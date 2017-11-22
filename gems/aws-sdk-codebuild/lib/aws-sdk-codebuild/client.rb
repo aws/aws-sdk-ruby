@@ -485,6 +485,8 @@ module Aws::CodeBuild
     #   resp.builds[0].artifacts.location #=> String
     #   resp.builds[0].artifacts.sha256sum #=> String
     #   resp.builds[0].artifacts.md5sum #=> String
+    #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.builds[0].cache.location #=> String
     #   resp.builds[0].environment.type #=> String, one of "LINUX_CONTAINER"
     #   resp.builds[0].environment.image #=> String
     #   resp.builds[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -499,6 +501,13 @@ module Aws::CodeBuild
     #   resp.builds[0].timeout_in_minutes #=> Integer
     #   resp.builds[0].build_complete #=> Boolean
     #   resp.builds[0].initiator #=> String
+    #   resp.builds[0].vpc_config.vpc_id #=> String
+    #   resp.builds[0].vpc_config.subnets #=> Array
+    #   resp.builds[0].vpc_config.subnets[0] #=> String
+    #   resp.builds[0].vpc_config.security_group_ids #=> Array
+    #   resp.builds[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.builds[0].network_interface.subnet_id #=> String
+    #   resp.builds[0].network_interface.network_interface_id #=> String
     #   resp.builds_not_found #=> Array
     #   resp.builds_not_found[0] #=> String
     #
@@ -544,6 +553,8 @@ module Aws::CodeBuild
     #   resp.projects[0].artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.projects[0].artifacts.name #=> String
     #   resp.projects[0].artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.projects[0].cache.location #=> String
     #   resp.projects[0].environment.type #=> String, one of "LINUX_CONTAINER"
     #   resp.projects[0].environment.image #=> String
     #   resp.projects[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -561,6 +572,13 @@ module Aws::CodeBuild
     #   resp.projects[0].created #=> Time
     #   resp.projects[0].last_modified #=> Time
     #   resp.projects[0].webhook.url #=> String
+    #   resp.projects[0].vpc_config.vpc_id #=> String
+    #   resp.projects[0].vpc_config.subnets #=> Array
+    #   resp.projects[0].vpc_config.subnets[0] #=> String
+    #   resp.projects[0].vpc_config.security_group_ids #=> Array
+    #   resp.projects[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.projects[0].badge.badge_enabled #=> Boolean
+    #   resp.projects[0].badge.badge_request_url #=> String
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
     #
@@ -586,6 +604,10 @@ module Aws::CodeBuild
     #
     # @option params [required, Types::ProjectArtifacts] :artifacts
     #   Information about the build output artifacts for the build project.
+    #
+    # @option params [Types::ProjectCache] :cache
+    #   Stores recently used information so that it can be quickly accessed at
+    #   a later time.
     #
     # @option params [required, Types::ProjectEnvironment] :environment
     #   Information about the build environment for the build project.
@@ -613,6 +635,13 @@ module Aws::CodeBuild
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+    #
+    # @option params [Boolean] :badge_enabled
+    #   Set this to true to generate a publicly-accessible URL for your
+    #   project's build badge.
+    #
     # @return [Types::CreateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateProjectOutput#project #project} => Types::Project
@@ -639,6 +668,10 @@ module Aws::CodeBuild
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
     #     },
+    #     cache: {
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       location: "String",
+    #     },
     #     environment: { # required
     #       type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
     #       image: "NonEmptyString", # required
@@ -661,6 +694,12 @@ module Aws::CodeBuild
     #         value: "ValueInput",
     #       },
     #     ],
+    #     vpc_config: {
+    #       vpc_id: "NonEmptyString",
+    #       subnets: ["NonEmptyString"],
+    #       security_group_ids: ["NonEmptyString"],
+    #     },
+    #     badge_enabled: false,
     #   })
     #
     # @example Response structure
@@ -679,6 +718,8 @@ module Aws::CodeBuild
     #   resp.project.artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.project.artifacts.name #=> String
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.project.cache.location #=> String
     #   resp.project.environment.type #=> String, one of "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -696,6 +737,13 @@ module Aws::CodeBuild
     #   resp.project.created #=> Time
     #   resp.project.last_modified #=> Time
     #   resp.project.webhook.url #=> String
+    #   resp.project.vpc_config.vpc_id #=> String
+    #   resp.project.vpc_config.subnets #=> Array
+    #   resp.project.vpc_config.subnets[0] #=> String
+    #   resp.project.vpc_config.security_group_ids #=> Array
+    #   resp.project.vpc_config.security_group_ids[0] #=> String
+    #   resp.project.badge.badge_enabled #=> Boolean
+    #   resp.project.badge.badge_request_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
     #
@@ -795,6 +843,28 @@ module Aws::CodeBuild
     # @param [Hash] params ({})
     def delete_webhook(params = {}, options = {})
       req = build_request(:delete_webhook, params)
+      req.send_request(options)
+    end
+
+    # Resets the cache for a project.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the build project that the cache will be reset for.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invalidate_project_cache({
+    #     project_name: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCache AWS API Documentation
+    #
+    # @overload invalidate_project_cache(params = {})
+    # @param [Hash] params ({})
+    def invalidate_project_cache(params = {}, options = {})
+      req = build_request(:invalidate_project_cache, params)
       req.send_request(options)
     end
 
@@ -1086,6 +1156,8 @@ module Aws::CodeBuild
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
+    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.build.cache.location #=> String
     #   resp.build.environment.type #=> String, one of "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -1100,6 +1172,13 @@ module Aws::CodeBuild
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
     #   resp.build.initiator #=> String
+    #   resp.build.vpc_config.vpc_id #=> String
+    #   resp.build.vpc_config.subnets #=> Array
+    #   resp.build.vpc_config.subnets[0] #=> String
+    #   resp.build.vpc_config.security_group_ids #=> Array
+    #   resp.build.vpc_config.security_group_ids[0] #=> String
+    #   resp.build.network_interface.subnet_id #=> String
+    #   resp.build.network_interface.network_interface_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild AWS API Documentation
     #
@@ -1152,6 +1231,8 @@ module Aws::CodeBuild
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
+    #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.build.cache.location #=> String
     #   resp.build.environment.type #=> String, one of "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -1166,6 +1247,13 @@ module Aws::CodeBuild
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
     #   resp.build.initiator #=> String
+    #   resp.build.vpc_config.vpc_id #=> String
+    #   resp.build.vpc_config.subnets #=> Array
+    #   resp.build.vpc_config.subnets[0] #=> String
+    #   resp.build.vpc_config.security_group_ids #=> Array
+    #   resp.build.vpc_config.security_group_ids[0] #=> String
+    #   resp.build.network_interface.subnet_id #=> String
+    #   resp.build.network_interface.network_interface_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild AWS API Documentation
     #
@@ -1196,6 +1284,10 @@ module Aws::CodeBuild
     #   Information to be changed about the build output artifacts for the
     #   build project.
     #
+    # @option params [Types::ProjectCache] :cache
+    #   Stores recently used information so that it can be quickly accessed at
+    #   a later time.
+    #
     # @option params [Types::ProjectEnvironment] :environment
     #   Information to be changed about the build environment for the build
     #   project.
@@ -1223,6 +1315,13 @@ module Aws::CodeBuild
     #   These tags are available for use by AWS services that support AWS
     #   CodeBuild build project tags.
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+    #
+    # @option params [Boolean] :badge_enabled
+    #   Set this to true to generate a publicly-accessible URL for your
+    #   project's build badge.
+    #
     # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProjectOutput#project #project} => Types::Project
@@ -1249,6 +1348,10 @@ module Aws::CodeBuild
     #       name: "String",
     #       packaging: "NONE", # accepts NONE, ZIP
     #     },
+    #     cache: {
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       location: "String",
+    #     },
     #     environment: {
     #       type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
     #       image: "NonEmptyString", # required
@@ -1271,6 +1374,12 @@ module Aws::CodeBuild
     #         value: "ValueInput",
     #       },
     #     ],
+    #     vpc_config: {
+    #       vpc_id: "NonEmptyString",
+    #       subnets: ["NonEmptyString"],
+    #       security_group_ids: ["NonEmptyString"],
+    #     },
+    #     badge_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1289,6 +1398,8 @@ module Aws::CodeBuild
     #   resp.project.artifacts.namespace_type #=> String, one of "NONE", "BUILD_ID"
     #   resp.project.artifacts.name #=> String
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
+    #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
+    #   resp.project.cache.location #=> String
     #   resp.project.environment.type #=> String, one of "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
@@ -1306,6 +1417,13 @@ module Aws::CodeBuild
     #   resp.project.created #=> Time
     #   resp.project.last_modified #=> Time
     #   resp.project.webhook.url #=> String
+    #   resp.project.vpc_config.vpc_id #=> String
+    #   resp.project.vpc_config.subnets #=> Array
+    #   resp.project.vpc_config.subnets[0] #=> String
+    #   resp.project.vpc_config.security_group_ids #=> Array
+    #   resp.project.vpc_config.security_group_ids[0] #=> String
+    #   resp.project.badge.badge_enabled #=> Boolean
+    #   resp.project.badge.badge_request_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
     #
@@ -1329,7 +1447,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

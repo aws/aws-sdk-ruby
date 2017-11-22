@@ -171,6 +171,10 @@ module Aws::CodeBuild
     #   Information about the output artifacts for the build.
     #   @return [Types::BuildArtifacts]
     #
+    # @!attribute [rw] cache
+    #   Information about the cache for the build.
+    #   @return [Types::ProjectCache]
+    #
     # @!attribute [rw] environment
     #   Information about the build environment for this build.
     #   @return [Types::ProjectEnvironment]
@@ -201,6 +205,18 @@ module Aws::CodeBuild
     #     string `CodeBuild-Jenkins-Plugin`.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   If your AWS CodeBuild project accesses resources in an Amazon VPC,
+    #   you provide this parameter that identifies the VPC ID and the list
+    #   of security group IDs and subnet IDs. The security groups and
+    #   subnets must belong to the same VPC. You must provide at least one
+    #   security group and one subnet ID.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] network_interface
+    #   Describes a network interface.
+    #   @return [Types::NetworkInterface]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
     #
     class Build < Struct.new(
@@ -215,11 +231,14 @@ module Aws::CodeBuild
       :phases,
       :source,
       :artifacts,
+      :cache,
       :environment,
       :logs,
       :timeout_in_minutes,
       :build_complete,
-      :initiator)
+      :initiator,
+      :vpc_config,
+      :network_interface)
       include Aws::Structure
     end
 
@@ -383,6 +402,10 @@ module Aws::CodeBuild
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
     #         },
+    #         cache: {
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           location: "String",
+    #         },
     #         environment: { # required
     #           type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
     #           image: "NonEmptyString", # required
@@ -405,6 +428,12 @@ module Aws::CodeBuild
     #             value: "ValueInput",
     #           },
     #         ],
+    #         vpc_config: {
+    #           vpc_id: "NonEmptyString",
+    #           subnets: ["NonEmptyString"],
+    #           security_group_ids: ["NonEmptyString"],
+    #         },
+    #         badge_enabled: false,
     #       }
     #
     # @!attribute [rw] name
@@ -422,6 +451,11 @@ module Aws::CodeBuild
     # @!attribute [rw] artifacts
     #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] cache
+    #   Stores recently used information so that it can be quickly accessed
+    #   at a later time.
+    #   @return [Types::ProjectCache]
     #
     # @!attribute [rw] environment
     #   Information about the build environment for the build project.
@@ -454,6 +488,16 @@ module Aws::CodeBuild
     #   CodeBuild build project tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] vpc_config
+    #   VpcConfig enables AWS CodeBuild to access resources in an Amazon
+    #   VPC.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] badge_enabled
+    #   Set this to true to generate a publicly-accessible URL for your
+    #   project's build badge.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput AWS API Documentation
     #
     class CreateProjectInput < Struct.new(
@@ -461,11 +505,14 @@ module Aws::CodeBuild
       :description,
       :source,
       :artifacts,
+      :cache,
       :environment,
       :service_role,
       :timeout_in_minutes,
       :encryption_key,
-      :tags)
+      :tags,
+      :vpc_config,
+      :badge_enabled)
       include Aws::Structure
     end
 
@@ -655,6 +702,28 @@ module Aws::CodeBuild
       :type)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass InvalidateProjectCacheInput
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "NonEmptyString", # required
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the build project that the cache will be reset for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCacheInput AWS API Documentation
+    #
+    class InvalidateProjectCacheInput < Struct.new(
+      :project_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCacheOutput AWS API Documentation
+    #
+    class InvalidateProjectCacheOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ListBuildsForProjectInput
     #   data as a hash:
@@ -886,6 +955,24 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # Describes a network interface.
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/NetworkInterface AWS API Documentation
+    #
+    class NetworkInterface < Struct.new(
+      :subnet_id,
+      :network_interface_id)
+      include Aws::Structure
+    end
+
     # Additional information about a build phase that has an error. You can
     # use this information to help troubleshoot a failed build.
     #
@@ -928,6 +1015,10 @@ module Aws::CodeBuild
     # @!attribute [rw] artifacts
     #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] cache
+    #   Information about the cache for the build project.
+    #   @return [Types::ProjectCache]
     #
     # @!attribute [rw] environment
     #   Information about the build environment for this build project.
@@ -975,6 +1066,18 @@ module Aws::CodeBuild
     #   events to a build project in AWS CodeBuild.
     #   @return [Types::Webhook]
     #
+    # @!attribute [rw] vpc_config
+    #   If your AWS CodeBuild project accesses resources in an Amazon VPC,
+    #   you provide this parameter that identifies the VPC ID and the list
+    #   of security group IDs and subnet IDs. The security groups and
+    #   subnets must belong to the same VPC. You must provide at least one
+    #   security group and one subnet ID.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] badge
+    #   Information about the build badge for the build project.
+    #   @return [Types::ProjectBadge]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
@@ -983,6 +1086,7 @@ module Aws::CodeBuild
       :description,
       :source,
       :artifacts,
+      :cache,
       :environment,
       :service_role,
       :timeout_in_minutes,
@@ -990,7 +1094,9 @@ module Aws::CodeBuild
       :tags,
       :created,
       :last_modified,
-      :webhook)
+      :webhook,
+      :vpc_config,
+      :badge)
       include Aws::Structure
     end
 
@@ -1131,6 +1237,60 @@ module Aws::CodeBuild
       :namespace_type,
       :name,
       :packaging)
+      include Aws::Structure
+    end
+
+    # Information about the build badge for the build project.
+    #
+    # @!attribute [rw] badge_enabled
+    #   Set this to true to generate a publicly-accessible URL for your
+    #   project's build badge.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] badge_request_url
+    #   The publicly-accessible URL through which you can access the build
+    #   badge for your project.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectBadge AWS API Documentation
+    #
+    class ProjectBadge < Struct.new(
+      :badge_enabled,
+      :badge_request_url)
+      include Aws::Structure
+    end
+
+    # Information about the cache for the build project.
+    #
+    # @note When making an API call, you may pass ProjectCache
+    #   data as a hash:
+    #
+    #       {
+    #         type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #         location: "String",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of cache used by the build project. Valid values include:
+    #
+    #   * `NO_CACHE`\: The build project will not use any cache.
+    #
+    #   * `S3`\: The build project will read and write from/to S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Information about the cache location, as follows:
+    #
+    #   * `NO_CACHE`\: This value will be ignored.
+    #
+    #   * `S3`\: This is the S3 bucket name/prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectCache AWS API Documentation
+    #
+    class ProjectCache < Struct.new(
+      :type,
+      :location)
       include Aws::Structure
     end
 
@@ -1527,6 +1687,10 @@ module Aws::CodeBuild
     #           name: "String",
     #           packaging: "NONE", # accepts NONE, ZIP
     #         },
+    #         cache: {
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           location: "String",
+    #         },
     #         environment: {
     #           type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
     #           image: "NonEmptyString", # required
@@ -1549,6 +1713,12 @@ module Aws::CodeBuild
     #             value: "ValueInput",
     #           },
     #         ],
+    #         vpc_config: {
+    #           vpc_id: "NonEmptyString",
+    #           subnets: ["NonEmptyString"],
+    #           security_group_ids: ["NonEmptyString"],
+    #         },
+    #         badge_enabled: false,
     #       }
     #
     # @!attribute [rw] name
@@ -1572,6 +1742,11 @@ module Aws::CodeBuild
     #   Information to be changed about the build output artifacts for the
     #   build project.
     #   @return [Types::ProjectArtifacts]
+    #
+    # @!attribute [rw] cache
+    #   Stores recently used information so that it can be quickly accessed
+    #   at a later time.
+    #   @return [Types::ProjectCache]
     #
     # @!attribute [rw] environment
     #   Information to be changed about the build environment for the build
@@ -1605,6 +1780,16 @@ module Aws::CodeBuild
     #   CodeBuild build project tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] vpc_config
+    #   VpcConfig enables AWS CodeBuild to access resources in an Amazon
+    #   VPC.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] badge_enabled
+    #   Set this to true to generate a publicly-accessible URL for your
+    #   project's build badge.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput AWS API Documentation
     #
     class UpdateProjectInput < Struct.new(
@@ -1612,11 +1797,14 @@ module Aws::CodeBuild
       :description,
       :source,
       :artifacts,
+      :cache,
       :environment,
       :service_role,
       :timeout_in_minutes,
       :encryption_key,
-      :tags)
+      :tags,
+      :vpc_config,
+      :badge_enabled)
       include Aws::Structure
     end
 
@@ -1628,6 +1816,42 @@ module Aws::CodeBuild
     #
     class UpdateProjectOutput < Struct.new(
       :project)
+      include Aws::Structure
+    end
+
+    # If your AWS CodeBuild project accesses resources in an Amazon VPC, you
+    # provide this parameter that identifies the VPC ID and the list of
+    # security group IDs and subnet IDs. The security groups and subnets
+    # must belong to the same VPC. You must provide at least one security
+    # group and one subnet ID.
+    #
+    # @note When making an API call, you may pass VpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_id: "NonEmptyString",
+    #         subnets: ["NonEmptyString"],
+    #         security_group_ids: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] vpc_id
+    #   The ID of the Amazon VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnets
+    #   A list of one or more subnet IDs in your Amazon VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of one or more security groups IDs in your Amazon VPC.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/VpcConfig AWS API Documentation
+    #
+    class VpcConfig < Struct.new(
+      :vpc_id,
+      :subnets,
+      :security_group_ids)
       include Aws::Structure
     end
 

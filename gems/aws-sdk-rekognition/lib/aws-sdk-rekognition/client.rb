@@ -155,14 +155,20 @@ module Aws::Rekognition
 
     # @!group API Operations
 
-    # Compares a face in the *source* input image with each face detected in
-    # the *target* input image.
+    # Compares a face in the *source* input image with each of the 100
+    # largest faces detected in the *target* input image.
     #
     # <note markdown="1"> If the source image contains multiple faces, the service detects the
     # largest face and compares it with each face detected in the target
     # image.
     #
     #  </note>
+    #
+    # You pass the input and target images either as base64-encoded image
+    # bytes or as a references to images in an Amazon S3 bucket. If you use
+    # the Amazon CLI to call Amazon Rekognition operations, passing image
+    # bytes is not supported. The image must be either a PNG or JPEG
+    # formatted file.
     #
     # In response, the operation returns an array of face matches ordered by
     # similarity score in descending order. For each face match, the
@@ -188,6 +194,9 @@ module Aws::Rekognition
     # orientation information for the source and target images. Use these
     # values to display the images with the correct image orientation.
     #
+    # If no faces are detected in the source or target images,
+    # `CompareFaces` returns an `InvalidParameterException` error.
+    #
     # <note markdown="1"> This is a stateless API operation. That is, data returned by this
     # operation doesn't persist.
     #
@@ -199,10 +208,14 @@ module Aws::Rekognition
     # `rekognition:CompareFaces` action.
     #
     # @option params [required, Types::Image] :source_image
-    #   The source image, either as bytes or as an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #
     # @option params [required, Types::Image] :target_image
-    #   The target image, either as bytes or as an S3 object.
+    #   The target image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #
     # @option params [Float] :similarity_threshold
     #   The minimum level of confidence in the face matches that a match must
@@ -358,6 +371,7 @@ module Aws::Rekognition
     #
     #   * {Types::CreateCollectionResponse#status_code #status_code} => Integer
     #   * {Types::CreateCollectionResponse#collection_arn #collection_arn} => String
+    #   * {Types::CreateCollectionResponse#face_model_version #face_model_version} => String
     #
     #
     # @example Example: To create a collection
@@ -384,6 +398,7 @@ module Aws::Rekognition
     #
     #   resp.status_code #=> Integer
     #   resp.collection_arn #=> String
+    #   resp.face_model_version #=> String
     #
     # @overload create_collection(params = {})
     # @param [Hash] params ({})
@@ -490,17 +505,23 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Detects faces within an image (JPEG or PNG) that is provided as input.
+    # Detects faces within an image that is provided as input.
     #
-    # For each face detected, the operation returns face details including a
-    # bounding box of the face, a confidence value (that the bounding box
-    # contains a face), and a fixed set of attributes such as facial
-    # landmarks (for example, coordinates of eye and mouth), gender,
-    # presence of beard, sunglasses, etc.
+    # `DetectFaces` detects the 100 largest faces in the image. For each
+    # face detected, the operation returns face details including a bounding
+    # box of the face, a confidence value (that the bounding box contains a
+    # face), and a fixed set of attributes such as facial landmarks (for
+    # example, coordinates of eye and mouth), gender, presence of beard,
+    # sunglasses, etc.
     #
     # The face-detection algorithm is most effective on frontal faces. For
     # non-frontal or obscured faces, the algorithm may not detect the faces
     # or might detect faces with lower confidence.
+    #
+    # You pass the input image either as base64-encoded image bytes or as a
+    # reference to an image in an Amazon S3 bucket. If you use the Amazon
+    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # supported. The image must be either a PNG or JPEG formatted file.
     #
     # <note markdown="1"> This is a stateless API operation. That is, the operation does not
     # persist any data.
@@ -513,8 +534,9 @@ module Aws::Rekognition
     # `rekognition:DetectFaces` action.
     #
     # @option params [required, Types::Image] :image
-    #   The image in which you want to detect faces. You can specify a blob or
-    #   an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #
     # @option params [Array<String>] :attributes
     #   An array of facial attributes you want to be returned. This can be the
@@ -667,6 +689,11 @@ module Aws::Rekognition
     # landscape, evening, and nature. For an example, see
     # get-started-exercise-detect-labels.
     #
+    # You pass the input image as base64-encoded image bytes or as a
+    # reference to an image in an Amazon S3 bucket. If you use the Amazon
+    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # supported. The image must be either a PNG or JPEG formatted file.
+    #
     # For each object, scene, and concept the API returns one or more
     # labels. Each label provides the object name, and the level of
     # confidence that the image contains the object. For example, suppose
@@ -694,12 +721,11 @@ module Aws::Rekognition
     # In this example, the detection algorithm more precisely identifies the
     # flower as a tulip.
     #
-    # You can provide the input image as an S3 object or as base64-encoded
-    # bytes. In response, the API returns an array of labels. In addition,
-    # the response also includes the orientation correction. Optionally, you
-    # can specify `MinConfidence` to control the confidence threshold for
-    # the labels returned. The default is 50%. You can also add the
-    # `MaxLabels` parameter to limit the number of labels returned.
+    # In response, the API returns an array of labels. In addition, the
+    # response also includes the orientation correction. Optionally, you can
+    # specify `MinConfidence` to control the confidence threshold for the
+    # labels returned. The default is 50%. You can also add the `MaxLabels`
+    # parameter to limit the number of labels returned.
     #
     # <note markdown="1"> If the object detected is a person, the operation doesn't provide the
     # same facial details that the DetectFaces operation provides.
@@ -713,8 +739,9 @@ module Aws::Rekognition
     # `rekognition:DetectLabels` action.
     #
     # @option params [required, Types::Image] :image
-    #   The input image. You can provide a blob of image bytes or an S3
-    #   object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #
     # @option params [Integer] :max_labels
     #   Maximum number of labels you want the service to return in the
@@ -803,8 +830,15 @@ module Aws::Rekognition
     # to determine which types of content are appropriate. For information
     # about moderation labels, see image-moderation.
     #
+    # You pass the input image either as base64-encoded image bytes or as a
+    # reference to an image in an Amazon S3 bucket. If you use the Amazon
+    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # supported. The image must be either a PNG or JPEG formatted file.
+    #
     # @option params [required, Types::Image] :image
-    #   The input image as bytes or an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #
     # @option params [Float] :min_confidence
     #   Specifies the minimum confidence level for the labels to return.
@@ -843,6 +877,87 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def detect_moderation_labels(params = {}, options = {})
       req = build_request(:detect_moderation_labels, params)
+      req.send_request(options)
+    end
+
+    # Detects text in the input image and converts it into machine-readable
+    # text.
+    #
+    # Pass the input image as base64-encoded image bytes or as a reference
+    # to an image in an Amazon S3 bucket. If you use the AWS CLI to call
+    # Amazon Rekognition operations, you must pass it as a reference to an
+    # image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is
+    # not supported. The image must be either a .png or .jpeg formatted
+    # file.
+    #
+    # The `DetectText` operation returns text in an array of elements,
+    # `TextDetections`. Each `TextDetection` element provides information
+    # about a single word or line of text that was detected in the image.
+    #
+    # A word is one or more ISO basic latin script characters that are not
+    # separated by spaces. `DetectText` can detect up to 50 words in an
+    # image.
+    #
+    # A line is a string of equally spaced words. A line isn't necessarily
+    # a complete sentence. For example, a driver's license number is
+    # detected as a line. A line ends when there is no aligned text after
+    # it. Also, a line ends when there is a large gap between words,
+    # relative to the length of the words. This means, depending on the gap
+    # between words, Amazon Rekognition may detect multiple lines in text
+    # aligned in the same direction. Periods don't represent the end of a
+    # line. If a sentence spans multiple lines, the `DetectText` operation
+    # returns multiple lines.
+    #
+    # To determine whether a `TextDetection` element is a line of text or a
+    # word, use the `TextDetection` object `Type` field.
+    #
+    # To be detected, text must be within +/- 30 degrees orientation of the
+    # horizontal axis.
+    #
+    # For more information, see text-detection.
+    #
+    # @option params [required, Types::Image] :image
+    #   The input image as base64-encoded bytes or an Amazon S3 object. If you
+    #   use the AWS CLI to call Amazon Rekognition operations, you can't pass
+    #   image bytes.
+    #
+    # @return [Types::DetectTextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectTextResponse#text_detections #text_detections} => Array&lt;Types::TextDetection&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_text({
+    #     image: { # required
+    #       bytes: "data",
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.text_detections #=> Array
+    #   resp.text_detections[0].detected_text #=> String
+    #   resp.text_detections[0].type #=> String, one of "LINE", "WORD"
+    #   resp.text_detections[0].id #=> Integer
+    #   resp.text_detections[0].parent_id #=> Integer
+    #   resp.text_detections[0].confidence #=> Float
+    #   resp.text_detections[0].geometry.bounding_box.width #=> Float
+    #   resp.text_detections[0].geometry.bounding_box.height #=> Float
+    #   resp.text_detections[0].geometry.bounding_box.left #=> Float
+    #   resp.text_detections[0].geometry.bounding_box.top #=> Float
+    #   resp.text_detections[0].geometry.polygon #=> Array
+    #   resp.text_detections[0].geometry.polygon[0].x #=> Float
+    #   resp.text_detections[0].geometry.polygon[0].y #=> Float
+    #
+    # @overload detect_text(params = {})
+    # @param [Hash] params ({})
+    def detect_text(params = {}, options = {})
+      req = build_request(:detect_text, params)
       req.send_request(options)
     end
 
@@ -893,7 +1008,14 @@ module Aws::Rekognition
     # uses feature vectors when performing face match and search operations
     # using the and operations.
     #
-    # If you provide the optional `externalImageID` for the input image you
+    # If you are using version 1.0 of the face detection model, `IndexFaces`
+    # indexes the 15 largest faces in the input image. Later versions of the
+    # face detection model index the 100 largest faces in the input image.
+    # To determine which version of the model you are using, check the the
+    # value of `FaceModelVersion` in the response from `IndexFaces`. For
+    # more information, see face-detection-model.
+    #
+    # If you provide the optional `ExternalImageID` for the input image you
     # provided, Amazon Rekognition associates this ID with all faces that it
     # detects. When you call the operation, the response returns the
     # external ID. You can use this external image ID to create a
@@ -912,6 +1034,11 @@ module Aws::Rekognition
     # the same collection, and use the same external ID in the `IndexFaces`
     # operation, Amazon Rekognition doesn't save duplicate face metadata.
     #
+    # The input image is passed either as base64-encoded image bytes or as a
+    # reference to an image in an Amazon S3 bucket. If you use the Amazon
+    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # supported. The image must be either a PNG or JPEG formatted file.
+    #
     # For an example, see example2.
     #
     # This operation requires permissions to perform the
@@ -922,7 +1049,9 @@ module Aws::Rekognition
     #   that are detected in the input images.
     #
     # @option params [required, Types::Image] :image
-    #   The input image as bytes or an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #
     # @option params [String] :external_image_id
     #   ID you want to assign to all the faces detected in the image.
@@ -944,6 +1073,7 @@ module Aws::Rekognition
     #
     #   * {Types::IndexFacesResponse#face_records #face_records} => Array&lt;Types::FaceRecord&gt;
     #   * {Types::IndexFacesResponse#orientation_correction #orientation_correction} => String
+    #   * {Types::IndexFacesResponse#face_model_version #face_model_version} => String
     #
     #
     # @example Example: To add a face to a collection
@@ -1149,6 +1279,7 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.quality.sharpness #=> Float
     #   resp.face_records[0].face_detail.confidence #=> Float
     #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
+    #   resp.face_model_version #=> String
     #
     # @overload index_faces(params = {})
     # @param [Hash] params ({})
@@ -1176,6 +1307,7 @@ module Aws::Rekognition
     #
     #   * {Types::ListCollectionsResponse#collection_ids #collection_ids} => Array&lt;String&gt;
     #   * {Types::ListCollectionsResponse#next_token #next_token} => String
+    #   * {Types::ListCollectionsResponse#face_model_versions #face_model_versions} => Array&lt;String&gt;
     #
     #
     # @example Example: To list the collections
@@ -1204,6 +1336,8 @@ module Aws::Rekognition
     #   resp.collection_ids #=> Array
     #   resp.collection_ids[0] #=> String
     #   resp.next_token #=> String
+    #   resp.face_model_versions #=> Array
+    #   resp.face_model_versions[0] #=> String
     #
     # @overload list_collections(params = {})
     # @param [Hash] params ({})
@@ -1236,6 +1370,7 @@ module Aws::Rekognition
     #
     #   * {Types::ListFacesResponse#faces #faces} => Array&lt;Types::Face&gt;
     #   * {Types::ListFacesResponse#next_token #next_token} => String
+    #   * {Types::ListFacesResponse#face_model_version #face_model_version} => String
     #
     #
     # @example Example: To list the faces in a collection
@@ -1394,6 +1529,7 @@ module Aws::Rekognition
     #   resp.faces[0].external_image_id #=> String
     #   resp.faces[0].confidence #=> Float
     #   resp.next_token #=> String
+    #   resp.face_model_version #=> String
     #
     # @overload list_faces(params = {})
     # @param [Hash] params ({})
@@ -1402,21 +1538,20 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Returns an array of celebrities recognized in the input image. The
-    # image is passed either as base64-encoded image bytes or as a reference
-    # to an image in an Amazon S3 bucket. The image must be either a PNG or
-    # JPEG formatted file. For more information, see celebrity-recognition.
+    # Returns an array of celebrities recognized in the input image. For
+    # more information, see celebrity-recognition.
     #
-    # `RecognizeCelebrities` returns the 15 largest faces in the image. It
-    # lists recognized celebrities in the `CelebrityFaces` list and
-    # unrecognized faces in the `UnrecognizedFaces` list. The operation
-    # doesn't return celebrities whose face sizes are smaller than the
-    # largest 15 faces in the image.
+    # `RecognizeCelebrities` returns the 100 largest faces in the image. It
+    # lists recognized celebrities in the `CelebrityFaces` array and
+    # unrecognized faces in the `UnrecognizedFaces` array.
+    # `RecognizeCelebrities` doesn't return celebrities whose faces are not
+    # amongst the largest 100 faces in the image.
     #
-    # For each celebrity recognized, the API returns a `Celebrity` object.
-    # The `Celebrity` object contains the celebrity name, ID, URL links to
-    # additional information, match confidence, and a `ComparedFace` object
-    # that you can use to locate the celebrity's face on the image.
+    # For each celebrity recognized, the `RecognizeCelebrities` returns a
+    # `Celebrity` object. The `Celebrity` object contains the celebrity
+    # name, ID, URL links to additional information, match confidence, and a
+    # `ComparedFace` object that you can use to locate the celebrity's face
+    # on the image.
     #
     # Rekognition does not retain information about which images a celebrity
     # has been recognized in. Your application must store this information
@@ -1425,13 +1560,20 @@ module Aws::Rekognition
     # information URLs returned by `RecognizeCelebrities`, you will need the
     # ID to identify the celebrity in a call to the operation.
     #
+    # You pass the imput image either as base64-encoded image bytes or as a
+    # reference to an image in an Amazon S3 bucket. If you use the Amazon
+    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # supported. The image must be either a PNG or JPEG formatted file.
+    #
     # For an example, see recognize-celebrities-tutorial.
     #
     # This operation requires permissions to perform the
     # `rekognition:RecognizeCelebrities` operation.
     #
     # @option params [required, Types::Image] :image
-    #   The input image to use for celebrity recognition.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #
     # @return [Types::RecognizeCelebritiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1540,6 +1682,7 @@ module Aws::Rekognition
     #
     #   * {Types::SearchFacesResponse#searched_face_id #searched_face_id} => String
     #   * {Types::SearchFacesResponse#face_matches #face_matches} => Array&lt;Types::FaceMatch&gt;
+    #   * {Types::SearchFacesResponse#face_model_version #face_model_version} => String
     #
     #
     # @example Example: To delete a face
@@ -1624,6 +1767,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.image_id #=> String
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
+    #   resp.face_model_version #=> String
     #
     # @overload search_faces(params = {})
     # @param [Hash] params ({})
@@ -1647,6 +1791,11 @@ module Aws::Rekognition
     #
     #  </note>
     #
+    # You pass the input image either as base64-encoded image bytes or as a
+    # reference to an image in an Amazon S3 bucket. If you use the Amazon
+    # CLI to call Amazon Rekognition operations, passing image bytes is not
+    # supported. The image must be either a PNG or JPEG formatted file.
+    #
     # The response returns an array of faces that match, ordered by
     # similarity score with the highest similarity first. More specifically,
     # it is an array of metadata for each face match found. Along with the
@@ -1665,7 +1814,9 @@ module Aws::Rekognition
     #   ID of the collection to search.
     #
     # @option params [required, Types::Image] :image
-    #   The input image as bytes or an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #
     # @option params [Integer] :max_faces
     #   Maximum number of faces to return. The operation returns the maximum
@@ -1681,6 +1832,7 @@ module Aws::Rekognition
     #   * {Types::SearchFacesByImageResponse#searched_face_bounding_box #searched_face_bounding_box} => Types::BoundingBox
     #   * {Types::SearchFacesByImageResponse#searched_face_confidence #searched_face_confidence} => Float
     #   * {Types::SearchFacesByImageResponse#face_matches #face_matches} => Array&lt;Types::FaceMatch&gt;
+    #   * {Types::SearchFacesByImageResponse#face_model_version #face_model_version} => String
     #
     #
     # @example Example: To search for faces matching a supplied image
@@ -1759,6 +1911,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.image_id #=> String
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
+    #   resp.face_model_version #=> String
     #
     # @overload search_faces_by_image(params = {})
     # @param [Hash] params ({})
@@ -1780,7 +1933,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

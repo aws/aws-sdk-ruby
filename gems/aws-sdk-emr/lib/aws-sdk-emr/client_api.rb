@@ -142,6 +142,7 @@ module Aws::EMR
     JobFlowExecutionStatusDetail = Shapes::StructureShape.new(name: 'JobFlowExecutionStatusDetail')
     JobFlowInstancesConfig = Shapes::StructureShape.new(name: 'JobFlowInstancesConfig')
     JobFlowInstancesDetail = Shapes::StructureShape.new(name: 'JobFlowInstancesDetail')
+    KerberosAttributes = Shapes::StructureShape.new(name: 'KerberosAttributes')
     KeyValue = Shapes::StructureShape.new(name: 'KeyValue')
     KeyValueList = Shapes::ListShape.new(name: 'KeyValueList')
     ListBootstrapActionsInput = Shapes::StructureShape.new(name: 'ListBootstrapActionsInput')
@@ -341,6 +342,7 @@ module Aws::EMR
     Cluster.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
     Cluster.add_member(:ebs_root_volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeSize"))
     Cluster.add_member(:repo_upgrade_on_boot, Shapes::ShapeRef.new(shape: RepoUpgradeOnBoot, location_name: "RepoUpgradeOnBoot"))
+    Cluster.add_member(:kerberos_attributes, Shapes::ShapeRef.new(shape: KerberosAttributes, location_name: "KerberosAttributes"))
     Cluster.struct_class = Types::Cluster
 
     ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -721,6 +723,13 @@ module Aws::EMR
     JobFlowInstancesDetail.add_member(:hadoop_version, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "HadoopVersion"))
     JobFlowInstancesDetail.struct_class = Types::JobFlowInstancesDetail
 
+    KerberosAttributes.add_member(:realm, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Realm"))
+    KerberosAttributes.add_member(:kdc_admin_password, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "KdcAdminPassword"))
+    KerberosAttributes.add_member(:cross_realm_trust_principal_password, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CrossRealmTrustPrincipalPassword"))
+    KerberosAttributes.add_member(:ad_domain_join_user, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ADDomainJoinUser"))
+    KerberosAttributes.add_member(:ad_domain_join_password, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ADDomainJoinPassword"))
+    KerberosAttributes.struct_class = Types::KerberosAttributes
+
     KeyValue.add_member(:key, Shapes::ShapeRef.new(shape: XmlString, location_name: "Key"))
     KeyValue.add_member(:value, Shapes::ShapeRef.new(shape: XmlString, location_name: "Value"))
     KeyValue.struct_class = Types::KeyValue
@@ -855,6 +864,7 @@ module Aws::EMR
     RunJobFlowInput.add_member(:custom_ami_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "CustomAmiId"))
     RunJobFlowInput.add_member(:ebs_root_volume_size, Shapes::ShapeRef.new(shape: Integer, location_name: "EbsRootVolumeSize"))
     RunJobFlowInput.add_member(:repo_upgrade_on_boot, Shapes::ShapeRef.new(shape: RepoUpgradeOnBoot, location_name: "RepoUpgradeOnBoot"))
+    RunJobFlowInput.add_member(:kerberos_attributes, Shapes::ShapeRef.new(shape: KerberosAttributes, location_name: "KerberosAttributes"))
     RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
     RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))

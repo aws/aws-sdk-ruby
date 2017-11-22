@@ -157,13 +157,32 @@ module Aws::Shield
 
     # Enables AWS Shield Advanced for a specific AWS resource. The resource
     # can be an Amazon CloudFront distribution, Elastic Load Balancing load
-    # balancer, or an Amazon Route 53 hosted zone.
+    # balancer, Elastic IP Address, or an Amazon Route 53 hosted zone.
     #
     # @option params [required, String] :name
     #   Friendly name for the `Protection` you are creating.
     #
     # @option params [required, String] :resource_arn
     #   The ARN (Amazon Resource Name) of the resource to be protected.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Elastic Load Balancer (Classic Load Balancer):
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
+    #     `
+    #
+    #   * For AWS CloudFront distribution:
+    #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #
+    #   * For Amazon Route 53:
+    #     `arn:aws:route53::account-id:hostedzone/hosted-zone-id `
+    #
+    #   * For an Elastic IP address:
+    #     `arn:aws:ec2:region:account-id:eip-allocation/allocation-id `
     #
     # @return [Types::CreateProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -224,7 +243,9 @@ module Aws::Shield
       req.send_request(options)
     end
 
-    # Removes AWS Shield Advanced from an account.
+    # Removes AWS Shield Advanced from an account. AWS Shield Advanced
+    # requires a 1-year subscription commitment. You cannot delete a
+    # subscription prior to the completion of that commitment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -284,6 +305,14 @@ module Aws::Shield
     #   resp.attack.attack_counters[0].sum #=> Float
     #   resp.attack.attack_counters[0].n #=> Integer
     #   resp.attack.attack_counters[0].unit #=> String
+    #   resp.attack.attack_properties #=> Array
+    #   resp.attack.attack_properties[0].attack_layer #=> String, one of "NETWORK", "APPLICATION"
+    #   resp.attack.attack_properties[0].attack_property_identifier #=> String, one of "DESTINATION_URL", "REFERRER", "SOURCE_ASN", "SOURCE_COUNTRY", "SOURCE_IP_ADDRESS", "SOURCE_USER_AGENT"
+    #   resp.attack.attack_properties[0].top_contributors #=> Array
+    #   resp.attack.attack_properties[0].top_contributors[0].name #=> String
+    #   resp.attack.attack_properties[0].top_contributors[0].value #=> Integer
+    #   resp.attack.attack_properties[0].unit #=> String, one of "BITS", "BYTES", "PACKETS", "REQUESTS"
+    #   resp.attack.attack_properties[0].total #=> Integer
     #   resp.attack.mitigations #=> Array
     #   resp.attack.mitigations[0].mitigation_name #=> String
     #
@@ -348,6 +377,25 @@ module Aws::Shield
       req.send_request(options)
     end
 
+    # Returns the `SubscriptionState`, either `Active` or `Inactive`.
+    #
+    # @return [Types::GetSubscriptionStateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSubscriptionStateResponse#subscription_state #subscription_state} => String
+    #
+    # @example Response structure
+    #
+    #   resp.subscription_state #=> String, one of "ACTIVE", "INACTIVE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionState AWS API Documentation
+    #
+    # @overload get_subscription_state(params = {})
+    # @param [Hash] params ({})
+    def get_subscription_state(params = {}, options = {})
+      req = build_request(:get_subscription_state, params)
+      req.send_request(options)
+    end
+
     # Returns all ongoing DDoS attacks or all DDoS attacks during a
     # specified time period.
     #
@@ -357,10 +405,24 @@ module Aws::Shield
     #   included.
     #
     # @option params [Types::TimeRange] :start_time
-    #   The time period for the attacks.
+    #   The start of the time period for the attacks. This is a `timestamp`
+    #   type. The sample request above indicates a `number` type because the
+    #   default used by WAF is Unix time in seconds. However any valid
+    #   [timestamp format][1] is allowed.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #
     # @option params [Types::TimeRange] :end_time
-    #   The end of the time period for the attacks.
+    #   The end of the time period for the attacks. This is a `timestamp`
+    #   type. The sample request above indicates a `number` type because the
+    #   default used by WAF is Unix time in seconds. However any valid
+    #   [timestamp format][1] is allowed.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #
     # @option params [String] :next_token
     #   The `ListAttacksRequest.NextMarker` value from a previous call to
@@ -463,7 +525,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

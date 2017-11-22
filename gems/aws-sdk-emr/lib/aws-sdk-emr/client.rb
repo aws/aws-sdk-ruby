@@ -371,7 +371,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/AddMoreThan256Steps.html
+    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
     #
     # @option params [required, String] :job_flow_id
     #   A string that uniquely identifies the job flow. This identifier is
@@ -423,12 +423,12 @@ module Aws::EMR
 
     # Adds tags to an Amazon EMR resource. Tags make it easier to associate
     # clusters in various ways, such as grouping clusters to track your
-    # Amazon EMR resource allocation costs. For more information, see
-    # [Tagging Amazon EMR Resources][1].
+    # Amazon EMR resource allocation costs. For more information, see [Tag
+    # Clusters][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html
+    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @option params [required, String] :resource_id
     #   The Amazon EMR resource identifier to which tags will be added. This
@@ -512,7 +512,13 @@ module Aws::EMR
     #   The name of the security configuration.
     #
     # @option params [required, String] :security_configuration
-    #   The security configuration details in JSON format.
+    #   The security configuration details in JSON format. For JSON parameters
+    #   and examples, see [Use Security Configurations to Set Up Cluster
+    #   Security][1] in the *Amazon EMR Management Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
     #
     # @return [Types::CreateSecurityConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -636,6 +642,11 @@ module Aws::EMR
     #   resp.cluster.custom_ami_id #=> String
     #   resp.cluster.ebs_root_volume_size #=> Integer
     #   resp.cluster.repo_upgrade_on_boot #=> String, one of "SECURITY", "NONE"
+    #   resp.cluster.kerberos_attributes.realm #=> String
+    #   resp.cluster.kerberos_attributes.kdc_admin_password #=> String
+    #   resp.cluster.kerberos_attributes.cross_realm_trust_principal_password #=> String
+    #   resp.cluster.kerberos_attributes.ad_domain_join_user #=> String
+    #   resp.cluster.kerberos_attributes.ad_domain_join_password #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster AWS API Documentation
     #
@@ -1509,14 +1520,14 @@ module Aws::EMR
     # Removes tags from an Amazon EMR resource. Tags make it easier to
     # associate clusters in various ways, such as grouping clusters to track
     # your Amazon EMR resource allocation costs. For more information, see
-    # [Tagging Amazon EMR Resources][1].
+    # [Tag Clusters][1].
     #
     # The following example removes the stack tag with value Prod from a
     # cluster:
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html
+    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @option params [required, String] :resource_id
     #   The Amazon EMR resource identifier from which tags will be removed.
@@ -1578,7 +1589,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/Management/Guide/AddMoreThan256Steps.html
+    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
     #
     # @option params [required, String] :name
     #   The name of the job flow.
@@ -1597,7 +1608,7 @@ module Aws::EMR
     #   use when launching Amazon EC2 instances in the job flow. For details
     #   about the AMI versions currently supported in EMR version 3.x and 2.x,
     #   see [AMI Versions Supported in
-    #   EMR](ElasticMapReduce/latest/DeveloperGuide/emr-dg.pdf#nameddest=ami-versions-supported)
+    #   EMR](emr/latest/DeveloperGuide/emr-dg.pdf#nameddest=ami-versions-supported)
     #   in the *Amazon EMR Developer Guide*.
     #
     #   If the AMI supports multiple versions of Hadoop (for example, AMI 1.0
@@ -1634,8 +1645,8 @@ module Aws::EMR
     #    </note>
     #
     #   A list of strings that indicates third-party software to use. For more
-    #   information, see [Use Third Party Applications with Amazon EMR][1].
-    #   Currently supported values are:
+    #   information, see the [Amazon EMR Developer Guide][1]. Currently
+    #   supported values are:
     #
     #   * "mapr-m3" - launch the job flow using MapR M3 Edition.
     #
@@ -1643,7 +1654,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html
+    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::SupportedProductConfig>] :new_supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
@@ -1680,7 +1691,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::Application>] :applications
     #   For Amazon EMR releases 4.0 and later. A list of applications for the
@@ -1769,6 +1780,15 @@ module Aws::EMR
     #   `SECURITY`, which indicates that only security updates are applied. If
     #   `NONE` is specified, no updates are applied, and all updates must be
     #   applied manually.
+    #
+    # @option params [Types::KerberosAttributes] :kerberos_attributes
+    #   Attributes for Kerberos configuration when Kerberos authentication is
+    #   enabled using a security configuration. For more information see [Use
+    #   Kerberos Authentication][1] in the *EMR Management Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
     #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1990,6 +2010,13 @@ module Aws::EMR
     #     custom_ami_id: "XmlStringMaxLen256",
     #     ebs_root_volume_size: 1,
     #     repo_upgrade_on_boot: "SECURITY", # accepts SECURITY, NONE
+    #     kerberos_attributes: {
+    #       realm: "XmlStringMaxLen256", # required
+    #       kdc_admin_password: "XmlStringMaxLen256", # required
+    #       cross_realm_trust_principal_password: "XmlStringMaxLen256",
+    #       ad_domain_join_user: "XmlStringMaxLen256",
+    #       ad_domain_join_password: "XmlStringMaxLen256",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2140,7 +2167,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

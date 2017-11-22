@@ -120,8 +120,8 @@ module Aws::StorageGateway
     # gateway in other API operations as well as resource-based
     # authorization.
     #
-    # <note markdown="1"> For gateways activated prior to September 02, 2015 the gateway ARN
-    # contains the gateway name rather than the gateway id. Changing the
+    # <note markdown="1"> For gateways activated prior to September 02, 2015, the gateway ARN
+    # contains the gateway name rather than the gateway ID. Changing the
     # name of the gateway has no effect on the gateway ARN.
     #
     #  </note>
@@ -358,6 +358,15 @@ module Aws::StorageGateway
     #   2017 don’t have this time stamp.
     #   @return [Time]
     #
+    # @!attribute [rw] volume_used_in_bytes
+    #   The size of the data stored on the volume in bytes.
+    #
+    #   <note markdown="1"> This value is not available for volumes created prior to May 13,
+    #   2015, until you store data on the volume.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CachediSCSIVolume AWS API Documentation
     #
     class CachediSCSIVolume < Struct.new(
@@ -369,7 +378,8 @@ module Aws::StorageGateway
       :volume_progress,
       :source_snapshot_id,
       :volume_iscsi_attributes,
-      :created_date)
+      :created_date,
+      :volume_used_in_bytes)
       include Aws::Structure
     end
 
@@ -582,6 +592,7 @@ module Aws::StorageGateway
     #         client_list: ["IPV4AddressCIDR"],
     #         squash: "Squash",
     #         read_only: false,
+    #         guess_mime_type_enabled: false,
     #       }
     #
     # @!attribute [rw] client_token
@@ -644,6 +655,12 @@ module Aws::StorageGateway
     #   is read-only, and otherwise "false".
     #   @return [Boolean]
     #
+    # @!attribute [rw] guess_mime_type_enabled
+    #   Enables guessing of the MIME type for uploaded objects based on file
+    #   extensions: "true" to enable MIME type guessing, and otherwise
+    #   "false".
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
     #
     class CreateNFSFileShareInput < Struct.new(
@@ -657,7 +674,8 @@ module Aws::StorageGateway
       :default_storage_class,
       :client_list,
       :squash,
-      :read_only)
+      :read_only,
+      :guess_mime_type_enabled)
       include Aws::Structure
     end
 
@@ -1131,10 +1149,11 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] force_delete
-    #   If set to true, deletes a file share immediately and aborts all data
-    #   uploads to AWS. Otherwise the file share is not deleted until all
-    #   data is uploaded to AWS. This process aborts the data upload process
-    #   and the file share enters the FORCE\_DELETING status.
+    #   If this value is set to true, the operation deletes a file share
+    #   immediately and aborts all data uploads to AWS. Otherwise, the file
+    #   share is not deleted until all data is uploaded to AWS. This process
+    #   aborts the data upload process, and the file share enters the
+    #   FORCE\_DELETING status.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShareInput AWS API Documentation
@@ -1158,7 +1177,7 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # A JSON object containing the id of the gateway to delete.
+    # A JSON object containing the ID of the gateway to delete.
     #
     # @note When making an API call, you may pass DeleteGatewayInput
     #   data as a hash:
@@ -1179,7 +1198,7 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # A JSON object containing the id of the deleted gateway.
+    # A JSON object containing the ID of the deleted gateway.
     #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1520,7 +1539,7 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # A JSON object containing the id of the gateway.
+    # A JSON object containing the ID of the gateway.
     #
     # @note When making an API call, you may pass DescribeGatewayInformationInput
     #   data as a hash:
@@ -2735,7 +2754,7 @@ module Aws::StorageGateway
     # permissions assigned to them. Upon discovery in an S3 bucket by
     # Storage Gateway, the S3 objects that represent files and folders are
     # assigned these default Unix permissions. This operation is only
-    # supported in the file gateway architecture.
+    # supported in the file gateway type.
     #
     # @note When making an API call, you may pass NFSFileShareDefaults
     #   data as a hash:
@@ -2789,7 +2808,7 @@ module Aws::StorageGateway
     #   permissions assigned to them. Upon discovery in an S3 bucket by
     #   Storage Gateway, the S3 objects that represent files and folders are
     #   assigned these default Unix permissions. This operation is only
-    #   supported in the file gateway architecture.
+    #   supported in the file gateway type.
     #   @return [Types::NFSFileShareDefaults]
     #
     # @!attribute [rw] file_share_arn
@@ -2861,6 +2880,12 @@ module Aws::StorageGateway
     #   "false".
     #   @return [Boolean]
     #
+    # @!attribute [rw] guess_mime_type_enabled
+    #   Enables guessing of the MIME type for uploaded objects based on file
+    #   extensions: "true" to enable MIME type guessing, and otherwise
+    #   "false".
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
     #
     class NFSFileShareInfo < Struct.new(
@@ -2877,7 +2902,8 @@ module Aws::StorageGateway
       :default_storage_class,
       :client_list,
       :squash,
-      :read_only)
+      :read_only,
+      :guess_mime_type_enabled)
       include Aws::Structure
     end
 
@@ -2906,6 +2932,41 @@ module Aws::StorageGateway
       :ipv_4_address,
       :mac_address,
       :ipv_6_address)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass NotifyWhenUploadedInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_share_arn: "FileShareARN", # required
+    #       }
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NotifyWhenUploadedInput AWS API Documentation
+    #
+    class NotifyWhenUploadedInput < Struct.new(
+      :file_share_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_id
+    #   The randomly generated ID of the notification that was sent. This ID
+    #   is in UUID format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NotifyWhenUploadedOutput AWS API Documentation
+    #
+    class NotifyWhenUploadedOutput < Struct.new(
+      :file_share_arn,
+      :notification_id)
       include Aws::Structure
     end
 
@@ -3287,6 +3348,15 @@ module Aws::StorageGateway
     #   2017 don’t have this time stamp.
     #   @return [Time]
     #
+    # @!attribute [rw] volume_used_in_bytes
+    #   The size of the data stored on the volume in bytes.
+    #
+    #   <note markdown="1"> This value is not available for volumes created prior to May 13,
+    #   2015, until you store data on the volume.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StorediSCSIVolume AWS API Documentation
     #
     class StorediSCSIVolume < Struct.new(
@@ -3300,7 +3370,8 @@ module Aws::StorageGateway
       :source_snapshot_id,
       :preserved_existing_data,
       :volume_iscsi_attributes,
-      :created_date)
+      :created_date,
+      :volume_used_in_bytes)
       include Aws::Structure
     end
 
@@ -3361,7 +3432,7 @@ module Aws::StorageGateway
     #   @return [Float]
     #
     # @!attribute [rw] tape_used_in_bytes
-    #   The size, in bytes, of data written to the virtual tape.
+    #   The size, in bytes, of data stored on the virtual tape.
     #
     #   <note markdown="1"> This value is not available for tapes created prior to May 13, 2015.
     #
@@ -3419,7 +3490,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tape_used_in_bytes
-    #   The size, in bytes, of data written to the virtual tape.
+    #   The size, in bytes, of data stored on the virtual tape.
     #
     #   <note markdown="1"> This value is not available for tapes created prior to May 13, 2015.
     #
@@ -3806,6 +3877,7 @@ module Aws::StorageGateway
     #         client_list: ["IPV4AddressCIDR"],
     #         squash: "Squash",
     #         read_only: false,
+    #         guess_mime_type_enabled: false,
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -3853,6 +3925,12 @@ module Aws::StorageGateway
     #   is read-only, otherwise "false".
     #   @return [Boolean]
     #
+    # @!attribute [rw] guess_mime_type_enabled
+    #   Enables guessing of the MIME type for uploaded objects based on file
+    #   extensions: "true" to enable MIME type guessing, and otherwise
+    #   "false".
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
     #
     class UpdateNFSFileShareInput < Struct.new(
@@ -3863,7 +3941,8 @@ module Aws::StorageGateway
       :default_storage_class,
       :client_list,
       :squash,
-      :read_only)
+      :read_only,
+      :guess_mime_type_enabled)
       include Aws::Structure
     end
 

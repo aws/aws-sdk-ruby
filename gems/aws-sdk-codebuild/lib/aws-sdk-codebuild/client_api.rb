@@ -31,6 +31,7 @@ module Aws::CodeBuild
     BuildPhases = Shapes::ListShape.new(name: 'BuildPhases')
     Builds = Shapes::ListShape.new(name: 'Builds')
     BuildsNotDeleted = Shapes::ListShape.new(name: 'BuildsNotDeleted')
+    CacheType = Shapes::StringShape.new(name: 'CacheType')
     ComputeType = Shapes::StringShape.new(name: 'ComputeType')
     CreateProjectInput = Shapes::StructureShape.new(name: 'CreateProjectInput')
     CreateProjectOutput = Shapes::StructureShape.new(name: 'CreateProjectOutput')
@@ -51,6 +52,8 @@ module Aws::CodeBuild
     EnvironmentVariableType = Shapes::StringShape.new(name: 'EnvironmentVariableType')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
+    InvalidateProjectCacheInput = Shapes::StructureShape.new(name: 'InvalidateProjectCacheInput')
+    InvalidateProjectCacheOutput = Shapes::StructureShape.new(name: 'InvalidateProjectCacheOutput')
     KeyInput = Shapes::StringShape.new(name: 'KeyInput')
     LanguageType = Shapes::StringShape.new(name: 'LanguageType')
     ListBuildsForProjectInput = Shapes::StructureShape.new(name: 'ListBuildsForProjectInput')
@@ -62,6 +65,7 @@ module Aws::CodeBuild
     ListProjectsInput = Shapes::StructureShape.new(name: 'ListProjectsInput')
     ListProjectsOutput = Shapes::StructureShape.new(name: 'ListProjectsOutput')
     LogsLocation = Shapes::StructureShape.new(name: 'LogsLocation')
+    NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     OAuthProviderException = Shapes::StructureShape.new(name: 'OAuthProviderException')
     PhaseContext = Shapes::StructureShape.new(name: 'PhaseContext')
@@ -69,6 +73,8 @@ module Aws::CodeBuild
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     Project = Shapes::StructureShape.new(name: 'Project')
     ProjectArtifacts = Shapes::StructureShape.new(name: 'ProjectArtifacts')
+    ProjectBadge = Shapes::StructureShape.new(name: 'ProjectBadge')
+    ProjectCache = Shapes::StructureShape.new(name: 'ProjectCache')
     ProjectDescription = Shapes::StringShape.new(name: 'ProjectDescription')
     ProjectEnvironment = Shapes::StructureShape.new(name: 'ProjectEnvironment')
     ProjectName = Shapes::StringShape.new(name: 'ProjectName')
@@ -78,6 +84,7 @@ module Aws::CodeBuild
     Projects = Shapes::ListShape.new(name: 'Projects')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SortOrderType = Shapes::StringShape.new(name: 'SortOrderType')
     SourceAuth = Shapes::StructureShape.new(name: 'SourceAuth')
     SourceAuthType = Shapes::StringShape.new(name: 'SourceAuthType')
@@ -88,6 +95,7 @@ module Aws::CodeBuild
     StopBuildInput = Shapes::StructureShape.new(name: 'StopBuildInput')
     StopBuildOutput = Shapes::StructureShape.new(name: 'StopBuildOutput')
     String = Shapes::StringShape.new(name: 'String')
+    Subnets = Shapes::ListShape.new(name: 'Subnets')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagList = Shapes::ListShape.new(name: 'TagList')
     TimeOut = Shapes::IntegerShape.new(name: 'TimeOut')
@@ -95,6 +103,7 @@ module Aws::CodeBuild
     UpdateProjectInput = Shapes::StructureShape.new(name: 'UpdateProjectInput')
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
     ValueInput = Shapes::StringShape.new(name: 'ValueInput')
+    VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     Webhook = Shapes::StructureShape.new(name: 'Webhook')
     WrapperBoolean = Shapes::BooleanShape.new(name: 'WrapperBoolean')
     WrapperInt = Shapes::IntegerShape.new(name: 'WrapperInt')
@@ -132,11 +141,14 @@ module Aws::CodeBuild
     Build.add_member(:phases, Shapes::ShapeRef.new(shape: BuildPhases, location_name: "phases"))
     Build.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, location_name: "source"))
     Build.add_member(:artifacts, Shapes::ShapeRef.new(shape: BuildArtifacts, location_name: "artifacts"))
+    Build.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
     Build.add_member(:environment, Shapes::ShapeRef.new(shape: ProjectEnvironment, location_name: "environment"))
     Build.add_member(:logs, Shapes::ShapeRef.new(shape: LogsLocation, location_name: "logs"))
     Build.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: WrapperInt, location_name: "timeoutInMinutes"))
     Build.add_member(:build_complete, Shapes::ShapeRef.new(shape: Boolean, location_name: "buildComplete"))
     Build.add_member(:initiator, Shapes::ShapeRef.new(shape: String, location_name: "initiator"))
+    Build.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    Build.add_member(:network_interface, Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "networkInterface"))
     Build.struct_class = Types::Build
 
     BuildArtifacts.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
@@ -168,11 +180,14 @@ module Aws::CodeBuild
     CreateProjectInput.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     CreateProjectInput.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, required: true, location_name: "source"))
     CreateProjectInput.add_member(:artifacts, Shapes::ShapeRef.new(shape: ProjectArtifacts, required: true, location_name: "artifacts"))
+    CreateProjectInput.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
     CreateProjectInput.add_member(:environment, Shapes::ShapeRef.new(shape: ProjectEnvironment, required: true, location_name: "environment"))
     CreateProjectInput.add_member(:service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "serviceRole"))
     CreateProjectInput.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeOut, location_name: "timeoutInMinutes"))
     CreateProjectInput.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
     CreateProjectInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateProjectInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    CreateProjectInput.add_member(:badge_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "badgeEnabled"))
     CreateProjectInput.struct_class = Types::CreateProjectInput
 
     CreateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
@@ -219,6 +234,11 @@ module Aws::CodeBuild
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: EnvironmentVariable)
 
+    InvalidateProjectCacheInput.add_member(:project_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "projectName"))
+    InvalidateProjectCacheInput.struct_class = Types::InvalidateProjectCacheInput
+
+    InvalidateProjectCacheOutput.struct_class = Types::InvalidateProjectCacheOutput
+
     ListBuildsForProjectInput.add_member(:project_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "projectName"))
     ListBuildsForProjectInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrderType, location_name: "sortOrder"))
     ListBuildsForProjectInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -255,6 +275,10 @@ module Aws::CodeBuild
     LogsLocation.add_member(:deep_link, Shapes::ShapeRef.new(shape: String, location_name: "deepLink"))
     LogsLocation.struct_class = Types::LogsLocation
 
+    NetworkInterface.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "subnetId"))
+    NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "networkInterfaceId"))
+    NetworkInterface.struct_class = Types::NetworkInterface
+
     PhaseContext.add_member(:status_code, Shapes::ShapeRef.new(shape: String, location_name: "statusCode"))
     PhaseContext.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     PhaseContext.struct_class = Types::PhaseContext
@@ -266,6 +290,7 @@ module Aws::CodeBuild
     Project.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     Project.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, location_name: "source"))
     Project.add_member(:artifacts, Shapes::ShapeRef.new(shape: ProjectArtifacts, location_name: "artifacts"))
+    Project.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
     Project.add_member(:environment, Shapes::ShapeRef.new(shape: ProjectEnvironment, location_name: "environment"))
     Project.add_member(:service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "serviceRole"))
     Project.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeOut, location_name: "timeoutInMinutes"))
@@ -274,6 +299,8 @@ module Aws::CodeBuild
     Project.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
     Project.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModified"))
     Project.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
+    Project.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    Project.add_member(:badge, Shapes::ShapeRef.new(shape: ProjectBadge, location_name: "badge"))
     Project.struct_class = Types::Project
 
     ProjectArtifacts.add_member(:type, Shapes::ShapeRef.new(shape: ArtifactsType, required: true, location_name: "type"))
@@ -283,6 +310,14 @@ module Aws::CodeBuild
     ProjectArtifacts.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ProjectArtifacts.add_member(:packaging, Shapes::ShapeRef.new(shape: ArtifactPackaging, location_name: "packaging"))
     ProjectArtifacts.struct_class = Types::ProjectArtifacts
+
+    ProjectBadge.add_member(:badge_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "badgeEnabled"))
+    ProjectBadge.add_member(:badge_request_url, Shapes::ShapeRef.new(shape: String, location_name: "badgeRequestUrl"))
+    ProjectBadge.struct_class = Types::ProjectBadge
+
+    ProjectCache.add_member(:type, Shapes::ShapeRef.new(shape: CacheType, required: true, location_name: "type"))
+    ProjectCache.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
+    ProjectCache.struct_class = Types::ProjectCache
 
     ProjectEnvironment.add_member(:type, Shapes::ShapeRef.new(shape: EnvironmentType, required: true, location_name: "type"))
     ProjectEnvironment.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "image"))
@@ -300,6 +335,8 @@ module Aws::CodeBuild
     ProjectSource.struct_class = Types::ProjectSource
 
     Projects.member = Shapes::ShapeRef.new(shape: Project)
+
+    SecurityGroupIds.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     SourceAuth.add_member(:type, Shapes::ShapeRef.new(shape: SourceAuthType, required: true, location_name: "type"))
     SourceAuth.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
@@ -322,6 +359,8 @@ module Aws::CodeBuild
     StopBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "build"))
     StopBuildOutput.struct_class = Types::StopBuildOutput
 
+    Subnets.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: KeyInput, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: ValueInput, location_name: "value"))
     Tag.struct_class = Types::Tag
@@ -332,15 +371,23 @@ module Aws::CodeBuild
     UpdateProjectInput.add_member(:description, Shapes::ShapeRef.new(shape: ProjectDescription, location_name: "description"))
     UpdateProjectInput.add_member(:source, Shapes::ShapeRef.new(shape: ProjectSource, location_name: "source"))
     UpdateProjectInput.add_member(:artifacts, Shapes::ShapeRef.new(shape: ProjectArtifacts, location_name: "artifacts"))
+    UpdateProjectInput.add_member(:cache, Shapes::ShapeRef.new(shape: ProjectCache, location_name: "cache"))
     UpdateProjectInput.add_member(:environment, Shapes::ShapeRef.new(shape: ProjectEnvironment, location_name: "environment"))
     UpdateProjectInput.add_member(:service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "serviceRole"))
     UpdateProjectInput.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: TimeOut, location_name: "timeoutInMinutes"))
     UpdateProjectInput.add_member(:encryption_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "encryptionKey"))
     UpdateProjectInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    UpdateProjectInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "vpcConfig"))
+    UpdateProjectInput.add_member(:badge_enabled, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "badgeEnabled"))
     UpdateProjectInput.struct_class = Types::UpdateProjectInput
 
     UpdateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     UpdateProjectOutput.struct_class = Types::UpdateProjectOutput
+
+    VpcConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "vpcId"))
+    VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, location_name: "subnets"))
+    VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
+    VpcConfig.struct_class = Types::VpcConfig
 
     Webhook.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "url"))
     Webhook.struct_class = Types::Webhook
@@ -428,6 +475,16 @@ module Aws::CodeBuild
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OAuthProviderException)
+      end)
+
+      api.add_operation(:invalidate_project_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InvalidateProjectCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: InvalidateProjectCacheInput)
+        o.output = Shapes::ShapeRef.new(shape: InvalidateProjectCacheOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_builds, Seahorse::Model::Operation.new.tap do |o|

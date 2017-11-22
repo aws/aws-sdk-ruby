@@ -833,6 +833,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.request_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.passthrough_behavior #=> String
     #   resp.resource_methods["String"].method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].method_integration.timeout_in_millis #=> Integer
     #   resp.resource_methods["String"].method_integration.cache_namespace #=> String
     #   resp.resource_methods["String"].method_integration.cache_key_parameters #=> Array
     #   resp.resource_methods["String"].method_integration.cache_key_parameters[0] #=> String
@@ -960,6 +961,7 @@ module Aws::APIGateway
     #   * {Types::Stage#method_settings #method_settings} => Hash&lt;String,Types::MethodSetting&gt;
     #   * {Types::Stage#variables #variables} => Hash&lt;String,String&gt;
     #   * {Types::Stage#documentation_version #documentation_version} => String
+    #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
     #
@@ -1001,6 +1003,8 @@ module Aws::APIGateway
     #   resp.variables #=> Hash
     #   resp.variables["String"] #=> String
     #   resp.documentation_version #=> String
+    #   resp.access_log_settings.format #=> String
+    #   resp.access_log_settings.destination_arn #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
     #
@@ -2641,7 +2645,7 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
-    # Represents a get integration.
+    # Get the integration settings.
     #
     # @option params [required, String] :rest_api_id
     #   The string identifier of the associated RestApi.
@@ -2662,6 +2666,7 @@ module Aws::APIGateway
     #   * {Types::Integration#request_templates #request_templates} => Hash&lt;String,String&gt;
     #   * {Types::Integration#passthrough_behavior #passthrough_behavior} => String
     #   * {Types::Integration#content_handling #content_handling} => String
+    #   * {Types::Integration#timeout_in_millis #timeout_in_millis} => Integer
     #   * {Types::Integration#cache_namespace #cache_namespace} => String
     #   * {Types::Integration#cache_key_parameters #cache_key_parameters} => Array&lt;String&gt;
     #   * {Types::Integration#integration_responses #integration_responses} => Hash&lt;String,Types::IntegrationResponse&gt;
@@ -2686,6 +2691,7 @@ module Aws::APIGateway
     #   resp.request_templates["String"] #=> String
     #   resp.passthrough_behavior #=> String
     #   resp.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.timeout_in_millis #=> Integer
     #   resp.cache_namespace #=> String
     #   resp.cache_key_parameters #=> Array
     #   resp.cache_key_parameters[0] #=> String
@@ -2813,6 +2819,7 @@ module Aws::APIGateway
     #   resp.method_integration.request_templates["String"] #=> String
     #   resp.method_integration.passthrough_behavior #=> String
     #   resp.method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.method_integration.timeout_in_millis #=> Integer
     #   resp.method_integration.cache_namespace #=> String
     #   resp.method_integration.cache_key_parameters #=> Array
     #   resp.method_integration.cache_key_parameters[0] #=> String
@@ -3135,6 +3142,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.request_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.passthrough_behavior #=> String
     #   resp.resource_methods["String"].method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].method_integration.timeout_in_millis #=> Integer
     #   resp.resource_methods["String"].method_integration.cache_namespace #=> String
     #   resp.resource_methods["String"].method_integration.cache_key_parameters #=> Array
     #   resp.resource_methods["String"].method_integration.cache_key_parameters[0] #=> String
@@ -3224,6 +3232,7 @@ module Aws::APIGateway
     #   resp.items[0].resource_methods["String"].method_integration.request_templates["String"] #=> String
     #   resp.items[0].resource_methods["String"].method_integration.passthrough_behavior #=> String
     #   resp.items[0].resource_methods["String"].method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.items[0].resource_methods["String"].method_integration.timeout_in_millis #=> Integer
     #   resp.items[0].resource_methods["String"].method_integration.cache_namespace #=> String
     #   resp.items[0].resource_methods["String"].method_integration.cache_key_parameters #=> Array
     #   resp.items[0].resource_methods["String"].method_integration.cache_key_parameters[0] #=> String
@@ -3476,6 +3485,7 @@ module Aws::APIGateway
     #   * {Types::Stage#method_settings #method_settings} => Hash&lt;String,Types::MethodSetting&gt;
     #   * {Types::Stage#variables #variables} => Hash&lt;String,String&gt;
     #   * {Types::Stage#documentation_version #documentation_version} => String
+    #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
     #
@@ -3509,6 +3519,8 @@ module Aws::APIGateway
     #   resp.variables #=> Hash
     #   resp.variables["String"] #=> String
     #   resp.documentation_version #=> String
+    #   resp.access_log_settings.format #=> String
+    #   resp.access_log_settings.destination_arn #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
     #
@@ -3562,6 +3574,8 @@ module Aws::APIGateway
     #   resp.item[0].variables #=> Hash
     #   resp.item[0].variables["String"] #=> String
     #   resp.item[0].documentation_version #=> String
+    #   resp.item[0].access_log_settings.format #=> String
+    #   resp.item[0].access_log_settings.destination_arn #=> String
     #   resp.item[0].created_date #=> Time
     #   resp.item[0].last_updated_date #=> Time
     #
@@ -4153,6 +4167,10 @@ module Aws::APIGateway
     #   modification, provided that the `passthroughBehaviors` is configured
     #   to support payload pass-through.
     #
+    # @option params [Integer] :timeout_in_millis
+    #   Custom timeout between 50 and 29,000 milliseconds. The default value
+    #   is 29,000 milliseconds or 29 seconds.
+    #
     # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Integration#type #type} => String
@@ -4163,6 +4181,7 @@ module Aws::APIGateway
     #   * {Types::Integration#request_templates #request_templates} => Hash&lt;String,String&gt;
     #   * {Types::Integration#passthrough_behavior #passthrough_behavior} => String
     #   * {Types::Integration#content_handling #content_handling} => String
+    #   * {Types::Integration#timeout_in_millis #timeout_in_millis} => Integer
     #   * {Types::Integration#cache_namespace #cache_namespace} => String
     #   * {Types::Integration#cache_key_parameters #cache_key_parameters} => Array&lt;String&gt;
     #   * {Types::Integration#integration_responses #integration_responses} => Hash&lt;String,Types::IntegrationResponse&gt;
@@ -4187,6 +4206,7 @@ module Aws::APIGateway
     #     cache_namespace: "String",
     #     cache_key_parameters: ["String"],
     #     content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
+    #     timeout_in_millis: 1,
     #   })
     #
     # @example Response structure
@@ -4201,6 +4221,7 @@ module Aws::APIGateway
     #   resp.request_templates["String"] #=> String
     #   resp.passthrough_behavior #=> String
     #   resp.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.timeout_in_millis #=> Integer
     #   resp.cache_namespace #=> String
     #   resp.cache_key_parameters #=> Array
     #   resp.cache_key_parameters[0] #=> String
@@ -4425,6 +4446,7 @@ module Aws::APIGateway
     #   resp.method_integration.request_templates["String"] #=> String
     #   resp.method_integration.passthrough_behavior #=> String
     #   resp.method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.method_integration.timeout_in_millis #=> Integer
     #   resp.method_integration.cache_namespace #=> String
     #   resp.method_integration.cache_key_parameters #=> Array
     #   resp.method_integration.cache_key_parameters[0] #=> String
@@ -5308,6 +5330,7 @@ module Aws::APIGateway
     #   * {Types::Integration#request_templates #request_templates} => Hash&lt;String,String&gt;
     #   * {Types::Integration#passthrough_behavior #passthrough_behavior} => String
     #   * {Types::Integration#content_handling #content_handling} => String
+    #   * {Types::Integration#timeout_in_millis #timeout_in_millis} => Integer
     #   * {Types::Integration#cache_namespace #cache_namespace} => String
     #   * {Types::Integration#cache_key_parameters #cache_key_parameters} => Array&lt;String&gt;
     #   * {Types::Integration#integration_responses #integration_responses} => Hash&lt;String,Types::IntegrationResponse&gt;
@@ -5340,6 +5363,7 @@ module Aws::APIGateway
     #   resp.request_templates["String"] #=> String
     #   resp.passthrough_behavior #=> String
     #   resp.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.timeout_in_millis #=> Integer
     #   resp.cache_namespace #=> String
     #   resp.cache_key_parameters #=> Array
     #   resp.cache_key_parameters[0] #=> String
@@ -5492,6 +5516,7 @@ module Aws::APIGateway
     #   resp.method_integration.request_templates["String"] #=> String
     #   resp.method_integration.passthrough_behavior #=> String
     #   resp.method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.method_integration.timeout_in_millis #=> Integer
     #   resp.method_integration.cache_namespace #=> String
     #   resp.method_integration.cache_key_parameters #=> Array
     #   resp.method_integration.cache_key_parameters[0] #=> String
@@ -5733,6 +5758,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.request_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.passthrough_behavior #=> String
     #   resp.resource_methods["String"].method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].method_integration.timeout_in_millis #=> Integer
     #   resp.resource_methods["String"].method_integration.cache_namespace #=> String
     #   resp.resource_methods["String"].method_integration.cache_key_parameters #=> Array
     #   resp.resource_methods["String"].method_integration.cache_key_parameters[0] #=> String
@@ -5831,6 +5857,7 @@ module Aws::APIGateway
     #   * {Types::Stage#method_settings #method_settings} => Hash&lt;String,Types::MethodSetting&gt;
     #   * {Types::Stage#variables #variables} => Hash&lt;String,String&gt;
     #   * {Types::Stage#documentation_version #documentation_version} => String
+    #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
     #
@@ -5872,6 +5899,8 @@ module Aws::APIGateway
     #   resp.variables #=> Hash
     #   resp.variables["String"] #=> String
     #   resp.documentation_version #=> String
+    #   resp.access_log_settings.format #=> String
+    #   resp.access_log_settings.destination_arn #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
     #
@@ -6005,7 +6034,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -328,7 +328,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/emr-mapr.html
+    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-mapr.html
     #
     # @note When making an API call, you may pass Application
     #   data as a hash:
@@ -797,7 +797,9 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] master_public_dns_name
-    #   The public DNS name of the master EC2 instance.
+    #   The DNS name of the master node. If the cluster is on a private
+    #   subnet, this is the private DNS name. On a public subnet, this is
+    #   the public DNS name.
     #   @return [String]
     #
     # @!attribute [rw] configurations
@@ -850,6 +852,16 @@ module Aws::EMR
     #   repositories when an instance boots using the AMI.
     #   @return [String]
     #
+    # @!attribute [rw] kerberos_attributes
+    #   Attributes for Kerberos configuration when Kerberos authentication
+    #   is enabled using a security configuration. For more information see
+    #   [Use Kerberos Authentication][1] in the *EMR Management Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    #   @return [Types::KerberosAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -876,7 +888,8 @@ module Aws::EMR
       :scale_down_behavior,
       :custom_ami_id,
       :ebs_root_volume_size,
-      :repo_upgrade_on_boot)
+      :repo_upgrade_on_boot,
+      :kerberos_attributes)
       include Aws::Structure
     end
 
@@ -1074,7 +1087,13 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] security_configuration
-    #   The security configuration details in JSON format.
+    #   The security configuration details in JSON format. For JSON
+    #   parameters and examples, see [Use Security Configurations to Set Up
+    #   Cluster Security][1] in the *Amazon EMR Management Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfigurationInput AWS API Documentation
@@ -2028,6 +2047,27 @@ module Aws::EMR
     #
     # @!attribute [rw] state
     #   A code representing the instance fleet status.
+    #
+    #   * `PROVISIONING`—The instance fleet is provisioning EC2 resources
+    #     and is not yet ready to run jobs.
+    #
+    #   * `BOOTSTRAPPING`—EC2 instances and other resources have been
+    #     provisioned and the bootstrap actions specified for the instances
+    #     are underway.
+    #
+    #   * `RUNNING`—EC2 instances and other resources are running. They are
+    #     either executing jobs or waiting to execute jobs.
+    #
+    #   * `RESIZING`—A resize operation is underway. EC2 instances are
+    #     either being added or removed.
+    #
+    #   * `SUSPENDED`—A resize operation could not complete. Existing EC2
+    #     instances are running, but instances can't be added or removed.
+    #
+    #   * `TERMINATING`—The instance fleet is terminating EC2 instances.
+    #
+    #   * `TERMINATED`—The instance fleet is no longer active, and all EC2
+    #     instances have been terminated.
     #   @return [String]
     #
     # @!attribute [rw] state_change_reason
@@ -2780,7 +2820,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported
+    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf#nameddest=ami-versions-supported
     #   @return [String]
     #
     # @!attribute [rw] execution_status_detail
@@ -3193,7 +3233,9 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] master_public_dns_name
-    #   The DNS name of the master node.
+    #   The DNS name of the master node. If the cluster is on a private
+    #   subnet, this is the private DNS name. On a public subnet, this is
+    #   the public DNS name.
     #   @return [String]
     #
     # @!attribute [rw] master_instance_id
@@ -3270,6 +3312,63 @@ module Aws::EMR
       :keep_job_flow_alive_when_no_steps,
       :termination_protected,
       :hadoop_version)
+      include Aws::Structure
+    end
+
+    # Attributes for Kerberos configuration when Kerberos authentication is
+    # enabled using a security configuration. For more information see [Use
+    # Kerberos Authentication][1] in the *EMR Management Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    #
+    # @note When making an API call, you may pass KerberosAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         realm: "XmlStringMaxLen256", # required
+    #         kdc_admin_password: "XmlStringMaxLen256", # required
+    #         cross_realm_trust_principal_password: "XmlStringMaxLen256",
+    #         ad_domain_join_user: "XmlStringMaxLen256",
+    #         ad_domain_join_password: "XmlStringMaxLen256",
+    #       }
+    #
+    # @!attribute [rw] realm
+    #   The name of the Kerberos realm to which all nodes in a cluster
+    #   belong. For example, `EC2.INTERNAL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kdc_admin_password
+    #   The password used within the cluster for the kadmin service on the
+    #   cluster-dedicated KDC, which maintains Kerberos principals, password
+    #   policies, and keytabs for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cross_realm_trust_principal_password
+    #   Required only when establishing a cross-realm trust with a KDC in a
+    #   different realm. The cross-realm principal password, which must be
+    #   identical across realms.
+    #   @return [String]
+    #
+    # @!attribute [rw] ad_domain_join_user
+    #   Required only when establishing a cross-realm trust with an Active
+    #   Directory domain. A user with sufficient privileges to join
+    #   resources to the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] ad_domain_join_password
+    #   The Active Directory password for `ADDomainJoinUser`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/KerberosAttributes AWS API Documentation
+    #
+    class KerberosAttributes < Struct.new(
+      :realm,
+      :kdc_admin_password,
+      :cross_realm_trust_principal_password,
+      :ad_domain_join_user,
+      :ad_domain_join_password)
       include Aws::Structure
     end
 
@@ -4179,6 +4278,13 @@ module Aws::EMR
     #         custom_ami_id: "XmlStringMaxLen256",
     #         ebs_root_volume_size: 1,
     #         repo_upgrade_on_boot: "SECURITY", # accepts SECURITY, NONE
+    #         kerberos_attributes: {
+    #           realm: "XmlStringMaxLen256", # required
+    #           kdc_admin_password: "XmlStringMaxLen256", # required
+    #           cross_realm_trust_principal_password: "XmlStringMaxLen256",
+    #           ad_domain_join_user: "XmlStringMaxLen256",
+    #           ad_domain_join_password: "XmlStringMaxLen256",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -4201,7 +4307,7 @@ module Aws::EMR
     #   Image (AMI) to use when launching Amazon EC2 instances in the job
     #   flow. For details about the AMI versions currently supported in EMR
     #   version 3.x and 2.x, see [AMI Versions Supported in
-    #   EMR](ElasticMapReduce/latest/DeveloperGuide/emr-dg.pdf#nameddest=ami-versions-supported)
+    #   EMR](emr/latest/DeveloperGuide/emr-dg.pdf#nameddest=ami-versions-supported)
     #   in the *Amazon EMR Developer Guide*.
     #
     #   If the AMI supports multiple versions of Hadoop (for example, AMI
@@ -4244,8 +4350,8 @@ module Aws::EMR
     #    </note>
     #
     #   A list of strings that indicates third-party software to use. For
-    #   more information, see [Use Third Party Applications with Amazon
-    #   EMR][1]. Currently supported values are:
+    #   more information, see the [Amazon EMR Developer Guide][1]. Currently
+    #   supported values are:
     #
     #   * "mapr-m3" - launch the job flow using MapR M3 Edition.
     #
@@ -4253,7 +4359,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html
+    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #   @return [Array<String>]
     #
     # @!attribute [rw] new_supported_products
@@ -4291,7 +4397,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
+    #   [1]: http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #   @return [Array<Types::SupportedProductConfig>]
     #
     # @!attribute [rw] applications
@@ -4395,6 +4501,16 @@ module Aws::EMR
     #   updates must be applied manually.
     #   @return [String]
     #
+    # @!attribute [rw] kerberos_attributes
+    #   Attributes for Kerberos configuration when Kerberos authentication
+    #   is enabled using a security configuration. For more information see
+    #   [Use Kerberos Authentication][1] in the *EMR Management Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html
+    #   @return [Types::KerberosAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -4419,7 +4535,8 @@ module Aws::EMR
       :scale_down_behavior,
       :custom_ami_id,
       :ebs_root_volume_size,
-      :repo_upgrade_on_boot)
+      :repo_upgrade_on_boot,
+      :kerberos_attributes)
       include Aws::Structure
     end
 
@@ -4770,7 +4887,7 @@ module Aws::EMR
     #   `ScalingAdjustment`, which should be expressed as an integer.
     #   `PERCENT_CHANGE_IN_CAPACITY` indicates the instance count increments
     #   or decrements by the percentage specified by `ScalingAdjustment`,
-    #   which should be expressed as a decimal. For example, 0.20 indicates
+    #   which should be expressed as an integer. For example, 20 indicates
     #   an increase in 20% increments of cluster capacity. `EXACT_CAPACITY`
     #   indicates the scaling activity results in an instance group with the
     #   number of EC2 instances specified by `ScalingAdjustment`, which
@@ -4784,7 +4901,7 @@ module Aws::EMR
     #   `AdjustmentType` is set to `EXACT_CAPACITY`, the number should only
     #   be a positive integer. If `AdjustmentType` is set to
     #   `PERCENT_CHANGE_IN_CAPACITY`, the value should express the
-    #   percentage as a decimal. For example, -0.20 indicates a decrease in
+    #   percentage as an integer. For example, -20 indicates a decrease in
     #   20% increments of cluster capacity.
     #   @return [Integer]
     #
@@ -5127,11 +5244,11 @@ module Aws::EMR
     # associate with an Amazon EMR resource. Tags make it easier to
     # associate clusters in various ways, such as grouping clusters to track
     # your Amazon EMR resource allocation costs. For more information, see
-    # [Tagging Amazon EMR Resources][1].
+    # [Tag Clusters][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html
+    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -5143,21 +5260,20 @@ module Aws::EMR
     #
     # @!attribute [rw] key
     #   A user-defined key, which is the minimum required information for a
-    #   valid tag. For more information, see [Tagging Amazon EMR
-    #   Resources][1].
+    #   valid tag. For more information, see [Tag ][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #   @return [String]
     #
     # @!attribute [rw] value
     #   A user-defined value, which is optional in a tag. For more
-    #   information, see [Tagging Amazon EMR Resources][1].
+    #   information, see [Tag Clusters][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html
+    #   [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Tag AWS API Documentation

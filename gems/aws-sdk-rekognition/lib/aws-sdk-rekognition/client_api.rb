@@ -43,6 +43,8 @@ module Aws::Rekognition
     DetectLabelsResponse = Shapes::StructureShape.new(name: 'DetectLabelsResponse')
     DetectModerationLabelsRequest = Shapes::StructureShape.new(name: 'DetectModerationLabelsRequest')
     DetectModerationLabelsResponse = Shapes::StructureShape.new(name: 'DetectModerationLabelsResponse')
+    DetectTextRequest = Shapes::StructureShape.new(name: 'DetectTextRequest')
+    DetectTextResponse = Shapes::StructureShape.new(name: 'DetectTextResponse')
     Emotion = Shapes::StructureShape.new(name: 'Emotion')
     EmotionName = Shapes::StringShape.new(name: 'EmotionName')
     Emotions = Shapes::ListShape.new(name: 'Emotions')
@@ -57,11 +59,13 @@ module Aws::Rekognition
     FaceList = Shapes::ListShape.new(name: 'FaceList')
     FaceMatch = Shapes::StructureShape.new(name: 'FaceMatch')
     FaceMatchList = Shapes::ListShape.new(name: 'FaceMatchList')
+    FaceModelVersionList = Shapes::ListShape.new(name: 'FaceModelVersionList')
     FaceRecord = Shapes::StructureShape.new(name: 'FaceRecord')
     FaceRecordList = Shapes::ListShape.new(name: 'FaceRecordList')
     Float = Shapes::FloatShape.new(name: 'Float')
     Gender = Shapes::StructureShape.new(name: 'Gender')
     GenderType = Shapes::StringShape.new(name: 'GenderType')
+    Geometry = Shapes::StructureShape.new(name: 'Geometry')
     GetCelebrityInfoRequest = Shapes::StructureShape.new(name: 'GetCelebrityInfoRequest')
     GetCelebrityInfoResponse = Shapes::StructureShape.new(name: 'GetCelebrityInfoResponse')
     Image = Shapes::StructureShape.new(name: 'Image')
@@ -94,6 +98,8 @@ module Aws::Rekognition
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     Percent = Shapes::FloatShape.new(name: 'Percent')
+    Point = Shapes::StructureShape.new(name: 'Point')
+    Polygon = Shapes::ListShape.new(name: 'Polygon')
     Pose = Shapes::StructureShape.new(name: 'Pose')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
     RecognizeCelebritiesRequest = Shapes::StructureShape.new(name: 'RecognizeCelebritiesRequest')
@@ -112,6 +118,9 @@ module Aws::Rekognition
     Smile = Shapes::StructureShape.new(name: 'Smile')
     String = Shapes::StringShape.new(name: 'String')
     Sunglasses = Shapes::StructureShape.new(name: 'Sunglasses')
+    TextDetection = Shapes::StructureShape.new(name: 'TextDetection')
+    TextDetectionList = Shapes::ListShape.new(name: 'TextDetectionList')
+    TextTypes = Shapes::StringShape.new(name: 'TextTypes')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
     Url = Shapes::StringShape.new(name: 'Url')
@@ -182,6 +191,7 @@ module Aws::Rekognition
 
     CreateCollectionResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: UInteger, location_name: "StatusCode"))
     CreateCollectionResponse.add_member(:collection_arn, Shapes::ShapeRef.new(shape: String, location_name: "CollectionArn"))
+    CreateCollectionResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     CreateCollectionResponse.struct_class = Types::CreateCollectionResponse
 
     DeleteCollectionRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
@@ -220,6 +230,12 @@ module Aws::Rekognition
 
     DetectModerationLabelsResponse.add_member(:moderation_labels, Shapes::ShapeRef.new(shape: ModerationLabels, location_name: "ModerationLabels"))
     DetectModerationLabelsResponse.struct_class = Types::DetectModerationLabelsResponse
+
+    DetectTextRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
+    DetectTextRequest.struct_class = Types::DetectTextRequest
+
+    DetectTextResponse.add_member(:text_detections, Shapes::ShapeRef.new(shape: TextDetectionList, location_name: "TextDetections"))
+    DetectTextResponse.struct_class = Types::DetectTextResponse
 
     Emotion.add_member(:type, Shapes::ShapeRef.new(shape: EmotionName, location_name: "Type"))
     Emotion.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -271,6 +287,8 @@ module Aws::Rekognition
 
     FaceMatchList.member = Shapes::ShapeRef.new(shape: FaceMatch)
 
+    FaceModelVersionList.member = Shapes::ShapeRef.new(shape: String)
+
     FaceRecord.add_member(:face, Shapes::ShapeRef.new(shape: Face, location_name: "Face"))
     FaceRecord.add_member(:face_detail, Shapes::ShapeRef.new(shape: FaceDetail, location_name: "FaceDetail"))
     FaceRecord.struct_class = Types::FaceRecord
@@ -280,6 +298,10 @@ module Aws::Rekognition
     Gender.add_member(:value, Shapes::ShapeRef.new(shape: GenderType, location_name: "Value"))
     Gender.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Gender.struct_class = Types::Gender
+
+    Geometry.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
+    Geometry.add_member(:polygon, Shapes::ShapeRef.new(shape: Polygon, location_name: "Polygon"))
+    Geometry.struct_class = Types::Geometry
 
     GetCelebrityInfoRequest.add_member(:id, Shapes::ShapeRef.new(shape: RekognitionUniqueId, required: true, location_name: "Id"))
     GetCelebrityInfoRequest.struct_class = Types::GetCelebrityInfoRequest
@@ -304,6 +326,7 @@ module Aws::Rekognition
 
     IndexFacesResponse.add_member(:face_records, Shapes::ShapeRef.new(shape: FaceRecordList, location_name: "FaceRecords"))
     IndexFacesResponse.add_member(:orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "OrientationCorrection"))
+    IndexFacesResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     IndexFacesResponse.struct_class = Types::IndexFacesResponse
 
     Label.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -325,6 +348,7 @@ module Aws::Rekognition
 
     ListCollectionsResponse.add_member(:collection_ids, Shapes::ShapeRef.new(shape: CollectionIdList, location_name: "CollectionIds"))
     ListCollectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListCollectionsResponse.add_member(:face_model_versions, Shapes::ShapeRef.new(shape: FaceModelVersionList, location_name: "FaceModelVersions"))
     ListCollectionsResponse.struct_class = Types::ListCollectionsResponse
 
     ListFacesRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
@@ -334,6 +358,7 @@ module Aws::Rekognition
 
     ListFacesResponse.add_member(:faces, Shapes::ShapeRef.new(shape: FaceList, location_name: "Faces"))
     ListFacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListFacesResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     ListFacesResponse.struct_class = Types::ListFacesResponse
 
     ModerationLabel.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -350,6 +375,12 @@ module Aws::Rekognition
     Mustache.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Mustache.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Mustache.struct_class = Types::Mustache
+
+    Point.add_member(:x, Shapes::ShapeRef.new(shape: Float, location_name: "X"))
+    Point.add_member(:y, Shapes::ShapeRef.new(shape: Float, location_name: "Y"))
+    Point.struct_class = Types::Point
+
+    Polygon.member = Shapes::ShapeRef.new(shape: Point)
 
     Pose.add_member(:roll, Shapes::ShapeRef.new(shape: Degree, location_name: "Roll"))
     Pose.add_member(:yaw, Shapes::ShapeRef.new(shape: Degree, location_name: "Yaw"))
@@ -378,6 +409,7 @@ module Aws::Rekognition
     SearchFacesByImageResponse.add_member(:searched_face_bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "SearchedFaceBoundingBox"))
     SearchFacesByImageResponse.add_member(:searched_face_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "SearchedFaceConfidence"))
     SearchFacesByImageResponse.add_member(:face_matches, Shapes::ShapeRef.new(shape: FaceMatchList, location_name: "FaceMatches"))
+    SearchFacesByImageResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     SearchFacesByImageResponse.struct_class = Types::SearchFacesByImageResponse
 
     SearchFacesRequest.add_member(:collection_id, Shapes::ShapeRef.new(shape: CollectionId, required: true, location_name: "CollectionId"))
@@ -388,6 +420,7 @@ module Aws::Rekognition
 
     SearchFacesResponse.add_member(:searched_face_id, Shapes::ShapeRef.new(shape: FaceId, location_name: "SearchedFaceId"))
     SearchFacesResponse.add_member(:face_matches, Shapes::ShapeRef.new(shape: FaceMatchList, location_name: "FaceMatches"))
+    SearchFacesResponse.add_member(:face_model_version, Shapes::ShapeRef.new(shape: String, location_name: "FaceModelVersion"))
     SearchFacesResponse.struct_class = Types::SearchFacesResponse
 
     Smile.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
@@ -397,6 +430,16 @@ module Aws::Rekognition
     Sunglasses.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     Sunglasses.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Sunglasses.struct_class = Types::Sunglasses
+
+    TextDetection.add_member(:detected_text, Shapes::ShapeRef.new(shape: String, location_name: "DetectedText"))
+    TextDetection.add_member(:type, Shapes::ShapeRef.new(shape: TextTypes, location_name: "Type"))
+    TextDetection.add_member(:id, Shapes::ShapeRef.new(shape: UInteger, location_name: "Id"))
+    TextDetection.add_member(:parent_id, Shapes::ShapeRef.new(shape: UInteger, location_name: "ParentId"))
+    TextDetection.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    TextDetection.add_member(:geometry, Shapes::ShapeRef.new(shape: Geometry, location_name: "Geometry"))
+    TextDetection.struct_class = Types::TextDetection
+
+    TextDetectionList.member = Shapes::ShapeRef.new(shape: TextDetection)
 
     Urls.member = Shapes::ShapeRef.new(shape: Url)
 
@@ -511,6 +554,22 @@ module Aws::Rekognition
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DetectModerationLabelsRequest)
         o.output = Shapes::ShapeRef.new(shape: DetectModerationLabelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
+      end)
+
+      api.add_operation(:detect_text, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectText"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectTextRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetectTextResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ImageTooLargeException)

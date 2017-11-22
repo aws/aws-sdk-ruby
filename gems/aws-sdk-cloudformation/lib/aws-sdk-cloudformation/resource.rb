@@ -32,6 +32,7 @@ module Aws::CloudFormation
     #         parameter_key: "ParameterKey",
     #         parameter_value: "ParameterValue",
     #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
     #       },
     #     ],
     #     disable_rollback: false,

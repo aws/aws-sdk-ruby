@@ -8,6 +8,29 @@
 module Aws::APIGateway
   module Types
 
+    # Access log settings, including the access log format and access log
+    # destination ARN.
+    #
+    # @!attribute [rw] format
+    #   A single line format of the access logs of data, as specified by
+    #   selected [$context variables][1]. The format must include at least
+    #   `$context.requestId`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_arn
+    #   The ARN of the CloudWatch Logs log group to receive access logs.
+    #   @return [String]
+    #
+    class AccessLogSettings < Struct.new(
+      :format,
+      :destination_arn)
+      include Aws::Structure
+    end
+
     # Represents an AWS account that is associated with Amazon API Gateway.
     #
     # <div class="remarks" markdown="1">
@@ -3124,7 +3147,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Represents a get integration request.
+    # Represents a request to get the integration configuration.
     #
     # @note When making an API call, you may pass GetIntegrationRequest
     #   data as a hash:
@@ -4087,6 +4110,11 @@ module Aws::APIGateway
     #   to support payload pass-through.
     #   @return [String]
     #
+    # @!attribute [rw] timeout_in_millis
+    #   Custom timeout between 50 and 29,000 milliseconds. The default value
+    #   is 29,000 milliseconds or 29 seconds.
+    #   @return [Integer]
+    #
     # @!attribute [rw] cache_namespace
     #   Specifies the integration's cache namespace.
     #   @return [String]
@@ -4138,6 +4166,7 @@ module Aws::APIGateway
       :request_templates,
       :passthrough_behavior,
       :content_handling,
+      :timeout_in_millis,
       :cache_namespace,
       :cache_key_parameters,
       :integration_responses)
@@ -4828,6 +4857,7 @@ module Aws::APIGateway
     #         cache_namespace: "String",
     #         cache_key_parameters: ["String"],
     #         content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
+    #         timeout_in_millis: 1,
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -4936,6 +4966,11 @@ module Aws::APIGateway
     #   to support payload pass-through.
     #   @return [String]
     #
+    # @!attribute [rw] timeout_in_millis
+    #   Custom timeout between 50 and 29,000 milliseconds. The default value
+    #   is 29,000 milliseconds or 29 seconds.
+    #   @return [Integer]
+    #
     class PutIntegrationRequest < Struct.new(
       :rest_api_id,
       :resource_id,
@@ -4949,7 +4984,8 @@ module Aws::APIGateway
       :passthrough_behavior,
       :cache_namespace,
       :cache_key_parameters,
-      :content_handling)
+      :content_handling,
+      :timeout_in_millis)
       include Aws::Structure
     end
 
@@ -5697,6 +5733,10 @@ module Aws::APIGateway
     #   The version of the associated API documentation.
     #   @return [String]
     #
+    # @!attribute [rw] access_log_settings
+    #   The access log settings in this stage.
+    #   @return [Types::AccessLogSettings]
+    #
     # @!attribute [rw] created_date
     #   The timestamp when the stage was created.
     #   @return [Time]
@@ -5716,6 +5756,7 @@ module Aws::APIGateway
       :method_settings,
       :variables,
       :documentation_version,
+      :access_log_settings,
       :created_date,
       :last_updated_date)
       include Aws::Structure

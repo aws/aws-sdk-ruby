@@ -46,10 +46,10 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Identifies the bounding box around the object or face. The `left`
-    # (x-coordinate) and `top` (y-coordinate) are coordinates representing
-    # the top and left sides of the bounding box. Note that the upper-left
-    # corner of the image is the origin (0,0).
+    # Identifies the bounding box around the object, face or text. The
+    # `left` (x-coordinate) and `top` (y-coordinate) are coordinates
+    # representing the top and left sides of the bounding box. Note that the
+    # upper-left corner of the image is the origin (0,0).
     #
     # The `top` and `left` values returned are ratios of the overall image
     # size. For example, if the input image is 700x200 pixels, and the
@@ -177,11 +177,15 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] source_image
-    #   The source image, either as bytes or as an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #   @return [Types::Image]
     #
     # @!attribute [rw] target_image
-    #   The target image, either as bytes or as an S3 object.
+    #   The target image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #   @return [Types::Image]
     #
     # @!attribute [rw] similarity_threshold
@@ -336,9 +340,15 @@ module Aws::Rekognition
     #   manage permissions on your resources.
     #   @return [String]
     #
+    # @!attribute [rw] face_model_version
+    #   Version number of the face detection model associated with the
+    #   collection you are creating.
+    #   @return [String]
+    #
     class CreateCollectionResponse < Struct.new(
       :status_code,
-      :collection_arn)
+      :collection_arn,
+      :face_model_version)
       include Aws::Structure
     end
 
@@ -414,8 +424,9 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] image
-    #   The image in which you want to detect faces. You can specify a blob
-    #   or an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #   @return [Types::Image]
     #
     # @!attribute [rw] attributes
@@ -483,8 +494,9 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] image
-    #   The input image. You can provide a blob of image bytes or an S3
-    #   object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_labels
@@ -549,7 +561,9 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] image
-    #   The input image as bytes or an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #   @return [Types::Image]
     #
     # @!attribute [rw] min_confidence
@@ -569,13 +583,47 @@ module Aws::Rekognition
 
     # @!attribute [rw] moderation_labels
     #   An array of labels for explicit or suggestive adult content found in
-    #   the image. The list includes the top-level label and each child
-    #   label detected in the image. This is useful for filtering specific
-    #   categories of content.
+    #   the image. The list includes the top-level label and each
+    #   second-level label detected in the image. This is useful for
+    #   filtering specific categories of content.
     #   @return [Array<Types::ModerationLabel>]
     #
     class DetectModerationLabelsResponse < Struct.new(
       :moderation_labels)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectTextRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image: { # required
+    #           bytes: "data",
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] image
+    #   The input image as base64-encoded bytes or an Amazon S3 object. If
+    #   you use the AWS CLI to call Amazon Rekognition operations, you
+    #   can't pass image bytes.
+    #   @return [Types::Image]
+    #
+    class DetectTextRequest < Struct.new(
+      :image)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] text_detections
+    #   An array of text that was detected in the input image.
+    #   @return [Array<Types::TextDetection>]
+    #
+    class DetectTextResponse < Struct.new(
+      :text_detections)
       include Aws::Structure
     end
 
@@ -814,6 +862,24 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Information about where text detected by is located on an image.
+    #
+    # @!attribute [rw] bounding_box
+    #   An axis-aligned coarse representation of the detected text's
+    #   location on the image.
+    #   @return [Types::BoundingBox]
+    #
+    # @!attribute [rw] polygon
+    #   Within the bounding box, a fine-grained polygon around the detected
+    #   text.
+    #   @return [Array<Types::Point>]
+    #
+    class Geometry < Struct.new(
+      :bounding_box,
+      :polygon)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCelebrityInfoRequest
     #   data as a hash:
     #
@@ -939,7 +1005,9 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   The input image as bytes or an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #   @return [Types::Image]
     #
     # @!attribute [rw] external_image_id
@@ -990,9 +1058,15 @@ module Aws::Rekognition
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] face_model_version
+    #   Version number of the face detection model associated with the input
+    #   collection (`CollectionId`).
+    #   @return [String]
+    #
     class IndexFacesResponse < Struct.new(
       :face_records,
-      :orientation_correction)
+      :orientation_correction,
+      :face_model_version)
       include Aws::Structure
     end
 
@@ -1072,9 +1146,17 @@ module Aws::Rekognition
     #   collection IDs.
     #   @return [String]
     #
+    # @!attribute [rw] face_model_versions
+    #   Version numbers of the face detection models associated with the
+    #   collections in the array `CollectionIds`. For example, the value of
+    #   `FaceModelVersions[2]` is the version number for the face detection
+    #   model used by the collection in `CollectionId[2]`.
+    #   @return [Array<String>]
+    #
     class ListCollectionsResponse < Struct.new(
       :collection_ids,
-      :next_token)
+      :next_token,
+      :face_model_versions)
       include Aws::Structure
     end
 
@@ -1119,9 +1201,15 @@ module Aws::Rekognition
     #   of faces.
     #   @return [String]
     #
+    # @!attribute [rw] face_model_version
+    #   Version number of the face detection model associated with the input
+    #   collection (`CollectionId`).
+    #   @return [String]
+    #
     class ListFacesResponse < Struct.new(
       :faces,
-      :next_token)
+      :next_token,
+      :face_model_version)
       include Aws::Structure
     end
 
@@ -1189,6 +1277,29 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The X and Y coordinates of a point on an image. The X and Y values
+    # returned are ratios of the overall image size. For example, if the
+    # input image is 700x200 and the operation returns X=0.5 and Y=0.25,
+    # then the point is at the (350,50) pixel coordinate on the image.
+    #
+    # An array of `Point` objects, `Polygon`, is returned by . `Polygon`
+    # represents a fine-grained polygon around detected text. For more
+    # information, see .
+    #
+    # @!attribute [rw] x
+    #   The value of the X coordinate for a point on a `Polygon`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] y
+    #   The value of the Y coordinate for a point on a `Polygon`.
+    #   @return [Float]
+    #
+    class Point < Struct.new(
+      :x,
+      :y)
+      include Aws::Structure
+    end
+
     # Indicates the pose of the face as determined by its pitch, roll, and
     # yaw.
     #
@@ -1226,7 +1337,9 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] image
-    #   The input image to use for celebrity recognition.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #   @return [Types::Image]
     #
     class RecognizeCelebritiesRequest < Struct.new(
@@ -1329,7 +1442,9 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] image
-    #   The input image as bytes or an S3 object.
+    #   The input image as base64-encoded bytes or an S3 object. If you use
+    #   the AWS CLI to call Amazon Rekognition operations, passing
+    #   base64-encoded image bytes is not supported.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_faces
@@ -1366,10 +1481,16 @@ module Aws::Rekognition
     #   confidence in the match.
     #   @return [Array<Types::FaceMatch>]
     #
+    # @!attribute [rw] face_model_version
+    #   Version number of the face detection model associated with the input
+    #   collection (`CollectionId`).
+    #   @return [String]
+    #
     class SearchFacesByImageResponse < Struct.new(
       :searched_face_bounding_box,
       :searched_face_confidence,
-      :face_matches)
+      :face_matches,
+      :face_model_version)
       include Aws::Structure
     end
 
@@ -1419,9 +1540,15 @@ module Aws::Rekognition
     #   confidence in the match.
     #   @return [Array<Types::FaceMatch>]
     #
+    # @!attribute [rw] face_model_version
+    #   Version number of the face detection model associated with the input
+    #   collection (`CollectionId`).
+    #   @return [String]
+    #
     class SearchFacesResponse < Struct.new(
       :searched_face_id,
-      :face_matches)
+      :face_matches,
+      :face_model_version)
       include Aws::Structure
     end
 
@@ -1457,6 +1584,59 @@ module Aws::Rekognition
     class Sunglasses < Struct.new(
       :value,
       :confidence)
+      include Aws::Structure
+    end
+
+    # Information about a word or line of text detected by .
+    #
+    # The `DetectedText` field contains the text that Amazon Rekognition
+    # detected in the image.
+    #
+    # Every word and line has an identifier (`Id`). Each word belongs to a
+    # line and has a parent identifier (`ParentId`) that identifies the line
+    # of text in which the word appears. The word `Id` is also an index for
+    # the word within a line of words.
+    #
+    # For more information, see text-detection.
+    #
+    # @!attribute [rw] detected_text
+    #   The word or line of text recognized by Amazon Rekognition.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of text that was detected.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier for the detected text. The identifier is only unique
+    #   for a single call to `DetectText`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parent_id
+    #   The Parent identifier for the detected text identified by the value
+    #   of `ID`. If the type of detected text is `LINE`, the value of
+    #   `ParentId` is `Null`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that Amazon Rekognition has in the accuracy of the
+    #   detected text and the accuracy of the geometry points around the
+    #   detected text.
+    #   @return [Float]
+    #
+    # @!attribute [rw] geometry
+    #   The location of the detected text on the image. Includes an axis
+    #   aligned coarse bounding box surrounding the text and a finer grain
+    #   polygon for more accurate spatial information.
+    #   @return [Types::Geometry]
+    #
+    class TextDetection < Struct.new(
+      :detected_text,
+      :type,
+      :id,
+      :parent_id,
+      :confidence,
+      :geometry)
       include Aws::Structure
     end
 

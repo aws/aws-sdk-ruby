@@ -13,11 +13,16 @@ module Aws::Shield
 
     AttackDetail = Shapes::StructureShape.new(name: 'AttackDetail')
     AttackId = Shapes::StringShape.new(name: 'AttackId')
+    AttackLayer = Shapes::StringShape.new(name: 'AttackLayer')
+    AttackProperties = Shapes::ListShape.new(name: 'AttackProperties')
+    AttackProperty = Shapes::StructureShape.new(name: 'AttackProperty')
+    AttackPropertyIdentifier = Shapes::StringShape.new(name: 'AttackPropertyIdentifier')
     AttackSummaries = Shapes::ListShape.new(name: 'AttackSummaries')
     AttackSummary = Shapes::StructureShape.new(name: 'AttackSummary')
     AttackTimestamp = Shapes::TimestampShape.new(name: 'AttackTimestamp')
     AttackVectorDescription = Shapes::StructureShape.new(name: 'AttackVectorDescription')
     AttackVectorDescriptionList = Shapes::ListShape.new(name: 'AttackVectorDescriptionList')
+    Contributor = Shapes::StructureShape.new(name: 'Contributor')
     CreateProtectionRequest = Shapes::StructureShape.new(name: 'CreateProtectionRequest')
     CreateProtectionResponse = Shapes::StructureShape.new(name: 'CreateProtectionResponse')
     CreateSubscriptionRequest = Shapes::StructureShape.new(name: 'CreateSubscriptionRequest')
@@ -34,6 +39,8 @@ module Aws::Shield
     DescribeSubscriptionResponse = Shapes::StructureShape.new(name: 'DescribeSubscriptionResponse')
     Double = Shapes::FloatShape.new(name: 'Double')
     DurationInSeconds = Shapes::IntegerShape.new(name: 'DurationInSeconds')
+    GetSubscriptionStateRequest = Shapes::StructureShape.new(name: 'GetSubscriptionStateRequest')
+    GetSubscriptionStateResponse = Shapes::StructureShape.new(name: 'GetSubscriptionStateResponse')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
     InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
@@ -47,6 +54,7 @@ module Aws::Shield
     ListProtectionsRequest = Shapes::StructureShape.new(name: 'ListProtectionsRequest')
     ListProtectionsResponse = Shapes::StructureShape.new(name: 'ListProtectionsResponse')
     LockedSubscriptionException = Shapes::StructureShape.new(name: 'LockedSubscriptionException')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Mitigation = Shapes::StructureShape.new(name: 'Mitigation')
     MitigationList = Shapes::ListShape.new(name: 'MitigationList')
@@ -64,6 +72,7 @@ module Aws::Shield
     SubResourceSummaryList = Shapes::ListShape.new(name: 'SubResourceSummaryList')
     SubResourceType = Shapes::StringShape.new(name: 'SubResourceType')
     Subscription = Shapes::StructureShape.new(name: 'Subscription')
+    SubscriptionState = Shapes::StringShape.new(name: 'SubscriptionState')
     SummarizedAttackVector = Shapes::StructureShape.new(name: 'SummarizedAttackVector')
     SummarizedAttackVectorList = Shapes::ListShape.new(name: 'SummarizedAttackVectorList')
     SummarizedCounter = Shapes::StructureShape.new(name: 'SummarizedCounter')
@@ -71,6 +80,8 @@ module Aws::Shield
     TimeRange = Shapes::StructureShape.new(name: 'TimeRange')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
+    TopContributors = Shapes::ListShape.new(name: 'TopContributors')
+    Unit = Shapes::StringShape.new(name: 'Unit')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     AttackDetail.add_member(:attack_id, Shapes::ShapeRef.new(shape: AttackId, location_name: "AttackId"))
@@ -79,8 +90,18 @@ module Aws::Shield
     AttackDetail.add_member(:start_time, Shapes::ShapeRef.new(shape: AttackTimestamp, location_name: "StartTime"))
     AttackDetail.add_member(:end_time, Shapes::ShapeRef.new(shape: AttackTimestamp, location_name: "EndTime"))
     AttackDetail.add_member(:attack_counters, Shapes::ShapeRef.new(shape: SummarizedCounterList, location_name: "AttackCounters"))
+    AttackDetail.add_member(:attack_properties, Shapes::ShapeRef.new(shape: AttackProperties, location_name: "AttackProperties"))
     AttackDetail.add_member(:mitigations, Shapes::ShapeRef.new(shape: MitigationList, location_name: "Mitigations"))
     AttackDetail.struct_class = Types::AttackDetail
+
+    AttackProperties.member = Shapes::ShapeRef.new(shape: AttackProperty)
+
+    AttackProperty.add_member(:attack_layer, Shapes::ShapeRef.new(shape: AttackLayer, location_name: "AttackLayer"))
+    AttackProperty.add_member(:attack_property_identifier, Shapes::ShapeRef.new(shape: AttackPropertyIdentifier, location_name: "AttackPropertyIdentifier"))
+    AttackProperty.add_member(:top_contributors, Shapes::ShapeRef.new(shape: TopContributors, location_name: "TopContributors"))
+    AttackProperty.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
+    AttackProperty.add_member(:total, Shapes::ShapeRef.new(shape: Long, location_name: "Total"))
+    AttackProperty.struct_class = Types::AttackProperty
 
     AttackSummaries.member = Shapes::ShapeRef.new(shape: AttackSummary)
 
@@ -95,6 +116,10 @@ module Aws::Shield
     AttackVectorDescription.struct_class = Types::AttackVectorDescription
 
     AttackVectorDescriptionList.member = Shapes::ShapeRef.new(shape: AttackVectorDescription)
+
+    Contributor.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    Contributor.add_member(:value, Shapes::ShapeRef.new(shape: Long, location_name: "Value"))
+    Contributor.struct_class = Types::Contributor
 
     CreateProtectionRequest.add_member(:name, Shapes::ShapeRef.new(shape: ProtectionName, required: true, location_name: "Name"))
     CreateProtectionRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
@@ -132,6 +157,11 @@ module Aws::Shield
 
     DescribeSubscriptionResponse.add_member(:subscription, Shapes::ShapeRef.new(shape: Subscription, location_name: "Subscription"))
     DescribeSubscriptionResponse.struct_class = Types::DescribeSubscriptionResponse
+
+    GetSubscriptionStateRequest.struct_class = Types::GetSubscriptionStateRequest
+
+    GetSubscriptionStateResponse.add_member(:subscription_state, Shapes::ShapeRef.new(shape: SubscriptionState, required: true, location_name: "SubscriptionState"))
+    GetSubscriptionStateResponse.struct_class = Types::GetSubscriptionStateResponse
 
     ListAttacksRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnFilterList, location_name: "ResourceArns"))
     ListAttacksRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeRange, location_name: "StartTime"))
@@ -197,6 +227,8 @@ module Aws::Shield
     TimeRange.add_member(:from_inclusive, Shapes::ShapeRef.new(shape: AttackTimestamp, location_name: "FromInclusive"))
     TimeRange.add_member(:to_exclusive, Shapes::ShapeRef.new(shape: AttackTimestamp, location_name: "ToExclusive"))
     TimeRange.struct_class = Types::TimeRange
+
+    TopContributors.member = Shapes::ShapeRef.new(shape: Contributor)
 
 
     # @api private
@@ -288,6 +320,15 @@ module Aws::Shield
         o.output = Shapes::ShapeRef.new(shape: DescribeSubscriptionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_subscription_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSubscriptionState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSubscriptionStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSubscriptionStateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:list_attacks, Seahorse::Model::Operation.new.tap do |o|

@@ -497,7 +497,7 @@ module Aws::XRay
     #       {
     #         telemetry_records: [ # required
     #           {
-    #             timestamp: Time.now,
+    #             timestamp: Time.now, # required
     #             segments_received_count: 1,
     #             segments_sent_count: 1,
     #             segments_spillover_count: 1,
@@ -512,9 +512,9 @@ module Aws::XRay
     #             },
     #           },
     #         ],
-    #         ec2_instance_id: "String",
-    #         hostname: "String",
-    #         resource_arn: "String",
+    #         ec2_instance_id: "EC2InstanceId",
+    #         hostname: "Hostname",
+    #         resource_arn: "ResourceARN",
     #       }
     #
     # @!attribute [rw] telemetry_records
@@ -746,7 +746,7 @@ module Aws::XRay
     #   data as a hash:
     #
     #       {
-    #         timestamp: Time.now,
+    #         timestamp: Time.now, # required
     #         segments_received_count: 1,
     #         segments_sent_count: 1,
     #         segments_spillover_count: 1,

@@ -163,6 +163,9 @@ module Aws::StorageGateway
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NextUpdateAvailabilityDate = Shapes::StringShape.new(name: 'NextUpdateAvailabilityDate')
+    NotificationId = Shapes::StringShape.new(name: 'NotificationId')
+    NotifyWhenUploadedInput = Shapes::StructureShape.new(name: 'NotifyWhenUploadedInput')
+    NotifyWhenUploadedOutput = Shapes::StructureShape.new(name: 'NotifyWhenUploadedOutput')
     NumTapesToCreate = Shapes::IntegerShape.new(name: 'NumTapesToCreate')
     Path = Shapes::StringShape.new(name: 'Path')
     PermissionId = Shapes::IntegerShape.new(name: 'PermissionId')
@@ -254,6 +257,7 @@ module Aws::StorageGateway
     VolumeRecoveryPointInfos = Shapes::ListShape.new(name: 'VolumeRecoveryPointInfos')
     VolumeStatus = Shapes::StringShape.new(name: 'VolumeStatus')
     VolumeType = Shapes::StringShape.new(name: 'VolumeType')
+    VolumeUsedInBytes = Shapes::IntegerShape.new(name: 'VolumeUsedInBytes')
     VolumeiSCSIAttributes = Shapes::StructureShape.new(name: 'VolumeiSCSIAttributes')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     double = Shapes::FloatShape.new(name: 'double')
@@ -311,6 +315,7 @@ module Aws::StorageGateway
     CachediSCSIVolume.add_member(:source_snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SourceSnapshotId"))
     CachediSCSIVolume.add_member(:volume_iscsi_attributes, Shapes::ShapeRef.new(shape: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
     CachediSCSIVolume.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
+    CachediSCSIVolume.add_member(:volume_used_in_bytes, Shapes::ShapeRef.new(shape: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
     CachediSCSIVolume.struct_class = Types::CachediSCSIVolume
 
     CachediSCSIVolumes.member = Shapes::ShapeRef.new(shape: CachediSCSIVolume)
@@ -361,6 +366,7 @@ module Aws::StorageGateway
     CreateNFSFileShareInput.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
     CreateNFSFileShareInput.add_member(:squash, Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
     CreateNFSFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
+    CreateNFSFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     CreateNFSFileShareInput.struct_class = Types::CreateNFSFileShareInput
 
     CreateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -740,6 +746,7 @@ module Aws::StorageGateway
     NFSFileShareInfo.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
     NFSFileShareInfo.add_member(:squash, Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
     NFSFileShareInfo.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
+    NFSFileShareInfo.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     NFSFileShareInfo.struct_class = Types::NFSFileShareInfo
 
     NFSFileShareInfoList.member = Shapes::ShapeRef.new(shape: NFSFileShareInfo)
@@ -748,6 +755,13 @@ module Aws::StorageGateway
     NetworkInterface.add_member(:mac_address, Shapes::ShapeRef.new(shape: string, location_name: "MacAddress"))
     NetworkInterface.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: string, location_name: "Ipv6Address"))
     NetworkInterface.struct_class = Types::NetworkInterface
+
+    NotifyWhenUploadedInput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, required: true, location_name: "FileShareARN"))
+    NotifyWhenUploadedInput.struct_class = Types::NotifyWhenUploadedInput
+
+    NotifyWhenUploadedOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    NotifyWhenUploadedOutput.add_member(:notification_id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "NotificationId"))
+    NotifyWhenUploadedOutput.struct_class = Types::NotifyWhenUploadedOutput
 
     RefreshCacheInput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, required: true, location_name: "FileShareARN"))
     RefreshCacheInput.struct_class = Types::RefreshCacheInput
@@ -816,6 +830,7 @@ module Aws::StorageGateway
     StorediSCSIVolume.add_member(:preserved_existing_data, Shapes::ShapeRef.new(shape: boolean, location_name: "PreservedExistingData"))
     StorediSCSIVolume.add_member(:volume_iscsi_attributes, Shapes::ShapeRef.new(shape: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
     StorediSCSIVolume.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
+    StorediSCSIVolume.add_member(:volume_used_in_bytes, Shapes::ShapeRef.new(shape: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
     StorediSCSIVolume.struct_class = Types::StorediSCSIVolume
 
     StorediSCSIVolumes.member = Shapes::ShapeRef.new(shape: StorediSCSIVolume)
@@ -921,6 +936,7 @@ module Aws::StorageGateway
     UpdateNFSFileShareInput.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
     UpdateNFSFileShareInput.add_member(:squash, Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
     UpdateNFSFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
+    UpdateNFSFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
     UpdateNFSFileShareInput.struct_class = Types::UpdateNFSFileShareInput
 
     UpdateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -1494,6 +1510,16 @@ module Aws::StorageGateway
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:notify_when_uploaded, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "NotifyWhenUploaded"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: NotifyWhenUploadedInput)
+        o.output = Shapes::ShapeRef.new(shape: NotifyWhenUploadedOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:refresh_cache, Seahorse::Model::Operation.new.tap do |o|

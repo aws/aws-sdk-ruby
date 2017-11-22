@@ -491,6 +491,7 @@ module Aws::CloudFormation
     #         parameter_key: "ParameterKey",
     #         parameter_value: "ParameterValue",
     #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
     #       },
     #     ],
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
@@ -753,6 +754,7 @@ module Aws::CloudFormation
     #         parameter_key: "ParameterKey",
     #         parameter_value: "ParameterValue",
     #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
     #       },
     #     ],
     #     disable_rollback: false,
@@ -813,6 +815,45 @@ module Aws::CloudFormation
     #   The names of one or more regions where you want to create stack
     #   instances using the specified AWS account(s).
     #
+    # @option params [Array<Types::Parameter>] :parameter_overrides
+    #   A list of stack set parameters whose values you want to override in
+    #   the selected stack instances.
+    #
+    #   Any overridden parameter values will be applied to all stack instances
+    #   in the specified accounts and regions. When specifying parameters and
+    #   their values, be aware of how AWS CloudFormation sets parameter values
+    #   during stack instance operations:
+    #
+    #   * To override the current value for a parameter, include the parameter
+    #     and specify its value.
+    #
+    #   * To leave a parameter set to its present value, you can do one of the
+    #     following:
+    #
+    #     * Do not include the parameter in the list.
+    #
+    #     * Include the parameter and specify `UsePreviousValue` as `true`.
+    #       (You cannot specify both a value and set `UsePreviousValue` to
+    #       `true`.)
+    #
+    #   * To set all overridden parameter back to the values specified in the
+    #     stack set, specify a parameter list but do not include any
+    #     parameters.
+    #
+    #   * To leave all parameters set to their present values, do not specify
+    #     this property at all.
+    #
+    #   During stack set updates, any parameter values overridden for a stack
+    #   instance are not updated, but retain their overridden value.
+    #
+    #   You can only override the parameter *values* that are specified in the
+    #   stack set; to add or delete a parameter itself, use
+    #   [UpdateStackSet][1] to update the stack set template.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
+    #
     # @option params [Types::StackSetOperationPreferences] :operation_preferences
     #   Preferences for how AWS CloudFormation performs this stack set
     #   operation.
@@ -845,6 +886,14 @@ module Aws::CloudFormation
     #     stack_set_name: "StackSetName", # required
     #     accounts: ["Account"], # required
     #     regions: ["Region"], # required
+    #     parameter_overrides: [
+    #       {
+    #         parameter_key: "ParameterKey",
+    #         parameter_value: "ParameterValue",
+    #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
+    #       },
+    #     ],
     #     operation_preferences: {
     #       region_order: ["Region"],
     #       failure_tolerance_count: 1,
@@ -993,6 +1042,7 @@ module Aws::CloudFormation
     #         parameter_key: "ParameterKey",
     #         parameter_value: "ParameterValue",
     #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
     #       },
     #     ],
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
@@ -1317,6 +1367,7 @@ module Aws::CloudFormation
     #   resp.parameters[0].parameter_key #=> String
     #   resp.parameters[0].parameter_value #=> String
     #   resp.parameters[0].use_previous_value #=> Boolean
+    #   resp.parameters[0].resolved_value #=> String
     #   resp.creation_time #=> Time
     #   resp.execution_status #=> String, one of "UNAVAILABLE", "AVAILABLE", "EXECUTE_IN_PROGRESS", "EXECUTE_COMPLETE", "EXECUTE_FAILED", "OBSOLETE"
     #   resp.status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "DELETE_COMPLETE", "FAILED"
@@ -1458,6 +1509,11 @@ module Aws::CloudFormation
     #   resp.stack_instance.region #=> String
     #   resp.stack_instance.account #=> String
     #   resp.stack_instance.stack_id #=> String
+    #   resp.stack_instance.parameter_overrides #=> Array
+    #   resp.stack_instance.parameter_overrides[0].parameter_key #=> String
+    #   resp.stack_instance.parameter_overrides[0].parameter_value #=> String
+    #   resp.stack_instance.parameter_overrides[0].use_previous_value #=> Boolean
+    #   resp.stack_instance.parameter_overrides[0].resolved_value #=> String
     #   resp.stack_instance.status #=> String, one of "CURRENT", "OUTDATED", "INOPERABLE"
     #   resp.stack_instance.status_reason #=> String
     #
@@ -1647,6 +1703,7 @@ module Aws::CloudFormation
     #   resp.stack_set.parameters[0].parameter_key #=> String
     #   resp.stack_set.parameters[0].parameter_value #=> String
     #   resp.stack_set.parameters[0].use_previous_value #=> Boolean
+    #   resp.stack_set.parameters[0].resolved_value #=> String
     #   resp.stack_set.capabilities #=> Array
     #   resp.stack_set.capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"
     #   resp.stack_set.tags #=> Array
@@ -1753,6 +1810,7 @@ module Aws::CloudFormation
     #   resp.stacks[0].parameters[0].parameter_key #=> String
     #   resp.stacks[0].parameters[0].parameter_value #=> String
     #   resp.stacks[0].parameters[0].use_previous_value #=> Boolean
+    #   resp.stacks[0].parameters[0].resolved_value #=> String
     #   resp.stacks[0].creation_time #=> Time
     #   resp.stacks[0].deletion_time #=> Time
     #   resp.stacks[0].last_updated_time #=> Time
@@ -1836,6 +1894,7 @@ module Aws::CloudFormation
     #         parameter_key: "ParameterKey",
     #         parameter_value: "ParameterValue",
     #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
     #       },
     #     ],
     #   })
@@ -2914,6 +2973,7 @@ module Aws::CloudFormation
     #         parameter_key: "ParameterKey",
     #         parameter_value: "ParameterValue",
     #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
     #       },
     #     ],
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
@@ -2950,6 +3010,152 @@ module Aws::CloudFormation
     # @param [Hash] params ({})
     def update_stack(params = {}, options = {})
       req = build_request(:update_stack, params)
+      req.send_request(options)
+    end
+
+    # Updates the parameter values for stack instances for the specified
+    # accounts, within the specified regions. A stack instance refers to a
+    # stack in a specific account and region.
+    #
+    # You can only update stack instances in regions and accounts where they
+    # already exist; to create additional stack instances, use
+    # [CreateStackInstances][1].
+    #
+    # During stack set updates, any parameters overridden for a stack
+    # instance are not updated, but retain their overridden value.
+    #
+    # You can only update the parameter *values* that are specified in the
+    # stack set; to add or delete a parameter itself, use
+    # [UpdateStackSet][2] to update the stack set template. If you add a
+    # parameter to a template, before you can override the parameter value
+    # specified in the stack set you must first use [UpdateStackSet][2] to
+    # update all stack instances with the updated template and parameter
+    # value specified in the stack set. Once a stack instance has been
+    # updated with the new parameter, you can then override the parameter
+    # value using `UpdateStackInstances`.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateStackInstances.html
+    # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
+    #
+    # @option params [required, String] :stack_set_name
+    #   The name or unique ID of the stack set associated with the stack
+    #   instances.
+    #
+    # @option params [required, Array<String>] :accounts
+    #   The names of one or more AWS accounts for which you want to update
+    #   parameter values for stack instances. The overridden parameter values
+    #   will be applied to all stack instances in the specified accounts and
+    #   regions.
+    #
+    # @option params [required, Array<String>] :regions
+    #   The names of one or more regions in which you want to update parameter
+    #   values for stack instances. The overridden parameter values will be
+    #   applied to all stack instances in the specified accounts and regions.
+    #
+    # @option params [Array<Types::Parameter>] :parameter_overrides
+    #   A list of input parameters whose values you want to update for the
+    #   specified stack instances.
+    #
+    #   Any overridden parameter values will be applied to all stack instances
+    #   in the specified accounts and regions. When specifying parameters and
+    #   their values, be aware of how AWS CloudFormation sets parameter values
+    #   during stack instance update operations:
+    #
+    #   * To override the current value for a parameter, include the parameter
+    #     and specify its value.
+    #
+    #   * To leave a parameter set to its present value, you can do one of the
+    #     following:
+    #
+    #     * Do not include the parameter in the list.
+    #
+    #     * Include the parameter and specify `UsePreviousValue` as `true`.
+    #       (You cannot specify both a value and set `UsePreviousValue` to
+    #       `true`.)
+    #
+    #   * To set all overridden parameter back to the values specified in the
+    #     stack set, specify a parameter list but do not include any
+    #     parameters.
+    #
+    #   * To leave all parameters set to their present values, do not specify
+    #     this property at all.
+    #
+    #   During stack set updates, any parameter values overridden for a stack
+    #   instance are not updated, but retain their overridden value.
+    #
+    #   You can only override the parameter *values* that are specified in the
+    #   stack set; to add or delete a parameter itself, use `UpdateStackSet`
+    #   to update the stack set template. If you add a parameter to a
+    #   template, before you can override the parameter value specified in the
+    #   stack set you must first use [UpdateStackSet][1] to update all stack
+    #   instances with the updated template and parameter value specified in
+    #   the stack set. Once a stack instance has been updated with the new
+    #   parameter, you can then override the parameter value using
+    #   `UpdateStackInstances`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html
+    #
+    # @option params [Types::StackSetOperationPreferences] :operation_preferences
+    #   Preferences for how AWS CloudFormation performs this stack set
+    #   operation.
+    #
+    # @option params [String] :operation_id
+    #   The unique identifier for this stack set operation.
+    #
+    #   The operation ID also functions as an idempotency token, to ensure
+    #   that AWS CloudFormation performs the stack set operation only once,
+    #   even if you retry the request multiple times. You might retry stack
+    #   set operation requests to ensure that AWS CloudFormation successfully
+    #   received them.
+    #
+    #   If you don't specify an operation ID, the SDK generates one
+    #   automatically.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateStackInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateStackInstancesOutput#operation_id #operation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_stack_instances({
+    #     stack_set_name: "StackSetName", # required
+    #     accounts: ["Account"], # required
+    #     regions: ["Region"], # required
+    #     parameter_overrides: [
+    #       {
+    #         parameter_key: "ParameterKey",
+    #         parameter_value: "ParameterValue",
+    #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
+    #       },
+    #     ],
+    #     operation_preferences: {
+    #       region_order: ["Region"],
+    #       failure_tolerance_count: 1,
+    #       failure_tolerance_percentage: 1,
+    #       max_concurrent_count: 1,
+    #       max_concurrent_percentage: 1,
+    #     },
+    #     operation_id: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInstances AWS API Documentation
+    #
+    # @overload update_stack_instances(params = {})
+    # @param [Hash] params ({})
+    def update_stack_instances(params = {}, options = {})
+      req = build_request(:update_stack_instances, params)
       req.send_request(options)
     end
 
@@ -3113,6 +3319,7 @@ module Aws::CloudFormation
     #         parameter_key: "ParameterKey",
     #         parameter_value: "ParameterValue",
     #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
     #       },
     #     ],
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
@@ -3271,7 +3478,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

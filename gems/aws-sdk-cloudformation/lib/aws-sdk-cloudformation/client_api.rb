@@ -252,6 +252,8 @@ module Aws::CloudFormation
     TransformsList = Shapes::ListShape.new(name: 'TransformsList')
     Type = Shapes::StringShape.new(name: 'Type')
     UpdateStackInput = Shapes::StructureShape.new(name: 'UpdateStackInput')
+    UpdateStackInstancesInput = Shapes::StructureShape.new(name: 'UpdateStackInstancesInput')
+    UpdateStackInstancesOutput = Shapes::StructureShape.new(name: 'UpdateStackInstancesOutput')
     UpdateStackOutput = Shapes::StructureShape.new(name: 'UpdateStackOutput')
     UpdateStackSetInput = Shapes::StructureShape.new(name: 'UpdateStackSetInput')
     UpdateStackSetOutput = Shapes::StructureShape.new(name: 'UpdateStackSetOutput')
@@ -354,6 +356,7 @@ module Aws::CloudFormation
     CreateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
     CreateStackInstancesInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "Accounts"))
     CreateStackInstancesInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "Regions"))
+    CreateStackInstancesInput.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
     CreateStackInstancesInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     CreateStackInstancesInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
     CreateStackInstancesInput.struct_class = Types::CreateStackInstancesInput
@@ -633,6 +636,7 @@ module Aws::CloudFormation
     Parameter.add_member(:parameter_key, Shapes::ShapeRef.new(shape: ParameterKey, location_name: "ParameterKey"))
     Parameter.add_member(:parameter_value, Shapes::ShapeRef.new(shape: ParameterValue, location_name: "ParameterValue"))
     Parameter.add_member(:use_previous_value, Shapes::ShapeRef.new(shape: UsePreviousValue, location_name: "UsePreviousValue"))
+    Parameter.add_member(:resolved_value, Shapes::ShapeRef.new(shape: ParameterValue, location_name: "ResolvedValue"))
     Parameter.struct_class = Types::Parameter
 
     ParameterConstraints.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedValues, location_name: "AllowedValues"))
@@ -745,6 +749,7 @@ module Aws::CloudFormation
     StackInstance.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "Region"))
     StackInstance.add_member(:account, Shapes::ShapeRef.new(shape: Account, location_name: "Account"))
     StackInstance.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
+    StackInstance.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
     StackInstance.add_member(:status, Shapes::ShapeRef.new(shape: StackInstanceStatus, location_name: "Status"))
     StackInstance.add_member(:status_reason, Shapes::ShapeRef.new(shape: Reason, location_name: "StatusReason"))
     StackInstance.struct_class = Types::StackInstance
@@ -906,6 +911,17 @@ module Aws::CloudFormation
     UpdateStackInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     UpdateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     UpdateStackInput.struct_class = Types::UpdateStackInput
+
+    UpdateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
+    UpdateStackInstancesInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "Accounts"))
+    UpdateStackInstancesInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "Regions"))
+    UpdateStackInstancesInput.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
+    UpdateStackInstancesInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
+    UpdateStackInstancesInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
+    UpdateStackInstancesInput.struct_class = Types::UpdateStackInstancesInput
+
+    UpdateStackInstancesOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
+    UpdateStackInstancesOutput.struct_class = Types::UpdateStackInstancesOutput
 
     UpdateStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
     UpdateStackOutput.struct_class = Types::UpdateStackOutput
@@ -1329,6 +1345,20 @@ module Aws::CloudFormation
         o.output = Shapes::ShapeRef.new(shape: UpdateStackOutput)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapabilitiesException)
         o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
+      end)
+
+      api.add_operation(:update_stack_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStackInstances"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStackInstancesInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStackInstancesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: StackSetNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: StackInstanceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationIdAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: StaleRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:update_stack_set, Seahorse::Model::Operation.new.tap do |o|

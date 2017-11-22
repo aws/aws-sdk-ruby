@@ -381,6 +381,7 @@ module Aws::CloudFormation
     #         parameter_key: "ParameterKey",
     #         parameter_value: "ParameterValue",
     #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
     #       },
     #     ],
     #     disable_rollback: false,
@@ -660,6 +661,7 @@ module Aws::CloudFormation
     #         parameter_key: "ParameterKey",
     #         parameter_value: "ParameterValue",
     #         use_previous_value: false,
+    #         resolved_value: "ParameterValue",
     #       },
     #     ],
     #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM

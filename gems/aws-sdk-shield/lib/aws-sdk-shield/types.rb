@@ -24,17 +24,31 @@ module Aws::Shield
     #   @return [Array<Types::SubResourceSummary>]
     #
     # @!attribute [rw] start_time
-    #   The time the attack started, in the format 2016-12-16T13:50Z.
+    #   The time the attack started, in Unix time in seconds. For more
+    #   information see [timestamp][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The time the attack ended, in the format 2016-12-16T13:50Z.
+    #   The time the attack ended, in Unix time in seconds. For more
+    #   information see [timestamp][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Time]
     #
     # @!attribute [rw] attack_counters
     #   List of counters that describe the attack for the specified time
     #   period.
     #   @return [Array<Types::SummarizedCounter>]
+    #
+    # @!attribute [rw] attack_properties
+    #   The array of AttackProperty objects.
+    #   @return [Array<Types::AttackProperty>]
     #
     # @!attribute [rw] mitigations
     #   List of mitigation actions taken for the attack.
@@ -49,7 +63,44 @@ module Aws::Shield
       :start_time,
       :end_time,
       :attack_counters,
+      :attack_properties,
       :mitigations)
+      include Aws::Structure
+    end
+
+    # Details of the described attack.
+    #
+    # @!attribute [rw] attack_layer
+    #   The type of DDoS event that was observed. `NETWORK` indicates layer
+    #   3 and layer 4 events and `APPLICATION` indicates layer 7 events.
+    #   @return [String]
+    #
+    # @!attribute [rw] attack_property_identifier
+    #   Defines the DDoS attack property information that is provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] top_contributors
+    #   The array of Contributor objects that includes the top five
+    #   contributors to an attack.
+    #   @return [Array<Types::Contributor>]
+    #
+    # @!attribute [rw] unit
+    #   The unit of the `Value` of the contributions.
+    #   @return [String]
+    #
+    # @!attribute [rw] total
+    #   The total contributions made to this attack by all contributors, not
+    #   just the five listed in the `TopContributors` list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackProperty AWS API Documentation
+    #
+    class AttackProperty < Struct.new(
+      :attack_layer,
+      :attack_property_identifier,
+      :top_contributors,
+      :unit,
+      :total)
       include Aws::Structure
     end
 
@@ -64,11 +115,21 @@ module Aws::Shield
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The start time of the attack, in the format 2016-12-16T13:50Z.
+    #   The start time of the attack, in Unix time in seconds. For more
+    #   information see [timestamp][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   The end time of the attack, in the format 2016-12-16T13:50Z.
+    #   The end time of the attack, in Unix time in seconds. For more
+    #   information see [timestamp][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Time]
     #
     # @!attribute [rw] attack_vectors
@@ -89,13 +150,65 @@ module Aws::Shield
     # Describes the attack.
     #
     # @!attribute [rw] vector_type
-    #   The attack type, for example, SNMP reflection or SYN flood.
+    #   The attack type. Valid values:
+    #
+    #   * UDP\_TRAFFIC
+    #
+    #   * UDP\_FRAGMENT
+    #
+    #   * GENERIC\_UDP\_REFLECTION
+    #
+    #   * DNS\_REFLECTION
+    #
+    #   * NTP\_REFLECTION
+    #
+    #   * CHARGEN\_REFLECTION
+    #
+    #   * SSDP\_REFLECTION
+    #
+    #   * PORT\_MAPPER
+    #
+    #   * RIP\_REFLECTION
+    #
+    #   * SNMP\_REFLECTION
+    #
+    #   * MSSQL\_REFLECTION
+    #
+    #   * NET\_BIOS\_REFLECTION
+    #
+    #   * SYN\_FLOOD
+    #
+    #   * ACK\_FLOOD
+    #
+    #   * REQUEST\_FLOOD
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackVectorDescription AWS API Documentation
     #
     class AttackVectorDescription < Struct.new(
       :vector_type)
+      include Aws::Structure
+    end
+
+    # A contributor to the attack and their contribution.
+    #
+    # @!attribute [rw] name
+    #   The name of the contributor. This is dependent on the
+    #   `AttackPropertyIdentifier`. For example, if the
+    #   `AttackPropertyIdentifier` is `SOURCE_COUNTRY`, the `Name` could be
+    #   `United States`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The contribution of this contributor expressed in Protection units.
+    #   For example `10,000`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Contributor AWS API Documentation
+    #
+    class Contributor < Struct.new(
+      :name,
+      :value)
       include Aws::Structure
     end
 
@@ -113,6 +226,25 @@ module Aws::Shield
     #
     # @!attribute [rw] resource_arn
     #   The ARN (Amazon Resource Name) of the resource to be protected.
+    #
+    #   The ARN should be in one of the following formats:
+    #
+    #   * For an Application Load Balancer:
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
+    #     `
+    #
+    #   * For an Elastic Load Balancer (Classic Load Balancer):
+    #     `arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
+    #     `
+    #
+    #   * For AWS CloudFront distribution:
+    #     `arn:aws:cloudfront::account-id:distribution/distribution-id `
+    #
+    #   * For Amazon Route 53:
+    #     `arn:aws:route53::account-id:hostedzone/hosted-zone-id `
+    #
+    #   * For an Elastic IP address:
+    #     `arn:aws:ec2:region:account-id:eip-allocation/allocation-id `
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionRequest AWS API Documentation
@@ -253,6 +385,23 @@ module Aws::Shield
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionStateRequest AWS API Documentation
+    #
+    class GetSubscriptionStateRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] subscription_state
+    #   The status of the subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/GetSubscriptionStateResponse AWS API Documentation
+    #
+    class GetSubscriptionStateResponse < Struct.new(
+      :subscription_state)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListAttacksRequest
     #   data as a hash:
     #
@@ -277,11 +426,25 @@ module Aws::Shield
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_time
-    #   The time period for the attacks.
+    #   The start of the time period for the attacks. This is a `timestamp`
+    #   type. The sample request above indicates a `number` type because the
+    #   default used by WAF is Unix time in seconds. However any valid
+    #   [timestamp format][1] is allowed.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Types::TimeRange]
     #
     # @!attribute [rw] end_time
-    #   The end of the time period for the attacks.
+    #   The end of the time period for the attacks. This is a `timestamp`
+    #   type. The sample request above indicates a `number` type because the
+    #   default used by WAF is Unix time in seconds. However any valid
+    #   [timestamp format][1] is allowed.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Types::TimeRange]
     #
     # @!attribute [rw] next_token
@@ -441,8 +604,12 @@ module Aws::Shield
     # Information about the AWS Shield Advanced subscription for an account.
     #
     # @!attribute [rw] start_time
-    #   The start time of the subscription, in the format
-    #   "2016-12-16T13:50Z".
+    #   The start time of the subscription, in Unix time in seconds. For
+    #   more information see [timestamp][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Time]
     #
     # @!attribute [rw] time_commitment_in_seconds
@@ -525,11 +692,21 @@ module Aws::Shield
     #       }
     #
     # @!attribute [rw] from_inclusive
-    #   The start time, in the format 2016-12-16T13:50Z.
+    #   The start time, in Unix time in seconds. For more information see
+    #   [timestamp][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Time]
     #
     # @!attribute [rw] to_exclusive
-    #   The end time, in the format 2016-12-16T15:50Z.
+    #   The end time, in Unix time in seconds. For more information see
+    #   [timestamp][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/TimeRange AWS API Documentation

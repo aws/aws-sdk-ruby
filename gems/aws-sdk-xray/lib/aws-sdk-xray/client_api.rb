@@ -21,9 +21,11 @@ module Aws::XRay
     BatchGetTracesRequest = Shapes::StructureShape.new(name: 'BatchGetTracesRequest')
     BatchGetTracesResult = Shapes::StructureShape.new(name: 'BatchGetTracesResult')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EC2InstanceId = Shapes::StringShape.new(name: 'EC2InstanceId')
     Edge = Shapes::StructureShape.new(name: 'Edge')
     EdgeList = Shapes::ListShape.new(name: 'EdgeList')
     EdgeStatistics = Shapes::StructureShape.new(name: 'EdgeStatistics')
+    ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorStatistics = Shapes::StructureShape.new(name: 'ErrorStatistics')
     FaultStatistics = Shapes::StructureShape.new(name: 'FaultStatistics')
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
@@ -35,6 +37,7 @@ module Aws::XRay
     GetTraceSummariesResult = Shapes::StructureShape.new(name: 'GetTraceSummariesResult')
     Histogram = Shapes::ListShape.new(name: 'Histogram')
     HistogramEntry = Shapes::StructureShape.new(name: 'HistogramEntry')
+    Hostname = Shapes::StringShape.new(name: 'Hostname')
     Http = Shapes::StructureShape.new(name: 'Http')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
@@ -46,6 +49,7 @@ module Aws::XRay
     PutTelemetryRecordsResult = Shapes::StructureShape.new(name: 'PutTelemetryRecordsResult')
     PutTraceSegmentsRequest = Shapes::StructureShape.new(name: 'PutTraceSegmentsRequest')
     PutTraceSegmentsResult = Shapes::StructureShape.new(name: 'PutTraceSegmentsResult')
+    ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
     Segment = Shapes::StructureShape.new(name: 'Segment')
     SegmentDocument = Shapes::StringShape.new(name: 'SegmentDocument')
     SegmentId = Shapes::StringShape.new(name: 'SegmentId')
@@ -183,9 +187,9 @@ module Aws::XRay
     Http.struct_class = Types::Http
 
     PutTelemetryRecordsRequest.add_member(:telemetry_records, Shapes::ShapeRef.new(shape: TelemetryRecordList, required: true, location_name: "TelemetryRecords"))
-    PutTelemetryRecordsRequest.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "EC2InstanceId"))
-    PutTelemetryRecordsRequest.add_member(:hostname, Shapes::ShapeRef.new(shape: String, location_name: "Hostname"))
-    PutTelemetryRecordsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, location_name: "ResourceARN"))
+    PutTelemetryRecordsRequest.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceId, location_name: "EC2InstanceId"))
+    PutTelemetryRecordsRequest.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "Hostname"))
+    PutTelemetryRecordsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
     PutTelemetryRecordsRequest.struct_class = Types::PutTelemetryRecordsRequest
 
     PutTelemetryRecordsResult.struct_class = Types::PutTelemetryRecordsResult
@@ -236,7 +240,7 @@ module Aws::XRay
     ServiceStatistics.add_member(:total_response_time, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "TotalResponseTime"))
     ServiceStatistics.struct_class = Types::ServiceStatistics
 
-    TelemetryRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    TelemetryRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
     TelemetryRecord.add_member(:segments_received_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "SegmentsReceivedCount"))
     TelemetryRecord.add_member(:segments_sent_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "SegmentsSentCount"))
     TelemetryRecord.add_member(:segments_spillover_count, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "SegmentsSpilloverCount"))
@@ -314,6 +318,11 @@ module Aws::XRay
         o.output = Shapes::ShapeRef.new(shape: BatchGetTracesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_service_graph, Seahorse::Model::Operation.new.tap do |o|
@@ -324,6 +333,11 @@ module Aws::XRay
         o.output = Shapes::ShapeRef.new(shape: GetServiceGraphResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_trace_graph, Seahorse::Model::Operation.new.tap do |o|
@@ -334,6 +348,11 @@ module Aws::XRay
         o.output = Shapes::ShapeRef.new(shape: GetTraceGraphResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_trace_summaries, Seahorse::Model::Operation.new.tap do |o|
@@ -344,6 +363,11 @@ module Aws::XRay
         o.output = Shapes::ShapeRef.new(shape: GetTraceSummariesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_telemetry_records, Seahorse::Model::Operation.new.tap do |o|

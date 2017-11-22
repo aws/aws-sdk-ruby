@@ -486,7 +486,7 @@ module Aws::XRay
     #   resp = client.put_telemetry_records({
     #     telemetry_records: [ # required
     #       {
-    #         timestamp: Time.now,
+    #         timestamp: Time.now, # required
     #         segments_received_count: 1,
     #         segments_sent_count: 1,
     #         segments_spillover_count: 1,
@@ -501,9 +501,9 @@ module Aws::XRay
     #         },
     #       },
     #     ],
-    #     ec2_instance_id: "String",
-    #     hostname: "String",
-    #     resource_arn: "String",
+    #     ec2_instance_id: "EC2InstanceId",
+    #     hostname: "Hostname",
+    #     resource_arn: "ResourceARN",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecords AWS API Documentation
@@ -610,7 +610,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

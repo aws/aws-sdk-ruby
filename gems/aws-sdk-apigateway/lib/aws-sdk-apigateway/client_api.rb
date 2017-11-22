@@ -11,6 +11,7 @@ module Aws::APIGateway
 
     include Seahorse::Model
 
+    AccessLogSettings = Shapes::StructureShape.new(name: 'AccessLogSettings')
     Account = Shapes::StructureShape.new(name: 'Account')
     ApiKey = Shapes::StructureShape.new(name: 'ApiKey')
     ApiKeyIds = Shapes::StructureShape.new(name: 'ApiKeyIds')
@@ -250,6 +251,10 @@ module Aws::APIGateway
     UsagePlanKey = Shapes::StructureShape.new(name: 'UsagePlanKey')
     UsagePlanKeys = Shapes::StructureShape.new(name: 'UsagePlanKeys')
     UsagePlans = Shapes::StructureShape.new(name: 'UsagePlans')
+
+    AccessLogSettings.add_member(:format, Shapes::ShapeRef.new(shape: String, location_name: "format"))
+    AccessLogSettings.add_member(:destination_arn, Shapes::ShapeRef.new(shape: String, location_name: "destinationArn"))
+    AccessLogSettings.struct_class = Types::AccessLogSettings
 
     Account.add_member(:cloudwatch_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "cloudwatchRoleArn"))
     Account.add_member(:throttle_settings, Shapes::ShapeRef.new(shape: ThrottleSettings, location_name: "throttleSettings"))
@@ -825,6 +830,7 @@ module Aws::APIGateway
     Integration.add_member(:request_templates, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestTemplates"))
     Integration.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: String, location_name: "passthroughBehavior"))
     Integration.add_member(:content_handling, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandling"))
+    Integration.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: Integer, location_name: "timeoutInMillis"))
     Integration.add_member(:cache_namespace, Shapes::ShapeRef.new(shape: String, location_name: "cacheNamespace"))
     Integration.add_member(:cache_key_parameters, Shapes::ShapeRef.new(shape: ListOfString, location_name: "cacheKeyParameters"))
     Integration.add_member(:integration_responses, Shapes::ShapeRef.new(shape: MapOfIntegrationResponse, location_name: "integrationResponses"))
@@ -992,6 +998,7 @@ module Aws::APIGateway
     PutIntegrationRequest.add_member(:cache_namespace, Shapes::ShapeRef.new(shape: String, location_name: "cacheNamespace"))
     PutIntegrationRequest.add_member(:cache_key_parameters, Shapes::ShapeRef.new(shape: ListOfString, location_name: "cacheKeyParameters"))
     PutIntegrationRequest.add_member(:content_handling, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandling"))
+    PutIntegrationRequest.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "timeoutInMillis"))
     PutIntegrationRequest.struct_class = Types::PutIntegrationRequest
 
     PutIntegrationResponseRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -1107,6 +1114,7 @@ module Aws::APIGateway
     Stage.add_member(:method_settings, Shapes::ShapeRef.new(shape: MapOfMethodSettings, location_name: "methodSettings"))
     Stage.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
     Stage.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, location_name: "documentationVersion"))
+    Stage.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AccessLogSettings, location_name: "accessLogSettings"))
     Stage.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     Stage.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
     Stage.struct_class = Types::Stage
