@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.89 (2017-11-22)
+------------------
+
 * Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
 
 2.10.88 (2017-11-22)
