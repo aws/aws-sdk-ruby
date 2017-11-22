@@ -132,8 +132,7 @@ module Aws::ACM
     #   @return [Time]
     #
     # @!attribute [rw] key_algorithm
-    #   The algorithm that was used to generate the key pair (the public and
-    #   private key).
+    #   The algorithm that was used to generate the public-private key pair.
     #   @return [String]
     #
     # @!attribute [rw] signature_algorithm
@@ -181,6 +180,19 @@ module Aws::ACM
     #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [Types::RenewalSummary]
     #
+    # @!attribute [rw] key_usages
+    #   A list of Key Usage X.509 v3 extension objects. Each object is a
+    #   string value that identifies the purpose of the public key contained
+    #   in the certificate. Possible extension values include
+    #   DIGITAL\_SIGNATURE, KEY\_ENCHIPHERMENT, NON\_REPUDIATION, and more.
+    #   @return [Array<Types::KeyUsage>]
+    #
+    # @!attribute [rw] extended_key_usages
+    #   Contains a list of Extended Key Usage X.509 v3 extension objects.
+    #   Each object specifies a purpose for which the certificate public key
+    #   can be used and consists of a name and an object identifier (OID).
+    #   @return [Array<Types::ExtendedKeyUsage>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateDetail AWS API Documentation
     #
     class CertificateDetail < Struct.new(
@@ -204,7 +216,9 @@ module Aws::ACM
       :in_use_by,
       :failure_reason,
       :type,
-      :renewal_summary)
+      :renewal_summary,
+      :key_usages,
+      :extended_key_usages)
       include Aws::Structure
     end
 
@@ -322,7 +336,28 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] validation_status
-    #   The validation status of the domain name.
+    #   The validation status of the domain name. This can be one of the
+    #   following values:
+    #
+    #   * `PENDING_VALIDATION`
+    #
+    #   * ``SUCCESS
+    #
+    #   * ``FAILED
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_record
+    #   Contains the CNAME record that you add to your DNS database for
+    #   domain validation. For more information, see [Use DNS to Validate
+    #   Domain Ownership][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   @return [Types::ResourceRecord]
+    #
+    # @!attribute [rw] validation_method
+    #   Specifies the domain validation method.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainValidation AWS API Documentation
@@ -331,12 +366,14 @@ module Aws::ACM
       :domain_name,
       :validation_emails,
       :validation_domain,
-      :validation_status)
+      :validation_status,
+      :resource_record,
+      :validation_method)
       include Aws::Structure
     end
 
     # Contains information about the domain names that you want ACM to use
-    # to send you emails to validate your ownership of the domain.
+    # to send you emails that enable you to validate domain ownership.
     #
     # @note When making an API call, you may pass DomainValidationOption
     #   data as a hash:
@@ -375,6 +412,80 @@ module Aws::ACM
     class DomainValidationOption < Struct.new(
       :domain_name,
       :validation_domain)
+      include Aws::Structure
+    end
+
+    # The Extended Key Usage X.509 v3 extension defines one or more purposes
+    # for which the public key can be used. This is in addition to or in
+    # place of the basic purposes specified by the Key Usage extension.
+    #
+    # @!attribute [rw] name
+    #   The name of an Extended Key Usage value.
+    #   @return [String]
+    #
+    # @!attribute [rw] oid
+    #   An object identifier (OID) for the extension value. OIDs are strings
+    #   of numbers separated by periods. The following OIDs are defined in
+    #   RFC 3280 and RFC 5280.
+    #
+    #   * `1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)`
+    #
+    #   * `1.3.6.1.5.5.7.3.2 (TLS_WEB_CLIENT_AUTHENTICATION)`
+    #
+    #   * `1.3.6.1.5.5.7.3.3 (CODE_SIGNING)`
+    #
+    #   * `1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)`
+    #
+    #   * `1.3.6.1.5.5.7.3.8 (TIME_STAMPING)`
+    #
+    #   * `1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)`
+    #
+    #   * `1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)`
+    #
+    #   * `1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)`
+    #
+    #   * `1.3.6.1.5.5.7.3.7 (IPSEC_USER)`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExtendedKeyUsage AWS API Documentation
+    #
+    class ExtendedKeyUsage < Struct.new(
+      :name,
+      :oid)
+      include Aws::Structure
+    end
+
+    # This structure can be used in the ListCertificates action to filter
+    # the output of the certificate list.
+    #
+    # @note When making an API call, you may pass Filters
+    #   data as a hash:
+    #
+    #       {
+    #         extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
+    #         key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
+    #         key_types: ["RSA_2048"], # accepts RSA_2048, RSA_1024, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
+    #       }
+    #
+    # @!attribute [rw] extended_key_usage
+    #   Specify one or more ExtendedKeyUsage extension values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] key_usage
+    #   Specify one or more KeyUsage extension values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] key_types
+    #   Specify one or more algorithms that can be used to generate key
+    #   pairs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Filters AWS API Documentation
+    #
+    class Filters < Struct.new(
+      :extended_key_usage,
+      :key_usage,
+      :key_types)
       include Aws::Structure
     end
 
@@ -443,30 +554,15 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] certificate
-    #   The certificate to import. It must meet the following requirements:
-    #
-    #   * Must be PEM-encoded.
-    #
-    #   * Must contain a 1024-bit or 2048-bit RSA public key.
-    #
-    #   * Must be valid at the time of import. You cannot import a
-    #     certificate before its validity period begins (the certificate's
-    #     `NotBefore` date) or after it expires (the certificate's
-    #     `NotAfter` date).
+    #   The certificate to import.
     #   @return [String]
     #
     # @!attribute [rw] private_key
-    #   The private key that matches the public key in the certificate. It
-    #   must meet the following requirements:
-    #
-    #   * Must be PEM-encoded.
-    #
-    #   * Must be unencrypted. You cannot import a private key that is
-    #     protected by a password or passphrase.
+    #   The private key that matches the public key in the certificate.
     #   @return [String]
     #
     # @!attribute [rw] certificate_chain
-    #   The certificate chain. It must be PEM-encoded.
+    #   The PEM encoded certificate chain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateRequest AWS API Documentation
@@ -494,19 +590,48 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # The Key Usage X.509 v3 extension defines the purpose of the public key
+    # contained in the certificate.
+    #
+    # @!attribute [rw] name
+    #   A string value that contains a Key Usage extension name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/KeyUsage AWS API Documentation
+    #
+    class KeyUsage < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListCertificatesRequest
     #   data as a hash:
     #
     #       {
     #         certificate_statuses: ["PENDING_VALIDATION"], # accepts PENDING_VALIDATION, ISSUED, INACTIVE, EXPIRED, VALIDATION_TIMED_OUT, REVOKED, FAILED
+    #         includes: {
+    #           extended_key_usage: ["TLS_WEB_SERVER_AUTHENTICATION"], # accepts TLS_WEB_SERVER_AUTHENTICATION, TLS_WEB_CLIENT_AUTHENTICATION, CODE_SIGNING, EMAIL_PROTECTION, TIME_STAMPING, OCSP_SIGNING, IPSEC_END_SYSTEM, IPSEC_TUNNEL, IPSEC_USER, ANY, NONE, CUSTOM
+    #           key_usage: ["DIGITAL_SIGNATURE"], # accepts DIGITAL_SIGNATURE, NON_REPUDIATION, KEY_ENCIPHERMENT, DATA_ENCIPHERMENT, KEY_AGREEMENT, CERTIFICATE_SIGNING, CRL_SIGNING, ENCIPHER_ONLY, DECIPHER_ONLY, ANY, CUSTOM
+    #           key_types: ["RSA_2048"], # accepts RSA_2048, RSA_1024, RSA_4096, EC_prime256v1, EC_secp384r1, EC_secp521r1
+    #         },
     #         next_token: "NextToken",
     #         max_items: 1,
     #       }
     #
     # @!attribute [rw] certificate_statuses
-    #   The status or statuses on which to filter the list of ACM
-    #   Certificates.
+    #   Filter the certificate list by status value.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] includes
+    #   Filter the certificate list by one or more of the following values.
+    #   For more information, see the Filters structure.
+    #
+    #   * extendedKeyUsage
+    #
+    #   * keyUsage
+    #
+    #   * keyTypes
+    #   @return [Types::Filters]
     #
     # @!attribute [rw] next_token
     #   Use this parameter only when paginating results and only in a
@@ -527,6 +652,7 @@ module Aws::ACM
     #
     class ListCertificatesRequest < Struct.new(
       :certificate_statuses,
+      :includes,
       :next_token,
       :max_items)
       include Aws::Structure
@@ -559,7 +685,7 @@ module Aws::ACM
     #
     # @!attribute [rw] certificate_arn
     #   String that contains the ARN of the ACM Certificate for which you
-    #   want to list the tags. This has the following form:
+    #   want to list the tags. This must have the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
@@ -669,6 +795,7 @@ module Aws::ACM
     #
     #       {
     #         domain_name: "DomainNameString", # required
+    #         validation_method: "EMAIL", # accepts EMAIL, DNS
     #         subject_alternative_names: ["DomainNameString"],
     #         idempotency_token: "IdempotencyToken",
     #         domain_validation_options: [
@@ -686,21 +813,13 @@ module Aws::ACM
     #   sites in the same domain. For example, *.example.com protects
     #   www.example.com, site.example.com, and images.example.com.
     #
-    #   The maximum length of a DNS name is 253 octets. The name is made up
-    #   of multiple labels separated by periods. No label can be longer than
-    #   63 octets. Consider the following examples:
+    #   The first domain name you enter cannot exceed 63 octets, including
+    #   periods. Each subsequent Subject Alternative Name (SAN), however,
+    #   can be up to 253 octets in length.
+    #   @return [String]
     #
-    #   `(63 octets).(63 octets).(63 octets).(61 octets)` is legal because
-    #   the total length is 253 octets (63+1+63+1+63+1+61) and no label
-    #   exceeds 63 octets.
-    #
-    #   `(64 octets).(63 octets).(63 octets).(61 octets)` is not legal
-    #   because the total length exceeds 253 octets (64+1+63+1+63+1+61) and
-    #   the first label exceeds 63 octets.
-    #
-    #   `(63 octets).(63 octets).(63 octets).(62 octets)` is not legal
-    #   because the total length of the DNS name (63+1+63+1+63+1+62) exceeds
-    #   253 octets.
+    # @!attribute [rw] validation_method
+    #   The method you want to use to validate your domain.
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
@@ -712,6 +831,22 @@ module Aws::ACM
     #   Certificate is 100. However, the initial limit is 10 domain names.
     #   If you need more than 10 names, you must request a limit increase.
     #   For more information, see [Limits][1].
+    #
+    #   The maximum length of a SAN DNS name is 253 octets. The name is made
+    #   up of multiple labels separated by periods. No label can be longer
+    #   than 63 octets. Consider the following examples:
+    #
+    #   * `(63 octets).(63 octets).(63 octets).(61 octets)` is legal because
+    #     the total length is 253 octets (63+1+63+1+63+1+61) and no label
+    #     exceeds 63 octets.
+    #
+    #   * `(64 octets).(63 octets).(63 octets).(61 octets)` is not legal
+    #     because the total length exceeds 253 octets (64+1+63+1+63+1+61)
+    #     and the first label exceeds 63 octets.
+    #
+    #   * `(63 octets).(63 octets).(63 octets).(62 octets)` is not legal
+    #     because the total length of the DNS name (63+1+63+1+63+1+62)
+    #     exceeds 253 octets.
     #
     #
     #
@@ -729,14 +864,15 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] domain_validation_options
-    #   The domain name that you want ACM to use to send you emails to
-    #   validate your ownership of the domain.
+    #   The domain name that you want ACM to use to send you emails so taht
+    #   your can validate domain ownership.
     #   @return [Array<Types::DomainValidationOption>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
     #
     class RequestCertificateRequest < Struct.new(
       :domain_name,
+      :validation_method,
       :subject_alternative_names,
       :idempotency_token,
       :domain_validation_options)
@@ -771,9 +907,7 @@ module Aws::ACM
     #   certificate ARN is generated and returned by the RequestCertificate
     #   action as soon as the request is made. By default, using this
     #   parameter causes email to be sent to all top-level domains you
-    #   specified in the certificate request.
-    #
-    #   The ARN must be of the form:
+    #   specified in the certificate request. The ARN must be of the form:
     #
     #   `arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #   @return [String]
@@ -810,6 +944,33 @@ module Aws::ACM
       :certificate_arn,
       :domain,
       :validation_domain)
+      include Aws::Structure
+    end
+
+    # Contains a DNS record value that you can use to can use to validate
+    # ownership or control of a domain. This is used by the
+    # DescribeCertificate action.
+    #
+    # @!attribute [rw] name
+    #   The name of the DNS record to create in your domain. This is
+    #   supplied by ACM.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of DNS record. Currently this can be `CNAME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the CNAME record to add to your DNS database. This is
+    #   supplied by ACM.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResourceRecord AWS API Documentation
+    #
+    class ResourceRecord < Struct.new(
+      :name,
+      :type,
+      :value)
       include Aws::Structure
     end
 

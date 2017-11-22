@@ -33,7 +33,12 @@ module Aws::ACM
     DomainValidationList = Shapes::ListShape.new(name: 'DomainValidationList')
     DomainValidationOption = Shapes::StructureShape.new(name: 'DomainValidationOption')
     DomainValidationOptionList = Shapes::ListShape.new(name: 'DomainValidationOptionList')
+    ExtendedKeyUsage = Shapes::StructureShape.new(name: 'ExtendedKeyUsage')
+    ExtendedKeyUsageFilterList = Shapes::ListShape.new(name: 'ExtendedKeyUsageFilterList')
+    ExtendedKeyUsageList = Shapes::ListShape.new(name: 'ExtendedKeyUsageList')
+    ExtendedKeyUsageName = Shapes::StringShape.new(name: 'ExtendedKeyUsageName')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
+    Filters = Shapes::StructureShape.new(name: 'Filters')
     GetCertificateRequest = Shapes::StructureShape.new(name: 'GetCertificateRequest')
     GetCertificateResponse = Shapes::StructureShape.new(name: 'GetCertificateResponse')
     IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
@@ -45,6 +50,11 @@ module Aws::ACM
     InvalidStateException = Shapes::StructureShape.new(name: 'InvalidStateException')
     InvalidTagException = Shapes::StructureShape.new(name: 'InvalidTagException')
     KeyAlgorithm = Shapes::StringShape.new(name: 'KeyAlgorithm')
+    KeyAlgorithmList = Shapes::ListShape.new(name: 'KeyAlgorithmList')
+    KeyUsage = Shapes::StructureShape.new(name: 'KeyUsage')
+    KeyUsageFilterList = Shapes::ListShape.new(name: 'KeyUsageFilterList')
+    KeyUsageList = Shapes::ListShape.new(name: 'KeyUsageList')
+    KeyUsageName = Shapes::StringShape.new(name: 'KeyUsageName')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListCertificatesRequest = Shapes::StructureShape.new(name: 'ListCertificatesRequest')
     ListCertificatesResponse = Shapes::StructureShape.new(name: 'ListCertificatesResponse')
@@ -53,6 +63,7 @@ module Aws::ACM
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PrivateKeyBlob = Shapes::BlobShape.new(name: 'PrivateKeyBlob')
+    RecordType = Shapes::StringShape.new(name: 'RecordType')
     RemoveTagsFromCertificateRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromCertificateRequest')
     RenewalStatus = Shapes::StringShape.new(name: 'RenewalStatus')
     RenewalSummary = Shapes::StructureShape.new(name: 'RenewalSummary')
@@ -62,6 +73,7 @@ module Aws::ACM
     ResendValidationEmailRequest = Shapes::StructureShape.new(name: 'ResendValidationEmailRequest')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceRecord = Shapes::StructureShape.new(name: 'ResourceRecord')
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
     String = Shapes::StringShape.new(name: 'String')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
@@ -71,6 +83,7 @@ module Aws::ACM
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     ValidationEmailList = Shapes::ListShape.new(name: 'ValidationEmailList')
+    ValidationMethod = Shapes::StringShape.new(name: 'ValidationMethod')
 
     AddTagsToCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     AddTagsToCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -97,6 +110,8 @@ module Aws::ACM
     CertificateDetail.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     CertificateDetail.add_member(:type, Shapes::ShapeRef.new(shape: CertificateType, location_name: "Type"))
     CertificateDetail.add_member(:renewal_summary, Shapes::ShapeRef.new(shape: RenewalSummary, location_name: "RenewalSummary"))
+    CertificateDetail.add_member(:key_usages, Shapes::ShapeRef.new(shape: KeyUsageList, location_name: "KeyUsages"))
+    CertificateDetail.add_member(:extended_key_usages, Shapes::ShapeRef.new(shape: ExtendedKeyUsageList, location_name: "ExtendedKeyUsages"))
     CertificateDetail.struct_class = Types::CertificateDetail
 
     CertificateStatuses.member = Shapes::ShapeRef.new(shape: CertificateStatus)
@@ -122,6 +137,8 @@ module Aws::ACM
     DomainValidation.add_member(:validation_emails, Shapes::ShapeRef.new(shape: ValidationEmailList, location_name: "ValidationEmails"))
     DomainValidation.add_member(:validation_domain, Shapes::ShapeRef.new(shape: DomainNameString, location_name: "ValidationDomain"))
     DomainValidation.add_member(:validation_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "ValidationStatus"))
+    DomainValidation.add_member(:resource_record, Shapes::ShapeRef.new(shape: ResourceRecord, location_name: "ResourceRecord"))
+    DomainValidation.add_member(:validation_method, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "ValidationMethod"))
     DomainValidation.struct_class = Types::DomainValidation
 
     DomainValidationList.member = Shapes::ShapeRef.new(shape: DomainValidation)
@@ -131,6 +148,19 @@ module Aws::ACM
     DomainValidationOption.struct_class = Types::DomainValidationOption
 
     DomainValidationOptionList.member = Shapes::ShapeRef.new(shape: DomainValidationOption)
+
+    ExtendedKeyUsage.add_member(:name, Shapes::ShapeRef.new(shape: ExtendedKeyUsageName, location_name: "Name"))
+    ExtendedKeyUsage.add_member(:oid, Shapes::ShapeRef.new(shape: String, location_name: "OID"))
+    ExtendedKeyUsage.struct_class = Types::ExtendedKeyUsage
+
+    ExtendedKeyUsageFilterList.member = Shapes::ShapeRef.new(shape: ExtendedKeyUsageName)
+
+    ExtendedKeyUsageList.member = Shapes::ShapeRef.new(shape: ExtendedKeyUsage)
+
+    Filters.add_member(:extended_key_usage, Shapes::ShapeRef.new(shape: ExtendedKeyUsageFilterList, location_name: "extendedKeyUsage"))
+    Filters.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageFilterList, location_name: "keyUsage"))
+    Filters.add_member(:key_types, Shapes::ShapeRef.new(shape: KeyAlgorithmList, location_name: "keyTypes"))
+    Filters.struct_class = Types::Filters
 
     GetCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     GetCertificateRequest.struct_class = Types::GetCertificateRequest
@@ -150,7 +180,17 @@ module Aws::ACM
 
     InUseList.member = Shapes::ShapeRef.new(shape: String)
 
+    KeyAlgorithmList.member = Shapes::ShapeRef.new(shape: KeyAlgorithm)
+
+    KeyUsage.add_member(:name, Shapes::ShapeRef.new(shape: KeyUsageName, location_name: "Name"))
+    KeyUsage.struct_class = Types::KeyUsage
+
+    KeyUsageFilterList.member = Shapes::ShapeRef.new(shape: KeyUsageName)
+
+    KeyUsageList.member = Shapes::ShapeRef.new(shape: KeyUsage)
+
     ListCertificatesRequest.add_member(:certificate_statuses, Shapes::ShapeRef.new(shape: CertificateStatuses, location_name: "CertificateStatuses"))
+    ListCertificatesRequest.add_member(:includes, Shapes::ShapeRef.new(shape: Filters, location_name: "Includes"))
     ListCertificatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCertificatesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location_name: "MaxItems"))
     ListCertificatesRequest.struct_class = Types::ListCertificatesRequest
@@ -174,6 +214,7 @@ module Aws::ACM
     RenewalSummary.struct_class = Types::RenewalSummary
 
     RequestCertificateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "DomainName"))
+    RequestCertificateRequest.add_member(:validation_method, Shapes::ShapeRef.new(shape: ValidationMethod, location_name: "ValidationMethod"))
     RequestCertificateRequest.add_member(:subject_alternative_names, Shapes::ShapeRef.new(shape: DomainList, location_name: "SubjectAlternativeNames"))
     RequestCertificateRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
     RequestCertificateRequest.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: DomainValidationOptionList, location_name: "DomainValidationOptions"))
@@ -186,6 +227,11 @@ module Aws::ACM
     ResendValidationEmailRequest.add_member(:domain, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "Domain"))
     ResendValidationEmailRequest.add_member(:validation_domain, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "ValidationDomain"))
     ResendValidationEmailRequest.struct_class = Types::ResendValidationEmailRequest
+
+    ResourceRecord.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    ResourceRecord.add_member(:type, Shapes::ShapeRef.new(shape: RecordType, required: true, location_name: "Type"))
+    ResourceRecord.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    ResourceRecord.struct_class = Types::ResourceRecord
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
