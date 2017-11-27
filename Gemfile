@@ -40,8 +40,12 @@ group :test do
       gem 'oj' unless RUBY_VERSION == '1.9.3'
     end
 
-    # As ox suggestion
-    gem 'ox', '~> 2.8.1'
+    if ENV['OLD_OX']
+      # As ox suggestion
+      gem 'ox', '~> 2.8.1'
+    else
+      gem 'ox'
+    end
   end
 
 end
