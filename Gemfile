@@ -40,12 +40,7 @@ group :test do
       gem 'oj' unless RUBY_VERSION == '1.9.3'
     end
 
-    # Ox after 2.4.12 has a change in default behavior. Test both.
-    if ENV['OLD_OX']
-      gem 'ox', '2.4.12'
-    else
-      gem 'ox'
-    end
+    gem 'ox'
   end
 
 end
