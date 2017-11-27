@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.90 (2017-11-27)
+------------------
+
 * Feature - Aws::MediaConvert - Added support for a new service, AWS Elemental MediaConvert.
 
 * Feature - Aws::MediaLive - Added support for a new service, AWS Elemental MediaLive.
