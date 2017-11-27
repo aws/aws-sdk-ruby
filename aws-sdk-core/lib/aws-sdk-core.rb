@@ -97,6 +97,11 @@ module Aws
     MarketplaceCommerceAnalytics
     MarketplaceEntitlementService
     MarketplaceMetering
+    MediaConvert
+    MediaLive
+    MediaPackage
+    MediaStore
+    MediaStoreData
     MigrationHub
     Mobile
     OpsWorks

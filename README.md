@@ -275,6 +275,11 @@ to be backwards compatible.
 | AWS Direct Connect                  | DirectConnect                 | 2012-10-25  |
 | AWS Directory Service               | DirectoryService              | 2015-04-16  |
 | AWS Elastic Beanstalk               | ElasticBeanstalk              | 2010-12-01  |
+| AWS Elemental MediaConvert          | MediaConvert                  | 2017-08-29  |
+| AWS Elemental MediaLive             | MediaLive                     | 2017-10-14  |
+| AWS Elemental MediaPackage          | MediaPackage                  | 2017-10-12  |
+| AWS Elemental MediaStore            | MediaStore                    | 2017-09-01  |
+| AWS Elemental MediaStore Data Plane | MediaStoreData                | 2017-09-01  |
 | AWS Glue                            | Glue                          | 2017-03-31  |
 | AWS Greengrass                      | Greengrass                    | 2017-06-07  |
 | AWS Health APIs and Notifications   | Health                        | 2016-08-04  |
@@ -283,8 +288,8 @@ to be backwards compatible.
 | AWS IoT                             | IoT                           | 2015-05-28  |
 | AWS IoT Data Plane                  | IoTDataPlane                  | 2015-05-28  |
 | AWS Key Management Service          | KMS                           | 2014-11-01  |
-| AWS Lambda                          | Lambda                        | 2015-03-31  |
 | AWS Lambda                          | LambdaPreview                 | 2014-11-11  |
+| AWS Lambda                          | Lambda                        | 2015-03-31  |
 | AWS Marketplace Commerce Analytics  | MarketplaceCommerceAnalytics  | 2015-07-01  |
 | AWS Marketplace Entitlement Service | MarketplaceEntitlementService | 2017-01-11  |
 | AWS Migration Hub                   | MigrationHub                  | 2017-05-31  |

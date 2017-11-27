@@ -294,6 +294,26 @@
     "models": "meteringmarketplace/2016-01-14",
     "endpoint": "metering.marketplace"
   },
+  "MediaConvert": {
+    "models": "mediaconvert/2017-08-29",
+    "endpoint": "mediaconvert"
+  },
+  "MediaLive": {
+    "models": "medialive/2017-10-14",
+    "endpoint": "medialive"
+  },
+  "MediaPackage": {
+    "models": "mediapackage/2017-10-12",
+    "endpoint": "mediapackage"
+  },
+  "MediaStore": {
+    "models": "mediastore/2017-09-01",
+    "endpoint": "mediastore"
+  },
+  "MediaStoreData": {
+    "models": "mediastore-data/2017-09-01",
+    "endpoint": "data.mediastore"
+  },
   "MigrationHub": {
     "models": "AWSMigrationHub/2017-05-31",
     "endpoint": "mgh"

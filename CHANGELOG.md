@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MediaConvert - Added support for a new service, AWS Elemental MediaConvert.
+
+* Feature - Aws::MediaLive - Added support for a new service, AWS Elemental MediaLive.
+
+* Feature - Aws::MediaPackage - Added support for a new service, AWS Elemental MediaPackage.
+
+* Feature - Aws::MediaStoreData - Added support for a new service, AWS Elemental MediaStore Data Plane.
+
+* Feature - Aws::MediaStore - Added support for a new service, AWS Elemental MediaStore.
+
 2.10.89 (2017-11-22)
 ------------------
 
