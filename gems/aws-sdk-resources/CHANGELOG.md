@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+3.4.0 (2017-11-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mediastoredata` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-mediastore` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-mediapackage` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-medialive` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-mediaconvert` gem.
+
 3.3.0 (2017-11-20)
 ------------------
 

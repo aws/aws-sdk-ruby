@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2017-11-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaStoreData`.
+
+* Feature - Added support for enumerating regions for `Aws::MediaStore`.
+
+* Feature - Added support for enumerating regions for `Aws::MediaPackage`.
+
+* Feature - Added support for enumerating regions for `Aws::MediaLive`.
+
+* Feature - Added support for enumerating regions for `Aws::MediaConvert`.
+
 1.39.0 (2017-11-22)
 ------------------
 

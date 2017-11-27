@@ -254,6 +254,21 @@
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14"
   },
+  "MediaConvert": {
+    "models": "mediaconvert/2017-08-29"
+  },
+  "MediaLive": {
+    "models": "medialive/2017-10-14"
+  },
+  "MediaPackage": {
+    "models": "mediapackage/2017-10-12"
+  },
+  "MediaStore": {
+    "models": "mediastore/2017-09-01"
+  },
+  "MediaStoreData": {
+    "models": "mediastore-data/2017-09-01"
+  },
   "MigrationHub": {
     "models": "AWSMigrationHub/2017-05-31"
   },

@@ -320,6 +320,11 @@ to be backwards compatible.
 | AWS Direct Connect                  | Aws::DirectConnect                 | aws-sdk-directconnect                 | 2012-10-25  |
 | AWS Directory Service               | Aws::DirectoryService              | aws-sdk-directoryservice              | 2015-04-16  |
 | AWS Elastic Beanstalk               | Aws::ElasticBeanstalk              | aws-sdk-elasticbeanstalk              | 2010-12-01  |
+| AWS Elemental MediaConvert          | Aws::MediaConvert                  | aws-sdk-mediaconvert                  | 2017-08-29  |
+| AWS Elemental MediaLive             | Aws::MediaLive                     | aws-sdk-medialive                     | 2017-10-14  |
+| AWS Elemental MediaPackage          | Aws::MediaPackage                  | aws-sdk-mediapackage                  | 2017-10-12  |
+| AWS Elemental MediaStore            | Aws::MediaStore                    | aws-sdk-mediastore                    | 2017-09-01  |
+| AWS Elemental MediaStore Data Plane | Aws::MediaStoreData                | aws-sdk-mediastoredata                | 2017-09-01  |
 | AWS Glue                            | Aws::Glue                          | aws-sdk-glue                          | 2017-03-31  |
 | AWS Greengrass                      | Aws::Greengrass                    | aws-sdk-greengrass                    | 2017-06-07  |
 | AWS Health APIs and Notifications   | Aws::Health                        | aws-sdk-health                        | 2016-08-04  |
@@ -328,8 +333,8 @@ to be backwards compatible.
 | AWS IoT                             | Aws::IoT                           | aws-sdk-iot                           | 2015-05-28  |
 | AWS IoT Data Plane                  | Aws::IoTDataPlane                  | aws-sdk-iotdataplane                  | 2015-05-28  |
 | AWS Key Management Service          | Aws::KMS                           | aws-sdk-kms                           | 2014-11-01  |
-| AWS Lambda                          | Aws::Lambda                        | aws-sdk-lambda                        | 2015-03-31  |
 | AWS Lambda                          | Aws::LambdaPreview                 | aws-sdk-lambdapreview                 | 2014-11-11  |
+| AWS Lambda                          | Aws::Lambda                        | aws-sdk-lambda                        | 2015-03-31  |
 | AWS Marketplace Commerce Analytics  | Aws::MarketplaceCommerceAnalytics  | aws-sdk-marketplacecommerceanalytics  | 2015-07-01  |
 | AWS Marketplace Entitlement Service | Aws::MarketplaceEntitlementService | aws-sdk-marketplaceentitlementservice | 2017-01-11  |
 | AWS Migration Hub                   | Aws::MigrationHub                  | aws-sdk-migrationhub                  | 2017-05-31  |
