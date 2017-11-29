@@ -1,6 +1,38 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws:: - Updated the API for Amazon DynamoDB.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::Glacier - Updated the API, and documentation for Amazon Glacier.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::Comprehend - Added support for a new service, Amazon Comprehend.
+
+* Feature - Aws::IoTJobsDataPlane - Added support for a new service, AWS IoT Jobs Data Plane.
+
+* Feature - Aws::KinesisVideoArchivedMedia - Added support for a new service, Amazon Kinesis Video Streams Archived Media.
+
+* Feature - Aws::KinesisVideoMedia - Added support for a new service, Amazon Kinesis Video Streams Media.
+
+* Feature - Aws::KinesisVideo - Added support for a new service, Amazon Kinesis Video Streams.
+
+* Feature - Aws::SageMakerRuntime - Added support for a new service, Amazon SageMaker Runtime.
+
+* Feature - Aws::SageMaker - Added support for a new service, Amazon SageMaker Service.
+
+* Feature - Aws::Translate - Added support for a new service, Amazon Translate.
+
 2.10.91 (2017-11-29)
 ------------------
 

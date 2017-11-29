@@ -52,6 +52,7 @@ module Aws
     CognitoIdentity
     CognitoIdentityProvider
     CognitoSync
+    Comprehend
     ConfigService
     CostExplorer
     CostandUsageReportService
@@ -86,9 +87,13 @@ module Aws
     Inspector
     IoT
     IoTDataPlane
+    IoTJobsDataPlane
     KMS
     Kinesis
     KinesisAnalytics
+    KinesisVideo
+    KinesisVideoArchivedMedia
+    KinesisVideoMedia
     Lambda
     LambdaPreview
     Lex
@@ -127,6 +132,8 @@ module Aws
     SSM
     STS
     SWF
+    SageMaker
+    SageMakerRuntime
     ServiceCatalog
     Shield
     SimpleDB
@@ -134,6 +141,7 @@ module Aws
     States
     StorageGateway
     Support
+    Translate
     WAF
     WAFRegional
     WorkDocs

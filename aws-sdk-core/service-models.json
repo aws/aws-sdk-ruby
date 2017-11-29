@@ -114,6 +114,10 @@
     "models": "cognito-sync/2014-06-30",
     "endpoint": "cognito-sync"
   },
+  "Comprehend": {
+    "models": "comprehend/2017-11-27",
+    "endpoint": "comprehend"
+  },
   "ConfigService": {
     "models": "config/2014-11-12",
     "endpoint": "config"
@@ -250,6 +254,10 @@
     "models": "iot-data/2015-05-28",
     "endpoint": "data.iot"
   },
+  "IoTJobsDataPlane": {
+    "models": "iot-jobs-data/2017-09-29",
+    "endpoint": "data.jobs.iot"
+  },
   "KMS": {
     "models": "kms/2014-11-01",
     "endpoint": "kms"
@@ -261,6 +269,18 @@
   "KinesisAnalytics": {
     "models": "kinesisanalytics/2015-08-14",
     "endpoint": "kinesisanalytics"
+  },
+  "KinesisVideo": {
+    "models": "kinesisvideo/2017-09-30",
+    "endpoint": "kinesisvideo"
+  },
+  "KinesisVideoArchivedMedia": {
+    "models": "kinesis-video-archived-media/2017-09-30",
+    "endpoint": "kinesisvideo"
+  },
+  "KinesisVideoMedia": {
+    "models": "kinesis-video-media/2017-09-30",
+    "endpoint": "kinesisvideo"
   },
   "Lambda": {
     "models": "lambda/2015-03-31",
@@ -414,6 +434,14 @@
     "models": "swf/2012-01-25",
     "endpoint": "swf"
   },
+  "SageMaker": {
+    "models": "sagemaker/2017-07-24",
+    "endpoint": "sagemaker"
+  },
+  "SageMakerRuntime": {
+    "models": "runtime.sagemaker/2017-05-13",
+    "endpoint": "runtime.sagemaker"
+  },
   "ServiceCatalog": {
     "models": "servicecatalog/2015-12-10",
     "endpoint": "servicecatalog"
@@ -441,6 +469,10 @@
   "Support": {
     "models": "support/2013-04-15",
     "endpoint": "support"
+  },
+  "Translate": {
+    "models": "translate/2017-07-01",
+    "endpoint": "translate"
   },
   "WAF": {
     "models": "waf/2015-08-24",
