@@ -396,7 +396,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2771,7 +2771,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #
     # @option params [required, Array<Types::ContainerDefinition>] :container_definitions
@@ -3122,7 +3122,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4028,7 +4028,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
