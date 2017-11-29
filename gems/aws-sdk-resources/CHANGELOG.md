@@ -1,6 +1,25 @@
 Unreleased Changes
 ------------------
 
+3.6.0 (2017-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-translate` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-sagemakerruntime` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-sagemaker` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-kinesisvideomedia` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-kinesisvideoarchivedmedia` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-kinesisvideo` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iotjobsdataplane` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-comprehend` gem.
+
 3.5.0 (2017-11-29)
 ------------------
 

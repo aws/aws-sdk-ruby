@@ -5655,6 +5655,7 @@ module Aws::S3
     # @option params [String] :version_id
     #
     # @option params [Types::RestoreRequest] :restore_request
+    #   Container for restore job parameters.
     #
     # @option params [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
@@ -5666,6 +5667,7 @@ module Aws::S3
     # @return [Types::RestoreObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreObjectOutput#request_charged #request_charged} => String
+    #   * {Types::RestoreObjectOutput#restore_output_path #restore_output_path} => String
     #
     #
     # @example Example: To restore an archived object
@@ -5694,9 +5696,74 @@ module Aws::S3
     #     key: "ObjectKey", # required
     #     version_id: "ObjectVersionId",
     #     restore_request: {
-    #       days: 1, # required
+    #       days: 1,
     #       glacier_job_parameters: {
     #         tier: "Standard", # required, accepts Standard, Bulk, Expedited
+    #       },
+    #       type: "SELECT", # accepts SELECT
+    #       tier: "Standard", # accepts Standard, Bulk, Expedited
+    #       description: "Description",
+    #       select_parameters: {
+    #         input_serialization: { # required
+    #           csv: {
+    #             file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #             comments: "Comments",
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #         },
+    #         expression_type: "SQL", # required, accepts SQL
+    #         expression: "Expression", # required
+    #         output_serialization: { # required
+    #           csv: {
+    #             quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #         },
+    #       },
+    #       output_location: {
+    #         s3: {
+    #           bucket_name: "BucketName", # required
+    #           prefix: "LocationPrefix", # required
+    #           encryption: {
+    #             encryption_type: "AES256", # required, accepts AES256, aws:kms
+    #             kms_key_id: "SSEKMSKeyId",
+    #             kms_context: "KMSContext",
+    #           },
+    #           canned_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #           access_control_list: [
+    #             {
+    #               grantee: {
+    #                 display_name: "DisplayName",
+    #                 email_address: "EmailAddress",
+    #                 id: "ID",
+    #                 type: "CanonicalUser", # required, accepts CanonicalUser, AmazonCustomerByEmail, Group
+    #                 uri: "URI",
+    #               },
+    #               permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #             },
+    #           ],
+    #           tagging: {
+    #             tag_set: [ # required
+    #               {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #             ],
+    #           },
+    #           user_metadata: [
+    #             {
+    #               name: "MetadataKey",
+    #               value: "MetadataValue",
+    #             },
+    #           ],
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         },
     #       },
     #     },
     #     request_payer: "requester", # accepts requester
@@ -5705,6 +5772,7 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.request_charged #=> String, one of "requester"
+    #   resp.restore_output_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObject AWS API Documentation
     #
@@ -6019,7 +6087,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

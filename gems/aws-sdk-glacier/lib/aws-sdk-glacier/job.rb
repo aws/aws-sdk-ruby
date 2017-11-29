@@ -47,47 +47,50 @@ module Aws::Glacier
     end
     alias :job_id :id
 
-    # The job description you provided when you initiated the job.
+    # The job description provided when initiating the job.
     # @return [String]
     def job_description
       data[:job_description]
     end
 
-    # The job type. It is either ArchiveRetrieval or InventoryRetrieval.
+    # The job type. This value is either `ArchiveRetrieval`,
+    # `InventoryRetrieval`, or `Select`.
     # @return [String]
     def action
       data[:action]
     end
 
-    # For an ArchiveRetrieval job, this is the archive ID requested for
-    # download. Otherwise, this field is null.
+    # The archive ID requested for a select job or archive retrieval.
+    # Otherwise, this field is null.
     # @return [String]
     def archive_id
       data[:archive_id]
     end
 
-    # The Amazon Resource Name (ARN) of the vault from which the archive
+    # The Amazon Resource Name (ARN) of the vault from which an archive
     # retrieval was requested.
     # @return [String]
     def vault_arn
       data[:vault_arn]
     end
 
-    # The UTC date when the job was created. A string representation of ISO
-    # 8601 date format, for example, "2012-03-20T17:03:43.221Z".
+    # The UTC date when the job was created. This value is a string
+    # representation of ISO 8601 date format, for example
+    # `"2012-03-20T17:03:43.221Z"`.
     # @return [Time]
     def creation_date
       data[:creation_date]
     end
 
-    # The job status. When a job is completed, you get the job's output.
+    # The job status. When a job is completed, you get the job's output
+    # using Get Job Output (GET output).
     # @return [Boolean]
     def completed
       data[:completed]
     end
 
-    # The status code can be InProgress, Succeeded, or Failed, and indicates
-    # the status of the job.
+    # The status code can be `InProgress`, `Succeeded`, or `Failed`, and
+    # indicates the status of the job.
     # @return [String]
     def status_code
       data[:status_code]
@@ -99,80 +102,80 @@ module Aws::Glacier
       data[:status_message]
     end
 
-    # For an ArchiveRetrieval job, this is the size in bytes of the archive
-    # being requested for download. For the InventoryRetrieval job, the
-    # value is null.
+    # For an archive retrieval job, this value is the size in bytes of the
+    # archive being requested for download. For an inventory retrieval or
+    # select job, this value is null.
     # @return [Integer]
     def archive_size_in_bytes
       data[:archive_size_in_bytes]
     end
 
-    # For an InventoryRetrieval job, this is the size in bytes of the
-    # inventory requested for download. For the ArchiveRetrieval job, the
-    # value is null.
+    # For an inventory retrieval job, this value is the size in bytes of the
+    # inventory requested for download. For an archive retrieval or select
+    # job, this value is null.
     # @return [Integer]
     def inventory_size_in_bytes
       data[:inventory_size_in_bytes]
     end
 
-    # An Amazon Simple Notification Service (Amazon SNS) topic that receives
-    # notification.
+    # An Amazon SNS topic that receives notification.
     # @return [String]
     def sns_topic
       data[:sns_topic]
     end
 
-    # The UTC time that the archive retrieval request completed. While the
-    # job is in progress, the value will be null.
+    # The UTC time that the job request completed. While the job is in
+    # progress, the value is null.
     # @return [Time]
     def completion_date
       data[:completion_date]
     end
 
-    # For an ArchiveRetrieval job, it is the checksum of the archive.
-    # Otherwise, the value is null.
+    # For an archive retrieval job, this value is the checksum of the
+    # archive. Otherwise, this value is null.
     #
     # The SHA256 tree hash value for the requested range of an archive. If
-    # the Initiate a Job request for an archive specified a tree-hash
+    # the **InitiateJob** request for an archive specified a tree-hash
     # aligned range, then this field returns a value.
     #
-    # For the specific case when the whole archive is retrieved, this value
-    # is the same as the ArchiveSHA256TreeHash value.
+    # If the whole archive is retrieved, this value is the same as the
+    # ArchiveSHA256TreeHash value.
     #
-    # This field is null in the following situations:
+    # This field is null for the following:
     #
     # * Archive retrieval jobs that specify a range that is not tree-hash
-    #   aligned.
+    #   aligned
     #
     # ^
     # ^
     #
     # * Archival jobs that specify a range that is equal to the whole
-    #   archive and the job status is InProgress.
+    #   archive, when the job status is `InProgress`
     #
     # ^
     # ^
     #
-    # * Inventory jobs.
+    # * Inventory jobs
     #
-    # ^
+    # * Select jobs
     # @return [String]
     def sha256_tree_hash
       data[:sha256_tree_hash]
     end
 
     # The SHA256 tree hash of the entire archive for an archive retrieval.
-    # For inventory retrieval jobs, this field is null.
+    # For inventory retrieval or select jobs, this field is null.
     # @return [String]
     def archive_sha256_tree_hash
       data[:archive_sha256_tree_hash]
     end
 
     # The retrieved byte range for archive retrieval jobs in the form
-    # "*StartByteValue*-*EndByteValue*" If no range was specified in the
-    # archive retrieval, then the whole archive is retrieved and
+    # *StartByteValue*-*EndByteValue*. If no range was specified in the
+    # archive retrieval, then the whole archive is retrieved. In this case,
     # *StartByteValue* equals 0 and *EndByteValue* equals the size of the
-    # archive minus 1. For inventory retrieval jobs this field is null.
+    # archive minus 1. For inventory retrieval or select jobs, this field is
+    # null.
     # @return [String]
     def retrieval_byte_range
       data[:retrieval_byte_range]
@@ -189,6 +192,24 @@ module Aws::Glacier
     # @return [Types::InventoryRetrievalJobDescription]
     def inventory_retrieval_parameters
       data[:inventory_retrieval_parameters]
+    end
+
+    # Contains the job output location.
+    # @return [String]
+    def job_output_path
+      data[:job_output_path]
+    end
+
+    # Contains the parameters that define a select job.
+    # @return [Types::SelectParameters]
+    def select_parameters
+      data[:select_parameters]
+    end
+
+    # Contains the location where the data from the select job is stored.
+    # @return [Types::OutputLocation]
+    def output_location
+      data[:output_location]
     end
 
     # @!endgroup

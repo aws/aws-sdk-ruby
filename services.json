@@ -98,6 +98,9 @@
   "CognitoSync": {
     "models": "cognito-sync/2014-06-30"
   },
+  "Comprehend": {
+    "models": "comprehend/2017-11-27"
+  },
   "ConfigService": {
     "models": "config/2014-11-12"
   },
@@ -218,6 +221,9 @@
     "models": "iot-data/2015-05-28",
     "partitionsKey": null
   },
+  "IoTJobsDataPlane": {
+    "models": "iot-jobs-data/2017-09-29"
+  },
   "KMS": {
     "models": "kms/2014-11-01"
   },
@@ -226,6 +232,15 @@
   },
   "KinesisAnalytics": {
     "models": "kinesisanalytics/2015-08-14"
+  },
+  "KinesisVideo": {
+    "models": "kinesisvideo/2017-09-30"
+  },
+  "KinesisVideoArchivedMedia": {
+    "models": "kinesis-video-archived-media/2017-09-30"
+  },
+  "KinesisVideoMedia": {
+    "models": "kinesis-video-media/2017-09-30"
   },
   "Lambda": {
     "models": "lambda/2015-03-31"
@@ -384,6 +399,12 @@
       "Aws::SWF::Plugins::ReadTimeouts"
     ]
   },
+  "SageMaker": {
+    "models": "sagemaker/2017-07-24"
+  },
+  "SageMakerRuntime": {
+    "models": "runtime.sagemaker/2017-05-13"
+  },
   "ServiceCatalog": {
     "models": "servicecatalog/2015-12-10"
   },
@@ -404,6 +425,9 @@
   },
   "Support": {
     "models": "support/2013-04-15"
+  },
+  "Translate": {
+    "models": "translate/2017-07-01"
   },
   "WAF": {
     "models": "waf/2015-08-24"

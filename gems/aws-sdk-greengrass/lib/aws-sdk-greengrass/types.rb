@@ -499,6 +499,13 @@ module Aws::Greengrass
     #               function_arn: "__string",
     #               function_configuration: {
     #                 environment: {
+    #                   access_sysfs: false,
+    #                   resource_access_policies: [
+    #                     {
+    #                       permission: "ro", # accepts ro, rw
+    #                       resource_id: "__string",
+    #                     },
+    #                   ],
     #                   variables: {
     #                     "__string" => "__string",
     #                   },
@@ -580,6 +587,13 @@ module Aws::Greengrass
     #             function_arn: "__string",
     #             function_configuration: {
     #               environment: {
+    #                 access_sysfs: false,
+    #                 resource_access_policies: [
+    #                   {
+    #                     permission: "ro", # accepts ro, rw
+    #                     resource_id: "__string",
+    #                   },
+    #                 ],
     #                 variables: {
     #                   "__string" => "__string",
     #                 },
@@ -678,6 +692,7 @@ module Aws::Greengrass
     #           device_definition_version_arn: "__string",
     #           function_definition_version_arn: "__string",
     #           logger_definition_version_arn: "__string",
+    #           resource_definition_version_arn: "__string",
     #           subscription_definition_version_arn: "__string",
     #         },
     #         name: "__string",
@@ -746,6 +761,7 @@ module Aws::Greengrass
     #         function_definition_version_arn: "__string",
     #         group_id: "__string", # required
     #         logger_definition_version_arn: "__string",
+    #         resource_definition_version_arn: "__string",
     #         subscription_definition_version_arn: "__string",
     #       }
     #
@@ -767,6 +783,9 @@ module Aws::Greengrass
     # @!attribute [rw] logger_definition_version_arn
     #   @return [String]
     #
+    # @!attribute [rw] resource_definition_version_arn
+    #   @return [String]
+    #
     # @!attribute [rw] subscription_definition_version_arn
     #   @return [String]
     #
@@ -779,6 +798,7 @@ module Aws::Greengrass
       :function_definition_version_arn,
       :group_id,
       :logger_definition_version_arn,
+      :resource_definition_version_arn,
       :subscription_definition_version_arn)
       include Aws::Structure
     end
@@ -931,6 +951,236 @@ module Aws::Greengrass
       :creation_timestamp,
       :id,
       :version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateResourceDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         amzn_client_token: "__string",
+    #         initial_version: {
+    #           resources: [
+    #             {
+    #               id: "__string",
+    #               name: "__string",
+    #               resource_data_container: {
+    #                 local_device_resource_data: {
+    #                   group_owner_setting: {
+    #                     auto_add_group_owner: false,
+    #                     group_owner: "__string",
+    #                   },
+    #                   source_path: "__string",
+    #                 },
+    #                 local_volume_resource_data: {
+    #                   destination_path: "__string",
+    #                   group_owner_setting: {
+    #                     auto_add_group_owner: false,
+    #                     group_owner: "__string",
+    #                   },
+    #                   source_path: "__string",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         name: "__string",
+    #       }
+    #
+    # @!attribute [rw] amzn_client_token
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_version
+    #   Information on resource definition version
+    #   @return [Types::ResourceDefinitionVersion]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionRequest AWS API Documentation
+    #
+    class CreateResourceDefinitionRequest < Struct.new(
+      :amzn_client_token,
+      :initial_version,
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionResponse AWS API Documentation
+    #
+    class CreateResourceDefinitionResponse < Struct.new(
+      :arn,
+      :creation_timestamp,
+      :id,
+      :last_updated_timestamp,
+      :latest_version,
+      :latest_version_arn,
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateResourceDefinitionVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         amzn_client_token: "__string",
+    #         resource_definition_id: "__string", # required
+    #         resources: [
+    #           {
+    #             id: "__string",
+    #             name: "__string",
+    #             resource_data_container: {
+    #               local_device_resource_data: {
+    #                 group_owner_setting: {
+    #                   auto_add_group_owner: false,
+    #                   group_owner: "__string",
+    #                 },
+    #                 source_path: "__string",
+    #               },
+    #               local_volume_resource_data: {
+    #                 destination_path: "__string",
+    #                 group_owner_setting: {
+    #                   auto_add_group_owner: false,
+    #                   group_owner: "__string",
+    #                 },
+    #                 source_path: "__string",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] amzn_client_token
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_definition_id
+    #   @return [String]
+    #
+    # @!attribute [rw] resources
+    #   @return [Array<Types::Resource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionVersionRequest AWS API Documentation
+    #
+    class CreateResourceDefinitionVersionRequest < Struct.new(
+      :amzn_client_token,
+      :resource_definition_id,
+      :resources)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionVersionResponse AWS API Documentation
+    #
+    class CreateResourceDefinitionVersionResponse < Struct.new(
+      :arn,
+      :creation_timestamp,
+      :id,
+      :version)
+      include Aws::Structure
+    end
+
+    # Request for the CreateSoftwareUpdateJob API
+    #
+    # @note When making an API call, you may pass CreateSoftwareUpdateJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         amzn_client_token: "__string",
+    #         s3_url_signer_role: "S3UrlSignerRole",
+    #         software_to_update: "core", # accepts core, ota_agent
+    #         update_agent_log_level: "NONE", # accepts NONE, TRACE, DEBUG, VERBOSE, INFO, WARN, ERROR, FATAL
+    #         update_targets: ["__string"],
+    #         update_targets_architecture: "armv7l", # accepts armv7l, x86_64, aarch64
+    #         update_targets_operating_system: "ubuntu", # accepts ubuntu, raspbian, amazon_linux
+    #       }
+    #
+    # @!attribute [rw] amzn_client_token
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_url_signer_role
+    #   The IAM Role that Greengrass will use to create pre-signed URLs
+    #   pointing towards the update artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] software_to_update
+    #   The piece of software on the Greengrass Core that will be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_agent_log_level
+    #   The minimum level of log statements that should be logged by the OTA
+    #   Agent during an update.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_targets
+    #   The target arns that this update will be applied to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] update_targets_architecture
+    #   The architecture of the Cores in the targets of an update
+    #   @return [String]
+    #
+    # @!attribute [rw] update_targets_operating_system
+    #   The operating system of the Cores in the targets of an update
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobRequest AWS API Documentation
+    #
+    class CreateSoftwareUpdateJobRequest < Struct.new(
+      :amzn_client_token,
+      :s3_url_signer_role,
+      :software_to_update,
+      :update_agent_log_level,
+      :update_targets,
+      :update_targets_architecture,
+      :update_targets_operating_system)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] iot_job_arn
+    #   The Iot Job Arn corresponding to this update.
+    #   @return [String]
+    #
+    # @!attribute [rw] iot_job_id
+    #   The Iot Job Id corresponding to this update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobResponse AWS API Documentation
+    #
+    class CreateSoftwareUpdateJobResponse < Struct.new(
+      :iot_job_arn,
+      :iot_job_id)
       include Aws::Structure
     end
 
@@ -1209,6 +1459,27 @@ module Aws::Greengrass
     #
     class DeleteLoggerDefinitionResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteResourceDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_definition_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_definition_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteResourceDefinitionRequest AWS API Documentation
+    #
+    class DeleteResourceDefinitionRequest < Struct.new(
+      :resource_definition_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteResourceDefinitionResponse AWS API Documentation
+    #
+    class DeleteResourceDefinitionResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteSubscriptionDefinitionRequest
     #   data as a hash:
     #
@@ -1407,6 +1678,13 @@ module Aws::Greengrass
     #         function_arn: "__string",
     #         function_configuration: {
     #           environment: {
+    #             access_sysfs: false,
+    #             resource_access_policies: [
+    #               {
+    #                 permission: "ro", # accepts ro, rw
+    #                 resource_id: "__string",
+    #               },
+    #             ],
     #             variables: {
     #               "__string" => "__string",
     #             },
@@ -1448,6 +1726,13 @@ module Aws::Greengrass
     #
     #       {
     #         environment: {
+    #           access_sysfs: false,
+    #           resource_access_policies: [
+    #             {
+    #               permission: "ro", # accepts ro, rw
+    #               resource_id: "__string",
+    #             },
+    #           ],
     #           variables: {
     #             "__string" => "__string",
     #           },
@@ -1504,10 +1789,25 @@ module Aws::Greengrass
     #   data as a hash:
     #
     #       {
+    #         access_sysfs: false,
+    #         resource_access_policies: [
+    #           {
+    #             permission: "ro", # accepts ro, rw
+    #             resource_id: "__string",
+    #           },
+    #         ],
     #         variables: {
     #           "__string" => "__string",
     #         },
     #       }
+    #
+    # @!attribute [rw] access_sysfs
+    #   Flag to allow lambda access sys filesystem.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] resource_access_policies
+    #   Policies for the function to access resources.
+    #   @return [Array<Types::ResourceAccessPolicy>]
     #
     # @!attribute [rw] variables
     #   @return [Hash<String,String>]
@@ -1515,6 +1815,8 @@ module Aws::Greengrass
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfigurationEnvironment AWS API Documentation
     #
     class FunctionConfigurationEnvironment < Struct.new(
+      :access_sysfs,
+      :resource_access_policies,
       :variables)
       include Aws::Structure
     end
@@ -1530,6 +1832,13 @@ module Aws::Greengrass
     #             function_arn: "__string",
     #             function_configuration: {
     #               environment: {
+    #                 access_sysfs: false,
+    #                 resource_access_policies: [
+    #                   {
+    #                     permission: "ro", # accepts ro, rw
+    #                     resource_id: "__string",
+    #                   },
+    #                 ],
     #                 variables: {
     #                   "__string" => "__string",
     #                 },
@@ -1631,6 +1940,7 @@ module Aws::Greengrass
     #   @return [Array<Types::ConnectivityInfo>]
     #
     # @!attribute [rw] message
+    #   Response Text
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfoResponse AWS API Documentation
@@ -1988,7 +2298,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   Information on the definition
+    #   Information on the definition.
     #   @return [Types::FunctionDefinitionVersion]
     #
     # @!attribute [rw] id
@@ -2302,6 +2612,112 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetResourceDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_definition_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_definition_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionRequest AWS API Documentation
+    #
+    class GetResourceDefinitionRequest < Struct.new(
+      :resource_definition_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_timestamp
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionResponse AWS API Documentation
+    #
+    class GetResourceDefinitionResponse < Struct.new(
+      :arn,
+      :creation_timestamp,
+      :id,
+      :last_updated_timestamp,
+      :latest_version,
+      :latest_version_arn,
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetResourceDefinitionVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_definition_id: "__string", # required
+    #         resource_definition_version_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] resource_definition_id
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_definition_version_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersionRequest AWS API Documentation
+    #
+    class GetResourceDefinitionVersionRequest < Struct.new(
+      :resource_definition_id,
+      :resource_definition_version_id)
+      include Aws::Structure
+    end
+
+    # Information on resource definition version response
+    #
+    # @!attribute [rw] arn
+    #   Arn of the resource definition version.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   Timestamp of when the resource definition version was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   Information on definition.
+    #   @return [Types::ResourceDefinitionVersion]
+    #
+    # @!attribute [rw] id
+    #   Id of the resource definition the version belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Version of the resource definition version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersionResponse AWS API Documentation
+    #
+    class GetResourceDefinitionVersionResponse < Struct.new(
+      :arn,
+      :creation_timestamp,
+      :definition,
+      :id,
+      :version)
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccountRequest AWS API Documentation
@@ -2515,6 +2931,32 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # Group owner related settings for local resources.
+    #
+    # @note When making an API call, you may pass GroupOwnerSetting
+    #   data as a hash:
+    #
+    #       {
+    #         auto_add_group_owner: false,
+    #         group_owner: "__string",
+    #       }
+    #
+    # @!attribute [rw] auto_add_group_owner
+    #   Eanble the auto added group owner.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] group_owner
+    #   Name of the group owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupOwnerSetting AWS API Documentation
+    #
+    class GroupOwnerSetting < Struct.new(
+      :auto_add_group_owner,
+      :group_owner)
+      include Aws::Structure
+    end
+
     # Information on group version
     #
     # @note When making an API call, you may pass GroupVersion
@@ -2525,6 +2967,7 @@ module Aws::Greengrass
     #         device_definition_version_arn: "__string",
     #         function_definition_version_arn: "__string",
     #         logger_definition_version_arn: "__string",
+    #         resource_definition_version_arn: "__string",
     #         subscription_definition_version_arn: "__string",
     #       }
     #
@@ -2541,7 +2984,11 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] logger_definition_version_arn
-    #   Logger definitionv ersion arn for this group.
+    #   Logger definition version arn for this group.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_definition_version_arn
+    #   Resource definition version arn for this group.
     #   @return [String]
     #
     # @!attribute [rw] subscription_definition_version_arn
@@ -2555,6 +3002,7 @@ module Aws::Greengrass
       :device_definition_version_arn,
       :function_definition_version_arn,
       :logger_definition_version_arn,
+      :resource_definition_version_arn,
       :subscription_definition_version_arn)
       include Aws::Structure
     end
@@ -3038,6 +3486,83 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListResourceDefinitionVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: "__string",
+    #         next_token: "__string",
+    #         resource_definition_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_definition_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionVersionsRequest AWS API Documentation
+    #
+    class ListResourceDefinitionVersionsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :resource_definition_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] versions
+    #   @return [Array<Types::VersionInformation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionVersionsResponse AWS API Documentation
+    #
+    class ListResourceDefinitionVersionsResponse < Struct.new(
+      :next_token,
+      :versions)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResourceDefinitionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: "__string",
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionsRequest AWS API Documentation
+    #
+    class ListResourceDefinitionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] definitions
+    #   @return [Array<Types::DefinitionInformation>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionsResponse AWS API Documentation
+    #
+    class ListResourceDefinitionsResponse < Struct.new(
+      :definitions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSubscriptionDefinitionVersionsRequest
     #   data as a hash:
     #
@@ -3131,6 +3656,70 @@ module Aws::Greengrass
     class ListVersionsResponse < Struct.new(
       :next_token,
       :versions)
+      include Aws::Structure
+    end
+
+    # Attributes that define the Local Device Resource.
+    #
+    # @note When making an API call, you may pass LocalDeviceResourceData
+    #   data as a hash:
+    #
+    #       {
+    #         group_owner_setting: {
+    #           auto_add_group_owner: false,
+    #           group_owner: "__string",
+    #         },
+    #         source_path: "__string",
+    #       }
+    #
+    # @!attribute [rw] group_owner_setting
+    #   Group owner related settings for local resources.
+    #   @return [Types::GroupOwnerSetting]
+    #
+    # @!attribute [rw] source_path
+    #   Local source path of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalDeviceResourceData AWS API Documentation
+    #
+    class LocalDeviceResourceData < Struct.new(
+      :group_owner_setting,
+      :source_path)
+      include Aws::Structure
+    end
+
+    # Attributes that define the Local Volume Resource.
+    #
+    # @note When making an API call, you may pass LocalVolumeResourceData
+    #   data as a hash:
+    #
+    #       {
+    #         destination_path: "__string",
+    #         group_owner_setting: {
+    #           auto_add_group_owner: false,
+    #           group_owner: "__string",
+    #         },
+    #         source_path: "__string",
+    #       }
+    #
+    # @!attribute [rw] destination_path
+    #   Local destination path of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_owner_setting
+    #   Group owner related settings for local resources.
+    #   @return [Types::GroupOwnerSetting]
+    #
+    # @!attribute [rw] source_path
+    #   Local source path of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalVolumeResourceData AWS API Documentation
+    #
+    class LocalVolumeResourceData < Struct.new(
+      :destination_path,
+      :group_owner_setting,
+      :source_path)
       include Aws::Structure
     end
 
@@ -3253,6 +3842,161 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
+    # Information on the resource.
+    #
+    # @note When making an API call, you may pass Resource
+    #   data as a hash:
+    #
+    #       {
+    #         id: "__string",
+    #         name: "__string",
+    #         resource_data_container: {
+    #           local_device_resource_data: {
+    #             group_owner_setting: {
+    #               auto_add_group_owner: false,
+    #               group_owner: "__string",
+    #             },
+    #             source_path: "__string",
+    #           },
+    #           local_volume_resource_data: {
+    #             destination_path: "__string",
+    #             group_owner_setting: {
+    #               auto_add_group_owner: false,
+    #               group_owner: "__string",
+    #             },
+    #             source_path: "__string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Resource Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A descriptive resource name.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_data_container
+    #   A container of data for all resource types.
+    #   @return [Types::ResourceDataContainer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Resource AWS API Documentation
+    #
+    class Resource < Struct.new(
+      :id,
+      :name,
+      :resource_data_container)
+      include Aws::Structure
+    end
+
+    # Policy for the function to access a resource.
+    #
+    # @note When making an API call, you may pass ResourceAccessPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         permission: "ro", # accepts ro, rw
+    #         resource_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] permission
+    #   The function's access permission to the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Id of the resource. A reference to the resource definiton.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceAccessPolicy AWS API Documentation
+    #
+    class ResourceAccessPolicy < Struct.new(
+      :permission,
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # A container of data for all resource types.
+    #
+    # @note When making an API call, you may pass ResourceDataContainer
+    #   data as a hash:
+    #
+    #       {
+    #         local_device_resource_data: {
+    #           group_owner_setting: {
+    #             auto_add_group_owner: false,
+    #             group_owner: "__string",
+    #           },
+    #           source_path: "__string",
+    #         },
+    #         local_volume_resource_data: {
+    #           destination_path: "__string",
+    #           group_owner_setting: {
+    #             auto_add_group_owner: false,
+    #             group_owner: "__string",
+    #           },
+    #           source_path: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] local_device_resource_data
+    #   Attributes that define the Local Device Resource.
+    #   @return [Types::LocalDeviceResourceData]
+    #
+    # @!attribute [rw] local_volume_resource_data
+    #   Attributes that define the Local Volume Resource.
+    #   @return [Types::LocalVolumeResourceData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDataContainer AWS API Documentation
+    #
+    class ResourceDataContainer < Struct.new(
+      :local_device_resource_data,
+      :local_volume_resource_data)
+      include Aws::Structure
+    end
+
+    # Information on resource definition version
+    #
+    # @note When making an API call, you may pass ResourceDefinitionVersion
+    #   data as a hash:
+    #
+    #       {
+    #         resources: [
+    #           {
+    #             id: "__string",
+    #             name: "__string",
+    #             resource_data_container: {
+    #               local_device_resource_data: {
+    #                 group_owner_setting: {
+    #                   auto_add_group_owner: false,
+    #                   group_owner: "__string",
+    #                 },
+    #                 source_path: "__string",
+    #               },
+    #               local_volume_resource_data: {
+    #                 destination_path: "__string",
+    #                 group_owner_setting: {
+    #                   auto_add_group_owner: false,
+    #                   group_owner: "__string",
+    #                 },
+    #                 source_path: "__string",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resources
+    #   List of resources.
+    #   @return [Array<Types::Resource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDefinitionVersion AWS API Documentation
+    #
+    class ResourceDefinitionVersion < Struct.new(
+      :resources)
+      include Aws::Structure
+    end
+
     # Information on subscription
     #
     # @note When making an API call, you may pass Subscription
@@ -3353,6 +4097,7 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] message
+    #   Response Text
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -3537,6 +4282,32 @@ module Aws::Greengrass
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateLoggerDefinitionResponse AWS API Documentation
     #
     class UpdateLoggerDefinitionResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateResourceDefinitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "__string",
+    #         resource_definition_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_definition_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateResourceDefinitionRequest AWS API Documentation
+    #
+    class UpdateResourceDefinitionRequest < Struct.new(
+      :name,
+      :resource_definition_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateResourceDefinitionResponse AWS API Documentation
+    #
+    class UpdateResourceDefinitionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateSubscriptionDefinitionRequest
     #   data as a hash:

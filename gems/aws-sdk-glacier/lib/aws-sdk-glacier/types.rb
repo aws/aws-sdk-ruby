@@ -152,6 +152,107 @@ module Aws::Glacier
       include Aws::Structure
     end
 
+    # Contains information about the comma-separated value (CSV) file to
+    # select from.
+    #
+    # @note When making an API call, you may pass CSVInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #         comments: "string",
+    #         quote_escape_character: "string",
+    #         record_delimiter: "string",
+    #         field_delimiter: "string",
+    #         quote_character: "string",
+    #       }
+    #
+    # @!attribute [rw] file_header_info
+    #   Describes the first line of input. Valid values are `None`,
+    #   `Ignore`, and `Use`.
+    #   @return [String]
+    #
+    # @!attribute [rw] comments
+    #   A single character used to indicate that a row should be ignored
+    #   when the character is present at the start of that row.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_escape_character
+    #   A single character used for escaping the quotation-mark character
+    #   inside an already escaped value.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_delimiter
+    #   A value used to separate individual records from each other.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_delimiter
+    #   A value used to separate individual fields from each other within a
+    #   record.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_character
+    #   A value used as an escape character where the field delimiter is
+    #   part of the value.
+    #   @return [String]
+    #
+    class CSVInput < Struct.new(
+      :file_header_info,
+      :comments,
+      :quote_escape_character,
+      :record_delimiter,
+      :field_delimiter,
+      :quote_character)
+      include Aws::Structure
+    end
+
+    # Contains information about the comma-separated value (CSV) file that
+    # the job results are stored in.
+    #
+    # @note When making an API call, you may pass CSVOutput
+    #   data as a hash:
+    #
+    #       {
+    #         quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #         quote_escape_character: "string",
+    #         record_delimiter: "string",
+    #         field_delimiter: "string",
+    #         quote_character: "string",
+    #       }
+    #
+    # @!attribute [rw] quote_fields
+    #   A value that indicates whether all output fields should be contained
+    #   within quotation marks.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_escape_character
+    #   A single character used for escaping the quotation-mark character
+    #   inside an already escaped value.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_delimiter
+    #   A value used to separate individual records from each other.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_delimiter
+    #   A value used to separate individual fields from each other within a
+    #   record.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_character
+    #   A value used as an escape character where the field delimiter is
+    #   part of the value.
+    #   @return [String]
+    #
+    class CSVOutput < Struct.new(
+      :quote_fields,
+      :quote_escape_character,
+      :record_delimiter,
+      :field_delimiter,
+      :quote_character)
+      include Aws::Structure
+    end
+
     # Provides options to complete a multipart upload operation. This
     # informs Amazon Glacier that all the archive parts have been uploaded
     # and Amazon Glacier can now assemble the archive from the uploaded
@@ -574,6 +675,41 @@ module Aws::Glacier
       include Aws::Structure
     end
 
+    # Contains information about the encryption used to store the job
+    # results in Amazon S3.
+    #
+    # @note When making an API call, you may pass Encryption
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_type: "aws:kms", # accepts aws:kms, AES256
+    #         kms_key_id: "string",
+    #         kms_context: "string",
+    #       }
+    #
+    # @!attribute [rw] encryption_type
+    #   The server-side encryption algorithm used when storing job results
+    #   in Amazon S3, for example `AES256` or `aws:kms`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key ID to use for object encryption. All GET and PUT
+    #   requests for an object protected by AWS KMS fail if not made by
+    #   using Secure Sockets Layer (SSL) or Signature Version 4.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_context
+    #   Optional. If the encryption type is `aws:kms`, you can use this
+    #   value to specify the encryption context for the restore results.
+    #   @return [String]
+    #
+    class Encryption < Struct.new(
+      :encryption_type,
+      :kms_key_id,
+      :kms_context)
+      include Aws::Structure
+    end
+
     # Input for GetDataRetrievalPolicy.
     #
     # @note When making an API call, you may pass GetDataRetrievalPolicyInput
@@ -892,41 +1028,44 @@ module Aws::Glacier
       include Aws::Structure
     end
 
-    # Describes an Amazon Glacier job.
+    # Contains the description of an Amazon Glacier job.
     #
     # @!attribute [rw] job_id
     #   An opaque string that identifies an Amazon Glacier job.
     #   @return [String]
     #
     # @!attribute [rw] job_description
-    #   The job description you provided when you initiated the job.
+    #   The job description provided when initiating the job.
     #   @return [String]
     #
     # @!attribute [rw] action
-    #   The job type. It is either ArchiveRetrieval or InventoryRetrieval.
+    #   The job type. This value is either `ArchiveRetrieval`,
+    #   `InventoryRetrieval`, or `Select`.
     #   @return [String]
     #
     # @!attribute [rw] archive_id
-    #   For an ArchiveRetrieval job, this is the archive ID requested for
-    #   download. Otherwise, this field is null.
+    #   The archive ID requested for a select job or archive retrieval.
+    #   Otherwise, this field is null.
     #   @return [String]
     #
     # @!attribute [rw] vault_arn
-    #   The Amazon Resource Name (ARN) of the vault from which the archive
+    #   The Amazon Resource Name (ARN) of the vault from which an archive
     #   retrieval was requested.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
-    #   The UTC date when the job was created. A string representation of
-    #   ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
+    #   The UTC date when the job was created. This value is a string
+    #   representation of ISO 8601 date format, for example
+    #   `"2012-03-20T17:03:43.221Z"`.
     #   @return [Time]
     #
     # @!attribute [rw] completed
-    #   The job status. When a job is completed, you get the job's output.
+    #   The job status. When a job is completed, you get the job's output
+    #   using Get Job Output (GET output).
     #   @return [Boolean]
     #
     # @!attribute [rw] status_code
-    #   The status code can be InProgress, Succeeded, or Failed, and
+    #   The status code can be `InProgress`, `Succeeded`, or `Failed`, and
     #   indicates the status of the job.
     #   @return [String]
     #
@@ -935,68 +1074,68 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] archive_size_in_bytes
-    #   For an ArchiveRetrieval job, this is the size in bytes of the
-    #   archive being requested for download. For the InventoryRetrieval
-    #   job, the value is null.
+    #   For an archive retrieval job, this value is the size in bytes of the
+    #   archive being requested for download. For an inventory retrieval or
+    #   select job, this value is null.
     #   @return [Integer]
     #
     # @!attribute [rw] inventory_size_in_bytes
-    #   For an InventoryRetrieval job, this is the size in bytes of the
-    #   inventory requested for download. For the ArchiveRetrieval job, the
-    #   value is null.
+    #   For an inventory retrieval job, this value is the size in bytes of
+    #   the inventory requested for download. For an archive retrieval or
+    #   select job, this value is null.
     #   @return [Integer]
     #
     # @!attribute [rw] sns_topic
-    #   An Amazon Simple Notification Service (Amazon SNS) topic that
-    #   receives notification.
+    #   An Amazon SNS topic that receives notification.
     #   @return [String]
     #
     # @!attribute [rw] completion_date
-    #   The UTC time that the archive retrieval request completed. While the
-    #   job is in progress, the value will be null.
+    #   The UTC time that the job request completed. While the job is in
+    #   progress, the value is null.
     #   @return [Time]
     #
     # @!attribute [rw] sha256_tree_hash
-    #   For an ArchiveRetrieval job, it is the checksum of the archive.
-    #   Otherwise, the value is null.
+    #   For an archive retrieval job, this value is the checksum of the
+    #   archive. Otherwise, this value is null.
     #
     #   The SHA256 tree hash value for the requested range of an archive. If
-    #   the Initiate a Job request for an archive specified a tree-hash
+    #   the **InitiateJob** request for an archive specified a tree-hash
     #   aligned range, then this field returns a value.
     #
-    #   For the specific case when the whole archive is retrieved, this
-    #   value is the same as the ArchiveSHA256TreeHash value.
+    #   If the whole archive is retrieved, this value is the same as the
+    #   ArchiveSHA256TreeHash value.
     #
-    #   This field is null in the following situations:
+    #   This field is null for the following:
     #
     #   * Archive retrieval jobs that specify a range that is not tree-hash
-    #     aligned.
+    #     aligned
     #
     #   ^
     #   ^
     #
     #   * Archival jobs that specify a range that is equal to the whole
-    #     archive and the job status is InProgress.
+    #     archive, when the job status is `InProgress`
     #
     #   ^
     #   ^
     #
-    #   * Inventory jobs.
+    #   * Inventory jobs
     #
-    #   ^
+    #   * Select jobs
     #   @return [String]
     #
     # @!attribute [rw] archive_sha256_tree_hash
     #   The SHA256 tree hash of the entire archive for an archive retrieval.
-    #   For inventory retrieval jobs, this field is null.
+    #   For inventory retrieval or select jobs, this field is null.
     #   @return [String]
     #
     # @!attribute [rw] retrieval_byte_range
     #   The retrieved byte range for archive retrieval jobs in the form
-    #   "*StartByteValue*-*EndByteValue*" If no range was specified in the
-    #   archive retrieval, then the whole archive is retrieved and
-    #   *StartByteValue* equals 0 and *EndByteValue* equals the size of the
-    #   archive minus 1. For inventory retrieval jobs this field is null.
+    #   *StartByteValue*-*EndByteValue*. If no range was specified in the
+    #   archive retrieval, then the whole archive is retrieved. In this
+    #   case, *StartByteValue* equals 0 and *EndByteValue* equals the size
+    #   of the archive minus 1. For inventory retrieval or select jobs, this
+    #   field is null.
     #   @return [String]
     #
     # @!attribute [rw] tier
@@ -1007,6 +1146,18 @@ module Aws::Glacier
     # @!attribute [rw] inventory_retrieval_parameters
     #   Parameters used for range inventory retrieval.
     #   @return [Types::InventoryRetrievalJobDescription]
+    #
+    # @!attribute [rw] job_output_path
+    #   Contains the job output location.
+    #   @return [String]
+    #
+    # @!attribute [rw] select_parameters
+    #   Contains the parameters that define a select job.
+    #   @return [Types::SelectParameters]
+    #
+    # @!attribute [rw] output_location
+    #   Contains the location where the data from the select job is stored.
+    #   @return [Types::OutputLocation]
     #
     class GlacierJobDescription < Struct.new(
       :job_id,
@@ -1026,7 +1177,82 @@ module Aws::Glacier
       :archive_sha256_tree_hash,
       :retrieval_byte_range,
       :tier,
-      :inventory_retrieval_parameters)
+      :inventory_retrieval_parameters,
+      :job_output_path,
+      :select_parameters,
+      :output_location)
+      include Aws::Structure
+    end
+
+    # Contains information about a grant.
+    #
+    # @note When making an API call, you may pass Grant
+    #   data as a hash:
+    #
+    #       {
+    #         grantee: {
+    #           type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
+    #           display_name: "string",
+    #           uri: "string",
+    #           id: "string",
+    #           email_address: "string",
+    #         },
+    #         permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #       }
+    #
+    # @!attribute [rw] grantee
+    #   The grantee.
+    #   @return [Types::Grantee]
+    #
+    # @!attribute [rw] permission
+    #   Specifies the permission given to the grantee.
+    #   @return [String]
+    #
+    class Grant < Struct.new(
+      :grantee,
+      :permission)
+      include Aws::Structure
+    end
+
+    # Contains information about the grantee.
+    #
+    # @note When making an API call, you may pass Grantee
+    #   data as a hash:
+    #
+    #       {
+    #         type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
+    #         display_name: "string",
+    #         uri: "string",
+    #         id: "string",
+    #         email_address: "string",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   Type of grantee
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   Screen name of the grantee.
+    #   @return [String]
+    #
+    # @!attribute [rw] uri
+    #   URI of the grantee group.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The canonical user ID of the grantee.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   Email address of the grantee.
+    #   @return [String]
+    #
+    class Grantee < Struct.new(
+      :type,
+      :display_name,
+      :uri,
+      :id,
+      :email_address)
       include Aws::Structure
     end
 
@@ -1051,6 +1277,60 @@ module Aws::Glacier
     #             end_date: Time.now,
     #             limit: "string",
     #             marker: "string",
+    #           },
+    #           select_parameters: {
+    #             input_serialization: {
+    #               csv: {
+    #                 file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #                 comments: "string",
+    #                 quote_escape_character: "string",
+    #                 record_delimiter: "string",
+    #                 field_delimiter: "string",
+    #                 quote_character: "string",
+    #               },
+    #             },
+    #             expression_type: "SQL", # accepts SQL
+    #             expression: "string",
+    #             output_serialization: {
+    #               csv: {
+    #                 quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #                 quote_escape_character: "string",
+    #                 record_delimiter: "string",
+    #                 field_delimiter: "string",
+    #                 quote_character: "string",
+    #               },
+    #             },
+    #           },
+    #           output_location: {
+    #             s3: {
+    #               bucket_name: "string",
+    #               prefix: "string",
+    #               encryption: {
+    #                 encryption_type: "aws:kms", # accepts aws:kms, AES256
+    #                 kms_key_id: "string",
+    #                 kms_context: "string",
+    #               },
+    #               canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
+    #               access_control_list: [
+    #                 {
+    #                   grantee: {
+    #                     type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
+    #                     display_name: "string",
+    #                     uri: "string",
+    #                     id: "string",
+    #                     email_address: "string",
+    #                   },
+    #                   permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #                 },
+    #               ],
+    #               tagging: {
+    #                 "string" => "string",
+    #               },
+    #               user_metadata: {
+    #                 "string" => "string",
+    #               },
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #             },
     #           },
     #         },
     #       }
@@ -1089,9 +1369,14 @@ module Aws::Glacier
     #   The ID of the job.
     #   @return [String]
     #
+    # @!attribute [rw] job_output_path
+    #   The path to the location of where the select results are stored.
+    #   @return [String]
+    #
     class InitiateJobOutput < Struct.new(
       :location,
-      :job_id)
+      :job_id,
+      :job_output_path)
       include Aws::Structure
     end
 
@@ -1211,6 +1496,31 @@ module Aws::Glacier
       include Aws::Structure
     end
 
+    # Describes how the archive is serialized.
+    #
+    # @note When making an API call, you may pass InputSerialization
+    #   data as a hash:
+    #
+    #       {
+    #         csv: {
+    #           file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #           comments: "string",
+    #           quote_escape_character: "string",
+    #           record_delimiter: "string",
+    #           field_delimiter: "string",
+    #           quote_character: "string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] csv
+    #   Describes the serialization of a CSV-encoded object.
+    #   @return [Types::CSVInput]
+    #
+    class InputSerialization < Struct.new(
+      :csv)
+      include Aws::Structure
+    end
+
     # Describes the options for a range inventory retrieval job.
     #
     # @!attribute [rw] format
@@ -1326,6 +1636,60 @@ module Aws::Glacier
     #           limit: "string",
     #           marker: "string",
     #         },
+    #         select_parameters: {
+    #           input_serialization: {
+    #             csv: {
+    #               file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #               comments: "string",
+    #               quote_escape_character: "string",
+    #               record_delimiter: "string",
+    #               field_delimiter: "string",
+    #               quote_character: "string",
+    #             },
+    #           },
+    #           expression_type: "SQL", # accepts SQL
+    #           expression: "string",
+    #           output_serialization: {
+    #             csv: {
+    #               quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #               quote_escape_character: "string",
+    #               record_delimiter: "string",
+    #               field_delimiter: "string",
+    #               quote_character: "string",
+    #             },
+    #           },
+    #         },
+    #         output_location: {
+    #           s3: {
+    #             bucket_name: "string",
+    #             prefix: "string",
+    #             encryption: {
+    #               encryption_type: "aws:kms", # accepts aws:kms, AES256
+    #               kms_key_id: "string",
+    #               kms_context: "string",
+    #             },
+    #             canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
+    #             access_control_list: [
+    #               {
+    #                 grantee: {
+    #                   type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
+    #                   display_name: "string",
+    #                   uri: "string",
+    #                   id: "string",
+    #                   email_address: "string",
+    #                 },
+    #                 permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #               },
+    #             ],
+    #             tagging: {
+    #               "string" => "string",
+    #             },
+    #             user_metadata: {
+    #               "string" => "string",
+    #             },
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] format
@@ -1337,16 +1701,17 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The job type. You can initiate a job to retrieve an archive or get
-    #   an inventory of a vault. Valid values are "archive-retrieval" and
+    #   The job type. You can initiate a job to perform a select query on an
+    #   archive, retrieve an archive, or get an inventory of a vault. Valid
+    #   values are "select", "archive-retrieval" and
     #   "inventory-retrieval".
     #   @return [String]
     #
     # @!attribute [rw] archive_id
     #   The ID of the archive that you want to retrieve. This field is
-    #   required only if `Type` is set to archive-retrieval. An error occurs
-    #   if you specify this request parameter for an inventory retrieval job
-    #   request.
+    #   required only if `Type` is set to `select` or
+    #   `archive-retrieval`code&gt;. An error occurs if you specify this
+    #   request parameter for an inventory retrieval job request.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1378,13 +1743,23 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The retrieval option to use for the archive retrieval. Valid values
-    #   are `Expedited`, `Standard`, or `Bulk`. `Standard` is the default.
+    #   The retrieval option to use for a select or archive retrieval job.
+    #   Valid values are `Expedited`, `Standard`, or `Bulk`. `Standard` is
+    #   the default.
     #   @return [String]
     #
     # @!attribute [rw] inventory_retrieval_parameters
     #   Input parameters used for range inventory retrieval.
     #   @return [Types::InventoryRetrievalJobInput]
+    #
+    # @!attribute [rw] select_parameters
+    #   Contains the parameters that define a job.
+    #   @return [Types::SelectParameters]
+    #
+    # @!attribute [rw] output_location
+    #   Contains information about the location where the select job results
+    #   are stored.
+    #   @return [Types::OutputLocation]
     #
     class JobParameters < Struct.new(
       :format,
@@ -1394,7 +1769,9 @@ module Aws::Glacier
       :sns_topic,
       :retrieval_byte_range,
       :tier,
-      :inventory_retrieval_parameters)
+      :inventory_retrieval_parameters,
+      :select_parameters,
+      :output_location)
       include Aws::Structure
     end
 
@@ -1658,12 +2035,11 @@ module Aws::Glacier
     #       }
     #
     # @!attribute [rw] account_id
-    #   The `AccountId` value is the AWS account ID of the account that owns
-    #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '-' (hyphen), in which case Amazon Glacier uses the AWS
-    #   account ID associated with the credentials used to sign the request.
-    #   If you use an account ID, don't include any hyphens ('-') in the
-    #   ID.
+    #   The AWS account ID of the account that owns the vault. You can
+    #   either specify an AWS account ID or optionally a single '-'
+    #   (hyphen), in which case Amazon Glacier uses the AWS account ID
+    #   associated with the credentials used to sign the request. If you use
+    #   an account ID, don't include any hyphens ('-') in the ID.
     #   @return [String]
     #
     class ListProvisionedCapacityInput < Struct.new(
@@ -1781,6 +2157,78 @@ module Aws::Glacier
       include Aws::Structure
     end
 
+    # Contains information about the location where the select job results
+    # are stored.
+    #
+    # @note When making an API call, you may pass OutputLocation
+    #   data as a hash:
+    #
+    #       {
+    #         s3: {
+    #           bucket_name: "string",
+    #           prefix: "string",
+    #           encryption: {
+    #             encryption_type: "aws:kms", # accepts aws:kms, AES256
+    #             kms_key_id: "string",
+    #             kms_context: "string",
+    #           },
+    #           canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
+    #           access_control_list: [
+    #             {
+    #               grantee: {
+    #                 type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
+    #                 display_name: "string",
+    #                 uri: "string",
+    #                 id: "string",
+    #                 email_address: "string",
+    #               },
+    #               permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #             },
+    #           ],
+    #           tagging: {
+    #             "string" => "string",
+    #           },
+    #           user_metadata: {
+    #             "string" => "string",
+    #           },
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3
+    #   Describes an S3 location that will receive the results of the
+    #   restore request.
+    #   @return [Types::S3Location]
+    #
+    class OutputLocation < Struct.new(
+      :s3)
+      include Aws::Structure
+    end
+
+    # Describes how the select output is serialized.
+    #
+    # @note When making an API call, you may pass OutputSerialization
+    #   data as a hash:
+    #
+    #       {
+    #         csv: {
+    #           quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #           quote_escape_character: "string",
+    #           record_delimiter: "string",
+    #           field_delimiter: "string",
+    #           quote_character: "string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] csv
+    #   Describes the serialization of CSV-encoded query results.
+    #   @return [Types::CSVOutput]
+    #
+    class OutputSerialization < Struct.new(
+      :csv)
+      include Aws::Structure
+    end
+
     # A list of the part sizes of the multipart upload.
     #
     # @!attribute [rw] range_in_bytes
@@ -1883,6 +2331,141 @@ module Aws::Glacier
       :account_id,
       :vault_name,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # Contains information about the location in Amazon S3 where the select
+    # job results are stored.
+    #
+    # @note When making an API call, you may pass S3Location
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "string",
+    #         prefix: "string",
+    #         encryption: {
+    #           encryption_type: "aws:kms", # accepts aws:kms, AES256
+    #           kms_key_id: "string",
+    #           kms_context: "string",
+    #         },
+    #         canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
+    #         access_control_list: [
+    #           {
+    #             grantee: {
+    #               type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
+    #               display_name: "string",
+    #               uri: "string",
+    #               id: "string",
+    #               email_address: "string",
+    #             },
+    #             permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #           },
+    #         ],
+    #         tagging: {
+    #           "string" => "string",
+    #         },
+    #         user_metadata: {
+    #           "string" => "string",
+    #         },
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the bucket where the restore results are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix that is prepended to the restore results for this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption
+    #   Contains information about the encryption used to store the job
+    #   results in Amazon S3.
+    #   @return [Types::Encryption]
+    #
+    # @!attribute [rw] canned_acl
+    #   The canned ACL to apply to the restore results.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_list
+    #   A list of grants that control access to the staged results.
+    #   @return [Array<Types::Grant>]
+    #
+    # @!attribute [rw] tagging
+    #   The tag-set that is applied to the restore results.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] user_metadata
+    #   A map of metadata to store with the restore results in Amazon S3.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] storage_class
+    #   The storage class used to store the restore results.
+    #   @return [String]
+    #
+    class S3Location < Struct.new(
+      :bucket_name,
+      :prefix,
+      :encryption,
+      :canned_acl,
+      :access_control_list,
+      :tagging,
+      :user_metadata,
+      :storage_class)
+      include Aws::Structure
+    end
+
+    # Contains information about the parameters used for a select.
+    #
+    # @note When making an API call, you may pass SelectParameters
+    #   data as a hash:
+    #
+    #       {
+    #         input_serialization: {
+    #           csv: {
+    #             file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #             comments: "string",
+    #             quote_escape_character: "string",
+    #             record_delimiter: "string",
+    #             field_delimiter: "string",
+    #             quote_character: "string",
+    #           },
+    #         },
+    #         expression_type: "SQL", # accepts SQL
+    #         expression: "string",
+    #         output_serialization: {
+    #           csv: {
+    #             quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #             quote_escape_character: "string",
+    #             record_delimiter: "string",
+    #             field_delimiter: "string",
+    #             quote_character: "string",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] input_serialization
+    #   Describes the serialization format of the object.
+    #   @return [Types::InputSerialization]
+    #
+    # @!attribute [rw] expression_type
+    #   The type of the provided expression, for example `SQL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The expression that is used to select the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_serialization
+    #   Describes how the results of the select job are serialized.
+    #   @return [Types::OutputSerialization]
+    #
+    class SelectParameters < Struct.new(
+      :input_serialization,
+      :expression_type,
+      :expression,
+      :output_serialization)
       include Aws::Structure
     end
 

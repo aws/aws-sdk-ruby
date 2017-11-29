@@ -279,6 +279,114 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Contains the description of the backup created for the table.
+    #
+    # @!attribute [rw] backup_details
+    #   Contains the details of the backup created for the table.
+    #   @return [Types::BackupDetails]
+    #
+    # @!attribute [rw] source_table_details
+    #   Contains the details of the table when the backup was created.
+    #   @return [Types::SourceTableDetails]
+    #
+    # @!attribute [rw] source_table_feature_details
+    #   Contains the details of the features enabled on the table when the
+    #   backup was created. For example, LSIs, GSIs, streams, TTL.
+    #   @return [Types::SourceTableFeatureDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupDescription AWS API Documentation
+    #
+    class BackupDescription < Struct.new(
+      :backup_details,
+      :source_table_details,
+      :source_table_feature_details)
+      include Aws::Structure
+    end
+
+    # Contains the details of the backup created for the table.
+    #
+    # @!attribute [rw] backup_arn
+    #   ARN associated with the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_name
+    #   Name of the requested backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_size_bytes
+    #   Size of the backup in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] backup_status
+    #   Backup can be in one of the following states: CREATING, ACTIVE,
+    #   DELETED.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_creation_date_time
+    #   Time at which the backup was created. This is the request time of
+    #   the backup.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupDetails AWS API Documentation
+    #
+    class BackupDetails < Struct.new(
+      :backup_arn,
+      :backup_name,
+      :backup_size_bytes,
+      :backup_status,
+      :backup_creation_date_time)
+      include Aws::Structure
+    end
+
+    # Contains details for the backup.
+    #
+    # @!attribute [rw] table_name
+    #   Name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_id
+    #   Unique identifier for the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   ARN associated with the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_arn
+    #   ARN associated with the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_name
+    #   Name of the specified backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_creation_date_time
+    #   Time at which the backup was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] backup_status
+    #   Backup can be in one of the following states: CREATING, ACTIVE,
+    #   DELETED.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_size_bytes
+    #   Size of the backup in bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupSummary AWS API Documentation
+    #
+    class BackupSummary < Struct.new(
+      :table_name,
+      :table_id,
+      :table_arn,
+      :backup_arn,
+      :backup_name,
+      :backup_creation_date_time,
+      :backup_status,
+      :backup_size_bytes)
+      include Aws::Structure
+    end
+
     # Represents the input of a `BatchGetItem` operation.
     #
     # @note When making an API call, you may pass BatchGetItemInput
@@ -622,7 +730,7 @@ module Aws::DynamoDB
     #     collection. This is the same as the partition key value of the
     #     item.
     #
-    #   * `SizeEstimateRange` - An estimate of item collection size,
+    #   * `SizeEstimateRangeGB` - An estimate of item collection size,
     #     expressed in GB. This is a two-element array containing a lower
     #     bound and an upper bound for the estimate. The estimate includes
     #     the size of all the items in the table, plus the size of all
@@ -939,6 +1047,56 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents the backup and restore settings on the table when the
+    # backup was created.
+    #
+    # @!attribute [rw] continuous_backups_status
+    #   ContinuousBackupsStatus can be one of the following states :
+    #   ENABLED, DISABLED
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ContinuousBackupsDescription AWS API Documentation
+    #
+    class ContinuousBackupsDescription < Struct.new(
+      :continuous_backups_status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateBackupInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #         backup_name: "BackupName", # required
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_name
+    #   Specified name for the backup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackupInput AWS API Documentation
+    #
+    class CreateBackupInput < Struct.new(
+      :table_name,
+      :backup_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_details
+    #   Contains the details of the backup created for the table.
+    #   @return [Types::BackupDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackupOutput AWS API Documentation
+    #
+    class CreateBackupOutput < Struct.new(
+      :backup_details)
+      include Aws::Structure
+    end
+
     # Represents a new global secondary index to be added to an existing
     # table.
     #
@@ -996,6 +1154,65 @@ module Aws::DynamoDB
       :key_schema,
       :projection,
       :provisioned_throughput)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateGlobalTableInput
+    #   data as a hash:
+    #
+    #       {
+    #         global_table_name: "TableName", # required
+    #         replication_group: [ # required
+    #           {
+    #             region_name: "RegionName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] global_table_name
+    #   The global table name.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_group
+    #   The regions where the global table needs to be created.
+    #   @return [Array<Types::Replica>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalTableInput AWS API Documentation
+    #
+    class CreateGlobalTableInput < Struct.new(
+      :global_table_name,
+      :replication_group)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_table_description
+    #   Contains the details of the global table.
+    #   @return [Types::GlobalTableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalTableOutput AWS API Documentation
+    #
+    class CreateGlobalTableOutput < Struct.new(
+      :global_table_description)
+      include Aws::Structure
+    end
+
+    # Represents a replica to be added.
+    #
+    # @note When making an API call, you may pass CreateReplicaAction
+    #   data as a hash:
+    #
+    #       {
+    #         region_name: "RegionName", # required
+    #       }
+    #
+    # @!attribute [rw] region_name
+    #   The region of the replica to be added.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateReplicaAction AWS API Documentation
+    #
+    class CreateReplicaAction < Struct.new(
+      :region_name)
       include Aws::Structure
     end
 
@@ -1262,6 +1479,35 @@ module Aws::DynamoDB
     #
     class CreateTableOutput < Struct.new(
       :table_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBackupInput
+    #   data as a hash:
+    #
+    #       {
+    #         backup_arn: "BackupArn", # required
+    #       }
+    #
+    # @!attribute [rw] backup_arn
+    #   The ARN associated with the backup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackupInput AWS API Documentation
+    #
+    class DeleteBackupInput < Struct.new(
+      :backup_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_description
+    #   Contains the description of the backup created for the table.
+    #   @return [Types::BackupDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackupOutput AWS API Documentation
+    #
+    class DeleteBackupOutput < Struct.new(
+      :backup_description)
       include Aws::Structure
     end
 
@@ -1553,7 +1799,7 @@ module Aws::DynamoDB
     #     collection. This is the same as the partition key value of the
     #     item itself.
     #
-    #   * `SizeEstimateRange` - An estimate of item collection size, in
+    #   * `SizeEstimateRangeGB` - An estimate of item collection size, in
     #     gigabytes. This value is a two-element array containing a lower
     #     bound and an upper bound for the estimate. The estimate includes
     #     the size of all the items in the table, plus the size of all
@@ -1571,6 +1817,26 @@ module Aws::DynamoDB
       :attributes,
       :consumed_capacity,
       :item_collection_metrics)
+      include Aws::Structure
+    end
+
+    # Represents a replica to be removed.
+    #
+    # @note When making an API call, you may pass DeleteReplicaAction
+    #   data as a hash:
+    #
+    #       {
+    #         region_name: "RegionName", # required
+    #       }
+    #
+    # @!attribute [rw] region_name
+    #   The region of the replica to be removed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteReplicaAction AWS API Documentation
+    #
+    class DeleteReplicaAction < Struct.new(
+      :region_name)
       include Aws::Structure
     end
 
@@ -1629,6 +1895,95 @@ module Aws::DynamoDB
     #
     class DeleteTableOutput < Struct.new(
       :table_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeBackupInput
+    #   data as a hash:
+    #
+    #       {
+    #         backup_arn: "BackupArn", # required
+    #       }
+    #
+    # @!attribute [rw] backup_arn
+    #   The ARN associated with the backup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackupInput AWS API Documentation
+    #
+    class DescribeBackupInput < Struct.new(
+      :backup_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_description
+    #   Contains the description of the backup created for the table.
+    #   @return [Types::BackupDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackupOutput AWS API Documentation
+    #
+    class DescribeBackupOutput < Struct.new(
+      :backup_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeContinuousBackupsInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   Name of the table for which the customer wants to check the backup
+    #   and restore settings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackupsInput AWS API Documentation
+    #
+    class DescribeContinuousBackupsInput < Struct.new(
+      :table_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] continuous_backups_description
+    #   `ContinuousBackupsDescription` can be one of the following :
+    #   ENABLED, DISABLED.
+    #   @return [Types::ContinuousBackupsDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackupsOutput AWS API Documentation
+    #
+    class DescribeContinuousBackupsOutput < Struct.new(
+      :continuous_backups_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeGlobalTableInput
+    #   data as a hash:
+    #
+    #       {
+    #         global_table_name: "TableName", # required
+    #       }
+    #
+    # @!attribute [rw] global_table_name
+    #   The name of the global table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableInput AWS API Documentation
+    #
+    class DescribeGlobalTableInput < Struct.new(
+      :global_table_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_table_description
+    #   Contains the details of the global table.
+    #   @return [Types::GlobalTableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableOutput AWS API Documentation
+    #
+    class DescribeGlobalTableOutput < Struct.new(
+      :global_table_description)
       include Aws::Structure
     end
 
@@ -2379,6 +2734,56 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents the properties of a global secondary index for the table
+    # when the backup was created.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_schema
+    #   The complete key schema for a global secondary index, which consists
+    #   of one or more pairs of attribute names and key types:
+    #
+    #   * `HASH` - partition key
+    #
+    #   * `RANGE` - sort key
+    #
+    #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
+    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   internal hash function to evenly distribute data items across
+    #   partitions, based on their partition key values.
+    #
+    #    The sort key of an item is also known as its *range attribute*. The
+    #   term "range attribute" derives from the way DynamoDB stores items
+    #   with the same partition key physically close together, in sorted
+    #   order by the sort key value.
+    #
+    #    </note>
+    #   @return [Array<Types::KeySchemaElement>]
+    #
+    # @!attribute [rw] projection
+    #   Represents attributes that are copied (projected) from the table
+    #   into the global secondary index. These are in addition to the
+    #   primary key attributes and index key attributes, which are
+    #   automatically projected.
+    #   @return [Types::Projection]
+    #
+    # @!attribute [rw] provisioned_throughput
+    #   Represents the provisioned throughput settings for the specified
+    #   global secondary index.
+    #   @return [Types::ProvisionedThroughput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexInfo AWS API Documentation
+    #
+    class GlobalSecondaryIndexInfo < Struct.new(
+      :index_name,
+      :key_schema,
+      :projection,
+      :provisioned_throughput)
+      include Aws::Structure
+    end
+
     # Represents one of the following:
     #
     # * A new global secondary index to be added to an existing table.
@@ -2452,6 +2857,65 @@ module Aws::DynamoDB
       :update,
       :create,
       :delete)
+      include Aws::Structure
+    end
+
+    # Represents the properties of a global table.
+    #
+    # @!attribute [rw] global_table_name
+    #   The global table name.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_group
+    #   The regions where the global table has replicas.
+    #   @return [Array<Types::Replica>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTable AWS API Documentation
+    #
+    class GlobalTable < Struct.new(
+      :global_table_name,
+      :replication_group)
+      include Aws::Structure
+    end
+
+    # Contains details about the global table.
+    #
+    # @!attribute [rw] replication_group
+    #   The regions where the global table has replicas.
+    #   @return [Array<Types::ReplicaDescription>]
+    #
+    # @!attribute [rw] global_table_arn
+    #   The unique identifier of the global table.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The creation time of the global table.
+    #   @return [Time]
+    #
+    # @!attribute [rw] global_table_status
+    #   The current state of the global table:
+    #
+    #   * `CREATING` - The global table is being created.
+    #
+    #   * `UPDATING` - The global table is being updated.
+    #
+    #   * `DELETING` - The global table is being deleted.
+    #
+    #   * `ACTIVE` - The global table is ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_table_name
+    #   The global table name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableDescription AWS API Documentation
+    #
+    class GlobalTableDescription < Struct.new(
+      :replication_group,
+      :global_table_arn,
+      :creation_date_time,
+      :global_table_status,
+      :global_table_name)
       include Aws::Structure
     end
 
@@ -2664,6 +3128,112 @@ module Aws::DynamoDB
       :consistent_read,
       :projection_expression,
       :expression_attribute_names)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBackupsInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName",
+    #         limit: 1,
+    #         time_range_lower_bound: Time.now,
+    #         time_range_upper_bound: Time.now,
+    #         exclusive_start_backup_arn: "BackupArn",
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The backups from the table specified by TableName are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Maximum number of backups to return at once.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] time_range_lower_bound
+    #   Only backups created after this time are listed.
+    #   `TimeRangeLowerBound` is inclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] time_range_upper_bound
+    #   Only backups created before this time are listed.
+    #   `TimeRangeUpperBound` is exclusive.
+    #   @return [Time]
+    #
+    # @!attribute [rw] exclusive_start_backup_arn
+    #   `LastEvaluatedBackupARN` returned by the previous ListBackups call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackupsInput AWS API Documentation
+    #
+    class ListBackupsInput < Struct.new(
+      :table_name,
+      :limit,
+      :time_range_lower_bound,
+      :time_range_upper_bound,
+      :exclusive_start_backup_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup_summaries
+    #   List of `BackupSummary` objects.
+    #   @return [Array<Types::BackupSummary>]
+    #
+    # @!attribute [rw] last_evaluated_backup_arn
+    #   Last evaluated BackupARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackupsOutput AWS API Documentation
+    #
+    class ListBackupsOutput < Struct.new(
+      :backup_summaries,
+      :last_evaluated_backup_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListGlobalTablesInput
+    #   data as a hash:
+    #
+    #       {
+    #         exclusive_start_global_table_name: "TableName",
+    #         limit: 1,
+    #         region_name: "RegionName",
+    #       }
+    #
+    # @!attribute [rw] exclusive_start_global_table_name
+    #   The first global table name that this operation will evaluate.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of table names to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] region_name
+    #   Lists the global tables in a specific region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListGlobalTablesInput AWS API Documentation
+    #
+    class ListGlobalTablesInput < Struct.new(
+      :exclusive_start_global_table_name,
+      :limit,
+      :region_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_tables
+    #   List of global table names.
+    #   @return [Array<Types::GlobalTable>]
+    #
+    # @!attribute [rw] last_evaluated_global_table_name
+    #   Last evaluated global table name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListGlobalTablesOutput AWS API Documentation
+    #
+    class ListGlobalTablesOutput < Struct.new(
+      :global_tables,
+      :last_evaluated_global_table_name)
       include Aws::Structure
     end
 
@@ -2890,6 +3460,50 @@ module Aws::DynamoDB
       :index_size_bytes,
       :item_count,
       :index_arn)
+      include Aws::Structure
+    end
+
+    # Represents the properties of a local secondary index for the table
+    # when the backup was created.
+    #
+    # @!attribute [rw] index_name
+    #   Represents the name of the local secondary index.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_schema
+    #   The complete key schema for a local secondary index, which consists
+    #   of one or more pairs of attribute names and key types:
+    #
+    #   * `HASH` - partition key
+    #
+    #   * `RANGE` - sort key
+    #
+    #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
+    #   The term "hash attribute" derives from DynamoDB' usage of an
+    #   internal hash function to evenly distribute data items across
+    #   partitions, based on their partition key values.
+    #
+    #    The sort key of an item is also known as its *range attribute*. The
+    #   term "range attribute" derives from the way DynamoDB stores items
+    #   with the same partition key physically close together, in sorted
+    #   order by the sort key value.
+    #
+    #    </note>
+    #   @return [Array<Types::KeySchemaElement>]
+    #
+    # @!attribute [rw] projection
+    #   Represents attributes that are copied (projected) from the table
+    #   into the global secondary index. These are in addition to the
+    #   primary key attributes and index key attributes, which are
+    #   automatically projected.
+    #   @return [Types::Projection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/LocalSecondaryIndexInfo AWS API Documentation
+    #
+    class LocalSecondaryIndexInfo < Struct.new(
+      :index_name,
+      :key_schema,
+      :projection)
       include Aws::Structure
     end
 
@@ -3316,7 +3930,7 @@ module Aws::DynamoDB
     #     collection. This is the same as the partition key value of the
     #     item itself.
     #
-    #   * `SizeEstimateRange` - An estimate of item collection size, in
+    #   * `SizeEstimateRangeGB` - An estimate of item collection size, in
     #     gigabytes. This value is a two-element array containing a lower
     #     bound and an upper bound for the estimate. The estimate includes
     #     the size of all the items in the table, plus the size of all
@@ -3886,6 +4500,139 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents the properties of a replica.
+    #
+    # @note When making an API call, you may pass Replica
+    #   data as a hash:
+    #
+    #       {
+    #         region_name: "RegionName",
+    #       }
+    #
+    # @!attribute [rw] region_name
+    #   The region where the replica needs to be created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Replica AWS API Documentation
+    #
+    class Replica < Struct.new(
+      :region_name)
+      include Aws::Structure
+    end
+
+    # Contains the details of the replica.
+    #
+    # @!attribute [rw] region_name
+    #   The name of the region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaDescription AWS API Documentation
+    #
+    class ReplicaDescription < Struct.new(
+      :region_name)
+      include Aws::Structure
+    end
+
+    # Represents one of the following:
+    #
+    # * A new replica to be added to an existing global table.
+    #
+    # * New parameters for an existing replica.
+    #
+    # * An existing replica to be removed from an existing global table.
+    #
+    # @note When making an API call, you may pass ReplicaUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         create: {
+    #           region_name: "RegionName", # required
+    #         },
+    #         delete: {
+    #           region_name: "RegionName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] create
+    #   The parameters required for creating a replica on an existing global
+    #   table.
+    #   @return [Types::CreateReplicaAction]
+    #
+    # @!attribute [rw] delete
+    #   The name of the existing replica to be removed.
+    #   @return [Types::DeleteReplicaAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaUpdate AWS API Documentation
+    #
+    class ReplicaUpdate < Struct.new(
+      :create,
+      :delete)
+      include Aws::Structure
+    end
+
+    # Contains details for the restore.
+    #
+    # @!attribute [rw] source_backup_arn
+    #   ARN of the backup from which the table was restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_table_arn
+    #   ARN of the source table of the backup that is being restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] restore_date_time
+    #   Point in time or source backup time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] restore_in_progress
+    #   Indicates if a restore is in progress or not.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreSummary AWS API Documentation
+    #
+    class RestoreSummary < Struct.new(
+      :source_backup_arn,
+      :source_table_arn,
+      :restore_date_time,
+      :restore_in_progress)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RestoreTableFromBackupInput
+    #   data as a hash:
+    #
+    #       {
+    #         target_table_name: "TableName", # required
+    #         backup_arn: "BackupArn", # required
+    #       }
+    #
+    # @!attribute [rw] target_table_name
+    #   The name of the new table to which the backup must be restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_arn
+    #   The ARN associated with the backup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackupInput AWS API Documentation
+    #
+    class RestoreTableFromBackupInput < Struct.new(
+      :target_table_name,
+      :backup_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_description
+    #   The description of the table created from an existing backup.
+    #   @return [Types::TableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackupOutput AWS API Documentation
+    #
+    class RestoreTableFromBackupOutput < Struct.new(
+      :table_description)
+      include Aws::Structure
+    end
+
     # Represents the input of a `Scan` operation.
     #
     # @note When making an API call, you may pass ScanInput
@@ -4333,6 +5080,90 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Contains the details of the table when the backup was created.
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table for which the backup was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_id
+    #   Unique identifier for the table for which the backup was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   ARN of the table for which backup was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_size_bytes
+    #   Size of the table in bytes. Please note this is an approximate
+    #   value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] key_schema
+    #   Schema of the table.
+    #   @return [Array<Types::KeySchemaElement>]
+    #
+    # @!attribute [rw] table_creation_date_time
+    #   Time when the source table was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] provisioned_throughput
+    #   Read IOPs and Write IOPS on the table when the backup was created.
+    #   @return [Types::ProvisionedThroughput]
+    #
+    # @!attribute [rw] item_count
+    #   Number of items in the table. Please note this is an approximate
+    #   value.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SourceTableDetails AWS API Documentation
+    #
+    class SourceTableDetails < Struct.new(
+      :table_name,
+      :table_id,
+      :table_arn,
+      :table_size_bytes,
+      :key_schema,
+      :table_creation_date_time,
+      :provisioned_throughput,
+      :item_count)
+      include Aws::Structure
+    end
+
+    # Contains the details of the features enabled on the table when the
+    # backup was created. For example, LSIs, GSIs, streams, TTL.
+    #
+    # @!attribute [rw] local_secondary_indexes
+    #   Represents the LSI properties for the table when the backup was
+    #   created. It includes the IndexName, KeySchema and Projection for the
+    #   LSIs on the table at the time of backup.
+    #   @return [Array<Types::LocalSecondaryIndexInfo>]
+    #
+    # @!attribute [rw] global_secondary_indexes
+    #   Represents the GSI properties for the table when the backup was
+    #   created. It includes the IndexName, KeySchema, Projection and
+    #   ProvisionedThroughput for the GSIs on the table at the time of
+    #   backup.
+    #   @return [Array<Types::GlobalSecondaryIndexInfo>]
+    #
+    # @!attribute [rw] stream_description
+    #   Stream settings on the table when the backup was created.
+    #   @return [Types::StreamSpecification]
+    #
+    # @!attribute [rw] time_to_live_description
+    #   Time to Live settings on the table when the backup was created.
+    #   @return [Types::TimeToLiveDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SourceTableFeatureDetails AWS API Documentation
+    #
+    class SourceTableFeatureDetails < Struct.new(
+      :local_secondary_indexes,
+      :global_secondary_indexes,
+      :stream_description,
+      :time_to_live_description)
+      include Aws::Structure
+    end
+
     # Represents the DynamoDB Streams configuration for a table in DynamoDB.
     #
     # @note When making an API call, you may pass StreamSpecification
@@ -4464,6 +5295,10 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] table_arn
     #   The Amazon Resource Name (ARN) that uniquely identifies the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_id
+    #   Unique identifier for the table for which the backup was created.
     #   @return [String]
     #
     # @!attribute [rw] local_secondary_indexes
@@ -4610,6 +5445,10 @@ module Aws::DynamoDB
     #   stream for this table.
     #   @return [String]
     #
+    # @!attribute [rw] restore_summary
+    #   Contains details for the restore.
+    #   @return [Types::RestoreSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
     #
     class TableDescription < Struct.new(
@@ -4622,11 +5461,13 @@ module Aws::DynamoDB
       :table_size_bytes,
       :item_count,
       :table_arn,
+      :table_id,
       :local_secondary_indexes,
       :global_secondary_indexes,
       :stream_specification,
       :latest_stream_label,
-      :latest_stream_arn)
+      :latest_stream_arn,
+      :restore_summary)
       include Aws::Structure
     end
 
@@ -4813,6 +5654,51 @@ module Aws::DynamoDB
     class UpdateGlobalSecondaryIndexAction < Struct.new(
       :index_name,
       :provisioned_throughput)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateGlobalTableInput
+    #   data as a hash:
+    #
+    #       {
+    #         global_table_name: "TableName", # required
+    #         replica_updates: [ # required
+    #           {
+    #             create: {
+    #               region_name: "RegionName", # required
+    #             },
+    #             delete: {
+    #               region_name: "RegionName", # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] global_table_name
+    #   The global table name.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_updates
+    #   A list of regions that should be added or removed from the global
+    #   table.
+    #   @return [Array<Types::ReplicaUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableInput AWS API Documentation
+    #
+    class UpdateGlobalTableInput < Struct.new(
+      :global_table_name,
+      :replica_updates)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_table_description
+    #   Contains the details of the global table.
+    #   @return [Types::GlobalTableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableOutput AWS API Documentation
+    #
+    class UpdateGlobalTableOutput < Struct.new(
+      :global_table_description)
       include Aws::Structure
     end
 
@@ -5209,7 +6095,7 @@ module Aws::DynamoDB
     #     collection. This is the same as the partition key value of the
     #     item itself.
     #
-    #   * `SizeEstimateRange` - An estimate of item collection size, in
+    #   * `SizeEstimateRangeGB` - An estimate of item collection size, in
     #     gigabytes. This value is a two-element array containing a lower
     #     bound and an upper bound for the estimate. The estimate includes
     #     the size of all the items in the table, plus the size of all

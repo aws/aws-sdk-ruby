@@ -732,6 +732,131 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Creates a backup for an existing table.
+    #
+    # Each time you create an On-Demand Backup, the entire table data is
+    # backed up. There is no limit to the number of on-demand backups that
+    # can be taken.
+    #
+    # You can call `CreateBackup` at a maximum rate of 50 times per second.
+    #
+    # All backups in DynamoDB work without consuming any provisioned
+    # throughput on the table. This results in a fast, low-cost, and
+    # scalable backup process. In general, the larger the table, the more
+    # time it takes to back up. The backup is stored in an S3 data store
+    # that is maintained and managed by DynamoDB.
+    #
+    # Backups incorporate all writes (delete, put, update) that were
+    # completed within the last minute before the backup request was
+    # initiated. Backups might include some writes (delete, put, update)
+    # that were completed before the backup request was finished.
+    #
+    # For example, if you submit the backup request on 2018-12-14 at
+    # 14:25:00, the backup is guaranteed to contain all data committed to
+    # the table up to 14:24:00, and data committed after 14:26:00 will not
+    # be. The backup may or may not contain data modifications made between
+    # 14:24:00 and 14:26:00. On-Demand Backup does not support causal
+    # consistency.
+    #
+    # Along with data, the following are also included on the backups:
+    #
+    # * Global secondary indexes (GSIs)
+    #
+    # * Local secondary indexes (LSIs)
+    #
+    # * Streams
+    #
+    # * Provisioned read and write capacity
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, String] :backup_name
+    #   Specified name for the backup.
+    #
+    # @return [Types::CreateBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBackupOutput#backup_details #backup_details} => Types::BackupDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_backup({
+    #     table_name: "TableName", # required
+    #     backup_name: "BackupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_details.backup_arn #=> String
+    #   resp.backup_details.backup_name #=> String
+    #   resp.backup_details.backup_size_bytes #=> Integer
+    #   resp.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_details.backup_creation_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackup AWS API Documentation
+    #
+    # @overload create_backup(params = {})
+    # @param [Hash] params ({})
+    def create_backup(params = {}, options = {})
+      req = build_request(:create_backup, params)
+      req.send_request(options)
+    end
+
+    # Creates a global table from an existing table. A global table creates
+    # a replication relationship between two or more DynamoDB tables with
+    # the same table name in the provided regions.
+    #
+    # Tables can only be added as the replicas of a global table group under
+    # the following conditions:
+    #
+    # * The tables must have the same name.
+    #
+    # * The tables must contain no items.
+    #
+    # * The tables must have the same hash key and sort key (if present).
+    #
+    # * The tables must have DynamoDB Streams enabled
+    #   (NEW\_AND\_OLD\_IMAGES).
+    #
+    # @option params [required, String] :global_table_name
+    #   The global table name.
+    #
+    # @option params [required, Array<Types::Replica>] :replication_group
+    #   The regions where the global table needs to be created.
+    #
+    # @return [Types::CreateGlobalTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGlobalTableOutput#global_table_description #global_table_description} => Types::GlobalTableDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_global_table({
+    #     global_table_name: "TableName", # required
+    #     replication_group: [ # required
+    #       {
+    #         region_name: "RegionName",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_table_description.replication_group #=> Array
+    #   resp.global_table_description.replication_group[0].region_name #=> String
+    #   resp.global_table_description.global_table_arn #=> String
+    #   resp.global_table_description.creation_date_time #=> Time
+    #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
+    #   resp.global_table_description.global_table_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalTable AWS API Documentation
+    #
+    # @overload create_global_table(params = {})
+    # @param [Hash] params ({})
+    def create_global_table(params = {}, options = {})
+      req = build_request(:create_global_table, params)
+      req.send_request(options)
+    end
+
     # The `CreateTable` operation adds a new table to your account. In an
     # AWS account, table names must be unique within each region. That is,
     # you can have two tables with same name if you create the tables in
@@ -1070,6 +1195,7 @@ module Aws::DynamoDB
     #   resp.table_description.table_size_bytes #=> Integer
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
+    #   resp.table_description.table_id #=> String
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -1103,6 +1229,10 @@ module Aws::DynamoDB
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.restore_summary.source_backup_arn #=> String
+    #   resp.table_description.restore_summary.source_table_arn #=> String
+    #   resp.table_description.restore_summary.restore_date_time #=> Time
+    #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
     #
@@ -1110,6 +1240,73 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def create_table(params = {}, options = {})
       req = build_request(:create_table, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing backup of a table.
+    #
+    # You can call `DeleteBackup` at a maximum rate of 10 times per second.
+    #
+    # @option params [required, String] :backup_arn
+    #   The ARN associated with the backup.
+    #
+    # @return [Types::DeleteBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteBackupOutput#backup_description #backup_description} => Types::BackupDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_backup({
+    #     backup_arn: "BackupArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_description.backup_details.backup_arn #=> String
+    #   resp.backup_description.backup_details.backup_name #=> String
+    #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
+    #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_description.source_table_details.table_name #=> String
+    #   resp.backup_description.source_table_details.table_id #=> String
+    #   resp.backup_description.source_table_details.table_arn #=> String
+    #   resp.backup_description.source_table_details.table_size_bytes #=> Integer
+    #   resp.backup_description.source_table_details.key_schema #=> Array
+    #   resp.backup_description.source_table_details.key_schema[0].attribute_name #=> String
+    #   resp.backup_description.source_table_details.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.backup_description.source_table_details.table_creation_date_time #=> Time
+    #   resp.backup_description.source_table_details.provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.backup_description.source_table_details.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.backup_description.source_table_details.item_count #=> Integer
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes #=> Array
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].index_name #=> String
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema #=> Array
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes #=> Array
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].index_name #=> String
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].key_schema #=> Array
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.backup_description.source_table_feature_details.stream_description.stream_enabled #=> Boolean
+    #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
+    #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackup AWS API Documentation
+    #
+    # @overload delete_backup(params = {})
+    # @param [Hash] params ({})
+    def delete_backup(params = {}, options = {})
+      req = build_request(:delete_backup, params)
       req.send_request(options)
     end
 
@@ -1461,6 +1658,7 @@ module Aws::DynamoDB
     #   resp.table_description.table_size_bytes #=> Integer
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
+    #   resp.table_description.table_id #=> String
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -1494,6 +1692,10 @@ module Aws::DynamoDB
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.restore_summary.source_backup_arn #=> String
+    #   resp.table_description.restore_summary.source_table_arn #=> String
+    #   resp.table_description.restore_summary.restore_date_time #=> Time
+    #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
     #
@@ -1501,6 +1703,141 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def delete_table(params = {}, options = {})
       req = build_request(:delete_table, params)
+      req.send_request(options)
+    end
+
+    # Describes an existing backup of a table.
+    #
+    # You can call `DescribeBackup` at a maximum rate of 10 times per
+    # second.
+    #
+    # @option params [required, String] :backup_arn
+    #   The ARN associated with the backup.
+    #
+    # @return [Types::DescribeBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBackupOutput#backup_description #backup_description} => Types::BackupDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_backup({
+    #     backup_arn: "BackupArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_description.backup_details.backup_arn #=> String
+    #   resp.backup_description.backup_details.backup_name #=> String
+    #   resp.backup_description.backup_details.backup_size_bytes #=> Integer
+    #   resp.backup_description.backup_details.backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_description.backup_details.backup_creation_date_time #=> Time
+    #   resp.backup_description.source_table_details.table_name #=> String
+    #   resp.backup_description.source_table_details.table_id #=> String
+    #   resp.backup_description.source_table_details.table_arn #=> String
+    #   resp.backup_description.source_table_details.table_size_bytes #=> Integer
+    #   resp.backup_description.source_table_details.key_schema #=> Array
+    #   resp.backup_description.source_table_details.key_schema[0].attribute_name #=> String
+    #   resp.backup_description.source_table_details.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.backup_description.source_table_details.table_creation_date_time #=> Time
+    #   resp.backup_description.source_table_details.provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.backup_description.source_table_details.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.backup_description.source_table_details.item_count #=> Integer
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes #=> Array
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].index_name #=> String
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema #=> Array
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.backup_description.source_table_feature_details.local_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes #=> Array
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].index_name #=> String
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].key_schema #=> Array
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.backup_description.source_table_feature_details.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.backup_description.source_table_feature_details.stream_description.stream_enabled #=> Boolean
+    #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
+    #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
+    #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackup AWS API Documentation
+    #
+    # @overload describe_backup(params = {})
+    # @param [Hash] params ({})
+    def describe_backup(params = {}, options = {})
+      req = build_request(:describe_backup, params)
+      req.send_request(options)
+    end
+
+    # Checks the status of the backup restore settings on the specified
+    # table. If backups are enabled, `ContinuousBackupsStatus` will bet set
+    # to ENABLED.
+    #
+    # You can call `DescribeContinuousBackups` at a maximum rate of 10 times
+    # per second.
+    #
+    # @option params [required, String] :table_name
+    #   Name of the table for which the customer wants to check the backup and
+    #   restore settings.
+    #
+    # @return [Types::DescribeContinuousBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeContinuousBackupsOutput#continuous_backups_description #continuous_backups_description} => Types::ContinuousBackupsDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_continuous_backups({
+    #     table_name: "TableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.continuous_backups_description.continuous_backups_status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackups AWS API Documentation
+    #
+    # @overload describe_continuous_backups(params = {})
+    # @param [Hash] params ({})
+    def describe_continuous_backups(params = {}, options = {})
+      req = build_request(:describe_continuous_backups, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the global table.
+    #
+    # @option params [required, String] :global_table_name
+    #   The name of the global table.
+    #
+    # @return [Types::DescribeGlobalTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGlobalTableOutput#global_table_description #global_table_description} => Types::GlobalTableDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_global_table({
+    #     global_table_name: "TableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_table_description.replication_group #=> Array
+    #   resp.global_table_description.replication_group[0].region_name #=> String
+    #   resp.global_table_description.global_table_arn #=> String
+    #   resp.global_table_description.creation_date_time #=> Time
+    #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
+    #   resp.global_table_description.global_table_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTable AWS API Documentation
+    #
+    # @overload describe_global_table(params = {})
+    # @param [Hash] params ({})
+    def describe_global_table(params = {}, options = {})
+      req = build_request(:describe_global_table, params)
       req.send_request(options)
     end
 
@@ -1703,6 +2040,7 @@ module Aws::DynamoDB
     #   resp.table.table_size_bytes #=> Integer
     #   resp.table.item_count #=> Integer
     #   resp.table.table_arn #=> String
+    #   resp.table.table_id #=> String
     #   resp.table.local_secondary_indexes #=> Array
     #   resp.table.local_secondary_indexes[0].index_name #=> String
     #   resp.table.local_secondary_indexes[0].key_schema #=> Array
@@ -1736,6 +2074,10 @@ module Aws::DynamoDB
     #   resp.table.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table.latest_stream_label #=> String
     #   resp.table.latest_stream_arn #=> String
+    #   resp.table.restore_summary.source_backup_arn #=> String
+    #   resp.table.restore_summary.source_table_arn #=> String
+    #   resp.table.restore_summary.restore_date_time #=> Time
+    #   resp.table.restore_summary.restore_in_progress #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable AWS API Documentation
     #
@@ -1970,6 +2312,114 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def get_item(params = {}, options = {})
       req = build_request(:get_item, params)
+      req.send_request(options)
+    end
+
+    # List backups associated with an AWS account. To list backups for a
+    # given table, specify `TableName`. `ListBackups` returns a paginated
+    # list of results with at most 1MB worth of items in a page. You can
+    # also specify a limit for the maximum number of entries to be returned
+    # in a page.
+    #
+    # In the request, start time is inclusive but end time is exclusive.
+    # Note that these limits are for the time at which the original backup
+    # was requested.
+    #
+    # You can call `ListBackups` a maximum of 5 times per second.
+    #
+    # @option params [String] :table_name
+    #   The backups from the table specified by TableName are listed.
+    #
+    # @option params [Integer] :limit
+    #   Maximum number of backups to return at once.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :time_range_lower_bound
+    #   Only backups created after this time are listed. `TimeRangeLowerBound`
+    #   is inclusive.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :time_range_upper_bound
+    #   Only backups created before this time are listed.
+    #   `TimeRangeUpperBound` is exclusive.
+    #
+    # @option params [String] :exclusive_start_backup_arn
+    #   `LastEvaluatedBackupARN` returned by the previous ListBackups call.
+    #
+    # @return [Types::ListBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBackupsOutput#backup_summaries #backup_summaries} => Array&lt;Types::BackupSummary&gt;
+    #   * {Types::ListBackupsOutput#last_evaluated_backup_arn #last_evaluated_backup_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_backups({
+    #     table_name: "TableName",
+    #     limit: 1,
+    #     time_range_lower_bound: Time.now,
+    #     time_range_upper_bound: Time.now,
+    #     exclusive_start_backup_arn: "BackupArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.backup_summaries #=> Array
+    #   resp.backup_summaries[0].table_name #=> String
+    #   resp.backup_summaries[0].table_id #=> String
+    #   resp.backup_summaries[0].table_arn #=> String
+    #   resp.backup_summaries[0].backup_arn #=> String
+    #   resp.backup_summaries[0].backup_name #=> String
+    #   resp.backup_summaries[0].backup_creation_date_time #=> Time
+    #   resp.backup_summaries[0].backup_status #=> String, one of "CREATING", "DELETED", "AVAILABLE"
+    #   resp.backup_summaries[0].backup_size_bytes #=> Integer
+    #   resp.last_evaluated_backup_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackups AWS API Documentation
+    #
+    # @overload list_backups(params = {})
+    # @param [Hash] params ({})
+    def list_backups(params = {}, options = {})
+      req = build_request(:list_backups, params)
+      req.send_request(options)
+    end
+
+    # Lists all the global tables. Only those global tables that have
+    # replicas in the region specified as input are returned.
+    #
+    # @option params [String] :exclusive_start_global_table_name
+    #   The first global table name that this operation will evaluate.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of table names to return.
+    #
+    # @option params [String] :region_name
+    #   Lists the global tables in a specific region.
+    #
+    # @return [Types::ListGlobalTablesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGlobalTablesOutput#global_tables #global_tables} => Array&lt;Types::GlobalTable&gt;
+    #   * {Types::ListGlobalTablesOutput#last_evaluated_global_table_name #last_evaluated_global_table_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_global_tables({
+    #     exclusive_start_global_table_name: "TableName",
+    #     limit: 1,
+    #     region_name: "RegionName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_tables #=> Array
+    #   resp.global_tables[0].global_table_name #=> String
+    #   resp.global_tables[0].replication_group #=> Array
+    #   resp.global_tables[0].replication_group[0].region_name #=> String
+    #   resp.last_evaluated_global_table_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListGlobalTables AWS API Documentation
+    #
+    # @overload list_global_tables(params = {})
+    # @param [Hash] params ({})
+    def list_global_tables(params = {}, options = {})
+      req = build_request(:list_global_tables, params)
       req.send_request(options)
     end
 
@@ -2940,6 +3390,108 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Creates a new table from an existing backup. Any number of users can
+    # execute up to 10 concurrent restores in a given account.
+    #
+    # You can call `RestoreTableFromBackup` at a maximum rate of 10 times
+    # per second.
+    #
+    # You must manually set up the following on the restored table:
+    #
+    # * Auto scaling policies
+    #
+    # * IAM policies
+    #
+    # * Cloudwatch metrics and alarms
+    #
+    # * Tags
+    #
+    # * Time to Live (TTL) settings
+    #
+    # @option params [required, String] :target_table_name
+    #   The name of the new table to which the backup must be restored.
+    #
+    # @option params [required, String] :backup_arn
+    #   The ARN associated with the backup.
+    #
+    # @return [Types::RestoreTableFromBackupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreTableFromBackupOutput#table_description #table_description} => Types::TableDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_table_from_backup({
+    #     target_table_name: "TableName", # required
+    #     backup_arn: "BackupArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_description.attribute_definitions #=> Array
+    #   resp.table_description.attribute_definitions[0].attribute_name #=> String
+    #   resp.table_description.attribute_definitions[0].attribute_type #=> String, one of "S", "N", "B"
+    #   resp.table_description.table_name #=> String
+    #   resp.table_description.key_schema #=> Array
+    #   resp.table_description.key_schema[0].attribute_name #=> String
+    #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.creation_date_time #=> Time
+    #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
+    #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
+    #   resp.table_description.provisioned_throughput.number_of_decreases_today #=> Integer
+    #   resp.table_description.provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.table_description.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.table_description.table_size_bytes #=> Integer
+    #   resp.table_description.item_count #=> Integer
+    #   resp.table_description.table_arn #=> String
+    #   resp.table_description.table_id #=> String
+    #   resp.table_description.local_secondary_indexes #=> Array
+    #   resp.table_description.local_secondary_indexes[0].index_name #=> String
+    #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
+    #   resp.table_description.local_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.table_description.local_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.table_description.local_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table_description.local_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table_description.local_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table_description.local_secondary_indexes[0].index_size_bytes #=> Integer
+    #   resp.table_description.local_secondary_indexes[0].item_count #=> Integer
+    #   resp.table_description.local_secondary_indexes[0].index_arn #=> String
+    #   resp.table_description.global_secondary_indexes #=> Array
+    #   resp.table_description.global_secondary_indexes[0].index_name #=> String
+    #   resp.table_description.global_secondary_indexes[0].key_schema #=> Array
+    #   resp.table_description.global_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.table_description.global_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.table_description.global_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table_description.global_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table_description.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table_description.global_secondary_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.global_secondary_indexes[0].backfilling #=> Boolean
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.last_increase_date_time #=> Time
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.last_decrease_date_time #=> Time
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.number_of_decreases_today #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].index_size_bytes #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].item_count #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].index_arn #=> String
+    #   resp.table_description.stream_specification.stream_enabled #=> Boolean
+    #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
+    #   resp.table_description.latest_stream_label #=> String
+    #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.restore_summary.source_backup_arn #=> String
+    #   resp.table_description.restore_summary.source_table_arn #=> String
+    #   resp.table_description.restore_summary.restore_date_time #=> Time
+    #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup AWS API Documentation
+    #
+    # @overload restore_table_from_backup(params = {})
+    # @param [Hash] params ({})
+    def restore_table_from_backup(params = {}, options = {})
+      req = build_request(:restore_table_from_backup, params)
+      req.send_request(options)
+    end
+
     # The `Scan` operation returns one or more items and item attributes by
     # accessing every item in a table or a secondary index. To have DynamoDB
     # return fewer items, you can provide a `FilterExpression` operation.
@@ -3458,6 +4010,55 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Adds or removes replicas to the specified global table. The global
+    # table should already exist to be able to use this operation.
+    # Currently, the replica to be added should be empty.
+    #
+    # @option params [required, String] :global_table_name
+    #   The global table name.
+    #
+    # @option params [required, Array<Types::ReplicaUpdate>] :replica_updates
+    #   A list of regions that should be added or removed from the global
+    #   table.
+    #
+    # @return [Types::UpdateGlobalTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGlobalTableOutput#global_table_description #global_table_description} => Types::GlobalTableDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_table({
+    #     global_table_name: "TableName", # required
+    #     replica_updates: [ # required
+    #       {
+    #         create: {
+    #           region_name: "RegionName", # required
+    #         },
+    #         delete: {
+    #           region_name: "RegionName", # required
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_table_description.replication_group #=> Array
+    #   resp.global_table_description.replication_group[0].region_name #=> String
+    #   resp.global_table_description.global_table_arn #=> String
+    #   resp.global_table_description.creation_date_time #=> Time
+    #   resp.global_table_description.global_table_status #=> String, one of "CREATING", "ACTIVE", "DELETING", "UPDATING"
+    #   resp.global_table_description.global_table_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTable AWS API Documentation
+    #
+    # @overload update_global_table(params = {})
+    # @param [Hash] params ({})
+    def update_global_table(params = {}, options = {})
+      req = build_request(:update_global_table, params)
       req.send_request(options)
     end
 
@@ -4048,6 +4649,7 @@ module Aws::DynamoDB
     #   resp.table_description.table_size_bytes #=> Integer
     #   resp.table_description.item_count #=> Integer
     #   resp.table_description.table_arn #=> String
+    #   resp.table_description.table_id #=> String
     #   resp.table_description.local_secondary_indexes #=> Array
     #   resp.table_description.local_secondary_indexes[0].index_name #=> String
     #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
@@ -4081,6 +4683,10 @@ module Aws::DynamoDB
     #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.restore_summary.source_backup_arn #=> String
+    #   resp.table_description.restore_summary.source_table_arn #=> String
+    #   resp.table_description.restore_summary.restore_date_time #=> Time
+    #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
     #
@@ -4176,7 +4782,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -725,9 +725,74 @@ module Aws::S3
     #   object_summary.restore_object({
     #     version_id: "ObjectVersionId",
     #     restore_request: {
-    #       days: 1, # required
+    #       days: 1,
     #       glacier_job_parameters: {
     #         tier: "Standard", # required, accepts Standard, Bulk, Expedited
+    #       },
+    #       type: "SELECT", # accepts SELECT
+    #       tier: "Standard", # accepts Standard, Bulk, Expedited
+    #       description: "Description",
+    #       select_parameters: {
+    #         input_serialization: { # required
+    #           csv: {
+    #             file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #             comments: "Comments",
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #         },
+    #         expression_type: "SQL", # required, accepts SQL
+    #         expression: "Expression", # required
+    #         output_serialization: { # required
+    #           csv: {
+    #             quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #         },
+    #       },
+    #       output_location: {
+    #         s3: {
+    #           bucket_name: "BucketName", # required
+    #           prefix: "LocationPrefix", # required
+    #           encryption: {
+    #             encryption_type: "AES256", # required, accepts AES256, aws:kms
+    #             kms_key_id: "SSEKMSKeyId",
+    #             kms_context: "KMSContext",
+    #           },
+    #           canned_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #           access_control_list: [
+    #             {
+    #               grantee: {
+    #                 display_name: "DisplayName",
+    #                 email_address: "EmailAddress",
+    #                 id: "ID",
+    #                 type: "CanonicalUser", # required, accepts CanonicalUser, AmazonCustomerByEmail, Group
+    #                 uri: "URI",
+    #               },
+    #               permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #             },
+    #           ],
+    #           tagging: {
+    #             tag_set: [ # required
+    #               {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #             ],
+    #           },
+    #           user_metadata: [
+    #             {
+    #               name: "MetadataKey",
+    #               value: "MetadataValue",
+    #             },
+    #           ],
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         },
     #       },
     #     },
     #     request_payer: "requester", # accepts requester
@@ -735,6 +800,7 @@ module Aws::S3
     # @param [Hash] options ({})
     # @option options [String] :version_id
     # @option options [Types::RestoreRequest] :restore_request
+    #   Container for restore job parameters.
     # @option options [String] :request_payer
     #   Confirms that the requester knows that she or he will be charged for
     #   the request. Bucket owners need not specify this parameter in their

@@ -173,8 +173,114 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Adds a thing to a thing group.
+    #
+    # @option params [String] :thing_group_name
+    #   The name of the group to which you are adding a thing.
+    #
+    # @option params [String] :thing_group_arn
+    #   The ARN of the group to which you are adding a thing.
+    #
+    # @option params [String] :thing_name
+    #   The name of the thing to add to a group.
+    #
+    # @option params [String] :thing_arn
+    #   The ARN of the thing to add to a group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_thing_to_thing_group({
+    #     thing_group_name: "ThingGroupName",
+    #     thing_group_arn: "ThingGroupArn",
+    #     thing_name: "ThingName",
+    #     thing_arn: "ThingArn",
+    #   })
+    #
+    # @overload add_thing_to_thing_group(params = {})
+    # @param [Hash] params ({})
+    def add_thing_to_thing_group(params = {}, options = {})
+      req = build_request(:add_thing_to_thing_group, params)
+      req.send_request(options)
+    end
+
+    # Associates a group with a continuous job. The following criteria must
+    # be met:
+    #
+    # * The job must have been created with the `targetSelection` field set
+    #   to "CONTINUOUS".
+    #
+    # * The job status must currently be "IN\_PROGRESS".
+    #
+    # * The total number of targets associated with a job must not exceed
+    #   100.
+    #
+    # @option params [required, Array<String>] :targets
+    #   A list of thing group ARNs that define the targets of the job.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #
+    # @option params [String] :comment
+    #   An optional comment string describing why the job was associated with
+    #   the targets.
+    #
+    # @return [Types::AssociateTargetsWithJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateTargetsWithJobResponse#job_arn #job_arn} => String
+    #   * {Types::AssociateTargetsWithJobResponse#job_id #job_id} => String
+    #   * {Types::AssociateTargetsWithJobResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_targets_with_job({
+    #     targets: ["TargetArn"], # required
+    #     job_id: "JobId", # required
+    #     comment: "Comment",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_id #=> String
+    #   resp.description #=> String
+    #
+    # @overload associate_targets_with_job(params = {})
+    # @param [Hash] params ({})
+    def associate_targets_with_job(params = {}, options = {})
+      req = build_request(:associate_targets_with_job, params)
+      req.send_request(options)
+    end
+
+    # Attaches a policy to the specified target.
+    #
+    # @option params [required, String] :policy_name
+    #   The name of the policy to attach.
+    #
+    # @option params [required, String] :target
+    #   The identity to which the policy is attached.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.attach_policy({
+    #     policy_name: "PolicyName", # required
+    #     target: "PolicyTarget", # required
+    #   })
+    #
+    # @overload attach_policy(params = {})
+    # @param [Hash] params ({})
+    def attach_policy(params = {}, options = {})
+      req = build_request(:attach_policy, params)
+      req.send_request(options)
+    end
+
     # Attaches the specified policy to the specified principal (certificate
     # or other credential).
+    #
+    # **Note:** This API is deprecated. Please use AttachPolicy instead.
     #
     # @option params [required, String] :policy_name
     #   The policy name.
@@ -250,6 +356,99 @@ module Aws::IoT
     # @param [Hash] params ({})
     def cancel_certificate_transfer(params = {}, options = {})
       req = build_request(:cancel_certificate_transfer, params)
+      req.send_request(options)
+    end
+
+    # Cancels a job.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #
+    # @option params [String] :comment
+    #   An optional comment string describing why the job was canceled.
+    #
+    # @return [Types::CancelJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelJobResponse#job_arn #job_arn} => String
+    #   * {Types::CancelJobResponse#job_id #job_id} => String
+    #   * {Types::CancelJobResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_job({
+    #     job_id: "JobId", # required
+    #     comment: "Comment",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_id #=> String
+    #   resp.description #=> String
+    #
+    # @overload cancel_job(params = {})
+    # @param [Hash] params ({})
+    def cancel_job(params = {}, options = {})
+      req = build_request(:cancel_job, params)
+      req.send_request(options)
+    end
+
+    # Clears the default authorizer.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @overload clear_default_authorizer(params = {})
+    # @param [Hash] params ({})
+    def clear_default_authorizer(params = {}, options = {})
+      req = build_request(:clear_default_authorizer, params)
+      req.send_request(options)
+    end
+
+    # Creates an authorizer.
+    #
+    # @option params [required, String] :authorizer_name
+    #   The authorizer name.
+    #
+    # @option params [required, String] :authorizer_function_arn
+    #   The ARN of the authorizer's Lambda function.
+    #
+    # @option params [required, String] :token_key_name
+    #   The name of the token key used to extract the token from the HTTP
+    #   headers.
+    #
+    # @option params [required, Hash<String,String>] :token_signing_public_keys
+    #   The public keys used to verify the digital signature returned by your
+    #   custom authentication service.
+    #
+    # @option params [String] :status
+    #   The status of the create authorizer request.
+    #
+    # @return [Types::CreateAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAuthorizerResponse#authorizer_name #authorizer_name} => String
+    #   * {Types::CreateAuthorizerResponse#authorizer_arn #authorizer_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_authorizer({
+    #     authorizer_name: "AuthorizerName", # required
+    #     authorizer_function_arn: "AuthorizerFunctionArn", # required
+    #     token_key_name: "TokenKeyName", # required
+    #     token_signing_public_keys: { # required
+    #       "KeyName" => "KeyValue",
+    #     },
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorizer_name #=> String
+    #   resp.authorizer_arn #=> String
+    #
+    # @overload create_authorizer(params = {})
+    # @param [Hash] params ({})
+    def create_authorizer(params = {}, options = {})
+      req = build_request(:create_authorizer, params)
       req.send_request(options)
     end
 
@@ -331,6 +530,82 @@ module Aws::IoT
     # @param [Hash] params ({})
     def create_certificate_from_csr(params = {}, options = {})
       req = build_request(:create_certificate_from_csr, params)
+      req.send_request(options)
+    end
+
+    # Creates a job.
+    #
+    # @option params [required, String] :job_id
+    #   A job identifier which must be unique for your AWS account. We
+    #   recommend using a UUID. Alpha-numeric characters, "-" and "\_" are
+    #   valid for use here.
+    #
+    # @option params [required, Array<String>] :targets
+    #   A list of things and thing groups to which the job should be sent.
+    #
+    # @option params [String] :document_source
+    #   An S3 link to the job document.
+    #
+    # @option params [String] :document
+    #   The job document.
+    #
+    # @option params [String] :description
+    #   A short text description of the job.
+    #
+    # @option params [Types::PresignedUrlConfig] :presigned_url_config
+    #   Configuration information for pre-signed S3 URLs.
+    #
+    # @option params [String] :target_selection
+    #   Specifies whether the job will continue to run (CONTINUOUS), or will
+    #   be complete after all those things specified as targets have completed
+    #   the job (SNAPSHOT). If continuous, the job may also be run on a thing
+    #   when a change is detected in a target. For example, a job will run on
+    #   a thing when the thing is added to a target group, even after the job
+    #   was completed by all things originally in the group.
+    #
+    # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
+    #   Allows you to create a staged rollout of the job.
+    #
+    # @option params [Hash<String,String>] :document_parameters
+    #   Parameters for the job document.
+    #
+    # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateJobResponse#job_arn #job_arn} => String
+    #   * {Types::CreateJobResponse#job_id #job_id} => String
+    #   * {Types::CreateJobResponse#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_job({
+    #     job_id: "JobId", # required
+    #     targets: ["TargetArn"], # required
+    #     document_source: "JobDocumentSource",
+    #     document: "JobDocument",
+    #     description: "JobDescription",
+    #     presigned_url_config: {
+    #       role_arn: "RoleArn",
+    #       expires_in_sec: 1,
+    #     },
+    #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #     job_executions_rollout_config: {
+    #       maximum_per_minute: 1,
+    #     },
+    #     document_parameters: {
+    #       "ParameterKey" => "ParameterValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_id #=> String
+    #   resp.description #=> String
+    #
+    # @overload create_job(params = {})
+    # @param [Hash] params ({})
+    def create_job(params = {}, options = {})
+      req = build_request(:create_job, params)
       req.send_request(options)
     end
 
@@ -429,7 +704,7 @@ module Aws::IoT
     #
     # @option params [required, String] :policy_document
     #   The JSON document that describes the policy. Minimum length of 1.
-    #   Maximum length of 2048, excluding whitespaces
+    #   Maximum length of 2048, excluding whitespace.
     #
     # @option params [Boolean] :set_as_default
     #   Specifies whether the policy version is set as the default. When this
@@ -466,6 +741,43 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Creates a role alias.
+    #
+    # @option params [required, String] :role_alias
+    #   The role alias that points to a role ARN. This allows you to change
+    #   the role without having to update the device.
+    #
+    # @option params [required, String] :role_arn
+    #   The role ARN.
+    #
+    # @option params [Integer] :credential_duration_seconds
+    #   How long (in seconds) the credentials will be valid.
+    #
+    # @return [Types::CreateRoleAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRoleAliasResponse#role_alias #role_alias} => String
+    #   * {Types::CreateRoleAliasResponse#role_alias_arn #role_alias_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_role_alias({
+    #     role_alias: "RoleAlias", # required
+    #     role_arn: "RoleArn", # required
+    #     credential_duration_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_alias #=> String
+    #   resp.role_alias_arn #=> String
+    #
+    # @overload create_role_alias(params = {})
+    # @param [Hash] params ({})
+    def create_role_alias(params = {}, options = {})
+      req = build_request(:create_role_alias, params)
+      req.send_request(options)
+    end
+
     # Creates a thing record in the thing registry.
     #
     # @option params [required, String] :thing_name
@@ -484,6 +796,7 @@ module Aws::IoT
     #
     #   * {Types::CreateThingResponse#thing_name #thing_name} => String
     #   * {Types::CreateThingResponse#thing_arn #thing_arn} => String
+    #   * {Types::CreateThingResponse#thing_id #thing_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -502,11 +815,58 @@ module Aws::IoT
     #
     #   resp.thing_name #=> String
     #   resp.thing_arn #=> String
+    #   resp.thing_id #=> String
     #
     # @overload create_thing(params = {})
     # @param [Hash] params ({})
     def create_thing(params = {}, options = {})
       req = build_request(:create_thing, params)
+      req.send_request(options)
+    end
+
+    # Create a thing group.
+    #
+    # @option params [required, String] :thing_group_name
+    #   The thing group name to create.
+    #
+    # @option params [String] :parent_group_name
+    #   The name of the parent thing group.
+    #
+    # @option params [Types::ThingGroupProperties] :thing_group_properties
+    #   The thing group properties.
+    #
+    # @return [Types::CreateThingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateThingGroupResponse#thing_group_name #thing_group_name} => String
+    #   * {Types::CreateThingGroupResponse#thing_group_arn #thing_group_arn} => String
+    #   * {Types::CreateThingGroupResponse#thing_group_id #thing_group_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_thing_group({
+    #     thing_group_name: "ThingGroupName", # required
+    #     parent_group_name: "ThingGroupName",
+    #     thing_group_properties: {
+    #       thing_group_description: "ThingGroupDescription",
+    #       attribute_payload: {
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         merge: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.thing_group_name #=> String
+    #   resp.thing_group_arn #=> String
+    #   resp.thing_group_id #=> String
+    #
+    # @overload create_thing_group(params = {})
+    # @param [Hash] params ({})
+    def create_thing_group(params = {}, options = {})
+      req = build_request(:create_thing_group, params)
       req.send_request(options)
     end
 
@@ -524,6 +884,7 @@ module Aws::IoT
     #
     #   * {Types::CreateThingTypeResponse#thing_type_name #thing_type_name} => String
     #   * {Types::CreateThingTypeResponse#thing_type_arn #thing_type_arn} => String
+    #   * {Types::CreateThingTypeResponse#thing_type_id #thing_type_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -539,6 +900,7 @@ module Aws::IoT
     #
     #   resp.thing_type_name #=> String
     #   resp.thing_type_arn #=> String
+    #   resp.thing_type_id #=> String
     #
     # @overload create_thing_type(params = {})
     # @param [Hash] params ({})
@@ -658,6 +1020,26 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Deletes an authorizer.
+    #
+    # @option params [required, String] :authorizer_name
+    #   The name of the authorizer to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_authorizer({
+    #     authorizer_name: "AuthorizerName", # required
+    #   })
+    #
+    # @overload delete_authorizer(params = {})
+    # @param [Hash] params ({})
+    def delete_authorizer(params = {}, options = {})
+      req = build_request(:delete_authorizer, params)
+      req.send_request(options)
+    end
+
     # Deletes a registered CA certificate.
     #
     # @option params [required, String] :certificate_id
@@ -688,12 +1070,16 @@ module Aws::IoT
     # @option params [required, String] :certificate_id
     #   The ID of the certificate.
     #
+    # @option params [Boolean] :force_delete
+    #   Forces a certificate request to be deleted.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_certificate({
     #     certificate_id: "CertificateId", # required
+    #     force_delete: false,
     #   })
     #
     # @overload delete_certificate(params = {})
@@ -773,6 +1159,26 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Deletes a role alias
+    #
+    # @option params [required, String] :role_alias
+    #   The role alias to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_role_alias({
+    #     role_alias: "RoleAlias", # required
+    #   })
+    #
+    # @overload delete_role_alias(params = {})
+    # @param [Hash] params ({})
+    def delete_role_alias(params = {}, options = {})
+      req = build_request(:delete_role_alias, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified thing.
     #
     # @option params [required, String] :thing_name
@@ -797,6 +1203,30 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_thing(params = {}, options = {})
       req = build_request(:delete_thing, params)
+      req.send_request(options)
+    end
+
+    # Deletes a thing group.
+    #
+    # @option params [required, String] :thing_group_name
+    #   The name of the thing group to delete.
+    #
+    # @option params [Integer] :expected_version
+    #   The expected version of the thing group to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_thing_group({
+    #     thing_group_name: "ThingGroupName", # required
+    #     expected_version: 1,
+    #   })
+    #
+    # @overload delete_thing_group(params = {})
+    # @param [Hash] params ({})
+    def delete_thing_group(params = {}, options = {})
+      req = build_request(:delete_thing_group, params)
       req.send_request(options)
     end
 
@@ -825,7 +1255,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Deletes the specified rule.
+    # Deletes the rule.
     #
     # @option params [required, String] :rule_name
     #   The name of the rule.
@@ -842,6 +1272,31 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_topic_rule(params = {}, options = {})
       req = build_request(:delete_topic_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes a logging level.
+    #
+    # @option params [required, String] :target_type
+    #   The type of resource for which you are configuring logging. Must be
+    #   `THING_Group`.
+    #
+    # @option params [required, String] :target_name
+    #   The name of the resource for which you are configuring logging.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_v2_logging_level({
+    #     target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP
+    #     target_name: "LogTargetName", # required
+    #   })
+    #
+    # @overload delete_v2_logging_level(params = {})
+    # @param [Hash] params ({})
+    def delete_v2_logging_level(params = {}, options = {})
+      req = build_request(:delete_v2_logging_level, params)
       req.send_request(options)
     end
 
@@ -872,6 +1327,40 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Describes an authorizer.
+    #
+    # @option params [required, String] :authorizer_name
+    #   The name of the authorizer to describe.
+    #
+    # @return [Types::DescribeAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAuthorizerResponse#authorizer_description #authorizer_description} => Types::AuthorizerDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_authorizer({
+    #     authorizer_name: "AuthorizerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorizer_description.authorizer_name #=> String
+    #   resp.authorizer_description.authorizer_arn #=> String
+    #   resp.authorizer_description.authorizer_function_arn #=> String
+    #   resp.authorizer_description.token_key_name #=> String
+    #   resp.authorizer_description.token_signing_public_keys #=> Hash
+    #   resp.authorizer_description.token_signing_public_keys["KeyName"] #=> String
+    #   resp.authorizer_description.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.authorizer_description.creation_date #=> Time
+    #   resp.authorizer_description.last_modified_date #=> Time
+    #
+    # @overload describe_authorizer(params = {})
+    # @param [Hash] params ({})
+    def describe_authorizer(params = {}, options = {})
+      req = build_request(:describe_authorizer, params)
+      req.send_request(options)
+    end
+
     # Describes a registered CA certificate.
     #
     # @option params [required, String] :certificate_id
@@ -880,6 +1369,7 @@ module Aws::IoT
     # @return [Types::DescribeCACertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeCACertificateResponse#certificate_description #certificate_description} => Types::CACertificateDescription
+    #   * {Types::DescribeCACertificateResponse#registration_config #registration_config} => Types::RegistrationConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -896,6 +1386,8 @@ module Aws::IoT
     #   resp.certificate_description.owned_by #=> String
     #   resp.certificate_description.creation_date #=> Time
     #   resp.certificate_description.auto_registration_status #=> String, one of "ENABLE", "DISABLE"
+    #   resp.registration_config.template_body #=> String
+    #   resp.registration_config.role_arn #=> String
     #
     # @overload describe_ca_certificate(params = {})
     # @param [Hash] params ({})
@@ -904,7 +1396,8 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets information about the specified certificate.
+    # Gets information about the specified certificate. You may specify the
+    # certificate using either its ID or PEM.
     #
     # @option params [required, String] :certificate_id
     #   The ID of the certificate.
@@ -943,11 +1436,45 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Describes the default authorizer.
+    #
+    # @return [Types::DescribeDefaultAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDefaultAuthorizerResponse#authorizer_description #authorizer_description} => Types::AuthorizerDescription
+    #
+    # @example Response structure
+    #
+    #   resp.authorizer_description.authorizer_name #=> String
+    #   resp.authorizer_description.authorizer_arn #=> String
+    #   resp.authorizer_description.authorizer_function_arn #=> String
+    #   resp.authorizer_description.token_key_name #=> String
+    #   resp.authorizer_description.token_signing_public_keys #=> Hash
+    #   resp.authorizer_description.token_signing_public_keys["KeyName"] #=> String
+    #   resp.authorizer_description.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.authorizer_description.creation_date #=> Time
+    #   resp.authorizer_description.last_modified_date #=> Time
+    #
+    # @overload describe_default_authorizer(params = {})
+    # @param [Hash] params ({})
+    def describe_default_authorizer(params = {}, options = {})
+      req = build_request(:describe_default_authorizer, params)
+      req.send_request(options)
+    end
+
     # Returns a unique endpoint specific to the AWS account making the call.
+    #
+    # @option params [String] :endpoint_type
+    #   The endpoint type.
     #
     # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEndpointResponse#endpoint_address #endpoint_address} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_endpoint({
+    #     endpoint_type: "EndpointType",
+    #   })
     #
     # @example Response structure
     #
@@ -960,6 +1487,184 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Describes event configurations.
+    #
+    # @return [Types::DescribeEventConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventConfigurationsResponse#event_configurations #event_configurations} => Hash&lt;String,Types::Configuration&gt;
+    #   * {Types::DescribeEventConfigurationsResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeEventConfigurationsResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Response structure
+    #
+    #   resp.event_configurations #=> Hash
+    #   resp.event_configurations["EventType"].enabled #=> Boolean
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #
+    # @overload describe_event_configurations(params = {})
+    # @param [Hash] params ({})
+    def describe_event_configurations(params = {}, options = {})
+      req = build_request(:describe_event_configurations, params)
+      req.send_request(options)
+    end
+
+    # Describes a search index.
+    #
+    # @option params [required, String] :index_name
+    #   The index name.
+    #
+    # @return [Types::DescribeIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeIndexResponse#index_name #index_name} => String
+    #   * {Types::DescribeIndexResponse#index_status #index_status} => String
+    #   * {Types::DescribeIndexResponse#schema #schema} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_index({
+    #     index_name: "IndexName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.index_name #=> String
+    #   resp.index_status #=> String, one of "ACTIVE", "BUILDING", "REBUILDING"
+    #   resp.schema #=> String
+    #
+    # @overload describe_index(params = {})
+    # @param [Hash] params ({})
+    def describe_index(params = {}, options = {})
+      req = build_request(:describe_index, params)
+      req.send_request(options)
+    end
+
+    # Describes a job.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #
+    # @return [Types::DescribeJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeJobResponse#document_source #document_source} => String
+    #   * {Types::DescribeJobResponse#job #job} => Types::Job
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document_source #=> String
+    #   resp.job.job_arn #=> String
+    #   resp.job.job_id #=> String
+    #   resp.job.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
+    #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED"
+    #   resp.job.comment #=> String
+    #   resp.job.targets #=> Array
+    #   resp.job.targets[0] #=> String
+    #   resp.job.description #=> String
+    #   resp.job.presigned_url_config.role_arn #=> String
+    #   resp.job.presigned_url_config.expires_in_sec #=> Integer
+    #   resp.job.job_executions_rollout_config.maximum_per_minute #=> Integer
+    #   resp.job.created_at #=> Time
+    #   resp.job.last_updated_at #=> Time
+    #   resp.job.completed_at #=> Time
+    #   resp.job.job_process_details.processing_targets #=> Array
+    #   resp.job.job_process_details.processing_targets[0] #=> String
+    #   resp.job.job_process_details.number_of_canceled_things #=> Integer
+    #   resp.job.job_process_details.number_of_succeeded_things #=> Integer
+    #   resp.job.job_process_details.number_of_failed_things #=> Integer
+    #   resp.job.job_process_details.number_of_rejected_things #=> Integer
+    #   resp.job.job_process_details.number_of_queued_things #=> Integer
+    #   resp.job.job_process_details.number_of_in_progress_things #=> Integer
+    #   resp.job.job_process_details.number_of_removed_things #=> Integer
+    #   resp.job.document_parameters #=> Hash
+    #   resp.job.document_parameters["ParameterKey"] #=> String
+    #
+    # @overload describe_job(params = {})
+    # @param [Hash] params ({})
+    def describe_job(params = {}, options = {})
+      req = build_request(:describe_job, params)
+      req.send_request(options)
+    end
+
+    # Describes a job execution.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing on which the job execution is running.
+    #
+    # @option params [Integer] :execution_number
+    #   A string (consisting of the digits "0" through "9" which is used
+    #   to specify a particular job execution on a particular device.
+    #
+    # @return [Types::DescribeJobExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeJobExecutionResponse#execution #execution} => Types::JobExecution
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_job_execution({
+    #     job_id: "JobId", # required
+    #     thing_name: "ThingName", # required
+    #     execution_number: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution.job_id #=> String
+    #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution.status_details.details_map #=> Hash
+    #   resp.execution.status_details.details_map["DetailsKey"] #=> String
+    #   resp.execution.thing_arn #=> String
+    #   resp.execution.queued_at #=> Time
+    #   resp.execution.started_at #=> Time
+    #   resp.execution.last_updated_at #=> Time
+    #   resp.execution.execution_number #=> Integer
+    #
+    # @overload describe_job_execution(params = {})
+    # @param [Hash] params ({})
+    def describe_job_execution(params = {}, options = {})
+      req = build_request(:describe_job_execution, params)
+      req.send_request(options)
+    end
+
+    # Describes a role alias.
+    #
+    # @option params [required, String] :role_alias
+    #   The role alias to describe.
+    #
+    # @return [Types::DescribeRoleAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRoleAliasResponse#role_alias_description #role_alias_description} => Types::RoleAliasDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_role_alias({
+    #     role_alias: "RoleAlias", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_alias_description.role_alias #=> String
+    #   resp.role_alias_description.role_arn #=> String
+    #   resp.role_alias_description.owner #=> String
+    #   resp.role_alias_description.credential_duration_seconds #=> Integer
+    #   resp.role_alias_description.creation_date #=> Time
+    #   resp.role_alias_description.last_modified_date #=> Time
+    #
+    # @overload describe_role_alias(params = {})
+    # @param [Hash] params ({})
+    def describe_role_alias(params = {}, options = {})
+      req = build_request(:describe_role_alias, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified thing.
     #
     # @option params [required, String] :thing_name
@@ -969,6 +1674,8 @@ module Aws::IoT
     #
     #   * {Types::DescribeThingResponse#default_client_id #default_client_id} => String
     #   * {Types::DescribeThingResponse#thing_name #thing_name} => String
+    #   * {Types::DescribeThingResponse#thing_id #thing_id} => String
+    #   * {Types::DescribeThingResponse#thing_arn #thing_arn} => String
     #   * {Types::DescribeThingResponse#thing_type_name #thing_type_name} => String
     #   * {Types::DescribeThingResponse#attributes #attributes} => Hash&lt;String,String&gt;
     #   * {Types::DescribeThingResponse#version #version} => Integer
@@ -983,6 +1690,8 @@ module Aws::IoT
     #
     #   resp.default_client_id #=> String
     #   resp.thing_name #=> String
+    #   resp.thing_id #=> String
+    #   resp.thing_arn #=> String
     #   resp.thing_type_name #=> String
     #   resp.attributes #=> Hash
     #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -995,6 +1704,97 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Describe a thing group.
+    #
+    # @option params [required, String] :thing_group_name
+    #   The name of the thing group.
+    #
+    # @return [Types::DescribeThingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeThingGroupResponse#thing_group_name #thing_group_name} => String
+    #   * {Types::DescribeThingGroupResponse#thing_group_id #thing_group_id} => String
+    #   * {Types::DescribeThingGroupResponse#thing_group_arn #thing_group_arn} => String
+    #   * {Types::DescribeThingGroupResponse#version #version} => Integer
+    #   * {Types::DescribeThingGroupResponse#thing_group_properties #thing_group_properties} => Types::ThingGroupProperties
+    #   * {Types::DescribeThingGroupResponse#thing_group_metadata #thing_group_metadata} => Types::ThingGroupMetadata
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_thing_group({
+    #     thing_group_name: "ThingGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.thing_group_name #=> String
+    #   resp.thing_group_id #=> String
+    #   resp.thing_group_arn #=> String
+    #   resp.version #=> Integer
+    #   resp.thing_group_properties.thing_group_description #=> String
+    #   resp.thing_group_properties.attribute_payload.attributes #=> Hash
+    #   resp.thing_group_properties.attribute_payload.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.thing_group_properties.attribute_payload.merge #=> Boolean
+    #   resp.thing_group_metadata.parent_group_name #=> String
+    #   resp.thing_group_metadata.root_to_parent_thing_groups #=> Array
+    #   resp.thing_group_metadata.root_to_parent_thing_groups[0].group_name #=> String
+    #   resp.thing_group_metadata.root_to_parent_thing_groups[0].group_arn #=> String
+    #   resp.thing_group_metadata.creation_date #=> Time
+    #
+    # @overload describe_thing_group(params = {})
+    # @param [Hash] params ({})
+    def describe_thing_group(params = {}, options = {})
+      req = build_request(:describe_thing_group, params)
+      req.send_request(options)
+    end
+
+    # Describes a bulk thing provisioning task.
+    #
+    # @option params [required, String] :task_id
+    #   The task ID.
+    #
+    # @return [Types::DescribeThingRegistrationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeThingRegistrationTaskResponse#task_id #task_id} => String
+    #   * {Types::DescribeThingRegistrationTaskResponse#creation_date #creation_date} => Time
+    #   * {Types::DescribeThingRegistrationTaskResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::DescribeThingRegistrationTaskResponse#template_body #template_body} => String
+    #   * {Types::DescribeThingRegistrationTaskResponse#input_file_bucket #input_file_bucket} => String
+    #   * {Types::DescribeThingRegistrationTaskResponse#input_file_key #input_file_key} => String
+    #   * {Types::DescribeThingRegistrationTaskResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeThingRegistrationTaskResponse#status #status} => String
+    #   * {Types::DescribeThingRegistrationTaskResponse#message #message} => String
+    #   * {Types::DescribeThingRegistrationTaskResponse#success_count #success_count} => Integer
+    #   * {Types::DescribeThingRegistrationTaskResponse#failure_count #failure_count} => Integer
+    #   * {Types::DescribeThingRegistrationTaskResponse#percentage_progress #percentage_progress} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_thing_registration_task({
+    #     task_id: "TaskId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_id #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #   resp.template_body #=> String
+    #   resp.input_file_bucket #=> String
+    #   resp.input_file_key #=> String
+    #   resp.role_arn #=> String
+    #   resp.status #=> String, one of "InProgress", "Completed", "Failed", "Cancelled", "Cancelling"
+    #   resp.message #=> String
+    #   resp.success_count #=> Integer
+    #   resp.failure_count #=> Integer
+    #   resp.percentage_progress #=> Integer
+    #
+    # @overload describe_thing_registration_task(params = {})
+    # @param [Hash] params ({})
+    def describe_thing_registration_task(params = {}, options = {})
+      req = build_request(:describe_thing_registration_task, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified thing type.
     #
     # @option params [required, String] :thing_type_name
@@ -1003,6 +1803,8 @@ module Aws::IoT
     # @return [Types::DescribeThingTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeThingTypeResponse#thing_type_name #thing_type_name} => String
+    #   * {Types::DescribeThingTypeResponse#thing_type_id #thing_type_id} => String
+    #   * {Types::DescribeThingTypeResponse#thing_type_arn #thing_type_arn} => String
     #   * {Types::DescribeThingTypeResponse#thing_type_properties #thing_type_properties} => Types::ThingTypeProperties
     #   * {Types::DescribeThingTypeResponse#thing_type_metadata #thing_type_metadata} => Types::ThingTypeMetadata
     #
@@ -1015,6 +1817,8 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.thing_type_name #=> String
+    #   resp.thing_type_id #=> String
+    #   resp.thing_type_arn #=> String
     #   resp.thing_type_properties.thing_type_description #=> String
     #   resp.thing_type_properties.searchable_attributes #=> Array
     #   resp.thing_type_properties.searchable_attributes[0] #=> String
@@ -1029,7 +1833,33 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Detaches a policy from the specified target.
+    #
+    # @option params [required, String] :policy_name
+    #   The policy to detach.
+    #
+    # @option params [required, String] :target
+    #   The target from which the policy will be detached.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detach_policy({
+    #     policy_name: "PolicyName", # required
+    #     target: "PolicyTarget", # required
+    #   })
+    #
+    # @overload detach_policy(params = {})
+    # @param [Hash] params ({})
+    def detach_policy(params = {}, options = {})
+      req = build_request(:detach_policy, params)
+      req.send_request(options)
+    end
+
     # Removes the specified policy from the specified certificate.
+    #
+    # **Note:** This API is deprecated. Please use DetachPolicy instead.
     #
     # @option params [required, String] :policy_name
     #   The name of the policy to detach.
@@ -1082,7 +1912,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Disables the specified rule.
+    # Disables the rule.
     #
     # @option params [required, String] :rule_name
     #   The name of the rule to disable.
@@ -1102,7 +1932,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Enables the specified rule.
+    # Enables the rule.
     #
     # @option params [required, String] :rule_name
     #   The name of the topic rule to enable.
@@ -1119,6 +1949,86 @@ module Aws::IoT
     # @param [Hash] params ({})
     def enable_topic_rule(params = {}, options = {})
       req = build_request(:enable_topic_rule, params)
+      req.send_request(options)
+    end
+
+    # Gets effective policies.
+    #
+    # @option params [String] :principal
+    #   The principal.
+    #
+    # @option params [String] :cognito_identity_pool_id
+    #   The Cognito identity pool ID.
+    #
+    # @option params [String] :thing_name
+    #   The thing name.
+    #
+    # @return [Types::GetEffectivePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEffectivePoliciesResponse#effective_policies #effective_policies} => Array&lt;Types::EffectivePolicy&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_effective_policies({
+    #     principal: "Principal",
+    #     cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #     thing_name: "ThingName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.effective_policies #=> Array
+    #   resp.effective_policies[0].policy_name #=> String
+    #   resp.effective_policies[0].policy_arn #=> String
+    #   resp.effective_policies[0].policy_document #=> String
+    #
+    # @overload get_effective_policies(params = {})
+    # @param [Hash] params ({})
+    def get_effective_policies(params = {}, options = {})
+      req = build_request(:get_effective_policies, params)
+      req.send_request(options)
+    end
+
+    # Gets the search configuration.
+    #
+    # @return [Types::GetIndexingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIndexingConfigurationResponse#thing_indexing_configuration #thing_indexing_configuration} => Types::ThingIndexingConfiguration
+    #
+    # @example Response structure
+    #
+    #   resp.thing_indexing_configuration.thing_indexing_mode #=> String, one of "OFF", "REGISTRY", "REGISTRY_AND_SHADOW"
+    #
+    # @overload get_indexing_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_indexing_configuration(params = {}, options = {})
+      req = build_request(:get_indexing_configuration, params)
+      req.send_request(options)
+    end
+
+    # Gets a job document.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #
+    # @return [Types::GetJobDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJobDocumentResponse#document #document} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_job_document({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.document #=> String
+    #
+    # @overload get_job_document(params = {})
+    # @param [Hash] params ({})
+    def get_job_document(params = {}, options = {})
+      req = build_request(:get_job_document, params)
       req.send_request(options)
     end
 
@@ -1230,7 +2140,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets information about the specified rule.
+    # Gets information about the rule.
     #
     # @option params [required, String] :rule_name
     #   The name of the rule.
@@ -1309,6 +2219,111 @@ module Aws::IoT
     # @param [Hash] params ({})
     def get_topic_rule(params = {}, options = {})
       req = build_request(:get_topic_rule, params)
+      req.send_request(options)
+    end
+
+    # Gets the fine grained logging options.
+    #
+    # @return [Types::GetV2LoggingOptionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetV2LoggingOptionsResponse#role_arn #role_arn} => String
+    #   * {Types::GetV2LoggingOptionsResponse#default_log_level #default_log_level} => String
+    #   * {Types::GetV2LoggingOptionsResponse#disable_all_logs #disable_all_logs} => Boolean
+    #
+    # @example Response structure
+    #
+    #   resp.role_arn #=> String
+    #   resp.default_log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
+    #   resp.disable_all_logs #=> Boolean
+    #
+    # @overload get_v2_logging_options(params = {})
+    # @param [Hash] params ({})
+    def get_v2_logging_options(params = {}, options = {})
+      req = build_request(:get_v2_logging_options, params)
+      req.send_request(options)
+    end
+
+    # Lists the policies attached to the specified thing group.
+    #
+    # @option params [required, String] :target
+    #   The group for which the policies will be listed.
+    #
+    # @option params [Boolean] :recursive
+    #   When true, recursively list attached policies.
+    #
+    # @option params [String] :marker
+    #   The token to retrieve the next set of results.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of results to be returned per request.
+    #
+    # @return [Types::ListAttachedPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAttachedPoliciesResponse#policies #policies} => Array&lt;Types::Policy&gt;
+    #   * {Types::ListAttachedPoliciesResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_attached_policies({
+    #     target: "PolicyTarget", # required
+    #     recursive: false,
+    #     marker: "Marker",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policies #=> Array
+    #   resp.policies[0].policy_name #=> String
+    #   resp.policies[0].policy_arn #=> String
+    #   resp.next_marker #=> String
+    #
+    # @overload list_attached_policies(params = {})
+    # @param [Hash] params ({})
+    def list_attached_policies(params = {}, options = {})
+      req = build_request(:list_attached_policies, params)
+      req.send_request(options)
+    end
+
+    # Lists the authorizers registered in your account.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :marker
+    #   A marker used to get the next set of results.
+    #
+    # @option params [Boolean] :ascending_order
+    #   Return the list of authorizers in ascending alphabetical order.
+    #
+    # @option params [String] :status
+    #   The status of the list authorizers request.
+    #
+    # @return [Types::ListAuthorizersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAuthorizersResponse#authorizers #authorizers} => Array&lt;Types::AuthorizerSummary&gt;
+    #   * {Types::ListAuthorizersResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_authorizers({
+    #     page_size: 1,
+    #     marker: "Marker",
+    #     ascending_order: false,
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorizers #=> Array
+    #   resp.authorizers[0].authorizer_name #=> String
+    #   resp.authorizers[0].authorizer_arn #=> String
+    #   resp.next_marker #=> String
+    #
+    # @overload list_authorizers(params = {})
+    # @param [Hash] params ({})
+    def list_authorizers(params = {}, options = {})
+      req = build_request(:list_authorizers, params)
       req.send_request(options)
     end
 
@@ -1445,7 +2460,198 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Lists certificates that are being transfered but not yet accepted.
+    # Lists the search indices.
+    #
+    # @option params [String] :next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListIndicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIndicesResponse#index_names #index_names} => Array&lt;String&gt;
+    #   * {Types::ListIndicesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_indices({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.index_names #=> Array
+    #   resp.index_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_indices(params = {})
+    # @param [Hash] params ({})
+    def list_indices(params = {}, options = {})
+      req = build_request(:list_indices, params)
+      req.send_request(options)
+    end
+
+    # Lists the job executions for a job.
+    #
+    # @option params [required, String] :job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #
+    # @option params [String] :status
+    #   The status of the job.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @return [Types::ListJobExecutionsForJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJobExecutionsForJobResponse#execution_summaries #execution_summaries} => Array&lt;Types::JobExecutionSummaryForJob&gt;
+    #   * {Types::ListJobExecutionsForJobResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_job_executions_for_job({
+    #     job_id: "JobId", # required
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_summaries #=> Array
+    #   resp.execution_summaries[0].thing_arn #=> String
+    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution_summaries[0].job_execution_summary.queued_at #=> Time
+    #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
+    #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
+    #   resp.execution_summaries[0].job_execution_summary.execution_number #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @overload list_job_executions_for_job(params = {})
+    # @param [Hash] params ({})
+    def list_job_executions_for_job(params = {}, options = {})
+      req = build_request(:list_job_executions_for_job, params)
+      req.send_request(options)
+    end
+
+    # Lists the job executions for the specified thing.
+    #
+    # @option params [required, String] :thing_name
+    #   The thing name.
+    #
+    # @option params [String] :status
+    #   An optional filter that lets you search for jobs that have the
+    #   specified status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to be returned per request.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @return [Types::ListJobExecutionsForThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJobExecutionsForThingResponse#execution_summaries #execution_summaries} => Array&lt;Types::JobExecutionSummaryForThing&gt;
+    #   * {Types::ListJobExecutionsForThingResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_job_executions_for_thing({
+    #     thing_name: "ThingName", # required
+    #     status: "QUEUED", # accepts QUEUED, IN_PROGRESS, SUCCEEDED, FAILED, REJECTED, REMOVED, CANCELED
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.execution_summaries #=> Array
+    #   resp.execution_summaries[0].job_id #=> String
+    #   resp.execution_summaries[0].job_execution_summary.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution_summaries[0].job_execution_summary.queued_at #=> Time
+    #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
+    #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
+    #   resp.execution_summaries[0].job_execution_summary.execution_number #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @overload list_job_executions_for_thing(params = {})
+    # @param [Hash] params ({})
+    def list_job_executions_for_thing(params = {}, options = {})
+      req = build_request(:list_job_executions_for_thing, params)
+      req.send_request(options)
+    end
+
+    # Lists jobs.
+    #
+    # @option params [String] :status
+    #   An optional filter that lets you search for jobs that have the
+    #   specified status.
+    #
+    # @option params [String] :target_selection
+    #   Specifies whether the job will continue to run (CONTINUOUS), or will
+    #   be complete after all those things specified as targets have completed
+    #   the job (SNAPSHOT). If continuous, the job may also be run on a thing
+    #   when a change is detected in a target. For example, a job will run on
+    #   a thing when the thing is added to a target group, even after the job
+    #   was completed by all things originally in the group.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per request.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @option params [String] :thing_group_name
+    #   A filter that limits the returned jobs to those for the specified
+    #   group.
+    #
+    # @option params [String] :thing_group_id
+    #   A filter that limits the returned jobs to those for the specified
+    #   group.
+    #
+    # @return [Types::ListJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListJobsResponse#jobs #jobs} => Array&lt;Types::JobSummary&gt;
+    #   * {Types::ListJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_jobs({
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED
+    #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     thing_group_name: "ThingGroupName",
+    #     thing_group_id: "ThingGroupId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.jobs #=> Array
+    #   resp.jobs[0].job_arn #=> String
+    #   resp.jobs[0].job_id #=> String
+    #   resp.jobs[0].thing_group_id #=> String
+    #   resp.jobs[0].target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
+    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED"
+    #   resp.jobs[0].created_at #=> Time
+    #   resp.jobs[0].last_updated_at #=> Time
+    #   resp.jobs[0].completed_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_jobs(params = {}, options = {})
+      req = build_request(:list_jobs, params)
+      req.send_request(options)
+    end
+
+    # Lists certificates that are being transferred but not yet accepted.
     #
     # @option params [Integer] :page_size
     #   The result page size.
@@ -1529,6 +2735,9 @@ module Aws::IoT
 
     # Lists the principals associated with the specified policy.
     #
+    # **Note:** This API is deprecated. Please use ListTargetsForPolicy
+    # instead.
+    #
     # @option params [required, String] :policy_name
     #   The policy name.
     #
@@ -1603,6 +2812,9 @@ module Aws::IoT
     # Cognito identity, the ID must be in [AmazonCognito Identity
     # format][1].
     #
+    # **Note:** This API is deprecated. Please use ListAttachedPolicies
+    # instead.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax
@@ -1651,8 +2863,8 @@ module Aws::IoT
     # Lists the things associated with the specified principal.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results, or **null** if there are no
-    #   additional results.
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -1686,6 +2898,168 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists the role aliases registered in your account.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :marker
+    #   A marker used to get the next set of results.
+    #
+    # @option params [Boolean] :ascending_order
+    #   Return the list of role aliases in ascending alphabetical order.
+    #
+    # @return [Types::ListRoleAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRoleAliasesResponse#role_aliases #role_aliases} => Array&lt;String&gt;
+    #   * {Types::ListRoleAliasesResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_role_aliases({
+    #     page_size: 1,
+    #     marker: "Marker",
+    #     ascending_order: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_aliases #=> Array
+    #   resp.role_aliases[0] #=> String
+    #   resp.next_marker #=> String
+    #
+    # @overload list_role_aliases(params = {})
+    # @param [Hash] params ({})
+    def list_role_aliases(params = {}, options = {})
+      req = build_request(:list_role_aliases, params)
+      req.send_request(options)
+    end
+
+    # List targets for the specified policy.
+    #
+    # @option params [required, String] :policy_name
+    #   The policy name.
+    #
+    # @option params [String] :marker
+    #   A marker used to get the next set of results.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListTargetsForPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTargetsForPolicyResponse#targets #targets} => Array&lt;String&gt;
+    #   * {Types::ListTargetsForPolicyResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_targets_for_policy({
+    #     policy_name: "PolicyName", # required
+    #     marker: "Marker",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.targets #=> Array
+    #   resp.targets[0] #=> String
+    #   resp.next_marker #=> String
+    #
+    # @overload list_targets_for_policy(params = {})
+    # @param [Hash] params ({})
+    def list_targets_for_policy(params = {}, options = {})
+      req = build_request(:list_targets_for_policy, params)
+      req.send_request(options)
+    end
+
+    # List the thing groups in your account.
+    #
+    # @option params [String] :next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :parent_group
+    #   A filter that limits the results to those with the specified parent
+    #   group.
+    #
+    # @option params [String] :name_prefix_filter
+    #   A filter that limits the results to those with the specified name
+    #   prefix.
+    #
+    # @option params [Boolean] :recursive
+    #   If true, return child groups as well.
+    #
+    # @return [Types::ListThingGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThingGroupsResponse#thing_groups #thing_groups} => Array&lt;Types::GroupNameAndArn&gt;
+    #   * {Types::ListThingGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_thing_groups({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     parent_group: "ThingGroupName",
+    #     name_prefix_filter: "ThingGroupName",
+    #     recursive: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.thing_groups #=> Array
+    #   resp.thing_groups[0].group_name #=> String
+    #   resp.thing_groups[0].group_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_thing_groups(params = {})
+    # @param [Hash] params ({})
+    def list_thing_groups(params = {}, options = {})
+      req = build_request(:list_thing_groups, params)
+      req.send_request(options)
+    end
+
+    # List the thing groups to which the specified thing belongs.
+    #
+    # @option params [required, String] :thing_name
+    #   The thing name.
+    #
+    # @option params [String] :next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListThingGroupsForThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThingGroupsForThingResponse#thing_groups #thing_groups} => Array&lt;Types::GroupNameAndArn&gt;
+    #   * {Types::ListThingGroupsForThingResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_thing_groups_for_thing({
+    #     thing_name: "ThingName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.thing_groups #=> Array
+    #   resp.thing_groups[0].group_name #=> String
+    #   resp.thing_groups[0].group_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_thing_groups_for_thing(params = {})
+    # @param [Hash] params ({})
+    def list_thing_groups_for_thing(params = {}, options = {})
+      req = build_request(:list_thing_groups_for_thing, params)
+      req.send_request(options)
+    end
+
     # Lists the principals associated with the specified thing.
     #
     # @option params [required, String] :thing_name
@@ -1710,6 +3084,87 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_thing_principals(params = {}, options = {})
       req = build_request(:list_thing_principals, params)
+      req.send_request(options)
+    end
+
+    # Information about the thing registration tasks.
+    #
+    # @option params [required, String] :task_id
+    #   The id of the task.
+    #
+    # @option params [required, String] :report_type
+    #   The type of task report.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per request.
+    #
+    # @return [Types::ListThingRegistrationTaskReportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThingRegistrationTaskReportsResponse#resource_links #resource_links} => Array&lt;String&gt;
+    #   * {Types::ListThingRegistrationTaskReportsResponse#report_type #report_type} => String
+    #   * {Types::ListThingRegistrationTaskReportsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_thing_registration_task_reports({
+    #     task_id: "TaskId", # required
+    #     report_type: "ERRORS", # required, accepts ERRORS, RESULTS
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_links #=> Array
+    #   resp.resource_links[0] #=> String
+    #   resp.report_type #=> String, one of "ERRORS", "RESULTS"
+    #   resp.next_token #=> String
+    #
+    # @overload list_thing_registration_task_reports(params = {})
+    # @param [Hash] params ({})
+    def list_thing_registration_task_reports(params = {}, options = {})
+      req = build_request(:list_thing_registration_task_reports, params)
+      req.send_request(options)
+    end
+
+    # List bulk thing provisioning tasks.
+    #
+    # @option params [String] :next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :status
+    #   The status of the bulk thing provisioning task.
+    #
+    # @return [Types::ListThingRegistrationTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThingRegistrationTasksResponse#task_ids #task_ids} => Array&lt;String&gt;
+    #   * {Types::ListThingRegistrationTasksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_thing_registration_tasks({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     status: "InProgress", # accepts InProgress, Completed, Failed, Cancelled, Cancelling
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_ids #=> Array
+    #   resp.task_ids[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_thing_registration_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_thing_registration_tasks(params = {}, options = {})
+      req = build_request(:list_thing_registration_tasks, params)
       req.send_request(options)
     end
 
@@ -1742,6 +3197,7 @@ module Aws::IoT
     #
     #   resp.thing_types #=> Array
     #   resp.thing_types[0].thing_type_name #=> String
+    #   resp.thing_types[0].thing_type_arn #=> String
     #   resp.thing_types[0].thing_type_properties.thing_type_description #=> String
     #   resp.thing_types[0].thing_type_properties.searchable_attributes #=> Array
     #   resp.thing_types[0].thing_type_properties.searchable_attributes[0] #=> String
@@ -1764,8 +3220,8 @@ module Aws::IoT
     # **Red**.
     #
     # @option params [String] :next_token
-    #   The token for the next set of results, or **null** if there are no
-    #   additional results.
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in this operation.
@@ -1799,6 +3255,7 @@ module Aws::IoT
     #   resp.things #=> Array
     #   resp.things[0].thing_name #=> String
     #   resp.things[0].thing_type_name #=> String
+    #   resp.things[0].thing_arn #=> String
     #   resp.things[0].attributes #=> Hash
     #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.things[0].version #=> Integer
@@ -1808,6 +3265,49 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_things(params = {}, options = {})
       req = build_request(:list_things, params)
+      req.send_request(options)
+    end
+
+    # Lists the things in the specified group.
+    #
+    # @option params [required, String] :thing_group_name
+    #   The thing group name.
+    #
+    # @option params [Boolean] :recursive
+    #   When true, list things in this thing group and in all child groups as
+    #   well.
+    #
+    # @option params [String] :next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListThingsInThingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListThingsInThingGroupResponse#things #things} => Array&lt;String&gt;
+    #   * {Types::ListThingsInThingGroupResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_things_in_thing_group({
+    #     thing_group_name: "ThingGroupName", # required
+    #     recursive: false,
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.things #=> Array
+    #   resp.things[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_things_in_thing_group(params = {})
+    # @param [Hash] params ({})
+    def list_things_in_thing_group(params = {}, options = {})
+      req = build_request(:list_things_in_thing_group, params)
       req.send_request(options)
     end
 
@@ -1856,6 +3356,47 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists logging levels.
+    #
+    # @option params [String] :target_type
+    #   The type of resource for which you are configuring logging. Must be
+    #   `THING_Group`.
+    #
+    # @option params [String] :next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @return [Types::ListV2LoggingLevelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListV2LoggingLevelsResponse#log_target_configurations #log_target_configurations} => Array&lt;Types::LogTargetConfiguration&gt;
+    #   * {Types::ListV2LoggingLevelsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_v2_logging_levels({
+    #     target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.log_target_configurations #=> Array
+    #   resp.log_target_configurations[0].log_target.target_type #=> String, one of "DEFAULT", "THING_GROUP"
+    #   resp.log_target_configurations[0].log_target.target_name #=> String
+    #   resp.log_target_configurations[0].log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
+    #   resp.next_token #=> String
+    #
+    # @overload list_v2_logging_levels(params = {})
+    # @param [Hash] params ({})
+    def list_v2_logging_levels(params = {}, options = {})
+      req = build_request(:list_v2_logging_levels, params)
+      req.send_request(options)
+    end
+
     # Registers a CA certificate with AWS IoT. This CA certificate can then
     # be used to sign device certificates, which can be then registered with
     # AWS IoT. You can register up to 10 CA certificates per AWS account
@@ -1878,6 +3419,9 @@ module Aws::IoT
     #   Allows this CA certificate to be used for auto registration of device
     #   certificates.
     #
+    # @option params [Types::RegistrationConfig] :registration_config
+    #   Information about the registration configuration.
+    #
     # @return [Types::RegisterCACertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterCACertificateResponse#certificate_arn #certificate_arn} => String
@@ -1890,6 +3434,10 @@ module Aws::IoT
     #     verification_certificate: "CertificatePem", # required
     #     set_as_active: false,
     #     allow_auto_registration: false,
+    #     registration_config: {
+    #       template_body: "TemplateBody",
+    #       role_arn: "RoleArn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1948,6 +3496,41 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Provisions a thing.
+    #
+    # @option params [required, String] :template_body
+    #   The provisioning template.
+    #
+    # @option params [Hash<String,String>] :parameters
+    #   The parameters for provisioning a thing.
+    #
+    # @return [Types::RegisterThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterThingResponse#certificate_pem #certificate_pem} => String
+    #   * {Types::RegisterThingResponse#resource_arns #resource_arns} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_thing({
+    #     template_body: "TemplateBody", # required
+    #     parameters: {
+    #       "Parameter" => "Value",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_pem #=> String
+    #   resp.resource_arns #=> Hash
+    #   resp.resource_arns["ResourceLogicalId"] #=> String
+    #
+    # @overload register_thing(params = {})
+    # @param [Hash] params ({})
+    def register_thing(params = {}, options = {})
+      req = build_request(:register_thing, params)
+      req.send_request(options)
+    end
+
     # Rejects a pending certificate transfer. After AWS IoT rejects a
     # certificate transfer, the certificate status changes from
     # **PENDING\_TRANSFER** to **INACTIVE**.
@@ -1981,10 +3564,42 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Replaces the specified rule. You must specify all parameters for the
-    # new rule. Creating rules is an administrator-level action. Any user
-    # who has permission to create rules will be able to access data
-    # processed by the rule.
+    # Remove the specified thing from the specified group.
+    #
+    # @option params [String] :thing_group_name
+    #   The group name.
+    #
+    # @option params [String] :thing_group_arn
+    #   The group ARN.
+    #
+    # @option params [String] :thing_name
+    #   The name of the thing to remove from the group.
+    #
+    # @option params [String] :thing_arn
+    #   The ARN of the thing to remove from the group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_thing_from_thing_group({
+    #     thing_group_name: "ThingGroupName",
+    #     thing_group_arn: "ThingGroupArn",
+    #     thing_name: "ThingName",
+    #     thing_arn: "ThingArn",
+    #   })
+    #
+    # @overload remove_thing_from_thing_group(params = {})
+    # @param [Hash] params ({})
+    def remove_thing_from_thing_group(params = {}, options = {})
+      req = build_request(:remove_thing_from_thing_group, params)
+      req.send_request(options)
+    end
+
+    # Replaces the rule. You must specify all parameters for the new rule.
+    # Creating rules is an administrator-level action. Any user who has
+    # permission to create rules will be able to access data processed by
+    # the rule.
     #
     # @option params [required, String] :rule_name
     #   The name of the rule.
@@ -2093,6 +3708,88 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # The query search index.
+    #
+    # @option params [String] :index_name
+    #   The search index name.
+    #
+    # @option params [required, String] :query_string
+    #   The search query string.
+    #
+    # @option params [String] :next_token
+    #   The token used to get the next set of results, or **null** if there
+    #   are no additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :query_version
+    #   The query version.
+    #
+    # @return [Types::SearchIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchIndexResponse#next_token #next_token} => String
+    #   * {Types::SearchIndexResponse#things #things} => Array&lt;Types::ThingDocument&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_index({
+    #     index_name: "IndexName",
+    #     query_string: "QueryString", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     query_version: "QueryVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.things #=> Array
+    #   resp.things[0].thing_name #=> String
+    #   resp.things[0].thing_id #=> String
+    #   resp.things[0].thing_type_name #=> String
+    #   resp.things[0].thing_group_names #=> Array
+    #   resp.things[0].thing_group_names[0] #=> String
+    #   resp.things[0].attributes #=> Hash
+    #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.things[0].shadow #=> String
+    #
+    # @overload search_index(params = {})
+    # @param [Hash] params ({})
+    def search_index(params = {}, options = {})
+      req = build_request(:search_index, params)
+      req.send_request(options)
+    end
+
+    # Sets the default authorizer. This will be used if a websocket
+    # connection is made without specifying an authorizer.
+    #
+    # @option params [required, String] :authorizer_name
+    #   The authorizer name.
+    #
+    # @return [Types::SetDefaultAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetDefaultAuthorizerResponse#authorizer_name #authorizer_name} => String
+    #   * {Types::SetDefaultAuthorizerResponse#authorizer_arn #authorizer_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_default_authorizer({
+    #     authorizer_name: "AuthorizerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorizer_name #=> String
+    #   resp.authorizer_arn #=> String
+    #
+    # @overload set_default_authorizer(params = {})
+    # @param [Hash] params ({})
+    def set_default_authorizer(params = {}, options = {})
+      req = build_request(:set_default_authorizer, params)
+      req.send_request(options)
+    end
+
     # Sets the specified version of the specified policy as the policy's
     # default (operative) version. This action affects all certificates to
     # which the policy is attached. To list the principals the policy is
@@ -2143,6 +3840,234 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Sets the logging level.
+    #
+    # @option params [required, Types::LogTarget] :log_target
+    #   The log target.
+    #
+    # @option params [required, String] :log_level
+    #   The log level.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_v2_logging_level({
+    #     log_target: { # required
+    #       target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP
+    #       target_name: "LogTargetName",
+    #     },
+    #     log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #   })
+    #
+    # @overload set_v2_logging_level(params = {})
+    # @param [Hash] params ({})
+    def set_v2_logging_level(params = {}, options = {})
+      req = build_request(:set_v2_logging_level, params)
+      req.send_request(options)
+    end
+
+    # Sets the logging options for the V2 logging service.
+    #
+    # @option params [String] :role_arn
+    #   The role ARN that allows IoT to write to Cloudwatch logs.
+    #
+    # @option params [String] :default_log_level
+    #   The default logging level.
+    #
+    # @option params [Boolean] :disable_all_logs
+    #   Set to true to disable all logs, otherwise set to false.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_v2_logging_options({
+    #     role_arn: "AwsArn",
+    #     default_log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
+    #     disable_all_logs: false,
+    #   })
+    #
+    # @overload set_v2_logging_options(params = {})
+    # @param [Hash] params ({})
+    def set_v2_logging_options(params = {}, options = {})
+      req = build_request(:set_v2_logging_options, params)
+      req.send_request(options)
+    end
+
+    # Creates a bulk thing provisioning task.
+    #
+    # @option params [required, String] :template_body
+    #   The provisioning template.
+    #
+    # @option params [required, String] :input_file_bucket
+    #   The S3 bucket that contains the input file.
+    #
+    # @option params [required, String] :input_file_key
+    #   The name of input file within the S3 bucket. This file contains a
+    #   newline delimited JSON file. Each line contains the parameter values
+    #   to provision one device (thing).
+    #
+    # @option params [required, String] :role_arn
+    #   The IAM role ARN that grants permission the input file.
+    #
+    # @return [Types::StartThingRegistrationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartThingRegistrationTaskResponse#task_id #task_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_thing_registration_task({
+    #     template_body: "TemplateBody", # required
+    #     input_file_bucket: "RegistryS3BucketName", # required
+    #     input_file_key: "RegistryS3KeyName", # required
+    #     role_arn: "RoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_id #=> String
+    #
+    # @overload start_thing_registration_task(params = {})
+    # @param [Hash] params ({})
+    def start_thing_registration_task(params = {}, options = {})
+      req = build_request(:start_thing_registration_task, params)
+      req.send_request(options)
+    end
+
+    # Cancels a bulk thing provisioning task.
+    #
+    # @option params [required, String] :task_id
+    #   The bulk thing provisioning task ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_thing_registration_task({
+    #     task_id: "TaskId", # required
+    #   })
+    #
+    # @overload stop_thing_registration_task(params = {})
+    # @param [Hash] params ({})
+    def stop_thing_registration_task(params = {}, options = {})
+      req = build_request(:stop_thing_registration_task, params)
+      req.send_request(options)
+    end
+
+    # Test custom authorization.
+    #
+    # @option params [String] :principal
+    #   The principal.
+    #
+    # @option params [String] :cognito_identity_pool_id
+    #   The Cognito identity pool ID.
+    #
+    # @option params [required, Array<Types::AuthInfo>] :auth_infos
+    #   A list of authorization info objects. Simulating authorization will
+    #   create a response for each `authInfo` object in the list.
+    #
+    # @option params [String] :client_id
+    #   The MQTT client ID.
+    #
+    # @option params [Array<String>] :policy_names_to_add
+    #   When testing custom authorization, the policies specified here are
+    #   treated as if they are attached to the principal being authorized.
+    #
+    # @option params [Array<String>] :policy_names_to_skip
+    #   When testing custom authorization, the policies specified here are
+    #   treated as if they are not attached to the principal being authorized.
+    #
+    # @return [Types::TestAuthorizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestAuthorizationResponse#auth_results #auth_results} => Array&lt;Types::AuthResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_authorization({
+    #     principal: "Principal",
+    #     cognito_identity_pool_id: "CognitoIdentityPoolId",
+    #     auth_infos: [ # required
+    #       {
+    #         action_type: "PUBLISH", # accepts PUBLISH, SUBSCRIBE, RECEIVE, CONNECT
+    #         resources: ["Resource"],
+    #       },
+    #     ],
+    #     client_id: "ClientId",
+    #     policy_names_to_add: ["PolicyName"],
+    #     policy_names_to_skip: ["PolicyName"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.auth_results #=> Array
+    #   resp.auth_results[0].auth_info.action_type #=> String, one of "PUBLISH", "SUBSCRIBE", "RECEIVE", "CONNECT"
+    #   resp.auth_results[0].auth_info.resources #=> Array
+    #   resp.auth_results[0].auth_info.resources[0] #=> String
+    #   resp.auth_results[0].allowed.policies #=> Array
+    #   resp.auth_results[0].allowed.policies[0].policy_name #=> String
+    #   resp.auth_results[0].allowed.policies[0].policy_arn #=> String
+    #   resp.auth_results[0].denied.implicit_deny.policies #=> Array
+    #   resp.auth_results[0].denied.implicit_deny.policies[0].policy_name #=> String
+    #   resp.auth_results[0].denied.implicit_deny.policies[0].policy_arn #=> String
+    #   resp.auth_results[0].denied.explicit_deny.policies #=> Array
+    #   resp.auth_results[0].denied.explicit_deny.policies[0].policy_name #=> String
+    #   resp.auth_results[0].denied.explicit_deny.policies[0].policy_arn #=> String
+    #   resp.auth_results[0].auth_decision #=> String, one of "ALLOWED", "EXPLICIT_DENY", "IMPLICIT_DENY"
+    #   resp.auth_results[0].missing_context_values #=> Array
+    #   resp.auth_results[0].missing_context_values[0] #=> String
+    #
+    # @overload test_authorization(params = {})
+    # @param [Hash] params ({})
+    def test_authorization(params = {}, options = {})
+      req = build_request(:test_authorization, params)
+      req.send_request(options)
+    end
+
+    # Invoke the specified custom authorizer for testing purposes.
+    #
+    # @option params [required, String] :authorizer_name
+    #   The custom authorizer name.
+    #
+    # @option params [required, String] :token
+    #   The token returned by your custom authentication service.
+    #
+    # @option params [required, String] :token_signature
+    #   The signature made with the token and your custom authentication
+    #   service's private key.
+    #
+    # @return [Types::TestInvokeAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestInvokeAuthorizerResponse#is_authenticated #is_authenticated} => Boolean
+    #   * {Types::TestInvokeAuthorizerResponse#principal_id #principal_id} => String
+    #   * {Types::TestInvokeAuthorizerResponse#policy_documents #policy_documents} => Array&lt;String&gt;
+    #   * {Types::TestInvokeAuthorizerResponse#refresh_after_in_seconds #refresh_after_in_seconds} => Integer
+    #   * {Types::TestInvokeAuthorizerResponse#disconnect_after_in_seconds #disconnect_after_in_seconds} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_invoke_authorizer({
+    #     authorizer_name: "AuthorizerName", # required
+    #     token: "Token", # required
+    #     token_signature: "TokenSignature", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.is_authenticated #=> Boolean
+    #   resp.principal_id #=> String
+    #   resp.policy_documents #=> Array
+    #   resp.policy_documents[0] #=> String
+    #   resp.refresh_after_in_seconds #=> Integer
+    #   resp.disconnect_after_in_seconds #=> Integer
+    #
+    # @overload test_invoke_authorizer(params = {})
+    # @param [Hash] params ({})
+    def test_invoke_authorizer(params = {}, options = {})
+      req = build_request(:test_invoke_authorizer, params)
+      req.send_request(options)
+    end
+
     # Transfers the specified certificate to the specified AWS account.
     #
     # You can cancel the transfer until it is acknowledged by the recipient.
@@ -2188,6 +4113,52 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates an authorizer.
+    #
+    # @option params [required, String] :authorizer_name
+    #   The authorizer name.
+    #
+    # @option params [String] :authorizer_function_arn
+    #   The ARN of the authorizer's Lambda function.
+    #
+    # @option params [String] :token_key_name
+    #   The key used to extract the token from the HTTP headers.
+    #
+    # @option params [Hash<String,String>] :token_signing_public_keys
+    #   The public keys used to verify the token signature.
+    #
+    # @option params [String] :status
+    #   The status of the update authorizer request.
+    #
+    # @return [Types::UpdateAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAuthorizerResponse#authorizer_name #authorizer_name} => String
+    #   * {Types::UpdateAuthorizerResponse#authorizer_arn #authorizer_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_authorizer({
+    #     authorizer_name: "AuthorizerName", # required
+    #     authorizer_function_arn: "AuthorizerFunctionArn",
+    #     token_key_name: "TokenKeyName",
+    #     token_signing_public_keys: {
+    #       "KeyName" => "KeyValue",
+    #     },
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.authorizer_name #=> String
+    #   resp.authorizer_arn #=> String
+    #
+    # @overload update_authorizer(params = {})
+    # @param [Hash] params ({})
+    def update_authorizer(params = {}, options = {})
+      req = build_request(:update_authorizer, params)
+      req.send_request(options)
+    end
+
     # Updates a registered CA certificate.
     #
     # @option params [required, String] :certificate_id
@@ -2203,6 +4174,12 @@ module Aws::IoT
     #   The new value for the auto registration status. Valid values are:
     #   "ENABLE" or "DISABLE".
     #
+    # @option params [Types::RegistrationConfig] :registration_config
+    #   Information about the registration configuration.
+    #
+    # @option params [Boolean] :remove_auto_registration
+    #   If true, remove auto registration.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2211,6 +4188,11 @@ module Aws::IoT
     #     certificate_id: "CertificateId", # required
     #     new_status: "ACTIVE", # accepts ACTIVE, INACTIVE
     #     new_auto_registration_status: "ENABLE", # accepts ENABLE, DISABLE
+    #     registration_config: {
+    #       template_body: "TemplateBody",
+    #       role_arn: "RoleArn",
+    #     },
+    #     remove_auto_registration: false,
     #   })
     #
     # @overload update_ca_certificate(params = {})
@@ -2259,6 +4241,88 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates the event configurations.
+    #
+    # @option params [Hash<String,Types::Configuration>] :event_configurations
+    #   The new event configuration values.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_event_configurations({
+    #     event_configurations: {
+    #       "THING" => {
+    #         enabled: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @overload update_event_configurations(params = {})
+    # @param [Hash] params ({})
+    def update_event_configurations(params = {}, options = {})
+      req = build_request(:update_event_configurations, params)
+      req.send_request(options)
+    end
+
+    # Updates the search configuration.
+    #
+    # @option params [Types::ThingIndexingConfiguration] :thing_indexing_configuration
+    #   Thing indexing configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_indexing_configuration({
+    #     thing_indexing_configuration: {
+    #       thing_indexing_mode: "OFF", # accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
+    #     },
+    #   })
+    #
+    # @overload update_indexing_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_indexing_configuration(params = {}, options = {})
+      req = build_request(:update_indexing_configuration, params)
+      req.send_request(options)
+    end
+
+    # Updates a role alias.
+    #
+    # @option params [required, String] :role_alias
+    #   The role alias to update.
+    #
+    # @option params [String] :role_arn
+    #   The role ARN.
+    #
+    # @option params [Integer] :credential_duration_seconds
+    #   The number of seconds the credential will be valid.
+    #
+    # @return [Types::UpdateRoleAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRoleAliasResponse#role_alias #role_alias} => String
+    #   * {Types::UpdateRoleAliasResponse#role_alias_arn #role_alias_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_role_alias({
+    #     role_alias: "RoleAlias", # required
+    #     role_arn: "RoleArn",
+    #     credential_duration_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_alias #=> String
+    #   resp.role_alias_arn #=> String
+    #
+    # @overload update_role_alias(params = {})
+    # @param [Hash] params ({})
+    def update_role_alias(params = {}, options = {})
+      req = build_request(:update_role_alias, params)
+      req.send_request(options)
+    end
+
     # Updates the data for a thing.
     #
     # @option params [required, String] :thing_name
@@ -2282,7 +4346,7 @@ module Aws::IoT
     #   rejected with a `VersionConflictException`.
     #
     # @option params [Boolean] :remove_thing_type
-    #   Remove a thing type association. If **true**, the assocation is
+    #   Remove a thing type association. If **true**, the association is
     #   removed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2309,6 +4373,77 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Update a thing group.
+    #
+    # @option params [required, String] :thing_group_name
+    #   The thing group to update.
+    #
+    # @option params [required, Types::ThingGroupProperties] :thing_group_properties
+    #   The thing group properties.
+    #
+    # @option params [Integer] :expected_version
+    #   The expected version of the thing group. If this does not match the
+    #   version of the thing group being updated, the update will fail.
+    #
+    # @return [Types::UpdateThingGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateThingGroupResponse#version #version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_thing_group({
+    #     thing_group_name: "ThingGroupName", # required
+    #     thing_group_properties: { # required
+    #       thing_group_description: "ThingGroupDescription",
+    #       attribute_payload: {
+    #         attributes: {
+    #           "AttributeName" => "AttributeValue",
+    #         },
+    #         merge: false,
+    #       },
+    #     },
+    #     expected_version: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version #=> Integer
+    #
+    # @overload update_thing_group(params = {})
+    # @param [Hash] params ({})
+    def update_thing_group(params = {}, options = {})
+      req = build_request(:update_thing_group, params)
+      req.send_request(options)
+    end
+
+    # Updates the groups to which the thing belongs.
+    #
+    # @option params [String] :thing_name
+    #   The thing whose group memberships will be updated.
+    #
+    # @option params [Array<String>] :thing_groups_to_add
+    #   The groups to which the thing will be added.
+    #
+    # @option params [Array<String>] :thing_groups_to_remove
+    #   The groups from which the thing will be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_thing_groups_for_thing({
+    #     thing_name: "ThingName",
+    #     thing_groups_to_add: ["ThingGroupName"],
+    #     thing_groups_to_remove: ["ThingGroupName"],
+    #   })
+    #
+    # @overload update_thing_groups_for_thing(params = {})
+    # @param [Hash] params ({})
+    def update_thing_groups_for_thing(params = {}, options = {})
+      req = build_request(:update_thing_groups_for_thing, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2322,7 +4457,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

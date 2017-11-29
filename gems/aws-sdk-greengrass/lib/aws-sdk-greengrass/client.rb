@@ -497,6 +497,13 @@ module Aws::Greengrass
     #           function_arn: "__string",
     #           function_configuration: {
     #             environment: {
+    #               access_sysfs: false,
+    #               resource_access_policies: [
+    #                 {
+    #                   permission: "ro", # accepts ro, rw
+    #                   resource_id: "__string",
+    #                 },
+    #               ],
     #               variables: {
     #                 "__string" => "__string",
     #               },
@@ -559,6 +566,13 @@ module Aws::Greengrass
     #         function_arn: "__string",
     #         function_configuration: {
     #           environment: {
+    #             access_sysfs: false,
+    #             resource_access_policies: [
+    #               {
+    #                 permission: "ro", # accepts ro, rw
+    #                 resource_id: "__string",
+    #               },
+    #             ],
     #             variables: {
     #               "__string" => "__string",
     #             },
@@ -619,6 +633,7 @@ module Aws::Greengrass
     #       device_definition_version_arn: "__string",
     #       function_definition_version_arn: "__string",
     #       logger_definition_version_arn: "__string",
+    #       resource_definition_version_arn: "__string",
     #       subscription_definition_version_arn: "__string",
     #     },
     #     name: "__string",
@@ -688,6 +703,8 @@ module Aws::Greengrass
     #
     # @option params [String] :logger_definition_version_arn
     #
+    # @option params [String] :resource_definition_version_arn
+    #
     # @option params [String] :subscription_definition_version_arn
     #
     # @return [Types::CreateGroupVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -706,6 +723,7 @@ module Aws::Greengrass
     #     function_definition_version_arn: "__string",
     #     group_id: "__string", # required
     #     logger_definition_version_arn: "__string",
+    #     resource_definition_version_arn: "__string",
     #     subscription_definition_version_arn: "__string",
     #   })
     #
@@ -828,6 +846,197 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def create_logger_definition_version(params = {}, options = {})
       req = build_request(:create_logger_definition_version, params)
+      req.send_request(options)
+    end
+
+    # Creates a resource definition which contains a list of resources to be
+    # used in a group. You can create an initial version of the definition
+    # by providing a list of resources now, or use
+    # ``CreateResourceDefinitionVersion`` later.
+    #
+    # @option params [String] :amzn_client_token
+    #
+    # @option params [Types::ResourceDefinitionVersion] :initial_version
+    #   Information on resource definition version
+    #
+    # @option params [String] :name
+    #
+    # @return [Types::CreateResourceDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResourceDefinitionResponse#arn #arn} => String
+    #   * {Types::CreateResourceDefinitionResponse#creation_timestamp #creation_timestamp} => String
+    #   * {Types::CreateResourceDefinitionResponse#id #id} => String
+    #   * {Types::CreateResourceDefinitionResponse#last_updated_timestamp #last_updated_timestamp} => String
+    #   * {Types::CreateResourceDefinitionResponse#latest_version #latest_version} => String
+    #   * {Types::CreateResourceDefinitionResponse#latest_version_arn #latest_version_arn} => String
+    #   * {Types::CreateResourceDefinitionResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_definition({
+    #     amzn_client_token: "__string",
+    #     initial_version: {
+    #       resources: [
+    #         {
+    #           id: "__string",
+    #           name: "__string",
+    #           resource_data_container: {
+    #             local_device_resource_data: {
+    #               group_owner_setting: {
+    #                 auto_add_group_owner: false,
+    #                 group_owner: "__string",
+    #               },
+    #               source_path: "__string",
+    #             },
+    #             local_volume_resource_data: {
+    #               destination_path: "__string",
+    #               group_owner_setting: {
+    #                 auto_add_group_owner: false,
+    #                 group_owner: "__string",
+    #               },
+    #               source_path: "__string",
+    #             },
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     name: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_timestamp #=> String
+    #   resp.id #=> String
+    #   resp.last_updated_timestamp #=> String
+    #   resp.latest_version #=> String
+    #   resp.latest_version_arn #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinition AWS API Documentation
+    #
+    # @overload create_resource_definition(params = {})
+    # @param [Hash] params ({})
+    def create_resource_definition(params = {}, options = {})
+      req = build_request(:create_resource_definition, params)
+      req.send_request(options)
+    end
+
+    # Create a version of a resource definition that has already been
+    # defined.
+    #
+    # @option params [String] :amzn_client_token
+    #
+    # @option params [required, String] :resource_definition_id
+    #
+    # @option params [Array<Types::Resource>] :resources
+    #
+    # @return [Types::CreateResourceDefinitionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateResourceDefinitionVersionResponse#arn #arn} => String
+    #   * {Types::CreateResourceDefinitionVersionResponse#creation_timestamp #creation_timestamp} => String
+    #   * {Types::CreateResourceDefinitionVersionResponse#id #id} => String
+    #   * {Types::CreateResourceDefinitionVersionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_resource_definition_version({
+    #     amzn_client_token: "__string",
+    #     resource_definition_id: "__string", # required
+    #     resources: [
+    #       {
+    #         id: "__string",
+    #         name: "__string",
+    #         resource_data_container: {
+    #           local_device_resource_data: {
+    #             group_owner_setting: {
+    #               auto_add_group_owner: false,
+    #               group_owner: "__string",
+    #             },
+    #             source_path: "__string",
+    #           },
+    #           local_volume_resource_data: {
+    #             destination_path: "__string",
+    #             group_owner_setting: {
+    #               auto_add_group_owner: false,
+    #               group_owner: "__string",
+    #             },
+    #             source_path: "__string",
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_timestamp #=> String
+    #   resp.id #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionVersion AWS API Documentation
+    #
+    # @overload create_resource_definition_version(params = {})
+    # @param [Hash] params ({})
+    def create_resource_definition_version(params = {}, options = {})
+      req = build_request(:create_resource_definition_version, params)
+      req.send_request(options)
+    end
+
+    # Creates an Iot Job that will trigger your Greengrass Cores to update
+    # the software they are running.
+    #
+    # @option params [String] :amzn_client_token
+    #
+    # @option params [String] :s3_url_signer_role
+    #   The IAM Role that Greengrass will use to create pre-signed URLs
+    #   pointing towards the update artifact.
+    #
+    # @option params [String] :software_to_update
+    #   The piece of software on the Greengrass Core that will be updated.
+    #
+    # @option params [String] :update_agent_log_level
+    #   The minimum level of log statements that should be logged by the OTA
+    #   Agent during an update.
+    #
+    # @option params [Array<String>] :update_targets
+    #   The target arns that this update will be applied to.
+    #
+    # @option params [String] :update_targets_architecture
+    #   The architecture of the Cores in the targets of an update
+    #
+    # @option params [String] :update_targets_operating_system
+    #   The operating system of the Cores in the targets of an update
+    #
+    # @return [Types::CreateSoftwareUpdateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSoftwareUpdateJobResponse#iot_job_arn #iot_job_arn} => String
+    #   * {Types::CreateSoftwareUpdateJobResponse#iot_job_id #iot_job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_software_update_job({
+    #     amzn_client_token: "__string",
+    #     s3_url_signer_role: "S3UrlSignerRole",
+    #     software_to_update: "core", # accepts core, ota_agent
+    #     update_agent_log_level: "NONE", # accepts NONE, TRACE, DEBUG, VERBOSE, INFO, WARN, ERROR, FATAL
+    #     update_targets: ["__string"],
+    #     update_targets_architecture: "armv7l", # accepts armv7l, x86_64, aarch64
+    #     update_targets_operating_system: "ubuntu", # accepts ubuntu, raspbian, amazon_linux
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.iot_job_arn #=> String
+    #   resp.iot_job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJob AWS API Documentation
+    #
+    # @overload create_software_update_job(params = {})
+    # @param [Hash] params ({})
+    def create_software_update_job(params = {}, options = {})
+      req = build_request(:create_software_update_job, params)
       req.send_request(options)
     end
 
@@ -1041,6 +1250,27 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def delete_logger_definition(params = {}, options = {})
       req = build_request(:delete_logger_definition, params)
+      req.send_request(options)
+    end
+
+    # Deletes a resource definition.
+    #
+    # @option params [required, String] :resource_definition_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_definition({
+    #     resource_definition_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteResourceDefinition AWS API Documentation
+    #
+    # @overload delete_resource_definition(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_definition(params = {}, options = {})
+      req = build_request(:delete_resource_definition, params)
       req.send_request(options)
     end
 
@@ -1446,6 +1676,10 @@ module Aws::Greengrass
     #   resp.creation_timestamp #=> String
     #   resp.definition.functions #=> Array
     #   resp.definition.functions[0].function_arn #=> String
+    #   resp.definition.functions[0].function_configuration.environment.access_sysfs #=> Boolean
+    #   resp.definition.functions[0].function_configuration.environment.resource_access_policies #=> Array
+    #   resp.definition.functions[0].function_configuration.environment.resource_access_policies[0].permission #=> String, one of "ro", "rw"
+    #   resp.definition.functions[0].function_configuration.environment.resource_access_policies[0].resource_id #=> String
     #   resp.definition.functions[0].function_configuration.environment.variables #=> Hash
     #   resp.definition.functions[0].function_configuration.environment.variables["__string"] #=> String
     #   resp.definition.functions[0].function_configuration.exec_args #=> String
@@ -1600,6 +1834,7 @@ module Aws::Greengrass
     #   resp.definition.device_definition_version_arn #=> String
     #   resp.definition.function_definition_version_arn #=> String
     #   resp.definition.logger_definition_version_arn #=> String
+    #   resp.definition.resource_definition_version_arn #=> String
     #   resp.definition.subscription_definition_version_arn #=> String
     #   resp.id #=> String
     #   resp.version #=> String
@@ -1692,6 +1927,94 @@ module Aws::Greengrass
     # @param [Hash] params ({})
     def get_logger_definition_version(params = {}, options = {})
       req = build_request(:get_logger_definition_version, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a resource definition, such as its
+    # creation time and latest version.
+    #
+    # @option params [required, String] :resource_definition_id
+    #
+    # @return [Types::GetResourceDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceDefinitionResponse#arn #arn} => String
+    #   * {Types::GetResourceDefinitionResponse#creation_timestamp #creation_timestamp} => String
+    #   * {Types::GetResourceDefinitionResponse#id #id} => String
+    #   * {Types::GetResourceDefinitionResponse#last_updated_timestamp #last_updated_timestamp} => String
+    #   * {Types::GetResourceDefinitionResponse#latest_version #latest_version} => String
+    #   * {Types::GetResourceDefinitionResponse#latest_version_arn #latest_version_arn} => String
+    #   * {Types::GetResourceDefinitionResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_definition({
+    #     resource_definition_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_timestamp #=> String
+    #   resp.id #=> String
+    #   resp.last_updated_timestamp #=> String
+    #   resp.latest_version #=> String
+    #   resp.latest_version_arn #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinition AWS API Documentation
+    #
+    # @overload get_resource_definition(params = {})
+    # @param [Hash] params ({})
+    def get_resource_definition(params = {}, options = {})
+      req = build_request(:get_resource_definition, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a resource definition version, such as
+    # which resources are included in the version.
+    #
+    # @option params [required, String] :resource_definition_id
+    #
+    # @option params [required, String] :resource_definition_version_id
+    #
+    # @return [Types::GetResourceDefinitionVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceDefinitionVersionResponse#arn #arn} => String
+    #   * {Types::GetResourceDefinitionVersionResponse#creation_timestamp #creation_timestamp} => String
+    #   * {Types::GetResourceDefinitionVersionResponse#definition #definition} => Types::ResourceDefinitionVersion
+    #   * {Types::GetResourceDefinitionVersionResponse#id #id} => String
+    #   * {Types::GetResourceDefinitionVersionResponse#version #version} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_definition_version({
+    #     resource_definition_id: "__string", # required
+    #     resource_definition_version_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.creation_timestamp #=> String
+    #   resp.definition.resources #=> Array
+    #   resp.definition.resources[0].id #=> String
+    #   resp.definition.resources[0].name #=> String
+    #   resp.definition.resources[0].resource_data_container.local_device_resource_data.group_owner_setting.auto_add_group_owner #=> Boolean
+    #   resp.definition.resources[0].resource_data_container.local_device_resource_data.group_owner_setting.group_owner #=> String
+    #   resp.definition.resources[0].resource_data_container.local_device_resource_data.source_path #=> String
+    #   resp.definition.resources[0].resource_data_container.local_volume_resource_data.destination_path #=> String
+    #   resp.definition.resources[0].resource_data_container.local_volume_resource_data.group_owner_setting.auto_add_group_owner #=> Boolean
+    #   resp.definition.resources[0].resource_data_container.local_volume_resource_data.group_owner_setting.group_owner #=> String
+    #   resp.definition.resources[0].resource_data_container.local_volume_resource_data.source_path #=> String
+    #   resp.id #=> String
+    #   resp.version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersion AWS API Documentation
+    #
+    # @overload get_resource_definition_version(params = {})
+    # @param [Hash] params ({})
+    def get_resource_definition_version(params = {}, options = {})
+      req = build_request(:get_resource_definition_version, params)
       req.send_request(options)
     end
 
@@ -2256,6 +2579,84 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Lists the versions of a resource definition.
+    #
+    # @option params [String] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [required, String] :resource_definition_id
+    #
+    # @return [Types::ListResourceDefinitionVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceDefinitionVersionsResponse#next_token #next_token} => String
+    #   * {Types::ListResourceDefinitionVersionsResponse#versions #versions} => Array&lt;Types::VersionInformation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_definition_versions({
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #     resource_definition_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.versions #=> Array
+    #   resp.versions[0].arn #=> String
+    #   resp.versions[0].creation_timestamp #=> String
+    #   resp.versions[0].id #=> String
+    #   resp.versions[0].version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionVersions AWS API Documentation
+    #
+    # @overload list_resource_definition_versions(params = {})
+    # @param [Hash] params ({})
+    def list_resource_definition_versions(params = {}, options = {})
+      req = build_request(:list_resource_definition_versions, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of resource definitions.
+    #
+    # @option params [String] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListResourceDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceDefinitionsResponse#definitions #definitions} => Array&lt;Types::DefinitionInformation&gt;
+    #   * {Types::ListResourceDefinitionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_definitions({
+    #     max_results: "__string",
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.definitions #=> Array
+    #   resp.definitions[0].arn #=> String
+    #   resp.definitions[0].creation_timestamp #=> String
+    #   resp.definitions[0].id #=> String
+    #   resp.definitions[0].last_updated_timestamp #=> String
+    #   resp.definitions[0].latest_version #=> String
+    #   resp.definitions[0].latest_version_arn #=> String
+    #   resp.definitions[0].name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitions AWS API Documentation
+    #
+    # @overload list_resource_definitions(params = {})
+    # @param [Hash] params ({})
+    def list_resource_definitions(params = {}, options = {})
+      req = build_request(:list_resource_definitions, params)
+      req.send_request(options)
+    end
+
     # Lists the versions of a subscription definition.
     #
     # @option params [String] :max_results
@@ -2567,6 +2968,30 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
+    # Updates a resource definition.
+    #
+    # @option params [String] :name
+    #
+    # @option params [required, String] :resource_definition_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_definition({
+    #     name: "__string",
+    #     resource_definition_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateResourceDefinition AWS API Documentation
+    #
+    # @overload update_resource_definition(params = {})
+    # @param [Hash] params ({})
+    def update_resource_definition(params = {}, options = {})
+      req = build_request(:update_resource_definition, params)
+      req.send_request(options)
+    end
+
     # Updates a subscription definition.
     #
     # @option params [String] :name
@@ -2604,7 +3029,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

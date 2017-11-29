@@ -534,6 +534,105 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Describes how a CSV-formatted input object is formatted.
+    #
+    # @note When making an API call, you may pass CSVInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #         comments: "Comments",
+    #         quote_escape_character: "QuoteEscapeCharacter",
+    #         record_delimiter: "RecordDelimiter",
+    #         field_delimiter: "FieldDelimiter",
+    #         quote_character: "QuoteCharacter",
+    #       }
+    #
+    # @!attribute [rw] file_header_info
+    #   Describes the first line of input. Valid values: None, Ignore, Use.
+    #   @return [String]
+    #
+    # @!attribute [rw] comments
+    #   Single character used to indicate a row should be ignored when
+    #   present at the start of a row.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_escape_character
+    #   Single character used for escaping the quote character inside an
+    #   already escaped value.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_delimiter
+    #   Value used to separate individual records.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_delimiter
+    #   Value used to separate individual fields in a record.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_character
+    #   Value used for escaping where the field delimiter is part of the
+    #   value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVInput AWS API Documentation
+    #
+    class CSVInput < Struct.new(
+      :file_header_info,
+      :comments,
+      :quote_escape_character,
+      :record_delimiter,
+      :field_delimiter,
+      :quote_character)
+      include Aws::Structure
+    end
+
+    # Describes how CSV-formatted results are formatted.
+    #
+    # @note When making an API call, you may pass CSVOutput
+    #   data as a hash:
+    #
+    #       {
+    #         quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #         quote_escape_character: "QuoteEscapeCharacter",
+    #         record_delimiter: "RecordDelimiter",
+    #         field_delimiter: "FieldDelimiter",
+    #         quote_character: "QuoteCharacter",
+    #       }
+    #
+    # @!attribute [rw] quote_fields
+    #   Indicates whether or not all output fields should be quoted.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_escape_character
+    #   Single character used for escaping the quote character inside an
+    #   already escaped value.
+    #   @return [String]
+    #
+    # @!attribute [rw] record_delimiter
+    #   Value used to separate individual records.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_delimiter
+    #   Value used to separate individual fields in a record.
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_character
+    #   Value used for escaping where the field delimiter is part of the
+    #   value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVOutput AWS API Documentation
+    #
+    class CSVOutput < Struct.new(
+      :quote_fields,
+      :quote_escape_character,
+      :record_delimiter,
+      :field_delimiter,
+      :quote_character)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CloudFunctionConfiguration
     #   data as a hash:
     #
@@ -1952,6 +2051,42 @@ module Aws::S3
       :storage_class,
       :access_control_translation,
       :encryption_configuration)
+      include Aws::Structure
+    end
+
+    # Describes the server-side encryption that will be applied to the
+    # restore results.
+    #
+    # @note When making an API call, you may pass Encryption
+    #   data as a hash:
+    #
+    #       {
+    #         encryption_type: "AES256", # required, accepts AES256, aws:kms
+    #         kms_key_id: "SSEKMSKeyId",
+    #         kms_context: "KMSContext",
+    #       }
+    #
+    # @!attribute [rw] encryption_type
+    #   The server-side encryption algorithm used when storing job results
+    #   in Amazon S3 (e.g., AES256, aws:kms).
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_id
+    #   If the encryption type is aws:kms, this optional value specifies the
+    #   AWS KMS key ID to use for encryption of job results.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_context
+    #   If the encryption type is aws:kms, this optional value can be used
+    #   to specify the encryption context for the restore results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Encryption AWS API Documentation
+    #
+    class Encryption < Struct.new(
+      :encryption_type,
+      :kms_key_id,
+      :kms_context)
       include Aws::Structure
     end
 
@@ -3464,6 +3599,33 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Describes the serialization format of the object.
+    #
+    # @note When making an API call, you may pass InputSerialization
+    #   data as a hash:
+    #
+    #       {
+    #         csv: {
+    #           file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #           comments: "Comments",
+    #           quote_escape_character: "QuoteEscapeCharacter",
+    #           record_delimiter: "RecordDelimiter",
+    #           field_delimiter: "FieldDelimiter",
+    #           quote_character: "QuoteCharacter",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] csv
+    #   Describes the serialization of a CSV-encoded object.
+    #   @return [Types::CSVInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InputSerialization AWS API Documentation
+    #
+    class InputSerialization < Struct.new(
+      :csv)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass InventoryConfiguration
     #   data as a hash:
     #
@@ -4924,6 +5086,30 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # A metadata key-value pair to store with an object.
+    #
+    # @note When making an API call, you may pass MetadataEntry
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MetadataKey",
+    #         value: "MetadataValue",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetadataEntry AWS API Documentation
+    #
+    class MetadataEntry < Struct.new(
+      :name,
+      :value)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass MetricsAndOperator
     #   data as a hash:
     #
@@ -5395,6 +5581,89 @@ module Aws::S3
       :is_latest,
       :last_modified,
       :owner)
+      include Aws::Structure
+    end
+
+    # Describes the location where the restore job's output is stored.
+    #
+    # @note When making an API call, you may pass OutputLocation
+    #   data as a hash:
+    #
+    #       {
+    #         s3: {
+    #           bucket_name: "BucketName", # required
+    #           prefix: "LocationPrefix", # required
+    #           encryption: {
+    #             encryption_type: "AES256", # required, accepts AES256, aws:kms
+    #             kms_key_id: "SSEKMSKeyId",
+    #             kms_context: "KMSContext",
+    #           },
+    #           canned_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #           access_control_list: [
+    #             {
+    #               grantee: {
+    #                 display_name: "DisplayName",
+    #                 email_address: "EmailAddress",
+    #                 id: "ID",
+    #                 type: "CanonicalUser", # required, accepts CanonicalUser, AmazonCustomerByEmail, Group
+    #                 uri: "URI",
+    #               },
+    #               permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #             },
+    #           ],
+    #           tagging: {
+    #             tag_set: [ # required
+    #               {
+    #                 key: "ObjectKey", # required
+    #                 value: "Value", # required
+    #               },
+    #             ],
+    #           },
+    #           user_metadata: [
+    #             {
+    #               name: "MetadataKey",
+    #               value: "MetadataValue",
+    #             },
+    #           ],
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3
+    #   Describes an S3 location that will receive the results of the
+    #   restore request.
+    #   @return [Types::S3Location]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OutputLocation AWS API Documentation
+    #
+    class OutputLocation < Struct.new(
+      :s3)
+      include Aws::Structure
+    end
+
+    # Describes how results of the Select job are serialized.
+    #
+    # @note When making an API call, you may pass OutputSerialization
+    #   data as a hash:
+    #
+    #       {
+    #         csv: {
+    #           quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #           quote_escape_character: "QuoteEscapeCharacter",
+    #           record_delimiter: "RecordDelimiter",
+    #           field_delimiter: "FieldDelimiter",
+    #           quote_character: "QuoteCharacter",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] csv
+    #   Describes the serialization of CSV-encoded Select results.
+    #   @return [Types::CSVOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OutputSerialization AWS API Documentation
+    #
+    class OutputSerialization < Struct.new(
+      :csv)
       include Aws::Structure
     end
 
@@ -7064,10 +7333,16 @@ module Aws::S3
     #   for the request.
     #   @return [String]
     #
+    # @!attribute [rw] restore_output_path
+    #   Indicates the path in the provided S3 output location where Select
+    #   results will be restored to.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObjectOutput AWS API Documentation
     #
     class RestoreObjectOutput < Struct.new(
-      :request_charged)
+      :request_charged,
+      :restore_output_path)
       include Aws::Structure
     end
 
@@ -7079,9 +7354,74 @@ module Aws::S3
     #         key: "ObjectKey", # required
     #         version_id: "ObjectVersionId",
     #         restore_request: {
-    #           days: 1, # required
+    #           days: 1,
     #           glacier_job_parameters: {
     #             tier: "Standard", # required, accepts Standard, Bulk, Expedited
+    #           },
+    #           type: "SELECT", # accepts SELECT
+    #           tier: "Standard", # accepts Standard, Bulk, Expedited
+    #           description: "Description",
+    #           select_parameters: {
+    #             input_serialization: { # required
+    #               csv: {
+    #                 file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #                 comments: "Comments",
+    #                 quote_escape_character: "QuoteEscapeCharacter",
+    #                 record_delimiter: "RecordDelimiter",
+    #                 field_delimiter: "FieldDelimiter",
+    #                 quote_character: "QuoteCharacter",
+    #               },
+    #             },
+    #             expression_type: "SQL", # required, accepts SQL
+    #             expression: "Expression", # required
+    #             output_serialization: { # required
+    #               csv: {
+    #                 quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #                 quote_escape_character: "QuoteEscapeCharacter",
+    #                 record_delimiter: "RecordDelimiter",
+    #                 field_delimiter: "FieldDelimiter",
+    #                 quote_character: "QuoteCharacter",
+    #               },
+    #             },
+    #           },
+    #           output_location: {
+    #             s3: {
+    #               bucket_name: "BucketName", # required
+    #               prefix: "LocationPrefix", # required
+    #               encryption: {
+    #                 encryption_type: "AES256", # required, accepts AES256, aws:kms
+    #                 kms_key_id: "SSEKMSKeyId",
+    #                 kms_context: "KMSContext",
+    #               },
+    #               canned_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #               access_control_list: [
+    #                 {
+    #                   grantee: {
+    #                     display_name: "DisplayName",
+    #                     email_address: "EmailAddress",
+    #                     id: "ID",
+    #                     type: "CanonicalUser", # required, accepts CanonicalUser, AmazonCustomerByEmail, Group
+    #                     uri: "URI",
+    #                   },
+    #                   permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #                 },
+    #               ],
+    #               tagging: {
+    #                 tag_set: [ # required
+    #                   {
+    #                     key: "ObjectKey", # required
+    #                     value: "Value", # required
+    #                   },
+    #                 ],
+    #               },
+    #               user_metadata: [
+    #                 {
+    #                   name: "MetadataKey",
+    #                   value: "MetadataValue",
+    #                 },
+    #               ],
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #             },
     #           },
     #         },
     #         request_payer: "requester", # accepts requester
@@ -7097,6 +7437,7 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] restore_request
+    #   Container for restore job parameters.
     #   @return [Types::RestoreRequest]
     #
     # @!attribute [rw] request_payer
@@ -7118,29 +7459,123 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Container for restore job parameters.
+    #
     # @note When making an API call, you may pass RestoreRequest
     #   data as a hash:
     #
     #       {
-    #         days: 1, # required
+    #         days: 1,
     #         glacier_job_parameters: {
     #           tier: "Standard", # required, accepts Standard, Bulk, Expedited
+    #         },
+    #         type: "SELECT", # accepts SELECT
+    #         tier: "Standard", # accepts Standard, Bulk, Expedited
+    #         description: "Description",
+    #         select_parameters: {
+    #           input_serialization: { # required
+    #             csv: {
+    #               file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #               comments: "Comments",
+    #               quote_escape_character: "QuoteEscapeCharacter",
+    #               record_delimiter: "RecordDelimiter",
+    #               field_delimiter: "FieldDelimiter",
+    #               quote_character: "QuoteCharacter",
+    #             },
+    #           },
+    #           expression_type: "SQL", # required, accepts SQL
+    #           expression: "Expression", # required
+    #           output_serialization: { # required
+    #             csv: {
+    #               quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #               quote_escape_character: "QuoteEscapeCharacter",
+    #               record_delimiter: "RecordDelimiter",
+    #               field_delimiter: "FieldDelimiter",
+    #               quote_character: "QuoteCharacter",
+    #             },
+    #           },
+    #         },
+    #         output_location: {
+    #           s3: {
+    #             bucket_name: "BucketName", # required
+    #             prefix: "LocationPrefix", # required
+    #             encryption: {
+    #               encryption_type: "AES256", # required, accepts AES256, aws:kms
+    #               kms_key_id: "SSEKMSKeyId",
+    #               kms_context: "KMSContext",
+    #             },
+    #             canned_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #             access_control_list: [
+    #               {
+    #                 grantee: {
+    #                   display_name: "DisplayName",
+    #                   email_address: "EmailAddress",
+    #                   id: "ID",
+    #                   type: "CanonicalUser", # required, accepts CanonicalUser, AmazonCustomerByEmail, Group
+    #                   uri: "URI",
+    #                 },
+    #                 permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #               },
+    #             ],
+    #             tagging: {
+    #               tag_set: [ # required
+    #                 {
+    #                   key: "ObjectKey", # required
+    #                   value: "Value", # required
+    #                 },
+    #               ],
+    #             },
+    #             user_metadata: [
+    #               {
+    #                 name: "MetadataKey",
+    #                 value: "MetadataValue",
+    #               },
+    #             ],
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #           },
     #         },
     #       }
     #
     # @!attribute [rw] days
-    #   Lifetime of the active copy in days
+    #   Lifetime of the active copy in days. Do not use with restores that
+    #   specify OutputLocation.
     #   @return [Integer]
     #
     # @!attribute [rw] glacier_job_parameters
-    #   Glacier related prameters pertaining to this job.
+    #   Glacier related parameters pertaining to this job. Do not use with
+    #   restores that specify OutputLocation.
     #   @return [Types::GlacierJobParameters]
+    #
+    # @!attribute [rw] type
+    #   Type of restore request.
+    #   @return [String]
+    #
+    # @!attribute [rw] tier
+    #   Glacier retrieval tier at which the restore will be processed.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The optional description for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] select_parameters
+    #   Describes the parameters for Select job types.
+    #   @return [Types::SelectParameters]
+    #
+    # @!attribute [rw] output_location
+    #   Describes the location where the restore job's output is stored.
+    #   @return [Types::OutputLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreRequest AWS API Documentation
     #
     class RestoreRequest < Struct.new(
       :days,
-      :glacier_job_parameters)
+      :glacier_job_parameters,
+      :type,
+      :tier,
+      :description,
+      :select_parameters,
+      :output_location)
       include Aws::Structure
     end
 
@@ -7297,6 +7732,98 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Describes an S3 location that will receive the results of the restore
+    # request.
+    #
+    # @note When making an API call, you may pass S3Location
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "BucketName", # required
+    #         prefix: "LocationPrefix", # required
+    #         encryption: {
+    #           encryption_type: "AES256", # required, accepts AES256, aws:kms
+    #           kms_key_id: "SSEKMSKeyId",
+    #           kms_context: "KMSContext",
+    #         },
+    #         canned_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+    #         access_control_list: [
+    #           {
+    #             grantee: {
+    #               display_name: "DisplayName",
+    #               email_address: "EmailAddress",
+    #               id: "ID",
+    #               type: "CanonicalUser", # required, accepts CanonicalUser, AmazonCustomerByEmail, Group
+    #               uri: "URI",
+    #             },
+    #             permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #           },
+    #         ],
+    #         tagging: {
+    #           tag_set: [ # required
+    #             {
+    #               key: "ObjectKey", # required
+    #               value: "Value", # required
+    #             },
+    #           ],
+    #         },
+    #         user_metadata: [
+    #           {
+    #             name: "MetadataKey",
+    #             value: "MetadataValue",
+    #           },
+    #         ],
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the bucket where the restore results will be placed.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The prefix that is prepended to the restore results for this
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption
+    #   Describes the server-side encryption that will be applied to the
+    #   restore results.
+    #   @return [Types::Encryption]
+    #
+    # @!attribute [rw] canned_acl
+    #   The canned ACL to apply to the restore results.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_control_list
+    #   A list of grants that control access to the staged results.
+    #   @return [Array<Types::Grant>]
+    #
+    # @!attribute [rw] tagging
+    #   The tag-set that is applied to the restore results.
+    #   @return [Types::Tagging]
+    #
+    # @!attribute [rw] user_metadata
+    #   A list of metadata to store with the restore results in S3.
+    #   @return [Array<Types::MetadataEntry>]
+    #
+    # @!attribute [rw] storage_class
+    #   The class of storage used to store the restore results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/S3Location AWS API Documentation
+    #
+    class S3Location < Struct.new(
+      :bucket_name,
+      :prefix,
+      :encryption,
+      :canned_acl,
+      :access_control_list,
+      :tagging,
+      :user_metadata,
+      :storage_class)
+      include Aws::Structure
+    end
+
     # Specifies the use of SSE-KMS to encrypt delievered Inventory reports.
     #
     # @note When making an API call, you may pass SSEKMS
@@ -7325,6 +7852,61 @@ module Aws::S3
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SSES3 AWS API Documentation
     #
     class SSES3 < Aws::EmptyStructure; end
+
+    # Describes the parameters for Select job types.
+    #
+    # @note When making an API call, you may pass SelectParameters
+    #   data as a hash:
+    #
+    #       {
+    #         input_serialization: { # required
+    #           csv: {
+    #             file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #             comments: "Comments",
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #         },
+    #         expression_type: "SQL", # required, accepts SQL
+    #         expression: "Expression", # required
+    #         output_serialization: { # required
+    #           csv: {
+    #             quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] input_serialization
+    #   Describes the serialization format of the object.
+    #   @return [Types::InputSerialization]
+    #
+    # @!attribute [rw] expression_type
+    #   The type of the provided expression (e.g., SQL).
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The expression that is used to query the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_serialization
+    #   Describes how the results of the Select job are serialized.
+    #   @return [Types::OutputSerialization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectParameters AWS API Documentation
+    #
+    class SelectParameters < Struct.new(
+      :input_serialization,
+      :expression_type,
+      :expression,
+      :output_serialization)
+      include Aws::Structure
+    end
 
     # Describes the default server-side encryption to apply to new objects
     # in the bucket. If Put Object request does not specify any server-side

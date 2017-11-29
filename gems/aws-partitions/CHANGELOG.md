@@ -1,6 +1,25 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2017-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Translate`.
+
+* Feature - Added support for enumerating regions for `Aws::SageMakerRuntime`.
+
+* Feature - Added support for enumerating regions for `Aws::SageMaker`.
+
+* Feature - Added support for enumerating regions for `Aws::KinesisVideoMedia`.
+
+* Feature - Added support for enumerating regions for `Aws::KinesisVideoArchivedMedia`.
+
+* Feature - Added support for enumerating regions for `Aws::KinesisVideo`.
+
+* Feature - Added support for enumerating regions for `Aws::IoTJobsDataPlane`.
+
+* Feature - Added support for enumerating regions for `Aws::Comprehend`.
+
 1.41.0 (2017-11-29)
 ------------------
 

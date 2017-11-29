@@ -133,6 +133,12 @@ module Aws::DynamoDB
       data[:table_arn]
     end
 
+    # Unique identifier for the table for which the backup was created.
+    # @return [String]
+    def table_id
+      data[:table_id]
+    end
+
     # Represents one or more local secondary indexes on the table. Each
     # index is scoped to a given partition key value. Tables with one or
     # more local secondary indexes are subject to an item collection size
@@ -283,6 +289,12 @@ module Aws::DynamoDB
     # @return [String]
     def latest_stream_arn
       data[:latest_stream_arn]
+    end
+
+    # Contains details for the restore.
+    # @return [Types::RestoreSummary]
+    def restore_summary
+      data[:restore_summary]
     end
 
     # @!endgroup

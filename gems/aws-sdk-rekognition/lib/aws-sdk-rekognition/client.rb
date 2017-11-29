@@ -202,7 +202,7 @@ module Aws::Rekognition
     #
     #  </note>
     #
-    # For an example, see get-started-exercise-compare-faces.
+    # For an example, see faces-compare-images.
     #
     # This operation requires permissions to perform the
     # `rekognition:CompareFaces` action.
@@ -359,8 +359,6 @@ module Aws::Rekognition
     #
     #  </note>
     #
-    # For an example, see example1.
-    #
     # This operation requires permissions to perform the
     # `rekognition:CreateCollection` action.
     #
@@ -407,8 +405,88 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Creates an Amazon Rekognition stream processor that you can use to
+    # detect and recognize faces in a streaming video.
+    #
+    # Rekognition Video is a consumer of live video from Amazon Kinesis
+    # Video Streams. Rekognition Video sends analysis results to Amazon
+    # Kinesis Data Streams.
+    #
+    # You provide as input a Kinesis video stream (`Input`) and a Kinesis
+    # data stream (`Output`) stream. You also specify the face recognition
+    # criteria in `Settings`. For example, the collection containing faces
+    # that you want to recognize. Use `Name` to assign an identifier for the
+    # stream processor. You use `Name` to manage the stream processor. For
+    # example, you can start processing the source video by calling with the
+    # `Name` field.
+    #
+    # After you have finished analyzing a streaming video, use to stop
+    # processing. You can delete the stream processor by calling .
+    #
+    # @option params [required, Types::StreamProcessorInput] :input
+    #   Kinesis video stream stream that provides the source streaming video.
+    #   If you are using the AWS CLI, the parameter name is
+    #   `StreamProcessorInput`.
+    #
+    # @option params [required, Types::StreamProcessorOutput] :output
+    #   Kinesis data stream stream to which Rekognition Video puts the
+    #   analysis results. If you are using the AWS CLI, the parameter name is
+    #   `StreamProcessorOutput`.
+    #
+    # @option params [required, String] :name
+    #   An identifier you assign to the stream processor. You can use `Name`
+    #   to manage the stream processor. For example, you can get the current
+    #   status of the stream processor by calling . `Name` is idempotent.
+    #
+    # @option params [required, Types::StreamProcessorSettings] :settings
+    #   Face recognition input parameters to be used by the stream processor.
+    #   Includes the collection to use for face recognition and the face
+    #   attributes to detect.
+    #
+    # @option params [required, String] :role_arn
+    #   ARN of the IAM role that allows access to the stream processor.
+    #
+    # @return [Types::CreateStreamProcessorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStreamProcessorResponse#stream_processor_arn #stream_processor_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_stream_processor({
+    #     input: { # required
+    #       kinesis_video_stream: {
+    #         arn: "KinesisVideoArn",
+    #       },
+    #     },
+    #     output: { # required
+    #       kinesis_data_stream: {
+    #         arn: "KinesisDataArn",
+    #       },
+    #     },
+    #     name: "StreamProcessorName", # required
+    #     settings: { # required
+    #       face_search: {
+    #         collection_id: "CollectionId",
+    #         face_match_threshold: 1.0,
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_processor_arn #=> String
+    #
+    # @overload create_stream_processor(params = {})
+    # @param [Hash] params ({})
+    def create_stream_processor(params = {}, options = {})
+      req = build_request(:create_stream_processor, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified collection. Note that this operation removes all
-    # faces in the collection. For an example, see example1.
+    # faces in the collection. For an example, see
+    # delete-collection-procedure.
     #
     # This operation requires permissions to perform the
     # `rekognition:DeleteCollection` action.
@@ -505,6 +583,77 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Deletes the stream processor identified by `Name`. You assign the
+    # value for `Name` when you create the stream processor with . You might
+    # not be able to use the same name for a stream processor for a few
+    # seconds after calling `DeleteStreamProcessor`.
+    #
+    # @option params [required, String] :name
+    #   The name of the stream processor you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_stream_processor({
+    #     name: "StreamProcessorName", # required
+    #   })
+    #
+    # @overload delete_stream_processor(params = {})
+    # @param [Hash] params ({})
+    def delete_stream_processor(params = {}, options = {})
+      req = build_request(:delete_stream_processor, params)
+      req.send_request(options)
+    end
+
+    # Provides information about a stream processor created by . You can get
+    # information about the input and output streams, the input parameters
+    # for the face recognition being performed, and the current status of
+    # the stream processor.
+    #
+    # @option params [required, String] :name
+    #   Name of the stream processor for which you want information.
+    #
+    # @return [Types::DescribeStreamProcessorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStreamProcessorResponse#name #name} => String
+    #   * {Types::DescribeStreamProcessorResponse#stream_processor_arn #stream_processor_arn} => String
+    #   * {Types::DescribeStreamProcessorResponse#status #status} => String
+    #   * {Types::DescribeStreamProcessorResponse#status_message #status_message} => String
+    #   * {Types::DescribeStreamProcessorResponse#creation_timestamp #creation_timestamp} => Time
+    #   * {Types::DescribeStreamProcessorResponse#last_update_timestamp #last_update_timestamp} => Time
+    #   * {Types::DescribeStreamProcessorResponse#input #input} => Types::StreamProcessorInput
+    #   * {Types::DescribeStreamProcessorResponse#output #output} => Types::StreamProcessorOutput
+    #   * {Types::DescribeStreamProcessorResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeStreamProcessorResponse#settings #settings} => Types::StreamProcessorSettings
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_stream_processor({
+    #     name: "StreamProcessorName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.stream_processor_arn #=> String
+    #   resp.status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING"
+    #   resp.status_message #=> String
+    #   resp.creation_timestamp #=> Time
+    #   resp.last_update_timestamp #=> Time
+    #   resp.input.kinesis_video_stream.arn #=> String
+    #   resp.output.kinesis_data_stream.arn #=> String
+    #   resp.role_arn #=> String
+    #   resp.settings.face_search.collection_id #=> String
+    #   resp.settings.face_search.face_match_threshold #=> Float
+    #
+    # @overload describe_stream_processor(params = {})
+    # @param [Hash] params ({})
+    def describe_stream_processor(params = {}, options = {})
+      req = build_request(:describe_stream_processor, params)
+      req.send_request(options)
+    end
+
     # Detects faces within an image that is provided as input.
     #
     # `DetectFaces` detects the 100 largest faces in the image. For each
@@ -528,7 +677,7 @@ module Aws::Rekognition
     #
     #  </note>
     #
-    # For an example, see get-started-exercise-detect-faces.
+    # For an example, see procedure-detecting-faces-in-images.
     #
     # This operation requires permissions to perform the
     # `rekognition:DetectFaces` action.
@@ -683,11 +832,16 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Detects instances of real-world labels within an image (JPEG or PNG)
+    # Detects instances of real-world entities within an image (JPEG or PNG)
     # provided as input. This includes objects like flower, tree, and table;
     # events like wedding, graduation, and birthday party; and concepts like
-    # landscape, evening, and nature. For an example, see
-    # get-started-exercise-detect-labels.
+    # landscape, evening, and nature. For an example, see images-s3.
+    #
+    # <note markdown="1"> `DetectLabels` does not support the detection of activities. However,
+    # activity detection is supported for label detection in videos. For
+    # more information, see .
+    #
+    #  </note>
     #
     # You pass the input image as base64-encoded image bytes or as a
     # reference to an image in an Amazon S3 bucket. If you use the Amazon
@@ -828,7 +982,7 @@ module Aws::Rekognition
     #
     # To filter images, use the labels returned by `DetectModerationLabels`
     # to determine which types of content are appropriate. For information
-    # about moderation labels, see image-moderation.
+    # about moderation labels, see moderation.
     #
     # You pass the input image either as base64-encoded image bytes or as a
     # reference to an image in an Amazon S3 bucket. If you use the Amazon
@@ -965,7 +1119,7 @@ module Aws::Rekognition
     # his or her Rekognition ID. The additional information is returned as
     # an array of URLs. If there is no additional information about the
     # celebrity, this list is empty. For more information, see
-    # celebrity-recognition.
+    # get-celebrity-info-procedure.
     #
     # This operation requires permissions to perform the
     # `rekognition:GetCelebrityInfo` action.
@@ -995,6 +1149,697 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def get_celebrity_info(params = {}, options = {})
       req = build_request(:get_celebrity_info, params)
+      req.send_request(options)
+    end
+
+    # Gets the celebrity recognition results for a Rekognition Video
+    # analysis started by .
+    #
+    # Celebrity recognition in a video is an asynchronous operation.
+    # Analysis is started by a call to which returns a job identifier
+    # (`JobId`). When the celebrity recognition operation finishes,
+    # Rekognition Video publishes a completion status to the Amazon Simple
+    # Notification Service topic registered in the initial call to
+    # `StartCelebrityRecognition`. To get the results of the celebrity
+    # recognition analysis, first check that the status value published to
+    # the Amazon SNS topic is `SUCCEEDED`. If so, call
+    # `GetCelebrityDetection` and pass the job identifier (`JobId`) from the
+    # initial call to `StartCelebrityDetection`. For more information, see
+    # video.
+    #
+    # `GetCelebrityRecognition` returns detected celebrities and the time(s)
+    # they are detected in an array (`Celebrities`) of objects. Each
+    # `CelebrityRecognition` contains information about the celebrity in a
+    # object and the time, `Timestamp`, the celebrity was detected.
+    #
+    # By default, the `Celebrities` array is sorted by time (milliseconds
+    # from the start of the video). You can also sort the array by celebrity
+    # by specifying the value `ID` in the `SortBy` input parameter.
+    #
+    # The `CelebrityDetail` object includes the celebrity identifer and
+    # additional information urls. If you don't store the additional
+    # information urls, you can get them later by calling with the celebrity
+    # identifer.
+    #
+    # No information is returned for faces not recognized as celebrities.
+    #
+    # Use MaxResults parameter to limit the number of labels returned. If
+    # there are more results than specified in `MaxResults`, the value of
+    # `NextToken` in the operation response contains a pagination token for
+    # getting the next set of results. To get the next page of results, call
+    # `GetCelebrityDetection` and populate the `NextToken` request parameter
+    # with the token value returned from the previous call to
+    # `GetCelebrityRecognition`.
+    #
+    # @option params [required, String] :job_id
+    #   Job identifier for the required celebrity recognition analysis. You
+    #   can get the job identifer from a call to `StartCelebrityRecognition`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of celebrities you want Rekognition Video to return in
+    #   the response. The default is 1000.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more
+    #   recognized celebrities to retrieve), Rekognition Video returns a
+    #   pagination token in the response. You can use this pagination token to
+    #   retrieve the next set of celebrities.
+    #
+    # @option params [String] :sort_by
+    #   Sort to use for celebrities returned in `Celebrities` field. Specify
+    #   `ID` to sort by the celebrity identifier, specify `TIMESTAMP` to sort
+    #   by the time the celebrity was recognized.
+    #
+    # @return [Types::GetCelebrityRecognitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCelebrityRecognitionResponse#job_status #job_status} => String
+    #   * {Types::GetCelebrityRecognitionResponse#status_message #status_message} => String
+    #   * {Types::GetCelebrityRecognitionResponse#video_metadata #video_metadata} => Types::VideoMetadata
+    #   * {Types::GetCelebrityRecognitionResponse#next_token #next_token} => String
+    #   * {Types::GetCelebrityRecognitionResponse#celebrities #celebrities} => Array&lt;Types::CelebrityRecognition&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_celebrity_recognition({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "ID", # accepts ID, TIMESTAMP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.video_metadata.codec #=> String
+    #   resp.video_metadata.duration_millis #=> Integer
+    #   resp.video_metadata.format #=> String
+    #   resp.video_metadata.frame_rate #=> Float
+    #   resp.video_metadata.frame_height #=> Integer
+    #   resp.video_metadata.frame_width #=> Integer
+    #   resp.next_token #=> String
+    #   resp.celebrities #=> Array
+    #   resp.celebrities[0].timestamp #=> Integer
+    #   resp.celebrities[0].celebrity.urls #=> Array
+    #   resp.celebrities[0].celebrity.urls[0] #=> String
+    #   resp.celebrities[0].celebrity.name #=> String
+    #   resp.celebrities[0].celebrity.id #=> String
+    #   resp.celebrities[0].celebrity.confidence #=> Float
+    #   resp.celebrities[0].celebrity.bounding_box.width #=> Float
+    #   resp.celebrities[0].celebrity.bounding_box.height #=> Float
+    #   resp.celebrities[0].celebrity.bounding_box.left #=> Float
+    #   resp.celebrities[0].celebrity.bounding_box.top #=> Float
+    #   resp.celebrities[0].celebrity.face.bounding_box.width #=> Float
+    #   resp.celebrities[0].celebrity.face.bounding_box.height #=> Float
+    #   resp.celebrities[0].celebrity.face.bounding_box.left #=> Float
+    #   resp.celebrities[0].celebrity.face.bounding_box.top #=> Float
+    #   resp.celebrities[0].celebrity.face.age_range.low #=> Integer
+    #   resp.celebrities[0].celebrity.face.age_range.high #=> Integer
+    #   resp.celebrities[0].celebrity.face.smile.value #=> Boolean
+    #   resp.celebrities[0].celebrity.face.smile.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.eyeglasses.value #=> Boolean
+    #   resp.celebrities[0].celebrity.face.eyeglasses.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.sunglasses.value #=> Boolean
+    #   resp.celebrities[0].celebrity.face.sunglasses.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.gender.value #=> String, one of "Male", "Female"
+    #   resp.celebrities[0].celebrity.face.gender.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.beard.value #=> Boolean
+    #   resp.celebrities[0].celebrity.face.beard.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.mustache.value #=> Boolean
+    #   resp.celebrities[0].celebrity.face.mustache.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.eyes_open.value #=> Boolean
+    #   resp.celebrities[0].celebrity.face.eyes_open.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.mouth_open.value #=> Boolean
+    #   resp.celebrities[0].celebrity.face.mouth_open.confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.emotions #=> Array
+    #   resp.celebrities[0].celebrity.face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.celebrities[0].celebrity.face.emotions[0].confidence #=> Float
+    #   resp.celebrities[0].celebrity.face.landmarks #=> Array
+    #   resp.celebrities[0].celebrity.face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
+    #   resp.celebrities[0].celebrity.face.landmarks[0].x #=> Float
+    #   resp.celebrities[0].celebrity.face.landmarks[0].y #=> Float
+    #   resp.celebrities[0].celebrity.face.pose.roll #=> Float
+    #   resp.celebrities[0].celebrity.face.pose.yaw #=> Float
+    #   resp.celebrities[0].celebrity.face.pose.pitch #=> Float
+    #   resp.celebrities[0].celebrity.face.quality.brightness #=> Float
+    #   resp.celebrities[0].celebrity.face.quality.sharpness #=> Float
+    #   resp.celebrities[0].celebrity.face.confidence #=> Float
+    #
+    # @overload get_celebrity_recognition(params = {})
+    # @param [Hash] params ({})
+    def get_celebrity_recognition(params = {}, options = {})
+      req = build_request(:get_celebrity_recognition, params)
+      req.send_request(options)
+    end
+
+    # Gets the content moderation analysis results for a Rekognition Video
+    # analysis started by .
+    #
+    # Content moderation analysis of a video is an asynchronous operation.
+    # You start analysis by calling . which returns a job identifier
+    # (`JobId`). When analysis finishes, Rekognition Video publishes a
+    # completion status to the Amazon Simple Notification Service topic
+    # registered in the initial call to `StartContentModeration`. To get the
+    # results of the content moderation analysis, first check that the
+    # status value published to the Amazon SNS topic is `SUCCEEDED`. If so,
+    # call `GetCelebrityDetection` and pass the job identifier (`JobId`)
+    # from the initial call to `StartCelebrityDetection`. For more
+    # information, see video.
+    #
+    # `GetContentModeration` returns detected content moderation labels, and
+    # the time they are detected, in an array, `ModerationLabels`, of
+    # objects.
+    #
+    # By default, the moderated labels are returned sorted by time, in
+    # milliseconds from the start of the video. You can also sort them by
+    # moderated label by specifying `NAME` for the `SortBy` input parameter.
+    #
+    # Since video analysis can return a large number of results, use the
+    # `MaxResults` parameter to limit the number of labels returned in a
+    # single call to `GetContentModeration`. If there are more results than
+    # specified in `MaxResults`, the value of `NextToken` in the operation
+    # response contains a pagination token for getting the next set of
+    # results. To get the next page of results, call `GetContentModeration`
+    # and populate the `NextToken` request parameter with the value of
+    # `NextToken` returned from the previous call to `GetContentModeration`.
+    #
+    # For more information, see moderation.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier for the content moderation job. Use `JobId` to identify
+    #   the job in a subsequent call to `GetContentModeration`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of content moderation labels to return. The default is
+    #   1000.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more data to
+    #   retrieve), Amazon Rekognition returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of content moderation labels.
+    #
+    # @option params [String] :sort_by
+    #   Sort to use for elements in the `ModerationLabelDetections` array. Use
+    #   `TIMESTAMP` to sort array elements by the time labels are detected.
+    #   Use `NAME` to alphabetically group elements for a label together.
+    #   Within each label group, the array element are sorted by detection
+    #   confidence. The default sort is by `TIMESTAMP`.
+    #
+    # @return [Types::GetContentModerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContentModerationResponse#job_status #job_status} => String
+    #   * {Types::GetContentModerationResponse#status_message #status_message} => String
+    #   * {Types::GetContentModerationResponse#video_metadata #video_metadata} => Types::VideoMetadata
+    #   * {Types::GetContentModerationResponse#moderation_labels #moderation_labels} => Array&lt;Types::ContentModerationDetection&gt;
+    #   * {Types::GetContentModerationResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_content_moderation({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "NAME", # accepts NAME, TIMESTAMP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.video_metadata.codec #=> String
+    #   resp.video_metadata.duration_millis #=> Integer
+    #   resp.video_metadata.format #=> String
+    #   resp.video_metadata.frame_rate #=> Float
+    #   resp.video_metadata.frame_height #=> Integer
+    #   resp.video_metadata.frame_width #=> Integer
+    #   resp.moderation_labels #=> Array
+    #   resp.moderation_labels[0].timestamp #=> Integer
+    #   resp.moderation_labels[0].moderation_label.confidence #=> Float
+    #   resp.moderation_labels[0].moderation_label.name #=> String
+    #   resp.moderation_labels[0].moderation_label.parent_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload get_content_moderation(params = {})
+    # @param [Hash] params ({})
+    def get_content_moderation(params = {}, options = {})
+      req = build_request(:get_content_moderation, params)
+      req.send_request(options)
+    end
+
+    # Gets face detection results for a Rekognition Video analysis started
+    # by .
+    #
+    # Face detection with Rekognition Video is an asynchronous operation.
+    # You start face detection by calling which returns a job identifier
+    # (`JobId`). When the face detection operation finishes, Rekognition
+    # Video publishes a completion status to the Amazon Simple Notification
+    # Service topic registered in the initial call to `StartFaceDetection`.
+    # To get the results of the face detection operation, first check that
+    # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
+    # so, call and pass the job identifier (`JobId`) from the initial call
+    # to `StartFaceDetection`.
+    #
+    # `GetFaceDetection` returns an array of detected faces (`Faces`) sorted
+    # by the time the faces were detected.
+    #
+    # Use MaxResults parameter to limit the number of labels returned. If
+    # there are more results than specified in `MaxResults`, the value of
+    # `NextToken` in the operation response contains a pagination token for
+    # getting the next set of results. To get the next page of results, call
+    # `GetFaceDetection` and populate the `NextToken` request parameter with
+    # the token value returned from the previous call to `GetFaceDetection`.
+    #
+    # @option params [required, String] :job_id
+    #   Unique identifier for the face detection job. The `JobId` is returned
+    #   from `StartFaceDetection`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of detected faces to return. The default is 1000.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there are more faces
+    #   to retrieve), Rekognition Video returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of faces.
+    #
+    # @return [Types::GetFaceDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFaceDetectionResponse#job_status #job_status} => String
+    #   * {Types::GetFaceDetectionResponse#status_message #status_message} => String
+    #   * {Types::GetFaceDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
+    #   * {Types::GetFaceDetectionResponse#next_token #next_token} => String
+    #   * {Types::GetFaceDetectionResponse#faces #faces} => Array&lt;Types::FaceDetection&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_face_detection({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.video_metadata.codec #=> String
+    #   resp.video_metadata.duration_millis #=> Integer
+    #   resp.video_metadata.format #=> String
+    #   resp.video_metadata.frame_rate #=> Float
+    #   resp.video_metadata.frame_height #=> Integer
+    #   resp.video_metadata.frame_width #=> Integer
+    #   resp.next_token #=> String
+    #   resp.faces #=> Array
+    #   resp.faces[0].timestamp #=> Integer
+    #   resp.faces[0].face.bounding_box.width #=> Float
+    #   resp.faces[0].face.bounding_box.height #=> Float
+    #   resp.faces[0].face.bounding_box.left #=> Float
+    #   resp.faces[0].face.bounding_box.top #=> Float
+    #   resp.faces[0].face.age_range.low #=> Integer
+    #   resp.faces[0].face.age_range.high #=> Integer
+    #   resp.faces[0].face.smile.value #=> Boolean
+    #   resp.faces[0].face.smile.confidence #=> Float
+    #   resp.faces[0].face.eyeglasses.value #=> Boolean
+    #   resp.faces[0].face.eyeglasses.confidence #=> Float
+    #   resp.faces[0].face.sunglasses.value #=> Boolean
+    #   resp.faces[0].face.sunglasses.confidence #=> Float
+    #   resp.faces[0].face.gender.value #=> String, one of "Male", "Female"
+    #   resp.faces[0].face.gender.confidence #=> Float
+    #   resp.faces[0].face.beard.value #=> Boolean
+    #   resp.faces[0].face.beard.confidence #=> Float
+    #   resp.faces[0].face.mustache.value #=> Boolean
+    #   resp.faces[0].face.mustache.confidence #=> Float
+    #   resp.faces[0].face.eyes_open.value #=> Boolean
+    #   resp.faces[0].face.eyes_open.confidence #=> Float
+    #   resp.faces[0].face.mouth_open.value #=> Boolean
+    #   resp.faces[0].face.mouth_open.confidence #=> Float
+    #   resp.faces[0].face.emotions #=> Array
+    #   resp.faces[0].face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.faces[0].face.emotions[0].confidence #=> Float
+    #   resp.faces[0].face.landmarks #=> Array
+    #   resp.faces[0].face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
+    #   resp.faces[0].face.landmarks[0].x #=> Float
+    #   resp.faces[0].face.landmarks[0].y #=> Float
+    #   resp.faces[0].face.pose.roll #=> Float
+    #   resp.faces[0].face.pose.yaw #=> Float
+    #   resp.faces[0].face.pose.pitch #=> Float
+    #   resp.faces[0].face.quality.brightness #=> Float
+    #   resp.faces[0].face.quality.sharpness #=> Float
+    #   resp.faces[0].face.confidence #=> Float
+    #
+    # @overload get_face_detection(params = {})
+    # @param [Hash] params ({})
+    def get_face_detection(params = {}, options = {})
+      req = build_request(:get_face_detection, params)
+      req.send_request(options)
+    end
+
+    # Gets the face search results for Rekognition Video face search started
+    # by . The search returns faces in a collection that match the faces of
+    # persons detected in a video. It also includes the time(s) that faces
+    # are matched in the video.
+    #
+    # Face search in a video is an asynchronous operation. You start face
+    # search by calling to which returns a job identifier (`JobId`). When
+    # the search operation finishes, Rekognition Video publishes a
+    # completion status to the Amazon Simple Notification Service topic
+    # registered in the initial call to `StartFaceSearch`. To get the search
+    # results, first check that the status value published to the Amazon SNS
+    # topic is `SUCCEEDED`. If so, call `GetFaceSearch` and pass the job
+    # identifier (`JobId`) from the initial call to `StartFaceSearch`. For
+    # more information, see collections.
+    #
+    # The search results are retured in an array, `Persons`, of objects.
+    # Each`PersonMatch` element contains details about the matching faces in
+    # the input collection, person information for the matched person, and
+    # the time the person was matched in the video.
+    #
+    # By default, the `Persons` array is sorted by the time, in milliseconds
+    # from the start of the video, persons are matched. You can also sort by
+    # persons by specifying `INDEX` for the `SORTBY` input parameter.
+    #
+    # @option params [required, String] :job_id
+    #   The job identifer for the search request. You get the job identifier
+    #   from an initial call to `StartFaceSearch`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of search results you want Rekognition Video to return
+    #   in the response. The default is 1000.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there is more search
+    #   results to retrieve), Rekognition Video returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of search results.
+    #
+    # @option params [String] :sort_by
+    #   Sort to use for grouping faces in the response. Use `TIMESTAMP` to
+    #   group faces by the time that they are recognized. Use `INDEX` to sort
+    #   by recognized faces.
+    #
+    # @return [Types::GetFaceSearchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFaceSearchResponse#job_status #job_status} => String
+    #   * {Types::GetFaceSearchResponse#status_message #status_message} => String
+    #   * {Types::GetFaceSearchResponse#next_token #next_token} => String
+    #   * {Types::GetFaceSearchResponse#video_metadata #video_metadata} => Types::VideoMetadata
+    #   * {Types::GetFaceSearchResponse#persons #persons} => Array&lt;Types::PersonMatch&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_face_search({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "INDEX", # accepts INDEX, TIMESTAMP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.next_token #=> String
+    #   resp.video_metadata.codec #=> String
+    #   resp.video_metadata.duration_millis #=> Integer
+    #   resp.video_metadata.format #=> String
+    #   resp.video_metadata.frame_rate #=> Float
+    #   resp.video_metadata.frame_height #=> Integer
+    #   resp.video_metadata.frame_width #=> Integer
+    #   resp.persons #=> Array
+    #   resp.persons[0].timestamp #=> Integer
+    #   resp.persons[0].person.index #=> Integer
+    #   resp.persons[0].person.bounding_box.width #=> Float
+    #   resp.persons[0].person.bounding_box.height #=> Float
+    #   resp.persons[0].person.bounding_box.left #=> Float
+    #   resp.persons[0].person.bounding_box.top #=> Float
+    #   resp.persons[0].person.face.bounding_box.width #=> Float
+    #   resp.persons[0].person.face.bounding_box.height #=> Float
+    #   resp.persons[0].person.face.bounding_box.left #=> Float
+    #   resp.persons[0].person.face.bounding_box.top #=> Float
+    #   resp.persons[0].person.face.age_range.low #=> Integer
+    #   resp.persons[0].person.face.age_range.high #=> Integer
+    #   resp.persons[0].person.face.smile.value #=> Boolean
+    #   resp.persons[0].person.face.smile.confidence #=> Float
+    #   resp.persons[0].person.face.eyeglasses.value #=> Boolean
+    #   resp.persons[0].person.face.eyeglasses.confidence #=> Float
+    #   resp.persons[0].person.face.sunglasses.value #=> Boolean
+    #   resp.persons[0].person.face.sunglasses.confidence #=> Float
+    #   resp.persons[0].person.face.gender.value #=> String, one of "Male", "Female"
+    #   resp.persons[0].person.face.gender.confidence #=> Float
+    #   resp.persons[0].person.face.beard.value #=> Boolean
+    #   resp.persons[0].person.face.beard.confidence #=> Float
+    #   resp.persons[0].person.face.mustache.value #=> Boolean
+    #   resp.persons[0].person.face.mustache.confidence #=> Float
+    #   resp.persons[0].person.face.eyes_open.value #=> Boolean
+    #   resp.persons[0].person.face.eyes_open.confidence #=> Float
+    #   resp.persons[0].person.face.mouth_open.value #=> Boolean
+    #   resp.persons[0].person.face.mouth_open.confidence #=> Float
+    #   resp.persons[0].person.face.emotions #=> Array
+    #   resp.persons[0].person.face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.persons[0].person.face.emotions[0].confidence #=> Float
+    #   resp.persons[0].person.face.landmarks #=> Array
+    #   resp.persons[0].person.face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
+    #   resp.persons[0].person.face.landmarks[0].x #=> Float
+    #   resp.persons[0].person.face.landmarks[0].y #=> Float
+    #   resp.persons[0].person.face.pose.roll #=> Float
+    #   resp.persons[0].person.face.pose.yaw #=> Float
+    #   resp.persons[0].person.face.pose.pitch #=> Float
+    #   resp.persons[0].person.face.quality.brightness #=> Float
+    #   resp.persons[0].person.face.quality.sharpness #=> Float
+    #   resp.persons[0].person.face.confidence #=> Float
+    #   resp.persons[0].face_matches #=> Array
+    #   resp.persons[0].face_matches[0].similarity #=> Float
+    #   resp.persons[0].face_matches[0].face.face_id #=> String
+    #   resp.persons[0].face_matches[0].face.bounding_box.width #=> Float
+    #   resp.persons[0].face_matches[0].face.bounding_box.height #=> Float
+    #   resp.persons[0].face_matches[0].face.bounding_box.left #=> Float
+    #   resp.persons[0].face_matches[0].face.bounding_box.top #=> Float
+    #   resp.persons[0].face_matches[0].face.image_id #=> String
+    #   resp.persons[0].face_matches[0].face.external_image_id #=> String
+    #   resp.persons[0].face_matches[0].face.confidence #=> Float
+    #
+    # @overload get_face_search(params = {})
+    # @param [Hash] params ({})
+    def get_face_search(params = {}, options = {})
+      req = build_request(:get_face_search, params)
+      req.send_request(options)
+    end
+
+    # Gets the label detection results of a Rekognition Video analysis
+    # started by .
+    #
+    # The label detection operation is started by a call to which returns a
+    # job identifier (`JobId`). When the label detection operation finishes,
+    # Amazon Rekognition publishes a completion status to the Amazon Simple
+    # Notification Service topic registered in the initial call to
+    # `StartlabelDetection`. To get the results of the label detection
+    # operation, first check that the status value published to the Amazon
+    # SNS topic is `SUCCEEDED`. If so, call and pass the job identifier
+    # (`JobId`) from the initial call to `StartLabelDetection`.
+    #
+    # `GetLabelDetection` returns an array of detected labels (`Labels`)
+    # sorted by the time the labels were detected. You can also sort by the
+    # label name by specifying `NAME` for the `SortBy` input parameter.
+    #
+    # The labels returned include the label name, the percentage confidence
+    # in the accuracy of the detected label, and the time the label was
+    # detected in the video.
+    #
+    # Use MaxResults parameter to limit the number of labels returned. If
+    # there are more results than specified in `MaxResults`, the value of
+    # `NextToken` in the operation response contains a pagination token for
+    # getting the next set of results. To get the next page of results, call
+    # `GetlabelDetection` and populate the `NextToken` request parameter
+    # with the token value returned from the previous call to
+    # `GetLabelDetection`.
+    #
+    # @option params [required, String] :job_id
+    #   Job identifier for the label detection operation for which you want
+    #   results returned. You get the job identifer from an initial call to
+    #   `StartlabelDetection`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of labels you want Amazon Rekognition to return in the
+    #   response. The default is 1000.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there are more labels
+    #   to retrieve), Rekognition Video returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of labels.
+    #
+    # @option params [String] :sort_by
+    #   Sort to use for elements in the `Labels` array. Use `TIMESTAMP` to
+    #   sort array elements by the time labels are detected. Use `NAME` to
+    #   alphabetically group elements for a label together. Within each label
+    #   group, the array element are sorted by detection confidence. The
+    #   default sort is by `TIMESTAMP`.
+    #
+    # @return [Types::GetLabelDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLabelDetectionResponse#job_status #job_status} => String
+    #   * {Types::GetLabelDetectionResponse#status_message #status_message} => String
+    #   * {Types::GetLabelDetectionResponse#video_metadata #video_metadata} => Types::VideoMetadata
+    #   * {Types::GetLabelDetectionResponse#next_token #next_token} => String
+    #   * {Types::GetLabelDetectionResponse#labels #labels} => Array&lt;Types::LabelDetection&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_label_detection({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "NAME", # accepts NAME, TIMESTAMP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.video_metadata.codec #=> String
+    #   resp.video_metadata.duration_millis #=> Integer
+    #   resp.video_metadata.format #=> String
+    #   resp.video_metadata.frame_rate #=> Float
+    #   resp.video_metadata.frame_height #=> Integer
+    #   resp.video_metadata.frame_width #=> Integer
+    #   resp.next_token #=> String
+    #   resp.labels #=> Array
+    #   resp.labels[0].timestamp #=> Integer
+    #   resp.labels[0].label.name #=> String
+    #   resp.labels[0].label.confidence #=> Float
+    #
+    # @overload get_label_detection(params = {})
+    # @param [Hash] params ({})
+    def get_label_detection(params = {}, options = {})
+      req = build_request(:get_label_detection, params)
+      req.send_request(options)
+    end
+
+    # Gets the person tracking results of a Rekognition Video analysis
+    # started by .
+    #
+    # The person detection operation is started by a call to
+    # `StartPersonTracking` which returns a job identifier (`JobId`). When
+    # the person detection operation finishes, Rekognition Video publishes a
+    # completion status to the Amazon Simple Notification Service topic
+    # registered in the initial call to `StartPersonTracking`.
+    #
+    # To get the results of the person tracking operation, first check that
+    # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
+    # so, call and pass the job identifier (`JobId`) from the initial call
+    # to `StartPersonTracking`.
+    #
+    # `GetPersonTracking` returns an array, `Persons`, of tracked persons
+    # and the time(s) they were tracked in the video.
+    #
+    # By default, the array is sorted by the time(s) a person is tracked in
+    # the video. You can sort by tracked persons by specifying `INDEX` for
+    # the `SortBy` input parameter.
+    #
+    # Use the `MaxResults` parameter to limit the number of items returned.
+    # If there are more results than specified in `MaxResults`, the value of
+    # `NextToken` in the operation response contains a pagination token for
+    # getting the next set of results. To get the next page of results, call
+    # `GetPersonTracking` and populate the `NextToken` request parameter
+    # with the token value returned from the previous call to
+    # `GetPersonTracking`.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier for a job that tracks persons in a video. You get the
+    #   `JobId` from a call to `StartPersonTracking`.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of tracked persons to return. The default is 1000.
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there are more
+    #   persons to retrieve), Rekognition Video returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of persons.
+    #
+    # @option params [String] :sort_by
+    #   Sort to use for elements in the `Persons` array. Use `TIMESTAMP` to
+    #   sort array elements by the time persons are detected. Use `INDEX` to
+    #   sort by the tracked persons. If you sort by `INDEX`, the array
+    #   elements for each person are sorted by detection confidence. The
+    #   default sort is by `TIMESTAMP`.
+    #
+    # @return [Types::GetPersonTrackingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPersonTrackingResponse#job_status #job_status} => String
+    #   * {Types::GetPersonTrackingResponse#status_message #status_message} => String
+    #   * {Types::GetPersonTrackingResponse#video_metadata #video_metadata} => Types::VideoMetadata
+    #   * {Types::GetPersonTrackingResponse#next_token #next_token} => String
+    #   * {Types::GetPersonTrackingResponse#persons #persons} => Array&lt;Types::PersonDetection&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_person_tracking({
+    #     job_id: "JobId", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "INDEX", # accepts INDEX, TIMESTAMP
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.video_metadata.codec #=> String
+    #   resp.video_metadata.duration_millis #=> Integer
+    #   resp.video_metadata.format #=> String
+    #   resp.video_metadata.frame_rate #=> Float
+    #   resp.video_metadata.frame_height #=> Integer
+    #   resp.video_metadata.frame_width #=> Integer
+    #   resp.next_token #=> String
+    #   resp.persons #=> Array
+    #   resp.persons[0].timestamp #=> Integer
+    #   resp.persons[0].person.index #=> Integer
+    #   resp.persons[0].person.bounding_box.width #=> Float
+    #   resp.persons[0].person.bounding_box.height #=> Float
+    #   resp.persons[0].person.bounding_box.left #=> Float
+    #   resp.persons[0].person.bounding_box.top #=> Float
+    #   resp.persons[0].person.face.bounding_box.width #=> Float
+    #   resp.persons[0].person.face.bounding_box.height #=> Float
+    #   resp.persons[0].person.face.bounding_box.left #=> Float
+    #   resp.persons[0].person.face.bounding_box.top #=> Float
+    #   resp.persons[0].person.face.age_range.low #=> Integer
+    #   resp.persons[0].person.face.age_range.high #=> Integer
+    #   resp.persons[0].person.face.smile.value #=> Boolean
+    #   resp.persons[0].person.face.smile.confidence #=> Float
+    #   resp.persons[0].person.face.eyeglasses.value #=> Boolean
+    #   resp.persons[0].person.face.eyeglasses.confidence #=> Float
+    #   resp.persons[0].person.face.sunglasses.value #=> Boolean
+    #   resp.persons[0].person.face.sunglasses.confidence #=> Float
+    #   resp.persons[0].person.face.gender.value #=> String, one of "Male", "Female"
+    #   resp.persons[0].person.face.gender.confidence #=> Float
+    #   resp.persons[0].person.face.beard.value #=> Boolean
+    #   resp.persons[0].person.face.beard.confidence #=> Float
+    #   resp.persons[0].person.face.mustache.value #=> Boolean
+    #   resp.persons[0].person.face.mustache.confidence #=> Float
+    #   resp.persons[0].person.face.eyes_open.value #=> Boolean
+    #   resp.persons[0].person.face.eyes_open.confidence #=> Float
+    #   resp.persons[0].person.face.mouth_open.value #=> Boolean
+    #   resp.persons[0].person.face.mouth_open.confidence #=> Float
+    #   resp.persons[0].person.face.emotions #=> Array
+    #   resp.persons[0].person.face.emotions[0].type #=> String, one of "HAPPY", "SAD", "ANGRY", "CONFUSED", "DISGUSTED", "SURPRISED", "CALM", "UNKNOWN"
+    #   resp.persons[0].person.face.emotions[0].confidence #=> Float
+    #   resp.persons[0].person.face.landmarks #=> Array
+    #   resp.persons[0].person.face.landmarks[0].type #=> String, one of "eyeLeft", "eyeRight", "nose", "mouthLeft", "mouthRight", "leftEyeBrowLeft", "leftEyeBrowRight", "leftEyeBrowUp", "rightEyeBrowLeft", "rightEyeBrowRight", "rightEyeBrowUp", "leftEyeLeft", "leftEyeRight", "leftEyeUp", "leftEyeDown", "rightEyeLeft", "rightEyeRight", "rightEyeUp", "rightEyeDown", "noseLeft", "noseRight", "mouthUp", "mouthDown", "leftPupil", "rightPupil"
+    #   resp.persons[0].person.face.landmarks[0].x #=> Float
+    #   resp.persons[0].person.face.landmarks[0].y #=> Float
+    #   resp.persons[0].person.face.pose.roll #=> Float
+    #   resp.persons[0].person.face.pose.yaw #=> Float
+    #   resp.persons[0].person.face.pose.pitch #=> Float
+    #   resp.persons[0].person.face.quality.brightness #=> Float
+    #   resp.persons[0].person.face.quality.sharpness #=> Float
+    #   resp.persons[0].person.face.confidence #=> Float
+    #
+    # @overload get_person_tracking(params = {})
+    # @param [Hash] params ({})
+    def get_person_tracking(params = {}, options = {})
+      req = build_request(:get_person_tracking, params)
       req.send_request(options)
     end
 
@@ -1038,8 +1883,6 @@ module Aws::Rekognition
     # reference to an image in an Amazon S3 bucket. If you use the Amazon
     # CLI to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
-    #
-    # For an example, see example2.
     #
     # This operation requires permissions to perform the
     # `rekognition:IndexFaces` action.
@@ -1292,7 +2135,7 @@ module Aws::Rekognition
     # truncated, the response also provides a `NextToken` that you can use
     # in the subsequent request to fetch the next set of collection IDs.
     #
-    # For an example, see example1.
+    # For an example, see list-collection-procedure.
     #
     # This operation requires permissions to perform the
     # `rekognition:ListCollections` action.
@@ -1349,7 +2192,7 @@ module Aws::Rekognition
     # Returns metadata for faces in the specified collection. This metadata
     # includes information such as the bounding box coordinates, the
     # confidence (that the bounding box contains a face), and face ID. For
-    # an example, see example3.
+    # an example, see list-faces-in-collection-procedure.
     #
     # This operation requires permissions to perform the
     # `rekognition:ListFaces` action.
@@ -1538,8 +2381,46 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Gets a list of stream processors that you have created with .
+    #
+    # @option params [String] :next_token
+    #   If the previous response was incomplete (because there are more stream
+    #   processors to retrieve), Rekognition Video returns a pagination token
+    #   in the response. You can use this pagination token to retrieve the
+    #   next set of stream processors.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of stream processors you want Rekognition Video to
+    #   return in the response. The default is 1000.
+    #
+    # @return [Types::ListStreamProcessorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStreamProcessorsResponse#next_token #next_token} => String
+    #   * {Types::ListStreamProcessorsResponse#stream_processors #stream_processors} => Array&lt;Types::StreamProcessor&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_stream_processors({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.stream_processors #=> Array
+    #   resp.stream_processors[0].name #=> String
+    #   resp.stream_processors[0].status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING"
+    #
+    # @overload list_stream_processors(params = {})
+    # @param [Hash] params ({})
+    def list_stream_processors(params = {}, options = {})
+      req = build_request(:list_stream_processors, params)
+      req.send_request(options)
+    end
+
     # Returns an array of celebrities recognized in the input image. For
-    # more information, see celebrity-recognition.
+    # more information, see celebrities.
     #
     # `RecognizeCelebrities` returns the 100 largest faces in the image. It
     # lists recognized celebrities in the `CelebrityFaces` array and
@@ -1565,7 +2446,7 @@ module Aws::Rekognition
     # CLI to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
-    # For an example, see recognize-celebrities-tutorial.
+    # For an example, see celebrities-procedure-image.
     #
     # This operation requires permissions to perform the
     # `rekognition:RecognizeCelebrities` operation.
@@ -1658,7 +2539,7 @@ module Aws::Rekognition
     # `confidence` value for each face match, indicating the confidence that
     # the specific face matches the input face.
     #
-    # For an example, see example3.
+    # For an example, see search-face-with-id-procedure.
     #
     # This operation requires permissions to perform the
     # `rekognition:SearchFaces` action.
@@ -1805,7 +2686,7 @@ module Aws::Rekognition
     # bounding box contains a face) of the face that Amazon Rekognition used
     # for the input image.
     #
-    # For an example, see example3.
+    # For an example, see search-face-with-image-procedure.
     #
     # This operation requires permissions to perform the
     # `rekognition:SearchFacesByImage` action.
@@ -1920,6 +2801,489 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Starts asynchronous recognition of celebrities in a stored video.
+    #
+    # Rekognition Video can detect celebrities in a video must be stored in
+    # an Amazon S3 bucket. Use Video to specify the bucket name and the
+    # filename of the video. `StartCelebrityRecognition` returns a job
+    # identifier (`JobId`) which you use to get the results of the analysis.
+    # When celebrity recognition analysis is finished, Rekognition Video
+    # publishes a completion status to the Amazon Simple Notification
+    # Service topic that you specify in `NotificationChannel`. To get the
+    # results of the celebrity recognition analysis, first check that the
+    # status value published to the Amazon SNS topic is `SUCCEEDED`. If so,
+    # call and pass the job identifier (`JobId`) from the initial call to
+    # `StartCelebrityRecognition`. For more information, see celebrities.
+    #
+    # @option params [required, Types::Video] :video
+    #   The video in which you want to recognize celebrities. The video must
+    #   be stored in an Amazon S3 bucket.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartCelebrityRecognition` requests, the
+    #   same `JobId` is returned. Use `ClientRequestToken` to prevent the same
+    #   job from being accidently started more than once.
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The Amazon SNS topic ARN that you want Rekognition Video to publish
+    #   the completion status of the celebrity recognition analysis to.
+    #
+    # @option params [String] :job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #
+    # @return [Types::StartCelebrityRecognitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCelebrityRecognitionResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_celebrity_recognition({
+    #     video: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     job_tag: "JobTag",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_celebrity_recognition(params = {})
+    # @param [Hash] params ({})
+    def start_celebrity_recognition(params = {}, options = {})
+      req = build_request(:start_celebrity_recognition, params)
+      req.send_request(options)
+    end
+
+    # Starts asynchronous detection of explicit or suggestive adult content
+    # in a stored video.
+    #
+    # Rekognition Video can moderate content in a video stored in an Amazon
+    # S3 bucket. Use Video to specify the bucket name and the filename of
+    # the video. `StartContentModeration` returns a job identifier (`JobId`)
+    # which you use to get the results of the analysis. When content
+    # moderation analysis is finished, Rekognition Video publishes a
+    # completion status to the Amazon Simple Notification Service topic that
+    # you specify in `NotificationChannel`.
+    #
+    # To get the results of the content moderation analysis, first check
+    # that the status value published to the Amazon SNS topic is
+    # `SUCCEEDED`. If so, call and pass the job identifier (`JobId`) from
+    # the initial call to `StartContentModeration`. For more information,
+    # see moderation.
+    #
+    # @option params [required, Types::Video] :video
+    #   The video in which you want to moderate content. The video must be
+    #   stored in an Amazon S3 bucket.
+    #
+    # @option params [Float] :min_confidence
+    #   Specifies the minimum confidence that Amazon Rekognition must have in
+    #   order to return a moderated content label. Confidence represents how
+    #   certain Amazon Rekognition is that the moderated content is correctly
+    #   identified. 0 is the lowest confidence. 100 is the highest confidence.
+    #   Amazon Rekognition doesn't return any moderated content labels with a
+    #   confidence level lower than this specified value.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartContentModeration` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same job
+    #   from being accidently started more than once.
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The Amazon SNS topic ARN that you want Rekognition Video to publish
+    #   the completion status of the content moderation analysis to.
+    #
+    # @option params [String] :job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #
+    # @return [Types::StartContentModerationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartContentModerationResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_content_moderation({
+    #     video: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     min_confidence: 1.0,
+    #     client_request_token: "ClientRequestToken",
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     job_tag: "JobTag",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_content_moderation(params = {})
+    # @param [Hash] params ({})
+    def start_content_moderation(params = {}, options = {})
+      req = build_request(:start_content_moderation, params)
+      req.send_request(options)
+    end
+
+    # Starts asynchronous detection of faces in a stored video.
+    #
+    # Rekognition Video can detect faces in a video stored in an Amazon S3
+    # bucket. Use Video to specify the bucket name and the filename of the
+    # video. `StartFaceDetection` returns a job identifier (`JobId`) that
+    # you use to get the results of the operation. When face detection is
+    # finished, Rekognition Video publishes a completion status to the
+    # Amazon Simple Notification Service topic that you specify in
+    # `NotificationChannel`. To get the results of the label detection
+    # operation, first check that the status value published to the Amazon
+    # SNS topic is `SUCCEEDED`. If so, call and pass the job identifier
+    # (`JobId`) from the initial call to `StartFaceDetection`. For more
+    # information, see faces-video.
+    #
+    # @option params [required, Types::Video] :video
+    #   The video in which you want to detect faces. The video must be stored
+    #   in an Amazon S3 bucket.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartFaceDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same job
+    #   from being accidently started more than once.
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The ARN of the Amazon SNS topic to which you want Rekognition Video to
+    #   publish the completion status of the face detection operation.
+    #
+    # @option params [String] :face_attributes
+    #   The face attributes you want returned.
+    #
+    #   `DEFAULT` - The following subset of facial attributes are returned:
+    #   BoundingBox, Confidence, Pose, Quality and Landmarks.
+    #
+    #   `ALL` - All facial attributes are returned.
+    #
+    # @option params [String] :job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #
+    # @return [Types::StartFaceDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartFaceDetectionResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_face_detection({
+    #     video: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     face_attributes: "DEFAULT", # accepts DEFAULT, ALL
+    #     job_tag: "JobTag",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_face_detection(params = {})
+    # @param [Hash] params ({})
+    def start_face_detection(params = {}, options = {})
+      req = build_request(:start_face_detection, params)
+      req.send_request(options)
+    end
+
+    # Starts the asynchronous search for faces in a collection that match
+    # the faces of persons detected in a stored video.
+    #
+    # The video must be stored in an Amazon S3 bucket. Use Video to specify
+    # the bucket name and the filename of the video. `StartFaceSearch`
+    # returns a job identifier (`JobId`) which you use to get the search
+    # results once the search has completed. When searching is finished,
+    # Rekognition Video publishes a completion status to the Amazon Simple
+    # Notification Service topic that you specify in `NotificationChannel`.
+    # To get the search results, first check that the status value published
+    # to the Amazon SNS topic is `SUCCEEDED`. If so, call and pass the job
+    # identifier (`JobId`) from the initial call to `StartFaceSearch`. For
+    # more information, see collections-search-person.
+    #
+    # @option params [required, Types::Video] :video
+    #   The video you want to search. The video must be stored in an Amazon S3
+    #   bucket.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartFaceSearch` requests, the same `JobId`
+    #   is returned. Use `ClientRequestToken` to prevent the same job from
+    #   being accidently started more than once.
+    #
+    # @option params [Float] :face_match_threshold
+    #   The minimum confidence in the person match to return. For example,
+    #   don't return any matches where confidence in matches is less than
+    #   70%.
+    #
+    # @option params [required, String] :collection_id
+    #   ID of the collection that contains the faces you want to search for.
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The ARN of the Amazon SNS topic to which you want Rekognition Video to
+    #   publish the completion status of the search.
+    #
+    # @option params [String] :job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #
+    # @return [Types::StartFaceSearchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartFaceSearchResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_face_search({
+    #     video: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     face_match_threshold: 1.0,
+    #     collection_id: "CollectionId", # required
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     job_tag: "JobTag",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_face_search(params = {})
+    # @param [Hash] params ({})
+    def start_face_search(params = {}, options = {})
+      req = build_request(:start_face_search, params)
+      req.send_request(options)
+    end
+
+    # Starts asynchronous detection of labels in a stored video.
+    #
+    # Rekognition Video can detect labels in a video. Labels are instances
+    # of real-world entities. This includes objects like flower, tree, and
+    # table; events like wedding, graduation, and birthday party; concepts
+    # like landscape, evening, and nature; and activities like a person
+    # getting out of a car or a person skiing.
+    #
+    # The video must be stored in an Amazon S3 bucket. Use Video to specify
+    # the bucket name and the filename of the video. `StartLabelDetection`
+    # returns a job identifier (`JobId`) which you use to get the results of
+    # the operation. When label detection is finished, Rekognition Video
+    # publishes a completion status to the Amazon Simple Notification
+    # Service topic that you specify in `NotificationChannel`.
+    #
+    # To get the results of the label detection operation, first check that
+    # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
+    # so, call and pass the job identifier (`JobId`) from the initial call
+    # to `StartLabelDetection`.
+    #
+    # @option params [required, Types::Video] :video
+    #   The video in which you want to detect labels. The video must be stored
+    #   in an Amazon S3 bucket.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartLabelDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same job
+    #   from being accidently started more than once.
+    #
+    # @option params [Float] :min_confidence
+    #   Specifies the minimum confidence that Rekognition Video must have in
+    #   order to return a detected label. Confidence represents how certain
+    #   Amazon Rekognition is that a label is correctly identified.0 is the
+    #   lowest confidence. 100 is the highest confidence. Rekognition Video
+    #   doesn't return any labels with a confidence level lower than this
+    #   specified value.
+    #
+    #   If you don't specify `MinConfidence`, the operation returns labels
+    #   with confidence values greater than or equal to 50 percent.
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The Amazon SNS topic ARN you want Rekognition Video to publish the
+    #   completion status of the label detection operation to.
+    #
+    # @option params [String] :job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #
+    # @return [Types::StartLabelDetectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartLabelDetectionResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_label_detection({
+    #     video: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     min_confidence: 1.0,
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     job_tag: "JobTag",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_label_detection(params = {})
+    # @param [Hash] params ({})
+    def start_label_detection(params = {}, options = {})
+      req = build_request(:start_label_detection, params)
+      req.send_request(options)
+    end
+
+    # Starts the asynchronous tracking of persons in a stored video.
+    #
+    # Rekognition Video can track persons in a video stored in an Amazon S3
+    # bucket. Use Video to specify the bucket name and the filename of the
+    # video. `StartPersonTracking` returns a job identifier (`JobId`) which
+    # you use to get the results of the operation. When label detection is
+    # finished, Amazon Rekognition publishes a completion status to the
+    # Amazon Simple Notification Service topic that you specify in
+    # `NotificationChannel`.
+    #
+    # To get the results of the person detection operation, first check that
+    # the status value published to the Amazon SNS topic is `SUCCEEDED`. If
+    # so, call and pass the job identifier (`JobId`) from the initial call
+    # to `StartPersonTracking`.
+    #
+    # @option params [required, Types::Video] :video
+    #   The video in which you want to detect people. The video must be stored
+    #   in an Amazon S3 bucket.
+    #
+    # @option params [String] :client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartPersonTracking` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same job
+    #   from being accidently started more than once.
+    #
+    # @option params [Types::NotificationChannel] :notification_channel
+    #   The Amazon SNS topic ARN you want Rekognition Video to publish the
+    #   completion status of the people detection operation to.
+    #
+    # @option params [String] :job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #
+    # @return [Types::StartPersonTrackingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartPersonTrackingResponse#job_id #job_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_person_tracking({
+    #     video: { # required
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #       role_arn: "RoleArn", # required
+    #     },
+    #     job_tag: "JobTag",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #
+    # @overload start_person_tracking(params = {})
+    # @param [Hash] params ({})
+    def start_person_tracking(params = {}, options = {})
+      req = build_request(:start_person_tracking, params)
+      req.send_request(options)
+    end
+
+    # Starts processing a stream processor. You create a stream processor by
+    # calling . To tell `StartStreamProcessor` which stream processor to
+    # start, use the value of the `Name` field specified in the call to
+    # `CreateStreamProcessor`.
+    #
+    # @option params [required, String] :name
+    #   The name of the stream processor to start processing.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_stream_processor({
+    #     name: "StreamProcessorName", # required
+    #   })
+    #
+    # @overload start_stream_processor(params = {})
+    # @param [Hash] params ({})
+    def start_stream_processor(params = {}, options = {})
+      req = build_request(:start_stream_processor, params)
+      req.send_request(options)
+    end
+
+    # Stops a running stream processor that was created by .
+    #
+    # @option params [required, String] :name
+    #   The name of a stream processor created by .
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_stream_processor({
+    #     name: "StreamProcessorName", # required
+    #   })
+    #
+    # @overload stop_stream_processor(params = {})
+    # @param [Hash] params ({})
+    def stop_stream_processor(params = {}, options = {})
+      req = build_request(:stop_stream_processor, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1933,7 +3297,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

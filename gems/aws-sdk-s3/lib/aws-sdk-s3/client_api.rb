@@ -51,11 +51,14 @@ module Aws::S3
     CORSConfiguration = Shapes::StructureShape.new(name: 'CORSConfiguration')
     CORSRule = Shapes::StructureShape.new(name: 'CORSRule')
     CORSRules = Shapes::ListShape.new(name: 'CORSRules', flattened: true)
+    CSVInput = Shapes::StructureShape.new(name: 'CSVInput')
+    CSVOutput = Shapes::StructureShape.new(name: 'CSVOutput')
     CacheControl = Shapes::StringShape.new(name: 'CacheControl')
     CloudFunction = Shapes::StringShape.new(name: 'CloudFunction')
     CloudFunctionConfiguration = Shapes::StructureShape.new(name: 'CloudFunctionConfiguration')
     CloudFunctionInvocationRole = Shapes::StringShape.new(name: 'CloudFunctionInvocationRole')
     Code = Shapes::StringShape.new(name: 'Code')
+    Comments = Shapes::StringShape.new(name: 'Comments')
     CommonPrefix = Shapes::StructureShape.new(name: 'CommonPrefix')
     CommonPrefixList = Shapes::ListShape.new(name: 'CommonPrefixList', flattened: true)
     CompleteMultipartUploadOutput = Shapes::StructureShape.new(name: 'CompleteMultipartUploadOutput')
@@ -120,11 +123,13 @@ module Aws::S3
     DeletedObject = Shapes::StructureShape.new(name: 'DeletedObject')
     DeletedObjects = Shapes::ListShape.new(name: 'DeletedObjects', flattened: true)
     Delimiter = Shapes::StringShape.new(name: 'Delimiter')
+    Description = Shapes::StringShape.new(name: 'Description')
     Destination = Shapes::StructureShape.new(name: 'Destination')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     ETag = Shapes::StringShape.new(name: 'ETag')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
     EncodingType = Shapes::StringShape.new(name: 'EncodingType')
+    Encryption = Shapes::StructureShape.new(name: 'Encryption')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     Error = Shapes::StructureShape.new(name: 'Error')
     ErrorDocument = Shapes::StructureShape.new(name: 'ErrorDocument')
@@ -138,7 +143,11 @@ module Aws::S3
     ExpiresString = Shapes::StringShape.new(name: 'ExpiresString')
     ExposeHeader = Shapes::StringShape.new(name: 'ExposeHeader')
     ExposeHeaders = Shapes::ListShape.new(name: 'ExposeHeaders', flattened: true)
+    Expression = Shapes::StringShape.new(name: 'Expression')
+    ExpressionType = Shapes::StringShape.new(name: 'ExpressionType')
     FetchOwner = Shapes::BooleanShape.new(name: 'FetchOwner')
+    FieldDelimiter = Shapes::StringShape.new(name: 'FieldDelimiter')
+    FileHeaderInfo = Shapes::StringShape.new(name: 'FileHeaderInfo')
     FilterRule = Shapes::StructureShape.new(name: 'FilterRule')
     FilterRuleList = Shapes::ListShape.new(name: 'FilterRuleList', flattened: true)
     FilterRuleName = Shapes::StringShape.new(name: 'FilterRuleName')
@@ -209,6 +218,7 @@ module Aws::S3
     IndexDocument = Shapes::StructureShape.new(name: 'IndexDocument')
     Initiated = Shapes::TimestampShape.new(name: 'Initiated')
     Initiator = Shapes::StructureShape.new(name: 'Initiator')
+    InputSerialization = Shapes::StructureShape.new(name: 'InputSerialization')
     InventoryConfiguration = Shapes::StructureShape.new(name: 'InventoryConfiguration')
     InventoryConfigurationList = Shapes::ListShape.new(name: 'InventoryConfigurationList', flattened: true)
     InventoryDestination = Shapes::StructureShape.new(name: 'InventoryDestination')
@@ -225,6 +235,7 @@ module Aws::S3
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
     IsLatest = Shapes::BooleanShape.new(name: 'IsLatest')
     IsTruncated = Shapes::BooleanShape.new(name: 'IsTruncated')
+    KMSContext = Shapes::StringShape.new(name: 'KMSContext')
     KeyCount = Shapes::IntegerShape.new(name: 'KeyCount')
     KeyMarker = Shapes::StringShape.new(name: 'KeyMarker')
     KeyPrefixEquals = Shapes::StringShape.new(name: 'KeyPrefixEquals')
@@ -256,6 +267,7 @@ module Aws::S3
     ListPartsOutput = Shapes::StructureShape.new(name: 'ListPartsOutput')
     ListPartsRequest = Shapes::StructureShape.new(name: 'ListPartsRequest')
     Location = Shapes::StringShape.new(name: 'Location')
+    LocationPrefix = Shapes::StringShape.new(name: 'LocationPrefix')
     LoggingEnabled = Shapes::StructureShape.new(name: 'LoggingEnabled')
     MFA = Shapes::StringShape.new(name: 'MFA')
     MFADelete = Shapes::StringShape.new(name: 'MFADelete')
@@ -268,6 +280,7 @@ module Aws::S3
     Message = Shapes::StringShape.new(name: 'Message')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     MetadataDirective = Shapes::StringShape.new(name: 'MetadataDirective')
+    MetadataEntry = Shapes::StructureShape.new(name: 'MetadataEntry')
     MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
     MetadataValue = Shapes::StringShape.new(name: 'MetadataValue')
     MetricsAndOperator = Shapes::StructureShape.new(name: 'MetricsAndOperator')
@@ -308,6 +321,8 @@ module Aws::S3
     ObjectVersionId = Shapes::StringShape.new(name: 'ObjectVersionId')
     ObjectVersionList = Shapes::ListShape.new(name: 'ObjectVersionList', flattened: true)
     ObjectVersionStorageClass = Shapes::StringShape.new(name: 'ObjectVersionStorageClass')
+    OutputLocation = Shapes::StructureShape.new(name: 'OutputLocation')
+    OutputSerialization = Shapes::StructureShape.new(name: 'OutputSerialization')
     Owner = Shapes::StructureShape.new(name: 'Owner')
     OwnerOverride = Shapes::StringShape.new(name: 'OwnerOverride')
     Part = Shapes::StructureShape.new(name: 'Part')
@@ -349,7 +364,11 @@ module Aws::S3
     QueueConfigurationDeprecated = Shapes::StructureShape.new(name: 'QueueConfigurationDeprecated')
     QueueConfigurationList = Shapes::ListShape.new(name: 'QueueConfigurationList', flattened: true)
     Quiet = Shapes::BooleanShape.new(name: 'Quiet')
+    QuoteCharacter = Shapes::StringShape.new(name: 'QuoteCharacter')
+    QuoteEscapeCharacter = Shapes::StringShape.new(name: 'QuoteEscapeCharacter')
+    QuoteFields = Shapes::StringShape.new(name: 'QuoteFields')
     Range = Shapes::StringShape.new(name: 'Range')
+    RecordDelimiter = Shapes::StringShape.new(name: 'RecordDelimiter')
     Redirect = Shapes::StructureShape.new(name: 'Redirect')
     RedirectAllRequestsTo = Shapes::StructureShape.new(name: 'RedirectAllRequestsTo')
     ReplaceKeyPrefixWith = Shapes::StringShape.new(name: 'ReplaceKeyPrefixWith')
@@ -372,19 +391,23 @@ module Aws::S3
     Restore = Shapes::StringShape.new(name: 'Restore')
     RestoreObjectOutput = Shapes::StructureShape.new(name: 'RestoreObjectOutput')
     RestoreObjectRequest = Shapes::StructureShape.new(name: 'RestoreObjectRequest')
+    RestoreOutputPath = Shapes::StringShape.new(name: 'RestoreOutputPath')
     RestoreRequest = Shapes::StructureShape.new(name: 'RestoreRequest')
+    RestoreRequestType = Shapes::StringShape.new(name: 'RestoreRequestType')
     Role = Shapes::StringShape.new(name: 'Role')
     RoutingRule = Shapes::StructureShape.new(name: 'RoutingRule')
     RoutingRules = Shapes::ListShape.new(name: 'RoutingRules')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     Rules = Shapes::ListShape.new(name: 'Rules', flattened: true)
     S3KeyFilter = Shapes::StructureShape.new(name: 'S3KeyFilter')
+    S3Location = Shapes::StructureShape.new(name: 'S3Location')
     SSECustomerAlgorithm = Shapes::StringShape.new(name: 'SSECustomerAlgorithm')
     SSECustomerKey = Shapes::StringShape.new(name: 'SSECustomerKey')
     SSECustomerKeyMD5 = Shapes::StringShape.new(name: 'SSECustomerKeyMD5')
     SSEKMS = Shapes::StructureShape.new(name: 'SSEKMS')
     SSEKMSKeyId = Shapes::StringShape.new(name: 'SSEKMSKeyId')
     SSES3 = Shapes::StructureShape.new(name: 'SSES3')
+    SelectParameters = Shapes::StructureShape.new(name: 'SelectParameters')
     ServerSideEncryption = Shapes::StringShape.new(name: 'ServerSideEncryption')
     ServerSideEncryptionByDefault = Shapes::StructureShape.new(name: 'ServerSideEncryptionByDefault')
     ServerSideEncryptionConfiguration = Shapes::StructureShape.new(name: 'ServerSideEncryptionConfiguration')
@@ -426,6 +449,7 @@ module Aws::S3
     UploadPartCopyRequest = Shapes::StructureShape.new(name: 'UploadPartCopyRequest')
     UploadPartOutput = Shapes::StructureShape.new(name: 'UploadPartOutput')
     UploadPartRequest = Shapes::StructureShape.new(name: 'UploadPartRequest')
+    UserMetadata = Shapes::ListShape.new(name: 'UserMetadata')
     Value = Shapes::StringShape.new(name: 'Value')
     VersionIdMarker = Shapes::StringShape.new(name: 'VersionIdMarker')
     VersioningConfiguration = Shapes::StructureShape.new(name: 'VersioningConfiguration')
@@ -508,6 +532,21 @@ module Aws::S3
     CORSRule.struct_class = Types::CORSRule
 
     CORSRules.member = Shapes::ShapeRef.new(shape: CORSRule)
+
+    CSVInput.add_member(:file_header_info, Shapes::ShapeRef.new(shape: FileHeaderInfo, location_name: "FileHeaderInfo"))
+    CSVInput.add_member(:comments, Shapes::ShapeRef.new(shape: Comments, location_name: "Comments"))
+    CSVInput.add_member(:quote_escape_character, Shapes::ShapeRef.new(shape: QuoteEscapeCharacter, location_name: "QuoteEscapeCharacter"))
+    CSVInput.add_member(:record_delimiter, Shapes::ShapeRef.new(shape: RecordDelimiter, location_name: "RecordDelimiter"))
+    CSVInput.add_member(:field_delimiter, Shapes::ShapeRef.new(shape: FieldDelimiter, location_name: "FieldDelimiter"))
+    CSVInput.add_member(:quote_character, Shapes::ShapeRef.new(shape: QuoteCharacter, location_name: "QuoteCharacter"))
+    CSVInput.struct_class = Types::CSVInput
+
+    CSVOutput.add_member(:quote_fields, Shapes::ShapeRef.new(shape: QuoteFields, location_name: "QuoteFields"))
+    CSVOutput.add_member(:quote_escape_character, Shapes::ShapeRef.new(shape: QuoteEscapeCharacter, location_name: "QuoteEscapeCharacter"))
+    CSVOutput.add_member(:record_delimiter, Shapes::ShapeRef.new(shape: RecordDelimiter, location_name: "RecordDelimiter"))
+    CSVOutput.add_member(:field_delimiter, Shapes::ShapeRef.new(shape: FieldDelimiter, location_name: "FieldDelimiter"))
+    CSVOutput.add_member(:quote_character, Shapes::ShapeRef.new(shape: QuoteCharacter, location_name: "QuoteCharacter"))
+    CSVOutput.struct_class = Types::CSVOutput
 
     CloudFunctionConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
     CloudFunctionConfiguration.add_member(:event, Shapes::ShapeRef.new(shape: Event, deprecated: true, location_name: "Event"))
@@ -761,6 +800,11 @@ module Aws::S3
     Destination.add_member(:access_control_translation, Shapes::ShapeRef.new(shape: AccessControlTranslation, location_name: "AccessControlTranslation"))
     Destination.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     Destination.struct_class = Types::Destination
+
+    Encryption.add_member(:encryption_type, Shapes::ShapeRef.new(shape: ServerSideEncryption, required: true, location_name: "EncryptionType"))
+    Encryption.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "KMSKeyId"))
+    Encryption.add_member(:kms_context, Shapes::ShapeRef.new(shape: KMSContext, location_name: "KMSContext"))
+    Encryption.struct_class = Types::Encryption
 
     EncryptionConfiguration.add_member(:replica_kms_key_id, Shapes::ShapeRef.new(shape: ReplicaKmsKeyID, location_name: "ReplicaKmsKeyID"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
@@ -1065,6 +1109,9 @@ module Aws::S3
     Initiator.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     Initiator.struct_class = Types::Initiator
 
+    InputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVInput, location_name: "CSV"))
+    InputSerialization.struct_class = Types::InputSerialization
+
     InventoryConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: InventoryDestination, required: true, location_name: "Destination"))
     InventoryConfiguration.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
     InventoryConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: InventoryFilter, location_name: "Filter"))
@@ -1295,6 +1342,10 @@ module Aws::S3
     Metadata.key = Shapes::ShapeRef.new(shape: MetadataKey)
     Metadata.value = Shapes::ShapeRef.new(shape: MetadataValue)
 
+    MetadataEntry.add_member(:name, Shapes::ShapeRef.new(shape: MetadataKey, location_name: "Name"))
+    MetadataEntry.add_member(:value, Shapes::ShapeRef.new(shape: MetadataValue, location_name: "Value"))
+    MetadataEntry.struct_class = Types::MetadataEntry
+
     MetricsAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
     MetricsAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
     MetricsAndOperator.struct_class = Types::MetricsAndOperator
@@ -1369,6 +1420,12 @@ module Aws::S3
     ObjectVersion.struct_class = Types::ObjectVersion
 
     ObjectVersionList.member = Shapes::ShapeRef.new(shape: ObjectVersion)
+
+    OutputLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3"))
+    OutputLocation.struct_class = Types::OutputLocation
+
+    OutputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVOutput, location_name: "CSV"))
+    OutputSerialization.struct_class = Types::OutputSerialization
 
     Owner.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     Owner.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
@@ -1626,6 +1683,7 @@ module Aws::S3
     RequestPaymentConfiguration.struct_class = Types::RequestPaymentConfiguration
 
     RestoreObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
+    RestoreObjectOutput.add_member(:restore_output_path, Shapes::ShapeRef.new(shape: RestoreOutputPath, location: "header", location_name: "x-amz-restore-output-path"))
     RestoreObjectOutput.struct_class = Types::RestoreObjectOutput
 
     RestoreObjectRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
@@ -1637,8 +1695,13 @@ module Aws::S3
     RestoreObjectRequest[:payload] = :restore_request
     RestoreObjectRequest[:payload_member] = RestoreObjectRequest.member(:restore_request)
 
-    RestoreRequest.add_member(:days, Shapes::ShapeRef.new(shape: Days, required: true, location_name: "Days"))
+    RestoreRequest.add_member(:days, Shapes::ShapeRef.new(shape: Days, location_name: "Days"))
     RestoreRequest.add_member(:glacier_job_parameters, Shapes::ShapeRef.new(shape: GlacierJobParameters, location_name: "GlacierJobParameters"))
+    RestoreRequest.add_member(:type, Shapes::ShapeRef.new(shape: RestoreRequestType, location_name: "Type"))
+    RestoreRequest.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, location_name: "Tier"))
+    RestoreRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    RestoreRequest.add_member(:select_parameters, Shapes::ShapeRef.new(shape: SelectParameters, location_name: "SelectParameters"))
+    RestoreRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "OutputLocation"))
     RestoreRequest.struct_class = Types::RestoreRequest
 
     RoutingRule.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "Condition"))
@@ -1662,10 +1725,26 @@ module Aws::S3
     S3KeyFilter.add_member(:filter_rules, Shapes::ShapeRef.new(shape: FilterRuleList, location_name: "FilterRule"))
     S3KeyFilter.struct_class = Types::S3KeyFilter
 
+    S3Location.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "BucketName"))
+    S3Location.add_member(:prefix, Shapes::ShapeRef.new(shape: LocationPrefix, required: true, location_name: "Prefix"))
+    S3Location.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+    S3Location.add_member(:canned_acl, Shapes::ShapeRef.new(shape: ObjectCannedACL, location_name: "CannedACL"))
+    S3Location.add_member(:access_control_list, Shapes::ShapeRef.new(shape: Grants, location_name: "AccessControlList"))
+    S3Location.add_member(:tagging, Shapes::ShapeRef.new(shape: Tagging, location_name: "Tagging"))
+    S3Location.add_member(:user_metadata, Shapes::ShapeRef.new(shape: UserMetadata, location_name: "UserMetadata"))
+    S3Location.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    S3Location.struct_class = Types::S3Location
+
     SSEKMS.add_member(:key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, required: true, location_name: "KeyId"))
     SSEKMS.struct_class = Types::SSEKMS
 
     SSES3.struct_class = Types::SSES3
+
+    SelectParameters.add_member(:input_serialization, Shapes::ShapeRef.new(shape: InputSerialization, required: true, location_name: "InputSerialization"))
+    SelectParameters.add_member(:expression_type, Shapes::ShapeRef.new(shape: ExpressionType, required: true, location_name: "ExpressionType"))
+    SelectParameters.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    SelectParameters.add_member(:output_serialization, Shapes::ShapeRef.new(shape: OutputSerialization, required: true, location_name: "OutputSerialization"))
+    SelectParameters.struct_class = Types::SelectParameters
 
     ServerSideEncryptionByDefault.add_member(:sse_algorithm, Shapes::ShapeRef.new(shape: ServerSideEncryption, required: true, location_name: "SSEAlgorithm"))
     ServerSideEncryptionByDefault.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location_name: "KMSMasterKeyID"))
@@ -1780,6 +1859,8 @@ module Aws::S3
     UploadPartRequest.struct_class = Types::UploadPartRequest
     UploadPartRequest[:payload] = :body
     UploadPartRequest[:payload_member] = UploadPartRequest.member(:body)
+
+    UserMetadata.member = Shapes::ShapeRef.new(shape: MetadataEntry, location_name: "MetadataEntry")
 
     VersioningConfiguration.add_member(:mfa_delete, Shapes::ShapeRef.new(shape: MFADelete, location_name: "MfaDelete"))
     VersioningConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: BucketVersioningStatus, location_name: "Status"))

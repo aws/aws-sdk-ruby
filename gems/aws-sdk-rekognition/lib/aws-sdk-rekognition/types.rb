@@ -132,6 +132,61 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Information about a recognized celebrity.
+    #
+    # @!attribute [rw] urls
+    #   An array of URLs pointing to additional celebrity information.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   The name of the celebrity.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the celebrity.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence, in percentage, that Amazon Rekognition has that the
+    #   recognized face is the celebrity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] bounding_box
+    #   Bounding box around the body of a celebrity.
+    #   @return [Types::BoundingBox]
+    #
+    # @!attribute [rw] face
+    #   Face details for the recognized celebrity.
+    #   @return [Types::FaceDetail]
+    #
+    class CelebrityDetail < Struct.new(
+      :urls,
+      :name,
+      :id,
+      :confidence,
+      :bounding_box,
+      :face)
+      include Aws::Structure
+    end
+
+    # Information about a detected celebrity and the time the celebrity was
+    # detected in a stored video. For more information, see .
+    #
+    # @!attribute [rw] timestamp
+    #   The time, in milliseconds from the start of the video, that the
+    #   celebrity was recognized.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] celebrity
+    #   Information about a recognized celebrity.
+    #   @return [Types::CelebrityDetail]
+    #
+    class CelebrityRecognition < Struct.new(
+      :timestamp,
+      :celebrity)
+      include Aws::Structure
+    end
+
     # Provides information about a face in a target image that matches the
     # source image face analysed by `CompareFaces`. The `Face` property
     # contains the bounding box of the face in the target image. The
@@ -315,6 +370,23 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Information about a moderation label detection in a stored video.
+    #
+    # @!attribute [rw] timestamp
+    #   Time, in milliseconds from the beginning of the video, that the
+    #   moderation label was detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] moderation_label
+    #   The moderation label detected by in the stored video.
+    #   @return [Types::ModerationLabel]
+    #
+    class ContentModerationDetection < Struct.new(
+      :timestamp,
+      :moderation_label)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateCollectionRequest
     #   data as a hash:
     #
@@ -349,6 +421,76 @@ module Aws::Rekognition
       :status_code,
       :collection_arn,
       :face_model_version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateStreamProcessorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input: { # required
+    #           kinesis_video_stream: {
+    #             arn: "KinesisVideoArn",
+    #           },
+    #         },
+    #         output: { # required
+    #           kinesis_data_stream: {
+    #             arn: "KinesisDataArn",
+    #           },
+    #         },
+    #         name: "StreamProcessorName", # required
+    #         settings: { # required
+    #           face_search: {
+    #             collection_id: "CollectionId",
+    #             face_match_threshold: 1.0,
+    #           },
+    #         },
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] input
+    #   Kinesis video stream stream that provides the source streaming
+    #   video. If you are using the AWS CLI, the parameter name is
+    #   `StreamProcessorInput`.
+    #   @return [Types::StreamProcessorInput]
+    #
+    # @!attribute [rw] output
+    #   Kinesis data stream stream to which Rekognition Video puts the
+    #   analysis results. If you are using the AWS CLI, the parameter name
+    #   is `StreamProcessorOutput`.
+    #   @return [Types::StreamProcessorOutput]
+    #
+    # @!attribute [rw] name
+    #   An identifier you assign to the stream processor. You can use `Name`
+    #   to manage the stream processor. For example, you can get the current
+    #   status of the stream processor by calling . `Name` is idempotent.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Face recognition input parameters to be used by the stream
+    #   processor. Includes the collection to use for face recognition and
+    #   the face attributes to detect.
+    #   @return [Types::StreamProcessorSettings]
+    #
+    # @!attribute [rw] role_arn
+    #   ARN of the IAM role that allows access to the stream processor.
+    #   @return [String]
+    #
+    class CreateStreamProcessorRequest < Struct.new(
+      :input,
+      :output,
+      :name,
+      :settings,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_processor_arn
+    #   ARN for the newly create stream processor.
+    #   @return [String]
+    #
+    class CreateStreamProcessorResponse < Struct.new(
+      :stream_processor_arn)
       include Aws::Structure
     end
 
@@ -405,6 +547,99 @@ module Aws::Rekognition
     #
     class DeleteFacesResponse < Struct.new(
       :deleted_faces)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteStreamProcessorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "StreamProcessorName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the stream processor you want to delete.
+    #   @return [String]
+    #
+    class DeleteStreamProcessorRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    class DeleteStreamProcessorResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeStreamProcessorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "StreamProcessorName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the stream processor for which you want information.
+    #   @return [String]
+    #
+    class DescribeStreamProcessorRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Name of the stream processor.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_processor_arn
+    #   ARN of the stream processor.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Current status of the stream processor.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   Detailed status message about the stream processor.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   Date and time the stream processor was created
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_update_timestamp
+    #   The time, in Unix format, the stream processor was last updated. For
+    #   example, when the stream processor moves from a running state to a
+    #   failed state, or when the user starts or stops the stream processor.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input
+    #   Kinesis video stream that provides the source streaming video.
+    #   @return [Types::StreamProcessorInput]
+    #
+    # @!attribute [rw] output
+    #   Kinesis data stream to which Rekognition Video puts the analysis
+    #   results.
+    #   @return [Types::StreamProcessorOutput]
+    #
+    # @!attribute [rw] role_arn
+    #   ARN of the IAM role that allows access to the stream processor.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings
+    #   Face recognition input parameters that are being used by the stream
+    #   processor. Includes the collection to use for face recognition and
+    #   the face attributes to detect.
+    #   @return [Types::StreamProcessorSettings]
+    #
+    class DescribeStreamProcessorResponse < Struct.new(
+      :name,
+      :stream_processor_arn,
+      :status,
+      :status_message,
+      :creation_timestamp,
+      :last_update_timestamp,
+      :input,
+      :output,
+      :role_arn,
+      :settings)
       include Aws::Structure
     end
 
@@ -582,10 +817,8 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] moderation_labels
-    #   An array of labels for explicit or suggestive adult content found in
-    #   the image. The list includes the top-level label and each
-    #   second-level label detected in the image. This is useful for
-    #   filtering specific categories of content.
+    #   Array of detected Moderation labels and the time, in millseconds
+    #   from the start of the video, they were detected.
     #   @return [Array<Types::ModerationLabel>]
     #
     class DetectModerationLabelsResponse < Struct.new(
@@ -806,6 +1039,24 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Information about a face detected in a video analysis request and the
+    # time the face was detected in the video.
+    #
+    # @!attribute [rw] timestamp
+    #   Time, in milliseconds from the start of the video, that the face was
+    #   detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] face
+    #   The face properties for the detected face.
+    #   @return [Types::FaceDetail]
+    #
+    class FaceDetection < Struct.new(
+      :timestamp,
+      :face)
+      include Aws::Structure
+    end
+
     # Provides face metadata. In addition, it also provides the confidence
     # in the match of this face with the input face.
     #
@@ -843,6 +1094,34 @@ module Aws::Rekognition
     class FaceRecord < Struct.new(
       :face,
       :face_detail)
+      include Aws::Structure
+    end
+
+    # Input face recognition parameters for an Amazon Rekognition stream
+    # processor. `FaceRecognitionSettings` is a request parameter for .
+    #
+    # @note When making an API call, you may pass FaceSearchSettings
+    #   data as a hash:
+    #
+    #       {
+    #         collection_id: "CollectionId",
+    #         face_match_threshold: 1.0,
+    #       }
+    #
+    # @!attribute [rw] collection_id
+    #   The ID of a collection that contains faces that you want to search
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] face_match_threshold
+    #   Minimum face match confidence score that must be met to return a
+    #   result for a recognized face. Default is 70. 0 is the lowest
+    #   confidence. 100 is the highest confidence.
+    #   @return [Float]
+    #
+    class FaceSearchSettings < Struct.new(
+      :collection_id,
+      :face_match_threshold)
       include Aws::Structure
     end
 
@@ -911,6 +1190,466 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCelebrityRecognitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #         sort_by: "ID", # accepts ID, TIMESTAMP
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   Job identifier for the required celebrity recognition analysis. You
+    #   can get the job identifer from a call to
+    #   `StartCelebrityRecognition`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of celebrities you want Rekognition Video to return
+    #   in the response. The default is 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   recognized celebrities to retrieve), Rekognition Video returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of celebrities.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort to use for celebrities returned in `Celebrities` field. Specify
+    #   `ID` to sort by the celebrity identifier, specify `TIMESTAMP` to
+    #   sort by the time the celebrity was recognized.
+    #   @return [String]
+    #
+    class GetCelebrityRecognitionRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token,
+      :sort_by)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The current status of the celebrity recognition job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the job fails, `StatusMessage` provides a descriptive error
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_metadata
+    #   Information about a video that Rekognition Video analyzed.
+    #   `Videometadata` is returned in every page of paginated responses
+    #   from a Rekognition Video operation.
+    #   @return [Types::VideoMetadata]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Rekognition Video returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of celebrities.
+    #   @return [String]
+    #
+    # @!attribute [rw] celebrities
+    #   Array of celebrities recognized in the video.
+    #   @return [Array<Types::CelebrityRecognition>]
+    #
+    class GetCelebrityRecognitionResponse < Struct.new(
+      :job_status,
+      :status_message,
+      :video_metadata,
+      :next_token,
+      :celebrities)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContentModerationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #         sort_by: "NAME", # accepts NAME, TIMESTAMP
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier for the content moderation job. Use `JobId` to
+    #   identify the job in a subsequent call to `GetContentModeration`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of content moderation labels to return. The default
+    #   is 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more data
+    #   to retrieve), Amazon Rekognition returns a pagination token in the
+    #   response. You can use this pagination token to retrieve the next set
+    #   of content moderation labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort to use for elements in the `ModerationLabelDetections` array.
+    #   Use `TIMESTAMP` to sort array elements by the time labels are
+    #   detected. Use `NAME` to alphabetically group elements for a label
+    #   together. Within each label group, the array element are sorted by
+    #   detection confidence. The default sort is by `TIMESTAMP`.
+    #   @return [String]
+    #
+    class GetContentModerationRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token,
+      :sort_by)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The current status of the content moderation job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the job fails, `StatusMessage` provides a descriptive error
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_metadata
+    #   Information about a video that Amazon Rekognition analyzed.
+    #   `Videometadata` is returned in every page of paginated responses
+    #   from `GetContentModeration`.
+    #   @return [Types::VideoMetadata]
+    #
+    # @!attribute [rw] moderation_labels
+    #   The detected moderation labels and the time(s) they were detected.
+    #   @return [Array<Types::ContentModerationDetection>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Rekognition Video returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of moderation labels.
+    #   @return [String]
+    #
+    class GetContentModerationResponse < Struct.new(
+      :job_status,
+      :status_message,
+      :video_metadata,
+      :moderation_labels,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFaceDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   Unique identifier for the face detection job. The `JobId` is
+    #   returned from `StartFaceDetection`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of detected faces to return. The default is 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there are more
+    #   faces to retrieve), Rekognition Video returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of faces.
+    #   @return [String]
+    #
+    class GetFaceDetectionRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The current status of the face detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the job fails, `StatusMessage` provides a descriptive error
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_metadata
+    #   Information about a video that Rekognition Video analyzed.
+    #   `Videometadata` is returned in every page of paginated responses
+    #   from a Amazon Rekognition video operation.
+    #   @return [Types::VideoMetadata]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Rekognition returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of faces.
+    #   @return [String]
+    #
+    # @!attribute [rw] faces
+    #   An array of faces detected in the video. Each element contains a
+    #   detected face's details and the time, in milliseconds from the
+    #   start of the video, the face was detected.
+    #   @return [Array<Types::FaceDetection>]
+    #
+    class GetFaceDetectionResponse < Struct.new(
+      :job_status,
+      :status_message,
+      :video_metadata,
+      :next_token,
+      :faces)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFaceSearchRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #         sort_by: "INDEX", # accepts INDEX, TIMESTAMP
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The job identifer for the search request. You get the job identifier
+    #   from an initial call to `StartFaceSearch`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of search results you want Rekognition Video to
+    #   return in the response. The default is 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there is more
+    #   search results to retrieve), Rekognition Video returns a pagination
+    #   token in the response. You can use this pagination token to retrieve
+    #   the next set of search results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort to use for grouping faces in the response. Use `TIMESTAMP` to
+    #   group faces by the time that they are recognized. Use `INDEX` to
+    #   sort by recognized faces.
+    #   @return [String]
+    #
+    class GetFaceSearchRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token,
+      :sort_by)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The current status of the face search job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the job fails, `StatusMessage` provides a descriptive error
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Rekognition Video returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of search results.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_metadata
+    #   Information about a video that Amazon Rekognition analyzed.
+    #   `Videometadata` is returned in every page of paginated responses
+    #   from a Rekognition Video operation.
+    #   @return [Types::VideoMetadata]
+    #
+    # @!attribute [rw] persons
+    #   An array of persons, , in the video whose face(s) match the face(s)
+    #   in an Amazon Rekognition collection. It also includes time
+    #   information for when persons are matched in the video. You specify
+    #   the input collection in an initial call to `StartFaceSearch`. Each
+    #   `Persons` element includes a time the person was matched, face match
+    #   details (`FaceMatches`) for matching faces in the collection, and
+    #   person information (`Person`) for the matched person.
+    #   @return [Array<Types::PersonMatch>]
+    #
+    class GetFaceSearchResponse < Struct.new(
+      :job_status,
+      :status_message,
+      :next_token,
+      :video_metadata,
+      :persons)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLabelDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #         sort_by: "NAME", # accepts NAME, TIMESTAMP
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   Job identifier for the label detection operation for which you want
+    #   results returned. You get the job identifer from an initial call to
+    #   `StartlabelDetection`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of labels you want Amazon Rekognition to return in
+    #   the response. The default is 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there are more
+    #   labels to retrieve), Rekognition Video returns a pagination token in
+    #   the response. You can use this pagination token to retrieve the next
+    #   set of labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort to use for elements in the `Labels` array. Use `TIMESTAMP` to
+    #   sort array elements by the time labels are detected. Use `NAME` to
+    #   alphabetically group elements for a label together. Within each
+    #   label group, the array element are sorted by detection confidence.
+    #   The default sort is by `TIMESTAMP`.
+    #   @return [String]
+    #
+    class GetLabelDetectionRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token,
+      :sort_by)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The current status of the label detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the job fails, `StatusMessage` provides a descriptive error
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_metadata
+    #   Information about a video that Rekognition Video analyzed.
+    #   `Videometadata` is returned in every page of paginated responses
+    #   from a Amazon Rekognition video operation.
+    #   @return [Types::VideoMetadata]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Rekognition Video returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of labels.
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   An array of labels detected in the video. Each element contains the
+    #   detected label and the time, in milliseconds from the start of the
+    #   video, that the label was detected.
+    #   @return [Array<Types::LabelDetection>]
+    #
+    class GetLabelDetectionResponse < Struct.new(
+      :job_status,
+      :status_message,
+      :video_metadata,
+      :next_token,
+      :labels)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPersonTrackingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #         sort_by: "INDEX", # accepts INDEX, TIMESTAMP
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier for a job that tracks persons in a video. You get the
+    #   `JobId` from a call to `StartPersonTracking`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of tracked persons to return. The default is 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there are more
+    #   persons to retrieve), Rekognition Video returns a pagination token
+    #   in the response. You can use this pagination token to retrieve the
+    #   next set of persons.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Sort to use for elements in the `Persons` array. Use `TIMESTAMP` to
+    #   sort array elements by the time persons are detected. Use `INDEX` to
+    #   sort by the tracked persons. If you sort by `INDEX`, the array
+    #   elements for each person are sorted by detection confidence. The
+    #   default sort is by `TIMESTAMP`.
+    #   @return [String]
+    #
+    class GetPersonTrackingRequest < Struct.new(
+      :job_id,
+      :max_results,
+      :next_token,
+      :sort_by)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_status
+    #   The current status of the person tracking job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   If the job fails, `StatusMessage` provides a descriptive error
+    #   message.
+    #   @return [String]
+    #
+    # @!attribute [rw] video_metadata
+    #   Information about a video that Rekognition Video analyzed.
+    #   `Videometadata` is returned in every page of paginated responses
+    #   from a Rekognition Video operation.
+    #   @return [Types::VideoMetadata]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Rekognition Video returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of persons.
+    #   @return [String]
+    #
+    # @!attribute [rw] persons
+    #   An array of the persons detected in the video and the times they are
+    #   tracked throughout the video. An array element will exist for each
+    #   time the person is tracked.
+    #   @return [Array<Types::PersonDetection>]
+    #
+    class GetPersonTrackingResponse < Struct.new(
+      :job_status,
+      :status_message,
+      :video_metadata,
+      :next_token,
+      :persons)
+      include Aws::Structure
+    end
+
     # Provides the input image either as bytes or an S3 object.
     #
     # You pass image bytes to a Rekognition API operation by using the
@@ -918,7 +1657,7 @@ module Aws::Rekognition
     # pass an image loaded from a local file system. Image bytes passed by
     # using the `Bytes` property must be base64-encoded. Your code may not
     # need to encode image bytes if you are using an AWS SDK to call
-    # Rekognition API operations. For more information, see example4.
+    # Rekognition API operations. For more information, see images-bytes.
     #
     # You pass images stored in an S3 bucket to a Rekognition API operation
     # by using the `S3Object` property. Images stored in an S3 bucket do not
@@ -1038,7 +1777,7 @@ module Aws::Rekognition
 
     # @!attribute [rw] face_records
     #   An array of faces detected and added to the collection. For more
-    #   information, see howitworks-index-faces.
+    #   information, see collections-index-faces.
     #   @return [Array<Types::FaceRecord>]
     #
     # @!attribute [rw] orientation_correction
@@ -1070,6 +1809,46 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The Kinesis data stream Amazon Rekognition to which the analysis
+    # results of a Amazon Rekognition stream processor are streamed. For
+    # more information, see .
+    #
+    # @note When making an API call, you may pass KinesisDataStream
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "KinesisDataArn",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   ARN of the output Amazon Kinesis Data Streams stream.
+    #   @return [String]
+    #
+    class KinesisDataStream < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # Kinesis video stream stream that provides the source streaming video
+    # for a Rekognition Video stream processor. For more information, see .
+    #
+    # @note When making an API call, you may pass KinesisVideoStream
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "KinesisVideoArn",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   ARN of the Kinesis video stream stream that streams the source
+    #   video.
+    #   @return [String]
+    #
+    class KinesisVideoStream < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
     # Structure containing details about the detected label, including name,
     # and level of confidence.
     #
@@ -1084,6 +1863,24 @@ module Aws::Rekognition
     class Label < Struct.new(
       :name,
       :confidence)
+      include Aws::Structure
+    end
+
+    # Information about a label detected in a video analysis request and the
+    # time the label was detected in the video.
+    #
+    # @!attribute [rw] timestamp
+    #   Time, in milliseconds from the start of the video, that the label
+    #   was detected.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] label
+    #   Details about the detected label.
+    #   @return [Types::Label]
+    #
+    class LabelDetection < Struct.new(
+      :timestamp,
+      :label)
       include Aws::Structure
     end
 
@@ -1213,9 +2010,51 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListStreamProcessorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the previous response was incomplete (because there are more
+    #   stream processors to retrieve), Rekognition Video returns a
+    #   pagination token in the response. You can use this pagination token
+    #   to retrieve the next set of stream processors.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of stream processors you want Rekognition Video to
+    #   return in the response. The default is 1000.
+    #   @return [Integer]
+    #
+    class ListStreamProcessorsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Rekognition Video returns this token
+    #   that you can use in the subsequent request to retrieve the next set
+    #   of stream processors.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_processors
+    #   List of stream processors that you have created.
+    #   @return [Array<Types::StreamProcessor>]
+    #
+    class ListStreamProcessorsResponse < Struct.new(
+      :next_token,
+      :stream_processors)
+      include Aws::Structure
+    end
+
     # Provides information about a single type of moderated content found in
-    # an image. Each type of moderated content has a label within a
-    # hierarchical taxonomy. For more information, see image-moderation.
+    # an image or video. Each type of moderated content has a label within a
+    # hierarchical taxonomy. For more information, see moderation.
     #
     # @!attribute [rw] confidence
     #   Specifies the confidence that Amazon Rekognition has that the label
@@ -1274,6 +2113,104 @@ module Aws::Rekognition
     class Mustache < Struct.new(
       :value,
       :confidence)
+      include Aws::Structure
+    end
+
+    # The Amazon Simple Notification Service topic to which Amazon
+    # Rekognition publishes the completion status of a video analysis
+    # operation. For more information, see api-video.
+    #
+    # @note When making an API call, you may pass NotificationChannel
+    #   data as a hash:
+    #
+    #       {
+    #         sns_topic_arn: "SNSTopicArn", # required
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   The Amazon SNS topic to which Amazon Rekognition to posts the
+    #   completion status.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of an IAM role that gives Amazon Rekognition publishing
+    #   permissions to the Amazon SNS topic.
+    #   @return [String]
+    #
+    class NotificationChannel < Struct.new(
+      :sns_topic_arn,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Details about a person detected in a video analysis request.
+    #
+    # @!attribute [rw] index
+    #   Identifier for the person detected person within a video. Use to
+    #   keep track of the person throughout the video. The identifier is not
+    #   stored by Amazon Rekognition.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bounding_box
+    #   Bounding box around the detected person.
+    #   @return [Types::BoundingBox]
+    #
+    # @!attribute [rw] face
+    #   Face details for the detected person.
+    #   @return [Types::FaceDetail]
+    #
+    class PersonDetail < Struct.new(
+      :index,
+      :bounding_box,
+      :face)
+      include Aws::Structure
+    end
+
+    # Details and tracking information for a single time a person is tracked
+    # in a video. Amazon Rekognition operations that track persons return an
+    # array of `PersonDetection` objects with elements for each time a
+    # person is tracked in a video. For more information, see .
+    #
+    # @!attribute [rw] timestamp
+    #   The time, in milliseconds from the start of the video, that the
+    #   person was tracked.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] person
+    #   Details about a person tracked in a video.
+    #   @return [Types::PersonDetail]
+    #
+    class PersonDetection < Struct.new(
+      :timestamp,
+      :person)
+      include Aws::Structure
+    end
+
+    # Information about a person whose face matches a face(s) in a Amazon
+    # Rekognition collection. Includes information about the faces in the
+    # Amazon Rekognition collection (,information about the person
+    # (PersonDetail) and the timestamp for when the person was detected in a
+    # video. An array of `PersonMatch` objects is returned by .
+    #
+    # @!attribute [rw] timestamp
+    #   The time, in milliseconds from the beginning of the video, that the
+    #   person was matched in the video.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] person
+    #   Information about the matched person.
+    #   @return [Types::PersonDetail]
+    #
+    # @!attribute [rw] face_matches
+    #   Information about the faces in the input collection that match the
+    #   face of a person in the video.
+    #   @return [Array<Types::FaceMatch>]
+    #
+    class PersonMatch < Struct.new(
+      :timestamp,
+      :person,
+      :face_matches)
       include Aws::Structure
     end
 
@@ -1569,6 +2506,533 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartCelebrityRecognitionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         video: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         job_tag: "JobTag",
+    #       }
+    #
+    # @!attribute [rw] video
+    #   The video in which you want to recognize celebrities. The video must
+    #   be stored in an Amazon S3 bucket.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartCelebrityRecognition` requests, the
+    #   same `JobId` is returned. Use `ClientRequestToken` to prevent the
+    #   same job from being accidently started more than once.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The Amazon SNS topic ARN that you want Rekognition Video to publish
+    #   the completion status of the celebrity recognition analysis to.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #   @return [String]
+    #
+    class StartCelebrityRecognitionRequest < Struct.new(
+      :video,
+      :client_request_token,
+      :notification_channel,
+      :job_tag)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier for the celebrity recognition analysis job. Use
+    #   `JobId` to identify the job in a subsequent call to
+    #   `GetCelebrityRecognition`.
+    #   @return [String]
+    #
+    class StartCelebrityRecognitionResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartContentModerationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         video: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         min_confidence: 1.0,
+    #         client_request_token: "ClientRequestToken",
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         job_tag: "JobTag",
+    #       }
+    #
+    # @!attribute [rw] video
+    #   The video in which you want to moderate content. The video must be
+    #   stored in an Amazon S3 bucket.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] min_confidence
+    #   Specifies the minimum confidence that Amazon Rekognition must have
+    #   in order to return a moderated content label. Confidence represents
+    #   how certain Amazon Rekognition is that the moderated content is
+    #   correctly identified. 0 is the lowest confidence. 100 is the highest
+    #   confidence. Amazon Rekognition doesn't return any moderated content
+    #   labels with a confidence level lower than this specified value.
+    #   @return [Float]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartContentModeration` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same
+    #   job from being accidently started more than once.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The Amazon SNS topic ARN that you want Rekognition Video to publish
+    #   the completion status of the content moderation analysis to.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #   @return [String]
+    #
+    class StartContentModerationRequest < Struct.new(
+      :video,
+      :min_confidence,
+      :client_request_token,
+      :notification_channel,
+      :job_tag)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier for the content moderation analysis job. Use `JobId`
+    #   to identify the job in a subsequent call to `GetContentModeration`.
+    #   @return [String]
+    #
+    class StartContentModerationResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartFaceDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         video: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         face_attributes: "DEFAULT", # accepts DEFAULT, ALL
+    #         job_tag: "JobTag",
+    #       }
+    #
+    # @!attribute [rw] video
+    #   The video in which you want to detect faces. The video must be
+    #   stored in an Amazon S3 bucket.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartFaceDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same
+    #   job from being accidently started more than once.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The ARN of the Amazon SNS topic to which you want Rekognition Video
+    #   to publish the completion status of the face detection operation.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] face_attributes
+    #   The face attributes you want returned.
+    #
+    #   `DEFAULT` - The following subset of facial attributes are returned:
+    #   BoundingBox, Confidence, Pose, Quality and Landmarks.
+    #
+    #   `ALL` - All facial attributes are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #   @return [String]
+    #
+    class StartFaceDetectionRequest < Struct.new(
+      :video,
+      :client_request_token,
+      :notification_channel,
+      :face_attributes,
+      :job_tag)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier for the face detection job. Use `JobId` to identify
+    #   the job in a subsequent call to `GetFaceDetection`.
+    #   @return [String]
+    #
+    class StartFaceDetectionResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartFaceSearchRequest
+    #   data as a hash:
+    #
+    #       {
+    #         video: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         face_match_threshold: 1.0,
+    #         collection_id: "CollectionId", # required
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         job_tag: "JobTag",
+    #       }
+    #
+    # @!attribute [rw] video
+    #   The video you want to search. The video must be stored in an Amazon
+    #   S3 bucket.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartFaceSearch` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same
+    #   job from being accidently started more than once.
+    #   @return [String]
+    #
+    # @!attribute [rw] face_match_threshold
+    #   The minimum confidence in the person match to return. For example,
+    #   don't return any matches where confidence in matches is less than
+    #   70%.
+    #   @return [Float]
+    #
+    # @!attribute [rw] collection_id
+    #   ID of the collection that contains the faces you want to search for.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The ARN of the Amazon SNS topic to which you want Rekognition Video
+    #   to publish the completion status of the search.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #   @return [String]
+    #
+    class StartFaceSearchRequest < Struct.new(
+      :video,
+      :client_request_token,
+      :face_match_threshold,
+      :collection_id,
+      :notification_channel,
+      :job_tag)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier for the search job. Use `JobId` to identify the job
+    #   in a subsequent call to `GetFaceSearch`.
+    #   @return [String]
+    #
+    class StartFaceSearchResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartLabelDetectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         video: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         min_confidence: 1.0,
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         job_tag: "JobTag",
+    #       }
+    #
+    # @!attribute [rw] video
+    #   The video in which you want to detect labels. The video must be
+    #   stored in an Amazon S3 bucket.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartLabelDetection` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same
+    #   job from being accidently started more than once.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_confidence
+    #   Specifies the minimum confidence that Rekognition Video must have in
+    #   order to return a detected label. Confidence represents how certain
+    #   Amazon Rekognition is that a label is correctly identified.0 is the
+    #   lowest confidence. 100 is the highest confidence. Rekognition Video
+    #   doesn't return any labels with a confidence level lower than this
+    #   specified value.
+    #
+    #   If you don't specify `MinConfidence`, the operation returns labels
+    #   with confidence values greater than or equal to 50 percent.
+    #   @return [Float]
+    #
+    # @!attribute [rw] notification_channel
+    #   The Amazon SNS topic ARN you want Rekognition Video to publish the
+    #   completion status of the label detection operation to.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #   @return [String]
+    #
+    class StartLabelDetectionRequest < Struct.new(
+      :video,
+      :client_request_token,
+      :min_confidence,
+      :notification_channel,
+      :job_tag)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier for the label detection job. Use `JobId` to identify
+    #   the job in a subsequent call to `GetLabelDetection`.
+    #   @return [String]
+    #
+    class StartLabelDetectionResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartPersonTrackingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         video: { # required
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         client_request_token: "ClientRequestToken",
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #           role_arn: "RoleArn", # required
+    #         },
+    #         job_tag: "JobTag",
+    #       }
+    #
+    # @!attribute [rw] video
+    #   The video in which you want to detect people. The video must be
+    #   stored in an Amazon S3 bucket.
+    #   @return [Types::Video]
+    #
+    # @!attribute [rw] client_request_token
+    #   Idempotent token used to identify the start request. If you use the
+    #   same token with multiple `StartPersonTracking` requests, the same
+    #   `JobId` is returned. Use `ClientRequestToken` to prevent the same
+    #   job from being accidently started more than once.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_channel
+    #   The Amazon SNS topic ARN you want Rekognition Video to publish the
+    #   completion status of the people detection operation to.
+    #   @return [Types::NotificationChannel]
+    #
+    # @!attribute [rw] job_tag
+    #   Unique identifier you specify to identify the job in the completion
+    #   status published to the Amazon Simple Notification Service topic.
+    #   @return [String]
+    #
+    class StartPersonTrackingRequest < Struct.new(
+      :video,
+      :client_request_token,
+      :notification_channel,
+      :job_tag)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier for the person detection job. Use `JobId` to identify
+    #   the job in a subsequent call to `GetPersonTracking`.
+    #   @return [String]
+    #
+    class StartPersonTrackingResponse < Struct.new(
+      :job_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartStreamProcessorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "StreamProcessorName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the stream processor to start processing.
+    #   @return [String]
+    #
+    class StartStreamProcessorRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    class StartStreamProcessorResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StopStreamProcessorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "StreamProcessorName", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of a stream processor created by .
+    #   @return [String]
+    #
+    class StopStreamProcessorRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    class StopStreamProcessorResponse < Aws::EmptyStructure; end
+
+    # An object that recognizes faces in a streaming video. An Amazon
+    # Rekognition stream processor is created by a call to . The request
+    # parameters for `CreateStreamProcessor` describe the Kinesis video
+    # stream source for the streaming video, face recognition parameters,
+    # and where to stream the analysis resullts.
+    #
+    # @!attribute [rw] name
+    #   Name of the Amazon Rekognition stream processor.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Current status of the Amazon Rekognition stream processor.
+    #   @return [String]
+    #
+    class StreamProcessor < Struct.new(
+      :name,
+      :status)
+      include Aws::Structure
+    end
+
+    # Information about the source streaming video.
+    #
+    # @note When making an API call, you may pass StreamProcessorInput
+    #   data as a hash:
+    #
+    #       {
+    #         kinesis_video_stream: {
+    #           arn: "KinesisVideoArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] kinesis_video_stream
+    #   The Kinesis video stream input stream for the source streaming
+    #   video.
+    #   @return [Types::KinesisVideoStream]
+    #
+    class StreamProcessorInput < Struct.new(
+      :kinesis_video_stream)
+      include Aws::Structure
+    end
+
+    # Information about the Amazon Kinesis Data Streams stream to which a
+    # Rekognition Video stream processor streams the results of a video
+    # analysis. For more information, see .
+    #
+    # @note When making an API call, you may pass StreamProcessorOutput
+    #   data as a hash:
+    #
+    #       {
+    #         kinesis_data_stream: {
+    #           arn: "KinesisDataArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] kinesis_data_stream
+    #   The Amazon Kinesis Data Streams stream to which the Amazon
+    #   Rekognition stream processor streams the analysis results.
+    #   @return [Types::KinesisDataStream]
+    #
+    class StreamProcessorOutput < Struct.new(
+      :kinesis_data_stream)
+      include Aws::Structure
+    end
+
+    # Input parameters used to recognize faces in a streaming video analyzed
+    # by a Amazon Rekognition stream processor.
+    #
+    # @note When making an API call, you may pass StreamProcessorSettings
+    #   data as a hash:
+    #
+    #       {
+    #         face_search: {
+    #           collection_id: "CollectionId",
+    #           face_match_threshold: 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] face_search
+    #   Face search settings to use on a streaming video.
+    #   @return [Types::FaceSearchSettings]
+    #
+    class StreamProcessorSettings < Struct.new(
+      :face_search)
+      include Aws::Structure
+    end
+
     # Indicates whether or not the face is wearing sunglasses, and the
     # confidence level in the determination.
     #
@@ -1637,6 +3101,68 @@ module Aws::Rekognition
       :parent_id,
       :confidence,
       :geometry)
+      include Aws::Structure
+    end
+
+    # Video file stored in an Amazon S3 bucket. Amazon Rekognition video
+    # start operations such as use `Video` to specify a video for analysis.
+    # The supported file formats are .mp4, .mov and .avi.
+    #
+    # @note When making an API call, you may pass Video
+    #   data as a hash:
+    #
+    #       {
+    #         s3_object: {
+    #           bucket: "S3Bucket",
+    #           name: "S3ObjectName",
+    #           version: "S3ObjectVersion",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_object
+    #   The Amazon S3 bucket name and file name for the video.
+    #   @return [Types::S3Object]
+    #
+    class Video < Struct.new(
+      :s3_object)
+      include Aws::Structure
+    end
+
+    # Information about a video that Amazon Rekognition analyzed.
+    # `Videometadata` is returned in every page of paginated responses from
+    # a Amazon Rekognition video operation.
+    #
+    # @!attribute [rw] codec
+    #   Type of compression used in the analyzed video.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_millis
+    #   Length of the video in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] format
+    #   Format of the analyzed video. Possible values are MP4, MOV and AVI.
+    #   @return [String]
+    #
+    # @!attribute [rw] frame_rate
+    #   Number of frames per second in the video.
+    #   @return [Float]
+    #
+    # @!attribute [rw] frame_height
+    #   Vertical pixel dimension of the video.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] frame_width
+    #   Horizontal pixel dimension of the video.
+    #   @return [Integer]
+    #
+    class VideoMetadata < Struct.new(
+      :codec,
+      :duration_millis,
+      :format,
+      :frame_rate,
+      :frame_height,
+      :frame_width)
       include Aws::Structure
     end
 

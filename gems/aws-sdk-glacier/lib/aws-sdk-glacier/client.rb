@@ -895,9 +895,9 @@ module Aws::Glacier
     # permission to perform specific actions. For more information, see
     # [Access Control Using AWS Identity and Access Management (IAM)][1].
     #
-    # For information about the underlying REST API, see [Working with
-    # Archives in Amazon Glacier][2] in the *Amazon Glacier Developer
-    # Guide*.
+    # For more information about using this operation, see the documentation
+    # for the underlying REST API [Describe Job][2] in the *Amazon Glacier
+    # Developer Guide*.
     #
     #
     #
@@ -938,6 +938,9 @@ module Aws::Glacier
     #   * {Types::GlacierJobDescription#retrieval_byte_range #retrieval_byte_range} => String
     #   * {Types::GlacierJobDescription#tier #tier} => String
     #   * {Types::GlacierJobDescription#inventory_retrieval_parameters #inventory_retrieval_parameters} => Types::InventoryRetrievalJobDescription
+    #   * {Types::GlacierJobDescription#job_output_path #job_output_path} => String
+    #   * {Types::GlacierJobDescription#select_parameters #select_parameters} => Types::SelectParameters
+    #   * {Types::GlacierJobDescription#output_location #output_location} => Types::OutputLocation
     #
     #
     # @example Example: To get information about a previously initiated job
@@ -975,7 +978,7 @@ module Aws::Glacier
     #
     #   resp.job_id #=> String
     #   resp.job_description #=> String
-    #   resp.action #=> String, one of "ArchiveRetrieval", "InventoryRetrieval"
+    #   resp.action #=> String, one of "ArchiveRetrieval", "InventoryRetrieval", "Select"
     #   resp.archive_id #=> String
     #   resp.vault_arn #=> String
     #   resp.creation_date #=> Time
@@ -995,6 +998,38 @@ module Aws::Glacier
     #   resp.inventory_retrieval_parameters.end_date #=> Time
     #   resp.inventory_retrieval_parameters.limit #=> String
     #   resp.inventory_retrieval_parameters.marker #=> String
+    #   resp.job_output_path #=> String
+    #   resp.select_parameters.input_serialization.csv.file_header_info #=> String, one of "USE", "IGNORE", "NONE"
+    #   resp.select_parameters.input_serialization.csv.comments #=> String
+    #   resp.select_parameters.input_serialization.csv.quote_escape_character #=> String
+    #   resp.select_parameters.input_serialization.csv.record_delimiter #=> String
+    #   resp.select_parameters.input_serialization.csv.field_delimiter #=> String
+    #   resp.select_parameters.input_serialization.csv.quote_character #=> String
+    #   resp.select_parameters.expression_type #=> String, one of "SQL"
+    #   resp.select_parameters.expression #=> String
+    #   resp.select_parameters.output_serialization.csv.quote_fields #=> String, one of "ALWAYS", "ASNEEDED"
+    #   resp.select_parameters.output_serialization.csv.quote_escape_character #=> String
+    #   resp.select_parameters.output_serialization.csv.record_delimiter #=> String
+    #   resp.select_parameters.output_serialization.csv.field_delimiter #=> String
+    #   resp.select_parameters.output_serialization.csv.quote_character #=> String
+    #   resp.output_location.s3.bucket_name #=> String
+    #   resp.output_location.s3.prefix #=> String
+    #   resp.output_location.s3.encryption.encryption_type #=> String, one of "aws:kms", "AES256"
+    #   resp.output_location.s3.encryption.kms_key_id #=> String
+    #   resp.output_location.s3.encryption.kms_context #=> String
+    #   resp.output_location.s3.canned_acl #=> String, one of "private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control"
+    #   resp.output_location.s3.access_control_list #=> Array
+    #   resp.output_location.s3.access_control_list[0].grantee.type #=> String, one of "AmazonCustomerByEmail", "CanonicalUser", "Group"
+    #   resp.output_location.s3.access_control_list[0].grantee.display_name #=> String
+    #   resp.output_location.s3.access_control_list[0].grantee.uri #=> String
+    #   resp.output_location.s3.access_control_list[0].grantee.id #=> String
+    #   resp.output_location.s3.access_control_list[0].grantee.email_address #=> String
+    #   resp.output_location.s3.access_control_list[0].permission #=> String, one of "FULL_CONTROL", "WRITE", "WRITE_ACP", "READ", "READ_ACP"
+    #   resp.output_location.s3.tagging #=> Hash
+    #   resp.output_location.s3.tagging["string"] #=> String
+    #   resp.output_location.s3.user_metadata #=> Hash
+    #   resp.output_location.s3.user_metadata["string"] #=> String
+    #   resp.output_location.s3.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -1541,164 +1576,14 @@ module Aws::Glacier
       req.send_request(options)
     end
 
-    # This operation initiates a job of the specified type. In this release,
-    # you can initiate a job to retrieve either an archive or a vault
-    # inventory (a list of archives in a vault).
-    #
-    # Retrieving data from Amazon Glacier is a two-step process:
-    #
-    # 1.  Initiate a retrieval job.
-    #
-    #     <note markdown="1"> A data retrieval policy can cause your initiate retrieval job
-    #     request to fail with a PolicyEnforcedException exception. For more
-    #     information about data retrieval policies, see [Amazon Glacier
-    #     Data Retrieval Policies][1]. For more information about the
-    #     PolicyEnforcedException exception, see [Error Responses][2].
-    #
-    #      </note>
-    #
-    # 2.  After the job completes, download the bytes.
-    #
-    # The retrieval request is executed asynchronously. When you initiate a
-    # retrieval job, Amazon Glacier creates a job and returns a job ID in
-    # the response. When Amazon Glacier completes the job, you can get the
-    # job output (archive or inventory data). For information about getting
-    # job output, see GetJobOutput operation.
-    #
-    # The job must complete before you can get its output. To determine when
-    # a job is complete, you have the following options:
-    #
-    # * **Use Amazon SNS Notification** You can specify an Amazon Simple
-    #   Notification Service (Amazon SNS) topic to which Amazon Glacier can
-    #   post a notification after the job is completed. You can specify an
-    #   SNS topic per job request. The notification is sent only after
-    #   Amazon Glacier completes the job. In addition to specifying an SNS
-    #   topic per job request, you can configure vault notifications for a
-    #   vault so that job notifications are always sent. For more
-    #   information, see SetVaultNotifications.
-    #
-    # * **Get job details** You can make a DescribeJob request to obtain job
-    #   status information while a job is in progress. However, it is more
-    #   efficient to use an Amazon SNS notification to determine when a job
-    #   is complete.
-    #
-    # <note markdown="1"> The information you get via notification is same that you get by
-    # calling DescribeJob.
-    #
-    #  </note>
-    #
-    # If for a specific event, you add both the notification configuration
-    # on the vault and also specify an SNS topic in your initiate job
-    # request, Amazon Glacier sends both notifications. For more
-    # information, see SetVaultNotifications.
-    #
-    # An AWS account has full permission to perform all operations
-    # (actions). However, AWS Identity and Access Management (IAM) users
-    # don't have any permissions by default. You must grant them explicit
-    # permission to perform specific actions. For more information, see
-    # [Access Control Using AWS Identity and Access Management (IAM)][3].
-    #
-    # **About the Vault Inventory**
-    #
-    # Amazon Glacier prepares an inventory for each vault periodically,
-    # every 24 hours. When you initiate a job for a vault inventory, Amazon
-    # Glacier returns the last inventory for the vault. The inventory data
-    # you get might be up to a day or two days old. Also, the initiate
-    # inventory job might take some time to complete before you can download
-    # the vault inventory. So you do not want to retrieve a vault inventory
-    # for each vault operation. However, in some scenarios, you might find
-    # the vault inventory useful. For example, when you upload an archive,
-    # you can provide an archive description but not an archive name. Amazon
-    # Glacier provides you a unique archive ID, an opaque string of
-    # characters. So, you might maintain your own database that maps archive
-    # names to their corresponding Amazon Glacier assigned archive IDs. You
-    # might find the vault inventory useful in the event you need to
-    # reconcile information in your database with the actual vault
-    # inventory.
-    #
-    # **Range Inventory Retrieval**
-    #
-    # You can limit the number of inventory items retrieved by filtering on
-    # the archive creation date or by setting a limit.
-    #
-    # *Filtering by Archive Creation Date*
-    #
-    # You can retrieve inventory items for archives created between
-    # `StartDate` and `EndDate` by specifying values for these parameters in
-    # the **InitiateJob** request. Archives created on or after the
-    # `StartDate` and before the `EndDate` will be returned. If you only
-    # provide the `StartDate` without the `EndDate`, you will retrieve the
-    # inventory for all archives created on or after the `StartDate`. If you
-    # only provide the `EndDate` without the `StartDate`, you will get back
-    # the inventory for all archives created before the `EndDate`.
-    #
-    # *Limiting Inventory Items per Retrieval*
-    #
-    # You can limit the number of inventory items returned by setting the
-    # `Limit` parameter in the **InitiateJob** request. The inventory job
-    # output will contain inventory items up to the specified `Limit`. If
-    # there are more inventory items available, the result is paginated.
-    # After a job is complete you can use the DescribeJob operation to get a
-    # marker that you use in a subsequent **InitiateJob** request. The
-    # marker will indicate the starting point to retrieve the next set of
-    # inventory items. You can page through your entire inventory by
-    # repeatedly making **InitiateJob** requests with the marker from the
-    # previous **DescribeJob** output, until you get a marker from
-    # **DescribeJob** that returns null, indicating that there are no more
-    # inventory items available.
-    #
-    # You can use the `Limit` parameter together with the date range
-    # parameters.
-    #
-    # **About Ranged Archive Retrieval**
-    #
-    # You can initiate an archive retrieval for the whole archive or a range
-    # of the archive. In the case of ranged archive retrieval, you specify a
-    # byte range to return or the whole archive. The range specified must be
-    # megabyte (MB) aligned, that is the range start value must be divisible
-    # by 1 MB and range end value plus 1 must be divisible by 1 MB or equal
-    # the end of the archive. If the ranged archive retrieval is not
-    # megabyte aligned, this operation returns a 400 response. Furthermore,
-    # to ensure you get checksum values for data you download using Get Job
-    # Output API, the range must be tree hash aligned.
-    #
-    # An AWS account has full permission to perform all operations
-    # (actions). However, AWS Identity and Access Management (IAM) users
-    # don't have any permissions by default. You must grant them explicit
-    # permission to perform specific actions. For more information, see
-    # [Access Control Using AWS Identity and Access Management (IAM)][3].
-    #
-    # For conceptual information and the underlying REST API, see [Initiate
-    # a Job][4] and [Downloading a Vault Inventory][5]
-    #
-    # **Expedited and Bulk Archive Retrievals**
-    #
-    # When retrieving an archive, you can specify one of the following
-    # options in the `Tier` field of the request body:
-    #
-    # * **Standard** The default type of retrieval, which allows access to
-    #   any of your archives within several hours. Standard retrievals
-    #   typically complete within 3–5 hours.
-    #
-    # * **Bulk** Amazon Glacier’s lowest-cost retrieval option, which
-    #   enables you to retrieve large amounts of data inexpensively in a
-    #   day. Bulk retrieval requests typically complete within 5–12 hours.
-    #
-    # * **Expedited** Amazon Glacier’s option for the fastest retrievals.
-    #   Archives requested using the expedited retrievals typically become
-    #   accessible within 1–5 minutes.
-    #
-    # For more information about expedited and bulk retrievals, see
-    # [Retrieving Amazon Glacier Archives][6].
+    # This operation initiates a job of the specified type, which can be a
+    # select, an archival retrieval, or a vault retrieval. For more
+    # information about using this operation, see the documentation for the
+    # underlying REST API [Initiate a Job][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html
-    # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-error-responses.html
-    # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
-    # [4]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html
-    # [5]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html
-    # [6]: http://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive-two-steps.html
+    # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html
     #
     # @option params [required, String] :account_id
     #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1718,6 +1603,7 @@ module Aws::Glacier
     #
     #   * {Types::InitiateJobOutput#location #location} => String
     #   * {Types::InitiateJobOutput#job_id #job_id} => String
+    #   * {Types::InitiateJobOutput#job_output_path #job_output_path} => String
     #
     #
     # @example Example: To initiate an inventory-retrieval job
@@ -1760,6 +1646,60 @@ module Aws::Glacier
     #         limit: "string",
     #         marker: "string",
     #       },
+    #       select_parameters: {
+    #         input_serialization: {
+    #           csv: {
+    #             file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #             comments: "string",
+    #             quote_escape_character: "string",
+    #             record_delimiter: "string",
+    #             field_delimiter: "string",
+    #             quote_character: "string",
+    #           },
+    #         },
+    #         expression_type: "SQL", # accepts SQL
+    #         expression: "string",
+    #         output_serialization: {
+    #           csv: {
+    #             quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #             quote_escape_character: "string",
+    #             record_delimiter: "string",
+    #             field_delimiter: "string",
+    #             quote_character: "string",
+    #           },
+    #         },
+    #       },
+    #       output_location: {
+    #         s3: {
+    #           bucket_name: "string",
+    #           prefix: "string",
+    #           encryption: {
+    #             encryption_type: "aws:kms", # accepts aws:kms, AES256
+    #             kms_key_id: "string",
+    #             kms_context: "string",
+    #           },
+    #           canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control
+    #           access_control_list: [
+    #             {
+    #               grantee: {
+    #                 type: "AmazonCustomerByEmail", # required, accepts AmazonCustomerByEmail, CanonicalUser, Group
+    #                 display_name: "string",
+    #                 uri: "string",
+    #                 id: "string",
+    #                 email_address: "string",
+    #               },
+    #               permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+    #             },
+    #           ],
+    #           tagging: {
+    #             "string" => "string",
+    #           },
+    #           user_metadata: {
+    #             "string" => "string",
+    #           },
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -1767,6 +1707,7 @@ module Aws::Glacier
     #
     #   resp.location #=> String
     #   resp.job_id #=> String
+    #   resp.job_output_path #=> String
     #
     # @overload initiate_job(params = {})
     # @param [Hash] params ({})
@@ -1987,7 +1928,8 @@ module Aws::Glacier
     end
 
     # This operation lists jobs for a vault, including jobs that are
-    # in-progress and jobs that have recently finished.
+    # in-progress and jobs that have recently finished. The List Job
+    # operation returns a list of these jobs sorted by job initiation time.
     #
     # <note markdown="1"> Amazon Glacier retains recently completed jobs for a period before
     # deleting them; however, it eventually removes completed jobs. The
@@ -2001,13 +1943,6 @@ module Aws::Glacier
     # the job exists.
     #
     #  </note>
-    #
-    # To retrieve an archive or retrieve a vault inventory from Amazon
-    # Glacier, you first initiate a job, and after the job completes, you
-    # download the data. For an archive retrieval, the output is the archive
-    # data. For an inventory retrieval, it is the inventory list. The List
-    # Job operation returns a list of these jobs sorted by job initiation
-    # time.
     #
     # The List Jobs operation supports pagination. You should always check
     # the response `Marker` field. If there are no more jobs to list, the
@@ -2031,7 +1966,8 @@ module Aws::Glacier
     # that were completed (`true`) or jobs that were not completed
     # (`false`).
     #
-    # For the underlying REST API, see [List Jobs][1].
+    # For more information about using this operation, see the documentation
+    # for the underlying REST API [List Jobs][1].
     #
     #
     #
@@ -2130,7 +2066,7 @@ module Aws::Glacier
     #   resp.job_list #=> Array
     #   resp.job_list[0].job_id #=> String
     #   resp.job_list[0].job_description #=> String
-    #   resp.job_list[0].action #=> String, one of "ArchiveRetrieval", "InventoryRetrieval"
+    #   resp.job_list[0].action #=> String, one of "ArchiveRetrieval", "InventoryRetrieval", "Select"
     #   resp.job_list[0].archive_id #=> String
     #   resp.job_list[0].vault_arn #=> String
     #   resp.job_list[0].creation_date #=> Time
@@ -2150,6 +2086,38 @@ module Aws::Glacier
     #   resp.job_list[0].inventory_retrieval_parameters.end_date #=> Time
     #   resp.job_list[0].inventory_retrieval_parameters.limit #=> String
     #   resp.job_list[0].inventory_retrieval_parameters.marker #=> String
+    #   resp.job_list[0].job_output_path #=> String
+    #   resp.job_list[0].select_parameters.input_serialization.csv.file_header_info #=> String, one of "USE", "IGNORE", "NONE"
+    #   resp.job_list[0].select_parameters.input_serialization.csv.comments #=> String
+    #   resp.job_list[0].select_parameters.input_serialization.csv.quote_escape_character #=> String
+    #   resp.job_list[0].select_parameters.input_serialization.csv.record_delimiter #=> String
+    #   resp.job_list[0].select_parameters.input_serialization.csv.field_delimiter #=> String
+    #   resp.job_list[0].select_parameters.input_serialization.csv.quote_character #=> String
+    #   resp.job_list[0].select_parameters.expression_type #=> String, one of "SQL"
+    #   resp.job_list[0].select_parameters.expression #=> String
+    #   resp.job_list[0].select_parameters.output_serialization.csv.quote_fields #=> String, one of "ALWAYS", "ASNEEDED"
+    #   resp.job_list[0].select_parameters.output_serialization.csv.quote_escape_character #=> String
+    #   resp.job_list[0].select_parameters.output_serialization.csv.record_delimiter #=> String
+    #   resp.job_list[0].select_parameters.output_serialization.csv.field_delimiter #=> String
+    #   resp.job_list[0].select_parameters.output_serialization.csv.quote_character #=> String
+    #   resp.job_list[0].output_location.s3.bucket_name #=> String
+    #   resp.job_list[0].output_location.s3.prefix #=> String
+    #   resp.job_list[0].output_location.s3.encryption.encryption_type #=> String, one of "aws:kms", "AES256"
+    #   resp.job_list[0].output_location.s3.encryption.kms_key_id #=> String
+    #   resp.job_list[0].output_location.s3.encryption.kms_context #=> String
+    #   resp.job_list[0].output_location.s3.canned_acl #=> String, one of "private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control"
+    #   resp.job_list[0].output_location.s3.access_control_list #=> Array
+    #   resp.job_list[0].output_location.s3.access_control_list[0].grantee.type #=> String, one of "AmazonCustomerByEmail", "CanonicalUser", "Group"
+    #   resp.job_list[0].output_location.s3.access_control_list[0].grantee.display_name #=> String
+    #   resp.job_list[0].output_location.s3.access_control_list[0].grantee.uri #=> String
+    #   resp.job_list[0].output_location.s3.access_control_list[0].grantee.id #=> String
+    #   resp.job_list[0].output_location.s3.access_control_list[0].grantee.email_address #=> String
+    #   resp.job_list[0].output_location.s3.access_control_list[0].permission #=> String, one of "FULL_CONTROL", "WRITE", "WRITE_ACP", "READ", "READ_ACP"
+    #   resp.job_list[0].output_location.s3.tagging #=> Hash
+    #   resp.job_list[0].output_location.s3.tagging["string"] #=> String
+    #   resp.job_list[0].output_location.s3.user_metadata #=> Hash
+    #   resp.job_list[0].output_location.s3.user_metadata["string"] #=> String
+    #   resp.job_list[0].output_location.s3.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
     #   resp.marker #=> String
     #
     # @overload list_jobs(params = {})
@@ -2417,16 +2385,15 @@ module Aws::Glacier
       req.send_request(options)
     end
 
-    # This operation lists the provisioned capacity for the specified AWS
-    # account.
+    # This operation lists the provisioned capacity units for the specified
+    # AWS account.
     #
     # @option params [required, String] :account_id
-    #   The `AccountId` value is the AWS account ID of the account that owns
-    #   the vault. You can either specify an AWS account ID or optionally a
-    #   single '-' (hyphen), in which case Amazon Glacier uses the AWS
-    #   account ID associated with the credentials used to sign the request.
-    #   If you use an account ID, don't include any hyphens ('-') in the
-    #   ID.
+    #   The AWS account ID of the account that owns the vault. You can either
+    #   specify an AWS account ID or optionally a single '-' (hyphen), in
+    #   which case Amazon Glacier uses the AWS account ID associated with the
+    #   credentials used to sign the request. If you use an account ID, don't
+    #   include any hyphens ('-') in the ID.
     #
     # @return [Types::ListProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3213,7 +3180,7 @@ module Aws::Glacier
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glacier'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

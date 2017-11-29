@@ -13,9 +13,13 @@ module Aws::Glacier
 
     AbortMultipartUploadInput = Shapes::StructureShape.new(name: 'AbortMultipartUploadInput')
     AbortVaultLockInput = Shapes::StructureShape.new(name: 'AbortVaultLockInput')
+    AccessControlPolicyList = Shapes::ListShape.new(name: 'AccessControlPolicyList')
     ActionCode = Shapes::StringShape.new(name: 'ActionCode')
     AddTagsToVaultInput = Shapes::StructureShape.new(name: 'AddTagsToVaultInput')
     ArchiveCreationOutput = Shapes::StructureShape.new(name: 'ArchiveCreationOutput')
+    CSVInput = Shapes::StructureShape.new(name: 'CSVInput')
+    CSVOutput = Shapes::StructureShape.new(name: 'CSVOutput')
+    CannedACL = Shapes::StringShape.new(name: 'CannedACL')
     CompleteMultipartUploadInput = Shapes::StructureShape.new(name: 'CompleteMultipartUploadInput')
     CompleteVaultLockInput = Shapes::StructureShape.new(name: 'CompleteVaultLockInput')
     CreateVaultInput = Shapes::StructureShape.new(name: 'CreateVaultInput')
@@ -31,6 +35,10 @@ module Aws::Glacier
     DescribeJobInput = Shapes::StructureShape.new(name: 'DescribeJobInput')
     DescribeVaultInput = Shapes::StructureShape.new(name: 'DescribeVaultInput')
     DescribeVaultOutput = Shapes::StructureShape.new(name: 'DescribeVaultOutput')
+    Encryption = Shapes::StructureShape.new(name: 'Encryption')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    ExpressionType = Shapes::StringShape.new(name: 'ExpressionType')
+    FileHeaderInfo = Shapes::StringShape.new(name: 'FileHeaderInfo')
     GetDataRetrievalPolicyInput = Shapes::StructureShape.new(name: 'GetDataRetrievalPolicyInput')
     GetDataRetrievalPolicyOutput = Shapes::StructureShape.new(name: 'GetDataRetrievalPolicyOutput')
     GetJobOutputInput = Shapes::StructureShape.new(name: 'GetJobOutputInput')
@@ -42,12 +50,15 @@ module Aws::Glacier
     GetVaultNotificationsInput = Shapes::StructureShape.new(name: 'GetVaultNotificationsInput')
     GetVaultNotificationsOutput = Shapes::StructureShape.new(name: 'GetVaultNotificationsOutput')
     GlacierJobDescription = Shapes::StructureShape.new(name: 'GlacierJobDescription')
+    Grant = Shapes::StructureShape.new(name: 'Grant')
+    Grantee = Shapes::StructureShape.new(name: 'Grantee')
     InitiateJobInput = Shapes::StructureShape.new(name: 'InitiateJobInput')
     InitiateJobOutput = Shapes::StructureShape.new(name: 'InitiateJobOutput')
     InitiateMultipartUploadInput = Shapes::StructureShape.new(name: 'InitiateMultipartUploadInput')
     InitiateMultipartUploadOutput = Shapes::StructureShape.new(name: 'InitiateMultipartUploadOutput')
     InitiateVaultLockInput = Shapes::StructureShape.new(name: 'InitiateVaultLockInput')
     InitiateVaultLockOutput = Shapes::StructureShape.new(name: 'InitiateVaultLockOutput')
+    InputSerialization = Shapes::StructureShape.new(name: 'InputSerialization')
     InsufficientCapacityException = Shapes::StructureShape.new(name: 'InsufficientCapacityException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     InventoryRetrievalJobDescription = Shapes::StructureShape.new(name: 'InventoryRetrievalJobDescription')
@@ -70,28 +81,36 @@ module Aws::Glacier
     MissingParameterValueException = Shapes::StructureShape.new(name: 'MissingParameterValueException')
     NotificationEventList = Shapes::ListShape.new(name: 'NotificationEventList')
     NullableLong = Shapes::IntegerShape.new(name: 'NullableLong')
+    OutputLocation = Shapes::StructureShape.new(name: 'OutputLocation')
+    OutputSerialization = Shapes::StructureShape.new(name: 'OutputSerialization')
     PartList = Shapes::ListShape.new(name: 'PartList')
     PartListElement = Shapes::StructureShape.new(name: 'PartListElement')
+    Permission = Shapes::StringShape.new(name: 'Permission')
     PolicyEnforcedException = Shapes::StructureShape.new(name: 'PolicyEnforcedException')
     ProvisionedCapacityDescription = Shapes::StructureShape.new(name: 'ProvisionedCapacityDescription')
     ProvisionedCapacityList = Shapes::ListShape.new(name: 'ProvisionedCapacityList')
     PurchaseProvisionedCapacityInput = Shapes::StructureShape.new(name: 'PurchaseProvisionedCapacityInput')
     PurchaseProvisionedCapacityOutput = Shapes::StructureShape.new(name: 'PurchaseProvisionedCapacityOutput')
+    QuoteFields = Shapes::StringShape.new(name: 'QuoteFields')
     RemoveTagsFromVaultInput = Shapes::StructureShape.new(name: 'RemoveTagsFromVaultInput')
     RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    S3Location = Shapes::StructureShape.new(name: 'S3Location')
+    SelectParameters = Shapes::StructureShape.new(name: 'SelectParameters')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SetDataRetrievalPolicyInput = Shapes::StructureShape.new(name: 'SetDataRetrievalPolicyInput')
     SetVaultAccessPolicyInput = Shapes::StructureShape.new(name: 'SetVaultAccessPolicyInput')
     SetVaultNotificationsInput = Shapes::StructureShape.new(name: 'SetVaultNotificationsInput')
     Size = Shapes::IntegerShape.new(name: 'Size')
     StatusCode = Shapes::StringShape.new(name: 'StatusCode')
+    StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     Stream = Shapes::BlobShape.new(name: 'Stream')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp', timestampFormat: "iso8601")
+    Type = Shapes::StringShape.new(name: 'Type')
     UploadArchiveInput = Shapes::StructureShape.new(name: 'UploadArchiveInput')
     UploadListElement = Shapes::StructureShape.new(name: 'UploadListElement')
     UploadMultipartPartInput = Shapes::StructureShape.new(name: 'UploadMultipartPartInput')
@@ -102,6 +121,7 @@ module Aws::Glacier
     VaultLockPolicy = Shapes::StructureShape.new(name: 'VaultLockPolicy')
     VaultNotificationConfig = Shapes::StructureShape.new(name: 'VaultNotificationConfig')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
+    hashmap = Shapes::MapShape.new(name: 'hashmap')
     httpstatus = Shapes::IntegerShape.new(name: 'httpstatus')
     long = Shapes::IntegerShape.new(name: 'long')
     string = Shapes::StringShape.new(name: 'string')
@@ -115,6 +135,8 @@ module Aws::Glacier
     AbortVaultLockInput.add_member(:vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "vaultName"))
     AbortVaultLockInput.struct_class = Types::AbortVaultLockInput
 
+    AccessControlPolicyList.member = Shapes::ShapeRef.new(shape: Grant)
+
     AddTagsToVaultInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
     AddTagsToVaultInput.add_member(:vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "vaultName"))
     AddTagsToVaultInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
@@ -124,6 +146,21 @@ module Aws::Glacier
     ArchiveCreationOutput.add_member(:checksum, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "x-amz-sha256-tree-hash"))
     ArchiveCreationOutput.add_member(:archive_id, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "x-amz-archive-id"))
     ArchiveCreationOutput.struct_class = Types::ArchiveCreationOutput
+
+    CSVInput.add_member(:file_header_info, Shapes::ShapeRef.new(shape: FileHeaderInfo, location_name: "FileHeaderInfo"))
+    CSVInput.add_member(:comments, Shapes::ShapeRef.new(shape: string, location_name: "Comments"))
+    CSVInput.add_member(:quote_escape_character, Shapes::ShapeRef.new(shape: string, location_name: "QuoteEscapeCharacter"))
+    CSVInput.add_member(:record_delimiter, Shapes::ShapeRef.new(shape: string, location_name: "RecordDelimiter"))
+    CSVInput.add_member(:field_delimiter, Shapes::ShapeRef.new(shape: string, location_name: "FieldDelimiter"))
+    CSVInput.add_member(:quote_character, Shapes::ShapeRef.new(shape: string, location_name: "QuoteCharacter"))
+    CSVInput.struct_class = Types::CSVInput
+
+    CSVOutput.add_member(:quote_fields, Shapes::ShapeRef.new(shape: QuoteFields, location_name: "QuoteFields"))
+    CSVOutput.add_member(:quote_escape_character, Shapes::ShapeRef.new(shape: string, location_name: "QuoteEscapeCharacter"))
+    CSVOutput.add_member(:record_delimiter, Shapes::ShapeRef.new(shape: string, location_name: "RecordDelimiter"))
+    CSVOutput.add_member(:field_delimiter, Shapes::ShapeRef.new(shape: string, location_name: "FieldDelimiter"))
+    CSVOutput.add_member(:quote_character, Shapes::ShapeRef.new(shape: string, location_name: "QuoteCharacter"))
+    CSVOutput.struct_class = Types::CSVOutput
 
     CompleteMultipartUploadInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
     CompleteMultipartUploadInput.add_member(:vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "vaultName"))
@@ -186,6 +223,11 @@ module Aws::Glacier
     DescribeVaultOutput.add_member(:number_of_archives, Shapes::ShapeRef.new(shape: long, location_name: "NumberOfArchives"))
     DescribeVaultOutput.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: long, location_name: "SizeInBytes"))
     DescribeVaultOutput.struct_class = Types::DescribeVaultOutput
+
+    Encryption.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
+    Encryption.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: string, location_name: "KMSKeyId"))
+    Encryption.add_member(:kms_context, Shapes::ShapeRef.new(shape: string, location_name: "KMSContext"))
+    Encryption.struct_class = Types::Encryption
 
     GetDataRetrievalPolicyInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
     GetDataRetrievalPolicyInput.struct_class = Types::GetDataRetrievalPolicyInput
@@ -256,7 +298,21 @@ module Aws::Glacier
     GlacierJobDescription.add_member(:retrieval_byte_range, Shapes::ShapeRef.new(shape: string, location_name: "RetrievalByteRange"))
     GlacierJobDescription.add_member(:tier, Shapes::ShapeRef.new(shape: string, location_name: "Tier"))
     GlacierJobDescription.add_member(:inventory_retrieval_parameters, Shapes::ShapeRef.new(shape: InventoryRetrievalJobDescription, location_name: "InventoryRetrievalParameters"))
+    GlacierJobDescription.add_member(:job_output_path, Shapes::ShapeRef.new(shape: string, location_name: "JobOutputPath"))
+    GlacierJobDescription.add_member(:select_parameters, Shapes::ShapeRef.new(shape: SelectParameters, location_name: "SelectParameters"))
+    GlacierJobDescription.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "OutputLocation"))
     GlacierJobDescription.struct_class = Types::GlacierJobDescription
+
+    Grant.add_member(:grantee, Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee"))
+    Grant.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
+    Grant.struct_class = Types::Grant
+
+    Grantee.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "Type"))
+    Grantee.add_member(:display_name, Shapes::ShapeRef.new(shape: string, location_name: "DisplayName"))
+    Grantee.add_member(:uri, Shapes::ShapeRef.new(shape: string, location_name: "URI"))
+    Grantee.add_member(:id, Shapes::ShapeRef.new(shape: string, location_name: "ID"))
+    Grantee.add_member(:email_address, Shapes::ShapeRef.new(shape: string, location_name: "EmailAddress"))
+    Grantee.struct_class = Types::Grantee
 
     InitiateJobInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
     InitiateJobInput.add_member(:vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "vaultName"))
@@ -267,6 +323,7 @@ module Aws::Glacier
 
     InitiateJobOutput.add_member(:location, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "Location"))
     InitiateJobOutput.add_member(:job_id, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "x-amz-job-id"))
+    InitiateJobOutput.add_member(:job_output_path, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "x-amz-job-output-path"))
     InitiateJobOutput.struct_class = Types::InitiateJobOutput
 
     InitiateMultipartUploadInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
@@ -288,6 +345,9 @@ module Aws::Glacier
 
     InitiateVaultLockOutput.add_member(:lock_id, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "x-amz-lock-id"))
     InitiateVaultLockOutput.struct_class = Types::InitiateVaultLockOutput
+
+    InputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVInput, location_name: "csv"))
+    InputSerialization.struct_class = Types::InputSerialization
 
     InventoryRetrievalJobDescription.add_member(:format, Shapes::ShapeRef.new(shape: string, location_name: "Format"))
     InventoryRetrievalJobDescription.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate"))
@@ -312,6 +372,8 @@ module Aws::Glacier
     JobParameters.add_member(:retrieval_byte_range, Shapes::ShapeRef.new(shape: string, location_name: "RetrievalByteRange"))
     JobParameters.add_member(:tier, Shapes::ShapeRef.new(shape: string, location_name: "Tier"))
     JobParameters.add_member(:inventory_retrieval_parameters, Shapes::ShapeRef.new(shape: InventoryRetrievalJobInput, location_name: "InventoryRetrievalParameters"))
+    JobParameters.add_member(:select_parameters, Shapes::ShapeRef.new(shape: SelectParameters, location_name: "SelectParameters"))
+    JobParameters.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "OutputLocation"))
     JobParameters.struct_class = Types::JobParameters
 
     ListJobsInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
@@ -376,6 +438,12 @@ module Aws::Glacier
 
     NotificationEventList.member = Shapes::ShapeRef.new(shape: string)
 
+    OutputLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3Location, location_name: "S3"))
+    OutputLocation.struct_class = Types::OutputLocation
+
+    OutputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVOutput, location_name: "csv"))
+    OutputSerialization.struct_class = Types::OutputSerialization
+
     PartList.member = Shapes::ShapeRef.new(shape: PartListElement)
 
     PartListElement.add_member(:range_in_bytes, Shapes::ShapeRef.new(shape: string, location_name: "RangeInBytes"))
@@ -399,6 +467,22 @@ module Aws::Glacier
     RemoveTagsFromVaultInput.add_member(:vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "vaultName"))
     RemoveTagsFromVaultInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
     RemoveTagsFromVaultInput.struct_class = Types::RemoveTagsFromVaultInput
+
+    S3Location.add_member(:bucket_name, Shapes::ShapeRef.new(shape: string, location_name: "BucketName"))
+    S3Location.add_member(:prefix, Shapes::ShapeRef.new(shape: string, location_name: "Prefix"))
+    S3Location.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+    S3Location.add_member(:canned_acl, Shapes::ShapeRef.new(shape: CannedACL, location_name: "CannedACL"))
+    S3Location.add_member(:access_control_list, Shapes::ShapeRef.new(shape: AccessControlPolicyList, location_name: "AccessControlList"))
+    S3Location.add_member(:tagging, Shapes::ShapeRef.new(shape: hashmap, location_name: "Tagging"))
+    S3Location.add_member(:user_metadata, Shapes::ShapeRef.new(shape: hashmap, location_name: "UserMetadata"))
+    S3Location.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "StorageClass"))
+    S3Location.struct_class = Types::S3Location
+
+    SelectParameters.add_member(:input_serialization, Shapes::ShapeRef.new(shape: InputSerialization, location_name: "InputSerialization"))
+    SelectParameters.add_member(:expression_type, Shapes::ShapeRef.new(shape: ExpressionType, location_name: "ExpressionType"))
+    SelectParameters.add_member(:expression, Shapes::ShapeRef.new(shape: string, location_name: "Expression"))
+    SelectParameters.add_member(:output_serialization, Shapes::ShapeRef.new(shape: OutputSerialization, location_name: "OutputSerialization"))
+    SelectParameters.struct_class = Types::SelectParameters
 
     SetDataRetrievalPolicyInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
     SetDataRetrievalPolicyInput.add_member(:policy, Shapes::ShapeRef.new(shape: DataRetrievalPolicy, location_name: "Policy"))
@@ -465,6 +549,9 @@ module Aws::Glacier
     VaultNotificationConfig.add_member(:sns_topic, Shapes::ShapeRef.new(shape: string, location_name: "SNSTopic"))
     VaultNotificationConfig.add_member(:events, Shapes::ShapeRef.new(shape: NotificationEventList, location_name: "Events"))
     VaultNotificationConfig.struct_class = Types::VaultNotificationConfig
+
+    hashmap.key = Shapes::ShapeRef.new(shape: string)
+    hashmap.value = Shapes::ShapeRef.new(shape: string)
 
 
     # @api private
