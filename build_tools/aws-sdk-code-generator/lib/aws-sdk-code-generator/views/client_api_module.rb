@@ -198,15 +198,24 @@ module AwsSdkCodeGenerator
 
       def shape_class_name(shape)
         type = shape['type']
-        # APIG time serializing difference
-        if @service.protocol == 'api-gateway' && type == 'timestamp'
-          shape['timestampFormat'] = 'iso8601'
-        end
+        shape = apply_timestamp(shape) if type == 'timestamp'
         if SHAPE_CLASSES.key?(type)
           ["Shapes::#{SHAPE_CLASSES[type]}", shape]
         else
           raise ArgumentError, "unsupported shape type `#{type}'"
         end
+      end
+
+      def apply_timestamp(shape)
+        # APIG time serializing difference
+        if @service.protocol == 'api-gateway'
+          shape['timestampFormat'] = 'iso8601'
+        elsif @service.protocol == 'rest-json' && @service.timestamp_format
+          # with metadata timestampFormat available for 'rest-json'
+          # shape in timestamp type will have this "timestampFormat" if not specified already
+          shape['timestampFormat'] = @service.timestamp_format unless shape.key?('timestampFormat')
+        end
+        shape
       end
 
       def shape_constructor_args(shape_name, shape)
