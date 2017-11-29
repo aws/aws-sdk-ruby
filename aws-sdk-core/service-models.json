@@ -11,6 +11,10 @@
     "models": "appstream/2016-12-01",
     "endpoint": "appstream2"
   },
+  "AppSync": {
+    "models": "appsync/2017-07-25",
+    "endpoint": "appsync"
+  },
   "ApplicationAutoScaling": {
     "models": "application-autoscaling/2016-02-06",
     "endpoint": "application-autoscaling"
@@ -218,6 +222,10 @@
     "models": "greengrass/2017-06-07",
     "endpoint": "greengrass"
   },
+  "GuardDuty": {
+    "models": "guardduty/2017-11-28",
+    "endpoint": "guardduty"
+  },
   "Health": {
     "models": "health/2016-08-04",
     "endpoint": "health"
@@ -273,6 +281,10 @@
   "Lightsail": {
     "models": "lightsail/2016-11-28",
     "endpoint": "lightsail"
+  },
+  "MQ": {
+    "models": "mq/2017-11-27",
+    "endpoint": "mq"
   },
   "MTurk": {
     "models": "mturk-requester/2017-01-17",

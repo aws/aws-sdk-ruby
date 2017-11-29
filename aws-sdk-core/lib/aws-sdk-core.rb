@@ -26,6 +26,7 @@ module Aws
     ACM
     APIGateway
     AppStream
+    AppSync
     ApplicationAutoScaling
     ApplicationDiscoveryService
     Athena
@@ -78,6 +79,7 @@ module Aws
     Glacier
     Glue
     Greengrass
+    GuardDuty
     Health
     IAM
     ImportExport
@@ -92,6 +94,7 @@ module Aws
     Lex
     LexModelBuildingService
     Lightsail
+    MQ
     MTurk
     MachineLearning
     MarketplaceCommerceAnalytics

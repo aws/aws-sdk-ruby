@@ -254,6 +254,7 @@ to be backwards compatible.
 
 | Service Name                        | Service Class                 | API Version |
 | ----------------------------------- | ----------------------------- | ----------- |
+| AWS AppSync                         | AppSync                       | 2017-07-25  |
 | AWS Application Discovery Service   | ApplicationDiscoveryService   | 2015-11-01  |
 | AWS Batch                           | Batch                         | 2016-08-10  |
 | AWS Budgets                         | Budgets                       | 2016-10-20  |
@@ -337,6 +338,7 @@ to be backwards compatible.
 | Amazon Elasticsearch Service        | ElasticsearchService          | 2015-01-01  |
 | Amazon GameLift                     | GameLift                      | 2015-10-01  |
 | Amazon Glacier                      | Glacier                       | 2012-06-01  |
+| Amazon GuardDuty                    | GuardDuty                     | 2017-11-28  |
 | Amazon Import/Export Snowball       | Snowball                      | 2016-06-30  |
 | Amazon Inspector                    | Inspector                     | 2016-02-16  |
 | Amazon Kinesis                      | Kinesis                       | 2013-12-02  |
@@ -363,6 +365,7 @@ to be backwards compatible.
 | Amazon SimpleDB                     | SimpleDB                      | 2009-04-15  |
 | Amazon WorkDocs                     | WorkDocs                      | 2016-05-01  |
 | Amazon WorkSpaces                   | WorkSpaces                    | 2015-04-08  |
+| AmazonMQ                            | MQ                            | 2017-11-27  |
 | Application Auto Scaling            | ApplicationAutoScaling        | 2016-02-06  |
 | Auto Scaling                        | AutoScaling                   | 2011-01-01  |
 | Elastic Load Balancing              | ElasticLoadBalancingV2        | 2015-12-01  |
