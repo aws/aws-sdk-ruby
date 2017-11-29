@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2017-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MQ`.
+
+* Feature - Added support for enumerating regions for `Aws::GuardDuty`.
+
+* Feature - Added support for enumerating regions for `Aws::AppSync`.
+
 1.40.0 (2017-11-27)
 ------------------
 

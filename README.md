@@ -299,6 +299,7 @@ to be backwards compatible.
 
 | Service Name                        | Service Module                     | gem_name                              | API Version |
 | ----------------------------------- | ---------------------------------- | ------------------------------------- | ----------- |
+| AWS AppSync                         | Aws::AppSync                       | aws-sdk-appsync                       | 2017-07-25  |
 | AWS Application Discovery Service   | Aws::ApplicationDiscoveryService   | aws-sdk-applicationdiscoveryservice   | 2015-11-01  |
 | AWS Batch                           | Aws::Batch                         | aws-sdk-batch                         | 2016-08-10  |
 | AWS Budgets                         | Aws::Budgets                       | aws-sdk-budgets                       | 2016-10-20  |
@@ -382,6 +383,7 @@ to be backwards compatible.
 | Amazon Elasticsearch Service        | Aws::ElasticsearchService          | aws-sdk-elasticsearchservice          | 2015-01-01  |
 | Amazon GameLift                     | Aws::GameLift                      | aws-sdk-gamelift                      | 2015-10-01  |
 | Amazon Glacier                      | Aws::Glacier                       | aws-sdk-glacier                       | 2012-06-01  |
+| Amazon GuardDuty                    | Aws::GuardDuty                     | aws-sdk-guardduty                     | 2017-11-28  |
 | Amazon Import/Export Snowball       | Aws::Snowball                      | aws-sdk-snowball                      | 2016-06-30  |
 | Amazon Inspector                    | Aws::Inspector                     | aws-sdk-inspector                     | 2016-02-16  |
 | Amazon Kinesis                      | Aws::Kinesis                       | aws-sdk-kinesis                       | 2013-12-02  |
@@ -408,6 +410,7 @@ to be backwards compatible.
 | Amazon SimpleDB                     | Aws::SimpleDB                      | aws-sdk-simpledb                      | 2009-04-15  |
 | Amazon WorkDocs                     | Aws::WorkDocs                      | aws-sdk-workdocs                      | 2016-05-01  |
 | Amazon WorkSpaces                   | Aws::WorkSpaces                    | aws-sdk-workspaces                    | 2015-04-08  |
+| AmazonMQ                            | Aws::MQ                            | aws-sdk-mq                            | 2017-11-27  |
 | Application Auto Scaling            | Aws::ApplicationAutoScaling        | aws-sdk-applicationautoscaling        | 2016-02-06  |
 | Auto Scaling                        | Aws::AutoScaling                   | aws-sdk-autoscaling                   | 2011-01-01  |
 | Elastic Load Balancing              | Aws::ElasticLoadBalancingV2        | aws-sdk-elasticloadbalancingv2        | 2015-12-01  |

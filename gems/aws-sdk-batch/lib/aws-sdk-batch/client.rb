@@ -155,7 +155,7 @@ module Aws::Batch
     #   The AWS Batch job ID of the job to cancel.
     #
     # @option params [required, String] :reason
-    #   A message to attach to the job that explains the reason for cancelling
+    #   A message to attach to the job that explains the reason for canceling
     #   it. This message is returned by future DescribeJobs operations on the
     #   job. This message is also recorded in the AWS Batch activity logs.
     #
@@ -198,8 +198,8 @@ module Aws::Batch
     # resources within the environment, based on the compute resources that
     # you specify. Instances launched into a managed compute environment use
     # a recent, approved version of the Amazon ECS-optimized AMI. You can
-    # choose to use Amazon EC2 On-Demand instances in your managed compute
-    # environment, or you can use Amazon EC2 Spot instances that only launch
+    # choose to use Amazon EC2 On-Demand Instances in your managed compute
+    # environment, or you can use Amazon EC2 Spot Instances that only launch
     # when the Spot bid price is below a specified percentage of the
     # On-Demand price.
     #
@@ -207,13 +207,13 @@ module Aws::Batch
     # resources. This provides more compute resource configuration options,
     # such as using a custom AMI, but you must ensure that your AMI meets
     # the Amazon ECS container instance AMI specification. For more
-    # information, see [Container Instance AMIs][1] in the *Amazon EC2
+    # information, see [Container Instance AMIs][1] in the *Amazon Elastic
     # Container Service Developer Guide*. After you have created your
     # unmanaged compute environment, you can use the
     # DescribeComputeEnvironments operation to find the Amazon ECS cluster
     # that is associated with it and then manually launch your container
     # instances into that Amazon ECS cluster. For more information, see
-    # [Launching an Amazon ECS Container Instance][2] in the *Amazon EC2
+    # [Launching an Amazon ECS Container Instance][2] in the *Amazon Elastic
     # Container Service Developer Guide*.
     #
     #
@@ -416,7 +416,7 @@ module Aws::Batch
     #   relative to each other. The job scheduler uses this parameter to
     #   determine which compute environment should execute a given job.
     #   Compute environments must be in the `VALID` state before you can
-    #   associate them with a job queue. You can associate up to 3 compute
+    #   associate them with a job queue. You can associate up to three compute
     #   environments with a job queue.
     #
     # @return [Types::CreateJobQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1076,6 +1076,7 @@ module Aws::Batch
     #   resp.jobs[0].stopped_at #=> Integer
     #   resp.jobs[0].depends_on #=> Array
     #   resp.jobs[0].depends_on[0].job_id #=> String
+    #   resp.jobs[0].depends_on[0].type #=> String, one of "N_TO_N", "SEQUENTIAL"
     #   resp.jobs[0].job_definition #=> String
     #   resp.jobs[0].parameters #=> Hash
     #   resp.jobs[0].parameters["String"] #=> String
@@ -1107,6 +1108,10 @@ module Aws::Batch
     #   resp.jobs[0].container.container_instance_arn #=> String
     #   resp.jobs[0].container.task_arn #=> String
     #   resp.jobs[0].container.log_stream_name #=> String
+    #   resp.jobs[0].array_properties.status_summary #=> Hash
+    #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
+    #   resp.jobs[0].array_properties.size #=> Integer
+    #   resp.jobs[0].array_properties.index #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs AWS API Documentation
     #
@@ -1121,9 +1126,13 @@ module Aws::Batch
     # the results by job status with the `jobStatus` parameter. If you do
     # not specify a status, only `RUNNING` jobs are returned.
     #
-    # @option params [required, String] :job_queue
+    # @option params [String] :job_queue
     #   The name or full Amazon Resource Name (ARN) of the job queue with
     #   which to list jobs.
+    #
+    # @option params [String] :array_job_id
+    #   The job ID for an array job. Specifying an array job ID with this
+    #   parameter lists all child jobs from within the specified array.
     #
     # @option params [String] :job_status
     #   The job status with which to filter jobs in the specified queue. If
@@ -1198,7 +1207,8 @@ module Aws::Batch
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
-    #     job_queue: "String", # required
+    #     job_queue: "String",
+    #     array_job_id: "String",
     #     job_status: "SUBMITTED", # accepts SUBMITTED, PENDING, RUNNABLE, STARTING, RUNNING, SUCCEEDED, FAILED
     #     max_results: 1,
     #     next_token: "String",
@@ -1209,6 +1219,15 @@ module Aws::Batch
     #   resp.job_summary_list #=> Array
     #   resp.job_summary_list[0].job_id #=> String
     #   resp.job_summary_list[0].job_name #=> String
+    #   resp.job_summary_list[0].created_at #=> Integer
+    #   resp.job_summary_list[0].status #=> String, one of "SUBMITTED", "PENDING", "RUNNABLE", "STARTING", "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.job_summary_list[0].status_reason #=> String
+    #   resp.job_summary_list[0].started_at #=> Integer
+    #   resp.job_summary_list[0].stopped_at #=> Integer
+    #   resp.job_summary_list[0].container.exit_code #=> Integer
+    #   resp.job_summary_list[0].container.reason #=> String
+    #   resp.job_summary_list[0].array_properties.size #=> Integer
+    #   resp.job_summary_list[0].array_properties.index #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs AWS API Documentation
@@ -1352,12 +1371,27 @@ module Aws::Batch
     #   underscores are allowed.
     #
     # @option params [required, String] :job_queue
-    #   The job queue into which the job will be submitted. You can specify
-    #   either the name or the Amazon Resource Name (ARN) of the queue.
+    #   The job queue into which the job is submitted. You can specify either
+    #   the name or the Amazon Resource Name (ARN) of the queue.
+    #
+    # @option params [Types::ArrayProperties] :array_properties
+    #   The array properties for the submitted job, such as the size of the
+    #   array. The array size can be between 2 and 10,000. If you specify
+    #   array properties for a job, it becomes an array job. For more
+    #   information, see [Array Jobs][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
     #
     # @option params [Array<Types::JobDependency>] :depends_on
-    #   A list of job IDs on which this job depends. A job can depend upon a
-    #   maximum of 20 jobs.
+    #   A list of dependencies for the job. A job can depend upon a maximum of
+    #   20 jobs. You can specify a `SEQUENTIAL` type dependency without
+    #   specifying a job ID for array jobs so that each child array job
+    #   completes sequentially, starting at index 0. You can also specify an
+    #   `N_TO_N` type dependency with a job ID for array jobs so that each
+    #   index child of this job must wait for the corresponding index child of
+    #   each dependency to complete before it can begin.
     #
     # @option params [required, String] :job_definition
     #   The job definition used by this job. This value can be either a
@@ -1413,9 +1447,13 @@ module Aws::Batch
     #   resp = client.submit_job({
     #     job_name: "String", # required
     #     job_queue: "String", # required
+    #     array_properties: {
+    #       size: 1,
+    #     },
     #     depends_on: [
     #       {
     #         job_id: "String",
+    #         type: "N_TO_N", # accepts N_TO_N, SEQUENTIAL
     #       },
     #     ],
     #     job_definition: "String", # required
@@ -1461,7 +1499,7 @@ module Aws::Batch
     #   The AWS Batch job ID of the job to terminate.
     #
     # @option params [required, String] :reason
-    #   A message to attach to the job that explains the reason for cancelling
+    #   A message to attach to the job that explains the reason for canceling
     #   it. This message is returned by future DescribeJobs operations on the
     #   job. This message is also recorded in the AWS Batch activity logs.
     #
@@ -1661,7 +1699,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

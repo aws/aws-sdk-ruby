@@ -16,9 +16,12 @@ module Aws::Lambda
     Action = Shapes::StringShape.new(name: 'Action')
     AddPermissionRequest = Shapes::StructureShape.new(name: 'AddPermissionRequest')
     AddPermissionResponse = Shapes::StructureShape.new(name: 'AddPermissionResponse')
+    AdditionalVersion = Shapes::StringShape.new(name: 'AdditionalVersion')
+    AdditionalVersionWeights = Shapes::MapShape.new(name: 'AdditionalVersionWeights')
     Alias = Shapes::StringShape.new(name: 'Alias')
     AliasConfiguration = Shapes::StructureShape.new(name: 'AliasConfiguration')
     AliasList = Shapes::ListShape.new(name: 'AliasList')
+    AliasRoutingConfiguration = Shapes::StructureShape.new(name: 'AliasRoutingConfiguration')
     Arn = Shapes::StringShape.new(name: 'Arn')
     BatchSize = Shapes::IntegerShape.new(name: 'BatchSize')
     Blob = Shapes::BlobShape.new(name: 'Blob')
@@ -148,6 +151,7 @@ module Aws::Lambda
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    Weight = Shapes::FloatShape.new(name: 'Weight')
 
     AccountLimit.add_member(:total_code_size, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCodeSize"))
     AccountLimit.add_member(:code_size_unzipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeUnzipped"))
@@ -172,18 +176,26 @@ module Aws::Lambda
     AddPermissionResponse.add_member(:statement, Shapes::ShapeRef.new(shape: String, location_name: "Statement"))
     AddPermissionResponse.struct_class = Types::AddPermissionResponse
 
+    AdditionalVersionWeights.key = Shapes::ShapeRef.new(shape: AdditionalVersion)
+    AdditionalVersionWeights.value = Shapes::ShapeRef.new(shape: Weight)
+
     AliasConfiguration.add_member(:alias_arn, Shapes::ShapeRef.new(shape: FunctionArn, location_name: "AliasArn"))
     AliasConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: Alias, location_name: "Name"))
     AliasConfiguration.add_member(:function_version, Shapes::ShapeRef.new(shape: Version, location_name: "FunctionVersion"))
     AliasConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    AliasConfiguration.add_member(:routing_config, Shapes::ShapeRef.new(shape: AliasRoutingConfiguration, location_name: "RoutingConfig"))
     AliasConfiguration.struct_class = Types::AliasConfiguration
 
     AliasList.member = Shapes::ShapeRef.new(shape: AliasConfiguration)
+
+    AliasRoutingConfiguration.add_member(:additional_version_weights, Shapes::ShapeRef.new(shape: AdditionalVersionWeights, location_name: "AdditionalVersionWeights"))
+    AliasRoutingConfiguration.struct_class = Types::AliasRoutingConfiguration
 
     CreateAliasRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     CreateAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "Name"))
     CreateAliasRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "FunctionVersion"))
     CreateAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateAliasRequest.add_member(:routing_config, Shapes::ShapeRef.new(shape: AliasRoutingConfiguration, location_name: "RoutingConfig"))
     CreateAliasRequest.struct_class = Types::CreateAliasRequest
 
     CreateEventSourceMappingRequest.add_member(:event_source_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "EventSourceArn"))
@@ -330,6 +342,7 @@ module Aws::Lambda
     InvocationResponse.add_member(:function_error, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Amz-Function-Error"))
     InvocationResponse.add_member(:log_result, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Amz-Log-Result"))
     InvocationResponse.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, location_name: "Payload"))
+    InvocationResponse.add_member(:executed_version, Shapes::ShapeRef.new(shape: Version, location: "header", location_name: "X-Amz-Executed-Version"))
     InvocationResponse.struct_class = Types::InvocationResponse
     InvocationResponse[:payload] = :payload
     InvocationResponse[:payload_member] = InvocationResponse.member(:payload)
@@ -425,6 +438,7 @@ module Aws::Lambda
     UpdateAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Alias, required: true, location: "uri", location_name: "Name"))
     UpdateAliasRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: Version, location_name: "FunctionVersion"))
     UpdateAliasRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateAliasRequest.add_member(:routing_config, Shapes::ShapeRef.new(shape: AliasRoutingConfiguration, location_name: "RoutingConfig"))
     UpdateAliasRequest.struct_class = Types::UpdateAliasRequest
 
     UpdateEventSourceMappingRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "UUID"))

@@ -132,6 +132,11 @@ module Aws::CodeDeploy
     #   The name for a connection to a GitHub account.
     #   @return [String]
     #
+    # @!attribute [rw] compute_platform
+    #   The destination platform type for deployment of the application
+    #   (`Lambda` or `Server`).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationInfo AWS API Documentation
     #
     class ApplicationInfo < Struct.new(
@@ -139,7 +144,8 @@ module Aws::CodeDeploy
       :application_name,
       :create_time,
       :linked_to_git_hub,
-      :git_hub_account_name)
+      :git_hub_account_name,
+      :compute_platform)
       include Aws::Structure
     end
 
@@ -199,17 +205,21 @@ module Aws::CodeDeploy
     #         application_name: "ApplicationName", # required
     #         revisions: [ # required
     #           {
-    #             revision_type: "S3", # accepts S3, GitHub
+    #             revision_type: "S3", # accepts S3, GitHub, String
     #             s3_location: {
     #               bucket: "S3Bucket",
     #               key: "S3Key",
-    #               bundle_type: "tar", # accepts tar, tgz, zip
+    #               bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #               version: "VersionId",
     #               e_tag: "ETag",
     #             },
     #             git_hub_location: {
     #               repository: "Repository",
     #               commit_id: "CommitId",
+    #             },
+    #             string: {
+    #               content: "RawStringContent",
+    #               sha256: "RawStringSha256",
     #             },
     #           },
     #         ],
@@ -263,7 +273,7 @@ module Aws::CodeDeploy
     #   data as a hash:
     #
     #       {
-    #         application_names: ["ApplicationName"],
+    #         application_names: ["ApplicationName"], # required
     #       }
     #
     # @!attribute [rw] application_names
@@ -385,7 +395,7 @@ module Aws::CodeDeploy
     #   data as a hash:
     #
     #       {
-    #         deployment_ids: ["DeploymentId"],
+    #         deployment_ids: ["DeploymentId"], # required
     #       }
     #
     # @!attribute [rw] deployment_ids
@@ -418,7 +428,7 @@ module Aws::CodeDeploy
     #   data as a hash:
     #
     #       {
-    #         instance_names: ["InstanceName"],
+    #         instance_names: ["InstanceName"], # required
     #       }
     #
     # @!attribute [rw] instance_names
@@ -552,6 +562,7 @@ module Aws::CodeDeploy
     #
     #       {
     #         application_name: "ApplicationName", # required
+    #         compute_platform: "Server", # accepts Server, Lambda
     #       }
     #
     # @!attribute [rw] application_name
@@ -559,10 +570,16 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #   @return [String]
     #
+    # @!attribute [rw] compute_platform
+    #   The destination platform type for the deployment `Lambda` or
+    #   `Server`).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplicationInput AWS API Documentation
     #
     class CreateApplicationInput < Struct.new(
-      :application_name)
+      :application_name,
+      :compute_platform)
       include Aws::Structure
     end
 
@@ -590,6 +607,18 @@ module Aws::CodeDeploy
     #           value: 1,
     #           type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
     #         },
+    #         traffic_routing_config: {
+    #           type: "TimeBasedCanary", # accepts TimeBasedCanary, TimeBasedLinear, AllAtOnce
+    #           time_based_canary: {
+    #             canary_percentage: 1,
+    #             canary_interval: 1,
+    #           },
+    #           time_based_linear: {
+    #             linear_percentage: 1,
+    #             linear_interval: 1,
+    #           },
+    #         },
+    #         compute_platform: "Server", # accepts Server, Lambda
     #       }
     #
     # @!attribute [rw] deployment_config_name
@@ -619,11 +648,23 @@ module Aws::CodeDeploy
     #   type of FLEET\_PERCENT and a value of 95.
     #   @return [Types::MinimumHealthyHosts]
     #
+    # @!attribute [rw] traffic_routing_config
+    #   The configuration specifying how the deployment traffic will be
+    #   routed.
+    #   @return [Types::TrafficRoutingConfig]
+    #
+    # @!attribute [rw] compute_platform
+    #   The destination platform type for the deployment (`Lambda` or
+    #   `Server`&gt;).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfigInput AWS API Documentation
     #
     class CreateDeploymentConfigInput < Struct.new(
       :deployment_config_name,
-      :minimum_healthy_hosts)
+      :minimum_healthy_hosts,
+      :traffic_routing_config,
+      :compute_platform)
       include Aws::Structure
     end
 
@@ -878,17 +919,21 @@ module Aws::CodeDeploy
     #         application_name: "ApplicationName", # required
     #         deployment_group_name: "DeploymentGroupName",
     #         revision: {
-    #           revision_type: "S3", # accepts S3, GitHub
+    #           revision_type: "S3", # accepts S3, GitHub, String
     #           s3_location: {
     #             bucket: "S3Bucket",
     #             key: "S3Key",
-    #             bundle_type: "tar", # accepts tar, tgz, zip
+    #             bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #             version: "VersionId",
     #             e_tag: "ETag",
     #           },
     #           git_hub_location: {
     #             repository: "Repository",
     #             commit_id: "CommitId",
+    #           },
+    #           string: {
+    #             content: "RawStringContent",
+    #             sha256: "RawStringSha256",
     #           },
     #         },
     #         deployment_config_name: "DeploymentConfigName",
@@ -1133,13 +1178,26 @@ module Aws::CodeDeploy
     #   The time at which the deployment configuration was created.
     #   @return [Time]
     #
+    # @!attribute [rw] compute_platform
+    #   The destination platform type for the deployment (`Lambda` or
+    #   `Server`).
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_routing_config
+    #   The configuration specifying how the deployment traffic will be
+    #   routed. Only deployments with a Lambda compute platform can specify
+    #   this.
+    #   @return [Types::TrafficRoutingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigInfo AWS API Documentation
     #
     class DeploymentConfigInfo < Struct.new(
       :deployment_config_id,
       :deployment_config_name,
       :minimum_healthy_hosts,
-      :create_time)
+      :create_time,
+      :compute_platform,
+      :traffic_routing_config)
       include Aws::Structure
     end
 
@@ -1235,6 +1293,11 @@ module Aws::CodeDeploy
     #   onPremisesInstanceTagFilters.
     #   @return [Types::OnPremisesTagSet]
     #
+    # @!attribute [rw] compute_platform
+    #   The destination platform type for the deployment group (`Lambda` or
+    #   `Server`).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupInfo AWS API Documentation
     #
     class DeploymentGroupInfo < Struct.new(
@@ -1256,7 +1319,8 @@ module Aws::CodeDeploy
       :last_successful_deployment,
       :last_attempted_deployment,
       :ec2_tag_set,
-      :on_premises_tag_set)
+      :on_premises_tag_set,
+      :compute_platform)
       include Aws::Structure
     end
 
@@ -1408,6 +1472,15 @@ module Aws::CodeDeploy
     #     and used as part of the new deployment.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_status_messages
+    #   Messages that contain information about the status of a deployment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compute_platform
+    #   The destination platform type for the deployment (`Lambda` or
+    #   `Server`).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo AWS API Documentation
     #
     class DeploymentInfo < Struct.new(
@@ -1435,7 +1508,9 @@ module Aws::CodeDeploy
       :blue_green_deployment_configuration,
       :load_balancer_info,
       :additional_deployment_status_info,
-      :file_exists_behavior)
+      :file_exists_behavior,
+      :deployment_status_messages,
+      :compute_platform)
       include Aws::Structure
     end
 
@@ -1700,7 +1775,7 @@ module Aws::CodeDeploy
     #   For blue/green deployments, the name of the load balancer that will
     #   be used to route traffic from original instances to replacement
     #   instances in a blue/green deployment. For in-place deployments, the
-    #   name of the load balancer that instances are deregistered from, so
+    #   name of the load balancer that instances are deregistered from so
     #   they are not serving traffic during a deployment, and then
     #   re-registered with after the deployment completes.
     #   @return [String]
@@ -1852,17 +1927,21 @@ module Aws::CodeDeploy
     #       {
     #         application_name: "ApplicationName", # required
     #         revision: { # required
-    #           revision_type: "S3", # accepts S3, GitHub
+    #           revision_type: "S3", # accepts S3, GitHub, String
     #           s3_location: {
     #             bucket: "S3Bucket",
     #             key: "S3Key",
-    #             bundle_type: "tar", # accepts tar, tgz, zip
+    #             bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #             version: "VersionId",
     #             e_tag: "ETag",
     #           },
     #           git_hub_location: {
     #             repository: "Repository",
     #             commit_id: "CommitId",
+    #           },
+    #           string: {
+    #             content: "RawStringContent",
+    #             sha256: "RawStringSha256",
     #           },
     #         },
     #       }
@@ -2977,6 +3056,83 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutLifecycleEventHookExecutionStatusInput
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_id: "DeploymentId",
+    #         lifecycle_event_hook_execution_id: "LifecycleEventHookExecutionId",
+    #         status: "Pending", # accepts Pending, InProgress, Succeeded, Failed, Skipped, Unknown
+    #       }
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the deployment. Pass this ID to a Lambda function that
+    #   validates a deployment lifecycle event.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_event_hook_execution_id
+    #   The execution ID of a deployment's lifecycle hook. A deployment
+    #   lifecycle hook is specified in the `hooks` section of the AppSpec
+    #   file.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The result of a Lambda function that validates a deployment
+    #   lifecycle event (`Succeeded` or `Failed`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatusInput AWS API Documentation
+    #
+    class PutLifecycleEventHookExecutionStatusInput < Struct.new(
+      :deployment_id,
+      :lifecycle_event_hook_execution_id,
+      :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] lifecycle_event_hook_execution_id
+    #   The execution ID of the lifecycle event hook. A hook is specified in
+    #   the `hooks` section of the deployment's AppSpec file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatusOutput AWS API Documentation
+    #
+    class PutLifecycleEventHookExecutionStatusOutput < Struct.new(
+      :lifecycle_event_hook_execution_id)
+      include Aws::Structure
+    end
+
+    # A revision for an AWS Lambda deployment that is a YAML-formatted or
+    # JSON-formatted string. For AWS Lambda deployments, the revision is the
+    # same as the AppSpec file.
+    #
+    # @note When making an API call, you may pass RawString
+    #   data as a hash:
+    #
+    #       {
+    #         content: "RawStringContent",
+    #         sha256: "RawStringSha256",
+    #       }
+    #
+    # @!attribute [rw] content
+    #   The YAML-formatted or JSON-formatted revision string. It includes
+    #   information about what Lambda function to update and optional Lambda
+    #   functions that validate deployment lifecycle events.
+    #   @return [String]
+    #
+    # @!attribute [rw] sha256
+    #   The SHA256 hash value of the revision that is specified as a
+    #   RawString.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RawString AWS API Documentation
+    #
+    class RawString < Struct.new(
+      :content,
+      :sha256)
+      include Aws::Structure
+    end
+
     # Represents the input of a RegisterApplicationRevision operation.
     #
     # @note When making an API call, you may pass RegisterApplicationRevisionInput
@@ -2986,17 +3142,21 @@ module Aws::CodeDeploy
     #         application_name: "ApplicationName", # required
     #         description: "Description",
     #         revision: { # required
-    #           revision_type: "S3", # accepts S3, GitHub
+    #           revision_type: "S3", # accepts S3, GitHub, String
     #           s3_location: {
     #             bucket: "S3Bucket",
     #             key: "S3Key",
-    #             bundle_type: "tar", # accepts tar, tgz, zip
+    #             bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #             version: "VersionId",
     #             e_tag: "ETag",
     #           },
     #           git_hub_location: {
     #             repository: "Repository",
     #             commit_id: "CommitId",
+    #           },
+    #           string: {
+    #             content: "RawStringContent",
+    #             sha256: "RawStringSha256",
     #           },
     #         },
     #       }
@@ -3113,17 +3273,21 @@ module Aws::CodeDeploy
     #   data as a hash:
     #
     #       {
-    #         revision_type: "S3", # accepts S3, GitHub
+    #         revision_type: "S3", # accepts S3, GitHub, String
     #         s3_location: {
     #           bucket: "S3Bucket",
     #           key: "S3Key",
-    #           bundle_type: "tar", # accepts tar, tgz, zip
+    #           bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #           version: "VersionId",
     #           e_tag: "ETag",
     #         },
     #         git_hub_location: {
     #           repository: "Repository",
     #           commit_id: "CommitId",
+    #         },
+    #         string: {
+    #           content: "RawStringContent",
+    #           sha256: "RawStringSha256",
     #         },
     #       }
     #
@@ -3132,12 +3296,15 @@ module Aws::CodeDeploy
     #
     #   * S3: An application revision stored in Amazon S3.
     #
-    #   * GitHub: An application revision stored in GitHub.
+    #   * GitHub: An application revision stored in GitHub (EC2/On-premises
+    #     deployments only)
+    #
+    #   * String: A YAML-formatted or JSON-formatted string (AWS Lambda
+    #     deployments only)
     #   @return [String]
     #
     # @!attribute [rw] s3_location
-    #   Information about the location of application artifacts stored in
-    #   Amazon S3.
+    #   Information about the location of a revision stored in Amazon S3.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] git_hub_location
@@ -3145,12 +3312,18 @@ module Aws::CodeDeploy
     #   GitHub.
     #   @return [Types::GitHubLocation]
     #
+    # @!attribute [rw] string
+    #   Information about the location of an AWS Lambda deployment revision
+    #   stored as a RawString.
+    #   @return [Types::RawString]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionLocation AWS API Documentation
     #
     class RevisionLocation < Struct.new(
       :revision_type,
       :s3_location,
-      :git_hub_location)
+      :git_hub_location,
+      :string)
       include Aws::Structure
     end
 
@@ -3189,7 +3362,7 @@ module Aws::CodeDeploy
     #       {
     #         bucket: "S3Bucket",
     #         key: "S3Key",
-    #         bundle_type: "tar", # accepts tar, tgz, zip
+    #         bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #         version: "VersionId",
     #         e_tag: "ETag",
     #       }
@@ -3458,6 +3631,67 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # A configuration that shifts traffic from one version of a Lambda
+    # function to another in two increments. The original and target Lambda
+    # function versions are specified in the deployment's AppSpec file.
+    #
+    # @note When making an API call, you may pass TimeBasedCanary
+    #   data as a hash:
+    #
+    #       {
+    #         canary_percentage: 1,
+    #         canary_interval: 1,
+    #       }
+    #
+    # @!attribute [rw] canary_percentage
+    #   The percentage of traffic to shift in the first increment of a
+    #   `TimeBasedCanary` deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] canary_interval
+    #   The number of minutes between the first and second traffic shifts of
+    #   a `TimeBasedCanary` deployment.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TimeBasedCanary AWS API Documentation
+    #
+    class TimeBasedCanary < Struct.new(
+      :canary_percentage,
+      :canary_interval)
+      include Aws::Structure
+    end
+
+    # A configuration that shifts traffic from one version of a Lambda
+    # function to another in equal increments, with an equal number of
+    # minutes between each increment. The original and target Lambda
+    # function versions are specified in the deployment's AppSpec file.
+    #
+    # @note When making an API call, you may pass TimeBasedLinear
+    #   data as a hash:
+    #
+    #       {
+    #         linear_percentage: 1,
+    #         linear_interval: 1,
+    #       }
+    #
+    # @!attribute [rw] linear_percentage
+    #   The percentage of traffic that is shifted at the start of each
+    #   increment of a `TimeBasedLinear` deployment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] linear_interval
+    #   The number of minutes between each incremental traffic shift of a
+    #   `TimeBasedLinear` deployment.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TimeBasedLinear AWS API Documentation
+    #
+    class TimeBasedLinear < Struct.new(
+      :linear_percentage,
+      :linear_interval)
+      include Aws::Structure
+    end
+
     # Information about a time range.
     #
     # @note When making an API call, you may pass TimeRange
@@ -3489,6 +3723,53 @@ module Aws::CodeDeploy
     class TimeRange < Struct.new(
       :start,
       :end)
+      include Aws::Structure
+    end
+
+    # The configuration specifying how traffic is shifted from one version
+    # of a Lambda function to another version during an AWS Lambda
+    # deployment.
+    #
+    # @note When making an API call, you may pass TrafficRoutingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         type: "TimeBasedCanary", # accepts TimeBasedCanary, TimeBasedLinear, AllAtOnce
+    #         time_based_canary: {
+    #           canary_percentage: 1,
+    #           canary_interval: 1,
+    #         },
+    #         time_based_linear: {
+    #           linear_percentage: 1,
+    #           linear_interval: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of traffic shifting a deployment configuration uses
+    #   (`TimeBasedCanary` or `TimeBasedLinear`).
+    #   @return [String]
+    #
+    # @!attribute [rw] time_based_canary
+    #   A configuration that shifts traffic from one version of a Lambda
+    #   function to another in two increments. The original and target
+    #   Lambda function versions are specified in the deployment's AppSpec
+    #   file.
+    #   @return [Types::TimeBasedCanary]
+    #
+    # @!attribute [rw] time_based_linear
+    #   A configuration that shifts traffic from one version of a Lambda
+    #   function to another in equal increments, with an equal number of
+    #   minutes between each increment. The original and target Lambda
+    #   function versions are specified in the deployment's AppSpec file.
+    #   @return [Types::TimeBasedLinear]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TrafficRoutingConfig AWS API Documentation
+    #
+    class TrafficRoutingConfig < Struct.new(
+      :type,
+      :time_based_canary,
+      :time_based_linear)
       include Aws::Structure
     end
 

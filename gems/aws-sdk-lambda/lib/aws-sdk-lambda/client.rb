@@ -316,12 +316,18 @@ module Aws::Lambda
     # @option params [String] :description
     #   Description of the alias.
     #
+    # @option params [Types::AliasRoutingConfiguration] :routing_config
+    #   Specifies an additional version your alias can point to, allowing you
+    #   to dictate what percentage of traffic will invoke each version. For
+    #   more information, see lambda-traffic-shifting-using-aliases.
+    #
     # @return [Types::AliasConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AliasConfiguration#alias_arn #alias_arn} => String
     #   * {Types::AliasConfiguration#name #name} => String
     #   * {Types::AliasConfiguration#function_version #function_version} => String
     #   * {Types::AliasConfiguration#description #description} => String
+    #   * {Types::AliasConfiguration#routing_config #routing_config} => Types::AliasRoutingConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -330,6 +336,11 @@ module Aws::Lambda
     #     name: "Alias", # required
     #     function_version: "Version", # required
     #     description: "Description",
+    #     routing_config: {
+    #       additional_version_weights: {
+    #         "AdditionalVersion" => 1.0,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -338,6 +349,8 @@ module Aws::Lambda
     #   resp.name #=> String
     #   resp.function_version #=> String
     #   resp.description #=> String
+    #   resp.routing_config.additional_version_weights #=> Hash
+    #   resp.routing_config.additional_version_weights["AdditionalVersion"] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias AWS API Documentation
     #
@@ -1001,6 +1014,7 @@ module Aws::Lambda
     #   * {Types::AliasConfiguration#name #name} => String
     #   * {Types::AliasConfiguration#function_version #function_version} => String
     #   * {Types::AliasConfiguration#description #description} => String
+    #   * {Types::AliasConfiguration#routing_config #routing_config} => Types::AliasRoutingConfiguration
     #
     #
     # @example Example: To retrieve a Lambda function alias
@@ -1033,6 +1047,8 @@ module Aws::Lambda
     #   resp.name #=> String
     #   resp.function_version #=> String
     #   resp.description #=> String
+    #   resp.routing_config.additional_version_weights #=> Hash
+    #   resp.routing_config.additional_version_weights["AdditionalVersion"] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias AWS API Documentation
     #
@@ -1142,14 +1158,14 @@ module Aws::Lambda
     #   characters in length.
     #
     # @option params [String] :qualifier
-    #   Using this optional parameter to specify a function version or an
-    #   alias name. If you specify function version, the API uses qualified
-    #   function ARN for the request and returns information about the
-    #   specific Lambda function version. If you specify an alias name, the
-    #   API uses the alias ARN and returns information about the function
-    #   version to which the alias points. If you don't provide this
-    #   parameter, the API uses unqualified function ARN and returns
-    #   information about the `$LATEST` version of the Lambda function.
+    #   Use this optional parameter to specify a function version or an alias
+    #   name. If you specify function version, the API uses qualified function
+    #   ARN for the request and returns information about the specific Lambda
+    #   function version. If you specify an alias name, the API uses the alias
+    #   ARN and returns information about the function version to which the
+    #   alias points. If you don't provide this parameter, the API uses
+    #   unqualified function ARN and returns information about the `$LATEST`
+    #   version of the Lambda function.
     #
     # @return [Types::GetFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1519,7 +1535,8 @@ module Aws::Lambda
     #   variable. For an example of a `ClientContext` JSON, see [PutEvents][1]
     #   in the *Amazon Mobile Analytics API Reference and User Guide*.
     #
-    #   The ClientContext JSON must be base64-encoded.
+    #   The ClientContext JSON must be base64-encoded and has a maximum size
+    #   of 3583 bytes.
     #
     #
     #
@@ -1544,6 +1561,7 @@ module Aws::Lambda
     #   * {Types::InvocationResponse#function_error #function_error} => String
     #   * {Types::InvocationResponse#log_result #log_result} => String
     #   * {Types::InvocationResponse#payload #payload} => String
+    #   * {Types::InvocationResponse#executed_version #executed_version} => String
     #
     #
     # @example Example: To invoke a Lambda function
@@ -1584,6 +1602,7 @@ module Aws::Lambda
     #   resp.function_error #=> String
     #   resp.log_result #=> String
     #   resp.payload #=> String
+    #   resp.executed_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Invoke AWS API Documentation
     #
@@ -1724,6 +1743,8 @@ module Aws::Lambda
     #   resp.aliases[0].name #=> String
     #   resp.aliases[0].function_version #=> String
     #   resp.aliases[0].description #=> String
+    #   resp.aliases[0].routing_config.additional_version_weights #=> Hash
+    #   resp.aliases[0].routing_config.additional_version_weights["AdditionalVersion"] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases AWS API Documentation
     #
@@ -1841,7 +1862,7 @@ module Aws::Lambda
     #   you specify `us-east-1`, only functions replicated from that region
     #   will be returned.
     #
-    #   `ALL` \_ Will return all functions from any region. If specified, you
+    #   `ALL`\: Will return all functions from any region. If specified, you
     #   also must specify a valid FunctionVersion parameter.
     #
     # @option params [String] :function_version
@@ -1850,7 +1871,7 @@ module Aws::Lambda
     #
     #   Valid value:
     #
-    #   `ALL` \_ Will return all versions, including `$LATEST` which will have
+    #   `ALL`\: Will return all versions, including `$LATEST` which will have
     #   fully qualified ARNs (Amazon Resource Names).
     #
     # @option params [String] :marker
@@ -2083,8 +2104,10 @@ module Aws::Lambda
     # @option params [String] :code_sha_256
     #   The SHA256 hash of the deployment package you want to publish. This
     #   provides validation on the code you are publishing. If you provide
-    #   this parameter value must match the SHA256 of the $LATEST version for
-    #   the publication to succeed.
+    #   this parameter, the value must match the SHA256 of the $LATEST version
+    #   for the publication to succeed. You can use the **DryRun** parameter
+    #   of UpdateFunctionCode to verify the hash value that will be returned
+    #   before publishing your new version.
     #
     # @option params [String] :description
     #   The description for the version you are publishing. If not provided,
@@ -2339,12 +2362,18 @@ module Aws::Lambda
     # @option params [String] :description
     #   You can change the description of the alias using this parameter.
     #
+    # @option params [Types::AliasRoutingConfiguration] :routing_config
+    #   Specifies an additional version your alias can point to, allowing you
+    #   to dictate what percentage of traffic will invoke each version. For
+    #   more information, see lambda-traffic-shifting-using-aliases.
+    #
     # @return [Types::AliasConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AliasConfiguration#alias_arn #alias_arn} => String
     #   * {Types::AliasConfiguration#name #name} => String
     #   * {Types::AliasConfiguration#function_version #function_version} => String
     #   * {Types::AliasConfiguration#description #description} => String
+    #   * {Types::AliasConfiguration#routing_config #routing_config} => Types::AliasRoutingConfiguration
     #
     #
     # @example Example: To update a Lambda function alias
@@ -2373,6 +2402,11 @@ module Aws::Lambda
     #     name: "Alias", # required
     #     function_version: "Version",
     #     description: "Description",
+    #     routing_config: {
+    #       additional_version_weights: {
+    #         "AdditionalVersion" => 1.0,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2381,6 +2415,8 @@ module Aws::Lambda
     #   resp.name #=> String
     #   resp.function_version #=> String
     #   resp.description #=> String
+    #   resp.routing_config.additional_version_weights #=> Hash
+    #   resp.routing_config.additional_version_weights["AdditionalVersion"] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias AWS API Documentation
     #
@@ -2575,7 +2611,7 @@ module Aws::Lambda
     #   to update the Lambda function and publish a version as an atomic
     #   operation. It will do all necessary computation and validation of your
     #   code but will not upload it or a publish a version. Each time this
-    #   operation is invoked, the `CodeSha256` hash value the provided code
+    #   operation is invoked, the `CodeSha256` hash value of the provided code
     #   will also be computed and returned in the response.
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2912,7 +2948,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

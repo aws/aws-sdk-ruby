@@ -259,15 +259,24 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Creates a new user in the specified user pool and sends a welcome
-    # message via email or phone (SMS). This message is based on a template
-    # that you configured in your call to
-    # [CreateUserPool](API_CreateUserPool.html) or
-    # [UpdateUserPool](API_UpdateUserPool.html). This template includes your
-    # custom sign-up instructions and placeholders for user name and
-    # temporary password.
+    # Creates a new user in the specified user pool.
     #
-    # Requires developer credentials.
+    # If `MessageAction` is not set, the default is to send a welcome
+    # message via email or phone (SMS).
+    #
+    # <note markdown="1"> This message is based on a template that you configured in your call
+    # to or . This template includes your custom sign-up instructions and
+    # placeholders for user name and temporary password.
+    #
+    #  </note>
+    #
+    # Alternatively, you can call AdminCreateUser with “SUPPRESS” for the
+    # `MessageAction` parameter, and Amazon Cognito will not send any email.
+    #
+    # In either case, the user will be in the `FORCE_CHANGE_PASSWORD` state
+    # until they sign in and change their password.
+    #
+    # AdminCreateUser requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where the user will be created.
@@ -281,11 +290,10 @@ module Aws::CognitoIdentityProvider
     #   An array of name-value pairs that contain user attributes and
     #   attribute values to be set for the user to be created. You can create
     #   a user without specifying any attributes other than `Username`.
-    #   However, any attributes that you specify as required (in
-    #   [CreateUserPool](API_CreateUserPool.html) or in the **Attributes** tab
-    #   of the console) must be supplied either by you (in your call to
-    #   `AdminCreateUser`) or by the user (when he or she signs up in response
-    #   to your welcome message).
+    #   However, any attributes that you specify as required (in or in the
+    #   **Attributes** tab of the console) must be supplied either by you (in
+    #   your call to `AdminCreateUser`) or by the user (when he or she signs
+    #   up in response to your welcome message).
     #
     #   For custom attributes, you must prepend the `custom:` prefix to the
     #   attribute name.
@@ -297,8 +305,7 @@ module Aws::CognitoIdentityProvider
     #
     #   In your call to `AdminCreateUser`, you can set the `email_verified`
     #   attribute to `True`, and you can set the `phone_number_verified`
-    #   attribute to `True`. (You can also do this by calling
-    #   [AdminUpdateUserAttributes](API_AdminUpdateUserAttributes.html).)
+    #   attribute to `True`. (You can also do this by calling .)
     #
     #   * **email**\: The email address of the user to whom the message that
     #     contains the code and username will be sent. Required if the
@@ -491,8 +498,7 @@ module Aws::CognitoIdentityProvider
     # IdP user, any link between that user and an existing user is removed.
     # The next time the external user (no longer attached to the previously
     # linked `DestinationUser`) signs in, they must create a new user
-    # account. See
-    # [AdminLinkProviderForUser](API_AdminLinkProviderForUser.html).
+    # account. See .
     #
     # This action is enabled only for admin access and requires developer
     # credentials.
@@ -514,8 +520,7 @@ module Aws::CognitoIdentityProvider
     # identity has not yet been used to sign-in, the `ProviderAttributeName`
     # and `ProviderAttributeValue` must be the same values that were used
     # for the `SourceUser` when the identities were originally linked in the
-    # [AdminLinkProviderForUser](API_AdminLinkProviderForUser.html) call.
-    # (If the linking was done with `ProviderAttributeName` set to
+    # call. (If the linking was done with `ProviderAttributeName` set to
     # `Cognito_Subject`, the same applies here). However, if the user has
     # already signed in, the `ProviderAttributeName` must be
     # `Cognito_Subject` and `ProviderAttributeValue` must be the subject of
@@ -702,6 +707,8 @@ module Aws::CognitoIdentityProvider
     #   * {Types::AdminGetUserResponse#enabled #enabled} => Boolean
     #   * {Types::AdminGetUserResponse#user_status #user_status} => String
     #   * {Types::AdminGetUserResponse#mfa_options #mfa_options} => Array&lt;Types::MFAOptionType&gt;
+    #   * {Types::AdminGetUserResponse#preferred_mfa_setting #preferred_mfa_setting} => String
+    #   * {Types::AdminGetUserResponse#user_mfa_setting_list #user_mfa_setting_list} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -723,6 +730,9 @@ module Aws::CognitoIdentityProvider
     #   resp.mfa_options #=> Array
     #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.mfa_options[0].attribute_name #=> String
+    #   resp.preferred_mfa_setting #=> String
+    #   resp.user_mfa_setting_list #=> Array
+    #   resp.user_mfa_setting_list[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUser AWS API Documentation
     #
@@ -793,6 +803,15 @@ module Aws::CognitoIdentityProvider
     #   be passed to your PreAuthentication Lambda trigger as-is. It can be
     #   used to implement additional validations around authentication.
     #
+    # @option params [Types::AnalyticsMetadataType] :analytics_metadata
+    #   The analytics metadata for collecting Amazon Pinpoint metrics for
+    #   `AdminInitiateAuth` calls.
+    #
+    # @option params [Types::ContextDataType] :context_data
+    #   Contextual data such as the user's device fingerprint, IP address, or
+    #   location used for evaluating the risk of an unexpected event by Amazon
+    #   Cognito advanced security.
+    #
     # @return [Types::AdminInitiateAuthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AdminInitiateAuthResponse#challenge_name #challenge_name} => String
@@ -812,11 +831,26 @@ module Aws::CognitoIdentityProvider
     #     client_metadata: {
     #       "StringType" => "StringType",
     #     },
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "StringType",
+    #     },
+    #     context_data: {
+    #       ip_address: "StringType", # required
+    #       server_name: "StringType", # required
+    #       server_path: "StringType", # required
+    #       http_headers: [ # required
+    #         {
+    #           header_name: "StringType",
+    #           header_value: "StringType",
+    #         },
+    #       ],
+    #       encoded_data: "StringType",
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
+    #   resp.challenge_name #=> String, one of "SMS_MFA", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
     #   resp.session #=> String
     #   resp.challenge_parameters #=> Hash
     #   resp.challenge_parameters["StringType"] #=> String
@@ -855,8 +889,7 @@ module Aws::CognitoIdentityProvider
     # only be used with external identity providers and provider attributes
     # that have been trusted by the application owner.
     #
-    # See also
-    # [AdminDisableProviderForUser](API_AdminDisableProviderForUser.html).
+    # See also .
     #
     # This action is enabled only for admin access and requires developer
     # credentials.
@@ -872,9 +905,14 @@ module Aws::CognitoIdentityProvider
     #   This is the user that is returned when the new user (with the linked
     #   identity provider attribute) signs in.
     #
-    #   The `ProviderAttributeValue` for the `DestinationUser` must match the
-    #   username for the user in the user pool. The `ProviderAttributeName`
-    #   will always be ignored.
+    #   For a native username + password user, the `ProviderAttributeValue`
+    #   for the `DestinationUser` should be the username in the user pool. For
+    #   a federated user, it should be the provider-specific `user_id`.
+    #
+    #   The `ProviderAttributeName` of the `DestinationUser` is ignored.
+    #
+    #   The `ProviderName` should be set to `Cognito` for users in Cognito
+    #   user pools.
     #
     # @option params [required, Types::ProviderUserIdentifierType] :source_user
     #   An external identity provider account for a user who does not
@@ -1032,6 +1070,66 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Lists a history of user activity and any risks detected as part of
+    # Amazon Cognito advanced security.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID.
+    #
+    # @option params [required, String] :username
+    #   The user pool username.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of authentication events to return.
+    #
+    # @option params [String] :next_token
+    #   A pagination token.
+    #
+    # @return [Types::AdminListUserAuthEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AdminListUserAuthEventsResponse#auth_events #auth_events} => Array&lt;Types::AuthEventType&gt;
+    #   * {Types::AdminListUserAuthEventsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_list_user_auth_events({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #     max_results: 1,
+    #     next_token: "PaginationKey",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.auth_events #=> Array
+    #   resp.auth_events[0].event_id #=> String
+    #   resp.auth_events[0].event_type #=> String, one of "SignIn", "SignUp", "ForgotPassword"
+    #   resp.auth_events[0].creation_date #=> Time
+    #   resp.auth_events[0].event_response #=> String, one of "Success", "Failure"
+    #   resp.auth_events[0].event_risk.risk_decision #=> String, one of "NoRisk", "AccountTakeover", "Block"
+    #   resp.auth_events[0].event_risk.risk_level #=> String, one of "Low", "Medium", "High"
+    #   resp.auth_events[0].challenge_responses #=> Array
+    #   resp.auth_events[0].challenge_responses[0].challenge_name #=> String, one of "Password", "Mfa"
+    #   resp.auth_events[0].challenge_responses[0].challenge_response #=> String, one of "Success", "Failure"
+    #   resp.auth_events[0].event_context_data.ip_address #=> String
+    #   resp.auth_events[0].event_context_data.device_name #=> String
+    #   resp.auth_events[0].event_context_data.timezone #=> String
+    #   resp.auth_events[0].event_context_data.city #=> String
+    #   resp.auth_events[0].event_context_data.country #=> String
+    #   resp.auth_events[0].event_feedback.feedback_value #=> String, one of "Valid", "Invalid"
+    #   resp.auth_events[0].event_feedback.provider #=> String
+    #   resp.auth_events[0].event_feedback.feedback_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListUserAuthEvents AWS API Documentation
+    #
+    # @overload admin_list_user_auth_events(params = {})
+    # @param [Hash] params ({})
+    def admin_list_user_auth_events(params = {}, options = {})
+      req = build_request(:admin_list_user_auth_events, params)
+      req.send_request(options)
+    end
+
     # Removes the specified user from the specified group.
     #
     # Requires developer credentials.
@@ -1116,8 +1214,7 @@ module Aws::CognitoIdentityProvider
     #   The app client ID.
     #
     # @option params [required, String] :challenge_name
-    #   The challenge name. For more information, see
-    #   [AdminInitiateAuth](API_AdminInitiateAuth.html).
+    #   The challenge name. For more information, see .
     #
     # @option params [Hash<String,String>] :challenge_responses
     #   The challenge responses. These are inputs corresponding to the value
@@ -1151,6 +1248,15 @@ module Aws::CognitoIdentityProvider
     #   session should be passed as it is to the next `RespondToAuthChallenge`
     #   API call.
     #
+    # @option params [Types::AnalyticsMetadataType] :analytics_metadata
+    #   The analytics metadata for collecting Amazon Pinpoint metrics for
+    #   `AdminRespondToAuthChallenge` calls.
+    #
+    # @option params [Types::ContextDataType] :context_data
+    #   Contextual data such as the user's device fingerprint, IP address, or
+    #   location used for evaluating the risk of an unexpected event by Amazon
+    #   Cognito advanced security.
+    #
     # @return [Types::AdminRespondToAuthChallengeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AdminRespondToAuthChallengeResponse#challenge_name #challenge_name} => String
@@ -1163,16 +1269,31 @@ module Aws::CognitoIdentityProvider
     #   resp = client.admin_respond_to_auth_challenge({
     #     user_pool_id: "UserPoolIdType", # required
     #     client_id: "ClientIdType", # required
-    #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
+    #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, SOFTWARE_TOKEN_MFA, SELECT_MFA_TYPE, MFA_SETUP, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
     #     challenge_responses: {
     #       "StringType" => "StringType",
     #     },
     #     session: "SessionType",
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "StringType",
+    #     },
+    #     context_data: {
+    #       ip_address: "StringType", # required
+    #       server_name: "StringType", # required
+    #       server_path: "StringType", # required
+    #       http_headers: [ # required
+    #         {
+    #           header_name: "StringType",
+    #           header_value: "StringType",
+    #         },
+    #       ],
+    #       encoded_data: "StringType",
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
+    #   resp.challenge_name #=> String, one of "SMS_MFA", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
     #   resp.session #=> String
     #   resp.challenge_parameters #=> Hash
     #   resp.challenge_parameters["StringType"] #=> String
@@ -1190,6 +1311,46 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def admin_respond_to_auth_challenge(params = {}, options = {})
       req = build_request(:admin_respond_to_auth_challenge, params)
+      req.send_request(options)
+    end
+
+    # Sets the user's multi-factor authentication (MFA) preference.
+    #
+    # @option params [Types::SMSMfaSettingsType] :sms_mfa_settings
+    #   The SMS text message MFA settings.
+    #
+    # @option params [Types::SoftwareTokenMfaSettingsType] :software_token_mfa_settings
+    #   The time-based one-time password software token MFA settings.
+    #
+    # @option params [required, String] :username
+    #   The user pool username.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_set_user_mfa_preference({
+    #     sms_mfa_settings: {
+    #       enabled: false,
+    #       preferred_mfa: false,
+    #     },
+    #     software_token_mfa_settings: {
+    #       enabled: false,
+    #       preferred_mfa: false,
+    #     },
+    #     username: "UsernameType", # required
+    #     user_pool_id: "UserPoolIdType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserMFAPreference AWS API Documentation
+    #
+    # @overload admin_set_user_mfa_preference(params = {})
+    # @param [Hash] params ({})
+    def admin_set_user_mfa_preference(params = {}, options = {})
+      req = build_request(:admin_set_user_mfa_preference, params)
       req.send_request(options)
     end
 
@@ -1229,6 +1390,43 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def admin_set_user_settings(params = {}, options = {})
       req = build_request(:admin_set_user_settings, params)
+      req.send_request(options)
+    end
+
+    # Provides feedback for an authentication event as to whether it was
+    # from a valid user. This feedback is used for improving the risk
+    # evaluation decision for the user pool as part of Amazon Cognito
+    # advanced security.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID.
+    #
+    # @option params [required, String] :username
+    #   The user pool username.
+    #
+    # @option params [required, String] :event_id
+    #   The authentication event ID.
+    #
+    # @option params [required, String] :feedback_value
+    #   The authentication event feedback value.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_update_auth_event_feedback({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #     event_id: "EventIdType", # required
+    #     feedback_value: "Valid", # required, accepts Valid, Invalid
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateAuthEventFeedback AWS API Documentation
+    #
+    # @overload admin_update_auth_event_feedback(params = {})
+    # @param [Hash] params ({})
+    def admin_update_auth_event_feedback(params = {}, options = {})
+      req = build_request(:admin_update_auth_event_feedback, params)
       req.send_request(options)
     end
 
@@ -1344,16 +1542,54 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Returns a unique generated shared secret key code for the user
+    # account. The request takes an access token or a session string, but
+    # not both.
+    #
+    # @option params [String] :access_token
+    #   The access token.
+    #
+    # @option params [String] :session
+    #   The session which should be passed both ways in challenge-response
+    #   calls to the service. This allows authentication of the user as part
+    #   of the MFA setup process.
+    #
+    # @return [Types::AssociateSoftwareTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateSoftwareTokenResponse#secret_code #secret_code} => String
+    #   * {Types::AssociateSoftwareTokenResponse#session #session} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_software_token({
+    #     access_token: "TokenModelType",
+    #     session: "SessionType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.secret_code #=> String
+    #   resp.session #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AssociateSoftwareToken AWS API Documentation
+    #
+    # @overload associate_software_token(params = {})
+    # @param [Hash] params ({})
+    def associate_software_token(params = {}, options = {})
+      req = build_request(:associate_software_token, params)
+      req.send_request(options)
+    end
+
     # Changes the password for a specified user in a user pool.
     #
     # @option params [required, String] :previous_password
-    #   The old password in the change password request.
+    #   The old password.
     #
     # @option params [required, String] :proposed_password
-    #   The new password in the change password request.
+    #   The new password.
     #
     # @option params [required, String] :access_token
-    #   The access token in the change password request.
+    #   The access token.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1436,11 +1672,19 @@ module Aws::CognitoIdentityProvider
     # @option params [required, String] :confirmation_code
     #   The confirmation code sent by a user's request to retrieve a
     #   forgotten password. For more information, see
-    #   [ForgotPassword](API_ForgotPassword.html)
     #
     # @option params [required, String] :password
     #   The password sent by a user's request to retrieve a forgotten
     #   password.
+    #
+    # @option params [Types::AnalyticsMetadataType] :analytics_metadata
+    #   The Amazon Pinpoint analytics metadata for collecting metrics for
+    #   `ConfirmForgotPassword` calls.
+    #
+    # @option params [Types::UserContextDataType] :user_context_data
+    #   Contextual data such as the user's device fingerprint, IP address, or
+    #   location used for evaluating the risk of an unexpected event by Amazon
+    #   Cognito advanced security.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1452,6 +1696,12 @@ module Aws::CognitoIdentityProvider
     #     username: "UsernameType", # required
     #     confirmation_code: "ConfirmationCodeType", # required
     #     password: "PasswordType", # required
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "StringType",
+    #     },
+    #     user_context_data: {
+    #       encoded_data: "StringType",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmForgotPassword AWS API Documentation
@@ -1490,6 +1740,15 @@ module Aws::CognitoIdentityProvider
     #   being confirmed. If set to `False`, the API will throw an
     #   **AliasExistsException** error.
     #
+    # @option params [Types::AnalyticsMetadataType] :analytics_metadata
+    #   The Amazon Pinpoint analytics metadata for collecting metrics for
+    #   `ConfirmSignUp` calls.
+    #
+    # @option params [Types::UserContextDataType] :user_context_data
+    #   Contextual data such as the user's device fingerprint, IP address, or
+    #   location used for evaluating the risk of an unexpected event by Amazon
+    #   Cognito advanced security.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1500,6 +1759,12 @@ module Aws::CognitoIdentityProvider
     #     username: "UsernameType", # required
     #     confirmation_code: "ConfirmationCodeType", # required
     #     force_alias_creation: false,
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "StringType",
+    #     },
+    #     user_context_data: {
+    #       encoded_data: "StringType",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUp AWS API Documentation
@@ -1814,6 +2079,10 @@ module Aws::CognitoIdentityProvider
     #   An array of schema attributes for the new user pool. These attributes
     #   can be standard or custom attributes.
     #
+    # @option params [Types::UserPoolAddOnsType] :user_pool_add_ons
+    #   Used to enable advanced security risk detection. Set the key
+    #   `AdvancedSecurityMode` to the value "AUDIT".
+    #
     # @return [Types::CreateUserPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolResponse#user_pool #user_pool} => Types::UserPoolType
@@ -1840,6 +2109,7 @@ module Aws::CognitoIdentityProvider
     #       define_auth_challenge: "ArnType",
     #       create_auth_challenge: "ArnType",
     #       verify_auth_challenge_response: "ArnType",
+    #       pre_token_generation: "ArnType",
     #     },
     #     auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #     alias_attributes: ["phone_number"], # accepts phone_number, email, preferred_username
@@ -1898,6 +2168,9 @@ module Aws::CognitoIdentityProvider
     #         },
     #       },
     #     ],
+    #     user_pool_add_ons: {
+    #       advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
+    #     },
     #   })
     #
     # @example Response structure
@@ -1917,6 +2190,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.lambda_config.define_auth_challenge #=> String
     #   resp.user_pool.lambda_config.create_auth_challenge #=> String
     #   resp.user_pool.lambda_config.verify_auth_challenge_response #=> String
+    #   resp.user_pool.lambda_config.pre_token_generation #=> String
     #   resp.user_pool.status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pool.last_modified_date #=> Time
     #   resp.user_pool.creation_date #=> Time
@@ -1963,6 +2237,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
+    #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPool AWS API Documentation
     #
@@ -2028,6 +2303,10 @@ module Aws::CognitoIdentityProvider
     #   Set to `True` if the client is allowed to follow the OAuth protocol
     #   when interacting with Cognito user pools.
     #
+    # @option params [Types::AnalyticsConfigurationType] :analytics_configuration
+    #   The Amazon Pinpoint analytics configuration for collecting metrics for
+    #   this user pool.
+    #
     # @return [Types::CreateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -2049,6 +2328,12 @@ module Aws::CognitoIdentityProvider
     #     allowed_o_auth_flows: ["code"], # accepts code, implicit, client_credentials
     #     allowed_o_auth_scopes: ["ScopeType"],
     #     allowed_o_auth_flows_user_pool_client: false,
+    #     analytics_configuration: {
+    #       application_id: "HexStringType", # required
+    #       role_arn: "ArnType", # required
+    #       external_id: "StringType", # required
+    #       user_data_shared: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2078,6 +2363,10 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.allowed_o_auth_scopes #=> Array
     #   resp.user_pool_client.allowed_o_auth_scopes[0] #=> String
     #   resp.user_pool_client.allowed_o_auth_flows_user_pool_client #=> Boolean
+    #   resp.user_pool_client.analytics_configuration.application_id #=> String
+    #   resp.user_pool_client.analytics_configuration.role_arn #=> String
+    #   resp.user_pool_client.analytics_configuration.external_id #=> String
+    #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClient AWS API Documentation
     #
@@ -2400,6 +2689,65 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Describes the risk configuration.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID.
+    #
+    # @option params [String] :client_id
+    #   The app client ID.
+    #
+    # @return [Types::DescribeRiskConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRiskConfigurationResponse#risk_configuration #risk_configuration} => Types::RiskConfigurationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_risk_configuration({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     client_id: "ClientIdType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.risk_configuration.user_pool_id #=> String
+    #   resp.risk_configuration.client_id #=> String
+    #   resp.risk_configuration.compromised_credentials_risk_configuration.event_filter #=> Array
+    #   resp.risk_configuration.compromised_credentials_risk_configuration.event_filter[0] #=> String, one of "SIGN_IN", "PASSWORD_CHANGE", "SIGN_UP"
+    #   resp.risk_configuration.compromised_credentials_risk_configuration.actions.event_action #=> String, one of "BLOCK", "NO_ACTION"
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.from #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.reply_to #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.source_arn #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.block_email.subject #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.block_email.html_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.block_email.text_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.no_action_email.subject #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.no_action_email.html_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.no_action_email.text_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.mfa_email.subject #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.mfa_email.html_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.mfa_email.text_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.low_action.notify #=> Boolean
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.low_action.event_action #=> String, one of "BLOCK", "MFA_IF_CONFIGURED", "MFA_REQUIRED", "NO_ACTION"
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.medium_action.notify #=> Boolean
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.medium_action.event_action #=> String, one of "BLOCK", "MFA_IF_CONFIGURED", "MFA_REQUIRED", "NO_ACTION"
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.high_action.notify #=> Boolean
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.high_action.event_action #=> String, one of "BLOCK", "MFA_IF_CONFIGURED", "MFA_REQUIRED", "NO_ACTION"
+    #   resp.risk_configuration.risk_exception_configuration.blocked_ip_range_list #=> Array
+    #   resp.risk_configuration.risk_exception_configuration.blocked_ip_range_list[0] #=> String
+    #   resp.risk_configuration.risk_exception_configuration.skipped_ip_range_list #=> Array
+    #   resp.risk_configuration.risk_exception_configuration.skipped_ip_range_list[0] #=> String
+    #   resp.risk_configuration.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeRiskConfiguration AWS API Documentation
+    #
+    # @overload describe_risk_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_risk_configuration(params = {}, options = {})
+      req = build_request(:describe_risk_configuration, params)
+      req.send_request(options)
+    end
+
     # Describes the user import job.
     #
     # @option params [required, String] :user_pool_id
@@ -2478,6 +2826,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.lambda_config.define_auth_challenge #=> String
     #   resp.user_pool.lambda_config.create_auth_challenge #=> String
     #   resp.user_pool.lambda_config.verify_auth_challenge_response #=> String
+    #   resp.user_pool.lambda_config.pre_token_generation #=> String
     #   resp.user_pool.status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pool.last_modified_date #=> Time
     #   resp.user_pool.creation_date #=> Time
@@ -2524,6 +2873,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
+    #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPool AWS API Documentation
     #
@@ -2581,6 +2931,10 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.allowed_o_auth_scopes #=> Array
     #   resp.user_pool_client.allowed_o_auth_scopes[0] #=> String
     #   resp.user_pool_client.allowed_o_auth_flows_user_pool_client #=> Boolean
+    #   resp.user_pool_client.analytics_configuration.application_id #=> String
+    #   resp.user_pool_client.analytics_configuration.role_arn #=> String
+    #   resp.user_pool_client.analytics_configuration.external_id #=> String
+    #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClient AWS API Documentation
     #
@@ -2659,7 +3013,7 @@ module Aws::CognitoIdentityProvider
     # confirmation code is sent to the email. If neither a verified phone
     # number nor a verified email exists, `InvalidParameterException` is
     # thrown. To use the confirmation code for resetting the password, call
-    # [ConfirmForgotPassword](API_ConfirmForgotPassword.html).
+    # .
     #
     # @option params [required, String] :client_id
     #   The ID of the client associated with the user pool.
@@ -2669,9 +3023,18 @@ module Aws::CognitoIdentityProvider
     #   secret key of a user pool client and username plus the client ID in
     #   the message.
     #
+    # @option params [Types::UserContextDataType] :user_context_data
+    #   Contextual data such as the user's device fingerprint, IP address, or
+    #   location used for evaluating the risk of an unexpected event by Amazon
+    #   Cognito advanced security.
+    #
     # @option params [required, String] :username
     #   The user name of the user for whom you want to enter a code to reset a
     #   forgotten password.
+    #
+    # @option params [Types::AnalyticsMetadataType] :analytics_metadata
+    #   The Amazon Pinpoint analytics metadata for collecting metrics for
+    #   `ForgotPassword` calls.
     #
     # @return [Types::ForgotPasswordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2682,7 +3045,13 @@ module Aws::CognitoIdentityProvider
     #   resp = client.forgot_password({
     #     client_id: "ClientIdType", # required
     #     secret_hash: "SecretHashType",
+    #     user_context_data: {
+    #       encoded_data: "StringType",
+    #     },
     #     username: "UsernameType", # required
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "StringType",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2906,6 +3275,8 @@ module Aws::CognitoIdentityProvider
     #   * {Types::GetUserResponse#username #username} => String
     #   * {Types::GetUserResponse#user_attributes #user_attributes} => Array&lt;Types::AttributeType&gt;
     #   * {Types::GetUserResponse#mfa_options #mfa_options} => Array&lt;Types::MFAOptionType&gt;
+    #   * {Types::GetUserResponse#preferred_mfa_setting #preferred_mfa_setting} => String
+    #   * {Types::GetUserResponse#user_mfa_setting_list #user_mfa_setting_list} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2922,6 +3293,9 @@ module Aws::CognitoIdentityProvider
     #   resp.mfa_options #=> Array
     #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.mfa_options[0].attribute_name #=> String
+    #   resp.preferred_mfa_setting #=> String
+    #   resp.user_mfa_setting_list #=> Array
+    #   resp.user_mfa_setting_list[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUser AWS API Documentation
     #
@@ -2966,6 +3340,40 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def get_user_attribute_verification_code(params = {}, options = {})
       req = build_request(:get_user_attribute_verification_code, params)
+      req.send_request(options)
+    end
+
+    # Gets the user pool multi-factor authentication (MFA) configuration.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID.
+    #
+    # @return [Types::GetUserPoolMfaConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUserPoolMfaConfigResponse#sms_mfa_configuration #sms_mfa_configuration} => Types::SmsMfaConfigType
+    #   * {Types::GetUserPoolMfaConfigResponse#software_token_mfa_configuration #software_token_mfa_configuration} => Types::SoftwareTokenMfaConfigType
+    #   * {Types::GetUserPoolMfaConfigResponse#mfa_configuration #mfa_configuration} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_user_pool_mfa_config({
+    #     user_pool_id: "UserPoolIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sms_mfa_configuration.sms_authentication_message #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.sns_caller_arn #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.external_id #=> String
+    #   resp.software_token_mfa_configuration.enabled #=> Boolean
+    #   resp.mfa_configuration #=> String, one of "OFF", "ON", "OPTIONAL"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserPoolMfaConfig AWS API Documentation
+    #
+    # @overload get_user_pool_mfa_config(params = {})
+    # @param [Hash] params ({})
+    def get_user_pool_mfa_config(params = {}, options = {})
+      req = build_request(:get_user_pool_mfa_config, params)
       req.send_request(options)
     end
 
@@ -3040,6 +3448,15 @@ module Aws::CognitoIdentityProvider
     # @option params [required, String] :client_id
     #   The app client ID.
     #
+    # @option params [Types::AnalyticsMetadataType] :analytics_metadata
+    #   The Amazon Pinpoint analytics metadata for collecting metrics for
+    #   `InitiateAuth` calls.
+    #
+    # @option params [Types::UserContextDataType] :user_context_data
+    #   Contextual data such as the user's device fingerprint, IP address, or
+    #   location used for evaluating the risk of an unexpected event by Amazon
+    #   Cognito advanced security.
+    #
     # @return [Types::InitiateAuthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InitiateAuthResponse#challenge_name #challenge_name} => String
@@ -3058,11 +3475,17 @@ module Aws::CognitoIdentityProvider
     #       "StringType" => "StringType",
     #     },
     #     client_id: "ClientIdType", # required
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "StringType",
+    #     },
+    #     user_context_data: {
+    #       encoded_data: "StringType",
+    #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
+    #   resp.challenge_name #=> String, one of "SMS_MFA", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
     #   resp.session #=> String
     #   resp.challenge_parameters #=> Hash
     #   resp.challenge_parameters["StringType"] #=> String
@@ -3398,6 +3821,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pools[0].lambda_config.define_auth_challenge #=> String
     #   resp.user_pools[0].lambda_config.create_auth_challenge #=> String
     #   resp.user_pools[0].lambda_config.verify_auth_challenge_response #=> String
+    #   resp.user_pools[0].lambda_config.pre_token_generation #=> String
     #   resp.user_pools[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pools[0].last_modified_date #=> Time
     #   resp.user_pools[0].creation_date #=> Time
@@ -3421,7 +3845,7 @@ module Aws::CognitoIdentityProvider
     # @option params [Array<String>] :attributes_to_get
     #   An array of strings, where each string is the name of a user attribute
     #   to be returned for each user in the search results. If the array is
-    #   empty, all attributes are returned.
+    #   null, all attributes are returned.
     #
     # @option params [Integer] :limit
     #   Maximum number of users to be returned.
@@ -3470,6 +3894,8 @@ module Aws::CognitoIdentityProvider
     #     (case-sensitive)
     #
     #   * `status` (case-insensitive)
+    #
+    #   * `sub`
     #
     #   Custom attributes are not searchable.
     #
@@ -3590,9 +4016,18 @@ module Aws::CognitoIdentityProvider
     #   secret key of a user pool client and username plus the client ID in
     #   the message.
     #
+    # @option params [Types::UserContextDataType] :user_context_data
+    #   Contextual data such as the user's device fingerprint, IP address, or
+    #   location used for evaluating the risk of an unexpected event by Amazon
+    #   Cognito advanced security.
+    #
     # @option params [required, String] :username
     #   The user name of the user to whom you wish to resend a confirmation
     #   code.
+    #
+    # @option params [Types::AnalyticsMetadataType] :analytics_metadata
+    #   The Amazon Pinpoint analytics metadata for collecting metrics for
+    #   `ResendConfirmationCode` calls.
     #
     # @return [Types::ResendConfirmationCodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3603,7 +4038,13 @@ module Aws::CognitoIdentityProvider
     #   resp = client.resend_confirmation_code({
     #     client_id: "ClientIdType", # required
     #     secret_hash: "SecretHashType",
+    #     user_context_data: {
+    #       encoded_data: "StringType",
+    #     },
     #     username: "UsernameType", # required
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "StringType",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3627,8 +4068,7 @@ module Aws::CognitoIdentityProvider
     #   The app client ID.
     #
     # @option params [required, String] :challenge_name
-    #   The challenge name. For more information, see
-    #   [InitiateAuth](API_InitiateAuth.html).
+    #   The challenge name. For more information, see .
     #
     #   `ADMIN_NO_SRP_AUTH` is not a valid value.
     #
@@ -3655,6 +4095,15 @@ module Aws::CognitoIdentityProvider
     #     attributes, `USERNAME`, `SECRET_HASH` (if app client is configured
     #     with client secret).
     #
+    # @option params [Types::AnalyticsMetadataType] :analytics_metadata
+    #   The Amazon Pinpoint analytics metadata for collecting metrics for
+    #   `RespondToAuthChallenge` calls.
+    #
+    # @option params [Types::UserContextDataType] :user_context_data
+    #   Contextual data such as the user's device fingerprint, IP address, or
+    #   location used for evaluating the risk of an unexpected event by Amazon
+    #   Cognito advanced security.
+    #
     # @return [Types::RespondToAuthChallengeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RespondToAuthChallengeResponse#challenge_name #challenge_name} => String
@@ -3666,16 +4115,22 @@ module Aws::CognitoIdentityProvider
     #
     #   resp = client.respond_to_auth_challenge({
     #     client_id: "ClientIdType", # required
-    #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
+    #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, SOFTWARE_TOKEN_MFA, SELECT_MFA_TYPE, MFA_SETUP, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
     #     session: "SessionType",
     #     challenge_responses: {
     #       "StringType" => "StringType",
+    #     },
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "StringType",
+    #     },
+    #     user_context_data: {
+    #       encoded_data: "StringType",
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
+    #   resp.challenge_name #=> String, one of "SMS_MFA", "SOFTWARE_TOKEN_MFA", "SELECT_MFA_TYPE", "MFA_SETUP", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
     #   resp.session #=> String
     #   resp.challenge_parameters #=> Hash
     #   resp.challenge_parameters["StringType"] #=> String
@@ -3693,6 +4148,133 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def respond_to_auth_challenge(params = {}, options = {})
       req = build_request(:respond_to_auth_challenge, params)
+      req.send_request(options)
+    end
+
+    # Configures actions on detected risks. To delete the risk configuration
+    # for `UserPoolId` or `ClientId`, pass null values for all four
+    # configuration types.
+    #
+    # To enable Amazon Cognito advanced security features, update the user
+    # pool to include the `UserPoolAddOns` key`AdvancedSecurityMode`.
+    #
+    # See .
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID.
+    #
+    # @option params [String] :client_id
+    #   The app client ID. If `ClientId` is null, then the risk configuration
+    #   is mapped to `userPoolId`. When the client ID is null, the same risk
+    #   configuration is applied to all the clients in the userPool.
+    #
+    #   Otherwise, `ClientId` is mapped to the client. When the client ID is
+    #   not null, the user pool configuration is overridden and the risk
+    #   configuration for the client is used instead.
+    #
+    # @option params [Types::CompromisedCredentialsRiskConfigurationType] :compromised_credentials_risk_configuration
+    #   The compromised credentials risk configuration.
+    #
+    # @option params [Types::AccountTakeoverRiskConfigurationType] :account_takeover_risk_configuration
+    #   The account takeover risk configuration.
+    #
+    # @option params [Types::RiskExceptionConfigurationType] :risk_exception_configuration
+    #   The configuration to override the risk decision.
+    #
+    # @return [Types::SetRiskConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetRiskConfigurationResponse#risk_configuration #risk_configuration} => Types::RiskConfigurationType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_risk_configuration({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     client_id: "ClientIdType",
+    #     compromised_credentials_risk_configuration: {
+    #       event_filter: ["SIGN_IN"], # accepts SIGN_IN, PASSWORD_CHANGE, SIGN_UP
+    #       actions: { # required
+    #         event_action: "BLOCK", # required, accepts BLOCK, NO_ACTION
+    #       },
+    #     },
+    #     account_takeover_risk_configuration: {
+    #       notify_configuration: {
+    #         from: "StringType",
+    #         reply_to: "StringType",
+    #         source_arn: "ArnType", # required
+    #         block_email: {
+    #           subject: "EmailNotificationSubjectType", # required
+    #           html_body: "EmailNotificationBodyType",
+    #           text_body: "EmailNotificationBodyType",
+    #         },
+    #         no_action_email: {
+    #           subject: "EmailNotificationSubjectType", # required
+    #           html_body: "EmailNotificationBodyType",
+    #           text_body: "EmailNotificationBodyType",
+    #         },
+    #         mfa_email: {
+    #           subject: "EmailNotificationSubjectType", # required
+    #           html_body: "EmailNotificationBodyType",
+    #           text_body: "EmailNotificationBodyType",
+    #         },
+    #       },
+    #       actions: { # required
+    #         low_action: {
+    #           notify: false, # required
+    #           event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
+    #         },
+    #         medium_action: {
+    #           notify: false, # required
+    #           event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
+    #         },
+    #         high_action: {
+    #           notify: false, # required
+    #           event_action: "BLOCK", # required, accepts BLOCK, MFA_IF_CONFIGURED, MFA_REQUIRED, NO_ACTION
+    #         },
+    #       },
+    #     },
+    #     risk_exception_configuration: {
+    #       blocked_ip_range_list: ["StringType"],
+    #       skipped_ip_range_list: ["StringType"],
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.risk_configuration.user_pool_id #=> String
+    #   resp.risk_configuration.client_id #=> String
+    #   resp.risk_configuration.compromised_credentials_risk_configuration.event_filter #=> Array
+    #   resp.risk_configuration.compromised_credentials_risk_configuration.event_filter[0] #=> String, one of "SIGN_IN", "PASSWORD_CHANGE", "SIGN_UP"
+    #   resp.risk_configuration.compromised_credentials_risk_configuration.actions.event_action #=> String, one of "BLOCK", "NO_ACTION"
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.from #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.reply_to #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.source_arn #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.block_email.subject #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.block_email.html_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.block_email.text_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.no_action_email.subject #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.no_action_email.html_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.no_action_email.text_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.mfa_email.subject #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.mfa_email.html_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.notify_configuration.mfa_email.text_body #=> String
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.low_action.notify #=> Boolean
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.low_action.event_action #=> String, one of "BLOCK", "MFA_IF_CONFIGURED", "MFA_REQUIRED", "NO_ACTION"
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.medium_action.notify #=> Boolean
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.medium_action.event_action #=> String, one of "BLOCK", "MFA_IF_CONFIGURED", "MFA_REQUIRED", "NO_ACTION"
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.high_action.notify #=> Boolean
+    #   resp.risk_configuration.account_takeover_risk_configuration.actions.high_action.event_action #=> String, one of "BLOCK", "MFA_IF_CONFIGURED", "MFA_REQUIRED", "NO_ACTION"
+    #   resp.risk_configuration.risk_exception_configuration.blocked_ip_range_list #=> Array
+    #   resp.risk_configuration.risk_exception_configuration.blocked_ip_range_list[0] #=> String
+    #   resp.risk_configuration.risk_exception_configuration.skipped_ip_range_list #=> Array
+    #   resp.risk_configuration.risk_exception_configuration.skipped_ip_range_list[0] #=> String
+    #   resp.risk_configuration.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetRiskConfiguration AWS API Documentation
+    #
+    # @overload set_risk_configuration(params = {})
+    # @param [Hash] params ({})
+    def set_risk_configuration(params = {}, options = {})
+      req = build_request(:set_risk_configuration, params)
       req.send_request(options)
     end
 
@@ -3756,6 +4338,96 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Set the user's multi-factor authentication (MFA) method preference.
+    #
+    # @option params [Types::SMSMfaSettingsType] :sms_mfa_settings
+    #   The SMS text message multi-factor authentication (MFA) settings.
+    #
+    # @option params [Types::SoftwareTokenMfaSettingsType] :software_token_mfa_settings
+    #   The time-based one-time password software token MFA settings.
+    #
+    # @option params [required, String] :access_token
+    #   The access token.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_user_mfa_preference({
+    #     sms_mfa_settings: {
+    #       enabled: false,
+    #       preferred_mfa: false,
+    #     },
+    #     software_token_mfa_settings: {
+    #       enabled: false,
+    #       preferred_mfa: false,
+    #     },
+    #     access_token: "TokenModelType", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserMFAPreference AWS API Documentation
+    #
+    # @overload set_user_mfa_preference(params = {})
+    # @param [Hash] params ({})
+    def set_user_mfa_preference(params = {}, options = {})
+      req = build_request(:set_user_mfa_preference, params)
+      req.send_request(options)
+    end
+
+    # Set the user pool MFA configuration.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID.
+    #
+    # @option params [Types::SmsMfaConfigType] :sms_mfa_configuration
+    #   The SMS text message MFA configuration.
+    #
+    # @option params [Types::SoftwareTokenMfaConfigType] :software_token_mfa_configuration
+    #   The software token MFA configuration.
+    #
+    # @option params [String] :mfa_configuration
+    #   The MFA configuration.
+    #
+    # @return [Types::SetUserPoolMfaConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetUserPoolMfaConfigResponse#sms_mfa_configuration #sms_mfa_configuration} => Types::SmsMfaConfigType
+    #   * {Types::SetUserPoolMfaConfigResponse#software_token_mfa_configuration #software_token_mfa_configuration} => Types::SoftwareTokenMfaConfigType
+    #   * {Types::SetUserPoolMfaConfigResponse#mfa_configuration #mfa_configuration} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_user_pool_mfa_config({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     sms_mfa_configuration: {
+    #       sms_authentication_message: "SmsVerificationMessageType",
+    #       sms_configuration: {
+    #         sns_caller_arn: "ArnType", # required
+    #         external_id: "StringType",
+    #       },
+    #     },
+    #     software_token_mfa_configuration: {
+    #       enabled: false,
+    #     },
+    #     mfa_configuration: "OFF", # accepts OFF, ON, OPTIONAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sms_mfa_configuration.sms_authentication_message #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.sns_caller_arn #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.external_id #=> String
+    #   resp.software_token_mfa_configuration.enabled #=> Boolean
+    #   resp.mfa_configuration #=> String, one of "OFF", "ON", "OPTIONAL"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserPoolMfaConfig AWS API Documentation
+    #
+    # @overload set_user_pool_mfa_config(params = {})
+    # @param [Hash] params ({})
+    def set_user_pool_mfa_config(params = {}, options = {})
+      req = build_request(:set_user_pool_mfa_config, params)
+      req.send_request(options)
+    end
+
     # Sets the user settings like multi-factor authentication (MFA). If MFA
     # is to be removed for a particular attribute pass the attribute with
     # code delivery as null. If null list is passed, all MFA options are
@@ -3816,6 +4488,15 @@ module Aws::CognitoIdentityProvider
     # @option params [Array<Types::AttributeType>] :validation_data
     #   The validation data in the request to register a user.
     #
+    # @option params [Types::AnalyticsMetadataType] :analytics_metadata
+    #   The Amazon Pinpoint analytics metadata for collecting metrics for
+    #   `SignUp` calls.
+    #
+    # @option params [Types::UserContextDataType] :user_context_data
+    #   Contextual data such as the user's device fingerprint, IP address, or
+    #   location used for evaluating the risk of an unexpected event by Amazon
+    #   Cognito advanced security.
+    #
     # @return [Types::SignUpResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SignUpResponse#user_confirmed #user_confirmed} => Boolean
@@ -3841,6 +4522,12 @@ module Aws::CognitoIdentityProvider
     #         value: "AttributeValueType",
     #       },
     #     ],
+    #     analytics_metadata: {
+    #       analytics_endpoint_id: "StringType",
+    #     },
+    #     user_context_data: {
+    #       encoded_data: "StringType",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3950,6 +4637,47 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Provides the feedback for an authentication event whether it was from
+    # a valid user or not. This feedback is used for improving the risk
+    # evaluation decision for the user pool as part of Amazon Cognito
+    # advanced security.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID.
+    #
+    # @option params [required, String] :username
+    #   The user pool username.
+    #
+    # @option params [required, String] :event_id
+    #   The event ID.
+    #
+    # @option params [required, String] :feedback_token
+    #   The feedback token.
+    #
+    # @option params [required, String] :feedback_value
+    #   The authentication event feedback value.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_auth_event_feedback({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #     event_id: "EventIdType", # required
+    #     feedback_token: "TokenModelType", # required
+    #     feedback_value: "Valid", # required, accepts Valid, Invalid
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateAuthEventFeedback AWS API Documentation
+    #
+    # @overload update_auth_event_feedback(params = {})
+    # @param [Hash] params ({})
+    def update_auth_event_feedback(params = {}, options = {})
+      req = build_request(:update_auth_event_feedback, params)
+      req.send_request(options)
+    end
+
     # Updates the device status.
     #
     # @option params [required, String] :access_token
@@ -3999,7 +4727,7 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [Integer] :precedence
     #   The new precedence value for the group. For more information about
-    #   this parameter, see [CreateGroup](API_CreateGroup.html).
+    #   this parameter, see .
     #
     # @return [Types::UpdateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4250,6 +4978,10 @@ module Aws::CognitoIdentityProvider
     # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
     #   The configuration for `AdminCreateUser` requests.
     #
+    # @option params [Types::UserPoolAddOnsType] :user_pool_add_ons
+    #   Used to enable advanced security risk detection. Set the key
+    #   `AdvancedSecurityMode` to the value "AUDIT".
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -4274,6 +5006,7 @@ module Aws::CognitoIdentityProvider
     #       define_auth_challenge: "ArnType",
     #       create_auth_challenge: "ArnType",
     #       verify_auth_challenge_response: "ArnType",
+    #       pre_token_generation: "ArnType",
     #     },
     #     auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #     sms_verification_message: "SmsVerificationMessageType",
@@ -4312,6 +5045,9 @@ module Aws::CognitoIdentityProvider
     #         email_message: "EmailVerificationMessageType",
     #         email_subject: "EmailVerificationSubjectType",
     #       },
+    #     },
+    #     user_pool_add_ons: {
+    #       advanced_security_mode: "OFF", # required, accepts OFF, AUDIT, ENFORCED
     #     },
     #   })
     #
@@ -4379,6 +5115,10 @@ module Aws::CognitoIdentityProvider
     #   Set to TRUE if the client is allowed to follow the OAuth protocol when
     #   interacting with Cognito user pools.
     #
+    # @option params [Types::AnalyticsConfigurationType] :analytics_configuration
+    #   The Amazon Pinpoint analytics configuration for collecting metrics for
+    #   this user pool.
+    #
     # @return [Types::UpdateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -4400,6 +5140,12 @@ module Aws::CognitoIdentityProvider
     #     allowed_o_auth_flows: ["code"], # accepts code, implicit, client_credentials
     #     allowed_o_auth_scopes: ["ScopeType"],
     #     allowed_o_auth_flows_user_pool_client: false,
+    #     analytics_configuration: {
+    #       application_id: "HexStringType", # required
+    #       role_arn: "ArnType", # required
+    #       external_id: "StringType", # required
+    #       user_data_shared: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -4429,6 +5175,10 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.allowed_o_auth_scopes #=> Array
     #   resp.user_pool_client.allowed_o_auth_scopes[0] #=> String
     #   resp.user_pool_client.allowed_o_auth_flows_user_pool_client #=> Boolean
+    #   resp.user_pool_client.analytics_configuration.application_id #=> String
+    #   resp.user_pool_client.analytics_configuration.role_arn #=> String
+    #   resp.user_pool_client.analytics_configuration.external_id #=> String
+    #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClient AWS API Documentation
     #
@@ -4436,6 +5186,50 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def update_user_pool_client(params = {}, options = {})
       req = build_request(:update_user_pool_client, params)
+      req.send_request(options)
+    end
+
+    # Use this API to register a user's entered TOTP code and mark the
+    # user's software token MFA status as "verified" if successful,
+    #
+    # @option params [String] :access_token
+    #   The access token.
+    #
+    # @option params [String] :session
+    #   The session which should be passed both ways in challenge-response
+    #   calls to the service.
+    #
+    # @option params [required, String] :user_code
+    #   The one time password computed using the secret code returned by
+    #
+    # @option params [String] :friendly_device_name
+    #   The friendly device name.
+    #
+    # @return [Types::VerifySoftwareTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VerifySoftwareTokenResponse#status #status} => String
+    #   * {Types::VerifySoftwareTokenResponse#session #session} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.verify_software_token({
+    #     access_token: "TokenModelType",
+    #     session: "SessionType",
+    #     user_code: "SoftwareTokenMFAUserCodeType", # required
+    #     friendly_device_name: "StringType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "SUCCESS", "ERROR"
+    #   resp.session #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifySoftwareToken AWS API Documentation
+    #
+    # @overload verify_software_token(params = {})
+    # @param [Hash] params ({})
+    def verify_software_token(params = {}, options = {})
+      req = build_request(:verify_software_token, params)
       req.send_request(options)
     end
 
@@ -4482,7 +5276,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

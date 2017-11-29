@@ -61,6 +61,7 @@ module Aws::EC2
     #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
+    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -68,7 +69,7 @@ module Aws::EC2
     #         no_device: "String",
     #       },
     #     ],
-    #     image_id: "String", # required
+    #     image_id: "String",
     #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
@@ -148,6 +149,21 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     launch_template: {
+    #       launch_template_id: "String",
+    #       launch_template_name: "String",
+    #       version: "String",
+    #     },
+    #     instance_market_options: {
+    #       market_type: "spot", # accepts spot
+    #       spot_options: {
+    #         max_price: "String",
+    #         spot_instance_type: "one-time", # accepts one-time, persistent
+    #         block_duration_minutes: 1,
+    #         valid_until: Time.now,
+    #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #       },
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -156,7 +172,7 @@ module Aws::EC2
     #   volumes can be encrypted on creation. If a snapshot is the basis for a
     #   volume, it is not blank and its encryption status is used for the
     #   volume encryption status.
-    # @option options [required, String] :image_id
+    # @option options [String] :image_id
     #   The ID of the AMI, which you can get by calling DescribeImages.
     # @option options [String] :instance_type
     #   The instance type. For more information, see [Instance Types][1] in
@@ -316,11 +332,17 @@ module Aws::EC2
     #   specification. You cannot specify this option if you're launching
     #   more than one instance in the request.
     # @option options [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   An Elastic GPU to associate with the instance.
+    #   An elastic GPU to associate with the instance.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can tag
     #   instances and volumes. The specified tags are applied to all instances
     #   or volumes that are created during launch.
+    # @option options [Types::LaunchTemplateSpecification] :launch_template
+    #   The launch template to use to launch the instances. Any parameters
+    #   that you specify in RunInstances override the same parameters in the
+    #   launch template.
+    # @option options [Types::InstanceMarketOptionsRequest] :instance_market_options
+    #   The market (purchasing) option for the instances.
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
@@ -903,6 +925,7 @@ module Aws::EC2
     #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
+    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -970,7 +993,7 @@ module Aws::EC2
     #   This option is supported only for HVM AMIs. Specifying this option
     #   with a PV AMI can make instances launched from the AMI unreachable.
     # @option options [String] :virtualization_type
-    #   The type of virtualization.
+    #   The type of virtualization (`hvm` \| `paravirtual`).
     #
     #   Default: `paravirtual`
     # @return [Image]

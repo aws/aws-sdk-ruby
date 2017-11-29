@@ -435,6 +435,48 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # Configuration settings of a canary deployment.
+    #
+    # @note When making an API call, you may pass CanarySettings
+    #   data as a hash:
+    #
+    #       {
+    #         percent_traffic: 1.0,
+    #         deployment_id: "String",
+    #         stage_variable_overrides: {
+    #           "String" => "String",
+    #         },
+    #         use_stage_cache: false,
+    #       }
+    #
+    # @!attribute [rw] percent_traffic
+    #   The percent (0-100) of traffic diverted to a canary deployment.
+    #   @return [Float]
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the canary deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] stage_variable_overrides
+    #   Stage variables overridden for a canary release deployment,
+    #   including new stage variables introduced in the canary. These stage
+    #   variables are represented as a string-to-string map between stage
+    #   variable names and their values.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] use_stage_cache
+    #   A Boolean flag to indicate whether the canary deployment uses the
+    #   stage cache or not.
+    #   @return [Boolean]
+    #
+    class CanarySettings < Struct.new(
+      :percent_traffic,
+      :deployment_id,
+      :stage_variable_overrides,
+      :use_stage_cache)
+      include Aws::Structure
+    end
+
     # Represents a client certificate used to configure client-side SSL
     # authentication while sending requests to the integration endpoint.
     #
@@ -748,6 +790,13 @@ module Aws::APIGateway
     #         variables: {
     #           "String" => "String",
     #         },
+    #         canary_settings: {
+    #           percent_traffic: 1.0,
+    #           stage_variable_overrides: {
+    #             "String" => "String",
+    #           },
+    #           use_stage_cache: false,
+    #         },
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -785,6 +834,11 @@ module Aws::APIGateway
     #   `[A-Za-z0-9-._~:/?#&=,]+`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] canary_settings
+    #   The input configuration for the canary deployment when the
+    #   deployment is a canary release deployment.
+    #   @return [Types::DeploymentCanarySettings]
+    #
     class CreateDeploymentRequest < Struct.new(
       :rest_api_id,
       :stage_name,
@@ -792,7 +846,8 @@ module Aws::APIGateway
       :description,
       :cache_cluster_enabled,
       :cache_cluster_size,
-      :variables)
+      :variables,
+      :canary_settings)
       include Aws::Structure
     end
 
@@ -1141,6 +1196,14 @@ module Aws::APIGateway
     #           "String" => "String",
     #         },
     #         documentation_version: "String",
+    #         canary_settings: {
+    #           percent_traffic: 1.0,
+    #           deployment_id: "String",
+    #           stage_variable_overrides: {
+    #             "String" => "String",
+    #           },
+    #           use_stage_cache: false,
+    #         },
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -1148,11 +1211,12 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The name for the Stage resource.
+    #   \\\{Required\] The name for the Stage resource.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
-    #   The identifier of the Deployment resource for the Stage resource.
+    #   \[Required\] The identifier of the Deployment resource for the Stage
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1177,6 +1241,10 @@ module Aws::APIGateway
     #   The version of the associated API documentation.
     #   @return [String]
     #
+    # @!attribute [rw] canary_settings
+    #   The canary deployment settings of this stage.
+    #   @return [Types::CanarySettings]
+    #
     class CreateStageRequest < Struct.new(
       :rest_api_id,
       :stage_name,
@@ -1185,7 +1253,8 @@ module Aws::APIGateway
       :cache_cluster_enabled,
       :cache_cluster_size,
       :variables,
-      :documentation_version)
+      :documentation_version,
+      :canary_settings)
       include Aws::Structure
     end
 
@@ -1832,6 +1901,44 @@ module Aws::APIGateway
       :description,
       :created_date,
       :api_summary)
+      include Aws::Structure
+    end
+
+    # The input configuration for a canary deployment.
+    #
+    # @note When making an API call, you may pass DeploymentCanarySettings
+    #   data as a hash:
+    #
+    #       {
+    #         percent_traffic: 1.0,
+    #         stage_variable_overrides: {
+    #           "String" => "String",
+    #         },
+    #         use_stage_cache: false,
+    #       }
+    #
+    # @!attribute [rw] percent_traffic
+    #   The percentage (0.0-100.0) of traffic routed to the canary
+    #   deployment.
+    #   @return [Float]
+    #
+    # @!attribute [rw] stage_variable_overrides
+    #   A stage variable overrides used for the canary release deployment.
+    #   They can override existing stage variables or add new stage
+    #   variables for the canary release deployment. These stage variables
+    #   are represented as a string-to-string map between stage variable
+    #   names and their values.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] use_stage_cache
+    #   A Boolean flag to indicate whether the canary release deployment
+    #   uses the stage cache or not.
+    #   @return [Boolean]
+    #
+    class DeploymentCanarySettings < Struct.new(
+      :percent_traffic,
+      :stage_variable_overrides,
+      :use_stage_cache)
       include Aws::Structure
     end
 
@@ -4718,7 +4825,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] op
     #   An update operation to be performed with this PATCH request. The
-    #   valid value can be "add", "remove", or "replace". Not all
+    #   valid value can be `add`, `remove`, `replace` or `copy`. Not all
     #   valid operations are supported for a given resource. Support of the
     #   operations depends on specific operational contexts. Attempts to
     #   apply an unsupported operation on a resource will return an error
@@ -4743,10 +4850,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The new target value of the update operation. When using AWS CLI to
-    #   update a property of a JSON value, enclose the JSON object with a
-    #   pair of single quotes in a Linux shell, e.g., '\\\{"a": ...\\}'.
-    #   In a Windows shell, see [Using JSON for Parameters][1].
+    #   The new target value of the update operation. It is applicable for
+    #   the `add` or `replace` operation. When using AWS CLI to update a
+    #   property of a JSON value, enclose the JSON object with a pair of
+    #   single quotes in a Linux shell, e.g., '\\\{"a": ...\\}'. In a
+    #   Windows shell, see [Using JSON for Parameters][1].
     #
     #
     #
@@ -4754,7 +4862,13 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] from
-    #   Not supported.
+    #   The `copy` update operation's source as identified by a
+    #   `JSON-Pointer` value referencing the location within the targeted
+    #   resource to copy the value from. For example, to promote a canary
+    #   deployment, you copy the canary deployment ID to the affiliated
+    #   deployment ID by calling a PATCH request on a Stage resource with
+    #   `"op":"copy"`, `"from":"/canarySettings/deploymentId"` and
+    #   `"path":"/deploymentId"`.
     #   @return [String]
     #
     class PatchOperation < Struct.new(
@@ -5734,8 +5848,12 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] access_log_settings
-    #   The access log settings in this stage.
+    #   Settings for logging access in this stage.
     #   @return [Types::AccessLogSettings]
+    #
+    # @!attribute [rw] canary_settings
+    #   Settings for the canary deployment in this stage.
+    #   @return [Types::CanarySettings]
     #
     # @!attribute [rw] created_date
     #   The timestamp when the stage was created.
@@ -5757,6 +5875,7 @@ module Aws::APIGateway
       :variables,
       :documentation_version,
       :access_log_settings,
+      :canary_settings,
       :created_date,
       :last_updated_date)
       include Aws::Structure

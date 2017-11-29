@@ -32,7 +32,7 @@ module Aws::Lambda
     #   Number of simultaneous executions of your function per region. For
     #   more information or to request a limit increase for concurrent
     #   executions, see [Lambda Function Concurrent Executions][1]. The
-    #   default limit is 100.
+    #   default limit is 1000.
     #
     #
     #
@@ -216,13 +216,47 @@ module Aws::Lambda
     #   Alias description.
     #   @return [String]
     #
+    # @!attribute [rw] routing_config
+    #   Specifies an additional function versions the alias points to,
+    #   allowing you to dictate what percentage of traffic will invoke each
+    #   version. For more information, see
+    #   lambda-traffic-shifting-using-aliases.
+    #   @return [Types::AliasRoutingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasConfiguration AWS API Documentation
     #
     class AliasConfiguration < Struct.new(
       :alias_arn,
       :name,
       :function_version,
-      :description)
+      :description,
+      :routing_config)
+      include Aws::Structure
+    end
+
+    # The parent object that implements what percentage of traffic will
+    # invoke each function version. For more information, see
+    # lambda-traffic-shifting-using-aliases.
+    #
+    # @note When making an API call, you may pass AliasRoutingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         additional_version_weights: {
+    #           "AdditionalVersion" => 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] additional_version_weights
+    #   Set this property value to dictate what percentage of traffic will
+    #   invoke the updated function version. If set to an empty string, 100
+    #   percent of traffic will invoke `function-version`.
+    #   @return [Hash<String,Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasRoutingConfiguration AWS API Documentation
+    #
+    class AliasRoutingConfiguration < Struct.new(
+      :additional_version_weights)
       include Aws::Structure
     end
 
@@ -234,6 +268,11 @@ module Aws::Lambda
     #         name: "Alias", # required
     #         function_version: "Version", # required
     #         description: "Description",
+    #         routing_config: {
+    #           additional_version_weights: {
+    #             "AdditionalVersion" => 1.0,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] function_name
@@ -255,13 +294,20 @@ module Aws::Lambda
     #   Description of the alias.
     #   @return [String]
     #
+    # @!attribute [rw] routing_config
+    #   Specifies an additional version your alias can point to, allowing
+    #   you to dictate what percentage of traffic will invoke each version.
+    #   For more information, see lambda-traffic-shifting-using-aliases.
+    #   @return [Types::AliasRoutingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAliasRequest AWS API Documentation
     #
     class CreateAliasRequest < Struct.new(
       :function_name,
       :name,
       :function_version,
-      :description)
+      :description,
+      :routing_config)
       include Aws::Structure
     end
 
@@ -1090,7 +1136,7 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   Using this optional parameter to specify a function version or an
+    #   Use this optional parameter to specify a function version or an
     #   alias name. If you specify function version, the API uses qualified
     #   function ARN for the request and returns information about the
     #   specific Lambda function version. If you specify an alias name, the
@@ -1236,7 +1282,8 @@ module Aws::Lambda
     #   [PutEvents][1] in the *Amazon Mobile Analytics API Reference and
     #   User Guide*.
     #
-    #   The ClientContext JSON must be base64-encoded.
+    #   The ClientContext JSON must be base64-encoded and has a maximum size
+    #   of 3583 bytes.
     #
     #
     #
@@ -1312,13 +1359,19 @@ module Aws::Lambda
     #   the message.
     #   @return [String]
     #
+    # @!attribute [rw] executed_version
+    #   The function version that has been executed. This value is returned
+    #   only if the invocation type is `RequestResponse`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationResponse AWS API Documentation
     #
     class InvocationResponse < Struct.new(
       :status_code,
       :function_error,
       :log_result,
-      :payload)
+      :payload,
+      :executed_version)
       include Aws::Structure
     end
 
@@ -1511,8 +1564,8 @@ module Aws::Lambda
     #   you specify `us-east-1`, only functions replicated from that region
     #   will be returned.
     #
-    #   `ALL` \_ Will return all functions from any region. If specified,
-    #   you also must specify a valid FunctionVersion parameter.
+    #   `ALL`\: Will return all functions from any region. If specified, you
+    #   also must specify a valid FunctionVersion parameter.
     #   @return [String]
     #
     # @!attribute [rw] function_version
@@ -1521,7 +1574,7 @@ module Aws::Lambda
     #
     #   Valid value:
     #
-    #   `ALL` \_ Will return all versions, including `$LATEST` which will
+    #   `ALL`\: Will return all versions, including `$LATEST` which will
     #   have fully qualified ARNs (Amazon Resource Names).
     #   @return [String]
     #
@@ -1675,8 +1728,10 @@ module Aws::Lambda
     # @!attribute [rw] code_sha_256
     #   The SHA256 hash of the deployment package you want to publish. This
     #   provides validation on the code you are publishing. If you provide
-    #   this parameter value must match the SHA256 of the $LATEST version
-    #   for the publication to succeed.
+    #   this parameter, the value must match the SHA256 of the $LATEST
+    #   version for the publication to succeed. You can use the **DryRun**
+    #   parameter of UpdateFunctionCode to verify the hash value that will
+    #   be returned before publishing your new version.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1833,6 +1888,11 @@ module Aws::Lambda
     #         name: "Alias", # required
     #         function_version: "Version",
     #         description: "Description",
+    #         routing_config: {
+    #           additional_version_weights: {
+    #             "AdditionalVersion" => 1.0,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] function_name
@@ -1854,13 +1914,20 @@ module Aws::Lambda
     #   You can change the description of the alias using this parameter.
     #   @return [String]
     #
+    # @!attribute [rw] routing_config
+    #   Specifies an additional version your alias can point to, allowing
+    #   you to dictate what percentage of traffic will invoke each version.
+    #   For more information, see lambda-traffic-shifting-using-aliases.
+    #   @return [Types::AliasRoutingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAliasRequest AWS API Documentation
     #
     class UpdateAliasRequest < Struct.new(
       :function_name,
       :name,
       :function_version,
-      :description)
+      :description,
+      :routing_config)
       include Aws::Structure
     end
 
@@ -1988,7 +2055,7 @@ module Aws::Lambda
     #   atomic operation. It will do all necessary computation and
     #   validation of your code but will not upload it or a publish a
     #   version. Each time this operation is invoked, the `CodeSha256` hash
-    #   value the provided code will also be computed and returned in the
+    #   value of the provided code will also be computed and returned in the
     #   response.
     #   @return [Boolean]
     #

@@ -446,6 +446,10 @@ module Aws::APIGateway
     #   alphanumeric and underscore characters, and the values must match
     #   `[A-Za-z0-9-._~:/?#&=,]+`.
     #
+    # @option params [Types::DeploymentCanarySettings] :canary_settings
+    #   The input configuration for the canary deployment when the deployment
+    #   is a canary release deployment.
+    #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Deployment#id #id} => String
@@ -464,6 +468,13 @@ module Aws::APIGateway
     #     cache_cluster_size: "0.5", # accepts 0.5, 1.6, 6.1, 13.5, 28.4, 58.2, 118, 237
     #     variables: {
     #       "String" => "String",
+    #     },
+    #     canary_settings: {
+    #       percent_traffic: 1.0,
+    #       stage_variable_overrides: {
+    #         "String" => "String",
+    #       },
+    #       use_stage_cache: false,
     #     },
     #   })
     #
@@ -927,10 +938,11 @@ module Aws::APIGateway
     #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   The name for the Stage resource.
+    #   \\\{Required\] The name for the Stage resource.
     #
     # @option params [required, String] :deployment_id
-    #   The identifier of the Deployment resource for the Stage resource.
+    #   \[Required\] The identifier of the Deployment resource for the Stage
+    #   resource.
     #
     # @option params [String] :description
     #   The description of the Stage resource.
@@ -949,6 +961,9 @@ module Aws::APIGateway
     # @option params [String] :documentation_version
     #   The version of the associated API documentation.
     #
+    # @option params [Types::CanarySettings] :canary_settings
+    #   The canary deployment settings of this stage.
+    #
     # @return [Types::Stage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Stage#deployment_id #deployment_id} => String
@@ -962,6 +977,7 @@ module Aws::APIGateway
     #   * {Types::Stage#variables #variables} => Hash&lt;String,String&gt;
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
+    #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
     #
@@ -978,6 +994,14 @@ module Aws::APIGateway
     #       "String" => "String",
     #     },
     #     documentation_version: "String",
+    #     canary_settings: {
+    #       percent_traffic: 1.0,
+    #       deployment_id: "String",
+    #       stage_variable_overrides: {
+    #         "String" => "String",
+    #       },
+    #       use_stage_cache: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1005,6 +1029,11 @@ module Aws::APIGateway
     #   resp.documentation_version #=> String
     #   resp.access_log_settings.format #=> String
     #   resp.access_log_settings.destination_arn #=> String
+    #   resp.canary_settings.percent_traffic #=> Float
+    #   resp.canary_settings.deployment_id #=> String
+    #   resp.canary_settings.stage_variable_overrides #=> Hash
+    #   resp.canary_settings.stage_variable_overrides["String"] #=> String
+    #   resp.canary_settings.use_stage_cache #=> Boolean
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
     #
@@ -3486,6 +3515,7 @@ module Aws::APIGateway
     #   * {Types::Stage#variables #variables} => Hash&lt;String,String&gt;
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
+    #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
     #
@@ -3521,6 +3551,11 @@ module Aws::APIGateway
     #   resp.documentation_version #=> String
     #   resp.access_log_settings.format #=> String
     #   resp.access_log_settings.destination_arn #=> String
+    #   resp.canary_settings.percent_traffic #=> Float
+    #   resp.canary_settings.deployment_id #=> String
+    #   resp.canary_settings.stage_variable_overrides #=> Hash
+    #   resp.canary_settings.stage_variable_overrides["String"] #=> String
+    #   resp.canary_settings.use_stage_cache #=> Boolean
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
     #
@@ -3576,6 +3611,11 @@ module Aws::APIGateway
     #   resp.item[0].documentation_version #=> String
     #   resp.item[0].access_log_settings.format #=> String
     #   resp.item[0].access_log_settings.destination_arn #=> String
+    #   resp.item[0].canary_settings.percent_traffic #=> Float
+    #   resp.item[0].canary_settings.deployment_id #=> String
+    #   resp.item[0].canary_settings.stage_variable_overrides #=> Hash
+    #   resp.item[0].canary_settings.stage_variable_overrides["String"] #=> String
+    #   resp.item[0].canary_settings.use_stage_cache #=> Boolean
     #   resp.item[0].created_date #=> Time
     #   resp.item[0].last_updated_date #=> Time
     #
@@ -5858,6 +5898,7 @@ module Aws::APIGateway
     #   * {Types::Stage#variables #variables} => Hash&lt;String,String&gt;
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
+    #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
     #
@@ -5901,6 +5942,11 @@ module Aws::APIGateway
     #   resp.documentation_version #=> String
     #   resp.access_log_settings.format #=> String
     #   resp.access_log_settings.destination_arn #=> String
+    #   resp.canary_settings.percent_traffic #=> Float
+    #   resp.canary_settings.deployment_id #=> String
+    #   resp.canary_settings.stage_variable_overrides #=> Hash
+    #   resp.canary_settings.stage_variable_overrides["String"] #=> String
+    #   resp.canary_settings.use_stage_cache #=> Boolean
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
     #
@@ -6034,7 +6080,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

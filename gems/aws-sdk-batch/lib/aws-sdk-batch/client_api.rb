@@ -11,6 +11,11 @@ module Aws::Batch
 
     include Seahorse::Model
 
+    ArrayJobDependency = Shapes::StringShape.new(name: 'ArrayJobDependency')
+    ArrayJobStatusSummary = Shapes::MapShape.new(name: 'ArrayJobStatusSummary')
+    ArrayProperties = Shapes::StructureShape.new(name: 'ArrayProperties')
+    ArrayPropertiesDetail = Shapes::StructureShape.new(name: 'ArrayPropertiesDetail')
+    ArrayPropertiesSummary = Shapes::StructureShape.new(name: 'ArrayPropertiesSummary')
     AttemptContainerDetail = Shapes::StructureShape.new(name: 'AttemptContainerDetail')
     AttemptDetail = Shapes::StructureShape.new(name: 'AttemptDetail')
     AttemptDetails = Shapes::ListShape.new(name: 'AttemptDetails')
@@ -31,6 +36,7 @@ module Aws::Batch
     ContainerDetail = Shapes::StructureShape.new(name: 'ContainerDetail')
     ContainerOverrides = Shapes::StructureShape.new(name: 'ContainerOverrides')
     ContainerProperties = Shapes::StructureShape.new(name: 'ContainerProperties')
+    ContainerSummary = Shapes::StructureShape.new(name: 'ContainerSummary')
     CreateComputeEnvironmentRequest = Shapes::StructureShape.new(name: 'CreateComputeEnvironmentRequest')
     CreateComputeEnvironmentResponse = Shapes::StructureShape.new(name: 'CreateComputeEnvironmentResponse')
     CreateJobQueueRequest = Shapes::StructureShape.new(name: 'CreateJobQueueRequest')
@@ -92,6 +98,21 @@ module Aws::Batch
     UpdateJobQueueResponse = Shapes::StructureShape.new(name: 'UpdateJobQueueResponse')
     Volume = Shapes::StructureShape.new(name: 'Volume')
     Volumes = Shapes::ListShape.new(name: 'Volumes')
+
+    ArrayJobStatusSummary.key = Shapes::ShapeRef.new(shape: String)
+    ArrayJobStatusSummary.value = Shapes::ShapeRef.new(shape: Integer)
+
+    ArrayProperties.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "size"))
+    ArrayProperties.struct_class = Types::ArrayProperties
+
+    ArrayPropertiesDetail.add_member(:status_summary, Shapes::ShapeRef.new(shape: ArrayJobStatusSummary, location_name: "statusSummary"))
+    ArrayPropertiesDetail.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "size"))
+    ArrayPropertiesDetail.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
+    ArrayPropertiesDetail.struct_class = Types::ArrayPropertiesDetail
+
+    ArrayPropertiesSummary.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "size"))
+    ArrayPropertiesSummary.add_member(:index, Shapes::ShapeRef.new(shape: Integer, location_name: "index"))
+    ArrayPropertiesSummary.struct_class = Types::ArrayPropertiesSummary
 
     AttemptContainerDetail.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
     AttemptContainerDetail.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
@@ -192,6 +213,10 @@ module Aws::Batch
     ContainerProperties.add_member(:user, Shapes::ShapeRef.new(shape: String, location_name: "user"))
     ContainerProperties.struct_class = Types::ContainerProperties
 
+    ContainerSummary.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
+    ContainerSummary.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    ContainerSummary.struct_class = Types::ContainerSummary
+
     CreateComputeEnvironmentRequest.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "computeEnvironmentName"))
     CreateComputeEnvironmentRequest.add_member(:type, Shapes::ShapeRef.new(shape: CEType, required: true, location_name: "type"))
     CreateComputeEnvironmentRequest.add_member(:state, Shapes::ShapeRef.new(shape: CEState, location_name: "state"))
@@ -281,6 +306,7 @@ module Aws::Batch
     JobDefinitionList.member = Shapes::ShapeRef.new(shape: JobDefinition)
 
     JobDependency.add_member(:job_id, Shapes::ShapeRef.new(shape: String, location_name: "jobId"))
+    JobDependency.add_member(:type, Shapes::ShapeRef.new(shape: ArrayJobDependency, location_name: "type"))
     JobDependency.struct_class = Types::JobDependency
 
     JobDependencyList.member = Shapes::ShapeRef.new(shape: JobDependency)
@@ -299,6 +325,7 @@ module Aws::Batch
     JobDetail.add_member(:job_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinition"))
     JobDetail.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))
     JobDetail.add_member(:container, Shapes::ShapeRef.new(shape: ContainerDetail, location_name: "container"))
+    JobDetail.add_member(:array_properties, Shapes::ShapeRef.new(shape: ArrayPropertiesDetail, location_name: "arrayProperties"))
     JobDetail.struct_class = Types::JobDetail
 
     JobDetailList.member = Shapes::ShapeRef.new(shape: JobDetail)
@@ -316,6 +343,13 @@ module Aws::Batch
 
     JobSummary.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     JobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))
+    JobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Long, location_name: "createdAt"))
+    JobSummary.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
+    JobSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    JobSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
+    JobSummary.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
+    JobSummary.add_member(:container, Shapes::ShapeRef.new(shape: ContainerSummary, location_name: "container"))
+    JobSummary.add_member(:array_properties, Shapes::ShapeRef.new(shape: ArrayPropertiesSummary, location_name: "arrayProperties"))
     JobSummary.struct_class = Types::JobSummary
 
     JobSummaryList.member = Shapes::ShapeRef.new(shape: JobSummary)
@@ -324,7 +358,8 @@ module Aws::Batch
     KeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     KeyValuePair.struct_class = Types::KeyValuePair
 
-    ListJobsRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobQueue"))
+    ListJobsRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, location_name: "jobQueue"))
+    ListJobsRequest.add_member(:array_job_id, Shapes::ShapeRef.new(shape: String, location_name: "arrayJobId"))
     ListJobsRequest.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "jobStatus"))
     ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -363,6 +398,7 @@ module Aws::Batch
 
     SubmitJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))
     SubmitJobRequest.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobQueue"))
+    SubmitJobRequest.add_member(:array_properties, Shapes::ShapeRef.new(shape: ArrayProperties, location_name: "arrayProperties"))
     SubmitJobRequest.add_member(:depends_on, Shapes::ShapeRef.new(shape: JobDependencyList, location_name: "dependsOn"))
     SubmitJobRequest.add_member(:job_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinition"))
     SubmitJobRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))

@@ -28,6 +28,7 @@ module Aws::APIGateway
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CacheClusterSize = Shapes::StringShape.new(name: 'CacheClusterSize')
     CacheClusterStatus = Shapes::StringShape.new(name: 'CacheClusterStatus')
+    CanarySettings = Shapes::StructureShape.new(name: 'CanarySettings')
     ClientCertificate = Shapes::StructureShape.new(name: 'ClientCertificate')
     ClientCertificates = Shapes::StructureShape.new(name: 'ClientCertificates')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -67,6 +68,7 @@ module Aws::APIGateway
     DeleteUsagePlanKeyRequest = Shapes::StructureShape.new(name: 'DeleteUsagePlanKeyRequest')
     DeleteUsagePlanRequest = Shapes::StructureShape.new(name: 'DeleteUsagePlanRequest')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
+    DeploymentCanarySettings = Shapes::StructureShape.new(name: 'DeploymentCanarySettings')
     Deployments = Shapes::StructureShape.new(name: 'Deployments')
     DocumentationPart = Shapes::StructureShape.new(name: 'DocumentationPart')
     DocumentationPartIds = Shapes::StructureShape.new(name: 'DocumentationPartIds')
@@ -311,6 +313,12 @@ module Aws::APIGateway
     BasePathMappings.add_member(:items, Shapes::ShapeRef.new(shape: ListOfBasePathMapping, location_name: "item"))
     BasePathMappings.struct_class = Types::BasePathMappings
 
+    CanarySettings.add_member(:percent_traffic, Shapes::ShapeRef.new(shape: Double, location_name: "percentTraffic"))
+    CanarySettings.add_member(:deployment_id, Shapes::ShapeRef.new(shape: String, location_name: "deploymentId"))
+    CanarySettings.add_member(:stage_variable_overrides, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "stageVariableOverrides"))
+    CanarySettings.add_member(:use_stage_cache, Shapes::ShapeRef.new(shape: Boolean, location_name: "useStageCache"))
+    CanarySettings.struct_class = Types::CanarySettings
+
     ClientCertificate.add_member(:client_certificate_id, Shapes::ShapeRef.new(shape: String, location_name: "clientCertificateId"))
     ClientCertificate.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ClientCertificate.add_member(:pem_encoded_certificate, Shapes::ShapeRef.new(shape: String, location_name: "pemEncodedCertificate"))
@@ -356,6 +364,7 @@ module Aws::APIGateway
     CreateDeploymentRequest.add_member(:cache_cluster_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "cacheClusterEnabled"))
     CreateDeploymentRequest.add_member(:cache_cluster_size, Shapes::ShapeRef.new(shape: CacheClusterSize, location_name: "cacheClusterSize"))
     CreateDeploymentRequest.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
+    CreateDeploymentRequest.add_member(:canary_settings, Shapes::ShapeRef.new(shape: DeploymentCanarySettings, location_name: "canarySettings"))
     CreateDeploymentRequest.struct_class = Types::CreateDeploymentRequest
 
     CreateDocumentationPartRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -414,6 +423,7 @@ module Aws::APIGateway
     CreateStageRequest.add_member(:cache_cluster_size, Shapes::ShapeRef.new(shape: CacheClusterSize, location_name: "cacheClusterSize"))
     CreateStageRequest.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
     CreateStageRequest.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, location_name: "documentationVersion"))
+    CreateStageRequest.add_member(:canary_settings, Shapes::ShapeRef.new(shape: CanarySettings, location_name: "canarySettings"))
     CreateStageRequest.struct_class = Types::CreateStageRequest
 
     CreateUsagePlanKeyRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
@@ -514,6 +524,11 @@ module Aws::APIGateway
     Deployment.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     Deployment.add_member(:api_summary, Shapes::ShapeRef.new(shape: PathToMapOfMethodSnapshot, location_name: "apiSummary"))
     Deployment.struct_class = Types::Deployment
+
+    DeploymentCanarySettings.add_member(:percent_traffic, Shapes::ShapeRef.new(shape: Double, location_name: "percentTraffic"))
+    DeploymentCanarySettings.add_member(:stage_variable_overrides, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "stageVariableOverrides"))
+    DeploymentCanarySettings.add_member(:use_stage_cache, Shapes::ShapeRef.new(shape: Boolean, location_name: "useStageCache"))
+    DeploymentCanarySettings.struct_class = Types::DeploymentCanarySettings
 
     Deployments.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
     Deployments.add_member(:items, Shapes::ShapeRef.new(shape: ListOfDeployment, location_name: "item"))
@@ -1115,6 +1130,7 @@ module Aws::APIGateway
     Stage.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
     Stage.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, location_name: "documentationVersion"))
     Stage.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AccessLogSettings, location_name: "accessLogSettings"))
+    Stage.add_member(:canary_settings, Shapes::ShapeRef.new(shape: CanarySettings, location_name: "canarySettings"))
     Stage.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     Stage.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
     Stage.struct_class = Types::Stage

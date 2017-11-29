@@ -11,6 +11,9 @@
   "AppStream": {
     "models": "appstream/2016-12-01"
   },
+  "AppSync": {
+    "models": "appsync/2017-07-25"
+  },
   "ApplicationAutoScaling": {
     "models": "application-autoscaling/2016-02-06",
     "partitionsKey": "application-autoscaling"
@@ -193,6 +196,9 @@
   "Greengrass": {
     "models": "greengrass/2017-06-07"
   },
+  "GuardDuty": {
+    "models": "guardduty/2017-11-28"
+  },
   "Health": {
     "models": "health/2016-08-04"
   },
@@ -235,6 +241,9 @@
   },
   "Lightsail": {
     "models": "lightsail/2016-11-28"
+  },
+  "MQ": {
+    "models": "mq/2017-11-27"
   },
   "MTurk": {
     "models": "mturk-requester/2017-01-17"

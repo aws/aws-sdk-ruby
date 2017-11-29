@@ -8,6 +8,72 @@
 module Aws::Batch
   module Types
 
+    # An object representing an AWS Batch array job.
+    #
+    # @note When making an API call, you may pass ArrayProperties
+    #   data as a hash:
+    #
+    #       {
+    #         size: 1,
+    #       }
+    #
+    # @!attribute [rw] size
+    #   The size of the array job.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayProperties AWS API Documentation
+    #
+    class ArrayProperties < Struct.new(
+      :size)
+      include Aws::Structure
+    end
+
+    # An object representing the array properties of a job.
+    #
+    # @!attribute [rw] status_summary
+    #   A summary of the number of array job children in each available job
+    #   status. This parameter is returned for parent array jobs.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] size
+    #   The size of the array job. This parameter is returned for parent
+    #   array jobs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] index
+    #   The job index within the array that is associated with this job.
+    #   This parameter is returned for array job children.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayPropertiesDetail AWS API Documentation
+    #
+    class ArrayPropertiesDetail < Struct.new(
+      :status_summary,
+      :size,
+      :index)
+      include Aws::Structure
+    end
+
+    # An object representing the array properties of a job.
+    #
+    # @!attribute [rw] size
+    #   The size of the array job. This parameter is returned for parent
+    #   array jobs.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] index
+    #   The job index within the array that is associated with this job.
+    #   This parameter is returned for children of array jobs.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayPropertiesSummary AWS API Documentation
+    #
+    class ArrayPropertiesSummary < Struct.new(
+      :size,
+      :index)
+      include Aws::Structure
+    end
+
     # An object representing the details of a container that is part of a
     # job attempt.
     #
@@ -57,13 +123,15 @@ module Aws::Batch
     #   @return [Types::AttemptContainerDetail]
     #
     # @!attribute [rw] started_at
-    #   The Unix timestamp for when the attempt was started (when the task
-    #   transitioned from the `PENDING` state to the `RUNNING` state).
+    #   The Unix time stamp for when the attempt was started (when the
+    #   attempt transitioned from the `STARTING` state to the `RUNNING`
+    #   state).
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_at
-    #   The Unix timestamp for when the attempt was stopped (when the task
-    #   transitioned from the `RUNNING` state to the `STOPPED` state).
+    #   The Unix time stamp for when the attempt was stopped (when the
+    #   attempt transitioned from the `RUNNING` state to a terminal state,
+    #   such as `SUCCEEDED` or `FAILED`).
     #   @return [Integer]
     #
     # @!attribute [rw] status_reason
@@ -95,7 +163,7 @@ module Aws::Batch
     #
     # @!attribute [rw] reason
     #   A message to attach to the job that explains the reason for
-    #   cancelling it. This message is returned by future DescribeJobs
+    #   canceling it. This message is returned by future DescribeJobs
     #   operations on the job. This message is also recorded in the AWS
     #   Batch activity logs.
     #   @return [String]
@@ -599,7 +667,7 @@ module Aws::Batch
     #   to `CpuShares` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cpu-shares` option to [docker run][3].
     #   Each vCPU is equivalent to 1,024 CPU shares. You must specify at
-    #   least 1 vCPU.
+    #   least one vCPU.
     #
     #
     #
@@ -652,7 +720,7 @@ module Aws::Batch
     #   maps to `Env` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--env` option to [docker run][3].
     #
-    #   We do not recommend using plain text environment variables for
+    #   We do not recommend using plaintext environment variables for
     #   sensitive information, such as credential data.
     #
     #   <note markdown="1"> Environment variables must not start with `AWS_BATCH`; this naming
@@ -745,6 +813,25 @@ module Aws::Batch
       :privileged,
       :ulimits,
       :user)
+      include Aws::Structure
+    end
+
+    # An object representing summary details of a container within a job.
+    #
+    # @!attribute [rw] exit_code
+    #   The exit code to return upon completion.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reason
+    #   A short (255 max characters) human-readable string to provide
+    #   additional details about a running or stopped container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerSummary AWS API Documentation
+    #
+    class ContainerSummary < Struct.new(
+      :exit_code,
+      :reason)
       include Aws::Structure
     end
 
@@ -878,8 +965,8 @@ module Aws::Batch
     #   order relative to each other. The job scheduler uses this parameter
     #   to determine which compute environment should execute a given job.
     #   Compute environments must be in the `VALID` state before you can
-    #   associate them with a job queue. You can associate up to 3 compute
-    #   environments with a job queue.
+    #   associate them with a job queue. You can associate up to three
+    #   compute environments with a job queue.
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueRequest AWS API Documentation
@@ -1318,16 +1405,22 @@ module Aws::Batch
     #
     #       {
     #         job_id: "String",
+    #         type: "N_TO_N", # accepts N_TO_N, SEQUENTIAL
     #       }
     #
     # @!attribute [rw] job_id
     #   The job ID of the AWS Batch job associated with this dependency.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the job dependency.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDependency AWS API Documentation
     #
     class JobDependency < Struct.new(
-      :job_id)
+      :job_id,
+      :type)
       include Aws::Structure
     end
 
@@ -1360,8 +1453,11 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix timestamp for when the job was created (when the task
-    #   entered the `PENDING` state).
+    #   The Unix time stamp for when the job was created. For non-array jobs
+    #   and parent array jobs, this is when the job entered the `SUBMITTED`
+    #   state (at the time SubmitJob was called). For array child jobs, this
+    #   is when the child job was spawned by its parent and entered the
+    #   `PENDING` state.
     #   @return [Integer]
     #
     # @!attribute [rw] retry_strategy
@@ -1369,13 +1465,14 @@ module Aws::Batch
     #   @return [Types::RetryStrategy]
     #
     # @!attribute [rw] started_at
-    #   The Unix timestamp for when the job was started (when the task
-    #   transitioned from the `PENDING` state to the `RUNNING` state).
+    #   The Unix time stamp for when the job was started (when the job
+    #   transitioned from the `STARTING` state to the `RUNNING` state).
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_at
-    #   The Unix timestamp for when the job was stopped (when the task
-    #   transitioned from the `RUNNING` state to the `STOPPED` state).
+    #   The Unix time stamp for when the job was stopped (when the job
+    #   transitioned from the `RUNNING` state to a terminal state, such as
+    #   `SUCCEEDED` or `FAILED`).
     #   @return [Integer]
     #
     # @!attribute [rw] depends_on
@@ -1397,6 +1494,10 @@ module Aws::Batch
     #   associated with the job.
     #   @return [Types::ContainerDetail]
     #
+    # @!attribute [rw] array_properties
+    #   The array properties of the job, if it is an array job.
+    #   @return [Types::ArrayPropertiesDetail]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDetail AWS API Documentation
     #
     class JobDetail < Struct.new(
@@ -1413,7 +1514,8 @@ module Aws::Batch
       :depends_on,
       :job_definition,
       :parameters,
-      :container)
+      :container,
+      :array_properties)
       include Aws::Structure
     end
 
@@ -1473,11 +1575,55 @@ module Aws::Batch
     #   The name of the job.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The Unix time stamp for when the job was created. For non-array jobs
+    #   and parent array jobs, this is when the job entered the `SUBMITTED`
+    #   state (at the time SubmitJob was called). For array child jobs, this
+    #   is when the child job was spawned by its parent and entered the
+    #   `PENDING` state.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The current status for the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   A short, human-readable string to provide additional details about
+    #   the current status of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The Unix time stamp for when the job was started (when the job
+    #   transitioned from the `STARTING` state to the `RUNNING` state).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stopped_at
+    #   The Unix time stamp for when the job was stopped (when the job
+    #   transitioned from the `RUNNING` state to a terminal state, such as
+    #   `SUCCEEDED` or `FAILED`).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container
+    #   An object representing the details of the container that is
+    #   associated with the job.
+    #   @return [Types::ContainerSummary]
+    #
+    # @!attribute [rw] array_properties
+    #   The array properties of the job, if it is an array job.
+    #   @return [Types::ArrayPropertiesSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobSummary AWS API Documentation
     #
     class JobSummary < Struct.new(
       :job_id,
-      :job_name)
+      :job_name,
+      :created_at,
+      :status,
+      :status_reason,
+      :started_at,
+      :stopped_at,
+      :container,
+      :array_properties)
       include Aws::Structure
     end
 
@@ -1492,12 +1638,12 @@ module Aws::Batch
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the key value pair. For environment variables, this is
+    #   The name of the key-value pair. For environment variables, this is
     #   the name of the environment variable.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the key value pair. For environment variables, this is
+    #   The value of the key-value pair. For environment variables, this is
     #   the value of the environment variable.
     #   @return [String]
     #
@@ -1513,7 +1659,8 @@ module Aws::Batch
     #   data as a hash:
     #
     #       {
-    #         job_queue: "String", # required
+    #         job_queue: "String",
+    #         array_job_id: "String",
     #         job_status: "SUBMITTED", # accepts SUBMITTED, PENDING, RUNNABLE, STARTING, RUNNING, SUCCEEDED, FAILED
     #         max_results: 1,
     #         next_token: "String",
@@ -1522,6 +1669,11 @@ module Aws::Batch
     # @!attribute [rw] job_queue
     #   The name or full Amazon Resource Name (ARN) of the job queue with
     #   which to list jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] array_job_id
+    #   The job ID for an array job. Specifying an array job ID with this
+    #   parameter lists all child jobs from within the specified array.
     #   @return [String]
     #
     # @!attribute [rw] job_status
@@ -1558,6 +1710,7 @@ module Aws::Batch
     #
     class ListJobsRequest < Struct.new(
       :job_queue,
+      :array_job_id,
       :job_status,
       :max_results,
       :next_token)
@@ -1741,9 +1894,9 @@ module Aws::Batch
     #
     # @!attribute [rw] attempts
     #   The number of times to move a job to the `RUNNABLE` status. You may
-    #   specify between 1 and 10 attempts. If `attempts` is greater than
-    #   one, the job is retried if it fails until it has moved to `RUNNABLE`
-    #   that many times.
+    #   specify between 1 and 10 attempts. If the value of `attempts` is
+    #   greater than one, the job is retried if it fails until it has moved
+    #   to `RUNNABLE` that many times.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RetryStrategy AWS API Documentation
@@ -1759,9 +1912,13 @@ module Aws::Batch
     #       {
     #         job_name: "String", # required
     #         job_queue: "String", # required
+    #         array_properties: {
+    #           size: 1,
+    #         },
     #         depends_on: [
     #           {
     #             job_id: "String",
+    #             type: "N_TO_N", # accepts N_TO_N, SEQUENTIAL
     #           },
     #         ],
     #         job_definition: "String", # required
@@ -1791,13 +1948,29 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] job_queue
-    #   The job queue into which the job will be submitted. You can specify
+    #   The job queue into which the job is submitted. You can specify
     #   either the name or the Amazon Resource Name (ARN) of the queue.
     #   @return [String]
     #
+    # @!attribute [rw] array_properties
+    #   The array properties for the submitted job, such as the size of the
+    #   array. The array size can be between 2 and 10,000. If you specify
+    #   array properties for a job, it becomes an array job. For more
+    #   information, see [Array Jobs][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html
+    #   @return [Types::ArrayProperties]
+    #
     # @!attribute [rw] depends_on
-    #   A list of job IDs on which this job depends. A job can depend upon a
-    #   maximum of 20 jobs.
+    #   A list of dependencies for the job. A job can depend upon a maximum
+    #   of 20 jobs. You can specify a `SEQUENTIAL` type dependency without
+    #   specifying a job ID for array jobs so that each child array job
+    #   completes sequentially, starting at index 0. You can also specify an
+    #   `N_TO_N` type dependency with a job ID for array jobs so that each
+    #   index child of this job must wait for the corresponding index child
+    #   of each dependency to complete before it can begin.
     #   @return [Array<Types::JobDependency>]
     #
     # @!attribute [rw] job_definition
@@ -1836,6 +2009,7 @@ module Aws::Batch
     class SubmitJobRequest < Struct.new(
       :job_name,
       :job_queue,
+      :array_properties,
       :depends_on,
       :job_definition,
       :parameters,
@@ -1874,7 +2048,7 @@ module Aws::Batch
     #
     # @!attribute [rw] reason
     #   A message to attach to the job that explains the reason for
-    #   cancelling it. This message is returned by future DescribeJobs
+    #   canceling it. This message is returned by future DescribeJobs
     #   operations on the job. This message is also recorded in the AWS
     #   Batch activity logs.
     #   @return [String]
@@ -2078,7 +2252,7 @@ module Aws::Batch
     #   The contents of the `host` parameter determine whether your data
     #   volume persists on the host container instance and where it is
     #   stored. If the host parameter is empty, then the Docker daemon
-    #   assigns a host path for your data volume, but the data is not
+    #   assigns a host path for your data volume. However, the data is not
     #   guaranteed to persist after the containers associated with it stop
     #   running.
     #   @return [Types::Host]

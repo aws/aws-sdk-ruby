@@ -211,17 +211,21 @@ module Aws::CodeDeploy
     #     application_name: "ApplicationName", # required
     #     revisions: [ # required
     #       {
-    #         revision_type: "S3", # accepts S3, GitHub
+    #         revision_type: "S3", # accepts S3, GitHub, String
     #         s3_location: {
     #           bucket: "S3Bucket",
     #           key: "S3Key",
-    #           bundle_type: "tar", # accepts tar, tgz, zip
+    #           bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #           version: "VersionId",
     #           e_tag: "ETag",
     #         },
     #         git_hub_location: {
     #           repository: "Repository",
     #           commit_id: "CommitId",
+    #         },
+    #         string: {
+    #           content: "RawStringContent",
+    #           sha256: "RawStringSha256",
     #         },
     #       },
     #     ],
@@ -232,14 +236,16 @@ module Aws::CodeDeploy
     #   resp.application_name #=> String
     #   resp.error_message #=> String
     #   resp.revisions #=> Array
-    #   resp.revisions[0].revision_location.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.revisions[0].revision_location.revision_type #=> String, one of "S3", "GitHub", "String"
     #   resp.revisions[0].revision_location.s3_location.bucket #=> String
     #   resp.revisions[0].revision_location.s3_location.key #=> String
-    #   resp.revisions[0].revision_location.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.revisions[0].revision_location.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
     #   resp.revisions[0].revision_location.s3_location.version #=> String
     #   resp.revisions[0].revision_location.s3_location.e_tag #=> String
     #   resp.revisions[0].revision_location.git_hub_location.repository #=> String
     #   resp.revisions[0].revision_location.git_hub_location.commit_id #=> String
+    #   resp.revisions[0].revision_location.string.content #=> String
+    #   resp.revisions[0].revision_location.string.sha256 #=> String
     #   resp.revisions[0].generic_revision_info.description #=> String
     #   resp.revisions[0].generic_revision_info.deployment_groups #=> Array
     #   resp.revisions[0].generic_revision_info.deployment_groups[0] #=> String
@@ -258,7 +264,7 @@ module Aws::CodeDeploy
 
     # Gets information about one or more applications.
     #
-    # @option params [Array<String>] :application_names
+    # @option params [required, Array<String>] :application_names
     #   A list of application names separated by spaces.
     #
     # @return [Types::BatchGetApplicationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -268,7 +274,7 @@ module Aws::CodeDeploy
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_get_applications({
-    #     application_names: ["ApplicationName"],
+    #     application_names: ["ApplicationName"], # required
     #   })
     #
     # @example Response structure
@@ -279,6 +285,7 @@ module Aws::CodeDeploy
     #   resp.applications_info[0].create_time #=> Time
     #   resp.applications_info[0].linked_to_git_hub #=> Boolean
     #   resp.applications_info[0].git_hub_account_name #=> String
+    #   resp.applications_info[0].compute_platform #=> String, one of "Server", "Lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications AWS API Documentation
     #
@@ -329,14 +336,16 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].auto_scaling_groups[0].name #=> String
     #   resp.deployment_groups_info[0].auto_scaling_groups[0].hook #=> String
     #   resp.deployment_groups_info[0].service_role_arn #=> String
-    #   resp.deployment_groups_info[0].target_revision.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.deployment_groups_info[0].target_revision.revision_type #=> String, one of "S3", "GitHub", "String"
     #   resp.deployment_groups_info[0].target_revision.s3_location.bucket #=> String
     #   resp.deployment_groups_info[0].target_revision.s3_location.key #=> String
-    #   resp.deployment_groups_info[0].target_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.deployment_groups_info[0].target_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
     #   resp.deployment_groups_info[0].target_revision.s3_location.version #=> String
     #   resp.deployment_groups_info[0].target_revision.s3_location.e_tag #=> String
     #   resp.deployment_groups_info[0].target_revision.git_hub_location.repository #=> String
     #   resp.deployment_groups_info[0].target_revision.git_hub_location.commit_id #=> String
+    #   resp.deployment_groups_info[0].target_revision.string.content #=> String
+    #   resp.deployment_groups_info[0].target_revision.string.sha256 #=> String
     #   resp.deployment_groups_info[0].trigger_configurations #=> Array
     #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_name #=> String
     #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_target_arn #=> String
@@ -378,6 +387,7 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0][0].key #=> String
     #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0][0].value #=> String
     #   resp.deployment_groups_info[0].on_premises_tag_set.on_premises_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
+    #   resp.deployment_groups_info[0].compute_platform #=> String, one of "Server", "Lambda"
     #   resp.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups AWS API Documentation
@@ -440,7 +450,7 @@ module Aws::CodeDeploy
 
     # Gets information about one or more deployments.
     #
-    # @option params [Array<String>] :deployment_ids
+    # @option params [required, Array<String>] :deployment_ids
     #   A list of deployment IDs, separated by spaces.
     #
     # @return [Types::BatchGetDeploymentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -450,7 +460,7 @@ module Aws::CodeDeploy
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_get_deployments({
-    #     deployment_ids: ["DeploymentId"],
+    #     deployment_ids: ["DeploymentId"], # required
     #   })
     #
     # @example Response structure
@@ -460,24 +470,28 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].deployment_group_name #=> String
     #   resp.deployments_info[0].deployment_config_name #=> String
     #   resp.deployments_info[0].deployment_id #=> String
-    #   resp.deployments_info[0].previous_revision.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.deployments_info[0].previous_revision.revision_type #=> String, one of "S3", "GitHub", "String"
     #   resp.deployments_info[0].previous_revision.s3_location.bucket #=> String
     #   resp.deployments_info[0].previous_revision.s3_location.key #=> String
-    #   resp.deployments_info[0].previous_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.deployments_info[0].previous_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
     #   resp.deployments_info[0].previous_revision.s3_location.version #=> String
     #   resp.deployments_info[0].previous_revision.s3_location.e_tag #=> String
     #   resp.deployments_info[0].previous_revision.git_hub_location.repository #=> String
     #   resp.deployments_info[0].previous_revision.git_hub_location.commit_id #=> String
-    #   resp.deployments_info[0].revision.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.deployments_info[0].previous_revision.string.content #=> String
+    #   resp.deployments_info[0].previous_revision.string.sha256 #=> String
+    #   resp.deployments_info[0].revision.revision_type #=> String, one of "S3", "GitHub", "String"
     #   resp.deployments_info[0].revision.s3_location.bucket #=> String
     #   resp.deployments_info[0].revision.s3_location.key #=> String
-    #   resp.deployments_info[0].revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.deployments_info[0].revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
     #   resp.deployments_info[0].revision.s3_location.version #=> String
     #   resp.deployments_info[0].revision.s3_location.e_tag #=> String
     #   resp.deployments_info[0].revision.git_hub_location.repository #=> String
     #   resp.deployments_info[0].revision.git_hub_location.commit_id #=> String
+    #   resp.deployments_info[0].revision.string.content #=> String
+    #   resp.deployments_info[0].revision.string.sha256 #=> String
     #   resp.deployments_info[0].status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
-    #   resp.deployments_info[0].error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP"
+    #   resp.deployments_info[0].error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "HOOK_EXECUTION_FAILURE"
     #   resp.deployments_info[0].error_information.message #=> String
     #   resp.deployments_info[0].create_time #=> Time
     #   resp.deployments_info[0].start_time #=> Time
@@ -523,6 +537,9 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].load_balancer_info.target_group_info_list[0].name #=> String
     #   resp.deployments_info[0].additional_deployment_status_info #=> String
     #   resp.deployments_info[0].file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
+    #   resp.deployments_info[0].deployment_status_messages #=> Array
+    #   resp.deployments_info[0].deployment_status_messages[0] #=> String
+    #   resp.deployments_info[0].compute_platform #=> String, one of "Server", "Lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments AWS API Documentation
     #
@@ -535,7 +552,7 @@ module Aws::CodeDeploy
 
     # Gets information about one or more on-premises instances.
     #
-    # @option params [Array<String>] :instance_names
+    # @option params [required, Array<String>] :instance_names
     #   The names of the on-premises instances about which to get information.
     #
     # @return [Types::BatchGetOnPremisesInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -545,7 +562,7 @@ module Aws::CodeDeploy
     # @example Request syntax with placeholder values
     #
     #   resp = client.batch_get_on_premises_instances({
-    #     instance_names: ["InstanceName"],
+    #     instance_names: ["InstanceName"], # required
     #   })
     #
     # @example Response structure
@@ -604,6 +621,10 @@ module Aws::CodeDeploy
     #   The name of the application. This name must be unique with the
     #   applicable IAM user or AWS account.
     #
+    # @option params [String] :compute_platform
+    #   The destination platform type for the deployment `Lambda` or
+    #   `Server`).
+    #
     # @return [Types::CreateApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationOutput#application_id #application_id} => String
@@ -612,6 +633,7 @@ module Aws::CodeDeploy
     #
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
+    #     compute_platform: "Server", # accepts Server, Lambda
     #   })
     #
     # @example Response structure
@@ -702,17 +724,21 @@ module Aws::CodeDeploy
     #     application_name: "ApplicationName", # required
     #     deployment_group_name: "DeploymentGroupName",
     #     revision: {
-    #       revision_type: "S3", # accepts S3, GitHub
+    #       revision_type: "S3", # accepts S3, GitHub, String
     #       s3_location: {
     #         bucket: "S3Bucket",
     #         key: "S3Key",
-    #         bundle_type: "tar", # accepts tar, tgz, zip
+    #         bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #         version: "VersionId",
     #         e_tag: "ETag",
     #       },
     #       git_hub_location: {
     #         repository: "Repository",
     #         commit_id: "CommitId",
+    #       },
+    #       string: {
+    #         content: "RawStringContent",
+    #         sha256: "RawStringSha256",
     #       },
     #     },
     #     deployment_config_name: "DeploymentConfigName",
@@ -786,6 +812,14 @@ module Aws::CodeDeploy
     #   For example, to set a minimum of 95% healthy instance, specify a type
     #   of FLEET\_PERCENT and a value of 95.
     #
+    # @option params [Types::TrafficRoutingConfig] :traffic_routing_config
+    #   The configuration specifying how the deployment traffic will be
+    #   routed.
+    #
+    # @option params [String] :compute_platform
+    #   The destination platform type for the deployment (`Lambda` or
+    #   `Server`&gt;).
+    #
     # @return [Types::CreateDeploymentConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeploymentConfigOutput#deployment_config_id #deployment_config_id} => String
@@ -798,6 +832,18 @@ module Aws::CodeDeploy
     #       value: 1,
     #       type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
     #     },
+    #     traffic_routing_config: {
+    #       type: "TimeBasedCanary", # accepts TimeBasedCanary, TimeBasedLinear, AllAtOnce
+    #       time_based_canary: {
+    #         canary_percentage: 1,
+    #         canary_interval: 1,
+    #       },
+    #       time_based_linear: {
+    #         linear_percentage: 1,
+    #         linear_interval: 1,
+    #       },
+    #     },
+    #     compute_platform: "Server", # accepts Server, Lambda
     #   })
     #
     # @example Response structure
@@ -1142,6 +1188,7 @@ module Aws::CodeDeploy
     #   resp.application.create_time #=> Time
     #   resp.application.linked_to_git_hub #=> Boolean
     #   resp.application.git_hub_account_name #=> String
+    #   resp.application.compute_platform #=> String, one of "Server", "Lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication AWS API Documentation
     #
@@ -1172,11 +1219,11 @@ module Aws::CodeDeploy
     #   resp = client.get_application_revision({
     #     application_name: "ApplicationName", # required
     #     revision: { # required
-    #       revision_type: "S3", # accepts S3, GitHub
+    #       revision_type: "S3", # accepts S3, GitHub, String
     #       s3_location: {
     #         bucket: "S3Bucket",
     #         key: "S3Key",
-    #         bundle_type: "tar", # accepts tar, tgz, zip
+    #         bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #         version: "VersionId",
     #         e_tag: "ETag",
     #       },
@@ -1184,20 +1231,26 @@ module Aws::CodeDeploy
     #         repository: "Repository",
     #         commit_id: "CommitId",
     #       },
+    #       string: {
+    #         content: "RawStringContent",
+    #         sha256: "RawStringSha256",
+    #       },
     #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.application_name #=> String
-    #   resp.revision.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.revision.revision_type #=> String, one of "S3", "GitHub", "String"
     #   resp.revision.s3_location.bucket #=> String
     #   resp.revision.s3_location.key #=> String
-    #   resp.revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
     #   resp.revision.s3_location.version #=> String
     #   resp.revision.s3_location.e_tag #=> String
     #   resp.revision.git_hub_location.repository #=> String
     #   resp.revision.git_hub_location.commit_id #=> String
+    #   resp.revision.string.content #=> String
+    #   resp.revision.string.sha256 #=> String
     #   resp.revision_info.description #=> String
     #   resp.revision_info.deployment_groups #=> Array
     #   resp.revision_info.deployment_groups[0] #=> String
@@ -1236,24 +1289,28 @@ module Aws::CodeDeploy
     #   resp.deployment_info.deployment_group_name #=> String
     #   resp.deployment_info.deployment_config_name #=> String
     #   resp.deployment_info.deployment_id #=> String
-    #   resp.deployment_info.previous_revision.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.deployment_info.previous_revision.revision_type #=> String, one of "S3", "GitHub", "String"
     #   resp.deployment_info.previous_revision.s3_location.bucket #=> String
     #   resp.deployment_info.previous_revision.s3_location.key #=> String
-    #   resp.deployment_info.previous_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.deployment_info.previous_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
     #   resp.deployment_info.previous_revision.s3_location.version #=> String
     #   resp.deployment_info.previous_revision.s3_location.e_tag #=> String
     #   resp.deployment_info.previous_revision.git_hub_location.repository #=> String
     #   resp.deployment_info.previous_revision.git_hub_location.commit_id #=> String
-    #   resp.deployment_info.revision.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.deployment_info.previous_revision.string.content #=> String
+    #   resp.deployment_info.previous_revision.string.sha256 #=> String
+    #   resp.deployment_info.revision.revision_type #=> String, one of "S3", "GitHub", "String"
     #   resp.deployment_info.revision.s3_location.bucket #=> String
     #   resp.deployment_info.revision.s3_location.key #=> String
-    #   resp.deployment_info.revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.deployment_info.revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
     #   resp.deployment_info.revision.s3_location.version #=> String
     #   resp.deployment_info.revision.s3_location.e_tag #=> String
     #   resp.deployment_info.revision.git_hub_location.repository #=> String
     #   resp.deployment_info.revision.git_hub_location.commit_id #=> String
+    #   resp.deployment_info.revision.string.content #=> String
+    #   resp.deployment_info.revision.string.sha256 #=> String
     #   resp.deployment_info.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
-    #   resp.deployment_info.error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP"
+    #   resp.deployment_info.error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP", "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION", "MISSING_ELB_INFORMATION", "MISSING_GITHUB_TOKEN", "ELASTIC_LOAD_BALANCING_INVALID", "ELB_INVALID_INSTANCE", "INVALID_LAMBDA_CONFIGURATION", "INVALID_LAMBDA_FUNCTION", "HOOK_EXECUTION_FAILURE"
     #   resp.deployment_info.error_information.message #=> String
     #   resp.deployment_info.create_time #=> Time
     #   resp.deployment_info.start_time #=> Time
@@ -1299,6 +1356,9 @@ module Aws::CodeDeploy
     #   resp.deployment_info.load_balancer_info.target_group_info_list[0].name #=> String
     #   resp.deployment_info.additional_deployment_status_info #=> String
     #   resp.deployment_info.file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
+    #   resp.deployment_info.deployment_status_messages #=> Array
+    #   resp.deployment_info.deployment_status_messages[0] #=> String
+    #   resp.deployment_info.compute_platform #=> String, one of "Server", "Lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment AWS API Documentation
     #
@@ -1332,6 +1392,12 @@ module Aws::CodeDeploy
     #   resp.deployment_config_info.minimum_healthy_hosts.value #=> Integer
     #   resp.deployment_config_info.minimum_healthy_hosts.type #=> String, one of "HOST_COUNT", "FLEET_PERCENT"
     #   resp.deployment_config_info.create_time #=> Time
+    #   resp.deployment_config_info.compute_platform #=> String, one of "Server", "Lambda"
+    #   resp.deployment_config_info.traffic_routing_config.type #=> String, one of "TimeBasedCanary", "TimeBasedLinear", "AllAtOnce"
+    #   resp.deployment_config_info.traffic_routing_config.time_based_canary.canary_percentage #=> Integer
+    #   resp.deployment_config_info.traffic_routing_config.time_based_canary.canary_interval #=> Integer
+    #   resp.deployment_config_info.traffic_routing_config.time_based_linear.linear_percentage #=> Integer
+    #   resp.deployment_config_info.traffic_routing_config.time_based_linear.linear_interval #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfig AWS API Documentation
     #
@@ -1381,14 +1447,16 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.auto_scaling_groups[0].name #=> String
     #   resp.deployment_group_info.auto_scaling_groups[0].hook #=> String
     #   resp.deployment_group_info.service_role_arn #=> String
-    #   resp.deployment_group_info.target_revision.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.deployment_group_info.target_revision.revision_type #=> String, one of "S3", "GitHub", "String"
     #   resp.deployment_group_info.target_revision.s3_location.bucket #=> String
     #   resp.deployment_group_info.target_revision.s3_location.key #=> String
-    #   resp.deployment_group_info.target_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.deployment_group_info.target_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
     #   resp.deployment_group_info.target_revision.s3_location.version #=> String
     #   resp.deployment_group_info.target_revision.s3_location.e_tag #=> String
     #   resp.deployment_group_info.target_revision.git_hub_location.repository #=> String
     #   resp.deployment_group_info.target_revision.git_hub_location.commit_id #=> String
+    #   resp.deployment_group_info.target_revision.string.content #=> String
+    #   resp.deployment_group_info.target_revision.string.sha256 #=> String
     #   resp.deployment_group_info.trigger_configurations #=> Array
     #   resp.deployment_group_info.trigger_configurations[0].trigger_name #=> String
     #   resp.deployment_group_info.trigger_configurations[0].trigger_target_arn #=> String
@@ -1430,6 +1498,7 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0][0].key #=> String
     #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0][0].value #=> String
     #   resp.deployment_group_info.on_premises_tag_set.on_premises_tag_set_list[0][0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
+    #   resp.deployment_group_info.compute_platform #=> String, one of "Server", "Lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup AWS API Documentation
     #
@@ -1599,14 +1668,16 @@ module Aws::CodeDeploy
     # @example Response structure
     #
     #   resp.revisions #=> Array
-    #   resp.revisions[0].revision_type #=> String, one of "S3", "GitHub"
+    #   resp.revisions[0].revision_type #=> String, one of "S3", "GitHub", "String"
     #   resp.revisions[0].s3_location.bucket #=> String
     #   resp.revisions[0].s3_location.key #=> String
-    #   resp.revisions[0].s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.revisions[0].s3_location.bundle_type #=> String, one of "tar", "tgz", "zip", "YAML", "JSON"
     #   resp.revisions[0].s3_location.version #=> String
     #   resp.revisions[0].s3_location.e_tag #=> String
     #   resp.revisions[0].git_hub_location.repository #=> String
     #   resp.revisions[0].git_hub_location.commit_id #=> String
+    #   resp.revisions[0].string.content #=> String
+    #   resp.revisions[0].string.sha256 #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions AWS API Documentation
@@ -1947,6 +2018,48 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
+    # Sets the result of a Lambda validation function. The function
+    # validates one or both lifecycle events (`BeforeAllowTraffic` and
+    # `AfterAllowTraffic`) and returns `Succeeded` or `Failed`.
+    #
+    # @option params [String] :deployment_id
+    #   The ID of the deployment. Pass this ID to a Lambda function that
+    #   validates a deployment lifecycle event.
+    #
+    # @option params [String] :lifecycle_event_hook_execution_id
+    #   The execution ID of a deployment's lifecycle hook. A deployment
+    #   lifecycle hook is specified in the `hooks` section of the AppSpec
+    #   file.
+    #
+    # @option params [String] :status
+    #   The result of a Lambda function that validates a deployment lifecycle
+    #   event (`Succeeded` or `Failed`).
+    #
+    # @return [Types::PutLifecycleEventHookExecutionStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutLifecycleEventHookExecutionStatusOutput#lifecycle_event_hook_execution_id #lifecycle_event_hook_execution_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_lifecycle_event_hook_execution_status({
+    #     deployment_id: "DeploymentId",
+    #     lifecycle_event_hook_execution_id: "LifecycleEventHookExecutionId",
+    #     status: "Pending", # accepts Pending, InProgress, Succeeded, Failed, Skipped, Unknown
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lifecycle_event_hook_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatus AWS API Documentation
+    #
+    # @overload put_lifecycle_event_hook_execution_status(params = {})
+    # @param [Hash] params ({})
+    def put_lifecycle_event_hook_execution_status(params = {}, options = {})
+      req = build_request(:put_lifecycle_event_hook_execution_status, params)
+      req.send_request(options)
+    end
+
     # Registers with AWS CodeDeploy a revision for the specified
     # application.
     #
@@ -1969,17 +2082,21 @@ module Aws::CodeDeploy
     #     application_name: "ApplicationName", # required
     #     description: "Description",
     #     revision: { # required
-    #       revision_type: "S3", # accepts S3, GitHub
+    #       revision_type: "S3", # accepts S3, GitHub, String
     #       s3_location: {
     #         bucket: "S3Bucket",
     #         key: "S3Key",
-    #         bundle_type: "tar", # accepts tar, tgz, zip
+    #         bundle_type: "tar", # accepts tar, tgz, zip, YAML, JSON
     #         version: "VersionId",
     #         e_tag: "ETag",
     #       },
     #       git_hub_location: {
     #         repository: "Repository",
     #         commit_id: "CommitId",
+    #       },
+    #       string: {
+    #         content: "RawStringContent",
+    #         sha256: "RawStringSha256",
     #       },
     #     },
     #   })
@@ -2347,7 +2464,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

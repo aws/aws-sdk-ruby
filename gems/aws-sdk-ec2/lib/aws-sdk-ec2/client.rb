@@ -196,6 +196,49 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Accepts one or more interface VPC endpoint connection requests to your
+    # VPC endpoint service.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :service_id
+    #   The ID of the endpoint service.
+    #
+    # @option params [required, Array<String>] :vpc_endpoint_ids
+    #   The IDs of one or more interface VPC endpoints.
+    #
+    # @return [Types::AcceptVpcEndpointConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptVpcEndpointConnectionsResult#unsuccessful #unsuccessful} => Array&lt;Types::UnsuccessfulItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_vpc_endpoint_connections({
+    #     dry_run: false,
+    #     service_id: "String", # required
+    #     vpc_endpoint_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.unsuccessful #=> Array
+    #   resp.unsuccessful[0].error.code #=> String
+    #   resp.unsuccessful[0].error.message #=> String
+    #   resp.unsuccessful[0].resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcEndpointConnections AWS API Documentation
+    #
+    # @overload accept_vpc_endpoint_connections(params = {})
+    # @param [Hash] params ({})
+    def accept_vpc_endpoint_connections(params = {}, options = {})
+      req = build_request(:accept_vpc_endpoint_connections, params)
+      req.send_request(options)
+    end
+
     # Accept a VPC peering connection request. To accept a request, the VPC
     # peering connection must be in the `pending-acceptance` state, and you
     # must be the owner of the peer VPC. Use DescribeVpcPeeringConnections
@@ -1224,7 +1267,7 @@ module Aws::EC2
     #   resp.attach_time #=> Time
     #   resp.device #=> String
     #   resp.instance_id #=> String
-    #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached"
+    #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.volume_id #=> String
     #   resp.delete_on_termination #=> Boolean
     #
@@ -1855,13 +1898,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Cancels the specified Spot fleet requests.
+    # Cancels the specified Spot Fleet requests.
     #
-    # After you cancel a Spot fleet request, the Spot fleet launches no new
-    # Spot instances. You must specify whether the Spot fleet should also
-    # terminate its Spot instances. If you terminate the instances, the Spot
-    # fleet request enters the `cancelled_terminating` state. Otherwise, the
-    # Spot fleet request enters the `cancelled_running` state and the
+    # After you cancel a Spot Fleet request, the Spot Fleet launches no new
+    # Spot Instances. You must specify whether the Spot Fleet should also
+    # terminate its Spot Instances. If you terminate the instances, the Spot
+    # Fleet request enters the `cancelled_terminating` state. Otherwise, the
+    # Spot Fleet request enters the `cancelled_running` state and the
     # instances continue to run until they are interrupted or you terminate
     # them manually.
     #
@@ -1872,10 +1915,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :spot_fleet_request_ids
-    #   The IDs of the Spot fleet requests.
+    #   The IDs of the Spot Fleet requests.
     #
     # @option params [required, Boolean] :terminate_instances
-    #   Indicates whether to terminate instances for a Spot fleet request if
+    #   Indicates whether to terminate instances for a Spot Fleet request if
     #   it is canceled successfully.
     #
     # @return [Types::CancelSpotFleetRequestsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1956,16 +1999,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Cancels one or more Spot instance requests. Spot instances are
-    # instances that Amazon EC2 starts on your behalf when the bid price
-    # that you specify exceeds the current Spot price. Amazon EC2
-    # periodically sets the Spot price based on available Spot instance
-    # capacity and current Spot instance requests. For more information, see
-    # [Spot Instance Requests][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # Cancels one or more Spot Instance requests. Spot Instances are
+    # instances that Amazon EC2 starts on your behalf when the maximum price
+    # that you specify exceeds the current Spot price. For more information,
+    # see [Spot Instance Requests][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
-    # Canceling a Spot instance request does not terminate running Spot
-    # instances associated with the request.
+    # Canceling a Spot Instance request does not terminate running Spot
+    # Instances associated with the request.
     #
     #
     #
@@ -1978,7 +2019,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :spot_instance_request_ids
-    #   One or more Spot instance request IDs.
+    #   One or more Spot Instance request IDs.
     #
     # @return [Types::CancelSpotInstanceRequestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3047,6 +3088,7 @@ module Aws::EC2
     #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
+    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -3205,17 +3247,17 @@ module Aws::EC2
     # Creates a 2048-bit RSA key pair with the specified name. Amazon EC2
     # stores the public key and displays the private key for you to save to
     # a file. The private key is returned as an unencrypted PEM encoded
-    # PKCS#8 private key. If a key with the specified name already exists,
+    # PKCS#1 private key. If a key with the specified name already exists,
     # Amazon EC2 returns an error.
     #
     # You can have up to five thousand key pairs per region.
     #
     # The key pair returned to you is available only in the region in which
-    # you create it. To create a key pair that is available in all regions,
-    # use ImportKeyPair.
+    # you create it. If you prefer, you can create your own key pair using a
+    # third-party tool and upload it to any region using ImportKeyPair.
     #
-    # For more information about key pairs, see [Key Pairs][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # For more information, see [Key Pairs][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
@@ -3266,6 +3308,406 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_key_pair(params = {}, options = {})
       req = build_request(:create_key_pair, params)
+      req.send_request(options)
+    end
+
+    # Creates a launch template. A launch template contains the parameters
+    # to launch an instance. When you launch an instance using RunInstances,
+    # you can specify a launch template instead of providing the launch
+    # parameters in the request.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [required, String] :launch_template_name
+    #   A name for the launch template.
+    #
+    # @option params [String] :version_description
+    #   A description for the first version of the launch template.
+    #
+    # @option params [required, Types::RequestLaunchTemplateData] :launch_template_data
+    #   The information for the launch template.
+    #
+    # @return [Types::CreateLaunchTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLaunchTemplateResult#launch_template #launch_template} => Types::LaunchTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_launch_template({
+    #     dry_run: false,
+    #     client_token: "String",
+    #     launch_template_name: "LaunchTemplateName", # required
+    #     version_description: "VersionDescription",
+    #     launch_template_data: { # required
+    #       kernel_id: "String",
+    #       ebs_optimized: false,
+    #       iam_instance_profile: {
+    #         arn: "String",
+    #         name: "String",
+    #       },
+    #       block_device_mappings: [
+    #         {
+    #           device_name: "String",
+    #           virtual_name: "String",
+    #           ebs: {
+    #             encrypted: false,
+    #             delete_on_termination: false,
+    #             iops: 1,
+    #             kms_key_id: "String",
+    #             snapshot_id: "String",
+    #             volume_size: 1,
+    #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           },
+    #           no_device: "String",
+    #         },
+    #       ],
+    #       network_interfaces: [
+    #         {
+    #           associate_public_ip_address: false,
+    #           delete_on_termination: false,
+    #           description: "String",
+    #           device_index: 1,
+    #           groups: ["String"],
+    #           ipv_6_address_count: 1,
+    #           ipv_6_addresses: [
+    #             {
+    #               ipv_6_address: "String",
+    #             },
+    #           ],
+    #           network_interface_id: "String",
+    #           private_ip_address: "String",
+    #           private_ip_addresses: [
+    #             {
+    #               primary: false,
+    #               private_ip_address: "String", # required
+    #             },
+    #           ],
+    #           secondary_private_ip_address_count: 1,
+    #           subnet_id: "String",
+    #         },
+    #       ],
+    #       image_id: "String",
+    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #       key_name: "String",
+    #       monitoring: {
+    #         enabled: false,
+    #       },
+    #       placement: {
+    #         availability_zone: "String",
+    #         affinity: "String",
+    #         group_name: "String",
+    #         host_id: "String",
+    #         tenancy: "default", # accepts default, dedicated, host
+    #         spread_domain: "String",
+    #       },
+    #       ram_disk_id: "String",
+    #       disable_api_termination: false,
+    #       instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #       user_data: "String",
+    #       tag_specifications: [
+    #         {
+    #           resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #           tags: [
+    #             {
+    #               key: "String",
+    #               value: "String",
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       elastic_gpu_specifications: [
+    #         {
+    #           type: "String", # required
+    #         },
+    #       ],
+    #       security_group_ids: ["String"],
+    #       security_groups: ["String"],
+    #       instance_market_options: {
+    #         market_type: "spot", # accepts spot
+    #         spot_options: {
+    #           max_price: "String",
+    #           spot_instance_type: "one-time", # accepts one-time, persistent
+    #           block_duration_minutes: 1,
+    #           valid_until: Time.now,
+    #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #         },
+    #       },
+    #       credit_specification: {
+    #         cpu_credits: "String",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.launch_template.launch_template_id #=> String
+    #   resp.launch_template.launch_template_name #=> String
+    #   resp.launch_template.create_time #=> Time
+    #   resp.launch_template.created_by #=> String
+    #   resp.launch_template.default_version_number #=> Integer
+    #   resp.launch_template.latest_version_number #=> Integer
+    #   resp.launch_template.tags #=> Array
+    #   resp.launch_template.tags[0].key #=> String
+    #   resp.launch_template.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplate AWS API Documentation
+    #
+    # @overload create_launch_template(params = {})
+    # @param [Hash] params ({})
+    def create_launch_template(params = {}, options = {})
+      req = build_request(:create_launch_template, params)
+      req.send_request(options)
+    end
+
+    # Creates a new version for a launch template. You can specify an
+    # existing version of launch template from which to base the new
+    # version.
+    #
+    # Launch template versions are numbered in the order in which they are
+    # created. You cannot specify, change, or replace the numbering of
+    # launch template versions.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @option params [String] :launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @option params [String] :source_version
+    #   The version number of the launch template version on which to base the
+    #   new version. The new version inherits the same launch parameters as
+    #   the source version, except for parameters that you specify in
+    #   LaunchTemplateData.
+    #
+    # @option params [String] :version_description
+    #   A description for the version of the launch template.
+    #
+    # @option params [required, Types::RequestLaunchTemplateData] :launch_template_data
+    #   The information for the launch template.
+    #
+    # @return [Types::CreateLaunchTemplateVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLaunchTemplateVersionResult#launch_template_version #launch_template_version} => Types::LaunchTemplateVersion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_launch_template_version({
+    #     dry_run: false,
+    #     client_token: "String",
+    #     launch_template_id: "String",
+    #     launch_template_name: "LaunchTemplateName",
+    #     source_version: "String",
+    #     version_description: "VersionDescription",
+    #     launch_template_data: { # required
+    #       kernel_id: "String",
+    #       ebs_optimized: false,
+    #       iam_instance_profile: {
+    #         arn: "String",
+    #         name: "String",
+    #       },
+    #       block_device_mappings: [
+    #         {
+    #           device_name: "String",
+    #           virtual_name: "String",
+    #           ebs: {
+    #             encrypted: false,
+    #             delete_on_termination: false,
+    #             iops: 1,
+    #             kms_key_id: "String",
+    #             snapshot_id: "String",
+    #             volume_size: 1,
+    #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #           },
+    #           no_device: "String",
+    #         },
+    #       ],
+    #       network_interfaces: [
+    #         {
+    #           associate_public_ip_address: false,
+    #           delete_on_termination: false,
+    #           description: "String",
+    #           device_index: 1,
+    #           groups: ["String"],
+    #           ipv_6_address_count: 1,
+    #           ipv_6_addresses: [
+    #             {
+    #               ipv_6_address: "String",
+    #             },
+    #           ],
+    #           network_interface_id: "String",
+    #           private_ip_address: "String",
+    #           private_ip_addresses: [
+    #             {
+    #               primary: false,
+    #               private_ip_address: "String", # required
+    #             },
+    #           ],
+    #           secondary_private_ip_address_count: 1,
+    #           subnet_id: "String",
+    #         },
+    #       ],
+    #       image_id: "String",
+    #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #       key_name: "String",
+    #       monitoring: {
+    #         enabled: false,
+    #       },
+    #       placement: {
+    #         availability_zone: "String",
+    #         affinity: "String",
+    #         group_name: "String",
+    #         host_id: "String",
+    #         tenancy: "default", # accepts default, dedicated, host
+    #         spread_domain: "String",
+    #       },
+    #       ram_disk_id: "String",
+    #       disable_api_termination: false,
+    #       instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #       user_data: "String",
+    #       tag_specifications: [
+    #         {
+    #           resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #           tags: [
+    #             {
+    #               key: "String",
+    #               value: "String",
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       elastic_gpu_specifications: [
+    #         {
+    #           type: "String", # required
+    #         },
+    #       ],
+    #       security_group_ids: ["String"],
+    #       security_groups: ["String"],
+    #       instance_market_options: {
+    #         market_type: "spot", # accepts spot
+    #         spot_options: {
+    #           max_price: "String",
+    #           spot_instance_type: "one-time", # accepts one-time, persistent
+    #           block_duration_minutes: 1,
+    #           valid_until: Time.now,
+    #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #         },
+    #       },
+    #       credit_specification: {
+    #         cpu_credits: "String",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.launch_template_version.launch_template_id #=> String
+    #   resp.launch_template_version.launch_template_name #=> String
+    #   resp.launch_template_version.version_number #=> Integer
+    #   resp.launch_template_version.version_description #=> String
+    #   resp.launch_template_version.create_time #=> Time
+    #   resp.launch_template_version.created_by #=> String
+    #   resp.launch_template_version.default_version #=> Boolean
+    #   resp.launch_template_version.launch_template_data.kernel_id #=> String
+    #   resp.launch_template_version.launch_template_data.ebs_optimized #=> Boolean
+    #   resp.launch_template_version.launch_template_data.iam_instance_profile.arn #=> String
+    #   resp.launch_template_version.launch_template_data.iam_instance_profile.name #=> String
+    #   resp.launch_template_version.launch_template_data.block_device_mappings #=> Array
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].device_name #=> String
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].virtual_name #=> String
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.snapshot_id #=> String
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.volume_size #=> Integer
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.launch_template_version.launch_template_data.block_device_mappings[0].no_device #=> String
+    #   resp.launch_template_version.launch_template_data.network_interfaces #=> Array
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].associate_public_ip_address #=> Boolean
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].delete_on_termination #=> Boolean
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].description #=> String
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].device_index #=> Integer
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].groups #=> Array
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].groups[0] #=> String
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].ipv_6_address_count #=> Integer
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].ipv_6_addresses #=> Array
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].network_interface_id #=> String
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].private_ip_address #=> String
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].private_ip_addresses #=> Array
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].private_ip_addresses[0].primary #=> Boolean
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].secondary_private_ip_address_count #=> Integer
+    #   resp.launch_template_version.launch_template_data.network_interfaces[0].subnet_id #=> String
+    #   resp.launch_template_version.launch_template_data.image_id #=> String
+    #   resp.launch_template_version.launch_template_data.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
+    #   resp.launch_template_version.launch_template_data.key_name #=> String
+    #   resp.launch_template_version.launch_template_data.monitoring.enabled #=> Boolean
+    #   resp.launch_template_version.launch_template_data.placement.availability_zone #=> String
+    #   resp.launch_template_version.launch_template_data.placement.affinity #=> String
+    #   resp.launch_template_version.launch_template_data.placement.group_name #=> String
+    #   resp.launch_template_version.launch_template_data.placement.host_id #=> String
+    #   resp.launch_template_version.launch_template_data.placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.launch_template_version.launch_template_data.placement.spread_domain #=> String
+    #   resp.launch_template_version.launch_template_data.ram_disk_id #=> String
+    #   resp.launch_template_version.launch_template_data.disable_api_termination #=> Boolean
+    #   resp.launch_template_version.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
+    #   resp.launch_template_version.launch_template_data.user_data #=> String
+    #   resp.launch_template_version.launch_template_data.tag_specifications #=> Array
+    #   resp.launch_template_version.launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags #=> Array
+    #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags[0].key #=> String
+    #   resp.launch_template_version.launch_template_data.tag_specifications[0].tags[0].value #=> String
+    #   resp.launch_template_version.launch_template_data.elastic_gpu_specifications #=> Array
+    #   resp.launch_template_version.launch_template_data.elastic_gpu_specifications[0].type #=> String
+    #   resp.launch_template_version.launch_template_data.security_group_ids #=> Array
+    #   resp.launch_template_version.launch_template_data.security_group_ids[0] #=> String
+    #   resp.launch_template_version.launch_template_data.security_groups #=> Array
+    #   resp.launch_template_version.launch_template_data.security_groups[0] #=> String
+    #   resp.launch_template_version.launch_template_data.instance_market_options.market_type #=> String, one of "spot"
+    #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.max_price #=> String
+    #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.spot_instance_type #=> String, one of "one-time", "persistent"
+    #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.block_duration_minutes #=> Integer
+    #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.valid_until #=> Time
+    #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
+    #   resp.launch_template_version.launch_template_data.credit_specification.cpu_credits #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersion AWS API Documentation
+    #
+    # @overload create_launch_template_version(params = {})
+    # @param [Hash] params ({})
+    def create_launch_template_version(params = {}, options = {})
+      req = build_request(:create_launch_template_version, params)
       req.send_request(options)
     end
 
@@ -4427,8 +4869,8 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a data feed for Spot instances, enabling you to view Spot
-    # instance usage logs. You can create one data feed per AWS account. For
+    # Creates a data feed for Spot Instances, enabling you to view Spot
+    # Instance usage logs. You can create one data feed per AWS account. For
     # more information, see [Spot Instance Data Feed][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
@@ -4437,7 +4879,7 @@ module Aws::EC2
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html
     #
     # @option params [required, String] :bucket
-    #   The Amazon S3 bucket in which to store the Spot instance data feed.
+    #   The Amazon S3 bucket in which to store the Spot Instance data feed.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4887,7 +5329,7 @@ module Aws::EC2
     #   resp.attachments[0].attach_time #=> Time
     #   resp.attachments[0].device #=> String
     #   resp.attachments[0].instance_id #=> String
-    #   resp.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
+    #   resp.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.attachments[0].volume_id #=> String
     #   resp.attachments[0].delete_on_termination #=> Boolean
     #   resp.availability_zone #=> String
@@ -5033,22 +5475,28 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a VPC endpoint for a specified AWS service. An endpoint
-    # enables you to create a private connection between your VPC and
-    # another AWS service in your account. You can create a gateway endpoint
-    # or an interface endpoint.
+    # Creates a VPC endpoint for a specified service. An endpoint enables
+    # you to create a private connection between your VPC and the service.
+    # The service may be provided by AWS, an AWS Marketplace partner, or
+    # another AWS account. For more information, see [VPC Endpoints][1] in
+    # the *Amazon Virtual Private Cloud User Guide*.
     #
-    # A gateway endpoint serves as a target for a route in your route table
-    # for traffic destined for the AWS service. You can specify the VPC
-    # route tables that use the endpoint, and you can optionally specify an
+    # A `gateway` endpoint serves as a target for a route in your route
+    # table for traffic destined for the AWS service. You can specify an
     # endpoint policy to attach to the endpoint that will control access to
-    # the service from your VPC.
+    # the service from your VPC. You can also specify the VPC route tables
+    # that use the endpoint.
     #
-    # An interface endpoint is a network interface in your subnet with a
-    # private IP address that serves as an entry point for traffic destined
-    # to the AWS service. You can specify the subnets in which to create an
-    # endpoint, and the security groups to associate with the network
-    # interface.
+    # An `interface` endpoint is a network interface in your subnet that
+    # serves as an endpoint for communicating with the specified service.
+    # You can specify the subnets in which to create an endpoint, and the
+    # security groups to associate with the endpoint network interface.
+    #
+    # Use DescribeVpcEndpointServices to get a list of supported services.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -5057,16 +5505,16 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [String] :vpc_endpoint_type
-    #   The type of endpoint. If not specified, the default is a gateway
-    #   endpoint.
+    #   The type of endpoint.
+    #
+    #   Default: Gateway
     #
     # @option params [required, String] :vpc_id
     #   The ID of the VPC in which the endpoint will be used.
     #
     # @option params [required, String] :service_name
-    #   The AWS service name, in the form `com.amazonaws.region.service `. To
-    #   get a list of available services, use the DescribeVpcEndpointServices
-    #   request.
+    #   The service name. To get a list of available services, use the
+    #   DescribeVpcEndpointServices request.
     #
     # @option params [String] :policy_document
     #   (Gateway endpoint) A policy to attach to the endpoint that controls
@@ -5079,11 +5527,11 @@ module Aws::EC2
     #
     # @option params [Array<String>] :subnet_ids
     #   (Interface endpoint) The ID of one or more subnets in which to create
-    #   a network interface for the endpoint.
+    #   an endpoint network interface.
     #
     # @option params [Array<String>] :security_group_ids
     #   (Interface endpoint) The ID of one or more security groups to
-    #   associate with the network interface.
+    #   associate with the endpoint network interface.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
@@ -5160,6 +5608,161 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_vpc_endpoint(params = {}, options = {})
       req = build_request(:create_vpc_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Creates a connection notification for a specified VPC endpoint or VPC
+    # endpoint service. A connection notification notifies you of specific
+    # endpoint events. You must create an SNS topic to receive
+    # notifications. For more information, see [Create a Topic][1] in the
+    # *Amazon Simple Notification Service Developer Guide*.
+    #
+    # You can create a connection notification for interface endpoints only.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :service_id
+    #   The ID of the endpoint service.
+    #
+    # @option params [String] :vpc_endpoint_id
+    #   The ID of the endpoint.
+    #
+    # @option params [required, String] :connection_notification_arn
+    #   The ARN of the SNS topic for the notifications.
+    #
+    # @option params [required, Array<String>] :connection_events
+    #   One or more endpoint events for which to receive notifications. Valid
+    #   values are `Accept`, `Connect`, `Delete`, and `Reject`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateVpcEndpointConnectionNotificationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcEndpointConnectionNotificationResult#connection_notification #connection_notification} => Types::ConnectionNotification
+    #   * {Types::CreateVpcEndpointConnectionNotificationResult#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_endpoint_connection_notification({
+    #     dry_run: false,
+    #     service_id: "String",
+    #     vpc_endpoint_id: "String",
+    #     connection_notification_arn: "String", # required
+    #     connection_events: ["String"], # required
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_notification.connection_notification_id #=> String
+    #   resp.connection_notification.service_id #=> String
+    #   resp.connection_notification.vpc_endpoint_id #=> String
+    #   resp.connection_notification.connection_notification_type #=> String, one of "Topic"
+    #   resp.connection_notification.connection_notification_arn #=> String
+    #   resp.connection_notification.connection_events #=> Array
+    #   resp.connection_notification.connection_events[0] #=> String
+    #   resp.connection_notification.connection_notification_state #=> String, one of "Enabled", "Disabled"
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointConnectionNotification AWS API Documentation
+    #
+    # @overload create_vpc_endpoint_connection_notification(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_endpoint_connection_notification(params = {}, options = {})
+      req = build_request(:create_vpc_endpoint_connection_notification, params)
+      req.send_request(options)
+    end
+
+    # Creates a VPC endpoint service configuration to which service
+    # consumers (AWS accounts, IAM users, and IAM roles) can connect.
+    # Service consumers can create an interface VPC endpoint to connect to
+    # your service.
+    #
+    # To create an endpoint service configuration, you must first create a
+    # Network Load Balancer for your service. For more information, see [VPC
+    # Endpoint Services][1] in the *Amazon Virtual Private Cloud User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/endpoint-service.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Boolean] :acceptance_required
+    #   Indicate whether requests from service consumers to create an endpoint
+    #   to your service must be accepted. To accept a request, use
+    #   AcceptVpcEndpointConnections.
+    #
+    # @option params [required, Array<String>] :network_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of one or more Network Load Balancers
+    #   for your service.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateVpcEndpointServiceConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcEndpointServiceConfigurationResult#service_configuration #service_configuration} => Types::ServiceConfiguration
+    #   * {Types::CreateVpcEndpointServiceConfigurationResult#client_token #client_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_endpoint_service_configuration({
+    #     dry_run: false,
+    #     acceptance_required: false,
+    #     network_load_balancer_arns: ["String"], # required
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_configuration.service_type #=> Array
+    #   resp.service_configuration.service_type[0].service_type #=> String, one of "Interface", "Gateway"
+    #   resp.service_configuration.service_id #=> String
+    #   resp.service_configuration.service_name #=> String
+    #   resp.service_configuration.service_state #=> String, one of "Pending", "Available", "Deleting", "Deleted", "Failed"
+    #   resp.service_configuration.availability_zones #=> Array
+    #   resp.service_configuration.availability_zones[0] #=> String
+    #   resp.service_configuration.acceptance_required #=> Boolean
+    #   resp.service_configuration.network_load_balancer_arns #=> Array
+    #   resp.service_configuration.network_load_balancer_arns[0] #=> String
+    #   resp.service_configuration.base_endpoint_dns_names #=> Array
+    #   resp.service_configuration.base_endpoint_dns_names[0] #=> String
+    #   resp.service_configuration.private_dns_name #=> String
+    #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointServiceConfiguration AWS API Documentation
+    #
+    # @overload create_vpc_endpoint_service_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_endpoint_service_configuration(params = {}, options = {})
+      req = build_request(:create_vpc_endpoint_service_configuration, params)
       req.send_request(options)
     end
 
@@ -5707,6 +6310,115 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes a launch template. Deleting a launch template deletes all of
+    # its versions.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @option params [String] :launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @return [Types::DeleteLaunchTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteLaunchTemplateResult#launch_template #launch_template} => Types::LaunchTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_launch_template({
+    #     dry_run: false,
+    #     launch_template_id: "String",
+    #     launch_template_name: "LaunchTemplateName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.launch_template.launch_template_id #=> String
+    #   resp.launch_template.launch_template_name #=> String
+    #   resp.launch_template.create_time #=> Time
+    #   resp.launch_template.created_by #=> String
+    #   resp.launch_template.default_version_number #=> Integer
+    #   resp.launch_template.latest_version_number #=> Integer
+    #   resp.launch_template.tags #=> Array
+    #   resp.launch_template.tags[0].key #=> String
+    #   resp.launch_template.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplate AWS API Documentation
+    #
+    # @overload delete_launch_template(params = {})
+    # @param [Hash] params ({})
+    def delete_launch_template(params = {}, options = {})
+      req = build_request(:delete_launch_template, params)
+      req.send_request(options)
+    end
+
+    # Deletes one or more versions of a launch template. You cannot delete
+    # the default version of a launch template; you must first assign a
+    # different version as the default. If the default version is the only
+    # version for the launch template, you must delete the entire launch
+    # template using DeleteLaunchTemplate.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @option params [String] :launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @option params [required, Array<String>] :versions
+    #   The version numbers of one or more launch template versions to delete.
+    #
+    # @return [Types::DeleteLaunchTemplateVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteLaunchTemplateVersionsResult#successfully_deleted_launch_template_versions #successfully_deleted_launch_template_versions} => Array&lt;Types::DeleteLaunchTemplateVersionsResponseSuccessItem&gt;
+    #   * {Types::DeleteLaunchTemplateVersionsResult#unsuccessfully_deleted_launch_template_versions #unsuccessfully_deleted_launch_template_versions} => Array&lt;Types::DeleteLaunchTemplateVersionsResponseErrorItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_launch_template_versions({
+    #     dry_run: false,
+    #     launch_template_id: "String",
+    #     launch_template_name: "LaunchTemplateName",
+    #     versions: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successfully_deleted_launch_template_versions #=> Array
+    #   resp.successfully_deleted_launch_template_versions[0].launch_template_id #=> String
+    #   resp.successfully_deleted_launch_template_versions[0].launch_template_name #=> String
+    #   resp.successfully_deleted_launch_template_versions[0].version_number #=> Integer
+    #   resp.unsuccessfully_deleted_launch_template_versions #=> Array
+    #   resp.unsuccessfully_deleted_launch_template_versions[0].launch_template_id #=> String
+    #   resp.unsuccessfully_deleted_launch_template_versions[0].launch_template_name #=> String
+    #   resp.unsuccessfully_deleted_launch_template_versions[0].version_number #=> Integer
+    #   resp.unsuccessfully_deleted_launch_template_versions[0].response_error.code #=> String, one of "launchTemplateIdDoesNotExist", "launchTemplateIdMalformed", "launchTemplateNameDoesNotExist", "launchTemplateNameMalformed", "launchTemplateVersionDoesNotExist", "unexpectedError"
+    #   resp.unsuccessfully_deleted_launch_template_versions[0].response_error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersions AWS API Documentation
+    #
+    # @overload delete_launch_template_versions(params = {})
+    # @param [Hash] params ({})
+    def delete_launch_template_versions(params = {}, options = {})
+      req = build_request(:delete_launch_template_versions, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified NAT gateway. Deleting a NAT gateway
     # disassociates its Elastic IP address, but does not release the address
     # from your account. Deleting a NAT gateway does not delete any NAT
@@ -6163,7 +6875,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Deletes the data feed for Spot instances.
+    # Deletes the data feed for Spot Instances.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6401,6 +7113,85 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Deletes one or more VPC endpoint connection notifications.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, Array<String>] :connection_notification_ids
+    #   One or more notification IDs.
+    #
+    # @return [Types::DeleteVpcEndpointConnectionNotificationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcEndpointConnectionNotificationsResult#unsuccessful #unsuccessful} => Array&lt;Types::UnsuccessfulItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_endpoint_connection_notifications({
+    #     dry_run: false,
+    #     connection_notification_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.unsuccessful #=> Array
+    #   resp.unsuccessful[0].error.code #=> String
+    #   resp.unsuccessful[0].error.message #=> String
+    #   resp.unsuccessful[0].resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointConnectionNotifications AWS API Documentation
+    #
+    # @overload delete_vpc_endpoint_connection_notifications(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_endpoint_connection_notifications(params = {}, options = {})
+      req = build_request(:delete_vpc_endpoint_connection_notifications, params)
+      req.send_request(options)
+    end
+
+    # Deletes one or more VPC endpoint service configurations in your
+    # account. Before you delete the endpoint service configuration, you
+    # must reject any `Available` or `PendingAcceptance` interface endpoint
+    # connections that are attached to the service.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, Array<String>] :service_ids
+    #   The IDs of one or more services.
+    #
+    # @return [Types::DeleteVpcEndpointServiceConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVpcEndpointServiceConfigurationsResult#unsuccessful #unsuccessful} => Array&lt;Types::UnsuccessfulItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_endpoint_service_configurations({
+    #     dry_run: false,
+    #     service_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.unsuccessful #=> Array
+    #   resp.unsuccessful[0].error.code #=> String
+    #   resp.unsuccessful[0].error.message #=> String
+    #   resp.unsuccessful[0].resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointServiceConfigurations AWS API Documentation
+    #
+    # @overload delete_vpc_endpoint_service_configurations(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_endpoint_service_configurations(params = {}, options = {})
+      req = build_request(:delete_vpc_endpoint_service_configurations, params)
+      req.send_request(options)
+    end
+
     # Deletes one or more specified VPC endpoints. Deleting a gateway
     # endpoint also deletes the endpoint routes in the route tables that
     # were associated with the endpoint. Deleting an interface endpoint
@@ -6413,7 +7204,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Array<String>] :vpc_endpoint_ids
-    #   One or more endpoint IDs.
+    #   One or more VPC endpoint IDs.
     #
     # @return [Types::DeleteVpcEndpointsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8435,6 +9226,7 @@ module Aws::EC2
     #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
@@ -8629,6 +9421,7 @@ module Aws::EC2
     #   resp.images[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.images[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.images[0].block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.images[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.images[0].block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.images[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
@@ -9748,6 +10541,243 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes one or more versions of a specified launch template. You can
+    # describe all versions, individual versions, or a range of versions.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @option params [String] :launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @option params [Array<String>] :versions
+    #   One or more versions of the launch template.
+    #
+    # @option params [String] :min_version
+    #   The version number after which to describe launch template versions.
+    #
+    # @option params [String] :max_version
+    #   The version number up to which to describe launch template versions.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `NextToken`
+    #   value. This value can be between 5 and 1000.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `create-time` - The time the launch template version was created.
+    #
+    #   * `ebs-optimized` - A boolean that indicates whether the instance is
+    #     optimized for Amazon EBS I/O.
+    #
+    #   * `iam-instance-profile` - The ARN of the IAM instance profile.
+    #
+    #   * `image-id` - The ID of the AMI.
+    #
+    #   * `instance-type` - The instance type.
+    #
+    #   * `is-default-version` - A boolean that indicates whether the launch
+    #     template version is the default version.
+    #
+    #   * `kernel-id` - The kernel ID.
+    #
+    #   * `ram-disk-id` - The RAM disk ID.
+    #
+    # @return [Types::DescribeLaunchTemplateVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLaunchTemplateVersionsResult#launch_template_versions #launch_template_versions} => Array&lt;Types::LaunchTemplateVersion&gt;
+    #   * {Types::DescribeLaunchTemplateVersionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_launch_template_versions({
+    #     dry_run: false,
+    #     launch_template_id: "String",
+    #     launch_template_name: "LaunchTemplateName",
+    #     versions: ["String"],
+    #     min_version: "String",
+    #     max_version: "String",
+    #     next_token: "String",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.launch_template_versions #=> Array
+    #   resp.launch_template_versions[0].launch_template_id #=> String
+    #   resp.launch_template_versions[0].launch_template_name #=> String
+    #   resp.launch_template_versions[0].version_number #=> Integer
+    #   resp.launch_template_versions[0].version_description #=> String
+    #   resp.launch_template_versions[0].create_time #=> Time
+    #   resp.launch_template_versions[0].created_by #=> String
+    #   resp.launch_template_versions[0].default_version #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.kernel_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.ebs_optimized #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.iam_instance_profile.arn #=> String
+    #   resp.launch_template_versions[0].launch_template_data.iam_instance_profile.name #=> String
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].device_name #=> String
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].virtual_name #=> String
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.snapshot_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.volume_size #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.launch_template_versions[0].launch_template_data.block_device_mappings[0].no_device #=> String
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].associate_public_ip_address #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].delete_on_termination #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].description #=> String
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].device_index #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].groups #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].groups[0] #=> String
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].ipv_6_address_count #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].ipv_6_addresses #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].network_interface_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].private_ip_address #=> String
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].private_ip_addresses #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].private_ip_addresses[0].primary #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].secondary_private_ip_address_count #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.network_interfaces[0].subnet_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.image_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
+    #   resp.launch_template_versions[0].launch_template_data.key_name #=> String
+    #   resp.launch_template_versions[0].launch_template_data.monitoring.enabled #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.placement.availability_zone #=> String
+    #   resp.launch_template_versions[0].launch_template_data.placement.affinity #=> String
+    #   resp.launch_template_versions[0].launch_template_data.placement.group_name #=> String
+    #   resp.launch_template_versions[0].launch_template_data.placement.host_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.launch_template_versions[0].launch_template_data.placement.spread_domain #=> String
+    #   resp.launch_template_versions[0].launch_template_data.ram_disk_id #=> String
+    #   resp.launch_template_versions[0].launch_template_data.disable_api_termination #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
+    #   resp.launch_template_versions[0].launch_template_data.user_data #=> String
+    #   resp.launch_template_versions[0].launch_template_data.tag_specifications #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags[0].key #=> String
+    #   resp.launch_template_versions[0].launch_template_data.tag_specifications[0].tags[0].value #=> String
+    #   resp.launch_template_versions[0].launch_template_data.elastic_gpu_specifications #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.elastic_gpu_specifications[0].type #=> String
+    #   resp.launch_template_versions[0].launch_template_data.security_group_ids #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.security_group_ids[0] #=> String
+    #   resp.launch_template_versions[0].launch_template_data.security_groups #=> Array
+    #   resp.launch_template_versions[0].launch_template_data.security_groups[0] #=> String
+    #   resp.launch_template_versions[0].launch_template_data.instance_market_options.market_type #=> String, one of "spot"
+    #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.max_price #=> String
+    #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.spot_instance_type #=> String, one of "one-time", "persistent"
+    #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.block_duration_minutes #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.valid_until #=> Time
+    #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
+    #   resp.launch_template_versions[0].launch_template_data.credit_specification.cpu_credits #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
+    #
+    # @overload describe_launch_template_versions(params = {})
+    # @param [Hash] params ({})
+    def describe_launch_template_versions(params = {}, options = {})
+      req = build_request(:describe_launch_template_versions, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more launch templates.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :launch_template_ids
+    #   One or more launch template IDs.
+    #
+    # @option params [Array<String>] :launch_template_names
+    #   One or more launch template names.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `create-time` - The time the launch template was created.
+    #
+    #   * `launch-template-name` - The name of the launch template.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned `NextToken`
+    #   value. This value can be between 5 and 1000.
+    #
+    # @return [Types::DescribeLaunchTemplatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLaunchTemplatesResult#launch_templates #launch_templates} => Array&lt;Types::LaunchTemplate&gt;
+    #   * {Types::DescribeLaunchTemplatesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_launch_templates({
+    #     dry_run: false,
+    #     launch_template_ids: ["String"],
+    #     launch_template_names: ["LaunchTemplateName"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.launch_templates #=> Array
+    #   resp.launch_templates[0].launch_template_id #=> String
+    #   resp.launch_templates[0].launch_template_name #=> String
+    #   resp.launch_templates[0].create_time #=> Time
+    #   resp.launch_templates[0].created_by #=> String
+    #   resp.launch_templates[0].default_version_number #=> Integer
+    #   resp.launch_templates[0].latest_version_number #=> Integer
+    #   resp.launch_templates[0].tags #=> Array
+    #   resp.launch_templates[0].tags[0].key #=> String
+    #   resp.launch_templates[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplates AWS API Documentation
+    #
+    # @overload describe_launch_templates(params = {})
+    # @param [Hash] params ({})
+    def describe_launch_templates(params = {}, options = {})
+      req = build_request(:describe_launch_templates, params)
+      req.send_request(options)
+    end
+
     # Describes your Elastic IP addresses that are being moved to the
     # EC2-VPC platform, or that are being restored to the EC2-Classic
     # platform. This request does not return information about any other
@@ -10694,7 +11724,7 @@ module Aws::EC2
     # includes the prefix list name and prefix list ID of the service and
     # the IP address range for the service. A prefix list ID is required for
     # creating an outbound security group rule that allows traffic from a
-    # VPC to access an AWS service through a VPC endpoint.
+    # VPC to access an AWS service through a gateway VPC endpoint.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12478,7 +13508,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the data feed for Spot instances. For more information, see
+    # Describes the data feed for Spot Instances. For more information, see
     # [Spot Instance Data Feed][1] in the *Amazon Elastic Compute Cloud User
     # Guide*.
     #
@@ -12538,7 +13568,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the running instances for the specified Spot fleet.
+    # Describes the running instances for the specified Spot Fleet.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12556,7 +13586,7 @@ module Aws::EC2
     #   The token for the next set of results.
     #
     # @option params [required, String] :spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #
     # @return [Types::DescribeSpotFleetInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12613,10 +13643,10 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the events for the specified Spot fleet request during the
+    # Describes the events for the specified Spot Fleet request during the
     # specified time.
     #
-    # Spot fleet events are delayed by up to 30 seconds before they can be
+    # Spot Fleet events are delayed by up to 30 seconds before they can be
     # described. This ensures that you can query by the last evaluated time
     # and not miss a recorded event.
     #
@@ -12639,7 +13669,7 @@ module Aws::EC2
     #   The token for the next set of results.
     #
     # @option params [required, String] :spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The starting date and time for the events, in UTC format (for example,
@@ -12735,9 +13765,9 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes your Spot fleet requests.
+    # Describes your Spot Fleet requests.
     #
-    # Spot fleet requests are deleted 48 hours after they are canceled and
+    # Spot Fleet requests are deleted 48 hours after they are canceled and
     # their instances are terminated.
     #
     # @option params [Boolean] :dry_run
@@ -12756,7 +13786,7 @@ module Aws::EC2
     #   The token for the next set of results.
     #
     # @option params [Array<String>] :spot_fleet_request_ids
-    #   The IDs of the Spot fleet requests.
+    #   The IDs of the Spot Fleet requests.
     #
     # @return [Types::DescribeSpotFleetRequestsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12850,6 +13880,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
@@ -12892,6 +13923,16 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].key #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].tag_specifications[0].tags[0].value #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_id #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.launch_template_name #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].launch_template_specification.version #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides #=> Array
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].spot_price #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].subnet_id #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].availability_zone #=> String
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].weighted_capacity #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.terminate_instances_with_expiration #=> Boolean
@@ -12899,7 +13940,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.valid_from #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.valid_until #=> Time
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.replace_unhealthy_instances #=> Boolean
-    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.instance_interruption_behavior #=> String, one of "stop", "terminate"
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.classic_load_balancers_config.classic_load_balancers #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.classic_load_balancers_config.classic_load_balancers[0].name #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.load_balancers_config.target_groups_config.target_groups #=> Array
@@ -12916,22 +13957,20 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes the Spot instance requests that belong to your account. Spot
-    # instances are instances that Amazon EC2 launches when the bid price
-    # that you specify exceeds the current Spot price. Amazon EC2
-    # periodically sets the Spot price based on available Spot instance
-    # capacity and current Spot instance requests. For more information, see
-    # [Spot Instance Requests][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # Describes the Spot Instance requests that belong to your account. Spot
+    # Instances are instances that Amazon EC2 launches when the Spot price
+    # that you specify exceeds the current Spot price. For more information,
+    # see [Spot Instance Requests][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
     # You can use `DescribeSpotInstanceRequests` to find a running Spot
-    # instance by examining the response. If the status of the Spot instance
+    # Instance by examining the response. If the status of the Spot Instance
     # is `fulfilled`, the instance ID appears in the response and contains
     # the identifier of the instance. Alternatively, you can use
     # DescribeInstances with a filter to look for instances where the
     # instance lifecycle is `spot`.
     #
-    # Spot instance requests are deleted 4 hours after they are canceled and
+    # Spot Instance requests are deleted 4 hours after they are canceled and
     # their instances are terminated.
     #
     #
@@ -12943,7 +13982,7 @@ module Aws::EC2
     #
     #   * `availability-zone-group` - The Availability Zone group.
     #
-    #   * `create-time` - The time stamp when the Spot instance request was
+    #   * `create-time` - The time stamp when the Spot Instance request was
     #     created.
     #
     #   * `fault-code` - The fault code related to the request.
@@ -12952,7 +13991,7 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance that fulfilled the request.
     #
-    #   * `launch-group` - The Spot instance launch group.
+    #   * `launch-group` - The Spot Instance launch group.
     #
     #   * `launch.block-device-mapping.delete-on-termination` - Indicates
     #     whether the EBS volume is deleted on instance termination.
@@ -12985,12 +14024,12 @@ module Aws::EC2
     #     with.
     #
     #   * `launch.monitoring-enabled` - Whether detailed monitoring is enabled
-    #     for the Spot instance.
+    #     for the Spot Instance.
     #
     #   * `launch.ramdisk-id` - The RAM disk ID.
     #
     #   * `launched-availability-zone` - The Availability Zone in which the
-    #     bid is launched.
+    #     request is launched.
     #
     #   * `network-interface.addresses.primary` - Indicates whether the IP
     #     address is the primary private IP address.
@@ -13019,22 +14058,22 @@ module Aws::EC2
     #   * `product-description` - The product description associated with the
     #     instance (`Linux/UNIX` \| `Windows`).
     #
-    #   * `spot-instance-request-id` - The Spot instance request ID.
+    #   * `spot-instance-request-id` - The Spot Instance request ID.
     #
-    #   * `spot-price` - The maximum hourly price for any Spot instance
+    #   * `spot-price` - The maximum hourly price for any Spot Instance
     #     launched to fulfill the request.
     #
-    #   * `state` - The state of the Spot instance request (`open` \| `active`
-    #     \| `closed` \| `cancelled` \| `failed`). Spot bid status information
-    #     can help you track your Amazon EC2 Spot instance requests. For more
-    #     information, see [Spot Bid Status][1] in the Amazon Elastic Compute
-    #     Cloud User Guide.
+    #   * `state` - The state of the Spot Instance request (`open` \| `active`
+    #     \| `closed` \| `cancelled` \| `failed`). Spot request status
+    #     information can help you track your Amazon EC2 Spot Instance
+    #     requests. For more information, see [Spot Request Status][1] in the
+    #     Amazon Elastic Compute Cloud User Guide.
     #
     #   * `status-code` - The short code describing the most recent evaluation
-    #     of your Spot instance request.
+    #     of your Spot Instance request.
     #
     #   * `status-message` - The message explaining the status of the Spot
-    #     instance request.
+    #     Instance request.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
     #     to the resource. Specify the key of the tag in the filter name and
@@ -13053,7 +14092,7 @@ module Aws::EC2
     #   * `tag-value` - The value of a tag assigned to the resource. This
     #     filter is independent of the `tag-key` filter.
     #
-    #   * `type` - The type of Spot instance request (`one-time` \|
+    #   * `type` - The type of Spot Instance request (`one-time` \|
     #     `persistent`).
     #
     #   * `valid-from` - The start date of the request.
@@ -13071,7 +14110,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Array<String>] :spot_instance_request_ids
-    #   One or more Spot instance request IDs.
+    #   One or more Spot Instance request IDs.
     #
     # @return [Types::DescribeSpotInstanceRequestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -13166,6 +14205,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
@@ -13214,7 +14254,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].type #=> String, one of "one-time", "persistent"
     #   resp.spot_instance_requests[0].valid_from #=> Time
     #   resp.spot_instance_requests[0].valid_until #=> Time
-    #   resp.spot_instance_requests[0].instance_interruption_behavior #=> String, one of "stop", "terminate"
+    #   resp.spot_instance_requests[0].instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequests AWS API Documentation
     #
@@ -13274,8 +14314,7 @@ module Aws::EC2
     #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
     #
     # @option params [Array<String>] :instance_types
-    #   Filters the results by the specified instance types. Note that T2 and
-    #   HS1 instance types are not supported.
+    #   Filters the results by the specified instance types.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. Specify a
@@ -14222,7 +15261,7 @@ module Aws::EC2
     #   resp.volumes[0].attachments[0].attach_time #=> Time
     #   resp.volumes[0].attachments[0].device #=> String
     #   resp.volumes[0].attachments[0].instance_id #=> String
-    #   resp.volumes[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
+    #   resp.volumes[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.volumes[0].attachments[0].volume_id #=> String
     #   resp.volumes[0].attachments[0].delete_on_termination #=> Boolean
     #   resp.volumes[0].availability_zone #=> String
@@ -14543,8 +15582,302 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Describes all supported AWS services that can be specified when
-    # creating a VPC endpoint.
+    # Describes the connection notifications for VPC endpoints and VPC
+    # endpoint services.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :connection_notification_id
+    #   The ID of the notification.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `connection-notification-arn` - The ARN of SNS topic for the
+    #     notification.
+    #
+    #   * `connection-notification-id` - The ID of the notification.
+    #
+    #   * `connection-notification-state` - The state of the notification
+    #     (`Enabled` \| `Disabled`).
+    #
+    #   * `connection-notification-type` - The type of notification (`Topic`).
+    #
+    #   * `service-id` - The ID of the endpoint service.
+    #
+    #   * `vpc-endpoint-id` - The ID of the VPC endpoint.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another request with the returned
+    #   `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @return [Types::DescribeVpcEndpointConnectionNotificationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcEndpointConnectionNotificationsResult#connection_notification_set #connection_notification_set} => Array&lt;Types::ConnectionNotification&gt;
+    #   * {Types::DescribeVpcEndpointConnectionNotificationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_endpoint_connection_notifications({
+    #     dry_run: false,
+    #     connection_notification_id: "String",
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connection_notification_set #=> Array
+    #   resp.connection_notification_set[0].connection_notification_id #=> String
+    #   resp.connection_notification_set[0].service_id #=> String
+    #   resp.connection_notification_set[0].vpc_endpoint_id #=> String
+    #   resp.connection_notification_set[0].connection_notification_type #=> String, one of "Topic"
+    #   resp.connection_notification_set[0].connection_notification_arn #=> String
+    #   resp.connection_notification_set[0].connection_events #=> Array
+    #   resp.connection_notification_set[0].connection_events[0] #=> String
+    #   resp.connection_notification_set[0].connection_notification_state #=> String, one of "Enabled", "Disabled"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnectionNotifications AWS API Documentation
+    #
+    # @overload describe_vpc_endpoint_connection_notifications(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_endpoint_connection_notifications(params = {}, options = {})
+      req = build_request(:describe_vpc_endpoint_connection_notifications, params)
+      req.send_request(options)
+    end
+
+    # Describes the VPC endpoint connections to your VPC endpoint services,
+    # including any endpoints that are pending your acceptance.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `customer-account-id` - The AWS account number of the owner of the
+    #     endpoint.
+    #
+    #   * `endpoint-connection-state` - The state of the endpoint
+    #     (`PendingAcceptance` \| `Pending` \| `Available` \| `Deleting` \|
+    #     `Deleted` \| `Rejected` \| `Failed`).
+    #
+    #   * `vpc-endpoint-id` - The ID of the endpoint.
+    #
+    #   * `vpc-endpoint-service-id` - The ID of the service.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results of the initial request can be seen by
+    #   sending another request with the returned `NextToken` value. This
+    #   value can be between 5 and 1000; if `MaxResults` is given a value
+    #   larger than 1000, only 1000 results are returned.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @return [Types::DescribeVpcEndpointConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcEndpointConnectionsResult#vpc_endpoint_connections #vpc_endpoint_connections} => Array&lt;Types::VpcEndpointConnection&gt;
+    #   * {Types::DescribeVpcEndpointConnectionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_endpoint_connections({
+    #     dry_run: false,
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_endpoint_connections #=> Array
+    #   resp.vpc_endpoint_connections[0].service_id #=> String
+    #   resp.vpc_endpoint_connections[0].vpc_endpoint_id #=> String
+    #   resp.vpc_endpoint_connections[0].vpc_endpoint_owner #=> String
+    #   resp.vpc_endpoint_connections[0].vpc_endpoint_state #=> String, one of "PendingAcceptance", "Pending", "Available", "Deleting", "Deleted", "Rejected", "Failed", "Expired"
+    #   resp.vpc_endpoint_connections[0].creation_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnections AWS API Documentation
+    #
+    # @overload describe_vpc_endpoint_connections(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_endpoint_connections(params = {}, options = {})
+      req = build_request(:describe_vpc_endpoint_connections, params)
+      req.send_request(options)
+    end
+
+    # Describes the VPC endpoint service configurations in your account
+    # (your services).
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :service_ids
+    #   The IDs of one or more services.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `service-name` - The ARN of the service.
+    #
+    #   * `vpc-endpoint-service-id` - The ID of the service.
+    #
+    #   * `vpc-endpoint-service-state` - The state of the service (`Pending`
+    #     \| `Available` \| `Deleting` \| `Deleted` \| `Failed`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results of the initial request can be seen by
+    #   sending another request with the returned `NextToken` value. This
+    #   value can be between 5 and 1000; if `MaxResults` is given a value
+    #   larger than 1000, only 1000 results are returned.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @return [Types::DescribeVpcEndpointServiceConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcEndpointServiceConfigurationsResult#service_configurations #service_configurations} => Array&lt;Types::ServiceConfiguration&gt;
+    #   * {Types::DescribeVpcEndpointServiceConfigurationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_endpoint_service_configurations({
+    #     dry_run: false,
+    #     service_ids: ["String"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_configurations #=> Array
+    #   resp.service_configurations[0].service_type #=> Array
+    #   resp.service_configurations[0].service_type[0].service_type #=> String, one of "Interface", "Gateway"
+    #   resp.service_configurations[0].service_id #=> String
+    #   resp.service_configurations[0].service_name #=> String
+    #   resp.service_configurations[0].service_state #=> String, one of "Pending", "Available", "Deleting", "Deleted", "Failed"
+    #   resp.service_configurations[0].availability_zones #=> Array
+    #   resp.service_configurations[0].availability_zones[0] #=> String
+    #   resp.service_configurations[0].acceptance_required #=> Boolean
+    #   resp.service_configurations[0].network_load_balancer_arns #=> Array
+    #   resp.service_configurations[0].network_load_balancer_arns[0] #=> String
+    #   resp.service_configurations[0].base_endpoint_dns_names #=> Array
+    #   resp.service_configurations[0].base_endpoint_dns_names[0] #=> String
+    #   resp.service_configurations[0].private_dns_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServiceConfigurations AWS API Documentation
+    #
+    # @overload describe_vpc_endpoint_service_configurations(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_endpoint_service_configurations(params = {}, options = {})
+      req = build_request(:describe_vpc_endpoint_service_configurations, params)
+      req.send_request(options)
+    end
+
+    # Describes the principals (service consumers) that are permitted to
+    # discover your VPC endpoint service.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :service_id
+    #   The ID of the service.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    #   * `principal` - The ARN of the principal.
+    #
+    #   * `principal-type` - The principal type (`All` \| `Service` \|
+    #     `OrganizationUnit` \| `Account` \| `User` \| `Role`).
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results of the initial request can be seen by
+    #   sending another request with the returned `NextToken` value. This
+    #   value can be between 5 and 1000; if `MaxResults` is given a value
+    #   larger than 1000, only 1000 results are returned.
+    #
+    # @option params [String] :next_token
+    #   The token to retrieve the next page of results.
+    #
+    # @return [Types::DescribeVpcEndpointServicePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVpcEndpointServicePermissionsResult#allowed_principals #allowed_principals} => Array&lt;Types::AllowedPrincipal&gt;
+    #   * {Types::DescribeVpcEndpointServicePermissionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vpc_endpoint_service_permissions({
+    #     dry_run: false,
+    #     service_id: "String", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.allowed_principals #=> Array
+    #   resp.allowed_principals[0].principal_type #=> String, one of "All", "Service", "OrganizationUnit", "Account", "User", "Role"
+    #   resp.allowed_principals[0].principal #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicePermissions AWS API Documentation
+    #
+    # @overload describe_vpc_endpoint_service_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_vpc_endpoint_service_permissions(params = {}, options = {})
+      req = build_request(:describe_vpc_endpoint_service_permissions, params)
+      req.send_request(options)
+    end
+
+    # Describes available services to which you can create a VPC endpoint.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -14636,7 +15969,7 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `service-name`\: The name of the AWS service.
+    #   * `service-name`\: The name of the service.
     #
     #   * `vpc-id`\: The ID of the VPC in which the endpoint resides.
     #
@@ -15407,7 +16740,7 @@ module Aws::EC2
     #   resp.attach_time #=> Time
     #   resp.device #=> String
     #   resp.instance_id #=> String
-    #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached"
+    #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached", "busy"
     #   resp.volume_id #=> String
     #   resp.delete_on_termination #=> Boolean
     #
@@ -16110,6 +17443,105 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_host_reservation_purchase_preview(params = {}, options = {})
       req = build_request(:get_host_reservation_purchase_preview, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the configuration data of the specified instance. You can
+    # use this data to create a launch template.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance.
+    #
+    # @return [Types::GetLaunchTemplateDataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLaunchTemplateDataResult#launch_template_data #launch_template_data} => Types::ResponseLaunchTemplateData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_launch_template_data({
+    #     dry_run: false,
+    #     instance_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.launch_template_data.kernel_id #=> String
+    #   resp.launch_template_data.ebs_optimized #=> Boolean
+    #   resp.launch_template_data.iam_instance_profile.arn #=> String
+    #   resp.launch_template_data.iam_instance_profile.name #=> String
+    #   resp.launch_template_data.block_device_mappings #=> Array
+    #   resp.launch_template_data.block_device_mappings[0].device_name #=> String
+    #   resp.launch_template_data.block_device_mappings[0].virtual_name #=> String
+    #   resp.launch_template_data.block_device_mappings[0].ebs.encrypted #=> Boolean
+    #   resp.launch_template_data.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
+    #   resp.launch_template_data.block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.launch_template_data.block_device_mappings[0].ebs.kms_key_id #=> String
+    #   resp.launch_template_data.block_device_mappings[0].ebs.snapshot_id #=> String
+    #   resp.launch_template_data.block_device_mappings[0].ebs.volume_size #=> Integer
+    #   resp.launch_template_data.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
+    #   resp.launch_template_data.block_device_mappings[0].no_device #=> String
+    #   resp.launch_template_data.network_interfaces #=> Array
+    #   resp.launch_template_data.network_interfaces[0].associate_public_ip_address #=> Boolean
+    #   resp.launch_template_data.network_interfaces[0].delete_on_termination #=> Boolean
+    #   resp.launch_template_data.network_interfaces[0].description #=> String
+    #   resp.launch_template_data.network_interfaces[0].device_index #=> Integer
+    #   resp.launch_template_data.network_interfaces[0].groups #=> Array
+    #   resp.launch_template_data.network_interfaces[0].groups[0] #=> String
+    #   resp.launch_template_data.network_interfaces[0].ipv_6_address_count #=> Integer
+    #   resp.launch_template_data.network_interfaces[0].ipv_6_addresses #=> Array
+    #   resp.launch_template_data.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
+    #   resp.launch_template_data.network_interfaces[0].network_interface_id #=> String
+    #   resp.launch_template_data.network_interfaces[0].private_ip_address #=> String
+    #   resp.launch_template_data.network_interfaces[0].private_ip_addresses #=> Array
+    #   resp.launch_template_data.network_interfaces[0].private_ip_addresses[0].primary #=> Boolean
+    #   resp.launch_template_data.network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
+    #   resp.launch_template_data.network_interfaces[0].secondary_private_ip_address_count #=> Integer
+    #   resp.launch_template_data.network_interfaces[0].subnet_id #=> String
+    #   resp.launch_template_data.image_id #=> String
+    #   resp.launch_template_data.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
+    #   resp.launch_template_data.key_name #=> String
+    #   resp.launch_template_data.monitoring.enabled #=> Boolean
+    #   resp.launch_template_data.placement.availability_zone #=> String
+    #   resp.launch_template_data.placement.affinity #=> String
+    #   resp.launch_template_data.placement.group_name #=> String
+    #   resp.launch_template_data.placement.host_id #=> String
+    #   resp.launch_template_data.placement.tenancy #=> String, one of "default", "dedicated", "host"
+    #   resp.launch_template_data.placement.spread_domain #=> String
+    #   resp.launch_template_data.ram_disk_id #=> String
+    #   resp.launch_template_data.disable_api_termination #=> Boolean
+    #   resp.launch_template_data.instance_initiated_shutdown_behavior #=> String, one of "stop", "terminate"
+    #   resp.launch_template_data.user_data #=> String
+    #   resp.launch_template_data.tag_specifications #=> Array
+    #   resp.launch_template_data.tag_specifications[0].resource_type #=> String, one of "customer-gateway", "dhcp-options", "image", "instance", "internet-gateway", "network-acl", "network-interface", "reserved-instances", "route-table", "snapshot", "spot-instances-request", "subnet", "security-group", "volume", "vpc", "vpn-connection", "vpn-gateway"
+    #   resp.launch_template_data.tag_specifications[0].tags #=> Array
+    #   resp.launch_template_data.tag_specifications[0].tags[0].key #=> String
+    #   resp.launch_template_data.tag_specifications[0].tags[0].value #=> String
+    #   resp.launch_template_data.elastic_gpu_specifications #=> Array
+    #   resp.launch_template_data.elastic_gpu_specifications[0].type #=> String
+    #   resp.launch_template_data.security_group_ids #=> Array
+    #   resp.launch_template_data.security_group_ids[0] #=> String
+    #   resp.launch_template_data.security_groups #=> Array
+    #   resp.launch_template_data.security_groups[0] #=> String
+    #   resp.launch_template_data.instance_market_options.market_type #=> String, one of "spot"
+    #   resp.launch_template_data.instance_market_options.spot_options.max_price #=> String
+    #   resp.launch_template_data.instance_market_options.spot_options.spot_instance_type #=> String, one of "one-time", "persistent"
+    #   resp.launch_template_data.instance_market_options.spot_options.block_duration_minutes #=> Integer
+    #   resp.launch_template_data.instance_market_options.spot_options.valid_until #=> Time
+    #   resp.launch_template_data.instance_market_options.spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
+    #   resp.launch_template_data.credit_specification.cpu_credits #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
+    #
+    # @overload get_launch_template_data(params = {})
+    # @param [Hash] params ({})
+    def get_launch_template_data(params = {}, options = {})
+      req = build_request(:get_launch_template_data, params)
       req.send_request(options)
     end
 
@@ -17305,6 +18737,73 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies a launch template. You can specify which version of the
+    # launch template to set as the default version. When launching an
+    # instance, the default version applies when a launch template version
+    # is not specified.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [String] :launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @option params [String] :launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #
+    # @option params [String] :default_version
+    #   The version number of the launch template to set as the default
+    #   version.
+    #
+    # @return [Types::ModifyLaunchTemplateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyLaunchTemplateResult#launch_template #launch_template} => Types::LaunchTemplate
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_launch_template({
+    #     dry_run: false,
+    #     client_token: "String",
+    #     launch_template_id: "String",
+    #     launch_template_name: "LaunchTemplateName",
+    #     default_version: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.launch_template.launch_template_id #=> String
+    #   resp.launch_template.launch_template_name #=> String
+    #   resp.launch_template.create_time #=> Time
+    #   resp.launch_template.created_by #=> String
+    #   resp.launch_template.default_version_number #=> Integer
+    #   resp.launch_template.latest_version_number #=> Integer
+    #   resp.launch_template.tags #=> Array
+    #   resp.launch_template.tags[0].key #=> String
+    #   resp.launch_template.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLaunchTemplate AWS API Documentation
+    #
+    # @overload modify_launch_template(params = {})
+    # @param [Hash] params ({})
+    def modify_launch_template(params = {}, options = {})
+      req = build_request(:modify_launch_template, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified network interface attribute. You can specify
     # only one attribute at a time.
     #
@@ -17596,37 +19095,40 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the specified Spot fleet request.
+    # Modifies the specified Spot Fleet request.
     #
-    # While the Spot fleet request is being modified, it is in the
+    # While the Spot Fleet request is being modified, it is in the
     # `modifying` state.
     #
-    # To scale up your Spot fleet, increase its target capacity. The Spot
-    # fleet launches the additional Spot instances according to the
-    # allocation strategy for the Spot fleet request. If the allocation
-    # strategy is `lowestPrice`, the Spot fleet launches instances using the
+    # To scale up your Spot Fleet, increase its target capacity. The Spot
+    # Fleet launches the additional Spot Instances according to the
+    # allocation strategy for the Spot Fleet request. If the allocation
+    # strategy is `lowestPrice`, the Spot Fleet launches instances using the
     # Spot pool with the lowest price. If the allocation strategy is
-    # `diversified`, the Spot fleet distributes the instances across the
+    # `diversified`, the Spot Fleet distributes the instances across the
     # Spot pools.
     #
-    # To scale down your Spot fleet, decrease its target capacity. First,
-    # the Spot fleet cancels any open bids that exceed the new target
-    # capacity. You can request that the Spot fleet terminate Spot instances
+    # To scale down your Spot Fleet, decrease its target capacity. First,
+    # the Spot Fleet cancels any open requests that exceed the new target
+    # capacity. You can request that the Spot Fleet terminate Spot Instances
     # until the size of the fleet no longer exceeds the new target capacity.
-    # If the allocation strategy is `lowestPrice`, the Spot fleet terminates
+    # If the allocation strategy is `lowestPrice`, the Spot Fleet terminates
     # the instances with the highest price per unit. If the allocation
-    # strategy is `diversified`, the Spot fleet terminates instances across
-    # the Spot pools. Alternatively, you can request that the Spot fleet
-    # keep the fleet at its current size, but not replace any Spot instances
+    # strategy is `diversified`, the Spot Fleet terminates instances across
+    # the Spot pools. Alternatively, you can request that the Spot Fleet
+    # keep the fleet at its current size, but not replace any Spot Instances
     # that are interrupted or that you terminate manually.
     #
+    # If you are finished with your Spot Fleet for now, but will use it
+    # again later, you can set the target capacity to 0.
+    #
     # @option params [String] :excess_capacity_termination_policy
-    #   Indicates whether running Spot instances should be terminated if the
-    #   target capacity of the Spot fleet request is decreased below the
-    #   current size of the Spot fleet.
+    #   Indicates whether running Spot Instances should be terminated if the
+    #   target capacity of the Spot Fleet request is decreased below the
+    #   current size of the Spot Fleet.
     #
     # @option params [required, String] :spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #
     # @option params [Integer] :target_capacity
     #   The size of the fleet.
@@ -18097,6 +19599,152 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_vpc_endpoint(params = {}, options = {})
       req = build_request(:modify_vpc_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Modifies a connection notification for VPC endpoint or VPC endpoint
+    # service. You can change the SNS topic for the notification, or the
+    # events for which to be notified.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :connection_notification_id
+    #   The ID of the notification.
+    #
+    # @option params [String] :connection_notification_arn
+    #   The ARN for the SNS topic for the notification.
+    #
+    # @option params [Array<String>] :connection_events
+    #   One or more events for the endpoint. Valid values are `Accept`,
+    #   `Connect`, `Delete`, and `Reject`.
+    #
+    # @return [Types::ModifyVpcEndpointConnectionNotificationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpcEndpointConnectionNotificationResult#return_value #return_value} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpc_endpoint_connection_notification({
+    #     dry_run: false,
+    #     connection_notification_id: "String", # required
+    #     connection_notification_arn: "String",
+    #     connection_events: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return_value #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointConnectionNotification AWS API Documentation
+    #
+    # @overload modify_vpc_endpoint_connection_notification(params = {})
+    # @param [Hash] params ({})
+    def modify_vpc_endpoint_connection_notification(params = {}, options = {})
+      req = build_request(:modify_vpc_endpoint_connection_notification, params)
+      req.send_request(options)
+    end
+
+    # Modifies the attributes of your VPC endpoint service configuration.
+    # You can change the Network Load Balancers for your service, and you
+    # can specify whether acceptance is required for requests to connect to
+    # your endpoint service through an interface VPC endpoint.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :service_id
+    #   The ID of the service.
+    #
+    # @option params [Boolean] :acceptance_required
+    #   Indicate whether requests to create an endpoint to your service must
+    #   be accepted.
+    #
+    # @option params [Array<String>] :add_network_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of Network Load Balancers to add to
+    #   your service configuration.
+    #
+    # @option params [Array<String>] :remove_network_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of Network Load Balancers to remove
+    #   from your service configuration.
+    #
+    # @return [Types::ModifyVpcEndpointServiceConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpcEndpointServiceConfigurationResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpc_endpoint_service_configuration({
+    #     dry_run: false,
+    #     service_id: "String", # required
+    #     acceptance_required: false,
+    #     add_network_load_balancer_arns: ["String"],
+    #     remove_network_load_balancer_arns: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServiceConfiguration AWS API Documentation
+    #
+    # @overload modify_vpc_endpoint_service_configuration(params = {})
+    # @param [Hash] params ({})
+    def modify_vpc_endpoint_service_configuration(params = {}, options = {})
+      req = build_request(:modify_vpc_endpoint_service_configuration, params)
+      req.send_request(options)
+    end
+
+    # Modifies the permissions for your VPC endpoint service. You can add or
+    # remove permissions for service consumers (IAM users, IAM roles, and
+    # AWS accounts) to discover your endpoint service.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :service_id
+    #   The ID of the service.
+    #
+    # @option params [Array<String>] :add_allowed_principals
+    #   One or more Amazon Resource Names (ARNs) of principals for which to
+    #   allow permission. Specify `*` to allow all principals.
+    #
+    # @option params [Array<String>] :remove_allowed_principals
+    #   One or more Amazon Resource Names (ARNs) of principals for which to
+    #   remove permission.
+    #
+    # @return [Types::ModifyVpcEndpointServicePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpcEndpointServicePermissionsResult#return_value #return_value} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpc_endpoint_service_permissions({
+    #     dry_run: false,
+    #     service_id: "String", # required
+    #     add_allowed_principals: ["String"],
+    #     remove_allowed_principals: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return_value #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissions AWS API Documentation
+    #
+    # @overload modify_vpc_endpoint_service_permissions(params = {})
+    # @param [Hash] params ({})
+    def modify_vpc_endpoint_service_permissions(params = {}, options = {})
+      req = build_request(:modify_vpc_endpoint_service_permissions, params)
       req.send_request(options)
     end
 
@@ -18744,7 +20392,7 @@ module Aws::EC2
     #   with a PV AMI can make instances launched from the AMI unreachable.
     #
     # @option params [String] :virtualization_type
-    #   The type of virtualization.
+    #   The type of virtualization (`hvm` \| `paravirtual`).
     #
     #   Default: `paravirtual`
     #
@@ -18765,6 +20413,7 @@ module Aws::EC2
     #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
+    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -18794,6 +20443,49 @@ module Aws::EC2
     # @param [Hash] params ({})
     def register_image(params = {}, options = {})
       req = build_request(:register_image, params)
+      req.send_request(options)
+    end
+
+    # Rejects one or more VPC endpoint connection requests to your VPC
+    # endpoint service.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :service_id
+    #   The ID of the service.
+    #
+    # @option params [required, Array<String>] :vpc_endpoint_ids
+    #   The IDs of one or more VPC endpoints.
+    #
+    # @return [Types::RejectVpcEndpointConnectionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectVpcEndpointConnectionsResult#unsuccessful #unsuccessful} => Array&lt;Types::UnsuccessfulItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_vpc_endpoint_connections({
+    #     dry_run: false,
+    #     service_id: "String", # required
+    #     vpc_endpoint_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.unsuccessful #=> Array
+    #   resp.unsuccessful[0].error.code #=> String
+    #   resp.unsuccessful[0].error.message #=> String
+    #   resp.unsuccessful[0].resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcEndpointConnections AWS API Documentation
+    #
+    # @overload reject_vpc_endpoint_connections(params = {})
+    # @param [Hash] params ({})
+    def reject_vpc_endpoint_connections(params = {}, options = {})
+      req = build_request(:reject_vpc_endpoint_connections, params)
       req.send_request(options)
     end
 
@@ -19401,22 +21093,26 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a Spot fleet request.
+    # Creates a Spot Fleet request.
     #
     # You can submit a single request that includes multiple launch
     # specifications that vary by instance type, AMI, Availability Zone, or
     # subnet.
     #
-    # By default, the Spot fleet requests Spot instances in the Spot pool
+    # By default, the Spot Fleet requests Spot Instances in the Spot pool
     # where the price per unit is the lowest. Each launch specification can
     # include its own instance weighting that reflects the value of the
     # instance type to your application workload.
     #
-    # Alternatively, you can specify that the Spot fleet distribute the
+    # Alternatively, you can specify that the Spot Fleet distribute the
     # target capacity across the Spot pools included in its launch
-    # specifications. By ensuring that the Spot instances in your Spot fleet
+    # specifications. By ensuring that the Spot Instances in your Spot Fleet
     # are in different Spot pools, you can improve the availability of your
     # fleet.
+    #
+    # You can specify tags for the Spot Instances. You cannot tag other
+    # resource types in a Spot Fleet request; only the `instance` resource
+    # type is supported.
     #
     # For more information, see [Spot Fleet Requests][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
@@ -19432,7 +21128,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [required, Types::SpotFleetRequestConfigData] :spot_fleet_request_config
-    #   The configuration for the Spot fleet request.
+    #   The configuration for the Spot Fleet request.
     #
     # @return [Types::RequestSpotFleetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -19599,7 +21295,7 @@ module Aws::EC2
     #       excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #       fulfilled_capacity: 1.0,
     #       iam_fleet_role: "String", # required
-    #       launch_specifications: [ # required
+    #       launch_specifications: [
     #         {
     #           security_groups: [
     #             {
@@ -19616,6 +21312,7 @@ module Aws::EC2
     #                 encrypted: false,
     #                 delete_on_termination: false,
     #                 iops: 1,
+    #                 kms_key_id: "String",
     #                 snapshot_id: "String",
     #                 volume_size: 1,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -19683,14 +21380,32 @@ module Aws::EC2
     #           ],
     #         },
     #       ],
-    #       spot_price: "String", # required
+    #       launch_template_configs: [
+    #         {
+    #           launch_template_specification: {
+    #             launch_template_id: "String",
+    #             launch_template_name: "LaunchTemplateName",
+    #             version: "String",
+    #           },
+    #           overrides: [
+    #             {
+    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #               spot_price: "String",
+    #               subnet_id: "String",
+    #               availability_zone: "String",
+    #               weighted_capacity: 1.0,
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       spot_price: "String",
     #       target_capacity: 1, # required
     #       terminate_instances_with_expiration: false,
     #       type: "request", # accepts request, maintain
     #       valid_from: Time.now,
     #       valid_until: Time.now,
     #       replace_unhealthy_instances: false,
-    #       instance_interruption_behavior: "stop", # accepts stop, terminate
+    #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #       load_balancers_config: {
     #         classic_load_balancers_config: {
     #           classic_load_balancers: [ # required
@@ -19723,48 +21438,46 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a Spot instance request. Spot instances are instances that
-    # Amazon EC2 launches when the bid price that you specify exceeds the
-    # current Spot price. Amazon EC2 periodically sets the Spot price based
-    # on available Spot Instance capacity and current Spot instance
-    # requests. For more information, see [Spot Instance Requests][1] in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # Creates a Spot Instance request. Spot Instances are instances that
+    # Amazon EC2 launches when the maximum price that you specify exceeds
+    # the current Spot price. For more information, see [Spot Instance
+    # Requests][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html
     #
     # @option params [String] :availability_zone_group
-    #   The user-specified name for a logical grouping of bids.
+    #   The user-specified name for a logical grouping of requests.
     #
     #   When you specify an Availability Zone group in a Spot Instance
-    #   request, all Spot instances in the request are launched in the same
+    #   request, all Spot Instances in the request are launched in the same
     #   Availability Zone. Instance proximity is maintained with this
     #   parameter, but the choice of Availability Zone is not. The group
-    #   applies only to bids for Spot Instances of the same instance type. Any
-    #   additional Spot instance requests that are specified with the same
+    #   applies only to requests for Spot Instances of the same instance type.
+    #   Any additional Spot Instance requests that are specified with the same
     #   Availability Zone group name are launched in that same Availability
     #   Zone, as long as at least one instance from the group is still active.
     #
     #   If there is no active instance running in the Availability Zone group
-    #   that you specify for a new Spot instance request (all instances are
-    #   terminated, the bid is expired, or the bid falls below current
-    #   market), then Amazon EC2 launches the instance in any Availability
-    #   Zone where the constraint can be met. Consequently, the subsequent set
-    #   of Spot instances could be placed in a different zone from the
-    #   original request, even if you specified the same Availability Zone
-    #   group.
+    #   that you specify for a new Spot Instance request (all instances are
+    #   terminated, the request is expired, or the maximum price you specified
+    #   falls below current Spot price), then Amazon EC2 launches the instance
+    #   in any Availability Zone where the constraint can be met.
+    #   Consequently, the subsequent set of Spot Instances could be placed in
+    #   a different zone from the original request, even if you specified the
+    #   same Availability Zone group.
     #
     #   Default: Instances are launched in any available Availability Zone.
     #
     # @option params [Integer] :block_duration_minutes
-    #   The required duration for the Spot instances (also known as Spot
+    #   The required duration for the Spot Instances (also known as Spot
     #   blocks), in minutes. This value must be a multiple of 60 (60, 120,
     #   180, 240, 300, or 360).
     #
-    #   The duration period starts as soon as your Spot instance receives its
+    #   The duration period starts as soon as your Spot Instance receives its
     #   instance ID. At the end of the duration period, Amazon EC2 marks the
-    #   Spot instance for termination and provides a Spot instance termination
+    #   Spot Instance for termination and provides a Spot Instance termination
     #   notice, which gives the instance a two-minute warning before it
     #   terminates.
     #
@@ -19787,12 +21500,12 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
     # @option params [Integer] :instance_count
-    #   The maximum number of Spot instances to launch.
+    #   The maximum number of Spot Instances to launch.
     #
     #   Default: 1
     #
     # @option params [String] :launch_group
-    #   The instance launch group. Launch groups are Spot instances that
+    #   The instance launch group. Launch groups are Spot Instances that
     #   launch together and terminate together.
     #
     #   Default: Instances are launched and terminated individually
@@ -19800,12 +21513,12 @@ module Aws::EC2
     # @option params [Types::RequestSpotLaunchSpecification] :launch_specification
     #   The launch specification.
     #
-    # @option params [required, String] :spot_price
-    #   The maximum hourly price (bid) for any Spot instance launched to
-    #   fulfill the request.
+    # @option params [String] :spot_price
+    #   The maximum price per hour that you are willing to pay for a Spot
+    #   Instance. The default is the On-Demand price.
     #
     # @option params [String] :type
-    #   The Spot instance request type.
+    #   The Spot Instance request type.
     #
     #   Default: `one-time`
     #
@@ -19816,19 +21529,16 @@ module Aws::EC2
     #   If the request is persistent, the request becomes active at this date
     #   and time and remains active until it expires or is canceled.
     #
-    #   Default: The request is effective indefinitely.
-    #
     # @option params [Time,DateTime,Date,Integer,String] :valid_until
     #   The end date of the request. If this is a one-time request, the
     #   request remains active until all instances launch, the request is
     #   canceled, or this date is reached. If the request is persistent, it
-    #   remains active until it is canceled or this date and time is reached.
-    #
-    #   Default: The request is effective indefinitely.
+    #   remains active until it is canceled or this date is reached. The
+    #   default end date is 7 days from the current date.
     #
     # @option params [String] :instance_interruption_behavior
-    #   Indicates whether a Spot instance stops or terminates when it is
-    #   interrupted.
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
     #
     # @return [Types::RequestSpotInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -19906,6 +21616,7 @@ module Aws::EC2
     #             encrypted: false,
     #             delete_on_termination: false,
     #             iops: 1,
+    #             kms_key_id: "String",
     #             snapshot_id: "String",
     #             volume_size: 1,
     #             volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -19959,11 +21670,11 @@ module Aws::EC2
     #       subnet_id: "String",
     #       user_data: "String",
     #     },
-    #     spot_price: "String", # required
+    #     spot_price: "String",
     #     type: "one-time", # accepts one-time, persistent
     #     valid_from: Time.now,
     #     valid_until: Time.now,
-    #     instance_interruption_behavior: "stop", # accepts stop, terminate
+    #     instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #   })
     #
     # @example Response structure
@@ -19988,6 +21699,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.delete_on_termination #=> Boolean
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.iops #=> Integer
+    #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.kms_key_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.snapshot_id #=> String
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_size #=> Integer
     #   resp.spot_instance_requests[0].launch_specification.block_device_mappings[0].ebs.volume_type #=> String, one of "standard", "io1", "gp2", "sc1", "st1"
@@ -20036,7 +21748,7 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].type #=> String, one of "one-time", "persistent"
     #   resp.spot_instance_requests[0].valid_from #=> Time
     #   resp.spot_instance_requests[0].valid_until #=> Time
-    #   resp.spot_instance_requests[0].instance_interruption_behavior #=> String, one of "stop", "terminate"
+    #   resp.spot_instance_requests[0].instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstances AWS API Documentation
     #
@@ -20603,6 +22315,11 @@ module Aws::EC2
     # * If any of the AMIs have a product code attached for which the user
     #   has not subscribed, the request fails.
     #
+    # You can create a [launch template][4], which is a resource that
+    # contains the parameters to launch an instance. When you launch an
+    # instance using RunInstances, you can specify the launch template
+    # instead of specifying the launch parameters.
+    #
     # To ensure faster instance launches, break up large requests into
     # smaller batches. For example, create five separate launch requests for
     # 100 instances each instead of one launch request for 500 instances.
@@ -20611,16 +22328,16 @@ module Aws::EC2
     # You can check the state of your instance using DescribeInstances. You
     # can tag instances and EBS volumes during launch, after launch, or
     # both. For more information, see CreateTags and [Tagging Your Amazon
-    # EC2 Resources][4].
+    # EC2 Resources][5].
     #
     # Linux instances have access to the public key of the key pair at boot.
     # You can use this key to provide secure access to the instance. Amazon
     # EC2 public images use this feature to provide secure access without
-    # passwords. For more information, see [Key Pairs][5] in the *Amazon
+    # passwords. For more information, see [Key Pairs][6] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
     # For troubleshooting, see [What To Do If An Instance Immediately
-    # Terminates][6], and [Troubleshooting Connecting to Your Instance][7]
+    # Terminates][7], and [Troubleshooting Connecting to Your Instance][8]
     # in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -20628,10 +22345,11 @@ module Aws::EC2
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
     # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
     # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
-    # [4]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-    # [5]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
-    # [6]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html
-    # [7]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
+    # [4]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    # [5]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [6]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+    # [7]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html
+    # [8]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
     #
     # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
     #   One or more block device mapping entries. You can't specify both a
@@ -20640,7 +22358,7 @@ module Aws::EC2
     #   volume, it is not blank and its encryption status is used for the
     #   volume encryption status.
     #
-    # @option params [required, String] :image_id
+    # @option params [String] :image_id
     #   The ID of the AMI, which you can get by calling DescribeImages.
     #
     # @option params [String] :instance_type
@@ -20824,12 +22542,20 @@ module Aws::EC2
     #   more than one instance in the request.
     #
     # @option params [Array<Types::ElasticGpuSpecification>] :elastic_gpu_specification
-    #   An Elastic GPU to associate with the instance.
+    #   An elastic GPU to associate with the instance.
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the resources during launch. You can tag
     #   instances and volumes. The specified tags are applied to all instances
     #   or volumes that are created during launch.
+    #
+    # @option params [Types::LaunchTemplateSpecification] :launch_template
+    #   The launch template to use to launch the instances. Any parameters
+    #   that you specify in RunInstances override the same parameters in the
+    #   launch template.
+    #
+    # @option params [Types::InstanceMarketOptionsRequest] :instance_market_options
+    #   The market (purchasing) option for the instances.
     #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -20850,6 +22576,7 @@ module Aws::EC2
     #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
+    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -20857,7 +22584,7 @@ module Aws::EC2
     #         no_device: "String",
     #       },
     #     ],
-    #     image_id: "String", # required
+    #     image_id: "String",
     #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #     ipv_6_address_count: 1,
     #     ipv_6_addresses: [
@@ -20937,6 +22664,21 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     launch_template: {
+    #       launch_template_id: "String",
+    #       launch_template_name: "String",
+    #       version: "String",
+    #     },
+    #     instance_market_options: {
+    #       market_type: "spot", # accepts spot
+    #       spot_options: {
+    #         max_price: "String",
+    #         spot_instance_type: "one-time", # accepts one-time, persistent
+    #         block_duration_minutes: 1,
+    #         valid_until: Time.now,
+    #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -21793,7 +23535,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -63,6 +63,51 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AcceptVpcEndpointConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_id: "String", # required
+    #         vpc_endpoint_ids: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the endpoint service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_ids
+    #   The IDs of one or more interface VPC endpoints.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcEndpointConnectionsRequest AWS API Documentation
+    #
+    class AcceptVpcEndpointConnectionsRequest < Struct.new(
+      :dry_run,
+      :service_id,
+      :vpc_endpoint_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] unsuccessful
+    #   Information about the interface endpoints that were not accepted, if
+    #   applicable.
+    #   @return [Array<Types::UnsuccessfulItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcEndpointConnectionsResult AWS API Documentation
+    #
+    class AcceptVpcEndpointConnectionsResult < Struct.new(
+      :unsuccessful)
+      include Aws::Structure
+    end
+
     # Contains the parameters for AcceptVpcPeeringConnection.
     #
     # @note When making an API call, you may pass AcceptVpcPeeringConnectionRequest
@@ -136,7 +181,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a running instance in a Spot fleet.
+    # Describes a running instance in a Spot Fleet.
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance.
@@ -147,7 +192,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_request_id
-    #   The ID of the Spot instance request.
+    #   The ID of the Spot Instance request.
     #   @return [String]
     #
     # @!attribute [rw] instance_health
@@ -349,6 +394,24 @@ module Aws::EC2
     #
     class AllocateHostsResult < Struct.new(
       :host_ids)
+      include Aws::Structure
+    end
+
+    # Describes a principal.
+    #
+    # @!attribute [rw] principal_type
+    #   The type of principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal
+    #   The Amazon Resource Name (ARN) of the principal.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllowedPrincipal AWS API Documentation
+    #
+    class AllowedPrincipal < Struct.new(
+      :principal_type,
+      :principal)
       include Aws::Structure
     end
 
@@ -1378,6 +1441,7 @@ module Aws::EC2
     #           encrypted: false,
     #           delete_on_termination: false,
     #           iops: 1,
+    #           kms_key_id: "String",
     #           snapshot_id: "String",
     #           volume_size: 1,
     #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -1743,7 +1807,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Spot fleet error.
+    # Describes a Spot Fleet error.
     #
     # @!attribute [rw] code
     #   The error code.
@@ -1761,14 +1825,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Spot fleet request that was not successfully canceled.
+    # Describes a Spot Fleet request that was not successfully canceled.
     #
     # @!attribute [rw] error
     #   The error.
     #   @return [Types::CancelSpotFleetRequestsError]
     #
     # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsErrorItem AWS API Documentation
@@ -1798,11 +1862,11 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] spot_fleet_request_ids
-    #   The IDs of the Spot fleet requests.
+    #   The IDs of the Spot Fleet requests.
     #   @return [Array<String>]
     #
     # @!attribute [rw] terminate_instances
-    #   Indicates whether to terminate instances for a Spot fleet request if
+    #   Indicates whether to terminate instances for a Spot Fleet request if
     #   it is canceled successfully.
     #   @return [Boolean]
     #
@@ -1818,12 +1882,12 @@ module Aws::EC2
     # Contains the output of CancelSpotFleetRequests.
     #
     # @!attribute [rw] successful_fleet_requests
-    #   Information about the Spot fleet requests that are successfully
+    #   Information about the Spot Fleet requests that are successfully
     #   canceled.
     #   @return [Array<Types::CancelSpotFleetRequestsSuccessItem>]
     #
     # @!attribute [rw] unsuccessful_fleet_requests
-    #   Information about the Spot fleet requests that are not successfully
+    #   Information about the Spot Fleet requests that are not successfully
     #   canceled.
     #   @return [Array<Types::CancelSpotFleetRequestsErrorItem>]
     #
@@ -1835,18 +1899,18 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Spot fleet request that was successfully canceled.
+    # Describes a Spot Fleet request that was successfully canceled.
     #
     # @!attribute [rw] current_spot_fleet_request_state
-    #   The current state of the Spot fleet request.
+    #   The current state of the Spot Fleet request.
     #   @return [String]
     #
     # @!attribute [rw] previous_spot_fleet_request_state
-    #   The previous state of the Spot fleet request.
+    #   The previous state of the Spot Fleet request.
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsSuccessItem AWS API Documentation
@@ -1876,7 +1940,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] spot_instance_request_ids
-    #   One or more Spot instance request IDs.
+    #   One or more Spot Instance request IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequestsRequest AWS API Documentation
@@ -1890,7 +1954,7 @@ module Aws::EC2
     # Contains the output of CancelSpotInstanceRequests.
     #
     # @!attribute [rw] cancelled_spot_instance_requests
-    #   One or more Spot instance requests.
+    #   One or more Spot Instance requests.
     #   @return [Array<Types::CancelledSpotInstanceRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequestsResult AWS API Documentation
@@ -1900,14 +1964,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a request to cancel a Spot instance.
+    # Describes a request to cancel a Spot Instance.
     #
     # @!attribute [rw] spot_instance_request_id
-    #   The ID of the Spot instance request.
+    #   The ID of the Spot Instance request.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the Spot instance request.
+    #   The state of the Spot Instance request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelledSpotInstanceRequest AWS API Documentation
@@ -1997,8 +2061,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the Classic Load Balancers to attach to a Spot fleet. Spot
-    # fleet registers the running Spot instances with these Classic Load
+    # Describes the Classic Load Balancers to attach to a Spot Fleet. Spot
+    # Fleet registers the running Spot Instances with these Classic Load
     # Balancers.
     #
     # @note When making an API call, you may pass ClassicLoadBalancersConfig
@@ -2114,6 +2178,51 @@ module Aws::EC2
     class ConfirmProductInstanceResult < Struct.new(
       :owner_id,
       :return)
+      include Aws::Structure
+    end
+
+    # Describes a connection notification for a VPC endpoint or VPC endpoint
+    # service.
+    #
+    # @!attribute [rw] connection_notification_id
+    #   The ID of the notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the endpoint service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_notification_type
+    #   The type of notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_notification_arn
+    #   The ARN of the SNS topic for the notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_events
+    #   The events for the notification. Valid values are `Accept`,
+    #   `Connect`, `Delete`, and `Reject`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connection_notification_state
+    #   The state of the notification.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConnectionNotification AWS API Documentation
+    #
+    class ConnectionNotification < Struct.new(
+      :connection_notification_id,
+      :service_id,
+      :vpc_endpoint_id,
+      :connection_notification_type,
+      :connection_notification_arn,
+      :connection_events,
+      :connection_notification_state)
       include Aws::Structure
     end
 
@@ -2872,6 +2981,7 @@ module Aws::EC2
     #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
+    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -3067,6 +3177,341 @@ module Aws::EC2
     class CreateKeyPairRequest < Struct.new(
       :key_name,
       :dry_run)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateLaunchTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         client_token: "String",
+    #         launch_template_name: "LaunchTemplateName", # required
+    #         version_description: "VersionDescription",
+    #         launch_template_data: { # required
+    #           kernel_id: "String",
+    #           ebs_optimized: false,
+    #           iam_instance_profile: {
+    #             arn: "String",
+    #             name: "String",
+    #           },
+    #           block_device_mappings: [
+    #             {
+    #               device_name: "String",
+    #               virtual_name: "String",
+    #               ebs: {
+    #                 encrypted: false,
+    #                 delete_on_termination: false,
+    #                 iops: 1,
+    #                 kms_key_id: "String",
+    #                 snapshot_id: "String",
+    #                 volume_size: 1,
+    #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               },
+    #               no_device: "String",
+    #             },
+    #           ],
+    #           network_interfaces: [
+    #             {
+    #               associate_public_ip_address: false,
+    #               delete_on_termination: false,
+    #               description: "String",
+    #               device_index: 1,
+    #               groups: ["String"],
+    #               ipv_6_address_count: 1,
+    #               ipv_6_addresses: [
+    #                 {
+    #                   ipv_6_address: "String",
+    #                 },
+    #               ],
+    #               network_interface_id: "String",
+    #               private_ip_address: "String",
+    #               private_ip_addresses: [
+    #                 {
+    #                   primary: false,
+    #                   private_ip_address: "String", # required
+    #                 },
+    #               ],
+    #               secondary_private_ip_address_count: 1,
+    #               subnet_id: "String",
+    #             },
+    #           ],
+    #           image_id: "String",
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #           key_name: "String",
+    #           monitoring: {
+    #             enabled: false,
+    #           },
+    #           placement: {
+    #             availability_zone: "String",
+    #             affinity: "String",
+    #             group_name: "String",
+    #             host_id: "String",
+    #             tenancy: "default", # accepts default, dedicated, host
+    #             spread_domain: "String",
+    #           },
+    #           ram_disk_id: "String",
+    #           disable_api_termination: false,
+    #           instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #           user_data: "String",
+    #           tag_specifications: [
+    #             {
+    #               resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #               tags: [
+    #                 {
+    #                   key: "String",
+    #                   value: "String",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           elastic_gpu_specifications: [
+    #             {
+    #               type: "String", # required
+    #             },
+    #           ],
+    #           security_group_ids: ["String"],
+    #           security_groups: ["String"],
+    #           instance_market_options: {
+    #             market_type: "spot", # accepts spot
+    #             spot_options: {
+    #               max_price: "String",
+    #               spot_instance_type: "one-time", # accepts one-time, persistent
+    #               block_duration_minutes: 1,
+    #               valid_until: Time.now,
+    #               instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #             },
+    #           },
+    #           credit_specification: {
+    #             cpu_credits: "String",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   A name for the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_description
+    #   A description for the first version of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_data
+    #   The information for the launch template.
+    #   @return [Types::RequestLaunchTemplateData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateRequest AWS API Documentation
+    #
+    class CreateLaunchTemplateRequest < Struct.new(
+      :dry_run,
+      :client_token,
+      :launch_template_name,
+      :version_description,
+      :launch_template_data)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_template
+    #   Information about the launch template.
+    #   @return [Types::LaunchTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateResult AWS API Documentation
+    #
+    class CreateLaunchTemplateResult < Struct.new(
+      :launch_template)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateLaunchTemplateVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         client_token: "String",
+    #         launch_template_id: "String",
+    #         launch_template_name: "LaunchTemplateName",
+    #         source_version: "String",
+    #         version_description: "VersionDescription",
+    #         launch_template_data: { # required
+    #           kernel_id: "String",
+    #           ebs_optimized: false,
+    #           iam_instance_profile: {
+    #             arn: "String",
+    #             name: "String",
+    #           },
+    #           block_device_mappings: [
+    #             {
+    #               device_name: "String",
+    #               virtual_name: "String",
+    #               ebs: {
+    #                 encrypted: false,
+    #                 delete_on_termination: false,
+    #                 iops: 1,
+    #                 kms_key_id: "String",
+    #                 snapshot_id: "String",
+    #                 volume_size: 1,
+    #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #               },
+    #               no_device: "String",
+    #             },
+    #           ],
+    #           network_interfaces: [
+    #             {
+    #               associate_public_ip_address: false,
+    #               delete_on_termination: false,
+    #               description: "String",
+    #               device_index: 1,
+    #               groups: ["String"],
+    #               ipv_6_address_count: 1,
+    #               ipv_6_addresses: [
+    #                 {
+    #                   ipv_6_address: "String",
+    #                 },
+    #               ],
+    #               network_interface_id: "String",
+    #               private_ip_address: "String",
+    #               private_ip_addresses: [
+    #                 {
+    #                   primary: false,
+    #                   private_ip_address: "String", # required
+    #                 },
+    #               ],
+    #               secondary_private_ip_address_count: 1,
+    #               subnet_id: "String",
+    #             },
+    #           ],
+    #           image_id: "String",
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #           key_name: "String",
+    #           monitoring: {
+    #             enabled: false,
+    #           },
+    #           placement: {
+    #             availability_zone: "String",
+    #             affinity: "String",
+    #             group_name: "String",
+    #             host_id: "String",
+    #             tenancy: "default", # accepts default, dedicated, host
+    #             spread_domain: "String",
+    #           },
+    #           ram_disk_id: "String",
+    #           disable_api_termination: false,
+    #           instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #           user_data: "String",
+    #           tag_specifications: [
+    #             {
+    #               resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #               tags: [
+    #                 {
+    #                   key: "String",
+    #                   value: "String",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           elastic_gpu_specifications: [
+    #             {
+    #               type: "String", # required
+    #             },
+    #           ],
+    #           security_group_ids: ["String"],
+    #           security_groups: ["String"],
+    #           instance_market_options: {
+    #             market_type: "spot", # accepts spot
+    #             spot_options: {
+    #               max_price: "String",
+    #               spot_instance_type: "one-time", # accepts one-time, persistent
+    #               block_duration_minutes: 1,
+    #               valid_until: Time.now,
+    #               instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #             },
+    #           },
+    #           credit_specification: {
+    #             cpu_credits: "String",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_version
+    #   The version number of the launch template version on which to base
+    #   the new version. The new version inherits the same launch parameters
+    #   as the source version, except for parameters that you specify in
+    #   LaunchTemplateData.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_description
+    #   A description for the version of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_data
+    #   The information for the launch template.
+    #   @return [Types::RequestLaunchTemplateData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersionRequest AWS API Documentation
+    #
+    class CreateLaunchTemplateVersionRequest < Struct.new(
+      :dry_run,
+      :client_token,
+      :launch_template_id,
+      :launch_template_name,
+      :source_version,
+      :version_description,
+      :launch_template_data)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_template_version
+    #   Information about the launch template version.
+    #   @return [Types::LaunchTemplateVersion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersionResult AWS API Documentation
+    #
+    class CreateLaunchTemplateVersionResult < Struct.new(
+      :launch_template_version)
       include Aws::Structure
     end
 
@@ -3808,7 +4253,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] bucket
-    #   The Amazon S3 bucket in which to store the Spot instance data feed.
+    #   The Amazon S3 bucket in which to store the Spot Instance data feed.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -3834,7 +4279,7 @@ module Aws::EC2
     # Contains the output of CreateSpotDatafeedSubscription.
     #
     # @!attribute [rw] spot_datafeed_subscription
-    #   The Spot instance data feed subscription.
+    #   The Spot Instance data feed subscription.
     #   @return [Types::SpotDatafeedSubscription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscriptionResult AWS API Documentation
@@ -4137,6 +4582,81 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateVpcEndpointConnectionNotificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_id: "String",
+    #         vpc_endpoint_id: "String",
+    #         connection_notification_arn: "String", # required
+    #         connection_events: ["String"], # required
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the endpoint service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_notification_arn
+    #   The ARN of the SNS topic for the notifications.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_events
+    #   One or more endpoint events for which to receive notifications.
+    #   Valid values are `Accept`, `Connect`, `Delete`, and `Reject`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointConnectionNotificationRequest AWS API Documentation
+    #
+    class CreateVpcEndpointConnectionNotificationRequest < Struct.new(
+      :dry_run,
+      :service_id,
+      :vpc_endpoint_id,
+      :connection_notification_arn,
+      :connection_events,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_notification
+    #   Information about the notification.
+    #   @return [Types::ConnectionNotification]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointConnectionNotificationResult AWS API Documentation
+    #
+    class CreateVpcEndpointConnectionNotificationResult < Struct.new(
+      :connection_notification,
+      :client_token)
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateVpcEndpoint.
     #
     # @note When making an API call, you may pass CreateVpcEndpointRequest
@@ -4163,8 +4683,9 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc_endpoint_type
-    #   The type of endpoint. If not specified, the default is a gateway
-    #   endpoint.
+    #   The type of endpoint.
+    #
+    #   Default: Gateway
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -4172,8 +4693,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The AWS service name, in the form `com.amazonaws.region.service `.
-    #   To get a list of available services, use the
+    #   The service name. To get a list of available services, use the
     #   DescribeVpcEndpointServices request.
     #   @return [String]
     #
@@ -4190,12 +4710,12 @@ module Aws::EC2
     #
     # @!attribute [rw] subnet_ids
     #   (Interface endpoint) The ID of one or more subnets in which to
-    #   create a network interface for the endpoint.
+    #   create an endpoint network interface.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_ids
     #   (Interface endpoint) The ID of one or more security groups to
-    #   associate with the network interface.
+    #   associate with the endpoint network interface.
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
@@ -4256,6 +4776,71 @@ module Aws::EC2
     #
     class CreateVpcEndpointResult < Struct.new(
       :vpc_endpoint,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateVpcEndpointServiceConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         acceptance_required: false,
+    #         network_load_balancer_arns: ["String"], # required
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] acceptance_required
+    #   Indicate whether requests from service consumers to create an
+    #   endpoint to your service must be accepted. To accept a request, use
+    #   AcceptVpcEndpointConnections.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of one or more Network Load
+    #   Balancers for your service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointServiceConfigurationRequest AWS API Documentation
+    #
+    class CreateVpcEndpointServiceConfigurationRequest < Struct.new(
+      :dry_run,
+      :acceptance_required,
+      :network_load_balancer_arns,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_configuration
+    #   Information about the service configuration.
+    #   @return [Types::ServiceConfiguration]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointServiceConfigurationResult AWS API Documentation
+    #
+    class CreateVpcEndpointServiceConfigurationResult < Struct.new(
+      :service_configuration,
       :client_token)
       include Aws::Structure
     end
@@ -4538,6 +5123,40 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the credit option for CPU usage of a T2 instance.
+    #
+    # @!attribute [rw] cpu_credits
+    #   The credit option for CPU usage of a T2 instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecification AWS API Documentation
+    #
+    class CreditSpecification < Struct.new(
+      :cpu_credits)
+      include Aws::Structure
+    end
+
+    # The credit option for CPU usage of a T2 instance.
+    #
+    # @note When making an API call, you may pass CreditSpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cpu_credits: "String",
+    #       }
+    #
+    # @!attribute [rw] cpu_credits
+    #   The credit option for CPU usage of a T2 instance. Valid values are
+    #   `standard` and `unlimited`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreditSpecificationRequest AWS API Documentation
+    #
+    class CreditSpecificationRequest < Struct.new(
+      :cpu_credits)
+      include Aws::Structure
+    end
+
     # Describes a customer gateway.
     #
     # @!attribute [rw] bgp_asn
@@ -4804,6 +5423,163 @@ module Aws::EC2
     class DeleteKeyPairRequest < Struct.new(
       :key_name,
       :dry_run)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteLaunchTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         launch_template_id: "String",
+    #         launch_template_name: "LaunchTemplateName",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateRequest AWS API Documentation
+    #
+    class DeleteLaunchTemplateRequest < Struct.new(
+      :dry_run,
+      :launch_template_id,
+      :launch_template_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_template
+    #   Information about the launch template.
+    #   @return [Types::LaunchTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateResult AWS API Documentation
+    #
+    class DeleteLaunchTemplateResult < Struct.new(
+      :launch_template)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteLaunchTemplateVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         launch_template_id: "String",
+    #         launch_template_name: "LaunchTemplateName",
+    #         versions: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions
+    #   The version numbers of one or more launch template versions to
+    #   delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersionsRequest AWS API Documentation
+    #
+    class DeleteLaunchTemplateVersionsRequest < Struct.new(
+      :dry_run,
+      :launch_template_id,
+      :launch_template_name,
+      :versions)
+      include Aws::Structure
+    end
+
+    # Describes a launch template version that could not be deleted.
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the launch template.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] response_error
+    #   Information about the error.
+    #   @return [Types::ResponseError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersionsResponseErrorItem AWS API Documentation
+    #
+    class DeleteLaunchTemplateVersionsResponseErrorItem < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version_number,
+      :response_error)
+      include Aws::Structure
+    end
+
+    # Describes a launch template version that was successfully deleted.
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number of the launch template.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersionsResponseSuccessItem AWS API Documentation
+    #
+    class DeleteLaunchTemplateVersionsResponseSuccessItem < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version_number)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successfully_deleted_launch_template_versions
+    #   Information about the launch template versions that were
+    #   successfully deleted.
+    #   @return [Array<Types::DeleteLaunchTemplateVersionsResponseSuccessItem>]
+    #
+    # @!attribute [rw] unsuccessfully_deleted_launch_template_versions
+    #   Information about the launch template versions that could not be
+    #   deleted.
+    #   @return [Array<Types::DeleteLaunchTemplateVersionsResponseErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteLaunchTemplateVersionsResult AWS API Documentation
+    #
+    class DeleteLaunchTemplateVersionsResult < Struct.new(
+      :successfully_deleted_launch_template_versions,
+      :unsuccessfully_deleted_launch_template_versions)
       include Aws::Structure
     end
 
@@ -5280,6 +6056,84 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteVpcEndpointConnectionNotificationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         connection_notification_ids: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] connection_notification_ids
+    #   One or more notification IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointConnectionNotificationsRequest AWS API Documentation
+    #
+    class DeleteVpcEndpointConnectionNotificationsRequest < Struct.new(
+      :dry_run,
+      :connection_notification_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] unsuccessful
+    #   Information about the notifications that could not be deleted
+    #   successfully.
+    #   @return [Array<Types::UnsuccessfulItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointConnectionNotificationsResult AWS API Documentation
+    #
+    class DeleteVpcEndpointConnectionNotificationsResult < Struct.new(
+      :unsuccessful)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteVpcEndpointServiceConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_ids: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_ids
+    #   The IDs of one or more services.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointServiceConfigurationsRequest AWS API Documentation
+    #
+    class DeleteVpcEndpointServiceConfigurationsRequest < Struct.new(
+      :dry_run,
+      :service_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] unsuccessful
+    #   Information about the service configurations that were not deleted,
+    #   if applicable.
+    #   @return [Array<Types::UnsuccessfulItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointServiceConfigurationsResult AWS API Documentation
+    #
+    class DeleteVpcEndpointServiceConfigurationsResult < Struct.new(
+      :unsuccessful)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DeleteVpcEndpoints.
     #
     # @note When making an API call, you may pass DeleteVpcEndpointsRequest
@@ -5298,7 +6152,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc_endpoint_ids
-    #   One or more endpoint IDs.
+    #   One or more VPC endpoint IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointsRequest AWS API Documentation
@@ -5312,7 +6166,8 @@ module Aws::EC2
     # Contains the output of DeleteVpcEndpoints.
     #
     # @!attribute [rw] unsuccessful
-    #   Information about the endpoints that were not successfully deleted.
+    #   Information about the VPC endpoints that were not successfully
+    #   deleted.
     #   @return [Array<Types::UnsuccessfulItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointsResult AWS API Documentation
@@ -7898,6 +8753,198 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeLaunchTemplateVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         launch_template_id: "String",
+    #         launch_template_name: "LaunchTemplateName",
+    #         versions: ["String"],
+    #         min_version: "String",
+    #         max_version: "String",
+    #         next_token: "String",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] versions
+    #   One or more versions of the launch template.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min_version
+    #   The version number after which to describe launch template versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_version
+    #   The version number up to which to describe launch template versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value. This value can be between 5 and 1000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `create-time` - The time the launch template version was created.
+    #
+    #   * `ebs-optimized` - A boolean that indicates whether the instance is
+    #     optimized for Amazon EBS I/O.
+    #
+    #   * `iam-instance-profile` - The ARN of the IAM instance profile.
+    #
+    #   * `image-id` - The ID of the AMI.
+    #
+    #   * `instance-type` - The instance type.
+    #
+    #   * `is-default-version` - A boolean that indicates whether the launch
+    #     template version is the default version.
+    #
+    #   * `kernel-id` - The kernel ID.
+    #
+    #   * `ram-disk-id` - The RAM disk ID.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersionsRequest AWS API Documentation
+    #
+    class DescribeLaunchTemplateVersionsRequest < Struct.new(
+      :dry_run,
+      :launch_template_id,
+      :launch_template_name,
+      :versions,
+      :min_version,
+      :max_version,
+      :next_token,
+      :max_results,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_template_versions
+    #   Information about the launch template versions.
+    #   @return [Array<Types::LaunchTemplateVersion>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersionsResult AWS API Documentation
+    #
+    class DescribeLaunchTemplateVersionsResult < Struct.new(
+      :launch_template_versions,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLaunchTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         launch_template_ids: ["String"],
+    #         launch_template_names: ["LaunchTemplateName"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] launch_template_ids
+    #   One or more launch template IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] launch_template_names
+    #   One or more launch template names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `create-time` - The time the launch template was created.
+    #
+    #   * `launch-template-name` - The name of the launch template.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value. This value can be between 5 and 1000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplatesRequest AWS API Documentation
+    #
+    class DescribeLaunchTemplatesRequest < Struct.new(
+      :dry_run,
+      :launch_template_ids,
+      :launch_template_names,
+      :filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_templates
+    #   Information about the launch templates.
+    #   @return [Array<Types::LaunchTemplate>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplatesResult AWS API Documentation
+    #
+    class DescribeLaunchTemplatesResult < Struct.new(
+      :launch_templates,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeMovingAddresses.
     #
     # @note When making an API call, you may pass DescribeMovingAddressesRequest
@@ -9962,7 +11009,7 @@ module Aws::EC2
     # Contains the output of DescribeSpotDatafeedSubscription.
     #
     # @!attribute [rw] spot_datafeed_subscription
-    #   The Spot instance data feed subscription.
+    #   The Spot Instance data feed subscription.
     #   @return [Types::SpotDatafeedSubscription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotDatafeedSubscriptionResult AWS API Documentation
@@ -10003,7 +11050,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstancesRequest AWS API Documentation
@@ -10029,7 +11076,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstancesResponse AWS API Documentation
@@ -10079,7 +11126,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -10102,7 +11149,7 @@ module Aws::EC2
     # Contains the output of DescribeSpotFleetRequestHistory.
     #
     # @!attribute [rw] history_records
-    #   Information about the events in the history of the Spot fleet
+    #   Information about the events in the history of the Spot Fleet
     #   request.
     #   @return [Array<Types::HistoryRecord>]
     #
@@ -10121,7 +11168,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -10171,7 +11218,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_ids
-    #   The IDs of the Spot fleet requests.
+    #   The IDs of the Spot Fleet requests.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestsRequest AWS API Documentation
@@ -10192,7 +11239,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_configs
-    #   Information about the configuration of your Spot fleet.
+    #   Information about the configuration of your Spot Fleet.
     #   @return [Array<Types::SpotFleetRequestConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestsResponse AWS API Documentation
@@ -10224,7 +11271,7 @@ module Aws::EC2
     #
     #   * `availability-zone-group` - The Availability Zone group.
     #
-    #   * `create-time` - The time stamp when the Spot instance request was
+    #   * `create-time` - The time stamp when the Spot Instance request was
     #     created.
     #
     #   * `fault-code` - The fault code related to the request.
@@ -10233,7 +11280,7 @@ module Aws::EC2
     #
     #   * `instance-id` - The ID of the instance that fulfilled the request.
     #
-    #   * `launch-group` - The Spot instance launch group.
+    #   * `launch-group` - The Spot Instance launch group.
     #
     #   * `launch.block-device-mapping.delete-on-termination` - Indicates
     #     whether the EBS volume is deleted on instance termination.
@@ -10266,12 +11313,12 @@ module Aws::EC2
     #     with.
     #
     #   * `launch.monitoring-enabled` - Whether detailed monitoring is
-    #     enabled for the Spot instance.
+    #     enabled for the Spot Instance.
     #
     #   * `launch.ramdisk-id` - The RAM disk ID.
     #
     #   * `launched-availability-zone` - The Availability Zone in which the
-    #     bid is launched.
+    #     request is launched.
     #
     #   * `network-interface.addresses.primary` - Indicates whether the IP
     #     address is the primary private IP address.
@@ -10300,22 +11347,22 @@ module Aws::EC2
     #   * `product-description` - The product description associated with
     #     the instance (`Linux/UNIX` \| `Windows`).
     #
-    #   * `spot-instance-request-id` - The Spot instance request ID.
+    #   * `spot-instance-request-id` - The Spot Instance request ID.
     #
-    #   * `spot-price` - The maximum hourly price for any Spot instance
+    #   * `spot-price` - The maximum hourly price for any Spot Instance
     #     launched to fulfill the request.
     #
-    #   * `state` - The state of the Spot instance request (`open` \|
-    #     `active` \| `closed` \| `cancelled` \| `failed`). Spot bid status
-    #     information can help you track your Amazon EC2 Spot instance
-    #     requests. For more information, see [Spot Bid Status][1] in the
-    #     Amazon Elastic Compute Cloud User Guide.
+    #   * `state` - The state of the Spot Instance request (`open` \|
+    #     `active` \| `closed` \| `cancelled` \| `failed`). Spot request
+    #     status information can help you track your Amazon EC2 Spot
+    #     Instance requests. For more information, see [Spot Request
+    #     Status][1] in the Amazon Elastic Compute Cloud User Guide.
     #
     #   * `status-code` - The short code describing the most recent
-    #     evaluation of your Spot instance request.
+    #     evaluation of your Spot Instance request.
     #
     #   * `status-message` - The message explaining the status of the Spot
-    #     instance request.
+    #     Instance request.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
     #     to the resource. Specify the key of the tag in the filter name and
@@ -10335,7 +11382,7 @@ module Aws::EC2
     #   * `tag-value` - The value of a tag assigned to the resource. This
     #     filter is independent of the `tag-key` filter.
     #
-    #   * `type` - The type of Spot instance request (`one-time` \|
+    #   * `type` - The type of Spot Instance request (`one-time` \|
     #     `persistent`).
     #
     #   * `valid-from` - The start date of the request.
@@ -10355,7 +11402,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] spot_instance_request_ids
-    #   One or more Spot instance request IDs.
+    #   One or more Spot Instance request IDs.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsRequest AWS API Documentation
@@ -10370,7 +11417,7 @@ module Aws::EC2
     # Contains the output of DescribeSpotInstanceRequests.
     #
     # @!attribute [rw] spot_instance_requests
-    #   One or more Spot instance requests.
+    #   One or more Spot Instance requests.
     #   @return [Array<Types::SpotInstanceRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsResult AWS API Documentation
@@ -10442,8 +11489,7 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] instance_types
-    #   Filters the results by the specified instance types. Note that T2
-    #   and HS1 instance types are not supported.
+    #   Filters the results by the specified instance types.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -11322,6 +12368,320 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeVpcEndpointConnectionNotificationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         connection_notification_id: "String",
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] connection_notification_id
+    #   The ID of the notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `connection-notification-arn` - The ARN of SNS topic for the
+    #     notification.
+    #
+    #   * `connection-notification-id` - The ID of the notification.
+    #
+    #   * `connection-notification-state` - The state of the notification
+    #     (`Enabled` \| `Disabled`).
+    #
+    #   * `connection-notification-type` - The type of notification
+    #     (`Topic`).
+    #
+    #   * `service-id` - The ID of the endpoint service.
+    #
+    #   * `vpc-endpoint-id` - The ID of the VPC endpoint.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another request with the
+    #   returned `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnectionNotificationsRequest AWS API Documentation
+    #
+    class DescribeVpcEndpointConnectionNotificationsRequest < Struct.new(
+      :dry_run,
+      :connection_notification_id,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connection_notification_set
+    #   One or more notifications.
+    #   @return [Array<Types::ConnectionNotification>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnectionNotificationsResult AWS API Documentation
+    #
+    class DescribeVpcEndpointConnectionNotificationsResult < Struct.new(
+      :connection_notification_set,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeVpcEndpointConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `customer-account-id` - The AWS account number of the owner of the
+    #     endpoint.
+    #
+    #   * `endpoint-connection-state` - The state of the endpoint
+    #     (`PendingAcceptance` \| `Pending` \| `Available` \| `Deleting` \|
+    #     `Deleted` \| `Rejected` \| `Failed`).
+    #
+    #   * `vpc-endpoint-id` - The ID of the endpoint.
+    #
+    #   * `vpc-endpoint-service-id` - The ID of the service.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results of the initial request can be seen by
+    #   sending another request with the returned `NextToken` value. This
+    #   value can be between 5 and 1000; if `MaxResults` is given a value
+    #   larger than 1000, only 1000 results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnectionsRequest AWS API Documentation
+    #
+    class DescribeVpcEndpointConnectionsRequest < Struct.new(
+      :dry_run,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_endpoint_connections
+    #   Information about one or more VPC endpoint connections.
+    #   @return [Array<Types::VpcEndpointConnection>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnectionsResult AWS API Documentation
+    #
+    class DescribeVpcEndpointConnectionsResult < Struct.new(
+      :vpc_endpoint_connections,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeVpcEndpointServiceConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_ids: ["String"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_ids
+    #   The IDs of one or more services.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `service-name` - The ARN of the service.
+    #
+    #   * `vpc-endpoint-service-id` - The ID of the service.
+    #
+    #   * `vpc-endpoint-service-state` - The state of the service (`Pending`
+    #     \| `Available` \| `Deleting` \| `Deleted` \| `Failed`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results of the initial request can be seen by
+    #   sending another request with the returned `NextToken` value. This
+    #   value can be between 5 and 1000; if `MaxResults` is given a value
+    #   larger than 1000, only 1000 results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServiceConfigurationsRequest AWS API Documentation
+    #
+    class DescribeVpcEndpointServiceConfigurationsRequest < Struct.new(
+      :dry_run,
+      :service_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_configurations
+    #   Information about one or more services.
+    #   @return [Array<Types::ServiceConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServiceConfigurationsResult AWS API Documentation
+    #
+    class DescribeVpcEndpointServiceConfigurationsResult < Struct.new(
+      :service_configurations,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeVpcEndpointServicePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_id: "String", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #
+    #   * `principal` - The ARN of the principal.
+    #
+    #   * `principal-type` - The principal type (`All` \| `Service` \|
+    #     `OrganizationUnit` \| `Account` \| `User` \| `Role`).
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for the request in a single
+    #   page. The remaining results of the initial request can be seen by
+    #   sending another request with the returned `NextToken` value. This
+    #   value can be between 5 and 1000; if `MaxResults` is given a value
+    #   larger than 1000, only 1000 results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicePermissionsRequest AWS API Documentation
+    #
+    class DescribeVpcEndpointServicePermissionsRequest < Struct.new(
+      :dry_run,
+      :service_id,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] allowed_principals
+    #   Information about one or more allowed principals.
+    #   @return [Array<Types::AllowedPrincipal>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicePermissionsResult AWS API Documentation
+    #
+    class DescribeVpcEndpointServicePermissionsResult < Struct.new(
+      :allowed_principals,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeVpcEndpointServices.
     #
     # @note When making an API call, you may pass DescribeVpcEndpointServicesRequest
@@ -11387,7 +12747,7 @@ module Aws::EC2
     # Contains the output of DescribeVpcEndpointServices.
     #
     # @!attribute [rw] service_names
-    #   A list of supported AWS services.
+    #   A list of supported services.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_details
@@ -11440,7 +12800,7 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `service-name`\: The name of the AWS service.
+    #   * `service-name`\: The name of the service.
     #
     #   * `vpc-id`\: The ID of the VPC in which the endpoint resides.
     #
@@ -12580,6 +13940,7 @@ module Aws::EC2
     #         encrypted: false,
     #         delete_on_termination: false,
     #         iops: 1,
+    #         kms_key_id: "String",
     #         snapshot_id: "String",
     #         volume_size: 1,
     #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -12619,6 +13980,20 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
+    # @!attribute [rw] kms_key_id
+    #   ID for a user-managed CMK under which the EBS volume is encrypted.
+    #
+    #   Note: This parameter is only supported on `BlockDeviceMapping`
+    #   objects called by [RunInstances][1], [RequestSpotFleet][2], and
+    #   [RequestSpotInstances][3].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html
+    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html
+    #   [3]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html
+    #   @return [String]
+    #
     # @!attribute [rw] snapshot_id
     #   The ID of the snapshot.
     #   @return [String]
@@ -12648,6 +14023,7 @@ module Aws::EC2
       :encrypted,
       :delete_on_termination,
       :iops,
+      :kms_key_id,
       :snapshot_id,
       :volume_size,
       :volume_type)
@@ -12787,6 +14163,19 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecification AWS API Documentation
     #
     class ElasticGpuSpecification < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # Describes an elastic GPU.
+    #
+    # @!attribute [rw] type
+    #   The elastic GPU type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ElasticGpuSpecificationResponse AWS API Documentation
+    #
+    class ElasticGpuSpecificationResponse < Struct.new(
       :type)
       include Aws::Structure
     end
@@ -12961,7 +14350,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Spot fleet event.
+    # Describes a Spot Fleet event.
     #
     # @!attribute [rw] event_description
     #   The description of the event.
@@ -12972,7 +14361,7 @@ module Aws::EC2
     #
     #   The following are the `error` events:
     #
-    #   * `iamFleetRoleInvalid` - The Spot fleet did not have the required
+    #   * `iamFleetRoleInvalid` - The Spot Fleet did not have the required
     #     permissions either to launch or terminate an instance.
     #
     #   * `launchSpecTemporarilyBlacklisted` - The configuration is not
@@ -12983,55 +14372,56 @@ module Aws::EC2
     #     valid. For more information, see the description of the event.
     #
     #   * `spotInstanceCountLimitExceeded` - You've reached the limit on
-    #     the number of Spot instances that you can launch.
+    #     the number of Spot Instances that you can launch.
     #
     #   The following are the `fleetRequestChange` events:
     #
-    #   * `active` - The Spot fleet has been validated and Amazon EC2 is
+    #   * `active` - The Spot Fleet has been validated and Amazon EC2 is
     #     attempting to maintain the target number of running Spot
-    #     instances.
+    #     Instances.
     #
-    #   * `cancelled` - The Spot fleet is canceled and has no running Spot
-    #     instances. The Spot fleet will be deleted two days after its
+    #   * `cancelled` - The Spot Fleet is canceled and has no running Spot
+    #     Instances. The Spot Fleet will be deleted two days after its
     #     instances were terminated.
     #
-    #   * `cancelled_running` - The Spot fleet is canceled and will not
-    #     launch additional Spot instances, but its existing Spot instances
+    #   * `cancelled_running` - The Spot Fleet is canceled and will not
+    #     launch additional Spot Instances, but its existing Spot Instances
     #     continue to run until they are interrupted or terminated.
     #
-    #   * `cancelled_terminating` - The Spot fleet is canceled and its Spot
-    #     instances are terminating.
+    #   * `cancelled_terminating` - The Spot Fleet is canceled and its Spot
+    #     Instances are terminating.
     #
-    #   * `expired` - The Spot fleet request has expired. A subsequent event
+    #   * `expired` - The Spot Fleet request has expired. A subsequent event
     #     indicates that the instances were terminated, if the request was
     #     created with `TerminateInstancesWithExpiration` set.
     #
-    #   * `modify_in_progress` - A request to modify the Spot fleet request
+    #   * `modify_in_progress` - A request to modify the Spot Fleet request
     #     was accepted and is in progress.
     #
-    #   * `modify_successful` - The Spot fleet request was modified.
+    #   * `modify_successful` - The Spot Fleet request was modified.
     #
-    #   * `price_update` - The bid price for a launch configuration was
-    #     adjusted because it was too high. This change is permanent.
+    #   * `price_update` - The price for a launch configuration was adjusted
+    #     because it was too high. This change is permanent.
     #
-    #   * `submitted` - The Spot fleet request is being evaluated and Amazon
-    #     EC2 is preparing to launch the target number of Spot instances.
+    #   * `submitted` - The Spot Fleet request is being evaluated and Amazon
+    #     EC2 is preparing to launch the target number of Spot Instances.
     #
     #   The following are the `instanceChange` events:
     #
-    #   * `launched` - A bid was fulfilled and a new instance was launched.
+    #   * `launched` - A request was fulfilled and a new instance was
+    #     launched.
     #
     #   * `terminated` - An instance was terminated by the user.
     #
     #   The following are the `Information` events:
     #
-    #   * `launchSpecUnusable` - The bid price of a launch specification is
-    #     not valid because it is below the market price or the market price
-    #     is above the On-Demand price.
+    #   * `launchSpecUnusable` - The price in a launch specification is not
+    #     valid because it is below the Spot price or the Spot price is
+    #     above the On-Demand price.
     #
-    #   * `fleetProgressHalted` - The bid price of every launch
-    #     specification is not valid. A launch specification might become
-    #     valid if the market price changes.
+    #   * `fleetProgressHalted` - The price in every launch specification is
+    #     not valid. A launch specification might become valid if the Spot
+    #     price changes.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -13184,6 +14574,41 @@ module Aws::EC2
     class Filter < Struct.new(
       :name,
       :values)
+      include Aws::Structure
+    end
+
+    # Describes a launch template.
+    #
+    # @note When making an API call, you may pass FleetLaunchTemplateSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "String",
+    #         launch_template_name: "LaunchTemplateName",
+    #         version: "String",
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template. You must specify either a template ID
+    #   or a template name.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template. You must specify either a template
+    #   name or a template ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number. By default, the default version of the launch
+    #   template is used.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecification AWS API Documentation
+    #
+    class FleetLaunchTemplateSpecification < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version)
       include Aws::Structure
     end
 
@@ -13546,6 +14971,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLaunchTemplateDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         instance_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateDataRequest AWS API Documentation
+    #
+    class GetLaunchTemplateDataRequest < Struct.new(
+      :dry_run,
+      :instance_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_template_data
+    #   The instance data.
+    #   @return [Types::ResponseLaunchTemplateData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateDataResult AWS API Documentation
+    #
+    class GetLaunchTemplateDataResult < Struct.new(
+      :launch_template_data)
+      include Aws::Structure
+    end
+
     # Contains the parameters for GetPasswordData.
     #
     # @note When making an API call, you may pass GetPasswordDataRequest
@@ -13720,7 +15183,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an event in the history of the Spot fleet request.
+    # Describes an event in the history of the Spot Fleet request.
     #
     # @!attribute [rw] event_information
     #   Information about the event.
@@ -13729,10 +15192,10 @@ module Aws::EC2
     # @!attribute [rw] event_type
     #   The event type.
     #
-    #   * `error` - An error with the Spot fleet request.
+    #   * `error` - An error with the Spot Fleet request.
     #
     #   * `fleetRequestChange` - A change in the status or configuration of
-    #     the Spot fleet request.
+    #     the Spot Fleet request.
     #
     #   * `instanceChange` - An instance was launched or terminated.
     #
@@ -15607,6 +17070,58 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an IPv6 address.
+    #
+    # @note When making an API call, you may pass InstanceIpv6AddressRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ipv_6_address: "String",
+    #       }
+    #
+    # @!attribute [rw] ipv_6_address
+    #   The IPv6 address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceIpv6AddressRequest AWS API Documentation
+    #
+    class InstanceIpv6AddressRequest < Struct.new(
+      :ipv_6_address)
+      include Aws::Structure
+    end
+
+    # Describes the market (purchasing) option for the instances.
+    #
+    # @note When making an API call, you may pass InstanceMarketOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         market_type: "spot", # accepts spot
+    #         spot_options: {
+    #           max_price: "String",
+    #           spot_instance_type: "one-time", # accepts one-time, persistent
+    #           block_duration_minutes: 1,
+    #           valid_until: Time.now,
+    #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #         },
+    #       }
+    #
+    # @!attribute [rw] market_type
+    #   The market type.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_options
+    #   The options for Spot Instances.
+    #   @return [Types::SpotMarketOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMarketOptionsRequest AWS API Documentation
+    #
+    class InstanceMarketOptionsRequest < Struct.new(
+      :market_type,
+      :spot_options)
+      include Aws::Structure
+    end
+
     # Describes the monitoring of an instance.
     #
     # @!attribute [rw] instance_id
@@ -16523,8 +18038,955 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a launch template.
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time launch template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The principal that created the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version_number
+    #   The version number of the default version of the launch template.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest_version_number
+    #   The version number of the latest version of the launch template.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the launch template.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplate AWS API Documentation
+    #
+    class LaunchTemplate < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :create_time,
+      :created_by,
+      :default_version_number,
+      :latest_version_number,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes a block device mapping.
+    #
+    # @!attribute [rw] device_name
+    #   The device name.
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_name
+    #   The virtual device name (ephemeralN).
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs
+    #   Information about the block device for an EBS volume.
+    #   @return [Types::LaunchTemplateEbsBlockDevice]
+    #
+    # @!attribute [rw] no_device
+    #   Suppresses the specified device included in the block device mapping
+    #   of the AMI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateBlockDeviceMapping AWS API Documentation
+    #
+    class LaunchTemplateBlockDeviceMapping < Struct.new(
+      :device_name,
+      :virtual_name,
+      :ebs,
+      :no_device)
+      include Aws::Structure
+    end
+
+    # Describes a block device mapping.
+    #
+    # @note When making an API call, you may pass LaunchTemplateBlockDeviceMappingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_name: "String",
+    #         virtual_name: "String",
+    #         ebs: {
+    #           encrypted: false,
+    #           delete_on_termination: false,
+    #           iops: 1,
+    #           kms_key_id: "String",
+    #           snapshot_id: "String",
+    #           volume_size: 1,
+    #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #         },
+    #         no_device: "String",
+    #       }
+    #
+    # @!attribute [rw] device_name
+    #   The device name (for example, /dev/sdh or xvdh).
+    #   @return [String]
+    #
+    # @!attribute [rw] virtual_name
+    #   The virtual device name (ephemeralN). Instance store volumes are
+    #   numbered starting from 0. An instance type with 2 available instance
+    #   store volumes can specify mappings for ephemeral0 and ephemeral1.
+    #   The number of available instance store volumes depends on the
+    #   instance type. After you connect to the instance, you must mount the
+    #   volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs
+    #   Parameters used to automatically set up EBS volumes when the
+    #   instance is launched.
+    #   @return [Types::LaunchTemplateEbsBlockDeviceRequest]
+    #
+    # @!attribute [rw] no_device
+    #   Suppresses the specified device included in the block device mapping
+    #   of the AMI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateBlockDeviceMappingRequest AWS API Documentation
+    #
+    class LaunchTemplateBlockDeviceMappingRequest < Struct.new(
+      :device_name,
+      :virtual_name,
+      :ebs,
+      :no_device)
+      include Aws::Structure
+    end
+
+    # Describes a launch template and overrides.
+    #
+    # @note When making an API call, you may pass LaunchTemplateConfig
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_specification: {
+    #           launch_template_id: "String",
+    #           launch_template_name: "LaunchTemplateName",
+    #           version: "String",
+    #         },
+    #         overrides: [
+    #           {
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #             spot_price: "String",
+    #             subnet_id: "String",
+    #             availability_zone: "String",
+    #             weighted_capacity: 1.0,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] launch_template_specification
+    #   The launch template.
+    #   @return [Types::FleetLaunchTemplateSpecification]
+    #
+    # @!attribute [rw] overrides
+    #   Any parameters that you specify override the same parameters in the
+    #   launch template.
+    #   @return [Array<Types::LaunchTemplateOverrides>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateConfig AWS API Documentation
+    #
+    class LaunchTemplateConfig < Struct.new(
+      :launch_template_specification,
+      :overrides)
+      include Aws::Structure
+    end
+
+    # Describes a block device for an EBS volume.
+    #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the EBS volume is encrypted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the EBS volume is deleted on instance termination.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] iops
+    #   The number of I/O operations per second (IOPS) that the volume
+    #   supports.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the AWS Key Management Service (AWS KMS) CMK used for
+    #   encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size
+    #   The size of the volume, in GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_type
+    #   The volume type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEbsBlockDevice AWS API Documentation
+    #
+    class LaunchTemplateEbsBlockDevice < Struct.new(
+      :encrypted,
+      :delete_on_termination,
+      :iops,
+      :kms_key_id,
+      :snapshot_id,
+      :volume_size,
+      :volume_type)
+      include Aws::Structure
+    end
+
+    # The parameters for a block device for an EBS volume.
+    #
+    # @note When making an API call, you may pass LaunchTemplateEbsBlockDeviceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         encrypted: false,
+    #         delete_on_termination: false,
+    #         iops: 1,
+    #         kms_key_id: "String",
+    #         snapshot_id: "String",
+    #         volume_size: 1,
+    #         volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #       }
+    #
+    # @!attribute [rw] encrypted
+    #   Indicates whether the EBS volume is encrypted. Encrypted volumes can
+    #   only be attached to instances that support Amazon EBS encryption. If
+    #   you are creating a volume from a snapshot, you can't specify an
+    #   encryption value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the EBS volume is deleted on instance termination.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] iops
+    #   The number of I/O operations per second (IOPS) that the volume
+    #   supports. For io1, this represents the number of IOPS that are
+    #   provisioned for the volume. For gp2, this represents the baseline
+    #   performance of the volume and the rate at which the volume
+    #   accumulates I/O credits for bursting. For more information about
+    #   General Purpose SSD baseline performance, I/O credits, and bursting,
+    #   see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User
+    #   Guide.
+    #
+    #   Condition: This parameter is required for requests to create io1
+    #   volumes; it is not used in requests to create gp2, st1, sc1, or
+    #   standard volumes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The ARN of the AWS Key Management Service (AWS KMS) CMK used for
+    #   encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the snapshot.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_size
+    #   The size of the volume, in GiB.
+    #
+    #   Default: If you're creating the volume from a snapshot and don't
+    #   specify a volume size, the default is the snapshot size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_type
+    #   The volume type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateEbsBlockDeviceRequest AWS API Documentation
+    #
+    class LaunchTemplateEbsBlockDeviceRequest < Struct.new(
+      :encrypted,
+      :delete_on_termination,
+      :iops,
+      :kms_key_id,
+      :snapshot_id,
+      :volume_size,
+      :volume_type)
+      include Aws::Structure
+    end
+
+    # Describes an IAM instance profile.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the instance profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateIamInstanceProfileSpecification AWS API Documentation
+    #
+    class LaunchTemplateIamInstanceProfileSpecification < Struct.new(
+      :arn,
+      :name)
+      include Aws::Structure
+    end
+
+    # An IAM instance profile.
+    #
+    # @note When making an API call, you may pass LaunchTemplateIamInstanceProfileSpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "String",
+    #         name: "String",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the instance profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateIamInstanceProfileSpecificationRequest AWS API Documentation
+    #
+    class LaunchTemplateIamInstanceProfileSpecificationRequest < Struct.new(
+      :arn,
+      :name)
+      include Aws::Structure
+    end
+
+    # The market (purchasing) option for the instances.
+    #
+    # @!attribute [rw] market_type
+    #   The market type.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_options
+    #   The options for Spot Instances.
+    #   @return [Types::LaunchTemplateSpotMarketOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMarketOptions AWS API Documentation
+    #
+    class LaunchTemplateInstanceMarketOptions < Struct.new(
+      :market_type,
+      :spot_options)
+      include Aws::Structure
+    end
+
+    # The market (purchasing) option for the instances.
+    #
+    # @note When making an API call, you may pass LaunchTemplateInstanceMarketOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         market_type: "spot", # accepts spot
+    #         spot_options: {
+    #           max_price: "String",
+    #           spot_instance_type: "one-time", # accepts one-time, persistent
+    #           block_duration_minutes: 1,
+    #           valid_until: Time.now,
+    #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #         },
+    #       }
+    #
+    # @!attribute [rw] market_type
+    #   The market type.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_options
+    #   The options for Spot Instances.
+    #   @return [Types::LaunchTemplateSpotMarketOptionsRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMarketOptionsRequest AWS API Documentation
+    #
+    class LaunchTemplateInstanceMarketOptionsRequest < Struct.new(
+      :market_type,
+      :spot_options)
+      include Aws::Structure
+    end
+
+    # Describes a network interface.
+    #
+    # @!attribute [rw] associate_public_ip_address
+    #   Indicates whether to associate a public IPv4 address with eth0 for a
+    #   new network interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the network interface is deleted when the instance
+    #   is terminated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description for the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_index
+    #   The device index for the network interface attachment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] groups
+    #   The IDs of one or more security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv_6_address_count
+    #   The number of IPv6 addresses for the network interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   The IPv6 addresses for the network interface.
+    #   @return [Array<Types::InstanceIpv6Address>]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The primary private IPv4 address of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   One or more private IPv4 addresses.
+    #   @return [Array<Types::PrivateIpAddressSpecification>]
+    #
+    # @!attribute [rw] secondary_private_ip_address_count
+    #   The number of secondary private IPv4 addresses for the network
+    #   interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet for the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecification AWS API Documentation
+    #
+    class LaunchTemplateInstanceNetworkInterfaceSpecification < Struct.new(
+      :associate_public_ip_address,
+      :delete_on_termination,
+      :description,
+      :device_index,
+      :groups,
+      :ipv_6_address_count,
+      :ipv_6_addresses,
+      :network_interface_id,
+      :private_ip_address,
+      :private_ip_addresses,
+      :secondary_private_ip_address_count,
+      :subnet_id)
+      include Aws::Structure
+    end
+
+    # The parameters for a network interface.
+    #
+    # @note When making an API call, you may pass LaunchTemplateInstanceNetworkInterfaceSpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         associate_public_ip_address: false,
+    #         delete_on_termination: false,
+    #         description: "String",
+    #         device_index: 1,
+    #         groups: ["String"],
+    #         ipv_6_address_count: 1,
+    #         ipv_6_addresses: [
+    #           {
+    #             ipv_6_address: "String",
+    #           },
+    #         ],
+    #         network_interface_id: "String",
+    #         private_ip_address: "String",
+    #         private_ip_addresses: [
+    #           {
+    #             primary: false,
+    #             private_ip_address: "String", # required
+    #           },
+    #         ],
+    #         secondary_private_ip_address_count: 1,
+    #         subnet_id: "String",
+    #       }
+    #
+    # @!attribute [rw] associate_public_ip_address
+    #   Associates a public IPv4 address with eth0 for a new network
+    #   interface.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] delete_on_termination
+    #   Indicates whether the network interface is deleted when the instance
+    #   is terminated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   A description for the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_index
+    #   The device index for the network interface attachment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] groups
+    #   The IDs of one or more security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ipv_6_address_count
+    #   The number of IPv6 addresses to assign to a network interface.
+    #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
+    #   range. You can't use this option if specifying specific IPv6
+    #   addresses.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ipv_6_addresses
+    #   One or more specific IPv6 addresses from the IPv6 CIDR block range
+    #   of your subnet. You can't use this option if you're specifying a
+    #   number of IPv6 addresses.
+    #   @return [Array<Types::InstanceIpv6AddressRequest>]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_address
+    #   The primary private IPv4 address of the network interface.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_ip_addresses
+    #   One or more private IPv4 addresses.
+    #   @return [Array<Types::PrivateIpAddressSpecification>]
+    #
+    # @!attribute [rw] secondary_private_ip_address_count
+    #   The number of secondary private IPv4 addresses to assign to a
+    #   network interface.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet for the network interface.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceNetworkInterfaceSpecificationRequest AWS API Documentation
+    #
+    class LaunchTemplateInstanceNetworkInterfaceSpecificationRequest < Struct.new(
+      :associate_public_ip_address,
+      :delete_on_termination,
+      :description,
+      :device_index,
+      :groups,
+      :ipv_6_address_count,
+      :ipv_6_addresses,
+      :network_interface_id,
+      :private_ip_address,
+      :private_ip_addresses,
+      :secondary_private_ip_address_count,
+      :subnet_id)
+      include Aws::Structure
+    end
+
+    # Describes overrides for a launch template.
+    #
+    # @note When making an API call, you may pass LaunchTemplateOverrides
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         spot_price: "String",
+    #         subnet_id: "String",
+    #         availability_zone: "String",
+    #         weighted_capacity: 1.0,
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_price
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] weighted_capacity
+    #   The number of units provided by the specified instance type.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateOverrides AWS API Documentation
+    #
+    class LaunchTemplateOverrides < Struct.new(
+      :instance_type,
+      :spot_price,
+      :subnet_id,
+      :availability_zone,
+      :weighted_capacity)
+      include Aws::Structure
+    end
+
+    # Describes the placement of an instance.
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] affinity
+    #   The affinity setting for the instance on the Dedicated Host.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the placement group for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_id
+    #   The ID of the Dedicated Host for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the instance (if the instance is running in a VPC).
+    #   An instance with a tenancy of `dedicated` runs on single-tenant
+    #   hardware.
+    #   @return [String]
+    #
+    # @!attribute [rw] spread_domain
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePlacement AWS API Documentation
+    #
+    class LaunchTemplatePlacement < Struct.new(
+      :availability_zone,
+      :affinity,
+      :group_name,
+      :host_id,
+      :tenancy,
+      :spread_domain)
+      include Aws::Structure
+    end
+
+    # The placement for the instance.
+    #
+    # @note When making an API call, you may pass LaunchTemplatePlacementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         availability_zone: "String",
+    #         affinity: "String",
+    #         group_name: "String",
+    #         host_id: "String",
+    #         tenancy: "default", # accepts default, dedicated, host
+    #         spread_domain: "String",
+    #       }
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] affinity
+    #   The affinity setting for an instance on a Dedicated Host.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the placement group for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_id
+    #   The ID of the Dedicated Host for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the instance (if the instance is running in a VPC).
+    #   An instance with a tenancy of dedicated runs on single-tenant
+    #   hardware.
+    #   @return [String]
+    #
+    # @!attribute [rw] spread_domain
+    #   Reserved for future use.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatePlacementRequest AWS API Documentation
+    #
+    class LaunchTemplatePlacementRequest < Struct.new(
+      :availability_zone,
+      :affinity,
+      :group_name,
+      :host_id,
+      :tenancy,
+      :spread_domain)
+      include Aws::Structure
+    end
+
+    # The launch template to use. You must specify either the launch
+    # template ID or launch template name in the request.
+    #
+    # @note When making an API call, you may pass LaunchTemplateSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "String",
+    #         launch_template_name: "String",
+    #         version: "String",
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the launch template.
+    #
+    #   Default: The default version for the launch template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateSpecification AWS API Documentation
+    #
+    class LaunchTemplateSpecification < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version)
+      include Aws::Structure
+    end
+
+    # The options for Spot Instances.
+    #
+    # @!attribute [rw] max_price
+    #   The maximum hourly price you're willing to pay for the Spot
+    #   Instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_instance_type
+    #   The Spot Instance request type.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_duration_minutes
+    #   The required duration for the Spot Instances (also known as Spot
+    #   blocks), in minutes. This value must be a multiple of 60 (60, 120,
+    #   180, 240, 300, or 360).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date of the request. For a one-time request, the request
+    #   remains active until all instances launch, the request is canceled,
+    #   or this date is reached. If the request is persistent, it remains
+    #   active until it is canceled or this date and time is reached.
+    #   @return [Time]
+    #
+    # @!attribute [rw] instance_interruption_behavior
+    #   The behavior when a Spot Instance is interrupted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateSpotMarketOptions AWS API Documentation
+    #
+    class LaunchTemplateSpotMarketOptions < Struct.new(
+      :max_price,
+      :spot_instance_type,
+      :block_duration_minutes,
+      :valid_until,
+      :instance_interruption_behavior)
+      include Aws::Structure
+    end
+
+    # The options for Spot Instances.
+    #
+    # @note When making an API call, you may pass LaunchTemplateSpotMarketOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_price: "String",
+    #         spot_instance_type: "one-time", # accepts one-time, persistent
+    #         block_duration_minutes: 1,
+    #         valid_until: Time.now,
+    #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #       }
+    #
+    # @!attribute [rw] max_price
+    #   The maximum hourly price you're willing to pay for the Spot
+    #   Instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_instance_type
+    #   The Spot Instance request type.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_duration_minutes
+    #   The required duration for the Spot Instances (also known as Spot
+    #   blocks), in minutes. This value must be a multiple of 60 (60, 120,
+    #   180, 240, 300, or 360).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date of the request. For a one-time request, the request
+    #   remains active until all instances launch, the request is canceled,
+    #   or this date is reached. If the request is persistent, it remains
+    #   active until it is canceled or this date and time is reached. The
+    #   default end date is 7 days from the current date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] instance_interruption_behavior
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateSpotMarketOptionsRequest AWS API Documentation
+    #
+    class LaunchTemplateSpotMarketOptionsRequest < Struct.new(
+      :max_price,
+      :spot_instance_type,
+      :block_duration_minutes,
+      :valid_until,
+      :instance_interruption_behavior)
+      include Aws::Structure
+    end
+
+    # The tag specification for the launch template.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateTagSpecification AWS API Documentation
+    #
+    class LaunchTemplateTagSpecification < Struct.new(
+      :resource_type,
+      :tags)
+      include Aws::Structure
+    end
+
+    # The tags specification for the launch template.
+    #
+    # @note When making an API call, you may pass LaunchTemplateTagSpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to tag. Currently, the resource types that
+    #   support tagging on creation are `instance` and `volume`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateTagSpecificationRequest AWS API Documentation
+    #
+    class LaunchTemplateTagSpecificationRequest < Struct.new(
+      :resource_type,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes a launch template version.
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_number
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] version_description
+    #   The description for the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The time the version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The principal that created the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version
+    #   Indicates whether the version is the default version.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] launch_template_data
+    #   Information about the launch template.
+    #   @return [Types::ResponseLaunchTemplateData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateVersion AWS API Documentation
+    #
+    class LaunchTemplateVersion < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version_number,
+      :version_description,
+      :create_time,
+      :created_by,
+      :default_version,
+      :launch_template_data)
+      include Aws::Structure
+    end
+
+    # Describes the monitoring for the instance.
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether detailed monitoring is enabled. Otherwise, basic
+    #   monitoring is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoring AWS API Documentation
+    #
+    class LaunchTemplatesMonitoring < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
+    # Describes the monitoring for the instance.
+    #
+    # @note When making an API call, you may pass LaunchTemplatesMonitoringRequest
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specify `true` to enable detailed monitoring. Otherwise, basic
+    #   monitoring is enabled.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplatesMonitoringRequest AWS API Documentation
+    #
+    class LaunchTemplatesMonitoringRequest < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
     # Describes the Classic Load Balancers and target groups to attach to a
-    # Spot fleet request.
+    # Spot Fleet request.
     #
     # @note When making an API call, you may pass LoadBalancersConfig
     #   data as a hash:
@@ -17198,6 +19660,71 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyLaunchTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         client_token: "String",
+    #         launch_template_id: "String",
+    #         launch_template_name: "LaunchTemplateName",
+    #         default_version: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_version
+    #   The version number of the launch template to set as the default
+    #   version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLaunchTemplateRequest AWS API Documentation
+    #
+    class ModifyLaunchTemplateRequest < Struct.new(
+      :dry_run,
+      :client_token,
+      :launch_template_id,
+      :launch_template_name,
+      :default_version)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] launch_template
+    #   Information about the launch template.
+    #   @return [Types::LaunchTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyLaunchTemplateResult AWS API Documentation
+    #
+    class ModifyLaunchTemplateResult < Struct.new(
+      :launch_template)
+      include Aws::Structure
+    end
+
     # Contains the parameters for ModifyNetworkInterfaceAttribute.
     #
     # @note When making an API call, you may pass ModifyNetworkInterfaceAttributeRequest
@@ -17418,13 +19945,13 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] excess_capacity_termination_policy
-    #   Indicates whether running Spot instances should be terminated if the
-    #   target capacity of the Spot fleet request is decreased below the
-    #   current size of the Spot fleet.
+    #   Indicates whether running Spot Instances should be terminated if the
+    #   target capacity of the Spot Fleet request is decreased below the
+    #   current size of the Spot Fleet.
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #   @return [String]
     #
     # @!attribute [rw] target_capacity
@@ -17668,6 +20195,58 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyVpcEndpointConnectionNotificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         connection_notification_id: "String", # required
+    #         connection_notification_arn: "String",
+    #         connection_events: ["String"],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] connection_notification_id
+    #   The ID of the notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_notification_arn
+    #   The ARN for the SNS topic for the notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_events
+    #   One or more events for the endpoint. Valid values are `Accept`,
+    #   `Connect`, `Delete`, and `Reject`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointConnectionNotificationRequest AWS API Documentation
+    #
+    class ModifyVpcEndpointConnectionNotificationRequest < Struct.new(
+      :dry_run,
+      :connection_notification_id,
+      :connection_notification_arn,
+      :connection_events)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointConnectionNotificationResult AWS API Documentation
+    #
+    class ModifyVpcEndpointConnectionNotificationResult < Struct.new(
+      :return_value)
+      include Aws::Structure
+    end
+
     # Contains the parameters for ModifyVpcEndpoint.
     #
     # @note When making an API call, you may pass ModifyVpcEndpointRequest
@@ -17770,6 +20349,119 @@ module Aws::EC2
     #
     class ModifyVpcEndpointResult < Struct.new(
       :return)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyVpcEndpointServiceConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_id: "String", # required
+    #         acceptance_required: false,
+    #         add_network_load_balancer_arns: ["String"],
+    #         remove_network_load_balancer_arns: ["String"],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] acceptance_required
+    #   Indicate whether requests to create an endpoint to your service must
+    #   be accepted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] add_network_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of Network Load Balancers to add to
+    #   your service configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_network_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of Network Load Balancers to remove
+    #   from your service configuration.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServiceConfigurationRequest AWS API Documentation
+    #
+    class ModifyVpcEndpointServiceConfigurationRequest < Struct.new(
+      :dry_run,
+      :service_id,
+      :acceptance_required,
+      :add_network_load_balancer_arns,
+      :remove_network_load_balancer_arns)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServiceConfigurationResult AWS API Documentation
+    #
+    class ModifyVpcEndpointServiceConfigurationResult < Struct.new(
+      :return)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyVpcEndpointServicePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_id: "String", # required
+    #         add_allowed_principals: ["String"],
+    #         remove_allowed_principals: ["String"],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_allowed_principals
+    #   One or more Amazon Resource Names (ARNs) of principals for which to
+    #   allow permission. Specify `*` to allow all principals.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_allowed_principals
+    #   One or more Amazon Resource Names (ARNs) of principals for which to
+    #   remove permission.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissionsRequest AWS API Documentation
+    #
+    class ModifyVpcEndpointServicePermissionsRequest < Struct.new(
+      :dry_run,
+      :service_id,
+      :add_allowed_principals,
+      :remove_allowed_principals)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePermissionsResult AWS API Documentation
+    #
+    class ModifyVpcEndpointServicePermissionsResult < Struct.new(
+      :return_value)
       include Aws::Structure
     end
 
@@ -19445,6 +22137,7 @@ module Aws::EC2
     #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
+    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -19537,7 +22230,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] virtualization_type
-    #   The type of virtualization.
+    #   The type of virtualization (`hvm` \| `paravirtual`).
     #
     #   Default: `paravirtual`
     #   @return [String]
@@ -19571,6 +22264,51 @@ module Aws::EC2
     #
     class RegisterImageResult < Struct.new(
       :image_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RejectVpcEndpointConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_id: "String", # required
+    #         vpc_endpoint_ids: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_ids
+    #   The IDs of one or more VPC endpoints.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcEndpointConnectionsRequest AWS API Documentation
+    #
+    class RejectVpcEndpointConnectionsRequest < Struct.new(
+      :dry_run,
+      :service_id,
+      :vpc_endpoint_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] unsuccessful
+    #   Information about the endpoints that were not rejected, if
+    #   applicable.
+    #   @return [Array<Types::UnsuccessfulItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcEndpointConnectionsResult AWS API Documentation
+    #
+    class RejectVpcEndpointConnectionsResult < Struct.new(
+      :unsuccessful)
       include Aws::Structure
     end
 
@@ -20090,6 +22828,278 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The information to include in the launch template.
+    #
+    # @note When making an API call, you may pass RequestLaunchTemplateData
+    #   data as a hash:
+    #
+    #       {
+    #         kernel_id: "String",
+    #         ebs_optimized: false,
+    #         iam_instance_profile: {
+    #           arn: "String",
+    #           name: "String",
+    #         },
+    #         block_device_mappings: [
+    #           {
+    #             device_name: "String",
+    #             virtual_name: "String",
+    #             ebs: {
+    #               encrypted: false,
+    #               delete_on_termination: false,
+    #               iops: 1,
+    #               kms_key_id: "String",
+    #               snapshot_id: "String",
+    #               volume_size: 1,
+    #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+    #             },
+    #             no_device: "String",
+    #           },
+    #         ],
+    #         network_interfaces: [
+    #           {
+    #             associate_public_ip_address: false,
+    #             delete_on_termination: false,
+    #             description: "String",
+    #             device_index: 1,
+    #             groups: ["String"],
+    #             ipv_6_address_count: 1,
+    #             ipv_6_addresses: [
+    #               {
+    #                 ipv_6_address: "String",
+    #               },
+    #             ],
+    #             network_interface_id: "String",
+    #             private_ip_address: "String",
+    #             private_ip_addresses: [
+    #               {
+    #                 primary: false,
+    #                 private_ip_address: "String", # required
+    #               },
+    #             ],
+    #             secondary_private_ip_address_count: 1,
+    #             subnet_id: "String",
+    #           },
+    #         ],
+    #         image_id: "String",
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #         key_name: "String",
+    #         monitoring: {
+    #           enabled: false,
+    #         },
+    #         placement: {
+    #           availability_zone: "String",
+    #           affinity: "String",
+    #           group_name: "String",
+    #           host_id: "String",
+    #           tenancy: "default", # accepts default, dedicated, host
+    #           spread_domain: "String",
+    #         },
+    #         ram_disk_id: "String",
+    #         disable_api_termination: false,
+    #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+    #         user_data: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         elastic_gpu_specifications: [
+    #           {
+    #             type: "String", # required
+    #           },
+    #         ],
+    #         security_group_ids: ["String"],
+    #         security_groups: ["String"],
+    #         instance_market_options: {
+    #           market_type: "spot", # accepts spot
+    #           spot_options: {
+    #             max_price: "String",
+    #             spot_instance_type: "one-time", # accepts one-time, persistent
+    #             block_duration_minutes: 1,
+    #             valid_until: Time.now,
+    #             instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #           },
+    #         },
+    #         credit_specification: {
+    #           cpu_credits: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] kernel_id
+    #   The ID of the kernel.
+    #
+    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
+    #   For more information, see [User Provided Kernels][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_optimized
+    #   Indicates whether the instance is optimized for Amazon EBS I/O. This
+    #   optimization provides dedicated throughput to Amazon EBS and an
+    #   optimized configuration stack to provide optimal Amazon EBS I/O
+    #   performance. This optimization isn't available with all instance
+    #   types. Additional usage charges apply when using an EBS-optimized
+    #   instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] iam_instance_profile
+    #   The IAM instance profile.
+    #   @return [Types::LaunchTemplateIamInstanceProfileSpecificationRequest]
+    #
+    # @!attribute [rw] block_device_mappings
+    #   The block device mapping.
+    #
+    #   Supplying both a snapshot ID and an encryption value as arguments
+    #   for block-device mapping results in an error. This is because only
+    #   blank volumes can be encrypted on start, and these are not created
+    #   from a snapshot. If a snapshot is the basis for the volume, it
+    #   contains data by definition and its encryption status cannot be
+    #   changed using this action.
+    #   @return [Array<Types::LaunchTemplateBlockDeviceMappingRequest>]
+    #
+    # @!attribute [rw] network_interfaces
+    #   One or more network interfaces.
+    #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecificationRequest>]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI, which you can get by using DescribeImages.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type. For more information, see [Instance Types][1] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair. You can create a key pair using
+    #   CreateKeyPair or ImportKeyPair.
+    #
+    #   If you do not specify a key pair, you can't connect to the instance
+    #   unless you choose an AMI that is configured to allow users another
+    #   way to log in.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring
+    #   The monitoring for the instance.
+    #   @return [Types::LaunchTemplatesMonitoringRequest]
+    #
+    # @!attribute [rw] placement
+    #   The placement for the instance.
+    #   @return [Types::LaunchTemplatePlacementRequest]
+    #
+    # @!attribute [rw] ram_disk_id
+    #   The ID of the RAM disk.
+    #
+    #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
+    #   For more information, see [User Provided Kernels][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
+    #   @return [String]
+    #
+    # @!attribute [rw] disable_api_termination
+    #   If set to `true`, you can't terminate the instance using the Amazon
+    #   EC2 console, CLI, or API. To change this attribute to `false` after
+    #   launch, use ModifyInstanceAttribute.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_initiated_shutdown_behavior
+    #   Indicates whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
+    #
+    #   Default: `stop`
+    #   @return [String]
+    #
+    # @!attribute [rw] user_data
+    #   The user data to make available to the instance. For more
+    #   information, see [Running Commands on Your Linux Instance at
+    #   Launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
+    #   using a command line tool, base64-encoding is performed for you and
+    #   you can load the text from a file. Otherwise, you must provide
+    #   base64-encoded text.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
+    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the resources during launch. You can tag
+    #   instances and volumes. The specified tags are applied to all
+    #   instances or volumes that are created during launch.
+    #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
+    #
+    # @!attribute [rw] elastic_gpu_specifications
+    #   An elastic GPU to associate with the instance.
+    #   @return [Array<Types::ElasticGpuSpecification>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   One or more security group IDs. You can create a security group
+    #   using CreateSecurityGroup. You cannot specify both a security group
+    #   ID and security name in the same request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   \[EC2-Classic, default VPC\] One or more security group names. For a
+    #   nondefault VPC, you must use security group IDs instead. You cannot
+    #   specify both a security group ID and security name in the same
+    #   request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_market_options
+    #   The market (purchasing) option for the instances.
+    #   @return [Types::LaunchTemplateInstanceMarketOptionsRequest]
+    #
+    # @!attribute [rw] credit_specification
+    #   The credit option for CPU usage of the instance. Valid for T2
+    #   instances only.
+    #   @return [Types::CreditSpecificationRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
+    #
+    class RequestLaunchTemplateData < Struct.new(
+      :kernel_id,
+      :ebs_optimized,
+      :iam_instance_profile,
+      :block_device_mappings,
+      :network_interfaces,
+      :image_id,
+      :instance_type,
+      :key_name,
+      :monitoring,
+      :placement,
+      :ram_disk_id,
+      :disable_api_termination,
+      :instance_initiated_shutdown_behavior,
+      :user_data,
+      :tag_specifications,
+      :elastic_gpu_specifications,
+      :security_group_ids,
+      :security_groups,
+      :instance_market_options,
+      :credit_specification)
+      include Aws::Structure
+    end
+
     # Contains the parameters for RequestSpotFleet.
     #
     # @note When making an API call, you may pass RequestSpotFleetRequest
@@ -20103,7 +23113,7 @@ module Aws::EC2
     #           excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #           fulfilled_capacity: 1.0,
     #           iam_fleet_role: "String", # required
-    #           launch_specifications: [ # required
+    #           launch_specifications: [
     #             {
     #               security_groups: [
     #                 {
@@ -20120,6 +23130,7 @@ module Aws::EC2
     #                     encrypted: false,
     #                     delete_on_termination: false,
     #                     iops: 1,
+    #                     kms_key_id: "String",
     #                     snapshot_id: "String",
     #                     volume_size: 1,
     #                     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -20187,14 +23198,32 @@ module Aws::EC2
     #               ],
     #             },
     #           ],
-    #           spot_price: "String", # required
+    #           launch_template_configs: [
+    #             {
+    #               launch_template_specification: {
+    #                 launch_template_id: "String",
+    #                 launch_template_name: "LaunchTemplateName",
+    #                 version: "String",
+    #               },
+    #               overrides: [
+    #                 {
+    #                   instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #                   spot_price: "String",
+    #                   subnet_id: "String",
+    #                   availability_zone: "String",
+    #                   weighted_capacity: 1.0,
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           spot_price: "String",
     #           target_capacity: 1, # required
     #           terminate_instances_with_expiration: false,
     #           type: "request", # accepts request, maintain
     #           valid_from: Time.now,
     #           valid_until: Time.now,
     #           replace_unhealthy_instances: false,
-    #           instance_interruption_behavior: "stop", # accepts stop, terminate
+    #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #           load_balancers_config: {
     #             classic_load_balancers_config: {
     #               classic_load_balancers: [ # required
@@ -20222,7 +23251,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] spot_fleet_request_config
-    #   The configuration for the Spot fleet request.
+    #   The configuration for the Spot Fleet request.
     #   @return [Types::SpotFleetRequestConfigData]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleetRequest AWS API Documentation
@@ -20236,7 +23265,7 @@ module Aws::EC2
     # Contains the output of RequestSpotFleet.
     #
     # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleetResponse AWS API Documentation
@@ -20270,6 +23299,7 @@ module Aws::EC2
     #                 encrypted: false,
     #                 delete_on_termination: false,
     #                 iops: 1,
+    #                 kms_key_id: "String",
     #                 snapshot_id: "String",
     #                 volume_size: 1,
     #                 volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -20323,46 +23353,46 @@ module Aws::EC2
     #           subnet_id: "String",
     #           user_data: "String",
     #         },
-    #         spot_price: "String", # required
+    #         spot_price: "String",
     #         type: "one-time", # accepts one-time, persistent
     #         valid_from: Time.now,
     #         valid_until: Time.now,
-    #         instance_interruption_behavior: "stop", # accepts stop, terminate
+    #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #       }
     #
     # @!attribute [rw] availability_zone_group
-    #   The user-specified name for a logical grouping of bids.
+    #   The user-specified name for a logical grouping of requests.
     #
     #   When you specify an Availability Zone group in a Spot Instance
-    #   request, all Spot instances in the request are launched in the same
+    #   request, all Spot Instances in the request are launched in the same
     #   Availability Zone. Instance proximity is maintained with this
     #   parameter, but the choice of Availability Zone is not. The group
-    #   applies only to bids for Spot Instances of the same instance type.
-    #   Any additional Spot instance requests that are specified with the
-    #   same Availability Zone group name are launched in that same
+    #   applies only to requests for Spot Instances of the same instance
+    #   type. Any additional Spot Instance requests that are specified with
+    #   the same Availability Zone group name are launched in that same
     #   Availability Zone, as long as at least one instance from the group
     #   is still active.
     #
     #   If there is no active instance running in the Availability Zone
-    #   group that you specify for a new Spot instance request (all
-    #   instances are terminated, the bid is expired, or the bid falls below
-    #   current market), then Amazon EC2 launches the instance in any
-    #   Availability Zone where the constraint can be met. Consequently, the
-    #   subsequent set of Spot instances could be placed in a different zone
-    #   from the original request, even if you specified the same
-    #   Availability Zone group.
+    #   group that you specify for a new Spot Instance request (all
+    #   instances are terminated, the request is expired, or the maximum
+    #   price you specified falls below current Spot price), then Amazon EC2
+    #   launches the instance in any Availability Zone where the constraint
+    #   can be met. Consequently, the subsequent set of Spot Instances could
+    #   be placed in a different zone from the original request, even if you
+    #   specified the same Availability Zone group.
     #
     #   Default: Instances are launched in any available Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] block_duration_minutes
-    #   The required duration for the Spot instances (also known as Spot
+    #   The required duration for the Spot Instances (also known as Spot
     #   blocks), in minutes. This value must be a multiple of 60 (60, 120,
     #   180, 240, 300, or 360).
     #
-    #   The duration period starts as soon as your Spot instance receives
+    #   The duration period starts as soon as your Spot Instance receives
     #   its instance ID. At the end of the duration period, Amazon EC2 marks
-    #   the Spot instance for termination and provides a Spot instance
+    #   the Spot Instance for termination and provides a Spot Instance
     #   termination notice, which gives the instance a two-minute warning
     #   before it terminates.
     #
@@ -20388,13 +23418,13 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_count
-    #   The maximum number of Spot instances to launch.
+    #   The maximum number of Spot Instances to launch.
     #
     #   Default: 1
     #   @return [Integer]
     #
     # @!attribute [rw] launch_group
-    #   The instance launch group. Launch groups are Spot instances that
+    #   The instance launch group. Launch groups are Spot Instances that
     #   launch together and terminate together.
     #
     #   Default: Instances are launched and terminated individually
@@ -20405,12 +23435,12 @@ module Aws::EC2
     #   @return [Types::RequestSpotLaunchSpecification]
     #
     # @!attribute [rw] spot_price
-    #   The maximum hourly price (bid) for any Spot instance launched to
-    #   fulfill the request.
+    #   The maximum price per hour that you are willing to pay for a Spot
+    #   Instance. The default is the On-Demand price.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The Spot instance request type.
+    #   The Spot Instance request type.
     #
     #   Default: `one-time`
     #   @return [String]
@@ -20422,23 +23452,19 @@ module Aws::EC2
     #   canceled. If the request is persistent, the request becomes active
     #   at this date and time and remains active until it expires or is
     #   canceled.
-    #
-    #   Default: The request is effective indefinitely.
     #   @return [Time]
     #
     # @!attribute [rw] valid_until
     #   The end date of the request. If this is a one-time request, the
     #   request remains active until all instances launch, the request is
     #   canceled, or this date is reached. If the request is persistent, it
-    #   remains active until it is canceled or this date and time is
-    #   reached.
-    #
-    #   Default: The request is effective indefinitely.
+    #   remains active until it is canceled or this date is reached. The
+    #   default end date is 7 days from the current date.
     #   @return [Time]
     #
     # @!attribute [rw] instance_interruption_behavior
-    #   Indicates whether a Spot instance stops or terminates when it is
-    #   interrupted.
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesRequest AWS API Documentation
@@ -20462,7 +23488,7 @@ module Aws::EC2
     # Contains the output of RequestSpotInstances.
     #
     # @!attribute [rw] spot_instance_requests
-    #   One or more Spot instance requests.
+    #   One or more Spot Instance requests.
     #   @return [Array<Types::SpotInstanceRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesResult AWS API Documentation
@@ -20489,6 +23515,7 @@ module Aws::EC2
     #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
+    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -21345,6 +24372,136 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the error that's returned when you cannot delete a launch
+    # template version.
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message, if applicable.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseError AWS API Documentation
+    #
+    class ResponseError < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The information for a launch template.
+    #
+    # @!attribute [rw] kernel_id
+    #   The ID of the kernel, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] ebs_optimized
+    #   Indicates whether the instance is optimized for Amazon EBS I/O.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] iam_instance_profile
+    #   The IAM instance profile.
+    #   @return [Types::LaunchTemplateIamInstanceProfileSpecification]
+    #
+    # @!attribute [rw] block_device_mappings
+    #   The block device mappings.
+    #   @return [Array<Types::LaunchTemplateBlockDeviceMapping>]
+    #
+    # @!attribute [rw] network_interfaces
+    #   The network interfaces.
+    #   @return [Array<Types::LaunchTemplateInstanceNetworkInterfaceSpecification>]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI that was used to launch the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_name
+    #   The name of the key pair.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitoring
+    #   The monitoring for the instance.
+    #   @return [Types::LaunchTemplatesMonitoring]
+    #
+    # @!attribute [rw] placement
+    #   The placement of the instance.
+    #   @return [Types::LaunchTemplatePlacement]
+    #
+    # @!attribute [rw] ram_disk_id
+    #   The ID of the RAM disk, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] disable_api_termination
+    #   If set to `true`, indicates that the instance cannot be terminated
+    #   using the Amazon EC2 console, command line tool, or API.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] instance_initiated_shutdown_behavior
+    #   Indicates whether an instance stops or terminates when you initiate
+    #   shutdown from the instance (using the operating system command for
+    #   system shutdown).
+    #   @return [String]
+    #
+    # @!attribute [rw] user_data
+    #   The user data for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags.
+    #   @return [Array<Types::LaunchTemplateTagSpecification>]
+    #
+    # @!attribute [rw] elastic_gpu_specifications
+    #   The elastic GPU specification.
+    #   @return [Array<Types::ElasticGpuSpecificationResponse>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The security group IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   The security group names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_market_options
+    #   The market (purchasing) option for the instances.
+    #   @return [Types::LaunchTemplateInstanceMarketOptions]
+    #
+    # @!attribute [rw] credit_specification
+    #   The credit option for CPU usage of the instance.
+    #   @return [Types::CreditSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
+    #
+    class ResponseLaunchTemplateData < Struct.new(
+      :kernel_id,
+      :ebs_optimized,
+      :iam_instance_profile,
+      :block_device_mappings,
+      :network_interfaces,
+      :image_id,
+      :instance_type,
+      :key_name,
+      :monitoring,
+      :placement,
+      :ram_disk_id,
+      :disable_api_termination,
+      :instance_initiated_shutdown_behavior,
+      :user_data,
+      :tag_specifications,
+      :elastic_gpu_specifications,
+      :security_group_ids,
+      :security_groups,
+      :instance_market_options,
+      :credit_specification)
+      include Aws::Structure
+    end
+
     # Contains the parameters for RestoreAddressToClassic.
     #
     # @note When making an API call, you may pass RestoreAddressToClassicRequest
@@ -21823,6 +24980,7 @@ module Aws::EC2
     #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
+    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -21830,7 +24988,7 @@ module Aws::EC2
     #             no_device: "String",
     #           },
     #         ],
-    #         image_id: "String", # required
+    #         image_id: "String",
     #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
@@ -21910,6 +25068,21 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         launch_template: {
+    #           launch_template_id: "String",
+    #           launch_template_name: "String",
+    #           version: "String",
+    #         },
+    #         instance_market_options: {
+    #           market_type: "spot", # accepts spot
+    #           spot_options: {
+    #             max_price: "String",
+    #             spot_instance_type: "one-time", # accepts one-time, persistent
+    #             block_duration_minutes: 1,
+    #             valid_until: Time.now,
+    #             instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] block_device_mappings
@@ -22130,7 +25303,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] elastic_gpu_specification
-    #   An Elastic GPU to associate with the instance.
+    #   An elastic GPU to associate with the instance.
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] tag_specifications
@@ -22138,6 +25311,16 @@ module Aws::EC2
     #   instances and volumes. The specified tags are applied to all
     #   instances or volumes that are created during launch.
     #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] launch_template
+    #   The launch template to use to launch the instances. Any parameters
+    #   that you specify in RunInstances override the same parameters in the
+    #   launch template.
+    #   @return [Types::LaunchTemplateSpecification]
+    #
+    # @!attribute [rw] instance_market_options
+    #   The market (purchasing) option for the instances.
+    #   @return [Types::InstanceMarketOptionsRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
@@ -22168,7 +25351,9 @@ module Aws::EC2
       :network_interfaces,
       :private_ip_address,
       :elastic_gpu_specification,
-      :tag_specifications)
+      :tag_specifications,
+      :launch_template,
+      :instance_market_options)
       include Aws::Structure
     end
 
@@ -23208,7 +26393,62 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a service.
+    # Describes a service configuration for a VPC endpoint service.
+    #
+    # @!attribute [rw] service_type
+    #   The type of service.
+    #   @return [Array<Types::ServiceTypeDetail>]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_state
+    #   The service state.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   In the Availability Zones in which the service is available.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] acceptance_required
+    #   Indicates whether requests from other AWS accounts to create an
+    #   endpoint to the service must first be accepted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] network_load_balancer_arns
+    #   The Amazon Resource Names (ARNs) of the Network Load Balancers for
+    #   the service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] base_endpoint_dns_names
+    #   The DNS names for the service.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] private_dns_name
+    #   The private DNS name for the service.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceConfiguration AWS API Documentation
+    #
+    class ServiceConfiguration < Struct.new(
+      :service_type,
+      :service_id,
+      :service_name,
+      :service_state,
+      :availability_zones,
+      :acceptance_required,
+      :network_load_balancer_arns,
+      :base_endpoint_dns_names,
+      :private_dns_name)
+      include Aws::Structure
+    end
+
+    # Describes a VPC endpoint service.
     #
     # @!attribute [rw] service_name
     #   The Amazon Resource Name (ARN) of the service.
@@ -23582,14 +26822,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the data feed for a Spot instance.
+    # Describes the data feed for a Spot Instance.
     #
     # @!attribute [rw] bucket
-    #   The Amazon S3 bucket where the Spot instance data feed is located.
+    #   The Amazon S3 bucket where the Spot Instance data feed is located.
     #   @return [String]
     #
     # @!attribute [rw] fault
-    #   The fault codes for the Spot instance request, if any.
+    #   The fault codes for the Spot Instance request, if any.
     #   @return [Types::SpotInstanceStateFault]
     #
     # @!attribute [rw] owner_id
@@ -23601,7 +26841,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the Spot instance data feed subscription.
+    #   The state of the Spot Instance data feed subscription.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotDatafeedSubscription AWS API Documentation
@@ -23615,7 +26855,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the launch specification for one or more Spot instances.
+    # Describes the launch specification for one or more Spot Instances.
     #
     # @note When making an API call, you may pass SpotFleetLaunchSpecification
     #   data as a hash:
@@ -23636,6 +26876,7 @@ module Aws::EC2
     #               encrypted: false,
     #               delete_on_termination: false,
     #               iops: 1,
+    #               kms_key_id: "String",
     #               snapshot_id: "String",
     #               volume_size: 1,
     #               volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -23742,8 +26983,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type. Note that T2 and HS1 instance types are not
-    #   supported.
+    #   The instance type.
     #   @return [String]
     #
     # @!attribute [rw] kernel_id
@@ -23773,10 +27013,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_price
-    #   The bid price per unit hour for the specified instance type. If this
-    #   value is not specified, the default is the Spot bid price specified
-    #   for the fleet. To determine the bid price per unit hour, divide the
-    #   Spot bid price by the value of `WeightedCapacity`.
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance. If this value is not specified, the default is the
+    #   Spot price specified for the fleet. To determine the Spot price per
+    #   unit hour, divide the Spot price by the value of `WeightedCapacity`.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -23853,15 +27093,15 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Spot fleet request.
+    # Describes a Spot Fleet request.
     #
     # @!attribute [rw] activity_status
-    #   The progress of the Spot fleet request. If there is an error, the
-    #   status is `error`. After all bids are placed, the status is
+    #   The progress of the Spot Fleet request. If there is an error, the
+    #   status is `error`. After all requests are placed, the status is
     #   `pending_fulfillment`. If the size of the fleet is equal to or
     #   greater than its target capacity, the status is `fulfilled`. If the
     #   size of the fleet is decreased, the status is `pending_termination`
-    #   while Spot instances are terminating.
+    #   while Spot Instances are terminating.
     #   @return [String]
     #
     # @!attribute [rw] create_time
@@ -23869,15 +27109,15 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] spot_fleet_request_config
-    #   Information about the configuration of the Spot fleet request.
+    #   The configuration of the Spot Fleet request.
     #   @return [Types::SpotFleetRequestConfigData]
     #
     # @!attribute [rw] spot_fleet_request_id
-    #   The ID of the Spot fleet request.
+    #   The ID of the Spot Fleet request.
     #   @return [String]
     #
     # @!attribute [rw] spot_fleet_request_state
-    #   The state of the Spot fleet request.
+    #   The state of the Spot Fleet request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfig AWS API Documentation
@@ -23891,7 +27131,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the configuration of a Spot fleet request.
+    # Describes the configuration of a Spot Fleet request.
     #
     # @note When making an API call, you may pass SpotFleetRequestConfigData
     #   data as a hash:
@@ -23902,7 +27142,7 @@ module Aws::EC2
     #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #         fulfilled_capacity: 1.0,
     #         iam_fleet_role: "String", # required
-    #         launch_specifications: [ # required
+    #         launch_specifications: [
     #           {
     #             security_groups: [
     #               {
@@ -23919,6 +27159,7 @@ module Aws::EC2
     #                   encrypted: false,
     #                   delete_on_termination: false,
     #                   iops: 1,
+    #                   kms_key_id: "String",
     #                   snapshot_id: "String",
     #                   volume_size: 1,
     #                   volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
@@ -23986,14 +27227,32 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
-    #         spot_price: "String", # required
+    #         launch_template_configs: [
+    #           {
+    #             launch_template_specification: {
+    #               launch_template_id: "String",
+    #               launch_template_name: "LaunchTemplateName",
+    #               version: "String",
+    #             },
+    #             overrides: [
+    #               {
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
+    #                 spot_price: "String",
+    #                 subnet_id: "String",
+    #                 availability_zone: "String",
+    #                 weighted_capacity: 1.0,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         spot_price: "String",
     #         target_capacity: 1, # required
     #         terminate_instances_with_expiration: false,
     #         type: "request", # accepts request, maintain
     #         valid_from: Time.now,
     #         valid_until: Time.now,
     #         replace_unhealthy_instances: false,
-    #         instance_interruption_behavior: "stop", # accepts stop, terminate
+    #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
     #         load_balancers_config: {
     #           classic_load_balancers_config: {
     #             classic_load_balancers: [ # required
@@ -24014,7 +27273,7 @@ module Aws::EC2
     #
     # @!attribute [rw] allocation_strategy
     #   Indicates how to allocate the target capacity across the Spot pools
-    #   specified by the Spot fleet request. The default is `lowestPrice`.
+    #   specified by the Spot Fleet request. The default is `lowestPrice`.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -24028,9 +27287,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] excess_capacity_termination_policy
-    #   Indicates whether running Spot instances should be terminated if the
-    #   target capacity of the Spot fleet request is decreased below the
-    #   current size of the Spot fleet.
+    #   Indicates whether running Spot Instances should be terminated if the
+    #   target capacity of the Spot Fleet request is decreased below the
+    #   current size of the Spot Fleet.
     #   @return [String]
     #
     # @!attribute [rw] fulfilled_capacity
@@ -24039,43 +27298,49 @@ module Aws::EC2
     #   @return [Float]
     #
     # @!attribute [rw] iam_fleet_role
-    #   Grants the Spot fleet permission to terminate Spot instances on your
-    #   behalf when you cancel its Spot fleet request using
-    #   CancelSpotFleetRequests or when the Spot fleet request expires, if
+    #   Grants the Spot Fleet permission to terminate Spot Instances on your
+    #   behalf when you cancel its Spot Fleet request using
+    #   CancelSpotFleetRequests or when the Spot Fleet request expires, if
     #   you set `terminateInstancesWithExpiration`.
     #   @return [String]
     #
     # @!attribute [rw] launch_specifications
-    #   Information about the launch specifications for the Spot fleet
-    #   request.
+    #   The launch specifications for the Spot Fleet request.
     #   @return [Array<Types::SpotFleetLaunchSpecification>]
     #
+    # @!attribute [rw] launch_template_configs
+    #   The launch template and overrides.
+    #   @return [Array<Types::LaunchTemplateConfig>]
+    #
     # @!attribute [rw] spot_price
-    #   The bid price per unit hour.
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance. The default is the On-Demand price.
     #   @return [String]
     #
     # @!attribute [rw] target_capacity
     #   The number of units to request. You can choose to set the target
     #   capacity in terms of instances or a performance characteristic that
     #   is important to your application workload, such as vCPUs, memory, or
-    #   I/O.
+    #   I/O. If the request type is `maintain`, you can specify a target
+    #   capacity of 0 and add capacity later.
     #   @return [Integer]
     #
     # @!attribute [rw] terminate_instances_with_expiration
-    #   Indicates whether running Spot instances should be terminated when
-    #   the Spot fleet request expires.
+    #   Indicates whether running Spot Instances should be terminated when
+    #   the Spot Fleet request expires.
     #   @return [Boolean]
     #
     # @!attribute [rw] type
     #   The type of request. Indicates whether the fleet will only `request`
     #   the target capacity or also attempt to `maintain` it. When you
     #   `request` a certain target capacity, the fleet will only place the
-    #   required bids. It will not attempt to replenish Spot instances if
-    #   capacity is diminished, nor will it submit bids in alternative Spot
-    #   pools if capacity is not available. When you want to `maintain` a
-    #   certain target capacity, fleet will place the required bids to meet
-    #   this target capacity. It will also automatically replenish any
-    #   interrupted instances. Default: `maintain`.
+    #   required requests. It will not attempt to replenish Spot Instances
+    #   if capacity is diminished, nor will it submit requests in
+    #   alternative Spot pools if capacity is not available. When you want
+    #   to `maintain` a certain target capacity, fleet will place the
+    #   required requests to meet this target capacity. It will also
+    #   automatically replenish any interrupted instances. Default:
+    #   `maintain`.
     #   @return [String]
     #
     # @!attribute [rw] valid_from
@@ -24087,25 +27352,26 @@ module Aws::EC2
     # @!attribute [rw] valid_until
     #   The end date and time of the request, in UTC format (for example,
     #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new Spot
-    #   instance requests are placed or enabled to fulfill the request.
+    #   Instance requests are placed or able to fulfill the request. The
+    #   default end date is 7 days from the current date.
     #   @return [Time]
     #
     # @!attribute [rw] replace_unhealthy_instances
-    #   Indicates whether Spot fleet should replace unhealthy instances.
+    #   Indicates whether Spot Fleet should replace unhealthy instances.
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_interruption_behavior
-    #   Indicates whether a Spot instance stops or terminates when it is
-    #   interrupted.
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
     #   @return [String]
     #
     # @!attribute [rw] load_balancers_config
     #   One or more Classic Load Balancers and target groups to attach to
-    #   the Spot fleet request. Spot fleet registers the running Spot
-    #   instances with the specified Classic Load Balancers and target
+    #   the Spot Fleet request. Spot Fleet registers the running Spot
+    #   Instances with the specified Classic Load Balancers and target
     #   groups.
     #
-    #   With Network Load Balancers, Spot fleet cannot register instances
+    #   With Network Load Balancers, Spot Fleet cannot register instances
     #   that have the following instance types: C1, CC1, CC2, CG1, CG2, CR1,
     #   CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1.
     #   @return [Types::LoadBalancersConfig]
@@ -24119,6 +27385,7 @@ module Aws::EC2
       :fulfilled_capacity,
       :iam_fleet_role,
       :launch_specifications,
+      :launch_template_configs,
       :spot_price,
       :target_capacity,
       :terminate_instances_with_expiration,
@@ -24131,7 +27398,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The tags for a Spot fleet resource.
+    # The tags for a Spot Fleet resource.
     #
     # @note When making an API call, you may pass SpotFleetTagSpecification
     #   data as a hash:
@@ -24163,40 +27430,40 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Spot instance request.
+    # Describes a Spot Instance request.
     #
     # @!attribute [rw] actual_block_hourly_price
-    #   If you specified a duration and your Spot instance request was
+    #   If you specified a duration and your Spot Instance request was
     #   fulfilled, this is the fixed hourly price in effect for the Spot
-    #   instance while it runs.
+    #   Instance while it runs.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_group
     #   The Availability Zone group. If you specify the same Availability
-    #   Zone group for all Spot instance requests, all Spot instances are
+    #   Zone group for all Spot Instance requests, all Spot Instances are
     #   launched in the same Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] block_duration_minutes
-    #   The duration for the Spot instance, in minutes.
+    #   The duration for the Spot Instance, in minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] create_time
-    #   The date and time when the Spot instance request was created, in UTC
+    #   The date and time when the Spot Instance request was created, in UTC
     #   format (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
     #   @return [Time]
     #
     # @!attribute [rw] fault
-    #   The fault codes for the Spot instance request, if any.
+    #   The fault codes for the Spot Instance request, if any.
     #   @return [Types::SpotInstanceStateFault]
     #
     # @!attribute [rw] instance_id
     #   The instance ID, if an instance has been launched to fulfill the
-    #   Spot instance request.
+    #   Spot Instance request.
     #   @return [String]
     #
     # @!attribute [rw] launch_group
-    #   The instance launch group. Launch groups are Spot instances that
+    #   The instance launch group. Launch groups are Spot Instances that
     #   launch together and terminate together.
     #   @return [String]
     #
@@ -24205,27 +27472,27 @@ module Aws::EC2
     #   @return [Types::LaunchSpecification]
     #
     # @!attribute [rw] launched_availability_zone
-    #   The Availability Zone in which the bid is launched.
+    #   The Availability Zone in which the request is launched.
     #   @return [String]
     #
     # @!attribute [rw] product_description
-    #   The product description associated with the Spot instance.
+    #   The product description associated with the Spot Instance.
     #   @return [String]
     #
     # @!attribute [rw] spot_instance_request_id
-    #   The ID of the Spot instance request.
+    #   The ID of the Spot Instance request.
     #   @return [String]
     #
     # @!attribute [rw] spot_price
-    #   The maximum hourly price (bid) for the Spot instance launched to
-    #   fulfill the request.
+    #   The maximum price per hour that you are willing to pay for a Spot
+    #   Instance.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the Spot instance request. Spot bid status information
-    #   can help you track your Spot instance requests. For more
-    #   information, see [Spot Bid Status][1] in the *Amazon Elastic Compute
-    #   Cloud User Guide*.
+    #   The state of the Spot Instance request. Spot status information can
+    #   help you track your Spot Instance requests. For more information,
+    #   see [Spot Status][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
     #
     #
     #
@@ -24233,7 +27500,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status code and status message describing the Spot instance
+    #   The status code and status message describing the Spot Instance
     #   request.
     #   @return [Types::SpotInstanceStatus]
     #
@@ -24242,7 +27509,7 @@ module Aws::EC2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] type
-    #   The Spot instance request type.
+    #   The Spot Instance request type.
     #   @return [String]
     #
     # @!attribute [rw] valid_from
@@ -24256,12 +27523,12 @@ module Aws::EC2
     #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). If this is a one-time request,
     #   it remains active until all instances launch, the request is
     #   canceled, or this date is reached. If the request is persistent, it
-    #   remains active until it is canceled or this date is reached.
+    #   remains active until it is canceled or this date is reached. The
+    #   default end date is 7 days from the current date.
     #   @return [Time]
     #
     # @!attribute [rw] instance_interruption_behavior
-    #   Indicates whether a Spot instance stops or terminates when it is
-    #   interrupted.
+    #   The behavior when a Spot Instance is interrupted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceRequest AWS API Documentation
@@ -24289,14 +27556,14 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes a Spot instance state change.
+    # Describes a Spot Instance state change.
     #
     # @!attribute [rw] code
-    #   The reason code for the Spot instance state change.
+    #   The reason code for the Spot Instance state change.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The message for the Spot instance state change.
+    #   The message for the Spot Instance state change.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceStateFault AWS API Documentation
@@ -24307,10 +27574,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the status of a Spot instance request.
+    # Describes the status of a Spot Instance request.
     #
     # @!attribute [rw] code
-    #   The status code. For a list of status codes, see [Spot Bid Status
+    #   The status code. For a list of status codes, see [Spot Status
     #   Codes][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -24336,7 +27603,59 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes Spot instance placement.
+    # The options for Spot Instances.
+    #
+    # @note When making an API call, you may pass SpotMarketOptions
+    #   data as a hash:
+    #
+    #       {
+    #         max_price: "String",
+    #         spot_instance_type: "one-time", # accepts one-time, persistent
+    #         block_duration_minutes: 1,
+    #         valid_until: Time.now,
+    #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #       }
+    #
+    # @!attribute [rw] max_price
+    #   The maximum hourly price you're willing to pay for the Spot
+    #   Instances. The default is the On-Demand price.
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_instance_type
+    #   The Spot Instance request type.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_duration_minutes
+    #   The required duration for the Spot Instances (also known as Spot
+    #   blocks), in minutes. This value must be a multiple of 60 (60, 120,
+    #   180, 240, 300, or 360).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date of the request. For a one-time request, the request
+    #   remains active until all instances launch, the request is canceled,
+    #   or this date is reached. If the request is persistent, it remains
+    #   active until it is canceled or this date and time is reached. The
+    #   default end date is 7 days from the current date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] instance_interruption_behavior
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotMarketOptions AWS API Documentation
+    #
+    class SpotMarketOptions < Struct.new(
+      :max_price,
+      :spot_instance_type,
+      :block_duration_minutes,
+      :valid_until,
+      :instance_interruption_behavior)
+      include Aws::Structure
+    end
+
+    # Describes Spot Instance placement.
     #
     # @note When making an API call, you may pass SpotPlacement
     #   data as a hash:
@@ -24350,7 +27669,7 @@ module Aws::EC2
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
     #
-    #   \[Spot fleet only\] To specify multiple Availability Zones, separate
+    #   \[Spot Fleet only\] To specify multiple Availability Zones, separate
     #   them using commas; for example, "us-west-2a, us-west-2b".
     #   @return [String]
     #
@@ -24361,7 +27680,7 @@ module Aws::EC2
     # @!attribute [rw] tenancy
     #   The tenancy of the instance (if the instance is running in a VPC).
     #   An instance with a tenancy of `dedicated` runs on single-tenant
-    #   hardware. The `host` tenancy is not supported for Spot instances.
+    #   hardware. The `host` tenancy is not supported for Spot Instances.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotPlacement AWS API Documentation
@@ -24373,16 +27692,15 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the maximum hourly price (bid) for any Spot instance
-    # launched to fulfill the request.
+    # Describes the maximum price per hour that you are willing to pay for a
+    # Spot Instance.
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type. Note that T2 and HS1 instance types are not
-    #   supported.
+    #   The instance type.
     #   @return [String]
     #
     # @!attribute [rw] product_description
@@ -24390,8 +27708,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] spot_price
-    #   The maximum price (bid) that you are willing to pay for a Spot
-    #   instance.
+    #   The maximum price per hour that you are willing to pay for a Spot
+    #   Instance.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
@@ -24565,7 +27883,7 @@ module Aws::EC2
     #     scheduled retirement.
     #
     #   * `Server.SpotInstanceTermination`\: A Spot Instance was terminated
-    #     due to an increase in the market price.
+    #     due to an increase in the Spot price.
     #
     #   * `Client.InternalError`\: A client error caused the instance to
     #     terminate on launch.
@@ -24970,8 +28288,8 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes the target groups to attach to a Spot fleet. Spot fleet
-    # registers the running Spot instances with these target groups.
+    # Describes the target groups to attach to a Spot Fleet. Spot Fleet
+    # registers the running Spot Instances with these target groups.
     #
     # @note When making an API call, you may pass TargetGroupsConfig
     #   data as a hash:
@@ -26068,7 +29386,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service to which the endpoint is associated.
+    #   The name of the service to which the endpoint is associated.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -26127,6 +29445,39 @@ module Aws::EC2
       :private_dns_enabled,
       :network_interface_ids,
       :dns_entries,
+      :creation_timestamp)
+      include Aws::Structure
+    end
+
+    # Describes a VPC endpoint connection to a service.
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the service to which the endpoint is connected.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The ID of the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_owner
+    #   The AWS account ID of the owner of the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_state
+    #   The state of the VPC endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_timestamp
+    #   The date and time the VPC endpoint was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpointConnection AWS API Documentation
+    #
+    class VpcEndpointConnection < Struct.new(
+      :service_id,
+      :vpc_endpoint_id,
+      :vpc_endpoint_owner,
+      :vpc_endpoint_state,
       :creation_timestamp)
       include Aws::Structure
     end

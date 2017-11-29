@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.5.0 (2017-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mq` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-guardduty` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-appsync` gem.
+
 3.4.0 (2017-11-27)
 ------------------
 
