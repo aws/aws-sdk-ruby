@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.94 (2017-11-30)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
