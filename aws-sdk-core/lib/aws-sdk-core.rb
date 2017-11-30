@@ -25,6 +25,7 @@ module Aws
   SERVICE_MODULE_NAMES = %w(
     ACM
     APIGateway
+    AlexaForBusiness
     AppStream
     AppSync
     ApplicationAutoScaling
@@ -33,6 +34,7 @@ module Aws
     AutoScaling
     Batch
     Budgets
+    Cloud9
     CloudDirectory
     CloudFormation
     CloudFront
@@ -135,6 +137,7 @@ module Aws
     SWF
     SageMaker
     SageMakerRuntime
+    ServerlessApplicationRepository
     ServiceCatalog
     Shield
     SimpleDB

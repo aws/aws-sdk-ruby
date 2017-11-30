@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::AlexaForBusiness - Added support for a new service, Alexa For Business.
+
+* Feature - Aws::Cloud9 - Added support for a new service, AWS Cloud9.
+
+* Feature - Aws::ServerlessApplicationRepository - Added support for a new service, AWSServerlessApplicationRepository.
+
 2.10.93 (2017-11-30)
 ------------------
 

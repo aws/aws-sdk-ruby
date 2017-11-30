@@ -7,6 +7,10 @@
     "models": "apigateway/2015-07-09",
     "endpoint": "apigateway"
   },
+  "AlexaForBusiness": {
+    "models": "alexaforbusiness/2017-11-09",
+    "endpoint": "a4b"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01",
     "endpoint": "appstream2"
@@ -38,6 +42,10 @@
   "Budgets": {
     "models": "budgets/2016-10-20",
     "endpoint": "budgets"
+  },
+  "Cloud9": {
+    "models": "cloud9/2017-09-23",
+    "endpoint": "cloud9"
   },
   "CloudDirectory": {
     "models": "clouddirectory/2016-05-10",
@@ -445,6 +453,10 @@
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13",
     "endpoint": "runtime.sagemaker"
+  },
+  "ServerlessApplicationRepository": {
+    "models": "serverlessrepo/2017-09-08",
+    "endpoint": "serverlessrepo"
   },
   "ServiceCatalog": {
     "models": "servicecatalog/2015-12-10",
