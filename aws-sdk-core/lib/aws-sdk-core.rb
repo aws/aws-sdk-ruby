@@ -121,6 +121,7 @@ module Aws
     RDS
     Redshift
     Rekognition
+    ResourceGroups
     ResourceGroupsTaggingAPI
     Route53
     Route53Domains

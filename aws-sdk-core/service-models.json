@@ -390,6 +390,10 @@
     "models": "rekognition/2016-06-27",
     "endpoint": "rekognition"
   },
+  "ResourceGroups": {
+    "models": "resource-groups/2017-11-27",
+    "endpoint": "resource-groups"
+  },
   "ResourceGroupsTaggingAPI": {
     "models": "resourcegroupstaggingapi/2017-01-26",
     "endpoint": "tagging"

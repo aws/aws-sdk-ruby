@@ -300,6 +300,7 @@ to be backwards compatible.
 | AWS OpsWorks for Chef Automate              | OpsWorksCM                    | 2016-11-01  |
 | AWS Organizations                           | Organizations                 | 2016-11-28  |
 | AWS Price List Service                      | Pricing                       | 2017-10-15  |
+| AWS Resource Groups                         | ResourceGroups                | 2017-11-27  |
 | AWS Resource Groups Tagging API             | ResourceGroupsTaggingAPI      | 2017-01-26  |
 | AWS Security Token Service                  | STS                           | 2011-06-15  |
 | AWS Server Migration Service                | SMS                           | 2016-10-24  |
