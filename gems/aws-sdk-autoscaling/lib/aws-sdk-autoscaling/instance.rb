@@ -73,6 +73,12 @@ module Aws::AutoScaling
       data[:launch_configuration_name]
     end
 
+    # The launch template for the instance.
+    # @return [Types::LaunchTemplateSpecification]
+    def launch_template
+      data[:launch_template]
+    end
+
     # Indicates whether the instance is protected from termination by Auto
     # Scaling when scaling in.
     # @return [Boolean]

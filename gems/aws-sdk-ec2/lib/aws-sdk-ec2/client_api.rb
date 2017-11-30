@@ -309,6 +309,8 @@ module Aws::EC2
     DescribeImportSnapshotTasksRequest = Shapes::StructureShape.new(name: 'DescribeImportSnapshotTasksRequest')
     DescribeImportSnapshotTasksResult = Shapes::StructureShape.new(name: 'DescribeImportSnapshotTasksResult')
     DescribeInstanceAttributeRequest = Shapes::StructureShape.new(name: 'DescribeInstanceAttributeRequest')
+    DescribeInstanceCreditSpecificationsRequest = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsRequest')
+    DescribeInstanceCreditSpecificationsResult = Shapes::StructureShape.new(name: 'DescribeInstanceCreditSpecificationsResult')
     DescribeInstanceStatusRequest = Shapes::StructureShape.new(name: 'DescribeInstanceStatusRequest')
     DescribeInstanceStatusResult = Shapes::StructureShape.new(name: 'DescribeInstanceStatusResult')
     DescribeInstancesRequest = Shapes::StructureShape.new(name: 'DescribeInstancesRequest')
@@ -582,6 +584,10 @@ module Aws::EC2
     InstanceCapacity = Shapes::StructureShape.new(name: 'InstanceCapacity')
     InstanceCount = Shapes::StructureShape.new(name: 'InstanceCount')
     InstanceCountList = Shapes::ListShape.new(name: 'InstanceCountList')
+    InstanceCreditSpecification = Shapes::StructureShape.new(name: 'InstanceCreditSpecification')
+    InstanceCreditSpecificationList = Shapes::ListShape.new(name: 'InstanceCreditSpecificationList')
+    InstanceCreditSpecificationListRequest = Shapes::ListShape.new(name: 'InstanceCreditSpecificationListRequest')
+    InstanceCreditSpecificationRequest = Shapes::StructureShape.new(name: 'InstanceCreditSpecificationRequest')
     InstanceExportDetails = Shapes::StructureShape.new(name: 'InstanceExportDetails')
     InstanceHealthStatus = Shapes::StringShape.new(name: 'InstanceHealthStatus')
     InstanceIdSet = Shapes::ListShape.new(name: 'InstanceIdSet')
@@ -698,6 +704,8 @@ module Aws::EC2
     ModifyIdentityIdFormatRequest = Shapes::StructureShape.new(name: 'ModifyIdentityIdFormatRequest')
     ModifyImageAttributeRequest = Shapes::StructureShape.new(name: 'ModifyImageAttributeRequest')
     ModifyInstanceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyInstanceAttributeRequest')
+    ModifyInstanceCreditSpecificationRequest = Shapes::StructureShape.new(name: 'ModifyInstanceCreditSpecificationRequest')
+    ModifyInstanceCreditSpecificationResult = Shapes::StructureShape.new(name: 'ModifyInstanceCreditSpecificationResult')
     ModifyInstancePlacementRequest = Shapes::StructureShape.new(name: 'ModifyInstancePlacementRequest')
     ModifyInstancePlacementResult = Shapes::StructureShape.new(name: 'ModifyInstancePlacementResult')
     ModifyLaunchTemplateRequest = Shapes::StructureShape.new(name: 'ModifyLaunchTemplateRequest')
@@ -1007,6 +1015,8 @@ module Aws::EC2
     SubnetIpv6CidrBlockAssociationSet = Shapes::ListShape.new(name: 'SubnetIpv6CidrBlockAssociationSet')
     SubnetList = Shapes::ListShape.new(name: 'SubnetList')
     SubnetState = Shapes::StringShape.new(name: 'SubnetState')
+    SuccessfulInstanceCreditSpecificationItem = Shapes::StructureShape.new(name: 'SuccessfulInstanceCreditSpecificationItem')
+    SuccessfulInstanceCreditSpecificationSet = Shapes::ListShape.new(name: 'SuccessfulInstanceCreditSpecificationSet')
     SummaryStatus = Shapes::StringShape.new(name: 'SummaryStatus')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagDescription = Shapes::StructureShape.new(name: 'TagDescription')
@@ -1033,6 +1043,10 @@ module Aws::EC2
     UnassignPrivateIpAddressesRequest = Shapes::StructureShape.new(name: 'UnassignPrivateIpAddressesRequest')
     UnmonitorInstancesRequest = Shapes::StructureShape.new(name: 'UnmonitorInstancesRequest')
     UnmonitorInstancesResult = Shapes::StructureShape.new(name: 'UnmonitorInstancesResult')
+    UnsuccessfulInstanceCreditSpecificationErrorCode = Shapes::StringShape.new(name: 'UnsuccessfulInstanceCreditSpecificationErrorCode')
+    UnsuccessfulInstanceCreditSpecificationItem = Shapes::StructureShape.new(name: 'UnsuccessfulInstanceCreditSpecificationItem')
+    UnsuccessfulInstanceCreditSpecificationItemError = Shapes::StructureShape.new(name: 'UnsuccessfulInstanceCreditSpecificationItemError')
+    UnsuccessfulInstanceCreditSpecificationSet = Shapes::ListShape.new(name: 'UnsuccessfulInstanceCreditSpecificationSet')
     UnsuccessfulItem = Shapes::StructureShape.new(name: 'UnsuccessfulItem')
     UnsuccessfulItemError = Shapes::StructureShape.new(name: 'UnsuccessfulItemError')
     UnsuccessfulItemList = Shapes::ListShape.new(name: 'UnsuccessfulItemList')
@@ -1914,7 +1928,7 @@ module Aws::EC2
     CreditSpecification.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "cpuCredits"))
     CreditSpecification.struct_class = Types::CreditSpecification
 
-    CreditSpecificationRequest.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "CpuCredits"))
+    CreditSpecificationRequest.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CpuCredits"))
     CreditSpecificationRequest.struct_class = Types::CreditSpecificationRequest
 
     CustomerGateway.add_member(:bgp_asn, Shapes::ShapeRef.new(shape: String, location_name: "bgpAsn"))
@@ -2335,6 +2349,17 @@ module Aws::EC2
     DescribeInstanceAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeInstanceAttributeRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceId"))
     DescribeInstanceAttributeRequest.struct_class = Types::DescribeInstanceAttributeRequest
+
+    DescribeInstanceCreditSpecificationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeInstanceCreditSpecificationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeInstanceCreditSpecificationsRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
+    DescribeInstanceCreditSpecificationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeInstanceCreditSpecificationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeInstanceCreditSpecificationsRequest.struct_class = Types::DescribeInstanceCreditSpecificationsRequest
+
+    DescribeInstanceCreditSpecificationsResult.add_member(:instance_credit_specifications, Shapes::ShapeRef.new(shape: InstanceCreditSpecificationList, location_name: "instanceCreditSpecificationSet"))
+    DescribeInstanceCreditSpecificationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeInstanceCreditSpecificationsResult.struct_class = Types::DescribeInstanceCreditSpecificationsResult
 
     DescribeInstanceStatusRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeInstanceStatusRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, location_name: "InstanceId"))
@@ -3589,6 +3614,18 @@ module Aws::EC2
 
     InstanceCountList.member = Shapes::ShapeRef.new(shape: InstanceCount, location_name: "item")
 
+    InstanceCreditSpecification.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    InstanceCreditSpecification.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "cpuCredits"))
+    InstanceCreditSpecification.struct_class = Types::InstanceCreditSpecification
+
+    InstanceCreditSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceCreditSpecification, location_name: "item")
+
+    InstanceCreditSpecificationListRequest.member = Shapes::ShapeRef.new(shape: InstanceCreditSpecificationRequest, location_name: "item")
+
+    InstanceCreditSpecificationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceId"))
+    InstanceCreditSpecificationRequest.add_member(:cpu_credits, Shapes::ShapeRef.new(shape: String, location_name: "CpuCredits"))
+    InstanceCreditSpecificationRequest.struct_class = Types::InstanceCreditSpecificationRequest
+
     InstanceExportDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     InstanceExportDetails.add_member(:target_environment, Shapes::ShapeRef.new(shape: ExportEnvironment, location_name: "targetEnvironment"))
     InstanceExportDetails.struct_class = Types::InstanceExportDetails
@@ -4059,6 +4096,15 @@ module Aws::EC2
     ModifyInstanceAttributeRequest.add_member(:user_data, Shapes::ShapeRef.new(shape: BlobAttributeValue, location_name: "userData"))
     ModifyInstanceAttributeRequest.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     ModifyInstanceAttributeRequest.struct_class = Types::ModifyInstanceAttributeRequest
+
+    ModifyInstanceCreditSpecificationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceCreditSpecificationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+    ModifyInstanceCreditSpecificationRequest.add_member(:instance_credit_specifications, Shapes::ShapeRef.new(shape: InstanceCreditSpecificationListRequest, required: true, location_name: "InstanceCreditSpecification"))
+    ModifyInstanceCreditSpecificationRequest.struct_class = Types::ModifyInstanceCreditSpecificationRequest
+
+    ModifyInstanceCreditSpecificationResult.add_member(:successful_instance_credit_specifications, Shapes::ShapeRef.new(shape: SuccessfulInstanceCreditSpecificationSet, location_name: "successfulInstanceCreditSpecificationSet"))
+    ModifyInstanceCreditSpecificationResult.add_member(:unsuccessful_instance_credit_specifications, Shapes::ShapeRef.new(shape: UnsuccessfulInstanceCreditSpecificationSet, location_name: "unsuccessfulInstanceCreditSpecificationSet"))
+    ModifyInstanceCreditSpecificationResult.struct_class = Types::ModifyInstanceCreditSpecificationResult
 
     ModifyInstancePlacementRequest.add_member(:affinity, Shapes::ShapeRef.new(shape: Affinity, location_name: "affinity"))
     ModifyInstancePlacementRequest.add_member(:host_id, Shapes::ShapeRef.new(shape: String, location_name: "hostId"))
@@ -4988,6 +5034,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     RunInstancesRequest.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
     RunInstancesRequest.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: InstanceMarketOptionsRequest, location_name: "InstanceMarketOptions"))
+    RunInstancesRequest.add_member(:credit_specification, Shapes::ShapeRef.new(shape: CreditSpecificationRequest, location_name: "CreditSpecification"))
     RunInstancesRequest.struct_class = Types::RunInstancesRequest
 
     RunScheduledInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -5438,6 +5485,11 @@ module Aws::EC2
 
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "item")
 
+    SuccessfulInstanceCreditSpecificationItem.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    SuccessfulInstanceCreditSpecificationItem.struct_class = Types::SuccessfulInstanceCreditSpecificationItem
+
+    SuccessfulInstanceCreditSpecificationSet.member = Shapes::ShapeRef.new(shape: SuccessfulInstanceCreditSpecificationItem, location_name: "item")
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     Tag.struct_class = Types::Tag
@@ -5509,6 +5561,16 @@ module Aws::EC2
 
     UnmonitorInstancesResult.add_member(:instance_monitorings, Shapes::ShapeRef.new(shape: InstanceMonitoringList, location_name: "instancesSet"))
     UnmonitorInstancesResult.struct_class = Types::UnmonitorInstancesResult
+
+    UnsuccessfulInstanceCreditSpecificationItem.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    UnsuccessfulInstanceCreditSpecificationItem.add_member(:error, Shapes::ShapeRef.new(shape: UnsuccessfulInstanceCreditSpecificationItemError, location_name: "error"))
+    UnsuccessfulInstanceCreditSpecificationItem.struct_class = Types::UnsuccessfulInstanceCreditSpecificationItem
+
+    UnsuccessfulInstanceCreditSpecificationItemError.add_member(:code, Shapes::ShapeRef.new(shape: UnsuccessfulInstanceCreditSpecificationErrorCode, location_name: "code"))
+    UnsuccessfulInstanceCreditSpecificationItemError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    UnsuccessfulInstanceCreditSpecificationItemError.struct_class = Types::UnsuccessfulInstanceCreditSpecificationItemError
+
+    UnsuccessfulInstanceCreditSpecificationSet.member = Shapes::ShapeRef.new(shape: UnsuccessfulInstanceCreditSpecificationItem, location_name: "item")
 
     UnsuccessfulItem.add_member(:error, Shapes::ShapeRef.new(shape: UnsuccessfulItemError, required: true, location_name: "error"))
     UnsuccessfulItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
@@ -6829,6 +6891,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: InstanceAttribute)
       end)
 
+      api.add_operation(:describe_instance_credit_specifications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstanceCreditSpecifications"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstanceCreditSpecificationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstanceCreditSpecificationsResult)
+      end)
+
       api.add_operation(:describe_instance_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeInstanceStatus"
         o.http_method = "POST"
@@ -7580,6 +7650,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyInstanceAttributeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:modify_instance_credit_specification, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceCreditSpecification"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceCreditSpecificationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyInstanceCreditSpecificationResult)
       end)
 
       api.add_operation(:modify_instance_placement, Seahorse::Model::Operation.new.tap do |o|

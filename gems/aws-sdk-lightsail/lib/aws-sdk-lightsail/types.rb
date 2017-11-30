@@ -70,12 +70,84 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operations
-    #   An object describing the API operation.
+    #   An object describing the API operations.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachDiskResult AWS API Documentation
     #
     class AttachDiskResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AttachInstancesToLoadBalancerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #         instance_names: ["ResourceName"], # required
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_names
+    #   An array of strings representing the instance name(s) you want to
+    #   attach to your load balancer.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachInstancesToLoadBalancerRequest AWS API Documentation
+    #
+    class AttachInstancesToLoadBalancerRequest < Struct.new(
+      :load_balancer_name,
+      :instance_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object representing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachInstancesToLoadBalancerResult AWS API Documentation
+    #
+    class AttachInstancesToLoadBalancerResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AttachLoadBalancerTlsCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #         certificate_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the load balancer to which you want to associate the
+    #   TLS/SSL certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_name
+    #   The name of your TLS/SSL certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachLoadBalancerTlsCertificateRequest AWS API Documentation
+    #
+    class AttachLoadBalancerTlsCertificateRequest < Struct.new(
+      :load_balancer_name,
+      :certificate_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object representing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachLoadBalancerTlsCertificateResult AWS API Documentation
+    #
+    class AttachLoadBalancerTlsCertificateResult < Struct.new(
       :operations)
       include Aws::Structure
     end
@@ -468,6 +540,7 @@ module Aws::Lightsail
     #           id: "NonEmptyString",
     #           name: "DomainName",
     #           target: "string",
+    #           is_alias: false,
     #           type: "DomainEntryType",
     #           options: {
     #             "DomainEntryOptionsKeys" => "string",
@@ -633,7 +706,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] user_data
     #   You can create a launch script that configures a server with
-    #   additional user data. For example, `apt-get –y update`.
+    #   additional user data. For example, `apt-get -y update`.
     #
     #   <note markdown="1"> Depending on the machine image you choose, the command to get
     #   software on your instance varies. Amazon Linux and CentOS use `yum`,
@@ -730,7 +803,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] user_data
     #   A launch script you can create that configures a server with
-    #   additional user data. For example, you might want to run `apt-get –y
+    #   additional user data. For example, you might want to run `apt-get -y
     #   update`.
     #
     #   <note markdown="1"> Depending on the machine image you choose, the command to get
@@ -820,6 +893,124 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLoadBalancerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #         instance_port: 1, # required
+    #         health_check_path: "string",
+    #         certificate_name: "ResourceName",
+    #         certificate_domain_name: "DomainName",
+    #         certificate_alternative_names: ["DomainName"],
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of your load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_port
+    #   The instance port where you're creating your load balancer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] health_check_path
+    #   The path you provided to perform the load balancer health check. If
+    #   you didn't specify a health check path, Lightsail uses the root
+    #   path of your website (e.g., `"/"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_name
+    #   The name of the TLS/SSL certificate.
+    #
+    #   If you specify `certificateName`, then `certificateDomainName` is
+    #   required (and vice-versa).
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_domain_name
+    #   The domain name with which your certificate is associated (e.g.,
+    #   `example.com`).
+    #
+    #   If you specify `certificateDomainName`, then `certificateName` is
+    #   required (and vice-versa).
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_alternative_names
+    #   The alternative domain names to use with your TLS/SSL certificate
+    #   (e.g., `www.example.com`, `www.ejemplo.com`, `ejemplo.com`).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerRequest AWS API Documentation
+    #
+    class CreateLoadBalancerRequest < Struct.new(
+      :load_balancer_name,
+      :instance_port,
+      :health_check_path,
+      :certificate_name,
+      :certificate_domain_name,
+      :certificate_alternative_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object containing information about the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerResult AWS API Documentation
+    #
+    class CreateLoadBalancerResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateLoadBalancerTlsCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #         certificate_name: "ResourceName", # required
+    #         certificate_domain_name: "DomainName", # required
+    #         certificate_alternative_names: ["DomainName"],
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The load balancer name where you want to create the TLS/SSL
+    #   certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_name
+    #   The TLS/SSL certificate name.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_domain_name
+    #   The domain name (e.g., `example.com`) for your TLS/SSL certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_alternative_names
+    #   An array of strings listing alternative domain names for your
+    #   TLS/SSL certificate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerTlsCertificateRequest AWS API Documentation
+    #
+    class CreateLoadBalancerTlsCertificateRequest < Struct.new(
+      :load_balancer_name,
+      :certificate_name,
+      :certificate_domain_name,
+      :certificate_alternative_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object containing information about the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerTlsCertificateResult AWS API Documentation
+    #
+    class CreateLoadBalancerTlsCertificateResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDiskRequest
     #   data as a hash:
     #
@@ -888,6 +1079,7 @@ module Aws::Lightsail
     #           id: "NonEmptyString",
     #           name: "DomainName",
     #           target: "string",
+    #           is_alias: false,
     #           type: "DomainEntryType",
     #           options: {
     #             "DomainEntryOptionsKeys" => "string",
@@ -1044,6 +1236,76 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteLoadBalancerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the load balancer you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteLoadBalancerRequest AWS API Documentation
+    #
+    class DeleteLoadBalancerRequest < Struct.new(
+      :load_balancer_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteLoadBalancerResult AWS API Documentation
+    #
+    class DeleteLoadBalancerResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteLoadBalancerTlsCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #         certificate_name: "ResourceName", # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The load balancer name.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_name
+    #   The TLS/SSL certificate name.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   When `true`, forces the deletion of a TLS/SSL certificate.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteLoadBalancerTlsCertificateRequest AWS API Documentation
+    #
+    class DeleteLoadBalancerTlsCertificateRequest < Struct.new(
+      :load_balancer_name,
+      :certificate_name,
+      :force)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteLoadBalancerTlsCertificateResult AWS API Documentation
+    #
+    class DeleteLoadBalancerTlsCertificateResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DetachDiskRequest
     #   data as a hash:
     #
@@ -1070,6 +1332,42 @@ module Aws::Lightsail
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachDiskResult AWS API Documentation
     #
     class DetachDiskResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetachInstancesFromLoadBalancerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #         instance_names: ["ResourceName"], # required
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the Lightsail load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_names
+    #   An array of strings containing the names of the instances you want
+    #   to detach from the load balancer.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachInstancesFromLoadBalancerRequest AWS API Documentation
+    #
+    class DetachInstancesFromLoadBalancerRequest < Struct.new(
+      :load_balancer_name,
+      :instance_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachInstancesFromLoadBalancerResult AWS API Documentation
+    #
+    class DetachInstancesFromLoadBalancerResult < Struct.new(
       :operations)
       include Aws::Structure
     end
@@ -1165,7 +1463,7 @@ module Aws::Lightsail
     # @!attribute [rw] attachment_state
     #   (Deprecated) The attachment state of the disk.
     #
-    #   <note markdown="1"> In releases prior to November 9, 2017, this parameter returned
+    #   <note markdown="1"> In releases prior to November 14, 2017, this parameter returned
     #   `attached` for system disks in the API response. It is now
     #   deprecated, but still included in the response. Use `isAttached`
     #   instead.
@@ -1176,7 +1474,7 @@ module Aws::Lightsail
     # @!attribute [rw] gb_in_use
     #   (Deprecated) The number of GB in use by the disk.
     #
-    #   <note markdown="1"> In releases prior to November 9, 2017, this parameter was not
+    #   <note markdown="1"> In releases prior to November 14, 2017, this parameter was not
     #   included in the API response. It is now deprecated.
     #
     #    </note>
@@ -1357,6 +1655,7 @@ module Aws::Lightsail
     #         id: "NonEmptyString",
     #         name: "DomainName",
     #         target: "string",
+    #         is_alias: false,
     #         type: "DomainEntryType",
     #         options: {
     #           "DomainEntryOptionsKeys" => "string",
@@ -1375,12 +1674,22 @@ module Aws::Lightsail
     #   The target AWS name server (e.g., `ns-111.awsdns-22.com.`).
     #   @return [String]
     #
+    # @!attribute [rw] is_alias
+    #   When `true`, specifies whether the domain entry is an alias used by
+    #   the Lightsail load balancer.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] type
     #   The type of domain entry (e.g., `SOA` or `NS`).
     #   @return [String]
     #
     # @!attribute [rw] options
-    #   The options for the domain entry.
+    #   (Deprecated) The options for the domain entry.
+    #
+    #   <note markdown="1"> In releases prior to November 29, 2017, this parameter was not
+    #   included in the API response. It is now deprecated.
+    #
+    #    </note>
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DomainEntry AWS API Documentation
@@ -1389,6 +1698,7 @@ module Aws::Lightsail
       :id,
       :name,
       :target,
+      :is_alias,
       :type,
       :options)
       include Aws::Structure
@@ -2105,6 +2415,261 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLoadBalancerMetricDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #         metric_name: "ClientTLSNegotiationErrorCount", # required, accepts ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount
+    #         period: 1, # required
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         unit: "Seconds", # required, accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         statistics: ["Minimum"], # required, accepts Minimum, Maximum, Sum, Average, SampleCount
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The metric about which you want to return information. Valid values
+    #   are listed below, along with the most useful `statistics` to include
+    #   in your request.
+    #
+    #   * <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number
+    #     of TLS connections initiated by the client that did not establish
+    #     a session with the load balancer. Possible causes include a
+    #     mismatch of ciphers or protocols.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #   * <b> <code>HealthyHostCount</code> </b> - The number of target
+    #     instances that are considered healthy.
+    #
+    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
+    #     and `Maximum`.
+    #
+    #   * <b> <code>UnhealthyHostCount</code> </b> - The number of target
+    #     instances that are considered unhealthy.
+    #
+    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
+    #     and `Maximum`.
+    #
+    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP
+    #     4XX client error codes that originate from the load balancer.
+    #     Client errors are generated when requests are malformed or
+    #     incomplete. These requests have not been received by the target
+    #     instance. This count does not include any response codes generated
+    #     by the target instances.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP
+    #     5XX server error codes that originate from the load balancer. This
+    #     count does not include any response codes generated by the target
+    #     instances.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of
+    #     HTTP response codes generated by the target instances. This does
+    #     not include any response codes generated by the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of
+    #     HTTP response codes generated by the target instances. This does
+    #     not include any response codes generated by the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of
+    #     HTTP response codes generated by the target instances. This does
+    #     not include any response codes generated by the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of
+    #     HTTP response codes generated by the target instances. This does
+    #     not include any response codes generated by the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in
+    #     seconds, after the request leaves the load balancer until a
+    #     response from the target instance is received.
+    #
+    #     `Statistics`\: The most useful statistic is `Average`.
+    #
+    #   * <b> <code>RejectedConnectionCount</code> </b> - The number of
+    #     connections that were rejected because the load balancer had
+    #     reached its maximum number of connections.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #   * <b> <code>RequestCount</code> </b> - The number of requests
+    #     processed over IPv4. This count includes only the requests with a
+    #     response generated by a target instance of the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #   @return [String]
+    #
+    # @!attribute [rw] period
+    #   The time period duration for your health data request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] unit
+    #   The unit for the time period request. Valid values are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistics
+    #   An array of statistics that you want to request metrics for. Valid
+    #   values are listed below.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerMetricDataRequest AWS API Documentation
+    #
+    class GetLoadBalancerMetricDataRequest < Struct.new(
+      :load_balancer_name,
+      :metric_name,
+      :period,
+      :start_time,
+      :end_time,
+      :unit,
+      :statistics)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_name
+    #   The metric about which you are receiving information. Valid values
+    #   are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_data
+    #   An array of metric datapoint objects.
+    #   @return [Array<Types::MetricDatapoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerMetricDataResult AWS API Documentation
+    #
+    class GetLoadBalancerMetricDataResult < Struct.new(
+      :metric_name,
+      :metric_data)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLoadBalancerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the load balancer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerRequest AWS API Documentation
+    #
+    class GetLoadBalancerRequest < Struct.new(
+      :load_balancer_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] load_balancer
+    #   An object containing information about your load balancer.
+    #   @return [Types::LoadBalancer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerResult AWS API Documentation
+    #
+    class GetLoadBalancerResult < Struct.new(
+      :load_balancer)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLoadBalancerTlsCertificatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the load balancer where you stored your TLS/SSL
+    #   certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerTlsCertificatesRequest AWS API Documentation
+    #
+    class GetLoadBalancerTlsCertificatesRequest < Struct.new(
+      :load_balancer_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tls_certificates
+    #   An array of LoadBalancerTlsCertificate objects describing your
+    #   TLS/SSL certificates.
+    #   @return [Array<Types::LoadBalancerTlsCertificate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerTlsCertificatesResult AWS API Documentation
+    #
+    class GetLoadBalancerTlsCertificatesResult < Struct.new(
+      :tls_certificates)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLoadBalancersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         page_token: "string",
+    #       }
+    #
+    # @!attribute [rw] page_token
+    #   A token used for paginating the results from your GetLoadBalancers
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancersRequest AWS API Documentation
+    #
+    class GetLoadBalancersRequest < Struct.new(
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] load_balancers
+    #   An array of LoadBalancer objects describing your load balancers.
+    #   @return [Array<Types::LoadBalancer>]
+    #
+    # @!attribute [rw] next_page_token
+    #   A token used for advancing to the next page of results from your
+    #   GetLoadBalancers request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancersResult AWS API Documentation
+    #
+    class GetLoadBalancersResult < Struct.new(
+      :load_balancers,
+      :next_page_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetOperationRequest
     #   data as a hash:
     #
@@ -2568,6 +3133,30 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes information about the health of the instance.
+    #
+    # @!attribute [rw] instance_name
+    #   The name of the Lightsail instance for which you are requesting
+    #   health check data.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_health
+    #   Describes the overall instance health. Valid values are below.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_health_reason
+    #   More information about the instance health. Valid values are below.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceHealthSummary AWS API Documentation
+    #
+    class InstanceHealthSummary < Struct.new(
+      :instance_name,
+      :instance_health,
+      :instance_health_reason)
+      include Aws::Structure
+    end
+
     # Describes monthly data transfer rates and port information for an
     # instance.
     #
@@ -2875,6 +3464,342 @@ module Aws::Lightsail
       :location,
       :resource_type,
       :fingerprint)
+      include Aws::Structure
+    end
+
+    # Describes the Lightsail load balancer.
+    #
+    # @!attribute [rw] name
+    #   The name of the load balancer (e.g., `my-load-balancer`).
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_code
+    #   The support code. Include this code in your email to support when
+    #   you have questions about your Lightsail load balancer. This code
+    #   enables our support team to look up your Lightsail information more
+    #   easily.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date when your load balancer was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] location
+    #   The AWS Region and Availability Zone where your load balancer was
+    #   created (e.g., `us-east-2a`).
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type (e.g., `LoadBalancer`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name of your Lightsail load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The status of your load balancer. Valid values are below.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol you have enabled for your load balancer. Valid values
+    #   are below.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_ports
+    #   An array of public port settings for your load balancer.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] health_check_path
+    #   The path you specified to perform your health checks. If no path is
+    #   specified, the load balancer tries to make a request to the default
+    #   (root) page.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_port
+    #   The instance port where the load balancer is listening.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_health_summary
+    #   An array of InstanceHealthSummary objects describing the health of
+    #   the load balancer.
+    #   @return [Array<Types::InstanceHealthSummary>]
+    #
+    # @!attribute [rw] tls_certificate_summaries
+    #   An array of LoadBalancerTlsCertificateSummary objects that provide
+    #   additional information about the TLS/SSL certificates.
+    #   @return [Array<Types::LoadBalancerTlsCertificateSummary>]
+    #
+    # @!attribute [rw] configuration_options
+    #   A string to string map of the configuration options for your load
+    #   balancer. Valid values are listed below.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancer AWS API Documentation
+    #
+    class LoadBalancer < Struct.new(
+      :name,
+      :arn,
+      :support_code,
+      :created_at,
+      :location,
+      :resource_type,
+      :dns_name,
+      :state,
+      :protocol,
+      :public_ports,
+      :health_check_path,
+      :instance_port,
+      :instance_health_summary,
+      :tls_certificate_summaries,
+      :configuration_options)
+      include Aws::Structure
+    end
+
+    # Describes a load balancer TLS/SSL certificate.
+    #
+    # TLS is just an updated, more secure version of Secure Socket Layer
+    # (SSL).
+    #
+    # @!attribute [rw] name
+    #   The name of the TLS/SSL certificate (e.g., `my-certificate`).
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the TLS/SSL certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_code
+    #   The support code. Include this code in your email to support when
+    #   you have questions about your Lightsail load balancer or TLS/SSL
+    #   certificate. This code enables our support team to look up your
+    #   Lightsail information more easily.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when you created your TLS/SSL certificate.
+    #   @return [Time]
+    #
+    # @!attribute [rw] location
+    #   The AWS Region and Availability Zone where you created your
+    #   certificate.
+    #   @return [Types::ResourceLocation]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type (e.g., `LoadBalancerTlsCertificate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The load balancer name where your TLS/SSL certificate is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_attached
+    #   When `true`, the TLS/SSL certificate is attached to the Lightsail
+    #   load balancer.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of the TLS/SSL certificate. Valid values are below.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name for your TLS/SSL certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_validation_records
+    #   An array of LoadBalancerTlsCertificateDomainValidationRecord objects
+    #   describing the records.
+    #   @return [Array<Types::LoadBalancerTlsCertificateDomainValidationRecord>]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for the TLS/SSL certificate validation failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] issued_at
+    #   The time when the TLS/SSL certificate was issued.
+    #   @return [Time]
+    #
+    # @!attribute [rw] issuer
+    #   The issuer of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_algorithm
+    #   The algorithm that was used to generate the key pair (the public and
+    #   private key).
+    #   @return [String]
+    #
+    # @!attribute [rw] not_after
+    #   The timestamp when the TLS/SSL certificate expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] not_before
+    #   The timestamp when the TLS/SSL certificate is first valid.
+    #   @return [Time]
+    #
+    # @!attribute [rw] renewal_summary
+    #   An object containing information about the status of Lightsail's
+    #   managed renewal for the certificate.
+    #   @return [Types::LoadBalancerTlsCertificateRenewalSummary]
+    #
+    # @!attribute [rw] revocation_reason
+    #   The reason the certificate was revoked. Valid values are below.
+    #   @return [String]
+    #
+    # @!attribute [rw] revoked_at
+    #   The timestamp when the TLS/SSL certificate was revoked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] serial
+    #   The serial number of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature_algorithm
+    #   The algorithm that was used to sign the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject
+    #   The name of the entity that is associated with the public key
+    #   contained in the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_alternative_names
+    #   One or more domain names (subject alternative names) included in the
+    #   certificate. This list contains the domain names that are bound to
+    #   the public key that is contained in the certificate. The subject
+    #   alternative names include the canonical domain name (CN) of the
+    #   certificate and additional domain names that can be used to connect
+    #   to the website.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificate AWS API Documentation
+    #
+    class LoadBalancerTlsCertificate < Struct.new(
+      :name,
+      :arn,
+      :support_code,
+      :created_at,
+      :location,
+      :resource_type,
+      :load_balancer_name,
+      :is_attached,
+      :status,
+      :domain_name,
+      :domain_validation_records,
+      :failure_reason,
+      :issued_at,
+      :issuer,
+      :key_algorithm,
+      :not_after,
+      :not_before,
+      :renewal_summary,
+      :revocation_reason,
+      :revoked_at,
+      :serial,
+      :signature_algorithm,
+      :subject,
+      :subject_alternative_names)
+      include Aws::Structure
+    end
+
+    # Contains information about the domain names on a TLS/SSL certificate
+    # that you will use to validate domain ownership.
+    #
+    # @!attribute [rw] domain_name
+    #   A fully qualified domain name in the certificate request.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status
+    #   The status of the domain validation. Valid values are listed below.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateDomainValidationOption AWS API Documentation
+    #
+    class LoadBalancerTlsCertificateDomainValidationOption < Struct.new(
+      :domain_name,
+      :validation_status)
+      include Aws::Structure
+    end
+
+    # Describes the validation record of each domain name in the TLS/SSL
+    # certificate.
+    #
+    # @!attribute [rw] name
+    #   A fully qualified domain name in the certificate. For example,
+    #   `example.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of validation record. For example, `CNAME` for domain
+    #   validation.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for that type.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status
+    #   The validation status. Valid values are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name against which your TLS/SSL certificate was
+    #   validated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateDomainValidationRecord AWS API Documentation
+    #
+    class LoadBalancerTlsCertificateDomainValidationRecord < Struct.new(
+      :name,
+      :type,
+      :value,
+      :validation_status,
+      :domain_name)
+      include Aws::Structure
+    end
+
+    # Contains information about the status of Lightsail's managed renewal
+    # for the certificate.
+    #
+    # @!attribute [rw] renewal_status
+    #   The status of Lightsail's managed renewal of the certificate. Valid
+    #   values are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_validation_options
+    #   Contains information about the validation of each domain name in the
+    #   certificate, as it pertains to Lightsail's managed renewal. This is
+    #   different from the initial validation that occurs as a result of the
+    #   RequestCertificate request.
+    #   @return [Array<Types::LoadBalancerTlsCertificateDomainValidationOption>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateRenewalSummary AWS API Documentation
+    #
+    class LoadBalancerTlsCertificateRenewalSummary < Struct.new(
+      :renewal_status,
+      :domain_validation_options)
+      include Aws::Structure
+    end
+
+    # Provides a summary of TLS/SSL certificate metadata.
+    #
+    # @!attribute [rw] name
+    #   The name of the TLS/SSL certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_attached
+    #   When `true`, the TLS/SSL certificate is attached to the Lightsail
+    #   load balancer.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateSummary AWS API Documentation
+    #
+    class LoadBalancerTlsCertificateSummary < Struct.new(
+      :name,
+      :is_attached)
       include Aws::Structure
     end
 
@@ -3450,6 +4375,7 @@ module Aws::Lightsail
     #           id: "NonEmptyString",
     #           name: "DomainName",
     #           target: "string",
+    #           is_alias: false,
     #           type: "DomainEntryType",
     #           options: {
     #             "DomainEntryOptionsKeys" => "string",
@@ -3482,6 +4408,48 @@ module Aws::Lightsail
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDomainEntryResult AWS API Documentation
     #
     class UpdateDomainEntryResult < Struct.new(
+      :operations)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateLoadBalancerAttributeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         load_balancer_name: "ResourceName", # required
+    #         attribute_name: "HealthCheckPath", # required, accepts HealthCheckPath, SessionStickinessEnabled, SessionStickiness_LB_CookieDurationSeconds
+    #         attribute_value: "StringMax256", # required
+    #       }
+    #
+    # @!attribute [rw] load_balancer_name
+    #   The name of the load balancer that you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the attribute you want to update. Valid values are
+    #   below.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value that you want to specify for the attribute name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateLoadBalancerAttributeRequest AWS API Documentation
+    #
+    class UpdateLoadBalancerAttributeRequest < Struct.new(
+      :load_balancer_name,
+      :attribute_name,
+      :attribute_value)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operations
+    #   An object describing the API operations.
+    #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateLoadBalancerAttributeResult AWS API Documentation
+    #
+    class UpdateLoadBalancerAttributeResult < Struct.new(
       :operations)
       include Aws::Structure
     end

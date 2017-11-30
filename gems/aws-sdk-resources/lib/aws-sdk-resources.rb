@@ -101,6 +101,7 @@ module Aws
   autoload :RDS, 'aws-sdk-rds'
   autoload :Redshift, 'aws-sdk-redshift'
   autoload :Rekognition, 'aws-sdk-rekognition'
+  autoload :ResourceGroups, 'aws-sdk-resourcegroups'
   autoload :ResourceGroupsTaggingAPI, 'aws-sdk-resourcegroupstaggingapi'
   autoload :Route53, 'aws-sdk-route53'
   autoload :Route53Domains, 'aws-sdk-route53domains'

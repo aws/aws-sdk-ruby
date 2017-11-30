@@ -22,10 +22,13 @@ module Aws::WAFRegional
     #       {
     #         priority: 1, # required
     #         rule_id: "ResourceId", # required
-    #         action: { # required
+    #         action: {
     #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #         },
-    #         type: "REGULAR", # accepts REGULAR, RATE_BASED
+    #         override_action: {
+    #           type: "NONE", # required, accepts NONE, COUNT
+    #         },
+    #         type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
     #       }
     #
     # @!attribute [rw] priority
@@ -58,15 +61,39 @@ module Aws::WAFRegional
     #   * `COUNT`\: AWS WAF increments a counter of requests that match the
     #     conditions in the rule and then continues to inspect the web
     #     request based on the remaining rules in the web ACL.
+    #
+    #   The `Action` data type within `ActivatedRule` is used only when
+    #   submitting an `UpdateWebACL` request. `ActivatedRule|Action` is not
+    #   applicable and therefore not available for `UpdateRuleGroup`.
     #   @return [Types::WafAction]
     #
+    # @!attribute [rw] override_action
+    #   Use the `OverrideAction` to test your `RuleGroup`.
+    #
+    #   Any rule in a `RuleGroup` can potentially block a request. If you
+    #   set the `OverrideAction` to `None`, the `RuleGroup` will block a
+    #   request if any individual rule in the `RuleGroup` matches the
+    #   request and is configured to block that request. However if you
+    #   first want to test the `RuleGroup`, set the `OverrideAction` to
+    #   `Count`. The `RuleGroup` will then override any block action
+    #   specified by individual rules contained within the group. Instead of
+    #   blocking matching requests, those requests will be counted. You can
+    #   view a record of counted requests using GetSampledRequests.
+    #
+    #   The `OverrideAction` data type within `ActivatedRule` is used only
+    #   when submitting an `UpdateRuleGroup` request.
+    #   `ActivatedRule|OverrideAction` is not applicable and therefore not
+    #   available for `UpdateWebACL`.
+    #   @return [Types::WafOverrideAction]
+    #
     # @!attribute [rw] type
-    #   The rule type, either `REGULAR`, as defined by Rule, or
-    #   `RATE_BASED`, as defined by RateBasedRule. The default is REGULAR.
-    #   Although this field is optional, be aware that if you try to add a
-    #   RATE\_BASED rule to a web ACL without setting the type, the
-    #   UpdateWebACL request will fail because the request tries to add a
-    #   REGULAR rule with the specified ID, which does not exist.
+    #   The rule type, either `REGULAR`, as defined by Rule, `RATE_BASED`,
+    #   as defined by RateBasedRule, or `GROUP`, as defined by RuleGroup.
+    #   The default is REGULAR. Although this field is optional, be aware
+    #   that if you try to add a RATE\_BASED rule to a web ACL without
+    #   setting the type, the UpdateWebACL request will fail because the
+    #   request tries to add a REGULAR rule with the specified ID, which
+    #   does not exist.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ActivatedRule AWS API Documentation
@@ -75,6 +102,7 @@ module Aws::WAFRegional
       :priority,
       :rule_id,
       :action,
+      :override_action,
       :type)
       include Aws::Structure
     end
@@ -721,6 +749,58 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceName", # required
+    #         metric_name: "MetricName", # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the RuleGroup. You can't change
+    #   `Name` after you create a `RuleGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   A friendly name or description for the metrics for this `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
+    #   the name can't contain whitespace. You can't change the name of
+    #   the metric after you create the `RuleGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleGroupRequest AWS API Documentation
+    #
+    class CreateRuleGroupRequest < Struct.new(
+      :name,
+      :metric_name,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_group
+    #   An empty RuleGroup.
+    #   @return [Types::RuleGroup]
+    #
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `CreateRuleGroup`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleGroupResponse AWS API Documentation
+    #
+    class CreateRuleGroupResponse < Struct.new(
+      :rule_group,
+      :change_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateRuleRequest
     #   data as a hash:
     #
@@ -1205,6 +1285,44 @@ module Aws::WAFRegional
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRegexPatternSetResponse AWS API Documentation
     #
     class DeleteRegexPatternSetResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_group_id: "ResourceId", # required
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] rule_group_id
+    #   The `RuleGroupId` of the RuleGroup that you want to delete.
+    #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRuleGroupRequest AWS API Documentation
+    #
+    class DeleteRuleGroupRequest < Struct.new(
+      :rule_group_id,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `DeleteRuleGroup`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRuleGroupResponse AWS API Documentation
+    #
+    class DeleteRuleGroupResponse < Struct.new(
       :change_token)
       include Aws::Structure
     end
@@ -1908,6 +2026,37 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_group_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] rule_group_id
+    #   The `RuleGroupId` of the RuleGroup that you want to get.
+    #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRuleGroupRequest AWS API Documentation
+    #
+    class GetRuleGroupRequest < Struct.new(
+      :rule_group_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_group
+    #   Information about the RuleGroup that you specified in the
+    #   `GetRuleGroup` request.
+    #   @return [Types::RuleGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRuleGroupResponse AWS API Documentation
+    #
+    class GetRuleGroupResponse < Struct.new(
+      :rule_group)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetRuleRequest
     #   data as a hash:
     #
@@ -1964,10 +2113,11 @@ module Aws::WAFRegional
     #   @return [String]
     #
     # @!attribute [rw] rule_id
-    #   `RuleId` is one of two values:
+    #   `RuleId` is one of three values:
     #
-    #   * The `RuleId` of the `Rule` for which you want `GetSampledRequests`
-    #     to return a sample of requests.
+    #   * The `RuleId` of the `Rule` or the `RuleGroupId` of the `RuleGroup`
+    #     for which you want `GetSampledRequests` to return a sample of
+    #     requests.
     #
     #   * `Default_Action`, which causes `GetSampledRequests` to return a
     #     sample of the requests that didn't match any of the rules in the
@@ -2470,6 +2620,68 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListActivatedRulesInRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_group_id: "ResourceId",
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] rule_group_id
+    #   The `RuleGroupId` of the RuleGroup for which you want to get a list
+    #   of ActivatedRule objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   If you specify a value for `Limit` and you have more
+    #   `ActivatedRules` than the value of `Limit`, AWS WAF returns a
+    #   `NextMarker` value in the response that allows you to list another
+    #   group of `ActivatedRules`. For the second and subsequent
+    #   `ListActivatedRulesInRuleGroup` requests, specify the value of
+    #   `NextMarker` from the previous response to get information about
+    #   another batch of `ActivatedRules`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of `ActivatedRules` that you want AWS WAF to
+    #   return for this request. If you have more `ActivatedRules` than the
+    #   number that you specify for `Limit`, the response includes a
+    #   `NextMarker` value that you can use to get another batch of
+    #   `ActivatedRules`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListActivatedRulesInRuleGroupRequest AWS API Documentation
+    #
+    class ListActivatedRulesInRuleGroupRequest < Struct.new(
+      :rule_group_id,
+      :next_marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   If you have more `ActivatedRules` than the number that you specified
+    #   for `Limit` in the request, the response includes a `NextMarker`
+    #   value. To list more `ActivatedRules`, submit another
+    #   `ListActivatedRulesInRuleGroup` request, and specify the
+    #   `NextMarker` value from the response in the `NextMarker` value in
+    #   the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] activated_rules
+    #   An array of `ActivatedRules` objects.
+    #   @return [Array<Types::ActivatedRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListActivatedRulesInRuleGroupResponse AWS API Documentation
+    #
+    class ListActivatedRulesInRuleGroupResponse < Struct.new(
+      :next_marker,
+      :activated_rules)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListByteMatchSetsRequest
     #   data as a hash:
     #
@@ -2824,6 +3036,58 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRuleGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   If you specify a value for `Limit` and you have more `RuleGroups`
+    #   than the value of `Limit`, AWS WAF returns a `NextMarker` value in
+    #   the response that allows you to list another group of `RuleGroups`.
+    #   For the second and subsequent `ListRuleGroups` requests, specify the
+    #   value of `NextMarker` from the previous response to get information
+    #   about another batch of `RuleGroups`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of `RuleGroups` that you want AWS WAF to return
+    #   for this request. If you have more `RuleGroups` than the number that
+    #   you specify for `Limit`, the response includes a `NextMarker` value
+    #   that you can use to get another batch of `RuleGroups`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRuleGroupsRequest AWS API Documentation
+    #
+    class ListRuleGroupsRequest < Struct.new(
+      :next_marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   If you have more `RuleGroups` than the number that you specified for
+    #   `Limit` in the request, the response includes a `NextMarker` value.
+    #   To list more `RuleGroups`, submit another `ListRuleGroups` request,
+    #   and specify the `NextMarker` value from the response in the
+    #   `NextMarker` value in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_groups
+    #   An array of RuleGroup objects.
+    #   @return [Array<Types::RuleGroupSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRuleGroupsResponse AWS API Documentation
+    #
+    class ListRuleGroupsResponse < Struct.new(
+      :next_marker,
+      :rule_groups)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRulesRequest
     #   data as a hash:
     #
@@ -2988,6 +3252,59 @@ module Aws::WAFRegional
     class ListSqlInjectionMatchSetsResponse < Struct.new(
       :next_marker,
       :sql_injection_match_sets)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSubscribedRuleGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] next_marker
+    #   If you specify a value for `Limit` and you have more
+    #   `ByteMatchSets`subscribed rule groups than the value of `Limit`, AWS
+    #   WAF returns a `NextMarker` value in the response that allows you to
+    #   list another group of subscribed rule groups. For the second and
+    #   subsequent `ListSubscribedRuleGroupsRequest` requests, specify the
+    #   value of `NextMarker` from the previous response to get information
+    #   about another batch of subscribed rule groups.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Specifies the number of subscribed rule groups that you want AWS WAF
+    #   to return for this request. If you have more objects than the number
+    #   you specify for `Limit`, the response includes a `NextMarker` value
+    #   that you can use to get another batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSubscribedRuleGroupsRequest AWS API Documentation
+    #
+    class ListSubscribedRuleGroupsRequest < Struct.new(
+      :next_marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_marker
+    #   If you have more objects than the number that you specified for
+    #   `Limit` in the request, the response includes a `NextMarker` value.
+    #   To list more objects, submit another `ListSubscribedRuleGroups`
+    #   request, and specify the `NextMarker` value from the response in the
+    #   `NextMarker` value in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_groups
+    #   An array of RuleGroup objects.
+    #   @return [Array<Types::SubscribedRuleGroupSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSubscribedRuleGroupsResponse AWS API Documentation
+    #
+    class ListSubscribedRuleGroupsResponse < Struct.new(
+      :next_marker,
+      :rule_groups)
       include Aws::Structure
     end
 
@@ -3612,6 +3929,115 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # A collection of predefined rules that you can add to a web ACL.
+    #
+    # Rule groups are subject to the following limits:
+    #
+    # * Three rule groups per account. You can request an increase to this
+    #   limit by contacting customer support.
+    #
+    # * One rule group per web ACL.
+    #
+    # * Ten rules per rule group.
+    #
+    # @!attribute [rw] rule_group_id
+    #   A unique identifier for a `RuleGroup`. You use `RuleGroupId` to get
+    #   more information about a `RuleGroup` (see GetRuleGroup), update a
+    #   `RuleGroup` (see UpdateRuleGroup), insert a `RuleGroup` into a
+    #   `WebACL` or delete a one from a `WebACL` (see UpdateWebACL), or
+    #   delete a `RuleGroup` from AWS WAF (see DeleteRuleGroup).
+    #
+    #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The friendly name or description for the `RuleGroup`. You can't
+    #   change the name of a `RuleGroup` after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   A friendly name or description for the metrics for this `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
+    #   the name can't contain whitespace. You can't change the name of
+    #   the metric after you create the `RuleGroup`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleGroup AWS API Documentation
+    #
+    class RuleGroup < Struct.new(
+      :rule_group_id,
+      :name,
+      :metric_name)
+      include Aws::Structure
+    end
+
+    # Contains the identifier and the friendly name or description of the
+    # `RuleGroup`.
+    #
+    # @!attribute [rw] rule_group_id
+    #   A unique identifier for a `RuleGroup`. You use `RuleGroupId` to get
+    #   more information about a `RuleGroup` (see GetRuleGroup), update a
+    #   `RuleGroup` (see UpdateRuleGroup), insert a `RuleGroup` into a
+    #   `WebACL` or delete one from a `WebACL` (see UpdateWebACL), or delete
+    #   a `RuleGroup` from AWS WAF (see DeleteRuleGroup).
+    #
+    #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the RuleGroup. You can't change
+    #   the name of a `RuleGroup` after you create it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleGroupSummary AWS API Documentation
+    #
+    class RuleGroupSummary < Struct.new(
+      :rule_group_id,
+      :name)
+      include Aws::Structure
+    end
+
+    # Specifies an `ActivatedRule` and indicates whether you want to add it
+    # to a `RuleGroup` or delete it from a `RuleGroup`.
+    #
+    # @note When making an API call, you may pass RuleGroupUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         action: "INSERT", # required, accepts INSERT, DELETE
+    #         activated_rule: { # required
+    #           priority: 1, # required
+    #           rule_id: "ResourceId", # required
+    #           action: {
+    #             type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
+    #           },
+    #           override_action: {
+    #             type: "NONE", # required, accepts NONE, COUNT
+    #           },
+    #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   Specify `INSERT` to add an `ActivatedRule` to a `RuleGroup`. Use
+    #   `DELETE` to remove an `ActivatedRule` from a `RuleGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] activated_rule
+    #   The `ActivatedRule` object specifies a `Rule` that you want to
+    #   insert or delete, the priority of the `Rule` in the `WebACL`, and
+    #   the action that you want AWS WAF to take when a web request matches
+    #   the `Rule` (`ALLOW`, `BLOCK`, or `COUNT`).
+    #   @return [Types::ActivatedRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleGroupUpdate AWS API Documentation
+    #
+    class RuleGroupUpdate < Struct.new(
+      :action,
+      :activated_rule)
+      include Aws::Structure
+    end
+
     # Contains the identifier and the friendly name or description of the
     # `Rule`.
     #
@@ -3698,13 +4124,21 @@ module Aws::WAFRegional
     #   `BLOCK`, or `COUNT`.
     #   @return [String]
     #
+    # @!attribute [rw] rule_within_rule_group
+    #   This value is returned if the `GetSampledRequests` request specifies
+    #   the ID of a `RuleGroup` rather than the ID of an individual rule.
+    #   `RuleWithinRuleGroup` is the rule within the specified `RuleGroup`
+    #   that matched the request listed in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SampledHTTPRequest AWS API Documentation
     #
     class SampledHTTPRequest < Struct.new(
       :request,
       :weight,
       :timestamp,
-      :action)
+      :action,
+      :rule_within_rule_group)
       include Aws::Structure
     end
 
@@ -4175,6 +4609,33 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # A summary of the rule groups you are subscribed to.
+    #
+    # @!attribute [rw] rule_group_id
+    #   A unique identifier for a `RuleGroup`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name or description of the `RuleGroup`. You can't change
+    #   the name of a `RuleGroup` after you create it.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   A friendly name or description for the metrics for this `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
+    #   the name can't contain whitespace. You can't change the name of
+    #   the metric after you create the `RuleGroup`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SubscribedRuleGroupSummary AWS API Documentation
+    #
+    class SubscribedRuleGroupSummary < Struct.new(
+      :rule_group_id,
+      :name,
+      :metric_name)
+      include Aws::Structure
+    end
+
     # In a GetSampledRequests request, the `StartTime` and `EndTime` objects
     # specify the time range for which you want AWS WAF to return a sample
     # of web requests.
@@ -4584,6 +5045,72 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateRuleGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rule_group_id: "ResourceId", # required
+    #         updates: [ # required
+    #           {
+    #             action: "INSERT", # required, accepts INSERT, DELETE
+    #             activated_rule: { # required
+    #               priority: 1, # required
+    #               rule_id: "ResourceId", # required
+    #               action: {
+    #                 type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
+    #               },
+    #               override_action: {
+    #                 type: "NONE", # required, accepts NONE, COUNT
+    #               },
+    #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #             },
+    #           },
+    #         ],
+    #         change_token: "ChangeToken", # required
+    #       }
+    #
+    # @!attribute [rw] rule_group_id
+    #   The `RuleGroupId` of the RuleGroup that you want to update.
+    #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
+    #   @return [String]
+    #
+    # @!attribute [rw] updates
+    #   An array of `RuleGroupUpdate` objects that you want to insert into
+    #   or delete from a RuleGroup.
+    #
+    #   You can only insert `REGULAR` rules into a rule group.
+    #
+    #   The `Action` data type within `ActivatedRule` is used only when
+    #   submitting an `UpdateWebACL` request. `ActivatedRule|Action` is not
+    #   applicable and therefore not available for `UpdateRuleGroup`.
+    #   @return [Array<Types::RuleGroupUpdate>]
+    #
+    # @!attribute [rw] change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRuleGroupRequest AWS API Documentation
+    #
+    class UpdateRuleGroupRequest < Struct.new(
+      :rule_group_id,
+      :updates,
+      :change_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] change_token
+    #   The `ChangeToken` that you used to submit the `UpdateRuleGroup`
+    #   request. You can also use this value to query the status of the
+    #   request. For more information, see GetChangeTokenStatus.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRuleGroupResponse AWS API Documentation
+    #
+    class UpdateRuleGroupResponse < Struct.new(
+      :change_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateRuleRequest
     #   data as a hash:
     #
@@ -4796,10 +5323,13 @@ module Aws::WAFRegional
     #             activated_rule: { # required
     #               priority: 1, # required
     #               rule_id: "ResourceId", # required
-    #               action: { # required
+    #               action: {
     #                 type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #               },
-    #               type: "REGULAR", # accepts REGULAR, RATE_BASED
+    #               override_action: {
+    #                 type: "NONE", # required, accepts NONE, COUNT
+    #               },
+    #               type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
     #             },
     #           },
     #         ],
@@ -4826,7 +5356,11 @@ module Aws::WAFRegional
     #
     #   * WebACLUpdate: Contains `Action` and `ActivatedRule`
     #
-    #   * ActivatedRule: Contains `Action`, `Priority`, `RuleId`, and `Type`
+    #   * ActivatedRule: Contains `Action`, `Priority`, `RuleId`, and
+    #     `Type`. The `OverrideAction` data type within `ActivatedRule` is
+    #     used only when submitting an `UpdateRuleGroup` request.
+    #     `ActivatedRule|OverrideAction` is not applicable and therefore not
+    #     available for `UpdateWebACL`.
     #
     #   * WafAction: Contains `Type`
     #   @return [Array<Types::WebACLUpdate>]
@@ -4964,6 +5498,29 @@ module Aws::WAFRegional
       include Aws::Structure
     end
 
+    # The action to take if any rule within the `RuleGroup` matches a
+    # request.
+    #
+    # @note When making an API call, you may pass WafOverrideAction
+    #   data as a hash:
+    #
+    #       {
+    #         type: "NONE", # required, accepts NONE, COUNT
+    #       }
+    #
+    # @!attribute [rw] type
+    #   `COUNT` overrides the action specified by the individual rule within
+    #   a `RuleGroup` . If set to `NONE`, the rule's action will take
+    #   place.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WafOverrideAction AWS API Documentation
+    #
+    class WafOverrideAction < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
     # Contains the `Rules` that identify the requests that you want to
     # allow, block, or count. In a `WebACL`, you also specify a default
     # action (`ALLOW` or `BLOCK`), and the action for each `Rule` that you
@@ -5052,10 +5609,13 @@ module Aws::WAFRegional
     #         activated_rule: { # required
     #           priority: 1, # required
     #           rule_id: "ResourceId", # required
-    #           action: { # required
+    #           action: {
     #             type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #           },
-    #           type: "REGULAR", # accepts REGULAR, RATE_BASED
+    #           override_action: {
+    #             type: "NONE", # required, accepts NONE, COUNT
+    #           },
+    #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
     #         },
     #       }
     #

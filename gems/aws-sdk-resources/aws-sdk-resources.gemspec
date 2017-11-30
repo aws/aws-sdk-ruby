@@ -111,6 +111,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-rds', '~> 1')
   spec.add_dependency('aws-sdk-redshift', '~> 1')
   spec.add_dependency('aws-sdk-rekognition', '~> 1')
+  spec.add_dependency('aws-sdk-resourcegroups', '~> 1')
   spec.add_dependency('aws-sdk-resourcegroupstaggingapi', '~> 1')
   spec.add_dependency('aws-sdk-route53', '~> 1')
   spec.add_dependency('aws-sdk-route53domains', '~> 1')

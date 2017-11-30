@@ -762,6 +762,68 @@ module Aws::WAF
       req.send_request(options)
     end
 
+    # Creates a `RuleGroup`. A rule group is a collection of predefined
+    # rules that you add to a web ACL. You use UpdateRuleGroup to add rules
+    # to the rule group.
+    #
+    # Rule groups are subject to the following limits:
+    #
+    # * Three rule groups per account. You can request an increase to this
+    #   limit by contacting customer support.
+    #
+    # * One rule group per web ACL.
+    #
+    # * Ten rules per rule group.
+    #
+    # For more information about how to use the AWS WAF API to allow or
+    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    #
+    # @option params [required, String] :name
+    #   A friendly name or description of the RuleGroup. You can't change
+    #   `Name` after you create a `RuleGroup`.
+    #
+    # @option params [required, String] :metric_name
+    #   A friendly name or description for the metrics for this `RuleGroup`.
+    #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
+    #   name can't contain whitespace. You can't change the name of the
+    #   metric after you create the `RuleGroup`.
+    #
+    # @option params [required, String] :change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @return [Types::CreateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateRuleGroupResponse#rule_group #rule_group} => Types::RuleGroup
+    #   * {Types::CreateRuleGroupResponse#change_token #change_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_rule_group({
+    #     name: "ResourceName", # required
+    #     metric_name: "MetricName", # required
+    #     change_token: "ChangeToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_group.rule_group_id #=> String
+    #   resp.rule_group.name #=> String
+    #   resp.rule_group.metric_name #=> String
+    #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRuleGroup AWS API Documentation
+    #
+    # @overload create_rule_group(params = {})
+    # @param [Hash] params ({})
+    def create_rule_group(params = {}, options = {})
+      req = build_request(:create_rule_group, params)
+      req.send_request(options)
+    end
+
     # Creates a `SizeConstraintSet`. You then use UpdateSizeConstraintSet to
     # identify the part of a web request that you want AWS WAF to check for
     # length, such as the length of the `User-Agent` header or the length of
@@ -1074,7 +1136,8 @@ module Aws::WAF
     #   resp.web_acl.rules[0].priority #=> Integer
     #   resp.web_acl.rules[0].rule_id #=> String
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
-    #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED"
+    #   resp.web_acl.rules[0].override_action.type #=> String, one of "NONE", "COUNT"
+    #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
     #   resp.change_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACL AWS API Documentation
@@ -1546,6 +1609,55 @@ module Aws::WAF
     # @param [Hash] params ({})
     def delete_rule(params = {}, options = {})
       req = build_request(:delete_rule, params)
+      req.send_request(options)
+    end
+
+    # Permanently deletes a RuleGroup. You can't delete a `RuleGroup` if
+    # it's still used in any `WebACL` objects or if it still includes any
+    # rules.
+    #
+    # If you just want to remove a `RuleGroup` from a `WebACL`, use
+    # UpdateWebACL.
+    #
+    # To permanently delete a `RuleGroup` from AWS WAF, perform the
+    # following steps:
+    #
+    # 1.  Update the `RuleGroup` to remove rules, if any. For more
+    #     information, see UpdateRuleGroup.
+    #
+    # 2.  Use GetChangeToken to get the change token that you provide in the
+    #     `ChangeToken` parameter of a `DeleteRuleGroup` request.
+    #
+    # 3.  Submit a `DeleteRuleGroup` request.
+    #
+    # @option params [required, String] :rule_group_id
+    #   The `RuleGroupId` of the RuleGroup that you want to delete.
+    #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
+    #
+    # @option params [required, String] :change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @return [Types::DeleteRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteRuleGroupResponse#change_token #change_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_rule_group({
+    #     rule_group_id: "ResourceId", # required
+    #     change_token: "ChangeToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRuleGroup AWS API Documentation
+    #
+    # @overload delete_rule_group(params = {})
+    # @param [Hash] params ({})
+    def delete_rule_group(params = {}, options = {})
+      req = build_request(:delete_rule_group, params)
       req.send_request(options)
     end
 
@@ -2267,6 +2379,40 @@ module Aws::WAF
       req.send_request(options)
     end
 
+    # Returns the RuleGroup that is specified by the `RuleGroupId` that you
+    # included in the `GetRuleGroup` request.
+    #
+    # To view the rules in a rule group, use ListActivatedRulesInRuleGroup.
+    #
+    # @option params [required, String] :rule_group_id
+    #   The `RuleGroupId` of the RuleGroup that you want to get. `RuleGroupId`
+    #   is returned by CreateRuleGroup and by ListRuleGroups.
+    #
+    # @return [Types::GetRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRuleGroupResponse#rule_group #rule_group} => Types::RuleGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_rule_group({
+    #     rule_group_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_group.rule_group_id #=> String
+    #   resp.rule_group.name #=> String
+    #   resp.rule_group.metric_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRuleGroup AWS API Documentation
+    #
+    # @overload get_rule_group(params = {})
+    # @param [Hash] params ({})
+    def get_rule_group(params = {}, options = {})
+      req = build_request(:get_rule_group, params)
+      req.send_request(options)
+    end
+
     # Gets detailed information about a specified number of requests--a
     # sample--that AWS WAF randomly selects from among the first 5,000
     # requests that your AWS resource received during a time range that you
@@ -2285,10 +2431,11 @@ module Aws::WAF
     #   to return a sample of requests.
     #
     # @option params [required, String] :rule_id
-    #   `RuleId` is one of two values:
+    #   `RuleId` is one of three values:
     #
-    #   * The `RuleId` of the `Rule` for which you want `GetSampledRequests`
-    #     to return a sample of requests.
+    #   * The `RuleId` of the `Rule` or the `RuleGroupId` of the `RuleGroup`
+    #     for which you want `GetSampledRequests` to return a sample of
+    #     requests.
     #
     #   * `Default_Action`, which causes `GetSampledRequests` to return a
     #     sample of the requests that didn't match any of the rules in the
@@ -2385,6 +2532,7 @@ module Aws::WAF
     #   resp.sampled_requests[0].weight #=> Integer
     #   resp.sampled_requests[0].timestamp #=> Time
     #   resp.sampled_requests[0].action #=> String
+    #   resp.sampled_requests[0].rule_within_rule_group #=> String
     #   resp.population_size #=> Integer
     #   resp.time_window.start_time #=> Time
     #   resp.time_window.end_time #=> Time
@@ -2581,7 +2729,8 @@ module Aws::WAF
     #   resp.web_acl.rules[0].priority #=> Integer
     #   resp.web_acl.rules[0].rule_id #=> String
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
-    #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED"
+    #   resp.web_acl.rules[0].override_action.type #=> String, one of "NONE", "COUNT"
+    #   resp.web_acl.rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetWebACL AWS API Documentation
     #
@@ -2649,6 +2798,59 @@ module Aws::WAF
     # @param [Hash] params ({})
     def get_xss_match_set(params = {}, options = {})
       req = build_request(:get_xss_match_set, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of ActivatedRule objects.
+    #
+    # @option params [String] :rule_group_id
+    #   The `RuleGroupId` of the RuleGroup for which you want to get a list of
+    #   ActivatedRule objects.
+    #
+    # @option params [String] :next_marker
+    #   If you specify a value for `Limit` and you have more `ActivatedRules`
+    #   than the value of `Limit`, AWS WAF returns a `NextMarker` value in the
+    #   response that allows you to list another group of `ActivatedRules`.
+    #   For the second and subsequent `ListActivatedRulesInRuleGroup`
+    #   requests, specify the value of `NextMarker` from the previous response
+    #   to get information about another batch of `ActivatedRules`.
+    #
+    # @option params [Integer] :limit
+    #   Specifies the number of `ActivatedRules` that you want AWS WAF to
+    #   return for this request. If you have more `ActivatedRules` than the
+    #   number that you specify for `Limit`, the response includes a
+    #   `NextMarker` value that you can use to get another batch of
+    #   `ActivatedRules`.
+    #
+    # @return [Types::ListActivatedRulesInRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListActivatedRulesInRuleGroupResponse#next_marker #next_marker} => String
+    #   * {Types::ListActivatedRulesInRuleGroupResponse#activated_rules #activated_rules} => Array&lt;Types::ActivatedRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_activated_rules_in_rule_group({
+    #     rule_group_id: "ResourceId",
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.activated_rules #=> Array
+    #   resp.activated_rules[0].priority #=> Integer
+    #   resp.activated_rules[0].rule_id #=> String
+    #   resp.activated_rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
+    #   resp.activated_rules[0].override_action.type #=> String, one of "NONE", "COUNT"
+    #   resp.activated_rules[0].type #=> String, one of "REGULAR", "RATE_BASED", "GROUP"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListActivatedRulesInRuleGroup AWS API Documentation
+    #
+    # @overload list_activated_rules_in_rule_group(params = {})
+    # @param [Hash] params ({})
+    def list_activated_rules_in_rule_group(params = {}, options = {})
+      req = build_request(:list_activated_rules_in_rule_group, params)
       req.send_request(options)
     end
 
@@ -2940,6 +3142,50 @@ module Aws::WAF
       req.send_request(options)
     end
 
+    # Returns an array of RuleGroup objects.
+    #
+    # @option params [String] :next_marker
+    #   If you specify a value for `Limit` and you have more `RuleGroups` than
+    #   the value of `Limit`, AWS WAF returns a `NextMarker` value in the
+    #   response that allows you to list another group of `RuleGroups`. For
+    #   the second and subsequent `ListRuleGroups` requests, specify the value
+    #   of `NextMarker` from the previous response to get information about
+    #   another batch of `RuleGroups`.
+    #
+    # @option params [Integer] :limit
+    #   Specifies the number of `RuleGroups` that you want AWS WAF to return
+    #   for this request. If you have more `RuleGroups` than the number that
+    #   you specify for `Limit`, the response includes a `NextMarker` value
+    #   that you can use to get another batch of `RuleGroups`.
+    #
+    # @return [Types::ListRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRuleGroupsResponse#next_marker #next_marker} => String
+    #   * {Types::ListRuleGroupsResponse#rule_groups #rule_groups} => Array&lt;Types::RuleGroupSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_rule_groups({
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.rule_groups #=> Array
+    #   resp.rule_groups[0].rule_group_id #=> String
+    #   resp.rule_groups[0].name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRuleGroups AWS API Documentation
+    #
+    # @overload list_rule_groups(params = {})
+    # @param [Hash] params ({})
+    def list_rule_groups(params = {}, options = {})
+      req = build_request(:list_rule_groups, params)
+      req.send_request(options)
+    end
+
     # Returns an array of RuleSummary objects.
     #
     # @option params [String] :next_marker
@@ -3130,6 +3376,52 @@ module Aws::WAF
     # @param [Hash] params ({})
     def list_sql_injection_match_sets(params = {}, options = {})
       req = build_request(:list_sql_injection_match_sets, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of RuleGroup objects that you are subscribed to.
+    #
+    # @option params [String] :next_marker
+    #   If you specify a value for `Limit` and you have more
+    #   `ByteMatchSets`subscribed rule groups than the value of `Limit`, AWS
+    #   WAF returns a `NextMarker` value in the response that allows you to
+    #   list another group of subscribed rule groups. For the second and
+    #   subsequent `ListSubscribedRuleGroupsRequest` requests, specify the
+    #   value of `NextMarker` from the previous response to get information
+    #   about another batch of subscribed rule groups.
+    #
+    # @option params [Integer] :limit
+    #   Specifies the number of subscribed rule groups that you want AWS WAF
+    #   to return for this request. If you have more objects than the number
+    #   you specify for `Limit`, the response includes a `NextMarker` value
+    #   that you can use to get another batch of objects.
+    #
+    # @return [Types::ListSubscribedRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSubscribedRuleGroupsResponse#next_marker #next_marker} => String
+    #   * {Types::ListSubscribedRuleGroupsResponse#rule_groups #rule_groups} => Array&lt;Types::SubscribedRuleGroupSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_subscribed_rule_groups({
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_marker #=> String
+    #   resp.rule_groups #=> Array
+    #   resp.rule_groups[0].rule_group_id #=> String
+    #   resp.rule_groups[0].name #=> String
+    #   resp.rule_groups[0].metric_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSubscribedRuleGroups AWS API Documentation
+    #
+    # @overload list_subscribed_rule_groups(params = {})
+    # @param [Hash] params ({})
+    def list_subscribed_rule_groups(params = {}, options = {})
+      req = build_request(:list_subscribed_rule_groups, params)
       req.send_request(options)
     end
 
@@ -3708,7 +4000,7 @@ module Aws::WAF
       req.send_request(options)
     end
 
-    # Inserts or deletes RegexMatchSetUpdate objects (filters) in a
+    # Inserts or deletes RegexMatchTuple objects (filters) in a
     # RegexMatchSet. For each `RegexMatchSetUpdate` object, you specify the
     # following values:
     #
@@ -3716,8 +4008,8 @@ module Aws::WAF
     #   to change a `RegexMatchSetUpdate` object, you delete the existing
     #   object and add a new one.
     #
-    # * The part of a web request that you want AWS WAF to inspect, such as
-    #   a query string or the value of the `User-Agent` header.
+    # * The part of a web request that you want AWS WAF to inspectupdate,
+    #   such as a query string or the value of the `User-Agent` header.
     #
     # * The identifier of the pattern (a regular expression) that you want
     #   AWS WAF to look for. For more information, see RegexPatternSet.
@@ -3803,15 +4095,13 @@ module Aws::WAF
       req.send_request(options)
     end
 
-    # Inserts or deletes RegexMatchSetUpdate objects (filters) in a
-    # RegexPatternSet. For each `RegexPatternSet` object, you specify the
-    # following values:
+    # Inserts or deletes `RegexPatternString` objects in a RegexPatternSet.
+    # For each `RegexPatternString` object, you specify the following
+    # values:
     #
-    # * Whether to insert or delete the object from the array. If you want
-    #   to change a `RegexPatternSet` object, you delete the existing object
-    #   and add a new one.
+    # * Whether to insert or delete the `RegexPatternString`.
     #
-    # * The regular expression pattern that you want AWS WAF to look for.
+    # * The regular expression pattern that you want to insert or delete.
     #   For more information, see RegexPatternSet.
     #
     # For example, you can create a `RegexPatternString` such as
@@ -4002,6 +4292,93 @@ module Aws::WAF
     # @param [Hash] params ({})
     def update_rule(params = {}, options = {})
       req = build_request(:update_rule, params)
+      req.send_request(options)
+    end
+
+    # Inserts or deletes ActivatedRule objects in a `RuleGroup`.
+    #
+    # You can only insert `REGULAR` rules into a rule group.
+    #
+    # You can have a maximum of ten rules per rule group.
+    #
+    # To create and configure a `RuleGroup`, perform the following steps:
+    #
+    # 1.  Create and update the `Rules` that you want to include in the
+    #     `RuleGroup`. See CreateRule.
+    #
+    # 2.  Use `GetChangeToken` to get the change token that you provide in
+    #     the `ChangeToken` parameter of an UpdateRuleGroup request.
+    #
+    # 3.  Submit an `UpdateRuleGroup` request to add `Rules` to the
+    #     `RuleGroup`.
+    #
+    # 4.  Create and update a `WebACL` that contains the `RuleGroup`. See
+    #     CreateWebACL.
+    #
+    # If you want to replace one `Rule` with another, you delete the
+    # existing one and add the new one.
+    #
+    # For more information about how to use the AWS WAF API to allow or
+    # block HTTP requests, see the [AWS WAF Developer Guide][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+    #
+    # @option params [required, String] :rule_group_id
+    #   The `RuleGroupId` of the RuleGroup that you want to update.
+    #   `RuleGroupId` is returned by CreateRuleGroup and by ListRuleGroups.
+    #
+    # @option params [required, Array<Types::RuleGroupUpdate>] :updates
+    #   An array of `RuleGroupUpdate` objects that you want to insert into or
+    #   delete from a RuleGroup.
+    #
+    #   You can only insert `REGULAR` rules into a rule group.
+    #
+    #   The `Action` data type within `ActivatedRule` is used only when
+    #   submitting an `UpdateWebACL` request. `ActivatedRule|Action` is not
+    #   applicable and therefore not available for `UpdateRuleGroup`.
+    #
+    # @option params [required, String] :change_token
+    #   The value returned by the most recent call to GetChangeToken.
+    #
+    # @return [Types::UpdateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRuleGroupResponse#change_token #change_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_rule_group({
+    #     rule_group_id: "ResourceId", # required
+    #     updates: [ # required
+    #       {
+    #         action: "INSERT", # required, accepts INSERT, DELETE
+    #         activated_rule: { # required
+    #           priority: 1, # required
+    #           rule_id: "ResourceId", # required
+    #           action: {
+    #             type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
+    #           },
+    #           override_action: {
+    #             type: "NONE", # required, accepts NONE, COUNT
+    #           },
+    #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
+    #         },
+    #       },
+    #     ],
+    #     change_token: "ChangeToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRuleGroup AWS API Documentation
+    #
+    # @overload update_rule_group(params = {})
+    # @param [Hash] params ({})
+    def update_rule_group(params = {}, options = {})
+      req = build_request(:update_rule_group, params)
       req.send_request(options)
     end
 
@@ -4343,7 +4720,11 @@ module Aws::WAF
     #
     #   * WebACLUpdate: Contains `Action` and `ActivatedRule`
     #
-    #   * ActivatedRule: Contains `Action`, `Priority`, `RuleId`, and `Type`
+    #   * ActivatedRule: Contains `Action`, `Priority`, `RuleId`, and `Type`.
+    #     The `OverrideAction` data type within `ActivatedRule` is used only
+    #     when submitting an `UpdateRuleGroup` request.
+    #     `ActivatedRule|OverrideAction` is not applicable and therefore not
+    #     available for `UpdateWebACL`.
     #
     #   * WafAction: Contains `Type`
     #
@@ -4397,10 +4778,13 @@ module Aws::WAF
     #         activated_rule: { # required
     #           priority: 1, # required
     #           rule_id: "ResourceId", # required
-    #           action: { # required
+    #           action: {
     #             type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
     #           },
-    #           type: "REGULAR", # accepts REGULAR, RATE_BASED
+    #           override_action: {
+    #             type: "NONE", # required, accepts NONE, COUNT
+    #           },
+    #           type: "REGULAR", # accepts REGULAR, RATE_BASED, GROUP
     #         },
     #       },
     #     ],
@@ -4557,7 +4941,7 @@ module Aws::WAF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-waf'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

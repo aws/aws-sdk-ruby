@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2017-11-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ResourceGroups`.
+
 1.42.0 (2017-11-29)
 ------------------
 

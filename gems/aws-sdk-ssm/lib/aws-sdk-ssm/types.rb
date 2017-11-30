@@ -454,6 +454,13 @@ module Aws::SSM
     #   are executed in order.
     #   @return [Array<Types::StepExecution>]
     #
+    # @!attribute [rw] step_executions_truncated
+    #   A boolean value that indicates if the response contains the full
+    #   list of the Automation step executions. If true, use the
+    #   DescribeAutomationStepExecutions API action to get the full list of
+    #   step executions.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] parameters
     #   The key-value map of execution parameters, which were supplied when
     #   calling StartAutomationExecution.
@@ -468,6 +475,53 @@ module Aws::SSM
     #   set to Failed.
     #   @return [String]
     #
+    # @!attribute [rw] mode
+    #   The automation execution mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_automation_execution_id
+    #   The AutomationExecutionId of the parent automation.
+    #   @return [String]
+    #
+    # @!attribute [rw] executed_by
+    #   The Amazon Resource Name (ARN) of the user who executed the
+    #   automation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_step_name
+    #   The name of the currently executing step.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_action
+    #   The action of the currently executing step.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_parameter_name
+    #   The parameter name.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The specified targets.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] resolved_targets
+    #   A list of resolved targets in the rate control execution.
+    #   @return [Types::ResolvedTargets]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The MaxConcurrency value specified by the user when the execution
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_errors
+    #   The MaxErrors value specified by the user when the execution
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target of the execution.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecution AWS API Documentation
     #
     class AutomationExecution < Struct.new(
@@ -478,9 +532,21 @@ module Aws::SSM
       :execution_end_time,
       :automation_execution_status,
       :step_executions,
+      :step_executions_truncated,
       :parameters,
       :outputs,
-      :failure_message)
+      :failure_message,
+      :mode,
+      :parent_automation_execution_id,
+      :executed_by,
+      :current_step_name,
+      :current_action,
+      :target_parameter_name,
+      :targets,
+      :resolved_targets,
+      :max_concurrency,
+      :max_errors,
+      :target)
       include Aws::Structure
     end
 
@@ -491,13 +557,14 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter
     #         values: ["AutomationExecutionFilterValue"], # required
     #       }
     #
     # @!attribute [rw] key
-    #   The aspect of the Automation execution information that should be
-    #   limited.
+    #   One or more keys to limit the results. Valid filter keys include the
+    #   following: DocumentNamePrefix, ExecutionStatus, ExecutionId,
+    #   ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -553,6 +620,52 @@ module Aws::SSM
     #   The list of execution outputs as defined in the Automation document.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] mode
+    #   The Automation execution mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_automation_execution_id
+    #   The ExecutionId of the parent Automation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_step_name
+    #   The name of the currently executing step.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_action
+    #   The action of the currently executing step.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   The list of execution outputs as defined in the Automation document.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_parameter_name
+    #   The list of execution outputs as defined in the Automation document.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The targets defined by the user when starting the Automation.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] resolved_targets
+    #   A list of targets that resolved during the execution.
+    #   @return [Types::ResolvedTargets]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The MaxConcurrency value specified by the user when starting the
+    #   Automation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_errors
+    #   The MaxErrors value specified by the user when starting the
+    #   Automation.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The list of execution outputs as defined in the Automation document.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionMetadata AWS API Documentation
     #
     class AutomationExecutionMetadata < Struct.new(
@@ -564,7 +677,18 @@ module Aws::SSM
       :execution_end_time,
       :executed_by,
       :log_file,
-      :outputs)
+      :outputs,
+      :mode,
+      :parent_automation_execution_id,
+      :current_step_name,
+      :current_action,
+      :failure_message,
+      :target_parameter_name,
+      :targets,
+      :resolved_targets,
+      :max_concurrency,
+      :max_errors,
+      :target)
       include Aws::Structure
     end
 
@@ -1640,10 +1764,12 @@ module Aws::SSM
     #         content: "DocumentContent", # required
     #         name: "DocumentName", # required
     #         document_type: "Command", # accepts Command, Policy, Automation
+    #         document_format: "YAML", # accepts YAML, JSON
+    #         target_type: "TargetType",
     #       }
     #
     # @!attribute [rw] content
-    #   A valid JSON string.
+    #   A valid JSON or YAML string.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1655,12 +1781,33 @@ module Aws::SSM
     #   Policy, Automation, and Command.
     #   @return [String]
     #
+    # @!attribute [rw] document_format
+    #   Specify the document format for the request. The document format can
+    #   be either JSON or YAML. JSON is the default format.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   Specify a target type to define the kinds of resources the document
+    #   can run on. For example, to run a document on EC2 instances, specify
+    #   the following value: /AWS::EC2::Instance. If you specify a value of
+    #   '/' the document can run on all types of resources. If you don't
+    #   specify a value, the document can't run on any resources. For a
+    #   list of valid resource types, see [AWS Resource Types Reference][1]
+    #   in the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocumentRequest AWS API Documentation
     #
     class CreateDocumentRequest < Struct.new(
       :content,
       :name,
-      :document_type)
+      :document_type,
+      :document_format,
+      :target_type)
       include Aws::Structure
     end
 
@@ -2400,7 +2547,7 @@ module Aws::SSM
     #       {
     #         filters: [
     #           {
-    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus
+    #             key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter
     #             values: ["AutomationExecutionFilterValue"], # required
     #           },
     #         ],
@@ -2446,6 +2593,77 @@ module Aws::SSM
     #
     class DescribeAutomationExecutionsResult < Struct.new(
       :automation_execution_metadata_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAutomationStepExecutionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         automation_execution_id: "AutomationExecutionId", # required
+    #         filters: [
+    #           {
+    #             key: "StartTimeBefore", # required, accepts StartTimeBefore, StartTimeAfter, StepExecutionStatus, StepExecutionId, StepName, Action
+    #             values: ["StepExecutionFilterValue"], # required
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         reverse_order: false,
+    #       }
+    #
+    # @!attribute [rw] automation_execution_id
+    #   The Automation execution ID for which you want step execution
+    #   descriptions.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters to limit the number of step executions returned
+    #   by the request.
+    #   @return [Array<Types::StepExecutionFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reverse_order
+    #   A boolean that indicates whether to list step executions in reverse
+    #   order by start time. The default value is false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutionsRequest AWS API Documentation
+    #
+    class DescribeAutomationStepExecutionsRequest < Struct.new(
+      :automation_execution_id,
+      :filters,
+      :next_token,
+      :max_results,
+      :reverse_order)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] step_executions
+    #   A list of details about the current state of all steps that make up
+    #   an execution.
+    #   @return [Array<Types::StepExecution>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items. If there are
+    #   no additional items to return, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutionsResult AWS API Documentation
+    #
+    class DescribeAutomationStepExecutionsResult < Struct.new(
+      :step_executions,
       :next_token)
       include Aws::Structure
     end
@@ -3708,6 +3926,21 @@ module Aws::SSM
     #   The default version.
     #   @return [String]
     #
+    # @!attribute [rw] document_format
+    #   The document format, either JSON or YAML.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The target type which defines the kinds of resources the document
+    #   can run on. For example, /AWS::EC2::Instance. For a list of valid
+    #   resource types, see [AWS Resource Types Reference][1] in the *AWS
+    #   CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags, or metadata, that have been applied to the document.
     #   @return [Array<Types::Tag>]
@@ -3730,6 +3963,8 @@ module Aws::SSM
       :schema_version,
       :latest_version,
       :default_version,
+      :document_format,
+      :target_type,
       :tags)
       include Aws::Structure
     end
@@ -3786,6 +4021,21 @@ module Aws::SSM
     #   The schema version.
     #   @return [String]
     #
+    # @!attribute [rw] document_format
+    #   The document format, either JSON or YAML.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The target type which defines the kinds of resources the document
+    #   can run on. For example, /AWS::EC2::Instance. For a list of valid
+    #   resource types, see [AWS Resource Types Reference][1] in the *AWS
+    #   CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags, or metadata, that have been applied to the document.
     #   @return [Array<Types::Tag>]
@@ -3799,6 +4049,8 @@ module Aws::SSM
       :document_version,
       :document_type,
       :schema_version,
+      :document_format,
+      :target_type,
       :tags)
       include Aws::Structure
     end
@@ -3909,13 +4161,18 @@ module Aws::SSM
     #   An identifier for the default version of the document.
     #   @return [Boolean]
     #
+    # @!attribute [rw] document_format
+    #   The document format, either JSON or YAML.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentVersionInfo AWS API Documentation
     #
     class DocumentVersionInfo < Struct.new(
       :name,
       :document_version,
       :created_date,
-      :is_default_version)
+      :is_default_version,
+      :document_format)
       include Aws::Structure
     end
 
@@ -4320,6 +4577,7 @@ module Aws::SSM
     #       {
     #         name: "DocumentARN", # required
     #         document_version: "DocumentVersion",
+    #         document_format: "YAML", # accepts YAML, JSON
     #       }
     #
     # @!attribute [rw] name
@@ -4330,11 +4588,17 @@ module Aws::SSM
     #   The document version for which you want information.
     #   @return [String]
     #
+    # @!attribute [rw] document_format
+    #   Returns the document in the specified format. The document format
+    #   can be either JSON or YAML. JSON is the default format.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocumentRequest AWS API Documentation
     #
     class GetDocumentRequest < Struct.new(
       :name,
-      :document_version)
+      :document_version,
+      :document_format)
       include Aws::Structure
     end
 
@@ -4354,13 +4618,18 @@ module Aws::SSM
     #   The document type.
     #   @return [String]
     #
+    # @!attribute [rw] document_format
+    #   The document format, either JSON or YAML.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocumentResult AWS API Documentation
     #
     class GetDocumentResult < Struct.new(
       :name,
       :document_version,
       :content,
-      :document_type)
+      :document_type,
+      :document_format)
       include Aws::Structure
     end
 
@@ -5955,7 +6224,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] data
-    #   The data section in the inventory result entity json.
+    #   The data section in the inventory result entity JSON.
     #   @return [Hash<String,Types::InventoryResultItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryResultEntity AWS API Documentation
@@ -7472,8 +7741,8 @@ module Aws::SSM
     #   The different events for which you can receive notifications. These
     #   events include the following: All (events), InProgress, Success,
     #   TimedOut, Cancelled, Failed. To learn more about these events, see
-    #   [Setting Up Events and Notifications][1] in the *Amazon EC2 Systems
-    #   Manager User Guide*.
+    #   [Setting Up Events and Notifications][1] in the *AWS Systems Manager
+    #   User Guide*.
     #
     #
     #
@@ -8607,6 +8876,27 @@ module Aws::SSM
     #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
 
+    # Information about targets that resolved during the Automation
+    # execution.
+    #
+    # @!attribute [rw] parameter_values
+    #   A list of parameter values sent to targets that resolved during the
+    #   Automation execution.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] truncated
+    #   A boolean value indicating whether the resolved target list is
+    #   truncated.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResolvedTargets AWS API Documentation
+    #
+    class ResolvedTargets < Struct.new(
+      :parameter_values,
+      :truncated)
+      include Aws::Structure
+    end
+
     # Compliance summary information for a specific resource.
     #
     # @!attribute [rw] compliance_type
@@ -8821,7 +9111,7 @@ module Aws::SSM
     #
     #       {
     #         automation_execution_id: "AutomationExecutionId", # required
-    #         signal_type: "Approve", # required, accepts Approve, Reject
+    #         signal_type: "Approve", # required, accepts Approve, Reject, StartStep, StopStep, Resume
     #         payload: {
     #           "AutomationParameterKey" => ["AutomationParameterValue"],
     #         },
@@ -9091,6 +9381,16 @@ module Aws::SSM
     #           "AutomationParameterKey" => ["AutomationParameterValue"],
     #         },
     #         client_token: "IdempotencyToken",
+    #         mode: "Auto", # accepts Auto, Interactive
+    #         target_parameter_name: "AutomationParameterKey",
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
+    #         max_concurrency: "MaxConcurrency",
+    #         max_errors: "MaxErrors",
     #       }
     #
     # @!attribute [rw] document_name
@@ -9111,13 +9411,58 @@ module Aws::SSM
     #   insensitive, enforces the UUID format, and can't be reused.
     #   @return [String]
     #
+    # @!attribute [rw] mode
+    #   The execution mode of the automation. Valid modes include the
+    #   following: Auto and Interactive. The default mode is Auto.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_parameter_name
+    #   The name of the parameter used as the target resource for the
+    #   rate-controlled execution. Required if you specify Targets.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   A key-value mapping to target resources. Required if you specify
+    #   TargetParameterName.
+    #   @return [Array<Types::Target>]
+    #
+    # @!attribute [rw] max_concurrency
+    #   The maximum number of targets allowed to run this task in parallel.
+    #   You can specify a number, such as 10, or a percentage, such as 10%.
+    #   The default value is 10.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_errors
+    #   The number of errors that are allowed before the system stops
+    #   running the automation on additional targets. You can specify either
+    #   an absolute number of errors, for example 10, or a percentage of the
+    #   target set, for example 10%. If you specify 3, for example, the
+    #   system stops running the automation when the fourth error is
+    #   received. If you specify 0, then the system stops running the
+    #   automation on additional targets after the first error result is
+    #   returned. If you run an automation on 50 resources and set
+    #   max-errors to 10%, then the system stops running the automation on
+    #   additional targets when the sixth error is received.
+    #
+    #   Executions that are already running an automation when max-errors is
+    #   reached are allowed to complete, but some of these executions may
+    #   fail as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set max-concurrency to 1 so the
+    #   executions proceed one at a time.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecutionRequest AWS API Documentation
     #
     class StartAutomationExecutionRequest < Struct.new(
       :document_name,
       :document_version,
       :parameters,
-      :client_token)
+      :client_token,
+      :mode,
+      :target_parameter_name,
+      :targets,
+      :max_concurrency,
+      :max_errors)
       include Aws::Structure
     end
 
@@ -9143,6 +9488,19 @@ module Aws::SSM
     #   The action this step performs. The action determines the behavior of
     #   the step.
     #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The timeout seconds of the step.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_failure
+    #   The action to take if the step fails. The default value is Abort.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_attempts
+    #   The maximum number of tries to run the action of the step. The
+    #   default value is 1.
+    #   @return [Integer]
     #
     # @!attribute [rw] execution_start_time
     #   If a step has begun execution, this contains the time the step
@@ -9185,11 +9543,23 @@ module Aws::SSM
     #   Information about the Automation failure.
     #   @return [Types::FailureDetails]
     #
+    # @!attribute [rw] step_execution_id
+    #   The unique ID of a step execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] overridden_parameters
+    #   A user-specified list of parameters to override when executing a
+    #   step.
+    #   @return [Hash<String,Array<String>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
     #
     class StepExecution < Struct.new(
       :step_name,
       :action,
+      :timeout_seconds,
+      :on_failure,
+      :max_attempts,
       :execution_start_time,
       :execution_end_time,
       :step_status,
@@ -9198,7 +9568,38 @@ module Aws::SSM
       :outputs,
       :response,
       :failure_message,
-      :failure_details)
+      :failure_details,
+      :step_execution_id,
+      :overridden_parameters)
+      include Aws::Structure
+    end
+
+    # A filter to limit the amount of step execution information returned by
+    # the call.
+    #
+    # @note When making an API call, you may pass StepExecutionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "StartTimeBefore", # required, accepts StartTimeBefore, StartTimeAfter, StepExecutionStatus, StepExecutionId, StepName, Action
+    #         values: ["StepExecutionFilterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   One or more keys to limit the results. Valid filter keys include the
+    #   following: StepName, Action, StepExecutionId, StepExecutionStatus,
+    #   StartTimeBefore, StartTimeAfter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values of the filter key.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecutionFilter AWS API Documentation
+    #
+    class StepExecutionFilter < Struct.new(
+      :key,
+      :values)
       include Aws::Structure
     end
 
@@ -9207,16 +9608,23 @@ module Aws::SSM
     #
     #       {
     #         automation_execution_id: "AutomationExecutionId", # required
+    #         type: "Complete", # accepts Complete, Cancel
     #       }
     #
     # @!attribute [rw] automation_execution_id
     #   The execution ID of the Automation to stop.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The stop request type. Valid types include the following: Cancel and
+    #   Complete. The default type is Cancel.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecutionRequest AWS API Documentation
     #
     class StopAutomationExecutionRequest < Struct.new(
-      :automation_execution_id)
+      :automation_execution_id,
+      :type)
       include Aws::Structure
     end
 
@@ -9487,6 +9895,8 @@ module Aws::SSM
     #         content: "DocumentContent", # required
     #         name: "DocumentName", # required
     #         document_version: "DocumentVersion",
+    #         document_format: "YAML", # accepts YAML, JSON
+    #         target_type: "TargetType",
     #       }
     #
     # @!attribute [rw] content
@@ -9501,12 +9911,24 @@ module Aws::SSM
     #   The version of the document that you want to update.
     #   @return [String]
     #
+    # @!attribute [rw] document_format
+    #   Specify the document format for the new document version. Systems
+    #   Manager supports JSON and YAML documents. JSON is the default
+    #   format.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   Specify a new target type for the document.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentRequest AWS API Documentation
     #
     class UpdateDocumentRequest < Struct.new(
       :content,
       :name,
-      :document_version)
+      :document_version,
+      :document_format,
+      :target_type)
       include Aws::Structure
     end
 

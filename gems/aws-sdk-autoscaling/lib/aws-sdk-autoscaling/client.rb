@@ -169,7 +169,7 @@ module Aws::AutoScaling
     #   One or more instance IDs.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -269,7 +269,7 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [required, Array<String>] :load_balancer_names
     #   One or more load balancer names.
@@ -339,7 +339,7 @@ module Aws::AutoScaling
     #   The name of the lifecycle hook.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the group for the lifecycle hook.
+    #   The name of the Auto Scaling group.
     #
     # @option params [String] :lifecycle_action_token
     #   A universally unique identifier (UUID) that identifies a specific
@@ -402,17 +402,23 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the group. This name must be unique within the scope of
-    #   your AWS account.
+    #   The name of the Auto Scaling group. This name must be unique within
+    #   the scope of your AWS account.
     #
     # @option params [String] :launch_configuration_name
-    #   The name of the launch configuration. Alternatively, specify an EC2
-    #   instance instead of a launch configuration.
+    #   The name of the launch configuration. You must specify one of the
+    #   following: a launch configuration, a launch template, or an EC2
+    #   instance.
+    #
+    # @option params [Types::LaunchTemplateSpecification] :launch_template
+    #   The launch template to use to launch instances. You must specify one
+    #   of the following: a launch template, a launch configuration, or an EC2
+    #   instance.
     #
     # @option params [String] :instance_id
     #   The ID of the instance used to create a launch configuration for the
-    #   group. Alternatively, specify a launch configuration instead of an EC2
-    #   instance.
+    #   group. You must specify one of the following: an EC2 instance, a
+    #   launch configuration, or a launch template.
     #
     #   When you specify an ID of an instance, Auto Scaling creates a new
     #   launch configuration and associates it with the group. This launch
@@ -604,6 +610,11 @@ module Aws::AutoScaling
     #   resp = client.create_auto_scaling_group({
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
     #     launch_configuration_name: "ResourceName",
+    #     launch_template: {
+    #       launch_template_id: "XmlStringMaxLen255",
+    #       launch_template_name: "LaunchTemplateName",
+    #       version: "XmlStringMaxLen255",
+    #     },
     #     instance_id: "XmlStringMaxLen19",
     #     min_size: 1, # required
     #     max_size: 1, # required
@@ -621,7 +632,7 @@ module Aws::AutoScaling
     #     lifecycle_hook_specification_list: [
     #       {
     #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #         lifecycle_transition: "LifecycleTransition",
+    #         lifecycle_transition: "LifecycleTransition", # required
     #         notification_metadata: "XmlStringMaxLen1023",
     #         heartbeat_timeout: 1,
     #         default_result: "LifecycleActionResult",
@@ -1011,7 +1022,7 @@ module Aws::AutoScaling
     # capacity of the Auto Scaling group to zero.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the group to delete.
+    #   The name of the Auto Scaling group.
     #
     # @option params [Boolean] :force_delete
     #   Specifies that the group will be deleted along with all instances
@@ -1100,7 +1111,7 @@ module Aws::AutoScaling
     #   The name of the lifecycle hook.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the Auto Scaling group for the lifecycle hook.
+    #   The name of the Auto Scaling group.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1383,8 +1394,8 @@ module Aws::AutoScaling
     # Describes one or more Auto Scaling groups.
     #
     # @option params [Array<String>] :auto_scaling_group_names
-    #   The group names. If you omit this parameter, all Auto Scaling groups
-    #   are described.
+    #   The names of the Auto Scaling groups. If you omit this parameter, all
+    #   Auto Scaling groups are described.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -1468,6 +1479,9 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].auto_scaling_group_name #=> String
     #   resp.auto_scaling_groups[0].auto_scaling_group_arn #=> String
     #   resp.auto_scaling_groups[0].launch_configuration_name #=> String
+    #   resp.auto_scaling_groups[0].launch_template.launch_template_id #=> String
+    #   resp.auto_scaling_groups[0].launch_template.launch_template_name #=> String
+    #   resp.auto_scaling_groups[0].launch_template.version #=> String
     #   resp.auto_scaling_groups[0].min_size #=> Integer
     #   resp.auto_scaling_groups[0].max_size #=> Integer
     #   resp.auto_scaling_groups[0].desired_capacity #=> Integer
@@ -1486,6 +1500,9 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].instances[0].lifecycle_state #=> String, one of "Pending", "Pending:Wait", "Pending:Proceed", "Quarantined", "InService", "Terminating", "Terminating:Wait", "Terminating:Proceed", "Terminated", "Detaching", "Detached", "EnteringStandby", "Standby"
     #   resp.auto_scaling_groups[0].instances[0].health_status #=> String
     #   resp.auto_scaling_groups[0].instances[0].launch_configuration_name #=> String
+    #   resp.auto_scaling_groups[0].instances[0].launch_template.launch_template_id #=> String
+    #   resp.auto_scaling_groups[0].instances[0].launch_template.launch_template_name #=> String
+    #   resp.auto_scaling_groups[0].instances[0].launch_template.version #=> String
     #   resp.auto_scaling_groups[0].instances[0].protected_from_scale_in #=> Boolean
     #   resp.auto_scaling_groups[0].created_time #=> Time
     #   resp.auto_scaling_groups[0].suspended_processes #=> Array
@@ -1580,6 +1597,9 @@ module Aws::AutoScaling
     #   resp.auto_scaling_instances[0].lifecycle_state #=> String
     #   resp.auto_scaling_instances[0].health_status #=> String
     #   resp.auto_scaling_instances[0].launch_configuration_name #=> String
+    #   resp.auto_scaling_instances[0].launch_template.launch_template_id #=> String
+    #   resp.auto_scaling_instances[0].launch_template.launch_template_name #=> String
+    #   resp.auto_scaling_instances[0].launch_template.version #=> String
     #   resp.auto_scaling_instances[0].protected_from_scale_in #=> Boolean
     #   resp.next_token #=> String
     #
@@ -1775,7 +1795,7 @@ module Aws::AutoScaling
     # Describes the lifecycle hooks for the specified Auto Scaling group.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :lifecycle_hook_names
     #   The names of one or more lifecycle hooks. If you omit this parameter,
@@ -1907,7 +1927,7 @@ module Aws::AutoScaling
     # instead.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -2039,7 +2059,7 @@ module Aws::AutoScaling
     # Scaling group.
     #
     # @option params [Array<String>] :auto_scaling_group_names
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -2109,14 +2129,13 @@ module Aws::AutoScaling
     # Describes the policies for the specified Auto Scaling group.
     #
     # @option params [String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :policy_names
-    #   One or more policy names or policy ARNs to be described. If you omit
-    #   this parameter, all policy names are described. If an group name is
-    #   provided, the results are limited to that group. This list is limited
-    #   to 50 items. If you specify an unknown policy name, it is ignored with
-    #   no error.
+    #   The names of one or more policies. If you omit this parameter, all
+    #   policies are described. If an group name is provided, the results are
+    #   limited to that group. This list is limited to 50 items. If you
+    #   specify an unknown policy name, it is ignored with no error.
     #
     # @option params [Array<String>] :policy_types
     #   One or more policy types. Valid values are `SimpleScaling` and
@@ -2234,7 +2253,7 @@ module Aws::AutoScaling
     #   unknown activities are requested, they are ignored with no error.
     #
     # @option params [String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
@@ -2372,7 +2391,7 @@ module Aws::AutoScaling
     # DescribeScalingActivities.
     #
     # @option params [String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :scheduled_action_names
     #   Describes one or more scheduled actions. If you omit this parameter,
@@ -2623,7 +2642,7 @@ module Aws::AutoScaling
     #   One or more instance IDs.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [required, Boolean] :should_decrement_desired_capacity
     #   If `True`, the Auto Scaling group decrements the desired capacity
@@ -2783,7 +2802,7 @@ module Aws::AutoScaling
     # Disables group metrics for the specified Auto Scaling group.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name or Amazon Resource Name (ARN) of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :metrics
     #   One or more of the following metrics. If you omit this parameter, all
@@ -2844,7 +2863,7 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name or ARN of the Auto Scaling group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :metrics
     #   One or more of the following metrics. If you omit this parameter, all
@@ -2988,7 +3007,7 @@ module Aws::AutoScaling
     # Executes the specified policy.
     #
     # @option params [String] :auto_scaling_group_name
-    #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [required, String] :policy_name
     #   The name or ARN of the policy.
@@ -3181,8 +3200,7 @@ module Aws::AutoScaling
     #   The name of the lifecycle hook.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the Auto Scaling group to which you want to assign the
-    #   lifecycle hook.
+    #   The name of the Auto Scaling group.
     #
     # @option params [String] :lifecycle_transition
     #   The instance state to which you want to attach the lifecycle hook. For
@@ -3341,7 +3359,7 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name or ARN of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [required, String] :policy_name
     #   The name of the policy.
@@ -3520,7 +3538,7 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/schedule_time.html
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of this scaling action.
@@ -3636,7 +3654,7 @@ module Aws::AutoScaling
     #   The name of the lifecycle hook.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the Auto Scaling group for the hook.
+    #   The name of the Auto Scaling group.
     #
     # @option params [String] :lifecycle_action_token
     #   A token that uniquely identifies a specific lifecycle action
@@ -3688,7 +3706,7 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :scaling_processes
     #   One or more of the following processes. If you omit this parameter,
@@ -3862,7 +3880,7 @@ module Aws::AutoScaling
     #   One or more instance IDs.
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [required, Boolean] :protected_from_scale_in
     #   Indicates whether the instance is protected from termination by Auto
@@ -3928,7 +3946,7 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html
     #
     # @option params [required, String] :auto_scaling_group_name
-    #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+    #   The name of the Auto Scaling group.
     #
     # @option params [Array<String>] :scaling_processes
     #   One or more of the following processes. If you omit this parameter,
@@ -4067,7 +4085,12 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [String] :launch_configuration_name
-    #   The name of the launch configuration.
+    #   The name of the launch configuration. You must specify either a launch
+    #   configuration or a launch template.
+    #
+    # @option params [Types::LaunchTemplateSpecification] :launch_template
+    #   The launch template to use to specify the updates. You must specify a
+    #   launch configuration or a launch template.
     #
     # @option params [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
@@ -4186,6 +4209,11 @@ module Aws::AutoScaling
     #   resp = client.update_auto_scaling_group({
     #     auto_scaling_group_name: "ResourceName", # required
     #     launch_configuration_name: "ResourceName",
+    #     launch_template: {
+    #       launch_template_id: "XmlStringMaxLen255",
+    #       launch_template_name: "LaunchTemplateName",
+    #       version: "XmlStringMaxLen255",
+    #     },
     #     min_size: 1,
     #     max_size: 1,
     #     desired_capacity: 1,
@@ -4221,7 +4249,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -31,8 +31,7 @@ module Aws::AutoScaling
     end
     alias :policy_name :name
 
-    # The name of the Auto Scaling group associated with this scaling
-    # policy.
+    # The name of the Auto Scaling group.
     # @return [String]
     def auto_scaling_group_name
       data[:auto_scaling_group_name]
@@ -279,7 +278,7 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [String] :auto_scaling_group_name
-    #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+    #   The name of the Auto Scaling group.
     # @option options [Boolean] :honor_cooldown
     #   If this parameter is true, Auto Scaling waits for the cooldown period
     #   to complete before executing the policy. Otherwise, Auto Scaling

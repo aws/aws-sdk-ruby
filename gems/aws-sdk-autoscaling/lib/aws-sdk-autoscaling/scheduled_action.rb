@@ -31,7 +31,7 @@ module Aws::AutoScaling
     end
     alias :scheduled_action_name :name
 
-    # The name of the group.
+    # The name of the Auto Scaling group.
     # @return [String]
     def auto_scaling_group_name
       data[:auto_scaling_group_name]

@@ -26,6 +26,11 @@ module Aws::AutoScaling
     #   autoscalinggroup = auto_scaling.create_group({
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
     #     launch_configuration_name: "ResourceName",
+    #     launch_template: {
+    #       launch_template_id: "XmlStringMaxLen255",
+    #       launch_template_name: "LaunchTemplateName",
+    #       version: "XmlStringMaxLen255",
+    #     },
     #     instance_id: "XmlStringMaxLen19",
     #     min_size: 1, # required
     #     max_size: 1, # required
@@ -43,7 +48,7 @@ module Aws::AutoScaling
     #     lifecycle_hook_specification_list: [
     #       {
     #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
-    #         lifecycle_transition: "LifecycleTransition",
+    #         lifecycle_transition: "LifecycleTransition", # required
     #         notification_metadata: "XmlStringMaxLen1023",
     #         heartbeat_timeout: 1,
     #         default_result: "LifecycleActionResult",
@@ -63,15 +68,20 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
-    #   The name of the group. This name must be unique within the scope of
-    #   your AWS account.
+    #   The name of the Auto Scaling group. This name must be unique within
+    #   the scope of your AWS account.
     # @option options [String] :launch_configuration_name
-    #   The name of the launch configuration. Alternatively, specify an EC2
-    #   instance instead of a launch configuration.
+    #   The name of the launch configuration. You must specify one of the
+    #   following: a launch configuration, a launch template, or an EC2
+    #   instance.
+    # @option options [Types::LaunchTemplateSpecification] :launch_template
+    #   The launch template to use to launch instances. You must specify one
+    #   of the following: a launch template, a launch configuration, or an EC2
+    #   instance.
     # @option options [String] :instance_id
     #   The ID of the instance used to create a launch configuration for the
-    #   group. Alternatively, specify a launch configuration instead of an EC2
-    #   instance.
+    #   group. You must specify one of the following: an EC2 instance, a
+    #   launch configuration, or a launch template.
     #
     #   When you specify an ID of an instance, Auto Scaling creates a new
     #   launch configuration and associates it with the group. This launch
@@ -446,7 +456,7 @@ module Aws::AutoScaling
     #   The list of requested activities cannot contain more than 50 items. If
     #   unknown activities are requested, they are ignored with no error.
     # @option options [String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     # @return [Activity::Collection]
     def activities(options = {})
       batches = Enumerator.new do |y|
@@ -491,8 +501,8 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :auto_scaling_group_names
-    #   The group names. If you omit this parameter, all Auto Scaling groups
-    #   are described.
+    #   The names of the Auto Scaling groups. If you omit this parameter, all
+    #   Auto Scaling groups are described.
     # @return [AutoScalingGroup::Collection]
     def groups(options = {})
       batches = Enumerator.new do |y|
@@ -588,13 +598,12 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     # @option options [Array<String>] :policy_names
-    #   One or more policy names or policy ARNs to be described. If you omit
-    #   this parameter, all policy names are described. If an group name is
-    #   provided, the results are limited to that group. This list is limited
-    #   to 50 items. If you specify an unknown policy name, it is ignored with
-    #   no error.
+    #   The names of one or more policies. If you omit this parameter, all
+    #   policies are described. If an group name is provided, the results are
+    #   limited to that group. This list is limited to 50 items. If you
+    #   specify an unknown policy name, it is ignored with no error.
     # @option options [Array<String>] :policy_types
     #   One or more policy types. Valid values are `SimpleScaling` and
     #   `StepScaling`.
@@ -645,7 +654,7 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [String] :auto_scaling_group_name
-    #   The name of the group.
+    #   The name of the Auto Scaling group.
     # @option options [Array<String>] :scheduled_action_names
     #   Describes one or more scheduled actions. If you omit this parameter,
     #   all scheduled actions are described. If you specify an unknown

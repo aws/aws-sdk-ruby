@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.7.0 (2017-11-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-resourcegroups` gem.
+
 3.6.0 (2017-11-29)
 ------------------
 

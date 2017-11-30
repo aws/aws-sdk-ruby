@@ -332,6 +332,9 @@
   "Rekognition": {
     "models": "rekognition/2016-06-27"
   },
+  "ResourceGroups": {
+    "models": "resource-groups/2017-11-27"
+  },
   "ResourceGroupsTaggingAPI": {
     "models": "resourcegroupstaggingapi/2017-01-26"
   },

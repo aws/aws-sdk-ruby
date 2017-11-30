@@ -31,7 +31,7 @@ module Aws::AutoScaling
     end
     alias :auto_scaling_group_name :name
 
-    # The Amazon Resource Name (ARN) of the group.
+    # The Amazon Resource Name (ARN) of the Auto Scaling group.
     # @return [String]
     def auto_scaling_group_arn
       data[:auto_scaling_group_arn]
@@ -41,6 +41,12 @@ module Aws::AutoScaling
     # @return [String]
     def launch_configuration_name
       data[:launch_configuration_name]
+    end
+
+    # The launch template for the group.
+    # @return [Types::LaunchTemplateSpecification]
+    def launch_template
+      data[:launch_template]
     end
 
     # The minimum size of the group.
@@ -756,6 +762,11 @@ module Aws::AutoScaling
     #
     #   autoscalinggroup = auto_scaling_group.update({
     #     launch_configuration_name: "ResourceName",
+    #     launch_template: {
+    #       launch_template_id: "XmlStringMaxLen255",
+    #       launch_template_name: "LaunchTemplateName",
+    #       version: "XmlStringMaxLen255",
+    #     },
     #     min_size: 1,
     #     max_size: 1,
     #     desired_capacity: 1,
@@ -770,7 +781,11 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
-    #   The name of the launch configuration.
+    #   The name of the launch configuration. You must specify either a launch
+    #   configuration or a launch template.
+    # @option options [Types::LaunchTemplateSpecification] :launch_template
+    #   The launch template to use to specify the updates. You must specify a
+    #   launch configuration or a launch template.
     # @option options [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
     # @option options [Integer] :max_size
@@ -1025,11 +1040,10 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :policy_names
-    #   One or more policy names or policy ARNs to be described. If you omit
-    #   this parameter, all policy names are described. If an group name is
-    #   provided, the results are limited to that group. This list is limited
-    #   to 50 items. If you specify an unknown policy name, it is ignored with
-    #   no error.
+    #   The names of one or more policies. If you omit this parameter, all
+    #   policies are described. If an group name is provided, the results are
+    #   limited to that group. This list is limited to 50 items. If you
+    #   specify an unknown policy name, it is ignored with no error.
     # @option options [Array<String>] :policy_types
     #   One or more policy types. Valid values are `SimpleScaling` and
     #   `StepScaling`.

@@ -317,6 +317,7 @@ module Aws
             'RDS' => 'rds',
             'Redshift' => 'redshift',
             'Rekognition' => 'rekognition',
+            'ResourceGroups' => 'resource-groups',
             'ResourceGroupsTaggingAPI' => 'tagging',
             'Route53' => 'route53',
             'Route53Domains' => 'route53domains',

@@ -345,6 +345,7 @@ to be backwards compatible.
 | AWS OpsWorks for Chef Automate              | Aws::OpsWorksCM                    | aws-sdk-opsworkscm                    | 2016-11-01  |
 | AWS Organizations                           | Aws::Organizations                 | aws-sdk-organizations                 | 2016-11-28  |
 | AWS Price List Service                      | Aws::Pricing                       | aws-sdk-pricing                       | 2017-10-15  |
+| AWS Resource Groups                         | Aws::ResourceGroups                | aws-sdk-resourcegroups                | 2017-11-27  |
 | AWS Resource Groups Tagging API             | Aws::ResourceGroupsTaggingAPI      | aws-sdk-resourcegroupstaggingapi      | 2017-01-26  |
 | AWS Security Token Service                  | Aws::STS                           | aws-sdk-core                          | 2011-06-15  |
 | AWS Server Migration Service                | Aws::SMS                           | aws-sdk-sms                           | 2016-10-24  |

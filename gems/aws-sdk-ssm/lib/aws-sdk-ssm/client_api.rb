@@ -68,6 +68,7 @@ module Aws::SSM
     AutomationParameterMap = Shapes::MapShape.new(name: 'AutomationParameterMap')
     AutomationParameterValue = Shapes::StringShape.new(name: 'AutomationParameterValue')
     AutomationParameterValueList = Shapes::ListShape.new(name: 'AutomationParameterValueList')
+    AutomationStepNotFoundException = Shapes::StructureShape.new(name: 'AutomationStepNotFoundException')
     BaselineDescription = Shapes::StringShape.new(name: 'BaselineDescription')
     BaselineId = Shapes::StringShape.new(name: 'BaselineId')
     BaselineName = Shapes::StringShape.new(name: 'BaselineName')
@@ -179,6 +180,8 @@ module Aws::SSM
     DescribeAssociationResult = Shapes::StructureShape.new(name: 'DescribeAssociationResult')
     DescribeAutomationExecutionsRequest = Shapes::StructureShape.new(name: 'DescribeAutomationExecutionsRequest')
     DescribeAutomationExecutionsResult = Shapes::StructureShape.new(name: 'DescribeAutomationExecutionsResult')
+    DescribeAutomationStepExecutionsRequest = Shapes::StructureShape.new(name: 'DescribeAutomationStepExecutionsRequest')
+    DescribeAutomationStepExecutionsResult = Shapes::StructureShape.new(name: 'DescribeAutomationStepExecutionsResult')
     DescribeAvailablePatchesRequest = Shapes::StructureShape.new(name: 'DescribeAvailablePatchesRequest')
     DescribeAvailablePatchesResult = Shapes::StructureShape.new(name: 'DescribeAvailablePatchesResult')
     DescribeDocumentPermissionRequest = Shapes::StructureShape.new(name: 'DescribeDocumentPermissionRequest')
@@ -229,6 +232,7 @@ module Aws::SSM
     DocumentFilterKey = Shapes::StringShape.new(name: 'DocumentFilterKey')
     DocumentFilterList = Shapes::ListShape.new(name: 'DocumentFilterList')
     DocumentFilterValue = Shapes::StringShape.new(name: 'DocumentFilterValue')
+    DocumentFormat = Shapes::StringShape.new(name: 'DocumentFormat')
     DocumentHash = Shapes::StringShape.new(name: 'DocumentHash')
     DocumentHashType = Shapes::StringShape.new(name: 'DocumentHashType')
     DocumentIdentifier = Shapes::StructureShape.new(name: 'DocumentIdentifier')
@@ -265,6 +269,7 @@ module Aws::SSM
     EffectivePatch = Shapes::StructureShape.new(name: 'EffectivePatch')
     EffectivePatchList = Shapes::ListShape.new(name: 'EffectivePatchList')
     ErrorCount = Shapes::IntegerShape.new(name: 'ErrorCount')
+    ExecutionMode = Shapes::StringShape.new(name: 'ExecutionMode')
     ExpirationDate = Shapes::TimestampShape.new(name: 'ExpirationDate')
     FailedCreateAssociation = Shapes::StructureShape.new(name: 'FailedCreateAssociation')
     FailedCreateAssociationList = Shapes::ListShape.new(name: 'FailedCreateAssociationList')
@@ -355,6 +360,7 @@ module Aws::SSM
     InvalidAssociationVersion = Shapes::StructureShape.new(name: 'InvalidAssociationVersion')
     InvalidAutomationExecutionParametersException = Shapes::StructureShape.new(name: 'InvalidAutomationExecutionParametersException')
     InvalidAutomationSignalException = Shapes::StructureShape.new(name: 'InvalidAutomationSignalException')
+    InvalidAutomationStatusUpdateException = Shapes::StructureShape.new(name: 'InvalidAutomationStatusUpdateException')
     InvalidCommandId = Shapes::StructureShape.new(name: 'InvalidCommandId')
     InvalidDocument = Shapes::StructureShape.new(name: 'InvalidDocument')
     InvalidDocumentContent = Shapes::StructureShape.new(name: 'InvalidDocumentContent')
@@ -451,6 +457,7 @@ module Aws::SSM
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     LoggingInfo = Shapes::StructureShape.new(name: 'LoggingInfo')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     MaintenanceWindowAllowUnassociatedTargets = Shapes::BooleanShape.new(name: 'MaintenanceWindowAllowUnassociatedTargets')
     MaintenanceWindowAutomationParameters = Shapes::StructureShape.new(name: 'MaintenanceWindowAutomationParameters')
     MaintenanceWindowCutoff = Shapes::IntegerShape.new(name: 'MaintenanceWindowCutoff')
@@ -632,6 +639,7 @@ module Aws::SSM
     RegistrationsCount = Shapes::IntegerShape.new(name: 'RegistrationsCount')
     RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
+    ResolvedTargets = Shapes::StructureShape.new(name: 'ResolvedTargets')
     ResourceComplianceSummaryItem = Shapes::StructureShape.new(name: 'ResourceComplianceSummaryItem')
     ResourceComplianceSummaryItemList = Shapes::ListShape.new(name: 'ResourceComplianceSummaryItemList')
     ResourceDataSyncAWSKMSKeyARN = Shapes::StringShape.new(name: 'ResourceDataSyncAWSKMSKeyARN')
@@ -681,9 +689,15 @@ module Aws::SSM
     StatusName = Shapes::StringShape.new(name: 'StatusName')
     StatusUnchanged = Shapes::StructureShape.new(name: 'StatusUnchanged')
     StepExecution = Shapes::StructureShape.new(name: 'StepExecution')
+    StepExecutionFilter = Shapes::StructureShape.new(name: 'StepExecutionFilter')
+    StepExecutionFilterKey = Shapes::StringShape.new(name: 'StepExecutionFilterKey')
+    StepExecutionFilterList = Shapes::ListShape.new(name: 'StepExecutionFilterList')
+    StepExecutionFilterValue = Shapes::StringShape.new(name: 'StepExecutionFilterValue')
+    StepExecutionFilterValueList = Shapes::ListShape.new(name: 'StepExecutionFilterValueList')
     StepExecutionList = Shapes::ListShape.new(name: 'StepExecutionList')
     StopAutomationExecutionRequest = Shapes::StructureShape.new(name: 'StopAutomationExecutionRequest')
     StopAutomationExecutionResult = Shapes::StructureShape.new(name: 'StopAutomationExecutionResult')
+    StopType = Shapes::StringShape.new(name: 'StopType')
     String = Shapes::StringShape.new(name: 'String')
     StringDateTime = Shapes::StringShape.new(name: 'StringDateTime')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -696,6 +710,8 @@ module Aws::SSM
     TargetCount = Shapes::IntegerShape.new(name: 'TargetCount')
     TargetInUseException = Shapes::StructureShape.new(name: 'TargetInUseException')
     TargetKey = Shapes::StringShape.new(name: 'TargetKey')
+    TargetParameterList = Shapes::ListShape.new(name: 'TargetParameterList')
+    TargetType = Shapes::StringShape.new(name: 'TargetType')
     TargetValue = Shapes::StringShape.new(name: 'TargetValue')
     TargetValues = Shapes::ListShape.new(name: 'TargetValues')
     Targets = Shapes::ListShape.new(name: 'Targets')
@@ -826,9 +842,21 @@ module Aws::SSM
     AutomationExecution.add_member(:execution_end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ExecutionEndTime"))
     AutomationExecution.add_member(:automation_execution_status, Shapes::ShapeRef.new(shape: AutomationExecutionStatus, location_name: "AutomationExecutionStatus"))
     AutomationExecution.add_member(:step_executions, Shapes::ShapeRef.new(shape: StepExecutionList, location_name: "StepExecutions"))
+    AutomationExecution.add_member(:step_executions_truncated, Shapes::ShapeRef.new(shape: Boolean, location_name: "StepExecutionsTruncated"))
     AutomationExecution.add_member(:parameters, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Parameters"))
     AutomationExecution.add_member(:outputs, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Outputs"))
     AutomationExecution.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
+    AutomationExecution.add_member(:mode, Shapes::ShapeRef.new(shape: ExecutionMode, location_name: "Mode"))
+    AutomationExecution.add_member(:parent_automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "ParentAutomationExecutionId"))
+    AutomationExecution.add_member(:executed_by, Shapes::ShapeRef.new(shape: String, location_name: "ExecutedBy"))
+    AutomationExecution.add_member(:current_step_name, Shapes::ShapeRef.new(shape: String, location_name: "CurrentStepName"))
+    AutomationExecution.add_member(:current_action, Shapes::ShapeRef.new(shape: String, location_name: "CurrentAction"))
+    AutomationExecution.add_member(:target_parameter_name, Shapes::ShapeRef.new(shape: AutomationParameterKey, location_name: "TargetParameterName"))
+    AutomationExecution.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    AutomationExecution.add_member(:resolved_targets, Shapes::ShapeRef.new(shape: ResolvedTargets, location_name: "ResolvedTargets"))
+    AutomationExecution.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    AutomationExecution.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
+    AutomationExecution.add_member(:target, Shapes::ShapeRef.new(shape: String, location_name: "Target"))
     AutomationExecution.struct_class = Types::AutomationExecution
 
     AutomationExecutionFilter.add_member(:key, Shapes::ShapeRef.new(shape: AutomationExecutionFilterKey, required: true, location_name: "Key"))
@@ -848,6 +876,17 @@ module Aws::SSM
     AutomationExecutionMetadata.add_member(:executed_by, Shapes::ShapeRef.new(shape: String, location_name: "ExecutedBy"))
     AutomationExecutionMetadata.add_member(:log_file, Shapes::ShapeRef.new(shape: String, location_name: "LogFile"))
     AutomationExecutionMetadata.add_member(:outputs, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Outputs"))
+    AutomationExecutionMetadata.add_member(:mode, Shapes::ShapeRef.new(shape: ExecutionMode, location_name: "Mode"))
+    AutomationExecutionMetadata.add_member(:parent_automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "ParentAutomationExecutionId"))
+    AutomationExecutionMetadata.add_member(:current_step_name, Shapes::ShapeRef.new(shape: String, location_name: "CurrentStepName"))
+    AutomationExecutionMetadata.add_member(:current_action, Shapes::ShapeRef.new(shape: String, location_name: "CurrentAction"))
+    AutomationExecutionMetadata.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
+    AutomationExecutionMetadata.add_member(:target_parameter_name, Shapes::ShapeRef.new(shape: AutomationParameterKey, location_name: "TargetParameterName"))
+    AutomationExecutionMetadata.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    AutomationExecutionMetadata.add_member(:resolved_targets, Shapes::ShapeRef.new(shape: ResolvedTargets, location_name: "ResolvedTargets"))
+    AutomationExecutionMetadata.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    AutomationExecutionMetadata.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
+    AutomationExecutionMetadata.add_member(:target, Shapes::ShapeRef.new(shape: String, location_name: "Target"))
     AutomationExecutionMetadata.struct_class = Types::AutomationExecutionMetadata
 
     AutomationExecutionMetadataList.member = Shapes::ShapeRef.new(shape: AutomationExecutionMetadata)
@@ -1027,6 +1066,8 @@ module Aws::SSM
     CreateDocumentRequest.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, required: true, location_name: "Content"))
     CreateDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
     CreateDocumentRequest.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
+    CreateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
+    CreateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
     CreateDocumentRequest.struct_class = Types::CreateDocumentRequest
 
     CreateDocumentResult.add_member(:document_description, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "DocumentDescription"))
@@ -1172,6 +1213,17 @@ module Aws::SSM
     DescribeAutomationExecutionsResult.add_member(:automation_execution_metadata_list, Shapes::ShapeRef.new(shape: AutomationExecutionMetadataList, location_name: "AutomationExecutionMetadataList"))
     DescribeAutomationExecutionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAutomationExecutionsResult.struct_class = Types::DescribeAutomationExecutionsResult
+
+    DescribeAutomationStepExecutionsRequest.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, required: true, location_name: "AutomationExecutionId"))
+    DescribeAutomationStepExecutionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: StepExecutionFilterList, location_name: "Filters"))
+    DescribeAutomationStepExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAutomationStepExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeAutomationStepExecutionsRequest.add_member(:reverse_order, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReverseOrder", metadata: {"box"=>true}))
+    DescribeAutomationStepExecutionsRequest.struct_class = Types::DescribeAutomationStepExecutionsRequest
+
+    DescribeAutomationStepExecutionsResult.add_member(:step_executions, Shapes::ShapeRef.new(shape: StepExecutionList, location_name: "StepExecutions"))
+    DescribeAutomationStepExecutionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAutomationStepExecutionsResult.struct_class = Types::DescribeAutomationStepExecutionsResult
 
     DescribeAvailablePatchesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PatchOrchestratorFilterList, location_name: "Filters"))
     DescribeAvailablePatchesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchBaselineMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -1380,6 +1432,8 @@ module Aws::SSM
     DocumentDescription.add_member(:schema_version, Shapes::ShapeRef.new(shape: DocumentSchemaVersion, location_name: "SchemaVersion"))
     DocumentDescription.add_member(:latest_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "LatestVersion"))
     DocumentDescription.add_member(:default_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DefaultVersion"))
+    DocumentDescription.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
+    DocumentDescription.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
     DocumentDescription.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     DocumentDescription.struct_class = Types::DocumentDescription
 
@@ -1395,6 +1449,8 @@ module Aws::SSM
     DocumentIdentifier.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     DocumentIdentifier.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
     DocumentIdentifier.add_member(:schema_version, Shapes::ShapeRef.new(shape: DocumentSchemaVersion, location_name: "SchemaVersion"))
+    DocumentIdentifier.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
+    DocumentIdentifier.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
     DocumentIdentifier.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     DocumentIdentifier.struct_class = Types::DocumentIdentifier
 
@@ -1420,6 +1476,7 @@ module Aws::SSM
     DocumentVersionInfo.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     DocumentVersionInfo.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
     DocumentVersionInfo.add_member(:is_default_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsDefaultVersion"))
+    DocumentVersionInfo.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     DocumentVersionInfo.struct_class = Types::DocumentVersionInfo
 
     DocumentVersionList.member = Shapes::ShapeRef.new(shape: DocumentVersionInfo)
@@ -1489,12 +1546,14 @@ module Aws::SSM
 
     GetDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
     GetDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    GetDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     GetDocumentRequest.struct_class = Types::GetDocumentRequest
 
     GetDocumentResult.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, location_name: "Name"))
     GetDocumentResult.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     GetDocumentResult.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, location_name: "Content"))
     GetDocumentResult.add_member(:document_type, Shapes::ShapeRef.new(shape: DocumentType, location_name: "DocumentType"))
+    GetDocumentResult.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
     GetDocumentResult.struct_class = Types::GetDocumentResult
 
     GetInventoryRequest.add_member(:filters, Shapes::ShapeRef.new(shape: InventoryFilterList, location_name: "Filters"))
@@ -2326,6 +2385,10 @@ module Aws::SSM
 
     RemoveTagsFromResourceResult.struct_class = Types::RemoveTagsFromResourceResult
 
+    ResolvedTargets.add_member(:parameter_values, Shapes::ShapeRef.new(shape: TargetParameterList, location_name: "ParameterValues"))
+    ResolvedTargets.add_member(:truncated, Shapes::ShapeRef.new(shape: Boolean, location_name: "Truncated"))
+    ResolvedTargets.struct_class = Types::ResolvedTargets
+
     ResourceComplianceSummaryItem.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceTypeName, location_name: "ComplianceType"))
     ResourceComplianceSummaryItem.add_member(:resource_type, Shapes::ShapeRef.new(shape: ComplianceResourceType, location_name: "ResourceType"))
     ResourceComplianceSummaryItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: ComplianceResourceId, location_name: "ResourceId"))
@@ -2407,6 +2470,11 @@ module Aws::SSM
     StartAutomationExecutionRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion", metadata: {"box"=>true}))
     StartAutomationExecutionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Parameters"))
     StartAutomationExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientToken"))
+    StartAutomationExecutionRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ExecutionMode, location_name: "Mode"))
+    StartAutomationExecutionRequest.add_member(:target_parameter_name, Shapes::ShapeRef.new(shape: AutomationParameterKey, location_name: "TargetParameterName"))
+    StartAutomationExecutionRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    StartAutomationExecutionRequest.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
+    StartAutomationExecutionRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     StartAutomationExecutionRequest.struct_class = Types::StartAutomationExecutionRequest
 
     StartAutomationExecutionResult.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, location_name: "AutomationExecutionId"))
@@ -2414,6 +2482,9 @@ module Aws::SSM
 
     StepExecution.add_member(:step_name, Shapes::ShapeRef.new(shape: String, location_name: "StepName"))
     StepExecution.add_member(:action, Shapes::ShapeRef.new(shape: AutomationActionName, location_name: "Action"))
+    StepExecution.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: Long, location_name: "TimeoutSeconds", metadata: {"box"=>true}))
+    StepExecution.add_member(:on_failure, Shapes::ShapeRef.new(shape: String, location_name: "OnFailure"))
+    StepExecution.add_member(:max_attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxAttempts", metadata: {"box"=>true}))
     StepExecution.add_member(:execution_start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ExecutionStartTime"))
     StepExecution.add_member(:execution_end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "ExecutionEndTime"))
     StepExecution.add_member(:step_status, Shapes::ShapeRef.new(shape: AutomationExecutionStatus, location_name: "StepStatus"))
@@ -2423,11 +2494,22 @@ module Aws::SSM
     StepExecution.add_member(:response, Shapes::ShapeRef.new(shape: String, location_name: "Response"))
     StepExecution.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     StepExecution.add_member(:failure_details, Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
+    StepExecution.add_member(:step_execution_id, Shapes::ShapeRef.new(shape: String, location_name: "StepExecutionId"))
+    StepExecution.add_member(:overridden_parameters, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "OverriddenParameters"))
     StepExecution.struct_class = Types::StepExecution
+
+    StepExecutionFilter.add_member(:key, Shapes::ShapeRef.new(shape: StepExecutionFilterKey, required: true, location_name: "Key"))
+    StepExecutionFilter.add_member(:values, Shapes::ShapeRef.new(shape: StepExecutionFilterValueList, required: true, location_name: "Values"))
+    StepExecutionFilter.struct_class = Types::StepExecutionFilter
+
+    StepExecutionFilterList.member = Shapes::ShapeRef.new(shape: StepExecutionFilter)
+
+    StepExecutionFilterValueList.member = Shapes::ShapeRef.new(shape: StepExecutionFilterValue)
 
     StepExecutionList.member = Shapes::ShapeRef.new(shape: StepExecution)
 
     StopAutomationExecutionRequest.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, required: true, location_name: "AutomationExecutionId"))
+    StopAutomationExecutionRequest.add_member(:type, Shapes::ShapeRef.new(shape: StopType, location_name: "Type"))
     StopAutomationExecutionRequest.struct_class = Types::StopAutomationExecutionRequest
 
     StopAutomationExecutionResult.struct_class = Types::StopAutomationExecutionResult
@@ -2443,6 +2525,8 @@ module Aws::SSM
     Target.add_member(:key, Shapes::ShapeRef.new(shape: TargetKey, location_name: "Key"))
     Target.add_member(:values, Shapes::ShapeRef.new(shape: TargetValues, location_name: "Values"))
     Target.struct_class = Types::Target
+
+    TargetParameterList.member = Shapes::ShapeRef.new(shape: ParameterValue)
 
     TargetValues.member = Shapes::ShapeRef.new(shape: TargetValue)
 
@@ -2480,6 +2564,8 @@ module Aws::SSM
     UpdateDocumentRequest.add_member(:content, Shapes::ShapeRef.new(shape: DocumentContent, required: true, location_name: "Content"))
     UpdateDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
     UpdateDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
+    UpdateDocumentRequest.add_member(:document_format, Shapes::ShapeRef.new(shape: DocumentFormat, location_name: "DocumentFormat"))
+    UpdateDocumentRequest.add_member(:target_type, Shapes::ShapeRef.new(shape: TargetType, location_name: "TargetType"))
     UpdateDocumentRequest.struct_class = Types::UpdateDocumentRequest
 
     UpdateDocumentResult.add_member(:document_description, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "DocumentDescription"))
@@ -2879,7 +2965,22 @@ module Aws::SSM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeAutomationExecutionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAutomationExecutionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterValue)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:describe_automation_step_executions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAutomationStepExecutions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAutomationStepExecutionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAutomationStepExecutionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: AutomationExecutionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilterValue)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -3608,6 +3709,7 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: SendAutomationSignalRequest)
         o.output = Shapes::ShapeRef.new(shape: SendAutomationSignalResult)
         o.errors << Shapes::ShapeRef.new(shape: AutomationExecutionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AutomationStepNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAutomationSignalException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
@@ -3641,6 +3743,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: AutomationExecutionLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AutomationDefinitionVersionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatch)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTarget)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -3651,6 +3754,7 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: StopAutomationExecutionRequest)
         o.output = Shapes::ShapeRef.new(shape: StopAutomationExecutionResult)
         o.errors << Shapes::ShapeRef.new(shape: AutomationExecutionNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAutomationStatusUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

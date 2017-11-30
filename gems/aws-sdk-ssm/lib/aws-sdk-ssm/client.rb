@@ -538,7 +538,7 @@ module Aws::SSM
     # associate it with one or more running instances.
     #
     # @option params [required, String] :content
-    #   A valid JSON string.
+    #   A valid JSON or YAML string.
     #
     # @option params [required, String] :name
     #   A name for the Systems Manager document.
@@ -546,6 +546,23 @@ module Aws::SSM
     # @option params [String] :document_type
     #   The type of document to create. Valid document types include: Policy,
     #   Automation, and Command.
+    #
+    # @option params [String] :document_format
+    #   Specify the document format for the request. The document format can
+    #   be either JSON or YAML. JSON is the default format.
+    #
+    # @option params [String] :target_type
+    #   Specify a target type to define the kinds of resources the document
+    #   can run on. For example, to run a document on EC2 instances, specify
+    #   the following value: /AWS::EC2::Instance. If you specify a value of
+    #   '/' the document can run on all types of resources. If you don't
+    #   specify a value, the document can't run on any resources. For a list
+    #   of valid resource types, see [AWS Resource Types Reference][1] in the
+    #   *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #
     # @return [Types::CreateDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -557,6 +574,8 @@ module Aws::SSM
     #     content: "DocumentContent", # required
     #     name: "DocumentName", # required
     #     document_type: "Command", # accepts Command, Policy, Automation
+    #     document_format: "YAML", # accepts YAML, JSON
+    #     target_type: "TargetType",
     #   })
     #
     # @example Response structure
@@ -581,6 +600,8 @@ module Aws::SSM
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
+    #   resp.document_description.document_format #=> String, one of "YAML", "JSON"
+    #   resp.document_description.target_type #=> String
     #   resp.document_description.tags #=> Array
     #   resp.document_description.tags[0].key #=> String
     #   resp.document_description.tags[0].value #=> String
@@ -1318,7 +1339,7 @@ module Aws::SSM
     #   resp = client.describe_automation_executions({
     #     filters: [
     #       {
-    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus
+    #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter
     #         values: ["AutomationExecutionFilterValue"], # required
     #       },
     #     ],
@@ -1332,7 +1353,7 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].automation_execution_id #=> String
     #   resp.automation_execution_metadata_list[0].document_name #=> String
     #   resp.automation_execution_metadata_list[0].document_version #=> String
-    #   resp.automation_execution_metadata_list[0].automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelled", "Failed"
+    #   resp.automation_execution_metadata_list[0].automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed"
     #   resp.automation_execution_metadata_list[0].execution_start_time #=> Time
     #   resp.automation_execution_metadata_list[0].execution_end_time #=> Time
     #   resp.automation_execution_metadata_list[0].executed_by #=> String
@@ -1340,6 +1361,22 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].outputs #=> Hash
     #   resp.automation_execution_metadata_list[0].outputs["AutomationParameterKey"] #=> Array
     #   resp.automation_execution_metadata_list[0].outputs["AutomationParameterKey"][0] #=> String
+    #   resp.automation_execution_metadata_list[0].mode #=> String, one of "Auto", "Interactive"
+    #   resp.automation_execution_metadata_list[0].parent_automation_execution_id #=> String
+    #   resp.automation_execution_metadata_list[0].current_step_name #=> String
+    #   resp.automation_execution_metadata_list[0].current_action #=> String
+    #   resp.automation_execution_metadata_list[0].failure_message #=> String
+    #   resp.automation_execution_metadata_list[0].target_parameter_name #=> String
+    #   resp.automation_execution_metadata_list[0].targets #=> Array
+    #   resp.automation_execution_metadata_list[0].targets[0].key #=> String
+    #   resp.automation_execution_metadata_list[0].targets[0].values #=> Array
+    #   resp.automation_execution_metadata_list[0].targets[0].values[0] #=> String
+    #   resp.automation_execution_metadata_list[0].resolved_targets.parameter_values #=> Array
+    #   resp.automation_execution_metadata_list[0].resolved_targets.parameter_values[0] #=> String
+    #   resp.automation_execution_metadata_list[0].resolved_targets.truncated #=> Boolean
+    #   resp.automation_execution_metadata_list[0].max_concurrency #=> String
+    #   resp.automation_execution_metadata_list[0].max_errors #=> String
+    #   resp.automation_execution_metadata_list[0].target #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationExecutions AWS API Documentation
@@ -1348,6 +1385,89 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_automation_executions(params = {}, options = {})
       req = build_request(:describe_automation_executions, params)
+      req.send_request(options)
+    end
+
+    # Information about all active and terminated step executions in an
+    # Automation workflow.
+    #
+    # @option params [required, String] :automation_execution_id
+    #   The Automation execution ID for which you want step execution
+    #   descriptions.
+    #
+    # @option params [Array<Types::StepExecutionFilter>] :filters
+    #   One or more filters to limit the number of step executions returned by
+    #   the request.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [Boolean] :reverse_order
+    #   A boolean that indicates whether to list step executions in reverse
+    #   order by start time. The default value is false.
+    #
+    # @return [Types::DescribeAutomationStepExecutionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAutomationStepExecutionsResult#step_executions #step_executions} => Array&lt;Types::StepExecution&gt;
+    #   * {Types::DescribeAutomationStepExecutionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_automation_step_executions({
+    #     automation_execution_id: "AutomationExecutionId", # required
+    #     filters: [
+    #       {
+    #         key: "StartTimeBefore", # required, accepts StartTimeBefore, StartTimeAfter, StepExecutionStatus, StepExecutionId, StepName, Action
+    #         values: ["StepExecutionFilterValue"], # required
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     reverse_order: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.step_executions #=> Array
+    #   resp.step_executions[0].step_name #=> String
+    #   resp.step_executions[0].action #=> String
+    #   resp.step_executions[0].timeout_seconds #=> Integer
+    #   resp.step_executions[0].on_failure #=> String
+    #   resp.step_executions[0].max_attempts #=> Integer
+    #   resp.step_executions[0].execution_start_time #=> Time
+    #   resp.step_executions[0].execution_end_time #=> Time
+    #   resp.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed"
+    #   resp.step_executions[0].response_code #=> String
+    #   resp.step_executions[0].inputs #=> Hash
+    #   resp.step_executions[0].inputs["String"] #=> String
+    #   resp.step_executions[0].outputs #=> Hash
+    #   resp.step_executions[0].outputs["AutomationParameterKey"] #=> Array
+    #   resp.step_executions[0].outputs["AutomationParameterKey"][0] #=> String
+    #   resp.step_executions[0].response #=> String
+    #   resp.step_executions[0].failure_message #=> String
+    #   resp.step_executions[0].failure_details.failure_stage #=> String
+    #   resp.step_executions[0].failure_details.failure_type #=> String
+    #   resp.step_executions[0].failure_details.details #=> Hash
+    #   resp.step_executions[0].failure_details.details["AutomationParameterKey"] #=> Array
+    #   resp.step_executions[0].failure_details.details["AutomationParameterKey"][0] #=> String
+    #   resp.step_executions[0].step_execution_id #=> String
+    #   resp.step_executions[0].overridden_parameters #=> Hash
+    #   resp.step_executions[0].overridden_parameters["AutomationParameterKey"] #=> Array
+    #   resp.step_executions[0].overridden_parameters["AutomationParameterKey"][0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutions AWS API Documentation
+    #
+    # @overload describe_automation_step_executions(params = {})
+    # @param [Hash] params ({})
+    def describe_automation_step_executions(params = {}, options = {})
+      req = build_request(:describe_automation_step_executions, params)
       req.send_request(options)
     end
 
@@ -1450,6 +1570,8 @@ module Aws::SSM
     #   resp.document.schema_version #=> String
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
+    #   resp.document.document_format #=> String, one of "YAML", "JSON"
+    #   resp.document.target_type #=> String
     #   resp.document.tags #=> Array
     #   resp.document.tags[0].key #=> String
     #   resp.document.tags[0].value #=> String
@@ -2550,13 +2672,16 @@ module Aws::SSM
     #   resp.automation_execution.document_version #=> String
     #   resp.automation_execution.execution_start_time #=> Time
     #   resp.automation_execution.execution_end_time #=> Time
-    #   resp.automation_execution.automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelled", "Failed"
+    #   resp.automation_execution.automation_execution_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed"
     #   resp.automation_execution.step_executions #=> Array
     #   resp.automation_execution.step_executions[0].step_name #=> String
     #   resp.automation_execution.step_executions[0].action #=> String
+    #   resp.automation_execution.step_executions[0].timeout_seconds #=> Integer
+    #   resp.automation_execution.step_executions[0].on_failure #=> String
+    #   resp.automation_execution.step_executions[0].max_attempts #=> Integer
     #   resp.automation_execution.step_executions[0].execution_start_time #=> Time
     #   resp.automation_execution.step_executions[0].execution_end_time #=> Time
-    #   resp.automation_execution.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelled", "Failed"
+    #   resp.automation_execution.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Waiting", "Success", "TimedOut", "Cancelling", "Cancelled", "Failed"
     #   resp.automation_execution.step_executions[0].response_code #=> String
     #   resp.automation_execution.step_executions[0].inputs #=> Hash
     #   resp.automation_execution.step_executions[0].inputs["String"] #=> String
@@ -2570,6 +2695,11 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].failure_details.details #=> Hash
     #   resp.automation_execution.step_executions[0].failure_details.details["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.step_executions[0].failure_details.details["AutomationParameterKey"][0] #=> String
+    #   resp.automation_execution.step_executions[0].step_execution_id #=> String
+    #   resp.automation_execution.step_executions[0].overridden_parameters #=> Hash
+    #   resp.automation_execution.step_executions[0].overridden_parameters["AutomationParameterKey"] #=> Array
+    #   resp.automation_execution.step_executions[0].overridden_parameters["AutomationParameterKey"][0] #=> String
+    #   resp.automation_execution.step_executions_truncated #=> Boolean
     #   resp.automation_execution.parameters #=> Hash
     #   resp.automation_execution.parameters["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.parameters["AutomationParameterKey"][0] #=> String
@@ -2577,6 +2707,22 @@ module Aws::SSM
     #   resp.automation_execution.outputs["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.outputs["AutomationParameterKey"][0] #=> String
     #   resp.automation_execution.failure_message #=> String
+    #   resp.automation_execution.mode #=> String, one of "Auto", "Interactive"
+    #   resp.automation_execution.parent_automation_execution_id #=> String
+    #   resp.automation_execution.executed_by #=> String
+    #   resp.automation_execution.current_step_name #=> String
+    #   resp.automation_execution.current_action #=> String
+    #   resp.automation_execution.target_parameter_name #=> String
+    #   resp.automation_execution.targets #=> Array
+    #   resp.automation_execution.targets[0].key #=> String
+    #   resp.automation_execution.targets[0].values #=> Array
+    #   resp.automation_execution.targets[0].values[0] #=> String
+    #   resp.automation_execution.resolved_targets.parameter_values #=> Array
+    #   resp.automation_execution.resolved_targets.parameter_values[0] #=> String
+    #   resp.automation_execution.resolved_targets.truncated #=> Boolean
+    #   resp.automation_execution.max_concurrency #=> String
+    #   resp.automation_execution.max_errors #=> String
+    #   resp.automation_execution.target #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution AWS API Documentation
     #
@@ -2737,18 +2883,24 @@ module Aws::SSM
     # @option params [String] :document_version
     #   The document version for which you want information.
     #
+    # @option params [String] :document_format
+    #   Returns the document in the specified format. The document format can
+    #   be either JSON or YAML. JSON is the default format.
+    #
     # @return [Types::GetDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDocumentResult#name #name} => String
     #   * {Types::GetDocumentResult#document_version #document_version} => String
     #   * {Types::GetDocumentResult#content #content} => String
     #   * {Types::GetDocumentResult#document_type #document_type} => String
+    #   * {Types::GetDocumentResult#document_format #document_format} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_document({
     #     name: "DocumentARN", # required
     #     document_version: "DocumentVersion",
+    #     document_format: "YAML", # accepts YAML, JSON
     #   })
     #
     # @example Response structure
@@ -2757,6 +2909,7 @@ module Aws::SSM
     #   resp.document_version #=> String
     #   resp.content #=> String
     #   resp.document_type #=> String, one of "Command", "Policy", "Automation"
+    #   resp.document_format #=> String, one of "YAML", "JSON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocument AWS API Documentation
     #
@@ -3987,6 +4140,7 @@ module Aws::SSM
     #   resp.document_versions[0].document_version #=> String
     #   resp.document_versions[0].created_date #=> Time
     #   resp.document_versions[0].is_default_version #=> Boolean
+    #   resp.document_versions[0].document_format #=> String, one of "YAML", "JSON"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersions AWS API Documentation
@@ -4051,6 +4205,8 @@ module Aws::SSM
     #   resp.document_identifiers[0].document_version #=> String
     #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation"
     #   resp.document_identifiers[0].schema_version #=> String
+    #   resp.document_identifiers[0].document_format #=> String, one of "YAML", "JSON"
+    #   resp.document_identifiers[0].target_type #=> String
     #   resp.document_identifiers[0].tags #=> Array
     #   resp.document_identifiers[0].tags[0].key #=> String
     #   resp.document_identifiers[0].tags[0].value #=> String
@@ -4837,7 +4993,7 @@ module Aws::SSM
     #
     #   resp = client.send_automation_signal({
     #     automation_execution_id: "AutomationExecutionId", # required
-    #     signal_type: "Approve", # required, accepts Approve, Reject
+    #     signal_type: "Approve", # required, accepts Approve, Reject, StartStep, StopStep, Resume
     #     payload: {
     #       "AutomationParameterKey" => ["AutomationParameterValue"],
     #     },
@@ -5040,6 +5196,41 @@ module Aws::SSM
     #   User-provided idempotency token. The token must be unique, is case
     #   insensitive, enforces the UUID format, and can't be reused.
     #
+    # @option params [String] :mode
+    #   The execution mode of the automation. Valid modes include the
+    #   following: Auto and Interactive. The default mode is Auto.
+    #
+    # @option params [String] :target_parameter_name
+    #   The name of the parameter used as the target resource for the
+    #   rate-controlled execution. Required if you specify Targets.
+    #
+    # @option params [Array<Types::Target>] :targets
+    #   A key-value mapping to target resources. Required if you specify
+    #   TargetParameterName.
+    #
+    # @option params [String] :max_concurrency
+    #   The maximum number of targets allowed to run this task in parallel.
+    #   You can specify a number, such as 10, or a percentage, such as 10%.
+    #   The default value is 10.
+    #
+    # @option params [String] :max_errors
+    #   The number of errors that are allowed before the system stops running
+    #   the automation on additional targets. You can specify either an
+    #   absolute number of errors, for example 10, or a percentage of the
+    #   target set, for example 10%. If you specify 3, for example, the system
+    #   stops running the automation when the fourth error is received. If you
+    #   specify 0, then the system stops running the automation on additional
+    #   targets after the first error result is returned. If you run an
+    #   automation on 50 resources and set max-errors to 10%, then the system
+    #   stops running the automation on additional targets when the sixth
+    #   error is received.
+    #
+    #   Executions that are already running an automation when max-errors is
+    #   reached are allowed to complete, but some of these executions may fail
+    #   as well. If you need to ensure that there won't be more than
+    #   max-errors failed executions, set max-concurrency to 1 so the
+    #   executions proceed one at a time.
+    #
     # @return [Types::StartAutomationExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartAutomationExecutionResult#automation_execution_id #automation_execution_id} => String
@@ -5053,6 +5244,16 @@ module Aws::SSM
     #       "AutomationParameterKey" => ["AutomationParameterValue"],
     #     },
     #     client_token: "IdempotencyToken",
+    #     mode: "Auto", # accepts Auto, Interactive
+    #     target_parameter_name: "AutomationParameterKey",
+    #     targets: [
+    #       {
+    #         key: "TargetKey",
+    #         values: ["TargetValue"],
+    #       },
+    #     ],
+    #     max_concurrency: "MaxConcurrency",
+    #     max_errors: "MaxErrors",
     #   })
     #
     # @example Response structure
@@ -5073,12 +5274,17 @@ module Aws::SSM
     # @option params [required, String] :automation_execution_id
     #   The execution ID of the Automation to stop.
     #
+    # @option params [String] :type
+    #   The stop request type. Valid types include the following: Cancel and
+    #   Complete. The default type is Cancel.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_automation_execution({
     #     automation_execution_id: "AutomationExecutionId", # required
+    #     type: "Complete", # accepts Complete, Cancel
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecution AWS API Documentation
@@ -5281,6 +5487,13 @@ module Aws::SSM
     # @option params [String] :document_version
     #   The version of the document that you want to update.
     #
+    # @option params [String] :document_format
+    #   Specify the document format for the new document version. Systems
+    #   Manager supports JSON and YAML documents. JSON is the default format.
+    #
+    # @option params [String] :target_type
+    #   Specify a new target type for the document.
+    #
     # @return [Types::UpdateDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDocumentResult#document_description #document_description} => Types::DocumentDescription
@@ -5291,6 +5504,8 @@ module Aws::SSM
     #     content: "DocumentContent", # required
     #     name: "DocumentName", # required
     #     document_version: "DocumentVersion",
+    #     document_format: "YAML", # accepts YAML, JSON
+    #     target_type: "TargetType",
     #   })
     #
     # @example Response structure
@@ -5315,6 +5530,8 @@ module Aws::SSM
     #   resp.document_description.schema_version #=> String
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
+    #   resp.document_description.document_format #=> String, one of "YAML", "JSON"
+    #   resp.document_description.target_type #=> String
     #   resp.document_description.tags #=> Array
     #   resp.document_description.tags[0].key #=> String
     #   resp.document_description.tags[0].value #=> String
@@ -5898,7 +6115,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

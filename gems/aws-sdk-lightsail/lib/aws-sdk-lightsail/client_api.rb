@@ -18,6 +18,10 @@ module Aws::Lightsail
     AllocateStaticIpResult = Shapes::StructureShape.new(name: 'AllocateStaticIpResult')
     AttachDiskRequest = Shapes::StructureShape.new(name: 'AttachDiskRequest')
     AttachDiskResult = Shapes::StructureShape.new(name: 'AttachDiskResult')
+    AttachInstancesToLoadBalancerRequest = Shapes::StructureShape.new(name: 'AttachInstancesToLoadBalancerRequest')
+    AttachInstancesToLoadBalancerResult = Shapes::StructureShape.new(name: 'AttachInstancesToLoadBalancerResult')
+    AttachLoadBalancerTlsCertificateRequest = Shapes::StructureShape.new(name: 'AttachLoadBalancerTlsCertificateRequest')
+    AttachLoadBalancerTlsCertificateResult = Shapes::StructureShape.new(name: 'AttachLoadBalancerTlsCertificateResult')
     AttachStaticIpRequest = Shapes::StructureShape.new(name: 'AttachStaticIpRequest')
     AttachStaticIpResult = Shapes::StructureShape.new(name: 'AttachStaticIpResult')
     AttachedDiskMap = Shapes::MapShape.new(name: 'AttachedDiskMap')
@@ -49,6 +53,10 @@ module Aws::Lightsail
     CreateInstancesResult = Shapes::StructureShape.new(name: 'CreateInstancesResult')
     CreateKeyPairRequest = Shapes::StructureShape.new(name: 'CreateKeyPairRequest')
     CreateKeyPairResult = Shapes::StructureShape.new(name: 'CreateKeyPairResult')
+    CreateLoadBalancerRequest = Shapes::StructureShape.new(name: 'CreateLoadBalancerRequest')
+    CreateLoadBalancerResult = Shapes::StructureShape.new(name: 'CreateLoadBalancerResult')
+    CreateLoadBalancerTlsCertificateRequest = Shapes::StructureShape.new(name: 'CreateLoadBalancerTlsCertificateRequest')
+    CreateLoadBalancerTlsCertificateResult = Shapes::StructureShape.new(name: 'CreateLoadBalancerTlsCertificateResult')
     DeleteDiskRequest = Shapes::StructureShape.new(name: 'DeleteDiskRequest')
     DeleteDiskResult = Shapes::StructureShape.new(name: 'DeleteDiskResult')
     DeleteDiskSnapshotRequest = Shapes::StructureShape.new(name: 'DeleteDiskSnapshotRequest')
@@ -63,8 +71,14 @@ module Aws::Lightsail
     DeleteInstanceSnapshotResult = Shapes::StructureShape.new(name: 'DeleteInstanceSnapshotResult')
     DeleteKeyPairRequest = Shapes::StructureShape.new(name: 'DeleteKeyPairRequest')
     DeleteKeyPairResult = Shapes::StructureShape.new(name: 'DeleteKeyPairResult')
+    DeleteLoadBalancerRequest = Shapes::StructureShape.new(name: 'DeleteLoadBalancerRequest')
+    DeleteLoadBalancerResult = Shapes::StructureShape.new(name: 'DeleteLoadBalancerResult')
+    DeleteLoadBalancerTlsCertificateRequest = Shapes::StructureShape.new(name: 'DeleteLoadBalancerTlsCertificateRequest')
+    DeleteLoadBalancerTlsCertificateResult = Shapes::StructureShape.new(name: 'DeleteLoadBalancerTlsCertificateResult')
     DetachDiskRequest = Shapes::StructureShape.new(name: 'DetachDiskRequest')
     DetachDiskResult = Shapes::StructureShape.new(name: 'DetachDiskResult')
+    DetachInstancesFromLoadBalancerRequest = Shapes::StructureShape.new(name: 'DetachInstancesFromLoadBalancerRequest')
+    DetachInstancesFromLoadBalancerResult = Shapes::StructureShape.new(name: 'DetachInstancesFromLoadBalancerResult')
     DetachStaticIpRequest = Shapes::StructureShape.new(name: 'DetachStaticIpRequest')
     DetachStaticIpResult = Shapes::StructureShape.new(name: 'DetachStaticIpResult')
     Disk = Shapes::StructureShape.new(name: 'Disk')
@@ -83,6 +97,7 @@ module Aws::Lightsail
     DomainEntryType = Shapes::StringShape.new(name: 'DomainEntryType')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
+    DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
     DownloadDefaultKeyPairRequest = Shapes::StructureShape.new(name: 'DownloadDefaultKeyPairRequest')
     DownloadDefaultKeyPairResult = Shapes::StructureShape.new(name: 'DownloadDefaultKeyPairResult')
     GetActiveNamesRequest = Shapes::StructureShape.new(name: 'GetActiveNamesRequest')
@@ -123,6 +138,14 @@ module Aws::Lightsail
     GetKeyPairResult = Shapes::StructureShape.new(name: 'GetKeyPairResult')
     GetKeyPairsRequest = Shapes::StructureShape.new(name: 'GetKeyPairsRequest')
     GetKeyPairsResult = Shapes::StructureShape.new(name: 'GetKeyPairsResult')
+    GetLoadBalancerMetricDataRequest = Shapes::StructureShape.new(name: 'GetLoadBalancerMetricDataRequest')
+    GetLoadBalancerMetricDataResult = Shapes::StructureShape.new(name: 'GetLoadBalancerMetricDataResult')
+    GetLoadBalancerRequest = Shapes::StructureShape.new(name: 'GetLoadBalancerRequest')
+    GetLoadBalancerResult = Shapes::StructureShape.new(name: 'GetLoadBalancerResult')
+    GetLoadBalancerTlsCertificatesRequest = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsCertificatesRequest')
+    GetLoadBalancerTlsCertificatesResult = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsCertificatesResult')
+    GetLoadBalancersRequest = Shapes::StructureShape.new(name: 'GetLoadBalancersRequest')
+    GetLoadBalancersResult = Shapes::StructureShape.new(name: 'GetLoadBalancersResult')
     GetOperationRequest = Shapes::StructureShape.new(name: 'GetOperationRequest')
     GetOperationResult = Shapes::StructureShape.new(name: 'GetOperationResult')
     GetOperationsForResourceRequest = Shapes::StructureShape.new(name: 'GetOperationsForResourceRequest')
@@ -141,6 +164,10 @@ module Aws::Lightsail
     InstanceAccessDetails = Shapes::StructureShape.new(name: 'InstanceAccessDetails')
     InstanceAccessProtocol = Shapes::StringShape.new(name: 'InstanceAccessProtocol')
     InstanceHardware = Shapes::StructureShape.new(name: 'InstanceHardware')
+    InstanceHealthReason = Shapes::StringShape.new(name: 'InstanceHealthReason')
+    InstanceHealthState = Shapes::StringShape.new(name: 'InstanceHealthState')
+    InstanceHealthSummary = Shapes::StructureShape.new(name: 'InstanceHealthSummary')
+    InstanceHealthSummaryList = Shapes::ListShape.new(name: 'InstanceHealthSummaryList')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
     InstanceMetricName = Shapes::StringShape.new(name: 'InstanceMetricName')
     InstanceNetworking = Shapes::StructureShape.new(name: 'InstanceNetworking')
@@ -162,6 +189,27 @@ module Aws::Lightsail
     IsoDate = Shapes::TimestampShape.new(name: 'IsoDate')
     KeyPair = Shapes::StructureShape.new(name: 'KeyPair')
     KeyPairList = Shapes::ListShape.new(name: 'KeyPairList')
+    LoadBalancer = Shapes::StructureShape.new(name: 'LoadBalancer')
+    LoadBalancerAttributeName = Shapes::StringShape.new(name: 'LoadBalancerAttributeName')
+    LoadBalancerConfigurationOptions = Shapes::MapShape.new(name: 'LoadBalancerConfigurationOptions')
+    LoadBalancerList = Shapes::ListShape.new(name: 'LoadBalancerList')
+    LoadBalancerMetricName = Shapes::StringShape.new(name: 'LoadBalancerMetricName')
+    LoadBalancerProtocol = Shapes::StringShape.new(name: 'LoadBalancerProtocol')
+    LoadBalancerState = Shapes::StringShape.new(name: 'LoadBalancerState')
+    LoadBalancerTlsCertificate = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificate')
+    LoadBalancerTlsCertificateDomainStatus = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateDomainStatus')
+    LoadBalancerTlsCertificateDomainValidationOption = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificateDomainValidationOption')
+    LoadBalancerTlsCertificateDomainValidationOptionList = Shapes::ListShape.new(name: 'LoadBalancerTlsCertificateDomainValidationOptionList')
+    LoadBalancerTlsCertificateDomainValidationRecord = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificateDomainValidationRecord')
+    LoadBalancerTlsCertificateDomainValidationRecordList = Shapes::ListShape.new(name: 'LoadBalancerTlsCertificateDomainValidationRecordList')
+    LoadBalancerTlsCertificateFailureReason = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateFailureReason')
+    LoadBalancerTlsCertificateList = Shapes::ListShape.new(name: 'LoadBalancerTlsCertificateList')
+    LoadBalancerTlsCertificateRenewalStatus = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateRenewalStatus')
+    LoadBalancerTlsCertificateRenewalSummary = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificateRenewalSummary')
+    LoadBalancerTlsCertificateRevocationReason = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateRevocationReason')
+    LoadBalancerTlsCertificateStatus = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateStatus')
+    LoadBalancerTlsCertificateSummary = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificateSummary')
+    LoadBalancerTlsCertificateSummaryList = Shapes::ListShape.new(name: 'LoadBalancerTlsCertificateSummaryList')
     MetricDatapoint = Shapes::StructureShape.new(name: 'MetricDatapoint')
     MetricDatapointList = Shapes::ListShape.new(name: 'MetricDatapointList')
     MetricPeriod = Shapes::IntegerShape.new(name: 'MetricPeriod')
@@ -186,6 +234,7 @@ module Aws::Lightsail
     PortAccessType = Shapes::StringShape.new(name: 'PortAccessType')
     PortInfo = Shapes::StructureShape.new(name: 'PortInfo')
     PortInfoList = Shapes::ListShape.new(name: 'PortInfoList')
+    PortList = Shapes::ListShape.new(name: 'PortList')
     PortState = Shapes::StringShape.new(name: 'PortState')
     PutInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'PutInstancePublicPortsRequest')
     PutInstancePublicPortsResult = Shapes::StructureShape.new(name: 'PutInstancePublicPortsResult')
@@ -198,6 +247,7 @@ module Aws::Lightsail
     ReleaseStaticIpResult = Shapes::StructureShape.new(name: 'ReleaseStaticIpResult')
     ResourceLocation = Shapes::StructureShape.new(name: 'ResourceLocation')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    ResourceNameList = Shapes::ListShape.new(name: 'ResourceNameList')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     StartInstanceRequest = Shapes::StructureShape.new(name: 'StartInstanceRequest')
@@ -207,11 +257,14 @@ module Aws::Lightsail
     StopInstanceRequest = Shapes::StructureShape.new(name: 'StopInstanceRequest')
     StopInstanceResult = Shapes::StructureShape.new(name: 'StopInstanceResult')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    StringMax256 = Shapes::StringShape.new(name: 'StringMax256')
     UnauthenticatedException = Shapes::StructureShape.new(name: 'UnauthenticatedException')
     UnpeerVpcRequest = Shapes::StructureShape.new(name: 'UnpeerVpcRequest')
     UnpeerVpcResult = Shapes::StructureShape.new(name: 'UnpeerVpcResult')
     UpdateDomainEntryRequest = Shapes::StructureShape.new(name: 'UpdateDomainEntryRequest')
     UpdateDomainEntryResult = Shapes::StructureShape.new(name: 'UpdateDomainEntryResult')
+    UpdateLoadBalancerAttributeRequest = Shapes::StructureShape.new(name: 'UpdateLoadBalancerAttributeRequest')
+    UpdateLoadBalancerAttributeResult = Shapes::StructureShape.new(name: 'UpdateLoadBalancerAttributeResult')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
     double = Shapes::FloatShape.new(name: 'double')
     float = Shapes::FloatShape.new(name: 'float')
@@ -232,6 +285,20 @@ module Aws::Lightsail
 
     AttachDiskResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     AttachDiskResult.struct_class = Types::AttachDiskResult
+
+    AttachInstancesToLoadBalancerRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    AttachInstancesToLoadBalancerRequest.add_member(:instance_names, Shapes::ShapeRef.new(shape: ResourceNameList, required: true, location_name: "instanceNames"))
+    AttachInstancesToLoadBalancerRequest.struct_class = Types::AttachInstancesToLoadBalancerRequest
+
+    AttachInstancesToLoadBalancerResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    AttachInstancesToLoadBalancerResult.struct_class = Types::AttachInstancesToLoadBalancerResult
+
+    AttachLoadBalancerTlsCertificateRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    AttachLoadBalancerTlsCertificateRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "certificateName"))
+    AttachLoadBalancerTlsCertificateRequest.struct_class = Types::AttachLoadBalancerTlsCertificateRequest
+
+    AttachLoadBalancerTlsCertificateResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    AttachLoadBalancerTlsCertificateResult.struct_class = Types::AttachLoadBalancerTlsCertificateResult
 
     AttachStaticIpRequest.add_member(:static_ip_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "staticIpName"))
     AttachStaticIpRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
@@ -364,6 +431,26 @@ module Aws::Lightsail
     CreateKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     CreateKeyPairResult.struct_class = Types::CreateKeyPairResult
 
+    CreateLoadBalancerRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    CreateLoadBalancerRequest.add_member(:instance_port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "instancePort"))
+    CreateLoadBalancerRequest.add_member(:health_check_path, Shapes::ShapeRef.new(shape: string, location_name: "healthCheckPath"))
+    CreateLoadBalancerRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "certificateName"))
+    CreateLoadBalancerRequest.add_member(:certificate_domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "certificateDomainName"))
+    CreateLoadBalancerRequest.add_member(:certificate_alternative_names, Shapes::ShapeRef.new(shape: DomainNameList, location_name: "certificateAlternativeNames"))
+    CreateLoadBalancerRequest.struct_class = Types::CreateLoadBalancerRequest
+
+    CreateLoadBalancerResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    CreateLoadBalancerResult.struct_class = Types::CreateLoadBalancerResult
+
+    CreateLoadBalancerTlsCertificateRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    CreateLoadBalancerTlsCertificateRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "certificateName"))
+    CreateLoadBalancerTlsCertificateRequest.add_member(:certificate_domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "certificateDomainName"))
+    CreateLoadBalancerTlsCertificateRequest.add_member(:certificate_alternative_names, Shapes::ShapeRef.new(shape: DomainNameList, location_name: "certificateAlternativeNames"))
+    CreateLoadBalancerTlsCertificateRequest.struct_class = Types::CreateLoadBalancerTlsCertificateRequest
+
+    CreateLoadBalancerTlsCertificateResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    CreateLoadBalancerTlsCertificateResult.struct_class = Types::CreateLoadBalancerTlsCertificateResult
+
     DeleteDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
     DeleteDiskRequest.struct_class = Types::DeleteDiskRequest
 
@@ -407,11 +494,32 @@ module Aws::Lightsail
     DeleteKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     DeleteKeyPairResult.struct_class = Types::DeleteKeyPairResult
 
+    DeleteLoadBalancerRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    DeleteLoadBalancerRequest.struct_class = Types::DeleteLoadBalancerRequest
+
+    DeleteLoadBalancerResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteLoadBalancerResult.struct_class = Types::DeleteLoadBalancerResult
+
+    DeleteLoadBalancerTlsCertificateRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    DeleteLoadBalancerTlsCertificateRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "certificateName"))
+    DeleteLoadBalancerTlsCertificateRequest.add_member(:force, Shapes::ShapeRef.new(shape: boolean, location_name: "force"))
+    DeleteLoadBalancerTlsCertificateRequest.struct_class = Types::DeleteLoadBalancerTlsCertificateRequest
+
+    DeleteLoadBalancerTlsCertificateResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DeleteLoadBalancerTlsCertificateResult.struct_class = Types::DeleteLoadBalancerTlsCertificateResult
+
     DetachDiskRequest.add_member(:disk_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "diskName"))
     DetachDiskRequest.struct_class = Types::DetachDiskRequest
 
     DetachDiskResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     DetachDiskResult.struct_class = Types::DetachDiskResult
+
+    DetachInstancesFromLoadBalancerRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    DetachInstancesFromLoadBalancerRequest.add_member(:instance_names, Shapes::ShapeRef.new(shape: ResourceNameList, required: true, location_name: "instanceNames"))
+    DetachInstancesFromLoadBalancerRequest.struct_class = Types::DetachInstancesFromLoadBalancerRequest
+
+    DetachInstancesFromLoadBalancerResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    DetachInstancesFromLoadBalancerResult.struct_class = Types::DetachInstancesFromLoadBalancerResult
 
     DetachStaticIpRequest.add_member(:static_ip_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "staticIpName"))
     DetachStaticIpRequest.struct_class = Types::DetachStaticIpRequest
@@ -471,8 +579,9 @@ module Aws::Lightsail
     DomainEntry.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "id"))
     DomainEntry.add_member(:name, Shapes::ShapeRef.new(shape: DomainName, location_name: "name"))
     DomainEntry.add_member(:target, Shapes::ShapeRef.new(shape: string, location_name: "target"))
+    DomainEntry.add_member(:is_alias, Shapes::ShapeRef.new(shape: boolean, location_name: "isAlias"))
     DomainEntry.add_member(:type, Shapes::ShapeRef.new(shape: DomainEntryType, location_name: "type"))
-    DomainEntry.add_member(:options, Shapes::ShapeRef.new(shape: DomainEntryOptions, location_name: "options"))
+    DomainEntry.add_member(:options, Shapes::ShapeRef.new(shape: DomainEntryOptions, deprecated: true, location_name: "options"))
     DomainEntry.struct_class = Types::DomainEntry
 
     DomainEntryList.member = Shapes::ShapeRef.new(shape: DomainEntry)
@@ -481,6 +590,8 @@ module Aws::Lightsail
     DomainEntryOptions.value = Shapes::ShapeRef.new(shape: string)
 
     DomainList.member = Shapes::ShapeRef.new(shape: Domain)
+
+    DomainNameList.member = Shapes::ShapeRef.new(shape: DomainName)
 
     DownloadDefaultKeyPairRequest.struct_class = Types::DownloadDefaultKeyPairRequest
 
@@ -621,6 +732,38 @@ module Aws::Lightsail
     GetKeyPairsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetKeyPairsResult.struct_class = Types::GetKeyPairsResult
 
+    GetLoadBalancerMetricDataRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    GetLoadBalancerMetricDataRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: LoadBalancerMetricName, required: true, location_name: "metricName"))
+    GetLoadBalancerMetricDataRequest.add_member(:period, Shapes::ShapeRef.new(shape: MetricPeriod, required: true, location_name: "period"))
+    GetLoadBalancerMetricDataRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "startTime"))
+    GetLoadBalancerMetricDataRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "endTime"))
+    GetLoadBalancerMetricDataRequest.add_member(:unit, Shapes::ShapeRef.new(shape: MetricUnit, required: true, location_name: "unit"))
+    GetLoadBalancerMetricDataRequest.add_member(:statistics, Shapes::ShapeRef.new(shape: MetricStatisticList, required: true, location_name: "statistics"))
+    GetLoadBalancerMetricDataRequest.struct_class = Types::GetLoadBalancerMetricDataRequest
+
+    GetLoadBalancerMetricDataResult.add_member(:metric_name, Shapes::ShapeRef.new(shape: LoadBalancerMetricName, location_name: "metricName"))
+    GetLoadBalancerMetricDataResult.add_member(:metric_data, Shapes::ShapeRef.new(shape: MetricDatapointList, location_name: "metricData"))
+    GetLoadBalancerMetricDataResult.struct_class = Types::GetLoadBalancerMetricDataResult
+
+    GetLoadBalancerRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    GetLoadBalancerRequest.struct_class = Types::GetLoadBalancerRequest
+
+    GetLoadBalancerResult.add_member(:load_balancer, Shapes::ShapeRef.new(shape: LoadBalancer, location_name: "loadBalancer"))
+    GetLoadBalancerResult.struct_class = Types::GetLoadBalancerResult
+
+    GetLoadBalancerTlsCertificatesRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    GetLoadBalancerTlsCertificatesRequest.struct_class = Types::GetLoadBalancerTlsCertificatesRequest
+
+    GetLoadBalancerTlsCertificatesResult.add_member(:tls_certificates, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateList, location_name: "tlsCertificates"))
+    GetLoadBalancerTlsCertificatesResult.struct_class = Types::GetLoadBalancerTlsCertificatesResult
+
+    GetLoadBalancersRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetLoadBalancersRequest.struct_class = Types::GetLoadBalancersRequest
+
+    GetLoadBalancersResult.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancerList, location_name: "loadBalancers"))
+    GetLoadBalancersResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetLoadBalancersResult.struct_class = Types::GetLoadBalancersResult
+
     GetOperationRequest.add_member(:operation_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "operationId"))
     GetOperationRequest.struct_class = Types::GetOperationRequest
 
@@ -705,6 +848,13 @@ module Aws::Lightsail
     InstanceHardware.add_member(:ram_size_in_gb, Shapes::ShapeRef.new(shape: float, location_name: "ramSizeInGb"))
     InstanceHardware.struct_class = Types::InstanceHardware
 
+    InstanceHealthSummary.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
+    InstanceHealthSummary.add_member(:instance_health, Shapes::ShapeRef.new(shape: InstanceHealthState, location_name: "instanceHealth"))
+    InstanceHealthSummary.add_member(:instance_health_reason, Shapes::ShapeRef.new(shape: InstanceHealthReason, location_name: "instanceHealthReason"))
+    InstanceHealthSummary.struct_class = Types::InstanceHealthSummary
+
+    InstanceHealthSummaryList.member = Shapes::ShapeRef.new(shape: InstanceHealthSummary)
+
     InstanceList.member = Shapes::ShapeRef.new(shape: Instance)
 
     InstanceNetworking.add_member(:monthly_transfer, Shapes::ShapeRef.new(shape: MonthlyTransfer, location_name: "monthlyTransfer"))
@@ -770,6 +920,81 @@ module Aws::Lightsail
 
     KeyPairList.member = Shapes::ShapeRef.new(shape: KeyPair)
 
+    LoadBalancer.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    LoadBalancer.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    LoadBalancer.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
+    LoadBalancer.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    LoadBalancer.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    LoadBalancer.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    LoadBalancer.add_member(:dns_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "dnsName"))
+    LoadBalancer.add_member(:state, Shapes::ShapeRef.new(shape: LoadBalancerState, location_name: "state"))
+    LoadBalancer.add_member(:protocol, Shapes::ShapeRef.new(shape: LoadBalancerProtocol, location_name: "protocol"))
+    LoadBalancer.add_member(:public_ports, Shapes::ShapeRef.new(shape: PortList, location_name: "publicPorts"))
+    LoadBalancer.add_member(:health_check_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "healthCheckPath"))
+    LoadBalancer.add_member(:instance_port, Shapes::ShapeRef.new(shape: integer, location_name: "instancePort"))
+    LoadBalancer.add_member(:instance_health_summary, Shapes::ShapeRef.new(shape: InstanceHealthSummaryList, location_name: "instanceHealthSummary"))
+    LoadBalancer.add_member(:tls_certificate_summaries, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateSummaryList, location_name: "tlsCertificateSummaries"))
+    LoadBalancer.add_member(:configuration_options, Shapes::ShapeRef.new(shape: LoadBalancerConfigurationOptions, location_name: "configurationOptions"))
+    LoadBalancer.struct_class = Types::LoadBalancer
+
+    LoadBalancerConfigurationOptions.key = Shapes::ShapeRef.new(shape: LoadBalancerAttributeName)
+    LoadBalancerConfigurationOptions.value = Shapes::ShapeRef.new(shape: string)
+
+    LoadBalancerList.member = Shapes::ShapeRef.new(shape: LoadBalancer)
+
+    LoadBalancerTlsCertificate.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    LoadBalancerTlsCertificate.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
+    LoadBalancerTlsCertificate.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
+    LoadBalancerTlsCertificate.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
+    LoadBalancerTlsCertificate.add_member(:location, Shapes::ShapeRef.new(shape: ResourceLocation, location_name: "location"))
+    LoadBalancerTlsCertificate.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    LoadBalancerTlsCertificate.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "loadBalancerName"))
+    LoadBalancerTlsCertificate.add_member(:is_attached, Shapes::ShapeRef.new(shape: boolean, location_name: "isAttached"))
+    LoadBalancerTlsCertificate.add_member(:status, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateStatus, location_name: "status"))
+    LoadBalancerTlsCertificate.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
+    LoadBalancerTlsCertificate.add_member(:domain_validation_records, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDomainValidationRecordList, location_name: "domainValidationRecords"))
+    LoadBalancerTlsCertificate.add_member(:failure_reason, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateFailureReason, location_name: "failureReason"))
+    LoadBalancerTlsCertificate.add_member(:issued_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "issuedAt"))
+    LoadBalancerTlsCertificate.add_member(:issuer, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "issuer"))
+    LoadBalancerTlsCertificate.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "keyAlgorithm"))
+    LoadBalancerTlsCertificate.add_member(:not_after, Shapes::ShapeRef.new(shape: IsoDate, location_name: "notAfter"))
+    LoadBalancerTlsCertificate.add_member(:not_before, Shapes::ShapeRef.new(shape: IsoDate, location_name: "notBefore"))
+    LoadBalancerTlsCertificate.add_member(:renewal_summary, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateRenewalSummary, location_name: "renewalSummary"))
+    LoadBalancerTlsCertificate.add_member(:revocation_reason, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateRevocationReason, location_name: "revocationReason"))
+    LoadBalancerTlsCertificate.add_member(:revoked_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "revokedAt"))
+    LoadBalancerTlsCertificate.add_member(:serial, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "serial"))
+    LoadBalancerTlsCertificate.add_member(:signature_algorithm, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "signatureAlgorithm"))
+    LoadBalancerTlsCertificate.add_member(:subject, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "subject"))
+    LoadBalancerTlsCertificate.add_member(:subject_alternative_names, Shapes::ShapeRef.new(shape: StringList, location_name: "subjectAlternativeNames"))
+    LoadBalancerTlsCertificate.struct_class = Types::LoadBalancerTlsCertificate
+
+    LoadBalancerTlsCertificateDomainValidationOption.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
+    LoadBalancerTlsCertificateDomainValidationOption.add_member(:validation_status, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDomainStatus, location_name: "validationStatus"))
+    LoadBalancerTlsCertificateDomainValidationOption.struct_class = Types::LoadBalancerTlsCertificateDomainValidationOption
+
+    LoadBalancerTlsCertificateDomainValidationOptionList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDomainValidationOption)
+
+    LoadBalancerTlsCertificateDomainValidationRecord.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
+    LoadBalancerTlsCertificateDomainValidationRecord.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "type"))
+    LoadBalancerTlsCertificateDomainValidationRecord.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "value"))
+    LoadBalancerTlsCertificateDomainValidationRecord.add_member(:validation_status, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDomainStatus, location_name: "validationStatus"))
+    LoadBalancerTlsCertificateDomainValidationRecord.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "domainName"))
+    LoadBalancerTlsCertificateDomainValidationRecord.struct_class = Types::LoadBalancerTlsCertificateDomainValidationRecord
+
+    LoadBalancerTlsCertificateDomainValidationRecordList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDomainValidationRecord)
+
+    LoadBalancerTlsCertificateList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificate)
+
+    LoadBalancerTlsCertificateRenewalSummary.add_member(:renewal_status, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateRenewalStatus, location_name: "renewalStatus"))
+    LoadBalancerTlsCertificateRenewalSummary.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateDomainValidationOptionList, location_name: "domainValidationOptions"))
+    LoadBalancerTlsCertificateRenewalSummary.struct_class = Types::LoadBalancerTlsCertificateRenewalSummary
+
+    LoadBalancerTlsCertificateSummary.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    LoadBalancerTlsCertificateSummary.add_member(:is_attached, Shapes::ShapeRef.new(shape: boolean, location_name: "isAttached"))
+    LoadBalancerTlsCertificateSummary.struct_class = Types::LoadBalancerTlsCertificateSummary
+
+    LoadBalancerTlsCertificateSummaryList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateSummary)
+
     MetricDatapoint.add_member(:average, Shapes::ShapeRef.new(shape: double, location_name: "average"))
     MetricDatapoint.add_member(:maximum, Shapes::ShapeRef.new(shape: double, location_name: "maximum"))
     MetricDatapoint.add_member(:minimum, Shapes::ShapeRef.new(shape: double, location_name: "minimum"))
@@ -825,6 +1050,8 @@ module Aws::Lightsail
 
     PortInfoList.member = Shapes::ShapeRef.new(shape: PortInfo)
 
+    PortList.member = Shapes::ShapeRef.new(shape: Port)
+
     PutInstancePublicPortsRequest.add_member(:port_infos, Shapes::ShapeRef.new(shape: PortInfoList, required: true, location_name: "portInfos"))
     PutInstancePublicPortsRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     PutInstancePublicPortsRequest.struct_class = Types::PutInstancePublicPortsRequest
@@ -856,6 +1083,8 @@ module Aws::Lightsail
     ResourceLocation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: string, location_name: "availabilityZone"))
     ResourceLocation.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "regionName"))
     ResourceLocation.struct_class = Types::ResourceLocation
+
+    ResourceNameList.member = Shapes::ShapeRef.new(shape: ResourceName)
 
     StartInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     StartInstanceRequest.struct_class = Types::StartInstanceRequest
@@ -897,6 +1126,14 @@ module Aws::Lightsail
     UpdateDomainEntryResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
     UpdateDomainEntryResult.struct_class = Types::UpdateDomainEntryResult
 
+    UpdateLoadBalancerAttributeRequest.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "loadBalancerName"))
+    UpdateLoadBalancerAttributeRequest.add_member(:attribute_name, Shapes::ShapeRef.new(shape: LoadBalancerAttributeName, required: true, location_name: "attributeName"))
+    UpdateLoadBalancerAttributeRequest.add_member(:attribute_value, Shapes::ShapeRef.new(shape: StringMax256, required: true, location_name: "attributeValue"))
+    UpdateLoadBalancerAttributeRequest.struct_class = Types::UpdateLoadBalancerAttributeRequest
+
+    UpdateLoadBalancerAttributeResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
+    UpdateLoadBalancerAttributeResult.struct_class = Types::UpdateLoadBalancerAttributeResult
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -933,6 +1170,36 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AttachDiskRequest)
         o.output = Shapes::ShapeRef.new(shape: AttachDiskResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:attach_instances_to_load_balancer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachInstancesToLoadBalancer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachInstancesToLoadBalancerRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachInstancesToLoadBalancerResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:attach_load_balancer_tls_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachLoadBalancerTlsCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachLoadBalancerTlsCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachLoadBalancerTlsCertificateResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1107,6 +1374,36 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:create_load_balancer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLoadBalancer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLoadBalancerRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLoadBalancerResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:create_load_balancer_tls_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLoadBalancerTlsCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLoadBalancerTlsCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLoadBalancerTlsCertificateResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:delete_disk, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDisk"
         o.http_method = "POST"
@@ -1212,12 +1509,57 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:delete_load_balancer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLoadBalancer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLoadBalancerRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLoadBalancerResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:delete_load_balancer_tls_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLoadBalancerTlsCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLoadBalancerTlsCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLoadBalancerTlsCertificateResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:detach_disk, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DetachDisk"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DetachDiskRequest)
         o.output = Shapes::ShapeRef.new(shape: DetachDiskResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:detach_instances_from_load_balancer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetachInstancesFromLoadBalancer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetachInstancesFromLoadBalancerRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetachInstancesFromLoadBalancerResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1542,6 +1884,66 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 
+      api.add_operation(:get_load_balancer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLoadBalancer"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLoadBalancerRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLoadBalancerResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_load_balancer_metric_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLoadBalancerMetricData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLoadBalancerMetricDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLoadBalancerMetricDataResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_load_balancer_tls_certificates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLoadBalancerTlsCertificates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLoadBalancerTlsCertificatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLoadBalancerTlsCertificatesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_load_balancers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLoadBalancers"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLoadBalancersRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLoadBalancersResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
       api.add_operation(:get_operation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetOperation"
         o.http_method = "POST"
@@ -1788,6 +2190,21 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDomainEntryRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDomainEntryResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:update_load_balancer_attribute, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLoadBalancerAttribute"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLoadBalancerAttributeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLoadBalancerAttributeResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
