@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.8.0 (2017-11-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-serverlessapplicationrepository` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-cloud9` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-alexaforbusiness` gem.
+
 3.7.0 (2017-11-30)
 ------------------
 

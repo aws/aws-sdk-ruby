@@ -533,12 +533,10 @@ module Aws::Lambda
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available on
-    #   AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can
-    #   request a one-time extension until June 30, 2017 by going to the
-    #   Lambda console and following the instructions provided. Failure to do
-    #   so will result in an invalid parmaeter error being returned. Note that
-    #   you will have to follow this procedure for each region that contains
-    #   functions written in the Node v0.10.42 runtime.
+    #   AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to
+    #   do so will result in an invalid parmaeter error being returned. Note
+    #   that you will have to follow this procedure for each region that
+    #   contains functions written in the Node v0.10.42 runtime.
     #
     #    </note>
     #
@@ -938,6 +936,29 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Removes concurrent execution limits from this function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the function you are removing concurrent execution limits
+    #   from.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function_concurrency({
+    #     function_name: "FunctionName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrency AWS API Documentation
+    #
+    # @overload delete_function_concurrency(params = {})
+    # @param [Hash] params ({})
+    def delete_function_concurrency(params = {}, options = {})
+      req = build_request(:delete_function_concurrency, params)
+      req.send_request(options)
+    end
+
     # Returns a customer's account settings.
     #
     # You can use this operation to retrieve Lambda limits information, such
@@ -976,6 +997,7 @@ module Aws::Lambda
     #   resp.account_limit.code_size_unzipped #=> Integer
     #   resp.account_limit.code_size_zipped #=> Integer
     #   resp.account_limit.concurrent_executions #=> Integer
+    #   resp.account_limit.unreserved_concurrent_executions #=> Integer
     #   resp.account_usage.total_code_size #=> Integer
     #   resp.account_usage.function_count #=> Integer
     #
@@ -1172,6 +1194,7 @@ module Aws::Lambda
     #   * {Types::GetFunctionResponse#configuration #configuration} => Types::FunctionConfiguration
     #   * {Types::GetFunctionResponse#code #code} => Types::FunctionCodeLocation
     #   * {Types::GetFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetFunctionResponse#concurrency #concurrency} => Types::Concurrency
     #
     #
     # @example Example: To retrieve a Lambda function's event source mapping
@@ -1254,6 +1277,7 @@ module Aws::Lambda
     #   resp.code.location #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.concurrency.reserved_concurrent_executions #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction AWS API Documentation
     #
@@ -2208,6 +2232,44 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Sets a limit on the number of concurrent executions available to this
+    # function. It is a subset of your account's total concurrent execution
+    # limit per region. Note that Lambda automatically reserves a buffer of
+    # 100 concurrent executions for functions without any reserved
+    # concurrency limit. This means if your account limit is 1000, you have
+    # a total of 900 available to allocate to individual functions.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the function you are setting concurrent execution limits
+    #   on.
+    #
+    # @option params [required, Integer] :reserved_concurrent_executions
+    #   The concurrent execution limit reserved for this function.
+    #
+    # @return [Types::Concurrency] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Concurrency#reserved_concurrent_executions #reserved_concurrent_executions} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_function_concurrency({
+    #     function_name: "FunctionName", # required
+    #     reserved_concurrent_executions: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reserved_concurrent_executions #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrency AWS API Documentation
+    #
+    # @overload put_function_concurrency(params = {})
+    # @param [Hash] params ({})
+    def put_function_concurrency(params = {}, options = {})
+      req = build_request(:put_function_concurrency, params)
+      req.send_request(options)
+    end
+
     # You can remove individual permissions from an resource policy
     # associated with a Lambda function by providing a statement ID that you
     # provided when you added the permission.
@@ -2792,12 +2854,10 @@ module Aws::Lambda
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available on
-    #   AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can
-    #   request a one-time extension until June 30, 2017 by going to the
-    #   Lambda console and following the instructions provided. Failure to do
-    #   so will result in an invalid parameter error being returned. Note that
-    #   you will have to follow this procedure for each region that contains
-    #   functions written in the Node v0.10.42 runtime.
+    #   AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to
+    #   do so will result in an invalid parameter error being returned. Note
+    #   that you will have to follow this procedure for each region that
+    #   contains functions written in the Node v0.10.42 runtime.
     #
     #    </note>
     #
@@ -2948,7 +3008,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

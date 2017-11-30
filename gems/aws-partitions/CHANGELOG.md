@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2017-11-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ServerlessApplicationRepository`.
+
+* Feature - Added support for enumerating regions for `Aws::Cloud9`.
+
+* Feature - Added support for enumerating regions for `Aws::AlexaForBusiness`.
+
 1.43.0 (2017-11-30)
 ------------------
 

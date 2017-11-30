@@ -223,6 +223,7 @@ module Aws
           {
             'ACM' => 'acm',
             'APIGateway' => 'apigateway',
+            'AlexaForBusiness' => 'a4b',
             'AppStream' => 'appstream2',
             'AppSync' => 'appsync',
             'ApplicationAutoScaling' => 'application-autoscaling',
@@ -231,6 +232,7 @@ module Aws
             'AutoScaling' => 'autoscaling',
             'Batch' => 'batch',
             'Budgets' => 'budgets',
+            'Cloud9' => 'cloud9',
             'CloudDirectory' => 'clouddirectory',
             'CloudFormation' => 'cloudformation',
             'CloudFront' => 'cloudfront',
@@ -331,6 +333,7 @@ module Aws
             'SWF' => 'swf',
             'SageMaker' => 'sagemaker',
             'SageMakerRuntime' => 'runtime.sagemaker',
+            'ServerlessApplicationRepository' => 'serverlessrepo',
             'ServiceCatalog' => 'servicecatalog',
             'Shield' => 'shield',
             'SimpleDB' => 'sdb',

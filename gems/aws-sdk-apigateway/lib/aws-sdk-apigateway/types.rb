@@ -31,7 +31,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Represents an AWS account that is associated with Amazon API Gateway.
+    # Represents an AWS account that is associated with API Gateway.
     #
     # <div class="remarks" markdown="1">
     # To view the account info, call `GET` on this resource.
@@ -290,11 +290,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] authorizer_credentials
-    #   Specifies the required credentials as an IAM role for Amazon API
-    #   Gateway to invoke the authorizer. To specify an IAM role for Amazon
-    #   API Gateway to assume, use the role's Amazon Resource Name (ARN).
-    #   To use resource-based permissions on the Lambda function, specify
-    #   null.
+    #   Specifies the required credentials as an IAM role for API Gateway to
+    #   invoke the authorizer. To specify an IAM role for API Gateway to
+    #   assume, use the role's Amazon Resource Name (ARN). To use
+    #   resource-based permissions on the Lambda function, specify null.
     #   @return [String]
     #
     # @!attribute [rw] identity_source
@@ -324,8 +323,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. Amazon API Gateway
-    #   will match the incoming token from the client against the specified
+    #   authorizers, this value is a regular expression. API Gateway will
+    #   match the incoming token from the client against the specified
     #   regular expression. It will invoke the authorizer's Lambda function
     #   there is a match. Otherwise, it will return a 401 Unauthorized
     #   response without calling the Lambda function. The validation
@@ -671,11 +670,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] authorizer_credentials
-    #   Specifies the required credentials as an IAM role for Amazon API
-    #   Gateway to invoke the authorizer. To specify an IAM role for Amazon
-    #   API Gateway to assume, use the role's Amazon Resource Name (ARN).
-    #   To use resource-based permissions on the Lambda function, specify
-    #   null.
+    #   Specifies the required credentials as an IAM role for API Gateway to
+    #   invoke the authorizer. To specify an IAM role for API Gateway to
+    #   assume, use the role's Amazon Resource Name (ARN). To use
+    #   resource-based permissions on the Lambda function, specify null.
     #   @return [String]
     #
     # @!attribute [rw] identity_source
@@ -705,8 +703,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. Amazon API Gateway
-    #   will match the incoming token from the client against the specified
+    #   authorizers, this value is a regular expression. API Gateway will
+    #   match the incoming token from the client against the specified
     #   regular expression. It will invoke the authorizer's Lambda function
     #   there is a match. Otherwise, it will return a 401 Unauthorized
     #   response without calling the Lambda function. The validation
@@ -734,7 +732,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to create a new BasePathMapping resource.
+    # Requests API Gateway to create a new BasePathMapping resource.
     #
     # @note When making an API call, you may pass CreateBasePathMappingRequest
     #   data as a hash:
@@ -775,7 +773,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to create a Deployment resource.
+    # Requests API Gateway to create a Deployment resource.
     #
     # @note When making an API call, you may pass CreateDeploymentRequest
     #   data as a hash:
@@ -1098,7 +1096,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to create a Resource resource.
+    # Requests API Gateway to create a Resource resource.
     #
     # @note When making an API call, you may pass CreateResourceRequest
     #   data as a hash:
@@ -1180,7 +1178,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to create a Stage resource.
+    # Requests API Gateway to create a Stage resource.
     #
     # @note When making an API call, you may pass CreateStageRequest
     #   data as a hash:
@@ -1211,7 +1209,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   \\\{Required\] The name for the Stage resource.
+    #   \[Required\] The name for the Stage resource.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -1347,6 +1345,41 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # Creates a VPC link, under the caller's account in a selected region,
+    # in an asynchronous operation that typically takes 2-4 minutes to
+    # complete and become operational. The caller must have permissions to
+    # create and update VPC Endpoint services.
+    #
+    # @note When making an API call, you may pass CreateVpcLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         description: "String",
+    #         target_arns: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   \[Required\] The name used to label and identify the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arns
+    #   \[Required\] The ARNs of network load balancers of the VPC targeted
+    #   by the VPC link. The network load balancers must be owned by the
+    #   same AWS account of the API owner.
+    #   @return [Array<String>]
+    #
+    class CreateVpcLinkRequest < Struct.new(
+      :name,
+      :description,
+      :target_arns)
+      include Aws::Structure
+    end
+
     # A request to delete the ApiKey resource.
     #
     # @note When making an API call, you may pass DeleteApiKeyRequest
@@ -1431,7 +1464,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to delete a Deployment resource.
+    # Requests API Gateway to delete a Deployment resource.
     #
     # @note When making an API call, you may pass DeleteDeploymentRequest
     #   data as a hash:
@@ -1790,7 +1823,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to delete a Stage resource.
+    # Requests API Gateway to delete a Stage resource.
     #
     # @note When making an API call, you may pass DeleteStageRequest
     #   data as a hash:
@@ -1856,6 +1889,25 @@ module Aws::APIGateway
     #
     class DeleteUsagePlanRequest < Struct.new(
       :usage_plan_id)
+      include Aws::Structure
+    end
+
+    # Deletes an existing VpcLink of a specified identifier.
+    #
+    # @note When making an API call, you may pass DeleteVpcLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_link_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_link_id
+    #   \[Required\] The identifier of the VpcLink. It is used in an
+    #   Integration to reference this VpcLink.
+    #   @return [String]
+    #
+    class DeleteVpcLinkRequest < Struct.new(
+      :vpc_link_id)
       include Aws::Structure
     end
 
@@ -2005,8 +2057,8 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
     #
     # @!attribute [rw] id
-    #   The DocumentationPart identifier, generated by Amazon API Gateway
-    #   when the `DocumentationPart` is created.
+    #   The DocumentationPart identifier, generated by API Gateway when the
+    #   `DocumentationPart` is created.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -2041,7 +2093,7 @@ module Aws::APIGateway
     #
     # <div class="remarks">
     # This is used to return the result when documentation parts in an
-    # external (e.g., Swagger) file are imported into Amazon API Gateway
+    # external (e.g., Swagger) file are imported into API Gateway
     # </div>
     #
     # <div class="seeAlso">
@@ -2235,8 +2287,8 @@ module Aws::APIGateway
     # (RestApi).
     #
     # <div class="Remarks" markdown="1">
-    # When you deploy an API, Amazon API Gateway creates a default host name
-    # for the API. This default API host name is of the
+    # When you deploy an API, API Gateway creates a default host name for
+    # the API. This default API host name is of the
     # `\{restapi-id\}.execute-api.\{region\}.amazonaws.com` format. With the
     # default host name, you can access the API's root resource with the
     # URL of
@@ -2280,8 +2332,8 @@ module Aws::APIGateway
     #   The domain name associated with the regional endpoint for this
     #   custom domain name. You set up this association by adding a DNS
     #   record that points the custom domain name to this regional domain
-    #   name. The regional domain name is returned by Amazon API Gateway
-    #   when you create a regional endpoint.
+    #   name. The regional domain name is returned by API Gateway when you
+    #   create a regional endpoint.
     #   @return [String]
     #
     # @!attribute [rw] regional_hosted_zone_id
@@ -2443,7 +2495,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to flush a stage's cache.
+    # Requests API Gateway to flush a stage's cache.
     #
     # @note When making an API call, you may pass FlushStageCacheRequest
     #   data as a hash:
@@ -2472,7 +2524,7 @@ module Aws::APIGateway
     #
     # <div class="remarks">
     # For more information about valid gateway response types, see [Gateway
-    # Response Types Supported by Amazon API Gateway][1]
+    # Response Types Supported by API Gateway][1]
     # <div class="example" markdown="1">
     # #### Example: Get a Gateway Response of a given response type
     #
@@ -2547,7 +2599,7 @@ module Aws::APIGateway
     # @!attribute [rw] default_response
     #   A Boolean flag to indicate whether this GatewayResponse is the
     #   default gateway response (`true`) or not (`false`). A default
-    #   gateway response is one generated by Amazon API Gateway without any
+    #   gateway response is one generated by API Gateway without any
     #   customization by an API developer.
     #   @return [Boolean]
     #
@@ -2566,7 +2618,7 @@ module Aws::APIGateway
     #
     # <div class="remarks">
     # For more information about valid gateway response types, see [Gateway
-    # Response Types Supported by Amazon API Gateway][1]
+    # Response Types Supported by API Gateway][1]
     # <div class="example" markdown="1">
     # #### Example: Get the collection of gateway responses of an API
     #
@@ -2631,8 +2683,8 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to get information about the current
-    # Account resource.
+    # Requests API Gateway to get information about the current Account
+    # resource.
     #
     # @api private
     #
@@ -2865,8 +2917,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to get information about a Deployment
-    # resource.
+    # Requests API Gateway to get information about a Deployment resource.
     #
     # @note When making an API call, you may pass GetDeploymentRequest
     #   data as a hash:
@@ -2906,7 +2957,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to get information about a Deployments
+    # Requests API Gateway to get information about a Deployments
     # collection.
     #
     # @note When making an API call, you may pass GetDeploymentsRequest
@@ -3219,8 +3270,8 @@ module Aws::APIGateway
 
     # Gets the GatewayResponses collection on the given RestApi. If an API
     # developer has not added any definitions for gateway responses, the
-    # result will be the Amazon API Gateway-generated default
-    # GatewayResponses collection for the supported response types.
+    # result will be the API Gateway-generated default GatewayResponses
+    # collection for the supported response types.
     #
     # @note When making an API call, you may pass GetGatewayResponsesRequest
     #   data as a hash:
@@ -3740,7 +3791,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to get information about a Stage resource.
+    # Requests API Gateway to get information about a Stage resource.
     #
     # @note When making an API call, you may pass GetStageRequest
     #   data as a hash:
@@ -3764,7 +3815,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to get information about one or more Stage
+    # Requests API Gateway to get information about one or more Stage
     # resources.
     #
     # @note When making an API call, you may pass GetStagesRequest
@@ -3953,6 +4004,50 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # Gets a specified VPC link under the caller's account in a region.
+    #
+    # @note When making an API call, you may pass GetVpcLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_link_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_link_id
+    #   \[Required\] The identifier of the VpcLink. It is used in an
+    #   Integration to reference this VpcLink.
+    #   @return [String]
+    #
+    class GetVpcLinkRequest < Struct.new(
+      :vpc_link_id)
+      include Aws::Structure
+    end
+
+    # Gets the VpcLinks collection under the caller's account in a selected
+    # region.
+    #
+    # @note When making an API call, you may pass GetVpcLinksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         position: "String",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] position
+    #   The current pagination position in the paged result set.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of returned results per page.
+    #   @return [Integer]
+    #
+    class GetVpcLinksRequest < Struct.new(
+      :position,
+      :limit)
+      include Aws::Structure
+    end
+
     # The POST request to import API keys from an external source, such as a
     # CSV-formatted file.
     #
@@ -4034,8 +4129,8 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # A POST request to import an API to Amazon API Gateway using an input
-    # of an API definition file.
+    # A POST request to import an API to API Gateway using an input of an
+    # API definition file.
     #
     # @note When making an API call, you may pass ImportRestApiRequest
     #   data as a hash:
@@ -4111,12 +4206,34 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
     #
     # @!attribute [rw] type
-    #   Specifies the integration's type. The valid value is `HTTP` for
-    #   integrating with an HTTP back end, `AWS` for any AWS service
-    #   endpoints, `MOCK` for testing without actually invoking the back
-    #   end, `HTTP_PROXY` for integrating with the HTTP proxy integration,
-    #   or `AWS_PROXY` for integrating with the Lambda proxy integration
-    #   type.
+    #   Specifies an API method integration type. The valid value is one of
+    #   the following:
+    #
+    #   * `AWS`\: for integrating the API method request with an AWS service
+    #     action, including the Lambda function-invoking action. With the
+    #     Lambda function-invoking action, this is referred to as the Lambda
+    #     custom integration. With any other AWS service action, this is
+    #     known as AWS integration.
+    #   * `AWS_PROXY`\: for integrating the API method request with the
+    #     Lambda function-invoking action with the client request passed
+    #     through as-is. This integration is also referred to as the Lambda
+    #     proxy integration.
+    #   * `HTTP`\: for integrating the API method request with an HTTP
+    #     endpoint, including a private HTTP endpoint within a VPC. This
+    #     integration is also referred to as the HTTP custom integration.
+    #   * `HTTP_PROXY`\: for integrating the API method request with an HTTP
+    #     endpoint, including a private HTTP endpoint within a VPC, with the
+    #     client request passed through as-is. This is also referred to as
+    #     the HTTP proxy integration.
+    #   * `MOCK`\: for integrating the API method request with API Gateway
+    #     as a "loop-back" endpoint without invoking any backend.
+    #
+    #   For the HTTP and HTTP proxy integrations, each integration can
+    #   specify a protocol (`http/https`), port and path. Standard 80 and
+    #   443 ports are supported as well as custom ports above 1024. An HTTP
+    #   or HTTP proxy integration with a `connectionType` of `VPC_LINK` is
+    #   referred to as a private integration and uses a VpcLink to connect
+    #   API Gateway to a network load balancer of a VPC.
     #   @return [String]
     #
     # @!attribute [rw] http_method
@@ -4124,31 +4241,63 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   Specifies the integration's Uniform Resource Identifier (URI). For
-    #   HTTP integrations, the URI must be a fully formed, encoded HTTP(S)
-    #   URL according to the [RFC-3986 specification][1]. For AWS
-    #   integrations, the URI should be of the form
-    #   `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:\{path|action\}/\{service_api\}`.
-    #   `Region`, `subdomain` and `service` are used to determine the right
-    #   endpoint. For AWS services that use the `Action=` query string
-    #   parameter, `service_api` should be a valid action for the desired
-    #   service. For RESTful AWS service APIs, `path` is used to indicate
-    #   that the remaining substring in the URI should be treated as the
-    #   path to the resource, including the initial `/`.
+    #   Specifies Uniform Resource Identifier (URI) of the integration
+    #   endpoint.
+    #
+    #   * For `HTTP` or `HTTP_PROXY` integrations, the URI must be a fully
+    #     formed, encoded HTTP(S) URL according to the [RFC-3986
+    #     specification][1], for either standard integration, where
+    #     `connectionType` is not `VPC_LINK`, or private integration, where
+    #     `connectionType` is `VPC_LINK`. For a private HTTP integration,
+    #     the URI is not used for routing.
+    #
+    #   * For `AWS` or `AWS_PROXY` integrations, the URI is of the form
+    #     `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api\}`.
+    #     Here, `\{Region\}` is the API Gateway region (e.g., `us-east-1`);
+    #     `\{service\}` is the name of the integrated AWS service (e.g.,
+    #     `s3`); and `\{subdomain\}` is a designated subdomain supported by
+    #     certain AWS service for fast host-name lookup. `action` can be
+    #     used for an AWS service action-based API, using an
+    #     `Action=\{name\}&\{p1\}=\{v1\}&p2=\{v2\}...` query string. The
+    #     ensuing `\{service_api\}` refers to a supported action `\{name\}`
+    #     plus any required input parameters. Alternatively, `path` can be
+    #     used for an AWS service path-based API. The ensuing `service_api`
+    #     refers to the path to an AWS service resource, including the
+    #     region of the integrated AWS service, if applicable. For example,
+    #     for integration with the S3 API of `GetObject`, the `uri` can be
+    #     either
+    #     `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
+    #     or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
     #   @return [String]
     #
+    # @!attribute [rw] connection_type
+    #   The type of the network connection to the integration endpoint. The
+    #   valid value is `INTERNET` for connections through the public
+    #   routable internet or `VPC_LINK` for private connections between API
+    #   Gateway and an network load balancer in a VPC. The default value is
+    #   `INTERNET`.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_id
+    #   The ([`id`][1]) of the VpcLink used for the integration when
+    #   `connectionType=VPC_LINK` and undefined, otherwise.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
+    #   @return [String]
+    #
     # @!attribute [rw] credentials
     #   Specifies the credentials required for the integration, if any. For
     #   AWS integrations, three options are available. To specify an IAM
-    #   Role for Amazon API Gateway to assume, use the role's Amazon
-    #   Resource Name (ARN). To require that the caller's identity be
-    #   passed through from the request, specify the string
-    #   `arn:aws:iam::*:user/*`. To use resource-based permissions on
-    #   supported AWS services, specify null.
+    #   Role for API Gateway to assume, use the role's Amazon Resource Name
+    #   (ARN). To require that the caller's identity be passed through from
+    #   the request, specify the string `arn:aws:iam::*:user/*`. To use
+    #   resource-based permissions on supported AWS services, specify null.
     #   @return [String]
     #
     # @!attribute [rw] request_parameters
@@ -4177,21 +4326,20 @@ module Aws::APIGateway
     #   without transformation. A content type is unmapped if no mapping
     #   template is defined in the integration or the content type does not
     #   match any of the mapped content types, as specified in
-    #   `requestTemplates`. There are three valid values: `WHEN_NO_MATCH`,
-    #   `WHEN_NO_TEMPLATES`, and `NEVER`.
+    #   `requestTemplates`. The valid value is one of the following:
     #
-    #   * `WHEN_NO_MATCH` passes the method request body through the
+    #   * `WHEN_NO_MATCH`\: passes the method request body through the
     #     integration request to the back end without transformation when
     #     the method request content type does not match any content type
     #     associated with the mapping templates defined in the integration
     #     request.
-    #   * `WHEN_NO_TEMPLATES` passes the method request body through the
+    #   * `WHEN_NO_TEMPLATES`\: passes the method request body through the
     #     integration request to the back end without transformation when no
     #     mapping template is defined in the integration request. If a
     #     template is defined when this option is selected, the method
     #     request of an unmapped content-type will be rejected with an HTTP
     #     `415 Unsupported Media Type` response.
-    #   * `NEVER` rejects the method request with an HTTP `415 Unsupported
+    #   * `NEVER`\: rejects the method request with an HTTP `415 Unsupported
     #     Media Type` response when either the method request content type
     #     does not match any content type associated with the mapping
     #     templates defined in the integration request or no mapping
@@ -4268,6 +4416,8 @@ module Aws::APIGateway
       :type,
       :http_method,
       :uri,
+      :connection_type,
+      :connection_id,
       :credentials,
       :request_parameters,
       :request_templates,
@@ -4442,8 +4592,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] request_parameters
     #   A key-value map defining required or optional method request
-    #   parameters that can be accepted by Amazon API Gateway. A key is a
-    #   method request parameter name matching the pattern of
+    #   parameters that can be accepted by API Gateway. A key is a method
+    #   request parameter name matching the pattern of
     #   `method.request.\{location\}.\{name\}`, where `location` is
     #   `querystring`, `path`, or `header` and `name` is a valid and unique
     #   parameter name. The value associated with the key is a Boolean flag
@@ -4588,15 +4738,15 @@ module Aws::APIGateway
     #
     # @!attribute [rw] response_parameters
     #   A key-value map specifying required or optional response parameters
-    #   that Amazon API Gateway can send back to the caller. A key defines a
-    #   method response header and the value specifies whether the
-    #   associated method response header is required or not. The expression
-    #   of the key must match the pattern `method.response.header.\{name\}`,
-    #   where `name` is a valid and unique header name. Amazon API Gateway
-    #   passes certain integration response data to the method response
-    #   headers specified here according to the mapping you prescribe in the
-    #   API's IntegrationResponse. The integration response data that can
-    #   be mapped include an integration response header expressed in
+    #   that API Gateway can send back to the caller. A key defines a method
+    #   response header and the value specifies whether the associated
+    #   method response header is required or not. The expression of the key
+    #   must match the pattern `method.response.header.\{name\}`, where
+    #   `name` is a valid and unique header name. API Gateway passes certain
+    #   integration response data to the method response headers specified
+    #   here according to the mapping you prescribe in the API's
+    #   IntegrationResponse. The integration response data that can be
+    #   mapped include an integration response header expressed in
     #   `integration.response.header.\{name\}`, a static value enclosed
     #   within a pair of single quotes (e.g., `'application/json'`), or a
     #   JSON expression from the back-end response payload in the form of
@@ -4960,6 +5110,8 @@ module Aws::APIGateway
     #         type: "HTTP", # required, accepts HTTP, AWS, MOCK, HTTP_PROXY, AWS_PROXY
     #         integration_http_method: "String",
     #         uri: "String",
+    #         connection_type: "INTERNET", # accepts INTERNET, VPC_LINK
+    #         connection_id: "String",
     #         credentials: "String",
     #         request_parameters: {
     #           "String" => "String",
@@ -4996,21 +5148,54 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   Specifies the integration's Uniform Resource Identifier (URI). For
-    #   HTTP integrations, the URI must be a fully formed, encoded HTTP(S)
-    #   URL according to the [RFC-3986 specification][1]. For AWS
-    #   integrations, the URI should be of the form
-    #   `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:\{path|action\}/\{service_api\}`.
-    #   `Region`, `subdomain` and `service` are used to determine the right
-    #   endpoint. For AWS services that use the `Action=` query string
-    #   parameter, `service_api` should be a valid action for the desired
-    #   service. For RESTful AWS service APIs, `path` is used to indicate
-    #   that the remaining substring in the URI should be treated as the
-    #   path to the resource, including the initial `/`.
+    #   Specifies Uniform Resource Identifier (URI) of the integration
+    #   endpoint.
+    #
+    #   * For `HTTP` or `HTTP_PROXY` integrations, the URI must be a fully
+    #     formed, encoded HTTP(S) URL according to the [RFC-3986
+    #     specification][1], for either standard integration, where
+    #     `connectionType` is not `VPC_LINK`, or private integration, where
+    #     `connectionType` is `VPC_LINK`. For a private HTTP integration,
+    #     the URI is not used for routing.
+    #
+    #   * For `AWS` or `AWS_PROXY` integrations, the URI is of the form
+    #     `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api\}`.
+    #     Here, `\{Region\}` is the API Gateway region (e.g., `us-east-1`);
+    #     `\{service\}` is the name of the integrated AWS service (e.g.,
+    #     `s3`); and `\{subdomain\}` is a designated subdomain supported by
+    #     certain AWS service for fast host-name lookup. `action` can be
+    #     used for an AWS service action-based API, using an
+    #     `Action=\{name\}&\{p1\}=\{v1\}&p2=\{v2\}...` query string. The
+    #     ensuing `\{service_api\}` refers to a supported action `\{name\}`
+    #     plus any required input parameters. Alternatively, `path` can be
+    #     used for an AWS service path-based API. The ensuing `service_api`
+    #     refers to the path to an AWS service resource, including the
+    #     region of the integrated AWS service, if applicable. For example,
+    #     for integration with the S3 API of `GetObject`, the `uri` can be
+    #     either
+    #     `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
+    #     or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The type of the network connection to the integration endpoint. The
+    #   valid value is `INTERNET` for connections through the public
+    #   routable internet or `VPC_LINK` for private connections between API
+    #   Gateway and an network load balancer in a VPC. The default value is
+    #   `INTERNET`.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_id
+    #   The ([`id`][1]) of the VpcLink used for the integration when
+    #   `connectionType=VPC_LINK` and undefined, otherwise.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
     #   @return [String]
     #
     # @!attribute [rw] credentials
@@ -5092,6 +5277,8 @@ module Aws::APIGateway
       :type,
       :integration_http_method,
       :uri,
+      :connection_type,
+      :connection_id,
       :credentials,
       :request_parameters,
       :request_templates,
@@ -5253,8 +5440,8 @@ module Aws::APIGateway
     #
     # @!attribute [rw] request_parameters
     #   A key-value map defining required or optional method request
-    #   parameters that can be accepted by Amazon API Gateway. A key defines
-    #   a method request parameter name matching the pattern of
+    #   parameters that can be accepted by API Gateway. A key defines a
+    #   method request parameter name matching the pattern of
     #   `method.request.\{location\}.\{name\}`, where `location` is
     #   `querystring`, `path`, or `header` and `name` is a valid and unique
     #   parameter name. The value associated with the key is a Boolean flag
@@ -5325,10 +5512,10 @@ module Aws::APIGateway
     #
     # @!attribute [rw] response_parameters
     #   A key-value map specifying required or optional response parameters
-    #   that Amazon API Gateway can send back to the caller. A key defines a
-    #   method response header name and the associated value is a Boolean
-    #   flag indicating whether the method response parameter is required or
-    #   not. The method response header names must match the pattern of
+    #   that API Gateway can send back to the caller. A key defines a method
+    #   response header name and the associated value is a Boolean flag
+    #   indicating whether the method response parameter is required or not.
+    #   The method response header names must match the pattern of
     #   `method.response.header.\{name\}`, where `name` is a valid and
     #   unique header name. The response parameter names defined here are
     #   available in the integration response to be mapped from an
@@ -5622,7 +5809,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] id
     #   The API's identifier. This identifier is unique across all of your
-    #   APIs in Amazon API Gateway.
+    #   APIs in API Gateway.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -5810,7 +5997,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] stage_name
     #   The name of the stage is the first path segment in the Uniform
-    #   Resource Identifier (URI) of a call to Amazon API Gateway.
+    #   Resource Identifier (URI) of a call to API Gateway.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -6025,8 +6212,7 @@ module Aws::APIGateway
     #   @return [Integer]
     #
     # @!attribute [rw] log
-    #   The Amazon API Gateway execution log for the test authorizer
-    #   request.
+    #   The API Gateway execution log for the test authorizer request.
     #   @return [String]
     #
     # @!attribute [rw] latency
@@ -6157,7 +6343,7 @@ module Aws::APIGateway
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] log
-    #   The Amazon API Gateway execution log for the test invoke request.
+    #   The API Gateway execution log for the test invoke request.
     #   @return [String]
     #
     # @!attribute [rw] latency
@@ -6199,8 +6385,8 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to change information about the current
-    # Account resource.
+    # Requests API Gateway to change information about the current Account
+    # resource.
     #
     # @note When making an API call, you may pass UpdateAccountRequest
     #   data as a hash:
@@ -6366,7 +6552,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to change information about a Deployment
+    # Requests API Gateway to change information about a Deployment
     # resource.
     #
     # @note When making an API call, you may pass UpdateDeploymentRequest
@@ -6909,8 +7095,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Requests Amazon API Gateway to change information about a Stage
-    # resource.
+    # Requests API Gateway to change information about a Stage resource.
     #
     # @note When making an API call, you may pass UpdateStageRequest
     #   data as a hash:
@@ -7016,6 +7201,39 @@ module Aws::APIGateway
     class UpdateUsageRequest < Struct.new(
       :usage_plan_id,
       :key_id,
+      :patch_operations)
+      include Aws::Structure
+    end
+
+    # Updates an existing VpcLink of a specified identifier.
+    #
+    # @note When making an API call, you may pass UpdateVpcLinkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_link_id: "String", # required
+    #         patch_operations: [
+    #           {
+    #             op: "add", # accepts add, remove, replace, move, copy, test
+    #             path: "String",
+    #             value: "String",
+    #             from: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] vpc_link_id
+    #   \[Required\] The identifier of the VpcLink. It is used in an
+    #   Integration to reference this VpcLink.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_operations
+    #   A list of update operations to be applied to the specified resource
+    #   and in the order specified in this list.
+    #   @return [Array<Types::PatchOperation>]
+    #
+    class UpdateVpcLinkRequest < Struct.new(
+      :vpc_link_id,
       :patch_operations)
       include Aws::Structure
     end
@@ -7208,6 +7426,85 @@ module Aws::APIGateway
     #   @return [Array<Types::UsagePlan>]
     #
     class UsagePlans < Struct.new(
+      :position,
+      :items)
+      include Aws::Structure
+    end
+
+    # A API Gateway VPC link for a RestApi to access resources in an Amazon
+    # Virtual Private Cloud (VPC).
+    #
+    # <div class="remarks" markdown="1">
+    # To enable access to a resource in an Amazon Virtual Private Cloud
+    # through Amazon API Gateway, you, as an API developer, create a VpcLink
+    # resource targeted for one or more network load balancers of the VPC
+    # and then integrate an API method with a private integration that uses
+    # the VpcLink. The private integraiton has an integration type of `HTTP`
+    # or `HTTP_PROXY` and has a connection type of `VPC_LINK`. The
+    # integration uses the `connectionId` property to identify the VpcLink
+    # used.
+    #
+    # </div>
+    #
+    # @!attribute [rw] id
+    #   The identifier of the VpcLink. It is used in an Integration to
+    #   reference this VpcLink.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name used to label and identify the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the VPC link.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arns
+    #   The ARNs of network load balancers of the VPC targeted by the VPC
+    #   link. The network load balancers must be owned by the same AWS
+    #   account of the API owner.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the VPC link. The valid values are `AVAILABLE`,
+    #   `PENDING`, `DELETING`, or `FAILED`. Deploying an API will wait if
+    #   the status is `PENDING` and will fail if the status is `DELETING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   A description about the VPC link status.
+    #   @return [String]
+    #
+    class VpcLink < Struct.new(
+      :id,
+      :name,
+      :description,
+      :target_arns,
+      :status,
+      :status_message)
+      include Aws::Structure
+    end
+
+    # The collection of VPC links under the caller's account in a region.
+    #
+    # <div class="seeAlso">
+    # [Getting Started with Private Integrations][1], [Set up Private
+    # Integrations][2]
+    # </div>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-with-private-integration.html
+    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-private-integration.html
+    #
+    # @!attribute [rw] position
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The current page of elements from this collection.
+    #   @return [Array<Types::VpcLink>]
+    #
+    class VpcLinks < Struct.new(
       :position,
       :items)
       include Aws::Structure

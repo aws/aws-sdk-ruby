@@ -126,7 +126,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] vpc_peering_connection_id
-    #   The ID of the VPC peering connection.
+    #   The ID of the VPC peering connection. You must specify this
+    #   parameter in the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcPeeringConnectionRequest AWS API Documentation
@@ -3904,7 +3905,7 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         group_name: "String", # required
-    #         strategy: "cluster", # required, accepts cluster
+    #         strategy: "cluster", # required, accepts cluster, spread
     #       }
     #
     # @!attribute [rw] dry_run
@@ -3915,7 +3916,8 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] group_name
-    #   A name for the placement group.
+    #   A name for the placement group. Must be unique within the scope of
+    #   your account for the region.
     #
     #   Constraints: Up to 255 ASCII characters
     #   @return [String]
@@ -4855,6 +4857,7 @@ module Aws::EC2
     #         peer_owner_id: "String",
     #         peer_vpc_id: "String",
     #         vpc_id: "String",
+    #         peer_region: "String",
     #       }
     #
     # @!attribute [rw] dry_run
@@ -4865,18 +4868,26 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] peer_owner_id
-    #   The AWS account ID of the owner of the peer VPC.
+    #   The AWS account ID of the owner of the accepter VPC.
     #
     #   Default: Your AWS account ID
     #   @return [String]
     #
     # @!attribute [rw] peer_vpc_id
     #   The ID of the VPC with which you are creating the VPC peering
-    #   connection.
+    #   connection. You must specify this parameter in the request.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
-    #   The ID of the requester VPC.
+    #   The ID of the requester VPC. You must specify this parameter in the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_region
+    #   The region code for the accepter VPC, if the accepter VPC is located
+    #   in a region other than the region in which you make the request.
+    #
+    #   Default: The region in which you make the request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnectionRequest AWS API Documentation
@@ -4885,7 +4896,8 @@ module Aws::EC2
       :dry_run,
       :peer_owner_id,
       :peer_vpc_id,
-      :vpc_id)
+      :vpc_id,
+      :peer_region)
       include Aws::Structure
     end
 
@@ -9660,7 +9672,8 @@ module Aws::EC2
     #   * `state` - The state of the placement group (`pending` \|
     #     `available` \| `deleting` \| `deleted`).
     #
-    #   * `strategy` - The strategy of the placement group (`cluster`).
+    #   * `strategy` - The strategy of the placement group (`cluster` \|
+    #     `spread`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -12952,13 +12965,13 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the peer
-    #     VPC.
+    #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the
+    #     accepter VPC.
     #
     #   * `accepter-vpc-info.owner-id` - The AWS account ID of the owner of
-    #     the peer VPC.
+    #     the accepter VPC.
     #
-    #   * `accepter-vpc-info.vpc-id` - The ID of the peer VPC.
+    #   * `accepter-vpc-info.vpc-id` - The ID of the accepter VPC.
     #
     #   * `expiration-time` - The expiration date and time for the VPC
     #     peering connection.
@@ -12973,7 +12986,7 @@ module Aws::EC2
     #
     #   * `status-code` - The status of the VPC peering connection
     #     (`pending-acceptance` \| `failed` \| `expired` \| `provisioning`
-    #     \| `active` \| `deleted` \| `rejected`).
+    #     \| `active` \| `deleting` \| `deleted` \| `rejected`).
     #
     #   * `status-message` - A message that provides more information about
     #     the status of the VPC peering connection, if applicable.
@@ -27878,7 +27891,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] group_name
-    #   The name of the placement group (for cluster instances).
+    #   The name of the placement group.
     #   @return [String]
     #
     # @!attribute [rw] tenancy
@@ -29874,6 +29887,10 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @!attribute [rw] region
+    #   The region in which the VPC is located.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionVpcInfo AWS API Documentation
     #
     class VpcPeeringConnectionVpcInfo < Struct.new(
@@ -29882,7 +29899,8 @@ module Aws::EC2
       :cidr_block_set,
       :owner_id,
       :peering_options,
-      :vpc_id)
+      :vpc_id,
+      :region)
       include Aws::Structure
     end
 

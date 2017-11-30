@@ -32,6 +32,7 @@ module Aws::APIGateway
     ClientCertificate = Shapes::StructureShape.new(name: 'ClientCertificate')
     ClientCertificates = Shapes::StructureShape.new(name: 'ClientCertificates')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     ContentHandlingStrategy = Shapes::StringShape.new(name: 'ContentHandlingStrategy')
     CreateApiKeyRequest = Shapes::StructureShape.new(name: 'CreateApiKeyRequest')
     CreateAuthorizerRequest = Shapes::StructureShape.new(name: 'CreateAuthorizerRequest')
@@ -47,6 +48,7 @@ module Aws::APIGateway
     CreateStageRequest = Shapes::StructureShape.new(name: 'CreateStageRequest')
     CreateUsagePlanKeyRequest = Shapes::StructureShape.new(name: 'CreateUsagePlanKeyRequest')
     CreateUsagePlanRequest = Shapes::StructureShape.new(name: 'CreateUsagePlanRequest')
+    CreateVpcLinkRequest = Shapes::StructureShape.new(name: 'CreateVpcLinkRequest')
     DeleteApiKeyRequest = Shapes::StructureShape.new(name: 'DeleteApiKeyRequest')
     DeleteAuthorizerRequest = Shapes::StructureShape.new(name: 'DeleteAuthorizerRequest')
     DeleteBasePathMappingRequest = Shapes::StructureShape.new(name: 'DeleteBasePathMappingRequest')
@@ -67,6 +69,7 @@ module Aws::APIGateway
     DeleteStageRequest = Shapes::StructureShape.new(name: 'DeleteStageRequest')
     DeleteUsagePlanKeyRequest = Shapes::StructureShape.new(name: 'DeleteUsagePlanKeyRequest')
     DeleteUsagePlanRequest = Shapes::StructureShape.new(name: 'DeleteUsagePlanRequest')
+    DeleteVpcLinkRequest = Shapes::StructureShape.new(name: 'DeleteVpcLinkRequest')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
     DeploymentCanarySettings = Shapes::StructureShape.new(name: 'DeploymentCanarySettings')
     Deployments = Shapes::StructureShape.new(name: 'Deployments')
@@ -133,6 +136,8 @@ module Aws::APIGateway
     GetUsagePlanRequest = Shapes::StructureShape.new(name: 'GetUsagePlanRequest')
     GetUsagePlansRequest = Shapes::StructureShape.new(name: 'GetUsagePlansRequest')
     GetUsageRequest = Shapes::StructureShape.new(name: 'GetUsageRequest')
+    GetVpcLinkRequest = Shapes::StructureShape.new(name: 'GetVpcLinkRequest')
+    GetVpcLinksRequest = Shapes::StructureShape.new(name: 'GetVpcLinksRequest')
     ImportApiKeysRequest = Shapes::StructureShape.new(name: 'ImportApiKeysRequest')
     ImportDocumentationPartsRequest = Shapes::StructureShape.new(name: 'ImportDocumentationPartsRequest')
     ImportRestApiRequest = Shapes::StructureShape.new(name: 'ImportRestApiRequest')
@@ -167,6 +172,7 @@ module Aws::APIGateway
     ListOfUsage = Shapes::ListShape.new(name: 'ListOfUsage')
     ListOfUsagePlan = Shapes::ListShape.new(name: 'ListOfUsagePlan')
     ListOfUsagePlanKey = Shapes::ListShape.new(name: 'ListOfUsagePlanKey')
+    ListOfVpcLink = Shapes::ListShape.new(name: 'ListOfVpcLink')
     LocationStatusType = Shapes::StringShape.new(name: 'LocationStatusType')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MapOfHeaderValues = Shapes::MapShape.new(name: 'MapOfHeaderValues')
@@ -248,11 +254,15 @@ module Aws::APIGateway
     UpdateStageRequest = Shapes::StructureShape.new(name: 'UpdateStageRequest')
     UpdateUsagePlanRequest = Shapes::StructureShape.new(name: 'UpdateUsagePlanRequest')
     UpdateUsageRequest = Shapes::StructureShape.new(name: 'UpdateUsageRequest')
+    UpdateVpcLinkRequest = Shapes::StructureShape.new(name: 'UpdateVpcLinkRequest')
     Usage = Shapes::StructureShape.new(name: 'Usage')
     UsagePlan = Shapes::StructureShape.new(name: 'UsagePlan')
     UsagePlanKey = Shapes::StructureShape.new(name: 'UsagePlanKey')
     UsagePlanKeys = Shapes::StructureShape.new(name: 'UsagePlanKeys')
     UsagePlans = Shapes::StructureShape.new(name: 'UsagePlans')
+    VpcLink = Shapes::StructureShape.new(name: 'VpcLink')
+    VpcLinkStatus = Shapes::StringShape.new(name: 'VpcLinkStatus')
+    VpcLinks = Shapes::StructureShape.new(name: 'VpcLinks')
 
     AccessLogSettings.add_member(:format, Shapes::ShapeRef.new(shape: String, location_name: "format"))
     AccessLogSettings.add_member(:destination_arn, Shapes::ShapeRef.new(shape: String, location_name: "destinationArn"))
@@ -438,6 +448,11 @@ module Aws::APIGateway
     CreateUsagePlanRequest.add_member(:quota, Shapes::ShapeRef.new(shape: QuotaSettings, location_name: "quota"))
     CreateUsagePlanRequest.struct_class = Types::CreateUsagePlanRequest
 
+    CreateVpcLinkRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    CreateVpcLinkRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CreateVpcLinkRequest.add_member(:target_arns, Shapes::ShapeRef.new(shape: ListOfString, required: true, location_name: "targetArns"))
+    CreateVpcLinkRequest.struct_class = Types::CreateVpcLinkRequest
+
     DeleteApiKeyRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "api_Key"))
     DeleteApiKeyRequest.struct_class = Types::DeleteApiKeyRequest
 
@@ -518,6 +533,9 @@ module Aws::APIGateway
 
     DeleteUsagePlanRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
     DeleteUsagePlanRequest.struct_class = Types::DeleteUsagePlanRequest
+
+    DeleteVpcLinkRequest.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "vpclink_id"))
+    DeleteVpcLinkRequest.struct_class = Types::DeleteVpcLinkRequest
 
     Deployment.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Deployment.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -815,6 +833,13 @@ module Aws::APIGateway
     GetUsageRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
     GetUsageRequest.struct_class = Types::GetUsageRequest
 
+    GetVpcLinkRequest.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "vpclink_id"))
+    GetVpcLinkRequest.struct_class = Types::GetVpcLinkRequest
+
+    GetVpcLinksRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+    GetVpcLinksRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+    GetVpcLinksRequest.struct_class = Types::GetVpcLinksRequest
+
     ImportApiKeysRequest.add_member(:body, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "body"))
     ImportApiKeysRequest.add_member(:format, Shapes::ShapeRef.new(shape: ApiKeysFormat, required: true, location: "querystring", location_name: "format"))
     ImportApiKeysRequest.add_member(:fail_on_warnings, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "failonwarnings"))
@@ -840,6 +865,8 @@ module Aws::APIGateway
     Integration.add_member(:type, Shapes::ShapeRef.new(shape: IntegrationType, location_name: "type"))
     Integration.add_member(:http_method, Shapes::ShapeRef.new(shape: String, location_name: "httpMethod"))
     Integration.add_member(:uri, Shapes::ShapeRef.new(shape: String, location_name: "uri"))
+    Integration.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "connectionType"))
+    Integration.add_member(:connection_id, Shapes::ShapeRef.new(shape: String, location_name: "connectionId"))
     Integration.add_member(:credentials, Shapes::ShapeRef.new(shape: String, location_name: "credentials"))
     Integration.add_member(:request_parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestParameters"))
     Integration.add_member(:request_templates, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestTemplates"))
@@ -909,6 +936,8 @@ module Aws::APIGateway
     ListOfUsagePlan.member = Shapes::ShapeRef.new(shape: UsagePlan)
 
     ListOfUsagePlanKey.member = Shapes::ShapeRef.new(shape: UsagePlanKey)
+
+    ListOfVpcLink.member = Shapes::ShapeRef.new(shape: VpcLink)
 
     MapOfHeaderValues.key = Shapes::ShapeRef.new(shape: String)
     MapOfHeaderValues.value = Shapes::ShapeRef.new(shape: String)
@@ -1006,6 +1035,8 @@ module Aws::APIGateway
     PutIntegrationRequest.add_member(:type, Shapes::ShapeRef.new(shape: IntegrationType, required: true, location_name: "type"))
     PutIntegrationRequest.add_member(:integration_http_method, Shapes::ShapeRef.new(shape: String, location_name: "httpMethod"))
     PutIntegrationRequest.add_member(:uri, Shapes::ShapeRef.new(shape: String, location_name: "uri"))
+    PutIntegrationRequest.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "connectionType"))
+    PutIntegrationRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: String, location_name: "connectionId"))
     PutIntegrationRequest.add_member(:credentials, Shapes::ShapeRef.new(shape: String, location_name: "credentials"))
     PutIntegrationRequest.add_member(:request_parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestParameters"))
     PutIntegrationRequest.add_member(:request_templates, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestTemplates"))
@@ -1288,6 +1319,10 @@ module Aws::APIGateway
     UpdateUsageRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
     UpdateUsageRequest.struct_class = Types::UpdateUsageRequest
 
+    UpdateVpcLinkRequest.add_member(:vpc_link_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "vpclink_id"))
+    UpdateVpcLinkRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
+    UpdateVpcLinkRequest.struct_class = Types::UpdateVpcLinkRequest
+
     Usage.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, location_name: "usagePlanId"))
     Usage.add_member(:start_date, Shapes::ShapeRef.new(shape: String, location_name: "startDate"))
     Usage.add_member(:end_date, Shapes::ShapeRef.new(shape: String, location_name: "endDate"))
@@ -1317,6 +1352,18 @@ module Aws::APIGateway
     UsagePlans.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
     UsagePlans.add_member(:items, Shapes::ShapeRef.new(shape: ListOfUsagePlan, location_name: "item"))
     UsagePlans.struct_class = Types::UsagePlans
+
+    VpcLink.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    VpcLink.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    VpcLink.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    VpcLink.add_member(:target_arns, Shapes::ShapeRef.new(shape: ListOfString, location_name: "targetArns"))
+    VpcLink.add_member(:status, Shapes::ShapeRef.new(shape: VpcLinkStatus, location_name: "status"))
+    VpcLink.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    VpcLink.struct_class = Types::VpcLink
+
+    VpcLinks.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
+    VpcLinks.add_member(:items, Shapes::ShapeRef.new(shape: ListOfVpcLink, location_name: "item"))
+    VpcLinks.struct_class = Types::VpcLinks
 
 
     # @api private
@@ -1517,6 +1564,17 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:create_vpc_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcLink"
+        o.http_method = "POST"
+        o.http_request_uri = "/vpclinks"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: VpcLink)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
@@ -1767,6 +1825,18 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_vpc_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcLink"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/vpclinks/{vpclink_id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
       api.add_operation(:flush_stage_authorizers_cache, Seahorse::Model::Operation.new.tap do |o|
@@ -2363,6 +2433,34 @@ module Aws::APIGateway
         )
       end)
 
+      api.add_operation(:get_vpc_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVpcLink"
+        o.http_method = "GET"
+        o.http_request_uri = "/vpclinks/{vpclink_id}"
+        o.input = Shapes::ShapeRef.new(shape: GetVpcLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: VpcLink)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_vpc_links, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVpcLinks"
+        o.http_method = "GET"
+        o.http_request_uri = "/vpclinks"
+        o.input = Shapes::ShapeRef.new(shape: GetVpcLinksRequest)
+        o.output = Shapes::ShapeRef.new(shape: VpcLinks)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "limit",
+          tokens: {
+            "position" => "position"
+          }
+        )
+      end)
+
       api.add_operation(:import_api_keys, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ImportApiKeys"
         o.http_method = "POST"
@@ -2776,6 +2874,19 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_vpc_link, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVpcLink"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/vpclinks/{vpclink_id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVpcLinkRequest)
+        o.output = Shapes::ShapeRef.new(shape: VpcLink)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
     end
 

@@ -39,13 +39,19 @@ module Aws::Lambda
     #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #   @return [Integer]
     #
+    # @!attribute [rw] unreserved_concurrent_executions
+    #   The number of concurrent executions available to functions that do
+    #   not have concurrency limits set.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountLimit AWS API Documentation
     #
     class AccountLimit < Struct.new(
       :total_code_size,
       :code_size_unzipped,
       :code_size_zipped,
-      :concurrent_executions)
+      :concurrent_executions,
+      :unreserved_concurrent_executions)
       include Aws::Structure
     end
 
@@ -260,6 +266,17 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @!attribute [rw] reserved_concurrent_executions
+    #   The number of concurrent executions reserved for this function.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency AWS API Documentation
+    #
+    class Concurrency < Struct.new(
+      :reserved_concurrent_executions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateAliasRequest
     #   data as a hash:
     #
@@ -461,12 +478,10 @@ module Aws::Lambda
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available
-    #   on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can
-    #   request a one-time extension until June 30, 2017 by going to the
-    #   Lambda console and following the instructions provided. Failure to
-    #   do so will result in an invalid parmaeter error being returned. Note
-    #   that you will have to follow this procedure for each region that
-    #   contains functions written in the Node v0.10.42 runtime.
+    #   on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure
+    #   to do so will result in an invalid parmaeter error being returned.
+    #   Note that you will have to follow this procedure for each region
+    #   that contains functions written in the Node v0.10.42 runtime.
     #
     #    </note>
     #   @return [String]
@@ -641,6 +656,25 @@ module Aws::Lambda
     #
     class DeleteEventSourceMappingRequest < Struct.new(
       :uuid)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFunctionConcurrencyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the function you are removing concurrent execution
+    #   limits from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyRequest AWS API Documentation
+    #
+    class DeleteFunctionConcurrencyRequest < Struct.new(
+      :function_name)
       include Aws::Structure
     end
 
@@ -1169,12 +1203,17 @@ module Aws::Lambda
     #   Returns the list of tags associated with the function.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] concurrency
+    #   The concurrent execution limit set for this function.
+    #   @return [Types::Concurrency]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionResponse AWS API Documentation
     #
     class GetFunctionResponse < Struct.new(
       :configuration,
       :code,
-      :tags)
+      :tags,
+      :concurrency)
       include Aws::Structure
     end
 
@@ -1748,6 +1787,31 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutFunctionConcurrencyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         reserved_concurrent_executions: 1, # required
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the function you are setting concurrent execution limits
+    #   on.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_concurrent_executions
+    #   The concurrent execution limit reserved for this function.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrencyRequest AWS API Documentation
+    #
+    class PutFunctionConcurrencyRequest < Struct.new(
+      :function_name,
+      :reserved_concurrent_executions)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemovePermissionRequest
     #   data as a hash:
     #
@@ -2167,12 +2231,10 @@ module Aws::Lambda
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available
-    #   on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. You can
-    #   request a one-time extension until June 30, 2017 by going to the
-    #   Lambda console and following the instructions provided. Failure to
-    #   do so will result in an invalid parameter error being returned. Note
-    #   that you will have to follow this procedure for each region that
-    #   contains functions written in the Node v0.10.42 runtime.
+    #   on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure
+    #   to do so will result in an invalid parameter error being returned.
+    #   Note that you will have to follow this procedure for each region
+    #   that contains functions written in the Node v0.10.42 runtime.
     #
     #    </note>
     #   @return [String]

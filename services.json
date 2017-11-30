@@ -8,6 +8,9 @@
       "Aws::APIGateway::Plugins::ApplyContentTypeHeader"
     ]
   },
+  "AlexaForBusiness": {
+    "models": "alexaforbusiness/2017-11-09"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01"
   },
@@ -32,6 +35,9 @@
   },
   "Budgets": {
     "models": "budgets/2016-10-20"
+  },
+  "Cloud9": {
+    "models": "cloud9/2017-09-23"
   },
   "CloudDirectory": {
     "models": "clouddirectory/2016-05-10"
@@ -407,6 +413,9 @@
   },
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"
+  },
+  "ServerlessApplicationRepository": {
+    "models": "serverlessrepo/2017-09-08"
   },
   "ServiceCatalog": {
     "models": "servicecatalog/2015-12-10"

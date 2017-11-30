@@ -277,10 +277,10 @@ module Aws::APIGateway
     #   `/2015-03-31/functions/[FunctionARN]/invocations`.
     #
     # @option params [String] :authorizer_credentials
-    #   Specifies the required credentials as an IAM role for Amazon API
-    #   Gateway to invoke the authorizer. To specify an IAM role for Amazon
-    #   API Gateway to assume, use the role's Amazon Resource Name (ARN). To
-    #   use resource-based permissions on the Lambda function, specify null.
+    #   Specifies the required credentials as an IAM role for API Gateway to
+    #   invoke the authorizer. To specify an IAM role for API Gateway to
+    #   assume, use the role's Amazon Resource Name (ARN). To use
+    #   resource-based permissions on the Lambda function, specify null.
     #
     # @option params [String] :identity_source
     #   The identity source for which authorization is requested. * For a
@@ -308,12 +308,12 @@ module Aws::APIGateway
     #
     # @option params [String] :identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
-    #   authorizers, this value is a regular expression. Amazon API Gateway
-    #   will match the incoming token from the client against the specified
-    #   regular expression. It will invoke the authorizer's Lambda function
-    #   there is a match. Otherwise, it will return a 401 Unauthorized
-    #   response without calling the Lambda function. The validation
-    #   expression does not apply to the `REQUEST` authorizer.
+    #   authorizers, this value is a regular expression. API Gateway will
+    #   match the incoming token from the client against the specified regular
+    #   expression. It will invoke the authorizer's Lambda function there is
+    #   a match. Otherwise, it will return a 401 Unauthorized response without
+    #   calling the Lambda function. The validation expression does not apply
+    #   to the `REQUEST` authorizer.
     #
     # @option params [Integer] :authorizer_result_ttl_in_seconds
     #   The TTL in seconds of cached authorizer results. If it equals 0,
@@ -837,6 +837,8 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.resource_methods["String"].method_integration.http_method #=> String
     #   resp.resource_methods["String"].method_integration.uri #=> String
+    #   resp.resource_methods["String"].method_integration.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.resource_methods["String"].method_integration.connection_id #=> String
     #   resp.resource_methods["String"].method_integration.credentials #=> String
     #   resp.resource_methods["String"].method_integration.request_parameters #=> Hash
     #   resp.resource_methods["String"].method_integration.request_parameters["String"] #=> String
@@ -938,7 +940,7 @@ module Aws::APIGateway
     #   The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   \\\{Required\] The name for the Stage resource.
+    #   \[Required\] The name for the Stage resource.
     #
     # @option params [required, String] :deployment_id
     #   \[Required\] The identifier of the Deployment resource for the Stage
@@ -1156,6 +1158,56 @@ module Aws::APIGateway
     # @param [Hash] params ({})
     def create_usage_plan_key(params = {}, options = {})
       req = build_request(:create_usage_plan_key, params)
+      req.send_request(options)
+    end
+
+    # Creates a VPC link, under the caller's account in a selected region,
+    # in an asynchronous operation that typically takes 2-4 minutes to
+    # complete and become operational. The caller must have permissions to
+    # create and update VPC Endpoint services.
+    #
+    # @option params [required, String] :name
+    #   \[Required\] The name used to label and identify the VPC link.
+    #
+    # @option params [String] :description
+    #   The description of the VPC link.
+    #
+    # @option params [required, Array<String>] :target_arns
+    #   \[Required\] The ARNs of network load balancers of the VPC targeted by
+    #   the VPC link. The network load balancers must be owned by the same AWS
+    #   account of the API owner.
+    #
+    # @return [Types::VpcLink] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VpcLink#id #id} => String
+    #   * {Types::VpcLink#name #name} => String
+    #   * {Types::VpcLink#description #description} => String
+    #   * {Types::VpcLink#target_arns #target_arns} => Array&lt;String&gt;
+    #   * {Types::VpcLink#status #status} => String
+    #   * {Types::VpcLink#status_message #status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_link({
+    #     name: "String", # required
+    #     description: "String",
+    #     target_arns: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.target_arns #=> Array
+    #   resp.target_arns[0] #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "DELETING", "FAILED"
+    #   resp.status_message #=> String
+    #
+    # @overload create_vpc_link(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_link(params = {}, options = {})
+      req = build_request(:create_vpc_link, params)
       req.send_request(options)
     end
 
@@ -1671,6 +1723,27 @@ module Aws::APIGateway
     # @param [Hash] params ({})
     def delete_usage_plan_key(params = {}, options = {})
       req = build_request(:delete_usage_plan_key, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing VpcLink of a specified identifier.
+    #
+    # @option params [required, String] :vpc_link_id
+    #   \[Required\] The identifier of the VpcLink. It is used in an
+    #   Integration to reference this VpcLink.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpc_link({
+    #     vpc_link_id: "String", # required
+    #   })
+    #
+    # @overload delete_vpc_link(params = {})
+    # @param [Hash] params ({})
+    def delete_vpc_link(params = {}, options = {})
+      req = build_request(:delete_vpc_link, params)
       req.send_request(options)
     end
 
@@ -2626,8 +2699,8 @@ module Aws::APIGateway
 
     # Gets the GatewayResponses collection on the given RestApi. If an API
     # developer has not added any definitions for gateway responses, the
-    # result will be the Amazon API Gateway-generated default
-    # GatewayResponses collection for the supported response types.
+    # result will be the API Gateway-generated default GatewayResponses
+    # collection for the supported response types.
     #
     # @option params [required, String] :rest_api_id
     #   The string identifier of the associated RestApi.
@@ -2690,6 +2763,8 @@ module Aws::APIGateway
     #   * {Types::Integration#type #type} => String
     #   * {Types::Integration#http_method #http_method} => String
     #   * {Types::Integration#uri #uri} => String
+    #   * {Types::Integration#connection_type #connection_type} => String
+    #   * {Types::Integration#connection_id #connection_id} => String
     #   * {Types::Integration#credentials #credentials} => String
     #   * {Types::Integration#request_parameters #request_parameters} => Hash&lt;String,String&gt;
     #   * {Types::Integration#request_templates #request_templates} => Hash&lt;String,String&gt;
@@ -2713,6 +2788,8 @@ module Aws::APIGateway
     #   resp.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.http_method #=> String
     #   resp.uri #=> String
+    #   resp.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.connection_id #=> String
     #   resp.credentials #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["String"] #=> String
@@ -2841,6 +2918,8 @@ module Aws::APIGateway
     #   resp.method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.method_integration.http_method #=> String
     #   resp.method_integration.uri #=> String
+    #   resp.method_integration.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.method_integration.connection_id #=> String
     #   resp.method_integration.credentials #=> String
     #   resp.method_integration.request_parameters #=> Hash
     #   resp.method_integration.request_parameters["String"] #=> String
@@ -3164,6 +3243,8 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.resource_methods["String"].method_integration.http_method #=> String
     #   resp.resource_methods["String"].method_integration.uri #=> String
+    #   resp.resource_methods["String"].method_integration.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.resource_methods["String"].method_integration.connection_id #=> String
     #   resp.resource_methods["String"].method_integration.credentials #=> String
     #   resp.resource_methods["String"].method_integration.request_parameters #=> Hash
     #   resp.resource_methods["String"].method_integration.request_parameters["String"] #=> String
@@ -3254,6 +3335,8 @@ module Aws::APIGateway
     #   resp.items[0].resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.items[0].resource_methods["String"].method_integration.http_method #=> String
     #   resp.items[0].resource_methods["String"].method_integration.uri #=> String
+    #   resp.items[0].resource_methods["String"].method_integration.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.items[0].resource_methods["String"].method_integration.connection_id #=> String
     #   resp.items[0].resource_methods["String"].method_integration.credentials #=> String
     #   resp.items[0].resource_methods["String"].method_integration.request_parameters #=> Hash
     #   resp.items[0].resource_methods["String"].method_integration.request_parameters["String"] #=> String
@@ -3861,6 +3944,84 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
+    # Gets a specified VPC link under the caller's account in a region.
+    #
+    # @option params [required, String] :vpc_link_id
+    #   \[Required\] The identifier of the VpcLink. It is used in an
+    #   Integration to reference this VpcLink.
+    #
+    # @return [Types::VpcLink] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VpcLink#id #id} => String
+    #   * {Types::VpcLink#name #name} => String
+    #   * {Types::VpcLink#description #description} => String
+    #   * {Types::VpcLink#target_arns #target_arns} => Array&lt;String&gt;
+    #   * {Types::VpcLink#status #status} => String
+    #   * {Types::VpcLink#status_message #status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpc_link({
+    #     vpc_link_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.target_arns #=> Array
+    #   resp.target_arns[0] #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "DELETING", "FAILED"
+    #   resp.status_message #=> String
+    #
+    # @overload get_vpc_link(params = {})
+    # @param [Hash] params ({})
+    def get_vpc_link(params = {}, options = {})
+      req = build_request(:get_vpc_link, params)
+      req.send_request(options)
+    end
+
+    # Gets the VpcLinks collection under the caller's account in a selected
+    # region.
+    #
+    # @option params [String] :position
+    #   The current pagination position in the paged result set.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of returned results per page.
+    #
+    # @return [Types::VpcLinks] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VpcLinks#position #position} => String
+    #   * {Types::VpcLinks#items #items} => Array&lt;Types::VpcLink&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpc_links({
+    #     position: "String",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.position #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].target_arns #=> Array
+    #   resp.items[0].target_arns[0] #=> String
+    #   resp.items[0].status #=> String, one of "AVAILABLE", "PENDING", "DELETING", "FAILED"
+    #   resp.items[0].status_message #=> String
+    #
+    # @overload get_vpc_links(params = {})
+    # @param [Hash] params ({})
+    def get_vpc_links(params = {}, options = {})
+      req = build_request(:get_vpc_links, params)
+      req.send_request(options)
+    end
+
     # Import API keys from an external source, such as a CSV-formatted file.
     #
     # @option params [required, String, IO] :body
@@ -3952,8 +4113,8 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
-    # A feature of the Amazon API Gateway control service for creating a new
-    # API from an external API definition file.
+    # A feature of the API Gateway control service for creating a new API
+    # from an external API definition file.
     #
     # @option params [Boolean] :fail_on_warnings
     #   A query parameter to indicate whether to rollback the API creation
@@ -4131,21 +4292,50 @@ module Aws::APIGateway
     #   HTTP or AWS, this field is required.
     #
     # @option params [String] :uri
-    #   Specifies the integration's Uniform Resource Identifier (URI). For
-    #   HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL
-    #   according to the [RFC-3986 specification][1]. For AWS integrations,
-    #   the URI should be of the form
-    #   `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:\{path|action\}/\{service_api\}`.
-    #   `Region`, `subdomain` and `service` are used to determine the right
-    #   endpoint. For AWS services that use the `Action=` query string
-    #   parameter, `service_api` should be a valid action for the desired
-    #   service. For RESTful AWS service APIs, `path` is used to indicate that
-    #   the remaining substring in the URI should be treated as the path to
-    #   the resource, including the initial `/`.
+    #   Specifies Uniform Resource Identifier (URI) of the integration
+    #   endpoint.
+    #
+    #   * For `HTTP` or `HTTP_PROXY` integrations, the URI must be a fully
+    #     formed, encoded HTTP(S) URL according to the [RFC-3986
+    #     specification][1], for either standard integration, where
+    #     `connectionType` is not `VPC_LINK`, or private integration, where
+    #     `connectionType` is `VPC_LINK`. For a private HTTP integration, the
+    #     URI is not used for routing.
+    #
+    #   * For `AWS` or `AWS_PROXY` integrations, the URI is of the form
+    #     `arn:aws:apigateway:\{region\}:\{subdomain.service|service\}:path|action/\{service_api\}`.
+    #     Here, `\{Region\}` is the API Gateway region (e.g., `us-east-1`);
+    #     `\{service\}` is the name of the integrated AWS service (e.g.,
+    #     `s3`); and `\{subdomain\}` is a designated subdomain supported by
+    #     certain AWS service for fast host-name lookup. `action` can be used
+    #     for an AWS service action-based API, using an
+    #     `Action=\{name\}&\{p1\}=\{v1\}&p2=\{v2\}...` query string. The
+    #     ensuing `\{service_api\}` refers to a supported action `\{name\}`
+    #     plus any required input parameters. Alternatively, `path` can be
+    #     used for an AWS service path-based API. The ensuing `service_api`
+    #     refers to the path to an AWS service resource, including the region
+    #     of the integrated AWS service, if applicable. For example, for
+    #     integration with the S3 API of `GetObject`, the `uri` can be either
+    #     `arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket=\{bucket\}&Key=\{key\}`
+    #     or `arn:aws:apigateway:us-west-2:s3:path/\{bucket\}/\{key\}`
     #
     #
     #
     #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
+    #
+    # @option params [String] :connection_type
+    #   The type of the network connection to the integration endpoint. The
+    #   valid value is `INTERNET` for connections through the public routable
+    #   internet or `VPC_LINK` for private connections between API Gateway and
+    #   an network load balancer in a VPC. The default value is `INTERNET`.
+    #
+    # @option params [String] :connection_id
+    #   The ([`id`][1]) of the VpcLink used for the integration when
+    #   `connectionType=VPC_LINK` and undefined, otherwise.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id
     #
     # @option params [String] :credentials
     #   Specifies whether credentials are required for a put integration.
@@ -4216,6 +4406,8 @@ module Aws::APIGateway
     #   * {Types::Integration#type #type} => String
     #   * {Types::Integration#http_method #http_method} => String
     #   * {Types::Integration#uri #uri} => String
+    #   * {Types::Integration#connection_type #connection_type} => String
+    #   * {Types::Integration#connection_id #connection_id} => String
     #   * {Types::Integration#credentials #credentials} => String
     #   * {Types::Integration#request_parameters #request_parameters} => Hash&lt;String,String&gt;
     #   * {Types::Integration#request_templates #request_templates} => Hash&lt;String,String&gt;
@@ -4235,6 +4427,8 @@ module Aws::APIGateway
     #     type: "HTTP", # required, accepts HTTP, AWS, MOCK, HTTP_PROXY, AWS_PROXY
     #     integration_http_method: "String",
     #     uri: "String",
+    #     connection_type: "INTERNET", # accepts INTERNET, VPC_LINK
+    #     connection_id: "String",
     #     credentials: "String",
     #     request_parameters: {
     #       "String" => "String",
@@ -4254,6 +4448,8 @@ module Aws::APIGateway
     #   resp.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.http_method #=> String
     #   resp.uri #=> String
+    #   resp.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.connection_id #=> String
     #   resp.credentials #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["String"] #=> String
@@ -4407,8 +4603,8 @@ module Aws::APIGateway
     #
     # @option params [Hash<String,Boolean>] :request_parameters
     #   A key-value map defining required or optional method request
-    #   parameters that can be accepted by Amazon API Gateway. A key defines a
-    #   method request parameter name matching the pattern of
+    #   parameters that can be accepted by API Gateway. A key defines a method
+    #   request parameter name matching the pattern of
     #   `method.request.\{location\}.\{name\}`, where `location` is
     #   `querystring`, `path`, or `header` and `name` is a valid and unique
     #   parameter name. The value associated with the key is a Boolean flag
@@ -4479,6 +4675,8 @@ module Aws::APIGateway
     #   resp.method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.method_integration.http_method #=> String
     #   resp.method_integration.uri #=> String
+    #   resp.method_integration.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.method_integration.connection_id #=> String
     #   resp.method_integration.credentials #=> String
     #   resp.method_integration.request_parameters #=> Hash
     #   resp.method_integration.request_parameters["String"] #=> String
@@ -4522,8 +4720,8 @@ module Aws::APIGateway
     #
     # @option params [Hash<String,Boolean>] :response_parameters
     #   A key-value map specifying required or optional response parameters
-    #   that Amazon API Gateway can send back to the caller. A key defines a
-    #   method response header name and the associated value is a Boolean flag
+    #   that API Gateway can send back to the caller. A key defines a method
+    #   response header name and the associated value is a Boolean flag
     #   indicating whether the method response parameter is required or not.
     #   The method response header names must match the pattern of
     #   `method.response.header.\{name\}`, where `name` is a valid and unique
@@ -4577,10 +4775,10 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
-    # A feature of the Amazon API Gateway control service for updating an
-    # existing API with an input of external API definitions. The update can
-    # take the form of merging the supplied definition into the existing API
-    # or overwriting the existing API.
+    # A feature of the API Gateway control service for updating an existing
+    # API with an input of external API definitions. The update can take the
+    # form of merging the supplied definition into the existing API or
+    # overwriting the existing API.
     #
     # @option params [required, String] :rest_api_id
     #   The string identifier of the associated RestApi.
@@ -5365,6 +5563,8 @@ module Aws::APIGateway
     #   * {Types::Integration#type #type} => String
     #   * {Types::Integration#http_method #http_method} => String
     #   * {Types::Integration#uri #uri} => String
+    #   * {Types::Integration#connection_type #connection_type} => String
+    #   * {Types::Integration#connection_id #connection_id} => String
     #   * {Types::Integration#credentials #credentials} => String
     #   * {Types::Integration#request_parameters #request_parameters} => Hash&lt;String,String&gt;
     #   * {Types::Integration#request_templates #request_templates} => Hash&lt;String,String&gt;
@@ -5396,6 +5596,8 @@ module Aws::APIGateway
     #   resp.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.http_method #=> String
     #   resp.uri #=> String
+    #   resp.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.connection_id #=> String
     #   resp.credentials #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["String"] #=> String
@@ -5549,6 +5751,8 @@ module Aws::APIGateway
     #   resp.method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.method_integration.http_method #=> String
     #   resp.method_integration.uri #=> String
+    #   resp.method_integration.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.method_integration.connection_id #=> String
     #   resp.method_integration.credentials #=> String
     #   resp.method_integration.request_parameters #=> Hash
     #   resp.method_integration.request_parameters["String"] #=> String
@@ -5791,6 +5995,8 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
     #   resp.resource_methods["String"].method_integration.http_method #=> String
     #   resp.resource_methods["String"].method_integration.uri #=> String
+    #   resp.resource_methods["String"].method_integration.connection_type #=> String, one of "INTERNET", "VPC_LINK"
+    #   resp.resource_methods["String"].method_integration.connection_id #=> String
     #   resp.resource_methods["String"].method_integration.credentials #=> String
     #   resp.resource_methods["String"].method_integration.request_parameters #=> Hash
     #   resp.resource_methods["String"].method_integration.request_parameters["String"] #=> String
@@ -6067,6 +6273,56 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
+    # Updates an existing VpcLink of a specified identifier.
+    #
+    # @option params [required, String] :vpc_link_id
+    #   \[Required\] The identifier of the VpcLink. It is used in an
+    #   Integration to reference this VpcLink.
+    #
+    # @option params [Array<Types::PatchOperation>] :patch_operations
+    #   A list of update operations to be applied to the specified resource
+    #   and in the order specified in this list.
+    #
+    # @return [Types::VpcLink] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VpcLink#id #id} => String
+    #   * {Types::VpcLink#name #name} => String
+    #   * {Types::VpcLink#description #description} => String
+    #   * {Types::VpcLink#target_arns #target_arns} => Array&lt;String&gt;
+    #   * {Types::VpcLink#status #status} => String
+    #   * {Types::VpcLink#status_message #status_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vpc_link({
+    #     vpc_link_id: "String", # required
+    #     patch_operations: [
+    #       {
+    #         op: "add", # accepts add, remove, replace, move, copy, test
+    #         path: "String",
+    #         value: "String",
+    #         from: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.target_arns #=> Array
+    #   resp.target_arns[0] #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "PENDING", "DELETING", "FAILED"
+    #   resp.status_message #=> String
+    #
+    # @overload update_vpc_link(params = {})
+    # @param [Hash] params ({})
+    def update_vpc_link(params = {}, options = {})
+      req = build_request(:update_vpc_link, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -6080,7 +6336,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

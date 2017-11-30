@@ -5,6 +5,7 @@ module Aws
   # service gems
   autoload :ACM, 'aws-sdk-acm'
   autoload :APIGateway, 'aws-sdk-apigateway'
+  autoload :AlexaForBusiness, 'aws-sdk-alexaforbusiness'
   autoload :AppStream, 'aws-sdk-appstream'
   autoload :AppSync, 'aws-sdk-appsync'
   autoload :ApplicationAutoScaling, 'aws-sdk-applicationautoscaling'
@@ -13,6 +14,7 @@ module Aws
   autoload :AutoScaling, 'aws-sdk-autoscaling'
   autoload :Batch, 'aws-sdk-batch'
   autoload :Budgets, 'aws-sdk-budgets'
+  autoload :Cloud9, 'aws-sdk-cloud9'
   autoload :CloudDirectory, 'aws-sdk-clouddirectory'
   autoload :CloudFormation, 'aws-sdk-cloudformation'
   autoload :CloudFront, 'aws-sdk-cloudfront'
@@ -115,6 +117,7 @@ module Aws
   autoload :SWF, 'aws-sdk-swf'
   autoload :SageMaker, 'aws-sdk-sagemaker'
   autoload :SageMakerRuntime, 'aws-sdk-sagemakerruntime'
+  autoload :ServerlessApplicationRepository, 'aws-sdk-serverlessapplicationrepository'
   autoload :ServiceCatalog, 'aws-sdk-servicecatalog'
   autoload :Shield, 'aws-sdk-shield'
   autoload :SimpleDB, 'aws-sdk-simpledb'

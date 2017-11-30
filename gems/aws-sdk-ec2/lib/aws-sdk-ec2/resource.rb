@@ -524,7 +524,7 @@ module Aws::EC2
     #   placementgroup = ec2.create_placement_group({
     #     dry_run: false,
     #     group_name: "String", # required
-    #     strategy: "cluster", # required, accepts cluster
+    #     strategy: "cluster", # required, accepts cluster, spread
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -533,7 +533,8 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [required, String] :group_name
-    #   A name for the placement group.
+    #   A name for the placement group. Must be unique within the scope of
+    #   your account for the region.
     #
     #   Constraints: Up to 255 ASCII characters
     # @option options [required, String] :strategy
@@ -852,6 +853,7 @@ module Aws::EC2
     #     peer_owner_id: "String",
     #     peer_vpc_id: "String",
     #     vpc_id: "String",
+    #     peer_region: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -860,14 +862,20 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :peer_owner_id
-    #   The AWS account ID of the owner of the peer VPC.
+    #   The AWS account ID of the owner of the accepter VPC.
     #
     #   Default: Your AWS account ID
     # @option options [String] :peer_vpc_id
     #   The ID of the VPC with which you are creating the VPC peering
-    #   connection.
+    #   connection. You must specify this parameter in the request.
     # @option options [String] :vpc_id
-    #   The ID of the requester VPC.
+    #   The ID of the requester VPC. You must specify this parameter in the
+    #   request.
+    # @option options [String] :peer_region
+    #   The region code for the accepter VPC, if the accepter VPC is located
+    #   in a region other than the region in which you make the request.
+    #
+    #   Default: The region in which you make the request.
     # @return [VpcPeeringConnection]
     def create_vpc_peering_connection(options = {})
       resp = @client.create_vpc_peering_connection(options)
@@ -2066,7 +2074,8 @@ module Aws::EC2
     #   * `state` - The state of the placement group (`pending` \| `available`
     #     \| `deleting` \| `deleted`).
     #
-    #   * `strategy` - The strategy of the placement group (`cluster`).
+    #   * `strategy` - The strategy of the placement group (`cluster` \|
+    #     `spread`).
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2765,13 +2774,13 @@ module Aws::EC2
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the peer
+    #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the accepter
     #     VPC.
     #
     #   * `accepter-vpc-info.owner-id` - The AWS account ID of the owner of
-    #     the peer VPC.
+    #     the accepter VPC.
     #
-    #   * `accepter-vpc-info.vpc-id` - The ID of the peer VPC.
+    #   * `accepter-vpc-info.vpc-id` - The ID of the accepter VPC.
     #
     #   * `expiration-time` - The expiration date and time for the VPC peering
     #     connection.
@@ -2786,7 +2795,7 @@ module Aws::EC2
     #
     #   * `status-code` - The status of the VPC peering connection
     #     (`pending-acceptance` \| `failed` \| `expired` \| `provisioning` \|
-    #     `active` \| `deleted` \| `rejected`).
+    #     `active` \| `deleting` \| `deleted` \| `rejected`).
     #
     #   * `status-message` - A message that provides more information about
     #     the status of the VPC peering connection, if applicable.

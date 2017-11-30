@@ -28,6 +28,7 @@ module Aws::Lambda
     BlobStream = Shapes::BlobShape.new(name: 'BlobStream')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CodeStorageExceededException = Shapes::StructureShape.new(name: 'CodeStorageExceededException')
+    Concurrency = Shapes::StructureShape.new(name: 'Concurrency')
     CreateAliasRequest = Shapes::StructureShape.new(name: 'CreateAliasRequest')
     CreateEventSourceMappingRequest = Shapes::StructureShape.new(name: 'CreateEventSourceMappingRequest')
     CreateFunctionRequest = Shapes::StructureShape.new(name: 'CreateFunctionRequest')
@@ -35,6 +36,7 @@ module Aws::Lambda
     DeadLetterConfig = Shapes::StructureShape.new(name: 'DeadLetterConfig')
     DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
     DeleteEventSourceMappingRequest = Shapes::StructureShape.new(name: 'DeleteEventSourceMappingRequest')
+    DeleteFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'DeleteFunctionConcurrencyRequest')
     DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
     Description = Shapes::StringShape.new(name: 'Description')
     EC2AccessDeniedException = Shapes::StructureShape.new(name: 'EC2AccessDeniedException')
@@ -108,9 +110,11 @@ module Aws::Lambda
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     Principal = Shapes::StringShape.new(name: 'Principal')
     PublishVersionRequest = Shapes::StructureShape.new(name: 'PublishVersionRequest')
+    PutFunctionConcurrencyRequest = Shapes::StructureShape.new(name: 'PutFunctionConcurrencyRequest')
     Qualifier = Shapes::StringShape.new(name: 'Qualifier')
     RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
     RequestTooLargeException = Shapes::StructureShape.new(name: 'RequestTooLargeException')
+    ReservedConcurrentExecutions = Shapes::IntegerShape.new(name: 'ReservedConcurrentExecutions')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -141,6 +145,7 @@ module Aws::Lambda
     TracingConfig = Shapes::StructureShape.new(name: 'TracingConfig')
     TracingConfigResponse = Shapes::StructureShape.new(name: 'TracingConfigResponse')
     TracingMode = Shapes::StringShape.new(name: 'TracingMode')
+    UnreservedConcurrentExecutions = Shapes::IntegerShape.new(name: 'UnreservedConcurrentExecutions')
     UnsupportedMediaTypeException = Shapes::StructureShape.new(name: 'UnsupportedMediaTypeException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAliasRequest = Shapes::StructureShape.new(name: 'UpdateAliasRequest')
@@ -157,6 +162,7 @@ module Aws::Lambda
     AccountLimit.add_member(:code_size_unzipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeUnzipped"))
     AccountLimit.add_member(:code_size_zipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeZipped"))
     AccountLimit.add_member(:concurrent_executions, Shapes::ShapeRef.new(shape: Integer, location_name: "ConcurrentExecutions"))
+    AccountLimit.add_member(:unreserved_concurrent_executions, Shapes::ShapeRef.new(shape: UnreservedConcurrentExecutions, location_name: "UnreservedConcurrentExecutions"))
     AccountLimit.struct_class = Types::AccountLimit
 
     AccountUsage.add_member(:total_code_size, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCodeSize"))
@@ -190,6 +196,9 @@ module Aws::Lambda
 
     AliasRoutingConfiguration.add_member(:additional_version_weights, Shapes::ShapeRef.new(shape: AdditionalVersionWeights, location_name: "AdditionalVersionWeights"))
     AliasRoutingConfiguration.struct_class = Types::AliasRoutingConfiguration
+
+    Concurrency.add_member(:reserved_concurrent_executions, Shapes::ShapeRef.new(shape: ReservedConcurrentExecutions, location_name: "ReservedConcurrentExecutions"))
+    Concurrency.struct_class = Types::Concurrency
 
     CreateAliasRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     CreateAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Alias, required: true, location_name: "Name"))
@@ -232,6 +241,9 @@ module Aws::Lambda
 
     DeleteEventSourceMappingRequest.add_member(:uuid, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "UUID"))
     DeleteEventSourceMappingRequest.struct_class = Types::DeleteEventSourceMappingRequest
+
+    DeleteFunctionConcurrencyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    DeleteFunctionConcurrencyRequest.struct_class = Types::DeleteFunctionConcurrencyRequest
 
     DeleteFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     DeleteFunctionRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
@@ -319,6 +331,7 @@ module Aws::Lambda
     GetFunctionResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "Configuration"))
     GetFunctionResponse.add_member(:code, Shapes::ShapeRef.new(shape: FunctionCodeLocation, location_name: "Code"))
     GetFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    GetFunctionResponse.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, location_name: "Concurrency"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
 
     GetPolicyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: NamespacedFunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -405,6 +418,10 @@ module Aws::Lambda
     PublishVersionRequest.add_member(:code_sha_256, Shapes::ShapeRef.new(shape: String, location_name: "CodeSha256"))
     PublishVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     PublishVersionRequest.struct_class = Types::PublishVersionRequest
+
+    PutFunctionConcurrencyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
+    PutFunctionConcurrencyRequest.add_member(:reserved_concurrent_executions, Shapes::ShapeRef.new(shape: ReservedConcurrentExecutions, required: true, location_name: "ReservedConcurrentExecutions"))
+    PutFunctionConcurrencyRequest.struct_class = Types::PutFunctionConcurrencyRequest
 
     RemovePermissionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     RemovePermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: NamespacedStatementId, required: true, location: "uri", location_name: "StatementId"))
@@ -580,6 +597,18 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+      end)
+
+      api.add_operation(:delete_function_concurrency, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFunctionConcurrency"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2017-10-31/functions/{FunctionName}/concurrency"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFunctionConcurrencyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
       end)
 
       api.add_operation(:get_account_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -775,6 +804,18 @@ module Aws::Lambda
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: CodeStorageExceededException)
+      end)
+
+      api.add_operation(:put_function_concurrency, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFunctionConcurrency"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2017-10-31/functions/{FunctionName}/concurrency"
+        o.input = Shapes::ShapeRef.new(shape: PutFunctionConcurrencyRequest)
+        o.output = Shapes::ShapeRef.new(shape: Concurrency)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:remove_permission, Seahorse::Model::Operation.new.tap do |o|

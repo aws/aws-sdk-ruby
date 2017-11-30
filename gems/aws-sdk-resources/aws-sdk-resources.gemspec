@@ -15,6 +15,7 @@ Gem::Specification.new do |spec|
   # service gems
   spec.add_dependency('aws-sdk-acm', '~> 1')
   spec.add_dependency('aws-sdk-apigateway', '~> 1')
+  spec.add_dependency('aws-sdk-alexaforbusiness', '~> 1')
   spec.add_dependency('aws-sdk-appstream', '~> 1')
   spec.add_dependency('aws-sdk-appsync', '~> 1')
   spec.add_dependency('aws-sdk-applicationautoscaling', '~> 1')
@@ -23,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-autoscaling', '~> 1')
   spec.add_dependency('aws-sdk-batch', '~> 1')
   spec.add_dependency('aws-sdk-budgets', '~> 1')
+  spec.add_dependency('aws-sdk-cloud9', '~> 1')
   spec.add_dependency('aws-sdk-clouddirectory', '~> 1')
   spec.add_dependency('aws-sdk-cloudformation', '~> 1')
   spec.add_dependency('aws-sdk-cloudfront', '~> 1')
@@ -124,6 +126,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-swf', '~> 1')
   spec.add_dependency('aws-sdk-sagemaker', '~> 1')
   spec.add_dependency('aws-sdk-sagemakerruntime', '~> 1')
+  spec.add_dependency('aws-sdk-serverlessapplicationrepository', '~> 1')
   spec.add_dependency('aws-sdk-servicecatalog', '~> 1')
   spec.add_dependency('aws-sdk-shield', '~> 1')
   spec.add_dependency('aws-sdk-simpledb', '~> 1')
