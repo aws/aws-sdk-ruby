@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.95 (2017-12-01)
+------------------
+
 * Feature - Aws::SageMaker - Updated the waiters for Amazon SageMaker Service.
 
 2.10.94 (2017-11-30)
