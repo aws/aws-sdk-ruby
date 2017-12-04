@@ -4714,7 +4714,7 @@ module Aws::ECS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguidetask-networking.html
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   [2]: https://docs.docker.com/engine/reference/run/#network-settings
     #   @return [String]
     #

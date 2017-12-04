@@ -22,10 +22,16 @@ module Aws::Budgets
     #         cost_filters: {
     #           "GenericString" => ["GenericString"],
     #         },
-    #         cost_types: { # required
-    #           include_tax: false, # required
-    #           include_subscription: false, # required
-    #           use_blended: false, # required
+    #         cost_types: {
+    #           include_tax: false,
+    #           include_subscription: false,
+    #           use_blended: false,
+    #           include_refund: false,
+    #           include_credit: false,
+    #           include_upfront: false,
+    #           include_recurring: false,
+    #           include_other_subscription: false,
+    #           include_support: false,
     #         },
     #         time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #         time_period: { # required
@@ -129,27 +135,65 @@ module Aws::Budgets
     #   data as a hash:
     #
     #       {
-    #         include_tax: false, # required
-    #         include_subscription: false, # required
-    #         use_blended: false, # required
+    #         include_tax: false,
+    #         include_subscription: false,
+    #         use_blended: false,
+    #         include_refund: false,
+    #         include_credit: false,
+    #         include_upfront: false,
+    #         include_recurring: false,
+    #         include_other_subscription: false,
+    #         include_support: false,
     #       }
     #
     # @!attribute [rw] include_tax
-    #   A generic boolean value.
+    #   A boolean value whether to include tax in the cost budget.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_subscription
-    #   A generic boolean value.
+    #   A boolean value whether to include subscriptions in the cost budget.
     #   @return [Boolean]
     #
     # @!attribute [rw] use_blended
-    #   A generic boolean value.
+    #   A boolean value whether to use blended costs in the cost budget.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_refund
+    #   A boolean value whether to include refunds in the cost budget.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_credit
+    #   A boolean value whether to include credits in the cost budget.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_upfront
+    #   A boolean value whether to include upfront costs in the cost budget.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_recurring
+    #   A boolean value whether to include recurring costs in the cost
+    #   budget.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_other_subscription
+    #   A boolean value whether to include other subscription costs in the
+    #   cost budget.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_support
+    #   A boolean value whether to include support costs in the cost budget.
     #   @return [Boolean]
     #
     class CostTypes < Struct.new(
       :include_tax,
       :include_subscription,
-      :use_blended)
+      :use_blended,
+      :include_refund,
+      :include_credit,
+      :include_upfront,
+      :include_recurring,
+      :include_other_subscription,
+      :include_support)
       include Aws::Structure
     end
 
@@ -169,10 +213,16 @@ module Aws::Budgets
     #           cost_filters: {
     #             "GenericString" => ["GenericString"],
     #           },
-    #           cost_types: { # required
-    #             include_tax: false, # required
-    #             include_subscription: false, # required
-    #             use_blended: false, # required
+    #           cost_types: {
+    #             include_tax: false,
+    #             include_subscription: false,
+    #             use_blended: false,
+    #             include_refund: false,
+    #             include_credit: false,
+    #             include_upfront: false,
+    #             include_recurring: false,
+    #             include_other_subscription: false,
+    #             include_support: false,
     #           },
     #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #           time_period: { # required
@@ -202,7 +252,7 @@ module Aws::Budgets
     #             subscribers: [ # required
     #               {
     #                 subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #                 address: "GenericString", # required
+    #                 address: "SubscriberAddress", # required
     #               },
     #             ],
     #           },
@@ -249,7 +299,7 @@ module Aws::Budgets
     #         subscribers: [ # required
     #           {
     #             subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #             address: "GenericString", # required
+    #             address: "SubscriberAddress", # required
     #           },
     #         ],
     #       }
@@ -300,7 +350,7 @@ module Aws::Budgets
     #         },
     #         subscriber: { # required
     #           subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #           address: "GenericString", # required
+    #           address: "SubscriberAddress", # required
     #         },
     #       }
     #
@@ -421,7 +471,7 @@ module Aws::Budgets
     #         },
     #         subscriber: { # required
     #           subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #           address: "GenericString", # required
+    #           address: "SubscriberAddress", # required
     #         },
     #       }
     #
@@ -715,7 +765,7 @@ module Aws::Budgets
     #         subscribers: [ # required
     #           {
     #             subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #             address: "GenericString", # required
+    #             address: "SubscriberAddress", # required
     #           },
     #         ],
     #       }
@@ -769,7 +819,7 @@ module Aws::Budgets
     #
     #       {
     #         subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #         address: "GenericString", # required
+    #         address: "SubscriberAddress", # required
     #       }
     #
     # @!attribute [rw] subscription_type
@@ -777,7 +827,7 @@ module Aws::Budgets
     #   @return [String]
     #
     # @!attribute [rw] address
-    #   A generic String.
+    #   String containing email or sns topic for the subscriber address.
     #   @return [String]
     #
     class Subscriber < Struct.new(
@@ -826,10 +876,16 @@ module Aws::Budgets
     #           cost_filters: {
     #             "GenericString" => ["GenericString"],
     #           },
-    #           cost_types: { # required
-    #             include_tax: false, # required
-    #             include_subscription: false, # required
-    #             use_blended: false, # required
+    #           cost_types: {
+    #             include_tax: false,
+    #             include_subscription: false,
+    #             use_blended: false,
+    #             include_refund: false,
+    #             include_credit: false,
+    #             include_upfront: false,
+    #             include_recurring: false,
+    #             include_other_subscription: false,
+    #             include_support: false,
     #           },
     #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #           time_period: { # required
@@ -937,11 +993,11 @@ module Aws::Budgets
     #         },
     #         old_subscriber: { # required
     #           subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #           address: "GenericString", # required
+    #           address: "SubscriberAddress", # required
     #         },
     #         new_subscriber: { # required
     #           subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #           address: "GenericString", # required
+    #           address: "SubscriberAddress", # required
     #         },
     #       }
     #

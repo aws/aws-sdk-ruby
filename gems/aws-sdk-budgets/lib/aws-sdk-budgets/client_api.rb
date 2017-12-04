@@ -44,7 +44,6 @@ module Aws::Budgets
     DimensionValues = Shapes::ListShape.new(name: 'DimensionValues')
     DuplicateRecordException = Shapes::StructureShape.new(name: 'DuplicateRecordException')
     ExpiredNextTokenException = Shapes::StructureShape.new(name: 'ExpiredNextTokenException')
-    GenericBoolean = Shapes::BooleanShape.new(name: 'GenericBoolean')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
     GenericTimestamp = Shapes::TimestampShape.new(name: 'GenericTimestamp')
     InternalErrorException = Shapes::StructureShape.new(name: 'InternalErrorException')
@@ -58,9 +57,11 @@ module Aws::Budgets
     NotificationWithSubscribers = Shapes::StructureShape.new(name: 'NotificationWithSubscribers')
     NotificationWithSubscribersList = Shapes::ListShape.new(name: 'NotificationWithSubscribersList')
     Notifications = Shapes::ListShape.new(name: 'Notifications')
+    NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NumericValue = Shapes::StringShape.new(name: 'NumericValue')
     Spend = Shapes::StructureShape.new(name: 'Spend')
     Subscriber = Shapes::StructureShape.new(name: 'Subscriber')
+    SubscriberAddress = Shapes::StringShape.new(name: 'SubscriberAddress')
     Subscribers = Shapes::ListShape.new(name: 'Subscribers')
     SubscriptionType = Shapes::StringShape.new(name: 'SubscriptionType')
     ThresholdType = Shapes::StringShape.new(name: 'ThresholdType')
@@ -78,7 +79,7 @@ module Aws::Budgets
     Budget.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     Budget.add_member(:budget_limit, Shapes::ShapeRef.new(shape: Spend, required: true, location_name: "BudgetLimit"))
     Budget.add_member(:cost_filters, Shapes::ShapeRef.new(shape: CostFilters, location_name: "CostFilters"))
-    Budget.add_member(:cost_types, Shapes::ShapeRef.new(shape: CostTypes, required: true, location_name: "CostTypes"))
+    Budget.add_member(:cost_types, Shapes::ShapeRef.new(shape: CostTypes, location_name: "CostTypes"))
     Budget.add_member(:time_unit, Shapes::ShapeRef.new(shape: TimeUnit, required: true, location_name: "TimeUnit"))
     Budget.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, required: true, location_name: "TimePeriod"))
     Budget.add_member(:calculated_spend, Shapes::ShapeRef.new(shape: CalculatedSpend, location_name: "CalculatedSpend"))
@@ -94,9 +95,15 @@ module Aws::Budgets
     CostFilters.key = Shapes::ShapeRef.new(shape: GenericString)
     CostFilters.value = Shapes::ShapeRef.new(shape: DimensionValues)
 
-    CostTypes.add_member(:include_tax, Shapes::ShapeRef.new(shape: GenericBoolean, required: true, location_name: "IncludeTax"))
-    CostTypes.add_member(:include_subscription, Shapes::ShapeRef.new(shape: GenericBoolean, required: true, location_name: "IncludeSubscription"))
-    CostTypes.add_member(:use_blended, Shapes::ShapeRef.new(shape: GenericBoolean, required: true, location_name: "UseBlended"))
+    CostTypes.add_member(:include_tax, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeTax"))
+    CostTypes.add_member(:include_subscription, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeSubscription"))
+    CostTypes.add_member(:use_blended, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "UseBlended"))
+    CostTypes.add_member(:include_refund, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeRefund"))
+    CostTypes.add_member(:include_credit, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeCredit"))
+    CostTypes.add_member(:include_upfront, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeUpfront"))
+    CostTypes.add_member(:include_recurring, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeRecurring"))
+    CostTypes.add_member(:include_other_subscription, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeOtherSubscription"))
+    CostTypes.add_member(:include_support, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeSupport"))
     CostTypes.struct_class = Types::CostTypes
 
     CreateBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
@@ -201,7 +208,7 @@ module Aws::Budgets
     Spend.struct_class = Types::Spend
 
     Subscriber.add_member(:subscription_type, Shapes::ShapeRef.new(shape: SubscriptionType, required: true, location_name: "SubscriptionType"))
-    Subscriber.add_member(:address, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "Address"))
+    Subscriber.add_member(:address, Shapes::ShapeRef.new(shape: SubscriberAddress, required: true, location_name: "Address"))
     Subscriber.struct_class = Types::Subscriber
 
     Subscribers.member = Shapes::ShapeRef.new(shape: Subscriber)

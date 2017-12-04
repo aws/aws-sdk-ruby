@@ -181,10 +181,16 @@ module Aws::Budgets
     #       cost_filters: {
     #         "GenericString" => ["GenericString"],
     #       },
-    #       cost_types: { # required
-    #         include_tax: false, # required
-    #         include_subscription: false, # required
-    #         use_blended: false, # required
+    #       cost_types: {
+    #         include_tax: false,
+    #         include_subscription: false,
+    #         use_blended: false,
+    #         include_refund: false,
+    #         include_credit: false,
+    #         include_upfront: false,
+    #         include_recurring: false,
+    #         include_other_subscription: false,
+    #         include_support: false,
     #       },
     #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #       time_period: { # required
@@ -214,7 +220,7 @@ module Aws::Budgets
     #         subscribers: [ # required
     #           {
     #             subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #             address: "GenericString", # required
+    #             address: "SubscriberAddress", # required
     #           },
     #         ],
     #       },
@@ -260,7 +266,7 @@ module Aws::Budgets
     #     subscribers: [ # required
     #       {
     #         subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #         address: "GenericString", # required
+    #         address: "SubscriberAddress", # required
     #       },
     #     ],
     #   })
@@ -304,7 +310,7 @@ module Aws::Budgets
     #     },
     #     subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #       address: "GenericString", # required
+    #       address: "SubscriberAddress", # required
     #     },
     #   })
     #
@@ -407,7 +413,7 @@ module Aws::Budgets
     #     },
     #     subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #       address: "GenericString", # required
+    #       address: "SubscriberAddress", # required
     #     },
     #   })
     #
@@ -449,6 +455,12 @@ module Aws::Budgets
     #   resp.budget.cost_types.include_tax #=> Boolean
     #   resp.budget.cost_types.include_subscription #=> Boolean
     #   resp.budget.cost_types.use_blended #=> Boolean
+    #   resp.budget.cost_types.include_refund #=> Boolean
+    #   resp.budget.cost_types.include_credit #=> Boolean
+    #   resp.budget.cost_types.include_upfront #=> Boolean
+    #   resp.budget.cost_types.include_recurring #=> Boolean
+    #   resp.budget.cost_types.include_other_subscription #=> Boolean
+    #   resp.budget.cost_types.include_support #=> Boolean
     #   resp.budget.time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
     #   resp.budget.time_period.start #=> Time
     #   resp.budget.time_period.end #=> Time
@@ -502,6 +514,12 @@ module Aws::Budgets
     #   resp.budgets[0].cost_types.include_tax #=> Boolean
     #   resp.budgets[0].cost_types.include_subscription #=> Boolean
     #   resp.budgets[0].cost_types.use_blended #=> Boolean
+    #   resp.budgets[0].cost_types.include_refund #=> Boolean
+    #   resp.budgets[0].cost_types.include_credit #=> Boolean
+    #   resp.budgets[0].cost_types.include_upfront #=> Boolean
+    #   resp.budgets[0].cost_types.include_recurring #=> Boolean
+    #   resp.budgets[0].cost_types.include_other_subscription #=> Boolean
+    #   resp.budgets[0].cost_types.include_support #=> Boolean
     #   resp.budgets[0].time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
     #   resp.budgets[0].time_period.start #=> Time
     #   resp.budgets[0].time_period.end #=> Time
@@ -642,10 +660,16 @@ module Aws::Budgets
     #       cost_filters: {
     #         "GenericString" => ["GenericString"],
     #       },
-    #       cost_types: { # required
-    #         include_tax: false, # required
-    #         include_subscription: false, # required
-    #         use_blended: false, # required
+    #       cost_types: {
+    #         include_tax: false,
+    #         include_subscription: false,
+    #         use_blended: false,
+    #         include_refund: false,
+    #         include_credit: false,
+    #         include_upfront: false,
+    #         include_recurring: false,
+    #         include_other_subscription: false,
+    #         include_support: false,
     #       },
     #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #       time_period: { # required
@@ -754,11 +778,11 @@ module Aws::Budgets
     #     },
     #     old_subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #       address: "GenericString", # required
+    #       address: "SubscriberAddress", # required
     #     },
     #     new_subscriber: { # required
     #       subscription_type: "SNS", # required, accepts SNS, EMAIL
-    #       address: "GenericString", # required
+    #       address: "SubscriberAddress", # required
     #     },
     #   })
     #
@@ -782,7 +806,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
