@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.96 (2017-12-04)
+------------------
+
 * Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
 
 * Feature - Aws::ECS - Updated the documentation for Amazon EC2 Container Service.
