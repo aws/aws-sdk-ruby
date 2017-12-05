@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+* Feature - Aws::ServiceDiscovery - Added support for a new service, Amazon Route 53 Auto Naming.
+
 2.10.96 (2017-12-04)
 ------------------
 

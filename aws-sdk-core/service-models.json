@@ -462,6 +462,10 @@
     "models": "servicecatalog/2015-12-10",
     "endpoint": "servicecatalog"
   },
+  "ServiceDiscovery": {
+    "models": "servicediscovery/2017-03-14",
+    "endpoint": "servicediscovery"
+  },
   "Shield": {
     "models": "shield/2016-06-02",
     "endpoint": "shield"

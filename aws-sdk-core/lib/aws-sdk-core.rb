@@ -139,6 +139,7 @@ module Aws
     SageMakerRuntime
     ServerlessApplicationRepository
     ServiceCatalog
+    ServiceDiscovery
     Shield
     SimpleDB
     Snowball

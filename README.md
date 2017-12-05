@@ -364,6 +364,7 @@ to be backwards compatible.
 | Amazon Rekognition                          | Rekognition                     | 2016-06-27  |
 | Amazon Relational Database Service          | RDS                             | 2014-10-31  |
 | Amazon Route 53                             | Route53                         | 2013-04-01  |
+| Amazon Route 53 Auto Naming                 | ServiceDiscovery                | 2017-03-14  |
 | Amazon Route 53 Domains                     | Route53Domains                  | 2014-05-15  |
 | Amazon SageMaker Runtime                    | SageMakerRuntime                | 2017-05-13  |
 | Amazon SageMaker Service                    | SageMaker                       | 2017-07-24  |
