@@ -1010,6 +1010,84 @@ module Aws::IoT
     #       ],
     #       rule_disabled: false,
     #       aws_iot_sql_version: "AwsIotSqlVersion",
+    #       error_action: {
+    #         dynamo_db: {
+    #           table_name: "TableName", # required
+    #           role_arn: "AwsArn", # required
+    #           operation: "DynamoOperation",
+    #           hash_key_field: "HashKeyField", # required
+    #           hash_key_value: "HashKeyValue", # required
+    #           hash_key_type: "STRING", # accepts STRING, NUMBER
+    #           range_key_field: "RangeKeyField",
+    #           range_key_value: "RangeKeyValue",
+    #           range_key_type: "STRING", # accepts STRING, NUMBER
+    #           payload_field: "PayloadField",
+    #         },
+    #         dynamo_d_bv_2: {
+    #           role_arn: "AwsArn",
+    #           put_item: {
+    #             table_name: "TableName", # required
+    #           },
+    #         },
+    #         lambda: {
+    #           function_arn: "FunctionArn", # required
+    #         },
+    #         sns: {
+    #           target_arn: "AwsArn", # required
+    #           role_arn: "AwsArn", # required
+    #           message_format: "RAW", # accepts RAW, JSON
+    #         },
+    #         sqs: {
+    #           role_arn: "AwsArn", # required
+    #           queue_url: "QueueUrl", # required
+    #           use_base_64: false,
+    #         },
+    #         kinesis: {
+    #           role_arn: "AwsArn", # required
+    #           stream_name: "StreamName", # required
+    #           partition_key: "PartitionKey",
+    #         },
+    #         republish: {
+    #           role_arn: "AwsArn", # required
+    #           topic: "TopicPattern", # required
+    #         },
+    #         s3: {
+    #           role_arn: "AwsArn", # required
+    #           bucket_name: "BucketName", # required
+    #           key: "Key", # required
+    #           canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write
+    #         },
+    #         firehose: {
+    #           role_arn: "AwsArn", # required
+    #           delivery_stream_name: "DeliveryStreamName", # required
+    #           separator: "FirehoseSeparator",
+    #         },
+    #         cloudwatch_metric: {
+    #           role_arn: "AwsArn", # required
+    #           metric_namespace: "MetricNamespace", # required
+    #           metric_name: "MetricName", # required
+    #           metric_value: "MetricValue", # required
+    #           metric_unit: "MetricUnit", # required
+    #           metric_timestamp: "MetricTimestamp",
+    #         },
+    #         cloudwatch_alarm: {
+    #           role_arn: "AwsArn", # required
+    #           alarm_name: "AlarmName", # required
+    #           state_reason: "StateReason", # required
+    #           state_value: "StateValue", # required
+    #         },
+    #         elasticsearch: {
+    #           role_arn: "AwsArn", # required
+    #           endpoint: "ElasticsearchEndpoint", # required
+    #           index: "ElasticsearchIndex", # required
+    #           type: "ElasticsearchType", # required
+    #           id: "ElasticsearchId", # required
+    #         },
+    #         salesforce: {
+    #           token: "SalesforceToken", # required
+    #           url: "SalesforceEndpoint", # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -1396,8 +1474,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets information about the specified certificate. You may specify the
-    # certificate using either its ID or PEM.
+    # Gets information about the specified certificate.
     #
     # @option params [required, String] :certificate_id
     #   The ID of the certificate.
@@ -2214,6 +2291,54 @@ module Aws::IoT
     #   resp.rule.actions[0].salesforce.url #=> String
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
+    #   resp.rule.error_action.dynamo_db.table_name #=> String
+    #   resp.rule.error_action.dynamo_db.role_arn #=> String
+    #   resp.rule.error_action.dynamo_db.operation #=> String
+    #   resp.rule.error_action.dynamo_db.hash_key_field #=> String
+    #   resp.rule.error_action.dynamo_db.hash_key_value #=> String
+    #   resp.rule.error_action.dynamo_db.hash_key_type #=> String, one of "STRING", "NUMBER"
+    #   resp.rule.error_action.dynamo_db.range_key_field #=> String
+    #   resp.rule.error_action.dynamo_db.range_key_value #=> String
+    #   resp.rule.error_action.dynamo_db.range_key_type #=> String, one of "STRING", "NUMBER"
+    #   resp.rule.error_action.dynamo_db.payload_field #=> String
+    #   resp.rule.error_action.dynamo_d_bv_2.role_arn #=> String
+    #   resp.rule.error_action.dynamo_d_bv_2.put_item.table_name #=> String
+    #   resp.rule.error_action.lambda.function_arn #=> String
+    #   resp.rule.error_action.sns.target_arn #=> String
+    #   resp.rule.error_action.sns.role_arn #=> String
+    #   resp.rule.error_action.sns.message_format #=> String, one of "RAW", "JSON"
+    #   resp.rule.error_action.sqs.role_arn #=> String
+    #   resp.rule.error_action.sqs.queue_url #=> String
+    #   resp.rule.error_action.sqs.use_base_64 #=> Boolean
+    #   resp.rule.error_action.kinesis.role_arn #=> String
+    #   resp.rule.error_action.kinesis.stream_name #=> String
+    #   resp.rule.error_action.kinesis.partition_key #=> String
+    #   resp.rule.error_action.republish.role_arn #=> String
+    #   resp.rule.error_action.republish.topic #=> String
+    #   resp.rule.error_action.s3.role_arn #=> String
+    #   resp.rule.error_action.s3.bucket_name #=> String
+    #   resp.rule.error_action.s3.key #=> String
+    #   resp.rule.error_action.s3.canned_acl #=> String, one of "private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control", "log-delivery-write"
+    #   resp.rule.error_action.firehose.role_arn #=> String
+    #   resp.rule.error_action.firehose.delivery_stream_name #=> String
+    #   resp.rule.error_action.firehose.separator #=> String
+    #   resp.rule.error_action.cloudwatch_metric.role_arn #=> String
+    #   resp.rule.error_action.cloudwatch_metric.metric_namespace #=> String
+    #   resp.rule.error_action.cloudwatch_metric.metric_name #=> String
+    #   resp.rule.error_action.cloudwatch_metric.metric_value #=> String
+    #   resp.rule.error_action.cloudwatch_metric.metric_unit #=> String
+    #   resp.rule.error_action.cloudwatch_metric.metric_timestamp #=> String
+    #   resp.rule.error_action.cloudwatch_alarm.role_arn #=> String
+    #   resp.rule.error_action.cloudwatch_alarm.alarm_name #=> String
+    #   resp.rule.error_action.cloudwatch_alarm.state_reason #=> String
+    #   resp.rule.error_action.cloudwatch_alarm.state_value #=> String
+    #   resp.rule.error_action.elasticsearch.role_arn #=> String
+    #   resp.rule.error_action.elasticsearch.endpoint #=> String
+    #   resp.rule.error_action.elasticsearch.index #=> String
+    #   resp.rule.error_action.elasticsearch.type #=> String
+    #   resp.rule.error_action.elasticsearch.id #=> String
+    #   resp.rule.error_action.salesforce.token #=> String
+    #   resp.rule.error_action.salesforce.url #=> String
     #
     # @overload get_topic_rule(params = {})
     # @param [Hash] params ({})
@@ -3698,6 +3823,84 @@ module Aws::IoT
     #       ],
     #       rule_disabled: false,
     #       aws_iot_sql_version: "AwsIotSqlVersion",
+    #       error_action: {
+    #         dynamo_db: {
+    #           table_name: "TableName", # required
+    #           role_arn: "AwsArn", # required
+    #           operation: "DynamoOperation",
+    #           hash_key_field: "HashKeyField", # required
+    #           hash_key_value: "HashKeyValue", # required
+    #           hash_key_type: "STRING", # accepts STRING, NUMBER
+    #           range_key_field: "RangeKeyField",
+    #           range_key_value: "RangeKeyValue",
+    #           range_key_type: "STRING", # accepts STRING, NUMBER
+    #           payload_field: "PayloadField",
+    #         },
+    #         dynamo_d_bv_2: {
+    #           role_arn: "AwsArn",
+    #           put_item: {
+    #             table_name: "TableName", # required
+    #           },
+    #         },
+    #         lambda: {
+    #           function_arn: "FunctionArn", # required
+    #         },
+    #         sns: {
+    #           target_arn: "AwsArn", # required
+    #           role_arn: "AwsArn", # required
+    #           message_format: "RAW", # accepts RAW, JSON
+    #         },
+    #         sqs: {
+    #           role_arn: "AwsArn", # required
+    #           queue_url: "QueueUrl", # required
+    #           use_base_64: false,
+    #         },
+    #         kinesis: {
+    #           role_arn: "AwsArn", # required
+    #           stream_name: "StreamName", # required
+    #           partition_key: "PartitionKey",
+    #         },
+    #         republish: {
+    #           role_arn: "AwsArn", # required
+    #           topic: "TopicPattern", # required
+    #         },
+    #         s3: {
+    #           role_arn: "AwsArn", # required
+    #           bucket_name: "BucketName", # required
+    #           key: "Key", # required
+    #           canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write
+    #         },
+    #         firehose: {
+    #           role_arn: "AwsArn", # required
+    #           delivery_stream_name: "DeliveryStreamName", # required
+    #           separator: "FirehoseSeparator",
+    #         },
+    #         cloudwatch_metric: {
+    #           role_arn: "AwsArn", # required
+    #           metric_namespace: "MetricNamespace", # required
+    #           metric_name: "MetricName", # required
+    #           metric_value: "MetricValue", # required
+    #           metric_unit: "MetricUnit", # required
+    #           metric_timestamp: "MetricTimestamp",
+    #         },
+    #         cloudwatch_alarm: {
+    #           role_arn: "AwsArn", # required
+    #           alarm_name: "AlarmName", # required
+    #           state_reason: "StateReason", # required
+    #           state_value: "StateValue", # required
+    #         },
+    #         elasticsearch: {
+    #           role_arn: "AwsArn", # required
+    #           endpoint: "ElasticsearchEndpoint", # required
+    #           index: "ElasticsearchIndex", # required
+    #           type: "ElasticsearchType", # required
+    #           id: "ElasticsearchId", # required
+    #         },
+    #         salesforce: {
+    #           token: "SalesforceToken", # required
+    #           url: "SalesforceEndpoint", # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -4457,7 +4660,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

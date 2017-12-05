@@ -8,15 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-iot/types'
-require_relative 'aws-sdk-iot/client_api'
-require_relative 'aws-sdk-iot/client'
-require_relative 'aws-sdk-iot/errors'
-require_relative 'aws-sdk-iot/resource'
-require_relative 'aws-sdk-iot/customizations'
+require_relative 'aws-sdk-servicediscovery/types'
+require_relative 'aws-sdk-servicediscovery/client_api'
+require_relative 'aws-sdk-servicediscovery/client'
+require_relative 'aws-sdk-servicediscovery/errors'
+require_relative 'aws-sdk-servicediscovery/resource'
+require_relative 'aws-sdk-servicediscovery/customizations'
 
-# This module provides support for AWS IoT. This module is available in the
-# `aws-sdk-iot` gem.
+# This module provides support for Amazon Route 53 Auto Naming. This module is available in the
+# `aws-sdk-servicediscovery` gem.
 #
 # # Client
 #
@@ -28,20 +28,20 @@ require_relative 'aws-sdk-iot/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS IoT all
+# Errors returned from Amazon Route 53 Auto Naming all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::IoT::Errors::ServiceError
+#     rescue Aws::ServiceDiscovery::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::IoT
+module Aws::ServiceDiscovery
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.0.0'
 
 end

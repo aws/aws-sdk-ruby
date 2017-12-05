@@ -155,7 +155,7 @@ module Aws::ServiceCatalog
 
     # @!group API Operations
 
-    # Accepts an offer to share a portfolio.
+    # Accepts an offer to share the specified portfolio.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -202,10 +202,10 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :principal_arn
-    #   The ARN representing the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group).
     #
     # @option params [required, String] :principal_type
-    #   The principal type. Must be `IAM`
+    #   The principal type. The supported value is `IAM`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -227,7 +227,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Associates a product with a portfolio.
+    # Associates the specified product with the specified portfolio.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -245,7 +245,7 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [String] :source_portfolio_id
-    #   The identifier of the source portfolio to use with this association.
+    #   The identifier of the source portfolio.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -267,7 +267,8 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Associate a TagOption identifier with a resource identifier.
+    # Associate the specified TagOption with the specified portfolio or
+    # product.
     #
     # @option params [required, String] :resource_id
     #   The resource identifier.
@@ -296,8 +297,8 @@ module Aws::ServiceCatalog
     # Copies the specified source product to the specified target product or
     # a new product.
     #
-    # You can copy the product to the same account or another account. You
-    # can copy the product to the same region or another region.
+    # You can copy a product to the same account or another account. You can
+    # copy a product to the same region or another region.
     #
     # This operation is performed asynchronously. To track the progress of
     # the operation, use DescribeCopyProductStatus.
@@ -315,24 +316,26 @@ module Aws::ServiceCatalog
     #   The Amazon Resource Name (ARN) of the source product.
     #
     # @option params [String] :target_product_id
-    #   The ID of the target product. By default, a new product is created.
+    #   The identifier of the target product. By default, a new product is
+    #   created.
     #
     # @option params [String] :target_product_name
     #   A name for the target product. The default is the name of the source
     #   product.
     #
     # @option params [Array<Hash>] :source_provisioning_artifact_identifiers
-    #   The IDs of the product versions to copy. By default, all provisioning
-    #   artifacts are copied.
+    #   The identifiers of the provisioning artifacts (also known as versions)
+    #   of the product to copy. By default, all provisioning artifacts are
+    #   copied.
     #
     # @option params [Array<String>] :copy_options
     #   The copy options. If the value is `CopyTags`, the tags from the source
     #   product are copied to the target product.
     #
     # @option params [required, String] :idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same input
-    #   in multiple requests, provided that you also specify a different
-    #   idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -370,12 +373,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Creates a new constraint. For more information, see [Using
-    # Constraints][1].
-    #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints.html
+    # Creates a constraint.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -393,26 +391,47 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, String] :parameters
-    #   The constraint parameters. Expected values vary depending on which
-    #   **Type** is specified. For more information, see the Examples section.
+    #   The constraint parameters, in JSON format. The syntax depends on the
+    #   constraint type as follows:
     #
-    #   For Type `LAUNCH`, the `RoleArn` property is required.
+    #   LAUNCH
     #
-    #   For Type `NOTIFICATION`, the `NotificationArns` property is required.
+    #   : Specify the `RoleArn` property as follows:
     #
-    #   For Type `TEMPLATE`, the `Rules` property is required.
+    #     \\"RoleArn\\" : \\"arn:aws:iam::123456789012:role/LaunchRole\\"
+    #
+    #   NOTIFICATION
+    #
+    #   : Specify the `NotificationArns` property as follows:
+    #
+    #     \\"NotificationArns\\" :
+    #     \[\\"arn:aws:sns:us-east-1:123456789012:Topic\\"\]
+    #
+    #   TEMPLATE
+    #
+    #   : Specify the `Rules` property. For more information, see [Template
+    #     Constraint Rules][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html
     #
     # @option params [required, String] :type
-    #   The type of the constraint. Case-sensitive valid values are: `LAUNCH`,
-    #   `NOTIFICATION`, or `TEMPLATE`.
+    #   The type of constraint.
+    #
+    #   * `LAUNCH`
+    #
+    #   * `NOTIFICATION`
+    #
+    #   * `TEMPLATE`
     #
     # @option params [String] :description
-    #   The text description of the constraint.
+    #   The description of the constraint.
     #
     # @option params [required, String] :idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same input
-    #   in multiple requests, provided that you also specify a different
-    #   idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -453,7 +472,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Creates a new portfolio.
+    # Creates a portfolio.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -468,18 +487,18 @@ module Aws::ServiceCatalog
     #   The name to use for display purposes.
     #
     # @option params [String] :description
-    #   The text description of the portfolio.
+    #   The description of the portfolio.
     #
     # @option params [required, String] :provider_name
     #   The name of the portfolio provider.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to associate with the new portfolio.
+    #   The tags to associate with the portfolio.
     #
     # @option params [required, String] :idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same input
-    #   in multiple requests, provided that you also specify a different
-    #   idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -526,7 +545,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Creates a new portfolio share.
+    # Shares the specified portfolio with the specified account.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -541,7 +560,7 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :account_id
-    #   The account ID with which to share the portfolio.
+    #   The AWS account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -562,7 +581,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Creates a new product.
+    # Creates a product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -580,33 +599,33 @@ module Aws::ServiceCatalog
     #   The owner of the product.
     #
     # @option params [String] :description
-    #   The text description of the product.
+    #   The description of the product.
     #
     # @option params [String] :distributor
     #   The distributor of the product.
     #
     # @option params [String] :support_description
-    #   Support information about the product.
+    #   The support information about the product.
     #
     # @option params [String] :support_email
-    #   Contact email for product support.
+    #   The contact email for product support.
     #
     # @option params [String] :support_url
-    #   Contact URL for product support.
+    #   The contact URL for product support.
     #
     # @option params [required, String] :product_type
-    #   The type of the product to create.
+    #   The type of product.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags to associate with the new product.
+    #   The tags to associate with the product.
     #
     # @option params [required, Types::ProvisioningArtifactProperties] :provisioning_artifact_parameters
-    #   Parameters for the provisioning artifact.
+    #   The configuration of the provisioning artifact.
     #
     # @option params [required, String] :idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same input
-    #   in multiple requests, provided that you also specify a different
-    #   idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -667,6 +686,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.description #=> String
     #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
+    #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -680,8 +700,11 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Create a new provisioning artifact for the specified product. This
-    # operation does not work with a product that has been shared with you.
+    # Creates a provisioning artifact (also known as a version) for the
+    # specified product.
+    #
+    # You cannot create a provisioning artifact for a product that was
+    # shared with you.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -696,12 +719,12 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, Types::ProvisioningArtifactProperties] :parameters
-    #   The parameters to use when creating the new provisioning artifact.
+    #   The configuration for the provisioning artifact.
     #
     # @option params [required, String] :idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same input
-    #   in multiple requests, provided that you also specify a different
-    #   idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -735,6 +758,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.description #=> String
     #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
+    #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
@@ -748,7 +772,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Create a new TagOption.
+    # Creates a TagOption.
     #
     # @option params [required, String] :key
     #   The TagOption key.
@@ -795,7 +819,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The identifier of the constraint to delete.
+    #   The identifier of the constraint.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -815,9 +839,10 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Deletes the specified portfolio. This operation does not work with a
-    # portfolio that has been shared with you or if it has products, users,
-    # constraints, or shared accounts associated with it.
+    # Deletes the specified portfolio.
+    #
+    # You cannot delete a portfolio if it was shared with you or if it has
+    # associated products, users, constraints, or shared accounts.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -829,7 +854,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The identifier of the portfolio for the delete request.
+    #   The portfolio identifier.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -849,7 +874,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Deletes the specified portfolio share.
+    # Stops sharing the specified portfolio with the specified account.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -864,7 +889,7 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :account_id
-    #   The account ID associated with the share to delete.
+    #   The AWS account ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -885,9 +910,10 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Deletes the specified product. This operation does not work with a
-    # product that has been shared with you or is associated with a
-    # portfolio.
+    # Deletes the specified product.
+    #
+    # You cannot delete a product if it was shared with you or is associated
+    # with a portfolio.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -899,7 +925,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The identifier of the product for the delete request.
+    #   The product identifier.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -919,11 +945,13 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Deletes the specified provisioning artifact. This operation does not
-    # work on a provisioning artifact associated with a product that has
-    # been shared with you, or on the last provisioning artifact associated
-    # with a product (a product must have at least one provisioning
-    # artifact).
+    # Deletes the specified provisioning artifact (also known as a version)
+    # for the specified product.
+    #
+    # You cannot delete a provisioning artifact associated with a product
+    # that was shared with you. You cannot delete the last provisioning
+    # artifact for a product, because a product must have at least one
+    # provisioning artifact.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -938,8 +966,7 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, String] :provisioning_artifact_id
-    #   The identifier of the provisioning artifact for the delete request.
-    #   This is sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -960,7 +987,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieves detailed information for a specified constraint.
+    # Gets information about the specified constraint.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1005,7 +1032,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Describes the status of the specified copy product operation.
+    # Gets the status of the specified copy product operation.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1017,8 +1044,8 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :copy_product_token
-    #   The token returned from the call to `CopyProduct` that initiated the
-    #   operation.
+    #   The token for the copy product operation. This token is returned by
+    #   CopyProduct.
     #
     # @return [Types::DescribeCopyProductStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1048,8 +1075,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieves detailed information and any tags associated with the
-    # specified portfolio.
+    # Gets information about the specified portfolio.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1061,7 +1087,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The identifier of the portfolio for which to retrieve information.
+    #   The portfolio identifier.
     #
     # @return [Types::DescribePortfolioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1102,10 +1128,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieves information about a specified product.
-    #
-    # This operation is functionally identical to DescribeProductView except
-    # that it takes as input `ProductId` instead of `ProductViewId`.
+    # Gets information about the specified product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1117,7 +1140,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The `ProductId` of the product to describe.
+    #   The product identifier.
     #
     # @return [Types::DescribeProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1159,8 +1182,8 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieves information about a specified product, run with
-    # administrator access.
+    # Gets information about the specified product. This operation is run
+    # with administrator access.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1172,7 +1195,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The identifier of the product for which to retrieve information.
+    #   The product identifier.
     #
     # @return [Types::DescribeProductAsAdminOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1229,10 +1252,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieves information about a specified product.
-    #
-    # This operation is functionally identical to DescribeProduct except
-    # that it takes as input `ProductViewId` instead of `ProductId`.
+    # Gets information about the specified product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1244,7 +1264,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The `ProductViewId` of the product to describe.
+    #   The product view identifier.
     #
     # @return [Types::DescribeProductViewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1286,7 +1306,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieve detailed information about the provisioned product.
+    # Gets information about the specified provisioned product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1332,8 +1352,8 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieves detailed information about the specified provisioning
-    # artifact.
+    # Gets information about the specified provisioning artifact (also known
+    # as a version) for the specified product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1345,14 +1365,13 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :provisioning_artifact_id
-    #   The identifier of the provisioning artifact. This is sometimes
-    #   referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #
     # @option params [required, String] :product_id
     #   The product identifier.
     #
     # @option params [Boolean] :verbose
-    #   Enable a verbose level of details for the provisioning artifact.
+    #   Indicates whether a verbose level of detail is enabled.
     #
     # @return [Types::DescribeProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1376,6 +1395,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.description #=> String
     #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
+    #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
@@ -1389,21 +1409,17 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Provides information about parameters required to provision a
-    # specified product in a specified manner. Use this operation to obtain
-    # the list of `ProvisioningArtifactParameters` parameters available to
-    # call the ProvisionProduct operation for the specified product.
+    # Gets information about the configuration required to provision the
+    # specified product using the specified provisioning artifact.
     #
     # If the output contains a TagOption key with an empty list of values,
     # there is a TagOption conflict for that key. The end user cannot take
     # action to fix the conflict, and launch is not blocked. In subsequent
-    # calls to the `ProvisionProduct` operation, do not include conflicted
-    # TagOption keys as tags. Calls to `ProvisionProduct` with empty
-    # TagOption values cause the error "Parameter validation failed:
-    # Missing required parameter in Tags\[*N*\]:*Value* ". Calls to
-    # `ProvisionProduct` with conflicted TagOption keys automatically tag
-    # the provisioned product with the conflicted keys with the value
-    # "`sc-tagoption-conflict-portfolioId-productId`".
+    # calls to ProvisionProduct, do not include conflicted TagOption keys as
+    # tags, or this will cause the error "Parameter validation failed:
+    # Missing required parameter in Tags\[*N*\]:*Value*" and tag the
+    # provisioned product with the value
+    # `sc-tagoption-conflict-portfolioId-productId`.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1418,13 +1434,12 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, String] :provisioning_artifact_id
-    #   The provisioning artifact identifier for this product. This is
-    #   sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #
     # @option params [String] :path_id
-    #   The identifier of the path for this product's provisioning. This
-    #   value is optional if the product has a default path, and is required
-    #   if there is more than one path for the specified product.
+    #   The path identifier of the product. This value is optional if the
+    #   product has a default path, and required if the product has more than
+    #   one path. To list the paths for a product, use ListLaunchPaths.
     #
     # @return [Types::DescribeProvisioningParametersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1472,9 +1487,10 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieves a paginated list of the full details of a specific request.
-    # Use this operation after calling a request operation
-    # (ProvisionProduct, TerminateProvisionedProduct, or
+    # Gets information about the specified request operation.
+    #
+    # Use this operation after calling a request operation (for example,
+    # ProvisionProduct, TerminateProvisionedProduct, or
     # UpdateProvisionedProduct).
     #
     # @option params [String] :accept_language
@@ -1487,18 +1503,15 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The record identifier of the ProvisionedProduct object for which to
-    #   retrieve output information. This is the `RecordDetail.RecordId`
-    #   obtained from the request operation's response.
+    #   The record identifier of the provisioned product. This identifier is
+    #   returned by the request operation.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @return [Types::DescribeRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1549,10 +1562,10 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Describes a TagOption.
+    # Gets information about the specified TagOption.
     #
     # @option params [required, String] :id
-    #   The identifier of the TagOption.
+    #   The TagOption identifier.
     #
     # @return [Types::DescribeTagOptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1596,7 +1609,7 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [required, String] :principal_arn
-    #   The ARN representing the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1653,13 +1666,13 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Disassociates a TagOption from a resource.
+    # Disassociates the specified TagOption from the specified resource.
     #
     # @option params [required, String] :resource_id
-    #   Identifier of the resource from which to disassociate the TagOption.
+    #   The resource identifier.
     #
     # @option params [required, String] :tag_option_id
-    #   Identifier of the TagOption to disassociate from the resource.
+    #   The TagOption identifier.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1679,8 +1692,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Lists details of all portfolios for which sharing was accepted by this
-    # account.
+    # Lists all portfolios for which sharing was accepted by this account.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1692,13 +1704,11 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @return [Types::ListAcceptedPortfolioSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1733,8 +1743,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieves detailed constraint information for the specified portfolio
-    # and product.
+    # Lists the constraints for the specified portfolio and product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1752,13 +1761,11 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @return [Types::ListConstraintsForPortfolioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1793,10 +1800,9 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Returns a paginated list of all paths to a specified product. A path
-    # is how the user has access to a specified product, and is necessary
-    # when provisioning a product. A path also determines the constraints
-    # put on the product.
+    # Lists the paths to the specified product. A path is how the user has
+    # access to a specified product, and is necessary when provisioning a
+    # product. A path also determines the constraints put on the product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1808,17 +1814,14 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :product_id
-    #   The product identifier. Identifies the product for which to retrieve
-    #   `LaunchPathSummaries` information.
+    #   The product identifier.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @return [Types::ListLaunchPathsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1856,8 +1859,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Lists the account IDs that have been authorized sharing of the
-    # specified portfolio.
+    # Lists the account IDs that have access to the specified portfolio.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1910,13 +1912,11 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @return [Types::ListPortfoliosOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1966,13 +1966,11 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @return [Types::ListPortfoliosForProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2023,13 +2021,11 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @return [Types::ListPrincipalsForPortfolioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2061,8 +2057,8 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Lists all provisioning artifacts associated with the specified
-    # product.
+    # Lists all provisioning artifacts (also known as versions) for the
+    # specified product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2096,6 +2092,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_details[0].description #=> String
     #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_details[0].created_time #=> Time
+    #   resp.provisioning_artifact_details[0].active #=> Boolean
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifacts AWS API Documentation
@@ -2107,8 +2104,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Returns a paginated list of all performed requests, in the form of
-    # RecordDetails objects that are filtered as specified.
+    # Lists the specified requests or all performed requests.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2120,20 +2116,17 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [Types::AccessLevelFilter] :access_level_filter
-    #   The access level for obtaining results. If left unspecified, `User`
-    #   level access is used.
+    #   The access level to use to obtain results. The default is `User`.
     #
     # @option params [Types::ListRecordHistorySearchFilter] :search_filter
-    #   The filter to limit search results.
+    #   The search filter to scope the results.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @return [Types::ListRecordHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2187,22 +2180,24 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Lists resources associated with a TagOption.
+    # Lists the resources associated with the specified TagOption.
     #
     # @option params [required, String] :tag_option_id
-    #   Identifier of the TagOption.
+    #   The TagOption identifier.
     #
     # @option params [String] :resource_type
-    #   Resource type.
+    #   The resource type.
+    #
+    #   * `Portfolio`
+    #
+    #   * `Product`
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @return [Types::ListResourcesForTagOptionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2237,20 +2232,18 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Lists detailed TagOptions information.
+    # Lists the specified TagOptions or all TagOptions.
     #
     # @option params [Types::ListTagOptionsFilters] :filters
-    #   The list of filters with which to limit search results. If no search
-    #   filters are specified, the output is all TagOptions.
+    #   The search filters. If no search filters are specified, the output
+    #   includes all TagOptions.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @return [Types::ListTagOptionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2287,20 +2280,17 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Requests a *provision* of a specified product. A *provisioned product*
-    # is a resourced instance for a product. For example, provisioning a
-    # CloudFormation-template-backed product results in launching a
-    # CloudFormation stack and all the underlying resources that come with
-    # it.
+    # Provisions the specified product.
     #
-    # You can check the status of this request using the DescribeRecord
-    # operation. The error "Parameter validation failed: Missing required
-    # parameter in Tags\[*N*\]:*Value*" indicates that your request
-    # contains a tag which has a tag key but no corresponding tag value
-    # (value is empty or null). Your call may have included values returned
-    # from a `DescribeProvisioningParameters` call that resulted in a
-    # TagOption key with an empty list. This happens when TagOption keys are
-    # in conflict. For more information, see DescribeProvisioningParameters.
+    # A provisioned product is a resourced instance of a product. For
+    # example, provisioning a product based on a CloudFormation template
+    # launches a CloudFormation stack and its underlying resources. You can
+    # check the status of this request using DescribeRecord.
+    #
+    # If the request contains a tag key with an empty list of values, there
+    # is a tag conflict for that key. Do not include conflicted keys as
+    # tags, or this will cause the error "Parameter validation failed:
+    # Missing required parameter in Tags\[*N*\]:*Value*".
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2315,25 +2305,24 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, String] :provisioning_artifact_id
-    #   The provisioning artifact identifier for this product. This is
-    #   sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #
     # @option params [String] :path_id
-    #   The identifier of the path for this product's provisioning. This
-    #   value is optional if the product has a default path, and is required
-    #   if there is more than one path for the specified product.
+    #   The path identifier of the product. This value is optional if the
+    #   product has a default path, and required if the product has more than
+    #   one path. To list the paths for a product, use ListLaunchPaths.
     #
     # @option params [required, String] :provisioned_product_name
-    #   A user-friendly name to identify the ProvisionedProduct object. This
-    #   value must be unique for the AWS account and cannot be updated after
-    #   the product is provisioned.
+    #   A user-friendly name for the provisioned product. This value must be
+    #   unique for the AWS account and cannot be updated after the product is
+    #   provisioned.
     #
     # @option params [Array<Types::ProvisioningParameter>] :provisioning_parameters
     #   Parameters specified by the administrator that are required for
     #   provisioning the product.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   A list of tags to use as provisioning options.
+    #   The tags to use as provisioning options.
     #
     # @option params [Array<String>] :notification_arns
     #   Passed to CloudFormation. The SNS topic ARNs to which to publish
@@ -2403,7 +2392,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Rejects an offer to share a portfolio.
+    # Rejects an offer to share the specified portfolio.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2435,8 +2424,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Returns a paginated list of all the ProvisionedProduct objects that
-    # are currently available (not terminated).
+    # Lists the provisioned products that are available (not terminated).
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2448,17 +2436,14 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [Types::AccessLevelFilter] :access_level_filter
-    #   The access level for obtaining results. If left unspecified, `User`
-    #   level access is used.
+    #   The access level to use to obtain results. The default is `User`.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @return [Types::ScanProvisionedProductsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2500,11 +2485,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Returns a paginated list all of the `Products` objects to which the
-    # caller has access.
-    #
-    # The output of this operation can be used as input for other
-    # operations, such as DescribeProductView.
+    # Gets information about the products to which the caller has access.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2516,26 +2497,21 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [Hash<String,Array>] :filters
-    #   The list of filters with which to limit search results. If no search
-    #   filters are specified, the output is all the products to which the
-    #   calling user has access.
+    #   The search filters. If no search filters are specified, the output
+    #   includes all products to which the caller has access.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @option params [String] :sort_by
-    #   The sort field specifier. If no value is specified, results are not
-    #   sorted.
+    #   The sort field. If no value is specified, the results are not sorted.
     #
     # @option params [String] :sort_order
-    #   The sort order specifier. If no value is specified, results are not
-    #   sorted.
+    #   The sort order. If no value is specified, the results are not sorted.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @return [Types::SearchProductsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2585,10 +2561,8 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Retrieves summary and status information about all products created
-    # within the caller's account. If a portfolio ID is provided, this
-    # operation retrieves information for only those products that are
-    # associated with the specified portfolio.
+    # Gets information about the products for the specified portfolio or all
+    # products.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2603,26 +2577,21 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #
     # @option params [Hash<String,Array>] :filters
-    #   The list of filters with which to limit search results. If no search
-    #   filters are specified, the output is all the products to which the
-    #   administrator has access.
+    #   The search filters. If no search filters are specified, the output
+    #   includes all products to which the administrator has access.
     #
     # @option params [String] :sort_by
-    #   The sort field specifier. If no value is specified, results are not
-    #   sorted.
+    #   The sort field. If no value is specified, the results are not sorted.
     #
     # @option params [String] :sort_order
-    #   The sort order specifier. If no value is specified, results are not
-    #   sorted.
+    #   The sort order. If no value is specified, the results are not sorted.
     #
     # @option params [String] :page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
     #
     # @option params [Integer] :page_size
-    #   The maximum number of items to return in the results. If more results
-    #   exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #
     # @option params [String] :product_source
     #   Access level of the source of the product.
@@ -2675,39 +2644,33 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Requests termination of an existing ProvisionedProduct object. If
-    # there are `Tags` associated with the object, they are terminated when
-    # the ProvisionedProduct object is terminated.
+    # Terminates the specified provisioned product.
     #
     # This operation does not delete any records associated with the
-    # ProvisionedProduct object.
+    # provisioned product.
     #
-    # You can check the status of this request using the DescribeRecord
-    # operation.
+    # You can check the status of this request using DescribeRecord.
     #
     # @option params [String] :provisioned_product_name
-    #   The name of the ProvisionedProduct object to terminate. Specify either
-    #   `ProvisionedProductName` or `ProvisionedProductId`, but not both.
+    #   The name of the provisioned product. You cannot specify both
+    #   `ProvisionedProductName` and `ProvisionedProductId`.
     #
     # @option params [String] :provisioned_product_id
-    #   The identifier of the ProvisionedProduct object to terminate. Specify
-    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
-    #   both.
+    #   The identifier of the provisioned product. You cannot specify both
+    #   `ProvisionedProductName` and `ProvisionedProductId`.
     #
     # @option params [required, String] :terminate_token
     #   An idempotency token that uniquely identifies the termination request.
     #   This token is only valid during the termination process. After the
-    #   ProvisionedProduct object is terminated, further requests to terminate
-    #   the same ProvisionedProduct object always return **ResourceNotFound**
-    #   regardless of the value of `TerminateToken`.
+    #   provisioned product is terminated, subsequent requests to terminate
+    #   the same provisioned product always return **ResourceNotFound**.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
     # @option params [Boolean] :ignore_errors
     #   If set to true, AWS Service Catalog stops managing the specified
-    #   ProvisionedProduct object even if it cannot delete the underlying
-    #   resources.
+    #   provisioned product even if it cannot delete the underlying resources.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2761,7 +2724,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Updates an existing constraint.
+    # Updates the specified constraint.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2773,10 +2736,10 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The identifier of the constraint to update.
+    #   The identifier of the constraint.
     #
     # @option params [String] :description
-    #   The updated text description of the constraint.
+    #   The updated description of the constraint.
     #
     # @return [Types::UpdateConstraintOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2810,8 +2773,9 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Updates the specified portfolio's details. This operation does not
-    # work with a product that has been shared with you.
+    # Updates the specified portfolio.
+    #
+    # You cannot update a product that was shared with you.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2823,24 +2787,22 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The identifier of the portfolio for the update request.
+    #   The portfolio identifier.
     #
     # @option params [String] :display_name
     #   The name to use for display purposes.
     #
     # @option params [String] :description
-    #   The updated text description of the portfolio.
+    #   The updated description of the portfolio.
     #
     # @option params [String] :provider_name
     #   The updated name of the portfolio provider.
     #
     # @option params [Array<Types::Tag>] :add_tags
-    #   Tags to add to the existing list of tags associated with the
-    #   portfolio.
+    #   The tags to add.
     #
     # @option params [Array<String>] :remove_tags
-    #   Tags to remove from the existing list of tags associated with the
-    #   portfolio.
+    #   The tags to remove.
     #
     # @return [Types::UpdatePortfolioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2885,7 +2847,7 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Updates an existing product.
+    # Updates the specified product.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2897,7 +2859,7 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [required, String] :id
-    #   The identifier of the product for the update request.
+    #   The product identifier.
     #
     # @option params [String] :name
     #   The updated product name.
@@ -2906,7 +2868,7 @@ module Aws::ServiceCatalog
     #   The updated owner of the product.
     #
     # @option params [String] :description
-    #   The updated text description of the product.
+    #   The updated description of the product.
     #
     # @option params [String] :distributor
     #   The updated distributor of the product.
@@ -2921,11 +2883,10 @@ module Aws::ServiceCatalog
     #   The updated support URL for the product.
     #
     # @option params [Array<Types::Tag>] :add_tags
-    #   Tags to add to the existing list of tags associated with the product.
+    #   The tags to add to the product.
     #
     # @option params [Array<String>] :remove_tags
-    #   Tags to remove from the existing list of tags associated with the
-    #   product.
+    #   The tags to remove from the product.
     #
     # @return [Types::UpdateProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2982,15 +2943,15 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Requests updates to the configuration of an existing
-    # ProvisionedProduct object. If there are tags associated with the
-    # object, they cannot be updated or added with this operation. Depending
-    # on the specific updates requested, this operation may update with no
-    # interruption, with some interruption, or replace the
-    # ProvisionedProduct object entirely.
+    # Requests updates to the configuration of the specified provisioned
+    # product.
     #
-    # You can check the status of this request using the DescribeRecord
-    # operation.
+    # If there are tags associated with the object, they cannot be updated
+    # or added. Depending on the specific updates requested, this operation
+    # can update with no interruption, with some interruption, or replace
+    # the provisioned product entirely.
+    #
+    # You can check the status of this request using DescribeRecord.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -3002,33 +2963,29 @@ module Aws::ServiceCatalog
     #   * `zh` - Chinese
     #
     # @option params [String] :provisioned_product_name
-    #   The updated name of the ProvisionedProduct object. Specify either
-    #   `ProvisionedProductName` or `ProvisionedProductId`, but not both.
+    #   The updated name of the provisioned product. You cannot specify both
+    #   `ProvisionedProductName` and `ProvisionedProductId`.
     #
     # @option params [String] :provisioned_product_id
-    #   The identifier of the ProvisionedProduct object to update. Specify
-    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
-    #   both.
+    #   The identifier of the provisioned product. You cannot specify both
+    #   `ProvisionedProductName` and `ProvisionedProductId`.
     #
     # @option params [String] :product_id
-    #   The identifier of the ProvisionedProduct object.
+    #   The identifier of the provisioned product.
     #
     # @option params [String] :provisioning_artifact_id
-    #   The provisioning artifact identifier for this product. This is
-    #   sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #
     # @option params [String] :path_id
-    #   The identifier of the path to use in the updated ProvisionedProduct
-    #   object. This value is optional if the product has a default path, and
-    #   is required if there is more than one path for the specified product.
+    #   The new path identifier. This value is optional if the product has a
+    #   default path, and required if the product has more than one path.
     #
     # @option params [Array<Types::UpdateProvisioningParameter>] :provisioning_parameters
-    #   A list of `ProvisioningParameter` objects used to update the
-    #   ProvisionedProduct object.
+    #   The new parameters.
     #
     # @option params [required, String] :update_token
     #   The idempotency token that uniquely identifies the provisioning update
-    #   request.
+    #   rquest.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3085,9 +3042,11 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Updates an existing provisioning artifact's information. This
-    # operation does not work on a provisioning artifact associated with a
-    # product that has been shared with you.
+    # Updates the specified provisioning artifact (also known as a version)
+    # for the specified product.
+    #
+    # You cannot update a provisioning artifact for a product that was
+    # shared with you.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -3102,14 +3061,16 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #
     # @option params [required, String] :provisioning_artifact_id
-    #   The identifier of the provisioning artifact for the update request.
-    #   This is sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #
     # @option params [String] :name
     #   The updated name of the provisioning artifact.
     #
     # @option params [String] :description
-    #   The updated text description of the provisioning artifact.
+    #   The updated description of the provisioning artifact.
+    #
+    # @option params [Boolean] :active
+    #   Indicates whether the product version is active.
     #
     # @return [Types::UpdateProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3125,6 +3086,7 @@ module Aws::ServiceCatalog
     #     provisioning_artifact_id: "Id", # required
     #     name: "ProvisioningArtifactName",
     #     description: "ProvisioningArtifactDescription",
+    #     active: false,
     #   })
     #
     # @example Response structure
@@ -3134,6 +3096,7 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_detail.description #=> String
     #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE", "MARKETPLACE_AMI", "MARKETPLACE_CAR"
     #   resp.provisioning_artifact_detail.created_time #=> Time
+    #   resp.provisioning_artifact_detail.active #=> Boolean
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
@@ -3147,10 +3110,10 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Updates an existing TagOption.
+    # Updates the specified TagOption.
     #
     # @option params [required, String] :id
-    #   The identifier of the constraint to update.
+    #   The TagOption identifier.
     #
     # @option params [String] :value
     #   The updated value.
@@ -3199,7 +3162,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

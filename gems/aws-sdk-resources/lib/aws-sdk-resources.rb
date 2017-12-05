@@ -119,6 +119,7 @@ module Aws
   autoload :SageMakerRuntime, 'aws-sdk-sagemakerruntime'
   autoload :ServerlessApplicationRepository, 'aws-sdk-serverlessapplicationrepository'
   autoload :ServiceCatalog, 'aws-sdk-servicecatalog'
+  autoload :ServiceDiscovery, 'aws-sdk-servicediscovery'
   autoload :Shield, 'aws-sdk-shield'
   autoload :SimpleDB, 'aws-sdk-simpledb'
   autoload :Snowball, 'aws-sdk-snowball'

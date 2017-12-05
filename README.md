@@ -409,6 +409,7 @@ to be backwards compatible.
 | Amazon Rekognition                          | Aws::Rekognition                     | aws-sdk-rekognition                     | 2016-06-27  |
 | Amazon Relational Database Service          | Aws::RDS                             | aws-sdk-rds                             | 2014-10-31  |
 | Amazon Route 53                             | Aws::Route53                         | aws-sdk-route53                         | 2013-04-01  |
+| Amazon Route 53 Auto Naming                 | Aws::ServiceDiscovery                | aws-sdk-servicediscovery                | 2017-03-14  |
 | Amazon Route 53 Domains                     | Aws::Route53Domains                  | aws-sdk-route53domains                  | 2014-05-15  |
 | Amazon SageMaker Runtime                    | Aws::SageMakerRuntime                | aws-sdk-sagemakerruntime                | 2017-05-13  |
 | Amazon SageMaker Service                    | Aws::SageMaker                       | aws-sdk-sagemaker                       | 2017-07-24  |

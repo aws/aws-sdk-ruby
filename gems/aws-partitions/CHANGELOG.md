@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2017-12-05)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ServiceDiscovery`.
+
 1.44.0 (2017-11-30)
 ------------------
 

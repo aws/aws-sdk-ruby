@@ -1759,6 +1759,7 @@ module Aws::IoT
     TopicRule.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, location_name: "actions"))
     TopicRule.add_member(:rule_disabled, Shapes::ShapeRef.new(shape: IsDisabled, location_name: "ruleDisabled"))
     TopicRule.add_member(:aws_iot_sql_version, Shapes::ShapeRef.new(shape: AwsIotSqlVersion, location_name: "awsIotSqlVersion"))
+    TopicRule.add_member(:error_action, Shapes::ShapeRef.new(shape: Action, location_name: "errorAction"))
     TopicRule.struct_class = Types::TopicRule
 
     TopicRuleList.member = Shapes::ShapeRef.new(shape: TopicRuleListItem)
@@ -1775,6 +1776,7 @@ module Aws::IoT
     TopicRulePayload.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, required: true, location_name: "actions"))
     TopicRulePayload.add_member(:rule_disabled, Shapes::ShapeRef.new(shape: IsDisabled, location_name: "ruleDisabled"))
     TopicRulePayload.add_member(:aws_iot_sql_version, Shapes::ShapeRef.new(shape: AwsIotSqlVersion, location_name: "awsIotSqlVersion"))
+    TopicRulePayload.add_member(:error_action, Shapes::ShapeRef.new(shape: Action, location_name: "errorAction"))
     TopicRulePayload.struct_class = Types::TopicRulePayload
 
     TransferCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))

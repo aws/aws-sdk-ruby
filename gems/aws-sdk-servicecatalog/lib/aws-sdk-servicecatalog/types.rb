@@ -42,7 +42,7 @@ module Aws::ServiceCatalog
     #
     class AcceptPortfolioShareOutput < Aws::EmptyStructure; end
 
-    # The access level to limit results.
+    # The access level to use to filter results.
     #
     # @note When making an API call, you may pass AccessLevelFilter
     #   data as a hash:
@@ -53,19 +53,19 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] key
-    #   Specifies the access level.
+    #   The access level.
     #
-    #   `Account` allows results at the account level.
+    #   * `Account` - Filter results based on the account.
     #
-    #   `Role` allows results based on the federated role of the specified
-    #   user.
+    #   * `Role` - Filter results based on the federated role of the
+    #     specified user.
     #
-    #   `User` allows results limited to the specified user.
+    #   * `User` - Filter results based on the specified user.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Specifies the user to which the access level applies. A value of
-    #   `Self` is currently supported.
+    #   The user to which the access level applies. The only supported value
+    #   is `Self`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AccessLevelFilter AWS API Documentation
@@ -101,11 +101,11 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN representing the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group).
     #   @return [String]
     #
     # @!attribute [rw] principal_type
-    #   The principal type. Must be `IAM`
+    #   The principal type. The supported value is `IAM`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolioInput AWS API Documentation
@@ -151,7 +151,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] source_portfolio_id
-    #   The identifier of the source portfolio to use with this association.
+    #   The identifier of the source portfolio.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolioInput AWS API Documentation
@@ -196,18 +196,24 @@ module Aws::ServiceCatalog
     #
     class AssociateTagOptionWithResourceOutput < Aws::EmptyStructure; end
 
-    # Detailed constraint information.
+    # Information about a constraint.
     #
     # @!attribute [rw] constraint_id
     #   The identifier of the constraint.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the constraint.
+    #   The type of constraint.
+    #
+    #   * `LAUNCH`
+    #
+    #   * `NOTIFICATION`
+    #
+    #   * `TEMPLATE`
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the constraint.
+    #   The description of the constraint.
     #   @return [String]
     #
     # @!attribute [rw] owner
@@ -224,15 +230,20 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # An administrator-specified constraint to apply when provisioning a
-    # product.
+    # Summary information about a constraint.
     #
     # @!attribute [rw] type
-    #   The type of the constraint.
+    #   The type of constraint.
+    #
+    #   * `LAUNCH`
+    #
+    #   * `NOTIFICATION`
+    #
+    #   * `TEMPLATE`
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the constraint.
+    #   The description of the constraint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintSummary AWS API Documentation
@@ -275,7 +286,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] target_product_id
-    #   The ID of the target product. By default, a new product is created.
+    #   The identifier of the target product. By default, a new product is
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] target_product_name
@@ -284,8 +296,9 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] source_provisioning_artifact_identifiers
-    #   The IDs of the product versions to copy. By default, all
-    #   provisioning artifacts are copied.
+    #   The identifiers of the provisioning artifacts (also known as
+    #   versions) of the product to copy. By default, all provisioning
+    #   artifacts are copied.
     #   @return [Array<Hash<String,String>>]
     #
     # @!attribute [rw] copy_options
@@ -294,9 +307,9 @@ module Aws::ServiceCatalog
     #   @return [Array<String>]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same
-    #   input in multiple requests, provided that you also specify a
-    #   different idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -316,8 +329,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] copy_product_token
-    #   A unique token to pass to `DescribeCopyProductStatus` to track the
-    #   progress of the operation.
+    #   The token to use to track the progress of the operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CopyProductOutput AWS API Documentation
@@ -359,31 +371,51 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The constraint parameters. Expected values vary depending on which
-    #   **Type** is specified. For more information, see the Examples
-    #   section.
+    #   The constraint parameters, in JSON format. The syntax depends on the
+    #   constraint type as follows:
     #
-    #   For Type `LAUNCH`, the `RoleArn` property is required.
+    #   LAUNCH
     #
-    #   For Type `NOTIFICATION`, the `NotificationArns` property is
-    #   required.
+    #   : Specify the `RoleArn` property as follows:
     #
-    #   For Type `TEMPLATE`, the `Rules` property is required.
+    #     \\"RoleArn\\" :
+    #     \\"arn:aws:iam::123456789012:role/LaunchRole\\"
+    #
+    #   NOTIFICATION
+    #
+    #   : Specify the `NotificationArns` property as follows:
+    #
+    #     \\"NotificationArns\\" :
+    #     \[\\"arn:aws:sns:us-east-1:123456789012:Topic\\"\]
+    #
+    #   TEMPLATE
+    #
+    #   : Specify the `Rules` property. For more information, see [Template
+    #     Constraint Rules][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the constraint. Case-sensitive valid values are:
-    #   `LAUNCH`, `NOTIFICATION`, or `TEMPLATE`.
+    #   The type of constraint.
+    #
+    #   * `LAUNCH`
+    #
+    #   * `NOTIFICATION`
+    #
+    #   * `TEMPLATE`
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the constraint.
+    #   The description of the constraint.
     #   @return [String]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same
-    #   input in multiple requests, provided that you also specify a
-    #   different idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -403,11 +435,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] constraint_detail
-    #   The resulting detailed constraint information.
+    #   Information about the constraint.
     #   @return [Types::ConstraintDetail]
     #
     # @!attribute [rw] constraint_parameters
-    #   The resulting constraint parameters.
+    #   The constraint parameters.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -455,7 +487,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the portfolio.
+    #   The description of the portfolio.
     #   @return [String]
     #
     # @!attribute [rw] provider_name
@@ -463,13 +495,13 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags to associate with the new portfolio.
+    #   The tags to associate with the portfolio.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same
-    #   input in multiple requests, provided that you also specify a
-    #   different idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -488,11 +520,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] portfolio_detail
-    #   The resulting detailed portfolio information.
+    #   Information about the portfolio.
     #   @return [Types::PortfolioDetail]
     #
     # @!attribute [rw] tags
-    #   Tags successfully associated with the new portfolio.
+    #   Information about the tags associated with the portfolio.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioOutput AWS API Documentation
@@ -527,7 +559,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The account ID with which to share the portfolio.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareInput AWS API Documentation
@@ -592,7 +624,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the product.
+    #   The description of the product.
     #   @return [String]
     #
     # @!attribute [rw] distributor
@@ -600,33 +632,33 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] support_description
-    #   Support information about the product.
+    #   The support information about the product.
     #   @return [String]
     #
     # @!attribute [rw] support_email
-    #   Contact email for product support.
+    #   The contact email for product support.
     #   @return [String]
     #
     # @!attribute [rw] support_url
-    #   Contact URL for product support.
+    #   The contact URL for product support.
     #   @return [String]
     #
     # @!attribute [rw] product_type
-    #   The type of the product to create.
+    #   The type of product.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags to associate with the new product.
+    #   The tags to associate with the product.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] provisioning_artifact_parameters
-    #   Parameters for the provisioning artifact.
+    #   The configuration of the provisioning artifact.
     #   @return [Types::ProvisioningArtifactProperties]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same
-    #   input in multiple requests, provided that you also specify a
-    #   different idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -651,15 +683,15 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] product_view_detail
-    #   The resulting detailed product view information.
+    #   Information about the product view.
     #   @return [Types::ProductViewDetail]
     #
     # @!attribute [rw] provisioning_artifact_detail
-    #   The resulting detailed provisioning artifact information.
+    #   Information about the provisioning artifact.
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] tags
-    #   Tags successfully associated with the new product.
+    #   Information about the tags associated with the product.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProductOutput AWS API Documentation
@@ -703,13 +735,13 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters to use when creating the new provisioning artifact.
+    #   The configuration for the provisioning artifact.
     #   @return [Types::ProvisioningArtifactProperties]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same
-    #   input in multiple requests, provided that you also specify a
-    #   different idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -726,12 +758,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] provisioning_artifact_detail
-    #   The resulting detailed provisioning artifact information.
+    #   Information about the provisioning artifact.
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] info
-    #   Additional information about the creation request for the
-    #   provisioning artifact.
+    #   The URL of the CloudFormation template in Amazon S3, in JSON format.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -772,7 +803,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] tag_option_detail
-    #   The resulting detailed TagOption information.
+    #   Information about the TagOption.
     #   @return [Types::TagOptionDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateTagOptionOutput AWS API Documentation
@@ -801,7 +832,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the constraint to delete.
+    #   The identifier of the constraint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraintInput AWS API Documentation
@@ -835,7 +866,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the portfolio for the delete request.
+    #   The portfolio identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioInput AWS API Documentation
@@ -874,7 +905,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The account ID associated with the share to delete.
+    #   The AWS account ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareInput AWS API Documentation
@@ -909,7 +940,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the product for the delete request.
+    #   The product identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProductInput AWS API Documentation
@@ -948,8 +979,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The identifier of the provisioning artifact for the delete request.
-    #   This is sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactInput AWS API Documentation
@@ -996,11 +1026,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] constraint_detail
-    #   Detailed constraint information.
+    #   Information about the constraint.
     #   @return [Types::ConstraintDetail]
     #
     # @!attribute [rw] constraint_parameters
-    #   The current parameters associated with the specified constraint.
+    #   The constraint parameters.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1035,8 +1065,8 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] copy_product_token
-    #   The token returned from the call to `CopyProduct` that initiated the
-    #   operation.
+    #   The token for the copy product operation. This token is returned by
+    #   CopyProduct.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeCopyProductStatusInput AWS API Documentation
@@ -1052,7 +1082,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] target_product_id
-    #   The ID of the copied product.
+    #   The identifier of the copied product.
     #   @return [String]
     #
     # @!attribute [rw] status_detail
@@ -1087,7 +1117,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the portfolio for which to retrieve information.
+    #   The portfolio identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioInput AWS API Documentation
@@ -1099,15 +1129,15 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] portfolio_detail
-    #   Detailed portfolio information.
+    #   Information about the portfolio.
     #   @return [Types::PortfolioDetail]
     #
     # @!attribute [rw] tags
-    #   Tags associated with the portfolio.
+    #   Information about the tags associated with the portfolio.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] tag_options
-    #   TagOptions associated with the portfolio.
+    #   Information about the TagOptions associated with the portfolio.
     #   @return [Array<Types::TagOptionDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioOutput AWS API Documentation
@@ -1138,7 +1168,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the product for which to retrieve information.
+    #   The product identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminInput AWS API Documentation
@@ -1150,19 +1180,20 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] product_view_detail
-    #   Detailed product view information.
+    #   Information about the product view.
     #   @return [Types::ProductViewDetail]
     #
     # @!attribute [rw] provisioning_artifact_summaries
-    #   A list of provisioning artifact summaries for the product.
+    #   Information about the provisioning artifacts (also known as
+    #   versions) for the specified product.
     #   @return [Array<Types::ProvisioningArtifactSummary>]
     #
     # @!attribute [rw] tags
-    #   Tags associated with the product.
+    #   Information about the tags associated with the product.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] tag_options
-    #   List of TagOptions associated with the product.
+    #   Information about the TagOptions associated with the product.
     #   @return [Array<Types::TagOptionDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminOutput AWS API Documentation
@@ -1194,7 +1225,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The `ProductId` of the product to describe.
+    #   The product identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductInput AWS API Documentation
@@ -1206,13 +1237,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] product_view_summary
-    #   The summary metadata about the specified product.
+    #   Summary information about the product view.
     #   @return [Types::ProductViewSummary]
     #
     # @!attribute [rw] provisioning_artifacts
-    #   A list of provisioning artifact objects for the specified product.
-    #   The `ProvisioningArtifacts` parameter represent the ways the
-    #   specified product can be provisioned.
+    #   Information about the provisioning artifacts for the specified
+    #   product.
     #   @return [Array<Types::ProvisioningArtifact>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductOutput AWS API Documentation
@@ -1242,7 +1272,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The `ProductViewId` of the product to describe.
+    #   The product view identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductViewInput AWS API Documentation
@@ -1254,13 +1284,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] product_view_summary
-    #   The summary metadata about the specified product.
+    #   Summary information about the product.
     #   @return [Types::ProductViewSummary]
     #
     # @!attribute [rw] provisioning_artifacts
-    #   A list of provisioning artifact objects for the specified product.
-    #   The `ProvisioningArtifacts` represent the ways in which the
-    #   specified product can be provisioned.
+    #   Information about the provisioning artifacts for the product.
     #   @return [Array<Types::ProvisioningArtifact>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductViewOutput AWS API Documentation
@@ -1302,7 +1330,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] provisioned_product_detail
-    #   Detailed provisioned product information.
+    #   Information about the provisioned product.
     #   @return [Types::ProvisionedProductDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductOutput AWS API Documentation
@@ -1333,8 +1361,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The identifier of the provisioning artifact. This is sometimes
-    #   referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -1342,7 +1369,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] verbose
-    #   Enable a verbose level of details for the provisioning artifact.
+    #   Indicates whether a verbose level of detail is enabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifactInput AWS API Documentation
@@ -1356,11 +1383,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] provisioning_artifact_detail
-    #   Detailed provisioning artifact information.
+    #   Information about the provisioning artifact.
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] info
-    #   Additional information about the provisioning artifact.
+    #   The URL of the CloudFormation template in Amazon S3.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -1401,14 +1428,13 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The provisioning artifact identifier for this product. This is
-    #   sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] path_id
-    #   The identifier of the path for this product's provisioning. This
-    #   value is optional if the product has a default path, and is required
-    #   if there is more than one path for the specified product.
+    #   The path identifier of the product. This value is optional if the
+    #   product has a default path, and required if the product has more
+    #   than one path. To list the paths for a product, use ListLaunchPaths.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersInput AWS API Documentation
@@ -1422,14 +1448,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] provisioning_artifact_parameters
-    #   The list of parameters used to successfully provision the product.
-    #   Each parameter includes a list of allowable values and additional
-    #   metadata about each parameter.
+    #   Information about the parameters used to provision the product.
     #   @return [Array<Types::ProvisioningArtifactParameter>]
     #
     # @!attribute [rw] constraint_summaries
-    #   The list of constraint summaries that apply to provisioning this
-    #   product.
+    #   Information about the constraints used to provision the product.
     #   @return [Array<Types::ConstraintSummary>]
     #
     # @!attribute [rw] usage_instructions
@@ -1439,8 +1462,7 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::UsageInstruction>]
     #
     # @!attribute [rw] tag_options
-    #   List of TagOptions associated with the provisioned provisioning
-    #   parameters.
+    #   Information about the TagOptions associated with the resource.
     #   @return [Array<Types::TagOptionSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersOutput AWS API Documentation
@@ -1474,20 +1496,17 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The record identifier of the ProvisionedProduct object for which to
-    #   retrieve output information. This is the `RecordDetail.RecordId`
-    #   obtained from the request operation's response.
+    #   The record identifier of the provisioned product. This identifier is
+    #   returned by the request operation.
     #   @return [String]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecordInput AWS API Documentation
@@ -1501,19 +1520,18 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] record_detail
-    #   Detailed record information for the specified product.
+    #   Information about the product.
     #   @return [Types::RecordDetail]
     #
     # @!attribute [rw] record_outputs
-    #   A list of outputs for the specified Product object created as the
-    #   result of a request. For example, a CloudFormation-backed product
-    #   that creates an S3 bucket would have an output for the S3 bucket
-    #   URL.
+    #   Information about the product created as the result of a request.
+    #   For example, the output for a CloudFormation-backed product that
+    #   creates an S3 bucket would include the S3 bucket URL.
     #   @return [Array<Types::RecordOutput>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecordOutput AWS API Documentation
@@ -1533,7 +1551,7 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the TagOption.
+    #   The TagOption identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOptionInput AWS API Documentation
@@ -1544,7 +1562,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] tag_option_detail
-    #   The resulting detailed TagOption information.
+    #   Information about the TagOption.
     #   @return [Types::TagOptionDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeTagOptionOutput AWS API Documentation
@@ -1578,7 +1596,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] principal_arn
-    #   The ARN representing the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolioInput AWS API Documentation
@@ -1643,11 +1661,11 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] resource_id
-    #   Identifier of the resource from which to disassociate the TagOption.
+    #   The resource identifier.
     #   @return [String]
     #
     # @!attribute [rw] tag_option_id
-    #   Identifier of the TagOption to disassociate from the resource.
+    #   The TagOption identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResourceInput AWS API Documentation
@@ -1662,24 +1680,22 @@ module Aws::ServiceCatalog
     #
     class DisassociateTagOptionFromResourceOutput < Aws::EmptyStructure; end
 
-    # Summary information about a path for a user to have access to a
-    # specified product.
+    # Summary information about a product path for a user.
     #
     # @!attribute [rw] id
-    #   The unique identifier of the product path.
+    #   The identifier of the product path.
     #   @return [String]
     #
     # @!attribute [rw] constraint_summaries
-    #   List of constraints on the portfolio-product relationship.
+    #   The constraints on the portfolio-product relationship.
     #   @return [Array<Types::ConstraintSummary>]
     #
     # @!attribute [rw] tags
-    #   List of tags used by this launch path.
+    #   The tags associated with this product path.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] name
-    #   Corresponds to the name of the portfolio to which the user was
-    #   assigned.
+    #   The name of the portfolio to which the user was assigned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LaunchPathSummary AWS API Documentation
@@ -1712,14 +1728,12 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesInput AWS API Documentation
@@ -1732,12 +1746,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] portfolio_details
-    #   List of detailed portfolio information objects.
+    #   Information about the portfolios.
     #   @return [Array<Types::PortfolioDetail>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesOutput AWS API Documentation
@@ -1778,14 +1792,12 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolioInput AWS API Documentation
@@ -1800,12 +1812,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] constraint_details
-    #   List of detailed constraint information objects.
+    #   Information about the constraints.
     #   @return [Array<Types::ConstraintDetail>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolioOutput AWS API Documentation
@@ -1837,19 +1849,16 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The product identifier. Identifies the product for which to retrieve
-    #   `LaunchPathSummaries` information.
+    #   The product identifier.
     #   @return [String]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPathsInput AWS API Documentation
@@ -1863,13 +1872,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] launch_path_summaries
-    #   List of launch path information summaries for the specified
-    #   `PageToken`.
+    #   Information about the launch path.
     #   @return [Array<Types::LaunchPathSummary>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPathsOutput AWS API Documentation
@@ -1911,12 +1919,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] account_ids
-    #   List of account IDs associated with access to the portfolio.
+    #   Information about the AWS accounts with access to the portfolio.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccessOutput AWS API Documentation
@@ -1952,14 +1960,12 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProductInput AWS API Documentation
@@ -1973,12 +1979,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] portfolio_details
-    #   List of detailed portfolio information objects.
+    #   Information about the portfolios.
     #   @return [Array<Types::PortfolioDetail>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProductOutput AWS API Documentation
@@ -2009,14 +2015,12 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosInput AWS API Documentation
@@ -2029,12 +2033,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] portfolio_details
-    #   List of detailed portfolio information objects.
+    #   Information about the portfolios.
     #   @return [Array<Types::PortfolioDetail>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosOutput AWS API Documentation
@@ -2070,14 +2074,12 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolioInput AWS API Documentation
@@ -2095,8 +2097,8 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::Principal>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolioOutput AWS API Documentation
@@ -2138,12 +2140,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] provisioning_artifact_details
-    #   List of detailed provisioning artifact information objects.
+    #   Information about the provisioning artifacts.
     #   @return [Array<Types::ProvisioningArtifactDetail>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsOutput AWS API Documentation
@@ -2182,23 +2184,20 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] access_level_filter
-    #   The access level for obtaining results. If left unspecified, `User`
-    #   level access is used.
+    #   The access level to use to obtain results. The default is `User`.
     #   @return [Types::AccessLevelFilter]
     #
     # @!attribute [rw] search_filter
-    #   The filter to limit search results.
+    #   The search filter to scope the results.
     #   @return [Types::ListRecordHistorySearchFilter]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistoryInput AWS API Documentation
@@ -2213,13 +2212,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] record_details
-    #   A list of record detail objects, listed in reverse chronological
-    #   order.
+    #   The records, in reverse chronological order.
     #   @return [Array<Types::RecordDetail>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistoryOutput AWS API Documentation
@@ -2230,8 +2228,7 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The search filter to limit results when listing request history
-    # records.
+    # The search filter to use when listing history records.
     #
     # @note When making an API call, you may pass ListRecordHistorySearchFilter
     #   data as a hash:
@@ -2243,10 +2240,16 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] key
     #   The filter key.
+    #
+    #   * `product` - Filter results based on the specified product
+    #     identifier.
+    #
+    #   * `provisionedproduct` - Filter results based on the provisioned
+    #     product identifier.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The filter value for `Key`.
+    #   The filter value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistorySearchFilter AWS API Documentation
@@ -2268,22 +2271,24 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] tag_option_id
-    #   Identifier of the TagOption.
+    #   The TagOption identifier.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   Resource type.
+    #   The resource type.
+    #
+    #   * `Portfolio`
+    #
+    #   * `Product`
     #   @return [String]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOptionInput AWS API Documentation
@@ -2297,12 +2302,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] resource_details
-    #   The resulting detailed resource information.
+    #   Information about the resources.
     #   @return [Array<Types::ResourceDetail>]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListResourcesForTagOptionOutput AWS API Documentation
@@ -2313,7 +2318,7 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The ListTagOptions filters.
+    # Filters to use when listing TagOptions.
     #
     # @note When making an API call, you may pass ListTagOptionsFilters
     #   data as a hash:
@@ -2325,15 +2330,15 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] key
-    #   The ListTagOptionsFilters key.
+    #   The TagOption key.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The ListTagOptionsFilters value.
+    #   The TagOption value.
     #   @return [String]
     #
     # @!attribute [rw] active
-    #   The ListTagOptionsFilters active state.
+    #   The active state.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsFilters AWS API Documentation
@@ -2359,19 +2364,17 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] filters
-    #   The list of filters with which to limit search results. If no search
-    #   filters are specified, the output is all TagOptions.
+    #   The search filters. If no search filters are specified, the output
+    #   includes all TagOptions.
     #   @return [Types::ListTagOptionsFilters]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsInput AWS API Documentation
@@ -2384,12 +2387,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] tag_option_details
-    #   The resulting detailed TagOption information.
+    #   Information about the TagOptions.
     #   @return [Array<Types::TagOptionDetail>]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListTagOptionsOutput AWS API Documentation
@@ -2413,10 +2416,10 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Detailed portfolio information.
+    # Information about a portfolio.
     #
     # @!attribute [rw] id
-    #   The identifier for the portfolio.
+    #   The portfolio identifier.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -2428,7 +2431,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the portfolio.
+    #   The description of the portfolio.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -2451,14 +2454,14 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # A principal's ARN and type.
+    # Information about a principal.
     #
     # @!attribute [rw] principal_arn
-    #   The ARN representing the principal (IAM user, role, or group).
+    #   The ARN of the principal (IAM user, role, or group).
     #   @return [String]
     #
     # @!attribute [rw] principal_type
-    #   The principal type. Must be `IAM`
+    #   The principal type. The supported value is `IAM`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Principal AWS API Documentation
@@ -2488,24 +2491,25 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Detailed product view information.
+    # Information about a product view.
     #
     # @!attribute [rw] product_view_summary
-    #   The summary metadata about the specified product view.
+    #   Summary information about the product view.
     #   @return [Types::ProductViewSummary]
     #
     # @!attribute [rw] status
-    #   Current status of the product.
+    #   The status of the product.
     #
-    #   `AVAILABLE` - Product is available for use.
+    #   * `AVAILABLE` - The product is ready for use.
     #
-    #   `CREATING` - Creation of product started, not ready for use.
+    #   * `CREATING` - Product creation has started; the product is not
+    #     ready for use.
     #
-    #   `FAILED` - Action on product failed.
+    #   * `FAILED` - An action failed.
     #   @return [String]
     #
     # @!attribute [rw] product_arn
-    #   The ARN associated with the product.
+    #   The ARN of the product.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -2522,7 +2526,7 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The summary metadata about the specified product.
+    # Summary information about a product view.
     #
     # @!attribute [rw] id
     #   The product view identifier.
@@ -2557,11 +2561,10 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] has_default_path
-    #   A value of `false` indicates that the product does not have a
-    #   default path, while a value of `true` indicates that it does. If
-    #   it's false, call ListLaunchPaths to disambiguate between paths. If
-    #   true, ListLaunchPaths is not required, and the output of the
-    #   ProductViewSummary operation can be used directly with
+    #   Indicates whether the product has a default path. If the product
+    #   does not have a default path, call ListLaunchPaths to disambiguate
+    #   between paths. Otherwise, ListLaunchPaths is not required, and the
+    #   output of ProductViewSummary can be used directly with
     #   DescribeProvisioningParameters.
     #   @return [Boolean]
     #
@@ -2634,20 +2637,19 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The provisioning artifact identifier for this product. This is
-    #   sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] path_id
-    #   The identifier of the path for this product's provisioning. This
-    #   value is optional if the product has a default path, and is required
-    #   if there is more than one path for the specified product.
+    #   The path identifier of the product. This value is optional if the
+    #   product has a default path, and required if the product has more
+    #   than one path. To list the paths for a product, use ListLaunchPaths.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_name
-    #   A user-friendly name to identify the ProvisionedProduct object. This
-    #   value must be unique for the AWS account and cannot be updated after
-    #   the product is provisioned.
+    #   A user-friendly name for the provisioned product. This value must be
+    #   unique for the AWS account and cannot be updated after the product
+    #   is provisioned.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_parameters
@@ -2656,7 +2658,7 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::ProvisioningParameter>]
     #
     # @!attribute [rw] tags
-    #   A list of tags to use as provisioning options.
+    #   The tags to use as provisioning options.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] notification_arns
@@ -2688,10 +2690,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] record_detail
-    #   The detailed result of the ProvisionProduct request, containing the
-    #   inputs made to that request, the current state of the request, a
-    #   pointer to the ProvisionedProduct object of the request, and a list
-    #   of any errors that the request encountered.
+    #   Information about the result of ProvisionProduct.
     #   @return [Types::RecordDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProductOutput AWS API Documentation
@@ -2701,47 +2700,47 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Detailed information about a ProvisionedProduct object.
+    # Information about a provisioned product.
     #
     # @!attribute [rw] name
-    #   The user-friendly name of the ProvisionedProduct object.
+    #   The user-friendly name of the provisioned product.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The ARN associated with the ProvisionedProduct object.
+    #   The ARN of the provisioned product.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the ProvisionedProduct object.
+    #   The type of provisioned product. The supported value is `CFN_STACK`.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the ProvisionedProduct object.
+    #   The identifier of the provisioned product.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the ProvisionedProduct.
+    #   The current status of the provisioned product.
     #
-    #   `AVAILABLE` - Stable state, ready to perform any operation. The most
-    #   recent action request succeeded and completed.
+    #   * `AVAILABLE` - Stable state, ready to perform any operation. The
+    #     most recent operation succeeded and completed.
     #
-    #   `UNDER_CHANGE` - Transitive state, operations performed may or may
-    #   not have valid results. Wait for an `AVAILABLE` status before
-    #   performing operations.
+    #   * `UNDER_CHANGE` - Transitive state, operations performed might not
+    #     have valid results. Wait for an `AVAILABLE` status before
+    #     performing operations.
     #
-    #   `TAINTED` - Stable state, ready to perform any operation. The stack
-    #   has completed the requested operation but is not exactly what was
-    #   requested. For example, a request to update to a new version failed
-    #   and the stack rolled back to the current version.
+    #   * `TAINTED` - Stable state, ready to perform any operation. The
+    #     stack has completed the requested operation but is not exactly
+    #     what was requested. For example, a request to update to a new
+    #     version failed and the stack rolled back to the current version.
     #
-    #   `ERROR` - Something unexpected happened such that the provisioned
-    #   product exists but the stack is not running. For example,
-    #   CloudFormation received an invalid parameter value and could not
-    #   launch the stack.
+    #   * `ERROR` - An unexpected error occurred, the provisioned product
+    #     exists but the stack is not running. For example, CloudFormation
+    #     received a parameter value that was not valid and could not launch
+    #     the stack.
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   The current status message of the ProvisionedProduct.
+    #   The current status message of the provisioned product.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -2749,14 +2748,14 @@ module Aws::ServiceCatalog
     #   @return [Time]
     #
     # @!attribute [rw] idempotency_token
-    #   A token to disambiguate duplicate requests. You can use the same
-    #   input in multiple requests, provided that you also specify a
-    #   different idempotency token for each request.
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
     #   @return [String]
     #
     # @!attribute [rw] last_record_id
     #   The record identifier of the last request performed on this
-    #   ProvisionedProduct object.
+    #   provisioned product.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductDetail AWS API Documentation
@@ -2774,20 +2773,19 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Contains information indicating the ways in which a product can be
-    # provisioned.
+    # Information about a provisioning artifact. A provisioning artifact is
+    # also known as a product version.
     #
     # @!attribute [rw] id
-    #   The identifier for the artifact. This is sometimes referred to as
-    #   the product version.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the artifact.
+    #   The name of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the artifact.
+    #   The description of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -2804,33 +2802,38 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Detailed provisioning artifact information.
+    # Information about a provisioning artifact (also known as a version)
+    # for a product.
     #
     # @!attribute [rw] id
-    #   The identifier of the provisioning artifact. This is sometimes
-    #   referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name assigned to the provisioning artifact.
+    #   The name of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the provisioning artifact.
+    #   The description of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the provisioning artifact. The following provisioning
-    #   artifact types are used by AWS Marketplace products:
+    #   The type of provisioning artifact.
     #
-    #   `MARKETPLACE_AMI` - AMI products.
+    #   * `CLOUD_FORMATION_TEMPLATE` - AWS CloudFormation template
     #
-    #   `MARKETPLACE_CAR` - CAR (Cluster and AWS Resources) products.
+    #   * `MARKETPLACE_AMI` - AWS Marketplace AMI
+    #
+    #   * `MARKETPLACE_CAR` - AWS Marketplace Clusters and AWS Resources
     #   @return [String]
     #
     # @!attribute [rw] created_time
     #   The UTC timestamp of the creation time.
     #   @return [Time]
+    #
+    # @!attribute [rw] active
+    #   Indicates whether the product version is active.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactDetail AWS API Documentation
     #
@@ -2839,19 +2842,19 @@ module Aws::ServiceCatalog
       :name,
       :description,
       :type,
-      :created_time)
+      :created_time,
+      :active)
       include Aws::Structure
     end
 
-    # A parameter used to successfully provision the product. This value
-    # includes a list of allowable values and additional metadata.
+    # Information about a parameter used to provision a product.
     #
     # @!attribute [rw] parameter_key
     #   The parameter key.
     #   @return [String]
     #
     # @!attribute [rw] default_value
-    #   The default value for this parameter.
+    #   The default value.
     #   @return [String]
     #
     # @!attribute [rw] parameter_type
@@ -2865,12 +2868,11 @@ module Aws::ServiceCatalog
     #   @return [Boolean]
     #
     # @!attribute [rw] description
-    #   The text description of the parameter.
+    #   The description of the parameter.
     #   @return [String]
     #
     # @!attribute [rw] parameter_constraints
-    #   The list of constraints that the administrator has put on the
-    #   parameter.
+    #   Constraints that the administrator has put on a parameter.
     #   @return [Types::ParameterConstraints]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactParameter AWS API Documentation
@@ -2885,8 +2887,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Provisioning artifact properties. For example request JSON, see
-    # CreateProvisioningArtifact.
+    # Information about a provisioning artifact (also known as a version)
+    # for a product.
     #
     # @note When making an API call, you may pass ProvisioningArtifactProperties
     #   data as a hash:
@@ -2901,28 +2903,31 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] name
-    #   The name assigned to the provisioning artifact properties.
+    #   The name of the provisioning artifact (for example, v1 v2beta). No
+    #   spaces are allowed.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the provisioning artifact properties.
+    #   The description of the provisioning artifact, including how it
+    #   differs from the previous provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] info
-    #   Additional information about the provisioning artifact properties.
-    #   When using this element in a request, you must specify
-    #   `LoadTemplateFromURL`. For more information, see
-    #   CreateProvisioningArtifact.
+    #   The URL of the CloudFormation template in Amazon S3. Specify the URL
+    #   in JSON format as follows:
+    #
+    #   `"LoadTemplateFromURL":
+    #   "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."`
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
-    #   The type of the provisioning artifact properties. The following
-    #   provisioning artifact property types are used by AWS Marketplace
-    #   products:
+    #   The type of provisioning artifact.
     #
-    #   `MARKETPLACE_AMI` - AMI products.
+    #   * `CLOUD_FORMATION_TEMPLATE` - AWS CloudFormation template
     #
-    #   `MARKETPLACE_CAR` - CAR (Cluster and AWS Resources) products.
+    #   * `MARKETPLACE_AMI` - AWS Marketplace AMI
+    #
+    #   * `MARKETPLACE_CAR` - AWS Marketplace Clusters and AWS Resources
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties AWS API Documentation
@@ -2935,7 +2940,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Stores summary information about a provisioning artifact.
+    # Summary information about a provisioning artifact (also known as a
+    # version) for a product.
     #
     # @!attribute [rw] id
     #   The identifier of the provisioning artifact.
@@ -2954,8 +2960,8 @@ module Aws::ServiceCatalog
     #   @return [Time]
     #
     # @!attribute [rw] provisioning_artifact_metadata
-    #   The provisioning artifact metadata. This data is used with products
-    #   created by AWS Marketplace.
+    #   The metadata for the provisioning artifact. This is used with AWS
+    #   Marketplace products.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactSummary AWS API Documentation
@@ -2969,7 +2975,7 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The parameter key-value pairs used to provision a product.
+    # Information about a parameter used to provision a product.
     #
     # @note When making an API call, you may pass ProvisioningParameter
     #   data as a hash:
@@ -2980,13 +2986,11 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] key
-    #   The `ProvisioningArtifactParameter.ParameterKey` parameter from
-    #   DescribeProvisioningParameters.
+    #   The parameter key.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value to use for provisioning. Any constraints on this value can
-    #   be found in `ProvisioningArtifactParameter` for `Key`.
+    #   The parameter value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningParameter AWS API Documentation
@@ -2997,31 +3001,32 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The full details of a specific ProvisionedProduct object.
+    # Information about a request operation.
     #
     # @!attribute [rw] record_id
-    #   The identifier of the ProvisionedProduct object record.
+    #   The identifier of the record.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_name
-    #   The user-friendly name of the ProvisionedProduct object.
+    #   The user-friendly name of the provisioned product.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the ProvisionedProduct object.
+    #   The status of the provisioned product.
     #
-    #   `CREATED` - Request created but the operation has not yet started.
+    #   * `CREATED` - The request was created but the operation has not
+    #     started.
     #
-    #   `IN_PROGRESS` - The requested operation is in-progress.
+    #   * `IN_PROGRESS` - The requested operation is in progress.
     #
-    #   `IN_PROGRESS_IN_ERROR` - The provisioned product is under change but
-    #   the requested operation failed and some remediation is occurring.
-    #   For example, a rollback.
+    #   * `IN_PROGRESS_IN_ERROR` - The provisioned product is under change
+    #     but the requested operation failed and some remediation is
+    #     occurring. For example, a rollback.
     #
-    #   `SUCCEEDED` - The requested operation has successfully completed.
+    #   * `SUCCEEDED` - The requested operation has successfully completed.
     #
-    #   `FAILED` - The requested operation has completed but has failed.
-    #   Investigate using the error messages returned.
+    #   * `FAILED` - The requested operation has unsuccessfully completed.
+    #     Investigate using the error messages returned.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -3029,20 +3034,25 @@ module Aws::ServiceCatalog
     #   @return [Time]
     #
     # @!attribute [rw] updated_time
-    #   The time when the record for the ProvisionedProduct object was last
-    #   updated.
+    #   The time when the record was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] provisioned_product_type
-    #   The type of the ProvisionedProduct object.
+    #   The type of provisioned product. The supported value is `CFN_STACK`.
     #   @return [String]
     #
     # @!attribute [rw] record_type
     #   The record type for this record.
+    #
+    #   * `PROVISION_PRODUCT`
+    #
+    #   * `UPDATE_PROVISIONED_PRODUCT`
+    #
+    #   * `TERMINATE_PROVISIONED_PRODUCT`
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_id
-    #   The identifier of the ProvisionedProduct object.
+    #   The identifier of the provisioned product.
     #   @return [String]
     #
     # @!attribute [rw] product_id
@@ -3050,20 +3060,19 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The provisioning artifact identifier for this product. This is
-    #   sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] path_id
-    #   The identifier of the path for this product's provisioning.
+    #   The path identifier.
     #   @return [String]
     #
     # @!attribute [rw] record_errors
-    #   A list of errors that occurred while processing the request.
+    #   The errors that occurred while processing the request.
     #   @return [Array<Types::RecordError>]
     #
     # @!attribute [rw] record_tags
-    #   List of tags associated with this record.
+    #   The tags associated with this record.
     #   @return [Array<Types::RecordTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordDetail AWS API Documentation
@@ -3092,7 +3101,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the error.
+    #   The description of the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordError AWS API Documentation
@@ -3103,9 +3112,9 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # An output for the specified Product object created as the result of a
-    # request. For example, a CloudFormation-backed product that creates an
-    # S3 bucket would have an output for the S3 bucket URL.
+    # The output for the product created as the result of a request. For
+    # example, the output for a CloudFormation-backed product that creates
+    # an S3 bucket would include the S3 bucket URL.
     #
     # @!attribute [rw] output_key
     #   The output key.
@@ -3116,7 +3125,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The text description of the output.
+    #   The description of the output.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordOutput AWS API Documentation
@@ -3180,26 +3189,26 @@ module Aws::ServiceCatalog
     #
     class RejectPortfolioShareOutput < Aws::EmptyStructure; end
 
-    # Detailed resource information.
+    # Information about a resource.
     #
     # @!attribute [rw] id
-    #   Identifier of the resource.
+    #   The identifier of the resource.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   ARN of the resource.
+    #   The ARN of the resource.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the resource.
+    #   The name of the resource.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the resource.
+    #   The description of the resource.
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   Creation time of the resource.
+    #   The creation time of the resource.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceDetail AWS API Documentation
@@ -3237,19 +3246,16 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] access_level_filter
-    #   The access level for obtaining results. If left unspecified, `User`
-    #   level access is used.
+    #   The access level to use to obtain results. The default is `User`.
     #   @return [Types::AccessLevelFilter]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProductsInput AWS API Documentation
@@ -3263,12 +3269,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] provisioned_products
-    #   A list of ProvisionedProduct detail objects.
+    #   Information about the provisioned products.
     #   @return [Array<Types::ProvisionedProductDetail>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProductsOutput AWS API Documentation
@@ -3310,30 +3316,27 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   The list of filters with which to limit search results. If no search
-    #   filters are specified, the output is all the products to which the
-    #   administrator has access.
+    #   The search filters. If no search filters are specified, the output
+    #   includes all products to which the administrator has access.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] sort_by
-    #   The sort field specifier. If no value is specified, results are not
+    #   The sort field. If no value is specified, the results are not
     #   sorted.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order specifier. If no value is specified, results are not
+    #   The sort order. If no value is specified, the results are not
     #   sorted.
     #   @return [String]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @!attribute [rw] product_source
@@ -3355,12 +3358,12 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] product_view_details
-    #   List of detailed product view information objects.
+    #   Information about the product views.
     #   @return [Array<Types::ProductViewDetail>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdminOutput AWS API Documentation
@@ -3396,30 +3399,27 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   The list of filters with which to limit search results. If no search
-    #   filters are specified, the output is all the products to which the
-    #   calling user has access.
+    #   The search filters. If no search filters are specified, the output
+    #   includes all products to which the caller has access.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] page_size
-    #   The maximum number of items to return in the results. If more
-    #   results exist than fit in the specified `PageSize`, the value of
-    #   `NextPageToken` in the response is non-null.
+    #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_by
-    #   The sort field specifier. If no value is specified, results are not
+    #   The sort field. If no value is specified, the results are not
     #   sorted.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   The sort order specifier. If no value is specified, results are not
+    #   The sort order. If no value is specified, the results are not
     #   sorted.
     #   @return [String]
     #
     # @!attribute [rw] page_token
-    #   The page token of the first page retrieved. If null, this retrieves
-    #   the first page of size `PageSize`.
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsInput AWS API Documentation
@@ -3435,16 +3435,16 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] product_view_summaries
-    #   A list of the product view summary objects.
+    #   Information about the product views.
     #   @return [Array<Types::ProductViewSummary>]
     #
     # @!attribute [rw] product_view_aggregations
-    #   A list of the product view aggregation value objects.
+    #   The product view aggregations.
     #   @return [Hash<String,Array<Types::ProductViewAggregationValue>>]
     #
     # @!attribute [rw] next_page_token
-    #   The page token to use to retrieve the next page of results for this
-    #   operation. If there are no more pages, this value is null.
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsOutput AWS API Documentation
@@ -3456,9 +3456,9 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Key-value pairs to associate with this provisioning. These tags are
-    # entirely discretionary and are propagated to the resources created in
-    # the provisioning.
+    # Information about a tag. A tag is a key-value pair. Tags are entirely
+    # discretionary and are propagated to the resources created when
+    # provisioning a product.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -3469,12 +3469,11 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] key
-    #   The `ProvisioningArtifactParameter.TagKey` parameter from
-    #   DescribeProvisioningParameters.
+    #   The tag key.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The desired value for this key.
+    #   The value for this key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Tag AWS API Documentation
@@ -3485,22 +3484,22 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The TagOption details.
+    # Information about a TagOption.
     #
     # @!attribute [rw] key
-    #   The TagOptionDetail key.
+    #   The TagOption key.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The TagOptionDetail value.
+    #   The TagOption value.
     #   @return [String]
     #
     # @!attribute [rw] active
-    #   The TagOptionDetail active state.
+    #   The TagOption active state.
     #   @return [Boolean]
     #
     # @!attribute [rw] id
-    #   The TagOptionDetail identifier.
+    #   The TagOption identifier.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionDetail AWS API Documentation
@@ -3513,14 +3512,14 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The TagOption summary key-value pair.
+    # Summary information about a TagOption.
     #
     # @!attribute [rw] key
-    #   The TagOptionSummary key.
+    #   The TagOption key.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The TagOptionSummary value.
+    #   The TagOption value.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TagOptionSummary AWS API Documentation
@@ -3543,23 +3542,21 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] provisioned_product_name
-    #   The name of the ProvisionedProduct object to terminate. Specify
-    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
-    #   both.
+    #   The name of the provisioned product. You cannot specify both
+    #   `ProvisionedProductName` and `ProvisionedProductId`.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_id
-    #   The identifier of the ProvisionedProduct object to terminate.
-    #   Specify either `ProvisionedProductName` or `ProvisionedProductId`,
-    #   but not both.
+    #   The identifier of the provisioned product. You cannot specify both
+    #   `ProvisionedProductName` and `ProvisionedProductId`.
     #   @return [String]
     #
     # @!attribute [rw] terminate_token
     #   An idempotency token that uniquely identifies the termination
     #   request. This token is only valid during the termination process.
-    #   After the ProvisionedProduct object is terminated, further requests
-    #   to terminate the same ProvisionedProduct object always return
-    #   **ResourceNotFound** regardless of the value of `TerminateToken`.
+    #   After the provisioned product is terminated, subsequent requests to
+    #   terminate the same provisioned product always return
+    #   **ResourceNotFound**.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3567,7 +3564,7 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] ignore_errors
     #   If set to true, AWS Service Catalog stops managing the specified
-    #   ProvisionedProduct object even if it cannot delete the underlying
+    #   provisioned product even if it cannot delete the underlying
     #   resources.
     #   @return [Boolean]
     #
@@ -3593,10 +3590,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] record_detail
-    #   The detailed result of the TerminateProvisionedProduct request,
-    #   containing the inputs made to that request, the current state of the
-    #   request, a pointer to the ProvisionedProduct object that the request
-    #   is modifying, and a list of any errors that the request encountered.
+    #   Information about the result of this request.
     #   @return [Types::RecordDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProductOutput AWS API Documentation
@@ -3626,11 +3620,11 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the constraint to update.
+    #   The identifier of the constraint.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated text description of the constraint.
+    #   The updated description of the constraint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraintInput AWS API Documentation
@@ -3643,11 +3637,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] constraint_detail
-    #   The resulting detailed constraint information.
+    #   Information about the constraint.
     #   @return [Types::ConstraintDetail]
     #
     # @!attribute [rw] constraint_parameters
-    #   The resulting updated constraint parameters.
+    #   The constraint parameters.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -3692,7 +3686,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the portfolio for the update request.
+    #   The portfolio identifier.
     #   @return [String]
     #
     # @!attribute [rw] display_name
@@ -3700,7 +3694,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated text description of the portfolio.
+    #   The updated description of the portfolio.
     #   @return [String]
     #
     # @!attribute [rw] provider_name
@@ -3708,13 +3702,11 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] add_tags
-    #   Tags to add to the existing list of tags associated with the
-    #   portfolio.
+    #   The tags to add.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] remove_tags
-    #   Tags to remove from the existing list of tags associated with the
-    #   portfolio.
+    #   The tags to remove.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioInput AWS API Documentation
@@ -3731,11 +3723,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] portfolio_detail
-    #   The resulting detailed portfolio information.
+    #   Information about the portfolio.
     #   @return [Types::PortfolioDetail]
     #
     # @!attribute [rw] tags
-    #   Tags associated with the portfolio.
+    #   Information about the tags associated with the portfolio.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioOutput AWS API Documentation
@@ -3779,7 +3771,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The identifier of the product for the update request.
+    #   The product identifier.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3791,7 +3783,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated text description of the product.
+    #   The updated description of the product.
     #   @return [String]
     #
     # @!attribute [rw] distributor
@@ -3811,13 +3803,11 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] add_tags
-    #   Tags to add to the existing list of tags associated with the
-    #   product.
+    #   The tags to add to the product.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] remove_tags
-    #   Tags to remove from the existing list of tags associated with the
-    #   product.
+    #   The tags to remove from the product.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProductInput AWS API Documentation
@@ -3838,11 +3828,11 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] product_view_detail
-    #   The resulting detailed product view information.
+    #   Information about the product view.
     #   @return [Types::ProductViewDetail]
     #
     # @!attribute [rw] tags
-    #   Tags associated with the product.
+    #   Information about the tags associated with the product.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProductOutput AWS API Documentation
@@ -3884,40 +3874,35 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_name
-    #   The updated name of the ProvisionedProduct object. Specify either
-    #   `ProvisionedProductName` or `ProvisionedProductId`, but not both.
+    #   The updated name of the provisioned product. You cannot specify both
+    #   `ProvisionedProductName` and `ProvisionedProductId`.
     #   @return [String]
     #
     # @!attribute [rw] provisioned_product_id
-    #   The identifier of the ProvisionedProduct object to update. Specify
-    #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
-    #   both.
+    #   The identifier of the provisioned product. You cannot specify both
+    #   `ProvisionedProductName` and `ProvisionedProductId`.
     #   @return [String]
     #
     # @!attribute [rw] product_id
-    #   The identifier of the ProvisionedProduct object.
+    #   The identifier of the provisioned product.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The provisioning artifact identifier for this product. This is
-    #   sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] path_id
-    #   The identifier of the path to use in the updated ProvisionedProduct
-    #   object. This value is optional if the product has a default path,
-    #   and is required if there is more than one path for the specified
-    #   product.
+    #   The new path identifier. This value is optional if the product has a
+    #   default path, and required if the product has more than one path.
     #   @return [String]
     #
     # @!attribute [rw] provisioning_parameters
-    #   A list of `ProvisioningParameter` objects used to update the
-    #   ProvisionedProduct object.
+    #   The new parameters.
     #   @return [Array<Types::UpdateProvisioningParameter>]
     #
     # @!attribute [rw] update_token
     #   The idempotency token that uniquely identifies the provisioning
-    #   update request.
+    #   update rquest.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -3938,10 +3923,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] record_detail
-    #   The detailed result of the UpdateProvisionedProduct request,
-    #   containing the inputs made to that request, the current state of the
-    #   request, a pointer to the ProvisionedProduct object that the request
-    #   is modifying, and a list of any errors that the request encountered.
+    #   Information about the result of the request.
     #   @return [Types::RecordDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductOutput AWS API Documentation
@@ -3960,6 +3942,7 @@ module Aws::ServiceCatalog
     #         provisioning_artifact_id: "Id", # required
     #         name: "ProvisioningArtifactName",
     #         description: "ProvisioningArtifactDescription",
+    #         active: false,
     #       }
     #
     # @!attribute [rw] accept_language
@@ -3977,8 +3960,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] provisioning_artifact_id
-    #   The identifier of the provisioning artifact for the update request.
-    #   This is sometimes referred to as the product version.
+    #   The identifier of the provisioning artifact.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3986,8 +3968,12 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The updated text description of the provisioning artifact.
+    #   The updated description of the provisioning artifact.
     #   @return [String]
+    #
+    # @!attribute [rw] active
+    #   Indicates whether the product version is active.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactInput AWS API Documentation
     #
@@ -3996,17 +3982,17 @@ module Aws::ServiceCatalog
       :product_id,
       :provisioning_artifact_id,
       :name,
-      :description)
+      :description,
+      :active)
       include Aws::Structure
     end
 
     # @!attribute [rw] provisioning_artifact_detail
-    #   The resulting detailed provisioning artifact information.
+    #   Information about the provisioning artifact.
     #   @return [Types::ProvisioningArtifactDetail]
     #
     # @!attribute [rw] info
-    #   Additional information about the provisioning artifact update
-    #   request.
+    #   The URL of the CloudFormation template in Amazon S3.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -4022,9 +4008,7 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # The parameter key-value pair used to update a ProvisionedProduct
-    # object. If `UsePreviousValue` is set to true, `Value` is ignored and
-    # the value for `Key` is kept as previously set (current value).
+    # The parameter key-value pair used to update a provisioned product.
     #
     # @note When making an API call, you may pass UpdateProvisioningParameter
     #   data as a hash:
@@ -4036,19 +4020,16 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] key
-    #   The `ProvisioningArtifactParameter.ParameterKey` parameter from
-    #   DescribeProvisioningParameters.
+    #   The parameter key.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value to use for updating the product provisioning. Any
-    #   constraints on this value can be found in the
-    #   `ProvisioningArtifactParameter` parameter for `Key`.
+    #   The parameter value.
     #   @return [String]
     #
     # @!attribute [rw] use_previous_value
-    #   If true, uses the currently set value for `Key`, ignoring
-    #   `UpdateProvisioningParameter.Value`.
+    #   If set to true, `Value` is ignored and the previous parameter value
+    #   is kept.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningParameter AWS API Documentation
@@ -4070,7 +4051,7 @@ module Aws::ServiceCatalog
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the constraint to update.
+    #   The TagOption identifier.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -4091,7 +4072,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] tag_option_detail
-    #   The resulting detailed TagOption information.
+    #   Information about the TagOption.
     #   @return [Types::TagOptionDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateTagOptionOutput AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.9.0 (2017-12-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-servicediscovery` gem.
+
 3.8.0 (2017-11-30)
 ------------------
 

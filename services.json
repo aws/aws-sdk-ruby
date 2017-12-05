@@ -420,6 +420,9 @@
   "ServiceCatalog": {
     "models": "servicecatalog/2015-12-10"
   },
+  "ServiceDiscovery": {
+    "models": "servicediscovery/2017-03-14"
+  },
   "Shield": {
     "models": "shield/2016-06-02"
   },

@@ -335,6 +335,7 @@ module Aws
             'SageMakerRuntime' => 'runtime.sagemaker',
             'ServerlessApplicationRepository' => 'serverlessrepo',
             'ServiceCatalog' => 'servicecatalog',
+            'ServiceDiscovery' => 'servicediscovery',
             'Shield' => 'shield',
             'SimpleDB' => 'sdb',
             'Snowball' => 'snowball',
