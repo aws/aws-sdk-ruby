@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.97 (2017-12-05)
+------------------
+
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
 
 * Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
