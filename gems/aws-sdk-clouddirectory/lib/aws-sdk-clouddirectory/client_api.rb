@@ -167,6 +167,8 @@ module Aws::CloudDirectory
     FacetNameList = Shapes::ListShape.new(name: 'FacetNameList')
     FacetNotFoundException = Shapes::StructureShape.new(name: 'FacetNotFoundException')
     FacetValidationException = Shapes::StructureShape.new(name: 'FacetValidationException')
+    GetAppliedSchemaVersionRequest = Shapes::StructureShape.new(name: 'GetAppliedSchemaVersionRequest')
+    GetAppliedSchemaVersionResponse = Shapes::StructureShape.new(name: 'GetAppliedSchemaVersionResponse')
     GetDirectoryRequest = Shapes::StructureShape.new(name: 'GetDirectoryRequest')
     GetDirectoryResponse = Shapes::StructureShape.new(name: 'GetDirectoryResponse')
     GetFacetRequest = Shapes::StructureShape.new(name: 'GetFacetRequest')
@@ -177,6 +179,7 @@ module Aws::CloudDirectory
     GetSchemaAsJsonResponse = Shapes::StructureShape.new(name: 'GetSchemaAsJsonResponse')
     GetTypedLinkFacetInformationRequest = Shapes::StructureShape.new(name: 'GetTypedLinkFacetInformationRequest')
     GetTypedLinkFacetInformationResponse = Shapes::StructureShape.new(name: 'GetTypedLinkFacetInformationResponse')
+    IncompatibleSchemaException = Shapes::StructureShape.new(name: 'IncompatibleSchemaException')
     IndexAttachment = Shapes::StructureShape.new(name: 'IndexAttachment')
     IndexAttachmentList = Shapes::ListShape.new(name: 'IndexAttachmentList')
     IndexedAttributeMissingException = Shapes::StructureShape.new(name: 'IndexedAttributeMissingException')
@@ -318,6 +321,10 @@ module Aws::CloudDirectory
     UpdateSchemaResponse = Shapes::StructureShape.new(name: 'UpdateSchemaResponse')
     UpdateTypedLinkFacetRequest = Shapes::StructureShape.new(name: 'UpdateTypedLinkFacetRequest')
     UpdateTypedLinkFacetResponse = Shapes::StructureShape.new(name: 'UpdateTypedLinkFacetResponse')
+    UpgradeAppliedSchemaRequest = Shapes::StructureShape.new(name: 'UpgradeAppliedSchemaRequest')
+    UpgradeAppliedSchemaResponse = Shapes::StructureShape.new(name: 'UpgradeAppliedSchemaResponse')
+    UpgradePublishedSchemaRequest = Shapes::StructureShape.new(name: 'UpgradePublishedSchemaRequest')
+    UpgradePublishedSchemaResponse = Shapes::StructureShape.new(name: 'UpgradePublishedSchemaResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Version = Shapes::StringShape.new(name: 'Version')
 
@@ -844,6 +851,12 @@ module Aws::CloudDirectory
 
     FacetNameList.member = Shapes::ShapeRef.new(shape: FacetName)
 
+    GetAppliedSchemaVersionRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SchemaArn"))
+    GetAppliedSchemaVersionRequest.struct_class = Types::GetAppliedSchemaVersionRequest
+
+    GetAppliedSchemaVersionResponse.add_member(:applied_schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AppliedSchemaArn"))
+    GetAppliedSchemaVersionResponse.struct_class = Types::GetAppliedSchemaVersionResponse
+
     GetDirectoryRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: DirectoryArn, required: true, location: "header", location_name: "x-amz-data-partition"))
     GetDirectoryRequest.struct_class = Types::GetDirectoryRequest
 
@@ -890,6 +903,7 @@ module Aws::CloudDirectory
     LinkNameToObjectIdentifierMap.value = Shapes::ShapeRef.new(shape: ObjectIdentifier)
 
     ListAppliedSchemaArnsRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DirectoryArn"))
+    ListAppliedSchemaArnsRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SchemaArn"))
     ListAppliedSchemaArnsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAppliedSchemaArnsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
     ListAppliedSchemaArnsRequest.struct_class = Types::ListAppliedSchemaArnsRequest
@@ -1049,6 +1063,7 @@ module Aws::CloudDirectory
     ListPolicyAttachmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPolicyAttachmentsResponse.struct_class = Types::ListPolicyAttachmentsResponse
 
+    ListPublishedSchemaArnsRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SchemaArn"))
     ListPublishedSchemaArnsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPublishedSchemaArnsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
     ListPublishedSchemaArnsRequest.struct_class = Types::ListPublishedSchemaArnsRequest
@@ -1140,6 +1155,7 @@ module Aws::CloudDirectory
 
     PublishSchemaRequest.add_member(:development_schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     PublishSchemaRequest.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "Version"))
+    PublishSchemaRequest.add_member(:minor_version, Shapes::ShapeRef.new(shape: Version, location_name: "MinorVersion"))
     PublishSchemaRequest.add_member(:name, Shapes::ShapeRef.new(shape: SchemaName, location_name: "Name"))
     PublishSchemaRequest.struct_class = Types::PublishSchemaRequest
 
@@ -1280,6 +1296,24 @@ module Aws::CloudDirectory
     UpdateTypedLinkFacetRequest.struct_class = Types::UpdateTypedLinkFacetRequest
 
     UpdateTypedLinkFacetResponse.struct_class = Types::UpdateTypedLinkFacetResponse
+
+    UpgradeAppliedSchemaRequest.add_member(:published_schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PublishedSchemaArn"))
+    UpgradeAppliedSchemaRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DirectoryArn"))
+    UpgradeAppliedSchemaRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Bool, location_name: "DryRun"))
+    UpgradeAppliedSchemaRequest.struct_class = Types::UpgradeAppliedSchemaRequest
+
+    UpgradeAppliedSchemaResponse.add_member(:upgraded_schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "UpgradedSchemaArn"))
+    UpgradeAppliedSchemaResponse.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DirectoryArn"))
+    UpgradeAppliedSchemaResponse.struct_class = Types::UpgradeAppliedSchemaResponse
+
+    UpgradePublishedSchemaRequest.add_member(:development_schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DevelopmentSchemaArn"))
+    UpgradePublishedSchemaRequest.add_member(:published_schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PublishedSchemaArn"))
+    UpgradePublishedSchemaRequest.add_member(:minor_version, Shapes::ShapeRef.new(shape: Version, required: true, location_name: "MinorVersion"))
+    UpgradePublishedSchemaRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Bool, location_name: "DryRun"))
+    UpgradePublishedSchemaRequest.struct_class = Types::UpgradePublishedSchemaRequest
+
+    UpgradePublishedSchemaResponse.add_member(:upgraded_schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "UpgradedSchemaArn"))
+    UpgradePublishedSchemaResponse.struct_class = Types::UpgradePublishedSchemaResponse
 
 
     # @api private
@@ -1725,6 +1759,21 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+      end)
+
+      api.add_operation(:get_applied_schema_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAppliedSchemaVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/amazonclouddirectory/2017-01-11/schema/getappliedschema"
+        o.input = Shapes::ShapeRef.new(shape: GetAppliedSchemaVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAppliedSchemaVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_directory, Seahorse::Model::Operation.new.tap do |o|
@@ -2404,6 +2453,39 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: FacetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRuleException)
+      end)
+
+      api.add_operation(:upgrade_applied_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpgradeAppliedSchema"
+        o.http_method = "PUT"
+        o.http_request_uri = "/amazonclouddirectory/2017-01-11/schema/upgradeapplied"
+        o.input = Shapes::ShapeRef.new(shape: UpgradeAppliedSchemaRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpgradeAppliedSchemaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleSchemaException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAttachmentException)
+      end)
+
+      api.add_operation(:upgrade_published_schema, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpgradePublishedSchema"
+        o.http_method = "PUT"
+        o.http_request_uri = "/amazonclouddirectory/2017-01-11/schema/upgradepublished"
+        o.input = Shapes::ShapeRef.new(shape: UpgradePublishedSchemaRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpgradePublishedSchemaResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleSchemaException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAttachmentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
     end
 

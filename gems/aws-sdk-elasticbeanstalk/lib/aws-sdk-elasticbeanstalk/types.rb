@@ -1020,10 +1020,16 @@ module Aws::ElasticBeanstalk
     #   @return [Boolean]
     #
     # @!attribute [rw] process
-    #   Preprocesses and validates the environment manifest and
-    #   configuration files in the source bundle. Validating configuration
-    #   files can identify issues prior to deploying the application version
-    #   to an environment.
+    #   Preprocesses and validates the environment manifest (`env.yaml`) and
+    #   configuration files (`*.config` files in the `.ebextensions` folder)
+    #   in the source bundle. Validating configuration files can identify
+    #   issues prior to deploying the application version to an environment.
+    #
+    #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration
+    #   files. It doesn't validate your application's configuration files,
+    #   like proxy server or Docker configuration.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersionMessage AWS API Documentation
@@ -1101,7 +1107,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of the custome platform.
+    #   The ARN of the custom platform.
     #   @return [String]
     #
     # @!attribute [rw] source_configuration

@@ -152,7 +152,8 @@ module Aws::CloudDirectory
     #   where the object resides. For more information, see arns.
     #
     # @option params [required, Types::SchemaFacet] :schema_facet
-    #   Identifiers for the facet that you are adding to the object.
+    #   Identifiers for the facet that you are adding to the object. See
+    #   SchemaFacet for details.
     #
     # @option params [Array<Types::AttributeKeyAndValue>] :object_attribute_list
     #   Attributes on the facet that you are adding to the object.
@@ -200,8 +201,9 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Copies the input published schema into the Directory with the same
-    # name and version as that of the published schema .
+    # Copies the input published schema, at the specified version, into the
+    # Directory with the same name and version as that of the published
+    # schema.
     #
     # @option params [required, String] :published_schema_arn
     #   Published schema Amazon Resource Name (ARN) that needs to be copied.
@@ -734,8 +736,7 @@ module Aws::CloudDirectory
     end
 
     # Performs all the write operations in a batch. Either all the
-    # operations succeed or none. Batch writes supports only object-related
-    # operations.
+    # operations succeed or none.
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory.
@@ -1192,8 +1193,8 @@ module Aws::CloudDirectory
     #   in which the object will be created. For more information, see arns.
     #
     # @option params [required, Array<Types::SchemaFacet>] :schema_facets
-    #   A list of schema facets to be associated with the object that contains
-    #   `SchemaArn` and facet name. For more information, see arns.
+    #   A list of schema facets to be associated with the object. Do not
+    #   provide minor version components. See SchemaFacet for details.
     #
     # @option params [Array<Types::AttributeKeyAndValue>] :object_attribute_list
     #   The attribute map whose attribute ARN contains the key and attribute
@@ -1736,6 +1737,35 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Returns current applied schema version ARN, including the minor
+    # version in use.
+    #
+    # @option params [required, String] :schema_arn
+    #   The ARN of the applied schema.
+    #
+    # @return [Types::GetAppliedSchemaVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAppliedSchemaVersionResponse#applied_schema_arn #applied_schema_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_applied_schema_version({
+    #     schema_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.applied_schema_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersion AWS API Documentation
+    #
+    # @overload get_applied_schema_version(params = {})
+    # @param [Hash] params ({})
+    def get_applied_schema_version(params = {}, options = {})
+      req = build_request(:get_applied_schema_version, params)
+      req.send_request(options)
+    end
+
     # Retrieves metadata about a directory.
     #
     # @option params [required, String] :directory_arn
@@ -1919,10 +1949,15 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Lists schemas applied to a directory.
+    # Lists schema major versions applied to a directory. If `SchemaArn` is
+    # provided, lists the minor version.
     #
     # @option params [required, String] :directory_arn
     #   The ARN of the directory you are listing.
+    #
+    # @option params [String] :schema_arn
+    #   The response for `ListAppliedSchemaArns` when this parameter is used
+    #   will list all minor version ARNs for a major version.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -1939,6 +1974,7 @@ module Aws::CloudDirectory
     #
     #   resp = client.list_applied_schema_arns({
     #     directory_arn: "Arn", # required
+    #     schema_arn: "Arn",
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -1958,7 +1994,7 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Lists indices attached to an object.
+    # Lists indices attached to the specified object.
     #
     # @option params [required, String] :directory_arn
     #   The ARN of the directory.
@@ -2295,7 +2331,7 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Lists objects attached to the specified index.
+    # Lists objects and indexed values attached to the index.
     #
     # @option params [required, String] :directory_arn
     #   The ARN of the directory that the index exists in.
@@ -2307,7 +2343,13 @@ module Aws::CloudDirectory
     #   The reference to the index to list.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to retrieve from the index.
+    #   The maximum number of objects in a single page to retrieve from the
+    #   index during a request. For more information, see [AWS Directory
+    #   Service Limits][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -2838,7 +2880,12 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Retrieves each published schema Amazon Resource Name (ARN).
+    # Lists schema major versions for a published schema. If `SchemaArn` is
+    # provided, lists the minor version.
+    #
+    # @option params [String] :schema_arn
+    #   The response for `ListPublishedSchemaArns` when this parameter is used
+    #   will list all minor version ARNs for a major version.
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -2854,6 +2901,7 @@ module Aws::CloudDirectory
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_published_schema_arns({
+    #     schema_arn: "Arn",
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -3086,17 +3134,21 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Publishes a development schema with a version. If description and
-    # attributes are specified, `PublishSchema` overrides the development
-    # schema description and attributes. If not, the development schema
-    # description and attributes are used.
+    # Publishes a development schema with a major version and a recommended
+    # minor version.
     #
     # @option params [required, String] :development_schema_arn
     #   The Amazon Resource Name (ARN) that is associated with the development
     #   schema. For more information, see arns.
     #
     # @option params [required, String] :version
-    #   The version under which the schema will be published.
+    #   The major version under which the schema will be published. Schemas
+    #   have both a major and minor version associated with them.
+    #
+    # @option params [String] :minor_version
+    #   The minor version under which the schema will be published. This
+    #   parameter is recommended. Schemas have both a major and minor version
+    #   associated with them.
     #
     # @option params [String] :name
     #   The new name under which the schema will be published. If this is not
@@ -3111,6 +3163,7 @@ module Aws::CloudDirectory
     #   resp = client.publish_schema({
     #     development_schema_arn: "Arn", # required
     #     version: "Version", # required
+    #     minor_version: "Version",
     #     name: "SchemaName",
     #   })
     #
@@ -3170,7 +3223,7 @@ module Aws::CloudDirectory
     #   The ARN of the directory in which the object resides.
     #
     # @option params [required, Types::SchemaFacet] :schema_facet
-    #   The facet to remove.
+    #   The facet to remove. See SchemaFacet for details.
     #
     # @option params [required, Types::ObjectReference] :object_reference
     #   A reference to the object to remove the facet from.
@@ -3500,6 +3553,101 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Upgrades a single directory in-place using the `PublishedSchemaArn`
+    # with schema updates found in `MinorVersion`. Backwards-compatible
+    # minor version upgrades are instantaneously available for readers on
+    # all objects in the directory. Note: This is a synchronous API call and
+    # upgrades only one schema on a given directory per call. To upgrade
+    # multiple directories from one schema, you would need to call this API
+    # on each directory.
+    #
+    # @option params [required, String] :published_schema_arn
+    #   The revision of the published schema to upgrade the directory to.
+    #
+    # @option params [required, String] :directory_arn
+    #   The ARN for the directory to which the upgraded schema will be
+    #   applied.
+    #
+    # @option params [Boolean] :dry_run
+    #   Used for testing whether the major version schemas are backward
+    #   compatible or not. If schema compatibility fails, an exception would
+    #   be thrown else the call would succeed but no changes will be saved.
+    #   This parameter is optional.
+    #
+    # @return [Types::UpgradeAppliedSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpgradeAppliedSchemaResponse#upgraded_schema_arn #upgraded_schema_arn} => String
+    #   * {Types::UpgradeAppliedSchemaResponse#directory_arn #directory_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.upgrade_applied_schema({
+    #     published_schema_arn: "Arn", # required
+    #     directory_arn: "Arn", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.upgraded_schema_arn #=> String
+    #   resp.directory_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchema AWS API Documentation
+    #
+    # @overload upgrade_applied_schema(params = {})
+    # @param [Hash] params ({})
+    def upgrade_applied_schema(params = {}, options = {})
+      req = build_request(:upgrade_applied_schema, params)
+      req.send_request(options)
+    end
+
+    # Upgrades a published schema under a new minor version revision using
+    # the current contents of `DevelopmentSchemaArn`.
+    #
+    # @option params [required, String] :development_schema_arn
+    #   The ARN of the development schema with the changes used for the
+    #   upgrade.
+    #
+    # @option params [required, String] :published_schema_arn
+    #   The ARN of the published schema to be upgraded.
+    #
+    # @option params [required, String] :minor_version
+    #   Identifies the minor version of the published schema that will be
+    #   created. This parameter is NOT optional.
+    #
+    # @option params [Boolean] :dry_run
+    #   Used for testing whether the Development schema provided is backwards
+    #   compatible, or not, with the publish schema provided by the user to be
+    #   upgraded. If schema compatibility fails, an exception would be thrown
+    #   else the call would succeed. This parameter is optional and defaults
+    #   to false.
+    #
+    # @return [Types::UpgradePublishedSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpgradePublishedSchemaResponse#upgraded_schema_arn #upgraded_schema_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.upgrade_published_schema({
+    #     development_schema_arn: "Arn", # required
+    #     published_schema_arn: "Arn", # required
+    #     minor_version: "Version", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.upgraded_schema_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchema AWS API Documentation
+    #
+    # @overload upgrade_published_schema(params = {})
+    # @param [Hash] params ({})
+    def upgrade_published_schema(params = {}, options = {})
+      req = build_request(:upgrade_published_schema, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3513,7 +3661,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

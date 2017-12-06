@@ -514,10 +514,16 @@ module Aws::ElasticBeanstalk
     #   doesn't already exist.
     #
     # @option params [Boolean] :process
-    #   Preprocesses and validates the environment manifest and configuration
-    #   files in the source bundle. Validating configuration files can
-    #   identify issues prior to deploying the application version to an
-    #   environment.
+    #   Preprocesses and validates the environment manifest (`env.yaml`) and
+    #   configuration files (`*.config` files in the `.ebextensions` folder)
+    #   in the source bundle. Validating configuration files can identify
+    #   issues prior to deploying the application version to an environment.
+    #
+    #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration files.
+    #   It doesn't validate your application's configuration files, like
+    #   proxy server or Docker configuration.
+    #
+    #    </note>
     #
     # @return [Types::ApplicationVersionDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -648,7 +654,7 @@ module Aws::ElasticBeanstalk
     #   stack as the source configuration template.
     #
     # @option params [String] :platform_arn
-    #   The ARN of the custome platform.
+    #   The ARN of the custom platform.
     #
     # @option params [Types::SourceConfiguration] :source_configuration
     #   If specified, AWS Elastic Beanstalk uses the configuration values from
@@ -1040,9 +1046,12 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Creates the Amazon S3 storage location for the account.
-    #
-    # This location is used to store user log files.
+    # Creates a bucket in Amazon S3 to store application versions, logs, and
+    # other files used by Elastic Beanstalk environments. The Elastic
+    # Beanstalk console and EB CLI call this API the first time you create
+    # an environment in a region. If the storage location already exists,
+    # `CreateStorageLocation` still returns the bucket name but does not
+    # create a new bucket.
     #
     # @return [Types::CreateStorageLocationResultMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2669,8 +2678,13 @@ module Aws::ElasticBeanstalk
     # Returns the tags applied to an AWS Elastic Beanstalk resource. The
     # response contains a list of tag key-value pairs.
     #
-    # Currently, Elastic Beanstalk only supports tagging Elastic Beanstalk
-    # environments.
+    # Currently, Elastic Beanstalk only supports tagging of Elastic
+    # Beanstalk environments. For details about environment tagging, see
+    # [Tagging Resources in Your Elastic Beanstalk Environment][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resouce for which a tag list is
@@ -3772,7 +3786,30 @@ module Aws::ElasticBeanstalk
     # `TagsToRemove`.
     #
     # Currently, Elastic Beanstalk only supports tagging of Elastic
-    # Beanstalk environments.
+    # Beanstalk environments. For details about environment tagging, see
+    # [Tagging Resources in Your Elastic Beanstalk Environment][1].
+    #
+    # If you create a custom IAM user policy to control permission to this
+    # operation, specify one of the following two virtual actions (or both)
+    # instead of the API operation name:
+    #
+    # elasticbeanstalk:AddTags
+    #
+    # : Controls permission to call `UpdateTagsForResource` and pass a list
+    #   of tags to add in the `TagsToAdd` parameter.
+    #
+    # elasticbeanstalk:RemoveTags
+    #
+    # : Controls permission to call `UpdateTagsForResource` and pass a list
+    #   of tag keys to remove in the `TagsToRemove` parameter.
+    #
+    # For details about creating a custom user policy, see [Creating a
+    # Custom User Policy][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.tagging.html
+    # [2]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#AWSHowTo.iam.policies
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resouce to be updated.
@@ -3912,7 +3949,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

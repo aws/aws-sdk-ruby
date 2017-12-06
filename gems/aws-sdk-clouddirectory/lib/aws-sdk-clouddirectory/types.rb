@@ -44,7 +44,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] schema_facet
-    #   Identifiers for the facet that you are adding to the object.
+    #   Identifiers for the facet that you are adding to the object. See
+    #   SchemaFacet for details.
     #   @return [Types::SchemaFacet]
     #
     # @!attribute [rw] object_attribute_list
@@ -976,8 +977,8 @@ module Aws::CloudDirectory
     end
 
     # Detaches the specified policy from the specified directory inside a
-    # BatchRead operation. For more information, see DetachPolicy and
-    # BatchReadRequest$Operations.
+    # BatchWrite operation. For more information, see DetachPolicy and
+    # BatchWriteRequest$Operations.
     #
     # @note When making an API call, you may pass BatchDetachPolicy
     #   data as a hash:
@@ -3378,8 +3379,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] schema_facets
-    #   A list of schema facets to be associated with the object that
-    #   contains `SchemaArn` and facet name. For more information, see arns.
+    #   A list of schema facets to be associated with the object. Do not
+    #   provide minor version components. See SchemaFacet for details.
     #   @return [Array<Types::SchemaFacet>]
     #
     # @!attribute [rw] object_attribute_list
@@ -4157,6 +4158,36 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAppliedSchemaVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         schema_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   The ARN of the applied schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersionRequest AWS API Documentation
+    #
+    class GetAppliedSchemaVersionRequest < Struct.new(
+      :schema_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] applied_schema_arn
+    #   Current applied schema ARN, including the minor version in use if
+    #   one was provided.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetAppliedSchemaVersionResponse AWS API Documentation
+    #
+    class GetAppliedSchemaVersionResponse < Struct.new(
+      :applied_schema_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDirectoryRequest
     #   data as a hash:
     #
@@ -4255,7 +4286,10 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] schema_facets
-    #   The facets attached to the specified object.
+    #   The facets attached to the specified object. Although the response
+    #   does not include minor version information, the most recently
+    #   applied minor version of each Facet is in effect. See
+    #   GetAppliedSchemaVersion for details.
     #   @return [Array<Types::SchemaFacet>]
     #
     # @!attribute [rw] object_identifier
@@ -4360,7 +4394,11 @@ module Aws::CloudDirectory
     #   @return [Array<Types::AttributeKeyAndValue>]
     #
     # @!attribute [rw] object_identifier
-    #   The `ObjectIdentifier` of the object attached to the index.
+    #   In response to ListIndex, the `ObjectIdentifier` of the object
+    #   attached to the index. In response to ListAttachedIndices, the
+    #   `ObjectIdentifier` of the index attached to the object. This field
+    #   will always contain the `ObjectIdentifier` of the object on the
+    #   opposite side of the attachment specified in the query.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/IndexAttachment AWS API Documentation
@@ -4376,12 +4414,18 @@ module Aws::CloudDirectory
     #
     #       {
     #         directory_arn: "Arn", # required
+    #         schema_arn: "Arn",
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
     #
     # @!attribute [rw] directory_arn
     #   The ARN of the directory you are listing.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_arn
+    #   The response for `ListAppliedSchemaArns` when this parameter is used
+    #   will list all minor version ARNs for a major version.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -4396,6 +4440,7 @@ module Aws::CloudDirectory
     #
     class ListAppliedSchemaArnsRequest < Struct.new(
       :directory_arn,
+      :schema_arn,
       :next_token,
       :max_results)
       include Aws::Structure
@@ -4820,7 +4865,13 @@ module Aws::CloudDirectory
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to retrieve from the index.
+    #   The maximum number of objects in a single page to retrieve from the
+    #   index during a request. For more information, see [AWS Directory
+    #   Service Limits][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html#limits_cd
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -5362,9 +5413,15 @@ module Aws::CloudDirectory
     #   data as a hash:
     #
     #       {
+    #         schema_arn: "Arn",
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
+    #
+    # @!attribute [rw] schema_arn
+    #   The response for `ListPublishedSchemaArns` when this parameter is
+    #   used will list all minor version ARNs for a major version.
+    #   @return [String]
     #
     # @!attribute [rw] next_token
     #   The pagination token.
@@ -5377,6 +5434,7 @@ module Aws::CloudDirectory
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPublishedSchemaArnsRequest AWS API Documentation
     #
     class ListPublishedSchemaArnsRequest < Struct.new(
+      :schema_arn,
       :next_token,
       :max_results)
       include Aws::Structure
@@ -5845,6 +5903,7 @@ module Aws::CloudDirectory
     #       {
     #         development_schema_arn: "Arn", # required
     #         version: "Version", # required
+    #         minor_version: "Version",
     #         name: "SchemaName",
     #       }
     #
@@ -5854,7 +5913,14 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version under which the schema will be published.
+    #   The major version under which the schema will be published. Schemas
+    #   have both a major and minor version associated with them.
+    #   @return [String]
+    #
+    # @!attribute [rw] minor_version
+    #   The minor version under which the schema will be published. This
+    #   parameter is recommended. Schemas have both a major and minor
+    #   version associated with them.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -5867,6 +5933,7 @@ module Aws::CloudDirectory
     class PublishSchemaRequest < Struct.new(
       :development_schema_arn,
       :version,
+      :minor_version,
       :name)
       include Aws::Structure
     end
@@ -5937,7 +6004,7 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] schema_facet
-    #   The facet to remove.
+    #   The facet to remove. See SchemaFacet for details.
     #   @return [Types::SchemaFacet]
     #
     # @!attribute [rw] object_reference
@@ -5998,7 +6065,13 @@ module Aws::CloudDirectory
     #       }
     #
     # @!attribute [rw] schema_arn
-    #   The ARN of the schema that contains the facet.
+    #   The ARN of the schema that contains the facet with no minor
+    #   component. See arns and [In-Place Schema Upgrade][1] for a
+    #   description of when to provide minor versions.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/inplaceschemaupgrade.html
     #   @return [String]
     #
     # @!attribute [rw] facet_name
@@ -6756,6 +6829,111 @@ module Aws::CloudDirectory
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateTypedLinkFacetResponse AWS API Documentation
     #
     class UpdateTypedLinkFacetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpgradeAppliedSchemaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         published_schema_arn: "Arn", # required
+    #         directory_arn: "Arn", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] published_schema_arn
+    #   The revision of the published schema to upgrade the directory to.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_arn
+    #   The ARN for the directory to which the upgraded schema will be
+    #   applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Used for testing whether the major version schemas are backward
+    #   compatible or not. If schema compatibility fails, an exception would
+    #   be thrown else the call would succeed but no changes will be saved.
+    #   This parameter is optional.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchemaRequest AWS API Documentation
+    #
+    class UpgradeAppliedSchemaRequest < Struct.new(
+      :published_schema_arn,
+      :directory_arn,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] upgraded_schema_arn
+    #   The ARN of the upgraded schema that is returned as part of the
+    #   response.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_arn
+    #   The ARN of the directory that is returned as part of the response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradeAppliedSchemaResponse AWS API Documentation
+    #
+    class UpgradeAppliedSchemaResponse < Struct.new(
+      :upgraded_schema_arn,
+      :directory_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpgradePublishedSchemaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         development_schema_arn: "Arn", # required
+    #         published_schema_arn: "Arn", # required
+    #         minor_version: "Version", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] development_schema_arn
+    #   The ARN of the development schema with the changes used for the
+    #   upgrade.
+    #   @return [String]
+    #
+    # @!attribute [rw] published_schema_arn
+    #   The ARN of the published schema to be upgraded.
+    #   @return [String]
+    #
+    # @!attribute [rw] minor_version
+    #   Identifies the minor version of the published schema that will be
+    #   created. This parameter is NOT optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Used for testing whether the Development schema provided is
+    #   backwards compatible, or not, with the publish schema provided by
+    #   the user to be upgraded. If schema compatibility fails, an exception
+    #   would be thrown else the call would succeed. This parameter is
+    #   optional and defaults to false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchemaRequest AWS API Documentation
+    #
+    class UpgradePublishedSchemaRequest < Struct.new(
+      :development_schema_arn,
+      :published_schema_arn,
+      :minor_version,
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] upgraded_schema_arn
+    #   The ARN of the upgraded schema that is returned as part of the
+    #   response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpgradePublishedSchemaResponse AWS API Documentation
+    #
+    class UpgradePublishedSchemaResponse < Struct.new(
+      :upgraded_schema_arn)
+      include Aws::Structure
+    end
 
   end
 end
