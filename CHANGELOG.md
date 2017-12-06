@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
+
+* Feature - Aws::ElasticBeanstalk - Updated the documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::SageMaker - Updated the waiters for Amazon SageMaker Service.
+
 2.10.97 (2017-12-05)
 ------------------
 
