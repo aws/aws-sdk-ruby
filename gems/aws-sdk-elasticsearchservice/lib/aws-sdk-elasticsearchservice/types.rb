@@ -145,6 +145,10 @@ module Aws::ElasticsearchService
     #           subnet_ids: ["String"],
     #           security_group_ids: ["String"],
     #         },
+    #         encryption_at_rest_options: {
+    #           enabled: false,
+    #           kms_key_id: "KmsKeyId",
+    #         },
     #         advanced_options: {
     #           "String" => "String",
     #         },
@@ -204,6 +208,10 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
     #   @return [Types::VPCOptions]
     #
+    # @!attribute [rw] encryption_at_rest_options
+    #   Specifies the Encryption At Rest Options.
+    #   @return [Types::EncryptionAtRestOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Option to allow references to indices in an HTTP request body. Must
     #   be `false` when configuring access to individual sub-resources. By
@@ -228,6 +236,7 @@ module Aws::ElasticsearchService
       :access_policies,
       :snapshot_options,
       :vpc_options,
+      :encryption_at_rest_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -605,6 +614,11 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
     #   @return [Types::VPCDerivedInfoStatus]
     #
+    # @!attribute [rw] encryption_at_rest_options
+    #   Specifies the `EncryptionAtRestOptions` for the Elasticsearch
+    #   domain.
+    #   @return [Types::EncryptionAtRestOptionsStatus]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the `AdvancedOptions` for the domain. See [Configuring
     #   Advanced Options][1] for more information.
@@ -625,6 +639,7 @@ module Aws::ElasticsearchService
       :access_policies,
       :snapshot_options,
       :vpc_options,
+      :encryption_at_rest_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -716,6 +731,10 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
     #   @return [Types::VPCDerivedInfo]
     #
+    # @!attribute [rw] encryption_at_rest_options
+    #   Specifies the status of the `EncryptionAtRestOptions`.
+    #   @return [Types::EncryptionAtRestOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Specifies the status of the `AdvancedOptions`
     #   @return [Hash<String,String>]
@@ -739,6 +758,7 @@ module Aws::ElasticsearchService
       :access_policies,
       :snapshot_options,
       :vpc_options,
+      :encryption_at_rest_options,
       :advanced_options,
       :log_publishing_options)
       include Aws::Structure
@@ -758,6 +778,49 @@ module Aws::ElasticsearchService
     #   @return [Types::OptionStatus]
     #
     class ElasticsearchVersionStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
+    # Specifies the Encryption At Rest Options.
+    #
+    # @note When making an API call, you may pass EncryptionAtRestOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         kms_key_id: "KmsKeyId",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specifies the option to enable Encryption At Rest.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   Specifies the KMS Key ID for Encryption At Rest options.
+    #   @return [String]
+    #
+    class EncryptionAtRestOptions < Struct.new(
+      :enabled,
+      :kms_key_id)
+      include Aws::Structure
+    end
+
+    # Status of the Encryption At Rest options for the specified
+    # Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies the Encryption At Rest options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::EncryptionAtRestOptions]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the Encryption At Rest options for the
+    #   specified Elasticsearch domain.
+    #   @return [Types::OptionStatus]
+    #
+    class EncryptionAtRestOptionsStatus < Struct.new(
       :options,
       :status)
       include Aws::Structure

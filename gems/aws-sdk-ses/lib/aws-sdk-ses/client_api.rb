@@ -56,6 +56,7 @@ module Aws::SES
     CreateConfigurationSetResponse = Shapes::StructureShape.new(name: 'CreateConfigurationSetResponse')
     CreateConfigurationSetTrackingOptionsRequest = Shapes::StructureShape.new(name: 'CreateConfigurationSetTrackingOptionsRequest')
     CreateConfigurationSetTrackingOptionsResponse = Shapes::StructureShape.new(name: 'CreateConfigurationSetTrackingOptionsResponse')
+    CreateCustomVerificationEmailTemplateRequest = Shapes::StructureShape.new(name: 'CreateCustomVerificationEmailTemplateRequest')
     CreateReceiptFilterRequest = Shapes::StructureShape.new(name: 'CreateReceiptFilterRequest')
     CreateReceiptFilterResponse = Shapes::StructureShape.new(name: 'CreateReceiptFilterResponse')
     CreateReceiptRuleRequest = Shapes::StructureShape.new(name: 'CreateReceiptRuleRequest')
@@ -66,6 +67,11 @@ module Aws::SES
     CreateTemplateResponse = Shapes::StructureShape.new(name: 'CreateTemplateResponse')
     CustomMailFromStatus = Shapes::StringShape.new(name: 'CustomMailFromStatus')
     CustomRedirectDomain = Shapes::StringShape.new(name: 'CustomRedirectDomain')
+    CustomVerificationEmailInvalidContentException = Shapes::StructureShape.new(name: 'CustomVerificationEmailInvalidContentException')
+    CustomVerificationEmailTemplate = Shapes::StructureShape.new(name: 'CustomVerificationEmailTemplate')
+    CustomVerificationEmailTemplateAlreadyExistsException = Shapes::StructureShape.new(name: 'CustomVerificationEmailTemplateAlreadyExistsException')
+    CustomVerificationEmailTemplateDoesNotExistException = Shapes::StructureShape.new(name: 'CustomVerificationEmailTemplateDoesNotExistException')
+    CustomVerificationEmailTemplates = Shapes::ListShape.new(name: 'CustomVerificationEmailTemplates')
     DefaultDimensionValue = Shapes::StringShape.new(name: 'DefaultDimensionValue')
     DeleteConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationRequest')
     DeleteConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationResponse')
@@ -73,6 +79,7 @@ module Aws::SES
     DeleteConfigurationSetResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetResponse')
     DeleteConfigurationSetTrackingOptionsRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetTrackingOptionsRequest')
     DeleteConfigurationSetTrackingOptionsResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetTrackingOptionsResponse')
+    DeleteCustomVerificationEmailTemplateRequest = Shapes::StructureShape.new(name: 'DeleteCustomVerificationEmailTemplateRequest')
     DeleteIdentityPolicyRequest = Shapes::StructureShape.new(name: 'DeleteIdentityPolicyRequest')
     DeleteIdentityPolicyResponse = Shapes::StructureShape.new(name: 'DeleteIdentityPolicyResponse')
     DeleteIdentityRequest = Shapes::StructureShape.new(name: 'DeleteIdentityRequest')
@@ -116,7 +123,12 @@ module Aws::SES
     ExtensionFieldList = Shapes::ListShape.new(name: 'ExtensionFieldList')
     ExtensionFieldName = Shapes::StringShape.new(name: 'ExtensionFieldName')
     ExtensionFieldValue = Shapes::StringShape.new(name: 'ExtensionFieldValue')
+    FailureRedirectionURL = Shapes::StringShape.new(name: 'FailureRedirectionURL')
+    FromAddress = Shapes::StringShape.new(name: 'FromAddress')
+    FromEmailAddressNotVerifiedException = Shapes::StructureShape.new(name: 'FromEmailAddressNotVerifiedException')
     GetAccountSendingEnabledResponse = Shapes::StructureShape.new(name: 'GetAccountSendingEnabledResponse')
+    GetCustomVerificationEmailTemplateRequest = Shapes::StructureShape.new(name: 'GetCustomVerificationEmailTemplateRequest')
+    GetCustomVerificationEmailTemplateResponse = Shapes::StructureShape.new(name: 'GetCustomVerificationEmailTemplateResponse')
     GetIdentityDkimAttributesRequest = Shapes::StructureShape.new(name: 'GetIdentityDkimAttributesRequest')
     GetIdentityDkimAttributesResponse = Shapes::StructureShape.new(name: 'GetIdentityDkimAttributesResponse')
     GetIdentityMailFromDomainAttributesRequest = Shapes::StructureShape.new(name: 'GetIdentityMailFromDomainAttributesRequest')
@@ -160,6 +172,8 @@ module Aws::SES
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListConfigurationSetsRequest = Shapes::StructureShape.new(name: 'ListConfigurationSetsRequest')
     ListConfigurationSetsResponse = Shapes::StructureShape.new(name: 'ListConfigurationSetsResponse')
+    ListCustomVerificationEmailTemplatesRequest = Shapes::StructureShape.new(name: 'ListCustomVerificationEmailTemplatesRequest')
+    ListCustomVerificationEmailTemplatesResponse = Shapes::StructureShape.new(name: 'ListCustomVerificationEmailTemplatesResponse')
     ListIdentitiesRequest = Shapes::StructureShape.new(name: 'ListIdentitiesRequest')
     ListIdentitiesResponse = Shapes::StructureShape.new(name: 'ListIdentitiesResponse')
     ListIdentityPoliciesRequest = Shapes::StructureShape.new(name: 'ListIdentityPoliciesRequest')
@@ -176,6 +190,7 @@ module Aws::SES
     MailFromDomainNotVerifiedException = Shapes::StructureShape.new(name: 'MailFromDomainNotVerifiedException')
     Max24HourSend = Shapes::FloatShape.new(name: 'Max24HourSend')
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxSendRate = Shapes::FloatShape.new(name: 'MaxSendRate')
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageData = Shapes::StringShape.new(name: 'MessageData')
@@ -195,6 +210,7 @@ module Aws::SES
     PolicyMap = Shapes::MapShape.new(name: 'PolicyMap')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyNameList = Shapes::ListShape.new(name: 'PolicyNameList')
+    ProductionAccessNotGrantedException = Shapes::StructureShape.new(name: 'ProductionAccessNotGrantedException')
     PutIdentityPolicyRequest = Shapes::StructureShape.new(name: 'PutIdentityPolicyRequest')
     PutIdentityPolicyResponse = Shapes::StructureShape.new(name: 'PutIdentityPolicyResponse')
     RawMessage = Shapes::StructureShape.new(name: 'RawMessage')
@@ -235,6 +251,8 @@ module Aws::SES
     SendBounceResponse = Shapes::StructureShape.new(name: 'SendBounceResponse')
     SendBulkTemplatedEmailRequest = Shapes::StructureShape.new(name: 'SendBulkTemplatedEmailRequest')
     SendBulkTemplatedEmailResponse = Shapes::StructureShape.new(name: 'SendBulkTemplatedEmailResponse')
+    SendCustomVerificationEmailRequest = Shapes::StructureShape.new(name: 'SendCustomVerificationEmailRequest')
+    SendCustomVerificationEmailResponse = Shapes::StructureShape.new(name: 'SendCustomVerificationEmailResponse')
     SendDataPoint = Shapes::StructureShape.new(name: 'SendDataPoint')
     SendDataPointList = Shapes::ListShape.new(name: 'SendDataPointList')
     SendEmailRequest = Shapes::StructureShape.new(name: 'SendEmailRequest')
@@ -260,8 +278,11 @@ module Aws::SES
     SetReceiptRulePositionResponse = Shapes::StructureShape.new(name: 'SetReceiptRulePositionResponse')
     StopAction = Shapes::StructureShape.new(name: 'StopAction')
     StopScope = Shapes::StringShape.new(name: 'StopScope')
+    Subject = Shapes::StringShape.new(name: 'Subject')
     SubjectPart = Shapes::StringShape.new(name: 'SubjectPart')
+    SuccessRedirectionURL = Shapes::StringShape.new(name: 'SuccessRedirectionURL')
     Template = Shapes::StructureShape.new(name: 'Template')
+    TemplateContent = Shapes::StringShape.new(name: 'TemplateContent')
     TemplateData = Shapes::StringShape.new(name: 'TemplateData')
     TemplateDoesNotExistException = Shapes::StructureShape.new(name: 'TemplateDoesNotExistException')
     TemplateMetadata = Shapes::StructureShape.new(name: 'TemplateMetadata')
@@ -282,6 +303,7 @@ module Aws::SES
     UpdateConfigurationSetSendingEnabledRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetSendingEnabledRequest')
     UpdateConfigurationSetTrackingOptionsRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetTrackingOptionsRequest')
     UpdateConfigurationSetTrackingOptionsResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetTrackingOptionsResponse')
+    UpdateCustomVerificationEmailTemplateRequest = Shapes::StructureShape.new(name: 'UpdateCustomVerificationEmailTemplateRequest')
     UpdateReceiptRuleRequest = Shapes::StructureShape.new(name: 'UpdateReceiptRuleRequest')
     UpdateReceiptRuleResponse = Shapes::StructureShape.new(name: 'UpdateReceiptRuleResponse')
     UpdateTemplateRequest = Shapes::StructureShape.new(name: 'UpdateTemplateRequest')
@@ -382,6 +404,14 @@ module Aws::SES
 
     CreateConfigurationSetTrackingOptionsResponse.struct_class = Types::CreateConfigurationSetTrackingOptionsResponse
 
+    CreateCustomVerificationEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    CreateCustomVerificationEmailTemplateRequest.add_member(:from_email_address, Shapes::ShapeRef.new(shape: FromAddress, required: true, location_name: "FromEmailAddress"))
+    CreateCustomVerificationEmailTemplateRequest.add_member(:template_subject, Shapes::ShapeRef.new(shape: Subject, required: true, location_name: "TemplateSubject"))
+    CreateCustomVerificationEmailTemplateRequest.add_member(:template_content, Shapes::ShapeRef.new(shape: TemplateContent, required: true, location_name: "TemplateContent"))
+    CreateCustomVerificationEmailTemplateRequest.add_member(:success_redirection_url, Shapes::ShapeRef.new(shape: SuccessRedirectionURL, required: true, location_name: "SuccessRedirectionURL"))
+    CreateCustomVerificationEmailTemplateRequest.add_member(:failure_redirection_url, Shapes::ShapeRef.new(shape: FailureRedirectionURL, required: true, location_name: "FailureRedirectionURL"))
+    CreateCustomVerificationEmailTemplateRequest.struct_class = Types::CreateCustomVerificationEmailTemplateRequest
+
     CreateReceiptFilterRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ReceiptFilter, required: true, location_name: "Filter"))
     CreateReceiptFilterRequest.struct_class = Types::CreateReceiptFilterRequest
 
@@ -404,6 +434,15 @@ module Aws::SES
 
     CreateTemplateResponse.struct_class = Types::CreateTemplateResponse
 
+    CustomVerificationEmailTemplate.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    CustomVerificationEmailTemplate.add_member(:from_email_address, Shapes::ShapeRef.new(shape: FromAddress, location_name: "FromEmailAddress"))
+    CustomVerificationEmailTemplate.add_member(:template_subject, Shapes::ShapeRef.new(shape: Subject, location_name: "TemplateSubject"))
+    CustomVerificationEmailTemplate.add_member(:success_redirection_url, Shapes::ShapeRef.new(shape: SuccessRedirectionURL, location_name: "SuccessRedirectionURL"))
+    CustomVerificationEmailTemplate.add_member(:failure_redirection_url, Shapes::ShapeRef.new(shape: FailureRedirectionURL, location_name: "FailureRedirectionURL"))
+    CustomVerificationEmailTemplate.struct_class = Types::CustomVerificationEmailTemplate
+
+    CustomVerificationEmailTemplates.member = Shapes::ShapeRef.new(shape: CustomVerificationEmailTemplate)
+
     DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
     DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, required: true, location_name: "EventDestinationName"))
     DeleteConfigurationSetEventDestinationRequest.struct_class = Types::DeleteConfigurationSetEventDestinationRequest
@@ -419,6 +458,9 @@ module Aws::SES
     DeleteConfigurationSetTrackingOptionsRequest.struct_class = Types::DeleteConfigurationSetTrackingOptionsRequest
 
     DeleteConfigurationSetTrackingOptionsResponse.struct_class = Types::DeleteConfigurationSetTrackingOptionsResponse
+
+    DeleteCustomVerificationEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    DeleteCustomVerificationEmailTemplateRequest.struct_class = Types::DeleteCustomVerificationEmailTemplateRequest
 
     DeleteIdentityPolicyRequest.add_member(:identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "Identity"))
     DeleteIdentityPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "PolicyName"))
@@ -514,6 +556,17 @@ module Aws::SES
     GetAccountSendingEnabledResponse.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
     GetAccountSendingEnabledResponse.struct_class = Types::GetAccountSendingEnabledResponse
 
+    GetCustomVerificationEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    GetCustomVerificationEmailTemplateRequest.struct_class = Types::GetCustomVerificationEmailTemplateRequest
+
+    GetCustomVerificationEmailTemplateResponse.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, location_name: "TemplateName"))
+    GetCustomVerificationEmailTemplateResponse.add_member(:from_email_address, Shapes::ShapeRef.new(shape: FromAddress, location_name: "FromEmailAddress"))
+    GetCustomVerificationEmailTemplateResponse.add_member(:template_subject, Shapes::ShapeRef.new(shape: Subject, location_name: "TemplateSubject"))
+    GetCustomVerificationEmailTemplateResponse.add_member(:template_content, Shapes::ShapeRef.new(shape: TemplateContent, location_name: "TemplateContent"))
+    GetCustomVerificationEmailTemplateResponse.add_member(:success_redirection_url, Shapes::ShapeRef.new(shape: SuccessRedirectionURL, location_name: "SuccessRedirectionURL"))
+    GetCustomVerificationEmailTemplateResponse.add_member(:failure_redirection_url, Shapes::ShapeRef.new(shape: FailureRedirectionURL, location_name: "FailureRedirectionURL"))
+    GetCustomVerificationEmailTemplateResponse.struct_class = Types::GetCustomVerificationEmailTemplateResponse
+
     GetIdentityDkimAttributesRequest.add_member(:identities, Shapes::ShapeRef.new(shape: IdentityList, required: true, location_name: "Identities"))
     GetIdentityDkimAttributesRequest.struct_class = Types::GetIdentityDkimAttributesRequest
 
@@ -600,6 +653,14 @@ module Aws::SES
     ListConfigurationSetsResponse.add_member(:configuration_sets, Shapes::ShapeRef.new(shape: ConfigurationSets, location_name: "ConfigurationSets"))
     ListConfigurationSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConfigurationSetsResponse.struct_class = Types::ListConfigurationSetsResponse
+
+    ListCustomVerificationEmailTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCustomVerificationEmailTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListCustomVerificationEmailTemplatesRequest.struct_class = Types::ListCustomVerificationEmailTemplatesRequest
+
+    ListCustomVerificationEmailTemplatesResponse.add_member(:custom_verification_email_templates, Shapes::ShapeRef.new(shape: CustomVerificationEmailTemplates, location_name: "CustomVerificationEmailTemplates"))
+    ListCustomVerificationEmailTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListCustomVerificationEmailTemplatesResponse.struct_class = Types::ListCustomVerificationEmailTemplatesResponse
 
     ListIdentitiesRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
     ListIdentitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -776,6 +837,14 @@ module Aws::SES
     SendBulkTemplatedEmailResponse.add_member(:status, Shapes::ShapeRef.new(shape: BulkEmailDestinationStatusList, required: true, location_name: "Status"))
     SendBulkTemplatedEmailResponse.struct_class = Types::SendBulkTemplatedEmailResponse
 
+    SendCustomVerificationEmailRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "EmailAddress"))
+    SendCustomVerificationEmailRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    SendCustomVerificationEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
+    SendCustomVerificationEmailRequest.struct_class = Types::SendCustomVerificationEmailRequest
+
+    SendCustomVerificationEmailResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId"))
+    SendCustomVerificationEmailResponse.struct_class = Types::SendCustomVerificationEmailResponse
+
     SendDataPoint.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     SendDataPoint.add_member(:delivery_attempts, Shapes::ShapeRef.new(shape: Counter, location_name: "DeliveryAttempts"))
     SendDataPoint.add_member(:bounces, Shapes::ShapeRef.new(shape: Counter, location_name: "Bounces"))
@@ -922,6 +991,14 @@ module Aws::SES
 
     UpdateConfigurationSetTrackingOptionsResponse.struct_class = Types::UpdateConfigurationSetTrackingOptionsResponse
 
+    UpdateCustomVerificationEmailTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: TemplateName, required: true, location_name: "TemplateName"))
+    UpdateCustomVerificationEmailTemplateRequest.add_member(:from_email_address, Shapes::ShapeRef.new(shape: FromAddress, location_name: "FromEmailAddress"))
+    UpdateCustomVerificationEmailTemplateRequest.add_member(:template_subject, Shapes::ShapeRef.new(shape: Subject, location_name: "TemplateSubject"))
+    UpdateCustomVerificationEmailTemplateRequest.add_member(:template_content, Shapes::ShapeRef.new(shape: TemplateContent, location_name: "TemplateContent"))
+    UpdateCustomVerificationEmailTemplateRequest.add_member(:success_redirection_url, Shapes::ShapeRef.new(shape: SuccessRedirectionURL, location_name: "SuccessRedirectionURL"))
+    UpdateCustomVerificationEmailTemplateRequest.add_member(:failure_redirection_url, Shapes::ShapeRef.new(shape: FailureRedirectionURL, location_name: "FailureRedirectionURL"))
+    UpdateCustomVerificationEmailTemplateRequest.struct_class = Types::UpdateCustomVerificationEmailTemplateRequest
+
     UpdateReceiptRuleRequest.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "RuleSetName"))
     UpdateReceiptRuleRequest.add_member(:rule, Shapes::ShapeRef.new(shape: ReceiptRule, required: true, location_name: "Rule"))
     UpdateReceiptRuleRequest.struct_class = Types::UpdateReceiptRuleRequest
@@ -1024,6 +1101,18 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrackingOptionsException)
       end)
 
+      api.add_operation(:create_custom_verification_email_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomVerificationEmailTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomVerificationEmailTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: CustomVerificationEmailTemplateAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: FromEmailAddressNotVerifiedException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomVerificationEmailInvalidContentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:create_receipt_filter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReceiptFilter"
         o.http_method = "POST"
@@ -1097,6 +1186,14 @@ module Aws::SES
         o.output = Shapes::ShapeRef.new(shape: DeleteConfigurationSetTrackingOptionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: TrackingOptionsDoesNotExistException)
+      end)
+
+      api.add_operation(:delete_custom_verification_email_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomVerificationEmailTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomVerificationEmailTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
       api.add_operation(:delete_identity, Seahorse::Model::Operation.new.tap do |o|
@@ -1201,6 +1298,15 @@ module Aws::SES
         o.output = Shapes::ShapeRef.new(shape: GetAccountSendingEnabledResponse)
       end)
 
+      api.add_operation(:get_custom_verification_email_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomVerificationEmailTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomVerificationEmailTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomVerificationEmailTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: CustomVerificationEmailTemplateDoesNotExistException)
+      end)
+
       api.add_operation(:get_identity_dkim_attributes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetIdentityDkimAttributes"
         o.http_method = "POST"
@@ -1272,6 +1378,20 @@ module Aws::SES
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListConfigurationSetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConfigurationSetsResponse)
+      end)
+
+      api.add_operation(:list_custom_verification_email_templates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomVerificationEmailTemplates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomVerificationEmailTemplatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomVerificationEmailTemplatesResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_identities, Seahorse::Model::Operation.new.tap do |o|
@@ -1368,6 +1488,19 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: TemplateDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetSendingPausedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSendingPausedException)
+      end)
+
+      api.add_operation(:send_custom_verification_email, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendCustomVerificationEmail"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SendCustomVerificationEmailRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendCustomVerificationEmailResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
+        o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomVerificationEmailTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: FromEmailAddressNotVerifiedException)
+        o.errors << Shapes::ShapeRef.new(shape: ProductionAccessNotGrantedException)
       end)
 
       api.add_operation(:send_email, Seahorse::Model::Operation.new.tap do |o|
@@ -1528,6 +1661,17 @@ module Aws::SES
         o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: TrackingOptionsDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTrackingOptionsException)
+      end)
+
+      api.add_operation(:update_custom_verification_email_template, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCustomVerificationEmailTemplate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCustomVerificationEmailTemplateRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: CustomVerificationEmailTemplateDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: FromEmailAddressNotVerifiedException)
+        o.errors << Shapes::ShapeRef.new(shape: CustomVerificationEmailInvalidContentException)
       end)
 
       api.add_operation(:update_receipt_rule, Seahorse::Model::Operation.new.tap do |o|

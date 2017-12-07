@@ -250,15 +250,21 @@ module Aws::SES
     #   Represents the destination of the message, consisting of To:, CC:,
     #   and BCC: fields.
     #
-    #   By default, the string must be 7-bit ASCII. If the text must contain
-    #   any other characters, then you must use MIME encoded-word syntax
-    #   (RFC 2047) instead of a literal string. MIME encoded-word syntax
-    #   uses the following form: `=?charset?encoding?encoded-text?=`. For
-    #   more information, see [RFC 2047][1].
+    #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
+    #   [RFC6531][1]. For this reason, the *local part* of a destination
+    #   email address (the part of the email address that precedes the @
+    #   sign) may only contain [7-bit ASCII characters][2]. If the *domain
+    #   part* of an address (the part after the @ sign) contains non-ASCII
+    #   characters, they must be encoded using Punycode, as described in
+    #   [RFC3492][3].
+    #
+    #    </note>
     #
     #
     #
-    #   [1]: https://tools.ietf.org/html/rfc2047
+    #   [1]: https://tools.ietf.org/html/rfc6531
+    #   [2]: https://en.wikipedia.org/wiki/Email_address#Local-part
+    #   [3]: https://tools.ietf.org/html/rfc3492.html
     #   @return [Types::Destination]
     #
     # @!attribute [rw] replacement_tags
@@ -708,6 +714,66 @@ module Aws::SES
     #
     class CreateConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure; end
 
+    # Represents a request to create a custom verification email template.
+    #
+    # @note When making an API call, you may pass CreateCustomVerificationEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         from_email_address: "FromAddress", # required
+    #         template_subject: "Subject", # required
+    #         template_content: "TemplateContent", # required
+    #         success_redirection_url: "SuccessRedirectionURL", # required
+    #         failure_redirection_url: "FailureRedirectionURL", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the custom verification email template.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_email_address
+    #   The email address that the custom verification email is sent from.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_subject
+    #   The subject line of the custom verification email.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_content
+    #   The content of the custom verification email. The total size of the
+    #   email must be less than 10 MB. The message body may contain HTML,
+    #   with some limitations. For more information, see [Custom
+    #   Verification Email Frequently Asked Questions][1] in the *Amazon SES
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
+    #   @return [String]
+    #
+    # @!attribute [rw] success_redirection_url
+    #   The URL that the recipient of the verification email is sent to if
+    #   his or her address is successfully verified.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_redirection_url
+    #   The URL that the recipient of the verification email is sent to if
+    #   his or her address is not successfully verified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateCustomVerificationEmailTemplateRequest AWS API Documentation
+    #
+    class CreateCustomVerificationEmailTemplateRequest < Struct.new(
+      :template_name,
+      :from_email_address,
+      :template_subject,
+      :template_content,
+      :success_redirection_url,
+      :failure_redirection_url)
+      include Aws::Structure
+    end
+
     # Represents a request to create a new IP address filter. You use IP
     # address filters when you receive email with Amazon SES. For more
     # information, see the [Amazon SES Developer Guide][1].
@@ -913,6 +979,41 @@ module Aws::SES
     #
     class CreateTemplateResponse < Aws::EmptyStructure; end
 
+    # Contains information about a custom verification email template.
+    #
+    # @!attribute [rw] template_name
+    #   The name of the custom verification email template.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_email_address
+    #   The email address that the custom verification email is sent from.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_subject
+    #   The subject line of the custom verification email.
+    #   @return [String]
+    #
+    # @!attribute [rw] success_redirection_url
+    #   The URL that the recipient of the verification email is sent to if
+    #   his or her address is successfully verified.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_redirection_url
+    #   The URL that the recipient of the verification email is sent to if
+    #   his or her address is not successfully verified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CustomVerificationEmailTemplate AWS API Documentation
+    #
+    class CustomVerificationEmailTemplate < Struct.new(
+      :template_name,
+      :from_email_address,
+      :template_subject,
+      :success_redirection_url,
+      :failure_redirection_url)
+      include Aws::Structure
+    end
+
     # Represents a request to delete a configuration set event destination.
     # Configuration set event destinations are associated with configuration
     # sets, which enable you to publish email sending events. For
@@ -1013,6 +1114,28 @@ module Aws::SES
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetTrackingOptionsResponse AWS API Documentation
     #
     class DeleteConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure; end
+
+    # Represents a request to delete an existing custom verification email
+    # template.
+    #
+    # @note When making an API call, you may pass DeleteCustomVerificationEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the custom verification email template that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteCustomVerificationEmailTemplateRequest AWS API Documentation
+    #
+    class DeleteCustomVerificationEmailTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
 
     # Represents a request to delete a sending authorization policy for an
     # identity. Sending authorization is an Amazon SES feature that enables
@@ -1443,15 +1566,20 @@ module Aws::SES
     # Represents the destination of the message, consisting of To:, CC:, and
     # BCC: fields.
     #
-    # By default, the string must be 7-bit ASCII. If the text must contain
-    # any other characters, then you must use MIME encoded-word syntax (RFC
-    # 2047) instead of a literal string. MIME encoded-word syntax uses the
-    # following form: `=?charset?encoding?encoded-text?=`. For more
-    # information, see [RFC 2047][1].
+    # <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
+    # [RFC6531][1]. For this reason, the *local part* of a destination email
+    # address (the part of the email address that precedes the @ sign) may
+    # only contain [7-bit ASCII characters][2]. If the *domain part* of an
+    # address (the part after the @ sign) contains non-ASCII characters,
+    # they must be encoded using Punycode, as described in [RFC3492][3].
+    #
+    #  </note>
     #
     #
     #
-    # [1]: https://tools.ietf.org/html/rfc2047
+    # [1]: https://tools.ietf.org/html/rfc6531
+    # [2]: https://en.wikipedia.org/wiki/Email_address#Local-part
+    # [3]: https://tools.ietf.org/html/rfc3492.html
     #
     # @note When making an API call, you may pass Destination
     #   data as a hash:
@@ -1627,6 +1755,68 @@ module Aws::SES
     #
     class GetAccountSendingEnabledResponse < Struct.new(
       :enabled)
+      include Aws::Structure
+    end
+
+    # Represents a request to retrieve an existing custom verification email
+    # template.
+    #
+    # @note When making an API call, you may pass GetCustomVerificationEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the custom verification email template that you want to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetCustomVerificationEmailTemplateRequest AWS API Documentation
+    #
+    class GetCustomVerificationEmailTemplateRequest < Struct.new(
+      :template_name)
+      include Aws::Structure
+    end
+
+    # The content of the custom verification email template.
+    #
+    # @!attribute [rw] template_name
+    #   The name of the custom verification email template.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_email_address
+    #   The email address that the custom verification email is sent from.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_subject
+    #   The subject line of the custom verification email.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_content
+    #   The content of the custom verification email.
+    #   @return [String]
+    #
+    # @!attribute [rw] success_redirection_url
+    #   The URL that the recipient of the verification email is sent to if
+    #   his or her address is successfully verified.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_redirection_url
+    #   The URL that the recipient of the verification email is sent to if
+    #   his or her address is not successfully verified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetCustomVerificationEmailTemplateResponse AWS API Documentation
+    #
+    class GetCustomVerificationEmailTemplateResponse < Struct.new(
+      :template_name,
+      :from_email_address,
+      :template_subject,
+      :template_content,
+      :success_redirection_url,
+      :failure_redirection_url)
       include Aws::Structure
     end
 
@@ -2266,6 +2456,68 @@ module Aws::SES
     #
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Represents a request to list the existing custom verification email
+    # templates for your account.
+    #
+    # For more information about custom verification email templates, see
+    # [Using Custom Verification Email Templates][1] in the *Amazon SES
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
+    #
+    # @note When making an API call, you may pass ListCustomVerificationEmailTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to
+    #   `ListCustomVerificationEmailTemplates` to indicate the position in
+    #   the list of email templates.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of custom verification email templates to return.
+    #   This value must be at least 1 and less than or equal to 50. If you
+    #   do not specify a value, or if you specify a value less than 1 or
+    #   greater than 50, the operation will return up to 50 results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListCustomVerificationEmailTemplatesRequest AWS API Documentation
+    #
+    class ListCustomVerificationEmailTemplatesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # A paginated list of custom verification email templates.
+    #
+    # @!attribute [rw] custom_verification_email_templates
+    #   A list of the custom verification email templates that exist in your
+    #   account.
+    #   @return [Array<Types::CustomVerificationEmailTemplate>]
+    #
+    # @!attribute [rw] next_token
+    #   A token indicating that there are additional custom verification
+    #   email templates available to be listed. Pass this token to a
+    #   subsequent call to `ListCustomVerificationEmailTemplates` to
+    #   retrieve the next 50 custom verification email templates.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListCustomVerificationEmailTemplatesResponse AWS API Documentation
+    #
+    class ListCustomVerificationEmailTemplatesResponse < Struct.new(
+      :custom_verification_email_templates,
       :next_token)
       include Aws::Structure
     end
@@ -3386,8 +3638,7 @@ module Aws::SES
     #   access to use your AWS KMS keys for decryption. This encryption
     #   client is currently available with the [AWS Java SDK][3] and [AWS
     #   Ruby SDK][4] only. For more information about client-side encryption
-    #   using AWS KMS master keys, see the [Amazon S3 Developer
-    #   Guide](AmazonS3/latest/dev/UsingClientSideEncryption.html).
+    #   using AWS KMS master keys, see the [Amazon S3 Developer Guide][5].
     #
     #
     #
@@ -3395,6 +3646,7 @@ module Aws::SES
     #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
     #   [3]: http://aws.amazon.com/sdk-for-java/
     #   [4]: http://aws.amazon.com/sdk-for-ruby/
+    #   [5]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/S3Action AWS API Documentation
@@ -3668,18 +3920,28 @@ module Aws::SES
     #   specify the `SourceArn` parameter. For more information about
     #   sending authorization, see the [Amazon SES Developer Guide][2].
     #
-    #   In all cases, the email address must be 7-bit ASCII. If the text
-    #   must contain any other characters, then you must use MIME
-    #   encoded-word syntax (RFC 2047) instead of a literal string. MIME
+    #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
+    #   [RFC6531][3]. For this reason, the *local part* of a source email
+    #   address (the part of the email address that precedes the @ sign) may
+    #   only contain [7-bit ASCII characters][4]. If the *domain part* of an
+    #   address (the part after the @ sign) contains non-ASCII characters,
+    #   they must be encoded using Punycode, as described in [RFC3492][5].
+    #   The sender name (also known as the *friendly name*) may contain
+    #   non-ASCII characters. These characters must be encoded using MIME
+    #   encoded-word syntax, as described in [RFC 2047][6]. MIME
     #   encoded-word syntax uses the following form:
-    #   `=?charset?encoding?encoded-text?=`. For more information, see [RFC
-    #   2047][3].
+    #   `=?charset?encoding?encoded-text?=`.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
     #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
-    #   [3]: https://tools.ietf.org/html/rfc2047
+    #   [3]: https://tools.ietf.org/html/rfc6531
+    #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
+    #   [5]: https://tools.ietf.org/html/rfc3492.html
+    #   [6]: https://tools.ietf.org/html/rfc2047
     #   @return [String]
     #
     # @!attribute [rw] source_arn
@@ -3806,6 +4068,56 @@ module Aws::SES
       include Aws::Structure
     end
 
+    # Represents a request to send a custom verification email to a
+    # specified recipient.
+    #
+    # @note When making an API call, you may pass SendCustomVerificationEmailRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_address: "Address", # required
+    #         template_name: "TemplateName", # required
+    #         configuration_set_name: "ConfigurationSetName",
+    #       }
+    #
+    # @!attribute [rw] email_address
+    #   The email address to verify.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_name
+    #   The name of the custom verification email template to use when
+    #   sending the verification email.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_set_name
+    #   Name of a configuration set to use when sending the verification
+    #   email.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendCustomVerificationEmailRequest AWS API Documentation
+    #
+    class SendCustomVerificationEmailRequest < Struct.new(
+      :email_address,
+      :template_name,
+      :configuration_set_name)
+      include Aws::Structure
+    end
+
+    # The response received when attempting to send the custom verification
+    # email.
+    #
+    # @!attribute [rw] message_id
+    #   The unique message identifier returned from the
+    #   `SendCustomVerificationEmail` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendCustomVerificationEmailResponse AWS API Documentation
+    #
+    class SendCustomVerificationEmailResponse < Struct.new(
+      :message_id)
+      include Aws::Structure
+    end
+
     # Represents sending statistics data. Each `SendDataPoint` contains
     # statistics for a 15-minute period of sending activity.
     #
@@ -3897,18 +4209,28 @@ module Aws::SES
     #   specify the `SourceArn` parameter. For more information about
     #   sending authorization, see the [Amazon SES Developer Guide][2].
     #
-    #   In all cases, the email address must be 7-bit ASCII. If the text
-    #   must contain any other characters, then you must use MIME
-    #   encoded-word syntax (RFC 2047) instead of a literal string. MIME
+    #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
+    #   [RFC6531][3]. For this reason, the *local part* of a source email
+    #   address (the part of the email address that precedes the @ sign) may
+    #   only contain [7-bit ASCII characters][4]. If the *domain part* of an
+    #   address (the part after the @ sign) contains non-ASCII characters,
+    #   they must be encoded using Punycode, as described in [RFC3492][5].
+    #   The sender name (also known as the *friendly name*) may contain
+    #   non-ASCII characters. These characters must be encoded using MIME
+    #   encoded-word syntax, as described in [RFC 2047][6]. MIME
     #   encoded-word syntax uses the following form:
-    #   `=?charset?encoding?encoded-text?=`. For more information, see [RFC
-    #   2047][3].
+    #   `=?charset?encoding?encoded-text?=`.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
     #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
-    #   [3]: https://tools.ietf.org/html/rfc2047
+    #   [3]: https://tools.ietf.org/html/rfc6531
+    #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
+    #   [5]: https://tools.ietf.org/html/rfc3492.html
+    #   [6]: https://tools.ietf.org/html/rfc2047
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -4052,22 +4374,31 @@ module Aws::SES
     #   this parameter, you must specify a "From" address in the raw text
     #   of the message. (You can also specify both.)
     #
-    #   By default, the string must be 7-bit ASCII. If the text must contain
-    #   any other characters, then you must use MIME encoded-word syntax
-    #   (RFC 2047) instead of a literal string. MIME encoded-word syntax
-    #   uses the following form: `=?charset?encoding?encoded-text?=`. For
-    #   more information, see [RFC 2047][1].
+    #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described
+    #   in[RFC6531][1]. For this reason, the *local part* of a source email
+    #   address (the part of the email address that precedes the @ sign) may
+    #   only contain [7-bit ASCII characters][2]. If the *domain part* of an
+    #   address (the part after the @ sign) contains non-ASCII characters,
+    #   they must be encoded using Punycode, as described in [RFC3492][3].
+    #   The sender name (also known as the *friendly name*) may contain
+    #   non-ASCII characters. These characters must be encoded using MIME
+    #   encoded-word syntax, as described in [RFC 2047][4]. MIME
+    #   encoded-word syntax uses the following form:
+    #   `=?charset?encoding?encoded-text?=`.
     #
-    #   <note markdown="1"> If you specify the `Source` parameter and have feedback forwarding
+    #    </note>
+    #
+    #   If you specify the `Source` parameter and have feedback forwarding
     #   enabled, then bounces and complaints will be sent to this email
     #   address. This takes precedence over any Return-Path header that you
     #   might include in the raw text of the message.
     #
-    #    </note>
     #
     #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc2047
+    #   [1]: https://tools.ietf.org/html/rfc6531
+    #   [2]: https://en.wikipedia.org/wiki/Email_address#Local-part
+    #   [3]: https://tools.ietf.org/html/rfc3492.html
+    #   [4]: https://tools.ietf.org/html/rfc2047
     #   @return [String]
     #
     # @!attribute [rw] destinations
@@ -4264,18 +4595,27 @@ module Aws::SES
     #   specify the `SourceArn` parameter. For more information about
     #   sending authorization, see the [Amazon SES Developer Guide][2].
     #
-    #   In all cases, the email address must be 7-bit ASCII. If the text
-    #   must contain any other characters, then you must use MIME
-    #   encoded-word syntax (RFC 2047) instead of a literal string. MIME
-    #   encoded-word syntax uses the following form:
-    #   `=?charset?encoding?encoded-text?=`. For more information, see [RFC
-    #   2047][3].
+    #   <note markdown="1"> Amazon SES does not support the SMTPUTF8 extension, as described in
+    #   [RFC6531][3]. For this reason, the *local part* of a source email
+    #   address (the part of the email address that precedes the @ sign) may
+    #   only contain [7-bit ASCII characters][4]. If the *domain part* of an
+    #   address (the part after the @ sign) contains non-ASCII characters,
+    #   they must be encoded using Punycode, as described in [RFC3492][5].
+    #   The sender name (also known as the *friendly name*) may contain
+    #   non-ASCII characters. These characters must be encoded using MIME
+    #   encoded-word syntax, as described in[RFC 2047][6]. MIME encoded-word
+    #   syntax uses the following form: `=?charset?encoding?encoded-text?=`.
+    #
+    #    </note>
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
     #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
-    #   [3]: https://tools.ietf.org/html/rfc2047
+    #   [3]: https://tools.ietf.org/html/rfc6531
+    #   [4]: https://en.wikipedia.org/wiki/Email_address#Local-part
+    #   [5]: https://tools.ietf.org/html/rfc3492.html
+    #   [6]: https://tools.ietf.org/html/rfc2047
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -5093,6 +5433,68 @@ module Aws::SES
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetTrackingOptionsResponse AWS API Documentation
     #
     class UpdateConfigurationSetTrackingOptionsResponse < Aws::EmptyStructure; end
+
+    # Represents a request to update an existing custom verification email
+    # template.
+    #
+    # @note When making an API call, you may pass UpdateCustomVerificationEmailTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         template_name: "TemplateName", # required
+    #         from_email_address: "FromAddress",
+    #         template_subject: "Subject",
+    #         template_content: "TemplateContent",
+    #         success_redirection_url: "SuccessRedirectionURL",
+    #         failure_redirection_url: "FailureRedirectionURL",
+    #       }
+    #
+    # @!attribute [rw] template_name
+    #   The name of the custom verification email template that you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_email_address
+    #   The email address that the custom verification email is sent from.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_subject
+    #   The subject line of the custom verification email.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_content
+    #   The content of the custom verification email. The total size of the
+    #   email must be less than 10 MB. The message body may contain HTML,
+    #   with some limitations. For more information, see [Custom
+    #   Verification Email Frequently Asked Questions][1] in the *Amazon SES
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html#custom-verification-emails-faq
+    #   @return [String]
+    #
+    # @!attribute [rw] success_redirection_url
+    #   The URL that the recipient of the verification email is sent to if
+    #   his or her address is successfully verified.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_redirection_url
+    #   The URL that the recipient of the verification email is sent to if
+    #   his or her address is not successfully verified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateCustomVerificationEmailTemplateRequest AWS API Documentation
+    #
+    class UpdateCustomVerificationEmailTemplateRequest < Struct.new(
+      :template_name,
+      :from_email_address,
+      :template_subject,
+      :template_content,
+      :success_redirection_url,
+      :failure_redirection_url)
+      include Aws::Structure
+    end
 
     # Represents a request to update a receipt rule. You use receipt rules
     # to receive email with Amazon SES. For more information, see the

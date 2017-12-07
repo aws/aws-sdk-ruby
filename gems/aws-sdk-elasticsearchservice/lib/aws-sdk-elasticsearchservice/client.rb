@@ -230,6 +230,9 @@ module Aws::ElasticsearchService
     #
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
     #
+    # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
+    #   Specifies the Encryption At Rest Options.
+    #
     # @option params [Hash<String,String>] :advanced_options
     #   Option to allow references to indices in an HTTP request body. Must be
     #   `false` when configuring access to individual sub-resources. By
@@ -275,6 +278,10 @@ module Aws::ElasticsearchService
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
     #     },
+    #     encryption_at_rest_options: {
+    #       enabled: false,
+    #       kms_key_id: "KmsKeyId",
+    #     },
     #     advanced_options: {
     #       "String" => "String",
     #     },
@@ -317,6 +324,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
+    #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
     #   resp.domain_status.log_publishing_options #=> Hash
@@ -378,6 +387,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
+    #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
     #   resp.domain_status.log_publishing_options #=> Hash
@@ -459,6 +470,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
+    #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status.advanced_options #=> Hash
     #   resp.domain_status.advanced_options["String"] #=> String
     #   resp.domain_status.log_publishing_options #=> Hash
@@ -541,6 +554,13 @@ module Aws::ElasticsearchService
     #   resp.domain_config.vpc_options.status.update_version #=> Integer
     #   resp.domain_config.vpc_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.vpc_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
+    #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
+    #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
+    #   resp.domain_config.encryption_at_rest_options.status.update_date #=> Time
+    #   resp.domain_config.encryption_at_rest_options.status.update_version #=> Integer
+    #   resp.domain_config.encryption_at_rest_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.encryption_at_rest_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.advanced_options.options #=> Hash
     #   resp.domain_config.advanced_options.options["String"] #=> String
     #   resp.domain_config.advanced_options.status.creation_date #=> Time
@@ -613,6 +633,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].vpc_options.availability_zones[0] #=> String
     #   resp.domain_status_list[0].vpc_options.security_group_ids #=> Array
     #   resp.domain_status_list[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status_list[0].encryption_at_rest_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status_list[0].advanced_options #=> Hash
     #   resp.domain_status_list[0].advanced_options["String"] #=> String
     #   resp.domain_status_list[0].log_publishing_options #=> Hash
@@ -973,6 +995,13 @@ module Aws::ElasticsearchService
     #   resp.domain_config.vpc_options.status.update_version #=> Integer
     #   resp.domain_config.vpc_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.vpc_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
+    #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
+    #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
+    #   resp.domain_config.encryption_at_rest_options.status.update_date #=> Time
+    #   resp.domain_config.encryption_at_rest_options.status.update_version #=> Integer
+    #   resp.domain_config.encryption_at_rest_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.encryption_at_rest_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.advanced_options.options #=> Hash
     #   resp.domain_config.advanced_options.options["String"] #=> String
     #   resp.domain_config.advanced_options.status.creation_date #=> Time
@@ -1009,7 +1038,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
