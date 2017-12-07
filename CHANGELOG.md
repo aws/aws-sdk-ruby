@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SES - Updated the API, and documentation for Amazon Simple Email Service.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
 2.10.98 (2017-12-06)
 ------------------
 
