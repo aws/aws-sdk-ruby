@@ -212,7 +212,7 @@ module AwsSdkCodeGenerator
           shape['timestampFormat'] = 'iso8601'
         elsif @service.protocol == 'rest-json' && @service.timestamp_format
           # with metadata timestampFormat available for 'rest-json'
-          # shape in timestamp type will have this "timestampFormat" if not specified already
+          # timestamp shape will have this "timestampFormat" if not specified already
           shape['timestampFormat'] = @service.timestamp_format unless shape.key?('timestampFormat')
         end
         shape

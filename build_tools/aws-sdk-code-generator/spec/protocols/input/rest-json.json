@@ -1137,6 +1137,10 @@
           "TimeArg": {
             "shape": "TimestampType"
           },
+          "TimeArgOverride": {
+            "shape": "TimestampType",
+            "timestampFormat": "unixTimestamp"
+          },
           "TimeArgInHeader": {
             "shape": "TimestampType",
             "location": "header",
@@ -1162,12 +1166,13 @@
           "name": "OperationName"
         },
         "params": {
-          "TimeArg": 1422172800
+          "TimeArg": 1422172800,
+          "TimeArgOverride": 1422172800
         },
         "serialized": {
           "uri": "/path",
           "headers": {},
-          "body": "{\"TimeArg\": \"2015-01-25T08:00:00Z\"}"
+          "body": "{\"TimeArg\": \"2015-01-25T08:00:00Z\", \"TimeArgOverride\": 1422172800}"
         }
       },
       {
@@ -1206,6 +1211,10 @@
           "TimeArg": {
             "shape": "TimestampType"
           },
+          "TimeArgOverride": {
+            "shape": "TimeType",
+            "timestampFormat": "unixTimestamp"
+          },
           "BaseTimeArg": {
             "shape": "TimeType"
           },
@@ -1238,11 +1247,12 @@
         },
         "params": {
           "TimeArg": 1422172800,
+          "TimeArgOverride": 1422172800,
           "BaseTimeArg": 1422172800
         },
         "serialized": {
           "uri": "/path",
-          "body": "{\"TimeArg\": 1422172800, \"BaseTimeArg\": \"2015-01-25T08:00:00Z\"}"
+          "body": "{\"TimeArg\": 1422172800, \"TimeArgOverride\": 1422172800, \"BaseTimeArg\": \"2015-01-25T08:00:00Z\"}"
         }
       },
       {
