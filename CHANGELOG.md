@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.100 (2017-12-08)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::ECS - Updated the documentation for Amazon EC2 Container Service.
