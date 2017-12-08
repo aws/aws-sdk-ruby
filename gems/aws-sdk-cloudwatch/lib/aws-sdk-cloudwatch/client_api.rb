@@ -39,6 +39,7 @@ module Aws::CloudWatch
     DatapointValue = Shapes::FloatShape.new(name: 'DatapointValue')
     DatapointValueMap = Shapes::MapShape.new(name: 'DatapointValueMap')
     Datapoints = Shapes::ListShape.new(name: 'Datapoints')
+    DatapointsToAlarm = Shapes::IntegerShape.new(name: 'DatapointsToAlarm')
     DeleteAlarmsInput = Shapes::StructureShape.new(name: 'DeleteAlarmsInput')
     DeleteDashboardsInput = Shapes::StructureShape.new(name: 'DeleteDashboardsInput')
     DeleteDashboardsOutput = Shapes::StructureShape.new(name: 'DeleteDashboardsOutput')
@@ -160,7 +161,7 @@ module Aws::CloudWatch
     DeleteAlarmsInput.add_member(:alarm_names, Shapes::ShapeRef.new(shape: AlarmNames, required: true, location_name: "AlarmNames"))
     DeleteAlarmsInput.struct_class = Types::DeleteAlarmsInput
 
-    DeleteDashboardsInput.add_member(:dashboard_names, Shapes::ShapeRef.new(shape: DashboardNames, location_name: "DashboardNames"))
+    DeleteDashboardsInput.add_member(:dashboard_names, Shapes::ShapeRef.new(shape: DashboardNames, required: true, location_name: "DashboardNames"))
     DeleteDashboardsInput.struct_class = Types::DeleteDashboardsInput
 
     DeleteDashboardsOutput.struct_class = Types::DeleteDashboardsOutput
@@ -221,7 +222,7 @@ module Aws::CloudWatch
 
     ExtendedStatistics.member = Shapes::ShapeRef.new(shape: ExtendedStatistic)
 
-    GetDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, location_name: "DashboardName"))
+    GetDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "DashboardName"))
     GetDashboardInput.struct_class = Types::GetDashboardInput
 
     GetDashboardOutput.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: DashboardArn, location_name: "DashboardArn"))
@@ -287,6 +288,7 @@ module Aws::CloudWatch
     MetricAlarm.add_member(:period, Shapes::ShapeRef.new(shape: Period, location_name: "Period"))
     MetricAlarm.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
     MetricAlarm.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: EvaluationPeriods, location_name: "EvaluationPeriods"))
+    MetricAlarm.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: DatapointsToAlarm, location_name: "DatapointsToAlarm"))
     MetricAlarm.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, location_name: "Threshold"))
     MetricAlarm.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "ComparisonOperator"))
     MetricAlarm.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "TreatMissingData"))
@@ -308,8 +310,8 @@ module Aws::CloudWatch
 
     Metrics.member = Shapes::ShapeRef.new(shape: Metric)
 
-    PutDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, location_name: "DashboardName"))
-    PutDashboardInput.add_member(:dashboard_body, Shapes::ShapeRef.new(shape: DashboardBody, location_name: "DashboardBody"))
+    PutDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "DashboardName"))
+    PutDashboardInput.add_member(:dashboard_body, Shapes::ShapeRef.new(shape: DashboardBody, required: true, location_name: "DashboardBody"))
     PutDashboardInput.struct_class = Types::PutDashboardInput
 
     PutDashboardOutput.add_member(:dashboard_validation_messages, Shapes::ShapeRef.new(shape: DashboardValidationMessages, location_name: "DashboardValidationMessages"))
@@ -329,6 +331,7 @@ module Aws::CloudWatch
     PutMetricAlarmInput.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "Period"))
     PutMetricAlarmInput.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
     PutMetricAlarmInput.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: EvaluationPeriods, required: true, location_name: "EvaluationPeriods"))
+    PutMetricAlarmInput.add_member(:datapoints_to_alarm, Shapes::ShapeRef.new(shape: DatapointsToAlarm, location_name: "DatapointsToAlarm"))
     PutMetricAlarmInput.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, required: true, location_name: "Threshold"))
     PutMetricAlarmInput.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
     PutMetricAlarmInput.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "TreatMissingData"))

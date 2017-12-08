@@ -2864,6 +2864,10 @@ module Aws::ECS
     #   of the same task on a single container instance when port mappings are
     #   used.
     #
+    #   Docker for Windows uses different network modes than Docker for Linux.
+    #   When you register a task definition with Windows containers, you must
+    #   not specify a network mode.
+    #
     #   For more information, see [Network settings][2] in the *Docker run
     #   reference*.
     #
@@ -4371,7 +4375,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

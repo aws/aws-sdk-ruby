@@ -161,11 +161,11 @@ module Aws::CloudWatch
     #   data as a hash:
     #
     #       {
-    #         dashboard_names: ["DashboardName"],
+    #         dashboard_names: ["DashboardName"], # required
     #       }
     #
     # @!attribute [rw] dashboard_names
-    #   The dashboards to be deleted.
+    #   The dashboards to be deleted. This parameter is required.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboardsInput AWS API Documentation
@@ -478,7 +478,7 @@ module Aws::CloudWatch
     #   data as a hash:
     #
     #       {
-    #         dashboard_name: "DashboardName",
+    #         dashboard_name: "DashboardName", # required
     #       }
     #
     # @!attribute [rw] dashboard_name
@@ -895,6 +895,11 @@ module Aws::CloudWatch
     #   threshold.
     #   @return [Integer]
     #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of datapoints that must be breaching to trigger the
+    #   alarm.
+    #   @return [Integer]
+    #
     # @!attribute [rw] threshold
     #   The value to compare with the specified statistic.
     #   @return [Float]
@@ -941,6 +946,7 @@ module Aws::CloudWatch
       :period,
       :unit,
       :evaluation_periods,
+      :datapoints_to_alarm,
       :threshold,
       :comparison_operator,
       :treat_missing_data,
@@ -1040,8 +1046,8 @@ module Aws::CloudWatch
     #   data as a hash:
     #
     #       {
-    #         dashboard_name: "DashboardName",
-    #         dashboard_body: "DashboardBody",
+    #         dashboard_name: "DashboardName", # required
+    #         dashboard_body: "DashboardBody", # required
     #       }
     #
     # @!attribute [rw] dashboard_name
@@ -1049,12 +1055,13 @@ module Aws::CloudWatch
     #   exists, this call modifies that dashboard, replacing its current
     #   contents. Otherwise, a new dashboard is created. The maximum length
     #   is 255, and valid characters are A-Z, a-z, 0-9, "-", and "\_".
+    #   This parameter is required.
     #   @return [String]
     #
     # @!attribute [rw] dashboard_body
     #   The detailed information about the dashboard in JSON format,
     #   including the widgets to include and their location on the
-    #   dashboard.
+    #   dashboard. This parameter is required.
     #
     #   For more information about the syntax, see
     #   CloudWatch-Dashboard-Body-Structure.
@@ -1110,6 +1117,7 @@ module Aws::CloudWatch
     #         period: 1, # required
     #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #         evaluation_periods: 1, # required
+    #         datapoints_to_alarm: 1,
     #         threshold: 1.0, # required
     #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #         treat_missing_data: "TreatMissingData",
@@ -1137,14 +1145,17 @@ module Aws::CloudWatch
     #
     #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
     #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover
+    #   arn:aws:automate:*region*\:ec2:recover \|
+    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
+    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
+    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
     #   @return [Array<String>]
     #
     # @!attribute [rw] alarm_actions
@@ -1154,14 +1165,17 @@ module Aws::CloudWatch
     #
     #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
     #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover
+    #   arn:aws:automate:*region*\:ec2:recover \|
+    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
+    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
+    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
     #   @return [Array<String>]
     #
     # @!attribute [rw] insufficient_data_actions
@@ -1171,14 +1185,17 @@ module Aws::CloudWatch
     #
     #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
     #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover
+    #   arn:aws:automate:*region*\:ec2:recover \|
+    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
+    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
+    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
     #   @return [Array<String>]
     #
     # @!attribute [rw] metric_name
@@ -1191,12 +1208,16 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] statistic
     #   The statistic for the metric associated with the alarm, other than
-    #   percentile. For percentile statistics, use `ExtendedStatistic`.
+    #   percentile. For percentile statistics, use `ExtendedStatistic`. When
+    #   you call `PutMetricAlarm`, you must specify either `Statistic` or
+    #   `ExtendedStatistic,` but not both.
     #   @return [String]
     #
     # @!attribute [rw] extended_statistic
     #   The percentile statistic for the metric associated with the alarm.
-    #   Specify a value between p0.0 and p100.
+    #   Specify a value between p0.0 and p100. When you call
+    #   `PutMetricAlarm`, you must specify either `Statistic` or
+    #   `ExtendedStatistic,` but not both.
     #   @return [String]
     #
     # @!attribute [rw] dimensions
@@ -1246,6 +1267,11 @@ module Aws::CloudWatch
     #   threshold. An alarm's total current evaluation period can be no
     #   longer than one day, so this number multiplied by `Period` cannot be
     #   more than 86,400 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] datapoints_to_alarm
+    #   The number of datapoints that must be breaching to trigger the
+    #   alarm.
     #   @return [Integer]
     #
     # @!attribute [rw] threshold
@@ -1304,6 +1330,7 @@ module Aws::CloudWatch
       :period,
       :unit,
       :evaluation_periods,
+      :datapoints_to_alarm,
       :threshold,
       :comparison_operator,
       :treat_missing_data,

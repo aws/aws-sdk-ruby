@@ -313,6 +313,7 @@ module Aws::CloudWatch
     #     period: 1, # required
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #     evaluation_periods: 1, # required
+    #     datapoints_to_alarm: 1,
     #     threshold: 1.0, # required
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #     treat_missing_data: "TreatMissingData",
@@ -334,14 +335,17 @@ module Aws::CloudWatch
     #
     #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
     #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover
+    #   arn:aws:automate:*region*\:ec2:recover \|
+    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
+    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
+    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
     # @option options [Array<String>] :alarm_actions
     #   The actions to execute when this alarm transitions to the `ALARM`
     #   state from any other state. Each action is specified as an Amazon
@@ -349,14 +353,17 @@ module Aws::CloudWatch
     #
     #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
     #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover
+    #   arn:aws:automate:*region*\:ec2:recover \|
+    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
+    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
+    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
     # @option options [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
     #   `INSUFFICIENT_DATA` state from any other state. Each action is
@@ -364,20 +371,27 @@ module Aws::CloudWatch
     #
     #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
     #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover
+    #   arn:aws:automate:*region*\:ec2:recover \|
+    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
+    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
+    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
     # @option options [String] :statistic
     #   The statistic for the metric associated with the alarm, other than
-    #   percentile. For percentile statistics, use `ExtendedStatistic`.
+    #   percentile. For percentile statistics, use `ExtendedStatistic`. When
+    #   you call `PutMetricAlarm`, you must specify either `Statistic` or
+    #   `ExtendedStatistic,` but not both.
     # @option options [String] :extended_statistic
     #   The percentile statistic for the metric associated with the alarm.
-    #   Specify a value between p0.0 and p100.
+    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`,
+    #   you must specify either `Statistic` or `ExtendedStatistic,` but not
+    #   both.
     # @option options [Array<Types::Dimension>] :dimensions
     #   The dimensions for the metric associated with the alarm.
     # @option options [required, Integer] :period
@@ -418,6 +432,8 @@ module Aws::CloudWatch
     #   threshold. An alarm's total current evaluation period can be no
     #   longer than one day, so this number multiplied by `Period` cannot be
     #   more than 86,400 seconds.
+    # @option options [Integer] :datapoints_to_alarm
+    #   The number of datapoints that must be breaching to trigger the alarm.
     # @option options [required, Float] :threshold
     #   The value against which the specified statistic is compared.
     # @option options [required, String] :comparison_operator

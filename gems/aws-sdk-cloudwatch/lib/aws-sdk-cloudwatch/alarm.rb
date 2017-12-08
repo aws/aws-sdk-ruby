@@ -155,6 +155,12 @@ module Aws::CloudWatch
       data[:evaluation_periods]
     end
 
+    # The number of datapoints that must be breaching to trigger the alarm.
+    # @return [Integer]
+    def datapoints_to_alarm
+      data[:datapoints_to_alarm]
+    end
+
     # The value to compare with the specified statistic.
     # @return [Float]
     def threshold

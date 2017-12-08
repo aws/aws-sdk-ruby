@@ -172,15 +172,15 @@ module Aws::CloudWatch
     # dashboards to delete. If there is an error during this call, no
     # dashboards are deleted.
     #
-    # @option params [Array<String>] :dashboard_names
-    #   The dashboards to be deleted.
+    # @option params [required, Array<String>] :dashboard_names
+    #   The dashboards to be deleted. This parameter is required.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_dashboards({
-    #     dashboard_names: ["DashboardName"],
+    #     dashboard_names: ["DashboardName"], # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteDashboards AWS API Documentation
@@ -321,6 +321,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].period #=> Integer
     #   resp.metric_alarms[0].unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
     #   resp.metric_alarms[0].evaluation_periods #=> Integer
+    #   resp.metric_alarms[0].datapoints_to_alarm #=> Integer
     #   resp.metric_alarms[0].threshold #=> Float
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
     #   resp.metric_alarms[0].treat_missing_data #=> String
@@ -413,6 +414,7 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].period #=> Integer
     #   resp.metric_alarms[0].unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
     #   resp.metric_alarms[0].evaluation_periods #=> Integer
+    #   resp.metric_alarms[0].datapoints_to_alarm #=> Integer
     #   resp.metric_alarms[0].threshold #=> Float
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
     #   resp.metric_alarms[0].treat_missing_data #=> String
@@ -479,7 +481,7 @@ module Aws::CloudWatch
     # data returned within `DashboardBody` as the template for the new
     # dashboard when you call `PutDashboard` to create the copy.
     #
-    # @option params [String] :dashboard_name
+    # @option params [required, String] :dashboard_name
     #   The name of the dashboard to be described.
     #
     # @return [Types::GetDashboardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -491,7 +493,7 @@ module Aws::CloudWatch
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_dashboard({
-    #     dashboard_name: "DashboardName",
+    #     dashboard_name: "DashboardName", # required
     #   })
     #
     # @example Response structure
@@ -842,15 +844,17 @@ module Aws::CloudWatch
     # of the `DashboardBody` script or the CloudFormation template used to
     # create the dashboard.
     #
-    # @option params [String] :dashboard_name
+    # @option params [required, String] :dashboard_name
     #   The name of the dashboard. If a dashboard with this name already
     #   exists, this call modifies that dashboard, replacing its current
     #   contents. Otherwise, a new dashboard is created. The maximum length is
-    #   255, and valid characters are A-Z, a-z, 0-9, "-", and "\_".
+    #   255, and valid characters are A-Z, a-z, 0-9, "-", and "\_". This
+    #   parameter is required.
     #
-    # @option params [String] :dashboard_body
+    # @option params [required, String] :dashboard_body
     #   The detailed information about the dashboard in JSON format, including
-    #   the widgets to include and their location on the dashboard.
+    #   the widgets to include and their location on the dashboard. This
+    #   parameter is required.
     #
     #   For more information about the syntax, see
     #   CloudWatch-Dashboard-Body-Structure.
@@ -862,8 +866,8 @@ module Aws::CloudWatch
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_dashboard({
-    #     dashboard_name: "DashboardName",
-    #     dashboard_body: "DashboardBody",
+    #     dashboard_name: "DashboardName", # required
+    #     dashboard_body: "DashboardBody", # required
     #   })
     #
     # @example Response structure
@@ -945,14 +949,17 @@ module Aws::CloudWatch
     #
     #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
     #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover
+    #   arn:aws:automate:*region*\:ec2:recover \|
+    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
+    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
+    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
     #
     # @option params [Array<String>] :alarm_actions
     #   The actions to execute when this alarm transitions to the `ALARM`
@@ -961,14 +968,17 @@ module Aws::CloudWatch
     #
     #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
     #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover
+    #   arn:aws:automate:*region*\:ec2:recover \|
+    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
+    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
+    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
     #
     # @option params [Array<String>] :insufficient_data_actions
     #   The actions to execute when this alarm transitions to the
@@ -977,14 +987,17 @@ module Aws::CloudWatch
     #
     #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
     #   arn:aws:automate:*region*\:ec2:terminate \|
-    #   arn:aws:automate:*region*\:ec2:recover
+    #   arn:aws:automate:*region*\:ec2:recover \|
+    #   arn:aws:sns:*region*\:*account-id*\:*sns-topic-name* \|
+    #   arn:aws:autoscaling:*region*\:*account-id*\:scalingPolicy:*policy-id*
+    #   autoScalingGroupName/*group-friendly-name*\:policyName/*policy-friendly-name*
     #
     #   Valid Values (for use with IAM roles):
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
     #   \|
-    #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+    #   arn:aws:swf:*region*\:\\\{*account-id*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
     #
     # @option params [required, String] :metric_name
     #   The name for the metric associated with the alarm.
@@ -994,11 +1007,15 @@ module Aws::CloudWatch
     #
     # @option params [String] :statistic
     #   The statistic for the metric associated with the alarm, other than
-    #   percentile. For percentile statistics, use `ExtendedStatistic`.
+    #   percentile. For percentile statistics, use `ExtendedStatistic`. When
+    #   you call `PutMetricAlarm`, you must specify either `Statistic` or
+    #   `ExtendedStatistic,` but not both.
     #
     # @option params [String] :extended_statistic
     #   The percentile statistic for the metric associated with the alarm.
-    #   Specify a value between p0.0 and p100.
+    #   Specify a value between p0.0 and p100. When you call `PutMetricAlarm`,
+    #   you must specify either `Statistic` or `ExtendedStatistic,` but not
+    #   both.
     #
     # @option params [Array<Types::Dimension>] :dimensions
     #   The dimensions for the metric associated with the alarm.
@@ -1043,6 +1060,9 @@ module Aws::CloudWatch
     #   threshold. An alarm's total current evaluation period can be no
     #   longer than one day, so this number multiplied by `Period` cannot be
     #   more than 86,400 seconds.
+    #
+    # @option params [Integer] :datapoints_to_alarm
+    #   The number of datapoints that must be breaching to trigger the alarm.
     #
     # @option params [required, Float] :threshold
     #   The value against which the specified statistic is compared.
@@ -1103,6 +1123,7 @@ module Aws::CloudWatch
     #     period: 1, # required
     #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
     #     evaluation_periods: 1, # required
+    #     datapoints_to_alarm: 1,
     #     threshold: 1.0, # required
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #     treat_missing_data: "TreatMissingData",
@@ -1261,7 +1282,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

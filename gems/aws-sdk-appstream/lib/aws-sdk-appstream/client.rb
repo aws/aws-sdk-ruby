@@ -234,7 +234,7 @@ module Aws::AppStream
     #   A unique name for the fleet.
     #
     # @option params [required, String] :image_name
-    #   The name of the image used by the fleet.
+    #   The name of the image used to create the fleet.
     #
     # @option params [required, String] :instance_type
     #   The instance type to use when launching fleet instances. The following
@@ -281,6 +281,20 @@ module Aws::AppStream
     #   * stream.graphics-pro.16xlarge
     #
     # @option params [String] :fleet_type
+    #   The fleet type.
+    #
+    #   ALWAYS\_ON
+    #
+    #   : Provides users with instant-on access to their apps. You are charged
+    #     for all running instances in your fleet, even if no users are
+    #     streaming apps.
+    #
+    #   ON\_DEMAND
+    #
+    #   : Provide users with access to applications after they connect, which
+    #     takes one to two minutes. You are charged for instance streaming
+    #     when users are connected and a small hourly fee for instances that
+    #     are not streaming apps.
     #
     # @option params [required, Types::ComputeCapacity] :compute_capacity
     #   The desired capacity for the fleet.
@@ -299,16 +313,16 @@ module Aws::AppStream
     #   Specify a value between 60 and 57600.
     #
     # @option params [String] :description
-    #   The description displayed to end users.
+    #   The description for display.
     #
     # @option params [String] :display_name
-    #   The fleet name displayed to end users.
+    #   The fleet name for display.
     #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the fleet.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The information needed for streaming instances to join a domain.
+    #   The information needed to join a Microsoft Active Directory domain.
     #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -376,24 +390,40 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Creates an image builder.
+    #
+    # The initial state of the builder is `PENDING`. When it is ready, the
+    # state is `RUNNING`.
+    #
     # @option params [required, String] :name
+    #   A unique name for the image builder.
     #
     # @option params [required, String] :image_name
+    #   The name of the image used to create the builder.
     #
     # @option params [required, String] :instance_type
+    #   The instance type to use when launching the image builder.
     #
     # @option params [String] :description
+    #   The description for display.
     #
     # @option params [String] :display_name
+    #   The image builder name for display.
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   Describes VPC configuration information.
+    #   The VPC configuration for the image builder. You can specify only one
+    #   subnet.
     #
     # @option params [Boolean] :enable_default_internet_access
+    #   Enables or disables default internet access for the image builder.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   Contains the information needed for streaming instances to join a
-    #   domain.
+    #   The information needed to join a Microsoft Active Directory domain.
+    #
+    # @option params [String] :appstream_agent_version
+    #   The version of the AppStream 2.0 agent to use for this image builder.
+    #   To use the latest version of the AppStream 2.0 agent, specify
+    #   \[LATEST\].
     #
     # @return [Types::CreateImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -416,6 +446,7 @@ module Aws::AppStream
     #       directory_name: "DirectoryName",
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
+    #     appstream_agent_version: "AppstreamAgentVersion",
     #   })
     #
     # @example Response structure
@@ -431,7 +462,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS"
-    #   resp.image_builder.state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -442,6 +473,7 @@ module Aws::AppStream
     #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
+    #   resp.image_builder.appstream_agent_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilder AWS API Documentation
     #
@@ -452,9 +484,14 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Creates a URL to start an image builder streaming session.
+    #
     # @option params [required, String] :name
+    #   The name of the image builder.
     #
     # @option params [Integer] :validity
+    #   The time that the streaming URL will be valid, in seconds. Specify a
+    #   value between 1 and 604800 seconds. The default is 3600 seconds.
     #
     # @return [Types::CreateImageBuilderStreamingURLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -488,10 +525,10 @@ module Aws::AppStream
     #   The name of the stack.
     #
     # @option params [String] :description
-    #   The description displayed to end users.
+    #   The description for display.
     #
     # @option params [String] :display_name
-    #   The stack name displayed to end users.
+    #   The stack name for display.
     #
     # @option params [Array<Types::StorageConnector>] :storage_connectors
     #   The storage connectors to enable.
@@ -539,9 +576,6 @@ module Aws::AppStream
 
     # Creates a URL to start a streaming session for the specified user.
     #
-    # By default, the URL is valid only for one minute from the time that it
-    # is generated.
-    #
     # @option params [required, String] :stack_name
     #   The name of the stack.
     #
@@ -552,15 +586,20 @@ module Aws::AppStream
     #   The ID of the user.
     #
     # @option params [String] :application_id
-    #   The ID of the application that must be launched after the session
-    #   starts.
+    #   The name of the application to launch after the session starts. This
+    #   is the name that you specified as **Name** in the Image Assistant.
     #
     # @option params [Integer] :validity
     #   The time that the streaming URL will be valid, in seconds. Specify a
-    #   value between 1 and 604800 seconds.
+    #   value between 1 and 604800 seconds. The default is 60 seconds.
     #
     # @option params [String] :session_context
-    #   The session context of the streaming URL.
+    #   The session context. For more information, see [Session Context][1] in
+    #   the *Amazon AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters
     #
     # @return [Types::CreateStreamingURLResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -636,7 +675,12 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Deletes the specified image. You cannot delete an image that is
+    # currently in use. After you delete an image, you cannot provision new
+    # capacity using the image.
+    #
     # @option params [required, String] :name
+    #   The name of the image.
     #
     # @return [Types::DeleteImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -672,6 +716,7 @@ module Aws::AppStream
     #   resp.image.applications[0].metadata["String"] #=> String
     #   resp.image.created_time #=> Time
     #   resp.image.public_base_image_released_date #=> Time
+    #   resp.image.appstream_agent_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
     #
@@ -682,7 +727,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Deletes the specified image builder and releases the capacity.
+    #
     # @option params [required, String] :name
+    #   The name of the image builder.
     #
     # @return [Types::DeleteImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -707,7 +755,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS"
-    #   resp.image_builder.state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -718,6 +766,7 @@ module Aws::AppStream
     #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
+    #   resp.image_builder.appstream_agent_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilder AWS API Documentation
     #
@@ -857,11 +906,18 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Describes the specified image builders or all image builders in the
+    # account.
+    #
     # @option params [Array<String>] :names
+    #   The names of the image builders to describe.
     #
     # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
     #
     # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #
     # @return [Types::DescribeImageBuildersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -890,7 +946,7 @@ module Aws::AppStream
     #   resp.image_builders[0].vpc_config.security_group_ids[0] #=> String
     #   resp.image_builders[0].instance_type #=> String
     #   resp.image_builders[0].platform #=> String, one of "WINDOWS"
-    #   resp.image_builders[0].state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builders[0].state_change_reason.message #=> String
     #   resp.image_builders[0].created_time #=> Time
@@ -901,6 +957,7 @@ module Aws::AppStream
     #   resp.image_builders[0].image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builders[0].image_builder_errors[0].error_message #=> String
     #   resp.image_builders[0].image_builder_errors[0].error_timestamp #=> Time
+    #   resp.image_builders[0].appstream_agent_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuilders AWS API Documentation
@@ -952,6 +1009,7 @@ module Aws::AppStream
     #   resp.images[0].applications[0].metadata["String"] #=> String
     #   resp.images[0].created_time #=> Time
     #   resp.images[0].public_base_image_released_date #=> Time
+    #   resp.images[0].appstream_agent_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
     #
@@ -1213,7 +1271,15 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Starts the specified image builder.
+    #
     # @option params [required, String] :name
+    #   The name of the image builder.
+    #
+    # @option params [String] :appstream_agent_version
+    #   The version of the AppStream 2.0 agent to use for this image builder.
+    #   To use the latest version of the AppStream 2.0 agent, specify
+    #   \[LATEST\].
     #
     # @return [Types::StartImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1223,6 +1289,7 @@ module Aws::AppStream
     #
     #   resp = client.start_image_builder({
     #     name: "String", # required
+    #     appstream_agent_version: "AppstreamAgentVersion",
     #   })
     #
     # @example Response structure
@@ -1238,7 +1305,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS"
-    #   resp.image_builder.state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -1249,6 +1316,7 @@ module Aws::AppStream
     #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
+    #   resp.image_builder.appstream_agent_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilder AWS API Documentation
     #
@@ -1281,7 +1349,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Stops the specified image builder.
+    #
     # @option params [required, String] :name
+    #   The name of the image builder.
     #
     # @return [Types::StopImageBuilderResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1306,7 +1377,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
     #   resp.image_builder.platform #=> String, one of "WINDOWS"
-    #   resp.image_builder.state #=> String, one of "PENDING", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
+    #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
     #   resp.image_builder.state_change_reason.message #=> String
     #   resp.image_builder.created_time #=> Time
@@ -1317,6 +1388,7 @@ module Aws::AppStream
     #   resp.image_builder.image_builder_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION", "SECURITY_GROUPS_NOT_FOUND", "IGW_NOT_ATTACHED", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION", "DOMAIN_JOIN_ERROR_FILE_NOT_FOUND", "DOMAIN_JOIN_ERROR_ACCESS_DENIED", "DOMAIN_JOIN_ERROR_LOGON_FAILURE", "DOMAIN_JOIN_ERROR_INVALID_PARAMETER", "DOMAIN_JOIN_ERROR_MORE_DATA", "DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN", "DOMAIN_JOIN_ERROR_NOT_SUPPORTED", "DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME", "DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED", "DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED", "DOMAIN_JOIN_NERR_PASSWORD_EXPIRED", "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
     #   resp.image_builder.image_builder_errors[0].error_message #=> String
     #   resp.image_builder.image_builder_errors[0].error_timestamp #=> Time
+    #   resp.image_builder.appstream_agent_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilder AWS API Documentation
     #
@@ -1381,7 +1453,7 @@ module Aws::AppStream
     # fleet is in the `STARTING` or `STOPPING` state, you can't update it.
     #
     # @option params [String] :image_name
-    #   The name of the image used by the fleet.
+    #   The name of the image used to create the fleet.
     #
     # @option params [required, String] :name
     #   A unique name for the fleet.
@@ -1450,16 +1522,16 @@ module Aws::AppStream
     #   Deletes the VPC association for the specified fleet.
     #
     # @option params [String] :description
-    #   The description displayed to end users.
+    #   The description for display.
     #
     # @option params [String] :display_name
-    #   The fleet name displayed to end users.
+    #   The fleet name for display.
     #
     # @option params [Boolean] :enable_default_internet_access
     #   Enables or disables default internet access for the fleet.
     #
     # @option params [Types::DomainJoinInfo] :domain_join_info
-    #   The information needed for streaming instances to join a domain.
+    #   The information needed to join a Microsoft Active Directory domain.
     #
     # @option params [Array<String>] :attributes_to_delete
     #   The fleet attributes to delete.
@@ -1534,10 +1606,10 @@ module Aws::AppStream
     # Updates the specified stack.
     #
     # @option params [String] :display_name
-    #   The stack name displayed to end users.
+    #   The stack name for display.
     #
     # @option params [String] :description
-    #   The description displayed to end users.
+    #   The description for display.
     #
     # @option params [required, String] :name
     #   The name of the stack.
@@ -1603,7 +1675,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

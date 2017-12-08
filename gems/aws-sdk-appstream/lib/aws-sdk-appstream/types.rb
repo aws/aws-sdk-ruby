@@ -15,7 +15,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The application name displayed to end users.
+    #   The application name for display.
     #   @return [String]
     #
     # @!attribute [rw] icon_url
@@ -208,7 +208,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] image_name
-    #   The name of the image used by the fleet.
+    #   The name of the image used to create the fleet.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -257,6 +257,20 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] fleet_type
+    #   The fleet type.
+    #
+    #   ALWAYS\_ON
+    #
+    #   : Provides users with instant-on access to their apps. You are
+    #     charged for all running instances in your fleet, even if no users
+    #     are streaming apps.
+    #
+    #   ON\_DEMAND
+    #
+    #   : Provide users with access to applications after they connect,
+    #     which takes one to two minutes. You are charged for instance
+    #     streaming when users are connected and a small hourly fee for
+    #     instances that are not streaming apps.
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity
@@ -280,11 +294,11 @@ module Aws::AppStream
     #   @return [Integer]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users.
+    #   The description for display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The fleet name displayed to end users.
+    #   The fleet name for display.
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
@@ -292,7 +306,7 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The information needed for streaming instances to join a domain.
+    #   The information needed to join a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
@@ -342,34 +356,47 @@ module Aws::AppStream
     #           directory_name: "DirectoryName",
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         },
+    #         appstream_agent_version: "AppstreamAgentVersion",
     #       }
     #
     # @!attribute [rw] name
+    #   A unique name for the image builder.
     #   @return [String]
     #
     # @!attribute [rw] image_name
+    #   The name of the image used to create the builder.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
+    #   The instance type to use when launching the image builder.
     #   @return [String]
     #
     # @!attribute [rw] description
+    #   The description for display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
+    #   The image builder name for display.
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
-    #   Describes VPC configuration information.
+    #   The VPC configuration for the image builder. You can specify only
+    #   one subnet.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] enable_default_internet_access
+    #   Enables or disables default internet access for the image builder.
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   Contains the information needed for streaming instances to join a
-    #   domain.
+    #   The information needed to join a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
+    #
+    # @!attribute [rw] appstream_agent_version
+    #   The version of the AppStream 2.0 agent to use for this image
+    #   builder. To use the latest version of the AppStream 2.0 agent,
+    #   specify \[LATEST\].
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest AWS API Documentation
     #
@@ -381,11 +408,13 @@ module Aws::AppStream
       :display_name,
       :vpc_config,
       :enable_default_internet_access,
-      :domain_join_info)
+      :domain_join_info,
+      :appstream_agent_version)
       include Aws::Structure
     end
 
     # @!attribute [rw] image_builder
+    #   Information about the image builder.
     #   @return [Types::ImageBuilder]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderResult AWS API Documentation
@@ -404,9 +433,12 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the image builder.
     #   @return [String]
     #
     # @!attribute [rw] validity
+    #   The time that the streaming URL will be valid, in seconds. Specify a
+    #   value between 1 and 604800 seconds. The default is 3600 seconds.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURLRequest AWS API Documentation
@@ -418,9 +450,12 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] streaming_url
+    #   The URL to start the AppStream 2.0 streaming session.
     #   @return [String]
     #
     # @!attribute [rw] expires
+    #   The elapsed time, in seconds after the Unix epoch, when this URL
+    #   expires.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURLResult AWS API Documentation
@@ -451,11 +486,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users.
+    #   The description for display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The stack name displayed to end users.
+    #   The stack name for display.
     #   @return [String]
     #
     # @!attribute [rw] storage_connectors
@@ -508,17 +543,22 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] application_id
-    #   The ID of the application that must be launched after the session
-    #   starts.
+    #   The name of the application to launch after the session starts. This
+    #   is the name that you specified as **Name** in the Image Assistant.
     #   @return [String]
     #
     # @!attribute [rw] validity
     #   The time that the streaming URL will be valid, in seconds. Specify a
-    #   value between 1 and 604800 seconds.
+    #   value between 1 and 604800 seconds. The default is 60 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] session_context
-    #   The session context of the streaming URL.
+    #   The session context. For more information, see [Session Context][1]
+    #   in the *Amazon AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURLRequest AWS API Documentation
@@ -602,6 +642,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the image builder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilderRequest AWS API Documentation
@@ -612,6 +653,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] image_builder
+    #   Information about the image builder.
     #   @return [Types::ImageBuilder]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilderResult AWS API Documentation
@@ -629,6 +671,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageRequest AWS API Documentation
@@ -639,7 +682,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] image
-    #   Describes an image.
+    #   Information about the image.
     #   @return [Types::Image]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageResult AWS API Documentation
@@ -771,12 +814,16 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] names
+    #   The names of the image builders to describe.
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
+    #   The maximum size of each page of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuildersRequest AWS API Documentation
@@ -789,9 +836,12 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] image_builders
+    #   Information about the image builders.
     #   @return [Array<Types::ImageBuilder>]
     #
     # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results for
+    #   this operation. If there are no more pages, this value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuildersResult AWS API Documentation
@@ -1001,7 +1051,7 @@ module Aws::AppStream
     #
     class DisassociateFleetResult < Aws::EmptyStructure; end
 
-    # Contains the information needed for streaming instances to join a
+    # Contains the information needed to join a Microsoft Active Directory
     # domain.
     #
     # @note When making an API call, you may pass DomainJoinInfo
@@ -1063,15 +1113,15 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The fleet name displayed to end users.
+    #   The fleet name for display.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users.
+    #   The description for display.
     #   @return [String]
     #
     # @!attribute [rw] image_name
-    #   The image used by the fleet.
+    #   The name of the image used to create the fleet.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -1079,6 +1129,20 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] fleet_type
+    #   The fleet type.
+    #
+    #   ALWAYS\_ON
+    #
+    #   : Provides users with instant-on access to their apps. You are
+    #     charged for all running instances in your fleet, even if no users
+    #     are streaming apps.
+    #
+    #   ON\_DEMAND
+    #
+    #   : Provide users with access to applications after they connect,
+    #     which takes one to two minutes. You are charged for instance
+    #     streaming when users are connected and a small hourly fee for
+    #     instances that are not streaming apps.
     #   @return [String]
     #
     # @!attribute [rw] compute_capacity_status
@@ -1118,7 +1182,7 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The information needed for streaming instances to join a domain.
+    #   The information needed to join a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
@@ -1176,7 +1240,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The image name displayed to end users.
+    #   The image name for display.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -1198,7 +1262,7 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users.
+    #   The description for display.
     #   @return [String]
     #
     # @!attribute [rw] state_change_reason
@@ -1219,6 +1283,11 @@ module Aws::AppStream
     #   created.
     #   @return [Time]
     #
+    # @!attribute [rw] appstream_agent_version
+    #   The version of the AppStream 2.0 agent to use for instances that are
+    #   launched from this image.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -1234,54 +1303,74 @@ module Aws::AppStream
       :state_change_reason,
       :applications,
       :created_time,
-      :public_base_image_released_date)
+      :public_base_image_released_date,
+      :appstream_agent_version)
       include Aws::Structure
     end
 
+    # Describes a streaming instance used for editing an image. New images
+    # are created from a snapshot through an image builder.
+    #
     # @!attribute [rw] name
+    #   The name of the image builder.
     #   @return [String]
     #
     # @!attribute [rw] arn
+    #   The ARN for the image builder.
     #   @return [String]
     #
     # @!attribute [rw] image_arn
+    #   The ARN of the image from which this builder was created.
     #   @return [String]
     #
     # @!attribute [rw] description
+    #   The description for display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
+    #   The image builder name for display.
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
-    #   Describes VPC configuration information.
+    #   The VPC configuration of the image builder.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] instance_type
+    #   The instance type for the image builder.
     #   @return [String]
     #
     # @!attribute [rw] platform
+    #   The operating system platform of the image builder.
     #   @return [String]
     #
     # @!attribute [rw] state
+    #   The state of the image builder.
     #   @return [String]
     #
     # @!attribute [rw] state_change_reason
+    #   The reason why the last state change occurred.
     #   @return [Types::ImageBuilderStateChangeReason]
     #
     # @!attribute [rw] created_time
+    #   The time stamp when the image builder was created.
     #   @return [Time]
     #
     # @!attribute [rw] enable_default_internet_access
+    #   Enables or disables default internet access for the image builder.
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   Contains the information needed for streaming instances to join a
-    #   domain.
+    #   The information needed to join a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @!attribute [rw] image_builder_errors
+    #   The image builder errors.
     #   @return [Array<Types::ResourceError>]
+    #
+    # @!attribute [rw] appstream_agent_version
+    #   The version of the AppStream 2.0 agent that is currently being used
+    #   by this image builder.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder AWS API Documentation
     #
@@ -1299,14 +1388,19 @@ module Aws::AppStream
       :created_time,
       :enable_default_internet_access,
       :domain_join_info,
-      :image_builder_errors)
+      :image_builder_errors,
+      :appstream_agent_version)
       include Aws::Structure
     end
 
+    # Describes the reason why the last image builder state change occurred.
+    #
     # @!attribute [rw] code
+    #   The state change reason code.
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   The state change reason message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilderStateChangeReason AWS API Documentation
@@ -1317,7 +1411,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes the reason why the last state change occurred.
+    # Describes the reason why the last image state change occurred.
     #
     # @!attribute [rw] code
     #   The state change reason code.
@@ -1419,13 +1513,18 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # Describes a resource error.
+    #
     # @!attribute [rw] error_code
+    #   The error code.
     #   @return [String]
     #
     # @!attribute [rw] error_message
+    #   The error message.
     #   @return [String]
     #
     # @!attribute [rw] error_timestamp
+    #   The time the error occurred.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ResourceError AWS API Documentation
@@ -1517,11 +1616,11 @@ module Aws::AppStream
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users.
+    #   The description for display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The stack name displayed to end users.
+    #   The stack name for display.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -1594,19 +1693,29 @@ module Aws::AppStream
     #
     #       {
     #         name: "String", # required
+    #         appstream_agent_version: "AppstreamAgentVersion",
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the image builder.
+    #   @return [String]
+    #
+    # @!attribute [rw] appstream_agent_version
+    #   The version of the AppStream 2.0 agent to use for this image
+    #   builder. To use the latest version of the AppStream 2.0 agent,
+    #   specify \[LATEST\].
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilderRequest AWS API Documentation
     #
     class StartImageBuilderRequest < Struct.new(
-      :name)
+      :name,
+      :appstream_agent_version)
       include Aws::Structure
     end
 
     # @!attribute [rw] image_builder
+    #   Information about the image builder.
     #   @return [Types::ImageBuilder]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilderResult AWS API Documentation
@@ -1646,6 +1755,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the image builder.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilderRequest AWS API Documentation
@@ -1656,6 +1766,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] image_builder
+    #   Information about the image builder.
     #   @return [Types::ImageBuilder]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilderResult AWS API Documentation
@@ -1765,7 +1876,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] image_name
-    #   The name of the image used by the fleet.
+    #   The name of the image used to create the fleet.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1842,11 +1953,11 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users.
+    #   The description for display.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The fleet name displayed to end users.
+    #   The fleet name for display.
     #   @return [String]
     #
     # @!attribute [rw] enable_default_internet_access
@@ -1854,7 +1965,7 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_join_info
-    #   The information needed for streaming instances to join a domain.
+    #   The information needed to join a Microsoft Active Directory domain.
     #   @return [Types::DomainJoinInfo]
     #
     # @!attribute [rw] attributes_to_delete
@@ -1908,11 +2019,11 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] display_name
-    #   The stack name displayed to end users.
+    #   The stack name for display.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description displayed to end users.
+    #   The description for display.
     #   @return [String]
     #
     # @!attribute [rw] name

@@ -419,20 +419,15 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] cpu
-    #   The number of `cpu` units reserved for the container. If your
-    #   containers will be part of a task using the Fargate launch type,
-    #   this field is optional and the only requirement is that the total
-    #   amount of CPU reserved for all containers within a task be lower
-    #   than the task `cpu` value.
+    #   The number of `cpu` units reserved for the container. This parameter
+    #   maps to `CpuShares` in the [Create a container][1] section of the
+    #   [Docker Remote API][2] and the `--cpu-shares` option to [docker
+    #   run][3].
     #
-    #   For containers that will be part of a task using the EC2 launch
-    #   type, a container instance has 1,024 `cpu` units for every CPU core.
-    #   This parameter specifies the minimum amount of CPU to reserve for a
-    #   container, and containers share unallocated CPU units with other
-    #   containers on the instance with the same ratio as their allocated
-    #   amount. This parameter maps to `CpuShares` in the [Create a
-    #   container][1] section of the [Docker Remote API][2] and the
-    #   `--cpu-shares` option to [docker run][3].
+    #   This field is optional for tasks using the Fargate launch type, and
+    #   the only requirement is that the total amount of CPU reserved for
+    #   all containers within a task be lower than the task-level `cpu`
+    #   value.
     #
     #   <note markdown="1"> You can determine the number of CPU units that are available per EC2
     #   instance type by multiplying the vCPUs listed for that instance type
@@ -451,14 +446,28 @@ module Aws::ECS
     #   were 100% active all of the time, they would be limited to 512 CPU
     #   units.
     #
-    #   The Docker daemon on the container instance uses the CPU value to
-    #   calculate the relative CPU share ratios for running containers. For
-    #   more information, see [CPU share constraint][5] in the Docker
-    #   documentation. The minimum valid CPU share value that the Linux
-    #   kernel allows is 2; however, the CPU parameter is not required, and
-    #   you can use CPU values below 2 in your container definitions. For
-    #   CPU values below 2 (including null), the behavior varies based on
-    #   your Amazon ECS container agent version:
+    #   Linux containers share unallocated CPU units with other containers
+    #   on the container instance with the same ratio as their allocated
+    #   amount. For example, if you run a single-container task on a
+    #   single-core instance type with 512 CPU units specified for that
+    #   container, and that is the only task running on the container
+    #   instance, that container could use the full 1,024 CPU unit share at
+    #   any given time. However, if you launched another copy of the same
+    #   task on that container instance, each task would be guaranteed a
+    #   minimum of 512 CPU units when needed, and each container could float
+    #   to higher CPU usage if the other container was not using it, but if
+    #   both tasks were 100% active all of the time, they would be limited
+    #   to 512 CPU units.
+    #
+    #   On Linux container instances, the Docker daemon on the container
+    #   instance uses the CPU value to calculate the relative CPU share
+    #   ratios for running containers. For more information, see [CPU share
+    #   constraint][5] in the Docker documentation. The minimum valid CPU
+    #   share value that the Linux kernel will allow is 2; however, the CPU
+    #   parameter is not required, and you can use CPU values below 2 in
+    #   your container definitions. For CPU values below 2 (including null),
+    #   the behavior varies based on your Amazon ECS container agent
+    #   version:
     #
     #   * **Agent versions less than or equal to 1.1.0:** Null and zero CPU
     #     values are passed to Docker as 0, which Docker then converts to
@@ -467,6 +476,11 @@ module Aws::ECS
     #
     #   * **Agent versions greater than or equal to 1.2.0:** Null, zero, and
     #     CPU values of 1 are passed to Docker as 2.
+    #
+    #   On Windows container instances, the CPU limit is enforced as an
+    #   absolute limit, or a quota. Windows containers only have access to
+    #   the specified amount of CPU that is described in the task
+    #   definition.
     #
     #
     #
@@ -543,17 +557,20 @@ module Aws::ECS
     #
     # @!attribute [rw] links
     #   The `link` parameter allows containers to communicate with each
-    #   other without the need for port mappings, using the `name` parameter
-    #   and optionally, an `alias` for the link. This construct is analogous
-    #   to `name:alias` in Docker links. This field is not valid for
-    #   containers in tasks using the Fargate launch type. Up to 255 letters
-    #   (uppercase and lowercase), numbers, hyphens, and underscores are
-    #   allowed for each `name` and `alias`. For more information on linking
-    #   Docker containers, see
+    #   other without the need for port mappings. Only supported if the
+    #   network mode of a task definition is set to `bridge`. The
+    #   `name:internalName` construct is analogous to `name:alias` in Docker
+    #   links. Up to 255 letters (uppercase and lowercase), numbers,
+    #   hyphens, and underscores are allowed. For more information about
+    #   linking Docker containers, go to
     #   [https://docs.docker.com/engine/userguide/networking/default\_network/dockerlinks/][1].
     #   This parameter maps to `Links` in the [Create a container][2]
-    #   section of the [Docker Remote API][3] and the `--link` option to
-    #   [docker run][4].
+    #   section of the [Docker Remote API][3] and the `--link` option to [
+    #   `docker run` ][4].
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
     #
     #   Containers that are collocated on a single container instance may be
     #   able to communicate with each other without requiring links or host
@@ -565,7 +582,7 @@ module Aws::ECS
     #   [1]: https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
     #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
     #   [3]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
-    #   [4]: https://docs.docker.com/engine/reference/run/
+    #   [4]: https://docs.docker.com/engine/reference/commandline/run/
     #   @return [Array<String>]
     #
     # @!attribute [rw] port_mappings
@@ -573,9 +590,14 @@ module Aws::ECS
     #   containers to access ports on the host container instance to send or
     #   receive traffic.
     #
-    #   If using containers in a task with the Fargate, exposed ports should
-    #   be specified using `containerPort`. The `hostPort` can be left blank
+    #   For task definitions that use the `awsvpc` network mode, you should
+    #   only specify the `containerPort`. The `hostPort` can be left blank
     #   or it must be the same value as the `containerPort`.
+    #
+    #   Port mappings on Windows use the `NetNAT` gateway address rather
+    #   than `localhost`. There is no loopback for port mappings on Windows,
+    #   so you cannot access a container's mapped port from the host
+    #   itself.
     #
     #   This parameter maps to `PortBindings` in the [Create a container][1]
     #   section of the [Docker Remote API][2] and the `--publish` option to
@@ -673,12 +695,13 @@ module Aws::ECS
     # @!attribute [rw] mount_points
     #   The mount points for data volumes in your container.
     #
-    #   If using the Fargate launch type, the `sourceVolume` parameter is
-    #   not supported.
-    #
     #   This parameter maps to `Volumes` in the [Create a container][1]
     #   section of the [Docker Remote API][2] and the `--volume` option to
     #   [docker run][3].
+    #
+    #   Windows containers can mount whole directories on the same drive as
+    #   `$env:ProgramData`. Windows containers cannot mount directories on a
+    #   different drive, and mount point cannot be across drives.
     #
     #
     #
@@ -701,8 +724,12 @@ module Aws::ECS
     #
     # @!attribute [rw] linux_parameters
     #   Linux-specific modifications that are applied to the container, such
-    #   as Linux KernelCapabilities. This field is not valid for containers
-    #   in tasks using the Fargate launch type.
+    #   as Linux KernelCapabilities.
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks
+    #   using the Fargate launch type.
+    #
+    #    </note>
     #   @return [Types::LinuxParameters]
     #
     # @!attribute [rw] hostname
@@ -721,6 +748,10 @@ module Aws::ECS
     #   The user name to use inside the container. This parameter maps to
     #   `User` in the [Create a container][1] section of the [Docker Remote
     #   API][2] and the `--user` option to [docker run][3].
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
     #
     #
     #
@@ -747,6 +778,10 @@ module Aws::ECS
     #   container. This parameter maps to `NetworkDisabled` in the [Create a
     #   container][1] section of the [Docker Remote API][2].
     #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
@@ -759,6 +794,11 @@ module Aws::ECS
     #   user). This parameter maps to `Privileged` in the [Create a
     #   container][1] section of the [Docker Remote API][2] and the
     #   `--privileged` option to [docker run][3].
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks
+    #   using the Fargate launch type.
+    #
+    #    </note>
     #
     #
     #
@@ -773,6 +813,10 @@ module Aws::ECS
     #   the [Create a container][1] section of the [Docker Remote API][2]
     #   and the `--read-only` option to `docker run`.
     #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
@@ -784,6 +828,10 @@ module Aws::ECS
     #   parameter maps to `Dns` in the [Create a container][1] section of
     #   the [Docker Remote API][2] and the `--dns` option to [docker
     #   run][3].
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
     #
     #
     #
@@ -797,6 +845,10 @@ module Aws::ECS
     #   This parameter maps to `DnsSearch` in the [Create a container][1]
     #   section of the [Docker Remote API][2] and the `--dns-search` option
     #   to [docker run][3].
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
     #
     #
     #
@@ -812,6 +864,10 @@ module Aws::ECS
     #   container to talk to. This parameter maps to `ExtraHosts` in the
     #   [Create a container][1] section of the [Docker Remote API][2] and
     #   the `--add-host` option to [docker run][3].
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
     #
     #
     #
@@ -835,6 +891,8 @@ module Aws::ECS
     #   placed on that instance can use these security options. For more
     #   information, see [Amazon ECS Container Agent Configuration][4] in
     #   the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #    This parameter is not supported for Windows containers.
     #
     #    </note>
     #
@@ -872,6 +930,10 @@ module Aws::ECS
     #   container instance. To check the Docker Remote API version on your
     #   container instance, log in to your container instance and run the
     #   following command: `sudo docker version | grep "Server API version"`
+    #
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
+    #
+    #    </note>
     #
     #
     #
@@ -2116,8 +2178,8 @@ module Aws::ECS
     #   container instance, the Docker daemon creates it. If the location
     #   does exist, the contents of the source path folder are exported.
     #
-    #   If you are using the Fargate launch type, the `host` parameter is
-    #   not supported.
+    #   If you are using the Fargate launch type, the `sourcePath` parameter
+    #   is not supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostVolumeProperties AWS API Documentation
@@ -3027,8 +3089,7 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] source_volume
-    #   The name of the volume to mount. If using the Fargate launch type,
-    #   the `sourceVolume` parameter is not supported.
+    #   The name of the volume to mount.
     #   @return [String]
     #
     # @!attribute [rw] container_path
@@ -3627,6 +3688,10 @@ module Aws::ECS
     #   If the network mode is `host`, you can't run multiple
     #   instantiations of the same task on a single container instance when
     #   port mappings are used.
+    #
+    #   Docker for Windows uses different network modes than Docker for
+    #   Linux. When you register a task definition with Windows containers,
+    #   you must not specify a network mode.
     #
     #   For more information, see [Network settings][2] in the *Docker run
     #   reference*.
@@ -4673,6 +4738,17 @@ module Aws::ECS
     #   The ARN of the IAM role that containers in this task can assume. All
     #   containers in this task are granted the permissions that are
     #   specified in this role.
+    #
+    #   IAM roles for tasks on Windows require that the `-EnableTaskIAMRole`
+    #   option is set when you launch the Amazon ECS-optimized Windows AMI.
+    #   Your containers must also run some configuration code in order to
+    #   take advantage of the feature. For more information, see [Windows
+    #   IAM Roles for Tasks][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows_task_IAM_roles.html
     #   @return [String]
     #
     # @!attribute [rw] execution_role_arn
@@ -4705,9 +4781,21 @@ module Aws::ECS
     #   more information, see [Task Networking][1] in the *Amazon Elastic
     #   Container Service Developer Guide*.
     #
+    #   <note markdown="1"> Currently, only the Amazon ECS-optimized AMI, other Amazon Linux
+    #   variants with the `ecs-init` package, or AWS Fargate infrastructure
+    #   support the `awsvpc` network mode.
+    #
+    #    </note>
+    #
     #   If the network mode is `host`, you can't run multiple
     #   instantiations of the same task on a single container instance when
     #   port mappings are used.
+    #
+    #   Docker for Windows uses different network modes than Docker for
+    #   Linux. When you register a task definition with Windows containers,
+    #   you must not specify a network mode. If you use the console to
+    #   register a task definition with Windows containers, you must choose
+    #   the `<default>` network mode object.
     #
     #   For more information, see [Network settings][2] in the *Docker run
     #   reference*.
@@ -5220,8 +5308,11 @@ module Aws::ECS
     #   guaranteed to persist after the containers associated with it stop
     #   running.
     #
-    #   If you are using the Fargate launch type, the `host` parameter is
-    #   not supported.
+    #   Windows containers can mount whole directories on the same drive as
+    #   `$env:ProgramData`. Windows containers cannot mount directories on a
+    #   different drive, and mount point cannot be across drives. For
+    #   example, you can mount `C:\my\path:C:\my\path` and `D:\:D:`, but
+    #   not `D:\my\path:C:\my\path` or `D:\:C:\my\path`.
     #   @return [Types::HostVolumeProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume AWS API Documentation

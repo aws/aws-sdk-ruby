@@ -15,6 +15,7 @@ module Aws::AppStream
     AccountPassword = Shapes::StringShape.new(name: 'AccountPassword')
     Application = Shapes::StructureShape.new(name: 'Application')
     Applications = Shapes::ListShape.new(name: 'Applications')
+    AppstreamAgentVersion = Shapes::StringShape.new(name: 'AppstreamAgentVersion')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateFleetRequest = Shapes::StructureShape.new(name: 'AssociateFleetRequest')
     AssociateFleetResult = Shapes::StructureShape.new(name: 'AssociateFleetResult')
@@ -207,6 +208,7 @@ module Aws::AppStream
     CreateImageBuilderRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     CreateImageBuilderRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     CreateImageBuilderRequest.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
+    CreateImageBuilderRequest.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     CreateImageBuilderRequest.struct_class = Types::CreateImageBuilderRequest
 
     CreateImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
@@ -386,6 +388,7 @@ module Aws::AppStream
     Image.add_member(:applications, Shapes::ShapeRef.new(shape: Applications, location_name: "Applications"))
     Image.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Image.add_member(:public_base_image_released_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PublicBaseImageReleasedDate"))
+    Image.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     Image.struct_class = Types::Image
 
     ImageBuilder.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
@@ -402,6 +405,7 @@ module Aws::AppStream
     ImageBuilder.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     ImageBuilder.add_member(:domain_join_info, Shapes::ShapeRef.new(shape: DomainJoinInfo, location_name: "DomainJoinInfo"))
     ImageBuilder.add_member(:image_builder_errors, Shapes::ShapeRef.new(shape: ResourceErrors, location_name: "ImageBuilderErrors"))
+    ImageBuilder.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     ImageBuilder.struct_class = Types::ImageBuilder
 
     ImageBuilderList.member = Shapes::ShapeRef.new(shape: ImageBuilder)
@@ -483,6 +487,7 @@ module Aws::AppStream
     StartFleetResult.struct_class = Types::StartFleetResult
 
     StartImageBuilderRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    StartImageBuilderRequest.add_member(:appstream_agent_version, Shapes::ShapeRef.new(shape: AppstreamAgentVersion, location_name: "AppstreamAgentVersion"))
     StartImageBuilderRequest.struct_class = Types::StartImageBuilderRequest
 
     StartImageBuilderResult.add_member(:image_builder, Shapes::ShapeRef.new(shape: ImageBuilder, location_name: "ImageBuilder"))
@@ -821,6 +826,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
 
       api.add_operation(:stop_fleet, Seahorse::Model::Operation.new.tap do |o|
