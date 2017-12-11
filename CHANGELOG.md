@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.101 (2017-12-11)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
