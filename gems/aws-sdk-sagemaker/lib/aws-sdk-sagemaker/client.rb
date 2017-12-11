@@ -412,7 +412,7 @@ module Aws::SageMaker
     # @option params [Array<Types::ContainerDefinition>] :supplemental_containers
     #   The additional optional containers to deploy.
     #
-    # @option params [String] :execution_role_arn
+    # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
     #   can assume to access model artifacts and docker image for deployment
     #   on ML compute instances. Deploying on ML compute instances is part of
@@ -457,7 +457,7 @@ module Aws::SageMaker
     #         },
     #       },
     #     ],
-    #     execution_role_arn: "RoleArn",
+    #     execution_role_arn: "RoleArn", # required
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -1876,7 +1876,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

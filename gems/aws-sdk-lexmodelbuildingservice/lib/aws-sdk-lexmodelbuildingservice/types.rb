@@ -94,6 +94,23 @@ module Aws::LexModelBuildingService
     #   platform.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] status
+    #   The status of the bot channel.
+    #
+    #   * `CREATED` - The channel has been created and is ready for use.
+    #
+    #   * `IN_PROGRESS` - Channel creation is in progress.
+    #
+    #   * `FAILED` - There was an error creating the channel. For
+    #     information about the reason for the failure, see the
+    #     `failureReason` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If `status` is `FAILED`, Amazon Lex provides the reason that it
+    #   failed to create the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/BotChannelAssociation AWS API Documentation
     #
     class BotChannelAssociation < Struct.new(
@@ -103,7 +120,9 @@ module Aws::LexModelBuildingService
       :bot_name,
       :created_date,
       :type,
-      :bot_configuration)
+      :bot_configuration,
+      :status,
+      :failure_reason)
       include Aws::Structure
     end
 
@@ -1125,6 +1144,23 @@ module Aws::LexModelBuildingService
     #   communicate with the Amazon Lex bot.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] status
+    #   The status of the bot channel.
+    #
+    #   * `CREATED` - The channel has been created and is ready for use.
+    #
+    #   * `IN_PROGRESS` - Channel creation is in progress.
+    #
+    #   * `FAILED` - There was an error creating the channel. For
+    #     information about the reason for the failure, see the
+    #     `failureReason` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   If `status` is `FAILED`, Amazon Lex provides the reason that it
+    #   failed to create the association.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociationResponse AWS API Documentation
     #
     class GetBotChannelAssociationResponse < Struct.new(
@@ -1134,7 +1170,9 @@ module Aws::LexModelBuildingService
       :bot_name,
       :created_date,
       :type,
-      :bot_configuration)
+      :bot_configuration,
+      :status,
+      :failure_reason)
       include Aws::Structure
     end
 

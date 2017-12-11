@@ -782,9 +782,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::MFAOptionType>]
     #
     # @!attribute [rw] preferred_mfa_setting
+    #   The user's preferred MFA setting.
     #   @return [String]
     #
     # @!attribute [rw] user_mfa_setting_list
+    #   The list of the user's MFA settings.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserResponse AWS API Documentation
@@ -4012,9 +4014,11 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<Types::MFAOptionType>]
     #
     # @!attribute [rw] preferred_mfa_setting
+    #   The user's preferred MFA setting.
     #   @return [String]
     #
     # @!attribute [rw] user_mfa_setting_list
+    #   The list of the user's MFA settings.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserResponse AWS API Documentation
@@ -7386,6 +7390,11 @@ module Aws::CognitoIdentityProvider
     #   your users.
     #   @return [String]
     #
+    # @!attribute [rw] domain
+    #   Holds the domain prefix if the user pool has a domain associated
+    #   with it.
+    #   @return [String]
+    #
     # @!attribute [rw] admin_create_user_config
     #   The configuration for `AdminCreateUser` requests.
     #   @return [Types::AdminCreateUserConfigType]
@@ -7421,6 +7430,7 @@ module Aws::CognitoIdentityProvider
       :user_pool_tags,
       :sms_configuration_failure,
       :email_configuration_failure,
+      :domain,
       :admin_create_user_config,
       :user_pool_add_ons)
       include Aws::Structure

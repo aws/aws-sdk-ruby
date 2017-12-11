@@ -708,7 +708,7 @@ module Aws::LexModelBuildingService
     # Amazon Lex stores the utterances that users send to your bot unless
     # the `childDirected` field in the bot is set to `true`. Utterances are
     # stored for 15 days for use with the GetUtterancesView operation, and
-    # then stored indefinately for use in improving the ability of your bot
+    # then stored indefinitely for use in improving the ability of your bot
     # to respond to user input.
     #
     # Use the `DeleteStoredUtterances` operation to manually delete stored
@@ -1006,6 +1006,8 @@ module Aws::LexModelBuildingService
     #   * {Types::GetBotChannelAssociationResponse#created_date #created_date} => Time
     #   * {Types::GetBotChannelAssociationResponse#type #type} => String
     #   * {Types::GetBotChannelAssociationResponse#bot_configuration #bot_configuration} => Hash&lt;String,String&gt;
+    #   * {Types::GetBotChannelAssociationResponse#status #status} => String
+    #   * {Types::GetBotChannelAssociationResponse#failure_reason #failure_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1025,6 +1027,8 @@ module Aws::LexModelBuildingService
     #   resp.type #=> String, one of "Facebook", "Slack", "Twilio-Sms"
     #   resp.bot_configuration #=> Hash
     #   resp.bot_configuration["String"] #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "CREATED", "FAILED"
+    #   resp.failure_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociation AWS API Documentation
     #
@@ -1091,6 +1095,8 @@ module Aws::LexModelBuildingService
     #   resp.bot_channel_associations[0].type #=> String, one of "Facebook", "Slack", "Twilio-Sms"
     #   resp.bot_channel_associations[0].bot_configuration #=> Hash
     #   resp.bot_channel_associations[0].bot_configuration["String"] #=> String
+    #   resp.bot_channel_associations[0].status #=> String, one of "IN_PROGRESS", "CREATED", "FAILED"
+    #   resp.bot_channel_associations[0].failure_reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBotChannelAssociations AWS API Documentation
@@ -2586,10 +2592,12 @@ module Aws::LexModelBuildingService
     #   example, asking "Do you want to order a drink with your pizza?"
     #
     # If you specify an existing intent name to update the intent, Amazon
-    # Lex replaces the values in the `$LATEST` version of the slot type with
+    # Lex replaces the values in the `$LATEST` version of the intent with
     # the values in the request. Amazon Lex removes fields that you don't
     # provide in the request. If you don't specify the required fields,
-    # Amazon Lex throws an exception.
+    # Amazon Lex throws an exception. When you update the `$LATEST` version
+    # of an intent, the `status` field of any bot that uses the `$LATEST`
+    # version of the intent is set to `NOT_BUILT`.
     #
     # For more information, see how-it-works.
     #
@@ -3183,7 +3191,9 @@ module Aws::LexModelBuildingService
     # request replace the existing values in the `$LATEST` version of the
     # slot type. Amazon Lex removes the fields that you don't provide in
     # the request. If you don't specify required fields, Amazon Lex throws
-    # an exception.
+    # an exception. When you update the `$LATEST` version of a slot type, if
+    # a bot uses the `$LATEST` version of an intent that contains the slot
+    # type, the bot's `status` field is set to `NOT_BUILT`.
     #
     # This operation requires permissions for the `lex:PutSlotType` action.
     #
@@ -3343,7 +3353,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

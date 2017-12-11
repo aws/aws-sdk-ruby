@@ -2232,6 +2232,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.user_pool_tags["StringType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
+    #   resp.user_pool.domain #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
     #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
@@ -2868,6 +2869,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.user_pool_tags["StringType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
+    #   resp.user_pool.domain #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
     #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
     #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
@@ -5276,7 +5278,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

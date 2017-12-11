@@ -33,6 +33,7 @@ module Aws::LexModelBuildingService
     BuiltinSlotTypeMetadataList = Shapes::ListShape.new(name: 'BuiltinSlotTypeMetadataList')
     BuiltinSlotTypeSignature = Shapes::StringShape.new(name: 'BuiltinSlotTypeSignature')
     ChannelConfigurationMap = Shapes::MapShape.new(name: 'ChannelConfigurationMap')
+    ChannelStatus = Shapes::StringShape.new(name: 'ChannelStatus')
     ChannelType = Shapes::StringShape.new(name: 'ChannelType')
     CodeHook = Shapes::StructureShape.new(name: 'CodeHook')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -180,6 +181,8 @@ module Aws::LexModelBuildingService
     BotChannelAssociation.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     BotChannelAssociation.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     BotChannelAssociation.add_member(:bot_configuration, Shapes::ShapeRef.new(shape: ChannelConfigurationMap, location_name: "botConfiguration"))
+    BotChannelAssociation.add_member(:status, Shapes::ShapeRef.new(shape: ChannelStatus, location_name: "status"))
+    BotChannelAssociation.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     BotChannelAssociation.struct_class = Types::BotChannelAssociation
 
     BotChannelAssociationList.member = Shapes::ShapeRef.new(shape: BotChannelAssociation)
@@ -359,6 +362,8 @@ module Aws::LexModelBuildingService
     GetBotChannelAssociationResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     GetBotChannelAssociationResponse.add_member(:type, Shapes::ShapeRef.new(shape: ChannelType, location_name: "type"))
     GetBotChannelAssociationResponse.add_member(:bot_configuration, Shapes::ShapeRef.new(shape: ChannelConfigurationMap, location_name: "botConfiguration"))
+    GetBotChannelAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ChannelStatus, location_name: "status"))
+    GetBotChannelAssociationResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     GetBotChannelAssociationResponse.struct_class = Types::GetBotChannelAssociationResponse
 
     GetBotChannelAssociationsRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))

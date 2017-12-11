@@ -384,7 +384,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
-    #         execution_role_arn: "RoleArn",
+    #         execution_role_arn: "RoleArn", # required
     #         tags: [
     #           {
     #             key: "TagKey", # required

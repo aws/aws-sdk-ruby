@@ -214,7 +214,7 @@ module Aws::SageMaker
     CreateModelInput.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     CreateModelInput.add_member(:primary_container, Shapes::ShapeRef.new(shape: ContainerDefinition, required: true, location_name: "PrimaryContainer"))
     CreateModelInput.add_member(:supplemental_containers, Shapes::ShapeRef.new(shape: ContainerDefinitionList, location_name: "SupplementalContainers"))
-    CreateModelInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "ExecutionRoleArn"))
+    CreateModelInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateModelInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateModelInput.struct_class = Types::CreateModelInput
 
