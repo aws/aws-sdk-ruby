@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.10.0 (2017-12-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-workmail` gem.
+
 3.9.0 (2017-12-05)
 ------------------
 

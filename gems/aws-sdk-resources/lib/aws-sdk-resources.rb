@@ -130,6 +130,7 @@ module Aws
   autoload :WAF, 'aws-sdk-waf'
   autoload :WAFRegional, 'aws-sdk-wafregional'
   autoload :WorkDocs, 'aws-sdk-workdocs'
+  autoload :WorkMail, 'aws-sdk-workmail'
   autoload :WorkSpaces, 'aws-sdk-workspaces'
   autoload :XRay, 'aws-sdk-xray'
   # end service gems

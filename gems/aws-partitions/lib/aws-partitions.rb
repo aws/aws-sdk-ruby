@@ -346,6 +346,7 @@ module Aws
             'WAF' => 'waf',
             'WAFRegional' => 'waf-regional',
             'WorkDocs' => 'workdocs',
+            'WorkMail' => 'workmail',
             'WorkSpaces' => 'workspaces',
             'XRay' => 'xray',
           }

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2017-12-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WorkMail`.
+
 1.46.0 (2017-12-11)
 ------------------
 

@@ -571,7 +571,7 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] compute_platform
-    #   The destination platform type for the deployment `Lambda` or
+    #   The destination platform type for the deployment (`Lambda` or
     #   `Server`).
     #   @return [String]
     #
@@ -649,7 +649,7 @@ module Aws::CodeDeploy
     #   @return [Types::MinimumHealthyHosts]
     #
     # @!attribute [rw] traffic_routing_config
-    #   The configuration specifying how the deployment traffic will be
+    #   The configuration that specifies how the deployment traffic will be
     #   routed.
     #   @return [Types::TrafficRoutingConfig]
     #
@@ -3116,8 +3116,8 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] content
     #   The YAML-formatted or JSON-formatted revision string. It includes
-    #   information about what Lambda function to update and optional Lambda
-    #   functions that validate deployment lifecycle events.
+    #   information about which Lambda function to update and optional
+    #   Lambda functions that validate deployment lifecycle events.
     #   @return [String]
     #
     # @!attribute [rw] sha256
@@ -3726,8 +3726,8 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # The configuration specifying how traffic is shifted from one version
-    # of a Lambda function to another version during an AWS Lambda
+    # The configuration that specifies how traffic is shifted from one
+    # version of a Lambda function to another version during an AWS Lambda
     # deployment.
     #
     # @note When making an API call, you may pass TrafficRoutingConfig
@@ -3746,8 +3746,8 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] type
-    #   The type of traffic shifting a deployment configuration uses
-    #   (`TimeBasedCanary` or `TimeBasedLinear`).
+    #   The type of traffic shifting (`TimeBasedCanary` or
+    #   `TimeBasedLinear`) used by a deployment configuration .
     #   @return [String]
     #
     # @!attribute [rw] time_based_canary

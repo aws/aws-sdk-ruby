@@ -622,7 +622,7 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #
     # @option params [String] :compute_platform
-    #   The destination platform type for the deployment `Lambda` or
+    #   The destination platform type for the deployment (`Lambda` or
     #   `Server`).
     #
     # @return [Types::CreateApplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -813,7 +813,7 @@ module Aws::CodeDeploy
     #   of FLEET\_PERCENT and a value of 95.
     #
     # @option params [Types::TrafficRoutingConfig] :traffic_routing_config
-    #   The configuration specifying how the deployment traffic will be
+    #   The configuration that specifies how the deployment traffic will be
     #   routed.
     #
     # @option params [String] :compute_platform
@@ -2464,7 +2464,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

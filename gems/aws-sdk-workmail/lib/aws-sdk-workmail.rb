@@ -8,16 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-codedeploy/types'
-require_relative 'aws-sdk-codedeploy/client_api'
-require_relative 'aws-sdk-codedeploy/client'
-require_relative 'aws-sdk-codedeploy/errors'
-require_relative 'aws-sdk-codedeploy/waiters'
-require_relative 'aws-sdk-codedeploy/resource'
-require_relative 'aws-sdk-codedeploy/customizations'
+require_relative 'aws-sdk-workmail/types'
+require_relative 'aws-sdk-workmail/client_api'
+require_relative 'aws-sdk-workmail/client'
+require_relative 'aws-sdk-workmail/errors'
+require_relative 'aws-sdk-workmail/resource'
+require_relative 'aws-sdk-workmail/customizations'
 
-# This module provides support for AWS CodeDeploy. This module is available in the
-# `aws-sdk-codedeploy` gem.
+# This module provides support for Amazon WorkMail. This module is available in the
+# `aws-sdk-workmail` gem.
 #
 # # Client
 #
@@ -29,20 +28,20 @@ require_relative 'aws-sdk-codedeploy/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS CodeDeploy all
+# Errors returned from Amazon WorkMail all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::CodeDeploy::Errors::ServiceError
+#     rescue Aws::WorkMail::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::CodeDeploy
+module Aws::WorkMail
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.0.0'
 
 end

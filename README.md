@@ -422,6 +422,7 @@ to be backwards compatible.
 | Amazon SimpleDB                             | Aws::SimpleDB                        | aws-sdk-simpledb                        | 2009-04-15  |
 | Amazon Translate                            | Aws::Translate                       | aws-sdk-translate                       | 2017-07-01  |
 | Amazon WorkDocs                             | Aws::WorkDocs                        | aws-sdk-workdocs                        | 2016-05-01  |
+| Amazon WorkMail                             | Aws::WorkMail                        | aws-sdk-workmail                        | 2017-10-01  |
 | Amazon WorkSpaces                           | Aws::WorkSpaces                      | aws-sdk-workspaces                      | 2015-04-08  |
 | AmazonMQ                                    | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | Application Auto Scaling                    | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
