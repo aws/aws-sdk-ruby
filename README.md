@@ -377,6 +377,7 @@ to be backwards compatible.
 | Amazon SimpleDB                             | SimpleDB                        | 2009-04-15  |
 | Amazon Translate                            | Translate                       | 2017-07-01  |
 | Amazon WorkDocs                             | WorkDocs                        | 2016-05-01  |
+| Amazon WorkMail                             | WorkMail                        | 2017-10-01  |
 | Amazon WorkSpaces                           | WorkSpaces                      | 2015-04-08  |
 | AmazonMQ                                    | MQ                              | 2017-11-27  |
 | Application Auto Scaling                    | ApplicationAutoScaling          | 2016-02-06  |

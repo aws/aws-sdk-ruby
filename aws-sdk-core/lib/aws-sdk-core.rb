@@ -150,6 +150,7 @@ module Aws
     WAF
     WAFRegional
     WorkDocs
+    WorkMail
     WorkSpaces
     XRay
   )

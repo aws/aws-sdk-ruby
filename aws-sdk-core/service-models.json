@@ -506,6 +506,10 @@
     "models": "workdocs/2016-05-01",
     "endpoint": "workdocs"
   },
+  "WorkMail": {
+    "models": "workmail/2017-10-01",
+    "endpoint": "workmail"
+  },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08",
     "endpoint": "workspaces"
