@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.102 (2017-12-12)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the documentation for AWS CodeDeploy.
 
 * Feature - Aws::WorkMail - Added support for a new service, Amazon WorkMail.
