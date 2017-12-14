@@ -53,12 +53,6 @@ See [related GitHub issue #1009](https://github.com/aws/aws-sdk-ruby/issues/1009
 
 ### Resource Model, Waiters and Paginators
 
-### Document resource model outdate issue
-
-1. `:destination_cidr_block` is not longer an identifier for `Route` resource
-
-See [related Github issue #1630](https://github.com/aws/aws-sdk-ruby/issues/1630)
-
 ### Add Interface to Create Custom Waiters
 
 For cases where a particular waiter doesn't exist, this request would provide an
@@ -66,6 +60,12 @@ interface with which someone could define a waiter in code, rather than having
 to alter the SDK source JSON files.
 
 See [related GitHub issue #1047](https://github.com/aws/aws-sdk-ruby/issues/1047).
+
+### EC2 Route resource identifier issue
+
+`:destination_cidr_block` is not longer an identifier for `Route` resource
+
+See [related Github issue #1630](https://github.com/aws/aws-sdk-ruby/issues/1630)
 
 ### Add NatGateways to the Aws::EC2::Vpc Resource Object
 
@@ -116,6 +116,14 @@ See [related GitHub issue #969](https://github.com/aws/aws-sdk-ruby/issues/969).
 
 See [related GitHub issue #1385](https://github.com/aws/aws-sdk-ruby/issues/1385).
 
+### RDS Resource CreateDBCluster path issue
+
+See [related GitHub issue #1652](https://github.com/aws/aws-sdk-ruby/issues/1652).
+
+### EC2 Resource definition assumes non-empty reservation resources
+
+See [related GitHub issue #1449](https://github.com/aws/aws-sdk-ruby/issues/1449).
+
 ### AWS Service
 
 ### S3 Presign
@@ -130,8 +138,9 @@ req = s3.presigned_request(:get_object, bucket:'...', key: '...')
 req.uri #=> "https://..."
 req.headers #=> { ... } authorization in here
 ```
-
-See [related GitHub issue #1152](https://github.com/aws/aws-sdk-ruby/issues/1152).
+See [related Github issue #874](https://github.com/aws/aws-sdk-ruby/issues/874)
+See [related GitHub issue #1152](https://github.com/aws/aws-sdk-ruby/issues/1152)
+See [related GitHub issue #1556](https://github.com/aws/aws-sdk-ruby/issues/1556)
 
 ### Add Option to Create Unsigned Requests
 
