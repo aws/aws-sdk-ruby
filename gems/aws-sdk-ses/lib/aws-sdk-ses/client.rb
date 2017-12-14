@@ -161,7 +161,7 @@ module Aws::SES
     # @option params [required, String] :rule_set_name
     #   The name of the rule set to create. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers (0-9),
     #     underscores (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
@@ -589,7 +589,7 @@ module Aws::SES
     # @option params [required, String] :rule_set_name
     #   The name of the rule set to create. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers (0-9),
     #     underscores (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
@@ -2088,9 +2088,8 @@ module Aws::SES
     # [1]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html
     #
     # @option params [String] :next_token
-    #   A token returned from a previous call to
-    #   `ListCustomVerificationEmailTemplates` to indicate the position in the
-    #   list of email templates.
+    #   An array the contains the name and creation time stamp for each
+    #   template in your Amazon SES account.
     #
     # @option params [Integer] :max_results
     #   The maximum number of custom verification email templates to return.
@@ -2384,7 +2383,8 @@ module Aws::SES
     # You can execute this operation no more than once per second.
     #
     # @option params [String] :next_token
-    #   The token to use for pagination.
+    #   A token returned from a previous call to `ListTemplates` to indicate
+    #   the position in the list of email templates.
     #
     # @option params [Integer] :max_items
     #   The maximum number of templates to return. This value must be at least
@@ -2895,13 +2895,17 @@ module Aws::SES
       req.send_request(options)
     end
 
-    # Sends a custom verification email to a specified recipient.
-    # Verification emails sent using this operation are counted against your
-    # 24-hour sending quota and per-second sending rate.
+    # Adds an email address to the list of identities for your Amazon SES
+    # account and attempts to verify it. As a result of executing this
+    # operation, a customized verification email is sent to the specified
+    # address.
     #
-    # For more information about custom verification email templates, see
-    # [Using Custom Verification Email Templates][1] in the *Amazon SES
-    # Developer Guide*.
+    # To use this operation, you must first create a custom verification
+    # email template. For more information about creating and using custom
+    # verification email templates, see [Using Custom Verification Email
+    # Templates][1] in the *Amazon SES Developer Guide*.
+    #
+    # You can execute this operation no more than once per second.
     #
     #
     #
@@ -4719,8 +4723,8 @@ module Aws::SES
     end
 
     # Adds an email address to the list of identities for your Amazon SES
-    # account and attempts to verify it. This operation causes a
-    # confirmation email message to be sent to the specified address.
+    # account and attempts to verify it. As a result of executing this
+    # operation, a verification email is sent to the specified address.
     #
     # You can execute this operation no more than once per second.
     #
@@ -4766,7 +4770,7 @@ module Aws::SES
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

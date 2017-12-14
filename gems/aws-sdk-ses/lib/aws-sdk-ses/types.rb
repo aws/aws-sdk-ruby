@@ -384,8 +384,8 @@ module Aws::SES
     # @!attribute [rw] rule_set_name
     #   The name of the rule set to create. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
-    #     underscores (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
@@ -470,8 +470,8 @@ module Aws::SES
     #   The name of an Amazon CloudWatch dimension associated with an email
     #   sending metric. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
-    #     (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Contain less than 256 characters.
     #   @return [String]
@@ -489,8 +489,8 @@ module Aws::SES
     #   CloudWatch if you do not provide the value of the dimension when you
     #   send an email. The default value must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
-    #     (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Contain less than 256 characters.
     #   @return [String]
@@ -923,8 +923,8 @@ module Aws::SES
     # @!attribute [rw] rule_set_name
     #   The name of the rule set to create. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
-    #     underscores (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
@@ -1659,8 +1659,8 @@ module Aws::SES
     # @!attribute [rw] name
     #   The name of the event destination. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
-    #     (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Contain less than 64 characters.
     #   @return [String]
@@ -2480,9 +2480,8 @@ module Aws::SES
     #       }
     #
     # @!attribute [rw] next_token
-    #   A token returned from a previous call to
-    #   `ListCustomVerificationEmailTemplates` to indicate the position in
-    #   the list of email templates.
+    #   An array the contains the name and creation time stamp for each
+    #   template in your Amazon SES account.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2510,8 +2509,8 @@ module Aws::SES
     # @!attribute [rw] next_token
     #   A token indicating that there are additional custom verification
     #   email templates available to be listed. Pass this token to a
-    #   subsequent call to `ListCustomVerificationEmailTemplates` to
-    #   retrieve the next 50 custom verification email templates.
+    #   subsequent call to `ListTemplates` to retrieve the next 50 custom
+    #   verification email templates.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListCustomVerificationEmailTemplatesResponse AWS API Documentation
@@ -2716,7 +2715,8 @@ module Aws::SES
     #       }
     #
     # @!attribute [rw] next_token
-    #   The token to use for pagination.
+    #   A token returned from a previous call to `ListTemplates` to indicate
+    #   the position in the list of email templates.
     #   @return [String]
     #
     # @!attribute [rw] max_items
@@ -2735,12 +2735,14 @@ module Aws::SES
     end
 
     # @!attribute [rw] templates_metadata
-    #   An array the contains the name of creation time stamp for each
+    #   An array the contains the name and creation time stamp for each
     #   template in your Amazon SES account.
     #   @return [Array<Types::TemplateMetadata>]
     #
     # @!attribute [rw] next_token
-    #   The token to use for pagination.
+    #   A token indicating that there are additional email templates
+    #   available to be listed. Pass this token to a subsequent call to
+    #   `ListTemplates` to retrieve the next 50 email templates.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListTemplatesResponse AWS API Documentation
@@ -2883,8 +2885,8 @@ module Aws::SES
     # @!attribute [rw] name
     #   The name of the tag. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
-    #     (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Contain less than 256 characters.
     #   @return [String]
@@ -2892,8 +2894,8 @@ module Aws::SES
     # @!attribute [rw] value
     #   The value of the tag. The value must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
-    #     (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Contain less than 256 characters.
     #   @return [String]
@@ -3134,8 +3136,8 @@ module Aws::SES
     # @!attribute [rw] name
     #   The name of the IP address filter. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
-    #     underscores (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
@@ -3267,8 +3269,8 @@ module Aws::SES
     # @!attribute [rw] name
     #   The name of the receipt rule. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
-    #     underscores (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
@@ -3331,8 +3333,8 @@ module Aws::SES
     # @!attribute [rw] name
     #   The name of the receipt rule set. The name must:
     #
-    #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
-    #     underscores (\_), or dashes (-).
+    #   * This value can only contain ASCII letters (a-z, A-Z), numbers
+    #     (0-9), underscores (\_), or dashes (-).
     #
     #   * Start and end with a letter or number.
     #
@@ -3638,7 +3640,8 @@ module Aws::SES
     #   access to use your AWS KMS keys for decryption. This encryption
     #   client is currently available with the [AWS Java SDK][3] and [AWS
     #   Ruby SDK][4] only. For more information about client-side encryption
-    #   using AWS KMS master keys, see the [Amazon S3 Developer Guide][5].
+    #   using AWS KMS master keys, see the [Amazon S3 Developer
+    #   Guide](AmazonS3/latest/dev/UsingClientSideEncryption.html).
     #
     #
     #
@@ -3646,7 +3649,6 @@ module Aws::SES
     #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html
     #   [3]: http://aws.amazon.com/sdk-for-java/
     #   [4]: http://aws.amazon.com/sdk-for-ruby/
-    #   [5]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/S3Action AWS API Documentation
@@ -5159,7 +5161,7 @@ module Aws::SES
       include Aws::Structure
     end
 
-    # Information about an email template.
+    # Contains information about an email template.
     #
     # @!attribute [rw] name
     #   The name of the template.

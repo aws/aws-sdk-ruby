@@ -979,6 +979,7 @@ module Aws::APIGateway
     Method.add_member(:request_models, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestModels"))
     Method.add_member(:method_responses, Shapes::ShapeRef.new(shape: MapOfMethodResponse, location_name: "methodResponses"))
     Method.add_member(:method_integration, Shapes::ShapeRef.new(shape: Integration, location_name: "methodIntegration"))
+    Method.add_member(:authorization_scopes, Shapes::ShapeRef.new(shape: ListOfString, location_name: "authorizationScopes"))
     Method.struct_class = Types::Method
 
     MethodResponse.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, location_name: "statusCode"))
@@ -1067,6 +1068,7 @@ module Aws::APIGateway
     PutMethodRequest.add_member(:request_parameters, Shapes::ShapeRef.new(shape: MapOfStringToBoolean, location_name: "requestParameters"))
     PutMethodRequest.add_member(:request_models, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestModels"))
     PutMethodRequest.add_member(:request_validator_id, Shapes::ShapeRef.new(shape: String, location_name: "requestValidatorId"))
+    PutMethodRequest.add_member(:authorization_scopes, Shapes::ShapeRef.new(shape: ListOfString, location_name: "authorizationScopes"))
     PutMethodRequest.struct_class = Types::PutMethodRequest
 
     PutMethodResponseRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))

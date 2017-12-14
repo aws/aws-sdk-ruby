@@ -858,6 +858,8 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].authorization_scopes #=> Array
+    #   resp.resource_methods["String"].authorization_scopes[0] #=> String
     #
     # @overload create_resource(params = {})
     # @param [Hash] params ({})
@@ -2888,6 +2890,7 @@ module Aws::APIGateway
     #   * {Types::Method#request_models #request_models} => Hash&lt;String,String&gt;
     #   * {Types::Method#method_responses #method_responses} => Hash&lt;String,Types::MethodResponse&gt;
     #   * {Types::Method#method_integration #method_integration} => Types::Integration
+    #   * {Types::Method#authorization_scopes #authorization_scopes} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2939,6 +2942,8 @@ module Aws::APIGateway
     #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.authorization_scopes #=> Array
+    #   resp.authorization_scopes[0] #=> String
     #
     # @overload get_method(params = {})
     # @param [Hash] params ({})
@@ -3264,6 +3269,8 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].authorization_scopes #=> Array
+    #   resp.resource_methods["String"].authorization_scopes[0] #=> String
     #
     # @overload get_resource(params = {})
     # @param [Hash] params ({})
@@ -3356,6 +3363,8 @@ module Aws::APIGateway
     #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.items[0].resource_methods["String"].authorization_scopes #=> Array
+    #   resp.items[0].resource_methods["String"].authorization_scopes[0] #=> String
     #
     # @overload get_resources(params = {})
     # @param [Hash] params ({})
@@ -4327,7 +4336,7 @@ module Aws::APIGateway
     #   The type of the network connection to the integration endpoint. The
     #   valid value is `INTERNET` for connections through the public routable
     #   internet or `VPC_LINK` for private connections between API Gateway and
-    #   an network load balancer in a VPC. The default value is `INTERNET`.
+    #   a network load balancer in a VPC. The default value is `INTERNET`.
     #
     # @option params [String] :connection_id
     #   The ([`id`][1]) of the VpcLink used for the integration when
@@ -4622,6 +4631,16 @@ module Aws::APIGateway
     #   The identifier of a RequestValidator for validating the method
     #   request.
     #
+    # @option params [Array<String>] :authorization_scopes
+    #   A list authorization scopes configured on the method used with a
+    #   `COGNITO_USER_POOL` authorizer to authorize the method invocation by
+    #   matching them against the scopes parsed from the access token in the
+    #   incoming request. The method invocation is authorized if any method
+    #   scopes matches a claimed scope in the access token. Otherwise, the
+    #   invocation is not authorized. When the method scope is configured, the
+    #   client must provide an access token instead of an identity token for
+    #   authorizatinon purposes.
+    #
     # @return [Types::Method] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Method#http_method #http_method} => String
@@ -4634,6 +4653,7 @@ module Aws::APIGateway
     #   * {Types::Method#request_models #request_models} => Hash&lt;String,String&gt;
     #   * {Types::Method#method_responses #method_responses} => Hash&lt;String,Types::MethodResponse&gt;
     #   * {Types::Method#method_integration #method_integration} => Types::Integration
+    #   * {Types::Method#authorization_scopes #authorization_scopes} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4652,6 +4672,7 @@ module Aws::APIGateway
     #       "String" => "String",
     #     },
     #     request_validator_id: "String",
+    #     authorization_scopes: ["String"],
     #   })
     #
     # @example Response structure
@@ -4696,6 +4717,8 @@ module Aws::APIGateway
     #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.authorization_scopes #=> Array
+    #   resp.authorization_scopes[0] #=> String
     #
     # @overload put_method(params = {})
     # @param [Hash] params ({})
@@ -5713,6 +5736,7 @@ module Aws::APIGateway
     #   * {Types::Method#request_models #request_models} => Hash&lt;String,String&gt;
     #   * {Types::Method#method_responses #method_responses} => Hash&lt;String,Types::MethodResponse&gt;
     #   * {Types::Method#method_integration #method_integration} => Types::Integration
+    #   * {Types::Method#authorization_scopes #authorization_scopes} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5772,6 +5796,8 @@ module Aws::APIGateway
     #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.authorization_scopes #=> Array
+    #   resp.authorization_scopes[0] #=> String
     #
     # @overload update_method(params = {})
     # @param [Hash] params ({})
@@ -6016,6 +6042,8 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
     #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
+    #   resp.resource_methods["String"].authorization_scopes #=> Array
+    #   resp.resource_methods["String"].authorization_scopes[0] #=> String
     #
     # @overload update_resource(params = {})
     # @param [Hash] params ({})
@@ -6336,7 +6364,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

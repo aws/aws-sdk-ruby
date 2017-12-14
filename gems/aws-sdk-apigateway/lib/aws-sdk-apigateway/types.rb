@@ -2531,7 +2531,7 @@ module Aws::APIGateway
     # ##### Request
     #
     # This example shows how to get a gateway response of the
-    # `MISSING_AUTHNETICATION_TOKEN` type.
+    # `MISSING_AUTHENTICATION_TOKEN` type.
     #
     #     GET /restapis/o81lxisefl/gatewayresponses/MISSING_AUTHENTICATION_TOKEN HTTP/1.1 Host: beta-apigateway.us-east-1.amazonaws.com Content-Type: application/json X-Amz-Date: 20170503T202516Z Authorization: AWS4-HMAC-SHA256 Credential=\{access-key-id\}/20170503/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=1b52460e3159c1a26cff29093855d50ea141c1c5b937528fecaf60f51129697a Cache-Control: no-cache Postman-Token: 3b2a1ce9-c848-2e26-2e2f-9c2caefbed45
     #
@@ -4278,7 +4278,7 @@ module Aws::APIGateway
     #   The type of the network connection to the integration endpoint. The
     #   valid value is `INTERNET` for connections through the public
     #   routable internet or `VPC_LINK` for private connections between API
-    #   Gateway and an network load balancer in a VPC. The default value is
+    #   Gateway and a network load balancer in a VPC. The default value is
     #   `INTERNET`.
     #   @return [String]
     #
@@ -4682,6 +4682,17 @@ module Aws::APIGateway
     #   [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html
     #   @return [Types::Integration]
     #
+    # @!attribute [rw] authorization_scopes
+    #   A list authorization scopes configured on the method used with a
+    #   `COGNITO_USER_POOL` authorizer to authorize the method invocation by
+    #   matching them against the scopes parsed from the access token in the
+    #   incoming request. The method invocation is authorized if any method
+    #   scopes matches a claimed scope in the access token. Otherwise, the
+    #   invocation is not authorized. When the method scope is configured,
+    #   the client must provide an access token instead of an identity token
+    #   for authorizatinon purposes.
+    #   @return [Array<String>]
+    #
     class Method < Struct.new(
       :http_method,
       :authorization_type,
@@ -4692,7 +4703,8 @@ module Aws::APIGateway
       :request_parameters,
       :request_models,
       :method_responses,
-      :method_integration)
+      :method_integration,
+      :authorization_scopes)
       include Aws::Structure
     end
 
@@ -5185,7 +5197,7 @@ module Aws::APIGateway
     #   The type of the network connection to the integration endpoint. The
     #   valid value is `INTERNET` for connections through the public
     #   routable internet or `VPC_LINK` for private connections between API
-    #   Gateway and an network load balancer in a VPC. The default value is
+    #   Gateway and a network load balancer in a VPC. The default value is
     #   `INTERNET`.
     #   @return [String]
     #
@@ -5398,6 +5410,7 @@ module Aws::APIGateway
     #           "String" => "String",
     #         },
     #         request_validator_id: "String",
+    #         authorization_scopes: ["String"],
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -5462,6 +5475,17 @@ module Aws::APIGateway
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] authorization_scopes
+    #   A list authorization scopes configured on the method used with a
+    #   `COGNITO_USER_POOL` authorizer to authorize the method invocation by
+    #   matching them against the scopes parsed from the access token in the
+    #   incoming request. The method invocation is authorized if any method
+    #   scopes matches a claimed scope in the access token. Otherwise, the
+    #   invocation is not authorized. When the method scope is configured,
+    #   the client must provide an access token instead of an identity token
+    #   for authorizatinon purposes.
+    #   @return [Array<String>]
+    #
     class PutMethodRequest < Struct.new(
       :rest_api_id,
       :resource_id,
@@ -5472,7 +5496,8 @@ module Aws::APIGateway
       :operation_name,
       :request_parameters,
       :request_models,
-      :request_validator_id)
+      :request_validator_id,
+      :authorization_scopes)
       include Aws::Structure
     end
 
@@ -7439,7 +7464,7 @@ module Aws::APIGateway
     # through Amazon API Gateway, you, as an API developer, create a VpcLink
     # resource targeted for one or more network load balancers of the VPC
     # and then integrate an API method with a private integration that uses
-    # the VpcLink. The private integraiton has an integration type of `HTTP`
+    # the VpcLink. The private integration has an integration type of `HTTP`
     # or `HTTP_PROXY` and has a connection type of `VPC_LINK`. The
     # integration uses the `connectionId` property to identify the VpcLink
     # used.
