@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.103 (2017-12-14)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::SES - Updated the documentation for Amazon Simple Email Service.
