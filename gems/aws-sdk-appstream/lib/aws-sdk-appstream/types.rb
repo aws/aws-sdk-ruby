@@ -1513,6 +1513,35 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The information about the tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Describes a resource error.
     #
     # @!attribute [rw] error_code
@@ -1801,6 +1830,68 @@ module Aws::AppStream
       :resource_identifier)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to associate. A tag is a key-value pair (the value is
+    #   optional). For example, `Environment=Test`, or, if you do not
+    #   specify a value, `Environment=`.
+    #
+    #   If you do not specify a value, we set the value to an empty string.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The tag keys for the tags to disassociate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDirectoryConfigRequest
     #   data as a hash:

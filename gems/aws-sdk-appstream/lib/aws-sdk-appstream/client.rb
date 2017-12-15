@@ -1249,6 +1249,43 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Lists the tags for the specified AppStream 2.0 resource. You can tag
+    # AppStream 2.0 image builders, images, fleets, and stacks.
+    #
+    # For more information about tags, see [Tagging Your Resources][1] in
+    # the *Amazon AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Starts the specified fleet.
     #
     # @option params [required, String] :name
@@ -1396,6 +1433,89 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def stop_image_builder(params = {}, options = {})
       req = build_request(:stop_image_builder, params)
+      req.send_request(options)
+    end
+
+    # Adds or overwrites one or more tags for the specified AppStream 2.0
+    # resource. You can tag AppStream 2.0 image builders, images, fleets,
+    # and stacks.
+    #
+    # Each tag consists of a key and an optional value. If a resource
+    # already has a tag with the same key, this operation updates its value.
+    #
+    # To list the current tags for your resources, use ListTagsForResource.
+    # To disassociate tags from your resources, use UntagResource.
+    #
+    # For more information about tags, see [Tagging Your Resources][1] in
+    # the *Amazon AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to associate. A tag is a key-value pair (the value is
+    #   optional). For example, `Environment=Test`, or, if you do not specify
+    #   a value, `Environment=`.
+    #
+    #   If you do not specify a value, we set the value to an empty string.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Disassociates the specified tags from the specified AppStream 2.0
+    # resource.
+    #
+    # To list the current tags for your resources, use ListTagsForResource.
+    #
+    # For more information about tags, see [Tagging Your Resources][1] in
+    # the *Amazon AppStream 2.0 Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The tag keys for the tags to disassociate.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1675,7 +1795,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

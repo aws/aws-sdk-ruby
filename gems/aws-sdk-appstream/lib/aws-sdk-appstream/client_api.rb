@@ -99,6 +99,8 @@ module Aws::AppStream
     ListAssociatedFleetsResult = Shapes::StructureShape.new(name: 'ListAssociatedFleetsResult')
     ListAssociatedStacksRequest = Shapes::StructureShape.new(name: 'ListAssociatedStacksRequest')
     ListAssociatedStacksResult = Shapes::StructureShape.new(name: 'ListAssociatedStacksResult')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     Name = Shapes::StringShape.new(name: 'Name')
@@ -138,7 +140,15 @@ module Aws::AppStream
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::MapShape.new(name: 'Tags')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDirectoryConfigRequest = Shapes::StructureShape.new(name: 'UpdateDirectoryConfigRequest')
     UpdateDirectoryConfigResult = Shapes::StructureShape.new(name: 'UpdateDirectoryConfigResult')
     UpdateFleetRequest = Shapes::StructureShape.new(name: 'UpdateFleetRequest')
@@ -436,6 +446,12 @@ module Aws::AppStream
     ListAssociatedStacksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListAssociatedStacksResult.struct_class = Types::ListAssociatedStacksResult
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     Metadata.key = Shapes::ShapeRef.new(shape: String)
     Metadata.value = Shapes::ShapeRef.new(shape: String)
 
@@ -513,6 +529,23 @@ module Aws::AppStream
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    Tags.key = Shapes::ShapeRef.new(shape: TagKey)
+    Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateDirectoryConfigRequest.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
     UpdateDirectoryConfigRequest.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, location_name: "OrganizationalUnitDistinguishedNames"))
@@ -805,6 +838,15 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: ListAssociatedStacksResult)
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:start_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartFleet"
         o.http_method = "POST"
@@ -848,6 +890,25 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:update_directory_config, Seahorse::Model::Operation.new.tap do |o|
