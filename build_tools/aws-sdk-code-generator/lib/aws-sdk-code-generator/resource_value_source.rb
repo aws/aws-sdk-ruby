@@ -28,7 +28,7 @@ module AwsSdkCodeGenerator
       if param['path'] == '@'
         'resp.data'
       else
-        'resp.data.' + underscore_path(param['path'])
+        'resp.data.' + underscore_path(param['path'].gsub(/\[\]/, "[0]"))
       end
     end
 
