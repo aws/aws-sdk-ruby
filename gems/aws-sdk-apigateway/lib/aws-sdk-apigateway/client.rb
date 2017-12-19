@@ -886,6 +886,21 @@ module Aws::APIGateway
     #   The list of binary media types supported by the RestApi. By default,
     #   the RestApi supports only UTF-8-encoded text payloads.
     #
+    # @option params [Integer] :minimum_compression_size
+    #   A nullable integer used to enable (non-negative between 0 and 10485760
+    #   (10M) bytes, inclusive) or disable (null) compression on an API. When
+    #   compression is enabled, compression or decompression are not applied
+    #   on the payload if the payload size is smaller than this value. Setting
+    #   it to zero allows compression for any payload size.
+    #
+    # @option params [String] :api_key_source
+    #   The source of the API key for metring requests according to a usage
+    #   plan. Valid values are * `HEADER` to read the API key from the
+    #   `X-API-Key` header of a
+    #     request.
+    #   * `AUTHORIZER` to read the API key from the `UsageIdentifierKey` from
+    #     a custom authorizer.
+    #
     # @option params [Types::EndpointConfiguration] :endpoint_configuration
     #   The endpoint configuration of this RestApi showing the endpoint types
     #   of the API.
@@ -899,6 +914,8 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
+    #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
@@ -909,6 +926,8 @@ module Aws::APIGateway
     #     version: "String",
     #     clone_from: "String",
     #     binary_media_types: ["String"],
+    #     minimum_compression_size: 1,
+    #     api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #     endpoint_configuration: {
     #       types: ["REGIONAL"], # accepts REGIONAL, EDGE
     #     },
@@ -925,6 +944,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.minimum_compression_size #=> Integer
+    #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -968,6 +989,11 @@ module Aws::APIGateway
     # @option params [Types::CanarySettings] :canary_settings
     #   The canary deployment settings of this stage.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Key/Value map of strings. Valid character set is \[a-zA-Z+-=.\_:/\].
+    #   Tag key can be up to 128 characters and must not start with "aws:".
+    #   Tag value can be up to 256 characters.
+    #
     # @return [Types::Stage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Stage#deployment_id #deployment_id} => String
@@ -982,6 +1008,7 @@ module Aws::APIGateway
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
+    #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
     #
@@ -1005,6 +1032,9 @@ module Aws::APIGateway
     #         "String" => "String",
     #       },
     #       use_stage_cache: false,
+    #     },
+    #     tags: {
+    #       "String" => "String",
     #     },
     #   })
     #
@@ -1038,6 +1068,8 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides #=> Hash
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
     #
@@ -3387,6 +3419,8 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
+    #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
@@ -3406,6 +3440,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.minimum_compression_size #=> Integer
+    #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -3450,6 +3486,8 @@ module Aws::APIGateway
     #   resp.items[0].warnings[0] #=> String
     #   resp.items[0].binary_media_types #=> Array
     #   resp.items[0].binary_media_types[0] #=> String
+    #   resp.items[0].minimum_compression_size #=> Integer
+    #   resp.items[0].api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -3608,6 +3646,7 @@ module Aws::APIGateway
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
+    #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
     #
@@ -3648,6 +3687,8 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides #=> Hash
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
     #
@@ -3708,6 +3749,8 @@ module Aws::APIGateway
     #   resp.item[0].canary_settings.stage_variable_overrides #=> Hash
     #   resp.item[0].canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.item[0].canary_settings.use_stage_cache #=> Boolean
+    #   resp.item[0].tags #=> Hash
+    #   resp.item[0].tags["String"] #=> String
     #   resp.item[0].created_date #=> Time
     #   resp.item[0].last_updated_date #=> Time
     #
@@ -3715,6 +3758,44 @@ module Aws::APIGateway
     # @param [Hash] params ({})
     def get_stages(params = {}, options = {})
       req = build_request(:get_stages, params)
+      req.send_request(options)
+    end
+
+    # Gets the Tags collection for a given resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   \[Required\] The ARN of a resource that can be tagged. At present,
+    #   Stage is the only taggable resource.
+    #
+    # @option params [String] :position
+    #   (Not currently supported) The current pagination position in the paged
+    #   result set.
+    #
+    # @option params [Integer] :limit
+    #   (Not currently supported) The maximum number of returned results per
+    #   page.
+    #
+    # @return [Types::Tags] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Tags#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_tags({
+    #     resource_arn: "String", # required
+    #     position: "String",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
+    #
+    # @overload get_tags(params = {})
+    # @param [Hash] params ({})
+    def get_tags(params = {}, options = {})
+      req = build_request(:get_tags, params)
       req.send_request(options)
     end
 
@@ -4170,6 +4251,8 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
+    #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
@@ -4193,6 +4276,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.minimum_compression_size #=> Integer
+    #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -4632,14 +4717,15 @@ module Aws::APIGateway
     #   request.
     #
     # @option params [Array<String>] :authorization_scopes
-    #   A list authorization scopes configured on the method used with a
-    #   `COGNITO_USER_POOL` authorizer to authorize the method invocation by
-    #   matching them against the scopes parsed from the access token in the
-    #   incoming request. The method invocation is authorized if any method
-    #   scopes matches a claimed scope in the access token. Otherwise, the
-    #   invocation is not authorized. When the method scope is configured, the
-    #   client must provide an access token instead of an identity token for
-    #   authorizatinon purposes.
+    #   A list of authorization scopes configured on the method. The scopes
+    #   are used with a `COGNITO_USER_POOL` authorizer to authorize the method
+    #   invocation. The authorization works by matching the method scopes
+    #   against the scopes parsed from the access token in the incoming
+    #   request. The method invocation is authorized if any method scopes
+    #   matches a claimed scope in the access token. Otherwise, the invocation
+    #   is not authorized. When the method scope is configured, the client
+    #   must provide an access token instead of an identity token for
+    #   authorization purposes.
     #
     # @return [Types::Method] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4837,6 +4923,8 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
+    #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
@@ -4862,6 +4950,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.minimum_compression_size #=> Integer
+    #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -4869,6 +4959,35 @@ module Aws::APIGateway
     # @param [Hash] params ({})
     def put_rest_api(params = {}, options = {})
       req = build_request(:put_rest_api, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates Tags on a gievn resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   \[Required\] The ARN of a resource that can be tagged. At present,
+    #   Stage is the only taggable resource.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   \[Required\] Key/Value map of strings. Valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. Tag key can be up to 128 characters and must not
+    #   start with "aws:". Tag value can be up to 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "String", # required
+    #     tags: { # required
+    #       "String" => "String",
+    #     },
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
       req.send_request(options)
     end
 
@@ -5028,6 +5147,31 @@ module Aws::APIGateway
     # @param [Hash] params ({})
     def test_invoke_method(params = {}, options = {})
       req = build_request(:test_invoke_method, params)
+      req.send_request(options)
+    end
+
+    # Removes Tags from a given resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   \[Required\] The ARN of a resource that can be tagged. At present,
+    #   Stage is the only taggable resource.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The Tag keys to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "String", # required
+    #     tag_keys: ["String"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -6070,6 +6214,8 @@ module Aws::APIGateway
     #   * {Types::RestApi#version #version} => String
     #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
     #   * {Types::RestApi#binary_media_types #binary_media_types} => Array&lt;String&gt;
+    #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
+    #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
     #
     # @example Request syntax with placeholder values
@@ -6097,6 +6243,8 @@ module Aws::APIGateway
     #   resp.warnings[0] #=> String
     #   resp.binary_media_types #=> Array
     #   resp.binary_media_types[0] #=> String
+    #   resp.minimum_compression_size #=> Integer
+    #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
     #
@@ -6133,6 +6281,7 @@ module Aws::APIGateway
     #   * {Types::Stage#documentation_version #documentation_version} => String
     #   * {Types::Stage#access_log_settings #access_log_settings} => Types::AccessLogSettings
     #   * {Types::Stage#canary_settings #canary_settings} => Types::CanarySettings
+    #   * {Types::Stage#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::Stage#created_date #created_date} => Time
     #   * {Types::Stage#last_updated_date #last_updated_date} => Time
     #
@@ -6181,6 +6330,8 @@ module Aws::APIGateway
     #   resp.canary_settings.stage_variable_overrides #=> Hash
     #   resp.canary_settings.stage_variable_overrides["String"] #=> String
     #   resp.canary_settings.use_stage_cache #=> Boolean
+    #   resp.tags #=> Hash
+    #   resp.tags["String"] #=> String
     #   resp.created_date #=> Time
     #   resp.last_updated_date #=> Time
     #
@@ -6364,7 +6515,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
