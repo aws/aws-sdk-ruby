@@ -34,6 +34,7 @@ module BuildTools
           "#{@svc_name}::Plugins::APIGEndpoint"
         ]),
         remove_plugins: [
+          'Aws::Plugins::UserAgent',
           'Aws::Plugins::RegionalEndpoint',
           'Aws::Plugins::CredentialsConfiguration'
         ]

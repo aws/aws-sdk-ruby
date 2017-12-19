@@ -169,7 +169,7 @@ module Aws::MediaStoreData
       req.send_request(options)
     end
 
-    # Gets the header for an object at the specified path.
+    # Gets the headers for an object at the specified path.
     #
     # @option params [required, String] :path
     #   The path (including the file name) where the object is stored in the
@@ -339,17 +339,7 @@ module Aws::MediaStoreData
     # 10 MB.
     #
     # @option params [required, String, IO] :body
-    #   The path to the file outside of the container. The file name can
-    #   include or omit an extension.
-    #
-    #   Example 1: If the file is stored on a remote server that has been
-    #   mounted to the workstation on which the REST API command is being run,
-    #   the path could be the absolute path ` \mount\assets\mlaw.avi` or the
-    #   relative path `..\..\mount\assets\movies\premium\mlaw.avi`.
-    #
-    #   Example 2: If the file is stored on a remote server that is not
-    #   mounted, the path could be
-    #   `https:\\192.0.2.15\movies\premium\mlaw.avi`.
+    #   The bytes to be stored.
     #
     # @option params [required, String] :path
     #   The path (including the file name) where the object is stored in the
@@ -447,7 +437,7 @@ module Aws::MediaStoreData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastoredata'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

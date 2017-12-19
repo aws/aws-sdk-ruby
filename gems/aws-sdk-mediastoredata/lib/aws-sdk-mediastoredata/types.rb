@@ -153,17 +153,7 @@ module Aws::MediaStoreData
     end
 
     # @!attribute [rw] body
-    #   The path to the file outside of the container. The file name can
-    #   include or omit an extension.
-    #
-    #   Example 1: If the file is stored on a remote server that has been
-    #   mounted to the workstation on which the REST API command is being
-    #   run, the path could be the absolute path ` \mount\assets\mlaw.avi`
-    #   or the relative path `..\..\mount\assets\movies\premium\mlaw.avi`.
-    #
-    #   Example 2: If the file is stored on a remote server that is not
-    #   mounted, the path could be
-    #   `https:\\192.0.2.15\movies\premium\mlaw.avi`.
+    #   The bytes of the object.
     #   @return [IO]
     #
     # @!attribute [rw] cache_control
@@ -319,17 +309,7 @@ module Aws::MediaStoreData
     #       }
     #
     # @!attribute [rw] body
-    #   The path to the file outside of the container. The file name can
-    #   include or omit an extension.
-    #
-    #   Example 1: If the file is stored on a remote server that has been
-    #   mounted to the workstation on which the REST API command is being
-    #   run, the path could be the absolute path ` \mount\assets\mlaw.avi`
-    #   or the relative path `..\..\mount\assets\movies\premium\mlaw.avi`.
-    #
-    #   Example 2: If the file is stored on a remote server that is not
-    #   mounted, the path could be
-    #   `https:\\192.0.2.15\movies\premium\mlaw.avi`.
+    #   The bytes to be stored.
     #   @return [IO]
     #
     # @!attribute [rw] path

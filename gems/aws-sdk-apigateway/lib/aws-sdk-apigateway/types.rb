@@ -1137,6 +1137,8 @@ module Aws::APIGateway
     #         version: "String",
     #         clone_from: "String",
     #         binary_media_types: ["String"],
+    #         minimum_compression_size: 1,
+    #         api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #         endpoint_configuration: {
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE
     #         },
@@ -1163,6 +1165,23 @@ module Aws::APIGateway
     #   the RestApi supports only UTF-8-encoded text payloads.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] minimum_compression_size
+    #   A nullable integer used to enable (non-negative between 0 and
+    #   10485760 (10M) bytes, inclusive) or disable (null) compression on an
+    #   API. When compression is enabled, compression or decompression are
+    #   not applied on the payload if the payload size is smaller than this
+    #   value. Setting it to zero allows compression for any payload size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] api_key_source
+    #   The source of the API key for metring requests according to a usage
+    #   plan. Valid values are * `HEADER` to read the API key from the
+    #   `X-API-Key` header of a
+    #     request.
+    #   * `AUTHORIZER` to read the API key from the `UsageIdentifierKey`
+    #     from a custom authorizer.
+    #   @return [String]
+    #
     # @!attribute [rw] endpoint_configuration
     #   The endpoint configuration of this RestApi showing the endpoint
     #   types of the API.
@@ -1174,6 +1193,8 @@ module Aws::APIGateway
       :version,
       :clone_from,
       :binary_media_types,
+      :minimum_compression_size,
+      :api_key_source,
       :endpoint_configuration)
       include Aws::Structure
     end
@@ -1201,6 +1222,9 @@ module Aws::APIGateway
     #             "String" => "String",
     #           },
     #           use_stage_cache: false,
+    #         },
+    #         tags: {
+    #           "String" => "String",
     #         },
     #       }
     #
@@ -1243,6 +1267,12 @@ module Aws::APIGateway
     #   The canary deployment settings of this stage.
     #   @return [Types::CanarySettings]
     #
+    # @!attribute [rw] tags
+    #   Key/Value map of strings. Valid character set is \[a-zA-Z+-=.\_:/\].
+    #   Tag key can be up to 128 characters and must not start with
+    #   "aws:". Tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
     class CreateStageRequest < Struct.new(
       :rest_api_id,
       :stage_name,
@@ -1252,7 +1282,8 @@ module Aws::APIGateway
       :cache_cluster_size,
       :variables,
       :documentation_version,
-      :canary_settings)
+      :canary_settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -3840,6 +3871,39 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # Gets the Tags collection for a given resource.
+    #
+    # @note When making an API call, you may pass GetTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         position: "String",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   \[Required\] The ARN of a resource that can be tagged. At present,
+    #   Stage is the only taggable resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   (Not currently supported) The current pagination position in the
+    #   paged result set.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   (Not currently supported) The maximum number of returned results per
+    #   page.
+    #   @return [Integer]
+    #
+    class GetTagsRequest < Struct.new(
+      :resource_arn,
+      :position,
+      :limit)
+      include Aws::Structure
+    end
+
     # The GET request to get a usage plan key of a given key identifier.
     #
     # @note When making an API call, you may pass GetUsagePlanKeyRequest
@@ -4683,14 +4747,15 @@ module Aws::APIGateway
     #   @return [Types::Integration]
     #
     # @!attribute [rw] authorization_scopes
-    #   A list authorization scopes configured on the method used with a
-    #   `COGNITO_USER_POOL` authorizer to authorize the method invocation by
-    #   matching them against the scopes parsed from the access token in the
+    #   A list of authorization scopes configured on the method. The scopes
+    #   are used with a `COGNITO_USER_POOL` authorizer to authorize the
+    #   method invocation. The authorization works by matching the method
+    #   scopes against the scopes parsed from the access token in the
     #   incoming request. The method invocation is authorized if any method
     #   scopes matches a claimed scope in the access token. Otherwise, the
     #   invocation is not authorized. When the method scope is configured,
     #   the client must provide an access token instead of an identity token
-    #   for authorizatinon purposes.
+    #   for authorization purposes.
     #   @return [Array<String>]
     #
     class Method < Struct.new(
@@ -5476,14 +5541,15 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] authorization_scopes
-    #   A list authorization scopes configured on the method used with a
-    #   `COGNITO_USER_POOL` authorizer to authorize the method invocation by
-    #   matching them against the scopes parsed from the access token in the
+    #   A list of authorization scopes configured on the method. The scopes
+    #   are used with a `COGNITO_USER_POOL` authorizer to authorize the
+    #   method invocation. The authorization works by matching the method
+    #   scopes against the scopes parsed from the access token in the
     #   incoming request. The method invocation is authorized if any method
     #   scopes matches a claimed scope in the access token. Otherwise, the
     #   invocation is not authorized. When the method scope is configured,
     #   the client must provide an access token instead of an identity token
-    #   for authorizatinon purposes.
+    #   for authorization purposes.
     #   @return [Array<String>]
     #
     class PutMethodRequest < Struct.new(
@@ -5863,6 +5929,23 @@ module Aws::APIGateway
     #   the RestApi supports only UTF-8-encoded text payloads.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] minimum_compression_size
+    #   A nullable integer used to enable (non-negative between 0 and
+    #   10485760 (10M) bytes, inclusive) or disable (null) compression on an
+    #   API. When compression is enabled, compression or decompression are
+    #   not applied on the payload if the payload size is smaller than this
+    #   value. Setting it to zero allows compression for any payload size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] api_key_source
+    #   The source of the API key for metring requests according to a usage
+    #   plan. Valid values are * `HEADER` to read the API key from the
+    #   `X-API-Key` header of a
+    #     request.
+    #   * `AUTHORIZER` to read the API key from the `UsageIdentifierKey`
+    #     from a custom authorizer.
+    #   @return [String]
+    #
     # @!attribute [rw] endpoint_configuration
     #   The endpoint configuration of this RestApi showing the endpoint
     #   types of the API.
@@ -5876,6 +5959,8 @@ module Aws::APIGateway
       :version,
       :warnings,
       :binary_media_types,
+      :minimum_compression_size,
+      :api_key_source,
       :endpoint_configuration)
       include Aws::Structure
     end
@@ -6067,6 +6152,10 @@ module Aws::APIGateway
     #   Settings for the canary deployment in this stage.
     #   @return [Types::CanarySettings]
     #
+    # @!attribute [rw] tags
+    #   A collection of Tags associated with a given resource.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] created_date
     #   The timestamp when the stage was created.
     #   @return [Time]
@@ -6088,6 +6177,7 @@ module Aws::APIGateway
       :documentation_version,
       :access_log_settings,
       :canary_settings,
+      :tags,
       :created_date,
       :last_updated_date)
       include Aws::Structure
@@ -6135,6 +6225,46 @@ module Aws::APIGateway
     #
     class Stages < Struct.new(
       :item)
+      include Aws::Structure
+    end
+
+    # Adds or updates Tags on a gievn resource.
+    #
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tags: { # required
+    #           "String" => "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   \[Required\] The ARN of a resource that can be tagged. At present,
+    #   Stage is the only taggable resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   \[Required\] Key/Value map of strings. Valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. Tag key can be up to 128 characters and must not
+    #   start with "aws:". Tag value can be up to 256 characters.
+    #   @return [Hash<String,String>]
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # A collection of Tags associated with a given resource.
+    #
+    # @!attribute [rw] tags
+    #   A collection of Tags associated with a given resource.
+    #   @return [Hash<String,String>]
+    #
+    class Tags < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -6407,6 +6537,31 @@ module Aws::APIGateway
     class ThrottleSettings < Struct.new(
       :burst_limit,
       :rate_limit)
+      include Aws::Structure
+    end
+
+    # Removes Tags from a given resource.
+    #
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tag_keys: ["String"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   \[Required\] The ARN of a resource that can be tagged. At present,
+    #   Stage is the only taggable resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The Tag keys to delete.
+    #   @return [Array<String>]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
       include Aws::Structure
     end
 

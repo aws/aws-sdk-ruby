@@ -15,6 +15,7 @@ module Aws::APIGateway
     Account = Shapes::StructureShape.new(name: 'Account')
     ApiKey = Shapes::StructureShape.new(name: 'ApiKey')
     ApiKeyIds = Shapes::StructureShape.new(name: 'ApiKeyIds')
+    ApiKeySourceType = Shapes::StringShape.new(name: 'ApiKeySourceType')
     ApiKeys = Shapes::StructureShape.new(name: 'ApiKeys')
     ApiKeysFormat = Shapes::StringShape.new(name: 'ApiKeysFormat')
     ApiStage = Shapes::StructureShape.new(name: 'ApiStage')
@@ -131,6 +132,7 @@ module Aws::APIGateway
     GetSdkTypesRequest = Shapes::StructureShape.new(name: 'GetSdkTypesRequest')
     GetStageRequest = Shapes::StructureShape.new(name: 'GetStageRequest')
     GetStagesRequest = Shapes::StructureShape.new(name: 'GetStagesRequest')
+    GetTagsRequest = Shapes::StructureShape.new(name: 'GetTagsRequest')
     GetUsagePlanKeyRequest = Shapes::StructureShape.new(name: 'GetUsagePlanKeyRequest')
     GetUsagePlanKeysRequest = Shapes::StructureShape.new(name: 'GetUsagePlanKeysRequest')
     GetUsagePlanRequest = Shapes::StructureShape.new(name: 'GetUsagePlanRequest')
@@ -223,6 +225,8 @@ module Aws::APIGateway
     Stages = Shapes::StructureShape.new(name: 'Stages')
     StatusCode = Shapes::StringShape.new(name: 'StatusCode')
     String = Shapes::StringShape.new(name: 'String')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    Tags = Shapes::StructureShape.new(name: 'Tags')
     Template = Shapes::StructureShape.new(name: 'Template')
     TestInvokeAuthorizerRequest = Shapes::StructureShape.new(name: 'TestInvokeAuthorizerRequest')
     TestInvokeAuthorizerResponse = Shapes::StructureShape.new(name: 'TestInvokeAuthorizerResponse')
@@ -233,6 +237,7 @@ module Aws::APIGateway
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
     UnauthorizedCacheControlHeaderStrategy = Shapes::StringShape.new(name: 'UnauthorizedCacheControlHeaderStrategy')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAccountRequest = Shapes::StructureShape.new(name: 'UpdateAccountRequest')
     UpdateApiKeyRequest = Shapes::StructureShape.new(name: 'UpdateApiKeyRequest')
     UpdateAuthorizerRequest = Shapes::StructureShape.new(name: 'UpdateAuthorizerRequest')
@@ -422,6 +427,8 @@ module Aws::APIGateway
     CreateRestApiRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     CreateRestApiRequest.add_member(:clone_from, Shapes::ShapeRef.new(shape: String, location_name: "cloneFrom"))
     CreateRestApiRequest.add_member(:binary_media_types, Shapes::ShapeRef.new(shape: ListOfString, location_name: "binaryMediaTypes"))
+    CreateRestApiRequest.add_member(:minimum_compression_size, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "minimumCompressionSize"))
+    CreateRestApiRequest.add_member(:api_key_source, Shapes::ShapeRef.new(shape: ApiKeySourceType, location_name: "apiKeySource"))
     CreateRestApiRequest.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     CreateRestApiRequest.struct_class = Types::CreateRestApiRequest
 
@@ -434,6 +441,7 @@ module Aws::APIGateway
     CreateStageRequest.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
     CreateStageRequest.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, location_name: "documentationVersion"))
     CreateStageRequest.add_member(:canary_settings, Shapes::ShapeRef.new(shape: CanarySettings, location_name: "canarySettings"))
+    CreateStageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     CreateStageRequest.struct_class = Types::CreateStageRequest
 
     CreateUsagePlanKeyRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
@@ -807,6 +815,11 @@ module Aws::APIGateway
     GetStagesRequest.add_member(:deployment_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "deploymentId"))
     GetStagesRequest.struct_class = Types::GetStagesRequest
 
+    GetTagsRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_arn"))
+    GetTagsRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+    GetTagsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+    GetTagsRequest.struct_class = Types::GetTagsRequest
+
     GetUsagePlanKeyRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
     GetUsagePlanKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "keyId"))
     GetUsagePlanKeyRequest.struct_class = Types::GetUsagePlanKeyRequest
@@ -1121,6 +1134,8 @@ module Aws::APIGateway
     RestApi.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     RestApi.add_member(:warnings, Shapes::ShapeRef.new(shape: ListOfString, location_name: "warnings"))
     RestApi.add_member(:binary_media_types, Shapes::ShapeRef.new(shape: ListOfString, location_name: "binaryMediaTypes"))
+    RestApi.add_member(:minimum_compression_size, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "minimumCompressionSize"))
+    RestApi.add_member(:api_key_source, Shapes::ShapeRef.new(shape: ApiKeySourceType, location_name: "apiKeySource"))
     RestApi.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
     RestApi.struct_class = Types::RestApi
 
@@ -1164,6 +1179,7 @@ module Aws::APIGateway
     Stage.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, location_name: "documentationVersion"))
     Stage.add_member(:access_log_settings, Shapes::ShapeRef.new(shape: AccessLogSettings, location_name: "accessLogSettings"))
     Stage.add_member(:canary_settings, Shapes::ShapeRef.new(shape: CanarySettings, location_name: "canarySettings"))
+    Stage.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
     Stage.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     Stage.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
     Stage.struct_class = Types::Stage
@@ -1174,6 +1190,13 @@ module Aws::APIGateway
 
     Stages.add_member(:item, Shapes::ShapeRef.new(shape: ListOfStage, location_name: "item"))
     Stages.struct_class = Types::Stages
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_arn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    Tags.add_member(:tags, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "tags"))
+    Tags.struct_class = Types::Tags
 
     Template.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     Template.struct_class = Types::Template
@@ -1216,6 +1239,10 @@ module Aws::APIGateway
     ThrottleSettings.add_member(:burst_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "burstLimit"))
     ThrottleSettings.add_member(:rate_limit, Shapes::ShapeRef.new(shape: Double, location_name: "rateLimit"))
     ThrottleSettings.struct_class = Types::ThrottleSettings
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_arn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: ListOfString, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateAccountRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
     UpdateAccountRequest.struct_class = Types::UpdateAccountRequest
@@ -2356,6 +2383,19 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTags"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{resource_arn}"
+        o.input = Shapes::ShapeRef.new(shape: GetTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Tags)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:get_usage, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetUsage"
         o.http_method = "GET"
@@ -2585,6 +2625,20 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "PUT"
+        o.http_request_uri = "/tags/{resource_arn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:test_invoke_authorizer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TestInvokeAuthorizer"
         o.http_method = "POST"
@@ -2607,6 +2661,19 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{resource_arn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_account, Seahorse::Model::Operation.new.tap do |o|
