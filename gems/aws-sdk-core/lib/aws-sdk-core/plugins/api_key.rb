@@ -21,7 +21,7 @@ When provided, `x-api-key` header will be injected with the value provided.
       class OptionHandler < Seahorse::Client::Handler
         def call(context)
           # apply APIG user-agent by default
-          context.config.user_agent_suffix ||= 'aws-apig-ruby'
+          context.config.user_agent_prefix = 'aws-apig-ruby'
 
           if context.operation.require_apikey
             api_key = context.params.delete(:api_key)

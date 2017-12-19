@@ -5,6 +5,8 @@ module Aws
 
       option(:user_agent_suffix)
 
+      option(:user_agent_prefix)
+
       # @api private
       class Handler < Seahorse::Client::Handler
 
@@ -29,6 +31,9 @@ module Aws
           end
 
           ua += " #{context.config.user_agent_suffix}" if context.config.user_agent_suffix
+          if context.config.user_agent_prefix == 'aws-apig-ruby'
+            ua.prepend(context.config.user_agent_prefix)
+          end
 
           context.http_request.headers['User-Agent'] = ua.strip
         end

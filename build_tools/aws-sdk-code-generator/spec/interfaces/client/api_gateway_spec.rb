@@ -58,12 +58,13 @@ describe 'Client Interface:' do
           date_member: Time.now
         }
       })
-      expect(resp.context.http_request.headers['User-Agent']).to include('apig-ruby')
+      expect(resp.context.http_request.headers['User-Agent']).to start_with('aws-apig-ruby')
 
       resp = client.get_noauth_errors({
         error_type: 'AnError'
       })
-      expect(resp.context.http_request.headers['User-Agent']).to include('apig-ruby')
+      expect(resp.context.http_request.headers['User-Agent']).to start_with('aws-apig-ruby')
+
 
       client_w_ua = WhiteLabel::Client.new(
         credentials: creds,
