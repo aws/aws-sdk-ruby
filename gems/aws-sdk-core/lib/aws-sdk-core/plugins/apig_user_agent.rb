@@ -1,11 +1,9 @@
 module Aws
   module Plugins
     # @api private
-    class UserAgent < Seahorse::Client::Plugin
+    class APIGUserAgent < Seahorse::Client::Plugin
 
       option(:user_agent_suffix)
-
-      option(:user_agent_prefix)
 
       # @api private
       class Handler < Seahorse::Client::Handler
@@ -16,7 +14,8 @@ module Aws
         end
 
         def set_user_agent(context)
-          ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
+          ua = "aws-apig-ruby"
+          ua += "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
 
           begin
             ua += " #{RUBY_ENGINE}/#{RUBY_VERSION}"
