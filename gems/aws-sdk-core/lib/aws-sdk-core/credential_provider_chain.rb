@@ -94,7 +94,8 @@ module Aws
     def assume_role_with_profile(prof, region)
       Aws.shared_config.assume_role_credentials_from_config(
         profile: prof,
-        region: region
+        region: region,
+        chain_config: @config
       )
     end
 

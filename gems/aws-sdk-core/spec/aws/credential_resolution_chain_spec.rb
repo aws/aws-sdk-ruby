@@ -93,7 +93,7 @@ JSON
       end
 
       describe 'Assume Role Resolution' do
-        it 'will not assume a role without source_profile present' do
+        it 'will not assume a role without a source present' do
           expect {
             ApiHelper.sample_rest_xml::Client.new(profile: "ar_no_src", region: "us-east-1")
           }.to raise_error(Errors::NoSourceProfileError)
@@ -103,6 +103,18 @@ JSON
           expect {
             ApiHelper.sample_rest_xml::Client.new(profile: "ar_bad_src", region: "us-east-1")
           }.to raise_error(Errors::NoSourceProfileError)
+        end
+
+        it 'will explicitly raise if credential_source is present but invalid' do
+          expect {
+            ApiHelper.sample_rest_xml::Client.new(profile: "ar_bad_csrc", region: "us-east-1")
+          }.to raise_error(Errors::InvalidCredentialSourceError)
+        end
+
+        it 'will explicitly raise if source_profile and credential_source both present' do
+          expect {
+            ApiHelper.sample_rest_xml::Client.new(profile: "ar_src_conflict", region: "us-east-1")
+          }.to raise_error(Errors::CredentialSourceConflictError)
         end
 
         it 'will assume a role from shared credentials before shared config' do
@@ -140,6 +152,68 @@ JSON
           client = ApiHelper.sample_rest_xml::Client.new(profile: "creds_from_sc", region: "us-east-1")
           expect(client.config.credentials.access_key_id).to eq("AR_AKID")
         end
+      end
+
+      it 'can assume a role with EC2 Instance Metadata as a source' do
+        profile = "ar_ec2_src"
+        resp = <<-JSON.strip
+{
+  "Code" : "Success",
+  "LastUpdated" : "2013-11-22T20:03:48Z",
+  "Type" : "AWS-HMAC",
+  "AccessKeyId" : "ACCESS_KEY_EC2",
+  "SecretAccessKey" : "secret",
+  "Token" : "session-token",
+  "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+}
+        JSON
+        assume_role_stub(
+          "arn:aws:iam:123456789012:role/foo",
+          "ACCESS_KEY_EC2",
+          "AR_AKID",
+          "AR_SECRET",
+          "AR_TOKEN"
+        )
+        stub_request(:get, "http://169.254.169.254/latest/meta-data/iam/security-credentials/").
+          to_return(:status => 200, :body => "profile-name\n")
+        stub_request(:get, "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name").
+          to_return(:status => 200, :body => resp)
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: profile,
+          region: "us-east-1"
+        )
+        expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+      end
+
+      it 'can assume a role with ECS Credentials as a source' do
+        profile = "ar_ecs_src"
+        path = "/latest/credentials?id=foobarbaz"
+        resp = <<-JSON.strip
+{
+  "RoleArn" : "arn:aws:iam::123456789012:role/BarFooRole",
+  "AccessKeyId" : "ACCESS_KEY_ECS",
+  "SecretAccessKey" : "secret",
+  "Token" : "session-token",
+  "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+}
+        JSON
+        stub_const('ENV', {
+          "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI" => path
+        })
+        stub_request(:get, "http://169.254.170.2#{path}").
+          to_return(:status => 200, :body => resp)
+        assume_role_stub(
+          "arn:aws:iam:123456789012:role/foo",
+          "ACCESS_KEY_ECS",
+          "AR_AKID",
+          "AR_SECRET",
+          "AR_TOKEN"
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: profile,
+          region: "us-east-1"
+        )
+        expect(client.config.credentials.access_key_id).to eq("AR_AKID")
       end
     end
 
