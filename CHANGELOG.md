@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.106 (2017-12-19)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::MediaStoreData - Updated the documentation for AWS Elemental MediaStore Data Plane.
