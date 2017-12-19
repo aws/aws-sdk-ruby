@@ -174,7 +174,7 @@ module Aws::EC2
       resp = waiter.wait(params.merge(snapshot_ids: [@id]))
       Snapshot.new({
         id: @id,
-        data: resp.data.snapshots[],
+        data: resp.data.snapshots[0],
         client: @client
       })
     end

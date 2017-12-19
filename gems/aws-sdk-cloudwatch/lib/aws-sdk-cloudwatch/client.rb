@@ -901,6 +901,8 @@ module Aws::CloudWatch
     # If you are an IAM user, you must have Amazon EC2 permissions for some
     # operations:
     #
+    # * `iam:CreateServiceLinkedRole` for all alarms with EC2 actions
+    #
     # * `ec2:DescribeInstanceStatus` and `ec2:DescribeInstances` for all
     #   alarms on EC2 instance status metrics
     #
@@ -1282,7 +1284,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
