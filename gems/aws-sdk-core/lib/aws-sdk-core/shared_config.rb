@@ -106,9 +106,10 @@ module Aws
     # file, if present.
     def assume_role_credentials_from_config(opts = {})
       p = opts.delete(:profile) || @profile_name
-      credentials = assume_role_from_profile(@parsed_credentials, p, opts)
+      chain_config = opts.delete(:chain_config)
+      credentials = assume_role_from_profile(@parsed_credentials, p, opts, chain_config)
       if @parsed_config
-        credentials ||= assume_role_from_profile(@parsed_config, p, opts)
+        credentials ||= assume_role_from_profile(@parsed_config, p, opts, chain_config)
       end
       credentials
     end
@@ -133,10 +134,19 @@ module Aws
       (@parsed_credentials && !@parsed_credentials.empty?) ||
         (@parsed_config && !@parsed_config.empty?)
     end
-    def assume_role_from_profile(cfg, profile, opts)
+
+    def assume_role_from_profile(cfg, profile, opts, chain_config)
       if cfg && prof_cfg = cfg[profile]
         opts[:source_profile] ||= prof_cfg["source_profile"]
-        if opts[:source_profile]
+        credential_source = opts.delete(:credential_source)
+        credential_source ||= prof_cfg["credential_source"]
+        if opts[:source_profile] && credential_source
+          raise Errors::CredentialSourceConflictError.new(
+            "Profile #{profile} has a source_profile, and "\
+              "a credential_source. For assume role credentials, must "\
+              "provide only source_profile or credential_source, not both."
+          )
+        elsif opts[:source_profile]
           opts[:credentials] = credentials(profile: opts[:source_profile])
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg["role_session_name"]
@@ -152,6 +162,25 @@ module Aws
                 " source_profile does not have credentials."
             )
           end
+        elsif credential_source
+          opts[:credentials] = credentials_from_source(
+            credential_source,
+            chain_config
+          )
+          if opts[:credentials]
+            opts[:role_session_name] ||= prof_cfg["role_session_name"]
+            opts[:role_session_name] ||= "default_session"
+            opts[:role_arn] ||= prof_cfg["role_arn"]
+            opts[:external_id] ||= prof_cfg["external_id"]
+            opts[:serial_number] ||= prof_cfg["mfa_serial"]
+            opts.delete(:source_profile) # Cleanup
+            AssumeRoleCredentials.new(opts)
+          else
+            raise Errors::NoSourceCredentials.new(
+              "Profile #{profile} could not get source credentials from"\
+                " provider #{credential_source}"
+            )
+          end
         elsif prof_cfg["role_arn"]
           raise Errors::NoSourceProfileError.new(
             "Profile #{profile} has a role_arn, but no source_profile."
@@ -161,6 +190,23 @@ module Aws
         end
       else
         nil
+      end
+    end
+
+    def credentials_from_source(credential_source, config)
+      case credential_source
+      when "Ec2InstanceMetadata"
+        InstanceProfileCredentials.new(
+          retries: config ? config.instance_profile_credentials_retries : 0,
+          http_open_timeout: config ? config.instance_profile_credentials_timeout : 1,
+          http_read_timeout: config ? config.instance_profile_credentials_timeout : 1
+        )
+      when "EcsContainer"
+        ECSCredentials.new
+      else
+        raise Errors::InvalidCredentialSourceError.new(
+          "Unsupported credential_source: #{credential_source}"
+        )
       end
     end
 
