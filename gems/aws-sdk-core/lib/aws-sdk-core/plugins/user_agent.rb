@@ -5,8 +5,6 @@ module Aws
 
       option(:user_agent_suffix)
 
-      option(:user_agent_prefix)
-
       # @api private
       class Handler < Seahorse::Client::Handler
 
