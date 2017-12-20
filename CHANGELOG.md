@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.107 (2017-12-20)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API for AWS Config.
 
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
