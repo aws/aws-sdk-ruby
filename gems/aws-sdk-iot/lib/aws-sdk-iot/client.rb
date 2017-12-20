@@ -646,6 +646,106 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Creates an AWS IoT OTAUpdate on a target group of things or groups.
+    #
+    # @option params [required, String] :ota_update_id
+    #   The ID of the OTA update to be created.
+    #
+    # @option params [String] :description
+    #   The description of the OTA update.
+    #
+    # @option params [required, Array<String>] :targets
+    #   The targeted devices to receive OTA updates.
+    #
+    # @option params [String] :target_selection
+    #   Specifies whether the update will continue to run (CONTINUOUS), or
+    #   will be complete after all the things specified as targets have
+    #   completed the update (SNAPSHOT). If continuous, the update may also be
+    #   run on a thing when a change is detected in a target. For example, an
+    #   update will run on a thing when the thing is added to a target group,
+    #   even after the update was completed by all things originally in the
+    #   group. Valid values: CONTINUOUS \| SNAPSHOT.
+    #
+    # @option params [required, Array<Types::OTAUpdateFile>] :files
+    #   The files to be streamed by the OTA update.
+    #
+    # @option params [required, String] :role_arn
+    #   The IAM role that allows access to the AWS IoT Jobs service.
+    #
+    # @option params [Hash<String,String>] :additional_parameters
+    #   A list of additional OTA update parameters which are name-value pairs.
+    #
+    # @return [Types::CreateOTAUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOTAUpdateResponse#ota_update_id #ota_update_id} => String
+    #   * {Types::CreateOTAUpdateResponse#aws_iot_job_id #aws_iot_job_id} => String
+    #   * {Types::CreateOTAUpdateResponse#ota_update_arn #ota_update_arn} => String
+    #   * {Types::CreateOTAUpdateResponse#aws_iot_job_arn #aws_iot_job_arn} => String
+    #   * {Types::CreateOTAUpdateResponse#ota_update_status #ota_update_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ota_update({
+    #     ota_update_id: "OTAUpdateId", # required
+    #     description: "OTAUpdateDescription",
+    #     targets: ["Target"], # required
+    #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #     files: [ # required
+    #       {
+    #         file_name: "FileName",
+    #         file_version: "OTAUpdateFileVersion",
+    #         file_source: {
+    #           stream_id: "StreamId",
+    #           file_id: 1,
+    #         },
+    #         code_signing: {
+    #           aws_signer_job_id: "SigningJobId",
+    #           custom_code_signing: {
+    #             signature: {
+    #               stream: {
+    #                 stream_id: "StreamId",
+    #                 file_id: 1,
+    #               },
+    #               inline_document: "data",
+    #             },
+    #             certificate_chain: {
+    #               stream: {
+    #                 stream_id: "StreamId",
+    #                 file_id: 1,
+    #               },
+    #               certificate_name: "CertificateName",
+    #               inline_document: "InlineDocument",
+    #             },
+    #             hash_algorithm: "HashAlgorithm",
+    #             signature_algorithm: "SignatureAlgorithm",
+    #           },
+    #         },
+    #         attributes: {
+    #           "Key" => "Value",
+    #         },
+    #       },
+    #     ],
+    #     role_arn: "RoleArn", # required
+    #     additional_parameters: {
+    #       "Key" => "Value",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ota_update_id #=> String
+    #   resp.aws_iot_job_id #=> String
+    #   resp.ota_update_arn #=> String
+    #   resp.aws_iot_job_arn #=> String
+    #   resp.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
+    #
+    # @overload create_ota_update(params = {})
+    # @param [Hash] params ({})
+    def create_ota_update(params = {}, options = {})
+      req = build_request(:create_ota_update, params)
+      req.send_request(options)
+    end
+
     # Creates an AWS IoT policy.
     #
     # The created policy is the default version for the policy. This
@@ -775,6 +875,67 @@ module Aws::IoT
     # @param [Hash] params ({})
     def create_role_alias(params = {}, options = {})
       req = build_request(:create_role_alias, params)
+      req.send_request(options)
+    end
+
+    # Creates a stream for delivering one or more large files in chunks over
+    # MQTT. A stream transports data bytes in chunks or blocks packaged as
+    # MQTT messages from a source like S3. You can have one or more files
+    # associated with a stream. The total size of a file associated with the
+    # stream cannot exceed more than 2 MB. The stream will be created with
+    # version 0. If a stream is created with the same streamID as a stream
+    # that existed and was deleted within last 90 days, we will resurrect
+    # that old stream by incrementing the version by 1.
+    #
+    # @option params [required, String] :stream_id
+    #   The stream ID.
+    #
+    # @option params [String] :description
+    #   A description of the stream.
+    #
+    # @option params [required, Array<Types::StreamFile>] :files
+    #   The files to stream.
+    #
+    # @option params [required, String] :role_arn
+    #   An IAM role that allows the IoT service principal assumes to access
+    #   your S3 files.
+    #
+    # @return [Types::CreateStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStreamResponse#stream_id #stream_id} => String
+    #   * {Types::CreateStreamResponse#stream_arn #stream_arn} => String
+    #   * {Types::CreateStreamResponse#description #description} => String
+    #   * {Types::CreateStreamResponse#stream_version #stream_version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_stream({
+    #     stream_id: "StreamId", # required
+    #     description: "StreamDescription",
+    #     files: [ # required
+    #       {
+    #         file_id: 1,
+    #         s3_location: {
+    #           bucket: "S3Bucket", # required
+    #           key: "S3Key", # required
+    #           version: "S3Version",
+    #         },
+    #       },
+    #     ],
+    #     role_arn: "RoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_id #=> String
+    #   resp.stream_arn #=> String
+    #   resp.description #=> String
+    #   resp.stream_version #=> Integer
+    #
+    # @overload create_stream(params = {})
+    # @param [Hash] params ({})
+    def create_stream(params = {}, options = {})
+      req = build_request(:create_stream, params)
       req.send_request(options)
     end
 
@@ -1167,6 +1328,26 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Delete an OTA update.
+    #
+    # @option params [required, String] :ota_update_id
+    #   The OTA update ID to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ota_update({
+    #     ota_update_id: "OTAUpdateId", # required
+    #   })
+    #
+    # @overload delete_ota_update(params = {})
+    # @param [Hash] params ({})
+    def delete_ota_update(params = {}, options = {})
+      req = build_request(:delete_ota_update, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified policy.
     #
     # A policy cannot be deleted if it has non-default versions or it is
@@ -1254,6 +1435,26 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_role_alias(params = {}, options = {})
       req = build_request(:delete_role_alias, params)
+      req.send_request(options)
+    end
+
+    # Deletes a stream.
+    #
+    # @option params [required, String] :stream_id
+    #   The stream ID.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_stream({
+    #     stream_id: "StreamId", # required
+    #   })
+    #
+    # @overload delete_stream(params = {})
+    # @param [Hash] params ({})
+    def delete_stream(params = {}, options = {})
+      req = build_request(:delete_stream, params)
       req.send_request(options)
     end
 
@@ -1742,6 +1943,43 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Gets information about a stream.
+    #
+    # @option params [required, String] :stream_id
+    #   The stream ID.
+    #
+    # @return [Types::DescribeStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeStreamResponse#stream_info #stream_info} => Types::StreamInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_stream({
+    #     stream_id: "StreamId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_info.stream_id #=> String
+    #   resp.stream_info.stream_arn #=> String
+    #   resp.stream_info.stream_version #=> Integer
+    #   resp.stream_info.description #=> String
+    #   resp.stream_info.files #=> Array
+    #   resp.stream_info.files[0].file_id #=> Integer
+    #   resp.stream_info.files[0].s3_location.bucket #=> String
+    #   resp.stream_info.files[0].s3_location.key #=> String
+    #   resp.stream_info.files[0].s3_location.version #=> String
+    #   resp.stream_info.created_at #=> Time
+    #   resp.stream_info.last_updated_at #=> Time
+    #   resp.stream_info.role_arn #=> String
+    #
+    # @overload describe_stream(params = {})
+    # @param [Hash] params ({})
+    def describe_stream(params = {}, options = {})
+      req = build_request(:describe_stream, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified thing.
     #
     # @option params [required, String] :thing_name
@@ -2125,6 +2363,63 @@ module Aws::IoT
     # @param [Hash] params ({})
     def get_logging_options(params = {}, options = {})
       req = build_request(:get_logging_options, params)
+      req.send_request(options)
+    end
+
+    # Gets an OTA update.
+    #
+    # @option params [required, String] :ota_update_id
+    #   The OTA update ID.
+    #
+    # @return [Types::GetOTAUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOTAUpdateResponse#ota_update_info #ota_update_info} => Types::OTAUpdateInfo
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_ota_update({
+    #     ota_update_id: "OTAUpdateId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ota_update_info.ota_update_id #=> String
+    #   resp.ota_update_info.ota_update_arn #=> String
+    #   resp.ota_update_info.creation_date #=> Time
+    #   resp.ota_update_info.last_modified_date #=> Time
+    #   resp.ota_update_info.description #=> String
+    #   resp.ota_update_info.targets #=> Array
+    #   resp.ota_update_info.targets[0] #=> String
+    #   resp.ota_update_info.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
+    #   resp.ota_update_info.ota_update_files #=> Array
+    #   resp.ota_update_info.ota_update_files[0].file_name #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_version #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_source.stream_id #=> String
+    #   resp.ota_update_info.ota_update_files[0].file_source.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].code_signing.aws_signer_job_id #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.stream_id #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature.inline_document #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.stream_id #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.stream.file_id #=> Integer
+    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.certificate_name #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.certificate_chain.inline_document #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.hash_algorithm #=> String
+    #   resp.ota_update_info.ota_update_files[0].code_signing.custom_code_signing.signature_algorithm #=> String
+    #   resp.ota_update_info.ota_update_files[0].attributes #=> Hash
+    #   resp.ota_update_info.ota_update_files[0].attributes["Key"] #=> String
+    #   resp.ota_update_info.ota_update_status #=> String, one of "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_COMPLETE", "CREATE_FAILED"
+    #   resp.ota_update_info.aws_iot_job_id #=> String
+    #   resp.ota_update_info.aws_iot_job_arn #=> String
+    #   resp.ota_update_info.error_info.code #=> String
+    #   resp.ota_update_info.error_info.message #=> String
+    #   resp.ota_update_info.additional_parameters #=> Hash
+    #   resp.ota_update_info.additional_parameters["Key"] #=> String
+    #
+    # @overload get_ota_update(params = {})
+    # @param [Hash] params ({})
+    def get_ota_update(params = {}, options = {})
+      req = build_request(:get_ota_update, params)
       req.send_request(options)
     end
 
@@ -2776,6 +3071,45 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists OTA updates.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :next_token
+    #   A token used to retreive the next set of results.
+    #
+    # @option params [String] :ota_update_status
+    #   The OTA update job status.
+    #
+    # @return [Types::ListOTAUpdatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOTAUpdatesResponse#ota_updates #ota_updates} => Array&lt;Types::OTAUpdateSummary&gt;
+    #   * {Types::ListOTAUpdatesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_ota_updates({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     ota_update_status: "CREATE_PENDING", # accepts CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_COMPLETE, CREATE_FAILED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ota_updates #=> Array
+    #   resp.ota_updates[0].ota_update_id #=> String
+    #   resp.ota_updates[0].ota_update_arn #=> String
+    #   resp.ota_updates[0].creation_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_ota_updates(params = {})
+    # @param [Hash] params ({})
+    def list_ota_updates(params = {}, options = {})
+      req = build_request(:list_ota_updates, params)
+      req.send_request(options)
+    end
+
     # Lists certificates that are being transferred but not yet accepted.
     #
     # @option params [Integer] :page_size
@@ -3057,6 +3391,46 @@ module Aws::IoT
     # @param [Hash] params ({})
     def list_role_aliases(params = {}, options = {})
       req = build_request(:list_role_aliases, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the streams in your AWS account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at a time.
+    #
+    # @option params [String] :next_token
+    #   A token used to get the next set of results.
+    #
+    # @option params [Boolean] :ascending_order
+    #   Set to true to return the list of streams in ascending order.
+    #
+    # @return [Types::ListStreamsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStreamsResponse#streams #streams} => Array&lt;Types::StreamSummary&gt;
+    #   * {Types::ListStreamsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_streams({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     ascending_order: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.streams #=> Array
+    #   resp.streams[0].stream_id #=> String
+    #   resp.streams[0].stream_arn #=> String
+    #   resp.streams[0].stream_version #=> Integer
+    #   resp.streams[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_streams(params = {})
+    # @param [Hash] params ({})
+    def list_streams(params = {}, options = {})
+      req = build_request(:list_streams, params)
       req.send_request(options)
     end
 
@@ -4526,6 +4900,61 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Updates an existing stream. The stream version will be incremented by
+    # one.
+    #
+    # @option params [required, String] :stream_id
+    #   The stream ID.
+    #
+    # @option params [String] :description
+    #   The description of the stream.
+    #
+    # @option params [Array<Types::StreamFile>] :files
+    #   The files associated with the stream.
+    #
+    # @option params [String] :role_arn
+    #   An IAM role that allows the IoT service principal assumes to access
+    #   your S3 files.
+    #
+    # @return [Types::UpdateStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateStreamResponse#stream_id #stream_id} => String
+    #   * {Types::UpdateStreamResponse#stream_arn #stream_arn} => String
+    #   * {Types::UpdateStreamResponse#description #description} => String
+    #   * {Types::UpdateStreamResponse#stream_version #stream_version} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_stream({
+    #     stream_id: "StreamId", # required
+    #     description: "StreamDescription",
+    #     files: [
+    #       {
+    #         file_id: 1,
+    #         s3_location: {
+    #           bucket: "S3Bucket", # required
+    #           key: "S3Key", # required
+    #           version: "S3Version",
+    #         },
+    #       },
+    #     ],
+    #     role_arn: "RoleArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.stream_id #=> String
+    #   resp.stream_arn #=> String
+    #   resp.description #=> String
+    #   resp.stream_version #=> Integer
+    #
+    # @overload update_stream(params = {})
+    # @param [Hash] params ({})
+    def update_stream(params = {}, options = {})
+      req = build_request(:update_stream, params)
+      req.send_request(options)
+    end
+
     # Updates the data for a thing.
     #
     # @option params [required, String] :thing_name
@@ -4660,7 +5089,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

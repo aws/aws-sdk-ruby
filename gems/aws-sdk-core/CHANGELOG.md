@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.12.0 (2017-12-20)
+------------------
+
 * Feature - Adds support for credential_source when assuming a role via shared configuration.
 
 * Issue - Update APIGateway SDK user agent pattern

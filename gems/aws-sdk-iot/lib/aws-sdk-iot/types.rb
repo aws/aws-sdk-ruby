@@ -832,6 +832,110 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes the method to use when code signing a file.
+    #
+    # @note When making an API call, you may pass CodeSigning
+    #   data as a hash:
+    #
+    #       {
+    #         aws_signer_job_id: "SigningJobId",
+    #         custom_code_signing: {
+    #           signature: {
+    #             stream: {
+    #               stream_id: "StreamId",
+    #               file_id: 1,
+    #             },
+    #             inline_document: "data",
+    #           },
+    #           certificate_chain: {
+    #             stream: {
+    #               stream_id: "StreamId",
+    #               file_id: 1,
+    #             },
+    #             certificate_name: "CertificateName",
+    #             inline_document: "InlineDocument",
+    #           },
+    #           hash_algorithm: "HashAlgorithm",
+    #           signature_algorithm: "SignatureAlgorithm",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] aws_signer_job_id
+    #   The ID of the AWSSignerJob which was created to sign the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_code_signing
+    #   A custom method for code signing a file.
+    #   @return [Types::CustomCodeSigning]
+    #
+    class CodeSigning < Struct.new(
+      :aws_signer_job_id,
+      :custom_code_signing)
+      include Aws::Structure
+    end
+
+    # Describes the certificate chain being used when code signing a file.
+    #
+    # @note When making an API call, you may pass CodeSigningCertificateChain
+    #   data as a hash:
+    #
+    #       {
+    #         stream: {
+    #           stream_id: "StreamId",
+    #           file_id: 1,
+    #         },
+    #         certificate_name: "CertificateName",
+    #         inline_document: "InlineDocument",
+    #       }
+    #
+    # @!attribute [rw] stream
+    #   A stream of the certificate chain files.
+    #   @return [Types::Stream]
+    #
+    # @!attribute [rw] certificate_name
+    #   The name of the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] inline_document
+    #   A base64 encoded binary representation of the code signing
+    #   certificate chain.
+    #   @return [String]
+    #
+    class CodeSigningCertificateChain < Struct.new(
+      :stream,
+      :certificate_name,
+      :inline_document)
+      include Aws::Structure
+    end
+
+    # Describes the signature for a file.
+    #
+    # @note When making an API call, you may pass CodeSigningSignature
+    #   data as a hash:
+    #
+    #       {
+    #         stream: {
+    #           stream_id: "StreamId",
+    #           file_id: 1,
+    #         },
+    #         inline_document: "data",
+    #       }
+    #
+    # @!attribute [rw] stream
+    #   A stream of the code signing signature.
+    #   @return [Types::Stream]
+    #
+    # @!attribute [rw] inline_document
+    #   A base64 encoded binary representation of the code signing
+    #   signature.
+    #   @return [String]
+    #
+    class CodeSigningSignature < Struct.new(
+      :stream,
+      :inline_document)
+      include Aws::Structure
+    end
+
     # Configuration.
     #
     # @note When making an API call, you may pass Configuration
@@ -1097,6 +1201,130 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateOTAUpdateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ota_update_id: "OTAUpdateId", # required
+    #         description: "OTAUpdateDescription",
+    #         targets: ["Target"], # required
+    #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
+    #         files: [ # required
+    #           {
+    #             file_name: "FileName",
+    #             file_version: "OTAUpdateFileVersion",
+    #             file_source: {
+    #               stream_id: "StreamId",
+    #               file_id: 1,
+    #             },
+    #             code_signing: {
+    #               aws_signer_job_id: "SigningJobId",
+    #               custom_code_signing: {
+    #                 signature: {
+    #                   stream: {
+    #                     stream_id: "StreamId",
+    #                     file_id: 1,
+    #                   },
+    #                   inline_document: "data",
+    #                 },
+    #                 certificate_chain: {
+    #                   stream: {
+    #                     stream_id: "StreamId",
+    #                     file_id: 1,
+    #                   },
+    #                   certificate_name: "CertificateName",
+    #                   inline_document: "InlineDocument",
+    #                 },
+    #                 hash_algorithm: "HashAlgorithm",
+    #                 signature_algorithm: "SignatureAlgorithm",
+    #               },
+    #             },
+    #             attributes: {
+    #               "Key" => "Value",
+    #             },
+    #           },
+    #         ],
+    #         role_arn: "RoleArn", # required
+    #         additional_parameters: {
+    #           "Key" => "Value",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ota_update_id
+    #   The ID of the OTA update to be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the OTA update.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The targeted devices to receive OTA updates.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_selection
+    #   Specifies whether the update will continue to run (CONTINUOUS), or
+    #   will be complete after all the things specified as targets have
+    #   completed the update (SNAPSHOT). If continuous, the update may also
+    #   be run on a thing when a change is detected in a target. For
+    #   example, an update will run on a thing when the thing is added to a
+    #   target group, even after the update was completed by all things
+    #   originally in the group. Valid values: CONTINUOUS \| SNAPSHOT.
+    #   @return [String]
+    #
+    # @!attribute [rw] files
+    #   The files to be streamed by the OTA update.
+    #   @return [Array<Types::OTAUpdateFile>]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role that allows access to the AWS IoT Jobs service.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_parameters
+    #   A list of additional OTA update parameters which are name-value
+    #   pairs.
+    #   @return [Hash<String,String>]
+    #
+    class CreateOTAUpdateRequest < Struct.new(
+      :ota_update_id,
+      :description,
+      :targets,
+      :target_selection,
+      :files,
+      :role_arn,
+      :additional_parameters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ota_update_id
+    #   The OTA update ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_iot_job_id
+    #   The AWS IoT job ID associated with the OTA update.
+    #   @return [String]
+    #
+    # @!attribute [rw] ota_update_arn
+    #   The OTA update ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_iot_job_arn
+    #   The AWS IoT job ARN associated with the OTA update.
+    #   @return [String]
+    #
+    # @!attribute [rw] ota_update_status
+    #   The OTA update status.
+    #   @return [String]
+    #
+    class CreateOTAUpdateResponse < Struct.new(
+      :ota_update_id,
+      :aws_iot_job_id,
+      :ota_update_arn,
+      :aws_iot_job_arn,
+      :ota_update_status)
+      include Aws::Structure
+    end
+
     # The input for the CreatePolicy operation.
     #
     # @note When making an API call, you may pass CreatePolicyRequest
@@ -1249,6 +1477,74 @@ module Aws::IoT
     class CreateRoleAliasResponse < Struct.new(
       :role_alias,
       :role_alias_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         stream_id: "StreamId", # required
+    #         description: "StreamDescription",
+    #         files: [ # required
+    #           {
+    #             file_id: 1,
+    #             s3_location: {
+    #               bucket: "S3Bucket", # required
+    #               key: "S3Key", # required
+    #               version: "S3Version",
+    #             },
+    #           },
+    #         ],
+    #         role_arn: "RoleArn", # required
+    #       }
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] files
+    #   The files to stream.
+    #   @return [Array<Types::StreamFile>]
+    #
+    # @!attribute [rw] role_arn
+    #   An IAM role that allows the IoT service principal assumes to access
+    #   your S3 files.
+    #   @return [String]
+    #
+    class CreateStreamRequest < Struct.new(
+      :stream_id,
+      :description,
+      :files,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_id
+    #   The stream ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The stream ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_version
+    #   The version of the stream.
+    #   @return [Integer]
+    #
+    class CreateStreamResponse < Struct.new(
+      :stream_id,
+      :stream_arn,
+      :description,
+      :stream_version)
       include Aws::Structure
     end
 
@@ -1603,6 +1899,55 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Describes a custom method used to code sign a file.
+    #
+    # @note When making an API call, you may pass CustomCodeSigning
+    #   data as a hash:
+    #
+    #       {
+    #         signature: {
+    #           stream: {
+    #             stream_id: "StreamId",
+    #             file_id: 1,
+    #           },
+    #           inline_document: "data",
+    #         },
+    #         certificate_chain: {
+    #           stream: {
+    #             stream_id: "StreamId",
+    #             file_id: 1,
+    #           },
+    #           certificate_name: "CertificateName",
+    #           inline_document: "InlineDocument",
+    #         },
+    #         hash_algorithm: "HashAlgorithm",
+    #         signature_algorithm: "SignatureAlgorithm",
+    #       }
+    #
+    # @!attribute [rw] signature
+    #   The signature for the file.
+    #   @return [Types::CodeSigningSignature]
+    #
+    # @!attribute [rw] certificate_chain
+    #   The certificate chain.
+    #   @return [Types::CodeSigningCertificateChain]
+    #
+    # @!attribute [rw] hash_algorithm
+    #   The hash algorithm used to code sign the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature_algorithm
+    #   The signature algorithm used to code sign the file.
+    #   @return [String]
+    #
+    class CustomCodeSigning < Struct.new(
+      :signature,
+      :certificate_chain,
+      :hash_algorithm,
+      :signature_algorithm)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteAuthorizerRequest
     #   data as a hash:
     #
@@ -1666,6 +2011,24 @@ module Aws::IoT
       :force_delete)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteOTAUpdateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ota_update_id: "OTAUpdateId", # required
+    #       }
+    #
+    # @!attribute [rw] ota_update_id
+    #   The OTA update ID to delete.
+    #   @return [String]
+    #
+    class DeleteOTAUpdateRequest < Struct.new(
+      :ota_update_id)
+      include Aws::Structure
+    end
+
+    class DeleteOTAUpdateResponse < Aws::EmptyStructure; end
 
     # The input for the DeletePolicy operation.
     #
@@ -1736,6 +2099,24 @@ module Aws::IoT
     end
 
     class DeleteRoleAliasResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         stream_id: "StreamId", # required
+    #       }
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID.
+    #   @return [String]
+    #
+    class DeleteStreamRequest < Struct.new(
+      :stream_id)
+      include Aws::Structure
+    end
+
+    class DeleteStreamResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteThingGroupRequest
     #   data as a hash:
@@ -2188,6 +2569,31 @@ module Aws::IoT
     #
     class DescribeRoleAliasResponse < Struct.new(
       :role_alias_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         stream_id: "StreamId", # required
+    #       }
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID.
+    #   @return [String]
+    #
+    class DescribeStreamRequest < Struct.new(
+      :stream_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_info
+    #   Information about the stream.
+    #   @return [Types::StreamInfo]
+    #
+    class DescribeStreamResponse < Struct.new(
+      :stream_info)
       include Aws::Structure
     end
 
@@ -2748,6 +3154,22 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Error information.
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message.
+    #   @return [String]
+    #
+    class ErrorInfo < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
     # Information that explicitly denies authorization.
     #
     # @!attribute [rw] policies
@@ -2887,6 +3309,31 @@ module Aws::IoT
     class GetLoggingOptionsResponse < Struct.new(
       :role_arn,
       :log_level)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetOTAUpdateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ota_update_id: "OTAUpdateId", # required
+    #       }
+    #
+    # @!attribute [rw] ota_update_id
+    #   The OTA update ID.
+    #   @return [String]
+    #
+    class GetOTAUpdateRequest < Struct.new(
+      :ota_update_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ota_update_info
+    #   The OTA update info.
+    #   @return [Types::OTAUpdateInfo]
+    #
+    class GetOTAUpdateResponse < Struct.new(
+      :ota_update_info)
       include Aws::Structure
     end
 
@@ -3953,6 +4400,48 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListOTAUpdatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         ota_update_status: "CREATE_PENDING", # accepts CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_COMPLETE, CREATE_FAILED
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used to retreive the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] ota_update_status
+    #   The OTA update job status.
+    #   @return [String]
+    #
+    class ListOTAUpdatesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :ota_update_status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ota_updates
+    #   A list of OTA update jobs.
+    #   @return [Array<Types::OTAUpdateSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use to get the next set of results.
+    #   @return [String]
+    #
+    class ListOTAUpdatesResponse < Struct.new(
+      :ota_updates,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The input to the ListOutgoingCertificates operation.
     #
     # @note When making an API call, you may pass ListOutgoingCertificatesRequest
@@ -4272,6 +4761,48 @@ module Aws::IoT
     class ListRoleAliasesResponse < Struct.new(
       :role_aliases,
       :next_marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStreamsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         ascending_order: false,
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at a time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token used to get the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] ascending_order
+    #   Set to true to return the list of streams in ascending order.
+    #   @return [Boolean]
+    #
+    class ListStreamsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :ascending_order)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] streams
+    #   A list of streams.
+    #   @return [Array<Types::StreamSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token used to get the next set of results.
+    #   @return [String]
+    #
+    class ListStreamsResponse < Struct.new(
+      :streams,
+      :next_token)
       include Aws::Structure
     end
 
@@ -4862,6 +5393,172 @@ module Aws::IoT
     class LoggingOptionsPayload < Struct.new(
       :role_arn,
       :log_level)
+      include Aws::Structure
+    end
+
+    # Describes a file to be associated with an OTA update.
+    #
+    # @note When making an API call, you may pass OTAUpdateFile
+    #   data as a hash:
+    #
+    #       {
+    #         file_name: "FileName",
+    #         file_version: "OTAUpdateFileVersion",
+    #         file_source: {
+    #           stream_id: "StreamId",
+    #           file_id: 1,
+    #         },
+    #         code_signing: {
+    #           aws_signer_job_id: "SigningJobId",
+    #           custom_code_signing: {
+    #             signature: {
+    #               stream: {
+    #                 stream_id: "StreamId",
+    #                 file_id: 1,
+    #               },
+    #               inline_document: "data",
+    #             },
+    #             certificate_chain: {
+    #               stream: {
+    #                 stream_id: "StreamId",
+    #                 file_id: 1,
+    #               },
+    #               certificate_name: "CertificateName",
+    #               inline_document: "InlineDocument",
+    #             },
+    #             hash_algorithm: "HashAlgorithm",
+    #             signature_algorithm: "SignatureAlgorithm",
+    #           },
+    #         },
+    #         attributes: {
+    #           "Key" => "Value",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_name
+    #   The name of the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_version
+    #   The file version.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_source
+    #   The source of the file.
+    #   @return [Types::Stream]
+    #
+    # @!attribute [rw] code_signing
+    #   The code signing method of the file.
+    #   @return [Types::CodeSigning]
+    #
+    # @!attribute [rw] attributes
+    #   A list of name/attribute pairs.
+    #   @return [Hash<String,String>]
+    #
+    class OTAUpdateFile < Struct.new(
+      :file_name,
+      :file_version,
+      :file_source,
+      :code_signing,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # Information about an OTA update.
+    #
+    # @!attribute [rw] ota_update_id
+    #   The OTA update ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ota_update_arn
+    #   The OTA update ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the OTA update was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date when the OTA update was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A description of the OTA update.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The targets of the OTA update.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_selection
+    #   Specifies whether the OTA update will continue to run (CONTINUOUS),
+    #   or will be complete after all those things specified as targets have
+    #   completed the OTA update (SNAPSHOT). If continuous, the OTA update
+    #   may also be run on a thing when a change is detected in a target.
+    #   For example, an OTA update will run on a thing when the thing is
+    #   added to a target group, even after the OTA update was completed by
+    #   all things originally in the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] ota_update_files
+    #   A list of files associated with the OTA update.
+    #   @return [Array<Types::OTAUpdateFile>]
+    #
+    # @!attribute [rw] ota_update_status
+    #   The status of the OTA update.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_iot_job_id
+    #   The AWS IoT job ID associated with the OTA update.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_iot_job_arn
+    #   The AWS IoT job ARN associated with the OTA update.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_info
+    #   Error information associated with the OTA update.
+    #   @return [Types::ErrorInfo]
+    #
+    # @!attribute [rw] additional_parameters
+    #   A collection of name/value pairs
+    #   @return [Hash<String,String>]
+    #
+    class OTAUpdateInfo < Struct.new(
+      :ota_update_id,
+      :ota_update_arn,
+      :creation_date,
+      :last_modified_date,
+      :description,
+      :targets,
+      :target_selection,
+      :ota_update_files,
+      :ota_update_status,
+      :aws_iot_job_id,
+      :aws_iot_job_arn,
+      :error_info,
+      :additional_parameters)
+      include Aws::Structure
+    end
+
+    # An OTA update summary.
+    #
+    # @!attribute [rw] ota_update_id
+    #   The OTA update ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] ota_update_arn
+    #   The OTA update ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   The date when the OTA update was created.
+    #   @return [Time]
+    #
+    class OTAUpdateSummary < Struct.new(
+      :ota_update_id,
+      :ota_update_arn,
+      :creation_date)
       include Aws::Structure
     end
 
@@ -5513,6 +6210,36 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The location in S3 the contains the files to stream.
+    #
+    # @note When making an API call, you may pass S3Location
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "S3Bucket", # required
+    #         key: "S3Key", # required
+    #         version: "S3Version",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The S3 bucket that contains the file to stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The name of the file within the S3 bucket to stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The file version.
+    #   @return [String]
+    #
+    class S3Location < Struct.new(
+      :bucket,
+      :key,
+      :version)
+      include Aws::Structure
+    end
+
     # Describes an action to write a message to a Salesforce IoT Cloud Input
     # Stream.
     #
@@ -5858,6 +6585,130 @@ module Aws::IoT
     end
 
     class StopThingRegistrationTaskResponse < Aws::EmptyStructure; end
+
+    # Describes a group of files that can be streamed.
+    #
+    # @note When making an API call, you may pass Stream
+    #   data as a hash:
+    #
+    #       {
+    #         stream_id: "StreamId",
+    #         file_id: 1,
+    #       }
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_id
+    #   The ID of a file associated with a stream.
+    #   @return [Integer]
+    #
+    class Stream < Struct.new(
+      :stream_id,
+      :file_id)
+      include Aws::Structure
+    end
+
+    # Represents a file to stream.
+    #
+    # @note When making an API call, you may pass StreamFile
+    #   data as a hash:
+    #
+    #       {
+    #         file_id: 1,
+    #         s3_location: {
+    #           bucket: "S3Bucket", # required
+    #           key: "S3Key", # required
+    #           version: "S3Version",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] file_id
+    #   The file ID.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] s3_location
+    #   The location of the file in S3.
+    #   @return [Types::S3Location]
+    #
+    class StreamFile < Struct.new(
+      :file_id,
+      :s3_location)
+      include Aws::Structure
+    end
+
+    # Information about a stream.
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The stream ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_version
+    #   The stream version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   The description of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] files
+    #   The files to stream.
+    #   @return [Array<Types::StreamFile>]
+    #
+    # @!attribute [rw] created_at
+    #   The date when the stream was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date when the stream was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] role_arn
+    #   An IAM role AWS IoT assumes to access your S3 files.
+    #   @return [String]
+    #
+    class StreamInfo < Struct.new(
+      :stream_id,
+      :stream_arn,
+      :stream_version,
+      :description,
+      :files,
+      :created_at,
+      :last_updated_at,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # A summary of a stream.
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The stream ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_version
+    #   The stream version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] description
+    #   A description of the stream.
+    #   @return [String]
+    #
+    class StreamSummary < Struct.new(
+      :stream_id,
+      :stream_arn,
+      :stream_version,
+      :description)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass TestAuthorizationRequest
     #   data as a hash:
@@ -6783,6 +7634,74 @@ module Aws::IoT
     class UpdateRoleAliasResponse < Struct.new(
       :role_alias,
       :role_alias_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         stream_id: "StreamId", # required
+    #         description: "StreamDescription",
+    #         files: [
+    #           {
+    #             file_id: 1,
+    #             s3_location: {
+    #               bucket: "S3Bucket", # required
+    #               key: "S3Key", # required
+    #               version: "S3Version",
+    #             },
+    #           },
+    #         ],
+    #         role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] files
+    #   The files associated with the stream.
+    #   @return [Array<Types::StreamFile>]
+    #
+    # @!attribute [rw] role_arn
+    #   An IAM role that allows the IoT service principal assumes to access
+    #   your S3 files.
+    #   @return [String]
+    #
+    class UpdateStreamRequest < Struct.new(
+      :stream_id,
+      :description,
+      :files,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] stream_id
+    #   The stream ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The stream ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_version
+    #   The stream version.
+    #   @return [Integer]
+    #
+    class UpdateStreamResponse < Struct.new(
+      :stream_id,
+      :stream_arn,
+      :description,
+      :stream_version)
       include Aws::Structure
     end
 
