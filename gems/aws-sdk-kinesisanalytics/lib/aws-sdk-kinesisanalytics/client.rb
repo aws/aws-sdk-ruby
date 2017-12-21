@@ -310,9 +310,9 @@ module Aws::KinesisAnalytics
     #   `ConcurrentModificationException` is returned.
     #
     # @option params [required, String] :input_id
-    #   The ID of the input configuration to which to add the input
-    #   configuration. You can get a list of the input IDs for an application
-    #   using the DescribeApplication operation.
+    #   The ID of the input configuration to add the input processing
+    #   configuration to. You can get a list of the input IDs for an
+    #   application using the DescribeApplication operation.
     #
     # @option params [required, Types::InputProcessingConfiguration] :input_processing_configuration
     #   The InputProcessingConfiguration to add to the application.
@@ -347,11 +347,12 @@ module Aws::KinesisAnalytics
     #
     # If you want Amazon Kinesis Analytics to deliver data from an
     # in-application stream within your application to an external
-    # destination (such as an Amazon Kinesis stream or a Firehose delivery
-    # stream), you add the relevant configuration to your application using
-    # this operation. You can configure one or more outputs for your
-    # application. Each output configuration maps an in-application stream
-    # and an external destination.
+    # destination (such as an Amazon Kinesis stream, an Amazon Kinesis
+    # Firehose delivery stream, or an Amazon Lambda function), you add the
+    # relevant configuration to your application using this operation. You
+    # can configure one or more outputs for your application. Each output
+    # configuration maps an in-application stream and an external
+    # destination.
     #
     # You can use one of the output configurations to deliver data from your
     # in-application error stream to an external destination so that you can
@@ -379,7 +380,7 @@ module Aws::KinesisAnalytics
     #   configuration.
     #
     # @option params [required, Integer] :current_application_version_id
-    #   Version of the application to which you want add the output
+    #   Version of the application to which you want to add the output
     #   configuration. You can use the DescribeApplication operation to get
     #   the current application version. If the version specified is not the
     #   current version, the `ConcurrentModificationException` is returned.
@@ -387,9 +388,9 @@ module Aws::KinesisAnalytics
     # @option params [required, Types::Output] :output
     #   An array of objects, each describing one output configuration. In the
     #   output configuration, you specify the name of an in-application
-    #   stream, a destination (that is, an Amazon Kinesis stream or an Amazon
-    #   Kinesis Firehose delivery stream), and record the formation to use
-    #   when writing to the destination.
+    #   stream, a destination (that is, an Amazon Kinesis stream, an Amazon
+    #   Kinesis Firehose delivery stream, or an Amazon Lambda function), and
+    #   record the formation to use when writing to the destination.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -405,6 +406,10 @@ module Aws::KinesisAnalytics
     #         role_arn: "RoleARN", # required
     #       },
     #       kinesis_firehose_output: {
+    #         resource_arn: "ResourceARN", # required
+    #         role_arn: "RoleARN", # required
+    #       },
+    #       lambda_output: {
     #         resource_arn: "ResourceARN", # required
     #         role_arn: "RoleARN", # required
     #       },
@@ -512,8 +517,8 @@ module Aws::KinesisAnalytics
 
     # Creates an Amazon Kinesis Analytics application. You can configure
     # each application with one streaming source as input, application code
-    # to process the input, and up to five streaming destinations where you
-    # want Amazon Kinesis Analytics to write the output data from your
+    # to process the input, and up to three destinations where you want
+    # Amazon Kinesis Analytics to write the output data from your
     # application. For an overview, see [How it Works][1].
     #
     # In the input configuration, you map the streaming source to an
@@ -528,7 +533,7 @@ module Aws::KinesisAnalytics
     #
     # In the output configuration, you can configure the application to
     # write data from in-application streams created in your applications to
-    # up to five streaming destinations.
+    # up to three destinations.
     #
     # To read data from your source stream or write data to destination
     # streams, Amazon Kinesis Analytics needs your permissions. You grant
@@ -561,7 +566,7 @@ module Aws::KinesisAnalytics
     #   as a constantly updating table).
     #
     #   For the streaming source, you provide its Amazon Resource Name (ARN)
-    #   and format of data on the stream (for example, JSON, CSV, etc). You
+    #   and format of data on the stream (for example, JSON, CSV, etc.). You
     #   also must provide an IAM role that Amazon Kinesis Analytics can assume
     #   to read this stream on your behalf.
     #
@@ -572,21 +577,23 @@ module Aws::KinesisAnalytics
     #
     # @option params [Array<Types::Output>] :outputs
     #   You can configure application output to write data from any of the
-    #   in-application streams to up to five destinations.
+    #   in-application streams to up to three destinations.
     #
     #   These destinations can be Amazon Kinesis streams, Amazon Kinesis
-    #   Firehose delivery streams, or both.
+    #   Firehose delivery streams, Amazon Lambda destinations, or any
+    #   combination of the three.
     #
     #   In the configuration, you specify the in-application stream name, the
-    #   destination stream Amazon Resource Name (ARN), and the format to use
-    #   when writing data. You must also provide an IAM role that Amazon
-    #   Kinesis Analytics can assume to write to the destination stream on
-    #   your behalf.
+    #   destination stream or Lambda function Amazon Resource Name (ARN), and
+    #   the format to use when writing data. You must also provide an IAM role
+    #   that Amazon Kinesis Analytics can assume to write to the destination
+    #   stream or Lambda function on your behalf.
     #
-    #   In the output configuration, you also provide the output stream Amazon
-    #   Resource Name (ARN) and the format of data in the stream (for example,
-    #   JSON, CSV). You also must provide an IAM role that Amazon Kinesis
-    #   Analytics can assume to write to this stream on your behalf.
+    #   In the output configuration, you also provide the output stream or
+    #   Lambda function ARN. For stream destinations, you provide the format
+    #   of data in the stream (for example, JSON, CSV). You also must provide
+    #   an IAM role that Amazon Kinesis Analytics can assume to write to the
+    #   stream or Lambda function on your behalf.
     #
     # @option params [Array<Types::CloudWatchLoggingOption>] :cloud_watch_logging_options
     #   Use this parameter to configure a CloudWatch log stream to monitor
@@ -603,7 +610,7 @@ module Aws::KinesisAnalytics
     #   data from one in-application stream, generates a running average of
     #   the number of advertisement clicks by vendor, and insert resulting
     #   rows in another in-application stream using pumps. For more
-    #   inforamtion about the typical pattern, see [Application Code][1].
+    #   information about the typical pattern, see [Application Code][1].
     #
     #   You can provide such series of SQL statements, where output of one
     #   statement can be used as the input for the next statement. You store
@@ -680,6 +687,10 @@ module Aws::KinesisAnalytics
     #           role_arn: "RoleARN", # required
     #         },
     #         kinesis_firehose_output: {
+    #           resource_arn: "ResourceARN", # required
+    #           role_arn: "RoleARN", # required
+    #         },
+    #         lambda_output: {
     #           resource_arn: "ResourceARN", # required
     #           role_arn: "RoleARN", # required
     #         },
@@ -760,8 +771,8 @@ module Aws::KinesisAnalytics
     #
     # @option params [required, String] :cloud_watch_logging_option_id
     #   The `CloudWatchLoggingOptionId` of the CloudWatch logging option to
-    #   delete. You can use the DescribeApplication operation to get the
-    #   `CloudWatchLoggingOptionId`.
+    #   delete. You can get the `CloudWatchLoggingOptionId` by using the
+    #   DescribeApplication operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -792,8 +803,8 @@ module Aws::KinesisAnalytics
     #
     # @option params [required, String] :input_id
     #   The ID of the input configuration from which to delete the input
-    #   configuration. You can get a list of the input IDs for an application
-    #   using the DescribeApplication operation.
+    #   processing configuration. You can get a list of the input IDs for an
+    #   application by using the DescribeApplication operation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -963,6 +974,8 @@ module Aws::KinesisAnalytics
     #   resp.application_detail.output_descriptions[0].kinesis_streams_output_description.role_arn #=> String
     #   resp.application_detail.output_descriptions[0].kinesis_firehose_output_description.resource_arn #=> String
     #   resp.application_detail.output_descriptions[0].kinesis_firehose_output_description.role_arn #=> String
+    #   resp.application_detail.output_descriptions[0].lambda_output_description.resource_arn #=> String
+    #   resp.application_detail.output_descriptions[0].lambda_output_description.role_arn #=> String
     #   resp.application_detail.output_descriptions[0].destination_schema.record_format_type #=> String, one of "JSON", "CSV"
     #   resp.application_detail.reference_data_source_descriptions #=> Array
     #   resp.application_detail.reference_data_source_descriptions[0].reference_id #=> String
@@ -997,9 +1010,9 @@ module Aws::KinesisAnalytics
 
     # Infers a schema by evaluating sample records on the specified
     # streaming source (Amazon Kinesis stream or Amazon Kinesis Firehose
-    # delivery stream). In the response, the operation returns the inferred
-    # schema and also the sample records that the operation used to infer
-    # the schema.
+    # delivery stream) or S3 object. In the response, the operation returns
+    # the inferred schema and also the sample records that the operation
+    # used to infer the schema.
     #
     # You can use the inferred schema when configuring a streaming source
     # for your application. For conceptual information, see [Configuring
@@ -1026,6 +1039,7 @@ module Aws::KinesisAnalytics
     #   records from the specified streaming source discovery purposes.
     #
     # @option params [Types::S3Configuration] :s3_configuration
+    #   Specify this parameter to discover a schema from data in an S3 object.
     #
     # @option params [Types::InputProcessingConfiguration] :input_processing_configuration
     #   The InputProcessingConfiguration to use to preprocess the records
@@ -1307,6 +1321,10 @@ module Aws::KinesisAnalytics
     #             resource_arn_update: "ResourceARN",
     #             role_arn_update: "RoleARN",
     #           },
+    #           lambda_output_update: {
+    #             resource_arn_update: "ResourceARN",
+    #             role_arn_update: "RoleARN",
+    #           },
     #           destination_schema_update: {
     #             record_format_type: "JSON", # accepts JSON, CSV
     #           },
@@ -1377,7 +1395,7 @@ module Aws::KinesisAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesisanalytics'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

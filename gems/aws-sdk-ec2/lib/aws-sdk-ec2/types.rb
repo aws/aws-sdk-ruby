@@ -250,6 +250,10 @@ module Aws::EC2
     #   The private IP address associated with the Elastic IP address.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the Elastic IP address.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Address AWS API Documentation
     #
     class Address < Struct.new(
@@ -260,7 +264,8 @@ module Aws::EC2
       :domain,
       :network_interface_id,
       :network_interface_owner_id,
-      :private_ip_address)
+      :private_ip_address,
+      :tags)
       include Aws::Structure
     end
 
@@ -12569,16 +12574,16 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `customer-account-id` - The AWS account number of the owner of the
+    #   * `service-id` - The ID of the service.
+    #
+    #   * `vpc-endpoint-owner` - The AWS account number of the owner of the
     #     endpoint.
     #
-    #   * `endpoint-connection-state` - The state of the endpoint
-    #     (`PendingAcceptance` \| `Pending` \| `Available` \| `Deleting` \|
-    #     `Deleted` \| `Rejected` \| `Failed`).
+    #   * `vpc-endpoint-state` - The state of the endpoint
+    #     (`pendingAcceptance` \| `pending` \| `available` \| `deleting` \|
+    #     `deleted` \| `rejected` \| `failed`).
     #
     #   * `vpc-endpoint-id` - The ID of the endpoint.
-    #
-    #   * `vpc-endpoint-service-id` - The ID of the service.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -12650,12 +12655,12 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
-    #   * `service-name` - The ARN of the service.
+    #   * `service-name` - The name of the service.
     #
-    #   * `vpc-endpoint-service-id` - The ID of the service.
+    #   * `service-id` - The ID of the service.
     #
-    #   * `vpc-endpoint-service-state` - The state of the service (`Pending`
-    #     \| `Available` \| `Deleting` \| `Deleted` \| `Failed`).
+    #   * `service-state` - The state of the service (`Pending` \|
+    #     `Available` \| `Deleting` \| `Deleted` \| `Failed`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -17862,11 +17867,12 @@ module Aws::EC2
     #   @return [Array<Types::Ipv6Range>]
     #
     # @!attribute [rw] prefix_list_ids
-    #   (Valid for AuthorizeSecurityGroupEgress, RevokeSecurityGroupEgress
-    #   and DescribeSecurityGroups only) One or more prefix list IDs for an
-    #   AWS service. In an AuthorizeSecurityGroupEgress request, this is the
-    #   AWS service that you want to access through a VPC endpoint from
-    #   instances associated with the security group.
+    #   (EC2-VPC only; valid for AuthorizeSecurityGroupEgress,
+    #   RevokeSecurityGroupEgress and DescribeSecurityGroups only) One or
+    #   more prefix list IDs for an AWS service. In an
+    #   AuthorizeSecurityGroupEgress request, this is the AWS service that
+    #   you want to access through a VPC endpoint from instances associated
+    #   with the security group.
     #   @return [Array<Types::PrefixListId>]
     #
     # @!attribute [rw] to_port
@@ -21712,7 +21718,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # The ID of the prefix.
+    # \[EC2-VPC only\] The ID of the prefix.
     #
     # @note When making an API call, you may pass PrefixListId
     #   data as a hash:

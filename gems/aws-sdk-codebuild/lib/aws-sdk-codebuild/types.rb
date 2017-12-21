@@ -611,11 +611,16 @@ module Aws::CodeBuild
     #   The description of the Docker image.
     #   @return [String]
     #
+    # @!attribute [rw] versions
+    #   A list of environment image versions.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentImage AWS API Documentation
     #
     class EnvironmentImage < Struct.new(
       :name,
-      :description)
+      :description,
+      :versions)
       include Aws::Structure
     end
 
@@ -1067,11 +1072,8 @@ module Aws::CodeBuild
     #   @return [Types::Webhook]
     #
     # @!attribute [rw] vpc_config
-    #   If your AWS CodeBuild project accesses resources in an Amazon VPC,
-    #   you provide this parameter that identifies the VPC ID and the list
-    #   of security group IDs and subnet IDs. The security groups and
-    #   subnets must belong to the same VPC. You must provide at least one
-    #   security group and one subnet ID.
+    #   Information about the VPC configuration that AWS CodeBuild will
+    #   access.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] badge
@@ -1819,11 +1821,8 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # If your AWS CodeBuild project accesses resources in an Amazon VPC, you
-    # provide this parameter that identifies the VPC ID and the list of
-    # security group IDs and subnet IDs. The security groups and subnets
-    # must belong to the same VPC. You must provide at least one security
-    # group and one subnet ID.
+    # Information about the VPC configuration that AWS CodeBuild will
+    # access.
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:

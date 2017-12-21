@@ -51,6 +51,7 @@ module Aws::CodeBuild
     EnvironmentVariable = Shapes::StructureShape.new(name: 'EnvironmentVariable')
     EnvironmentVariableType = Shapes::StringShape.new(name: 'EnvironmentVariableType')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidateProjectCacheInput = Shapes::StructureShape.new(name: 'InvalidateProjectCacheInput')
     InvalidateProjectCacheOutput = Shapes::StructureShape.new(name: 'InvalidateProjectCacheOutput')
@@ -211,6 +212,7 @@ module Aws::CodeBuild
 
     EnvironmentImage.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EnvironmentImage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    EnvironmentImage.add_member(:versions, Shapes::ShapeRef.new(shape: ImageVersions, location_name: "versions"))
     EnvironmentImage.struct_class = Types::EnvironmentImage
 
     EnvironmentImages.member = Shapes::ShapeRef.new(shape: EnvironmentImage)
@@ -233,6 +235,8 @@ module Aws::CodeBuild
     EnvironmentVariable.struct_class = Types::EnvironmentVariable
 
     EnvironmentVariables.member = Shapes::ShapeRef.new(shape: EnvironmentVariable)
+
+    ImageVersions.member = Shapes::ShapeRef.new(shape: String)
 
     InvalidateProjectCacheInput.add_member(:project_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "projectName"))
     InvalidateProjectCacheInput.struct_class = Types::InvalidateProjectCacheInput

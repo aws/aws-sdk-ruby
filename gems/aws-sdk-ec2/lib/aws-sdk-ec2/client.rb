@@ -7747,6 +7747,9 @@ module Aws::EC2
     #   resp.addresses[0].network_interface_id #=> String
     #   resp.addresses[0].network_interface_owner_id #=> String
     #   resp.addresses[0].private_ip_address #=> String
+    #   resp.addresses[0].tags #=> Array
+    #   resp.addresses[0].tags[0].key #=> String
+    #   resp.addresses[0].tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddresses AWS API Documentation
     #
@@ -15787,16 +15790,16 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `customer-account-id` - The AWS account number of the owner of the
+    #   * `service-id` - The ID of the service.
+    #
+    #   * `vpc-endpoint-owner` - The AWS account number of the owner of the
     #     endpoint.
     #
-    #   * `endpoint-connection-state` - The state of the endpoint
-    #     (`PendingAcceptance` \| `Pending` \| `Available` \| `Deleting` \|
-    #     `Deleted` \| `Rejected` \| `Failed`).
+    #   * `vpc-endpoint-state` - The state of the endpoint
+    #     (`pendingAcceptance` \| `pending` \| `available` \| `deleting` \|
+    #     `deleted` \| `rejected` \| `failed`).
     #
     #   * `vpc-endpoint-id` - The ID of the endpoint.
-    #
-    #   * `vpc-endpoint-service-id` - The ID of the service.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
@@ -15861,12 +15864,12 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
-    #   * `service-name` - The ARN of the service.
+    #   * `service-name` - The name of the service.
     #
-    #   * `vpc-endpoint-service-id` - The ID of the service.
+    #   * `service-id` - The ID of the service.
     #
-    #   * `vpc-endpoint-service-state` - The state of the service (`Pending`
-    #     \| `Available` \| `Deleting` \| `Deleted` \| `Failed`).
+    #   * `service-state` - The state of the service (`Pending` \| `Available`
+    #     \| `Deleting` \| `Deleted` \| `Failed`).
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return for the request in a single
@@ -20875,6 +20878,8 @@ module Aws::EC2
     # network ACL. For more information about network ACLs, see [Network
     # ACLs][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
+    # This is an idempotent operation.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html
@@ -23730,7 +23735,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -77,8 +77,8 @@ module Aws::KinesisAnalytics
     #   @return [Integer]
     #
     # @!attribute [rw] input_id
-    #   The ID of the input configuration to which to add the input
-    #   configuration. You can get a list of the input IDs for an
+    #   The ID of the input configuration to add the input processing
+    #   configuration to. You can get a list of the input IDs for an
     #   application using the DescribeApplication operation.
     #   @return [String]
     #
@@ -194,6 +194,10 @@ module Aws::KinesisAnalytics
     #             resource_arn: "ResourceARN", # required
     #             role_arn: "RoleARN", # required
     #           },
+    #           lambda_output: {
+    #             resource_arn: "ResourceARN", # required
+    #             role_arn: "RoleARN", # required
+    #           },
     #           destination_schema: { # required
     #             record_format_type: "JSON", # accepts JSON, CSV
     #           },
@@ -206,7 +210,7 @@ module Aws::KinesisAnalytics
     #   @return [String]
     #
     # @!attribute [rw] current_application_version_id
-    #   Version of the application to which you want add the output
+    #   Version of the application to which you want to add the output
     #   configuration. You can use the DescribeApplication operation to get
     #   the current application version. If the version specified is not the
     #   current version, the `ConcurrentModificationException` is returned.
@@ -215,9 +219,9 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] output
     #   An array of objects, each describing one output configuration. In
     #   the output configuration, you specify the name of an in-application
-    #   stream, a destination (that is, an Amazon Kinesis stream or an
-    #   Amazon Kinesis Firehose delivery stream), and record the formation
-    #   to use when writing to the destination.
+    #   stream, a destination (that is, an Amazon Kinesis stream, an Amazon
+    #   Kinesis Firehose delivery stream, or an Amazon Lambda function), and
+    #   record the formation to use when writing to the destination.
     #   @return [Types::Output]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutputRequest AWS API Documentation
@@ -326,11 +330,11 @@ module Aws::KinesisAnalytics
     #   @return [String]
     #
     # @!attribute [rw] create_timestamp
-    #   Timestamp when the application version was created.
+    #   Time stamp when the application version was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_update_timestamp
-    #   Timestamp when the application was last updated.
+    #   Time stamp when the application was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] input_descriptions
@@ -484,6 +488,10 @@ module Aws::KinesisAnalytics
     #               role_arn_update: "RoleARN",
     #             },
     #             kinesis_firehose_output_update: {
+    #               resource_arn_update: "ResourceARN",
+    #               role_arn_update: "RoleARN",
+    #             },
+    #             lambda_output_update: {
     #               resource_arn_update: "ResourceARN",
     #               role_arn_update: "RoleARN",
     #             },
@@ -751,6 +759,10 @@ module Aws::KinesisAnalytics
     #               resource_arn: "ResourceARN", # required
     #               role_arn: "RoleARN", # required
     #             },
+    #             lambda_output: {
+    #               resource_arn: "ResourceARN", # required
+    #               role_arn: "RoleARN", # required
+    #             },
     #             destination_schema: { # required
     #               record_format_type: "JSON", # accepts JSON, CSV
     #             },
@@ -784,7 +796,7 @@ module Aws::KinesisAnalytics
     #   think of it as a constantly updating table).
     #
     #   For the streaming source, you provide its Amazon Resource Name (ARN)
-    #   and format of data on the stream (for example, JSON, CSV, etc). You
+    #   and format of data on the stream (for example, JSON, CSV, etc.). You
     #   also must provide an IAM role that Amazon Kinesis Analytics can
     #   assume to read this stream on your behalf.
     #
@@ -796,21 +808,23 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] outputs
     #   You can configure application output to write data from any of the
-    #   in-application streams to up to five destinations.
+    #   in-application streams to up to three destinations.
     #
     #   These destinations can be Amazon Kinesis streams, Amazon Kinesis
-    #   Firehose delivery streams, or both.
+    #   Firehose delivery streams, Amazon Lambda destinations, or any
+    #   combination of the three.
     #
     #   In the configuration, you specify the in-application stream name,
-    #   the destination stream Amazon Resource Name (ARN), and the format to
-    #   use when writing data. You must also provide an IAM role that Amazon
-    #   Kinesis Analytics can assume to write to the destination stream on
-    #   your behalf.
+    #   the destination stream or Lambda function Amazon Resource Name
+    #   (ARN), and the format to use when writing data. You must also
+    #   provide an IAM role that Amazon Kinesis Analytics can assume to
+    #   write to the destination stream or Lambda function on your behalf.
     #
-    #   In the output configuration, you also provide the output stream
-    #   Amazon Resource Name (ARN) and the format of data in the stream (for
-    #   example, JSON, CSV). You also must provide an IAM role that Amazon
-    #   Kinesis Analytics can assume to write to this stream on your behalf.
+    #   In the output configuration, you also provide the output stream or
+    #   Lambda function ARN. For stream destinations, you provide the format
+    #   of data in the stream (for example, JSON, CSV). You also must
+    #   provide an IAM role that Amazon Kinesis Analytics can assume to
+    #   write to the stream or Lambda function on your behalf.
     #   @return [Array<Types::Output>]
     #
     # @!attribute [rw] cloud_watch_logging_options
@@ -829,7 +843,7 @@ module Aws::KinesisAnalytics
     #   reads data from one in-application stream, generates a running
     #   average of the number of advertisement clicks by vendor, and insert
     #   resulting rows in another in-application stream using pumps. For
-    #   more inforamtion about the typical pattern, see [Application
+    #   more information about the typical pattern, see [Application
     #   Code][1].
     #
     #   You can provide such series of SQL statements, where output of one
@@ -894,8 +908,8 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] cloud_watch_logging_option_id
     #   The `CloudWatchLoggingOptionId` of the CloudWatch logging option to
-    #   delete. You can use the DescribeApplication operation to get the
-    #   `CloudWatchLoggingOptionId`.
+    #   delete. You can get the `CloudWatchLoggingOptionId` by using the
+    #   DescribeApplication operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationCloudWatchLoggingOptionRequest AWS API Documentation
@@ -930,8 +944,8 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] input_id
     #   The ID of the input configuration from which to delete the input
-    #   configuration. You can get a list of the input IDs for an
-    #   application using the DescribeApplication operation.
+    #   processing configuration. You can get a list of the input IDs for an
+    #   application by using the DescribeApplication operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationInputProcessingConfigurationRequest AWS API Documentation
@@ -1152,6 +1166,8 @@ module Aws::KinesisAnalytics
     #   @return [Types::InputStartingPositionConfiguration]
     #
     # @!attribute [rw] s3_configuration
+    #   Specify this parameter to discover a schema from data in an S3
+    #   object.
     #   @return [Types::S3Configuration]
     #
     # @!attribute [rw] input_processing_configuration
@@ -1257,16 +1273,16 @@ module Aws::KinesisAnalytics
     #       }
     #
     # @!attribute [rw] name_prefix
-    #   Name prefix to use when creating in-application stream. Suppose you
-    #   specify a prefix "MyInApplicationStream". Amazon Kinesis Analytics
-    #   will then create one or more (as per the `InputParallelism` count
-    #   you specified) in-application streams with names
-    #   "MyInApplicationStream\_001", "MyInApplicationStream\_002" and
+    #   Name prefix to use when creating an in-application stream. Suppose
+    #   that you specify a prefix "MyInApplicationStream." Amazon Kinesis
+    #   Analytics then creates one or more (as per the `InputParallelism`
+    #   count you specified) in-application streams with names
+    #   "MyInApplicationStream\_001," "MyInApplicationStream\_002," and
     #   so on.
     #   @return [String]
     #
     # @!attribute [rw] input_processing_configuration
-    #   The InputProcessingConfiguration for the Input. An input processor
+    #   The InputProcessingConfiguration for the input. An input processor
     #   transforms records as they are received from the stream, before the
     #   application's SQL code executes. Currently, the only input
     #   processing configuration available is InputLambdaProcessor.
@@ -1283,9 +1299,9 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] kinesis_firehose_input
     #   If the streaming source is an Amazon Kinesis Firehose delivery
-    #   stream, identifies the Firehose delivery stream's ARN and an IAM
-    #   role that enables Amazon Kinesis Analytics to access the stream on
-    #   your behalf.
+    #   stream, identifies the delivery stream's ARN and an IAM role that
+    #   enables Amazon Kinesis Analytics to access the stream on your
+    #   behalf.
     #
     #   Note: Either `KinesisStreamsInput` or `KinesisFirehoseInput` is
     #   required.
@@ -1294,7 +1310,7 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] input_parallelism
     #   Describes the number of in-application streams to create.
     #
-    #   Data from your source will be routed to these in-application input
+    #   Data from your source is routed to these in-application input
     #   streams.
     #
     #   (see [Configuring Application Input][1].
@@ -1385,15 +1401,16 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] kinesis_streams_input_description
     #   If an Amazon Kinesis stream is configured as streaming source,
-    #   provides Amazon Kinesis stream's ARN and an IAM role that enables
-    #   Amazon Kinesis Analytics to access the stream on your behalf.
+    #   provides Amazon Kinesis stream's Amazon Resource Name (ARN) and an
+    #   IAM role that enables Amazon Kinesis Analytics to access the stream
+    #   on your behalf.
     #   @return [Types::KinesisStreamsInputDescription]
     #
     # @!attribute [rw] kinesis_firehose_input_description
     #   If an Amazon Kinesis Firehose delivery stream is configured as a
-    #   streaming source, provides the Firehose delivery stream's Amazon
-    #   Resource Name (ARN) and an IAM role that enables Amazon Kinesis
-    #   Analytics to access the stream on your behalf.
+    #   streaming source, provides the delivery stream's ARN and an IAM
+    #   role that enables Amazon Kinesis Analytics to access the stream on
+    #   your behalf.
     #   @return [Types::KinesisFirehoseInputDescription]
     #
     # @!attribute [rw] input_schema
@@ -1427,9 +1444,10 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    # An object that contains the ARN of the [AWS Lambda][1] function that
-    # is used to preprocess records in the stream, and the ARN of the IAM
-    # role used to access the AWS Lambda function.
+    # An object that contains the Amazon Resource Name (ARN) of the [AWS
+    # Lambda][1] function that is used to preprocess records in the stream,
+    # and the ARN of the IAM role that is used to access the AWS Lambda
+    # function.
     #
     #
     #
@@ -1453,7 +1471,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role used to access the AWS Lambda function.
+    #   The ARN of the IAM role that is used to access the AWS Lambda
+    #   function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessor AWS API Documentation
@@ -1464,9 +1483,10 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    # An object that contains the ARN of the [AWS Lambda][1] function that
-    # is used to preprocess records in the stream, and the ARN of the IAM
-    # role used to access the AWS Lambda expression.
+    # An object that contains the Amazon Resource Name (ARN) of the [AWS
+    # Lambda][1] function that is used to preprocess records in the stream,
+    # and the ARN of the IAM role that is used to access the AWS Lambda
+    # expression.
     #
     #
     #
@@ -1482,7 +1502,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role used to access the AWS Lambda function.
+    #   The ARN of the IAM role that is used to access the AWS Lambda
+    #   function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessorDescription AWS API Documentation
@@ -1505,8 +1526,8 @@ module Aws::KinesisAnalytics
     #       }
     #
     # @!attribute [rw] resource_arn_update
-    #   The ARN of the new [AWS Lambda][1] function that is used to
-    #   preprocess the records in the stream.
+    #   The Amazon Resource Name (ARN) of the new [AWS Lambda][1] function
+    #   that is used to preprocess the records in the stream.
     #
     #
     #
@@ -1514,7 +1535,8 @@ module Aws::KinesisAnalytics
     #   @return [String]
     #
     # @!attribute [rw] role_arn_update
-    #   The ARN of the new IAM role used to access the AWS Lambda function.
+    #   The ARN of the new IAM role that is used to access the AWS Lambda
+    #   function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputLambdaProcessorUpdate AWS API Documentation
@@ -1578,9 +1600,8 @@ module Aws::KinesisAnalytics
     end
 
     # Provides a description of a processor that is used to preprocess the
-    # records in the stream prior to being processed by your application
-    # code. Currently, the only input processor available is [AWS
-    # Lambda][1].
+    # records in the stream before being processed by your application code.
+    # Currently, the only input processor available is [AWS Lambda][1].
     #
     #
     #
@@ -1598,7 +1619,7 @@ module Aws::KinesisAnalytics
     #
     # @!attribute [rw] input_lambda_processor
     #   The InputLambdaProcessor that is used to preprocess the records in
-    #   the stream prior to being processed by your application code.
+    #   the stream before being processed by your application code.
     #   @return [Types::InputLambdaProcessor]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputProcessingConfiguration AWS API Documentation
@@ -1716,7 +1737,7 @@ module Aws::KinesisAnalytics
     #   The starting position on the stream.
     #
     #   * `NOW` - Start reading just after the most recent record in the
-    #     stream, start at the request timestamp that the customer issued.
+    #     stream, start at the request time stamp that the customer issued.
     #
     #   * `TRIM_HORIZON` - Start reading at the last untrimmed record in the
     #     stream, which is the oldest record available in the stream. This
@@ -1798,14 +1819,15 @@ module Aws::KinesisAnalytics
     #   @return [Types::InputProcessingConfigurationUpdate]
     #
     # @!attribute [rw] kinesis_streams_input_update
-    #   If a Amazon Kinesis stream is the streaming source to be updated,
-    #   provides an updated stream ARN and IAM role ARN.
+    #   If an Amazon Kinesis stream is the streaming source to be updated,
+    #   provides an updated stream Amazon Resource Name (ARN) and IAM role
+    #   ARN.
     #   @return [Types::KinesisStreamsInputUpdate]
     #
     # @!attribute [rw] kinesis_firehose_input_update
     #   If an Amazon Kinesis Firehose delivery stream is the streaming
-    #   source to be updated, provides an updated stream Amazon Resource
-    #   Name (ARN) and IAM role ARN.
+    #   source to be updated, provides an updated stream ARN and IAM role
+    #   ARN.
     #   @return [Types::KinesisFirehoseInputUpdate]
     #
     # @!attribute [rw] input_schema_update
@@ -1854,9 +1876,9 @@ module Aws::KinesisAnalytics
     end
 
     # Identifies an Amazon Kinesis Firehose delivery stream as the streaming
-    # source. You provide the Firehose delivery stream's Amazon Resource
-    # Name (ARN) and an IAM role ARN that enables Amazon Kinesis Analytics
-    # to access the stream on your behalf.
+    # source. You provide the delivery stream's Amazon Resource Name (ARN)
+    # and an IAM role ARN that enables Amazon Kinesis Analytics to access
+    # the stream on your behalf.
     #
     # @note When making an API call, you may pass KinesisFirehoseInput
     #   data as a hash:
@@ -1867,7 +1889,7 @@ module Aws::KinesisAnalytics
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the input Firehose delivery stream.
+    #   ARN of the input delivery stream.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -1919,13 +1941,14 @@ module Aws::KinesisAnalytics
     #       }
     #
     # @!attribute [rw] resource_arn_update
-    #   ARN of the input Amazon Kinesis Firehose delivery stream to read.
+    #   Amazon Resource Name (ARN) of the input Amazon Kinesis Firehose
+    #   delivery stream to read.
     #   @return [String]
     #
     # @!attribute [rw] role_arn_update
-    #   Amazon Resource Name (ARN) of the IAM role that Amazon Kinesis
-    #   Analytics can assume to access the stream on your behalf. You need
-    #   to grant necessary permissions to this role.
+    #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
+    #   access the stream on your behalf. You need to grant necessary
+    #   permissions to this role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseInputUpdate AWS API Documentation
@@ -2021,8 +2044,9 @@ module Aws::KinesisAnalytics
     end
 
     # Identifies an Amazon Kinesis stream as the streaming source. You
-    # provide the stream's ARN and an IAM role ARN that enables Amazon
-    # Kinesis Analytics to access the stream on your behalf.
+    # provide the stream's Amazon Resource Name (ARN) and an IAM role ARN
+    # that enables Amazon Kinesis Analytics to access the stream on your
+    # behalf.
     #
     # @note When making an API call, you may pass KinesisStreamsInput
     #   data as a hash:
@@ -2100,7 +2124,7 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    # When configuring application output, identifies a Amazon Kinesis
+    # When configuring application output, identifies an Amazon Kinesis
     # stream as the destination. You provide the stream Amazon Resource Name
     # (ARN) and also an IAM role ARN that Amazon Kinesis Analytics can use
     # to write to the stream on your behalf.
@@ -2177,6 +2201,88 @@ module Aws::KinesisAnalytics
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsOutputUpdate AWS API Documentation
     #
     class KinesisStreamsOutputUpdate < Struct.new(
+      :resource_arn_update,
+      :role_arn_update)
+      include Aws::Structure
+    end
+
+    # When configuring application output, identifies an AWS Lambda function
+    # as the destination. You provide the function Amazon Resource Name
+    # (ARN) and also an IAM role ARN that Amazon Kinesis Analytics can use
+    # to write to the function on your behalf.
+    #
+    # @note When making an API call, you may pass LambdaOutput
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceARN", # required
+    #         role_arn: "RoleARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the destination Lambda function to
+    #   write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
+    #   write to the destination function on your behalf. You need to grant
+    #   the necessary permissions to this role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/LambdaOutput AWS API Documentation
+    #
+    class LambdaOutput < Struct.new(
+      :resource_arn,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # For an application output, describes the AWS Lambda function
+    # configured as its destination.
+    #
+    # @!attribute [rw] resource_arn
+    #   Amazon Resource Name (ARN) of the destination Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
+    #   write to the destination function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/LambdaOutputDescription AWS API Documentation
+    #
+    class LambdaOutputDescription < Struct.new(
+      :resource_arn,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # When updating an output configuration using the UpdateApplication
+    # operation, provides information about an AWS Lambda function
+    # configured as the destination.
+    #
+    # @note When making an API call, you may pass LambdaOutputUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn_update: "ResourceARN",
+    #         role_arn_update: "RoleARN",
+    #       }
+    #
+    # @!attribute [rw] resource_arn_update
+    #   Amazon Resource Name (ARN) of the destination Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn_update
+    #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
+    #   write to the destination function on your behalf. You need to grant
+    #   the necessary permissions to this role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/LambdaOutputUpdate AWS API Documentation
+    #
+    class LambdaOutputUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update)
       include Aws::Structure
@@ -2289,6 +2395,10 @@ module Aws::KinesisAnalytics
     #           resource_arn: "ResourceARN", # required
     #           role_arn: "RoleARN", # required
     #         },
+    #         lambda_output: {
+    #           resource_arn: "ResourceARN", # required
+    #           role_arn: "RoleARN", # required
+    #         },
     #         destination_schema: { # required
     #           record_format_type: "JSON", # accepts JSON, CSV
     #         },
@@ -2307,6 +2417,10 @@ module Aws::KinesisAnalytics
     #   destination.
     #   @return [Types::KinesisFirehoseOutput]
     #
+    # @!attribute [rw] lambda_output
+    #   Identifies an AWS Lambda function as the destination.
+    #   @return [Types::LambdaOutput]
+    #
     # @!attribute [rw] destination_schema
     #   Describes the data format when records are written to the
     #   destination. For more information, see [Configuring Application
@@ -2323,6 +2437,7 @@ module Aws::KinesisAnalytics
       :name,
       :kinesis_streams_output,
       :kinesis_firehose_output,
+      :lambda_output,
       :destination_schema)
       include Aws::Structure
     end
@@ -2350,6 +2465,11 @@ module Aws::KinesisAnalytics
     #   the destination where output is written.
     #   @return [Types::KinesisFirehoseOutputDescription]
     #
+    # @!attribute [rw] lambda_output_description
+    #   Describes the AWS Lambda function configured as the destination
+    #   where output is written.
+    #   @return [Types::LambdaOutputDescription]
+    #
     # @!attribute [rw] destination_schema
     #   Data format used for writing data to the destination.
     #   @return [Types::DestinationSchema]
@@ -2361,6 +2481,7 @@ module Aws::KinesisAnalytics
       :name,
       :kinesis_streams_output_description,
       :kinesis_firehose_output_description,
+      :lambda_output_description,
       :destination_schema)
       include Aws::Structure
     end
@@ -2379,6 +2500,10 @@ module Aws::KinesisAnalytics
     #           role_arn_update: "RoleARN",
     #         },
     #         kinesis_firehose_output_update: {
+    #           resource_arn_update: "ResourceARN",
+    #           role_arn_update: "RoleARN",
+    #         },
+    #         lambda_output_update: {
     #           resource_arn_update: "ResourceARN",
     #           role_arn_update: "RoleARN",
     #         },
@@ -2404,9 +2529,13 @@ module Aws::KinesisAnalytics
     #   @return [Types::KinesisStreamsOutputUpdate]
     #
     # @!attribute [rw] kinesis_firehose_output_update
-    #   Describes a Amazon Kinesis Firehose delivery stream as the
+    #   Describes an Amazon Kinesis Firehose delivery stream as the
     #   destination for the output.
     #   @return [Types::KinesisFirehoseOutputUpdate]
+    #
+    # @!attribute [rw] lambda_output_update
+    #   Describes an AWS Lambda function as the destination for the output.
+    #   @return [Types::LambdaOutputUpdate]
     #
     # @!attribute [rw] destination_schema_update
     #   Describes the data format when records are written to the
@@ -2425,6 +2554,7 @@ module Aws::KinesisAnalytics
       :name_update,
       :kinesis_streams_output_update,
       :kinesis_firehose_output_update,
+      :lambda_output_update,
       :destination_schema_update)
       include Aws::Structure
     end
@@ -2552,11 +2682,10 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] s3_reference_data_source
     #   Identifies the S3 bucket and object that contains the reference
     #   data. Also identifies the IAM role Amazon Kinesis Analytics can
-    #   assume to read this object on your behalf.
-    #
-    #   An Amazon Kinesis Analytics application loads reference data only
-    #   once. If the data changes, you call the UpdateApplication operation
-    #   to trigger reloading of data into your application.
+    #   assume to read this object on your behalf. An Amazon Kinesis
+    #   Analytics application loads reference data only once. If the data
+    #   changes, you call the UpdateApplication operation to trigger
+    #   reloading of data into your application.
     #   @return [Types::S3ReferenceDataSource]
     #
     # @!attribute [rw] reference_schema
@@ -2683,6 +2812,11 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # Provides a description of an Amazon S3 data source, including the
+    # Amazon Resource Name (ARN) of the S3 bucket, the ARN of the IAM role
+    # that is used to access the bucket, and the name of the S3 object that
+    # contains the data.
+    #
     # @note When making an API call, you may pass S3Configuration
     #   data as a hash:
     #
@@ -2693,12 +2827,15 @@ module Aws::KinesisAnalytics
     #       }
     #
     # @!attribute [rw] role_arn
+    #   IAM ARN of the role used to access the data.
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
+    #   ARN of the S3 bucket that contains the data.
     #   @return [String]
     #
     # @!attribute [rw] file_key
+    #   The name of the object that contains the data.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3Configuration AWS API Documentation
@@ -2986,6 +3123,10 @@ module Aws::KinesisAnalytics
     #                 role_arn_update: "RoleARN",
     #               },
     #               kinesis_firehose_output_update: {
+    #                 resource_arn_update: "ResourceARN",
+    #                 role_arn_update: "RoleARN",
+    #               },
+    #               lambda_output_update: {
     #                 resource_arn_update: "ResourceARN",
     #                 role_arn_update: "RoleARN",
     #               },

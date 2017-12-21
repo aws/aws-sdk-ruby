@@ -99,6 +99,9 @@ module Aws::KinesisAnalytics
     KinesisStreamsOutput = Shapes::StructureShape.new(name: 'KinesisStreamsOutput')
     KinesisStreamsOutputDescription = Shapes::StructureShape.new(name: 'KinesisStreamsOutputDescription')
     KinesisStreamsOutputUpdate = Shapes::StructureShape.new(name: 'KinesisStreamsOutputUpdate')
+    LambdaOutput = Shapes::StructureShape.new(name: 'LambdaOutput')
+    LambdaOutputDescription = Shapes::StructureShape.new(name: 'LambdaOutputDescription')
+    LambdaOutputUpdate = Shapes::StructureShape.new(name: 'LambdaOutputUpdate')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListApplicationsInputLimit = Shapes::IntegerShape.new(name: 'ListApplicationsInputLimit')
     ListApplicationsRequest = Shapes::StructureShape.new(name: 'ListApplicationsRequest')
@@ -437,6 +440,18 @@ module Aws::KinesisAnalytics
     KinesisStreamsOutputUpdate.add_member(:role_arn_update, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARNUpdate"))
     KinesisStreamsOutputUpdate.struct_class = Types::KinesisStreamsOutputUpdate
 
+    LambdaOutput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
+    LambdaOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    LambdaOutput.struct_class = Types::LambdaOutput
+
+    LambdaOutputDescription.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARN"))
+    LambdaOutputDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    LambdaOutputDescription.struct_class = Types::LambdaOutputDescription
+
+    LambdaOutputUpdate.add_member(:resource_arn_update, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "ResourceARNUpdate"))
+    LambdaOutputUpdate.add_member(:role_arn_update, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARNUpdate"))
+    LambdaOutputUpdate.struct_class = Types::LambdaOutputUpdate
+
     ListApplicationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: ListApplicationsInputLimit, location_name: "Limit"))
     ListApplicationsRequest.add_member(:exclusive_start_application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ExclusiveStartApplicationName"))
     ListApplicationsRequest.struct_class = Types::ListApplicationsRequest
@@ -452,6 +467,7 @@ module Aws::KinesisAnalytics
     Output.add_member(:name, Shapes::ShapeRef.new(shape: InAppStreamName, required: true, location_name: "Name"))
     Output.add_member(:kinesis_streams_output, Shapes::ShapeRef.new(shape: KinesisStreamsOutput, location_name: "KinesisStreamsOutput"))
     Output.add_member(:kinesis_firehose_output, Shapes::ShapeRef.new(shape: KinesisFirehoseOutput, location_name: "KinesisFirehoseOutput"))
+    Output.add_member(:lambda_output, Shapes::ShapeRef.new(shape: LambdaOutput, location_name: "LambdaOutput"))
     Output.add_member(:destination_schema, Shapes::ShapeRef.new(shape: DestinationSchema, required: true, location_name: "DestinationSchema"))
     Output.struct_class = Types::Output
 
@@ -459,6 +475,7 @@ module Aws::KinesisAnalytics
     OutputDescription.add_member(:name, Shapes::ShapeRef.new(shape: InAppStreamName, location_name: "Name"))
     OutputDescription.add_member(:kinesis_streams_output_description, Shapes::ShapeRef.new(shape: KinesisStreamsOutputDescription, location_name: "KinesisStreamsOutputDescription"))
     OutputDescription.add_member(:kinesis_firehose_output_description, Shapes::ShapeRef.new(shape: KinesisFirehoseOutputDescription, location_name: "KinesisFirehoseOutputDescription"))
+    OutputDescription.add_member(:lambda_output_description, Shapes::ShapeRef.new(shape: LambdaOutputDescription, location_name: "LambdaOutputDescription"))
     OutputDescription.add_member(:destination_schema, Shapes::ShapeRef.new(shape: DestinationSchema, location_name: "DestinationSchema"))
     OutputDescription.struct_class = Types::OutputDescription
 
@@ -468,6 +485,7 @@ module Aws::KinesisAnalytics
     OutputUpdate.add_member(:name_update, Shapes::ShapeRef.new(shape: InAppStreamName, location_name: "NameUpdate"))
     OutputUpdate.add_member(:kinesis_streams_output_update, Shapes::ShapeRef.new(shape: KinesisStreamsOutputUpdate, location_name: "KinesisStreamsOutputUpdate"))
     OutputUpdate.add_member(:kinesis_firehose_output_update, Shapes::ShapeRef.new(shape: KinesisFirehoseOutputUpdate, location_name: "KinesisFirehoseOutputUpdate"))
+    OutputUpdate.add_member(:lambda_output_update, Shapes::ShapeRef.new(shape: LambdaOutputUpdate, location_name: "LambdaOutputUpdate"))
     OutputUpdate.add_member(:destination_schema_update, Shapes::ShapeRef.new(shape: DestinationSchema, location_name: "DestinationSchemaUpdate"))
     OutputUpdate.struct_class = Types::OutputUpdate
 

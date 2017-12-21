@@ -980,6 +980,8 @@ module Aws::CodeBuild
     #   resp.platforms[0].languages[0].images #=> Array
     #   resp.platforms[0].languages[0].images[0].name #=> String
     #   resp.platforms[0].languages[0].images[0].description #=> String
+    #   resp.platforms[0].languages[0].images[0].versions #=> Array
+    #   resp.platforms[0].languages[0].images[0].versions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImages AWS API Documentation
     #
@@ -1447,7 +1449,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

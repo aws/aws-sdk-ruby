@@ -74,6 +74,12 @@ module Aws::EC2
       data[:private_ip_address]
     end
 
+    # Any tags assigned to the Elastic IP address.
+    # @return [Array<Types::Tag>]
+    def tags
+      data[:tags]
+    end
+
     # @!endgroup
 
     # @return [Client]

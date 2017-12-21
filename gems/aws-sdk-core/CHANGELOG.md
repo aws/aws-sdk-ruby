@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.13.0 (2017-12-21)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.12.0 (2017-12-20)
 ------------------
 
