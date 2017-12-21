@@ -57,7 +57,7 @@ group :build do
 end
 
 group :docs do
-  gem 'yard', '0.9.5'
+  gem 'yard', ~> '0.9.11'
   gem 'yard-sitemap', '~> 1.0'
   gem 'rdiscount'
 end
