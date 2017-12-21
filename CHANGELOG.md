@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.108 (2017-12-21)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
