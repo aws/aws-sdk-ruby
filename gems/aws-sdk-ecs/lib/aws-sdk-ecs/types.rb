@@ -548,6 +548,10 @@ module Aws::ECS
     #   container instance, but also allow the container to consume more
     #   memory resources when needed.
     #
+    #   The Docker daemon reserves a minimum of 4 MiB of memory for a
+    #   container, so you should not specify fewer than 4 MiB of memory for
+    #   your containers.
+    #
     #
     #
     #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
@@ -1342,6 +1346,7 @@ module Aws::ECS
     #             assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
+    #         health_check_grace_period_seconds: 1,
     #       }
     #
     # @!attribute [rw] cluster
@@ -1467,6 +1472,19 @@ module Aws::ECS
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] health_check_grace_period_seconds
+    #   The period of time, in seconds, that the Amazon ECS service
+    #   scheduler should ignore unhealthy Elastic Load Balancing target
+    #   health checks after a task has first started. This is only valid if
+    #   your service is configured to use a load balancer. If your
+    #   service's tasks take a while to start and respond to ELB health
+    #   checks, you can specify a health check grace period of up to 1,800
+    #   seconds during which the ECS service scheduler will ignore ELB
+    #   health check status. This grace period can prevent the ECS service
+    #   scheduler from marking tasks as unhealthy and stopping them before
+    #   they have time to come up.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
     #
     class CreateServiceRequest < Struct.new(
@@ -1482,7 +1500,8 @@ module Aws::ECS
       :deployment_configuration,
       :placement_constraints,
       :placement_strategy,
-      :network_configuration)
+      :network_configuration,
+      :health_check_grace_period_seconds)
       include Aws::Structure
     end
 
@@ -1834,7 +1853,7 @@ module Aws::ECS
     #
     #   * runningEC2TasksCount
     #
-    #   * RunningFargateTasksCount
+    #   * runningFargateTasksCount
     #
     #   * pendingEC2TasksCount
     #
@@ -3297,9 +3316,10 @@ module Aws::ECS
     # instance to send or receive traffic. Port mappings are specified as
     # part of the container definition.
     #
-    # If using containers in a task with the Fargate launch type, exposed
-    # ports should be specified using `containerPort`. The `hostPort` can be
-    # left blank or it must be the same value as the `containerPort`.
+    # If using containers in a task with the `awsvpc` or `host` network
+    # mode, exposed ports should be specified using `containerPort`. The
+    # `hostPort` can be left blank or it must be the same value as the
+    # `containerPort`.
     #
     # After a task reaches the `RUNNING` status, manual and automatic host
     # and container port assignments are visible in the `networkBindings`
@@ -3318,10 +3338,10 @@ module Aws::ECS
     #   The port number on the container that is bound to the user-specified
     #   or automatically assigned host port.
     #
-    #   If using containers in a task with the Fargate launch type, exposed
-    #   ports should be specified using `containerPort`.
+    #   If using containers in a task with the `awsvpc` or `host` network
+    #   mode, exposed ports should be specified using `containerPort`.
     #
-    #   If using containers in a task with the EC2 launch type and you
+    #   If using containers in a task with the `bridge` network mode and you
     #   specify a container port and not a host port, your container
     #   automatically receives a host port in the ephemeral port range (for
     #   more information, see `hostPort`). Port mappings that are
@@ -3333,16 +3353,16 @@ module Aws::ECS
     #   The port number on the container instance to reserve for your
     #   container.
     #
-    #   If using containers in a task with the Fargate launch type, the
-    #   `hostPort` can either be left blank or needs to be the same value as
-    #   the `containerPort`.
+    #   If using containers in a task with the `awsvpc` or `host` network
+    #   mode, the `hostPort` can either be left blank or needs to be the
+    #   same value as the `containerPort`.
     #
-    #   If using containers in a task with the EC2 launch type, you can
-    #   specify a non-reserved host port for your container port mapping, or
-    #   you can omit the `hostPort` (or set it to `0`) while specifying a
-    #   `containerPort` and your container automatically receives a port in
-    #   the ephemeral port range for your container instance operating
-    #   system and Docker version.
+    #   If using containers in a task with the `bridge` network mode, you
+    #   can specify a non-reserved host port for your container port
+    #   mapping, or you can omit the `hostPort` (or set it to `0`) while
+    #   specifying a `containerPort` and your container automatically
+    #   receives a port in the ephemeral port range for your container
+    #   instance operating system and Docker version.
     #
     #   The default ephemeral port range for Docker version 1.6.0 and later
     #   is listed on the instance under
@@ -3726,12 +3746,19 @@ module Aws::ECS
     #
     # @!attribute [rw] cpu
     #   The number of `cpu` units used by the task. If using the EC2 launch
-    #   type, this field is optional and any value can be used. If you are
-    #   using the Fargate launch type, this field is required and you must
-    #   use one of the following values, which determines your range of
-    #   valid values for the `memory` parameter:
+    #   type, this field is optional and any value can be used.
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 512MB, 1GB, 2GB
+    #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
+    #   containers. We recommend specifying container-level resources for
+    #   Windows containers.
+    #
+    #    </note>
+    #
+    #   If you are using the Fargate launch type, this field is required and
+    #   you must use one of the following values, which determines your
+    #   range of valid values for the `memory` parameter:
+    #
+    #   * 256 (.25 vCPU) - Available `memory` values: 0.5GB, 1GB, 2GB
     #
     #   * 512 (.5 vCPU) - Available `memory` values: 1GB, 2GB, 3GB, 4GB
     #
@@ -3747,12 +3774,19 @@ module Aws::ECS
     #
     # @!attribute [rw] memory
     #   The amount (in MiB) of memory used by the task. If using the EC2
-    #   launch type, this field is optional and any value can be used. If
-    #   you are using the Fargate launch type, this field is required and
+    #   launch type, this field is optional and any value can be used.
+    #
+    #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
+    #   containers. We recommend specifying container-level resources for
+    #   Windows containers.
+    #
+    #    </note>
+    #
+    #   If you are using the Fargate launch type, this field is required and
     #   you must use one of the following values, which determines your
     #   range of valid values for the `cpu` parameter:
     #
-    #   * 512MB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
+    #   * 0\.5GB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
     #
     #   * 1GB, 2GB, 3GB, 4GB - Available `cpu` values: 512 (.5 vCPU)
     #
@@ -4128,6 +4162,12 @@ module Aws::ECS
     #   networking mode.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] health_check_grace_period_seconds
+    #   The period of time, in seconds, that the Amazon ECS service
+    #   scheduler ignores unhealthy Elastic Load Balancing target health
+    #   checks after a task has first started.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -4149,7 +4189,8 @@ module Aws::ECS
       :created_at,
       :placement_constraints,
       :placement_strategy,
-      :network_configuration)
+      :network_configuration,
+      :health_check_grace_period_seconds)
       include Aws::Structure
     end
 
@@ -4557,7 +4598,7 @@ module Aws::ECS
     #   the following values, which determines your range of valid values
     #   for the `memory` parameter:
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 512MB, 1GB, 2GB
+    #   * 256 (.25 vCPU) - Available `memory` values: 0.5GB, 1GB, 2GB
     #
     #   * 512 (.5 vCPU) - Available `memory` values: 1GB, 2GB, 3GB, 4GB
     #
@@ -4578,7 +4619,7 @@ module Aws::ECS
     #   use one of the following values, which determines your range of
     #   valid values for the `cpu` parameter:
     #
-    #   * 512MB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
+    #   * 0\.5GB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
     #
     #   * 1GB, 2GB, 3GB, 4GB - Available `cpu` values: 512 (.5 vCPU)
     #
@@ -4865,7 +4906,7 @@ module Aws::ECS
     #   the following values, which determines your range of valid values
     #   for the `memory` parameter:
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 512MB, 1GB, 2GB
+    #   * 256 (.25 vCPU) - Available `memory` values: 0.5GB, 1GB, 2GB
     #
     #   * 512 (.5 vCPU) - Available `memory` values: 1GB, 2GB, 3GB, 4GB
     #
@@ -4886,7 +4927,7 @@ module Aws::ECS
     #   use one of the following values, which determines your range of
     #   valid values for the `cpu` parameter:
     #
-    #   * 512MB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
+    #   * 0\.5GB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
     #
     #   * 1GB, 2GB, 3GB, 4GB - Available `cpu` values: 512 (.5 vCPU)
     #
@@ -5157,6 +5198,7 @@ module Aws::ECS
     #         },
     #         platform_version: "String",
     #         force_new_deployment: false,
+    #         health_check_grace_period_seconds: 1,
     #       }
     #
     # @!attribute [rw] cluster
@@ -5218,6 +5260,19 @@ module Aws::ECS
     #   Whether or not to force a new deployment of the service.
     #   @return [Boolean]
     #
+    # @!attribute [rw] health_check_grace_period_seconds
+    #   The period of time, in seconds, that the Amazon ECS service
+    #   scheduler should ignore unhealthy Elastic Load Balancing target
+    #   health checks after a task has first started. This is only valid if
+    #   your service is configured to use a load balancer. If your
+    #   service's tasks take a while to start and respond to ELB health
+    #   checks, you can specify a health check grace period of up to 1,800
+    #   seconds during which the ECS service scheduler will ignore ELB
+    #   health check status. This grace period can prevent the ECS service
+    #   scheduler from marking tasks as unhealthy and stopping them before
+    #   they have time to come up.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation
     #
     class UpdateServiceRequest < Struct.new(
@@ -5228,7 +5283,8 @@ module Aws::ECS
       :deployment_configuration,
       :network_configuration,
       :platform_version,
-      :force_new_deployment)
+      :force_new_deployment,
+      :health_check_grace_period_seconds)
       include Aws::Structure
     end
 

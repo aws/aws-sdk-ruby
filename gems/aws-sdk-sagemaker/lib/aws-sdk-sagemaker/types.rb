@@ -374,16 +374,6 @@ module Aws::SageMaker
     #             "EnvironmentKey" => "EnvironmentValue",
     #           },
     #         },
-    #         supplemental_containers: [
-    #           {
-    #             container_hostname: "ContainerHostname",
-    #             image: "Image", # required
-    #             model_data_url: "Url",
-    #             environment: {
-    #               "EnvironmentKey" => "EnvironmentValue",
-    #             },
-    #           },
-    #         ],
     #         execution_role_arn: "RoleArn", # required
     #         tags: [
     #           {
@@ -402,10 +392,6 @@ module Aws::SageMaker
     #   associated artifacts, and custom environment map that the inference
     #   code uses when the model is deployed into production.
     #   @return [Types::ContainerDefinition]
-    #
-    # @!attribute [rw] supplemental_containers
-    #   The additional optional containers to deploy.
-    #   @return [Array<Types::ContainerDefinition>]
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
@@ -434,7 +420,6 @@ module Aws::SageMaker
     class CreateModelInput < Struct.new(
       :model_name,
       :primary_container,
-      :supplemental_containers,
       :execution_role_arn,
       :tags)
       include Aws::Structure
@@ -1019,11 +1004,6 @@ module Aws::SageMaker
     #   deployed in production.
     #   @return [Types::ContainerDefinition]
     #
-    # @!attribute [rw] supplemental_containers
-    #   The description of additional optional containers that you defined
-    #   when creating the model.
-    #   @return [Array<Types::ContainerDefinition>]
-    #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that you specified
     #   for the model.
@@ -1042,7 +1022,6 @@ module Aws::SageMaker
     class DescribeModelOutput < Struct.new(
       :model_name,
       :primary_container,
-      :supplemental_containers,
       :execution_role_arn,
       :creation_time,
       :model_arn)

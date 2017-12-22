@@ -27,6 +27,7 @@ module Aws::Inspector
     AgentIdList = Shapes::ListShape.new(name: 'AgentIdList')
     AgentPreview = Shapes::StructureShape.new(name: 'AgentPreview')
     AgentPreviewList = Shapes::ListShape.new(name: 'AgentPreviewList')
+    AgentVersion = Shapes::StringShape.new(name: 'AgentVersion')
     AgentsAlreadyRunningAssessmentException = Shapes::StructureShape.new(name: 'AgentsAlreadyRunningAssessmentException')
     AmiId = Shapes::StringShape.new(name: 'AmiId')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -117,6 +118,7 @@ module Aws::Inspector
     IocConfidence = Shapes::IntegerShape.new(name: 'IocConfidence')
     Ipv4Address = Shapes::StringShape.new(name: 'Ipv4Address')
     Ipv4AddressList = Shapes::ListShape.new(name: 'Ipv4AddressList')
+    KernelVersion = Shapes::StringShape.new(name: 'KernelVersion')
     LimitExceededErrorCode = Shapes::StringShape.new(name: 'LimitExceededErrorCode')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAssessmentRunAgentsRequest = Shapes::StructureShape.new(name: 'ListAssessmentRunAgentsRequest')
@@ -148,6 +150,7 @@ module Aws::Inspector
     NoSuchEntityException = Shapes::StructureShape.new(name: 'NoSuchEntityException')
     NumericSeverity = Shapes::FloatShape.new(name: 'NumericSeverity')
     NumericVersion = Shapes::IntegerShape.new(name: 'NumericVersion')
+    OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PreviewAgentsMaxResults = Shapes::IntegerShape.new(name: 'PreviewAgentsMaxResults')
     PreviewAgentsRequest = Shapes::StructureShape.new(name: 'PreviewAgentsRequest')
@@ -221,8 +224,14 @@ module Aws::Inspector
 
     AgentIdList.member = Shapes::ShapeRef.new(shape: AgentId)
 
+    AgentPreview.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, location_name: "hostname"))
     AgentPreview.add_member(:agent_id, Shapes::ShapeRef.new(shape: AgentId, required: true, location_name: "agentId"))
     AgentPreview.add_member(:auto_scaling_group, Shapes::ShapeRef.new(shape: AutoScalingGroup, location_name: "autoScalingGroup"))
+    AgentPreview.add_member(:agent_health, Shapes::ShapeRef.new(shape: AgentHealth, location_name: "agentHealth"))
+    AgentPreview.add_member(:agent_version, Shapes::ShapeRef.new(shape: AgentVersion, location_name: "agentVersion"))
+    AgentPreview.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "operatingSystem"))
+    AgentPreview.add_member(:kernel_version, Shapes::ShapeRef.new(shape: KernelVersion, location_name: "kernelVersion"))
+    AgentPreview.add_member(:ipv4_address, Shapes::ShapeRef.new(shape: Ipv4Address, location_name: "ipv4Address"))
     AgentPreview.struct_class = Types::AgentPreview
 
     AgentPreviewList.member = Shapes::ShapeRef.new(shape: AgentPreview)

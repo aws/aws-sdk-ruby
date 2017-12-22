@@ -409,6 +409,17 @@ module Aws::ECS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html
     #
+    # @option params [Integer] :health_check_grace_period_seconds
+    #   The period of time, in seconds, that the Amazon ECS service scheduler
+    #   should ignore unhealthy Elastic Load Balancing target health checks
+    #   after a task has first started. This is only valid if your service is
+    #   configured to use a load balancer. If your service's tasks take a
+    #   while to start and respond to ELB health checks, you can specify a
+    #   health check grace period of up to 1,800 seconds during which the ECS
+    #   service scheduler will ignore ELB health check status. This grace
+    #   period can prevent the ECS service scheduler from marking tasks as
+    #   unhealthy and stopping them before they have time to come up.
+    #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServiceResponse#service #service} => Types::Service
@@ -573,6 +584,7 @@ module Aws::ECS
     #         assign_public_ip: "ENABLED", # accepts ENABLED, DISABLED
     #       },
     #     },
+    #     health_check_grace_period_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -627,6 +639,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.health_check_grace_period_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService AWS API Documentation
     #
@@ -852,6 +865,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.health_check_grace_period_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService AWS API Documentation
     #
@@ -1136,7 +1150,7 @@ module Aws::ECS
     #
     #   * runningEC2TasksCount
     #
-    #   * RunningFargateTasksCount
+    #   * runningFargateTasksCount
     #
     #   * pendingEC2TasksCount
     #
@@ -1511,6 +1525,7 @@ module Aws::ECS
     #   resp.services[0].network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.services[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.services[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.services[0].health_check_grace_period_seconds #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2895,12 +2910,19 @@ module Aws::ECS
     #
     # @option params [String] :cpu
     #   The number of `cpu` units used by the task. If using the EC2 launch
-    #   type, this field is optional and any value can be used. If you are
-    #   using the Fargate launch type, this field is required and you must use
-    #   one of the following values, which determines your range of valid
-    #   values for the `memory` parameter:
+    #   type, this field is optional and any value can be used.
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 512MB, 1GB, 2GB
+    #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
+    #   containers. We recommend specifying container-level resources for
+    #   Windows containers.
+    #
+    #    </note>
+    #
+    #   If you are using the Fargate launch type, this field is required and
+    #   you must use one of the following values, which determines your range
+    #   of valid values for the `memory` parameter:
+    #
+    #   * 256 (.25 vCPU) - Available `memory` values: 0.5GB, 1GB, 2GB
     #
     #   * 512 (.5 vCPU) - Available `memory` values: 1GB, 2GB, 3GB, 4GB
     #
@@ -2915,12 +2937,19 @@ module Aws::ECS
     #
     # @option params [String] :memory
     #   The amount (in MiB) of memory used by the task. If using the EC2
-    #   launch type, this field is optional and any value can be used. If you
-    #   are using the Fargate launch type, this field is required and you must
-    #   use one of the following values, which determines your range of valid
-    #   values for the `cpu` parameter:
+    #   launch type, this field is optional and any value can be used.
     #
-    #   * 512MB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
+    #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
+    #   containers. We recommend specifying container-level resources for
+    #   Windows containers.
+    #
+    #    </note>
+    #
+    #   If you are using the Fargate launch type, this field is required and
+    #   you must use one of the following values, which determines your range
+    #   of valid values for the `cpu` parameter:
+    #
+    #   * 0\.5GB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
     #
     #   * 1GB, 2GB, 3GB, 4GB - Available `cpu` values: 512 (.5 vCPU)
     #
@@ -3210,6 +3239,28 @@ module Aws::ECS
     #
     # Alternatively, you can use StartTask to use your own scheduler or
     # place tasks manually on specific container instances.
+    #
+    # The Amazon ECS API follows an eventual consistency model, due to the
+    # distributed nature of the system supporting the API. This means that
+    # the result of an API command you run that affects your Amazon ECS
+    # resources might not be immediately visible to all subsequent commands
+    # you run. You should keep this in mind when you carry out an API
+    # command that immediately follows a previous API command.
+    #
+    # To manage eventual consistency, you can do the following:
+    #
+    # * Confirm the state of the resource before you run a command to modify
+    #   it. Run the DescribeTasks command using an exponential backoff
+    #   algorithm to ensure that you allow enough time for the previous
+    #   command to propagate through the system. To do this, run the
+    #   DescribeTasks command repeatedly, starting with a couple of seconds
+    #   of wait time, and increasing gradually up to five minutes of wait
+    #   time.
+    #
+    # * Add wait time between subsequent commands, even if the DescribeTasks
+    #   command returns an accurate response. Apply an exponential backoff
+    #   algorithm starting with a couple of seconds of wait time, and
+    #   increase gradually up to about five minutes of wait time.
     #
     #
     #
@@ -4247,6 +4298,17 @@ module Aws::ECS
     # @option params [Boolean] :force_new_deployment
     #   Whether or not to force a new deployment of the service.
     #
+    # @option params [Integer] :health_check_grace_period_seconds
+    #   The period of time, in seconds, that the Amazon ECS service scheduler
+    #   should ignore unhealthy Elastic Load Balancing target health checks
+    #   after a task has first started. This is only valid if your service is
+    #   configured to use a load balancer. If your service's tasks take a
+    #   while to start and respond to ELB health checks, you can specify a
+    #   health check grace period of up to 1,800 seconds during which the ECS
+    #   service scheduler will ignore ELB health check status. This grace
+    #   period can prevent the ECS service scheduler from marking tasks as
+    #   unhealthy and stopping them before they have time to come up.
+    #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServiceResponse#service #service} => Types::Service
@@ -4298,6 +4360,7 @@ module Aws::ECS
     #     },
     #     platform_version: "String",
     #     force_new_deployment: false,
+    #     health_check_grace_period_seconds: 1,
     #   })
     #
     # @example Response structure
@@ -4352,6 +4415,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.security_groups #=> Array
     #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
+    #   resp.service.health_check_grace_period_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService AWS API Documentation
     #
@@ -4375,7 +4439,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

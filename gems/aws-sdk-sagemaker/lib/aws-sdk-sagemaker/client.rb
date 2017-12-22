@@ -390,9 +390,8 @@ module Aws::SageMaker
     # Amazon SageMaker then deploys all of the containers that you defined
     # for the model in the hosting environment.
     #
-    # In the `CreateModel` request, you must define at least one container
-    # with the `PrimaryContainer` parameter. You can optionally specify
-    # additional containers with the `SupplementalContainers` parameter.
+    # In the `CreateModel` request, you must define a container with the
+    # `PrimaryContainer` parameter.
     #
     # In the request, you also provide an IAM role that Amazon SageMaker can
     # assume to access model artifacts and docker image for deployment on ML
@@ -408,9 +407,6 @@ module Aws::SageMaker
     #   The location of the primary docker image containing inference code,
     #   associated artifacts, and custom environment map that the inference
     #   code uses when the model is deployed into production.
-    #
-    # @option params [Array<Types::ContainerDefinition>] :supplemental_containers
-    #   The additional optional containers to deploy.
     #
     # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
@@ -447,16 +443,6 @@ module Aws::SageMaker
     #         "EnvironmentKey" => "EnvironmentValue",
     #       },
     #     },
-    #     supplemental_containers: [
-    #       {
-    #         container_hostname: "ContainerHostname",
-    #         image: "Image", # required
-    #         model_data_url: "Url",
-    #         environment: {
-    #           "EnvironmentKey" => "EnvironmentValue",
-    #         },
-    #       },
-    #     ],
     #     execution_role_arn: "RoleArn", # required
     #     tags: [
     #       {
@@ -1067,7 +1053,6 @@ module Aws::SageMaker
     #
     #   * {Types::DescribeModelOutput#model_name #model_name} => String
     #   * {Types::DescribeModelOutput#primary_container #primary_container} => Types::ContainerDefinition
-    #   * {Types::DescribeModelOutput#supplemental_containers #supplemental_containers} => Array&lt;Types::ContainerDefinition&gt;
     #   * {Types::DescribeModelOutput#execution_role_arn #execution_role_arn} => String
     #   * {Types::DescribeModelOutput#creation_time #creation_time} => Time
     #   * {Types::DescribeModelOutput#model_arn #model_arn} => String
@@ -1086,12 +1071,6 @@ module Aws::SageMaker
     #   resp.primary_container.model_data_url #=> String
     #   resp.primary_container.environment #=> Hash
     #   resp.primary_container.environment["EnvironmentKey"] #=> String
-    #   resp.supplemental_containers #=> Array
-    #   resp.supplemental_containers[0].container_hostname #=> String
-    #   resp.supplemental_containers[0].image #=> String
-    #   resp.supplemental_containers[0].model_data_url #=> String
-    #   resp.supplemental_containers[0].environment #=> Hash
-    #   resp.supplemental_containers[0].environment["EnvironmentKey"] #=> String
     #   resp.execution_role_arn #=> String
     #   resp.creation_time #=> Time
     #   resp.model_arn #=> String
@@ -1650,9 +1629,8 @@ module Aws::SageMaker
     # Launches an ML compute instance with the latest version of the
     # libraries and attaches your ML storage volume. After configuring the
     # notebook instance, Amazon SageMaker sets the notebook instance status
-    # to `InService`. A notebook instance's status must be `InService` (is
-    # this same as "Running" in the console?) before you can connect to
-    # your Jupyter notebook.
+    # to `InService`. A notebook instance's status must be `InService`
+    # before you can connect to your Jupyter notebook.
     #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance to start.
@@ -1876,7 +1854,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

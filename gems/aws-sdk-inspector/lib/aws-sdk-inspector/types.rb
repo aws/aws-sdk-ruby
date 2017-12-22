@@ -79,7 +79,7 @@ module Aws::Inspector
     #   data as a hash:
     #
     #       {
-    #         agent_healths: ["HEALTHY"], # required, accepts HEALTHY, UNHEALTHY
+    #         agent_healths: ["HEALTHY"], # required, accepts HEALTHY, UNHEALTHY, UNKNOWN
     #         agent_health_codes: ["IDLE"], # required, accepts IDLE, RUNNING, SHUTDOWN, UNHEALTHY, THROTTLED, UNKNOWN
     #       }
     #
@@ -104,6 +104,11 @@ module Aws::Inspector
 
     # Used as a response element in the PreviewAgents action.
     #
+    # @!attribute [rw] hostname
+    #   The hostname of the EC2 instance on which the Amazon Inspector Agent
+    #   is installed.
+    #   @return [String]
+    #
     # @!attribute [rw] agent_id
     #   The ID of the EC2 instance where the agent is installed.
     #   @return [String]
@@ -113,11 +118,40 @@ module Aws::Inspector
     #   installed.
     #   @return [String]
     #
+    # @!attribute [rw] agent_health
+    #   The health status of the Amazon Inspector Agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_version
+    #   The version of the Amazon Inspector Agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] operating_system
+    #   The operating system running on the EC2 instance on which the Amazon
+    #   Inspector Agent is installed.
+    #   @return [String]
+    #
+    # @!attribute [rw] kernel_version
+    #   The kernel version of the operating system running on the EC2
+    #   instance on which the Amazon Inspector Agent is installed.
+    #   @return [String]
+    #
+    # @!attribute [rw] ipv4_address
+    #   The IP address of the EC2 instance on which the Amazon Inspector
+    #   Agent is installed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AgentPreview AWS API Documentation
     #
     class AgentPreview < Struct.new(
+      :hostname,
       :agent_id,
-      :auto_scaling_group)
+      :auto_scaling_group,
+      :agent_health,
+      :agent_version,
+      :operating_system,
+      :kernel_version,
+      :ipv4_address)
       include Aws::Structure
     end
 
@@ -1444,7 +1478,7 @@ module Aws::Inspector
     #       {
     #         assessment_run_arn: "Arn", # required
     #         filter: {
-    #           agent_healths: ["HEALTHY"], # required, accepts HEALTHY, UNHEALTHY
+    #           agent_healths: ["HEALTHY"], # required, accepts HEALTHY, UNHEALTHY, UNKNOWN
     #           agent_health_codes: ["IDLE"], # required, accepts IDLE, RUNNING, SHUTDOWN, UNHEALTHY, THROTTLED, UNKNOWN
     #         },
     #         next_token: "PaginationToken",
@@ -2030,9 +2064,8 @@ module Aws::Inspector
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role that Amazon Inspector uses to list your EC2
-    #   instances during the assessment run or when you call the
-    #   PreviewAgents action.
+    #   The ARN of the IAM role that grants Amazon Inspector access to AWS
+    #   Services needed to perform security assessments.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRoleRequest AWS API Documentation

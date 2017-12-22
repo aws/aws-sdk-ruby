@@ -19,7 +19,6 @@ module Aws::SageMaker
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     CompressionType = Shapes::StringShape.new(name: 'CompressionType')
     ContainerDefinition = Shapes::StructureShape.new(name: 'ContainerDefinition')
-    ContainerDefinitionList = Shapes::ListShape.new(name: 'ContainerDefinitionList')
     ContainerHostname = Shapes::StringShape.new(name: 'ContainerHostname')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateEndpointConfigInput = Shapes::StructureShape.new(name: 'CreateEndpointConfigInput')
@@ -193,8 +192,6 @@ module Aws::SageMaker
     ContainerDefinition.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentMap, location_name: "Environment"))
     ContainerDefinition.struct_class = Types::ContainerDefinition
 
-    ContainerDefinitionList.member = Shapes::ShapeRef.new(shape: ContainerDefinition)
-
     CreateEndpointConfigInput.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
     CreateEndpointConfigInput.add_member(:production_variants, Shapes::ShapeRef.new(shape: ProductionVariantList, required: true, location_name: "ProductionVariants"))
     CreateEndpointConfigInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -213,7 +210,6 @@ module Aws::SageMaker
 
     CreateModelInput.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     CreateModelInput.add_member(:primary_container, Shapes::ShapeRef.new(shape: ContainerDefinition, required: true, location_name: "PrimaryContainer"))
-    CreateModelInput.add_member(:supplemental_containers, Shapes::ShapeRef.new(shape: ContainerDefinitionList, location_name: "SupplementalContainers"))
     CreateModelInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateModelInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateModelInput.struct_class = Types::CreateModelInput
@@ -302,7 +298,6 @@ module Aws::SageMaker
 
     DescribeModelOutput.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     DescribeModelOutput.add_member(:primary_container, Shapes::ShapeRef.new(shape: ContainerDefinition, required: true, location_name: "PrimaryContainer"))
-    DescribeModelOutput.add_member(:supplemental_containers, Shapes::ShapeRef.new(shape: ContainerDefinitionList, required: true, location_name: "SupplementalContainers"))
     DescribeModelOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
     DescribeModelOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeModelOutput.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "ModelArn"))
