@@ -155,13 +155,13 @@ module Aws::WorkSpaces
 
     # @!group API Operations
 
-    # Creates tags for a WorkSpace.
+    # Creates tags for the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The resource ID of the request.
+    #   The ID of the resource.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags of the request.
+    #   The tags. Each resource can have a maximum of 50 tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -188,13 +188,11 @@ module Aws::WorkSpaces
 
     # Creates one or more WorkSpaces.
     #
-    # <note markdown="1"> This operation is asynchronous and returns before the WorkSpaces are
+    # This operation is asynchronous and returns before the WorkSpaces are
     # created.
     #
-    #  </note>
-    #
     # @option params [required, Array<Types::WorkspaceRequest>] :workspaces
-    #   An array of structures that specify the WorkSpaces to create.
+    #   Information about the WorkSpaces to create.
     #
     # @return [Types::CreateWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -215,6 +213,9 @@ module Aws::WorkSpaces
     #         workspace_properties: {
     #           running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #           running_mode_auto_stop_timeout_in_minutes: 1,
+    #           root_volume_size_gib: 1,
+    #           user_volume_size_gib: 1,
+    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
     #         },
     #         tags: [
     #           {
@@ -237,6 +238,9 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.root_volume_encryption_enabled #=> Boolean
     #   resp.failed_requests[0].workspace_request.workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #   resp.failed_requests[0].workspace_request.workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
+    #   resp.failed_requests[0].workspace_request.workspace_properties.root_volume_size_gib #=> Integer
+    #   resp.failed_requests[0].workspace_request.workspace_properties.user_volume_size_gib #=> Integer
+    #   resp.failed_requests[0].workspace_request.workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS"
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
@@ -247,7 +251,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].directory_id #=> String
     #   resp.pending_requests[0].user_name #=> String
     #   resp.pending_requests[0].ip_address #=> String
-    #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.pending_requests[0].bundle_id #=> String
     #   resp.pending_requests[0].subnet_id #=> String
     #   resp.pending_requests[0].error_message #=> String
@@ -258,6 +262,12 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].root_volume_encryption_enabled #=> Boolean
     #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
+    #   resp.pending_requests[0].workspace_properties.root_volume_size_gib #=> Integer
+    #   resp.pending_requests[0].workspace_properties.user_volume_size_gib #=> Integer
+    #   resp.pending_requests[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS"
+    #   resp.pending_requests[0].modification_states #=> Array
+    #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
+    #   resp.pending_requests[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces AWS API Documentation
     #
@@ -268,13 +278,13 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Deletes tags from a WorkSpace.
+    # Deletes the specified tags from a WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The resource ID of the request.
+    #   The ID of the resource.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag keys of the request.
+    #   The tag keys.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -294,10 +304,10 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes tags for a WorkSpace.
+    # Describes the tags for the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The resource ID of the request.
+    #   The ID of the resource.
     #
     # @return [Types::DescribeTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -324,36 +334,25 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Obtains information about the WorkSpace bundles that are available to
-    # your account in the specified region.
+    # Describes the available WorkSpace bundles.
     #
-    # You can filter the results with either the `BundleIds` parameter, or
-    # the `Owner` parameter, but not both.
-    #
-    # This operation supports pagination with the use of the `NextToken`
-    # request and response parameters. If more results are available, the
-    # `NextToken` response member contains a token that you pass in the next
-    # call to this operation to retrieve the next set of items.
+    # You can filter the results using either bundle ID or owner, but not
+    # both.
     #
     # @option params [Array<String>] :bundle_ids
-    #   An array of strings that contains the identifiers of the bundles to
-    #   retrieve. This parameter cannot be combined with any other filter
-    #   parameter.
+    #   The IDs of the bundles. This parameter cannot be combined with any
+    #   other filter.
     #
     # @option params [String] :owner
-    #   The owner of the bundles to retrieve. This parameter cannot be
-    #   combined with any other filter parameter.
+    #   The owner of the bundles. This parameter cannot be combined with any
+    #   other filter.
     #
-    #   This contains one of the following values:
-    #
-    #   * null- Retrieves the bundles that belong to the account making the
-    #     call.
-    #
-    #   * `AMAZON`- Retrieves the bundles that are provided by AWS.
+    #   Specify `AMAZON` to describe the bundles provided by AWS or null to
+    #   describe the bundles that belong to your account.
     #
     # @option params [String] :next_token
-    #   The `NextToken` value from a previous call to this operation. Pass
-    #   null if this is the first call.
+    #   The token for the next set of results. (You received this token from a
+    #   previous call.)
     #
     # @return [Types::DescribeWorkspaceBundlesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -375,8 +374,9 @@ module Aws::WorkSpaces
     #   resp.bundles[0].name #=> String
     #   resp.bundles[0].owner #=> String
     #   resp.bundles[0].description #=> String
+    #   resp.bundles[0].root_storage.capacity #=> String
     #   resp.bundles[0].user_storage.capacity #=> String
-    #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE"
+    #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles AWS API Documentation
@@ -388,23 +388,16 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Retrieves information about the AWS Directory Service directories in
-    # the region that are registered with Amazon WorkSpaces and are
-    # available to your account.
-    #
-    # This operation supports pagination with the use of the `NextToken`
-    # request and response parameters. If more results are available, the
-    # `NextToken` response member contains a token that you pass in the next
-    # call to this operation to retrieve the next set of items.
+    # Describes the available AWS Directory Service directories that are
+    # registered with Amazon WorkSpaces.
     #
     # @option params [Array<String>] :directory_ids
-    #   An array of strings that contains the directory identifiers to
-    #   retrieve information for. If this member is null, all directories are
-    #   retrieved.
+    #   The identifiers of the directories. If the value is null, all
+    #   directories are retrieved.
     #
     # @option params [String] :next_token
-    #   The `NextToken` value from a previous call to this operation. Pass
-    #   null if this is the first call.
+    #   The token for the next set of results. (You received this token from a
+    #   previous call.)
     #
     # @return [Types::DescribeWorkspaceDirectoriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -450,46 +443,39 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Obtains information about the specified WorkSpaces.
+    # Describes the specified WorkSpaces.
     #
-    # Only one of the filter parameters, such as `BundleId`, `DirectoryId`,
-    # or `WorkspaceIds`, can be specified at a time.
-    #
-    # This operation supports pagination with the use of the `NextToken`
-    # request and response parameters. If more results are available, the
-    # `NextToken` response member contains a token that you pass in the next
-    # call to this operation to retrieve the next set of items.
+    # You can filter the results using bundle ID, directory ID, or owner,
+    # but you can specify only one filter at a time.
     #
     # @option params [Array<String>] :workspace_ids
-    #   An array of strings that contain the identifiers of the WorkSpaces for
-    #   which to retrieve information. This parameter cannot be combined with
-    #   any other filter parameter.
+    #   The IDs of the WorkSpaces. This parameter cannot be combined with any
+    #   other filter.
     #
     #   Because the CreateWorkspaces operation is asynchronous, the identifier
     #   it returns is not immediately available. If you immediately call
     #   DescribeWorkspaces with this identifier, no information is returned.
     #
     # @option params [String] :directory_id
-    #   Specifies the directory identifier to which to limit the WorkSpaces.
-    #   Optionally, you can specify a specific directory user with the
-    #   `UserName` parameter. This parameter cannot be combined with any other
-    #   filter parameter.
+    #   The ID of the directory. In addition, you can optionally specify a
+    #   specific directory user (see `UserName`). This parameter cannot be
+    #   combined with any other filter.
     #
     # @option params [String] :user_name
-    #   Used with the `DirectoryId` parameter to specify the directory user
-    #   for whom to obtain the WorkSpace.
+    #   The name of the directory user. You must specify this parameter with
+    #   `DirectoryId`.
     #
     # @option params [String] :bundle_id
-    #   The identifier of a bundle to obtain the WorkSpaces for. All
-    #   WorkSpaces that are created from this bundle will be retrieved. This
-    #   parameter cannot be combined with any other filter parameter.
+    #   The ID of the bundle. All WorkSpaces that are created from this bundle
+    #   are retrieved. This parameter cannot be combined with any other
+    #   filter.
     #
     # @option params [Integer] :limit
     #   The maximum number of items to return.
     #
     # @option params [String] :next_token
-    #   The `NextToken` value from a previous call to this operation. Pass
-    #   null if this is the first call.
+    #   The token for the next set of results. (You received this token from a
+    #   previous call.)
     #
     # @return [Types::DescribeWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -514,7 +500,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].directory_id #=> String
     #   resp.workspaces[0].user_name #=> String
     #   resp.workspaces[0].ip_address #=> String
-    #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "STOPPING", "STOPPED", "ERROR"
+    #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.workspaces[0].bundle_id #=> String
     #   resp.workspaces[0].subnet_id #=> String
     #   resp.workspaces[0].error_message #=> String
@@ -525,6 +511,12 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].root_volume_encryption_enabled #=> Boolean
     #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
+    #   resp.workspaces[0].workspace_properties.root_volume_size_gib #=> Integer
+    #   resp.workspaces[0].workspace_properties.user_volume_size_gib #=> Integer
+    #   resp.workspaces[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS"
+    #   resp.workspaces[0].modification_states #=> Array
+    #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
+    #   resp.workspaces[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces AWS API Documentation
@@ -536,13 +528,14 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the connection status of a specified WorkSpace.
+    # Describes the connection status of the specified WorkSpaces.
     #
     # @option params [Array<String>] :workspace_ids
-    #   An array of strings that contain the identifiers of the WorkSpaces.
+    #   The identifiers of the WorkSpaces.
     #
     # @option params [String] :next_token
-    #   The next token of the request.
+    #   The token for the next set of results. (You received this token from a
+    #   previous call.)
     #
     # @return [Types::DescribeWorkspacesConnectionStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -574,14 +567,13 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Modifies the WorkSpace properties, including the running mode and
-    # AutoStop time.
+    # Modifies the specified WorkSpace properties.
     #
     # @option params [required, String] :workspace_id
     #   The ID of the WorkSpace.
     #
     # @option params [required, Types::WorkspaceProperties] :workspace_properties
-    #   The WorkSpace properties of the request.
+    #   The properties of the WorkSpace.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -592,6 +584,9 @@ module Aws::WorkSpaces
     #     workspace_properties: { # required
     #       running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #       running_mode_auto_stop_timeout_in_minutes: 1,
+    #       root_volume_size_gib: 1,
+    #       user_volume_size_gib: 1,
+    #       compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
     #     },
     #   })
     #
@@ -606,16 +601,14 @@ module Aws::WorkSpaces
 
     # Reboots the specified WorkSpaces.
     #
-    # To be able to reboot a WorkSpace, the WorkSpace must have a **State**
-    # of `AVAILABLE`, `IMPAIRED`, or `INOPERABLE`.
+    # You cannot reboot a WorkSpace unless its state is `AVAILABLE`,
+    # `IMPAIRED`, or `INOPERABLE`.
     #
-    # <note markdown="1"> This operation is asynchronous and returns before the WorkSpaces have
+    # This operation is asynchronous and returns before the WorkSpaces have
     # rebooted.
     #
-    #  </note>
-    #
     # @option params [required, Array<Types::RebootRequest>] :reboot_workspace_requests
-    #   An array of structures that specify the WorkSpaces to reboot.
+    #   The WorkSpaces to reboot.
     #
     # @return [Types::RebootWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -649,31 +642,22 @@ module Aws::WorkSpaces
 
     # Rebuilds the specified WorkSpaces.
     #
+    # You cannot rebuild a WorkSpace unless its state is `AVAILABLE` or
+    # `ERROR`.
+    #
     # Rebuilding a WorkSpace is a potentially destructive action that can
-    # result in the loss of data. Rebuilding a WorkSpace causes the
-    # following to occur:
+    # result in the loss of data. For more information, see [Rebuild a
+    # WorkSpace][1].
     #
-    # * The system is restored to the image of the bundle that the WorkSpace
-    #   is created from. Any applications that have been installed, or
-    #   system settings that have been made since the WorkSpace was created
-    #   will be lost.
-    #
-    # * The data drive (D drive) is re-created from the last automatic
-    #   snapshot taken of the data drive. The current contents of the data
-    #   drive are overwritten. Automatic snapshots of the data drive are
-    #   taken every 12 hours, so the snapshot can be as much as 12 hours
-    #   old.
-    #
-    # To be able to rebuild a WorkSpace, the WorkSpace must have a **State**
-    # of `AVAILABLE` or `ERROR`.
-    #
-    # <note markdown="1"> This operation is asynchronous and returns before the WorkSpaces have
+    # This operation is asynchronous and returns before the WorkSpaces have
     # been completely rebuilt.
     #
-    #  </note>
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html
     #
     # @option params [required, Array<Types::RebuildRequest>] :rebuild_workspace_requests
-    #   An array of structures that specify the WorkSpaces to rebuild.
+    #   The WorkSpaces to rebuild.
     #
     # @return [Types::RebuildWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -705,11 +689,13 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Starts the specified WorkSpaces. The WorkSpaces must have a running
-    # mode of AutoStop and a state of STOPPED.
+    # Starts the specified WorkSpaces.
+    #
+    # You cannot start a WorkSpace unless it has a running mode of
+    # `AutoStop` and a state of `STOPPED`.
     #
     # @option params [required, Array<Types::StartRequest>] :start_workspace_requests
-    #   The requests.
+    #   The WorkSpaces to start.
     #
     # @return [Types::StartWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -741,12 +727,13 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Stops the specified WorkSpaces. The WorkSpaces must have a running
-    # mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or
-    # ERROR.
+    # Stops the specified WorkSpaces.
+    #
+    # You cannot stop a WorkSpace unless it has a running mode of `AutoStop`
+    # and a state of `AVAILABLE`, `IMPAIRED`, `UNHEALTHY`, or `ERROR`.
     #
     # @option params [required, Array<Types::StopRequest>] :stop_workspace_requests
-    #   The requests.
+    #   The WorkSpaces to stop.
     #
     # @return [Types::StopWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -781,19 +768,16 @@ module Aws::WorkSpaces
     # Terminates the specified WorkSpaces.
     #
     # Terminating a WorkSpace is a permanent action and cannot be undone.
-    # The user's data is not maintained and will be destroyed. If you need
-    # to archive any user data, contact Amazon Web Services before
-    # terminating the WorkSpace.
+    # The user's data is destroyed. If you need to archive any user data,
+    # contact Amazon Web Services before terminating the WorkSpace.
     #
     # You can terminate a WorkSpace that is in any state except `SUSPENDED`.
     #
-    # <note markdown="1"> This operation is asynchronous and returns before the WorkSpaces have
+    # This operation is asynchronous and returns before the WorkSpaces have
     # been completely terminated.
     #
-    #  </note>
-    #
     # @option params [required, Array<Types::TerminateRequest>] :terminate_workspace_requests
-    #   An array of structures that specify the WorkSpaces to terminate.
+    #   The WorkSpaces to terminate.
     #
     # @return [Types::TerminateWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -838,7 +822,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8,10 +8,10 @@
 module Aws::WorkSpaces
   module Types
 
-    # Contains information about the compute type of a WorkSpace bundle.
+    # Information about the compute type.
     #
     # @!attribute [rw] name
-    #   The name of the compute type for the bundle.
+    #   The compute type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ComputeType AWS API Documentation
@@ -21,8 +21,6 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # The request of the CreateTags operation.
-    #
     # @note When making an API call, you may pass CreateTagsRequest
     #   data as a hash:
     #
@@ -37,11 +35,11 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The resource ID of the request.
+    #   The ID of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags of the request.
+    #   The tags. Each resource can have a maximum of 50 tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsRequest AWS API Documentation
@@ -52,14 +50,10 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # The result of the CreateTags operation.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsResult AWS API Documentation
     #
     class CreateTagsResult < Aws::EmptyStructure; end
 
-    # Contains the inputs for the CreateWorkspaces operation.
-    #
     # @note When making an API call, you may pass CreateWorkspacesRequest
     #   data as a hash:
     #
@@ -75,6 +69,9 @@ module Aws::WorkSpaces
     #             workspace_properties: {
     #               running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #               running_mode_auto_stop_timeout_in_minutes: 1,
+    #               root_volume_size_gib: 1,
+    #               user_volume_size_gib: 1,
+    #               compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
     #             },
     #             tags: [
     #               {
@@ -87,7 +84,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspaces
-    #   An array of structures that specify the WorkSpaces to create.
+    #   Information about the WorkSpaces to create.
     #   @return [Array<Types::WorkspaceRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesRequest AWS API Documentation
@@ -97,21 +94,17 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the result of the CreateWorkspaces operation.
-    #
     # @!attribute [rw] failed_requests
-    #   An array of structures that represent the WorkSpaces that could not
-    #   be created.
+    #   Information about the WorkSpaces that could not be created.
     #   @return [Array<Types::FailedCreateWorkspaceRequest>]
     #
     # @!attribute [rw] pending_requests
-    #   An array of structures that represent the WorkSpaces that were
-    #   created.
+    #   Information about the WorkSpaces that were created.
     #
-    #   Because this operation is asynchronous, the identifier in
-    #   `WorkspaceId` is not immediately available. If you immediately call
-    #   DescribeWorkspaces with this identifier, no information will be
-    #   returned.
+    #   Because this operation is asynchronous, the identifier returned is
+    #   not immediately available for use with other operations. For
+    #   example, if you call DescribeWorkspaces before the WorkSpace is
+    #   created, the information returned can be incomplete.
     #   @return [Array<Types::Workspace>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesResult AWS API Documentation
@@ -122,29 +115,30 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains default WorkSpace creation information.
+    # Information about defaults used to create a WorkSpace.
     #
     # @!attribute [rw] enable_work_docs
-    #   Specifies if the directory is enabled for Amazon WorkDocs.
+    #   Indicates whether the directory is enabled for Amazon WorkDocs.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_internet_access
-    #   A public IP address will be attached to all WorkSpaces that are
-    #   created or rebuilt.
+    #   The public IP address to attach to all WorkSpaces that are created
+    #   or rebuilt.
     #   @return [Boolean]
     #
     # @!attribute [rw] default_ou
-    #   The organizational unit (OU) in the directory that the WorkSpace
-    #   machine accounts are placed in.
+    #   The organizational unit (OU) in the directory for the WorkSpace
+    #   machine accounts.
     #   @return [String]
     #
     # @!attribute [rw] custom_security_group_id
-    #   The identifier of any custom security groups that are applied to the
-    #   WorkSpaces when they are created.
+    #   The identifier of any security groups to apply to WorkSpaces when
+    #   they are created.
     #   @return [String]
     #
     # @!attribute [rw] user_enabled_as_local_administrator
-    #   The WorkSpace user is an administrator on the WorkSpace.
+    #   Indicates whether the WorkSpace user is an administrator on the
+    #   WorkSpace.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultWorkspaceCreationProperties AWS API Documentation
@@ -158,8 +152,6 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # The request of the DeleteTags operation.
-    #
     # @note When making an API call, you may pass DeleteTagsRequest
     #   data as a hash:
     #
@@ -169,11 +161,11 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The resource ID of the request.
+    #   The ID of the resource.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The tag keys of the request.
+    #   The tag keys.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTagsRequest AWS API Documentation
@@ -184,14 +176,10 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # The result of the DeleteTags operation.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTagsResult AWS API Documentation
     #
     class DeleteTagsResult < Aws::EmptyStructure; end
 
-    # The request of the DescribeTags operation.
-    #
     # @note When making an API call, you may pass DescribeTagsRequest
     #   data as a hash:
     #
@@ -200,7 +188,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The resource ID of the request.
+    #   The ID of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsRequest AWS API Documentation
@@ -210,10 +198,8 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # The result of the DescribeTags operation.
-    #
     # @!attribute [rw] tag_list
-    #   The list of tags.
+    #   The tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsResult AWS API Documentation
@@ -223,8 +209,6 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the inputs for the DescribeWorkspaceBundles operation.
-    #
     # @note When making an API call, you may pass DescribeWorkspaceBundlesRequest
     #   data as a hash:
     #
@@ -235,26 +219,21 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] bundle_ids
-    #   An array of strings that contains the identifiers of the bundles to
-    #   retrieve. This parameter cannot be combined with any other filter
-    #   parameter.
+    #   The IDs of the bundles. This parameter cannot be combined with any
+    #   other filter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] owner
-    #   The owner of the bundles to retrieve. This parameter cannot be
-    #   combined with any other filter parameter.
+    #   The owner of the bundles. This parameter cannot be combined with any
+    #   other filter.
     #
-    #   This contains one of the following values:
-    #
-    #   * null- Retrieves the bundles that belong to the account making the
-    #     call.
-    #
-    #   * `AMAZON`- Retrieves the bundles that are provided by AWS.
+    #   Specify `AMAZON` to describe the bundles provided by AWS or null to
+    #   describe the bundles that belong to your account.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` value from a previous call to this operation. Pass
-    #   null if this is the first call.
+    #   The token for the next set of results. (You received this token from
+    #   a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundlesRequest AWS API Documentation
@@ -266,17 +245,14 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the results of the DescribeWorkspaceBundles operation.
-    #
     # @!attribute [rw] bundles
-    #   An array of structures that contain information about the bundles.
+    #   Information about the bundles.
     #   @return [Array<Types::WorkspaceBundle>]
     #
     # @!attribute [rw] next_token
-    #   If not null, more results are available. Pass this value for the
-    #   `NextToken` parameter in a subsequent call to this operation to
-    #   retrieve the next set of items. This token is valid for one day and
-    #   must be used within that time frame.
+    #   The token to use to retrieve the next set of results, or null if
+    #   there are no more results available. This token is valid for one day
+    #   and must be used within that time frame.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundlesResult AWS API Documentation
@@ -287,8 +263,6 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the inputs for the DescribeWorkspaceDirectories operation.
-    #
     # @note When making an API call, you may pass DescribeWorkspaceDirectoriesRequest
     #   data as a hash:
     #
@@ -298,14 +272,13 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] directory_ids
-    #   An array of strings that contains the directory identifiers to
-    #   retrieve information for. If this member is null, all directories
-    #   are retrieved.
+    #   The identifiers of the directories. If the value is null, all
+    #   directories are retrieved.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` value from a previous call to this operation. Pass
-    #   null if this is the first call.
+    #   The token for the next set of results. (You received this token from
+    #   a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectoriesRequest AWS API Documentation
@@ -316,18 +289,14 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the results of the DescribeWorkspaceDirectories operation.
-    #
     # @!attribute [rw] directories
-    #   An array of structures that contain information about the
-    #   directories.
+    #   Information about the directories.
     #   @return [Array<Types::WorkspaceDirectory>]
     #
     # @!attribute [rw] next_token
-    #   If not null, more results are available. Pass this value for the
-    #   `NextToken` parameter in a subsequent call to this operation to
-    #   retrieve the next set of items. This token is valid for one day and
-    #   must be used within that time frame.
+    #   The token to use to retrieve the next set of results, or null if
+    #   there are no more results available. This token is valid for one day
+    #   and must be used within that time frame.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectoriesResult AWS API Documentation
@@ -347,11 +316,12 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_ids
-    #   An array of strings that contain the identifiers of the WorkSpaces.
+    #   The identifiers of the WorkSpaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The next token of the request.
+    #   The token for the next set of results. (You received this token from
+    #   a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatusRequest AWS API Documentation
@@ -363,11 +333,12 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] workspaces_connection_status
-    #   The connection status of the WorkSpace.
+    #   Information about the connection status of the WorkSpace.
     #   @return [Array<Types::WorkspaceConnectionStatus>]
     #
     # @!attribute [rw] next_token
-    #   The next token of the result.
+    #   The token to use to retrieve the next set of results, or null if
+    #   there are no more results available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatusResult AWS API Documentation
@@ -378,8 +349,6 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the inputs for the DescribeWorkspaces operation.
-    #
     # @note When making an API call, you may pass DescribeWorkspacesRequest
     #   data as a hash:
     #
@@ -393,9 +362,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_ids
-    #   An array of strings that contain the identifiers of the WorkSpaces
-    #   for which to retrieve information. This parameter cannot be combined
-    #   with any other filter parameter.
+    #   The IDs of the WorkSpaces. This parameter cannot be combined with
+    #   any other filter.
     #
     #   Because the CreateWorkspaces operation is asynchronous, the
     #   identifier it returns is not immediately available. If you
@@ -404,21 +372,20 @@ module Aws::WorkSpaces
     #   @return [Array<String>]
     #
     # @!attribute [rw] directory_id
-    #   Specifies the directory identifier to which to limit the WorkSpaces.
-    #   Optionally, you can specify a specific directory user with the
-    #   `UserName` parameter. This parameter cannot be combined with any
-    #   other filter parameter.
+    #   The ID of the directory. In addition, you can optionally specify a
+    #   specific directory user (see `UserName`). This parameter cannot be
+    #   combined with any other filter.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   Used with the `DirectoryId` parameter to specify the directory user
-    #   for whom to obtain the WorkSpace.
+    #   The name of the directory user. You must specify this parameter with
+    #   `DirectoryId`.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
-    #   The identifier of a bundle to obtain the WorkSpaces for. All
-    #   WorkSpaces that are created from this bundle will be retrieved. This
-    #   parameter cannot be combined with any other filter parameter.
+    #   The ID of the bundle. All WorkSpaces that are created from this
+    #   bundle are retrieved. This parameter cannot be combined with any
+    #   other filter.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -426,8 +393,8 @@ module Aws::WorkSpaces
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` value from a previous call to this operation. Pass
-    #   null if this is the first call.
+    #   The token for the next set of results. (You received this token from
+    #   a previous call.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesRequest AWS API Documentation
@@ -442,21 +409,17 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the results for the DescribeWorkspaces operation.
-    #
     # @!attribute [rw] workspaces
-    #   An array of structures that contain the information about the
-    #   WorkSpaces.
+    #   Information about the WorkSpaces.
     #
-    #   Because the CreateWorkspaces operation is asynchronous, some of this
-    #   information may be incomplete for a newly-created WorkSpace.
+    #   Because CreateWorkspaces is an asynchronous operation, some of the
+    #   returned information could be incomplete.
     #   @return [Array<Types::Workspace>]
     #
     # @!attribute [rw] next_token
-    #   If not null, more results are available. Pass this value for the
-    #   `NextToken` parameter in a subsequent call to this operation to
-    #   retrieve the next set of items. This token is valid for one day and
-    #   must be used within that time frame.
+    #   The token to use to retrieve the next set of results, or null if
+    #   there are no more results available. This token is valid for one day
+    #   and must be used within that time frame.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesResult AWS API Documentation
@@ -467,11 +430,10 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains information about a WorkSpace that could not be created.
+    # Information about a WorkSpace that could not be created.
     #
     # @!attribute [rw] workspace_request
-    #   A FailedCreateWorkspaceRequest$WorkspaceRequest object that contains
-    #   the information about the WorkSpace that could not be created.
+    #   Information about the WorkSpace.
     #   @return [Types::WorkspaceRequest]
     #
     # @!attribute [rw] error_code
@@ -491,7 +453,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains information about a WorkSpace that could not be rebooted
+    # Information about a WorkSpace that could not be rebooted
     # (RebootWorkspaces), rebuilt (RebuildWorkspaces), terminated
     # (TerminateWorkspaces), started (StartWorkspaces), or stopped
     # (StopWorkspaces).
@@ -517,6 +479,24 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Information about a WorkSpace modification.
+    #
+    # @!attribute [rw] resource
+    #   The resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The modification state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModificationState AWS API Documentation
+    #
+    class ModificationState < Struct.new(
+      :resource,
+      :state)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyWorkspacePropertiesRequest
     #   data as a hash:
     #
@@ -525,6 +505,9 @@ module Aws::WorkSpaces
     #         workspace_properties: { # required
     #           running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #           running_mode_auto_stop_timeout_in_minutes: 1,
+    #           root_volume_size_gib: 1,
+    #           user_volume_size_gib: 1,
+    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
     #         },
     #       }
     #
@@ -533,7 +516,7 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] workspace_properties
-    #   The WorkSpace properties of the request.
+    #   The properties of the WorkSpace.
     #   @return [Types::WorkspaceProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspacePropertiesRequest AWS API Documentation
@@ -548,8 +531,7 @@ module Aws::WorkSpaces
     #
     class ModifyWorkspacePropertiesResult < Aws::EmptyStructure; end
 
-    # Contains information used with the RebootWorkspaces operation to
-    # reboot a WorkSpace.
+    # Information used to reboot a WorkSpace.
     #
     # @note When making an API call, you may pass RebootRequest
     #   data as a hash:
@@ -559,7 +541,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The identifier of the WorkSpace to reboot.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootRequest AWS API Documentation
@@ -569,8 +551,6 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the inputs for the RebootWorkspaces operation.
-    #
     # @note When making an API call, you may pass RebootWorkspacesRequest
     #   data as a hash:
     #
@@ -583,7 +563,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] reboot_workspace_requests
-    #   An array of structures that specify the WorkSpaces to reboot.
+    #   The WorkSpaces to reboot.
     #   @return [Array<Types::RebootRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspacesRequest AWS API Documentation
@@ -593,11 +573,8 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the results of the RebootWorkspaces operation.
-    #
     # @!attribute [rw] failed_requests
-    #   An array of structures representing any WorkSpaces that could not be
-    #   rebooted.
+    #   Information about the WorkSpaces that could not be rebooted.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspacesResult AWS API Documentation
@@ -607,8 +584,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains information used with the RebuildWorkspaces operation to
-    # rebuild a WorkSpace.
+    # Information used to rebuild a WorkSpace.
     #
     # @note When making an API call, you may pass RebuildRequest
     #   data as a hash:
@@ -618,7 +594,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The identifier of the WorkSpace to rebuild.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildRequest AWS API Documentation
@@ -628,8 +604,6 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the inputs for the RebuildWorkspaces operation.
-    #
     # @note When making an API call, you may pass RebuildWorkspacesRequest
     #   data as a hash:
     #
@@ -642,7 +616,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] rebuild_workspace_requests
-    #   An array of structures that specify the WorkSpaces to rebuild.
+    #   The WorkSpaces to rebuild.
     #   @return [Array<Types::RebuildRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesRequest AWS API Documentation
@@ -652,11 +626,8 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the results of the RebuildWorkspaces operation.
-    #
     # @!attribute [rw] failed_requests
-    #   An array of structures representing any WorkSpaces that could not be
-    #   rebuilt.
+    #   Information about the WorkSpaces that could not be rebuilt.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesResult AWS API Documentation
@@ -666,7 +637,20 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the start request.
+    # Information about the root volume for a WorkSpace bundle.
+    #
+    # @!attribute [rw] capacity
+    #   The size of the root volume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RootStorage AWS API Documentation
+    #
+    class RootStorage < Struct.new(
+      :capacity)
+      include Aws::Structure
+    end
+
+    # Information used to start a WorkSpace.
     #
     # @note When making an API call, you may pass StartRequest
     #   data as a hash:
@@ -698,7 +682,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] start_workspace_requests
-    #   The requests.
+    #   The WorkSpaces to start.
     #   @return [Array<Types::StartRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspacesRequest AWS API Documentation
@@ -709,7 +693,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] failed_requests
-    #   The failed requests.
+    #   Information about the WorkSpaces that could not be started.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspacesResult AWS API Documentation
@@ -719,7 +703,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the stop request.
+    # Information used to stop a WorkSpace.
     #
     # @note When making an API call, you may pass StopRequest
     #   data as a hash:
@@ -751,7 +735,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] stop_workspace_requests
-    #   The requests.
+    #   The WorkSpaces to stop.
     #   @return [Array<Types::StopRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspacesRequest AWS API Documentation
@@ -762,7 +746,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] failed_requests
-    #   The failed requests.
+    #   Information about the WorkSpaces that could not be stopped.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspacesResult AWS API Documentation
@@ -772,7 +756,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the tag of the WorkSpace.
+    # Information about a tag.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -798,8 +782,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains information used with the TerminateWorkspaces operation to
-    # terminate a WorkSpace.
+    # Information used to terminate a WorkSpace.
     #
     # @note When making an API call, you may pass TerminateRequest
     #   data as a hash:
@@ -809,7 +792,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The identifier of the WorkSpace to terminate.
+    #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateRequest AWS API Documentation
@@ -819,8 +802,6 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the inputs for the TerminateWorkspaces operation.
-    #
     # @note When making an API call, you may pass TerminateWorkspacesRequest
     #   data as a hash:
     #
@@ -833,7 +814,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] terminate_workspace_requests
-    #   An array of structures that specify the WorkSpaces to terminate.
+    #   The WorkSpaces to terminate.
     #   @return [Array<Types::TerminateRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesRequest AWS API Documentation
@@ -843,11 +824,8 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains the results of the TerminateWorkspaces operation.
-    #
     # @!attribute [rw] failed_requests
-    #   An array of structures representing any WorkSpaces that could not be
-    #   terminated.
+    #   Information about the WorkSpaces that could not be terminated.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesResult AWS API Documentation
@@ -857,10 +835,10 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains information about the user storage for a WorkSpace bundle.
+    # Information about the user storage for a WorkSpace bundle.
     #
     # @!attribute [rw] capacity
-    #   The amount of user storage for the bundle.
+    #   The size of the user storage.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UserStorage AWS API Documentation
@@ -870,19 +848,19 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains information about a WorkSpace.
+    # Information about a WorkSpace.
     #
     # @!attribute [rw] workspace_id
     #   The identifier of the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] directory_id
-    #   The identifier of the AWS Directory Service directory that the
-    #   WorkSpace belongs to.
+    #   The identifier of the AWS Directory Service directory for the
+    #   WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The user that the WorkSpace is assigned to.
+    #   The user for the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] ip_address
@@ -894,24 +872,24 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
-    #   The identifier of the bundle that the WorkSpace was created from.
+    #   The identifier of the bundle used to create the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
-    #   The identifier of the subnet that the WorkSpace is in.
+    #   The identifier of the subnet for the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   If the WorkSpace could not be created, this contains a textual error
+    #   If the WorkSpace could not be created, contains a textual error
     #   message that describes the failure.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   If the WorkSpace could not be created, this contains the error code.
+    #   If the WorkSpace could not be created, contains the error code.
     #   @return [String]
     #
     # @!attribute [rw] computer_name
-    #   The name of the WorkSpace as seen by the operating system.
+    #   The name of the WorkSpace, as seen by the operating system.
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
@@ -919,18 +897,20 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] user_volume_encryption_enabled
-    #   Specifies whether the data stored on the user volume, or D: drive,
-    #   is encrypted.
+    #   Indicates whether the data stored on the user volume is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] root_volume_encryption_enabled
-    #   Specifies whether the data stored on the root volume, or C: drive,
-    #   is encrypted.
+    #   Indicates whether the data stored on the root volume is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] workspace_properties
-    #   Describes the properties of a WorkSpace.
+    #   The properties of the WorkSpace.
     #   @return [Types::WorkspaceProperties]
+    #
+    # @!attribute [rw] modification_states
+    #   The modification states of the WorkSpace.
+    #   @return [Array<Types::ModificationState>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Workspace AWS API Documentation
     #
@@ -948,11 +928,12 @@ module Aws::WorkSpaces
       :volume_encryption_key,
       :user_volume_encryption_enabled,
       :root_volume_encryption_enabled,
-      :workspace_properties)
+      :workspace_properties,
+      :modification_states)
       include Aws::Structure
     end
 
-    # Contains information about a WorkSpace bundle.
+    # Information about a WorkSpace bundle.
     #
     # @!attribute [rw] bundle_id
     #   The bundle identifier.
@@ -963,21 +944,29 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The owner of the bundle. This contains the owner's account
-    #   identifier, or `AMAZON` if the bundle is provided by AWS.
+    #   The owner of the bundle. This is the account identifier of the
+    #   owner, or `AMAZON` if the bundle is provided by AWS.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The bundle description.
+    #   A description.
     #   @return [String]
     #
+    # @!attribute [rw] root_storage
+    #   The size of the root volume.
+    #   @return [Types::RootStorage]
+    #
     # @!attribute [rw] user_storage
-    #   A UserStorage object that specifies the amount of user storage that
-    #   the bundle contains.
+    #   The size of the user storage.
     #   @return [Types::UserStorage]
     #
     # @!attribute [rw] compute_type
-    #   A ComputeType object that specifies the compute type for the bundle.
+    #   The compute type. For more information, see [Amazon WorkSpaces
+    #   Bundles][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles
     #   @return [Types::ComputeType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceBundle AWS API Documentation
@@ -987,6 +976,7 @@ module Aws::WorkSpaces
       :name,
       :owner,
       :description,
+      :root_storage,
       :user_storage,
       :compute_type)
       include Aws::Structure
@@ -999,8 +989,8 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] connection_state
-    #   The connection state of the WorkSpace. Returns UNKOWN if the
-    #   WorkSpace is in a Stopped state.
+    #   The connection state of the WorkSpace. The connection state is
+    #   unknown if the WorkSpace is stopped.
     #   @return [String]
     #
     # @!attribute [rw] connection_state_check_timestamp
@@ -1043,13 +1033,11 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
-    #   An array of strings that contains the identifiers of the subnets
-    #   used with the directory.
+    #   The identifiers of the subnets used with the directory.
     #   @return [Array<String>]
     #
     # @!attribute [rw] dns_ip_addresses
-    #   An array of strings that contains the IP addresses of the DNS
-    #   servers for the directory.
+    #   The IP addresses of the DNS servers for the directory.
     #   @return [Array<String>]
     #
     # @!attribute [rw] customer_user_name
@@ -1076,8 +1064,7 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] workspace_creation_properties
-    #   A structure that specifies the default creation properties for all
-    #   WorkSpaces in the directory.
+    #   The default creation properties for all WorkSpaces in the directory.
     #   @return [Types::DefaultWorkspaceCreationProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceDirectory AWS API Documentation
@@ -1098,7 +1085,7 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Describes the properties of a WorkSpace.
+    # Information about a WorkSpace.
     #
     # @note When making an API call, you may pass WorkspaceProperties
     #   data as a hash:
@@ -1106,12 +1093,18 @@ module Aws::WorkSpaces
     #       {
     #         running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #         running_mode_auto_stop_timeout_in_minutes: 1,
+    #         root_volume_size_gib: 1,
+    #         user_volume_size_gib: 1,
+    #         compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
     #       }
     #
     # @!attribute [rw] running_mode
-    #   The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed
-    #   monthly. AutoStop WorkSpaces are billed by the hour and stopped when
-    #   no longer being used in order to save on costs.
+    #   The running mode. For more information, see [Manage the WorkSpace
+    #   Running Mode][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html
     #   @return [String]
     #
     # @!attribute [rw] running_mode_auto_stop_timeout_in_minutes
@@ -1119,15 +1112,35 @@ module Aws::WorkSpaces
     #   stopped. Configured in 60 minute intervals.
     #   @return [Integer]
     #
+    # @!attribute [rw] root_volume_size_gib
+    #   The size of the root volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] user_volume_size_gib
+    #   The size of the user storage.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compute_type_name
+    #   The compute type. For more information, see [Amazon WorkSpaces
+    #   Bundles][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceProperties AWS API Documentation
     #
     class WorkspaceProperties < Struct.new(
       :running_mode,
-      :running_mode_auto_stop_timeout_in_minutes)
+      :running_mode_auto_stop_timeout_in_minutes,
+      :root_volume_size_gib,
+      :user_volume_size_gib,
+      :compute_type_name)
       include Aws::Structure
     end
 
-    # Contains information about a WorkSpace creation request.
+    # Information used to create a WorkSpace.
     #
     # @note When making an API call, you may pass WorkspaceRequest
     #   data as a hash:
@@ -1142,6 +1155,9 @@ module Aws::WorkSpaces
     #         workspace_properties: {
     #           running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
     #           running_mode_auto_stop_timeout_in_minutes: 1,
+    #           root_volume_size_gib: 1,
+    #           user_volume_size_gib: 1,
+    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS
     #         },
     #         tags: [
     #           {
@@ -1152,21 +1168,19 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] directory_id
-    #   The identifier of the AWS Directory Service directory to create the
-    #   WorkSpace in. You can use the DescribeWorkspaceDirectories operation
-    #   to obtain a list of the directories that are available.
+    #   The identifier of the AWS Directory Service directory for the
+    #   WorkSpace. You can use DescribeWorkspaceDirectories to list the
+    #   available directories.
     #   @return [String]
     #
     # @!attribute [rw] user_name
-    #   The username that the WorkSpace is assigned to. This username must
-    #   exist in the AWS Directory Service directory specified by the
-    #   `DirectoryId` member.
+    #   The username of the user for the WorkSpace. This username must exist
+    #   in the AWS Directory Service directory for the WorkSpace.
     #   @return [String]
     #
     # @!attribute [rw] bundle_id
-    #   The identifier of the bundle to create the WorkSpace from. You can
-    #   use the DescribeWorkspaceBundles operation to obtain a list of the
-    #   bundles that are available.
+    #   The identifier of the bundle for the WorkSpace. You can use
+    #   DescribeWorkspaceBundles to list the available bundles.
     #   @return [String]
     #
     # @!attribute [rw] volume_encryption_key
@@ -1174,21 +1188,19 @@ module Aws::WorkSpaces
     #   @return [String]
     #
     # @!attribute [rw] user_volume_encryption_enabled
-    #   Specifies whether the data stored on the user volume, or D: drive,
-    #   is encrypted.
+    #   Indicates whether the data stored on the user volume is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] root_volume_encryption_enabled
-    #   Specifies whether the data stored on the root volume, or C: drive,
-    #   is encrypted.
+    #   Indicates whether the data stored on the root volume is encrypted.
     #   @return [Boolean]
     #
     # @!attribute [rw] workspace_properties
-    #   Describes the properties of a WorkSpace.
+    #   The WorkSpace properties.
     #   @return [Types::WorkspaceProperties]
     #
     # @!attribute [rw] tags
-    #   The tags of the WorkSpace request.
+    #   The tags for the WorkSpace.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceRequest AWS API Documentation

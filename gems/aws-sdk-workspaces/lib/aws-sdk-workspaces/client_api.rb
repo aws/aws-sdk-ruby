@@ -61,6 +61,10 @@ module Aws::WorkSpaces
     InvalidResourceStateException = Shapes::StructureShape.new(name: 'InvalidResourceStateException')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     Limit = Shapes::IntegerShape.new(name: 'Limit')
+    ModificationResourceEnum = Shapes::StringShape.new(name: 'ModificationResourceEnum')
+    ModificationState = Shapes::StructureShape.new(name: 'ModificationState')
+    ModificationStateEnum = Shapes::StringShape.new(name: 'ModificationStateEnum')
+    ModificationStateList = Shapes::ListShape.new(name: 'ModificationStateList')
     ModifyWorkspacePropertiesRequest = Shapes::StructureShape.new(name: 'ModifyWorkspacePropertiesRequest')
     ModifyWorkspacePropertiesResult = Shapes::StructureShape.new(name: 'ModifyWorkspacePropertiesResult')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
@@ -78,6 +82,8 @@ module Aws::WorkSpaces
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceUnavailableException = Shapes::StructureShape.new(name: 'ResourceUnavailableException')
+    RootStorage = Shapes::StructureShape.new(name: 'RootStorage')
+    RootVolumeSizeGib = Shapes::IntegerShape.new(name: 'RootVolumeSizeGib')
     RunningMode = Shapes::StringShape.new(name: 'RunningMode')
     RunningModeAutoStopTimeoutInMinutes = Shapes::IntegerShape.new(name: 'RunningModeAutoStopTimeoutInMinutes')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
@@ -104,6 +110,7 @@ module Aws::WorkSpaces
     UnsupportedWorkspaceConfigurationException = Shapes::StructureShape.new(name: 'UnsupportedWorkspaceConfigurationException')
     UserName = Shapes::StringShape.new(name: 'UserName')
     UserStorage = Shapes::StructureShape.new(name: 'UserStorage')
+    UserVolumeSizeGib = Shapes::IntegerShape.new(name: 'UserVolumeSizeGib')
     VolumeEncryptionKey = Shapes::StringShape.new(name: 'VolumeEncryptionKey')
     Workspace = Shapes::StructureShape.new(name: 'Workspace')
     WorkspaceBundle = Shapes::StructureShape.new(name: 'WorkspaceBundle')
@@ -225,6 +232,12 @@ module Aws::WorkSpaces
     FailedWorkspaceChangeRequest.add_member(:error_message, Shapes::ShapeRef.new(shape: Description, location_name: "ErrorMessage"))
     FailedWorkspaceChangeRequest.struct_class = Types::FailedWorkspaceChangeRequest
 
+    ModificationState.add_member(:resource, Shapes::ShapeRef.new(shape: ModificationResourceEnum, location_name: "Resource"))
+    ModificationState.add_member(:state, Shapes::ShapeRef.new(shape: ModificationStateEnum, location_name: "State"))
+    ModificationState.struct_class = Types::ModificationState
+
+    ModificationStateList.member = Shapes::ShapeRef.new(shape: ModificationState)
+
     ModifyWorkspacePropertiesRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "WorkspaceId"))
     ModifyWorkspacePropertiesRequest.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, required: true, location_name: "WorkspaceProperties"))
     ModifyWorkspacePropertiesRequest.struct_class = Types::ModifyWorkspacePropertiesRequest
@@ -252,6 +265,9 @@ module Aws::WorkSpaces
 
     RebuildWorkspacesResult.add_member(:failed_requests, Shapes::ShapeRef.new(shape: FailedRebuildWorkspaceRequests, location_name: "FailedRequests"))
     RebuildWorkspacesResult.struct_class = Types::RebuildWorkspacesResult
+
+    RootStorage.add_member(:capacity, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Capacity"))
+    RootStorage.struct_class = Types::RootStorage
 
     StartRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, location_name: "WorkspaceId"))
     StartRequest.struct_class = Types::StartRequest
@@ -313,12 +329,14 @@ module Aws::WorkSpaces
     Workspace.add_member(:user_volume_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UserVolumeEncryptionEnabled"))
     Workspace.add_member(:root_volume_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "RootVolumeEncryptionEnabled"))
     Workspace.add_member(:workspace_properties, Shapes::ShapeRef.new(shape: WorkspaceProperties, location_name: "WorkspaceProperties"))
+    Workspace.add_member(:modification_states, Shapes::ShapeRef.new(shape: ModificationStateList, location_name: "ModificationStates"))
     Workspace.struct_class = Types::Workspace
 
     WorkspaceBundle.add_member(:bundle_id, Shapes::ShapeRef.new(shape: BundleId, location_name: "BundleId"))
     WorkspaceBundle.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     WorkspaceBundle.add_member(:owner, Shapes::ShapeRef.new(shape: BundleOwner, location_name: "Owner"))
     WorkspaceBundle.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    WorkspaceBundle.add_member(:root_storage, Shapes::ShapeRef.new(shape: RootStorage, location_name: "RootStorage"))
     WorkspaceBundle.add_member(:user_storage, Shapes::ShapeRef.new(shape: UserStorage, location_name: "UserStorage"))
     WorkspaceBundle.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "ComputeType"))
     WorkspaceBundle.struct_class = Types::WorkspaceBundle
@@ -351,6 +369,9 @@ module Aws::WorkSpaces
 
     WorkspaceProperties.add_member(:running_mode, Shapes::ShapeRef.new(shape: RunningMode, location_name: "RunningMode"))
     WorkspaceProperties.add_member(:running_mode_auto_stop_timeout_in_minutes, Shapes::ShapeRef.new(shape: RunningModeAutoStopTimeoutInMinutes, location_name: "RunningModeAutoStopTimeoutInMinutes"))
+    WorkspaceProperties.add_member(:root_volume_size_gib, Shapes::ShapeRef.new(shape: RootVolumeSizeGib, location_name: "RootVolumeSizeGib"))
+    WorkspaceProperties.add_member(:user_volume_size_gib, Shapes::ShapeRef.new(shape: UserVolumeSizeGib, location_name: "UserVolumeSizeGib"))
+    WorkspaceProperties.add_member(:compute_type_name, Shapes::ShapeRef.new(shape: Compute, location_name: "ComputeTypeName"))
     WorkspaceProperties.struct_class = Types::WorkspaceProperties
 
     WorkspaceRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
