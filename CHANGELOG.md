@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.110 (2017-12-29)
+------------------
+
 * Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
 
 2.10.109 (2017-12-22)
