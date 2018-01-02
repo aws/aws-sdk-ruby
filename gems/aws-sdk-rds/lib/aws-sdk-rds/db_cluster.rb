@@ -32,7 +32,7 @@ module Aws::RDS
     alias :db_cluster_identifier :id
 
     # For all database engines except Amazon Aurora, `AllocatedStorage`
-    # specifies the allocated storage size in gigabytes (GB). For Aurora,
+    # specifies the allocated storage size in gibibytes (GiB). For Aurora,
     # `AllocatedStorage` always returns 1, because Aurora DB cluster storage
     # size is not fixed, but instead automatically adjusts as needed.
     # @return [Integer]
@@ -498,7 +498,8 @@ module Aws::RDS
     #   The port number on which the instances in the DB cluster accept
     #   connections.
     #
-    #   Default: `3306`
+    #   Default: `3306` if engine is set as aurora or `5432` if set to
+    #   aurora-postgresql.
     # @option options [String] :master_username
     #   The name of the master user for the DB cluster.
     #

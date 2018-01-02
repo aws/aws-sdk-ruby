@@ -1157,7 +1157,8 @@ module Aws::RDS
     #   The port number on which the instances in the DB cluster accept
     #   connections.
     #
-    #   Default: `3306`
+    #   Default: `3306` if engine is set as aurora or `5432` if set to
+    #   aurora-postgresql.
     #   @return [Integer]
     #
     # @!attribute [rw] master_username
@@ -1668,8 +1669,8 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   The amount of storage (in gigabytes) to be initially allocated for
-    #   the DB instance.
+    #   The amount of storage (in gibibytes) to allocate for the DB
+    #   instance.
     #
     #   Type: Integer
     #
@@ -1685,10 +1686,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
-    #     6144.
+    #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     6144.
+    #     16384.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -1698,10 +1699,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
-    #     6144.
+    #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     6144.
+    #     16384.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -1711,10 +1712,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
-    #     6144.
+    #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     6144.
+    #     16384.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -1724,10 +1725,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 10 to
-    #     6144.
+    #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
-    #     6144.
+    #     16384.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -2101,6 +2102,8 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.1.26` (supported in all AWS Regions)
+    #
     #   * `10.1.23` (supported in all AWS Regions)
     #
     #   * `10.1.19` (supported in all AWS Regions)
@@ -2108,6 +2111,8 @@ module Aws::RDS
     #   * `10.1.14` (supported in all AWS Regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.32` (supported in all AWS Regions)
     #
     #   * `10.0.31` (supported in all AWS Regions)
     #
@@ -2118,7 +2123,17 @@ module Aws::RDS
     #   * `10.0.17` (supported in all AWS Regions except us-east-2,
     #     ca-central-1, eu-west-2)
     #
+    #   **Microsoft SQL Server 2017**
+    #
+    #   * `14.00.1000.169.v1` (supported for all editions, and all AWS
+    #     Regions)
+    #
+    #   ^
+    #
     #   **Microsoft SQL Server 2016**
+    #
+    #   * `13.00.4451.0.v1` (supported for all editions, and all AWS
+    #     Regions)
     #
     #   * `13.00.4422.0.v1` (supported for all editions, and all AWS
     #     Regions)
@@ -2279,9 +2294,9 @@ module Aws::RDS
     #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
     #   Improve Performance][1].
     #
-    #   Constraints: Must be a multiple between 3 and 10 of the storage
+    #   Constraints: Must be a multiple between 1 and 50 of the storage
     #   amount for the DB instance. Must also be an integer multiple of
-    #   1000. For example, if the size of your DB instance is 500 GB, then
+    #   1000. For example, if the size of your DB instance is 500 GiB, then
     #   your `Iops` value can be 2000, 3000, 4000, or 5000.
     #
     #
@@ -3409,7 +3424,7 @@ module Aws::RDS
     #
     # @!attribute [rw] allocated_storage
     #   For all database engines except Amazon Aurora, `AllocatedStorage`
-    #   specifies the allocated storage size in gigabytes (GB). For Aurora,
+    #   specifies the allocated storage size in gibibytes (GiB). For Aurora,
     #   `AllocatedStorage` always returns 1, because Aurora DB cluster
     #   storage size is not fixed, but instead automatically adjusts as
     #   needed.
@@ -3866,7 +3881,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   Specifies the allocated storage size in gigabytes (GB).
+    #   Specifies the allocated storage size in gibibytes (GiB).
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -4176,7 +4191,7 @@ module Aws::RDS
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] allocated_storage
-    #   Specifies the allocated storage size specified in gigabytes.
+    #   Specifies the allocated storage size specified in gibibytes.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_create_time
@@ -4771,7 +4786,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   Specifies the allocated storage size in gigabytes (GB).
+    #   Specifies the allocated storage size in gibibytes (GiB).
     #   @return [Integer]
     #
     # @!attribute [rw] status
@@ -8328,80 +8343,16 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] allocated_storage
-    #   The new storage capacity of the RDS instance. Changing this setting
-    #   does not result in an outage and the change is applied during the
-    #   next maintenance window unless `ApplyImmediately` is set to `true`
-    #   for this request.
-    #
-    #   **MySQL**
-    #
-    #   Default: Uses existing setting
-    #
-    #   Valid Values: 5-6144
-    #
-    #   Constraints: Value supplied must be at least 10% greater than the
-    #   current value. Values that are not at least 10% greater than the
-    #   existing value are rounded up so that they are 10% greater than the
-    #   current value.
-    #
-    #   Type: Integer
-    #
-    #   **MariaDB**
-    #
-    #   Default: Uses existing setting
-    #
-    #   Valid Values: 5-6144
-    #
-    #   Constraints: Value supplied must be at least 10% greater than the
-    #   current value. Values that are not at least 10% greater than the
-    #   existing value are rounded up so that they are 10% greater than the
-    #   current value.
-    #
-    #   Type: Integer
-    #
-    #   **PostgreSQL**
-    #
-    #   Default: Uses existing setting
-    #
-    #   Valid Values: 5-6144
-    #
-    #   Constraints: Value supplied must be at least 10% greater than the
-    #   current value. Values that are not at least 10% greater than the
-    #   existing value are rounded up so that they are 10% greater than the
-    #   current value.
-    #
-    #   Type: Integer
-    #
-    #   **Oracle**
-    #
-    #   Default: Uses existing setting
-    #
-    #   Valid Values: 10-6144
-    #
-    #   Constraints: Value supplied must be at least 10% greater than the
-    #   current value. Values that are not at least 10% greater than the
-    #   existing value are rounded up so that they are 10% greater than the
-    #   current value.
-    #
-    #   **SQL Server**
-    #
-    #   Cannot be modified.
-    #
-    #   If you choose to migrate your DB instance from using standard
-    #   storage to using Provisioned IOPS, or from using Provisioned IOPS to
-    #   using standard storage, the process can take time. The duration of
-    #   the migration depends on several factors such as database load,
-    #   storage size, storage type (standard or Provisioned IOPS), amount of
-    #   IOPS provisioned (if any), and the number of prior scale storage
-    #   operations. Typical migration times are under 24 hours, but the
-    #   process can take up to several days in some cases. During the
-    #   migration, the DB instance is available for use, but might
-    #   experience performance degradation. While the migration takes place,
-    #   nightly backups for the instance are suspended. No other Amazon RDS
-    #   operations can take place for the instance, including modifying the
-    #   instance, rebooting the instance, deleting the instance, creating a
-    #   Read Replica for the instance, and creating a DB snapshot of the
+    #   The new amount of storage (in gibibytes) to allocate for the DB
     #   instance.
+    #
+    #   For MariaDB, MySQL, Oracle, and PostgreSQL, the value supplied must
+    #   be at least 10% greater than the current value. Values that are not
+    #   at least 10% greater than the existing value are rounded up so that
+    #   they are 10% greater than the current value.
+    #
+    #   For the valid values for allocated storage for each engine, see
+    #   CreateDBInstance.
     #   @return [Integer]
     #
     # @!attribute [rw] db_instance_class
@@ -8685,25 +8636,14 @@ module Aws::RDS
     #
     # @!attribute [rw] iops
     #   The new Provisioned IOPS (I/O operations per second) value for the
-    #   RDS instance. Changing this setting does not result in an outage and
-    #   the change is applied during the next maintenance window unless the
-    #   `ApplyImmediately` parameter is set to `true` for this request.
+    #   RDS instance.
     #
-    #   Default: Uses existing setting
-    #
-    #   Constraints: Value supplied must be at least 10% greater than the
-    #   current value. Values that are not at least 10% greater than the
-    #   existing value are rounded up so that they are 10% greater than the
-    #   current value. If you are migrating from Provisioned IOPS to
-    #   standard storage, set this value to 0. The DB instance will require
-    #   a reboot for the change in storage type to take effect.
-    #
-    #   **SQL Server**
-    #
-    #   Setting the IOPS value for the SQL Server database engine is not
-    #   supported.
-    #
-    #   Type: Integer
+    #   Changing this setting does not result in an outage and the change is
+    #   applied during the next maintenance window unless the
+    #   `ApplyImmediately` parameter is set to `true` for this request. If
+    #   you are migrating from Provisioned IOPS to standard storage, set
+    #   this value to 0. The DB instance will require a reboot for the
+    #   change in storage type to take effect.
     #
     #   If you choose to migrate your DB instance from using standard
     #   storage to using Provisioned IOPS, or from using Provisioned IOPS to
@@ -8720,6 +8660,13 @@ module Aws::RDS
     #   instance, rebooting the instance, deleting the instance, creating a
     #   Read Replica for the instance, and creating a DB snapshot of the
     #   instance.
+    #
+    #   Constraints: For MariaDB, MySQL, Oracle, and PostgreSQL, the value
+    #   supplied must be at least 10% greater than the current value. Values
+    #   that are not at least 10% greater than the existing value are
+    #   rounded up so that they are 10% greater than the current value.
+    #
+    #   Default: Uses existing setting
     #   @return [Integer]
     #
     # @!attribute [rw] option_group_name
@@ -8759,10 +8706,26 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   Specifies the storage type to be associated with the DB instance.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   If you specify Provisioned IOPS (`io1`), you must also include a
+    #   value for the `Iops` parameter.
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   If you choose to migrate your DB instance from using standard
+    #   storage to using Provisioned IOPS, or from using Provisioned IOPS to
+    #   using standard storage, the process can take time. The duration of
+    #   the migration depends on several factors such as database load,
+    #   storage size, storage type (standard or Provisioned IOPS), amount of
+    #   IOPS provisioned (if any), and the number of prior scale storage
+    #   operations. Typical migration times are under 24 hours, but the
+    #   process can take up to several days in some cases. During the
+    #   migration, the DB instance is available for use, but might
+    #   experience performance degradation. While the migration takes place,
+    #   nightly backups for the instance are suspended. No other Amazon RDS
+    #   operations can take place for the instance, including modifying the
+    #   instance, rebooting the instance, deleting the instance, creating a
+    #   Read Replica for the instance, and creating a DB snapshot of the
+    #   instance.
+    #
+    #   Valid values: `standard | gp2 | io1`
     #
     #   Default: `io1` if the `Iops` parameter is specified, otherwise
     #   `standard`
@@ -13061,7 +13024,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] storage_size
-    #   The valid range of storage in gigabytes. For example, 100 to 6144.
+    #   The valid range of storage in gibibytes. For example, 100 to 16384.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] provisioned_iops
@@ -13069,7 +13032,7 @@ module Aws::RDS
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] iops_to_storage_ratio
-    #   The valid range of Provisioned IOPS to gigabytes of storage
+    #   The valid range of Provisioned IOPS to gibibytes of storage
     #   multiplier. For example, 3-10, which means that provisioned IOPS can
     #   be between 3 and 10 times storage.
     #   @return [Array<Types::DoubleRange>]

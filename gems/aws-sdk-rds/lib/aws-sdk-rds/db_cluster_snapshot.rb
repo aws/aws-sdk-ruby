@@ -60,7 +60,7 @@ module Aws::RDS
       data[:engine]
     end
 
-    # Specifies the allocated storage size in gigabytes (GB).
+    # Specifies the allocated storage size in gibibytes (GiB).
     # @return [Integer]
     def allocated_storage
       data[:allocated_storage]

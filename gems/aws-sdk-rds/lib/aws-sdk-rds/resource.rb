@@ -126,7 +126,8 @@ module Aws::RDS
     #   The port number on which the instances in the DB cluster accept
     #   connections.
     #
-    #   Default: `3306`
+    #   Default: `3306` if engine is set as aurora or `5432` if set to
+    #   aurora-postgresql.
     # @option options [String] :master_username
     #   The name of the master user for the DB cluster.
     #
@@ -477,8 +478,7 @@ module Aws::RDS
     #
     #   Example: `mydbinstance`
     # @option options [Integer] :allocated_storage
-    #   The amount of storage (in gigabytes) to be initially allocated for the
-    #   DB instance.
+    #   The amount of storage (in gibibytes) to allocate for the DB instance.
     #
     #   Type: Integer
     #
@@ -494,9 +494,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
-    #     6144.
+    #     16384.
     #
-    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #     16384.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -506,9 +507,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
-    #     6144.
+    #     16384.
     #
-    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #     16384.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -518,9 +520,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
-    #     6144.
+    #     16384.
     #
-    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #     16384.
     #
     #   * Magnetic storage (standard): Must be an integer from 5 to 3072.
     #
@@ -530,9 +533,10 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 10 to
-    #     6144.
+    #     16384.
     #
-    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to 6144.
+    #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
+    #     16384.
     #
     #   * Magnetic storage (standard): Must be an integer from 10 to 3072.
     #
@@ -872,6 +876,8 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.1.26` (supported in all AWS Regions)
+    #
     #   * `10.1.23` (supported in all AWS Regions)
     #
     #   * `10.1.19` (supported in all AWS Regions)
@@ -879,6 +885,8 @@ module Aws::RDS
     #   * `10.1.14` (supported in all AWS Regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.32` (supported in all AWS Regions)
     #
     #   * `10.0.31` (supported in all AWS Regions)
     #
@@ -889,7 +897,16 @@ module Aws::RDS
     #   * `10.0.17` (supported in all AWS Regions except us-east-2,
     #     ca-central-1, eu-west-2)
     #
+    #   **Microsoft SQL Server 2017**
+    #
+    #   * `14.00.1000.169.v1` (supported for all editions, and all AWS
+    #     Regions)
+    #
+    #   ^
+    #
     #   **Microsoft SQL Server 2016**
+    #
+    #   * `13.00.4451.0.v1` (supported for all editions, and all AWS Regions)
     #
     #   * `13.00.4422.0.v1` (supported for all editions, and all AWS Regions)
     #
@@ -1038,9 +1055,9 @@ module Aws::RDS
     #   valid Iops values, see see [Amazon RDS Provisioned IOPS Storage to
     #   Improve Performance][1].
     #
-    #   Constraints: Must be a multiple between 3 and 10 of the storage amount
+    #   Constraints: Must be a multiple between 1 and 50 of the storage amount
     #   for the DB instance. Must also be an integer multiple of 1000. For
-    #   example, if the size of your DB instance is 500 GB, then your `Iops`
+    #   example, if the size of your DB instance is 500 GiB, then your `Iops`
     #   value can be 2000, 3000, 4000, or 5000.
     #
     #
