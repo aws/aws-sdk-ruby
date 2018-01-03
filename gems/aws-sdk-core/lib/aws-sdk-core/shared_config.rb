@@ -82,7 +82,7 @@ module Aws
       @config_enabled ? true : false
     end
 
-    # Sources static credentials from shared credential/config files.
+    # Sources credentials from shared credential/config files.
     #
     # @param [Hash] opts
     # @option options [String] :profile the name of the configuration file from
@@ -91,8 +91,12 @@ module Aws
     #   or `nil` if no valid credentials were found.
     def credentials(opts = {})
       p = opts[:profile] || @profile_name
+      static_only = opts.delete(:static_only)
+      loop = opts.delete(:loop_detection)
       validate_profile_exists(p) if credentials_present?
-      if credentials = credentials_from_shared(p, opts)
+      if @config_enabled && !static_only && credentials = assume_role_credentials_from_config(opts.merge(loop_detection: loop))
+        credentials
+      elsif credentials = credentials_from_shared(p, opts)
         credentials
       elsif credentials = credentials_from_config(p, opts)
         credentials
@@ -106,10 +110,16 @@ module Aws
     # file, if present.
     def assume_role_credentials_from_config(opts = {})
       p = opts.delete(:profile) || @profile_name
+      # Loop Detection
+      loop = opts.delete(:loop_detection)
+      loop ||= []
+      if loop.include?(p)
+        raise Errors::SourceProfileLoopError.new("Profile #{p} already used in source profile chain: #{loop.join(", ")}")
+      end
       chain_config = opts.delete(:chain_config)
-      credentials = assume_role_from_profile(@parsed_credentials, p, opts, chain_config)
+      credentials = assume_role_from_profile(@parsed_credentials, p, opts, chain_config, loop)
       if @parsed_config
-        credentials ||= assume_role_from_profile(@parsed_config, p, opts, chain_config)
+        credentials ||= assume_role_from_profile(@parsed_config, p, opts, chain_config, loop)
       end
       credentials
     end
@@ -135,7 +145,7 @@ module Aws
         (@parsed_config && !@parsed_config.empty?)
     end
 
-    def assume_role_from_profile(cfg, profile, opts, chain_config)
+    def assume_role_from_profile(cfg, profile, opts, chain_config, loop)
       if cfg && prof_cfg = cfg[profile]
         opts[:source_profile] ||= prof_cfg["source_profile"]
         credential_source = opts.delete(:credential_source)
@@ -147,7 +157,18 @@ module Aws
               "provide only source_profile or credential_source, not both."
           )
         elsif opts[:source_profile]
-          opts[:credentials] = credentials(profile: opts[:source_profile])
+          if profile == opts[:source_profile]
+            opts[:credentials] = credentials(
+              profile: opts[:source_profile],
+              static_only: true
+            )
+          else
+            loop << profile
+            opts[:credentials] = credentials(
+              profile: opts[:source_profile],
+              loop_detection: loop
+            )
+          end
           if opts[:credentials]
             opts[:role_session_name] ||= prof_cfg["role_session_name"]
             opts[:role_session_name] ||= "default_session"
