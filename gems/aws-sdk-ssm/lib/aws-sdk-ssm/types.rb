@@ -5343,8 +5343,8 @@ module Aws::SSM
     # @!attribute [rw] path
     #   The hierarchy for the parameter. Hierarchies start with a forward
     #   slash (/) and end with the parameter name. A hierarchy can have a
-    #   maximum of five levels. For example:
-    #   `/Finance/Prod/IAD/WinServ2016/license15`
+    #   maximum of 15 levels. Here is an example of a hierarchy:
+    #   `/Finance/Prod/IAD/WinServ2016/license33`
     #   @return [String]
     #
     # @!attribute [rw] recursive
@@ -7937,8 +7937,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # One or more filters. Use a filter to return a more specific list of
-    # results.
+    # This data type is deprecated. Instead, use ParameterStringFilter.
     #
     # @note When making an API call, you may pass ParametersFilter
     #   data as a hash:
@@ -8123,6 +8122,235 @@ module Aws::SSM
 
     # Defines a patch filter.
     #
+    # A patch filter consists of key/value pairs, but not all keys are valid
+    # for all operating system types. For example, the key `PRODUCT` is
+    # valid for all supported operating system types. The key
+    # `MSRC_SEVERITY`, however, is valid only for Windows operating systems,
+    # and the key `SECTION` is valid only for Ubuntu operating systems.
+    #
+    # Refer to the following sections for information about which keys may
+    # be used with each major operating system, and which values are valid
+    # for each key.
+    #
+    # **Windows Operating Systems**
+    #
+    # The supported keys for Windows operating systems are `PRODUCT`,
+    # `CLASSIFICATION`, and `MSRC_SEVERITY`. See the following lists for
+    # valid values for each of these keys.
+    #
+    # *Supported key:* `PRODUCT`
+    #
+    # *Supported values:*
+    #
+    # * `Windows7`
+    #
+    # * `Windows8`
+    #
+    # * `Windows8.1`
+    #
+    # * `Windows8Embedded`
+    #
+    # * `Windows10`
+    #
+    # * `Windows10LTSB`
+    #
+    # * `WindowsServer2008`
+    #
+    # * `WindowsServer2008R2`
+    #
+    # * `WindowsServer2012`
+    #
+    # * `WindowsServer2012R2`
+    #
+    # * `WindowsServer2016`
+    #
+    # *Supported key:* `CLASSIFICATION`
+    #
+    # *Supported values:*
+    #
+    # * `CriticalUpdates`
+    #
+    # * `DefinitionUpdates`
+    #
+    # * `Drivers`
+    #
+    # * `FeaturePacks`
+    #
+    # * `SecurityUpdates`
+    #
+    # * `ServicePacks`
+    #
+    # * `Tools`
+    #
+    # * `UpdateRollups`
+    #
+    # * `Updates`
+    #
+    # * `Upgrades`
+    #
+    # *Supported key:* `MSRC_SEVERITY`
+    #
+    # *Supported values:*
+    #
+    # * `Critical`
+    #
+    # * `Important`
+    #
+    # * `Moderate`
+    #
+    # * `Low`
+    #
+    # * `Unspecified`
+    #
+    # **Ubuntu Operating Systems**
+    #
+    # The supported keys for Ubuntu operating systems are `PRODUCT`,
+    # `PRIORITY`, and `SECTION`. See the following lists for valid values
+    # for each of these keys.
+    #
+    # *Supported key:* `PRODUCT`
+    #
+    # *Supported values:*
+    #
+    # * `Ubuntu14.04`
+    #
+    # * `Ubuntu16.04`
+    #
+    # *Supported key:* `PRIORITY`
+    #
+    # *Supported values:*
+    #
+    # * `Required`
+    #
+    # * `Important`
+    #
+    # * `Standard`
+    #
+    # * `Optional`
+    #
+    # * `Extra`
+    #
+    # *Supported key:* `SECTION`
+    #
+    # Only the length of the key value is validated. Minimum length is 1.
+    # Maximum length is 64.
+    #
+    # **Amazon Linux Operating Systems**
+    #
+    # The supported keys for Amazon Linux operating systems are `PRODUCT`,
+    # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
+    # values for each of these keys.
+    #
+    # *Supported key:* `PRODUCT`
+    #
+    # *Supported values:*
+    #
+    # * `AmazonLinux2012.03`
+    #
+    # * `AmazonLinux2012.09`
+    #
+    # * `AmazonLinux2013.03`
+    #
+    # * `AmazonLinux2013.09`
+    #
+    # * `AmazonLinux2014.03`
+    #
+    # * `AmazonLinux2014.09`
+    #
+    # * `AmazonLinux2015.03`
+    #
+    # * `AmazonLinux2015.09`
+    #
+    # * `AmazonLinux2016.03`
+    #
+    # * `AmazonLinux2016.09`
+    #
+    # * `AmazonLinux2017.03`
+    #
+    # * `AmazonLinux2017.09`
+    #
+    # *Supported key:* `CLASSIFICATION`
+    #
+    # *Supported values:*
+    #
+    # * `Security`
+    #
+    # * `Bugfix`
+    #
+    # * `Enhancement`
+    #
+    # * `Recommended`
+    #
+    # * `Newpackage`
+    #
+    # *Supported key:* `SEVERITY`
+    #
+    # *Supported values:*
+    #
+    # * `Critical`
+    #
+    # * `Important`
+    #
+    # * `Medium`
+    #
+    # * `Low`
+    #
+    # **RedHat Enterprise Linux (RHEL) Operating Systems**
+    #
+    # The supported keys for RedHat Enterprise Linux operating systems are
+    # `PRODUCT`, `CLASSIFICATION`, and `SEVERITY`. See the following lists
+    # for valid values for each of these keys.
+    #
+    # *Supported key:* `PRODUCT`
+    #
+    # *Supported values:*
+    #
+    # * `RedhatEnterpriseLinux6.5`
+    #
+    # * `RedhatEnterpriseLinux6.6`
+    #
+    # * `RedhatEnterpriseLinux6.7`
+    #
+    # * `RedhatEnterpriseLinux6.8`
+    #
+    # * `RedhatEnterpriseLinux6.9`
+    #
+    # * `RedhatEnterpriseLinux7.0`
+    #
+    # * `RedhatEnterpriseLinux7.1`
+    #
+    # * `RedhatEnterpriseLinux7.2`
+    #
+    # * `RedhatEnterpriseLinux7.3`
+    #
+    # * `RedhatEnterpriseLinux7.4`
+    #
+    # *Supported key:* `CLASSIFICATION`
+    #
+    # *Supported values:*
+    #
+    # * `Security`
+    #
+    # * `Bugfix`
+    #
+    # * `Enhancement`
+    #
+    # * `Recommended`
+    #
+    # * `Newpackage`
+    #
+    # *Supported key:* `SEVERITY`
+    #
+    # *Supported values:*
+    #
+    # * `Critical`
+    #
+    # * `Important`
+    #
+    # * `Medium`
+    #
+    # * `Low`
+    #
     # @note When making an API call, you may pass PatchFilter
     #   data as a hash:
     #
@@ -8132,12 +8360,17 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] key
-    #   The key for the filter (PRODUCT, CLASSIFICATION, MSRC\_SEVERITY,
-    #   PATCH\_ID)
+    #   The key for the filter.
+    #
+    #   See PatchFilter for lists of valid keys for each operating system
+    #   type.
     #   @return [String]
     #
     # @!attribute [rw] values
     #   The value for the filter key.
+    #
+    #   See PatchFilter for lists of valid values for each key based on
+    #   operating system type.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchFilter AWS API Documentation

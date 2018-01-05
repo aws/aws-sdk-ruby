@@ -166,7 +166,7 @@ module Aws::SSM
     # Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and
     # Value=Production, Pre-Production, or Test.
     #
-    # Each resource can have a maximum of 10 tags.
+    # Each resource can have a maximum of 50 tags.
     #
     # We recommend that you devise a set of tag keys that meets your needs
     # for each resource type. Using a consistent set of tag keys makes it
@@ -682,6 +682,15 @@ module Aws::SSM
     end
 
     # Creates a patch baseline.
+    #
+    # <note markdown="1"> For information about valid key and value pairs in `PatchFilters` for
+    # each supported operating system type, see [PatchFilter][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html
     #
     # @option params [String] :operating_system
     #   Defines the operating system the patch baseline applies to. The
@@ -3498,6 +3507,10 @@ module Aws::SSM
     # You can specify the `NextToken` in a subsequent call to get the next
     # set of results.
     #
+    # <note markdown="1"> This API action doesn't support filtering by tags.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-working.html
@@ -3505,8 +3518,8 @@ module Aws::SSM
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
     #   slash (/) and end with the parameter name. A hierarchy can have a
-    #   maximum of five levels. For example:
-    #   `/Finance/Prod/IAD/WinServ2016/license15`
+    #   maximum of 15 levels. Here is an example of a hierarchy:
+    #   `/Finance/Prod/IAD/WinServ2016/license33`
     #
     # @option params [Boolean] :recursive
     #   Retrieve all parameters within a hierarchy.
@@ -4500,6 +4513,46 @@ module Aws::SSM
     # details with a resource. This call overwrites existing compliance
     # information on the resource, so you must provide a full list of
     # compliance items each time that you send the request.
+    #
+    # ComplianceType can be one of the following:
+    #
+    # * ExecutionId: The execution ID when the patch, association, or custom
+    #   compliance item was applied.
+    #
+    # * ExecutionType: Specify patch, association, or Custom:`string`.
+    #
+    # * ExecutionTime. The time the patch, association, or custom compliance
+    #   item was applied to the instance.
+    #
+    # * Id: The patch, association, or custom compliance ID.
+    #
+    # * Title: A title.
+    #
+    # * Status: The status of the compliance item. For example, `approved`
+    #   for patches, or `Failed` for associations.
+    #
+    # * Severity: A patch severity. For example, `critical`.
+    #
+    # * DocumentName: A SSM document name. For example,
+    #   AWS-RunPatchBaseline.
+    #
+    # * DocumentVersion: An SSM document version number. For example, 4.
+    #
+    # * Classification: A patch classification. For example, `security
+    #   updates`.
+    #
+    # * PatchBaselineId: A patch baseline ID.
+    #
+    # * PatchSeverity: A patch severity. For example, `Critical`.
+    #
+    # * PatchState: A patch state. For example,
+    #   `InstancesWithFailedPatches`.
+    #
+    # * PatchGroup: The name of a patch group.
+    #
+    # * InstalledTime: The time the association, patch, or custom compliance
+    #   item was applied to the resource. Specify the time by using the
+    #   following format: yyyy-MM-dd'T'HH:mm:ss'Z'
     #
     # @option params [required, String] :resource_id
     #   Specify an ID for this resource. For a managed instance, this is the
@@ -5995,6 +6048,15 @@ module Aws::SSM
     # Modifies an existing patch baseline. Fields not specified in the
     # request are left unchanged.
     #
+    # <note markdown="1"> For information about valid key and value pairs in `PatchFilters` for
+    # each supported operating system type, see [PatchFilter][1].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html
+    #
     # @option params [required, String] :baseline_id
     #   The ID of the patch baseline to update.
     #
@@ -6115,7 +6177,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

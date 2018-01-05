@@ -314,7 +314,7 @@ module Aws::Snowball
     #   `Environmental Data Cluster-01`.
     #
     # @option params [required, String] :address_id
-    #   The ID for the address that you want the cluster shipped to.&gt;
+    #   The ID for the address that you want the cluster shipped to.
     #
     # @option params [String] :kms_key_arn
     #   The `KmsKeyARN` value that you want to associate with this cluster.
@@ -1660,7 +1660,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

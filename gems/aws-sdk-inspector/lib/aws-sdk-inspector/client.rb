@@ -762,6 +762,7 @@ module Aws::Inspector
     #       {
     #         name: "ExampleAssessmentTemplate", 
     #         arn: "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq/template/0-4r1V2mAw", 
+    #         assessment_run_count: 0, 
     #         assessment_target_arn: "arn:aws:inspector:us-west-2:123456789012:target/0-0kFIPusq", 
     #         created_at: Time.parse("1458074191.844"), 
     #         duration_in_seconds: 3600, 
@@ -794,6 +795,8 @@ module Aws::Inspector
     #   resp.assessment_templates[0].user_attributes_for_findings #=> Array
     #   resp.assessment_templates[0].user_attributes_for_findings[0].key #=> String
     #   resp.assessment_templates[0].user_attributes_for_findings[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.assessment_templates[0].last_assessment_run_arn #=> String
+    #   resp.assessment_templates[0].assessment_run_count #=> Integer
     #   resp.assessment_templates[0].created_at #=> Time
     #   resp.failed_items #=> Hash
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
@@ -2574,7 +2577,7 @@ module Aws::Inspector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

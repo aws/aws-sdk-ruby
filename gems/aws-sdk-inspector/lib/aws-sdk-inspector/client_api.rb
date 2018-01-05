@@ -31,6 +31,7 @@ module Aws::Inspector
     AgentsAlreadyRunningAssessmentException = Shapes::StructureShape.new(name: 'AgentsAlreadyRunningAssessmentException')
     AmiId = Shapes::StringShape.new(name: 'AmiId')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    ArnCount = Shapes::IntegerShape.new(name: 'ArnCount')
     AssessmentRulesPackageArnList = Shapes::ListShape.new(name: 'AssessmentRulesPackageArnList')
     AssessmentRun = Shapes::StructureShape.new(name: 'AssessmentRun')
     AssessmentRunAgent = Shapes::StructureShape.new(name: 'AssessmentRunAgent')
@@ -318,6 +319,8 @@ module Aws::Inspector
     AssessmentTemplate.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: AssessmentRunDuration, required: true, location_name: "durationInSeconds"))
     AssessmentTemplate.add_member(:rules_package_arns, Shapes::ShapeRef.new(shape: AssessmentTemplateRulesPackageArnList, required: true, location_name: "rulesPackageArns"))
     AssessmentTemplate.add_member(:user_attributes_for_findings, Shapes::ShapeRef.new(shape: UserAttributeList, required: true, location_name: "userAttributesForFindings"))
+    AssessmentTemplate.add_member(:last_assessment_run_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "lastAssessmentRunArn"))
+    AssessmentTemplate.add_member(:assessment_run_count, Shapes::ShapeRef.new(shape: ArnCount, required: true, location_name: "assessmentRunCount"))
     AssessmentTemplate.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     AssessmentTemplate.struct_class = Types::AssessmentTemplate
 

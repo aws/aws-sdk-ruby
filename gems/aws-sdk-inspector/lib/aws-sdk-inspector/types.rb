@@ -527,6 +527,17 @@ module Aws::Inspector
     #   finding from the assessment run that uses this assessment template.
     #   @return [Array<Types::Attribute>]
     #
+    # @!attribute [rw] last_assessment_run_arn
+    #   The Amazon Resource Name (ARN) of the most recent assessment run
+    #   associated with this assessment template. This value exists only
+    #   when the value of assessmentRunCount is greater than zero.
+    #   @return [String]
+    #
+    # @!attribute [rw] assessment_run_count
+    #   The number of existing assessment runs associated with this
+    #   assessment template. This value can be zero or a positive integer.
+    #   @return [Integer]
+    #
     # @!attribute [rw] created_at
     #   The time at which the assessment template is created.
     #   @return [Time]
@@ -540,6 +551,8 @@ module Aws::Inspector
       :duration_in_seconds,
       :rules_package_arns,
       :user_attributes_for_findings,
+      :last_assessment_run_arn,
+      :assessment_run_count,
       :created_at)
       include Aws::Structure
     end

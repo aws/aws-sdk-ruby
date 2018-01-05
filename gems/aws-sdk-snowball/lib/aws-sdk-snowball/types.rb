@@ -407,7 +407,7 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] address_id
-    #   The ID for the address that you want the cluster shipped to.&gt;
+    #   The ID for the address that you want the cluster shipped to.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
@@ -1562,12 +1562,12 @@ module Aws::Snowball
     #
     # @!attribute [rw] inbound_shipment
     #   The `Status` and `TrackingNumber` values for a Snowball being
-    #   delivered to the address that you specified for a particular job.
+    #   returned to AWS for a particular job.
     #   @return [Types::Shipment]
     #
     # @!attribute [rw] outbound_shipment
     #   The `Status` and `TrackingNumber` values for a Snowball being
-    #   returned to AWS for a particular job.
+    #   delivered to the address that you specified for a particular job.
     #   @return [Types::Shipment]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ShippingDetails AWS API Documentation
