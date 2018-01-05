@@ -58,6 +58,8 @@ module Aws
     # a credential_source, and that source doesn't provide credentials.
     class NoSourceCredentialsError < RuntimeError; end
 
+    # Raised when a profile used in client construction contains looping
+    # references amongst source_profile values.
     class SourceProfileLoopError < RuntimeError; end
 
     # Raised when a client is constructed and credentials are not

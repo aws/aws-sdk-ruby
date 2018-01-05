@@ -150,6 +150,16 @@ module Aws
         opts[:source_profile] ||= prof_cfg["source_profile"]
         credential_source = opts.delete(:credential_source)
         credential_source ||= prof_cfg["credential_source"]
+        unless opts[:region]
+          # Determine region, if possible, by creating a dummy client.
+          dummy_opts = {
+            credentials: Aws::Credentials.new("STUB", "STUB")
+          }
+          begin
+            dummy_client = Aws::STS::Client.new(dummy_opts)
+            opts[:region] = dummy_client.config.region
+          rescue Aws::Errors::MissingRegionError; end
+        end
         if opts[:source_profile] && credential_source
           raise Errors::CredentialSourceConflictError.new(
             "Profile #{profile} has a source_profile, and "\
@@ -160,13 +170,15 @@ module Aws
           if profile == opts[:source_profile]
             opts[:credentials] = credentials(
               profile: opts[:source_profile],
-              static_only: true
+              static_only: true,
+              region: opts[:region]
             )
           else
             loop << profile
             opts[:credentials] = credentials(
               profile: opts[:source_profile],
-              loop_detection: loop
+              loop_detection: loop,
+              region: opts[:region]
             )
           end
           if opts[:credentials]
