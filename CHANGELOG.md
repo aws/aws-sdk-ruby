@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.112 (2018-01-05)
+------------------
+
 * Feature - Aws::Inspector - Updated the API, and documentation for Amazon Inspector.
 
 * Feature - Aws::Snowball - Updated the documentation for Amazon Import/Export Snowball.
