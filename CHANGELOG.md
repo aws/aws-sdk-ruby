@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.113 (2018-01-09)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
 
 * Feature - Aws::ApplicationDiscoveryService - Updated the API, and documentation for AWS Application Discovery Service.
