@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::ApplicationDiscoveryService - Updated the API, and documentation for AWS Application Discovery Service.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
 2.10.112 (2018-01-05)
 ------------------
 
