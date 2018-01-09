@@ -31,7 +31,8 @@ module BuildTools
         default_endpoint: @default_endpoint,
         add_plugins: add_plugins([
           "#{@svc_name}::Plugins::Authorizer",
-          "#{@svc_name}::Plugins::APIGEndpoint"
+          "#{@svc_name}::Plugins::APIGEndpoint",
+          "#{@svc_name}::Plugins::APIGUserAgent"
         ]),
         remove_plugins: [
           'Aws::Plugins::UserAgent',
