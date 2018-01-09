@@ -85,6 +85,7 @@ module Aws::DirectoryService
     DirectoryConnectSettingsDescription = Shapes::StructureShape.new(name: 'DirectoryConnectSettingsDescription')
     DirectoryDescription = Shapes::StructureShape.new(name: 'DirectoryDescription')
     DirectoryDescriptions = Shapes::ListShape.new(name: 'DirectoryDescriptions')
+    DirectoryEdition = Shapes::StringShape.new(name: 'DirectoryEdition')
     DirectoryId = Shapes::StringShape.new(name: 'DirectoryId')
     DirectoryIds = Shapes::ListShape.new(name: 'DirectoryIds')
     DirectoryLimitExceededException = Shapes::StructureShape.new(name: 'DirectoryLimitExceededException')
@@ -324,6 +325,7 @@ module Aws::DirectoryService
     CreateMicrosoftADRequest.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
     CreateMicrosoftADRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateMicrosoftADRequest.add_member(:vpc_settings, Shapes::ShapeRef.new(shape: DirectoryVpcSettings, required: true, location_name: "VpcSettings"))
+    CreateMicrosoftADRequest.add_member(:edition, Shapes::ShapeRef.new(shape: DirectoryEdition, location_name: "Edition"))
     CreateMicrosoftADRequest.struct_class = Types::CreateMicrosoftADRequest
 
     CreateMicrosoftADResult.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -449,6 +451,7 @@ module Aws::DirectoryService
     DirectoryDescription.add_member(:name, Shapes::ShapeRef.new(shape: DirectoryName, location_name: "Name"))
     DirectoryDescription.add_member(:short_name, Shapes::ShapeRef.new(shape: DirectoryShortName, location_name: "ShortName"))
     DirectoryDescription.add_member(:size, Shapes::ShapeRef.new(shape: DirectorySize, location_name: "Size"))
+    DirectoryDescription.add_member(:edition, Shapes::ShapeRef.new(shape: DirectoryEdition, location_name: "Edition"))
     DirectoryDescription.add_member(:alias, Shapes::ShapeRef.new(shape: AliasName, location_name: "Alias"))
     DirectoryDescription.add_member(:access_url, Shapes::ShapeRef.new(shape: AccessUrl, location_name: "AccessUrl"))
     DirectoryDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))

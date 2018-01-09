@@ -624,6 +624,10 @@ module Aws::DirectoryService
     #   Contains VPC information for the CreateDirectory or CreateMicrosoftAD
     #   operation.
     #
+    # @option params [String] :edition
+    #   AWS Microsoft AD is available in two editions: Standard and
+    #   Enterprise. Enterprise is the default.
+    #
     # @return [Types::CreateMicrosoftADResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMicrosoftADResult#directory_id #directory_id} => String
@@ -639,6 +643,7 @@ module Aws::DirectoryService
     #       vpc_id: "VpcId", # required
     #       subnet_ids: ["SubnetId"], # required
     #     },
+    #     edition: "Enterprise", # accepts Enterprise, Standard
     #   })
     #
     # @example Response structure
@@ -1002,6 +1007,7 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].name #=> String
     #   resp.directory_descriptions[0].short_name #=> String
     #   resp.directory_descriptions[0].size #=> String, one of "Small", "Large"
+    #   resp.directory_descriptions[0].edition #=> String, one of "Enterprise", "Standard"
     #   resp.directory_descriptions[0].alias #=> String
     #   resp.directory_descriptions[0].access_url #=> String
     #   resp.directory_descriptions[0].description #=> String
@@ -1919,7 +1925,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

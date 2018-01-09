@@ -566,6 +566,7 @@ module Aws::DirectoryService
     #           vpc_id: "VpcId", # required
     #           subnet_ids: ["SubnetId"], # required
     #         },
+    #         edition: "Enterprise", # accepts Enterprise, Standard
     #       }
     #
     # @!attribute [rw] name
@@ -596,6 +597,11 @@ module Aws::DirectoryService
     #   CreateMicrosoftAD operation.
     #   @return [Types::DirectoryVpcSettings]
     #
+    # @!attribute [rw] edition
+    #   AWS Microsoft AD is available in two editions: Standard and
+    #   Enterprise. Enterprise is the default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADRequest AWS API Documentation
     #
     class CreateMicrosoftADRequest < Struct.new(
@@ -603,7 +609,8 @@ module Aws::DirectoryService
       :short_name,
       :password,
       :description,
-      :vpc_settings)
+      :vpc_settings,
+      :edition)
       include Aws::Structure
     end
 
@@ -1364,6 +1371,10 @@ module Aws::DirectoryService
     #   The directory size.
     #   @return [String]
     #
+    # @!attribute [rw] edition
+    #   The edition associated with this directory.
+    #   @return [String]
+    #
     # @!attribute [rw] alias
     #   The alias for the directory. If no alias has been created for the
     #   directory, the alias is the directory identifier, such as
@@ -1448,6 +1459,7 @@ module Aws::DirectoryService
       :name,
       :short_name,
       :size,
+      :edition,
       :alias,
       :access_url,
       :description,
@@ -1561,11 +1573,7 @@ module Aws::DirectoryService
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_group_id
-    #   The security group identifier for the directory. If the directory
-    #   was created before 8/1/2014, this is the identifier of the directory
-    #   members security group that was created when the directory was
-    #   created. If the directory was created after this date, this value is
-    #   null.
+    #   The domain controller security group identifier for the directory.
     #   @return [String]
     #
     # @!attribute [rw] availability_zones
