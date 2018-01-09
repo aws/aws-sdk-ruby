@@ -69,6 +69,8 @@ module Aws::CodeDeploy
     DeleteDeploymentConfigInput = Shapes::StructureShape.new(name: 'DeleteDeploymentConfigInput')
     DeleteDeploymentGroupInput = Shapes::StructureShape.new(name: 'DeleteDeploymentGroupInput')
     DeleteDeploymentGroupOutput = Shapes::StructureShape.new(name: 'DeleteDeploymentGroupOutput')
+    DeleteGitHubAccountTokenInput = Shapes::StructureShape.new(name: 'DeleteGitHubAccountTokenInput')
+    DeleteGitHubAccountTokenOutput = Shapes::StructureShape.new(name: 'DeleteGitHubAccountTokenOutput')
     DeploymentAlreadyCompletedException = Shapes::StructureShape.new(name: 'DeploymentAlreadyCompletedException')
     DeploymentConfigAlreadyExistsException = Shapes::StructureShape.new(name: 'DeploymentConfigAlreadyExistsException')
     DeploymentConfigDoesNotExistException = Shapes::StructureShape.new(name: 'DeploymentConfigDoesNotExistException')
@@ -143,6 +145,7 @@ module Aws::CodeDeploy
     GitHubAccountTokenDoesNotExistException = Shapes::StructureShape.new(name: 'GitHubAccountTokenDoesNotExistException')
     GitHubAccountTokenName = Shapes::StringShape.new(name: 'GitHubAccountTokenName')
     GitHubAccountTokenNameList = Shapes::ListShape.new(name: 'GitHubAccountTokenNameList')
+    GitHubAccountTokenNameRequiredException = Shapes::StructureShape.new(name: 'GitHubAccountTokenNameRequiredException')
     GitHubLocation = Shapes::StructureShape.new(name: 'GitHubLocation')
     GreenFleetProvisioningAction = Shapes::StringShape.new(name: 'GreenFleetProvisioningAction')
     GreenFleetProvisioningOption = Shapes::StructureShape.new(name: 'GreenFleetProvisioningOption')
@@ -427,7 +430,7 @@ module Aws::CodeDeploy
     CreateApplicationOutput.struct_class = Types::CreateApplicationOutput
 
     CreateDeploymentConfigInput.add_member(:deployment_config_name, Shapes::ShapeRef.new(shape: DeploymentConfigName, required: true, location_name: "deploymentConfigName"))
-    CreateDeploymentConfigInput.add_member(:minimum_healthy_hosts, Shapes::ShapeRef.new(shape: MinimumHealthyHosts, required: true, location_name: "minimumHealthyHosts"))
+    CreateDeploymentConfigInput.add_member(:minimum_healthy_hosts, Shapes::ShapeRef.new(shape: MinimumHealthyHosts, location_name: "minimumHealthyHosts"))
     CreateDeploymentConfigInput.add_member(:traffic_routing_config, Shapes::ShapeRef.new(shape: TrafficRoutingConfig, location_name: "trafficRoutingConfig"))
     CreateDeploymentConfigInput.add_member(:compute_platform, Shapes::ShapeRef.new(shape: ComputePlatform, location_name: "computePlatform"))
     CreateDeploymentConfigInput.struct_class = Types::CreateDeploymentConfigInput
@@ -482,6 +485,12 @@ module Aws::CodeDeploy
 
     DeleteDeploymentGroupOutput.add_member(:hooks_not_cleaned_up, Shapes::ShapeRef.new(shape: AutoScalingGroupList, location_name: "hooksNotCleanedUp"))
     DeleteDeploymentGroupOutput.struct_class = Types::DeleteDeploymentGroupOutput
+
+    DeleteGitHubAccountTokenInput.add_member(:token_name, Shapes::ShapeRef.new(shape: GitHubAccountTokenName, location_name: "tokenName"))
+    DeleteGitHubAccountTokenInput.struct_class = Types::DeleteGitHubAccountTokenInput
+
+    DeleteGitHubAccountTokenOutput.add_member(:token_name, Shapes::ShapeRef.new(shape: GitHubAccountTokenName, location_name: "tokenName"))
+    DeleteGitHubAccountTokenOutput.struct_class = Types::DeleteGitHubAccountTokenOutput
 
     DeploymentConfigInfo.add_member(:deployment_config_id, Shapes::ShapeRef.new(shape: DeploymentConfigId, location_name: "deploymentConfigId"))
     DeploymentConfigInfo.add_member(:deployment_config_name, Shapes::ShapeRef.new(shape: DeploymentConfigName, location_name: "deploymentConfigName"))
@@ -955,6 +964,7 @@ module Aws::CodeDeploy
         o.input = Shapes::ShapeRef.new(shape: AddTagsToOnPremisesInstancesInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InstanceNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceNameException)
         o.errors << Shapes::ShapeRef.new(shape: TagRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
@@ -1178,6 +1188,19 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: DeploymentGroupNameRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentGroupNameException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+      end)
+
+      api.add_operation(:delete_git_hub_account_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteGitHubAccountToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteGitHubAccountTokenInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteGitHubAccountTokenOutput)
+        o.errors << Shapes::ShapeRef.new(shape: GitHubAccountTokenNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: GitHubAccountTokenDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGitHubAccountTokenNameException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
       end)
 
       api.add_operation(:deregister_on_premises_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -1463,6 +1486,7 @@ module Aws::CodeDeploy
         o.input = Shapes::ShapeRef.new(shape: RemoveTagsFromOnPremisesInstancesInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InstanceNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceNameException)
         o.errors << Shapes::ShapeRef.new(shape: TagRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagException)
         o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)

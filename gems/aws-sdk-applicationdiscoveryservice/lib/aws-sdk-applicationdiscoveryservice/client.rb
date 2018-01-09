@@ -844,20 +844,21 @@ module Aws::ApplicationDiscoveryService
 
     # Begins the export of discovered data to an S3 bucket.
     #
-    # If you specify `agentId` in a filter, the task exports up to 72 hours
+    # If you specify `agentIds` in a filter, the task exports up to 72 hours
     # of detailed data collected by the identified Application Discovery
     # Agent, including network, process, and performance details. A time
     # range for exported agent data may be set by using `startTime` and
     # `endTime`. Export of detailed agent data is limited to five
     # concurrently running exports.
     #
-    # If you do not include an `agentId` filter, summary data is exported
+    # If you do not include an `agentIds` filter, summary data is exported
     # that includes both AWS Agentless Discovery Connector data and summary
     # data from AWS Discovery Agents. Export of summary data is limited to
     # two exports per day.
     #
     # @option params [Array<String>] :export_data_format
     #   The file format for the returned export data. Default value is `CSV`.
+    #   **Note:** *The* `GRAPHML` *option has been deprecated.*
     #
     # @option params [Array<Types::ExportFilter>] :filters
     #   If a filter is present, it selects the single `agentId` of the
@@ -978,7 +979,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

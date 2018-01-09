@@ -1131,7 +1131,7 @@ module Aws::ApplicationDiscoveryService
     #
     # @!attribute [rw] export_data_format
     #   The file format for the returned export data. Default value is
-    #   `CSV`.
+    #   `CSV`. **Note:** *The* `GRAPHML` *option has been deprecated.*
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters

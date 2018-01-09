@@ -603,7 +603,7 @@ module Aws::CodeDeploy
     #
     #       {
     #         deployment_config_name: "DeploymentConfigName", # required
-    #         minimum_healthy_hosts: { # required
+    #         minimum_healthy_hosts: {
     #           value: 1,
     #           type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
     #         },
@@ -1156,6 +1156,39 @@ module Aws::CodeDeploy
     #
     class DeleteDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up)
+      include Aws::Structure
+    end
+
+    # Represents the input of a DeleteGitHubAccount operation.
+    #
+    # @note When making an API call, you may pass DeleteGitHubAccountTokenInput
+    #   data as a hash:
+    #
+    #       {
+    #         token_name: "GitHubAccountTokenName",
+    #       }
+    #
+    # @!attribute [rw] token_name
+    #   The name of the GitHub account connection to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountTokenInput AWS API Documentation
+    #
+    class DeleteGitHubAccountTokenInput < Struct.new(
+      :token_name)
+      include Aws::Structure
+    end
+
+    # Represents the output of a DeleteGitHubAccountToken operation.
+    #
+    # @!attribute [rw] token_name
+    #   The name of the GitHub account connection that was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountTokenOutput AWS API Documentation
+    #
+    class DeleteGitHubAccountTokenOutput < Struct.new(
+      :token_name)
       include Aws::Structure
     end
 

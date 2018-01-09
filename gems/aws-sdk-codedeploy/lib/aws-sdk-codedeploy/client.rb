@@ -791,7 +791,7 @@ module Aws::CodeDeploy
     # @option params [required, String] :deployment_config_name
     #   The name of the deployment configuration to create.
     #
-    # @option params [required, Types::MinimumHealthyHosts] :minimum_healthy_hosts
+    # @option params [Types::MinimumHealthyHosts] :minimum_healthy_hosts
     #   The minimum number of healthy instances that should be available at
     #   any time during the deployment. There are two parameters expected in
     #   the input: type and value.
@@ -828,7 +828,7 @@ module Aws::CodeDeploy
     #
     #   resp = client.create_deployment_config({
     #     deployment_config_name: "DeploymentConfigName", # required
-    #     minimum_healthy_hosts: { # required
+    #     minimum_healthy_hosts: {
     #       value: 1,
     #       type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
     #     },
@@ -1140,6 +1140,34 @@ module Aws::CodeDeploy
     # @param [Hash] params ({})
     def delete_deployment_group(params = {}, options = {})
       req = build_request(:delete_deployment_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes a GitHub account connection.
+    #
+    # @option params [String] :token_name
+    #   The name of the GitHub account connection to delete.
+    #
+    # @return [Types::DeleteGitHubAccountTokenOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteGitHubAccountTokenOutput#token_name #token_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_git_hub_account_token({
+    #     token_name: "GitHubAccountTokenName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.token_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountToken AWS API Documentation
+    #
+    # @overload delete_git_hub_account_token(params = {})
+    # @param [Hash] params ({})
+    def delete_git_hub_account_token(params = {}, options = {})
+      req = build_request(:delete_git_hub_account_token, params)
       req.send_request(options)
     end
 
@@ -2464,7 +2492,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

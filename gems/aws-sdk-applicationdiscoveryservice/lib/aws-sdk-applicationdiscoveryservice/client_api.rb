@@ -163,7 +163,7 @@ module Aws::ApplicationDiscoveryService
     ConfigurationTag.add_member(:time_of_creation, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "timeOfCreation"))
     ConfigurationTag.struct_class = Types::ConfigurationTag
 
-    ConfigurationTagSet.member = Shapes::ShapeRef.new(shape: ConfigurationTag, location_name: "item")
+    ConfigurationTagSet.member = Shapes::ShapeRef.new(shape: ConfigurationTag)
 
     Configurations.member = Shapes::ShapeRef.new(shape: Configuration)
 
@@ -295,7 +295,7 @@ module Aws::ApplicationDiscoveryService
     Filter.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, required: true, location_name: "condition"))
     Filter.struct_class = Types::Filter
 
-    FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue, location_name: "item")
+    FilterValues.member = Shapes::ShapeRef.new(shape: FilterValue)
 
     Filters.member = Shapes::ShapeRef.new(shape: Filter)
 
@@ -378,7 +378,7 @@ module Aws::ApplicationDiscoveryService
 
     TagFilters.member = Shapes::ShapeRef.new(shape: TagFilter)
 
-    TagSet.member = Shapes::ShapeRef.new(shape: Tag, location_name: "item")
+    TagSet.member = Shapes::ShapeRef.new(shape: Tag)
 
     UpdateApplicationRequest.add_member(:configuration_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "configurationId"))
     UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
