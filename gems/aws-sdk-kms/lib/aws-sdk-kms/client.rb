@@ -476,29 +476,29 @@ module Aws::KMS
     # @option params [String] :policy
     #   The key policy to attach to the CMK.
     #
-    #   If you specify a policy and do not set
-    #   `BypassPolicyLockoutSafetyCheck` to true, the policy must meet the
-    #   following criteria:
+    #   If you provide a key policy, it must meet the following criteria:
     #
-    #   * It must allow the principal that is making the `CreateKey` request
-    #     to make a subsequent PutKeyPolicy request on the CMK. This reduces
-    #     the likelihood that the CMK becomes unmanageable. For more
+    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to true, the key
+    #     policy must allow the principal that is making the `CreateKey`
+    #     request to make a subsequent PutKeyPolicy request on the CMK. This
+    #     reduces the risk that the CMK becomes unmanageable. For more
     #     information, refer to the scenario in the [Default Key Policy][1]
-    #     section in the *AWS Key Management Service Developer Guide*.
+    #     section of the *AWS Key Management Service Developer Guide*.
     #
-    #   * The principals that are specified in the key policy must exist and
-    #     be visible to AWS KMS. When you create a new AWS principal (for
+    #   * Each statement in the key policy must contain one or more
+    #     principals. The principals in the key policy must exist and be
+    #     visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
-    #     before specifying the new principal in a key policy because the new
-    #     principal might not immediately be visible to AWS KMS. For more
+    #     before including the new principal in a key policy because the new
+    #     principal might not be immediately visible to AWS KMS. For more
     #     information, see [Changes that I make are not always immediately
-    #     visible][2] in the *IAM User Guide*.
+    #     visible][2] in the *AWS Identity and Access Management User Guide*.
     #
-    #   If you do not specify a policy, AWS KMS attaches a default key policy
-    #   to the CMK. For more information, see [Default Key Policy][3] in the
-    #   *AWS Key Management Service Developer Guide*.
+    #   If you do not provide a key policy, AWS KMS attaches a default key
+    #   policy to the CMK. For more information, see [Default Key Policy][3]
+    #   in the *AWS Key Management Service Developer Guide*.
     #
-    #   The policy size limit is 32 kilobytes (32768 bytes).
+    #   The key policy size limit is 32 kilobytes (32768 bytes).
     #
     #
     #
@@ -537,8 +537,8 @@ module Aws::KMS
     #   A flag to indicate whether to bypass the key policy lockout safety
     #   check.
     #
-    #   Setting this value to true increases the likelihood that the CMK
-    #   becomes unmanageable. Do not set this value to true indiscriminately.
+    #   Setting this value to true increases the risk that the CMK becomes
+    #   unmanageable. Do not set this value to true indiscriminately.
     #
     #    For more information, refer to the scenario in the [Default Key
     #   Policy][1] section in the *AWS Key Management Service Developer
@@ -1576,8 +1576,8 @@ module Aws::KMS
     #   To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
     #
     # @option params [required, String] :policy_name
-    #   Specifies the name of the policy. The only valid name is `default`. To
-    #   get the names of key policies, use ListKeyPolicies.
+    #   Specifies the name of the key policy. The only valid name is
+    #   `default`. To get the names of key policies, use ListKeyPolicies.
     #
     # @return [Types::GetKeyPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2552,24 +2552,25 @@ module Aws::KMS
     # @option params [required, String] :policy
     #   The key policy to attach to the CMK.
     #
-    #   If you do not set `BypassPolicyLockoutSafetyCheck` to true, the policy
-    #   must meet the following criteria:
+    #   The key policy must meet the following criteria:
     #
-    #   * It must allow the principal that is making the `PutKeyPolicy`
+    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to true, the key
+    #     policy must allow the principal that is making the `PutKeyPolicy`
     #     request to make a subsequent `PutKeyPolicy` request on the CMK. This
-    #     reduces the likelihood that the CMK becomes unmanageable. For more
+    #     reduces the risk that the CMK becomes unmanageable. For more
     #     information, refer to the scenario in the [Default Key Policy][1]
-    #     section in the *AWS Key Management Service Developer Guide*.
+    #     section of the *AWS Key Management Service Developer Guide*.
     #
-    #   * The principals that are specified in the key policy must exist and
-    #     be visible to AWS KMS. When you create a new AWS principal (for
+    #   * Each statement in the key policy must contain one or more
+    #     principals. The principals in the key policy must exist and be
+    #     visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
-    #     before specifying the new principal in a key policy because the new
-    #     principal might not immediately be visible to AWS KMS. For more
+    #     before including the new principal in a key policy because the new
+    #     principal might not be immediately visible to AWS KMS. For more
     #     information, see [Changes that I make are not always immediately
-    #     visible][2] in the *IAM User Guide*.
+    #     visible][2] in the *AWS Identity and Access Management User Guide*.
     #
-    #   The policy size limit is 32 kilobytes (32768 bytes).
+    #   The key policy size limit is 32 kilobytes (32768 bytes).
     #
     #
     #
@@ -2580,8 +2581,8 @@ module Aws::KMS
     #   A flag to indicate whether to bypass the key policy lockout safety
     #   check.
     #
-    #   Setting this value to true increases the likelihood that the CMK
-    #   becomes unmanageable. Do not set this value to true indiscriminately.
+    #   Setting this value to true increases the risk that the CMK becomes
+    #   unmanageable. Do not set this value to true indiscriminately.
     #
     #    For more information, refer to the scenario in the [Default Key
     #   Policy][1] section in the *AWS Key Management Service Developer
@@ -3218,7 +3219,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
