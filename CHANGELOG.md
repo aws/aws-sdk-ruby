@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.115 (2018-01-09)
+------------------
+
 * Feature - Aws::KMS - Updated the documentation for AWS Key Management Service.
 
 2.10.114 (2018-01-09)
