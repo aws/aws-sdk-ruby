@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.116 (2018-01-11)
+------------------
+
 * Feature - Aws::ElasticLoadBalancing - Updated the API, and documentation for Elastic Load Balancing.
 
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
