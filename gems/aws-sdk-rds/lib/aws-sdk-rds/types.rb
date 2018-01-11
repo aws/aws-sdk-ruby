@@ -1685,7 +1685,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -1698,7 +1698,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -1711,7 +1711,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -1724,7 +1724,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 10 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -2101,6 +2101,12 @@ module Aws::RDS
     #   information, see CreateDBCluster.
     #
     #   **MariaDB**
+    #
+    #   * `10.2.11` (supported in all AWS Regions)
+    #
+    #   ^
+    #
+    #
     #
     #   * `10.1.26` (supported in all AWS Regions)
     #
@@ -2570,6 +2576,7 @@ module Aws::RDS
     #         db_instance_class: "String",
     #         availability_zone: "String",
     #         port: 1,
+    #         multi_az: false,
     #         auto_minor_version_upgrade: false,
     #         iops: 1,
     #         option_group_name: "String",
@@ -2663,6 +2670,10 @@ module Aws::RDS
     #
     #   Valid Values: `1150-65535`
     #   @return [Integer]
+    #
+    # @!attribute [rw] multi_az
+    #   Specifies whether the read replica is in a Multi-AZ deployment.
+    #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to
@@ -2900,6 +2911,7 @@ module Aws::RDS
       :db_instance_class,
       :availability_zone,
       :port,
+      :multi_az,
       :auto_minor_version_upgrade,
       :iops,
       :option_group_name,
@@ -8587,9 +8599,6 @@ module Aws::RDS
     #   parameter does not result in an outage and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request.
-    #
-    #   Constraints: Cannot be specified if the DB instance is a Read
-    #   Replica.
     #   @return [Boolean]
     #
     # @!attribute [rw] engine_version
@@ -11737,8 +11746,9 @@ module Aws::RDS
     #
     #   Default: The same as source
     #
-    #   Constraint: Must be compatible with the engine of the source. You
-    #   can restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot.
+    #   Constraint: Must be compatible with the engine of the source. For
+    #   example, you can restore a MariaDB 10.1 DB instance from a MySQL 5.6
+    #   snapshot.
     #
     #   Valid Values:
     #

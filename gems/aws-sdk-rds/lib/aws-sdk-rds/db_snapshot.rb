@@ -643,8 +643,9 @@ module Aws::RDS
     #
     #   Default: The same as source
     #
-    #   Constraint: Must be compatible with the engine of the source. You can
-    #   restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot.
+    #   Constraint: Must be compatible with the engine of the source. For
+    #   example, you can restore a MariaDB 10.1 DB instance from a MySQL 5.6
+    #   snapshot.
     #
     #   Valid Values:
     #

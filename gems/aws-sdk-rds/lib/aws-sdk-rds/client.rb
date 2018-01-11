@@ -2039,7 +2039,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -2052,7 +2052,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -2065,7 +2065,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -2078,7 +2078,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 10 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -2436,6 +2436,12 @@ module Aws::RDS
     #   see CreateDBCluster.
     #
     #   **MariaDB**
+    #
+    #   * `10.2.11` (supported in all AWS Regions)
+    #
+    #   ^
+    #
+    #
     #
     #   * `10.1.26` (supported in all AWS Regions)
     #
@@ -2997,23 +3003,19 @@ module Aws::RDS
 
     # Creates a new DB instance that acts as a Read Replica for an existing
     # source DB instance. You can create a Read Replica for a DB instance
-    # running MySQL, MariaDB, or PostgreSQL.
+    # running MySQL, MariaDB, or PostgreSQL. For more information, see
+    # [Working with PostgreSQL, MySQL, and MariaDB Read Replicas][1].
     #
-    # <note markdown="1"> Amazon Aurora does not support this action. You must call the
+    # Amazon Aurora does not support this action. You must call the
     # `CreateDBInstance` action to create a DB instance for an Aurora DB
     # cluster.
     #
-    #  </note>
+    # All Read Replica DB instances are created with backups disabled. All
+    # other DB instance attributes (including DB security groups and DB
+    # parameter groups) are inherited from the source DB instance, except as
+    # specified below.
     #
-    # All Read Replica DB instances are created as Single-AZ deployments
-    # with backups disabled. All other DB instance attributes (including DB
-    # security groups and DB parameter groups) are inherited from the source
-    # DB instance, except as specified below.
-    #
-    # The source DB instance must have backup retention enabled.
-    #
-    # For more information, see [Working with PostgreSQL, MySQL, and MariaDB
-    # Read Replicas][1].
+    # Your source DB instance must have backup retention enabled.
     #
     #
     #
@@ -3081,6 +3083,9 @@ module Aws::RDS
     #   Default: Inherits from the source DB instance
     #
     #   Valid Values: `1150-65535`
+    #
+    # @option params [Boolean] :multi_az
+    #   Specifies whether the read replica is in a Multi-AZ deployment.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
@@ -3329,6 +3334,7 @@ module Aws::RDS
     #     db_instance_class: "String",
     #     availability_zone: "String",
     #     port: 1,
+    #     multi_az: false,
     #     auto_minor_version_upgrade: false,
     #     iops: 1,
     #     option_group_name: "String",
@@ -8852,8 +8858,6 @@ module Aws::RDS
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request.
     #
-    #   Constraints: Cannot be specified if the DB instance is a Read Replica.
-    #
     # @option params [String] :engine_version
     #   The version number of the database engine to upgrade to. Changing this
     #   parameter results in an outage and the change is applied during the
@@ -11681,8 +11685,9 @@ module Aws::RDS
     #
     #   Default: The same as source
     #
-    #   Constraint: Must be compatible with the engine of the source. You can
-    #   restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot.
+    #   Constraint: Must be compatible with the engine of the source. For
+    #   example, you can restore a MariaDB 10.1 DB instance from a MySQL 5.6
+    #   snapshot.
     #
     #   Valid Values:
     #
@@ -13063,6 +13068,10 @@ module Aws::RDS
     # more information, see Stopping and Starting a DB instance in the AWS
     # RDS user guide.
     #
+    # <note markdown="1"> This command does not apply to Aurora MySQL and Aurora PostgreSQL.
+    #
+    #  </note>
+    #
     # @option params [required, String] :db_instance_identifier
     #   The user-supplied instance identifier.
     #
@@ -13185,6 +13194,10 @@ module Aws::RDS
     # transaction logs so you can do a point-in-time restore if necessary.
     # For more information, see Stopping and Starting a DB instance in the
     # AWS RDS user guide.
+    #
+    # <note markdown="1"> This command does not apply to Aurora MySQL and Aurora PostgreSQL.
+    #
+    #  </note>
     #
     # @option params [required, String] :db_instance_identifier
     #   The user-supplied instance identifier.
@@ -13320,7 +13333,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

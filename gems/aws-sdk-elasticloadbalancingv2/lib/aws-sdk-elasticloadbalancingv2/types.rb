@@ -290,9 +290,6 @@ module Aws::ElasticLoadBalancingV2
     #
     #   \[Application Load Balancers\] You must specify subnets from at
     #   least two Availability Zones.
-    #
-    #   \[Network Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
@@ -300,13 +297,11 @@ module Aws::ElasticLoadBalancingV2
     #   specify only one subnet per Availability Zone. You must specify
     #   either subnets or subnet mappings.
     #
-    #   \[Application Load Balancers\] You must specify subnets from at
-    #   least two Availability Zones. You cannot specify Elastic IP
-    #   addresses for your subnets.
+    #   \[Network Load Balancers\] You can specify one Elastic IP address
+    #   per subnet.
     #
-    #   \[Network Load Balancers\] You can specify subnets from one or more
-    #   Availability Zones. You can specify one Elastic IP address per
-    #   subnet.
+    #   \[Application Load Balancers\] You cannot specify Elastic IP
+    #   addresses for your subnets.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] security_groups
@@ -1232,10 +1227,6 @@ module Aws::ElasticLoadBalancingV2
     #   * target-groups
     #
     #   * targets-per-application-load-balancer
-    #
-    #   * targets-per-availability-zone-per-network-load-balancer
-    #
-    #   * targets-per-network-load-balancer
     #   @return [String]
     #
     # @!attribute [rw] max
@@ -2138,7 +2129,8 @@ module Aws::ElasticLoadBalancingV2
     #   Availability Zones. You can specify only one subnet per Availability
     #   Zone. You must specify either subnets or subnet mappings.
     #
-    #   You cannot specify Elastic IP addresses for your subnets.
+    #   The load balancer is allocated one static IP address per subnet. You
+    #   cannot specify your own Elastic IP addresses.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation
@@ -2410,9 +2402,6 @@ module Aws::ElasticLoadBalancingV2
     #     Elastic Load Balancing to wait before changing the state of a
     #     deregistering target from `draining` to `unused`. The range is
     #     0-3600 seconds. The default value is 300 seconds.
-    #
-    #   * `proxy_protocol_v2.enabled` - \[Network Load Balancers\] Indicates
-    #     whether Proxy Protocol version 2 is enabled.
     #
     #   * `stickiness.enabled` - \[Application Load Balancers\] Indicates
     #     whether sticky sessions are enabled. The value is `true` or

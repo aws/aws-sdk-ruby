@@ -493,7 +493,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -506,7 +506,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -519,7 +519,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -532,7 +532,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 10 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -875,6 +875,12 @@ module Aws::RDS
     #   see CreateDBCluster.
     #
     #   **MariaDB**
+    #
+    #   * `10.2.11` (supported in all AWS Regions)
+    #
+    #   ^
+    #
+    #
     #
     #   * `10.1.26` (supported in all AWS Regions)
     #

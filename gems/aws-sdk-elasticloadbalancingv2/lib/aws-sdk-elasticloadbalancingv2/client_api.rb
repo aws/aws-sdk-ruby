@@ -769,6 +769,7 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: AllocationIdNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AvailabilityZoneNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:create_rule, Seahorse::Model::Operation.new.tap do |o|

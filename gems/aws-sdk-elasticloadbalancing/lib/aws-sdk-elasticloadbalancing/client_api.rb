@@ -133,6 +133,7 @@ module Aws::ElasticLoadBalancing
     ModifyLoadBalancerAttributesInput = Shapes::StructureShape.new(name: 'ModifyLoadBalancerAttributesInput')
     ModifyLoadBalancerAttributesOutput = Shapes::StructureShape.new(name: 'ModifyLoadBalancerAttributesOutput')
     Name = Shapes::StringShape.new(name: 'Name')
+    OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     Policies = Shapes::StructureShape.new(name: 'Policies')
     PolicyAttribute = Shapes::StructureShape.new(name: 'PolicyAttribute')
@@ -678,6 +679,7 @@ module Aws::ElasticLoadBalancing
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
         o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:create_load_balancer_listeners, Seahorse::Model::Operation.new.tap do |o|

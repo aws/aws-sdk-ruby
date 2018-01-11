@@ -694,7 +694,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -707,7 +707,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -720,7 +720,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 5 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -733,7 +733,7 @@ module Aws::RDS
     #   Constraints to the amount of storage for each storage type are the
     #   following:
     #
-    #   * General Purpose (SSD) storage (gp2): Must be an integer from 10 to
+    #   * General Purpose (SSD) storage (gp2): Must be an integer from 20 to
     #     16384.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 100 to
@@ -1076,6 +1076,12 @@ module Aws::RDS
     #   see CreateDBCluster.
     #
     #   **MariaDB**
+    #
+    #   * `10.2.11` (supported in all AWS Regions)
+    #
+    #   ^
+    #
+    #
     #
     #   * `10.1.26` (supported in all AWS Regions)
     #
@@ -1451,6 +1457,7 @@ module Aws::RDS
     #     db_instance_class: "String",
     #     availability_zone: "String",
     #     port: 1,
+    #     multi_az: false,
     #     auto_minor_version_upgrade: false,
     #     iops: 1,
     #     option_group_name: "String",
@@ -1503,6 +1510,8 @@ module Aws::RDS
     #   Default: Inherits from the source DB instance
     #
     #   Valid Values: `1150-65535`
+    # @option options [Boolean] :multi_az
+    #   Specifies whether the read replica is in a Multi-AZ deployment.
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
     #   Read Replica during the maintenance window.
@@ -2066,8 +2075,6 @@ module Aws::RDS
     #   parameter does not result in an outage and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request.
-    #
-    #   Constraints: Cannot be specified if the DB instance is a Read Replica.
     # @option options [String] :engine_version
     #   The version number of the database engine to upgrade to. Changing this
     #   parameter results in an outage and the change is applied during the
