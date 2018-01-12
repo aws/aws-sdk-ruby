@@ -162,7 +162,7 @@ module Aws
           # The encrypted object contains both the cipher text
           # plus a trailing auth tag. This decrypter will the body
           # expect for the trailing auth tag.
-          decrypter = IOAuthDecrypter.new(
+          IOAuthDecrypter.new(
             io: http_resp.body,
             encrypted_content_length: content_length - auth_tag_length,
             cipher: cipher)

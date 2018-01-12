@@ -38,7 +38,7 @@ for all operations.
           def apply_dualstack_endpoint(context)
             bucket_name = context.params[:bucket]
             region = context.config.region
-            force_path_style = context.config.force_path_style
+            context.config.force_path_style
             dns_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
 
             if use_bucket_dns?(bucket_name, context)
