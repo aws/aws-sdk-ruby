@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.117 (2018-01-12)
+------------------
+
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
 
 2.10.116 (2018-01-11)
