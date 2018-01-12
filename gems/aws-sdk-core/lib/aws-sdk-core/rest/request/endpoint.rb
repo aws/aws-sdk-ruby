@@ -49,11 +49,11 @@ module Aws
 
         def apply_querystring_params(uri, params)
           # collect params that are supposed to be part of the query string
-          parts = @rules.shape.members.inject([]) do |parts, (member_name, member_ref)|
+          parts = @rules.shape.members.inject([]) do |local_parts, (member_name, member_ref)|
             if member_ref.location == 'querystring' && !params[member_name].nil?
-              parts << [member_ref, params[member_name]]
+              local_parts << [member_ref, params[member_name]]
             end
-            parts
+            local_parts
           end
           querystring = QuerystringBuilder.new.build(parts)
           querystring = [@query_prefix, querystring == '' ? nil : querystring].compact.join('&')

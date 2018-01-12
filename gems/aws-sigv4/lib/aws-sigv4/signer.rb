@@ -438,11 +438,11 @@ module Aws
       end
 
       def canonical_headers(headers)
-        headers = headers.inject([]) do |headers, (k,v)|
+        headers = headers.inject([]) do |local_headers, (k,v)|
           if @unsigned_headers.include?(k)
-            headers
+            local_headers
           else
-            headers << [k,v]
+            local_headers << [k,v]
           end
         end
         headers = headers.sort_by(&:first)
