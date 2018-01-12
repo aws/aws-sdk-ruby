@@ -26,6 +26,22 @@ module Aws::Glue
     #
     # @!attribute [rw] arguments
     #   Arguments to be passed to the job.
+    #
+    #   You can specify arguments here that your own job-execution script
+    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #
+    #   For information about how to specify and consume your own Job
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   developer guide.
+    #
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Action AWS API Documentation
@@ -333,19 +349,19 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Details about the job run and the error that occurred while trying to
-    # submit it for stopping.
+    # Records an error that occurred when attempting to stop a specified
+    # JobRun.
     #
     # @!attribute [rw] job_name
-    #   The name of the job.
+    #   The name of the Job in question.
     #   @return [String]
     #
     # @!attribute [rw] job_run_id
-    #   The job run Id.
+    #   The JobRunId of the JobRun in question.
     #   @return [String]
     #
     # @!attribute [rw] error_detail
-    #   The details of the error that occurred.
+    #   Specifies details about the error that was encountered.
     #   @return [Types::ErrorDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunError AWS API Documentation
@@ -366,11 +382,11 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of the job whose job runs are to be stopped.
+    #   The name of the Job in question.
     #   @return [String]
     #
     # @!attribute [rw] job_run_ids
-    #   A list of job run Ids of the given job to be stopped.
+    #   A list of the JobRunIds that should be stopped for that Job.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunRequest AWS API Documentation
@@ -382,12 +398,13 @@ module Aws::Glue
     end
 
     # @!attribute [rw] successful_submissions
-    #   A list of job runs which are successfully submitted for stopping.
+    #   A list of the JobRuns that were successfully submitted for stopping.
     #   @return [Array<Types::BatchStopJobRunSuccessfulSubmission>]
     #
     # @!attribute [rw] errors
-    #   A list containing the job run Ids and details of the error that
-    #   occurred for each job run while submitting to stop.
+    #   A list of the errors that were encountered in tryng to stop JobRuns,
+    #   including the JobRunId for which each error was encountered and
+    #   details about the error.
     #   @return [Array<Types::BatchStopJobRunError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunResponse AWS API Documentation
@@ -398,15 +415,14 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Details about the job run which is submitted successfully for
-    # stopping.
+    # Records a successful request to stop a specified JobRun.
     #
     # @!attribute [rw] job_name
-    #   The name of the job.
+    #   The Name of the Job in question.
     #   @return [String]
     #
     # @!attribute [rw] job_run_id
-    #   The job run Id.
+    #   The JobRunId of the JobRun in question.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunSuccessfulSubmission AWS API Documentation
@@ -648,11 +664,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] job_name
-    #   The name of the job in question.
+    #   The name of the Job to whose JobRuns this condition applies and on
+    #   which this trigger waits.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The condition state.
+    #   The condition state. Currently, the values supported are SUCCEEDED,
+    #   STOPPED and FAILED.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Condition AWS API Documentation
@@ -877,6 +895,9 @@ module Aws::Glue
     #   and schema from their parent table, rather than detect this
     #   information separately for each partition. Use the following JSON
     #   string to specify that behavior:
+    #
+    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
@@ -1153,7 +1174,11 @@ module Aws::Glue
     #   You can use this field to force partitions to inherit metadata such
     #   as classification, input format, output format, serde information,
     #   and schema from their parent table, rather than detect this
-    #   information separately for each partition.
+    #   information separately for each partition. Use the following JSON
+    #   string to specify that behavior:
+    #
+    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerRequest AWS API Documentation
@@ -1430,7 +1455,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   The name you assign to this job.
+    #   The name you assign to this job. It must be unique in your account.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1442,7 +1467,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The role associated with this job.
+    #   The name of the IAM role associated with this job.
     #   @return [String]
     #
     # @!attribute [rw] execution_property
@@ -1455,7 +1480,23 @@ module Aws::Glue
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
-    #   The default parameters for this job.
+    #   The default arguments for this job.
+    #
+    #   You can specify arguments here that your own job-execution script
+    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #
+    #   For information about how to specify and consume your own Job
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   developer guide.
+    #
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -1467,7 +1508,15 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_capacity
-    #   The number of capacity units allocated to this job.
+    #   The number of AWS Glue data processing units (DPUs) to allocate to
+    #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4
+    #   vCPUs of compute capacity and 16 GB of memory. For more information,
+    #   see the [AWS Glue pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
@@ -1487,7 +1536,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] name
-    #   The unique name of the new job that has been created.
+    #   The unique name that was provided.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobResponse AWS API Documentation
@@ -1611,6 +1660,7 @@ module Aws::Glue
     #             target_parameter: "CodeGenArgName",
     #           },
     #         ],
+    #         language: "PYTHON", # accepts PYTHON, SCALA
     #       }
     #
     # @!attribute [rw] dag_nodes
@@ -1621,11 +1671,16 @@ module Aws::Glue
     #   A list of the edges in the DAG.
     #   @return [Array<Types::CodeGenEdge>]
     #
+    # @!attribute [rw] language
+    #   The programming language of the resulting code from the DAG.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateScriptRequest AWS API Documentation
     #
     class CreateScriptRequest < Struct.new(
       :dag_nodes,
-      :dag_edges)
+      :dag_edges,
+      :language)
       include Aws::Structure
     end
 
@@ -1633,10 +1688,15 @@ module Aws::Glue
     #   The Python script generated from the DAG.
     #   @return [String]
     #
+    # @!attribute [rw] scala_code
+    #   The Scala code generated from the DAG.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateScriptResponse AWS API Documentation
     #
     class CreateScriptResponse < Struct.new(
-      :python_script)
+      :python_script,
+      :scala_code)
       include Aws::Structure
     end
 
@@ -1743,7 +1803,7 @@ module Aws::Glue
     #         type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND
     #         schedule: "GenericString",
     #         predicate: {
-    #           logical: "AND", # accepts AND
+    #           logical: "AND", # accepts AND, ANY
     #           conditions: [
     #             {
     #               logical_operator: "EQUALS", # accepts EQUALS
@@ -1764,7 +1824,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   The name to assign to the new trigger.
+    #   The name of the trigger.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1776,6 +1836,8 @@ module Aws::Glue
     #   Schedules for Jobs and Crawlers][1]. For example, to run something
     #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
+    #   This field is required when the trigger type is SCHEDULED.
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
@@ -1783,6 +1845,8 @@ module Aws::Glue
     #
     # @!attribute [rw] predicate
     #   A predicate to specify when the new trigger should fire.
+    #
+    #   This field is required when the trigger type is CONDITIONAL.
     #   @return [Types::Predicate]
     #
     # @!attribute [rw] actions
@@ -1806,7 +1870,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] name
-    #   The name assigned to the new trigger.
+    #   The name of the trigger.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTriggerResponse AWS API Documentation
@@ -1884,9 +1948,11 @@ module Aws::Glue
     #
     # @!attribute [rw] row_tag
     #   The XML tag designating the element that contains each record in an
-    #   XML document being parsed. Note that this cannot be an empty
-    #   element. It must contain child elements representing fields in the
-    #   record.
+    #   XML document being parsed. Note that this cannot identify a
+    #   self-closing element (closed by `/>`). An empty row element that
+    #   contains only attributes can be parsed as long as it ends with a
+    #   closing tag (for example, `<row item_a="A" item_b="B"></row>` is
+    #   okay, but `<row item_a="A" item_b="B" />` is not).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateXMLClassifierRequest AWS API Documentation
@@ -2450,7 +2516,9 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] max_concurrent_runs
-    #   The maximum number of concurrent runs allowed for a job.
+    #   The maximum number of concurrent runs allowed for a job. The default
+    #   is 1. An error is returned when this threshold is reached. The
+    #   maximum value you can specify is controlled by a service limit.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ExecutionProperty AWS API Documentation
@@ -3033,7 +3101,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] predecessors_included
-    #   A list of the predecessor runs to return as well.
+    #   True if a list of predecessor runs should be returned.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRunRequest AWS API Documentation
@@ -3371,6 +3439,7 @@ module Aws::Glue
     #             },
     #           ],
     #         },
+    #         language: "PYTHON", # accepts PYTHON, SCALA
     #       }
     #
     # @!attribute [rw] mapping
@@ -3389,13 +3458,18 @@ module Aws::Glue
     #   Parameters for the mapping.
     #   @return [Types::Location]
     #
+    # @!attribute [rw] language
+    #   The programming language of the code to perform the mapping.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlanRequest AWS API Documentation
     #
     class GetPlanRequest < Struct.new(
       :mapping,
       :source,
       :sinks,
-      :location)
+      :location,
+      :language)
       include Aws::Structure
     end
 
@@ -3403,10 +3477,15 @@ module Aws::Glue
     #   A Python script to perform the mapping.
     #   @return [String]
     #
+    # @!attribute [rw] scala_code
+    #   Scala code to perform the mapping.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlanResponse AWS API Documentation
     #
     class GetPlanResponse < Struct.new(
-      :python_script)
+      :python_script,
+      :scala_code)
       include Aws::Structure
     end
 
@@ -3617,7 +3696,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] dependent_job_name
-    #   The name of the job for which to retrieve triggers.
+    #   The name of the job for which to retrieve triggers. The trigger that
+    #   can start this job will be returned, and if there is no such
+    #   trigger, all triggers will be returned.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3868,7 +3949,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies a job in the Data Catalog.
+    # Specifies a job.
     #
     # @!attribute [rw] name
     #   The name you assign to this job.
@@ -3883,7 +3964,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The role associated with this job.
+    #   The name of the IAM role associated with this job.
     #   @return [String]
     #
     # @!attribute [rw] created_on
@@ -3904,7 +3985,23 @@ module Aws::Glue
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
-    #   The default parameters for this job.
+    #   The default arguments for this job, specified as name-value pairs.
+    #
+    #   You can specify arguments here that your own job-execution script
+    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #
+    #   For information about how to specify and consume your own Job
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   developer guide.
+    #
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -3916,7 +4013,15 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_capacity
-    #   The number of capacity units allocated to this job.
+    #   The number of AWS Glue data processing units (DPUs) allocated to
+    #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4
+    #   vCPUs of compute capacity and 16 GB of memory. For more information,
+    #   see the [AWS Glue pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
@@ -3981,11 +4086,11 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   The name of this job command.
+    #   The name of the job command: this must be `glueetl`.
     #   @return [String]
     #
     # @!attribute [rw] script_location
-    #   Specifies the location of a script that executes a job.
+    #   Specifies the S3 path to a script that executes a job (required).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobCommand AWS API Documentation
@@ -4003,15 +4108,16 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] attempt
-    #   The number or the attempt to run this job.
+    #   The number of the attempt to run this job.
     #   @return [Integer]
     #
     # @!attribute [rw] previous_run_id
-    #   The ID of the previous run of this job.
+    #   The ID of the previous run of this job. For example, the JobRunId
+    #   specified in the StartJobRun action.
     #   @return [String]
     #
     # @!attribute [rw] trigger_name
-    #   The name of the trigger for this job run.
+    #   The name of the trigger that started this job run.
     #   @return [String]
     #
     # @!attribute [rw] job_name
@@ -4035,7 +4141,24 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] arguments
-    #   The job arguments associated with this run.
+    #   The job arguments associated with this run. These override
+    #   equivalent default arguments set for the job.
+    #
+    #   You can specify arguments here that your own job-execution script
+    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #
+    #   For information about how to specify and consume your own job
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   developer guide.
+    #
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] error_message
@@ -4047,7 +4170,15 @@ module Aws::Glue
     #   @return [Array<Types::Predecessor>]
     #
     # @!attribute [rw] allocated_capacity
-    #   The amount of infrastructure capacity allocated to this job run.
+    #   The number of AWS Glue data processing units (DPUs) allocated to
+    #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10.
+    #   A DPU is a relative measure of processing power that consists of 4
+    #   vCPUs of compute capacity and 16 GB of memory. For more information,
+    #   see the [AWS Glue pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
@@ -4069,7 +4200,9 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies information used to update an existing job.
+    # Specifies information used to update an existing job. Note that the
+    # previous job definition will be completely overwritten by this
+    # information.
     #
     # @note When making an API call, you may pass JobUpdate
     #   data as a hash:
@@ -4104,7 +4237,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The role associated with this job.
+    #   The name of the IAM role associated with this job (required).
     #   @return [String]
     #
     # @!attribute [rw] execution_property
@@ -4113,11 +4246,27 @@ module Aws::Glue
     #   @return [Types::ExecutionProperty]
     #
     # @!attribute [rw] command
-    #   The JobCommand that executes this job.
+    #   The JobCommand that executes this job (required).
     #   @return [Types::JobCommand]
     #
     # @!attribute [rw] default_arguments
-    #   The default parameters for this job.
+    #   The default arguments for this job.
+    #
+    #   You can specify arguments here that your own job-execution script
+    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #
+    #   For information about how to specify and consume your own Job
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   developer guide.
+    #
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -4129,7 +4278,15 @@ module Aws::Glue
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_capacity
-    #   The number of capacity units allocated to this job.
+    #   The number of AWS Glue data processing units (DPUs) to allocate to
+    #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4
+    #   vCPUs of compute capacity and 16 GB of memory. For more information,
+    #   see the [AWS Glue pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
@@ -4507,14 +4664,15 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A job run that preceded this one.
+    # A job run that was used in the predicate of a conditional trigger that
+    # triggered this job run.
     #
     # @!attribute [rw] job_name
     #   The name of the predecessor job.
     #   @return [String]
     #
     # @!attribute [rw] run_id
-    #   The job-run ID of the precessor job run.
+    #   The job-run ID of the predecessor job run.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Predecessor AWS API Documentation
@@ -4531,7 +4689,7 @@ module Aws::Glue
     #   data as a hash:
     #
     #       {
-    #         logical: "AND", # accepts AND
+    #         logical: "AND", # accepts AND, ANY
     #         conditions: [
     #           {
     #             logical_operator: "EQUALS", # accepts EQUALS
@@ -4856,15 +5014,40 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] job_run_id
-    #   The ID of the job run to start.
+    #   The ID of a previous JobRun to retry.
     #   @return [String]
     #
     # @!attribute [rw] arguments
-    #   Specific arguments for this job run.
+    #   The job arguments specifically for this run. They override the
+    #   equivalent default arguments set for the job itself.
+    #
+    #   You can specify arguments here that your own job-execution script
+    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #
+    #   For information about how to specify and consume your own Job
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   developer guide.
+    #
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] allocated_capacity
-    #   The infrastructure capacity to allocate to this job.
+    #   The number of AWS Glue data processing units (DPUs) to allocate to
+    #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10.
+    #   A DPU is a relative measure of processing power that consists of 4
+    #   vCPUs of compute capacity and 16 GB of memory. For more information,
+    #   see the [AWS Glue pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRunRequest AWS API Documentation
@@ -5379,7 +5562,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The trigger ID.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -5409,7 +5592,7 @@ module Aws::Glue
     #   @return [Array<Types::Action>]
     #
     # @!attribute [rw] predicate
-    #   The predicate of this trigger.
+    #   The predicate of this trigger, which defines when it will fire.
     #   @return [Types::Predicate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Trigger AWS API Documentation
@@ -5426,7 +5609,9 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # A structure used to provide information used to updata a trigger.
+    # A structure used to provide information used to update a trigger. This
+    # object will update the the previous trigger definition by overwriting
+    # it completely.
     #
     # @note When making an API call, you may pass TriggerUpdate
     #   data as a hash:
@@ -5444,7 +5629,7 @@ module Aws::Glue
     #           },
     #         ],
     #         predicate: {
-    #           logical: "AND", # accepts AND
+    #           logical: "AND", # accepts AND, ANY
     #           conditions: [
     #             {
     #               logical_operator: "EQUALS", # accepts EQUALS
@@ -5456,7 +5641,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the trigger.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5464,10 +5649,9 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] schedule
-    #   An updated `cron` expression used to specify the schedule (see
-    #   [Time-Based Schedules for Jobs and Crawlers][1]. For example, to run
-    #   something every day at 12:15 UTC, you would specify: `cron(15 12 * *
-    #   ? *)`.
+    #   A `cron` expression used to specify the schedule (see [Time-Based
+    #   Schedules for Jobs and Crawlers][1]. For example, to run something
+    #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
     #
     #
@@ -5668,6 +5852,9 @@ module Aws::Glue
     #   and schema from their parent table, rather than detect this
     #   information separately for each partition. Use the following JSON
     #   string to specify that behavior:
+    #
+    #   Example:  `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerRequest AWS API Documentation
@@ -6113,7 +6300,7 @@ module Aws::Glue
     #             },
     #           ],
     #           predicate: {
-    #             logical: "AND", # accepts AND
+    #             logical: "AND", # accepts AND, ANY
     #             conditions: [
     #               {
     #                 logical_operator: "EQUALS", # accepts EQUALS
@@ -6227,9 +6414,11 @@ module Aws::Glue
     #
     # @!attribute [rw] row_tag
     #   The XML tag designating the element that contains each record in an
-    #   XML document being parsed. Note that this cannot be an empty
-    #   element. It must contain child elements representing fields in the
-    #   record.
+    #   XML document being parsed. Note that this cannot identify a
+    #   self-closing element (closed by `/>`). An empty row element that
+    #   contains only attributes can be parsed as long as it ends with a
+    #   closing tag (for example, `<row item_a="A" item_b="B"></row>` is
+    #   okay, but `<row item_a="A" item_b="B" />` is not).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateXMLClassifierRequest AWS API Documentation
@@ -6353,9 +6542,11 @@ module Aws::Glue
     #
     # @!attribute [rw] row_tag
     #   The XML tag designating the element that contains each record in an
-    #   XML document being parsed. Note that this cannot be an empty
-    #   element. It must contain child elements representing fields in the
-    #   record.
+    #   XML document being parsed. Note that this cannot identify a
+    #   self-closing element (closed by `/>`). An empty row element that
+    #   contains only attributes can be parsed as long as it ends with a
+    #   closing tag (for example, `<row item_a="A" item_b="B"></row>` is
+    #   okay, but `<row item_a="A" item_b="B" />` is not).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/XMLClassifier AWS API Documentation

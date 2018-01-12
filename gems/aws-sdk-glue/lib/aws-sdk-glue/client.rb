@@ -465,13 +465,13 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Stops a batch of job runs for a given job.
+    # Stops one or more job runs for a specified Job.
     #
     # @option params [required, String] :job_name
-    #   The name of the job whose job runs are to be stopped.
+    #   The name of the Job in question.
     #
     # @option params [required, Array<String>] :job_run_ids
-    #   A list of job run Ids of the given job to be stopped.
+    #   A list of the JobRunIds that should be stopped for that Job.
     #
     # @return [Types::BatchStopJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -630,7 +630,11 @@ module Aws::Glue
     #   You can use this field to force partitions to inherit metadata such as
     #   classification, input format, output format, serde information, and
     #   schema from their parent table, rather than detect this information
-    #   separately for each partition.
+    #   separately for each partition. Use the following JSON string to
+    #   specify that behavior:
+    #
+    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -809,7 +813,7 @@ module Aws::Glue
     # Creates a new job.
     #
     # @option params [required, String] :name
-    #   The name you assign to this job.
+    #   The name you assign to this job. It must be unique in your account.
     #
     # @option params [String] :description
     #   Description of the job.
@@ -818,7 +822,7 @@ module Aws::Glue
     #   This field is reserved for future use.
     #
     # @option params [required, String] :role
-    #   The role associated with this job.
+    #   The name of the IAM role associated with this job.
     #
     # @option params [Types::ExecutionProperty] :execution_property
     #   An ExecutionProperty specifying the maximum number of concurrent runs
@@ -828,7 +832,23 @@ module Aws::Glue
     #   The JobCommand that executes this job.
     #
     # @option params [Hash<String,String>] :default_arguments
-    #   The default parameters for this job.
+    #   The default arguments for this job.
+    #
+    #   You can specify arguments here that your own job-execution script
+    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #
+    #   For information about how to specify and consume your own Job
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   developer guide.
+    #
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
     #
     # @option params [Types::ConnectionsList] :connections
     #   The connections used for this job.
@@ -837,7 +857,15 @@ module Aws::Glue
     #   The maximum number of times to retry this job if it fails.
     #
     # @option params [Integer] :allocated_capacity
-    #   The number of capacity units allocated to this job.
+    #   The number of AWS Glue data processing units (DPUs) to allocate to
+    #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4 vCPUs
+    #   of compute capacity and 16 GB of memory. For more information, see the
+    #   [AWS Glue pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -963,7 +991,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Transforms a directed acyclic graph (DAG) into a Python script.
+    # Transforms a directed acyclic graph (DAG) into code.
     #
     # @option params [Array<Types::CodeGenNode>] :dag_nodes
     #   A list of the nodes in the DAG.
@@ -971,9 +999,13 @@ module Aws::Glue
     # @option params [Array<Types::CodeGenEdge>] :dag_edges
     #   A list of the edges in the DAG.
     #
+    # @option params [String] :language
+    #   The programming language of the resulting code from the DAG.
+    #
     # @return [Types::CreateScriptResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateScriptResponse#python_script #python_script} => String
+    #   * {Types::CreateScriptResponse#scala_code #scala_code} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -999,11 +1031,13 @@ module Aws::Glue
     #         target_parameter: "CodeGenArgName",
     #       },
     #     ],
+    #     language: "PYTHON", # accepts PYTHON, SCALA
     #   })
     #
     # @example Response structure
     #
     #   resp.python_script #=> String
+    #   resp.scala_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateScript AWS API Documentation
     #
@@ -1108,7 +1142,7 @@ module Aws::Glue
     # Creates a new trigger.
     #
     # @option params [required, String] :name
-    #   The name to assign to the new trigger.
+    #   The name of the trigger.
     #
     # @option params [required, String] :type
     #   The type of the new trigger.
@@ -1118,12 +1152,16 @@ module Aws::Glue
     #   Schedules for Jobs and Crawlers][1]. For example, to run something
     #   every day at 12:15 UTC, you would specify: `cron(15 12 * * ? *)`.
     #
+    #   This field is required when the trigger type is SCHEDULED.
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
     #
     # @option params [Types::Predicate] :predicate
     #   A predicate to specify when the new trigger should fire.
+    #
+    #   This field is required when the trigger type is CONDITIONAL.
     #
     # @option params [required, Array<Types::Action>] :actions
     #   The actions initiated by this trigger when it fires.
@@ -1142,7 +1180,7 @@ module Aws::Glue
     #     type: "SCHEDULED", # required, accepts SCHEDULED, CONDITIONAL, ON_DEMAND
     #     schedule: "GenericString",
     #     predicate: {
-    #       logical: "AND", # accepts AND
+    #       logical: "AND", # accepts AND, ANY
     #       conditions: [
     #         {
     #           logical_operator: "EQUALS", # accepts EQUALS
@@ -1339,7 +1377,8 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Deletes a specified job.
+    # Deletes a specified job. If the job is not found, no exception is
+    # thrown.
     #
     # @option params [required, String] :job_name
     #   The name of the job to delete.
@@ -1434,7 +1473,8 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Deletes a specified trigger.
+    # Deletes a specified trigger. If the trigger is not found, no exception
+    # is thrown.
     #
     # @option params [required, String] :name
     #   The name of the trigger to delete.
@@ -2161,7 +2201,7 @@ module Aws::Glue
     #   The ID of the job run.
     #
     # @option params [Boolean] :predecessors_included
-    #   A list of the predecessor runs to return as well.
+    #   True if a list of predecessor runs should be returned.
     #
     # @return [Types::GetJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2542,7 +2582,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Gets a Python script to perform a specified mapping.
+    # Gets code to perform a specified mapping.
     #
     # @option params [required, Array<Types::MappingEntry>] :mapping
     #   The list of mappings from a source table to target tables.
@@ -2556,9 +2596,13 @@ module Aws::Glue
     # @option params [Types::Location] :location
     #   Parameters for the mapping.
     #
+    # @option params [String] :language
+    #   The programming language of the code to perform the mapping.
+    #
     # @return [Types::GetPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPlanResponse#python_script #python_script} => String
+    #   * {Types::GetPlanResponse#scala_code #scala_code} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2599,11 +2643,13 @@ module Aws::Glue
     #         },
     #       ],
     #     },
+    #     language: "PYTHON", # accepts PYTHON, SCALA
     #   })
     #
     # @example Response structure
     #
     #   resp.python_script #=> String
+    #   resp.scala_code #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetPlan AWS API Documentation
     #
@@ -2914,7 +2960,7 @@ module Aws::Glue
     #   resp.trigger.actions[0].job_name #=> String
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
-    #   resp.trigger.predicate.logical #=> String, one of "AND"
+    #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
@@ -2935,7 +2981,9 @@ module Aws::Glue
     #   A continuation token, if this is a continuation call.
     #
     # @option params [String] :dependent_job_name
-    #   The name of the job for which to retrieve triggers.
+    #   The name of the job for which to retrieve triggers. The trigger that
+    #   can start this job will be returned, and if there is no such trigger,
+    #   all triggers will be returned.
     #
     # @option params [Integer] :max_results
     #   The maximum size of the response.
@@ -2966,7 +3014,7 @@ module Aws::Glue
     #   resp.triggers[0].actions[0].job_name #=> String
     #   resp.triggers[0].actions[0].arguments #=> Hash
     #   resp.triggers[0].actions[0].arguments["GenericString"] #=> String
-    #   resp.triggers[0].predicate.logical #=> String, one of "AND"
+    #   resp.triggers[0].predicate.logical #=> String, one of "AND", "ANY"
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.triggers[0].predicate.conditions[0].job_name #=> String
@@ -3190,13 +3238,38 @@ module Aws::Glue
     #   The name of the job to start.
     #
     # @option params [String] :job_run_id
-    #   The ID of the job run to start.
+    #   The ID of a previous JobRun to retry.
     #
     # @option params [Hash<String,String>] :arguments
-    #   Specific arguments for this job run.
+    #   The job arguments specifically for this run. They override the
+    #   equivalent default arguments set for the job itself.
+    #
+    #   You can specify arguments here that your own job-execution script
+    #   consumes, as well as arguments that AWS Glue itself consumes.
+    #
+    #   For information about how to specify and consume your own Job
+    #   arguments, see the [Calling AWS Glue APIs in Python][1] topic in the
+    #   developer guide.
+    #
+    #   For information about the key-value pairs that AWS Glue consumes to
+    #   set up your job, see the [Special Parameters Used by AWS Glue][2]
+    #   topic in the developer guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
     #
     # @option params [Integer] :allocated_capacity
-    #   The infrastructure capacity to allocate to this job.
+    #   The number of AWS Glue data processing units (DPUs) to allocate to
+    #   this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A
+    #   DPU is a relative measure of processing power that consists of 4 vCPUs
+    #   of compute capacity and 16 GB of memory. For more information, see the
+    #   [AWS Glue pricing page][1].
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/glue/pricing/
     #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3226,7 +3299,12 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Starts an existing trigger.
+    # Starts an existing trigger. See [Triggering Jobs][1] for information
+    # about how different types of trigger are started.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/glue/latest/dg/trigger-job.html
     #
     # @option params [required, String] :name
     #   The name of the trigger to start.
@@ -3456,6 +3534,9 @@ module Aws::Glue
     #   schema from their parent table, rather than detect this information
     #   separately for each partition. Use the following JSON string to
     #   specify that behavior:
+    #
+    #   Example:  `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3867,7 +3948,7 @@ module Aws::Glue
     #         },
     #       ],
     #       predicate: {
-    #         logical: "AND", # accepts AND
+    #         logical: "AND", # accepts AND, ANY
     #         conditions: [
     #           {
     #             logical_operator: "EQUALS", # accepts EQUALS
@@ -3891,7 +3972,7 @@ module Aws::Glue
     #   resp.trigger.actions[0].job_name #=> String
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
-    #   resp.trigger.predicate.logical #=> String, one of "AND"
+    #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
@@ -3967,7 +4048,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
