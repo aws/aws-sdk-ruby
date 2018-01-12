@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix Ruby 2.5 warnings.
+
 3.13.0 (2017-12-21)
 ------------------
 

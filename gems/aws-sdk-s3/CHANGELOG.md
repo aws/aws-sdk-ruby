@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix Ruby 2.5 warnings.
+
 1.8.0 (2017-11-29)
 ------------------
 
