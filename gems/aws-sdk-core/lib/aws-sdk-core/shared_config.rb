@@ -254,11 +254,11 @@ module Aws
     end
 
     def determine_credentials_path
-      default = default_shared_config_path('credentials')
+      default_shared_config_path('credentials')
     end
 
     def determine_config_path
-      default = default_shared_config_path('config')
+      default_shared_config_path('config')
     end
 
     def default_shared_config_path(file)

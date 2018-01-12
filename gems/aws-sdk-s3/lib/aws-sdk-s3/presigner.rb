@@ -132,7 +132,7 @@ module Aws
       end
 
       def build_signer(cfg)
-        signer = Aws::Sigv4::Signer.new(
+        Aws::Sigv4::Signer.new(
           service: 's3',
           region: cfg.region,
           credentials_provider: cfg.credentials,
