@@ -41,7 +41,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] unreserved_concurrent_executions
     #   The number of concurrent executions available to functions that do
-    #   not have concurrency limits set.
+    #   not have concurrency limits set. For more information, see
+    #   concurrent-executions.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountLimit AWS API Documentation
@@ -254,9 +255,10 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] additional_version_weights
-    #   Set this property value to dictate what percentage of traffic will
-    #   invoke the updated function version. If set to an empty string, 100
-    #   percent of traffic will invoke `function-version`.
+    #   Set this value to dictate what percentage of traffic will invoke the
+    #   updated function version. If set to an empty string, 100 percent of
+    #   traffic will invoke `function-version`. For more information, see
+    #   lambda-traffic-shifting-using-aliases.
     #   @return [Hash<String,Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasRoutingConfiguration AWS API Documentation
@@ -267,7 +269,8 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] reserved_concurrent_executions
-    #   The number of concurrent executions reserved for this function.
+    #   The number of concurrent executions reserved for this function. For
+    #   more information, see concurrent-executions.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Concurrency AWS API Documentation
@@ -425,7 +428,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, nodejs4.3-edge
+    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
     #         role: "RoleArn", # required
     #         handler: "Handler", # required
     #         code: { # required
@@ -668,7 +671,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] function_name
     #   The name of the function you are removing concurrent execution
-    #   limits from.
+    #   limits from. For more information, see concurrent-executions.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionConcurrencyRequest AWS API Documentation
@@ -1204,7 +1207,8 @@ module Aws::Lambda
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] concurrency
-    #   The concurrent execution limit set for this function.
+    #   The concurrent execution limit set for this function. For more
+    #   information, see concurrent-executions.
     #   @return [Types::Concurrency]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionResponse AWS API Documentation
@@ -1400,7 +1404,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] executed_version
     #   The function version that has been executed. This value is returned
-    #   only if the invocation type is `RequestResponse`.
+    #   only if the invocation type is `RequestResponse`. For more
+    #   information, see lambda-traffic-shifting-using-aliases.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationResponse AWS API Documentation
@@ -1797,11 +1802,12 @@ module Aws::Lambda
     #
     # @!attribute [rw] function_name
     #   The name of the function you are setting concurrent execution limits
-    #   on.
+    #   on. For more information, see concurrent-executions.
     #   @return [String]
     #
     # @!attribute [rw] reserved_concurrent_executions
-    #   The concurrent execution limit reserved for this function.
+    #   The concurrent execution limit reserved for this function. For more
+    #   information, see concurrent-executions.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PutFunctionConcurrencyRequest AWS API Documentation
@@ -2155,7 +2161,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, nodejs4.3-edge
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },
