@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fixed ox parsing of xml documents containing significant whitespace
+
 3.14.0 (2018-01-15)
 ------------------
 

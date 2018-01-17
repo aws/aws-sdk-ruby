@@ -14,7 +14,7 @@ module Aws
           Ox.sax_parse(
             @stack, StringIO.new(xml),
             :convert_special => true,
-            :skip => :skip_white
+            :skip => :skip_none
           )
         end
 
