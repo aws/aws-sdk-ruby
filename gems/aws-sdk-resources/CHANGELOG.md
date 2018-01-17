@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.11.0 (2018-01-17)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-autoscalingplans` gem.
+
 3.10.0 (2017-12-12)
 ------------------
 

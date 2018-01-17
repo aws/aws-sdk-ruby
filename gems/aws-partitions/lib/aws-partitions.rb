@@ -230,6 +230,7 @@ module Aws
             'ApplicationDiscoveryService' => 'discovery',
             'Athena' => 'athena',
             'AutoScaling' => 'autoscaling',
+            'AutoScalingPlans' => 'autoscaling',
             'Batch' => 'batch',
             'Budgets' => 'budgets',
             'Cloud9' => 'cloud9',

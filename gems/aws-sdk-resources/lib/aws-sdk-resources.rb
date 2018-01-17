@@ -12,6 +12,7 @@ module Aws
   autoload :ApplicationDiscoveryService, 'aws-sdk-applicationdiscoveryservice'
   autoload :Athena, 'aws-sdk-athena'
   autoload :AutoScaling, 'aws-sdk-autoscaling'
+  autoload :AutoScalingPlans, 'aws-sdk-autoscalingplans'
   autoload :Batch, 'aws-sdk-batch'
   autoload :Budgets, 'aws-sdk-budgets'
   autoload :Cloud9, 'aws-sdk-cloud9'

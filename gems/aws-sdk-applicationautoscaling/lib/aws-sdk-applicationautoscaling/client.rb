@@ -477,8 +477,8 @@ module Aws::ApplicationAutoScaling
       req.send_request(options)
     end
 
-    # Provides descriptive information about the scalable targets in the
-    # specified namespace.
+    # Gets information about the scalable targets in the specified
+    # namespace.
     #
     # You can filter the results using the `ResourceIds` and
     # `ScalableDimension` parameters.
@@ -559,8 +559,8 @@ module Aws::ApplicationAutoScaling
     #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of scalable target results. This value can be
-    #   between 1 and 50. The default value is 50.
+    #   The maximum number of scalable targets. This value can be between 1
+    #   and 50. The default value is 50.
     #
     #   If this parameter is used, the operation returns up to `MaxResults`
     #   results at a time, along with a `NextToken` value. To get the next set
@@ -713,8 +713,8 @@ module Aws::ApplicationAutoScaling
     #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of scalable target results. This value can be
-    #   between 1 and 50. The default value is 50.
+    #   The maximum number of scalable targets. This value can be between 1
+    #   and 50. The default value is 50.
     #
     #   If this parameter is used, the operation returns up to `MaxResults`
     #   results at a time, along with a `NextToken` value. To get the next set
@@ -878,8 +878,8 @@ module Aws::ApplicationAutoScaling
     #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of scalable target results. This value can be
-    #   between 1 and 50. The default value is 50.
+    #   The maximum number of scalable targets. This value can be between 1
+    #   and 50. The default value is 50.
     #
     #   If this parameter is used, the operation returns up to `MaxResults`
     #   results at a time, along with a `NextToken` value. To get the next set
@@ -965,7 +965,7 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies[0].step_scaling_policy_configuration.cooldown #=> Integer
     #   resp.scaling_policies[0].step_scaling_policy_configuration.metric_aggregation_type #=> String, one of "Average", "Minimum", "Maximum"
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.target_value #=> Float
-    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "DynamoDBReadCapacityUtilization", "DynamoDBWriteCapacityUtilization", "ALBRequestCountPerTarget", "RDSReaderAverageCPUUtilization", "RDSReaderAverageDatabaseConnections", "EC2SpotFleetRequestAverageCPUUtilization", "EC2SpotFleetRequestAverageNetworkIn", "EC2SpotFleetRequestAverageNetworkOut"
+    #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.predefined_metric_type #=> String, one of "DynamoDBReadCapacityUtilization", "DynamoDBWriteCapacityUtilization", "ALBRequestCountPerTarget", "RDSReaderAverageCPUUtilization", "RDSReaderAverageDatabaseConnections", "EC2SpotFleetRequestAverageCPUUtilization", "EC2SpotFleetRequestAverageNetworkIn", "EC2SpotFleetRequestAverageNetworkOut", "ECSServiceAverageCPUUtilization", "ECSServiceAverageMemoryUtilization"
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.predefined_metric_specification.resource_label #=> String
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.metric_name #=> String
     #   resp.scaling_policies[0].target_tracking_scaling_policy_configuration.customized_metric_specification.namespace #=> String
@@ -1134,7 +1134,7 @@ module Aws::ApplicationAutoScaling
     # Each scalable target is identified by a service namespace, resource
     # ID, and scalable dimension. A scaling policy applies to the scalable
     # target identified by those three attributes. You cannot create a
-    # scaling policy without first registering a scalable target using
+    # scaling policy until you register the scalable target using
     # RegisterScalableTarget.
     #
     # To update a policy, specify its policy name and the parameters that
@@ -1217,12 +1217,13 @@ module Aws::ApplicationAutoScaling
     #     Aurora DB cluster. Available for Aurora MySQL-compatible edition.
     #
     # @option params [String] :policy_type
-    #   The policy type. If you are creating a new policy, this parameter is
-    #   required. If you are updating a policy, this parameter is not
-    #   required.
+    #   The policy type. This parameter is required if you are creating a
+    #   policy.
     #
-    #   For DynamoDB, only `TargetTrackingScaling` is supported. For any other
-    #   service, only `StepScaling` is supported.
+    #   For DynamoDB, only `TargetTrackingScaling` is supported. For Amazon
+    #   ECS, Spot Fleet, and Amazon RDS, both `StepScaling` and
+    #   `TargetTrackingScaling` are supported. For any other service, only
+    #   `StepScaling` is supported.
     #
     # @option params [Types::StepScalingPolicyConfiguration] :step_scaling_policy_configuration
     #   A step scaling policy.
@@ -1233,8 +1234,8 @@ module Aws::ApplicationAutoScaling
     # @option params [Types::TargetTrackingScalingPolicyConfiguration] :target_tracking_scaling_policy_configuration
     #   A target tracking policy.
     #
-    #   This parameter is required if you are creating a new policy and the
-    #   policy type is `TargetTrackingScaling`.
+    #   This parameter is required if you are creating a policy and the policy
+    #   type is `TargetTrackingScaling`.
     #
     # @return [Types::PutScalingPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1322,7 +1323,7 @@ module Aws::ApplicationAutoScaling
     #     target_tracking_scaling_policy_configuration: {
     #       target_value: 1.0, # required
     #       predefined_metric_specification: {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
     #         resource_label: "ResourceLabel",
     #       },
     #       customized_metric_specification: {
@@ -1365,7 +1366,7 @@ module Aws::ApplicationAutoScaling
     # Each scalable target is identified by a service namespace, resource
     # ID, and scalable dimension. A scheduled action applies to the scalable
     # target identified by those three attributes. You cannot create a
-    # scheduled action without first registering a scalable target using
+    # scheduled action until you register the scalable target using
     # RegisterScalableTarget.
     #
     # To update an action, specify its name and the parameters that you want
@@ -1439,7 +1440,8 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
     #
     # @option params [String] :scalable_dimension
-    #   The scalable dimension. This string consists of the service namespace,
+    #   The scalable dimension. This parameter is required if you are creating
+    #   a scheduled action. This string consists of the service namespace,
     #   resource type, and scaling property.
     #
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
@@ -1512,13 +1514,13 @@ module Aws::ApplicationAutoScaling
     # Registers or updates a scalable target. A scalable target is a
     # resource that Application Auto Scaling can scale out or scale in.
     # After you have registered a scalable target, you can use this
-    # operation to update the minimum and maximum values for your scalable
+    # operation to update the minimum and maximum values for its scalable
     # dimension.
     #
     # After you register a scalable target, you can create and apply scaling
     # policies using PutScalingPolicy. You can view the scaling policies for
-    # a service namespace using DescribeScalableTargets. If you are no
-    # longer using a scalable target, you can deregister it using
+    # a service namespace using DescribeScalableTargets. If you no longer
+    # need a scalable target, you can deregister it using
     # DeregisterScalableTarget.
     #
     # @option params [required, String] :service_namespace
@@ -1592,25 +1594,22 @@ module Aws::ApplicationAutoScaling
     #
     # @option params [Integer] :min_capacity
     #   The minimum value to scale to in response to a scale in event. This
-    #   parameter is required if you are registering a scalable target and
-    #   optional if you are updating one.
+    #   parameter is required if you are registering a scalable target.
     #
     # @option params [Integer] :max_capacity
     #   The maximum value to scale to in response to a scale out event. This
-    #   parameter is required if you are registering a scalable target and
-    #   optional if you are updating one.
+    #   parameter is required if you are registering a scalable target.
     #
     # @option params [String] :role_arn
-    #   The ARN of an IAM role that allows Application Auto Scaling to modify
-    #   the scalable target on your behalf.
-    #
-    #   With Amazon RDS resources, permissions are granted using a
-    #   service-linked role. For more information, see [Service-Linked Roles
-    #   for Application Auto Scaling][1].
+    #   Application Auto Scaling creates a service-linked role that grants it
+    #   permissions to modify the scalable target on your behalf. For more
+    #   information, see [Service-Linked Roles for Application Auto
+    #   Scaling][1].
     #
     #   For resources that are not supported using a service-linked role, this
-    #   parameter is required when you register a scalable target and optional
-    #   when you update one.
+    #   parameter is required and must specify the ARN of an IAM role that
+    #   allows Application Auto Scaling to modify the scalable target on your
+    #   behalf.
     #
     #
     #
@@ -1684,7 +1683,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -87,6 +87,20 @@ module Aws::RDS
       data[:supported_timezones]
     end
 
+    # The types of logs that the database engine has available for export to
+    # CloudWatch Logs.
+    # @return [Array<String>]
+    def exportable_log_types
+      data[:exportable_log_types]
+    end
+
+    # A value that indicates whether the engine version supports exporting
+    # the log types specified by ExportableLogTypes to CloudWatch Logs.
+    # @return [Boolean]
+    def supports_log_exports_to_cloudwatch_logs
+      data[:supports_log_exports_to_cloudwatch_logs]
+    end
+
     # @!endgroup
 
     # @return [Client]

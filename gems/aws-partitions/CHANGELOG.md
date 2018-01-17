@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2018-01-17)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AutoScalingPlans`.
+
 1.54.0 (2018-01-15)
 ------------------
 

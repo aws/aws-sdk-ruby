@@ -462,8 +462,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of scalable target results. This value can be
-    #   between 1 and 50. The default value is 50.
+    #   The maximum number of scalable targets. This value can be between 1
+    #   and 50. The default value is 50.
     #
     #   If this parameter is used, the operation returns up to `MaxResults`
     #   results at a time, along with a `NextToken` value. To get the next
@@ -488,7 +488,7 @@ module Aws::ApplicationAutoScaling
     end
 
     # @!attribute [rw] scalable_targets
-    #   The list of scalable targets that matches the request parameters.
+    #   The scalable targets that match the request parameters.
     #   @return [Array<Types::ScalableTarget>]
     #
     # @!attribute [rw] next_token
@@ -592,8 +592,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of scalable target results. This value can be
-    #   between 1 and 50. The default value is 50.
+    #   The maximum number of scalable targets. This value can be between 1
+    #   and 50. The default value is 50.
     #
     #   If this parameter is used, the operation returns up to `MaxResults`
     #   results at a time, along with a `NextToken` value. To get the next
@@ -727,8 +727,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of scalable target results. This value can be
-    #   between 1 and 50. The default value is 50.
+    #   The maximum number of scalable targets. This value can be between 1
+    #   and 50. The default value is 50.
     #
     #   If this parameter is used, the operation returns up to `MaxResults`
     #   results at a time, along with a `NextToken` value. To get the next
@@ -938,20 +938,20 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
     #         resource_label: "ResourceLabel",
     #       }
     #
     # @!attribute [rw] predefined_metric_type
     #   The metric type. The `ALBRequestCountPerTarget` metric type applies
-    #   only to Spot fleet requests.
+    #   only to Spot fleet requests and ECS services.
     #   @return [String]
     #
     # @!attribute [rw] resource_label
     #   Identifies the resource associated with the metric type. You can't
     #   specify a resource label unless the metric type is
     #   `ALBRequestCountPerTarget` and there is a target group attached to
-    #   the Spot fleet request.
+    #   the Spot fleet request or ECS service.
     #
     #   The format is
     #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
@@ -997,7 +997,7 @@ module Aws::ApplicationAutoScaling
     #         target_tracking_scaling_policy_configuration: {
     #           target_value: 1.0, # required
     #           predefined_metric_specification: {
-    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
+    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
     #             resource_label: "ResourceLabel",
     #           },
     #           customized_metric_specification: {
@@ -1096,12 +1096,13 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The policy type. If you are creating a new policy, this parameter is
-    #   required. If you are updating a policy, this parameter is not
-    #   required.
+    #   The policy type. This parameter is required if you are creating a
+    #   policy.
     #
-    #   For DynamoDB, only `TargetTrackingScaling` is supported. For any
-    #   other service, only `StepScaling` is supported.
+    #   For DynamoDB, only `TargetTrackingScaling` is supported. For Amazon
+    #   ECS, Spot Fleet, and Amazon RDS, both `StepScaling` and
+    #   `TargetTrackingScaling` are supported. For any other service, only
+    #   `StepScaling` is supported.
     #   @return [String]
     #
     # @!attribute [rw] step_scaling_policy_configuration
@@ -1114,7 +1115,7 @@ module Aws::ApplicationAutoScaling
     # @!attribute [rw] target_tracking_scaling_policy_configuration
     #   A target tracking policy.
     #
-    #   This parameter is required if you are creating a new policy and the
+    #   This parameter is required if you are creating a policy and the
     #   policy type is `TargetTrackingScaling`.
     #   @return [Types::TargetTrackingScalingPolicyConfiguration]
     #
@@ -1231,7 +1232,8 @@ module Aws::ApplicationAutoScaling
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
-    #   The scalable dimension. This string consists of the service
+    #   The scalable dimension. This parameter is required if you are
+    #   creating a scheduled action. This string consists of the service
     #   namespace, resource type, and scaling property.
     #
     #   * `ecs:service:DesiredCount` - The desired task count of an ECS
@@ -1386,27 +1388,24 @@ module Aws::ApplicationAutoScaling
     #
     # @!attribute [rw] min_capacity
     #   The minimum value to scale to in response to a scale in event. This
-    #   parameter is required if you are registering a scalable target and
-    #   optional if you are updating one.
+    #   parameter is required if you are registering a scalable target.
     #   @return [Integer]
     #
     # @!attribute [rw] max_capacity
     #   The maximum value to scale to in response to a scale out event. This
-    #   parameter is required if you are registering a scalable target and
-    #   optional if you are updating one.
+    #   parameter is required if you are registering a scalable target.
     #   @return [Integer]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of an IAM role that allows Application Auto Scaling to
-    #   modify the scalable target on your behalf.
-    #
-    #   With Amazon RDS resources, permissions are granted using a
-    #   service-linked role. For more information, see [Service-Linked Roles
-    #   for Application Auto Scaling][1].
+    #   Application Auto Scaling creates a service-linked role that grants
+    #   it permissions to modify the scalable target on your behalf. For
+    #   more information, see [Service-Linked Roles for Application Auto
+    #   Scaling][1].
     #
     #   For resources that are not supported using a service-linked role,
-    #   this parameter is required when you register a scalable target and
-    #   optional when you update one.
+    #   this parameter is required and must specify the ARN of an IAM role
+    #   that allows Application Auto Scaling to modify the scalable target
+    #   on your behalf.
     #
     #
     #
@@ -2108,7 +2107,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         target_value: 1.0, # required
     #         predefined_metric_specification: {
-    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
+    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
     #           resource_label: "ResourceLabel",
     #         },
     #         customized_metric_specification: {

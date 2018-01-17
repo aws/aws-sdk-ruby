@@ -388,6 +388,7 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1238,6 +1239,9 @@ module Aws::RDS
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
+    # @option options [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = @client.create_db_instance(options)

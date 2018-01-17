@@ -37,6 +37,7 @@ module Aws::RDS
     CertificateMessage = Shapes::StructureShape.new(name: 'CertificateMessage')
     CertificateNotFoundFault = Shapes::StructureShape.new(name: 'CertificateNotFoundFault')
     CharacterSet = Shapes::StructureShape.new(name: 'CharacterSet')
+    CloudwatchLogsExportConfiguration = Shapes::StructureShape.new(name: 'CloudwatchLogsExportConfiguration')
     CopyDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'CopyDBClusterParameterGroupMessage')
     CopyDBClusterParameterGroupResult = Shapes::StructureShape.new(name: 'CopyDBClusterParameterGroupResult')
     CopyDBClusterSnapshotMessage = Shapes::StructureShape.new(name: 'CopyDBClusterSnapshotMessage')
@@ -254,6 +255,7 @@ module Aws::RDS
     KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
     ListTagsForResourceMessage = Shapes::StructureShape.new(name: 'ListTagsForResourceMessage')
+    LogTypeList = Shapes::ListShape.new(name: 'LogTypeList')
     Long = Shapes::IntegerShape.new(name: 'Long')
     ModifyDBClusterMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterMessage')
     ModifyDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'ModifyDBClusterParameterGroupMessage')
@@ -303,6 +305,7 @@ module Aws::RDS
     OrderableDBInstanceOptionsMessage = Shapes::StructureShape.new(name: 'OrderableDBInstanceOptionsMessage')
     Parameter = Shapes::StructureShape.new(name: 'Parameter')
     ParametersList = Shapes::ListShape.new(name: 'ParametersList')
+    PendingCloudwatchLogsExports = Shapes::StructureShape.new(name: 'PendingCloudwatchLogsExports')
     PendingMaintenanceAction = Shapes::StructureShape.new(name: 'PendingMaintenanceAction')
     PendingMaintenanceActionDetails = Shapes::ListShape.new(name: 'PendingMaintenanceActionDetails')
     PendingMaintenanceActions = Shapes::ListShape.new(name: 'PendingMaintenanceActions')
@@ -468,6 +471,10 @@ module Aws::RDS
     CharacterSet.add_member(:character_set_description, Shapes::ShapeRef.new(shape: String, location_name: "CharacterSetDescription"))
     CharacterSet.struct_class = Types::CharacterSet
 
+    CloudwatchLogsExportConfiguration.add_member(:enable_log_types, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableLogTypes"))
+    CloudwatchLogsExportConfiguration.add_member(:disable_log_types, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "DisableLogTypes"))
+    CloudwatchLogsExportConfiguration.struct_class = Types::CloudwatchLogsExportConfiguration
+
     CopyDBClusterParameterGroupMessage.add_member(:source_db_cluster_parameter_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceDBClusterParameterGroupIdentifier"))
     CopyDBClusterParameterGroupMessage.add_member(:target_db_cluster_parameter_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetDBClusterParameterGroupIdentifier"))
     CopyDBClusterParameterGroupMessage.add_member(:target_db_cluster_parameter_group_description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetDBClusterParameterGroupDescription"))
@@ -609,6 +616,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
     CreateDBInstanceMessage.add_member(:enable_performance_insights, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnablePerformanceInsights"))
     CreateDBInstanceMessage.add_member(:performance_insights_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "PerformanceInsightsKMSKeyId"))
+    CreateDBInstanceMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -632,6 +640,7 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
     CreateDBInstanceReadReplicaMessage.add_member(:enable_performance_insights, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnablePerformanceInsights"))
     CreateDBInstanceReadReplicaMessage.add_member(:performance_insights_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "PerformanceInsightsKMSKeyId"))
+    CreateDBInstanceReadReplicaMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     CreateDBInstanceReadReplicaMessage.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, location_name: "DestinationRegion", metadata: {"documented"=>false}))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
@@ -827,6 +836,8 @@ module Aws::RDS
     DBEngineVersion.add_member(:supported_character_sets, Shapes::ShapeRef.new(shape: SupportedCharacterSetsList, location_name: "SupportedCharacterSets"))
     DBEngineVersion.add_member(:valid_upgrade_target, Shapes::ShapeRef.new(shape: ValidUpgradeTargetList, location_name: "ValidUpgradeTarget"))
     DBEngineVersion.add_member(:supported_timezones, Shapes::ShapeRef.new(shape: SupportedTimezonesList, location_name: "SupportedTimezones"))
+    DBEngineVersion.add_member(:exportable_log_types, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "ExportableLogTypes"))
+    DBEngineVersion.add_member(:supports_log_exports_to_cloudwatch_logs, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsLogExportsToCloudwatchLogs"))
     DBEngineVersion.struct_class = Types::DBEngineVersion
 
     DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -886,6 +897,7 @@ module Aws::RDS
     DBInstance.add_member(:iam_database_authentication_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "IAMDatabaseAuthenticationEnabled"))
     DBInstance.add_member(:performance_insights_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "PerformanceInsightsEnabled"))
     DBInstance.add_member(:performance_insights_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "PerformanceInsightsKMSKeyId"))
+    DBInstance.add_member(:enabled_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnabledCloudwatchLogsExports"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceList.member = Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance")
@@ -1396,6 +1408,8 @@ module Aws::RDS
     ListTagsForResourceMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     ListTagsForResourceMessage.struct_class = Types::ListTagsForResourceMessage
 
+    LogTypeList.member = Shapes::ShapeRef.new(shape: String)
+
     ModifyDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     ModifyDBClusterMessage.add_member(:new_db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "NewDBClusterIdentifier"))
     ModifyDBClusterMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplyImmediately"))
@@ -1461,6 +1475,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
     ModifyDBInstanceMessage.add_member(:enable_performance_insights, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnablePerformanceInsights"))
     ModifyDBInstanceMessage.add_member(:performance_insights_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "PerformanceInsightsKMSKeyId"))
+    ModifyDBInstanceMessage.add_member(:cloudwatch_logs_export_configuration, Shapes::ShapeRef.new(shape: CloudwatchLogsExportConfiguration, location_name: "CloudwatchLogsExportConfiguration"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -1662,6 +1677,10 @@ module Aws::RDS
 
     ParametersList.member = Shapes::ShapeRef.new(shape: Parameter, location_name: "Parameter")
 
+    PendingCloudwatchLogsExports.add_member(:log_types_to_enable, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "LogTypesToEnable"))
+    PendingCloudwatchLogsExports.add_member(:log_types_to_disable, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "LogTypesToDisable"))
+    PendingCloudwatchLogsExports.struct_class = Types::PendingCloudwatchLogsExports
+
     PendingMaintenanceAction.add_member(:action, Shapes::ShapeRef.new(shape: String, location_name: "Action"))
     PendingMaintenanceAction.add_member(:auto_applied_after_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "AutoAppliedAfterDate"))
     PendingMaintenanceAction.add_member(:forced_apply_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ForcedApplyDate"))
@@ -1691,6 +1710,7 @@ module Aws::RDS
     PendingModifiedValues.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
     PendingModifiedValues.add_member(:ca_certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CACertificateIdentifier"))
     PendingModifiedValues.add_member(:db_subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "DBSubnetGroupName"))
+    PendingModifiedValues.add_member(:pending_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: PendingCloudwatchLogsExports, location_name: "PendingCloudwatchLogsExports"))
     PendingModifiedValues.struct_class = Types::PendingModifiedValues
 
     PromoteReadReplicaDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
@@ -1899,6 +1919,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:copy_tags_to_snapshot, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTagsToSnapshot"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -1942,6 +1963,7 @@ module Aws::RDS
     RestoreDBInstanceFromS3Message.add_member(:s3_ingestion_role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "S3IngestionRoleArn"))
     RestoreDBInstanceFromS3Message.add_member(:enable_performance_insights, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnablePerformanceInsights"))
     RestoreDBInstanceFromS3Message.add_member(:performance_insights_kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "PerformanceInsightsKMSKeyId"))
+    RestoreDBInstanceFromS3Message.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     RestoreDBInstanceFromS3Message.struct_class = Types::RestoreDBInstanceFromS3Message
 
     RestoreDBInstanceFromS3Result.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -1971,6 +1993,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "Domain"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:enable_iam_database_authentication, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableIAMDatabaseAuthentication"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:enable_cloudwatch_logs_exports, Shapes::ShapeRef.new(shape: LogTypeList, location_name: "EnableCloudwatchLogsExports"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))

@@ -384,6 +384,33 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # The configuration setting for the log types to be enabled for export
+    # to CloudWatch Logs for a specific DB instance or DB cluster.
+    #
+    # @note When making an API call, you may pass CloudwatchLogsExportConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enable_log_types: ["String"],
+    #         disable_log_types: ["String"],
+    #       }
+    #
+    # @!attribute [rw] enable_log_types
+    #   The list of log types to enable.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] disable_log_types
+    #   The list of log types to disable.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CloudwatchLogsExportConfiguration AWS API Documentation
+    #
+    class CloudwatchLogsExportConfiguration < Struct.new(
+      :enable_log_types,
+      :disable_log_types)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CopyDBClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -1575,6 +1602,7 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] db_name
@@ -2520,6 +2548,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -2563,7 +2596,8 @@ module Aws::RDS
       :timezone,
       :enable_iam_database_authentication,
       :enable_performance_insights,
-      :performance_insights_kms_key_id)
+      :performance_insights_kms_key_id,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -2597,6 +2631,7 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
+    #         enable_cloudwatch_logs_exports: ["String"],
     #         source_region: "String",
     #       }
     #
@@ -2673,6 +2708,17 @@ module Aws::RDS
     #
     # @!attribute [rw] multi_az
     #   Specifies whether the read replica is in a Multi-AZ deployment.
+    #
+    #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates
+    #   a standby of your replica in another Availability Zone for failover
+    #   support for the replica. Creating your Read Replica as a Multi-AZ DB
+    #   instance is independent of whether the source database is a Multi-AZ
+    #   DB instance.
+    #
+    #   <note markdown="1"> Currently PostgreSQL Read Replicas can only be created as single-AZ
+    #   DB instances.
+    #
+    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -2895,6 +2941,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the new DB instance is to export to CloudWatch
+    #   Logs.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -2927,6 +2978,7 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
+      :enable_cloudwatch_logs_exports,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -4111,6 +4163,16 @@ module Aws::RDS
     #   parameter of the `CreateDBInstance` action.
     #   @return [Array<Types::Timezone>]
     #
+    # @!attribute [rw] exportable_log_types
+    #   The types of logs that the database engine has available for export
+    #   to CloudWatch Logs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supports_log_exports_to_cloudwatch_logs
+    #   A value that indicates whether the engine version supports exporting
+    #   the log types specified by ExportableLogTypes to CloudWatch Logs.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -4122,7 +4184,9 @@ module Aws::RDS
       :default_character_set,
       :supported_character_sets,
       :valid_upgrade_target,
-      :supported_timezones)
+      :supported_timezones,
+      :exportable_log_types,
+      :supports_log_exports_to_cloudwatch_logs)
       include Aws::Structure
     end
 
@@ -4451,6 +4515,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] enabled_cloudwatch_logs_exports
+    #   A list of log types that this DB instance is configured to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -4504,7 +4573,8 @@ module Aws::RDS
       :timezone,
       :iam_database_authentication_enabled,
       :performance_insights_enabled,
-      :performance_insights_kms_key_id)
+      :performance_insights_kms_key_id,
+      :enabled_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -8341,6 +8411,10 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
+    #         cloudwatch_logs_export_configuration: {
+    #           enable_log_types: ["String"],
+    #           disable_log_types: ["String"],
+    #         },
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -8914,6 +8988,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #   @return [Types::CloudwatchLogsExportConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -8951,7 +9030,8 @@ module Aws::RDS
       :promotion_tier,
       :enable_iam_database_authentication,
       :enable_performance_insights,
-      :performance_insights_kms_key_id)
+      :performance_insights_kms_key_id,
+      :cloudwatch_logs_export_configuration)
       include Aws::Structure
     end
 
@@ -10047,6 +10127,29 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # A list of the log types whose configuration is still pending. In other
+    # words, these log types are in the process of being activated or
+    # deactivated.
+    #
+    # @!attribute [rw] log_types_to_enable
+    #   Log types that are in the process of being deactivated. After they
+    #   are deactivated, these log types aren't exported to CloudWatch
+    #   Logs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] log_types_to_disable
+    #   Log types that are in the process of being enabled. After they are
+    #   enabled, these log types are exported to CloudWatch Logs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingCloudwatchLogsExports AWS API Documentation
+    #
+    class PendingCloudwatchLogsExports < Struct.new(
+      :log_types_to_enable,
+      :log_types_to_disable)
+      include Aws::Structure
+    end
+
     # Provides information about a pending maintenance action for a
     # resource.
     #
@@ -10185,6 +10288,12 @@ module Aws::RDS
     #   The new DB subnet group for the DB instance.
     #   @return [String]
     #
+    # @!attribute [rw] pending_cloudwatch_logs_exports
+    #   A list of the log types whose configuration is still pending. In
+    #   other words, these log types are in the process of being activated
+    #   or deactivated.
+    #   @return [Types::PendingCloudwatchLogsExports]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -10200,7 +10309,8 @@ module Aws::RDS
       :db_instance_identifier,
       :storage_type,
       :ca_certificate_identifier,
-      :db_subnet_group_name)
+      :db_subnet_group_name,
+      :pending_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -11619,6 +11729,7 @@ module Aws::RDS
     #         copy_tags_to_snapshot: false,
     #         domain_iam_role_name: "String",
     #         enable_iam_database_authentication: false,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -11869,6 +11980,11 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB instance is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -11893,7 +12009,8 @@ module Aws::RDS
       :domain,
       :copy_tags_to_snapshot,
       :domain_iam_role_name,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -11958,6 +12075,7 @@ module Aws::RDS
     #         s3_ingestion_role_arn: "String", # required
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] db_name
@@ -12296,6 +12414,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB instance is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message AWS API Documentation
     #
     class RestoreDBInstanceFromS3Message < Struct.new(
@@ -12336,7 +12459,8 @@ module Aws::RDS
       :s3_prefix,
       :s3_ingestion_role_arn,
       :enable_performance_insights,
-      :performance_insights_kms_key_id)
+      :performance_insights_kms_key_id,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -12387,6 +12511,7 @@ module Aws::RDS
     #         domain: "String",
     #         domain_iam_role_name: "String",
     #         enable_iam_database_authentication: false,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] source_db_instance_identifier
@@ -12394,7 +12519,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing DBInstance.
+    #   * Must match the identifier of an existing DB instance.
     #
     #   ^
     #   @return [String]
@@ -12648,6 +12773,11 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB instance is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -12674,7 +12804,8 @@ module Aws::RDS
       :tde_credential_password,
       :domain,
       :domain_iam_role_name,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 

@@ -547,6 +547,7 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -743,6 +744,9 @@ module Aws::RDS
     #   * Aurora 5.6 or higher.
     #
     #   Default: `false`
+    # @option options [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB instance is to export to
+    #   CloudWatch Logs.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

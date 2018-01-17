@@ -2823,6 +2823,10 @@ module Aws::RDS
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -2896,6 +2900,7 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -2946,6 +2951,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -2991,6 +3000,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -3086,6 +3097,17 @@ module Aws::RDS
     #
     # @option params [Boolean] :multi_az
     #   Specifies whether the read replica is in a Multi-AZ deployment.
+    #
+    #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates a
+    #   standby of your replica in another Availability Zone for failover
+    #   support for the replica. Creating your Read Replica as a Multi-AZ DB
+    #   instance is independent of whether the source database is a Multi-AZ
+    #   DB instance.
+    #
+    #   <note markdown="1"> Currently PostgreSQL Read Replicas can only be created as single-AZ DB
+    #   instances.
+    #
+    #    </note>
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
@@ -3291,6 +3313,10 @@ module Aws::RDS
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the new DB instance is to export to CloudWatch
+    #   Logs.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3355,6 +3381,7 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     enable_cloudwatch_logs_exports: ["String"],
     #     source_region: "String",
     #   })
     #
@@ -3406,6 +3433,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -3451,6 +3482,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -4544,6 +4577,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -4589,6 +4626,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -5707,6 +5746,9 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].is_major_version_upgrade #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
+    #   resp.db_engine_versions[0].exportable_log_types #=> Array
+    #   resp.db_engine_versions[0].exportable_log_types[0] #=> String
+    #   resp.db_engine_versions[0].supports_log_exports_to_cloudwatch_logs #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -5843,6 +5885,10 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.storage_type #=> String
     #   resp.db_instances[0].pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instances[0].pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -5888,6 +5934,8 @@ module Aws::RDS
     #   resp.db_instances[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_instances[0].performance_insights_enabled #=> Boolean
     #   resp.db_instances[0].performance_insights_kms_key_id #=> String
+    #   resp.db_instances[0].enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -9144,6 +9192,10 @@ module Aws::RDS
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
     #
+    # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -9208,6 +9260,10 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     cloudwatch_logs_export_configuration: {
+    #       enable_log_types: ["String"],
+    #       disable_log_types: ["String"],
+    #     },
     #   })
     #
     # @example Response structure
@@ -9258,6 +9314,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -9303,6 +9363,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -10041,6 +10103,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -10086,6 +10152,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -10374,6 +10442,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -10419,6 +10491,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -11796,6 +11870,10 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB instance is to export to
+    #   CloudWatch Logs.
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -11925,6 +12003,7 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -11975,6 +12054,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -12020,6 +12103,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -12335,6 +12420,10 @@ module Aws::RDS
     #   data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB instance is to export to
+    #   CloudWatch Logs.
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -12385,6 +12474,7 @@ module Aws::RDS
     #     s3_ingestion_role_arn: "String", # required
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -12435,6 +12525,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -12480,6 +12574,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -12509,7 +12605,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must match the identifier of an existing DBInstance.
+    #   * Must match the identifier of an existing DB instance.
     #
     #   ^
     #
@@ -12737,6 +12833,10 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB instance is to export to
+    #   CloudWatch Logs.
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -12869,6 +12969,7 @@ module Aws::RDS
     #     domain: "String",
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -12919,6 +13020,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -12964,6 +13069,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -13133,6 +13240,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13178,6 +13289,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -13265,6 +13378,10 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.storage_type #=> String
     #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
     #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
+    #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13310,6 +13427,8 @@ module Aws::RDS
     #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #   resp.db_instance.performance_insights_enabled #=> Boolean
     #   resp.db_instance.performance_insights_kms_key_id #=> String
+    #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -13333,7 +13452,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

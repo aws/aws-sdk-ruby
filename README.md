@@ -301,6 +301,7 @@ to be backwards compatible.
 | ------------------------------------------- | ------------------------------------ | --------------------------------------- | ----------- |
 | AWS AppSync                                 | Aws::AppSync                         | aws-sdk-appsync                         | 2017-07-25  |
 | AWS Application Discovery Service           | Aws::ApplicationDiscoveryService     | aws-sdk-applicationdiscoveryservice     | 2015-11-01  |
+| AWS Auto Scaling Plans                      | Aws::AutoScalingPlans                | aws-sdk-autoscalingplans                | 2018-01-06  |
 | AWS Batch                                   | Aws::Batch                           | aws-sdk-batch                           | 2016-08-10  |
 | AWS Budgets                                 | Aws::Budgets                         | aws-sdk-budgets                         | 2016-10-20  |
 | AWS Certificate Manager                     | Aws::ACM                             | aws-sdk-acm                             | 2015-12-08  |
@@ -336,8 +337,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                          | Aws::IoTDataPlane                    | aws-sdk-iotdataplane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                     | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS Key Management Service                  | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
-| AWS Lambda                                  | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS Lambda                                  | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
+| AWS Lambda                                  | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS Marketplace Commerce Analytics          | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service         | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
 | AWS Migration Hub                           | Aws::MigrationHub                    | aws-sdk-migrationhub                    | 2017-05-31  |
