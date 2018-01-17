@@ -1384,6 +1384,20 @@ module Aws::EC2
     #     with the Elastic IP address.
     #
     #   * `public-ip` - The Elastic IP address.
+    #
+    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. This filter
+    #     is independent of the `tag-value` filter. For example, if you use
+    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
+    #     you get any resources assigned both the tag key Purpose (regardless
+    #     of what the tag's value is), and the tag value X (regardless of the
+    #     tag's key). If you want to list only resources where Purpose is X,
+    #     see the `tag`\:*key*=*value* filter.
     # @option options [Array<String>] :public_ips
     #   \[EC2-Classic\] One or more Elastic IP addresses.
     #

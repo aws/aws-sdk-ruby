@@ -354,7 +354,9 @@ module Aws::EC2
     #   volume, it is not blank and its encryption status is used for the
     #   volume encryption status.
     # @option options [String] :image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages.
+    #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
+    #   is required to launch an instance and must be specified here or in a
+    #   launch template.
     # @option options [String] :instance_type
     #   The instance type. For more information, see [Instance Types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.

@@ -155,11 +155,21 @@ module Aws::AutoScalingPlans
 
     # @!group API Operations
 
+    # Creates a scaling plan.
+    #
+    # A scaling plan contains a set of instructions used to configure
+    # dynamic scaling for the scalable resources in your application. AWS
+    # Auto Scaling creates target tracking scaling policies based on the
+    # scaling instructions in your scaling plan.
+    #
     # @option params [required, String] :scaling_plan_name
+    #   The name of the scaling plan.
     #
     # @option params [required, Types::ApplicationSource] :application_source
+    #   The source for the application.
     #
     # @option params [required, Array<Types::ScalingInstruction>] :scaling_instructions
+    #   The scaling instructions.
     #
     # @return [Types::CreateScalingPlanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -221,9 +231,13 @@ module Aws::AutoScalingPlans
       req.send_request(options)
     end
 
+    # Deletes the specified scaling plan.
+    #
     # @option params [required, String] :scaling_plan_name
+    #   The name of the scaling plan.
     #
     # @option params [required, Integer] :scaling_plan_version
+    #   The version of the scaling plan.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -243,13 +257,20 @@ module Aws::AutoScalingPlans
       req.send_request(options)
     end
 
+    # Describes the scalable resources in the specified scaling plan.
+    #
     # @option params [required, String] :scaling_plan_name
+    #   The name of the scaling plan.
     #
     # @option params [required, Integer] :scaling_plan_version
+    #   The version of the scaling plan.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of scalable resources to return. This value can be
+    #   between 1 and 50. The default value is 50.
     #
     # @option params [String] :next_token
+    #   The token for the next set of results.
     #
     # @return [Types::DescribeScalingPlanResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -303,15 +324,26 @@ module Aws::AutoScalingPlans
       req.send_request(options)
     end
 
+    # Describes the specified scaling plans or all of your scaling plans.
+    #
     # @option params [Array<String>] :scaling_plan_names
+    #   The names of the scaling plans (up to 10). If you specify application
+    #   sources, you cannot specify scaling plan names.
     #
     # @option params [Integer] :scaling_plan_version
+    #   The version of the scaling plan. If you specify a scaling plan
+    #   version, you must also specify a scaling plan name.
     #
     # @option params [Array<Types::ApplicationSource>] :application_sources
+    #   The sources for the applications (up to 10). If you specify scaling
+    #   plan names, you cannot specify application sources.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of scalable resources to return. This value can be
+    #   between 1 and 50. The default value is 50.
     #
     # @option params [String] :next_token
+    #   The token for the next set of results.
     #
     # @return [Types::DescribeScalingPlansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -386,7 +418,7 @@ module Aws::AutoScalingPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscalingplans'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

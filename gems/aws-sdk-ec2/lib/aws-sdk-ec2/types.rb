@@ -4701,7 +4701,8 @@ module Aws::EC2
     #
     # @!attribute [rw] service_name
     #   The service name. To get a list of available services, use the
-    #   DescribeVpcEndpointServices request.
+    #   DescribeVpcEndpointServices request, or get the name from the
+    #   service provider.
     #   @return [String]
     #
     # @!attribute [rw] policy_document
@@ -6461,6 +6462,20 @@ module Aws::EC2
     #     associated with the Elastic IP address.
     #
     #   * `public-ip` - The Elastic IP address.
+    #
+    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. This filter
+    #     is independent of the `tag-value` filter. For example, if you use
+    #     both the filter "tag-key=Purpose" and the filter
+    #     "tag-value=X", you get any resources assigned both the tag key
+    #     Purpose (regardless of what the tag's value is), and the tag
+    #     value X (regardless of the tag's key). If you want to list only
+    #     resources where Purpose is X, see the `tag`\:*key*=*value* filter.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] public_ips
@@ -9000,6 +9015,20 @@ module Aws::EC2
     #   * `create-time` - The time the launch template was created.
     #
     #   * `launch-template-name` - The name of the launch template.
+    #
+    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. This filter
+    #     is independent of the `tag-value` filter. For example, if you use
+    #     both the filter "tag-key=Purpose" and the filter
+    #     "tag-value=X", you get any resources assigned both the tag key
+    #     Purpose (regardless of what the tag's value is), and the tag
+    #     value X (regardless of the tag's key). If you want to list only
+    #     resources where Purpose is X, see the `tag`\:*key*=*value* filter.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -11838,11 +11867,13 @@ module Aws::EC2
     #   * `resource-id` - The resource ID.
     #
     #   * `resource-type` - The resource type (`customer-gateway` \|
-    #     `dhcp-options` \| `image` \| `instance` \| `internet-gateway` \|
-    #     `network-acl` \| `network-interface` \| `reserved-instances` \|
-    #     `route-table` \| `security-group` \| `snapshot` \|
-    #     `spot-instances-request` \| `subnet` \| `volume` \| `vpc` \|
-    #     `vpn-connection` \| `vpn-gateway`).
+    #     `dhcp-options` \| `elastic-ip` \| `fpga-image` \| `image` \|
+    #     `instance` \| `internet-gateway` \| `launch-template` \|
+    #     `natgateway` \| `network-acl` \| `network-interface` \|
+    #     `reserved-instances` \| `route-table` \| `security-group` \|
+    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
+    #     `vpc` \| `vpc-peering-connection` \| `vpn-connection` \|
+    #     `vpn-gateway`).
     #
     #   * `value` - The tag value.
     #   @return [Array<Types::Filter>]
@@ -17779,7 +17810,9 @@ module Aws::EC2
     # egress-only Internet gateway.
     #
     # @!attribute [rw] state
-    #   The current state of the attachment.
+    #   The current state of the attachment. For an Internet gateway, the
+    #   state is `available` when attached to a VPC; otherwise, this value
+    #   is not returned.
     #   @return [String]
     #
     # @!attribute [rw] vpc_id
@@ -25303,7 +25336,9 @@ module Aws::EC2
     #   @return [Array<Types::BlockDeviceMapping>]
     #
     # @!attribute [rw] image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages.
+    #   The ID of the AMI, which you can get by calling DescribeImages. An
+    #   AMI is required to launch an instance and must be specified here or
+    #   in a launch template.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
@@ -29092,6 +29127,9 @@ module Aws::EC2
     #   The name of the security group. In a request, use this parameter for
     #   a security group in EC2-Classic or a default VPC only. For a
     #   security group in a nondefault VPC, use the security group ID.
+    #
+    #   For a referenced security group in another VPC, this value is not
+    #   returned if the referenced security group is deleted.
     #   @return [String]
     #
     # @!attribute [rw] peering_status
@@ -29099,8 +29137,11 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The ID of an AWS account. For a referenced security group in another
-    #   VPC, the account ID of the referenced security group is returned.
+    #   The ID of an AWS account.
+    #
+    #   For a referenced security group in another VPC, the account ID of
+    #   the referenced security group is returned in the response. If the
+    #   referenced security group is deleted, this value is not returned.
     #
     #   \[EC2-Classic\] Required when adding or removing rules that
     #   reference a security group in another AWS account.

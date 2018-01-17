@@ -5526,7 +5526,8 @@ module Aws::EC2
     #
     # @option params [required, String] :service_name
     #   The service name. To get a list of available services, use the
-    #   DescribeVpcEndpointServices request.
+    #   DescribeVpcEndpointServices request, or get the name from the service
+    #   provider.
     #
     # @option params [String] :policy_document
     #   (Gateway endpoint) A policy to attach to the endpoint that controls
@@ -5784,6 +5785,12 @@ module Aws::EC2
     # different region to the requester VPC. The requester VPC and accepter
     # VPC cannot have overlapping CIDR blocks.
     #
+    # <note markdown="1"> Limitations and rules apply to a VPC peering connection. For more
+    # information, see the [limitations][1] section in the *VPC Peering
+    # Guide*.
+    #
+    #  </note>
+    #
     # The owner of the accepter VPC must accept the peering request to
     # activate the peering connection. The VPC peering connection request
     # expires after 7 days, after which it cannot be accepted or rejected.
@@ -5791,6 +5798,10 @@ module Aws::EC2
     # If you create a VPC peering connection request between VPCs with
     # overlapping CIDR blocks, the VPC peering connection has a status of
     # `failed`.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/vpc-peering-basics.html#vpc-peering-limitations
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -7615,6 +7626,20 @@ module Aws::EC2
     #     with the Elastic IP address.
     #
     #   * `public-ip` - The Elastic IP address.
+    #
+    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. This filter
+    #     is independent of the `tag-value` filter. For example, if you use
+    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
+    #     you get any resources assigned both the tag key Purpose (regardless
+    #     of what the tag's value is), and the tag value X (regardless of the
+    #     tag's key). If you want to list only resources where Purpose is X,
+    #     see the `tag`\:*key*=*value* filter.
     #
     # @option params [Array<String>] :public_ips
     #   \[EC2-Classic\] One or more Elastic IP addresses.
@@ -10841,6 +10866,20 @@ module Aws::EC2
     #   * `create-time` - The time the launch template was created.
     #
     #   * `launch-template-name` - The name of the launch template.
+    #
+    #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. This filter
+    #     is independent of the `tag-value` filter. For example, if you use
+    #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
+    #     you get any resources assigned both the tag key Purpose (regardless
+    #     of what the tag's value is), and the tag value X (regardless of the
+    #     tag's key). If you want to list only resources where Purpose is X,
+    #     see the `tag`\:*key*=*value* filter.
     #
     # @option params [String] :next_token
     #   The token to request the next page of results.
@@ -14789,11 +14828,13 @@ module Aws::EC2
     #   * `resource-id` - The resource ID.
     #
     #   * `resource-type` - The resource type (`customer-gateway` \|
-    #     `dhcp-options` \| `image` \| `instance` \| `internet-gateway` \|
-    #     `network-acl` \| `network-interface` \| `reserved-instances` \|
-    #     `route-table` \| `security-group` \| `snapshot` \|
-    #     `spot-instances-request` \| `subnet` \| `volume` \| `vpc` \|
-    #     `vpn-connection` \| `vpn-gateway`).
+    #     `dhcp-options` \| `elastic-ip` \| `fpga-image` \| `image` \|
+    #     `instance` \| `internet-gateway` \| `launch-template` \|
+    #     `natgateway` \| `network-acl` \| `network-interface` \|
+    #     `reserved-instances` \| `route-table` \| `security-group` \|
+    #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
+    #     `vpc` \| `vpc-peering-connection` \| `vpn-connection` \|
+    #     `vpn-gateway`).
     #
     #   * `value` - The tag value.
     #
@@ -19884,9 +19925,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the permissions for your VPC endpoint service. You can add or
-    # remove permissions for service consumers (IAM users, IAM roles, and
-    # AWS accounts) to discover your endpoint service.
+    # Modifies the permissions for your [VPC endpoint service][1]. You can
+    # add or remove permissions for service consumers (IAM users, IAM roles,
+    # and AWS accounts) to connect to your endpoint service.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/endpoint-service.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -22544,7 +22589,9 @@ module Aws::EC2
     #   volume encryption status.
     #
     # @option params [String] :image_id
-    #   The ID of the AMI, which you can get by calling DescribeImages.
+    #   The ID of the AMI, which you can get by calling DescribeImages. An AMI
+    #   is required to launch an instance and must be specified here or in a
+    #   launch template.
     #
     # @option params [String] :instance_type
     #   The instance type. For more information, see [Instance Types][1] in
@@ -23735,7 +23782,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
