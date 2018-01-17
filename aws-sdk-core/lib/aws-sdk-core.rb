@@ -32,6 +32,7 @@ module Aws
     ApplicationDiscoveryService
     Athena
     AutoScaling
+    AutoScalingPlans
     Batch
     Budgets
     Cloud9

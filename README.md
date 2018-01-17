@@ -256,6 +256,7 @@ to be backwards compatible.
 | ------------------------------------------- | ------------------------------- | ----------- |
 | AWS AppSync                                 | AppSync                         | 2017-07-25  |
 | AWS Application Discovery Service           | ApplicationDiscoveryService     | 2015-11-01  |
+| AWS Auto Scaling Plans                      | AutoScalingPlans                | 2018-01-06  |
 | AWS Batch                                   | Batch                           | 2016-08-10  |
 | AWS Budgets                                 | Budgets                         | 2016-10-20  |
 | AWS Certificate Manager                     | ACM                             | 2015-12-08  |
@@ -291,8 +292,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                          | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                     | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                  | KMS                             | 2014-11-01  |
-| AWS Lambda                                  | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                  | Lambda                          | 2015-03-31  |
+| AWS Lambda                                  | LambdaPreview                   | 2014-11-11  |
 | AWS Marketplace Commerce Analytics          | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service         | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS Migration Hub                           | MigrationHub                    | 2017-05-31  |
