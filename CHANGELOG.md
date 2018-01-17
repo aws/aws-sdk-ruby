@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.119 (2018-01-17)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
