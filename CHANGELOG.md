@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.121 (2018-01-18)
+------------------
+
 * Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
 
 2.10.120 (2018-01-17)
