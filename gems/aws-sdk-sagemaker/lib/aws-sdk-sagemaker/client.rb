@@ -338,6 +338,11 @@ module Aws::SageMaker
     #
     #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
+    # @option params [String] :kms_key_id
+    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
+    #   that Amazon SageMaker uses to encrypt data on the storage volume
+    #   attached to the ML compute instance that hosts the endpoint.
+    #
     # @return [Types::CreateEndpointConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEndpointConfigOutput#endpoint_config_arn #endpoint_config_arn} => String
@@ -361,6 +366,7 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -799,6 +805,7 @@ module Aws::SageMaker
     #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #       instance_count: 1, # required
     #       volume_size_in_gb: 1, # required
+    #       volume_kms_key_id: "KmsKeyId",
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -1015,6 +1022,7 @@ module Aws::SageMaker
     #   * {Types::DescribeEndpointConfigOutput#endpoint_config_name #endpoint_config_name} => String
     #   * {Types::DescribeEndpointConfigOutput#endpoint_config_arn #endpoint_config_arn} => String
     #   * {Types::DescribeEndpointConfigOutput#production_variants #production_variants} => Array&lt;Types::ProductionVariant&gt;
+    #   * {Types::DescribeEndpointConfigOutput#kms_key_id #kms_key_id} => String
     #   * {Types::DescribeEndpointConfigOutput#creation_time #creation_time} => Time
     #
     # @example Request syntax with placeholder values
@@ -1033,6 +1041,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].initial_instance_count #=> Integer
     #   resp.production_variants[0].instance_type #=> String, one of "ml.c4.2xlarge", "ml.c4.8xlarge", "ml.c4.xlarge", "ml.c5.2xlarge", "ml.c5.9xlarge", "ml.c5.xlarge", "ml.m4.xlarge", "ml.p2.xlarge", "ml.p3.2xlarge", "ml.t2.medium"
     #   resp.production_variants[0].initial_variant_weight #=> Float
+    #   resp.kms_key_id #=> String
     #   resp.creation_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeEndpointConfig AWS API Documentation
@@ -1194,6 +1203,7 @@ module Aws::SageMaker
     #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.volume_size_in_gb #=> Integer
+    #   resp.resource_config.volume_kms_key_id #=> String
     #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.creation_time #=> Time
     #   resp.training_start_time #=> Time
@@ -1760,12 +1770,12 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Updates variant weight, capacity, or both of one or more variants
-    # associated with an endpoint. This operation updates weight, capacity,
-    # or both for the previously provisioned endpoint. When it receives the
-    # request, Amazon SageMaker sets the endpoint status to `Updating`.
-    # After updating the endpoint, it sets the status to `InService`. To
-    # check the status of an endpoint, use the [DescribeEndpoint][1] API.
+    # Updates variant weight of one or more variants associated with an
+    # existing endpoint, or capacity of one variant associated with an
+    # existing endpoint. When it receives the request, Amazon SageMaker sets
+    # the endpoint status to `Updating`. After updating the endpoint, it
+    # sets the status to `InService`. To check the status of an endpoint,
+    # use the [DescribeEndpoint][1] API.
     #
     #
     #
@@ -1854,7 +1864,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

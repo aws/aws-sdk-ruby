@@ -257,6 +257,7 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] endpoint_config_name
@@ -283,12 +284,19 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
+    #   that Amazon SageMaker uses to encrypt data on the storage volume
+    #   attached to the ML compute instance that hosts the endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateEndpointConfigInput AWS API Documentation
     #
     class CreateEndpointConfigInput < Struct.new(
       :endpoint_config_name,
       :production_variants,
-      :tags)
+      :tags,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -592,6 +600,7 @@ module Aws::SageMaker
     #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
+    #           volume_kms_key_id: "KmsKeyId",
     #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
@@ -896,6 +905,11 @@ module Aws::SageMaker
     #   want to host at this endpoint.
     #   @return [Array<Types::ProductionVariant>]
     #
+    # @!attribute [rw] kms_key_id
+    #   AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it
+    #   on the ML storage volume attached to the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   A timestamp that shows when the endpoint configuration was created.
     #   @return [Time]
@@ -906,6 +920,7 @@ module Aws::SageMaker
       :endpoint_config_name,
       :endpoint_config_arn,
       :production_variants,
+      :kms_key_id,
       :creation_time)
       include Aws::Structure
     end
@@ -2090,6 +2105,7 @@ module Aws::SageMaker
     #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #         instance_count: 1, # required
     #         volume_size_in_gb: 1, # required
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] instance_type
@@ -2118,12 +2134,19 @@ module Aws::SageMaker
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   The Amazon Resource Name (ARN) of a AWS Key Management Service key
+    #   that Amazon SageMaker uses to encrypt data on the storage volume
+    #   attached to the ML compute instance(s) that run the training job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceConfig AWS API Documentation
     #
     class ResourceConfig < Struct.new(
       :instance_type,
       :instance_count,
-      :volume_size_in_gb)
+      :volume_size_in_gb,
+      :volume_kms_key_id)
       include Aws::Structure
     end
 
