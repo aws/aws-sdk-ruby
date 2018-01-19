@@ -147,6 +147,7 @@ module Aws
     States
     StorageGateway
     Support
+    TranscribeService
     Translate
     WAF
     WAFRegional

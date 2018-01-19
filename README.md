@@ -292,8 +292,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                          | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                     | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                  | KMS                             | 2014-11-01  |
-| AWS Lambda                                  | Lambda                          | 2015-03-31  |
 | AWS Lambda                                  | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                  | Lambda                          | 2015-03-31  |
 | AWS Marketplace Commerce Analytics          | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service         | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS Migration Hub                           | MigrationHub                    | 2017-05-31  |
@@ -376,6 +376,7 @@ to be backwards compatible.
 | Amazon Simple Systems Manager (SSM)         | SSM                             | 2014-11-06  |
 | Amazon Simple Workflow Service              | SWF                             | 2012-01-25  |
 | Amazon SimpleDB                             | SimpleDB                        | 2009-04-15  |
+| Amazon Transcribe Service                   | TranscribeService               | 2017-10-26  |
 | Amazon Translate                            | Translate                       | 2017-07-01  |
 | Amazon WorkDocs                             | WorkDocs                        | 2016-05-01  |
 | Amazon WorkMail                             | WorkMail                        | 2017-10-01  |

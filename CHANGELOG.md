@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::TranscribeService - Added support for a new service, Amazon Transcribe Service.
+
 2.10.121 (2018-01-18)
 ------------------
 
