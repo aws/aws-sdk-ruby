@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2018-01-19)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::TranscribeService`.
+
 1.55.0 (2018-01-17)
 ------------------
 

@@ -343,6 +343,7 @@ module Aws
             'States' => 'states',
             'StorageGateway' => 'storagegateway',
             'Support' => 'support',
+            'TranscribeService' => 'transcribe',
             'Translate' => 'translate',
             'WAF' => 'waf',
             'WAFRegional' => 'waf-regional',

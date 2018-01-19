@@ -136,6 +136,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-states', '~> 1')
   spec.add_dependency('aws-sdk-storagegateway', '~> 1')
   spec.add_dependency('aws-sdk-support', '~> 1')
+  spec.add_dependency('aws-sdk-transcribeservice', '~> 1')
   spec.add_dependency('aws-sdk-translate', '~> 1')
   spec.add_dependency('aws-sdk-waf', '~> 1')
   spec.add_dependency('aws-sdk-wafregional', '~> 1')

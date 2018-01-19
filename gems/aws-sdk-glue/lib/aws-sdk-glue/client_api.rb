@@ -26,6 +26,9 @@ module Aws::Glue
     BatchDeleteTableNameList = Shapes::ListShape.new(name: 'BatchDeleteTableNameList')
     BatchDeleteTableRequest = Shapes::StructureShape.new(name: 'BatchDeleteTableRequest')
     BatchDeleteTableResponse = Shapes::StructureShape.new(name: 'BatchDeleteTableResponse')
+    BatchDeleteTableVersionList = Shapes::ListShape.new(name: 'BatchDeleteTableVersionList')
+    BatchDeleteTableVersionRequest = Shapes::StructureShape.new(name: 'BatchDeleteTableVersionRequest')
+    BatchDeleteTableVersionResponse = Shapes::StructureShape.new(name: 'BatchDeleteTableVersionResponse')
     BatchGetPartitionRequest = Shapes::StructureShape.new(name: 'BatchGetPartitionRequest')
     BatchGetPartitionResponse = Shapes::StructureShape.new(name: 'BatchGetPartitionResponse')
     BatchGetPartitionValueList = Shapes::ListShape.new(name: 'BatchGetPartitionValueList')
@@ -37,6 +40,7 @@ module Aws::Glue
     BatchStopJobRunSuccessfulSubmission = Shapes::StructureShape.new(name: 'BatchStopJobRunSuccessfulSubmission')
     BatchStopJobRunSuccessfulSubmissionList = Shapes::ListShape.new(name: 'BatchStopJobRunSuccessfulSubmissionList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanNullable = Shapes::BooleanShape.new(name: 'BooleanNullable')
     BooleanValue = Shapes::BooleanShape.new(name: 'BooleanValue')
     BoundedPartitionValueList = Shapes::ListShape.new(name: 'BoundedPartitionValueList')
     CatalogEntries = Shapes::ListShape.new(name: 'CatalogEntries')
@@ -134,6 +138,8 @@ module Aws::Glue
     DeletePartitionResponse = Shapes::StructureShape.new(name: 'DeletePartitionResponse')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
     DeleteTableResponse = Shapes::StructureShape.new(name: 'DeleteTableResponse')
+    DeleteTableVersionRequest = Shapes::StructureShape.new(name: 'DeleteTableVersionRequest')
+    DeleteTableVersionResponse = Shapes::StructureShape.new(name: 'DeleteTableVersionResponse')
     DeleteTriggerRequest = Shapes::StructureShape.new(name: 'DeleteTriggerRequest')
     DeleteTriggerResponse = Shapes::StructureShape.new(name: 'DeleteTriggerResponse')
     DeleteUserDefinedFunctionRequest = Shapes::StructureShape.new(name: 'DeleteUserDefinedFunctionRequest')
@@ -198,6 +204,8 @@ module Aws::Glue
     GetPlanResponse = Shapes::StructureShape.new(name: 'GetPlanResponse')
     GetTableRequest = Shapes::StructureShape.new(name: 'GetTableRequest')
     GetTableResponse = Shapes::StructureShape.new(name: 'GetTableResponse')
+    GetTableVersionRequest = Shapes::StructureShape.new(name: 'GetTableVersionRequest')
+    GetTableVersionResponse = Shapes::StructureShape.new(name: 'GetTableVersionResponse')
     GetTableVersionsList = Shapes::ListShape.new(name: 'GetTableVersionsList')
     GetTableVersionsRequest = Shapes::StructureShape.new(name: 'GetTableVersionsRequest')
     GetTableVersionsResponse = Shapes::StructureShape.new(name: 'GetTableVersionsResponse')
@@ -330,6 +338,8 @@ module Aws::Glue
     TablePrefix = Shapes::StringShape.new(name: 'TablePrefix')
     TableTypeString = Shapes::StringShape.new(name: 'TableTypeString')
     TableVersion = Shapes::StructureShape.new(name: 'TableVersion')
+    TableVersionError = Shapes::StructureShape.new(name: 'TableVersionError')
+    TableVersionErrors = Shapes::ListShape.new(name: 'TableVersionErrors')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampValue = Shapes::TimestampShape.new(name: 'TimestampValue')
     Token = Shapes::StringShape.new(name: 'Token')
@@ -421,6 +431,17 @@ module Aws::Glue
 
     BatchDeleteTableResponse.add_member(:errors, Shapes::ShapeRef.new(shape: TableErrors, location_name: "Errors"))
     BatchDeleteTableResponse.struct_class = Types::BatchDeleteTableResponse
+
+    BatchDeleteTableVersionList.member = Shapes::ShapeRef.new(shape: VersionString)
+
+    BatchDeleteTableVersionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    BatchDeleteTableVersionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    BatchDeleteTableVersionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    BatchDeleteTableVersionRequest.add_member(:version_ids, Shapes::ShapeRef.new(shape: BatchDeleteTableVersionList, required: true, location_name: "VersionIds"))
+    BatchDeleteTableVersionRequest.struct_class = Types::BatchDeleteTableVersionRequest
+
+    BatchDeleteTableVersionResponse.add_member(:errors, Shapes::ShapeRef.new(shape: TableVersionErrors, location_name: "Errors"))
+    BatchDeleteTableVersionResponse.struct_class = Types::BatchDeleteTableVersionResponse
 
     BatchGetPartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     BatchGetPartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -523,11 +544,11 @@ module Aws::Glue
     Connection.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: NameString, location_name: "LastUpdatedBy"))
     Connection.struct_class = Types::Connection
 
-    ConnectionInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    ConnectionInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     ConnectionInput.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
-    ConnectionInput.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, location_name: "ConnectionType"))
+    ConnectionInput.add_member(:connection_type, Shapes::ShapeRef.new(shape: ConnectionType, required: true, location_name: "ConnectionType"))
     ConnectionInput.add_member(:match_criteria, Shapes::ShapeRef.new(shape: MatchCriteria, location_name: "MatchCriteria"))
-    ConnectionInput.add_member(:connection_properties, Shapes::ShapeRef.new(shape: ConnectionProperties, location_name: "ConnectionProperties"))
+    ConnectionInput.add_member(:connection_properties, Shapes::ShapeRef.new(shape: ConnectionProperties, required: true, location_name: "ConnectionProperties"))
     ConnectionInput.add_member(:physical_connection_requirements, Shapes::ShapeRef.new(shape: PhysicalConnectionRequirements, location_name: "PhysicalConnectionRequirements"))
     ConnectionInput.struct_class = Types::ConnectionInput
 
@@ -772,6 +793,14 @@ module Aws::Glue
 
     DeleteTableResponse.struct_class = Types::DeleteTableResponse
 
+    DeleteTableVersionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    DeleteTableVersionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    DeleteTableVersionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    DeleteTableVersionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, required: true, location_name: "VersionId"))
+    DeleteTableVersionRequest.struct_class = Types::DeleteTableVersionRequest
+
+    DeleteTableVersionResponse.struct_class = Types::DeleteTableVersionResponse
+
     DeleteTriggerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     DeleteTriggerRequest.struct_class = Types::DeleteTriggerRequest
 
@@ -1004,6 +1033,15 @@ module Aws::Glue
 
     GetTableResponse.add_member(:table, Shapes::ShapeRef.new(shape: Table, location_name: "Table"))
     GetTableResponse.struct_class = Types::GetTableResponse
+
+    GetTableVersionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
+    GetTableVersionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
+    GetTableVersionRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
+    GetTableVersionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
+    GetTableVersionRequest.struct_class = Types::GetTableVersionRequest
+
+    GetTableVersionResponse.add_member(:table_version, Shapes::ShapeRef.new(shape: TableVersion, location_name: "TableVersion"))
+    GetTableVersionResponse.struct_class = Types::GetTableVersionResponse
 
     GetTableVersionsList.member = Shapes::ShapeRef.new(shape: TableVersion)
 
@@ -1367,6 +1405,13 @@ module Aws::Glue
     TableVersion.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
     TableVersion.struct_class = Types::TableVersion
 
+    TableVersionError.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, location_name: "TableName"))
+    TableVersionError.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionString, location_name: "VersionId"))
+    TableVersionError.add_member(:error_detail, Shapes::ShapeRef.new(shape: ErrorDetail, location_name: "ErrorDetail"))
+    TableVersionError.struct_class = Types::TableVersionError
+
+    TableVersionErrors.member = Shapes::ShapeRef.new(shape: TableVersionError)
+
     Trigger.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     Trigger.add_member(:id, Shapes::ShapeRef.new(shape: IdString, location_name: "Id"))
     Trigger.add_member(:type, Shapes::ShapeRef.new(shape: TriggerType, location_name: "Type"))
@@ -1459,6 +1504,7 @@ module Aws::Glue
     UpdateTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     UpdateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, required: true, location_name: "TableInput"))
+    UpdateTableRequest.add_member(:skip_archive, Shapes::ShapeRef.new(shape: BooleanNullable, location_name: "SkipArchive"))
     UpdateTableRequest.struct_class = Types::UpdateTableRequest
 
     UpdateTableResponse.struct_class = Types::UpdateTableResponse
@@ -1573,6 +1619,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:batch_delete_table_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteTableVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteTableVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteTableVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
       api.add_operation(:batch_get_partition, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetPartition"
         o.http_method = "POST"
@@ -1616,6 +1674,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
       api.add_operation(:create_crawler, Seahorse::Model::Operation.new.tap do |o|
@@ -1739,6 +1798,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
       api.add_operation(:delete_classifier, Seahorse::Model::Operation.new.tap do |o|
@@ -1826,6 +1886,18 @@ module Aws::Glue
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteTableRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteTableResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:delete_table_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTableVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTableVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTableVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
@@ -2152,6 +2224,18 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:get_table_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTableVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTableVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTableVersionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
       api.add_operation(:get_table_versions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTableVersions"
         o.http_method = "POST"
@@ -2469,6 +2553,7 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
       api.add_operation(:update_trigger, Seahorse::Model::Operation.new.tap do |o|

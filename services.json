@@ -444,6 +444,9 @@
   "Support": {
     "models": "support/2013-04-15"
   },
+  "TranscribeService": {
+    "models": "transcribe/2017-10-26"
+  },
   "Translate": {
     "models": "translate/2017-07-01"
   },

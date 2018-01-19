@@ -8,15 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-glue/types'
-require_relative 'aws-sdk-glue/client_api'
-require_relative 'aws-sdk-glue/client'
-require_relative 'aws-sdk-glue/errors'
-require_relative 'aws-sdk-glue/resource'
-require_relative 'aws-sdk-glue/customizations'
+require_relative 'aws-sdk-transcribeservice/types'
+require_relative 'aws-sdk-transcribeservice/client_api'
+require_relative 'aws-sdk-transcribeservice/client'
+require_relative 'aws-sdk-transcribeservice/errors'
+require_relative 'aws-sdk-transcribeservice/resource'
+require_relative 'aws-sdk-transcribeservice/customizations'
 
-# This module provides support for AWS Glue. This module is available in the
-# `aws-sdk-glue` gem.
+# This module provides support for Amazon Transcribe Service. This module is available in the
+# `aws-sdk-transcribeservice` gem.
 #
 # # Client
 #
@@ -28,20 +28,20 @@ require_relative 'aws-sdk-glue/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS Glue all
+# Errors returned from Amazon Transcribe Service all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::Glue::Errors::ServiceError
+#     rescue Aws::TranscribeService::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::Glue
+module Aws::TranscribeService
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.0.0'
 
 end

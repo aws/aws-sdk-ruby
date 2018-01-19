@@ -264,6 +264,7 @@ module Aws::Glue
     #
     # @!attribute [rw] database_name
     #   The name of the catalog database where the tables to delete reside.
+    #   For Hive compatibility, this name is entirely lowercase.
     #   @return [String]
     #
     # @!attribute [rw] tables_to_delete
@@ -287,6 +288,57 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTableResponse AWS API Documentation
     #
     class BatchDeleteTableResponse < Struct.new(
+      :errors)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchDeleteTableVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         version_ids: ["VersionString"], # required
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the tables reside. If none is
+    #   supplied, the AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database in the catalog in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table. For Hive compatibility, this name is entirely
+    #   lowercase.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_ids
+    #   A list of the IDs of versions to be deleted.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTableVersionRequest AWS API Documentation
+    #
+    class BatchDeleteTableVersionRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :version_ids)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] errors
+    #   A list of errors encountered while trying to delete the specified
+    #   table versions.
+    #   @return [Array<Types::TableVersionError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTableVersionResponse AWS API Documentation
+    #
+    class BatchDeleteTableVersionResponse < Struct.new(
       :errors)
       include Aws::Structure
     end
@@ -744,11 +796,11 @@ module Aws::Glue
     #   data as a hash:
     #
     #       {
-    #         name: "NameString",
+    #         name: "NameString", # required
     #         description: "DescriptionString",
-    #         connection_type: "JDBC", # accepts JDBC, SFTP
+    #         connection_type: "JDBC", # required, accepts JDBC, SFTP
     #         match_criteria: ["NameString"],
-    #         connection_properties: {
+    #         connection_properties: { # required
     #           "HOST" => "ValueString",
     #         },
     #         physical_connection_requirements: {
@@ -1051,11 +1103,11 @@ module Aws::Glue
     #       {
     #         catalog_id: "CatalogIdString",
     #         connection_input: { # required
-    #           name: "NameString",
+    #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # accepts JDBC, SFTP
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP
     #           match_criteria: ["NameString"],
-    #           connection_properties: {
+    #           connection_properties: { # required
     #             "HOST" => "ValueString",
     #           },
     #           physical_connection_requirements: {
@@ -1774,7 +1826,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The catalog database in which to create the new table.
+    #   The catalog database in which to create the new table. For Hive
+    #   compatibility, this name is entirely lowercase.
     #   @return [String]
     #
     # @!attribute [rw] table_input
@@ -1968,7 +2021,8 @@ module Aws::Glue
     # reside in a Hive metastore or an RDBMS.
     #
     # @!attribute [rw] name
-    #   Name of the database.
+    #   Name of the database. For Hive compatibility, this is folded to
+    #   lowercase when it is stored.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1999,7 +2053,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # The structure used to create or updata a database.
+    # The structure used to create or update a database.
     #
     # @note When making an API call, you may pass DatabaseInput
     #   data as a hash:
@@ -2014,7 +2068,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   Name of the database.
+    #   Name of the database. For Hive compatibility, this is folded to
+    #   lowercase when it is stored.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2127,7 +2182,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the Database to delete.
+    #   The name of the Database to delete. For Hive compatibility, this
+    #   must be all lowercase.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteDatabaseRequest AWS API Documentation
@@ -2250,11 +2306,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name of the catalog database in which the table resides.
+    #   The name of the catalog database in which the table resides. For
+    #   Hive compatibility, this name is entirely lowercase.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the table to be deleted.
+    #   The name of the table to be deleted. For Hive compatibility, this
+    #   name is entirely lowercase.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableRequest AWS API Documentation
@@ -2269,6 +2327,49 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableResponse AWS API Documentation
     #
     class DeleteTableResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteTableVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         version_id: "VersionString", # required
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the tables reside. If none is
+    #   supplied, the AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database in the catalog in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table. For Hive compatibility, this name is entirely
+    #   lowercase.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the table version to be deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableVersionRequest AWS API Documentation
+    #
+    class DeleteTableVersionRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableVersionResponse AWS API Documentation
+    #
+    class DeleteTableVersionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteTriggerRequest
     #   data as a hash:
@@ -2880,7 +2981,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the database to retrieve.
+    #   The name of the database to retrieve. For Hive compatibility, this
+    #   should be all lowercase.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDatabaseRequest AWS API Documentation
@@ -3505,10 +3607,12 @@ module Aws::Glue
     #
     # @!attribute [rw] database_name
     #   The name of the database in the catalog in which the table resides.
+    #   For Hive compatibility, this name is entirely lowercase.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the table for which to retrieve the definition.
+    #   The name of the table for which to retrieve the definition. For Hive
+    #   compatibility, this name is entirely lowercase.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableRequest AWS API Documentation
@@ -3531,6 +3635,56 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetTableVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         version_id: "VersionString",
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the tables reside. If none is
+    #   supplied, the AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database in the catalog in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table. For Hive compatibility, this name is entirely
+    #   lowercase.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID value of the table version to be retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersionRequest AWS API Documentation
+    #
+    class GetTableVersionRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_version
+    #   The requested table version.
+    #   @return [Types::TableVersion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersionResponse AWS API Documentation
+    #
+    class GetTableVersionResponse < Struct.new(
+      :table_version)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTableVersionsRequest
     #   data as a hash:
     #
@@ -3548,11 +3702,13 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The database in the catalog in which the table resides.
+    #   The database in the catalog in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
     #   @return [String]
     #
     # @!attribute [rw] table_name
-    #   The name of the table.
+    #   The name of the table. For Hive compatibility, this name is entirely
+    #   lowercase.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3609,7 +3765,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The database in the catalog whose tables to list.
+    #   The database in the catalog whose tables to list. For Hive
+    #   compatibility, this name is entirely lowercase.
     #   @return [String]
     #
     # @!attribute [rw] expression
@@ -4652,7 +4809,8 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] availability_zone
-    #   The connection's availability zone.
+    #   The connection's availability zone. This field is deprecated and
+    #   has no effect.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PhysicalConnectionRequirements AWS API Documentation
@@ -5293,11 +5451,13 @@ module Aws::Glue
     # Represents a collection of related data organized in columns and rows.
     #
     # @!attribute [rw] name
-    #   Name of the table.
+    #   Name of the table. For Hive compatibility, this must be entirely
+    #   lowercase.
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   Name of the metadata database where the table metadata resides.
+    #   Name of the metadata database where the table metadata resides. For
+    #   Hive compatibility, this must be all lowercase.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5386,7 +5546,8 @@ module Aws::Glue
     # An error record for table operations.
     #
     # @!attribute [rw] table_name
-    #   Name of the table.
+    #   Name of the table. For Hive compatibility, this must be entirely
+    #   lowercase.
     #   @return [String]
     #
     # @!attribute [rw] error_detail
@@ -5468,7 +5629,8 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
-    #   Name of the table.
+    #   Name of the table. For Hive compatibility, this is folded to
+    #   lowercase when it is stored.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5552,6 +5714,29 @@ module Aws::Glue
     class TableVersion < Struct.new(
       :table,
       :version_id)
+      include Aws::Structure
+    end
+
+    # An error record for table-version operations.
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table in question.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID value of the version in question.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_detail
+    #   Detail about the error.
+    #   @return [Types::ErrorDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TableVersionError AWS API Documentation
+    #
+    class TableVersionError < Struct.new(
+      :table_name,
+      :version_id,
+      :error_detail)
       include Aws::Structure
     end
 
@@ -5721,11 +5906,11 @@ module Aws::Glue
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
     #         connection_input: { # required
-    #           name: "NameString",
+    #           name: "NameString", # required
     #           description: "DescriptionString",
-    #           connection_type: "JDBC", # accepts JDBC, SFTP
+    #           connection_type: "JDBC", # required, accepts JDBC, SFTP
     #           match_criteria: ["NameString"],
-    #           connection_properties: {
+    #           connection_properties: { # required
     #             "HOST" => "ValueString",
     #           },
     #           physical_connection_requirements: {
@@ -5934,7 +6119,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the metadata database to update in the catalog.
+    #   The name of the database to update in the catalog. For Hive
+    #   compatibility, this is folded to lowercase.
     #   @return [String]
     #
     # @!attribute [rw] database_input
@@ -6253,6 +6439,7 @@ module Aws::Glue
     #             "KeyString" => "ParametersMapValue",
     #           },
     #         },
+    #         skip_archive: false,
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -6261,7 +6448,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] database_name
-    #   The name of the catalog database in which the table resides.
+    #   The name of the catalog database in which the table resides. For
+    #   Hive compatibility, this name is entirely lowercase.
     #   @return [String]
     #
     # @!attribute [rw] table_input
@@ -6269,12 +6457,19 @@ module Aws::Glue
     #   catalog.
     #   @return [Types::TableInput]
     #
+    # @!attribute [rw] skip_archive
+    #   By default, `UpdateTable` always creates an archived version of the
+    #   table before updating it. If `skipArchive` is set to true, however,
+    #   `UpdateTable` does not create the archived version.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
       :catalog_id,
       :database_name,
-      :table_input)
+      :table_input,
+      :skip_archive)
       include Aws::Structure
     end
 

@@ -348,6 +348,7 @@ module Aws::Glue
     #
     # @option params [required, String] :database_name
     #   The name of the catalog database where the tables to delete reside.
+    #   For Hive compatibility, this name is entirely lowercase.
     #
     # @option params [required, Array<String>] :tables_to_delete
     #   A list of the table to delete.
@@ -377,6 +378,53 @@ module Aws::Glue
     # @param [Hash] params ({})
     def batch_delete_table(params = {}, options = {})
       req = build_request(:batch_delete_table, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specified batch of versions of a table.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the tables reside. If none is
+    #   supplied, the AWS account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The database in the catalog in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table. For Hive compatibility, this name is entirely
+    #   lowercase.
+    #
+    # @option params [required, Array<String>] :version_ids
+    #   A list of the IDs of versions to be deleted.
+    #
+    # @return [Types::BatchDeleteTableVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteTableVersionResponse#errors #errors} => Array&lt;Types::TableVersionError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_table_version({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     version_ids: ["VersionString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].table_name #=> String
+    #   resp.errors[0].version_id #=> String
+    #   resp.errors[0].error_detail.error_code #=> String
+    #   resp.errors[0].error_detail.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchDeleteTableVersion AWS API Documentation
+    #
+    # @overload batch_delete_table_version(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_table_version(params = {}, options = {})
+      req = build_request(:batch_delete_table_version, params)
       req.send_request(options)
     end
 
@@ -557,11 +605,11 @@ module Aws::Glue
     #   resp = client.create_connection({
     #     catalog_id: "CatalogIdString",
     #     connection_input: { # required
-    #       name: "NameString",
+    #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # accepts JDBC, SFTP
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP
     #       match_criteria: ["NameString"],
-    #       connection_properties: {
+    #       connection_properties: { # required
     #         "HOST" => "ValueString",
     #       },
     #       physical_connection_requirements: {
@@ -1055,7 +1103,8 @@ module Aws::Glue
     #   supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
-    #   The catalog database in which to create the new table.
+    #   The catalog database in which to create the new table. For Hive
+    #   compatibility, this name is entirely lowercase.
     #
     # @option params [required, Types::TableInput] :table_input
     #   The `TableInput` object that defines the metadata table to create in
@@ -1335,7 +1384,8 @@ module Aws::Glue
     #   supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
-    #   The name of the Database to delete.
+    #   The name of the Database to delete. For Hive compatibility, this must
+    #   be all lowercase.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1449,10 +1499,12 @@ module Aws::Glue
     #   supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
-    #   The name of the catalog database in which the table resides.
+    #   The name of the catalog database in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
     #
     # @option params [required, String] :name
-    #   The name of the table to be deleted.
+    #   The name of the table to be deleted. For Hive compatibility, this name
+    #   is entirely lowercase.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1470,6 +1522,43 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_table(params = {}, options = {})
       req = build_request(:delete_table, params)
+      req.send_request(options)
+    end
+
+    # Deletes a specified version of a table.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the tables reside. If none is
+    #   supplied, the AWS account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The database in the catalog in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table. For Hive compatibility, this name is entirely
+    #   lowercase.
+    #
+    # @option params [required, String] :version_id
+    #   The ID of the table version to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_table_version({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     version_id: "VersionString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTableVersion AWS API Documentation
+    #
+    # @overload delete_table_version(params = {})
+    # @param [Hash] params ({})
+    def delete_table_version(params = {}, options = {})
+      req = build_request(:delete_table_version, params)
       req.send_request(options)
     end
 
@@ -1935,7 +2024,8 @@ module Aws::Glue
     #   supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
-    #   The name of the database to retrieve.
+    #   The name of the database to retrieve. For Hive compatibility, this
+    #   should be all lowercase.
     #
     # @return [Types::GetDatabaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2669,9 +2759,11 @@ module Aws::Glue
     #
     # @option params [required, String] :database_name
     #   The name of the database in the catalog in which the table resides.
+    #   For Hive compatibility, this name is entirely lowercase.
     #
     # @option params [required, String] :name
-    #   The name of the table for which to retrieve the definition.
+    #   The name of the table for which to retrieve the definition. For Hive
+    #   compatibility, this name is entirely lowercase.
     #
     # @return [Types::GetTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2743,6 +2835,95 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves a specified version of a table.
+    #
+    # @option params [String] :catalog_id
+    #   The ID of the Data Catalog where the tables reside. If none is
+    #   supplied, the AWS account ID is used by default.
+    #
+    # @option params [required, String] :database_name
+    #   The database in the catalog in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table. For Hive compatibility, this name is entirely
+    #   lowercase.
+    #
+    # @option params [String] :version_id
+    #   The ID value of the table version to be retrieved.
+    #
+    # @return [Types::GetTableVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTableVersionResponse#table_version #table_version} => Types::TableVersion
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_table_version({
+    #     catalog_id: "CatalogIdString",
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     version_id: "VersionString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_version.table.name #=> String
+    #   resp.table_version.table.database_name #=> String
+    #   resp.table_version.table.description #=> String
+    #   resp.table_version.table.owner #=> String
+    #   resp.table_version.table.create_time #=> Time
+    #   resp.table_version.table.update_time #=> Time
+    #   resp.table_version.table.last_access_time #=> Time
+    #   resp.table_version.table.last_analyzed_time #=> Time
+    #   resp.table_version.table.retention #=> Integer
+    #   resp.table_version.table.storage_descriptor.columns #=> Array
+    #   resp.table_version.table.storage_descriptor.columns[0].name #=> String
+    #   resp.table_version.table.storage_descriptor.columns[0].type #=> String
+    #   resp.table_version.table.storage_descriptor.columns[0].comment #=> String
+    #   resp.table_version.table.storage_descriptor.location #=> String
+    #   resp.table_version.table.storage_descriptor.input_format #=> String
+    #   resp.table_version.table.storage_descriptor.output_format #=> String
+    #   resp.table_version.table.storage_descriptor.compressed #=> Boolean
+    #   resp.table_version.table.storage_descriptor.number_of_buckets #=> Integer
+    #   resp.table_version.table.storage_descriptor.serde_info.name #=> String
+    #   resp.table_version.table.storage_descriptor.serde_info.serialization_library #=> String
+    #   resp.table_version.table.storage_descriptor.serde_info.parameters #=> Hash
+    #   resp.table_version.table.storage_descriptor.serde_info.parameters["KeyString"] #=> String
+    #   resp.table_version.table.storage_descriptor.bucket_columns #=> Array
+    #   resp.table_version.table.storage_descriptor.bucket_columns[0] #=> String
+    #   resp.table_version.table.storage_descriptor.sort_columns #=> Array
+    #   resp.table_version.table.storage_descriptor.sort_columns[0].column #=> String
+    #   resp.table_version.table.storage_descriptor.sort_columns[0].sort_order #=> Integer
+    #   resp.table_version.table.storage_descriptor.parameters #=> Hash
+    #   resp.table_version.table.storage_descriptor.parameters["KeyString"] #=> String
+    #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_names #=> Array
+    #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
+    #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_values #=> Array
+    #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
+    #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
+    #   resp.table_version.table.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
+    #   resp.table_version.table.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table_version.table.partition_keys #=> Array
+    #   resp.table_version.table.partition_keys[0].name #=> String
+    #   resp.table_version.table.partition_keys[0].type #=> String
+    #   resp.table_version.table.partition_keys[0].comment #=> String
+    #   resp.table_version.table.view_original_text #=> String
+    #   resp.table_version.table.view_expanded_text #=> String
+    #   resp.table_version.table.table_type #=> String
+    #   resp.table_version.table.parameters #=> Hash
+    #   resp.table_version.table.parameters["KeyString"] #=> String
+    #   resp.table_version.table.created_by #=> String
+    #   resp.table_version.version_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
+    #
+    # @overload get_table_version(params = {})
+    # @param [Hash] params ({})
+    def get_table_version(params = {}, options = {})
+      req = build_request(:get_table_version, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of strings that identify available versions of a
     # specified table.
     #
@@ -2751,10 +2932,12 @@ module Aws::Glue
     #   supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
-    #   The database in the catalog in which the table resides.
+    #   The database in the catalog in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
     #
     # @option params [required, String] :table_name
-    #   The name of the table.
+    #   The name of the table. For Hive compatibility, this name is entirely
+    #   lowercase.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is not the first call.
@@ -2846,7 +3029,8 @@ module Aws::Glue
     #   supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
-    #   The database in the catalog whose tables to list.
+    #   The database in the catalog whose tables to list. For Hive
+    #   compatibility, this name is entirely lowercase.
     #
     # @option params [String] :expression
     #   A regular expression pattern. If present, only those tables whose
@@ -3461,11 +3645,11 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     name: "NameString", # required
     #     connection_input: { # required
-    #       name: "NameString",
+    #       name: "NameString", # required
     #       description: "DescriptionString",
-    #       connection_type: "JDBC", # accepts JDBC, SFTP
+    #       connection_type: "JDBC", # required, accepts JDBC, SFTP
     #       match_criteria: ["NameString"],
-    #       connection_properties: {
+    #       connection_properties: { # required
     #         "HOST" => "ValueString",
     #       },
     #       physical_connection_requirements: {
@@ -3621,7 +3805,8 @@ module Aws::Glue
     #   none is supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :name
-    #   The name of the metadata database to update in the catalog.
+    #   The name of the database to update in the catalog. For Hive
+    #   compatibility, this is folded to lowercase.
     #
     # @option params [required, Types::DatabaseInput] :database_input
     #   A `DatabaseInput` object specifying the new definition of the metadata
@@ -3835,11 +4020,17 @@ module Aws::Glue
     #   supplied, the AWS account ID is used by default.
     #
     # @option params [required, String] :database_name
-    #   The name of the catalog database in which the table resides.
+    #   The name of the catalog database in which the table resides. For Hive
+    #   compatibility, this name is entirely lowercase.
     #
     # @option params [required, Types::TableInput] :table_input
     #   An updated `TableInput` object to define the metadata table in the
     #   catalog.
+    #
+    # @option params [Boolean] :skip_archive
+    #   By default, `UpdateTable` always creates an archived version of the
+    #   table before updating it. If `skipArchive` is set to true, however,
+    #   `UpdateTable` does not create the archived version.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3908,6 +4099,7 @@ module Aws::Glue
     #         "KeyString" => "ParametersMapValue",
     #       },
     #     },
+    #     skip_archive: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable AWS API Documentation
@@ -4048,7 +4240,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

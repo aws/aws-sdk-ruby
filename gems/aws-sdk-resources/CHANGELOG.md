@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.12.0 (2018-01-19)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-transcribeservice` gem.
+
 3.11.0 (2018-01-17)
 ------------------
 

@@ -337,8 +337,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                          | Aws::IoTDataPlane                    | aws-sdk-iotdataplane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                     | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS Key Management Service                  | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
-| AWS Lambda                                  | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Lambda                                  | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
+| AWS Lambda                                  | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Marketplace Commerce Analytics          | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service         | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
 | AWS Migration Hub                           | Aws::MigrationHub                    | aws-sdk-migrationhub                    | 2017-05-31  |
@@ -421,6 +421,7 @@ to be backwards compatible.
 | Amazon Simple Systems Manager (SSM)         | Aws::SSM                             | aws-sdk-ssm                             | 2014-11-06  |
 | Amazon Simple Workflow Service              | Aws::SWF                             | aws-sdk-swf                             | 2012-01-25  |
 | Amazon SimpleDB                             | Aws::SimpleDB                        | aws-sdk-simpledb                        | 2009-04-15  |
+| Amazon Transcribe Service                   | Aws::TranscribeService               | aws-sdk-transcribeservice               | 2017-10-26  |
 | Amazon Translate                            | Aws::Translate                       | aws-sdk-translate                       | 2017-07-01  |
 | Amazon WorkDocs                             | Aws::WorkDocs                        | aws-sdk-workdocs                        | 2016-05-01  |
 | Amazon WorkMail                             | Aws::WorkMail                        | aws-sdk-workmail                        | 2017-10-01  |
