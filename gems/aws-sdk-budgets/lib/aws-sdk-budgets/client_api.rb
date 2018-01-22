@@ -104,6 +104,8 @@ module Aws::Budgets
     CostTypes.add_member(:include_recurring, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeRecurring"))
     CostTypes.add_member(:include_other_subscription, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeOtherSubscription"))
     CostTypes.add_member(:include_support, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeSupport"))
+    CostTypes.add_member(:include_discount, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IncludeDiscount"))
+    CostTypes.add_member(:use_amortized, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "UseAmortized"))
     CostTypes.struct_class = Types::CostTypes
 
     CreateBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))

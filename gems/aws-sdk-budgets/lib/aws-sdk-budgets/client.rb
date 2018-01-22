@@ -191,6 +191,8 @@ module Aws::Budgets
     #         include_recurring: false,
     #         include_other_subscription: false,
     #         include_support: false,
+    #         include_discount: false,
+    #         use_amortized: false,
     #       },
     #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #       time_period: { # required
@@ -461,6 +463,8 @@ module Aws::Budgets
     #   resp.budget.cost_types.include_recurring #=> Boolean
     #   resp.budget.cost_types.include_other_subscription #=> Boolean
     #   resp.budget.cost_types.include_support #=> Boolean
+    #   resp.budget.cost_types.include_discount #=> Boolean
+    #   resp.budget.cost_types.use_amortized #=> Boolean
     #   resp.budget.time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
     #   resp.budget.time_period.start #=> Time
     #   resp.budget.time_period.end #=> Time
@@ -520,6 +524,8 @@ module Aws::Budgets
     #   resp.budgets[0].cost_types.include_recurring #=> Boolean
     #   resp.budgets[0].cost_types.include_other_subscription #=> Boolean
     #   resp.budgets[0].cost_types.include_support #=> Boolean
+    #   resp.budgets[0].cost_types.include_discount #=> Boolean
+    #   resp.budgets[0].cost_types.use_amortized #=> Boolean
     #   resp.budgets[0].time_unit #=> String, one of "DAILY", "MONTHLY", "QUARTERLY", "ANNUALLY"
     #   resp.budgets[0].time_period.start #=> Time
     #   resp.budgets[0].time_period.end #=> Time
@@ -670,6 +676,8 @@ module Aws::Budgets
     #         include_recurring: false,
     #         include_other_subscription: false,
     #         include_support: false,
+    #         include_discount: false,
+    #         use_amortized: false,
     #       },
     #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #       time_period: { # required
@@ -806,7 +814,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -32,6 +32,8 @@ module Aws::Budgets
     #           include_recurring: false,
     #           include_other_subscription: false,
     #           include_support: false,
+    #           include_discount: false,
+    #           use_amortized: false,
     #         },
     #         time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #         time_period: { # required
@@ -144,6 +146,8 @@ module Aws::Budgets
     #         include_recurring: false,
     #         include_other_subscription: false,
     #         include_support: false,
+    #         include_discount: false,
+    #         use_amortized: false,
     #       }
     #
     # @!attribute [rw] include_tax
@@ -184,6 +188,15 @@ module Aws::Budgets
     #   A boolean value whether to include support costs in the cost budget.
     #   @return [Boolean]
     #
+    # @!attribute [rw] include_discount
+    #   A boolean value whether to include discounts in the cost budget.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] use_amortized
+    #   A boolean value whether to include amortized costs in the cost
+    #   budget.
+    #   @return [Boolean]
+    #
     class CostTypes < Struct.new(
       :include_tax,
       :include_subscription,
@@ -193,7 +206,9 @@ module Aws::Budgets
       :include_upfront,
       :include_recurring,
       :include_other_subscription,
-      :include_support)
+      :include_support,
+      :include_discount,
+      :use_amortized)
       include Aws::Structure
     end
 
@@ -223,6 +238,8 @@ module Aws::Budgets
     #             include_recurring: false,
     #             include_other_subscription: false,
     #             include_support: false,
+    #             include_discount: false,
+    #             use_amortized: false,
     #           },
     #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #           time_period: { # required
@@ -886,6 +903,8 @@ module Aws::Budgets
     #             include_recurring: false,
     #             include_other_subscription: false,
     #             include_support: false,
+    #             include_discount: false,
+    #             use_amortized: false,
     #           },
     #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
     #           time_period: { # required
