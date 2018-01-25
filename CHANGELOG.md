@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.124 (2018-01-25)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
