@@ -88,6 +88,7 @@ module Aws::Lambda
     #         source_account: "SourceOwner",
     #         event_source_token: "EventSourceToken",
     #         qualifier: "Qualifier",
+    #         revision_id: "String",
     #       }
     #
     # @!attribute [rw] function_name
@@ -174,6 +175,14 @@ module Aws::Lambda
     #   `arn:aws:lambda:aws-region:acct-id:function:function-name`
     #   @return [String]
     #
+    # @!attribute [rw] revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you
+    #   pass doesn't match the latest `RevisionId` of the function or
+    #   alias, it will fail with an error message, advising you to retrieve
+    #   the latest function version or alias `RevisionID` using either or .
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest AWS API Documentation
     #
     class AddPermissionRequest < Struct.new(
@@ -184,7 +193,8 @@ module Aws::Lambda
       :source_arn,
       :source_account,
       :event_source_token,
-      :qualifier)
+      :qualifier,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -230,6 +240,10 @@ module Aws::Lambda
     #   lambda-traffic-shifting-using-aliases.
     #   @return [Types::AliasRoutingConfiguration]
     #
+    # @!attribute [rw] revision_id
+    #   Represents the latest updated revision of the function or alias.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasConfiguration AWS API Documentation
     #
     class AliasConfiguration < Struct.new(
@@ -237,7 +251,8 @@ module Aws::Lambda
       :name,
       :function_version,
       :description,
-      :routing_config)
+      :routing_config,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -482,7 +497,7 @@ module Aws::Lambda
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available
     #   on AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure
-    #   to do so will result in an invalid parmaeter error being returned.
+    #   to do so will result in an invalid parameter error being returned.
     #   Note that you will have to follow this procedure for each region
     #   that contains functions written in the Node v0.10.42 runtime.
     #
@@ -1016,6 +1031,10 @@ module Aws::Lambda
     #   Returns the ARN (Amazon Resource Name) of the master function.
     #   @return [String]
     #
+    # @!attribute [rw] revision_id
+    #   Represents the latest updated revision of the function or alias.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -1036,7 +1055,8 @@ module Aws::Lambda
       :environment,
       :kms_key_arn,
       :tracing_config,
-      :master_arn)
+      :master_arn,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -1266,10 +1286,15 @@ module Aws::Lambda
     #   an escape character in the JSON.
     #   @return [String]
     #
+    # @!attribute [rw] revision_id
+    #   Represents the latest updated revision of the function or alias.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicyResponse AWS API Documentation
     #
     class GetPolicyResponse < Struct.new(
-      :policy)
+      :policy,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -1756,6 +1781,7 @@ module Aws::Lambda
     #         function_name: "FunctionName", # required
     #         code_sha_256: "String",
     #         description: "Description",
+    #         revision_id: "String",
     #       }
     #
     # @!attribute [rw] function_name
@@ -1783,12 +1809,21 @@ module Aws::Lambda
     #   AWS Lambda copies the description from the $LATEST version.
     #   @return [String]
     #
+    # @!attribute [rw] revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you
+    #   pass doesn't match the latest `RevisionId` of the function or
+    #   alias, it will fail with an error message, advising you to retrieve
+    #   the latest function version or alias `RevisionID` using either or .
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersionRequest AWS API Documentation
     #
     class PublishVersionRequest < Struct.new(
       :function_name,
       :code_sha_256,
-      :description)
+      :description,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -1825,6 +1860,7 @@ module Aws::Lambda
     #         function_name: "FunctionName", # required
     #         statement_id: "NamespacedStatementId", # required
     #         qualifier: "Qualifier",
+    #         revision_id: "String",
     #       }
     #
     # @!attribute [rw] function_name
@@ -1851,12 +1887,21 @@ module Aws::Lambda
     #   associated with the unqualified function ARN.
     #   @return [String]
     #
+    # @!attribute [rw] revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you
+    #   pass doesn't match the latest `RevisionId` of the function or
+    #   alias, it will fail with an error message, advising you to retrieve
+    #   the latest function version or alias `RevisionID` using either or .
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionRequest AWS API Documentation
     #
     class RemovePermissionRequest < Struct.new(
       :function_name,
       :statement_id,
-      :qualifier)
+      :qualifier,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -1963,6 +2008,7 @@ module Aws::Lambda
     #             "AdditionalVersion" => 1.0,
     #           },
     #         },
+    #         revision_id: "String",
     #       }
     #
     # @!attribute [rw] function_name
@@ -1990,6 +2036,14 @@ module Aws::Lambda
     #   For more information, see lambda-traffic-shifting-using-aliases.
     #   @return [Types::AliasRoutingConfiguration]
     #
+    # @!attribute [rw] revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you
+    #   pass doesn't match the latest `RevisionId` of the function or
+    #   alias, it will fail with an error message, advising you to retrieve
+    #   the latest function version or alias `RevisionID` using either or .
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAliasRequest AWS API Documentation
     #
     class UpdateAliasRequest < Struct.new(
@@ -1997,7 +2051,8 @@ module Aws::Lambda
       :name,
       :function_version,
       :description,
-      :routing_config)
+      :routing_config,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -2071,6 +2126,7 @@ module Aws::Lambda
     #         s3_object_version: "S3ObjectVersion",
     #         publish: false,
     #         dry_run: false,
+    #         revision_id: "String",
     #       }
     #
     # @!attribute [rw] function_name
@@ -2129,6 +2185,14 @@ module Aws::Lambda
     #   response.
     #   @return [Boolean]
     #
+    # @!attribute [rw] revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you
+    #   pass doesn't match the latest `RevisionId` of the function or
+    #   alias, it will fail with an error message, advising you to retrieve
+    #   the latest function version or alias `RevisionID` using either or .
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest AWS API Documentation
     #
     class UpdateFunctionCodeRequest < Struct.new(
@@ -2138,7 +2202,8 @@ module Aws::Lambda
       :s3_key,
       :s3_object_version,
       :publish,
-      :dry_run)
+      :dry_run,
+      :revision_id)
       include Aws::Structure
     end
 
@@ -2169,6 +2234,7 @@ module Aws::Lambda
     #         tracing_config: {
     #           mode: "Active", # accepts Active, PassThrough
     #         },
+    #         revision_id: "String",
     #       }
     #
     # @!attribute [rw] function_name
@@ -2261,6 +2327,14 @@ module Aws::Lambda
     #   The parent object that contains your function's tracing settings.
     #   @return [Types::TracingConfig]
     #
+    # @!attribute [rw] revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you
+    #   pass doesn't match the latest `RevisionId` of the function or
+    #   alias, it will fail with an error message, advising you to retrieve
+    #   the latest function version or alias `RevisionID` using either or .
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
@@ -2275,7 +2349,8 @@ module Aws::Lambda
       :runtime,
       :dead_letter_config,
       :kms_key_arn,
-      :tracing_config)
+      :tracing_config,
+      :revision_id)
       include Aws::Structure
     end
 

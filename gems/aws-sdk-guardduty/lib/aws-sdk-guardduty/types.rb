@@ -45,6 +45,35 @@ module Aws::GuardDuty
     #
     class AcceptInvitationResponse < Aws::EmptyStructure; end
 
+    # The IAM access key details (IAM user information) of a user that
+    # engaged in the activity that prompted GuardDuty to generate a finding.
+    #
+    # @!attribute [rw] access_key_id
+    #   Access key ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_id
+    #   The principal ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_type
+    #   The type of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccessKeyDetails AWS API Documentation
+    #
+    class AccessKeyDetails < Struct.new(
+      :access_key_id,
+      :principal_id,
+      :user_name,
+      :user_type)
+      include Aws::Structure
+    end
+
     # An object containing the member's accountId and email address.
     #
     # @note When making an API call, you may pass AccountDetail
@@ -2055,6 +2084,12 @@ module Aws::GuardDuty
     # The AWS resource associated with the activity that prompted GuardDuty
     # to generate a finding.
     #
+    # @!attribute [rw] access_key_details
+    #   The IAM access key details (IAM user information) of a user that
+    #   engaged in the activity that prompted GuardDuty to generate a
+    #   finding.
+    #   @return [Types::AccessKeyDetails]
+    #
     # @!attribute [rw] instance_details
     #   The information about the EC2 instance associated with the activity
     #   that prompted GuardDuty to generate a finding.
@@ -2067,6 +2102,7 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource AWS API Documentation
     #
     class Resource < Struct.new(
+      :access_key_details,
       :instance_details,
       :resource_type)
       include Aws::Structure

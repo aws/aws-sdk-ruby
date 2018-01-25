@@ -51,6 +51,7 @@ module Aws::CodeBuild
     EnvironmentVariable = Shapes::StructureShape.new(name: 'EnvironmentVariable')
     EnvironmentVariableType = Shapes::StringShape.new(name: 'EnvironmentVariableType')
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
+    GitCloneDepth = Shapes::IntegerShape.new(name: 'GitCloneDepth')
     ImageVersions = Shapes::ListShape.new(name: 'ImageVersions')
     InvalidInputException = Shapes::StructureShape.new(name: 'InvalidInputException')
     InvalidateProjectCacheInput = Shapes::StructureShape.new(name: 'InvalidateProjectCacheInput')
@@ -328,14 +329,17 @@ module Aws::CodeBuild
     ProjectEnvironment.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, required: true, location_name: "computeType"))
     ProjectEnvironment.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariables"))
     ProjectEnvironment.add_member(:privileged_mode, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "privilegedMode"))
+    ProjectEnvironment.add_member(:certificate, Shapes::ShapeRef.new(shape: String, location_name: "certificate"))
     ProjectEnvironment.struct_class = Types::ProjectEnvironment
 
     ProjectNames.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     ProjectSource.add_member(:type, Shapes::ShapeRef.new(shape: SourceType, required: true, location_name: "type"))
     ProjectSource.add_member(:location, Shapes::ShapeRef.new(shape: String, location_name: "location"))
+    ProjectSource.add_member(:git_clone_depth, Shapes::ShapeRef.new(shape: GitCloneDepth, location_name: "gitCloneDepth"))
     ProjectSource.add_member(:buildspec, Shapes::ShapeRef.new(shape: String, location_name: "buildspec"))
     ProjectSource.add_member(:auth, Shapes::ShapeRef.new(shape: SourceAuth, location_name: "auth"))
+    ProjectSource.add_member(:insecure_ssl, Shapes::ShapeRef.new(shape: WrapperBoolean, location_name: "insecureSsl"))
     ProjectSource.struct_class = Types::ProjectSource
 
     Projects.member = Shapes::ShapeRef.new(shape: Project)
@@ -350,6 +354,7 @@ module Aws::CodeBuild
     StartBuildInput.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "sourceVersion"))
     StartBuildInput.add_member(:artifacts_override, Shapes::ShapeRef.new(shape: ProjectArtifacts, location_name: "artifactsOverride"))
     StartBuildInput.add_member(:environment_variables_override, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "environmentVariablesOverride"))
+    StartBuildInput.add_member(:git_clone_depth_override, Shapes::ShapeRef.new(shape: GitCloneDepth, location_name: "gitCloneDepthOverride"))
     StartBuildInput.add_member(:buildspec_override, Shapes::ShapeRef.new(shape: String, location_name: "buildspecOverride"))
     StartBuildInput.add_member(:timeout_in_minutes_override, Shapes::ShapeRef.new(shape: TimeOut, location_name: "timeoutInMinutesOverride"))
     StartBuildInput.struct_class = Types::StartBuildInput
@@ -394,6 +399,8 @@ module Aws::CodeBuild
     VpcConfig.struct_class = Types::VpcConfig
 
     Webhook.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "url"))
+    Webhook.add_member(:payload_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "payloadUrl"))
+    Webhook.add_member(:secret, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "secret"))
     Webhook.struct_class = Types::Webhook
 
 

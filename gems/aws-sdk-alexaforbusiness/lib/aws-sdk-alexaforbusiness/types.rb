@@ -494,8 +494,13 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] device_status
-    #   The status of a device.
+    #   The status of a device. If the status is not READY, check the
+    #   DeviceStatusInfo for details.
     #   @return [String]
+    #
+    # @!attribute [rw] device_status_info
+    #   Detailed information about a device's status.
+    #   @return [Types::DeviceStatusInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Device AWS API Documentation
     #
@@ -507,7 +512,8 @@ module Aws::AlexaForBusiness
       :software_version,
       :mac_address,
       :room_arn,
-      :device_status)
+      :device_status,
+      :device_status_info)
       include Aws::Structure
     end
 
@@ -549,6 +555,10 @@ module Aws::AlexaForBusiness
     #   The name of the room associated with a device.
     #   @return [String]
     #
+    # @!attribute [rw] device_status_info
+    #   Detailed information about a device's status.
+    #   @return [Types::DeviceStatusInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceData AWS API Documentation
     #
     class DeviceData < Struct.new(
@@ -560,7 +570,34 @@ module Aws::AlexaForBusiness
       :mac_address,
       :device_status,
       :room_arn,
-      :room_name)
+      :room_name,
+      :device_status_info)
+      include Aws::Structure
+    end
+
+    # Details of a device’s status.
+    #
+    # @!attribute [rw] code
+    #   The device status detail code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusDetail AWS API Documentation
+    #
+    class DeviceStatusDetail < Struct.new(
+      :code)
+      include Aws::Structure
+    end
+
+    # Detailed information about a device's status.
+    #
+    # @!attribute [rw] device_status_details
+    #   One or more device status detail descriptions.
+    #   @return [Array<Types::DeviceStatusDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusInfo AWS API Documentation
+    #
+    class DeviceStatusInfo < Struct.new(
+      :device_status_details)
       include Aws::Structure
     end
 
@@ -1256,8 +1293,8 @@ module Aws::AlexaForBusiness
     #
     # @!attribute [rw] filters
     #   The filters to use to list a specified set of devices. Supported
-    #   filter keys are DeviceName, DeviceStatus, RoomName, DeviceType,
-    #   DeviceSerialNumber, and UnassociatedOnly.
+    #   filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode,
+    #   RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] sort_criteria

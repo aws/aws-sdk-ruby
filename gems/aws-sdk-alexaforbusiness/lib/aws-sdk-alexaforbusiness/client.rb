@@ -635,6 +635,8 @@ module Aws::AlexaForBusiness
     #   resp.device.mac_address #=> String
     #   resp.device.room_arn #=> String
     #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE"
+    #   resp.device.device_status_info.device_status_details #=> Array
+    #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDevice AWS API Documentation
     #
@@ -996,8 +998,8 @@ module Aws::AlexaForBusiness
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters to use to list a specified set of devices. Supported
-    #   filter keys are DeviceName, DeviceStatus, RoomName, DeviceType,
-    #   DeviceSerialNumber, and UnassociatedOnly.
+    #   filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode,
+    #   RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.
     #
     # @option params [Array<Types::Sort>] :sort_criteria
     #   The sort order to use in listing the specified set of devices.
@@ -1041,6 +1043,8 @@ module Aws::AlexaForBusiness
     #   resp.devices[0].device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE"
     #   resp.devices[0].room_arn #=> String
     #   resp.devices[0].room_name #=> String
+    #   resp.devices[0].device_status_info.device_status_details #=> Array
+    #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -1609,7 +1613,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

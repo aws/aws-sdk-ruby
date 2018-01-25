@@ -13,6 +13,7 @@ module Aws::GuardDuty
 
     AcceptInvitationRequest = Shapes::StructureShape.new(name: 'AcceptInvitationRequest')
     AcceptInvitationResponse = Shapes::StructureShape.new(name: 'AcceptInvitationResponse')
+    AccessKeyDetails = Shapes::StructureShape.new(name: 'AccessKeyDetails')
     AccountDetail = Shapes::StructureShape.new(name: 'AccountDetail')
     AccountDetails = Shapes::ListShape.new(name: 'AccountDetails')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
@@ -187,6 +188,12 @@ module Aws::GuardDuty
     AcceptInvitationRequest.struct_class = Types::AcceptInvitationRequest
 
     AcceptInvitationResponse.struct_class = Types::AcceptInvitationResponse
+
+    AccessKeyDetails.add_member(:access_key_id, Shapes::ShapeRef.new(shape: __string, location_name: "accessKeyId"))
+    AccessKeyDetails.add_member(:principal_id, Shapes::ShapeRef.new(shape: __string, location_name: "principalId"))
+    AccessKeyDetails.add_member(:user_name, Shapes::ShapeRef.new(shape: __string, location_name: "userName"))
+    AccessKeyDetails.add_member(:user_type, Shapes::ShapeRef.new(shape: __string, location_name: "userType"))
+    AccessKeyDetails.struct_class = Types::AccessKeyDetails
 
     AccountDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     AccountDetail.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "email"))
@@ -600,6 +607,7 @@ module Aws::GuardDuty
     RemotePortDetails.add_member(:port_name, Shapes::ShapeRef.new(shape: __string, location_name: "portName"))
     RemotePortDetails.struct_class = Types::RemotePortDetails
 
+    Resource.add_member(:access_key_details, Shapes::ShapeRef.new(shape: AccessKeyDetails, location_name: "accessKeyDetails"))
     Resource.add_member(:instance_details, Shapes::ShapeRef.new(shape: InstanceDetails, location_name: "instanceDetails"))
     Resource.add_member(:resource_type, Shapes::ShapeRef.new(shape: __string, location_name: "resourceType"))
     Resource.struct_class = Types::Resource

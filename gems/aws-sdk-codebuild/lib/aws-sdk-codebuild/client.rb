@@ -477,11 +477,13 @@ module Aws::CodeBuild
     #   resp.builds[0].phases[0].contexts #=> Array
     #   resp.builds[0].phases[0].contexts[0].status_code #=> String
     #   resp.builds[0].phases[0].contexts[0].message #=> String
-    #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET"
+    #   resp.builds[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
     #   resp.builds[0].source.location #=> String
+    #   resp.builds[0].source.git_clone_depth #=> Integer
     #   resp.builds[0].source.buildspec #=> String
     #   resp.builds[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].source.auth.resource #=> String
+    #   resp.builds[0].source.insecure_ssl #=> Boolean
     #   resp.builds[0].artifacts.location #=> String
     #   resp.builds[0].artifacts.sha256sum #=> String
     #   resp.builds[0].artifacts.md5sum #=> String
@@ -495,6 +497,7 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.environment_variables[0].value #=> String
     #   resp.builds[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.builds[0].environment.privileged_mode #=> Boolean
+    #   resp.builds[0].environment.certificate #=> String
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
     #   resp.builds[0].logs.deep_link #=> String
@@ -542,11 +545,13 @@ module Aws::CodeBuild
     #   resp.projects[0].name #=> String
     #   resp.projects[0].arn #=> String
     #   resp.projects[0].description #=> String
-    #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET"
+    #   resp.projects[0].source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
     #   resp.projects[0].source.location #=> String
+    #   resp.projects[0].source.git_clone_depth #=> Integer
     #   resp.projects[0].source.buildspec #=> String
     #   resp.projects[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].source.auth.resource #=> String
+    #   resp.projects[0].source.insecure_ssl #=> Boolean
     #   resp.projects[0].artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.projects[0].artifacts.location #=> String
     #   resp.projects[0].artifacts.path #=> String
@@ -563,6 +568,7 @@ module Aws::CodeBuild
     #   resp.projects[0].environment.environment_variables[0].value #=> String
     #   resp.projects[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.projects[0].environment.privileged_mode #=> Boolean
+    #   resp.projects[0].environment.certificate #=> String
     #   resp.projects[0].service_role #=> String
     #   resp.projects[0].timeout_in_minutes #=> Integer
     #   resp.projects[0].encryption_key #=> String
@@ -572,6 +578,8 @@ module Aws::CodeBuild
     #   resp.projects[0].created #=> Time
     #   resp.projects[0].last_modified #=> Time
     #   resp.projects[0].webhook.url #=> String
+    #   resp.projects[0].webhook.payload_url #=> String
+    #   resp.projects[0].webhook.secret #=> String
     #   resp.projects[0].vpc_config.vpc_id #=> String
     #   resp.projects[0].vpc_config.subnets #=> Array
     #   resp.projects[0].vpc_config.subnets[0] #=> String
@@ -652,13 +660,15 @@ module Aws::CodeBuild
     #     name: "ProjectName", # required
     #     description: "ProjectDescription",
     #     source: { # required
-    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET
+    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
     #       location: "String",
+    #       git_clone_depth: 1,
     #       buildspec: "String",
     #       auth: {
     #         type: "OAUTH", # required, accepts OAUTH
     #         resource: "String",
     #       },
+    #       insecure_ssl: false,
     #     },
     #     artifacts: { # required
     #       type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
@@ -684,6 +694,7 @@ module Aws::CodeBuild
     #         },
     #       ],
     #       privileged_mode: false,
+    #       certificate: "String",
     #     },
     #     service_role: "NonEmptyString",
     #     timeout_in_minutes: 1,
@@ -707,11 +718,13 @@ module Aws::CodeBuild
     #   resp.project.name #=> String
     #   resp.project.arn #=> String
     #   resp.project.description #=> String
-    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET"
+    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
     #   resp.project.source.location #=> String
+    #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
+    #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
     #   resp.project.artifacts.path #=> String
@@ -728,6 +741,7 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables[0].value #=> String
     #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.project.environment.privileged_mode #=> Boolean
+    #   resp.project.environment.certificate #=> String
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.encryption_key #=> String
@@ -737,6 +751,8 @@ module Aws::CodeBuild
     #   resp.project.created #=> Time
     #   resp.project.last_modified #=> Time
     #   resp.project.webhook.url #=> String
+    #   resp.project.webhook.payload_url #=> String
+    #   resp.project.webhook.secret #=> String
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
     #   resp.project.vpc_config.subnets[0] #=> String
@@ -766,7 +782,7 @@ module Aws::CodeBuild
     # per-build basis, you will be billed for both builds. Therefore, if you
     # are using AWS CodePipeline, we recommend that you disable webhooks in
     # CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For
-    # more information, see step 9 in [Change a Build Project’s
+    # more information, see step 9 in [Change a Build Project's
     # Settings][1].
     #
     #
@@ -789,6 +805,8 @@ module Aws::CodeBuild
     # @example Response structure
     #
     #   resp.webhook.url #=> String
+    #   resp.webhook.payload_url #=> String
+    #   resp.webhook.secret #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook AWS API Documentation
     #
@@ -1094,6 +1112,11 @@ module Aws::CodeBuild
     #   A set of environment variables that overrides, for this build only,
     #   the latest ones already defined in the build project.
     #
+    # @option params [Integer] :git_clone_depth_override
+    #   The user-defined depth of history, with a minimum value of 0, that
+    #   overrides, for this build only, any previous depth of history defined
+    #   in the build project.
+    #
     # @option params [String] :buildspec_override
     #   A build spec declaration that overrides, for this build only, the
     #   latest one already defined in the build project.
@@ -1127,6 +1150,7 @@ module Aws::CodeBuild
     #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #       },
     #     ],
+    #     git_clone_depth_override: 1,
     #     buildspec_override: "String",
     #     timeout_in_minutes_override: 1,
     #   })
@@ -1150,11 +1174,13 @@ module Aws::CodeBuild
     #   resp.build.phases[0].contexts #=> Array
     #   resp.build.phases[0].contexts[0].status_code #=> String
     #   resp.build.phases[0].contexts[0].message #=> String
-    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET"
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
     #   resp.build.source.location #=> String
+    #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
+    #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
@@ -1168,6 +1194,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].value #=> String
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
+    #   resp.build.environment.certificate #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
@@ -1225,11 +1252,13 @@ module Aws::CodeBuild
     #   resp.build.phases[0].contexts #=> Array
     #   resp.build.phases[0].contexts[0].status_code #=> String
     #   resp.build.phases[0].contexts[0].message #=> String
-    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET"
+    #   resp.build.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
     #   resp.build.source.location #=> String
+    #   resp.build.source.git_clone_depth #=> Integer
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
+    #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
     #   resp.build.artifacts.md5sum #=> String
@@ -1243,6 +1272,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].value #=> String
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
+    #   resp.build.environment.certificate #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
@@ -1334,13 +1364,15 @@ module Aws::CodeBuild
     #     name: "NonEmptyString", # required
     #     description: "ProjectDescription",
     #     source: {
-    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET
+    #       type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
     #       location: "String",
+    #       git_clone_depth: 1,
     #       buildspec: "String",
     #       auth: {
     #         type: "OAUTH", # required, accepts OAUTH
     #         resource: "String",
     #       },
+    #       insecure_ssl: false,
     #     },
     #     artifacts: {
     #       type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
@@ -1366,6 +1398,7 @@ module Aws::CodeBuild
     #         },
     #       ],
     #       privileged_mode: false,
+    #       certificate: "String",
     #     },
     #     service_role: "NonEmptyString",
     #     timeout_in_minutes: 1,
@@ -1389,11 +1422,13 @@ module Aws::CodeBuild
     #   resp.project.name #=> String
     #   resp.project.arn #=> String
     #   resp.project.description #=> String
-    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET"
+    #   resp.project.source.type #=> String, one of "CODECOMMIT", "CODEPIPELINE", "GITHUB", "S3", "BITBUCKET", "GITHUB_ENTERPRISE"
     #   resp.project.source.location #=> String
+    #   resp.project.source.git_clone_depth #=> Integer
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
+    #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
     #   resp.project.artifacts.path #=> String
@@ -1410,6 +1445,7 @@ module Aws::CodeBuild
     #   resp.project.environment.environment_variables[0].value #=> String
     #   resp.project.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.project.environment.privileged_mode #=> Boolean
+    #   resp.project.environment.certificate #=> String
     #   resp.project.service_role #=> String
     #   resp.project.timeout_in_minutes #=> Integer
     #   resp.project.encryption_key #=> String
@@ -1419,6 +1455,8 @@ module Aws::CodeBuild
     #   resp.project.created #=> Time
     #   resp.project.last_modified #=> Time
     #   resp.project.webhook.url #=> String
+    #   resp.project.webhook.payload_url #=> String
+    #   resp.project.webhook.secret #=> String
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
     #   resp.project.vpc_config.subnets[0] #=> String
@@ -1449,7 +1487,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -386,13 +386,15 @@ module Aws::CodeBuild
     #         name: "ProjectName", # required
     #         description: "ProjectDescription",
     #         source: { # required
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET
+    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
     #           location: "String",
+    #           git_clone_depth: 1,
     #           buildspec: "String",
     #           auth: {
     #             type: "OAUTH", # required, accepts OAUTH
     #             resource: "String",
     #           },
+    #           insecure_ssl: false,
     #         },
     #         artifacts: { # required
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
@@ -418,6 +420,7 @@ module Aws::CodeBuild
     #             },
     #           ],
     #           privileged_mode: false,
+    #           certificate: "String",
     #         },
     #         service_role: "NonEmptyString",
     #         timeout_in_minutes: 1,
@@ -1313,6 +1316,7 @@ module Aws::CodeBuild
     #           },
     #         ],
     #         privileged_mode: false,
+    #         certificate: "String",
     #       }
     #
     # @!attribute [rw] type
@@ -1361,6 +1365,10 @@ module Aws::CodeBuild
     #   sh -c "until docker info; do echo .; sleep 1; done"`
     #   @return [Boolean]
     #
+    # @!attribute [rw] certificate
+    #   The certificate to use with this build project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectEnvironment AWS API Documentation
     #
     class ProjectEnvironment < Struct.new(
@@ -1368,7 +1376,8 @@ module Aws::CodeBuild
       :image,
       :compute_type,
       :environment_variables,
-      :privileged_mode)
+      :privileged_mode,
+      :certificate)
       include Aws::Structure
     end
 
@@ -1378,13 +1387,15 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET
+    #         type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
     #         location: "String",
+    #         git_clone_depth: 1,
     #         buildspec: "String",
     #         auth: {
     #           type: "OAUTH", # required, accepts OAUTH
     #           resource: "String",
     #         },
+    #         insecure_ssl: false,
     #       }
     #
     # @!attribute [rw] type
@@ -1452,6 +1463,10 @@ module Aws::CodeBuild
     #     `type` value to `OAUTH`.
     #   @return [String]
     #
+    # @!attribute [rw] git_clone_depth
+    #   Information about the git clone depth for the build project.
+    #   @return [Integer]
+    #
     # @!attribute [rw] buildspec
     #   The build spec declaration to use for the builds in this build
     #   project.
@@ -1469,13 +1484,20 @@ module Aws::CodeBuild
     #   build project's source `type` value is `BITBUCKET` or `GITHUB`).
     #   @return [Types::SourceAuth]
     #
+    # @!attribute [rw] insecure_ssl
+    #   Enable this flag to ignore SSL warnings while connecting to the
+    #   project source code.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSource AWS API Documentation
     #
     class ProjectSource < Struct.new(
       :type,
       :location,
+      :git_clone_depth,
       :buildspec,
-      :auth)
+      :auth,
+      :insecure_ssl)
       include Aws::Structure
     end
 
@@ -1532,6 +1554,7 @@ module Aws::CodeBuild
     #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #           },
     #         ],
+    #         git_clone_depth_override: 1,
     #         buildspec_override: "String",
     #         timeout_in_minutes_override: 1,
     #       }
@@ -1574,6 +1597,12 @@ module Aws::CodeBuild
     #   the latest ones already defined in the build project.
     #   @return [Array<Types::EnvironmentVariable>]
     #
+    # @!attribute [rw] git_clone_depth_override
+    #   The user-defined depth of history, with a minimum value of 0, that
+    #   overrides, for this build only, any previous depth of history
+    #   defined in the build project.
+    #   @return [Integer]
+    #
     # @!attribute [rw] buildspec_override
     #   A build spec declaration that overrides, for this build only, the
     #   latest one already defined in the build project.
@@ -1592,6 +1621,7 @@ module Aws::CodeBuild
       :source_version,
       :artifacts_override,
       :environment_variables_override,
+      :git_clone_depth_override,
       :buildspec_override,
       :timeout_in_minutes_override)
       include Aws::Structure
@@ -1673,13 +1703,15 @@ module Aws::CodeBuild
     #         name: "NonEmptyString", # required
     #         description: "ProjectDescription",
     #         source: {
-    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET
+    #           type: "CODECOMMIT", # required, accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
     #           location: "String",
+    #           git_clone_depth: 1,
     #           buildspec: "String",
     #           auth: {
     #             type: "OAUTH", # required, accepts OAUTH
     #             resource: "String",
     #           },
+    #           insecure_ssl: false,
     #         },
     #         artifacts: {
     #           type: "CODEPIPELINE", # required, accepts CODEPIPELINE, S3, NO_ARTIFACTS
@@ -1705,6 +1737,7 @@ module Aws::CodeBuild
     #             },
     #           ],
     #           privileged_mode: false,
+    #           certificate: "String",
     #         },
     #         service_role: "NonEmptyString",
     #         timeout_in_minutes: 1,
@@ -1861,10 +1894,22 @@ module Aws::CodeBuild
     #   The URL to the webhook.
     #   @return [String]
     #
+    # @!attribute [rw] payload_url
+    #   This is the server endpoint that will receive the webhook payload.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret
+    #   Use this secret while creating a webhook in GitHub for Enterprise.
+    #   The secret allows webhook requests sent by GitHub for Enterprise to
+    #   be authenticated by AWS CodeBuild.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Webhook AWS API Documentation
     #
     class Webhook < Struct.new(
-      :url)
+      :url,
+      :payload_url,
+      :secret)
       include Aws::Structure
     end
 

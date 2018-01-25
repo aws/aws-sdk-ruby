@@ -692,6 +692,10 @@ module Aws::GuardDuty
     #   resp.findings[0].id #=> String
     #   resp.findings[0].partition #=> String
     #   resp.findings[0].region #=> String
+    #   resp.findings[0].resource.access_key_details.access_key_id #=> String
+    #   resp.findings[0].resource.access_key_details.principal_id #=> String
+    #   resp.findings[0].resource.access_key_details.user_name #=> String
+    #   resp.findings[0].resource.access_key_details.user_type #=> String
     #   resp.findings[0].resource.instance_details.availability_zone #=> String
     #   resp.findings[0].resource.instance_details.iam_instance_profile.arn #=> String
     #   resp.findings[0].resource.instance_details.iam_instance_profile.id #=> String
@@ -1553,7 +1557,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

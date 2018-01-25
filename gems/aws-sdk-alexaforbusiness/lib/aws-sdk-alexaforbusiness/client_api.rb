@@ -44,6 +44,10 @@ module Aws::AlexaForBusiness
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
     DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
+    DeviceStatusDetail = Shapes::StructureShape.new(name: 'DeviceStatusDetail')
+    DeviceStatusDetailCode = Shapes::StringShape.new(name: 'DeviceStatusDetailCode')
+    DeviceStatusDetails = Shapes::ListShape.new(name: 'DeviceStatusDetails')
+    DeviceStatusInfo = Shapes::StructureShape.new(name: 'DeviceStatusInfo')
     DeviceType = Shapes::StringShape.new(name: 'DeviceType')
     DisassociateDeviceFromRoomRequest = Shapes::StructureShape.new(name: 'DisassociateDeviceFromRoomRequest')
     DisassociateDeviceFromRoomResponse = Shapes::StructureShape.new(name: 'DisassociateDeviceFromRoomResponse')
@@ -255,6 +259,7 @@ module Aws::AlexaForBusiness
     Device.add_member(:mac_address, Shapes::ShapeRef.new(shape: MacAddress, location_name: "MacAddress"))
     Device.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     Device.add_member(:device_status, Shapes::ShapeRef.new(shape: DeviceStatus, location_name: "DeviceStatus"))
+    Device.add_member(:device_status_info, Shapes::ShapeRef.new(shape: DeviceStatusInfo, location_name: "DeviceStatusInfo"))
     Device.struct_class = Types::Device
 
     DeviceData.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
@@ -266,9 +271,18 @@ module Aws::AlexaForBusiness
     DeviceData.add_member(:device_status, Shapes::ShapeRef.new(shape: DeviceStatus, location_name: "DeviceStatus"))
     DeviceData.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     DeviceData.add_member(:room_name, Shapes::ShapeRef.new(shape: RoomName, location_name: "RoomName"))
+    DeviceData.add_member(:device_status_info, Shapes::ShapeRef.new(shape: DeviceStatusInfo, location_name: "DeviceStatusInfo"))
     DeviceData.struct_class = Types::DeviceData
 
     DeviceDataList.member = Shapes::ShapeRef.new(shape: DeviceData)
+
+    DeviceStatusDetail.add_member(:code, Shapes::ShapeRef.new(shape: DeviceStatusDetailCode, location_name: "Code"))
+    DeviceStatusDetail.struct_class = Types::DeviceStatusDetail
+
+    DeviceStatusDetails.member = Shapes::ShapeRef.new(shape: DeviceStatusDetail)
+
+    DeviceStatusInfo.add_member(:device_status_details, Shapes::ShapeRef.new(shape: DeviceStatusDetails, location_name: "DeviceStatusDetails"))
+    DeviceStatusInfo.struct_class = Types::DeviceStatusInfo
 
     DisassociateDeviceFromRoomRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
     DisassociateDeviceFromRoomRequest.struct_class = Types::DisassociateDeviceFromRoomRequest

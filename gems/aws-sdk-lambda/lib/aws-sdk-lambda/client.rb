@@ -242,6 +242,13 @@ module Aws::Lambda
     #
     #   `arn:aws:lambda:aws-region:acct-id:function:function-name`
     #
+    # @option params [String] :revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you pass
+    #   doesn't match the latest `RevisionId` of the function or alias, it
+    #   will fail with an error message, advising you to retrieve the latest
+    #   function version or alias `RevisionID` using either or .
+    #
     # @return [Types::AddPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AddPermissionResponse#statement #statement} => String
@@ -276,6 +283,7 @@ module Aws::Lambda
     #     source_account: "SourceOwner",
     #     event_source_token: "EventSourceToken",
     #     qualifier: "Qualifier",
+    #     revision_id: "String",
     #   })
     #
     # @example Response structure
@@ -328,6 +336,7 @@ module Aws::Lambda
     #   * {Types::AliasConfiguration#function_version #function_version} => String
     #   * {Types::AliasConfiguration#description #description} => String
     #   * {Types::AliasConfiguration#routing_config #routing_config} => Types::AliasRoutingConfiguration
+    #   * {Types::AliasConfiguration#revision_id #revision_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -351,6 +360,7 @@ module Aws::Lambda
     #   resp.description #=> String
     #   resp.routing_config.additional_version_weights #=> Hash
     #   resp.routing_config.additional_version_weights["AdditionalVersion"] #=> Float
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias AWS API Documentation
     #
@@ -534,7 +544,7 @@ module Aws::Lambda
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available on
     #   AWS Lambda (nodejs4.3 or nodejs6.10) as soon as possible. Failure to
-    #   do so will result in an invalid parmaeter error being returned. Note
+    #   do so will result in an invalid parameter error being returned. Note
     #   that you will have to follow this procedure for each region that
     #   contains functions written in the Node v0.10.42 runtime.
     #
@@ -631,6 +641,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
+    #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #
     #
     # @example Example: create-function
@@ -735,6 +746,7 @@ module Aws::Lambda
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -1038,6 +1050,7 @@ module Aws::Lambda
     #   * {Types::AliasConfiguration#function_version #function_version} => String
     #   * {Types::AliasConfiguration#description #description} => String
     #   * {Types::AliasConfiguration#routing_config #routing_config} => Types::AliasRoutingConfiguration
+    #   * {Types::AliasConfiguration#revision_id #revision_id} => String
     #
     #
     # @example Example: To retrieve a Lambda function alias
@@ -1072,6 +1085,7 @@ module Aws::Lambda
     #   resp.description #=> String
     #   resp.routing_config.additional_version_weights #=> Hash
     #   resp.routing_config.additional_version_weights["AdditionalVersion"] #=> Float
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias AWS API Documentation
     #
@@ -1274,6 +1288,7 @@ module Aws::Lambda
     #   resp.configuration.kms_key_arn #=> String
     #   resp.configuration.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.configuration.master_arn #=> String
+    #   resp.configuration.revision_id #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.tags #=> Hash
@@ -1352,6 +1367,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
+    #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #
     #
     # @example Example: To retrieve a Lambda function's event source mapping
@@ -1420,6 +1436,7 @@ module Aws::Lambda
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration AWS API Documentation
     #
@@ -1468,6 +1485,7 @@ module Aws::Lambda
     # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPolicyResponse#policy #policy} => String
+    #   * {Types::GetPolicyResponse#revision_id #revision_id} => String
     #
     #
     # @example Example: To retrieve a Lambda function policy
@@ -1494,6 +1512,7 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.policy #=> String
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicy AWS API Documentation
     #
@@ -1781,6 +1800,7 @@ module Aws::Lambda
     #   resp.aliases[0].description #=> String
     #   resp.aliases[0].routing_config.additional_version_weights #=> Hash
     #   resp.aliases[0].routing_config.additional_version_weights["AdditionalVersion"] #=> Float
+    #   resp.aliases[0].revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases AWS API Documentation
     #
@@ -1979,6 +1999,7 @@ module Aws::Lambda
     #   resp.functions[0].kms_key_arn #=> String
     #   resp.functions[0].tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.functions[0].master_arn #=> String
+    #   resp.functions[0].revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -2106,6 +2127,7 @@ module Aws::Lambda
     #   resp.versions[0].kms_key_arn #=> String
     #   resp.versions[0].tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.versions[0].master_arn #=> String
+    #   resp.versions[0].revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -2149,6 +2171,13 @@ module Aws::Lambda
     #   The description for the version you are publishing. If not provided,
     #   AWS Lambda copies the description from the $LATEST version.
     #
+    # @option params [String] :revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you pass
+    #   doesn't match the latest `RevisionId` of the function or alias, it
+    #   will fail with an error message, advising you to retrieve the latest
+    #   function version or alias `RevisionID` using either or .
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -2169,6 +2198,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
+    #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #
     #
     # @example Example: To publish a version of a Lambda function
@@ -2205,6 +2235,7 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #     code_sha_256: "String",
     #     description: "Description",
+    #     revision_id: "String",
     #   })
     #
     # @example Response structure
@@ -2234,6 +2265,7 @@ module Aws::Lambda
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -2324,6 +2356,13 @@ module Aws::Lambda
     #   don't specify this parameter, the API removes permission associated
     #   with the unqualified function ARN.
     #
+    # @option params [String] :revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you pass
+    #   doesn't match the latest `RevisionId` of the function or alias, it
+    #   will fail with an error message, advising you to retrieve the latest
+    #   function version or alias `RevisionID` using either or .
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -2343,6 +2382,7 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #     statement_id: "NamespacedStatementId", # required
     #     qualifier: "Qualifier",
+    #     revision_id: "String",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermission AWS API Documentation
@@ -2443,6 +2483,13 @@ module Aws::Lambda
     #   to dictate what percentage of traffic will invoke each version. For
     #   more information, see lambda-traffic-shifting-using-aliases.
     #
+    # @option params [String] :revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you pass
+    #   doesn't match the latest `RevisionId` of the function or alias, it
+    #   will fail with an error message, advising you to retrieve the latest
+    #   function version or alias `RevisionID` using either or .
+    #
     # @return [Types::AliasConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AliasConfiguration#alias_arn #alias_arn} => String
@@ -2450,6 +2497,7 @@ module Aws::Lambda
     #   * {Types::AliasConfiguration#function_version #function_version} => String
     #   * {Types::AliasConfiguration#description #description} => String
     #   * {Types::AliasConfiguration#routing_config #routing_config} => Types::AliasRoutingConfiguration
+    #   * {Types::AliasConfiguration#revision_id #revision_id} => String
     #
     #
     # @example Example: To update a Lambda function alias
@@ -2483,6 +2531,7 @@ module Aws::Lambda
     #         "AdditionalVersion" => 1.0,
     #       },
     #     },
+    #     revision_id: "String",
     #   })
     #
     # @example Response structure
@@ -2493,6 +2542,7 @@ module Aws::Lambda
     #   resp.description #=> String
     #   resp.routing_config.additional_version_weights #=> Hash
     #   resp.routing_config.additional_version_weights["AdditionalVersion"] #=> Float
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias AWS API Documentation
     #
@@ -2690,6 +2740,13 @@ module Aws::Lambda
     #   operation is invoked, the `CodeSha256` hash value of the provided code
     #   will also be computed and returned in the response.
     #
+    # @option params [String] :revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you pass
+    #   doesn't match the latest `RevisionId` of the function or alias, it
+    #   will fail with an error message, advising you to retrieve the latest
+    #   function version or alias `RevisionID` using either or .
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -2710,6 +2767,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
+    #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #
     #
     # @example Example: To update a Lambda function's code
@@ -2753,6 +2811,7 @@ module Aws::Lambda
     #     s3_object_version: "S3ObjectVersion",
     #     publish: false,
     #     dry_run: false,
+    #     revision_id: "String",
     #   })
     #
     # @example Response structure
@@ -2782,6 +2841,7 @@ module Aws::Lambda
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -2888,6 +2948,13 @@ module Aws::Lambda
     # @option params [Types::TracingConfig] :tracing_config
     #   The parent object that contains your function's tracing settings.
     #
+    # @option params [String] :revision_id
+    #   An optional value you can use to ensure you are updating the latest
+    #   update of the function version or alias. If the `RevisionID` you pass
+    #   doesn't match the latest `RevisionId` of the function or alias, it
+    #   will fail with an error message, advising you to retrieve the latest
+    #   function version or alias `RevisionID` using either or .
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -2908,6 +2975,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
     #   * {Types::FunctionConfiguration#tracing_config #tracing_config} => Types::TracingConfigResponse
     #   * {Types::FunctionConfiguration#master_arn #master_arn} => String
+    #   * {Types::FunctionConfiguration#revision_id #revision_id} => String
     #
     #
     # @example Example: To update a Lambda function's configuration
@@ -2970,6 +3038,7 @@ module Aws::Lambda
     #     tracing_config: {
     #       mode: "Active", # accepts Active, PassThrough
     #     },
+    #     revision_id: "String",
     #   })
     #
     # @example Response structure
@@ -2999,6 +3068,7 @@ module Aws::Lambda
     #   resp.kms_key_arn #=> String
     #   resp.tracing_config.mode #=> String, one of "Active", "PassThrough"
     #   resp.master_arn #=> String
+    #   resp.revision_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -3022,7 +3092,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
