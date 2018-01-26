@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.125 (2018-01-26)
+------------------
+
 * Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
 
 * Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
