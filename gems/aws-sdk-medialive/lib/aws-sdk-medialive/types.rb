@@ -1565,6 +1565,9 @@ module Aws::MediaLive
     #   List of input attachments for channel.
     #   @return [Array<Types::InputAttachment>]
     #
+    # @!attribute [rw] input_specification
+    #   @return [Types::InputSpecification]
+    #
     # @!attribute [rw] name
     #   The name of the channel. (user-mutable)
     #   @return [String]
@@ -1590,6 +1593,7 @@ module Aws::MediaLive
       :encoder_settings,
       :id,
       :input_attachments,
+      :input_specification,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -1646,6 +1650,9 @@ module Aws::MediaLive
     #   List of input attachments for channel.
     #   @return [Array<Types::InputAttachment>]
     #
+    # @!attribute [rw] input_specification
+    #   @return [Types::InputSpecification]
+    #
     # @!attribute [rw] name
     #   The name of the channel. (user-mutable)
     #   @return [String]
@@ -1670,6 +1677,7 @@ module Aws::MediaLive
       :egress_endpoints,
       :id,
       :input_attachments,
+      :input_specification,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -1686,6 +1694,11 @@ module Aws::MediaLive
     # @!attribute [rw] input_attachments
     #   List of input attachments for channel.
     #   @return [Array<Types::InputAttachment>]
+    #
+    # @!attribute [rw] input_specification
+    #   Specification of input for this channel (max. bitrate, resolution,
+    #   codec, etc.)
+    #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] name
     #   Name of channel.
@@ -1711,6 +1724,7 @@ module Aws::MediaLive
       :destinations,
       :encoder_settings,
       :input_attachments,
+      :input_specification,
       :name,
       :request_id,
       :reserved,
@@ -2386,6 +2400,11 @@ module Aws::MediaLive
     #             },
     #           },
     #         ],
+    #         input_specification: {
+    #           codec: "MPEG2", # accepts MPEG2, AVC, HEVC
+    #           maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
+    #           resolution: "SD", # accepts SD, HD, UHD
+    #         },
     #         name: "__string",
     #         request_id: "__string",
     #         reserved: "__string",
@@ -2400,6 +2419,9 @@ module Aws::MediaLive
     #
     # @!attribute [rw] input_attachments
     #   @return [Array<Types::InputAttachment>]
+    #
+    # @!attribute [rw] input_specification
+    #   @return [Types::InputSpecification]
     #
     # @!attribute [rw] name
     #   @return [String]
@@ -2421,6 +2443,7 @@ module Aws::MediaLive
       :destinations,
       :encoder_settings,
       :input_attachments,
+      :input_specification,
       :name,
       :request_id,
       :reserved,
@@ -2449,9 +2472,7 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] destinations
-    #   settings required for PUSH-type inputs; one per redundancy group.
-    #   Only one of sources and destinations can be specified. Note: there
-    #   are currently no settings required for PUSH-type inputs
+    #   Destination settings for PUSH type inputs.
     #   @return [Array<Types::InputDestinationRequest>]
     #
     # @!attribute [rw] input_security_groups
@@ -2463,13 +2484,14 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries **A suitable default value is auto-generated.** You should normally
+    #   Unique identifier of the request to ensure the request is handled exactly once in case of retries. **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
     #   @return [String]
     #
     # @!attribute [rw] sources
-    #   settings required for PULL-type inputs; one per redundancy group
-    #   Only one of sources and destinations can be specified
+    #   The source URLs for a PULL-type input. Every PULL type input needs
+    #   exactly two source URLs for redundancy. Only specify sources for
+    #   PULL type Inputs. Leave Destinations empty.
     #   @return [Array<Types::InputSourceRequest>]
     #
     # @!attribute [rw] type
@@ -2639,6 +2661,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_attachments
     #   @return [Array<Types::InputAttachment>]
     #
+    # @!attribute [rw] input_specification
+    #   @return [Types::InputSpecification]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -2660,6 +2685,7 @@ module Aws::MediaLive
       :encoder_settings,
       :id,
       :input_attachments,
+      :input_specification,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -2744,6 +2770,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_attachments
     #   @return [Array<Types::InputAttachment>]
     #
+    # @!attribute [rw] input_specification
+    #   @return [Types::InputSpecification]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -2765,6 +2794,7 @@ module Aws::MediaLive
       :encoder_settings,
       :id,
       :input_attachments,
+      :input_specification,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -4692,9 +4722,9 @@ module Aws::MediaLive
     #   @return [Types::HlsCdnSettings]
     #
     # @!attribute [rw] index_n_segments
-    #   Number of segments to keep in the playlist (.m3u8) file. mode must
-    #   be "vod" for this setting to have an effect, and this number
-    #   should be less than or equal to keepSegments.
+    #   If mode is "live", the number of segments to retain in the
+    #   manifest (.m3u8) file. This number must be less than or equal to
+    #   keepSegments. If mode is "vod", this parameter has no effect.
     #   @return [Integer]
     #
     # @!attribute [rw] input_loss_action
@@ -4717,8 +4747,9 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] keep_segments
-    #   Number of segments to retain in the destination directory. mode must
-    #   be "live" for this setting to have an effect.
+    #   If mode is "live", the number of TS segments to retain in the
+    #   destination directory. If mode is "vod", this parameter has no
+    #   effect.
     #   @return [Integer]
     #
     # @!attribute [rw] key_format
@@ -4752,9 +4783,14 @@ module Aws::MediaLive
     #   @return [Integer]
     #
     # @!attribute [rw] mode
-    #   If set to "vod", keeps and indexes all segments starting with the
-    #   first segment. If set to "live" segments will age out and only the
-    #   last keepSegments number of segments will be retained.
+    #   If "vod", all segments are indexed and kept permanently in the
+    #   destination and manifest. If "live", only the number segments
+    #   specified in keepSegments and indexNSegments are kept; newer
+    #   segments replace older segments, which may prevent players from
+    #   rewinding all the way to the beginning of the event. VOD mode uses
+    #   HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running,
+    #   converting it to a "VOD" type manifest on completion of the
+    #   stream.
     #   @return [String]
     #
     # @!attribute [rw] output_selection
@@ -5104,32 +5140,32 @@ module Aws::MediaLive
     end
 
     # @!attribute [rw] arn
-    #   Unique ARN of input (generated, immutable)
+    #   The Unique ARN of the input (generated, immutable).
     #   @return [String]
     #
     # @!attribute [rw] attached_channels
-    #   List of channel IDs that that input is attached to (currently an
-    #   input can only be attached to one channel)
+    #   A list of channel IDs that that input is attached to (currently an
+    #   input can only be attached to one channel).
     #   @return [Array<String>]
     #
     # @!attribute [rw] destinations
-    #   List of destinations of input (PULL-type)
+    #   A list of the destinations of the input (PUSH-type).
     #   @return [Array<Types::InputDestination>]
     #
     # @!attribute [rw] id
-    #   generated ID of input (unique for user account, immutable)
+    #   The generated ID of the input (unique for user account, immutable).
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   user-assigned name (mutable)
+    #   The user-assigned name (This is a mutable value).
     #   @return [String]
     #
     # @!attribute [rw] security_groups
-    #   List of IDs for all the security groups attached to the input.
+    #   A list of IDs for all the security groups attached to the input.
     #   @return [Array<String>]
     #
     # @!attribute [rw] sources
-    #   List of sources of input (PULL-type)
+    #   A list of the sources of the input (PULL-type).
     #   @return [Array<Types::InputSource>]
     #
     # @!attribute [rw] state
@@ -5272,15 +5308,15 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Settings for a PUSH type input
+    # The settings for a PUSH type input.
     #
     # @!attribute [rw] ip
-    #   system-generated static IP address of endpoint. Remains fixed for
-    #   the lifetime of the input
+    #   The system-generated static IP address of endpoint. It remains fixed
+    #   for the lifetime of the input.
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   port for input
+    #   The port number for the input.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -5297,7 +5333,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Endpoint settings for a PUSH type input
+    # Endpoint settings for a PUSH type input.
     #
     # @note When making an API call, you may pass InputDestinationRequest
     #   data as a hash:
@@ -5584,10 +5620,10 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Settings for a PULL type input
+    # The settings for a PULL type input.
     #
     # @!attribute [rw] password_param
-    #   key used to extract the password from EC2 Parameter store
+    #   The key used to extract the password from EC2 Parameter store.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -5596,7 +5632,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   username for input source
+    #   The username for the input source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSource AWS API Documentation
@@ -5608,7 +5644,7 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
-    # Settings for for a PULL type input
+    # Settings for for a PULL type input.
     #
     # @note When making an API call, you may pass InputSourceRequest
     #   data as a hash:
@@ -5620,7 +5656,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] password_param
-    #   key used to extract the password from EC2 Parameter store
+    #   The key used to extract the password from EC2 Parameter store.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -5629,7 +5665,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   username for input source
+    #   The username for the input source.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSourceRequest AWS API Documentation
@@ -5638,6 +5674,36 @@ module Aws::MediaLive
       :password_param,
       :url,
       :username)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass InputSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         codec: "MPEG2", # accepts MPEG2, AVC, HEVC
+    #         maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
+    #         resolution: "SD", # accepts SD, HD, UHD
+    #       }
+    #
+    # @!attribute [rw] codec
+    #   Input codec
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_bitrate
+    #   Maximum input bitrate, categorized coarsely
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution
+    #   Input resolution, categorized coarsely
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputSpecification AWS API Documentation
+    #
+    class InputSpecification < Struct.new(
+      :codec,
+      :maximum_bitrate,
+      :resolution)
       include Aws::Structure
     end
 
@@ -6070,9 +6136,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] ecm_pid
-    #   Packet Identifier (PID) for ECM in the transport stream. Only
-    #   enabled when Simulcrypt is enabled. Can be entered as a decimal or
-    #   hexadecimal value. Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+    #   This field is unused and deprecated.
     #   @return [String]
     #
     # @!attribute [rw] es_rate_in_pes
@@ -6319,11 +6383,7 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] ecm_pid
-    #   ThePlatform-protected transport streams using 'microsoft' as
-    #   Target Client include an ECM stream. This ECM stream contains the
-    #   size, IV, and PTS of every sample in the transport stream. This
-    #   stream PID is specified here. This PID has no effect on non
-    #   ThePlatform-protected streams.
+    #   This parameter is unused and deprecated.
     #   @return [String]
     #
     # @!attribute [rw] pat_interval
@@ -7935,6 +7995,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_attachments
     #   @return [Array<Types::InputAttachment>]
     #
+    # @!attribute [rw] input_specification
+    #   @return [Types::InputSpecification]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -7956,6 +8019,7 @@ module Aws::MediaLive
       :encoder_settings,
       :id,
       :input_attachments,
+      :input_specification,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -8026,6 +8090,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_attachments
     #   @return [Array<Types::InputAttachment>]
     #
+    # @!attribute [rw] input_specification
+    #   @return [Types::InputSpecification]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -8047,6 +8114,7 @@ module Aws::MediaLive
       :encoder_settings,
       :id,
       :input_attachments,
+      :input_specification,
       :name,
       :pipelines_running_count,
       :role_arn,

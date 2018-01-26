@@ -1279,7 +1279,12 @@ module Aws::MTurk
     # URL is generated the instant the GetFileUploadURL operation is called,
     # and is valid for 60 seconds. You can get a temporary file upload URL
     # any time until the HIT is disposed. After the HIT is disposed, any
-    # uploaded files are deleted, and cannot be retrieved.
+    # uploaded files are deleted, and cannot be retrieved. Pending
+    # Deprecation on December 12, 2017. The Answer Specification structure
+    # will no longer support the `FileUploadAnswer` element to be used for
+    # the QuestionForm data structure. Instead, we recommend that Requesters
+    # who want to create HITs asking Workers to upload files to use Amazon
+    # S3.
     #
     # @option params [required, String] :assignment_id
     #   The ID of the assignment that contains the question with a
@@ -2637,7 +2642,7 @@ module Aws::MTurk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mturk'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

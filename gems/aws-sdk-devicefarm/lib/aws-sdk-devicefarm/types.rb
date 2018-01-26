@@ -450,11 +450,14 @@ module Aws::DeviceFarm
     #         device_arn: "AmazonResourceName", # required
     #         ssh_public_key: "SshPublicKey",
     #         remote_debug_enabled: false,
+    #         remote_record_enabled: false,
+    #         remote_record_app_arn: "AmazonResourceName",
     #         name: "Name",
     #         client_id: "ClientId",
     #         configuration: {
     #           billing_method: "METERED", # accepts METERED, UNMETERED
     #         },
+    #         interaction_mode: "INTERACTIVE", # accepts INTERACTIVE, NO_VIDEO, VIDEO_ONLY
     #       }
     #
     # @!attribute [rw] project_arn
@@ -478,6 +481,16 @@ module Aws::DeviceFarm
     #   in your remote access session.
     #   @return [Boolean]
     #
+    # @!attribute [rw] remote_record_enabled
+    #   Set to `true` to enable remote recording for the remote access
+    #   session.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] remote_record_app_arn
+    #   The Amazon Resource Name (ARN) for the app to be recorded in the
+    #   remote access session.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the remote access session that you wish to create.
     #   @return [String]
@@ -486,12 +499,29 @@ module Aws::DeviceFarm
     #   Unique identifier for the client. If you want access to multiple
     #   devices on the same client, you should pass the same `clientId`
     #   value in each call to `CreateRemoteAccessSession`. This is required
-    #   only if `remoteDebugEnabled` is set to true `true`.
+    #   only if `remoteDebugEnabled` is set to `true`.
     #   @return [String]
     #
     # @!attribute [rw] configuration
     #   The configuration information for the remote access session request.
     #   @return [Types::CreateRemoteAccessSessionConfiguration]
+    #
+    # @!attribute [rw] interaction_mode
+    #   The interaction mode of the remote access session. Valid values are:
+    #
+    #   * INTERACTIVE: You can interact with the iOS device by viewing,
+    #     touching, and rotating the screen. You **cannot** run XCUITest
+    #     framework-based tests in this mode.
+    #
+    #   * NO\_VIDEO: You are connected to the device but cannot interact
+    #     with it or view the screen. This mode has the fastest test
+    #     execution speed. You **can** run XCUITest framework-based tests in
+    #     this mode.
+    #
+    #   * VIDEO\_ONLY: You can view the screen but cannot touch or rotate
+    #     it. You **can** run XCUITest framework-based tests and watch the
+    #     screen in this mode.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionRequest AWS API Documentation
     #
@@ -500,9 +530,12 @@ module Aws::DeviceFarm
       :device_arn,
       :ssh_public_key,
       :remote_debug_enabled,
+      :remote_record_enabled,
+      :remote_record_app_arn,
       :name,
       :client_id,
-      :configuration)
+      :configuration,
+      :interaction_mode)
       include Aws::Structure
     end
 
@@ -839,6 +872,10 @@ module Aws::DeviceFarm
     #   The device's model name.
     #   @return [String]
     #
+    # @!attribute [rw] model_id
+    #   The device's model ID.
+    #   @return [String]
+    #
     # @!attribute [rw] form_factor
     #   The device's form factor.
     #
@@ -917,6 +954,7 @@ module Aws::DeviceFarm
       :name,
       :manufacturer,
       :model,
+      :model_id,
       :form_factor,
       :platform,
       :os,
@@ -1092,9 +1130,9 @@ module Aws::DeviceFarm
     #       {
     #         device_pool_arn: "AmazonResourceName", # required
     #         app_arn: "AmazonResourceName",
-    #         test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #         test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #         test: {
-    #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #           test_package_arn: "AmazonResourceName",
     #           filter: "Filter",
     #           parameters: {
@@ -1962,7 +2000,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The jobs' ARNs.
+    #   The run's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2388,7 +2426,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The suites' ARNs.
+    #   The job's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2437,7 +2475,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The tests' ARNs.
+    #   The test suite's Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3119,6 +3157,16 @@ module Aws::DeviceFarm
     #   remote access session.
     #   @return [Boolean]
     #
+    # @!attribute [rw] remote_record_enabled
+    #   This flag is set to `true` if remote recording is enabled for the
+    #   remote access session.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] remote_record_app_arn
+    #   The Amazon Resource Name (ARN) for the app to be recorded in the
+    #   remote access session.
+    #   @return [String]
+    #
     # @!attribute [rw] host_address
     #   IP address of the EC2 host where you need to connect to remotely
     #   debug devices. Only returned if remote debugging is enabled for the
@@ -3155,6 +3203,23 @@ module Aws::DeviceFarm
     #   remote debugging is enabled for the remote access session.
     #   @return [String]
     #
+    # @!attribute [rw] interaction_mode
+    #   The interaction mode of the remote access session. Valid values are:
+    #
+    #   * INTERACTIVE: You can interact with the iOS device by viewing,
+    #     touching, and rotating the screen. You **cannot** run XCUITest
+    #     framework-based tests in this mode.
+    #
+    #   * NO\_VIDEO: You are connected to the device but cannot interact
+    #     with it or view the screen. This mode has the fastest test
+    #     execution speed. You **can** run XCUITest framework-based tests in
+    #     this mode.
+    #
+    #   * VIDEO\_ONLY: You can view the screen but cannot touch or rotate
+    #     it. You **can** run XCUITest framework-based tests and watch the
+    #     screen in this mode.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessSession AWS API Documentation
     #
     class RemoteAccessSession < Struct.new(
@@ -3168,12 +3233,15 @@ module Aws::DeviceFarm
       :stopped,
       :device,
       :remote_debug_enabled,
+      :remote_record_enabled,
+      :remote_record_app_arn,
       :host_address,
       :client_id,
       :billing_method,
       :device_minutes,
       :endpoint,
-      :device_udid)
+      :device_udid,
+      :interaction_mode)
       include Aws::Structure
     end
 
@@ -3453,9 +3521,49 @@ module Aws::DeviceFarm
     #   package parsing failure.
     #   @return [String]
     #
+    # @!attribute [rw] seed
+    #   For fuzz tests, this is a seed to use for randomizing the UI fuzz
+    #   test. Using the same seed value between tests ensures identical
+    #   event sequences.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] app_upload
+    #   An app to upload or that has been uploaded.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_count
+    #   For fuzz tests, this is the number of events, between 1 and 10000,
+    #   that the UI fuzz test should perform.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_timeout_minutes
+    #   The number of minutes the job will execute before it times out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] device_pool_arn
+    #   The ARN of the device pool for the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   Information about the locale that is used for the run.
+    #   @return [String]
+    #
+    # @!attribute [rw] radios
+    #   Information about the radio states for the run.
+    #   @return [Types::Radios]
+    #
+    # @!attribute [rw] location
+    #   Information about the location that is used for the run.
+    #   @return [Types::Location]
+    #
     # @!attribute [rw] customer_artifact_paths
     #   Output `CustomerArtifactPaths` object for the test run.
     #   @return [Types::CustomerArtifactPaths]
+    #
+    # @!attribute [rw] web_url
+    #   A pre-signed Amazon S3 URL that can be used with a corresponding GET
+    #   request to download the symbol file for the run.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
     #
@@ -3478,7 +3586,16 @@ module Aws::DeviceFarm
       :network_profile,
       :parsing_result_url,
       :result_code,
-      :customer_artifact_paths)
+      :seed,
+      :app_upload,
+      :event_count,
+      :job_timeout_minutes,
+      :device_pool_arn,
+      :locale,
+      :radios,
+      :location,
+      :customer_artifact_paths,
+      :web_url)
       include Aws::Structure
     end
 
@@ -3639,7 +3756,7 @@ module Aws::DeviceFarm
     #         device_pool_arn: "AmazonResourceName", # required
     #         name: "Name",
     #         test: { # required
-    #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #           test_package_arn: "AmazonResourceName",
     #           filter: "Filter",
     #           parameters: {
@@ -3736,7 +3853,7 @@ module Aws::DeviceFarm
     #   data as a hash:
     #
     #       {
-    #         type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #         type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #         test_package_arn: "AmazonResourceName",
     #         filter: "Filter",
     #         parameters: {
@@ -4335,7 +4452,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the project that you wish to
+    #   The Amazon Resource Name (ARN) of the project for which you want to
     #   update network profile settings.
     #   @return [String]
     #

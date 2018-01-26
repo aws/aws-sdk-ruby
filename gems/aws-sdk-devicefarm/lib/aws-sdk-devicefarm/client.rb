@@ -394,6 +394,14 @@ module Aws::DeviceFarm
     #   Set to `true` if you want to access devices remotely for debugging in
     #   your remote access session.
     #
+    # @option params [Boolean] :remote_record_enabled
+    #   Set to `true` to enable remote recording for the remote access
+    #   session.
+    #
+    # @option params [String] :remote_record_app_arn
+    #   The Amazon Resource Name (ARN) for the app to be recorded in the
+    #   remote access session.
+    #
     # @option params [String] :name
     #   The name of the remote access session that you wish to create.
     #
@@ -401,10 +409,25 @@ module Aws::DeviceFarm
     #   Unique identifier for the client. If you want access to multiple
     #   devices on the same client, you should pass the same `clientId` value
     #   in each call to `CreateRemoteAccessSession`. This is required only if
-    #   `remoteDebugEnabled` is set to true `true`.
+    #   `remoteDebugEnabled` is set to `true`.
     #
     # @option params [Types::CreateRemoteAccessSessionConfiguration] :configuration
     #   The configuration information for the remote access session request.
+    #
+    # @option params [String] :interaction_mode
+    #   The interaction mode of the remote access session. Valid values are:
+    #
+    #   * INTERACTIVE: You can interact with the iOS device by viewing,
+    #     touching, and rotating the screen. You **cannot** run XCUITest
+    #     framework-based tests in this mode.
+    #
+    #   * NO\_VIDEO: You are connected to the device but cannot interact with
+    #     it or view the screen. This mode has the fastest test execution
+    #     speed. You **can** run XCUITest framework-based tests in this mode.
+    #
+    #   * VIDEO\_ONLY: You can view the screen but cannot touch or rotate it.
+    #     You **can** run XCUITest framework-based tests and watch the screen
+    #     in this mode.
     #
     # @return [Types::CreateRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -437,11 +460,14 @@ module Aws::DeviceFarm
     #     device_arn: "AmazonResourceName", # required
     #     ssh_public_key: "SshPublicKey",
     #     remote_debug_enabled: false,
+    #     remote_record_enabled: false,
+    #     remote_record_app_arn: "AmazonResourceName",
     #     name: "Name",
     #     client_id: "ClientId",
     #     configuration: {
     #       billing_method: "METERED", # accepts METERED, UNMETERED
     #     },
+    #     interaction_mode: "INTERACTIVE", # accepts INTERACTIVE, NO_VIDEO, VIDEO_ONLY
     #   })
     #
     # @example Response structure
@@ -458,6 +484,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.name #=> String
     #   resp.remote_access_session.device.manufacturer #=> String
     #   resp.remote_access_session.device.model #=> String
+    #   resp.remote_access_session.device.model_id #=> String
     #   resp.remote_access_session.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.remote_access_session.device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.remote_access_session.device.os #=> String
@@ -476,6 +503,8 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.fleet_type #=> String
     #   resp.remote_access_session.device.fleet_name #=> String
     #   resp.remote_access_session.remote_debug_enabled #=> Boolean
+    #   resp.remote_access_session.remote_record_enabled #=> Boolean
+    #   resp.remote_access_session.remote_record_app_arn #=> String
     #   resp.remote_access_session.host_address #=> String
     #   resp.remote_access_session.client_id #=> String
     #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
@@ -484,6 +513,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device_minutes.unmetered #=> Float
     #   resp.remote_access_session.endpoint #=> String
     #   resp.remote_access_session.device_udid #=> String
+    #   resp.remote_access_session.interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession AWS API Documentation
     #
@@ -923,6 +953,7 @@ module Aws::DeviceFarm
     #   resp.device.name #=> String
     #   resp.device.manufacturer #=> String
     #   resp.device.model #=> String
+    #   resp.device.model_id #=> String
     #   resp.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.device.os #=> String
@@ -1075,9 +1106,9 @@ module Aws::DeviceFarm
     #   resp = client.get_device_pool_compatibility({
     #     device_pool_arn: "AmazonResourceName", # required
     #     app_arn: "AmazonResourceName",
-    #     test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #     test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #     test: {
-    #       type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #       type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #       test_package_arn: "AmazonResourceName",
     #       filter: "Filter",
     #       parameters: {
@@ -1093,6 +1124,7 @@ module Aws::DeviceFarm
     #   resp.compatible_devices[0].device.name #=> String
     #   resp.compatible_devices[0].device.manufacturer #=> String
     #   resp.compatible_devices[0].device.model #=> String
+    #   resp.compatible_devices[0].device.model_id #=> String
     #   resp.compatible_devices[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.compatible_devices[0].device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.compatible_devices[0].device.os #=> String
@@ -1119,6 +1151,7 @@ module Aws::DeviceFarm
     #   resp.incompatible_devices[0].device.name #=> String
     #   resp.incompatible_devices[0].device.manufacturer #=> String
     #   resp.incompatible_devices[0].device.model #=> String
+    #   resp.incompatible_devices[0].device.model_id #=> String
     #   resp.incompatible_devices[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.incompatible_devices[0].device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.incompatible_devices[0].device.os #=> String
@@ -1184,7 +1217,7 @@ module Aws::DeviceFarm
     #
     #   resp.job.arn #=> String
     #   resp.job.name #=> String
-    #   resp.job.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.job.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.job.created #=> Time
     #   resp.job.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
     #   resp.job.result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
@@ -1202,6 +1235,7 @@ module Aws::DeviceFarm
     #   resp.job.device.name #=> String
     #   resp.job.device.manufacturer #=> String
     #   resp.job.device.model #=> String
+    #   resp.job.device.model_id #=> String
     #   resp.job.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.job.device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.job.device.os #=> String
@@ -1464,6 +1498,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.name #=> String
     #   resp.remote_access_session.device.manufacturer #=> String
     #   resp.remote_access_session.device.model #=> String
+    #   resp.remote_access_session.device.model_id #=> String
     #   resp.remote_access_session.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.remote_access_session.device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.remote_access_session.device.os #=> String
@@ -1482,6 +1517,8 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.fleet_type #=> String
     #   resp.remote_access_session.device.fleet_name #=> String
     #   resp.remote_access_session.remote_debug_enabled #=> Boolean
+    #   resp.remote_access_session.remote_record_enabled #=> Boolean
+    #   resp.remote_access_session.remote_record_app_arn #=> String
     #   resp.remote_access_session.host_address #=> String
     #   resp.remote_access_session.client_id #=> String
     #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
@@ -1490,6 +1527,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device_minutes.unmetered #=> Float
     #   resp.remote_access_session.endpoint #=> String
     #   resp.remote_access_session.device_udid #=> String
+    #   resp.remote_access_session.interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession AWS API Documentation
     #
@@ -1558,7 +1596,7 @@ module Aws::DeviceFarm
     #
     #   resp.run.arn #=> String
     #   resp.run.name #=> String
-    #   resp.run.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.run.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.run.platform #=> String, one of "ANDROID", "IOS"
     #   resp.run.created #=> Time
     #   resp.run.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
@@ -1593,12 +1631,25 @@ module Aws::DeviceFarm
     #   resp.run.network_profile.downlink_loss_percent #=> Integer
     #   resp.run.parsing_result_url #=> String
     #   resp.run.result_code #=> String, one of "PARSING_FAILED"
+    #   resp.run.seed #=> Integer
+    #   resp.run.app_upload #=> String
+    #   resp.run.event_count #=> Integer
+    #   resp.run.job_timeout_minutes #=> Integer
+    #   resp.run.device_pool_arn #=> String
+    #   resp.run.locale #=> String
+    #   resp.run.radios.wifi #=> Boolean
+    #   resp.run.radios.bluetooth #=> Boolean
+    #   resp.run.radios.nfc #=> Boolean
+    #   resp.run.radios.gps #=> Boolean
+    #   resp.run.location.latitude #=> Float
+    #   resp.run.location.longitude #=> Float
     #   resp.run.customer_artifact_paths.ios_paths #=> Array
     #   resp.run.customer_artifact_paths.ios_paths[0] #=> String
     #   resp.run.customer_artifact_paths.android_paths #=> Array
     #   resp.run.customer_artifact_paths.android_paths[0] #=> String
     #   resp.run.customer_artifact_paths.device_host_paths #=> Array
     #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
+    #   resp.run.web_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -1643,7 +1694,7 @@ module Aws::DeviceFarm
     #
     #   resp.suite.arn #=> String
     #   resp.suite.name #=> String
-    #   resp.suite.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.suite.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.suite.created #=> Time
     #   resp.suite.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
     #   resp.suite.result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
@@ -1704,7 +1755,7 @@ module Aws::DeviceFarm
     #
     #   resp.test.arn #=> String
     #   resp.test.name #=> String
-    #   resp.test.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.test.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.test.created #=> Time
     #   resp.test.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
     #   resp.test.result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
@@ -2043,6 +2094,7 @@ module Aws::DeviceFarm
     #   resp.devices[0].name #=> String
     #   resp.devices[0].manufacturer #=> String
     #   resp.devices[0].model #=> String
+    #   resp.devices[0].model_id #=> String
     #   resp.devices[0].form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.devices[0].platform #=> String, one of "ANDROID", "IOS"
     #   resp.devices[0].os #=> String
@@ -2071,10 +2123,10 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Gets information about jobs.
+    # Gets information about jobs for a given test run.
     #
     # @option params [required, String] :arn
-    #   The jobs' ARNs.
+    #   The run's Amazon Resource Name (ARN).
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -2107,7 +2159,7 @@ module Aws::DeviceFarm
     #   resp.jobs #=> Array
     #   resp.jobs[0].arn #=> String
     #   resp.jobs[0].name #=> String
-    #   resp.jobs[0].type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.jobs[0].type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.jobs[0].created #=> Time
     #   resp.jobs[0].status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
     #   resp.jobs[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
@@ -2125,6 +2177,7 @@ module Aws::DeviceFarm
     #   resp.jobs[0].device.name #=> String
     #   resp.jobs[0].device.manufacturer #=> String
     #   resp.jobs[0].device.model #=> String
+    #   resp.jobs[0].device.model_id #=> String
     #   resp.jobs[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.jobs[0].device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.jobs[0].device.os #=> String
@@ -2637,6 +2690,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].device.name #=> String
     #   resp.remote_access_sessions[0].device.manufacturer #=> String
     #   resp.remote_access_sessions[0].device.model #=> String
+    #   resp.remote_access_sessions[0].device.model_id #=> String
     #   resp.remote_access_sessions[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.remote_access_sessions[0].device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.remote_access_sessions[0].device.os #=> String
@@ -2655,6 +2709,8 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].device.fleet_type #=> String
     #   resp.remote_access_sessions[0].device.fleet_name #=> String
     #   resp.remote_access_sessions[0].remote_debug_enabled #=> Boolean
+    #   resp.remote_access_sessions[0].remote_record_enabled #=> Boolean
+    #   resp.remote_access_sessions[0].remote_record_app_arn #=> String
     #   resp.remote_access_sessions[0].host_address #=> String
     #   resp.remote_access_sessions[0].client_id #=> String
     #   resp.remote_access_sessions[0].billing_method #=> String, one of "METERED", "UNMETERED"
@@ -2663,6 +2719,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].device_minutes.unmetered #=> Float
     #   resp.remote_access_sessions[0].endpoint #=> String
     #   resp.remote_access_sessions[0].device_udid #=> String
+    #   resp.remote_access_sessions[0].interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions AWS API Documentation
@@ -2744,7 +2801,7 @@ module Aws::DeviceFarm
     #   resp.runs #=> Array
     #   resp.runs[0].arn #=> String
     #   resp.runs[0].name #=> String
-    #   resp.runs[0].type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.runs[0].type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.runs[0].platform #=> String, one of "ANDROID", "IOS"
     #   resp.runs[0].created #=> Time
     #   resp.runs[0].status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
@@ -2779,12 +2836,25 @@ module Aws::DeviceFarm
     #   resp.runs[0].network_profile.downlink_loss_percent #=> Integer
     #   resp.runs[0].parsing_result_url #=> String
     #   resp.runs[0].result_code #=> String, one of "PARSING_FAILED"
+    #   resp.runs[0].seed #=> Integer
+    #   resp.runs[0].app_upload #=> String
+    #   resp.runs[0].event_count #=> Integer
+    #   resp.runs[0].job_timeout_minutes #=> Integer
+    #   resp.runs[0].device_pool_arn #=> String
+    #   resp.runs[0].locale #=> String
+    #   resp.runs[0].radios.wifi #=> Boolean
+    #   resp.runs[0].radios.bluetooth #=> Boolean
+    #   resp.runs[0].radios.nfc #=> Boolean
+    #   resp.runs[0].radios.gps #=> Boolean
+    #   resp.runs[0].location.latitude #=> Float
+    #   resp.runs[0].location.longitude #=> Float
     #   resp.runs[0].customer_artifact_paths.ios_paths #=> Array
     #   resp.runs[0].customer_artifact_paths.ios_paths[0] #=> String
     #   resp.runs[0].customer_artifact_paths.android_paths #=> Array
     #   resp.runs[0].customer_artifact_paths.android_paths[0] #=> String
     #   resp.runs[0].customer_artifact_paths.device_host_paths #=> Array
     #   resp.runs[0].customer_artifact_paths.device_host_paths[0] #=> String
+    #   resp.runs[0].web_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -2852,10 +2922,10 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Gets information about suites.
+    # Gets information about test suites for a given job.
     #
     # @option params [required, String] :arn
-    #   The suites' ARNs.
+    #   The job's Amazon Resource Name (ARN).
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -2895,7 +2965,7 @@ module Aws::DeviceFarm
     #   resp.suites #=> Array
     #   resp.suites[0].arn #=> String
     #   resp.suites[0].name #=> String
-    #   resp.suites[0].type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.suites[0].type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.suites[0].created #=> Time
     #   resp.suites[0].status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
     #   resp.suites[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
@@ -2923,10 +2993,10 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
-    # Gets information about tests.
+    # Gets information about tests in a given test suite.
     #
     # @option params [required, String] :arn
-    #   The tests' ARNs.
+    #   The test suite's Amazon Resource Name (ARN).
     #
     # @option params [String] :next_token
     #   An identifier that was returned from the previous call to this
@@ -2966,7 +3036,7 @@ module Aws::DeviceFarm
     #   resp.tests #=> Array
     #   resp.tests[0].arn #=> String
     #   resp.tests[0].name #=> String
-    #   resp.tests[0].type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.tests[0].type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.tests[0].created #=> Time
     #   resp.tests[0].status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
     #   resp.tests[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
@@ -3050,6 +3120,7 @@ module Aws::DeviceFarm
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.name #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.manufacturer #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.model #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.model_id #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.os #=> String
@@ -3374,7 +3445,7 @@ module Aws::DeviceFarm
     #     device_pool_arn: "AmazonResourceName", # required
     #     name: "Name",
     #     test: { # required
-    #       type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #       type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, WEB_PERFORMANCE_PROFILE, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI, REMOTE_ACCESS_RECORD, REMOTE_ACCESS_REPLAY
     #       test_package_arn: "AmazonResourceName",
     #       filter: "Filter",
     #       parameters: {
@@ -3414,7 +3485,7 @@ module Aws::DeviceFarm
     #
     #   resp.run.arn #=> String
     #   resp.run.name #=> String
-    #   resp.run.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.run.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.run.platform #=> String, one of "ANDROID", "IOS"
     #   resp.run.created #=> Time
     #   resp.run.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
@@ -3449,12 +3520,25 @@ module Aws::DeviceFarm
     #   resp.run.network_profile.downlink_loss_percent #=> Integer
     #   resp.run.parsing_result_url #=> String
     #   resp.run.result_code #=> String, one of "PARSING_FAILED"
+    #   resp.run.seed #=> Integer
+    #   resp.run.app_upload #=> String
+    #   resp.run.event_count #=> Integer
+    #   resp.run.job_timeout_minutes #=> Integer
+    #   resp.run.device_pool_arn #=> String
+    #   resp.run.locale #=> String
+    #   resp.run.radios.wifi #=> Boolean
+    #   resp.run.radios.bluetooth #=> Boolean
+    #   resp.run.radios.nfc #=> Boolean
+    #   resp.run.radios.gps #=> Boolean
+    #   resp.run.location.latitude #=> Float
+    #   resp.run.location.longitude #=> Float
     #   resp.run.customer_artifact_paths.ios_paths #=> Array
     #   resp.run.customer_artifact_paths.ios_paths[0] #=> String
     #   resp.run.customer_artifact_paths.android_paths #=> Array
     #   resp.run.customer_artifact_paths.android_paths[0] #=> String
     #   resp.run.customer_artifact_paths.device_host_paths #=> Array
     #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
+    #   resp.run.web_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -3495,6 +3579,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.name #=> String
     #   resp.remote_access_session.device.manufacturer #=> String
     #   resp.remote_access_session.device.model #=> String
+    #   resp.remote_access_session.device.model_id #=> String
     #   resp.remote_access_session.device.form_factor #=> String, one of "PHONE", "TABLET"
     #   resp.remote_access_session.device.platform #=> String, one of "ANDROID", "IOS"
     #   resp.remote_access_session.device.os #=> String
@@ -3513,6 +3598,8 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.fleet_type #=> String
     #   resp.remote_access_session.device.fleet_name #=> String
     #   resp.remote_access_session.remote_debug_enabled #=> Boolean
+    #   resp.remote_access_session.remote_record_enabled #=> Boolean
+    #   resp.remote_access_session.remote_record_app_arn #=> String
     #   resp.remote_access_session.host_address #=> String
     #   resp.remote_access_session.client_id #=> String
     #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
@@ -3521,6 +3608,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device_minutes.unmetered #=> Float
     #   resp.remote_access_session.endpoint #=> String
     #   resp.remote_access_session.device_udid #=> String
+    #   resp.remote_access_session.interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession AWS API Documentation
     #
@@ -3572,7 +3660,7 @@ module Aws::DeviceFarm
     #
     #   resp.run.arn #=> String
     #   resp.run.name #=> String
-    #   resp.run.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
+    #   resp.run.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "WEB_PERFORMANCE_PROFILE", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI", "REMOTE_ACCESS_RECORD", "REMOTE_ACCESS_REPLAY"
     #   resp.run.platform #=> String, one of "ANDROID", "IOS"
     #   resp.run.created #=> Time
     #   resp.run.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
@@ -3607,12 +3695,25 @@ module Aws::DeviceFarm
     #   resp.run.network_profile.downlink_loss_percent #=> Integer
     #   resp.run.parsing_result_url #=> String
     #   resp.run.result_code #=> String, one of "PARSING_FAILED"
+    #   resp.run.seed #=> Integer
+    #   resp.run.app_upload #=> String
+    #   resp.run.event_count #=> Integer
+    #   resp.run.job_timeout_minutes #=> Integer
+    #   resp.run.device_pool_arn #=> String
+    #   resp.run.locale #=> String
+    #   resp.run.radios.wifi #=> Boolean
+    #   resp.run.radios.bluetooth #=> Boolean
+    #   resp.run.radios.nfc #=> Boolean
+    #   resp.run.radios.gps #=> Boolean
+    #   resp.run.location.latitude #=> Float
+    #   resp.run.location.longitude #=> Float
     #   resp.run.customer_artifact_paths.ios_paths #=> Array
     #   resp.run.customer_artifact_paths.ios_paths[0] #=> String
     #   resp.run.customer_artifact_paths.android_paths #=> Array
     #   resp.run.customer_artifact_paths.android_paths[0] #=> String
     #   resp.run.customer_artifact_paths.device_host_paths #=> Array
     #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
+    #   resp.run.web_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -3709,8 +3810,8 @@ module Aws::DeviceFarm
     # Updates the network profile with specific settings.
     #
     # @option params [required, String] :arn
-    #   The Amazon Resource Name (ARN) of the project that you wish to update
-    #   network profile settings.
+    #   The Amazon Resource Name (ARN) of the project for which you want to
+    #   update network profile settings.
     #
     # @option params [String] :name
     #   The name of the network profile about which you are returning
@@ -3876,7 +3977,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
