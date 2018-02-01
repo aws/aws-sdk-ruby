@@ -213,7 +213,7 @@ module Seahorse
           when String   then summarize_string(value)
           when Hash     then '{' + summarize_hash(value) + '}'
           when Array    then summarize_array(value)
-          when File     then summarize_file(value.path)
+          when File     then summarize_file_io(value)
           when Pathname then summarize_file(value)
           else value.inspect
           end
@@ -228,6 +228,14 @@ module Seahorse
           else
             str.inspect
           end
+        end
+
+        # Given an open file, this method returns a summarized inspecton
+        # string that includes the file size.
+        # @param [IO] file
+        # @return [String]
+        def summarize_file_io io
+          "#<File:#{io.path} (#{io.size} bytes)>"
         end
 
         # Given the path to a file on disk, this method returns a summarized

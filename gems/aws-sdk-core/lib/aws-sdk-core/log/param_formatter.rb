@@ -49,10 +49,14 @@ module Aws
         when String   then summarize_string(value)
         when Hash     then '{' + summarize_hash(value) + '}'
         when Array    then summarize_array(value)
-        when File     then summarize_file(value.path)
+        when File     then summarize_file_io(value)
         when Pathname then summarize_file(value)
         else value.inspect
         end
+      end
+
+      def summarize_file_io(io)
+        "#<File:#{io.path} (#{io.size} bytes)>"
       end
 
       def summarize_file(path)

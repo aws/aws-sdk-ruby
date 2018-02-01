@@ -25,6 +25,10 @@ module Seahorse
           end
 
           it 'provides a :request_params replacement' do
+            file = Tempfile.open('') do |tempfile|
+              tempfile.write('#' * 2000)
+              File.open(tempfile.path)
+            end
             response.context.params = {
               foo: 'bar',
               attributes: {
@@ -34,7 +38,7 @@ module Seahorse
               config: {
                 nested: true,
                 values: [1,2,3],
-                file: File.open(__FILE__),
+                file: file,
                 path: Pathname.new(__FILE__),
                 complex: double('obj', inspect: '"inspected"')
               },
@@ -43,7 +47,7 @@ module Seahorse
             formatted = format('{:request_params}', max_string_size: 20)
             size = File.size(__FILE__)
             expect(formatted).to eq(<<-FORMATTED.strip)
-{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,values:[1,2,3],file:#<File:#{__FILE__} (#{size} bytes)>,path:#<File:#{__FILE__} (#{size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>}
+{foo:"bar",attributes:{"color"=>"red","size"=>"large"},config:{nested:true,values:[1,2,3],file:#<File:#{file.path} (2000 bytes)>,path:#<File:#{__FILE__} (#{size} bytes)>,complex:"inspected"},huge:#<String "--------------------" ... (1000 bytes)>}
             FORMATTED
           end
 
