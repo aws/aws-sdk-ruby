@@ -49,6 +49,7 @@ module Aws
         when String   then summarize_string(value)
         when Hash     then '{' + summarize_hash(value) + '}'
         when Array    then summarize_array(value)
+        when Tempfile then summarize_file_io(value)
         when File     then summarize_file_io(value)
         when Pathname then summarize_file(value)
         else value.inspect
