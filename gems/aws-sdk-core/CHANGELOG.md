@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Issue - Handle unlinked (temporary) files in logging formatter.
 
 3.14.0 (2018-01-15)
 ------------------
