@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Updated the documentation for AWS Certificate Manager.
+
+* Feature - Aws::Cloud9 - Updated the documentation for AWS Cloud9.
+
+* Feature - Aws::Kinesis - Updated the API, and documentation for Amazon Kinesis.
+
+* Feature - Aws::OpsWorks - Updated the API, documentation, and waiters for AWS OpsWorks.
+
 2.10.125 (2018-01-26)
 ------------------
 
