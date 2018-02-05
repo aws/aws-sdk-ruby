@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.126 (2018-02-05)
+------------------
+
 * Feature - Aws::ACM - Updated the documentation for AWS Certificate Manager.
 
 * Feature - Aws::Cloud9 - Updated the documentation for AWS Cloud9.
