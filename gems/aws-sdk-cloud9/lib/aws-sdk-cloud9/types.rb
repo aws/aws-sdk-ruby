@@ -44,7 +44,7 @@ module Aws::Cloud9
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The type of instance to host the environment on (for example,
+    #   The type of instance to connect to the environment (for example,
     #   `t2.micro`).
     #   @return [String]
     #
@@ -323,7 +323,7 @@ module Aws::Cloud9
     #       }
     #
     # @!attribute [rw] environment_ids
-    #   The IDs of invidividual environments to get information about.
+    #   The IDs of individual environments to get information about.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/DescribeEnvironmentsRequest AWS API Documentation
@@ -361,10 +361,10 @@ module Aws::Cloud9
     # @!attribute [rw] type
     #   The type of environment. Valid values include the following:
     #
-    #   * `ec2`\: An environment hosted on an Amazon Elastic Compute Cloud
-    #     (Amazon EC2) instance.
+    #   * `ec2`\: An Amazon Elastic Compute Cloud (Amazon EC2) instance
+    #     connects to the environment.
     #
-    #   * `ssh`\: An environment hosted on your own server.
+    #   * `ssh`\: Your own server connects to the environment.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -542,7 +542,7 @@ module Aws::Cloud9
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Any replacement name for the environment.
+    #   A replacement name for the environment.
     #   @return [String]
     #
     # @!attribute [rw] description

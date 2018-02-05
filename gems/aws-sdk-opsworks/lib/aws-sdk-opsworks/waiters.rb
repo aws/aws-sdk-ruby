@@ -52,7 +52,7 @@ module Aws::OpsWorks
 
     end
 
-    # Wait until a deployment has completed successfully
+    # Wait until a deployment has completed successfully.
     class DeploymentSuccessful
 
       # @param [Hash] options
@@ -290,12 +290,6 @@ module Aws::OpsWorks
               },
               {
                 "expected" => "booting",
-                "matcher" => "pathAny",
-                "state" => "failure",
-                "argument" => "instances[].status"
-              },
-              {
-                "expected" => "online",
                 "matcher" => "pathAny",
                 "state" => "failure",
                 "argument" => "instances[].status"

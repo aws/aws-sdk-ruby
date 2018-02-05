@@ -33,6 +33,7 @@ module Aws::Kinesis
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpiredIteratorException = Shapes::StructureShape.new(name: 'ExpiredIteratorException')
+    ExpiredNextTokenException = Shapes::StructureShape.new(name: 'ExpiredNextTokenException')
     GetRecordsInput = Shapes::StructureShape.new(name: 'GetRecordsInput')
     GetRecordsInputLimit = Shapes::IntegerShape.new(name: 'GetRecordsInputLimit')
     GetRecordsOutput = Shapes::StructureShape.new(name: 'GetRecordsOutput')
@@ -50,6 +51,9 @@ module Aws::Kinesis
     KMSThrottlingException = Shapes::StructureShape.new(name: 'KMSThrottlingException')
     KeyId = Shapes::StringShape.new(name: 'KeyId')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListShardsInput = Shapes::StructureShape.new(name: 'ListShardsInput')
+    ListShardsInputLimit = Shapes::IntegerShape.new(name: 'ListShardsInputLimit')
+    ListShardsOutput = Shapes::StructureShape.new(name: 'ListShardsOutput')
     ListStreamsInput = Shapes::StructureShape.new(name: 'ListStreamsInput')
     ListStreamsInputLimit = Shapes::IntegerShape.new(name: 'ListStreamsInputLimit')
     ListStreamsOutput = Shapes::StructureShape.new(name: 'ListStreamsOutput')
@@ -60,6 +64,7 @@ module Aws::Kinesis
     MetricsName = Shapes::StringShape.new(name: 'MetricsName')
     MetricsNameList = Shapes::ListShape.new(name: 'MetricsNameList')
     MillisBehindLatest = Shapes::IntegerShape.new(name: 'MillisBehindLatest')
+    NextToken = Shapes::StringShape.new(name: 'NextToken')
     PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
     PositiveIntegerObject = Shapes::IntegerShape.new(name: 'PositiveIntegerObject')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
@@ -76,6 +81,7 @@ module Aws::Kinesis
     RemoveTagsFromStreamInput = Shapes::StructureShape.new(name: 'RemoveTagsFromStreamInput')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RetentionPeriodHours = Shapes::IntegerShape.new(name: 'RetentionPeriodHours')
     ScalingType = Shapes::StringShape.new(name: 'ScalingType')
     SequenceNumber = Shapes::StringShape.new(name: 'SequenceNumber')
     SequenceNumberRange = Shapes::StructureShape.new(name: 'SequenceNumberRange')
@@ -113,7 +119,7 @@ module Aws::Kinesis
     CreateStreamInput.struct_class = Types::CreateStreamInput
 
     DecreaseStreamRetentionPeriodInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
-    DecreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "RetentionPeriodHours"))
+    DecreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
     DecreaseStreamRetentionPeriodInput.struct_class = Types::DecreaseStreamRetentionPeriodInput
 
     DeleteStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
@@ -181,8 +187,19 @@ module Aws::Kinesis
     HashKeyRange.struct_class = Types::HashKeyRange
 
     IncreaseStreamRetentionPeriodInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
-    IncreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "RetentionPeriodHours"))
+    IncreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
     IncreaseStreamRetentionPeriodInput.struct_class = Types::IncreaseStreamRetentionPeriodInput
+
+    ListShardsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+    ListShardsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListShardsInput.add_member(:exclusive_start_shard_id, Shapes::ShapeRef.new(shape: ShardId, location_name: "ExclusiveStartShardId"))
+    ListShardsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListShardsInputLimit, location_name: "MaxResults"))
+    ListShardsInput.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StreamCreationTimestamp"))
+    ListShardsInput.struct_class = Types::ListShardsInput
+
+    ListShardsOutput.add_member(:shards, Shapes::ShapeRef.new(shape: ShardList, location_name: "Shards"))
+    ListShardsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListShardsOutput.struct_class = Types::ListShardsOutput
 
     ListStreamsInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListStreamsInputLimit, location_name: "Limit"))
     ListStreamsInput.add_member(:exclusive_start_stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "ExclusiveStartStreamName"))
@@ -290,7 +307,7 @@ module Aws::Kinesis
     StreamDescription.add_member(:stream_status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "StreamStatus"))
     StreamDescription.add_member(:shards, Shapes::ShapeRef.new(shape: ShardList, required: true, location_name: "Shards"))
     StreamDescription.add_member(:has_more_shards, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreShards"))
-    StreamDescription.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "RetentionPeriodHours"))
+    StreamDescription.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
     StreamDescription.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StreamCreationTimestamp"))
     StreamDescription.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoringList, required: true, location_name: "EnhancedMonitoring"))
     StreamDescription.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "EncryptionType"))
@@ -377,6 +394,7 @@ module Aws::Kinesis
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
 
@@ -487,7 +505,21 @@ module Aws::Kinesis
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+      end)
+
+      api.add_operation(:list_shards, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListShards"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListShardsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListShardsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:list_streams, Seahorse::Model::Operation.new.tap do |o|

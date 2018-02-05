@@ -531,8 +531,9 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
+    #     `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1359,8 +1360,9 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
+    #     `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1596,6 +1598,7 @@ module Aws::OpsWorks
     #             size: 1, # required
     #             volume_type: "String",
     #             iops: 1,
+    #             encrypted: false,
     #           },
     #         ],
     #         enable_auto_healing: false,
@@ -1907,8 +1910,9 @@ module Aws::OpsWorks
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
+    #     `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -2234,7 +2238,7 @@ module Aws::OpsWorks
     #
     # @!attribute [rw] type
     #   The data source's type, `AutoSelectOpsworksMysqlInstance`,
-    #   `OpsworksMysqlInstance`, or `RdsDbInstance`.
+    #   `OpsworksMysqlInstance`, `RdsDbInstance`, or `None`.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -2765,21 +2769,19 @@ module Aws::OpsWorks
     #       }
     #
     # @!attribute [rw] stack_id
-    #   The stack ID. If you include this parameter, `DescribeDeployments`
-    #   returns a description of the commands associated with the specified
-    #   stack.
+    #   The stack ID. If you include this parameter, the command returns a
+    #   description of the commands associated with the specified stack.
     #   @return [String]
     #
     # @!attribute [rw] app_id
-    #   The app ID. If you include this parameter, `DescribeDeployments`
-    #   returns a description of the commands associated with the specified
-    #   app.
+    #   The app ID. If you include this parameter, the command returns a
+    #   description of the commands associated with the specified app.
     #   @return [String]
     #
     # @!attribute [rw] deployment_ids
     #   An array of deployment IDs to be described. If you include this
-    #   parameter, `DescribeDeployments` returns a description of the
-    #   specified deployments. Otherwise, it returns a description of every
+    #   parameter, the command returns a description of the specified
+    #   deployments. Otherwise, it returns a description of every
     #   deployment.
     #   @return [Array<String>]
     #
@@ -3093,6 +3095,18 @@ module Aws::OpsWorks
     #
     class DescribeMyUserProfileResult < Struct.new(
       :user_profile)
+      include Aws::Structure
+    end
+
+    # The response to a `DescribeOperatingSystems` request.
+    #
+    # @!attribute [rw] operating_systems
+    #   @return [Array<Types::OperatingSystem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeOperatingSystemsResponse AWS API Documentation
+    #
+    class DescribeOperatingSystemsResponse < Struct.new(
+      :operating_systems)
       include Aws::Structure
     end
 
@@ -3592,7 +3606,15 @@ module Aws::OpsWorks
     #
     # @!attribute [rw] volume_type
     #   The volume type. `gp2` for General Purpose (SSD) volumes, `io1` for
-    #   Provisioned IOPS (SSD) volumes, and `standard` for Magnetic volumes.
+    #   Provisioned IOPS (SSD) volumes, `st1` for Throughput Optimized hard
+    #   disk drives (HDD), `sc1` for Cold HDD,and `standard` for Magnetic
+    #   volumes.
+    #
+    #   If you specify the `io1` volume type, you must also specify a value
+    #   for the `Iops` attribute. The maximum ratio of provisioned IOPS to
+    #   requested volume size (in GiB) is 50:1. AWS uses the default volume
+    #   size (in GiB) specified in the AMI attributes to set IOPS to 50 x
+    #   (volume size).
     #   @return [String]
     #
     # @!attribute [rw] delete_on_termination
@@ -4222,6 +4244,9 @@ module Aws::OpsWorks
     #   The number of instances with `start_failed` status.
     #   @return [Integer]
     #
+    # @!attribute [rw] stop_failed
+    #   @return [Integer]
+    #
     # @!attribute [rw] stopped
     #   The number of instances with `stopped` status.
     #   @return [Integer]
@@ -4259,6 +4284,7 @@ module Aws::OpsWorks
       :setup_failed,
       :shutting_down,
       :start_failed,
+      :stop_failed,
       :stopped,
       :stopping,
       :terminated,
@@ -4550,6 +4576,75 @@ module Aws::OpsWorks
       :enable,
       :up_scaling,
       :down_scaling)
+      include Aws::Structure
+    end
+
+    # Describes supported operating systems in AWS OpsWorks Stacks.
+    #
+    # @!attribute [rw] name
+    #   The name of the operating system, such as `Amazon Linux 2017.09`.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of a supported operating system, such as `Amazon Linux
+    #   2017.09`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of a supported operating system, either `Linux` or
+    #   `Windows`.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_managers
+    #   Supported configuration manager name and versions for an AWS
+    #   OpsWorks Stacks operating system.
+    #   @return [Array<Types::OperatingSystemConfigurationManager>]
+    #
+    # @!attribute [rw] reported_name
+    #   A short name for the operating system manufacturer.
+    #   @return [String]
+    #
+    # @!attribute [rw] reported_version
+    #   The version of the operating system, including the release and
+    #   edition, if applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported
+    #   Indicates that an operating system is not supported for new
+    #   instances.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/OperatingSystem AWS API Documentation
+    #
+    class OperatingSystem < Struct.new(
+      :name,
+      :id,
+      :type,
+      :configuration_managers,
+      :reported_name,
+      :reported_version,
+      :supported)
+      include Aws::Structure
+    end
+
+    # A block that contains information about the configuration manager
+    # (Chef) and the versions of the configuration manager that are
+    # supported for an operating system.
+    #
+    # @!attribute [rw] name
+    #   The name of the configuration manager, which is Chef.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The versions of the configuration manager that are supported by an
+    #   operating system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/OperatingSystemConfigurationManager AWS API Documentation
+    #
+    class OperatingSystemConfigurationManager < Struct.new(
+      :name,
+      :version)
       include Aws::Structure
     end
 
@@ -5730,16 +5825,21 @@ module Aws::OpsWorks
     #
     #       {
     #         instance_id: "String", # required
+    #         force: false,
     #       }
     #
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstanceRequest AWS API Documentation
     #
     class StopInstanceRequest < Struct.new(
-      :instance_id)
+      :instance_id,
+      :force)
       include Aws::Structure
     end
 
@@ -6116,8 +6216,9 @@ module Aws::OpsWorks
     #   following. You cannot update an instance that is using a custom AMI.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
+    #     `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -6273,6 +6374,7 @@ module Aws::OpsWorks
     #             size: 1, # required
     #             volume_type: "String",
     #             iops: 1,
+    #             encrypted: false,
     #           },
     #         ],
     #         enable_auto_healing: false,
@@ -6556,8 +6658,9 @@ module Aws::OpsWorks
     #   following:
     #
     #   * A supported Linux operating system: An Amazon Linux version, such
-    #     as `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     as `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or
+    #     `Amazon Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -6978,6 +7081,9 @@ module Aws::OpsWorks
     #   For PIOPS volumes, the IOPS per disk.
     #   @return [Integer]
     #
+    # @!attribute [rw] encrypted
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Volume AWS API Documentation
     #
     class Volume < Struct.new(
@@ -6993,7 +7099,8 @@ module Aws::OpsWorks
       :region,
       :availability_zone,
       :volume_type,
-      :iops)
+      :iops,
+      :encrypted)
       include Aws::Structure
     end
 
@@ -7009,6 +7116,7 @@ module Aws::OpsWorks
     #         size: 1, # required
     #         volume_type: "String",
     #         iops: 1,
+    #         encrypted: false,
     #       }
     #
     # @!attribute [rw] mount_point
@@ -7032,18 +7140,36 @@ module Aws::OpsWorks
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   The volume type:
+    #   The volume type. For more information, see [ Amazon EBS Volume
+    #   Types][1].
     #
     #   * `standard` - Magnetic
     #
     #   * `io1` - Provisioned IOPS (SSD)
     #
     #   * `gp2` - General Purpose (SSD)
+    #
+    #   * `st1` - Throughput Optimized hard disk drive (HDD)
+    #
+    #   * `sc1` - Cold HDD
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [String]
     #
     # @!attribute [rw] iops
     #   For PIOPS volumes, the IOPS per disk.
     #   @return [Integer]
+    #
+    # @!attribute [rw] encrypted
+    #   Specifies whether an Amazon EBS volume is encrypted. For more
+    #   information, see [Amazon EBS Encryption][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/VolumeConfiguration AWS API Documentation
     #
@@ -7053,7 +7179,8 @@ module Aws::OpsWorks
       :number_of_disks,
       :size,
       :volume_type,
-      :iops)
+      :iops,
+      :encrypted)
       include Aws::Structure
     end
 

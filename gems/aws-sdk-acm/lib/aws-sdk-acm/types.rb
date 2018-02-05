@@ -623,14 +623,8 @@ module Aws::ACM
     #   @return [Array<String>]
     #
     # @!attribute [rw] includes
-    #   Filter the certificate list by one or more of the following values.
-    #   For more information, see the Filters structure.
-    #
-    #   * extendedKeyUsage
-    #
-    #   * keyUsage
-    #
-    #   * keyTypes
+    #   Filter the certificate list. For more information, see the Filters
+    #   structure.
     #   @return [Types::Filters]
     #
     # @!attribute [rw] next_token
@@ -864,8 +858,8 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] domain_validation_options
-    #   The domain name that you want ACM to use to send you emails so taht
-    #   your can validate domain ownership.
+    #   The domain name that you want ACM to use to send you emails so that
+    #   you can validate domain ownership.
     #   @return [Array<Types::DomainValidationOption>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation

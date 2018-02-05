@@ -385,6 +385,7 @@ module Aws::OpsWorks
     #         size: 1, # required
     #         volume_type: "String",
     #         iops: 1,
+    #         encrypted: false,
     #       },
     #     ],
     #     enable_auto_healing: false,

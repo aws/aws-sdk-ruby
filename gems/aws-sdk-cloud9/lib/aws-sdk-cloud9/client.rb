@@ -156,8 +156,8 @@ module Aws::Cloud9
     # @!group API Operations
 
     # Creates an AWS Cloud9 development environment, launches an Amazon
-    # Elastic Compute Cloud (Amazon EC2) instance, and then hosts the
-    # environment on the instance.
+    # Elastic Compute Cloud (Amazon EC2) instance, and then connects from
+    # the instance to the environment.
     #
     # @option params [required, String] :name
     #   The name of the environment to create.
@@ -179,7 +179,7 @@ module Aws::Cloud9
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [required, String] :instance_type
-    #   The type of instance to host the environment on (for example,
+    #   The type of instance to connect to the environment (for example,
     #   `t2.micro`).
     #
     # @option params [String] :subnet_id
@@ -198,6 +198,23 @@ module Aws::Cloud9
     # @return [Types::CreateEnvironmentEC2Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEnvironmentEC2Result#environment_id #environment_id} => String
+    #
+    #
+    # @example Example: CreateEnvironmentEC2
+    #
+    #   resp = client.create_environment_ec2({
+    #     name: "my-demo-environment", 
+    #     automatic_stop_time_minutes: 60, 
+    #     description: "This is my demonstration environment.", 
+    #     instance_type: "t2.micro", 
+    #     owner_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
+    #     subnet_id: "subnet-1fab8aEX", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -246,6 +263,25 @@ module Aws::Cloud9
     #
     #   * {Types::CreateEnvironmentMembershipResult#membership #membership} => Types::EnvironmentMember
     #
+    #
+    # @example Example: CreateEnvironmentMembership
+    #
+    #   resp = client.create_environment_membership({
+    #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #     permissions: "read-write", 
+    #     user_arn: "arn:aws:iam::123456789012:user/AnotherDemoUser", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     membership: {
+    #       environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #       permissions: "read-write", 
+    #       user_arn: "arn:aws:iam::123456789012:user/AnotherDemoUser", 
+    #       user_id: "AIDAJ3BA6O2FMJWCWXHEX", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_environment_membership({
@@ -271,14 +307,25 @@ module Aws::Cloud9
       req.send_request(options)
     end
 
-    # Deletes an AWS Cloud9 development environment. If the environment is
-    # hosted on an Amazon Elastic Compute Cloud (Amazon EC2) instance, also
-    # terminates the instance.
+    # Deletes an AWS Cloud9 development environment. If an Amazon EC2
+    # instance is connected to the environment, also terminates the
+    # instance.
     #
     # @option params [required, String] :environment_id
     #   The ID of the environment to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: DeleteEnvironment
+    #
+    #   resp = client.delete_environment({
+    #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -306,6 +353,18 @@ module Aws::Cloud9
     #   from the environment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: DeleteEnvironmentMembership
+    #
+    #   resp = client.delete_environment_membership({
+    #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #     user_arn: "arn:aws:iam::123456789012:user/AnotherDemoUser", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -364,6 +423,85 @@ module Aws::Cloud9
     #   * {Types::DescribeEnvironmentMembershipsResult#memberships #memberships} => Array&lt;Types::EnvironmentMember&gt;
     #   * {Types::DescribeEnvironmentMembershipsResult#next_token #next_token} => String
     #
+    #
+    # @example Example: DescribeEnvironmentMemberships1
+    #
+    #   # The following example gets information about all of the environment members for the specified AWS Cloud9 development
+    #   # environment.
+    #
+    #   resp = client.describe_environment_memberships({
+    #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     memberships: [
+    #       {
+    #         environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #         permissions: "read-write", 
+    #         user_arn: "arn:aws:iam::123456789012:user/AnotherDemoUser", 
+    #         user_id: "AIDAJ3BA6O2FMJWCWXHEX", 
+    #       }, 
+    #       {
+    #         environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #         permissions: "owner", 
+    #         user_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
+    #         user_id: "AIDAJNUEDQAQWFELJDLEX", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: DescribeEnvironmentMemberships2
+    #
+    #   # The following example gets information about the owner of the specified AWS Cloud9 development environment.
+    #
+    #   resp = client.describe_environment_memberships({
+    #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #     permissions: [
+    #       "owner", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     memberships: [
+    #       {
+    #         environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #         permissions: "owner", 
+    #         user_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
+    #         user_id: "AIDAJNUEDQAQWFELJDLEX", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: DescribeEnvironmentMemberships3
+    #
+    #   # The following example gets AWS Cloud9 development environment membership information for the specified user.
+    #
+    #   resp = client.describe_environment_memberships({
+    #     user_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     memberships: [
+    #       {
+    #         environment_id: "10a75714bd494714929e7f5ec4125aEX", 
+    #         last_access: Time.parse("2018-01-19T11:06:13Z"), 
+    #         permissions: "owner", 
+    #         user_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
+    #         user_id: "AIDAJNUEDQAQWFELJDLEX", 
+    #       }, 
+    #       {
+    #         environment_id: "12bfc3cd537f41cb9776f8af5525c9EX", 
+    #         last_access: Time.parse("2018-01-19T11:39:19Z"), 
+    #         permissions: "owner", 
+    #         user_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
+    #         user_id: "AIDAJNUEDQAQWFELJDLEX", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_environment_memberships({
@@ -403,6 +541,19 @@ module Aws::Cloud9
     #   * {Types::DescribeEnvironmentStatusResult#status #status} => String
     #   * {Types::DescribeEnvironmentStatusResult#message #message} => String
     #
+    #
+    # @example Example: DescribeEnvironmentStatus
+    #
+    #   resp = client.describe_environment_status({
+    #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     message: "Environment is ready to use", 
+    #     status: "ready", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_environment_status({
@@ -426,11 +577,42 @@ module Aws::Cloud9
     # Gets information about AWS Cloud9 development environments.
     #
     # @option params [required, Array<String>] :environment_ids
-    #   The IDs of invidividual environments to get information about.
+    #   The IDs of individual environments to get information about.
     #
     # @return [Types::DescribeEnvironmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeEnvironmentsResult#environments #environments} => Array&lt;Types::Environment&gt;
+    #
+    #
+    # @example Example: DescribeEnvironments
+    #
+    #   resp = client.describe_environments({
+    #     environment_ids: [
+    #       "8d9967e2f0624182b74e7690ad69ebEX", 
+    #       "349c86d4579e4e7298d500ff57a6b2EX", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     environments: [
+    #       {
+    #         name: "my-demo-environment", 
+    #         type: "ec2", 
+    #         arn: "arn:aws:cloud9:us-east-2:123456789012:environment:8d9967e2f0624182b74e7690ad69ebEX", 
+    #         description: "This is my demonstration environment.", 
+    #         id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #         owner_arn: "arn:aws:iam::123456789012:user/MyDemoUser", 
+    #       }, 
+    #       {
+    #         name: "another-demo-environment", 
+    #         type: "ssh", 
+    #         arn: "arn:aws:cloud9:us-east-2:123456789012:environment:349c86d4579e4e7298d500ff57a6b2EX", 
+    #         id: "349c86d4579e4e7298d500ff57a6b2EX", 
+    #         owner_arn: "arn:aws:sts::123456789012:assumed-role/AnotherDemoUser/AnotherDemoUser", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -476,6 +658,20 @@ module Aws::Cloud9
     #   * {Types::ListEnvironmentsResult#next_token #next_token} => String
     #   * {Types::ListEnvironmentsResult#environment_ids #environment_ids} => Array&lt;String&gt;
     #
+    #
+    # @example Example: ListEnvironments
+    #
+    #   resp = client.list_environments({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     environment_ids: [
+    #       "349c86d4579e4e7298d500ff57a6b2EX", 
+    #       "45a3da47af0840f2b0c0824f5ee232EX", 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_environments({
@@ -505,12 +701,25 @@ module Aws::Cloud9
     #   The ID of the environment to change settings.
     #
     # @option params [String] :name
-    #   Any replacement name for the environment.
+    #   A replacement name for the environment.
     #
     # @option params [String] :description
     #   Any new or replacement description for the environment.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: UpdateEnvironment
+    #
+    #   resp = client.update_environment({
+    #     name: "my-changed-demo-environment", 
+    #     description: "This is my changed demonstration environment.", 
+    #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -552,6 +761,25 @@ module Aws::Cloud9
     #
     #   * {Types::UpdateEnvironmentMembershipResult#membership #membership} => Types::EnvironmentMember
     #
+    #
+    # @example Example: UpdateEnvironmentMembership
+    #
+    #   resp = client.update_environment_membership({
+    #     environment_id: "8d9967e2f0624182b74e7690ad69ebEX", 
+    #     permissions: "read-only", 
+    #     user_arn: "arn:aws:iam::123456789012:user/AnotherDemoUser", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     membership: {
+    #       environment_id: "8d9967e2f0624182b74e7690ad69eb31", 
+    #       permissions: "read-only", 
+    #       user_arn: "arn:aws:iam::123456789012:user/AnotherDemoUser", 
+    #       user_id: "AIDAJ3BA6O2FMJWCWXHEX", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_environment_membership({
@@ -590,7 +818,7 @@ module Aws::Cloud9
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloud9'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

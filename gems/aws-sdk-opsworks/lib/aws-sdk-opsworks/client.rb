@@ -426,8 +426,9 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
+    #     Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -957,8 +958,9 @@ module Aws::OpsWorks
     #   following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
+    #     Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -1330,6 +1332,7 @@ module Aws::OpsWorks
     #         size: 1, # required
     #         volume_type: "String",
     #         iops: 1,
+    #         encrypted: false,
     #       },
     #     ],
     #     enable_auto_healing: false,
@@ -1452,8 +1455,9 @@ module Aws::OpsWorks
     #   create the instance. You can specify one of the following.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
+    #     Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -2307,20 +2311,17 @@ module Aws::OpsWorks
     # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #
     # @option params [String] :stack_id
-    #   The stack ID. If you include this parameter, `DescribeDeployments`
-    #   returns a description of the commands associated with the specified
-    #   stack.
+    #   The stack ID. If you include this parameter, the command returns a
+    #   description of the commands associated with the specified stack.
     #
     # @option params [String] :app_id
-    #   The app ID. If you include this parameter, `DescribeDeployments`
-    #   returns a description of the commands associated with the specified
-    #   app.
+    #   The app ID. If you include this parameter, the command returns a
+    #   description of the commands associated with the specified app.
     #
     # @option params [Array<String>] :deployment_ids
     #   An array of deployment IDs to be described. If you include this
-    #   parameter, `DescribeDeployments` returns a description of the
-    #   specified deployments. Otherwise, it returns a description of every
-    #   deployment.
+    #   parameter, the command returns a description of the specified
+    #   deployments. Otherwise, it returns a description of every deployment.
     #
     # @return [Types::DescribeDeploymentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2734,6 +2735,7 @@ module Aws::OpsWorks
     #   resp.layers[0].volume_configurations[0].size #=> Integer
     #   resp.layers[0].volume_configurations[0].volume_type #=> String
     #   resp.layers[0].volume_configurations[0].iops #=> Integer
+    #   resp.layers[0].volume_configurations[0].encrypted #=> Boolean
     #   resp.layers[0].enable_auto_healing #=> Boolean
     #   resp.layers[0].auto_assign_elastic_ips #=> Boolean
     #   resp.layers[0].auto_assign_public_ips #=> Boolean
@@ -2859,6 +2861,35 @@ module Aws::OpsWorks
     # @param [Hash] params ({})
     def describe_my_user_profile(params = {}, options = {})
       req = build_request(:describe_my_user_profile, params)
+      req.send_request(options)
+    end
+
+    # Describes the operating systems that are supported by AWS OpsWorks
+    # Stacks.
+    #
+    # @return [Types::DescribeOperatingSystemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOperatingSystemsResponse#operating_systems #operating_systems} => Array&lt;Types::OperatingSystem&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.operating_systems #=> Array
+    #   resp.operating_systems[0].name #=> String
+    #   resp.operating_systems[0].id #=> String
+    #   resp.operating_systems[0].type #=> String
+    #   resp.operating_systems[0].configuration_managers #=> Array
+    #   resp.operating_systems[0].configuration_managers[0].name #=> String
+    #   resp.operating_systems[0].configuration_managers[0].version #=> String
+    #   resp.operating_systems[0].reported_name #=> String
+    #   resp.operating_systems[0].reported_version #=> String
+    #   resp.operating_systems[0].supported #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeOperatingSystems AWS API Documentation
+    #
+    # @overload describe_operating_systems(params = {})
+    # @param [Hash] params ({})
+    def describe_operating_systems(params = {}, options = {})
+      req = build_request(:describe_operating_systems, params)
       req.send_request(options)
     end
 
@@ -3178,6 +3209,7 @@ module Aws::OpsWorks
     #   resp.stack_summary.instances_count.setup_failed #=> Integer
     #   resp.stack_summary.instances_count.shutting_down #=> Integer
     #   resp.stack_summary.instances_count.start_failed #=> Integer
+    #   resp.stack_summary.instances_count.stop_failed #=> Integer
     #   resp.stack_summary.instances_count.stopped #=> Integer
     #   resp.stack_summary.instances_count.stopping #=> Integer
     #   resp.stack_summary.instances_count.terminated #=> Integer
@@ -3423,6 +3455,7 @@ module Aws::OpsWorks
     #   resp.volumes[0].availability_zone #=> String
     #   resp.volumes[0].volume_type #=> String
     #   resp.volumes[0].iops #=> Integer
+    #   resp.volumes[0].encrypted #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeVolumes AWS API Documentation
     #
@@ -4209,12 +4242,15 @@ module Aws::OpsWorks
     # @option params [required, String] :instance_id
     #   The instance ID.
     #
+    # @option params [Boolean] :force
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.stop_instance({
     #     instance_id: "String", # required
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstance AWS API Documentation
@@ -4597,8 +4633,9 @@ module Aws::OpsWorks
     #   following. You cannot update an instance that is using a custom AMI.
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
+    #     Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -4868,6 +4905,7 @@ module Aws::OpsWorks
     #         size: 1, # required
     #         volume_type: "String",
     #         iops: 1,
+    #         encrypted: false,
     #       },
     #     ],
     #     enable_auto_healing: false,
@@ -5007,8 +5045,9 @@ module Aws::OpsWorks
     #   following:
     #
     #   * A supported Linux operating system: An Amazon Linux version, such as
-    #     `Amazon Linux 2017.03`, `Amazon Linux 2016.09`, `Amazon Linux
-    #     2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux 2015.03`.
+    #     `Amazon Linux 2017.09`, `Amazon Linux 2017.03`, `Amazon Linux
+    #     2016.09`, `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
+    #     Linux 2015.03`.
     #
     #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
     #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
@@ -5360,7 +5399,7 @@ module Aws::OpsWorks
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworks'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

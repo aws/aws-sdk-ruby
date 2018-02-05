@@ -346,7 +346,7 @@ module Aws::ACM
 
     # Retrieves a certificate specified by an ARN and its certificate chain
     # . The chain is an ordered list of certificates that contains the end
-    # entity ertificate, intermediate certificates of subordinate CAs, and
+    # entity certificate, intermediate certificates of subordinate CAs, and
     # the root certificate in that order. The certificate and certificate
     # chain are base64 encoded. If you want to decode the certificate to see
     # the individual fields, you can use OpenSSL.
@@ -389,23 +389,20 @@ module Aws::ACM
     end
 
     # Imports a certificate into AWS Certificate Manager (ACM) to use with
-    # services that are integrated with ACM. For more information, see
-    # [Integrated Services][1].
+    # services that are integrated with ACM. Note that [integrated
+    # services][1] allow only certificate types and keys they support to be
+    # associated with their resources. Further, their support differs
+    # depending on whether the certificate is imported into IAM or into ACM.
+    # For more information, see the documentation for each service. For more
+    # information about importing certificates into ACM, see [Importing
+    # Certificates][2] in the *AWS Certificate Manager User Guide*.
     #
-    # <note markdown="1"> ACM does not provide [managed renewal][2] for certificates that you
+    # <note markdown="1"> ACM does not provide [managed renewal][3] for certificates that you
     # import.
     #
     #  </note>
     #
-    # For more information about importing certificates into ACM, including
-    # the differences between certificates that you import and those that
-    # ACM provides, see [Importing Certificates][3] in the *AWS Certificate
-    # Manager User Guide*.
-    #
-    # In general, you can import almost any valid certificate. However,
-    # services integrated with ACM allow only certificate types they support
-    # to be associated with their resources. The following guidelines are
-    # also important:
+    # Note the following guidelines when importing third party certificates:
     #
     # * You must enter the private key that matches the certificate you are
     #   importing.
@@ -427,18 +424,18 @@ module Aws::ACM
     #
     # * The `Issuer` field must not be empty.
     #
-    # * The OCSP authority URL must not exceed 1000 characters.
+    # * The OCSP authority URL, if present, must not exceed 1000 characters.
     #
-    # * To import a new certificate, omit the `CertificateArn` field.
-    #   Include this field only when you want to replace a previously
+    # * To import a new certificate, omit the `CertificateArn` argument.
+    #   Include this argument only when you want to replace a previously
     #   imported certificate.
     #
     # * When you import a certificate by using the CLI or one of the SDKs,
-    #   you must specify the certificate, certificate chain, and private key
-    #   parameters as file names preceded by `file://`. For example, you can
-    #   specify a certificate saved in the `C:\temp` folder as
-    #   `C:\temp\certificate_to_import.pem`. If you are making an HTTP or
-    #   HTTPS Query request, include these parameters as BLOBs.
+    #   you must specify the certificate, the certificate chain, and the
+    #   private key by their file names preceded by `file://`. For example,
+    #   you can specify a certificate saved in the `C:\temp` folder as
+    #   `file://C:\temp\certificate_to_import.pem`. If you are making an
+    #   HTTP or HTTPS Query request, include these arguments as BLOBs.
     #
     # This operation returns the [Amazon Resource Name (ARN)][4] of the
     # imported certificate.
@@ -446,8 +443,8 @@ module Aws::ACM
     #
     #
     # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html
-    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
-    # [3]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    # [3]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     # [4]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :certificate_arn
@@ -501,14 +498,8 @@ module Aws::ACM
     #   Filter the certificate list by status value.
     #
     # @option params [Types::Filters] :includes
-    #   Filter the certificate list by one or more of the following values.
-    #   For more information, see the Filters structure.
-    #
-    #   * extendedKeyUsage
-    #
-    #   * keyUsage
-    #
-    #   * keyTypes
+    #   Filter the certificate list. For more information, see the Filters
+    #   structure.
     #
     # @option params [String] :next_token
     #   Use this parameter only when paginating results and only in a
@@ -725,8 +716,8 @@ module Aws::ACM
     #   requesting multiple certificates.
     #
     # @option params [Array<Types::DomainValidationOption>] :domain_validation_options
-    #   The domain name that you want ACM to use to send you emails so taht
-    #   your can validate domain ownership.
+    #   The domain name that you want ACM to use to send you emails so that
+    #   you can validate domain ownership.
     #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -842,7 +833,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

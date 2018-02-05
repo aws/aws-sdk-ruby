@@ -91,6 +91,7 @@ module Aws::OpsWorks
     DescribeLoadBasedAutoScalingRequest = Shapes::StructureShape.new(name: 'DescribeLoadBasedAutoScalingRequest')
     DescribeLoadBasedAutoScalingResult = Shapes::StructureShape.new(name: 'DescribeLoadBasedAutoScalingResult')
     DescribeMyUserProfileResult = Shapes::StructureShape.new(name: 'DescribeMyUserProfileResult')
+    DescribeOperatingSystemsResponse = Shapes::StructureShape.new(name: 'DescribeOperatingSystemsResponse')
     DescribePermissionsRequest = Shapes::StructureShape.new(name: 'DescribePermissionsRequest')
     DescribePermissionsResult = Shapes::StructureShape.new(name: 'DescribePermissionsResult')
     DescribeRaidArraysRequest = Shapes::StructureShape.new(name: 'DescribeRaidArraysRequest')
@@ -146,6 +147,10 @@ module Aws::OpsWorks
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Minute = Shapes::IntegerShape.new(name: 'Minute')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OperatingSystem = Shapes::StructureShape.new(name: 'OperatingSystem')
+    OperatingSystemConfigurationManager = Shapes::StructureShape.new(name: 'OperatingSystemConfigurationManager')
+    OperatingSystemConfigurationManagers = Shapes::ListShape.new(name: 'OperatingSystemConfigurationManagers')
+    OperatingSystems = Shapes::ListShape.new(name: 'OperatingSystems')
     Parameters = Shapes::MapShape.new(name: 'Parameters')
     Permission = Shapes::StructureShape.new(name: 'Permission')
     Permissions = Shapes::ListShape.new(name: 'Permissions')
@@ -599,6 +604,9 @@ module Aws::OpsWorks
     DescribeMyUserProfileResult.add_member(:user_profile, Shapes::ShapeRef.new(shape: SelfUserProfile, location_name: "UserProfile"))
     DescribeMyUserProfileResult.struct_class = Types::DescribeMyUserProfileResult
 
+    DescribeOperatingSystemsResponse.add_member(:operating_systems, Shapes::ShapeRef.new(shape: OperatingSystems, location_name: "OperatingSystems"))
+    DescribeOperatingSystemsResponse.struct_class = Types::DescribeOperatingSystemsResponse
+
     DescribePermissionsRequest.add_member(:iam_user_arn, Shapes::ShapeRef.new(shape: String, location_name: "IamUserArn"))
     DescribePermissionsRequest.add_member(:stack_id, Shapes::ShapeRef.new(shape: String, location_name: "StackId"))
     DescribePermissionsRequest.struct_class = Types::DescribePermissionsRequest
@@ -797,6 +805,7 @@ module Aws::OpsWorks
     InstancesCount.add_member(:setup_failed, Shapes::ShapeRef.new(shape: Integer, location_name: "SetupFailed"))
     InstancesCount.add_member(:shutting_down, Shapes::ShapeRef.new(shape: Integer, location_name: "ShuttingDown"))
     InstancesCount.add_member(:start_failed, Shapes::ShapeRef.new(shape: Integer, location_name: "StartFailed"))
+    InstancesCount.add_member(:stop_failed, Shapes::ShapeRef.new(shape: Integer, location_name: "StopFailed"))
     InstancesCount.add_member(:stopped, Shapes::ShapeRef.new(shape: Integer, location_name: "Stopped"))
     InstancesCount.add_member(:stopping, Shapes::ShapeRef.new(shape: Integer, location_name: "Stopping"))
     InstancesCount.add_member(:terminated, Shapes::ShapeRef.new(shape: Integer, location_name: "Terminated"))
@@ -853,6 +862,23 @@ module Aws::OpsWorks
     LoadBasedAutoScalingConfiguration.struct_class = Types::LoadBasedAutoScalingConfiguration
 
     LoadBasedAutoScalingConfigurations.member = Shapes::ShapeRef.new(shape: LoadBasedAutoScalingConfiguration)
+
+    OperatingSystem.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    OperatingSystem.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    OperatingSystem.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    OperatingSystem.add_member(:configuration_managers, Shapes::ShapeRef.new(shape: OperatingSystemConfigurationManagers, location_name: "ConfigurationManagers"))
+    OperatingSystem.add_member(:reported_name, Shapes::ShapeRef.new(shape: String, location_name: "ReportedName"))
+    OperatingSystem.add_member(:reported_version, Shapes::ShapeRef.new(shape: String, location_name: "ReportedVersion"))
+    OperatingSystem.add_member(:supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "Supported"))
+    OperatingSystem.struct_class = Types::OperatingSystem
+
+    OperatingSystemConfigurationManager.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    OperatingSystemConfigurationManager.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    OperatingSystemConfigurationManager.struct_class = Types::OperatingSystemConfigurationManager
+
+    OperatingSystemConfigurationManagers.member = Shapes::ShapeRef.new(shape: OperatingSystemConfigurationManager)
+
+    OperatingSystems.member = Shapes::ShapeRef.new(shape: OperatingSystem)
 
     Parameters.key = Shapes::ShapeRef.new(shape: String)
     Parameters.value = Shapes::ShapeRef.new(shape: String)
@@ -1048,6 +1074,7 @@ module Aws::OpsWorks
     StartStackRequest.struct_class = Types::StartStackRequest
 
     StopInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
+    StopInstanceRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
     StopInstanceRequest.struct_class = Types::StopInstanceRequest
 
     StopStackRequest.add_member(:stack_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackId"))
@@ -1197,6 +1224,7 @@ module Aws::OpsWorks
     Volume.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
     Volume.add_member(:volume_type, Shapes::ShapeRef.new(shape: String, location_name: "VolumeType"))
     Volume.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
+    Volume.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
     Volume.struct_class = Types::Volume
 
     VolumeConfiguration.add_member(:mount_point, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MountPoint"))
@@ -1205,6 +1233,7 @@ module Aws::OpsWorks
     VolumeConfiguration.add_member(:size, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Size"))
     VolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: String, location_name: "VolumeType"))
     VolumeConfiguration.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
+    VolumeConfiguration.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
     VolumeConfiguration.struct_class = Types::VolumeConfiguration
 
     VolumeConfigurations.member = Shapes::ShapeRef.new(shape: VolumeConfiguration)
@@ -1555,6 +1584,14 @@ module Aws::OpsWorks
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: DescribeMyUserProfileResult)
+      end)
+
+      api.add_operation(:describe_operating_systems, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOperatingSystems"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DescribeOperatingSystemsResponse)
       end)
 
       api.add_operation(:describe_permissions, Seahorse::Model::Operation.new.tap do |o|
