@@ -553,14 +553,18 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Creates a classifier in the user's account. This may be either a
-    # `GrokClassifier` or an `XMLClassifier`.
+    # Creates a classifier in the user's account. This may be a
+    # `GrokClassifier`, an `XMLClassifier`, or abbrev `JsonClassifier`,
+    # depending on which field of the request is present.
     #
     # @option params [Types::CreateGrokClassifierRequest] :grok_classifier
     #   A `GrokClassifier` object specifying the classifier to create.
     #
     # @option params [Types::CreateXMLClassifierRequest] :xml_classifier
     #   An `XMLClassifier` object specifying the classifier to create.
+    #
+    # @option params [Types::CreateJsonClassifierRequest] :json_classifier
+    #   A `JsonClassifier` object specifying the classifier to create.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -577,6 +581,10 @@ module Aws::Glue
     #       classification: "Classification", # required
     #       name: "NameString", # required
     #       row_tag: "RowTag",
+    #     },
+    #     json_classifier: {
+    #       name: "NameString", # required
+    #       json_path: "JsonPath", # required
     #     },
     #   })
     #
@@ -1683,6 +1691,11 @@ module Aws::Glue
     #   resp.classifier.xml_classifier.last_updated #=> Time
     #   resp.classifier.xml_classifier.version #=> Integer
     #   resp.classifier.xml_classifier.row_tag #=> String
+    #   resp.classifier.json_classifier.name #=> String
+    #   resp.classifier.json_classifier.creation_time #=> Time
+    #   resp.classifier.json_classifier.last_updated #=> Time
+    #   resp.classifier.json_classifier.version #=> Integer
+    #   resp.classifier.json_classifier.json_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifier AWS API Documentation
     #
@@ -1729,6 +1742,11 @@ module Aws::Glue
     #   resp.classifiers[0].xml_classifier.last_updated #=> Time
     #   resp.classifiers[0].xml_classifier.version #=> Integer
     #   resp.classifiers[0].xml_classifier.row_tag #=> String
+    #   resp.classifiers[0].json_classifier.name #=> String
+    #   resp.classifiers[0].json_classifier.creation_time #=> Time
+    #   resp.classifiers[0].json_classifier.last_updated #=> Time
+    #   resp.classifiers[0].json_classifier.version #=> Integer
+    #   resp.classifiers[0].json_classifier.json_path #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetClassifiers AWS API Documentation
@@ -3589,14 +3607,17 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Modifies an existing classifier (either a `GrokClassifier` or an
-    # `XMLClassifier`).
+    # Modifies an existing classifier (a `GrokClassifier`, `XMLClassifier`,
+    # or `JsonClassifier`, depending on which field is present).
     #
     # @option params [Types::UpdateGrokClassifierRequest] :grok_classifier
     #   A `GrokClassifier` object with updated fields.
     #
     # @option params [Types::UpdateXMLClassifierRequest] :xml_classifier
     #   An `XMLClassifier` object with updated fields.
+    #
+    # @option params [Types::UpdateJsonClassifierRequest] :json_classifier
+    #   A `JsonClassifier` object with updated fields.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3613,6 +3634,10 @@ module Aws::Glue
     #       name: "NameString", # required
     #       classification: "Classification",
     #       row_tag: "RowTag",
+    #     },
+    #     json_classifier: {
+    #       name: "NameString", # required
+    #       json_path: "JsonPath",
     #     },
     #   })
     #
@@ -3719,7 +3744,7 @@ module Aws::Glue
     #   separately for each partition. Use the following JSON string to
     #   specify that behavior:
     #
-    #   Example:  `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
     #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -4240,7 +4265,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

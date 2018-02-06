@@ -1774,6 +1774,15 @@ module Aws::SSM
     #
     # @!attribute [rw] name
     #   A name for the Systems Manager document.
+    #
+    #   Do not use the following to begin the names of documents you create.
+    #   They are reserved by AWS for use as document prefixes:
+    #
+    #    * `aws`
+    #
+    #   * `amazon`
+    #
+    #   * `amzn`
     #   @return [String]
     #
     # @!attribute [rw] document_type
@@ -1905,7 +1914,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
@@ -1928,13 +1937,22 @@ module Aws::SSM
     #               },
     #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #               approve_after_days: 1, # required
+    #               enable_non_security: false,
     #             },
     #           ],
     #         },
     #         approved_patches: ["PatchId"],
     #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #         approved_patches_enable_non_security: false,
     #         rejected_patches: ["PatchId"],
     #         description: "BaselineDescription",
+    #         sources: [
+    #           {
+    #             name: "PatchSourceName", # required
+    #             products: ["PatchSourceProduct"], # required
+    #             configuration: "PatchSourceConfiguration", # required
+    #           },
+    #         ],
     #         client_token: "ClientToken",
     #       }
     #
@@ -1967,6 +1985,12 @@ module Aws::SSM
     #   UNSPECIFIED. The default value is UNSPECIFIED.
     #   @return [String]
     #
+    # @!attribute [rw] approved_patches_enable_non_security
+    #   Indicates whether the list of approved patches includes non-security
+    #   updates that should be applied to the instances. The default value
+    #   is 'false'. Applies to Linux instances only.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
     #   @return [Array<String>]
@@ -1974,6 +1998,12 @@ module Aws::SSM
     # @!attribute [rw] description
     #   A description of the patch baseline.
     #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   Information about the patches to use to update the instances,
+    #   including target operating systems and source repositories. Applies
+    #   to Linux instances only.
+    #   @return [Array<Types::PatchSource>]
     #
     # @!attribute [rw] client_token
     #   User-provided idempotency token.
@@ -1991,8 +2021,10 @@ module Aws::SSM
       :approval_rules,
       :approved_patches,
       :approved_patches_compliance_level,
+      :approved_patches_enable_non_security,
       :rejected_patches,
       :description,
+      :sources,
       :client_token)
       include Aws::Structure
     end
@@ -4486,7 +4518,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
     #       }
     #
     # @!attribute [rw] operating_system
@@ -5447,7 +5479,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
     #       }
     #
     # @!attribute [rw] patch_group
@@ -5538,6 +5570,12 @@ module Aws::SSM
     #   in the patch baseline.
     #   @return [String]
     #
+    # @!attribute [rw] approved_patches_enable_non_security
+    #   Indicates whether the list of approved patches includes non-security
+    #   updates that should be applied to the instances. The default value
+    #   is 'false'. Applies to Linux instances only.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
     #   @return [Array<String>]
@@ -5558,6 +5596,12 @@ module Aws::SSM
     #   A description of the patch baseline.
     #   @return [String]
     #
+    # @!attribute [rw] sources
+    #   Information about the patches to use to update the instances,
+    #   including target operating systems and source repositories. Applies
+    #   to Linux instances only.
+    #   @return [Array<Types::PatchSource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineResult AWS API Documentation
     #
     class GetPatchBaselineResult < Struct.new(
@@ -5568,11 +5612,13 @@ module Aws::SSM
       :approval_rules,
       :approved_patches,
       :approved_patches_compliance_level,
+      :approved_patches_enable_non_security,
       :rejected_patches,
       :patch_groups,
       :created_date,
       :modified_date,
-      :description)
+      :description,
+      :sources)
       include Aws::Structure
     end
 
@@ -8351,6 +8397,64 @@ module Aws::SSM
     #
     # * `Low`
     #
+    # **SUSE Linux Enterprise Server (SUSE) Operating Systems**
+    #
+    # The supported keys for SUSE operating systems are `PRODUCT`,
+    # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
+    # values for each of these keys.
+    #
+    # *Supported key:* `PRODUCT`
+    #
+    # *Supported values:*
+    #
+    # * `Suse12.0`
+    #
+    # * `Suse12.1`
+    #
+    # * `Suse12.2`
+    #
+    # * `Suse12.3`
+    #
+    # * `Suse12.4`
+    #
+    # * `Suse12.5`
+    #
+    # * `Suse12.6`
+    #
+    # * `Suse12.7`
+    #
+    # * `Suse12.8`
+    #
+    # * `Suse12.9`
+    #
+    # *Supported key:* `CLASSIFICATION`
+    #
+    # *Supported values:*
+    #
+    # * `Security`
+    #
+    # * `Recommended`
+    #
+    # * `Optional`
+    #
+    # * `Feature`
+    #
+    # * `Document`
+    #
+    # * `Yast`
+    #
+    # *Supported key:* `SEVERITY`
+    #
+    # *Supported values:*
+    #
+    # * `Critical`
+    #
+    # * `Important`
+    #
+    # * `Moderate`
+    #
+    # * `Low`
+    #
     # @note When making an API call, you may pass PatchFilter
     #   data as a hash:
     #
@@ -8467,6 +8571,7 @@ module Aws::SSM
     #         },
     #         compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #         approve_after_days: 1, # required
+    #         enable_non_security: false,
     #       }
     #
     # @!attribute [rw] patch_filter_group
@@ -8484,12 +8589,20 @@ module Aws::SSM
     #   the rule the patch is marked as approved in the patch baseline.
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_non_security
+    #   For instances identified by the approval rule filters, enables a
+    #   patch baseline to apply non-security updates available in the
+    #   specified repository. The default value is 'false'. Applies to
+    #   Linux instances only.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchRule AWS API Documentation
     #
     class PatchRule < Struct.new(
       :patch_filter_group,
       :compliance_level,
-      :approve_after_days)
+      :approve_after_days,
+      :enable_non_security)
       include Aws::Structure
     end
 
@@ -8511,6 +8624,7 @@ module Aws::SSM
     #             },
     #             compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #             approve_after_days: 1, # required
+    #             enable_non_security: false,
     #           },
     #         ],
     #       }
@@ -8523,6 +8637,51 @@ module Aws::SSM
     #
     class PatchRuleGroup < Struct.new(
       :patch_rules)
+      include Aws::Structure
+    end
+
+    # Information about the patches to use to update the instances,
+    # including target operating systems and source repository. Applies to
+    # Linux instances only.
+    #
+    # @note When making an API call, you may pass PatchSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PatchSourceName", # required
+    #         products: ["PatchSourceProduct"], # required
+    #         configuration: "PatchSourceConfiguration", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name specified to identify the patch source.
+    #   @return [String]
+    #
+    # @!attribute [rw] products
+    #   The specific operating system versions a patch repository applies
+    #   to, such as "Ubuntu16.04", "AmazonLinux2016.09",
+    #   "RedhatEnterpriseLinux7.2" or "Suse12.7". For lists of supported
+    #   product values, see PatchFilter.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] configuration
+    #   The value of the yum repo configuration. For example:
+    #
+    #   `cachedir=/var/cache/yum/$basesearch`
+    #
+    #   `$releasever`
+    #
+    #   `keepcache=0`
+    #
+    #   `debualevel=2`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchSource AWS API Documentation
+    #
+    class PatchSource < Struct.new(
+      :name,
+      :products,
+      :configuration)
       include Aws::Structure
     end
 
@@ -8691,12 +8850,20 @@ module Aws::SSM
     #   of the parameter path and name. For example:
     #   `/Dev/DBServer/MySQL/db-string13`
     #
+    #   For information about parameter name requirements and restrictions,
+    #   see [About Creating Systems Manager Parameters][1] in the *AWS
+    #   Systems Manager User Guide*.
+    #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
     #   maximum length for the fully qualified parameter name is 1011
     #   characters.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-paramstore-su-create-about
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -10682,13 +10849,23 @@ module Aws::SSM
     #               },
     #               compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #               approve_after_days: 1, # required
+    #               enable_non_security: false,
     #             },
     #           ],
     #         },
     #         approved_patches: ["PatchId"],
     #         approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #         approved_patches_enable_non_security: false,
     #         rejected_patches: ["PatchId"],
     #         description: "BaselineDescription",
+    #         sources: [
+    #           {
+    #             name: "PatchSourceName", # required
+    #             products: ["PatchSourceProduct"], # required
+    #             configuration: "PatchSourceConfiguration", # required
+    #           },
+    #         ],
+    #         replace: false,
     #       }
     #
     # @!attribute [rw] baseline_id
@@ -10716,6 +10893,12 @@ module Aws::SSM
     #   baseline.
     #   @return [String]
     #
+    # @!attribute [rw] approved_patches_enable_non_security
+    #   Indicates whether the list of approved patches includes non-security
+    #   updates that should be applied to the instances. The default value
+    #   is 'false'. Applies to Linux instances only.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
     #   @return [Array<String>]
@@ -10723,6 +10906,18 @@ module Aws::SSM
     # @!attribute [rw] description
     #   A description of the patch baseline.
     #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   Information about the patches to use to update the instances,
+    #   including target operating systems and source repositories. Applies
+    #   to Linux instances only.
+    #   @return [Array<Types::PatchSource>]
+    #
+    # @!attribute [rw] replace
+    #   If True, then all fields that are required by the
+    #   CreatePatchBaseline action are also required for this API request.
+    #   Optional fields that are not specified are set to null.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaselineRequest AWS API Documentation
     #
@@ -10733,8 +10928,11 @@ module Aws::SSM
       :approval_rules,
       :approved_patches,
       :approved_patches_compliance_level,
+      :approved_patches_enable_non_security,
       :rejected_patches,
-      :description)
+      :description,
+      :sources,
+      :replace)
       include Aws::Structure
     end
 
@@ -10767,6 +10965,12 @@ module Aws::SSM
     #   the update completed.
     #   @return [String]
     #
+    # @!attribute [rw] approved_patches_enable_non_security
+    #   Indicates whether the list of approved patches includes non-security
+    #   updates that should be applied to the instances. The default value
+    #   is 'false'. Applies to Linux instances only.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
     #   @return [Array<String>]
@@ -10783,6 +10987,12 @@ module Aws::SSM
     #   A description of the Patch Baseline.
     #   @return [String]
     #
+    # @!attribute [rw] sources
+    #   Information about the patches to use to update the instances,
+    #   including target operating systems and source repositories. Applies
+    #   to Linux instances only.
+    #   @return [Array<Types::PatchSource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaselineResult AWS API Documentation
     #
     class UpdatePatchBaselineResult < Struct.new(
@@ -10793,10 +11003,12 @@ module Aws::SSM
       :approval_rules,
       :approved_patches,
       :approved_patches_compliance_level,
+      :approved_patches_enable_non_security,
       :rejected_patches,
       :created_date,
       :modified_date,
-      :description)
+      :description,
+      :sources)
       include Aws::Structure
     end
 

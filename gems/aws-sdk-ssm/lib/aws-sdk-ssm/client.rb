@@ -543,6 +543,15 @@ module Aws::SSM
     # @option params [required, String] :name
     #   A name for the Systems Manager document.
     #
+    #   Do not use the following to begin the names of documents you create.
+    #   They are reserved by AWS for use as document prefixes:
+    #
+    #    * `aws`
+    #
+    #   * `amazon`
+    #
+    #   * `amzn`
+    #
     # @option params [String] :document_type
     #   The type of document to create. Valid document types include: Policy,
     #   Automation, and Command.
@@ -715,11 +724,21 @@ module Aws::SSM
     #   following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED.
     #   The default value is UNSPECIFIED.
     #
+    # @option params [Boolean] :approved_patches_enable_non_security
+    #   Indicates whether the list of approved patches includes non-security
+    #   updates that should be applied to the instances. The default value is
+    #   'false'. Applies to Linux instances only.
+    #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
     #
     # @option params [String] :description
     #   A description of the patch baseline.
+    #
+    # @option params [Array<Types::PatchSource>] :sources
+    #   Information about the patches to use to update the instances,
+    #   including target operating systems and source repositories. Applies to
+    #   Linux instances only.
     #
     # @option params [String] :client_token
     #   User-provided idempotency token.
@@ -734,7 +753,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
     #     name: "BaselineName", # required
     #     global_filters: {
     #       patch_filters: [ # required
@@ -757,13 +776,22 @@ module Aws::SSM
     #           },
     #           compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #           approve_after_days: 1, # required
+    #           enable_non_security: false,
     #         },
     #       ],
     #     },
     #     approved_patches: ["PatchId"],
     #     approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #     approved_patches_enable_non_security: false,
     #     rejected_patches: ["PatchId"],
     #     description: "BaselineDescription",
+    #     sources: [
+    #       {
+    #         name: "PatchSourceName", # required
+    #         products: ["PatchSourceProduct"], # required
+    #         configuration: "PatchSourceConfiguration", # required
+    #       },
+    #     ],
     #     client_token: "ClientToken",
     #   })
     #
@@ -2553,7 +2581,7 @@ module Aws::SSM
     #   resp.baseline_identities #=> Array
     #   resp.baseline_identities[0].baseline_id #=> String
     #   resp.baseline_identities[0].baseline_name #=> String
-    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
+    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
     #   resp.baseline_identities[0].baseline_description #=> String
     #   resp.baseline_identities[0].default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -2643,7 +2671,7 @@ module Aws::SSM
     #   resp.mappings[0].patch_group #=> String
     #   resp.mappings[0].baseline_identity.baseline_id #=> String
     #   resp.mappings[0].baseline_identity.baseline_name #=> String
-    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
+    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
     #   resp.mappings[0].baseline_identity.baseline_description #=> String
     #   resp.mappings[0].baseline_identity.default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -2826,13 +2854,13 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_default_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline AWS API Documentation
     #
@@ -3593,11 +3621,13 @@ module Aws::SSM
     #   * {Types::GetPatchBaselineResult#approval_rules #approval_rules} => Types::PatchRuleGroup
     #   * {Types::GetPatchBaselineResult#approved_patches #approved_patches} => Array&lt;String&gt;
     #   * {Types::GetPatchBaselineResult#approved_patches_compliance_level #approved_patches_compliance_level} => String
+    #   * {Types::GetPatchBaselineResult#approved_patches_enable_non_security #approved_patches_enable_non_security} => Boolean
     #   * {Types::GetPatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
     #   * {Types::GetPatchBaselineResult#patch_groups #patch_groups} => Array&lt;String&gt;
     #   * {Types::GetPatchBaselineResult#created_date #created_date} => Time
     #   * {Types::GetPatchBaselineResult#modified_date #modified_date} => Time
     #   * {Types::GetPatchBaselineResult#description #description} => String
+    #   * {Types::GetPatchBaselineResult#sources #sources} => Array&lt;Types::PatchSource&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3609,7 +3639,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -3621,9 +3651,11 @@ module Aws::SSM
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.approval_rules.patch_rules[0].approve_after_days #=> Integer
+    #   resp.approval_rules.patch_rules[0].enable_non_security #=> Boolean
     #   resp.approved_patches #=> Array
     #   resp.approved_patches[0] #=> String
     #   resp.approved_patches_compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
+    #   resp.approved_patches_enable_non_security #=> Boolean
     #   resp.rejected_patches #=> Array
     #   resp.rejected_patches[0] #=> String
     #   resp.patch_groups #=> Array
@@ -3631,6 +3663,11 @@ module Aws::SSM
     #   resp.created_date #=> Time
     #   resp.modified_date #=> Time
     #   resp.description #=> String
+    #   resp.sources #=> Array
+    #   resp.sources[0].name #=> String
+    #   resp.sources[0].products #=> Array
+    #   resp.sources[0].products[0] #=> String
+    #   resp.sources[0].configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaseline AWS API Documentation
     #
@@ -3661,14 +3698,14 @@ module Aws::SSM
     #
     #   resp = client.get_patch_baseline_for_patch_group({
     #     patch_group: "PatchGroup", # required
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup AWS API Documentation
     #
@@ -4670,12 +4707,20 @@ module Aws::SSM
     #   the parameter path and name. For example:
     #   `/Dev/DBServer/MySQL/db-string13`
     #
+    #   For information about parameter name requirements and restrictions,
+    #   see [About Creating Systems Manager Parameters][1] in the *AWS Systems
+    #   Manager User Guide*.
+    #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
     #   maximum length for the fully qualified parameter name is 1011
     #   characters.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-paramstore-su-create-about
     #
     # @option params [String] :description
     #   Information about the parameter that you want to add to the system.
@@ -6075,11 +6120,26 @@ module Aws::SSM
     # @option params [String] :approved_patches_compliance_level
     #   Assigns a new compliance severity level to an existing patch baseline.
     #
+    # @option params [Boolean] :approved_patches_enable_non_security
+    #   Indicates whether the list of approved patches includes non-security
+    #   updates that should be applied to the instances. The default value is
+    #   'false'. Applies to Linux instances only.
+    #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
     #
     # @option params [String] :description
     #   A description of the patch baseline.
+    #
+    # @option params [Array<Types::PatchSource>] :sources
+    #   Information about the patches to use to update the instances,
+    #   including target operating systems and source repositories. Applies to
+    #   Linux instances only.
+    #
+    # @option params [Boolean] :replace
+    #   If True, then all fields that are required by the CreatePatchBaseline
+    #   action are also required for this API request. Optional fields that
+    #   are not specified are set to null.
     #
     # @return [Types::UpdatePatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6090,10 +6150,12 @@ module Aws::SSM
     #   * {Types::UpdatePatchBaselineResult#approval_rules #approval_rules} => Types::PatchRuleGroup
     #   * {Types::UpdatePatchBaselineResult#approved_patches #approved_patches} => Array&lt;String&gt;
     #   * {Types::UpdatePatchBaselineResult#approved_patches_compliance_level #approved_patches_compliance_level} => String
+    #   * {Types::UpdatePatchBaselineResult#approved_patches_enable_non_security #approved_patches_enable_non_security} => Boolean
     #   * {Types::UpdatePatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
     #   * {Types::UpdatePatchBaselineResult#created_date #created_date} => Time
     #   * {Types::UpdatePatchBaselineResult#modified_date #modified_date} => Time
     #   * {Types::UpdatePatchBaselineResult#description #description} => String
+    #   * {Types::UpdatePatchBaselineResult#sources #sources} => Array&lt;Types::PatchSource&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6121,20 +6183,30 @@ module Aws::SSM
     #           },
     #           compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
     #           approve_after_days: 1, # required
+    #           enable_non_security: false,
     #         },
     #       ],
     #     },
     #     approved_patches: ["PatchId"],
     #     approved_patches_compliance_level: "CRITICAL", # accepts CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED
+    #     approved_patches_enable_non_security: false,
     #     rejected_patches: ["PatchId"],
     #     description: "BaselineDescription",
+    #     sources: [
+    #       {
+    #         name: "PatchSourceName", # required
+    #         products: ["PatchSourceProduct"], # required
+    #         configuration: "PatchSourceConfiguration", # required
+    #       },
+    #     ],
+    #     replace: false,
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -6146,14 +6218,21 @@ module Aws::SSM
     #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
     #   resp.approval_rules.patch_rules[0].compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
     #   resp.approval_rules.patch_rules[0].approve_after_days #=> Integer
+    #   resp.approval_rules.patch_rules[0].enable_non_security #=> Boolean
     #   resp.approved_patches #=> Array
     #   resp.approved_patches[0] #=> String
     #   resp.approved_patches_compliance_level #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW", "INFORMATIONAL", "UNSPECIFIED"
+    #   resp.approved_patches_enable_non_security #=> Boolean
     #   resp.rejected_patches #=> Array
     #   resp.rejected_patches[0] #=> String
     #   resp.created_date #=> Time
     #   resp.modified_date #=> Time
     #   resp.description #=> String
+    #   resp.sources #=> Array
+    #   resp.sources[0].name #=> String
+    #   resp.sources[0].products #=> Array
+    #   resp.sources[0].products[0] #=> String
+    #   resp.sources[0].configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaseline AWS API Documentation
     #
@@ -6177,7 +6256,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

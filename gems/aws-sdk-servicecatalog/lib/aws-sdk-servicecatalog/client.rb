@@ -493,7 +493,7 @@ module Aws::ServiceCatalog
     #   The name of the portfolio provider.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to associate with the portfolio.
+    #   One or more tags.
     #
     # @option params [required, String] :idempotency_token
     #   A unique identifier that you provide to ensure idempotency. If
@@ -617,7 +617,7 @@ module Aws::ServiceCatalog
     #   The type of product.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to associate with the product.
+    #   One or more tags.
     #
     # @option params [required, Types::ProvisioningArtifactProperties] :provisioning_artifact_parameters
     #   The configuration of the provisioning artifact.
@@ -697,6 +697,120 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def create_product(params = {}, options = {})
       req = build_request(:create_product, params)
+      req.send_request(options)
+    end
+
+    # Creates a plan. A plan includes the list of resources that will be
+    # created (when provisioning a new product) or modified (when updating a
+    # provisioned product) when the plan is executed.
+    #
+    # You can create one plan per provisioned product. To create a plan for
+    # an existing provisioned product, it's status must be AVAILBLE or
+    # TAINTED.
+    #
+    # To view the resource changes in the change set, use
+    # DescribeProvisionedProductPlan. To create or modify the provisioned
+    # product, use ExecuteProvisionedProductPlan.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :plan_name
+    #   The name of the plan.
+    #
+    # @option params [required, String] :plan_type
+    #   The plan type.
+    #
+    # @option params [Array<String>] :notification_arns
+    #   Passed to CloudFormation. The SNS topic ARNs to which to publish
+    #   stack-related events.
+    #
+    # @option params [String] :path_id
+    #   The path identifier of the product. This value is optional if the
+    #   product has a default path, and required if the product has more than
+    #   one path. To list the paths for a product, use ListLaunchPaths.
+    #
+    # @option params [required, String] :product_id
+    #   The product identifier.
+    #
+    # @option params [required, String] :provisioned_product_name
+    #   A user-friendly name for the provisioned product. This value must be
+    #   unique for the AWS account and cannot be updated after the product is
+    #   provisioned.
+    #
+    # @option params [required, String] :provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #
+    # @option params [Array<Types::UpdateProvisioningParameter>] :provisioning_parameters
+    #   Parameters specified by the administrator that are required for
+    #   provisioning the product.
+    #
+    # @option params [required, String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags.
+    #
+    # @return [Types::CreateProvisionedProductPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateProvisionedProductPlanOutput#plan_name #plan_name} => String
+    #   * {Types::CreateProvisionedProductPlanOutput#plan_id #plan_id} => String
+    #   * {Types::CreateProvisionedProductPlanOutput#provision_product_id #provision_product_id} => String
+    #   * {Types::CreateProvisionedProductPlanOutput#provisioned_product_name #provisioned_product_name} => String
+    #   * {Types::CreateProvisionedProductPlanOutput#provisioning_artifact_id #provisioning_artifact_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_provisioned_product_plan({
+    #     accept_language: "AcceptLanguage",
+    #     plan_name: "ProvisionedProductPlanName", # required
+    #     plan_type: "CLOUDFORMATION", # required, accepts CLOUDFORMATION
+    #     notification_arns: ["NotificationArn"],
+    #     path_id: "Id",
+    #     product_id: "Id", # required
+    #     provisioned_product_name: "ProvisionedProductName", # required
+    #     provisioning_artifact_id: "Id", # required
+    #     provisioning_parameters: [
+    #       {
+    #         key: "ParameterKey",
+    #         value: "ParameterValue",
+    #         use_previous_value: false,
+    #       },
+    #     ],
+    #     idempotency_token: "IdempotencyToken", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.plan_name #=> String
+    #   resp.plan_id #=> String
+    #   resp.provision_product_id #=> String
+    #   resp.provisioned_product_name #=> String
+    #   resp.provisioning_artifact_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisionedProductPlan AWS API Documentation
+    #
+    # @overload create_provisioned_product_plan(params = {})
+    # @param [Hash] params ({})
+    def create_provisioned_product_plan(params = {}, options = {})
+      req = build_request(:create_provisioned_product_plan, params)
       req.send_request(options)
     end
 
@@ -942,6 +1056,43 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def delete_product(params = {}, options = {})
       req = build_request(:delete_product, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified plan.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :plan_id
+    #   The plan identifier.
+    #
+    # @option params [Boolean] :ignore_errors
+    #   If set to true, AWS Service Catalog stops managing the specified
+    #   provisioned product even if it cannot delete the underlying resources.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_provisioned_product_plan({
+    #     accept_language: "AcceptLanguage",
+    #     plan_id: "Id", # required
+    #     ignore_errors: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisionedProductPlan AWS API Documentation
+    #
+    # @overload delete_provisioned_product_plan(params = {})
+    # @param [Hash] params ({})
+    def delete_provisioned_product_plan(params = {}, options = {})
+      req = build_request(:delete_provisioned_product_plan, params)
       req.send_request(options)
     end
 
@@ -1323,6 +1474,7 @@ module Aws::ServiceCatalog
     # @return [Types::DescribeProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeProvisionedProductOutput#provisioned_product_detail #provisioned_product_detail} => Types::ProvisionedProductDetail
+    #   * {Types::DescribeProvisionedProductOutput#cloud_watch_dashboards #cloud_watch_dashboards} => Array&lt;Types::CloudWatchDashboard&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1337,11 +1489,13 @@ module Aws::ServiceCatalog
     #   resp.provisioned_product_detail.arn #=> String
     #   resp.provisioned_product_detail.type #=> String
     #   resp.provisioned_product_detail.id #=> String
-    #   resp.provisioned_product_detail.status #=> String, one of "AVAILABLE", "UNDER_CHANGE", "TAINTED", "ERROR"
+    #   resp.provisioned_product_detail.status #=> String, one of "AVAILABLE", "UNDER_CHANGE", "TAINTED", "ERROR", "PLAN_IN_PROGRESS"
     #   resp.provisioned_product_detail.status_message #=> String
     #   resp.provisioned_product_detail.created_time #=> Time
     #   resp.provisioned_product_detail.idempotency_token #=> String
     #   resp.provisioned_product_detail.last_record_id #=> String
+    #   resp.cloud_watch_dashboards #=> Array
+    #   resp.cloud_watch_dashboards[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProduct AWS API Documentation
     #
@@ -1349,6 +1503,90 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def describe_provisioned_product(params = {}, options = {})
       req = build_request(:describe_provisioned_product, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the resource changes for the specified plan.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :plan_id
+    #   The plan identifier.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @return [Types::DescribeProvisionedProductPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeProvisionedProductPlanOutput#provisioned_product_plan_details #provisioned_product_plan_details} => Types::ProvisionedProductPlanDetails
+    #   * {Types::DescribeProvisionedProductPlanOutput#resource_changes #resource_changes} => Array&lt;Types::ResourceChange&gt;
+    #   * {Types::DescribeProvisionedProductPlanOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_provisioned_product_plan({
+    #     accept_language: "AcceptLanguage",
+    #     plan_id: "Id", # required
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.provisioned_product_plan_details.created_time #=> Time
+    #   resp.provisioned_product_plan_details.path_id #=> String
+    #   resp.provisioned_product_plan_details.product_id #=> String
+    #   resp.provisioned_product_plan_details.plan_name #=> String
+    #   resp.provisioned_product_plan_details.plan_id #=> String
+    #   resp.provisioned_product_plan_details.provision_product_id #=> String
+    #   resp.provisioned_product_plan_details.provision_product_name #=> String
+    #   resp.provisioned_product_plan_details.plan_type #=> String, one of "CLOUDFORMATION"
+    #   resp.provisioned_product_plan_details.provisioning_artifact_id #=> String
+    #   resp.provisioned_product_plan_details.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_SUCCESS", "CREATE_FAILED", "EXECUTE_IN_PROGRESS", "EXECUTE_SUCCESS", "EXECUTE_FAILED"
+    #   resp.provisioned_product_plan_details.updated_time #=> Time
+    #   resp.provisioned_product_plan_details.notification_arns #=> Array
+    #   resp.provisioned_product_plan_details.notification_arns[0] #=> String
+    #   resp.provisioned_product_plan_details.provisioning_parameters #=> Array
+    #   resp.provisioned_product_plan_details.provisioning_parameters[0].key #=> String
+    #   resp.provisioned_product_plan_details.provisioning_parameters[0].value #=> String
+    #   resp.provisioned_product_plan_details.provisioning_parameters[0].use_previous_value #=> Boolean
+    #   resp.provisioned_product_plan_details.tags #=> Array
+    #   resp.provisioned_product_plan_details.tags[0].key #=> String
+    #   resp.provisioned_product_plan_details.tags[0].value #=> String
+    #   resp.provisioned_product_plan_details.status_message #=> String
+    #   resp.resource_changes #=> Array
+    #   resp.resource_changes[0].action #=> String, one of "ADD", "MODIFY", "REMOVE"
+    #   resp.resource_changes[0].logical_resource_id #=> String
+    #   resp.resource_changes[0].physical_resource_id #=> String
+    #   resp.resource_changes[0].resource_type #=> String
+    #   resp.resource_changes[0].replacement #=> String, one of "TRUE", "FALSE", "CONDITIONAL"
+    #   resp.resource_changes[0].scope #=> Array
+    #   resp.resource_changes[0].scope[0] #=> String, one of "PROPERTIES", "METADATA", "CREATIONPOLICY", "UPDATEPOLICY", "DELETIONPOLICY", "TAGS"
+    #   resp.resource_changes[0].details #=> Array
+    #   resp.resource_changes[0].details[0].target.attribute #=> String, one of "PROPERTIES", "METADATA", "CREATIONPOLICY", "UPDATEPOLICY", "DELETIONPOLICY", "TAGS"
+    #   resp.resource_changes[0].details[0].target.name #=> String
+    #   resp.resource_changes[0].details[0].target.requires_recreation #=> String, one of "NEVER", "CONDITIONALLY", "ALWAYS"
+    #   resp.resource_changes[0].details[0].evaluation #=> String, one of "STATIC", "DYNAMIC"
+    #   resp.resource_changes[0].details[0].causing_entity #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductPlan AWS API Documentation
+    #
+    # @overload describe_provisioned_product_plan(params = {})
+    # @param [Hash] params ({})
+    def describe_provisioned_product_plan(params = {}, options = {})
+      req = build_request(:describe_provisioned_product_plan, params)
       req.send_request(options)
     end
 
@@ -1416,10 +1654,9 @@ module Aws::ServiceCatalog
     # there is a TagOption conflict for that key. The end user cannot take
     # action to fix the conflict, and launch is not blocked. In subsequent
     # calls to ProvisionProduct, do not include conflicted TagOption keys as
-    # tags, or this will cause the error "Parameter validation failed:
-    # Missing required parameter in Tags\[*N*\]:*Value*" and tag the
-    # provisioned product with the value
-    # `sc-tagoption-conflict-portfolioId-productId`.
+    # tags, or this causes the error "Parameter validation failed: Missing
+    # required parameter in Tags\[*N*\]:*Value*". Tag the provisioned
+    # product with the value `sc-tagoption-conflict-portfolioId-productId`.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -1689,6 +1926,70 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def disassociate_tag_option_from_resource(params = {}, options = {})
       req = build_request(:disassociate_tag_option_from_resource, params)
+      req.send_request(options)
+    end
+
+    # Provisions or modifies a product based on the resource changes for the
+    # specified plan.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [required, String] :plan_id
+    #   The plan identifier.
+    #
+    # @option params [required, String] :idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ExecuteProvisionedProductPlanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExecuteProvisionedProductPlanOutput#record_detail #record_detail} => Types::RecordDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_provisioned_product_plan({
+    #     accept_language: "AcceptLanguage",
+    #     plan_id: "Id", # required
+    #     idempotency_token: "IdempotencyToken", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.record_detail.record_id #=> String
+    #   resp.record_detail.provisioned_product_name #=> String
+    #   resp.record_detail.status #=> String, one of "CREATED", "IN_PROGRESS", "IN_PROGRESS_IN_ERROR", "SUCCEEDED", "FAILED"
+    #   resp.record_detail.created_time #=> Time
+    #   resp.record_detail.updated_time #=> Time
+    #   resp.record_detail.provisioned_product_type #=> String
+    #   resp.record_detail.record_type #=> String
+    #   resp.record_detail.provisioned_product_id #=> String
+    #   resp.record_detail.product_id #=> String
+    #   resp.record_detail.provisioning_artifact_id #=> String
+    #   resp.record_detail.path_id #=> String
+    #   resp.record_detail.record_errors #=> Array
+    #   resp.record_detail.record_errors[0].code #=> String
+    #   resp.record_detail.record_errors[0].description #=> String
+    #   resp.record_detail.record_tags #=> Array
+    #   resp.record_detail.record_tags[0].key #=> String
+    #   resp.record_detail.record_tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductPlan AWS API Documentation
+    #
+    # @overload execute_provisioned_product_plan(params = {})
+    # @param [Hash] params ({})
+    def execute_provisioned_product_plan(params = {}, options = {})
+      req = build_request(:execute_provisioned_product_plan, params)
       req.send_request(options)
     end
 
@@ -2057,6 +2358,69 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
+    # Lists the plans for the specified provisioned product or all plans the
+    # user has access to.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [String] :provision_product_id
+    #   The product identifier.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @option params [Types::AccessLevelFilter] :access_level_filter
+    #   The access level to use to obtain results. The default is `User`.
+    #
+    # @return [Types::ListProvisionedProductPlansOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProvisionedProductPlansOutput#provisioned_product_plans #provisioned_product_plans} => Array&lt;Types::ProvisionedProductPlanSummary&gt;
+    #   * {Types::ListProvisionedProductPlansOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_provisioned_product_plans({
+    #     accept_language: "AcceptLanguage",
+    #     provision_product_id: "Id",
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #     access_level_filter: {
+    #       key: "Account", # accepts Account, Role, User
+    #       value: "AccessLevelFilterValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.provisioned_product_plans #=> Array
+    #   resp.provisioned_product_plans[0].plan_name #=> String
+    #   resp.provisioned_product_plans[0].plan_id #=> String
+    #   resp.provisioned_product_plans[0].provision_product_id #=> String
+    #   resp.provisioned_product_plans[0].provision_product_name #=> String
+    #   resp.provisioned_product_plans[0].plan_type #=> String, one of "CLOUDFORMATION"
+    #   resp.provisioned_product_plans[0].provisioning_artifact_id #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisionedProductPlans AWS API Documentation
+    #
+    # @overload list_provisioned_product_plans(params = {})
+    # @param [Hash] params ({})
+    def list_provisioned_product_plans(params = {}, options = {})
+      req = build_request(:list_provisioned_product_plans, params)
+      req.send_request(options)
+    end
+
     # Lists all provisioning artifacts (also known as versions) for the
     # specified product.
     #
@@ -2289,8 +2653,8 @@ module Aws::ServiceCatalog
     #
     # If the request contains a tag key with an empty list of values, there
     # is a tag conflict for that key. Do not include conflicted keys as
-    # tags, or this will cause the error "Parameter validation failed:
-    # Missing required parameter in Tags\[*N*\]:*Value*".
+    # tags, or this causes the error "Parameter validation failed: Missing
+    # required parameter in Tags\[*N*\]:*Value*".
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -2322,7 +2686,7 @@ module Aws::ServiceCatalog
     #   provisioning the product.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to use as provisioning options.
+    #   One or more tags.
     #
     # @option params [Array<String>] :notification_arns
     #   Passed to CloudFormation. The SNS topic ARNs to which to publish
@@ -2426,6 +2790,8 @@ module Aws::ServiceCatalog
 
     # Lists the provisioned products that are available (not terminated).
     #
+    # To use additional filtering, see SearchProvisionedProducts.
+    #
     # @option params [String] :accept_language
     #   The language code.
     #
@@ -2469,7 +2835,7 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].arn #=> String
     #   resp.provisioned_products[0].type #=> String
     #   resp.provisioned_products[0].id #=> String
-    #   resp.provisioned_products[0].status #=> String, one of "AVAILABLE", "UNDER_CHANGE", "TAINTED", "ERROR"
+    #   resp.provisioned_products[0].status #=> String, one of "AVAILABLE", "UNDER_CHANGE", "TAINTED", "ERROR", "PLAN_IN_PROGRESS"
     #   resp.provisioned_products[0].status_message #=> String
     #   resp.provisioned_products[0].created_time #=> Time
     #   resp.provisioned_products[0].idempotency_token #=> String
@@ -2641,6 +3007,100 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def search_products_as_admin(params = {}, options = {})
       req = build_request(:search_products_as_admin, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the provisioned products that meet the
+    # specified criteria.
+    #
+    # @option params [String] :accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #
+    # @option params [Types::AccessLevelFilter] :access_level_filter
+    #   The access level to use to obtain results. The default is `User`.
+    #
+    # @option params [Hash<String,Array>] :filters
+    #   The search filters.
+    #
+    #   When the key is `SearchQuery`, the searchable fields are `arn`,
+    #   `createdTime`, `id`, `lastRecordId`, `idempotencyToken`, `name`,
+    #   `physicalId`, `productId`, `provisioningArtifact`, `type`, `status`,
+    #   `tags`, `userArn`, and `userArnSession`.
+    #
+    #   Example: `"SearchQuery":["status:AVAILABLE"]`
+    #
+    # @option params [String] :sort_by
+    #   The sort field. If no value is specified, the results are not sorted.
+    #   The valid values are `arn`, `id`, `name`, and `lastRecordId`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order. If no value is specified, the results are not sorted.
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of items to return with this call.
+    #
+    # @option params [String] :page_token
+    #   The page token for the next set of results. To retrieve the first set
+    #   of results, use null.
+    #
+    # @return [Types::SearchProvisionedProductsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchProvisionedProductsOutput#provisioned_products #provisioned_products} => Array&lt;Types::ProvisionedProductAttribute&gt;
+    #   * {Types::SearchProvisionedProductsOutput#total_results_count #total_results_count} => Integer
+    #   * {Types::SearchProvisionedProductsOutput#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_provisioned_products({
+    #     accept_language: "AcceptLanguage",
+    #     access_level_filter: {
+    #       key: "Account", # accepts Account, Role, User
+    #       value: "AccessLevelFilterValue",
+    #     },
+    #     filters: {
+    #       "SearchQuery" => ["ProvisionedProductViewFilterValue"],
+    #     },
+    #     sort_by: "SortField",
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     page_size: 1,
+    #     page_token: "PageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.provisioned_products #=> Array
+    #   resp.provisioned_products[0].name #=> String
+    #   resp.provisioned_products[0].arn #=> String
+    #   resp.provisioned_products[0].type #=> String
+    #   resp.provisioned_products[0].id #=> String
+    #   resp.provisioned_products[0].status #=> String, one of "AVAILABLE", "UNDER_CHANGE", "TAINTED", "ERROR", "PLAN_IN_PROGRESS"
+    #   resp.provisioned_products[0].status_message #=> String
+    #   resp.provisioned_products[0].created_time #=> Time
+    #   resp.provisioned_products[0].idempotency_token #=> String
+    #   resp.provisioned_products[0].last_record_id #=> String
+    #   resp.provisioned_products[0].tags #=> Array
+    #   resp.provisioned_products[0].tags[0].key #=> String
+    #   resp.provisioned_products[0].tags[0].value #=> String
+    #   resp.provisioned_products[0].physical_id #=> String
+    #   resp.provisioned_products[0].product_id #=> String
+    #   resp.provisioned_products[0].provisioning_artifact_id #=> String
+    #   resp.provisioned_products[0].user_arn #=> String
+    #   resp.provisioned_products[0].user_arn_session #=> String
+    #   resp.total_results_count #=> Integer
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProvisionedProducts AWS API Documentation
+    #
+    # @overload search_provisioned_products(params = {})
+    # @param [Hash] params ({})
+    def search_provisioned_products(params = {}, options = {})
+      req = build_request(:search_provisioned_products, params)
       req.send_request(options)
     end
 
@@ -2985,7 +3445,7 @@ module Aws::ServiceCatalog
     #
     # @option params [required, String] :update_token
     #   The idempotency token that uniquely identifies the provisioning update
-    #   rquest.
+    #   request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3162,7 +3622,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

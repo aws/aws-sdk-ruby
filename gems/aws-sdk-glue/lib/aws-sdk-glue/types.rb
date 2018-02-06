@@ -541,8 +541,9 @@ module Aws::Glue
     # and if it is, the classifier creates a schema in the form of a
     # `StructType` object that matches that data format.
     #
-    # A classifier can be either a `grok` classifier or an XML classifier,
-    # specified in one or the other field of the `Classifier` object.
+    # A classifier can be a `grok` classifier, an XML classifier, or a JSON
+    # classifier, asspecified in one of the fields in the `Classifier`
+    # object.
     #
     # @!attribute [rw] grok_classifier
     #   A `GrokClassifier` object.
@@ -552,11 +553,16 @@ module Aws::Glue
     #   An `XMLClassifier` object.
     #   @return [Types::XMLClassifier]
     #
+    # @!attribute [rw] json_classifier
+    #   A `JsonClassifier` object.
+    #   @return [Types::JsonClassifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Classifier AWS API Documentation
     #
     class Classifier < Struct.new(
       :grok_classifier,
-      :xml_classifier)
+      :xml_classifier,
+      :json_classifier)
       include Aws::Structure
     end
 
@@ -1075,6 +1081,10 @@ module Aws::Glue
     #           name: "NameString", # required
     #           row_tag: "RowTag",
     #         },
+    #         json_classifier: {
+    #           name: "NameString", # required
+    #           json_path: "JsonPath", # required
+    #         },
     #       }
     #
     # @!attribute [rw] grok_classifier
@@ -1085,11 +1095,16 @@ module Aws::Glue
     #   An `XMLClassifier` object specifying the classifier to create.
     #   @return [Types::CreateXMLClassifierRequest]
     #
+    # @!attribute [rw] json_classifier
+    #   A `JsonClassifier` object specifying the classifier to create.
+    #   @return [Types::CreateJsonClassifierRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateClassifierRequest AWS API Documentation
     #
     class CreateClassifierRequest < Struct.new(
       :grok_classifier,
-      :xml_classifier)
+      :xml_classifier,
+      :json_classifier)
       include Aws::Structure
     end
 
@@ -1595,6 +1610,38 @@ module Aws::Glue
     #
     class CreateJobResponse < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # Specifies a JSON classifier for `CreateClassifier` to create.
+    #
+    # @note When making an API call, you may pass CreateJsonClassifierRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         json_path: "JsonPath", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] json_path
+    #   A `JsonPath` string defining the JSON data for the classifier to
+    #   classify. AWS Glue supports a subset of JsonPath, as described in
+    #   [Writing JsonPath Custom Classifiers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJsonClassifierRequest AWS API Documentation
+    #
+    class CreateJsonClassifierRequest < Struct.new(
+      :name,
+      :json_path)
       include Aws::Structure
     end
 
@@ -4461,6 +4508,45 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A classifier for `JSON` content.
+    #
+    # @!attribute [rw] name
+    #   The name of the classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time this classifier was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated
+    #   The time this classifier was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] version
+    #   The version of this classifier.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] json_path
+    #   A `JsonPath` string defining the JSON data for the classifier to
+    #   classify. AWS Glue supports a subset of JsonPath, as described in
+    #   [Writing JsonPath Custom Classifiers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JsonClassifier AWS API Documentation
+    #
+    class JsonClassifier < Struct.new(
+      :name,
+      :creation_time,
+      :last_updated,
+      :version,
+      :json_path)
+      include Aws::Structure
+    end
+
     # Status and error information about the most recent crawl.
     #
     # @!attribute [rw] status
@@ -5877,6 +5963,10 @@ module Aws::Glue
     #           classification: "Classification",
     #           row_tag: "RowTag",
     #         },
+    #         json_classifier: {
+    #           name: "NameString", # required
+    #           json_path: "JsonPath",
+    #         },
     #       }
     #
     # @!attribute [rw] grok_classifier
@@ -5887,11 +5977,16 @@ module Aws::Glue
     #   An `XMLClassifier` object with updated fields.
     #   @return [Types::UpdateXMLClassifierRequest]
     #
+    # @!attribute [rw] json_classifier
+    #   A `JsonClassifier` object with updated fields.
+    #   @return [Types::UpdateJsonClassifierRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateClassifierRequest AWS API Documentation
     #
     class UpdateClassifierRequest < Struct.new(
       :grok_classifier,
-      :xml_classifier)
+      :xml_classifier,
+      :json_classifier)
       include Aws::Structure
     end
 
@@ -6038,7 +6133,7 @@ module Aws::Glue
     #   information separately for each partition. Use the following JSON
     #   string to specify that behavior:
     #
-    #   Example:  `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
+    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
     #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
     #   @return [String]
     #
@@ -6276,6 +6371,38 @@ module Aws::Glue
     #
     class UpdateJobResponse < Struct.new(
       :job_name)
+      include Aws::Structure
+    end
+
+    # Specifies a JSON classifier to be updated.
+    #
+    # @note When making an API call, you may pass UpdateJsonClassifierRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         json_path: "JsonPath",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the classifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] json_path
+    #   A `JsonPath` string defining the JSON data for the classifier to
+    #   classify. AWS Glue supports a subset of JsonPath, as described in
+    #   [Writing JsonPath Custom Classifiers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJsonClassifierRequest AWS API Documentation
+    #
+    class UpdateJsonClassifierRequest < Struct.new(
+      :name,
+      :json_path)
       include Aws::Structure
     end
 

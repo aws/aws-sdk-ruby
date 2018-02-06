@@ -196,6 +196,19 @@ module Aws::ServiceCatalog
     #
     class AssociateTagOptionWithResourceOutput < Aws::EmptyStructure; end
 
+    # Information about a CloudWatch dashboard.
+    #
+    # @!attribute [rw] name
+    #   The name of the CloudWatch dashboard.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CloudWatchDashboard AWS API Documentation
+    #
+    class CloudWatchDashboard < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Information about a constraint.
     #
     # @!attribute [rw] constraint_id
@@ -495,7 +508,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to associate with the portfolio.
+    #   One or more tags.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] idempotency_token
@@ -648,7 +661,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to associate with the product.
+    #   One or more tags.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] provisioning_artifact_parameters
@@ -700,6 +713,143 @@ module Aws::ServiceCatalog
       :product_view_detail,
       :provisioning_artifact_detail,
       :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateProvisionedProductPlanInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         plan_name: "ProvisionedProductPlanName", # required
+    #         plan_type: "CLOUDFORMATION", # required, accepts CLOUDFORMATION
+    #         notification_arns: ["NotificationArn"],
+    #         path_id: "Id",
+    #         product_id: "Id", # required
+    #         provisioned_product_name: "ProvisionedProductName", # required
+    #         provisioning_artifact_id: "Id", # required
+    #         provisioning_parameters: [
+    #           {
+    #             key: "ParameterKey",
+    #             value: "ParameterValue",
+    #             use_previous_value: false,
+    #           },
+    #         ],
+    #         idempotency_token: "IdempotencyToken", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_name
+    #   The name of the plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_type
+    #   The plan type.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_arns
+    #   Passed to CloudFormation. The SNS topic ARNs to which to publish
+    #   stack-related events.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] path_id
+    #   The path identifier of the product. This value is optional if the
+    #   product has a default path, and required if the product has more
+    #   than one path. To list the paths for a product, use ListLaunchPaths.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_name
+    #   A user-friendly name for the provisioned product. This value must be
+    #   unique for the AWS account and cannot be updated after the product
+    #   is provisioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_parameters
+    #   Parameters specified by the administrator that are required for
+    #   provisioning the product.
+    #   @return [Array<Types::UpdateProvisioningParameter>]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisionedProductPlanInput AWS API Documentation
+    #
+    class CreateProvisionedProductPlanInput < Struct.new(
+      :accept_language,
+      :plan_name,
+      :plan_type,
+      :notification_arns,
+      :path_id,
+      :product_id,
+      :provisioned_product_name,
+      :provisioning_artifact_id,
+      :provisioning_parameters,
+      :idempotency_token,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] plan_name
+    #   The name of the plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_id
+    #   The plan identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provision_product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_product_name
+    #   The user-friendly name of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisionedProductPlanOutput AWS API Documentation
+    #
+    class CreateProvisionedProductPlanOutput < Struct.new(
+      :plan_name,
+      :plan_id,
+      :provision_product_id,
+      :provisioned_product_name,
+      :provisioning_artifact_id)
       include Aws::Structure
     end
 
@@ -954,6 +1104,48 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProductOutput AWS API Documentation
     #
     class DeleteProductOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteProvisionedProductPlanInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         plan_id: "Id", # required
+    #         ignore_errors: false,
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_id
+    #   The plan identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] ignore_errors
+    #   If set to true, AWS Service Catalog stops managing the specified
+    #   provisioned product even if it cannot delete the underlying
+    #   resources.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisionedProductPlanInput AWS API Documentation
+    #
+    class DeleteProvisionedProductPlanInput < Struct.new(
+      :accept_language,
+      :plan_id,
+      :ignore_errors)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisionedProductPlanOutput AWS API Documentation
+    #
+    class DeleteProvisionedProductPlanOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteProvisioningArtifactInput
     #   data as a hash:
@@ -1333,10 +1525,82 @@ module Aws::ServiceCatalog
     #   Information about the provisioned product.
     #   @return [Types::ProvisionedProductDetail]
     #
+    # @!attribute [rw] cloud_watch_dashboards
+    #   Any CloudWatch dashboards that were created when provisioning the
+    #   product.
+    #   @return [Array<Types::CloudWatchDashboard>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductOutput AWS API Documentation
     #
     class DescribeProvisionedProductOutput < Struct.new(
-      :provisioned_product_detail)
+      :provisioned_product_detail,
+      :cloud_watch_dashboards)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeProvisionedProductPlanInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         plan_id: "Id", # required
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_id
+    #   The plan identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductPlanInput AWS API Documentation
+    #
+    class DescribeProvisionedProductPlanInput < Struct.new(
+      :accept_language,
+      :plan_id,
+      :page_size,
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioned_product_plan_details
+    #   Information about the plan.
+    #   @return [Types::ProvisionedProductPlanDetails]
+    #
+    # @!attribute [rw] resource_changes
+    #   Information about the resources changes that will occur when the
+    #   plan is executed.
+    #   @return [Array<Types::ResourceChange>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductPlanOutput AWS API Documentation
+    #
+    class DescribeProvisionedProductPlanOutput < Struct.new(
+      :provisioned_product_plan_details,
+      :resource_changes,
+      :next_page_token)
       include Aws::Structure
     end
 
@@ -1679,6 +1943,58 @@ module Aws::ServiceCatalog
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateTagOptionFromResourceOutput AWS API Documentation
     #
     class DisassociateTagOptionFromResourceOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass ExecuteProvisionedProductPlanInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         plan_id: "Id", # required
+    #         idempotency_token: "IdempotencyToken", # required
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_id
+    #   The plan identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductPlanInput AWS API Documentation
+    #
+    class ExecuteProvisionedProductPlanInput < Struct.new(
+      :accept_language,
+      :plan_id,
+      :idempotency_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] record_detail
+    #   Information about the result of provisioning the product.
+    #   @return [Types::RecordDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductPlanOutput AWS API Documentation
+    #
+    class ExecuteProvisionedProductPlanOutput < Struct.new(
+      :record_detail)
+      include Aws::Structure
+    end
 
     # Summary information about a product path for a user.
     #
@@ -2109,6 +2425,75 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListProvisionedProductPlansInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         provision_product_id: "Id",
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #         access_level_filter: {
+    #           key: "Account", # accepts Account, Role, User
+    #           value: "AccessLevelFilterValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] provision_product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_level_filter
+    #   The access level to use to obtain results. The default is `User`.
+    #   @return [Types::AccessLevelFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisionedProductPlansInput AWS API Documentation
+    #
+    class ListProvisionedProductPlansInput < Struct.new(
+      :accept_language,
+      :provision_product_id,
+      :page_size,
+      :page_token,
+      :access_level_filter)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioned_product_plans
+    #   Information about the plans.
+    #   @return [Array<Types::ProvisionedProductPlanSummary>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisionedProductPlansOutput AWS API Documentation
+    #
+    class ListProvisionedProductPlansOutput < Struct.new(
+      :provisioned_product_plans,
+      :next_page_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListProvisioningArtifactsInput
     #   data as a hash:
     #
@@ -2435,7 +2820,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The UTC timestamp of the creation time.
+    #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
     # @!attribute [rw] provider_name
@@ -2513,7 +2898,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The UTC timestamp of the creation time.
+    #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewDetail AWS API Documentation
@@ -2658,7 +3043,7 @@ module Aws::ServiceCatalog
     #   @return [Array<Types::ProvisioningParameter>]
     #
     # @!attribute [rw] tags
-    #   The tags to use as provisioning options.
+    #   One or more tags.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] notification_arns
@@ -2690,7 +3075,7 @@ module Aws::ServiceCatalog
     end
 
     # @!attribute [rw] record_detail
-    #   Information about the result of ProvisionProduct.
+    #   Information about the result of provisioning the product.
     #   @return [Types::RecordDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProductOutput AWS API Documentation
@@ -2744,7 +3129,112 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The UTC timestamp of the creation time.
+    #   The UTC time stamp of the creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique identifier that you provide to ensure idempotency. If
+    #   multiple requests differ only by the idempotency token, the same
+    #   response is returned for each repeated request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_record_id
+    #   The record identifier of the last request performed on this
+    #   provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] physical_id
+    #   The assigned identifier for the resource, such as an EC2 instance ID
+    #   or an S3 bucket name.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_arn
+    #   The Amazon Resource Name (ARN) of the IAM user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_arn_session
+    #   The ARN of the IAM user in the session. This ARN might contain a
+    #   session ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductAttribute AWS API Documentation
+    #
+    class ProvisionedProductAttribute < Struct.new(
+      :name,
+      :arn,
+      :type,
+      :id,
+      :status,
+      :status_message,
+      :created_time,
+      :idempotency_token,
+      :last_record_id,
+      :tags,
+      :physical_id,
+      :product_id,
+      :provisioning_artifact_id,
+      :user_arn,
+      :user_arn_session)
+      include Aws::Structure
+    end
+
+    # Information about a provisioned product.
+    #
+    # @!attribute [rw] name
+    #   The user-friendly name of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of provisioned product. The supported value is `CFN_STACK`.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the provisioned product.
+    #
+    #   * `AVAILABLE` - Stable state, ready to perform any operation. The
+    #     most recent operation succeeded and completed.
+    #
+    #   * `UNDER_CHANGE` - Transitive state, operations performed might not
+    #     have valid results. Wait for an `AVAILABLE` status before
+    #     performing operations.
+    #
+    #   * `TAINTED` - Stable state, ready to perform any operation. The
+    #     stack has completed the requested operation but is not exactly
+    #     what was requested. For example, a request to update to a new
+    #     version failed and the stack rolled back to the current version.
+    #
+    #   * `ERROR` - An unexpected error occurred, the provisioned product
+    #     exists but the stack is not running. For example, CloudFormation
+    #     received a parameter value that was not valid and could not launch
+    #     the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The current status message of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
     # @!attribute [rw] idempotency_token
@@ -2773,6 +3263,131 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # Information about a plan.
+    #
+    # @!attribute [rw] created_time
+    #   The UTC time stamp of the creation time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] path_id
+    #   The path identifier of the product. This value is optional if the
+    #   product has a default path, and required if the product has more
+    #   than one path. To list the paths for a product, use ListLaunchPaths.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_name
+    #   The name of the plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_id
+    #   The plan identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provision_product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provision_product_name
+    #   The user-friendly name of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_type
+    #   The plan type.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_time
+    #   The time when the plan was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] notification_arns
+    #   Passed to CloudFormation. The SNS topic ARNs to which to publish
+    #   stack-related events.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] provisioning_parameters
+    #   Parameters specified by the administrator that are required for
+    #   provisioning the product.
+    #   @return [Array<Types::UpdateProvisioningParameter>]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] status_message
+    #   The status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductPlanDetails AWS API Documentation
+    #
+    class ProvisionedProductPlanDetails < Struct.new(
+      :created_time,
+      :path_id,
+      :product_id,
+      :plan_name,
+      :plan_id,
+      :provision_product_id,
+      :provision_product_name,
+      :plan_type,
+      :provisioning_artifact_id,
+      :status,
+      :updated_time,
+      :notification_arns,
+      :provisioning_parameters,
+      :tags,
+      :status_message)
+      include Aws::Structure
+    end
+
+    # Summary information about a plan.
+    #
+    # @!attribute [rw] plan_name
+    #   The name of the plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_id
+    #   The plan identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provision_product_id
+    #   The product identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] provision_product_name
+    #   The user-friendly name of the provisioned product.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_type
+    #   The plan type.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioning_artifact_id
+    #   The identifier of the provisioning artifact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductPlanSummary AWS API Documentation
+    #
+    class ProvisionedProductPlanSummary < Struct.new(
+      :plan_name,
+      :plan_id,
+      :provision_product_id,
+      :provision_product_name,
+      :plan_type,
+      :provisioning_artifact_id)
+      include Aws::Structure
+    end
+
     # Information about a provisioning artifact. A provisioning artifact is
     # also known as a product version.
     #
@@ -2789,7 +3404,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The UTC timestamp of the creation time.
+    #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifact AWS API Documentation
@@ -2828,7 +3443,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The UTC timestamp of the creation time.
+    #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
     # @!attribute [rw] active
@@ -2956,7 +3571,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The UTC timestamp of the creation time.
+    #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
     # @!attribute [rw] provisioning_artifact_metadata
@@ -3030,7 +3645,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] created_time
-    #   The UTC timestamp of the creation time.
+    #   The UTC time stamp of the creation time.
     #   @return [Time]
     #
     # @!attribute [rw] updated_time
@@ -3042,7 +3657,7 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] record_type
-    #   The record type for this record.
+    #   The record type.
     #
     #   * `PROVISION_PRODUCT`
     #
@@ -3068,11 +3683,11 @@ module Aws::ServiceCatalog
     #   @return [String]
     #
     # @!attribute [rw] record_errors
-    #   The errors that occurred while processing the request.
+    #   The errors that occurred.
     #   @return [Array<Types::RecordError>]
     #
     # @!attribute [rw] record_tags
-    #   The tags associated with this record.
+    #   One or more tags.
     #   @return [Array<Types::RecordTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordDetail AWS API Documentation
@@ -3137,7 +3752,7 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # A tag associated with the record, stored as a key-value pair.
+    # Information about a tag, which is a key-value pair.
     #
     # @!attribute [rw] key
     #   The key for this tag.
@@ -3189,6 +3804,77 @@ module Aws::ServiceCatalog
     #
     class RejectPortfolioShareOutput < Aws::EmptyStructure; end
 
+    # Information about a resource change that will occur when a plan is
+    # executed.
+    #
+    # @!attribute [rw] action
+    #   The change action.
+    #   @return [String]
+    #
+    # @!attribute [rw] logical_resource_id
+    #   The ID of the resource, as defined in the CloudFormation template.
+    #   @return [String]
+    #
+    # @!attribute [rw] physical_resource_id
+    #   The ID of the resource, if it was already created.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] replacement
+    #   If the change type is `Modify`, indicates whether the existing
+    #   resource is deleted and replaced with a new one.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The change scope.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] details
+    #   Information about the resource changes.
+    #   @return [Array<Types::ResourceChangeDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceChange AWS API Documentation
+    #
+    class ResourceChange < Struct.new(
+      :action,
+      :logical_resource_id,
+      :physical_resource_id,
+      :resource_type,
+      :replacement,
+      :scope,
+      :details)
+      include Aws::Structure
+    end
+
+    # Information about a change to a resource attribute.
+    #
+    # @!attribute [rw] target
+    #   Information about the resource attribute that will be modified.
+    #   @return [Types::ResourceTargetDefinition]
+    #
+    # @!attribute [rw] evaluation
+    #   For static evaluations, the value the resource attribute will change
+    #   and the new value is known. For dynamic evaluations, the value might
+    #   change, and any new value will be determined when the plan is
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] causing_entity
+    #   The ID of the entity that caused the change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceChangeDetail AWS API Documentation
+    #
+    class ResourceChangeDetail < Struct.new(
+      :target,
+      :evaluation,
+      :causing_entity)
+      include Aws::Structure
+    end
+
     # Information about a resource.
     #
     # @!attribute [rw] id
@@ -3219,6 +3905,31 @@ module Aws::ServiceCatalog
       :name,
       :description,
       :created_time)
+      include Aws::Structure
+    end
+
+    # Information about a change to a resource attribute.
+    #
+    # @!attribute [rw] attribute
+    #   The attribute that will change.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   If the attribute is `Properties`, the value is the name of the
+    #   property. Otherwise, the value is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] requires_recreation
+    #   If the attribute is `Properties`, indicates whether a change to this
+    #   property causes the resource to be recreated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceTargetDefinition AWS API Documentation
+    #
+    class ResourceTargetDefinition < Struct.new(
+      :attribute,
+      :name,
+      :requires_recreation)
       include Aws::Structure
     end
 
@@ -3456,9 +4167,106 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
-    # Information about a tag. A tag is a key-value pair. Tags are entirely
-    # discretionary and are propagated to the resources created when
-    # provisioning a product.
+    # @note When making an API call, you may pass SearchProvisionedProductsInput
+    #   data as a hash:
+    #
+    #       {
+    #         accept_language: "AcceptLanguage",
+    #         access_level_filter: {
+    #           key: "Account", # accepts Account, Role, User
+    #           value: "AccessLevelFilterValue",
+    #         },
+    #         filters: {
+    #           "SearchQuery" => ["ProvisionedProductViewFilterValue"],
+    #         },
+    #         sort_by: "SortField",
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         page_size: 1,
+    #         page_token: "PageToken",
+    #       }
+    #
+    # @!attribute [rw] accept_language
+    #   The language code.
+    #
+    #   * `en` - English (default)
+    #
+    #   * `jp` - Japanese
+    #
+    #   * `zh` - Chinese
+    #   @return [String]
+    #
+    # @!attribute [rw] access_level_filter
+    #   The access level to use to obtain results. The default is `User`.
+    #   @return [Types::AccessLevelFilter]
+    #
+    # @!attribute [rw] filters
+    #   The search filters.
+    #
+    #   When the key is `SearchQuery`, the searchable fields are `arn`,
+    #   `createdTime`, `id`, `lastRecordId`, `idempotencyToken`, `name`,
+    #   `physicalId`, `productId`, `provisioningArtifact`, `type`, `status`,
+    #   `tags`, `userArn`, and `userArnSession`.
+    #
+    #   Example: `"SearchQuery":["status:AVAILABLE"]`
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] sort_by
+    #   The sort field. If no value is specified, the results are not
+    #   sorted. The valid values are `arn`, `id`, `name`, and
+    #   `lastRecordId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order. If no value is specified, the results are not
+    #   sorted.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_token
+    #   The page token for the next set of results. To retrieve the first
+    #   set of results, use null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProvisionedProductsInput AWS API Documentation
+    #
+    class SearchProvisionedProductsInput < Struct.new(
+      :accept_language,
+      :access_level_filter,
+      :filters,
+      :sort_by,
+      :sort_order,
+      :page_size,
+      :page_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] provisioned_products
+    #   Information about the provisioned products.
+    #   @return [Array<Types::ProvisionedProductAttribute>]
+    #
+    # @!attribute [rw] total_results_count
+    #   The number of provisioned products found.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_page_token
+    #   The page token to use to retrieve the next set of results. If there
+    #   are no additional results, this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProvisionedProductsOutput AWS API Documentation
+    #
+    class SearchProvisionedProductsOutput < Struct.new(
+      :provisioned_products,
+      :total_results_count,
+      :next_page_token)
+      include Aws::Structure
+    end
+
+    # Information about a tag. A tag is a key-value pair. Tags are
+    # propagated to the resources created when provisioning a product.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -3902,7 +4710,7 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] update_token
     #   The idempotency token that uniquely identifies the provisioning
-    #   update rquest.
+    #   update request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.

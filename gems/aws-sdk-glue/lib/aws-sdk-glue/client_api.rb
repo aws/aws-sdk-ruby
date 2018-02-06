@@ -101,6 +101,7 @@ module Aws::Glue
     CreateGrokClassifierRequest = Shapes::StructureShape.new(name: 'CreateGrokClassifierRequest')
     CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
     CreateJobResponse = Shapes::StructureShape.new(name: 'CreateJobResponse')
+    CreateJsonClassifierRequest = Shapes::StructureShape.new(name: 'CreateJsonClassifierRequest')
     CreatePartitionRequest = Shapes::StructureShape.new(name: 'CreatePartitionRequest')
     CreatePartitionResponse = Shapes::StructureShape.new(name: 'CreatePartitionResponse')
     CreateScriptRequest = Shapes::StructureShape.new(name: 'CreateScriptRequest')
@@ -241,6 +242,8 @@ module Aws::Glue
     JobRunList = Shapes::ListShape.new(name: 'JobRunList')
     JobRunState = Shapes::StringShape.new(name: 'JobRunState')
     JobUpdate = Shapes::StructureShape.new(name: 'JobUpdate')
+    JsonClassifier = Shapes::StructureShape.new(name: 'JsonClassifier')
+    JsonPath = Shapes::StringShape.new(name: 'JsonPath')
     JsonValue = Shapes::StringShape.new(name: 'JsonValue')
     KeyString = Shapes::StringShape.new(name: 'KeyString')
     Language = Shapes::StringShape.new(name: 'Language')
@@ -366,6 +369,7 @@ module Aws::Glue
     UpdateGrokClassifierRequest = Shapes::StructureShape.new(name: 'UpdateGrokClassifierRequest')
     UpdateJobRequest = Shapes::StructureShape.new(name: 'UpdateJobRequest')
     UpdateJobResponse = Shapes::StructureShape.new(name: 'UpdateJobResponse')
+    UpdateJsonClassifierRequest = Shapes::StructureShape.new(name: 'UpdateJsonClassifierRequest')
     UpdatePartitionRequest = Shapes::StructureShape.new(name: 'UpdatePartitionRequest')
     UpdatePartitionResponse = Shapes::StructureShape.new(name: 'UpdatePartitionResponse')
     UpdateTableRequest = Shapes::StructureShape.new(name: 'UpdateTableRequest')
@@ -493,6 +497,7 @@ module Aws::Glue
 
     Classifier.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: GrokClassifier, location_name: "GrokClassifier"))
     Classifier.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: XMLClassifier, location_name: "XMLClassifier"))
+    Classifier.add_member(:json_classifier, Shapes::ShapeRef.new(shape: JsonClassifier, location_name: "JsonClassifier"))
     Classifier.struct_class = Types::Classifier
 
     ClassifierList.member = Shapes::ShapeRef.new(shape: Classifier)
@@ -600,6 +605,7 @@ module Aws::Glue
 
     CreateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: CreateGrokClassifierRequest, location_name: "GrokClassifier"))
     CreateClassifierRequest.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: CreateXMLClassifierRequest, location_name: "XMLClassifier"))
+    CreateClassifierRequest.add_member(:json_classifier, Shapes::ShapeRef.new(shape: CreateJsonClassifierRequest, location_name: "JsonClassifier"))
     CreateClassifierRequest.struct_class = Types::CreateClassifierRequest
 
     CreateClassifierResponse.struct_class = Types::CreateClassifierResponse
@@ -676,6 +682,10 @@ module Aws::Glue
 
     CreateJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
     CreateJobResponse.struct_class = Types::CreateJobResponse
+
+    CreateJsonClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateJsonClassifierRequest.add_member(:json_path, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "JsonPath"))
+    CreateJsonClassifierRequest.struct_class = Types::CreateJsonClassifierRequest
 
     CreatePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreatePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -1177,6 +1187,13 @@ module Aws::Glue
     JobUpdate.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
     JobUpdate.struct_class = Types::JobUpdate
 
+    JsonClassifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    JsonClassifier.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    JsonClassifier.add_member(:last_updated, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdated"))
+    JsonClassifier.add_member(:version, Shapes::ShapeRef.new(shape: VersionId, location_name: "Version"))
+    JsonClassifier.add_member(:json_path, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "JsonPath"))
+    JsonClassifier.struct_class = Types::JsonClassifier
+
     LastCrawlInfo.add_member(:status, Shapes::ShapeRef.new(shape: LastCrawlStatus, location_name: "Status"))
     LastCrawlInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "ErrorMessage"))
     LastCrawlInfo.add_member(:log_group, Shapes::ShapeRef.new(shape: LogGroup, location_name: "LogGroup"))
@@ -1433,6 +1450,7 @@ module Aws::Glue
 
     UpdateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: UpdateGrokClassifierRequest, location_name: "GrokClassifier"))
     UpdateClassifierRequest.add_member(:xml_classifier, Shapes::ShapeRef.new(shape: UpdateXMLClassifierRequest, location_name: "XMLClassifier"))
+    UpdateClassifierRequest.add_member(:json_classifier, Shapes::ShapeRef.new(shape: UpdateJsonClassifierRequest, location_name: "JsonClassifier"))
     UpdateClassifierRequest.struct_class = Types::UpdateClassifierRequest
 
     UpdateClassifierResponse.struct_class = Types::UpdateClassifierResponse
@@ -1491,6 +1509,10 @@ module Aws::Glue
 
     UpdateJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
     UpdateJobResponse.struct_class = Types::UpdateJobResponse
+
+    UpdateJsonClassifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    UpdateJsonClassifierRequest.add_member(:json_path, Shapes::ShapeRef.new(shape: JsonPath, location_name: "JsonPath"))
+    UpdateJsonClassifierRequest.struct_class = Types::UpdateJsonClassifierRequest
 
     UpdatePartitionRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdatePartitionRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))

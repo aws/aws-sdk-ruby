@@ -103,6 +103,7 @@ module Aws::ServiceDiscovery
     ResourceInUse = Shapes::StructureShape.new(name: 'ResourceInUse')
     ResourceLimitExceeded = Shapes::StructureShape.new(name: 'ResourceLimitExceeded')
     ResourcePath = Shapes::StringShape.new(name: 'ResourcePath')
+    RoutingPolicy = Shapes::StringShape.new(name: 'RoutingPolicy')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceAlreadyExists = Shapes::StructureShape.new(name: 'ServiceAlreadyExists')
     ServiceChange = Shapes::StructureShape.new(name: 'ServiceChange')
@@ -166,6 +167,7 @@ module Aws::ServiceDiscovery
     DeregisterInstanceResponse.struct_class = Types::DeregisterInstanceResponse
 
     DnsConfig.add_member(:namespace_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "NamespaceId"))
+    DnsConfig.add_member(:routing_policy, Shapes::ShapeRef.new(shape: RoutingPolicy, location_name: "RoutingPolicy"))
     DnsConfig.add_member(:dns_records, Shapes::ShapeRef.new(shape: DnsRecordList, required: true, location_name: "DnsRecords"))
     DnsConfig.struct_class = Types::DnsConfig
 
@@ -218,7 +220,7 @@ module Aws::ServiceDiscovery
     GetServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "Service"))
     GetServiceResponse.struct_class = Types::GetServiceResponse
 
-    HealthCheckConfig.add_member(:type, Shapes::ShapeRef.new(shape: HealthCheckType, location_name: "Type"))
+    HealthCheckConfig.add_member(:type, Shapes::ShapeRef.new(shape: HealthCheckType, required: true, location_name: "Type"))
     HealthCheckConfig.add_member(:resource_path, Shapes::ShapeRef.new(shape: ResourcePath, location_name: "ResourcePath"))
     HealthCheckConfig.add_member(:failure_threshold, Shapes::ShapeRef.new(shape: FailureThreshold, location_name: "FailureThreshold"))
     HealthCheckConfig.struct_class = Types::HealthCheckConfig
@@ -574,6 +576,7 @@ module Aws::ServiceDiscovery
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListServicesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListServicesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
