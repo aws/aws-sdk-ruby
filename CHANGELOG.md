@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.127 (2018-02-06)
+------------------
+
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
 
 * Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
