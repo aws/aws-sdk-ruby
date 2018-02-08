@@ -240,8 +240,8 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA,
-    #   REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
+    #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
+    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -1503,6 +1503,70 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeReplicationInstanceTaskLogsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_instance_arn: "String", # required
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstanceTaskLogsMessage AWS API Documentation
+    #
+    class DescribeReplicationInstanceTaskLogsMessage < Struct.new(
+      :replication_instance_arn,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_instance_task_logs
+    #   An array of replication task log metadata. Each member of the array
+    #   contains the replication task name, ARN, and task log size (in
+    #   bytes).
+    #   @return [Array<Types::ReplicationInstanceTaskLog>]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstanceTaskLogsResponse AWS API Documentation
+    #
+    class DescribeReplicationInstanceTaskLogsResponse < Struct.new(
+      :replication_instance_arn,
+      :replication_instance_task_logs,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeReplicationInstancesMessage
     #   data as a hash:
     #
@@ -1927,8 +1991,8 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_name
     #   The database engine name. Valid values, depending on the
-    #   EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA,
-    #   REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
+    #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
+    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -2317,8 +2381,8 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA,
-    #   REDSHIFT, S3, DYNAMODB, MONGODB, SYBASE, and SQLSERVER.
+    #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
+    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -2886,6 +2950,43 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RebootReplicationInstanceMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_instance_arn: "String", # required
+    #         force_failover: false,
+    #       }
+    #
+    # @!attribute [rw] replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] force_failover
+    #   If this parameter is `true`, the reboot is conducted through a
+    #   Multi-AZ failover. (If the instance isn't configured for Multi-AZ,
+    #   then you can't specify `true`.)
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstanceMessage AWS API Documentation
+    #
+    class RebootReplicationInstanceMessage < Struct.new(
+      :replication_instance_arn,
+      :force_failover)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_instance
+    #   The replication instance that is being rebooted.
+    #   @return [Types::ReplicationInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstanceResponse AWS API Documentation
+    #
+    class RebootReplicationInstanceResponse < Struct.new(
+      :replication_instance)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RefreshSchemasMessage
     #   data as a hash:
     #
@@ -3159,6 +3260,29 @@ module Aws::DatabaseMigrationService
       :replication_instance_private_ip_addresses,
       :publicly_accessible,
       :secondary_availability_zone)
+      include Aws::Structure
+    end
+
+    # Contains metadata for a replication instance task log.
+    #
+    # @!attribute [rw] replication_task_name
+    #   The name of the replication task.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_arn
+    #   The Amazon Resource Name (ARN) of the replication task.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_instance_task_log_size
+    #   The size, in bytes, of the replication task log.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstanceTaskLog AWS API Documentation
+    #
+    class ReplicationInstanceTaskLog < Struct.new(
+      :replication_task_name,
+      :replication_task_arn,
+      :replication_instance_task_log_size)
       include Aws::Structure
     end
 
@@ -3578,8 +3702,8 @@ module Aws::DatabaseMigrationService
 
     # @!attribute [rw] engine_name
     #   The database engine name. Valid values, depending on the
-    #   EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA,
-    #   REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
+    #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
+    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
     #   @return [String]
     #
     # @!attribute [rw] supports_cdc

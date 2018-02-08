@@ -15,7 +15,7 @@ module Aws::GameLift
     #
     #       {
     #         ticket_id: "MatchmakingIdStringModel", # required
-    #         player_ids: ["PlayerIdStringModel"], # required
+    #         player_ids: ["NonZeroAndMaxString"], # required
     #         acceptance_type: "ACCEPT", # required, accepts ACCEPT, REJECT
     #       }
     #
@@ -111,7 +111,7 @@ module Aws::GameLift
       include Aws::Structure
     end
 
-    # Values for use in Player attribute type:value pairs. This object lets
+    # Values for use in Player attribute key:value pairs. This object lets
     # you specify an attribute value using any of the valid data types:
     # string, number, string array or data map. Each `AttributeValue` object
     # can use only one of the available properties.
@@ -144,7 +144,7 @@ module Aws::GameLift
     #   @return [Array<String>]
     #
     # @!attribute [rw] sdm
-    #   For a map of up to 10 type:value pairs. Maximum length for each
+    #   For a map of up to 10 data type:value pairs. Maximum length for each
     #   string value is 100 characters.
     #   @return [Hash<String,Float>]
     #
@@ -343,23 +343,23 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] storage_location
-    #   Amazon S3 location of the game build files to be uploaded. The S3
-    #   bucket must be owned by the same AWS account that you're using to
-    #   manage Amazon GameLift. It also must in the same region that you
-    #   want to create a new build in. Before calling `CreateBuild` with
-    #   this location, you must allow Amazon GameLift to access your Amazon
-    #   S3 bucket (see [Create a Build with Files in Amazon S3][1]).
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build
+    #   Information indicating where your game build files are stored. Use
+    #   this parameter only when creating a build with files stored in an
+    #   Amazon S3 bucket that you own. The storage location must specify an
+    #   Amazon S3 bucket name and key, as well as a role ARN that you set up
+    #   to allow Amazon GameLift to access your Amazon S3 bucket. The S3
+    #   bucket must be in the same region that you want to create a new
+    #   build in.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] operating_system
     #   Operating system that the game server binaries are built to run on.
     #   This value determines the type of fleet resources that you can use
     #   for this build. If your game build contains multiple executables,
-    #   they all must run on the same operating system.
+    #   they all must run on the same operating system. If an operating
+    #   system is not specified when creating a build, Amazon GameLift uses
+    #   the default value (WINDOWS\_2012). This value cannot be changed
+    #   later.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuildInput AWS API Documentation
@@ -380,11 +380,16 @@ module Aws::GameLift
     #   @return [Types::Build]
     #
     # @!attribute [rw] upload_credentials
-    #   This element is not currently in use.
+    #   This element is returned only when the operation is called without a
+    #   storage location. It contains credentials to use when you are
+    #   uploading a build file to an Amazon S3 bucket that is owned by
+    #   Amazon GameLift. Credentials have a limited life span. To refresh
+    #   these credentials, call RequestUploadCredentials.
     #   @return [Types::AwsCredentials]
     #
     # @!attribute [rw] storage_location
-    #   Amazon S3 location specified in the request.
+    #   Amazon S3 location for your game build file, including bucket name
+    #   and key.
     #   @return [Types::S3Location]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuildOutput AWS API Documentation
@@ -538,10 +543,11 @@ module Aws::GameLift
     #   @return [Types::ResourceCreationLimitPolicy]
     #
     # @!attribute [rw] metric_groups
-    #   Names of metric groups to add this fleet to. Use an existing metric
-    #   group name to add this fleet to the group. Or use a new name to
-    #   create a new metric group. A fleet can only be included in one
-    #   metric group at a time.
+    #   Name of a metric group to add this fleet to. A metric group tracks
+    #   metrics across all fleets in the group. Use an existing metric group
+    #   name to add this fleet to the group, or use a new name to create a
+    #   new metric group. A fleet can only be included in one metric group
+    #   at a time.
     #   @return [Array<String>]
     #
     # @!attribute [rw] peer_vpc_aws_account_id
@@ -635,10 +641,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session, formatted as
-    #   a set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a
-    #   request to start a new game session (see [Start a Game Session][1]).
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]).
     #
     #
     #
@@ -674,10 +680,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession
-    #   object, which is passed to the game server with a request to start a
-    #   new game session (see [Start a Game Session][1]).
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]).
     #
     #
     #
@@ -878,12 +884,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session, formatted as
-    #   a set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a
-    #   request to start a new game session (see [Start a Game Session][1]).
-    #   This information is added to the new GameSession object that is
-    #   created for a successful match.
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]). This information is added to the new
+    #   GameSession object that is created for a successful match.
     #
     #
     #
@@ -891,12 +896,11 @@ module Aws::GameLift
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession
-    #   object, which is passed to the game server with a request to start a
-    #   new game session (see [Start a Game Session][1]). This information
-    #   is added to the new GameSession object that is created for a
-    #   successful match.
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]). This information is added to the new
+    #   GameSession object that is created for a successful match.
     #
     #
     #
@@ -2163,8 +2167,8 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] ticket_ids
-    #   Unique identifier for a matchmaking ticket. To request all existing
-    #   tickets, leave this parameter empty.
+    #   Unique identifier for a matchmaking ticket. You can include up to 10
+    #   ID values.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeMatchmakingInput AWS API Documentation
@@ -3267,10 +3271,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session, formatted as
-    #   a set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a
-    #   request to start a new game session (see [Start a Game Session][1]).
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]). You can search for active game sessions
+    #   based on this custom data with SearchGameSessions.
     #
     #
     #
@@ -3298,14 +3303,29 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession
-    #   object, which is passed to the game server with a request to start a
-    #   new game session (see [Start a Game Session][1]).
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]).
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [String]
+    #
+    # @!attribute [rw] matchmaker_data
+    #   Information about the matchmaking process that was used to create
+    #   the game session. It is in JSON syntax, formated as a string. In
+    #   addition the matchmaking configuration used, it contains data on all
+    #   players assigned to the match, including player attributes and team
+    #   assignments. For more details on matchmaker data, see [Match
+    #   Data][1]. Matchmaker data is useful when requesting match backfills,
+    #   and is updated whenever new players are added during a successful
+    #   backfill (see StartMatchBackfill).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSession AWS API Documentation
@@ -3324,7 +3344,8 @@ module Aws::GameLift
       :port,
       :player_session_creation_policy,
       :creator_id,
-      :game_session_data)
+      :game_session_data,
+      :matchmaker_data)
       include Aws::Structure
     end
 
@@ -3435,10 +3456,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session, formatted as
-    #   a set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a
-    #   request to start a new game session (see [Start a Game Session][1]).
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]).
     #
     #
     #
@@ -3515,14 +3536,27 @@ module Aws::GameLift
     #   @return [Array<Types::PlacedPlayerSession>]
     #
     # @!attribute [rw] game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession
-    #   object, which is passed to the game server with a request to start a
-    #   new game session (see [Start a Game Session][1]).
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]).
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
+    #   @return [String]
+    #
+    # @!attribute [rw] matchmaker_data
+    #   Information on the matchmaking process for this game. Data is in
+    #   JSON syntax, formated as a string. It identifies the matchmaking
+    #   configuration used to create the match, and contains data on all
+    #   players assigned to the match, including player attributes and team
+    #   assignments. For more details on matchmaker data, see
+    #   [http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionPlacement AWS API Documentation
@@ -3543,7 +3577,8 @@ module Aws::GameLift
       :ip_address,
       :port,
       :placed_player_sessions,
-      :game_session_data)
+      :game_session_data,
+      :matchmaker_data)
       include Aws::Structure
     end
 
@@ -4206,12 +4241,11 @@ module Aws::GameLift
     #   @return [Time]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session, formatted as
-    #   a set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a
-    #   request to start a new game session (see [Start a Game Session][1]).
-    #   This information is added to the new GameSession object that is
-    #   created for a successful match.
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]). This information is added to the new
+    #   GameSession object that is created for a successful match.
     #
     #
     #
@@ -4219,12 +4253,11 @@ module Aws::GameLift
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession
-    #   object, which is passed to the game server with a request to start a
-    #   new game session (see [Start a Game Session][1]). This information
-    #   is added to the new GameSession object that is created for a
-    #   successful match.
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]). This information is added to the new
+    #   GameSession object that is created for a successful match.
     #
     #
     #
@@ -4258,7 +4291,7 @@ module Aws::GameLift
     #
     # A rule set may define the following elements for a match. For detailed
     # information and examples showing how to construct a rule set, see
-    # [Create Matchmaking Rules for Your Game][1].
+    # [Build a FlexMatch Rule Set][1].
     #
     # * Teams -- Required. A rule set must define one or multiple teams for
     #   the match and set minimum and maximum team sizes. For example, a
@@ -4273,13 +4306,15 @@ module Aws::GameLift
     #
     # * Rules -- Optional. Rules define how to evaluate potential players
     #   for a match based on player attributes. A rule might specify minimum
-    #   requirements for individual players--such as each player must meet a
-    #   certain skill level, or may describe an entire group--such as all
-    #   teams must be evenly matched or have at least one player in a
-    #   certain role.
+    #   requirements for individual players, teams, or entire matches. For
+    #   example, a rule might require each player to meet a certain skill
+    #   level, each team to have at least one player in a certain role, or
+    #   the match to have a minimum average skill level. or may describe an
+    #   entire group--such as all teams must be evenly matched or have at
+    #   least one player in a certain role.
     #
     # * Expansions -- Optional. Expansions allow you to relax the rules
-    #   after a period of time if no acceptable matches are found. This
+    #   after a period of time when no acceptable matches are found. This
     #   feature lets you balance getting players into games in a reasonable
     #   amount of time instead of making them wait indefinitely for the best
     #   possible match. For example, you might use an expansion to increase
@@ -4287,7 +4322,7 @@ module Aws::GameLift
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-rules.html
+    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html
     #
     # @!attribute [rw] rule_set_name
     #   Unique identifier for a matchmaking rule set
@@ -4353,15 +4388,19 @@ module Aws::GameLift
     #
     #   * **FAILED** -- The matchmaking request was not completed. Tickets
     #     with players who fail to accept a proposed match are placed in
-    #     `FAILED` status; new matchmaking requests can be submitted for
-    #     these players.
+    #     `FAILED` status.
     #
     #   * **CANCELLED** -- The matchmaking request was canceled with a call
     #     to StopMatchmaking.
     #
-    #   * **TIMED\_OUT** -- The matchmaking request was not completed within
-    #     the duration specified in the matchmaking configuration.
-    #     Matchmaking requests that time out can be resubmitted.
+    #   * **TIMED\_OUT** -- The matchmaking request was not successful
+    #     within the duration specified in the matchmaking configuration.
+    #
+    #   <note markdown="1"> Matchmaking requests that fail to successfully complete (statuses
+    #   FAILED, CANCELLED, TIMED\_OUT) can be resubmitted as new requests
+    #   with new ticket IDs.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -4470,7 +4509,7 @@ module Aws::GameLift
     #   data as a hash:
     #
     #       {
-    #         player_id: "PlayerIdStringModel",
+    #         player_id: "NonZeroAndMaxString",
     #         player_attributes: {
     #           "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #         },
@@ -4485,9 +4524,9 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] player_attributes
-    #   Collection of name:value pairs containing player information for use
-    #   in matchmaking. Player attribute names need to match
-    #   *playerAttributes* names in the rule set being used. Example:
+    #   Collection of key:value pairs containing player information for use
+    #   in matchmaking. Player attribute keys must match the
+    #   *playerAttributes* used in a matchmaking rule set. Example:
     #   `"PlayerAttributes": \{"skill": \{"N": "23"\}, "gameMode": \{"S":
     #   "deathmatch"\}\}`.
     #   @return [Hash<String,Types::AttributeValue>]
@@ -5371,20 +5410,21 @@ module Aws::GameLift
     #   condition consists of the following:
     #
     #   * **Operand** -- Name of a game session attribute. Valid values are
-    #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
-    #     `playerSessionCount`, `maximumSessions`,
+    #     `gameSessionName`, `gameSessionId`, `gameSessionProperties`,
+    #     `maximumSessions`, `creationTimeMillis`, `playerSessionCount`,
     #     `hasAvailablePlayerSessions`.
     #
     #   * **Comparator** -- Valid comparators are: `=`, `<>`, `<`, `>`,
     #     `<=`, `>=`.
     #
-    #   * **Value** -- Value to be searched for. Values can be numbers,
-    #     boolean values (true/false) or strings. String values are case
-    #     sensitive, enclosed in single quotes. Special characters must be
-    #     escaped. Boolean and string values can only be used with the
-    #     comparators `=` and `<>`. For example, the following filter
-    #     expression searches on `gameSessionName`\: "`FilterExpression":
-    #     "gameSessionName = 'Matt\'s Awesome Game 1'"`.
+    #   * **Value** -- Value to be searched for. Values may be numbers,
+    #     boolean values (true/false) or strings depending on the operand.
+    #     String values are case sensitive and must be enclosed in single
+    #     quotes. Special characters must be escaped. Boolean and string
+    #     values can only be used with the comparators `=` and `<>`. For
+    #     example, the following filter expression searches on
+    #     `gameSessionName`\: "`FilterExpression": "gameSessionName =
+    #     'Matt\'s Awesome Game 1'"`.
     #
     #   To chain multiple conditions in a single expression, use the logical
     #   keywords `AND`, `OR`, and `NOT` and parentheses as needed. For
@@ -5414,8 +5454,8 @@ module Aws::GameLift
     #   A sort expression consists of the following elements:
     #
     #   * **Operand** -- Name of a game session attribute. Valid values are
-    #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
-    #     `playerSessionCount`, `maximumSessions`,
+    #     `gameSessionName`, `gameSessionId`, `gameSessionProperties`,
+    #     `maximumSessions`, `creationTimeMillis`, `playerSessionCount`,
     #     `hasAvailablePlayerSessions`.
     #
     #   * **Order** -- Valid sort orders are `ASC` (ascending) and `DESC`
@@ -5563,10 +5603,10 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session, formatted as
-    #   a set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a
-    #   request to start a new game session (see [Start a Game Session][1]).
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]).
     #
     #
     #
@@ -5595,10 +5635,10 @@ module Aws::GameLift
     #   @return [Array<Types::DesiredPlayerSession>]
     #
     # @!attribute [rw] game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession
-    #   object, which is passed to the game server with a request to start a
-    #   new game session (see [Start a Game Session][1]).
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]).
     #
     #
     #
@@ -5636,15 +5676,16 @@ module Aws::GameLift
 
     # Represents the input for a request action.
     #
-    # @note When making an API call, you may pass StartMatchmakingInput
+    # @note When making an API call, you may pass StartMatchBackfillInput
     #   data as a hash:
     #
     #       {
     #         ticket_id: "MatchmakingIdStringModel",
     #         configuration_name: "MatchmakingIdStringModel", # required
+    #         game_session_arn: "ArnStringModel", # required
     #         players: [ # required
     #           {
-    #             player_id: "PlayerIdStringModel",
+    #             player_id: "NonZeroAndMaxString",
     #             player_attributes: {
     #               "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #             },
@@ -5657,8 +5698,105 @@ module Aws::GameLift
     #       }
     #
     # @!attribute [rw] ticket_id
-    #   Unique identifier for a matchmaking ticket. Use this identifier to
-    #   track the matchmaking ticket status and retrieve match results.
+    #   Unique identifier for a matchmaking ticket. If no ticket ID is
+    #   specified here, Amazon GameLift will generate one in the form of a
+    #   UUID. Use this identifier to track the match backfill ticket status
+    #   and retrieve match results.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_name
+    #   Name of the matchmaker to use for this request. The name of the
+    #   matchmaker that was used with the original game session is listed in
+    #   the GameSession object, `MatchmakerData` property. This property
+    #   contains a matchmaking configuration ARN value, which includes the
+    #   matchmaker name. (In the ARN value
+    #   "arn:aws:gamelift:us-west-2:111122223333:matchmakingconfiguration/MM-4v4",
+    #   the matchmaking configuration name is "MM-4v4".) Use only the name
+    #   for this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] game_session_arn
+    #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
+    #   and uniquely identifies it.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   @return [String]
+    #
+    # @!attribute [rw] players
+    #   Match information on all players that are currently assigned to the
+    #   game session. This information is used by the matchmaker to find new
+    #   players and add them to the existing game.
+    #
+    #   * PlayerID, PlayerAttributes, Team -- This information is maintained
+    #     in the GameSession object, `MatchmakerData` property, for all
+    #     players who are currently assigned to the game session. The
+    #     matchmaker data is in JSON syntax, formatted as a string. For more
+    #     details, see [ Match Data][1].
+    #
+    #   * LatencyInMs -- If the matchmaker uses player latency, include a
+    #     latency value, in milliseconds, for the region that the game
+    #     session is currently in. Do not include latency values for any
+    #     other region.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
+    #   @return [Array<Types::Player>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchBackfillInput AWS API Documentation
+    #
+    class StartMatchBackfillInput < Struct.new(
+      :ticket_id,
+      :configuration_name,
+      :game_session_arn,
+      :players)
+      include Aws::Structure
+    end
+
+    # Represents the returned data in response to a request action.
+    #
+    # @!attribute [rw] matchmaking_ticket
+    #   Ticket representing the backfill matchmaking request. This object
+    #   includes the information in the request, ticket status, and match
+    #   results as generated during the matchmaking process.
+    #   @return [Types::MatchmakingTicket]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchBackfillOutput AWS API Documentation
+    #
+    class StartMatchBackfillOutput < Struct.new(
+      :matchmaking_ticket)
+      include Aws::Structure
+    end
+
+    # Represents the input for a request action.
+    #
+    # @note When making an API call, you may pass StartMatchmakingInput
+    #   data as a hash:
+    #
+    #       {
+    #         ticket_id: "MatchmakingIdStringModel",
+    #         configuration_name: "MatchmakingIdStringModel", # required
+    #         players: [ # required
+    #           {
+    #             player_id: "NonZeroAndMaxString",
+    #             player_attributes: {
+    #               "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #             },
+    #             team: "NonZeroAndMaxString",
+    #             latency_in_ms: {
+    #               "NonEmptyString" => 1,
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] ticket_id
+    #   Unique identifier for a matchmaking ticket. If no ticket ID is
+    #   specified here, Amazon GameLift will generate one in the form of a
+    #   UUID. Use this identifier to track the matchmaking ticket status and
+    #   retrieve match results.
     #   @return [String]
     #
     # @!attribute [rw] configuration_name
@@ -6289,12 +6427,11 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_properties
-    #   Set of developer-defined properties for a game session, formatted as
-    #   a set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a
-    #   request to start a new game session (see [Start a Game Session][1]).
-    #   This information is added to the new GameSession object that is
-    #   created for a successful match.
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]). This information is added to the new
+    #   GameSession object that is created for a successful match.
     #
     #
     #
@@ -6302,12 +6439,11 @@ module Aws::GameLift
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession
-    #   object, which is passed to the game server with a request to start a
-    #   new game session (see [Start a Game Session][1]). This information
-    #   is added to the new GameSession object that is created for a
-    #   successful match.
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]). This information is added to the new
+    #   GameSession object that is created for a successful match.
     #
     #
     #
@@ -6565,7 +6701,8 @@ module Aws::GameLift
 
     # Represents status information for a VPC peering connection. Status is
     # associated with a VpcPeeringConnection object. Status codes and
-    # messages are provided from EC2 ([).][1] Connection status information
+    # messages are provided from EC2 (see
+    # [VpcPeeringConnectionStateReason][1]). Connection status information
     # is also communicated as a fleet Event.
     #
     #

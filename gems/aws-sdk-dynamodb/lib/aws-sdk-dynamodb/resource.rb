@@ -288,6 +288,9 @@ module Aws::DynamoDB
     #       stream_enabled: false,
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
+    #     sse_specification: {
+    #       enabled: false, # required
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [required, Array<Types::AttributeDefinition>] :attribute_definitions
@@ -451,6 +454,8 @@ module Aws::DynamoDB
     #
     #     * `NEW_AND_OLD_IMAGES` - Both the new and the old item images of the
     #       item are written to the stream.
+    # @option options [Types::SSESpecification] :sse_specification
+    #   Represents the settings used to enable server-side encryption.
     # @return [Table]
     def create_table(options = {})
       resp = @client.create_table(options)

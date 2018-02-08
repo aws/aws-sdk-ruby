@@ -337,6 +337,10 @@ module Aws::MediaLive
     UdpOutputSettings = Shapes::StructureShape.new(name: 'UdpOutputSettings')
     UdpTimedMetadataId3Frame = Shapes::StringShape.new(name: 'UdpTimedMetadataId3Frame')
     UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
+    UpdateChannel = Shapes::StructureShape.new(name: 'UpdateChannel')
+    UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
+    UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
+    UpdateChannelResultModel = Shapes::StructureShape.new(name: 'UpdateChannelResultModel')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     VideoCodecSettings = Shapes::StructureShape.new(name: 'VideoCodecSettings')
     VideoDescription = Shapes::StructureShape.new(name: 'VideoDescription')
@@ -555,7 +559,7 @@ module Aws::MediaLive
     CreateChannel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     CreateChannel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateChannel.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
-    CreateChannel.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, location_name: "reserved"))
+    CreateChannel.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
     CreateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateChannel.struct_class = Types::CreateChannel
 
@@ -565,7 +569,7 @@ module Aws::MediaLive
     CreateChannelRequest.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateChannelRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
-    CreateChannelRequest.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, location_name: "reserved"))
+    CreateChannelRequest.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
     CreateChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
@@ -1302,6 +1306,27 @@ module Aws::MediaLive
     UdpOutputSettings.add_member(:fec_output_settings, Shapes::ShapeRef.new(shape: FecOutputSettings, location_name: "fecOutputSettings"))
     UdpOutputSettings.struct_class = Types::UdpOutputSettings
 
+    UpdateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: ListOfOutputDestination, location_name: "destinations"))
+    UpdateChannel.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
+    UpdateChannel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    UpdateChannel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
+    UpdateChannel.struct_class = Types::UpdateChannel
+
+    UpdateChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
+    UpdateChannelRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: ListOfOutputDestination, location_name: "destinations"))
+    UpdateChannelRequest.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
+    UpdateChannelRequest.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
+    UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
+    UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
+
+    UpdateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
+    UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
+
+    UpdateChannelResultModel.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
+    UpdateChannelResultModel.struct_class = Types::UpdateChannelResultModel
+
     ValidationError.add_member(:element_path, Shapes::ShapeRef.new(shape: __string, location_name: "elementPath"))
     ValidationError.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
     ValidationError.struct_class = Types::ValidationError
@@ -1575,6 +1600,21 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_channel, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateChannel"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/channels/{channelId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateChannelRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end

@@ -479,6 +479,7 @@ module Aws::AppStream
     #             resource_identifier: "ResourceIdentifier",
     #           },
     #         ],
+    #         redirect_url: "RedirectURL",
     #       }
     #
     # @!attribute [rw] name
@@ -497,13 +498,18 @@ module Aws::AppStream
     #   The storage connectors to enable.
     #   @return [Array<Types::StorageConnector>]
     #
+    # @!attribute [rw] redirect_url
+    #   The URL the user is redirected to after the streaming session ends.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
       :name,
       :description,
       :display_name,
-      :storage_connectors)
+      :storage_connectors,
+      :redirect_url)
       include Aws::Structure
     end
 
@@ -746,7 +752,9 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] directory_configs
-    #   Information about the directory configurations.
+    #   Information about the directory configurations. Note that although
+    #   the response syntax in this topic includes the account password,
+    #   this password is not returned in the actual response.
     #   @return [Array<Types::DirectoryConfig>]
     #
     # @!attribute [rw] next_token
@@ -1660,6 +1668,10 @@ module Aws::AppStream
     #   The storage connectors to enable.
     #   @return [Array<Types::StorageConnector>]
     #
+    # @!attribute [rw] redirect_url
+    #   The URL the user is redirected to after the streaming session ends.
+    #   @return [String]
+    #
     # @!attribute [rw] stack_errors
     #   The errors for the stack.
     #   @return [Array<Types::StackError>]
@@ -1673,6 +1685,7 @@ module Aws::AppStream
       :display_name,
       :created_time,
       :storage_connectors,
+      :redirect_url,
       :stack_errors)
       include Aws::Structure
     end
@@ -2107,6 +2120,8 @@ module Aws::AppStream
     #           },
     #         ],
     #         delete_storage_connectors: false,
+    #         redirect_url: "RedirectURL",
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL
     #       }
     #
     # @!attribute [rw] display_name
@@ -2129,6 +2144,14 @@ module Aws::AppStream
     #   Deletes the storage connectors currently enabled for the stack.
     #   @return [Boolean]
     #
+    # @!attribute [rw] redirect_url
+    #   The URL the user is redirected to after the streaming session ends.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes_to_delete
+    #   The stack attributes to delete.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -2136,7 +2159,9 @@ module Aws::AppStream
       :description,
       :name,
       :storage_connectors,
-      :delete_storage_connectors)
+      :delete_storage_connectors,
+      :redirect_url,
+      :attributes_to_delete)
       include Aws::Structure
     end
 

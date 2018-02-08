@@ -8,14 +8,19 @@
 module Aws::Budgets
   module Types
 
-    # AWS Budget model
+    # Represents the output of the `CreateBudget` operation. The content
+    # consists of the detailed metadata and data file information, and the
+    # current status of the `budget`.
+    #
+    # The ARN pattern for a budget is:
+    # `arn:aws:budgetservice::AccountId:budget/budgetName`
     #
     # @note When making an API call, you may pass Budget
     #   data as a hash:
     #
     #       {
     #         budget_name: "BudgetName", # required
-    #         budget_limit: { # required
+    #         budget_limit: {
     #           amount: "NumericValue", # required
     #           unit: "UnitValue", # required
     #         },
@@ -36,9 +41,9 @@ module Aws::Budgets
     #           use_amortized: false,
     #         },
     #         time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
-    #         time_period: { # required
-    #           start: Time.now, # required
-    #           end: Time.now, # required
+    #         time_period: {
+    #           start: Time.now,
+    #           end: Time.now,
     #         },
     #         calculated_spend: {
     #           actual_spend: { # required
@@ -54,37 +59,59 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of a budget. Unique within accounts. `:` and `` characters
+    #   are not allowed in the `BudgetName`.
     #   @return [String]
     #
     # @!attribute [rw] budget_limit
-    #   A structure that represents either a cost spend or usage spend.
-    #   Contains an amount and a unit.
+    #   The total amount of cost, usage, or RI utilization that you want to
+    #   track with your budget.
+    #
+    #   `BudgetLimit` is required for cost or usage budgets, but optional
+    #   for RI utilization budgets. RI utilization budgets default to the
+    #   only valid value for RI utilization budgets, which is `100`.
     #   @return [Types::Spend]
     #
     # @!attribute [rw] cost_filters
-    #   A map that represents the cost filters applied to the budget.
+    #   The cost filters applied to a budget, such as service or region.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] cost_types
-    #   This includes the options for getting the cost of a budget.
+    #   The types of costs included in this budget.
     #   @return [Types::CostTypes]
     #
     # @!attribute [rw] time_unit
-    #   The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.
+    #   The length of time until a budget resets the actual and forecasted
+    #   spend.
     #   @return [String]
     #
     # @!attribute [rw] time_period
-    #   A time period indicating the start date and end date of a budget.
+    #   The period of time covered by a budget. Has a start date and an end
+    #   date. The start date must come before the end date. There are no
+    #   restrictions on the end date.
+    #
+    #   If you created your budget and didn't specify a start date, AWS
+    #   defaults to the start of your chosen time period (i.e. DAILY,
+    #   MONTHLY, QUARTERLY, ANNUALLY). For example, if you created your
+    #   budget on January 24th 2018, chose `DAILY`, and didn't set a start
+    #   date, AWS set your start date to `01/24/18 00:00 UTC`. If you chose
+    #   `MONTHLY`, AWS set your start date to `01/01/18 00:00 UTC`. If you
+    #   didn't specify an end date, AWS set your end date to `06/15/87
+    #   00:00 UTC`. The defaults are the same for the AWS Billing and Cost
+    #   Management console and the API.
+    #
+    #   You can change either date with the `UpdateBudget` operation.
+    #
+    #   After the end date, AWS deletes the budget and all associated
+    #   notifications and subscribers.
     #   @return [Types::TimePeriod]
     #
     # @!attribute [rw] calculated_spend
-    #   A structure that holds the actual and forecasted spend for a budget.
+    #   The actual and forecasted cost or usage being tracked by a budget.
     #   @return [Types::CalculatedSpend]
     #
     # @!attribute [rw] budget_type
-    #   The type of a budget. It should be COST, USAGE, or RI\_UTILIZATION.
+    #   Whether this budget tracks monetary costs, usage, or RI utilization.
     #   @return [String]
     #
     class Budget < Struct.new(
@@ -99,7 +126,14 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # A structure that holds the actual and forecasted spend for a budget.
+    # The spend objects associated with this budget. The `actualSpend`
+    # tracks how much you've used, cost, usage, or RI units, and the
+    # `forecastedSpend` tracks how much you are predicted to spend if your
+    # current usage remains steady.
+    #
+    # For example, if it is the 20th of the month and you have spent `50`
+    # dollars on Amazon EC2, your `actualSpend` is `50 USD`, and your
+    # `forecastedSpend` is `75 USD`.
     #
     # @note When making an API call, you may pass CalculatedSpend
     #   data as a hash:
@@ -116,13 +150,12 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] actual_spend
-    #   A structure that represents either a cost spend or usage spend.
-    #   Contains an amount and a unit.
+    #   The amount of cost, usage, or RI units that you have used.
     #   @return [Types::Spend]
     #
     # @!attribute [rw] forecasted_spend
-    #   A structure that represents either a cost spend or usage spend.
-    #   Contains an amount and a unit.
+    #   The amount of cost, usage, or RI units that you are forecasted to
+    #   use.
     #   @return [Types::Spend]
     #
     class CalculatedSpend < Struct.new(
@@ -131,7 +164,7 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # This includes the options for getting the cost of a budget.
+    # The types of cost included in a budget, such as tax and subscriptions.
     #
     # @note When making an API call, you may pass CostTypes
     #   data as a hash:
@@ -151,50 +184,70 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] include_tax
-    #   A boolean value whether to include tax in the cost budget.
+    #   Specifies whether a budget includes taxes.
+    #
+    #   The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_subscription
-    #   A boolean value whether to include subscriptions in the cost budget.
+    #   Specifies whether a budget includes subscriptions.
+    #
+    #   The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] use_blended
-    #   A boolean value whether to use blended costs in the cost budget.
+    #   Specifies whether a budget uses blended rate.
+    #
+    #   The default value is `false`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_refund
-    #   A boolean value whether to include refunds in the cost budget.
+    #   Specifies whether a budget includes refunds.
+    #
+    #   The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_credit
-    #   A boolean value whether to include credits in the cost budget.
+    #   Specifies whether a budget includes credits.
+    #
+    #   The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_upfront
-    #   A boolean value whether to include upfront costs in the cost budget.
+    #   Specifies whether a budget includes upfront RI costs.
+    #
+    #   The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_recurring
-    #   A boolean value whether to include recurring costs in the cost
-    #   budget.
+    #   Specifies whether a budget includes recurring fees such as monthly
+    #   RI fees.
+    #
+    #   The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_other_subscription
-    #   A boolean value whether to include other subscription costs in the
-    #   cost budget.
+    #   Specifies whether a budget includes non-RI subscription costs.
+    #
+    #   The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_support
-    #   A boolean value whether to include support costs in the cost budget.
+    #   Specifies whether a budget includes support subscription fees.
+    #
+    #   The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] include_discount
-    #   A boolean value whether to include discounts in the cost budget.
+    #   Specifies whether a budget includes discounts.
+    #
+    #   The default value is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] use_amortized
-    #   A boolean value whether to include amortized costs in the cost
-    #   budget.
+    #   Specifies whether a budget uses the amortized rate.
+    #
+    #   The default value is `false`.
     #   @return [Boolean]
     #
     class CostTypes < Struct.new(
@@ -221,7 +274,7 @@ module Aws::Budgets
     #         account_id: "AccountId", # required
     #         budget: { # required
     #           budget_name: "BudgetName", # required
-    #           budget_limit: { # required
+    #           budget_limit: {
     #             amount: "NumericValue", # required
     #             unit: "UnitValue", # required
     #           },
@@ -242,9 +295,9 @@ module Aws::Budgets
     #             use_amortized: false,
     #           },
     #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
-    #           time_period: { # required
-    #             start: Time.now, # required
-    #             end: Time.now, # required
+    #           time_period: {
+    #             start: Time.now,
+    #             end: Time.now,
     #           },
     #           calculated_spend: {
     #             actual_spend: { # required
@@ -277,15 +330,19 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget.
     #   @return [String]
     #
     # @!attribute [rw] budget
-    #   AWS Budget model
+    #   The budget object that you want to create.
     #   @return [Types::Budget]
     #
     # @!attribute [rw] notifications_with_subscribers
-    #   A list of Notifications, each with a list of subscribers.
+    #   A notification that you want to associate with a budget. A budget
+    #   can have up to five notifications, and each notification can have
+    #   one SNS subscriber and up to ten email subscribers. If you include
+    #   notifications and subscribers in your `CreateBudget` call, AWS
+    #   creates the notifications and subscribers for you.
     #   @return [Array<Types::NotificationWithSubscribers>]
     #
     class CreateBudgetRequest < Struct.new(
@@ -322,21 +379,23 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget that you want to
+    #   create a notification for.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget that you want AWS to notified you about.
+    #   Budget names must be unique within an account.
     #   @return [String]
     #
     # @!attribute [rw] notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification that you want to create.
     #   @return [Types::Notification]
     #
     # @!attribute [rw] subscribers
-    #   A list of subscribers.
+    #   A list of subscribers that you want to associate with the
+    #   notification. Each notification can have one SNS subscriber and up
+    #   to ten email subscribers.
     #   @return [Array<Types::Subscriber>]
     #
     class CreateNotificationRequest < Struct.new(
@@ -372,22 +431,22 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` associated with the budget that you want to create a
+    #   subscriber for.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget that you want to subscribe to. Budget names
+    #   must be unique within an account.
     #   @return [String]
     #
     # @!attribute [rw] notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification that you want to create a subscriber for.
     #   @return [Types::Notification]
     #
     # @!attribute [rw] subscriber
-    #   Subscriber model. Each notification may contain multiple subscribers
-    #   with different addresses.
+    #   The subscriber that you want to associate with a budget
+    #   notification.
     #   @return [Types::Subscriber]
     #
     class CreateSubscriberRequest < Struct.new(
@@ -413,12 +472,12 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget that you want to
+    #   delete.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget that you want to delete.
     #   @return [String]
     #
     class DeleteBudgetRequest < Struct.new(
@@ -448,17 +507,16 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose
+    #   notification you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget whose notification you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification that you want to delete.
     #   @return [Types::Notification]
     #
     class DeleteNotificationRequest < Struct.new(
@@ -493,22 +551,20 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose subscriber
+    #   you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget whose subscriber you want to delete.
     #   @return [String]
     #
     # @!attribute [rw] notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification whose subscriber you want to delete.
     #   @return [Types::Notification]
     #
     # @!attribute [rw] subscriber
-    #   Subscriber model. Each notification may contain multiple subscribers
-    #   with different addresses.
+    #   The subscriber that you want to delete.
     #   @return [Types::Subscriber]
     #
     class DeleteSubscriberRequest < Struct.new(
@@ -534,12 +590,12 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget that you want a
+    #   description of.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget that you want a description of.
     #   @return [String]
     #
     class DescribeBudgetRequest < Struct.new(
@@ -551,7 +607,7 @@ module Aws::Budgets
     # Response of DescribeBudget
     #
     # @!attribute [rw] budget
-    #   AWS Budget model
+    #   The description of the budget.
     #   @return [Types::Budget]
     #
     class DescribeBudgetResponse < Struct.new(
@@ -571,16 +627,18 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budgets that you want
+    #   descriptions of.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   An integer to represent how many entries a paginated response
-    #   contains. Maximum is set to 100.
+    #   Optional integer. Specifies the maximum number of results to return
+    #   in response.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A generic String.
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
     #   @return [String]
     #
     class DescribeBudgetsRequest < Struct.new(
@@ -593,11 +651,12 @@ module Aws::Budgets
     # Response of DescribeBudgets
     #
     # @!attribute [rw] budgets
-    #   A list of budgets
+    #   A list of budgets.
     #   @return [Array<Types::Budget>]
     #
     # @!attribute [rw] next_token
-    #   A generic String.
+    #   The pagination token that indicates the next set of results that you
+    #   can retrieve.
     #   @return [String]
     #
     class DescribeBudgetsResponse < Struct.new(
@@ -619,21 +678,22 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose
+    #   notifications you want descriptions of.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget whose notifications you want descriptions of.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   An integer to represent how many entries a paginated response
-    #   contains. Maximum is set to 100.
+    #   Optional integer. Specifies the maximum number of results to return
+    #   in response.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A generic String.
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
     #   @return [String]
     #
     class DescribeNotificationsForBudgetRequest < Struct.new(
@@ -647,11 +707,12 @@ module Aws::Budgets
     # Response of GetNotificationsForBudget
     #
     # @!attribute [rw] notifications
-    #   A list of notifications.
+    #   A list of notifications associated with a budget.
     #   @return [Array<Types::Notification>]
     #
     # @!attribute [rw] next_token
-    #   A generic String.
+    #   The pagination token that indicates the next set of results that you
+    #   can retrieve.
     #   @return [String]
     #
     class DescribeNotificationsForBudgetResponse < Struct.new(
@@ -679,26 +740,26 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose subscribers
+    #   you want descriptions of.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget whose subscribers you want descriptions of.
     #   @return [String]
     #
     # @!attribute [rw] notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification whose subscribers you want to list.
     #   @return [Types::Notification]
     #
     # @!attribute [rw] max_results
-    #   An integer to represent how many entries a paginated response
-    #   contains. Maximum is set to 100.
+    #   Optional integer. Specifies the maximum number of results to return
+    #   in response.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A generic String.
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
     #   @return [String]
     #
     class DescribeSubscribersForNotificationRequest < Struct.new(
@@ -713,11 +774,12 @@ module Aws::Budgets
     # Response of DescribeSubscribersForNotification
     #
     # @!attribute [rw] subscribers
-    #   A list of subscribers.
+    #   A list of subscribers associated with a notification.
     #   @return [Array<Types::Subscriber>]
     #
     # @!attribute [rw] next_token
-    #   A generic String.
+    #   The pagination token that indicates the next set of results that you
+    #   can retrieve.
     #   @return [String]
     #
     class DescribeSubscribersForNotificationResponse < Struct.new(
@@ -726,8 +788,22 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # Notification model. Each budget may contain multiple notifications
-    # with different settings.
+    # A notification associated with a budget. A budget can have up to five
+    # notifications.
+    #
+    # Each notification must have at least one subscriber. A notification
+    # can have one SNS subscriber and up to ten email subscribers, for a
+    # total of 11 subscribers.
+    #
+    # For example, if you have a budget for 200 dollars and you want to be
+    # notified when you go over 160 dollars, create a notification with the
+    # following parameters:
+    #
+    # * A notificationType of `ACTUAL`
+    #
+    # * A comparisonOperator of `GREATER_THAN`
+    #
+    # * A notification threshold of `80`
     #
     # @note When making an API call, you may pass Notification
     #   data as a hash:
@@ -740,22 +816,24 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] notification_type
-    #   The type of a notification. It should be ACTUAL or FORECASTED.
+    #   Whether the notification is for how much you have spent (`ACTUAL`)
+    #   or for how much you are forecasted to spend (`FORECASTED`).
     #   @return [String]
     #
     # @!attribute [rw] comparison_operator
-    #   The comparison operator of a notification. Currently we support less
-    #   than, equal to and greater than.
+    #   The comparison used for this notification.
     #   @return [String]
     #
     # @!attribute [rw] threshold
-    #   The threshold of a notification. It should be a number between 0 and
-    #   1,000,000,000.
+    #   The threshold associated with a notification. Thresholds are always
+    #   a percentage.
     #   @return [Float]
     #
     # @!attribute [rw] threshold_type
-    #   The type of threshold for a notification. It can be PERCENTAGE or
-    #   ABSOLUTE\_VALUE.
+    #   The type of threshold for a notification. For `ACTUAL` thresholds,
+    #   AWS notifies you when you go over the threshold, and for
+    #   `FORECASTED` thresholds AWS notifies you when you are forecasted to
+    #   go over the threshold.
     #   @return [String]
     #
     class Notification < Struct.new(
@@ -766,8 +844,9 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # A structure to relate notification and a list of subscribers who
-    # belong to the notification.
+    # A notification with subscribers. A notification can have one SNS
+    # subscriber and up to ten email subscribers, for a total of 11
+    # subscribers.
     #
     # @note When making an API call, you may pass NotificationWithSubscribers
     #   data as a hash:
@@ -788,12 +867,11 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification associated with a budget.
     #   @return [Types::Notification]
     #
     # @!attribute [rw] subscribers
-    #   A list of subscribers.
+    #   A list of subscribers who are subscribed to this notification.
     #   @return [Array<Types::Subscriber>]
     #
     class NotificationWithSubscribers < Struct.new(
@@ -802,8 +880,14 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # A structure that represents either a cost spend or usage spend.
-    # Contains an amount and a unit.
+    # The amount of cost or usage being measured for a budget.
+    #
+    # For example, a `Spend` for `3 GB` of S3 usage would have the following
+    # parameters:
+    #
+    # * An `Amount` of `3`
+    #
+    # * A `unit` of `GB`
     #
     # @note When making an API call, you may pass Spend
     #   data as a hash:
@@ -814,12 +898,13 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] amount
-    #   A string to represent NumericValue.
+    #   The cost or usage amount associated with a budget forecast, actual
+    #   spend, or budget threshold.
     #   @return [String]
     #
     # @!attribute [rw] unit
-    #   A string to represent budget spend unit. It should be not null and
-    #   not empty.
+    #   The unit of measurement used for the budget forecast, actual spend,
+    #   or budget threshold, such as dollars or GB.
     #   @return [String]
     #
     class Spend < Struct.new(
@@ -828,8 +913,15 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # Subscriber model. Each notification may contain multiple subscribers
-    # with different addresses.
+    # The subscriber to a budget notification. The subscriber consists of a
+    # subscription type and either an Amazon Simple Notification Service
+    # topic or an email address.
+    #
+    # For example, an email subscriber would have the following parameters:
+    #
+    # * A `subscriptionType` of `EMAIL`
+    #
+    # * An `address` of `example@example.com`
     #
     # @note When making an API call, you may pass Subscriber
     #   data as a hash:
@@ -840,11 +932,12 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] subscription_type
-    #   The subscription type of the subscriber. It can be SMS or EMAIL.
+    #   The type of notification that AWS sends to a subscriber.
     #   @return [String]
     #
     # @!attribute [rw] address
-    #   String containing email or sns topic for the subscriber address.
+    #   The address that AWS sends budget notifications to, either an SNS
+    #   topic or an email.
     #   @return [String]
     #
     class Subscriber < Struct.new(
@@ -853,22 +946,39 @@ module Aws::Budgets
       include Aws::Structure
     end
 
-    # A time period indicating the start date and end date of a budget.
+    # The period of time covered by a budget. Has a start date and an end
+    # date. The start date must come before the end date. There are no
+    # restrictions on the end date.
     #
     # @note When making an API call, you may pass TimePeriod
     #   data as a hash:
     #
     #       {
-    #         start: Time.now, # required
-    #         end: Time.now, # required
+    #         start: Time.now,
+    #         end: Time.now,
     #       }
     #
     # @!attribute [rw] start
-    #   A generic timestamp. In Java it is transformed to a Date object.
+    #   The start date for a budget. If you created your budget and didn't
+    #   specify a start date, AWS defaults to the start of your chosen time
+    #   period (i.e. DAILY, MONTHLY, QUARTERLY, ANNUALLY). For example, if
+    #   you created your budget on January 24th 2018, chose `DAILY`, and
+    #   didn't set a start date, AWS set your start date to `01/24/18 00:00
+    #   UTC`. If you chose `MONTHLY`, AWS set your start date to `01/01/18
+    #   00:00 UTC`. The defaults are the same for the AWS Billing and Cost
+    #   Management console and the API.
+    #
+    #   You can change your start date with the `UpdateBudget` operation.
     #   @return [Time]
     #
     # @!attribute [rw] end
-    #   A generic timestamp. In Java it is transformed to a Date object.
+    #   The end date for a budget. If you didn't specify an end date, AWS
+    #   set your end date to `06/15/87 00:00 UTC`. The defaults are the same
+    #   for the AWS Billing and Cost Management console and the API.
+    #
+    #   After the end date, AWS deletes the budget and all associated
+    #   notifications and subscribers. You can change your end date with the
+    #   `UpdateBudget` operation.
     #   @return [Time]
     #
     class TimePeriod < Struct.new(
@@ -886,7 +996,7 @@ module Aws::Budgets
     #         account_id: "AccountId", # required
     #         new_budget: { # required
     #           budget_name: "BudgetName", # required
-    #           budget_limit: { # required
+    #           budget_limit: {
     #             amount: "NumericValue", # required
     #             unit: "UnitValue", # required
     #           },
@@ -907,9 +1017,9 @@ module Aws::Budgets
     #             use_amortized: false,
     #           },
     #           time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
-    #           time_period: { # required
-    #             start: Time.now, # required
-    #             end: Time.now, # required
+    #           time_period: {
+    #             start: Time.now,
+    #             end: Time.now,
     #           },
     #           calculated_spend: {
     #             actual_spend: { # required
@@ -926,11 +1036,12 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget that you want to
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] new_budget
-    #   AWS Budget model
+    #   The budget that you want to update your budget to.
     #   @return [Types::Budget]
     #
     class UpdateBudgetRequest < Struct.new(
@@ -966,22 +1077,20 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose
+    #   notification you want to update.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget whose notification you want to update.
     #   @return [String]
     #
     # @!attribute [rw] old_notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The previous notification associated with a budget.
     #   @return [Types::Notification]
     #
     # @!attribute [rw] new_notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The updated notification to be associated with a budget.
     #   @return [Types::Notification]
     #
     class UpdateNotificationRequest < Struct.new(
@@ -1021,27 +1130,24 @@ module Aws::Budgets
     #       }
     #
     # @!attribute [rw] account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose subscriber
+    #   you want to update.
     #   @return [String]
     #
     # @!attribute [rw] budget_name
-    #   A string represents the budget name. No ":" and "\\" character
-    #   is allowed.
+    #   The name of the budget whose subscriber you want to update.
     #   @return [String]
     #
     # @!attribute [rw] notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification whose subscriber you want to update.
     #   @return [Types::Notification]
     #
     # @!attribute [rw] old_subscriber
-    #   Subscriber model. Each notification may contain multiple subscribers
-    #   with different addresses.
+    #   The previous subscriber associated with a budget notification.
     #   @return [Types::Subscriber]
     #
     # @!attribute [rw] new_subscriber
-    #   Subscriber model. Each notification may contain multiple subscribers
-    #   with different addresses.
+    #   The updated subscriber associated with a budget notification.
     #   @return [Types::Subscriber]
     #
     class UpdateSubscriberRequest < Struct.new(

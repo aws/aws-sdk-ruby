@@ -738,25 +738,22 @@ module Aws::DynamoDB
     # backed up. There is no limit to the number of on-demand backups that
     # can be taken.
     #
+    # When you create an On-Demand Backup, a time marker of the request is
+    # cataloged, and the backup is created asynchronously, by applying all
+    # changes until the time of the request to the last full table snapshot.
+    # Backup requests are processed instantaneously and become available for
+    # restore within minutes.
+    #
     # You can call `CreateBackup` at a maximum rate of 50 times per second.
     #
     # All backups in DynamoDB work without consuming any provisioned
-    # throughput on the table. This results in a fast, low-cost, and
-    # scalable backup process. In general, the larger the table, the more
-    # time it takes to back up. The backup is stored in an S3 data store
-    # that is maintained and managed by DynamoDB.
+    # throughput on the table.
     #
-    # Backups incorporate all writes (delete, put, update) that were
-    # completed within the last minute before the backup request was
-    # initiated. Backups might include some writes (delete, put, update)
-    # that were completed before the backup request was finished.
-    #
-    # For example, if you submit the backup request on 2018-12-14 at
-    # 14:25:00, the backup is guaranteed to contain all data committed to
-    # the table up to 14:24:00, and data committed after 14:26:00 will not
-    # be. The backup may or may not contain data modifications made between
-    # 14:24:00 and 14:26:00. On-Demand Backup does not support causal
-    # consistency.
+    # If you submit a backup request on 2018-12-14 at 14:25:00, the backup
+    # is guaranteed to contain all data committed to the table up to
+    # 14:24:00, and data committed after 14:26:00 will not be. The backup
+    # may or may not contain data modifications made between 14:24:00 and
+    # 14:26:00. On-Demand Backup does not support causal consistency.
     #
     # Along with data, the following are also included on the backups:
     #
@@ -1044,6 +1041,9 @@ module Aws::DynamoDB
     #     * `NEW_AND_OLD_IMAGES` - Both the new and the old item images of the
     #       item are written to the stream.
     #
+    # @option params [Types::SSESpecification] :sse_specification
+    #   Represents the settings used to enable server-side encryption.
+    #
     # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTableOutput#table_description #table_description} => Types::TableDescription
@@ -1174,6 +1174,9 @@ module Aws::DynamoDB
     #       stream_enabled: false,
     #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #     },
+    #     sse_specification: {
+    #       enabled: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1233,6 +1236,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
     #
@@ -1300,6 +1304,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackup AWS API Documentation
     #
@@ -1696,6 +1701,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
     #
@@ -1764,6 +1770,7 @@ module Aws::DynamoDB
     #   resp.backup_description.source_table_feature_details.stream_description.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
     #   resp.backup_description.source_table_feature_details.time_to_live_description.attribute_name #=> String
+    #   resp.backup_description.source_table_feature_details.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackup AWS API Documentation
     #
@@ -1808,7 +1815,7 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # Returns information about the global table.
+    # Returns information about the specified global table.
     #
     # @option params [required, String] :global_table_name
     #   The name of the global table.
@@ -2078,6 +2085,7 @@ module Aws::DynamoDB
     #   resp.table.restore_summary.source_table_arn #=> String
     #   resp.table.restore_summary.restore_date_time #=> Time
     #   resp.table.restore_summary.restore_in_progress #=> Boolean
+    #   resp.table.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable AWS API Documentation
     #
@@ -2381,8 +2389,7 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # Lists all the global tables. Only those global tables that have
-    # replicas in the region specified as input are returned.
+    # Lists all global tables that have a replica in the specified region.
     #
     # @option params [String] :exclusive_start_global_table_name
     #   The first global table name that this operation will evaluate.
@@ -3131,11 +3138,12 @@ module Aws::DynamoDB
     #   retrieved by the `Query` action.
     #
     #   The condition must perform an equality test on a single partition key
-    #   value. The condition can also perform one of several comparison tests
-    #   on a single sort key value. `Query` can use `KeyConditionExpression`
-    #   to retrieve one item with a given partition key value and sort key
-    #   value, or several items that have the same partition key value but
-    #   different sort key values.
+    #   value.
+    #
+    #   The condition can optionally perform one of several comparison tests
+    #   on a single sort key value. This allows `Query` to retrieve one item
+    #   with a given partition key value and sort key value, or several items
+    #   that have the same partition key value but different sort key values.
     #
     #   The partition key equality test is required, and must be specified in
     #   the following format:
@@ -3406,6 +3414,8 @@ module Aws::DynamoDB
     #
     # * Tags
     #
+    # * Stream settings
+    #
     # * Time to Live (TTL) settings
     #
     # @option params [required, String] :target_table_name
@@ -3482,6 +3492,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup AWS API Documentation
     #
@@ -4013,9 +4024,17 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # Adds or removes replicas to the specified global table. The global
-    # table should already exist to be able to use this operation.
-    # Currently, the replica to be added should be empty.
+    # Adds or removes replicas in the specified global table. The global
+    # table must already exist to be able to use this operation. Any replica
+    # to be added must be empty, must have the same name as the global
+    # table, must have the same key schema, must have DynamoDB Streams
+    # enabled, and cannot have any local secondary indexes (LSIs).
+    #
+    # <note markdown="1"> Although you can use `UpdateGlobalTable` to add replicas and remove
+    # replicas in a single request, for simplicity we recommend that you
+    # issue separate requests for adding or removing replicas.
+    #
+    #  </note>
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -4687,6 +4706,7 @@ module Aws::DynamoDB
     #   resp.table_description.restore_summary.source_table_arn #=> String
     #   resp.table_description.restore_summary.restore_date_time #=> Time
     #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
     #
@@ -4782,7 +4802,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

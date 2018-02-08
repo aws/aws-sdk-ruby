@@ -533,6 +533,9 @@ module Aws::AppStream
     # @option params [Array<Types::StorageConnector>] :storage_connectors
     #   The storage connectors to enable.
     #
+    # @option params [String] :redirect_url
+    #   The URL the user is redirected to after the streaming session ends.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -549,6 +552,7 @@ module Aws::AppStream
     #         resource_identifier: "ResourceIdentifier",
     #       },
     #     ],
+    #     redirect_url: "RedirectURL",
     #   })
     #
     # @example Response structure
@@ -561,6 +565,7 @@ module Aws::AppStream
     #   resp.stack.storage_connectors #=> Array
     #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
+    #   resp.stack.redirect_url #=> String
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
@@ -801,7 +806,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified directory configurations.
+    # Describes the specified directory configurations. Note that although
+    # the response syntax in this topic includes the account password, this
+    # password is not returned in the actual response.
     #
     # @option params [Array<String>] :directory_names
     #   The directory names.
@@ -1115,6 +1122,7 @@ module Aws::AppStream
     #   resp.stacks[0].storage_connectors #=> Array
     #   resp.stacks[0].storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
     #   resp.stacks[0].storage_connectors[0].resource_identifier #=> String
+    #   resp.stacks[0].redirect_url #=> String
     #   resp.stacks[0].stack_errors #=> Array
     #   resp.stacks[0].stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stacks[0].stack_errors[0].error_message #=> String
@@ -1257,7 +1265,7 @@ module Aws::AppStream
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic
+    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -1451,7 +1459,7 @@ module Aws::AppStream
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic
+    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -1493,7 +1501,7 @@ module Aws::AppStream
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic
+    # [1]: http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -1740,6 +1748,12 @@ module Aws::AppStream
     # @option params [Boolean] :delete_storage_connectors
     #   Deletes the storage connectors currently enabled for the stack.
     #
+    # @option params [String] :redirect_url
+    #   The URL the user is redirected to after the streaming session ends.
+    #
+    # @option params [Array<String>] :attributes_to_delete
+    #   The stack attributes to delete.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -1757,6 +1771,8 @@ module Aws::AppStream
     #       },
     #     ],
     #     delete_storage_connectors: false,
+    #     redirect_url: "RedirectURL",
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL
     #   })
     #
     # @example Response structure
@@ -1769,6 +1785,7 @@ module Aws::AppStream
     #   resp.stack.storage_connectors #=> Array
     #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
+    #   resp.stack.redirect_url #=> String
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
@@ -1795,7 +1812,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

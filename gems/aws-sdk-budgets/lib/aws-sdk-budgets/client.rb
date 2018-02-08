@@ -155,16 +155,20 @@ module Aws::Budgets
 
     # @!group API Operations
 
-    # Create a new budget
+    # Creates a budget and, if included, notifications and subscribers.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget.
     #
     # @option params [required, Types::Budget] :budget
-    #   AWS Budget model
+    #   The budget object that you want to create.
     #
     # @option params [Array<Types::NotificationWithSubscribers>] :notifications_with_subscribers
-    #   A list of Notifications, each with a list of subscribers.
+    #   A notification that you want to associate with a budget. A budget can
+    #   have up to five notifications, and each notification can have one SNS
+    #   subscriber and up to ten email subscribers. If you include
+    #   notifications and subscribers in your `CreateBudget` call, AWS creates
+    #   the notifications and subscribers for you.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -174,7 +178,7 @@ module Aws::Budgets
     #     account_id: "AccountId", # required
     #     budget: { # required
     #       budget_name: "BudgetName", # required
-    #       budget_limit: { # required
+    #       budget_limit: {
     #         amount: "NumericValue", # required
     #         unit: "UnitValue", # required
     #       },
@@ -195,9 +199,9 @@ module Aws::Budgets
     #         use_amortized: false,
     #       },
     #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
-    #       time_period: { # required
-    #         start: Time.now, # required
-    #         end: Time.now, # required
+    #       time_period: {
+    #         start: Time.now,
+    #         end: Time.now,
     #       },
     #       calculated_spend: {
     #         actual_spend: { # required
@@ -236,21 +240,24 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Create a new Notification with subscribers for a budget
+    # Creates a notification. You must create the budget before you create
+    # the associated notification.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget that you want to
+    #   create a notification for.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget that you want AWS to notified you about. Budget
+    #   names must be unique within an account.
     #
     # @option params [required, Types::Notification] :notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification that you want to create.
     #
     # @option params [required, Array<Types::Subscriber>] :subscribers
-    #   A list of subscribers.
+    #   A list of subscribers that you want to associate with the
+    #   notification. Each notification can have one SNS subscriber and up to
+    #   ten email subscribers.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -280,22 +287,22 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Create a new Subscriber for a notification
+    # Creates a subscriber. You must create the associated budget and
+    # notification before you create the subscriber.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` associated with the budget that you want to create a
+    #   subscriber for.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget that you want to subscribe to. Budget names
+    #   must be unique within an account.
     #
     # @option params [required, Types::Notification] :notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification that you want to create a subscriber for.
     #
     # @option params [required, Types::Subscriber] :subscriber
-    #   Subscriber model. Each notification may contain multiple subscribers
-    #   with different addresses.
+    #   The subscriber that you want to associate with a budget notification.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -323,14 +330,17 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Delete a budget and related notifications
+    # Deletes a budget. You can delete your budget at any time.
+    #
+    # **Deleting a budget also deletes the notifications and subscribers
+    # associated with that budget.**
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget that you want to
+    #   delete.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -348,18 +358,20 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Delete a notification and related subscribers
+    # Deletes a notification.
+    #
+    # **Deleting a notification also deletes the subscribers associated with
+    # the notification.**
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose notification
+    #   you want to delete.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget whose notification you want to delete.
     #
     # @option params [required, Types::Notification] :notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -383,22 +395,23 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Delete a Subscriber for a notification
+    # Deletes a subscriber.
+    #
+    # **Deleting the last subscriber to a notification also deletes the
+    # notification.**
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose subscriber
+    #   you want to delete.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget whose subscriber you want to delete.
     #
     # @option params [required, Types::Notification] :notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification whose subscriber you want to delete.
     #
     # @option params [required, Types::Subscriber] :subscriber
-    #   Subscriber model. Each notification may contain multiple subscribers
-    #   with different addresses.
+    #   The subscriber that you want to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -426,14 +439,14 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Get a single budget
+    # Describes a budget.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget that you want a
+    #   description of.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget that you want a description of.
     #
     # @return [Types::DescribeBudgetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -481,17 +494,19 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Get all budgets for an account
+    # Lists the budgets associated with an account.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budgets that you want
+    #   descriptions of.
     #
     # @option params [Integer] :max_results
-    #   An integer to represent how many entries a paginated response
-    #   contains. Maximum is set to 100.
+    #   Optional integer. Specifies the maximum number of results to return in
+    #   response.
     #
     # @option params [String] :next_token
-    #   A generic String.
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
     #
     # @return [Types::DescribeBudgetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -543,21 +558,22 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Get notifications of a budget
+    # Lists the notifications associated with a budget.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose notifications
+    #   you want descriptions of.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget whose notifications you want descriptions of.
     #
     # @option params [Integer] :max_results
-    #   An integer to represent how many entries a paginated response
-    #   contains. Maximum is set to 100.
+    #   Optional integer. Specifies the maximum number of results to return in
+    #   response.
     #
     # @option params [String] :next_token
-    #   A generic String.
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
     #
     # @return [Types::DescribeNotificationsForBudgetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -589,25 +605,25 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Get subscribers of a notification
+    # Lists the subscribers associated with a notification.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose subscribers
+    #   you want descriptions of.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget whose subscribers you want descriptions of.
     #
     # @option params [required, Types::Notification] :notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification whose subscribers you want to list.
     #
     # @option params [Integer] :max_results
-    #   An integer to represent how many entries a paginated response
-    #   contains. Maximum is set to 100.
+    #   Optional integer. Specifies the maximum number of results to return in
+    #   response.
     #
     # @option params [String] :next_token
-    #   A generic String.
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
     #
     # @return [Types::DescribeSubscribersForNotificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -643,13 +659,17 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Update the information of a budget already created
+    # Updates a budget. You can change every part of a budget except for the
+    # `budgetName` and the `calculatedSpend`. When a budget is modified, the
+    # `calculatedSpend` drops to zero until AWS has new usage data to use
+    # for forecasting.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget that you want to
+    #   update.
     #
     # @option params [required, Types::Budget] :new_budget
-    #   AWS Budget model
+    #   The budget that you want to update your budget to.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -659,7 +679,7 @@ module Aws::Budgets
     #     account_id: "AccountId", # required
     #     new_budget: { # required
     #       budget_name: "BudgetName", # required
-    #       budget_limit: { # required
+    #       budget_limit: {
     #         amount: "NumericValue", # required
     #         unit: "UnitValue", # required
     #       },
@@ -680,9 +700,9 @@ module Aws::Budgets
     #         use_amortized: false,
     #       },
     #       time_unit: "DAILY", # required, accepts DAILY, MONTHLY, QUARTERLY, ANNUALLY
-    #       time_period: { # required
-    #         start: Time.now, # required
-    #         end: Time.now, # required
+    #       time_period: {
+    #         start: Time.now,
+    #         end: Time.now,
     #       },
     #       calculated_spend: {
     #         actual_spend: { # required
@@ -705,22 +725,20 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Update the information about a notification already created
+    # Updates a notification.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose notification
+    #   you want to update.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget whose notification you want to update.
     #
     # @option params [required, Types::Notification] :old_notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The previous notification associated with a budget.
     #
     # @option params [required, Types::Notification] :new_notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The updated notification to be associated with a budget.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -750,26 +768,23 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Update a subscriber
+    # Updates a subscriber.
     #
     # @option params [required, String] :account_id
-    #   Account Id of the customer. It should be a 12 digit number.
+    #   The `accountId` that is associated with the budget whose subscriber
+    #   you want to update.
     #
     # @option params [required, String] :budget_name
-    #   A string represents the budget name. No ":" and "\\" character is
-    #   allowed.
+    #   The name of the budget whose subscriber you want to update.
     #
     # @option params [required, Types::Notification] :notification
-    #   Notification model. Each budget may contain multiple notifications
-    #   with different settings.
+    #   The notification whose subscriber you want to update.
     #
     # @option params [required, Types::Subscriber] :old_subscriber
-    #   Subscriber model. Each notification may contain multiple subscribers
-    #   with different addresses.
+    #   The previous subscriber associated with a budget notification.
     #
     # @option params [required, Types::Subscriber] :new_subscriber
-    #   Subscriber model. Each notification may contain multiple subscribers
-    #   with different addresses.
+    #   The updated subscriber associated with a budget notification.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -814,7 +829,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

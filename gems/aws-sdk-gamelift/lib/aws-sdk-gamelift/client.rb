@@ -208,7 +208,7 @@ module Aws::GameLift
     #
     #   resp = client.accept_match({
     #     ticket_id: "MatchmakingIdStringModel", # required
-    #     player_ids: ["PlayerIdStringModel"], # required
+    #     player_ids: ["NonZeroAndMaxString"], # required
     #     acceptance_type: "ACCEPT", # required, accepts ACCEPT, REJECT
     #   })
     #
@@ -303,25 +303,45 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Creates a new Amazon GameLift build from a set of game server binary
-    # files stored in an Amazon Simple Storage Service (Amazon S3) location.
-    # To use this API call, create a `.zip` file containing all of the files
-    # for the build and store it in an Amazon S3 bucket under your AWS
-    # account. For help on packaging your build files and creating a build,
-    # see [Uploading Your Game to Amazon GameLift][1].
+    # Creates a new Amazon GameLift build record for your game server binary
+    # files and points to the location of your game server build files in an
+    # Amazon Simple Storage Service (Amazon S3) location.
     #
-    # Use this API action ONLY if you are storing your game build files in
-    # an Amazon S3 bucket. To create a build using files stored locally, use
-    # the CLI command [ `upload-build` ][2], which uploads the build files
-    # from a file location you specify.
+    # Game server binaries must be combined into a `.zip` file for use with
+    # Amazon GameLift. See [Uploading Your Game][1] for more information.
     #
-    # To create a new build using `CreateBuild`, identify the storage
-    # location and operating system of your game build. You also have the
-    # option of specifying a build name and version. If successful, this
-    # action creates a new build record with an unique build ID and in
-    # `INITIALIZED` status. Use the API call DescribeBuild to check the
-    # status of your build. A build must be in `READY` status before it can
-    # be used to create fleets to host your game.
+    # To create new builds quickly and easily, use the AWS CLI command <b>
+    # <a
+    # href="http://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html">upload-build</a>
+    # </b>. This helper command uploads your build and creates a new build
+    # record in one step, and automatically handles the necessary
+    # permissions. See [ Upload Build Files to Amazon GameLift][2] for more
+    # help.
+    #
+    # The `CreateBuild` operation should be used only when you need to
+    # manually upload your build files, as in the following scenarios:
+    #
+    # * Store a build file in an Amazon S3 bucket under your own AWS
+    #   account. To use this option, you must first give Amazon GameLift
+    #   access to that Amazon S3 bucket. See [ Create a Build with Files in
+    #   Amazon S3][3] for detailed help. To create a new build record using
+    #   files in your Amazon S3 bucket, call `CreateBuild` and specify a
+    #   build name, operating system, and the storage location of your game
+    #   build.
+    #
+    # * Upload a build file directly to Amazon GameLift's Amazon S3
+    #   account. To use this option, you first call `CreateBuild` with a
+    #   build name and operating system. This action creates a new build
+    #   record and returns an Amazon S3 storage location (bucket and key
+    #   only) and temporary access credentials. Use the credentials to
+    #   manually upload your build file to the storage location (see the
+    #   Amazon S3 topic [Uploading Objects][4]). You can upload files to a
+    #   location only once.
+    #
+    # If successful, this operation creates a new build record with a unique
+    # build ID and places it in `INITIALIZED` status. You can use
+    # DescribeBuild to check the status of your build. A build must be in
+    # `READY` status before it can be used to create fleets.
     #
     # Build-related operations include:
     #
@@ -338,7 +358,9 @@ module Aws::GameLift
     #
     #
     # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
-    # [2]: http://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html
+    # [2]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html
+    # [3]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build
+    # [4]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html
     #
     # @option params [String] :name
     #   Descriptive label that is associated with a build. Build names do not
@@ -349,22 +371,21 @@ module Aws::GameLift
     #   need to be unique. You can use UpdateBuild to change this value later.
     #
     # @option params [Types::S3Location] :storage_location
-    #   Amazon S3 location of the game build files to be uploaded. The S3
-    #   bucket must be owned by the same AWS account that you're using to
-    #   manage Amazon GameLift. It also must in the same region that you want
-    #   to create a new build in. Before calling `CreateBuild` with this
-    #   location, you must allow Amazon GameLift to access your Amazon S3
-    #   bucket (see [Create a Build with Files in Amazon S3][1]).
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build
+    #   Information indicating where your game build files are stored. Use
+    #   this parameter only when creating a build with files stored in an
+    #   Amazon S3 bucket that you own. The storage location must specify an
+    #   Amazon S3 bucket name and key, as well as a role ARN that you set up
+    #   to allow Amazon GameLift to access your Amazon S3 bucket. The S3
+    #   bucket must be in the same region that you want to create a new build
+    #   in.
     #
     # @option params [String] :operating_system
     #   Operating system that the game server binaries are built to run on.
     #   This value determines the type of fleet resources that you can use for
     #   this build. If your game build contains multiple executables, they all
-    #   must run on the same operating system.
+    #   must run on the same operating system. If an operating system is not
+    #   specified when creating a build, Amazon GameLift uses the default
+    #   value (WINDOWS\_2012). This value cannot be changed later.
     #
     # @return [Types::CreateBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -600,10 +621,11 @@ module Aws::GameLift
     #   can create over a span of time for this fleet.
     #
     # @option params [Array<String>] :metric_groups
-    #   Names of metric groups to add this fleet to. Use an existing metric
-    #   group name to add this fleet to the group. Or use a new name to create
-    #   a new metric group. A fleet can only be included in one metric group
-    #   at a time.
+    #   Name of a metric group to add this fleet to. A metric group tracks
+    #   metrics across all fleets in the group. Use an existing metric group
+    #   name to add this fleet to the group, or use a new name to create a new
+    #   metric group. A fleet can only be included in one metric group at a
+    #   time.
     #
     # @option params [String] :peer_vpc_aws_account_id
     #   Unique identifier for the AWS account with the VPC that you want to
@@ -764,10 +786,10 @@ module Aws::GameLift
     #   names do not need to be unique.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   Set of developer-defined properties for a game session, formatted as a
-    #   set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a request
-    #   to start a new game session (see [Start a Game Session][1]).
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]).
     #
     #
     #
@@ -799,10 +821,10 @@ module Aws::GameLift
     #   this time period and then deleted.
     #
     # @option params [String] :game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession object,
-    #   which is passed to the game server with a request to start a new game
-    #   session (see [Start a Game Session][1]).
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the GameSession
+    #   object with a request to start a new game session (see [Start a Game
+    #   Session][1]).
     #
     #
     #
@@ -849,6 +871,7 @@ module Aws::GameLift
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
     #   resp.game_session.game_session_data #=> String
+    #   resp.game_session.matchmaker_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSession AWS API Documentation
     #
@@ -1079,23 +1102,22 @@ module Aws::GameLift
     #   configuration.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   Set of developer-defined properties for a game session, formatted as a
-    #   set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a request
-    #   to start a new game session (see [Start a Game Session][1]). This
-    #   information is added to the new GameSession object that is created for
-    #   a successful match.
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]). This information is added to the new
+    #   GameSession object that is created for a successful match.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @option params [String] :game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession object,
-    #   which is passed to the game server with a request to start a new game
-    #   session (see [Start a Game Session][1]). This information is added to
-    #   the new GameSession object that is created for a successful match.
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the GameSession
+    #   object with a request to start a new game session (see [Start a Game
+    #   Session][1]). This information is added to the new GameSession object
+    #   that is created for a successful match.
     #
     #
     #
@@ -2012,7 +2034,7 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves properties for a build. To get a build record, specify a
+    # Retrieves properties for a build. To request a build record, specify a
     # build ID. If successful, an object containing the build properties is
     # returned.
     #
@@ -2781,6 +2803,7 @@ module Aws::GameLift
     #   resp.game_session_details[0].game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session_details[0].game_session.creator_id #=> String
     #   resp.game_session_details[0].game_session.game_session_data #=> String
+    #   resp.game_session_details[0].game_session.matchmaker_data #=> String
     #   resp.game_session_details[0].protection_policy #=> String, one of "NoProtection", "FullProtection"
     #   resp.next_token #=> String
     #
@@ -2857,6 +2880,7 @@ module Aws::GameLift
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
     #   resp.game_session_placement.placed_player_sessions[0].player_session_id #=> String
     #   resp.game_session_placement.game_session_data #=> String
+    #   resp.game_session_placement.matchmaker_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionPlacement AWS API Documentation
     #
@@ -3028,6 +3052,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
     #   resp.game_sessions[0].game_session_data #=> String
+    #   resp.game_sessions[0].matchmaker_data #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessions AWS API Documentation
@@ -3099,20 +3124,19 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves a set of one or more matchmaking tickets. Use this operation
-    # to retrieve ticket information, including status and--once a
-    # successful match is made--acquire connection information for the
-    # resulting new game session.
+    # Retrieves one or more matchmaking tickets. Use this operation to
+    # retrieve ticket information, including status and--once a successful
+    # match is made--acquire connection information for the resulting new
+    # game session.
     #
     # You can use this operation to track the progress of matchmaking
     # requests (through polling) as an alternative to using event
     # notifications. See more details on tracking matchmaking requests
     # through polling or notifications in StartMatchmaking.
     #
-    # You can request data for a one or a list of ticket IDs. If the request
-    # is successful, a ticket object is returned for each requested ID. When
-    # specifying a list of ticket IDs, objects are returned only for tickets
-    # that currently exist.
+    # To request matchmaking tickets, provide a list of up to 10 ticket IDs.
+    # If the request is successful, a ticket object is returned for each
+    # requested ID that currently exists.
     #
     # Matchmaking-related operations include:
     #
@@ -3125,8 +3149,8 @@ module Aws::GameLift
     # * AcceptMatch
     #
     # @option params [required, Array<String>] :ticket_ids
-    #   Unique identifier for a matchmaking ticket. To request all existing
-    #   tickets, leave this parameter empty.
+    #   Unique identifier for a matchmaking ticket. You can include up to 10
+    #   ID values.
     #
     # @return [Types::DescribeMatchmakingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4286,10 +4310,14 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # <i>This API call is not currently in use. </i> Retrieves a fresh set
-    # of upload credentials and the assigned Amazon S3 storage location for
-    # a specific build. Valid credentials are required to upload your game
-    # build files to Amazon S3.
+    # Retrieves a fresh set of credentials for use when uploading a new set
+    # of game build files to Amazon GameLift's Amazon S3. This is done as
+    # part of the build creation process; see CreateBuild.
+    #
+    # To request new credentials, specify the build ID as returned with an
+    # initial `CreateBuild` request. If successful, a new set of credentials
+    # are returned, along with the S3 storage location associated with the
+    # build ID.
     #
     # @option params [required, String] :build_id
     #   Unique identifier for a build to get credentials for.
@@ -4366,15 +4394,9 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # Retrieves a set of game sessions that match a set of search criteria
-    # and sorts them in a specified order. A game session search is limited
-    # to a single fleet. Search results include only game sessions that are
-    # in `ACTIVE` status. If you need to retrieve game sessions with a
-    # status other than active, use DescribeGameSessions. If you need to
-    # retrieve the protection policy for each game session, use
-    # DescribeGameSessionDetails.
-    #
-    # You can search or sort by the following game session attributes:
+    # Retrieves all active game sessions that match a set of search criteria
+    # and sorts them in a specified order. You can search or sort by the
+    # following game session attributes:
     #
     # * **gameSessionId** -- Unique identifier for the game session. You can
     #   use either a `GameSessionId` or `GameSessionArn` value.
@@ -4384,6 +4406,19 @@ module Aws::GameLift
     #   updating with UpdateGameSession. Game session names do not need to
     #   be unique to a game session.
     #
+    # * **gameSessionProperties** -- Custom data defined in a game
+    #   session's `GameProperty` parameter. `GameProperty` values are
+    #   stored as key:value pairs; the filter expression must indicate the
+    #   key and a string to search the data values for. For example, to
+    #   search for game sessions with custom data containing the key:value
+    #   pair "gameMode:brawl", specify the following:
+    #   gameSessionProperties.gameMode = "brawl". All custom data values
+    #   are searched as strings.
+    #
+    # * **maximumSessions** -- Maximum number of player sessions allowed for
+    #   a game session. This value is set when requesting a new game session
+    #   with CreateGameSession or updating with UpdateGameSession.
+    #
     # * **creationTimeMillis** -- Value indicating when a game session was
     #   created. It is expressed in Unix time as milliseconds.
     #
@@ -4391,22 +4426,11 @@ module Aws::GameLift
     #   game session. This value changes rapidly as players join the session
     #   or drop out.
     #
-    # * **maximumSessions** -- Maximum number of player sessions allowed for
-    #   a game session. This value is set when requesting a new game session
-    #   with CreateGameSession or updating with UpdateGameSession.
-    #
     # * **hasAvailablePlayerSessions** -- Boolean value indicating whether a
-    #   game session has reached its maximum number of players. When
-    #   searching with this attribute, the search value must be `true` or
-    #   `false`. It is highly recommended that all search requests include
-    #   this filter attribute to optimize search performance and return only
-    #   sessions that players can join.
-    #
-    # To search or sort, specify either a fleet ID or an alias ID, and
-    # provide a search filter expression, a sort expression, or both. Use
-    # the pagination parameters to retrieve results as a set of sequential
-    # pages. If successful, a collection of GameSession objects matching the
-    # request is returned.
+    #   game session has reached its maximum number of players. It is highly
+    #   recommended that all search requests include this filter attribute
+    #   to optimize search performance and return only sessions that players
+    #   can join.
     #
     # <note markdown="1"> Returned values for `playerSessionCount` and
     # `hasAvailablePlayerSessions` change quickly as players join sessions
@@ -4415,6 +4439,18 @@ module Aws::GameLift
     # up before a player can join.
     #
     #  </note>
+    #
+    # To search or sort, specify either a fleet ID or an alias ID, and
+    # provide a search filter expression, a sort expression, or both. If
+    # successful, a collection of GameSession objects matching the request
+    # is returned. Use the pagination parameters to retrieve results as a
+    # set of sequential pages.
+    #
+    # You can search for game sessions one fleet at a time only. To find
+    # game sessions across multiple fleets, you must search each fleet
+    # separately and combine the results. This search feature finds only
+    # game sessions that are in `ACTIVE` status. To locate games in statuses
+    # other than active, use DescribeGameSessionDetails.
     #
     # Game-session-related operations include:
     #
@@ -4456,20 +4492,21 @@ module Aws::GameLift
     #   condition consists of the following:
     #
     #   * **Operand** -- Name of a game session attribute. Valid values are
-    #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
-    #     `playerSessionCount`, `maximumSessions`,
+    #     `gameSessionName`, `gameSessionId`, `gameSessionProperties`,
+    #     `maximumSessions`, `creationTimeMillis`, `playerSessionCount`,
     #     `hasAvailablePlayerSessions`.
     #
     #   * **Comparator** -- Valid comparators are: `=`, `<>`, `<`, `>`, `<=`,
     #     `>=`.
     #
-    #   * **Value** -- Value to be searched for. Values can be numbers,
-    #     boolean values (true/false) or strings. String values are case
-    #     sensitive, enclosed in single quotes. Special characters must be
-    #     escaped. Boolean and string values can only be used with the
-    #     comparators `=` and `<>`. For example, the following filter
-    #     expression searches on `gameSessionName`\: "`FilterExpression":
-    #     "gameSessionName = 'Matt\'s Awesome Game 1'"`.
+    #   * **Value** -- Value to be searched for. Values may be numbers,
+    #     boolean values (true/false) or strings depending on the operand.
+    #     String values are case sensitive and must be enclosed in single
+    #     quotes. Special characters must be escaped. Boolean and string
+    #     values can only be used with the comparators `=` and `<>`. For
+    #     example, the following filter expression searches on
+    #     `gameSessionName`\: "`FilterExpression": "gameSessionName =
+    #     'Matt\'s Awesome Game 1'"`.
     #
     #   To chain multiple conditions in a single expression, use the logical
     #   keywords `AND`, `OR`, and `NOT` and parentheses as needed. For
@@ -4498,8 +4535,8 @@ module Aws::GameLift
     #   expression consists of the following elements:
     #
     #   * **Operand** -- Name of a game session attribute. Valid values are
-    #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
-    #     `playerSessionCount`, `maximumSessions`,
+    #     `gameSessionName`, `gameSessionId`, `gameSessionProperties`,
+    #     `maximumSessions`, `creationTimeMillis`, `playerSessionCount`,
     #     `hasAvailablePlayerSessions`.
     #
     #   * **Order** -- Valid sort orders are `ASC` (ascending) and `DESC`
@@ -4555,6 +4592,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_sessions[0].creator_id #=> String
     #   resp.game_sessions[0].game_session_data #=> String
+    #   resp.game_sessions[0].matchmaker_data #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessions AWS API Documentation
@@ -4642,10 +4680,10 @@ module Aws::GameLift
     #   Name of the queue to use to place the new game session.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   Set of developer-defined properties for a game session, formatted as a
-    #   set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a request
-    #   to start a new game session (see [Start a Game Session][1]).
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]).
     #
     #
     #
@@ -4669,10 +4707,10 @@ module Aws::GameLift
     #   Set of information on each player to create a player session for.
     #
     # @option params [String] :game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession object,
-    #   which is passed to the game server with a request to start a new game
-    #   session (see [Start a Game Session][1]).
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the GameSession
+    #   object with a request to start a new game session (see [Start a Game
+    #   Session][1]).
     #
     #
     #
@@ -4736,6 +4774,7 @@ module Aws::GameLift
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
     #   resp.game_session_placement.placed_player_sessions[0].player_session_id #=> String
     #   resp.game_session_placement.game_session_data #=> String
+    #   resp.game_session_placement.matchmaker_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartGameSessionPlacement AWS API Documentation
     #
@@ -4743,6 +4782,149 @@ module Aws::GameLift
     # @param [Hash] params ({})
     def start_game_session_placement(params = {}, options = {})
       req = build_request(:start_game_session_placement, params)
+      req.send_request(options)
+    end
+
+    # Finds new players to fill open slots in an existing game session. This
+    # operation can be used to add players to matched games that start with
+    # fewer than the maximum number of players or to replace players when
+    # they drop out. By backfilling with the same matchmaker used to create
+    # the original match, you ensure that new players meet the match
+    # criteria and maintain a consistent experience throughout the game
+    # session. You can backfill a match anytime after a game session has
+    # been created.
+    #
+    # To request a match backfill, specify a unique ticket ID, the existing
+    # game session's ARN, a matchmaking configuration, and a set of data
+    # that describes all current players in the game session. If successful,
+    # a match backfill ticket is created and returned with status set to
+    # QUEUED. The ticket is placed in the matchmaker's ticket pool and
+    # processed. Track the status of the ticket to respond as needed. For
+    # more detail how to set up backfilling, see [ Set up Match
+    # Backfilling][1].
+    #
+    # The process of finding backfill matches is essentially identical to
+    # the initial matchmaking process. The matchmaker searches the pool and
+    # groups tickets together to form potential matches, allowing only one
+    # backfill ticket per potential match. Once the a match is formed, the
+    # matchmaker creates player sessions for the new players. All tickets in
+    # the match are updated with the game session's connection information,
+    # and the GameSession object is updated to include matchmaker data on
+    # the new players. For more detail on how match backfill requests are
+    # processed, see [ How Amazon GameLift FlexMatch Works][2].
+    #
+    # Matchmaking-related operations include:
+    #
+    # * StartMatchmaking
+    #
+    # * DescribeMatchmaking
+    #
+    # * StopMatchmaking
+    #
+    # * AcceptMatch
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html
+    # [2]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
+    #
+    # @option params [String] :ticket_id
+    #   Unique identifier for a matchmaking ticket. If no ticket ID is
+    #   specified here, Amazon GameLift will generate one in the form of a
+    #   UUID. Use this identifier to track the match backfill ticket status
+    #   and retrieve match results.
+    #
+    # @option params [required, String] :configuration_name
+    #   Name of the matchmaker to use for this request. The name of the
+    #   matchmaker that was used with the original game session is listed in
+    #   the GameSession object, `MatchmakerData` property. This property
+    #   contains a matchmaking configuration ARN value, which includes the
+    #   matchmaker name. (In the ARN value
+    #   "arn:aws:gamelift:us-west-2:111122223333:matchmakingconfiguration/MM-4v4",
+    #   the matchmaking configuration name is "MM-4v4".) Use only the name
+    #   for this parameter.
+    #
+    # @option params [required, String] :game_session_arn
+    #   Amazon Resource Name ([ARN][1]) that is assigned to a game session and
+    #   uniquely identifies it.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #
+    # @option params [required, Array<Types::Player>] :players
+    #   Match information on all players that are currently assigned to the
+    #   game session. This information is used by the matchmaker to find new
+    #   players and add them to the existing game.
+    #
+    #   * PlayerID, PlayerAttributes, Team -- This information is maintained
+    #     in the GameSession object, `MatchmakerData` property, for all
+    #     players who are currently assigned to the game session. The
+    #     matchmaker data is in JSON syntax, formatted as a string. For more
+    #     details, see [ Match Data][1].
+    #
+    #   * LatencyInMs -- If the matchmaker uses player latency, include a
+    #     latency value, in milliseconds, for the region that the game session
+    #     is currently in. Do not include latency values for any other region.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data
+    #
+    # @return [Types::StartMatchBackfillOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartMatchBackfillOutput#matchmaking_ticket #matchmaking_ticket} => Types::MatchmakingTicket
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_match_backfill({
+    #     ticket_id: "MatchmakingIdStringModel",
+    #     configuration_name: "MatchmakingIdStringModel", # required
+    #     game_session_arn: "ArnStringModel", # required
+    #     players: [ # required
+    #       {
+    #         player_id: "NonZeroAndMaxString",
+    #         player_attributes: {
+    #           "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #         },
+    #         team: "NonZeroAndMaxString",
+    #         latency_in_ms: {
+    #           "NonEmptyString" => 1,
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.matchmaking_ticket.ticket_id #=> String
+    #   resp.matchmaking_ticket.configuration_name #=> String
+    #   resp.matchmaking_ticket.status #=> String, one of "CANCELLED", "COMPLETED", "FAILED", "PLACING", "QUEUED", "REQUIRES_ACCEPTANCE", "SEARCHING", "TIMED_OUT"
+    #   resp.matchmaking_ticket.status_reason #=> String
+    #   resp.matchmaking_ticket.status_message #=> String
+    #   resp.matchmaking_ticket.start_time #=> Time
+    #   resp.matchmaking_ticket.end_time #=> Time
+    #   resp.matchmaking_ticket.players #=> Array
+    #   resp.matchmaking_ticket.players[0].player_id #=> String
+    #   resp.matchmaking_ticket.players[0].player_attributes #=> Hash
+    #   resp.matchmaking_ticket.players[0].player_attributes["NonZeroAndMaxString"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.matchmaking_ticket.players[0].team #=> String
+    #   resp.matchmaking_ticket.players[0].latency_in_ms #=> Hash
+    #   resp.matchmaking_ticket.players[0].latency_in_ms["NonEmptyString"] #=> Integer
+    #   resp.matchmaking_ticket.game_session_connection_info.game_session_arn #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.ip_address #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.port #=> Integer
+    #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions #=> Array
+    #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_id #=> String
+    #   resp.matchmaking_ticket.game_session_connection_info.matched_player_sessions[0].player_session_id #=> String
+    #   resp.matchmaking_ticket.estimated_wait_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartMatchBackfill AWS API Documentation
+    #
+    # @overload start_match_backfill(params = {})
+    # @param [Hash] params ({})
+    def start_match_backfill(params = {}, options = {})
+      req = build_request(:start_match_backfill, params)
       req.send_request(options)
     end
 
@@ -4830,8 +5012,10 @@ module Aws::GameLift
     # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/match-intro.html
     #
     # @option params [String] :ticket_id
-    #   Unique identifier for a matchmaking ticket. Use this identifier to
-    #   track the matchmaking ticket status and retrieve match results.
+    #   Unique identifier for a matchmaking ticket. If no ticket ID is
+    #   specified here, Amazon GameLift will generate one in the form of a
+    #   UUID. Use this identifier to track the matchmaking ticket status and
+    #   retrieve match results.
     #
     # @option params [required, String] :configuration_name
     #   Name of the matchmaking configuration to use for this request.
@@ -4856,7 +5040,7 @@ module Aws::GameLift
     #     configuration_name: "MatchmakingIdStringModel", # required
     #     players: [ # required
     #       {
-    #         player_id: "PlayerIdStringModel",
+    #         player_id: "NonZeroAndMaxString",
     #         player_attributes: {
     #           "NonZeroAndMaxString" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #         },
@@ -4965,6 +5149,7 @@ module Aws::GameLift
     #   resp.game_session_placement.placed_player_sessions[0].player_id #=> String
     #   resp.game_session_placement.placed_player_sessions[0].player_session_id #=> String
     #   resp.game_session_placement.game_session_data #=> String
+    #   resp.game_session_placement.matchmaker_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacement AWS API Documentation
     #
@@ -5545,6 +5730,7 @@ module Aws::GameLift
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
     #   resp.game_session.game_session_data #=> String
+    #   resp.game_session.matchmaker_data #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSession AWS API Documentation
     #
@@ -5717,23 +5903,22 @@ module Aws::GameLift
     #   configuration.
     #
     # @option params [Array<Types::GameProperty>] :game_properties
-    #   Set of developer-defined properties for a game session, formatted as a
-    #   set of type:value pairs. These properties are included in the
-    #   GameSession object, which is passed to the game server with a request
-    #   to start a new game session (see [Start a Game Session][1]). This
-    #   information is added to the new GameSession object that is created for
-    #   a successful match.
+    #   Set of custom properties for a game session, formatted as key:value
+    #   pairs. These properties are passed to a game server process in the
+    #   GameSession object with a request to start a new game session (see
+    #   [Start a Game Session][1]). This information is added to the new
+    #   GameSession object that is created for a successful match.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
     #
     # @option params [String] :game_session_data
-    #   Set of developer-defined game session properties, formatted as a
-    #   single string value. This data is included in the GameSession object,
-    #   which is passed to the game server with a request to start a new game
-    #   session (see [Start a Game Session][1]). This information is added to
-    #   the new GameSession object that is created for a successful match.
+    #   Set of custom game session properties, formatted as a single string
+    #   value. This data is passed to a game server process in the GameSession
+    #   object with a request to start a new game session (see [Start a Game
+    #   Session][1]). This information is added to the new GameSession object
+    #   that is created for a successful match.
     #
     #
     #
@@ -5969,7 +6154,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

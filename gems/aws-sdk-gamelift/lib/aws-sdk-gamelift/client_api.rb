@@ -20,7 +20,7 @@ module Aws::GameLift
     ArnStringModel = Shapes::StringShape.new(name: 'ArnStringModel')
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
     AwsCredentials = Shapes::StructureShape.new(name: 'AwsCredentials')
-    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanModel = Shapes::BooleanShape.new(name: 'BooleanModel')
     Build = Shapes::StructureShape.new(name: 'Build')
     BuildId = Shapes::StringShape.new(name: 'BuildId')
     BuildList = Shapes::ListShape.new(name: 'BuildList')
@@ -179,13 +179,13 @@ module Aws::GameLift
     ListFleetsOutput = Shapes::StructureShape.new(name: 'ListFleetsOutput')
     MatchedPlayerSession = Shapes::StructureShape.new(name: 'MatchedPlayerSession')
     MatchedPlayerSessionList = Shapes::ListShape.new(name: 'MatchedPlayerSessionList')
+    MatchmakerData = Shapes::StringShape.new(name: 'MatchmakerData')
     MatchmakingAcceptanceTimeoutInteger = Shapes::IntegerShape.new(name: 'MatchmakingAcceptanceTimeoutInteger')
     MatchmakingConfiguration = Shapes::StructureShape.new(name: 'MatchmakingConfiguration')
     MatchmakingConfigurationList = Shapes::ListShape.new(name: 'MatchmakingConfigurationList')
     MatchmakingConfigurationStatus = Shapes::StringShape.new(name: 'MatchmakingConfigurationStatus')
     MatchmakingIdList = Shapes::ListShape.new(name: 'MatchmakingIdList')
     MatchmakingIdStringModel = Shapes::StringShape.new(name: 'MatchmakingIdStringModel')
-    MatchmakingPlayerIdList = Shapes::ListShape.new(name: 'MatchmakingPlayerIdList')
     MatchmakingRequestTimeoutInteger = Shapes::IntegerShape.new(name: 'MatchmakingRequestTimeoutInteger')
     MatchmakingRuleSet = Shapes::StructureShape.new(name: 'MatchmakingRuleSet')
     MatchmakingRuleSetList = Shapes::ListShape.new(name: 'MatchmakingRuleSetList')
@@ -209,7 +209,6 @@ module Aws::GameLift
     PlayerData = Shapes::StringShape.new(name: 'PlayerData')
     PlayerDataMap = Shapes::MapShape.new(name: 'PlayerDataMap')
     PlayerIdList = Shapes::ListShape.new(name: 'PlayerIdList')
-    PlayerIdStringModel = Shapes::StringShape.new(name: 'PlayerIdStringModel')
     PlayerLatency = Shapes::StructureShape.new(name: 'PlayerLatency')
     PlayerLatencyList = Shapes::ListShape.new(name: 'PlayerLatencyList')
     PlayerLatencyPolicy = Shapes::StructureShape.new(name: 'PlayerLatencyPolicy')
@@ -249,6 +248,8 @@ module Aws::GameLift
     SnsArnStringModel = Shapes::StringShape.new(name: 'SnsArnStringModel')
     StartGameSessionPlacementInput = Shapes::StructureShape.new(name: 'StartGameSessionPlacementInput')
     StartGameSessionPlacementOutput = Shapes::StructureShape.new(name: 'StartGameSessionPlacementOutput')
+    StartMatchBackfillInput = Shapes::StructureShape.new(name: 'StartMatchBackfillInput')
+    StartMatchBackfillOutput = Shapes::StructureShape.new(name: 'StartMatchBackfillOutput')
     StartMatchmakingInput = Shapes::StructureShape.new(name: 'StartMatchmakingInput')
     StartMatchmakingOutput = Shapes::StructureShape.new(name: 'StartMatchmakingOutput')
     StopGameSessionPlacementInput = Shapes::StructureShape.new(name: 'StopGameSessionPlacementInput')
@@ -290,7 +291,7 @@ module Aws::GameLift
     WholeNumber = Shapes::IntegerShape.new(name: 'WholeNumber')
 
     AcceptMatchInput.add_member(:ticket_id, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "TicketId"))
-    AcceptMatchInput.add_member(:player_ids, Shapes::ShapeRef.new(shape: MatchmakingPlayerIdList, required: true, location_name: "PlayerIds"))
+    AcceptMatchInput.add_member(:player_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "PlayerIds"))
     AcceptMatchInput.add_member(:acceptance_type, Shapes::ShapeRef.new(shape: AcceptanceType, required: true, location_name: "AcceptanceType"))
     AcceptMatchInput.struct_class = Types::AcceptMatchInput
 
@@ -395,7 +396,7 @@ module Aws::GameLift
     CreateMatchmakingConfigurationInput.add_member(:game_session_queue_arns, Shapes::ShapeRef.new(shape: QueueArnsList, required: true, location_name: "GameSessionQueueArns"))
     CreateMatchmakingConfigurationInput.add_member(:request_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingRequestTimeoutInteger, required: true, location_name: "RequestTimeoutSeconds"))
     CreateMatchmakingConfigurationInput.add_member(:acceptance_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingAcceptanceTimeoutInteger, location_name: "AcceptanceTimeoutSeconds"))
-    CreateMatchmakingConfigurationInput.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "AcceptanceRequired"))
+    CreateMatchmakingConfigurationInput.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: BooleanModel, required: true, location_name: "AcceptanceRequired"))
     CreateMatchmakingConfigurationInput.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "RuleSetName"))
     CreateMatchmakingConfigurationInput.add_member(:notification_target, Shapes::ShapeRef.new(shape: SnsArnStringModel, location_name: "NotificationTarget"))
     CreateMatchmakingConfigurationInput.add_member(:additional_player_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "AdditionalPlayerCount"))
@@ -743,6 +744,7 @@ module Aws::GameLift
     GameSession.add_member(:player_session_creation_policy, Shapes::ShapeRef.new(shape: PlayerSessionCreationPolicy, location_name: "PlayerSessionCreationPolicy"))
     GameSession.add_member(:creator_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "CreatorId"))
     GameSession.add_member(:game_session_data, Shapes::ShapeRef.new(shape: GameSessionData, location_name: "GameSessionData"))
+    GameSession.add_member(:matchmaker_data, Shapes::ShapeRef.new(shape: MatchmakerData, location_name: "MatchmakerData"))
     GameSession.struct_class = Types::GameSession
 
     GameSessionConnectionInfo.add_member(:game_session_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "GameSessionArn"))
@@ -775,6 +777,7 @@ module Aws::GameLift
     GameSessionPlacement.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "Port"))
     GameSessionPlacement.add_member(:placed_player_sessions, Shapes::ShapeRef.new(shape: PlacedPlayerSessionList, location_name: "PlacedPlayerSessions"))
     GameSessionPlacement.add_member(:game_session_data, Shapes::ShapeRef.new(shape: GameSessionData, location_name: "GameSessionData"))
+    GameSessionPlacement.add_member(:matchmaker_data, Shapes::ShapeRef.new(shape: MatchmakerData, location_name: "MatchmakerData"))
     GameSessionPlacement.struct_class = Types::GameSessionPlacement
 
     GameSessionQueue.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueName, location_name: "Name"))
@@ -878,7 +881,7 @@ module Aws::GameLift
     MatchmakingConfiguration.add_member(:game_session_queue_arns, Shapes::ShapeRef.new(shape: QueueArnsList, location_name: "GameSessionQueueArns"))
     MatchmakingConfiguration.add_member(:request_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingRequestTimeoutInteger, location_name: "RequestTimeoutSeconds"))
     MatchmakingConfiguration.add_member(:acceptance_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingAcceptanceTimeoutInteger, location_name: "AcceptanceTimeoutSeconds"))
-    MatchmakingConfiguration.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "AcceptanceRequired"))
+    MatchmakingConfiguration.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: BooleanModel, location_name: "AcceptanceRequired"))
     MatchmakingConfiguration.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "RuleSetName"))
     MatchmakingConfiguration.add_member(:notification_target, Shapes::ShapeRef.new(shape: SnsArnStringModel, location_name: "NotificationTarget"))
     MatchmakingConfiguration.add_member(:additional_player_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "AdditionalPlayerCount"))
@@ -891,8 +894,6 @@ module Aws::GameLift
     MatchmakingConfigurationList.member = Shapes::ShapeRef.new(shape: MatchmakingConfiguration)
 
     MatchmakingIdList.member = Shapes::ShapeRef.new(shape: MatchmakingIdStringModel)
-
-    MatchmakingPlayerIdList.member = Shapes::ShapeRef.new(shape: PlayerIdStringModel)
 
     MatchmakingRuleSet.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "RuleSetName"))
     MatchmakingRuleSet.add_member(:rule_set_body, Shapes::ShapeRef.new(shape: RuleSetBody, required: true, location_name: "RuleSetBody"))
@@ -925,7 +926,7 @@ module Aws::GameLift
 
     PlacedPlayerSessionList.member = Shapes::ShapeRef.new(shape: PlacedPlayerSession)
 
-    Player.add_member(:player_id, Shapes::ShapeRef.new(shape: PlayerIdStringModel, location_name: "PlayerId"))
+    Player.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
     Player.add_member(:player_attributes, Shapes::ShapeRef.new(shape: PlayerAttributeMap, location_name: "PlayerAttributes"))
     Player.add_member(:team, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Team"))
     Player.add_member(:latency_in_ms, Shapes::ShapeRef.new(shape: LatencyMap, location_name: "LatencyInMs"))
@@ -1060,6 +1061,15 @@ module Aws::GameLift
     StartGameSessionPlacementOutput.add_member(:game_session_placement, Shapes::ShapeRef.new(shape: GameSessionPlacement, location_name: "GameSessionPlacement"))
     StartGameSessionPlacementOutput.struct_class = Types::StartGameSessionPlacementOutput
 
+    StartMatchBackfillInput.add_member(:ticket_id, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "TicketId"))
+    StartMatchBackfillInput.add_member(:configuration_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "ConfigurationName"))
+    StartMatchBackfillInput.add_member(:game_session_arn, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "GameSessionArn"))
+    StartMatchBackfillInput.add_member(:players, Shapes::ShapeRef.new(shape: PlayerList, required: true, location_name: "Players"))
+    StartMatchBackfillInput.struct_class = Types::StartMatchBackfillInput
+
+    StartMatchBackfillOutput.add_member(:matchmaking_ticket, Shapes::ShapeRef.new(shape: MatchmakingTicket, location_name: "MatchmakingTicket"))
+    StartMatchBackfillOutput.struct_class = Types::StartMatchBackfillOutput
+
     StartMatchmakingInput.add_member(:ticket_id, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "TicketId"))
     StartMatchmakingInput.add_member(:configuration_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, required: true, location_name: "ConfigurationName"))
     StartMatchmakingInput.add_member(:players, Shapes::ShapeRef.new(shape: PlayerList, required: true, location_name: "Players"))
@@ -1153,7 +1163,7 @@ module Aws::GameLift
     UpdateMatchmakingConfigurationInput.add_member(:game_session_queue_arns, Shapes::ShapeRef.new(shape: QueueArnsList, location_name: "GameSessionQueueArns"))
     UpdateMatchmakingConfigurationInput.add_member(:request_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingRequestTimeoutInteger, location_name: "RequestTimeoutSeconds"))
     UpdateMatchmakingConfigurationInput.add_member(:acceptance_timeout_seconds, Shapes::ShapeRef.new(shape: MatchmakingAcceptanceTimeoutInteger, location_name: "AcceptanceTimeoutSeconds"))
-    UpdateMatchmakingConfigurationInput.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "AcceptanceRequired"))
+    UpdateMatchmakingConfigurationInput.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: BooleanModel, location_name: "AcceptanceRequired"))
     UpdateMatchmakingConfigurationInput.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: MatchmakingIdStringModel, location_name: "RuleSetName"))
     UpdateMatchmakingConfigurationInput.add_member(:notification_target, Shapes::ShapeRef.new(shape: SnsArnStringModel, location_name: "NotificationTarget"))
     UpdateMatchmakingConfigurationInput.add_member(:additional_player_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "AdditionalPlayerCount"))
@@ -1175,7 +1185,7 @@ module Aws::GameLift
     ValidateMatchmakingRuleSetInput.add_member(:rule_set_body, Shapes::ShapeRef.new(shape: RuleSetBody, required: true, location_name: "RuleSetBody"))
     ValidateMatchmakingRuleSetInput.struct_class = Types::ValidateMatchmakingRuleSetInput
 
-    ValidateMatchmakingRuleSetOutput.add_member(:valid, Shapes::ShapeRef.new(shape: Boolean, location_name: "Valid"))
+    ValidateMatchmakingRuleSetOutput.add_member(:valid, Shapes::ShapeRef.new(shape: BooleanModel, location_name: "Valid"))
     ValidateMatchmakingRuleSetOutput.struct_class = Types::ValidateMatchmakingRuleSetOutput
 
     VpcPeeringAuthorization.add_member(:game_lift_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameLiftAwsAccountId"))
@@ -1840,6 +1850,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:start_match_backfill, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartMatchBackfill"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartMatchBackfillInput)
+        o.output = Shapes::ShapeRef.new(shape: StartMatchBackfillOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
       end)
 
       api.add_operation(:start_matchmaking, Seahorse::Model::Operation.new.tap do |o|

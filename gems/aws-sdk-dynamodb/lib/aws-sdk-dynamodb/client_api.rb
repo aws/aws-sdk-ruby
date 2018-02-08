@@ -194,6 +194,10 @@ module Aws::DynamoDB
     ReturnConsumedCapacity = Shapes::StringShape.new(name: 'ReturnConsumedCapacity')
     ReturnItemCollectionMetrics = Shapes::StringShape.new(name: 'ReturnItemCollectionMetrics')
     ReturnValue = Shapes::StringShape.new(name: 'ReturnValue')
+    SSEDescription = Shapes::StructureShape.new(name: 'SSEDescription')
+    SSEEnabled = Shapes::BooleanShape.new(name: 'SSEEnabled')
+    SSESpecification = Shapes::StructureShape.new(name: 'SSESpecification')
+    SSEStatus = Shapes::StringShape.new(name: 'SSEStatus')
     ScalarAttributeType = Shapes::StringShape.new(name: 'ScalarAttributeType')
     ScanInput = Shapes::StructureShape.new(name: 'ScanInput')
     ScanOutput = Shapes::StructureShape.new(name: 'ScanOutput')
@@ -382,6 +386,7 @@ module Aws::DynamoDB
     CreateTableInput.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
     CreateTableInput.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, required: true, location_name: "ProvisionedThroughput"))
     CreateTableInput.add_member(:stream_specification, Shapes::ShapeRef.new(shape: StreamSpecification, location_name: "StreamSpecification"))
+    CreateTableInput.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     CreateTableInput.struct_class = Types::CreateTableInput
 
     CreateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -742,6 +747,12 @@ module Aws::DynamoDB
     RestoreTableFromBackupOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
     RestoreTableFromBackupOutput.struct_class = Types::RestoreTableFromBackupOutput
 
+    SSEDescription.add_member(:status, Shapes::ShapeRef.new(shape: SSEStatus, location_name: "Status"))
+    SSEDescription.struct_class = Types::SSEDescription
+
+    SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, required: true, location_name: "Enabled"))
+    SSESpecification.struct_class = Types::SSESpecification
+
     ScanInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
     ScanInput.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, location_name: "IndexName"))
     ScanInput.add_member(:attributes_to_get, Shapes::ShapeRef.new(shape: AttributeNameList, location_name: "AttributesToGet"))
@@ -784,6 +795,7 @@ module Aws::DynamoDB
     SourceTableFeatureDetails.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: GlobalSecondaryIndexes, location_name: "GlobalSecondaryIndexes"))
     SourceTableFeatureDetails.add_member(:stream_description, Shapes::ShapeRef.new(shape: StreamSpecification, location_name: "StreamDescription"))
     SourceTableFeatureDetails.add_member(:time_to_live_description, Shapes::ShapeRef.new(shape: TimeToLiveDescription, location_name: "TimeToLiveDescription"))
+    SourceTableFeatureDetails.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     SourceTableFeatureDetails.struct_class = Types::SourceTableFeatureDetails
 
     StreamSpecification.add_member(:stream_enabled, Shapes::ShapeRef.new(shape: StreamEnabled, location_name: "StreamEnabled"))
@@ -808,6 +820,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:latest_stream_label, Shapes::ShapeRef.new(shape: String, location_name: "LatestStreamLabel"))
     TableDescription.add_member(:latest_stream_arn, Shapes::ShapeRef.new(shape: StreamArn, location_name: "LatestStreamArn"))
     TableDescription.add_member(:restore_summary, Shapes::ShapeRef.new(shape: RestoreSummary, location_name: "RestoreSummary"))
+    TableDescription.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     TableDescription.struct_class = Types::TableDescription
 
     TableNameList.member = Shapes::ShapeRef.new(shape: TableName)

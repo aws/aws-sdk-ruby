@@ -77,11 +77,11 @@ module Aws::Budgets
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
     Budget.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
-    Budget.add_member(:budget_limit, Shapes::ShapeRef.new(shape: Spend, required: true, location_name: "BudgetLimit"))
+    Budget.add_member(:budget_limit, Shapes::ShapeRef.new(shape: Spend, location_name: "BudgetLimit"))
     Budget.add_member(:cost_filters, Shapes::ShapeRef.new(shape: CostFilters, location_name: "CostFilters"))
     Budget.add_member(:cost_types, Shapes::ShapeRef.new(shape: CostTypes, location_name: "CostTypes"))
     Budget.add_member(:time_unit, Shapes::ShapeRef.new(shape: TimeUnit, required: true, location_name: "TimeUnit"))
-    Budget.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, required: true, location_name: "TimePeriod"))
+    Budget.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, location_name: "TimePeriod"))
     Budget.add_member(:calculated_spend, Shapes::ShapeRef.new(shape: CalculatedSpend, location_name: "CalculatedSpend"))
     Budget.add_member(:budget_type, Shapes::ShapeRef.new(shape: BudgetType, required: true, location_name: "BudgetType"))
     Budget.struct_class = Types::Budget
@@ -215,8 +215,8 @@ module Aws::Budgets
 
     Subscribers.member = Shapes::ShapeRef.new(shape: Subscriber)
 
-    TimePeriod.add_member(:start, Shapes::ShapeRef.new(shape: GenericTimestamp, required: true, location_name: "Start"))
-    TimePeriod.add_member(:end, Shapes::ShapeRef.new(shape: GenericTimestamp, required: true, location_name: "End"))
+    TimePeriod.add_member(:start, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "Start"))
+    TimePeriod.add_member(:end, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "End"))
     TimePeriod.struct_class = Types::TimePeriod
 
     UpdateBudgetRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))

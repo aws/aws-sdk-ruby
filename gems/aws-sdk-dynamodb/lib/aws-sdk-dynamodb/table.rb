@@ -297,6 +297,13 @@ module Aws::DynamoDB
       data[:restore_summary]
     end
 
+    # The description of the server-side encryption status on the specified
+    # table.
+    # @return [Types::SSEDescription]
+    def sse_description
+      data[:sse_description]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1187,11 +1194,12 @@ module Aws::DynamoDB
     #   retrieved by the `Query` action.
     #
     #   The condition must perform an equality test on a single partition key
-    #   value. The condition can also perform one of several comparison tests
-    #   on a single sort key value. `Query` can use `KeyConditionExpression`
-    #   to retrieve one item with a given partition key value and sort key
-    #   value, or several items that have the same partition key value but
-    #   different sort key values.
+    #   value.
+    #
+    #   The condition can optionally perform one of several comparison tests
+    #   on a single sort key value. This allows `Query` to retrieve one item
+    #   with a given partition key value and sort key value, or several items
+    #   that have the same partition key value but different sort key values.
     #
     #   The partition key equality test is required, and must be specified in
     #   the following format:

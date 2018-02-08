@@ -224,8 +224,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [required, String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA,
-    #   REDSHIFT, S3, SYBASE, DYNAMODB, MONGODB, and SQLSERVER.
+    #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
+    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -2205,6 +2205,58 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Returns information about the task logs for the specified task.
+    #
+    # @option params [required, String] :replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::DescribeReplicationInstanceTaskLogsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicationInstanceTaskLogsResponse#replication_instance_arn #replication_instance_arn} => String
+    #   * {Types::DescribeReplicationInstanceTaskLogsResponse#replication_instance_task_logs #replication_instance_task_logs} => Array&lt;Types::ReplicationInstanceTaskLog&gt;
+    #   * {Types::DescribeReplicationInstanceTaskLogsResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replication_instance_task_logs({
+    #     replication_instance_arn: "String", # required
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_instance_arn #=> String
+    #   resp.replication_instance_task_logs #=> Array
+    #   resp.replication_instance_task_logs[0].replication_task_name #=> String
+    #   resp.replication_instance_task_logs[0].replication_task_arn #=> String
+    #   resp.replication_instance_task_logs[0].replication_instance_task_log_size #=> Integer
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstanceTaskLogs AWS API Documentation
+    #
+    # @overload describe_replication_instance_task_logs(params = {})
+    # @param [Hash] params ({})
+    def describe_replication_instance_task_logs(params = {}, options = {})
+      req = build_request(:describe_replication_instance_task_logs, params)
+      req.send_request(options)
+    end
+
     # Returns information about replication instances for your account in
     # the current region.
     #
@@ -2874,8 +2926,8 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
-    #   EndPointType, include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA,
-    #   REDSHIFT, S3, DYNAMODB, MONGODB, SYBASE, and SQLSERVER.
+    #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
+    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -3489,6 +3541,75 @@ module Aws::DatabaseMigrationService
       req.send_request(options)
     end
 
+    # Reboots a replication instance. Rebooting results in a momentary
+    # outage, until the replication instance becomes available again.
+    #
+    # @option params [required, String] :replication_instance_arn
+    #   The Amazon Resource Name (ARN) of the replication instance.
+    #
+    # @option params [Boolean] :force_failover
+    #   If this parameter is `true`, the reboot is conducted through a
+    #   Multi-AZ failover. (If the instance isn't configured for Multi-AZ,
+    #   then you can't specify `true`.)
+    #
+    # @return [Types::RebootReplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RebootReplicationInstanceResponse#replication_instance #replication_instance} => Types::ReplicationInstance
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reboot_replication_instance({
+    #     replication_instance_arn: "String", # required
+    #     force_failover: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_instance.replication_instance_identifier #=> String
+    #   resp.replication_instance.replication_instance_class #=> String
+    #   resp.replication_instance.replication_instance_status #=> String
+    #   resp.replication_instance.allocated_storage #=> Integer
+    #   resp.replication_instance.instance_create_time #=> Time
+    #   resp.replication_instance.vpc_security_groups #=> Array
+    #   resp.replication_instance.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.replication_instance.vpc_security_groups[0].status #=> String
+    #   resp.replication_instance.availability_zone #=> String
+    #   resp.replication_instance.replication_subnet_group.replication_subnet_group_identifier #=> String
+    #   resp.replication_instance.replication_subnet_group.replication_subnet_group_description #=> String
+    #   resp.replication_instance.replication_subnet_group.vpc_id #=> String
+    #   resp.replication_instance.replication_subnet_group.subnet_group_status #=> String
+    #   resp.replication_instance.replication_subnet_group.subnets #=> Array
+    #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_identifier #=> String
+    #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.replication_instance.replication_subnet_group.subnets[0].subnet_status #=> String
+    #   resp.replication_instance.preferred_maintenance_window #=> String
+    #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
+    #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
+    #   resp.replication_instance.pending_modified_values.multi_az #=> Boolean
+    #   resp.replication_instance.pending_modified_values.engine_version #=> String
+    #   resp.replication_instance.multi_az #=> Boolean
+    #   resp.replication_instance.engine_version #=> String
+    #   resp.replication_instance.auto_minor_version_upgrade #=> Boolean
+    #   resp.replication_instance.kms_key_id #=> String
+    #   resp.replication_instance.replication_instance_arn #=> String
+    #   resp.replication_instance.replication_instance_public_ip_address #=> String
+    #   resp.replication_instance.replication_instance_private_ip_address #=> String
+    #   resp.replication_instance.replication_instance_public_ip_addresses #=> Array
+    #   resp.replication_instance.replication_instance_public_ip_addresses[0] #=> String
+    #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
+    #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
+    #   resp.replication_instance.publicly_accessible #=> Boolean
+    #   resp.replication_instance.secondary_availability_zone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstance AWS API Documentation
+    #
+    # @overload reboot_replication_instance(params = {})
+    # @param [Hash] params ({})
+    def reboot_replication_instance(params = {}, options = {})
+      req = build_request(:reboot_replication_instance, params)
+      req.send_request(options)
+    end
+
     # Populates the schema for the specified endpoint. This is an
     # asynchronous operation and can take several minutes. You can check the
     # status of this operation by calling the DescribeRefreshSchemasStatus
@@ -3899,7 +4020,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

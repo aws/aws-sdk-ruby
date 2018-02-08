@@ -108,6 +108,7 @@ module Aws::AppStream
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
+    RedirectURL = Shapes::StringShape.new(name: 'RedirectURL')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceError = Shapes::StructureShape.new(name: 'ResourceError')
     ResourceErrors = Shapes::ListShape.new(name: 'ResourceErrors')
@@ -121,6 +122,8 @@ module Aws::AppStream
     SessionList = Shapes::ListShape.new(name: 'SessionList')
     SessionState = Shapes::StringShape.new(name: 'SessionState')
     Stack = Shapes::StructureShape.new(name: 'Stack')
+    StackAttribute = Shapes::StringShape.new(name: 'StackAttribute')
+    StackAttributes = Shapes::ListShape.new(name: 'StackAttributes')
     StackError = Shapes::StructureShape.new(name: 'StackError')
     StackErrorCode = Shapes::StringShape.new(name: 'StackErrorCode')
     StackErrors = Shapes::ListShape.new(name: 'StackErrors')
@@ -236,6 +239,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateStackRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     CreateStackRequest.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
+    CreateStackRequest.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -486,8 +490,11 @@ module Aws::AppStream
     Stack.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
     Stack.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Stack.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
+    Stack.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
     Stack.add_member(:stack_errors, Shapes::ShapeRef.new(shape: StackErrors, location_name: "StackErrors"))
     Stack.struct_class = Types::Stack
+
+    StackAttributes.member = Shapes::ShapeRef.new(shape: StackAttribute)
 
     StackError.add_member(:error_code, Shapes::ShapeRef.new(shape: StackErrorCode, location_name: "ErrorCode"))
     StackError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
@@ -577,7 +584,9 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateStackRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     UpdateStackRequest.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
-    UpdateStackRequest.add_member(:delete_storage_connectors, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteStorageConnectors"))
+    UpdateStackRequest.add_member(:delete_storage_connectors, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "DeleteStorageConnectors"))
+    UpdateStackRequest.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
+    UpdateStackRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: StackAttributes, location_name: "AttributesToDelete"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))

@@ -12,9 +12,10 @@ module Aws::MediaStore
     # Elemental MediaStore container.
     #
     # @!attribute [rw] endpoint
-    #   The DNS endpoint of the container. Use from 1 to 255 characters. Use
-    #   this endpoint to identify this container when sending requests to
-    #   the data plane.
+    #   The DNS endpoint of the container. Use the endpoint to identify the
+    #   specific container when sending requests to the data plane. The
+    #   service assigns this value when the container is created. Once the
+    #   value has been assigned, it does not change.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -54,6 +55,76 @@ module Aws::MediaStore
       include Aws::Structure
     end
 
+    # A rule for a CORS policy. You can add up to 100 rules to a CORS
+    # policy. If more than one rule applies, the service uses the first
+    # applicable rule listed.
+    #
+    # @note When making an API call, you may pass CorsRule
+    #   data as a hash:
+    #
+    #       {
+    #         allowed_origins: ["Origin"],
+    #         allowed_methods: ["PUT"], # accepts PUT, GET, DELETE, HEAD
+    #         allowed_headers: ["Header"],
+    #         max_age_seconds: 1,
+    #         expose_headers: ["Header"],
+    #       }
+    #
+    # @!attribute [rw] allowed_origins
+    #   One or more response headers that you want users to be able to
+    #   access from their applications (for example, from a JavaScript
+    #   `XMLHttpRequest` object).
+    #
+    #   Each CORS rule must have at least one `AllowedOrigin` element. The
+    #   string value can include only one wildcard character (*), for
+    #   example, http://*.example.com. Additionally, you can specify only
+    #   one wildcard character to allow cross-origin access for all origins.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_methods
+    #   Identifies an HTTP method that the origin that is specified in the
+    #   rule is allowed to execute.
+    #
+    #   Each CORS rule must contain at least one `AllowedMethod` and one
+    #   `AllowedOrigin` element.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allowed_headers
+    #   Specifies which headers are allowed in a preflight `OPTIONS` request
+    #   through the `Access-Control-Request-Headers` header. Each header
+    #   name that is specified in `Access-Control-Request-Headers` must have
+    #   a corresponding entry in the rule. Only the headers that were
+    #   requested are sent back.
+    #
+    #   This element can contain only one wildcard character (*).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_age_seconds
+    #   The time in seconds that your browser caches the preflight response
+    #   for the specified resource.
+    #
+    #   A CORS rule can have only one `MaxAgeSeconds` element.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] expose_headers
+    #   One or more headers in the response that you want users to be able
+    #   to access from their applications (for example, from a JavaScript
+    #   `XMLHttpRequest` object).
+    #
+    #   This element is optional for each rule.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CorsRule AWS API Documentation
+    #
+    class CorsRule < Struct.new(
+      :allowed_origins,
+      :allowed_methods,
+      :allowed_headers,
+      :max_age_seconds,
+      :expose_headers)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateContainerInput
     #   data as a hash:
     #
@@ -85,7 +156,7 @@ module Aws::MediaStore
     #
     #   ContainerName: The container name as specified in the request.
     #
-    #   CreationTime: Unix timestamp.
+    #   CreationTime: Unix time stamp.
     #
     #   Status: The status of container creation or deletion. The status is
     #   one of the following: `CREATING`, `ACTIVE`, or `DELETING`. While the
@@ -148,6 +219,28 @@ module Aws::MediaStore
     #
     class DeleteContainerPolicyOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteCorsPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container to remove the policy from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteCorsPolicyInput AWS API Documentation
+    #
+    class DeleteCorsPolicyInput < Struct.new(
+      :container_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteCorsPolicyOutput AWS API Documentation
+    #
+    class DeleteCorsPolicyOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeContainerInput
     #   data as a hash:
     #
@@ -203,6 +296,35 @@ module Aws::MediaStore
     #
     class GetContainerPolicyOutput < Struct.new(
       :policy)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCorsPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that the policy is assigned to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetCorsPolicyInput AWS API Documentation
+    #
+    class GetCorsPolicyInput < Struct.new(
+      :container_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cors_policy
+    #   The CORS policy of the container.
+    #   @return [Array<Types::CorsRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetCorsPolicyOutput AWS API Documentation
+    #
+    class GetCorsPolicyOutput < Struct.new(
+      :cors_policy)
       include Aws::Structure
     end
 
@@ -285,6 +407,43 @@ module Aws::MediaStore
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutContainerPolicyOutput AWS API Documentation
     #
     class PutContainerPolicyOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutCorsPolicyInput
+    #   data as a hash:
+    #
+    #       {
+    #         container_name: "ContainerName", # required
+    #         cors_policy: [ # required
+    #           {
+    #             allowed_origins: ["Origin"],
+    #             allowed_methods: ["PUT"], # accepts PUT, GET, DELETE, HEAD
+    #             allowed_headers: ["Header"],
+    #             max_age_seconds: 1,
+    #             expose_headers: ["Header"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] container_name
+    #   The name of the container that you want to assign the CORS policy
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] cors_policy
+    #   The CORS policy to apply to the container.
+    #   @return [Array<Types::CorsRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutCorsPolicyInput AWS API Documentation
+    #
+    class PutCorsPolicyInput < Struct.new(
+      :container_name,
+      :cors_policy)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutCorsPolicyOutput AWS API Documentation
+    #
+    class PutCorsPolicyOutput < Aws::EmptyStructure; end
 
   end
 end

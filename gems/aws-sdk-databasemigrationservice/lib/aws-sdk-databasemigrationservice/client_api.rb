@@ -69,6 +69,8 @@ module Aws::DatabaseMigrationService
     DescribeOrderableReplicationInstancesResponse = Shapes::StructureShape.new(name: 'DescribeOrderableReplicationInstancesResponse')
     DescribeRefreshSchemasStatusMessage = Shapes::StructureShape.new(name: 'DescribeRefreshSchemasStatusMessage')
     DescribeRefreshSchemasStatusResponse = Shapes::StructureShape.new(name: 'DescribeRefreshSchemasStatusResponse')
+    DescribeReplicationInstanceTaskLogsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationInstanceTaskLogsMessage')
+    DescribeReplicationInstanceTaskLogsResponse = Shapes::StructureShape.new(name: 'DescribeReplicationInstanceTaskLogsResponse')
     DescribeReplicationInstancesMessage = Shapes::StructureShape.new(name: 'DescribeReplicationInstancesMessage')
     DescribeReplicationInstancesResponse = Shapes::StructureShape.new(name: 'DescribeReplicationInstancesResponse')
     DescribeReplicationSubnetGroupsMessage = Shapes::StructureShape.new(name: 'DescribeReplicationSubnetGroupsMessage')
@@ -124,6 +126,8 @@ module Aws::DatabaseMigrationService
     NestingLevelValue = Shapes::StringShape.new(name: 'NestingLevelValue')
     OrderableReplicationInstance = Shapes::StructureShape.new(name: 'OrderableReplicationInstance')
     OrderableReplicationInstanceList = Shapes::ListShape.new(name: 'OrderableReplicationInstanceList')
+    RebootReplicationInstanceMessage = Shapes::StructureShape.new(name: 'RebootReplicationInstanceMessage')
+    RebootReplicationInstanceResponse = Shapes::StructureShape.new(name: 'RebootReplicationInstanceResponse')
     RefreshSchemasMessage = Shapes::StructureShape.new(name: 'RefreshSchemasMessage')
     RefreshSchemasResponse = Shapes::StructureShape.new(name: 'RefreshSchemasResponse')
     RefreshSchemasStatus = Shapes::StructureShape.new(name: 'RefreshSchemasStatus')
@@ -137,6 +141,8 @@ module Aws::DatabaseMigrationService
     ReplicationInstanceList = Shapes::ListShape.new(name: 'ReplicationInstanceList')
     ReplicationInstancePrivateIpAddressList = Shapes::ListShape.new(name: 'ReplicationInstancePrivateIpAddressList')
     ReplicationInstancePublicIpAddressList = Shapes::ListShape.new(name: 'ReplicationInstancePublicIpAddressList')
+    ReplicationInstanceTaskLog = Shapes::StructureShape.new(name: 'ReplicationInstanceTaskLog')
+    ReplicationInstanceTaskLogsList = Shapes::ListShape.new(name: 'ReplicationInstanceTaskLogsList')
     ReplicationPendingModifiedValues = Shapes::StructureShape.new(name: 'ReplicationPendingModifiedValues')
     ReplicationSubnetGroup = Shapes::StructureShape.new(name: 'ReplicationSubnetGroup')
     ReplicationSubnetGroupDoesNotCoverEnoughAZs = Shapes::StructureShape.new(name: 'ReplicationSubnetGroupDoesNotCoverEnoughAZs')
@@ -421,6 +427,16 @@ module Aws::DatabaseMigrationService
     DescribeRefreshSchemasStatusResponse.add_member(:refresh_schemas_status, Shapes::ShapeRef.new(shape: RefreshSchemasStatus, location_name: "RefreshSchemasStatus"))
     DescribeRefreshSchemasStatusResponse.struct_class = Types::DescribeRefreshSchemasStatusResponse
 
+    DescribeReplicationInstanceTaskLogsMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
+    DescribeReplicationInstanceTaskLogsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+    DescribeReplicationInstanceTaskLogsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReplicationInstanceTaskLogsMessage.struct_class = Types::DescribeReplicationInstanceTaskLogsMessage
+
+    DescribeReplicationInstanceTaskLogsResponse.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceArn"))
+    DescribeReplicationInstanceTaskLogsResponse.add_member(:replication_instance_task_logs, Shapes::ShapeRef.new(shape: ReplicationInstanceTaskLogsList, location_name: "ReplicationInstanceTaskLogs"))
+    DescribeReplicationInstanceTaskLogsResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+    DescribeReplicationInstanceTaskLogsResponse.struct_class = Types::DescribeReplicationInstanceTaskLogsResponse
+
     DescribeReplicationInstancesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
     DescribeReplicationInstancesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeReplicationInstancesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
@@ -646,6 +662,13 @@ module Aws::DatabaseMigrationService
 
     OrderableReplicationInstanceList.member = Shapes::ShapeRef.new(shape: OrderableReplicationInstance)
 
+    RebootReplicationInstanceMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
+    RebootReplicationInstanceMessage.add_member(:force_failover, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ForceFailover"))
+    RebootReplicationInstanceMessage.struct_class = Types::RebootReplicationInstanceMessage
+
+    RebootReplicationInstanceResponse.add_member(:replication_instance, Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance"))
+    RebootReplicationInstanceResponse.struct_class = Types::RebootReplicationInstanceResponse
+
     RefreshSchemasMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
     RefreshSchemasMessage.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceArn"))
     RefreshSchemasMessage.struct_class = Types::RefreshSchemasMessage
@@ -701,6 +724,13 @@ module Aws::DatabaseMigrationService
     ReplicationInstancePrivateIpAddressList.member = Shapes::ShapeRef.new(shape: String)
 
     ReplicationInstancePublicIpAddressList.member = Shapes::ShapeRef.new(shape: String)
+
+    ReplicationInstanceTaskLog.add_member(:replication_task_name, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskName"))
+    ReplicationInstanceTaskLog.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
+    ReplicationInstanceTaskLog.add_member(:replication_instance_task_log_size, Shapes::ShapeRef.new(shape: Long, location_name: "ReplicationInstanceTaskLogSize"))
+    ReplicationInstanceTaskLog.struct_class = Types::ReplicationInstanceTaskLog
+
+    ReplicationInstanceTaskLogsList.member = Shapes::ShapeRef.new(shape: ReplicationInstanceTaskLog)
 
     ReplicationPendingModifiedValues.add_member(:replication_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceClass"))
     ReplicationPendingModifiedValues.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
@@ -1134,6 +1164,22 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
       end)
 
+      api.add_operation(:describe_replication_instance_task_logs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReplicationInstanceTaskLogs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReplicationInstanceTaskLogsMessage)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReplicationInstanceTaskLogsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_records",
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:describe_replication_instances, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeReplicationInstances"
         o.http_method = "POST"
@@ -1234,6 +1280,7 @@ module Aws::DatabaseMigrationService
         o.output = Shapes::ShapeRef.new(shape: ImportCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1308,6 +1355,16 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
+      end)
+
+      api.add_operation(:reboot_replication_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RebootReplicationInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RebootReplicationInstanceMessage)
+        o.output = Shapes::ShapeRef.new(shape: RebootReplicationInstanceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
       end)
 
       api.add_operation(:refresh_schemas, Seahorse::Model::Operation.new.tap do |o|

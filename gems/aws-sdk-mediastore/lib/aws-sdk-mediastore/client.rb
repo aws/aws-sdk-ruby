@@ -239,10 +239,40 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
-    # Retrieves the properties of the requested container. This returns a
-    # single `Container` object based on `ContainerName`. To return all
-    # `Container` objects that are associated with a specified AWS account,
-    # use ListContainers.
+    # Deletes the cross-origin resource sharing (CORS) configuration
+    # information that is set for the container.
+    #
+    # To use this operation, you must have permission to perform the
+    # `MediaStore:DeleteCorsPolicy` action. The container owner has this
+    # permission by default and can grant this permission to others.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container to remove the policy from.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cors_policy({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteCorsPolicy AWS API Documentation
+    #
+    # @overload delete_cors_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_cors_policy(params = {}, options = {})
+      req = build_request(:delete_cors_policy, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the properties of the requested container. This request is
+    # commonly used to retrieve the endpoint of a container. An endpoint is
+    # a value assigned by the service when a new container is created. A
+    # container's endpoint does not change after it has been assigned. The
+    # `DescribeContainer` request returns a single `Container` object based
+    # on `ContainerName`. To return all `Container` objects that are
+    # associated with a specified AWS account, use ListContainers.
     #
     # @option params [String] :container_name
     #   The name of the container to query.
@@ -305,6 +335,48 @@ module Aws::MediaStore
     # @param [Hash] params ({})
     def get_container_policy(params = {}, options = {})
       req = build_request(:get_container_policy, params)
+      req.send_request(options)
+    end
+
+    # Returns the cross-origin resource sharing (CORS) configuration
+    # information that is set for the container.
+    #
+    # To use this operation, you must have permission to perform the
+    # `MediaStore:GetCorsPolicy` action. By default, the container owner has
+    # this permission and can grant it to others.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that the policy is assigned to.
+    #
+    # @return [Types::GetCorsPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCorsPolicyOutput#cors_policy #cors_policy} => Array&lt;Types::CorsRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cors_policy({
+    #     container_name: "ContainerName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cors_policy #=> Array
+    #   resp.cors_policy[0].allowed_origins #=> Array
+    #   resp.cors_policy[0].allowed_origins[0] #=> String
+    #   resp.cors_policy[0].allowed_methods #=> Array
+    #   resp.cors_policy[0].allowed_methods[0] #=> String, one of "PUT", "GET", "DELETE", "HEAD"
+    #   resp.cors_policy[0].allowed_headers #=> Array
+    #   resp.cors_policy[0].allowed_headers[0] #=> String
+    #   resp.cors_policy[0].max_age_seconds #=> Integer
+    #   resp.cors_policy[0].expose_headers #=> Array
+    #   resp.cors_policy[0].expose_headers[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetCorsPolicy AWS API Documentation
+    #
+    # @overload get_cors_policy(params = {})
+    # @param [Hash] params ({})
+    def get_cors_policy(params = {}, options = {})
+      req = build_request(:get_cors_policy, params)
       req.send_request(options)
     end
 
@@ -403,6 +475,52 @@ module Aws::MediaStore
       req.send_request(options)
     end
 
+    # Sets the cross-origin resource sharing (CORS) configuration on a
+    # container so that the container can service cross-origin requests. For
+    # example, you might want to enable a request whose origin is
+    # http://www.example.com to access your AWS Elemental MediaStore
+    # container at my.example.container.com by using the browser's
+    # XMLHttpRequest capability.
+    #
+    # To enable CORS on a container, you attach a CORS policy to the
+    # container. In the CORS policy, you configure rules that identify
+    # origins and the HTTP methods that can be executed on your container.
+    # The policy can contain up to 398,000 characters. You can add up to 100
+    # rules to a CORS policy. If more than one rule applies, the service
+    # uses the first applicable rule listed.
+    #
+    # @option params [required, String] :container_name
+    #   The name of the container that you want to assign the CORS policy to.
+    #
+    # @option params [required, Array<Types::CorsRule>] :cors_policy
+    #   The CORS policy to apply to the container.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_cors_policy({
+    #     container_name: "ContainerName", # required
+    #     cors_policy: [ # required
+    #       {
+    #         allowed_origins: ["Origin"],
+    #         allowed_methods: ["PUT"], # accepts PUT, GET, DELETE, HEAD
+    #         allowed_headers: ["Header"],
+    #         max_age_seconds: 1,
+    #         expose_headers: ["Header"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutCorsPolicy AWS API Documentation
+    #
+    # @overload put_cors_policy(params = {})
+    # @param [Hash] params ({})
+    def put_cors_policy(params = {}, options = {})
+      req = build_request(:put_cors_policy, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -416,7 +534,7 @@ module Aws::MediaStore
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediastore'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

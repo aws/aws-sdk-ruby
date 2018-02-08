@@ -185,7 +185,7 @@ module Aws::DynamoDB
     #   Each attribute value is described as a name-value pair. The name is
     #   the data type, and the value is the data itself.
     #
-    #   For more information, see [Data TYpes][1] in the *Amazon DynamoDB
+    #   For more information, see [Data Types][1] in the *Amazon DynamoDB
     #   Developer Guide*.
     #
     #
@@ -1277,6 +1277,9 @@ module Aws::DynamoDB
     #           stream_enabled: false,
     #           stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
     #         },
+    #         sse_specification: {
+    #           enabled: false, # required
+    #         },
     #       }
     #
     # @!attribute [rw] attribute_definitions
@@ -1456,6 +1459,10 @@ module Aws::DynamoDB
     #       the item are written to the stream.
     #   @return [Types::StreamSpecification]
     #
+    # @!attribute [rw] sse_specification
+    #   Represents the settings used to enable server-side encryption.
+    #   @return [Types::SSESpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableInput AWS API Documentation
     #
     class CreateTableInput < Struct.new(
@@ -1465,7 +1472,8 @@ module Aws::DynamoDB
       :local_secondary_indexes,
       :global_secondary_indexes,
       :provisioned_throughput,
-      :stream_specification)
+      :stream_specification,
+      :sse_specification)
       include Aws::Structure
     end
 
@@ -4243,11 +4251,13 @@ module Aws::DynamoDB
     #   retrieved by the `Query` action.
     #
     #   The condition must perform an equality test on a single partition
-    #   key value. The condition can also perform one of several comparison
-    #   tests on a single sort key value. `Query` can use
-    #   `KeyConditionExpression` to retrieve one item with a given partition
-    #   key value and sort key value, or several items that have the same
-    #   partition key value but different sort key values.
+    #   key value.
+    #
+    #   The condition can optionally perform one of several comparison tests
+    #   on a single sort key value. This allows `Query` to retrieve one item
+    #   with a given partition key value and sort key value, or several
+    #   items that have the same partition key value but different sort key
+    #   values.
     #
     #   The partition key equality test is required, and must be specified
     #   in the following format:
@@ -4630,6 +4640,49 @@ module Aws::DynamoDB
     #
     class RestoreTableFromBackupOutput < Struct.new(
       :table_description)
+      include Aws::Structure
+    end
+
+    # The description of the server-side encryption status on the specified
+    # table.
+    #
+    # @!attribute [rw] status
+    #   The current state of server-side encryption:
+    #
+    #   * `ENABLING` - Server-side encryption is being enabled.
+    #
+    #   * `ENABLED` - Server-side encryption is enabled.
+    #
+    #   * `DISABLING` - Server-side encryption is being disabled.
+    #
+    #   * `DISABLED` - Server-side encryption is disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSEDescription AWS API Documentation
+    #
+    class SSEDescription < Struct.new(
+      :status)
+      include Aws::Structure
+    end
+
+    # Represents the settings used to enable server-side encryption.
+    #
+    # @note When making an API call, you may pass SSESpecification
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether server-side encryption is enabled (true) or
+    #   disabled (false) on the table.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSESpecification AWS API Documentation
+    #
+    class SSESpecification < Struct.new(
+      :enabled)
       include Aws::Structure
     end
 
@@ -5154,13 +5207,19 @@ module Aws::DynamoDB
     #   Time to Live settings on the table when the backup was created.
     #   @return [Types::TimeToLiveDescription]
     #
+    # @!attribute [rw] sse_description
+    #   The description of the server-side encryption status on the table
+    #   when the backup was created.
+    #   @return [Types::SSEDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SourceTableFeatureDetails AWS API Documentation
     #
     class SourceTableFeatureDetails < Struct.new(
       :local_secondary_indexes,
       :global_secondary_indexes,
       :stream_description,
-      :time_to_live_description)
+      :time_to_live_description,
+      :sse_description)
       include Aws::Structure
     end
 
@@ -5449,6 +5508,11 @@ module Aws::DynamoDB
     #   Contains details for the restore.
     #   @return [Types::RestoreSummary]
     #
+    # @!attribute [rw] sse_description
+    #   The description of the server-side encryption status on the
+    #   specified table.
+    #   @return [Types::SSEDescription]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
     #
     class TableDescription < Struct.new(
@@ -5467,7 +5531,8 @@ module Aws::DynamoDB
       :stream_specification,
       :latest_stream_label,
       :latest_stream_arn,
-      :restore_summary)
+      :restore_summary,
+      :sse_description)
       include Aws::Structure
     end
 
