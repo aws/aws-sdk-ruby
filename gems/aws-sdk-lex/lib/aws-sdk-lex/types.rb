@@ -261,19 +261,39 @@ module Aws::Lex
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Message to convey to the user. It can come from the bot's
-    #   configuration or a code hook (Lambda function). If the current
-    #   intent is not configured with a code hook or if the code hook
-    #   returned `Delegate` as the `dialogAction.type` in its response, then
-    #   Amazon Lex decides the next course of action and selects an
-    #   appropriate message from the bot configuration based on the current
-    #   user interaction context. For example, if Amazon Lex is not able to
-    #   understand the user input, it uses a clarification prompt message
-    #   (For more information, see the Error Handling section in the Amazon
-    #   Lex console). Another example: if the intent requires confirmation
-    #   before fulfillment, then Amazon Lex uses the confirmation prompt
-    #   message in the intent configuration. If the code hook returns a
-    #   message, Amazon Lex passes it as-is in its response to the client.
+    #   The message to convey to the user. The message can come from the
+    #   bot's configuration or from a Lambda function.
+    #
+    #   If the intent is not configured with a Lambda function, or if the
+    #   Lambda function returned `Delegate` as the `dialogAction.type` its
+    #   response, Amazon Lex decides on the next course of action and
+    #   selects an appropriate message from the bot's configuration based
+    #   on the current interaction context. For example, if Amazon Lex
+    #   isn't able to understand user input, it uses a clarification prompt
+    #   message.
+    #
+    #   When you create an intent you can assign messages to groups. When
+    #   messages are assigned to groups Amazon Lex returns one message from
+    #   each group in the response. The message field is an escaped JSON
+    #   string containing the messages. For more information about the
+    #   structure of the JSON string returned, see msg-prompts-formats.
+    #
+    #   If the Lambda function returns a message, Amazon Lex passes it to
+    #   the client in its response.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_format
+    #   The format of the response message. One of the following values:
+    #
+    #   * `PlainText` - The message contains plain UTF-8 text.
+    #
+    #   * `CustomPayload` - The message is a custom format for the client.
+    #
+    #   * `SSML` - The message contains text formatted for voice output.
+    #
+    #   * `Composite` - The message contains an escaped JSON object
+    #     containing one or more messages from the groups that messages were
+    #     assigned to when the intent was created.
     #   @return [String]
     #
     # @!attribute [rw] dialog_state
@@ -358,6 +378,7 @@ module Aws::Lex
       :slots,
       :session_attributes,
       :message,
+      :message_format,
       :dialog_state,
       :slot_to_elicit,
       :input_transcript,
@@ -483,19 +504,40 @@ module Aws::Lex
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] message
-    #   A message to convey to the user. It can come from the bot's
-    #   configuration or a code hook (Lambda function). If the current
-    #   intent is not configured with a code hook or the code hook returned
-    #   `Delegate` as the `dialogAction.type` in its response, then Amazon
-    #   Lex decides the next course of action and selects an appropriate
-    #   message from the bot configuration based on the current user
-    #   interaction context. For example, if Amazon Lex is not able to
-    #   understand the user input, it uses a clarification prompt message
-    #   (for more information, see the Error Handling section in the Amazon
-    #   Lex console). Another example: if the intent requires confirmation
-    #   before fulfillment, then Amazon Lex uses the confirmation prompt
-    #   message in the intent configuration. If the code hook returns a
-    #   message, Amazon Lex passes it as-is in its response to the client.
+    #   The message to convey to the user. The message can come from the
+    #   bot's configuration or from a Lambda function.
+    #
+    #   If the intent is not configured with a Lambda function, or if the
+    #   Lambda function returned `Delegate` as the `dialogAction.type` its
+    #   response, Amazon Lex decides on the next course of action and
+    #   selects an appropriate message from the bot's configuration based
+    #   on the current interaction context. For example, if Amazon Lex
+    #   isn't able to understand user input, it uses a clarification prompt
+    #   message.
+    #
+    #   When you create an intent you can assign messages to groups. When
+    #   messages are assigned to groups Amazon Lex returns one message from
+    #   each group in the response. The message field is an escaped JSON
+    #   string containing the messages. For more information about the
+    #   structure of the JSON string returned, see msg-prompts-formats.
+    #
+    #   If the Lambda function returns a message, Amazon Lex passes it to
+    #   the client in its response.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_format
+    #   The format of the response message. One of the following values:
+    #
+    #   * `PlainText` - The message contains plain UTF-8 text.
+    #
+    #   * `CustomPayload` - The message is a custom format defined by the
+    #     Lambda function.
+    #
+    #   * `SSML` - The message contains text formatted for voice output.
+    #
+    #   * `Composite` - The message contains an escaped JSON object
+    #     containing one or more messages from the groups that messages were
+    #     assigned to when the intent was created.
     #   @return [String]
     #
     # @!attribute [rw] dialog_state
@@ -566,6 +608,7 @@ module Aws::Lex
       :slots,
       :session_attributes,
       :message,
+      :message_format,
       :dialog_state,
       :slot_to_elicit,
       :response_card)

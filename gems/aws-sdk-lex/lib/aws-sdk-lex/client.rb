@@ -352,6 +352,7 @@ module Aws::Lex
     #   * {Types::PostContentResponse#slots #slots} => String
     #   * {Types::PostContentResponse#session_attributes #session_attributes} => String
     #   * {Types::PostContentResponse#message #message} => String
+    #   * {Types::PostContentResponse#message_format #message_format} => String
     #   * {Types::PostContentResponse#dialog_state #dialog_state} => String
     #   * {Types::PostContentResponse#slot_to_elicit #slot_to_elicit} => String
     #   * {Types::PostContentResponse#input_transcript #input_transcript} => String
@@ -377,6 +378,7 @@ module Aws::Lex
     #   resp.slots #=> String
     #   resp.session_attributes #=> String
     #   resp.message #=> String
+    #   resp.message_format #=> String, one of "PlainText", "CustomPayload", "SSML", "Composite"
     #   resp.dialog_state #=> String, one of "ElicitIntent", "ConfirmIntent", "ElicitSlot", "Fulfilled", "ReadyForFulfillment", "Failed"
     #   resp.slot_to_elicit #=> String
     #   resp.input_transcript #=> String
@@ -513,6 +515,7 @@ module Aws::Lex
     #   * {Types::PostTextResponse#slots #slots} => Hash&lt;String,String&gt;
     #   * {Types::PostTextResponse#session_attributes #session_attributes} => Hash&lt;String,String&gt;
     #   * {Types::PostTextResponse#message #message} => String
+    #   * {Types::PostTextResponse#message_format #message_format} => String
     #   * {Types::PostTextResponse#dialog_state #dialog_state} => String
     #   * {Types::PostTextResponse#slot_to_elicit #slot_to_elicit} => String
     #   * {Types::PostTextResponse#response_card #response_card} => Types::ResponseCard
@@ -540,6 +543,7 @@ module Aws::Lex
     #   resp.session_attributes #=> Hash
     #   resp.session_attributes["String"] #=> String
     #   resp.message #=> String
+    #   resp.message_format #=> String, one of "PlainText", "CustomPayload", "SSML", "Composite"
     #   resp.dialog_state #=> String, one of "ElicitIntent", "ConfirmIntent", "ElicitSlot", "Fulfilled", "ReadyForFulfillment", "Failed"
     #   resp.slot_to_elicit #=> String
     #   resp.response_card.version #=> String
@@ -575,7 +579,7 @@ module Aws::Lex
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lex'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

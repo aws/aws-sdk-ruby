@@ -869,8 +869,9 @@ module Aws::LexModelBuildingService
     #         prompt: { # required
     #           messages: [ # required
     #             {
-    #               content_type: "PlainText", # required, accepts PlainText, SSML
+    #               content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #               content: "ContentString", # required
+    #               group_number: 1,
     #             },
     #           ],
     #           max_attempts: 1, # required
@@ -879,8 +880,9 @@ module Aws::LexModelBuildingService
     #         rejection_statement: { # required
     #           messages: [ # required
     #             {
-    #               content_type: "PlainText", # required, accepts PlainText, SSML
+    #               content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #               content: "ContentString", # required
+    #               group_number: 1,
     #             },
     #           ],
     #           response_card: "ResponseCard",
@@ -2289,8 +2291,9 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         content_type: "PlainText", # required, accepts PlainText, SSML
+    #         content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #         content: "ContentString", # required
+    #         group_number: 1,
     #       }
     #
     # @!attribute [rw] content_type
@@ -2301,11 +2304,18 @@ module Aws::LexModelBuildingService
     #   The text of the message.
     #   @return [String]
     #
+    # @!attribute [rw] group_number
+    #   Identifies the message group that the message belongs to. When a
+    #   group is assigned to a message, Amazon Lex returns one message from
+    #   each group in the response.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Message AWS API Documentation
     #
     class Message < Struct.new(
       :content_type,
-      :content)
+      :content,
+      :group_number)
       include Aws::Structure
     end
 
@@ -2321,8 +2331,9 @@ module Aws::LexModelBuildingService
     #       {
     #         messages: [ # required
     #           {
-    #             content_type: "PlainText", # required, accepts PlainText, SSML
+    #             content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #             content: "ContentString", # required
+    #             group_number: 1,
     #           },
     #         ],
     #         max_attempts: 1, # required
@@ -2463,8 +2474,9 @@ module Aws::LexModelBuildingService
     #         clarification_prompt: {
     #           messages: [ # required
     #             {
-    #               content_type: "PlainText", # required, accepts PlainText, SSML
+    #               content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #               content: "ContentString", # required
+    #               group_number: 1,
     #             },
     #           ],
     #           max_attempts: 1, # required
@@ -2473,8 +2485,9 @@ module Aws::LexModelBuildingService
     #         abort_statement: {
     #           messages: [ # required
     #             {
-    #               content_type: "PlainText", # required, accepts PlainText, SSML
+    #               content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #               content: "ContentString", # required
+    #               group_number: 1,
     #             },
     #           ],
     #           response_card: "ResponseCard",
@@ -2785,8 +2798,9 @@ module Aws::LexModelBuildingService
     #             value_elicitation_prompt: {
     #               messages: [ # required
     #                 {
-    #                   content_type: "PlainText", # required, accepts PlainText, SSML
+    #                   content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #                   content: "ContentString", # required
+    #                   group_number: 1,
     #                 },
     #               ],
     #               max_attempts: 1, # required
@@ -2801,8 +2815,9 @@ module Aws::LexModelBuildingService
     #         confirmation_prompt: {
     #           messages: [ # required
     #             {
-    #               content_type: "PlainText", # required, accepts PlainText, SSML
+    #               content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #               content: "ContentString", # required
+    #               group_number: 1,
     #             },
     #           ],
     #           max_attempts: 1, # required
@@ -2811,8 +2826,9 @@ module Aws::LexModelBuildingService
     #         rejection_statement: {
     #           messages: [ # required
     #             {
-    #               content_type: "PlainText", # required, accepts PlainText, SSML
+    #               content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #               content: "ContentString", # required
+    #               group_number: 1,
     #             },
     #           ],
     #           response_card: "ResponseCard",
@@ -2821,8 +2837,9 @@ module Aws::LexModelBuildingService
     #           prompt: { # required
     #             messages: [ # required
     #               {
-    #                 content_type: "PlainText", # required, accepts PlainText, SSML
+    #                 content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #                 content: "ContentString", # required
+    #                 group_number: 1,
     #               },
     #             ],
     #             max_attempts: 1, # required
@@ -2831,8 +2848,9 @@ module Aws::LexModelBuildingService
     #           rejection_statement: { # required
     #             messages: [ # required
     #               {
-    #                 content_type: "PlainText", # required, accepts PlainText, SSML
+    #                 content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #                 content: "ContentString", # required
+    #                 group_number: 1,
     #               },
     #             ],
     #             response_card: "ResponseCard",
@@ -2841,8 +2859,9 @@ module Aws::LexModelBuildingService
     #         conclusion_statement: {
     #           messages: [ # required
     #             {
-    #               content_type: "PlainText", # required, accepts PlainText, SSML
+    #               content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #               content: "ContentString", # required
+    #               group_number: 1,
     #             },
     #           ],
     #           response_card: "ResponseCard",
@@ -3297,8 +3316,9 @@ module Aws::LexModelBuildingService
     #         value_elicitation_prompt: {
     #           messages: [ # required
     #             {
-    #               content_type: "PlainText", # required, accepts PlainText, SSML
+    #               content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #               content: "ContentString", # required
+    #               group_number: 1,
     #             },
     #           ],
     #           max_attempts: 1, # required
@@ -3415,8 +3435,9 @@ module Aws::LexModelBuildingService
     #       {
     #         messages: [ # required
     #           {
-    #             content_type: "PlainText", # required, accepts PlainText, SSML
+    #             content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #             content: "ContentString", # required
+    #             group_number: 1,
     #           },
     #         ],
     #         response_card: "ResponseCard",

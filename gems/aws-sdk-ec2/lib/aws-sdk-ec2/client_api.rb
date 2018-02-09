@@ -264,6 +264,8 @@ module Aws::EC2
     DescribeAccountAttributesResult = Shapes::StructureShape.new(name: 'DescribeAccountAttributesResult')
     DescribeAddressesRequest = Shapes::StructureShape.new(name: 'DescribeAddressesRequest')
     DescribeAddressesResult = Shapes::StructureShape.new(name: 'DescribeAddressesResult')
+    DescribeAggregateIdFormatRequest = Shapes::StructureShape.new(name: 'DescribeAggregateIdFormatRequest')
+    DescribeAggregateIdFormatResult = Shapes::StructureShape.new(name: 'DescribeAggregateIdFormatResult')
     DescribeAvailabilityZonesRequest = Shapes::StructureShape.new(name: 'DescribeAvailabilityZonesRequest')
     DescribeAvailabilityZonesResult = Shapes::StructureShape.new(name: 'DescribeAvailabilityZonesResult')
     DescribeBundleTasksRequest = Shapes::StructureShape.new(name: 'DescribeBundleTasksRequest')
@@ -339,6 +341,8 @@ module Aws::EC2
     DescribePlacementGroupsResult = Shapes::StructureShape.new(name: 'DescribePlacementGroupsResult')
     DescribePrefixListsRequest = Shapes::StructureShape.new(name: 'DescribePrefixListsRequest')
     DescribePrefixListsResult = Shapes::StructureShape.new(name: 'DescribePrefixListsResult')
+    DescribePrincipalIdFormatRequest = Shapes::StructureShape.new(name: 'DescribePrincipalIdFormatRequest')
+    DescribePrincipalIdFormatResult = Shapes::StructureShape.new(name: 'DescribePrincipalIdFormatResult')
     DescribeRegionsRequest = Shapes::StructureShape.new(name: 'DescribeRegionsRequest')
     DescribeRegionsResult = Shapes::StructureShape.new(name: 'DescribeRegionsResult')
     DescribeReservedInstancesListingsRequest = Shapes::StructureShape.new(name: 'DescribeReservedInstancesListingsRequest')
@@ -804,6 +808,8 @@ module Aws::EC2
     PriceScheduleSpecificationList = Shapes::ListShape.new(name: 'PriceScheduleSpecificationList')
     PricingDetail = Shapes::StructureShape.new(name: 'PricingDetail')
     PricingDetailsList = Shapes::ListShape.new(name: 'PricingDetailsList')
+    PrincipalIdFormat = Shapes::StructureShape.new(name: 'PrincipalIdFormat')
+    PrincipalIdFormatList = Shapes::ListShape.new(name: 'PrincipalIdFormatList')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     PrivateIpAddressConfigSet = Shapes::ListShape.new(name: 'PrivateIpAddressConfigSet')
     PrivateIpAddressSpecification = Shapes::StructureShape.new(name: 'PrivateIpAddressSpecification')
@@ -901,6 +907,7 @@ module Aws::EC2
     ResetNetworkInterfaceAttributeRequest = Shapes::StructureShape.new(name: 'ResetNetworkInterfaceAttributeRequest')
     ResetSnapshotAttributeRequest = Shapes::StructureShape.new(name: 'ResetSnapshotAttributeRequest')
     ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
+    ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResponseError = Shapes::StructureShape.new(name: 'ResponseError')
     ResponseHostIdList = Shapes::ListShape.new(name: 'ResponseHostIdList')
@@ -2145,6 +2152,13 @@ module Aws::EC2
     DescribeAddressesResult.add_member(:addresses, Shapes::ShapeRef.new(shape: AddressList, location_name: "addressesSet"))
     DescribeAddressesResult.struct_class = Types::DescribeAddressesResult
 
+    DescribeAggregateIdFormatRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeAggregateIdFormatRequest.struct_class = Types::DescribeAggregateIdFormatRequest
+
+    DescribeAggregateIdFormatResult.add_member(:use_long_ids_aggregated, Shapes::ShapeRef.new(shape: Boolean, location_name: "useLongIdsAggregated"))
+    DescribeAggregateIdFormatResult.add_member(:statuses, Shapes::ShapeRef.new(shape: IdFormatList, location_name: "statusSet"))
+    DescribeAggregateIdFormatResult.struct_class = Types::DescribeAggregateIdFormatResult
+
     DescribeAvailabilityZonesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeAvailabilityZonesRequest.add_member(:zone_names, Shapes::ShapeRef.new(shape: ZoneNameStringList, location_name: "ZoneName"))
     DescribeAvailabilityZonesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -2506,6 +2520,16 @@ module Aws::EC2
     DescribePrefixListsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribePrefixListsResult.add_member(:prefix_lists, Shapes::ShapeRef.new(shape: PrefixListSet, location_name: "prefixListSet"))
     DescribePrefixListsResult.struct_class = Types::DescribePrefixListsResult
+
+    DescribePrincipalIdFormatRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribePrincipalIdFormatRequest.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "Resource"))
+    DescribePrincipalIdFormatRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribePrincipalIdFormatRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribePrincipalIdFormatRequest.struct_class = Types::DescribePrincipalIdFormatRequest
+
+    DescribePrincipalIdFormatResult.add_member(:principals, Shapes::ShapeRef.new(shape: PrincipalIdFormatList, location_name: "principalSet"))
+    DescribePrincipalIdFormatResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribePrincipalIdFormatResult.struct_class = Types::DescribePrincipalIdFormatResult
 
     DescribeRegionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeRegionsRequest.add_member(:region_names, Shapes::ShapeRef.new(shape: RegionNameStringList, location_name: "RegionName"))
@@ -4213,8 +4237,8 @@ module Aws::EC2
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServiceId"))
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "AcceptanceRequired"))
-    ModifyVpcEndpointServiceConfigurationRequest.add_member(:add_network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "addNetworkLoadBalancerArn"))
-    ModifyVpcEndpointServiceConfigurationRequest.add_member(:remove_network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "removeNetworkLoadBalancerArn"))
+    ModifyVpcEndpointServiceConfigurationRequest.add_member(:add_network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddNetworkLoadBalancerArn"))
+    ModifyVpcEndpointServiceConfigurationRequest.add_member(:remove_network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveNetworkLoadBalancerArn"))
     ModifyVpcEndpointServiceConfigurationRequest.struct_class = Types::ModifyVpcEndpointServiceConfigurationRequest
 
     ModifyVpcEndpointServiceConfigurationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -4482,6 +4506,12 @@ module Aws::EC2
     PricingDetail.struct_class = Types::PricingDetail
 
     PricingDetailsList.member = Shapes::ShapeRef.new(shape: PricingDetail, location_name: "item")
+
+    PrincipalIdFormat.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    PrincipalIdFormat.add_member(:statuses, Shapes::ShapeRef.new(shape: IdFormatList, location_name: "statusSet"))
+    PrincipalIdFormat.struct_class = Types::PrincipalIdFormat
+
+    PrincipalIdFormatList.member = Shapes::ShapeRef.new(shape: PrincipalIdFormat, location_name: "item")
 
     PrivateIpAddressConfigSet.member = Shapes::ShapeRef.new(shape: ScheduledInstancesPrivateIpAddressConfig, location_name: "PrivateIpAddressConfigSet")
 
@@ -4906,6 +4936,8 @@ module Aws::EC2
     ResetSnapshotAttributeRequest.struct_class = Types::ResetSnapshotAttributeRequest
 
     ResourceIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    ResourceList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     ResponseError.add_member(:code, Shapes::ShapeRef.new(shape: LaunchTemplateErrorCode, location_name: "code"))
     ResponseError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -6710,6 +6742,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeAddressesResult)
       end)
 
+      api.add_operation(:describe_aggregate_id_format, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAggregateIdFormat"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAggregateIdFormatRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAggregateIdFormatResult)
+      end)
+
       api.add_operation(:describe_availability_zones, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAvailabilityZones"
         o.http_method = "POST"
@@ -7030,6 +7070,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribePrefixListsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribePrefixListsResult)
+      end)
+
+      api.add_operation(:describe_principal_id_format, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePrincipalIdFormat"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePrincipalIdFormatRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePrincipalIdFormatResult)
       end)
 
       api.add_operation(:describe_regions, Seahorse::Model::Operation.new.tap do |o|

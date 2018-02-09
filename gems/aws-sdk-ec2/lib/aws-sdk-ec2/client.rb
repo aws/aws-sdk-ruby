@@ -4716,7 +4716,7 @@ module Aws::EC2
     # @option params [required, String] :group_name
     #   The name of the security group.
     #
-    #   Constraints: Up to 255 characters in length
+    #   Constraints: Up to 255 characters in length. Cannot start with `sg-`.
     #
     #   Constraints for EC2-Classic: ASCII characters
     #
@@ -7785,6 +7785,58 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the longer ID format settings for all resource types in a
+    # specific region. This request is useful for performing a quick audit
+    # to determine whether a specific region is fully opted in for longer
+    # IDs (17-character IDs).
+    #
+    # This request only returns information about resource types that
+    # support longer IDs.
+    #
+    # The following resource types support longer IDs: `bundle` \|
+    # `conversion-task` \| `dhcp-options` \| `elastic-ip-allocation` \|
+    # `elastic-ip-association` \| `export-task` \| `flow-log` \| `image` \|
+    # `import-task` \| `instance` \| `internet-gateway` \| `network-acl` \|
+    # `network-acl-association` \| `network-interface` \|
+    # `network-interface-attachment` \| `prefix-list` \| `reservation` \|
+    # `route-table` \| `route-table-association` \| `security-group` \|
+    # `snapshot` \| `subnet` \| `subnet-cidr-block-association` \| `volume`
+    # \| `vpc` \| `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeAggregateIdFormatResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAggregateIdFormatResult#use_long_ids_aggregated #use_long_ids_aggregated} => Boolean
+    #   * {Types::DescribeAggregateIdFormatResult#statuses #statuses} => Array&lt;Types::IdFormat&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_aggregate_id_format({
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.use_long_ids_aggregated #=> Boolean
+    #   resp.statuses #=> Array
+    #   resp.statuses[0].deadline #=> Time
+    #   resp.statuses[0].resource #=> String
+    #   resp.statuses[0].use_long_ids #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAggregateIdFormat AWS API Documentation
+    #
+    # @overload describe_aggregate_id_format(params = {})
+    # @param [Hash] params ({})
+    def describe_aggregate_id_format(params = {}, options = {})
+      req = build_request(:describe_aggregate_id_format, params)
+      req.send_request(options)
+    end
+
     # Describes one or more of the Availability Zones that are available to
     # you. The results include zones only for the region you're currently
     # using. If there is an event impacting an Availability Zone, you can
@@ -9136,8 +9188,15 @@ module Aws::EC2
     # whose ID formats can be modified; it does not return information about
     # other resource types.
     #
-    # The following resource types support longer IDs: `instance` \|
-    # `reservation` \| `snapshot` \| `volume`.
+    # The following resource types support longer IDs: `bundle` \|
+    # `conversion-task` \| `dhcp-options` \| `elastic-ip-allocation` \|
+    # `elastic-ip-association` \| `export-task` \| `flow-log` \| `image` \|
+    # `import-task` \| `instance` \| `internet-gateway` \| `network-acl` \|
+    # `network-acl-association` \| `network-interface` \|
+    # `network-interface-attachment` \| `prefix-list` \| `reservation` \|
+    # `route-table` \| `route-table-association` \| `security-group` \|
+    # `snapshot` \| `subnet` \| `subnet-cidr-block-association` \| `volume`
+    # \| `vpc` \| `vpc-cidr-block-association` \| `vpc-peering-connection`.
     #
     # These settings apply to the IAM user who makes the request; they do
     # not apply to the entire AWS account. By default, an IAM user defaults
@@ -9148,8 +9207,15 @@ module Aws::EC2
     # `Describe` command for the resource type.
     #
     # @option params [String] :resource
-    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
-    #   `volume`
+    #   The type of resource: `bundle` \| `conversion-task` \| `dhcp-options`
+    #   \| `elastic-ip-allocation` \| `elastic-ip-association` \|
+    #   `export-task` \| `flow-log` \| `image` \| `import-task` \| `instance`
+    #   \| `internet-gateway` \| `network-acl` \| `network-acl-association` \|
+    #   `network-interface` \| `network-interface-attachment` \| `prefix-list`
+    #   \| `reservation` \| `route-table` \| `route-table-association` \|
+    #   `security-group` \| `snapshot` \| `subnet` \|
+    #   `subnet-cidr-block-association` \| `volume` \| `vpc` \|
+    #   `vpc-cidr-block-association` \| `vpc-peering-connection`
     #
     # @return [Types::DescribeIdFormatResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9185,8 +9251,15 @@ module Aws::EC2
     # information, see [Resource IDs][1] in the *Amazon Elastic Compute
     # Cloud User Guide*.
     #
-    # The following resource types support longer IDs: `instance` \|
-    # `reservation` \| `snapshot` \| `volume`.
+    # The following resource types support longer IDs: `bundle` \|
+    # `conversion-task` \| `dhcp-options` \| `elastic-ip-allocation` \|
+    # `elastic-ip-association` \| `export-task` \| `flow-log` \| `image` \|
+    # `import-task` \| `instance` \| `internet-gateway` \| `network-acl` \|
+    # `network-acl-association` \| `network-interface` \|
+    # `network-interface-attachment` \| `prefix-list` \| `reservation` \|
+    # `route-table` \| `route-table-association` \| `security-group` \|
+    # `snapshot` \| `subnet` \| `subnet-cidr-block-association` \| `volume`
+    # \| `vpc` \| `vpc-cidr-block-association` \| `vpc-peering-connection`.
     #
     # These settings apply to the principal specified in the request. They
     # do not apply to the principal that makes the request.
@@ -9200,8 +9273,15 @@ module Aws::EC2
     #   root user.
     #
     # @option params [String] :resource
-    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
-    #   `volume`
+    #   The type of resource: `bundle` \| `conversion-task` \| `dhcp-options`
+    #   \| `elastic-ip-allocation` \| `elastic-ip-association` \|
+    #   `export-task` \| `flow-log` \| `image` \| `import-task` \| `instance`
+    #   \| `internet-gateway` \| `network-acl` \| `network-acl-association` \|
+    #   `network-interface` \| `network-interface-attachment` \| `prefix-list`
+    #   \| `reservation` \| `route-table` \| `route-table-association` \|
+    #   `security-group` \| `snapshot` \| `subnet` \|
+    #   `subnet-cidr-block-association` \| `volume` \| `vpc` \|
+    #   `vpc-cidr-block-association` \| `vpc-peering-connection`
     #
     # @return [Types::DescribeIdentityIdFormatResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11948,6 +12028,83 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the ID format settings for the root user and all IAM roles
+    # and IAM users that have explicitly specified a longer ID (17-character
+    # ID) preference.
+    #
+    # By default, all IAM roles and IAM users default to the same ID
+    # settings as the root user, unless they explicitly override the
+    # settings. This request is useful for identifying those IAM users and
+    # IAM roles that have overridden the default ID settings.
+    #
+    # The following resource types support longer IDs: `bundle` \|
+    # `conversion-task` \| `dhcp-options` \| `elastic-ip-allocation` \|
+    # `elastic-ip-association` \| `export-task` \| `flow-log` \| `image` \|
+    # `import-task` \| `instance` \| `internet-gateway` \| `network-acl` \|
+    # `network-acl-association` \| `network-interface` \|
+    # `network-interface-attachment` \| `prefix-list` \| `reservation` \|
+    # `route-table` \| `route-table-association` \| `security-group` \|
+    # `snapshot` \| `subnet` \| `subnet-cidr-block-association` \| `volume`
+    # \| `vpc` \| `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Array<String>] :resources
+    #   The type of resource: `bundle` \| `conversion-task` \| `dhcp-options`
+    #   \| `elastic-ip-allocation` \| `elastic-ip-association` \|
+    #   `export-task` \| `flow-log` \| `image` \| `import-task` \| `instance`
+    #   \| `internet-gateway` \| `network-acl` \| `network-acl-association` \|
+    #   `network-interface` \| `network-interface-attachment` \| `prefix-list`
+    #   \| `reservation` \| `route-table` \| `route-table-association` \|
+    #   `security-group` \| `snapshot` \| `subnet` \|
+    #   `subnet-cidr-block-association` \| `volume` \| `vpc` \|
+    #   `vpc-cidr-block-association` \| `vpc-peering-connection`
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned NextToken
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token to request the next page of results.
+    #
+    # @return [Types::DescribePrincipalIdFormatResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePrincipalIdFormatResult#principals #principals} => Array&lt;Types::PrincipalIdFormat&gt;
+    #   * {Types::DescribePrincipalIdFormatResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_principal_id_format({
+    #     dry_run: false,
+    #     resources: ["String"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.principals #=> Array
+    #   resp.principals[0].arn #=> String
+    #   resp.principals[0].statuses #=> Array
+    #   resp.principals[0].statuses[0].deadline #=> Time
+    #   resp.principals[0].statuses[0].resource #=> String
+    #   resp.principals[0].statuses[0].use_long_ids #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrincipalIdFormat AWS API Documentation
+    #
+    # @overload describe_principal_id_format(params = {})
+    # @param [Hash] params ({})
+    def describe_principal_id_format(params = {}, options = {})
+      req = build_request(:describe_principal_id_format, params)
+      req.send_request(options)
+    end
+
     # Describes one or more regions that are currently available to you.
     #
     # For a list of the regions supported by Amazon EC2, see [Regions and
@@ -13254,7 +13411,8 @@ module Aws::EC2
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call. To retrieve
     #   the remaining results, make another request with the returned
-    #   `NextToken` value. This value can be between 5 and 1000.
+    #   `NextToken` value. This value can be between 5 and 1000. If this
+    #   parameter is not specified, then all results are returned.
     #
     # @return [Types::DescribeSecurityGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -18473,9 +18631,18 @@ module Aws::EC2
 
     # Modifies the ID format for the specified resource on a per-region
     # basis. You can specify that resources should receive longer IDs
-    # (17-character IDs) when they are created. The following resource types
-    # support longer IDs: `instance` \| `reservation` \| `snapshot` \|
-    # `volume`.
+    # (17-character IDs) when they are created.
+    #
+    # This request can only be used to modify longer ID settings for
+    # resource types that are within the opt-in period. Resources currently
+    # in their opt-in period include: `bundle` \| `conversion-task` \|
+    # `dhcp-options` \| `elastic-ip-allocation` \| `elastic-ip-association`
+    # \| `export-task` \| `flow-log` \| `image` \| `import-task` \|
+    # `internet-gateway` \| `network-acl` \| `network-acl-association` \|
+    # `network-interface` \| `network-interface-attachment` \| `prefix-list`
+    # \| `route-table` \| `route-table-association` \| `security-group` \|
+    # `subnet` \| `subnet-cidr-block-association` \| `vpc` \|
+    # `vpc-cidr-block-association` \| `vpc-peering-connection`.
     #
     # This setting applies to the IAM user who makes the request; it does
     # not apply to the entire AWS account. By default, an IAM user defaults
@@ -18495,8 +18662,17 @@ module Aws::EC2
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
     #
     # @option params [required, String] :resource
-    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
-    #   `volume`
+    #   The type of resource: `bundle` \| `conversion-task` \| `dhcp-options`
+    #   \| `elastic-ip-allocation` \| `elastic-ip-association` \|
+    #   `export-task` \| `flow-log` \| `image` \| `import-task` \|
+    #   `internet-gateway` \| `network-acl` \| `network-acl-association` \|
+    #   `network-interface` \| `network-interface-attachment` \| `prefix-list`
+    #   \| `route-table` \| `route-table-association` \| `security-group` \|
+    #   `subnet` \| `subnet-cidr-block-association` \| `vpc` \|
+    #   `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #
+    #   Alternatively, use the `all-current` option to include all resource
+    #   types that are currently within their opt-in period for longer IDs.
     #
     # @option params [required, Boolean] :use_long_ids
     #   Indicate whether the resource should use longer IDs (17-character
@@ -18525,9 +18701,19 @@ module Aws::EC2
     # and the root user for an account. You can specify that resources
     # should receive longer IDs (17-character IDs) when they are created.
     #
-    # The following resource types support longer IDs: `instance` \|
-    # `reservation` \| `snapshot` \| `volume`. For more information, see
-    # [Resource IDs][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # This request can only be used to modify longer ID settings for
+    # resource types that are within the opt-in period. Resources currently
+    # in their opt-in period include: `bundle` \| `conversion-task` \|
+    # `dhcp-options` \| `elastic-ip-allocation` \| `elastic-ip-association`
+    # \| `export-task` \| `flow-log` \| `image` \| `import-task` \|
+    # `internet-gateway` \| `network-acl` \| `network-acl-association` \|
+    # `network-interface` \| `network-interface-attachment` \| `prefix-list`
+    # \| `route-table` \| `route-table-association` \| `security-group` \|
+    # `subnet` \| `subnet-cidr-block-association` \| `vpc` \|
+    # `vpc-cidr-block-association` \| `vpc-peering-connection`..
+    #
+    # For more information, see [Resource IDs][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     # This setting applies to the principal specified in the request; it
     # does not apply to the principal that makes the request.
@@ -18547,8 +18733,17 @@ module Aws::EC2
     #   IAM roles, and the root user of the account.
     #
     # @option params [required, String] :resource
-    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
-    #   `volume`
+    #   The type of resource: `bundle` \| `conversion-task` \| `dhcp-options`
+    #   \| `elastic-ip-allocation` \| `elastic-ip-association` \|
+    #   `export-task` \| `flow-log` \| `image` \| `import-task` \|
+    #   `internet-gateway` \| `network-acl` \| `network-acl-association` \|
+    #   `network-interface` \| `network-interface-attachment` \| `prefix-list`
+    #   \| `route-table` \| `route-table-association` \| `security-group` \|
+    #   `subnet` \| `subnet-cidr-block-association` \| `vpc` \|
+    #   `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #
+    #   Alternatively, use the `all-current` option to include all resource
+    #   types that are currently within their opt-in period for longer IDs.
     #
     # @option params [required, Boolean] :use_long_ids
     #   Indicates whether the resource should use longer IDs (17-character
@@ -23782,7 +23977,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

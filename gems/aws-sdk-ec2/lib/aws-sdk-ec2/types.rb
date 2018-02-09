@@ -4171,7 +4171,8 @@ module Aws::EC2
     # @!attribute [rw] group_name
     #   The name of the security group.
     #
-    #   Constraints: Up to 255 characters in length
+    #   Constraints: Up to 255 characters in length. Cannot start with
+    #   `sg-`.
     #
     #   Constraints for EC2-Classic: ASCII characters
     #
@@ -6520,6 +6521,45 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeAggregateIdFormatRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAggregateIdFormatRequest AWS API Documentation
+    #
+    class DescribeAggregateIdFormatRequest < Struct.new(
+      :dry_run)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] use_long_ids_aggregated
+    #   Indicates whether all resrouces types in the region are configured
+    #   to use longer IDs. This value will only be `true` if all users are
+    #   configured to use longer IDs for all resources types in the region.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] statuses
+    #   Information about each resource's ID format.
+    #   @return [Array<Types::IdFormat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAggregateIdFormatResult AWS API Documentation
+    #
+    class DescribeAggregateIdFormatResult < Struct.new(
+      :use_long_ids_aggregated,
+      :statuses)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeAvailabilityZones.
     #
     # @note When making an API call, you may pass DescribeAvailabilityZonesRequest
@@ -7715,8 +7755,16 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] resource
-    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
-    #   `volume`
+    #   The type of resource: `bundle` \| `conversion-task` \|
+    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
+    #   \| `import-task` \| `instance` \| `internet-gateway` \|
+    #   `network-acl` \| `network-acl-association` \| `network-interface` \|
+    #   `network-interface-attachment` \| `prefix-list` \| `reservation` \|
+    #   `route-table` \| `route-table-association` \| `security-group` \|
+    #   `snapshot` \| `subnet` \| `subnet-cidr-block-association` \|
+    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \|
+    #   `vpc-peering-connection`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdFormatRequest AWS API Documentation
@@ -7755,8 +7803,16 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
-    #   `volume`
+    #   The type of resource: `bundle` \| `conversion-task` \|
+    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
+    #   \| `import-task` \| `instance` \| `internet-gateway` \|
+    #   `network-acl` \| `network-acl-association` \| `network-interface` \|
+    #   `network-interface-attachment` \| `prefix-list` \| `reservation` \|
+    #   `route-table` \| `route-table-association` \| `security-group` \|
+    #   `snapshot` \| `subnet` \| `subnet-cidr-block-association` \|
+    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \|
+    #   `vpc-peering-connection`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdentityIdFormatRequest AWS API Documentation
@@ -9827,6 +9883,73 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribePrincipalIdFormatRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         resources: ["String"],
+    #         max_results: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] resources
+    #   The type of resource: `bundle` \| `conversion-task` \|
+    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
+    #   \| `import-task` \| `instance` \| `internet-gateway` \|
+    #   `network-acl` \| `network-acl-association` \| `network-interface` \|
+    #   `network-interface-attachment` \| `prefix-list` \| `reservation` \|
+    #   `route-table` \| `route-table-association` \| `security-group` \|
+    #   `snapshot` \| `subnet` \| `subnet-cidr-block-association` \|
+    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \|
+    #   `vpc-peering-connection`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   NextToken value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrincipalIdFormatRequest AWS API Documentation
+    #
+    class DescribePrincipalIdFormatRequest < Struct.new(
+      :dry_run,
+      :resources,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] principals
+    #   Information about the ID format settings for the ARN.
+    #   @return [Array<Types::PrincipalIdFormat>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrincipalIdFormatResult AWS API Documentation
+    #
+    class DescribePrincipalIdFormatResult < Struct.new(
+      :principals,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeRegions.
     #
     # @note When making an API call, you may pass DescribeRegionsRequest
@@ -10871,7 +10994,8 @@ module Aws::EC2
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
     #   retrieve the remaining results, make another request with the
-    #   returned `NextToken` value. This value can be between 5 and 1000.
+    #   returned `NextToken` value. This value can be between 5 and 1000. If
+    #   this parameter is not specified, then all results are returned.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsRequest AWS API Documentation
@@ -11658,7 +11782,7 @@ module Aws::EC2
     #
     # @!attribute [rw] next_token
     #   The token required to retrieve the next set of results. This value
-    #   is `null` when there are no more results to return.
+    #   is an empty string when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_price_history
@@ -15924,7 +16048,7 @@ module Aws::EC2
     # @!attribute [rw] format
     #   The format of the disk image being imported.
     #
-    #   Valid values: `RAW` \| `VHD` \| `VMDK` \| `OVA`
+    #   Valid values: `VHD` \| `VMDK` \| `OVA`
     #   @return [String]
     #
     # @!attribute [rw] snapshot_id
@@ -16274,10 +16398,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The user data to make available to the instance. If you are using an
-    #   AWS SDK or command line tool, Base64-encoding is performed for you,
-    #   and you can load the text from a file. Otherwise, you must provide
-    #   Base64-encoded text.
+    #   The Base64-encoded user data to make available to the instance.
     #   @return [Types::UserData]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceLaunchSpecification AWS API Documentation
@@ -18120,10 +18241,7 @@ module Aws::EC2
     # Describes the launch specification for an instance.
     #
     # @!attribute [rw] user_data
-    #   The user data to make available to the instances. If you are using
-    #   an AWS SDK or command line tool, Base64-encoding is performed for
-    #   you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
+    #   The Base64-encoded user data for the instance.
     #   @return [String]
     #
     # @!attribute [rw] security_groups
@@ -19441,8 +19559,18 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] resource
-    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
-    #   `volume`
+    #   The type of resource: `bundle` \| `conversion-task` \|
+    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
+    #   \| `import-task` \| `internet-gateway` \| `network-acl` \|
+    #   `network-acl-association` \| `network-interface` \|
+    #   `network-interface-attachment` \| `prefix-list` \| `route-table` \|
+    #   `route-table-association` \| `security-group` \| `subnet` \|
+    #   `subnet-cidr-block-association` \| `vpc` \|
+    #   `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #
+    #   Alternatively, use the `all-current` option to include all resource
+    #   types that are currently within their opt-in period for longer IDs.
     #   @return [String]
     #
     # @!attribute [rw] use_long_ids
@@ -19476,8 +19604,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
-    #   `volume`
+    #   The type of resource: `bundle` \| `conversion-task` \|
+    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
+    #   \| `import-task` \| `internet-gateway` \| `network-acl` \|
+    #   `network-acl-association` \| `network-interface` \|
+    #   `network-interface-attachment` \| `prefix-list` \| `route-table` \|
+    #   `route-table-association` \| `security-group` \| `subnet` \|
+    #   `subnet-cidr-block-association` \| `vpc` \|
+    #   `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #
+    #   Alternatively, use the `all-current` option to include all resource
+    #   types that are currently within their opt-in period for longer IDs.
     #   @return [String]
     #
     # @!attribute [rw] use_long_ids
@@ -21875,6 +22013,24 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # PrincipalIdFormat description
+    #
+    # @!attribute [rw] arn
+    #   PrincipalIdFormatARN description
+    #   @return [String]
+    #
+    # @!attribute [rw] statuses
+    #   PrincipalIdFormatStatuses description
+    #   @return [Array<Types::IdFormat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrincipalIdFormat AWS API Documentation
+    #
+    class PrincipalIdFormat < Struct.new(
+      :arn,
+      :statuses)
+      include Aws::Structure
+    end
+
     # Describes a secondary private IPv4 address for a network interface.
     #
     # @note When making an API call, you may pass PrivateIpAddressSpecification
@@ -23268,12 +23424,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The user data to make available to the instance. For more
-    #   information, see [Running Commands on Your Linux Instance at
-    #   Launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
-    #   using a command line tool, base64-encoding is performed for you and
-    #   you can load the text from a file. Otherwise, you must provide
-    #   base64-encoded text.
+    #   The Base64-encoded user data to make available to the instance. For
+    #   more information, see [Running Commands on Your Linux Instance at
+    #   Launch][1] (Linux) and [Adding User Data][2] (Windows).
     #
     #
     #
@@ -23889,10 +24042,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The user data to make available to the instances. If you are using
-    #   an AWS SDK or command line tool, Base64-encoding is performed for
-    #   you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
+    #   The Base64-encoded user data for the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotLaunchSpecification AWS API Documentation
@@ -27005,7 +27155,7 @@ module Aws::EC2
     # @!attribute [rw] format
     #   The format of the disk image being imported.
     #
-    #   Valid values: `RAW` \| `VHD` \| `VMDK` \| `OVA`
+    #   Valid values: `VHD` \| `VMDK` \| `OVA`
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -27284,10 +27434,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The user data to make available to the instances. If you are using
-    #   an AWS SDK or command line tool, Base64-encoding is performed for
-    #   you, and you can load the text from a file. Otherwise, you must
-    #   provide Base64-encoded text.
+    #   The Base64-encoded user data to make available to the instances.
     #   @return [String]
     #
     # @!attribute [rw] weighted_capacity
@@ -30058,7 +30205,8 @@ module Aws::EC2
     # @!attribute [rw] static_routes_only
     #   Indicate whether the VPN connection uses static routes only. If you
     #   are creating a VPN connection for a device that does not support
-    #   BGP, you must specify `true`.
+    #   BGP, you must specify `true`. Use CreateVpnConnectionRoute to create
+    #   a static route.
     #
     #   Default: `false`
     #   @return [Boolean]

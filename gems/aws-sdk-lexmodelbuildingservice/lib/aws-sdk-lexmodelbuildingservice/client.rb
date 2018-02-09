@@ -207,13 +207,15 @@ module Aws::LexModelBuildingService
     #   resp.intents[0].intent_name #=> String
     #   resp.intents[0].intent_version #=> String
     #   resp.clarification_prompt.messages #=> Array
-    #   resp.clarification_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.clarification_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.clarification_prompt.messages[0].content #=> String
+    #   resp.clarification_prompt.messages[0].group_number #=> Integer
     #   resp.clarification_prompt.max_attempts #=> Integer
     #   resp.clarification_prompt.response_card #=> String
     #   resp.abort_statement.messages #=> Array
-    #   resp.abort_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.abort_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.abort_statement.messages[0].content #=> String
+    #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
     #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
@@ -301,8 +303,9 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].slot_type #=> String
     #   resp.slots[0].slot_type_version #=> String
     #   resp.slots[0].value_elicitation_prompt.messages #=> Array
-    #   resp.slots[0].value_elicitation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.slots[0].value_elicitation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.slots[0].value_elicitation_prompt.messages[0].content #=> String
+    #   resp.slots[0].value_elicitation_prompt.messages[0].group_number #=> Integer
     #   resp.slots[0].value_elicitation_prompt.max_attempts #=> Integer
     #   resp.slots[0].value_elicitation_prompt.response_card #=> String
     #   resp.slots[0].priority #=> Integer
@@ -312,26 +315,31 @@ module Aws::LexModelBuildingService
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
-    #   resp.confirmation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.confirmation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.confirmation_prompt.messages[0].content #=> String
+    #   resp.confirmation_prompt.messages[0].group_number #=> Integer
     #   resp.confirmation_prompt.max_attempts #=> Integer
     #   resp.confirmation_prompt.response_card #=> String
     #   resp.rejection_statement.messages #=> Array
-    #   resp.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.rejection_statement.messages[0].content #=> String
+    #   resp.rejection_statement.messages[0].group_number #=> Integer
     #   resp.rejection_statement.response_card #=> String
     #   resp.follow_up_prompt.prompt.messages #=> Array
-    #   resp.follow_up_prompt.prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.follow_up_prompt.prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.follow_up_prompt.prompt.messages[0].content #=> String
+    #   resp.follow_up_prompt.prompt.messages[0].group_number #=> Integer
     #   resp.follow_up_prompt.prompt.max_attempts #=> Integer
     #   resp.follow_up_prompt.prompt.response_card #=> String
     #   resp.follow_up_prompt.rejection_statement.messages #=> Array
-    #   resp.follow_up_prompt.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.follow_up_prompt.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.follow_up_prompt.rejection_statement.messages[0].content #=> String
+    #   resp.follow_up_prompt.rejection_statement.messages[0].group_number #=> Integer
     #   resp.follow_up_prompt.rejection_statement.response_card #=> String
     #   resp.conclusion_statement.messages #=> Array
-    #   resp.conclusion_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.conclusion_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.conclusion_statement.messages[0].content #=> String
+    #   resp.conclusion_statement.messages[0].group_number #=> Integer
     #   resp.conclusion_statement.response_card #=> String
     #   resp.dialog_code_hook.uri #=> String
     #   resp.dialog_code_hook.message_version #=> String
@@ -705,11 +713,10 @@ module Aws::LexModelBuildingService
 
     # Deletes stored utterances.
     #
-    # Amazon Lex stores the utterances that users send to your bot unless
-    # the `childDirected` field in the bot is set to `true`. Utterances are
-    # stored for 15 days for use with the GetUtterancesView operation, and
-    # then stored indefinitely for use in improving the ability of your bot
-    # to respond to user input.
+    # Amazon Lex stores the utterances that users send to your bot.
+    # Utterances are stored for 15 days for use with the GetUtterancesView
+    # operation, and then stored indefinitely for use in improving the
+    # ability of your bot to respond to user input.
     #
     # Use the `DeleteStoredUtterances` operation to manually delete stored
     # utterances for a specific user.
@@ -847,13 +854,15 @@ module Aws::LexModelBuildingService
     #   resp.intents[0].intent_name #=> String
     #   resp.intents[0].intent_version #=> String
     #   resp.clarification_prompt.messages #=> Array
-    #   resp.clarification_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.clarification_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.clarification_prompt.messages[0].content #=> String
+    #   resp.clarification_prompt.messages[0].group_number #=> Integer
     #   resp.clarification_prompt.max_attempts #=> Integer
     #   resp.clarification_prompt.response_card #=> String
     #   resp.abort_statement.messages #=> Array
-    #   resp.abort_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.abort_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.abort_statement.messages[0].content #=> String
+    #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
     #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
@@ -1024,7 +1033,7 @@ module Aws::LexModelBuildingService
     #   resp.bot_alias #=> String
     #   resp.bot_name #=> String
     #   resp.created_date #=> Time
-    #   resp.type #=> String, one of "Facebook", "Slack", "Twilio-Sms"
+    #   resp.type #=> String, one of "Facebook", "Slack", "Twilio-Sms", "Kik"
     #   resp.bot_configuration #=> Hash
     #   resp.bot_configuration["String"] #=> String
     #   resp.status #=> String, one of "IN_PROGRESS", "CREATED", "FAILED"
@@ -1092,7 +1101,7 @@ module Aws::LexModelBuildingService
     #   resp.bot_channel_associations[0].bot_alias #=> String
     #   resp.bot_channel_associations[0].bot_name #=> String
     #   resp.bot_channel_associations[0].created_date #=> Time
-    #   resp.bot_channel_associations[0].type #=> String, one of "Facebook", "Slack", "Twilio-Sms"
+    #   resp.bot_channel_associations[0].type #=> String, one of "Facebook", "Slack", "Twilio-Sms", "Kik"
     #   resp.bot_channel_associations[0].bot_configuration #=> Hash
     #   resp.bot_channel_associations[0].bot_configuration["String"] #=> String
     #   resp.bot_channel_associations[0].status #=> String, one of "IN_PROGRESS", "CREATED", "FAILED"
@@ -1660,8 +1669,9 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].slot_type #=> String
     #   resp.slots[0].slot_type_version #=> String
     #   resp.slots[0].value_elicitation_prompt.messages #=> Array
-    #   resp.slots[0].value_elicitation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.slots[0].value_elicitation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.slots[0].value_elicitation_prompt.messages[0].content #=> String
+    #   resp.slots[0].value_elicitation_prompt.messages[0].group_number #=> Integer
     #   resp.slots[0].value_elicitation_prompt.max_attempts #=> Integer
     #   resp.slots[0].value_elicitation_prompt.response_card #=> String
     #   resp.slots[0].priority #=> Integer
@@ -1671,26 +1681,31 @@ module Aws::LexModelBuildingService
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
-    #   resp.confirmation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.confirmation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.confirmation_prompt.messages[0].content #=> String
+    #   resp.confirmation_prompt.messages[0].group_number #=> Integer
     #   resp.confirmation_prompt.max_attempts #=> Integer
     #   resp.confirmation_prompt.response_card #=> String
     #   resp.rejection_statement.messages #=> Array
-    #   resp.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.rejection_statement.messages[0].content #=> String
+    #   resp.rejection_statement.messages[0].group_number #=> Integer
     #   resp.rejection_statement.response_card #=> String
     #   resp.follow_up_prompt.prompt.messages #=> Array
-    #   resp.follow_up_prompt.prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.follow_up_prompt.prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.follow_up_prompt.prompt.messages[0].content #=> String
+    #   resp.follow_up_prompt.prompt.messages[0].group_number #=> Integer
     #   resp.follow_up_prompt.prompt.max_attempts #=> Integer
     #   resp.follow_up_prompt.prompt.response_card #=> String
     #   resp.follow_up_prompt.rejection_statement.messages #=> Array
-    #   resp.follow_up_prompt.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.follow_up_prompt.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.follow_up_prompt.rejection_statement.messages[0].content #=> String
+    #   resp.follow_up_prompt.rejection_statement.messages[0].group_number #=> Integer
     #   resp.follow_up_prompt.rejection_statement.response_card #=> String
     #   resp.conclusion_statement.messages #=> Array
-    #   resp.conclusion_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.conclusion_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.conclusion_statement.messages[0].content #=> String
+    #   resp.conclusion_statement.messages[0].group_number #=> Integer
     #   resp.conclusion_statement.response_card #=> String
     #   resp.dialog_code_hook.uri #=> String
     #   resp.dialog_code_hook.message_version #=> String
@@ -2100,13 +2115,12 @@ module Aws::LexModelBuildingService
     # about the old version and the new so that you can compare the
     # performance across the two versions.
     #
-    # Data is available for the last 15 days. You can request information
-    # for up to 5 versions in each request. The response contains
-    # information about a maximum of 100 utterances for each version.
+    # <note markdown="1"> Utterance statistics are generated once a day. Data is available for
+    # the last 15 days. You can request information for up to 5 versions in
+    # each request. The response contains information about a maximum of 100
+    # utterances for each version.
     #
-    # If the bot's `childDirected` field is set to `true`, utterances for
-    # the bot are not stored and cannot be retrieved with the
-    # `GetUtterancesView` operation. For more information, see PutBot.
+    #  </note>
     #
     # This operation requires permissions for the `lex:GetUtterancesView`
     # action.
@@ -2159,19 +2173,20 @@ module Aws::LexModelBuildingService
 
     # Creates an Amazon Lex conversational bot or replaces an existing bot.
     # When you create or update a bot you are only required to specify a
-    # name. You can use this to add intents later, or to remove intents from
-    # an existing bot. When you create a bot with a name only, the bot is
-    # created or updated but Amazon Lex returns the ` response FAILED. You
-    # can build the bot after you add one or more intents. For more
-    # information about Amazon Lex bots, see how-it-works. </p> If you
-    # specify the name of an existing bot, the fields in the request replace
-    # the existing values in the $LATEST version of the bot. Amazon Lex
-    # removes any fields that you don't provide values for in the request,
-    # except for the idleTTLInSeconds and privacySettings fields, which are
-    # set to their default values. If you don't specify values for required
-    # fields, Amazon Lex throws an exception. This operation requires
-    # permissions for the lex:PutBot action. For more information, see
-    # auth-and-access-control.
+    # name, a locale, and whether the bot is directed toward children under
+    # age 13. You can use this to add intents later, or to remove intents
+    # from an existing bot. When you create a bot with the minimum
+    # information, the bot is created or updated but Amazon Lex returns the
+    # ` response FAILED. You can build the bot after you add one or more
+    # intents. For more information about Amazon Lex bots, see how-it-works.
+    # </p> If you specify the name of an existing bot, the fields in the
+    # request replace the existing values in the $LATEST version of the bot.
+    # Amazon Lex removes any fields that you don't provide values for in the
+    # request, except for the idleTTLInSeconds and privacySettings fields,
+    # which are set to their default values. If you don't specify values for
+    # required fields, Amazon Lex throws an exception. This operation
+    # requires permissions for the lex:PutBot action. For more information,
+    # see auth-and-access-control.
     # `
     #
     # @option params [required, String] :name
@@ -2424,8 +2439,9 @@ module Aws::LexModelBuildingService
     #     clarification_prompt: {
     #       messages: [ # required
     #         {
-    #           content_type: "PlainText", # required, accepts PlainText, SSML
+    #           content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #           content: "ContentString", # required
+    #           group_number: 1,
     #         },
     #       ],
     #       max_attempts: 1, # required
@@ -2434,8 +2450,9 @@ module Aws::LexModelBuildingService
     #     abort_statement: {
     #       messages: [ # required
     #         {
-    #           content_type: "PlainText", # required, accepts PlainText, SSML
+    #           content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #           content: "ContentString", # required
+    #           group_number: 1,
     #         },
     #       ],
     #       response_card: "ResponseCard",
@@ -2456,13 +2473,15 @@ module Aws::LexModelBuildingService
     #   resp.intents[0].intent_name #=> String
     #   resp.intents[0].intent_version #=> String
     #   resp.clarification_prompt.messages #=> Array
-    #   resp.clarification_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.clarification_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.clarification_prompt.messages[0].content #=> String
+    #   resp.clarification_prompt.messages[0].group_number #=> Integer
     #   resp.clarification_prompt.max_attempts #=> Integer
     #   resp.clarification_prompt.response_card #=> String
     #   resp.abort_statement.messages #=> Array
-    #   resp.abort_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.abort_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.abort_statement.messages[0].content #=> String
+    #   resp.abort_statement.messages[0].group_number #=> Integer
     #   resp.abort_statement.response_card #=> String
     #   resp.status #=> String, one of "BUILDING", "READY", "FAILED", "NOT_BUILT"
     #   resp.failure_reason #=> String
@@ -3041,8 +3060,9 @@ module Aws::LexModelBuildingService
     #         value_elicitation_prompt: {
     #           messages: [ # required
     #             {
-    #               content_type: "PlainText", # required, accepts PlainText, SSML
+    #               content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #               content: "ContentString", # required
+    #               group_number: 1,
     #             },
     #           ],
     #           max_attempts: 1, # required
@@ -3057,8 +3077,9 @@ module Aws::LexModelBuildingService
     #     confirmation_prompt: {
     #       messages: [ # required
     #         {
-    #           content_type: "PlainText", # required, accepts PlainText, SSML
+    #           content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #           content: "ContentString", # required
+    #           group_number: 1,
     #         },
     #       ],
     #       max_attempts: 1, # required
@@ -3067,8 +3088,9 @@ module Aws::LexModelBuildingService
     #     rejection_statement: {
     #       messages: [ # required
     #         {
-    #           content_type: "PlainText", # required, accepts PlainText, SSML
+    #           content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #           content: "ContentString", # required
+    #           group_number: 1,
     #         },
     #       ],
     #       response_card: "ResponseCard",
@@ -3077,8 +3099,9 @@ module Aws::LexModelBuildingService
     #       prompt: { # required
     #         messages: [ # required
     #           {
-    #             content_type: "PlainText", # required, accepts PlainText, SSML
+    #             content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #             content: "ContentString", # required
+    #             group_number: 1,
     #           },
     #         ],
     #         max_attempts: 1, # required
@@ -3087,8 +3110,9 @@ module Aws::LexModelBuildingService
     #       rejection_statement: { # required
     #         messages: [ # required
     #           {
-    #             content_type: "PlainText", # required, accepts PlainText, SSML
+    #             content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #             content: "ContentString", # required
+    #             group_number: 1,
     #           },
     #         ],
     #         response_card: "ResponseCard",
@@ -3097,8 +3121,9 @@ module Aws::LexModelBuildingService
     #     conclusion_statement: {
     #       messages: [ # required
     #         {
-    #           content_type: "PlainText", # required, accepts PlainText, SSML
+    #           content_type: "PlainText", # required, accepts PlainText, SSML, CustomPayload
     #           content: "ContentString", # required
+    #           group_number: 1,
     #         },
     #       ],
     #       response_card: "ResponseCard",
@@ -3129,8 +3154,9 @@ module Aws::LexModelBuildingService
     #   resp.slots[0].slot_type #=> String
     #   resp.slots[0].slot_type_version #=> String
     #   resp.slots[0].value_elicitation_prompt.messages #=> Array
-    #   resp.slots[0].value_elicitation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.slots[0].value_elicitation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.slots[0].value_elicitation_prompt.messages[0].content #=> String
+    #   resp.slots[0].value_elicitation_prompt.messages[0].group_number #=> Integer
     #   resp.slots[0].value_elicitation_prompt.max_attempts #=> Integer
     #   resp.slots[0].value_elicitation_prompt.response_card #=> String
     #   resp.slots[0].priority #=> Integer
@@ -3140,26 +3166,31 @@ module Aws::LexModelBuildingService
     #   resp.sample_utterances #=> Array
     #   resp.sample_utterances[0] #=> String
     #   resp.confirmation_prompt.messages #=> Array
-    #   resp.confirmation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.confirmation_prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.confirmation_prompt.messages[0].content #=> String
+    #   resp.confirmation_prompt.messages[0].group_number #=> Integer
     #   resp.confirmation_prompt.max_attempts #=> Integer
     #   resp.confirmation_prompt.response_card #=> String
     #   resp.rejection_statement.messages #=> Array
-    #   resp.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.rejection_statement.messages[0].content #=> String
+    #   resp.rejection_statement.messages[0].group_number #=> Integer
     #   resp.rejection_statement.response_card #=> String
     #   resp.follow_up_prompt.prompt.messages #=> Array
-    #   resp.follow_up_prompt.prompt.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.follow_up_prompt.prompt.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.follow_up_prompt.prompt.messages[0].content #=> String
+    #   resp.follow_up_prompt.prompt.messages[0].group_number #=> Integer
     #   resp.follow_up_prompt.prompt.max_attempts #=> Integer
     #   resp.follow_up_prompt.prompt.response_card #=> String
     #   resp.follow_up_prompt.rejection_statement.messages #=> Array
-    #   resp.follow_up_prompt.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.follow_up_prompt.rejection_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.follow_up_prompt.rejection_statement.messages[0].content #=> String
+    #   resp.follow_up_prompt.rejection_statement.messages[0].group_number #=> Integer
     #   resp.follow_up_prompt.rejection_statement.response_card #=> String
     #   resp.conclusion_statement.messages #=> Array
-    #   resp.conclusion_statement.messages[0].content_type #=> String, one of "PlainText", "SSML"
+    #   resp.conclusion_statement.messages[0].content_type #=> String, one of "PlainText", "SSML", "CustomPayload"
     #   resp.conclusion_statement.messages[0].content #=> String
+    #   resp.conclusion_statement.messages[0].group_number #=> Integer
     #   resp.conclusion_statement.response_card #=> String
     #   resp.dialog_code_hook.uri #=> String
     #   resp.dialog_code_hook.message_version #=> String
@@ -3353,7 +3384,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

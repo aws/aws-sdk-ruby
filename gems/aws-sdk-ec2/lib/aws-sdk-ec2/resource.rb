@@ -595,7 +595,7 @@ module Aws::EC2
     # @option options [required, String] :group_name
     #   The name of the security group.
     #
-    #   Constraints: Up to 255 characters in length
+    #   Constraints: Up to 255 characters in length. Cannot start with `sg-`.
     #
     #   Constraints for EC2-Classic: ASCII characters
     #
@@ -2368,7 +2368,8 @@ module Aws::EC2
     # @option options [Integer] :max_results
     #   The maximum number of results to return in a single call. To retrieve
     #   the remaining results, make another request with the returned
-    #   `NextToken` value. This value can be between 5 and 1000.
+    #   `NextToken` value. This value can be between 5 and 1000. If this
+    #   parameter is not specified, then all results are returned.
     # @return [SecurityGroup::Collection]
     def security_groups(options = {})
       batches = Enumerator.new do |y|

@@ -100,6 +100,7 @@ module Aws::LexModelBuildingService
     GetSlotTypesResponse = Shapes::StructureShape.new(name: 'GetSlotTypesResponse')
     GetUtterancesViewRequest = Shapes::StructureShape.new(name: 'GetUtterancesViewRequest')
     GetUtterancesViewResponse = Shapes::StructureShape.new(name: 'GetUtterancesViewResponse')
+    GroupNumber = Shapes::IntegerShape.new(name: 'GroupNumber')
     Intent = Shapes::StructureShape.new(name: 'Intent')
     IntentList = Shapes::ListShape.new(name: 'IntentList')
     IntentMetadata = Shapes::StructureShape.new(name: 'IntentMetadata')
@@ -564,6 +565,7 @@ module Aws::LexModelBuildingService
 
     Message.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, required: true, location_name: "contentType"))
     Message.add_member(:content, Shapes::ShapeRef.new(shape: ContentString, required: true, location_name: "content"))
+    Message.add_member(:group_number, Shapes::ShapeRef.new(shape: GroupNumber, location_name: "groupNumber"))
     Message.struct_class = Types::Message
 
     MessageList.member = Shapes::ShapeRef.new(shape: Message)
