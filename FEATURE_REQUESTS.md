@@ -212,13 +212,6 @@ clean up.
 
 See [related GitHub issue #1535](https://github.com/aws/aws-sdk-ruby/issues/1535).
 
-### Allow for in-memroy multipart upload
-
-Currently, `Client#put_object` doesn't seem to upload an object with multipart, and
-`Object#upload_file` does multipart uploading, but it requires the file to be on disk.
-
-See [related GitHub issue #1580](https://github.com/aws/aws-sdk-ruby/issues/1580)
-
 ### API Helper
 
 ### Add a Way to Extract Queue Name from Aws::SQS::Errors::NonExistentQueue

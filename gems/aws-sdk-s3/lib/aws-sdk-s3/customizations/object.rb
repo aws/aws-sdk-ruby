@@ -214,6 +214,39 @@ module Aws
         url.to_s
       end
 
+      # Uploads chunks in a streaming fashion to the current object in S3.
+      #
+      #     # Passed chunks automatically split into multiupart multipart upload parts
+      #     # and the parts are uploaded in parallel. This allows for streaming uploads
+      #     # that never touch the disk.
+      # @example Streaming chunks of data
+      #     obj.upload_file do |write_stream|
+      #       10.times { write_stream << 'hello' }
+      #     end
+      #
+      # @option options [Integer] :thread_count
+      #   The number of parallel multipart uploads
+      #   Default :thread_count is 10.
+      #
+      # @raise [MultipartUploadError] If an object is being uploaded in
+      #   parts, and the upload can not be completed, then the upload is
+      #   aborted and this error is raised.  The raised error has a `#errors`
+      #   method that returns the failures that caused the upload to be
+      #   aborted.
+      #
+      # @return [Boolean] Returns `true` when the object is uploaded
+      #   without any errors.
+      #
+      def upload_chunks(options = {}, &block)
+        uploading_options = options.dup
+        uploader = MultipartChunkUploader.new(
+          client: client,
+          thread_count: uploading_options.delete(:thread_count),
+        )
+        uploader.upload(uploading_options.merge(bucket: bucket_name, key: key), &block)
+        true
+      end
+
       # Uploads a file from disk to the current object in S3.
       #
       #     # small files are uploaded in a single API call

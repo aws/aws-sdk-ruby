@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - S3::Object#upload_chunks - Added a utility method for uploading
+  chunks in a streaming manner to Amazon S3. This method automatically manages uploading large
+  streams using the multipart upload APIs. The data does never touch disk which makes it a good
+  fit for environments that have limited disk access
+
+  ```ruby
+  s3 = Aws::S3::Resource.new
+  s3.bucket('aws-sdk').object('key').upload_chunks do |write_stream|
+    10.times { write_stream << 'foo' }
+  end
+  ```
+
 * Issue - Fix Ruby 2.5 warnings.
 
 1.8.0 (2017-11-29)

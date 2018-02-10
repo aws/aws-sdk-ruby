@@ -23,6 +23,40 @@ Given(/^I create a bucket resource$/) do
   @created_buckets << @bucket
 end
 
+Given("I have {int} {int}MB chunks") do |number, size|
+  @chunks = number.to_i.times.map {'.' * size.to_i * 1024 * 1024}
+end
+
+When(/^I upload the chunks to the "(.*?)" object$/) do |key|
+  @bucket.object(key).upload_chunks do |write_stream|
+    @chunks.each {|chunk| write_stream << chunk }
+  end
+end
+
+When(/^I upload the chunks to the "(.*?)" object with SSE\/CPK$/) do |key|
+  require 'openssl'
+  cipher = OpenSSL::Cipher::AES256.new(:CBC)
+  encryption_key = cipher.random_key
+  @bucket.object(key).upload_chunks({
+    sse_customer_key: encryption_key,
+    sse_customer_algorithm: 'AES256'
+  }) do |write_stream|
+    @chunks.each {|chunk| write_stream << chunk }
+  end
+end
+
+Then(/^the chunks should have been uploaded as a multipart upload$/) do
+  expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
+  expect(ApiCallTracker.called_operations).to include(:upload_part)
+  expect(ApiCallTracker.called_operations).to include(:complete_multipart_upload)
+end
+
+Then(/the "(.*?)" object should contained the chunks joined/) do |key|
+  data = @s3.bucket(@bucket_name).object(key).get.body.read
+  expect(data).to eq(@chunks.join)
+end
+
+
 Given(/^I have a (\d+)MB file$/) do |size|
   @file = Tempfile.new('tempfile')
   @file.write('.' * size.to_i * 1024 * 1024)
