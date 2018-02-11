@@ -170,16 +170,16 @@ module Aws
           client.stub_responses(:complete_multipart_upload)
           result = []
           allow(client).to receive(:upload_part) do |part|
-            result << part[:body].read
+            result << part[:body].read.size
           end.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
             17.times { write_stream << one_mb }
           end
           expect(result).to eq([
-            one_mb * 5,
-            one_mb * 5,
-            one_mb * 5,
-            one_mb * 2,
+            5 * 1024 * 1024,
+            5 * 1024 * 1024,
+            5 * 1024 * 1024,
+            2 * 1024 * 1024,
           ])
         end
 
@@ -320,16 +320,16 @@ module Aws
             client.stub_responses(:complete_multipart_upload)
             result = []
             allow(client).to receive(:upload_part) do |part|
-              result << part[:body].read
+              result << part[:body].read.size
             end.and_return(double(:upload_part, etag: 'etag'))
             object.upload_stream(tempfile: true) do |write_stream|
               17.times { write_stream << one_mb }
             end
             expect(result).to eq([
-              one_mb * 5,
-              one_mb * 5,
-              one_mb * 5,
-              one_mb * 2,
+              5 * 1024 * 1024,
+              5 * 1024 * 1024,
+              5 * 1024 * 1024,
+              2 * 1024 * 1024,
             ])
           end
 
