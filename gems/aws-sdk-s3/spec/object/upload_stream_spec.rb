@@ -54,28 +54,28 @@ module Aws
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
-            body: one_mb * 5,
+            body: instance_of(StringIO),
             part_number: 1,
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
-            body: one_mb * 5,
+            body: instance_of(StringIO),
             part_number: 2,
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
-            body: one_mb * 5,
+            body: instance_of(StringIO),
             part_number: 3,
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
-            body: one_mb * 2,
+            body: instance_of(StringIO),
             part_number: 4,
           ).once.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
@@ -90,33 +90,51 @@ module Aws
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
-            body: one_mb * 5,
+            body: instance_of(StringIO),
             part_number: 1,
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
-            body: one_mb * 5,
+            body: instance_of(StringIO),
             part_number: 2,
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
-            body: one_mb * 5,
+            body: instance_of(StringIO),
             part_number: 3,
           ).once.and_return(double(:upload_part, etag: 'etag'))
           expect(client).to receive(:upload_part).with(
             bucket: 'bucket',
             key: 'key',
             upload_id: 'id',
-            body: one_mb * 2,
+            body: instance_of(StringIO),
             part_number: 4,
           ).once.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
             17.times { write_stream << one_mb }
           end
+        end
+
+        it 'passes stringios with correct contents to upload_part' do
+          client.stub_responses(:create_multipart_upload, upload_id:'id')
+          client.stub_responses(:complete_multipart_upload)
+          result = []
+          allow(client).to receive(:upload_part) do |part|
+            result << part[:body].read
+          end.and_return(double(:upload_part, etag: 'etag'))
+          object.upload_stream(tempfile: true) do |write_stream|
+            17.times { write_stream << one_mb }
+          end
+          expect(result).to eq([
+            one_mb * 5,
+            one_mb * 5,
+            one_mb * 5,
+            one_mb * 2,
+          ])
         end
 
         it 'automatically deletes failed multipart upload on error' do

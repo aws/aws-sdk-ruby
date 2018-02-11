@@ -1,6 +1,7 @@
 require 'thread'
 require 'set'
 require 'tempfile'
+require 'stringio'
 module Aws
   module S3
     # @api private
@@ -100,20 +101,18 @@ module Aws
 
       def read_to_part_body(read_pipe)
         return if read_pipe.closed?
-        if @tempfile
-          tempfile = Tempfile.new(TEMPFILE_PREIX)
-          tempfile.binmode
-          byte_count = IO.copy_stream(read_pipe, tempfile, PART_SIZE)
-          tempfile.rewind
-          if byte_count == 0
-            tempfile.close
-            tempfile.unlink
-            nil
-          else
-            tempfile
+        temp_io = @tempfile ? Tempfile.new(TEMPFILE_PREIX) : StringIO.new
+        temp_io.binmode
+        bytes_copied = IO.copy_stream(read_pipe, temp_io, PART_SIZE)
+        temp_io.rewind
+        if bytes_copied == 0
+          if Tempfile === temp_io
+            temp_io.close
+            temp_io.unlink
           end
+          nil
         else
-          read_pipe.read(PART_SIZE)
+          temp_io
         end
       end
 
