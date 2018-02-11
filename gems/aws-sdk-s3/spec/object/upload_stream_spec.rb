@@ -153,15 +153,18 @@ module Aws
           client.stub_responses(:complete_multipart_upload)
           result = []
           allow(client).to receive(:upload_part) do |part|
-            result << part[:body].read
+            result << [
+              part[:part_number],
+              part[:body].read.size,
+            ]
           end.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream(part_size: 7 * 1024 * 1024) do |write_stream|
             17.times { write_stream << one_mb }
           end
-          expect(result).to eq([
-            one_mb * 7,
-            one_mb * 7,
-            one_mb * 3,
+          expect(result.sort_by(&:first)).to eq([
+            [1, 7 * 1024 * 1024],
+            [2, 7 * 1024 * 1024],
+            [3, 3 * 1024 * 1024],
           ])
         end
 
@@ -170,16 +173,19 @@ module Aws
           client.stub_responses(:complete_multipart_upload)
           result = []
           allow(client).to receive(:upload_part) do |part|
-            result << part[:body].read.size
+            result << [
+              part[:part_number],
+              part[:body].read.size,
+            ]
           end.and_return(double(:upload_part, etag: 'etag'))
           object.upload_stream do |write_stream|
             17.times { write_stream << one_mb }
           end
-          expect(result).to eq([
-            5 * 1024 * 1024,
-            5 * 1024 * 1024,
-            5 * 1024 * 1024,
-            2 * 1024 * 1024,
+          expect(result.sort_by(&:first)).to eq([
+            [1, 5 * 1024 * 1024],
+            [2, 5 * 1024 * 1024],
+            [3, 5 * 1024 * 1024],
+            [4, 2 * 1024 * 1024],
           ])
         end
 
@@ -320,16 +326,19 @@ module Aws
             client.stub_responses(:complete_multipart_upload)
             result = []
             allow(client).to receive(:upload_part) do |part|
-              result << part[:body].read.size
+              result << [
+                part[:part_number],
+                part[:body].read.size,
+              ]
             end.and_return(double(:upload_part, etag: 'etag'))
             object.upload_stream(tempfile: true) do |write_stream|
               17.times { write_stream << one_mb }
             end
-            expect(result).to eq([
-              5 * 1024 * 1024,
-              5 * 1024 * 1024,
-              5 * 1024 * 1024,
-              2 * 1024 * 1024,
+            expect(result.sort_by(&:first)).to eq([
+              [1, 5 * 1024 * 1024],
+              [2, 5 * 1024 * 1024],
+              [3, 5 * 1024 * 1024],
+              [4, 2 * 1024 * 1024],
             ])
           end
 
