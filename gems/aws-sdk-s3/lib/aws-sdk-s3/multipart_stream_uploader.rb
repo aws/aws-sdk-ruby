@@ -1,6 +1,6 @@
 require 'thread'
 require 'set'
-
+require 'tempfile'
 module Aws
   module S3
     # @api private
@@ -10,6 +10,9 @@ module Aws
 
       # api private
       THREAD_COUNT = 10
+
+      # api private
+      TEMPFILE_PREIX = 'aws-sdk-s3-upload_stream'.freeze
 
       # @api private
       CREATE_OPTIONS =
@@ -22,6 +25,7 @@ module Aws
       # @option options [Client] :client
       def initialize(options = {})
         @client = options[:client] || Client.new
+        @tempfile = options[:tempfile]
         @thread_count = options[:thread_count] || THREAD_COUNT
       end
 
@@ -94,20 +98,49 @@ module Aws
         end
       end
 
+      def read_to_part_body(read_pipe)
+        return if read_pipe.closed?
+        if @tempfile
+          tempfile = Tempfile.new(TEMPFILE_PREIX)
+          tempfile.binmode
+          byte_count = IO.copy_stream(read_pipe, tempfile, PART_SIZE)
+          tempfile.rewind
+          if byte_count == 0
+            tempfile.close
+            tempfile.unlink
+            nil
+          else
+            tempfile
+          end
+        else
+          read_pipe.read(PART_SIZE)
+        end
+      end
+
       def upload_in_threads(read_pipe, completed, options)
         mutex = Mutex.new
         part_number = 0
         @thread_count.times.map do
           thread = Thread.new do
             begin
-              while (pair = mutex.synchronize { [!read_pipe.closed? && read_pipe.read(PART_SIZE), part_number += 1] }) && pair.first
-                buffer, part_number = pair
-                part = options.merge(
-                  body: buffer,
-                  part_number: part_number,
-                )
-                resp = @client.upload_part(part)
-                completed << {etag: resp.etag, part_number: part[:part_number]}
+              loop do
+                body, thread_part_number = mutex.synchronize do
+                  [read_to_part_body(read_pipe), part_number += 1]
+                end
+                break unless body
+                begin
+                  part = options.merge(
+                    body: body,
+                    part_number: part_number,
+                  )
+                  resp = @client.upload_part(part)
+                  completed << {etag: resp.etag, part_number: part[:part_number]}
+                ensure
+                  if Tempfile === body
+                    body.close
+                    body.unlink
+                  end
+                end
               end
               nil
             rescue => error

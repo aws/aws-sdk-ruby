@@ -24,6 +24,12 @@ Feature: Aws::S3::Object
     Then the "medium" object should contained the chunks joined
 
   @slow
+  Scenario: Uploading chunks with using temporary files
+    Given I have 6 1MB chunks
+    When I upload the chunks using tempfile to the "medium" object
+    Then the "medium" object should contained the chunks joined
+
+  @slow
   Scenario: Uploading chunks with serverside encryption
     Given I have 2 3MB chunks
     When I upload the chunks to the "encrypted" object with SSE/CPK

@@ -226,7 +226,13 @@ module Aws
       #
       # @option options [Integer] :thread_count
       #   The number of parallel multipart uploads
-      #   Default :thread_count is 10.
+      #   Default `:thread_count` is `10`.
+      #
+      # @option options [Boolean] :tempfile
+      #   Normally read data is stored in memory when building the parts in order to complete
+      #   the underlying multipart upload. By passing `:tempfile => true` data read will be
+      #   temporarily stored on disk reducing the memory footprint vastly.
+      #   Default `:tempfile` is `false`.
       #
       # @raise [MultipartUploadError] If an object is being uploaded in
       #   parts, and the upload can not be completed, then the upload is
@@ -242,6 +248,7 @@ module Aws
         uploader = MultipartStreamUploader.new(
           client: client,
           thread_count: uploading_options.delete(:thread_count),
+          tempfile: uploading_options.delete(:tempfile),
         )
         uploader.upload(uploading_options.merge(bucket: bucket_name, key: key), &block)
         true

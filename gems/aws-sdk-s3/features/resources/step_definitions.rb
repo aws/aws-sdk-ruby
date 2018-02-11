@@ -27,6 +27,12 @@ Given("I have {int} {int}MB chunks") do |number, size|
   @chunks = number.to_i.times.map {'.' * size.to_i * 1024 * 1024}
 end
 
+When(/^I upload the chunks using tempfile to the "(.*?)" object$/) do |key|
+  @bucket.object(key).upload_stream(tempfile: true) do |write_stream|
+    @chunks.each {|chunk| write_stream << chunk }
+  end
+end
+
 When(/^I upload the chunks to the "(.*?)" object$/) do |key|
   @bucket.object(key).upload_stream do |write_stream|
     @chunks.each {|chunk| write_stream << chunk }
