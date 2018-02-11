@@ -58,12 +58,13 @@ module Aws
       end
 
       def upload_parts(upload_id, options, &block)
-        read_pipe, write_pipe = IO.pipe
         completed = Queue.new
-        threads = upload_in_threads(read_pipe, completed, upload_part_opts(options).merge(upload_id: upload_id))
-        block.call(write_pipe)
-        write_pipe.close
-        errors = threads.map(&:value).compact
+        errors = IO.pipe do |read_pipe, write_pipe|
+          threads = upload_in_threads(read_pipe, completed, upload_part_opts(options).merge(upload_id: upload_id))
+          block.call(write_pipe)
+          write_pipe.close
+          threads.map(&:value).compact
+        end
         if errors.empty?
           Array.new(completed.size) { completed.pop }.sort_by { |part| part[:part_number] }
         else
