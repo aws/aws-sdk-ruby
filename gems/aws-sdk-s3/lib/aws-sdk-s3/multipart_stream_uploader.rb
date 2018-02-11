@@ -101,7 +101,8 @@ module Aws
         @thread_count.times.map do
           thread = Thread.new do
             begin
-              while (buffer, part_number = mutex.synchronize { [!read_pipe.closed? && read_pipe.read(PART_SIZE), part_number += 1] }) && buffer
+              while (pair = mutex.synchronize { [!read_pipe.closed? && read_pipe.read(PART_SIZE), part_number += 1] }) && pair.first
+                buffer, part_number = pair
                 part = options.merge(
                   body: buffer,
                   part_number: part_number,
