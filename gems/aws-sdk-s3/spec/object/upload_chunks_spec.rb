@@ -6,7 +6,7 @@ module Aws
     describe Object do
       let(:client) { S3::Client.new(stub_responses: true) }
 
-      describe '#upload_chunks' do
+      describe '#upload_stream' do
 
         let(:object) {
           S3::Object.new(
@@ -42,7 +42,7 @@ module Aws
               ]
             }
           ).once
-          object.upload_chunks(content_type: 'text/plain') do |write_stream|
+          object.upload_stream(content_type: 'text/plain') do |write_stream|
             write_stream << seventeen_mb
           end
         end
@@ -78,7 +78,7 @@ module Aws
             body: one_mb * 2,
             part_number: 4,
           ).once.and_return(double(:upload_part, etag: 'etag'))
-          object.upload_chunks do |write_stream|
+          object.upload_stream do |write_stream|
             write_stream << seventeen_mb
           end
         end
@@ -114,7 +114,7 @@ module Aws
             body: one_mb * 2,
             part_number: 4,
           ).once.and_return(double(:upload_part, etag: 'etag'))
-          object.upload_chunks do |write_stream|
+          object.upload_stream do |write_stream|
             17.times { write_stream << one_mb }
           end
         end
@@ -131,8 +131,11 @@ module Aws
             with(bucket: 'bucket', key: 'key', upload_id: 'MultipartUploadId')
 
           expect {
-            object.upload_chunks do |write_stream|
-              write_stream << seventeen_mb
+            object.upload_stream do |write_stream|
+              begin
+                write_stream << seventeen_mb
+              rescue Errno::EPIPE
+              end
             end
           }.to raise_error('multipart upload failed: part 3 failed')
         end
@@ -148,7 +151,7 @@ module Aws
             RuntimeError.new('network-error'),
           ])
           expect {
-            object.upload_chunks do |write_stream|
+            object.upload_stream do |write_stream|
               write_stream << seventeen_mb
             end
           }.to raise_error(S3::MultipartUploadError, 'failed to abort multipart upload: network-error')

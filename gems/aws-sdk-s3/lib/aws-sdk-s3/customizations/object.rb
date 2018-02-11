@@ -237,9 +237,9 @@ module Aws
       # @return [Boolean] Returns `true` when the object is uploaded
       #   without any errors.
       #
-      def upload_chunks(options = {}, &block)
+      def upload_stream(options = {}, &block)
         uploading_options = options.dup
-        uploader = MultipartChunkUploader.new(
+        uploader = MultipartStreamUploader.new(
           client: client,
           thread_count: uploading_options.delete(:thread_count),
         )

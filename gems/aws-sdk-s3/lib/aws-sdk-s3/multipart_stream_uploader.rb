@@ -4,7 +4,10 @@ require 'set'
 module Aws
   module S3
     # @api private
-    class MultipartChunkUploader
+    class MultipartStreamUploader
+      # api private
+      PART_SIZE = 5 * 1024 * 1024 # 5MB
+
       # api private
       THREAD_COUNT = 10
 
@@ -49,23 +52,11 @@ module Aws
       end
 
       def upload_parts(upload_id, options, &block)
-        queue = SizedQueue.new(1)
+        read_pipe, write_pipe = IO.pipe
         completed = Queue.new
-        chunked_part_reader = ChunkedPartReader.new do |buffer, part_number|
-          queue << upload_part_opts(options).merge({
-            upload_id: upload_id,
-            body: buffer,
-            part_number: part_number,
-          })
-        end
-        threads = upload_in_threads(queue, completed)
-        begin
-          block.call(chunked_part_reader)
-          chunked_part_reader.flush
-        rescue ClosedQueueError
-          # Thread pool terminated
-        end
-        queue.close
+        threads = upload_in_threads(read_pipe, completed, upload_part_opts(options).merge(upload_id: upload_id))
+        block.call(write_pipe)
+        write_pipe.close
         errors = threads.map(&:value).compact
         completed.close
         if errors.empty?
@@ -104,57 +95,29 @@ module Aws
         end
       end
 
-      def upload_in_threads(queue, completed)
+      def upload_in_threads(read_pipe, completed, options)
+        mutex = Mutex.new
+        part_number = 0
         @thread_count.times.map do
           thread = Thread.new do
             begin
-              while part = queue.pop
+              while (buffer, part_number = mutex.synchronize { [!read_pipe.closed? && read_pipe.read(PART_SIZE), part_number += 1] }) && buffer
+                part = options.merge(
+                  body: buffer,
+                  part_number: part_number,
+                )
                 resp = @client.upload_part(part)
                 completed << {etag: resp.etag, part_number: part[:part_number]}
               end
               nil
             rescue => error
-              queue.close
               # keep other threads from uploading other parts
-              queue.clear
+              mutex.synchronize { read_pipe.close_read }
               error
             end
           end
           thread.abort_on_exception = true
           thread
-        end
-      end
-
-      # @api private
-      class ChunkedPartReader
-        PART_SIZE = 5 * 1024 * 1024 # 5MB
-
-        def initialize(&block)
-          @block = block
-          @buffer = ''
-          @part_number = 1
-        end
-
-        def <<(buf)
-          if @buffer.bytesize + buf.bytesize > PART_SIZE
-            offset = PART_SIZE - @buffer.bytesize
-            @buffer << buf.byteslice(0, offset)
-            @block.call(@buffer, @part_number)
-            @part_number += 1
-            complete_chunks = (buf.bytesize - offset) / PART_SIZE
-            complete_chunks.times do |i|
-              @block.call(buf.byteslice(offset + i * PART_SIZE, PART_SIZE), @part_number)
-              @part_number += 1
-            end
-            remaining_range = (offset + complete_chunks * PART_SIZE)..-1
-            @buffer = buf.byteslice(remaining_range)
-          else
-            @buffer << buf
-          end
-        end
-
-        def flush
-          @block.call(@buffer, @part_number)
         end
       end
     end

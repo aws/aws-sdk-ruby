@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - S3::Object#upload_chunks
+* Feature - S3::Object#upload_stream
 
 * Issue - Fix Ruby 2.5 warnings.
 

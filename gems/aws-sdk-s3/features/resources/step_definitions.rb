@@ -28,7 +28,7 @@ Given("I have {int} {int}MB chunks") do |number, size|
 end
 
 When(/^I upload the chunks to the "(.*?)" object$/) do |key|
-  @bucket.object(key).upload_chunks do |write_stream|
+  @bucket.object(key).upload_stream do |write_stream|
     @chunks.each {|chunk| write_stream << chunk }
   end
 end
@@ -37,7 +37,7 @@ When(/^I upload the chunks to the "(.*?)" object with SSE\/CPK$/) do |key|
   require 'openssl'
   cipher = OpenSSL::Cipher::AES256.new(:CBC)
   encryption_key = cipher.random_key
-  @bucket.object(key).upload_chunks({
+  @bucket.object(key).upload_stream({
     sse_customer_key: encryption_key,
     sse_customer_algorithm: 'AES256'
   }) do |write_stream|

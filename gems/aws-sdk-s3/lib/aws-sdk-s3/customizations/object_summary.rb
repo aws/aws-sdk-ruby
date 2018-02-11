@@ -60,11 +60,11 @@ module Aws
         object.upload_file(source, options)
       end
 
-      # @options (see Object#upload_chunks)
-      # @return (see Object#upload_chunks)
-      # @see Object#upload_chunks
-      def upload_chunks(options = {}, &block)
-        object.upload_chunks(options, &block)
+      # @options (see Object#upload_stream)
+      # @return (see Object#upload_stream)
+      # @see Object#upload_stream
+      def upload_stream(options = {}, &block)
+        object.upload_stream(options, &block)
       end
 
       # @param (see Object#download_file)
