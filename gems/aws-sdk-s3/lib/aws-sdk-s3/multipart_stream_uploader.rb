@@ -58,7 +58,6 @@ module Aws
         block.call(write_pipe)
         write_pipe.close
         errors = threads.map(&:value).compact
-        completed.close
         if errors.empty?
           Array.new(completed.size) { completed.pop }.sort_by { |part| part[:part_number] }
         else
