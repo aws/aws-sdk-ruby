@@ -131,7 +131,7 @@ module Aws
                 begin
                   part = options.merge(
                     body: body,
-                    part_number: part_number,
+                    part_number: thread_part_number,
                   )
                   resp = @client.upload_part(part)
                   completed << {etag: resp.etag, part_number: part[:part_number]}
