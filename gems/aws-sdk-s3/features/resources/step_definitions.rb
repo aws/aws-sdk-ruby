@@ -4,6 +4,7 @@ require 'fileutils'
 require 'net/https'
 require 'net/http/post/multipart'
 require 'uri'
+require 'stringio'
 
 Before("@s3", "@resources") do
   @s3 = Aws::S3::Resource.new
@@ -25,6 +26,21 @@ end
 
 Given("I have {int} {int}MB chunks") do |number, size|
   @chunks = number.to_i.times.map {'.' * size.to_i * 1024 * 1024}
+end
+
+Given("I have a {int}MB stream") do |size|
+  @stream = StringIO.new('.' * size * 1024 * 1024)
+end
+
+When("I upload the stream with the custom part size of {int}MB to the {string} object") do |part_size_mb, key|
+  @bucket.object(key).upload_stream(part_size: part_size_mb * 1024 * 1024) do |write_stream|
+    IO.copy_stream(@stream, write_stream)
+  end
+end
+
+Then("the {string} object should contained the stream") do |key|
+  data = @s3.bucket(@bucket_name).object(key).get.body.read
+  expect(data).to eq(@stream.string)
 end
 
 When(/^I upload the chunks using tempfile to the "(.*?)" object$/) do |key|

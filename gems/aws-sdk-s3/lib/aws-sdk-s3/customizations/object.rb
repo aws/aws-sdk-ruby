@@ -214,7 +214,7 @@ module Aws
         url.to_s
       end
 
-      # Uploads chunks in a streaming fashion to the current object in S3.
+      # Uploads a stream in a streaming fashion to the current object in S3.
       #
       #     # Passed chunks automatically split into multiupart multipart upload parts
       #     # and the parts are uploaded in parallel. This allows for streaming uploads
@@ -234,6 +234,10 @@ module Aws
       #   temporarily stored on disk reducing the memory footprint vastly.
       #   Default `:tempfile` is `false`.
       #
+      # @option options [Integer] :part_size
+      #   Define how big each part size but the last should be.
+      #   Default `:part_size` is `5 * 1024 * 1024`.
+      #
       # @raise [MultipartUploadError] If an object is being uploaded in
       #   parts, and the upload can not be completed, then the upload is
       #   aborted and this error is raised.  The raised error has a `#errors`
@@ -249,6 +253,7 @@ module Aws
           client: client,
           thread_count: uploading_options.delete(:thread_count),
           tempfile: uploading_options.delete(:tempfile),
+          part_size: uploading_options.delete(:part_size),
         )
         uploader.upload(uploading_options.merge(bucket: bucket_name, key: key), &block)
         true

@@ -24,6 +24,12 @@ Feature: Aws::S3::Object
     Then the "medium" object should contained the chunks joined
 
   @slow
+  Scenario: Uploading stream with custom part size
+    Given I have a 7MB stream
+    When I upload the stream with the custom part size of 6MB to the "stream" object
+    Then the "stream" object should contained the stream
+
+  @slow
   Scenario: Uploading chunks with using temporary files
     Given I have 6 1MB chunks
     When I upload the chunks using tempfile to the "medium" object

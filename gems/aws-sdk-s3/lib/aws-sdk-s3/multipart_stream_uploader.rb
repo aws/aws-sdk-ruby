@@ -27,6 +27,7 @@ module Aws
       def initialize(options = {})
         @client = options[:client] || Client.new
         @tempfile = options[:tempfile]
+        @part_size = options[:part_size] || PART_SIZE
         @thread_count = options[:thread_count] || THREAD_COUNT
       end
 
@@ -103,7 +104,7 @@ module Aws
         return if read_pipe.closed?
         temp_io = @tempfile ? Tempfile.new(TEMPFILE_PREIX) : StringIO.new
         temp_io.binmode
-        bytes_copied = IO.copy_stream(read_pipe, temp_io, PART_SIZE)
+        bytes_copied = IO.copy_stream(read_pipe, temp_io, @part_size)
         temp_io.rewind
         if bytes_copied == 0
           if Tempfile === temp_io
