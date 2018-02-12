@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.130 (2018-02-12)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
