@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
+
+* Feature - Aws::KMS - Updated the API for AWS Key Management Service.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
 2.10.129 (2018-02-09)
 ------------------
 
