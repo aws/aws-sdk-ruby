@@ -202,6 +202,14 @@ module Aws::RDS
     #   group family, and can be applied only to a DB cluster running a
     #   database engine and engine version compatible with that DB cluster
     #   parameter group family.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `aurora5.6`, `aurora-mysql5.7`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `aurora-postgresql9.6`
     # @option options [required, String] :description
     #   The description for the DB cluster parameter group.
     # @option options [Array<Types::Tag>] :tags

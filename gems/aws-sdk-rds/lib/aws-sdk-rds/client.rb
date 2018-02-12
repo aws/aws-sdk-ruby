@@ -1412,14 +1412,20 @@ module Aws::RDS
     # @option params [required, String] :engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora`, `aurora-postgresql`
+    #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora),
+    #   `aurora-mysql` (for MySQL 5.7-compatible Aurora), and
+    #   `aurora-postgresql`
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   **Aurora**
+    #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`
+    #   Example: `5.6.10a`, `5.7.12`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the DB cluster accept
@@ -1767,6 +1773,14 @@ module Aws::RDS
     #   group family, and can be applied only to a DB cluster running a
     #   database engine and engine version compatible with that DB cluster
     #   parameter group family.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `aurora5.6`, `aurora-mysql5.7`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `aurora-postgresql9.6`
     #
     # @option params [required, String] :description
     #   The description for the DB cluster parameter group.
@@ -2130,7 +2144,9 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
+    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #
+    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -3017,14 +3033,14 @@ module Aws::RDS
     # running MySQL, MariaDB, or PostgreSQL. For more information, see
     # [Working with PostgreSQL, MySQL, and MariaDB Read Replicas][1].
     #
-    # Amazon Aurora does not support this action. You must call the
+    # Amazon Aurora doesn't support this action. You must call the
     # `CreateDBInstance` action to create a DB instance for an Aurora DB
     # cluster.
     #
     # All Read Replica DB instances are created with backups disabled. All
     # other DB instance attributes (including DB security groups and DB
     # parameter groups) are inherited from the source DB instance, except as
-    # specified below.
+    # specified following.
     #
     # Your source DB instance must have backup retention enabled.
     #
@@ -3096,7 +3112,7 @@ module Aws::RDS
     #   Valid Values: `1150-65535`
     #
     # @option params [Boolean] :multi_az
-    #   Specifies whether the read replica is in a Multi-AZ deployment.
+    #   Specifies whether the Read Replica is in a Multi-AZ deployment.
     #
     #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates a
     #   standby of your replica in another Availability Zone for failover
@@ -3104,7 +3120,7 @@ module Aws::RDS
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
     #
-    #   <note markdown="1"> Currently PostgreSQL Read Replicas can only be created as single-AZ DB
+    #   <note markdown="1"> Currently, you can't create PostgreSQL Read Replicas as Multi-AZ DB
     #   instances.
     #
     #    </note>
@@ -4946,7 +4962,7 @@ module Aws::RDS
     # instances allowed. The description for a quota includes the quota
     # name, current usage toward that quota, and the quota's maximum value.
     #
-    # This command does not take any parameters.
+    # This command doesn't take any parameters.
     #
     # @return [Types::AccountAttributesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8297,7 +8313,7 @@ module Aws::RDS
     #
     # @option params [String] :option_group_name
     #   A value that indicates that the DB cluster should be associated with
-    #   the specified option group. Changing this parameter does not result in
+    #   the specified option group. Changing this parameter doesn't result in
     #   an outage except in the following case, and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request. If the parameter change
@@ -8725,7 +8741,7 @@ module Aws::RDS
     #
     # @option params [Array<String>] :db_security_groups
     #   A list of DB security groups to authorize on this DB instance.
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints:
@@ -8774,7 +8790,7 @@ module Aws::RDS
     #   The new password for the master user. The password can include any
     #   printable ASCII character except "/", """, or "@".
     #
-    #   Changing this parameter does not result in an outage and the change is
+    #   Changing this parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible. Between the time of the
     #   request and the completion of the request, the `MasterUserPassword`
     #   element exists in the `PendingModifiedValues` element of the operation
@@ -8816,7 +8832,7 @@ module Aws::RDS
     #
     # @option params [String] :db_parameter_group_name
     #   The name of the DB parameter group to apply to the DB instance.
-    #   Changing this setting does not result in an outage. The parameter
+    #   Changing this setting doesn't result in an outage. The parameter
     #   group name itself is changed immediately, but the actual parameter
     #   changes are not applied until you reboot the instance without
     #   failover. The db instance will NOT be rebooted automatically and the
@@ -8862,7 +8878,7 @@ module Aws::RDS
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, as determined by the
-    #   `BackupRetentionPeriod` parameter. Changing this parameter does not
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
     #   result in an outage and the change is asynchronously applied as soon
     #   as possible.
     #
@@ -8883,9 +8899,9 @@ module Aws::RDS
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range (in UTC) during which system maintenance can
-    #   occur, which might result in an outage. Changing this parameter does
-    #   not result in an outage, except in the following situation, and the
-    #   change is asynchronously applied as soon as possible. If there are
+    #   occur, which might result in an outage. Changing this parameter
+    #   doesn't result in an outage, except in the following situation, and
+    #   the change is asynchronously applied as soon as possible. If there are
     #   pending actions that cause a reboot, and the maintenance window is
     #   changed to include the current time, then changing this parameter will
     #   cause a reboot of the DB instance. If moving this window to the
@@ -8902,7 +8918,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :multi_az
     #   Specifies if the DB instance is a Multi-AZ deployment. Changing this
-    #   parameter does not result in an outage and the change is applied
+    #   parameter doesn't result in an outage and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request.
     #
@@ -8921,7 +8937,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
-    #   parameter does not result in an outage and the change is
+    #   parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints: This parameter must be set to true when specifying a
@@ -8931,7 +8947,7 @@ module Aws::RDS
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
     #   DB instance during the maintenance window. Changing this parameter
-    #   does not result in an outage except in the following case and the
+    #   doesn't result in an outage except in the following case and the
     #   change is asynchronously applied as soon as possible. An outage will
     #   result if this parameter is set to `true` during the maintenance
     #   window, and a newer minor version is available, and RDS has enabled
@@ -8947,7 +8963,7 @@ module Aws::RDS
     #   The new Provisioned IOPS (I/O operations per second) value for the RDS
     #   instance.
     #
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   applied during the next maintenance window unless the
     #   `ApplyImmediately` parameter is set to `true` for this request. If you
     #   are migrating from Provisioned IOPS to standard storage, set this
@@ -8978,7 +8994,7 @@ module Aws::RDS
     #
     # @option params [String] :option_group_name
     #   Indicates that the DB instance should be associated with the specified
-    #   option group. Changing this parameter does not result in an outage
+    #   option group. Changing this parameter doesn't result in an outage
     #   except in the following case and the change is applied during the next
     #   maintenance window unless the `ApplyImmediately` parameter is set to
     #   `true` for this request. If the parameter change results in an option
@@ -9970,10 +9986,12 @@ module Aws::RDS
 
     # Promotes a Read Replica DB instance to a standalone DB instance.
     #
-    # <note markdown="1"> We recommend that you enable automated backups on your Read Replica
-    # before promoting the Read Replica. This ensures that no backup is
-    # taken during the promotion process. Once the instance is promoted to a
-    # primary instance, backups are taken based on your backup settings.
+    # <note markdown="1"> * We recommend that you enable automated backups on your Read Replica
+    #   before promoting the Read Replica. This ensures that no backup is
+    #   taken during the promotion process. Once the instance is promoted to
+    #   a primary instance, backups are taken based on your backup settings.
+    #
+    # * This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
     #
     #  </note>
     #
@@ -10919,9 +10937,13 @@ module Aws::RDS
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   **Aurora**
+    #   **Aurora MySQL**
     #
     #   Example: `5.6.10a`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the restored DB cluster
@@ -11634,7 +11656,7 @@ module Aws::RDS
     #
     # If your intent is to replace your original DB instance with the new,
     # restored DB instance, then rename your original DB instance before you
-    # call the RestoreDBInstanceFromDBSnapshot action. RDS does not allow
+    # call the RestoreDBInstanceFromDBSnapshot action. RDS doesn't allow
     # two DB instances with the same name. Once you have renamed your
     # original DB instance with a different identifier, then you can pass
     # the original name of the DB instance as the DBInstanceIdentifier in
@@ -11644,6 +11666,11 @@ module Aws::RDS
     #
     # If you are restoring from a shared manual DB snapshot, the
     # `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
+    #
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
+    # Aurora, use RestoreDBClusterFromSnapshot.
+    #
+    #  </note>
     #
     # @option params [required, String] :db_instance_identifier
     #   Name of the DB instance to create from the DB snapshot. This parameter
@@ -11765,10 +11792,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
-    #
-    #   * `aurora-postgresql`
-    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -11865,8 +11888,6 @@ module Aws::RDS
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
-    #
-    #   * Aurora 5.6 or higher.
     #
     #   Default: `false`
     #
@@ -12600,6 +12621,11 @@ module Aws::RDS
     # case, the instance becomes a mirrored deployment and not a single-AZ
     # deployment.
     #
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
+    # Aurora, use RestoreDBClusterToPointInTime.
+    #
+    #  </note>
+    #
     # @option params [required, String] :source_db_instance_identifier
     #   The identifier of the source DB instance from which to restore.
     #
@@ -12735,10 +12761,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
-    #
-    #   * `aurora-postgresql`
-    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -12828,8 +12850,6 @@ module Aws::RDS
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
-    #
-    #   * Aurora 5.6 or higher.
     #
     #   Default: `false`
     #
@@ -13175,7 +13195,7 @@ module Aws::RDS
     # more information, see Stopping and Starting a DB instance in the AWS
     # RDS user guide.
     #
-    # <note markdown="1"> This command does not apply to Aurora MySQL and Aurora PostgreSQL.
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
     #
     #  </note>
     #
@@ -13308,7 +13328,7 @@ module Aws::RDS
     # For more information, see Stopping and Starting a DB instance in the
     # AWS RDS user guide.
     #
-    # <note markdown="1"> This command does not apply to Aurora MySQL and Aurora PostgreSQL.
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
     #
     #  </note>
     #
@@ -13452,7 +13472,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

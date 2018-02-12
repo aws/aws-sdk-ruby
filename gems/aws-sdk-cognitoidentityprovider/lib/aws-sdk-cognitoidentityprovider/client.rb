@@ -763,6 +763,9 @@ module Aws::CognitoIdentityProvider
     #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRP_A` and return the
     #     SRP variables to be used for next challenge execution.
     #
+    #   * `USER_PASSWORD_AUTH` will take in `USERNAME` and `PASSWORD` and
+    #     return the next challenge or tokens.
+    #
     #   Valid values include:
     #
     #   * `USER_SRP_AUTH`\: Authentication flow for the Secure Remote Password
@@ -778,6 +781,11 @@ module Aws::CognitoIdentityProvider
     #     the USERNAME and PASSWORD directly if the flow is enabled for
     #     calling the app client.
     #
+    #   * `USER_PASSWORD_AUTH`\: Non-SRP authentication flow; USERNAME and
+    #     PASSWORD are passed directly. If a user migration Lambda trigger is
+    #     set, this flow will invoke the user migration Lambda if the USERNAME
+    #     is not found in the user pool.
+    #
     # @option params [Hash<String,String>] :auth_parameters
     #   The authentication parameters. These are inputs corresponding to the
     #   `AuthFlow` that you are invoking. The required values depend on the
@@ -787,9 +795,9 @@ module Aws::CognitoIdentityProvider
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`
     #
-    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `USERNAME` (required),
+    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `REFRESH_TOKEN` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
-    #     client secret), `REFRESH_TOKEN` (required), `DEVICE_KEY`
+    #     client secret), `DEVICE_KEY`
     #
     #   * For `ADMIN_NO_SRP_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if
     #     app client is configured with client secret), `PASSWORD` (required),
@@ -824,7 +832,7 @@ module Aws::CognitoIdentityProvider
     #   resp = client.admin_initiate_auth({
     #     user_pool_id: "UserPoolIdType", # required
     #     client_id: "ClientIdType", # required
-    #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH
+    #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH
     #     auth_parameters: {
     #       "StringType" => "StringType",
     #     },
@@ -1077,7 +1085,7 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID.
     #
     # @option params [required, String] :username
-    #   The user pool username.
+    #   The user pool username or an alias.
     #
     # @option params [Integer] :max_results
     #   The maximum number of authentication events to return.
@@ -1323,7 +1331,7 @@ module Aws::CognitoIdentityProvider
     #   The time-based one-time password software token MFA settings.
     #
     # @option params [required, String] :username
-    #   The user pool username.
+    #   The user pool username or alias.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
@@ -2024,6 +2032,25 @@ module Aws::CognitoIdentityProvider
     # @option params [Types::LambdaConfigType] :lambda_config
     #   The Lambda trigger configuration information for the new user pool.
     #
+    #   <note markdown="1"> In a push model, event sources (such as Amazon S3 and custom
+    #   applications) need permission to invoke a function. So you will need
+    #   to make an extra call to add permission for these event sources to
+    #   invoke your Lambda function.
+    #
+    #
+    #
+    #    For more information on using the Lambda API to add permission, see [
+    #   AddPermission ][1].
+    #
+    #    For adding permission using the AWS CLI, see [ add-permission ][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html
+    #
     # @option params [Array<String>] :auto_verified_attributes
     #   The attributes to be auto-verified. Possible values: **email**,
     #   **phone\_number**.
@@ -2110,6 +2137,7 @@ module Aws::CognitoIdentityProvider
     #       create_auth_challenge: "ArnType",
     #       verify_auth_challenge_response: "ArnType",
     #       pre_token_generation: "ArnType",
+    #       user_migration: "ArnType",
     #     },
     #     auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #     alias_attributes: ["phone_number"], # accepts phone_number, email, preferred_username
@@ -2191,6 +2219,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.lambda_config.create_auth_challenge #=> String
     #   resp.user_pool.lambda_config.verify_auth_challenge_response #=> String
     #   resp.user_pool.lambda_config.pre_token_generation #=> String
+    #   resp.user_pool.lambda_config.user_migration #=> String
     #   resp.user_pool.status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pool.last_modified_date #=> Time
     #   resp.user_pool.creation_date #=> Time
@@ -2321,7 +2350,7 @@ module Aws::CognitoIdentityProvider
     #     refresh_token_validity: 1,
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
-    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY
+    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH
     #     supported_identity_providers: ["ProviderNameType"],
     #     callback_urls: ["RedirectUrlType"],
     #     logout_urls: ["RedirectUrlType"],
@@ -2351,7 +2380,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -2828,6 +2857,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.lambda_config.create_auth_challenge #=> String
     #   resp.user_pool.lambda_config.verify_auth_challenge_response #=> String
     #   resp.user_pool.lambda_config.pre_token_generation #=> String
+    #   resp.user_pool.lambda_config.user_migration #=> String
     #   resp.user_pool.status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pool.last_modified_date #=> Time
     #   resp.user_pool.creation_date #=> Time
@@ -2920,7 +2950,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -3224,6 +3254,34 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # This method takes a user pool ID, and returns the signing certificate.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID.
+    #
+    # @return [Types::GetSigningCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSigningCertificateResponse#certificate #certificate} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_signing_certificate({
+    #     user_pool_id: "UserPoolIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetSigningCertificate AWS API Documentation
+    #
+    # @overload get_signing_certificate(params = {})
+    # @param [Hash] params ({})
+    def get_signing_certificate(params = {}, options = {})
+      req = build_request(:get_signing_certificate, params)
+      req.send_request(options)
+    end
+
     # Gets the UI Customization information for a particular app client's
     # app UI, if there is something set. If nothing is set for the
     # particular client, but there is an existing pool level customization
@@ -3413,6 +3471,9 @@ module Aws::CognitoIdentityProvider
     #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRP_A` and return the
     #     SRP variables to be used for next challenge execution.
     #
+    #   * `USER_PASSWORD_AUTH` will take in `USERNAME` and `PASSWORD` and
+    #     return the next challenge or tokens.
+    #
     #   Valid values include:
     #
     #   * `USER_SRP_AUTH`\: Authentication flow for the Secure Remote Password
@@ -3423,6 +3484,11 @@ module Aws::CognitoIdentityProvider
     #     refresh token.
     #
     #   * `CUSTOM_AUTH`\: Custom authentication flow.
+    #
+    #   * `USER_PASSWORD_AUTH`\: Non-SRP authentication flow; USERNAME and
+    #     PASSWORD are passed directly. If a user migration Lambda trigger is
+    #     set, this flow will invoke the user migration Lambda if the USERNAME
+    #     is not found in the user pool.
     #
     #   `ADMIN_NO_SRP_AUTH` is not a valid value.
     #
@@ -3435,9 +3501,9 @@ module Aws::CognitoIdentityProvider
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`
     #
-    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `USERNAME` (required),
+    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `REFRESH_TOKEN` (required),
     #     `SECRET_HASH` (required if the app client is configured with a
-    #     client secret), `REFRESH_TOKEN` (required), `DEVICE_KEY`
+    #     client secret), `DEVICE_KEY`
     #
     #   * For `CUSTOM_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if app
     #     client is configured with client secret), `DEVICE_KEY`
@@ -3469,7 +3535,7 @@ module Aws::CognitoIdentityProvider
     # @example Request syntax with placeholder values
     #
     #   resp = client.initiate_auth({
-    #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH
+    #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH
     #     auth_parameters: {
     #       "StringType" => "StringType",
     #     },
@@ -3824,6 +3890,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pools[0].lambda_config.create_auth_challenge #=> String
     #   resp.user_pools[0].lambda_config.verify_auth_challenge_response #=> String
     #   resp.user_pools[0].lambda_config.pre_token_generation #=> String
+    #   resp.user_pools[0].lambda_config.user_migration #=> String
     #   resp.user_pools[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.user_pools[0].last_modified_date #=> Time
     #   resp.user_pools[0].creation_date #=> Time
@@ -5009,6 +5076,7 @@ module Aws::CognitoIdentityProvider
     #       create_auth_challenge: "ArnType",
     #       verify_auth_challenge_response: "ArnType",
     #       pre_token_generation: "ArnType",
+    #       user_migration: "ArnType",
     #     },
     #     auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #     sms_verification_message: "SmsVerificationMessageType",
@@ -5134,7 +5202,7 @@ module Aws::CognitoIdentityProvider
     #     refresh_token_validity: 1,
     #     read_attributes: ["ClientPermissionType"],
     #     write_attributes: ["ClientPermissionType"],
-    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY
+    #     explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH
     #     supported_identity_providers: ["ProviderNameType"],
     #     callback_urls: ["RedirectUrlType"],
     #     logout_urls: ["RedirectUrlType"],
@@ -5164,7 +5232,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.write_attributes #=> Array
     #   resp.user_pool_client.write_attributes[0] #=> String
     #   resp.user_pool_client.explicit_auth_flows #=> Array
-    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
+    #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY", "USER_PASSWORD_AUTH"
     #   resp.user_pool_client.supported_identity_providers #=> Array
     #   resp.user_pool_client.supported_identity_providers[0] #=> String
     #   resp.user_pool_client.callback_urls #=> Array
@@ -5278,7 +5346,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

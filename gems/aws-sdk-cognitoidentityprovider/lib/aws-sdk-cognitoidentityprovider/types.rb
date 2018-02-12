@@ -812,7 +812,7 @@ module Aws::CognitoIdentityProvider
     #       {
     #         user_pool_id: "UserPoolIdType", # required
     #         client_id: "ClientIdType", # required
-    #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH
+    #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH
     #         auth_parameters: {
     #           "StringType" => "StringType",
     #         },
@@ -854,6 +854,9 @@ module Aws::CognitoIdentityProvider
     #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRP_A` and return the
     #     SRP variables to be used for next challenge execution.
     #
+    #   * `USER_PASSWORD_AUTH` will take in `USERNAME` and `PASSWORD` and
+    #     return the next challenge or tokens.
+    #
     #   Valid values include:
     #
     #   * `USER_SRP_AUTH`\: Authentication flow for the Secure Remote
@@ -868,6 +871,11 @@ module Aws::CognitoIdentityProvider
     #   * `ADMIN_NO_SRP_AUTH`\: Non-SRP authentication flow; you can pass in
     #     the USERNAME and PASSWORD directly if the flow is enabled for
     #     calling the app client.
+    #
+    #   * `USER_PASSWORD_AUTH`\: Non-SRP authentication flow; USERNAME and
+    #     PASSWORD are passed directly. If a user migration Lambda trigger
+    #     is set, this flow will invoke the user migration Lambda if the
+    #     USERNAME is not found in the user pool.
     #   @return [String]
     #
     # @!attribute [rw] auth_parameters
@@ -879,9 +887,9 @@ module Aws::CognitoIdentityProvider
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`
     #
-    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `USERNAME` (required),
-    #     `SECRET_HASH` (required if the app client is configured with a
-    #     client secret), `REFRESH_TOKEN` (required), `DEVICE_KEY`
+    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `REFRESH_TOKEN`
+    #     (required), `SECRET_HASH` (required if the app client is
+    #     configured with a client secret), `DEVICE_KEY`
     #
     #   * For `ADMIN_NO_SRP_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if
     #     app client is configured with client secret), `PASSWORD`
@@ -974,7 +982,7 @@ module Aws::CognitoIdentityProvider
     #
     #   All challenges require `USERNAME` and `SECRET_HASH` (if applicable).
     #
-    #   The value of the `USER_IF_FOR_SRP` attribute will be the user's
+    #   The value of the `USER_ID_FOR_SRP` attribute will be the user's
     #   actual username, not an alias (such as email address or phone
     #   number), even if you specified an alias in your call to
     #   `AdminInitiateAuth`. This is because, in the
@@ -1206,7 +1214,7 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The user pool username.
+    #   The user pool username or an alias.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1468,7 +1476,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::SoftwareTokenMfaSettingsType]
     #
     # @!attribute [rw] username
-    #   The user pool username.
+    #   The user pool username or alias.
     #   @return [String]
     #
     # @!attribute [rw] user_pool_id
@@ -2562,7 +2570,7 @@ module Aws::CognitoIdentityProvider
     #         refresh_token_validity: 1,
     #         read_attributes: ["ClientPermissionType"],
     #         write_attributes: ["ClientPermissionType"],
-    #         explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY
+    #         explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH
     #         supported_identity_providers: ["ProviderNameType"],
     #         callback_urls: ["RedirectUrlType"],
     #         logout_urls: ["RedirectUrlType"],
@@ -2738,6 +2746,7 @@ module Aws::CognitoIdentityProvider
     #           create_auth_challenge: "ArnType",
     #           verify_auth_challenge_response: "ArnType",
     #           pre_token_generation: "ArnType",
+    #           user_migration: "ArnType",
     #         },
     #         auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #         alias_attributes: ["phone_number"], # accepts phone_number, email, preferred_username
@@ -2811,6 +2820,25 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] lambda_config
     #   The Lambda trigger configuration information for the new user pool.
+    #
+    #   <note markdown="1"> In a push model, event sources (such as Amazon S3 and custom
+    #   applications) need permission to invoke a function. So you will need
+    #   to make an extra call to add permission for these event sources to
+    #   invoke your Lambda function.
+    #
+    #
+    #
+    #    For more information on using the Lambda API to add permission, see
+    #   [ AddPermission ][1].
+    #
+    #    For adding permission using the AWS CLI, see [ add-permission ][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html
+    #   [2]: https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html
     #   @return [Types::LambdaConfigType]
     #
     # @!attribute [rw] auto_verified_attributes
@@ -3856,6 +3884,39 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # Request to get a signing certificate from Cognito.
+    #
+    # @note When making an API call, you may pass GetSigningCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetSigningCertificateRequest AWS API Documentation
+    #
+    class GetSigningCertificateRequest < Struct.new(
+      :user_pool_id)
+      include Aws::Structure
+    end
+
+    # Response from Cognito for a signing certificate request.
+    #
+    # @!attribute [rw] certificate
+    #   The signing certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetSigningCertificateResponse AWS API Documentation
+    #
+    class GetSigningCertificateResponse < Struct.new(
+      :certificate)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetUICustomizationRequest
     #   data as a hash:
     #
@@ -4199,7 +4260,7 @@ module Aws::CognitoIdentityProvider
     #   data as a hash:
     #
     #       {
-    #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH
+    #         auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH, USER_PASSWORD_AUTH
     #         auth_parameters: {
     #           "StringType" => "StringType",
     #         },
@@ -4225,6 +4286,9 @@ module Aws::CognitoIdentityProvider
     #   * `USER_SRP_AUTH` will take in `USERNAME` and `SRP_A` and return the
     #     SRP variables to be used for next challenge execution.
     #
+    #   * `USER_PASSWORD_AUTH` will take in `USERNAME` and `PASSWORD` and
+    #     return the next challenge or tokens.
+    #
     #   Valid values include:
     #
     #   * `USER_SRP_AUTH`\: Authentication flow for the Secure Remote
@@ -4235,6 +4299,11 @@ module Aws::CognitoIdentityProvider
     #     refresh token.
     #
     #   * `CUSTOM_AUTH`\: Custom authentication flow.
+    #
+    #   * `USER_PASSWORD_AUTH`\: Non-SRP authentication flow; USERNAME and
+    #     PASSWORD are passed directly. If a user migration Lambda trigger
+    #     is set, this flow will invoke the user migration Lambda if the
+    #     USERNAME is not found in the user pool.
     #
     #   `ADMIN_NO_SRP_AUTH` is not a valid value.
     #   @return [String]
@@ -4248,9 +4317,9 @@ module Aws::CognitoIdentityProvider
     #     `SECRET_HASH` (required if the app client is configured with a
     #     client secret), `DEVICE_KEY`
     #
-    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `USERNAME` (required),
-    #     `SECRET_HASH` (required if the app client is configured with a
-    #     client secret), `REFRESH_TOKEN` (required), `DEVICE_KEY`
+    #   * For `REFRESH_TOKEN_AUTH/REFRESH_TOKEN`\: `REFRESH_TOKEN`
+    #     (required), `SECRET_HASH` (required if the app client is
+    #     configured with a client secret), `DEVICE_KEY`
     #
     #   * For `CUSTOM_AUTH`\: `USERNAME` (required), `SECRET_HASH` (if app
     #     client is configured with client secret), `DEVICE_KEY`
@@ -4374,6 +4443,7 @@ module Aws::CognitoIdentityProvider
     #         create_auth_challenge: "ArnType",
     #         verify_auth_challenge_response: "ArnType",
     #         pre_token_generation: "ArnType",
+    #         user_migration: "ArnType",
     #       }
     #
     # @!attribute [rw] pre_sign_up
@@ -4412,6 +4482,10 @@ module Aws::CognitoIdentityProvider
     #   A Lambda trigger that is invoked before token generation.
     #   @return [String]
     #
+    # @!attribute [rw] user_migration
+    #   The user migration Lambda config type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LambdaConfigType AWS API Documentation
     #
     class LambdaConfigType < Struct.new(
@@ -4423,7 +4497,8 @@ module Aws::CognitoIdentityProvider
       :define_auth_challenge,
       :create_auth_challenge,
       :verify_auth_challenge_response,
-      :pre_token_generation)
+      :pre_token_generation,
+      :user_migration)
       include Aws::Structure
     end
 
@@ -6635,7 +6710,7 @@ module Aws::CognitoIdentityProvider
     #         refresh_token_validity: 1,
     #         read_attributes: ["ClientPermissionType"],
     #         write_attributes: ["ClientPermissionType"],
-    #         explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY
+    #         explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH
     #         supported_identity_providers: ["ProviderNameType"],
     #         callback_urls: ["RedirectUrlType"],
     #         logout_urls: ["RedirectUrlType"],
@@ -6784,6 +6859,7 @@ module Aws::CognitoIdentityProvider
     #           create_auth_challenge: "ArnType",
     #           verify_auth_challenge_response: "ArnType",
     #           pre_token_generation: "ArnType",
+    #           user_migration: "ArnType",
     #         },
     #         auto_verified_attributes: ["phone_number"], # accepts phone_number, email
     #         sms_verification_message: "SmsVerificationMessageType",

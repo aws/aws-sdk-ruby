@@ -885,6 +885,7 @@ module Aws::KMS
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RetireGrantRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGrantIdException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

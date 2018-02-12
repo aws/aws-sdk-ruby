@@ -2226,17 +2226,35 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) CMK to use
-    #   when encrypting the snapshots of an image during a copy operation.
-    #   This parameter is only required if you want to use a non-default CMK;
-    #   if this parameter is not specified, the default CMK for EBS is used.
-    #   The ARN contains the `arn:aws:kms` namespace, followed by the region
-    #   of the CMK, the AWS account ID of the CMK owner, the `key` namespace,
-    #   and then the CMK ID. For example,
-    #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted volume. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
+    #     example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
+    #   may appear to complete even though you provided an invalid identifier.
+    #   This action will eventually report failure.
+    #
     #   The specified CMK must exist in the region that the snapshot is being
-    #   copied to. If a `KmsKeyId` is specified, the `Encrypted` flag must
-    #   also be set.
+    #   copied to.
     #
     # @option params [required, String] :name
     #   The name of the new AMI in the destination region.
@@ -2344,16 +2362,32 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) CMK to use
-    #   when creating the snapshot copy. This parameter is only required if
-    #   you want to use a non-default CMK; if this parameter is not specified,
-    #   the default CMK for EBS is used. The ARN contains the `arn:aws:kms`
-    #   namespace, followed by the region of the CMK, the AWS account ID of
-    #   the CMK owner, the `key` namespace, and then the CMK ID. For example,
-    #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
-    #   The specified CMK must exist in the region that the snapshot is being
-    #   copied to. If a `KmsKeyId` is specified, the `Encrypted` flag must
-    #   also be set.
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted volume. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
+    #     example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
+    #   may appear to complete even though you provided an invalid identifier.
+    #   The action will eventually fail.
     #
     # @option params [String] :presigned_url
     #   The pre-signed URL that facilitates copying an encrypted snapshot.
@@ -4219,7 +4253,7 @@ module Aws::EC2
     #   resp.network_interface.requester_id #=> String
     #   resp.network_interface.requester_managed #=> Boolean
     #   resp.network_interface.source_dest_check #=> Boolean
-    #   resp.network_interface.status #=> String, one of "available", "attaching", "in-use", "detaching"
+    #   resp.network_interface.status #=> String, one of "available", "associated", "attaching", "in-use", "detaching"
     #   resp.network_interface.subnet_id #=> String
     #   resp.network_interface.tag_set #=> Array
     #   resp.network_interface.tag_set[0].key #=> String
@@ -5204,15 +5238,32 @@ module Aws::EC2
     #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
     #
     # @option params [String] :kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
     #   master key (CMK) to use when creating the encrypted volume. This
     #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used. The
-    #   ARN contains the `arn:aws:kms` namespace, followed by the region of
-    #   the CMK, the AWS account ID of the CMK owner, the `key` namespace, and
-    #   then the CMK ID. For example,
-    #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
-    #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   this parameter is not specified, the default CMK for EBS is used. If a
+    #   `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID of
+    #     the CMK owner, the `alias` namespace, and then the CMK alias. For
+    #     example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you call
+    #   may appear to complete even though you provided an invalid identifier.
+    #   The action will eventually fail.
     #
     # @option params [Integer] :size
     #   The size of the volume, in GiBs.
@@ -7454,7 +7505,7 @@ module Aws::EC2
     # * `default-vpc`\: The ID of the default VPC for your account, or
     #   `none`.
     #
-    # * `max-instances`\: The maximum number of On-Demand instances that you
+    # * `max-instances`\: The maximum number of On-Demand Instances that you
     #   can run.
     #
     # * `vpc-max-security-groups-per-interface`\: The maximum number of
@@ -10540,7 +10591,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].private_dns_name #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].source_dest_check #=> Boolean
-    #   resp.reservations[0].instances[0].network_interfaces[0].status #=> String, one of "available", "attaching", "in-use", "detaching"
+    #   resp.reservations[0].instances[0].network_interfaces[0].status #=> String, one of "available", "associated", "attaching", "in-use", "detaching"
     #   resp.reservations[0].instances[0].network_interfaces[0].subnet_id #=> String
     #   resp.reservations[0].instances[0].network_interfaces[0].vpc_id #=> String
     #   resp.reservations[0].instances[0].root_device_name #=> String
@@ -11876,7 +11927,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].requester_id #=> String
     #   resp.network_interfaces[0].requester_managed #=> Boolean
     #   resp.network_interfaces[0].source_dest_check #=> Boolean
-    #   resp.network_interfaces[0].status #=> String, one of "available", "attaching", "in-use", "detaching"
+    #   resp.network_interfaces[0].status #=> String, one of "available", "associated", "attaching", "in-use", "detaching"
     #   resp.network_interfaces[0].subnet_id #=> String
     #   resp.network_interfaces[0].tag_set #=> Array
     #   resp.network_interfaces[0].tag_set[0].key #=> String
@@ -23204,7 +23255,7 @@ module Aws::EC2
     #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].private_dns_name #=> String
     #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].private_ip_address #=> String
     #   resp.instances[0].network_interfaces[0].source_dest_check #=> Boolean
-    #   resp.instances[0].network_interfaces[0].status #=> String, one of "available", "attaching", "in-use", "detaching"
+    #   resp.instances[0].network_interfaces[0].status #=> String, one of "available", "associated", "attaching", "in-use", "detaching"
     #   resp.instances[0].network_interfaces[0].subnet_id #=> String
     #   resp.instances[0].network_interfaces[0].vpc_id #=> String
     #   resp.instances[0].root_device_name #=> String
@@ -23977,7 +24028,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

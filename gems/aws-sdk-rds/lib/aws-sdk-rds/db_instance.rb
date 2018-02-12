@@ -791,7 +791,9 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
+    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #
+    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -1523,7 +1525,7 @@ module Aws::RDS
     #
     #   Valid Values: `1150-65535`
     # @option options [Boolean] :multi_az
-    #   Specifies whether the read replica is in a Multi-AZ deployment.
+    #   Specifies whether the Read Replica is in a Multi-AZ deployment.
     #
     #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates a
     #   standby of your replica in another Availability Zone for failover
@@ -1531,7 +1533,7 @@ module Aws::RDS
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
     #
-    #   <note markdown="1"> Currently PostgreSQL Read Replicas can only be created as single-AZ DB
+    #   <note markdown="1"> Currently, you can't create PostgreSQL Read Replicas as Multi-AZ DB
     #   instances.
     #
     #    </note>
@@ -1933,7 +1935,7 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
     # @option options [Array<String>] :db_security_groups
     #   A list of DB security groups to authorize on this DB instance.
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints:
@@ -1979,7 +1981,7 @@ module Aws::RDS
     #   The new password for the master user. The password can include any
     #   printable ASCII character except "/", """, or "@".
     #
-    #   Changing this parameter does not result in an outage and the change is
+    #   Changing this parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible. Between the time of the
     #   request and the completion of the request, the `MasterUserPassword`
     #   element exists in the `PendingModifiedValues` element of the operation
@@ -2020,7 +2022,7 @@ module Aws::RDS
     #    </note>
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to apply to the DB instance.
-    #   Changing this setting does not result in an outage. The parameter
+    #   Changing this setting doesn't result in an outage. The parameter
     #   group name itself is changed immediately, but the actual parameter
     #   changes are not applied until you reboot the instance without
     #   failover. The db instance will NOT be rebooted automatically and the
@@ -2064,7 +2066,7 @@ module Aws::RDS
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, as determined by the
-    #   `BackupRetentionPeriod` parameter. Changing this parameter does not
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
     #   result in an outage and the change is asynchronously applied as soon
     #   as possible.
     #
@@ -2084,9 +2086,9 @@ module Aws::RDS
     #   * Must be at least 30 minutes
     # @option options [String] :preferred_maintenance_window
     #   The weekly time range (in UTC) during which system maintenance can
-    #   occur, which might result in an outage. Changing this parameter does
-    #   not result in an outage, except in the following situation, and the
-    #   change is asynchronously applied as soon as possible. If there are
+    #   occur, which might result in an outage. Changing this parameter
+    #   doesn't result in an outage, except in the following situation, and
+    #   the change is asynchronously applied as soon as possible. If there are
     #   pending actions that cause a reboot, and the maintenance window is
     #   changed to include the current time, then changing this parameter will
     #   cause a reboot of the DB instance. If moving this window to the
@@ -2102,7 +2104,7 @@ module Aws::RDS
     #   Constraints: Must be at least 30 minutes
     # @option options [Boolean] :multi_az
     #   Specifies if the DB instance is a Multi-AZ deployment. Changing this
-    #   parameter does not result in an outage and the change is applied
+    #   parameter doesn't result in an outage and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request.
     # @option options [String] :engine_version
@@ -2119,7 +2121,7 @@ module Aws::RDS
     #   For a list of valid engine versions, see CreateDBInstance.
     # @option options [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
-    #   parameter does not result in an outage and the change is
+    #   parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints: This parameter must be set to true when specifying a
@@ -2128,7 +2130,7 @@ module Aws::RDS
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
     #   DB instance during the maintenance window. Changing this parameter
-    #   does not result in an outage except in the following case and the
+    #   doesn't result in an outage except in the following case and the
     #   change is asynchronously applied as soon as possible. An outage will
     #   result if this parameter is set to `true` during the maintenance
     #   window, and a newer minor version is available, and RDS has enabled
@@ -2142,7 +2144,7 @@ module Aws::RDS
     #   The new Provisioned IOPS (I/O operations per second) value for the RDS
     #   instance.
     #
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   applied during the next maintenance window unless the
     #   `ApplyImmediately` parameter is set to `true` for this request. If you
     #   are migrating from Provisioned IOPS to standard storage, set this
@@ -2172,7 +2174,7 @@ module Aws::RDS
     #   Default: Uses existing setting
     # @option options [String] :option_group_name
     #   Indicates that the DB instance should be associated with the specified
-    #   option group. Changing this parameter does not result in an outage
+    #   option group. Changing this parameter doesn't result in an outage
     #   except in the following case and the change is applied during the next
     #   maintenance window unless the `ApplyImmediately` parameter is set to
     #   `true` for this request. If the parameter change results in an option
@@ -2606,10 +2608,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
-    #
-    #   * `aurora-postgresql`
-    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -2689,8 +2687,6 @@ module Aws::RDS
     #   * For MySQL 5.6, minor version 5.6.34 or higher
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
-    #
-    #   * Aurora 5.6 or higher.
     #
     #   Default: `false`
     # @option options [Array<String>] :enable_cloudwatch_logs_exports

@@ -119,6 +119,7 @@ module Aws::GuardDuty
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
+    ListOfPortProbeDetail = Shapes::ListShape.new(name: 'ListOfPortProbeDetail')
     ListThreatIntelSetsRequest = Shapes::StructureShape.new(name: 'ListThreatIntelSetsRequest')
     ListThreatIntelSetsResponse = Shapes::StructureShape.new(name: 'ListThreatIntelSetsResponse')
     LocalPortDetails = Shapes::StructureShape.new(name: 'LocalPortDetails')
@@ -139,6 +140,8 @@ module Aws::GuardDuty
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
     Organization = Shapes::StructureShape.new(name: 'Organization')
+    PortProbeAction = Shapes::StructureShape.new(name: 'PortProbeAction')
+    PortProbeDetail = Shapes::StructureShape.new(name: 'PortProbeDetail')
     PrivateDnsName = Shapes::StringShape.new(name: 'PrivateDnsName')
     PrivateIpAddress = Shapes::StringShape.new(name: 'PrivateIpAddress')
     PrivateIpAddressDetails = Shapes::StructureShape.new(name: 'PrivateIpAddressDetails')
@@ -207,6 +210,7 @@ module Aws::GuardDuty
     Action.add_member(:aws_api_call_action, Shapes::ShapeRef.new(shape: AwsApiCallAction, location_name: "awsApiCallAction"))
     Action.add_member(:dns_request_action, Shapes::ShapeRef.new(shape: DnsRequestAction, location_name: "dnsRequestAction"))
     Action.add_member(:network_connection_action, Shapes::ShapeRef.new(shape: NetworkConnectionAction, location_name: "networkConnectionAction"))
+    Action.add_member(:port_probe_action, Shapes::ShapeRef.new(shape: PortProbeAction, location_name: "portProbeAction"))
     Action.struct_class = Types::Action
 
     ArchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
@@ -519,6 +523,8 @@ module Aws::GuardDuty
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
 
+    ListOfPortProbeDetail.member = Shapes::ShapeRef.new(shape: PortProbeDetail)
+
     ListThreatIntelSetsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     ListThreatIntelSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListThreatIntelSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -583,6 +589,14 @@ module Aws::GuardDuty
     Organization.add_member(:isp, Shapes::ShapeRef.new(shape: __string, location_name: "isp"))
     Organization.add_member(:org, Shapes::ShapeRef.new(shape: __string, location_name: "org"))
     Organization.struct_class = Types::Organization
+
+    PortProbeAction.add_member(:blocked, Shapes::ShapeRef.new(shape: __boolean, location_name: "blocked"))
+    PortProbeAction.add_member(:port_probe_details, Shapes::ShapeRef.new(shape: ListOfPortProbeDetail, location_name: "portProbeDetails"))
+    PortProbeAction.struct_class = Types::PortProbeAction
+
+    PortProbeDetail.add_member(:local_port_details, Shapes::ShapeRef.new(shape: LocalPortDetails, location_name: "localPortDetails"))
+    PortProbeDetail.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
+    PortProbeDetail.struct_class = Types::PortProbeDetail
 
     PrivateIpAddressDetails.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: PrivateDnsName, location_name: "privateDnsName"))
     PrivateIpAddressDetails.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: PrivateIpAddress, location_name: "privateIpAddress"))

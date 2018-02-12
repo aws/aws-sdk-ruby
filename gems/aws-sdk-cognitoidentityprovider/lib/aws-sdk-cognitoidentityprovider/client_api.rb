@@ -217,6 +217,8 @@ module Aws::CognitoIdentityProvider
     GetGroupResponse = Shapes::StructureShape.new(name: 'GetGroupResponse')
     GetIdentityProviderByIdentifierRequest = Shapes::StructureShape.new(name: 'GetIdentityProviderByIdentifierRequest')
     GetIdentityProviderByIdentifierResponse = Shapes::StructureShape.new(name: 'GetIdentityProviderByIdentifierResponse')
+    GetSigningCertificateRequest = Shapes::StructureShape.new(name: 'GetSigningCertificateRequest')
+    GetSigningCertificateResponse = Shapes::StructureShape.new(name: 'GetSigningCertificateResponse')
     GetUICustomizationRequest = Shapes::StructureShape.new(name: 'GetUICustomizationRequest')
     GetUICustomizationResponse = Shapes::StructureShape.new(name: 'GetUICustomizationResponse')
     GetUserAttributeVerificationCodeRequest = Shapes::StructureShape.new(name: 'GetUserAttributeVerificationCodeRequest')
@@ -1057,6 +1059,12 @@ module Aws::CognitoIdentityProvider
     GetIdentityProviderByIdentifierResponse.add_member(:identity_provider, Shapes::ShapeRef.new(shape: IdentityProviderType, required: true, location_name: "IdentityProvider"))
     GetIdentityProviderByIdentifierResponse.struct_class = Types::GetIdentityProviderByIdentifierResponse
 
+    GetSigningCertificateRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+    GetSigningCertificateRequest.struct_class = Types::GetSigningCertificateRequest
+
+    GetSigningCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: StringType, location_name: "Certificate"))
+    GetSigningCertificateResponse.struct_class = Types::GetSigningCertificateResponse
+
     GetUICustomizationRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
     GetUICustomizationRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientIdType, location_name: "ClientId"))
     GetUICustomizationRequest.struct_class = Types::GetUICustomizationRequest
@@ -1146,6 +1154,7 @@ module Aws::CognitoIdentityProvider
     LambdaConfigType.add_member(:create_auth_challenge, Shapes::ShapeRef.new(shape: ArnType, location_name: "CreateAuthChallenge"))
     LambdaConfigType.add_member(:verify_auth_challenge_response, Shapes::ShapeRef.new(shape: ArnType, location_name: "VerifyAuthChallengeResponse"))
     LambdaConfigType.add_member(:pre_token_generation, Shapes::ShapeRef.new(shape: ArnType, location_name: "PreTokenGeneration"))
+    LambdaConfigType.add_member(:user_migration, Shapes::ShapeRef.new(shape: ArnType, location_name: "UserMigration"))
     LambdaConfigType.struct_class = Types::LambdaConfigType
 
     ListDevicesRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, required: true, location_name: "AccessToken"))
@@ -2631,6 +2640,16 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:get_signing_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSigningCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSigningCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSigningCertificateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_ui_customization, Seahorse::Model::Operation.new.tap do |o|

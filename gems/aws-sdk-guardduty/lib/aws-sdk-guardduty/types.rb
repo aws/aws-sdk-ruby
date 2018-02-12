@@ -120,13 +120,18 @@ module Aws::GuardDuty
     #   finding.
     #   @return [Types::NetworkConnectionAction]
     #
+    # @!attribute [rw] port_probe_action
+    #   Information about the PORT\_PROBE action described in this finding.
+    #   @return [Types::PortProbeAction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action AWS API Documentation
     #
     class Action < Struct.new(
       :action_type,
       :aws_api_call_action,
       :dns_request_action,
-      :network_connection_action)
+      :network_connection_action,
+      :port_probe_action)
       include Aws::Structure
     end
 
@@ -1991,6 +1996,42 @@ module Aws::GuardDuty
       :asn_org,
       :isp,
       :org)
+      include Aws::Structure
+    end
+
+    # Information about the PORT\_PROBE action described in this finding.
+    #
+    # @!attribute [rw] blocked
+    #   Port probe blocked information.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] port_probe_details
+    #   A list of port probe details objects.
+    #   @return [Array<Types::PortProbeDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PortProbeAction AWS API Documentation
+    #
+    class PortProbeAction < Struct.new(
+      :blocked,
+      :port_probe_details)
+      include Aws::Structure
+    end
+
+    # Details about the port probe finding.
+    #
+    # @!attribute [rw] local_port_details
+    #   Local port information of the connection.
+    #   @return [Types::LocalPortDetails]
+    #
+    # @!attribute [rw] remote_ip_details
+    #   Remote IP information of the connection.
+    #   @return [Types::RemoteIpDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PortProbeDetail AWS API Documentation
+    #
+    class PortProbeDetail < Struct.new(
+      :local_port_details,
+      :remote_ip_details)
       include Aws::Structure
     end
 
