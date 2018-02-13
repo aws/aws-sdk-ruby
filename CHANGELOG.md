@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glacier - Updated the documentation for Amazon Glacier.
+
+* Feature - Aws::Route53 - Updated the API for Amazon Route 53.
+
 2.10.130 (2018-02-12)
 ------------------
 
