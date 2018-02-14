@@ -19,7 +19,8 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] expires
-    #   The time when the API key expires.
+    #   The time after which the API key expires. The date is represented as
+    #   seconds since the epoch, rounded down to the nearest hour.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiKey AWS API Documentation
@@ -37,6 +38,7 @@ module Aws::AppSync
     #       {
     #         api_id: "String", # required
     #         description: "String",
+    #         expires: 1,
     #       }
     #
     # @!attribute [rw] api_id
@@ -47,11 +49,18 @@ module Aws::AppSync
     #   A description of the purpose of the API key.
     #   @return [String]
     #
+    # @!attribute [rw] expires
+    #   The time after which the API key expires. The date is represented as
+    #   seconds since the epoch, rounded down to the nearest hour. The
+    #   default value for this parameter is 7 days from creation time.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiKeyRequest AWS API Documentation
     #
     class CreateApiKeyRequest < Struct.new(
       :api_id,
-      :description)
+      :description,
+      :expires)
       include Aws::Structure
     end
 
@@ -73,7 +82,7 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         name: "ResourceName", # required
     #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH
+    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
     #         service_role_arn: "String",
     #         dynamodb_config: {
     #           table_name: "String", # required
@@ -151,7 +160,7 @@ module Aws::AppSync
     #   data as a hash:
     #
     #       {
-    #         name: "ResourceName", # required
+    #         name: "String", # required
     #         authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
     #         user_pool_config: {
     #           user_pool_id: "String", # required
@@ -224,7 +233,7 @@ module Aws::AppSync
     # @!attribute [rw] request_mapping_template
     #   The mapping template to be used for requests.
     #
-    #   A resolver use a request mapping template to convert a GraphQL
+    #   A resolver uses a request mapping template to convert a GraphQL
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
     #   @return [String]
@@ -320,6 +329,18 @@ module Aws::AppSync
     #
     # @!attribute [rw] type
     #   The type of the data source.
+    #
+    #   * **AMAZON\_DYNAMODB**\: The data source is an Amazon DynamoDB
+    #     table.
+    #
+    #   * **AMAZON\_ELASTICSEARCH**\: The data source is an Amazon
+    #     Elasticsearch Service domain.
+    #
+    #   * **AWS\_LAMBDA**\: The data source is an AWS Lambda function.
+    #
+    #   * **NONE**\: There is no data source. This type is used when the
+    #     required information can be computed on the fly without connecting
+    #     to a back-end data source.
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -1190,6 +1211,54 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateApiKeyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         api_id: "String", # required
+    #         id: "String", # required
+    #         description: "String",
+    #         expires: 1,
+    #       }
+    #
+    # @!attribute [rw] api_id
+    #   The ID for the GraphQL API
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The API key ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the purpose of the API key.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires
+    #   The time after which the API key expires. The date is represented as
+    #   seconds since the epoch.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiKeyRequest AWS API Documentation
+    #
+    class UpdateApiKeyRequest < Struct.new(
+      :api_id,
+      :id,
+      :description,
+      :expires)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] api_key
+    #   The API key.
+    #   @return [Types::ApiKey]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiKeyResponse AWS API Documentation
+    #
+    class UpdateApiKeyResponse < Struct.new(
+      :api_key)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateDataSourceRequest
     #   data as a hash:
     #
@@ -1197,7 +1266,7 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         name: "ResourceName", # required
     #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH
+    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
     #         service_role_arn: "String",
     #         dynamodb_config: {
     #           table_name: "String", # required
@@ -1275,7 +1344,7 @@ module Aws::AppSync
     #
     #       {
     #         api_id: "String", # required
-    #         name: "ResourceName", # required
+    #         name: "String", # required
     #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
     #         user_pool_config: {
     #           user_pool_id: "String", # required
@@ -1313,7 +1382,7 @@ module Aws::AppSync
     end
 
     # @!attribute [rw] graphql_api
-    #   The udpated `GraphqlApi` object.
+    #   The updated `GraphqlApi` object.
     #   @return [Types::GraphqlApi]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiResponse AWS API Documentation

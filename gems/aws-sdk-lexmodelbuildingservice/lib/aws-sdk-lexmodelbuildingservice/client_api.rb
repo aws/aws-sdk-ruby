@@ -14,6 +14,7 @@ module Aws::LexModelBuildingService
     AliasName = Shapes::StringShape.new(name: 'AliasName')
     AliasNameOrListAll = Shapes::StringShape.new(name: 'AliasNameOrListAll')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BotAliasMetadata = Shapes::StructureShape.new(name: 'BotAliasMetadata')
     BotAliasMetadataList = Shapes::ListShape.new(name: 'BotAliasMetadataList')
@@ -86,6 +87,8 @@ module Aws::LexModelBuildingService
     GetBuiltinSlotTypesResponse = Shapes::StructureShape.new(name: 'GetBuiltinSlotTypesResponse')
     GetExportRequest = Shapes::StructureShape.new(name: 'GetExportRequest')
     GetExportResponse = Shapes::StructureShape.new(name: 'GetExportResponse')
+    GetImportRequest = Shapes::StructureShape.new(name: 'GetImportRequest')
+    GetImportResponse = Shapes::StructureShape.new(name: 'GetImportResponse')
     GetIntentRequest = Shapes::StructureShape.new(name: 'GetIntentRequest')
     GetIntentResponse = Shapes::StructureShape.new(name: 'GetIntentResponse')
     GetIntentVersionsRequest = Shapes::StructureShape.new(name: 'GetIntentVersionsRequest')
@@ -101,6 +104,7 @@ module Aws::LexModelBuildingService
     GetUtterancesViewRequest = Shapes::StructureShape.new(name: 'GetUtterancesViewRequest')
     GetUtterancesViewResponse = Shapes::StructureShape.new(name: 'GetUtterancesViewResponse')
     GroupNumber = Shapes::IntegerShape.new(name: 'GroupNumber')
+    ImportStatus = Shapes::StringShape.new(name: 'ImportStatus')
     Intent = Shapes::StructureShape.new(name: 'Intent')
     IntentList = Shapes::ListShape.new(name: 'IntentList')
     IntentMetadata = Shapes::StructureShape.new(name: 'IntentMetadata')
@@ -115,6 +119,7 @@ module Aws::LexModelBuildingService
     Locale = Shapes::StringShape.new(name: 'Locale')
     LocaleList = Shapes::ListShape.new(name: 'LocaleList')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MergeStrategy = Shapes::StringShape.new(name: 'MergeStrategy')
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageList = Shapes::ListShape.new(name: 'MessageList')
     MessageVersion = Shapes::StringShape.new(name: 'MessageVersion')
@@ -150,10 +155,13 @@ module Aws::LexModelBuildingService
     SlotTypeName = Shapes::StringShape.new(name: 'SlotTypeName')
     SlotUtteranceList = Shapes::ListShape.new(name: 'SlotUtteranceList')
     SlotValueSelectionStrategy = Shapes::StringShape.new(name: 'SlotValueSelectionStrategy')
+    StartImportRequest = Shapes::StructureShape.new(name: 'StartImportRequest')
+    StartImportResponse = Shapes::StructureShape.new(name: 'StartImportResponse')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusType = Shapes::StringShape.new(name: 'StatusType')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     SynonymList = Shapes::ListShape.new(name: 'SynonymList')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UserId = Shapes::StringShape.new(name: 'UserId')
@@ -460,6 +468,18 @@ module Aws::LexModelBuildingService
     GetExportResponse.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
     GetExportResponse.struct_class = Types::GetExportResponse
 
+    GetImportRequest.add_member(:import_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "importId"))
+    GetImportRequest.struct_class = Types::GetImportRequest
+
+    GetImportResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    GetImportResponse.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    GetImportResponse.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy"))
+    GetImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: String, location_name: "importId"))
+    GetImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    GetImportResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: StringList, location_name: "failureReason"))
+    GetImportResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
+    GetImportResponse.struct_class = Types::GetImportResponse
+
     GetIntentRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
     GetIntentRequest.add_member(:version, Shapes::ShapeRef.new(shape: Version, required: true, location: "uri", location_name: "version"))
     GetIntentRequest.struct_class = Types::GetIntentRequest
@@ -602,6 +622,7 @@ module Aws::LexModelBuildingService
     PutBotRequest.add_member(:process_behavior, Shapes::ShapeRef.new(shape: ProcessBehavior, location_name: "processBehavior"))
     PutBotRequest.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, required: true, location_name: "locale"))
     PutBotRequest.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "childDirected"))
+    PutBotRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutBotRequest.struct_class = Types::PutBotRequest
 
     PutBotResponse.add_member(:name, Shapes::ShapeRef.new(shape: BotName, location_name: "name"))
@@ -619,6 +640,7 @@ module Aws::LexModelBuildingService
     PutBotResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     PutBotResponse.add_member(:locale, Shapes::ShapeRef.new(shape: Locale, location_name: "locale"))
     PutBotResponse.add_member(:child_directed, Shapes::ShapeRef.new(shape: Boolean, location_name: "childDirected"))
+    PutBotResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutBotResponse.struct_class = Types::PutBotResponse
 
     PutIntentRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
@@ -633,6 +655,7 @@ module Aws::LexModelBuildingService
     PutIntentRequest.add_member(:fulfillment_activity, Shapes::ShapeRef.new(shape: FulfillmentActivity, location_name: "fulfillmentActivity"))
     PutIntentRequest.add_member(:parent_intent_signature, Shapes::ShapeRef.new(shape: BuiltinIntentSignature, location_name: "parentIntentSignature"))
     PutIntentRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    PutIntentRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutIntentRequest.struct_class = Types::PutIntentRequest
 
     PutIntentResponse.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, location_name: "name"))
@@ -650,6 +673,7 @@ module Aws::LexModelBuildingService
     PutIntentResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
     PutIntentResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     PutIntentResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
+    PutIntentResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutIntentResponse.struct_class = Types::PutIntentResponse
 
     PutSlotTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
@@ -657,6 +681,7 @@ module Aws::LexModelBuildingService
     PutSlotTypeRequest.add_member(:enumeration_values, Shapes::ShapeRef.new(shape: EnumerationValues, location_name: "enumerationValues"))
     PutSlotTypeRequest.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutSlotTypeRequest.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    PutSlotTypeRequest.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutSlotTypeRequest.struct_class = Types::PutSlotTypeRequest
 
     PutSlotTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, location_name: "name"))
@@ -667,6 +692,7 @@ module Aws::LexModelBuildingService
     PutSlotTypeResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     PutSlotTypeResponse.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
     PutSlotTypeResponse.add_member(:value_selection_strategy, Shapes::ShapeRef.new(shape: SlotValueSelectionStrategy, location_name: "valueSelectionStrategy"))
+    PutSlotTypeResponse.add_member(:create_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "createVersion"))
     PutSlotTypeResponse.struct_class = Types::PutSlotTypeResponse
 
     ResourceReference.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -697,9 +723,24 @@ module Aws::LexModelBuildingService
 
     SlotUtteranceList.member = Shapes::ShapeRef.new(shape: Utterance)
 
+    StartImportRequest.add_member(:payload, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "payload"))
+    StartImportRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    StartImportRequest.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, required: true, location_name: "mergeStrategy"))
+    StartImportRequest.struct_class = Types::StartImportRequest
+
+    StartImportResponse.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    StartImportResponse.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    StartImportResponse.add_member(:merge_strategy, Shapes::ShapeRef.new(shape: MergeStrategy, location_name: "mergeStrategy"))
+    StartImportResponse.add_member(:import_id, Shapes::ShapeRef.new(shape: String, location_name: "importId"))
+    StartImportResponse.add_member(:import_status, Shapes::ShapeRef.new(shape: ImportStatus, location_name: "importStatus"))
+    StartImportResponse.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
+    StartImportResponse.struct_class = Types::StartImportResponse
+
     Statement.add_member(:messages, Shapes::ShapeRef.new(shape: MessageList, required: true, location_name: "messages"))
     Statement.add_member(:response_card, Shapes::ShapeRef.new(shape: ResponseCard, location_name: "responseCard"))
     Statement.struct_class = Types::Statement
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
     SynonymList.member = Shapes::ShapeRef.new(shape: Value)
 
@@ -1058,6 +1099,18 @@ module Aws::LexModelBuildingService
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:get_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetImport"
+        o.http_method = "GET"
+        o.http_request_uri = "/imports/{importId}"
+        o.input = Shapes::ShapeRef.new(shape: GetImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:get_intent, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetIntent"
         o.http_method = "GET"
@@ -1215,6 +1268,17 @@ module Aws::LexModelBuildingService
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailedException)
+      end)
+
+      api.add_operation(:start_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartImport"
+        o.http_method = "POST"
+        o.http_request_uri = "/imports/"
+        o.input = Shapes::ShapeRef.new(shape: StartImportRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartImportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
     end
 

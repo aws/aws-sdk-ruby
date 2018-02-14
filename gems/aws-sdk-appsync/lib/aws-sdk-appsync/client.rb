@@ -154,6 +154,11 @@ module Aws::AppSync
     # @option params [String] :description
     #   A description of the purpose of the API key.
     #
+    # @option params [Integer] :expires
+    #   The time after which the API key expires. The date is represented as
+    #   seconds since the epoch, rounded down to the nearest hour. The default
+    #   value for this parameter is 7 days from creation time.
+    #
     # @return [Types::CreateApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApiKeyResponse#api_key #api_key} => Types::ApiKey
@@ -163,6 +168,7 @@ module Aws::AppSync
     #   resp = client.create_api_key({
     #     api_id: "String", # required
     #     description: "String",
+    #     expires: 1,
     #   })
     #
     # @example Response structure
@@ -217,7 +223,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -238,7 +244,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -274,7 +280,7 @@ module Aws::AppSync
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_graphql_api({
-    #     name: "ResourceName", # required
+    #     name: "String", # required
     #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
     #     user_pool_config: {
     #       user_pool_id: "String", # required
@@ -326,7 +332,7 @@ module Aws::AppSync
     # @option params [required, String] :request_mapping_template
     #   The mapping template to be used for requests.
     #
-    #   A resolver use a request mapping template to convert a GraphQL
+    #   A resolver uses a request mapping template to convert a GraphQL
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
     #
@@ -567,7 +573,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -840,7 +846,7 @@ module Aws::AppSync
     #   resp.data_sources[0].data_source_arn #=> String
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].description #=> String
-    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH"
+    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
     #   resp.data_sources[0].service_role_arn #=> String
     #   resp.data_sources[0].dynamodb_config.table_name #=> String
     #   resp.data_sources[0].dynamodb_config.aws_region #=> String
@@ -1039,6 +1045,49 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Updates an API key.
+    #
+    # @option params [required, String] :api_id
+    #   The ID for the GraphQL API
+    #
+    # @option params [required, String] :id
+    #   The API key ID.
+    #
+    # @option params [String] :description
+    #   A description of the purpose of the API key.
+    #
+    # @option params [Integer] :expires
+    #   The time after which the API key expires. The date is represented as
+    #   seconds since the epoch.
+    #
+    # @return [Types::UpdateApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApiKeyResponse#api_key #api_key} => Types::ApiKey
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_api_key({
+    #     api_id: "String", # required
+    #     id: "String", # required
+    #     description: "String",
+    #     expires: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_key.id #=> String
+    #   resp.api_key.description #=> String
+    #   resp.api_key.expires #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiKey AWS API Documentation
+    #
+    # @overload update_api_key(params = {})
+    # @param [Hash] params ({})
+    def update_api_key(params = {}, options = {})
+      req = build_request(:update_api_key, params)
+      req.send_request(options)
+    end
+
     # Updates a `DataSource` object.
     #
     # @option params [required, String] :api_id
@@ -1075,7 +1124,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -1096,7 +1145,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -1137,7 +1186,7 @@ module Aws::AppSync
     #
     #   resp = client.update_graphql_api({
     #     api_id: "String", # required
-    #     name: "ResourceName", # required
+    #     name: "String", # required
     #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
     #     user_pool_config: {
     #       user_pool_id: "String", # required
@@ -1279,7 +1328,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

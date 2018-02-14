@@ -13,6 +13,7 @@ module Aws::AppSync
 
     ApiKey = Shapes::StructureShape.new(name: 'ApiKey')
     ApiKeyLimitExceededException = Shapes::StructureShape.new(name: 'ApiKeyLimitExceededException')
+    ApiKeyValidityOutOfBoundsException = Shapes::StructureShape.new(name: 'ApiKeyValidityOutOfBoundsException')
     ApiKeys = Shapes::ListShape.new(name: 'ApiKeys')
     ApiLimitExceededException = Shapes::StructureShape.new(name: 'ApiLimitExceededException')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
@@ -93,6 +94,8 @@ module Aws::AppSync
     TypeDefinitionFormat = Shapes::StringShape.new(name: 'TypeDefinitionFormat')
     TypeList = Shapes::ListShape.new(name: 'TypeList')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
+    UpdateApiKeyRequest = Shapes::StructureShape.new(name: 'UpdateApiKeyRequest')
+    UpdateApiKeyResponse = Shapes::StructureShape.new(name: 'UpdateApiKeyResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateDataSourceResponse = Shapes::StructureShape.new(name: 'UpdateDataSourceResponse')
     UpdateGraphqlApiRequest = Shapes::StructureShape.new(name: 'UpdateGraphqlApiRequest')
@@ -112,6 +115,7 @@ module Aws::AppSync
 
     CreateApiKeyRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     CreateApiKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CreateApiKeyRequest.add_member(:expires, Shapes::ShapeRef.new(shape: Long, location_name: "expires"))
     CreateApiKeyRequest.struct_class = Types::CreateApiKeyRequest
 
     CreateApiKeyResponse.add_member(:api_key, Shapes::ShapeRef.new(shape: ApiKey, location_name: "apiKey"))
@@ -130,7 +134,7 @@ module Aws::AppSync
     CreateDataSourceResponse.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "dataSource"))
     CreateDataSourceResponse.struct_class = Types::CreateDataSourceResponse
 
-    CreateGraphqlApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    CreateGraphqlApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     CreateGraphqlApiRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, required: true, location_name: "authenticationType"))
     CreateGraphqlApiRequest.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: UserPoolConfig, location_name: "userPoolConfig"))
     CreateGraphqlApiRequest.struct_class = Types::CreateGraphqlApiRequest
@@ -341,6 +345,15 @@ module Aws::AppSync
 
     TypeList.member = Shapes::ShapeRef.new(shape: Type)
 
+    UpdateApiKeyRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
+    UpdateApiKeyRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "id"))
+    UpdateApiKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateApiKeyRequest.add_member(:expires, Shapes::ShapeRef.new(shape: Long, location_name: "expires"))
+    UpdateApiKeyRequest.struct_class = Types::UpdateApiKeyRequest
+
+    UpdateApiKeyResponse.add_member(:api_key, Shapes::ShapeRef.new(shape: ApiKey, location_name: "apiKey"))
+    UpdateApiKeyResponse.struct_class = Types::UpdateApiKeyResponse
+
     UpdateDataSourceRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
     UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "name"))
     UpdateDataSourceRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -355,7 +368,7 @@ module Aws::AppSync
     UpdateDataSourceResponse.struct_class = Types::UpdateDataSourceResponse
 
     UpdateGraphqlApiRequest.add_member(:api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "apiId"))
-    UpdateGraphqlApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    UpdateGraphqlApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     UpdateGraphqlApiRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "authenticationType"))
     UpdateGraphqlApiRequest.add_member(:user_pool_config, Shapes::ShapeRef.new(shape: UserPoolConfig, location_name: "userPoolConfig"))
     UpdateGraphqlApiRequest.struct_class = Types::UpdateGraphqlApiRequest
@@ -417,6 +430,7 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ApiKeyLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ApiKeyValidityOutOfBoundsException)
       end)
 
       api.add_operation(:create_data_source, Seahorse::Model::Operation.new.tap do |o|
@@ -679,6 +693,20 @@ module Aws::AppSync
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_api_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApiKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apis/{apiId}/apikeys/{id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApiKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApiKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ApiKeyValidityOutOfBoundsException)
       end)
 
       api.add_operation(:update_data_source, Seahorse::Model::Operation.new.tap do |o|
