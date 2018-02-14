@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.132 (2018-02-14)
+------------------
+
 * Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
 
 * Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
