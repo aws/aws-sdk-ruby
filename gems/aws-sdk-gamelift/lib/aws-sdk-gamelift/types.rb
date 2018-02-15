@@ -441,6 +441,7 @@ module Aws::GameLift
     #         metric_groups: ["MetricGroup"],
     #         peer_vpc_aws_account_id: "NonZeroAndMaxString",
     #         peer_vpc_id: "NonZeroAndMaxString",
+    #         fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #       }
     #
     # @!attribute [rw] name
@@ -564,6 +565,22 @@ module Aws::GameLift
     #   the AWS Management Console.
     #   @return [String]
     #
+    # @!attribute [rw] fleet_type
+    #   Indicates whether to use on-demand instances or spot instances for
+    #   this fleet. If empty, the default is ON\_DEMAND. Both categories of
+    #   instances use identical hardware and configurations, based on the
+    #   instance type selected for this fleet. You can acquire on-demand
+    #   instances at any time for a fixed price and keep them as long as you
+    #   need them. Spot instances have lower prices, but spot pricing is
+    #   variable, and while in use they can be interrupted (with a
+    #   two-minute notification). Learn more about Amazon GameLift spot
+    #   instances with at [ Choose Computing Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
     class CreateFleetInput < Struct.new(
@@ -580,7 +597,8 @@ module Aws::GameLift
       :resource_creation_limit_policy,
       :metric_groups,
       :peer_vpc_aws_account_id,
-      :peer_vpc_id)
+      :peer_vpc_id,
+      :fleet_type)
       include Aws::Structure
     end
 
@@ -2683,12 +2701,6 @@ module Aws::GameLift
     #   Type of event being logged. The following events are currently in
     #   use:
     #
-    #   **General events:**
-    #
-    #   * GENERIC\_EVENT -- An unspecified event has occurred.
-    #
-    #   ^
-    #
     #   **Fleet creation events:**
     #
     #   * FLEET\_CREATED -- A fleet record was successfully created with a
@@ -2775,6 +2787,13 @@ module Aws::GameLift
     #   * FLEET\_VPC\_PEERING\_DELETED -- A VPC peering connection has been
     #     successfully deleted.
     #
+    #   **Spot instance events:**
+    #
+    #   * INSTANCE\_INTERRUPTED -- A spot instance was interrupted by EC2
+    #     with a two-minute notification.
+    #
+    #   ^
+    #
     #   **Other fleet events:**
     #
     #   * FLEET\_SCALING\_EVENT -- A change was made to the fleet's
@@ -2786,6 +2805,8 @@ module Aws::GameLift
     #     Event messaging includes both the old and new policy setting.
     #
     #   * FLEET\_DELETED -- A request to delete a fleet was initiated.
+    #
+    #   * GENERIC\_EVENT -- An unspecified event has occurred.
     #
     #
     #
@@ -2873,6 +2894,22 @@ module Aws::GameLift
     #
     # @!attribute [rw] fleet_arn
     #   Identifier for a fleet that is unique across all regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_type
+    #   Indicates whether the fleet uses on-demand or spot instances. A spot
+    #   instance in use may be interrupted with a two-minute notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   EC2 instance type indicating the computing resources of each
+    #   instance in the fleet, including CPU, memory, storage, and
+    #   networking capacity. See [Amazon EC2 Instance Types][1] for detailed
+    #   descriptions.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/ec2/instance-types/
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2985,6 +3022,8 @@ module Aws::GameLift
     class FleetAttributes < Struct.new(
       :fleet_id,
       :fleet_arn,
+      :fleet_type,
+      :instance_type,
       :description,
       :name,
       :creation_time,
@@ -3270,6 +3309,13 @@ module Aws::GameLift
     #   `ACTIVE` status to have player sessions.
     #   @return [String]
     #
+    # @!attribute [rw] status_reason
+    #   Provides additional information about game session status.
+    #   `INTERRUPTED` indicates that the game session was hosted on a spot
+    #   instance that was reclaimed, causing the active game session to be
+    #   terminated.
+    #   @return [String]
+    #
     # @!attribute [rw] game_properties
     #   Set of custom properties for a game session, formatted as key:value
     #   pairs. These properties are passed to a game server process in the
@@ -3339,6 +3385,7 @@ module Aws::GameLift
       :current_player_session_count,
       :maximum_player_session_count,
       :status,
+      :status_reason,
       :game_properties,
       :ip_address,
       :port,
@@ -3551,8 +3598,8 @@ module Aws::GameLift
     #   JSON syntax, formated as a string. It identifies the matchmaking
     #   configuration used to create the match, and contains data on all
     #   players assigned to the match, including player attributes and team
-    #   assignments. For more details on matchmaker data, see
-    #   [http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data][1].
+    #   assignments. For more details on matchmaker data, see [Match
+    #   Data][1].
     #
     #
     #
@@ -4420,10 +4467,10 @@ module Aws::GameLift
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   Time stamp indicating when the matchmaking request stopped being
-    #   processed due to successful completion, timeout, or cancellation.
-    #   Format is a number expressed in Unix time as milliseconds (for
-    #   example "1469498468.057").
+    #   Time stamp indicating when this matchmaking request stopped being
+    #   processed due to success, failure, or cancellation. Format is a
+    #   number expressed in Unix time as milliseconds (for example
+    #   "1469498468.057").
     #   @return [Time]
     #
     # @!attribute [rw] players
@@ -5729,14 +5776,14 @@ module Aws::GameLift
     #   game session. This information is used by the matchmaker to find new
     #   players and add them to the existing game.
     #
-    #   * PlayerID, PlayerAttributes, Team -- This information is maintained
-    #     in the GameSession object, `MatchmakerData` property, for all
-    #     players who are currently assigned to the game session. The
-    #     matchmaker data is in JSON syntax, formatted as a string. For more
-    #     details, see [ Match Data][1].
+    #   * PlayerID, PlayerAttributes, Team -\\\\- This information is
+    #     maintained in the GameSession object, `MatchmakerData` property,
+    #     for all players who are currently assigned to the game session.
+    #     The matchmaker data is in JSON syntax, formatted as a string. For
+    #     more details, see [ Match Data][1].
     #
-    #   * LatencyInMs -- If the matchmaker uses player latency, include a
-    #     latency value, in milliseconds, for the region that the game
+    #   * LatencyInMs -\\\\- If the matchmaker uses player latency, include
+    #     a latency value, in milliseconds, for the region that the game
     #     session is currently in. Do not include latency values for any
     #     other region.
     #

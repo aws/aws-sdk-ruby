@@ -191,6 +191,8 @@ module Aws::GameLift
     #
     # * AcceptMatch
     #
+    # * StartMatchBackfill
+    #
     # @option params [required, String] :ticket_id
     #   Unique identifier for a matchmaking ticket. The ticket must be in
     #   status `REQUIRES_ACCEPTANCE`; otherwise this request will fail.
@@ -433,19 +435,17 @@ module Aws::GameLift
 
     # Creates a new fleet to run your game servers. A fleet is a set of
     # Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can
-    # run multiple server processes to host game sessions. You configure a
-    # fleet to create instances with certain hardware specifications (see
-    # [Amazon EC2 Instance Types][1] for more information), and deploy a
-    # specified game build to each instance. A newly created fleet passes
-    # through several statuses; once it reaches the `ACTIVE` status, it can
-    # begin hosting game sessions.
+    # run multiple server processes to host game sessions. You set up a
+    # fleet to use instances with certain hardware specifications (see
+    # [Amazon EC2 Instance Types][1] for more information), and deploy your
+    # game build to run on each instance.
     #
-    # To create a new fleet, you must specify the following: (1) fleet name,
-    # (2) build ID of an uploaded game build, (3) an EC2 instance type, and
-    # (4) a run-time configuration that describes which server processes to
-    # run on each instance in the fleet. (Although the run-time
-    # configuration is not a required parameter, the fleet cannot be
-    # successfully activated without it.)
+    # To create a new fleet, you must specify the following: (1) a fleet
+    # name, (2) the build ID of a successfully uploaded game build, (3) an
+    # EC2 instance type, and (4) a run-time configuration, which describes
+    # the server processes to run on each instance in the fleet. If you
+    # don't specify a fleet type (on-demand or spot), the new fleet uses
+    # on-demand instances by default.
     #
     # You can also configure the new fleet with the following settings:
     #
@@ -455,35 +455,40 @@ module Aws::GameLift
     #
     # * Fleet-wide game session protection
     #
-    # * Resource creation limit
+    # * Resource usage limits
+    # ^
+    #
+    # * VPC peering connection (see [VPC Peering with Amazon GameLift
+    #   Fleets][2])
+    #
+    # ^
     #
     # If you use Amazon CloudWatch for metrics, you can add the new fleet to
-    # a metric group. This allows you to view aggregated metrics for a set
-    # of fleets. Once you specify a metric group, the new fleet's metrics
-    # are included in the metric group's data.
+    # a metric group. By adding multiple fleets to a metric group, you can
+    # view aggregated metrics for all the fleets in the group.
     #
-    # You have the option of creating a VPC peering connection with the new
-    # fleet. For more information, see [VPC Peering with Amazon GameLift
-    # Fleets][2].
+    # If the `CreateFleet` call is successful, Amazon GameLift performs the
+    # following tasks. You can track the process of a fleet by checking the
+    # fleet status or by monitoring fleet creation events:
     #
-    # If the CreateFleet call is successful, Amazon GameLift performs the
-    # following tasks:
-    #
-    # * Creates a fleet record and sets the status to `NEW` (followed by
-    #   other statuses as the fleet is activated).
-    #
-    # * Sets the fleet's target capacity to 1 (desired instances), which
-    #   causes Amazon GameLift to start one new EC2 instance.
-    #
-    # * Starts launching server processes on the instance. If the fleet is
-    #   configured to run multiple server processes per instance, Amazon
-    #   GameLift staggers each launch by a few seconds.
+    # * Creates a fleet record. Status: `NEW`.
     #
     # * Begins writing events to the fleet event log, which can be accessed
     #   in the Amazon GameLift console.
     #
+    #   Sets the fleet's target capacity to 1 (desired instances), which
+    #   triggers Amazon GameLift to start one new EC2 instance.
+    #
+    # * Downloads the game build to the new instance and installs it.
+    #   Statuses: `DOWNLOADING`, `VALIDATING`, `BUILDING`.
+    #
+    # * Starts launching server processes on the instance. If the fleet is
+    #   configured to run multiple server processes per instance, Amazon
+    #   GameLift staggers each launch by a few seconds. Status:
+    #   `ACTIVATING`.
+    #
     # * Sets the fleet's status to `ACTIVE` as soon as one server process
-    #   in the fleet is ready to host a game session.
+    #   is ready to host a game session.
     #
     # Fleet-related operations include:
     #
@@ -639,6 +644,21 @@ module Aws::GameLift
     #   Virtual Private Cloud service tools, including the VPC Dashboard in
     #   the AWS Management Console.
     #
+    # @option params [String] :fleet_type
+    #   Indicates whether to use on-demand instances or spot instances for
+    #   this fleet. If empty, the default is ON\_DEMAND. Both categories of
+    #   instances use identical hardware and configurations, based on the
+    #   instance type selected for this fleet. You can acquire on-demand
+    #   instances at any time for a fixed price and keep them as long as you
+    #   need them. Spot instances have lower prices, but spot pricing is
+    #   variable, and while in use they can be interrupted (with a two-minute
+    #   notification). Learn more about Amazon GameLift spot instances with at
+    #   [ Choose Computing Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html
+    #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetOutput#fleet_attributes #fleet_attributes} => Types::FleetAttributes
@@ -680,12 +700,15 @@ module Aws::GameLift
     #     metric_groups: ["MetricGroup"],
     #     peer_vpc_aws_account_id: "NonZeroAndMaxString",
     #     peer_vpc_id: "NonZeroAndMaxString",
+    #     fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #   })
     #
     # @example Response structure
     #
     #   resp.fleet_attributes.fleet_id #=> String
     #   resp.fleet_attributes.fleet_arn #=> String
+    #   resp.fleet_attributes.fleet_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.fleet_attributes.instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
     #   resp.fleet_attributes.description #=> String
     #   resp.fleet_attributes.name #=> String
     #   resp.fleet_attributes.creation_time #=> Time
@@ -863,6 +886,7 @@ module Aws::GameLift
     #   resp.game_session.current_player_session_count #=> Integer
     #   resp.game_session.maximum_player_session_count #=> Integer
     #   resp.game_session.status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
+    #   resp.game_session.status_reason #=> String, one of "INTERRUPTED"
     #   resp.game_session.game_properties #=> Array
     #   resp.game_session.game_properties[0].key #=> String
     #   resp.game_session.game_properties[0].value #=> String
@@ -1001,9 +1025,9 @@ module Aws::GameLift
     # matchmaking configuration sets out guidelines for matching players and
     # getting the matches into games. You can set up multiple matchmaking
     # configurations to handle the scenarios needed for your game. Each
-    # matchmaking request (StartMatchmaking) specifies a configuration for
-    # the match and provides player attributes to support the configuration
-    # being used.
+    # matchmaking ticket (StartMatchmaking or StartMatchBackfill) specifies
+    # a configuration for the match and provides player attributes to
+    # support the configuration being used.
     #
     # To create a matchmaking configuration, at a minimum you must specify
     # the following: configuration name; a rule set that governs how to
@@ -1192,7 +1216,7 @@ module Aws::GameLift
     #
     # Once created, matchmaking rule sets cannot be changed or deleted, so
     # we recommend checking the rule set syntax using
-    # ValidateMatchmakingRuleSetbefore creating the rule set.
+    # ValidateMatchmakingRuleSet before creating the rule set.
     #
     # To create a matchmaking rule set, provide the set of rules and a
     # unique name. Rule sets must be defined in the same region as the
@@ -2269,6 +2293,8 @@ module Aws::GameLift
     #   resp.fleet_attributes #=> Array
     #   resp.fleet_attributes[0].fleet_id #=> String
     #   resp.fleet_attributes[0].fleet_arn #=> String
+    #   resp.fleet_attributes[0].fleet_type #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.fleet_attributes[0].instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
     #   resp.fleet_attributes[0].description #=> String
     #   resp.fleet_attributes[0].name #=> String
     #   resp.fleet_attributes[0].creation_time #=> Time
@@ -2504,7 +2530,7 @@ module Aws::GameLift
     #   resp.events #=> Array
     #   resp.events[0].event_id #=> String
     #   resp.events[0].resource_id #=> String
-    #   resp.events[0].event_code #=> String, one of "GENERIC_EVENT", "FLEET_CREATED", "FLEET_DELETED", "FLEET_SCALING_EVENT", "FLEET_STATE_DOWNLOADING", "FLEET_STATE_VALIDATING", "FLEET_STATE_BUILDING", "FLEET_STATE_ACTIVATING", "FLEET_STATE_ACTIVE", "FLEET_STATE_ERROR", "FLEET_INITIALIZATION_FAILED", "FLEET_BINARY_DOWNLOAD_FAILED", "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND", "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE", "FLEET_VALIDATION_TIMED_OUT", "FLEET_ACTIVATION_FAILED", "FLEET_ACTIVATION_FAILED_NO_INSTANCES", "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED", "SERVER_PROCESS_INVALID_PATH", "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT", "SERVER_PROCESS_PROCESS_READY_TIMEOUT", "SERVER_PROCESS_CRASHED", "SERVER_PROCESS_TERMINATED_UNHEALTHY", "SERVER_PROCESS_FORCE_TERMINATED", "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT", "GAME_SESSION_ACTIVATION_TIMEOUT", "FLEET_CREATION_EXTRACTING_BUILD", "FLEET_CREATION_RUNNING_INSTALLER", "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG", "FLEET_VPC_PEERING_SUCCEEDED", "FLEET_VPC_PEERING_FAILED", "FLEET_VPC_PEERING_DELETED"
+    #   resp.events[0].event_code #=> String, one of "GENERIC_EVENT", "FLEET_CREATED", "FLEET_DELETED", "FLEET_SCALING_EVENT", "FLEET_STATE_DOWNLOADING", "FLEET_STATE_VALIDATING", "FLEET_STATE_BUILDING", "FLEET_STATE_ACTIVATING", "FLEET_STATE_ACTIVE", "FLEET_STATE_ERROR", "FLEET_INITIALIZATION_FAILED", "FLEET_BINARY_DOWNLOAD_FAILED", "FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND", "FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE", "FLEET_VALIDATION_TIMED_OUT", "FLEET_ACTIVATION_FAILED", "FLEET_ACTIVATION_FAILED_NO_INSTANCES", "FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED", "SERVER_PROCESS_INVALID_PATH", "SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT", "SERVER_PROCESS_PROCESS_READY_TIMEOUT", "SERVER_PROCESS_CRASHED", "SERVER_PROCESS_TERMINATED_UNHEALTHY", "SERVER_PROCESS_FORCE_TERMINATED", "SERVER_PROCESS_PROCESS_EXIT_TIMEOUT", "GAME_SESSION_ACTIVATION_TIMEOUT", "FLEET_CREATION_EXTRACTING_BUILD", "FLEET_CREATION_RUNNING_INSTALLER", "FLEET_CREATION_VALIDATING_RUNTIME_CONFIG", "FLEET_VPC_PEERING_SUCCEEDED", "FLEET_VPC_PEERING_FAILED", "FLEET_VPC_PEERING_DELETED", "INSTANCE_INTERRUPTED"
     #   resp.events[0].message #=> String
     #   resp.events[0].event_time #=> Time
     #   resp.events[0].pre_signed_log_url #=> String
@@ -2795,6 +2821,7 @@ module Aws::GameLift
     #   resp.game_session_details[0].game_session.current_player_session_count #=> Integer
     #   resp.game_session_details[0].game_session.maximum_player_session_count #=> Integer
     #   resp.game_session_details[0].game_session.status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
+    #   resp.game_session_details[0].game_session.status_reason #=> String, one of "INTERRUPTED"
     #   resp.game_session_details[0].game_session.game_properties #=> Array
     #   resp.game_session_details[0].game_session.game_properties[0].key #=> String
     #   resp.game_session_details[0].game_session.game_properties[0].value #=> String
@@ -3044,6 +3071,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].current_player_session_count #=> Integer
     #   resp.game_sessions[0].maximum_player_session_count #=> Integer
     #   resp.game_sessions[0].status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
+    #   resp.game_sessions[0].status_reason #=> String, one of "INTERRUPTED"
     #   resp.game_sessions[0].game_properties #=> Array
     #   resp.game_sessions[0].game_properties[0].key #=> String
     #   resp.game_sessions[0].game_properties[0].value #=> String
@@ -3147,6 +3175,8 @@ module Aws::GameLift
     # * StopMatchmaking
     #
     # * AcceptMatch
+    #
+    # * StartMatchBackfill
     #
     # @option params [required, Array<String>] :ticket_ids
     #   Unique identifier for a matchmaking ticket. You can include up to 10
@@ -4584,6 +4614,7 @@ module Aws::GameLift
     #   resp.game_sessions[0].current_player_session_count #=> Integer
     #   resp.game_sessions[0].maximum_player_session_count #=> Integer
     #   resp.game_sessions[0].status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
+    #   resp.game_sessions[0].status_reason #=> String, one of "INTERRUPTED"
     #   resp.game_sessions[0].game_properties #=> Array
     #   resp.game_sessions[0].game_properties[0].key #=> String
     #   resp.game_sessions[0].game_properties[0].value #=> String
@@ -4800,8 +4831,8 @@ module Aws::GameLift
     # a match backfill ticket is created and returned with status set to
     # QUEUED. The ticket is placed in the matchmaker's ticket pool and
     # processed. Track the status of the ticket to respond as needed. For
-    # more detail how to set up backfilling, see [ Set up Match
-    # Backfilling][1].
+    # more detail how to set up backfilling, see [ Backfill Existing Games
+    # with FlexMatch][1].
     #
     # The process of finding backfill matches is essentially identical to
     # the initial matchmaking process. The matchmaker searches the pool and
@@ -4822,6 +4853,8 @@ module Aws::GameLift
     # * StopMatchmaking
     #
     # * AcceptMatch
+    #
+    # * StartMatchBackfill
     #
     #
     #
@@ -4857,13 +4890,13 @@ module Aws::GameLift
     #   game session. This information is used by the matchmaker to find new
     #   players and add them to the existing game.
     #
-    #   * PlayerID, PlayerAttributes, Team -- This information is maintained
-    #     in the GameSession object, `MatchmakerData` property, for all
-    #     players who are currently assigned to the game session. The
+    #   * PlayerID, PlayerAttributes, Team -\\\\- This information is
+    #     maintained in the GameSession object, `MatchmakerData` property, for
+    #     all players who are currently assigned to the game session. The
     #     matchmaker data is in JSON syntax, formatted as a string. For more
     #     details, see [ Match Data][1].
     #
-    #   * LatencyInMs -- If the matchmaker uses player latency, include a
+    #   * LatencyInMs -\\\\- If the matchmaker uses player latency, include a
     #     latency value, in milliseconds, for the region that the game session
     #     is currently in. Do not include latency values for any other region.
     #
@@ -5006,6 +5039,8 @@ module Aws::GameLift
     # * StopMatchmaking
     #
     # * AcceptMatch
+    #
+    # * StartMatchBackfill
     #
     #
     #
@@ -5174,6 +5209,8 @@ module Aws::GameLift
     # * StopMatchmaking
     #
     # * AcceptMatch
+    #
+    # * StartMatchBackfill
     #
     # @option params [required, String] :ticket_id
     #   Unique identifier for a matchmaking ticket.
@@ -5722,6 +5759,7 @@ module Aws::GameLift
     #   resp.game_session.current_player_session_count #=> Integer
     #   resp.game_session.maximum_player_session_count #=> Integer
     #   resp.game_session.status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
+    #   resp.game_session.status_reason #=> String, one of "INTERRUPTED"
     #   resp.game_session.game_properties #=> Array
     #   resp.game_session.game_properties[0].key #=> String
     #   resp.game_session.game_properties[0].value #=> String
@@ -6154,7 +6192,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

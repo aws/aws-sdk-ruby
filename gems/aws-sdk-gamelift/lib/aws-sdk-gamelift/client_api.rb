@@ -123,6 +123,7 @@ module Aws::GameLift
     FleetId = Shapes::StringShape.new(name: 'FleetId')
     FleetIdList = Shapes::ListShape.new(name: 'FleetIdList')
     FleetStatus = Shapes::StringShape.new(name: 'FleetStatus')
+    FleetType = Shapes::StringShape.new(name: 'FleetType')
     FleetUtilization = Shapes::StructureShape.new(name: 'FleetUtilization')
     FleetUtilizationList = Shapes::ListShape.new(name: 'FleetUtilizationList')
     Float = Shapes::FloatShape.new(name: 'Float')
@@ -148,6 +149,7 @@ module Aws::GameLift
     GameSessionQueueName = Shapes::StringShape.new(name: 'GameSessionQueueName')
     GameSessionQueueNameList = Shapes::ListShape.new(name: 'GameSessionQueueNameList')
     GameSessionStatus = Shapes::StringShape.new(name: 'GameSessionStatus')
+    GameSessionStatusReason = Shapes::StringShape.new(name: 'GameSessionStatusReason')
     GetGameSessionLogUrlInput = Shapes::StructureShape.new(name: 'GetGameSessionLogUrlInput')
     GetGameSessionLogUrlOutput = Shapes::StructureShape.new(name: 'GetGameSessionLogUrlOutput')
     GetInstanceAccessInput = Shapes::StructureShape.new(name: 'GetInstanceAccessInput')
@@ -363,6 +365,7 @@ module Aws::GameLift
     CreateFleetInput.add_member(:metric_groups, Shapes::ShapeRef.new(shape: MetricGroupList, location_name: "MetricGroups"))
     CreateFleetInput.add_member(:peer_vpc_aws_account_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PeerVpcAwsAccountId"))
     CreateFleetInput.add_member(:peer_vpc_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PeerVpcId"))
+    CreateFleetInput.add_member(:fleet_type, Shapes::ShapeRef.new(shape: FleetType, location_name: "FleetType"))
     CreateFleetInput.struct_class = Types::CreateFleetInput
 
     CreateFleetOutput.add_member(:fleet_attributes, Shapes::ShapeRef.new(shape: FleetAttributes, location_name: "FleetAttributes"))
@@ -689,6 +692,8 @@ module Aws::GameLift
 
     FleetAttributes.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
     FleetAttributes.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
+    FleetAttributes.add_member(:fleet_type, Shapes::ShapeRef.new(shape: FleetType, location_name: "FleetType"))
+    FleetAttributes.add_member(:instance_type, Shapes::ShapeRef.new(shape: EC2InstanceType, location_name: "InstanceType"))
     FleetAttributes.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
     FleetAttributes.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
     FleetAttributes.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
@@ -738,6 +743,7 @@ module Aws::GameLift
     GameSession.add_member(:current_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "CurrentPlayerSessionCount"))
     GameSession.add_member(:maximum_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "MaximumPlayerSessionCount"))
     GameSession.add_member(:status, Shapes::ShapeRef.new(shape: GameSessionStatus, location_name: "Status"))
+    GameSession.add_member(:status_reason, Shapes::ShapeRef.new(shape: GameSessionStatusReason, location_name: "StatusReason"))
     GameSession.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     GameSession.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
     GameSession.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "Port"))

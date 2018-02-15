@@ -444,7 +444,7 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] audio_normalization_settings
-    #   Settings for Audio Normalization
+    #   Advanced audio normalization settings.
     #   @return [Types::AudioNormalizationSettings]
     #
     # @!attribute [rw] audio_source_name
@@ -626,8 +626,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] external_audio_file_input
-    #   Specifies audio data from an external file source. Auto populated
-    #   when Infer External Filename is checked
+    #   Specifies audio data from an external file source.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -1439,6 +1438,7 @@ module Aws::MediaConvert
     #           fragment_time: 1.0,
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
+    #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           null_packet_bitrate: 1.0,
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -1453,12 +1453,14 @@ module Aws::MediaConvert
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #           segmentation_time: 1.0,
+    #           timed_metadata_pid: 1,
     #           transport_stream_id: 1,
     #           video_pid: 1,
     #         },
     #         m3u_8_settings: {
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #           pcr_pid: 1,
@@ -1905,6 +1907,7 @@ module Aws::MediaConvert
     #                       fragment_time: 1.0,
     #                       max_pcr_interval: 1,
     #                       min_ebp_interval: 1,
+    #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       null_packet_bitrate: 1.0,
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -1919,12 +1922,14 @@ module Aws::MediaConvert
     #                       segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #                       segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #                       segmentation_time: 1.0,
+    #                       timed_metadata_pid: 1,
     #                       transport_stream_id: 1,
     #                       video_pid: 1,
     #                     },
     #                     m3u_8_settings: {
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #                       pcr_pid: 1,
@@ -2645,6 +2650,7 @@ module Aws::MediaConvert
     #                       fragment_time: 1.0,
     #                       max_pcr_interval: 1,
     #                       min_ebp_interval: 1,
+    #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       null_packet_bitrate: 1.0,
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -2659,12 +2665,14 @@ module Aws::MediaConvert
     #                       segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #                       segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #                       segmentation_time: 1.0,
+    #                       timed_metadata_pid: 1,
     #                       transport_stream_id: 1,
     #                       video_pid: 1,
     #                     },
     #                     m3u_8_settings: {
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #                       pcr_pid: 1,
@@ -3180,6 +3188,7 @@ module Aws::MediaConvert
     #               fragment_time: 1.0,
     #               max_pcr_interval: 1,
     #               min_ebp_interval: 1,
+    #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               null_packet_bitrate: 1.0,
     #               pat_interval: 1,
     #               pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -3194,12 +3203,14 @@ module Aws::MediaConvert
     #               segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #               segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #               segmentation_time: 1.0,
+    #               timed_metadata_pid: 1,
     #               transport_stream_id: 1,
     #               video_pid: 1,
     #             },
     #             m3u_8_settings: {
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
+    #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               pat_interval: 1,
     #               pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #               pcr_pid: 1,
@@ -4404,7 +4415,7 @@ module Aws::MediaConvert
     # @!attribute [rw] source_file
     #   External caption file used for loading captions. Accepted file
     #   extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and
-    #   'smi'. Auto-populated when Infer External Filename is checked.
+    #   'smi'.
     #   @return [String]
     #
     # @!attribute [rw] time_delta
@@ -6772,6 +6783,7 @@ module Aws::MediaConvert
     #                     fragment_time: 1.0,
     #                     max_pcr_interval: 1,
     #                     min_ebp_interval: 1,
+    #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     null_packet_bitrate: 1.0,
     #                     pat_interval: 1,
     #                     pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -6786,12 +6798,14 @@ module Aws::MediaConvert
     #                     segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #                     segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #                     segmentation_time: 1.0,
+    #                     timed_metadata_pid: 1,
     #                     transport_stream_id: 1,
     #                     video_pid: 1,
     #                   },
     #                   m3u_8_settings: {
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
+    #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     pat_interval: 1,
     #                     pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #                     pcr_pid: 1,
@@ -7170,7 +7184,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] type
     #   A job template can be of two types: system or custom. System or
-    #   built-in job templates can’t be modified or deleted by the user.
+    #   built-in job templates can't be modified or deleted by the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobTemplate AWS API Documentation
@@ -7561,6 +7575,7 @@ module Aws::MediaConvert
     #                     fragment_time: 1.0,
     #                     max_pcr_interval: 1,
     #                     min_ebp_interval: 1,
+    #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     null_packet_bitrate: 1.0,
     #                     pat_interval: 1,
     #                     pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -7575,12 +7590,14 @@ module Aws::MediaConvert
     #                     segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #                     segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #                     segmentation_time: 1.0,
+    #                     timed_metadata_pid: 1,
     #                     transport_stream_id: 1,
     #                     video_pid: 1,
     #                   },
     #                   m3u_8_settings: {
     #                     audio_frames_per_pes: 1,
     #                     audio_pids: [1],
+    #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                     pat_interval: 1,
     #                     pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #                     pcr_pid: 1,
@@ -8237,6 +8254,7 @@ module Aws::MediaConvert
     #         fragment_time: 1.0,
     #         max_pcr_interval: 1,
     #         min_ebp_interval: 1,
+    #         nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #         null_packet_bitrate: 1.0,
     #         pat_interval: 1,
     #         pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -8251,6 +8269,7 @@ module Aws::MediaConvert
     #         segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #         segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #         segmentation_time: 1.0,
+    #         timed_metadata_pid: 1,
     #         transport_stream_id: 1,
     #         video_pid: 1,
     #       }
@@ -8267,8 +8286,7 @@ module Aws::MediaConvert
     # @!attribute [rw] audio_pids
     #   Packet Identifier (PID) of the elementary audio stream(s) in the
     #   transport stream. Multiple values are accepted, and can be entered
-    #   in ranges and/or by comma separation. Can be entered as decimal or
-    #   hexadecimal values.
+    #   in ranges and/or by comma separation.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] bitrate
@@ -8297,8 +8315,7 @@ module Aws::MediaConvert
     # @!attribute [rw] dvb_sub_pids
     #   Packet Identifier (PID) for input source DVB Subtitle data to this
     #   output. Multiple values are accepted, and can be entered in ranges
-    #   and/or by comma separation. Can be entered as decimal or hexadecimal
-    #   values.
+    #   and/or by comma separation.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] dvb_tdt_settings
@@ -8308,7 +8325,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] dvb_teletext_pid
     #   Packet Identifier (PID) for input source DVB Teletext data to this
-    #   output. Can be entered as a decimal or hexadecimal value.
+    #   output.
     #   @return [Integer]
     #
     # @!attribute [rw] ebp_audio_interval
@@ -8350,6 +8367,12 @@ module Aws::MediaConvert
     #   to create sufficient latency to make the lookahead accurate.
     #   @return [Integer]
     #
+    # @!attribute [rw] nielsen_id_3
+    #   If INSERT, Nielsen inaudible tones for media tracking will be
+    #   detected in the input audio and an equivalent ID3 tag will be
+    #   inserted in the output.
+    #   @return [String]
+    #
     # @!attribute [rw] null_packet_bitrate
     #   Value in bits per second of extra null packets to insert into the
     #   transport stream. This can be used if a downstream encryption system
@@ -8371,8 +8394,7 @@ module Aws::MediaConvert
     # @!attribute [rw] pcr_pid
     #   Packet Identifier (PID) of the Program Clock Reference (PCR) in the
     #   transport stream. When no value is given, the encoder will assign
-    #   the same value as the Video PID. Can be entered as a decimal or
-    #   hexadecimal value.
+    #   the same value as the Video PID.
     #   @return [Integer]
     #
     # @!attribute [rw] pmt_interval
@@ -8382,12 +8404,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] pmt_pid
     #   Packet Identifier (PID) for the Program Map Table (PMT) in the
-    #   transport stream. Can be entered as a decimal or hexadecimal value.
+    #   transport stream.
     #   @return [Integer]
     #
     # @!attribute [rw] private_metadata_pid
     #   Packet Identifier (PID) of the private metadata stream in the
-    #   transport stream. Can be entered as a decimal or hexadecimal value.
+    #   transport stream.
     #   @return [Integer]
     #
     # @!attribute [rw] program_number
@@ -8403,13 +8425,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] scte_35_pid
     #   Packet Identifier (PID) of the SCTE-35 stream in the transport
-    #   stream. Can be entered as a decimal or hexadecimal value.
+    #   stream.
     #   @return [Integer]
     #
     # @!attribute [rw] scte_35_source
     #   Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35
-    #   signals from input to output. This is only available for certain
-    #   containers.
+    #   signals from input to output.
     #   @return [String]
     #
     # @!attribute [rw] segmentation_markers
@@ -8445,13 +8466,18 @@ module Aws::MediaConvert
     #   set to \_none\_.
     #   @return [Float]
     #
+    # @!attribute [rw] timed_metadata_pid
+    #   Packet Identifier (PID) of the timed metadata stream in the
+    #   transport stream.
+    #   @return [Integer]
+    #
     # @!attribute [rw] transport_stream_id
     #   The value of the transport stream ID field in the Program Map Table.
     #   @return [Integer]
     #
     # @!attribute [rw] video_pid
     #   Packet Identifier (PID) of the elementary video stream in the
-    #   transport stream. Can be entered as a decimal or hexadecimal value.
+    #   transport stream.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M2tsSettings AWS API Documentation
@@ -8473,6 +8499,7 @@ module Aws::MediaConvert
       :fragment_time,
       :max_pcr_interval,
       :min_ebp_interval,
+      :nielsen_id_3,
       :null_packet_bitrate,
       :pat_interval,
       :pcr_control,
@@ -8487,6 +8514,7 @@ module Aws::MediaConvert
       :segmentation_markers,
       :segmentation_style,
       :segmentation_time,
+      :timed_metadata_pid,
       :transport_stream_id,
       :video_pid)
       include Aws::Structure
@@ -8500,6 +8528,7 @@ module Aws::MediaConvert
     #       {
     #         audio_frames_per_pes: 1,
     #         audio_pids: [1],
+    #         nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #         pat_interval: 1,
     #         pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #         pcr_pid: 1,
@@ -8522,9 +8551,14 @@ module Aws::MediaConvert
     # @!attribute [rw] audio_pids
     #   Packet Identifier (PID) of the elementary audio stream(s) in the
     #   transport stream. Multiple values are accepted, and can be entered
-    #   in ranges and/or by comma separation. Can be entered as decimal or
-    #   hexadecimal values.
+    #   in ranges and/or by comma separation.
     #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] nielsen_id_3
+    #   If INSERT, Nielsen inaudible tones for media tracking will be
+    #   detected in the input audio and an equivalent ID3 tag will be
+    #   inserted in the output.
+    #   @return [String]
     #
     # @!attribute [rw] pat_interval
     #   The number of milliseconds between instances of this table in the
@@ -8541,8 +8575,7 @@ module Aws::MediaConvert
     # @!attribute [rw] pcr_pid
     #   Packet Identifier (PID) of the Program Clock Reference (PCR) in the
     #   transport stream. When no value is given, the encoder will assign
-    #   the same value as the Video PID. Can be entered as a decimal or
-    #   hexadecimal value.
+    #   the same value as the Video PID.
     #   @return [Integer]
     #
     # @!attribute [rw] pmt_interval
@@ -8552,12 +8585,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] pmt_pid
     #   Packet Identifier (PID) for the Program Map Table (PMT) in the
-    #   transport stream. Can be entered as a decimal or hexadecimal value.
+    #   transport stream.
     #   @return [Integer]
     #
     # @!attribute [rw] private_metadata_pid
     #   Packet Identifier (PID) of the private metadata stream in the
-    #   transport stream. Can be entered as a decimal or hexadecimal value.
+    #   transport stream.
     #   @return [Integer]
     #
     # @!attribute [rw] program_number
@@ -8566,24 +8599,22 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] scte_35_pid
     #   Packet Identifier (PID) of the SCTE-35 stream in the transport
-    #   stream. Can be entered as a decimal or hexadecimal value.
+    #   stream.
     #   @return [Integer]
     #
     # @!attribute [rw] scte_35_source
     #   Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35
-    #   signals from input to output. This is only available for certain
-    #   containers.
+    #   signals from input to output.
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata
     #   If PASSTHROUGH, inserts ID3 timed metadata from the timed\_metadata
-    #   REST command into this output. Only available for certain
-    #   containers.
+    #   REST command into this output.
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata_pid
     #   Packet Identifier (PID) of the timed metadata stream in the
-    #   transport stream. Can be entered as a decimal or hexadecimal value.
+    #   transport stream.
     #   @return [Integer]
     #
     # @!attribute [rw] transport_stream_id
@@ -8592,7 +8623,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] video_pid
     #   Packet Identifier (PID) of the elementary video stream in the
-    #   transport stream. Can be entered as a decimal or hexadecimal value.
+    #   transport stream.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/M3u8Settings AWS API Documentation
@@ -8600,6 +8631,7 @@ module Aws::MediaConvert
     class M3u8Settings < Struct.new(
       :audio_frames_per_pes,
       :audio_pids,
+      :nielsen_id_3,
       :pat_interval,
       :pcr_control,
       :pcr_pid,
@@ -9407,6 +9439,7 @@ module Aws::MediaConvert
     #             fragment_time: 1.0,
     #             max_pcr_interval: 1,
     #             min_ebp_interval: 1,
+    #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             null_packet_bitrate: 1.0,
     #             pat_interval: 1,
     #             pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -9421,12 +9454,14 @@ module Aws::MediaConvert
     #             segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #             segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #             segmentation_time: 1.0,
+    #             timed_metadata_pid: 1,
     #             transport_stream_id: 1,
     #             video_pid: 1,
     #           },
     #           m3u_8_settings: {
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
+    #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             pat_interval: 1,
     #             pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #             pcr_pid: 1,
@@ -9717,10 +9752,11 @@ module Aws::MediaConvert
     #   Use Name modifier (NameModifier) to have the service add a string to
     #   the end of each output filename. You specify the base filename as
     #   part of your destination URI. When you create multiple outputs in
-    #   the same output group, Name modifier is required. Name modifier also
-    #   accepts format identifiers. For DASH ISO outputs, if you use the
-    #   format identifiers $Number$ or $Time$ in one output, you must use
-    #   them in the same way in all outputs of the output group.
+    #   the same output group, Name modifier (NameModifier) is required.
+    #   Name modifier also accepts format identifiers. For DASH ISO outputs,
+    #   if you use the format identifiers $Number$ or $Time$ in one output,
+    #   you must use them in the same way in all outputs of the output
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] output_settings
@@ -10063,6 +10099,7 @@ module Aws::MediaConvert
     #                 fragment_time: 1.0,
     #                 max_pcr_interval: 1,
     #                 min_ebp_interval: 1,
+    #                 nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                 null_packet_bitrate: 1.0,
     #                 pat_interval: 1,
     #                 pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -10077,12 +10114,14 @@ module Aws::MediaConvert
     #                 segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #                 segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #                 segmentation_time: 1.0,
+    #                 timed_metadata_pid: 1,
     #                 transport_stream_id: 1,
     #                 video_pid: 1,
     #               },
     #               m3u_8_settings: {
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: [1],
+    #                 nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                 pat_interval: 1,
     #                 pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #                 pcr_pid: 1,
@@ -10573,7 +10612,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] type
     #   A preset can be of two types: system or custom. System or built-in
-    #   preset can’t be modified or deleted by the user.
+    #   preset can't be modified or deleted by the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Preset AWS API Documentation
@@ -10774,6 +10813,7 @@ module Aws::MediaConvert
     #             fragment_time: 1.0,
     #             max_pcr_interval: 1,
     #             min_ebp_interval: 1,
+    #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             null_packet_bitrate: 1.0,
     #             pat_interval: 1,
     #             pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -10788,12 +10828,14 @@ module Aws::MediaConvert
     #             segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #             segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #             segmentation_time: 1.0,
+    #             timed_metadata_pid: 1,
     #             transport_stream_id: 1,
     #             video_pid: 1,
     #           },
     #           m3u_8_settings: {
     #             audio_frames_per_pes: 1,
     #             audio_pids: [1],
+    #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #             pat_interval: 1,
     #             pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #             pcr_pid: 1,
@@ -11218,7 +11260,7 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] type
     #   A queue can be of two types: system or custom. System or built-in
-    #   queues can’t be modified or deleted by the user.
+    #   queues can't be modified or deleted by the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Queue AWS API Documentation
@@ -11638,7 +11680,8 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Settings for TTML caption output
+    # Settings specific to TTML caption outputs, including Pass style
+    # information (TtmlStylePassthrough).
     #
     # @note When making an API call, you may pass TtmlDestinationSettings
     #   data as a hash:
@@ -12038,6 +12081,7 @@ module Aws::MediaConvert
     #                       fragment_time: 1.0,
     #                       max_pcr_interval: 1,
     #                       min_ebp_interval: 1,
+    #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       null_packet_bitrate: 1.0,
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -12052,12 +12096,14 @@ module Aws::MediaConvert
     #                       segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #                       segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #                       segmentation_time: 1.0,
+    #                       timed_metadata_pid: 1,
     #                       transport_stream_id: 1,
     #                       video_pid: 1,
     #                     },
     #                     m3u_8_settings: {
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: [1],
+    #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                       pat_interval: 1,
     #                       pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #                       pcr_pid: 1,
@@ -12573,6 +12619,7 @@ module Aws::MediaConvert
     #               fragment_time: 1.0,
     #               max_pcr_interval: 1,
     #               min_ebp_interval: 1,
+    #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               null_packet_bitrate: 1.0,
     #               pat_interval: 1,
     #               pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -12587,12 +12634,14 @@ module Aws::MediaConvert
     #               segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #               segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #               segmentation_time: 1.0,
+    #               timed_metadata_pid: 1,
     #               transport_stream_id: 1,
     #               video_pid: 1,
     #             },
     #             m3u_8_settings: {
     #               audio_frames_per_pes: 1,
     #               audio_pids: [1],
+    #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #               pat_interval: 1,
     #               pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #               pcr_pid: 1,

@@ -577,6 +577,7 @@ module Aws::MediaConvert
     #                   fragment_time: 1.0,
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
+    #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   null_packet_bitrate: 1.0,
     #                   pat_interval: 1,
     #                   pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -591,12 +592,14 @@ module Aws::MediaConvert
     #                   segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #                   segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #                   segmentation_time: 1.0,
+    #                   timed_metadata_pid: 1,
     #                   transport_stream_id: 1,
     #                   video_pid: 1,
     #                 },
     #                 m3u_8_settings: {
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: [1],
+    #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   pat_interval: 1,
     #                   pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #                   pcr_pid: 1,
@@ -1149,6 +1152,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -1163,11 +1167,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -1798,6 +1804,7 @@ module Aws::MediaConvert
     #                   fragment_time: 1.0,
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
+    #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   null_packet_bitrate: 1.0,
     #                   pat_interval: 1,
     #                   pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -1812,12 +1819,14 @@ module Aws::MediaConvert
     #                   segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #                   segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #                   segmentation_time: 1.0,
+    #                   timed_metadata_pid: 1,
     #                   transport_stream_id: 1,
     #                   video_pid: 1,
     #                 },
     #                 m3u_8_settings: {
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: [1],
+    #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   pat_interval: 1,
     #                   pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #                   pcr_pid: 1,
@@ -2360,6 +2369,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -2374,11 +2384,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -2810,6 +2822,7 @@ module Aws::MediaConvert
     #           fragment_time: 1.0,
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
+    #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           null_packet_bitrate: 1.0,
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -2824,12 +2837,14 @@ module Aws::MediaConvert
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #           segmentation_time: 1.0,
+    #           timed_metadata_pid: 1,
     #           transport_stream_id: 1,
     #           video_pid: 1,
     #         },
     #         m3u_8_settings: {
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #           pcr_pid: 1,
@@ -3216,6 +3231,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.preset.settings.container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -3230,11 +3246,13 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.preset.settings.container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.preset.settings.container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -3876,6 +3894,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -3890,11 +3909,13 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -4405,6 +4426,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -4419,11 +4441,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -4803,6 +4827,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.preset.settings.container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -4817,11 +4842,13 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.preset.settings.container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.preset.settings.container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -5374,6 +5401,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -5388,11 +5416,13 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -5933,6 +5963,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -5947,11 +5978,13 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -6366,6 +6399,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.presets[0].settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.presets[0].settings.container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.presets[0].settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -6380,11 +6414,13 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.presets[0].settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.presets[0].settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.presets[0].settings.container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.presets[0].settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.presets[0].settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -7049,6 +7085,7 @@ module Aws::MediaConvert
     #                   fragment_time: 1.0,
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
+    #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   null_packet_bitrate: 1.0,
     #                   pat_interval: 1,
     #                   pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -7063,12 +7100,14 @@ module Aws::MediaConvert
     #                   segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #                   segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #                   segmentation_time: 1.0,
+    #                   timed_metadata_pid: 1,
     #                   transport_stream_id: 1,
     #                   video_pid: 1,
     #                 },
     #                 m3u_8_settings: {
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: [1],
+    #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #                   pat_interval: 1,
     #                   pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #                   pcr_pid: 1,
@@ -7611,6 +7650,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -7625,11 +7665,13 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -8059,6 +8101,7 @@ module Aws::MediaConvert
     #           fragment_time: 1.0,
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
+    #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           null_packet_bitrate: 1.0,
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
@@ -8073,12 +8116,14 @@ module Aws::MediaConvert
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #           segmentation_time: 1.0,
+    #           timed_metadata_pid: 1,
     #           transport_stream_id: 1,
     #           video_pid: 1,
     #         },
     #         m3u_8_settings: {
     #           audio_frames_per_pes: 1,
     #           audio_pids: [1],
+    #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
     #           pat_interval: 1,
     #           pcr_control: "PCR_EVERY_PES_PACKET", # accepts PCR_EVERY_PES_PACKET, CONFIGURED_PCR_PERIOD
     #           pcr_pid: 1,
@@ -8465,6 +8510,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
+    #   resp.preset.settings.container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.null_packet_bitrate #=> Float
     #   resp.preset.settings.container_settings.m2ts_settings.pat_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
@@ -8479,11 +8525,13 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_time #=> Float
+    #   resp.preset.settings.container_settings.m2ts_settings.timed_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.transport_stream_id #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.video_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_frames_per_pes #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids #=> Array
     #   resp.preset.settings.container_settings.m3u_8_settings.audio_pids[0] #=> Integer
+    #   resp.preset.settings.container_settings.m3u_8_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.pat_interval #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pcr_control #=> String, one of "PCR_EVERY_PES_PACKET", "CONFIGURED_PCR_PERIOD"
     #   resp.preset.settings.container_settings.m3u_8_settings.pcr_pid #=> Integer
@@ -8752,7 +8800,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
