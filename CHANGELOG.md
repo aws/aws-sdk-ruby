@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.133 (2018-02-15)
+------------------
+
 * Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
 
 * Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
