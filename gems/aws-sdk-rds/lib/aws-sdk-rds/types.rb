@@ -2730,11 +2730,6 @@ module Aws::RDS
     #   support for the replica. Creating your Read Replica as a Multi-AZ DB
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
-    #
-    #   <note markdown="1"> Currently, you can't create PostgreSQL Read Replicas as Multi-AZ DB
-    #   instances.
-    #
-    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -4189,6 +4184,11 @@ module Aws::RDS
     #   the log types specified by ExportableLogTypes to CloudWatch Logs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_read_replica
+    #   Indicates whether the database engine version supports read
+    #   replicas.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -4202,7 +4202,8 @@ module Aws::RDS
       :valid_upgrade_target,
       :supported_timezones,
       :exportable_log_types,
-      :supports_log_exports_to_cloudwatch_logs)
+      :supports_log_exports_to_cloudwatch_logs,
+      :supports_read_replica)
       include Aws::Structure
     end
 

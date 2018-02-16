@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.8.1 (2018-02-16)
+------------------
+
 * Issue - Enhance S3 Multipart Downloader performance #1709
 
 * Issue - Fix Ruby 2.5 warnings.

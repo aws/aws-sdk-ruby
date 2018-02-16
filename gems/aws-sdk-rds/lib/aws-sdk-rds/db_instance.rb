@@ -1532,11 +1532,6 @@ module Aws::RDS
     #   support for the replica. Creating your Read Replica as a Multi-AZ DB
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
-    #
-    #   <note markdown="1"> Currently, you can't create PostgreSQL Read Replicas as Multi-AZ DB
-    #   instances.
-    #
-    #    </note>
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
     #   Read Replica during the maintenance window.
