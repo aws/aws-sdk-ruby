@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.0 (2018-02-19)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API for AWS Config.
 
 2.10.134 (2018-02-16)
