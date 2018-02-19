@@ -21,6 +21,48 @@ module Aws
 
     end
 
+        describe 'disable flag' do
+      let(:env) {{}}
+
+      before(:each) do
+        stub_const('ENV', env)
+      end
+
+      it 'does not attempt to get credentials when disable flag set' do
+        env["AWS_EC2_METADATA_DISABLED"] = "true"
+        expect(InstanceProfileCredentials.new.set?).to be(false)
+      end
+
+      it 'has a disable flag which is not case sensitive' do
+        env["AWS_EC2_METADATA_DISABLED"] = "TrUe"
+        expect(InstanceProfileCredentials.new.set?).to be(false)
+      end
+
+      it 'ignores values other than true for the disable flag' do
+        env["AWS_EC2_METADATA_DISABLED"] = "1"
+        expiration = Time.now.utc + 3600
+        resp = <<-JSON.strip
+{
+  "Code" : "Success",
+  "LastUpdated" : "2013-11-22T20:03:48Z",
+  "Type" : "AWS-HMAC",
+  "AccessKeyId" : "akid",
+  "SecretAccessKey" : "secret",
+  "Token" : "session-token",
+  "Expiration" : "#{expiration.strftime('%Y-%m-%dT%H:%M:%SZ')}"
+}
+               JSON
+        stub_request(:get, "http://169.254.169.254#{path}").
+          to_return(:status => 200, :body => "profile-name\n")
+        stub_request(:get, "http://169.254.169.254#{path}profile-name").
+          to_return(:status => 200, :body => resp)
+        c = InstanceProfileCredentials.new(backoff:0)
+        expect(c.credentials.access_key_id).to eq('akid')
+        expect(c.credentials.secret_access_key).to eq('secret')
+        expect(c.credentials.session_token).to eq('session-token')
+      end
+    end
+
     describe 'with instance metadata service present' do
 
       let(:expiration) { Time.now.utc + 3600 }
