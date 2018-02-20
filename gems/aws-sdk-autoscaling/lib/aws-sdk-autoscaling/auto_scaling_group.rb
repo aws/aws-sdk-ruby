@@ -168,6 +168,13 @@ module Aws::AutoScaling
       data[:new_instances_protected_from_scale_in]
     end
 
+    # The Amazon Resource Name (ARN) of the service-linked role that the
+    # Auto Scaling group uses to call other AWS services on your behalf.
+    # @return [String]
+    def service_linked_role_arn
+      data[:service_linked_role_arn]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -372,7 +379,7 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances. You can specify up to 20 instances.
     # @return [EmptyStructure]
     def attach_instances(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -406,10 +413,10 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances. You can specify up to 20 instances.
     # @option options [required, Boolean] :should_decrement_desired_capacity
-    #   If `True`, the Auto Scaling group decrements the desired capacity
-    #   value by the number of instances detached.
+    #   Indicates whether the Auto Scaling group decrements the desired
+    #   capacity value by the number of instances detached.
     # @return [Activity::Collection]
     def detach_instances(options = {})
       batch = []
@@ -714,11 +721,10 @@ module Aws::AutoScaling
     #   The number of EC2 instances that should be running in the Auto Scaling
     #   group.
     # @option options [Boolean] :honor_cooldown
-    #   By default, `SetDesiredCapacity` overrides any cooldown period
-    #   associated with the Auto Scaling group. Specify `True` to make Auto
-    #   Scaling to wait for the cool-down period associated with the Auto
-    #   Scaling group to complete before initiating a scaling activity to set
-    #   your Auto Scaling group to its new capacity.
+    #   Indicates whether Auto Scaling waits for the cooldown period to
+    #   complete before initiating a scaling activity to set your Auto Scaling
+    #   group to its new capacity. By default, Auto Scaling does not honor the
+    #   cooldown period during manual scaling activities.
     # @return [EmptyStructure]
     def set_desired_capacity(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -778,14 +784,15 @@ module Aws::AutoScaling
     #     vpc_zone_identifier: "XmlStringMaxLen2047",
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
+    #     service_linked_role_arn: "ResourceName",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
-    #   The name of the launch configuration. You must specify either a launch
-    #   configuration or a launch template.
+    #   The name of the launch configuration. If you specify a launch
+    #   configuration, you can't specify a launch template.
     # @option options [Types::LaunchTemplateSpecification] :launch_template
-    #   The launch template to use to specify the updates. You must specify a
-    #   launch configuration or a launch template.
+    #   The launch template to use to specify the updates. If you specify a
+    #   launch template, you can't specify a launch configuration.
     # @option options [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
     # @option options [Integer] :max_size
@@ -856,6 +863,9 @@ module Aws::AutoScaling
     # @option options [Boolean] :new_instances_protected_from_scale_in
     #   Indicates whether newly launched instances are protected from
     #   termination by Auto Scaling when scaling in.
+    # @option options [String] :service_linked_role_arn
+    #   The Amazon Resource Name (ARN) of the service-linked role that the
+    #   Auto Scaling group uses to call other AWS services on your behalf.
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)
@@ -986,7 +996,7 @@ module Aws::AutoScaling
     #   token from a previous call.)
     # @option options [Integer] :max_records
     #   The maximum number of items to return with this call. The default
-    #   value is 50 and the maximum value is 100.
+    #   value is 100 and the maximum value is 100.
     # @return [LoadBalancer::Collection]
     def load_balancers(options = {})
       batches = Enumerator.new do |y|

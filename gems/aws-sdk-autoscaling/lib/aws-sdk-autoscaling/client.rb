@@ -166,7 +166,7 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-instance-asg.html
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances. You can specify up to 20 instances.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -219,7 +219,8 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [required, Array<String>] :target_group_arns
-    #   The Amazon Resource Names (ARN) of the target groups.
+    #   The Amazon Resource Names (ARN) of the target groups. You can specify
+    #   up to 10 target groups.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -272,7 +273,8 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [required, Array<String>] :load_balancer_names
-    #   One or more load balancer names.
+    #   The names of the load balancers. You can specify up to 10 load
+    #   balancers.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -390,16 +392,18 @@ module Aws::AutoScaling
 
     # Creates an Auto Scaling group with the specified name and attributes.
     #
-    # If you exceed your maximum limit of Auto Scaling groups, which by
-    # default is 20 per region, the call fails. For information about
-    # viewing and updating this limit, see DescribeAccountLimits.
+    # If you exceed your maximum limit of Auto Scaling groups, the call
+    # fails. For information about viewing this limit, see
+    # DescribeAccountLimits. For information about updating this limit, see
+    # [Auto Scaling Limits][1] in the *Auto Scaling User Guide*.
     #
-    # For more information, see [Auto Scaling Groups][1] in the *Auto
+    # For more information, see [Auto Scaling Groups][2] in the *Auto
     # Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-account-limits.html
+    # [2]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group. This name must be unique within
@@ -554,6 +558,12 @@ module Aws::AutoScaling
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
     #
+    # @option params [String] :service_linked_role_arn
+    #   The Amazon Resource Name (ARN) of the service-linked role that the
+    #   Auto Scaling group uses to call other AWS services on your behalf. By
+    #   default, Auto Scaling uses a service-linked role named
+    #   AWSServiceRoleForAutoScaling, which it creates if it does not exist.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -649,6 +659,7 @@ module Aws::AutoScaling
     #         propagate_at_launch: false,
     #       },
     #     ],
+    #     service_linked_role_arn: "ResourceName",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup AWS API Documentation
@@ -662,16 +673,18 @@ module Aws::AutoScaling
 
     # Creates a launch configuration.
     #
-    # If you exceed your maximum limit of launch configurations, which by
-    # default is 100 per region, the call fails. For information about
-    # viewing and updating this limit, see DescribeAccountLimits.
+    # If you exceed your maximum limit of launch configurations, the call
+    # fails. For information about viewing this limit, see
+    # DescribeAccountLimits. For information about updating this limit, see
+    # [Auto Scaling Limits][1] in the *Auto Scaling User Guide*.
     #
-    # For more information, see [Launch Configurations][1] in the *Auto
+    # For more information, see [Launch Configurations][2] in the *Auto
     # Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/LaunchConfiguration.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-account-limits.html
+    # [2]: http://docs.aws.amazon.com/autoscaling/latest/userguide/LaunchConfiguration.html
     #
     # @option params [required, String] :launch_configuration_name
     #   The name of the launch configuration. This name must be unique within
@@ -844,14 +857,13 @@ module Aws::AutoScaling
     #   when you create your group.
     #
     #   Default: If the instance is launched into a default subnet, the
-    #   default is `true`. If the instance is launched into a nondefault
-    #   subnet, the default is `false`. For more information, see [Supported
-    #   Platforms][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   default is to assign a public IP address. If the instance is launched
+    #   into a nondefault subnet, the default is not to assign a public IP
+    #   address.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #
     # @option params [String] :placement_tenancy
     #   The tenancy of the instance. An instance with a tenancy of `dedicated`
@@ -1302,12 +1314,12 @@ module Aws::AutoScaling
     # Describes the current Auto Scaling resource limits for your AWS
     # account.
     #
-    # For information about requesting an increase in these limits, see [AWS
-    # Service Limits][1] in the *Amazon Web Services General Reference*.
+    # For information about requesting an increase in these limits, see
+    # [Auto Scaling Limits][1] in the *Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-account-limits.html
     #
     # @return [Types::DescribeAccountLimitsAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1523,6 +1535,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].termination_policies #=> Array
     #   resp.auto_scaling_groups[0].termination_policies[0] #=> String
     #   resp.auto_scaling_groups[0].new_instances_protected_from_scale_in #=> Boolean
+    #   resp.auto_scaling_groups[0].service_linked_role_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingGroups AWS API Documentation
@@ -1543,7 +1556,7 @@ module Aws::AutoScaling
     #
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
-    #   value is 50 and the maximum value is 100.
+    #   value is 50 and the maximum value is 50.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -1870,7 +1883,7 @@ module Aws::AutoScaling
     #
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
-    #   value is 50 and the maximum value is 100.
+    #   value is 100 and the maximum value is 100.
     #
     # @return [Types::DescribeLoadBalancerTargetGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1935,7 +1948,7 @@ module Aws::AutoScaling
     #
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
-    #   value is 50 and the maximum value is 100.
+    #   value is 100 and the maximum value is 100.
     #
     # @return [Types::DescribeLoadBalancersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2257,7 +2270,7 @@ module Aws::AutoScaling
     #
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
-    #   value is 100.
+    #   value is 100 and the maximum value is 100.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -2639,14 +2652,14 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances. You can specify up to 20 instances.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #
     # @option params [required, Boolean] :should_decrement_desired_capacity
-    #   If `True`, the Auto Scaling group decrements the desired capacity
-    #   value by the number of instances detached.
+    #   Indicates whether the Auto Scaling group decrements the desired
+    #   capacity value by the number of instances detached.
     #
     # @return [Types::DetachInstancesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2719,7 +2732,8 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [required, Array<String>] :target_group_arns
-    #   The Amazon Resource Names (ARN) of the target groups.
+    #   The Amazon Resource Names (ARN) of the target groups. You can specify
+    #   up to 10 target groups.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2767,7 +2781,8 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [required, Array<String>] :load_balancer_names
-    #   One or more load balancer names.
+    #   The names of the load balancers. You can specify up to 10 load
+    #   balancers.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2928,17 +2943,14 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instances to move into `Standby` mode. You must specify at
-    #   least one instance ID.
+    #   The IDs of the instances. You can specify up to 20 instances.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #
     # @option params [required, Boolean] :should_decrement_desired_capacity
-    #   Specifies whether the instances moved to `Standby` mode count as part
-    #   of the Auto Scaling group's desired capacity. If set, the desired
-    #   capacity for the Auto Scaling group decrements by the number of
-    #   instances moved to `Standby` mode.
+    #   Indicates whether to decrement the desired capacity of the Auto
+    #   Scaling group by the number of instances moved to `Standby` mode.
     #
     # @return [Types::EnterStandbyAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3013,10 +3025,8 @@ module Aws::AutoScaling
     #   The name or ARN of the policy.
     #
     # @option params [Boolean] :honor_cooldown
-    #   If this parameter is true, Auto Scaling waits for the cooldown period
-    #   to complete before executing the policy. Otherwise, Auto Scaling
-    #   executes the policy without waiting for the cooldown period to
-    #   complete.
+    #   Indicates whether Auto Scaling waits for the cooldown period to
+    #   complete before executing the policy.
     #
     #   This parameter is not supported if the policy type is `StepScaling`.
     #
@@ -3088,7 +3098,7 @@ module Aws::AutoScaling
     # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html
     #
     # @option params [Array<String>] :instance_ids
-    #   One or more instance IDs. You must specify at least one instance ID.
+    #   The IDs of the instances. You can specify up to 20 instances.
     #
     # @option params [required, String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
@@ -3775,11 +3785,10 @@ module Aws::AutoScaling
     #   group.
     #
     # @option params [Boolean] :honor_cooldown
-    #   By default, `SetDesiredCapacity` overrides any cooldown period
-    #   associated with the Auto Scaling group. Specify `True` to make Auto
-    #   Scaling to wait for the cool-down period associated with the Auto
-    #   Scaling group to complete before initiating a scaling activity to set
-    #   your Auto Scaling group to its new capacity.
+    #   Indicates whether Auto Scaling waits for the cooldown period to
+    #   complete before initiating a scaling activity to set your Auto Scaling
+    #   group to its new capacity. By default, Auto Scaling does not honor the
+    #   cooldown period during manual scaling activities.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -4008,8 +4017,8 @@ module Aws::AutoScaling
     #   The ID of the instance.
     #
     # @option params [required, Boolean] :should_decrement_desired_capacity
-    #   If `true`, terminating the instance also decrements the size of the
-    #   Auto Scaling group.
+    #   Indicates whether terminating the instance also decrements the size of
+    #   the Auto Scaling group.
     #
     # @return [Types::ActivityType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4085,12 +4094,12 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #
     # @option params [String] :launch_configuration_name
-    #   The name of the launch configuration. You must specify either a launch
-    #   configuration or a launch template.
+    #   The name of the launch configuration. If you specify a launch
+    #   configuration, you can't specify a launch template.
     #
     # @option params [Types::LaunchTemplateSpecification] :launch_template
-    #   The launch template to use to specify the updates. You must specify a
-    #   launch configuration or a launch template.
+    #   The launch template to use to specify the updates. If you specify a
+    #   launch template, you can't specify a launch configuration.
     #
     # @option params [Integer] :min_size
     #   The minimum size of the Auto Scaling group.
@@ -4173,6 +4182,10 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Auto Scaling when scaling in.
     #
+    # @option params [String] :service_linked_role_arn
+    #   The Amazon Resource Name (ARN) of the service-linked role that the
+    #   Auto Scaling group uses to call other AWS services on your behalf.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -4225,6 +4238,7 @@ module Aws::AutoScaling
     #     vpc_zone_identifier: "XmlStringMaxLen2047",
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
+    #     service_linked_role_arn: "ResourceName",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
@@ -4249,7 +4263,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

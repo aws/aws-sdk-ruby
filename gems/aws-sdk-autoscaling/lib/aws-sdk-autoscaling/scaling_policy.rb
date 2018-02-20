@@ -280,10 +280,8 @@ module Aws::AutoScaling
     # @option options [String] :auto_scaling_group_name
     #   The name of the Auto Scaling group.
     # @option options [Boolean] :honor_cooldown
-    #   If this parameter is true, Auto Scaling waits for the cooldown period
-    #   to complete before executing the policy. Otherwise, Auto Scaling
-    #   executes the policy without waiting for the cooldown period to
-    #   complete.
+    #   Indicates whether Auto Scaling waits for the cooldown period to
+    #   complete before executing the policy.
     #
     #   This parameter is not supported if the policy type is `StepScaling`.
     #
