@@ -25,13 +25,17 @@ module Aws
   SERVICE_MODULE_NAMES = %w(
     ACM
     APIGateway
+    AlexaForBusiness
     AppStream
+    AppSync
     ApplicationAutoScaling
     ApplicationDiscoveryService
     Athena
     AutoScaling
+    AutoScalingPlans
     Batch
     Budgets
+    Cloud9
     CloudDirectory
     CloudFormation
     CloudFront
@@ -51,7 +55,9 @@ module Aws
     CognitoIdentity
     CognitoIdentityProvider
     CognitoSync
+    Comprehend
     ConfigService
+    CostExplorer
     CostandUsageReportService
     DAX
     DataPipeline
@@ -77,25 +83,36 @@ module Aws
     Glacier
     Glue
     Greengrass
+    GuardDuty
     Health
     IAM
     ImportExport
     Inspector
     IoT
     IoTDataPlane
+    IoTJobsDataPlane
     KMS
     Kinesis
     KinesisAnalytics
+    KinesisVideo
+    KinesisVideoArchivedMedia
+    KinesisVideoMedia
     Lambda
     LambdaPreview
     Lex
     LexModelBuildingService
     Lightsail
+    MQ
     MTurk
     MachineLearning
     MarketplaceCommerceAnalytics
     MarketplaceEntitlementService
     MarketplaceMetering
+    MediaConvert
+    MediaLive
+    MediaPackage
+    MediaStore
+    MediaStoreData
     MigrationHub
     Mobile
     OpsWorks
@@ -103,9 +120,11 @@ module Aws
     Organizations
     Pinpoint
     Polly
+    Pricing
     RDS
     Redshift
     Rekognition
+    ResourceGroups
     ResourceGroupsTaggingAPI
     Route53
     Route53Domains
@@ -117,16 +136,23 @@ module Aws
     SSM
     STS
     SWF
+    SageMaker
+    SageMakerRuntime
+    ServerlessApplicationRepository
     ServiceCatalog
+    ServiceDiscovery
     Shield
     SimpleDB
     Snowball
     States
     StorageGateway
     Support
+    TranscribeService
+    Translate
     WAF
     WAFRegional
     WorkDocs
+    WorkMail
     WorkSpaces
     XRay
   )

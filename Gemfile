@@ -27,7 +27,6 @@ gem 'oga'
 
 group :test do
   gem 'rspec'
-  gem 'cucumber'
   if RUBY_VERSION == '1.9.3'
     # webmock dropped support for Ruby 1.9.3 after version 2.2.0
     gem 'webmock', '2.2.0'
@@ -37,9 +36,12 @@ group :test do
     gem 'addressable', '2.4.0'
     # oj drop support for Ruby under 2.0 since 3.3.5
     gem 'oj', '<= 3.3.4'
+    # cucumber drop support for Ruby under 2.0 after 3.0.0
+    gem 'cucumber', '3.0.0'
   else
     gem 'webmock'
     gem 'addressable'
+    gem 'cucumber'
   end
   gem 'simplecov', require: false
   gem 'coveralls', require: false if RUBY_VERSION > '1.9.3'

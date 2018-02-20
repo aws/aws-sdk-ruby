@@ -7,9 +7,17 @@
     "models": "apigateway/2015-07-09",
     "endpoint": "apigateway"
   },
+  "AlexaForBusiness": {
+    "models": "alexaforbusiness/2017-11-09",
+    "endpoint": "a4b"
+  },
   "AppStream": {
     "models": "appstream/2016-12-01",
     "endpoint": "appstream2"
+  },
+  "AppSync": {
+    "models": "appsync/2017-07-25",
+    "endpoint": "appsync"
   },
   "ApplicationAutoScaling": {
     "models": "application-autoscaling/2016-02-06",
@@ -27,6 +35,10 @@
     "models": "autoscaling/2011-01-01",
     "endpoint": "autoscaling"
   },
+  "AutoScalingPlans": {
+    "models": "autoscaling-plans/2018-01-06",
+    "endpoint": "autoscaling"
+  },
   "Batch": {
     "models": "batch/2016-08-10",
     "endpoint": "batch"
@@ -34,6 +46,10 @@
   "Budgets": {
     "models": "budgets/2016-10-20",
     "endpoint": "budgets"
+  },
+  "Cloud9": {
+    "models": "cloud9/2017-09-23",
+    "endpoint": "cloud9"
   },
   "CloudDirectory": {
     "models": "clouddirectory/2016-05-10",
@@ -110,9 +126,17 @@
     "models": "cognito-sync/2014-06-30",
     "endpoint": "cognito-sync"
   },
+  "Comprehend": {
+    "models": "comprehend/2017-11-27",
+    "endpoint": "comprehend"
+  },
   "ConfigService": {
     "models": "config/2014-11-12",
     "endpoint": "config"
+  },
+  "CostExplorer": {
+    "models": "ce/2017-10-25",
+    "endpoint": "ce"
   },
   "CostandUsageReportService": {
     "models": "cur/2017-01-06",
@@ -214,6 +238,10 @@
     "models": "greengrass/2017-06-07",
     "endpoint": "greengrass"
   },
+  "GuardDuty": {
+    "models": "guardduty/2017-11-28",
+    "endpoint": "guardduty"
+  },
   "Health": {
     "models": "health/2016-08-04",
     "endpoint": "health"
@@ -238,6 +266,10 @@
     "models": "iot-data/2015-05-28",
     "endpoint": "data.iot"
   },
+  "IoTJobsDataPlane": {
+    "models": "iot-jobs-data/2017-09-29",
+    "endpoint": "data.jobs.iot"
+  },
   "KMS": {
     "models": "kms/2014-11-01",
     "endpoint": "kms"
@@ -249,6 +281,18 @@
   "KinesisAnalytics": {
     "models": "kinesisanalytics/2015-08-14",
     "endpoint": "kinesisanalytics"
+  },
+  "KinesisVideo": {
+    "models": "kinesisvideo/2017-09-30",
+    "endpoint": "kinesisvideo"
+  },
+  "KinesisVideoArchivedMedia": {
+    "models": "kinesis-video-archived-media/2017-09-30",
+    "endpoint": "kinesisvideo"
+  },
+  "KinesisVideoMedia": {
+    "models": "kinesis-video-media/2017-09-30",
+    "endpoint": "kinesisvideo"
   },
   "Lambda": {
     "models": "lambda/2015-03-31",
@@ -270,6 +314,10 @@
     "models": "lightsail/2016-11-28",
     "endpoint": "lightsail"
   },
+  "MQ": {
+    "models": "mq/2017-11-27",
+    "endpoint": "mq"
+  },
   "MTurk": {
     "models": "mturk-requester/2017-01-17",
     "endpoint": "mturk-requester"
@@ -289,6 +337,26 @@
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14",
     "endpoint": "metering.marketplace"
+  },
+  "MediaConvert": {
+    "models": "mediaconvert/2017-08-29",
+    "endpoint": "mediaconvert"
+  },
+  "MediaLive": {
+    "models": "medialive/2017-10-14",
+    "endpoint": "medialive"
+  },
+  "MediaPackage": {
+    "models": "mediapackage/2017-10-12",
+    "endpoint": "mediapackage"
+  },
+  "MediaStore": {
+    "models": "mediastore/2017-09-01",
+    "endpoint": "mediastore"
+  },
+  "MediaStoreData": {
+    "models": "mediastore-data/2017-09-01",
+    "endpoint": "data.mediastore"
   },
   "MigrationHub": {
     "models": "AWSMigrationHub/2017-05-31",
@@ -318,6 +386,10 @@
     "models": "polly/2016-06-10",
     "endpoint": "polly"
   },
+  "Pricing": {
+    "models": "pricing/2017-10-15",
+    "endpoint": "api.pricing"
+  },
   "RDS": {
     "models": "rds/2014-10-31",
     "endpoint": "rds"
@@ -329,6 +401,10 @@
   "Rekognition": {
     "models": "rekognition/2016-06-27",
     "endpoint": "rekognition"
+  },
+  "ResourceGroups": {
+    "models": "resource-groups/2017-11-27",
+    "endpoint": "resource-groups"
   },
   "ResourceGroupsTaggingAPI": {
     "models": "resourcegroupstaggingapi/2017-01-26",
@@ -374,9 +450,25 @@
     "models": "swf/2012-01-25",
     "endpoint": "swf"
   },
+  "SageMaker": {
+    "models": "sagemaker/2017-07-24",
+    "endpoint": "sagemaker"
+  },
+  "SageMakerRuntime": {
+    "models": "runtime.sagemaker/2017-05-13",
+    "endpoint": "runtime.sagemaker"
+  },
+  "ServerlessApplicationRepository": {
+    "models": "serverlessrepo/2017-09-08",
+    "endpoint": "serverlessrepo"
+  },
   "ServiceCatalog": {
     "models": "servicecatalog/2015-12-10",
     "endpoint": "servicecatalog"
+  },
+  "ServiceDiscovery": {
+    "models": "servicediscovery/2017-03-14",
+    "endpoint": "servicediscovery"
   },
   "Shield": {
     "models": "shield/2016-06-02",
@@ -402,6 +494,14 @@
     "models": "support/2013-04-15",
     "endpoint": "support"
   },
+  "TranscribeService": {
+    "models": "transcribe/2017-10-26",
+    "endpoint": "transcribe"
+  },
+  "Translate": {
+    "models": "translate/2017-07-01",
+    "endpoint": "translate"
+  },
   "WAF": {
     "models": "waf/2015-08-24",
     "endpoint": "waf"
@@ -413,6 +513,10 @@
   "WorkDocs": {
     "models": "workdocs/2016-05-01",
     "endpoint": "workdocs"
+  },
+  "WorkMail": {
+    "models": "workmail/2017-10-01",
+    "endpoint": "workmail"
   },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08",

@@ -1,41 +1,44 @@
 {
   "version": "2.0",
-  "service": "Defines service operations used by the GlueFrontendService",
+  "service": "<fullname>AWS Glue</fullname> <p>Defines the public endpoint for the AWS Glue service.</p>",
   "operations": {
     "BatchCreatePartition": "<p>Creates one or more partitions in a batch operation.</p>",
     "BatchDeleteConnection": "<p>Deletes a list of connection definitions from the Data Catalog.</p>",
     "BatchDeletePartition": "<p>Deletes one or more partitions in a batch operation.</p>",
     "BatchDeleteTable": "<p>Deletes multiple tables at once.</p>",
+    "BatchDeleteTableVersion": "<p>Deletes a specified batch of versions of a table.</p>",
     "BatchGetPartition": "<p>Retrieves partitions in a batch request.</p>",
-    "CreateClassifier": "<p>Creates a <code>Classifier</code> in the user's account.</p>",
+    "BatchStopJobRun": "<p>Stops one or more job runs for a specified Job.</p>",
+    "CreateClassifier": "<p>Creates a classifier in the user's account. This may be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, or abbrev <code>JsonClassifier</code>, depending on which field of the request is present.</p>",
     "CreateConnection": "<p>Creates a connection definition in the Data Catalog.</p>",
-    "CreateCrawler": "<p>Creates a new <code>Crawler</code> with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the <i>s3Targets</i> or the <i>jdbcTargets</i> field.</p>",
+    "CreateCrawler": "<p>Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the <i>s3Targets</i> or the <i>jdbcTargets</i> field.</p>",
     "CreateDatabase": "<p>Creates a new database in a Data Catalog.</p>",
     "CreateDevEndpoint": "<p>Creates a new DevEndpoint.</p>",
     "CreateJob": "<p>Creates a new job.</p>",
     "CreatePartition": "<p>Creates a new partition.</p>",
-    "CreateScript": "<p>Transforms a directed acyclic graph (DAG) into a Python script.</p>",
+    "CreateScript": "<p>Transforms a directed acyclic graph (DAG) into code.</p>",
     "CreateTable": "<p>Creates a new table definition in the Data Catalog.</p>",
     "CreateTrigger": "<p>Creates a new trigger.</p>",
     "CreateUserDefinedFunction": "<p>Creates a new function definition in the Data Catalog.</p>",
-    "DeleteClassifier": "<p>Removes a <code>Classifier</code> from the metadata store.</p>",
+    "DeleteClassifier": "<p>Removes a classifier from the Data Catalog.</p>",
     "DeleteConnection": "<p>Deletes a connection from the Data Catalog.</p>",
-    "DeleteCrawler": "<p>Removes a specified <code>Crawler</code> from the metadata store, unless the <code>Crawler</code> state is <code>RUNNING</code>.</p>",
+    "DeleteCrawler": "<p>Removes a specified crawler from the Data Catalog, unless the crawler state is <code>RUNNING</code>.</p>",
     "DeleteDatabase": "<p>Removes a specified Database from a Data Catalog.</p>",
     "DeleteDevEndpoint": "<p>Deletes a specified DevEndpoint.</p>",
-    "DeleteJob": "<p>Deletes a specified job.</p>",
+    "DeleteJob": "<p>Deletes a specified job. If the job is not found, no exception is thrown.</p>",
     "DeletePartition": "<p>Deletes a specified partition.</p>",
     "DeleteTable": "<p>Removes a table definition from the Data Catalog.</p>",
-    "DeleteTrigger": "<p>Deletes a specified trigger.</p>",
+    "DeleteTableVersion": "<p>Deletes a specified version of a table.</p>",
+    "DeleteTrigger": "<p>Deletes a specified trigger. If the trigger is not found, no exception is thrown.</p>",
     "DeleteUserDefinedFunction": "<p>Deletes an existing function definition from the Data Catalog.</p>",
     "GetCatalogImportStatus": "<p>Retrieves the status of a migration operation.</p>",
-    "GetClassifier": "<p>Retrieve a <code>Classifier</code> by name.</p>",
-    "GetClassifiers": "<p>Lists all Classifier objects in the metadata store.</p>",
+    "GetClassifier": "<p>Retrieve a classifier by name.</p>",
+    "GetClassifiers": "<p>Lists all classifier objects in the Data Catalog.</p>",
     "GetConnection": "<p>Retrieves a connection definition from the Data Catalog.</p>",
     "GetConnections": "<p>Retrieves a list of connection definitions from the Data Catalog.</p>",
-    "GetCrawler": "<p>Retrieves metadata for a specified <code>Crawler</code>.</p>",
+    "GetCrawler": "<p>Retrieves metadata for a specified crawler.</p>",
     "GetCrawlerMetrics": "<p>Retrieves metrics about specified crawlers.</p>",
-    "GetCrawlers": "<p>Retrieves metadata for all <code>Crawlers</code> defined in the customer account.</p>",
+    "GetCrawlers": "<p>Retrieves metadata for all crawlers defined in the customer account.</p>",
     "GetDatabase": "<p>Retrieves the definition of a specified database.</p>",
     "GetDatabases": "<p>Retrieves all Databases defined in a given Data Catalog.</p>",
     "GetDataflowGraph": "<p>Transforms a Python script into a directed acyclic graph (DAG). </p>",
@@ -48,8 +51,9 @@
     "GetMapping": "<p>Creates mappings.</p>",
     "GetPartition": "<p>Retrieves information about a specified partition.</p>",
     "GetPartitions": "<p>Retrieves information about the partitions in a table.</p>",
-    "GetPlan": "<p>Gets a Python script to perform a specified mapping.</p>",
+    "GetPlan": "<p>Gets code to perform a specified mapping.</p>",
     "GetTable": "<p>Retrieves the <code>Table</code> definition in a Data Catalog for a specified table.</p>",
+    "GetTableVersion": "<p>Retrieves a specified version of a table.</p>",
     "GetTableVersions": "<p>Retrieves a list of strings that identify available versions of a specified table.</p>",
     "GetTables": "<p>Retrieves the definitions of some or all of the tables in a given <code>Database</code>.</p>",
     "GetTrigger": "<p>Retrieves the definition of a trigger.</p>",
@@ -58,17 +62,17 @@
     "GetUserDefinedFunctions": "<p>Retrieves a multiple function definitions from the Data Catalog.</p>",
     "ImportCatalogToGlue": "<p>Imports an existing Athena Data Catalog to AWS Glue</p>",
     "ResetJobBookmark": "<p>Resets a bookmark entry.</p>",
-    "StartCrawler": "<p>Starts a crawl using the specified <code>Crawler</code>, regardless of what is scheduled. If the <code>Crawler</code> is already running, does nothing.</p>",
+    "StartCrawler": "<p>Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.</p>",
     "StartCrawlerSchedule": "<p>Changes the schedule state of the specified crawler to <code>SCHEDULED</code>, unless the crawler is already running or the schedule state is already <code>SCHEDULED</code>.</p>",
     "StartJobRun": "<p>Runs a job.</p>",
-    "StartTrigger": "<p>Starts an existing trigger.</p>",
-    "StopCrawler": "<p>If the specified <code>Crawler</code> is running, stops the crawl.</p>",
+    "StartTrigger": "<p>Starts an existing trigger. See <a href=\"http://docs.aws.amazon.com/glue/latest/dg/trigger-job.html\">Triggering Jobs</a> for information about how different types of trigger are started.</p>",
+    "StopCrawler": "<p>If the specified crawler is running, stops the crawl.</p>",
     "StopCrawlerSchedule": "<p>Sets the schedule state of the specified crawler to <code>NOT_SCHEDULED</code>, but does not stop the crawler if it is already running.</p>",
     "StopTrigger": "<p>Stops a specified trigger.</p>",
-    "UpdateClassifier": "<p>Modifies an existing <code>Classifier</code>.</p>",
+    "UpdateClassifier": "<p>Modifies an existing classifier (a <code>GrokClassifier</code>, <code>XMLClassifier</code>, or <code>JsonClassifier</code>, depending on which field is present).</p>",
     "UpdateConnection": "<p>Updates a connection definition in the Data Catalog.</p>",
-    "UpdateCrawler": "<p>Updates a <code>Crawler</code>. If a <code>Crawler</code> is running, you must stop it using <code>StopCrawler</code> before updating it.</p>",
-    "UpdateCrawlerSchedule": "<p>Updates the schedule of a crawler using a Cron expression. </p>",
+    "UpdateCrawler": "<p>Updates a crawler. If a crawler is running, you must stop it using <code>StopCrawler</code> before updating it.</p>",
+    "UpdateCrawlerSchedule": "<p>Updates the schedule of a crawler using a <code>cron</code> expression. </p>",
     "UpdateDatabase": "<p>Updates an existing database definition in a Data Catalog.</p>",
     "UpdateDevEndpoint": "<p>Updates a specified DevEndpoint.</p>",
     "UpdateJob": "<p>Updates an existing job definition.</p>",
@@ -84,7 +88,7 @@
       }
     },
     "Action": {
-      "base": null,
+      "base": "<p>Defines an action to be initiated by a trigger.</p>",
       "refs": {
         "ActionList$member": null
       }
@@ -105,7 +109,7 @@
     "AttemptCount": {
       "base": null,
       "refs": {
-        "JobRun$Attempt": "<p>The number or the attempt to run this job.</p>"
+        "JobRun$Attempt": "<p>The number of the attempt to run this job.</p>"
       }
     },
     "BatchCreatePartitionRequest": {
@@ -160,6 +164,22 @@
       "refs": {
       }
     },
+    "BatchDeleteTableVersionList": {
+      "base": null,
+      "refs": {
+        "BatchDeleteTableVersionRequest$VersionIds": "<p>A list of the IDs of versions to be deleted.</p>"
+      }
+    },
+    "BatchDeleteTableVersionRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "BatchDeleteTableVersionResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
     "BatchGetPartitionRequest": {
       "base": null,
       "refs": {
@@ -177,20 +197,67 @@
         "BatchGetPartitionResponse$UnprocessedKeys": "<p>A list of the partition values in the request for which partions were not returned.</p>"
       }
     },
+    "BatchStopJobRunError": {
+      "base": "<p>Records an error that occurred when attempting to stop a specified JobRun.</p>",
+      "refs": {
+        "BatchStopJobRunErrorList$member": null
+      }
+    },
+    "BatchStopJobRunErrorList": {
+      "base": null,
+      "refs": {
+        "BatchStopJobRunResponse$Errors": "<p>A list of the errors that were encountered in tryng to stop JobRuns, including the JobRunId for which each error was encountered and details about the error.</p>"
+      }
+    },
+    "BatchStopJobRunJobRunIdList": {
+      "base": null,
+      "refs": {
+        "BatchStopJobRunRequest$JobRunIds": "<p>A list of the JobRunIds that should be stopped for that Job.</p>"
+      }
+    },
+    "BatchStopJobRunRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "BatchStopJobRunResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "BatchStopJobRunSuccessfulSubmission": {
+      "base": "<p>Records a successful request to stop a specified JobRun.</p>",
+      "refs": {
+        "BatchStopJobRunSuccessfulSubmissionList$member": null
+      }
+    },
+    "BatchStopJobRunSuccessfulSubmissionList": {
+      "base": null,
+      "refs": {
+        "BatchStopJobRunResponse$SuccessfulSubmissions": "<p>A list of the JobRuns that were successfully submitted for stopping.</p>"
+      }
+    },
     "Boolean": {
       "base": null,
       "refs": {
         "CatalogImportStatus$ImportCompleted": "<p>True if the migration has completed, or False otherwise.</p>",
         "CodeGenNodeArg$Param": "<p>True if the value is used as a parameter.</p>",
-        "CrawlerMetrics$StillEstimating": "<p>True if the crawler is estimating its </p>",
+        "CrawlerMetrics$StillEstimating": "<p>True if the crawler is still estimating how long it will take to complete this run.</p>",
         "StorageDescriptor$Compressed": "<p>True if the data in the table is compressed, or False if not.</p>",
         "StorageDescriptor$StoredAsSubDirectories": "<p>True if the table data is stored in subdirectories, or False if not.</p>"
+      }
+    },
+    "BooleanNullable": {
+      "base": null,
+      "refs": {
+        "UpdateTableRequest$SkipArchive": "<p>By default, <code>UpdateTable</code> always creates an archived version of the table before updating it. If <code>skipArchive</code> is set to true, however, <code>UpdateTable</code> does not create the archived version.</p>"
       }
     },
     "BooleanValue": {
       "base": null,
       "refs": {
-        "GetJobRunRequest$PredecessorsIncluded": "<p>A list of the predecessor runs to return as well.</p>"
+        "GetJobRunRequest$PredecessorsIncluded": "<p>True if a list of predecessor runs should be returned.</p>",
+        "UpdateDevEndpointRequest$UpdateEtlLibraries": "<p>True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.</p>"
       }
     },
     "BoundedPartitionValueList": {
@@ -221,6 +288,7 @@
         "BatchDeleteConnectionRequest$CatalogId": "<p>The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.</p>",
         "BatchDeletePartitionRequest$CatalogId": "<p>The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.</p>",
         "BatchDeleteTableRequest$CatalogId": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>",
+        "BatchDeleteTableVersionRequest$CatalogId": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>",
         "BatchGetPartitionRequest$CatalogId": "<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>",
         "CreateConnectionRequest$CatalogId": "<p>The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.</p>",
         "CreateDatabaseRequest$CatalogId": "<p>The ID of the Data Catalog in which to create the database. If none is supplied, the AWS account ID is used by default.</p>",
@@ -231,6 +299,7 @@
         "DeleteDatabaseRequest$CatalogId": "<p>The ID of the Data Catalog in which the database resides. If none is supplied, the AWS account ID is used by default.</p>",
         "DeletePartitionRequest$CatalogId": "<p>The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.</p>",
         "DeleteTableRequest$CatalogId": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>",
+        "DeleteTableVersionRequest$CatalogId": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>",
         "DeleteUserDefinedFunctionRequest$CatalogId": "<p>The ID of the Data Catalog where the function to be deleted is located. If none is supplied, the AWS account ID is used by default.</p>",
         "GetCatalogImportStatusRequest$CatalogId": "<p>The ID of the catalog to migrate. Currently, this should be the AWS account ID.</p>",
         "GetConnectionRequest$CatalogId": "<p>The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.</p>",
@@ -240,6 +309,7 @@
         "GetPartitionRequest$CatalogId": "<p>The ID of the Data Catalog where the partition in question resides. If none is supplied, the AWS account ID is used by default.</p>",
         "GetPartitionsRequest$CatalogId": "<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>",
         "GetTableRequest$CatalogId": "<p>The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.</p>",
+        "GetTableVersionRequest$CatalogId": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>",
         "GetTableVersionsRequest$CatalogId": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>",
         "GetTablesRequest$CatalogId": "<p>The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.</p>",
         "GetUserDefinedFunctionRequest$CatalogId": "<p>The ID of the Data Catalog where the function to be retrieved is located. If none is supplied, the AWS account ID is used by default.</p>",
@@ -261,30 +331,33 @@
     "Classification": {
       "base": null,
       "refs": {
-        "CreateGrokClassifierRequest$Classification": "<p>The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.</p>",
-        "GrokClassifier$Classification": "<p>The data form that the classifier matches, such as Twitter, JSON, Omniture Logs, and so forth.</p>",
-        "UpdateGrokClassifierRequest$Classification": "<p>The type of result that the classifier matches, such as Twitter Json, Omniture logs, Cloudwatch logs, and so forth.</p>"
+        "CreateGrokClassifierRequest$Classification": "<p>An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.</p>",
+        "CreateXMLClassifierRequest$Classification": "<p>An identifier of the data format that the classifier matches.</p>",
+        "GrokClassifier$Classification": "<p>An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on.</p>",
+        "UpdateGrokClassifierRequest$Classification": "<p>An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, Amazon CloudWatch Logs, and so on.</p>",
+        "UpdateXMLClassifierRequest$Classification": "<p>An identifier of the data format that the classifier matches.</p>",
+        "XMLClassifier$Classification": "<p>An identifier of the data format that the classifier matches.</p>"
       }
     },
     "Classifier": {
-      "base": "<p>Classifiers are written in Python and triggered during a Crawl Task. You can write your own Classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A Classifier first checks whether a given file is in a format it can handle, and then, if so, creates a schema in the form of a <code>StructType</code> object that matches that data format.</p>",
+      "base": "<p>Classifiers are written in Python and triggered during a crawl task. You can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>A classifier can be a <code>grok</code> classifier, an XML classifier, or a JSON classifier, asspecified in one of the fields in the <code>Classifier</code> object.</p>",
       "refs": {
         "ClassifierList$member": null,
-        "GetClassifierResponse$Classifier": "<p>The requested <code>Classifier</code>.</p>"
+        "GetClassifierResponse$Classifier": "<p>The requested classifier.</p>"
       }
     },
     "ClassifierList": {
       "base": null,
       "refs": {
-        "GetClassifiersResponse$Classifiers": "<p>The requested list of <code>Classifier</code> objects.</p>"
+        "GetClassifiersResponse$Classifiers": "<p>The requested list of classifier objects.</p>"
       }
     },
     "ClassifierNameList": {
       "base": null,
       "refs": {
-        "Crawler$Classifiers": "<p>A list of custom <code>Classifier</code>s associated with this Crawler.</p>",
-        "CreateCrawlerRequest$Classifiers": "<p>A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>",
-        "UpdateCrawlerRequest$Classifiers": "<p>A list of custom <code>Classifier</code> names that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>"
+        "Crawler$Classifiers": "<p>A list of custom classifiers associated with the crawler.</p>",
+        "CreateCrawlerRequest$Classifiers": "<p>A list of custom classifiers that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>",
+        "UpdateCrawlerRequest$Classifiers": "<p>A list of custom classifiers that the user has registered. By default, all classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.</p>"
       }
     },
     "CodeGenArgName": {
@@ -331,7 +404,7 @@
       "refs": {
         "CodeGenNode$Args": "<p>Properties of the node, in the form of name-value pairs.</p>",
         "Location$Jdbc": "<p>A JDBC location.</p>",
-        "Location$S3": "<p>An AWS S3 location.</p>"
+        "Location$S3": "<p>An Amazon S3 location.</p>"
       }
     },
     "CodeGenNodeType": {
@@ -391,7 +464,7 @@
       }
     },
     "Condition": {
-      "base": null,
+      "base": "<p>Defines a condition under which a trigger fires.</p>",
       "refs": {
         "ConditionList$member": null
       }
@@ -425,7 +498,7 @@
     "ConnectionName": {
       "base": null,
       "refs": {
-        "JdbcTarget$ConnectionName": "<p>The name of the connection to use for the JDBC target.</p>"
+        "JdbcTarget$ConnectionName": "<p>The name of the connection to use to connect to the JDBC target.</p>"
       }
     },
     "ConnectionProperties": {
@@ -444,9 +517,9 @@
     "ConnectionType": {
       "base": null,
       "refs": {
-        "Connection$ConnectionType": "<p>The type of the connection.</p>",
-        "ConnectionInput$ConnectionType": "<p>The type of the connection.</p>",
-        "GetConnectionsFilter$ConnectionType": "<p>The type of connections to return.</p>"
+        "Connection$ConnectionType": "<p>The type of the connection. Currently, only JDBC is supported; SFTP is not supported.</p>",
+        "ConnectionInput$ConnectionType": "<p>The type of the connection. Currently, only JDBC is supported; SFTP is not supported.</p>",
+        "GetConnectionsFilter$ConnectionType": "<p>The type of connections to return. Currently, only JDBC is supported; SFTP is not supported.</p>"
       }
     },
     "ConnectionsList": {
@@ -458,16 +531,24 @@
       }
     },
     "Crawler": {
-      "base": "<p>Specifies a crawler program that examines a data source and uses classifiers to try to its schema. If successful, the crawler records metatdata concerning the data source in the Data Catalog.</p>",
+      "base": "<p>Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.</p>",
       "refs": {
         "CrawlerList$member": null,
-        "GetCrawlerResponse$Crawler": "<p>The metadata for the specified <code>Crawler</code>.</p>"
+        "GetCrawlerResponse$Crawler": "<p>The metadata for the specified crawler.</p>"
+      }
+    },
+    "CrawlerConfiguration": {
+      "base": null,
+      "refs": {
+        "Crawler$Configuration": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>'{ \"Version\": 1.0, \"CrawlerOutput\": { \"Partitions\": { \"AddOrUpdateBehavior\": \"InheritFromTable\" } } }'</code> </p>",
+        "CreateCrawlerRequest$Configuration": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>'{ \"Version\": 1.0, \"CrawlerOutput\": { \"Partitions\": { \"AddOrUpdateBehavior\": \"InheritFromTable\" } } }'</code> </p>",
+        "UpdateCrawlerRequest$Configuration": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior.</p> <p>You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior:</p> <p>Example: <code>'{ \"Version\": 1.0, \"CrawlerOutput\": { \"Partitions\": { \"AddOrUpdateBehavior\": \"InheritFromTable\" } } }'</code> </p>"
       }
     },
     "CrawlerList": {
       "base": null,
       "refs": {
-        "GetCrawlersResponse$Crawlers": "<p>A list of <code>Crawler</code> metadata.</p>"
+        "GetCrawlersResponse$Crawlers": "<p>A list of crawler metadata.</p>"
       }
     },
     "CrawlerMetrics": {
@@ -501,7 +582,7 @@
     "CrawlerState": {
       "base": null,
       "refs": {
-        "Crawler$State": "<p>Indicates whether this Crawler is running, or whether a run is pending.</p>"
+        "Crawler$State": "<p>Indicates whether the crawler is running, or whether a run is pending.</p>"
       }
     },
     "CrawlerStoppingException": {
@@ -510,11 +591,11 @@
       }
     },
     "CrawlerTargets": {
-      "base": "<p>Specifies crawler targets.</p>",
+      "base": "<p>Specifies data stores to crawl.</p>",
       "refs": {
         "Crawler$Targets": "<p>A collection of targets to crawl.</p>",
         "CreateCrawlerRequest$Targets": "<p>A list of collection of targets to crawl.</p>",
-        "UpdateCrawlerRequest$Targets": "<p>A list of collection of targets to crawl.</p>"
+        "UpdateCrawlerRequest$Targets": "<p>A list of targets to crawl.</p>"
       }
     },
     "CreateClassifierRequest": {
@@ -568,9 +649,9 @@
       }
     },
     "CreateGrokClassifierRequest": {
-      "base": "<p>Specifies a Grok classifier for CreateClassifier to create.</p>",
+      "base": "<p>Specifies a <code>grok</code> classifier for <code>CreateClassifier</code> to create.</p>",
       "refs": {
-        "CreateClassifierRequest$GrokClassifier": "<p>A grok classifier to create.</p>"
+        "CreateClassifierRequest$GrokClassifier": "<p>A <code>GrokClassifier</code> object specifying the classifier to create.</p>"
       }
     },
     "CreateJobRequest": {
@@ -581,6 +662,12 @@
     "CreateJobResponse": {
       "base": null,
       "refs": {
+      }
+    },
+    "CreateJsonClassifierRequest": {
+      "base": "<p>Specifies a JSON classifier for <code>CreateClassifier</code> to create.</p>",
+      "refs": {
+        "CreateClassifierRequest$JsonClassifier": "<p>A <code>JsonClassifier</code> object specifying the classifier to create.</p>"
       }
     },
     "CreatePartitionRequest": {
@@ -633,21 +720,27 @@
       "refs": {
       }
     },
+    "CreateXMLClassifierRequest": {
+      "base": "<p>Specifies an XML classifier for <code>CreateClassifier</code> to create.</p>",
+      "refs": {
+        "CreateClassifierRequest$XMLClassifier": "<p>An <code>XMLClassifier</code> object specifying the classifier to create.</p>"
+      }
+    },
     "CronExpression": {
       "base": null,
       "refs": {
-        "CreateCrawlerRequest$Schedule": "<p>A cron expression that can be used as a Cloudwatch event (see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">CloudWatch Schedule Expression Syntax</a>. For example, to run every day at 12:15 UTC, specify: <code>cron(15 12 * * ? *)</code>.</p>",
-        "Schedule$ScheduleExpression": "<p>A <code>cron</code> expression that can be used as a Cloudwatch event to schedule something (see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">CloudWatch Schedule Expression Syntax</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>",
-        "UpdateCrawlerRequest$Schedule": "<p>A cron expression that can be used as a Cloudwatch event (see <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">CloudWatch Schedule Expression Syntax</a>. For example, to run every day at 12:15 UTC, specify: <code>cron(15 12 * * ? *)</code>.</p>",
-        "UpdateCrawlerScheduleRequest$Schedule": "<p>Cron expression of the updated schedule.</p>"
+        "CreateCrawlerRequest$Schedule": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>",
+        "Schedule$ScheduleExpression": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>",
+        "UpdateCrawlerRequest$Schedule": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>",
+        "UpdateCrawlerScheduleRequest$Schedule": "<p>The updated <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
       }
     },
     "CustomPatterns": {
       "base": null,
       "refs": {
-        "CreateGrokClassifierRequest$CustomPatterns": "<p>Custom grok patterns used by this classifier.</p>",
-        "GrokClassifier$CustomPatterns": "<p>Custom grok patterns used by this classifier.</p>",
-        "UpdateGrokClassifierRequest$CustomPatterns": "<p>Custom grok patterns used by this classifier.</p>"
+        "CreateGrokClassifierRequest$CustomPatterns": "<p>Optional custom grok patterns used by this classifier.</p>",
+        "GrokClassifier$CustomPatterns": "<p>Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifers</a>.</p>",
+        "UpdateGrokClassifierRequest$CustomPatterns": "<p>Optional custom grok patterns used by this classifier.</p>"
       }
     },
     "DagEdges": {
@@ -672,7 +765,7 @@
       }
     },
     "DatabaseInput": {
-      "base": "<p>The structure used to create or updata a database.</p>",
+      "base": "<p>The structure used to create or update a database.</p>",
       "refs": {
         "CreateDatabaseRequest$DatabaseInput": "<p>A <code>DatabaseInput</code> object defining the metadata database to create in the catalog.</p>",
         "UpdateDatabaseRequest$DatabaseInput": "<p>A <code>DatabaseInput</code> object specifying the new definition of the metadata database in the catalog.</p>"
@@ -687,15 +780,15 @@
     "DatabaseName": {
       "base": null,
       "refs": {
-        "Crawler$DatabaseName": "<p>The <code>Database</code> where this Crawler's output should be stored.</p>",
-        "CreateCrawlerRequest$DatabaseName": "<p>The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>",
-        "UpdateCrawlerRequest$DatabaseName": "<p>The Glue <code>Database</code> where results will be stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>"
+        "Crawler$DatabaseName": "<p>The database where metadata is written by this crawler.</p>",
+        "CreateCrawlerRequest$DatabaseName": "<p>The AWS Glue database where results are written, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>",
+        "UpdateCrawlerRequest$DatabaseName": "<p>The AWS Glue database where results are stored, such as: <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>"
       }
     },
     "DeleteBehavior": {
       "base": null,
       "refs": {
-        "SchemaChangePolicy$DeleteBehavior": "<p>The deletion behavior.</p>"
+        "SchemaChangePolicy$DeleteBehavior": "<p>The deletion behavior when the crawler finds a deleted object.</p>"
       }
     },
     "DeleteClassifierRequest": {
@@ -784,6 +877,16 @@
       "refs": {
       }
     },
+    "DeleteTableVersionRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DeleteTableVersionResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
     "DeleteTriggerRequest": {
       "base": null,
       "refs": {
@@ -809,8 +912,8 @@
       "refs": {
         "Connection$Description": "<p>Description of the connection.</p>",
         "ConnectionInput$Description": "<p>Description of the connection.</p>",
-        "Crawler$Description": "<p>A description of this Crawler and where it should be used.</p>",
-        "CreateCrawlerRequest$Description": "<p>A description of the new <code>Crawler</code>.</p>",
+        "Crawler$Description": "<p>A description of the crawler.</p>",
+        "CreateCrawlerRequest$Description": "<p>A description of the new crawler.</p>",
         "CreateJobRequest$Description": "<p>Description of the job.</p>",
         "CreateTriggerRequest$Description": "<p>A description of the new trigger.</p>",
         "Database$Description": "<p>Description of the database.</p>",
@@ -818,7 +921,7 @@
         "ErrorDetail$ErrorMessage": "<p>A message describing the error.</p>",
         "Job$Description": "<p>Description of this job.</p>",
         "JobUpdate$Description": "<p>Description of the job.</p>",
-        "LastCrawlInfo$ErrorMessage": "<p>Error information about the last crawl, if an error occurred.</p>",
+        "LastCrawlInfo$ErrorMessage": "<p>If an error occurred, the error information about the last crawl.</p>",
         "Table$Description": "<p>Description of the table.</p>",
         "TableInput$Description": "<p>Description of the table.</p>",
         "Trigger$Description": "<p>A description of this trigger.</p>",
@@ -828,7 +931,7 @@
     "DescriptionStringRemovable": {
       "base": null,
       "refs": {
-        "UpdateCrawlerRequest$Description": "<p>A description of the new <code>Crawler</code>.</p>"
+        "UpdateCrawlerRequest$Description": "<p>A description of the new crawler.</p>"
       }
     },
     "DevEndpoint": {
@@ -841,7 +944,7 @@
     "DevEndpointCustomLibraries": {
       "base": "<p>Custom libraries to be loaded into a DevEndpoint.</p>",
       "refs": {
-        "UpdateDevEndpointRequest$CustomLibraries": "<p>Custom Python or Java custom libraries to be loaded in the DevEndpoint.</p>"
+        "UpdateDevEndpointRequest$CustomLibraries": "<p>Custom Python or Java libraries to be loaded in the DevEndpoint.</p>"
       }
     },
     "DevEndpointList": {
@@ -864,9 +967,11 @@
     "ErrorDetail": {
       "base": "<p>Contains details about an error.</p>",
       "refs": {
+        "BatchStopJobRunError$ErrorDetail": "<p>Specifies details about the error that was encountered.</p>",
         "ErrorByName$value": null,
         "PartitionError$ErrorDetail": "<p>Details about the partition error.</p>",
-        "TableError$ErrorDetail": "<p>Detail about the error.</p>"
+        "TableError$ErrorDetail": "<p>Detail about the error.</p>",
+        "TableVersionError$ErrorDetail": "<p>Detail about the error.</p>"
       }
     },
     "ErrorString": {
@@ -906,12 +1011,12 @@
     "GenericMap": {
       "base": null,
       "refs": {
-        "Action$Arguments": null,
-        "CreateJobRequest$DefaultArguments": "<p>The default parameters for this job.</p>",
-        "Job$DefaultArguments": "<p>The default parameters for this job.</p>",
-        "JobRun$Arguments": "<p>The job arguments associated with this run.</p>",
-        "JobUpdate$DefaultArguments": "<p>The default parameters for this job.</p>",
-        "StartJobRunRequest$Arguments": "<p>Specific arguments for this job run.</p>"
+        "Action$Arguments": "<p>Arguments to be passed to the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>",
+        "CreateJobRequest$DefaultArguments": "<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>",
+        "Job$DefaultArguments": "<p>The default arguments for this job, specified as name-value pairs.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>",
+        "JobRun$Arguments": "<p>The job arguments associated with this run. These override equivalent default arguments set for the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>",
+        "JobUpdate$DefaultArguments": "<p>The default arguments for this job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>",
+        "StartJobRunRequest$Arguments": "<p>The job arguments specifically for this run. They override the equivalent default arguments set for the job itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
       }
     },
     "GenericString": {
@@ -920,7 +1025,7 @@
         "CreateDevEndpointRequest$EndpointName": "<p>The name to be assigned to the new DevEndpoint.</p>",
         "CreateDevEndpointRequest$SubnetId": "<p>The subnet ID for the new DevEndpoint to use.</p>",
         "CreateDevEndpointRequest$PublicKey": "<p>The public key to use for authentication.</p>",
-        "CreateDevEndpointRequest$ExtraPythonLibsS3Path": "<p>Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.</p>",
+        "CreateDevEndpointRequest$ExtraPythonLibsS3Path": "<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p>",
         "CreateDevEndpointRequest$ExtraJarsS3Path": "<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p>",
         "CreateDevEndpointResponse$EndpointName": "<p>The name assigned to the new DevEndpoint.</p>",
         "CreateDevEndpointResponse$Status": "<p>The current status of the new DevEndpoint.</p>",
@@ -928,10 +1033,10 @@
         "CreateDevEndpointResponse$YarnEndpointAddress": "<p>The address of the YARN endpoint used by this DevEndpoint.</p>",
         "CreateDevEndpointResponse$AvailabilityZone": "<p>The AWS availability zone where this DevEndpoint is located.</p>",
         "CreateDevEndpointResponse$VpcId": "<p>The ID of the VPC used by this DevEndpoint.</p>",
-        "CreateDevEndpointResponse$ExtraPythonLibsS3Path": "<p>Path to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.</p>",
+        "CreateDevEndpointResponse$ExtraPythonLibsS3Path": "<p>Path(s) to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.</p>",
         "CreateDevEndpointResponse$ExtraJarsS3Path": "<p>Path to one or more Java Jars in an S3 bucket that will be loaded in your DevEndpoint.</p>",
         "CreateDevEndpointResponse$FailureReason": "<p>The reason for a current failure in this DevEndpoint.</p>",
-        "CreateTriggerRequest$Schedule": "<p>A cron schedule expression for the new trigger.</p>",
+        "CreateTriggerRequest$Schedule": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p> <p>This field is required when the trigger type is SCHEDULED.</p>",
         "DeleteDevEndpointRequest$EndpointName": "<p>The name of the DevEndpoint.</p>",
         "DevEndpoint$EndpointName": "<p>The name of the DevEndpoint.</p>",
         "DevEndpoint$SubnetId": "<p>The subnet ID for this DevEndpoint.</p>",
@@ -940,13 +1045,13 @@
         "DevEndpoint$Status": "<p>The current status of this DevEndpoint.</p>",
         "DevEndpoint$AvailabilityZone": "<p>The AWS availability zone where this DevEndpoint is located.</p>",
         "DevEndpoint$VpcId": "<p>The ID of the virtual private cloud (VPC) used by this DevEndpoint.</p>",
-        "DevEndpoint$ExtraPythonLibsS3Path": "<p>Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.</p>",
-        "DevEndpoint$ExtraJarsS3Path": "<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p>",
+        "DevEndpoint$ExtraPythonLibsS3Path": "<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p>",
+        "DevEndpoint$ExtraJarsS3Path": "<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p> <p>Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.</p>",
         "DevEndpoint$FailureReason": "<p>The reason for a current failure in this DevEndpoint.</p>",
         "DevEndpoint$LastUpdateStatus": "<p>The status of the last update.</p>",
         "DevEndpoint$PublicKey": "<p>The public key to be used by this DevEndpoint for authentication.</p>",
-        "DevEndpointCustomLibraries$ExtraPythonLibsS3Path": "<p>Path to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint.</p>",
-        "DevEndpointCustomLibraries$ExtraJarsS3Path": "<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p>",
+        "DevEndpointCustomLibraries$ExtraPythonLibsS3Path": "<p>Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.</p> <p>Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the <a href=\"http://pandas.pydata.org/\">pandas</a> Python data analysis library, are not yet supported.</p>",
+        "DevEndpointCustomLibraries$ExtraJarsS3Path": "<p>Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.</p> <p>Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.</p>",
         "GenericMap$key": null,
         "GenericMap$value": null,
         "GetDevEndpointRequest$EndpointName": "<p>Name of the DevEndpoint for which to retrieve information.</p>",
@@ -958,10 +1063,10 @@
         "GetJobsResponse$NextToken": "<p>A continuation token, if not all jobs have yet been returned.</p>",
         "GetTriggersRequest$NextToken": "<p>A continuation token, if this is a continuation call.</p>",
         "GetTriggersResponse$NextToken": "<p>A continuation token, if not all the requested triggers have yet been returned.</p>",
-        "JobCommand$Name": "<p>The name of this job command.</p>",
+        "JobCommand$Name": "<p>The name of the job command: this must be <code>glueetl</code>.</p>",
         "StringList$member": null,
-        "Trigger$Schedule": "<p>A cron schedule expression.</p>",
-        "TriggerUpdate$Schedule": "<p>A cron expression specifying the schedule.</p>",
+        "Trigger$Schedule": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>",
+        "TriggerUpdate$Schedule": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>",
         "UpdateDevEndpointRequest$EndpointName": "<p>The name of the DevEndpoint to be updated.</p>",
         "UpdateDevEndpointRequest$PublicKey": "<p>The public key for the DevEndpoint to use.</p>"
       }
@@ -1192,6 +1297,16 @@
       "refs": {
       }
     },
+    "GetTableVersionRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetTableVersionResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
     "GetTableVersionsList": {
       "base": null,
       "refs": {
@@ -1259,29 +1374,32 @@
       }
     },
     "GrokClassifier": {
-      "base": "<p>A classifier that uses <code>grok</code>.</p>",
+      "base": "<p>A classifier that uses <code>grok</code> patterns.</p>",
       "refs": {
-        "Classifier$GrokClassifier": "<p>A GrokClassifier object.</p>"
+        "Classifier$GrokClassifier": "<p>A <code>GrokClassifier</code> object.</p>"
       }
     },
     "GrokPattern": {
       "base": null,
       "refs": {
         "CreateGrokClassifierRequest$GrokPattern": "<p>The grok pattern used by this classifier.</p>",
-        "GrokClassifier$GrokPattern": "<p>The grok pattern used by this classifier.</p>",
+        "GrokClassifier$GrokPattern": "<p>The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifers</a>.</p>",
         "UpdateGrokClassifierRequest$GrokPattern": "<p>The grok pattern used by this classifier.</p>"
       }
     },
     "IdString": {
       "base": null,
       "refs": {
+        "BatchStopJobRunError$JobRunId": "<p>The JobRunId of the JobRun in question.</p>",
+        "BatchStopJobRunJobRunIdList$member": null,
+        "BatchStopJobRunSuccessfulSubmission$JobRunId": "<p>The JobRunId of the JobRun in question.</p>",
         "GetJobRunRequest$RunId": "<p>The ID of the job run.</p>",
         "JobRun$Id": "<p>The ID of this job run.</p>",
-        "JobRun$PreviousRunId": "<p>The ID of the previous run of this job.</p>",
-        "Predecessor$RunId": "<p>The job-run ID of the precessor job run.</p>",
-        "StartJobRunRequest$JobRunId": "<p>The ID of the job run to start.</p>",
+        "JobRun$PreviousRunId": "<p>The ID of the previous run of this job. For example, the JobRunId specified in the StartJobRun action.</p>",
+        "Predecessor$RunId": "<p>The job-run ID of the predecessor job run.</p>",
+        "StartJobRunRequest$JobRunId": "<p>The ID of a previous JobRun to retry.</p>",
         "StartJobRunResponse$JobRunId": "<p>The ID assigned to this job run.</p>",
-        "Trigger$Id": "<p>The trigger ID.</p>"
+        "Trigger$Id": "<p>Reserved for future use.</p>"
       }
     },
     "IdempotentParameterMismatchException": {
@@ -1315,17 +1433,19 @@
     "IntegerValue": {
       "base": null,
       "refs": {
-        "CreateDevEndpointRequest$NumberOfNodes": "<p>The number of nodes to use.</p>",
-        "CreateDevEndpointResponse$NumberOfNodes": "<p>The number of nodes in this DevEndpoint.</p>",
-        "CreateJobRequest$AllocatedCapacity": "<p>The number of capacity units allocated to this job.</p>",
-        "DevEndpoint$NumberOfNodes": "<p>The number of nodes used by this DevEndpoint.</p>",
-        "Job$AllocatedCapacity": "<p>The number of capacity units allocated to this job.</p>",
+        "CreateDevEndpointRequest$NumberOfNodes": "<p>The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.</p>",
+        "CreateDevEndpointResponse$ZeppelinRemoteSparkInterpreterPort": "<p>The Apache Zeppelin port for the remote Apache Spark interpreter.</p>",
+        "CreateDevEndpointResponse$NumberOfNodes": "<p>The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.</p>",
+        "CreateJobRequest$AllocatedCapacity": "<p>The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>",
+        "DevEndpoint$ZeppelinRemoteSparkInterpreterPort": "<p>The Apache Zeppelin port for the remote Apache Spark interpreter.</p>",
+        "DevEndpoint$NumberOfNodes": "<p>The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.</p>",
+        "Job$AllocatedCapacity": "<p>The number of AWS Glue data processing units (DPUs) allocated to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>",
         "JobBookmarkEntry$Version": "<p>Version of the job.</p>",
         "JobBookmarkEntry$Run": "<p>The run ID number.</p>",
         "JobBookmarkEntry$Attempt": "<p>The attempt ID number.</p>",
-        "JobRun$AllocatedCapacity": "<p>The amount of infrastructure capacity allocated to this job run.</p>",
-        "JobUpdate$AllocatedCapacity": "<p>The number of capacity units allocated to this job.</p>",
-        "StartJobRunRequest$AllocatedCapacity": "<p>The infrastructure capacity to allocate to this job.</p>"
+        "JobRun$AllocatedCapacity": "<p>The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>",
+        "JobUpdate$AllocatedCapacity": "<p>The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>",
+        "StartJobRunRequest$AllocatedCapacity": "<p>The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>"
       }
     },
     "InternalServiceException": {
@@ -1339,7 +1459,7 @@
       }
     },
     "JdbcTarget": {
-      "base": "<p>Specifies a JDBC target for a crawl.</p>",
+      "base": "<p>Specifies a JDBC data store to crawl.</p>",
       "refs": {
         "JdbcTargetList$member": null
       }
@@ -1351,7 +1471,7 @@
       }
     },
     "Job": {
-      "base": "<p>Specifies a job in the Data Catalog.</p>",
+      "base": "<p>Specifies a job.</p>",
       "refs": {
         "GetJobResponse$Job": "<p>The requested job definition.</p>",
         "JobList$member": null
@@ -1368,7 +1488,7 @@
       "refs": {
         "CreateJobRequest$Command": "<p>The JobCommand that executes this job.</p>",
         "Job$Command": "<p>The JobCommand that executes this job.</p>",
-        "JobUpdate$Command": "<p>The JobCommand that executes this job.</p>"
+        "JobUpdate$Command": "<p>The JobCommand that executes this job (required).</p>"
       }
     },
     "JobList": {
@@ -1400,14 +1520,28 @@
     "JobRunState": {
       "base": null,
       "refs": {
-        "Condition$State": null,
+        "Condition$State": "<p>The condition state. Currently, the values supported are SUCCEEDED, STOPPED and FAILED.</p>",
         "JobRun$JobRunState": "<p>The current state of the job run.</p>"
       }
     },
     "JobUpdate": {
-      "base": "<p>Specifies information used to update an existing job.</p>",
+      "base": "<p>Specifies information used to update an existing job. Note that the previous job definition will be completely overwritten by this information.</p>",
       "refs": {
         "UpdateJobRequest$JobUpdate": "<p>Specifies the values with which to update the job.</p>"
+      }
+    },
+    "JsonClassifier": {
+      "base": "<p>A classifier for <code>JSON</code> content.</p>",
+      "refs": {
+        "Classifier$JsonClassifier": "<p>A <code>JsonClassifier</code> object.</p>"
+      }
+    },
+    "JsonPath": {
+      "base": null,
+      "refs": {
+        "CreateJsonClassifierRequest$JsonPath": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>",
+        "JsonClassifier$JsonPath": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>",
+        "UpdateJsonClassifierRequest$JsonPath": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
       }
     },
     "JsonValue": {
@@ -1420,6 +1554,13 @@
       "base": null,
       "refs": {
         "ParametersMap$key": null
+      }
+    },
+    "Language": {
+      "base": null,
+      "refs": {
+        "CreateScriptRequest$Language": "<p>The programming language of the resulting code from the DAG.</p>",
+        "GetPlanRequest$Language": "<p>The programming language of the code to perform the mapping.</p>"
       }
     },
     "LastCrawlInfo": {
@@ -1474,7 +1615,7 @@
     "LogicalOperator": {
       "base": null,
       "refs": {
-        "Condition$LogicalOperator": null
+        "Condition$LogicalOperator": "<p>A logical operator.</p>"
       }
     },
     "MappingEntry": {
@@ -1501,7 +1642,7 @@
     "MaxConcurrentRuns": {
       "base": null,
       "refs": {
-        "ExecutionProperty$MaxConcurrentRuns": "<p>The maximum number of concurrent runs allowed for a job.</p>"
+        "ExecutionProperty$MaxConcurrentRuns": "<p>The maximum number of concurrent runs allowed for a job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.</p>"
       }
     },
     "MaxRetries": {
@@ -1545,66 +1686,75 @@
     "MillisecondsCount": {
       "base": null,
       "refs": {
-        "Crawler$CrawlElapsedTime": "<p>If this Crawler is running, contains the total time elapsed since the last crawl began.</p>"
+        "Crawler$CrawlElapsedTime": "<p>If the crawler is running, contains the total time elapsed since the last crawl began.</p>"
       }
     },
     "NameString": {
       "base": null,
       "refs": {
-        "Action$JobName": null,
+        "Action$JobName": "<p>The name of a job to be executed.</p>",
         "BatchCreatePartitionRequest$DatabaseName": "<p>The name of the metadata database in which the partition is to be created.</p>",
         "BatchCreatePartitionRequest$TableName": "<p>The name of the metadata table in which the partition is to be created.</p>",
         "BatchDeletePartitionRequest$DatabaseName": "<p>The name of the catalog database in which the table in question resides.</p>",
         "BatchDeletePartitionRequest$TableName": "<p>The name of the table where the partitions to be deleted is located.</p>",
         "BatchDeleteTableNameList$member": null,
-        "BatchDeleteTableRequest$DatabaseName": "<p>The name of the catalog database where the tables to delete reside.</p>",
+        "BatchDeleteTableRequest$DatabaseName": "<p>The name of the catalog database where the tables to delete reside. For Hive compatibility, this name is entirely lowercase.</p>",
+        "BatchDeleteTableVersionRequest$DatabaseName": "<p>The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>",
+        "BatchDeleteTableVersionRequest$TableName": "<p>The name of the table. For Hive compatibility, this name is entirely lowercase.</p>",
         "BatchGetPartitionRequest$DatabaseName": "<p>The name of the catalog database where the partitions reside.</p>",
         "BatchGetPartitionRequest$TableName": "<p>The name of the partitions' table.</p>",
+        "BatchStopJobRunError$JobName": "<p>The name of the Job in question.</p>",
+        "BatchStopJobRunRequest$JobName": "<p>The name of the Job in question.</p>",
+        "BatchStopJobRunSuccessfulSubmission$JobName": "<p>The Name of the Job in question.</p>",
         "CatalogEntry$DatabaseName": "<p>The database in which the table metadata resides.</p>",
         "CatalogEntry$TableName": "<p>The name of the table in question.</p>",
         "CatalogImportStatus$ImportedBy": "<p>The name of the person who initiated the migration.</p>",
         "ClassifierNameList$member": null,
         "Column$Name": "<p>The name of the <code>Column</code>.</p>",
-        "Condition$JobName": null,
+        "Condition$JobName": "<p>The name of the Job to whose JobRuns this condition applies and on which this trigger waits.</p>",
         "Connection$Name": "<p>The name of the connection definition.</p>",
         "Connection$LastUpdatedBy": "<p>The user, group or role that last updated this connection definition.</p>",
         "ConnectionInput$Name": "<p>The name of the connection.</p>",
-        "Crawler$Name": "<p>The <code>Crawler</code> name.</p>",
+        "Crawler$Name": "<p>The crawler name.</p>",
         "CrawlerMetrics$CrawlerName": "<p>The name of the crawler.</p>",
         "CrawlerNameList$member": null,
-        "CreateCrawlerRequest$Name": "<p>Name of the new <code>Crawler</code>.</p>",
-        "CreateGrokClassifierRequest$Name": "<p>The name of the new Classifier.</p>",
-        "CreateJobRequest$Name": "<p>The name you assign to this job.</p>",
-        "CreateJobResponse$Name": "<p>The unique name of the new job that has been created.</p>",
+        "CreateCrawlerRequest$Name": "<p>Name of the new crawler.</p>",
+        "CreateGrokClassifierRequest$Name": "<p>The name of the new classifier.</p>",
+        "CreateJobRequest$Name": "<p>The name you assign to this job. It must be unique in your account.</p>",
+        "CreateJobResponse$Name": "<p>The unique name that was provided.</p>",
+        "CreateJsonClassifierRequest$Name": "<p>The name of the classifier.</p>",
         "CreatePartitionRequest$DatabaseName": "<p>The name of the metadata database in which the partition is to be created.</p>",
         "CreatePartitionRequest$TableName": "<p>The name of the metadata table in which the partition is to be created.</p>",
-        "CreateTableRequest$DatabaseName": "<p>The catalog database in which to create the new table.</p>",
-        "CreateTriggerRequest$Name": "<p>The name to assign to the new trigger.</p>",
-        "CreateTriggerResponse$Name": "<p>The name assigned to the new trigger.</p>",
+        "CreateTableRequest$DatabaseName": "<p>The catalog database in which to create the new table. For Hive compatibility, this name is entirely lowercase.</p>",
+        "CreateTriggerRequest$Name": "<p>The name of the trigger.</p>",
+        "CreateTriggerResponse$Name": "<p>The name of the trigger.</p>",
         "CreateUserDefinedFunctionRequest$DatabaseName": "<p>The name of the catalog database in which to create the function.</p>",
-        "Database$Name": "<p>Name of the database.</p>",
-        "DatabaseInput$Name": "<p>Name of the database.</p>",
-        "DeleteClassifierRequest$Name": "<p>Name of the <code>Classifier</code> to remove.</p>",
+        "CreateXMLClassifierRequest$Name": "<p>The name of the classifier.</p>",
+        "Database$Name": "<p>Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.</p>",
+        "DatabaseInput$Name": "<p>Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.</p>",
+        "DeleteClassifierRequest$Name": "<p>Name of the classifier to remove.</p>",
         "DeleteConnectionNameList$member": null,
         "DeleteConnectionRequest$ConnectionName": "<p>The name of the connection to delete.</p>",
-        "DeleteCrawlerRequest$Name": "<p>Name of the <code>Crawler</code> to remove.</p>",
-        "DeleteDatabaseRequest$Name": "<p>The name of the Database to delete.</p>",
+        "DeleteCrawlerRequest$Name": "<p>Name of the crawler to remove.</p>",
+        "DeleteDatabaseRequest$Name": "<p>The name of the Database to delete. For Hive compatibility, this must be all lowercase.</p>",
         "DeleteJobRequest$JobName": "<p>The name of the job to delete.</p>",
         "DeleteJobResponse$JobName": "<p>The name of the job that was deleted.</p>",
         "DeletePartitionRequest$DatabaseName": "<p>The name of the catalog database in which the table in question resides.</p>",
         "DeletePartitionRequest$TableName": "<p>The name of the table where the partition to be deleted is located.</p>",
-        "DeleteTableRequest$DatabaseName": "<p>The name of the catalog database in which the table resides.</p>",
-        "DeleteTableRequest$Name": "<p>The name of the table to be deleted.</p>",
+        "DeleteTableRequest$DatabaseName": "<p>The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>",
+        "DeleteTableRequest$Name": "<p>The name of the table to be deleted. For Hive compatibility, this name is entirely lowercase.</p>",
+        "DeleteTableVersionRequest$DatabaseName": "<p>The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>",
+        "DeleteTableVersionRequest$TableName": "<p>The name of the table. For Hive compatibility, this name is entirely lowercase.</p>",
         "DeleteTriggerRequest$Name": "<p>The name of the trigger to delete.</p>",
         "DeleteTriggerResponse$Name": "<p>The name of the trigger that was deleted.</p>",
         "DeleteUserDefinedFunctionRequest$DatabaseName": "<p>The name of the catalog database where the function is located.</p>",
         "DeleteUserDefinedFunctionRequest$FunctionName": "<p>The name of the function definition to be deleted.</p>",
         "ErrorByName$key": null,
         "ErrorDetail$ErrorCode": "<p>The code associated with this error.</p>",
-        "GetClassifierRequest$Name": "<p>Name of the <code>Classifier</code> to retrieve.</p>",
+        "GetClassifierRequest$Name": "<p>Name of the classifier to retrieve.</p>",
         "GetConnectionRequest$Name": "<p>The name of the connection definition to retrieve.</p>",
-        "GetCrawlerRequest$Name": "<p>Name of the <code>Crawler</code> to retrieve metadata for.</p>",
-        "GetDatabaseRequest$Name": "<p>The name of the database to retrieve.</p>",
+        "GetCrawlerRequest$Name": "<p>Name of the crawler to retrieve metadata for.</p>",
+        "GetDatabaseRequest$Name": "<p>The name of the database to retrieve. For Hive compatibility, this should be all lowercase.</p>",
         "GetJobRequest$JobName": "<p>The name of the job to retrieve.</p>",
         "GetJobRunRequest$JobName": "<p>Name of the job being run.</p>",
         "GetJobRunsRequest$JobName": "<p>The name of the job for which to retrieve all job runs.</p>",
@@ -1612,69 +1762,76 @@
         "GetPartitionRequest$TableName": "<p>The name of the partition's table.</p>",
         "GetPartitionsRequest$DatabaseName": "<p>The name of the catalog database where the partitions reside.</p>",
         "GetPartitionsRequest$TableName": "<p>The name of the partitions' table.</p>",
-        "GetTableRequest$DatabaseName": "<p>The name of the database in the catalog in which the table resides.</p>",
-        "GetTableRequest$Name": "<p>The name of the table for which to retrieve the definition.</p>",
-        "GetTableVersionsRequest$DatabaseName": "<p>The database in the catalog in which the table resides.</p>",
-        "GetTableVersionsRequest$TableName": "<p>The name of the table.</p>",
-        "GetTablesRequest$DatabaseName": "<p>The database in the catalog whose tables to list.</p>",
+        "GetTableRequest$DatabaseName": "<p>The name of the database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>",
+        "GetTableRequest$Name": "<p>The name of the table for which to retrieve the definition. For Hive compatibility, this name is entirely lowercase.</p>",
+        "GetTableVersionRequest$DatabaseName": "<p>The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>",
+        "GetTableVersionRequest$TableName": "<p>The name of the table. For Hive compatibility, this name is entirely lowercase.</p>",
+        "GetTableVersionsRequest$DatabaseName": "<p>The database in the catalog in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>",
+        "GetTableVersionsRequest$TableName": "<p>The name of the table. For Hive compatibility, this name is entirely lowercase.</p>",
+        "GetTablesRequest$DatabaseName": "<p>The database in the catalog whose tables to list. For Hive compatibility, this name is entirely lowercase.</p>",
         "GetTriggerRequest$Name": "<p>The name of the trigger to retrieve.</p>",
-        "GetTriggersRequest$DependentJobName": "<p>The name of the job for which to retrieve triggers.</p>",
+        "GetTriggersRequest$DependentJobName": "<p>The name of the job for which to retrieve triggers. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned.</p>",
         "GetUserDefinedFunctionRequest$DatabaseName": "<p>The name of the catalog database where the function is located.</p>",
         "GetUserDefinedFunctionRequest$FunctionName": "<p>The name of the function.</p>",
         "GetUserDefinedFunctionsRequest$DatabaseName": "<p>The name of the catalog database where the functions are located.</p>",
         "GetUserDefinedFunctionsRequest$Pattern": "<p>An optional function-name pattern string that filters the function definitions returned.</p>",
         "GrokClassifier$Name": "<p>The name of the classifier.</p>",
         "Job$Name": "<p>The name you assign to this job.</p>",
-        "JobRun$TriggerName": "<p>The name of the trigger for this job run.</p>",
+        "JobRun$TriggerName": "<p>The name of the trigger that started this job run.</p>",
         "JobRun$JobName": "<p>The name of the job being run.</p>",
+        "JsonClassifier$Name": "<p>The name of the classifier.</p>",
         "MatchCriteria$member": null,
         "NameStringList$member": null,
         "Order$Column": "<p>The name of the column.</p>",
         "Partition$DatabaseName": "<p>The name of the catalog database where the table in question is located.</p>",
         "Partition$TableName": "<p>The name of the table in question.</p>",
         "PhysicalConnectionRequirements$SubnetId": "<p>The subnet ID used by the connection.</p>",
-        "PhysicalConnectionRequirements$AvailabilityZone": "<p>The connection's availability zone.</p>",
+        "PhysicalConnectionRequirements$AvailabilityZone": "<p>The connection's availability zone. This field is deprecated and has no effect.</p>",
         "Predecessor$JobName": "<p>The name of the predecessor job.</p>",
         "SecurityGroupIdList$member": null,
         "SerDeInfo$Name": "<p>Name of the SerDe.</p>",
         "SerDeInfo$SerializationLibrary": "<p>Usually the class that implements the SerDe. An example is: <code>org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe</code>.</p>",
-        "StartCrawlerRequest$Name": "<p>Name of the <code>Crawler</code> to start.</p>",
+        "StartCrawlerRequest$Name": "<p>Name of the crawler to start.</p>",
         "StartCrawlerScheduleRequest$CrawlerName": "<p>Name of the crawler to schedule.</p>",
         "StartJobRunRequest$JobName": "<p>The name of the job to start.</p>",
         "StartTriggerRequest$Name": "<p>The name of the trigger to start.</p>",
         "StartTriggerResponse$Name": "<p>The name of the trigger that was started.</p>",
-        "StopCrawlerRequest$Name": "<p>Name of the <code>Crawler</code> to stop.</p>",
+        "StopCrawlerRequest$Name": "<p>Name of the crawler to stop.</p>",
         "StopCrawlerScheduleRequest$CrawlerName": "<p>Name of the crawler whose schedule state to set.</p>",
         "StopTriggerRequest$Name": "<p>The name of the trigger to stop.</p>",
         "StopTriggerResponse$Name": "<p>The name of the trigger that was stopped.</p>",
-        "Table$Name": "<p>Name of the table.</p>",
-        "Table$DatabaseName": "<p>Name of the metadata database where the table metadata resides.</p>",
+        "Table$Name": "<p>Name of the table. For Hive compatibility, this must be entirely lowercase.</p>",
+        "Table$DatabaseName": "<p>Name of the metadata database where the table metadata resides. For Hive compatibility, this must be all lowercase.</p>",
         "Table$Owner": "<p>Owner of the table.</p>",
         "Table$CreatedBy": "<p>Person or entity who created the table.</p>",
-        "TableError$TableName": "<p>Name of the table.</p>",
-        "TableInput$Name": "<p>Name of the table.</p>",
+        "TableError$TableName": "<p>Name of the table. For Hive compatibility, this must be entirely lowercase.</p>",
+        "TableInput$Name": "<p>Name of the table. For Hive compatibility, this is folded to lowercase when it is stored.</p>",
         "TableInput$Owner": "<p>Owner of the table.</p>",
+        "TableVersionError$TableName": "<p>The name of the table in question.</p>",
         "Trigger$Name": "<p>Name of the trigger.</p>",
-        "TriggerUpdate$Name": "<p>The name of the trigger.</p>",
+        "TriggerUpdate$Name": "<p>Reserved for future use.</p>",
         "UpdateConnectionRequest$Name": "<p>The name of the connection definition to update.</p>",
-        "UpdateCrawlerRequest$Name": "<p>Name of the new <code>Crawler</code>.</p>",
+        "UpdateCrawlerRequest$Name": "<p>Name of the new crawler.</p>",
         "UpdateCrawlerScheduleRequest$CrawlerName": "<p>Name of the crawler whose schedule to update.</p>",
-        "UpdateDatabaseRequest$Name": "<p>The name of the metadata database to update in the catalog.</p>",
+        "UpdateDatabaseRequest$Name": "<p>The name of the database to update in the catalog. For Hive compatibility, this is folded to lowercase.</p>",
         "UpdateGrokClassifierRequest$Name": "<p>The name of the <code>GrokClassifier</code>.</p>",
         "UpdateJobRequest$JobName": "<p>Name of the job definition to update.</p>",
         "UpdateJobResponse$JobName": "<p>Returns the name of the updated job.</p>",
+        "UpdateJsonClassifierRequest$Name": "<p>The name of the classifier.</p>",
         "UpdatePartitionRequest$DatabaseName": "<p>The name of the catalog database in which the table in question resides.</p>",
         "UpdatePartitionRequest$TableName": "<p>The name of the table where the partition to be updated is located.</p>",
-        "UpdateTableRequest$DatabaseName": "<p>The name of the catalog database in which the table resides.</p>",
+        "UpdateTableRequest$DatabaseName": "<p>The name of the catalog database in which the table resides. For Hive compatibility, this name is entirely lowercase.</p>",
         "UpdateTriggerRequest$Name": "<p>The name of the trigger to update.</p>",
         "UpdateUserDefinedFunctionRequest$DatabaseName": "<p>The name of the catalog database where the function to be updated is located.</p>",
         "UpdateUserDefinedFunctionRequest$FunctionName": "<p>The name of the function.</p>",
+        "UpdateXMLClassifierRequest$Name": "<p>The name of the classifier.</p>",
         "UserDefinedFunction$FunctionName": "<p>The name of the function.</p>",
         "UserDefinedFunction$ClassName": "<p>The Java class that contains the function code.</p>",
         "UserDefinedFunction$OwnerName": "<p>The owner of the function.</p>",
         "UserDefinedFunctionInput$FunctionName": "<p>The name of the function.</p>",
         "UserDefinedFunctionInput$ClassName": "<p>The Java class that contains the function code.</p>",
-        "UserDefinedFunctionInput$OwnerName": "<p>The owner of the function.</p>"
+        "UserDefinedFunctionInput$OwnerName": "<p>The owner of the function.</p>",
+        "XMLClassifier$Name": "<p>The name of the classifier.</p>"
       }
     },
     "NameStringList": {
@@ -1701,9 +1858,9 @@
     "NonNegativeInteger": {
       "base": null,
       "refs": {
-        "CrawlerMetrics$TablesCreated": "<p>A list of the tables created by this crawler.</p>",
-        "CrawlerMetrics$TablesUpdated": "<p>A list of the tables created by this crawler.</p>",
-        "CrawlerMetrics$TablesDeleted": "<p>A list of the tables deleted by this crawler.</p>",
+        "CrawlerMetrics$TablesCreated": "<p>The number of tables created by this crawler.</p>",
+        "CrawlerMetrics$TablesUpdated": "<p>The number of tables updated by this crawler.</p>",
+        "CrawlerMetrics$TablesDeleted": "<p>The number of tables deleted by this crawler.</p>",
         "Segment$SegmentNumber": "<p>The zero-based index number of the this segment. For example, if the total number of segments is 4, SegmentNumber values will range from zero through three.</p>",
         "Table$Retention": "<p>Retention time for this table.</p>",
         "TableInput$Retention": "<p>Retention time for this table.</p>"
@@ -1732,7 +1889,7 @@
         "GetClassifiersRequest$MaxResults": "<p>Size of the list to return (optional).</p>",
         "GetConnectionsRequest$MaxResults": "<p>The maximum number of connections to return in one response.</p>",
         "GetCrawlerMetricsRequest$MaxResults": "<p>The maximum size of a list to return.</p>",
-        "GetCrawlersRequest$MaxResults": "<p>The number of Crawlers to return on each call.</p>",
+        "GetCrawlersRequest$MaxResults": "<p>The number of crawlers to return on each call.</p>",
         "GetDatabasesRequest$MaxResults": "<p>The maximum number of databases to return in one response.</p>",
         "GetDevEndpointsRequest$MaxResults": "<p>The maximum size of information to return.</p>",
         "GetJobRunsRequest$MaxResults": "<p>The maximum size of the response.</p>",
@@ -1805,7 +1962,7 @@
       }
     },
     "PartitionValueList": {
-      "base": null,
+      "base": "<p>Contains a list of values defining partitions.</p>",
       "refs": {
         "BatchDeletePartitionValueList$member": null,
         "BatchGetPartitionValueList$member": null
@@ -1816,14 +1973,14 @@
       "refs": {
         "JdbcTarget$Path": "<p>The path of the JDBC target.</p>",
         "PathList$member": null,
-        "S3Target$Path": "<p>The path to the S3 target.</p>"
+        "S3Target$Path": "<p>The path to the Amazon S3 target.</p>"
       }
     },
     "PathList": {
       "base": null,
       "refs": {
-        "JdbcTarget$Exclusions": "<p>A list of items to exclude from the crawl.</p>",
-        "S3Target$Exclusions": "<p>A list of S3 objects to exclude from the crawl.</p>"
+        "JdbcTarget$Exclusions": "<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>",
+        "S3Target$Exclusions": "<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
       }
     },
     "PhysicalConnectionRequirements": {
@@ -1834,7 +1991,7 @@
       }
     },
     "Predecessor": {
-      "base": "<p>A job run that preceded this one.</p>",
+      "base": "<p>A job run that was used in the predicate of a conditional trigger that triggered this job run.</p>",
       "refs": {
         "PredecessorList$member": null
       }
@@ -1848,8 +2005,8 @@
     "Predicate": {
       "base": "<p>Defines the predicate of the trigger, which determines when it fires.</p>",
       "refs": {
-        "CreateTriggerRequest$Predicate": "<p>A predicate to specify when the new trigger should fire.</p>",
-        "Trigger$Predicate": "<p>The predicate of this trigger.</p>",
+        "CreateTriggerRequest$Predicate": "<p>A predicate to specify when the new trigger should fire.</p> <p>This field is required when the trigger type is CONDITIONAL.</p>",
+        "Trigger$Predicate": "<p>The predicate of this trigger, which defines when it will fire.</p>",
         "TriggerUpdate$Predicate": "<p>The predicate of this trigger, which defines when it will fire.</p>"
       }
     },
@@ -1871,7 +2028,7 @@
       "refs": {
         "CreateScriptResponse$PythonScript": "<p>The Python script generated from the DAG.</p>",
         "GetDataflowGraphRequest$PythonScript": "<p>The Python script to transform.</p>",
-        "GetPlanResponse$PythonScript": "<p>A python script to perform the mapping.</p>"
+        "GetPlanResponse$PythonScript": "<p>A Python script to perform the mapping.</p>"
       }
     },
     "ResetJobBookmarkRequest": {
@@ -1908,27 +2065,40 @@
         "UserDefinedFunctionInput$ResourceUris": "<p>The resource URIs for the function.</p>"
       }
     },
+    "Role": {
+      "base": null,
+      "refs": {
+        "Crawler$Role": "<p>The IAM role (or ARN of an IAM role) used to access customer resources, such as data in Amazon S3.</p>",
+        "CreateCrawlerRequest$Role": "<p>The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.</p>",
+        "UpdateCrawlerRequest$Role": "<p>The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.</p>"
+      }
+    },
     "RoleArn": {
       "base": null,
       "refs": {
-        "Crawler$Role": "<p>The ARN of an IAM role used to access customer resources such as data in S3.</p>",
-        "CreateCrawlerRequest$Role": "<p>The AWS ARN of the IAM role used by the new <code>Crawler</code> to access customer resources.</p>",
         "CreateDevEndpointRequest$RoleArn": "<p>The IAM role for the DevEndpoint.</p>",
         "CreateDevEndpointResponse$RoleArn": "<p>The AWS ARN of the role assigned to the new DevEndpoint.</p>",
-        "DevEndpoint$RoleArn": "<p>The AWS ARN of the IAM role used in this DevEndpoint.</p>",
-        "UpdateCrawlerRequest$Role": "<p>The AWS ARN of the IAM role used by the new <code>Crawler</code> to access customer resources.</p>"
+        "DevEndpoint$RoleArn": "<p>The AWS ARN of the IAM role used in this DevEndpoint.</p>"
       }
     },
     "RoleString": {
       "base": null,
       "refs": {
-        "CreateJobRequest$Role": "<p>The role associated with this job.</p>",
-        "Job$Role": "<p>The role associated with this job.</p>",
-        "JobUpdate$Role": "<p>The role associated with this job.</p>"
+        "CreateJobRequest$Role": "<p>The name of the IAM role associated with this job.</p>",
+        "Job$Role": "<p>The name of the IAM role associated with this job.</p>",
+        "JobUpdate$Role": "<p>The name of the IAM role associated with this job (required).</p>"
+      }
+    },
+    "RowTag": {
+      "base": null,
+      "refs": {
+        "CreateXMLClassifierRequest$RowTag": "<p>The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>",
+        "UpdateXMLClassifierRequest$RowTag": "<p>The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>",
+        "XMLClassifier$RowTag": "<p>The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>"
       }
     },
     "S3Target": {
-      "base": "<p>Specifies a crawler target in AWS S3.</p>",
+      "base": "<p>Specifies a data store in Amazon S3.</p>",
       "refs": {
         "S3TargetList$member": null
       }
@@ -1936,13 +2106,20 @@
     "S3TargetList": {
       "base": null,
       "refs": {
-        "CrawlerTargets$S3Targets": "<p>Specifies targets in AWS S3.</p>"
+        "CrawlerTargets$S3Targets": "<p>Specifies Amazon S3 targets.</p>"
+      }
+    },
+    "ScalaCode": {
+      "base": null,
+      "refs": {
+        "CreateScriptResponse$ScalaCode": "<p>The Scala code generated from the DAG.</p>",
+        "GetPlanResponse$ScalaCode": "<p>Scala code to perform the mapping.</p>"
       }
     },
     "Schedule": {
       "base": "<p>A scheduling object using a <code>cron</code> statement to schedule an event.</p>",
       "refs": {
-        "Crawler$Schedule": "<p>A <code>Schedule</code> object that specifies the schedule on which this Crawler is to be run.</p>"
+        "Crawler$Schedule": "<p>For scheduled crawlers, the schedule when the crawler runs.</p>"
       }
     },
     "ScheduleState": {
@@ -1969,7 +2146,7 @@
     "SchemaChangePolicy": {
       "base": "<p>Crawler policy for update and deletion behavior.</p>",
       "refs": {
-        "Crawler$SchemaChangePolicy": "<p>Sets policy for the crawler's update and delete behavior.</p>",
+        "Crawler$SchemaChangePolicy": "<p>Sets the behavior when the crawler finds a changed or deleted object.</p>",
         "CreateCrawlerRequest$SchemaChangePolicy": "<p>Policy for the crawler's update and deletion behavior.</p>",
         "UpdateCrawlerRequest$SchemaChangePolicy": "<p>Policy for the crawler's update and deletion behavior.</p>"
       }
@@ -1984,7 +2161,7 @@
     "ScriptLocationString": {
       "base": null,
       "refs": {
-        "JobCommand$ScriptLocation": "<p>Specifies the location of a script that executes a job.</p>"
+        "JobCommand$ScriptLocation": "<p>Specifies the S3 path to a script that executes a job (required).</p>"
       }
     },
     "SecurityGroupIdList": {
@@ -2104,7 +2281,7 @@
       "refs": {
         "GetTableResponse$Table": "<p>The <code>Table</code> object that defines the specified table.</p>",
         "TableList$member": null,
-        "TableVersion$Table": null
+        "TableVersion$Table": "<p>The table in question</p>"
       }
     },
     "TableError": {
@@ -2142,9 +2319,9 @@
     "TablePrefix": {
       "base": null,
       "refs": {
-        "Crawler$TablePrefix": "<p>The table prefix used for catalog tables created.</p>",
-        "CreateCrawlerRequest$TablePrefix": "<p>The table prefix used for catalog tables created.</p>",
-        "UpdateCrawlerRequest$TablePrefix": "<p>The table prefix used for catalog tables created.</p>"
+        "Crawler$TablePrefix": "<p>The prefix added to the names of tables that are created.</p>",
+        "CreateCrawlerRequest$TablePrefix": "<p>The table prefix used for catalog tables that are created.</p>",
+        "UpdateCrawlerRequest$TablePrefix": "<p>The table prefix used for catalog tables that are created.</p>"
       }
     },
     "TableTypeString": {
@@ -2155,9 +2332,22 @@
       }
     },
     "TableVersion": {
+      "base": "<p>Specifies a version of a table.</p>",
+      "refs": {
+        "GetTableVersionResponse$TableVersion": "<p>The requested table version.</p>",
+        "GetTableVersionsList$member": null
+      }
+    },
+    "TableVersionError": {
+      "base": "<p>An error record for table-version operations.</p>",
+      "refs": {
+        "TableVersionErrors$member": null
+      }
+    },
+    "TableVersionErrors": {
       "base": null,
       "refs": {
-        "GetTableVersionsList$member": null
+        "BatchDeleteTableVersionResponse$Errors": "<p>A list of errors encountered while trying to delete the specified table versions.</p>"
       }
     },
     "Timestamp": {
@@ -2166,11 +2356,13 @@
         "CatalogImportStatus$ImportTime": "<p>The time that the migration was started.</p>",
         "Connection$CreationTime": "<p>The time this connection definition was created.</p>",
         "Connection$LastUpdatedTime": "<p>The last time this connection definition was updated.</p>",
-        "Crawler$CreationTime": "<p>The time when the Crawler was created.</p>",
-        "Crawler$LastUpdated": "<p>The time the Crawler was last updated.</p>",
+        "Crawler$CreationTime": "<p>The time when the crawler was created.</p>",
+        "Crawler$LastUpdated": "<p>The time the crawler was last updated.</p>",
         "Database$CreateTime": "<p>The time at which the metadata database was created in the catalog.</p>",
         "GrokClassifier$CreationTime": "<p>The time this classifier was registered.</p>",
         "GrokClassifier$LastUpdated": "<p>The time this classifier was last updated.</p>",
+        "JsonClassifier$CreationTime": "<p>The time this classifier was registered.</p>",
+        "JsonClassifier$LastUpdated": "<p>The time this classifier was last updated.</p>",
         "LastCrawlInfo$StartTime": "<p>The time at which the crawl started.</p>",
         "Partition$CreationTime": "<p>The time at which the partition was created.</p>",
         "Partition$LastAccessTime": "<p>The last time at which the partition was accessed.</p>",
@@ -2183,7 +2375,9 @@
         "Table$LastAnalyzedTime": "<p>Last time column statistics were computed for this table.</p>",
         "TableInput$LastAccessTime": "<p>Last time the table was accessed.</p>",
         "TableInput$LastAnalyzedTime": "<p>Last time column statistics were computed for this table.</p>",
-        "UserDefinedFunction$CreateTime": "<p>The time at which the function was created.</p>"
+        "UserDefinedFunction$CreateTime": "<p>The time at which the function was created.</p>",
+        "XMLClassifier$CreationTime": "<p>The time this classifier was registered.</p>",
+        "XMLClassifier$LastUpdated": "<p>The time this classifier was last updated.</p>"
       }
     },
     "TimestampValue": {
@@ -2256,7 +2450,7 @@
       }
     },
     "TriggerUpdate": {
-      "base": "<p>A structure used to provide information used to updata a trigger.</p>",
+      "base": "<p>A structure used to provide information used to update a trigger. This object will update the the previous trigger definition by overwriting it completely.</p>",
       "refs": {
         "UpdateTriggerRequest$TriggerUpdate": "<p>The new values with which to update the trigger.</p>"
       }
@@ -2272,7 +2466,7 @@
     "UpdateBehavior": {
       "base": null,
       "refs": {
-        "SchemaChangePolicy$UpdateBehavior": "<p>The update behavior.</p>"
+        "SchemaChangePolicy$UpdateBehavior": "<p>The update behavior when the crawler finds a changed schema.</p>"
       }
     },
     "UpdateClassifierRequest": {
@@ -2336,7 +2530,7 @@
       }
     },
     "UpdateGrokClassifierRequest": {
-      "base": "<p>Specifies a Grok classifier to update when passed to UpdateClassifier.</p>",
+      "base": "<p>Specifies a grok classifier to update when passed to <code>UpdateClassifier</code>.</p>",
       "refs": {
         "UpdateClassifierRequest$GrokClassifier": "<p>A <code>GrokClassifier</code> object with updated fields.</p>"
       }
@@ -2349,6 +2543,12 @@
     "UpdateJobResponse": {
       "base": null,
       "refs": {
+      }
+    },
+    "UpdateJsonClassifierRequest": {
+      "base": "<p>Specifies a JSON classifier to be updated.</p>",
+      "refs": {
+        "UpdateClassifierRequest$JsonClassifier": "<p>A <code>JsonClassifier</code> object with updated fields.</p>"
       }
     },
     "UpdatePartitionRequest": {
@@ -2391,12 +2591,18 @@
       "refs": {
       }
     },
+    "UpdateXMLClassifierRequest": {
+      "base": "<p>Specifies an XML classifier to be updated.</p>",
+      "refs": {
+        "UpdateClassifierRequest$XMLClassifier": "<p>An <code>XMLClassifier</code> object with updated fields.</p>"
+      }
+    },
     "UriString": {
       "base": null,
       "refs": {
-        "CreateJobRequest$LogUri": "<p>Location of the logs for this job.</p>",
-        "Job$LogUri": "<p>Location of the logs for this job.</p>",
-        "JobUpdate$LogUri": "<p>Location of the logs for this job.</p>"
+        "CreateJobRequest$LogUri": "<p>This field is reserved for future use.</p>",
+        "Job$LogUri": "<p>This field is reserved for future use.</p>",
+        "JobUpdate$LogUri": "<p>This field is reserved for future use.</p>"
       }
     },
     "UserDefinedFunction": {
@@ -2440,14 +2646,16 @@
         "Partition$Values": "<p>The values of the partition.</p>",
         "PartitionError$PartitionValues": "<p>The values that define the partition.</p>",
         "PartitionInput$Values": "<p>The values of the partition.</p>",
-        "PartitionValueList$Values": null
+        "PartitionValueList$Values": "<p>The list of values.</p>"
       }
     },
     "VersionId": {
       "base": null,
       "refs": {
-        "Crawler$Version": "<p>The version of the Crawler.</p>",
-        "GrokClassifier$Version": "<p>The version of this classifier.</p>"
+        "Crawler$Version": "<p>The version of the crawler.</p>",
+        "GrokClassifier$Version": "<p>The version of this classifier.</p>",
+        "JsonClassifier$Version": "<p>The version of this classifier.</p>",
+        "XMLClassifier$Version": "<p>The version of this classifier.</p>"
       }
     },
     "VersionMismatchException": {
@@ -2458,7 +2666,11 @@
     "VersionString": {
       "base": null,
       "refs": {
-        "TableVersion$VersionId": null
+        "BatchDeleteTableVersionList$member": null,
+        "DeleteTableVersionRequest$VersionId": "<p>The ID of the table version to be deleted.</p>",
+        "GetTableVersionRequest$VersionId": "<p>The ID value of the table version to be retrieved.</p>",
+        "TableVersion$VersionId": "<p>The ID value that identifies this table version.</p>",
+        "TableVersionError$VersionId": "<p>The ID value of the version in question.</p>"
       }
     },
     "ViewTextString": {
@@ -2468,6 +2680,12 @@
         "Table$ViewExpandedText": "<p>If the table is a view, the expanded text of the view; otherwise <code>null</code>.</p>",
         "TableInput$ViewOriginalText": "<p>If the table is a view, the original text of the view; otherwise <code>null</code>.</p>",
         "TableInput$ViewExpandedText": "<p>If the table is a view, the expanded text of the view; otherwise <code>null</code>.</p>"
+      }
+    },
+    "XMLClassifier": {
+      "base": "<p>A classifier for <code>XML</code> content.</p>",
+      "refs": {
+        "Classifier$XMLClassifier": "<p>An <code>XMLClassifier</code> object.</p>"
       }
     }
   }

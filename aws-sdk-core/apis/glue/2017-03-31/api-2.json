@@ -71,6 +71,21 @@
         {"shape":"OperationTimeoutException"}
       ]
     },
+    "BatchDeleteTableVersion":{
+      "name":"BatchDeleteTableVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchDeleteTableVersionRequest"},
+      "output":{"shape":"BatchDeleteTableVersionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ]
+    },
     "BatchGetPartition":{
       "name":"BatchGetPartition",
       "http":{
@@ -84,6 +99,20 @@
         {"shape":"EntityNotFoundException"},
         {"shape":"OperationTimeoutException"},
         {"shape":"InternalServiceException"}
+      ]
+    },
+    "BatchStopJobRun":{
+      "name":"BatchStopJobRun",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"BatchStopJobRunRequest"},
+      "output":{"shape":"BatchStopJobRunResponse"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
       ]
     },
     "CreateClassifier":{
@@ -111,7 +140,8 @@
       "errors":[
         {"shape":"AlreadyExistsException"},
         {"shape":"InvalidInputException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ResourceNumberLimitExceededException"}
       ]
     },
     "CreateCrawler":{
@@ -178,7 +208,8 @@
         {"shape":"AlreadyExistsException"},
         {"shape":"InternalServiceException"},
         {"shape":"OperationTimeoutException"},
-        {"shape":"ResourceNumberLimitExceededException"}
+        {"shape":"ResourceNumberLimitExceededException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "CreatePartition":{
@@ -240,9 +271,11 @@
       "errors":[
         {"shape":"AlreadyExistsException"},
         {"shape":"InvalidInputException"},
+        {"shape":"IdempotentParameterMismatchException"},
         {"shape":"InternalServiceException"},
         {"shape":"OperationTimeoutException"},
-        {"shape":"ResourceNumberLimitExceededException"}
+        {"shape":"ResourceNumberLimitExceededException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "CreateUserDefinedFunction":{
@@ -258,7 +291,8 @@
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
         {"shape":"EntityNotFoundException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ResourceNumberLimitExceededException"}
       ]
     },
     "DeleteClassifier":{
@@ -376,6 +410,21 @@
         {"shape":"OperationTimeoutException"}
       ]
     },
+    "DeleteTableVersion":{
+      "name":"DeleteTableVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTableVersionRequest"},
+      "output":{"shape":"DeleteTableVersionResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ]
+    },
     "DeleteTrigger":{
       "name":"DeleteTrigger",
       "http":{
@@ -387,7 +436,8 @@
       "errors":[
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "DeleteUserDefinedFunction":{
@@ -650,7 +700,8 @@
       "errors":[
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"EntityNotFoundException"}
       ]
     },
     "GetPartition":{
@@ -705,6 +756,21 @@
       },
       "input":{"shape":"GetTableRequest"},
       "output":{"shape":"GetTableResponse"},
+      "errors":[
+        {"shape":"EntityNotFoundException"},
+        {"shape":"InvalidInputException"},
+        {"shape":"InternalServiceException"},
+        {"shape":"OperationTimeoutException"}
+      ]
+    },
+    "GetTableVersion":{
+      "name":"GetTableVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTableVersionRequest"},
+      "output":{"shape":"GetTableVersionResponse"},
       "errors":[
         {"shape":"EntityNotFoundException"},
         {"shape":"InvalidInputException"},
@@ -936,7 +1002,8 @@
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
         {"shape":"EntityNotFoundException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "UpdateClassifier":{
@@ -1043,7 +1110,8 @@
         {"shape":"InvalidInputException"},
         {"shape":"EntityNotFoundException"},
         {"shape":"InternalServiceException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "UpdatePartition":{
@@ -1074,7 +1142,8 @@
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
         {"shape":"OperationTimeoutException"},
-        {"shape":"ConcurrentModificationException"}
+        {"shape":"ConcurrentModificationException"},
+        {"shape":"ResourceNumberLimitExceededException"}
       ]
     },
     "UpdateTrigger":{
@@ -1089,7 +1158,8 @@
         {"shape":"InvalidInputException"},
         {"shape":"InternalServiceException"},
         {"shape":"EntityNotFoundException"},
-        {"shape":"OperationTimeoutException"}
+        {"shape":"OperationTimeoutException"},
+        {"shape":"ConcurrentModificationException"}
       ]
     },
     "UpdateUserDefinedFunction":{
@@ -1220,6 +1290,32 @@
         "Errors":{"shape":"TableErrors"}
       }
     },
+    "BatchDeleteTableVersionList":{
+      "type":"list",
+      "member":{"shape":"VersionString"},
+      "max":100,
+      "min":0
+    },
+    "BatchDeleteTableVersionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "VersionIds"
+      ],
+      "members":{
+        "CatalogId":{"shape":"CatalogIdString"},
+        "DatabaseName":{"shape":"NameString"},
+        "TableName":{"shape":"NameString"},
+        "VersionIds":{"shape":"BatchDeleteTableVersionList"}
+      }
+    },
+    "BatchDeleteTableVersionResponse":{
+      "type":"structure",
+      "members":{
+        "Errors":{"shape":"TableVersionErrors"}
+      }
+    },
     "BatchGetPartitionRequest":{
       "type":"structure",
       "required":[
@@ -1247,7 +1343,55 @@
       "max":1000,
       "min":0
     },
+    "BatchStopJobRunError":{
+      "type":"structure",
+      "members":{
+        "JobName":{"shape":"NameString"},
+        "JobRunId":{"shape":"IdString"},
+        "ErrorDetail":{"shape":"ErrorDetail"}
+      }
+    },
+    "BatchStopJobRunErrorList":{
+      "type":"list",
+      "member":{"shape":"BatchStopJobRunError"}
+    },
+    "BatchStopJobRunJobRunIdList":{
+      "type":"list",
+      "member":{"shape":"IdString"},
+      "max":25,
+      "min":1
+    },
+    "BatchStopJobRunRequest":{
+      "type":"structure",
+      "required":[
+        "JobName",
+        "JobRunIds"
+      ],
+      "members":{
+        "JobName":{"shape":"NameString"},
+        "JobRunIds":{"shape":"BatchStopJobRunJobRunIdList"}
+      }
+    },
+    "BatchStopJobRunResponse":{
+      "type":"structure",
+      "members":{
+        "SuccessfulSubmissions":{"shape":"BatchStopJobRunSuccessfulSubmissionList"},
+        "Errors":{"shape":"BatchStopJobRunErrorList"}
+      }
+    },
+    "BatchStopJobRunSuccessfulSubmission":{
+      "type":"structure",
+      "members":{
+        "JobName":{"shape":"NameString"},
+        "JobRunId":{"shape":"IdString"}
+      }
+    },
+    "BatchStopJobRunSuccessfulSubmissionList":{
+      "type":"list",
+      "member":{"shape":"BatchStopJobRunSuccessfulSubmission"}
+    },
     "Boolean":{"type":"boolean"},
+    "BooleanNullable":{"type":"boolean"},
     "BooleanValue":{"type":"boolean"},
     "BoundedPartitionValueList":{
       "type":"list",
@@ -1288,7 +1432,9 @@
     "Classifier":{
       "type":"structure",
       "members":{
-        "GrokClassifier":{"shape":"GrokClassifier"}
+        "GrokClassifier":{"shape":"GrokClassifier"},
+        "XMLClassifier":{"shape":"XMLClassifier"},
+        "JsonClassifier":{"shape":"JsonClassifier"}
       }
     },
     "ClassifierList":{
@@ -1424,6 +1570,11 @@
     },
     "ConnectionInput":{
       "type":"structure",
+      "required":[
+        "Name",
+        "ConnectionType",
+        "ConnectionProperties"
+      ],
       "members":{
         "Name":{"shape":"NameString"},
         "Description":{"shape":"DescriptionString"},
@@ -1478,7 +1629,7 @@
       "type":"structure",
       "members":{
         "Name":{"shape":"NameString"},
-        "Role":{"shape":"RoleArn"},
+        "Role":{"shape":"Role"},
         "Targets":{"shape":"CrawlerTargets"},
         "DatabaseName":{"shape":"DatabaseName"},
         "Description":{"shape":"DescriptionString"},
@@ -1491,9 +1642,11 @@
         "CreationTime":{"shape":"Timestamp"},
         "LastUpdated":{"shape":"Timestamp"},
         "LastCrawl":{"shape":"LastCrawlInfo"},
-        "Version":{"shape":"VersionId"}
+        "Version":{"shape":"VersionId"},
+        "Configuration":{"shape":"CrawlerConfiguration"}
       }
     },
+    "CrawlerConfiguration":{"type":"string"},
     "CrawlerList":{
       "type":"list",
       "member":{"shape":"Crawler"}
@@ -1560,7 +1713,9 @@
     "CreateClassifierRequest":{
       "type":"structure",
       "members":{
-        "GrokClassifier":{"shape":"CreateGrokClassifierRequest"}
+        "GrokClassifier":{"shape":"CreateGrokClassifierRequest"},
+        "XMLClassifier":{"shape":"CreateXMLClassifierRequest"},
+        "JsonClassifier":{"shape":"CreateJsonClassifierRequest"}
       }
     },
     "CreateClassifierResponse":{
@@ -1591,14 +1746,15 @@
       ],
       "members":{
         "Name":{"shape":"NameString"},
-        "Role":{"shape":"RoleArn"},
+        "Role":{"shape":"Role"},
         "DatabaseName":{"shape":"DatabaseName"},
         "Description":{"shape":"DescriptionString"},
         "Targets":{"shape":"CrawlerTargets"},
         "Schedule":{"shape":"CronExpression"},
         "Classifiers":{"shape":"ClassifierNameList"},
         "TablePrefix":{"shape":"TablePrefix"},
-        "SchemaChangePolicy":{"shape":"SchemaChangePolicy"}
+        "SchemaChangePolicy":{"shape":"SchemaChangePolicy"},
+        "Configuration":{"shape":"CrawlerConfiguration"}
       }
     },
     "CreateCrawlerResponse":{
@@ -1624,8 +1780,7 @@
       "required":[
         "EndpointName",
         "RoleArn",
-        "SecurityGroupIds",
-        "SubnetId"
+        "PublicKey"
       ],
       "members":{
         "EndpointName":{"shape":"GenericString"},
@@ -1647,6 +1802,7 @@
         "SubnetId":{"shape":"GenericString"},
         "RoleArn":{"shape":"RoleArn"},
         "YarnEndpointAddress":{"shape":"GenericString"},
+        "ZeppelinRemoteSparkInterpreterPort":{"shape":"IntegerValue"},
         "NumberOfNodes":{"shape":"IntegerValue"},
         "AvailabilityZone":{"shape":"GenericString"},
         "VpcId":{"shape":"GenericString"},
@@ -1696,6 +1852,17 @@
         "Name":{"shape":"NameString"}
       }
     },
+    "CreateJsonClassifierRequest":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "JsonPath"
+      ],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "JsonPath":{"shape":"JsonPath"}
+      }
+    },
     "CreatePartitionRequest":{
       "type":"structure",
       "required":[
@@ -1719,13 +1886,15 @@
       "type":"structure",
       "members":{
         "DagNodes":{"shape":"DagNodes"},
-        "DagEdges":{"shape":"DagEdges"}
+        "DagEdges":{"shape":"DagEdges"},
+        "Language":{"shape":"Language"}
       }
     },
     "CreateScriptResponse":{
       "type":"structure",
       "members":{
-        "PythonScript":{"shape":"PythonScript"}
+        "PythonScript":{"shape":"PythonScript"},
+        "ScalaCode":{"shape":"ScalaCode"}
       }
     },
     "CreateTableRequest":{
@@ -1782,6 +1951,18 @@
     "CreateUserDefinedFunctionResponse":{
       "type":"structure",
       "members":{
+      }
+    },
+    "CreateXMLClassifierRequest":{
+      "type":"structure",
+      "required":[
+        "Classification",
+        "Name"
+      ],
+      "members":{
+        "Classification":{"shape":"Classification"},
+        "Name":{"shape":"NameString"},
+        "RowTag":{"shape":"RowTag"}
       }
     },
     "CronExpression":{"type":"string"},
@@ -1950,6 +2131,25 @@
       "members":{
       }
     },
+    "DeleteTableVersionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName",
+        "VersionId"
+      ],
+      "members":{
+        "CatalogId":{"shape":"CatalogIdString"},
+        "DatabaseName":{"shape":"NameString"},
+        "TableName":{"shape":"NameString"},
+        "VersionId":{"shape":"VersionString"}
+      }
+    },
+    "DeleteTableVersionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DeleteTriggerRequest":{
       "type":"structure",
       "required":["Name"],
@@ -2000,6 +2200,7 @@
         "SecurityGroupIds":{"shape":"StringList"},
         "SubnetId":{"shape":"GenericString"},
         "YarnEndpointAddress":{"shape":"GenericString"},
+        "ZeppelinRemoteSparkInterpreterPort":{"shape":"IntegerValue"},
         "PublicAddress":{"shape":"GenericString"},
         "Status":{"shape":"GenericString"},
         "NumberOfNodes":{"shape":"IntegerValue"},
@@ -2387,13 +2588,15 @@
         "Mapping":{"shape":"MappingList"},
         "Source":{"shape":"CatalogEntry"},
         "Sinks":{"shape":"CatalogEntries"},
-        "Location":{"shape":"Location"}
+        "Location":{"shape":"Location"},
+        "Language":{"shape":"Language"}
       }
     },
     "GetPlanResponse":{
       "type":"structure",
       "members":{
-        "PythonScript":{"shape":"PythonScript"}
+        "PythonScript":{"shape":"PythonScript"},
+        "ScalaCode":{"shape":"ScalaCode"}
       }
     },
     "GetTableRequest":{
@@ -2412,6 +2615,25 @@
       "type":"structure",
       "members":{
         "Table":{"shape":"Table"}
+      }
+    },
+    "GetTableVersionRequest":{
+      "type":"structure",
+      "required":[
+        "DatabaseName",
+        "TableName"
+      ],
+      "members":{
+        "CatalogId":{"shape":"CatalogIdString"},
+        "DatabaseName":{"shape":"NameString"},
+        "TableName":{"shape":"NameString"},
+        "VersionId":{"shape":"VersionString"}
+      }
+    },
+    "GetTableVersionResponse":{
+      "type":"structure",
+      "members":{
+        "TableVersion":{"shape":"TableVersion"}
       }
     },
     "GetTableVersionsList":{
@@ -2691,12 +2913,34 @@
         "AllocatedCapacity":{"shape":"IntegerValue"}
       }
     },
+    "JsonClassifier":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "JsonPath"
+      ],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "CreationTime":{"shape":"Timestamp"},
+        "LastUpdated":{"shape":"Timestamp"},
+        "Version":{"shape":"VersionId"},
+        "JsonPath":{"shape":"JsonPath"}
+      }
+    },
+    "JsonPath":{"type":"string"},
     "JsonValue":{"type":"string"},
     "KeyString":{
       "type":"string",
       "max":255,
       "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "Language":{
+      "type":"string",
+      "enum":[
+        "PYTHON",
+        "SCALA"
+      ]
     },
     "LastCrawlInfo":{
       "type":"structure",
@@ -2748,7 +2992,10 @@
     },
     "Logical":{
       "type":"string",
-      "enum":["AND"]
+      "enum":[
+        "AND",
+        "ANY"
+      ]
     },
     "LogicalOperator":{
       "type":"string",
@@ -2845,7 +3092,7 @@
     },
     "ParametersMapValue":{
       "type":"string",
-      "max":51200
+      "max":512000
     },
     "Partition":{
       "type":"structure",
@@ -2985,11 +3232,13 @@
       "max":1000,
       "min":0
     },
+    "Role":{"type":"string"},
     "RoleArn":{
       "type":"string",
       "pattern":"arn:aws:iam::\\d{12}:role/.*"
     },
     "RoleString":{"type":"string"},
+    "RowTag":{"type":"string"},
     "S3Target":{
       "type":"structure",
       "members":{
@@ -3001,6 +3250,7 @@
       "type":"list",
       "member":{"shape":"S3Target"}
     },
+    "ScalaCode":{"type":"string"},
     "Schedule":{
       "type":"structure",
       "members":{
@@ -3262,6 +3512,18 @@
         "VersionId":{"shape":"VersionString"}
       }
     },
+    "TableVersionError":{
+      "type":"structure",
+      "members":{
+        "TableName":{"shape":"NameString"},
+        "VersionId":{"shape":"VersionString"},
+        "ErrorDetail":{"shape":"ErrorDetail"}
+      }
+    },
+    "TableVersionErrors":{
+      "type":"list",
+      "member":{"shape":"TableVersionError"}
+    },
     "Timestamp":{"type":"timestamp"},
     "TimestampValue":{"type":"timestamp"},
     "Token":{"type":"string"},
@@ -3334,7 +3596,9 @@
     "UpdateClassifierRequest":{
       "type":"structure",
       "members":{
-        "GrokClassifier":{"shape":"UpdateGrokClassifierRequest"}
+        "GrokClassifier":{"shape":"UpdateGrokClassifierRequest"},
+        "XMLClassifier":{"shape":"UpdateXMLClassifierRequest"},
+        "JsonClassifier":{"shape":"UpdateJsonClassifierRequest"}
       }
     },
     "UpdateClassifierResponse":{
@@ -3364,14 +3628,15 @@
       "required":["Name"],
       "members":{
         "Name":{"shape":"NameString"},
-        "Role":{"shape":"RoleArn"},
+        "Role":{"shape":"Role"},
         "DatabaseName":{"shape":"DatabaseName"},
         "Description":{"shape":"DescriptionStringRemovable"},
         "Targets":{"shape":"CrawlerTargets"},
         "Schedule":{"shape":"CronExpression"},
         "Classifiers":{"shape":"ClassifierNameList"},
         "TablePrefix":{"shape":"TablePrefix"},
-        "SchemaChangePolicy":{"shape":"SchemaChangePolicy"}
+        "SchemaChangePolicy":{"shape":"SchemaChangePolicy"},
+        "Configuration":{"shape":"CrawlerConfiguration"}
       }
     },
     "UpdateCrawlerResponse":{
@@ -3415,7 +3680,8 @@
       "members":{
         "EndpointName":{"shape":"GenericString"},
         "PublicKey":{"shape":"GenericString"},
-        "CustomLibraries":{"shape":"DevEndpointCustomLibraries"}
+        "CustomLibraries":{"shape":"DevEndpointCustomLibraries"},
+        "UpdateEtlLibraries":{"shape":"BooleanValue"}
       }
     },
     "UpdateDevEndpointResponse":{
@@ -3450,6 +3716,14 @@
         "JobName":{"shape":"NameString"}
       }
     },
+    "UpdateJsonClassifierRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "JsonPath":{"shape":"JsonPath"}
+      }
+    },
     "UpdatePartitionRequest":{
       "type":"structure",
       "required":[
@@ -3480,7 +3754,8 @@
       "members":{
         "CatalogId":{"shape":"CatalogIdString"},
         "DatabaseName":{"shape":"NameString"},
-        "TableInput":{"shape":"TableInput"}
+        "TableInput":{"shape":"TableInput"},
+        "SkipArchive":{"shape":"BooleanNullable"}
       }
     },
     "UpdateTableResponse":{
@@ -3522,6 +3797,15 @@
     "UpdateUserDefinedFunctionResponse":{
       "type":"structure",
       "members":{
+      }
+    },
+    "UpdateXMLClassifierRequest":{
+      "type":"structure",
+      "required":["Name"],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "Classification":{"shape":"Classification"},
+        "RowTag":{"shape":"RowTag"}
       }
     },
     "UriString":{"type":"string"},
@@ -3581,7 +3865,22 @@
     },
     "ViewTextString":{
       "type":"string",
-      "max":2048
+      "max":409600
+    },
+    "XMLClassifier":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Classification"
+      ],
+      "members":{
+        "Name":{"shape":"NameString"},
+        "Classification":{"shape":"Classification"},
+        "CreationTime":{"shape":"Timestamp"},
+        "LastUpdated":{"shape":"Timestamp"},
+        "Version":{"shape":"VersionId"},
+        "RowTag":{"shape":"RowTag"}
+      }
     }
   }
 }
