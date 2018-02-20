@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
+
+* Feature - Aws::WAFRegional - Updated the API, and documentation for AWS WAF Regional.
+
+* Feature - Aws::WAF - Updated the API, and documentation for AWS WAF.
+
 * Feature - Aws::InstanceProfileCredentials - When the `AWS_EC2_METADATA_DISABLED` environment variable is present with the value `true` (not case sensitive), the `Aws::InstanceProfileCredentials` credential provider will not be used.
 
 2.11.0 (2018-02-19)
