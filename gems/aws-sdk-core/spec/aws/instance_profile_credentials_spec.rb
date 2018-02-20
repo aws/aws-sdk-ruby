@@ -21,7 +21,7 @@ module Aws
 
     end
 
-        describe 'disable flag' do
+    describe 'disable flag' do
       let(:env) {{}}
 
       before(:each) do
