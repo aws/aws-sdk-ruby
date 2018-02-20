@@ -146,7 +146,7 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances. You can specify up to 20 instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -178,7 +178,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] target_group_arns
-    #   The Amazon Resource Names (ARN) of the target groups.
+    #   The Amazon Resource Names (ARN) of the target groups. You can
+    #   specify up to 10 target groups.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroupsType AWS API Documentation
@@ -206,7 +207,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_names
-    #   One or more load balancer names.
+    #   The names of the load balancers. You can specify up to 10 load
+    #   balancers.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancersType AWS API Documentation
@@ -328,6 +330,11 @@ module Aws::AutoScaling
     #   termination by Auto Scaling when scaling in.
     #   @return [Boolean]
     #
+    # @!attribute [rw] service_linked_role_arn
+    #   The Amazon Resource Name (ARN) of the service-linked role that the
+    #   Auto Scaling group uses to call other AWS services on your behalf.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
@@ -353,7 +360,8 @@ module Aws::AutoScaling
       :status,
       :tags,
       :termination_policies,
-      :new_instances_protected_from_scale_in)
+      :new_instances_protected_from_scale_in,
+      :service_linked_role_arn)
       include Aws::Structure
     end
 
@@ -628,6 +636,7 @@ module Aws::AutoScaling
     #             propagate_at_launch: false,
     #           },
     #         ],
+    #         service_linked_role_arn: "ResourceName",
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -802,6 +811,13 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] service_linked_role_arn
+    #   The Amazon Resource Name (ARN) of the service-linked role that the
+    #   Auto Scaling group uses to call other AWS services on your behalf.
+    #   By default, Auto Scaling uses a service-linked role named
+    #   AWSServiceRoleForAutoScaling, which it creates if it does not exist.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
     #
     class CreateAutoScalingGroupType < Struct.new(
@@ -823,7 +839,8 @@ module Aws::AutoScaling
       :termination_policies,
       :new_instances_protected_from_scale_in,
       :lifecycle_hook_specification_list,
-      :tags)
+      :tags,
+      :service_linked_role_arn)
       include Aws::Structure
     end
 
@@ -1055,14 +1072,13 @@ module Aws::AutoScaling
     #   subnet when you create your group.
     #
     #   Default: If the instance is launched into a default subnet, the
-    #   default is `true`. If the instance is launched into a nondefault
-    #   subnet, the default is `false`. For more information, see [Supported
-    #   Platforms][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   default is to assign a public IP address. If the instance is
+    #   launched into a nondefault subnet, the default is not to assign a
+    #   public IP address.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     #   @return [Boolean]
     #
     # @!attribute [rw] placement_tenancy
@@ -1396,7 +1412,7 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
-    #   value is 50 and the maximum value is 100.
+    #   value is 50 and the maximum value is 50.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1491,7 +1507,7 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
-    #   value is 50 and the maximum value is 100.
+    #   value is 100 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroupsRequest AWS API Documentation
@@ -1540,7 +1556,7 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
-    #   value is 50 and the maximum value is 100.
+    #   value is 100 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancersRequest AWS API Documentation
@@ -1707,7 +1723,7 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
-    #   value is 100.
+    #   value is 100 and the maximum value is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1855,7 +1871,7 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs.
+    #   The IDs of the instances. You can specify up to 20 instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -1863,8 +1879,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] should_decrement_desired_capacity
-    #   If `True`, the Auto Scaling group decrements the desired capacity
-    #   value by the number of instances detached.
+    #   Indicates whether the Auto Scaling group decrements the desired
+    #   capacity value by the number of instances detached.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstancesQuery AWS API Documentation
@@ -1893,7 +1909,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] target_group_arns
-    #   The Amazon Resource Names (ARN) of the target groups.
+    #   The Amazon Resource Names (ARN) of the target groups. You can
+    #   specify up to 10 target groups.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroupsType AWS API Documentation
@@ -1921,7 +1938,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_names
-    #   One or more load balancer names.
+    #   The names of the load balancers. You can specify up to 10 load
+    #   balancers.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancersType AWS API Documentation
@@ -2016,9 +2034,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] delete_on_termination
-    #   Indicates whether the volume is deleted on instance termination.
-    #
-    #   Default: `true`
+    #   Indicates whether the volume is deleted on instance termination. The
+    #   default is `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
@@ -2157,8 +2174,7 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instances to move into `Standby` mode. You must specify
-    #   at least one instance ID.
+    #   The IDs of the instances. You can specify up to 20 instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -2166,10 +2182,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] should_decrement_desired_capacity
-    #   Specifies whether the instances moved to `Standby` mode count as
-    #   part of the Auto Scaling group's desired capacity. If set, the
-    #   desired capacity for the Auto Scaling group decrements by the number
-    #   of instances moved to `Standby` mode.
+    #   Indicates whether to decrement the desired capacity of the Auto
+    #   Scaling group by the number of instances moved to `Standby` mode.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandbyQuery AWS API Documentation
@@ -2201,10 +2215,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] honor_cooldown
-    #   If this parameter is true, Auto Scaling waits for the cooldown
-    #   period to complete before executing the policy. Otherwise, Auto
-    #   Scaling executes the policy without waiting for the cooldown period
-    #   to complete.
+    #   Indicates whether Auto Scaling waits for the cooldown period to
+    #   complete before executing the policy.
     #
     #   This parameter is not supported if the policy type is `StepScaling`.
     #
@@ -2268,7 +2280,7 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   One or more instance IDs. You must specify at least one instance ID.
+    #   The IDs of the instances. You can specify up to 20 instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -2596,8 +2608,11 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   The version number. By default, the default version of the launch
-    #   template is used.
+    #   The version number, `$Latest`, or `$Default`. If the value is
+    #   `$Latest`, Auto Scaling selects the latest version of the launch
+    #   template when launching instances. If the value is `$Default`, Auto
+    #   Scaling selects the default version of the launch template when
+    #   launching instances. The default value is `$Default`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchTemplateSpecification AWS API Documentation
@@ -3729,11 +3744,10 @@ module Aws::AutoScaling
     #   @return [Integer]
     #
     # @!attribute [rw] honor_cooldown
-    #   By default, `SetDesiredCapacity` overrides any cooldown period
-    #   associated with the Auto Scaling group. Specify `True` to make Auto
-    #   Scaling to wait for the cool-down period associated with the Auto
-    #   Scaling group to complete before initiating a scaling activity to
-    #   set your Auto Scaling group to its new capacity.
+    #   Indicates whether Auto Scaling waits for the cooldown period to
+    #   complete before initiating a scaling activity to set your Auto
+    #   Scaling group to its new capacity. By default, Auto Scaling does not
+    #   honor the cooldown period during manual scaling activities.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacityType AWS API Documentation
@@ -4052,11 +4066,10 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] disable_scale_in
     #   Indicates whether scale in by the target tracking policy is
-    #   disabled. If the value is `true`, scale in is disabled and the
-    #   target tracking policy won't remove instances from the Auto Scaling
-    #   group. Otherwise, scale in is enabled and the target tracking policy
-    #   can remove instances from the Auto Scaling group. The default value
-    #   is `false`.
+    #   disabled. If scale in is disabled, the target tracking policy won't
+    #   remove instances from the Auto Scaling group. Otherwise, the target
+    #   tracking policy can remove instances from the Auto Scaling group.
+    #   The default is disabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TargetTrackingConfiguration AWS API Documentation
@@ -4082,8 +4095,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] should_decrement_desired_capacity
-    #   If `true`, terminating the instance also decrements the size of the
-    #   Auto Scaling group.
+    #   Indicates whether terminating the instance also decrements the size
+    #   of the Auto Scaling group.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TerminateInstanceInAutoScalingGroupType AWS API Documentation
@@ -4116,6 +4129,7 @@ module Aws::AutoScaling
     #         vpc_zone_identifier: "XmlStringMaxLen2047",
     #         termination_policies: ["XmlStringMaxLen1600"],
     #         new_instances_protected_from_scale_in: false,
+    #         service_linked_role_arn: "ResourceName",
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -4123,13 +4137,13 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] launch_configuration_name
-    #   The name of the launch configuration. You must specify either a
-    #   launch configuration or a launch template.
+    #   The name of the launch configuration. If you specify a launch
+    #   configuration, you can't specify a launch template.
     #   @return [String]
     #
     # @!attribute [rw] launch_template
-    #   The launch template to use to specify the updates. You must specify
-    #   a launch configuration or a launch template.
+    #   The launch template to use to specify the updates. If you specify a
+    #   launch template, you can't specify a launch configuration.
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] min_size
@@ -4225,6 +4239,11 @@ module Aws::AutoScaling
     #   termination by Auto Scaling when scaling in.
     #   @return [Boolean]
     #
+    # @!attribute [rw] service_linked_role_arn
+    #   The Amazon Resource Name (ARN) of the service-linked role that the
+    #   Auto Scaling group uses to call other AWS services on your behalf.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
     class UpdateAutoScalingGroupType < Struct.new(
@@ -4241,7 +4260,8 @@ module Aws::AutoScaling
       :placement_group,
       :vpc_zone_identifier,
       :termination_policies,
-      :new_instances_protected_from_scale_in)
+      :new_instances_protected_from_scale_in,
+      :service_linked_role_arn)
       include Aws::Structure
     end
 

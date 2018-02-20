@@ -59,6 +59,8 @@ module Aws::WAFRegional
     DeleteGeoMatchSetResponse = Shapes::StructureShape.new(name: 'DeleteGeoMatchSetResponse')
     DeleteIPSetRequest = Shapes::StructureShape.new(name: 'DeleteIPSetRequest')
     DeleteIPSetResponse = Shapes::StructureShape.new(name: 'DeleteIPSetResponse')
+    DeletePermissionPolicyRequest = Shapes::StructureShape.new(name: 'DeletePermissionPolicyRequest')
+    DeletePermissionPolicyResponse = Shapes::StructureShape.new(name: 'DeletePermissionPolicyResponse')
     DeleteRateBasedRuleRequest = Shapes::StructureShape.new(name: 'DeleteRateBasedRuleRequest')
     DeleteRateBasedRuleResponse = Shapes::StructureShape.new(name: 'DeleteRateBasedRuleResponse')
     DeleteRegexMatchSetRequest = Shapes::StructureShape.new(name: 'DeleteRegexMatchSetRequest')
@@ -99,6 +101,8 @@ module Aws::WAFRegional
     GetGeoMatchSetResponse = Shapes::StructureShape.new(name: 'GetGeoMatchSetResponse')
     GetIPSetRequest = Shapes::StructureShape.new(name: 'GetIPSetRequest')
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
+    GetPermissionPolicyRequest = Shapes::StructureShape.new(name: 'GetPermissionPolicyRequest')
+    GetPermissionPolicyResponse = Shapes::StructureShape.new(name: 'GetPermissionPolicyResponse')
     GetRateBasedRuleManagedKeysRequest = Shapes::StructureShape.new(name: 'GetRateBasedRuleManagedKeysRequest')
     GetRateBasedRuleManagedKeysResponse = Shapes::StructureShape.new(name: 'GetRateBasedRuleManagedKeysResponse')
     GetRateBasedRuleRequest = Shapes::StructureShape.new(name: 'GetRateBasedRuleRequest')
@@ -182,11 +186,14 @@ module Aws::WAFRegional
     ParameterExceptionField = Shapes::StringShape.new(name: 'ParameterExceptionField')
     ParameterExceptionParameter = Shapes::StringShape.new(name: 'ParameterExceptionParameter')
     ParameterExceptionReason = Shapes::StringShape.new(name: 'ParameterExceptionReason')
+    PolicyString = Shapes::StringShape.new(name: 'PolicyString')
     PopulationSize = Shapes::IntegerShape.new(name: 'PopulationSize')
     PositionalConstraint = Shapes::StringShape.new(name: 'PositionalConstraint')
     Predicate = Shapes::StructureShape.new(name: 'Predicate')
     PredicateType = Shapes::StringShape.new(name: 'PredicateType')
     Predicates = Shapes::ListShape.new(name: 'Predicates')
+    PutPermissionPolicyRequest = Shapes::StructureShape.new(name: 'PutPermissionPolicyRequest')
+    PutPermissionPolicyResponse = Shapes::StructureShape.new(name: 'PutPermissionPolicyResponse')
     RateBasedRule = Shapes::StructureShape.new(name: 'RateBasedRule')
     RateKey = Shapes::StringShape.new(name: 'RateKey')
     RateLimit = Shapes::IntegerShape.new(name: 'RateLimit')
@@ -272,6 +279,7 @@ module Aws::WAFRegional
     WAFInvalidAccountException = Shapes::StructureShape.new(name: 'WAFInvalidAccountException')
     WAFInvalidOperationException = Shapes::StructureShape.new(name: 'WAFInvalidOperationException')
     WAFInvalidParameterException = Shapes::StructureShape.new(name: 'WAFInvalidParameterException')
+    WAFInvalidPermissionPolicyException = Shapes::StructureShape.new(name: 'WAFInvalidPermissionPolicyException')
     WAFInvalidRegexPatternException = Shapes::StructureShape.new(name: 'WAFInvalidRegexPatternException')
     WAFLimitsExceededException = Shapes::StructureShape.new(name: 'WAFLimitsExceededException')
     WAFNonEmptyEntityException = Shapes::StructureShape.new(name: 'WAFNonEmptyEntityException')
@@ -464,6 +472,11 @@ module Aws::WAFRegional
     DeleteIPSetResponse.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, location_name: "ChangeToken"))
     DeleteIPSetResponse.struct_class = Types::DeleteIPSetResponse
 
+    DeletePermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    DeletePermissionPolicyRequest.struct_class = Types::DeletePermissionPolicyRequest
+
+    DeletePermissionPolicyResponse.struct_class = Types::DeletePermissionPolicyResponse
+
     DeleteRateBasedRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     DeleteRateBasedRuleRequest.add_member(:change_token, Shapes::ShapeRef.new(shape: ChangeToken, required: true, location_name: "ChangeToken"))
     DeleteRateBasedRuleRequest.struct_class = Types::DeleteRateBasedRuleRequest
@@ -587,6 +600,12 @@ module Aws::WAFRegional
 
     GetIPSetResponse.add_member(:ip_set, Shapes::ShapeRef.new(shape: IPSet, location_name: "IPSet"))
     GetIPSetResponse.struct_class = Types::GetIPSetResponse
+
+    GetPermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    GetPermissionPolicyRequest.struct_class = Types::GetPermissionPolicyRequest
+
+    GetPermissionPolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyString, location_name: "Policy"))
+    GetPermissionPolicyResponse.struct_class = Types::GetPermissionPolicyResponse
 
     GetRateBasedRuleManagedKeysRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     GetRateBasedRuleManagedKeysRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
@@ -831,6 +850,12 @@ module Aws::WAFRegional
     Predicate.struct_class = Types::Predicate
 
     Predicates.member = Shapes::ShapeRef.new(shape: Predicate)
+
+    PutPermissionPolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
+    PutPermissionPolicyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyString, required: true, location_name: "Policy"))
+    PutPermissionPolicyRequest.struct_class = Types::PutPermissionPolicyRequest
+
+    PutPermissionPolicyResponse.struct_class = Types::PutPermissionPolicyResponse
 
     RateBasedRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     RateBasedRule.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "Name"))
@@ -1364,6 +1389,17 @@ module Aws::WAFRegional
         o.errors << Shapes::ShapeRef.new(shape: WAFNonEmptyEntityException)
       end)
 
+      api.add_operation(:delete_permission_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePermissionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePermissionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePermissionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+      end)
+
       api.add_operation(:delete_rate_based_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteRateBasedRule"
         o.http_method = "POST"
@@ -1550,6 +1586,16 @@ module Aws::WAFRegional
         o.output = Shapes::ShapeRef.new(shape: GetIPSetResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+      end)
+
+      api.add_operation(:get_permission_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPermissionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPermissionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPermissionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
       end)
 
@@ -1835,6 +1881,18 @@ module Aws::WAFRegional
         o.output = Shapes::ShapeRef.new(shape: ListXssMatchSetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidAccountException)
+      end)
+
+      api.add_operation(:put_permission_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutPermissionPolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutPermissionPolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutPermissionPolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFStaleDataException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFInvalidPermissionPolicyException)
       end)
 
       api.add_operation(:update_byte_match_set, Seahorse::Model::Operation.new.tap do |o|

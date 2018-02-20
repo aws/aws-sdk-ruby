@@ -65,6 +65,7 @@ module Aws::AutoScaling
     #         propagate_at_launch: false,
     #       },
     #     ],
+    #     service_linked_role_arn: "ResourceName",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
@@ -201,6 +202,11 @@ module Aws::AutoScaling
     #
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
+    # @option options [String] :service_linked_role_arn
+    #   The Amazon Resource Name (ARN) of the service-linked role that the
+    #   Auto Scaling group uses to call other AWS services on your behalf. By
+    #   default, Auto Scaling uses a service-linked role named
+    #   AWSServiceRoleForAutoScaling, which it creates if it does not exist.
     # @return [AutoScalingGroup]
     def create_group(options = {})
       resp = @client.create_auto_scaling_group(options)
@@ -404,14 +410,13 @@ module Aws::AutoScaling
     #   when you create your group.
     #
     #   Default: If the instance is launched into a default subnet, the
-    #   default is `true`. If the instance is launched into a nondefault
-    #   subnet, the default is `false`. For more information, see [Supported
-    #   Platforms][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   default is to assign a public IP address. If the instance is launched
+    #   into a nondefault subnet, the default is not to assign a public IP
+    #   address.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
     # @option options [String] :placement_tenancy
     #   The tenancy of the instance. An instance with a tenancy of `dedicated`
     #   runs on single-tenant hardware and can only be launched into a VPC.

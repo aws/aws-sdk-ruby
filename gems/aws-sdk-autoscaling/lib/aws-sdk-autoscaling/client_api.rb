@@ -197,6 +197,7 @@ module Aws::AutoScaling
     ScheduledUpdateGroupAction = Shapes::StructureShape.new(name: 'ScheduledUpdateGroupAction')
     ScheduledUpdateGroupActions = Shapes::ListShape.new(name: 'ScheduledUpdateGroupActions')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
+    ServiceLinkedRoleFailure = Shapes::StructureShape.new(name: 'ServiceLinkedRoleFailure')
     SetDesiredCapacityType = Shapes::StructureShape.new(name: 'SetDesiredCapacityType')
     SetInstanceHealthQuery = Shapes::StructureShape.new(name: 'SetInstanceHealthQuery')
     SetInstanceProtectionAnswer = Shapes::StructureShape.new(name: 'SetInstanceProtectionAnswer')
@@ -306,6 +307,7 @@ module Aws::AutoScaling
     AutoScalingGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagDescriptionList, location_name: "Tags"))
     AutoScalingGroup.add_member(:termination_policies, Shapes::ShapeRef.new(shape: TerminationPolicies, location_name: "TerminationPolicies"))
     AutoScalingGroup.add_member(:new_instances_protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, location_name: "NewInstancesProtectedFromScaleIn"))
+    AutoScalingGroup.add_member(:service_linked_role_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ServiceLinkedRoleARN"))
     AutoScalingGroup.struct_class = Types::AutoScalingGroup
 
     AutoScalingGroupNames.member = Shapes::ShapeRef.new(shape: ResourceName)
@@ -379,6 +381,7 @@ module Aws::AutoScaling
     CreateAutoScalingGroupType.add_member(:new_instances_protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, location_name: "NewInstancesProtectedFromScaleIn"))
     CreateAutoScalingGroupType.add_member(:lifecycle_hook_specification_list, Shapes::ShapeRef.new(shape: LifecycleHookSpecifications, location_name: "LifecycleHookSpecificationList"))
     CreateAutoScalingGroupType.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateAutoScalingGroupType.add_member(:service_linked_role_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ServiceLinkedRoleARN"))
     CreateAutoScalingGroupType.struct_class = Types::CreateAutoScalingGroupType
 
     CreateLaunchConfigurationType.add_member(:launch_configuration_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "LaunchConfigurationName"))
@@ -917,6 +920,7 @@ module Aws::AutoScaling
     UpdateAutoScalingGroupType.add_member(:vpc_zone_identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen2047, location_name: "VPCZoneIdentifier"))
     UpdateAutoScalingGroupType.add_member(:termination_policies, Shapes::ShapeRef.new(shape: TerminationPolicies, location_name: "TerminationPolicies"))
     UpdateAutoScalingGroupType.add_member(:new_instances_protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, location_name: "NewInstancesProtectedFromScaleIn"))
+    UpdateAutoScalingGroupType.add_member(:service_linked_role_arn, Shapes::ShapeRef.new(shape: ResourceName, location_name: "ServiceLinkedRoleARN"))
     UpdateAutoScalingGroupType.struct_class = Types::UpdateAutoScalingGroupType
 
     Values.member = Shapes::ShapeRef.new(shape: XmlString)
@@ -942,6 +946,7 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: AttachInstancesQuery)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
       end)
 
       api.add_operation(:attach_load_balancer_target_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -951,6 +956,7 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: AttachLoadBalancerTargetGroupsType)
         o.output = Shapes::ShapeRef.new(shape: AttachLoadBalancerTargetGroupsResultType)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
       end)
 
       api.add_operation(:attach_load_balancers, Seahorse::Model::Operation.new.tap do |o|
@@ -960,6 +966,7 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: AttachLoadBalancersType)
         o.output = Shapes::ShapeRef.new(shape: AttachLoadBalancersResultType)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
       end)
 
       api.add_operation(:complete_lifecycle_action, Seahorse::Model::Operation.new.tap do |o|
@@ -980,6 +987,7 @@ module Aws::AutoScaling
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
       end)
 
       api.add_operation(:create_launch_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1051,6 +1059,7 @@ module Aws::AutoScaling
         o.input = Shapes::ShapeRef.new(shape: DeletePolicyType)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
       end)
 
       api.add_operation(:delete_scheduled_action, Seahorse::Model::Operation.new.tap do |o|
@@ -1216,6 +1225,7 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: PoliciesType)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -1381,6 +1391,7 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
       end)
 
       api.add_operation(:put_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1391,6 +1402,7 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: PolicyARNType)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
       end)
 
       api.add_operation(:put_scheduled_update_group_action, Seahorse::Model::Operation.new.tap do |o|
@@ -1480,6 +1492,7 @@ module Aws::AutoScaling
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ScalingActivityInProgressFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceLinkedRoleFailure)
       end)
     end
 

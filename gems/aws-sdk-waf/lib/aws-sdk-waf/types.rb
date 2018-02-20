@@ -62,9 +62,11 @@ module Aws::WAF
     #     conditions in the rule and then continues to inspect the web
     #     request based on the remaining rules in the web ACL.
     #
-    #   The `Action` data type within `ActivatedRule` is used only when
-    #   submitting an `UpdateWebACL` request. `ActivatedRule|Action` is not
-    #   applicable and therefore not available for `UpdateRuleGroup`.
+    #   `ActivatedRule|OverrideAction` applies only when updating or adding
+    #   a `RuleGroup` to a `WebACL`. In this case you do not use
+    #   `ActivatedRule|Action`. For all other update requests,
+    #   `ActivatedRule|Action` is used instead of
+    #   `ActivatedRule|OverrideAction`.
     #   @return [Types::WafAction]
     #
     # @!attribute [rw] override_action
@@ -80,10 +82,11 @@ module Aws::WAF
     #   blocking matching requests, those requests will be counted. You can
     #   view a record of counted requests using GetSampledRequests.
     #
-    #   The `OverrideAction` data type within `ActivatedRule` is used only
-    #   when submitting an `UpdateRuleGroup` request.
-    #   `ActivatedRule|OverrideAction` is not applicable and therefore not
-    #   available for `UpdateWebACL`.
+    #   `ActivatedRule|OverrideAction` applies only when updating or adding
+    #   a `RuleGroup` to a `WebACL`. In this case you do not use
+    #   `ActivatedRule|Action`. For all other update requests,
+    #   `ActivatedRule|Action` is used instead of
+    #   `ActivatedRule|OverrideAction`.
     #   @return [Types::WafOverrideAction]
     #
     # @!attribute [rw] type
@@ -1144,6 +1147,31 @@ module Aws::WAF
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeletePermissionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the RuleGroup from which you want
+    #   to delete the policy.
+    #
+    #   The user making the request must be the owner of the RuleGroup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeletePermissionPolicyRequest AWS API Documentation
+    #
+    class DeletePermissionPolicyRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeletePermissionPolicyResponse AWS API Documentation
+    #
+    class DeletePermissionPolicyResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteRateBasedRuleRequest
     #   data as a hash:
     #
@@ -1830,6 +1858,36 @@ module Aws::WAF
     #
     class GetIPSetResponse < Struct.new(
       :ip_set)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPermissionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the RuleGroup for which you want
+    #   to get the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetPermissionPolicyRequest AWS API Documentation
+    #
+    class GetPermissionPolicyRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The IAM policy attached to the specified RuleGroup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetPermissionPolicyResponse AWS API Documentation
+    #
+    class GetPermissionPolicyResponse < Struct.new(
+      :policy)
       include Aws::Structure
     end
 
@@ -3355,6 +3413,35 @@ module Aws::WAF
       :data_id)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass PutPermissionPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         policy: "PolicyString", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the RuleGroup to which you want to
+    #   attach the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The policy to attach to the specified RuleGroup.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/PutPermissionPolicyRequest AWS API Documentation
+    #
+    class PutPermissionPolicyRequest < Struct.new(
+      :resource_arn,
+      :policy)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/PutPermissionPolicyResponse AWS API Documentation
+    #
+    class PutPermissionPolicyResponse < Aws::EmptyStructure; end
 
     # A `RateBasedRule` is identical to a regular Rule, with one addition: a
     # `RateBasedRule` counts the number of requests that arrive from a
@@ -4965,9 +5052,11 @@ module Aws::WAF
     #
     #   You can only insert `REGULAR` rules into a rule group.
     #
-    #   The `Action` data type within `ActivatedRule` is used only when
-    #   submitting an `UpdateWebACL` request. `ActivatedRule|Action` is not
-    #   applicable and therefore not available for `UpdateRuleGroup`.
+    #   `ActivatedRule|OverrideAction` applies only when updating or adding
+    #   a `RuleGroup` to a `WebACL`. In this case you do not use
+    #   `ActivatedRule|Action`. For all other update requests,
+    #   `ActivatedRule|Action` is used instead of
+    #   `ActivatedRule|OverrideAction`.
     #   @return [Array<Types::RuleGroupUpdate>]
     #
     # @!attribute [rw] change_token
@@ -5241,11 +5330,12 @@ module Aws::WAF
     #
     #   * WebACLUpdate: Contains `Action` and `ActivatedRule`
     #
-    #   * ActivatedRule: Contains `Action`, `Priority`, `RuleId`, and
-    #     `Type`. The `OverrideAction` data type within `ActivatedRule` is
-    #     used only when submitting an `UpdateRuleGroup` request.
-    #     `ActivatedRule|OverrideAction` is not applicable and therefore not
-    #     available for `UpdateWebACL`.
+    #   * ActivatedRule: Contains `Action`, `OverrideAction`, `Priority`,
+    #     `RuleId`, and `Type`. `ActivatedRule|OverrideAction` applies only
+    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case
+    #     you do not use `ActivatedRule|Action`. For all other update
+    #     requests, `ActivatedRule|Action` is used instead of
+    #     `ActivatedRule|OverrideAction`.
     #
     #   * WafAction: Contains `Type`
     #   @return [Array<Types::WebACLUpdate>]
