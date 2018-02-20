@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.1 (2018-02-20)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
 
 * Feature - Aws::WAFRegional - Updated the API, and documentation for AWS WAF Regional.
