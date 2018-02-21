@@ -15,9 +15,11 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] author
-    #   The name of the author publishing the app.\\nMin Length=1. Max
-    #   Length=127.\\nPattern
-    #   "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
+    #   The name of the author publishing the app.
+    #
+    #   Min Length=1. Max Length=127.
+    #
+    #   Pattern "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -25,29 +27,44 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the application.\\nMin Length=1. Max Length=256
+    #   The description of the application.
+    #
+    #   Min Length=1. Max Length=256
+    #   @return [String]
+    #
+    # @!attribute [rw] home_page_url
+    #   A URL with more information about the application, for example the
+    #   location of your GitHub repository for the application.
     #   @return [String]
     #
     # @!attribute [rw] labels
-    #   Labels to improve discovery of apps in search results.\\nMin
-    #   Length=1. Max Length=127. Maximum number of labels: 10\\nPattern:
-    #   "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
+    #   Labels to improve discovery of apps in search results.
+    #
+    #   Min Length=1. Max Length=127. Maximum number of labels: 10
+    #
+    #   Pattern: "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_url
     #   A link to a license file of the app that matches the spdxLicenseID
-    #   of your application.\\nMax size 5 MB
+    #   of your application.
+    #
+    #   Max size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the application.\\nMin Length=1. Max
-    #   Length=140\\nPattern: "\[a-zA-Z0-9\\\\-\]+";
+    #   The name of the application.
+    #
+    #   Min Length=1. Max Length=140
+    #
+    #   Pattern: "\[a-zA-Z0-9\\\\-\]+";
     #   @return [String]
     #
     # @!attribute [rw] readme_url
-    #   A link to the Readme file that contains a more detailed description
-    #   of the application and how it works in markdown language.\\nMax size
-    #   5 MB
+    #   A link to the readme file that contains a more detailed description
+    #   of the application and how it works in Markdown language.
+    #
+    #   Max size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] spdx_license_id
@@ -65,6 +82,7 @@ module Aws::ServerlessApplicationRepository
       :author,
       :creation_time,
       :description,
+      :home_page_url,
       :labels,
       :license_url,
       :name,
@@ -111,16 +129,23 @@ module Aws::ServerlessApplicationRepository
     #   data as a hash:
     #
     #       {
-    #         actions: ["__string"],
-    #         principals: ["__string"],
+    #         actions: ["__string"], # required
+    #         principals: ["__string"], # required
     #         statement_id: "__string",
     #       }
     #
     # @!attribute [rw] actions
-    #   A list of supported actions:\\n\\n GetApplication \\n \\n\\n
-    #   CreateCloudFormationChangeSet \\n \\n\\n ListApplicationVersions \\n
-    #   \\n\\n SearchApplications \\n \\n\\n Deploy (Note: This action
-    #   enables all other actions above.)
+    #   A list of supported actions:
+    #
+    #   GetApplication
+    #
+    #   CreateCloudFormationChangeSet
+    #
+    #   ListApplicationVersions
+    #
+    #   SearchApplications
+    #
+    #   Deploy (Note: This action enables all other actions above.)
     #   @return [Array<String>]
     #
     # @!attribute [rw] principals
@@ -147,9 +172,11 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] author
-    #   The name of the author publishing the app\\nMin Length=1. Max
-    #   Length=127.\\nPattern
-    #   "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
+    #   The name of the author publishing the app.
+    #
+    #   Min Length=1. Max Length=127.
+    #
+    #   Pattern "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -157,22 +184,35 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the application.\\nMin Length=1. Max Length=256
+    #   The description of the application.
+    #
+    #   Min Length=1. Max Length=256
+    #   @return [String]
+    #
+    # @!attribute [rw] home_page_url
+    #   A URL with more information about the application, for example the
+    #   location of your GitHub repository for the application.
     #   @return [String]
     #
     # @!attribute [rw] labels
-    #   Labels to improve discovery of apps in search results.\\nMin
-    #   Length=1. Max Length=127. Maximum number of labels: 10\\nPattern:
-    #   "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
+    #   Labels to improve discovery of apps in search results.
+    #
+    #   Min Length=1. Max Length=127. Maximum number of labels: 10
+    #
+    #   Pattern: "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
     #   @return [Array<String>]
     #
     # @!attribute [rw] name
-    #   The name of the application.\\nMin Length=1. Max
-    #   Length=140\\nPattern: "\[a-zA-Z0-9\\\\-\]+";
+    #   The name of the application.
+    #
+    #   Min Length=1. Max Length=140
+    #
+    #   Pattern: "\[a-zA-Z0-9\\\\-\]+";
     #   @return [String]
     #
     # @!attribute [rw] spdx_license_id
-    #   A valid identifier from https://spdx.org/licenses/ .
+    #   A valid identifier from <a
+    #   href=""https://spdx.org/licenses/"">https://spdx.org/licenses/</a>.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationSummary AWS API Documentation
@@ -182,6 +222,7 @@ module Aws::ServerlessApplicationRepository
       :author,
       :creation_time,
       :description,
+      :home_page_url,
       :labels,
       :name,
       :spdx_license_id)
@@ -213,12 +254,17 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] change_set_id
-    #   The ARN of the change set.\\nLength Constraints: Minimum length of
-    #   1.\\nPattern: arn:\[-a-zA-Z0-9:/\]*
+    #   The ARN of the change set.
+    #
+    #   Length Constraints: Minimum length of 1.
+    #
+    #   Pattern: Amazon Resource Name (ARN):\[-a-zA-Z0-9:/\]*
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the application:\\n\\n https://semver.org/
+    #   The semantic version of the application:
+    #
+    #   <a href=""https://semver.org/"">https://semver.org/</a>
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -238,50 +284,72 @@ module Aws::ServerlessApplicationRepository
     # Create application request.
     #
     # @!attribute [rw] author
-    #   The name of the author publishing the app.\\nMin Length=1. Max
-    #   Length=127.\\nPattern
-    #   "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
+    #   The name of the author publishing the app.
+    #
+    #   Min Length=1. Max Length=127.
+    #
+    #   Pattern "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the application.\\nMin Length=1. Max Length=256
+    #   The description of the application.
+    #
+    #   Min Length=1. Max Length=256
+    #   @return [String]
+    #
+    # @!attribute [rw] home_page_url
+    #   A URL with more information about the application, for example the
+    #   location of your GitHub repository for the application.
     #   @return [String]
     #
     # @!attribute [rw] labels
-    #   Labels to improve discovery of apps in search results.\\nMin
-    #   Length=1. Max Length=127. Maximum number of labels: 10\\nPattern:
-    #   "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
+    #   Labels to improve discovery of apps in search results.
+    #
+    #   Min Length=1. Max Length=127. Maximum number of labels: 10
+    #
+    #   Pattern: "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
     #   @return [Array<String>]
     #
     # @!attribute [rw] license_body
     #   A raw text file that contains the license of the app that matches
-    #   the spdxLicenseID of your application.\\nMax size 5 MB
+    #   the spdxLicenseID of your application.
+    #
+    #   Max size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] license_url
     #   A link to a license file of the app that matches the spdxLicenseID
-    #   of your application.\\nMax size 5 MB
+    #   of your application.
+    #
+    #   Max size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the application you want to publish.\\nMin Length=1. Max
-    #   Length=140\\nPattern: "\[a-zA-Z0-9\\\\-\]+";
+    #   The name of the application you want to publish.
+    #
+    #   Min Length=1. Max Length=140
+    #
+    #   Pattern: "\[a-zA-Z0-9\\\\-\]+";
     #   @return [String]
     #
     # @!attribute [rw] readme_body
     #   A raw text Readme file that contains a more detailed description of
-    #   the application and how it works in markdown language.\\nMax size 5
-    #   MB
+    #   the application and how it works in markdown language.
+    #
+    #   Max size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] readme_url
     #   A link to the Readme file that contains a more detailed description
-    #   of the application and how it works in markdown language.\\nMax size
-    #   5 MB
+    #   of the application and how it works in markdown language.
+    #
+    #   Max size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the application:\\n\\n https://semver.org/
+    #   The semantic version of the application:
+    #
+    #   <a href=""https://semver.org/"">https://semver.org/</a>
     #   @return [String]
     #
     # @!attribute [rw] source_code_url
@@ -290,15 +358,16 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] spdx_license_id
-    #   A valid identifier from https://spdx.org/licenses/ .
+    #   A valid identifier from <a
+    #   href=""https://spdx.org/licenses/"">https://spdx.org/licenses/</a>.
     #   @return [String]
     #
     # @!attribute [rw] template_body
-    #   The raw packaged SAM template of your application.
+    #   The raw packaged AWS SAM template of your application.
     #   @return [String]
     #
     # @!attribute [rw] template_url
-    #   A link to the packaged SAM template of your application.
+    #   A link to the packaged AWS SAM template of your application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationInput AWS API Documentation
@@ -306,6 +375,7 @@ module Aws::ServerlessApplicationRepository
     class CreateApplicationInput < Struct.new(
       :author,
       :description,
+      :home_page_url,
       :labels,
       :license_body,
       :license_url,
@@ -326,6 +396,7 @@ module Aws::ServerlessApplicationRepository
     #       {
     #         author: "__string",
     #         description: "__string",
+    #         home_page_url: "__string",
     #         labels: ["__string"],
     #         license_body: "__string",
     #         license_url: "__string",
@@ -343,6 +414,9 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] home_page_url
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -383,6 +457,7 @@ module Aws::ServerlessApplicationRepository
     class CreateApplicationRequest < Struct.new(
       :author,
       :description,
+      :home_page_url,
       :labels,
       :license_body,
       :license_url,
@@ -407,6 +482,9 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] home_page_url
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -435,6 +513,7 @@ module Aws::ServerlessApplicationRepository
       :author,
       :creation_time,
       :description,
+      :home_page_url,
       :labels,
       :license_url,
       :name,
@@ -452,11 +531,11 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] template_body
-    #   The raw packaged SAM template of your application.
+    #   The raw packaged AWS SAM template of your application.
     #   @return [String]
     #
     # @!attribute [rw] template_url
-    #   A link to the packaged SAM template of your application.
+    #   A link to the packaged AWS SAM template of your application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersionInput AWS API Documentation
@@ -542,15 +621,20 @@ module Aws::ServerlessApplicationRepository
     #   @return [Array<Types::ParameterValue>]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the application:\\n\\n https://semver.org/
+    #   The semantic version of the application:
+    #
+    #   <a href=""https://semver.org/"">https://semver.org/</a>
     #   @return [String]
     #
     # @!attribute [rw] stack_name
     #   The name or the unique ID of the stack for which you are creating a
-    #   change set. AWS CloudFormation generates\\n the change set by
-    #   comparing this stack's information with the information that you
-    #   submit, such as a modified\\n template or different parameter input
-    #   values. \\nConstraints: Minimum length of 1.\\nPattern:
+    #   change set. AWS CloudFormation generates the change set by comparing
+    #   this stack's information with the information that you submit, such
+    #   as a modified template or different parameter input values.
+    #
+    #   Constraints: Minimum length of 1.
+    #
+    #   Pattern:
     #   (\[a-zA-Z\]\[-a-zA-Z0-9\]*)\|(arn:\\b(aws\|aws-us-gov\|aws-cn)\\b:\[-a-zA-Z0-9:/.\_+\]*)
     #   @return [String]
     #
@@ -570,8 +654,8 @@ module Aws::ServerlessApplicationRepository
     #         application_id: "__string", # required
     #         parameter_overrides: [
     #           {
-    #             name: "__string",
-    #             value: "__string",
+    #             name: "__string", # required
+    #             value: "__string", # required
     #           },
     #         ],
     #         semantic_version: "__string",
@@ -619,6 +703,23 @@ module Aws::ServerlessApplicationRepository
       :change_set_id,
       :semantic_version,
       :stack_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteApplicationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/DeleteApplicationRequest AWS API Documentation
+    #
+    class DeleteApplicationRequest < Struct.new(
+      :application_id)
       include Aws::Structure
     end
 
@@ -683,6 +784,9 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] description
     #   @return [String]
     #
+    # @!attribute [rw] home_page_url
+    #   @return [String]
+    #
     # @!attribute [rw] labels
     #   @return [Array<String>]
     #
@@ -709,6 +813,7 @@ module Aws::ServerlessApplicationRepository
       :author,
       :creation_time,
       :description,
+      :home_page_url,
       :labels,
       :license_url,
       :name,
@@ -808,21 +913,25 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] constraint_description
     #   A string that explains a constraint when the constraint is violated.
-    #   For example, without a constraint description,\\n a parameter that
-    #   has an allowed pattern of \[A-Za-z0-9\]+ displays the following
-    #   error message when the user\\n specifies an invalid value:\\n\\n
+    #   For example, without a constraint description, a parameter that has
+    #   an allowed pattern of \[A-Za-z0-9\]+ displays the following error
+    #   message when the user specifies an invalid value:
+    #
     #   Malformed input-Parameter MyParameter must match pattern
-    #   \[A-Za-z0-9\]+ \\n \\nBy adding a constraint description, such as
-    #   "must contain only uppercase and lowercase letters, and numbers,"
-    #   you can display\\n the following customized error message:\\n\\n
+    #   \[A-Za-z0-9\]+
+    #
+    #   By adding a constraint description, such as "must contain only
+    #   uppercase and lowercase letters, and numbers," you can display the
+    #   following customized error message:
+    #
     #   Malformed input-Parameter MyParameter must contain only uppercase
     #   and lowercase letters and numbers.
     #   @return [String]
     #
     # @!attribute [rw] default_value
     #   A value of the appropriate type for the template to use if no value
-    #   is specified when a stack is created.\\n If you define constraints
-    #   for the parameter, you must specify a value that adheres to those
+    #   is specified when a stack is created. If you define constraints for
+    #   the parameter, you must specify a value that adheres to those
     #   constraints.
     #   @return [String]
     #
@@ -856,16 +965,46 @@ module Aws::ServerlessApplicationRepository
     #
     # @!attribute [rw] no_echo
     #   Whether to mask the parameter value whenever anyone makes a call
-    #   that describes the stack. If you set the\\n value to true, the
+    #   that describes the stack. If you set the value to true, the
     #   parameter value is masked with asterisks (*****).
     #   @return [Boolean]
     #
     # @!attribute [rw] referenced_by_resources
-    #   A list of SAM resources that use this parameter.
+    #   A list of AWS SAM resources that use this parameter.
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
-    #   The type of the parameter.\\nValid values: String \| Number \| List<Number> | CommaDelimitedList \n \n\n String : A literal string.\nFor example, users could specify "MyUserName" .\n\n Number : An integer or float. AWS CloudFormation validates the parameter value as a number; however, when you use the\n parameter elsewhere in your template (for example, by using the Ref intrinsic function), the parameter value becomes a string.\nFor example, users could specify "8888" .\n\n List<Number> : An array of integers or floats that are separated by commas. AWS CloudFormation validates the parameter value as numbers; however, when\n you use the parameter elsewhere in your template (for example, by using the Ref intrinsic function), the parameter value becomes a list of strings.\nFor example, users could specify "80,20", and a Ref results in ["80","20"] .\n\n CommaDelimitedList : An array of literal strings that are separated by commas. The total number of strings should be one more than the total number of commas.\n Also, each member string is space-trimmed.\nFor example, users could specify "test,dev,prod", and a Ref results in ["test","dev","prod"] . </Number></Number>
+    #   The type of the parameter.
+    #
+    #   Valid values: String \| Number \| List&lt;Number> \|
+    #   CommaDelimitedList
+    #
+    #   String: A literal string.
+    #
+    #   For example, users could specify "MyUserName".
+    #
+    #   Number: An integer or float. AWS CloudFormation validates the
+    #   parameter value as a number; however, when you use the parameter
+    #   elsewhere in your template (for example, by using the Ref intrinsic
+    #   function), the parameter value becomes a string.
+    #
+    #   For example, users could specify "8888".
+    #
+    #   List&lt;Number>: An array of integers or floats that are separated
+    #   by commas. AWS CloudFormation validates the parameter value as
+    #   numbers; however, when you use the parameter elsewhere in your
+    #   template (for example, by using the Ref intrinsic function), the
+    #   parameter value becomes a list of strings.
+    #
+    #   For example, users could specify "80,20", and a Ref results in
+    #   \["80","20"\].
+    #
+    #   CommaDelimitedList: An array of literal strings that are separated
+    #   by commas. The total number of strings should be one more than the
+    #   total number of commas. Also, each member string is space-trimmed.
+    #
+    #   For example, users could specify "test,dev,prod", and a Ref
+    #   results in \["test","dev","prod"\].
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ParameterDefinition AWS API Documentation
@@ -893,13 +1032,13 @@ module Aws::ServerlessApplicationRepository
     #   data as a hash:
     #
     #       {
-    #         name: "__string",
-    #         value: "__string",
+    #         name: "__string", # required
+    #         value: "__string", # required
     #       }
     #
     # @!attribute [rw] name
     #   The key associated with the parameter. If you don't specify a key
-    #   and value for a particular parameter, AWS CloudFormation\\n uses the
+    #   and value for a particular parameter, AWS CloudFormation uses the
     #   default value that is specified in your template.
     #   @return [String]
     #
@@ -922,8 +1061,8 @@ module Aws::ServerlessApplicationRepository
     #         application_id: "__string", # required
     #         statements: [
     #           {
-    #             actions: ["__string"],
-    #             principals: ["__string"],
+    #             actions: ["__string"], # required
+    #             principals: ["__string"], # required
     #             statement_id: "__string",
     #           },
     #         ],
@@ -956,31 +1095,44 @@ module Aws::ServerlessApplicationRepository
     # Update application request.
     #
     # @!attribute [rw] author
-    #   The name of the author publishing the app.\\nMin Length=1. Max
-    #   Length=127.\\nPattern
-    #   "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
+    #   The name of the author publishing the app.
+    #
+    #   Min Length=1. Max Length=127.
+    #
+    #   Pattern "^\[a-z0-9\]((\[a-z0-9\]\|-(?!-))*\[a-z0-9\])?$";
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description of the application.\\nMin Length=1. Max Length=256
+    #   The description of the application.
+    #
+    #   Min Length=1. Max Length=256
+    #   @return [String]
+    #
+    # @!attribute [rw] home_page_url
+    #   A URL with more information about the application, for example the
+    #   location of your GitHub repository for the application.
     #   @return [String]
     #
     # @!attribute [rw] labels
-    #   Labels to improve discovery of apps in search results.\\nMin
-    #   Length=1. Max Length=127. Maximum number of labels: 10\\nPattern:
-    #   "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
+    #   Labels to improve discovery of apps in search results.
+    #
+    #   Min Length=1. Max Length=127. Maximum number of labels: 10
+    #
+    #   Pattern: "^\[a-zA-Z0-9+\\\\-\_:\\\\/@\]+$";
     #   @return [Array<String>]
     #
     # @!attribute [rw] readme_body
     #   A raw text Readme file that contains a more detailed description of
-    #   the application and how it works in markdown language.\\nMax size 5
-    #   MB
+    #   the application and how it works in markdown language.
+    #
+    #   Max size 5 MB
     #   @return [String]
     #
     # @!attribute [rw] readme_url
     #   A link to the Readme file that contains a more detailed description
-    #   of the application and how it works in markdown language.\\nMax size
-    #   5 MB
+    #   of the application and how it works in markdown language.
+    #
+    #   Max size 5 MB
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/UpdateApplicationInput AWS API Documentation
@@ -988,6 +1140,7 @@ module Aws::ServerlessApplicationRepository
     class UpdateApplicationInput < Struct.new(
       :author,
       :description,
+      :home_page_url,
       :labels,
       :readme_body,
       :readme_url)
@@ -1001,6 +1154,7 @@ module Aws::ServerlessApplicationRepository
     #         application_id: "__string", # required
     #         author: "__string",
     #         description: "__string",
+    #         home_page_url: "__string",
     #         labels: ["__string"],
     #         readme_body: "__string",
     #         readme_url: "__string",
@@ -1013,6 +1167,9 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] home_page_url
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -1030,6 +1187,7 @@ module Aws::ServerlessApplicationRepository
       :application_id,
       :author,
       :description,
+      :home_page_url,
       :labels,
       :readme_body,
       :readme_url)
@@ -1046,6 +1204,9 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] description
+    #   @return [String]
+    #
+    # @!attribute [rw] home_page_url
     #   @return [String]
     #
     # @!attribute [rw] labels
@@ -1074,6 +1235,7 @@ module Aws::ServerlessApplicationRepository
       :author,
       :creation_time,
       :description,
+      :home_page_url,
       :labels,
       :license_url,
       :name,
@@ -1098,7 +1260,9 @@ module Aws::ServerlessApplicationRepository
     #   @return [Array<Types::ParameterDefinition>]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the application:\\n\\n https://semver.org/
+    #   The semantic version of the application:
+    #
+    #   <a href=""https://semver.org/"">https://semver.org/</a>
     #   @return [String]
     #
     # @!attribute [rw] source_code_url
@@ -1107,7 +1271,7 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] template_url
-    #   A link to the packaged SAM template of your application.
+    #   A link to the packaged AWS SAM template of your application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/Version AWS API Documentation
@@ -1133,7 +1297,9 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] semantic_version
-    #   The semantic version of the application:\\n\\n https://semver.org/
+    #   The semantic version of the application:
+    #
+    #   <a href=""https://semver.org/"">https://semver.org/</a>
     #   @return [String]
     #
     # @!attribute [rw] source_code_url

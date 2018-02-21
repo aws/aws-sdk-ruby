@@ -622,6 +622,17 @@ module Aws::EC2
     #   snapshot = ec2.create_snapshot({
     #     description: "String",
     #     volume_id: "String", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
@@ -629,6 +640,8 @@ module Aws::EC2
     #   A description for the snapshot.
     # @option options [required, String] :volume_id
     #   The ID of the EBS volume.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the snapshot during creation.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
