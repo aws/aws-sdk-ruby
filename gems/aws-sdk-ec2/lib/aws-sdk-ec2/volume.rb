@@ -279,11 +279,24 @@ module Aws::EC2
     #
     #   snapshot = volume.create_snapshot({
     #     description: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :description
     #   A description for the snapshot.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the snapshot during creation.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

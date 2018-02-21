@@ -1510,6 +1510,84 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Adds or updates a file in an AWS CodeCommit repository.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to add or update the file.
+    #
+    # @option params [required, String] :branch_name
+    #   The name of the branch where you want to add or update the file.
+    #
+    # @option params [required, String, IO] :file_content
+    #   The content of the file, in binary object format.
+    #
+    # @option params [required, String] :file_path
+    #   The name of the file you want to add or update, including the relative
+    #   path to the file in the repository.
+    #
+    #   <note markdown="1"> If the path does not currently exist in the repository, the path will
+    #   be created as part of adding the file.
+    #
+    #    </note>
+    #
+    # @option params [String] :file_mode
+    #   The file mode permissions of the blob. Valid file mode permissions are
+    #   listed below.
+    #
+    # @option params [String] :parent_commit_id
+    #   The full commit ID of the head commit in the branch where you want to
+    #   add or update the file. If the commit ID does not match the ID of the
+    #   head commit at the time of the operation, an error will occur, and the
+    #   file will not be added or updated.
+    #
+    # @option params [String] :commit_message
+    #   A message about why this file was added or updated. While optional,
+    #   adding a message is strongly encouraged in order to provide a more
+    #   useful commit history for your repository.
+    #
+    # @option params [String] :name
+    #   The name of the person adding or updating the file. While optional,
+    #   adding a name is strongly encouraged in order to provide a more useful
+    #   commit history for your repository.
+    #
+    # @option params [String] :email
+    #   An email address for the person adding or updating the file.
+    #
+    # @return [Types::PutFileOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutFileOutput#commit_id #commit_id} => String
+    #   * {Types::PutFileOutput#blob_id #blob_id} => String
+    #   * {Types::PutFileOutput#tree_id #tree_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_file({
+    #     repository_name: "RepositoryName", # required
+    #     branch_name: "BranchName", # required
+    #     file_content: "data", # required
+    #     file_path: "Path", # required
+    #     file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #     parent_commit_id: "CommitId",
+    #     commit_message: "Message",
+    #     name: "Name",
+    #     email: "Email",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.commit_id #=> String
+    #   resp.blob_id #=> String
+    #   resp.tree_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFile AWS API Documentation
+    #
+    # @overload put_file(params = {})
+    # @param [Hash] params ({})
+    def put_file(params = {}, options = {})
+      req = build_request(:put_file, params)
+      req.send_request(options)
+    end
+
     # Replaces all triggers for a repository. This can be used to create or
     # delete triggers.
     #
@@ -1906,7 +1984,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

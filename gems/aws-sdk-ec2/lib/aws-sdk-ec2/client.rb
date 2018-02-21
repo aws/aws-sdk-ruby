@@ -4818,19 +4818,26 @@ module Aws::EC2
     # automatically encrypted. Your encrypted volumes and any associated
     # snapshots always remain protected.
     #
-    # For more information, see [Amazon Elastic Block Store][1] and [Amazon
-    # EBS Encryption][2] in the *Amazon Elastic Compute Cloud User Guide*.
+    # You can tag your snapshots during creation. For more information, see
+    # [Tagging Your Amazon EC2 Resources][1].
+    #
+    # For more information, see [Amazon Elastic Block Store][2] and [Amazon
+    # EBS Encryption][3] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html
+    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [String] :description
     #   A description for the snapshot.
     #
     # @option params [required, String] :volume_id
     #   The ID of the EBS volume.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the snapshot during creation.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4884,6 +4891,17 @@ module Aws::EC2
     #   resp = client.create_snapshot({
     #     description: "String",
     #     volume_id: "String", # required
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     dry_run: false,
     #   })
     #
@@ -24028,7 +24046,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
