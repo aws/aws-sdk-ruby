@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ServerlessApplicationRepository - Updated the API, and documentation for AWSServerlessApplicationRepository.
+
 2.11.1 (2018-02-20)
 ------------------
 
