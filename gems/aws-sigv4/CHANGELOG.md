@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.0.3 (2018-02-21)
+------------------
+
+* Issue - Fix Ruby warning: shadowed local variable "headers"
+
 1.0.2 (2017-08-31)
 ------------------
 
