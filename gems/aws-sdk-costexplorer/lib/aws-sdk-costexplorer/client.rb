@@ -158,11 +158,10 @@ module Aws::CostExplorer
     # Retrieve cost and usage metrics for your account. You can specify
     # which cost and usage-related metric, such as `BlendedCosts` or
     # `UsageQuantity`, that you want the request to return. You can also
-    # filter and group your data by various dimensions, such as `AWS
-    # Service` or `AvailabilityZone`, in a specific time range. See the
-    # `GetDimensionValues` action for a complete list of the valid
-    # dimensions. Master accounts in an organization have access to all
-    # member accounts.
+    # filter and group your data by various dimensions, such as `SERVICE` or
+    # `AZ`, in a specific time range. See the `GetDimensionValues` action
+    # for a complete list of the valid dimensions. Master accounts in an
+    # organization have access to all member accounts.
     #
     # @option params [Types::DateInterval] :time_period
     #   Sets the start and end dates for retrieving AWS costs. The start date
@@ -172,19 +171,25 @@ module Aws::CostExplorer
     #   but not including `2017-05-01`.
     #
     # @option params [String] :granularity
-    #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`.
+    #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`. If
+    #   `Granularity` isn't set, the response object doesn't include the
+    #   `Granularity`, either `MONTHLY` or `DAILY`.
     #
     # @option params [Types::Expression] :filter
     #   Filters AWS costs by different dimensions. For example, you can
-    #   specify `Service` and `Linked Account` and get the costs associated
+    #   specify `SERVICE` and `LINKED_ACCOUNT` and get the costs associated
     #   with that account's usage of that service. You can nest `Expression`
     #   objects to define any combination of dimension filters. For more
-    #   information, see the `Expression` object or `More Examples`.
+    #   information, see [Expression][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
     #
     # @option params [Array<String>] :metrics
     #   Which metrics are returned in the query. For more information about
-    #   blended and unblended rates, see
-    #   https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/.
+    #   blended and unblended rates, see [Why does the "blended" annotation
+    #   appear on some line items in my bill?][1].
     #
     #   Valid values are `BlendedCost`, `UnblendedCost`, and `UsageQuantity`.
     #
@@ -197,6 +202,10 @@ module Aws::CostExplorer
     #
     #    </note>
     #
+    #
+    #
+    #   [1]: https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
+    #
     # @option params [Array<Types::GroupDefinition>] :group_by
     #   You can group AWS costs using up to two different groups, either
     #   dimensions, tag keys, or both.
@@ -204,9 +213,9 @@ module Aws::CostExplorer
     #   When you group by tag key, you get all tag values, including empty
     #   strings.
     #
-    #   Valid values are: `AZ`, `INSTANCE_TYPE`, `LINKED_ACCCOUNT`,
-    #   `OPERATION`, `PURCHASE_TYPE`, `SERVICE`, `USAGE_TYPE`, `TAGS`, and
-    #   `PLATFORM`.
+    #   Valid values are `AZ`, `INSTANCE_TYPE`, `LINKED_ACCOUNT`, `OPERATION`,
+    #   `PLATFORM`, `PURCHASE_TYPE`, `SERVICE`, `TAGS`, `TENANCY`, and
+    #   `USAGE_TYPE`.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -242,7 +251,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -304,16 +313,16 @@ module Aws::CostExplorer
     #   `2017-04-30` but not including `2017-05-01`.
     #
     # @option params [required, String] :dimension
-    #   The name of the dimension. Different `Dimensions`are available for
-    #   different `Context`s. For more information, see `Context`.
+    #   The name of the dimension. Each `Dimensions`is available for different
+    #   a `Context`. For more information, see `Context`.
     #
     # @option params [String] :context
     #   The context for the call to `GetDimensionValues`. This can be
-    #   `RESERVED_INSTANCE` or `COST_AND_USAGE`. The default value is
-    #   `COST_AND_USAGE`. If the context is set to `RESERVED_INSTANCE`, the
+    #   `RESERVATIONS` or `COST_AND_USAGE`. The default value is
+    #   `COST_AND_USAGE`. If the context is set to `RESERVATIONS`, the
     #   resulting dimension values can be used in the
     #   `GetReservationUtilization` action. If the context is set to
-    #   `COST_AND_USAGE`, , the resulting dimension values can be used in the
+    #   `COST_AND_USAGE`, the resulting dimension values can be used in the
     #   `GetCostAndUsage` operation.
     #
     #   If you set the context to `CostAndUsage`, you can use the following
@@ -321,51 +330,52 @@ module Aws::CostExplorer
     #
     #   * AZ - The Availability Zone. An example is us-east-1a.
     #
-    #   * InstanceType - The type of EC2 instance. An example is m4.xlarge.
+    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is m4.xlarge.
     #
-    #   * LinkedAccount - The description in the attribute map that includes
+    #   * LINKED\_ACCOUNT - The description in the attribute map that includes
     #     the full name of the member account. The value field contains the
     #     AWS ID of the member account
     #
-    #   * Operation - The action performed. Examples include RunInstance and
+    #   * OPERATION - The action performed. Examples include RunInstance and
     #     CreateBucket.
     #
-    #   * PurchaseType - The reservation type of the purchase to which this
+    #   * PURCHASE\_TYPE - The reservation type of the purchase to which this
     #     usage is related. Examples include: On Demand Instances and Standard
     #     Reserved Instances
     #
-    #   * Service - The AWS service such as DynamoDB.
+    #   * SERVICE - The AWS service such as DynamoDB.
     #
-    #   * UsageType -The type of usage. An example is DataTransfer-In-Bytes.
-    #     The response for the GetDimensionValues action includes a unit
-    #     attribute, examples of which include GB and Hrs.
+    #   * USAGE\_TYPE - The type of usage. An example is
+    #     DataTransfer-In-Bytes. The response for the GetDimensionValues
+    #     action includes a unit attribute, examples of which include GB and
+    #     Hrs.
     #
-    #   * UsageTypeGroup - The grouping of common usage types. An example is
-    #     EC2: CloudWatch – Alarms. The response for this action includes a
+    #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An example
+    #     is EC2: CloudWatch – Alarms. The response for this action includes a
     #     unit attribute.
     #
-    #   * RecordType - The different types of charges such as RI fees, usage
-    #     costs, tax refunds, and credits
+    #   * RECORD\_TYPE - The different types of charges such as RI fees, usage
+    #     costs, tax refunds, and credits.
     #
-    #   If you set the context to `ReservedInstance`, you can use the
-    #   following dimensions for searching:
+    #   If you set the context to `RESERVATIONS`, you can use the following
+    #   dimensions for searching:
     #
     #   * AZ - The Availability Zone. An example is us-east-1a.
     #
-    #   * InstanceType - The type of EC2 instance. An example is m4.xlarge.
+    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is m4.xlarge.
     #
-    #   * LinkedAccount - The description in the attribute map that includes
+    #   * LINKED\_ACCOUNT - The description in the attribute map that includes
     #     the full name of the member account. The value field contains the
     #     AWS ID of the member account
     #
-    #   * Platform - The operating system. Examples are Windows or Linux.
+    #   * PLATFORM - The operating system. Examples are Windows or Linux.
     #
-    #   * Region - The AWS region.
+    #   * REGION - The AWS region.
     #
-    #   * Scope - The scope of a reserved instance (RI). Values are regional
+    #   * SCOPE - The scope of a reserved instance (RI). Values are regional
     #     or a single availability zone.
     #
-    #   * Tenancy - The tenancy of a resource. Examples are shared or
+    #   * TENANCY - The tenancy of a resource. Examples are shared or
     #     dedicated.
     #
     # @option params [String] :next_page_token
@@ -388,7 +398,7 @@ module Aws::CostExplorer
     #       start: "YearMonthDay", # required
     #       end: "YearMonthDay", # required
     #     },
-    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID
+    #     dimension: "AZ", # required, accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY
     #     context: "COST_AND_USAGE", # accepts COST_AND_USAGE, RESERVATIONS
     #     next_page_token: "NextPageToken",
     #   })
@@ -412,6 +422,161 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Retrieve the reservation coverage for your account. An organization's
+    # master account has access to the associated member accounts. For any
+    # time period, you can filter data about reservation usage by the
+    # following dimensions.
+    #
+    # * AZ
+    #
+    # * INSTANCE\_TYPE
+    #
+    # * LINKED\_ACCOUNT
+    #
+    # * PLATFORM
+    #
+    # * REGION
+    #
+    # * TENANCY
+    #
+    # To determine valid values for a dimension, use the
+    # `GetDimensionValues` operation.
+    #
+    # @option params [required, Types::DateInterval] :time_period
+    #   The start and end dates of the period for which you want to retrieve
+    #   data about reservation coverage. You can retrieve data for a maximum
+    #   of 13 months-the last 12 months and the current month. The start date
+    #   is inclusive, but the end date is exclusive. For example, if `start`
+    #   is `2017-01-01` and `end` is `2017-05-01`, then the cost and usage
+    #   data is retrieved from `2017-01-01` up to and including `2017-04-30`
+    #   but not including `2017-05-01`.
+    #
+    # @option params [Array<Types::GroupDefinition>] :group_by
+    #   You can group the data by the following attributes.
+    #
+    #   * AZ
+    #
+    #   * INSTANCE\_TYPE
+    #
+    #   * LINKED\_ACCOUNT
+    #
+    #   * PLATFORM
+    #
+    #   * REGION
+    #
+    #   * TENANCY
+    #
+    # @option params [String] :granularity
+    #   The granularity of the AWS cost data for the reservation. Valid values
+    #   are `MONTHLY` and `DAILY`.
+    #
+    #   If `GroupBy` is set, `Granularity` can't be set. If `Granularity`
+    #   isn't set, the response object doesn't include the `Granularity`,
+    #   either `MONTHLY` or `DAILY`.
+    #
+    # @option params [Types::Expression] :filter
+    #   Filters utilization data by dimensions. You can filter by the
+    #   following dimensions.
+    #
+    #   * AZ
+    #
+    #   * INSTANCE\_TYPE
+    #
+    #   * LINKED\_ACCOUNT
+    #
+    #   * PLATFORM
+    #
+    #   * REGION
+    #
+    #   * TENANCY
+    #
+    #   `GetReservationCoverage` uses the same `Expression` object as the
+    #   other operations, but only `AND` is supported among each dimension.
+    #   You can nest only one level deep. If there are multiple values for a
+    #   dimension, they are OR'd together.
+    #
+    # @option params [String] :next_page_token
+    #   The token to retrieve the next set of results. AWS provides the token
+    #   when the response from a previous call has more results than the
+    #   maximum page size.
+    #
+    # @return [Types::GetReservationCoverageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetReservationCoverageResponse#coverages_by_time #coverages_by_time} => Array&lt;Types::CoverageByTime&gt;
+    #   * {Types::GetReservationCoverageResponse#total #total} => Types::Coverage
+    #   * {Types::GetReservationCoverageResponse#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_reservation_coverage({
+    #     time_period: { # required
+    #       start: "YearMonthDay", # required
+    #       end: "YearMonthDay", # required
+    #     },
+    #     group_by: [
+    #       {
+    #         type: "DIMENSION", # accepts DIMENSION, TAG
+    #         key: "GroupDefinitionKey",
+    #       },
+    #     ],
+    #     granularity: "DAILY", # accepts DAILY, MONTHLY
+    #     filter: {
+    #       or: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       and: [
+    #         {
+    #           # recursive Expression
+    #         },
+    #       ],
+    #       not: {
+    #         # recursive Expression
+    #       },
+    #       dimensions: {
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY
+    #         values: ["Value"],
+    #       },
+    #       tags: {
+    #         key: "TagKey",
+    #         values: ["Value"],
+    #       },
+    #     },
+    #     next_page_token: "NextPageToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.coverages_by_time #=> Array
+    #   resp.coverages_by_time[0].time_period.start #=> String
+    #   resp.coverages_by_time[0].time_period.end #=> String
+    #   resp.coverages_by_time[0].groups #=> Array
+    #   resp.coverages_by_time[0].groups[0].attributes #=> Hash
+    #   resp.coverages_by_time[0].groups[0].attributes["AttributeType"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.on_demand_hours #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.reserved_hours #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.total_running_hours #=> String
+    #   resp.coverages_by_time[0].groups[0].coverage.coverage_hours.coverage_hours_percentage #=> String
+    #   resp.coverages_by_time[0].total.coverage_hours.on_demand_hours #=> String
+    #   resp.coverages_by_time[0].total.coverage_hours.reserved_hours #=> String
+    #   resp.coverages_by_time[0].total.coverage_hours.total_running_hours #=> String
+    #   resp.coverages_by_time[0].total.coverage_hours.coverage_hours_percentage #=> String
+    #   resp.total.coverage_hours.on_demand_hours #=> String
+    #   resp.total.coverage_hours.reserved_hours #=> String
+    #   resp.total.coverage_hours.total_running_hours #=> String
+    #   resp.total.coverage_hours.coverage_hours_percentage #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverage AWS API Documentation
+    #
+    # @overload get_reservation_coverage(params = {})
+    # @param [Hash] params ({})
+    def get_reservation_coverage(params = {}, options = {})
+      req = build_request(:get_reservation_coverage, params)
+      req.send_request(options)
+    end
+
     # You can retrieve the Reservation utilization for your account. Master
     # accounts in an organization have access to their associated member
     # accounts. You can filter data by dimensions in a time period. You can
@@ -427,14 +592,13 @@ module Aws::CostExplorer
     #   `2017-05-01`.
     #
     # @option params [Array<Types::GroupDefinition>] :group_by
-    #   Groups only by `SubscriptionId`. Metadata is included.
+    #   Groups only by `SUBSCRIPTION_ID`. Metadata is included.
     #
     # @option params [String] :granularity
-    #   Sets the AWS cost granularity to `MONTHLY` or `DAILY`. If both
-    #   `GroupBy` and `granularity` are not set, `GetReservationUtilization`
-    #   defaults to `DAILY`. If `GroupBy` is set, `Granularity` can't be set,
-    #   and the response object doesn't include `MONTHLY` or `DAILY`
-    #   granularity.
+    #   If `GroupBy` is set, `Granularity` can't be set. If `Granularity`
+    #   isn't set, the response object doesn't include the `Granularity`,
+    #   either `MONTHLY` or `DAILY`. If both `GroupBy` and `Granularity`
+    #   aren't set, `GetReservationUtilization` defaults to `DAILY`.
     #
     # @option params [Types::Expression] :filter
     #   Filters utilization data by using different dimensions.
@@ -483,7 +647,7 @@ module Aws::CostExplorer
     #         # recursive Expression
     #       },
     #       dimensions: {
-    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID
+    #         key: "AZ", # accepts AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PURCHASE_TYPE, REGION, SERVICE, USAGE_TYPE, USAGE_TYPE_GROUP, RECORD_TYPE, OPERATING_SYSTEM, TENANCY, SCOPE, PLATFORM, SUBSCRIPTION_ID, LEGAL_ENTITY_NAME, DEPLOYMENT_OPTION, DATABASE_ENGINE, CACHE_ENGINE, INSTANCE_TYPE_FAMILY
     #         values: ["Value"],
     #       },
     #       tags: {
@@ -597,7 +761,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
