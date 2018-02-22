@@ -284,29 +284,34 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The IDs of the subnets to attach to the load balancer. You can
-    #   specify only one subnet per Availability Zone. You must specify
-    #   either subnets or subnet mappings.
+    #   The IDs of the public subnets. You can specify only one subnet per
+    #   Availability Zone. You must specify either subnets or subnet
+    #   mappings.
     #
     #   \[Application Load Balancers\] You must specify subnets from at
     #   least two Availability Zones.
+    #
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
-    #   The IDs of the subnets to attach to the load balancer. You can
-    #   specify only one subnet per Availability Zone. You must specify
-    #   either subnets or subnet mappings.
+    #   The IDs of the public subnets. You can specify only one subnet per
+    #   Availability Zone. You must specify either subnets or subnet
+    #   mappings.
     #
-    #   \[Network Load Balancers\] You can specify one Elastic IP address
-    #   per subnet.
-    #
-    #   \[Application Load Balancers\] You cannot specify Elastic IP
+    #   \[Application Load Balancers\] You must specify subnets from at
+    #   least two Availability Zones. You cannot specify Elastic IP
     #   addresses for your subnets.
+    #
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones. You can specify one Elastic IP address per
+    #   subnet.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @!attribute [rw] security_groups
-    #   \[Application Load Balancers\] The IDs of the security groups to
-    #   assign to the load balancer.
+    #   \[Application Load Balancers\] The IDs of the security groups for
+    #   the load balancer.
     #   @return [Array<String>]
     #
     # @!attribute [rw] scheme
@@ -330,7 +335,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] type
-    #   The type of load balancer to create. The default is `application`.
+    #   The type of load balancer. The default is `application`.
     #   @return [String]
     #
     # @!attribute [rw] ip_address_type
@@ -1227,6 +1232,10 @@ module Aws::ElasticLoadBalancingV2
     #   * target-groups
     #
     #   * targets-per-application-load-balancer
+    #
+    #   * targets-per-availability-zone-per-network-load-balancer
+    #
+    #   * targets-per-network-load-balancer
     #   @return [String]
     #
     # @!attribute [rw] max
@@ -1419,6 +1428,14 @@ module Aws::ElasticLoadBalancingV2
     #   * `idle_timeout.timeout_seconds` - \[Application Load Balancers\]
     #     The idle timeout value, in seconds. The valid range is 1-4000. The
     #     default is 60 seconds.
+    #
+    #   * `load_balancing.cross_zone.enabled` - \[Network Load Balancers\]
+    #     Indicates whether cross-zone load balancing is enabled. The value
+    #     is `true` or `false`. The default is `false`.
+    #
+    #   * `routing.http2.enabled` - \[Application Load Balancers\] Indicates
+    #     whether HTTP/2 is enabled. The value is `true` or `false`. The
+    #     default is `true`.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2119,18 +2136,19 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] subnets
-    #   The IDs of the subnets. You must specify subnets from at least two
-    #   Availability Zones. You can specify only one subnet per Availability
-    #   Zone. You must specify either subnets or subnet mappings.
+    #   The IDs of the public subnets. You must specify subnets from at
+    #   least two Availability Zones. You can specify only one subnet per
+    #   Availability Zone. You must specify either subnets or subnet
+    #   mappings.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_mappings
-    #   The IDs of the subnets. You must specify subnets from at least two
-    #   Availability Zones. You can specify only one subnet per Availability
-    #   Zone. You must specify either subnets or subnet mappings.
+    #   The IDs of the public subnets. You must specify subnets from at
+    #   least two Availability Zones. You can specify only one subnet per
+    #   Availability Zone. You must specify either subnets or subnet
+    #   mappings.
     #
-    #   The load balancer is allocated one static IP address per subnet. You
-    #   cannot specify your own Elastic IP addresses.
+    #   You cannot specify Elastic IP addresses for your subnets.
     #   @return [Array<Types::SubnetMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation
@@ -2402,6 +2420,9 @@ module Aws::ElasticLoadBalancingV2
     #     Elastic Load Balancing to wait before changing the state of a
     #     deregistering target from `draining` to `unused`. The range is
     #     0-3600 seconds. The default value is 300 seconds.
+    #
+    #   * `proxy_protocol_v2.enabled` - \[Network Load Balancers\] Indicates
+    #     whether Proxy Protocol version 2 is enabled.
     #
     #   * `stickiness.enabled` - \[Application Load Balancers\] Indicates
     #     whether sticky sessions are enabled. The value is `true` or

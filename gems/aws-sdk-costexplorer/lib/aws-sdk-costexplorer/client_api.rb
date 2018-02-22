@@ -14,7 +14,14 @@ module Aws::CostExplorer
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
+    BillExpirationException = Shapes::StructureShape.new(name: 'BillExpirationException')
     Context = Shapes::StringShape.new(name: 'Context')
+    Coverage = Shapes::StructureShape.new(name: 'Coverage')
+    CoverageByTime = Shapes::StructureShape.new(name: 'CoverageByTime')
+    CoverageHours = Shapes::StructureShape.new(name: 'CoverageHours')
+    CoverageHoursPercentage = Shapes::StringShape.new(name: 'CoverageHoursPercentage')
+    CoveragesByTime = Shapes::ListShape.new(name: 'CoveragesByTime')
+    DataUnavailableException = Shapes::StructureShape.new(name: 'DataUnavailableException')
     DateInterval = Shapes::StructureShape.new(name: 'DateInterval')
     Dimension = Shapes::StringShape.new(name: 'Dimension')
     DimensionValues = Shapes::StructureShape.new(name: 'DimensionValues')
@@ -29,6 +36,8 @@ module Aws::CostExplorer
     GetCostAndUsageResponse = Shapes::StructureShape.new(name: 'GetCostAndUsageResponse')
     GetDimensionValuesRequest = Shapes::StructureShape.new(name: 'GetDimensionValuesRequest')
     GetDimensionValuesResponse = Shapes::StructureShape.new(name: 'GetDimensionValuesResponse')
+    GetReservationCoverageRequest = Shapes::StructureShape.new(name: 'GetReservationCoverageRequest')
+    GetReservationCoverageResponse = Shapes::StructureShape.new(name: 'GetReservationCoverageResponse')
     GetReservationUtilizationRequest = Shapes::StructureShape.new(name: 'GetReservationUtilizationRequest')
     GetReservationUtilizationResponse = Shapes::StructureShape.new(name: 'GetReservationUtilizationResponse')
     GetTagsRequest = Shapes::StructureShape.new(name: 'GetTagsRequest')
@@ -40,6 +49,7 @@ module Aws::CostExplorer
     GroupDefinitionType = Shapes::StringShape.new(name: 'GroupDefinitionType')
     GroupDefinitions = Shapes::ListShape.new(name: 'GroupDefinitions')
     Groups = Shapes::ListShape.new(name: 'Groups')
+    InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     Key = Shapes::StringShape.new(name: 'Key')
     Keys = Shapes::ListShape.new(name: 'Keys')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -50,13 +60,17 @@ module Aws::CostExplorer
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
     Metrics = Shapes::MapShape.new(name: 'Metrics')
     NextPageToken = Shapes::StringShape.new(name: 'NextPageToken')
+    OnDemandHours = Shapes::StringShape.new(name: 'OnDemandHours')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
     ReservationAggregates = Shapes::StructureShape.new(name: 'ReservationAggregates')
+    ReservationCoverageGroup = Shapes::StructureShape.new(name: 'ReservationCoverageGroup')
+    ReservationCoverageGroups = Shapes::ListShape.new(name: 'ReservationCoverageGroups')
     ReservationGroupKey = Shapes::StringShape.new(name: 'ReservationGroupKey')
     ReservationGroupValue = Shapes::StringShape.new(name: 'ReservationGroupValue')
     ReservationUtilizationGroup = Shapes::StructureShape.new(name: 'ReservationUtilizationGroup')
     ReservationUtilizationGroups = Shapes::ListShape.new(name: 'ReservationUtilizationGroups')
+    ReservedHours = Shapes::StringShape.new(name: 'ReservedHours')
     ResultByTime = Shapes::StructureShape.new(name: 'ResultByTime')
     ResultsByTime = Shapes::ListShape.new(name: 'ResultsByTime')
     SearchString = Shapes::StringShape.new(name: 'SearchString')
@@ -64,6 +78,7 @@ module Aws::CostExplorer
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValues = Shapes::StructureShape.new(name: 'TagValues')
     TotalActualHours = Shapes::StringShape.new(name: 'TotalActualHours')
+    TotalRunningHours = Shapes::StringShape.new(name: 'TotalRunningHours')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
     UtilizationPercentage = Shapes::StringShape.new(name: 'UtilizationPercentage')
@@ -74,6 +89,22 @@ module Aws::CostExplorer
 
     Attributes.key = Shapes::ShapeRef.new(shape: AttributeType)
     Attributes.value = Shapes::ShapeRef.new(shape: AttributeValue)
+
+    Coverage.add_member(:coverage_hours, Shapes::ShapeRef.new(shape: CoverageHours, location_name: "CoverageHours"))
+    Coverage.struct_class = Types::Coverage
+
+    CoverageByTime.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimePeriod"))
+    CoverageByTime.add_member(:groups, Shapes::ShapeRef.new(shape: ReservationCoverageGroups, location_name: "Groups"))
+    CoverageByTime.add_member(:total, Shapes::ShapeRef.new(shape: Coverage, location_name: "Total"))
+    CoverageByTime.struct_class = Types::CoverageByTime
+
+    CoverageHours.add_member(:on_demand_hours, Shapes::ShapeRef.new(shape: OnDemandHours, location_name: "OnDemandHours"))
+    CoverageHours.add_member(:reserved_hours, Shapes::ShapeRef.new(shape: ReservedHours, location_name: "ReservedHours"))
+    CoverageHours.add_member(:total_running_hours, Shapes::ShapeRef.new(shape: TotalRunningHours, location_name: "TotalRunningHours"))
+    CoverageHours.add_member(:coverage_hours_percentage, Shapes::ShapeRef.new(shape: CoverageHoursPercentage, location_name: "CoverageHoursPercentage"))
+    CoverageHours.struct_class = Types::CoverageHours
+
+    CoveragesByTime.member = Shapes::ShapeRef.new(shape: CoverageByTime)
 
     DateInterval.add_member(:start, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "Start"))
     DateInterval.add_member(:end, Shapes::ShapeRef.new(shape: YearMonthDay, required: true, location_name: "End"))
@@ -123,6 +154,18 @@ module Aws::CostExplorer
     GetDimensionValuesResponse.add_member(:total_size, Shapes::ShapeRef.new(shape: PageSize, required: true, location_name: "TotalSize"))
     GetDimensionValuesResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
     GetDimensionValuesResponse.struct_class = Types::GetDimensionValuesResponse
+
+    GetReservationCoverageRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
+    GetReservationCoverageRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
+    GetReservationCoverageRequest.add_member(:granularity, Shapes::ShapeRef.new(shape: Granularity, location_name: "Granularity"))
+    GetReservationCoverageRequest.add_member(:filter, Shapes::ShapeRef.new(shape: Expression, location_name: "Filter"))
+    GetReservationCoverageRequest.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetReservationCoverageRequest.struct_class = Types::GetReservationCoverageRequest
+
+    GetReservationCoverageResponse.add_member(:coverages_by_time, Shapes::ShapeRef.new(shape: CoveragesByTime, required: true, location_name: "CoveragesByTime"))
+    GetReservationCoverageResponse.add_member(:total, Shapes::ShapeRef.new(shape: Coverage, location_name: "Total"))
+    GetReservationCoverageResponse.add_member(:next_page_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextPageToken"))
+    GetReservationCoverageResponse.struct_class = Types::GetReservationCoverageResponse
 
     GetReservationUtilizationRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: DateInterval, required: true, location_name: "TimePeriod"))
     GetReservationUtilizationRequest.add_member(:group_by, Shapes::ShapeRef.new(shape: GroupDefinitions, location_name: "GroupBy"))
@@ -176,6 +219,12 @@ module Aws::CostExplorer
     ReservationAggregates.add_member(:total_actual_hours, Shapes::ShapeRef.new(shape: TotalActualHours, location_name: "TotalActualHours"))
     ReservationAggregates.add_member(:unused_hours, Shapes::ShapeRef.new(shape: UnusedHours, location_name: "UnusedHours"))
     ReservationAggregates.struct_class = Types::ReservationAggregates
+
+    ReservationCoverageGroup.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))
+    ReservationCoverageGroup.add_member(:coverage, Shapes::ShapeRef.new(shape: Coverage, location_name: "Coverage"))
+    ReservationCoverageGroup.struct_class = Types::ReservationCoverageGroup
+
+    ReservationCoverageGroups.member = Shapes::ShapeRef.new(shape: ReservationCoverageGroup)
 
     ReservationUtilizationGroup.add_member(:key, Shapes::ShapeRef.new(shape: ReservationGroupKey, location_name: "Key"))
     ReservationUtilizationGroup.add_member(:value, Shapes::ShapeRef.new(shape: ReservationGroupValue, location_name: "Value"))
@@ -231,6 +280,9 @@ module Aws::CostExplorer
         o.input = Shapes::ShapeRef.new(shape: GetCostAndUsageRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCostAndUsageResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:get_dimension_values, Seahorse::Model::Operation.new.tap do |o|
@@ -240,6 +292,19 @@ module Aws::CostExplorer
         o.input = Shapes::ShapeRef.new(shape: GetDimensionValuesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDimensionValuesResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:get_reservation_coverage, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetReservationCoverage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetReservationCoverageRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetReservationCoverageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:get_reservation_utilization, Seahorse::Model::Operation.new.tap do |o|
@@ -249,6 +314,8 @@ module Aws::CostExplorer
         o.input = Shapes::ShapeRef.new(shape: GetReservationUtilizationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetReservationUtilizationResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:get_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -258,6 +325,8 @@ module Aws::CostExplorer
         o.input = Shapes::ShapeRef.new(shape: GetTagsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
     end
 
