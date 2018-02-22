@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.3 (2018-02-22)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
