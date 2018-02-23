@@ -25,6 +25,8 @@ module Aws::AppStream
     ComputeCapacity = Shapes::StructureShape.new(name: 'ComputeCapacity')
     ComputeCapacityStatus = Shapes::StructureShape.new(name: 'ComputeCapacityStatus')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    CopyImageRequest = Shapes::StructureShape.new(name: 'CopyImageRequest')
+    CopyImageResponse = Shapes::StructureShape.new(name: 'CopyImageResponse')
     CreateDirectoryConfigRequest = Shapes::StructureShape.new(name: 'CreateDirectoryConfigRequest')
     CreateDirectoryConfigResult = Shapes::StructureShape.new(name: 'CreateDirectoryConfigResult')
     CreateFleetRequest = Shapes::StructureShape.new(name: 'CreateFleetRequest')
@@ -109,6 +111,7 @@ module Aws::AppStream
     OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     RedirectURL = Shapes::StringShape.new(name: 'RedirectURL')
+    RegionName = Shapes::StringShape.new(name: 'RegionName')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceError = Shapes::StructureShape.new(name: 'ResourceError')
     ResourceErrors = Shapes::ListShape.new(name: 'ResourceErrors')
@@ -187,6 +190,15 @@ module Aws::AppStream
     ComputeCapacityStatus.add_member(:in_use, Shapes::ShapeRef.new(shape: Integer, location_name: "InUse"))
     ComputeCapacityStatus.add_member(:available, Shapes::ShapeRef.new(shape: Integer, location_name: "Available"))
     ComputeCapacityStatus.struct_class = Types::ComputeCapacityStatus
+
+    CopyImageRequest.add_member(:source_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "SourceImageName"))
+    CopyImageRequest.add_member(:destination_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "DestinationImageName"))
+    CopyImageRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "DestinationRegion"))
+    CopyImageRequest.add_member(:destination_image_description, Shapes::ShapeRef.new(shape: Description, location_name: "DestinationImageDescription"))
+    CopyImageRequest.struct_class = Types::CopyImageRequest
+
+    CopyImageResponse.add_member(:destination_image_name, Shapes::ShapeRef.new(shape: Name, location_name: "DestinationImageName"))
+    CopyImageResponse.struct_class = Types::CopyImageResponse
 
     CreateDirectoryConfigRequest.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
     CreateDirectoryConfigRequest.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, required: true, location_name: "OrganizationalUnitDistinguishedNames"))
@@ -623,6 +635,19 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:copy_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyImageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
 
       api.add_operation(:create_directory_config, Seahorse::Model::Operation.new.tap do |o|

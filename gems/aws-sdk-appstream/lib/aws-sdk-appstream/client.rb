@@ -181,6 +181,52 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Copies the image within the same region or to a new region within the
+    # same AWS account. Note that any tags you added to the image will not
+    # be copied.
+    #
+    # @option params [required, String] :source_image_name
+    #   The name of the image to copy.
+    #
+    # @option params [required, String] :destination_image_name
+    #   The name that the image will have when it is copied to the
+    #   destination.
+    #
+    # @option params [required, String] :destination_region
+    #   The destination region to which the image will be copied. This
+    #   parameter is required, even if you are copying an image within the
+    #   same region.
+    #
+    # @option params [String] :destination_image_description
+    #   The description that the image will have when it is copied to the
+    #   destination.
+    #
+    # @return [Types::CopyImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyImageResponse#destination_image_name #destination_image_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_image({
+    #     source_image_name: "Name", # required
+    #     destination_image_name: "Name", # required
+    #     destination_region: "RegionName", # required
+    #     destination_image_description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_image_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImage AWS API Documentation
+    #
+    # @overload copy_image(params = {})
+    # @param [Hash] params ({})
+    def copy_image(params = {}, options = {})
+      req = build_request(:copy_image, params)
+      req.send_request(options)
+    end
+
     # Creates a directory configuration.
     #
     # @option params [required, String] :directory_name
@@ -703,12 +749,12 @@ module Aws::AppStream
     #   resp.image.arn #=> String
     #   resp.image.base_image_arn #=> String
     #   resp.image.display_name #=> String
-    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "DELETING"
+    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.platform #=> String, one of "WINDOWS"
     #   resp.image.description #=> String
-    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE"
+    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.image.state_change_reason.message #=> String
     #   resp.image.applications #=> Array
     #   resp.image.applications[0].name #=> String
@@ -998,12 +1044,12 @@ module Aws::AppStream
     #   resp.images[0].arn #=> String
     #   resp.images[0].base_image_arn #=> String
     #   resp.images[0].display_name #=> String
-    #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "DELETING"
+    #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
     #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].platform #=> String, one of "WINDOWS"
     #   resp.images[0].description #=> String
-    #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE"
+    #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.images[0].state_change_reason.message #=> String
     #   resp.images[0].applications #=> Array
     #   resp.images[0].applications[0].name #=> String
@@ -1033,10 +1079,10 @@ module Aws::AppStream
     # is to authenticate users using a streaming URL.
     #
     # @option params [required, String] :stack_name
-    #   The name of the stack.
+    #   The name of the stack. This value is case-sensitive.
     #
     # @option params [required, String] :fleet_name
-    #   The name of the fleet.
+    #   The name of the fleet. This value is case-sensitive.
     #
     # @option params [String] :user_id
     #   The user ID.
@@ -1812,7 +1858,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
