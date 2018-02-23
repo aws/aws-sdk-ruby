@@ -130,6 +130,57 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_image_name: "Name", # required
+    #         destination_image_name: "Name", # required
+    #         destination_region: "RegionName", # required
+    #         destination_image_description: "Description",
+    #       }
+    #
+    # @!attribute [rw] source_image_name
+    #   The name of the image to copy.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_image_name
+    #   The name that the image will have when it is copied to the
+    #   destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_region
+    #   The destination region to which the image will be copied. This
+    #   parameter is required, even if you are copying an image within the
+    #   same region.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_image_description
+    #   The description that the image will have when it is copied to the
+    #   destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImageRequest AWS API Documentation
+    #
+    class CopyImageRequest < Struct.new(
+      :source_image_name,
+      :destination_image_name,
+      :destination_region,
+      :destination_image_description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_image_name
+    #   The name of the destination image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImageResponse AWS API Documentation
+    #
+    class CopyImageResponse < Struct.new(
+      :destination_image_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDirectoryConfigRequest
     #   data as a hash:
     #
@@ -902,11 +953,11 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] stack_name
-    #   The name of the stack.
+    #   The name of the stack. This value is case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] fleet_name
-    #   The name of the fleet.
+    #   The name of the fleet. This value is case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] user_id
