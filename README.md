@@ -67,6 +67,8 @@ The SDK searches the following locations for credentials:
     * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
 * From an instance profile when running on EC2, or from the ECS credential provider when running in an ECS container with that feature enabled.
 
+**Shared configuration is loaded only a single time, and credentials are provided statically at client creation time. Shared credentials do not refresh.**
+
 The SDK searches the following locations for a region:
 
 * `ENV['AWS_REGION']`
