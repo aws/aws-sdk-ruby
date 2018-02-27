@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.5 (2018-02-27)
+------------------
+
 * Feature - Aws::Route53 - Updated the API for Amazon Route 53.
 
 * Feature - Aws::STS - Updated the API, and documentation for AWS Security Token Service.
