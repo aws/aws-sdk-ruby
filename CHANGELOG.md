@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.6 (2018-02-27)
+------------------
+
 * Feature - Aws::ECR - Updated the documentation for Amazon EC2 Container Registry.
 
 2.11.5 (2018-02-27)
