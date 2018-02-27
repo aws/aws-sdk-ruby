@@ -207,22 +207,6 @@
       "errors" : [ ],
       "authtype" : "none"
     },
-    "PutNoauthMultiLocation" : {
-      "name" : "PutNoauthMultiLocation",
-      "http" : {
-        "method" : "PUT",
-        "requestUri" : "/test/noauth/{multi-location}",
-        "responseCode" : 200
-      },
-      "input" : {
-        "shape" : "PutNoauthMultiLocationRequest"
-      },
-      "output" : {
-        "shape" : "PutNoauthMultiLocationResponse"
-      },
-      "errors" : [ ],
-      "authtype" : "none"
-    },
     "PutNoauthRefsCanonList" : {
       "name" : "PutNoauthRefsCanonList",
       "http" : {
@@ -235,22 +219,6 @@
       },
       "output" : {
         "shape" : "PutNoauthRefsCanonListResponse"
-      },
-      "errors" : [ ],
-      "authtype" : "none"
-    },
-    "PutNoauthRefsCanonListOfScalars" : {
-      "name" : "PutNoauthRefsCanonListOfScalars",
-      "http" : {
-        "method" : "PUT",
-        "requestUri" : "/test/noauth/refs/canon/list-of-scalars",
-        "responseCode" : 200
-      },
-      "input" : {
-        "shape" : "PutNoauthRefsCanonListOfScalarsRequest"
-      },
-      "output" : {
-        "shape" : "PutNoauthRefsCanonListOfScalarsResponse"
       },
       "errors" : [ ],
       "authtype" : "none"
@@ -302,22 +270,6 @@
       },
       "errors" : [ ],
       "authtype" : "none"
-    },
-    "lowercaseOperationName" : {
-      "name" : "lowercaseOperationName",
-      "http" : {
-        "method" : "PUT",
-        "requestUri" : "/test/noauth/lowercase-operation-name",
-        "responseCode" : 200
-      },
-      "input" : {
-        "shape" : "lowercaseOperationNameRequest"
-      },
-      "output" : {
-        "shape" : "lowercaseOperationNameResponse"
-      },
-      "errors" : [ ],
-      "authtype" : "none"
     }
   },
   "shapes" : {
@@ -325,7 +277,7 @@
       "type" : "structure",
       "members" : {
         "AnonymousList" : {
-          "shape" : "ListOfAnonymousListItem",
+          "shape" : "__listOf__AnonymousListElement",
           "locationName" : "anonymousList"
         }
       }
@@ -334,7 +286,7 @@
       "type" : "structure",
       "members" : {
         "AnonMapStringToString" : {
-          "shape" : "MapOf__string",
+          "shape" : "__mapOf__string",
           "locationName" : "anonMapStringToString"
         }
       }
@@ -351,15 +303,6 @@
     "AnonymousEnum" : {
       "type" : "string",
       "enum" : [ "VALUE_ONE", "VALUE_TWO", "VALUE_THREE" ]
-    },
-    "AnonymousListItem" : {
-      "type" : "structure",
-      "members" : {
-        "StrProperty" : {
-          "shape" : "__string",
-          "locationName" : "strProperty"
-        }
-      }
     },
     "AnonymousObject" : {
       "type" : "structure",
@@ -413,19 +356,6 @@
       "required" : [ "ScalarTypes" ],
       "payload" : "ScalarTypes"
     },
-    "InlineEnumRef" : {
-      "type" : "string",
-      "enum" : [ "foo", "bar", "baz" ]
-    },
-    "InlineRefMember" : {
-      "type" : "structure",
-      "members" : {
-        "StrProperty" : {
-          "shape" : "__string",
-          "locationName" : "strProperty"
-        }
-      }
-    },
     "InternalServerError" : {
       "type" : "structure",
       "members" : {
@@ -448,127 +378,13 @@
         "httpStatusCode" : 500
       }
     },
-    "ListOfAnonymousListItem" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "AnonymousListItem"
-      }
-    },
-    "ListOfScalarTypes" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ScalarTypes"
-      }
-    },
-    "ListOfScalars" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "ScalarTypes"
-      }
-    },
     "ListOfStrings" : {
       "type" : "list",
       "member" : {
         "shape" : "__string"
       }
     },
-    "ListOf__boolean" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "__boolean"
-      }
-    },
-    "ListOf__double" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "__double"
-      }
-    },
-    "ListOf__integer" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "__integer"
-      }
-    },
-    "ListOf__string" : {
-      "type" : "list",
-      "member" : {
-        "shape" : "__string"
-      }
-    },
-    "MapOfListOfScalarTypes" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "ListOfScalarTypes"
-      }
-    },
-    "MapOfListOf__string" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "ListOf__string"
-      }
-    },
-    "MapOfMapOf__string" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "MapOf__string"
-      }
-    },
-    "MapOfScalarTypes" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "ScalarTypes"
-      }
-    },
     "MapOfStringToString" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "__string"
-      }
-    },
-    "MapOf__boolean" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "__boolean"
-      }
-    },
-    "MapOf__double" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "__double"
-      }
-    },
-    "MapOf__integer" : {
-      "type" : "map",
-      "key" : {
-        "shape" : "__string"
-      },
-      "value" : {
-        "shape" : "__integer"
-      }
-    },
-    "MapOf__string" : {
       "type" : "map",
       "key" : {
         "shape" : "__string"
@@ -614,23 +430,23 @@
       "type" : "structure",
       "members" : {
         "ListOfStructures" : {
-          "shape" : "ListOfScalarTypes",
+          "shape" : "__listOfScalarTypes",
           "locationName" : "listOfStructures"
         },
         "MapOfStringToListOfString" : {
-          "shape" : "MapOfListOf__string",
+          "shape" : "__mapOf__listOf__string",
           "locationName" : "mapOfStringToListOfString"
         },
         "MapOfStringToListOfStructure" : {
-          "shape" : "MapOfListOfScalarTypes",
+          "shape" : "__mapOf__listOfScalarTypes",
           "locationName" : "mapOfStringToListOfStructure"
         },
         "MapOfStringToMapOfStringToString" : {
-          "shape" : "MapOfMapOf__string",
+          "shape" : "__mapOf__mapOf__string",
           "locationName" : "mapOfStringToMapOfStringToString"
         },
         "MapOfStringToStructure" : {
-          "shape" : "MapOfScalarTypes",
+          "shape" : "__mapOfScalarTypes",
           "locationName" : "mapOfStringToStructure"
         }
       }
@@ -639,35 +455,35 @@
       "type" : "structure",
       "members" : {
         "ListOfBooleans" : {
-          "shape" : "ListOf__boolean",
+          "shape" : "__listOf__boolean",
           "locationName" : "listOfBooleans"
         },
         "ListOfDoubles" : {
-          "shape" : "ListOf__double",
+          "shape" : "__listOf__double",
           "locationName" : "listOfDoubles"
         },
         "ListOfIntegers" : {
-          "shape" : "ListOf__integer",
+          "shape" : "__listOf__integer",
           "locationName" : "listOfIntegers"
         },
         "ListOfStrings" : {
-          "shape" : "ListOf__string",
+          "shape" : "__listOf__string",
           "locationName" : "listOfStrings"
         },
         "MapOfStringToBoolean" : {
-          "shape" : "MapOf__boolean",
+          "shape" : "__mapOf__boolean",
           "locationName" : "mapOfStringToBoolean"
         },
         "MapOfStringToDouble" : {
-          "shape" : "MapOf__double",
+          "shape" : "__mapOf__double",
           "locationName" : "mapOfStringToDouble"
         },
         "MapOfStringToInteger" : {
-          "shape" : "MapOf__integer",
+          "shape" : "__mapOf__integer",
           "locationName" : "mapOfStringToInteger"
         },
         "MapOfStringToString" : {
-          "shape" : "MapOf__string",
+          "shape" : "__mapOf__string",
           "locationName" : "mapOfStringToString"
         }
       }
@@ -696,8 +512,17 @@
       "type" : "structure",
       "members" : {
         "InlineRefMember" : {
-          "shape" : "InlineRefMember",
+          "shape" : "PutDefinitionsInputInlineRefMember",
           "locationName" : "inlineRefMember"
+        }
+      }
+    },
+    "PutDefinitionsInputInlineRefMember" : {
+      "type" : "structure",
+      "members" : {
+        "StrProperty" : {
+          "shape" : "__string",
+          "locationName" : "strProperty"
         }
       }
     },
@@ -861,81 +686,6 @@
       "required" : [ "PutSimpleEnumsInput" ],
       "payload" : "PutSimpleEnumsInput"
     },
-    "PutNoauthMultiLocationRequest" : {
-      "type" : "structure",
-      "members" : {
-        "HeaderOne" : {
-          "shape" : "__string",
-          "location" : "header",
-          "locationName" : "x-header-one"
-        },
-        "HeaderTwo" : {
-          "shape" : "__string",
-          "location" : "header",
-          "locationName" : "x-header-two"
-        },
-        "MultiLocation" : {
-          "shape" : "__string",
-          "location" : "uri",
-          "locationName" : "multi-location"
-        },
-        "QueryParamOne" : {
-          "shape" : "__string",
-          "location" : "querystring",
-          "locationName" : "queryParamOne"
-        },
-        "QueryParamTwo" : {
-          "shape" : "__string",
-          "location" : "querystring",
-          "locationName" : "queryParamTwo"
-        },
-        "ScalarTypes" : {
-          "shape" : "ScalarTypes"
-        }
-      },
-      "required" : [ "MultiLocation", "ScalarTypes" ],
-      "payload" : "ScalarTypes"
-    },
-    "PutNoauthMultiLocationResponse" : {
-      "type" : "structure",
-      "members" : {
-        "HeaderOne" : {
-          "shape" : "__string",
-          "location" : "header",
-          "locationName" : "x-header-one"
-        },
-        "HeaderTwo" : {
-          "shape" : "__string",
-          "location" : "header",
-          "locationName" : "x-header-two"
-        },
-        "ScalarTypes" : {
-          "shape" : "ScalarTypes"
-        }
-      },
-      "required" : [ "ScalarTypes" ],
-      "payload" : "ScalarTypes"
-    },
-    "PutNoauthRefsCanonListOfScalarsRequest" : {
-      "type" : "structure",
-      "members" : {
-        "ListOfScalars" : {
-          "shape" : "ListOfScalars"
-        }
-      },
-      "required" : [ "ListOfScalars" ],
-      "payload" : "ListOfScalars"
-    },
-    "PutNoauthRefsCanonListOfScalarsResponse" : {
-      "type" : "structure",
-      "members" : {
-        "ListOfScalars" : {
-          "shape" : "ListOfScalars"
-        }
-      },
-      "required" : [ "ListOfScalars" ],
-      "payload" : "ListOfScalars"
-    },
     "PutNoauthRefsCanonListRequest" : {
       "type" : "structure",
       "members" : {
@@ -1028,10 +778,14 @@
           "locationName" : "canonicalEnumRef"
         },
         "InlineEnumRef" : {
-          "shape" : "InlineEnumRef",
+          "shape" : "PutSimpleEnumsInputInlineEnumRef",
           "locationName" : "inlineEnumRef"
         }
       }
+    },
+    "PutSimpleEnumsInputInlineEnumRef" : {
+      "type" : "string",
+      "enum" : [ "foo", "bar", "baz" ]
     },
     "ResourceNotFound" : {
       "type" : "structure",
@@ -1047,9 +801,6 @@
       "members" : {
         "BooleanMember" : {
           "shape" : "__boolean"
-        },
-        "DateMember" : {
-          "shape" : "__timestamp"
         },
         "Foo" : {
           "shape" : "__string",
@@ -1089,6 +840,15 @@
     "String" : {
       "type" : "string"
     },
+    "__AnonymousListElement" : {
+      "type" : "structure",
+      "members" : {
+        "StrProperty" : {
+          "shape" : "__string",
+          "locationName" : "strProperty"
+        }
+      }
+    },
     "__boolean" : {
       "type" : "boolean"
     },
@@ -1098,31 +858,127 @@
     "__integer" : {
       "type" : "integer"
     },
+    "__listOfScalarTypes" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "ScalarTypes"
+      }
+    },
+    "__listOf__AnonymousListElement" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__AnonymousListElement"
+      }
+    },
+    "__listOf__boolean" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__boolean"
+      }
+    },
+    "__listOf__double" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__double"
+      }
+    },
+    "__listOf__integer" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__integer"
+      }
+    },
+    "__listOf__string" : {
+      "type" : "list",
+      "member" : {
+        "shape" : "__string"
+      }
+    },
+    "__long" : {
+      "type" : "long"
+    },
+    "__mapOfScalarTypes" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "ScalarTypes"
+      }
+    },
+    "__mapOf__boolean" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__boolean"
+      }
+    },
+    "__mapOf__double" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__double"
+      }
+    },
+    "__mapOf__integer" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__integer"
+      }
+    },
+    "__mapOf__listOfScalarTypes" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__listOfScalarTypes"
+      }
+    },
+    "__mapOf__listOf__string" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__listOf__string"
+      }
+    },
+    "__mapOf__mapOf__string" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__mapOf__string"
+      }
+    },
+    "__mapOf__string" : {
+      "type" : "map",
+      "key" : {
+        "shape" : "__string"
+      },
+      "value" : {
+        "shape" : "__string"
+      }
+    },
     "__string" : {
       "type" : "string"
     },
-    "__timestamp" : {
-      "type" : "timestamp"
+    "__timestampIso8601" : {
+      "type" : "timestamp",
+      "timestampFormat" : "iso8601"
     },
-    "lowercaseOperationNameRequest" : {
-      "type" : "structure",
-      "members" : {
-        "ScalarTypes" : {
-          "shape" : "ScalarTypes"
-        }
-      },
-      "required" : [ "ScalarTypes" ],
-      "payload" : "ScalarTypes"
-    },
-    "lowercaseOperationNameResponse" : {
-      "type" : "structure",
-      "members" : {
-        "ScalarTypes" : {
-          "shape" : "ScalarTypes"
-        }
-      },
-      "required" : [ "ScalarTypes" ],
-      "payload" : "ScalarTypes"
+    "__timestampUnix" : {
+      "type" : "timestamp",
+      "timestampFormat" : "unixTimestamp"
     }
   },
   "authorizers" : {
