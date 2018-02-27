@@ -55,7 +55,6 @@ describe 'Client Interface:' do
       resp = client.put_apikey({
         scalar_types: {
           boolean_member: false,
-          date_member: Time.now
         }
       })
       expect(resp.context.http_request.headers['User-Agent']).to start_with('aws-apig-ruby')
@@ -74,7 +73,6 @@ describe 'Client Interface:' do
       resp = client_w_ua.put_apikey({
         scalar_types: {
           boolean_member: false,
-          date_member: Time.now
         }
       })
       expect(resp.context.http_request.headers['User-Agent']).to include('foo')
