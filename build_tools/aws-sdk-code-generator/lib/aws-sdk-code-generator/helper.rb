@@ -136,6 +136,14 @@ module AwsSdkCodeGenerator
       end
     end
 
+    def lstrip_prefix(name)
+      name.start_with?("__") ? name[2..-1] : name
+    end
+
+    def apig_prefix(name)
+      "__" << name
+    end
+
     def shape(ref)
       if ref.nil?
         nil
@@ -189,7 +197,7 @@ module AwsSdkCodeGenerator
       str.gsub(/(.{1,#{width}})(\s+|\Z)/, "#{indent}\\1\n").chomp
     end
 
-    module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string
+    module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string, :apig_prefix
 
   end
 end

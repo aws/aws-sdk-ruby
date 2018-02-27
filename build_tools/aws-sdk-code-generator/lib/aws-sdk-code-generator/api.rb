@@ -7,9 +7,15 @@ module AwsSdkCodeGenerator
       # @return [String, nil]
       def docstring(shape_or_shape_ref, api)
         ref, shape = resolve(shape_or_shape_ref, api)
+        # APIG models, downcase shape name in origin or "__" prefix in origin
         if shape.nil?
-          # APIG models, downcase shape name in origin
           ref, shape = resolve(AwsSdkCodeGenerator::Helper.downcase_first(shape_or_shape_ref), api)
+          if shape.nil?
+            ref, shape = resolve(AwsSdkCodeGenerator::Helper.apig_prefix(shape_or_shape_ref), api)
+            if shape.nil?
+              ref, shape = resolve(AwsSdkCodeGenerator::Helper.apig_prefix(downcase_first(shape_or_shape_ref)), api)
+            end
+          end
         end
         ref['documentation'] || shape['documentation']
       end

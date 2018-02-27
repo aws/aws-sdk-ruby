@@ -98,8 +98,10 @@ module AwsSdkCodeGenerator
       # @return [Array<Shape>]
       def shapes
         shape_enum.map do |shape_name, shape|
-          # APIG model, shape can start with downcase
-          shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
+          # APIG model, shape can start with downcase and with "__"
+          if @service.protocol == 'api-gateway'
+            shape_name = lstrip_prefix(upcase_first(shape_name))
+          end
           Shape.new.tap do |s|
             s.name = shape_name
             s.class_name, shape = shape_class_name(shape)
@@ -110,8 +112,10 @@ module AwsSdkCodeGenerator
 
       def shape_definitions
         shape_enum.inject([]) do |groups, (shape_name, shape)|
-          # APIG model, shape can start with downcase
-          shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
+          # APIG model, shape can start with downcase and with "__"
+          if @service.protocol == 'api-gateway'
+            shape_name = lstrip_prefix(upcase_first(shape_name))
+          end
           lines = []
           if non_error_struct?(shape)
             required = Set.new(shape['required'] || [])
@@ -248,7 +252,11 @@ module AwsSdkCodeGenerator
       end
 
       def shape_ref(ref, member_name = nil, required = Set.new)
-        line = "Shapes::ShapeRef.new(shape: #{ref['shape']}"
+        ref_name = ref['shape']
+        if  @service.protocol == 'api-gateway'
+          ref_name = lstrip_prefix(ref_name)
+        end
+        line = "Shapes::ShapeRef.new(shape: #{ref_name}"
         line += shape_ref_required(required, member_name)
         line += shape_ref_deprecated(ref)
         line += shape_ref_location(ref)
@@ -324,9 +332,11 @@ module AwsSdkCodeGenerator
 
       def operation_ref(ref)
         metadata = ref.dup
-        # APIG model, shape can start with downcase
         shape_name = metadata.delete('shape')
-        shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
+        # APIG model, shape can start with downcase and with "__"
+        if @service.protocol == 'api-gateway'
+          shape_name = lstrip_prefix(upcase_first(shape_name))
+        end
         if metadata.empty?
           options = ''
         else
