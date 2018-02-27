@@ -516,8 +516,7 @@ module Aws::ECR
     #   assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository that is associated with the repository
-    #   policy to  delete.
+    #   The name of the repository.
     #
     # @return [Types::DeleteLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -695,7 +694,8 @@ module Aws::ECR
     #   `DescribeImages` request where `maxResults` was used and the results
     #   exceeded the value of that parameter. Pagination continues from the
     #   end of the previous results that returned the `nextToken` value. This
-    #   value is `null` when there are no more results to return.
+    #   value is `null` when there are no more results to return. This option
+    #   cannot be used when you specify images with `imageIds`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of repository results returned by `DescribeImages`
@@ -705,7 +705,8 @@ module Aws::ECR
     #   request can be seen by sending another `DescribeImages` request with
     #   the returned `nextToken` value. This value can be between 1 and 100.
     #   If this parameter is not used, then `DescribeImages` returns up to 100
-    #   results and a `nextToken` value, if applicable.
+    #   results and a `nextToken` value, if applicable. This option cannot be
+    #   used when you specify images with `imageIds`.
     #
     # @option params [Types::DescribeImagesFilter] :filter
     #   The filter key and value with which to filter your `DescribeImages`
@@ -772,6 +773,8 @@ module Aws::ECR
     #   results exceeded the value of that parameter. Pagination continues
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to return.
+    #   This option cannot be used when you specify repositories with
+    #   `repositoryNames`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
     #   to retrieve the next items in a list and not for other programmatic
@@ -788,7 +791,8 @@ module Aws::ECR
     #   `DescribeRepositories` request with the returned `nextToken` value.
     #   This value can be between 1 and 100. If this parameter is not used,
     #   then `DescribeRepositories` returns up to 100 results and a
-    #   `nextToken` value, if applicable.
+    #   `nextToken` value, if applicable. This option cannot be used when you
+    #   specify repositories with `repositoryNames`.
     #
     # @return [Types::DescribeRepositoriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -965,7 +969,7 @@ module Aws::ECR
     #   assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository with the policy to retrieve.
+    #   The name of the repository.
     #
     # @return [Types::GetLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1006,7 +1010,7 @@ module Aws::ECR
     #   assumed.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository with the policy to retrieve.
+    #   The name of the repository.
     #
     # @option params [Array<Types::ImageIdentifier>] :image_ids
     #   The list of imageIDs to be included.
@@ -1017,7 +1021,8 @@ module Aws::ECR
     #   and the  results exceeded the value of that parameter. Pagination
     #   continues from the end of the  previous results that returned the
     #   `nextToken` value. This value is  `null` when there are no more
-    #   results to return.
+    #   results to return. This option cannot be used when you specify images
+    #   with `imageIds`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of repository results returned by
@@ -1029,7 +1034,8 @@ module Aws::ECR
     #   with the returned `nextToken`  value. This value can be between 1 and
     #   100. If this  parameter is not used, then
     #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
-    #   `nextToken` value, if  applicable.
+    #   `nextToken` value, if  applicable. This option cannot be used when you
+    #   specify images with `imageIds`.
     #
     # @option params [Types::LifecyclePolicyPreviewFilter] :filter
     #   An optional parameter that filters results based on image tag status
@@ -1334,7 +1340,12 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Creates or updates a lifecycle policy.
+    # Creates or updates a lifecycle policy. For information about lifecycle
+    # policy syntax, see [Lifecycle Policy Template][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -1548,7 +1559,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
