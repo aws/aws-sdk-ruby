@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.7 (2018-02-28)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 2.11.6 (2018-02-27)
