@@ -847,9 +847,8 @@ module Aws::SSM
     #   The maximum number of errors allowed before the system stops sending
     #   the command to additional targets. You can specify a number of
     #   errors, such as 10, or a percentage or errors, such as 10%. The
-    #   default value is 50. For more information about how to use
-    #   MaxErrors, see [Executing a Command Using Systems Manager Run
-    #   Command][1].
+    #   default value is 0. For more information about how to use MaxErrors,
+    #   see [Executing a Command Using Systems Manager Run Command][1].
     #
     #
     #
@@ -5798,7 +5797,10 @@ module Aws::SSM
     #
     # @!attribute [rw] is_latest_version
     #   Indicates whether latest version of the SSM Agent is running on your
-    #   instance.
+    #   instance. Some older versions of Windows Server use the EC2Config
+    #   service to process SSM requests. For this reason, this field does
+    #   not indicate whether or not the latest version is installed on
+    #   Windows managed instances.
     #   @return [Boolean]
     #
     # @!attribute [rw] platform_type
@@ -9374,6 +9376,10 @@ module Aws::SSM
     #   The date and time the configuration was created (UTC).
     #   @return [Time]
     #
+    # @!attribute [rw] last_sync_status_message
+    #   The status message details reported by the last sync.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResourceDataSyncItem AWS API Documentation
     #
     class ResourceDataSyncItem < Struct.new(
@@ -9382,7 +9388,8 @@ module Aws::SSM
       :last_sync_time,
       :last_successful_sync_time,
       :last_status,
-      :sync_created_time)
+      :sync_created_time,
+      :last_sync_status_message)
       include Aws::Structure
     end
 
@@ -9671,7 +9678,7 @@ module Aws::SSM
     #   When the command fails one more time beyond the value of MaxErrors,
     #   the systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
-    #   is 50. For more information about how to use MaxErrors, see [Using
+    #   is 0. For more information about how to use MaxErrors, see [Using
     #   Error Controls][1].
     #
     #

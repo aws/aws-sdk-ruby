@@ -76,6 +76,8 @@ module Aws::ServiceCatalog
     DeleteProvisionedProductPlanOutput = Shapes::StructureShape.new(name: 'DeleteProvisionedProductPlanOutput')
     DeleteProvisioningArtifactInput = Shapes::StructureShape.new(name: 'DeleteProvisioningArtifactInput')
     DeleteProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'DeleteProvisioningArtifactOutput')
+    DeleteTagOptionInput = Shapes::StructureShape.new(name: 'DeleteTagOptionInput')
+    DeleteTagOptionOutput = Shapes::StructureShape.new(name: 'DeleteTagOptionOutput')
     DescribeConstraintInput = Shapes::StructureShape.new(name: 'DescribeConstraintInput')
     DescribeConstraintOutput = Shapes::StructureShape.new(name: 'DescribeConstraintOutput')
     DescribeCopyProductStatusInput = Shapes::StructureShape.new(name: 'DescribeCopyProductStatusInput')
@@ -535,6 +537,11 @@ module Aws::ServiceCatalog
     DeleteProvisioningArtifactInput.struct_class = Types::DeleteProvisioningArtifactInput
 
     DeleteProvisioningArtifactOutput.struct_class = Types::DeleteProvisioningArtifactOutput
+
+    DeleteTagOptionInput.add_member(:id, Shapes::ShapeRef.new(shape: TagOptionId, required: true, location_name: "Id"))
+    DeleteTagOptionInput.struct_class = Types::DeleteTagOptionInput
+
+    DeleteTagOptionOutput.struct_class = Types::DeleteTagOptionOutput
 
     DescribeConstraintInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DescribeConstraintInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
@@ -1462,6 +1469,17 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+      end)
+
+      api.add_operation(:delete_tag_option, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTagOption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTagOptionInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTagOptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_constraint, Seahorse::Model::Operation.new.tap do |o|

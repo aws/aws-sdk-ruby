@@ -167,6 +167,7 @@ module Aws::StorageGateway
     NotifyWhenUploadedInput = Shapes::StructureShape.new(name: 'NotifyWhenUploadedInput')
     NotifyWhenUploadedOutput = Shapes::StructureShape.new(name: 'NotifyWhenUploadedOutput')
     NumTapesToCreate = Shapes::IntegerShape.new(name: 'NumTapesToCreate')
+    ObjectACL = Shapes::StringShape.new(name: 'ObjectACL')
     Path = Shapes::StringShape.new(name: 'Path')
     PermissionId = Shapes::IntegerShape.new(name: 'PermissionId')
     PermissionMode = Shapes::StringShape.new(name: 'PermissionMode')
@@ -363,10 +364,12 @@ module Aws::StorageGateway
     CreateNFSFileShareInput.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
     CreateNFSFileShareInput.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationARN, required: true, location_name: "LocationARN"))
     CreateNFSFileShareInput.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
+    CreateNFSFileShareInput.add_member(:object_acl, Shapes::ShapeRef.new(shape: ObjectACL, location_name: "ObjectACL"))
     CreateNFSFileShareInput.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
     CreateNFSFileShareInput.add_member(:squash, Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
     CreateNFSFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     CreateNFSFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
+    CreateNFSFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     CreateNFSFileShareInput.struct_class = Types::CreateNFSFileShareInput
 
     CreateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -743,10 +746,12 @@ module Aws::StorageGateway
     NFSFileShareInfo.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
     NFSFileShareInfo.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN"))
     NFSFileShareInfo.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
+    NFSFileShareInfo.add_member(:object_acl, Shapes::ShapeRef.new(shape: ObjectACL, location_name: "ObjectACL"))
     NFSFileShareInfo.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
     NFSFileShareInfo.add_member(:squash, Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
     NFSFileShareInfo.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     NFSFileShareInfo.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
+    NFSFileShareInfo.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     NFSFileShareInfo.struct_class = Types::NFSFileShareInfo
 
     NFSFileShareInfoList.member = Shapes::ShapeRef.new(shape: NFSFileShareInfo)
@@ -933,10 +938,12 @@ module Aws::StorageGateway
     UpdateNFSFileShareInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     UpdateNFSFileShareInput.add_member(:nfs_file_share_defaults, Shapes::ShapeRef.new(shape: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
     UpdateNFSFileShareInput.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
+    UpdateNFSFileShareInput.add_member(:object_acl, Shapes::ShapeRef.new(shape: ObjectACL, location_name: "ObjectACL"))
     UpdateNFSFileShareInput.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
     UpdateNFSFileShareInput.add_member(:squash, Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
     UpdateNFSFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     UpdateNFSFileShareInput.add_member(:guess_mime_type_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "GuessMIMETypeEnabled"))
+    UpdateNFSFileShareInput.add_member(:requester_pays, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequesterPays"))
     UpdateNFSFileShareInput.struct_class = Types::UpdateNFSFileShareInput
 
     UpdateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))

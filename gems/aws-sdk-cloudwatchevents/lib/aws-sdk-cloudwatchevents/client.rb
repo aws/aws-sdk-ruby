@@ -436,6 +436,10 @@ module Aws::CloudWatchEvents
     #   resp.targets[0].run_command_parameters.run_command_targets[0].values[0] #=> String
     #   resp.targets[0].ecs_parameters.task_definition_arn #=> String
     #   resp.targets[0].ecs_parameters.task_count #=> Integer
+    #   resp.targets[0].batch_parameters.job_definition #=> String
+    #   resp.targets[0].batch_parameters.job_name #=> String
+    #   resp.targets[0].batch_parameters.array_properties.size #=> Integer
+    #   resp.targets[0].batch_parameters.retry_strategy.attempts #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule AWS API Documentation
@@ -550,6 +554,11 @@ module Aws::CloudWatchEvents
     # or based on value of the state. You can disable a rule using
     # DisableRule.
     #
+    # If you are updating an existing rule, the rule is completely replaced
+    # with what you specify in this `PutRule` command. If you omit arguments
+    # in `PutRule`, the old values for those arguments are not kept.
+    # Instead, they are replaced with null values.
+    #
     # When you create or update a rule, incoming events might not
     # immediately start matching to new or updated rules. Please allow a
     # short period of time for changes to take effect.
@@ -639,6 +648,8 @@ module Aws::CloudWatchEvents
     #
     # * AWS Step Functions state machines
     #
+    # * AWS Batch jobs
+    #
     # * Pipelines in Amazon Code Pipeline
     #
     # * Amazon Inspector assessment templates
@@ -702,8 +713,8 @@ module Aws::CloudWatchEvents
     #   JSONPaths are extracted from the event and used as values in a
     #   template that you specify as the input to the target.
     #
-    # When you specify `Input`, `InputPath`, or `InputTransformer`, you must
-    # use JSON dot notation, not bracket notation.
+    # When you specify `InputPath` or `InputTransformer`, you must use JSON
+    # dot notation, not bracket notation.
     #
     # When you add targets to a rule and the associated rule triggers soon
     # after, new or updated targets might not be immediately invoked. Please
@@ -761,6 +772,16 @@ module Aws::CloudWatchEvents
     #         ecs_parameters: {
     #           task_definition_arn: "Arn", # required
     #           task_count: 1,
+    #         },
+    #         batch_parameters: {
+    #           job_definition: "String", # required
+    #           job_name: "String", # required
+    #           array_properties: {
+    #             size: 1,
+    #           },
+    #           retry_strategy: {
+    #             attempts: 1,
+    #           },
     #         },
     #       },
     #     ],
@@ -913,7 +934,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

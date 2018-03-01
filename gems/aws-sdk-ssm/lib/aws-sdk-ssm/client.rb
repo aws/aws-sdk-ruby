@@ -4457,6 +4457,7 @@ module Aws::SSM
     #   resp.resource_data_sync_items[0].last_successful_sync_time #=> Time
     #   resp.resource_data_sync_items[0].last_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.resource_data_sync_items[0].sync_created_time #=> Time
+    #   resp.resource_data_sync_items[0].last_sync_status_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSync AWS API Documentation
@@ -5189,7 +5190,7 @@ module Aws::SSM
     #   the command fails one more time beyond the value of MaxErrors, the
     #   systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
-    #   is 50. For more information about how to use MaxErrors, see [Using
+    #   is 0. For more information about how to use MaxErrors, see [Using
     #   Error Controls][1].
     #
     #
@@ -6256,7 +6257,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
