@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.8 (2018-03-01)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
