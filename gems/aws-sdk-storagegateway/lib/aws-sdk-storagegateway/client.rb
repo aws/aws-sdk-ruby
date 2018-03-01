@@ -155,8 +155,7 @@ module Aws::StorageGateway
 
     # @!group API Operations
 
-    # Activates the gateway you previously deployed on your host. For more
-    # information, see [ Activate the AWS Storage Gateway][1]. In the
+    # Activates the gateway you previously deployed on your host. In the
     # activation process, you specify information such as the region you
     # want to use for storing snapshots or tapes, the time zone for
     # scheduled snapshots the gateway snapshot schedule window, an
@@ -168,10 +167,6 @@ module Aws::StorageGateway
     #
     #  </note>
     #
-    #
-    #
-    # [1]: http://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedActivateGateway-common.html
-    #
     # @option params [required, String] :activation_key
     #   Your gateway activation key. You can obtain the activation key by
     #   sending an HTTP GET request with redirects enabled to the gateway IP
@@ -181,6 +176,10 @@ module Aws::StorageGateway
     #   parameters, however, these are merely defaults -- the arguments you
     #   pass to the `ActivateGateway` API call determine the actual
     #   configuration of your gateway.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html
+    #   in the Storage Gateway User Guide.
     #
     # @option params [required, String] :gateway_name
     #   The name you configured for your gateway.
@@ -202,7 +201,7 @@ module Aws::StorageGateway
     #
     #   Valid Values: "us-east-1", "us-east-2", "us-west-1",
     #   "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1",
-    #   "eu-west-2", "ap-northeast-1", "ap-northeast-2",
+    #   "eu-west-2", "eu-west-3", "ap-northeast-1", "ap-northeast-2",
     #   "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"
     #
     #
@@ -793,6 +792,11 @@ module Aws::StorageGateway
     #   this field is not populated, the default value S3\_STANDARD is used.
     #   Optional.
     #
+    # @option params [String] :object_acl
+    #   Sets the access control list permission for objects in the Amazon S3
+    #   bucket that a file gateway puts objects into. The default value is
+    #   "private".
+    #
     # @option params [Array<String>] :client_list
     #   The list of clients that are allowed to access the file gateway. The
     #   list must contain either valid IP addresses or valid CIDR blocks.
@@ -807,13 +811,18 @@ module Aws::StorageGateway
     #   * "AllSquash" - Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
-    #   Sets the write status of a file share: "true" if the write status is
-    #   read-only, and otherwise "false".
+    #   Sets the write status of a file share. This value is true if the write
+    #   status is read-only, and otherwise false.
     #
     # @option params [Boolean] :guess_mime_type_enabled
     #   Enables guessing of the MIME type for uploaded objects based on file
-    #   extensions: "true" to enable MIME type guessing, and otherwise
-    #   "false".
+    #   extensions. Set this value to true to enable MIME type guessing, and
+    #   otherwise to false. The default value is true.
+    #
+    # @option params [Boolean] :requester_pays
+    #   Sets who pays the cost of the request and the data download from the
+    #   Amazon S3 bucket. Set this value to true if you want the requester to
+    #   pay instead of the bucket owner, and otherwise to false.
     #
     # @return [Types::CreateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -835,10 +844,12 @@ module Aws::StorageGateway
     #     role: "Role", # required
     #     location_arn: "LocationARN", # required
     #     default_storage_class: "StorageClass",
+    #     object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
     #     client_list: ["IPV4AddressCIDR"],
     #     squash: "Squash",
     #     read_only: false,
     #     guess_mime_type_enabled: false,
+    #     requester_pays: false,
     #   })
     #
     # @example Response structure
@@ -2148,11 +2159,13 @@ module Aws::StorageGateway
     #   resp.nfs_file_share_info_list[0].role #=> String
     #   resp.nfs_file_share_info_list[0].location_arn #=> String
     #   resp.nfs_file_share_info_list[0].default_storage_class #=> String
+    #   resp.nfs_file_share_info_list[0].object_acl #=> String, one of "private", "public-read", "public-read-write", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control", "aws-exec-read"
     #   resp.nfs_file_share_info_list[0].client_list #=> Array
     #   resp.nfs_file_share_info_list[0].client_list[0] #=> String
     #   resp.nfs_file_share_info_list[0].squash #=> String
     #   resp.nfs_file_share_info_list[0].read_only #=> Boolean
     #   resp.nfs_file_share_info_list[0].guess_mime_type_enabled #=> Boolean
+    #   resp.nfs_file_share_info_list[0].requester_pays #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares AWS API Documentation
     #
@@ -3434,18 +3447,22 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
-    # Sends you notification when all file data written to the NFS file
-    # share has been uploaded to Amazon S3.
+    # Sends you notification through CloudWatch Events when all files
+    # written to your NFS file share have been uploaded to Amazon S3.
     #
     # AWS Storage Gateway can send a notification through Amazon CloudWatch
     # Events when all files written to your file share up to that point in
     # time have been uploaded to Amazon S3. These files include files
     # written to the NFS file share up to the time that you make a request
     # for notification. When the upload is done, Storage Gateway sends you
-    # notification through an Amazon CloudWatch event. You can configure
-    # CloudWatch Events to sent the notification through event targets such
-    # as email, SNS or a Lambda function. text or Lambda functions. This
-    # operation is only supported in the file gateway type.
+    # notification through an Amazon CloudWatch Event. You can configure
+    # CloudWatch Events to send the notification through event targets such
+    # as Amazon SNS or AWS Lambda function. This operation is only supported
+    # in the file gateway type.
+    #
+    # For more information, see Getting File Upload Notification in the
+    # Storage Gateway User Guide
+    # (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification).
     #
     # @option params [required, String] :file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
@@ -3567,7 +3584,7 @@ module Aws::StorageGateway
     # occur when a disk is corrupted or removed from the gateway. When a
     # cache is reset, the gateway loses its cache storage. At this point you
     # can reconfigure the disks as cache disks. This operation is only
-    # supported in the cached volume, tape and file gateway types.
+    # supported in the cached volume and tape types.
     #
     # If the cache disk you are resetting contains data that has not been
     # uploaded to Amazon S3 yet, that data can be lost. After you reset
@@ -4302,6 +4319,11 @@ module Aws::StorageGateway
     #   If this field is not populated, the default value S3\_STANDARD is
     #   used. Optional.
     #
+    # @option params [String] :object_acl
+    #   Sets the access control list permission for objects in the S3 bucket
+    #   that a file gateway puts objects into. The default value is
+    #   "private".
+    #
     # @option params [Array<String>] :client_list
     #   The list of clients that are allowed to access the file gateway. The
     #   list must contain either valid IP addresses or valid CIDR blocks.
@@ -4316,13 +4338,18 @@ module Aws::StorageGateway
     #   * "AllSquash" - Everyone is mapped to anonymous user.
     #
     # @option params [Boolean] :read_only
-    #   Sets the write status of a file share: "true" if the write status is
-    #   read-only, otherwise "false".
+    #   Sets the write status of a file share. This value is true if the write
+    #   status is read-only, and otherwise false.
     #
     # @option params [Boolean] :guess_mime_type_enabled
     #   Enables guessing of the MIME type for uploaded objects based on file
-    #   extensions: "true" to enable MIME type guessing, and otherwise
-    #   "false".
+    #   extensions. Set this value to true to enable MIME type guessing, and
+    #   otherwise to false. The default value is true.
+    #
+    # @option params [Boolean] :requester_pays
+    #   Sets who pays the cost of the request and the data download from the
+    #   Amazon S3 bucket. Set this value to true if you want the requester to
+    #   pay instead of the bucket owner, and otherwise to false.
     #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4341,10 +4368,12 @@ module Aws::StorageGateway
     #       owner_id: 1,
     #     },
     #     default_storage_class: "StorageClass",
+    #     object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
     #     client_list: ["IPV4AddressCIDR"],
     #     squash: "Squash",
     #     read_only: false,
     #     guess_mime_type_enabled: false,
+    #     requester_pays: false,
     #   })
     #
     # @example Response structure
@@ -4499,7 +4528,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
