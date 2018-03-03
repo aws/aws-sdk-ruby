@@ -62,6 +62,6 @@ require_relative 'aws-sdk-s3/customizations'
 # @service
 module Aws::S3
 
-  GEM_VERSION = '1.8.1'
+  GEM_VERSION = '1.8.2'
 
 end

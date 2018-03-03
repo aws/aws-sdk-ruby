@@ -26,8 +26,10 @@ module AwsSdkCodeGenerator
       # @return [Array<StructClass>]
       def structures
         @service.api['shapes'].inject([]) do |list, (shape_name, shape)|
-          # APIG model can have input/output shape with downcase
-          shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
+          # APIG model can have input/output shape with downcase and '__'
+          if @service.protocol == 'api-gateway'
+            shape_name = lstrip_prefix(upcase_first(shape_name))
+          end
           if struct_type?(shape)
             list << StructClass.new(
               class_name: shape_name,
@@ -75,9 +77,17 @@ module AwsSdkCodeGenerator
       end
 
       def attribute_macros_docs(shape_name)
-        # APIG model downcase shape name in origin
-        if shape(shape_name).nil? && @service.protocol == 'api-gateway'
-          shape_name = downcase_first(shape_name)
+        # APIG model downcase shape name in origin or "__" prefix in origin
+        if @service.protocol == 'api-gateway'
+          if shape(shape_name).nil?
+            if !shape(downcase_first(shape_name)).nil?
+              shape_name = downcase_first(shape_name)
+            elsif !shape(apig_prefix(shape_name)).nil?
+              shape_name = apig_prefix(shape_name)
+            else
+              shape_name = apig_prefix(downcase_first(shape_name))
+            end
+          end
         end
         return if shape(shape_name)['members'].nil?
         shape(shape_name)['members'].map do |member_name, member_ref|

@@ -2399,7 +2399,7 @@ module Aws::EC2
     #
     #   * Key ID
     #
-    #   * Key alias
+    #   * Key alias, in the form `alias/ExampleAlias `
     #
     #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
     #     followed by the region of the CMK, the AWS account ID of the CMK
@@ -2544,24 +2544,27 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] presigned_url
-    #   The pre-signed URL that facilitates copying an encrypted snapshot.
-    #   This parameter is only required when copying an encrypted snapshot
-    #   with the Amazon EC2 Query API; it is available as an optional
-    #   parameter in all other cases. The `PresignedUrl` should use the
-    #   snapshot source endpoint, the `CopySnapshot` action, and include the
-    #   `SourceRegion`, `SourceSnapshotId`, and `DestinationRegion`
-    #   parameters. The `PresignedUrl` must be signed using AWS Signature
-    #   Version 4. Because EBS snapshots are stored in Amazon S3, the
-    #   signing algorithm for this parameter uses the same logic that is
-    #   described in [Authenticating Requests by Using Query Parameters (AWS
-    #   Signature Version 4)][1] in the *Amazon Simple Storage Service API
-    #   Reference*. An invalid or improperly signed `PresignedUrl` will
-    #   cause the copy operation to fail asynchronously, and the snapshot
-    #   will move to an `error` state.
+    #   The pre-signed URL parameter is required when copying an encrypted
+    #   snapshot with the Amazon EC2 Query API; it is available as an
+    #   optional parameter in all other cases. For more information, see
+    #   [Query Requests][1].
+    #
+    #   The `PresignedUrl` should use the snapshot source endpoint, the
+    #   `CopySnapshot` action, and include the `SourceRegion`,
+    #   `SourceSnapshotId`, and `DestinationRegion` parameters. The
+    #   `PresignedUrl` must be signed using AWS Signature Version 4. Because
+    #   EBS snapshots are stored in Amazon S3, the signing algorithm for
+    #   this parameter uses the same logic that is described in
+    #   [Authenticating Requests by Using Query Parameters (AWS Signature
+    #   Version 4)][2] in the *Amazon Simple Storage Service API Reference*.
+    #   An invalid or improperly signed `PresignedUrl` will cause the copy
+    #   operation to fail asynchronously, and the snapshot will move to an
+    #   `error` state.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
+    #   [2]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   @return [String]
     #
     # @!attribute [rw] source_region
@@ -6095,12 +6098,15 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags to delete. If you omit this parameter, we delete
-    #   all tags for the specified resources. Specify a tag key and an
-    #   optional tag value to delete specific tags. If you specify a tag key
-    #   without a tag value, we delete any tag with this key regardless of
-    #   its value. If you specify a tag key with an empty string as the tag
-    #   value, we delete the tag only if its value is an empty string.
+    #   One or more tags to delete. Specify a tag key and an optional tag
+    #   value to delete specific tags. If you specify a tag key without a
+    #   tag value, we delete any tag with this key regardless of its value.
+    #   If you specify a tag key with an empty string as the tag value, we
+    #   delete the tag only if its value is an empty string.
+    #
+    #   If you omit this parameter, we delete all user-defined tags for the
+    #   specified resources. We do not delete AWS-generated tags (tags that
+    #   have the `aws:` prefix).
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTagsRequest AWS API Documentation
@@ -7822,15 +7828,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resource
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `instance` \| `internet-gateway` \|
     #   `network-acl` \| `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `reservation` \|
     #   `route-table` \| `route-table-association` \| `security-group` \|
     #   `snapshot` \| `subnet` \| `subnet-cidr-block-association` \|
-    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \|
-    #   `vpc-peering-connection`
+    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \| `vpc-endpoint`
+    #   \| `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdFormatRequest AWS API Documentation
@@ -7870,15 +7876,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resource
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `instance` \| `internet-gateway` \|
     #   `network-acl` \| `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `reservation` \|
     #   `route-table` \| `route-table-association` \| `security-group` \|
     #   `snapshot` \| `subnet` \| `subnet-cidr-block-association` \|
-    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \|
-    #   `vpc-peering-connection`
+    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \| `vpc-endpoint`
+    #   \| `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdentityIdFormatRequest AWS API Documentation
@@ -9968,15 +9974,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resources
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `instance` \| `internet-gateway` \|
     #   `network-acl` \| `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `reservation` \|
     #   `route-table` \| `route-table-association` \| `security-group` \|
     #   `snapshot` \| `subnet` \| `subnet-cidr-block-association` \|
-    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \|
-    #   `vpc-peering-connection`
+    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \| `vpc-endpoint`
+    #   \| `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -11848,7 +11854,7 @@ module Aws::EC2
     #
     # @!attribute [rw] next_token
     #   The token required to retrieve the next set of results. This value
-    #   is an empty string when there are no more results to return.
+    #   is null or an empty string when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_price_history
@@ -19627,14 +19633,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resource
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `internet-gateway` \| `network-acl` \|
     #   `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `route-table` \|
     #   `route-table-association` \| `security-group` \| `subnet` \|
     #   `subnet-cidr-block-association` \| `vpc` \|
-    #   `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #   `vpc-cidr-block-association` \| `vpc-endpoint` \|
+    #   `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`.
     #
     #   Alternatively, use the `all-current` option to include all resource
     #   types that are currently within their opt-in period for longer IDs.
@@ -19672,14 +19679,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resource
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `internet-gateway` \| `network-acl` \|
     #   `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `route-table` \|
     #   `route-table-association` \| `security-group` \| `subnet` \|
     #   `subnet-cidr-block-association` \| `vpc` \|
-    #   `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #   `vpc-cidr-block-association` \| `vpc-endpoint` \|
+    #   `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`.
     #
     #   Alternatively, use the `all-current` option to include all resource
     #   types that are currently within their opt-in period for longer IDs.
@@ -20059,18 +20067,28 @@ module Aws::EC2
     #
     #       {
     #         affinity: "default", # accepts default, host
+    #         group_name: "String",
     #         host_id: "String",
     #         instance_id: "String", # required
     #         tenancy: "dedicated", # accepts dedicated, host
     #       }
     #
     # @!attribute [rw] affinity
-    #   The new affinity setting for the instance.
+    #   The affinity setting for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the placement group in which to place the instance. For
+    #   spread placement groups, the instance must have a tenancy of
+    #   `default`. For cluster placement groups, the instance must have a
+    #   tenancy of `default` or `dedicated`.
+    #
+    #   To remove an instance from a placement group, specify an empty
+    #   string ("").
     #   @return [String]
     #
     # @!attribute [rw] host_id
-    #   The ID of the Dedicated Host that the instance will have affinity
-    #   with.
+    #   The ID of the Dedicated Host with which to associate the instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -20078,13 +20096,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tenancy
-    #   The tenancy of the instance that you are modifying.
+    #   The tenancy for the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacementRequest AWS API Documentation
     #
     class ModifyInstancePlacementRequest < Struct.new(
       :affinity,
+      :group_name,
       :host_id,
       :instance_id,
       :tenancy)
@@ -20528,6 +20547,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] volume_id
+    #   The ID of the volume.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -21766,8 +21786,9 @@ module Aws::EC2
     # Describes the VPC peering connection options.
     #
     # @!attribute [rw] allow_dns_resolution_from_remote_vpc
-    #   If true, enables a local VPC to resolve public DNS hostnames to
-    #   private IP addresses when queried from instances in the peer VPC.
+    #   If true, the public DNS hostnames of instances in the specified VPC
+    #   resolve to private IP addresses when queried from instances in the
+    #   peer VPC.
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc

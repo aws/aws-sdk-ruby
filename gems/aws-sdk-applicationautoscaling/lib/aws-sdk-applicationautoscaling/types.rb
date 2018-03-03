@@ -80,9 +80,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "ResourceIdMaxLen1600", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #       }
     #
     # @!attribute [rw] policy_name
@@ -127,6 +127,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -160,6 +164,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -180,10 +187,10 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         scheduled_action_name: "ResourceIdMaxLen1600", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -228,6 +235,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -261,6 +272,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScheduledActionRequest AWS API Documentation
@@ -281,9 +295,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -324,6 +338,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -358,6 +376,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -377,9 +398,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         resource_ids: ["ResourceIdMaxLen1600"],
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -424,6 +445,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] scalable_dimension
@@ -459,6 +484,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -508,9 +536,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -555,6 +583,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -589,6 +621,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -639,9 +674,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -690,6 +725,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -724,6 +763,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -775,9 +817,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         scheduled_action_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -826,6 +868,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -860,6 +906,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -938,7 +987,7 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
+    #         predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
     #         resource_label: "ResourceLabel",
     #       }
     #
@@ -977,9 +1026,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "PolicyName", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #         policy_type: "StepScaling", # accepts StepScaling, TargetTrackingScaling
     #         step_scaling_policy_configuration: {
     #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -997,7 +1046,7 @@ module Aws::ApplicationAutoScaling
     #         target_tracking_scaling_policy_configuration: {
     #           target_value: 1.0, # required
     #           predefined_metric_specification: {
-    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
+    #             predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
     #             resource_label: "ResourceLabel",
     #           },
     #           customized_metric_specification: {
@@ -1060,6 +1109,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1093,6 +1146,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1152,11 +1208,11 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         schedule: "ResourceIdMaxLen1600",
     #         scheduled_action_name: "ScheduledActionName", # required
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #         start_time: Time.now,
     #         end_time: Time.now,
     #         scalable_target_action: {
@@ -1229,6 +1285,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1263,6 +1323,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -1304,9 +1367,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream, dynamodb, rds, sagemaker
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits, rds:cluster:ReadReplicaCount, sagemaker:variant:DesiredInstanceCount
     #         min_capacity: 1,
     #         max_capacity: 1,
     #         role_arn: "ResourceIdMaxLen1600",
@@ -1350,6 +1413,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1384,6 +1451,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -1468,6 +1538,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1502,6 +1576,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -1604,6 +1681,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1637,6 +1718,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1733,6 +1817,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1766,6 +1854,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -1874,6 +1965,10 @@ module Aws::ApplicationAutoScaling
     #
     #   * Aurora DB cluster - The resource type is `cluster` and the unique
     #     identifier is the cluster name. Example: `cluster:my-db-cluster`.
+    #
+    #   * Amazon SageMaker endpoint variants - The resource type is
+    #     `variant` and the unique identifier is the resource ID. Example:
+    #     `endpoint/my-end-point/variant/KMeansClustering`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -1907,6 +2002,9 @@ module Aws::ApplicationAutoScaling
     #   * `rds:cluster:ReadReplicaCount` - The count of Aurora Replicas in
     #     an Aurora DB cluster. Available for Aurora MySQL-compatible
     #     edition.
+    #
+    #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
+    #     instances for an Amazon SageMaker model endpoint variant.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -2107,7 +2205,7 @@ module Aws::ApplicationAutoScaling
     #       {
     #         target_value: 1.0, # required
     #         predefined_metric_specification: {
-    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
+    #           predefined_metric_type: "DynamoDBReadCapacityUtilization", # required, accepts DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut, SageMakerVariantInvocationsPerInstance, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization
     #           resource_label: "ResourceLabel",
     #         },
     #         customized_metric_specification: {
@@ -2137,7 +2235,7 @@ module Aws::ApplicationAutoScaling
     #   @return [Types::PredefinedMetricSpecification]
     #
     # @!attribute [rw] customized_metric_specification
-    #   Reserved for future use.
+    #   A customized metric.
     #   @return [Types::CustomizedMetricSpecification]
     #
     # @!attribute [rw] scale_out_cooldown

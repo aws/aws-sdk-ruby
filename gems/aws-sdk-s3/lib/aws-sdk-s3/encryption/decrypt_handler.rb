@@ -25,6 +25,7 @@ module Aws
         POSSIBLE_ENCRYPTION_FORMATS = %w(
           AES/GCM/NoPadding
           AES/CBC/PKCS5Padding
+          AES/CBC/PKCS7Padding
         )
 
         def call(context)

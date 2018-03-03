@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.2 (2018-02-23)
+------------------
+
+* Issue - Add support for AES/CBC/PKCS7Padding to encryption client.
+
 1.8.1 (2018-02-16)
 ------------------
 

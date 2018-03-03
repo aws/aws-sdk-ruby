@@ -324,8 +324,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The name of the repository that is associated with the repository
-    #   policy to  delete.
+    #   The name of the repository.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteLifecyclePolicyRequest AWS API Documentation
@@ -345,7 +344,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_policy_text
-    #   The JSON repository policy text.
+    #   The JSON lifecycle policy text.
     #   @return [String]
     #
     # @!attribute [rw] last_evaluated_at
@@ -513,7 +512,8 @@ module Aws::ECR
     #   `DescribeImages` request where `maxResults` was used and the results
     #   exceeded the value of that parameter. Pagination continues from the
     #   end of the previous results that returned the `nextToken` value.
-    #   This value is `null` when there are no more results to return.
+    #   This value is `null` when there are no more results to return. This
+    #   option cannot be used when you specify images with `imageIds`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -525,7 +525,8 @@ module Aws::ECR
     #   request with the returned `nextToken` value. This value can be
     #   between 1 and 100. If this parameter is not used, then
     #   `DescribeImages` returns up to 100 results and a `nextToken` value,
-    #   if applicable.
+    #   if applicable. This option cannot be used when you specify images
+    #   with `imageIds`.
     #   @return [Integer]
     #
     # @!attribute [rw] filter
@@ -592,7 +593,8 @@ module Aws::ECR
     #   results exceeded the value of that parameter. Pagination continues
     #   from the end of the previous results that returned the `nextToken`
     #   value. This value is `null` when there are no more results to
-    #   return.
+    #   return. This option cannot be used when you specify repositories
+    #   with `repositoryNames`.
     #
     #   <note markdown="1"> This token should be treated as an opaque identifier that is only
     #   used to retrieve the next items in a list and not for other
@@ -610,7 +612,8 @@ module Aws::ECR
     #   `DescribeRepositories` request with the returned `nextToken` value.
     #   This value can be between 1 and 100. If this parameter is not used,
     #   then `DescribeRepositories` returns up to 100 results and a
-    #   `nextToken` value, if applicable.
+    #   `nextToken` value, if applicable. This option cannot be used when
+    #   you specify repositories with `repositoryNames`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositoriesRequest AWS API Documentation
@@ -750,7 +753,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The name of the repository with the policy to retrieve.
+    #   The name of the repository.
     #   @return [String]
     #
     # @!attribute [rw] image_ids
@@ -763,7 +766,8 @@ module Aws::ECR
     #   used and the  results exceeded the value of that parameter.
     #   Pagination continues from the end of the  previous results that
     #   returned the `nextToken` value. This value is  `null` when there are
-    #   no more results to return.
+    #   no more results to return. This option cannot be used when you
+    #   specify images with `imageIds`.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -776,7 +780,8 @@ module Aws::ECR
     #   request with the returned `nextToken`  value. This value can be
     #   between 1 and 100. If this  parameter is not used, then
     #   `GetLifecyclePolicyPreviewRequest` returns up to  100 results and a
-    #   `nextToken` value, if  applicable.
+    #   `nextToken` value, if  applicable. This option cannot be used when
+    #   you specify images with `imageIds`.
     #   @return [Integer]
     #
     # @!attribute [rw] filter
@@ -805,7 +810,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_policy_text
-    #   The JSON repository policy text.
+    #   The JSON lifecycle policy text.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -856,7 +861,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] repository_name
-    #   The name of the repository with the policy to retrieve.
+    #   The name of the repository.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetLifecyclePolicyRequest AWS API Documentation
@@ -876,7 +881,7 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_policy_text
-    #   The JSON repository policy text.
+    #   The JSON lifecycle policy text.
     #   @return [String]
     #
     # @!attribute [rw] last_evaluated_at

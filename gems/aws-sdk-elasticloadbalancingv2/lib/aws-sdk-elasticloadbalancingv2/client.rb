@@ -254,12 +254,14 @@ module Aws::ElasticLoadBalancingV2
     # Creates a listener for the specified Application Load Balancer or
     # Network Load Balancer.
     #
-    # You can create up to 10 listeners per load balancer.
-    #
     # To update a listener, use ModifyListener. When you are finished with a
     # listener, you can delete it using DeleteListener. If you are finished
     # with both the listener and the load balancer, you can delete them both
     # using DeleteLoadBalancer.
+    #
+    # This operation is idempotent, which means that it completes at most
+    # one time. If you attempt to create multiple listeners with the same
+    # settings, each call succeeds.
     #
     # For more information, see [Listeners for Your Application Load
     # Balancers][1] in the *Application Load Balancers Guide* and [Listeners
@@ -434,19 +436,22 @@ module Aws::ElasticLoadBalancingV2
     # Creates an Application Load Balancer or a Network Load Balancer.
     #
     # When you create a load balancer, you can specify security groups,
-    # subnets, IP address type, and tags. Otherwise, you could do so later
-    # using SetSecurityGroups, SetSubnets, SetIpAddressType, and AddTags.
+    # public subnets, IP address type, and tags. Otherwise, you could do so
+    # later using SetSecurityGroups, SetSubnets, SetIpAddressType, and
+    # AddTags.
     #
     # To create listeners for your load balancer, use CreateListener. To
     # describe your current load balancers, see DescribeLoadBalancers. When
     # you are finished with a load balancer, you can delete it using
     # DeleteLoadBalancer.
     #
-    # You can create up to 20 load balancers per region per account. You can
-    # request an increase for the number of load balancers for your account.
-    # For more information, see [Limits for Your Application Load
+    # For limit information, see [Limits for Your Application Load
     # Balancer][1] in the *Application Load Balancers Guide* and [Limits for
     # Your Network Load Balancer][2] in the *Network Load Balancers Guide*.
+    #
+    # This operation is idempotent, which means that it completes at most
+    # one time. If you attempt to create multiple load balancers with the
+    # same settings, each call succeeds.
     #
     # For more information, see [Application Load Balancers][3] in the
     # *Application Load Balancers Guide* and [Network Load Balancers][4] in
@@ -467,27 +472,29 @@ module Aws::ElasticLoadBalancingV2
     #   and must not begin or end with a hyphen.
     #
     # @option params [Array<String>] :subnets
-    #   The IDs of the subnets to attach to the load balancer. You can specify
-    #   only one subnet per Availability Zone. You must specify either subnets
-    #   or subnet mappings.
+    #   The IDs of the public subnets. You can specify only one subnet per
+    #   Availability Zone. You must specify either subnets or subnet mappings.
     #
     #   \[Application Load Balancers\] You must specify subnets from at least
     #   two Availability Zones.
     #
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones.
+    #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
-    #   The IDs of the subnets to attach to the load balancer. You can specify
-    #   only one subnet per Availability Zone. You must specify either subnets
-    #   or subnet mappings.
+    #   The IDs of the public subnets. You can specify only one subnet per
+    #   Availability Zone. You must specify either subnets or subnet mappings.
     #
-    #   \[Network Load Balancers\] You can specify one Elastic IP address per
-    #   subnet.
+    #   \[Application Load Balancers\] You must specify subnets from at least
+    #   two Availability Zones. You cannot specify Elastic IP addresses for
+    #   your subnets.
     #
-    #   \[Application Load Balancers\] You cannot specify Elastic IP addresses
-    #   for your subnets.
+    #   \[Network Load Balancers\] You can specify subnets from one or more
+    #   Availability Zones. You can specify one Elastic IP address per subnet.
     #
     # @option params [Array<String>] :security_groups
-    #   \[Application Load Balancers\] The IDs of the security groups to
-    #   assign to the load balancer.
+    #   \[Application Load Balancers\] The IDs of the security groups for the
+    #   load balancer.
     #
     # @option params [String] :scheme
     #   The nodes of an Internet-facing load balancer have public IP
@@ -508,7 +515,7 @@ module Aws::ElasticLoadBalancingV2
     #   One or more tags to assign to the load balancer.
     #
     # @option params [String] :type
-    #   The type of load balancer to create. The default is `application`.
+    #   The type of load balancer. The default is `application`.
     #
     # @option params [String] :ip_address_type
     #   \[Application Load Balancers\] The type of IP addresses used by the
@@ -834,6 +841,10 @@ module Aws::ElasticLoadBalancingV2
     # group in an action using CreateListener or CreateRule.
     #
     # To delete a target group, use DeleteTargetGroup.
+    #
+    # This operation is idempotent, which means that it completes at most
+    # one time. If you attempt to create multiple target groups with the
+    # same settings, each call succeeds.
     #
     # For more information, see [Target Groups for Your Application Load
     # Balancers][1] in the *Application Load Balancers Guide* or [Target
@@ -3124,7 +3135,7 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Enables the Availability Zone for the specified subnets for the
+    # Enables the Availability Zone for the specified public subnets for the
     # specified Application Load Balancer. The specified subnets replace the
     # previously enabled subnets.
     #
@@ -3134,17 +3145,16 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the load balancer.
     #
     # @option params [required, Array<String>] :subnets
-    #   The IDs of the subnets. You must specify subnets from at least two
-    #   Availability Zones. You can specify only one subnet per Availability
-    #   Zone. You must specify either subnets or subnet mappings.
+    #   The IDs of the public subnets. You must specify subnets from at least
+    #   two Availability Zones. You can specify only one subnet per
+    #   Availability Zone. You must specify either subnets or subnet mappings.
     #
     # @option params [Array<Types::SubnetMapping>] :subnet_mappings
-    #   The IDs of the subnets. You must specify subnets from at least two
-    #   Availability Zones. You can specify only one subnet per Availability
-    #   Zone. You must specify either subnets or subnet mappings.
+    #   The IDs of the public subnets. You must specify subnets from at least
+    #   two Availability Zones. You can specify only one subnet per
+    #   Availability Zone. You must specify either subnets or subnet mappings.
     #
-    #   The load balancer is allocated one static IP address per subnet. You
-    #   cannot specify your own Elastic IP addresses.
+    #   You cannot specify Elastic IP addresses for your subnets.
     #
     # @return [Types::SetSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3221,7 +3231,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

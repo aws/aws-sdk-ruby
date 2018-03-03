@@ -429,6 +429,7 @@ module Aws::SSM
     ItemContentMismatchException = Shapes::StructureShape.new(name: 'ItemContentMismatchException')
     ItemSizeLimitExceededException = Shapes::StructureShape.new(name: 'ItemSizeLimitExceededException')
     KeyList = Shapes::ListShape.new(name: 'KeyList')
+    LastResourceDataSyncMessage = Shapes::StringShape.new(name: 'LastResourceDataSyncMessage')
     LastResourceDataSyncStatus = Shapes::StringShape.new(name: 'LastResourceDataSyncStatus')
     LastResourceDataSyncTime = Shapes::TimestampShape.new(name: 'LastResourceDataSyncTime')
     LastSuccessfulResourceDataSyncTime = Shapes::TimestampShape.new(name: 'LastSuccessfulResourceDataSyncTime')
@@ -2427,6 +2428,7 @@ module Aws::SSM
     ResourceDataSyncItem.add_member(:last_successful_sync_time, Shapes::ShapeRef.new(shape: LastSuccessfulResourceDataSyncTime, location_name: "LastSuccessfulSyncTime"))
     ResourceDataSyncItem.add_member(:last_status, Shapes::ShapeRef.new(shape: LastResourceDataSyncStatus, location_name: "LastStatus"))
     ResourceDataSyncItem.add_member(:sync_created_time, Shapes::ShapeRef.new(shape: ResourceDataSyncCreatedTime, location_name: "SyncCreatedTime"))
+    ResourceDataSyncItem.add_member(:last_sync_status_message, Shapes::ShapeRef.new(shape: LastResourceDataSyncMessage, location_name: "LastSyncStatusMessage"))
     ResourceDataSyncItem.struct_class = Types::ResourceDataSyncItem
 
     ResourceDataSyncItemList.member = Shapes::ShapeRef.new(shape: ResourceDataSyncItem)

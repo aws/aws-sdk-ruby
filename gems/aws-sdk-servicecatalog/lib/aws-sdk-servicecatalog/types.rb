@@ -1187,6 +1187,28 @@ module Aws::ServiceCatalog
     #
     class DeleteProvisioningArtifactOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteTagOptionInput
+    #   data as a hash:
+    #
+    #       {
+    #         id: "TagOptionId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The TagOption identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteTagOptionInput AWS API Documentation
+    #
+    class DeleteTagOptionInput < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteTagOptionOutput AWS API Documentation
+    #
+    class DeleteTagOptionOutput < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DescribeConstraintInput
     #   data as a hash:
     #
@@ -1586,8 +1608,8 @@ module Aws::ServiceCatalog
     #   @return [Types::ProvisionedProductPlanDetails]
     #
     # @!attribute [rw] resource_changes
-    #   Information about the resources changes that will occur when the
-    #   plan is executed.
+    #   Information about the resource changes that will occur when the plan
+    #   is executed.
     #   @return [Array<Types::ResourceChange>]
     #
     # @!attribute [rw] next_page_token
@@ -3852,14 +3874,14 @@ module Aws::ServiceCatalog
     # Information about a change to a resource attribute.
     #
     # @!attribute [rw] target
-    #   Information about the resource attribute that will be modified.
+    #   Information about the resource attribute to be modified.
     #   @return [Types::ResourceTargetDefinition]
     #
     # @!attribute [rw] evaluation
-    #   For static evaluations, the value the resource attribute will change
-    #   and the new value is known. For dynamic evaluations, the value might
-    #   change, and any new value will be determined when the plan is
-    #   updated.
+    #   For static evaluations, the value of the resource attribute will
+    #   change and the new value is known. For dynamic evaluations, the
+    #   value might change, and any new value will be determined when the
+    #   plan is updated.
     #   @return [String]
     #
     # @!attribute [rw] causing_entity
@@ -3911,7 +3933,7 @@ module Aws::ServiceCatalog
     # Information about a change to a resource attribute.
     #
     # @!attribute [rw] attribute
-    #   The attribute that will change.
+    #   The attribute to be changed.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -3921,7 +3943,7 @@ module Aws::ServiceCatalog
     #
     # @!attribute [rw] requires_recreation
     #   If the attribute is `Properties`, indicates whether a change to this
-    #   property causes the resource to be recreated.
+    #   property causes the resource to be re-created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceTargetDefinition AWS API Documentation

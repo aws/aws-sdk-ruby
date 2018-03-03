@@ -1,10 +1,15 @@
 Unreleased Changes
 ------------------
 
-3.16.0 (2018-02-21)
+3.17.1 (2018-02-21)
 ------------------
 
-* Issue - Fix Ruby warnings: shadowed local variable "parts" and unintialized @location
+* Issue - Fix Ruby warnings: Unshadowed local variable "parts" and intialized @location
+
+3.17.0 (2018-02-27)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
 
 3.16.0 (2018-02-20)
 ------------------

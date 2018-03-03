@@ -342,24 +342,26 @@ module Aws::EC2
     #   may appear to complete even though you provided an invalid identifier.
     #   The action will eventually fail.
     # @option options [String] :presigned_url
-    #   The pre-signed URL that facilitates copying an encrypted snapshot.
-    #   This parameter is only required when copying an encrypted snapshot
-    #   with the Amazon EC2 Query API; it is available as an optional
-    #   parameter in all other cases. The `PresignedUrl` should use the
-    #   snapshot source endpoint, the `CopySnapshot` action, and include the
-    #   `SourceRegion`, `SourceSnapshotId`, and `DestinationRegion`
-    #   parameters. The `PresignedUrl` must be signed using AWS Signature
-    #   Version 4. Because EBS snapshots are stored in Amazon S3, the signing
-    #   algorithm for this parameter uses the same logic that is described in
-    #   [Authenticating Requests by Using Query Parameters (AWS Signature
-    #   Version 4)][1] in the *Amazon Simple Storage Service API Reference*.
-    #   An invalid or improperly signed `PresignedUrl` will cause the copy
-    #   operation to fail asynchronously, and the snapshot will move to an
-    #   `error` state.
+    #   The pre-signed URL parameter is required when copying an encrypted
+    #   snapshot with the Amazon EC2 Query API; it is available as an optional
+    #   parameter in all other cases. For more information, see [Query
+    #   Requests][1].
+    #
+    #   The `PresignedUrl` should use the snapshot source endpoint, the
+    #   `CopySnapshot` action, and include the `SourceRegion`,
+    #   `SourceSnapshotId`, and `DestinationRegion` parameters. The
+    #   `PresignedUrl` must be signed using AWS Signature Version 4. Because
+    #   EBS snapshots are stored in Amazon S3, the signing algorithm for this
+    #   parameter uses the same logic that is described in [Authenticating
+    #   Requests by Using Query Parameters (AWS Signature Version 4)][2] in
+    #   the *Amazon Simple Storage Service API Reference*. An invalid or
+    #   improperly signed `PresignedUrl` will cause the copy operation to fail
+    #   asynchronously, and the snapshot will move to an `error` state.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
+    #   [2]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     # @option options [required, String] :source_region
     #   The ID of the region that contains the snapshot to be copied.
     # @option options [Boolean] :dry_run
