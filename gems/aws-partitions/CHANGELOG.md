@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2018-03-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.68.0 (2018-02-28)
 ------------------
 

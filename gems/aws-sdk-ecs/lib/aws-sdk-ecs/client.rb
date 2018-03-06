@@ -2909,8 +2909,11 @@ module Aws::ECS
     #   defaults to `EC2`.
     #
     # @option params [String] :cpu
-    #   The number of `cpu` units used by the task. If using the EC2 launch
-    #   type, this field is optional and any value can be used.
+    #   The number of CPU units used by the task. It can be expressed as an
+    #   integer using CPU units, for example `1024`, or as a string using
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but will
+    #   be converted to an integer indicating the CPU units when the task
+    #   definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -2918,26 +2921,34 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If you are using the Fargate launch type, this field is required and
-    #   you must use one of the following values, which determines your range
-    #   of valid values for the `memory` parameter:
+    #   If using the EC2 launch type, this field is optional. Supported values
+    #   are between `128` CPU units (`0.125` vCPUs) and `10240` CPU units
+    #   (`10` vCPUs).
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 0.5GB, 1GB, 2GB
+    #   If using the Fargate launch type, this field is required and you must
+    #   use one of the following values, which determines your range of
+    #   supported values for the `memory` parameter:
     #
-    #   * 512 (.5 vCPU) - Available `memory` values: 1GB, 2GB, 3GB, 4GB
+    #   * 256 (.25 vCPU) - Available `memory` values: 512 (0.5GB), 1024 (1GB),
+    #     2048 (2GB)
     #
-    #   * 1024 (1 vCPU) - Available `memory` values: 2GB, 3GB, 4GB, 5GB, 6GB,
-    #     7GB, 8GB
+    #   * 512 (.5 vCPU) - Available `memory` values: 1024 (1GB), 2048 (2GB),
+    #     3072 (3GB), 4096 (4GB)
     #
-    #   * 2048 (2 vCPU) - Available `memory` values: Between 4GB and 16GB in
-    #     1GB increments
+    #   * 1024 (1 vCPU) - Available `memory` values: 2048 (2GB), 3072 (3GB),
+    #     4096 (4GB), 5120 (5GB), 6144 (6GB), 7168 (7GB), 8192 (8GB)
     #
-    #   * 4096 (4 vCPU) - Available `memory` values: Between 8GB and 30GB in
-    #     1GB increments
+    #   * 2048 (2 vCPU) - Available `memory` values: Between 4096 (4GB) and
+    #     16384 (16GB) in increments of 1024 (1GB)
+    #
+    #   * 4096 (4 vCPU) - Available `memory` values: Between 8192 (8GB) and
+    #     30720 (30GB) in increments of 1024 (1GB)
     #
     # @option params [String] :memory
-    #   The amount (in MiB) of memory used by the task. If using the EC2
-    #   launch type, this field is optional and any value can be used.
+    #   The amount of memory (in MiB) used by the task. It can be expressed as
+    #   an integer using MiB, for example `1024`, or as a string using GB, for
+    #   example `1GB` or `1 GB`, in a task definition but will be converted to
+    #   an integer indicating the MiB when the task definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -2945,22 +2956,26 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If you are using the Fargate launch type, this field is required and
-    #   you must use one of the following values, which determines your range
-    #   of valid values for the `cpu` parameter:
+    #   If using the EC2 launch type, this field is optional.
     #
-    #   * 0\.5GB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
+    #   If using the Fargate launch type, this field is required and you must
+    #   use one of the following values, which determines your range of
+    #   supported values for the `cpu` parameter:
     #
-    #   * 1GB, 2GB, 3GB, 4GB - Available `cpu` values: 512 (.5 vCPU)
+    #   * 512 (0.5GB), 1024 (1GB), 2048 (2GB) - Available `cpu` values: 256
+    #     (.25 vCPU)
     #
-    #   * 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available `cpu` values: 1024 (1
-    #     vCPU)
+    #   * 1024 (1GB), 2048 (2GB), 3072 (3GB), 4096 (4GB) - Available `cpu`
+    #     values: 512 (.5 vCPU)
     #
-    #   * Between 4GB and 16GB in 1GB increments - Available `cpu` values:
-    #     2048 (2 vCPU)
+    #   * 2048 (2GB), 3072 (3GB), 4096 (4GB), 5120 (5GB), 6144 (6GB), 7168
+    #     (7GB), 8192 (8GB) - Available `cpu` values: 1024 (1 vCPU)
     #
-    #   * Between 8GB and 30GB in 1GB increments - Available `cpu` values:
-    #     4096 (4 vCPU)
+    #   * Between 4096 (4GB) and 16384 (16GB) in increments of 1024 (1GB) -
+    #     Available `cpu` values: 2048 (2 vCPU)
+    #
+    #   * Between 8192 (8GB) and 30720 (30GB) in increments of 1024 (1GB) -
+    #     Available `cpu` values: 4096 (4 vCPU)
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4296,7 +4311,8 @@ module Aws::ECS
     #   The platform version you want to update your service to run.
     #
     # @option params [Boolean] :force_new_deployment
-    #   Whether or not to force a new deployment of the service.
+    #   Whether or not to force a new deployment of the service. By default,
+    #   `--no-force-new-deployment` is assumed unless specified otherwise.
     #
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
@@ -4439,7 +4455,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
