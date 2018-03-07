@@ -178,15 +178,15 @@ module Aws::MediaLive
     #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #           dvb_nit_settings: {
-    #             network_id: 1,
-    #             network_name: "__string",
+    #             network_id: 1, # required
+    #             network_name: "__stringMin1Max256", # required
     #             rep_interval: 1,
     #           },
     #           dvb_sdt_settings: {
     #             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #             rep_interval: 1,
-    #             service_name: "__string",
-    #             service_provider_name: "__string",
+    #             service_name: "__stringMin1Max256",
+    #             service_provider_name: "__stringMin1Max256",
     #           },
     #           dvb_sub_pids: "__string",
     #           dvb_tdt_settings: {
@@ -240,7 +240,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         destination: {
+    #         destination: { # required
     #           destination_ref_id: "__string",
     #         },
     #         rollover_interval: 1,
@@ -269,7 +269,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         container_settings: {
+    #         container_settings: { # required
     #           m2ts_settings: {
     #             absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #             arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -283,15 +283,15 @@ module Aws::MediaLive
     #             buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #             cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #             dvb_nit_settings: {
-    #               network_id: 1,
-    #               network_name: "__string",
+    #               network_id: 1, # required
+    #               network_name: "__stringMin1Max256", # required
     #               rep_interval: 1,
     #             },
     #             dvb_sdt_settings: {
     #               output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #               rep_interval: 1,
-    #               service_name: "__string",
-    #               service_provider_name: "__string",
+    #               service_name: "__stringMin1Max256",
+    #               service_provider_name: "__stringMin1Max256",
     #             },
     #             dvb_sub_pids: "__string",
     #             dvb_tdt_settings: {
@@ -373,13 +373,13 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         input_channel_levels: [
+    #         input_channel_levels: [ # required
     #           {
-    #             gain: 1,
-    #             input_channel: 1,
+    #             gain: 1, # required
+    #             input_channel: 1, # required
     #           },
     #         ],
-    #         output_channel: 1,
+    #         output_channel: 1, # required
     #       }
     #
     # @!attribute [rw] input_channel_levels
@@ -489,7 +489,7 @@ module Aws::MediaLive
     #           algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO
     #           target_lkfs: 1.0,
     #         },
-    #         audio_selector_name: "__string",
+    #         audio_selector_name: "__string", # required
     #         audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
     #         audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #         codec_settings: {
@@ -543,19 +543,19 @@ module Aws::MediaLive
     #           pass_through_settings: {
     #           },
     #         },
-    #         language_code: "__string",
+    #         language_code: "__stringMin3Max3",
     #         language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #         name: "__string",
+    #         name: "__string", # required
     #         remix_settings: {
-    #           channel_mappings: [
+    #           channel_mappings: [ # required
     #             {
-    #               input_channel_levels: [
+    #               input_channel_levels: [ # required
     #                 {
-    #                   gain: 1,
-    #                   input_channel: 1,
+    #                   gain: 1, # required
+    #                   input_channel: 1, # required
     #                 },
     #               ],
-    #               output_channel: 1,
+    #               output_channel: 1, # required
     #             },
     #           ],
     #           channels_in: 1,
@@ -641,7 +641,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         language_code: "__string",
+    #         language_code: "__string", # required
     #         language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
     #       }
     #
@@ -711,7 +711,7 @@ module Aws::MediaLive
     #         audio_group_id: "__string",
     #         audio_only_image: {
     #           password_param: "__string",
-    #           uri: "__string",
+    #           uri: "__string", # required
     #           username: "__string",
     #         },
     #         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
@@ -760,7 +760,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         pid: 1,
+    #         pid: 1, # required
     #       }
     #
     # @!attribute [rw] pid
@@ -778,14 +778,14 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         name: "__string",
+    #         name: "__string", # required
     #         selector_settings: {
     #           audio_language_selection: {
-    #             language_code: "__string",
+    #             language_code: "__string", # required
     #             language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
     #           },
     #           audio_pid_selection: {
-    #             pid: 1,
+    #             pid: 1, # required
     #           },
     #         },
     #       }
@@ -813,11 +813,11 @@ module Aws::MediaLive
     #
     #       {
     #         audio_language_selection: {
-    #           language_code: "__string",
+    #           language_code: "__string", # required
     #           language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
     #         },
     #         audio_pid_selection: {
-    #           pid: 1,
+    #           pid: 1, # required
     #         },
     #       }
     #
@@ -841,7 +841,7 @@ module Aws::MediaLive
     #       {
     #         avail_blanking_image: {
     #           password_param: "__string",
-    #           uri: "__string",
+    #           uri: "__string", # required
     #           username: "__string",
     #         },
     #         state: "DISABLED", # accepts DISABLED, ENABLED
@@ -930,16 +930,16 @@ module Aws::MediaLive
     #       {
     #         blackout_slate_image: {
     #           password_param: "__string",
-    #           uri: "__string",
+    #           uri: "__string", # required
     #           username: "__string",
     #         },
     #         network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #         network_end_blackout_image: {
     #           password_param: "__string",
-    #           uri: "__string",
+    #           uri: "__string", # required
     #           username: "__string",
     #         },
-    #         network_id: "__string",
+    #         network_id: "__stringMin34Max34",
     #         state: "DISABLED", # accepts DISABLED, ENABLED
     #       }
     #
@@ -993,7 +993,7 @@ module Aws::MediaLive
     #         background_opacity: 1,
     #         font: {
     #           password_param: "__string",
-    #           uri: "__string",
+    #           uri: "__string", # required
     #           username: "__string",
     #         },
     #         font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -1160,7 +1160,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         caption_selector_name: "__string",
+    #         caption_selector_name: "__string", # required
     #         destination_settings: {
     #           arib_destination_settings: {
     #           },
@@ -1170,7 +1170,7 @@ module Aws::MediaLive
     #             background_opacity: 1,
     #             font: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
     #             font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -1193,7 +1193,7 @@ module Aws::MediaLive
     #             background_opacity: 1,
     #             font: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
     #             font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -1230,7 +1230,7 @@ module Aws::MediaLive
     #         },
     #         language_code: "__string",
     #         language_description: "__string",
-    #         name: "__string",
+    #         name: "__string", # required
     #       }
     #
     # @!attribute [rw] caption_selector_name
@@ -1281,7 +1281,7 @@ module Aws::MediaLive
     #           background_opacity: 1,
     #           font: {
     #             password_param: "__string",
-    #             uri: "__string",
+    #             uri: "__string", # required
     #             username: "__string",
     #           },
     #           font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -1304,7 +1304,7 @@ module Aws::MediaLive
     #           background_opacity: 1,
     #           font: {
     #             password_param: "__string",
-    #             uri: "__string",
+    #             uri: "__string", # required
     #             username: "__string",
     #           },
     #           font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -1397,9 +1397,9 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         caption_channel: 1,
-    #         language_code: "__string",
-    #         language_description: "__string",
+    #         caption_channel: 1, # required
+    #         language_code: "__stringMin3Max3", # required
+    #         language_description: "__stringMin1", # required
     #       }
     #
     # @!attribute [rw] caption_channel
@@ -1434,7 +1434,7 @@ module Aws::MediaLive
     #
     #       {
     #         language_code: "__string",
-    #         name: "__string",
+    #         name: "__string", # required
     #         selector_settings: {
     #           arib_source_settings: {
     #           },
@@ -1750,14 +1750,14 @@ module Aws::MediaLive
     #           },
     #         ],
     #         encoder_settings: {
-    #           audio_descriptions: [
+    #           audio_descriptions: [ # required
     #             {
     #               audio_normalization_settings: {
     #                 algorithm: "ITU_1770_1", # accepts ITU_1770_1, ITU_1770_2
     #                 algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO
     #                 target_lkfs: 1.0,
     #               },
-    #               audio_selector_name: "__string",
+    #               audio_selector_name: "__string", # required
     #               audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
     #               audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               codec_settings: {
@@ -1811,19 +1811,19 @@ module Aws::MediaLive
     #                 pass_through_settings: {
     #                 },
     #               },
-    #               language_code: "__string",
+    #               language_code: "__stringMin3Max3",
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               name: "__string",
+    #               name: "__string", # required
     #               remix_settings: {
-    #                 channel_mappings: [
+    #                 channel_mappings: [ # required
     #                   {
-    #                     input_channel_levels: [
+    #                     input_channel_levels: [ # required
     #                       {
-    #                         gain: 1,
-    #                         input_channel: 1,
+    #                         gain: 1, # required
+    #                         input_channel: 1, # required
     #                       },
     #                     ],
-    #                     output_channel: 1,
+    #                     output_channel: 1, # required
     #                   },
     #                 ],
     #                 channels_in: 1,
@@ -1835,7 +1835,7 @@ module Aws::MediaLive
     #           avail_blanking: {
     #             avail_blanking_image: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
     #             state: "DISABLED", # accepts DISABLED, ENABLED
@@ -1857,21 +1857,21 @@ module Aws::MediaLive
     #           blackout_slate: {
     #             blackout_slate_image: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
     #             network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #             network_end_blackout_image: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
-    #             network_id: "__string",
+    #             network_id: "__stringMin34Max34",
     #             state: "DISABLED", # accepts DISABLED, ENABLED
     #           },
     #           caption_descriptions: [
     #             {
-    #               caption_selector_name: "__string",
+    #               caption_selector_name: "__string", # required
     #               destination_settings: {
     #                 arib_destination_settings: {
     #                 },
@@ -1881,7 +1881,7 @@ module Aws::MediaLive
     #                   background_opacity: 1,
     #                   font: {
     #                     password_param: "__string",
-    #                     uri: "__string",
+    #                     uri: "__string", # required
     #                     username: "__string",
     #                   },
     #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -1904,7 +1904,7 @@ module Aws::MediaLive
     #                   background_opacity: 1,
     #                   font: {
     #                     password_param: "__string",
-    #                     uri: "__string",
+    #                     uri: "__string", # required
     #                     username: "__string",
     #                   },
     #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -1941,7 +1941,7 @@ module Aws::MediaLive
     #               },
     #               language_code: "__string",
     #               language_description: "__string",
-    #               name: "__string",
+    #               name: "__string", # required
     #             },
     #           ],
     #           global_configuration: {
@@ -1949,10 +1949,10 @@ module Aws::MediaLive
     #             input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
     #             input_loss_behavior: {
     #               black_frame_msec: 1,
-    #               input_loss_image_color: "__string",
+    #               input_loss_image_color: "__stringMin6Max6",
     #               input_loss_image_slate: {
     #                 password_param: "__string",
-    #                 uri: "__string",
+    #                 uri: "__string", # required
     #                 username: "__string",
     #               },
     #               input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -1961,12 +1961,12 @@ module Aws::MediaLive
     #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #           },
-    #           output_groups: [
+    #           output_groups: [ # required
     #             {
-    #               name: "__string",
-    #               output_group_settings: {
+    #               name: "__stringMax32",
+    #               output_group_settings: { # required
     #                 archive_group_settings: {
-    #                   destination: {
+    #                   destination: { # required
     #                     destination_ref_id: "__string",
     #                   },
     #                   rollover_interval: 1,
@@ -1977,16 +1977,16 @@ module Aws::MediaLive
     #                   base_url_manifest: "__string",
     #                   caption_language_mappings: [
     #                     {
-    #                       caption_channel: 1,
-    #                       language_code: "__string",
-    #                       language_description: "__string",
+    #                       caption_channel: 1, # required
+    #                       language_code: "__stringMin3Max3", # required
+    #                       language_description: "__stringMin1", # required
     #                     },
     #                   ],
     #                   caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #                   constant_iv: "__string",
-    #                   destination: {
+    #                   constant_iv: "__stringMin32Max32",
+    #                   destination: { # required
     #                     destination_ref_id: "__string",
     #                   },
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
@@ -2033,10 +2033,10 @@ module Aws::MediaLive
     #                     static_key_settings: {
     #                       key_provider_server: {
     #                         password_param: "__string",
-    #                         uri: "__string",
+    #                         uri: "__string", # required
     #                         username: "__string",
     #                       },
-    #                       static_key_value: "__string",
+    #                       static_key_value: "__stringMin32Max32", # required
     #                     },
     #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
@@ -2060,7 +2060,7 @@ module Aws::MediaLive
     #                   audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
     #                   certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
     #                   connection_retry_interval: 1,
-    #                   destination: {
+    #                   destination: { # required
     #                     destination_ref_id: "__string",
     #                   },
     #                   event_id: "__string",
@@ -2084,14 +2084,14 @@ module Aws::MediaLive
     #                   timed_metadata_id_3_period: 1,
     #                 },
     #               },
-    #               outputs: [
+    #               outputs: [ # required
     #                 {
     #                   audio_description_names: ["__string"],
     #                   caption_description_names: ["__string"],
-    #                   output_name: "__string",
-    #                   output_settings: {
+    #                   output_name: "__stringMin1Max255",
+    #                   output_settings: { # required
     #                     archive_output_settings: {
-    #                       container_settings: {
+    #                       container_settings: { # required
     #                         m2ts_settings: {
     #                           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                           arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -2105,15 +2105,15 @@ module Aws::MediaLive
     #                           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                           dvb_nit_settings: {
-    #                             network_id: 1,
-    #                             network_name: "__string",
+    #                             network_id: 1, # required
+    #                             network_name: "__stringMin1Max256", # required
     #                             rep_interval: 1,
     #                           },
     #                           dvb_sdt_settings: {
     #                             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                             rep_interval: 1,
-    #                             service_name: "__string",
-    #                             service_provider_name: "__string",
+    #                             service_name: "__stringMin1Max256",
+    #                             service_provider_name: "__stringMin1Max256",
     #                           },
     #                           dvb_sub_pids: "__string",
     #                           dvb_tdt_settings: {
@@ -2156,19 +2156,19 @@ module Aws::MediaLive
     #                       name_modifier: "__string",
     #                     },
     #                     hls_output_settings: {
-    #                       hls_settings: {
+    #                       hls_settings: { # required
     #                         audio_only_hls_settings: {
     #                           audio_group_id: "__string",
     #                           audio_only_image: {
     #                             password_param: "__string",
-    #                             uri: "__string",
+    #                             uri: "__string", # required
     #                             username: "__string",
     #                           },
     #                           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #                         },
     #                         standard_hls_settings: {
     #                           audio_rendition_sets: "__string",
-    #                           m3u_8_settings: {
+    #                           m3u_8_settings: { # required
     #                             audio_frames_per_pes: 1,
     #                             audio_pids: "__string",
     #                             ecm_pid: "__string",
@@ -2187,7 +2187,7 @@ module Aws::MediaLive
     #                           },
     #                         },
     #                       },
-    #                       name_modifier: "__string",
+    #                       name_modifier: "__stringMin1",
     #                       segment_modifier: "__string",
     #                     },
     #                     ms_smooth_output_settings: {
@@ -2195,7 +2195,7 @@ module Aws::MediaLive
     #                     },
     #                     udp_output_settings: {
     #                       buffer_msec: 1,
-    #                       container_settings: {
+    #                       container_settings: { # required
     #                         m2ts_settings: {
     #                           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                           arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -2209,15 +2209,15 @@ module Aws::MediaLive
     #                           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                           dvb_nit_settings: {
-    #                             network_id: 1,
-    #                             network_name: "__string",
+    #                             network_id: 1, # required
+    #                             network_name: "__stringMin1Max256", # required
     #                             rep_interval: 1,
     #                           },
     #                           dvb_sdt_settings: {
     #                             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                             rep_interval: 1,
-    #                             service_name: "__string",
-    #                             service_provider_name: "__string",
+    #                             service_name: "__stringMin1Max256",
+    #                             service_provider_name: "__stringMin1Max256",
     #                           },
     #                           dvb_sub_pids: "__string",
     #                           dvb_tdt_settings: {
@@ -2256,7 +2256,7 @@ module Aws::MediaLive
     #                           video_pid: "__string",
     #                         },
     #                       },
-    #                       destination: {
+    #                       destination: { # required
     #                         destination_ref_id: "__string",
     #                       },
     #                       fec_output_settings: {
@@ -2271,11 +2271,11 @@ module Aws::MediaLive
     #               ],
     #             },
     #           ],
-    #           timecode_config: {
-    #             source: "EMBEDDED", # accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
+    #           timecode_config: { # required
+    #             source: "EMBEDDED", # required, accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
     #             sync_threshold: 1,
     #           },
-    #           video_descriptions: [
+    #           video_descriptions: [ # required
     #             {
     #               codec_settings: {
     #                 h264_settings: {
@@ -2317,7 +2317,7 @@ module Aws::MediaLive
     #                 },
     #               },
     #               height: 1,
-    #               name: "__string",
+    #               name: "__string", # required
     #               respond_to_afd: "NONE", # accepts NONE, PASSTHROUGH, RESPOND
     #               scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
     #               sharpness: 1,
@@ -2331,14 +2331,14 @@ module Aws::MediaLive
     #             input_settings: {
     #               audio_selectors: [
     #                 {
-    #                   name: "__string",
+    #                   name: "__string", # required
     #                   selector_settings: {
     #                     audio_language_selection: {
-    #                       language_code: "__string",
+    #                       language_code: "__string", # required
     #                       language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
     #                     },
     #                     audio_pid_selection: {
-    #                       pid: 1,
+    #                       pid: 1, # required
     #                     },
     #                   },
     #                 },
@@ -2346,7 +2346,7 @@ module Aws::MediaLive
     #               caption_selectors: [
     #                 {
     #                   language_code: "__string",
-    #                   name: "__string",
+    #                   name: "__string", # required
     #                   selector_settings: {
     #                     arib_source_settings: {
     #                     },
@@ -2903,8 +2903,8 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         network_id: 1,
-    #         network_name: "__string",
+    #         network_id: 1, # required
+    #         network_name: "__stringMin1Max256", # required
     #         rep_interval: 1,
     #       }
     #
@@ -2939,8 +2939,8 @@ module Aws::MediaLive
     #       {
     #         output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #         rep_interval: 1,
-    #         service_name: "__string",
-    #         service_provider_name: "__string",
+    #         service_name: "__stringMin1Max256",
+    #         service_provider_name: "__stringMin1Max256",
     #       }
     #
     # @!attribute [rw] output_sdt
@@ -2988,7 +2988,7 @@ module Aws::MediaLive
     #         background_opacity: 1,
     #         font: {
     #           password_param: "__string",
-    #           uri: "__string",
+    #           uri: "__string", # required
     #           username: "__string",
     #         },
     #         font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -3409,14 +3409,14 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         audio_descriptions: [
+    #         audio_descriptions: [ # required
     #           {
     #             audio_normalization_settings: {
     #               algorithm: "ITU_1770_1", # accepts ITU_1770_1, ITU_1770_2
     #               algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO
     #               target_lkfs: 1.0,
     #             },
-    #             audio_selector_name: "__string",
+    #             audio_selector_name: "__string", # required
     #             audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
     #             audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #             codec_settings: {
@@ -3470,19 +3470,19 @@ module Aws::MediaLive
     #               pass_through_settings: {
     #               },
     #             },
-    #             language_code: "__string",
+    #             language_code: "__stringMin3Max3",
     #             language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #             name: "__string",
+    #             name: "__string", # required
     #             remix_settings: {
-    #               channel_mappings: [
+    #               channel_mappings: [ # required
     #                 {
-    #                   input_channel_levels: [
+    #                   input_channel_levels: [ # required
     #                     {
-    #                       gain: 1,
-    #                       input_channel: 1,
+    #                       gain: 1, # required
+    #                       input_channel: 1, # required
     #                     },
     #                   ],
-    #                   output_channel: 1,
+    #                   output_channel: 1, # required
     #                 },
     #               ],
     #               channels_in: 1,
@@ -3494,7 +3494,7 @@ module Aws::MediaLive
     #         avail_blanking: {
     #           avail_blanking_image: {
     #             password_param: "__string",
-    #             uri: "__string",
+    #             uri: "__string", # required
     #             username: "__string",
     #           },
     #           state: "DISABLED", # accepts DISABLED, ENABLED
@@ -3516,21 +3516,21 @@ module Aws::MediaLive
     #         blackout_slate: {
     #           blackout_slate_image: {
     #             password_param: "__string",
-    #             uri: "__string",
+    #             uri: "__string", # required
     #             username: "__string",
     #           },
     #           network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #           network_end_blackout_image: {
     #             password_param: "__string",
-    #             uri: "__string",
+    #             uri: "__string", # required
     #             username: "__string",
     #           },
-    #           network_id: "__string",
+    #           network_id: "__stringMin34Max34",
     #           state: "DISABLED", # accepts DISABLED, ENABLED
     #         },
     #         caption_descriptions: [
     #           {
-    #             caption_selector_name: "__string",
+    #             caption_selector_name: "__string", # required
     #             destination_settings: {
     #               arib_destination_settings: {
     #               },
@@ -3540,7 +3540,7 @@ module Aws::MediaLive
     #                 background_opacity: 1,
     #                 font: {
     #                   password_param: "__string",
-    #                   uri: "__string",
+    #                   uri: "__string", # required
     #                   username: "__string",
     #                 },
     #                 font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -3563,7 +3563,7 @@ module Aws::MediaLive
     #                 background_opacity: 1,
     #                 font: {
     #                   password_param: "__string",
-    #                   uri: "__string",
+    #                   uri: "__string", # required
     #                   username: "__string",
     #                 },
     #                 font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -3600,7 +3600,7 @@ module Aws::MediaLive
     #             },
     #             language_code: "__string",
     #             language_description: "__string",
-    #             name: "__string",
+    #             name: "__string", # required
     #           },
     #         ],
     #         global_configuration: {
@@ -3608,10 +3608,10 @@ module Aws::MediaLive
     #           input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
     #           input_loss_behavior: {
     #             black_frame_msec: 1,
-    #             input_loss_image_color: "__string",
+    #             input_loss_image_color: "__stringMin6Max6",
     #             input_loss_image_slate: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
     #             input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -3620,12 +3620,12 @@ module Aws::MediaLive
     #           output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #           support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #         },
-    #         output_groups: [
+    #         output_groups: [ # required
     #           {
-    #             name: "__string",
-    #             output_group_settings: {
+    #             name: "__stringMax32",
+    #             output_group_settings: { # required
     #               archive_group_settings: {
-    #                 destination: {
+    #                 destination: { # required
     #                   destination_ref_id: "__string",
     #                 },
     #                 rollover_interval: 1,
@@ -3636,16 +3636,16 @@ module Aws::MediaLive
     #                 base_url_manifest: "__string",
     #                 caption_language_mappings: [
     #                   {
-    #                     caption_channel: 1,
-    #                     language_code: "__string",
-    #                     language_description: "__string",
+    #                     caption_channel: 1, # required
+    #                     language_code: "__stringMin3Max3", # required
+    #                     language_description: "__stringMin1", # required
     #                   },
     #                 ],
     #                 caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #                 constant_iv: "__string",
-    #                 destination: {
+    #                 constant_iv: "__stringMin32Max32",
+    #                 destination: { # required
     #                   destination_ref_id: "__string",
     #                 },
     #                 directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
@@ -3692,10 +3692,10 @@ module Aws::MediaLive
     #                   static_key_settings: {
     #                     key_provider_server: {
     #                       password_param: "__string",
-    #                       uri: "__string",
+    #                       uri: "__string", # required
     #                       username: "__string",
     #                     },
-    #                     static_key_value: "__string",
+    #                     static_key_value: "__stringMin32Max32", # required
     #                   },
     #                 },
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
@@ -3719,7 +3719,7 @@ module Aws::MediaLive
     #                 audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
     #                 certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
     #                 connection_retry_interval: 1,
-    #                 destination: {
+    #                 destination: { # required
     #                   destination_ref_id: "__string",
     #                 },
     #                 event_id: "__string",
@@ -3743,14 +3743,14 @@ module Aws::MediaLive
     #                 timed_metadata_id_3_period: 1,
     #               },
     #             },
-    #             outputs: [
+    #             outputs: [ # required
     #               {
     #                 audio_description_names: ["__string"],
     #                 caption_description_names: ["__string"],
-    #                 output_name: "__string",
-    #                 output_settings: {
+    #                 output_name: "__stringMin1Max255",
+    #                 output_settings: { # required
     #                   archive_output_settings: {
-    #                     container_settings: {
+    #                     container_settings: { # required
     #                       m2ts_settings: {
     #                         absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                         arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -3764,15 +3764,15 @@ module Aws::MediaLive
     #                         buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                         cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                         dvb_nit_settings: {
-    #                           network_id: 1,
-    #                           network_name: "__string",
+    #                           network_id: 1, # required
+    #                           network_name: "__stringMin1Max256", # required
     #                           rep_interval: 1,
     #                         },
     #                         dvb_sdt_settings: {
     #                           output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                           rep_interval: 1,
-    #                           service_name: "__string",
-    #                           service_provider_name: "__string",
+    #                           service_name: "__stringMin1Max256",
+    #                           service_provider_name: "__stringMin1Max256",
     #                         },
     #                         dvb_sub_pids: "__string",
     #                         dvb_tdt_settings: {
@@ -3815,19 +3815,19 @@ module Aws::MediaLive
     #                     name_modifier: "__string",
     #                   },
     #                   hls_output_settings: {
-    #                     hls_settings: {
+    #                     hls_settings: { # required
     #                       audio_only_hls_settings: {
     #                         audio_group_id: "__string",
     #                         audio_only_image: {
     #                           password_param: "__string",
-    #                           uri: "__string",
+    #                           uri: "__string", # required
     #                           username: "__string",
     #                         },
     #                         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #                       },
     #                       standard_hls_settings: {
     #                         audio_rendition_sets: "__string",
-    #                         m3u_8_settings: {
+    #                         m3u_8_settings: { # required
     #                           audio_frames_per_pes: 1,
     #                           audio_pids: "__string",
     #                           ecm_pid: "__string",
@@ -3846,7 +3846,7 @@ module Aws::MediaLive
     #                         },
     #                       },
     #                     },
-    #                     name_modifier: "__string",
+    #                     name_modifier: "__stringMin1",
     #                     segment_modifier: "__string",
     #                   },
     #                   ms_smooth_output_settings: {
@@ -3854,7 +3854,7 @@ module Aws::MediaLive
     #                   },
     #                   udp_output_settings: {
     #                     buffer_msec: 1,
-    #                     container_settings: {
+    #                     container_settings: { # required
     #                       m2ts_settings: {
     #                         absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                         arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -3868,15 +3868,15 @@ module Aws::MediaLive
     #                         buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                         cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                         dvb_nit_settings: {
-    #                           network_id: 1,
-    #                           network_name: "__string",
+    #                           network_id: 1, # required
+    #                           network_name: "__stringMin1Max256", # required
     #                           rep_interval: 1,
     #                         },
     #                         dvb_sdt_settings: {
     #                           output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                           rep_interval: 1,
-    #                           service_name: "__string",
-    #                           service_provider_name: "__string",
+    #                           service_name: "__stringMin1Max256",
+    #                           service_provider_name: "__stringMin1Max256",
     #                         },
     #                         dvb_sub_pids: "__string",
     #                         dvb_tdt_settings: {
@@ -3915,7 +3915,7 @@ module Aws::MediaLive
     #                         video_pid: "__string",
     #                       },
     #                     },
-    #                     destination: {
+    #                     destination: { # required
     #                       destination_ref_id: "__string",
     #                     },
     #                     fec_output_settings: {
@@ -3930,11 +3930,11 @@ module Aws::MediaLive
     #             ],
     #           },
     #         ],
-    #         timecode_config: {
-    #           source: "EMBEDDED", # accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
+    #         timecode_config: { # required
+    #           source: "EMBEDDED", # required, accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
     #           sync_threshold: 1,
     #         },
-    #         video_descriptions: [
+    #         video_descriptions: [ # required
     #           {
     #             codec_settings: {
     #               h264_settings: {
@@ -3976,7 +3976,7 @@ module Aws::MediaLive
     #               },
     #             },
     #             height: 1,
-    #             name: "__string",
+    #             name: "__string", # required
     #             respond_to_afd: "NONE", # accepts NONE, PASSTHROUGH, RESPOND
     #             scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
     #             sharpness: 1,
@@ -4080,10 +4080,10 @@ module Aws::MediaLive
     #         input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
     #         input_loss_behavior: {
     #           black_frame_msec: 1,
-    #           input_loss_image_color: "__string",
+    #           input_loss_image_color: "__stringMin6Max6",
     #           input_loss_image_slate: {
     #             password_param: "__string",
-    #             uri: "__string",
+    #             uri: "__string", # required
     #             username: "__string",
     #           },
     #           input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -4572,16 +4572,16 @@ module Aws::MediaLive
     #         base_url_manifest: "__string",
     #         caption_language_mappings: [
     #           {
-    #             caption_channel: 1,
-    #             language_code: "__string",
-    #             language_description: "__string",
+    #             caption_channel: 1, # required
+    #             language_code: "__stringMin3Max3", # required
+    #             language_description: "__stringMin1", # required
     #           },
     #         ],
     #         caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
     #         client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #         constant_iv: "__string",
-    #         destination: {
+    #         constant_iv: "__stringMin32Max32",
+    #         destination: { # required
     #           destination_ref_id: "__string",
     #         },
     #         directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
@@ -4628,10 +4628,10 @@ module Aws::MediaLive
     #           static_key_settings: {
     #             key_provider_server: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
-    #             static_key_value: "__string",
+    #             static_key_value: "__stringMin32Max32", # required
     #           },
     #         },
     #         manifest_compression: "GZIP", # accepts GZIP, NONE
@@ -4988,19 +4988,19 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         hls_settings: {
+    #         hls_settings: { # required
     #           audio_only_hls_settings: {
     #             audio_group_id: "__string",
     #             audio_only_image: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
     #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #           },
     #           standard_hls_settings: {
     #             audio_rendition_sets: "__string",
-    #             m3u_8_settings: {
+    #             m3u_8_settings: { # required
     #               audio_frames_per_pes: 1,
     #               audio_pids: "__string",
     #               ecm_pid: "__string",
@@ -5019,7 +5019,7 @@ module Aws::MediaLive
     #             },
     #           },
     #         },
-    #         name_modifier: "__string",
+    #         name_modifier: "__stringMin1",
     #         segment_modifier: "__string",
     #       }
     #
@@ -5054,14 +5054,14 @@ module Aws::MediaLive
     #           audio_group_id: "__string",
     #           audio_only_image: {
     #             password_param: "__string",
-    #             uri: "__string",
+    #             uri: "__string", # required
     #             username: "__string",
     #           },
     #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #         },
     #         standard_hls_settings: {
     #           audio_rendition_sets: "__string",
-    #           m3u_8_settings: {
+    #           m3u_8_settings: { # required
     #             audio_frames_per_pes: 1,
     #             audio_pids: "__string",
     #             ecm_pid: "__string",
@@ -5198,14 +5198,14 @@ module Aws::MediaLive
     #         input_settings: {
     #           audio_selectors: [
     #             {
-    #               name: "__string",
+    #               name: "__string", # required
     #               selector_settings: {
     #                 audio_language_selection: {
-    #                   language_code: "__string",
+    #                   language_code: "__string", # required
     #                   language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
     #                 },
     #                 audio_pid_selection: {
-    #                   pid: 1,
+    #                   pid: 1, # required
     #                 },
     #               },
     #             },
@@ -5213,7 +5213,7 @@ module Aws::MediaLive
     #           caption_selectors: [
     #             {
     #               language_code: "__string",
-    #               name: "__string",
+    #               name: "__string", # required
     #               selector_settings: {
     #                 arib_source_settings: {
     #                 },
@@ -5288,8 +5288,8 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         gain: 1,
-    #         input_channel: 1,
+    #         gain: 1, # required
+    #         input_channel: 1, # required
     #       }
     #
     # @!attribute [rw] gain
@@ -5359,7 +5359,7 @@ module Aws::MediaLive
     #
     #       {
     #         password_param: "__string",
-    #         uri: "__string",
+    #         uri: "__string", # required
     #         username: "__string",
     #       }
     #
@@ -5396,10 +5396,10 @@ module Aws::MediaLive
     #
     #       {
     #         black_frame_msec: 1,
-    #         input_loss_image_color: "__string",
+    #         input_loss_image_color: "__stringMin6Max6",
     #         input_loss_image_slate: {
     #           password_param: "__string",
-    #           uri: "__string",
+    #           uri: "__string", # required
     #           username: "__string",
     #         },
     #         input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -5492,14 +5492,14 @@ module Aws::MediaLive
     #       {
     #         audio_selectors: [
     #           {
-    #             name: "__string",
+    #             name: "__string", # required
     #             selector_settings: {
     #               audio_language_selection: {
-    #                 language_code: "__string",
+    #                 language_code: "__string", # required
     #                 language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
     #               },
     #               audio_pid_selection: {
-    #                 pid: 1,
+    #                 pid: 1, # required
     #               },
     #             },
     #           },
@@ -5507,7 +5507,7 @@ module Aws::MediaLive
     #         caption_selectors: [
     #           {
     #             language_code: "__string",
-    #             name: "__string",
+    #             name: "__string", # required
     #             selector_settings: {
     #               arib_source_settings: {
     #               },
@@ -5768,10 +5768,10 @@ module Aws::MediaLive
     #         static_key_settings: {
     #           key_provider_server: {
     #             password_param: "__string",
-    #             uri: "__string",
+    #             uri: "__string", # required
     #             username: "__string",
     #           },
-    #           static_key_value: "__string",
+    #           static_key_value: "__stringMin32Max32", # required
     #         },
     #       }
     #
@@ -5964,15 +5964,15 @@ module Aws::MediaLive
     #         buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #         cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #         dvb_nit_settings: {
-    #           network_id: 1,
-    #           network_name: "__string",
+    #           network_id: 1, # required
+    #           network_name: "__stringMin1Max256", # required
     #           rep_interval: 1,
     #         },
     #         dvb_sdt_settings: {
     #           output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #           rep_interval: 1,
-    #           service_name: "__string",
-    #           service_provider_name: "__string",
+    #           service_name: "__stringMin1Max256",
+    #           service_provider_name: "__stringMin1Max256",
     #         },
     #         dvb_sub_pids: "__string",
     #         dvb_tdt_settings: {
@@ -6511,7 +6511,7 @@ module Aws::MediaLive
     #         audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
     #         certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
     #         connection_retry_interval: 1,
-    #         destination: {
+    #         destination: { # required
     #           destination_ref_id: "__string",
     #         },
     #         event_id: "__string",
@@ -6733,10 +6733,10 @@ module Aws::MediaLive
     #       {
     #         audio_description_names: ["__string"],
     #         caption_description_names: ["__string"],
-    #         output_name: "__string",
-    #         output_settings: {
+    #         output_name: "__stringMin1Max255",
+    #         output_settings: { # required
     #           archive_output_settings: {
-    #             container_settings: {
+    #             container_settings: { # required
     #               m2ts_settings: {
     #                 absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                 arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -6750,15 +6750,15 @@ module Aws::MediaLive
     #                 buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                 cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                 dvb_nit_settings: {
-    #                   network_id: 1,
-    #                   network_name: "__string",
+    #                   network_id: 1, # required
+    #                   network_name: "__stringMin1Max256", # required
     #                   rep_interval: 1,
     #                 },
     #                 dvb_sdt_settings: {
     #                   output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                   rep_interval: 1,
-    #                   service_name: "__string",
-    #                   service_provider_name: "__string",
+    #                   service_name: "__stringMin1Max256",
+    #                   service_provider_name: "__stringMin1Max256",
     #                 },
     #                 dvb_sub_pids: "__string",
     #                 dvb_tdt_settings: {
@@ -6801,19 +6801,19 @@ module Aws::MediaLive
     #             name_modifier: "__string",
     #           },
     #           hls_output_settings: {
-    #             hls_settings: {
+    #             hls_settings: { # required
     #               audio_only_hls_settings: {
     #                 audio_group_id: "__string",
     #                 audio_only_image: {
     #                   password_param: "__string",
-    #                   uri: "__string",
+    #                   uri: "__string", # required
     #                   username: "__string",
     #                 },
     #                 audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #               },
     #               standard_hls_settings: {
     #                 audio_rendition_sets: "__string",
-    #                 m3u_8_settings: {
+    #                 m3u_8_settings: { # required
     #                   audio_frames_per_pes: 1,
     #                   audio_pids: "__string",
     #                   ecm_pid: "__string",
@@ -6832,7 +6832,7 @@ module Aws::MediaLive
     #                 },
     #               },
     #             },
-    #             name_modifier: "__string",
+    #             name_modifier: "__stringMin1",
     #             segment_modifier: "__string",
     #           },
     #           ms_smooth_output_settings: {
@@ -6840,7 +6840,7 @@ module Aws::MediaLive
     #           },
     #           udp_output_settings: {
     #             buffer_msec: 1,
-    #             container_settings: {
+    #             container_settings: { # required
     #               m2ts_settings: {
     #                 absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                 arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -6854,15 +6854,15 @@ module Aws::MediaLive
     #                 buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                 cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                 dvb_nit_settings: {
-    #                   network_id: 1,
-    #                   network_name: "__string",
+    #                   network_id: 1, # required
+    #                   network_name: "__stringMin1Max256", # required
     #                   rep_interval: 1,
     #                 },
     #                 dvb_sdt_settings: {
     #                   output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                   rep_interval: 1,
-    #                   service_name: "__string",
-    #                   service_provider_name: "__string",
+    #                   service_name: "__stringMin1Max256",
+    #                   service_provider_name: "__stringMin1Max256",
     #                 },
     #                 dvb_sub_pids: "__string",
     #                 dvb_tdt_settings: {
@@ -6901,7 +6901,7 @@ module Aws::MediaLive
     #                 video_pid: "__string",
     #               },
     #             },
-    #             destination: {
+    #             destination: { # required
     #               destination_ref_id: "__string",
     #             },
     #             fec_output_settings: {
@@ -7014,10 +7014,10 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         name: "__string",
-    #         output_group_settings: {
+    #         name: "__stringMax32",
+    #         output_group_settings: { # required
     #           archive_group_settings: {
-    #             destination: {
+    #             destination: { # required
     #               destination_ref_id: "__string",
     #             },
     #             rollover_interval: 1,
@@ -7028,16 +7028,16 @@ module Aws::MediaLive
     #             base_url_manifest: "__string",
     #             caption_language_mappings: [
     #               {
-    #                 caption_channel: 1,
-    #                 language_code: "__string",
-    #                 language_description: "__string",
+    #                 caption_channel: 1, # required
+    #                 language_code: "__stringMin3Max3", # required
+    #                 language_description: "__stringMin1", # required
     #               },
     #             ],
     #             caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
     #             client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #             codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #             constant_iv: "__string",
-    #             destination: {
+    #             constant_iv: "__stringMin32Max32",
+    #             destination: { # required
     #               destination_ref_id: "__string",
     #             },
     #             directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
@@ -7084,10 +7084,10 @@ module Aws::MediaLive
     #               static_key_settings: {
     #                 key_provider_server: {
     #                   password_param: "__string",
-    #                   uri: "__string",
+    #                   uri: "__string", # required
     #                   username: "__string",
     #                 },
-    #                 static_key_value: "__string",
+    #                 static_key_value: "__stringMin32Max32", # required
     #               },
     #             },
     #             manifest_compression: "GZIP", # accepts GZIP, NONE
@@ -7111,7 +7111,7 @@ module Aws::MediaLive
     #             audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
     #             certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
     #             connection_retry_interval: 1,
-    #             destination: {
+    #             destination: { # required
     #               destination_ref_id: "__string",
     #             },
     #             event_id: "__string",
@@ -7135,14 +7135,14 @@ module Aws::MediaLive
     #             timed_metadata_id_3_period: 1,
     #           },
     #         },
-    #         outputs: [
+    #         outputs: [ # required
     #           {
     #             audio_description_names: ["__string"],
     #             caption_description_names: ["__string"],
-    #             output_name: "__string",
-    #             output_settings: {
+    #             output_name: "__stringMin1Max255",
+    #             output_settings: { # required
     #               archive_output_settings: {
-    #                 container_settings: {
+    #                 container_settings: { # required
     #                   m2ts_settings: {
     #                     absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                     arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -7156,15 +7156,15 @@ module Aws::MediaLive
     #                     buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                     cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                     dvb_nit_settings: {
-    #                       network_id: 1,
-    #                       network_name: "__string",
+    #                       network_id: 1, # required
+    #                       network_name: "__stringMin1Max256", # required
     #                       rep_interval: 1,
     #                     },
     #                     dvb_sdt_settings: {
     #                       output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                       rep_interval: 1,
-    #                       service_name: "__string",
-    #                       service_provider_name: "__string",
+    #                       service_name: "__stringMin1Max256",
+    #                       service_provider_name: "__stringMin1Max256",
     #                     },
     #                     dvb_sub_pids: "__string",
     #                     dvb_tdt_settings: {
@@ -7207,19 +7207,19 @@ module Aws::MediaLive
     #                 name_modifier: "__string",
     #               },
     #               hls_output_settings: {
-    #                 hls_settings: {
+    #                 hls_settings: { # required
     #                   audio_only_hls_settings: {
     #                     audio_group_id: "__string",
     #                     audio_only_image: {
     #                       password_param: "__string",
-    #                       uri: "__string",
+    #                       uri: "__string", # required
     #                       username: "__string",
     #                     },
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #                   },
     #                   standard_hls_settings: {
     #                     audio_rendition_sets: "__string",
-    #                     m3u_8_settings: {
+    #                     m3u_8_settings: { # required
     #                       audio_frames_per_pes: 1,
     #                       audio_pids: "__string",
     #                       ecm_pid: "__string",
@@ -7238,7 +7238,7 @@ module Aws::MediaLive
     #                     },
     #                   },
     #                 },
-    #                 name_modifier: "__string",
+    #                 name_modifier: "__stringMin1",
     #                 segment_modifier: "__string",
     #               },
     #               ms_smooth_output_settings: {
@@ -7246,7 +7246,7 @@ module Aws::MediaLive
     #               },
     #               udp_output_settings: {
     #                 buffer_msec: 1,
-    #                 container_settings: {
+    #                 container_settings: { # required
     #                   m2ts_settings: {
     #                     absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                     arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -7260,15 +7260,15 @@ module Aws::MediaLive
     #                     buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                     cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                     dvb_nit_settings: {
-    #                       network_id: 1,
-    #                       network_name: "__string",
+    #                       network_id: 1, # required
+    #                       network_name: "__stringMin1Max256", # required
     #                       rep_interval: 1,
     #                     },
     #                     dvb_sdt_settings: {
     #                       output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                       rep_interval: 1,
-    #                       service_name: "__string",
-    #                       service_provider_name: "__string",
+    #                       service_name: "__stringMin1Max256",
+    #                       service_provider_name: "__stringMin1Max256",
     #                     },
     #                     dvb_sub_pids: "__string",
     #                     dvb_tdt_settings: {
@@ -7307,7 +7307,7 @@ module Aws::MediaLive
     #                     video_pid: "__string",
     #                   },
     #                 },
-    #                 destination: {
+    #                 destination: { # required
     #                   destination_ref_id: "__string",
     #                 },
     #                 fec_output_settings: {
@@ -7349,7 +7349,7 @@ module Aws::MediaLive
     #
     #       {
     #         archive_group_settings: {
-    #           destination: {
+    #           destination: { # required
     #             destination_ref_id: "__string",
     #           },
     #           rollover_interval: 1,
@@ -7360,16 +7360,16 @@ module Aws::MediaLive
     #           base_url_manifest: "__string",
     #           caption_language_mappings: [
     #             {
-    #               caption_channel: 1,
-    #               language_code: "__string",
-    #               language_description: "__string",
+    #               caption_channel: 1, # required
+    #               language_code: "__stringMin3Max3", # required
+    #               language_description: "__stringMin1", # required
     #             },
     #           ],
     #           caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
     #           client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #           codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #           constant_iv: "__string",
-    #           destination: {
+    #           constant_iv: "__stringMin32Max32",
+    #           destination: { # required
     #             destination_ref_id: "__string",
     #           },
     #           directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
@@ -7416,10 +7416,10 @@ module Aws::MediaLive
     #             static_key_settings: {
     #               key_provider_server: {
     #                 password_param: "__string",
-    #                 uri: "__string",
+    #                 uri: "__string", # required
     #                 username: "__string",
     #               },
-    #               static_key_value: "__string",
+    #               static_key_value: "__stringMin32Max32", # required
     #             },
     #           },
     #           manifest_compression: "GZIP", # accepts GZIP, NONE
@@ -7443,7 +7443,7 @@ module Aws::MediaLive
     #           audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
     #           certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
     #           connection_retry_interval: 1,
-    #           destination: {
+    #           destination: { # required
     #             destination_ref_id: "__string",
     #           },
     #           event_id: "__string",
@@ -7514,7 +7514,7 @@ module Aws::MediaLive
     #
     #       {
     #         archive_output_settings: {
-    #           container_settings: {
+    #           container_settings: { # required
     #             m2ts_settings: {
     #               absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #               arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -7528,15 +7528,15 @@ module Aws::MediaLive
     #               buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #               cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #               dvb_nit_settings: {
-    #                 network_id: 1,
-    #                 network_name: "__string",
+    #                 network_id: 1, # required
+    #                 network_name: "__stringMin1Max256", # required
     #                 rep_interval: 1,
     #               },
     #               dvb_sdt_settings: {
     #                 output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                 rep_interval: 1,
-    #                 service_name: "__string",
-    #                 service_provider_name: "__string",
+    #                 service_name: "__stringMin1Max256",
+    #                 service_provider_name: "__stringMin1Max256",
     #               },
     #               dvb_sub_pids: "__string",
     #               dvb_tdt_settings: {
@@ -7579,19 +7579,19 @@ module Aws::MediaLive
     #           name_modifier: "__string",
     #         },
     #         hls_output_settings: {
-    #           hls_settings: {
+    #           hls_settings: { # required
     #             audio_only_hls_settings: {
     #               audio_group_id: "__string",
     #               audio_only_image: {
     #                 password_param: "__string",
-    #                 uri: "__string",
+    #                 uri: "__string", # required
     #                 username: "__string",
     #               },
     #               audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #             },
     #             standard_hls_settings: {
     #               audio_rendition_sets: "__string",
-    #               m3u_8_settings: {
+    #               m3u_8_settings: { # required
     #                 audio_frames_per_pes: 1,
     #                 audio_pids: "__string",
     #                 ecm_pid: "__string",
@@ -7610,7 +7610,7 @@ module Aws::MediaLive
     #               },
     #             },
     #           },
-    #           name_modifier: "__string",
+    #           name_modifier: "__stringMin1",
     #           segment_modifier: "__string",
     #         },
     #         ms_smooth_output_settings: {
@@ -7618,7 +7618,7 @@ module Aws::MediaLive
     #         },
     #         udp_output_settings: {
     #           buffer_msec: 1,
-    #           container_settings: {
+    #           container_settings: { # required
     #             m2ts_settings: {
     #               absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #               arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -7632,15 +7632,15 @@ module Aws::MediaLive
     #               buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #               cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #               dvb_nit_settings: {
-    #                 network_id: 1,
-    #                 network_name: "__string",
+    #                 network_id: 1, # required
+    #                 network_name: "__stringMin1Max256", # required
     #                 rep_interval: 1,
     #               },
     #               dvb_sdt_settings: {
     #                 output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                 rep_interval: 1,
-    #                 service_name: "__string",
-    #                 service_provider_name: "__string",
+    #                 service_name: "__stringMin1Max256",
+    #                 service_provider_name: "__stringMin1Max256",
     #               },
     #               dvb_sub_pids: "__string",
     #               dvb_tdt_settings: {
@@ -7679,7 +7679,7 @@ module Aws::MediaLive
     #               video_pid: "__string",
     #             },
     #           },
-    #           destination: {
+    #           destination: { # required
     #             destination_ref_id: "__string",
     #           },
     #           fec_output_settings: {
@@ -7722,15 +7722,15 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         channel_mappings: [
+    #         channel_mappings: [ # required
     #           {
-    #             input_channel_levels: [
+    #             input_channel_levels: [ # required
     #               {
-    #                 gain: 1,
-    #                 input_channel: 1,
+    #                 gain: 1, # required
+    #                 input_channel: 1, # required
     #               },
     #             ],
-    #             output_channel: 1,
+    #             output_channel: 1, # required
     #           },
     #         ],
     #         channels_in: 1,
@@ -7924,7 +7924,7 @@ module Aws::MediaLive
     #
     #       {
     #         audio_rendition_sets: "__string",
-    #         m3u_8_settings: {
+    #         m3u_8_settings: { # required
     #           audio_frames_per_pes: 1,
     #           audio_pids: "__string",
     #           ecm_pid: "__string",
@@ -8034,10 +8034,10 @@ module Aws::MediaLive
     #       {
     #         key_provider_server: {
     #           password_param: "__string",
-    #           uri: "__string",
+    #           uri: "__string", # required
     #           username: "__string",
     #         },
-    #         static_key_value: "__string",
+    #         static_key_value: "__stringMin32Max32", # required
     #       }
     #
     # @!attribute [rw] key_provider_server
@@ -8154,7 +8154,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         source: "EMBEDDED", # accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
+    #         source: "EMBEDDED", # required, accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
     #         sync_threshold: 1,
     #       }
     #
@@ -8220,15 +8220,15 @@ module Aws::MediaLive
     #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #           dvb_nit_settings: {
-    #             network_id: 1,
-    #             network_name: "__string",
+    #             network_id: 1, # required
+    #             network_name: "__stringMin1Max256", # required
     #             rep_interval: 1,
     #           },
     #           dvb_sdt_settings: {
     #             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #             rep_interval: 1,
-    #             service_name: "__string",
-    #             service_provider_name: "__string",
+    #             service_name: "__stringMin1Max256",
+    #             service_provider_name: "__stringMin1Max256",
     #           },
     #           dvb_sub_pids: "__string",
     #           dvb_tdt_settings: {
@@ -8320,7 +8320,7 @@ module Aws::MediaLive
     #
     #       {
     #         buffer_msec: 1,
-    #         container_settings: {
+    #         container_settings: { # required
     #           m2ts_settings: {
     #             absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #             arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -8334,15 +8334,15 @@ module Aws::MediaLive
     #             buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #             cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #             dvb_nit_settings: {
-    #               network_id: 1,
-    #               network_name: "__string",
+    #               network_id: 1, # required
+    #               network_name: "__stringMin1Max256", # required
     #               rep_interval: 1,
     #             },
     #             dvb_sdt_settings: {
     #               output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #               rep_interval: 1,
-    #               service_name: "__string",
-    #               service_provider_name: "__string",
+    #               service_name: "__stringMin1Max256",
+    #               service_provider_name: "__stringMin1Max256",
     #             },
     #             dvb_sub_pids: "__string",
     #             dvb_tdt_settings: {
@@ -8381,7 +8381,7 @@ module Aws::MediaLive
     #             video_pid: "__string",
     #           },
     #         },
-    #         destination: {
+    #         destination: { # required
     #           destination_ref_id: "__string",
     #         },
     #         fec_output_settings: {
@@ -8475,14 +8475,14 @@ module Aws::MediaLive
     #           },
     #         ],
     #         encoder_settings: {
-    #           audio_descriptions: [
+    #           audio_descriptions: [ # required
     #             {
     #               audio_normalization_settings: {
     #                 algorithm: "ITU_1770_1", # accepts ITU_1770_1, ITU_1770_2
     #                 algorithm_control: "CORRECT_AUDIO", # accepts CORRECT_AUDIO
     #                 target_lkfs: 1.0,
     #               },
-    #               audio_selector_name: "__string",
+    #               audio_selector_name: "__string", # required
     #               audio_type: "CLEAN_EFFECTS", # accepts CLEAN_EFFECTS, HEARING_IMPAIRED, UNDEFINED, VISUAL_IMPAIRED_COMMENTARY
     #               audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               codec_settings: {
@@ -8536,19 +8536,19 @@ module Aws::MediaLive
     #                 pass_through_settings: {
     #                 },
     #               },
-    #               language_code: "__string",
+    #               language_code: "__stringMin3Max3",
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               name: "__string",
+    #               name: "__string", # required
     #               remix_settings: {
-    #                 channel_mappings: [
+    #                 channel_mappings: [ # required
     #                   {
-    #                     input_channel_levels: [
+    #                     input_channel_levels: [ # required
     #                       {
-    #                         gain: 1,
-    #                         input_channel: 1,
+    #                         gain: 1, # required
+    #                         input_channel: 1, # required
     #                       },
     #                     ],
-    #                     output_channel: 1,
+    #                     output_channel: 1, # required
     #                   },
     #                 ],
     #                 channels_in: 1,
@@ -8560,7 +8560,7 @@ module Aws::MediaLive
     #           avail_blanking: {
     #             avail_blanking_image: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
     #             state: "DISABLED", # accepts DISABLED, ENABLED
@@ -8582,21 +8582,21 @@ module Aws::MediaLive
     #           blackout_slate: {
     #             blackout_slate_image: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
     #             network_end_blackout: "DISABLED", # accepts DISABLED, ENABLED
     #             network_end_blackout_image: {
     #               password_param: "__string",
-    #               uri: "__string",
+    #               uri: "__string", # required
     #               username: "__string",
     #             },
-    #             network_id: "__string",
+    #             network_id: "__stringMin34Max34",
     #             state: "DISABLED", # accepts DISABLED, ENABLED
     #           },
     #           caption_descriptions: [
     #             {
-    #               caption_selector_name: "__string",
+    #               caption_selector_name: "__string", # required
     #               destination_settings: {
     #                 arib_destination_settings: {
     #                 },
@@ -8606,7 +8606,7 @@ module Aws::MediaLive
     #                   background_opacity: 1,
     #                   font: {
     #                     password_param: "__string",
-    #                     uri: "__string",
+    #                     uri: "__string", # required
     #                     username: "__string",
     #                   },
     #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -8629,7 +8629,7 @@ module Aws::MediaLive
     #                   background_opacity: 1,
     #                   font: {
     #                     password_param: "__string",
-    #                     uri: "__string",
+    #                     uri: "__string", # required
     #                     username: "__string",
     #                   },
     #                   font_color: "BLACK", # accepts BLACK, BLUE, GREEN, RED, WHITE, YELLOW
@@ -8666,7 +8666,7 @@ module Aws::MediaLive
     #               },
     #               language_code: "__string",
     #               language_description: "__string",
-    #               name: "__string",
+    #               name: "__string", # required
     #             },
     #           ],
     #           global_configuration: {
@@ -8674,10 +8674,10 @@ module Aws::MediaLive
     #             input_end_action: "NONE", # accepts NONE, SWITCH_AND_LOOP_INPUTS
     #             input_loss_behavior: {
     #               black_frame_msec: 1,
-    #               input_loss_image_color: "__string",
+    #               input_loss_image_color: "__stringMin6Max6",
     #               input_loss_image_slate: {
     #                 password_param: "__string",
-    #                 uri: "__string",
+    #                 uri: "__string", # required
     #                 username: "__string",
     #               },
     #               input_loss_image_type: "COLOR", # accepts COLOR, SLATE
@@ -8686,12 +8686,12 @@ module Aws::MediaLive
     #             output_timing_source: "INPUT_CLOCK", # accepts INPUT_CLOCK, SYSTEM_CLOCK
     #             support_low_framerate_inputs: "DISABLED", # accepts DISABLED, ENABLED
     #           },
-    #           output_groups: [
+    #           output_groups: [ # required
     #             {
-    #               name: "__string",
-    #               output_group_settings: {
+    #               name: "__stringMax32",
+    #               output_group_settings: { # required
     #                 archive_group_settings: {
-    #                   destination: {
+    #                   destination: { # required
     #                     destination_ref_id: "__string",
     #                   },
     #                   rollover_interval: 1,
@@ -8702,16 +8702,16 @@ module Aws::MediaLive
     #                   base_url_manifest: "__string",
     #                   caption_language_mappings: [
     #                     {
-    #                       caption_channel: 1,
-    #                       language_code: "__string",
-    #                       language_description: "__string",
+    #                       caption_channel: 1, # required
+    #                       language_code: "__stringMin3Max3", # required
+    #                       language_description: "__stringMin1", # required
     #                     },
     #                   ],
     #                   caption_language_setting: "INSERT", # accepts INSERT, NONE, OMIT
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_4281", # accepts RFC_4281, RFC_6381
-    #                   constant_iv: "__string",
-    #                   destination: {
+    #                   constant_iv: "__stringMin32Max32",
+    #                   destination: { # required
     #                     destination_ref_id: "__string",
     #                   },
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
@@ -8758,10 +8758,10 @@ module Aws::MediaLive
     #                     static_key_settings: {
     #                       key_provider_server: {
     #                         password_param: "__string",
-    #                         uri: "__string",
+    #                         uri: "__string", # required
     #                         username: "__string",
     #                       },
-    #                       static_key_value: "__string",
+    #                       static_key_value: "__stringMin32Max32", # required
     #                     },
     #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
@@ -8785,7 +8785,7 @@ module Aws::MediaLive
     #                   audio_only_timecode_control: "PASSTHROUGH", # accepts PASSTHROUGH, USE_CONFIGURED_CLOCK
     #                   certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
     #                   connection_retry_interval: 1,
-    #                   destination: {
+    #                   destination: { # required
     #                     destination_ref_id: "__string",
     #                   },
     #                   event_id: "__string",
@@ -8809,14 +8809,14 @@ module Aws::MediaLive
     #                   timed_metadata_id_3_period: 1,
     #                 },
     #               },
-    #               outputs: [
+    #               outputs: [ # required
     #                 {
     #                   audio_description_names: ["__string"],
     #                   caption_description_names: ["__string"],
-    #                   output_name: "__string",
-    #                   output_settings: {
+    #                   output_name: "__stringMin1Max255",
+    #                   output_settings: { # required
     #                     archive_output_settings: {
-    #                       container_settings: {
+    #                       container_settings: { # required
     #                         m2ts_settings: {
     #                           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                           arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -8830,15 +8830,15 @@ module Aws::MediaLive
     #                           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                           dvb_nit_settings: {
-    #                             network_id: 1,
-    #                             network_name: "__string",
+    #                             network_id: 1, # required
+    #                             network_name: "__stringMin1Max256", # required
     #                             rep_interval: 1,
     #                           },
     #                           dvb_sdt_settings: {
     #                             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                             rep_interval: 1,
-    #                             service_name: "__string",
-    #                             service_provider_name: "__string",
+    #                             service_name: "__stringMin1Max256",
+    #                             service_provider_name: "__stringMin1Max256",
     #                           },
     #                           dvb_sub_pids: "__string",
     #                           dvb_tdt_settings: {
@@ -8881,19 +8881,19 @@ module Aws::MediaLive
     #                       name_modifier: "__string",
     #                     },
     #                     hls_output_settings: {
-    #                       hls_settings: {
+    #                       hls_settings: { # required
     #                         audio_only_hls_settings: {
     #                           audio_group_id: "__string",
     #                           audio_only_image: {
     #                             password_param: "__string",
-    #                             uri: "__string",
+    #                             uri: "__string", # required
     #                             username: "__string",
     #                           },
     #                           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT", # accepts ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_NOT_AUTO_SELECT, AUDIO_ONLY_VARIANT_STREAM
     #                         },
     #                         standard_hls_settings: {
     #                           audio_rendition_sets: "__string",
-    #                           m3u_8_settings: {
+    #                           m3u_8_settings: { # required
     #                             audio_frames_per_pes: 1,
     #                             audio_pids: "__string",
     #                             ecm_pid: "__string",
@@ -8912,7 +8912,7 @@ module Aws::MediaLive
     #                           },
     #                         },
     #                       },
-    #                       name_modifier: "__string",
+    #                       name_modifier: "__stringMin1",
     #                       segment_modifier: "__string",
     #                     },
     #                     ms_smooth_output_settings: {
@@ -8920,7 +8920,7 @@ module Aws::MediaLive
     #                     },
     #                     udp_output_settings: {
     #                       buffer_msec: 1,
-    #                       container_settings: {
+    #                       container_settings: { # required
     #                         m2ts_settings: {
     #                           absent_input_audio_behavior: "DROP", # accepts DROP, ENCODE_SILENCE
     #                           arib: "DISABLED", # accepts DISABLED, ENABLED
@@ -8934,15 +8934,15 @@ module Aws::MediaLive
     #                           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                           cc_descriptor: "DISABLED", # accepts DISABLED, ENABLED
     #                           dvb_nit_settings: {
-    #                             network_id: 1,
-    #                             network_name: "__string",
+    #                             network_id: 1, # required
+    #                             network_name: "__stringMin1Max256", # required
     #                             rep_interval: 1,
     #                           },
     #                           dvb_sdt_settings: {
     #                             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                             rep_interval: 1,
-    #                             service_name: "__string",
-    #                             service_provider_name: "__string",
+    #                             service_name: "__stringMin1Max256",
+    #                             service_provider_name: "__stringMin1Max256",
     #                           },
     #                           dvb_sub_pids: "__string",
     #                           dvb_tdt_settings: {
@@ -8981,7 +8981,7 @@ module Aws::MediaLive
     #                           video_pid: "__string",
     #                         },
     #                       },
-    #                       destination: {
+    #                       destination: { # required
     #                         destination_ref_id: "__string",
     #                       },
     #                       fec_output_settings: {
@@ -8996,11 +8996,11 @@ module Aws::MediaLive
     #               ],
     #             },
     #           ],
-    #           timecode_config: {
-    #             source: "EMBEDDED", # accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
+    #           timecode_config: { # required
+    #             source: "EMBEDDED", # required, accepts EMBEDDED, SYSTEMCLOCK, ZEROBASED
     #             sync_threshold: 1,
     #           },
-    #           video_descriptions: [
+    #           video_descriptions: [ # required
     #             {
     #               codec_settings: {
     #                 h264_settings: {
@@ -9042,7 +9042,7 @@ module Aws::MediaLive
     #                 },
     #               },
     #               height: 1,
-    #               name: "__string",
+    #               name: "__string", # required
     #               respond_to_afd: "NONE", # accepts NONE, PASSTHROUGH, RESPOND
     #               scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
     #               sharpness: 1,
@@ -9224,7 +9224,7 @@ module Aws::MediaLive
     #           },
     #         },
     #         height: 1,
-    #         name: "__string",
+    #         name: "__string", # required
     #         respond_to_afd: "NONE", # accepts NONE, PASSTHROUGH, RESPOND
     #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
     #         sharpness: 1,
