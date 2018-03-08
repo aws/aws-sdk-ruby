@@ -970,9 +970,6 @@ module Aws::RDS
     # the AWS Region where you call the `CopyDBSnapshot` action is the
     # destination AWS Region for the DB snapshot copy.
     #
-    # You can't copy an encrypted, shared DB snapshot from one AWS Region
-    # to another.
-    #
     # For more information about copying snapshots, see [Copying a DB
     # Snapshot][1] in the Amazon RDS User Guide.
     #
@@ -2615,7 +2612,9 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
+    #   * **Version 10.1**
+    #
+    #   * **Version 9.6.x:** ` 9.6.6 | 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
     #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
@@ -9982,10 +9981,14 @@ module Aws::RDS
 
     # Promotes a Read Replica DB instance to a standalone DB instance.
     #
-    # <note markdown="1"> * We recommend that you enable automated backups on your Read Replica
-    #   before promoting the Read Replica. This ensures that no backup is
-    #   taken during the promotion process. Once the instance is promoted to
-    #   a primary instance, backups are taken based on your backup settings.
+    # <note markdown="1"> * Backup duration is a function of the amount of changes to the
+    #   database since the previous backup. If you plan to promote a Read
+    #   Replica to a standalone instance, we recommend that you enable
+    #   backups and complete at least one backup prior to promotion. In
+    #   addition, a Read Replica cannot be promoted to a standalone instance
+    #   when it is in the `backing-up` status. If you have enabled backups
+    #   on your Read Replica, configure the automated backup window so that
+    #   daily backups do not interfere with Read Replica promotion.
     #
     # * This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
     #
@@ -11201,7 +11204,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 letters, numbers, or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -13468,7 +13471,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

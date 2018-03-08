@@ -801,7 +801,7 @@ module Aws::MigrationHub
     #         migration_task_name: "MigrationTaskName", # required
     #         resource_attribute_list: [ # required
     #           {
-    #             type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER, LABEL
+    #             type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER
     #             value: "ResourceAttributeValue", # required
     #           },
     #         ],
@@ -820,6 +820,22 @@ module Aws::MigrationHub
     #   Information about the resource that is being migrated. This data
     #   will be used to map the task to a resource in the Application
     #   Discovery Service (ADS)'s repository.
+    #
+    #   <note markdown="1"> In the `ResourceAttribute` object array, the `Type` field is
+    #   reserved for the following values: `IPV4_ADDRESS | IPV6_ADDRESS |
+    #   MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE |
+    #   VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER`, and the
+    #   identifying value can be a string up to 256 characters.
+    #
+    #    </note>
+    #
+    #   If any "VM" related value is used for a `ResourceAttribute`
+    #   object, it is required that `VM_MANAGER_ID`, as a minimum, is always
+    #   used. If it is not used, the server will not be associated in the
+    #   Application Discovery Service (ADS)'s repository using any of the
+    #   other "VM" related values, and you will experience data loss. See
+    #   the Example section below for a use case of specifying "VM"
+    #   related values.
     #   @return [Array<Types::ResourceAttribute>]
     #
     # @!attribute [rw] dry_run
@@ -843,11 +859,33 @@ module Aws::MigrationHub
 
     # Attribute associated with a resource.
     #
+    # Note the corresponding format required per type listed below:
+    #
+    # IPV4
+    #
+    # : `x.x.x.x`
+    #
+    #   *where x is an integer in the range \[0,255\]*
+    #
+    # IPV6
+    #
+    # : `y : y : y : y : y : y : y : y`
+    #
+    #   *where y is a hexadecimal between 0 and FFFF. \[0, FFFF\]*
+    #
+    # MAC\_ADDRESS
+    #
+    # : `^([0-9A-Fa-f]\{2\}[:-])\{5\}([0-9A-Fa-f]\{2\})$`
+    #
+    # FQDN
+    #
+    # : `^[^<>\{\}\\\\/?,=\\p\{Cntrl\}]\{1,256\}$`
+    #
     # @note When making an API call, you may pass ResourceAttribute
     #   data as a hash:
     #
     #       {
-    #         type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER, LABEL
+    #         type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER
     #         value: "ResourceAttributeValue", # required
     #       }
     #

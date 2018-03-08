@@ -414,11 +414,11 @@ module Aws::ECS
     #   should ignore unhealthy Elastic Load Balancing target health checks
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
-    #   while to start and respond to ELB health checks, you can specify a
-    #   health check grace period of up to 1,800 seconds during which the ECS
-    #   service scheduler will ignore ELB health check status. This grace
-    #   period can prevent the ECS service scheduler from marking tasks as
-    #   unhealthy and stopping them before they have time to come up.
+    #   while to start and respond to Elastic Load Balancing health checks,
+    #   you can specify a health check grace period of up to 1,800 seconds
+    #   during which the ECS service scheduler ignores health check status.
+    #   This grace period can prevent the ECS service scheduler from marking
+    #   tasks as unhealthy and stopping them before they have time to come up.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1104,6 +1104,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -1691,6 +1697,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -1835,6 +1847,7 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -1857,6 +1870,7 @@ module Aws::ECS
     #   resp.tasks[0].attachments[0].details #=> Array
     #   resp.tasks[0].attachments[0].details[0].name #=> String
     #   resp.tasks[0].attachments[0].details[0].value #=> String
+    #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2929,20 +2943,20 @@ module Aws::ECS
     #   use one of the following values, which determines your range of
     #   supported values for the `memory` parameter:
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 512 (0.5GB), 1024 (1GB),
-    #     2048 (2GB)
+    #   * 256 (.25 vCPU) - Available `memory` values: 512 (0.5 GB), 1024 (1
+    #     GB), 2048 (2 GB)
     #
-    #   * 512 (.5 vCPU) - Available `memory` values: 1024 (1GB), 2048 (2GB),
-    #     3072 (3GB), 4096 (4GB)
+    #   * 512 (.5 vCPU) - Available `memory` values: 1024 (1 GB), 2048 (2 GB),
+    #     3072 (3 GB), 4096 (4 GB)
     #
-    #   * 1024 (1 vCPU) - Available `memory` values: 2048 (2GB), 3072 (3GB),
-    #     4096 (4GB), 5120 (5GB), 6144 (6GB), 7168 (7GB), 8192 (8GB)
+    #   * 1024 (1 vCPU) - Available `memory` values: 2048 (2 GB), 3072 (3 GB),
+    #     4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
     #
-    #   * 2048 (2 vCPU) - Available `memory` values: Between 4096 (4GB) and
-    #     16384 (16GB) in increments of 1024 (1GB)
+    #   * 2048 (2 vCPU) - Available `memory` values: Between 4096 (4 GB) and
+    #     16384 (16 GB) in increments of 1024 (1 GB)
     #
-    #   * 4096 (4 vCPU) - Available `memory` values: Between 8192 (8GB) and
-    #     30720 (30GB) in increments of 1024 (1GB)
+    #   * 4096 (4 vCPU) - Available `memory` values: Between 8192 (8 GB) and
+    #     30720 (30 GB) in increments of 1024 (1 GB)
     #
     # @option params [String] :memory
     #   The amount of memory (in MiB) used by the task. It can be expressed as
@@ -2962,19 +2976,19 @@ module Aws::ECS
     #   use one of the following values, which determines your range of
     #   supported values for the `cpu` parameter:
     #
-    #   * 512 (0.5GB), 1024 (1GB), 2048 (2GB) - Available `cpu` values: 256
+    #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values: 256
     #     (.25 vCPU)
     #
-    #   * 1024 (1GB), 2048 (2GB), 3072 (3GB), 4096 (4GB) - Available `cpu`
+    #   * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available `cpu`
     #     values: 512 (.5 vCPU)
     #
-    #   * 2048 (2GB), 3072 (3GB), 4096 (4GB), 5120 (5GB), 6144 (6GB), 7168
-    #     (7GB), 8192 (8GB) - Available `cpu` values: 1024 (1 vCPU)
+    #   * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB),
+    #     7168 (7 GB), 8192 (8 GB) - Available `cpu` values: 1024 (1 vCPU)
     #
-    #   * Between 4096 (4GB) and 16384 (16GB) in increments of 1024 (1GB) -
+    #   * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
     #     Available `cpu` values: 2048 (2 vCPU)
     #
-    #   * Between 8192 (8GB) and 30720 (30GB) in increments of 1024 (1GB) -
+    #   * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) -
     #     Available `cpu` values: 4096 (4 vCPU)
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3127,6 +3141,13 @@ module Aws::ECS
     #             "String" => "String",
     #           },
     #         },
+    #         health_check: {
+    #           command: ["String"], # required
+    #           interval: 1,
+    #           timeout: 1,
+    #           retries: 1,
+    #           start_period: 1,
+    #         },
     #       },
     #     ],
     #     volumes: [
@@ -3212,6 +3233,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -3486,6 +3513,7 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -3508,6 +3536,7 @@ module Aws::ECS
     #   resp.tasks[0].attachments[0].details #=> Array
     #   resp.tasks[0].attachments[0].details[0].name #=> String
     #   resp.tasks[0].attachments[0].details[0].value #=> String
+    #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3664,6 +3693,7 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -3686,6 +3716,7 @@ module Aws::ECS
     #   resp.tasks[0].attachments[0].details #=> Array
     #   resp.tasks[0].attachments[0].details[0].name #=> String
     #   resp.tasks[0].attachments[0].details[0].value #=> String
+    #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3784,6 +3815,7 @@ module Aws::ECS
     #   resp.task.containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.task.containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.task.containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.task.containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
@@ -3806,6 +3838,7 @@ module Aws::ECS
     #   resp.task.attachments[0].details #=> Array
     #   resp.task.attachments[0].details[0].name #=> String
     #   resp.task.attachments[0].details[0].value #=> String
+    #   resp.task.health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -3914,7 +3947,7 @@ module Aws::ECS
     #   The Unix time stamp for when the container image pull completed.
     #
     # @option params [Time,DateTime,Date,Integer,String] :execution_stopped_at
-    #   The Unix timestamp for when the task execution stopped.
+    #   The Unix time stamp for when the task execution stopped.
     #
     # @return [Types::SubmitTaskStateChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4291,7 +4324,7 @@ module Aws::ECS
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the service. This parameter is required
     #   for task definitions that use the `awsvpc` network mode to receive
-    #   their own Elastic Network Interface, and it is not supported for other
+    #   their own elastic network interface, and it is not supported for other
     #   network modes. For more information, see [Task Networking][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
@@ -4311,19 +4344,20 @@ module Aws::ECS
     #   The platform version you want to update your service to run.
     #
     # @option params [Boolean] :force_new_deployment
-    #   Whether or not to force a new deployment of the service. By default,
-    #   `--no-force-new-deployment` is assumed unless specified otherwise.
+    #   Whether to force a new deployment of the service. By default,
+    #   `--no-force-new-deployment` is assumed unless otherwise specified.
     #
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
     #   should ignore unhealthy Elastic Load Balancing target health checks
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
-    #   while to start and respond to ELB health checks, you can specify a
-    #   health check grace period of up to 1,800 seconds during which the ECS
-    #   service scheduler will ignore ELB health check status. This grace
-    #   period can prevent the ECS service scheduler from marking tasks as
-    #   unhealthy and stopping them before they have time to come up.
+    #   while to start and respond to Elastic Load Balancing health checks,
+    #   you can specify a health check grace period of up to 1,800 seconds
+    #   during which the ECS service scheduler ignores the Elastic Load
+    #   Balancing health check status. This grace period can prevent the ECS
+    #   service scheduler from marking tasks as unhealthy and stopping them
+    #   before they have time to come up.
     #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4455,7 +4489,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

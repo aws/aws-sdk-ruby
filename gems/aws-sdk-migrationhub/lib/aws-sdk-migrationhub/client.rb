@@ -286,9 +286,8 @@ module Aws::MigrationHub
     #   stream name (same as a `CreateProgressUpdateStream` call).
     #
     # * The call will return, and a background process will asynchronously
-    #   be doing the actual delete of the stream and all of its resources
-    #   (tasks, associated resources, resource attributes, created
-    #   artifacts).
+    #   delete the stream and all of its resources (tasks, associated
+    #   resources, resource attributes, created artifacts).
     #
     # * If the stream takes time to be deleted, it might still show up on a
     #   `ListProgressUpdateStreams` call.
@@ -389,7 +388,7 @@ module Aws::MigrationHub
     #   resp.migration_task.task.progress_percent #=> Integer
     #   resp.migration_task.update_date_time #=> Time
     #   resp.migration_task.resource_attribute_list #=> Array
-    #   resp.migration_task.resource_attribute_list[0].type #=> String, one of "IPV4_ADDRESS", "IPV6_ADDRESS", "MAC_ADDRESS", "FQDN", "VM_MANAGER_ID", "VM_MANAGED_OBJECT_REFERENCE", "VM_NAME", "VM_PATH", "BIOS_ID", "MOTHERBOARD_SERIAL_NUMBER", "LABEL"
+    #   resp.migration_task.resource_attribute_list[0].type #=> String, one of "IPV4_ADDRESS", "IPV6_ADDRESS", "MAC_ADDRESS", "FQDN", "VM_MANAGER_ID", "VM_MANAGED_OBJECT_REFERENCE", "VM_NAME", "VM_PATH", "BIOS_ID", "MOTHERBOARD_SERIAL_NUMBER"
     #   resp.migration_task.resource_attribute_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask AWS API Documentation
@@ -818,15 +817,19 @@ module Aws::MigrationHub
     # repository. This association occurs asynchronously after
     # `PutResourceAttributes` returns.
     #
-    # Keep in mind that subsequent calls to PutResourceAttributes will
-    # override previously stored attributes. For example, if it is first
-    # called with a MAC address, but later, it is desired to *add* an IP
-    # address, it will then be required to call it with *both* the IP and
-    # MAC addresses to prevent overiding the MAC address.
+    # * Keep in mind that subsequent calls to PutResourceAttributes will
+    #   override previously stored attributes. For example, if it is first
+    #   called with a MAC address, but later, it is desired to *add* an IP
+    #   address, it will then be required to call it with *both* the IP and
+    #   MAC addresses to prevent overiding the MAC address.
+    #
+    # * Note the instructions regarding the special use case of the
+    #   `ResourceAttributeList` parameter when specifying any "VM" related
+    #   value.
     #
     # <note markdown="1"> Because this is an asynchronous call, it will always return 200,
     # whether an association occurs or not. To confirm if an association was
-    # found based on the provided details, call `ListAssociatedResource`.
+    # found based on the provided details, call `ListDiscoveredResources`.
     #
     #  </note>
     #
@@ -841,6 +844,21 @@ module Aws::MigrationHub
     #   be used to map the task to a resource in the Application Discovery
     #   Service (ADS)'s repository.
     #
+    #   <note markdown="1"> In the `ResourceAttribute` object array, the `Type` field is reserved
+    #   for the following values: `IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS |
+    #   FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH
+    #   | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER`, and the identifying value can
+    #   be a string up to 256 characters.
+    #
+    #    </note>
+    #
+    #   If any "VM" related value is used for a `ResourceAttribute` object,
+    #   it is required that `VM_MANAGER_ID`, as a minimum, is always used. If
+    #   it is not used, the server will not be associated in the Application
+    #   Discovery Service (ADS)'s repository using any of the other "VM"
+    #   related values, and you will experience data loss. See the Example
+    #   section below for a use case of specifying "VM" related values.
+    #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
     #   place. Used to test if the caller has permission to make the call.
@@ -854,7 +872,7 @@ module Aws::MigrationHub
     #     migration_task_name: "MigrationTaskName", # required
     #     resource_attribute_list: [ # required
     #       {
-    #         type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER, LABEL
+    #         type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER
     #         value: "ResourceAttributeValue", # required
     #       },
     #     ],
@@ -883,7 +901,7 @@ module Aws::MigrationHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhub'
-      context[:gem_version] = '1.0.1'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
