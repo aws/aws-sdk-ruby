@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MigrationHub - Updated the API, and documentation for AWS Migration Hub.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
 2.11.10 (2018-03-07)
 ------------------
 
