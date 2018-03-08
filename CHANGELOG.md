@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.11 (2018-03-08)
+------------------
+
 * Feature - Aws::MigrationHub - Updated the API, and documentation for AWS Migration Hub.
 
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
