@@ -1,10 +1,10 @@
 Unreleased Changes
 ------------------
 
-3.18.0 (2018-02-21)
+3.17.1 (2018-03-12)
 ------------------
 
-* Issue - Fix Ruby warnings: shadowed local variable "parts" and unintialized @location
+* Issue - Fix Ruby warnings: Shadowed local variables "parts" and "headers"
 
 3.17.0 (2018-02-27)
 ------------------
