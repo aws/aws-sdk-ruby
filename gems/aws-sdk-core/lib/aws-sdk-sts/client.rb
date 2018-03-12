@@ -216,7 +216,12 @@ module Aws::STS
     # the role in the other account. If the user is in the same account as
     # the role, then you can either attach a policy to the user (identical
     # to the previous different account user), or you can add the user as a
-    # principal directly in the role's trust policy
+    # principal directly in the role's trust policy. In this case, the
+    # trust policy acts as the only resource-based policy in IAM, and users
+    # in the same account as the role do not need explicit permission to
+    # assume the role. For more information about trust policies and
+    # resource-based policies, see [IAM Policies][6] in the *IAM User
+    # Guide*.
     #
     # **Using MFA with AssumeRole**
     #
@@ -232,7 +237,7 @@ module Aws::STS
     #
     # `"Condition": \{"Bool": \{"aws:MultiFactorAuthPresent": true\}\}`
     #
-    # For more information, see [Configuring MFA-Protected API Access][6] in
+    # For more information, see [Configuring MFA-Protected API Access][7] in
     # the *IAM User Guide* guide.
     #
     # To use MFA with `AssumeRole`, you pass values for the `SerialNumber`
@@ -247,7 +252,8 @@ module Aws::STS
     # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
     # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html#sts-introduction
     # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
-    # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/MFAProtectedAPI.html
+    # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    # [7]: http://docs.aws.amazon.com/IAM/latest/UserGuide/MFAProtectedAPI.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role to assume.
@@ -732,7 +738,7 @@ module Aws::STS
     # [10]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
     # [11]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
     # [12]: https://web-identity-federation-playground.s3.amazonaws.com/index.html
-    # [13]: http://aws.amazon.com/articles/4617974389850313
+    # [13]: http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role that the caller is
@@ -1407,7 +1413,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.16.0'
+      context[:gem_version] = '3.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
