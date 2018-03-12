@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.13 (2018-03-12)
+------------------
+
 * Feature - Aws::CloudHSMV2 - Updated the API for AWS CloudHSM V2.
 
 * Feature - Aws::ApplicationDiscoveryService - Updated the API, and documentation for AWS Application Discovery Service.
