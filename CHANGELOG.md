@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudHSMV2 - Updated the API for AWS CloudHSM V2.
+
+* Feature - Aws::ApplicationDiscoveryService - Updated the API, and documentation for AWS Application Discovery Service.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
 2.11.12 (2018-03-08)
 ------------------
 
