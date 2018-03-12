@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-3.17.1 (2018-03-12)
+3.18.0 (2018-03-12)
 ------------------
 
 * Issue - Fix Ruby warnings: Shadowed local variables "parts" and "headers"
