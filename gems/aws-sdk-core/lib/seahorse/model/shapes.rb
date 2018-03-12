@@ -7,7 +7,6 @@ module Seahorse
       class ShapeRef
 
         def initialize(options = {})
-          @location = nil
           @metadata = {}
           @required = false
           @deprecated = false
