@@ -504,8 +504,9 @@ module Aws::Redshift
     #   node types, go to [ Working with Clusters][1] in the *Amazon Redshift
     #   Cluster Management Guide*.
     #
-    #   Valid Values: `ds1.xlarge` \| `ds1.8xlarge` \| `ds2.xlarge` \|
-    #   `ds2.8xlarge` \| `dc1.large` \| `dc1.8xlarge`.
+    #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `ds2.xlarge` \|
+    #   `ds2.8xlarge` \| `dc1.large` \| `dc1.8xlarge` \| `dc2.large` \|
+    #   `dc2.8xlarge`
     #
     #
     #
@@ -517,7 +518,8 @@ module Aws::Redshift
     #
     #   Constraints:
     #
-    #   * Must be 1 - 128 alphanumeric characters.
+    #   * Must be 1 - 128 alphanumeric characters. The user name can't be
+    #     `PUBLIC`.
     #
     #   * First character must be a letter.
     #
@@ -1191,6 +1193,8 @@ module Aws::Redshift
     #   resp.cluster_subnet_group.subnets #=> Array
     #   resp.cluster_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cluster_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.cluster_subnet_group.subnets[0].subnet_availability_zone.supported_platforms #=> Array
+    #   resp.cluster_subnet_group.subnets[0].subnet_availability_zone.supported_platforms[0].name #=> String
     #   resp.cluster_subnet_group.subnets[0].subnet_status #=> String
     #   resp.cluster_subnet_group.tags #=> Array
     #   resp.cluster_subnet_group.tags[0].key #=> String
@@ -2439,6 +2443,13 @@ module Aws::Redshift
     #   snapshots that have either or both of these tag values associated with
     #   them.
     #
+    # @option params [Boolean] :cluster_exists
+    #   A value that indicates whether to return snapshots only for an
+    #   existing cluster. Table-level restore can be performed only using a
+    #   snapshot of an existing cluster, that is, a cluster that has not been
+    #   deleted. If `ClusterExists` is set to `true`, `ClusterIdentifier` is
+    #   required.
+    #
     # @return [Types::SnapshotMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SnapshotMessage#marker #marker} => String
@@ -2457,6 +2468,7 @@ module Aws::Redshift
     #     owner_account: "String",
     #     tag_keys: ["String"],
     #     tag_values: ["String"],
+    #     cluster_exists: false,
     #   })
     #
     # @example Response structure
@@ -2590,6 +2602,8 @@ module Aws::Redshift
     #   resp.cluster_subnet_groups[0].subnets #=> Array
     #   resp.cluster_subnet_groups[0].subnets[0].subnet_identifier #=> String
     #   resp.cluster_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
+    #   resp.cluster_subnet_groups[0].subnets[0].subnet_availability_zone.supported_platforms #=> Array
+    #   resp.cluster_subnet_groups[0].subnets[0].subnet_availability_zone.supported_platforms[0].name #=> String
     #   resp.cluster_subnet_groups[0].subnets[0].subnet_status #=> String
     #   resp.cluster_subnet_groups[0].tags #=> Array
     #   resp.cluster_subnet_groups[0].tags[0].key #=> String
@@ -3491,6 +3505,8 @@ module Aws::Redshift
     #   resp.orderable_cluster_options[0].node_type #=> String
     #   resp.orderable_cluster_options[0].availability_zones #=> Array
     #   resp.orderable_cluster_options[0].availability_zones[0].name #=> String
+    #   resp.orderable_cluster_options[0].availability_zones[0].supported_platforms #=> Array
+    #   resp.orderable_cluster_options[0].availability_zones[0].supported_platforms[0].name #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeOrderableClusterOptions AWS API Documentation
@@ -3567,6 +3583,7 @@ module Aws::Redshift
     #   resp.reserved_node_offerings[0].recurring_charges #=> Array
     #   resp.reserved_node_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_node_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_node_offerings[0].reserved_node_offering_type #=> String, one of "Regular", "Upgradable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeOfferings AWS API Documentation
     #
@@ -3632,6 +3649,7 @@ module Aws::Redshift
     #   resp.reserved_nodes[0].recurring_charges #=> Array
     #   resp.reserved_nodes[0].recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_nodes[0].recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_nodes[0].reserved_node_offering_type #=> String, one of "Regular", "Upgradable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodes AWS API Documentation
     #
@@ -4386,7 +4404,8 @@ module Aws::Redshift
     #
     #   Constraints:
     #
-    #   * Must be 1 to 64 alphanumeric characters or hyphens
+    #   * Must be 1 to 64 alphanumeric characters or hyphens. The user name
+    #     can't be `PUBLIC`.
     #
     #   * Must contain only lowercase letters, numbers, underscore, plus sign,
     #     period (dot), at symbol (@), or hyphen.
@@ -4546,8 +4565,8 @@ module Aws::Redshift
     #   restored. You can use DescribeResize to track the progress of the
     #   resize request.
     #
-    #   Valid Values: ` ds1.xlarge` \| `ds1.8xlarge` \| ` ds2.xlarge` \|
-    #   `ds2.8xlarge` \| `dc1.large` \| `dc1.8xlarge`.
+    #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge`
     #
     # @option params [Integer] :number_of_nodes
     #   The new number of nodes of the cluster. If you specify a new number of
@@ -5051,6 +5070,8 @@ module Aws::Redshift
     #   resp.cluster_subnet_group.subnets #=> Array
     #   resp.cluster_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cluster_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #   resp.cluster_subnet_group.subnets[0].subnet_availability_zone.supported_platforms #=> Array
+    #   resp.cluster_subnet_group.subnets[0].subnet_availability_zone.supported_platforms[0].name #=> String
     #   resp.cluster_subnet_group.subnets[0].subnet_status #=> String
     #   resp.cluster_subnet_group.tags #=> Array
     #   resp.cluster_subnet_group.tags[0].key #=> String
@@ -5319,6 +5340,7 @@ module Aws::Redshift
     #   resp.reserved_node.recurring_charges #=> Array
     #   resp.reserved_node.recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_node.recurring_charges[0].recurring_charge_frequency #=> String
+    #   resp.reserved_node.reserved_node_offering_type #=> String, one of "Regular", "Upgradable"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOffering AWS API Documentation
     #
@@ -5670,11 +5692,14 @@ module Aws::Redshift
     #   taken. You can modify this if you are using any DS node type. In that
     #   case, you can choose to restore into another DS node type of the same
     #   size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or
-    #   ds2.xlarge into ds1.xlarge. If you have a DC instance type, you must
+    #   ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must
     #   restore into that same instance type and size. In other words, you can
     #   only restore a dc1.large instance type into another dc1.large instance
-    #   type. For more information about node types, see [ About Clusters and
-    #   Nodes][1] in the *Amazon Redshift Cluster Management Guide*
+    #   type or dc2.large instance type. You can't restore dc1.8xlarge to
+    #   dc2.8xlarge. First restore to a dc1.8xlareg cluster, then resize to a
+    #   dc2.8large cluster. For more information about node types, see [ About
+    #   Clusters and Nodes][1] in the *Amazon Redshift Cluster Management
+    #   Guide*.
     #
     #
     #
@@ -6178,7 +6203,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

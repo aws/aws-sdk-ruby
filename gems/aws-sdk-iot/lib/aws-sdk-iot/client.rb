@@ -1665,6 +1665,9 @@ module Aws::IoT
     #   resp.certificate_description.owned_by #=> String
     #   resp.certificate_description.creation_date #=> Time
     #   resp.certificate_description.auto_registration_status #=> String, one of "ENABLE", "DISABLE"
+    #   resp.certificate_description.last_modified_date #=> Time
+    #   resp.certificate_description.customer_version #=> Integer
+    #   resp.certificate_description.generation_id #=> String
     #   resp.registration_config.template_body #=> String
     #   resp.registration_config.role_arn #=> String
     #
@@ -1701,11 +1704,13 @@ module Aws::IoT
     #   resp.certificate_description.previous_owned_by #=> String
     #   resp.certificate_description.creation_date #=> Time
     #   resp.certificate_description.last_modified_date #=> Time
+    #   resp.certificate_description.customer_version #=> Integer
     #   resp.certificate_description.transfer_data.transfer_message #=> String
     #   resp.certificate_description.transfer_data.reject_reason #=> String
     #   resp.certificate_description.transfer_data.transfer_date #=> Time
     #   resp.certificate_description.transfer_data.accept_date #=> Time
     #   resp.certificate_description.transfer_data.reject_date #=> Time
+    #   resp.certificate_description.generation_id #=> String
     #
     # @overload describe_certificate(params = {})
     # @param [Hash] params ({})
@@ -1930,6 +1935,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.role_alias_description.role_alias #=> String
+    #   resp.role_alias_description.role_alias_arn #=> String
     #   resp.role_alias_description.role_arn #=> String
     #   resp.role_alias_description.owner #=> String
     #   resp.role_alias_description.credential_duration_seconds #=> Integer
@@ -2435,6 +2441,9 @@ module Aws::IoT
     #   * {Types::GetPolicyResponse#policy_arn #policy_arn} => String
     #   * {Types::GetPolicyResponse#policy_document #policy_document} => String
     #   * {Types::GetPolicyResponse#default_version_id #default_version_id} => String
+    #   * {Types::GetPolicyResponse#creation_date #creation_date} => Time
+    #   * {Types::GetPolicyResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::GetPolicyResponse#generation_id #generation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2448,6 +2457,9 @@ module Aws::IoT
     #   resp.policy_arn #=> String
     #   resp.policy_document #=> String
     #   resp.default_version_id #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #   resp.generation_id #=> String
     #
     # @overload get_policy(params = {})
     # @param [Hash] params ({})
@@ -2471,6 +2483,9 @@ module Aws::IoT
     #   * {Types::GetPolicyVersionResponse#policy_document #policy_document} => String
     #   * {Types::GetPolicyVersionResponse#policy_version_id #policy_version_id} => String
     #   * {Types::GetPolicyVersionResponse#is_default_version #is_default_version} => Boolean
+    #   * {Types::GetPolicyVersionResponse#creation_date #creation_date} => Time
+    #   * {Types::GetPolicyVersionResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::GetPolicyVersionResponse#generation_id #generation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2486,6 +2501,9 @@ module Aws::IoT
     #   resp.policy_document #=> String
     #   resp.policy_version_id #=> String
     #   resp.is_default_version #=> Boolean
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #   resp.generation_id #=> String
     #
     # @overload get_policy_version(params = {})
     # @param [Hash] params ({})
@@ -5089,7 +5107,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

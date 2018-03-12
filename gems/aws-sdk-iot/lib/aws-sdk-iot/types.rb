@@ -577,6 +577,15 @@ module Aws::IoT
     #   device certificates. Valid values are "ENABLE" and "DISABLE"
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] customer_version
+    #   @return [Integer]
+    #
+    # @!attribute [rw] generation_id
+    #   @return [String]
+    #
     class CACertificateDescription < Struct.new(
       :certificate_arn,
       :certificate_id,
@@ -584,7 +593,10 @@ module Aws::IoT
       :certificate_pem,
       :owned_by,
       :creation_date,
-      :auto_registration_status)
+      :auto_registration_status,
+      :last_modified_date,
+      :customer_version,
+      :generation_id)
       include Aws::Structure
     end
 
@@ -715,9 +727,15 @@ module Aws::IoT
     #   The date and time the certificate was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] customer_version
+    #   @return [Integer]
+    #
     # @!attribute [rw] transfer_data
     #   The transfer data.
     #   @return [Types::TransferData]
+    #
+    # @!attribute [rw] generation_id
+    #   @return [String]
     #
     class CertificateDescription < Struct.new(
       :certificate_arn,
@@ -729,7 +747,9 @@ module Aws::IoT
       :previous_owned_by,
       :creation_date,
       :last_modified_date,
-      :transfer_data)
+      :customer_version,
+      :transfer_data,
+      :generation_id)
       include Aws::Structure
     end
 
@@ -3373,11 +3393,23 @@ module Aws::IoT
     #   The default policy version ID.
     #   @return [String]
     #
+    # @!attribute [rw] creation_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] generation_id
+    #   @return [String]
+    #
     class GetPolicyResponse < Struct.new(
       :policy_name,
       :policy_arn,
       :policy_document,
-      :default_version_id)
+      :default_version_id,
+      :creation_date,
+      :last_modified_date,
+      :generation_id)
       include Aws::Structure
     end
 
@@ -3427,12 +3459,24 @@ module Aws::IoT
     #   Specifies whether the policy version is the default.
     #   @return [Boolean]
     #
+    # @!attribute [rw] creation_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   @return [Time]
+    #
+    # @!attribute [rw] generation_id
+    #   @return [String]
+    #
     class GetPolicyVersionResponse < Struct.new(
       :policy_arn,
       :policy_name,
       :policy_document,
       :policy_version_id,
-      :is_default_version)
+      :is_default_version,
+      :creation_date,
+      :last_modified_date,
+      :generation_id)
       include Aws::Structure
     end
 
@@ -6138,6 +6182,9 @@ module Aws::IoT
     #   The role alias.
     #   @return [String]
     #
+    # @!attribute [rw] role_alias_arn
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   The role ARN.
     #   @return [String]
@@ -6160,6 +6207,7 @@ module Aws::IoT
     #
     class RoleAliasDescription < Struct.new(
       :role_alias,
+      :role_alias_arn,
       :role_arn,
       :owner,
       :credential_duration_seconds,

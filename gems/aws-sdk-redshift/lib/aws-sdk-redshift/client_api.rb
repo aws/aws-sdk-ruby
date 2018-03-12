@@ -238,6 +238,7 @@ module Aws::Redshift
     ReservedNodeOffering = Shapes::StructureShape.new(name: 'ReservedNodeOffering')
     ReservedNodeOfferingList = Shapes::ListShape.new(name: 'ReservedNodeOfferingList')
     ReservedNodeOfferingNotFoundFault = Shapes::StructureShape.new(name: 'ReservedNodeOfferingNotFoundFault')
+    ReservedNodeOfferingType = Shapes::StringShape.new(name: 'ReservedNodeOfferingType')
     ReservedNodeOfferingsMessage = Shapes::StructureShape.new(name: 'ReservedNodeOfferingsMessage')
     ReservedNodeQuotaExceededFault = Shapes::StructureShape.new(name: 'ReservedNodeQuotaExceededFault')
     ReservedNodesMessage = Shapes::StructureShape.new(name: 'ReservedNodesMessage')
@@ -286,6 +287,8 @@ module Aws::Redshift
     SubscriptionEventIdNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionEventIdNotFoundFault')
     SubscriptionNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionNotFoundFault')
     SubscriptionSeverityNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionSeverityNotFoundFault')
+    SupportedPlatform = Shapes::StructureShape.new(name: 'SupportedPlatform')
+    SupportedPlatformsList = Shapes::ListShape.new(name: 'SupportedPlatformsList')
     TStamp = Shapes::TimestampShape.new(name: 'TStamp')
     TableRestoreNotFoundFault = Shapes::StructureShape.new(name: 'TableRestoreNotFoundFault')
     TableRestoreStatus = Shapes::StructureShape.new(name: 'TableRestoreStatus')
@@ -332,6 +335,7 @@ module Aws::Redshift
     AuthorizeSnapshotAccessResult.struct_class = Types::AuthorizeSnapshotAccessResult
 
     AvailabilityZone.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    AvailabilityZone.add_member(:supported_platforms, Shapes::ShapeRef.new(shape: SupportedPlatformsList, location_name: "SupportedPlatforms"))
     AvailabilityZone.struct_class = Types::AvailabilityZone
 
     AvailabilityZoneList.member = Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZone")
@@ -673,6 +677,7 @@ module Aws::Redshift
     DescribeClusterSnapshotsMessage.add_member(:owner_account, Shapes::ShapeRef.new(shape: String, location_name: "OwnerAccount"))
     DescribeClusterSnapshotsMessage.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "TagKeys"))
     DescribeClusterSnapshotsMessage.add_member(:tag_values, Shapes::ShapeRef.new(shape: TagValueList, location_name: "TagValues"))
+    DescribeClusterSnapshotsMessage.add_member(:cluster_exists, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ClusterExists"))
     DescribeClusterSnapshotsMessage.struct_class = Types::DescribeClusterSnapshotsMessage
 
     DescribeClusterSubnetGroupsMessage.add_member(:cluster_subnet_group_name, Shapes::ShapeRef.new(shape: String, location_name: "ClusterSubnetGroupName"))
@@ -1062,6 +1067,7 @@ module Aws::Redshift
     ReservedNode.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
     ReservedNode.add_member(:offering_type, Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
     ReservedNode.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
+    ReservedNode.add_member(:reserved_node_offering_type, Shapes::ShapeRef.new(shape: ReservedNodeOfferingType, location_name: "ReservedNodeOfferingType"))
     ReservedNode.struct_class = Types::ReservedNode
 
     ReservedNodeList.member = Shapes::ShapeRef.new(shape: ReservedNode, location_name: "ReservedNode")
@@ -1074,6 +1080,7 @@ module Aws::Redshift
     ReservedNodeOffering.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "CurrencyCode"))
     ReservedNodeOffering.add_member(:offering_type, Shapes::ShapeRef.new(shape: String, location_name: "OfferingType"))
     ReservedNodeOffering.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
+    ReservedNodeOffering.add_member(:reserved_node_offering_type, Shapes::ShapeRef.new(shape: ReservedNodeOfferingType, location_name: "ReservedNodeOfferingType"))
     ReservedNodeOffering.struct_class = Types::ReservedNodeOffering
 
     ReservedNodeOfferingList.member = Shapes::ShapeRef.new(shape: ReservedNodeOffering, location_name: "ReservedNodeOffering")
@@ -1236,6 +1243,11 @@ module Aws::Redshift
     SubnetIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetIdentifier")
 
     SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "Subnet")
+
+    SupportedPlatform.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    SupportedPlatform.struct_class = Types::SupportedPlatform
+
+    SupportedPlatformsList.member = Shapes::ShapeRef.new(shape: SupportedPlatform, location_name: "SupportedPlatform")
 
     TableRestoreStatus.add_member(:table_restore_request_id, Shapes::ShapeRef.new(shape: String, location_name: "TableRestoreRequestId"))
     TableRestoreStatus.add_member(:status, Shapes::ShapeRef.new(shape: TableRestoreStatusType, location_name: "Status"))
@@ -1645,6 +1657,7 @@ module Aws::Redshift
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClusterSnapshotsMessage)
         o.output = Shapes::ShapeRef.new(shape: SnapshotMessage)
+        o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: ClusterSnapshotNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
         o[:pager] = Aws::Pager.new(
