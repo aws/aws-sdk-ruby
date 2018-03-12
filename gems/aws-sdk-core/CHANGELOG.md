@@ -1,15 +1,12 @@
 Unreleased Changes
 ------------------
 
-3.18.0 (2018-03-12)
-------------------
-
-* Issue - Fix Ruby warnings: Shadowed local variables "parts" and "headers"
-
 3.17.0 (2018-02-27)
 ------------------
 
 * Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Issue - Fix Ruby warnings: Shadowed local variables "parts" and "headers"
 
 3.16.0 (2018-02-20)
 ------------------
