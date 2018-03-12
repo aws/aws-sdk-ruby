@@ -55,9 +55,11 @@ module Aws
             end
 
             context.http_response.on_success(200) do
-              checksum_io = context.http_response.body
-              checksum_io.io.rewind if checksum_io.io.respond_to?(:rewind)
-              context.http_response.body = checksum_io.io
+              if body_md5_present?(context)
+                checksum_io = context.http_response.body
+                checksum_io.io.rewind if checksum_io.io.respond_to?(:rewind)
+                context.http_response.body = checksum_io.io
+              end
             end
 
             context.http_response.on_error do
@@ -111,6 +113,10 @@ raised.
               @body.write(chunk)
               @io.write(chunk)
             end
+          end
+
+          def finalize
+            nil
           end
 
           private
