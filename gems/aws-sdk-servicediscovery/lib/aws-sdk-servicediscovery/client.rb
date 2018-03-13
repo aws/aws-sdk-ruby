@@ -159,8 +159,13 @@ module Aws::ServiceDiscovery
     # inside a specified Amazon VPC. The namespace defines your service
     # naming scheme. For example, if you name your namespace `example.com`
     # and name your service `backend`, the resulting DNS name for the
-    # service will be `backend.example.com`. You can associate more than one
-    # service with the same namespace.
+    # service will be `backend.example.com`. For the current limit on the
+    # number of namespaces that you can create using the same AWS account,
+    # see [Limits on Auto Naming][1] in the *Route 53 Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming
     #
     # @option params [required, String] :name
     #   The name that you want to assign to this namespace. When you create a
@@ -213,8 +218,13 @@ module Aws::ServiceDiscovery
     # internet. The namespace defines your service naming scheme. For
     # example, if you name your namespace `example.com` and name your
     # service `backend`, the resulting DNS name for the service will be
-    # `backend.example.com`. You can associate more than one service with
-    # the same namespace.
+    # `backend.example.com`. For the current limit on the number of
+    # namespaces that you can create using the same AWS account, see [Limits
+    # on Auto Naming][1] in the *Route 53 Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming
     #
     # @option params [required, String] :name
     #   The name that you want to assign to this namespace.
@@ -267,6 +277,14 @@ module Aws::ServiceDiscovery
     # request, and Amazon Route 53 uses the values in the configuration to
     # create the specified entities.
     #
+    # For the current limit on the number of instances that you can register
+    # using the same namespace and using the same service, see [Limits on
+    # Auto Naming][1] in the *Route 53 Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming
+    #
     # @option params [required, String] :name
     #   The name that you want to assign to the service.
     #
@@ -299,6 +317,8 @@ module Aws::ServiceDiscovery
     #
     #   [1]: http://aws.amazon.com/route53/pricing
     #
+    # @option params [Types::HealthCheckCustomConfig] :health_check_custom_config
+    #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServiceResponse#service #service} => Types::Service
@@ -320,8 +340,11 @@ module Aws::ServiceDiscovery
     #       ],
     #     },
     #     health_check_config: {
-    #       type: "HTTP", # required, accepts HTTP, HTTPS, TCP
+    #       type: "HTTP", # accepts HTTP, HTTPS, TCP
     #       resource_path: "ResourcePath",
+    #       failure_threshold: 1,
+    #     },
+    #     health_check_custom_config: {
     #       failure_threshold: 1,
     #     },
     #   })
@@ -341,6 +364,7 @@ module Aws::ServiceDiscovery
     #   resp.service.health_check_config.type #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.service.health_check_config.resource_path #=> String
     #   resp.service.health_check_config.failure_threshold #=> Integer
+    #   resp.service.health_check_custom_config.failure_threshold #=> Integer
     #   resp.service.create_date #=> Time
     #   resp.service.creator_request_id #=> String
     #
@@ -647,6 +671,7 @@ module Aws::ServiceDiscovery
     #   resp.service.health_check_config.type #=> String, one of "HTTP", "HTTPS", "TCP"
     #   resp.service.health_check_config.resource_path #=> String
     #   resp.service.health_check_config.failure_threshold #=> Integer
+    #   resp.service.health_check_custom_config.failure_threshold #=> Integer
     #   resp.service.create_date #=> Time
     #   resp.service.creator_request_id #=> String
     #
@@ -918,8 +943,8 @@ module Aws::ServiceDiscovery
     #   `ServiceId`, creates or updates a record in the hosted zone that is
     #   associated with the corresponding namespace
     #
-    # * Creates or updates a health check based on the settings in the
-    #   health check configuration, if any, for the service
+    # * If the service includes `HealthCheckConfig`, creates or updates a
+    #   health check based on the settings in the health check configuration
     #
     # * Associates the health check, if any, with each of the records
     #
@@ -933,11 +958,19 @@ module Aws::ServiceDiscovery
     #
     # * **If the health check is healthy**\: returns all the records
     #
-    # * **If the health check is unhealthy**\: returns the IP address of the
-    #   last healthy instance
+    # * **If the health check is unhealthy**\: returns the applicable value
+    #   for the last healthy instance
     #
     # * **If you didn't specify a health check configuration**\: returns
     #   all the records
+    #
+    # For the current limit on the number of instances that you can register
+    # using the same namespace and using the same service, see [Limits on
+    # Auto Naming][1] in the *Route 53 Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming
     #
     # @option params [required, String] :service_id
     #   The ID of the service that you want to use for settings for the
@@ -1032,9 +1065,9 @@ module Aws::ServiceDiscovery
     #   example, `192.0.2.44`.
     #
     #   This value is required if the service specified by `ServiceId`
-    #   includes settings for an A record. Either `AWS_INSTANCE_IPV4` or
-    #   `AWS_INSTANCE_IPV6` is required if the service includes settings for
-    #   an SRV record.
+    #   includes settings for an A record. If the service includes settings
+    #   for an SRV record, you must specify a value for `AWS_INSTANCE_IPV4`,
+    #   `AWS_INSTANCE_IPV6`, or both.
     #
     #   **AWS\_INSTANCE\_IPV6**
     #
@@ -1043,9 +1076,9 @@ module Aws::ServiceDiscovery
     #   example, `2001:0db8:85a3:0000:0000:abcd:0001:2345`.
     #
     #   This value is required if the service specified by `ServiceId`
-    #   includes settings for an AAAA record. Either `AWS_INSTANCE_IPV4` or
-    #   `AWS_INSTANCE_IPV6` is required if the service includes settings for
-    #   an SRV record.
+    #   includes settings for an AAAA record. If the service includes settings
+    #   for an SRV record, you must specify a value for `AWS_INSTANCE_IPV4`,
+    #   `AWS_INSTANCE_IPV6`, or both.
     #
     #   **AWS\_INSTANCE\_PORT**
     #
@@ -1090,6 +1123,31 @@ module Aws::ServiceDiscovery
       req.send_request(options)
     end
 
+    # @option params [required, String] :service_id
+    #
+    # @option params [required, String] :instance_id
+    #
+    # @option params [required, String] :status
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_instance_custom_health_status({
+    #     service_id: "ResourceId", # required
+    #     instance_id: "ResourceId", # required
+    #     status: "HEALTHY", # required, accepts HEALTHY, UNHEALTHY
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateInstanceCustomHealthStatus AWS API Documentation
+    #
+    # @overload update_instance_custom_health_status(params = {})
+    # @param [Hash] params ({})
+    def update_instance_custom_health_status(params = {}, options = {})
+      req = build_request(:update_instance_custom_health_status, params)
+      req.send_request(options)
+    end
+
     # Submits a request to perform the following operations:
     #
     # * Add or delete `DnsRecords` configurations
@@ -1097,8 +1155,6 @@ module Aws::ServiceDiscovery
     # * Update the TTL setting for existing `DnsRecords` configurations
     #
     # * Add, update, or delete `HealthCheckConfig` for a specified service
-    #
-    # *
     #
     # You must specify all `DnsRecords` configurations (and, optionally,
     # `HealthCheckConfig`) that you want to appear in the updated service.
@@ -1134,7 +1190,7 @@ module Aws::ServiceDiscovery
     #         ],
     #       },
     #       health_check_config: {
-    #         type: "HTTP", # required, accepts HTTP, HTTPS, TCP
+    #         type: "HTTP", # accepts HTTP, HTTPS, TCP
     #         resource_path: "ResourcePath",
     #         failure_threshold: 1,
     #       },
@@ -1167,7 +1223,7 @@ module Aws::ServiceDiscovery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicediscovery'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
