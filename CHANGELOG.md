@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ServiceDiscovery - Updated the API, and documentation for Amazon Route 53 Auto Naming.
+
 2.11.13 (2018-03-12)
 ------------------
 
