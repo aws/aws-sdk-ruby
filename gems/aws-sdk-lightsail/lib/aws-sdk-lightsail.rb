@@ -42,6 +42,6 @@ require_relative 'aws-sdk-lightsail/customizations'
 # @service
 module Aws::Lightsail
 
-  GEM_VERSION = '1.3.0'
+  GEM_VERSION = '1.4.0'
 
 end
