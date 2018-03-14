@@ -77,7 +77,10 @@ module AwsSdkCodeGenerator
       end
 
       def example_operation_name
-        underscore(@service.api['operations'].keys.first)
+        apig_without_operations = @service.protocol == 'api-gateway' && @service.api['operations'].empty?
+        unless apig_without_operations
+          underscore(@service.api['operations'].keys.first)
+        end
         nil
       end
 

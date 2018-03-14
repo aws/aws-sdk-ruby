@@ -5,6 +5,7 @@ describe 'Client Interface:' do
 
     before(:all) do
        SpecHelper.generate_service(['WhiteLabel'], multiple_files: false, custom: true)
+       SpecHelper.generate_service(['WhiteLabelEmpty'], multiple_files: false, custom: true)
     end
 
     let(:creds) {
@@ -28,6 +29,14 @@ describe 'Client Interface:' do
         authorizer_token: 'my-fancy-token'
       )
     }
+
+    it 'allows empty operation clients' do
+      expect {
+        WhiteLabelEmpty::Client.new(
+          stub_responses: true
+        )
+      }.to_not raise_error
+    end
 
     it 'populates x-api-key header correctly' do
       resp = client.put_apikey({
