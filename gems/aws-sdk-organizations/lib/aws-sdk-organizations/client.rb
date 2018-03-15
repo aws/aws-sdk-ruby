@@ -1492,6 +1492,12 @@ module Aws::Organizations
     #
     # This operation can be called from any account in the organization.
     #
+    # <note markdown="1"> Even if a policy type is shown as available in the organization, it
+    # can be disabled separately at the root level with DisablePolicyType.
+    # Use ListRoots to see the status of policy types for a specified root.
+    #
+    #  </note>
+    #
     # @return [Types::DescribeOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeOrganizationResponse#organization #organization} => Types::Organization
@@ -1828,6 +1834,14 @@ module Aws::Organizations
     # This operation can be called only from the organization's master
     # account.
     #
+    # <note markdown="1"> If you disable a policy type for a root, it still shows as enabled for
+    # the organization if all features are enabled in that organization. Use
+    # ListRoots to see the status of policy types for a specified root. Use
+    # DescribeOrganization to see the status of policy types in the
+    # organization.
+    #
+    #  </note>
+    #
     # @option params [required, String] :root_id
     #   The unique identifier (ID) of the root in which you want to disable a
     #   policy type. You can get the ID from the ListRoots operation.
@@ -1960,6 +1974,11 @@ module Aws::Organizations
     # administrators in the invited accounts approve the change by accepting
     # the handshake.
     #
+    # After you enable all features, you can separately enable or disable
+    # individual policy types in a root using EnablePolicyType and
+    # DisablePolicyType. To see the status of policy types in a root, use
+    # ListRoots.
+    #
     # After all invited member accounts accept the handshake, you finalize
     # the feature set change by accepting the handshake that contains
     # `"Action": "ENABLE_ALL_FEATURES"`. This completes the change.
@@ -2050,6 +2069,12 @@ module Aws::Organizations
     #
     # This operation can be called only from the organization's master
     # account.
+    #
+    # You can enable a policy type in a root only if that policy type is
+    # available in the organization. Use DescribeOrganization to view the
+    # status of available policy types in the organization.
+    #
+    # To view the status of policy type in a root, use ListRoots.
     #
     # @option params [required, String] :root_id
     #   The unique identifier (ID) of the root in which you want to enable a
@@ -2391,8 +2416,16 @@ module Aws::Organizations
     end
 
     # Lists all the accounts in the organization. To request only the
-    # accounts in a root or OU, use the ListAccountsForParent operation
-    # instead.
+    # accounts in a specified root or OU, use the ListAccountsForParent
+    # operation instead.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2505,6 +2538,14 @@ module Aws::Organizations
     # and not in any child OUs. To get a list of all accounts in the
     # organization, use the ListAccounts operation.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # This operation can be called only from the organization's master
     # account.
     #
@@ -2600,6 +2641,14 @@ module Aws::Organizations
     # Lists all of the OUs or accounts that are contained in the specified
     # parent OU or root. This operation, along with ListParents enables you
     # to traverse the tree structure that makes up this root.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2700,6 +2749,14 @@ module Aws::Organizations
 
     # Lists the account creation requests that match the specified status
     # that is currently being tracked for the organization.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2816,6 +2873,14 @@ module Aws::Organizations
     # Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the
     # results of this API for only 30 days after changing to that state.
     # After that they are deleted and no longer accessible.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called from any account in the organization.
     #
@@ -2954,6 +3019,14 @@ module Aws::Organizations
     # Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the
     # results of this API for only 30 days after changing to that state.
     # After that they are deleted and no longer accessible.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -3129,6 +3202,14 @@ module Aws::Organizations
     # Lists the organizational units (OUs) in a parent organizational unit
     # or root.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # This operation can be called only from the organization's master
     # account.
     #
@@ -3229,6 +3310,14 @@ module Aws::Organizations
     # along with ListChildren enables you to traverse the tree structure
     # that makes up this root.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # This operation can be called only from the organization's master
     # account.
     #
@@ -3322,6 +3411,14 @@ module Aws::Organizations
 
     # Retrieves the list of all policies in an organization of a specified
     # type.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -3422,6 +3519,14 @@ module Aws::Organizations
     # Lists the policies that are directly attached to the specified target
     # root, organizational unit (OU), or account. You must specify the
     # policy type that you want included in the returned list.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -3530,8 +3635,25 @@ module Aws::Organizations
 
     # Lists the roots that are defined in the current organization.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # This operation can be called only from the organization's master
     # account.
+    #
+    # <note markdown="1"> Policy types can be enabled and disabled in roots. This is distinct
+    # from whether they are available in the organization. When you enable
+    # all features, you make policy types available for use in that
+    # organization. Individual policy types can then be enabled and disabled
+    # in a root. To see the availability of a policy type in an
+    # organization, use DescribeOrganization.
+    #
+    #  </note>
     #
     # @option params [String] :next_token
     #   Use this parameter if you receive a `NextToken` response in a previous
@@ -3610,6 +3732,14 @@ module Aws::Organizations
 
     # Lists all the roots, OUs, and accounts to which the specified policy
     # is attached.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -4079,7 +4209,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

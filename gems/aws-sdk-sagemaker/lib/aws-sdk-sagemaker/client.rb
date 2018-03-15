@@ -472,27 +472,29 @@ module Aws::SageMaker
     end
 
     # Creates an Amazon SageMaker notebook instance. A notebook instance is
-    # an ML compute instance running on a Jupyter notebook.
+    # a machine learning (ML) compute instance running on a Jupyter
+    # notebook.
     #
-    # In a `CreateNotebookInstance` request, you specify the type of ML
-    # compute instance that you want to run. Amazon SageMaker launches the
-    # instance, installs common libraries that you can use to explore
-    # datasets for model training, and attaches an ML storage volume to the
-    # notebook instance.
+    # In a `CreateNotebookInstance` request, specify the type of ML compute
+    # instance that you want to run. Amazon SageMaker launches the instance,
+    # installs common libraries that you can use to explore datasets for
+    # model training, and attaches an ML storage volume to the notebook
+    # instance.
     #
     # Amazon SageMaker also provides a set of example notebooks. Each
-    # notebook demonstrates how to use Amazon SageMaker with a specific an
+    # notebook demonstrates how to use Amazon SageMaker with a specific
     # algorithm or with a machine learning framework.
     #
     # After receiving the request, Amazon SageMaker does the following:
     #
     # 1.  Creates a network interface in the Amazon SageMaker VPC.
     #
-    # 2.  (Option) If you specified `SubnetId`, creates a network interface
-    #     in your own VPC, which is inferred from the subnet ID that you
-    #     provide in the input. When creating this network interface, Amazon
-    #     SageMaker attaches the security group that you specified in the
-    #     request to the network interface that it creates in your VPC.
+    # 2.  (Option) If you specified `SubnetId`, Amazon SageMaker creates a
+    #     network interface in your own VPC, which is inferred from the
+    #     subnet ID that you provide in the input. When creating this
+    #     network interface, Amazon SageMaker attaches the security group
+    #     that you specified in the request to the network interface that it
+    #     creates in your VPC.
     #
     # 3.  Launches an EC2 instance of the type specified in the request in
     #     the Amazon SageMaker VPC. If you specified `SubnetId` of your VPC,
@@ -551,6 +553,22 @@ module Aws::SageMaker
     #   A list of tags to associate with the notebook instance. You can add
     #   tags later by using the `CreateTags` API.
     #
+    # @option params [String] :lifecycle_config_name
+    #   The name of a lifecycle configuration to associate with the notebook
+    #   instance. For information about lifestyle configurations, see
+    #   notebook-lifecycle-config.
+    #
+    # @option params [String] :direct_internet_access
+    #   Sets whether Amazon SageMaker provides internet access to the notebook
+    #   instance. If you set this to `Disabled` this notebook instance will be
+    #   able to access resources only in your VPC, and will not be able to
+    #   connect to Amazon SageMaker training and endpoint services unless your
+    #   configure a NAT Gateway in your VPC.
+    #
+    #   For more information, see appendix-notebook-and-internet-access. You
+    #   can set the value of this parameter to `Disabled` only if you set a
+    #   value for the `SubnetId` parameter.
+    #
     # @return [Types::CreateNotebookInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNotebookInstanceOutput#notebook_instance_arn #notebook_instance_arn} => String
@@ -559,7 +577,7 @@ module Aws::SageMaker
     #
     #   resp = client.create_notebook_instance({
     #     notebook_instance_name: "NotebookInstanceName", # required
-    #     instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge
+    #     instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge
     #     subnet_id: "SubnetId",
     #     security_group_ids: ["SecurityGroupId"],
     #     role_arn: "RoleArn", # required
@@ -570,6 +588,8 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
+    #     direct_internet_access: "Enabled", # accepts Enabled, Disabled
     #   })
     #
     # @example Response structure
@@ -582,6 +602,57 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_notebook_instance(params = {}, options = {})
       req = build_request(:create_notebook_instance, params)
+      req.send_request(options)
+    end
+
+    # Creates a lifecycle configuration that you can associate with a
+    # notebook instance. A *lifecycle configuration* is a collection of
+    # shell scripts that run when you create or start a notebook instance.
+    #
+    # For information about notebook instance lifestyle configurations, see
+    # notebook-lifecycle-config.
+    #
+    # @option params [required, String] :notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration.
+    #
+    # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_create
+    #   A shell script that runs only once, when you create a notebook
+    #   instance.
+    #
+    # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_start
+    #   A shell script that runs every time you start a notebook instance,
+    #   including when you create the notebook instance.
+    #
+    # @return [Types::CreateNotebookInstanceLifecycleConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNotebookInstanceLifecycleConfigOutput#notebook_instance_lifecycle_config_arn #notebook_instance_lifecycle_config_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_notebook_instance_lifecycle_config({
+    #     notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #     on_create: [
+    #       {
+    #         content: "NotebookInstanceLifecycleConfigContent",
+    #       },
+    #     ],
+    #     on_start: [
+    #       {
+    #         content: "NotebookInstanceLifecycleConfigContent",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_instance_lifecycle_config_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceLifecycleConfig AWS API Documentation
+    #
+    # @overload create_notebook_instance_lifecycle_config(params = {})
+    # @param [Hash] params ({})
+    def create_notebook_instance_lifecycle_config(params = {}, options = {})
+      req = build_request(:create_notebook_instance_lifecycle_config, params)
       req.send_request(options)
     end
 
@@ -935,6 +1006,28 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Deletes a notebook instance lifecycle configuration.
+    #
+    # @option params [required, String] :notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_notebook_instance_lifecycle_config({
+    #     notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceLifecycleConfig AWS API Documentation
+    #
+    # @overload delete_notebook_instance_lifecycle_config(params = {})
+    # @param [Hash] params ({})
+    def delete_notebook_instance_lifecycle_config(params = {}, options = {})
+      req = build_request(:delete_notebook_instance_lifecycle_config, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified tags from an Amazon SageMaker resource.
     #
     # To list a resource's tags, use the `ListTags` API.
@@ -1113,6 +1206,8 @@ module Aws::SageMaker
     #   * {Types::DescribeNotebookInstanceOutput#network_interface_id #network_interface_id} => String
     #   * {Types::DescribeNotebookInstanceOutput#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeNotebookInstanceOutput#creation_time #creation_time} => Time
+    #   * {Types::DescribeNotebookInstanceOutput#notebook_instance_lifecycle_config_name #notebook_instance_lifecycle_config_name} => String
+    #   * {Types::DescribeNotebookInstanceOutput#direct_internet_access #direct_internet_access} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1127,7 +1222,7 @@ module Aws::SageMaker
     #   resp.notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting"
     #   resp.failure_reason #=> String
     #   resp.url #=> String
-    #   resp.instance_type #=> String, one of "ml.t2.medium", "ml.m4.xlarge", "ml.p2.xlarge"
+    #   resp.instance_type #=> String, one of "ml.t2.medium", "ml.m4.xlarge", "ml.p2.xlarge", "ml.p3.2xlarge"
     #   resp.subnet_id #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
@@ -1136,6 +1231,8 @@ module Aws::SageMaker
     #   resp.network_interface_id #=> String
     #   resp.last_modified_time #=> Time
     #   resp.creation_time #=> Time
+    #   resp.notebook_instance_lifecycle_config_name #=> String
+    #   resp.direct_internet_access #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstance AWS API Documentation
     #
@@ -1143,6 +1240,49 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_notebook_instance(params = {}, options = {})
       req = build_request(:describe_notebook_instance, params)
+      req.send_request(options)
+    end
+
+    # Returns a description of a notebook instance lifecycle configuration.
+    #
+    # For information about notebook instance lifestyle configurations, see
+    # notebook-lifecycle-config.
+    #
+    # @option params [required, String] :notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration to describe.
+    #
+    # @return [Types::DescribeNotebookInstanceLifecycleConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#notebook_instance_lifecycle_config_arn #notebook_instance_lifecycle_config_arn} => String
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#notebook_instance_lifecycle_config_name #notebook_instance_lifecycle_config_name} => String
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#on_create #on_create} => Array&lt;Types::NotebookInstanceLifecycleHook&gt;
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#on_start #on_start} => Array&lt;Types::NotebookInstanceLifecycleHook&gt;
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_notebook_instance_lifecycle_config({
+    #     notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_instance_lifecycle_config_arn #=> String
+    #   resp.notebook_instance_lifecycle_config_name #=> String
+    #   resp.on_create #=> Array
+    #   resp.on_create[0].content #=> String
+    #   resp.on_start #=> Array
+    #   resp.on_start[0].content #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceLifecycleConfig AWS API Documentation
+    #
+    # @overload describe_notebook_instance_lifecycle_config(params = {})
+    # @param [Hash] params ({})
+    def describe_notebook_instance_lifecycle_config(params = {}, options = {})
+      req = build_request(:describe_notebook_instance_lifecycle_config, params)
       req.send_request(options)
     end
 
@@ -1425,6 +1565,80 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists notebook instance lifestyle configurations created with the API.
+    #
+    # @option params [String] :next_token
+    #   If the result of a `ListNotebookInstanceLifecycleConfigs` request was
+    #   truncated, the response includes a `NextToken`. To get the next set of
+    #   lifecycle configurations, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of lifecycle configurations to return in the
+    #   response.
+    #
+    # @option params [String] :sort_by
+    #   Sorts the list of results. The default is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results.
+    #
+    # @option params [String] :name_contains
+    #   A string in the lifecycle configuration name. This filter returns only
+    #   lifecycle configurations whose name contains the specified string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only lifecycle configurations that were created
+    #   before the specified time (timestamp).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only lifecycle configurations that were created
+    #   after the specified time (timestamp).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   A filter that returns only lifecycle configurations that were modified
+    #   before the specified time (timestamp).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   A filter that returns only lifecycle configurations that were modified
+    #   after the specified time (timestamp).
+    #
+    # @return [Types::ListNotebookInstanceLifecycleConfigsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNotebookInstanceLifecycleConfigsOutput#next_token #next_token} => String
+    #   * {Types::ListNotebookInstanceLifecycleConfigsOutput#notebook_instance_lifecycle_configs #notebook_instance_lifecycle_configs} => Array&lt;Types::NotebookInstanceLifecycleConfigSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_notebook_instance_lifecycle_configs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     sort_by: "Name", # accepts Name, CreationTime, LastModifiedTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     name_contains: "NotebookInstanceLifecycleConfigNameContains",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.notebook_instance_lifecycle_configs #=> Array
+    #   resp.notebook_instance_lifecycle_configs[0].notebook_instance_lifecycle_config_name #=> String
+    #   resp.notebook_instance_lifecycle_configs[0].notebook_instance_lifecycle_config_arn #=> String
+    #   resp.notebook_instance_lifecycle_configs[0].creation_time #=> Time
+    #   resp.notebook_instance_lifecycle_configs[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstanceLifecycleConfigs AWS API Documentation
+    #
+    # @overload list_notebook_instance_lifecycle_configs(params = {})
+    # @param [Hash] params ({})
+    def list_notebook_instance_lifecycle_configs(params = {}, options = {})
+      req = build_request(:list_notebook_instance_lifecycle_configs, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the Amazon SageMaker notebook instances in the
     # requester's account in an AWS Region.
     #
@@ -1473,6 +1687,12 @@ module Aws::SageMaker
     #   A filter that returns only notebook instances with the specified
     #   status.
     #
+    # @option params [String] :notebook_instance_lifecycle_config_name_contains
+    #   A string in the name of a notebook instances lifecycle configuration
+    #   associated with this notebook instance. This filter returns only
+    #   notebook instances associated with a lifecycle configuration with a
+    #   name that contains the specified string.
+    #
     # @return [Types::ListNotebookInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListNotebookInstancesOutput#next_token #next_token} => String
@@ -1491,6 +1711,7 @@ module Aws::SageMaker
     #     last_modified_time_before: Time.now,
     #     last_modified_time_after: Time.now,
     #     status_equals: "Pending", # accepts Pending, InService, Stopping, Stopped, Failed, Deleting
+    #     notebook_instance_lifecycle_config_name_contains: "NotebookInstanceLifecycleConfigName",
     #   })
     #
     # @example Response structure
@@ -1501,9 +1722,10 @@ module Aws::SageMaker
     #   resp.notebook_instances[0].notebook_instance_arn #=> String
     #   resp.notebook_instances[0].notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting"
     #   resp.notebook_instances[0].url #=> String
-    #   resp.notebook_instances[0].instance_type #=> String, one of "ml.t2.medium", "ml.m4.xlarge", "ml.p2.xlarge"
+    #   resp.notebook_instances[0].instance_type #=> String, one of "ml.t2.medium", "ml.m4.xlarge", "ml.p2.xlarge", "ml.p3.2xlarge"
     #   resp.notebook_instances[0].creation_time #=> Time
     #   resp.notebook_instances[0].last_modified_time #=> Time
+    #   resp.notebook_instances[0].notebook_instance_lifecycle_config_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstances AWS API Documentation
     #
@@ -1838,7 +2060,7 @@ module Aws::SageMaker
     #
     #   resp = client.update_notebook_instance({
     #     notebook_instance_name: "NotebookInstanceName", # required
-    #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge
+    #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge
     #     role_arn: "RoleArn",
     #   })
     #
@@ -1848,6 +2070,47 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_notebook_instance(params = {}, options = {})
       req = build_request(:update_notebook_instance, params)
+      req.send_request(options)
+    end
+
+    # Updates a notebook instance lifecycle configuration created with the
+    # API.
+    #
+    # @option params [required, String] :notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration.
+    #
+    # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_create
+    #   The shell script that runs only once, when you create a notebook
+    #   instance
+    #
+    # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_start
+    #   The shell script that runs every time you start a notebook instance,
+    #   including when you create the notebook instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_notebook_instance_lifecycle_config({
+    #     notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #     on_create: [
+    #       {
+    #         content: "NotebookInstanceLifecycleConfigContent",
+    #       },
+    #     ],
+    #     on_start: [
+    #       {
+    #         content: "NotebookInstanceLifecycleConfigContent",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceLifecycleConfig AWS API Documentation
+    #
+    # @overload update_notebook_instance_lifecycle_config(params = {})
+    # @param [Hash] params ({})
+    def update_notebook_instance_lifecycle_config(params = {}, options = {})
+      req = build_request(:update_notebook_instance_lifecycle_config, params)
       req.send_request(options)
     end
 
@@ -1864,7 +2127,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

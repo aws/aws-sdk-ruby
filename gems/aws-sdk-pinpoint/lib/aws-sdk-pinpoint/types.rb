@@ -2502,6 +2502,39 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteEndpointRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         endpoint_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEndpointRequest AWS API Documentation
+    #
+    class DeleteEndpointRequest < Struct.new(
+      :application_id,
+      :endpoint_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoint_response
+    #   Endpoint response
+    #   @return [Types::EndpointResponse]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEndpointResponse AWS API Documentation
+    #
+    class DeleteEndpointResponse < Struct.new(
+      :endpoint_response)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteEventStreamRequest
     #   data as a hash:
     #
@@ -2735,6 +2768,7 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
     #           substitutions: {
     #             "__string" => ["__string"],
@@ -5554,6 +5588,7 @@ module Aws::Pinpoint
     #           sms_message: {
     #             body: "__string",
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             origination_number: "__string",
     #             sender_id: "__string",
     #             substitutions: {
     #               "__string" => ["__string"],
@@ -5856,6 +5891,7 @@ module Aws::Pinpoint
     #       {
     #         body: "__string",
     #         message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #         origination_number: "__string",
     #         sender_id: "__string",
     #         substitutions: {
     #           "__string" => ["__string"],
@@ -5871,8 +5907,17 @@ module Aws::Pinpoint
     #   Is this a transaction priority message or lower priority.
     #   @return [String]
     #
+    # @!attribute [rw] origination_number
+    #   The phone number that the SMS message originates from. Specify one
+    #   of the dedicated long codes or short codes that you requested from
+    #   AWS Support and that is assigned to your account. If this attribute
+    #   is not specified, Amazon Pinpoint randomly assigns a long code.
+    #   @return [String]
+    #
     # @!attribute [rw] sender_id
-    #   Sender ID of sent message.
+    #   The sender ID that is shown as the message sender on the
+    #   recipient's device. Support for sender IDs varies by country or
+    #   region.
     #   @return [String]
     #
     # @!attribute [rw] substitutions
@@ -5883,6 +5928,7 @@ module Aws::Pinpoint
     class SMSMessage < Struct.new(
       :body,
       :message_type,
+      :origination_number,
       :sender_id,
       :substitutions)
       include Aws::Structure
@@ -6420,6 +6466,7 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
     #               substitutions: {
     #                 "__string" => ["__string"],
@@ -6574,6 +6621,7 @@ module Aws::Pinpoint
     #           sms_message: {
     #             body: "__string",
     #             message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #             origination_number: "__string",
     #             sender_id: "__string",
     #             substitutions: {
     #               "__string" => ["__string"],
@@ -6763,6 +6811,7 @@ module Aws::Pinpoint
     #             sms_message: {
     #               body: "__string",
     #               message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #               origination_number: "__string",
     #               sender_id: "__string",
     #               substitutions: {
     #                 "__string" => ["__string"],

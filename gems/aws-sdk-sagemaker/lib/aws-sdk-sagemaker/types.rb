@@ -92,7 +92,7 @@ module Aws::SageMaker
     #   data directly from S3 to the container.
     #
     #   In File mode, make sure you provision ML storage volume with
-    #   sufficient capacity to accomodate the data download from S3. In
+    #   sufficient capacity to accommodate the data download from S3. In
     #   addition to the training data, the ML storage volume also stores the
     #   output model. The algorithm container use ML storage volume to also
     #   store intermediate information, if any.
@@ -449,7 +449,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge
     #         subnet_id: "SubnetId",
     #         security_group_ids: ["SecurityGroupId"],
     #         role_arn: "RoleArn", # required
@@ -460,6 +460,8 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
+    #         direct_internet_access: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] notebook_instance_name
@@ -505,6 +507,24 @@ module Aws::SageMaker
     #   tags later by using the `CreateTags` API.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] lifecycle_config_name
+    #   The name of a lifecycle configuration to associate with the notebook
+    #   instance. For information about lifestyle configurations, see
+    #   notebook-lifecycle-config.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_internet_access
+    #   Sets whether Amazon SageMaker provides internet access to the
+    #   notebook instance. If you set this to `Disabled` this notebook
+    #   instance will be able to access resources only in your VPC, and will
+    #   not be able to connect to Amazon SageMaker training and endpoint
+    #   services unless your configure a NAT Gateway in your VPC.
+    #
+    #   For more information, see appendix-notebook-and-internet-access. You
+    #   can set the value of this parameter to `Disabled` only if you set a
+    #   value for the `SubnetId` parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceInput AWS API Documentation
     #
     class CreateNotebookInstanceInput < Struct.new(
@@ -514,7 +534,60 @@ module Aws::SageMaker
       :security_group_ids,
       :role_arn,
       :kms_key_id,
-      :tags)
+      :tags,
+      :lifecycle_config_name,
+      :direct_internet_access)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateNotebookInstanceLifecycleConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #         on_create: [
+    #           {
+    #             content: "NotebookInstanceLifecycleConfigContent",
+    #           },
+    #         ],
+    #         on_start: [
+    #           {
+    #             content: "NotebookInstanceLifecycleConfigContent",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_create
+    #   A shell script that runs only once, when you create a notebook
+    #   instance.
+    #   @return [Array<Types::NotebookInstanceLifecycleHook>]
+    #
+    # @!attribute [rw] on_start
+    #   A shell script that runs every time you start a notebook instance,
+    #   including when you create the notebook instance.
+    #   @return [Array<Types::NotebookInstanceLifecycleHook>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceLifecycleConfigInput AWS API Documentation
+    #
+    class CreateNotebookInstanceLifecycleConfigInput < Struct.new(
+      :notebook_instance_lifecycle_config_name,
+      :on_create,
+      :on_start)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_instance_lifecycle_config_arn
+    #   The Amazon Resource Name (ARN) of the lifecycle configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceLifecycleConfigOutput AWS API Documentation
+    #
+    class CreateNotebookInstanceLifecycleConfigOutput < Struct.new(
+      :notebook_instance_lifecycle_config_arn)
       include Aws::Structure
     end
 
@@ -845,6 +918,24 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteNotebookInstanceLifecycleConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #       }
+    #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceLifecycleConfigInput AWS API Documentation
+    #
+    class DeleteNotebookInstanceLifecycleConfigInput < Struct.new(
+      :notebook_instance_lifecycle_config_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteTagsInput
     #   data as a hash:
     #
@@ -1061,6 +1152,63 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeNotebookInstanceLifecycleConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #       }
+    #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceLifecycleConfigInput AWS API Documentation
+    #
+    class DescribeNotebookInstanceLifecycleConfigInput < Struct.new(
+      :notebook_instance_lifecycle_config_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_instance_lifecycle_config_arn
+    #   The Amazon Resource Name (ARN) of the lifecycle configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_create
+    #   The shell script that runs only once, when you create a notebook
+    #   instance.
+    #   @return [Array<Types::NotebookInstanceLifecycleHook>]
+    #
+    # @!attribute [rw] on_start
+    #   The shell script that runs every time you start a notebook instance,
+    #   including when you create the notebook instance.
+    #   @return [Array<Types::NotebookInstanceLifecycleHook>]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp that tells when the lifecycle configuration was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that tells when the lifecycle configuration was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceLifecycleConfigOutput AWS API Documentation
+    #
+    class DescribeNotebookInstanceLifecycleConfigOutput < Struct.new(
+      :notebook_instance_lifecycle_config_arn,
+      :notebook_instance_lifecycle_config_name,
+      :on_create,
+      :on_start,
+      :last_modified_time,
+      :creation_time)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] notebook_instance_arn
     #   The Amazon Resource Name (ARN) of the notebook instance.
     #   @return [String]
@@ -1074,7 +1222,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   If staus is failed, the reason it failed.
+    #   If status is failed, the reason it failed.
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -1119,6 +1267,19 @@ module Aws::SageMaker
     #   instance was created
     #   @return [Time]
     #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name
+    #   Returns the name of a notebook instance lifecycle configuration.
+    #
+    #   For information about notebook instance lifestyle configurations,
+    #   see notebook-lifecycle-config.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_internet_access
+    #   Describes whether the notebook instance has internet access.
+    #
+    #   For more information, see appendix-notebook-and-internet-access.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput AWS API Documentation
     #
     class DescribeNotebookInstanceOutput < Struct.new(
@@ -1134,7 +1295,9 @@ module Aws::SageMaker
       :kms_key_id,
       :network_interface_id,
       :last_modified_time,
-      :creation_time)
+      :creation_time,
+      :notebook_instance_lifecycle_config_name,
+      :direct_internet_access)
       include Aws::Structure
     end
 
@@ -1617,6 +1780,100 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListNotebookInstanceLifecycleConfigsInput
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         sort_by: "Name", # accepts Name, CreationTime, LastModifiedTime
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         name_contains: "NotebookInstanceLifecycleConfigNameContains",
+    #         creation_time_before: Time.now,
+    #         creation_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of a `ListNotebookInstanceLifecycleConfigs` request
+    #   was truncated, the response includes a `NextToken`. To get the next
+    #   set of lifecycle configurations, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of lifecycle configurations to return in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_by
+    #   Sorts the list of results. The default is `CreationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the lifecycle configuration name. This filter returns
+    #   only lifecycle configurations whose name contains the specified
+    #   string.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only lifecycle configurations that were
+    #   created before the specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only lifecycle configurations that were
+    #   created after the specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   A filter that returns only lifecycle configurations that were
+    #   modified before the specified time (timestamp).
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   A filter that returns only lifecycle configurations that were
+    #   modified after the specified time (timestamp).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstanceLifecycleConfigsInput AWS API Documentation
+    #
+    class ListNotebookInstanceLifecycleConfigsInput < Struct.new(
+      :next_token,
+      :max_results,
+      :sort_by,
+      :sort_order,
+      :name_contains,
+      :creation_time_before,
+      :creation_time_after,
+      :last_modified_time_before,
+      :last_modified_time_after)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon SageMaker returns this token.
+    #   To get the next set of lifecycle configurations, use it in the next
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_instance_lifecycle_configs
+    #   An array of `NotebookInstanceLifecycleConfiguration` objects, each
+    #   listing a lifecycle configuration.
+    #   @return [Array<Types::NotebookInstanceLifecycleConfigSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstanceLifecycleConfigsOutput AWS API Documentation
+    #
+    class ListNotebookInstanceLifecycleConfigsOutput < Struct.new(
+      :next_token,
+      :notebook_instance_lifecycle_configs)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListNotebookInstancesInput
     #   data as a hash:
     #
@@ -1631,6 +1888,7 @@ module Aws::SageMaker
     #         last_modified_time_before: Time.now,
     #         last_modified_time_after: Time.now,
     #         status_equals: "Pending", # accepts Pending, InService, Stopping, Stopped, Failed, Deleting
+    #         notebook_instance_lifecycle_config_name_contains: "NotebookInstanceLifecycleConfigName",
     #       }
     #
     # @!attribute [rw] next_token
@@ -1688,6 +1946,13 @@ module Aws::SageMaker
     #   status.
     #   @return [String]
     #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name_contains
+    #   A string in the name of a notebook instances lifecycle configuration
+    #   associated with this notebook instance. This filter returns only
+    #   notebook instances associated with a lifecycle configuration with a
+    #   name that contains the specified string.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesInput AWS API Documentation
     #
     class ListNotebookInstancesInput < Struct.new(
@@ -1700,7 +1965,8 @@ module Aws::SageMaker
       :creation_time_after,
       :last_modified_time_before,
       :last_modified_time_after,
-      :status_equals)
+      :status_equals,
+      :notebook_instance_lifecycle_config_name_contains)
       include Aws::Structure
     end
 
@@ -1910,6 +2176,61 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Provides a summary of a notebook instance lifecycle configuration.
+    #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_instance_lifecycle_config_arn
+    #   The Amazon Resource Name (ARN) of the lifecycle configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   A timestamp that tells when the lifecycle configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   A timestamp that tells when the lifecycle configuration was last
+    #   modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceLifecycleConfigSummary AWS API Documentation
+    #
+    class NotebookInstanceLifecycleConfigSummary < Struct.new(
+      :notebook_instance_lifecycle_config_name,
+      :notebook_instance_lifecycle_config_arn,
+      :creation_time,
+      :last_modified_time)
+      include Aws::Structure
+    end
+
+    # Contains the notebook instance lifecycle configuration script.
+    #
+    # This script runs in the path `/sbin:bin:/usr/sbin:/usr/bin`.
+    #
+    # For information about notebook instance lifestyle configurations, see
+    # notebook-lifecycle-config.
+    #
+    # @note When making an API call, you may pass NotebookInstanceLifecycleHook
+    #   data as a hash:
+    #
+    #       {
+    #         content: "NotebookInstanceLifecycleConfigContent",
+    #       }
+    #
+    # @!attribute [rw] content
+    #   A base64-encoded string that contains a shell script for a notebook
+    #   instance lifecycle configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceLifecycleHook AWS API Documentation
+    #
+    class NotebookInstanceLifecycleHook < Struct.new(
+      :content)
+      include Aws::Structure
+    end
+
     # Provides summary information for an Amazon SageMaker notebook
     # instance.
     #
@@ -1943,6 +2264,14 @@ module Aws::SageMaker
     #   A timestamp that shows when the notebook instance was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name
+    #   The name of a notebook instance lifecycle configuration associated
+    #   with this notebook instance.
+    #
+    #   For information about notebook instance lifestyle configurations,
+    #   see notebook-lifecycle-config.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceSummary AWS API Documentation
     #
     class NotebookInstanceSummary < Struct.new(
@@ -1952,7 +2281,8 @@ module Aws::SageMaker
       :url,
       :instance_type,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :notebook_instance_lifecycle_config_name)
       include Aws::Structure
     end
 
@@ -2059,8 +2389,8 @@ module Aws::SageMaker
 
     # Describes weight and capacities for a production variant associated
     # with an endpoint. If you sent a request to the
-    # `UpdateWeightAndCapacities` API and the endpoint status is `Updating`,
-    # you get different desired and current values.
+    # `UpdateEndpointWeightsAndCapacities` API and the endpoint status is
+    # `Updating`, you get different desired and current values.
     #
     # @!attribute [rw] variant_name
     #   The name of the variant.
@@ -2072,7 +2402,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] desired_weight
     #   The requested weight, as specified in the
-    #   `UpdateWeightAndCapacities` request.
+    #   `UpdateEndpointWeightsAndCapacities` request.
     #   @return [Float]
     #
     # @!attribute [rw] current_instance_count
@@ -2080,8 +2410,8 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] desired_instance_count
-    #   The number of instances requested in the `UpdateWeightAndCapacities`
-    #   request.
+    #   The number of instances requested in the
+    #   `UpdateEndpointWeightsAndCapacities` request.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary AWS API Documentation
@@ -2482,7 +2812,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge
+    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge
     #         role_arn: "RoleArn",
     #       }
     #
@@ -2507,6 +2837,50 @@ module Aws::SageMaker
       :role_arn)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateNotebookInstanceLifecycleConfigInput
+    #   data as a hash:
+    #
+    #       {
+    #         notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #         on_create: [
+    #           {
+    #             content: "NotebookInstanceLifecycleConfigContent",
+    #           },
+    #         ],
+    #         on_start: [
+    #           {
+    #             content: "NotebookInstanceLifecycleConfigContent",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] on_create
+    #   The shell script that runs only once, when you create a notebook
+    #   instance
+    #   @return [Array<Types::NotebookInstanceLifecycleHook>]
+    #
+    # @!attribute [rw] on_start
+    #   The shell script that runs every time you start a notebook instance,
+    #   including when you create the notebook instance.
+    #   @return [Array<Types::NotebookInstanceLifecycleHook>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceLifecycleConfigInput AWS API Documentation
+    #
+    class UpdateNotebookInstanceLifecycleConfigInput < Struct.new(
+      :notebook_instance_lifecycle_config_name,
+      :on_create,
+      :on_start)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceLifecycleConfigOutput AWS API Documentation
+    #
+    class UpdateNotebookInstanceLifecycleConfigOutput < Aws::EmptyStructure; end
 
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceOutput AWS API Documentation
     #

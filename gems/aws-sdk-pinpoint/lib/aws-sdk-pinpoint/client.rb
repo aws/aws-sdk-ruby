@@ -1301,6 +1301,68 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Deletes an endpoint.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :endpoint_id
+    #
+    # @return [Types::DeleteEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteEndpointResponse#endpoint_response #endpoint_response} => Types::EndpointResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_endpoint({
+    #     application_id: "__string", # required
+    #     endpoint_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_response.address #=> String
+    #   resp.endpoint_response.application_id #=> String
+    #   resp.endpoint_response.attributes #=> Hash
+    #   resp.endpoint_response.attributes["__string"] #=> Array
+    #   resp.endpoint_response.attributes["__string"][0] #=> String
+    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoint_response.cohort_id #=> String
+    #   resp.endpoint_response.creation_date #=> String
+    #   resp.endpoint_response.demographic.app_version #=> String
+    #   resp.endpoint_response.demographic.locale #=> String
+    #   resp.endpoint_response.demographic.make #=> String
+    #   resp.endpoint_response.demographic.model #=> String
+    #   resp.endpoint_response.demographic.model_version #=> String
+    #   resp.endpoint_response.demographic.platform #=> String
+    #   resp.endpoint_response.demographic.platform_version #=> String
+    #   resp.endpoint_response.demographic.timezone #=> String
+    #   resp.endpoint_response.effective_date #=> String
+    #   resp.endpoint_response.endpoint_status #=> String
+    #   resp.endpoint_response.id #=> String
+    #   resp.endpoint_response.location.city #=> String
+    #   resp.endpoint_response.location.country #=> String
+    #   resp.endpoint_response.location.latitude #=> Float
+    #   resp.endpoint_response.location.longitude #=> Float
+    #   resp.endpoint_response.location.postal_code #=> String
+    #   resp.endpoint_response.location.region #=> String
+    #   resp.endpoint_response.metrics #=> Hash
+    #   resp.endpoint_response.metrics["__string"] #=> Float
+    #   resp.endpoint_response.opt_out #=> String
+    #   resp.endpoint_response.request_id #=> String
+    #   resp.endpoint_response.user.user_attributes #=> Hash
+    #   resp.endpoint_response.user.user_attributes["__string"] #=> Array
+    #   resp.endpoint_response.user.user_attributes["__string"][0] #=> String
+    #   resp.endpoint_response.user.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEndpoint AWS API Documentation
+    #
+    # @overload delete_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_endpoint(params = {}, options = {})
+      req = build_request(:delete_endpoint, params)
+      req.send_request(options)
+    end
+
     # Deletes the event stream for an app.
     #
     # @option params [required, String] :application_id
@@ -3679,6 +3741,7 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
     #           substitutions: {
     #             "__string" => ["__string"],
@@ -3842,6 +3905,7 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
     #           substitutions: {
     #             "__string" => ["__string"],
@@ -5068,7 +5132,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

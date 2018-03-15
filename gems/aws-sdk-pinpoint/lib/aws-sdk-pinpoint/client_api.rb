@@ -76,6 +76,8 @@ module Aws::Pinpoint
     DeleteCampaignResponse = Shapes::StructureShape.new(name: 'DeleteCampaignResponse')
     DeleteEmailChannelRequest = Shapes::StructureShape.new(name: 'DeleteEmailChannelRequest')
     DeleteEmailChannelResponse = Shapes::StructureShape.new(name: 'DeleteEmailChannelResponse')
+    DeleteEndpointRequest = Shapes::StructureShape.new(name: 'DeleteEndpointRequest')
+    DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
     DeleteEventStreamRequest = Shapes::StructureShape.new(name: 'DeleteEventStreamRequest')
     DeleteEventStreamResponse = Shapes::StructureShape.new(name: 'DeleteEventStreamResponse')
     DeleteGcmChannelRequest = Shapes::StructureShape.new(name: 'DeleteGcmChannelRequest')
@@ -690,6 +692,15 @@ module Aws::Pinpoint
     DeleteEmailChannelResponse.struct_class = Types::DeleteEmailChannelResponse
     DeleteEmailChannelResponse[:payload] = :email_channel_response
     DeleteEmailChannelResponse[:payload_member] = DeleteEmailChannelResponse.member(:email_channel_response)
+
+    DeleteEndpointRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    DeleteEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "endpoint-id"))
+    DeleteEndpointRequest.struct_class = Types::DeleteEndpointRequest
+
+    DeleteEndpointResponse.add_member(:endpoint_response, Shapes::ShapeRef.new(shape: EndpointResponse, required: true, location_name: "EndpointResponse"))
+    DeleteEndpointResponse.struct_class = Types::DeleteEndpointResponse
+    DeleteEndpointResponse[:payload] = :endpoint_response
+    DeleteEndpointResponse[:payload_member] = DeleteEndpointResponse.member(:endpoint_response)
 
     DeleteEventStreamRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteEventStreamRequest.struct_class = Types::DeleteEventStreamRequest
@@ -1348,6 +1359,7 @@ module Aws::Pinpoint
 
     SMSMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     SMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    SMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     SMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
     SMSMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
     SMSMessage.struct_class = Types::SMSMessage
@@ -1844,6 +1856,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/email"
         o.input = Shapes::ShapeRef.new(shape: DeleteEmailChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteEmailChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEndpoint"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apps/{application-id}/endpoints/{endpoint-id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEndpointResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
