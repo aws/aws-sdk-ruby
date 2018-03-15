@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.16 (2018-03-15)
+------------------
+
 * Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
 
 * Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
