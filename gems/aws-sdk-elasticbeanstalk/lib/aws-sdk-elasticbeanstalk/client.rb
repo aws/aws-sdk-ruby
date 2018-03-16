@@ -1298,6 +1298,27 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
+    # @return [Types::DescribeAccountAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountAttributesResult#resource_quotas #resource_quotas} => Types::ResourceQuotas
+    #
+    # @example Response structure
+    #
+    #   resp.resource_quotas.application_quota.maximum #=> Integer
+    #   resp.resource_quotas.application_version_quota.maximum #=> Integer
+    #   resp.resource_quotas.environment_quota.maximum #=> Integer
+    #   resp.resource_quotas.configuration_template_quota.maximum #=> Integer
+    #   resp.resource_quotas.custom_platform_quota.maximum #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeAccountAttributes AWS API Documentation
+    #
+    # @overload describe_account_attributes(params = {})
+    # @param [Hash] params ({})
+    def describe_account_attributes(params = {}, options = {})
+      req = build_request(:describe_account_attributes, params)
+      req.send_request(options)
+    end
+
     # Retrieve a list of application versions.
     #
     # @option params [String] :application_name
@@ -3949,7 +3970,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

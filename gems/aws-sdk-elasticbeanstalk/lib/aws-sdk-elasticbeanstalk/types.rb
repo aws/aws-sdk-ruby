@@ -1592,6 +1592,16 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_quotas
+    #   @return [Types::ResourceQuotas]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeAccountAttributesResult AWS API Documentation
+    #
+    class DescribeAccountAttributesResult < Struct.new(
+      :resource_quotas)
+      include Aws::Structure
+    end
+
     # Request to describe application versions.
     #
     # @note When making an API call, you may pass DescribeApplicationVersionsMessage
@@ -3498,6 +3508,42 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       :info_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] maximum
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuota AWS API Documentation
+    #
+    class ResourceQuota < Struct.new(
+      :maximum)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_quota
+    #   @return [Types::ResourceQuota]
+    #
+    # @!attribute [rw] application_version_quota
+    #   @return [Types::ResourceQuota]
+    #
+    # @!attribute [rw] environment_quota
+    #   @return [Types::ResourceQuota]
+    #
+    # @!attribute [rw] configuration_template_quota
+    #   @return [Types::ResourceQuota]
+    #
+    # @!attribute [rw] custom_platform_quota
+    #   @return [Types::ResourceQuota]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuotas AWS API Documentation
+    #
+    class ResourceQuotas < Struct.new(
+      :application_quota,
+      :application_version_quota,
+      :environment_quota,
+      :configuration_template_quota,
+      :custom_platform_quota)
       include Aws::Structure
     end
 
