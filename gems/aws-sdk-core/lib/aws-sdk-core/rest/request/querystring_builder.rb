@@ -34,6 +34,9 @@ module Aws
           when StringShape, BooleanShape, FloatShape, IntegerShape, StringShape
             param_name = shape_ref.location_name
             "#{param_name}=#{escape(param_value.to_s)}"
+          when TimestampShape
+            param_name = shape_ref.location_name
+            "#{param_name}=#{escape(param_value.utc.httpdate)}"
           when MapShape
             if StringShape === shape_ref.shape.value.shape
               query_map_of_string(param_value)
