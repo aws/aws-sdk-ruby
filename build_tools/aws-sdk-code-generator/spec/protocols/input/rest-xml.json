@@ -760,7 +760,7 @@
         },
         "serialized": {
           "body": "",
-          "uri": "/path?time=2015-01-25%2000%3A00%3A00%20-0800",
+          "uri": "/path?time=Sun%2C%2025%20Jan%202015%2008%3A00%3A00%20GMT",
           "headers": {}
         }
       }
