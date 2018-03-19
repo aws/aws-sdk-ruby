@@ -31,7 +31,7 @@ module Aws
         def build_part(shape_ref, param_value)
           case shape_ref.shape
           # supported scalar types
-          when StringShape, BooleanShape, FloatShape, IntegerShape, StringShape
+          when StringShape, BooleanShape, FloatShape, IntegerShape, StringShape, TimestampShape
             param_name = shape_ref.location_name
             "#{param_name}=#{escape(param_value.to_s)}"
           when MapShape

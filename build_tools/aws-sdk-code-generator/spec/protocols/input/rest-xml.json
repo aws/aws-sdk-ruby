@@ -723,6 +723,50 @@
     ]
   },
   {
+    "description": "Querystring contains timestamp",
+    "metadata": {
+      "protocol": "rest-xml",
+      "apiVersion": "2018-03-16"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Time": {
+            "shape": "TimestampShape",
+            "location": "querystring",
+            "locationName": "time"
+          }
+        }
+      },
+      "TimestampShape": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Time": 1422172800
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?time=2015-01-25%2000%3A00%3A00%20-0800",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
     "description": "Querystring list of strings",
     "metadata": {
       "protocol": "rest-xml",
