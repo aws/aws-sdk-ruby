@@ -8,6 +8,134 @@
 module Aws::ConfigService
   module Types
 
+    # The detailed configuration of a specified resource.
+    #
+    # @!attribute [rw] version
+    #   The version number of the resource configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The 12 digit AWS account ID associated with the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_item_capture_time
+    #   The time when the configuration recording was initiated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration_item_status
+    #   The configuration item status.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_state_id
+    #   An identifier that indicates the ordering of the configuration items
+    #   of a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of AWS resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource (for example., sg-xxxxxx).
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The custom name of the resource, if available.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The region where the resource resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone associated with the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_creation_time
+    #   The time stamp when the resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration
+    #   The description of the resource configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] supplementary_configuration
+    #   Configuration attributes that AWS Config returns for certain
+    #   resource types to supplement the information returned for the
+    #   configuration parameter.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BaseConfigurationItem AWS API Documentation
+    #
+    class BaseConfigurationItem < Struct.new(
+      :version,
+      :account_id,
+      :configuration_item_capture_time,
+      :configuration_item_status,
+      :configuration_state_id,
+      :arn,
+      :resource_type,
+      :resource_id,
+      :resource_name,
+      :aws_region,
+      :availability_zone,
+      :resource_creation_time,
+      :configuration,
+      :supplementary_configuration)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetResourceConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_keys: [ # required
+    #           {
+    #             resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution
+    #             resource_id: "ResourceId", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_keys
+    #   A list of resource keys to be processed with the current request.
+    #   Each element in the list consists of the resource type and resource
+    #   ID.
+    #   @return [Array<Types::ResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetResourceConfigRequest AWS API Documentation
+    #
+    class BatchGetResourceConfigRequest < Struct.new(
+      :resource_keys)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] base_configuration_items
+    #   A list that contains the current configuration of one or more
+    #   resources.
+    #   @return [Array<Types::BaseConfigurationItem>]
+    #
+    # @!attribute [rw] unprocessed_resource_keys
+    #   A list of resource keys that were not processed with the current
+    #   response. The unprocessesResourceKeys value is in the same form as
+    #   ResourceKeys, so the value can be directly provided to a subsequent
+    #   BatchGetResourceConfig operation. If there are no unprocessed
+    #   resource keys, the response contains an empty
+    #   unprocessedResourceKeys list.
+    #   @return [Array<Types::ResourceKey>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetResourceConfigResponse AWS API Documentation
+    #
+    class BatchGetResourceConfigResponse < Struct.new(
+      :base_configuration_items,
+      :unprocessed_resource_keys)
+      include Aws::Structure
+    end
+
     # Indicates whether an AWS resource or AWS Config rule is compliant and
     # provides the number of contributors that affect the compliance.
     #
@@ -1034,8 +1162,7 @@ module Aws::ConfigService
     # @!attribute [rw] compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `INSUFFICIENT_DATA`.
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] limit
@@ -2242,6 +2369,33 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # The details that identify a resource within AWS Config, including the
+    # resource type and resource ID.
+    #
+    # @note When making an API call, you may pass ResourceKey
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution
+    #         resource_id: "ResourceId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource (for example., sg-xxxxxx).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceKey AWS API Documentation
+    #
+    class ResourceKey < Struct.new(
+      :resource_type,
+      :resource_id)
+      include Aws::Structure
+    end
+
     # Defines which resources trigger an evaluation for an AWS Config rule.
     # The scope can include one or more resource types, a combination of a
     # tag key and value, or a combination of one resource type and one
@@ -2387,7 +2541,8 @@ module Aws::ConfigService
     #     evaluation when AWS Config delivers a configuration snapshot.
     #
     #   If you want your custom rule to be triggered by configuration
-    #   changes, specify both `ConfigurationItemChangeNotification` and
+    #   changes, specify two SourceDetail objects, one for
+    #   `ConfigurationItemChangeNotification` and one for
     #   `OversizedConfigurationItemChangeNotification`.
     #   @return [String]
     #
@@ -2400,6 +2555,11 @@ module Aws::ConfigService
     #   <note markdown="1"> By default, rules with a periodic trigger are evaluated every 24
     #   hours. To change the frequency, specify a valid value for the
     #   `MaximumExecutionFrequency` parameter.
+    #
+    #    Based on the valid value you choose, AWS Config runs evaluations
+    #   once for each valid value. For example, if you choose `Three_Hours`,
+    #   AWS Config runs evaluations once every three hours. In this case,
+    #   `Three_Hours` is the frequency of this rule.
     #
     #    </note>
     #   @return [String]

@@ -1313,7 +1313,7 @@ module Aws::Glue
     #         role_arn: "RoleArn", # required
     #         security_group_ids: ["GenericString"],
     #         subnet_id: "GenericString",
-    #         public_key: "GenericString", # required
+    #         public_key: "GenericString",
     #         number_of_nodes: 1,
     #         extra_python_libs_s3_path: "GenericString",
     #         extra_jars_s3_path: "GenericString",
@@ -2505,12 +2505,16 @@ module Aws::Glue
     #   The YARN endpoint address used by this DevEndpoint.
     #   @return [String]
     #
+    # @!attribute [rw] private_address
+    #   The private address used by this DevEndpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] zeppelin_remote_spark_interpreter_port
     #   The Apache Zeppelin port for the remote Apache Spark interpreter.
     #   @return [Integer]
     #
     # @!attribute [rw] public_address
-    #   The public address used by this DevEndpoint.
+    #   The public VPC address used by this DevEndpoint.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2580,6 +2584,7 @@ module Aws::Glue
       :security_group_ids,
       :subnet_id,
       :yarn_endpoint_address,
+      :private_address,
       :zeppelin_remote_spark_interpreter_port,
       :public_address,
       :status,

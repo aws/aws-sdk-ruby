@@ -48,6 +48,7 @@ module Aws::CloudWatchEvents
     ListRulesResponse = Shapes::StructureShape.new(name: 'ListRulesResponse')
     ListTargetsByRuleRequest = Shapes::StructureShape.new(name: 'ListTargetsByRuleRequest')
     ListTargetsByRuleResponse = Shapes::StructureShape.new(name: 'ListTargetsByRuleResponse')
+    MessageGroupId = Shapes::StringShape.new(name: 'MessageGroupId')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
     Principal = Shapes::StringShape.new(name: 'Principal')
@@ -85,6 +86,7 @@ module Aws::CloudWatchEvents
     RunCommandTargetValues = Shapes::ListShape.new(name: 'RunCommandTargetValues')
     RunCommandTargets = Shapes::ListShape.new(name: 'RunCommandTargets')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    SqsParameters = Shapes::StructureShape.new(name: 'SqsParameters')
     StatementId = Shapes::StringShape.new(name: 'StatementId')
     String = Shapes::StringShape.new(name: 'String')
     Target = Shapes::StructureShape.new(name: 'Target')
@@ -276,6 +278,9 @@ module Aws::CloudWatchEvents
 
     RunCommandTargets.member = Shapes::ShapeRef.new(shape: RunCommandTarget)
 
+    SqsParameters.add_member(:message_group_id, Shapes::ShapeRef.new(shape: MessageGroupId, location_name: "MessageGroupId"))
+    SqsParameters.struct_class = Types::SqsParameters
+
     Target.add_member(:id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "Id"))
     Target.add_member(:arn, Shapes::ShapeRef.new(shape: TargetArn, required: true, location_name: "Arn"))
     Target.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
@@ -286,6 +291,7 @@ module Aws::CloudWatchEvents
     Target.add_member(:run_command_parameters, Shapes::ShapeRef.new(shape: RunCommandParameters, location_name: "RunCommandParameters"))
     Target.add_member(:ecs_parameters, Shapes::ShapeRef.new(shape: EcsParameters, location_name: "EcsParameters"))
     Target.add_member(:batch_parameters, Shapes::ShapeRef.new(shape: BatchParameters, location_name: "BatchParameters"))
+    Target.add_member(:sqs_parameters, Shapes::ShapeRef.new(shape: SqsParameters, location_name: "SqsParameters"))
     Target.struct_class = Types::Target
 
     TargetIdList.member = Shapes::ShapeRef.new(shape: TargetId)

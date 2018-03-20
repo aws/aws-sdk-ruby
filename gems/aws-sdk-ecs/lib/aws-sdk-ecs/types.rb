@@ -130,13 +130,15 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] subnets
-    #   The subnets associated with the task or service.
+    #   The subnets associated with the task or service. There is a limit of
+    #   10 subnets able to be specified per AwsVpcConfiguration.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
     #   The security groups associated with the task or service. If you do
     #   not specify a security group, the default security group for the VPC
-    #   is used.
+    #   is used. There is a limit of 5 security groups able to be specified
+    #   per AwsVpcConfiguration.
     #   @return [Array<String>]
     #
     # @!attribute [rw] assign_public_ip
@@ -341,6 +343,14 @@ module Aws::ECS
     #             },
     #           ],
     #           init_process_enabled: false,
+    #           shared_memory_size: 1,
+    #           tmpfs: [
+    #             {
+    #               container_path: "String", # required
+    #               size: 1, # required
+    #               mount_options: ["String"],
+    #             },
+    #           ],
     #         },
     #         hostname: "String",
     #         user: "String",
@@ -1095,20 +1105,25 @@ module Aws::ECS
     #   @return [Types::VersionInfo]
     #
     # @!attribute [rw] remaining_resources
-    #   For most resource types, this parameter describes the remaining
-    #   resources of the container instance that are available for new
-    #   tasks. For port resource types, this parameter describes the ports
-    #   that are reserved by the Amazon ECS container agent and any
-    #   containers that have reserved port mappings; any port that is not
-    #   specified here is available for new tasks.
+    #   For CPU and memory resource types, this parameter describes the
+    #   remaining CPU and memory on the that has not already been allocated
+    #   to tasks (and is therefore available for new tasks). For port
+    #   resource types, this parameter describes the ports that were
+    #   reserved by the Amazon ECS container agent (at instance registration
+    #   time) and any task containers that have reserved port mappings on
+    #   the host (with the `host` or `bridge` network mode). Any port that
+    #   is not specified here is available for new tasks.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] registered_resources
-    #   For most resource types, this parameter describes the registered
-    #   resources on the container instance that are in use by current
-    #   tasks. For port resource types, this parameter describes the ports
-    #   that were reserved by the Amazon ECS container agent when it
-    #   registered the container instance with Amazon ECS.
+    #   For CPU and memory resource types, this parameter describes the
+    #   amount of each resource that was available on the container instance
+    #   when the container agent registered it with Amazon ECS; this value
+    #   represents the total amount of CPU and memory that can be allocated
+    #   on this container instance to tasks. For port resource types, this
+    #   parameter describes the ports that were reserved by the Amazon ECS
+    #   container agent when it registered the container instance with
+    #   Amazon ECS.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] status
@@ -2442,6 +2457,14 @@ module Aws::ECS
     #           },
     #         ],
     #         init_process_enabled: false,
+    #         shared_memory_size: 1,
+    #         tmpfs: [
+    #           {
+    #             container_path: "String", # required
+    #             size: 1, # required
+    #             mount_options: ["String"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] capabilities
@@ -2486,12 +2509,32 @@ module Aws::ECS
     #   [1]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
+    # @!attribute [rw] shared_memory_size
+    #   The value for the size of the `/dev/shm` volume. This parameter maps
+    #   to the `--shm-size` option to [docker run][1].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tmpfs
+    #   The container path, mount options, and size of the tmpfs mount. This
+    #   parameter maps to the `--tmpfs` option to [docker run][1].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Array<Types::Tmpfs>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LinuxParameters AWS API Documentation
     #
     class LinuxParameters < Struct.new(
       :capabilities,
       :devices,
-      :init_process_enabled)
+      :init_process_enabled,
+      :shared_memory_size,
+      :tmpfs)
       include Aws::Structure
     end
 
@@ -3726,6 +3769,14 @@ module Aws::ECS
     #                 },
     #               ],
     #               init_process_enabled: false,
+    #               shared_memory_size: 1,
+    #               tmpfs: [
+    #                 {
+    #                   container_path: "String", # required
+    #                   size: 1, # required
+    #                   mount_options: ["String"],
+    #                 },
+    #               ],
     #             },
     #             hostname: "String",
     #             user: "String",
@@ -5248,6 +5299,45 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The container path, mount options, and size of the tmpfs mount.
+    #
+    # @note When making an API call, you may pass Tmpfs
+    #   data as a hash:
+    #
+    #       {
+    #         container_path: "String", # required
+    #         size: 1, # required
+    #         mount_options: ["String"],
+    #       }
+    #
+    # @!attribute [rw] container_path
+    #   The absolute file path where the tmpfs volume will be mounted.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The size of the tmpfs volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mount_options
+    #   The list of tmpfs volume mount options.
+    #
+    #   Valid values: `"defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev"
+    #   | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" |
+    #   "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" |
+    #   "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" |
+    #   "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" |
+    #   "relatime" | "norelatime" | "strictatime" | "nostrictatime"`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Tmpfs AWS API Documentation
+    #
+    class Tmpfs < Struct.new(
+      :container_path,
+      :size,
+      :mount_options)
+      include Aws::Structure
+    end
+
     # The `ulimit` settings to pass to the container.
     #
     # @note When making an API call, you may pass Ulimit
@@ -5448,8 +5538,12 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] force_new_deployment
-    #   Whether to force a new deployment of the service. By default,
-    #   `--no-force-new-deployment` is assumed unless otherwise specified.
+    #   Whether to force a new deployment of the service. Deployments are
+    #   not forced by default. You can use this option to trigger a new
+    #   deployment with no service definition changes. For example, you can
+    #   update a service's tasks to use a newer Docker image with the same
+    #   image/tag combination (`my_image:latest`) or to roll Fargate tasks
+    #   onto a newer platform version.
     #   @return [Boolean]
     #
     # @!attribute [rw] health_check_grace_period_seconds

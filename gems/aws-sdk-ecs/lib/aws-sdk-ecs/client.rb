@@ -1080,6 +1080,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
     #   resp.task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.task_definition.container_definitions[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1673,6 +1679,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
     #   resp.task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.task_definition.container_definitions[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -3109,6 +3121,14 @@ module Aws::ECS
     #             },
     #           ],
     #           init_process_enabled: false,
+    #           shared_memory_size: 1,
+    #           tmpfs: [
+    #             {
+    #               container_path: "String", # required
+    #               size: 1, # required
+    #               mount_options: ["String"],
+    #             },
+    #           ],
     #         },
     #         hostname: "String",
     #         user: "String",
@@ -3209,6 +3229,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
     #   resp.task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.task_definition.container_definitions[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -4228,8 +4254,21 @@ module Aws::ECS
     # definition in a service by specifying the cluster that the service is
     # running in and a new `desiredCount` parameter.
     #
-    # You can use UpdateService to modify your task definition and deploy a
-    # new version of your service.
+    # If you have updated the Docker image of your application, you can
+    # create a new task definition with that image and deploy it to your
+    # service. The service scheduler uses the minimum healthy percent and
+    # maximum percent parameters (in the service's deployment
+    # configuration) to determine the deployment strategy.
+    #
+    # <note markdown="1"> If your updated Docker image uses the same tag as what is in the
+    # existing task definition for your service (for example,
+    # `my_image:latest`), you do not need to create a new revision of your
+    # task definition. You can update the service using the
+    # `forceNewDeployment` option. The new tasks launched by the deployment
+    # pull the current image/tag combination from your repository when they
+    # start.
+    #
+    #  </note>
     #
     # You can also update the deployment configuration of a service. When a
     # deployment is triggered by updating the task definition of a service,
@@ -4344,8 +4383,12 @@ module Aws::ECS
     #   The platform version you want to update your service to run.
     #
     # @option params [Boolean] :force_new_deployment
-    #   Whether to force a new deployment of the service. By default,
-    #   `--no-force-new-deployment` is assumed unless otherwise specified.
+    #   Whether to force a new deployment of the service. Deployments are not
+    #   forced by default. You can use this option to trigger a new deployment
+    #   with no service definition changes. For example, you can update a
+    #   service's tasks to use a newer Docker image with the same image/tag
+    #   combination (`my_image:latest`) or to roll Fargate tasks onto a newer
+    #   platform version.
     #
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
@@ -4489,7 +4532,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

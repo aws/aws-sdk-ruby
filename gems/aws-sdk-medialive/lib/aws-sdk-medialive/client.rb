@@ -1404,6 +1404,9 @@ module Aws::MediaLive
     #
     #   resp.security_group.arn #=> String
     #   resp.security_group.id #=> String
+    #   resp.security_group.inputs #=> Array
+    #   resp.security_group.inputs[0] #=> String
+    #   resp.security_group.state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
     #   resp.security_group.whitelist_rules #=> Array
     #   resp.security_group.whitelist_rules[0].cidr #=> String
     #
@@ -2495,6 +2498,8 @@ module Aws::MediaLive
     #
     #   * {Types::DescribeInputSecurityGroupResponse#arn #arn} => String
     #   * {Types::DescribeInputSecurityGroupResponse#id #id} => String
+    #   * {Types::DescribeInputSecurityGroupResponse#inputs #inputs} => Array&lt;String&gt;
+    #   * {Types::DescribeInputSecurityGroupResponse#state #state} => String
     #   * {Types::DescribeInputSecurityGroupResponse#whitelist_rules #whitelist_rules} => Array&lt;Types::InputWhitelistRule&gt;
     #
     # @example Request syntax with placeholder values
@@ -2507,6 +2512,9 @@ module Aws::MediaLive
     #
     #   resp.arn #=> String
     #   resp.id #=> String
+    #   resp.inputs #=> Array
+    #   resp.inputs[0] #=> String
+    #   resp.state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
     #   resp.whitelist_rules #=> Array
     #   resp.whitelist_rules[0].cidr #=> String
     #
@@ -2624,6 +2632,9 @@ module Aws::MediaLive
     #   resp.input_security_groups #=> Array
     #   resp.input_security_groups[0].arn #=> String
     #   resp.input_security_groups[0].id #=> String
+    #   resp.input_security_groups[0].inputs #=> Array
+    #   resp.input_security_groups[0].inputs[0] #=> String
+    #   resp.input_security_groups[0].state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
     #   resp.input_security_groups[0].whitelist_rules #=> Array
     #   resp.input_security_groups[0].whitelist_rules[0].cidr #=> String
     #   resp.next_token #=> String
@@ -3672,6 +3683,8 @@ module Aws::MediaLive
     #
     # @option params [Types::EncoderSettings] :encoder_settings
     #
+    # @option params [Array<Types::InputAttachment>] :input_attachments
+    #
     # @option params [Types::InputSpecification] :input_specification
     #
     # @option params [String] :name
@@ -4274,6 +4287,82 @@ module Aws::MediaLive
     #         },
     #       ],
     #     },
+    #     input_attachments: [
+    #       {
+    #         input_id: "__string",
+    #         input_settings: {
+    #           audio_selectors: [
+    #             {
+    #               name: "__string", # required
+    #               selector_settings: {
+    #                 audio_language_selection: {
+    #                   language_code: "__string", # required
+    #                   language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
+    #                 },
+    #                 audio_pid_selection: {
+    #                   pid: 1, # required
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           caption_selectors: [
+    #             {
+    #               language_code: "__string",
+    #               name: "__string", # required
+    #               selector_settings: {
+    #                 arib_source_settings: {
+    #                 },
+    #                 dvb_sub_source_settings: {
+    #                   pid: 1,
+    #                 },
+    #                 embedded_source_settings: {
+    #                   convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
+    #                   scte_20_detection: "AUTO", # accepts AUTO, OFF
+    #                   source_608_channel_number: 1,
+    #                   source_608_track_number: 1,
+    #                 },
+    #                 scte_20_source_settings: {
+    #                   convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
+    #                   source_608_channel_number: 1,
+    #                 },
+    #                 scte_27_source_settings: {
+    #                   pid: 1,
+    #                 },
+    #                 teletext_source_settings: {
+    #                   page_number: "__string",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #           deblock_filter: "DISABLED", # accepts DISABLED, ENABLED
+    #           denoise_filter: "DISABLED", # accepts DISABLED, ENABLED
+    #           filter_strength: 1,
+    #           input_filter: "AUTO", # accepts AUTO, DISABLED, FORCED
+    #           network_input_settings: {
+    #             hls_input_settings: {
+    #               bandwidth: 1,
+    #               buffer_segments: 1,
+    #               retries: 1,
+    #               retry_interval: 1,
+    #             },
+    #             server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
+    #           },
+    #           source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
+    #           video_selector: {
+    #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
+    #             color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
+    #             selector_settings: {
+    #               video_selector_pid: {
+    #                 pid: 1,
+    #               },
+    #               video_selector_program_id: {
+    #                 program_id: 1,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       },
+    #     ],
     #     input_specification: {
     #       codec: "MPEG2", # accepts MPEG2, AVC, HEVC
     #       maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
@@ -4748,6 +4837,111 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Updates an input.
+    #
+    # @option params [Array<Types::InputDestinationRequest>] :destinations
+    #
+    # @option params [required, String] :input_id
+    #
+    # @option params [Array<String>] :input_security_groups
+    #
+    # @option params [String] :name
+    #
+    # @option params [Array<Types::InputSourceRequest>] :sources
+    #
+    # @return [Types::UpdateInputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInputResponse#input #input} => Types::Input
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_input({
+    #     destinations: [
+    #       {
+    #         stream_name: "__string",
+    #       },
+    #     ],
+    #     input_id: "__string", # required
+    #     input_security_groups: ["__string"],
+    #     name: "__string",
+    #     sources: [
+    #       {
+    #         password_param: "__string",
+    #         url: "__string",
+    #         username: "__string",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.input.arn #=> String
+    #   resp.input.attached_channels #=> Array
+    #   resp.input.attached_channels[0] #=> String
+    #   resp.input.destinations #=> Array
+    #   resp.input.destinations[0].ip #=> String
+    #   resp.input.destinations[0].port #=> String
+    #   resp.input.destinations[0].url #=> String
+    #   resp.input.id #=> String
+    #   resp.input.name #=> String
+    #   resp.input.security_groups #=> Array
+    #   resp.input.security_groups[0] #=> String
+    #   resp.input.sources #=> Array
+    #   resp.input.sources[0].password_param #=> String
+    #   resp.input.sources[0].url #=> String
+    #   resp.input.sources[0].username #=> String
+    #   resp.input.state #=> String, one of "CREATING", "DETACHED", "ATTACHED", "DELETING", "DELETED"
+    #   resp.input.type #=> String, one of "UDP_PUSH", "RTP_PUSH", "RTMP_PUSH", "RTMP_PULL", "URL_PULL"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
+    #
+    # @overload update_input(params = {})
+    # @param [Hash] params ({})
+    def update_input(params = {}, options = {})
+      req = build_request(:update_input, params)
+      req.send_request(options)
+    end
+
+    # Update an Input Security Group's Whilelists.
+    #
+    # @option params [required, String] :input_security_group_id
+    #
+    # @option params [Array<Types::InputWhitelistRuleCidr>] :whitelist_rules
+    #
+    # @return [Types::UpdateInputSecurityGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInputSecurityGroupResponse#security_group #security_group} => Types::InputSecurityGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_input_security_group({
+    #     input_security_group_id: "__string", # required
+    #     whitelist_rules: [
+    #       {
+    #         cidr: "__string",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.security_group.arn #=> String
+    #   resp.security_group.id #=> String
+    #   resp.security_group.inputs #=> Array
+    #   resp.security_group.inputs[0] #=> String
+    #   resp.security_group.state #=> String, one of "IDLE", "IN_USE", "UPDATING", "DELETED"
+    #   resp.security_group.whitelist_rules #=> Array
+    #   resp.security_group.whitelist_rules[0].cidr #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputSecurityGroup AWS API Documentation
+    #
+    # @overload update_input_security_group(params = {})
+    # @param [Hash] params ({})
+    def update_input_security_group(params = {}, options = {})
+      req = build_request(:update_input_security_group, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4761,7 +4955,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2885,6 +2885,12 @@ module Aws::MediaLive
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @!attribute [rw] inputs
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   @return [String]
+    #
     # @!attribute [rw] whitelist_rules
     #   @return [Array<Types::InputWhitelistRule>]
     #
@@ -2893,6 +2899,8 @@ module Aws::MediaLive
     class DescribeInputSecurityGroupResponse < Struct.new(
       :arn,
       :id,
+      :inputs,
+      :state,
       :whitelist_rules)
       include Aws::Structure
     end
@@ -5457,6 +5465,14 @@ module Aws::MediaLive
     #   The Id of the Input Security Group
     #   @return [String]
     #
+    # @!attribute [rw] inputs
+    #   The list of inputs currently using this Input Security Group.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] state
+    #   The current state of the Input Security Group.
+    #   @return [String]
+    #
     # @!attribute [rw] whitelist_rules
     #   Whitelist rules and their sync status
     #   @return [Array<Types::InputWhitelistRule>]
@@ -5466,6 +5482,8 @@ module Aws::MediaLive
     class InputSecurityGroup < Struct.new(
       :arn,
       :id,
+      :inputs,
+      :state,
       :whitelist_rules)
       include Aws::Structure
     end
@@ -5731,7 +5749,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] cidr
-    #   The IPv4 CIDR to whitelist
+    #   The IPv4 CIDR to whitelist.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InputWhitelistRuleCidr AWS API Documentation
@@ -8431,6 +8449,9 @@ module Aws::MediaLive
     #   The encoder settings for this channel.
     #   @return [Types::EncoderSettings]
     #
+    # @!attribute [rw] input_attachments
+    #   @return [Array<Types::InputAttachment>]
+    #
     # @!attribute [rw] input_specification
     #   Specification of input for this channel (max. bitrate, resolution,
     #   codec, etc.)
@@ -8451,6 +8472,7 @@ module Aws::MediaLive
     class UpdateChannel < Struct.new(
       :destinations,
       :encoder_settings,
+      :input_attachments,
       :input_specification,
       :name,
       :role_arn)
@@ -9050,6 +9072,82 @@ module Aws::MediaLive
     #             },
     #           ],
     #         },
+    #         input_attachments: [
+    #           {
+    #             input_id: "__string",
+    #             input_settings: {
+    #               audio_selectors: [
+    #                 {
+    #                   name: "__string", # required
+    #                   selector_settings: {
+    #                     audio_language_selection: {
+    #                       language_code: "__string", # required
+    #                       language_selection_policy: "LOOSE", # accepts LOOSE, STRICT
+    #                     },
+    #                     audio_pid_selection: {
+    #                       pid: 1, # required
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               caption_selectors: [
+    #                 {
+    #                   language_code: "__string",
+    #                   name: "__string", # required
+    #                   selector_settings: {
+    #                     arib_source_settings: {
+    #                     },
+    #                     dvb_sub_source_settings: {
+    #                       pid: 1,
+    #                     },
+    #                     embedded_source_settings: {
+    #                       convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
+    #                       scte_20_detection: "AUTO", # accepts AUTO, OFF
+    #                       source_608_channel_number: 1,
+    #                       source_608_track_number: 1,
+    #                     },
+    #                     scte_20_source_settings: {
+    #                       convert_608_to_708: "DISABLED", # accepts DISABLED, UPCONVERT
+    #                       source_608_channel_number: 1,
+    #                     },
+    #                     scte_27_source_settings: {
+    #                       pid: 1,
+    #                     },
+    #                     teletext_source_settings: {
+    #                       page_number: "__string",
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #               deblock_filter: "DISABLED", # accepts DISABLED, ENABLED
+    #               denoise_filter: "DISABLED", # accepts DISABLED, ENABLED
+    #               filter_strength: 1,
+    #               input_filter: "AUTO", # accepts AUTO, DISABLED, FORCED
+    #               network_input_settings: {
+    #                 hls_input_settings: {
+    #                   bandwidth: 1,
+    #                   buffer_segments: 1,
+    #                   retries: 1,
+    #                   retry_interval: 1,
+    #                 },
+    #                 server_validation: "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", # accepts CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME, CHECK_CRYPTOGRAPHY_ONLY
+    #               },
+    #               source_end_behavior: "CONTINUE", # accepts CONTINUE, LOOP
+    #               video_selector: {
+    #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709
+    #                 color_space_usage: "FALLBACK", # accepts FALLBACK, FORCE
+    #                 selector_settings: {
+    #                   video_selector_pid: {
+    #                     pid: 1,
+    #                   },
+    #                   video_selector_program_id: {
+    #                     program_id: 1,
+    #                   },
+    #                 },
+    #               },
+    #             },
+    #           },
+    #         ],
     #         input_specification: {
     #           codec: "MPEG2", # accepts MPEG2, AVC, HEVC
     #           maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
@@ -9068,6 +9166,9 @@ module Aws::MediaLive
     # @!attribute [rw] encoder_settings
     #   @return [Types::EncoderSettings]
     #
+    # @!attribute [rw] input_attachments
+    #   @return [Array<Types::InputAttachment>]
+    #
     # @!attribute [rw] input_specification
     #   @return [Types::InputSpecification]
     #
@@ -9083,6 +9184,7 @@ module Aws::MediaLive
       :channel_id,
       :destinations,
       :encoder_settings,
+      :input_attachments,
       :input_specification,
       :name,
       :role_arn)
@@ -9108,6 +9210,149 @@ module Aws::MediaLive
     #
     class UpdateChannelResultModel < Struct.new(
       :channel)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destinations
+    #   Destination settings for PUSH type inputs.
+    #   @return [Array<Types::InputDestinationRequest>]
+    #
+    # @!attribute [rw] input_security_groups
+    #   A list of security groups referenced by IDs to attach to the input.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   Name of the input.
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   The source URLs for a PULL-type input. Every PULL type input needs
+    #   exactly two source URLs for redundancy. Only specify sources for
+    #   PULL type Inputs. Leave Destinations empty.
+    #   @return [Array<Types::InputSourceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInput AWS API Documentation
+    #
+    class UpdateInput < Struct.new(
+      :destinations,
+      :input_security_groups,
+      :name,
+      :sources)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateInputRequest
+    #   data as a hash:
+    #
+    #       {
+    #         destinations: [
+    #           {
+    #             stream_name: "__string",
+    #           },
+    #         ],
+    #         input_id: "__string", # required
+    #         input_security_groups: ["__string"],
+    #         name: "__string",
+    #         sources: [
+    #           {
+    #             password_param: "__string",
+    #             url: "__string",
+    #             username: "__string",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] destinations
+    #   @return [Array<Types::InputDestinationRequest>]
+    #
+    # @!attribute [rw] input_id
+    #   @return [String]
+    #
+    # @!attribute [rw] input_security_groups
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] sources
+    #   @return [Array<Types::InputSourceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputRequest AWS API Documentation
+    #
+    class UpdateInputRequest < Struct.new(
+      :destinations,
+      :input_id,
+      :input_security_groups,
+      :name,
+      :sources)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] input
+    #   @return [Types::Input]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputResponse AWS API Documentation
+    #
+    class UpdateInputResponse < Struct.new(
+      :input)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] input
+    #   @return [Types::Input]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputResultModel AWS API Documentation
+    #
+    class UpdateInputResultModel < Struct.new(
+      :input)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateInputSecurityGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_security_group_id: "__string", # required
+    #         whitelist_rules: [
+    #           {
+    #             cidr: "__string",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] input_security_group_id
+    #   @return [String]
+    #
+    # @!attribute [rw] whitelist_rules
+    #   @return [Array<Types::InputWhitelistRuleCidr>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputSecurityGroupRequest AWS API Documentation
+    #
+    class UpdateInputSecurityGroupRequest < Struct.new(
+      :input_security_group_id,
+      :whitelist_rules)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_group
+    #   An Input Security Group
+    #   @return [Types::InputSecurityGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputSecurityGroupResponse AWS API Documentation
+    #
+    class UpdateInputSecurityGroupResponse < Struct.new(
+      :security_group)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_group
+    #   An Input Security Group
+    #   @return [Types::InputSecurityGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/UpdateInputSecurityGroupResultModel AWS API Documentation
+    #
+    class UpdateInputSecurityGroupResultModel < Struct.new(
+      :security_group)
       include Aws::Structure
     end
 

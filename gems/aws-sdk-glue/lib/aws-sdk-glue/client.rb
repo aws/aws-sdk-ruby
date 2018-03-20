@@ -785,7 +785,7 @@ module Aws::Glue
     # @option params [String] :subnet_id
     #   The subnet ID for the new DevEndpoint to use.
     #
-    # @option params [required, String] :public_key
+    # @option params [String] :public_key
     #   The public key to use for authentication.
     #
     # @option params [Integer] :number_of_nodes
@@ -833,7 +833,7 @@ module Aws::Glue
     #     role_arn: "RoleArn", # required
     #     security_group_ids: ["GenericString"],
     #     subnet_id: "GenericString",
-    #     public_key: "GenericString", # required
+    #     public_key: "GenericString",
     #     number_of_nodes: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
@@ -2182,6 +2182,7 @@ module Aws::Glue
     #   resp.dev_endpoint.security_group_ids[0] #=> String
     #   resp.dev_endpoint.subnet_id #=> String
     #   resp.dev_endpoint.yarn_endpoint_address #=> String
+    #   resp.dev_endpoint.private_address #=> String
     #   resp.dev_endpoint.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
@@ -2234,6 +2235,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].security_group_ids[0] #=> String
     #   resp.dev_endpoints[0].subnet_id #=> String
     #   resp.dev_endpoints[0].yarn_endpoint_address #=> String
+    #   resp.dev_endpoints[0].private_address #=> String
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
@@ -4265,7 +4267,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

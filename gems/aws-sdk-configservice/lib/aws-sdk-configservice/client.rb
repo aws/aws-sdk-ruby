@@ -155,6 +155,70 @@ module Aws::ConfigService
 
     # @!group API Operations
 
+    # Returns the current configuration for one or more requested resources.
+    # The operation also returns a list of resources that are not processed
+    # in the current request. If there are no unprocessed resources, the
+    # operation returns an empty unprocessedResourceKeys list.
+    #
+    # <note markdown="1"> * The API does not return results for deleted resources.
+    #
+    # * The API does not return any tags for the requested resources. This
+    #   information is filtered out of the supplementaryConfiguration
+    #   section of the API response.
+    #
+    #  </note>
+    #
+    # @option params [required, Array<Types::ResourceKey>] :resource_keys
+    #   A list of resource keys to be processed with the current request. Each
+    #   element in the list consists of the resource type and resource ID.
+    #
+    # @return [Types::BatchGetResourceConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetResourceConfigResponse#base_configuration_items #base_configuration_items} => Array&lt;Types::BaseConfigurationItem&gt;
+    #   * {Types::BatchGetResourceConfigResponse#unprocessed_resource_keys #unprocessed_resource_keys} => Array&lt;Types::ResourceKey&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_resource_config({
+    #     resource_keys: [ # required
+    #       {
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution
+    #         resource_id: "ResourceId", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.base_configuration_items #=> Array
+    #   resp.base_configuration_items[0].version #=> String
+    #   resp.base_configuration_items[0].account_id #=> String
+    #   resp.base_configuration_items[0].configuration_item_capture_time #=> Time
+    #   resp.base_configuration_items[0].configuration_item_status #=> String, one of "OK", "ResourceDiscovered", "ResourceNotRecorded", "ResourceDeleted", "ResourceDeletedNotRecorded"
+    #   resp.base_configuration_items[0].configuration_state_id #=> String
+    #   resp.base_configuration_items[0].arn #=> String
+    #   resp.base_configuration_items[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution"
+    #   resp.base_configuration_items[0].resource_id #=> String
+    #   resp.base_configuration_items[0].resource_name #=> String
+    #   resp.base_configuration_items[0].aws_region #=> String
+    #   resp.base_configuration_items[0].availability_zone #=> String
+    #   resp.base_configuration_items[0].resource_creation_time #=> Time
+    #   resp.base_configuration_items[0].configuration #=> String
+    #   resp.base_configuration_items[0].supplementary_configuration #=> Hash
+    #   resp.base_configuration_items[0].supplementary_configuration["SupplementaryConfigurationName"] #=> String
+    #   resp.unprocessed_resource_keys #=> Array
+    #   resp.unprocessed_resource_keys[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution"
+    #   resp.unprocessed_resource_keys[0].resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetResourceConfig AWS API Documentation
+    #
+    # @overload batch_get_resource_config(params = {})
+    # @param [Hash] params ({})
+    def batch_get_resource_config(params = {}, options = {})
+      req = build_request(:batch_get_resource_config, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified AWS Config rule and all of its evaluation
     # results.
     #
@@ -423,8 +487,7 @@ module Aws::ConfigService
     # @option params [Array<String>] :compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `INSUFFICIENT_DATA`.
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
     #
     # @option params [Integer] :limit
     #   The maximum number of evaluation results returned on each page. The
@@ -1597,7 +1660,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

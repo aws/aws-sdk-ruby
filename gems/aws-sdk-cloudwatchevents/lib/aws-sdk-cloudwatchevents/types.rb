@@ -764,6 +764,9 @@ module Aws::CloudWatchEvents
     #                 attempts: 1,
     #               },
     #             },
+    #             sqs_parameters: {
+    #               message_group_id: "MessageGroupId",
+    #             },
     #           },
     #         ],
     #       }
@@ -1016,6 +1019,27 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # This structure includes the custom parameter to be used when the
+    # target is an SQS FIFO queue.
+    #
+    # @note When making an API call, you may pass SqsParameters
+    #   data as a hash:
+    #
+    #       {
+    #         message_group_id: "MessageGroupId",
+    #       }
+    #
+    # @!attribute [rw] message_group_id
+    #   The FIFO message group ID to use as the target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/SqsParameters AWS API Documentation
+    #
+    class SqsParameters < Struct.new(
+      :message_group_id)
+      include Aws::Structure
+    end
+
     # Targets are the resources to be invoked when a rule is triggered.
     # Target types include EC2 instances, AWS Lambda functions, Amazon
     # Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines,
@@ -1060,6 +1084,9 @@ module Aws::CloudWatchEvents
     #           retry_strategy: {
     #             attempts: 1,
     #           },
+    #         },
+    #         sqs_parameters: {
+    #           message_group_id: "MessageGroupId",
     #         },
     #       }
     #
@@ -1137,6 +1164,11 @@ module Aws::CloudWatchEvents
     #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/jobs.html
     #   @return [Types::BatchParameters]
     #
+    # @!attribute [rw] sqs_parameters
+    #   Contains the message group ID to use when the target is a FIFO
+    #   queue.
+    #   @return [Types::SqsParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Target AWS API Documentation
     #
     class Target < Struct.new(
@@ -1149,7 +1181,8 @@ module Aws::CloudWatchEvents
       :kinesis_parameters,
       :run_command_parameters,
       :ecs_parameters,
-      :batch_parameters)
+      :batch_parameters,
+      :sqs_parameters)
       include Aws::Structure
     end
 

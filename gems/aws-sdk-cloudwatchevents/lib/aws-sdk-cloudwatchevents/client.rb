@@ -440,6 +440,7 @@ module Aws::CloudWatchEvents
     #   resp.targets[0].batch_parameters.job_name #=> String
     #   resp.targets[0].batch_parameters.array_properties.size #=> Integer
     #   resp.targets[0].batch_parameters.retry_strategy.attempts #=> Integer
+    #   resp.targets[0].sqs_parameters.message_group_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule AWS API Documentation
@@ -656,7 +657,7 @@ module Aws::CloudWatchEvents
     #
     # * Amazon SNS topics
     #
-    # * Amazon SQS queues
+    # * Amazon SQS queues, including FIFO queues
     #
     # * The default event bus of another AWS account
     #
@@ -782,6 +783,9 @@ module Aws::CloudWatchEvents
     #           retry_strategy: {
     #             attempts: 1,
     #           },
+    #         },
+    #         sqs_parameters: {
+    #           message_group_id: "MessageGroupId",
     #         },
     #       },
     #     ],
@@ -934,7 +938,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

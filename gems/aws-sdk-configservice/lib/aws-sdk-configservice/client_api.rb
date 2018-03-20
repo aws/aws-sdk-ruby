@@ -16,7 +16,11 @@ module Aws::ConfigService
     AllSupported = Shapes::BooleanShape.new(name: 'AllSupported')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
+    BaseConfigurationItem = Shapes::StructureShape.new(name: 'BaseConfigurationItem')
+    BaseConfigurationItems = Shapes::ListShape.new(name: 'BaseConfigurationItems')
     BaseResourceId = Shapes::StringShape.new(name: 'BaseResourceId')
+    BatchGetResourceConfigRequest = Shapes::StructureShape.new(name: 'BatchGetResourceConfigRequest')
+    BatchGetResourceConfigResponse = Shapes::StructureShape.new(name: 'BatchGetResourceConfigResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     ChronologicalOrder = Shapes::StringShape.new(name: 'ChronologicalOrder')
@@ -164,6 +168,8 @@ module Aws::ConfigService
     ResourceIdentifier = Shapes::StructureShape.new(name: 'ResourceIdentifier')
     ResourceIdentifierList = Shapes::ListShape.new(name: 'ResourceIdentifierList')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
+    ResourceKey = Shapes::StructureShape.new(name: 'ResourceKey')
+    ResourceKeys = Shapes::ListShape.new(name: 'ResourceKeys')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotDiscoveredException = Shapes::StructureShape.new(name: 'ResourceNotDiscoveredException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -190,6 +196,31 @@ module Aws::ConfigService
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::StringShape.new(name: 'Version')
+
+    BaseConfigurationItem.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
+    BaseConfigurationItem.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    BaseConfigurationItem.add_member(:configuration_item_capture_time, Shapes::ShapeRef.new(shape: ConfigurationItemCaptureTime, location_name: "configurationItemCaptureTime"))
+    BaseConfigurationItem.add_member(:configuration_item_status, Shapes::ShapeRef.new(shape: ConfigurationItemStatus, location_name: "configurationItemStatus"))
+    BaseConfigurationItem.add_member(:configuration_state_id, Shapes::ShapeRef.new(shape: ConfigurationStateId, location_name: "configurationStateId"))
+    BaseConfigurationItem.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "arn"))
+    BaseConfigurationItem.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    BaseConfigurationItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "resourceId"))
+    BaseConfigurationItem.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "resourceName"))
+    BaseConfigurationItem.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "awsRegion"))
+    BaseConfigurationItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "availabilityZone"))
+    BaseConfigurationItem.add_member(:resource_creation_time, Shapes::ShapeRef.new(shape: ResourceCreationTime, location_name: "resourceCreationTime"))
+    BaseConfigurationItem.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
+    BaseConfigurationItem.add_member(:supplementary_configuration, Shapes::ShapeRef.new(shape: SupplementaryConfiguration, location_name: "supplementaryConfiguration"))
+    BaseConfigurationItem.struct_class = Types::BaseConfigurationItem
+
+    BaseConfigurationItems.member = Shapes::ShapeRef.new(shape: BaseConfigurationItem)
+
+    BatchGetResourceConfigRequest.add_member(:resource_keys, Shapes::ShapeRef.new(shape: ResourceKeys, required: true, location_name: "resourceKeys"))
+    BatchGetResourceConfigRequest.struct_class = Types::BatchGetResourceConfigRequest
+
+    BatchGetResourceConfigResponse.add_member(:base_configuration_items, Shapes::ShapeRef.new(shape: BaseConfigurationItems, location_name: "baseConfigurationItems"))
+    BatchGetResourceConfigResponse.add_member(:unprocessed_resource_keys, Shapes::ShapeRef.new(shape: ResourceKeys, location_name: "unprocessedResourceKeys"))
+    BatchGetResourceConfigResponse.struct_class = Types::BatchGetResourceConfigResponse
 
     Compliance.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
     Compliance.add_member(:compliance_contributor_count, Shapes::ShapeRef.new(shape: ComplianceContributorCount, location_name: "ComplianceContributorCount"))
@@ -559,6 +590,12 @@ module Aws::ConfigService
 
     ResourceIdentifierList.member = Shapes::ShapeRef.new(shape: ResourceIdentifier)
 
+    ResourceKey.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    ResourceKey.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
+    ResourceKey.struct_class = Types::ResourceKey
+
+    ResourceKeys.member = Shapes::ShapeRef.new(shape: ResourceKey)
+
     ResourceTypeList.member = Shapes::ShapeRef.new(shape: ResourceType)
 
     ResourceTypes.member = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
@@ -612,6 +649,16 @@ module Aws::ConfigService
         "signatureVersion" => "v4",
         "targetPrefix" => "StarlingDoveService",
       }
+
+      api.add_operation(:batch_get_resource_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetResourceConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetResourceConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetResourceConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
+      end)
 
       api.add_operation(:delete_config_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteConfigRule"

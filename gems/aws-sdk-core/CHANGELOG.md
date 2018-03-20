@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.17.1 (2018-03-20)
+------------------
+
 * Issue - Support timestamp shape in querystring
 
 3.17.0 (2018-02-27)

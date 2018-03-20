@@ -1298,6 +1298,11 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
+    # Returns attributes related to AWS Elastic Beanstalk that are
+    # associated with the calling AWS account.
+    #
+    # The result currently has one set of attributes—resource quotas.
+    #
     # @return [Types::DescribeAccountAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeAccountAttributesResult#resource_quotas #resource_quotas} => Types::ResourceQuotas
@@ -3970,7 +3975,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

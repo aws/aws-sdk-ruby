@@ -182,6 +182,8 @@ module Aws::ECS
     TaskOverride = Shapes::StructureShape.new(name: 'TaskOverride')
     Tasks = Shapes::ListShape.new(name: 'Tasks')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Tmpfs = Shapes::StructureShape.new(name: 'Tmpfs')
+    TmpfsList = Shapes::ListShape.new(name: 'TmpfsList')
     TransportProtocol = Shapes::StringShape.new(name: 'TransportProtocol')
     Ulimit = Shapes::StructureShape.new(name: 'Ulimit')
     UlimitList = Shapes::ListShape.new(name: 'UlimitList')
@@ -498,6 +500,8 @@ module Aws::ECS
     LinuxParameters.add_member(:capabilities, Shapes::ShapeRef.new(shape: KernelCapabilities, location_name: "capabilities"))
     LinuxParameters.add_member(:devices, Shapes::ShapeRef.new(shape: DevicesList, location_name: "devices"))
     LinuxParameters.add_member(:init_process_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "initProcessEnabled"))
+    LinuxParameters.add_member(:shared_memory_size, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "sharedMemorySize"))
+    LinuxParameters.add_member(:tmpfs, Shapes::ShapeRef.new(shape: TmpfsList, location_name: "tmpfs"))
     LinuxParameters.struct_class = Types::LinuxParameters
 
     ListAttributesRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
@@ -839,6 +843,13 @@ module Aws::ECS
     TaskOverride.struct_class = Types::TaskOverride
 
     Tasks.member = Shapes::ShapeRef.new(shape: Task)
+
+    Tmpfs.add_member(:container_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerPath"))
+    Tmpfs.add_member(:size, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "size"))
+    Tmpfs.add_member(:mount_options, Shapes::ShapeRef.new(shape: StringList, location_name: "mountOptions"))
+    Tmpfs.struct_class = Types::Tmpfs
+
+    TmpfsList.member = Shapes::ShapeRef.new(shape: Tmpfs)
 
     Ulimit.add_member(:name, Shapes::ShapeRef.new(shape: UlimitName, required: true, location_name: "name"))
     Ulimit.add_member(:soft_limit, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "softLimit"))

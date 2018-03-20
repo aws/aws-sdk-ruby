@@ -207,6 +207,7 @@ module Aws::MediaLive
     InputMaximumBitrate = Shapes::StringShape.new(name: 'InputMaximumBitrate')
     InputResolution = Shapes::StringShape.new(name: 'InputResolution')
     InputSecurityGroup = Shapes::StructureShape.new(name: 'InputSecurityGroup')
+    InputSecurityGroupState = Shapes::StringShape.new(name: 'InputSecurityGroupState')
     InputSecurityGroupWhitelistRequest = Shapes::StructureShape.new(name: 'InputSecurityGroupWhitelistRequest')
     InputSettings = Shapes::StructureShape.new(name: 'InputSettings')
     InputSource = Shapes::StructureShape.new(name: 'InputSource')
@@ -315,6 +316,13 @@ module Aws::MediaLive
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
     UpdateChannelResultModel = Shapes::StructureShape.new(name: 'UpdateChannelResultModel')
+    UpdateInput = Shapes::StructureShape.new(name: 'UpdateInput')
+    UpdateInputRequest = Shapes::StructureShape.new(name: 'UpdateInputRequest')
+    UpdateInputResponse = Shapes::StructureShape.new(name: 'UpdateInputResponse')
+    UpdateInputResultModel = Shapes::StructureShape.new(name: 'UpdateInputResultModel')
+    UpdateInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'UpdateInputSecurityGroupRequest')
+    UpdateInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'UpdateInputSecurityGroupResponse')
+    UpdateInputSecurityGroupResultModel = Shapes::StructureShape.new(name: 'UpdateInputSecurityGroupResultModel')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     VideoCodecSettings = Shapes::StructureShape.new(name: 'VideoCodecSettings')
     VideoDescription = Shapes::StructureShape.new(name: 'VideoDescription')
@@ -719,6 +727,8 @@ module Aws::MediaLive
 
     DescribeInputSecurityGroupResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     DescribeInputSecurityGroupResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    DescribeInputSecurityGroupResponse.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputs"))
+    DescribeInputSecurityGroupResponse.add_member(:state, Shapes::ShapeRef.new(shape: InputSecurityGroupState, location_name: "state"))
     DescribeInputSecurityGroupResponse.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRule, location_name: "whitelistRules"))
     DescribeInputSecurityGroupResponse.struct_class = Types::DescribeInputSecurityGroupResponse
 
@@ -980,6 +990,8 @@ module Aws::MediaLive
 
     InputSecurityGroup.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     InputSecurityGroup.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    InputSecurityGroup.add_member(:inputs, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputs"))
+    InputSecurityGroup.add_member(:state, Shapes::ShapeRef.new(shape: InputSecurityGroupState, location_name: "state"))
     InputSecurityGroup.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRule, location_name: "whitelistRules"))
     InputSecurityGroup.struct_class = Types::InputSecurityGroup
 
@@ -1304,6 +1316,7 @@ module Aws::MediaLive
 
     UpdateChannel.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     UpdateChannel.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
+    UpdateChannel.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     UpdateChannel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     UpdateChannel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -1312,6 +1325,7 @@ module Aws::MediaLive
     UpdateChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     UpdateChannelRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfOutputDestination, location_name: "destinations"))
     UpdateChannelRequest.add_member(:encoder_settings, Shapes::ShapeRef.new(shape: EncoderSettings, location_name: "encoderSettings"))
+    UpdateChannelRequest.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     UpdateChannelRequest.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -1322,6 +1336,35 @@ module Aws::MediaLive
 
     UpdateChannelResultModel.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     UpdateChannelResultModel.struct_class = Types::UpdateChannelResultModel
+
+    UpdateInput.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
+    UpdateInput.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
+    UpdateInput.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateInput.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
+    UpdateInput.struct_class = Types::UpdateInput
+
+    UpdateInputRequest.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfInputDestinationRequest, location_name: "destinations"))
+    UpdateInputRequest.add_member(:input_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputId"))
+    UpdateInputRequest.add_member(:input_security_groups, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "inputSecurityGroups"))
+    UpdateInputRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    UpdateInputRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfInputSourceRequest, location_name: "sources"))
+    UpdateInputRequest.struct_class = Types::UpdateInputRequest
+
+    UpdateInputResponse.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
+    UpdateInputResponse.struct_class = Types::UpdateInputResponse
+
+    UpdateInputResultModel.add_member(:input, Shapes::ShapeRef.new(shape: Input, location_name: "input"))
+    UpdateInputResultModel.struct_class = Types::UpdateInputResultModel
+
+    UpdateInputSecurityGroupRequest.add_member(:input_security_group_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputSecurityGroupId"))
+    UpdateInputSecurityGroupRequest.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRuleCidr, location_name: "whitelistRules"))
+    UpdateInputSecurityGroupRequest.struct_class = Types::UpdateInputSecurityGroupRequest
+
+    UpdateInputSecurityGroupResponse.add_member(:security_group, Shapes::ShapeRef.new(shape: InputSecurityGroup, location_name: "securityGroup"))
+    UpdateInputSecurityGroupResponse.struct_class = Types::UpdateInputSecurityGroupResponse
+
+    UpdateInputSecurityGroupResultModel.add_member(:security_group, Shapes::ShapeRef.new(shape: InputSecurityGroup, location_name: "securityGroup"))
+    UpdateInputSecurityGroupResultModel.struct_class = Types::UpdateInputSecurityGroupResultModel
 
     ValidationError.add_member(:element_path, Shapes::ShapeRef.new(shape: __string, location_name: "elementPath"))
     ValidationError.add_member(:error_message, Shapes::ShapeRef.new(shape: __string, location_name: "errorMessage"))
@@ -1429,8 +1472,8 @@ module Aws::MediaLive
         o.http_request_uri = "/prod/channels"
         o.input = Shapes::ShapeRef.new(shape: CreateChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateChannelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
@@ -1657,11 +1700,41 @@ module Aws::MediaLive
         o.http_request_uri = "/prod/channels/{channelId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateChannelResponse)
-        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_input, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInput"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/inputs/{inputId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInputRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInputResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_input_security_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInputSecurityGroup"
+        o.http_method = "PUT"
+        o.http_request_uri = "/prod/inputSecurityGroups/{inputSecurityGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInputSecurityGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInputSecurityGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
