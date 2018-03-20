@@ -29,6 +29,15 @@ describe 'Client Interface:' do
       )
     }
 
+    it 'allows empty operation clients' do
+      expect {
+        SpecHelper.generate_service(['WhiteLabelEmpty'], multiple_files: false, custom: true)
+        WhiteLabelEmpty::Client.new(
+          stub_responses: true
+        )
+      }.to raise_error("no operations found for the service")
+    end
+
     it 'populates x-api-key header correctly' do
       resp = client.put_apikey({
         scalar_types: {
