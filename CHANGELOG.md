@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.18 (2018-03-20)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
