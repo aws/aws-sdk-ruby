@@ -77,10 +77,8 @@ module AwsSdkCodeGenerator
       end
 
       def example_operation_name
-        apig_without_operations = @service.protocol == 'api-gateway' && @service.api['operations'].empty?
-        unless apig_without_operations
-          underscore(@service.api['operations'].keys.first)
-        end
+        raise "no operations found for the service" if @service.api['operations'].empty?
+        underscore(@service.api['operations'].keys.first)
         nil
       end
 
