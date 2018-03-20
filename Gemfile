@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rake', require: false
+if RUBY_VERSION == '1.9.3'
+  # rake 12.3.0 drop support for Ruby < 2.0
+  gem 'rake', '12.2.1', require: false
+else
+  gem 'rake', require: false
+end
 gem 'jmespath'
 
 group :test do
