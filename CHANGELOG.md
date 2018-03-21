@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.19 (2018-03-21)
+------------------
+
 * Feature - Aws::ServerlessApplicationRepository - Updated the documentation for AWSServerlessApplicationRepository.
 
 2.11.18 (2018-03-20)
