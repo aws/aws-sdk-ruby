@@ -211,8 +211,11 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] spdx_license_id
-    #   A valid identifier from <a
-    #   href=""https://spdx.org/licenses/"">https://spdx.org/licenses/</a>.
+    #   A valid identifier from [https://spdx.org/licenses/][1].
+    #
+    #
+    #
+    #   [1]: https://spdx.org/licenses/
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationSummary AWS API Documentation
@@ -264,7 +267,11 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] semantic_version
     #   The semantic version of the application:
     #
-    #   <a href=""https://semver.org/"">https://semver.org/</a>
+    #   [https://semver.org/][1]
+    #
+    #
+    #
+    #   [1]: https://semver.org/
     #   @return [String]
     #
     # @!attribute [rw] stack_id
@@ -349,7 +356,11 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] semantic_version
     #   The semantic version of the application:
     #
-    #   <a href=""https://semver.org/"">https://semver.org/</a>
+    #   [https://semver.org/][1]
+    #
+    #
+    #
+    #   [1]: https://semver.org/
     #   @return [String]
     #
     # @!attribute [rw] source_code_url
@@ -358,8 +369,11 @@ module Aws::ServerlessApplicationRepository
     #   @return [String]
     #
     # @!attribute [rw] spdx_license_id
-    #   A valid identifier from <a
-    #   href=""https://spdx.org/licenses/"">https://spdx.org/licenses/</a>.
+    #   A valid identifier from [https://spdx.org/licenses/][1].
+    #
+    #
+    #
+    #   [1]: https://spdx.org/licenses/
     #   @return [String]
     #
     # @!attribute [rw] template_body
@@ -623,7 +637,11 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] semantic_version
     #   The semantic version of the application:
     #
-    #   <a href=""https://semver.org/"">https://semver.org/</a>
+    #   [https://semver.org/][1]
+    #
+    #
+    #
+    #   [1]: https://semver.org/
     #   @return [String]
     #
     # @!attribute [rw] stack_name
@@ -1262,7 +1280,11 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] semantic_version
     #   The semantic version of the application:
     #
-    #   <a href=""https://semver.org/"">https://semver.org/</a>
+    #   [https://semver.org/][1]
+    #
+    #
+    #
+    #   [1]: https://semver.org/
     #   @return [String]
     #
     # @!attribute [rw] source_code_url
@@ -1299,7 +1321,11 @@ module Aws::ServerlessApplicationRepository
     # @!attribute [rw] semantic_version
     #   The semantic version of the application:
     #
-    #   <a href=""https://semver.org/"">https://semver.org/</a>
+    #   [https://semver.org/][1]
+    #
+    #
+    #
+    #   [1]: https://semver.org/
     #   @return [String]
     #
     # @!attribute [rw] source_code_url
