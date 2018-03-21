@@ -192,7 +192,7 @@ module Aws
       #   to sign. If the 'X-Amz-Content-Sha256' header is set, the `:body`
       #   is optional and will not be read.
       #
-      # @option request [otpional, String, IO] :body ('') The HTTP request body.
+      # @option request [optional, String, IO] :body ('') The HTTP request body.
       #   A sha256 checksum is computed of the body unless the
       #   'X-Amz-Content-Sha256' header is set.
       #
