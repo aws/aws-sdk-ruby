@@ -341,6 +341,14 @@ module Aws::ECS
     #   on a container instance, the container instance and port combination
     #   is registered as a target in the target group specified here.
     #
+    # @option params [Array<Types::ServiceRegistry>] :service_registries
+    #   The details of the service discovery registries you want to assign to
+    #   this service. For more information, see [Service Discovery][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html
+    #
     # @option params [required, Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
     #   and keep running on your cluster.
@@ -556,6 +564,12 @@ module Aws::ECS
     #         container_port: 1,
     #       },
     #     ],
+    #     service_registries: [
+    #       {
+    #         registry_arn: "String",
+    #         port: 1,
+    #       },
+    #     ],
     #     desired_count: 1, # required
     #     client_token: "String",
     #     launch_type: "EC2", # accepts EC2, FARGATE
@@ -597,6 +611,9 @@ module Aws::ECS
     #   resp.service.load_balancers[0].load_balancer_name #=> String
     #   resp.service.load_balancers[0].container_name #=> String
     #   resp.service.load_balancers[0].container_port #=> Integer
+    #   resp.service.service_registries #=> Array
+    #   resp.service.service_registries[0].registry_arn #=> String
+    #   resp.service.service_registries[0].port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -823,6 +840,9 @@ module Aws::ECS
     #   resp.service.load_balancers[0].load_balancer_name #=> String
     #   resp.service.load_balancers[0].container_name #=> String
     #   resp.service.load_balancers[0].container_port #=> Integer
+    #   resp.service.service_registries #=> Array
+    #   resp.service.service_registries[0].registry_arn #=> String
+    #   resp.service.service_registries[0].port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -1495,6 +1515,9 @@ module Aws::ECS
     #   resp.services[0].load_balancers[0].load_balancer_name #=> String
     #   resp.services[0].load_balancers[0].container_name #=> String
     #   resp.services[0].load_balancers[0].container_port #=> Integer
+    #   resp.services[0].service_registries #=> Array
+    #   resp.services[0].service_registries[0].registry_arn #=> String
+    #   resp.services[0].service_registries[0].port #=> Integer
     #   resp.services[0].status #=> String
     #   resp.services[0].desired_count #=> Integer
     #   resp.services[0].running_count #=> Integer
@@ -4466,6 +4489,9 @@ module Aws::ECS
     #   resp.service.load_balancers[0].load_balancer_name #=> String
     #   resp.service.load_balancers[0].container_name #=> String
     #   resp.service.load_balancers[0].container_port #=> Integer
+    #   resp.service.service_registries #=> Array
+    #   resp.service.service_registries[0].registry_arn #=> String
+    #   resp.service.service_registries[0].port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -4532,7 +4558,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

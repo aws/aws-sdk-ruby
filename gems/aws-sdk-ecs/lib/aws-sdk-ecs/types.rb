@@ -1365,6 +1365,12 @@ module Aws::ECS
     #             container_port: 1,
     #           },
     #         ],
+    #         service_registries: [
+    #           {
+    #             registry_arn: "String",
+    #             port: 1,
+    #           },
+    #         ],
     #         desired_count: 1, # required
     #         client_token: "String",
     #         launch_type: "EC2", # accepts EC2, FARGATE
@@ -1438,6 +1444,15 @@ module Aws::ECS
     #   instance and port combination is registered as a target in the
     #   target group specified here.
     #   @return [Array<Types::LoadBalancer>]
+    #
+    # @!attribute [rw] service_registries
+    #   The details of the service discovery registries you want to assign
+    #   to this service. For more information, see [Service Discovery][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html
+    #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] desired_count
     #   The number of instantiations of the specified task definition to
@@ -1539,6 +1554,7 @@ module Aws::ECS
       :service_name,
       :task_definition,
       :load_balancers,
+      :service_registries,
       :desired_count,
       :client_token,
       :launch_type,
@@ -4281,6 +4297,9 @@ module Aws::ECS
     #   load balancer.
     #   @return [Array<Types::LoadBalancer>]
     #
+    # @!attribute [rw] service_registries
+    #   @return [Array<Types::ServiceRegistry>]
+    #
     # @!attribute [rw] status
     #   The status of the service. The valid values are `ACTIVE`,
     #   `DRAINING`, or `INACTIVE`.
@@ -4374,6 +4393,7 @@ module Aws::ECS
       :service_name,
       :cluster_arn,
       :load_balancers,
+      :service_registries,
       :status,
       :desired_count,
       :running_count,
@@ -4413,6 +4433,39 @@ module Aws::ECS
       :id,
       :created_at,
       :message)
+      include Aws::Structure
+    end
+
+    # Details of the service registry.
+    #
+    # @note When making an API call, you may pass ServiceRegistry
+    #   data as a hash:
+    #
+    #       {
+    #         registry_arn: "String",
+    #         port: 1,
+    #       }
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the Service Registry. The
+    #   currently supported service registry is Amazon Route 53 Auto Naming
+    #   Service. For more information, see [Service][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_autonaming_Service.html
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value used if your Service Discovery service specified an
+    #   SRV record.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRegistry AWS API Documentation
+    #
+    class ServiceRegistry < Struct.new(
+      :registry_arn,
+      :port)
       include Aws::Structure
     end
 

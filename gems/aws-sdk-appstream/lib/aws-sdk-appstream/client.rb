@@ -580,7 +580,13 @@ module Aws::AppStream
     #   The storage connectors to enable.
     #
     # @option params [String] :redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
+    #
+    # @option params [String] :feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
     #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -599,6 +605,7 @@ module Aws::AppStream
     #       },
     #     ],
     #     redirect_url: "RedirectURL",
+    #     feedback_url: "FeedbackURL",
     #   })
     #
     # @example Response structure
@@ -612,6 +619,7 @@ module Aws::AppStream
     #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
     #   resp.stack.redirect_url #=> String
+    #   resp.stack.feedback_url #=> String
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
@@ -1169,6 +1177,7 @@ module Aws::AppStream
     #   resp.stacks[0].storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
     #   resp.stacks[0].storage_connectors[0].resource_identifier #=> String
     #   resp.stacks[0].redirect_url #=> String
+    #   resp.stacks[0].feedback_url #=> String
     #   resp.stacks[0].stack_errors #=> Array
     #   resp.stacks[0].stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stacks[0].stack_errors[0].error_message #=> String
@@ -1795,7 +1804,13 @@ module Aws::AppStream
     #   Deletes the storage connectors currently enabled for the stack.
     #
     # @option params [String] :redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
+    #
+    # @option params [String] :feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
     #
     # @option params [Array<String>] :attributes_to_delete
     #   The stack attributes to delete.
@@ -1818,7 +1833,8 @@ module Aws::AppStream
     #     ],
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL
+    #     feedback_url: "FeedbackURL",
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL, FEEDBACK_URL, THEME_NAME
     #   })
     #
     # @example Response structure
@@ -1832,6 +1848,7 @@ module Aws::AppStream
     #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
     #   resp.stack.redirect_url #=> String
+    #   resp.stack.feedback_url #=> String
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
@@ -1858,7 +1875,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

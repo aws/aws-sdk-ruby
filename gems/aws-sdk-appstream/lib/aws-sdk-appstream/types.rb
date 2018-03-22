@@ -531,6 +531,7 @@ module Aws::AppStream
     #           },
     #         ],
     #         redirect_url: "RedirectURL",
+    #         feedback_url: "FeedbackURL",
     #       }
     #
     # @!attribute [rw] name
@@ -550,7 +551,14 @@ module Aws::AppStream
     #   @return [Array<Types::StorageConnector>]
     #
     # @!attribute [rw] redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
@@ -560,7 +568,8 @@ module Aws::AppStream
       :description,
       :display_name,
       :storage_connectors,
-      :redirect_url)
+      :redirect_url,
+      :feedback_url)
       include Aws::Structure
     end
 
@@ -1720,7 +1729,14 @@ module Aws::AppStream
     #   @return [Array<Types::StorageConnector>]
     #
     # @!attribute [rw] redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
     #   @return [String]
     #
     # @!attribute [rw] stack_errors
@@ -1737,6 +1753,7 @@ module Aws::AppStream
       :created_time,
       :storage_connectors,
       :redirect_url,
+      :feedback_url,
       :stack_errors)
       include Aws::Structure
     end
@@ -2172,7 +2189,8 @@ module Aws::AppStream
     #         ],
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL
+    #         feedback_url: "FeedbackURL",
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL, FEEDBACK_URL, THEME_NAME
     #       }
     #
     # @!attribute [rw] display_name
@@ -2196,7 +2214,14 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
     #   @return [String]
     #
     # @!attribute [rw] attributes_to_delete
@@ -2212,6 +2237,7 @@ module Aws::AppStream
       :storage_connectors,
       :delete_storage_connectors,
       :redirect_url,
+      :feedback_url,
       :attributes_to_delete)
       include Aws::Structure
     end

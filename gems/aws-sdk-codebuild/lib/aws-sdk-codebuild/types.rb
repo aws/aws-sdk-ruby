@@ -155,7 +155,7 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
     #   @return [String]
     #
     # @!attribute [rw] phases
@@ -535,16 +535,26 @@ module Aws::CodeBuild
     #
     #       {
     #         project_name: "ProjectName", # required
+    #         branch_filter: "String",
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_filter
+    #   A regular expression used to determine which branches in a
+    #   repository are built when a webhook is triggered. If the name of a
+    #   branch matches the regular expression, then it is built. If it
+    #   doesn't match, then it is not. If branchFilter is empty, then all
+    #   branches are built.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput AWS API Documentation
     #
     class CreateWebhookInput < Struct.new(
-      :project_name)
+      :project_name,
+      :branch_filter)
       include Aws::Structure
     end
 
@@ -590,7 +600,7 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookInput AWS API Documentation
@@ -719,7 +729,8 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project that the cache will be reset for.
+    #   The name of the AWS CodeBuild build project that the cache will be
+    #   reset for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCacheInput AWS API Documentation
@@ -743,7 +754,7 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -1347,18 +1358,17 @@ module Aws::CodeBuild
     #   @return [Array<Types::EnvironmentVariable>]
     #
     # @!attribute [rw] privileged_mode
-    #   If set to true, enables running the Docker daemon inside a Docker
-    #   container; otherwise, false or not specified (the default). This
-    #   value must be set to true only if this build project will be used to
-    #   build Docker images, and the specified build environment image is
-    #   not one provided by AWS CodeBuild with Docker support. Otherwise,
-    #   all associated builds that attempt to interact with the Docker
-    #   daemon will fail. Note that you must also start the Docker daemon so
-    #   that your builds can interact with it as needed. One way to do this
-    #   is to initialize the Docker daemon in the install phase of your
-    #   build spec by running the following build commands. (Do not run the
-    #   following build commands if the specified build environment image is
-    #   provided by AWS CodeBuild with Docker support.)
+    #   Enables running the Docker daemon inside a Docker container. Set to
+    #   true only if the build project is be used to build Docker images,
+    #   and the specified build environment image is not provided by AWS
+    #   CodeBuild with Docker support. Otherwise, all associated builds that
+    #   attempt to interact with the Docker daemon will fail. Note that you
+    #   must also start the Docker daemon so that builds can interact with
+    #   it. One way to do this is to initialize the Docker daemon during the
+    #   install phase of your build spec by running the following build
+    #   commands. (Do not run the following build commands if the specified
+    #   build environment image is provided by AWS CodeBuild with Docker
+    #   support.)
     #
     #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
     #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout -t 15
@@ -1560,7 +1570,8 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project to start running a build.
+    #   The name of the AWS CodeBuild build project to start running a
+    #   build.
     #   @return [String]
     #
     # @!attribute [rw] source_version
@@ -1854,6 +1865,53 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateWebhookInput
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         branch_filter: "String",
+    #         rotate_secret: false,
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the AWS CodeBuild project.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_filter
+    #   A regular expression used to determine which branches in a
+    #   repository are built when a webhook is triggered. If the name of a
+    #   branch matches the regular expression, then it is built. If it
+    #   doesn't match, then it is not. If branchFilter is empty, then all
+    #   branches are built.
+    #   @return [String]
+    #
+    # @!attribute [rw] rotate_secret
+    #   A boolean value that specifies whether the associated repository's
+    #   secret token should be updated.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookInput AWS API Documentation
+    #
+    class UpdateWebhookInput < Struct.new(
+      :project_name,
+      :branch_filter,
+      :rotate_secret)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] webhook
+    #   Information about a repository's webhook that is associated with a
+    #   project in AWS CodeBuild.
+    #   @return [Types::Webhook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookOutput AWS API Documentation
+    #
+    class UpdateWebhookOutput < Struct.new(
+      :webhook)
+      include Aws::Structure
+    end
+
     # Information about the VPC configuration that AWS CodeBuild will
     # access.
     #
@@ -1895,21 +1953,34 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] payload_url
-    #   This is the server endpoint that will receive the webhook payload.
+    #   The CodeBuild endpoint where webhook events are sent.
     #   @return [String]
     #
     # @!attribute [rw] secret
-    #   Use this secret while creating a webhook in GitHub for Enterprise.
-    #   The secret allows webhook requests sent by GitHub for Enterprise to
-    #   be authenticated by AWS CodeBuild.
+    #   The secret token of the associated repository.
     #   @return [String]
+    #
+    # @!attribute [rw] branch_filter
+    #   A regular expression used to determine which branches in a
+    #   repository are built when a webhook is triggered. If the name of a
+    #   branch matches the regular expression, then it is built. If it
+    #   doesn't match, then it is not. If branchFilter is empty, then all
+    #   branches are built.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_secret
+    #   A timestamp indicating the last time a repository's secret token
+    #   was modified.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Webhook AWS API Documentation
     #
     class Webhook < Struct.new(
       :url,
       :payload_url,
-      :secret)
+      :secret,
+      :branch_filter,
+      :last_modified_secret)
       include Aws::Structure
     end
 

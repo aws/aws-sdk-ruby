@@ -157,6 +157,8 @@ module Aws::ECS
     ServiceEvents = Shapes::ListShape.new(name: 'ServiceEvents')
     ServiceNotActiveException = Shapes::StructureShape.new(name: 'ServiceNotActiveException')
     ServiceNotFoundException = Shapes::StructureShape.new(name: 'ServiceNotFoundException')
+    ServiceRegistries = Shapes::ListShape.new(name: 'ServiceRegistries')
+    ServiceRegistry = Shapes::StructureShape.new(name: 'ServiceRegistry')
     Services = Shapes::ListShape.new(name: 'Services')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartTaskRequest = Shapes::StructureShape.new(name: 'StartTaskRequest')
@@ -339,6 +341,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceName"))
     CreateServiceRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
     CreateServiceRequest.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
+    CreateServiceRequest.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
     CreateServiceRequest.add_member(:desired_count, Shapes::ShapeRef.new(shape: BoxedInteger, required: true, location_name: "desiredCount"))
     CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateServiceRequest.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
@@ -707,6 +710,7 @@ module Aws::ECS
     Service.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     Service.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
     Service.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
+    Service.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
     Service.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     Service.add_member(:desired_count, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredCount"))
     Service.add_member(:running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningCount"))
@@ -731,6 +735,12 @@ module Aws::ECS
     ServiceEvent.struct_class = Types::ServiceEvent
 
     ServiceEvents.member = Shapes::ShapeRef.new(shape: ServiceEvent)
+
+    ServiceRegistries.member = Shapes::ShapeRef.new(shape: ServiceRegistry)
+
+    ServiceRegistry.add_member(:registry_arn, Shapes::ShapeRef.new(shape: String, location_name: "registryArn"))
+    ServiceRegistry.add_member(:port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "port"))
+    ServiceRegistry.struct_class = Types::ServiceRegistry
 
     Services.member = Shapes::ShapeRef.new(shape: Service)
 

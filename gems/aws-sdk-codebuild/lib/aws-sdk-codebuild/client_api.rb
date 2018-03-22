@@ -104,6 +104,8 @@ module Aws::CodeBuild
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UpdateProjectInput = Shapes::StructureShape.new(name: 'UpdateProjectInput')
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
+    UpdateWebhookInput = Shapes::StructureShape.new(name: 'UpdateWebhookInput')
+    UpdateWebhookOutput = Shapes::StructureShape.new(name: 'UpdateWebhookOutput')
     ValueInput = Shapes::StringShape.new(name: 'ValueInput')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
     Webhook = Shapes::StructureShape.new(name: 'Webhook')
@@ -196,6 +198,7 @@ module Aws::CodeBuild
     CreateProjectOutput.struct_class = Types::CreateProjectOutput
 
     CreateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
+    CreateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
     CreateWebhookInput.struct_class = Types::CreateWebhookInput
 
     CreateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
@@ -393,6 +396,14 @@ module Aws::CodeBuild
     UpdateProjectOutput.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     UpdateProjectOutput.struct_class = Types::UpdateProjectOutput
 
+    UpdateWebhookInput.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectName, required: true, location_name: "projectName"))
+    UpdateWebhookInput.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
+    UpdateWebhookInput.add_member(:rotate_secret, Shapes::ShapeRef.new(shape: Boolean, location_name: "rotateSecret"))
+    UpdateWebhookInput.struct_class = Types::UpdateWebhookInput
+
+    UpdateWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: Webhook, location_name: "webhook"))
+    UpdateWebhookOutput.struct_class = Types::UpdateWebhookOutput
+
     VpcConfig.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "vpcId"))
     VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, location_name: "subnets"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIds, location_name: "securityGroupIds"))
@@ -401,6 +412,8 @@ module Aws::CodeBuild
     Webhook.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "url"))
     Webhook.add_member(:payload_url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "payloadUrl"))
     Webhook.add_member(:secret, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "secret"))
+    Webhook.add_member(:branch_filter, Shapes::ShapeRef.new(shape: String, location_name: "branchFilter"))
+    Webhook.add_member(:last_modified_secret, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedSecret"))
     Webhook.struct_class = Types::Webhook
 
 
@@ -563,6 +576,17 @@ module Aws::CodeBuild
         o.output = Shapes::ShapeRef.new(shape: UpdateProjectOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_webhook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateWebhook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateWebhookInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateWebhookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OAuthProviderException)
       end)
     end
 
