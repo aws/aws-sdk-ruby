@@ -2450,11 +2450,13 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.2.12` (supported in all AWS Regions)
+    #
     #   * `10.2.11` (supported in all AWS Regions)
     #
-    #   ^
     #
     #
+    #   * `10.1.31` (supported in all AWS Regions)
     #
     #   * `10.1.26` (supported in all AWS Regions)
     #
@@ -2465,6 +2467,8 @@ module Aws::RDS
     #   * `10.1.14` (supported in all AWS Regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.34` (supported in all AWS Regions)
     #
     #   * `10.0.32` (supported in all AWS Regions)
     #
@@ -2526,6 +2530,8 @@ module Aws::RDS
     #
     #   **MySQL**
     #
+    #   * `5.7.21` (supported in all AWS regions)
+    #
     #   * `5.7.19` (supported in all AWS regions)
     #
     #   * `5.7.17` (supported in all AWS regions)
@@ -2533,6 +2539,8 @@ module Aws::RDS
     #   * `5.7.16` (supported in all AWS regions)
     #
     #
+    #
+    #   * `5.6.39` (supported in all AWS Regions)
     #
     #   * `5.6.37` (supported in all AWS Regions)
     #
@@ -2546,6 +2554,8 @@ module Aws::RDS
     #     ca-central-1, eu-west-2)
     #
     #
+    #
+    #   * `5.5.59` (supported in all AWS Regions)
     #
     #   * `5.5.57` (supported in all AWS Regions)
     #
@@ -13471,7 +13481,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
