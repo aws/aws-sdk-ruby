@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.21 (2018-03-23)
+------------------
+
 * Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
 
 2.11.20 (2018-03-22)
