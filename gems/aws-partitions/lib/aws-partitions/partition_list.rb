@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Partitions
     class PartitionList
@@ -19,8 +21,8 @@ module Aws
         if @partitions.key?(partition_name)
           @partitions[partition_name]
         else
-          msg = "invalid partition name #{partition_name.inspect}; valid "
-          msg << "partition names include %s" % [@partitions.keys.join(', ')]
+          msg = "invalid partition name #{partition_name.inspect}; valid "\
+                "partition names include %s" % [@partitions.keys.join(', ')]
           raise ArgumentError, msg
         end
       end

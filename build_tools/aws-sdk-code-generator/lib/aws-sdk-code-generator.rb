@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'aws-sdk-code-generator/api'
 require_relative 'aws-sdk-code-generator/apply_docs'
 require_relative 'aws-sdk-code-generator/client_constructor'

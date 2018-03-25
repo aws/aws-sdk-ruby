@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # encoding: UTF-8
 $:.unshift(File.expand_path('../../lib', __FILE__))
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'aws-partitions'
 require 'seahorse'
 require 'jmespath'

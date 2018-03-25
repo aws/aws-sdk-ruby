@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # omit :response_target to download to a StringIO in memory
 resp = s3.get_object(bucket: 'bucket-name', key: 'object-key')
 

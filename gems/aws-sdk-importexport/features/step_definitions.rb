@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@importexport") do
   @service = Aws::ImportExport::Resource.new
   @client = @service.client

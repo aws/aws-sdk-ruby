@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'set'
 
 desc 'Generates the code for every service'

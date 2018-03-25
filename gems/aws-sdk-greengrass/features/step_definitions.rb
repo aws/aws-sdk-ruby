@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@greengrass") do
   @service = Aws::Greengrass::Resource.new
   @client = @service.client

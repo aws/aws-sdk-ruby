@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@ses") do
   @service = Aws::SES::Resource.new
   @client = @service.client

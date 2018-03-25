@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def javascripts_full_list
   super + ['js/nolink.js']
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # encoding: utf-8
 
 require_relative '../spec_helper'
@@ -14,19 +16,19 @@ module Aws
         let(:message_attributes) {{
           'ccc' => {
             string_value: 'test',
-            data_type: 'String'
+            data_type: 'String'.dup
           },
           aaa: {
             binary_value: [ 2, 3, 4 ].pack('C*'),
-            data_type: 'Binary'
+            data_type: 'Binary'.dup
           },
           zzz: {
-            data_type: 'Number',
+            data_type: 'Number'.dup,
             string_value: '0230.01'
           },
           'öther_encodings' => {
-            data_type: 'String',
-            string_value: 'Tüst'.encode!('ISO-8859-1')
+            data_type: 'String'.dup,
+            string_value: 'Tüst'.encode('ISO-8859-1')
           }
         }}
 

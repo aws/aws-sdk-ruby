@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'openssl'
 
 Before("@s3", "@client") do

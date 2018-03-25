@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@cloudwatchlogs") do
   @service = Aws::CloudWatchLogs::Resource.new
   @client = @service.client

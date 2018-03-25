@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@mediaconvert") do
   @service = Aws::MediaConvert::Resource.new
   @client = @service.client

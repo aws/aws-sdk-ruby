@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@route53domains") do
   @service = Aws::Route53Domains::Resource.new
   @client = @service.client

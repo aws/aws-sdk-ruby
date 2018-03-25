@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@mobile") do
   @service = Aws::Mobile::Resource.new
   @client = @service.client

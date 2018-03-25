@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # filtering by tag keys "key1" or "key2"
 ec2.describe_instances(filters:[{ name: 'tag-key', values: ['key1', 'key2'] }])
 

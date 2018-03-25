@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@swf") do
   @service = Aws::SWF::Resource.new
   @client = @service.client

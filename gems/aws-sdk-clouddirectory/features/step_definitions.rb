@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@clouddirectory") do
   @service = Aws::CloudDirectory::Resource.new
   @client = @service.client

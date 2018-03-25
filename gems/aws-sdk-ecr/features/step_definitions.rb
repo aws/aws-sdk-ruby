@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@ecr") do
   @service = Aws::ECR::Resource.new
   @client = @service.client

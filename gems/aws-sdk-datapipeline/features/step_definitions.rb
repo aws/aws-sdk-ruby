@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@datapipeline") do
   @service = Aws::DataPipeline::Resource.new
   @client = @service.client

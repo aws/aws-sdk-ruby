@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'seahorse/client/net_http/handler'
 
 module Seahorse

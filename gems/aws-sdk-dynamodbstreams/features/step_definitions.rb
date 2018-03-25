@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@dynamodbstreams") do
   @service = Aws::DynamoDBStreams::Resource.new
   @client = @service.client

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # updates the table of supported services in the repo README
 task 'update-readme' do
 

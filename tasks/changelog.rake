@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 task 'changelog:add' do
   Dir.glob('gems/*').each do |gem_dir|
     path = "#{gem_dir}/CHANGELOG.md"

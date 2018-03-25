@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@mq") do
   @service = Aws::MQ::Resource.new
   @client = @service.client

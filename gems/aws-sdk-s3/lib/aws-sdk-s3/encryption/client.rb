@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module S3
 
@@ -347,8 +349,8 @@ module Aws
           if [:metadata, :instruction_file].include?(location)
             location
           else
-            msg = ":envelope_location must be :metadata or :instruction_file "
-            msg << "got #{location.inspect}"
+            msg = ":envelope_location must be :metadata or :instruction_file \
+                    got #{location.inspect}"
             raise ArgumentError, msg
           end
         end

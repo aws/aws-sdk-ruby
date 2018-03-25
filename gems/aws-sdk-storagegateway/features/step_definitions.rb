@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@storagegateway") do
   @service = Aws::StorageGateway::Resource.new
   @client = @service.client

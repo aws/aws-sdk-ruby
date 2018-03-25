@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Sigv4
     # Users that wish to configure static credentials can use the

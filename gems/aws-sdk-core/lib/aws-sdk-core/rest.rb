@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'rest/handler'
 require_relative 'rest/request/body'
 require_relative 'rest/request/builder'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rexml/document'
 require 'rexml/streamlistener'
 
@@ -15,7 +17,7 @@ module Aws
 
         def parse(xml)
           begin
-            source = REXML::Source.new(xml)
+            source = REXML::Source.new(xml.dup)
             REXML::Parsers::StreamParser.new(source, self).parse
           rescue REXML::ParseException => error
             @stack.error(error.message)

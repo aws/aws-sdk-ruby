@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def groups(list, type = "Method")
   if groups_data = object.groups
     list.each {|m| groups_data |= [m.group] if m.group && owner != m.namespace }

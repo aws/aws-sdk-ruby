@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Seahorse
   module Client
     # This utility class is used to track files opened by Seahorse.

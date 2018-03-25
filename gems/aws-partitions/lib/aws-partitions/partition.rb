@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
   module Partitions
     class Partition
@@ -22,8 +24,8 @@ module Aws
         if @regions.key?(region_name)
           @regions[region_name]
         else
-          msg = "invalid region name #{region_name.inspect}; valid region "
-          msg << "names include %s" % [@regions.keys.join(', ')]
+          msg = "invalid region name #{region_name.inspect}; valid region "\
+                "names include %s" % [@regions.keys.join(', ')]
           raise ArgumentError, msg
         end
       end

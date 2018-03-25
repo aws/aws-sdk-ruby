@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'aws-sigv2/credentials'
 require_relative 'aws-sigv2/signer'
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@marketplacecommerceanalytics") do
   @service = Aws::MarketplaceCommerceAnalytics::Resource.new
   @client = @service.client

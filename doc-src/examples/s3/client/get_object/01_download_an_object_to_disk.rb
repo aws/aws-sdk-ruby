@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # stream object directly to disk
 resp = s3.get_object(
   response_target: '/path/to/file',

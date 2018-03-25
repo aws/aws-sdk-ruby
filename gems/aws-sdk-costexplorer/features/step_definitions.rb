@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@costexplorer") do
   @service = Aws::CostExplorer::Resource.new
   @client = @service.client

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@opsworks") do
   @service = Aws::OpsWorks::Resource.new
   @client = @service.client

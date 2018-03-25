@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@machinelearning") do
   @service = Aws::MachineLearning::Resource.new
   @client = @service.client

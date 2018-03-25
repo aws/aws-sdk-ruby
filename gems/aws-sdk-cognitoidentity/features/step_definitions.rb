@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@cognitoidentity") do
   @client = Aws::CognitoIdentity::Client.new
 end

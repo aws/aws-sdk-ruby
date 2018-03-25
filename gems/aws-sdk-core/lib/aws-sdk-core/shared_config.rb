@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
 
   # @api private
@@ -271,8 +273,8 @@ module Aws
     def validate_profile_exists(profile)
       unless (@parsed_credentials && @parsed_credentials[profile]) ||
           (@parsed_config && @parsed_config[profile])
-        msg = "Profile `#{profile}' not found in #{@credentials_path}"
-        msg << " or #{@config_path}" if @config_path
+        config_error = @config_path ? " or #{@config_path}" : ''
+        msg = "Profile `#{profile}' not found in #{@credentials_path}#{config_error}"
         raise Errors::NoSuchProfileError.new(msg)
       end
     end

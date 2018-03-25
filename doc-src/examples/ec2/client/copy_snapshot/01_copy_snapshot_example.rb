@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source_snapshot_id = 'snapshot-id'
 source_region = 'us-east-1'
 target_region = 'us-west-2'

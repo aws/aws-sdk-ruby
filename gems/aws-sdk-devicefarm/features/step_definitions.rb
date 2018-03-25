@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@devicefarm") do
   @service = Aws::DeviceFarm::Resource.new
   @client = @service.client

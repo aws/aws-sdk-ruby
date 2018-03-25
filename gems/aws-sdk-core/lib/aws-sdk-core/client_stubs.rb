@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thread'
 
 module Aws
@@ -160,8 +162,8 @@ module Aws
       if config.stub_responses
         apply_stubs(operation_name, stubs.flatten)
       else
-        msg = 'stubbing is not enabled; enable stubbing in the constructor '
-        msg << 'with `:stub_responses => true`'
+        msg = 'stubbing is not enabled; enable stubbing in the constructor '\
+              'with `:stub_responses => true`'
         raise msg
       end
     end

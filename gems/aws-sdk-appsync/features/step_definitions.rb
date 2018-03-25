@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@appsync") do
   @service = Aws::AppSync::Resource.new
   @client = @service.client

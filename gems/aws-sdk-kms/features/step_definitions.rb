@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@kms") do
   @service = Aws::KMS::Resource.new
   @client = @service.client

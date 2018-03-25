@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Note: this spec test helps checking all source code:
 # no hard-coded regions unless have to
 
@@ -9,13 +11,13 @@ end
 def whitelist
   {
     "core" => {
-      "errors.rb" => 102,
-      "signature_v4.rb" => 35,
-      "stub_responses.rb" => 19
+      "errors.rb" => 104,
+      "signature_v4.rb" => 37,
+      "stub_responses.rb" => 21
     },
     "s3" => {
-      "location_constraint.rb" => 12,
-      "s3_signer.rb" => 195
+      "location_constraint.rb" => 14,
+      "s3_signer.rb" => 197
     }
   }
 end
@@ -28,7 +30,7 @@ describe "ensure no hard-coded region" do
     Dir.glob("#{dir}**/*").sort.each do |path|
       next if File.directory? path
 
-      file = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read } 
+      file = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read }
       lines = file.lines.to_a
 
       it "#{path} has no hard-coded region" do
@@ -37,7 +39,7 @@ describe "ensure no hard-coded region" do
           next if val.strip[0] == "#"
           # skip known whitelists
           next if whitelist[key] && whitelist[key][File.basename(path)] == idx
-          expect(val).not_to match(/(us|eu|ap|sa|ca)-\w+-\d+/)        
+          expect(val).not_to match(/(us|eu|ap|sa|ca)-\w+-\d+/)
         end
       end
 

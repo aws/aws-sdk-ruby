@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@elastictranscoder") do
   @service = Aws::ElasticTranscoder::Resource.new
   @client = @service.client

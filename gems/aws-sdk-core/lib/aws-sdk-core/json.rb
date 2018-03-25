@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require_relative 'json/builder'
 require_relative 'json/error_handler'

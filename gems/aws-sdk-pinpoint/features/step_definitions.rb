@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@pinpoint") do
   @service = Aws::Pinpoint::Resource.new
   @client = @service.client

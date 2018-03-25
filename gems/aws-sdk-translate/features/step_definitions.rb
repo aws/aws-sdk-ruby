@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@translate") do
   @service = Aws::Translate::Resource.new
   @client = @service.client

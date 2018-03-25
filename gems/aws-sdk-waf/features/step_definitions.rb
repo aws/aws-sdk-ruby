@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@waf") do
   @service = Aws::WAF::Resource.new
   @client = @service.client

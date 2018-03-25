@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Before("@codecommit") do
   @service = Aws::CodeCommit::Resource.new
   @client = @service.client

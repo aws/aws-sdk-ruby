@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Aws
 
   # A utility module that provides a class method that wraps
@@ -46,10 +48,9 @@ module Aws
     def deprecated(method_name, options = {})
 
       deprecation_msg = options[:message] || begin
-        msg = "DEPRECATION WARNING: called deprecated method `#{method_name}' "
-        msg << "of an #{self}"
-        msg << ", use #{options[:use]} instead" if options[:use]
-        msg
+        instead = options[:use] ? ", use #{options[:use]} instead" : ''
+        "DEPRECATION WARNING: called deprecated method `#{method_name}' "\
+        "of an #{self}#{instead}"
       end
 
       alias_method(:"deprecated_#{method_name}", method_name)
