@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
 2.11.21 (2018-03-23)
 ------------------
 
