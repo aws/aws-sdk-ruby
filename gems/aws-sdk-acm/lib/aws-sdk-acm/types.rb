@@ -22,7 +22,7 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   String that contains the ARN of the ACM Certificate to which the tag
+    #   String that contains the ARN of the ACM certificate to which the tag
     #   is to be applied. This must be of the form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -193,6 +193,15 @@ module Aws::ACM
     #   can be used and consists of a name and an object identifier (OID).
     #   @return [Array<Types::ExtendedKeyUsage>]
     #
+    # @!attribute [rw] options
+    #   Value that specifies whether to add the certificate to a
+    #   transparency log. Certificate transparency makes it possible to
+    #   detect SSL certificates that have been mistakenly or maliciously
+    #   issued. A browser might respond to certificate that has not been
+    #   logged by showing an error message. The logs are cryptographicaly
+    #   secure.
+    #   @return [Types::CertificateOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateDetail AWS API Documentation
     #
     class CertificateDetail < Struct.new(
@@ -218,7 +227,37 @@ module Aws::ACM
       :type,
       :renewal_summary,
       :key_usages,
-      :extended_key_usages)
+      :extended_key_usages,
+      :options)
+      include Aws::Structure
+    end
+
+    # Structure that contains options for your certificate. Currently, you
+    # can use this only to specify whether to opt in to or out of
+    # certificate transparency logging. Some browsers require that public
+    # certificates issued for your domain be recorded in a log. Certificates
+    # that are not logged typically generate a browser error. Transparency
+    # makes it possible for you to detect SSL/TLS certificates that have
+    # been mistakenly or maliciously issued for your domain. For general
+    # information, see [ACM
+    # Concepts](acm/latest/userguide/acm-concepts.html).
+    #
+    # @note When making an API call, you may pass CertificateOptions
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] certificate_transparency_logging_preference
+    #   You can opt out of certificate transparency logging by specifying
+    #   the `DISABLED` option. Opt in by specifying `ENABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateOptions AWS API Documentation
+    #
+    class CertificateOptions < Struct.new(
+      :certificate_transparency_logging_preference)
       include Aws::Structure
     end
 
@@ -259,7 +298,7 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   String that contains the ARN of the ACM Certificate to be deleted.
+    #   String that contains the ARN of the ACM certificate to be deleted.
     #   This must be of the form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -287,7 +326,7 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   The Amazon Resource Name (ARN) of the ACM Certificate. The ARN must
+    #   The Amazon Resource Name (ARN) of the ACM certificate. The ARN must
     #   have the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -517,7 +556,7 @@ module Aws::ACM
     end
 
     # @!attribute [rw] certificate
-    #   String that contains the ACM Certificate represented by the ARN
+    #   String that contains the ACM certificate represented by the ARN
     #   specified at input.
     #   @return [String]
     #
@@ -659,7 +698,7 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] certificate_summary_list
-    #   A list of ACM Certificates.
+    #   A list of ACM certificates.
     #   @return [Array<Types::CertificateSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificatesResponse AWS API Documentation
@@ -678,7 +717,7 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   String that contains the ARN of the ACM Certificate for which you
+    #   String that contains the ARN of the ACM certificate for which you
     #   want to list the tags. This must have the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -798,6 +837,9 @@ module Aws::ACM
     #             validation_domain: "DomainNameString", # required
     #           },
     #         ],
+    #         options: {
+    #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -818,11 +860,11 @@ module Aws::ACM
     #
     # @!attribute [rw] subject_alternative_names
     #   Additional FQDNs to be included in the Subject Alternative Name
-    #   extension of the ACM Certificate. For example, add the name
+    #   extension of the ACM certificate. For example, add the name
     #   www.example.net to a certificate for which the `DomainName` field is
     #   www.example.com if users can reach your site by using either name.
     #   The maximum number of domain names that you can add to an ACM
-    #   Certificate is 100. However, the initial limit is 10 domain names.
+    #   certificate is 100. However, the initial limit is 10 domain names.
     #   If you need more than 10 names, you must request a limit increase.
     #   For more information, see [Limits][1].
     #
@@ -862,6 +904,16 @@ module Aws::ACM
     #   you can validate domain ownership.
     #   @return [Array<Types::DomainValidationOption>]
     #
+    # @!attribute [rw] options
+    #   Currently, you can use this parameter to specify whether to add the
+    #   certificate to a certificate transparency log. Certificate
+    #   transparency makes it possible to detect SSL/TLS certificates that
+    #   have been mistakenly or maliciously issued. Certificates that have
+    #   not been logged typically produce an error message in a browser. For
+    #   more information, see [ Opting Out of Certificate Transparency
+    #   Logging](acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
+    #   @return [Types::CertificateOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
     #
     class RequestCertificateRequest < Struct.new(
@@ -869,7 +921,8 @@ module Aws::ACM
       :validation_method,
       :subject_alternative_names,
       :idempotency_token,
-      :domain_validation_options)
+      :domain_validation_options,
+      :options)
       include Aws::Structure
     end
 
@@ -992,6 +1045,41 @@ module Aws::ACM
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateCertificateOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "Arn", # required
+    #         options: { # required
+    #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   ARN of the requested certificate to update. This must be of the
+    #   form:
+    #
+    #   `arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
+    #   `
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   Use to update the options for your certificate. Currently, you can
+    #   specify whether to add your certificate to a transparency log.
+    #   Certificate transparency makes it possible to detect SSL/TLS
+    #   certificates that have been mistakenly or maliciously issued.
+    #   Certificates that have not been logged typically produce an error
+    #   message in a browser.
+    #   @return [Types::CertificateOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptionsRequest AWS API Documentation
+    #
+    class UpdateCertificateOptionsRequest < Struct.new(
+      :certificate_arn,
+      :options)
       include Aws::Structure
     end
 
