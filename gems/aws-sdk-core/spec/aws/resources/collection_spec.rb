@@ -14,7 +14,7 @@ module Aws
       end
 
       describe '#first' do
-        it 'wont raise a NoMethodError error about an undefined each method' do
+        it 'wont raise a NoMethodError error about an undefined next method' do
           expect { Collection.new([]).first }.not_to raise_error
         end
       end
