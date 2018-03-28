@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::MTurk - Updated the API, and documentation for Amazon Mechanical Turk.
+
+* Feature - Aws::STS - Updated the API, and documentation for AWS Security Token Service.
+
 2.11.23 (2018-03-27)
 ------------------
 
