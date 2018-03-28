@@ -59,7 +59,7 @@ module Aws::IAM
     end
 
     # Indicates whether passwords in the account expire. Returns true if
-    # MaxPasswordAge is contains a value greater than 0. Returns false if
+    # `MaxPasswordAge` contains a value greater than 0. Returns false if
     # MaxPasswordAge is 0 or not present.
     # @return [Boolean]
     def expire_passwords
@@ -245,55 +245,73 @@ module Aws::IAM
     # @option options [Integer] :minimum_password_length
     #   The minimum number of characters allowed in an IAM user password.
     #
-    #   Default value: 6
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `6`.
     # @option options [Boolean] :require_symbols
     #   Specifies whether IAM user passwords must contain at least one of the
     #   following non-alphanumeric characters:
     #
     #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that passwords do not
+    #   require at least one symbol character.
     # @option options [Boolean] :require_numbers
     #   Specifies whether IAM user passwords must contain at least one numeric
     #   character (0 to 9).
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that passwords do not
+    #   require at least one numeric character.
     # @option options [Boolean] :require_uppercase_characters
     #   Specifies whether IAM user passwords must contain at least one
     #   uppercase character from the ISO basic Latin alphabet (A to Z).
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that passwords do not
+    #   require at least one uppercase character.
     # @option options [Boolean] :require_lowercase_characters
     #   Specifies whether IAM user passwords must contain at least one
     #   lowercase character from the ISO basic Latin alphabet (a to z).
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that passwords do not
+    #   require at least one lowercase character.
     # @option options [Boolean] :allow_users_to_change_password
     #   Allows all IAM users in your account to use the AWS Management Console
     #   to change their own passwords. For more information, see [Letting IAM
     #   Users Change Their Own Passwords][1] in the *IAM User Guide*.
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that IAM users in the
+    #   account do not automatically have permissions to change their own
+    #   password.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
     # @option options [Integer] :max_password_age
-    #   The number of days that an IAM user password is valid. The default
-    #   value of 0 means IAM user passwords never expire.
+    #   The number of days that an IAM user password is valid.
     #
-    #   Default value: 0
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `0`. The result is that IAM user passwords
+    #   never expire.
     # @option options [Integer] :password_reuse_prevention
     #   Specifies the number of previous passwords that IAM users are
-    #   prevented from reusing. The default value of 0 means IAM users are not
-    #   prevented from reusing previous passwords.
+    #   prevented from reusing.
     #
-    #   Default value: 0
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `0`. The result is that IAM users are not
+    #   prevented from reusing previous passwords.
     # @option options [Boolean] :hard_expiry
     #   Prevents IAM users from setting a new password after their password
-    #   has expired.
+    #   has expired. The IAM user cannot be accessed until an administrator
+    #   resets the password.
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that IAM users can
+    #   change their passwords after they expire and continue to sign in as
+    #   the user.
     # @return [EmptyStructure]
     def update(options = {})
       resp = @client.update_account_password_policy(options)
