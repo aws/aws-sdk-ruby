@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::Greengrass - Updated the API, and documentation for AWS Greengrass.
+
+* Feature - Aws::SSM - Updated the API for Amazon Simple Systems Manager (SSM).
+
 2.11.24 (2018-03-28)
 ------------------
 
