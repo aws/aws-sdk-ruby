@@ -27,7 +27,7 @@ module Aws
           metadata = api['metadata'] || {}
           prefix = metadata['endpointPrefix']
           # event stream is not supported at V2
-          api = exclude_eventstream(api)
+          api = exclude_eventstream(api) if api['operations']
           @apis[prefix].call(api) if @apis[prefix]
         end
 
