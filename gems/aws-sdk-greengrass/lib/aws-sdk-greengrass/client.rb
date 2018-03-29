@@ -145,15 +145,15 @@ module Aws::Greengrass
 
     # @!group API Operations
 
-    # Associates a role with a group. The role will be used by the AWS
-    # Greengrass core in order to access AWS cloud services. The role's
-    # permissions will allow Greengrass core Lambda functions to perform
-    # actions against the cloud.
+    # Associates a role with a group. Your AWS Greengrass core will use the
+    # role to access AWS cloud services. The role's permissions should
+    # allow Greengrass core Lambda functions to perform actions against the
+    # cloud.
     #
     # @option params [required, String] :group_id
     #
     # @option params [String] :role_arn
-    #   Role arn you wish to associate with this group.
+    #   The ARN of the role you wish to associate with this group.
     #
     # @return [Types::AssociateRoleToGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -179,13 +179,14 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Associates a role which is used by AWS Greengrass. AWS Greengrass uses
-    # the role to access your Lambda functions and AWS IoT resources. This
-    # is necessary for deployments to succeed. It needs to have minimum
-    # permissions in policy ``AWSGreengrassResourceAccessRolePolicy``
+    # Associates a role with your account. AWS Greengrass will use the role
+    # to access your Lambda functions and AWS IoT resources. This is
+    # necessary for deployments to succeed. The role must have at least
+    # minimum permissions in the policy
+    # ''AWSGreengrassResourceAccessRolePolicy''.
     #
     # @option params [String] :role_arn
-    #   Role arn you wish to associate with this account.
+    #   The ARN of the service role you wish to associate with your account.
     #
     # @return [Types::AssociateServiceRoleToAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -210,15 +211,15 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Creates a core definition. You may optionally provide the initial
-    # version of the core definition or use
-    # ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass
-    # Groups must each contain exactly 1 AWS Greengrass Core.
+    # Creates a core definition. You may provide the initial version of the
+    # core definition now or use ''CreateCoreDefinitionVersion'' at a
+    # later time. AWS Greengrass groups must each contain exactly one AWS
+    # Greengrass core.
     #
     # @option params [String] :amzn_client_token
     #
     # @option params [Types::CoreDefinitionVersion] :initial_version
-    #   Information on core definition version
+    #   Information about a core definition version.
     #
     # @option params [String] :name
     #
@@ -269,7 +270,8 @@ module Aws::Greengrass
     end
 
     # Creates a version of a core definition that has already been defined.
-    # AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+    # AWS Greengrass groups must each contain exactly one AWS Greengrass
+    # core.
     #
     # @option params [String] :amzn_client_token
     #
@@ -320,16 +322,17 @@ module Aws::Greengrass
     # @option params [String] :amzn_client_token
     #
     # @option params [String] :deployment_id
-    #   Id of the deployment if you wish to redeploy a previous deployment.
+    #   The ID of the deployment if you wish to redeploy a previous
+    #   deployment.
     #
     # @option params [String] :deployment_type
-    #   Type of deployment. When used in CreateDeployment, only NewDeployment
-    #   and Redeployment are valid.
+    #   The type of deployment. When used in ''CreateDeployment'', only
+    #   ''NewDeployment'' and ''Redeployment'' are valid.
     #
     # @option params [required, String] :group_id
     #
     # @option params [String] :group_version_id
-    #   Group Version you wish to deploy.
+    #   The ID of the group version to be deployed.
     #
     # @return [Types::CreateDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -360,14 +363,14 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Creates a device definition. You may optinally provide the initial
-    # version of the device definition or use
-    # ``CreateDeviceDefinitionVersion`` at a later time.
+    # Creates a device definition. You may provide the initial version of
+    # the device definition now or use ''CreateDeviceDefinitionVersion''
+    # at a later time.
     #
     # @option params [String] :amzn_client_token
     #
     # @option params [Types::DeviceDefinitionVersion] :initial_version
-    #   Information on device definition version
+    #   Information about a device definition version.
     #
     # @option params [String] :name
     #
@@ -468,12 +471,12 @@ module Aws::Greengrass
     # functions and their configurations to be used in a group. You can
     # create an initial version of the definition by providing a list of
     # Lambda functions and their configurations now, or use
-    # ``CreateFunctionDefinitionVersion`` later.
+    # ''CreateFunctionDefinitionVersion'' later.
     #
     # @option params [String] :amzn_client_token
     #
     # @option params [Types::FunctionDefinitionVersion] :initial_version
-    #   Information on the function definition version
+    #   Information about a function definition version.
     #
     # @option params [String] :name
     #
@@ -496,6 +499,7 @@ module Aws::Greengrass
     #         {
     #           function_arn: "__string",
     #           function_configuration: {
+    #             encoding_type: "binary", # accepts binary, json
     #             environment: {
     #               access_sysfs: false,
     #               resource_access_policies: [
@@ -540,8 +544,8 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Create a version of a Lambda function definition that has already been
-    # defined.
+    # Creates a version of a Lambda function definition that has already
+    # been defined.
     #
     # @option params [String] :amzn_client_token
     #
@@ -565,6 +569,7 @@ module Aws::Greengrass
     #       {
     #         function_arn: "__string",
     #         function_configuration: {
+    #           encoding_type: "binary", # accepts binary, json
     #           environment: {
     #             access_sysfs: false,
     #             resource_access_policies: [
@@ -604,13 +609,13 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Creates a group. You may optionally provide the initial version of the
-    # group or use ''CreateGroupVersion'' at a later time.
+    # Creates a group. You may provide the initial version of the group or
+    # use ''CreateGroupVersion'' at a later time.
     #
     # @option params [String] :amzn_client_token
     #
     # @option params [Types::GroupVersion] :initial_version
-    #   Information on group version
+    #   Information about a group version.
     #
     # @option params [String] :name
     #
@@ -743,14 +748,14 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Creates a logger definition. You may optionally provide the initial
-    # version of the logger definition or use
-    # ``CreateLoggerDefinitionVersion`` at a later time.
+    # Creates a logger definition. You may provide the initial version of
+    # the logger definition now or use ''CreateLoggerDefinitionVersion''
+    # at a later time.
     #
     # @option params [String] :amzn_client_token
     #
     # @option params [Types::LoggerDefinitionVersion] :initial_version
-    #   Information on logger definition version
+    #   Information about a logger definition version.
     #
     # @option params [String] :name
     #
@@ -852,12 +857,12 @@ module Aws::Greengrass
     # Creates a resource definition which contains a list of resources to be
     # used in a group. You can create an initial version of the definition
     # by providing a list of resources now, or use
-    # ``CreateResourceDefinitionVersion`` later.
+    # ''CreateResourceDefinitionVersion'' later.
     #
     # @option params [String] :amzn_client_token
     #
     # @option params [Types::ResourceDefinitionVersion] :initial_version
-    #   Information on resource definition version
+    #   Information about a resource definition version.
     #
     # @option params [String] :name
     #
@@ -896,6 +901,14 @@ module Aws::Greengrass
     #               },
     #               source_path: "__string",
     #             },
+    #             s3_machine_learning_model_resource_data: {
+    #               destination_path: "__string",
+    #               s3_uri: "__string",
+    #             },
+    #             sage_maker_machine_learning_model_resource_data: {
+    #               destination_path: "__string",
+    #               sage_maker_job_arn: "__string",
+    #             },
     #           },
     #         },
     #       ],
@@ -922,7 +935,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Create a version of a resource definition that has already been
+    # Creates a version of a resource definition that has already been
     # defined.
     #
     # @option params [String] :amzn_client_token
@@ -963,6 +976,14 @@ module Aws::Greengrass
     #             },
     #             source_path: "__string",
     #           },
+    #           s3_machine_learning_model_resource_data: {
+    #             destination_path: "__string",
+    #             s3_uri: "__string",
+    #           },
+    #           sage_maker_machine_learning_model_resource_data: {
+    #             destination_path: "__string",
+    #             sage_maker_job_arn: "__string",
+    #           },
     #         },
     #       },
     #     ],
@@ -984,8 +1005,11 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Creates an Iot Job that will trigger your Greengrass Cores to update
-    # the software they are running.
+    # Creates a software update for a core or group of cores (specified as
+    # an IoT thing group.) Use this to update the OTA Agent as well as the
+    # Greengrass core software. It makes use of the IoT Jobs feature which
+    # provides additional commands to manage a Greengrass core software
+    # update job.
     #
     # @option params [String] :amzn_client_token
     #
@@ -994,20 +1018,21 @@ module Aws::Greengrass
     #   pointing towards the update artifact.
     #
     # @option params [String] :software_to_update
-    #   The piece of software on the Greengrass Core that will be updated.
+    #   The piece of software on the Greengrass core that will be updated.
     #
     # @option params [String] :update_agent_log_level
     #   The minimum level of log statements that should be logged by the OTA
     #   Agent during an update.
     #
     # @option params [Array<String>] :update_targets
-    #   The target arns that this update will be applied to.
+    #   The ARNs of the targets (IoT things or IoT thing groups) that this
+    #   update will be applied to.
     #
     # @option params [String] :update_targets_architecture
-    #   The architecture of the Cores in the targets of an update
+    #   The architecture of the cores which are the targets of an update.
     #
     # @option params [String] :update_targets_operating_system
-    #   The operating system of the Cores in the targets of an update
+    #   The operating system of the cores which are the targets of an update.
     #
     # @return [Types::CreateSoftwareUpdateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1040,14 +1065,14 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Creates a subscription definition. You may optionally provide the
-    # initial version of the subscription definition or use
-    # ``CreateSubscriptionDefinitionVersion`` at a later time.
+    # Creates a subscription definition. You may provide the initial version
+    # of the subscription definition now or use
+    # ''CreateSubscriptionDefinitionVersion'' at a later time.
     #
     # @option params [String] :amzn_client_token
     #
     # @option params [Types::SubscriptionDefinitionVersion] :initial_version
-    #   Information on subscription definition version
+    #   Information about a subscription definition version.
     #
     # @option params [String] :name
     #
@@ -1144,8 +1169,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Deletes a core definition. The core definition must not have been used
-    # in a deployment.
+    # Deletes a core definition.
     #
     # @option params [required, String] :core_definition_id
     #
@@ -1166,8 +1190,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Deletes a device definition. The device definition must not have been
-    # used in a deployment.
+    # Deletes a device definition.
     #
     # @option params [required, String] :device_definition_id
     #
@@ -1188,8 +1211,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Deletes a Lambda function definition. The Lambda function definition
-    # must not have been used in a deployment.
+    # Deletes a Lambda function definition.
     #
     # @option params [required, String] :function_definition_id
     #
@@ -1210,7 +1232,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Deletes a group. The group must not have been used in deployment.
+    # Deletes a group.
     #
     # @option params [required, String] :group_id
     #
@@ -1231,8 +1253,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Deletes a logger definition. The logger definition must not have been
-    # used in a deployment.
+    # Deletes a logger definition.
     #
     # @option params [required, String] :logger_definition_id
     #
@@ -1274,8 +1295,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Deletes a subscription definition. The subscription definition must
-    # not have been used in a deployment.
+    # Deletes a subscription definition.
     #
     # @option params [required, String] :subscription_definition_id
     #
@@ -1323,7 +1343,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Disassociates the service role from the account. Without a service
+    # Disassociates the service role from your account. Without a service
     # role, deployments will not work.
     #
     # @return [Types::DisassociateServiceRoleFromAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1607,8 +1627,8 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Retrieves information about a Lambda function definition, such as its
-    # creation time and latest version.
+    # Retrieves information about a Lambda function definition, including
+    # its creation time and latest version.
     #
     # @option params [required, String] :function_definition_id
     #
@@ -1647,8 +1667,8 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Retrieves information about a Lambda function definition version, such
-    # as which Lambda functions are included in the version and their
+    # Retrieves information about a Lambda function definition version,
+    # including which Lambda functions are included in the version and their
     # configurations.
     #
     # @option params [required, String] :function_definition_id
@@ -1676,6 +1696,7 @@ module Aws::Greengrass
     #   resp.creation_timestamp #=> String
     #   resp.definition.functions #=> Array
     #   resp.definition.functions[0].function_arn #=> String
+    #   resp.definition.functions[0].function_configuration.encoding_type #=> String, one of "binary", "json"
     #   resp.definition.functions[0].function_configuration.environment.access_sysfs #=> Boolean
     #   resp.definition.functions[0].function_configuration.environment.resource_access_policies #=> Array
     #   resp.definition.functions[0].function_configuration.environment.resource_access_policies[0].permission #=> String, one of "ro", "rw"
@@ -1930,7 +1951,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Retrieves information about a resource definition, such as its
+    # Retrieves information about a resource definition, including its
     # creation time and latest version.
     #
     # @option params [required, String] :resource_definition_id
@@ -1970,7 +1991,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Retrieves information about a resource definition version, such as
+    # Retrieves information about a resource definition version, including
     # which resources are included in the version.
     #
     # @option params [required, String] :resource_definition_id
@@ -2006,6 +2027,10 @@ module Aws::Greengrass
     #   resp.definition.resources[0].resource_data_container.local_volume_resource_data.group_owner_setting.auto_add_group_owner #=> Boolean
     #   resp.definition.resources[0].resource_data_container.local_volume_resource_data.group_owner_setting.group_owner #=> String
     #   resp.definition.resources[0].resource_data_container.local_volume_resource_data.source_path #=> String
+    #   resp.definition.resources[0].resource_data_container.s3_machine_learning_model_resource_data.destination_path #=> String
+    #   resp.definition.resources[0].resource_data_container.s3_machine_learning_model_resource_data.s3_uri #=> String
+    #   resp.definition.resources[0].resource_data_container.sage_maker_machine_learning_model_resource_data.destination_path #=> String
+    #   resp.definition.resources[0].resource_data_container.sage_maker_machine_learning_model_resource_data.sage_maker_job_arn #=> String
     #   resp.id #=> String
     #   resp.version #=> String
     #
@@ -2018,7 +2043,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Retrieves the service role that is attached to the account.
+    # Retrieves the service role that is attached to your account.
     #
     # @return [Types::GetServiceRoleForAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2120,7 +2145,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Lists versions of a core definition.
+    # Lists the versions of a core definition.
     #
     # @option params [required, String] :core_definition_id
     #
@@ -2423,7 +2448,7 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # List the versions of a group.
+    # Lists the versions of a group.
     #
     # @option params [required, String] :group_id
     #
@@ -2740,7 +2765,7 @@ module Aws::Greengrass
     # @option params [String] :amzn_client_token
     #
     # @option params [Boolean] :force
-    #   When set to true, perform a best-effort only core reset.
+    #   If true, performs a best-effort only core reset.
     #
     # @option params [required, String] :group_id
     #
@@ -2776,7 +2801,7 @@ module Aws::Greengrass
     # in order to find the location of the core and connect to it.
     #
     # @option params [Array<Types::ConnectivityInfo>] :connectivity_info
-    #   Connectivity info list
+    #   A list of connectivity info.
     #
     # @option params [required, String] :thing_name
     #
@@ -2909,10 +2934,11 @@ module Aws::Greengrass
       req.send_request(options)
     end
 
-    # Updates the Cert expiry time for a group.
+    # Updates the Certificate expiry time for a group.
     #
     # @option params [String] :certificate_expiry_in_milliseconds
-    #   Amount of time when the certificate expires in milliseconds.
+    #   The amount of time remaining before the certificate expires, in
+    #   milliseconds.
     #
     # @option params [required, String] :group_id
     #
@@ -3029,7 +3055,7 @@ module Aws::Greengrass
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrass'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

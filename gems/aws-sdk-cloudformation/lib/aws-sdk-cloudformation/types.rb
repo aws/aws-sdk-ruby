@@ -1020,6 +1020,7 @@ module Aws::CloudFormation
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         administration_role_arn: "RoleARN",
     #         client_request_token: "ClientRequestToken",
     #       }
     #
@@ -1127,6 +1128,21 @@ module Aws::CloudFormation
     #   created.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] administration_role_arn
+    #   The Amazon Resource Number (ARN) of the IAM role to use to create
+    #   this stack set.
+    #
+    #   Specify an IAM role only if you are using customized administrator
+    #   roles to control which users or groups can manage specific stack
+    #   sets within the same administrator account. For more information,
+    #   see [Define Permissions for Multiple Administrators][1] in the *AWS
+    #   CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   @return [String]
+    #
     # @!attribute [rw] client_request_token
     #   A unique identifier for this `CreateStackSet` request. Specify this
     #   token if you plan to retry requests so that AWS CloudFormation knows
@@ -1151,6 +1167,7 @@ module Aws::CloudFormation
       :parameters,
       :capabilities,
       :tags,
+      :administration_role_arn,
       :client_request_token)
       include Aws::Structure
     end
@@ -3125,29 +3142,12 @@ module Aws::CloudFormation
     # Rollback triggers enable you to have AWS CloudFormation monitor the
     # state of your application during stack creation and updating, and to
     # roll back that operation if the application breaches the threshold of
-    # any of the alarms you've specified. For each rollback trigger you
-    # create, you specify the Cloudwatch alarm that CloudFormation should
-    # monitor. CloudFormation monitors the specified alarms during the stack
-    # create or update operation, and for the specified amount of time after
-    # all resources have been deployed. If any of the alarms goes to ALERT
-    # state during the stack operation or the monitoring period,
-    # CloudFormation rolls back the entire stack operation. If the
-    # monitoring period expires without any alarms going to ALERT state,
-    # CloudFormation proceeds to dispose of old resources as usual.
-    #
-    # By default, CloudFormation only rolls back stack operations if an
-    # alarm goes to ALERT state, not INSUFFICIENT\_DATA state. To have
-    # CloudFormation roll back the stack operation if an alarm goes to
-    # INSUFFICIENT\_DATA state as well, edit the CloudWatch alarm to treat
-    # missing data as `breaching`. For more information, see [Configuring
-    # How CloudWatch Alarms Treats Missing Data][1].
-    #
-    # AWS CloudFormation does not monitor rollback triggers when it rolls
-    # back a stack during an update operation.
+    # any of the alarms you've specified. For more information, see
+    # [Monitor and Roll Back Stack Operations][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html
+    # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html
     #
     # @note When making an API call, you may pass RollbackConfiguration
     #   data as a hash:
@@ -3171,37 +3171,34 @@ module Aws::CloudFormation
     #   triggers for this parameter, those triggers replace any list of
     #   triggers previously specified for the stack. This means:
     #
-    #   * If you don't specify this parameter, AWS CloudFormation uses the
-    #     rollback triggers previously specified for this stack, if any.
+    #   * To use the rollback triggers previously specified for this stack,
+    #     if any, don't specify this parameter.
     #
-    #   * If you specify any rollback triggers using this parameter, you
-    #     must specify all the triggers that you want used for this stack,
-    #     even triggers you've specifed before (for example, when creating
-    #     the stack or during a previous stack update). Any triggers that
-    #     you don't include in the updated list of triggers are no longer
+    #   * To specify new or updated rollback triggers, you must specify
+    #     *all* the triggers that you want used for this stack, even
+    #     triggers you've specifed before (for example, when creating the
+    #     stack or during a previous stack update). Any triggers that you
+    #     don't include in the updated list of triggers are no longer
     #     applied to the stack.
     #
-    #   * If you specify an empty list, AWS CloudFormation removes all
-    #     currently specified triggers.
+    #   * To remove all currently specified triggers, specify an empty list
+    #     for this parameter.
     #
-    #   If a specified Cloudwatch alarm is missing, the entire stack
-    #   operation fails and is rolled back.
+    #   If a specified trigger is missing, the entire stack operation fails
+    #   and is rolled back.
     #   @return [Array<Types::RollbackTrigger>]
     #
     # @!attribute [rw] monitoring_time_in_minutes
     #   The amount of time, in minutes, during which CloudFormation should
     #   monitor all the rollback triggers after the stack creation or update
-    #   operation deploys all necessary resources. If any of the alarms goes
-    #   to ALERT state during the stack operation or this monitoring period,
-    #   CloudFormation rolls back the entire stack operation. Then, for
-    #   update operations, if the monitoring period expires without any
-    #   alarms going to ALERT state CloudFormation proceeds to dispose of
-    #   old resources as usual.
+    #   operation deploys all necessary resources.
+    #
+    #   The default is 0 minutes.
     #
     #   If you specify a monitoring period but do not specify any rollback
     #   triggers, CloudFormation still waits the specified period of time
-    #   before cleaning up old resources for update operations. You can use
-    #   this monitoring period to perform any manual stack validation
+    #   before cleaning up old resources after update operations. You can
+    #   use this monitoring period to perform any manual stack validation
     #   desired, and manually cancel the stack creation or update (using
     #   [CancelUpdateStack][1], for example) as necessary.
     #
@@ -3224,7 +3221,7 @@ module Aws::CloudFormation
     end
 
     # A rollback trigger AWS CloudFormation monitors during creation and
-    # updating of stacks. If any of the alarms you specify goes to ALERT
+    # updating of stacks. If any of the alarms you specify goes to ALARM
     # state during the stack operation or within the specified monitoring
     # period afterwards, CloudFormation rolls back the entire stack
     # operation.
@@ -3239,6 +3236,9 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the rollback trigger.
+    #
+    #   If a specified trigger is missing, the entire stack operation fails
+    #   and is rolled back.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -3942,6 +3942,24 @@ module Aws::CloudFormation
     #   maximum number of 50 tags can be specified.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] stack_set_arn
+    #   The Amazon Resource Number (ARN) of the stack set.
+    #   @return [String]
+    #
+    # @!attribute [rw] administration_role_arn
+    #   The Amazon Resource Number (ARN) of the IAM role used to create or
+    #   update the stack set.
+    #
+    #   Use customized administrator roles to control which users or groups
+    #   can manage specific stack sets within the same administrator
+    #   account. For more information, see [Define Permissions for Multiple
+    #   Administrators][1] in the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSet AWS API Documentation
     #
     class StackSet < Struct.new(
@@ -3952,7 +3970,9 @@ module Aws::CloudFormation
       :template_body,
       :parameters,
       :capabilities,
-      :tags)
+      :tags,
+      :stack_set_arn,
+      :administration_role_arn)
       include Aws::Structure
     end
 
@@ -4010,6 +4030,20 @@ module Aws::CloudFormation
     #   or add an existing, saved stack to a new stack set.
     #   @return [Boolean]
     #
+    # @!attribute [rw] administration_role_arn
+    #   The Amazon Resource Number (ARN) of the IAM role used to perform
+    #   this stack set operation.
+    #
+    #   Use customized administrator roles to control which users or groups
+    #   can manage specific stack sets within the same administrator
+    #   account. For more information, see [Define Permissions for Multiple
+    #   Administrators][1] in the *AWS CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   @return [String]
+    #
     # @!attribute [rw] creation_timestamp
     #   The time at which the operation was initiated. Note that the
     #   creation times for the stack set operation might differ from the
@@ -4035,6 +4069,7 @@ module Aws::CloudFormation
       :status,
       :operation_preferences,
       :retain_stacks,
+      :administration_role_arn,
       :creation_timestamp,
       :end_timestamp)
       include Aws::Structure
@@ -4913,6 +4948,7 @@ module Aws::CloudFormation
     #           max_concurrent_count: 1,
     #           max_concurrent_percentage: 1,
     #         },
+    #         administration_role_arn: "RoleARN",
     #         operation_id: "ClientRequestToken",
     #       }
     #
@@ -5050,6 +5086,27 @@ module Aws::CloudFormation
     #   operation.
     #   @return [Types::StackSetOperationPreferences]
     #
+    # @!attribute [rw] administration_role_arn
+    #   The Amazon Resource Number (ARN) of the IAM role to use to update
+    #   this stack set.
+    #
+    #   Specify an IAM role only if you are using customized administrator
+    #   roles to control which users or groups can manage specific stack
+    #   sets within the same administrator account. For more information,
+    #   see [Define Permissions for Multiple Administrators][1] in the *AWS
+    #   CloudFormation User Guide*.
+    #
+    #   If you specify a customized administrator role, AWS CloudFormation
+    #   uses that role to update the stack. If you do not specify a
+    #   customized administrator role, AWS CloudFormation performs the
+    #   update using the role previously associated with the stack set, so
+    #   long as you have permissions to perform operations on the stack set.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #   @return [String]
+    #
     # @!attribute [rw] operation_id
     #   The unique ID for this stack set operation.
     #
@@ -5081,6 +5138,7 @@ module Aws::CloudFormation
       :capabilities,
       :tags,
       :operation_preferences,
+      :administration_role_arn,
       :operation_id)
       include Aws::Structure
     end

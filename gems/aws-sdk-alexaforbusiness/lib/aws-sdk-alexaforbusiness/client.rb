@@ -155,6 +155,32 @@ module Aws::AlexaForBusiness
 
     # @!group API Operations
 
+    # Associates a contact to a given address book.
+    #
+    # @option params [required, String] :contact_arn
+    #   The ARN of the contact to associate with an address book.
+    #
+    # @option params [required, String] :address_book_arn
+    #   The ARN of the address book with which to associate the contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_contact_with_address_book({
+    #     contact_arn: "Arn", # required
+    #     address_book_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBook AWS API Documentation
+    #
+    # @overload associate_contact_with_address_book(params = {})
+    # @param [Hash] params ({})
+    def associate_contact_with_address_book(params = {}, options = {})
+      req = build_request(:associate_contact_with_address_book, params)
+      req.send_request(options)
+    end
+
     # Associates a device to a given room. This applies all the settings
     # from the room profile to the device, and all the skills in any skill
     # groups added to that room. This operation requires the device to be
@@ -208,6 +234,96 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def associate_skill_group_with_room(params = {}, options = {})
       req = build_request(:associate_skill_group_with_room, params)
+      req.send_request(options)
+    end
+
+    # Creates an address book with the specified details.
+    #
+    # @option params [required, String] :name
+    #   The name of the address book.
+    #
+    # @option params [String] :description
+    #   The description of the address book.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateAddressBookResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAddressBookResponse#address_book_arn #address_book_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_address_book({
+    #     name: "AddressBookName", # required
+    #     description: "AddressBookDescription",
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_book_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBook AWS API Documentation
+    #
+    # @overload create_address_book(params = {})
+    # @param [Hash] params ({})
+    def create_address_book(params = {}, options = {})
+      req = build_request(:create_address_book, params)
+      req.send_request(options)
+    end
+
+    # Creates a contact with the specified details.
+    #
+    # @option params [String] :display_name
+    #   The name of the contact to display on the AWS management console.
+    #
+    # @option params [required, String] :first_name
+    #   The first name of the contact that is used to call the contact on the
+    #   device.
+    #
+    # @option params [String] :last_name
+    #   The last name of the contact that is used to call the contact on the
+    #   device.
+    #
+    # @option params [required, String] :phone_number
+    #   The phone number of the contact in E164 format.
+    #
+    # @option params [String] :client_request_token
+    #   A unique, user-specified identifier for this request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateContactResponse#contact_arn #contact_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_contact({
+    #     display_name: "ContactName",
+    #     first_name: "ContactName", # required
+    #     last_name: "ContactName",
+    #     phone_number: "E164PhoneNumber", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContact AWS API Documentation
+    #
+    # @overload create_contact(params = {})
+    # @param [Hash] params ({})
+    def create_contact(params = {}, options = {})
+      req = build_request(:create_contact, params)
       req.send_request(options)
     end
 
@@ -433,6 +549,50 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Deletes an address book by the address book ARN.
+    #
+    # @option params [required, String] :address_book_arn
+    #   The ARN of the address book to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_address_book({
+    #     address_book_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBook AWS API Documentation
+    #
+    # @overload delete_address_book(params = {})
+    # @param [Hash] params ({})
+    def delete_address_book(params = {}, options = {})
+      req = build_request(:delete_address_book, params)
+      req.send_request(options)
+    end
+
+    # Deletes a contact by the contact ARN.
+    #
+    # @option params [required, String] :contact_arn
+    #   The ARN of the contact to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_contact({
+    #     contact_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContact AWS API Documentation
+    #
+    # @overload delete_contact(params = {})
+    # @param [Hash] params ({})
+    def delete_contact(params = {}, options = {})
+      req = build_request(:delete_contact, params)
+      req.send_request(options)
+    end
+
     # Deletes a room profile by the profile ARN.
     #
     # @option params [String] :profile_arn
@@ -558,6 +718,32 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Disassociates a contact from a given address book.
+    #
+    # @option params [required, String] :contact_arn
+    #   The ARN of the contact to disassociate from an address book.
+    #
+    # @option params [required, String] :address_book_arn
+    #   The ARN of the address from which to disassociate the contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_contact_from_address_book({
+    #     contact_arn: "Arn", # required
+    #     address_book_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateContactFromAddressBook AWS API Documentation
+    #
+    # @overload disassociate_contact_from_address_book(params = {})
+    # @param [Hash] params ({})
+    def disassociate_contact_from_address_book(params = {}, options = {})
+      req = build_request(:disassociate_contact_from_address_book, params)
+      req.send_request(options)
+    end
+
     # Disassociates a device from its current room. The device continues to
     # be connected to the Wi-Fi network and is still registered to the
     # account. The device settings and skills are removed from the room.
@@ -607,6 +793,68 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def disassociate_skill_group_from_room(params = {}, options = {})
       req = build_request(:disassociate_skill_group_from_room, params)
+      req.send_request(options)
+    end
+
+    # Gets address the book details by the address book ARN.
+    #
+    # @option params [required, String] :address_book_arn
+    #   The ARN of the address book for which to request details.
+    #
+    # @return [Types::GetAddressBookResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAddressBookResponse#address_book #address_book} => Types::AddressBook
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_address_book({
+    #     address_book_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_book.address_book_arn #=> String
+    #   resp.address_book.name #=> String
+    #   resp.address_book.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBook AWS API Documentation
+    #
+    # @overload get_address_book(params = {})
+    # @param [Hash] params ({})
+    def get_address_book(params = {}, options = {})
+      req = build_request(:get_address_book, params)
+      req.send_request(options)
+    end
+
+    # Gets the contact details by the contact ARN.
+    #
+    # @option params [required, String] :contact_arn
+    #   The ARN of the contact for which to request details.
+    #
+    # @return [Types::GetContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetContactResponse#contact #contact} => Types::Contact
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_contact({
+    #     contact_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact.contact_arn #=> String
+    #   resp.contact.display_name #=> String
+    #   resp.contact.first_name #=> String
+    #   resp.contact.last_name #=> String
+    #   resp.contact.phone_number #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContact AWS API Documentation
+    #
+    # @overload get_contact(params = {})
+    # @param [Hash] params ({})
+    def get_contact(params = {}, options = {})
+      req = build_request(:get_contact, params)
       req.send_request(options)
     end
 
@@ -978,6 +1226,139 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def revoke_invitation(params = {}, options = {})
       req = build_request(:revoke_invitation, params)
+      req.send_request(options)
+    end
+
+    # Searches address books and lists the ones that meet a set of filter
+    # and sort criteria.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters to use to list a specified set of address books. The
+    #   supported filter key is AddressBookName.
+    #
+    # @option params [Array<Types::Sort>] :sort_criteria
+    #   The sort order to use in listing the specified set of address books.
+    #   The supported sort key is AddressBookName.
+    #
+    # @option params [String] :next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response only includes results beyond the token, up to
+    #   the value specified by MaxResults.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response. If more
+    #   results exist than the specified MaxResults value, a token is included
+    #   in the response so that the remaining results can be retrieved.
+    #
+    # @return [Types::SearchAddressBooksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchAddressBooksResponse#address_books #address_books} => Array&lt;Types::AddressBookData&gt;
+    #   * {Types::SearchAddressBooksResponse#next_token #next_token} => String
+    #   * {Types::SearchAddressBooksResponse#total_count #total_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_address_books({
+    #     filters: [
+    #       {
+    #         key: "FilterKey", # required
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     sort_criteria: [
+    #       {
+    #         key: "SortKey", # required
+    #         value: "ASC", # required, accepts ASC, DESC
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.address_books #=> Array
+    #   resp.address_books[0].address_book_arn #=> String
+    #   resp.address_books[0].name #=> String
+    #   resp.address_books[0].description #=> String
+    #   resp.next_token #=> String
+    #   resp.total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchAddressBooks AWS API Documentation
+    #
+    # @overload search_address_books(params = {})
+    # @param [Hash] params ({})
+    def search_address_books(params = {}, options = {})
+      req = build_request(:search_address_books, params)
+      req.send_request(options)
+    end
+
+    # Searches contacts and lists the ones that meet a set of filter and
+    # sort criteria.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   The filters to use to list a specified set of address books. The
+    #   supported filter keys are DisplayName, FirstName, LastName, and
+    #   AddressBookArns.
+    #
+    # @option params [Array<Types::Sort>] :sort_criteria
+    #   The sort order to use in listing the specified set of contacts. The
+    #   supported sort keys are DisplayName, FirstName, and LastName.
+    #
+    # @option params [String] :next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response only includes results beyond the token, up to
+    #   the value specified by MaxResults.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response. If more
+    #   results exist than the specified MaxResults value, a token is included
+    #   in the response so that the remaining results can be retrieved.
+    #
+    # @return [Types::SearchContactsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchContactsResponse#contacts #contacts} => Array&lt;Types::ContactData&gt;
+    #   * {Types::SearchContactsResponse#next_token #next_token} => String
+    #   * {Types::SearchContactsResponse#total_count #total_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_contacts({
+    #     filters: [
+    #       {
+    #         key: "FilterKey", # required
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     sort_criteria: [
+    #       {
+    #         key: "SortKey", # required
+    #         value: "ASC", # required, accepts ASC, DESC
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contacts #=> Array
+    #   resp.contacts[0].contact_arn #=> String
+    #   resp.contacts[0].display_name #=> String
+    #   resp.contacts[0].first_name #=> String
+    #   resp.contacts[0].last_name #=> String
+    #   resp.contacts[0].phone_number #=> String
+    #   resp.next_token #=> String
+    #   resp.total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchContacts AWS API Documentation
+    #
+    # @overload search_contacts(params = {})
+    # @param [Hash] params ({})
+    def search_contacts(params = {}, options = {})
+      req = build_request(:search_contacts, params)
       req.send_request(options)
     end
 
@@ -1448,6 +1829,74 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
+    # Updates address book details by the address book ARN.
+    #
+    # @option params [required, String] :address_book_arn
+    #   The ARN of the room to update.
+    #
+    # @option params [String] :name
+    #   The updated name of the room.
+    #
+    # @option params [String] :description
+    #   The updated description of the room.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_address_book({
+    #     address_book_arn: "Arn", # required
+    #     name: "AddressBookName",
+    #     description: "AddressBookDescription",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateAddressBook AWS API Documentation
+    #
+    # @overload update_address_book(params = {})
+    # @param [Hash] params ({})
+    def update_address_book(params = {}, options = {})
+      req = build_request(:update_address_book, params)
+      req.send_request(options)
+    end
+
+    # Updates the contact details by the contact ARN.
+    #
+    # @option params [required, String] :contact_arn
+    #   The ARN of the contact to update.
+    #
+    # @option params [String] :display_name
+    #   The updated display name of the contact.
+    #
+    # @option params [String] :first_name
+    #   The updated first name of the contact.
+    #
+    # @option params [String] :last_name
+    #   The updated last name of the contact.
+    #
+    # @option params [String] :phone_number
+    #   The updated phone number of the contact.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_contact({
+    #     contact_arn: "Arn", # required
+    #     display_name: "ContactName",
+    #     first_name: "ContactName",
+    #     last_name: "ContactName",
+    #     phone_number: "E164PhoneNumber",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContact AWS API Documentation
+    #
+    # @overload update_contact(params = {})
+    # @param [Hash] params ({})
+    def update_contact(params = {}, options = {})
+      req = build_request(:update_contact, params)
+      req.send_request(options)
+    end
+
     # Updates the device name by device ARN.
     #
     # @option params [String] :device_arn
@@ -1613,7 +2062,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

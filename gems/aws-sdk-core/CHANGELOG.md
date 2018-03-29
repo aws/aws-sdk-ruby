@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.18.1 (2018-03-29)
+------------------
+
 * Issue - Fix undefined method `each`/`next` for `Enumerable::Enumerator` when this class exists in the environment
 
 3.18.0 (2018-03-28)

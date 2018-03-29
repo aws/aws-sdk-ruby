@@ -1013,6 +1013,20 @@ module Aws::CloudFormation
     #   to tag resources. If you don't, the entire `CreateStackSet` action
     #   fails with an `access denied` error, and the stack set is not created.
     #
+    # @option params [String] :administration_role_arn
+    #   The Amazon Resource Number (ARN) of the IAM role to use to create this
+    #   stack set.
+    #
+    #   Specify an IAM role only if you are using customized administrator
+    #   roles to control which users or groups can manage specific stack sets
+    #   within the same administrator account. For more information, see
+    #   [Define Permissions for Multiple Administrators][1] in the *AWS
+    #   CloudFormation User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #
     # @option params [String] :client_request_token
     #   A unique identifier for this `CreateStackSet` request. Specify this
     #   token if you plan to retry requests so that AWS CloudFormation knows
@@ -1052,6 +1066,7 @@ module Aws::CloudFormation
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     administration_role_arn: "RoleARN",
     #     client_request_token: "ClientRequestToken",
     #   })
     #
@@ -1709,6 +1724,8 @@ module Aws::CloudFormation
     #   resp.stack_set.tags #=> Array
     #   resp.stack_set.tags[0].key #=> String
     #   resp.stack_set.tags[0].value #=> String
+    #   resp.stack_set.stack_set_arn #=> String
+    #   resp.stack_set.administration_role_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSet AWS API Documentation
     #
@@ -1752,6 +1769,7 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.operation_preferences.max_concurrent_count #=> Integer
     #   resp.stack_set_operation.operation_preferences.max_concurrent_percentage #=> Integer
     #   resp.stack_set_operation.retain_stacks #=> Boolean
+    #   resp.stack_set_operation.administration_role_arn #=> String
     #   resp.stack_set_operation.creation_timestamp #=> Time
     #   resp.stack_set_operation.end_timestamp #=> Time
     #
@@ -3284,6 +3302,26 @@ module Aws::CloudFormation
     #   Preferences for how AWS CloudFormation performs this stack set
     #   operation.
     #
+    # @option params [String] :administration_role_arn
+    #   The Amazon Resource Number (ARN) of the IAM role to use to update this
+    #   stack set.
+    #
+    #   Specify an IAM role only if you are using customized administrator
+    #   roles to control which users or groups can manage specific stack sets
+    #   within the same administrator account. For more information, see
+    #   [Define Permissions for Multiple Administrators][1] in the *AWS
+    #   CloudFormation User Guide*.
+    #
+    #   If you specify a customized administrator role, AWS CloudFormation
+    #   uses that role to update the stack. If you do not specify a customized
+    #   administrator role, AWS CloudFormation performs the update using the
+    #   role previously associated with the stack set, so long as you have
+    #   permissions to perform operations on the stack set.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html
+    #
     # @option params [String] :operation_id
     #   The unique ID for this stack set operation.
     #
@@ -3336,6 +3374,7 @@ module Aws::CloudFormation
     #       max_concurrent_count: 1,
     #       max_concurrent_percentage: 1,
     #     },
+    #     administration_role_arn: "RoleARN",
     #     operation_id: "ClientRequestToken",
     #   })
     #
@@ -3478,7 +3517,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

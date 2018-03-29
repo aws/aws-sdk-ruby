@@ -8,6 +8,80 @@
 module Aws::AlexaForBusiness
   module Types
 
+    # An address book with attributes.
+    #
+    # @!attribute [rw] address_book_arn
+    #   The ARN of the address book.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the address book.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the address book.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AddressBook AWS API Documentation
+    #
+    class AddressBook < Struct.new(
+      :address_book_arn,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
+    # Information related to an address book.
+    #
+    # @!attribute [rw] address_book_arn
+    #   The ARN of the address book.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the address book.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the address book.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AddressBookData AWS API Documentation
+    #
+    class AddressBookData < Struct.new(
+      :address_book_arn,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AssociateContactWithAddressBookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_arn: "Arn", # required
+    #         address_book_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] contact_arn
+    #   The ARN of the contact to associate with an address book.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_book_arn
+    #   The ARN of the address book with which to associate the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBookRequest AWS API Documentation
+    #
+    class AssociateContactWithAddressBookRequest < Struct.new(
+      :contact_arn,
+      :address_book_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBookResponse AWS API Documentation
+    #
+    class AssociateContactWithAddressBookResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AssociateDeviceWithRoomRequest
     #   data as a hash:
     #
@@ -64,6 +138,180 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateSkillGroupWithRoomResponse AWS API Documentation
     #
     class AssociateSkillGroupWithRoomResponse < Aws::EmptyStructure; end
+
+    # A contact with attributes.
+    #
+    # @!attribute [rw] contact_arn
+    #   The ARN of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the contact to display on the AWS management console.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the contact that is used to call the contact on
+    #   the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the contact that is used to call the contact on the
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number of the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Contact AWS API Documentation
+    #
+    class Contact < Struct.new(
+      :contact_arn,
+      :display_name,
+      :first_name,
+      :last_name,
+      :phone_number)
+      include Aws::Structure
+    end
+
+    # Information related to a contact.
+    #
+    # @!attribute [rw] contact_arn
+    #   The ARN of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The name of the contact to display on the AWS management console.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the contact that is used to call the contact on
+    #   the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the contact that is used to call the contact on the
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number of the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ContactData AWS API Documentation
+    #
+    class ContactData < Struct.new(
+      :contact_arn,
+      :display_name,
+      :first_name,
+      :last_name,
+      :phone_number)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateAddressBookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "AddressBookName", # required
+    #         description: "AddressBookDescription",
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the address book.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the address book.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, user-specified identifier for the request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBookRequest AWS API Documentation
+    #
+    class CreateAddressBookRequest < Struct.new(
+      :name,
+      :description,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_book_arn
+    #   The ARN of the newly created address book.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBookResponse AWS API Documentation
+    #
+    class CreateAddressBookResponse < Struct.new(
+      :address_book_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         display_name: "ContactName",
+    #         first_name: "ContactName", # required
+    #         last_name: "ContactName",
+    #         phone_number: "E164PhoneNumber", # required
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] display_name
+    #   The name of the contact to display on the AWS management console.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the contact that is used to call the contact on
+    #   the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the contact that is used to call the contact on the
+    #   device.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number of the contact in E164 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique, user-specified identifier for this request that ensures
+    #   idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContactRequest AWS API Documentation
+    #
+    class CreateContactRequest < Struct.new(
+      :display_name,
+      :first_name,
+      :last_name,
+      :phone_number,
+      :client_request_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_arn
+    #   The ARN of the newly created address book.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContactResponse AWS API Documentation
+    #
+    class CreateContactResponse < Struct.new(
+      :contact_arn)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass CreateProfileRequest
     #   data as a hash:
@@ -333,6 +581,50 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAddressBookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         address_book_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] address_book_arn
+    #   The ARN of the address book to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBookRequest AWS API Documentation
+    #
+    class DeleteAddressBookRequest < Struct.new(
+      :address_book_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBookResponse AWS API Documentation
+    #
+    class DeleteAddressBookResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] contact_arn
+    #   The ARN of the contact to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContactRequest AWS API Documentation
+    #
+    class DeleteContactRequest < Struct.new(
+      :contact_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContactResponse AWS API Documentation
+    #
+    class DeleteContactResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteProfileRequest
     #   data as a hash:
     #
@@ -601,6 +893,34 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateContactFromAddressBookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_arn: "Arn", # required
+    #         address_book_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] contact_arn
+    #   The ARN of the contact to disassociate from an address book.
+    #   @return [String]
+    #
+    # @!attribute [rw] address_book_arn
+    #   The ARN of the address from which to disassociate the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateContactFromAddressBookRequest AWS API Documentation
+    #
+    class DisassociateContactFromAddressBookRequest < Struct.new(
+      :contact_arn,
+      :address_book_arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateContactFromAddressBookResponse AWS API Documentation
+    #
+    class DisassociateContactFromAddressBookResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateDeviceFromRoomRequest
     #   data as a hash:
     #
@@ -677,6 +997,64 @@ module Aws::AlexaForBusiness
     class Filter < Struct.new(
       :key,
       :values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAddressBookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         address_book_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] address_book_arn
+    #   The ARN of the address book for which to request details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBookRequest AWS API Documentation
+    #
+    class GetAddressBookRequest < Struct.new(
+      :address_book_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_book
+    #   The details of the requested address book.
+    #   @return [Types::AddressBook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBookResponse AWS API Documentation
+    #
+    class GetAddressBookResponse < Struct.new(
+      :address_book)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] contact_arn
+    #   The ARN of the contact for which to request details.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContactRequest AWS API Documentation
+    #
+    class GetContactRequest < Struct.new(
+      :contact_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact
+    #   The details of the requested contact.
+    #   @return [Types::Contact]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContactResponse AWS API Documentation
+    #
+    class GetContactResponse < Struct.new(
+      :contact)
       include Aws::Structure
     end
 
@@ -1254,6 +1632,159 @@ module Aws::AlexaForBusiness
     class RoomSkillParameter < Struct.new(
       :parameter_key,
       :parameter_value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchAddressBooksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "FilterKey", # required
+    #             values: ["FilterValue"], # required
+    #           },
+    #         ],
+    #         sort_criteria: [
+    #           {
+    #             key: "SortKey", # required
+    #             value: "ASC", # required, accepts ASC, DESC
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   The filters to use to list a specified set of address books. The
+    #   supported filter key is AddressBookName.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] sort_criteria
+    #   The sort order to use in listing the specified set of address books.
+    #   The supported sort key is AddressBookName.
+    #   @return [Array<Types::Sort>]
+    #
+    # @!attribute [rw] next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response only includes results beyond the token, up
+    #   to the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response. If more
+    #   results exist than the specified MaxResults value, a token is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchAddressBooksRequest AWS API Documentation
+    #
+    class SearchAddressBooksRequest < Struct.new(
+      :filters,
+      :sort_criteria,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] address_books
+    #   The address books that meet the specified set of filter criteria, in
+    #   sort order.
+    #   @return [Array<Types::AddressBookData>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned to indicate that there is more data available.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of address books returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchAddressBooksResponse AWS API Documentation
+    #
+    class SearchAddressBooksResponse < Struct.new(
+      :address_books,
+      :next_token,
+      :total_count)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchContactsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "FilterKey", # required
+    #             values: ["FilterValue"], # required
+    #           },
+    #         ],
+    #         sort_criteria: [
+    #           {
+    #             key: "SortKey", # required
+    #             value: "ASC", # required, accepts ASC, DESC
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   The filters to use to list a specified set of address books. The
+    #   supported filter keys are DisplayName, FirstName, LastName, and
+    #   AddressBookArns.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] sort_criteria
+    #   The sort order to use in listing the specified set of contacts. The
+    #   supported sort keys are DisplayName, FirstName, and LastName.
+    #   @return [Array<Types::Sort>]
+    #
+    # @!attribute [rw] next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response only includes results beyond the token, up
+    #   to the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response. If more
+    #   results exist than the specified MaxResults value, a token is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchContactsRequest AWS API Documentation
+    #
+    class SearchContactsRequest < Struct.new(
+      :filters,
+      :sort_criteria,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contacts
+    #   The contacts that meet the specified set of filter criteria, in sort
+    #   order.
+    #   @return [Array<Types::ContactData>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned to indicate that there is more data available.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_count
+    #   The total number of contacts returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchContactsResponse AWS API Documentation
+    #
+    class SearchContactsResponse < Struct.new(
+      :contacts,
+      :next_token,
+      :total_count)
       include Aws::Structure
     end
 
@@ -1881,6 +2412,86 @@ module Aws::AlexaForBusiness
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateAddressBookRequest
+    #   data as a hash:
+    #
+    #       {
+    #         address_book_arn: "Arn", # required
+    #         name: "AddressBookName",
+    #         description: "AddressBookDescription",
+    #       }
+    #
+    # @!attribute [rw] address_book_arn
+    #   The ARN of the room to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the room.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the room.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateAddressBookRequest AWS API Documentation
+    #
+    class UpdateAddressBookRequest < Struct.new(
+      :address_book_arn,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateAddressBookResponse AWS API Documentation
+    #
+    class UpdateAddressBookResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         contact_arn: "Arn", # required
+    #         display_name: "ContactName",
+    #         first_name: "ContactName",
+    #         last_name: "ContactName",
+    #         phone_number: "E164PhoneNumber",
+    #       }
+    #
+    # @!attribute [rw] contact_arn
+    #   The ARN of the contact to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The updated display name of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The updated first name of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The updated last name of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The updated phone number of the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContactRequest AWS API Documentation
+    #
+    class UpdateContactRequest < Struct.new(
+      :contact_arn,
+      :display_name,
+      :first_name,
+      :last_name,
+      :phone_number)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContactResponse AWS API Documentation
+    #
+    class UpdateContactResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDeviceRequest
     #   data as a hash:

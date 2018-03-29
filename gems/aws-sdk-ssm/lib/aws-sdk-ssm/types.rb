@@ -1913,7 +1913,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
@@ -4517,7 +4517,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #       }
     #
     # @!attribute [rw] operating_system
@@ -5478,7 +5478,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #       }
     #
     # @!attribute [rw] patch_group
