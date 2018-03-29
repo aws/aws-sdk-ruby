@@ -264,7 +264,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -313,7 +313,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -337,12 +337,16 @@ module Aws::IAM
     #   new version of the policy.
     #
     #   The [regex pattern][1] used to validate this parameter is a string of
-    #   characters consisting of any printable ASCII character ranging from
-    #   the space character (\\u0020) through end of the ASCII character range
-    #   as well as the printable characters in the Basic Latin and Latin-1
-    #   Supplement character set (through \\u00FF). It also includes the
-    #   special characters tab (\\u0009), line feed (\\u000A), and carriage
-    #   return (\\u000D).
+    #   characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -352,8 +356,8 @@ module Aws::IAM
     #   version.
     #
     #   When this parameter is `true`, the new policy version becomes the
-    #   operative version; that is, the version that is in effect for the IAM
-    #   users, groups, and roles that the policy is attached to.
+    #   operative version. That is, it becomes the version that is in effect
+    #   for the IAM users, groups, and roles that the policy is attached to.
     #
     #   For more information about managed policy versions, see [Versioning
     #   for Managed Policies][1] in the *IAM User Guide*.
@@ -396,7 +400,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -446,7 +450,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -471,12 +475,12 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   entities.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -515,12 +519,12 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   entities.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -559,12 +563,12 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   entities.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #

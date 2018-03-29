@@ -1047,18 +1047,24 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
-    # Represents the backup and restore settings on the table when the
-    # backup was created.
+    # Represents the continuous backups and point in time recovery settings
+    # on the table.
     #
     # @!attribute [rw] continuous_backups_status
-    #   ContinuousBackupsStatus can be one of the following states :
+    #   `ContinuousBackupsStatus` can be one of the following states :
     #   ENABLED, DISABLED
     #   @return [String]
+    #
+    # @!attribute [rw] point_in_time_recovery_description
+    #   The description of the point in time recovery settings applied to
+    #   the table.
+    #   @return [Types::PointInTimeRecoveryDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ContinuousBackupsDescription AWS API Documentation
     #
     class ContinuousBackupsDescription < Struct.new(
-      :continuous_backups_status)
+      :continuous_backups_status,
+      :point_in_time_recovery_description)
       include Aws::Structure
     end
 
@@ -1943,8 +1949,8 @@ module Aws::DynamoDB
     #       }
     #
     # @!attribute [rw] table_name
-    #   Name of the table for which the customer wants to check the backup
-    #   and restore settings.
+    #   Name of the table for which the customer wants to check the
+    #   continuous backups and point in time recovery settings.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackupsInput AWS API Documentation
@@ -3515,6 +3521,59 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The description of the point in time settings applied to the table.
+    #
+    # @!attribute [rw] point_in_time_recovery_status
+    #   The current state of point in time recovery:
+    #
+    #   * `ENABLING` - Point in time recovery is being enabled.
+    #
+    #   * `ENABLED` - Point in time recovery is enabled.
+    #
+    #   * `DISABLED` - Point in time recovery is disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] earliest_restorable_date_time
+    #   Specifies the earliest point in time you can restore your table to.
+    #   It is equal to the maximum of point in time recovery enabled time
+    #   and `CurrentTime` - `PointInTimeRecoveryPeriod`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_restorable_date_time
+    #   `LatestRestorableDateTime` is 5 minutes from now and there is a +/-
+    #   1 minute fuzziness on the restore times.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PointInTimeRecoveryDescription AWS API Documentation
+    #
+    class PointInTimeRecoveryDescription < Struct.new(
+      :point_in_time_recovery_status,
+      :earliest_restorable_date_time,
+      :latest_restorable_date_time)
+      include Aws::Structure
+    end
+
+    # Represents the settings used to enable point in time recovery.
+    #
+    # @note When making an API call, you may pass PointInTimeRecoverySpecification
+    #   data as a hash:
+    #
+    #       {
+    #         point_in_time_recovery_enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] point_in_time_recovery_enabled
+    #   Indicates whether point in time recovery is enabled (true) or
+    #   disabled (false) on the table.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PointInTimeRecoverySpecification AWS API Documentation
+    #
+    class PointInTimeRecoverySpecification < Struct.new(
+      :point_in_time_recovery_enabled)
+      include Aws::Structure
+    end
+
     # Represents attributes that are copied (projected) from the table into
     # an index. These are in addition to the primary key attributes and
     # index key attributes, which are automatically projected.
@@ -4166,8 +4225,8 @@ module Aws::DynamoDB
     #   Items with the same partition key value are stored in sorted order
     #   by sort key. If the sort key data type is Number, the results are
     #   stored in numeric order. For type String, the results are stored in
-    #   order of ASCII character code values. For type Binary, DynamoDB
-    #   treats each byte of the binary data as unsigned.
+    #   order of UTF-8 bytes. For type Binary, DynamoDB treats each byte of
+    #   the binary data as unsigned.
     #
     #   If `ScanIndexForward` is `true`, DynamoDB returns the results in the
     #   order in which they are stored (by sort key value). This is the
@@ -4639,6 +4698,55 @@ module Aws::DynamoDB
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackupOutput AWS API Documentation
     #
     class RestoreTableFromBackupOutput < Struct.new(
+      :table_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RestoreTableToPointInTimeInput
+    #   data as a hash:
+    #
+    #       {
+    #         source_table_name: "TableName", # required
+    #         target_table_name: "TableName", # required
+    #         use_latest_restorable_time: false,
+    #         restore_date_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] source_table_name
+    #   Name of the source table that is being restored.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_table_name
+    #   The name of the new table to which it must be restored to.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_latest_restorable_time
+    #   Restore the table to the latest possible time.
+    #   `LatestRestorableDateTime` is typically 5 minutes before the current
+    #   time.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] restore_date_time
+    #   Time in the past to restore the table to.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTimeInput AWS API Documentation
+    #
+    class RestoreTableToPointInTimeInput < Struct.new(
+      :source_table_name,
+      :target_table_name,
+      :use_latest_restorable_time,
+      :restore_date_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_description
+    #   Represents the properties of a table.
+    #   @return [Types::TableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTimeOutput AWS API Documentation
+    #
+    class RestoreTableToPointInTimeOutput < Struct.new(
       :table_description)
       include Aws::Structure
     end
@@ -5681,6 +5789,44 @@ module Aws::DynamoDB
     class UntagResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateContinuousBackupsInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #         point_in_time_recovery_specification: { # required
+    #           point_in_time_recovery_enabled: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] point_in_time_recovery_specification
+    #   Represents the settings used to enable point in time recovery.
+    #   @return [Types::PointInTimeRecoverySpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContinuousBackupsInput AWS API Documentation
+    #
+    class UpdateContinuousBackupsInput < Struct.new(
+      :table_name,
+      :point_in_time_recovery_specification)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] continuous_backups_description
+    #   Represents the continuous backups and point in time recovery
+    #   settings on the table.
+    #   @return [Types::ContinuousBackupsDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContinuousBackupsOutput AWS API Documentation
+    #
+    class UpdateContinuousBackupsOutput < Struct.new(
+      :continuous_backups_description)
       include Aws::Structure
     end
 

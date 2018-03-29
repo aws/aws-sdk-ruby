@@ -289,6 +289,8 @@ module Aws::IAM
     UpdateOpenIDConnectProviderThumbprintRequest = Shapes::StructureShape.new(name: 'UpdateOpenIDConnectProviderThumbprintRequest')
     UpdateRoleDescriptionRequest = Shapes::StructureShape.new(name: 'UpdateRoleDescriptionRequest')
     UpdateRoleDescriptionResponse = Shapes::StructureShape.new(name: 'UpdateRoleDescriptionResponse')
+    UpdateRoleRequest = Shapes::StructureShape.new(name: 'UpdateRoleRequest')
+    UpdateRoleResponse = Shapes::StructureShape.new(name: 'UpdateRoleResponse')
     UpdateSAMLProviderRequest = Shapes::StructureShape.new(name: 'UpdateSAMLProviderRequest')
     UpdateSAMLProviderResponse = Shapes::StructureShape.new(name: 'UpdateSAMLProviderResponse')
     UpdateSSHPublicKeyRequest = Shapes::StructureShape.new(name: 'UpdateSSHPublicKeyRequest')
@@ -382,6 +384,7 @@ module Aws::IAM
     roleDescriptionType = Shapes::StringShape.new(name: 'roleDescriptionType')
     roleDetailListType = Shapes::ListShape.new(name: 'roleDetailListType')
     roleListType = Shapes::ListShape.new(name: 'roleListType')
+    roleMaxSessionDurationType = Shapes::IntegerShape.new(name: 'roleMaxSessionDurationType')
     roleNameType = Shapes::StringShape.new(name: 'roleNameType')
     serialNumberType = Shapes::StringShape.new(name: 'serialNumberType')
     serverCertificateMetadataListType = Shapes::ListShape.new(name: 'serverCertificateMetadataListType')
@@ -532,6 +535,7 @@ module Aws::IAM
     CreateRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
     CreateRoleRequest.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, required: true, location_name: "AssumeRolePolicyDocument"))
     CreateRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
+    CreateRoleRequest.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
     CreateRoleRequest.struct_class = Types::CreateRoleRequest
 
     CreateRoleResponse.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
@@ -1259,6 +1263,7 @@ module Aws::IAM
     Role.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
     Role.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "AssumeRolePolicyDocument"))
     Role.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
+    Role.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
     Role.struct_class = Types::Role
 
     RoleDetail.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
@@ -1424,6 +1429,13 @@ module Aws::IAM
 
     UpdateRoleDescriptionResponse.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
     UpdateRoleDescriptionResponse.struct_class = Types::UpdateRoleDescriptionResponse
+
+    UpdateRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
+    UpdateRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
+    UpdateRoleRequest.add_member(:max_session_duration, Shapes::ShapeRef.new(shape: roleMaxSessionDurationType, location_name: "MaxSessionDuration"))
+    UpdateRoleRequest.struct_class = Types::UpdateRoleRequest
+
+    UpdateRoleResponse.struct_class = Types::UpdateRoleResponse
 
     UpdateSAMLProviderRequest.add_member(:saml_metadata_document, Shapes::ShapeRef.new(shape: SAMLMetadataDocumentType, required: true, location_name: "SAMLMetadataDocument"))
     UpdateSAMLProviderRequest.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "SAMLProviderArn"))
@@ -2979,6 +2991,17 @@ module Aws::IAM
         o.input = Shapes::ShapeRef.new(shape: UpdateOpenIDConnectProviderThumbprintRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRole"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRoleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRoleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)

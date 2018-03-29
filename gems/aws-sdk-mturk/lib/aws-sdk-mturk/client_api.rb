@@ -66,6 +66,7 @@ module Aws::MTurk
     GetQualificationTypeRequest = Shapes::StructureShape.new(name: 'GetQualificationTypeRequest')
     GetQualificationTypeResponse = Shapes::StructureShape.new(name: 'GetQualificationTypeResponse')
     HIT = Shapes::StructureShape.new(name: 'HIT')
+    HITAccessActions = Shapes::StringShape.new(name: 'HITAccessActions')
     HITLayoutParameter = Shapes::StructureShape.new(name: 'HITLayoutParameter')
     HITLayoutParameterList = Shapes::ListShape.new(name: 'HITLayoutParameterList')
     HITList = Shapes::ListShape.new(name: 'HITList')
@@ -554,7 +555,8 @@ module Aws::MTurk
     QualificationRequirement.add_member(:comparator, Shapes::ShapeRef.new(shape: Comparator, required: true, location_name: "Comparator"))
     QualificationRequirement.add_member(:integer_values, Shapes::ShapeRef.new(shape: IntegerList, location_name: "IntegerValues"))
     QualificationRequirement.add_member(:locale_values, Shapes::ShapeRef.new(shape: LocaleList, location_name: "LocaleValues"))
-    QualificationRequirement.add_member(:required_to_preview, Shapes::ShapeRef.new(shape: Boolean, location_name: "RequiredToPreview"))
+    QualificationRequirement.add_member(:required_to_preview, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "RequiredToPreview"))
+    QualificationRequirement.add_member(:actions_guarded, Shapes::ShapeRef.new(shape: HITAccessActions, location_name: "ActionsGuarded"))
     QualificationRequirement.struct_class = Types::QualificationRequirement
 
     QualificationRequirementList.member = Shapes::ShapeRef.new(shape: QualificationRequirement)

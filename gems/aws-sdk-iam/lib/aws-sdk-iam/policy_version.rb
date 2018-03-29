@@ -44,6 +44,17 @@ module Aws::IAM
     # GetPolicyVersion and GetAccountAuthorizationDetails operations. It is
     # not returned in the response to the CreatePolicyVersion or
     # ListPolicyVersions operations.
+    #
+    # The policy document returned in this structure is URL-encoded
+    # compliant with [RFC 3986][1]. You can use a URL decoding method to
+    # convert the policy back to plain JSON text. For example, if you use
+    # Java, you can use the `decode` method of the `java.net.URLDecoder`
+    # utility class in the Java SDK. Other languages and SDKs provide
+    # similar functionality.
+    #
+    #
+    #
+    # [1]: https://tools.ietf.org/html/rfc3986
     # @return [String]
     def document
       data[:document]

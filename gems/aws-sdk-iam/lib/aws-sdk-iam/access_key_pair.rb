@@ -48,8 +48,8 @@ module Aws::IAM
     end
     alias :secret_access_key :secret
 
-    # The status of the access key. `Active` means the key is valid for API
-    # calls, while `Inactive` means it is not.
+    # The status of the access key. `Active` means that the key is valid for
+    # API calls, while `Inactive` means it is not.
     # @return [String]
     def status
       data[:status]
