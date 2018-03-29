@@ -26,6 +26,8 @@ module Aws
         def apply_api_customizations(api)
           metadata = api['metadata'] || {}
           prefix = metadata['endpointPrefix']
+          # event stream is not supported at V2
+          api = exclude_eventstream(api)
           @apis[prefix].call(api) if @apis[prefix]
         end
 
@@ -39,6 +41,29 @@ module Aws
           if @plugins[prefix]
             @plugins[prefix][:add].each { |p| client_class.add_plugin(p) }
             @plugins[prefix][:remove].each { |p| client_class.remove_plugin(p) }
+          end
+        end
+
+        private
+
+        def exclude_eventstream(api)
+          api['operations'].each do |name, ref|
+            inbound = ref['input'] && is_eventstream?(api, ref['input']['shape'])
+            outbound = ref['output'] && is_eventstream?(api, ref['output']['shape'])
+            api['operations'].delete(name) if !!inbound || !!outbound
+          end
+          api
+        end
+
+        def is_eventstream?(api, shape_name)
+          shape = api['shapes'][shape_name]
+          if shape['type'] == 'structure' && shape['payload']
+            payload_ref = shape['members'][shape['payload']]
+            api['shapes'][payload_ref['shape']]['eventstream']
+          else
+            # non structure request/response shape
+            # check if it's eventstream itself
+            shape['eventstream']
           end
         end
 
