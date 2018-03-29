@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix undefined method `each`/`next` for `Enumerable::Enumerator` when this class exists in the environment
+
 3.18.0 (2018-03-28)
 ------------------
 
@@ -266,4 +268,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-core` gem.
-
