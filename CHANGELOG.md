@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.25 (2018-03-29)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
