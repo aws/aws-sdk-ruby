@@ -117,6 +117,7 @@ module Aws::DynamoDB
     IndexStatus = Shapes::StringShape.new(name: 'IndexStatus')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
+    InvalidRestoreTimeException = Shapes::StructureShape.new(name: 'InvalidRestoreTimeException')
     ItemCollectionKeyAttributeMap = Shapes::MapShape.new(name: 'ItemCollectionKeyAttributeMap')
     ItemCollectionMetrics = Shapes::StructureShape.new(name: 'ItemCollectionMetrics')
     ItemCollectionMetricsMultiple = Shapes::ListShape.new(name: 'ItemCollectionMetricsMultiple')
@@ -160,6 +161,10 @@ module Aws::DynamoDB
     NullAttributeValue = Shapes::BooleanShape.new(name: 'NullAttributeValue')
     NumberAttributeValue = Shapes::StringShape.new(name: 'NumberAttributeValue')
     NumberSetAttributeValue = Shapes::ListShape.new(name: 'NumberSetAttributeValue')
+    PointInTimeRecoveryDescription = Shapes::StructureShape.new(name: 'PointInTimeRecoveryDescription')
+    PointInTimeRecoverySpecification = Shapes::StructureShape.new(name: 'PointInTimeRecoverySpecification')
+    PointInTimeRecoveryStatus = Shapes::StringShape.new(name: 'PointInTimeRecoveryStatus')
+    PointInTimeRecoveryUnavailableException = Shapes::StructureShape.new(name: 'PointInTimeRecoveryUnavailableException')
     PositiveIntegerObject = Shapes::IntegerShape.new(name: 'PositiveIntegerObject')
     PositiveLongObject = Shapes::IntegerShape.new(name: 'PositiveLongObject')
     Projection = Shapes::StructureShape.new(name: 'Projection')
@@ -186,11 +191,12 @@ module Aws::DynamoDB
     ResourceArnString = Shapes::StringShape.new(name: 'ResourceArnString')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
-    RestoreDateTime = Shapes::TimestampShape.new(name: 'RestoreDateTime')
     RestoreInProgress = Shapes::BooleanShape.new(name: 'RestoreInProgress')
     RestoreSummary = Shapes::StructureShape.new(name: 'RestoreSummary')
     RestoreTableFromBackupInput = Shapes::StructureShape.new(name: 'RestoreTableFromBackupInput')
     RestoreTableFromBackupOutput = Shapes::StructureShape.new(name: 'RestoreTableFromBackupOutput')
+    RestoreTableToPointInTimeInput = Shapes::StructureShape.new(name: 'RestoreTableToPointInTimeInput')
+    RestoreTableToPointInTimeOutput = Shapes::StructureShape.new(name: 'RestoreTableToPointInTimeOutput')
     ReturnConsumedCapacity = Shapes::StringShape.new(name: 'ReturnConsumedCapacity')
     ReturnItemCollectionMetrics = Shapes::StringShape.new(name: 'ReturnItemCollectionMetrics')
     ReturnValue = Shapes::StringShape.new(name: 'ReturnValue')
@@ -238,6 +244,8 @@ module Aws::DynamoDB
     TimeToLiveSpecification = Shapes::StructureShape.new(name: 'TimeToLiveSpecification')
     TimeToLiveStatus = Shapes::StringShape.new(name: 'TimeToLiveStatus')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
+    UpdateContinuousBackupsInput = Shapes::StructureShape.new(name: 'UpdateContinuousBackupsInput')
+    UpdateContinuousBackupsOutput = Shapes::StructureShape.new(name: 'UpdateContinuousBackupsOutput')
     UpdateExpression = Shapes::StringShape.new(name: 'UpdateExpression')
     UpdateGlobalSecondaryIndexAction = Shapes::StructureShape.new(name: 'UpdateGlobalSecondaryIndexAction')
     UpdateGlobalTableInput = Shapes::StructureShape.new(name: 'UpdateGlobalTableInput')
@@ -354,6 +362,7 @@ module Aws::DynamoDB
     ConsumedCapacityMultiple.member = Shapes::ShapeRef.new(shape: ConsumedCapacity)
 
     ContinuousBackupsDescription.add_member(:continuous_backups_status, Shapes::ShapeRef.new(shape: ContinuousBackupsStatus, required: true, location_name: "ContinuousBackupsStatus"))
+    ContinuousBackupsDescription.add_member(:point_in_time_recovery_description, Shapes::ShapeRef.new(shape: PointInTimeRecoveryDescription, location_name: "PointInTimeRecoveryDescription"))
     ContinuousBackupsDescription.struct_class = Types::ContinuousBackupsDescription
 
     CreateBackupInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
@@ -654,6 +663,14 @@ module Aws::DynamoDB
 
     NumberSetAttributeValue.member = Shapes::ShapeRef.new(shape: NumberAttributeValue)
 
+    PointInTimeRecoveryDescription.add_member(:point_in_time_recovery_status, Shapes::ShapeRef.new(shape: PointInTimeRecoveryStatus, location_name: "PointInTimeRecoveryStatus"))
+    PointInTimeRecoveryDescription.add_member(:earliest_restorable_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "EarliestRestorableDateTime"))
+    PointInTimeRecoveryDescription.add_member(:latest_restorable_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "LatestRestorableDateTime"))
+    PointInTimeRecoveryDescription.struct_class = Types::PointInTimeRecoveryDescription
+
+    PointInTimeRecoverySpecification.add_member(:point_in_time_recovery_enabled, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "PointInTimeRecoveryEnabled"))
+    PointInTimeRecoverySpecification.struct_class = Types::PointInTimeRecoverySpecification
+
     Projection.add_member(:projection_type, Shapes::ShapeRef.new(shape: ProjectionType, location_name: "ProjectionType"))
     Projection.add_member(:non_key_attributes, Shapes::ShapeRef.new(shape: NonKeyAttributeNameList, location_name: "NonKeyAttributes"))
     Projection.struct_class = Types::Projection
@@ -736,7 +753,7 @@ module Aws::DynamoDB
 
     RestoreSummary.add_member(:source_backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "SourceBackupArn"))
     RestoreSummary.add_member(:source_table_arn, Shapes::ShapeRef.new(shape: TableArn, location_name: "SourceTableArn"))
-    RestoreSummary.add_member(:restore_date_time, Shapes::ShapeRef.new(shape: RestoreDateTime, required: true, location_name: "RestoreDateTime"))
+    RestoreSummary.add_member(:restore_date_time, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "RestoreDateTime"))
     RestoreSummary.add_member(:restore_in_progress, Shapes::ShapeRef.new(shape: RestoreInProgress, required: true, location_name: "RestoreInProgress"))
     RestoreSummary.struct_class = Types::RestoreSummary
 
@@ -746,6 +763,15 @@ module Aws::DynamoDB
 
     RestoreTableFromBackupOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
     RestoreTableFromBackupOutput.struct_class = Types::RestoreTableFromBackupOutput
+
+    RestoreTableToPointInTimeInput.add_member(:source_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "SourceTableName"))
+    RestoreTableToPointInTimeInput.add_member(:target_table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TargetTableName"))
+    RestoreTableToPointInTimeInput.add_member(:use_latest_restorable_time, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "UseLatestRestorableTime"))
+    RestoreTableToPointInTimeInput.add_member(:restore_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "RestoreDateTime"))
+    RestoreTableToPointInTimeInput.struct_class = Types::RestoreTableToPointInTimeInput
+
+    RestoreTableToPointInTimeOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
+    RestoreTableToPointInTimeOutput.struct_class = Types::RestoreTableToPointInTimeOutput
 
     SSEDescription.add_member(:status, Shapes::ShapeRef.new(shape: SSEStatus, location_name: "Status"))
     SSEDescription.struct_class = Types::SSEDescription
@@ -848,6 +874,13 @@ module Aws::DynamoDB
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
+
+    UpdateContinuousBackupsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
+    UpdateContinuousBackupsInput.add_member(:point_in_time_recovery_specification, Shapes::ShapeRef.new(shape: PointInTimeRecoverySpecification, required: true, location_name: "PointInTimeRecoverySpecification"))
+    UpdateContinuousBackupsInput.struct_class = Types::UpdateContinuousBackupsInput
+
+    UpdateContinuousBackupsOutput.add_member(:continuous_backups_description, Shapes::ShapeRef.new(shape: ContinuousBackupsDescription, location_name: "ContinuousBackupsDescription"))
+    UpdateContinuousBackupsOutput.struct_class = Types::UpdateContinuousBackupsOutput
 
     UpdateGlobalSecondaryIndexAction.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     UpdateGlobalSecondaryIndexAction.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, required: true, location_name: "ProvisionedThroughput"))
@@ -1176,6 +1209,21 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:restore_table_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreTableToPointInTime"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreTableToPointInTimeInput)
+        o.output = Shapes::ShapeRef.new(shape: RestoreTableToPointInTimeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TableAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: TableNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TableInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRestoreTimeException)
+        o.errors << Shapes::ShapeRef.new(shape: PointInTimeRecoveryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:scan, Seahorse::Model::Operation.new.tap do |o|
         o.name = "Scan"
         o.http_method = "POST"
@@ -1215,6 +1263,17 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:update_continuous_backups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateContinuousBackups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateContinuousBackupsInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateContinuousBackupsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TableNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ContinuousBackupsUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:update_global_table, Seahorse::Model::Operation.new.tap do |o|

@@ -27,6 +27,9 @@ module AwsSdkCodeGenerator
         'flattened' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
+        # ignore event stream traits
+        'event' => false,
+        'eventstream' => false,
         # ignore
         'box' => false,
         'fault' => false,
@@ -102,12 +105,14 @@ module AwsSdkCodeGenerator
           if @service.protocol == 'api-gateway'
             shape_name = lstrip_prefix(upcase_first(shape_name))
           end
+          # exclude event stream/event shapes
+          next if shape['eventstream'] || shape['event']
           Shape.new.tap do |s|
             s.name = shape_name
             s.class_name, shape = shape_class_name(shape)
             s.constructor_args = shape_constructor_args(shape_name, shape)
           end
-        end
+        end.compact
       end
 
       def shape_definitions
@@ -117,7 +122,10 @@ module AwsSdkCodeGenerator
             shape_name = lstrip_prefix(upcase_first(shape_name))
           end
           lines = []
-          if non_error_struct?(shape)
+          # exclude event stream/event shapes
+          if shape['eventstream'] || shape['event']
+            groups
+          elsif non_error_struct?(shape)
             required = Set.new(shape['required'] || [])
             unless shape['members'].nil?
               shape['members'].each do |member_name, member_ref|
