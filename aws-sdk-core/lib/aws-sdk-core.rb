@@ -57,6 +57,7 @@ module Aws
     CognitoSync
     Comprehend
     ConfigService
+    Connect
     CostExplorer
     CostandUsageReportService
     DAX

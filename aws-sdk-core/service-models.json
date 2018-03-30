@@ -134,6 +134,10 @@
     "models": "config/2014-11-12",
     "endpoint": "config"
   },
+  "Connect": {
+    "models": "connect/2017-08-08",
+    "endpoint": "connect"
+  },
   "CostExplorer": {
     "models": "ce/2017-10-25",
     "endpoint": "ce"

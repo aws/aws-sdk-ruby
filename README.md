@@ -294,8 +294,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                          | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                     | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                  | KMS                             | 2014-11-01  |
-| AWS Lambda                                  | LambdaPreview                   | 2014-11-11  |
 | AWS Lambda                                  | Lambda                          | 2015-03-31  |
+| AWS Lambda                                  | LambdaPreview                   | 2014-11-11  |
 | AWS Marketplace Commerce Analytics          | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service         | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS Migration Hub                           | MigrationHub                    | 2017-05-31  |
@@ -334,6 +334,7 @@ to be backwards compatible.
 | Amazon Cognito Identity Provider            | CognitoIdentityProvider         | 2016-04-18  |
 | Amazon Cognito Sync                         | CognitoSync                     | 2014-06-30  |
 | Amazon Comprehend                           | Comprehend                      | 2017-11-27  |
+| Amazon Connect Service                      | Connect                         | 2017-08-08  |
 | Amazon DynamoDB                             | DynamoDB                        | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)           | DAX                             | 2017-04-19  |
 | Amazon DynamoDB Streams                     | DynamoDBStreams                 | 2012-08-10  |
@@ -386,8 +387,8 @@ to be backwards compatible.
 | AmazonMQ                                    | MQ                              | 2017-11-27  |
 | Application Auto Scaling                    | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                      | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                      | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                      | ElasticLoadBalancingV2          | 2015-12-01  |
 
 ## License
 
