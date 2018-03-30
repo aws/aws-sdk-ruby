@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.26 (2018-03-30)
+------------------
+
 * Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
 
 * Feature - Aws::Connect - Added support for a new service, Amazon Connect Service.
