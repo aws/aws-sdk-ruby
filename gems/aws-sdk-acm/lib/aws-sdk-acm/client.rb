@@ -645,23 +645,26 @@ module Aws::ACM
     # request an ACM certificate, you must specify the fully qualified
     # domain name (FQDN) for your site in the `DomainName` parameter. You
     # can also specify additional FQDNs in the `SubjectAlternativeNames`
-    # parameter if users can reach your site by using other names.
+    # parameter.
     #
-    # For each domain name you specify, email is sent to the domain owner to
+    # Each domain name that you specify must be validated to verify that you
+    # own or control the domain. You can use [DNS validation][1] or [email
+    # validation][2]. We recommend that you use DNS validation.
+    #
+    # If you choose email validation, email is sent to the domain owner to
     # request approval to issue the certificate. Email is sent to three
     # registered contact addresses in the WHOIS database and to five common
     # system administration addresses formed from the `DomainName` you enter
     # or the optional `ValidationDomain` parameter. For more information,
-    # see [Validate Domain Ownership][1].
+    # see [Validate with Email][2].
     #
     # After receiving approval from the domain owner, the ACM certificate is
-    # issued. For more information, see the [AWS Certificate Manager User
-    # Guide][2].
+    # issued.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate.html
-    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [required, String] :domain_name
     #   Fully qualified domain name (FQDN), such as www.example.com, of the
@@ -675,7 +678,14 @@ module Aws::ACM
     #   be up to 253 octets in length.
     #
     # @option params [String] :validation_method
-    #   The method you want to use to validate your domain.
+    #   The method you want to use to validate that you own or control domain.
+    #   You can [validate with DNS][1] or [validate with email][2]. We
+    #   recommend that you use DNS validation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [Array<String>] :subject_alternative_names
     #   Additional FQDNs to be included in the Subject Alternative Name
@@ -726,8 +736,11 @@ module Aws::ACM
     #   transparency makes it possible to detect SSL/TLS certificates that
     #   have been mistakenly or maliciously issued. Certificates that have not
     #   been logged typically produce an error message in a browser. For more
-    #   information, see [ Opting Out of Certificate Transparency
-    #   Logging](acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
+    #   information, see [Opting Out of Certificate Transparency Logging][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -836,8 +849,11 @@ module Aws::ACM
     # Updates a certificate. Currently, you can use this function to specify
     # whether to opt in to or out of recording your certificate in a
     # certificate transparency log. For more information, see [ Opting Out
-    # of Certificate Transparency
-    # Logging](acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
+    # of Certificate Transparency Logging][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #
     # @option params [required, String] :certificate_arn
     #   ARN of the requested certificate to update. This must be of the form:
@@ -886,7 +902,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -8,15 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-acm/types'
-require_relative 'aws-sdk-acm/client_api'
-require_relative 'aws-sdk-acm/client'
-require_relative 'aws-sdk-acm/errors'
-require_relative 'aws-sdk-acm/resource'
-require_relative 'aws-sdk-acm/customizations'
+require_relative 'aws-sdk-connect/types'
+require_relative 'aws-sdk-connect/client_api'
+require_relative 'aws-sdk-connect/client'
+require_relative 'aws-sdk-connect/errors'
+require_relative 'aws-sdk-connect/resource'
+require_relative 'aws-sdk-connect/customizations'
 
-# This module provides support for AWS Certificate Manager. This module is available in the
-# `aws-sdk-acm` gem.
+# This module provides support for Amazon Connect Service. This module is available in the
+# `aws-sdk-connect` gem.
 #
 # # Client
 #
@@ -28,20 +28,20 @@ require_relative 'aws-sdk-acm/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS Certificate Manager all
+# Errors returned from Amazon Connect Service all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::ACM::Errors::ServiceError
+#     rescue Aws::Connect::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::ACM
+module Aws::Connect
 
-  GEM_VERSION = '1.5.0'
+  GEM_VERSION = '1.0.0'
 
 end

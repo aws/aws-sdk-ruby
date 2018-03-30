@@ -198,7 +198,7 @@ module Aws::ACM
     #   transparency log. Certificate transparency makes it possible to
     #   detect SSL certificates that have been mistakenly or maliciously
     #   issued. A browser might respond to certificate that has not been
-    #   logged by showing an error message. The logs are cryptographicaly
+    #   logged by showing an error message. The logs are cryptographically
     #   secure.
     #   @return [Types::CertificateOptions]
     #
@@ -239,8 +239,11 @@ module Aws::ACM
     # that are not logged typically generate a browser error. Transparency
     # makes it possible for you to detect SSL/TLS certificates that have
     # been mistakenly or maliciously issued for your domain. For general
-    # information, see [ACM
-    # Concepts](acm/latest/userguide/acm-concepts.html).
+    # information, see [Certificate Transparency Logging][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
     #
     # @note When making an API call, you may pass CertificateOptions
     #   data as a hash:
@@ -855,7 +858,14 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] validation_method
-    #   The method you want to use to validate your domain.
+    #   The method you want to use to validate that you own or control
+    #   domain. You can [validate with DNS][1] or [validate with email][2].
+    #   We recommend that you use DNS validation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
@@ -910,8 +920,12 @@ module Aws::ACM
     #   transparency makes it possible to detect SSL/TLS certificates that
     #   have been mistakenly or maliciously issued. Certificates that have
     #   not been logged typically produce an error message in a browser. For
-    #   more information, see [ Opting Out of Certificate Transparency
-    #   Logging](acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
+    #   more information, see [Opting Out of Certificate Transparency
+    #   Logging][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #   @return [Types::CertificateOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation

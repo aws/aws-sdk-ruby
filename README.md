@@ -339,8 +339,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                          | Aws::IoTDataPlane                    | aws-sdk-iotdataplane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                     | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS Key Management Service                  | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
-| AWS Lambda                                  | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS Lambda                                  | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
+| AWS Lambda                                  | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS Marketplace Commerce Analytics          | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service         | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
 | AWS Migration Hub                           | Aws::MigrationHub                    | aws-sdk-migrationhub                    | 2017-05-31  |
@@ -379,6 +379,7 @@ to be backwards compatible.
 | Amazon Cognito Identity Provider            | Aws::CognitoIdentityProvider         | aws-sdk-cognitoidentityprovider         | 2016-04-18  |
 | Amazon Cognito Sync                         | Aws::CognitoSync                     | aws-sdk-cognitosync                     | 2014-06-30  |
 | Amazon Comprehend                           | Aws::Comprehend                      | aws-sdk-comprehend                      | 2017-11-27  |
+| Amazon Connect Service                      | Aws::Connect                         | aws-sdk-connect                         | 2017-08-08  |
 | Amazon DynamoDB                             | Aws::DynamoDB                        | aws-sdk-dynamodb                        | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)           | Aws::DAX                             | aws-sdk-dax                             | 2017-04-19  |
 | Amazon DynamoDB Streams                     | Aws::DynamoDBStreams                 | aws-sdk-dynamodbstreams                 | 2012-08-10  |
@@ -431,8 +432,8 @@ to be backwards compatible.
 | AmazonMQ                                    | Aws::MQ                              | aws-sdk-mq                              | 2017-11-27  |
 | Application Auto Scaling                    | Aws::ApplicationAutoScaling          | aws-sdk-applicationautoscaling          | 2016-02-06  |
 | Auto Scaling                                | Aws::AutoScaling                     | aws-sdk-autoscaling                     | 2011-01-01  |
-| Elastic Load Balancing                      | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 | Elastic Load Balancing                      | Aws::ElasticLoadBalancing            | aws-sdk-elasticloadbalancing            | 2012-06-01  |
+| Elastic Load Balancing                      | Aws::ElasticLoadBalancingV2          | aws-sdk-elasticloadbalancingv2          | 2015-12-01  |
 
 ## License
 

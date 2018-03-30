@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2018-03-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Connect`.
+
 1.75.0 (2018-03-29)
 ------------------
 

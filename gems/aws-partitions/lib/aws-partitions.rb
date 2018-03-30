@@ -254,6 +254,7 @@ module Aws
             'CognitoSync' => 'cognito-sync',
             'Comprehend' => 'comprehend',
             'ConfigService' => 'config',
+            'Connect' => 'connect',
             'CostExplorer' => 'ce',
             'CostandUsageReportService' => 'cur',
             'DAX' => 'dax',

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.13.0 (2018-03-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-connect` gem.
+
 3.12.0 (2018-01-19)
 ------------------
 

@@ -37,6 +37,7 @@ module Aws
   autoload :CognitoSync, 'aws-sdk-cognitosync'
   autoload :Comprehend, 'aws-sdk-comprehend'
   autoload :ConfigService, 'aws-sdk-configservice'
+  autoload :Connect, 'aws-sdk-connect'
   autoload :CostExplorer, 'aws-sdk-costexplorer'
   autoload :CostandUsageReportService, 'aws-sdk-costandusagereportservice'
   autoload :DAX, 'aws-sdk-dax'
