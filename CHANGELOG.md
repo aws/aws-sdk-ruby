@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2017-10-30 API version of Amazon CloudFront.
+
 2.11.26 (2018-03-30)
 ------------------
 
