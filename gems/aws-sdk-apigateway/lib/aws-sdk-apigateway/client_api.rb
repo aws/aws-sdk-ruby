@@ -430,6 +430,7 @@ module Aws::APIGateway
     CreateRestApiRequest.add_member(:minimum_compression_size, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "minimumCompressionSize"))
     CreateRestApiRequest.add_member(:api_key_source, Shapes::ShapeRef.new(shape: ApiKeySourceType, location_name: "apiKeySource"))
     CreateRestApiRequest.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
+    CreateRestApiRequest.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
     CreateRestApiRequest.struct_class = Types::CreateRestApiRequest
 
     CreateStageRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -1137,6 +1138,7 @@ module Aws::APIGateway
     RestApi.add_member(:minimum_compression_size, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "minimumCompressionSize"))
     RestApi.add_member(:api_key_source, Shapes::ShapeRef.new(shape: ApiKeySourceType, location_name: "apiKeySource"))
     RestApi.add_member(:endpoint_configuration, Shapes::ShapeRef.new(shape: EndpointConfiguration, location_name: "endpointConfiguration"))
+    RestApi.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
     RestApi.struct_class = Types::RestApi
 
     RestApis.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))

@@ -117,6 +117,67 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Options to specify the Cognito user and identity pools for Kibana
+    # authentication. For more information, see [Amazon Cognito
+    # Authentication for Kibana][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
+    #
+    # @note When making an API call, you may pass CognitoOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         user_pool_id: "UserPoolId",
+    #         identity_pool_id: "IdentityPoolId",
+    #         role_arn: "RoleArn",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specifies the option to enable Cognito for Kibana authentication.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] user_pool_id
+    #   Specifies the Cognito user pool ID for Kibana authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_pool_id
+    #   Specifies the Cognito identity pool ID for Kibana authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   Specifies the role ARN that provides Elasticsearch permissions for
+    #   accessing Cognito resources.
+    #   @return [String]
+    #
+    class CognitoOptions < Struct.new(
+      :enabled,
+      :user_pool_id,
+      :identity_pool_id,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Status of the Cognito options for the specified Elasticsearch domain.
+    #
+    # @!attribute [rw] options
+    #   Specifies the Cognito options for the specified Elasticsearch
+    #   domain.
+    #   @return [Types::CognitoOptions]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the Cognito options for the specified
+    #   Elasticsearch domain.
+    #   @return [Types::OptionStatus]
+    #
+    class CognitoOptionsStatus < Struct.new(
+      :options,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateElasticsearchDomainRequest
     #   data as a hash:
     #
@@ -144,6 +205,12 @@ module Aws::ElasticsearchService
     #         vpc_options: {
     #           subnet_ids: ["String"],
     #           security_group_ids: ["String"],
+    #         },
+    #         cognito_options: {
+    #           enabled: false,
+    #           user_pool_id: "UserPoolId",
+    #           identity_pool_id: "IdentityPoolId",
+    #           role_arn: "RoleArn",
     #         },
     #         encryption_at_rest_options: {
     #           enabled: false,
@@ -208,6 +275,16 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
     #   @return [Types::VPCOptions]
     #
+    # @!attribute [rw] cognito_options
+    #   Options to specify the Cognito user and identity pools for Kibana
+    #   authentication. For more information, see [Amazon Cognito
+    #   Authentication for Kibana][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
+    #   @return [Types::CognitoOptions]
+    #
     # @!attribute [rw] encryption_at_rest_options
     #   Specifies the Encryption At Rest Options.
     #   @return [Types::EncryptionAtRestOptions]
@@ -236,6 +313,7 @@ module Aws::ElasticsearchService
       :access_policies,
       :snapshot_options,
       :vpc_options,
+      :cognito_options,
       :encryption_at_rest_options,
       :advanced_options,
       :log_publishing_options)
@@ -614,6 +692,15 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
     #   @return [Types::VPCDerivedInfoStatus]
     #
+    # @!attribute [rw] cognito_options
+    #   The `CognitoOptions` for the specified domain. For more information,
+    #   see [Amazon Cognito Authentication for Kibana][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
+    #   @return [Types::CognitoOptionsStatus]
+    #
     # @!attribute [rw] encryption_at_rest_options
     #   Specifies the `EncryptionAtRestOptions` for the Elasticsearch
     #   domain.
@@ -639,6 +726,7 @@ module Aws::ElasticsearchService
       :access_policies,
       :snapshot_options,
       :vpc_options,
+      :cognito_options,
       :encryption_at_rest_options,
       :advanced_options,
       :log_publishing_options)
@@ -731,6 +819,15 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html
     #   @return [Types::VPCDerivedInfo]
     #
+    # @!attribute [rw] cognito_options
+    #   The `CognitoOptions` for the specified domain. For more information,
+    #   see [Amazon Cognito Authentication for Kibana][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
+    #   @return [Types::CognitoOptions]
+    #
     # @!attribute [rw] encryption_at_rest_options
     #   Specifies the status of the `EncryptionAtRestOptions`.
     #   @return [Types::EncryptionAtRestOptions]
@@ -758,6 +855,7 @@ module Aws::ElasticsearchService
       :access_policies,
       :snapshot_options,
       :vpc_options,
+      :cognito_options,
       :encryption_at_rest_options,
       :advanced_options,
       :log_publishing_options)
@@ -1301,6 +1399,12 @@ module Aws::ElasticsearchService
     #           subnet_ids: ["String"],
     #           security_group_ids: ["String"],
     #         },
+    #         cognito_options: {
+    #           enabled: false,
+    #           user_pool_id: "UserPoolId",
+    #           identity_pool_id: "IdentityPoolId",
+    #           role_arn: "RoleArn",
+    #         },
     #         advanced_options: {
     #           "String" => "String",
     #         },
@@ -1341,6 +1445,16 @@ module Aws::ElasticsearchService
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
     #   @return [Types::VPCOptions]
     #
+    # @!attribute [rw] cognito_options
+    #   Options to specify the Cognito user and identity pools for Kibana
+    #   authentication. For more information, see [Amazon Cognito
+    #   Authentication for Kibana][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
+    #   @return [Types::CognitoOptions]
+    #
     # @!attribute [rw] advanced_options
     #   Modifies the advanced option to allow references to indices in an
     #   HTTP request body. Must be `false` when configuring access to
@@ -1367,6 +1481,7 @@ module Aws::ElasticsearchService
       :ebs_options,
       :snapshot_options,
       :vpc_options,
+      :cognito_options,
       :advanced_options,
       :access_policies,
       :log_publishing_options)

@@ -368,7 +368,7 @@ to be backwards compatible.
 | Amazon AppStream                            | Aws::AppStream                       | aws-sdk-appstream                       | 2016-12-01  |
 | Amazon Athena                               | Aws::Athena                          | aws-sdk-athena                          | 2017-05-18  |
 | Amazon CloudDirectory                       | Aws::CloudDirectory                  | aws-sdk-clouddirectory                  | 2016-05-10  |
-| Amazon CloudFront                           | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2017-03-25  |
+| Amazon CloudFront                           | Aws::CloudFront                      | aws-sdk-cloudfront                      | 2017-10-30  |
 | Amazon CloudHSM                             | Aws::CloudHSM                        | aws-sdk-cloudhsm                        | 2014-05-30  |
 | Amazon CloudSearch                          | Aws::CloudSearch                     | aws-sdk-cloudsearch                     | 2013-01-01  |
 | Amazon CloudSearch Domain                   | Aws::CloudSearchDomain               | aws-sdk-cloudsearchdomain               | 2013-01-01  |

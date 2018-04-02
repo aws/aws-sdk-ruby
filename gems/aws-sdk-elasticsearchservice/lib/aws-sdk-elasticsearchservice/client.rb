@@ -230,6 +230,15 @@ module Aws::ElasticsearchService
     #
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
     #
+    # @option params [Types::CognitoOptions] :cognito_options
+    #   Options to specify the Cognito user and identity pools for Kibana
+    #   authentication. For more information, see [Amazon Cognito
+    #   Authentication for Kibana][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
+    #
     # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
     #   Specifies the Encryption At Rest Options.
     #
@@ -278,6 +287,12 @@ module Aws::ElasticsearchService
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
     #     },
+    #     cognito_options: {
+    #       enabled: false,
+    #       user_pool_id: "UserPoolId",
+    #       identity_pool_id: "IdentityPoolId",
+    #       role_arn: "RoleArn",
+    #     },
     #     encryption_at_rest_options: {
     #       enabled: false,
     #       kms_key_id: "KmsKeyId",
@@ -324,6 +339,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.cognito_options.enabled #=> Boolean
+    #   resp.domain_status.cognito_options.user_pool_id #=> String
+    #   resp.domain_status.cognito_options.identity_pool_id #=> String
+    #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status.advanced_options #=> Hash
@@ -387,6 +406,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.cognito_options.enabled #=> Boolean
+    #   resp.domain_status.cognito_options.user_pool_id #=> String
+    #   resp.domain_status.cognito_options.identity_pool_id #=> String
+    #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status.advanced_options #=> Hash
@@ -470,6 +493,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.cognito_options.enabled #=> Boolean
+    #   resp.domain_status.cognito_options.user_pool_id #=> String
+    #   resp.domain_status.cognito_options.identity_pool_id #=> String
+    #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status.advanced_options #=> Hash
@@ -554,6 +581,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.vpc_options.status.update_version #=> Integer
     #   resp.domain_config.vpc_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.vpc_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.cognito_options.options.enabled #=> Boolean
+    #   resp.domain_config.cognito_options.options.user_pool_id #=> String
+    #   resp.domain_config.cognito_options.options.identity_pool_id #=> String
+    #   resp.domain_config.cognito_options.options.role_arn #=> String
+    #   resp.domain_config.cognito_options.status.creation_date #=> Time
+    #   resp.domain_config.cognito_options.status.update_date #=> Time
+    #   resp.domain_config.cognito_options.status.update_version #=> Integer
+    #   resp.domain_config.cognito_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.cognito_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
     #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
@@ -633,6 +669,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].vpc_options.availability_zones[0] #=> String
     #   resp.domain_status_list[0].vpc_options.security_group_ids #=> Array
     #   resp.domain_status_list[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status_list[0].cognito_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].cognito_options.user_pool_id #=> String
+    #   resp.domain_status_list[0].cognito_options.identity_pool_id #=> String
+    #   resp.domain_status_list[0].cognito_options.role_arn #=> String
     #   resp.domain_status_list[0].encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status_list[0].encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status_list[0].advanced_options #=> Hash
@@ -885,6 +925,15 @@ module Aws::ElasticsearchService
     #
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
     #
+    # @option params [Types::CognitoOptions] :cognito_options
+    #   Options to specify the Cognito user and identity pools for Kibana
+    #   authentication. For more information, see [Amazon Cognito
+    #   Authentication for Kibana][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
+    #
     # @option params [Hash<String,String>] :advanced_options
     #   Modifies the advanced option to allow references to indices in an HTTP
     #   request body. Must be `false` when configuring access to individual
@@ -930,6 +979,12 @@ module Aws::ElasticsearchService
     #     vpc_options: {
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
+    #     },
+    #     cognito_options: {
+    #       enabled: false,
+    #       user_pool_id: "UserPoolId",
+    #       identity_pool_id: "IdentityPoolId",
+    #       role_arn: "RoleArn",
     #     },
     #     advanced_options: {
     #       "String" => "String",
@@ -995,6 +1050,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.vpc_options.status.update_version #=> Integer
     #   resp.domain_config.vpc_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.vpc_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.cognito_options.options.enabled #=> Boolean
+    #   resp.domain_config.cognito_options.options.user_pool_id #=> String
+    #   resp.domain_config.cognito_options.options.identity_pool_id #=> String
+    #   resp.domain_config.cognito_options.options.role_arn #=> String
+    #   resp.domain_config.cognito_options.status.creation_date #=> Time
+    #   resp.domain_config.cognito_options.status.update_date #=> Time
+    #   resp.domain_config.cognito_options.status.update_version #=> Integer
+    #   resp.domain_config.cognito_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.cognito_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
     #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
@@ -1038,7 +1102,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
