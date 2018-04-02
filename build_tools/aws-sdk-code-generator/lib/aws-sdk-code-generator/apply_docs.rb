@@ -25,6 +25,7 @@ module AwsSdkCodeGenerator
         @api['shapes'][shape_name]['documentation'] = shape_docs['base']
         shape_docs['refs'].each do |ref, ref_docs|
           ref_shape, ref_member = ref.split('$')
+          next unless @api['shapes'][ref_shape]
           case @api['shapes'][ref_shape]['type']
           when 'structure'
             shape = @api['shapes'][ref_shape]
