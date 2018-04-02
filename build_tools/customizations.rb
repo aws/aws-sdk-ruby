@@ -15,6 +15,8 @@ module BuildTools
       end
 
       def apply_api_customizations(svc_name, api)
+        # delay eventstream support in V3
+        api = exclude_eventstream(api) if api['operations']
         @api_customizations[svc_name].call(api) if @api_customizations[svc_name]
       end
 
@@ -22,6 +24,33 @@ module BuildTools
         @doc_customizations[svc_name].call(docs) if @doc_customizations[svc_name]
       end
 
+      private
+
+      def exclude_eventstream(api)
+        api['operations'].each do |name, ref|
+          inbound = ref['input'] && is_eventstream?(api, ref['input']['shape'])
+          outbound = ref['output'] && is_eventstream?(api, ref['output']['shape'])
+          # for eventstream operations, avoid operation, input and output shapes
+          if !!inbound || !!outbound
+            api['shapes'].delete(ref['input']['shape'])
+            api['shapes'].delete(ref['output']['shape'])
+            api['operations'].delete(name)
+          end
+        end
+        api
+      end
+
+      def is_eventstream?(api, shape_name)
+        shape = api['shapes'][shape_name]
+        if shape['type'] == 'structure' && shape['payload']
+          payload_ref = shape['members'][shape['payload']]
+          api['shapes'][payload_ref['shape']]['eventstream']
+        else
+          # non structure request/response shape
+          # check if it's eventstream itself
+          shape['eventstream']
+        end
+      end
     end
 
     api('CloudFront') do |api|

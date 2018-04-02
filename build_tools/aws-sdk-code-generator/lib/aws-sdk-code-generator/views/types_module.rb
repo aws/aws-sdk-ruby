@@ -30,7 +30,10 @@ module AwsSdkCodeGenerator
           if @service.protocol == 'api-gateway'
             shape_name = lstrip_prefix(upcase_first(shape_name))
           end
-          if struct_type?(shape)
+          # exclude eventstream and event shapes
+          if shape['eventstream'] || shape['event']
+            list
+          elsif struct_type?(shape)
             list << StructClass.new(
               class_name: shape_name,
               members: struct_members(shape),
