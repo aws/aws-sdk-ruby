@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.27 (2018-04-02)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
