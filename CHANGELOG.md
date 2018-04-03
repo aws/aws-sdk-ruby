@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.28 (2018-04-03)
+------------------
+
 * Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
 
 * Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
