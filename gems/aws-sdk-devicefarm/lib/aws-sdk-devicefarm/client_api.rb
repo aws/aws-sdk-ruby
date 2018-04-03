@@ -31,6 +31,8 @@ module Aws::DeviceFarm
     Counters = Shapes::StructureShape.new(name: 'Counters')
     CreateDevicePoolRequest = Shapes::StructureShape.new(name: 'CreateDevicePoolRequest')
     CreateDevicePoolResult = Shapes::StructureShape.new(name: 'CreateDevicePoolResult')
+    CreateInstanceProfileRequest = Shapes::StructureShape.new(name: 'CreateInstanceProfileRequest')
+    CreateInstanceProfileResult = Shapes::StructureShape.new(name: 'CreateInstanceProfileResult')
     CreateNetworkProfileRequest = Shapes::StructureShape.new(name: 'CreateNetworkProfileRequest')
     CreateNetworkProfileResult = Shapes::StructureShape.new(name: 'CreateNetworkProfileResult')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
@@ -45,6 +47,8 @@ module Aws::DeviceFarm
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteDevicePoolRequest = Shapes::StructureShape.new(name: 'DeleteDevicePoolRequest')
     DeleteDevicePoolResult = Shapes::StructureShape.new(name: 'DeleteDevicePoolResult')
+    DeleteInstanceProfileRequest = Shapes::StructureShape.new(name: 'DeleteInstanceProfileRequest')
+    DeleteInstanceProfileResult = Shapes::StructureShape.new(name: 'DeleteInstanceProfileResult')
     DeleteNetworkProfileRequest = Shapes::StructureShape.new(name: 'DeleteNetworkProfileRequest')
     DeleteNetworkProfileResult = Shapes::StructureShape.new(name: 'DeleteNetworkProfileResult')
     DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
@@ -59,6 +63,8 @@ module Aws::DeviceFarm
     DeviceAttribute = Shapes::StringShape.new(name: 'DeviceAttribute')
     DeviceFormFactor = Shapes::StringShape.new(name: 'DeviceFormFactor')
     DeviceHostPaths = Shapes::ListShape.new(name: 'DeviceHostPaths')
+    DeviceInstance = Shapes::StructureShape.new(name: 'DeviceInstance')
+    DeviceInstances = Shapes::ListShape.new(name: 'DeviceInstances')
     DeviceMinutes = Shapes::StructureShape.new(name: 'DeviceMinutes')
     DevicePlatform = Shapes::StringShape.new(name: 'DevicePlatform')
     DevicePool = Shapes::StructureShape.new(name: 'DevicePool')
@@ -75,12 +81,16 @@ module Aws::DeviceFarm
     Filter = Shapes::StringShape.new(name: 'Filter')
     GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
     GetAccountSettingsResult = Shapes::StructureShape.new(name: 'GetAccountSettingsResult')
+    GetDeviceInstanceRequest = Shapes::StructureShape.new(name: 'GetDeviceInstanceRequest')
+    GetDeviceInstanceResult = Shapes::StructureShape.new(name: 'GetDeviceInstanceResult')
     GetDevicePoolCompatibilityRequest = Shapes::StructureShape.new(name: 'GetDevicePoolCompatibilityRequest')
     GetDevicePoolCompatibilityResult = Shapes::StructureShape.new(name: 'GetDevicePoolCompatibilityResult')
     GetDevicePoolRequest = Shapes::StructureShape.new(name: 'GetDevicePoolRequest')
     GetDevicePoolResult = Shapes::StructureShape.new(name: 'GetDevicePoolResult')
     GetDeviceRequest = Shapes::StructureShape.new(name: 'GetDeviceRequest')
     GetDeviceResult = Shapes::StructureShape.new(name: 'GetDeviceResult')
+    GetInstanceProfileRequest = Shapes::StructureShape.new(name: 'GetInstanceProfileRequest')
+    GetInstanceProfileResult = Shapes::StructureShape.new(name: 'GetInstanceProfileResult')
     GetJobRequest = Shapes::StructureShape.new(name: 'GetJobRequest')
     GetJobResult = Shapes::StructureShape.new(name: 'GetJobResult')
     GetNetworkProfileRequest = Shapes::StructureShape.new(name: 'GetNetworkProfileRequest')
@@ -105,6 +115,10 @@ module Aws::DeviceFarm
     IncompatibilityMessages = Shapes::ListShape.new(name: 'IncompatibilityMessages')
     InstallToRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'InstallToRemoteAccessSessionRequest')
     InstallToRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'InstallToRemoteAccessSessionResult')
+    InstanceLabels = Shapes::ListShape.new(name: 'InstanceLabels')
+    InstanceProfile = Shapes::StructureShape.new(name: 'InstanceProfile')
+    InstanceProfiles = Shapes::ListShape.new(name: 'InstanceProfiles')
+    InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InteractionMode = Shapes::StringShape.new(name: 'InteractionMode')
     IosPaths = Shapes::ListShape.new(name: 'IosPaths')
@@ -114,10 +128,14 @@ module Aws::DeviceFarm
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListArtifactsRequest = Shapes::StructureShape.new(name: 'ListArtifactsRequest')
     ListArtifactsResult = Shapes::StructureShape.new(name: 'ListArtifactsResult')
+    ListDeviceInstancesRequest = Shapes::StructureShape.new(name: 'ListDeviceInstancesRequest')
+    ListDeviceInstancesResult = Shapes::StructureShape.new(name: 'ListDeviceInstancesResult')
     ListDevicePoolsRequest = Shapes::StructureShape.new(name: 'ListDevicePoolsRequest')
     ListDevicePoolsResult = Shapes::StructureShape.new(name: 'ListDevicePoolsResult')
     ListDevicesRequest = Shapes::StructureShape.new(name: 'ListDevicesRequest')
     ListDevicesResult = Shapes::StructureShape.new(name: 'ListDevicesResult')
+    ListInstanceProfilesRequest = Shapes::StructureShape.new(name: 'ListInstanceProfilesRequest')
+    ListInstanceProfilesResult = Shapes::StructureShape.new(name: 'ListInstanceProfilesResult')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResult = Shapes::StructureShape.new(name: 'ListJobsResult')
     ListNetworkProfilesRequest = Shapes::StructureShape.new(name: 'ListNetworkProfilesRequest')
@@ -168,6 +186,7 @@ module Aws::DeviceFarm
     OfferingTransactions = Shapes::ListShape.new(name: 'OfferingTransactions')
     OfferingType = Shapes::StringShape.new(name: 'OfferingType')
     Offerings = Shapes::ListShape.new(name: 'Offerings')
+    PackageIds = Shapes::ListShape.new(name: 'PackageIds')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PercentInteger = Shapes::IntegerShape.new(name: 'PercentInteger')
     Problem = Shapes::StructureShape.new(name: 'Problem')
@@ -200,6 +219,7 @@ module Aws::DeviceFarm
     ScheduleRunResult = Shapes::StructureShape.new(name: 'ScheduleRunResult')
     ScheduleRunTest = Shapes::StructureShape.new(name: 'ScheduleRunTest')
     ServiceAccountException = Shapes::StructureShape.new(name: 'ServiceAccountException')
+    SkipAppResign = Shapes::BooleanShape.new(name: 'SkipAppResign')
     SshPublicKey = Shapes::StringShape.new(name: 'SshPublicKey')
     StopRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionRequest')
     StopRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionResult')
@@ -218,8 +238,12 @@ module Aws::DeviceFarm
     UniqueProblem = Shapes::StructureShape.new(name: 'UniqueProblem')
     UniqueProblems = Shapes::ListShape.new(name: 'UniqueProblems')
     UniqueProblemsByExecutionResultMap = Shapes::MapShape.new(name: 'UniqueProblemsByExecutionResultMap')
+    UpdateDeviceInstanceRequest = Shapes::StructureShape.new(name: 'UpdateDeviceInstanceRequest')
+    UpdateDeviceInstanceResult = Shapes::StructureShape.new(name: 'UpdateDeviceInstanceResult')
     UpdateDevicePoolRequest = Shapes::StructureShape.new(name: 'UpdateDevicePoolRequest')
     UpdateDevicePoolResult = Shapes::StructureShape.new(name: 'UpdateDevicePoolResult')
+    UpdateInstanceProfileRequest = Shapes::StructureShape.new(name: 'UpdateInstanceProfileRequest')
+    UpdateInstanceProfileResult = Shapes::StructureShape.new(name: 'UpdateInstanceProfileResult')
     UpdateNetworkProfileRequest = Shapes::StructureShape.new(name: 'UpdateNetworkProfileRequest')
     UpdateNetworkProfileResult = Shapes::StructureShape.new(name: 'UpdateNetworkProfileResult')
     UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
@@ -236,6 +260,7 @@ module Aws::DeviceFarm
     AccountSettings.add_member(:trial_minutes, Shapes::ShapeRef.new(shape: TrialMinutes, location_name: "trialMinutes"))
     AccountSettings.add_member(:max_slots, Shapes::ShapeRef.new(shape: MaxSlotMap, location_name: "maxSlots"))
     AccountSettings.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
+    AccountSettings.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
     AccountSettings.struct_class = Types::AccountSettings
 
     AmazonResourceNames.member = Shapes::ShapeRef.new(shape: AmazonResourceName)
@@ -274,6 +299,16 @@ module Aws::DeviceFarm
     CreateDevicePoolResult.add_member(:device_pool, Shapes::ShapeRef.new(shape: DevicePool, location_name: "devicePool"))
     CreateDevicePoolResult.struct_class = Types::CreateDevicePoolResult
 
+    CreateInstanceProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateInstanceProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
+    CreateInstanceProfileRequest.add_member(:package_cleanup, Shapes::ShapeRef.new(shape: Boolean, location_name: "packageCleanup"))
+    CreateInstanceProfileRequest.add_member(:exclude_app_packages_from_cleanup, Shapes::ShapeRef.new(shape: PackageIds, location_name: "excludeAppPackagesFromCleanup"))
+    CreateInstanceProfileRequest.add_member(:reboot_after_use, Shapes::ShapeRef.new(shape: Boolean, location_name: "rebootAfterUse"))
+    CreateInstanceProfileRequest.struct_class = Types::CreateInstanceProfileRequest
+
+    CreateInstanceProfileResult.add_member(:instance_profile, Shapes::ShapeRef.new(shape: InstanceProfile, location_name: "instanceProfile"))
+    CreateInstanceProfileResult.struct_class = Types::CreateInstanceProfileResult
+
     CreateNetworkProfileRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
     CreateNetworkProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateNetworkProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
@@ -303,6 +338,7 @@ module Aws::DeviceFarm
 
     CreateRemoteAccessSessionRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
     CreateRemoteAccessSessionRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "deviceArn"))
+    CreateRemoteAccessSessionRequest.add_member(:instance_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "instanceArn"))
     CreateRemoteAccessSessionRequest.add_member(:ssh_public_key, Shapes::ShapeRef.new(shape: SshPublicKey, location_name: "sshPublicKey"))
     CreateRemoteAccessSessionRequest.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
     CreateRemoteAccessSessionRequest.add_member(:remote_record_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteRecordEnabled"))
@@ -311,6 +347,7 @@ module Aws::DeviceFarm
     CreateRemoteAccessSessionRequest.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "clientId"))
     CreateRemoteAccessSessionRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CreateRemoteAccessSessionConfiguration, location_name: "configuration"))
     CreateRemoteAccessSessionRequest.add_member(:interaction_mode, Shapes::ShapeRef.new(shape: InteractionMode, location_name: "interactionMode"))
+    CreateRemoteAccessSessionRequest.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: Boolean, location_name: "skipAppResign"))
     CreateRemoteAccessSessionRequest.struct_class = Types::CreateRemoteAccessSessionRequest
 
     CreateRemoteAccessSessionResult.add_member(:remote_access_session, Shapes::ShapeRef.new(shape: RemoteAccessSession, location_name: "remoteAccessSession"))
@@ -334,6 +371,11 @@ module Aws::DeviceFarm
     DeleteDevicePoolRequest.struct_class = Types::DeleteDevicePoolRequest
 
     DeleteDevicePoolResult.struct_class = Types::DeleteDevicePoolResult
+
+    DeleteInstanceProfileRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    DeleteInstanceProfileRequest.struct_class = Types::DeleteInstanceProfileRequest
+
+    DeleteInstanceProfileResult.struct_class = Types::DeleteInstanceProfileResult
 
     DeleteNetworkProfileRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     DeleteNetworkProfileRequest.struct_class = Types::DeleteNetworkProfileRequest
@@ -379,9 +421,20 @@ module Aws::DeviceFarm
     Device.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
     Device.add_member(:fleet_type, Shapes::ShapeRef.new(shape: String, location_name: "fleetType"))
     Device.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, location_name: "fleetName"))
+    Device.add_member(:instances, Shapes::ShapeRef.new(shape: DeviceInstances, location_name: "instances"))
     Device.struct_class = Types::Device
 
     DeviceHostPaths.member = Shapes::ShapeRef.new(shape: String)
+
+    DeviceInstance.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
+    DeviceInstance.add_member(:device_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "deviceArn"))
+    DeviceInstance.add_member(:labels, Shapes::ShapeRef.new(shape: InstanceLabels, location_name: "labels"))
+    DeviceInstance.add_member(:status, Shapes::ShapeRef.new(shape: InstanceStatus, location_name: "status"))
+    DeviceInstance.add_member(:udid, Shapes::ShapeRef.new(shape: String, location_name: "udid"))
+    DeviceInstance.add_member(:instance_profile, Shapes::ShapeRef.new(shape: InstanceProfile, location_name: "instanceProfile"))
+    DeviceInstance.struct_class = Types::DeviceInstance
+
+    DeviceInstances.member = Shapes::ShapeRef.new(shape: DeviceInstance)
 
     DeviceMinutes.add_member(:total, Shapes::ShapeRef.new(shape: Double, location_name: "total"))
     DeviceMinutes.add_member(:metered, Shapes::ShapeRef.new(shape: Double, location_name: "metered"))
@@ -409,12 +462,19 @@ module Aws::DeviceFarm
     ExecutionConfiguration.add_member(:job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "jobTimeoutMinutes"))
     ExecutionConfiguration.add_member(:accounts_cleanup, Shapes::ShapeRef.new(shape: AccountsCleanup, location_name: "accountsCleanup"))
     ExecutionConfiguration.add_member(:app_packages_cleanup, Shapes::ShapeRef.new(shape: AppPackagesCleanup, location_name: "appPackagesCleanup"))
+    ExecutionConfiguration.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
     ExecutionConfiguration.struct_class = Types::ExecutionConfiguration
 
     GetAccountSettingsRequest.struct_class = Types::GetAccountSettingsRequest
 
     GetAccountSettingsResult.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "accountSettings"))
     GetAccountSettingsResult.struct_class = Types::GetAccountSettingsResult
+
+    GetDeviceInstanceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    GetDeviceInstanceRequest.struct_class = Types::GetDeviceInstanceRequest
+
+    GetDeviceInstanceResult.add_member(:device_instance, Shapes::ShapeRef.new(shape: DeviceInstance, location_name: "deviceInstance"))
+    GetDeviceInstanceResult.struct_class = Types::GetDeviceInstanceResult
 
     GetDevicePoolCompatibilityRequest.add_member(:device_pool_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "devicePoolArn"))
     GetDevicePoolCompatibilityRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "appArn"))
@@ -437,6 +497,12 @@ module Aws::DeviceFarm
 
     GetDeviceResult.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "device"))
     GetDeviceResult.struct_class = Types::GetDeviceResult
+
+    GetInstanceProfileRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    GetInstanceProfileRequest.struct_class = Types::GetInstanceProfileRequest
+
+    GetInstanceProfileResult.add_member(:instance_profile, Shapes::ShapeRef.new(shape: InstanceProfile, location_name: "instanceProfile"))
+    GetInstanceProfileResult.struct_class = Types::GetInstanceProfileResult
 
     GetJobRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     GetJobRequest.struct_class = Types::GetJobRequest
@@ -507,6 +573,18 @@ module Aws::DeviceFarm
     InstallToRemoteAccessSessionResult.add_member(:app_upload, Shapes::ShapeRef.new(shape: Upload, location_name: "appUpload"))
     InstallToRemoteAccessSessionResult.struct_class = Types::InstallToRemoteAccessSessionResult
 
+    InstanceLabels.member = Shapes::ShapeRef.new(shape: String)
+
+    InstanceProfile.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
+    InstanceProfile.add_member(:package_cleanup, Shapes::ShapeRef.new(shape: Boolean, location_name: "packageCleanup"))
+    InstanceProfile.add_member(:exclude_app_packages_from_cleanup, Shapes::ShapeRef.new(shape: PackageIds, location_name: "excludeAppPackagesFromCleanup"))
+    InstanceProfile.add_member(:reboot_after_use, Shapes::ShapeRef.new(shape: Boolean, location_name: "rebootAfterUse"))
+    InstanceProfile.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    InstanceProfile.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
+    InstanceProfile.struct_class = Types::InstanceProfile
+
+    InstanceProfiles.member = Shapes::ShapeRef.new(shape: InstanceProfile)
+
     IosPaths.member = Shapes::ShapeRef.new(shape: String)
 
     Job.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
@@ -520,6 +598,7 @@ module Aws::DeviceFarm
     Job.add_member(:counters, Shapes::ShapeRef.new(shape: Counters, location_name: "counters"))
     Job.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     Job.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "device"))
+    Job.add_member(:instance_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "instanceArn"))
     Job.add_member(:device_minutes, Shapes::ShapeRef.new(shape: DeviceMinutes, location_name: "deviceMinutes"))
     Job.struct_class = Types::Job
 
@@ -533,6 +612,14 @@ module Aws::DeviceFarm
     ListArtifactsResult.add_member(:artifacts, Shapes::ShapeRef.new(shape: Artifacts, location_name: "artifacts"))
     ListArtifactsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListArtifactsResult.struct_class = Types::ListArtifactsResult
+
+    ListDeviceInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    ListDeviceInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListDeviceInstancesRequest.struct_class = Types::ListDeviceInstancesRequest
+
+    ListDeviceInstancesResult.add_member(:device_instances, Shapes::ShapeRef.new(shape: DeviceInstances, location_name: "deviceInstances"))
+    ListDeviceInstancesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListDeviceInstancesResult.struct_class = Types::ListDeviceInstancesResult
 
     ListDevicePoolsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     ListDevicePoolsRequest.add_member(:type, Shapes::ShapeRef.new(shape: DevicePoolType, location_name: "type"))
@@ -550,6 +637,14 @@ module Aws::DeviceFarm
     ListDevicesResult.add_member(:devices, Shapes::ShapeRef.new(shape: Devices, location_name: "devices"))
     ListDevicesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListDevicesResult.struct_class = Types::ListDevicesResult
+
+    ListInstanceProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    ListInstanceProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListInstanceProfilesRequest.struct_class = Types::ListInstanceProfilesRequest
+
+    ListInstanceProfilesResult.add_member(:instance_profiles, Shapes::ShapeRef.new(shape: InstanceProfiles, location_name: "instanceProfiles"))
+    ListInstanceProfilesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListInstanceProfilesResult.struct_class = Types::ListInstanceProfilesResult
 
     ListJobsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -713,6 +808,8 @@ module Aws::DeviceFarm
 
     Offerings.member = Shapes::ShapeRef.new(shape: Offering)
 
+    PackageIds.member = Shapes::ShapeRef.new(shape: String)
+
     Problem.add_member(:run, Shapes::ShapeRef.new(shape: ProblemDetail, location_name: "run"))
     Problem.add_member(:job, Shapes::ShapeRef.new(shape: ProblemDetail, location_name: "job"))
     Problem.add_member(:suite, Shapes::ShapeRef.new(shape: ProblemDetail, location_name: "suite"))
@@ -768,6 +865,7 @@ module Aws::DeviceFarm
     RemoteAccessSession.add_member(:started, Shapes::ShapeRef.new(shape: DateTime, location_name: "started"))
     RemoteAccessSession.add_member(:stopped, Shapes::ShapeRef.new(shape: DateTime, location_name: "stopped"))
     RemoteAccessSession.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "device"))
+    RemoteAccessSession.add_member(:instance_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "instanceArn"))
     RemoteAccessSession.add_member(:remote_debug_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteDebugEnabled"))
     RemoteAccessSession.add_member(:remote_record_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteRecordEnabled"))
     RemoteAccessSession.add_member(:remote_record_app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "remoteRecordAppArn"))
@@ -778,6 +876,7 @@ module Aws::DeviceFarm
     RemoteAccessSession.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
     RemoteAccessSession.add_member(:device_udid, Shapes::ShapeRef.new(shape: String, location_name: "deviceUdid"))
     RemoteAccessSession.add_member(:interaction_mode, Shapes::ShapeRef.new(shape: InteractionMode, location_name: "interactionMode"))
+    RemoteAccessSession.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
     RemoteAccessSession.struct_class = Types::RemoteAccessSession
 
     RemoteAccessSessions.member = Shapes::ShapeRef.new(shape: RemoteAccessSession)
@@ -828,6 +927,7 @@ module Aws::DeviceFarm
     Run.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
     Run.add_member(:customer_artifact_paths, Shapes::ShapeRef.new(shape: CustomerArtifactPaths, location_name: "customerArtifactPaths"))
     Run.add_member(:web_url, Shapes::ShapeRef.new(shape: String, location_name: "webUrl"))
+    Run.add_member(:skip_app_resign, Shapes::ShapeRef.new(shape: SkipAppResign, location_name: "skipAppResign"))
     Run.struct_class = Types::Run
 
     Runs.member = Shapes::ShapeRef.new(shape: Run)
@@ -925,6 +1025,14 @@ module Aws::DeviceFarm
     UniqueProblemsByExecutionResultMap.key = Shapes::ShapeRef.new(shape: ExecutionResult)
     UniqueProblemsByExecutionResultMap.value = Shapes::ShapeRef.new(shape: UniqueProblems)
 
+    UpdateDeviceInstanceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    UpdateDeviceInstanceRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "profileArn"))
+    UpdateDeviceInstanceRequest.add_member(:labels, Shapes::ShapeRef.new(shape: InstanceLabels, location_name: "labels"))
+    UpdateDeviceInstanceRequest.struct_class = Types::UpdateDeviceInstanceRequest
+
+    UpdateDeviceInstanceResult.add_member(:device_instance, Shapes::ShapeRef.new(shape: DeviceInstance, location_name: "deviceInstance"))
+    UpdateDeviceInstanceResult.struct_class = Types::UpdateDeviceInstanceResult
+
     UpdateDevicePoolRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     UpdateDevicePoolRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     UpdateDevicePoolRequest.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
@@ -933,6 +1041,17 @@ module Aws::DeviceFarm
 
     UpdateDevicePoolResult.add_member(:device_pool, Shapes::ShapeRef.new(shape: DevicePool, location_name: "devicePool"))
     UpdateDevicePoolResult.struct_class = Types::UpdateDevicePoolResult
+
+    UpdateInstanceProfileRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    UpdateInstanceProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    UpdateInstanceProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
+    UpdateInstanceProfileRequest.add_member(:package_cleanup, Shapes::ShapeRef.new(shape: Boolean, location_name: "packageCleanup"))
+    UpdateInstanceProfileRequest.add_member(:exclude_app_packages_from_cleanup, Shapes::ShapeRef.new(shape: PackageIds, location_name: "excludeAppPackagesFromCleanup"))
+    UpdateInstanceProfileRequest.add_member(:reboot_after_use, Shapes::ShapeRef.new(shape: Boolean, location_name: "rebootAfterUse"))
+    UpdateInstanceProfileRequest.struct_class = Types::UpdateInstanceProfileRequest
+
+    UpdateInstanceProfileResult.add_member(:instance_profile, Shapes::ShapeRef.new(shape: InstanceProfile, location_name: "instanceProfile"))
+    UpdateInstanceProfileResult.struct_class = Types::UpdateInstanceProfileResult
 
     UpdateNetworkProfileRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     UpdateNetworkProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -999,6 +1118,18 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
       end)
 
+      api.add_operation(:create_instance_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateInstanceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateInstanceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateInstanceProfileResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
       api.add_operation(:create_network_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateNetworkProfile"
         o.http_method = "POST"
@@ -1053,6 +1184,18 @@ module Aws::DeviceFarm
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDevicePoolRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDevicePoolResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:delete_instance_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInstanceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInstanceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInstanceProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1143,6 +1286,18 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
       end)
 
+      api.add_operation(:get_device_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeviceInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDeviceInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDeviceInstanceResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
       api.add_operation(:get_device_pool, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDevicePool"
         o.http_method = "POST"
@@ -1161,6 +1316,18 @@ module Aws::DeviceFarm
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetDevicePoolCompatibilityRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDevicePoolCompatibilityResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:get_instance_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInstanceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetInstanceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInstanceProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1310,6 +1477,18 @@ module Aws::DeviceFarm
         )
       end)
 
+      api.add_operation(:list_device_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDeviceInstances"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDeviceInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDeviceInstancesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
       api.add_operation(:list_device_pools, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDevicePools"
         o.http_method = "POST"
@@ -1342,6 +1521,18 @@ module Aws::DeviceFarm
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_instance_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInstanceProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListInstanceProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListInstanceProfilesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -1616,12 +1807,36 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
       end)
 
+      api.add_operation(:update_device_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateDeviceInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateDeviceInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateDeviceInstanceResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
       api.add_operation(:update_device_pool, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateDevicePool"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDevicePoolRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDevicePoolResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:update_instance_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateInstanceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateInstanceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateInstanceProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)

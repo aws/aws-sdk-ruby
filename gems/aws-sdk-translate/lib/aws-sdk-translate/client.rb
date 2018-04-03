@@ -171,6 +171,11 @@ module Aws::Translate
     #
     # * Spanish (es)
     #
+    # To have Amazon Translate determine the source language of your text,
+    # you can specify `auto` in the `SourceLanguageCode` field. If you
+    # specify `auto`, Amazon Translate will call Amazon Comprehend to
+    # determine the source language.
+    #
     # @option params [required, String] :text
     #   The text to translate.
     #
@@ -178,6 +183,11 @@ module Aws::Translate
     #   One of the supported language codes for the source text. If the
     #   `TargetLanguageCode` is not "en", the `SourceLanguageCode` must be
     #   "en".
+    #
+    #   To have Amazon Translate determine the source language of your text,
+    #   you can specify `auto` in the `SourceLanguageCode` field. If you
+    #   specify `auto`, Amazon Translate will call Amazon Comprehend to
+    #   determine the source language.
     #
     # @option params [required, String] :target_language_code
     #   One of the supported language codes for the target text. If the
@@ -226,7 +236,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -200,7 +200,7 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [ # required
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS
     #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
@@ -214,7 +214,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
@@ -224,6 +224,63 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def create_device_pool(params = {}, options = {})
       req = build_request(:create_device_pool, params)
+      req.send_request(options)
+    end
+
+    # Creates a profile that can be applied to one or more private fleet
+    # device instances.
+    #
+    # @option params [required, String] :name
+    #   The name of your instance profile.
+    #
+    # @option params [String] :description
+    #   The description of your instance profile.
+    #
+    # @option params [Boolean] :package_cleanup
+    #   When set to `true`, Device Farm will remove app packages after a test
+    #   run. The default value is `false` for private devices.
+    #
+    # @option params [Array<String>] :exclude_app_packages_from_cleanup
+    #   An array of strings specifying the list of app packages that should
+    #   not be cleaned up from the device after a test run is over.
+    #
+    #   The list of packages is only considered if you set `packageCleanup` to
+    #   `true`.
+    #
+    # @option params [Boolean] :reboot_after_use
+    #   When set to `true`, Device Farm will reboot the instance after a test
+    #   run. The default value is `true`.
+    #
+    # @return [Types::CreateInstanceProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateInstanceProfileResult#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_instance_profile({
+    #     name: "Name", # required
+    #     description: "Message",
+    #     package_cleanup: false,
+    #     exclude_app_packages_from_cleanup: ["String"],
+    #     reboot_after_use: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_profile.arn #=> String
+    #   resp.instance_profile.package_cleanup #=> Boolean
+    #   resp.instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.instance_profile.reboot_after_use #=> Boolean
+    #   resp.instance_profile.name #=> String
+    #   resp.instance_profile.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateInstanceProfile AWS API Documentation
+    #
+    # @overload create_instance_profile(params = {})
+    # @param [Hash] params ({})
+    def create_instance_profile(params = {}, options = {})
+      req = build_request(:create_instance_profile, params)
       req.send_request(options)
     end
 
@@ -385,6 +442,10 @@ module Aws::DeviceFarm
     #   The Amazon Resource Name (ARN) of the device for which you want to
     #   create a remote access session.
     #
+    # @option params [String] :instance_arn
+    #   The Amazon Resource Name (ARN) of the device instance for which you
+    #   want to create a remote access session.
+    #
     # @option params [String] :ssh_public_key
     #   The public key of the `ssh` key pair you want to use for connecting to
     #   remote devices in your remote debugging session. This is only required
@@ -429,6 +490,18 @@ module Aws::DeviceFarm
     #     You **can** run XCUITest framework-based tests and watch the screen
     #     in this mode.
     #
+    # @option params [Boolean] :skip_app_resign
+    #   When set to `true`, for private devices, Device Farm will not sign
+    #   your app again. For public devices, Device Farm always signs your apps
+    #   again and this parameter has no effect.
+    #
+    #   For more information about how Device Farm re-signs your app(s), see
+    #   [Do you modify my app?][1] in the *AWS Device Farm FAQs*.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #
     # @return [Types::CreateRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRemoteAccessSessionResult#remote_access_session #remote_access_session} => Types::RemoteAccessSession
@@ -458,6 +531,7 @@ module Aws::DeviceFarm
     #   resp = client.create_remote_access_session({
     #     project_arn: "AmazonResourceName", # required
     #     device_arn: "AmazonResourceName", # required
+    #     instance_arn: "AmazonResourceName",
     #     ssh_public_key: "SshPublicKey",
     #     remote_debug_enabled: false,
     #     remote_record_enabled: false,
@@ -468,6 +542,7 @@ module Aws::DeviceFarm
     #       billing_method: "METERED", # accepts METERED, UNMETERED
     #     },
     #     interaction_mode: "INTERACTIVE", # accepts INTERACTIVE, NO_VIDEO, VIDEO_ONLY
+    #     skip_app_resign: false,
     #   })
     #
     # @example Response structure
@@ -502,6 +577,21 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.device.fleet_type #=> String
     #   resp.remote_access_session.device.fleet_name #=> String
+    #   resp.remote_access_session.device.instances #=> Array
+    #   resp.remote_access_session.device.instances[0].arn #=> String
+    #   resp.remote_access_session.device.instances[0].device_arn #=> String
+    #   resp.remote_access_session.device.instances[0].labels #=> Array
+    #   resp.remote_access_session.device.instances[0].labels[0] #=> String
+    #   resp.remote_access_session.device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.remote_access_session.device.instances[0].udid #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.arn #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.remote_access_session.device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.remote_access_session.device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.remote_access_session.device.instances[0].instance_profile.name #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.description #=> String
+    #   resp.remote_access_session.instance_arn #=> String
     #   resp.remote_access_session.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.remote_record_enabled #=> Boolean
     #   resp.remote_access_session.remote_record_app_arn #=> String
@@ -514,6 +604,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.endpoint #=> String
     #   resp.remote_access_session.device_udid #=> String
     #   resp.remote_access_session.interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
+    #   resp.remote_access_session.skip_app_resign #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession AWS API Documentation
     #
@@ -676,6 +767,30 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def delete_device_pool(params = {}, options = {})
       req = build_request(:delete_device_pool, params)
+      req.send_request(options)
+    end
+
+    # Deletes a profile that can be applied to one or more private device
+    # instances.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the instance profile you are
+    #   requesting to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_instance_profile({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteInstanceProfile AWS API Documentation
+    #
+    # @overload delete_instance_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_instance_profile(params = {}, options = {})
+      req = build_request(:delete_instance_profile, params)
       req.send_request(options)
     end
 
@@ -888,6 +1003,7 @@ module Aws::DeviceFarm
     #   resp.account_settings.max_slots #=> Hash
     #   resp.account_settings.max_slots["String"] #=> Integer
     #   resp.account_settings.default_job_timeout_minutes #=> Integer
+    #   resp.account_settings.skip_app_resign #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettings AWS API Documentation
     #
@@ -971,6 +1087,20 @@ module Aws::DeviceFarm
     #   resp.device.remote_debug_enabled #=> Boolean
     #   resp.device.fleet_type #=> String
     #   resp.device.fleet_name #=> String
+    #   resp.device.instances #=> Array
+    #   resp.device.instances[0].arn #=> String
+    #   resp.device.instances[0].device_arn #=> String
+    #   resp.device.instances[0].labels #=> Array
+    #   resp.device.instances[0].labels[0] #=> String
+    #   resp.device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.device.instances[0].udid #=> String
+    #   resp.device.instances[0].instance_profile.arn #=> String
+    #   resp.device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.device.instances[0].instance_profile.name #=> String
+    #   resp.device.instances[0].instance_profile.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevice AWS API Documentation
     #
@@ -978,6 +1108,48 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def get_device(params = {}, options = {})
       req = build_request(:get_device, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a device instance belonging to a private
+    # device fleet.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the instance you're requesting
+    #   information about.
+    #
+    # @return [Types::GetDeviceInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeviceInstanceResult#device_instance #device_instance} => Types::DeviceInstance
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_device_instance({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_instance.arn #=> String
+    #   resp.device_instance.device_arn #=> String
+    #   resp.device_instance.labels #=> Array
+    #   resp.device_instance.labels[0] #=> String
+    #   resp.device_instance.status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.device_instance.udid #=> String
+    #   resp.device_instance.instance_profile.arn #=> String
+    #   resp.device_instance.instance_profile.package_cleanup #=> Boolean
+    #   resp.device_instance.instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.device_instance.instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.device_instance.instance_profile.reboot_after_use #=> Boolean
+    #   resp.device_instance.instance_profile.name #=> String
+    #   resp.device_instance.instance_profile.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceInstance AWS API Documentation
+    #
+    # @overload get_device_instance(params = {})
+    # @param [Hash] params ({})
+    def get_device_instance(params = {}, options = {})
+      req = build_request(:get_device_instance, params)
       req.send_request(options)
     end
 
@@ -1018,7 +1190,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
@@ -1142,10 +1314,24 @@ module Aws::DeviceFarm
     #   resp.compatible_devices[0].device.remote_debug_enabled #=> Boolean
     #   resp.compatible_devices[0].device.fleet_type #=> String
     #   resp.compatible_devices[0].device.fleet_name #=> String
+    #   resp.compatible_devices[0].device.instances #=> Array
+    #   resp.compatible_devices[0].device.instances[0].arn #=> String
+    #   resp.compatible_devices[0].device.instances[0].device_arn #=> String
+    #   resp.compatible_devices[0].device.instances[0].labels #=> Array
+    #   resp.compatible_devices[0].device.instances[0].labels[0] #=> String
+    #   resp.compatible_devices[0].device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.compatible_devices[0].device.instances[0].udid #=> String
+    #   resp.compatible_devices[0].device.instances[0].instance_profile.arn #=> String
+    #   resp.compatible_devices[0].device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.compatible_devices[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.compatible_devices[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.compatible_devices[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.compatible_devices[0].device.instances[0].instance_profile.name #=> String
+    #   resp.compatible_devices[0].device.instances[0].instance_profile.description #=> String
     #   resp.compatible_devices[0].compatible #=> Boolean
     #   resp.compatible_devices[0].incompatibility_messages #=> Array
     #   resp.compatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
+    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
     #   resp.incompatible_devices #=> Array
     #   resp.incompatible_devices[0].device.arn #=> String
     #   resp.incompatible_devices[0].device.name #=> String
@@ -1169,10 +1355,24 @@ module Aws::DeviceFarm
     #   resp.incompatible_devices[0].device.remote_debug_enabled #=> Boolean
     #   resp.incompatible_devices[0].device.fleet_type #=> String
     #   resp.incompatible_devices[0].device.fleet_name #=> String
+    #   resp.incompatible_devices[0].device.instances #=> Array
+    #   resp.incompatible_devices[0].device.instances[0].arn #=> String
+    #   resp.incompatible_devices[0].device.instances[0].device_arn #=> String
+    #   resp.incompatible_devices[0].device.instances[0].labels #=> Array
+    #   resp.incompatible_devices[0].device.instances[0].labels[0] #=> String
+    #   resp.incompatible_devices[0].device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.incompatible_devices[0].device.instances[0].udid #=> String
+    #   resp.incompatible_devices[0].device.instances[0].instance_profile.arn #=> String
+    #   resp.incompatible_devices[0].device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.incompatible_devices[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.incompatible_devices[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.incompatible_devices[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.incompatible_devices[0].device.instances[0].instance_profile.name #=> String
+    #   resp.incompatible_devices[0].device.instances[0].instance_profile.description #=> String
     #   resp.incompatible_devices[0].compatible #=> Boolean
     #   resp.incompatible_devices[0].incompatibility_messages #=> Array
     #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
+    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility AWS API Documentation
     #
@@ -1180,6 +1380,40 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def get_device_pool_compatibility(params = {}, options = {})
       req = build_request(:get_device_pool_compatibility, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the specified instance profile.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of your instance profile.
+    #
+    # @return [Types::GetInstanceProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInstanceProfileResult#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_instance_profile({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_profile.arn #=> String
+    #   resp.instance_profile.package_cleanup #=> Boolean
+    #   resp.instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.instance_profile.reboot_after_use #=> Boolean
+    #   resp.instance_profile.name #=> String
+    #   resp.instance_profile.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetInstanceProfile AWS API Documentation
+    #
+    # @overload get_instance_profile(params = {})
+    # @param [Hash] params ({})
+    def get_instance_profile(params = {}, options = {})
+      req = build_request(:get_instance_profile, params)
       req.send_request(options)
     end
 
@@ -1253,6 +1487,21 @@ module Aws::DeviceFarm
     #   resp.job.device.remote_debug_enabled #=> Boolean
     #   resp.job.device.fleet_type #=> String
     #   resp.job.device.fleet_name #=> String
+    #   resp.job.device.instances #=> Array
+    #   resp.job.device.instances[0].arn #=> String
+    #   resp.job.device.instances[0].device_arn #=> String
+    #   resp.job.device.instances[0].labels #=> Array
+    #   resp.job.device.instances[0].labels[0] #=> String
+    #   resp.job.device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.job.device.instances[0].udid #=> String
+    #   resp.job.device.instances[0].instance_profile.arn #=> String
+    #   resp.job.device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.job.device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.job.device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.job.device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.job.device.instances[0].instance_profile.name #=> String
+    #   resp.job.device.instances[0].instance_profile.description #=> String
+    #   resp.job.instance_arn #=> String
     #   resp.job.device_minutes.total #=> Float
     #   resp.job.device_minutes.metered #=> Float
     #   resp.job.device_minutes.unmetered #=> Float
@@ -1516,6 +1765,21 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.device.fleet_type #=> String
     #   resp.remote_access_session.device.fleet_name #=> String
+    #   resp.remote_access_session.device.instances #=> Array
+    #   resp.remote_access_session.device.instances[0].arn #=> String
+    #   resp.remote_access_session.device.instances[0].device_arn #=> String
+    #   resp.remote_access_session.device.instances[0].labels #=> Array
+    #   resp.remote_access_session.device.instances[0].labels[0] #=> String
+    #   resp.remote_access_session.device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.remote_access_session.device.instances[0].udid #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.arn #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.remote_access_session.device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.remote_access_session.device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.remote_access_session.device.instances[0].instance_profile.name #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.description #=> String
+    #   resp.remote_access_session.instance_arn #=> String
     #   resp.remote_access_session.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.remote_record_enabled #=> Boolean
     #   resp.remote_access_session.remote_record_app_arn #=> String
@@ -1528,6 +1792,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.endpoint #=> String
     #   resp.remote_access_session.device_udid #=> String
     #   resp.remote_access_session.interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
+    #   resp.remote_access_session.skip_app_resign #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession AWS API Documentation
     #
@@ -1650,6 +1915,7 @@ module Aws::DeviceFarm
     #   resp.run.customer_artifact_paths.device_host_paths #=> Array
     #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
     #   resp.run.web_url #=> String
+    #   resp.run.skip_app_resign #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -1956,6 +2222,57 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Returns information about the private device instances associated with
+    # one or more AWS accounts.
+    #
+    # @option params [Integer] :max_results
+    #   An integer specifying the maximum number of items you want to return
+    #   in the API response.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListDeviceInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeviceInstancesResult#device_instances #device_instances} => Array&lt;Types::DeviceInstance&gt;
+    #   * {Types::ListDeviceInstancesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_device_instances({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_instances #=> Array
+    #   resp.device_instances[0].arn #=> String
+    #   resp.device_instances[0].device_arn #=> String
+    #   resp.device_instances[0].labels #=> Array
+    #   resp.device_instances[0].labels[0] #=> String
+    #   resp.device_instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.device_instances[0].udid #=> String
+    #   resp.device_instances[0].instance_profile.arn #=> String
+    #   resp.device_instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.device_instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.device_instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.device_instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.device_instances[0].instance_profile.name #=> String
+    #   resp.device_instances[0].instance_profile.description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDeviceInstances AWS API Documentation
+    #
+    # @overload list_device_instances(params = {})
+    # @param [Hash] params ({})
+    def list_device_instances(params = {}, options = {})
+      req = build_request(:list_device_instances, params)
+      req.send_request(options)
+    end
+
     # Gets information about device pools.
     #
     # @option params [required, String] :arn
@@ -2038,7 +2355,7 @@ module Aws::DeviceFarm
     #   resp.device_pools[0].description #=> String
     #   resp.device_pools[0].type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pools[0].rules #=> Array
-    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
     #   resp.device_pools[0].rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pools[0].rules[0].value #=> String
     #   resp.next_token #=> String
@@ -2112,6 +2429,20 @@ module Aws::DeviceFarm
     #   resp.devices[0].remote_debug_enabled #=> Boolean
     #   resp.devices[0].fleet_type #=> String
     #   resp.devices[0].fleet_name #=> String
+    #   resp.devices[0].instances #=> Array
+    #   resp.devices[0].instances[0].arn #=> String
+    #   resp.devices[0].instances[0].device_arn #=> String
+    #   resp.devices[0].instances[0].labels #=> Array
+    #   resp.devices[0].instances[0].labels[0] #=> String
+    #   resp.devices[0].instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.devices[0].instances[0].udid #=> String
+    #   resp.devices[0].instances[0].instance_profile.arn #=> String
+    #   resp.devices[0].instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.devices[0].instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.devices[0].instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.devices[0].instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.devices[0].instances[0].instance_profile.name #=> String
+    #   resp.devices[0].instances[0].instance_profile.description #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevices AWS API Documentation
@@ -2120,6 +2451,50 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def list_devices(params = {}, options = {})
       req = build_request(:list_devices, params)
+      req.send_request(options)
+    end
+
+    # Returns information about all the instance profiles in an AWS account.
+    #
+    # @option params [Integer] :max_results
+    #   An integer specifying the maximum number of items you want to return
+    #   in the API response.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListInstanceProfilesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInstanceProfilesResult#instance_profiles #instance_profiles} => Array&lt;Types::InstanceProfile&gt;
+    #   * {Types::ListInstanceProfilesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_instance_profiles({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_profiles #=> Array
+    #   resp.instance_profiles[0].arn #=> String
+    #   resp.instance_profiles[0].package_cleanup #=> Boolean
+    #   resp.instance_profiles[0].exclude_app_packages_from_cleanup #=> Array
+    #   resp.instance_profiles[0].exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.instance_profiles[0].reboot_after_use #=> Boolean
+    #   resp.instance_profiles[0].name #=> String
+    #   resp.instance_profiles[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListInstanceProfiles AWS API Documentation
+    #
+    # @overload list_instance_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_instance_profiles(params = {}, options = {})
+      req = build_request(:list_instance_profiles, params)
       req.send_request(options)
     end
 
@@ -2195,6 +2570,21 @@ module Aws::DeviceFarm
     #   resp.jobs[0].device.remote_debug_enabled #=> Boolean
     #   resp.jobs[0].device.fleet_type #=> String
     #   resp.jobs[0].device.fleet_name #=> String
+    #   resp.jobs[0].device.instances #=> Array
+    #   resp.jobs[0].device.instances[0].arn #=> String
+    #   resp.jobs[0].device.instances[0].device_arn #=> String
+    #   resp.jobs[0].device.instances[0].labels #=> Array
+    #   resp.jobs[0].device.instances[0].labels[0] #=> String
+    #   resp.jobs[0].device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.jobs[0].device.instances[0].udid #=> String
+    #   resp.jobs[0].device.instances[0].instance_profile.arn #=> String
+    #   resp.jobs[0].device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.jobs[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.jobs[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.jobs[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.jobs[0].device.instances[0].instance_profile.name #=> String
+    #   resp.jobs[0].device.instances[0].instance_profile.description #=> String
+    #   resp.jobs[0].instance_arn #=> String
     #   resp.jobs[0].device_minutes.total #=> Float
     #   resp.jobs[0].device_minutes.metered #=> Float
     #   resp.jobs[0].device_minutes.unmetered #=> Float
@@ -2708,6 +3098,21 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].device.remote_debug_enabled #=> Boolean
     #   resp.remote_access_sessions[0].device.fleet_type #=> String
     #   resp.remote_access_sessions[0].device.fleet_name #=> String
+    #   resp.remote_access_sessions[0].device.instances #=> Array
+    #   resp.remote_access_sessions[0].device.instances[0].arn #=> String
+    #   resp.remote_access_sessions[0].device.instances[0].device_arn #=> String
+    #   resp.remote_access_sessions[0].device.instances[0].labels #=> Array
+    #   resp.remote_access_sessions[0].device.instances[0].labels[0] #=> String
+    #   resp.remote_access_sessions[0].device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.remote_access_sessions[0].device.instances[0].udid #=> String
+    #   resp.remote_access_sessions[0].device.instances[0].instance_profile.arn #=> String
+    #   resp.remote_access_sessions[0].device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.remote_access_sessions[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.remote_access_sessions[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.remote_access_sessions[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.remote_access_sessions[0].device.instances[0].instance_profile.name #=> String
+    #   resp.remote_access_sessions[0].device.instances[0].instance_profile.description #=> String
+    #   resp.remote_access_sessions[0].instance_arn #=> String
     #   resp.remote_access_sessions[0].remote_debug_enabled #=> Boolean
     #   resp.remote_access_sessions[0].remote_record_enabled #=> Boolean
     #   resp.remote_access_sessions[0].remote_record_app_arn #=> String
@@ -2720,6 +3125,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].endpoint #=> String
     #   resp.remote_access_sessions[0].device_udid #=> String
     #   resp.remote_access_sessions[0].interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
+    #   resp.remote_access_sessions[0].skip_app_resign #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions AWS API Documentation
@@ -2855,6 +3261,7 @@ module Aws::DeviceFarm
     #   resp.runs[0].customer_artifact_paths.device_host_paths #=> Array
     #   resp.runs[0].customer_artifact_paths.device_host_paths[0] #=> String
     #   resp.runs[0].web_url #=> String
+    #   resp.runs[0].skip_app_resign #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -3138,6 +3545,20 @@ module Aws::DeviceFarm
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.remote_debug_enabled #=> Boolean
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.fleet_type #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].device.fleet_name #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances #=> Array
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].arn #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].device_arn #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].labels #=> Array
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].labels[0] #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].udid #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.arn #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.name #=> String
+    #   resp.unique_problems["ExecutionResult"][0].problems[0].device.instances[0].instance_profile.description #=> String
     #   resp.unique_problems["ExecutionResult"][0].problems[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
     #   resp.unique_problems["ExecutionResult"][0].problems[0].message #=> String
     #   resp.next_token #=> String
@@ -3478,6 +3899,7 @@ module Aws::DeviceFarm
     #       job_timeout_minutes: 1,
     #       accounts_cleanup: false,
     #       app_packages_cleanup: false,
+    #       skip_app_resign: false,
     #     },
     #   })
     #
@@ -3539,6 +3961,7 @@ module Aws::DeviceFarm
     #   resp.run.customer_artifact_paths.device_host_paths #=> Array
     #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
     #   resp.run.web_url #=> String
+    #   resp.run.skip_app_resign #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -3597,6 +4020,21 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.device.fleet_type #=> String
     #   resp.remote_access_session.device.fleet_name #=> String
+    #   resp.remote_access_session.device.instances #=> Array
+    #   resp.remote_access_session.device.instances[0].arn #=> String
+    #   resp.remote_access_session.device.instances[0].device_arn #=> String
+    #   resp.remote_access_session.device.instances[0].labels #=> Array
+    #   resp.remote_access_session.device.instances[0].labels[0] #=> String
+    #   resp.remote_access_session.device.instances[0].status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.remote_access_session.device.instances[0].udid #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.arn #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.package_cleanup #=> Boolean
+    #   resp.remote_access_session.device.instances[0].instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.remote_access_session.device.instances[0].instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.reboot_after_use #=> Boolean
+    #   resp.remote_access_session.device.instances[0].instance_profile.name #=> String
+    #   resp.remote_access_session.device.instances[0].instance_profile.description #=> String
+    #   resp.remote_access_session.instance_arn #=> String
     #   resp.remote_access_session.remote_debug_enabled #=> Boolean
     #   resp.remote_access_session.remote_record_enabled #=> Boolean
     #   resp.remote_access_session.remote_record_app_arn #=> String
@@ -3609,6 +4047,7 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.endpoint #=> String
     #   resp.remote_access_session.device_udid #=> String
     #   resp.remote_access_session.interaction_mode #=> String, one of "INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"
+    #   resp.remote_access_session.skip_app_resign #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession AWS API Documentation
     #
@@ -3714,6 +4153,7 @@ module Aws::DeviceFarm
     #   resp.run.customer_artifact_paths.device_host_paths #=> Array
     #   resp.run.customer_artifact_paths.device_host_paths[0] #=> String
     #   resp.run.web_url #=> String
+    #   resp.run.skip_app_resign #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -3721,6 +4161,56 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def stop_run(params = {}, options = {})
       req = build_request(:stop_run, params)
+      req.send_request(options)
+    end
+
+    # Updates information about an existing private device instance.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the device instance.
+    #
+    # @option params [String] :profile_arn
+    #   The Amazon Resource Name (ARN) of the profile that you want to
+    #   associate with the device instance.
+    #
+    # @option params [Array<String>] :labels
+    #   An array of strings that you want to associate with the device
+    #   instance.
+    #
+    # @return [Types::UpdateDeviceInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDeviceInstanceResult#device_instance #device_instance} => Types::DeviceInstance
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_device_instance({
+    #     arn: "AmazonResourceName", # required
+    #     profile_arn: "AmazonResourceName",
+    #     labels: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_instance.arn #=> String
+    #   resp.device_instance.device_arn #=> String
+    #   resp.device_instance.labels #=> Array
+    #   resp.device_instance.labels[0] #=> String
+    #   resp.device_instance.status #=> String, one of "IN_USE", "PREPARING", "AVAILABLE", "NOT_AVAILABLE"
+    #   resp.device_instance.udid #=> String
+    #   resp.device_instance.instance_profile.arn #=> String
+    #   resp.device_instance.instance_profile.package_cleanup #=> Boolean
+    #   resp.device_instance.instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.device_instance.instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.device_instance.instance_profile.reboot_after_use #=> Boolean
+    #   resp.device_instance.instance_profile.name #=> String
+    #   resp.device_instance.instance_profile.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDeviceInstance AWS API Documentation
+    #
+    # @overload update_device_instance(params = {})
+    # @param [Hash] params ({})
+    def update_device_instance(params = {}, options = {})
+      req = build_request(:update_device_instance, params)
       req.send_request(options)
     end
 
@@ -3780,7 +4270,7 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS
     #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
@@ -3794,7 +4284,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
@@ -3804,6 +4294,66 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def update_device_pool(params = {}, options = {})
       req = build_request(:update_device_pool, params)
+      req.send_request(options)
+    end
+
+    # Updates information about an existing private device instance profile.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the instance profile.
+    #
+    # @option params [String] :name
+    #   The updated name for your instance profile.
+    #
+    # @option params [String] :description
+    #   The updated description for your instance profile.
+    #
+    # @option params [Boolean] :package_cleanup
+    #   The updated choice for whether you want to specify package cleanup.
+    #   The default value is `false` for private devices.
+    #
+    # @option params [Array<String>] :exclude_app_packages_from_cleanup
+    #   An array of strings specifying the list of app packages that should
+    #   not be cleaned up from the device after a test run is over.
+    #
+    #   The list of packages is only considered if you set `packageCleanup` to
+    #   `true`.
+    #
+    # @option params [Boolean] :reboot_after_use
+    #   The updated choice for whether you want to reboot the device after
+    #   use. The default value is `true`.
+    #
+    # @return [Types::UpdateInstanceProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateInstanceProfileResult#instance_profile #instance_profile} => Types::InstanceProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_instance_profile({
+    #     arn: "AmazonResourceName", # required
+    #     name: "Name",
+    #     description: "Message",
+    #     package_cleanup: false,
+    #     exclude_app_packages_from_cleanup: ["String"],
+    #     reboot_after_use: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_profile.arn #=> String
+    #   resp.instance_profile.package_cleanup #=> Boolean
+    #   resp.instance_profile.exclude_app_packages_from_cleanup #=> Array
+    #   resp.instance_profile.exclude_app_packages_from_cleanup[0] #=> String
+    #   resp.instance_profile.reboot_after_use #=> Boolean
+    #   resp.instance_profile.name #=> String
+    #   resp.instance_profile.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateInstanceProfile AWS API Documentation
+    #
+    # @overload update_instance_profile(params = {})
+    # @param [Hash] params ({})
+    def update_instance_profile(params = {}, options = {})
+      req = build_request(:update_instance_profile, params)
       req.send_request(options)
     end
 
@@ -3977,7 +4527,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

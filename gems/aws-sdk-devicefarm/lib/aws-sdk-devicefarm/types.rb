@@ -46,6 +46,19 @@ module Aws::DeviceFarm
     #   execute before it times out. Default value is 60 minutes.
     #   @return [Integer]
     #
+    # @!attribute [rw] skip_app_resign
+    #   When set to `true`, for private devices, Device Farm will not sign
+    #   your app again. For public devices, Device Farm always signs your
+    #   apps again and this parameter has no effect.
+    #
+    #   For more information about how Device Farm re-signs your app(s), see
+    #   [Do you modify my app?][1] in the *AWS Device Farm FAQs*.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/AccountSettings AWS API Documentation
     #
     class AccountSettings < Struct.new(
@@ -55,7 +68,8 @@ module Aws::DeviceFarm
       :max_job_timeout_minutes,
       :trial_minutes,
       :max_slots,
-      :default_job_timeout_minutes)
+      :default_job_timeout_minutes,
+      :skip_app_resign)
       include Aws::Structure
     end
 
@@ -225,7 +239,7 @@ module Aws::DeviceFarm
     #         description: "Message",
     #         rules: [ # required
     #           {
-    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION
+    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS
     #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #             value: "String",
     #           },
@@ -268,6 +282,65 @@ module Aws::DeviceFarm
     #
     class CreateDevicePoolResult < Struct.new(
       :device_pool)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateInstanceProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         description: "Message",
+    #         package_cleanup: false,
+    #         exclude_app_packages_from_cleanup: ["String"],
+    #         reboot_after_use: false,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of your instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of your instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_cleanup
+    #   When set to `true`, Device Farm will remove app packages after a
+    #   test run. The default value is `false` for private devices.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_app_packages_from_cleanup
+    #   An array of strings specifying the list of app packages that should
+    #   not be cleaned up from the device after a test run is over.
+    #
+    #   The list of packages is only considered if you set `packageCleanup`
+    #   to `true`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reboot_after_use
+    #   When set to `true`, Device Farm will reboot the instance after a
+    #   test run. The default value is `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateInstanceProfileRequest AWS API Documentation
+    #
+    class CreateInstanceProfileRequest < Struct.new(
+      :name,
+      :description,
+      :package_cleanup,
+      :exclude_app_packages_from_cleanup,
+      :reboot_after_use)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_profile
+    #   An object containing information about your instance profile.
+    #   @return [Types::InstanceProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateInstanceProfileResult AWS API Documentation
+    #
+    class CreateInstanceProfileResult < Struct.new(
+      :instance_profile)
       include Aws::Structure
     end
 
@@ -418,8 +491,8 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
-    # Creates the configuration settings for a remote access session,
-    # including the device model and type.
+    # Configuration settings for a remote access session, including billing
+    # method.
     #
     # @note When making an API call, you may pass CreateRemoteAccessSessionConfiguration
     #   data as a hash:
@@ -429,8 +502,7 @@ module Aws::DeviceFarm
     #       }
     #
     # @!attribute [rw] billing_method
-    #   Returns the billing method for purposes of configuring a remote
-    #   access session.
+    #   The billing method for the remote access session.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionConfiguration AWS API Documentation
@@ -448,6 +520,7 @@ module Aws::DeviceFarm
     #       {
     #         project_arn: "AmazonResourceName", # required
     #         device_arn: "AmazonResourceName", # required
+    #         instance_arn: "AmazonResourceName",
     #         ssh_public_key: "SshPublicKey",
     #         remote_debug_enabled: false,
     #         remote_record_enabled: false,
@@ -458,6 +531,7 @@ module Aws::DeviceFarm
     #           billing_method: "METERED", # accepts METERED, UNMETERED
     #         },
     #         interaction_mode: "INTERACTIVE", # accepts INTERACTIVE, NO_VIDEO, VIDEO_ONLY
+    #         skip_app_resign: false,
     #       }
     #
     # @!attribute [rw] project_arn
@@ -468,6 +542,11 @@ module Aws::DeviceFarm
     # @!attribute [rw] device_arn
     #   The Amazon Resource Name (ARN) of the device for which you want to
     #   create a remote access session.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the device instance for which you
+    #   want to create a remote access session.
     #   @return [String]
     #
     # @!attribute [rw] ssh_public_key
@@ -523,11 +602,25 @@ module Aws::DeviceFarm
     #     screen in this mode.
     #   @return [String]
     #
+    # @!attribute [rw] skip_app_resign
+    #   When set to `true`, for private devices, Device Farm will not sign
+    #   your app again. For public devices, Device Farm always signs your
+    #   apps again and this parameter has no effect.
+    #
+    #   For more information about how Device Farm re-signs your app(s), see
+    #   [Do you modify my app?][1] in the *AWS Device Farm FAQs*.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionRequest AWS API Documentation
     #
     class CreateRemoteAccessSessionRequest < Struct.new(
       :project_arn,
       :device_arn,
+      :instance_arn,
       :ssh_public_key,
       :remote_debug_enabled,
       :remote_record_enabled,
@@ -535,7 +628,8 @@ module Aws::DeviceFarm
       :name,
       :client_id,
       :configuration,
-      :interaction_mode)
+      :interaction_mode,
+      :skip_app_resign)
       include Aws::Structure
     end
 
@@ -722,6 +816,29 @@ module Aws::DeviceFarm
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteDevicePoolResult AWS API Documentation
     #
     class DeleteDevicePoolResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteInstanceProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance profile you are
+    #   requesting to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteInstanceProfileRequest AWS API Documentation
+    #
+    class DeleteInstanceProfileRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteInstanceProfileResult AWS API Documentation
+    #
+    class DeleteInstanceProfileResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteNetworkProfileRequest
     #   data as a hash:
@@ -947,6 +1064,10 @@ module Aws::DeviceFarm
     #   The name of the fleet to which this device belongs.
     #   @return [String]
     #
+    # @!attribute [rw] instances
+    #   The instances belonging to this device.
+    #   @return [Array<Types::DeviceInstance>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Device AWS API Documentation
     #
     class Device < Struct.new(
@@ -968,7 +1089,46 @@ module Aws::DeviceFarm
       :remote_access_enabled,
       :remote_debug_enabled,
       :fleet_type,
-      :fleet_name)
+      :fleet_name,
+      :instances)
+      include Aws::Structure
+    end
+
+    # Represents the device instance.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the device instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_arn
+    #   The Amazon Resource Name (ARN) of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   An array of strings describing the device instance.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the device instance. Valid values are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] udid
+    #   Unique device identifier for the device instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_profile
+    #   A object containing information about the instance profile.
+    #   @return [Types::InstanceProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceInstance AWS API Documentation
+    #
+    class DeviceInstance < Struct.new(
+      :arn,
+      :device_arn,
+      :labels,
+      :status,
+      :udid,
+      :instance_profile)
       include Aws::Structure
     end
 
@@ -1075,6 +1235,7 @@ module Aws::DeviceFarm
     #         job_timeout_minutes: 1,
     #         accounts_cleanup: false,
     #         app_packages_cleanup: false,
+    #         skip_app_resign: false,
     #       }
     #
     # @!attribute [rw] job_timeout_minutes
@@ -1091,12 +1252,26 @@ module Aws::DeviceFarm
     #   otherwise, false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] skip_app_resign
+    #   When set to `true`, for private devices, Device Farm will not sign
+    #   your app again. For public devices, Device Farm always signs your
+    #   apps again and this parameter has no effect.
+    #
+    #   For more information about how Device Farm re-signs your app(s), see
+    #   [Do you modify my app?][1] in the *AWS Device Farm FAQs*.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ExecutionConfiguration AWS API Documentation
     #
     class ExecutionConfiguration < Struct.new(
       :job_timeout_minutes,
       :accounts_cleanup,
-      :app_packages_cleanup)
+      :app_packages_cleanup,
+      :skip_app_resign)
       include Aws::Structure
     end
 
@@ -1119,6 +1294,36 @@ module Aws::DeviceFarm
     #
     class GetAccountSettingsResult < Struct.new(
       :account_settings)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDeviceInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance you're requesting
+    #   information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceInstanceRequest AWS API Documentation
+    #
+    class GetDeviceInstanceRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_instance
+    #   An object containing information about your device instance.
+    #   @return [Types::DeviceInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceInstanceResult AWS API Documentation
+    #
+    class GetDeviceInstanceResult < Struct.new(
+      :device_instance)
       include Aws::Structure
     end
 
@@ -1283,6 +1488,35 @@ module Aws::DeviceFarm
     #
     class GetDeviceResult < Struct.new(
       :device)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetInstanceProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of your instance profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetInstanceProfileRequest AWS API Documentation
+    #
+    class GetInstanceProfileRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_profile
+    #   An object containing information about your instance profile.
+    #   @return [Types::InstanceProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetInstanceProfileResult AWS API Documentation
+    #
+    class GetInstanceProfileResult < Struct.new(
+      :instance_profile)
       include Aws::Structure
     end
 
@@ -1677,6 +1911,50 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # Represents the instance profile.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_cleanup
+    #   When set to `true`, Device Farm will remove app packages after a
+    #   test run. The default value is `false` for private devices.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_app_packages_from_cleanup
+    #   An array of strings specifying the list of app packages that should
+    #   not be cleaned up from the device after a test run is over.
+    #
+    #   The list of packages is only considered if you set `packageCleanup`
+    #   to `true`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reboot_after_use
+    #   When set to `true`, Device Farm will reboot the instance after a
+    #   test run. The default value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] name
+    #   The name of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the instance profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstanceProfile AWS API Documentation
+    #
+    class InstanceProfile < Struct.new(
+      :arn,
+      :package_cleanup,
+      :exclude_app_packages_from_cleanup,
+      :reboot_after_use,
+      :name,
+      :description)
+      include Aws::Structure
+    end
+
     # Represents a device.
     #
     # @!attribute [rw] arn
@@ -1792,6 +2070,10 @@ module Aws::DeviceFarm
     #   The device (phone or tablet).
     #   @return [Types::Device]
     #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] device_minutes
     #   Represents the total (metered or unmetered) minutes used by the job.
     #   @return [Types::DeviceMinutes]
@@ -1810,6 +2092,7 @@ module Aws::DeviceFarm
       :counters,
       :message,
       :device,
+      :instance_arn,
       :device_minutes)
       include Aws::Structure
     end
@@ -1873,6 +2156,50 @@ module Aws::DeviceFarm
     #
     class ListArtifactsResult < Struct.new(
       :artifacts,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDeviceInstancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   An integer specifying the maximum number of items you want to return
+    #   in the API response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDeviceInstancesRequest AWS API Documentation
+    #
+    class ListDeviceInstancesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_instances
+    #   An object containing information about your device instances.
+    #   @return [Array<Types::DeviceInstance>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that can be used in the next call to this operation to
+    #   return the next set of items in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDeviceInstancesResult AWS API Documentation
+    #
+    class ListDeviceInstancesResult < Struct.new(
+      :device_instances,
       :next_token)
       include Aws::Structure
     end
@@ -1985,6 +2312,50 @@ module Aws::DeviceFarm
     #
     class ListDevicesResult < Struct.new(
       :devices,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListInstanceProfilesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   An integer specifying the maximum number of items you want to return
+    #   in the API response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListInstanceProfilesRequest AWS API Documentation
+    #
+    class ListInstanceProfilesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_profiles
+    #   An object containing information about your instance profiles.
+    #   @return [Array<Types::InstanceProfile>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that can be used in the next call to this operation to
+    #   return the next set of items in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListInstanceProfilesResult AWS API Documentation
+    #
+    class ListInstanceProfilesResult < Struct.new(
+      :instance_profiles,
       :next_token)
       include Aws::Structure
     end
@@ -3152,6 +3523,10 @@ module Aws::DeviceFarm
     #   The device (phone or tablet) used in the remote access session.
     #   @return [Types::Device]
     #
+    # @!attribute [rw] instance_arn
+    #   The Amazon Resource Name (ARN) of the instance.
+    #   @return [String]
+    #
     # @!attribute [rw] remote_debug_enabled
     #   This flag is set to `true` if remote debugging is enabled for the
     #   remote access session.
@@ -3220,6 +3595,19 @@ module Aws::DeviceFarm
     #     screen in this mode.
     #   @return [String]
     #
+    # @!attribute [rw] skip_app_resign
+    #   When set to `true`, for private devices, Device Farm will not sign
+    #   your app again. For public devices, Device Farm always signs your
+    #   apps again and this parameter has no effect.
+    #
+    #   For more information about how Device Farm re-signs your app(s), see
+    #   [Do you modify my app?][1] in the *AWS Device Farm FAQs*.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessSession AWS API Documentation
     #
     class RemoteAccessSession < Struct.new(
@@ -3232,6 +3620,7 @@ module Aws::DeviceFarm
       :started,
       :stopped,
       :device,
+      :instance_arn,
       :remote_debug_enabled,
       :remote_record_enabled,
       :remote_record_app_arn,
@@ -3241,7 +3630,8 @@ module Aws::DeviceFarm
       :device_minutes,
       :endpoint,
       :device_udid,
-      :interaction_mode)
+      :interaction_mode,
+      :skip_app_resign)
       include Aws::Structure
     end
 
@@ -3309,7 +3699,7 @@ module Aws::DeviceFarm
     #   data as a hash:
     #
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS
     #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       }
@@ -3332,6 +3722,11 @@ module Aws::DeviceFarm
     #     access.
     #
     #   * APPIUM\_VERSION: The Appium version for the test.
+    #
+    #   * INSTANCE\_ARN: The Amazon Resource Name (ARN) of the device
+    #     instance.
+    #
+    #   * INSTANCE\_LABELS: The label of the device instance.
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -3561,9 +3956,21 @@ module Aws::DeviceFarm
     #   @return [Types::CustomerArtifactPaths]
     #
     # @!attribute [rw] web_url
-    #   A pre-signed Amazon S3 URL that can be used with a corresponding GET
-    #   request to download the symbol file for the run.
+    #   The Device Farm console URL for the recording of the run.
     #   @return [String]
+    #
+    # @!attribute [rw] skip_app_resign
+    #   When set to `true`, for private devices, Device Farm will not sign
+    #   your app again. For public devices, Device Farm always signs your
+    #   apps again and this parameter has no effect.
+    #
+    #   For more information about how Device Farm re-signs your app(s), see
+    #   [Do you modify my app?][1] in the *AWS Device Farm FAQs*.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/device-farm/faq/
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
     #
@@ -3595,7 +4002,8 @@ module Aws::DeviceFarm
       :radios,
       :location,
       :customer_artifact_paths,
-      :web_url)
+      :web_url,
+      :skip_app_resign)
       include Aws::Structure
     end
 
@@ -3789,6 +4197,7 @@ module Aws::DeviceFarm
     #           job_timeout_minutes: 1,
     #           accounts_cleanup: false,
     #           app_packages_cleanup: false,
+    #           skip_app_resign: false,
     #         },
     #       }
     #
@@ -4372,6 +4781,49 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateDeviceInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #         profile_arn: "AmazonResourceName",
+    #         labels: ["String"],
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the device instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] profile_arn
+    #   The Amazon Resource Name (ARN) of the profile that you want to
+    #   associate with the device instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] labels
+    #   An array of strings that you want to associate with the device
+    #   instance.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDeviceInstanceRequest AWS API Documentation
+    #
+    class UpdateDeviceInstanceRequest < Struct.new(
+      :arn,
+      :profile_arn,
+      :labels)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_instance
+    #   An object containing information about your device instance.
+    #   @return [Types::DeviceInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDeviceInstanceResult AWS API Documentation
+    #
+    class UpdateDeviceInstanceResult < Struct.new(
+      :device_instance)
+      include Aws::Structure
+    end
+
     # Represents a request to the update device pool operation.
     #
     # @note When making an API call, you may pass UpdateDevicePoolRequest
@@ -4383,7 +4835,7 @@ module Aws::DeviceFarm
     #         description: "Message",
     #         rules: [
     #           {
-    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION
+    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS
     #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #             value: "String",
     #           },
@@ -4430,6 +4882,71 @@ module Aws::DeviceFarm
     #
     class UpdateDevicePoolResult < Struct.new(
       :device_pool)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateInstanceProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #         name: "Name",
+    #         description: "Message",
+    #         package_cleanup: false,
+    #         exclude_app_packages_from_cleanup: ["String"],
+    #         reboot_after_use: false,
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name for your instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description for your instance profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_cleanup
+    #   The updated choice for whether you want to specify package cleanup.
+    #   The default value is `false` for private devices.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_app_packages_from_cleanup
+    #   An array of strings specifying the list of app packages that should
+    #   not be cleaned up from the device after a test run is over.
+    #
+    #   The list of packages is only considered if you set `packageCleanup`
+    #   to `true`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reboot_after_use
+    #   The updated choice for whether you want to reboot the device after
+    #   use. The default value is `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateInstanceProfileRequest AWS API Documentation
+    #
+    class UpdateInstanceProfileRequest < Struct.new(
+      :arn,
+      :name,
+      :description,
+      :package_cleanup,
+      :exclude_app_packages_from_cleanup,
+      :reboot_after_use)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_profile
+    #   An object containing information about your instance profile.
+    #   @return [Types::InstanceProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateInstanceProfileResult AWS API Documentation
+    #
+    class UpdateInstanceProfileResult < Struct.new(
+      :instance_profile)
       include Aws::Structure
     end
 
