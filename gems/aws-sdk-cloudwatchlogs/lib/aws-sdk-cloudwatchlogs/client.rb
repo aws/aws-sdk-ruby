@@ -738,7 +738,7 @@ module Aws::CloudWatchLogs
     # @option params [String] :log_stream_name_prefix
     #   The prefix to match.
     #
-    #   iIf `orderBy` is `LastEventTime`,you cannot specify this parameter.
+    #   If `orderBy` is `LastEventTime`,you cannot specify this parameter.
     #
     # @option params [String] :order_by
     #   If the value is `LogStreamName`, the results are ordered by log stream
