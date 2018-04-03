@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::Translate - Updated the API, and documentation for Amazon Translate.
+
 2.11.27 (2018-04-02)
 ------------------
 
