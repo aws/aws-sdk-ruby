@@ -972,7 +972,7 @@
     },
     "DescribeTasksRequest":{
       "type":"structure",
-      "required":["tasks"],
+      "required":["cluster", "tasks"],
       "members":{
         "cluster":{"shape":"String"},
         "tasks":{"shape":"StringList"}
