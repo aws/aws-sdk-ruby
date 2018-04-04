@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.29 (2018-04-04)
+------------------
+
 * Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
 
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
