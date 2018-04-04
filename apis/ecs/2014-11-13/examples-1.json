@@ -484,6 +484,7 @@
     "DescribeTasks": [
       {
         "input": {
+          "cluster": "arn:aws:ecs:<region>:<aws_account_id>:cluster/default",
           "tasks": [
             "c5cba4eb-5dad-405e-96db-71ef8eefe6a8"
           ]
