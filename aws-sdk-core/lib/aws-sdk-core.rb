@@ -24,6 +24,7 @@ module Aws
   # services
   SERVICE_MODULE_NAMES = %w(
     ACM
+    ACMPCA
     APIGateway
     AlexaForBusiness
     AppStream
@@ -79,6 +80,7 @@ module Aws
     ElasticLoadBalancingV2
     ElasticTranscoder
     ElasticsearchService
+    FMS
     Firehose
     GameLift
     Glacier
@@ -139,6 +141,7 @@ module Aws
     SWF
     SageMaker
     SageMakerRuntime
+    SecretsManager
     ServerlessApplicationRepository
     ServiceCatalog
     ServiceDiscovery

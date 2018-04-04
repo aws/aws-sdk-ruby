@@ -3,6 +3,10 @@
     "models": "acm/2015-12-08",
     "endpoint": "acm"
   },
+  "ACMPCA": {
+    "models": "acm-pca/2017-08-22",
+    "endpoint": "acm-pca"
+  },
   "APIGateway": {
     "models": "apigateway/2015-07-09",
     "endpoint": "apigateway"
@@ -221,6 +225,10 @@
   "ElasticsearchService": {
     "models": "es/2015-01-01",
     "endpoint": "es"
+  },
+  "FMS": {
+    "models": "fms/2018-01-01",
+    "endpoint": "fms"
   },
   "Firehose": {
     "models": "firehose/2015-08-04",
@@ -461,6 +469,10 @@
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13",
     "endpoint": "runtime.sagemaker"
+  },
+  "SecretsManager": {
+    "models": "secretsmanager/2017-10-17",
+    "endpoint": "secretsmanager"
   },
   "ServerlessApplicationRepository": {
     "models": "serverlessrepo/2017-09-08",

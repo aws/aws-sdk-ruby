@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
+* Feature - Aws::ACMPCA - Added support for a new service, AWS Certificate Manager Private Certificate Authority.
+
+* Feature - Aws::FMS - Added support for a new service, Firewall Management Service.
+
+* Feature - Aws::SecretsManager - Added support for a new service, AWS Secrets Manager.
+
 2.11.28 (2018-04-03)
 ------------------
 
