@@ -177,7 +177,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/tags.html
+    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/tags.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM certificate to which the tag
@@ -316,8 +316,8 @@ module Aws::ACM
     #   resp.certificate.signature_algorithm #=> String
     #   resp.certificate.in_use_by #=> Array
     #   resp.certificate.in_use_by[0] #=> String
-    #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "CAA_ERROR", "OTHER"
-    #   resp.certificate.type #=> String, one of "IMPORTED", "AMAZON_ISSUED"
+    #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "OTHER"
+    #   resp.certificate.type #=> String, one of "IMPORTED", "AMAZON_ISSUED", "PRIVATE"
     #   resp.certificate.renewal_summary.renewal_status #=> String, one of "PENDING_AUTO_RENEWAL", "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #   resp.certificate.renewal_summary.domain_validation_options #=> Array
     #   resp.certificate.renewal_summary.domain_validation_options[0].domain_name #=> String
@@ -334,6 +334,8 @@ module Aws::ACM
     #   resp.certificate.extended_key_usages #=> Array
     #   resp.certificate.extended_key_usages[0].name #=> String, one of "TLS_WEB_SERVER_AUTHENTICATION", "TLS_WEB_CLIENT_AUTHENTICATION", "CODE_SIGNING", "EMAIL_PROTECTION", "TIME_STAMPING", "OCSP_SIGNING", "IPSEC_END_SYSTEM", "IPSEC_TUNNEL", "IPSEC_USER", "ANY", "NONE", "CUSTOM"
     #   resp.certificate.extended_key_usages[0].oid #=> String
+    #   resp.certificate.certificate_authority_arn #=> String
+    #   resp.certificate.renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
     #   resp.certificate.options.certificate_transparency_logging_preference #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate AWS API Documentation
@@ -342,6 +344,58 @@ module Aws::ACM
     # @param [Hash] params ({})
     def describe_certificate(params = {}, options = {})
       req = build_request(:describe_certificate, params)
+      req.send_request(options)
+    end
+
+    # Exports a certificate for use anywhere. You can export the
+    # certificate, the certificate chain, and the encrypted private key
+    # associated with the public key embedded in the certificate. You must
+    # store the private key securely. The private key is a 2048 bit RSA key.
+    # You must provide a passphrase for the private key when exporting it.
+    # You can use the following OpenSSL command to decrypt it later. Provide
+    # the passphrase when prompted.
+    #
+    # `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
+    #
+    # @option params [required, String] :certificate_arn
+    #   An Amazon Resource Name (ARN) of the issued certificate. This must be
+    #   of the form:
+    #
+    #   `arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012`
+    #
+    # @option params [required, String, IO] :passphrase
+    #   Passphrase to associate with the encrypted exported private key. If
+    #   you want to later decrypt the private key, you must have the
+    #   passphrase. You can use the following OpenSSL command to decrypt a
+    #   private key:
+    #
+    #   `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
+    #
+    # @return [Types::ExportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportCertificateResponse#certificate #certificate} => String
+    #   * {Types::ExportCertificateResponse#certificate_chain #certificate_chain} => String
+    #   * {Types::ExportCertificateResponse#private_key #private_key} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_certificate({
+    #     certificate_arn: "Arn", # required
+    #     passphrase: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate #=> String
+    #   resp.certificate_chain #=> String
+    #   resp.private_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificate AWS API Documentation
+    #
+    # @overload export_certificate(params = {})
+    # @param [Hash] params ({})
+    def export_certificate(params = {}, options = {})
+      req = build_request(:export_certificate, params)
       req.send_request(options)
     end
 
@@ -443,9 +497,9 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html
-    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
-    # [3]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-services.html
+    # [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/import-certificate.html
+    # [3]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
     # [4]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :certificate_arn
@@ -663,8 +717,8 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
-    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html
+    # [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [required, String] :domain_name
     #   Fully qualified domain name (FQDN), such as www.example.com, of the
@@ -684,8 +738,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
-    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [Array<String>] :subject_alternative_names
     #   Additional FQDNs to be included in the Subject Alternative Name
@@ -715,7 +769,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-limits.html
     #
     # @option params [String] :idempotency_token
     #   Customer chosen string that can be used to distinguish between calls
@@ -740,7 +794,20 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #
+    # @option params [String] :certificate_authority_arn
+    #   The Amazon Resource Name (ARN) of the private certificate authority
+    #   (CA) that will be used to issue the certificate. For more information
+    #   about private CAs, see the [AWS Certificate Manager Private
+    #   Certificate Authority (PCA)][1] user guide. The ARN must have the
+    #   following form:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm-pca/latest/userguide/PcaWelcome.html
     #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -762,6 +829,7 @@ module Aws::ACM
     #     options: {
     #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #     },
+    #     certificate_authority_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -792,7 +860,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/setup-email.html
+    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/setup-email.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the requested certificate. The
@@ -853,7 +921,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #
     # @option params [required, String] :certificate_arn
     #   ARN of the requested certificate to update. This must be of the form:
@@ -902,7 +970,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

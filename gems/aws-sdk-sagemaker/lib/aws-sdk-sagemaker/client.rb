@@ -356,7 +356,7 @@ module Aws::SageMaker
     #         variant_name: "VariantName", # required
     #         model_name: "ModelName", # required
     #         initial_instance_count: 1, # required
-    #         instance_type: "ml.c4.2xlarge", # required, accepts ml.c4.2xlarge, ml.c4.8xlarge, ml.c4.xlarge, ml.c5.2xlarge, ml.c5.9xlarge, ml.c5.xlarge, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge, ml.t2.medium
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #         initial_variant_weight: 1.0,
     #       },
     #     ],
@@ -577,7 +577,7 @@ module Aws::SageMaker
     #
     #   resp = client.create_notebook_instance({
     #     notebook_instance_name: "NotebookInstanceName", # required
-    #     instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge
+    #     instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #     subnet_id: "SubnetId",
     #     security_group_ids: ["SecurityGroupId"],
     #     role_arn: "RoleArn", # required
@@ -608,6 +608,19 @@ module Aws::SageMaker
     # Creates a lifecycle configuration that you can associate with a
     # notebook instance. A *lifecycle configuration* is a collection of
     # shell scripts that run when you create or start a notebook instance.
+    #
+    # Each lifecycle configuration script has a limit of 16384 characters.
+    #
+    # The value of the `$PATH` environment variable that is available to
+    # both scripts is `/sbin:bin:/usr/sbin:/usr/bin`.
+    #
+    # View CloudWatch Logs for notebook instance lifecycle configurations in
+    # log group `/aws/sagemaker/NotebookInstances` in log stream
+    # `[notebook-instance-name]/[LifecycleConfigHook]`.
+    #
+    # Lifecycle configuration scripts cannot run for longer than 5 minutes.
+    # If a script runs for longer than 5 minutes, it fails and the notebook
+    # instance is not created or started.
     #
     # For information about notebook instance lifestyle configurations, see
     # notebook-lifecycle-config.
@@ -761,12 +774,11 @@ module Aws::SageMaker
     #   algorithm and algorithm-specific metadata, including the input mode.
     #   For more information about algorithms provided by Amazon SageMaker,
     #   see [Algorithms][1]. For information about providing your own
-    #   algorithms, see [Bring Your Own Algorithms ][2].
+    #   algorithms, see your-algorithms.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
@@ -873,7 +885,7 @@ module Aws::SageMaker
     #       s3_output_path: "S3Uri", # required
     #     },
     #     resource_config: { # required
-    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #       instance_count: 1, # required
     #       volume_size_in_gb: 1, # required
     #       volume_kms_key_id: "KmsKeyId",
@@ -1132,7 +1144,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].variant_name #=> String
     #   resp.production_variants[0].model_name #=> String
     #   resp.production_variants[0].initial_instance_count #=> Integer
-    #   resp.production_variants[0].instance_type #=> String, one of "ml.c4.2xlarge", "ml.c4.8xlarge", "ml.c4.xlarge", "ml.c5.2xlarge", "ml.c5.9xlarge", "ml.c5.xlarge", "ml.m4.xlarge", "ml.p2.xlarge", "ml.p3.2xlarge", "ml.t2.medium"
+    #   resp.production_variants[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
     #   resp.production_variants[0].initial_variant_weight #=> Float
     #   resp.kms_key_id #=> String
     #   resp.creation_time #=> Time
@@ -1222,7 +1234,7 @@ module Aws::SageMaker
     #   resp.notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting"
     #   resp.failure_reason #=> String
     #   resp.url #=> String
-    #   resp.instance_type #=> String, one of "ml.t2.medium", "ml.m4.xlarge", "ml.p2.xlarge", "ml.p3.2xlarge"
+    #   resp.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
     #   resp.subnet_id #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
@@ -1340,7 +1352,7 @@ module Aws::SageMaker
     #   resp.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
-    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.volume_size_in_gb #=> Integer
     #   resp.resource_config.volume_kms_key_id #=> String
@@ -1722,7 +1734,7 @@ module Aws::SageMaker
     #   resp.notebook_instances[0].notebook_instance_arn #=> String
     #   resp.notebook_instances[0].notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting"
     #   resp.notebook_instances[0].url #=> String
-    #   resp.notebook_instances[0].instance_type #=> String, one of "ml.t2.medium", "ml.m4.xlarge", "ml.p2.xlarge", "ml.p3.2xlarge"
+    #   resp.notebook_instances[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
     #   resp.notebook_instances[0].creation_time #=> Time
     #   resp.notebook_instances[0].last_modified_time #=> Time
     #   resp.notebook_instances[0].notebook_instance_lifecycle_config_name #=> String
@@ -2060,7 +2072,7 @@ module Aws::SageMaker
     #
     #   resp = client.update_notebook_instance({
     #     notebook_instance_name: "NotebookInstanceName", # required
-    #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge
+    #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #     role_arn: "RoleArn",
     #   })
     #
@@ -2127,7 +2139,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

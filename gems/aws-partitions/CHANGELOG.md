@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2018-04-04)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SecretsManager`.
+
+* Feature - Added support for enumerating regions for `Aws::FMS`.
+
+* Feature - Added support for enumerating regions for `Aws::ACMPCA`.
+
 1.76.0 (2018-03-30)
 ------------------
 

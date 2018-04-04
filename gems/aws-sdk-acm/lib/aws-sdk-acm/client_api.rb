@@ -35,6 +35,8 @@ module Aws::ACM
     DomainValidationList = Shapes::ListShape.new(name: 'DomainValidationList')
     DomainValidationOption = Shapes::StructureShape.new(name: 'DomainValidationOption')
     DomainValidationOptionList = Shapes::ListShape.new(name: 'DomainValidationOptionList')
+    ExportCertificateRequest = Shapes::StructureShape.new(name: 'ExportCertificateRequest')
+    ExportCertificateResponse = Shapes::StructureShape.new(name: 'ExportCertificateResponse')
     ExtendedKeyUsage = Shapes::StructureShape.new(name: 'ExtendedKeyUsage')
     ExtendedKeyUsageFilterList = Shapes::ListShape.new(name: 'ExtendedKeyUsageFilterList')
     ExtendedKeyUsageList = Shapes::ListShape.new(name: 'ExtendedKeyUsageList')
@@ -64,9 +66,12 @@ module Aws::ACM
     ListTagsForCertificateResponse = Shapes::StructureShape.new(name: 'ListTagsForCertificateResponse')
     MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    PassphraseBlob = Shapes::BlobShape.new(name: 'PassphraseBlob')
+    PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
     PrivateKeyBlob = Shapes::BlobShape.new(name: 'PrivateKeyBlob')
     RecordType = Shapes::StringShape.new(name: 'RecordType')
     RemoveTagsFromCertificateRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromCertificateRequest')
+    RenewalEligibility = Shapes::StringShape.new(name: 'RenewalEligibility')
     RenewalStatus = Shapes::StringShape.new(name: 'RenewalStatus')
     RenewalSummary = Shapes::StructureShape.new(name: 'RenewalSummary')
     RequestCertificateRequest = Shapes::StructureShape.new(name: 'RequestCertificateRequest')
@@ -115,6 +120,8 @@ module Aws::ACM
     CertificateDetail.add_member(:renewal_summary, Shapes::ShapeRef.new(shape: RenewalSummary, location_name: "RenewalSummary"))
     CertificateDetail.add_member(:key_usages, Shapes::ShapeRef.new(shape: KeyUsageList, location_name: "KeyUsages"))
     CertificateDetail.add_member(:extended_key_usages, Shapes::ShapeRef.new(shape: ExtendedKeyUsageList, location_name: "ExtendedKeyUsages"))
+    CertificateDetail.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
+    CertificateDetail.add_member(:renewal_eligibility, Shapes::ShapeRef.new(shape: RenewalEligibility, location_name: "RenewalEligibility"))
     CertificateDetail.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, location_name: "Options"))
     CertificateDetail.struct_class = Types::CertificateDetail
 
@@ -155,6 +162,15 @@ module Aws::ACM
     DomainValidationOption.struct_class = Types::DomainValidationOption
 
     DomainValidationOptionList.member = Shapes::ShapeRef.new(shape: DomainValidationOption)
+
+    ExportCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
+    ExportCertificateRequest.add_member(:passphrase, Shapes::ShapeRef.new(shape: PassphraseBlob, required: true, location_name: "Passphrase"))
+    ExportCertificateRequest.struct_class = Types::ExportCertificateRequest
+
+    ExportCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: CertificateBody, location_name: "Certificate"))
+    ExportCertificateResponse.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: CertificateChain, location_name: "CertificateChain"))
+    ExportCertificateResponse.add_member(:private_key, Shapes::ShapeRef.new(shape: PrivateKey, location_name: "PrivateKey"))
+    ExportCertificateResponse.struct_class = Types::ExportCertificateResponse
 
     ExtendedKeyUsage.add_member(:name, Shapes::ShapeRef.new(shape: ExtendedKeyUsageName, location_name: "Name"))
     ExtendedKeyUsage.add_member(:oid, Shapes::ShapeRef.new(shape: String, location_name: "OID"))
@@ -226,6 +242,7 @@ module Aws::ACM
     RequestCertificateRequest.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "IdempotencyToken"))
     RequestCertificateRequest.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: DomainValidationOptionList, location_name: "DomainValidationOptions"))
     RequestCertificateRequest.add_member(:options, Shapes::ShapeRef.new(shape: CertificateOptions, location_name: "Options"))
+    RequestCertificateRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateAuthorityArn"))
     RequestCertificateRequest.struct_class = Types::RequestCertificateRequest
 
     RequestCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
@@ -301,6 +318,17 @@ module Aws::ACM
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
+      api.add_operation(:export_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ExportCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ExportCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: ExportCertificateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+      end)
+
       api.add_operation(:get_certificate, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCertificate"
         o.http_method = "POST"
@@ -365,6 +393,7 @@ module Aws::ACM
         o.output = Shapes::ShapeRef.new(shape: RequestCertificateResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDomainValidationOptionsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
       end)
 
       api.add_operation(:resend_validation_email, Seahorse::Model::Operation.new.tap do |o|
@@ -386,7 +415,6 @@ module Aws::ACM
         o.input = Shapes::ShapeRef.new(shape: UpdateCertificateOptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)

@@ -222,6 +222,7 @@ module Aws
           # service ids
           {
             'ACM' => 'acm',
+            'ACMPCA' => 'acm-pca',
             'APIGateway' => 'apigateway',
             'AlexaForBusiness' => 'a4b',
             'AppStream' => 'appstream2',
@@ -276,6 +277,7 @@ module Aws
             'ElasticLoadBalancingV2' => 'elasticloadbalancing',
             'ElasticTranscoder' => 'elastictranscoder',
             'ElasticsearchService' => 'es',
+            'FMS' => 'fms',
             'Firehose' => 'firehose',
             'GameLift' => 'gamelift',
             'Glacier' => 'glacier',
@@ -335,6 +337,7 @@ module Aws
             'SWF' => 'swf',
             'SageMaker' => 'sagemaker',
             'SageMakerRuntime' => 'runtime.sagemaker',
+            'SecretsManager' => 'secretsmanager',
             'ServerlessApplicationRepository' => 'serverlessrepo',
             'ServiceCatalog' => 'servicecatalog',
             'ServiceDiscovery' => 'servicediscovery',

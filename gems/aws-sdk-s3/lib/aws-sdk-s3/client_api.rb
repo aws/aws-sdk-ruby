@@ -48,6 +48,8 @@ module Aws::S3
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketVersioningStatus = Shapes::StringShape.new(name: 'BucketVersioningStatus')
     Buckets = Shapes::ListShape.new(name: 'Buckets')
+    BytesProcessed = Shapes::IntegerShape.new(name: 'BytesProcessed')
+    BytesScanned = Shapes::IntegerShape.new(name: 'BytesScanned')
     CORSConfiguration = Shapes::StructureShape.new(name: 'CORSConfiguration')
     CORSRule = Shapes::StructureShape.new(name: 'CORSRule')
     CORSRules = Shapes::ListShape.new(name: 'CORSRules', flattened: true)
@@ -66,6 +68,7 @@ module Aws::S3
     CompletedMultipartUpload = Shapes::StructureShape.new(name: 'CompletedMultipartUpload')
     CompletedPart = Shapes::StructureShape.new(name: 'CompletedPart')
     CompletedPartList = Shapes::ListShape.new(name: 'CompletedPartList', flattened: true)
+    CompressionType = Shapes::StringShape.new(name: 'CompressionType')
     Condition = Shapes::StructureShape.new(name: 'Condition')
     ConfirmRemoveSelfBucketAccess = Shapes::BooleanShape.new(name: 'ConfirmRemoveSelfBucketAccess')
     ContentDisposition = Shapes::StringShape.new(name: 'ContentDisposition')
@@ -128,6 +131,7 @@ module Aws::S3
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
     ETag = Shapes::StringShape.new(name: 'ETag')
     EmailAddress = Shapes::StringShape.new(name: 'EmailAddress')
+    EnableRequestProgress = Shapes::BooleanShape.new(name: 'EnableRequestProgress')
     EncodingType = Shapes::StringShape.new(name: 'EncodingType')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
@@ -235,6 +239,9 @@ module Aws::S3
     IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
     IsLatest = Shapes::BooleanShape.new(name: 'IsLatest')
     IsTruncated = Shapes::BooleanShape.new(name: 'IsTruncated')
+    JSONInput = Shapes::StructureShape.new(name: 'JSONInput')
+    JSONOutput = Shapes::StructureShape.new(name: 'JSONOutput')
+    JSONType = Shapes::StringShape.new(name: 'JSONType')
     KMSContext = Shapes::StringShape.new(name: 'KMSContext')
     KeyCount = Shapes::IntegerShape.new(name: 'KeyCount')
     KeyMarker = Shapes::StringShape.new(name: 'KeyMarker')
@@ -334,6 +341,7 @@ module Aws::S3
     Permission = Shapes::StringShape.new(name: 'Permission')
     Policy = Shapes::StringShape.new(name: 'Policy')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
+    Progress = Shapes::StructureShape.new(name: 'Progress')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     PutBucketAccelerateConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAccelerateConfigurationRequest')
     PutBucketAclRequest = Shapes::StructureShape.new(name: 'PutBucketAclRequest')
@@ -382,6 +390,7 @@ module Aws::S3
     RequestCharged = Shapes::StringShape.new(name: 'RequestCharged')
     RequestPayer = Shapes::StringShape.new(name: 'RequestPayer')
     RequestPaymentConfiguration = Shapes::StructureShape.new(name: 'RequestPaymentConfiguration')
+    RequestProgress = Shapes::StructureShape.new(name: 'RequestProgress')
     ResponseCacheControl = Shapes::StringShape.new(name: 'ResponseCacheControl')
     ResponseContentDisposition = Shapes::StringShape.new(name: 'ResponseContentDisposition')
     ResponseContentEncoding = Shapes::StringShape.new(name: 'ResponseContentEncoding')
@@ -418,6 +427,7 @@ module Aws::S3
     SseKmsEncryptedObjects = Shapes::StructureShape.new(name: 'SseKmsEncryptedObjects')
     SseKmsEncryptedObjectsStatus = Shapes::StringShape.new(name: 'SseKmsEncryptedObjectsStatus')
     StartAfter = Shapes::StringShape.new(name: 'StartAfter')
+    Stats = Shapes::StructureShape.new(name: 'Stats')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     StorageClassAnalysis = Shapes::StructureShape.new(name: 'StorageClassAnalysis')
     StorageClassAnalysisDataExport = Shapes::StructureShape.new(name: 'StorageClassAnalysisDataExport')
@@ -1110,6 +1120,8 @@ module Aws::S3
     Initiator.struct_class = Types::Initiator
 
     InputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVInput, location_name: "CSV"))
+    InputSerialization.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
+    InputSerialization.add_member(:json, Shapes::ShapeRef.new(shape: JSONInput, location_name: "JSON"))
     InputSerialization.struct_class = Types::InputSerialization
 
     InventoryConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: InventoryDestination, required: true, location_name: "Destination"))
@@ -1144,6 +1156,12 @@ module Aws::S3
 
     InventorySchedule.add_member(:frequency, Shapes::ShapeRef.new(shape: InventoryFrequency, required: true, location_name: "Frequency"))
     InventorySchedule.struct_class = Types::InventorySchedule
+
+    JSONInput.add_member(:type, Shapes::ShapeRef.new(shape: JSONType, location_name: "Type"))
+    JSONInput.struct_class = Types::JSONInput
+
+    JSONOutput.add_member(:record_delimiter, Shapes::ShapeRef.new(shape: RecordDelimiter, location_name: "RecordDelimiter"))
+    JSONOutput.struct_class = Types::JSONOutput
 
     LambdaFunctionConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
     LambdaFunctionConfiguration.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "CloudFunction"))
@@ -1334,9 +1352,9 @@ module Aws::S3
     ListPartsRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
     ListPartsRequest.struct_class = Types::ListPartsRequest
 
-    LoggingEnabled.add_member(:target_bucket, Shapes::ShapeRef.new(shape: TargetBucket, location_name: "TargetBucket"))
+    LoggingEnabled.add_member(:target_bucket, Shapes::ShapeRef.new(shape: TargetBucket, required: true, location_name: "TargetBucket"))
     LoggingEnabled.add_member(:target_grants, Shapes::ShapeRef.new(shape: TargetGrants, location_name: "TargetGrants"))
-    LoggingEnabled.add_member(:target_prefix, Shapes::ShapeRef.new(shape: TargetPrefix, location_name: "TargetPrefix"))
+    LoggingEnabled.add_member(:target_prefix, Shapes::ShapeRef.new(shape: TargetPrefix, required: true, location_name: "TargetPrefix"))
     LoggingEnabled.struct_class = Types::LoggingEnabled
 
     Metadata.key = Shapes::ShapeRef.new(shape: MetadataKey)
@@ -1425,6 +1443,7 @@ module Aws::S3
     OutputLocation.struct_class = Types::OutputLocation
 
     OutputSerialization.add_member(:csv, Shapes::ShapeRef.new(shape: CSVOutput, location_name: "CSV"))
+    OutputSerialization.add_member(:json, Shapes::ShapeRef.new(shape: JSONOutput, location_name: "JSON"))
     OutputSerialization.struct_class = Types::OutputSerialization
 
     Owner.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
@@ -1438,6 +1457,10 @@ module Aws::S3
     Part.struct_class = Types::Part
 
     Parts.member = Shapes::ShapeRef.new(shape: Part)
+
+    Progress.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: BytesScanned, location_name: "BytesScanned"))
+    Progress.add_member(:bytes_processed, Shapes::ShapeRef.new(shape: BytesProcessed, location_name: "BytesProcessed"))
+    Progress.struct_class = Types::Progress
 
     PutBucketAccelerateConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketAccelerateConfigurationRequest.add_member(:accelerate_configuration, Shapes::ShapeRef.new(shape: AccelerateConfiguration, required: true, location_name: "AccelerateConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
@@ -1682,6 +1705,9 @@ module Aws::S3
     RequestPaymentConfiguration.add_member(:payer, Shapes::ShapeRef.new(shape: Payer, required: true, location_name: "Payer"))
     RequestPaymentConfiguration.struct_class = Types::RequestPaymentConfiguration
 
+    RequestProgress.add_member(:enabled, Shapes::ShapeRef.new(shape: EnableRequestProgress, location_name: "Enabled"))
+    RequestProgress.struct_class = Types::RequestProgress
+
     RestoreObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
     RestoreObjectOutput.add_member(:restore_output_path, Shapes::ShapeRef.new(shape: RestoreOutputPath, location: "header", location_name: "x-amz-restore-output-path"))
     RestoreObjectOutput.struct_class = Types::RestoreObjectOutput
@@ -1763,6 +1789,10 @@ module Aws::S3
 
     SseKmsEncryptedObjects.add_member(:status, Shapes::ShapeRef.new(shape: SseKmsEncryptedObjectsStatus, required: true, location_name: "Status"))
     SseKmsEncryptedObjects.struct_class = Types::SseKmsEncryptedObjects
+
+    Stats.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: BytesScanned, location_name: "BytesScanned"))
+    Stats.add_member(:bytes_processed, Shapes::ShapeRef.new(shape: BytesProcessed, location_name: "BytesProcessed"))
+    Stats.struct_class = Types::Stats
 
     StorageClassAnalysis.add_member(:data_export, Shapes::ShapeRef.new(shape: StorageClassAnalysisDataExport, location_name: "DataExport"))
     StorageClassAnalysis.struct_class = Types::StorageClassAnalysis

@@ -30,6 +30,9 @@ module Aws::S3
       @bucket_name
     end
 
+    # Container for logging information. Presence of this element indicates
+    # that logging is enabled. Parameters TargetBucket and TargetPrefix are
+    # required in this case.
     # @return [Types::LoggingEnabled]
     def logging_enabled
       data[:logging_enabled]
@@ -172,7 +175,7 @@ module Aws::S3
     #   bucket_logging.put({
     #     bucket_logging_status: { # required
     #       logging_enabled: {
-    #         target_bucket: "TargetBucket",
+    #         target_bucket: "TargetBucket", # required
     #         target_grants: [
     #           {
     #             grantee: {
@@ -185,7 +188,7 @@ module Aws::S3
     #             permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE
     #           },
     #         ],
-    #         target_prefix: "TargetPrefix",
+    #         target_prefix: "TargetPrefix", # required
     #       },
     #     },
     #     content_md5: "ContentMD5",

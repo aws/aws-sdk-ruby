@@ -516,6 +516,102 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetMetricDataInput
+    #   data as a hash:
+    #
+    #       {
+    #         metric_data_queries: [ # required
+    #           {
+    #             id: "MetricId", # required
+    #             metric_stat: {
+    #               metric: { # required
+    #                 namespace: "Namespace",
+    #                 metric_name: "MetricName",
+    #                 dimensions: [
+    #                   {
+    #                     name: "DimensionName", # required
+    #                     value: "DimensionValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #               period: 1, # required
+    #               stat: "Stat", # required
+    #               unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #             },
+    #             expression: "MetricExpression",
+    #             label: "MetricLabel",
+    #             return_data: false,
+    #           },
+    #         ],
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         next_token: "NextToken",
+    #         scan_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
+    #         max_datapoints: 1,
+    #       }
+    #
+    # @!attribute [rw] metric_data_queries
+    #   The metric queries to be returned. A single `GetMetricData` call can
+    #   include as many as 100 `MetricDataQuery` structures. Each of these
+    #   structures can specify either a metric to retrieve, or a math
+    #   expression to perform on retrieved data.
+    #   @return [Array<Types::MetricDataQuery>]
+    #
+    # @!attribute [rw] start_time
+    #   The time stamp indicating the earliest data to be returned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time stamp indicating the latest data to be returned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   Include this value, if it was returned by the previous call, to get
+    #   the next set of data points.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_by
+    #   The order in which data points should be returned.
+    #   `TimestampDescending` returns the newest data first and paginates
+    #   when the `MaxDatapoints` limit is reached. `TimestampAscending`
+    #   returns the oldest data first and paginates when the `MaxDatapoints`
+    #   limit is reached.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_datapoints
+    #   The maximum number of data points the request should return before
+    #   paginating. If you omit this, the default of 100,800 is used.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataInput AWS API Documentation
+    #
+    class GetMetricDataInput < Struct.new(
+      :metric_data_queries,
+      :start_time,
+      :end_time,
+      :next_token,
+      :scan_by,
+      :max_datapoints)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_data_results
+    #   The metrics that are returned, including the metric name, namespace,
+    #   and dimensions.
+    #   @return [Array<Types::MetricDataResult>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that marks the next batch of returned results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataOutput AWS API Documentation
+    #
+    class GetMetricDataOutput < Struct.new(
+      :metric_data_results,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetMetricStatisticsInput
     #   data as a hash:
     #
@@ -641,8 +737,8 @@ module Aws::CloudWatch
     # @!attribute [rw] unit
     #   The unit for a given metric. Metrics may be reported in multiple
     #   units. Not supplying a unit results in all units being returned. If
-    #   the metric only ever reports one unit, specifying a unit has no
-    #   effect.
+    #   you specify only a unit that the metric does not report, the results
+    #   of the call are null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatisticsInput AWS API Documentation
@@ -780,7 +876,40 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # A message returned by the `GetMetricData`API, including a code and a
+    # description.
+    #
+    # @!attribute [rw] code
+    #   The error code or status code associated with the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The message text.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MessageData AWS API Documentation
+    #
+    class MessageData < Struct.new(
+      :code,
+      :value)
+      include Aws::Structure
+    end
+
     # Represents a specific metric.
+    #
+    # @note When making an API call, you may pass Metric
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "Namespace",
+    #         metric_name: "MetricName",
+    #         dimensions: [
+    #           {
+    #             name: "DimensionName", # required
+    #             value: "DimensionValue", # required
+    #           },
+    #         ],
+    #       }
     #
     # @!attribute [rw] namespace
     #   The namespace of the metric.
@@ -954,6 +1083,147 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # This structure indicates the metric data to return, and whether this
+    # call is just retrieving a batch set of data for one metric, or is
+    # performing a math expression on metric data. A single `GetMetricData`
+    # call can include up to 100 `MetricDataQuery` structures.
+    #
+    # @note When making an API call, you may pass MetricDataQuery
+    #   data as a hash:
+    #
+    #       {
+    #         id: "MetricId", # required
+    #         metric_stat: {
+    #           metric: { # required
+    #             namespace: "Namespace",
+    #             metric_name: "MetricName",
+    #             dimensions: [
+    #               {
+    #                 name: "DimensionName", # required
+    #                 value: "DimensionValue", # required
+    #               },
+    #             ],
+    #           },
+    #           period: 1, # required
+    #           stat: "Stat", # required
+    #           unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         },
+    #         expression: "MetricExpression",
+    #         label: "MetricLabel",
+    #         return_data: false,
+    #       }
+    #
+    # @!attribute [rw] id
+    #   A short name used to tie this structure to the results in the
+    #   response. This name must be unique within a single call to
+    #   `GetMetricData`. If you are performing math expressions on this set
+    #   of data, this name represents that data and can serve as a variable
+    #   in the mathematical expression. The valid characters are letters,
+    #   numbers, and underscore. The first character must be a lowercase
+    #   letter.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_stat
+    #   The metric to be returned, along with statistics, period, and units.
+    #   Use this parameter only if this structure is performing a data
+    #   retrieval and not performing a math expression on the returned data.
+    #
+    #   Within one MetricDataQuery structure, you must specify either
+    #   `Expression` or `MetricStat` but not both.
+    #   @return [Types::MetricStat]
+    #
+    # @!attribute [rw] expression
+    #   The math expression to be performed on the returned data, if this
+    #   structure is performing a math expression. For more information
+    #   about metric math expressions, see [Metric Math Syntax and
+    #   Functions][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #   Within one MetricDataQuery structure, you must specify either
+    #   `Expression` or `MetricStat` but not both.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   A human-readable label for this metric or expression. This is
+    #   especially useful if this is an expression, so that you know what
+    #   the value represents. If the metric or expression is shown in a
+    #   CloudWatch dashboard widget, the label is shown. If Label is
+    #   omitted, CloudWatch generates a default.
+    #   @return [String]
+    #
+    # @!attribute [rw] return_data
+    #   Indicates whether to return the time stamps and raw data values of
+    #   this metric. If you are performing this call just to do math
+    #   expressions and do not also need the raw data returned, you can
+    #   specify `False`. If you omit this, the default of `True` is used.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataQuery AWS API Documentation
+    #
+    class MetricDataQuery < Struct.new(
+      :id,
+      :metric_stat,
+      :expression,
+      :label,
+      :return_data)
+      include Aws::Structure
+    end
+
+    # A `GetMetricData` call returns an array of `MetricDataResult`
+    # structures. Each of these structures includes the data points for that
+    # metric, along with the time stamps of those data points and other
+    # identifying information.
+    #
+    # @!attribute [rw] id
+    #   The short name you specified to represent this metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   The human-readable label associated with the data.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamps
+    #   The time stamps for the data points, formatted in Unix timestamp
+    #   format. The number of time stamps always matches the number of
+    #   values and the value for Timestamps\[x\] is Values\[x\].
+    #   @return [Array<Time>]
+    #
+    # @!attribute [rw] values
+    #   The data points for the metric corresponding to `Timestamps`. The
+    #   number of values always matches the number of time stamps and the
+    #   time stamp for Values\[x\] is Timestamps\[x\].
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] status_code
+    #   The status of the returned data. `Complete` indicates that all data
+    #   points in the requested time range were returned. `PartialData`
+    #   means that an incomplete set of data points were returned. You can
+    #   use the `NextToken` value that was returned and repeat your request
+    #   to get more data points. `NextToken` is not returned if you are
+    #   performing a math expression. `InternalError` indicates that an
+    #   error occurred. Retry your request using `NextToken`, if present.
+    #   @return [String]
+    #
+    # @!attribute [rw] messages
+    #   A list of messages with additional information about the data
+    #   returned.
+    #   @return [Array<Types::MessageData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataResult AWS API Documentation
+    #
+    class MetricDataResult < Struct.new(
+      :id,
+      :label,
+      :timestamps,
+      :values,
+      :status_code,
+      :messages)
+      include Aws::Structure
+    end
+
     # Encapsulates the information sent to either create a metric or add new
     # values to be aggregated into an existing metric.
     #
@@ -1039,6 +1309,56 @@ module Aws::CloudWatch
       :statistic_values,
       :unit,
       :storage_resolution)
+      include Aws::Structure
+    end
+
+    # This structure defines the metric to be returned, along with the
+    # statistics, period, and units.
+    #
+    # @note When making an API call, you may pass MetricStat
+    #   data as a hash:
+    #
+    #       {
+    #         metric: { # required
+    #           namespace: "Namespace",
+    #           metric_name: "MetricName",
+    #           dimensions: [
+    #             {
+    #               name: "DimensionName", # required
+    #               value: "DimensionValue", # required
+    #             },
+    #           ],
+    #         },
+    #         period: 1, # required
+    #         stat: "Stat", # required
+    #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #       }
+    #
+    # @!attribute [rw] metric
+    #   The metric to return, including the metric name, namespace, and
+    #   dimensions.
+    #   @return [Types::Metric]
+    #
+    # @!attribute [rw] period
+    #   The period to use when retrieving the metric.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stat
+    #   The statistic to return. It can include any CloudWatch statistic or
+    #   extended statistic.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit to use for the returned data points.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStat AWS API Documentation
+    #
+    class MetricStat < Struct.new(
+      :metric,
+      :period,
+      :stat,
+      :unit)
       include Aws::Structure
     end
 
@@ -1230,7 +1550,7 @@ module Aws::CloudWatch
     #
     #   Be sure to specify 10 or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify
-    #   a Period of 10 or 30 for a metric that does not have sub-minute
+    #   a period of 10 or 30 for a metric that does not have sub-minute
     #   resolution, the alarm still attempts to gather data at the period
     #   rate that you specify. In this case, it does not receive data for
     #   the attempts that do not correspond to a one-minute data resolution,
@@ -1264,14 +1584,25 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] evaluation_periods
     #   The number of periods over which data is compared to the specified
-    #   threshold. An alarm's total current evaluation period can be no
-    #   longer than one day, so this number multiplied by `Period` cannot be
-    #   more than 86,400 seconds.
+    #   threshold. If you are setting an alarm which requires that a number
+    #   of consecutive data points be breaching to trigger the alarm, this
+    #   value specifies that number. If you are setting an "M out of N"
+    #   alarm, this value is the N.
+    #
+    #   An alarm's total current evaluation period can be no longer than
+    #   one day, so this number multiplied by `Period` cannot be more than
+    #   86,400 seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] datapoints_to_alarm
     #   The number of datapoints that must be breaching to trigger the
-    #   alarm.
+    #   alarm. This is used only if you are setting an "M out of N" alarm.
+    #   In that case, this value is the M. For more information, see
+    #   [Evaluating an Alarm][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
     #   @return [Integer]
     #
     # @!attribute [rw] threshold

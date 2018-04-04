@@ -8,6 +8,222 @@
 module Aws::ConfigService
   module Types
 
+    # A collection of accounts and regions.
+    #
+    # @note When making an API call, you may pass AccountAggregationSource
+    #   data as a hash:
+    #
+    #       {
+    #         account_ids: ["AccountId"], # required
+    #         all_aws_regions: false,
+    #         aws_regions: ["String"],
+    #       }
+    #
+    # @!attribute [rw] account_ids
+    #   The 12-digit account ID of the account being aggregated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_aws_regions
+    #   If true, aggreagate existing AWS Config regions and future regions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] aws_regions
+    #   The source regions being aggregated.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AccountAggregationSource AWS API Documentation
+    #
+    class AccountAggregationSource < Struct.new(
+      :account_ids,
+      :all_aws_regions,
+      :aws_regions)
+      include Aws::Structure
+    end
+
+    # Indicates whether an AWS Config rule is compliant based on account ID,
+    # region, compliance, and rule name.
+    #
+    # A rule is compliant if all of the resources that the rule evaluated
+    # comply with it. It is noncompliant if any of these resources do not
+    # comply.
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance
+    #   Indicates whether an AWS resource or AWS Config rule is compliant
+    #   and provides the number of contributors that affect the compliance.
+    #   @return [Types::Compliance]
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of the source account.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The source region from where the data is aggregated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateComplianceByConfigRule AWS API Documentation
+    #
+    class AggregateComplianceByConfigRule < Struct.new(
+      :config_rule_name,
+      :compliance,
+      :account_id,
+      :aws_region)
+      include Aws::Structure
+    end
+
+    # Returns the number of compliant and noncompliant rules for one or more
+    # accounts and regions in an aggregator.
+    #
+    # @!attribute [rw] group_name
+    #   The 12-digit account ID or region based on the GroupByKey value.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_summary
+    #   The number of compliant and noncompliant AWS Config rules.
+    #   @return [Types::ComplianceSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateComplianceCount AWS API Documentation
+    #
+    class AggregateComplianceCount < Struct.new(
+      :group_name,
+      :compliance_summary)
+      include Aws::Structure
+    end
+
+    # The details of an AWS Config evaluation for an account ID and region
+    # in an aggregator. Provides the AWS resource that was evaluated, the
+    # compliance of the resource, related time stamps, and supplementary
+    # information.
+    #
+    # @!attribute [rw] evaluation_result_identifier
+    #   Uniquely identifies the evaluation result.
+    #   @return [Types::EvaluationResultIdentifier]
+    #
+    # @!attribute [rw] compliance_type
+    #   The resource compliance status.
+    #
+    #   For the `AggregationEvaluationResult` data type, AWS Config supports
+    #   only the `COMPLIANT` and `NON_COMPLIANT`. AWS Config does not
+    #   support the `NOT_APPLICABLE` and `INSUFFICIENT_DATA` value.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_recorded_time
+    #   The time when AWS Config recorded the aggregate evaluation result.
+    #   @return [Time]
+    #
+    # @!attribute [rw] config_rule_invoked_time
+    #   The time when the AWS Config rule evaluated the AWS resource.
+    #   @return [Time]
+    #
+    # @!attribute [rw] annotation
+    #   Supplementary information about how the agrregate evaluation
+    #   determined the compliance.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of the source account.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The source region from where the data is aggregated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregateEvaluationResult AWS API Documentation
+    #
+    class AggregateEvaluationResult < Struct.new(
+      :evaluation_result_identifier,
+      :compliance_type,
+      :result_recorded_time,
+      :config_rule_invoked_time,
+      :annotation,
+      :account_id,
+      :aws_region)
+      include Aws::Structure
+    end
+
+    # The current sync status between the source and the aggregator account.
+    #
+    # @!attribute [rw] source_id
+    #   The source account ID or an organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The source account or an organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The region authorized to collect aggregated data.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_status
+    #   Filters the last updated status type.
+    #
+    #   * Valid value FAILED indicates errors while moving data.
+    #
+    #   * Valid value SUCCEEDED indicates the data was successfully moved.
+    #
+    #   * Valid value OUTDATED indicates the data is not the most recent.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_update_time
+    #   The time of the last update.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_error_code
+    #   The error code that AWS Config returned when the source account
+    #   aggregation last failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_error_message
+    #   The message indicating that the source account aggregation failed
+    #   due to an error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregatedSourceStatus AWS API Documentation
+    #
+    class AggregatedSourceStatus < Struct.new(
+      :source_id,
+      :source_type,
+      :aws_region,
+      :last_update_status,
+      :last_update_time,
+      :last_error_code,
+      :last_error_message)
+      include Aws::Structure
+    end
+
+    # An object that represents the authorizations granted to aggregator
+    # accounts and regions.
+    #
+    # @!attribute [rw] aggregation_authorization_arn
+    #   The Amazon Resource Name (ARN) of the aggregation object.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_account_id
+    #   The 12-digit account ID of the account authorized to aggregate data.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_aws_region
+    #   The region authorized to collect aggregated data.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time stamp when the aggregation authorization was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/AggregationAuthorization AWS API Documentation
+    #
+    class AggregationAuthorization < Struct.new(
+      :aggregation_authorization_arn,
+      :authorized_account_id,
+      :authorized_aws_region,
+      :creation_time)
+      include Aws::Structure
+    end
+
     # The detailed configuration of a specified resource.
     #
     # @!attribute [rw] version
@@ -143,15 +359,15 @@ module Aws::ConfigService
     #   Indicates whether an AWS resource or AWS Config rule is compliant.
     #
     #   A resource is compliant if it complies with all of the AWS Config
-    #   rules that evaluate it, and it is noncompliant if it does not comply
-    #   with one or more of these rules.
+    #   rules that evaluate it. A resource is noncompliant if it does not
+    #   comply with one or more of these rules.
     #
     #   A rule is compliant if all of the resources that the rule evaluates
-    #   comply with it, and it is noncompliant if any of these resources do
+    #   comply with it. A rule is noncompliant if any of these resources do
     #   not comply.
     #
     #   AWS Config returns the `INSUFFICIENT_DATA` value when no evaluation
-    #   results are available for the AWS resource or Config rule.
+    #   results are available for the AWS resource or AWS Config rule.
     #
     #   For the `Compliance` data type, AWS Config supports only
     #   `COMPLIANT`, `NON_COMPLIANT`, and `INSUFFICIENT_DATA` values. AWS
@@ -173,7 +389,7 @@ module Aws::ConfigService
     end
 
     # Indicates whether an AWS Config rule is compliant. A rule is compliant
-    # if all of the resources that the rule evaluated comply with it, and it
+    # if all of the resources that the rule evaluated comply with it. A rule
     # is noncompliant if any of these resources do not comply.
     #
     # @!attribute [rw] config_rule_name
@@ -194,7 +410,7 @@ module Aws::ConfigService
 
     # Indicates whether an AWS resource that is evaluated according to one
     # or more AWS Config rules is compliant. A resource is compliant if it
-    # complies with all of the rules that evaluate it, and it is
+    # complies with all of the rules that evaluate it. A resource is
     # noncompliant if it does not comply with one or more of these rules.
     #
     # @!attribute [rw] resource_type
@@ -266,7 +482,7 @@ module Aws::ConfigService
     end
 
     # The number of AWS resources of a specific type that are compliant or
-    # noncompliant, up to a maximum of 100 for each compliance.
+    # noncompliant, up to a maximum of 100 for each.
     #
     # @!attribute [rw] resource_type
     #   The type of AWS resource.
@@ -274,7 +490,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] compliance_summary
     #   The number of AWS resources that are compliant or noncompliant, up
-    #   to a maximum of 100 for each compliance.
+    #   to a maximum of 100 for each.
     #   @return [Types::ComplianceSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceSummaryByResourceType AWS API Documentation
@@ -413,8 +629,8 @@ module Aws::ConfigService
     #   @return [Types::Source]
     #
     # @!attribute [rw] input_parameters
-    #   A string in JSON format that is passed to the AWS Config rule Lambda
-    #   function.
+    #   A string, in JSON format, that is passed to the AWS Config rule
+    #   Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] maximum_execution_frequency
@@ -438,17 +654,17 @@ module Aws::ConfigService
     # @!attribute [rw] config_rule_state
     #   Indicates whether the AWS Config rule is active or is currently
     #   being deleted by AWS Config. It can also indicate the evaluation
-    #   status for the Config rule.
+    #   status for the AWS Config rule.
     #
     #   AWS Config sets the state of the rule to `EVALUATING` temporarily
     #   after you use the `StartConfigRulesEvaluation` request to evaluate
-    #   your resources against the Config rule.
+    #   your resources against the AWS Config rule.
     #
     #   AWS Config sets the state of the rule to `DELETING_RESULTS`
     #   temporarily after you use the `DeleteEvaluationResults` request to
-    #   delete the current evaluation results for the Config rule.
+    #   delete the current evaluation results for the AWS Config rule.
     #
-    #   AWS Config sets the state of a rule to `DELETING` temporarily after
+    #   AWS Config temporarily sets the state of a rule to `DELETING` after
     #   you use the `DeleteConfigRule` request to delete the rule. After AWS
     #   Config deletes the rule, the rule and all of its evaluations are
     #   erased and are no longer available.
@@ -469,11 +685,80 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # Filters the compliance results based on account ID, region, compliance
+    # type, and rule name.
+    #
+    # @note When making an API call, you may pass ConfigRuleComplianceFilters
+    #   data as a hash:
+    #
+    #       {
+    #         config_rule_name: "ConfigRuleName",
+    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
+    #         account_id: "AccountId",
+    #         aws_region: "AwsRegion",
+    #       }
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_type
+    #   The rule compliance status.
+    #
+    #   For the `ConfigRuleComplianceFilters` data type, AWS Config supports
+    #   only `COMPLIANT` and `NON_COMPLIANT`. AWS Config does not support
+    #   the `NOT_APPLICABLE` and the `INSUFFICIENT_DATA` values.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of the source account.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The source region where the data is aggregated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRuleComplianceFilters AWS API Documentation
+    #
+    class ConfigRuleComplianceFilters < Struct.new(
+      :config_rule_name,
+      :compliance_type,
+      :account_id,
+      :aws_region)
+      include Aws::Structure
+    end
+
+    # Filters the results based on the account IDs and regions.
+    #
+    # @note When making an API call, you may pass ConfigRuleComplianceSummaryFilters
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId",
+    #         aws_region: "AwsRegion",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of the source account.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The source region where the data is aggregated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRuleComplianceSummaryFilters AWS API Documentation
+    #
+    class ConfigRuleComplianceSummaryFilters < Struct.new(
+      :account_id,
+      :aws_region)
+      include Aws::Structure
+    end
+
     # Status information for your AWS managed Config rules. The status
     # includes information such as the last time the rule ran, the last time
     # it failed, and the related error for the last failure.
     #
-    # This action does not return status information about custom Config
+    # This action does not return status information about custom AWS Config
     # rules.
     #
     # @!attribute [rw] config_rule_name
@@ -565,7 +850,7 @@ module Aws::ConfigService
     # * The value for the `deliveryFrequency` parameter within the delivery
     #   channel configuration, which sets how often AWS Config delivers
     #   configuration snapshots. This value also sets how often AWS Config
-    #   invokes evaluations for Config rules.
+    #   invokes evaluations for AWS Config rules.
     #
     # * The value for the `MaximumExecutionFrequency` parameter, which sets
     #   the maximum frequency with which AWS Config invokes evaluations for
@@ -651,6 +936,45 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # The details about the configuration aggregator, including information
+    # about source accounts, regions, and metadata of the aggregator.
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_aggregator_arn
+    #   The Amazon Resource Name (ARN) of the aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_aggregation_sources
+    #   Provides a list of source accounts and regions to be aggregated.
+    #   @return [Array<Types::AccountAggregationSource>]
+    #
+    # @!attribute [rw] organization_aggregation_source
+    #   Provides an organization and list of regions to be aggregated.
+    #   @return [Types::OrganizationAggregationSource]
+    #
+    # @!attribute [rw] creation_time
+    #   The time stamp when the configuration aggregator was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The time of the last update.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationAggregator AWS API Documentation
+    #
+    class ConfigurationAggregator < Struct.new(
+      :configuration_aggregator_name,
+      :configuration_aggregator_arn,
+      :account_aggregation_sources,
+      :organization_aggregation_source,
+      :creation_time,
+      :last_updated_time)
+      include Aws::Structure
+    end
+
     # A list that contains detailed configurations of a specified resource.
     #
     # @!attribute [rw] version
@@ -658,7 +982,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] account_id
-    #   The 12 digit AWS account ID associated with the resource.
+    #   The 12-digit AWS account ID associated with the resource.
     #   @return [String]
     #
     # @!attribute [rw] configuration_item_capture_time
@@ -690,7 +1014,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource (for example., `sg-xxxxxx`).
+    #   The ID of the resource (for example, `sg-xxxxxx`).
     #   @return [String]
     #
     # @!attribute [rw] resource_name
@@ -718,7 +1042,7 @@ module Aws::ConfigService
     #
     #   A populated field indicates that the current configuration was
     #   initiated by the events recorded in the CloudTrail log. For more
-    #   information about CloudTrail, see [What is AWS CloudTrail?][1].
+    #   information about CloudTrail, see [What Is AWS CloudTrail][1].
     #
     #   An empty field indicates that the current configuration was not
     #   initiated by any event.
@@ -794,7 +1118,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] recording_group
-    #   Specifies the types of AWS resource for which AWS Config records
+    #   Specifies the types of AWS resources for which AWS Config records
     #   configuration changes.
     #   @return [Types::RecordingGroup]
     #
@@ -822,7 +1146,7 @@ module Aws::ConfigService
     #   @return [Time]
     #
     # @!attribute [rw] recording
-    #   Specifies whether the recorder is currently recording or not.
+    #   Specifies whether or not the recorder is currently recording.
     #   @return [Boolean]
     #
     # @!attribute [rw] last_status
@@ -855,6 +1179,30 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAggregationAuthorizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authorized_account_id: "AccountId", # required
+    #         authorized_aws_region: "AwsRegion", # required
+    #       }
+    #
+    # @!attribute [rw] authorized_account_id
+    #   The 12-digit account ID of the account authorized to aggregate data.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_aws_region
+    #   The region authorized to collect aggregated data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteAggregationAuthorizationRequest AWS API Documentation
+    #
+    class DeleteAggregationAuthorizationRequest < Struct.new(
+      :authorized_account_id,
+      :authorized_aws_region)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteConfigRuleRequest
     #   data as a hash:
     #
@@ -870,6 +1218,24 @@ module Aws::ConfigService
     #
     class DeleteConfigRuleRequest < Struct.new(
       :config_rule_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteConfigurationAggregatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationAggregatorRequest AWS API Documentation
+    #
+    class DeleteConfigurationAggregatorRequest < Struct.new(
+      :configuration_aggregator_name)
       include Aws::Structure
     end
 
@@ -896,7 +1262,7 @@ module Aws::ConfigService
     end
 
     # The input for the DeleteDeliveryChannel action. The action accepts the
-    # following data in JSON format.
+    # following data, in JSON format.
     #
     # @note When making an API call, you may pass DeleteDeliveryChannelRequest
     #   data as a hash:
@@ -924,7 +1290,7 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] config_rule_name
-    #   The name of the Config rule for which you want to delete the
+    #   The name of the AWS Config rule for which you want to delete the
     #   evaluation results.
     #   @return [String]
     #
@@ -936,11 +1302,35 @@ module Aws::ConfigService
     end
 
     # The output when you delete the evaluation results for the specified
-    # Config rule.
+    # AWS Config rule.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResultsResponse AWS API Documentation
     #
     class DeleteEvaluationResultsResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeletePendingAggregationRequestRequest
+    #   data as a hash:
+    #
+    #       {
+    #         requester_account_id: "AccountId", # required
+    #         requester_aws_region: "AwsRegion", # required
+    #       }
+    #
+    # @!attribute [rw] requester_account_id
+    #   The 12-digit account ID of the account requesting to aggregate data.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_aws_region
+    #   The region requesting to aggregate data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeletePendingAggregationRequestRequest AWS API Documentation
+    #
+    class DeletePendingAggregationRequestRequest < Struct.new(
+      :requester_account_id,
+      :requester_aws_region)
+      include Aws::Structure
+    end
 
     # The input for the DeliverConfigSnapshot action.
     #
@@ -963,7 +1353,7 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # The output for the DeliverConfigSnapshot action in JSON format.
+    # The output for the DeliverConfigSnapshot action, in JSON format.
     #
     # @!attribute [rw] config_snapshot_id
     #   The ID of the snapshot that is being created.
@@ -1082,6 +1472,111 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeAggregateComplianceByConfigRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         filters: {
+    #           config_rule_name: "ConfigRuleName",
+    #           compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
+    #           account_id: "AccountId",
+    #           aws_region: "AwsRegion",
+    #         },
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the results by ConfigRuleComplianceFilters object.
+    #   @return [Types::ConfigRuleComplianceFilters]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of evaluation results returned on each page. The
+    #   default is maximum. If you specify 0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregateComplianceByConfigRulesRequest AWS API Documentation
+    #
+    class DescribeAggregateComplianceByConfigRulesRequest < Struct.new(
+      :configuration_aggregator_name,
+      :filters,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregate_compliance_by_config_rules
+    #   Returns a list of AggregateComplianceByConfigRule object.
+    #   @return [Array<Types::AggregateComplianceByConfigRule>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregateComplianceByConfigRulesResponse AWS API Documentation
+    #
+    class DescribeAggregateComplianceByConfigRulesResponse < Struct.new(
+      :aggregate_compliance_by_config_rules,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAggregationAuthorizationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of AggregationAuthorizations returned on each
+    #   page. The default is maximum. If you specify 0, AWS Config uses the
+    #   default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregationAuthorizationsRequest AWS API Documentation
+    #
+    class DescribeAggregationAuthorizationsRequest < Struct.new(
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregation_authorizations
+    #   Returns a list of authorizations granted to various aggregator
+    #   accounts and regions.
+    #   @return [Array<Types::AggregationAuthorization>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregationAuthorizationsResponse AWS API Documentation
+    #
+    class DescribeAggregationAuthorizationsResponse < Struct.new(
+      :aggregation_authorizations,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeComplianceByConfigRuleRequest
     #   data as a hash:
     #
@@ -1104,7 +1599,7 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` string returned on a previous page that you use to
+    #   The `nextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1147,9 +1642,9 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The types of AWS resources for which you want compliance
-    #   information; for example, `AWS::EC2::Instance`. For this action, you
-    #   can specify that the resource type is an AWS account by specifying
+    #   The types of AWS resources for which you want compliance information
+    #   (for example, `AWS::EC2::Instance`). For this action, you can
+    #   specify that the resource type is an AWS account by specifying
     #   `AWS::::Account`.
     #   @return [String]
     #
@@ -1167,12 +1662,12 @@ module Aws::ConfigService
     #
     # @!attribute [rw] limit
     #   The maximum number of evaluation results returned on each page. The
-    #   default is 10. You cannot specify a limit greater than 100. If you
+    #   default is 10. You cannot specify a number greater than 100. If you
     #   specify 0, AWS Config uses the default.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` string returned on a previous page that you use to
+    #   The `nextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1221,7 +1716,7 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` string returned on a previous page that you use to
+    #   The `nextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1231,8 +1726,8 @@ module Aws::ConfigService
     #   This parameter is required if the rule limit for your account is
     #   more than the default of 50 rules.
     #
-    #   For more information about requesting a rule limit increase, see
-    #   [AWS Config Limits][1] in the *AWS General Reference Guide*.
+    #   For information about requesting a rule limit increase, see [AWS
+    #   Config Limits][1] in the *AWS General Reference Guide*.
     #
     #
     #
@@ -1280,7 +1775,7 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` string returned on a previous page that you use to
+    #   The `nextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1309,6 +1804,118 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeConfigurationAggregatorSourcesStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         update_status: ["FAILED"], # accepts FAILED, SUCCEEDED, OUTDATED
+    #         next_token: "String",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_status
+    #   Filters the status type.
+    #
+    #   * Valid value FAILED indicates errors while moving data.
+    #
+    #   * Valid value SUCCEEDED indicates the data was successfully moved.
+    #
+    #   * Valid value OUTDATED indicates the data is not the most recent.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of AggregatorSourceStatus returned on each page.
+    #   The default is maximum. If you specify 0, AWS Config uses the
+    #   default.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorSourcesStatusRequest AWS API Documentation
+    #
+    class DescribeConfigurationAggregatorSourcesStatusRequest < Struct.new(
+      :configuration_aggregator_name,
+      :update_status,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregated_source_status_list
+    #   Retuns an AggregatedSourceStatus object.
+    #   @return [Array<Types::AggregatedSourceStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorSourcesStatusResponse AWS API Documentation
+    #
+    class DescribeConfigurationAggregatorSourcesStatusResponse < Struct.new(
+      :aggregated_source_status_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeConfigurationAggregatorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_names: ["ConfigurationAggregatorName"],
+    #         next_token: "String",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_names
+    #   The name of the configuration aggregators.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of configuration aggregators returned on each
+    #   page. The default is maximum. If you specify 0, AWS Config uses the
+    #   default.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorsRequest AWS API Documentation
+    #
+    class DescribeConfigurationAggregatorsRequest < Struct.new(
+      :configuration_aggregator_names,
+      :next_token,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_aggregators
+    #   Returns a ConfigurationAggregators object.
+    #   @return [Array<Types::ConfigurationAggregator>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorsResponse AWS API Documentation
+    #
+    class DescribeConfigurationAggregatorsResponse < Struct.new(
+      :configuration_aggregators,
+      :next_token)
+      include Aws::Structure
+    end
+
     # The input for the DescribeConfigurationRecorderStatus action.
     #
     # @note When making an API call, you may pass DescribeConfigurationRecorderStatusRequest
@@ -1331,7 +1938,7 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # The output for the DescribeConfigurationRecorderStatus action in JSON
+    # The output for the DescribeConfigurationRecorderStatus action, in JSON
     # format.
     #
     # @!attribute [rw] configuration_recorders_status
@@ -1446,6 +2053,49 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribePendingAggregationRequestsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         limit: 1,
+    #         next_token: "String",
+    #       }
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of evaluation results returned on each page. The
+    #   default is maximum. If you specify 0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequestsRequest AWS API Documentation
+    #
+    class DescribePendingAggregationRequestsRequest < Struct.new(
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] pending_aggregation_requests
+    #   Returns a PendingAggregationRequests object.
+    #   @return [Array<Types::PendingAggregationRequest>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequestsResponse AWS API Documentation
+    #
+    class DescribePendingAggregationRequestsResponse < Struct.new(
+      :pending_aggregation_requests,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Identifies an AWS resource and indicates whether it complies with the
     # AWS Config rule that it was evaluated against.
     #
@@ -1479,8 +2129,8 @@ module Aws::ConfigService
     #
     #   Similarly, AWS Config does not accept `INSUFFICIENT_DATA` as the
     #   value for `ComplianceType` from a `PutEvaluations` request. For
-    #   example, an AWS Lambda function for a custom Config rule cannot pass
-    #   an `INSUFFICIENT_DATA` value to AWS Config.
+    #   example, an AWS Lambda function for a custom AWS Config rule cannot
+    #   pass an `INSUFFICIENT_DATA` value to AWS Config.
     #   @return [String]
     #
     # @!attribute [rw] annotation
@@ -1509,8 +2159,8 @@ module Aws::ConfigService
     end
 
     # The details of an AWS Config evaluation. Provides the AWS resource
-    # that was evaluated, the compliance of the resource, related
-    # timestamps, and supplementary information.
+    # that was evaluated, the compliance of the resource, related time
+    # stamps, and supplementary information.
     #
     # @!attribute [rw] evaluation_result_identifier
     #   Uniquely identifies the evaluation result.
@@ -1604,6 +2254,159 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAggregateComplianceDetailsByConfigRuleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         config_rule_name: "ConfigRuleName", # required
+    #         account_id: "AccountId", # required
+    #         aws_region: "AwsRegion", # required
+    #         compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] config_rule_name
+    #   The name of the AWS Config rule for which you want compliance
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The 12-digit account ID of the source account.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_region
+    #   The source region from where the data is aggregated.
+    #   @return [String]
+    #
+    # @!attribute [rw] compliance_type
+    #   The resource compliance status.
+    #
+    #   <note markdown="1"> For the `GetAggregateComplianceDetailsByConfigRuleRequest` data
+    #   type, AWS Config supports only the `COMPLIANT` and `NON_COMPLIANT`.
+    #   AWS Config does not support the `NOT_APPLICABLE` and
+    #   `INSUFFICIENT_DATA` values.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of evaluation results returned on each page. The
+    #   default is 50. You cannot specify a number greater than 100. If you
+    #   specify 0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateComplianceDetailsByConfigRuleRequest AWS API Documentation
+    #
+    class GetAggregateComplianceDetailsByConfigRuleRequest < Struct.new(
+      :configuration_aggregator_name,
+      :config_rule_name,
+      :account_id,
+      :aws_region,
+      :compliance_type,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregate_evaluation_results
+    #   Returns an AggregateEvaluationResults object.
+    #   @return [Array<Types::AggregateEvaluationResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateComplianceDetailsByConfigRuleResponse AWS API Documentation
+    #
+    class GetAggregateComplianceDetailsByConfigRuleResponse < Struct.new(
+      :aggregate_evaluation_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetAggregateConfigRuleComplianceSummaryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         filters: {
+    #           account_id: "AccountId",
+    #           aws_region: "AwsRegion",
+    #         },
+    #         group_by_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, AWS_REGION
+    #         limit: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the results based on the ConfigRuleComplianceSummaryFilters
+    #   object.
+    #   @return [Types::ConfigRuleComplianceSummaryFilters]
+    #
+    # @!attribute [rw] group_by_key
+    #   Groups the result based on ACCOUNT\_ID or AWS\_REGION.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of evaluation results returned on each page. The
+    #   default is 1000. You cannot specify a number greater than 1000. If
+    #   you specify 0, AWS Config uses the default.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummaryRequest AWS API Documentation
+    #
+    class GetAggregateConfigRuleComplianceSummaryRequest < Struct.new(
+      :configuration_aggregator_name,
+      :filters,
+      :group_by_key,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_by_key
+    #   Groups the result based on ACCOUNT\_ID or AWS\_REGION.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregate_compliance_counts
+    #   Returns a list of AggregateComplianceCounts object.
+    #   @return [Array<Types::AggregateComplianceCount>]
+    #
+    # @!attribute [rw] next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummaryResponse AWS API Documentation
+    #
+    class GetAggregateConfigRuleComplianceSummaryResponse < Struct.new(
+      :group_by_key,
+      :aggregate_compliance_counts,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetComplianceDetailsByConfigRuleRequest
     #   data as a hash:
     #
@@ -1628,12 +2431,12 @@ module Aws::ConfigService
     #
     # @!attribute [rw] limit
     #   The maximum number of evaluation results returned on each page. The
-    #   default is 10. You cannot specify a limit greater than 100. If you
+    #   default is 10. You cannot specify a number greater than 100. If you
     #   specify 0, AWS Config uses the default.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` string returned on a previous page that you use to
+    #   The `nextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1693,7 +2496,7 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `NextToken` string returned on a previous page that you use to
+    #   The `nextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1750,8 +2553,8 @@ module Aws::ConfigService
     #   resource type.
     #
     #   For this request, you can specify an AWS resource type such as
-    #   `AWS::EC2::Instance`, and you can specify that the resource type is
-    #   an AWS account by specifying `AWS::::Account`.
+    #   `AWS::EC2::Instance`. You can specify that the resource type is an
+    #   AWS account by specifying `AWS::::Account`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceTypeRequest AWS API Documentation
@@ -1786,7 +2589,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] resource_types
     #   The comma-separated list that specifies the resource types that you
-    #   want the AWS Config to return. For example, (`"AWS::EC2::Instance"`,
+    #   want AWS Config to return (for example, `"AWS::EC2::Instance"`,
     #   `"AWS::IAM::User"`).
     #
     #   If a value for `resourceTypes` is not specified, AWS Config returns
@@ -1804,7 +2607,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] limit
     #   The maximum number of ResourceCount objects returned on each page.
-    #   The default is 100. You cannot specify a limit greater than 100. If
+    #   The default is 100. You cannot specify a number greater than 100. If
     #   you specify 0, AWS Config uses the default.
     #   @return [Integer]
     #
@@ -1835,7 +2638,7 @@ module Aws::ConfigService
     #       and 15 S3 buckets, for a total of 60 resources.
     #
     #   2.  You make a call to the `GetDiscoveredResourceCounts` action and
-    #       specify the resource type, `"AWS::EC2::Instances"` in the
+    #       specify the resource type, `"AWS::EC2::Instances"`, in the
     #       request.
     #
     #   3.  AWS Config returns 25 for `totalDiscoveredResources`.
@@ -1891,17 +2694,17 @@ module Aws::ConfigService
     # @!attribute [rw] earlier_time
     #   The time stamp that indicates an earlier time. If not specified, the
     #   action returns paginated results that contain configuration items
-    #   that start from when the first configuration item was recorded.
+    #   that start when the first configuration item was recorded.
     #   @return [Time]
     #
     # @!attribute [rw] chronological_order
-    #   The chronological order for configuration items listed. By default
+    #   The chronological order for configuration items listed. By default,
     #   the results are listed in reverse chronological order.
     #   @return [String]
     #
     # @!attribute [rw] limit
     #   The maximum number of configuration items returned on each page. The
-    #   default is 10. You cannot specify a limit greater than 100. If you
+    #   default is 10. You cannot specify a number greater than 100. If you
     #   specify 0, AWS Config uses the default.
     #   @return [Integer]
     #
@@ -1975,7 +2778,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] limit
     #   The maximum number of resource identifiers returned on each page.
-    #   The default is 100. You cannot specify a limit greater than 100. If
+    #   The default is 100. You cannot specify a number greater than 100. If
     #   you specify 0, AWS Config uses the default.
     #   @return [Integer]
     #
@@ -2020,6 +2823,94 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # This object contains regions to setup the aggregator and an IAM role
+    # to retrieve organization details.
+    #
+    # @note When making an API call, you may pass OrganizationAggregationSource
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "String", # required
+    #         aws_regions: ["String"],
+    #         all_aws_regions: false,
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   ARN of the IAM role used to retreive AWS Organization details
+    #   associated with the aggregator account.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_regions
+    #   The source regions being aggregated.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_aws_regions
+    #   If true, aggreagate existing AWS Config regions and future regions.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationAggregationSource AWS API Documentation
+    #
+    class OrganizationAggregationSource < Struct.new(
+      :role_arn,
+      :aws_regions,
+      :all_aws_regions)
+      include Aws::Structure
+    end
+
+    # An object that represents the account ID and region of an aggregator
+    # account that is requesting authorization but is not yet authorized.
+    #
+    # @!attribute [rw] requester_account_id
+    #   The 12-digit account ID of the account requesting to aggregate data.
+    #   @return [String]
+    #
+    # @!attribute [rw] requester_aws_region
+    #   The region requesting to aggregate data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PendingAggregationRequest AWS API Documentation
+    #
+    class PendingAggregationRequest < Struct.new(
+      :requester_account_id,
+      :requester_aws_region)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutAggregationAuthorizationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         authorized_account_id: "AccountId", # required
+    #         authorized_aws_region: "AwsRegion", # required
+    #       }
+    #
+    # @!attribute [rw] authorized_account_id
+    #   The 12-digit account ID of the account authorized to aggregate data.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorized_aws_region
+    #   The region authorized to collect aggregated data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutAggregationAuthorizationRequest AWS API Documentation
+    #
+    class PutAggregationAuthorizationRequest < Struct.new(
+      :authorized_account_id,
+      :authorized_aws_region)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregation_authorization
+    #   Returns an AggregationAuthorization object.
+    #   @return [Types::AggregationAuthorization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutAggregationAuthorizationResponse AWS API Documentation
+    #
+    class PutAggregationAuthorizationResponse < Struct.new(
+      :aggregation_authorization)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutConfigRuleRequest
     #   data as a hash:
     #
@@ -2060,6 +2951,57 @@ module Aws::ConfigService
     #
     class PutConfigRuleRequest < Struct.new(
       :config_rule)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutConfigurationAggregatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #         account_aggregation_sources: [
+    #           {
+    #             account_ids: ["AccountId"], # required
+    #             all_aws_regions: false,
+    #             aws_regions: ["String"],
+    #           },
+    #         ],
+    #         organization_aggregation_source: {
+    #           role_arn: "String", # required
+    #           aws_regions: ["String"],
+    #           all_aws_regions: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_aggregation_sources
+    #   A list of AccountAggregationSource object.
+    #   @return [Array<Types::AccountAggregationSource>]
+    #
+    # @!attribute [rw] organization_aggregation_source
+    #   An OrganizationAggregationSource object.
+    #   @return [Types::OrganizationAggregationSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationAggregatorRequest AWS API Documentation
+    #
+    class PutConfigurationAggregatorRequest < Struct.new(
+      :configuration_aggregator_name,
+      :account_aggregation_sources,
+      :organization_aggregation_source)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration_aggregator
+    #   Returns a ConfigurationAggregator object.
+    #   @return [Types::ConfigurationAggregator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationAggregatorResponse AWS API Documentation
+    #
+    class PutConfigurationAggregatorResponse < Struct.new(
+      :configuration_aggregator)
       include Aws::Structure
     end
 
@@ -2111,7 +3053,7 @@ module Aws::ConfigService
     #
     # @!attribute [rw] delivery_channel
     #   The configuration delivery channel object that delivers the
-    #   configuration information to an Amazon S3 bucket, and to an Amazon
+    #   configuration information to an Amazon S3 bucket and to an Amazon
     #   SNS topic.
     #   @return [Types::DeliveryChannel]
     #
@@ -2149,7 +3091,7 @@ module Aws::ConfigService
     # @!attribute [rw] result_token
     #   An encrypted token that associates an evaluation with an AWS Config
     #   rule. Identifies the rule and the event that triggered the
-    #   evaluation
+    #   evaluation.
     #   @return [String]
     #
     # @!attribute [rw] test_mode
@@ -2214,8 +3156,8 @@ module Aws::ConfigService
     # which types of resources it will record with the `resourceTypes`
     # parameter.
     #
-    # For a list of supported resource types, see [Supported resource
-    # types][1].
+    # For a list of supported resource types, see [Supported Resource
+    # Types][1].
     #
     # For more information, see [Selecting Which Resources AWS Config
     # Records][2].
@@ -2239,8 +3181,8 @@ module Aws::ConfigService
     #   supported type of regional resource.
     #
     #   If you set this option to `true`, when AWS Config adds support for a
-    #   new type of regional resource, it automatically starts recording
-    #   resources of that type.
+    #   new type of regional resource, it starts recording resources of that
+    #   type automatically.
     #
     #   If you set this option to `true`, you cannot enumerate a list of
     #   `resourceTypes`.
@@ -2255,8 +3197,8 @@ module Aws::ConfigService
     #   `allSupported` option to `true`.
     #
     #   If you set this option to `true`, when AWS Config adds support for a
-    #   new type of global resource, it automatically starts recording
-    #   resources of that type.
+    #   new type of global resource, it starts recording resources of that
+    #   type automatically.
     #
     #   The configuration details for any global resource are the same in
     #   all regions. To prevent duplicate configuration items, you should
@@ -2324,7 +3266,7 @@ module Aws::ConfigService
     # An object that contains the resource type and the number of resources.
     #
     # @!attribute [rw] resource_type
-    #   The resource type, for example `"AWS::EC2::Instance"`.
+    #   The resource type (for example, `"AWS::EC2::Instance"`).
     #   @return [String]
     #
     # @!attribute [rw] count
@@ -2348,7 +3290,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource (for example., `sg-xxxxxx`).
+    #   The ID of the resource (for example, `sg-xxxxxx`).
     #   @return [String]
     #
     # @!attribute [rw] resource_name
@@ -2432,7 +3374,7 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] compliance_resource_id
-    #   The IDs of the only AWS resource that you want to trigger an
+    #   The ID of the only AWS resource that you want to trigger an
     #   evaluation for the rule. If you specify a resource ID, you must
     #   specify one resource type for `ComplianceResourceTypes`.
     #   @return [String]
@@ -2541,13 +3483,12 @@ module Aws::ConfigService
     #     evaluation when AWS Config delivers a configuration snapshot.
     #
     #   If you want your custom rule to be triggered by configuration
-    #   changes, specify two SourceDetail objects, one for
-    #   `ConfigurationItemChangeNotification` and one for
+    #   changes, specify both `ConfigurationItemChangeNotification` and
     #   `OversizedConfigurationItemChangeNotification`.
     #   @return [String]
     #
     # @!attribute [rw] maximum_execution_frequency
-    #   The frequency that you want AWS Config to run evaluations for a
+    #   The frequency at which you want AWS Config to run evaluations for a
     #   custom rule with a periodic trigger. If you specify a value for
     #   `MaximumExecutionFrequency`, then `MessageType` must use the
     #   `ScheduledNotification` value.
@@ -2581,8 +3522,8 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] config_rule_names
-    #   The list of names of Config rules that you want to run evaluations
-    #   for.
+    #   The list of names of AWS Config rules that you want to run
+    #   evaluations for.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluationRequest AWS API Documentation
@@ -2592,7 +3533,7 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    # The output when you start the evaluation for the specified Config
+    # The output when you start the evaluation for the specified AWS Config
     # rule.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluationResponse AWS API Documentation

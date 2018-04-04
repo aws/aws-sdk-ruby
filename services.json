@@ -2,6 +2,9 @@
   "ACM": {
     "models": "acm/2015-12-08"
   },
+  "ACMPCA": {
+    "models": "acm-pca/2017-08-22"
+  },
   "APIGateway": {
     "models": "apigateway/2015-07-09",
     "addPlugins": [
@@ -190,6 +193,9 @@
   },
   "ElasticsearchService": {
     "models": "es/2015-01-01"
+  },
+  "FMS": {
+    "models": "fms/2018-01-01"
   },
   "Firehose": {
     "models": "firehose/2015-08-04"
@@ -419,6 +425,9 @@
   },
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"
+  },
+  "SecretsManager": {
+    "models": "secretsmanager/2017-10-17"
   },
   "ServerlessApplicationRepository": {
     "models": "serverlessrepo/2017-09-08"

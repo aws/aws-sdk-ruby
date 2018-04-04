@@ -14,6 +14,7 @@ Gem::Specification.new do |spec|
 
   # service gems
   spec.add_dependency('aws-sdk-acm', '~> 1')
+  spec.add_dependency('aws-sdk-acmpca', '~> 1')
   spec.add_dependency('aws-sdk-apigateway', '~> 1')
   spec.add_dependency('aws-sdk-alexaforbusiness', '~> 1')
   spec.add_dependency('aws-sdk-appstream', '~> 1')
@@ -69,6 +70,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-elasticloadbalancingv2', '~> 1')
   spec.add_dependency('aws-sdk-elastictranscoder', '~> 1')
   spec.add_dependency('aws-sdk-elasticsearchservice', '~> 1')
+  spec.add_dependency('aws-sdk-fms', '~> 1')
   spec.add_dependency('aws-sdk-firehose', '~> 1')
   spec.add_dependency('aws-sdk-gamelift', '~> 1')
   spec.add_dependency('aws-sdk-glacier', '~> 1')
@@ -128,6 +130,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-swf', '~> 1')
   spec.add_dependency('aws-sdk-sagemaker', '~> 1')
   spec.add_dependency('aws-sdk-sagemakerruntime', '~> 1')
+  spec.add_dependency('aws-sdk-secretsmanager', '~> 1')
   spec.add_dependency('aws-sdk-serverlessapplicationrepository', '~> 1')
   spec.add_dependency('aws-sdk-servicecatalog', '~> 1')
   spec.add_dependency('aws-sdk-servicediscovery', '~> 1')

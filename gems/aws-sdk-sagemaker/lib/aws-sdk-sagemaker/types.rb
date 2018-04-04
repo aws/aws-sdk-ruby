@@ -55,13 +55,12 @@ module Aws::SageMaker
     #
     # For more information about algorithms provided by Amazon SageMaker,
     # see [Algorithms][2]. For information about using your own algorithms,
-    # see [Bring Your Own Algorithms ][3].
+    # see your-algorithms.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html
     # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    # [3]: http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html
     #
     # @note When making an API call, you may pass AlgorithmSpecification
     #   data as a hash:
@@ -73,13 +72,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] training_image
     #   The registry path of the Docker image that contains the training
-    #   algorithm. For information about using your own algorithms, see
-    #   [Docker Registry Paths for Algorithms Provided by Amazon SageMaker
-    #   ][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos-docker-registry-paths.html
+    #   algorithm. For information about docker registry paths for built-in
+    #   algorithms, see sagemaker-algo-docker-registry-paths.
     #   @return [String]
     #
     # @!attribute [rw] training_input_mode
@@ -247,7 +241,7 @@ module Aws::SageMaker
     #             variant_name: "VariantName", # required
     #             model_name: "ModelName", # required
     #             initial_instance_count: 1, # required
-    #             instance_type: "ml.c4.2xlarge", # required, accepts ml.c4.2xlarge, ml.c4.8xlarge, ml.c4.xlarge, ml.c5.2xlarge, ml.c5.9xlarge, ml.c5.xlarge, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge, ml.t2.medium
+    #             instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #             initial_variant_weight: 1.0,
     #           },
     #         ],
@@ -449,7 +443,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #         subnet_id: "SubnetId",
     #         security_group_ids: ["SecurityGroupId"],
     #         role_arn: "RoleArn", # required
@@ -670,7 +664,7 @@ module Aws::SageMaker
     #           s3_output_path: "S3Uri", # required
     #         },
     #         resource_config: { # required
-    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #           instance_count: 1, # required
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
@@ -712,12 +706,11 @@ module Aws::SageMaker
     #   algorithm and algorithm-specific metadata, including the input mode.
     #   For more information about algorithms provided by Amazon SageMaker,
     #   see [Algorithms][1]. For information about providing your own
-    #   algorithms, see [Bring Your Own Algorithms ][2].
+    #   algorithms, see your-algorithms.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html
     #   @return [Types::AlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
@@ -1275,7 +1268,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
-    #   Describes whether the notebook instance has internet access.
+    #   Describes whether Amazon SageMaker provides internet access to the
+    #   notebook instance. If this value is set to *Disabled, he notebook
+    #   instance does not have internet access, and cannot connect to Amazon
+    #   SageMaker training and endpoint services*.
     #
     #   For more information, see appendix-notebook-and-internet-access.
     #   @return [String]
@@ -2207,7 +2203,18 @@ module Aws::SageMaker
 
     # Contains the notebook instance lifecycle configuration script.
     #
-    # This script runs in the path `/sbin:bin:/usr/sbin:/usr/bin`.
+    # Each lifecycle configuration script has a limit of 16384 characters.
+    #
+    # The value of the `$PATH` environment variable that is available to
+    # both scripts is `/sbin:bin:/usr/sbin:/usr/bin`.
+    #
+    # View CloudWatch Logs for notebook instance lifecycle configurations in
+    # log group `/aws/sagemaker/NotebookInstances` in log stream
+    # `[notebook-instance-name]/[LifecycleConfigHook]`.
+    #
+    # Lifecycle configuration scripts cannot run for longer than 5 minutes.
+    # If a script runs for longer than 5 minutes, it fails and the notebook
+    # instance is not created or started.
     #
     # For information about notebook instance lifestyle configurations, see
     # notebook-lifecycle-config.
@@ -2347,7 +2354,7 @@ module Aws::SageMaker
     #         variant_name: "VariantName", # required
     #         model_name: "ModelName", # required
     #         initial_instance_count: 1, # required
-    #         instance_type: "ml.c4.2xlarge", # required, accepts ml.c4.2xlarge, ml.c4.8xlarge, ml.c4.xlarge, ml.c5.2xlarge, ml.c5.9xlarge, ml.c5.xlarge, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge, ml.t2.medium
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #         initial_variant_weight: 1.0,
     #       }
     #
@@ -2432,7 +2439,7 @@ module Aws::SageMaker
     #   data as a hash:
     #
     #       {
-    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #         instance_count: 1, # required
     #         volume_size_in_gb: 1, # required
     #         volume_kms_key_id: "KmsKeyId",
@@ -2812,7 +2819,7 @@ module Aws::SageMaker
     #
     #       {
     #         notebook_instance_name: "NotebookInstanceName", # required
-    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge
+    #         instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #         role_arn: "RoleArn",
     #       }
     #

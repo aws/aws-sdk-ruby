@@ -8,6 +8,89 @@
 module Aws::TranscribeService
   module Types
 
+    # @note When making an API call, you may pass CreateVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName", # required
+    #         language_code: "en-US", # required, accepts en-US, es-US
+    #         phrases: ["Phrase"], # required
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary. The name must be unique within an AWS
+    #   account. The name is case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] phrases
+    #   An array of strings that contains the vocabulary entries.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyRequest AWS API Documentation
+    #
+    class CreateVocabularyRequest < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :phrases)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_state
+    #   The processing state of the vocabulary. When the `VocabularyState`
+    #   field contains `READY` the vocabulary is ready to be used in a
+    #   `StartTranscriptionJob` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the vocabulary was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the `VocabularyState` field is `FAILED`, this field contains
+    #   information about why the job failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyResponse AWS API Documentation
+    #
+    class CreateVocabularyResponse < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :vocabulary_state,
+      :last_modified_time,
+      :failure_reason)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName", # required
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabularyRequest AWS API Documentation
+    #
+    class DeleteVocabularyRequest < Struct.new(
+      :vocabulary_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTranscriptionJobRequest
     #   data as a hash:
     #
@@ -37,11 +120,70 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName", # required
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary to return information about. The name is
+    #   case-sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyRequest AWS API Documentation
+    #
+    class GetVocabularyRequest < Struct.new(
+      :vocabulary_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_state
+    #   The processing state of the vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the vocabulary was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the `VocabularyState` field is `FAILED`, this field contains
+    #   information about why the job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] download_uri
+    #   The S3 location where the vocabulary is stored. Use this URI to get
+    #   the contents of the vocabulary. The URI is available for a limited
+    #   time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyResponse AWS API Documentation
+    #
+    class GetVocabularyResponse < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :vocabulary_state,
+      :last_modified_time,
+      :failure_reason,
+      :download_uri)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTranscriptionJobsRequest
     #   data as a hash:
     #
     #       {
-    #         status: "IN_PROGRESS", # required, accepts IN_PROGRESS, FAILED, COMPLETED
+    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, COMPLETED
+    #         job_name_contains: "TranscriptionJobName",
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -51,19 +193,27 @@ module Aws::TranscribeService
     #   status.
     #   @return [String]
     #
+    # @!attribute [rw] job_name_contains
+    #   When specified, the jobs returned in the list are limited to jobs
+    #   whose name contains the specified string.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   If the result of the previous request to `ListTranscriptionJobs` was
     #   truncated, include the `NextToken` to fetch the next set of jobs.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of jobs to return in the response.
+    #   The maximum number of jobs to return in the response. If there are
+    #   fewer results in the list, this response contains only the actual
+    #   results.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobsRequest AWS API Documentation
     #
     class ListTranscriptionJobsRequest < Struct.new(
       :status,
+      :job_name_contains,
       :next_token,
       :max_results)
       include Aws::Structure
@@ -75,11 +225,11 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] next_token
     #   The `ListTranscriptionJobs` operation returns a page of jobs at a
-    #   time. The size of the page is set by the `MaxResults` parameter. If
-    #   there are more jobs in the list than the page size, Amazon
-    #   Transcribe returns the `NextPage` token. Include the token in the
-    #   next request to the `ListTranscriptionJobs` operation to return in
-    #   the next page of jobs.
+    #   time. The maximum size of the page is set by the `MaxResults`
+    #   parameter. If there are more jobs in the list than the page size,
+    #   Amazon Transcribe returns the `NextPage` token. Include the token in
+    #   the next request to the `ListTranscriptionJobs` operation to return
+    #   in the next page of jobs.
     #   @return [String]
     #
     # @!attribute [rw] transcription_job_summaries
@@ -96,6 +246,76 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListVocabulariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         state_equals: "PENDING", # accepts PENDING, READY, FAILED
+    #         name_contains: "VocabularyName",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request to `ListVocabularies` was
+    #   truncated, include the `NextToken` to fetch the next set of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of vocabularies to return in the response. If
+    #   there are fewer results in the list, this response contains only the
+    #   actual results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state_equals
+    #   When specified, only returns vocabularies with the `VocabularyState`
+    #   field equal to the specified state.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   When specified, the vocabularies returned in the list are limited to
+    #   vocabularies whose name contains the specified string. The search is
+    #   case-insensitive, `ListVocabularies` will return both
+    #   "vocabularyname" and "VocabularyName" in the response list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabulariesRequest AWS API Documentation
+    #
+    class ListVocabulariesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :state_equals,
+      :name_contains)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The requested vocabulary state.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `ListVocabularies` operation returns a page of vocabularies at a
+    #   time. The maximum size of the page is set by the `MaxResults`
+    #   parameter. If there are more jobs in the list than the page size,
+    #   Amazon Transcribe returns the `NextPage` token. Include the token in
+    #   the next request to the `ListVocabularies` operation to return in
+    #   the next page of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabularies
+    #   A list of objects that describe the vocabularies that match the
+    #   search criteria in the request.
+    #   @return [Array<Types::VocabularyInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabulariesResponse AWS API Documentation
+    #
+    class ListVocabulariesResponse < Struct.new(
+      :status,
+      :next_token,
+      :vocabularies)
+      include Aws::Structure
+    end
+
     # Describes the input media file in a transcription request.
     #
     # @note When making an API call, you may pass Media
@@ -106,7 +326,9 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] media_file_uri
-    #   The S3 location of the input media file. The general form is:
+    #   The S3 location of the input media file. The URI must be in the same
+    #   region as the API endpoint that you are calling. The general form
+    #   is:
     #
     #   `
     #   https://<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
@@ -114,15 +336,62 @@ module Aws::TranscribeService
     #
     #   For example:
     #
-    #   `https://s3-us-west-2.amazonaws.com/examplebucket/example.mp4`
+    #   `https://s3-us-east-1.amazonaws.com/examplebucket/example.mp4`
     #
-    #   `https://s3-us-west-2.amazonaws.com/examplebucket/mediadocs/example.mp4`
+    #   `https://s3-us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4`
+    #
+    #   For more information about S3 object names, see [Object Keys][1] in
+    #   the *Amazon S3 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Media AWS API Documentation
     #
     class Media < Struct.new(
       :media_file_uri)
+      include Aws::Structure
+    end
+
+    # Provides optional settings for the `StartTranscriptionJob` operation.
+    #
+    # @note When making an API call, you may pass Settings
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName",
+    #         show_speaker_labels: false,
+    #         max_speaker_labels: 1,
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of a vocabulary to use when processing the transcription
+    #   job.
+    #   @return [String]
+    #
+    # @!attribute [rw] show_speaker_labels
+    #   Determines whether the transcription job should use speaker
+    #   recognition to identify different speakers in the input audio. If
+    #   you set the `ShowSpeakerLabels` field to true, you must also set the
+    #   maximum number of speaker labels `MaxSpeakerLabels` field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_speaker_labels
+    #   The maximum number of speakers to identify in the input audio. If
+    #   there are more speakers in the audio than this number, multiple
+    #   speakers will be identified as a single speaker. If you specify the
+    #   `MaxSpeakerLabels` field, you must set the `ShowSpeakerLabels` field
+    #   to true.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Settings AWS API Documentation
+    #
+    class Settings < Struct.new(
+      :vocabulary_name,
+      :show_speaker_labels,
+      :max_speaker_labels)
       include Aws::Structure
     end
 
@@ -136,6 +405,11 @@ module Aws::TranscribeService
     #         media_format: "mp3", # required, accepts mp3, mp4, wav, flac
     #         media: { # required
     #           media_file_uri: "Uri",
+    #         },
+    #         settings: {
+    #           vocabulary_name: "VocabularyName",
+    #           show_speaker_labels: false,
+    #           max_speaker_labels: 1,
     #         },
     #       }
     #
@@ -160,6 +434,11 @@ module Aws::TranscribeService
     #   An object that describes the input media for a transcription job.
     #   @return [Types::Media]
     #
+    # @!attribute [rw] settings
+    #   A `Settings` object that provides optional settings for a
+    #   transcription job.
+    #   @return [Types::Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJobRequest AWS API Documentation
     #
     class StartTranscriptionJobRequest < Struct.new(
@@ -167,7 +446,8 @@ module Aws::TranscribeService
       :language_code,
       :media_sample_rate_hertz,
       :media_format,
-      :media)
+      :media,
+      :settings)
       include Aws::Structure
     end
 
@@ -185,18 +465,8 @@ module Aws::TranscribeService
     # Describes the output of a transcription job.
     #
     # @!attribute [rw] transcript_file_uri
-    #   The S3 location where the transcription result is stored. The
-    #   general form of this Uri is:
-    #
-    #   `
-    #   https://<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-    #   `
-    #
-    #   For example:
-    #
-    #   `https://s3-us-west-2.amazonaws.com/examplebucket/example.json`
-    #
-    #   `https://s3-us-west-2.amazonaws.com/examplebucket/mediadocs/example.json`
+    #   The S3 location where the transcription result is stored. Use this
+    #   URI to access the results of the transcription job.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Transcript AWS API Documentation
@@ -214,7 +484,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] transcription_job_status
-    #   The identifier assigned to the job when it was created.
+    #   The status of the transcription job.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -251,6 +521,10 @@ module Aws::TranscribeService
     #   contains information about why the job failed.
     #   @return [String]
     #
+    # @!attribute [rw] settings
+    #   Optional settings for the transcription job.
+    #   @return [Types::Settings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
     #
     class TranscriptionJob < Struct.new(
@@ -263,7 +537,8 @@ module Aws::TranscribeService
       :transcript,
       :creation_time,
       :completion_time,
-      :failure_reason)
+      :failure_reason,
+      :settings)
       include Aws::Structure
     end
 
@@ -305,6 +580,93 @@ module Aws::TranscribeService
       :language_code,
       :transcription_job_status,
       :failure_reason)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vocabulary_name: "VocabularyName", # required
+    #         language_code: "en-US", # required, accepts en-US, es-US
+    #         phrases: ["Phrase"], # required
+    #       }
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary to update. The name is case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] phrases
+    #   An array of strings containing the vocabulary entries.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyRequest AWS API Documentation
+    #
+    class UpdateVocabularyRequest < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :phrases)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary that was updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the vocabulary was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vocabulary_state
+    #   The processing state of the vocabulary. When the `VocabularyState`
+    #   field contains `READY` the vocabulary is ready to be used in a
+    #   `StartTranscriptionJob` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyResponse AWS API Documentation
+    #
+    class UpdateVocabularyResponse < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :last_modified_time,
+      :vocabulary_state)
+      include Aws::Structure
+    end
+
+    # Provides information about a custom vocabulary.
+    #
+    # @!attribute [rw] vocabulary_name
+    #   The name of the vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the vocabulary was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] vocabulary_state
+    #   The processing state of the vocabulary. If the state is `READY` you
+    #   can use the vocabulary in a `StartTranscriptionJob` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyInfo AWS API Documentation
+    #
+    class VocabularyInfo < Struct.new(
+      :vocabulary_name,
+      :language_code,
+      :last_modified_time,
+      :vocabulary_state)
       include Aws::Structure
     end
 

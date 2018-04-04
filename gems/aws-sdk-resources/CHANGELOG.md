@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.14.0 (2018-04-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-secretsmanager` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-fms` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-acmpca` gem.
+
 3.13.0 (2018-03-30)
 ------------------
 

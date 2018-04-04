@@ -4,6 +4,7 @@ require 'aws-sdk-core'
 module Aws
   # service gems
   autoload :ACM, 'aws-sdk-acm'
+  autoload :ACMPCA, 'aws-sdk-acmpca'
   autoload :APIGateway, 'aws-sdk-apigateway'
   autoload :AlexaForBusiness, 'aws-sdk-alexaforbusiness'
   autoload :AppStream, 'aws-sdk-appstream'
@@ -59,6 +60,7 @@ module Aws
   autoload :ElasticLoadBalancingV2, 'aws-sdk-elasticloadbalancingv2'
   autoload :ElasticTranscoder, 'aws-sdk-elastictranscoder'
   autoload :ElasticsearchService, 'aws-sdk-elasticsearchservice'
+  autoload :FMS, 'aws-sdk-fms'
   autoload :Firehose, 'aws-sdk-firehose'
   autoload :GameLift, 'aws-sdk-gamelift'
   autoload :Glacier, 'aws-sdk-glacier'
@@ -119,6 +121,7 @@ module Aws
   autoload :SWF, 'aws-sdk-swf'
   autoload :SageMaker, 'aws-sdk-sagemaker'
   autoload :SageMakerRuntime, 'aws-sdk-sagemakerruntime'
+  autoload :SecretsManager, 'aws-sdk-secretsmanager'
   autoload :ServerlessApplicationRepository, 'aws-sdk-serverlessapplicationrepository'
   autoload :ServiceCatalog, 'aws-sdk-servicecatalog'
   autoload :ServiceDiscovery, 'aws-sdk-servicediscovery'

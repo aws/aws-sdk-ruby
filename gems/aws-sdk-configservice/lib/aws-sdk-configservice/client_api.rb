@@ -12,7 +12,24 @@ module Aws::ConfigService
     include Seahorse::Model
 
     ARN = Shapes::StringShape.new(name: 'ARN')
+    AccountAggregationSource = Shapes::StructureShape.new(name: 'AccountAggregationSource')
+    AccountAggregationSourceAccountList = Shapes::ListShape.new(name: 'AccountAggregationSourceAccountList')
+    AccountAggregationSourceList = Shapes::ListShape.new(name: 'AccountAggregationSourceList')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AggregateComplianceByConfigRule = Shapes::StructureShape.new(name: 'AggregateComplianceByConfigRule')
+    AggregateComplianceByConfigRuleList = Shapes::ListShape.new(name: 'AggregateComplianceByConfigRuleList')
+    AggregateComplianceCount = Shapes::StructureShape.new(name: 'AggregateComplianceCount')
+    AggregateComplianceCountList = Shapes::ListShape.new(name: 'AggregateComplianceCountList')
+    AggregateEvaluationResult = Shapes::StructureShape.new(name: 'AggregateEvaluationResult')
+    AggregateEvaluationResultList = Shapes::ListShape.new(name: 'AggregateEvaluationResultList')
+    AggregatedSourceStatus = Shapes::StructureShape.new(name: 'AggregatedSourceStatus')
+    AggregatedSourceStatusList = Shapes::ListShape.new(name: 'AggregatedSourceStatusList')
+    AggregatedSourceStatusType = Shapes::StringShape.new(name: 'AggregatedSourceStatusType')
+    AggregatedSourceStatusTypeList = Shapes::ListShape.new(name: 'AggregatedSourceStatusTypeList')
+    AggregatedSourceType = Shapes::StringShape.new(name: 'AggregatedSourceType')
+    AggregationAuthorization = Shapes::StructureShape.new(name: 'AggregationAuthorization')
+    AggregationAuthorizationList = Shapes::ListShape.new(name: 'AggregationAuthorizationList')
+    AggregatorRegionList = Shapes::ListShape.new(name: 'AggregatorRegionList')
     AllSupported = Shapes::BooleanShape.new(name: 'AllSupported')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
@@ -38,14 +55,23 @@ module Aws::ConfigService
     ComplianceTypes = Shapes::ListShape.new(name: 'ComplianceTypes')
     ConfigExportDeliveryInfo = Shapes::StructureShape.new(name: 'ConfigExportDeliveryInfo')
     ConfigRule = Shapes::StructureShape.new(name: 'ConfigRule')
+    ConfigRuleComplianceFilters = Shapes::StructureShape.new(name: 'ConfigRuleComplianceFilters')
+    ConfigRuleComplianceSummaryFilters = Shapes::StructureShape.new(name: 'ConfigRuleComplianceSummaryFilters')
+    ConfigRuleComplianceSummaryGroupKey = Shapes::StringShape.new(name: 'ConfigRuleComplianceSummaryGroupKey')
     ConfigRuleEvaluationStatus = Shapes::StructureShape.new(name: 'ConfigRuleEvaluationStatus')
     ConfigRuleEvaluationStatusList = Shapes::ListShape.new(name: 'ConfigRuleEvaluationStatusList')
+    ConfigRuleName = Shapes::StringShape.new(name: 'ConfigRuleName')
     ConfigRuleNames = Shapes::ListShape.new(name: 'ConfigRuleNames')
     ConfigRuleState = Shapes::StringShape.new(name: 'ConfigRuleState')
     ConfigRules = Shapes::ListShape.new(name: 'ConfigRules')
     ConfigSnapshotDeliveryProperties = Shapes::StructureShape.new(name: 'ConfigSnapshotDeliveryProperties')
     ConfigStreamDeliveryInfo = Shapes::StructureShape.new(name: 'ConfigStreamDeliveryInfo')
     Configuration = Shapes::StringShape.new(name: 'Configuration')
+    ConfigurationAggregator = Shapes::StructureShape.new(name: 'ConfigurationAggregator')
+    ConfigurationAggregatorArn = Shapes::StringShape.new(name: 'ConfigurationAggregatorArn')
+    ConfigurationAggregatorList = Shapes::ListShape.new(name: 'ConfigurationAggregatorList')
+    ConfigurationAggregatorName = Shapes::StringShape.new(name: 'ConfigurationAggregatorName')
+    ConfigurationAggregatorNameList = Shapes::ListShape.new(name: 'ConfigurationAggregatorNameList')
     ConfigurationItem = Shapes::StructureShape.new(name: 'ConfigurationItem')
     ConfigurationItemCaptureTime = Shapes::TimestampShape.new(name: 'ConfigurationItemCaptureTime')
     ConfigurationItemList = Shapes::ListShape.new(name: 'ConfigurationItemList')
@@ -58,11 +84,14 @@ module Aws::ConfigService
     ConfigurationRecorderStatusList = Shapes::ListShape.new(name: 'ConfigurationRecorderStatusList')
     ConfigurationStateId = Shapes::StringShape.new(name: 'ConfigurationStateId')
     Date = Shapes::TimestampShape.new(name: 'Date')
+    DeleteAggregationAuthorizationRequest = Shapes::StructureShape.new(name: 'DeleteAggregationAuthorizationRequest')
     DeleteConfigRuleRequest = Shapes::StructureShape.new(name: 'DeleteConfigRuleRequest')
+    DeleteConfigurationAggregatorRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationAggregatorRequest')
     DeleteConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationRecorderRequest')
     DeleteDeliveryChannelRequest = Shapes::StructureShape.new(name: 'DeleteDeliveryChannelRequest')
     DeleteEvaluationResultsRequest = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsRequest')
     DeleteEvaluationResultsResponse = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsResponse')
+    DeletePendingAggregationRequestRequest = Shapes::StructureShape.new(name: 'DeletePendingAggregationRequestRequest')
     DeliverConfigSnapshotRequest = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotRequest')
     DeliverConfigSnapshotResponse = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotResponse')
     DeliveryChannel = Shapes::StructureShape.new(name: 'DeliveryChannel')
@@ -71,6 +100,10 @@ module Aws::ConfigService
     DeliveryChannelStatus = Shapes::StructureShape.new(name: 'DeliveryChannelStatus')
     DeliveryChannelStatusList = Shapes::ListShape.new(name: 'DeliveryChannelStatusList')
     DeliveryStatus = Shapes::StringShape.new(name: 'DeliveryStatus')
+    DescribeAggregateComplianceByConfigRulesRequest = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConfigRulesRequest')
+    DescribeAggregateComplianceByConfigRulesResponse = Shapes::StructureShape.new(name: 'DescribeAggregateComplianceByConfigRulesResponse')
+    DescribeAggregationAuthorizationsRequest = Shapes::StructureShape.new(name: 'DescribeAggregationAuthorizationsRequest')
+    DescribeAggregationAuthorizationsResponse = Shapes::StructureShape.new(name: 'DescribeAggregationAuthorizationsResponse')
     DescribeComplianceByConfigRuleRequest = Shapes::StructureShape.new(name: 'DescribeComplianceByConfigRuleRequest')
     DescribeComplianceByConfigRuleResponse = Shapes::StructureShape.new(name: 'DescribeComplianceByConfigRuleResponse')
     DescribeComplianceByResourceRequest = Shapes::StructureShape.new(name: 'DescribeComplianceByResourceRequest')
@@ -79,6 +112,10 @@ module Aws::ConfigService
     DescribeConfigRuleEvaluationStatusResponse = Shapes::StructureShape.new(name: 'DescribeConfigRuleEvaluationStatusResponse')
     DescribeConfigRulesRequest = Shapes::StructureShape.new(name: 'DescribeConfigRulesRequest')
     DescribeConfigRulesResponse = Shapes::StructureShape.new(name: 'DescribeConfigRulesResponse')
+    DescribeConfigurationAggregatorSourcesStatusRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationAggregatorSourcesStatusRequest')
+    DescribeConfigurationAggregatorSourcesStatusResponse = Shapes::StructureShape.new(name: 'DescribeConfigurationAggregatorSourcesStatusResponse')
+    DescribeConfigurationAggregatorsRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationAggregatorsRequest')
+    DescribeConfigurationAggregatorsResponse = Shapes::StructureShape.new(name: 'DescribeConfigurationAggregatorsResponse')
     DescribeConfigurationRecorderStatusRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationRecorderStatusRequest')
     DescribeConfigurationRecorderStatusResponse = Shapes::StructureShape.new(name: 'DescribeConfigurationRecorderStatusResponse')
     DescribeConfigurationRecordersRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationRecordersRequest')
@@ -87,6 +124,9 @@ module Aws::ConfigService
     DescribeDeliveryChannelStatusResponse = Shapes::StructureShape.new(name: 'DescribeDeliveryChannelStatusResponse')
     DescribeDeliveryChannelsRequest = Shapes::StructureShape.new(name: 'DescribeDeliveryChannelsRequest')
     DescribeDeliveryChannelsResponse = Shapes::StructureShape.new(name: 'DescribeDeliveryChannelsResponse')
+    DescribePendingAggregationRequestsLimit = Shapes::IntegerShape.new(name: 'DescribePendingAggregationRequestsLimit')
+    DescribePendingAggregationRequestsRequest = Shapes::StructureShape.new(name: 'DescribePendingAggregationRequestsRequest')
+    DescribePendingAggregationRequestsResponse = Shapes::StructureShape.new(name: 'DescribePendingAggregationRequestsResponse')
     EarlierTime = Shapes::TimestampShape.new(name: 'EarlierTime')
     EmptiableStringWithCharLimit256 = Shapes::StringShape.new(name: 'EmptiableStringWithCharLimit256')
     Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
@@ -96,6 +136,10 @@ module Aws::ConfigService
     EvaluationResults = Shapes::ListShape.new(name: 'EvaluationResults')
     Evaluations = Shapes::ListShape.new(name: 'Evaluations')
     EventSource = Shapes::StringShape.new(name: 'EventSource')
+    GetAggregateComplianceDetailsByConfigRuleRequest = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleRequest')
+    GetAggregateComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetAggregateComplianceDetailsByConfigRuleResponse')
+    GetAggregateConfigRuleComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryRequest')
+    GetAggregateConfigRuleComplianceSummaryResponse = Shapes::StructureShape.new(name: 'GetAggregateConfigRuleComplianceSummaryResponse')
     GetComplianceDetailsByConfigRuleRequest = Shapes::StructureShape.new(name: 'GetComplianceDetailsByConfigRuleRequest')
     GetComplianceDetailsByConfigRuleResponse = Shapes::StructureShape.new(name: 'GetComplianceDetailsByConfigRuleResponse')
     GetComplianceDetailsByResourceRequest = Shapes::StructureShape.new(name: 'GetComplianceDetailsByResourceRequest')
@@ -107,6 +151,7 @@ module Aws::ConfigService
     GetDiscoveredResourceCountsResponse = Shapes::StructureShape.new(name: 'GetDiscoveredResourceCountsResponse')
     GetResourceConfigHistoryRequest = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryRequest')
     GetResourceConfigHistoryResponse = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryResponse')
+    GroupByAPILimit = Shapes::IntegerShape.new(name: 'GroupByAPILimit')
     IncludeGlobalResourceTypes = Shapes::BooleanShape.new(name: 'IncludeGlobalResourceTypes')
     InsufficientDeliveryPolicyException = Shapes::StructureShape.new(name: 'InsufficientDeliveryPolicyException')
     InsufficientPermissionsException = Shapes::StructureShape.new(name: 'InsufficientPermissionsException')
@@ -138,14 +183,25 @@ module Aws::ConfigService
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NoAvailableConfigurationRecorderException = Shapes::StructureShape.new(name: 'NoAvailableConfigurationRecorderException')
     NoAvailableDeliveryChannelException = Shapes::StructureShape.new(name: 'NoAvailableDeliveryChannelException')
+    NoAvailableOrganizationException = Shapes::StructureShape.new(name: 'NoAvailableOrganizationException')
     NoRunningConfigurationRecorderException = Shapes::StructureShape.new(name: 'NoRunningConfigurationRecorderException')
     NoSuchBucketException = Shapes::StructureShape.new(name: 'NoSuchBucketException')
     NoSuchConfigRuleException = Shapes::StructureShape.new(name: 'NoSuchConfigRuleException')
+    NoSuchConfigurationAggregatorException = Shapes::StructureShape.new(name: 'NoSuchConfigurationAggregatorException')
     NoSuchConfigurationRecorderException = Shapes::StructureShape.new(name: 'NoSuchConfigurationRecorderException')
     NoSuchDeliveryChannelException = Shapes::StructureShape.new(name: 'NoSuchDeliveryChannelException')
     OrderingTimestamp = Shapes::TimestampShape.new(name: 'OrderingTimestamp')
+    OrganizationAccessDeniedException = Shapes::StructureShape.new(name: 'OrganizationAccessDeniedException')
+    OrganizationAggregationSource = Shapes::StructureShape.new(name: 'OrganizationAggregationSource')
+    OrganizationAllFeaturesNotEnabledException = Shapes::StructureShape.new(name: 'OrganizationAllFeaturesNotEnabledException')
     Owner = Shapes::StringShape.new(name: 'Owner')
+    PendingAggregationRequest = Shapes::StructureShape.new(name: 'PendingAggregationRequest')
+    PendingAggregationRequestList = Shapes::ListShape.new(name: 'PendingAggregationRequestList')
+    PutAggregationAuthorizationRequest = Shapes::StructureShape.new(name: 'PutAggregationAuthorizationRequest')
+    PutAggregationAuthorizationResponse = Shapes::StructureShape.new(name: 'PutAggregationAuthorizationResponse')
     PutConfigRuleRequest = Shapes::StructureShape.new(name: 'PutConfigRuleRequest')
+    PutConfigurationAggregatorRequest = Shapes::StructureShape.new(name: 'PutConfigurationAggregatorRequest')
+    PutConfigurationAggregatorResponse = Shapes::StructureShape.new(name: 'PutConfigurationAggregatorResponse')
     PutConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'PutConfigurationRecorderRequest')
     PutDeliveryChannelRequest = Shapes::StructureShape.new(name: 'PutDeliveryChannelRequest')
     PutEvaluationsRequest = Shapes::StructureShape.new(name: 'PutEvaluationsRequest')
@@ -196,6 +252,63 @@ module Aws::ConfigService
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::StringShape.new(name: 'Version')
+
+    AccountAggregationSource.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountAggregationSourceAccountList, required: true, location_name: "AccountIds"))
+    AccountAggregationSource.add_member(:all_aws_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAwsRegions"))
+    AccountAggregationSource.add_member(:aws_regions, Shapes::ShapeRef.new(shape: AggregatorRegionList, location_name: "AwsRegions"))
+    AccountAggregationSource.struct_class = Types::AccountAggregationSource
+
+    AccountAggregationSourceAccountList.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    AccountAggregationSourceList.member = Shapes::ShapeRef.new(shape: AccountAggregationSource)
+
+    AggregateComplianceByConfigRule.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
+    AggregateComplianceByConfigRule.add_member(:compliance, Shapes::ShapeRef.new(shape: Compliance, location_name: "Compliance"))
+    AggregateComplianceByConfigRule.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AggregateComplianceByConfigRule.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateComplianceByConfigRule.struct_class = Types::AggregateComplianceByConfigRule
+
+    AggregateComplianceByConfigRuleList.member = Shapes::ShapeRef.new(shape: AggregateComplianceByConfigRule)
+
+    AggregateComplianceCount.add_member(:group_name, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupName"))
+    AggregateComplianceCount.add_member(:compliance_summary, Shapes::ShapeRef.new(shape: ComplianceSummary, location_name: "ComplianceSummary"))
+    AggregateComplianceCount.struct_class = Types::AggregateComplianceCount
+
+    AggregateComplianceCountList.member = Shapes::ShapeRef.new(shape: AggregateComplianceCount)
+
+    AggregateEvaluationResult.add_member(:evaluation_result_identifier, Shapes::ShapeRef.new(shape: EvaluationResultIdentifier, location_name: "EvaluationResultIdentifier"))
+    AggregateEvaluationResult.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
+    AggregateEvaluationResult.add_member(:result_recorded_time, Shapes::ShapeRef.new(shape: Date, location_name: "ResultRecordedTime"))
+    AggregateEvaluationResult.add_member(:config_rule_invoked_time, Shapes::ShapeRef.new(shape: Date, location_name: "ConfigRuleInvokedTime"))
+    AggregateEvaluationResult.add_member(:annotation, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "Annotation"))
+    AggregateEvaluationResult.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AggregateEvaluationResult.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregateEvaluationResult.struct_class = Types::AggregateEvaluationResult
+
+    AggregateEvaluationResultList.member = Shapes::ShapeRef.new(shape: AggregateEvaluationResult)
+
+    AggregatedSourceStatus.add_member(:source_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceId"))
+    AggregatedSourceStatus.add_member(:source_type, Shapes::ShapeRef.new(shape: AggregatedSourceType, location_name: "SourceType"))
+    AggregatedSourceStatus.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    AggregatedSourceStatus.add_member(:last_update_status, Shapes::ShapeRef.new(shape: AggregatedSourceStatusType, location_name: "LastUpdateStatus"))
+    AggregatedSourceStatus.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
+    AggregatedSourceStatus.add_member(:last_error_code, Shapes::ShapeRef.new(shape: String, location_name: "LastErrorCode"))
+    AggregatedSourceStatus.add_member(:last_error_message, Shapes::ShapeRef.new(shape: String, location_name: "LastErrorMessage"))
+    AggregatedSourceStatus.struct_class = Types::AggregatedSourceStatus
+
+    AggregatedSourceStatusList.member = Shapes::ShapeRef.new(shape: AggregatedSourceStatus)
+
+    AggregatedSourceStatusTypeList.member = Shapes::ShapeRef.new(shape: AggregatedSourceStatusType)
+
+    AggregationAuthorization.add_member(:aggregation_authorization_arn, Shapes::ShapeRef.new(shape: String, location_name: "AggregationAuthorizationArn"))
+    AggregationAuthorization.add_member(:authorized_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AuthorizedAccountId"))
+    AggregationAuthorization.add_member(:authorized_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AuthorizedAwsRegion"))
+    AggregationAuthorization.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
+    AggregationAuthorization.struct_class = Types::AggregationAuthorization
+
+    AggregationAuthorizationList.member = Shapes::ShapeRef.new(shape: AggregationAuthorization)
+
+    AggregatorRegionList.member = Shapes::ShapeRef.new(shape: String)
 
     BaseConfigurationItem.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     BaseConfigurationItem.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
@@ -277,6 +390,16 @@ module Aws::ConfigService
     ConfigRule.add_member(:config_rule_state, Shapes::ShapeRef.new(shape: ConfigRuleState, location_name: "ConfigRuleState"))
     ConfigRule.struct_class = Types::ConfigRule
 
+    ConfigRuleComplianceFilters.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
+    ConfigRuleComplianceFilters.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
+    ConfigRuleComplianceFilters.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    ConfigRuleComplianceFilters.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    ConfigRuleComplianceFilters.struct_class = Types::ConfigRuleComplianceFilters
+
+    ConfigRuleComplianceSummaryFilters.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    ConfigRuleComplianceSummaryFilters.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "AwsRegion"))
+    ConfigRuleComplianceSummaryFilters.struct_class = Types::ConfigRuleComplianceSummaryFilters
+
     ConfigRuleEvaluationStatus.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, location_name: "ConfigRuleName"))
     ConfigRuleEvaluationStatus.add_member(:config_rule_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConfigRuleArn"))
     ConfigRuleEvaluationStatus.add_member(:config_rule_id, Shapes::ShapeRef.new(shape: String, location_name: "ConfigRuleId"))
@@ -304,6 +427,18 @@ module Aws::ConfigService
     ConfigStreamDeliveryInfo.add_member(:last_error_message, Shapes::ShapeRef.new(shape: String, location_name: "lastErrorMessage"))
     ConfigStreamDeliveryInfo.add_member(:last_status_change_time, Shapes::ShapeRef.new(shape: Date, location_name: "lastStatusChangeTime"))
     ConfigStreamDeliveryInfo.struct_class = Types::ConfigStreamDeliveryInfo
+
+    ConfigurationAggregator.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, location_name: "ConfigurationAggregatorName"))
+    ConfigurationAggregator.add_member(:configuration_aggregator_arn, Shapes::ShapeRef.new(shape: ConfigurationAggregatorArn, location_name: "ConfigurationAggregatorArn"))
+    ConfigurationAggregator.add_member(:account_aggregation_sources, Shapes::ShapeRef.new(shape: AccountAggregationSourceList, location_name: "AccountAggregationSources"))
+    ConfigurationAggregator.add_member(:organization_aggregation_source, Shapes::ShapeRef.new(shape: OrganizationAggregationSource, location_name: "OrganizationAggregationSource"))
+    ConfigurationAggregator.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
+    ConfigurationAggregator.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdatedTime"))
+    ConfigurationAggregator.struct_class = Types::ConfigurationAggregator
+
+    ConfigurationAggregatorList.member = Shapes::ShapeRef.new(shape: ConfigurationAggregator)
+
+    ConfigurationAggregatorNameList.member = Shapes::ShapeRef.new(shape: ConfigurationAggregatorName)
 
     ConfigurationItem.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     ConfigurationItem.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
@@ -348,8 +483,15 @@ module Aws::ConfigService
 
     ConfigurationRecorderStatusList.member = Shapes::ShapeRef.new(shape: ConfigurationRecorderStatus)
 
+    DeleteAggregationAuthorizationRequest.add_member(:authorized_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AuthorizedAccountId"))
+    DeleteAggregationAuthorizationRequest.add_member(:authorized_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "AuthorizedAwsRegion"))
+    DeleteAggregationAuthorizationRequest.struct_class = Types::DeleteAggregationAuthorizationRequest
+
     DeleteConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
     DeleteConfigRuleRequest.struct_class = Types::DeleteConfigRuleRequest
+
+    DeleteConfigurationAggregatorRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    DeleteConfigurationAggregatorRequest.struct_class = Types::DeleteConfigurationAggregatorRequest
 
     DeleteConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
     DeleteConfigurationRecorderRequest.struct_class = Types::DeleteConfigurationRecorderRequest
@@ -361,6 +503,10 @@ module Aws::ConfigService
     DeleteEvaluationResultsRequest.struct_class = Types::DeleteEvaluationResultsRequest
 
     DeleteEvaluationResultsResponse.struct_class = Types::DeleteEvaluationResultsResponse
+
+    DeletePendingAggregationRequestRequest.add_member(:requester_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "RequesterAccountId"))
+    DeletePendingAggregationRequestRequest.add_member(:requester_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "RequesterAwsRegion"))
+    DeletePendingAggregationRequestRequest.struct_class = Types::DeletePendingAggregationRequestRequest
 
     DeliverConfigSnapshotRequest.add_member(:delivery_channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "deliveryChannelName"))
     DeliverConfigSnapshotRequest.struct_class = Types::DeliverConfigSnapshotRequest
@@ -386,6 +532,24 @@ module Aws::ConfigService
     DeliveryChannelStatus.struct_class = Types::DeliveryChannelStatus
 
     DeliveryChannelStatusList.member = Shapes::ShapeRef.new(shape: DeliveryChannelStatus)
+
+    DescribeAggregateComplianceByConfigRulesRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    DescribeAggregateComplianceByConfigRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ConfigRuleComplianceFilters, location_name: "Filters"))
+    DescribeAggregateComplianceByConfigRulesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: GroupByAPILimit, location_name: "Limit"))
+    DescribeAggregateComplianceByConfigRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAggregateComplianceByConfigRulesRequest.struct_class = Types::DescribeAggregateComplianceByConfigRulesRequest
+
+    DescribeAggregateComplianceByConfigRulesResponse.add_member(:aggregate_compliance_by_config_rules, Shapes::ShapeRef.new(shape: AggregateComplianceByConfigRuleList, location_name: "AggregateComplianceByConfigRules"))
+    DescribeAggregateComplianceByConfigRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAggregateComplianceByConfigRulesResponse.struct_class = Types::DescribeAggregateComplianceByConfigRulesResponse
+
+    DescribeAggregationAuthorizationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeAggregationAuthorizationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAggregationAuthorizationsRequest.struct_class = Types::DescribeAggregationAuthorizationsRequest
+
+    DescribeAggregationAuthorizationsResponse.add_member(:aggregation_authorizations, Shapes::ShapeRef.new(shape: AggregationAuthorizationList, location_name: "AggregationAuthorizations"))
+    DescribeAggregationAuthorizationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeAggregationAuthorizationsResponse.struct_class = Types::DescribeAggregationAuthorizationsResponse
 
     DescribeComplianceByConfigRuleRequest.add_member(:config_rule_names, Shapes::ShapeRef.new(shape: ConfigRuleNames, location_name: "ConfigRuleNames"))
     DescribeComplianceByConfigRuleRequest.add_member(:compliance_types, Shapes::ShapeRef.new(shape: ComplianceTypes, location_name: "ComplianceTypes"))
@@ -424,6 +588,25 @@ module Aws::ConfigService
     DescribeConfigRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeConfigRulesResponse.struct_class = Types::DescribeConfigRulesResponse
 
+    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:update_status, Shapes::ShapeRef.new(shape: AggregatedSourceStatusTypeList, location_name: "UpdateStatus"))
+    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeConfigurationAggregatorSourcesStatusRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeConfigurationAggregatorSourcesStatusRequest.struct_class = Types::DescribeConfigurationAggregatorSourcesStatusRequest
+
+    DescribeConfigurationAggregatorSourcesStatusResponse.add_member(:aggregated_source_status_list, Shapes::ShapeRef.new(shape: AggregatedSourceStatusList, location_name: "AggregatedSourceStatusList"))
+    DescribeConfigurationAggregatorSourcesStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeConfigurationAggregatorSourcesStatusResponse.struct_class = Types::DescribeConfigurationAggregatorSourcesStatusResponse
+
+    DescribeConfigurationAggregatorsRequest.add_member(:configuration_aggregator_names, Shapes::ShapeRef.new(shape: ConfigurationAggregatorNameList, location_name: "ConfigurationAggregatorNames"))
+    DescribeConfigurationAggregatorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeConfigurationAggregatorsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    DescribeConfigurationAggregatorsRequest.struct_class = Types::DescribeConfigurationAggregatorsRequest
+
+    DescribeConfigurationAggregatorsResponse.add_member(:configuration_aggregators, Shapes::ShapeRef.new(shape: ConfigurationAggregatorList, location_name: "ConfigurationAggregators"))
+    DescribeConfigurationAggregatorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeConfigurationAggregatorsResponse.struct_class = Types::DescribeConfigurationAggregatorsResponse
+
     DescribeConfigurationRecorderStatusRequest.add_member(:configuration_recorder_names, Shapes::ShapeRef.new(shape: ConfigurationRecorderNameList, location_name: "ConfigurationRecorderNames"))
     DescribeConfigurationRecorderStatusRequest.struct_class = Types::DescribeConfigurationRecorderStatusRequest
 
@@ -447,6 +630,14 @@ module Aws::ConfigService
 
     DescribeDeliveryChannelsResponse.add_member(:delivery_channels, Shapes::ShapeRef.new(shape: DeliveryChannelList, location_name: "DeliveryChannels"))
     DescribeDeliveryChannelsResponse.struct_class = Types::DescribeDeliveryChannelsResponse
+
+    DescribePendingAggregationRequestsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribePendingAggregationRequestsLimit, location_name: "Limit"))
+    DescribePendingAggregationRequestsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribePendingAggregationRequestsRequest.struct_class = Types::DescribePendingAggregationRequestsRequest
+
+    DescribePendingAggregationRequestsResponse.add_member(:pending_aggregation_requests, Shapes::ShapeRef.new(shape: PendingAggregationRequestList, location_name: "PendingAggregationRequests"))
+    DescribePendingAggregationRequestsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribePendingAggregationRequestsResponse.struct_class = Types::DescribePendingAggregationRequestsResponse
 
     Evaluation.add_member(:compliance_resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "ComplianceResourceType"))
     Evaluation.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, required: true, location_name: "ComplianceResourceId"))
@@ -475,6 +666,31 @@ module Aws::ConfigService
     EvaluationResults.member = Shapes::ShapeRef.new(shape: EvaluationResult)
 
     Evaluations.member = Shapes::ShapeRef.new(shape: Evaluation)
+
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, required: true, location_name: "ConfigRuleName"))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "AwsRegion"))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:compliance_type, Shapes::ShapeRef.new(shape: ComplianceType, location_name: "ComplianceType"))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+    GetAggregateComplianceDetailsByConfigRuleRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateComplianceDetailsByConfigRuleRequest.struct_class = Types::GetAggregateComplianceDetailsByConfigRuleRequest
+
+    GetAggregateComplianceDetailsByConfigRuleResponse.add_member(:aggregate_evaluation_results, Shapes::ShapeRef.new(shape: AggregateEvaluationResultList, location_name: "AggregateEvaluationResults"))
+    GetAggregateComplianceDetailsByConfigRuleResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateComplianceDetailsByConfigRuleResponse.struct_class = Types::GetAggregateComplianceDetailsByConfigRuleResponse
+
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:filters, Shapes::ShapeRef.new(shape: ConfigRuleComplianceSummaryFilters, location_name: "Filters"))
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:group_by_key, Shapes::ShapeRef.new(shape: ConfigRuleComplianceSummaryGroupKey, location_name: "GroupByKey"))
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:limit, Shapes::ShapeRef.new(shape: GroupByAPILimit, location_name: "Limit"))
+    GetAggregateConfigRuleComplianceSummaryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConfigRuleComplianceSummaryRequest.struct_class = Types::GetAggregateConfigRuleComplianceSummaryRequest
+
+    GetAggregateConfigRuleComplianceSummaryResponse.add_member(:group_by_key, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "GroupByKey"))
+    GetAggregateConfigRuleComplianceSummaryResponse.add_member(:aggregate_compliance_counts, Shapes::ShapeRef.new(shape: AggregateComplianceCountList, location_name: "AggregateComplianceCounts"))
+    GetAggregateConfigRuleComplianceSummaryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetAggregateConfigRuleComplianceSummaryResponse.struct_class = Types::GetAggregateConfigRuleComplianceSummaryResponse
 
     GetComplianceDetailsByConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
     GetComplianceDetailsByConfigRuleRequest.add_member(:compliance_types, Shapes::ShapeRef.new(shape: ComplianceTypes, location_name: "ComplianceTypes"))
@@ -540,8 +756,34 @@ module Aws::ConfigService
     ListDiscoveredResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDiscoveredResourcesResponse.struct_class = Types::ListDiscoveredResourcesResponse
 
+    OrganizationAggregationSource.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+    OrganizationAggregationSource.add_member(:aws_regions, Shapes::ShapeRef.new(shape: AggregatorRegionList, location_name: "AwsRegions"))
+    OrganizationAggregationSource.add_member(:all_aws_regions, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllAwsRegions"))
+    OrganizationAggregationSource.struct_class = Types::OrganizationAggregationSource
+
+    PendingAggregationRequest.add_member(:requester_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "RequesterAccountId"))
+    PendingAggregationRequest.add_member(:requester_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "RequesterAwsRegion"))
+    PendingAggregationRequest.struct_class = Types::PendingAggregationRequest
+
+    PendingAggregationRequestList.member = Shapes::ShapeRef.new(shape: PendingAggregationRequest)
+
+    PutAggregationAuthorizationRequest.add_member(:authorized_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AuthorizedAccountId"))
+    PutAggregationAuthorizationRequest.add_member(:authorized_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "AuthorizedAwsRegion"))
+    PutAggregationAuthorizationRequest.struct_class = Types::PutAggregationAuthorizationRequest
+
+    PutAggregationAuthorizationResponse.add_member(:aggregation_authorization, Shapes::ShapeRef.new(shape: AggregationAuthorization, location_name: "AggregationAuthorization"))
+    PutAggregationAuthorizationResponse.struct_class = Types::PutAggregationAuthorizationResponse
+
     PutConfigRuleRequest.add_member(:config_rule, Shapes::ShapeRef.new(shape: ConfigRule, required: true, location_name: "ConfigRule"))
     PutConfigRuleRequest.struct_class = Types::PutConfigRuleRequest
+
+    PutConfigurationAggregatorRequest.add_member(:configuration_aggregator_name, Shapes::ShapeRef.new(shape: ConfigurationAggregatorName, required: true, location_name: "ConfigurationAggregatorName"))
+    PutConfigurationAggregatorRequest.add_member(:account_aggregation_sources, Shapes::ShapeRef.new(shape: AccountAggregationSourceList, location_name: "AccountAggregationSources"))
+    PutConfigurationAggregatorRequest.add_member(:organization_aggregation_source, Shapes::ShapeRef.new(shape: OrganizationAggregationSource, location_name: "OrganizationAggregationSource"))
+    PutConfigurationAggregatorRequest.struct_class = Types::PutConfigurationAggregatorRequest
+
+    PutConfigurationAggregatorResponse.add_member(:configuration_aggregator, Shapes::ShapeRef.new(shape: ConfigurationAggregator, location_name: "ConfigurationAggregator"))
+    PutConfigurationAggregatorResponse.struct_class = Types::PutConfigurationAggregatorResponse
 
     PutConfigurationRecorderRequest.add_member(:configuration_recorder, Shapes::ShapeRef.new(shape: ConfigurationRecorder, required: true, location_name: "ConfigurationRecorder"))
     PutConfigurationRecorderRequest.struct_class = Types::PutConfigurationRecorderRequest
@@ -660,6 +902,15 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
       end)
 
+      api.add_operation(:delete_aggregation_authorization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAggregationAuthorization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAggregationAuthorizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:delete_config_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteConfigRule"
         o.http_method = "POST"
@@ -668,6 +919,15 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:delete_configuration_aggregator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConfigurationAggregator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConfigurationAggregatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
       end)
 
       api.add_operation(:delete_configuration_recorder, Seahorse::Model::Operation.new.tap do |o|
@@ -699,6 +959,15 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
+      api.add_operation(:delete_pending_aggregation_request, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePendingAggregationRequest"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePendingAggregationRequestRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:deliver_config_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeliverConfigSnapshot"
         o.http_method = "POST"
@@ -708,6 +977,29 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDeliveryChannelException)
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
         o.errors << Shapes::ShapeRef.new(shape: NoRunningConfigurationRecorderException)
+      end)
+
+      api.add_operation(:describe_aggregate_compliance_by_config_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAggregateComplianceByConfigRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConfigRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAggregateComplianceByConfigRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+      end)
+
+      api.add_operation(:describe_aggregation_authorizations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAggregationAuthorizations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAggregationAuthorizationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAggregationAuthorizationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
       end)
 
       api.add_operation(:describe_compliance_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -752,6 +1044,30 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
+      api.add_operation(:describe_configuration_aggregator_sources_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeConfigurationAggregatorSourcesStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeConfigurationAggregatorSourcesStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeConfigurationAggregatorSourcesStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+      end)
+
+      api.add_operation(:describe_configuration_aggregators, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeConfigurationAggregators"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeConfigurationAggregatorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeConfigurationAggregatorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+      end)
+
       api.add_operation(:describe_configuration_recorder_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeConfigurationRecorderStatus"
         o.http_method = "POST"
@@ -786,6 +1102,41 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: DescribeDeliveryChannelsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDeliveryChannelsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchDeliveryChannelException)
+      end)
+
+      api.add_operation(:describe_pending_aggregation_requests, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePendingAggregationRequests"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePendingAggregationRequestsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePendingAggregationRequestsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+      end)
+
+      api.add_operation(:get_aggregate_compliance_details_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAggregateComplianceDetailsByConfigRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAggregateComplianceDetailsByConfigRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAggregateComplianceDetailsByConfigRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
+      end)
+
+      api.add_operation(:get_aggregate_config_rule_compliance_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAggregateConfigRuleComplianceSummary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAggregateConfigRuleComplianceSummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAggregateConfigRuleComplianceSummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationAggregatorException)
       end)
 
       api.add_operation(:get_compliance_details_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -868,6 +1219,15 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
       end)
 
+      api.add_operation(:put_aggregation_authorization, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAggregationAuthorization"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAggregationAuthorizationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutAggregationAuthorizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
       api.add_operation(:put_config_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutConfigRule"
         o.http_method = "POST"
@@ -879,6 +1239,20 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
         o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
+      end)
+
+      api.add_operation(:put_configuration_aggregator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutConfigurationAggregator"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutConfigurationAggregatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutConfigurationAggregatorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoAvailableOrganizationException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationAllFeaturesNotEnabledException)
       end)
 
       api.add_operation(:put_configuration_recorder, Seahorse::Model::Operation.new.tap do |o|

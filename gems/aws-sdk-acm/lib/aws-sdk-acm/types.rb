@@ -152,7 +152,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/troubleshooting.html#troubleshooting-failed
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -166,8 +166,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
-    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
+    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/import-certificate.html
     #   @return [String]
     #
     # @!attribute [rw] renewal_summary
@@ -177,7 +177,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
     #   @return [Types::RenewalSummary]
     #
     # @!attribute [rw] key_usages
@@ -192,6 +192,18 @@ module Aws::ACM
     #   Each object specifies a purpose for which the certificate public key
     #   can be used and consists of a name and an object identifier (OID).
     #   @return [Array<Types::ExtendedKeyUsage>]
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The Amazon Resource Name (ARN) of the ACM PCA private certificate
+    #   authority (CA) that issued the certificate. This has the following
+    #   format:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_eligibility
+    #   Specifies whether the certificate is eligible for renewal.
+    #   @return [String]
     #
     # @!attribute [rw] options
     #   Value that specifies whether to add the certificate to a
@@ -228,6 +240,8 @@ module Aws::ACM
       :renewal_summary,
       :key_usages,
       :extended_key_usages,
+      :certificate_authority_arn,
+      :renewal_eligibility,
       :options)
       include Aws::Structure
     end
@@ -243,7 +257,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-concepts.html#concept-transparency
     #
     # @note When making an API call, you may pass CertificateOptions
     #   data as a hash:
@@ -395,7 +409,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html
     #   @return [Types::ResourceRecord]
     #
     # @!attribute [rw] validation_method
@@ -454,6 +468,61 @@ module Aws::ACM
     class DomainValidationOption < Struct.new(
       :domain_name,
       :validation_domain)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ExportCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "Arn", # required
+    #         passphrase: "data", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   An Amazon Resource Name (ARN) of the issued certificate. This must
+    #   be of the form:
+    #
+    #   `arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012`
+    #   @return [String]
+    #
+    # @!attribute [rw] passphrase
+    #   Passphrase to associate with the encrypted exported private key. If
+    #   you want to later decrypt the private key, you must have the
+    #   passphrase. You can use the following OpenSSL command to decrypt a
+    #   private key:
+    #
+    #   `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateRequest AWS API Documentation
+    #
+    class ExportCertificateRequest < Struct.new(
+      :certificate_arn,
+      :passphrase)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate
+    #   The base64 PEM-encoded certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_chain
+    #   The base64 PEM-encoded certificate chain. This does not include the
+    #   certificate that you are exporting.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key
+    #   The PEM-encoded private key associated with the public key in the
+    #   certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateResponse AWS API Documentation
+    #
+    class ExportCertificateResponse < Struct.new(
+      :certificate,
+      :certificate_chain,
+      :private_key)
       include Aws::Structure
     end
 
@@ -796,14 +865,14 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
     #
     # @!attribute [rw] renewal_status
     #   The status of ACM's [managed renewal][1] of the certificate.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
     #   @return [String]
     #
     # @!attribute [rw] domain_validation_options
@@ -815,7 +884,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
     #   @return [Array<Types::DomainValidation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewalSummary AWS API Documentation
@@ -843,6 +912,7 @@ module Aws::ACM
     #         options: {
     #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
     #         },
+    #         certificate_authority_arn: "Arn",
     #       }
     #
     # @!attribute [rw] domain_name
@@ -864,8 +934,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
-    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-email.html
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
@@ -896,7 +966,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-limits.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] idempotency_token
@@ -925,8 +995,22 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #   @return [Types::CertificateOptions]
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The Amazon Resource Name (ARN) of the private certificate authority
+    #   (CA) that will be used to issue the certificate. For more
+    #   information about private CAs, see the [AWS Certificate Manager
+    #   Private Certificate Authority (PCA)][1] user guide. The ARN must
+    #   have the following form:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm-pca/latest/userguide/PcaWelcome.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
     #
@@ -936,7 +1020,8 @@ module Aws::ACM
       :subject_alternative_names,
       :idempotency_token,
       :domain_validation_options,
-      :options)
+      :options,
+      :certificate_authority_arn)
       include Aws::Structure
     end
 
