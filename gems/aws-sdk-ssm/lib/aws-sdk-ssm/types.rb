@@ -84,22 +84,42 @@ module Aws::SSM
     #
     # @!attribute [rw] resource_type
     #   Specifies the type of resource you are tagging.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The resource ID you want to tag.
     #
-    #   For the ManagedInstance, MaintenanceWindow, and PatchBaseline
-    #   values, use the ID of the resource, such as mw-01234361858c9b57b for
-    #   a Maintenance Window.
+    #   Use the ID of the resource. Here are some examples:
+    #
+    #   ManagedInstance: mi-012345abcde
+    #
+    #   MaintenanceWindow: mw-012345abcde
+    #
+    #   PatchBaseline: pb-012345abcde
     #
     #   For the Document and Parameter values, use the name of the resource.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   One or more tags. The value parameter is required, but if you don't
     #   want the tag to have a value, specify the parameter with no value,
     #   and we set the value to an empty string.
+    #
+    #   Do not enter personally identifiable information in this field.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResourceRequest AWS API Documentation
@@ -742,7 +762,7 @@ module Aws::SSM
     #
     # @!attribute [rw] expires_after
     #   If this time is reached and the command has not already started
-    #   executing, it will not execute. Calculated based on the ExpiresAfter
+    #   executing, it will not run. Calculated based on the ExpiresAfter
     #   user input provided as part of the SendCommand API.
     #   @return [Time]
     #
@@ -1291,15 +1311,15 @@ module Aws::SSM
     #
     # @!attribute [rw] id
     #   An ID for the compliance item. For example, if the compliance item
-    #   is a Windows patch, the ID could be the number of the KB article.
-    #   Here's an example: KB4010320.
+    #   is a Windows patch, the ID could be the number of the KB article;
+    #   for example: KB4010320.
     #   @return [String]
     #
     # @!attribute [rw] title
     #   A title for the compliance item. For example, if the compliance item
     #   is a Windows patch, the title could be the title of the KB article
-    #   for the patch. Here's an example: Security Update for Active
-    #   Directory Federation Services.
+    #   for the patch; for example: Security Update for Active Directory
+    #   Federation Services.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1360,8 +1380,8 @@ module Aws::SSM
     # @!attribute [rw] title
     #   The title of the compliance item. For example, if the compliance
     #   item is a Windows patch, the title could be the title of the KB
-    #   article for the patch. Here's an example: Security Update for
-    #   Active Directory Federation Services.
+    #   article for the patch; for example: Security Update for Active
+    #   Directory Federation Services.
     #   @return [String]
     #
     # @!attribute [rw] severity
@@ -1478,14 +1498,18 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] description
-    #   A userdefined description of the resource that you want to register
+    #   A user-defined description of the resource that you want to register
     #   with Amazon EC2.
+    #
+    #   Do not enter personally identifiable information in this field.
     #   @return [String]
     #
     # @!attribute [rw] default_instance_name
     #   The name of the registered, managed instance as it will appear in
     #   the Amazon EC2 console or when you use the AWS command line tools to
     #   list EC2 resources.
+    #
+    #   Do not enter personally identifiable information in this field.
     #   @return [String]
     #
     # @!attribute [rw] iam_role
@@ -1974,14 +1998,20 @@ module Aws::SSM
     #
     # @!attribute [rw] approved_patches
     #   A list of explicitly approved patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] approved_patches_compliance_level
     #   Defines the compliance level for approved patches. This means that
     #   if an approved patch is reported as missing, this is the severity of
-    #   the compliance violation. Valid compliance severity levels include
-    #   the following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL,
-    #   UNSPECIFIED. The default value is UNSPECIFIED.
+    #   the compliance violation. The default value is UNSPECIFIED.
     #   @return [String]
     #
     # @!attribute [rw] approved_patches_enable_non_security
@@ -1992,6 +2022,14 @@ module Aws::SSM
     #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] description
@@ -4408,8 +4446,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the parent command for this invocation. This status
-    #   can be different than StatusDetails.
+    #   The status of this invocation plugin. This status can be different
+    #   than StatusDetails.
     #   @return [String]
     #
     # @!attribute [rw] status_details
@@ -5017,8 +5055,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
-    #   The parameters passed to the task when it was executed. The map has
-    #   the following format:
+    #   The parameters passed to the task when it was executed.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
+    #
+    #   The map has the following format:
     #
     #   Key: string, between 1 and 255 characters
     #
@@ -5207,6 +5254,14 @@ module Aws::SSM
     #
     # @!attribute [rw] task_parameters
     #   The parameters to pass to the task when it executes.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] task_invocation_parameters
@@ -5230,6 +5285,15 @@ module Aws::SSM
     #
     # @!attribute [rw] logging_info
     #   The location in Amazon S3 where the task results are logged.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name
@@ -5968,7 +6032,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] owner_information
-    #   Placeholder information, this field will always be empty in the
+    #   Placeholder information. This field will always be empty in the
     #   current release of the service.
     #   @return [String]
     #
@@ -7052,6 +7116,15 @@ module Aws::SSM
 
     # Information about an Amazon S3 bucket to write instance-level logs to.
     #
+    # <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    # options in the `TaskInvocationParameters` structure. For information
+    # about how Systems Manager handles these options for the supported
+    # Maintenance Window task types, see
+    # MaintenanceWindowTaskInvocationParameters.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass LoggingInfo
     #   data as a hash:
     #
@@ -7100,6 +7173,27 @@ module Aws::SSM
     #
     # @!attribute [rw] parameters
     #   The parameters for the AUTOMATION task.
+    #
+    #   For information about specifying and updating task parameters, see
+    #   RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    For AUTOMATION task types, Systems Manager ignores any values
+    #   specified for these parameters.
+    #
+    #    </note>
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowAutomationParameters AWS API Documentation
@@ -7345,6 +7439,27 @@ module Aws::SSM
 
     # The parameters for a LAMBDA task type.
     #
+    # For information about specifying and updating task parameters, see
+    # RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
+    #
+    # <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    # options in the `TaskInvocationParameters` structure. For information
+    # about how Systems Manager handles these options for the supported
+    # Maintenance Window task types, see
+    # MaintenanceWindowTaskInvocationParameters.
+    #
+    #  `TaskParameters` has been deprecated. To specify parameters to pass to
+    # a task when it runs, instead use the `Parameters` option in the
+    # `TaskInvocationParameters` structure. For information about how
+    # Systems Manager handles these options for the supported Maintenance
+    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #  For Lambda tasks, Systems Manager ignores any values specified for
+    # TaskParameters and LoggingInfo.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass MaintenanceWindowLambdaParameters
     #   data as a hash:
     #
@@ -7382,6 +7497,28 @@ module Aws::SSM
     end
 
     # The parameters for a RUN\_COMMAND task type.
+    #
+    # For information about specifying and updating task parameters, see
+    # RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
+    #
+    # <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    # options in the `TaskInvocationParameters` structure. For information
+    # about how Systems Manager handles these options for the supported
+    # Maintenance Window task types, see
+    # MaintenanceWindowTaskInvocationParameters.
+    #
+    #  `TaskParameters` has been deprecated. To specify parameters to pass to
+    # a task when it runs, instead use the `Parameters` option in the
+    # `TaskInvocationParameters` structure. For information about how
+    # Systems Manager handles these options for the supported Maintenance
+    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #  For Run Command tasks, Systems Manager uses specified values for
+    # `TaskParameters` and `LoggingInfo` only if no values are specified for
+    # `TaskInvocationParameters`.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass MaintenanceWindowRunCommandParameters
     #   data as a hash:
@@ -7458,7 +7595,28 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The parameters for the STEP\_FUNCTION execution.
+    # The parameters for a STEP\_FUNCTION task.
+    #
+    # For information about specifying and updating task parameters, see
+    # RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
+    #
+    # <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    # options in the `TaskInvocationParameters` structure. For information
+    # about how Systems Manager handles these options for the supported
+    # Maintenance Window task types, see
+    # MaintenanceWindowTaskInvocationParameters.
+    #
+    #  `TaskParameters` has been deprecated. To specify parameters to pass to
+    # a task when it runs, instead use the `Parameters` option in the
+    # `TaskInvocationParameters` structure. For information about how
+    # Systems Manager handles these options for the supported Maintenance
+    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #  For Step Functions tasks, Systems Manager ignores any values specified
+    # for `TaskParameters` and `LoggingInfo`.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass MaintenanceWindowStepFunctionsParameters
     #   data as a hash:
@@ -7564,6 +7722,14 @@ module Aws::SSM
     # @!attribute [rw] task_parameters
     #   The parameters that should be passed to the task when it is
     #   executed.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] priority
@@ -7574,6 +7740,15 @@ module Aws::SSM
     #
     # @!attribute [rw] logging_info
     #   Information about an Amazon S3 bucket to write task-level logs to.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] service_role_arn
@@ -7661,7 +7836,7 @@ module Aws::SSM
     #   @return [Types::MaintenanceWindowRunCommandParameters]
     #
     # @!attribute [rw] automation
-    #   The parameters for a AUTOMATION task type.
+    #   The parameters for an AUTOMATION task type.
     #   @return [Types::MaintenanceWindowAutomationParameters]
     #
     # @!attribute [rw] step_functions
@@ -8870,6 +9045,8 @@ module Aws::SSM
     #
     # @!attribute [rw] description
     #   Information about the parameter that you want to add to the system.
+    #
+    #   Do not enter personally identifiable information in this field.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -9026,10 +9203,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags). Instances are specified
-    #   using
-    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
-    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+    #   The targets (either instances or tags).
+    #
+    #   Specify instances using the following format:
+    #
+    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #
+    #   Specify tags using either of the following formats:
+    #
+    #   `Key=tag:<tag-key>,Values=<tag-value-1>,<tag-value-2>`
+    #
+    #   `Key=tag-key,Values=<tag-key-1>,<tag-key-2>`
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] owner_information
@@ -9144,14 +9328,19 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The id of the Maintenance Window the task should be added to.
+    #   The ID of the Maintenance Window the task should be added to.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags). Instances are specified
-    #   using
-    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
-    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+    #   The targets (either instances or Maintenance Window targets).
+    #
+    #   Specify instances using the following format:
+    #
+    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #
+    #   Specify Maintenance Window targets using the following format:
+    #
+    #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
@@ -9169,6 +9358,14 @@ module Aws::SSM
     # @!attribute [rw] task_parameters
     #   The parameters that should be passed to the task when it is
     #   executed.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] task_invocation_parameters
@@ -9196,6 +9393,15 @@ module Aws::SSM
     # @!attribute [rw] logging_info
     #   A structure containing information about an Amazon S3 bucket to
     #   write instance-level logs to.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name
@@ -9255,10 +9461,33 @@ module Aws::SSM
     #
     # @!attribute [rw] resource_type
     #   The type of resource of which you want to remove a tag.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The resource ID for which you want to remove tags.
+    #   The resource ID for which you want to remove tags. Use the ID of the
+    #   resource. Here are some examples:
+    #
+    #   ManagedInstance: mi-012345abcde
+    #
+    #   MaintenanceWindow: mw-012345abcde
+    #
+    #   PatchBaseline: pb-012345abcde
+    #
+    #   For the Document and Parameter values, use the name of the resource.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -9632,7 +9861,7 @@ module Aws::SSM
     #
     # @!attribute [rw] timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it will not execute.
+    #   executing, it will not run.
     #   @return [Integer]
     #
     # @!attribute [rw] comment
@@ -10660,7 +10889,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
-    #   The parameters to modify. The map has the following format:
+    #   The parameters to modify.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
+    #
+    #   The map has the following format:
     #
     #   Key: string, between 1 and 255 characters
     #
@@ -10694,6 +10933,15 @@ module Aws::SSM
     #
     # @!attribute [rw] logging_info
     #   The new logging location in Amazon S3 to specify.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name
@@ -10752,6 +11000,14 @@ module Aws::SSM
     #
     # @!attribute [rw] task_parameters
     #   The updated parameter values.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] task_invocation_parameters
@@ -10772,6 +11028,15 @@ module Aws::SSM
     #
     # @!attribute [rw] logging_info
     #   The updated logging information in Amazon S3.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name
@@ -10893,6 +11158,14 @@ module Aws::SSM
     #
     # @!attribute [rw] approved_patches
     #   A list of explicitly approved patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] approved_patches_compliance_level
@@ -10908,6 +11181,14 @@ module Aws::SSM
     #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] description
