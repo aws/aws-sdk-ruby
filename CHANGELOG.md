@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
+
 2.11.30 (2018-04-05)
 ------------------
 
