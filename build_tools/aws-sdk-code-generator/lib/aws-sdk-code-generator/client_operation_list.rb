@@ -19,7 +19,8 @@ module AwsSdkCodeGenerator
             examples: examples,
             client_examples: client_examples[method_name] || []
           ).to_s,
-          streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api)
+          streaming: AwsSdkCodeGenerator::Helper.operation_streaming?(operation, api),
+          eventstream_output: AwsSdkCodeGenerator::Helper.eventstream_output?(operation, api)
         )
       end
     end
@@ -35,6 +36,7 @@ module AwsSdkCodeGenerator
         @name = options.fetch(:name)
         @documentation = options.fetch(:documentation)
         @streaming = options.fetch(:streaming)
+        @eventstream_output = options.fetch(:eventstream_output)
       end
 
       # @return [String]
@@ -43,11 +45,19 @@ module AwsSdkCodeGenerator
       # @return [String, nil]
       attr_reader :documentation
 
+      # @return [Boolean]
+      attr_reader :eventstream_output
+
       def block_option
         if @streaming
           ", &block"
         end
       end
+
+      def eventstream_decode
+        "req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)"
+      end
+
     end
   end
 end

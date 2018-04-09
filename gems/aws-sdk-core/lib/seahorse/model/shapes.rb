@@ -10,6 +10,10 @@ module Seahorse
           @metadata = {}
           @required = false
           @deprecated = false
+          @event = false
+          @eventstream = false
+          @eventpayload = false
+          @eventheader = false
           options.each do |key, value|
             if key == :metadata
               value.each do |k,v|
@@ -32,6 +36,18 @@ module Seahorse
 
         # @return [Boolean]
         attr_accessor :deprecated
+
+        # @return [Boolean]
+        attr_accessor :event
+
+        # @return [Boolean]
+        attr_accessor :eventstream
+
+        # @return [Boolean]
+        attr_accessor :eventpayload
+
+        # @return [Boolean]
+        attr_accessor :eventheader
 
         # @return [String, nil]
         def location

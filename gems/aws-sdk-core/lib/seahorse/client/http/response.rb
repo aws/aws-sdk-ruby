@@ -10,6 +10,7 @@ module Seahorse
           @status_code = options[:status_code] || 0
           @headers = options[:headers] || Headers.new
           @body = options[:body] || StringIO.new
+          @raw_stream = options[:raw_stream] || StringIO.new
           @listeners = Hash.new { |h,k| h[k] = [] }
           @complete = false
           @done = nil
@@ -25,6 +26,12 @@ module Seahorse
 
         # @return [StandardError, nil]
         attr_reader :error
+
+        # Raw binary stream data used for eventstream only
+        # body is concatenated parsed event structs in StringIO
+        #
+        # @return [IO]
+        attr_accessor :raw_stream
 
         # @return [IO]
         def body
@@ -57,9 +64,15 @@ module Seahorse
         end
 
         # @param [string] chunk
-        def signal_data(chunk)
+        def signal_data(chunk, callbacks = nil)
           unless chunk == ''
+            # record raw binary stream for eventstream
+            # parsed event struct object is written to body
+            @raw_stream.write(chunk)
             @body.write(chunk)
+            if callbacks
+              @body.trigger(chunk, callbacks)
+            end
             emit(:data, chunk)
           end
         end

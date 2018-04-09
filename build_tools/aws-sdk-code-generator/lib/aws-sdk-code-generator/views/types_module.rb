@@ -30,10 +30,7 @@ module AwsSdkCodeGenerator
           if @service.protocol == 'api-gateway'
             shape_name = lstrip_prefix(upcase_first(shape_name))
           end
-          # exclude eventstream and event shapes
-          if shape['eventstream'] || shape['event']
-            list
-          elsif struct_type?(shape)
+          if struct_type?(shape)
             list << StructClass.new(
               class_name: shape_name,
               members: struct_members(shape),
@@ -45,13 +42,30 @@ module AwsSdkCodeGenerator
         end
       end
 
+      # return [Array<EventStreamClass>]
+      def eventstreams
+        @service.api['shapes'].inject([]) do |list, (shape_name, shape)|
+          if shape['eventstream']
+            list << EventStreamClass.new(
+              class_name: shape_name,
+              types: struct_members(shape),
+              documentation: eventstream_class_docs(shape_name)
+            )
+          else
+            list
+          end
+        end
+      end
+
       private
 
       def struct_members(shape)
         return if shape['members'].nil?
-        shape['members'].map do |member_name, _|
+        members = shape['members'].map do |member_name, _|
           StructMember.new(member_name: underscore(member_name))
         end
+        members << StructMember.new(member_name: "event_type") if shape['event']
+        members
       end
 
       def struct_class_docs(shape_name)
@@ -61,6 +75,19 @@ module AwsSdkCodeGenerator
           attribute_macros_docs(shape_name),
           see_also_tag(shape_name),
         ])
+      end
+
+      def eventstream_class_docs(shape_name)
+        join_docstrings([
+          html_to_markdown(Api.docstring(shape_name, @api)),
+          input_example_docs(shape_name),
+          eventstream_docs(shape_name),
+          see_also_tag(shape_name),
+        ])
+      end
+
+      def eventstream_docs(shape_name)
+        # TODO
       end
 
       def input_example_docs(shape_name)
@@ -154,6 +181,36 @@ module AwsSdkCodeGenerator
 
       def shape(shape_ref)
         Api.resolve(shape_ref, @api)[1]
+      end
+
+      class EventStreamClass
+
+        def initialize(options)
+          @class_name = options.fetch(:class_name)
+          @types = options.fetch(:types)
+          @documentation = options.fetch(:documentation)
+          if @types.nil? || @types.empty?
+            @empty = true
+          else
+            @empty = false
+            @types.last.last = true
+          end
+        end
+
+        # @return [String]
+        attr_accessor :class_name
+
+        # @return [Array<StructMember>]
+        attr_accessor :types
+
+        # @return [String, nil]
+        attr_accessor :documentation
+
+        # @return [Boolean]
+        def empty?
+          @empty
+        end
+
       end
 
       class StructClass

@@ -18,6 +18,26 @@ module {{module_name}}
     end
     {{/empty?}}
     {{/structures}}
+    {{#eventstreams}}
+
+    {{> documentation}}
+    class {{class_name}} < Enumerator
+
+      def event_types
+        {{#empty?}}
+        []
+        {{/empty?}}
+        {{^empty?}}
+        [
+        {{#types}}
+          :{{member_name}}{{^last}},{{/last}}
+        {{/types}}
+        ]
+        {{/empty?}}
+      end
+
+    end
+    {{/eventstreams}}
 
   end
 end

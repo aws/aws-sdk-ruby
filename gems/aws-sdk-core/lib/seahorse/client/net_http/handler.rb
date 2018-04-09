@@ -70,6 +70,8 @@ module Seahorse
         # @param [Http::Response] resp
         # @return [void]
         def transmit(config, req, resp)
+          # eventstream operations can have callback handlers
+          callbacks = config.eventstream_handler
           session(config, req) do |http|
             http.request(build_net_request(req)) do |net_resp|
 
@@ -80,7 +82,7 @@ module Seahorse
               resp.signal_headers(status_code, headers)
               net_resp.read_body do |chunk|
                 bytes_received += chunk.bytesize
-                resp.signal_data(chunk)
+                resp.signal_data(chunk, callbacks)
               end
               complete_response(req, resp, bytes_received)
 

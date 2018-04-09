@@ -175,6 +175,16 @@ module AwsSdkCodeGenerator
       end
     end
 
+    def eventstream_output?(operation, api)
+      return false unless operation.key? 'output'
+      output_shape = api['shapes'][operation['output']['shape']]
+      return false unless output_shape.key? 'members'
+      output_shape['members'].each do |name, ref|
+        return true if Api.eventstream?(ref, api)
+      end
+      return false
+    end
+
     def deep_copy(obj)
       case obj
       when nil then nil
@@ -197,7 +207,7 @@ module AwsSdkCodeGenerator
       str.gsub(/(.{1,#{width}})(\s+|\Z)/, "#{indent}\\1\n").chomp
     end
 
-    module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string, :apig_prefix
+    module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string, :apig_prefix, :eventstream_output?
 
   end
 end
