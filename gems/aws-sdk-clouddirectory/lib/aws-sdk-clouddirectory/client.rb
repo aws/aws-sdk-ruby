@@ -145,7 +145,8 @@ module Aws::CloudDirectory
 
     # @!group API Operations
 
-    # Adds a new Facet to an object.
+    # Adds a new Facet to an object. An object can have more than one facet
+    # applied on it.
     #
     # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory
@@ -292,7 +293,7 @@ module Aws::CloudDirectory
     # Attaches a policy object to a regular object. An object can have a
     # limited number of attached policies.
     #
-    # @option params [String] :directory_arn
+    # @option params [required, String] :directory_arn
     #   The Amazon Resource Name (ARN) that is associated with the Directory
     #   where both objects reside. For more information, see arns.
     #
@@ -308,7 +309,7 @@ module Aws::CloudDirectory
     # @example Request syntax with placeholder values
     #
     #   resp = client.attach_policy({
-    #     directory_arn: "Arn",
+    #     directory_arn: "Arn", # required
     #     policy_reference: { # required
     #       selector: "SelectorObjectReference",
     #     },
@@ -507,6 +508,16 @@ module Aws::CloudDirectory
     #             selector: "SelectorObjectReference",
     #           },
     #         },
+    #         get_object_attributes: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           schema_facet: { # required
+    #             schema_arn: "Arn",
+    #             facet_name: "FacetName",
+    #           },
+    #           attribute_names: ["AttributeName"], # required
+    #         },
     #         list_object_policies: {
     #           object_reference: { # required
     #             selector: "SelectorObjectReference",
@@ -655,6 +666,15 @@ module Aws::CloudDirectory
     #   resp.responses[0].successful_response.get_object_information.schema_facets[0].schema_arn #=> String
     #   resp.responses[0].successful_response.get_object_information.schema_facets[0].facet_name #=> String
     #   resp.responses[0].successful_response.get_object_information.object_identifier #=> String
+    #   resp.responses[0].successful_response.get_object_attributes.attributes #=> Array
+    #   resp.responses[0].successful_response.get_object_attributes.attributes[0].key.schema_arn #=> String
+    #   resp.responses[0].successful_response.get_object_attributes.attributes[0].key.facet_name #=> String
+    #   resp.responses[0].successful_response.get_object_attributes.attributes[0].key.name #=> String
+    #   resp.responses[0].successful_response.get_object_attributes.attributes[0].value.string_value #=> String
+    #   resp.responses[0].successful_response.get_object_attributes.attributes[0].value.binary_value #=> String
+    #   resp.responses[0].successful_response.get_object_attributes.attributes[0].value.boolean_value #=> Boolean
+    #   resp.responses[0].successful_response.get_object_attributes.attributes[0].value.number_value #=> String
+    #   resp.responses[0].successful_response.get_object_attributes.attributes[0].value.datetime_value #=> Time
     #   resp.responses[0].successful_response.list_attached_indices.index_attachments #=> Array
     #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes #=> Array
     #   resp.responses[0].successful_response.list_attached_indices.index_attachments[0].indexed_attributes[0].key.schema_arn #=> String
@@ -778,11 +798,11 @@ module Aws::CloudDirectory
     #               },
     #             },
     #           ],
-    #           parent_reference: { # required
+    #           parent_reference: {
     #             selector: "SelectorObjectReference",
     #           },
-    #           link_name: "LinkName", # required
-    #           batch_reference_name: "BatchReferenceName", # required
+    #           link_name: "LinkName",
+    #           batch_reference_name: "BatchReferenceName",
     #         },
     #         attach_object: {
     #           parent_reference: { # required
@@ -798,7 +818,7 @@ module Aws::CloudDirectory
     #             selector: "SelectorObjectReference",
     #           },
     #           link_name: "LinkName", # required
-    #           batch_reference_name: "BatchReferenceName", # required
+    #           batch_reference_name: "BatchReferenceName",
     #         },
     #         update_object_attributes: {
     #           object_reference: { # required
@@ -1833,6 +1853,68 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Retrieves attributes within a facet that are associated with an
+    # object.
+    #
+    # @option params [required, String] :directory_arn
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides.
+    #
+    # @option params [required, Types::ObjectReference] :object_reference
+    #   Reference that identifies the object whose attributes will be
+    #   retrieved.
+    #
+    # @option params [String] :consistency_level
+    #   The consistency level at which to retrieve the attributes on an
+    #   object.
+    #
+    # @option params [required, Types::SchemaFacet] :schema_facet
+    #   Identifier for the facet whose attributes will be retrieved. See
+    #   SchemaFacet for details.
+    #
+    # @option params [required, Array<String>] :attribute_names
+    #   List of attribute names whose values will be retrieved.
+    #
+    # @return [Types::GetObjectAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetObjectAttributesResponse#attributes #attributes} => Array&lt;Types::AttributeKeyAndValue&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_object_attributes({
+    #     directory_arn: "Arn", # required
+    #     object_reference: { # required
+    #       selector: "SelectorObjectReference",
+    #     },
+    #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #     schema_facet: { # required
+    #       schema_arn: "Arn",
+    #       facet_name: "FacetName",
+    #     },
+    #     attribute_names: ["AttributeName"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].key.schema_arn #=> String
+    #   resp.attributes[0].key.facet_name #=> String
+    #   resp.attributes[0].key.name #=> String
+    #   resp.attributes[0].value.string_value #=> String
+    #   resp.attributes[0].value.binary_value #=> String
+    #   resp.attributes[0].value.boolean_value #=> Boolean
+    #   resp.attributes[0].value.number_value #=> String
+    #   resp.attributes[0].value.datetime_value #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributes AWS API Documentation
+    #
+    # @overload get_object_attributes(params = {})
+    # @param [Hash] params ({})
+    def get_object_attributes(params = {}, options = {})
+      req = build_request(:get_object_attributes, params)
+      req.send_request(options)
+    end
+
     # Retrieves metadata about an object.
     #
     # @option params [required, String] :directory_arn
@@ -2331,7 +2413,7 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Lists objects and indexed values attached to the index.
+    # Lists objects attached to the specified index.
     #
     # @option params [required, String] :directory_arn
     #   The ARN of the directory that the index exists in.
@@ -2880,8 +2962,9 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Lists schema major versions for a published schema. If `SchemaArn` is
-    # provided, lists the minor version.
+    # Lists the major version families of each published schema. If a major
+    # version ARN is provided as `SchemaArn`, the minor version revisions in
+    # that family are listed instead.
     #
     # @option params [String] :schema_arn
     #   The response for `ListPublishedSchemaArns` when this parameter is used
@@ -3661,7 +3744,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

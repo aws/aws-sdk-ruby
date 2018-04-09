@@ -173,7 +173,7 @@ module Aws::CloudDirectory
     #   data as a hash:
     #
     #       {
-    #         directory_arn: "Arn",
+    #         directory_arn: "Arn", # required
     #         policy_reference: { # required
     #           selector: "SelectorObjectReference",
     #         },
@@ -792,11 +792,11 @@ module Aws::CloudDirectory
     #             },
     #           },
     #         ],
-    #         parent_reference: { # required
+    #         parent_reference: {
     #           selector: "SelectorObjectReference",
     #         },
-    #         link_name: "LinkName", # required
-    #         batch_reference_name: "BatchReferenceName", # required
+    #         link_name: "LinkName",
+    #         batch_reference_name: "BatchReferenceName",
     #       }
     #
     # @!attribute [rw] schema_facet
@@ -934,7 +934,7 @@ module Aws::CloudDirectory
     #           selector: "SelectorObjectReference",
     #         },
     #         link_name: "LinkName", # required
-    #         batch_reference_name: "BatchReferenceName", # required
+    #         batch_reference_name: "BatchReferenceName",
     #       }
     #
     # @!attribute [rw] parent_reference
@@ -1065,6 +1065,60 @@ module Aws::CloudDirectory
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachTypedLinkResponse AWS API Documentation
     #
     class BatchDetachTypedLinkResponse < Aws::EmptyStructure; end
+
+    # Retrieves attributes within a facet that are associated with an object
+    # inside an BatchRead operation. For more information, see
+    # GetObjectAttributes and BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchGetObjectAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         schema_facet: { # required
+    #           schema_arn: "Arn",
+    #           facet_name: "FacetName",
+    #         },
+    #         attribute_names: ["AttributeName"], # required
+    #       }
+    #
+    # @!attribute [rw] object_reference
+    #   Reference that identifies the object whose attributes will be
+    #   retrieved.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] schema_facet
+    #   Identifier for the facet whose attributes will be retrieved. See
+    #   SchemaFacet for details.
+    #   @return [Types::SchemaFacet]
+    #
+    # @!attribute [rw] attribute_names
+    #   List of attribute names whose values will be retrieved.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectAttributes AWS API Documentation
+    #
+    class BatchGetObjectAttributes < Struct.new(
+      :object_reference,
+      :schema_facet,
+      :attribute_names)
+      include Aws::Structure
+    end
+
+    # Represents the output of a GetObjectAttributes response operation.
+    #
+    # @!attribute [rw] attributes
+    #   The attribute values that are associated with an object.
+    #   @return [Array<Types::AttributeKeyAndValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectAttributesResponse AWS API Documentation
+    #
+    class BatchGetObjectAttributesResponse < Struct.new(
+      :attributes)
+      include Aws::Structure
+    end
 
     # Retrieves metadata about an object inside a BatchRead operation. For
     # more information, see GetObjectInformation and
@@ -1852,6 +1906,16 @@ module Aws::CloudDirectory
     #             selector: "SelectorObjectReference",
     #           },
     #         },
+    #         get_object_attributes: {
+    #           object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           schema_facet: { # required
+    #             schema_arn: "Arn",
+    #             facet_name: "FacetName",
+    #           },
+    #           attribute_names: ["AttributeName"], # required
+    #         },
     #         list_object_policies: {
     #           object_reference: { # required
     #             selector: "SelectorObjectReference",
@@ -2004,6 +2068,11 @@ module Aws::CloudDirectory
     #   Retrieves metadata about an object.
     #   @return [Types::BatchGetObjectInformation]
     #
+    # @!attribute [rw] get_object_attributes
+    #   Retrieves attributes within a facet that are associated with an
+    #   object.
+    #   @return [Types::BatchGetObjectAttributes]
+    #
     # @!attribute [rw] list_object_policies
     #   Returns policies attached to an object in pagination fashion.
     #   @return [Types::BatchListObjectPolicies]
@@ -2062,6 +2131,7 @@ module Aws::CloudDirectory
       :list_attached_indices,
       :list_object_parent_paths,
       :get_object_information,
+      :get_object_attributes,
       :list_object_policies,
       :list_policy_attachments,
       :lookup_policy,
@@ -2132,6 +2202,16 @@ module Aws::CloudDirectory
     #               object_reference: { # required
     #                 selector: "SelectorObjectReference",
     #               },
+    #             },
+    #             get_object_attributes: {
+    #               object_reference: { # required
+    #                 selector: "SelectorObjectReference",
+    #               },
+    #               schema_facet: { # required
+    #                 schema_arn: "Arn",
+    #                 facet_name: "FacetName",
+    #               },
+    #               attribute_names: ["AttributeName"], # required
     #             },
     #             list_object_policies: {
     #               object_reference: { # required
@@ -2311,6 +2391,11 @@ module Aws::CloudDirectory
     #   Retrieves metadata about an object.
     #   @return [Types::BatchGetObjectInformationResponse]
     #
+    # @!attribute [rw] get_object_attributes
+    #   Retrieves attributes within a facet that are associated with an
+    #   object.
+    #   @return [Types::BatchGetObjectAttributesResponse]
+    #
     # @!attribute [rw] list_attached_indices
     #   Lists indices attached to an object.
     #   @return [Types::BatchListAttachedIndicesResponse]
@@ -2381,6 +2466,7 @@ module Aws::CloudDirectory
       :list_object_attributes,
       :list_object_children,
       :get_object_information,
+      :get_object_attributes,
       :list_attached_indices,
       :list_object_parent_paths,
       :list_object_policies,
@@ -2517,11 +2603,11 @@ module Aws::CloudDirectory
     #               },
     #             },
     #           ],
-    #           parent_reference: { # required
+    #           parent_reference: {
     #             selector: "SelectorObjectReference",
     #           },
-    #           link_name: "LinkName", # required
-    #           batch_reference_name: "BatchReferenceName", # required
+    #           link_name: "LinkName",
+    #           batch_reference_name: "BatchReferenceName",
     #         },
     #         attach_object: {
     #           parent_reference: { # required
@@ -2537,7 +2623,7 @@ module Aws::CloudDirectory
     #             selector: "SelectorObjectReference",
     #           },
     #           link_name: "LinkName", # required
-    #           batch_reference_name: "BatchReferenceName", # required
+    #           batch_reference_name: "BatchReferenceName",
     #         },
     #         update_object_attributes: {
     #           object_reference: { # required
@@ -2915,11 +3001,11 @@ module Aws::CloudDirectory
     #                   },
     #                 },
     #               ],
-    #               parent_reference: { # required
+    #               parent_reference: {
     #                 selector: "SelectorObjectReference",
     #               },
-    #               link_name: "LinkName", # required
-    #               batch_reference_name: "BatchReferenceName", # required
+    #               link_name: "LinkName",
+    #               batch_reference_name: "BatchReferenceName",
     #             },
     #             attach_object: {
     #               parent_reference: { # required
@@ -2935,7 +3021,7 @@ module Aws::CloudDirectory
     #                 selector: "SelectorObjectReference",
     #               },
     #               link_name: "LinkName", # required
-    #               batch_reference_name: "BatchReferenceName", # required
+    #               batch_reference_name: "BatchReferenceName",
     #             },
     #             update_object_attributes: {
     #               object_reference: { # required
@@ -3923,8 +4009,12 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # A structure that contains `Name`, `ARN`, `Attributes`, Rules, and
-    # `ObjectTypes`.
+    # A structure that contains `Name`, `ARN`, `Attributes`, ` Rules`, and
+    # `ObjectTypes`. See [Facets][1] for more information.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html
     #
     # @!attribute [rw] name
     #   The name of the Facet.
@@ -4250,6 +4340,68 @@ module Aws::CloudDirectory
     #
     class GetFacetResponse < Struct.new(
       :facet)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetObjectAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_arn: "Arn", # required
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #         schema_facet: { # required
+    #           schema_arn: "Arn",
+    #           facet_name: "FacetName",
+    #         },
+    #         attribute_names: ["AttributeName"], # required
+    #       }
+    #
+    # @!attribute [rw] directory_arn
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the object resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_reference
+    #   Reference that identifies the object whose attributes will be
+    #   retrieved.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] consistency_level
+    #   The consistency level at which to retrieve the attributes on an
+    #   object.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_facet
+    #   Identifier for the facet whose attributes will be retrieved. See
+    #   SchemaFacet for details.
+    #   @return [Types::SchemaFacet]
+    #
+    # @!attribute [rw] attribute_names
+    #   List of attribute names whose values will be retrieved.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributesRequest AWS API Documentation
+    #
+    class GetObjectAttributesRequest < Struct.new(
+      :directory_arn,
+      :object_reference,
+      :consistency_level,
+      :schema_facet,
+      :attribute_names)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The attributes that are associated with the object.
+    #   @return [Array<Types::AttributeKeyAndValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributesResponse AWS API Documentation
+    #
+    class GetObjectAttributesResponse < Struct.new(
+      :attributes)
       include Aws::Structure
     end
 
@@ -6192,7 +6344,12 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # A range of attribute values.
+    # A range of attribute values. For more information, see [Range
+    # Filters][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters
     #
     # @note When making an API call, you may pass TypedAttributeValueRange
     #   data as a hash:
