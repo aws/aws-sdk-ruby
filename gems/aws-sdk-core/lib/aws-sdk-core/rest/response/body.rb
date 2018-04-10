@@ -31,8 +31,6 @@ module Aws
 
         private
 
-        # TODO?
-        # not payload marked?
         def event_stream?
           @rules[:payload] && @rules[:payload_member].eventstream
         end

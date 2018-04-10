@@ -16,6 +16,10 @@ module {{module_name}}
       end
 
       {{/types}}
+      def on_error_event(&block)
+        on_event(:error, Proc.new)
+      end
+
       private
 
       def on_event(type, callback)

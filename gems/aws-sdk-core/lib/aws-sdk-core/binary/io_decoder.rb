@@ -8,10 +8,13 @@ module Aws
       # @param [String] protocol
       # @param [ShapeRef] rules ShapeRef of the eventstream member
       # @param [IO#write] io An IO-like object that responds to `#write`
-      def initialize(protocol, rules, io)
+      # @param [Proc|nil] callbacks A Proc object that registered with callbacks
+      #   for processing events when they arrive
+      def initialize(protocol, rules, io, callbacks = nil)
         @decoder = Aws::EventStream::Decoder.new
         @event_parser = EventParser.new(parser_class(protocol), rules)
         @stream_class = extract_stream_class(rules.shape.struct_class)
+        @callbacks = callbacks
         @io = io
       end
 
@@ -21,13 +24,9 @@ module Aws
       def write(chunk)
         # wrap decoded parsed event with callbacks in a event stream
         @decoder.decode(StringIO.new(chunk)) do |raw_event|
-          @io.write(@stream_class.new(data: @event_parser.apply(raw_event)))
-        end
-      end
-
-      def trigger(chunk, callbacks)
-        @decoder.decode(StringIO.new(chunk)) do |raw_event|
-          callbacks.call(@stream_class.new(data: @event_parser.apply(raw_event)))
+          event = @stream_class.new(data: @event_parser.apply(raw_event))
+          @callbacks.call(event) unless @callbacks.nil?
+          @io.write(event)
         end
       end
 

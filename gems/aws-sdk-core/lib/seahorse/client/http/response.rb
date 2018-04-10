@@ -64,15 +64,12 @@ module Seahorse
         end
 
         # @param [string] chunk
-        def signal_data(chunk, callbacks = nil)
+        def signal_data(chunk)
           unless chunk == ''
             # record raw binary stream for eventstream
             # parsed event struct object is written to body
             @raw_stream.write(chunk)
             @body.write(chunk)
-            if callbacks
-              @body.trigger(chunk, callbacks)
-            end
             emit(:data, chunk)
           end
         end

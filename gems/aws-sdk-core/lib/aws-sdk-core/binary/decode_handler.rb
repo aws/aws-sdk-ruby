@@ -24,7 +24,10 @@ module Aws
         context.http_response.on_headers(200) do
           protocol = context.config.api.metadata['protocol']
           context.http_response.body = IODecoder.new(
-            protocol, rules, context.http_response.body)
+            protocol,
+            rules,
+            context.http_response.body,
+            context.config.eventstream_handler)
         end
 
         context.http_response.on_success(200) do

@@ -6,8 +6,7 @@ module Aws
   # example usage:
   #
   #   client.stream_foo(name: 'bar') do |event|
-  #     case event.event_type
-  #     when :error
+  #     stream.on_error_event do |event|
   #       raise "Error #{event.error_code}: #{event.error_message}"
   #     end
   #   end
