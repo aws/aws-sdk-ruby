@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.33 (2018-04-10)
+------------------
+
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
 
 * Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
