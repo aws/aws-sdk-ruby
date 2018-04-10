@@ -185,39 +185,19 @@ module Aws::SSM
     # @option params [required, String] :resource_type
     #   Specifies the type of resource you are tagging.
     #
-    #   <note markdown="1"> The ManagedInstance type for this API action is for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
-    #
-    #    </note>
-    #
     # @option params [required, String] :resource_id
     #   The resource ID you want to tag.
     #
-    #   Use the ID of the resource. Here are some examples:
-    #
-    #   ManagedInstance: mi-012345abcde
-    #
-    #   MaintenanceWindow: mw-012345abcde
-    #
-    #   PatchBaseline: pb-012345abcde
+    #   For the ManagedInstance, MaintenanceWindow, and PatchBaseline values,
+    #   use the ID of the resource, such as mw-01234361858c9b57b for a
+    #   Maintenance Window.
     #
     #   For the Document and Parameter values, use the name of the resource.
-    #
-    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
-    #
-    #    </note>
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   One or more tags. The value parameter is required, but if you don't
     #   want the tag to have a value, specify the parameter with no value, and
     #   we set the value to an empty string.
-    #
-    #   Do not enter personally identifiable information in this field.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -285,17 +265,13 @@ module Aws::SSM
     # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html
     #
     # @option params [String] :description
-    #   A user-defined description of the resource that you want to register
+    #   A userdefined description of the resource that you want to register
     #   with Amazon EC2.
-    #
-    #   Do not enter personally identifiable information in this field.
     #
     # @option params [String] :default_instance_name
     #   The name of the registered, managed instance as it will appear in the
     #   Amazon EC2 console or when you use the AWS command line tools to list
     #   EC2 resources.
-    #
-    #   Do not enter personally identifiable information in this field.
     #
     # @option params [required, String] :iam_role
     #   The Amazon Identity and Access Management (IAM) role that you want to
@@ -741,18 +717,12 @@ module Aws::SSM
     # @option params [Array<String>] :approved_patches
     #   A list of explicitly approved patches for the baseline.
     #
-    #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [Package Name Formats for Approved and
-    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
-    #
     # @option params [String] :approved_patches_compliance_level
     #   Defines the compliance level for approved patches. This means that if
     #   an approved patch is reported as missing, this is the severity of the
-    #   compliance violation. The default value is UNSPECIFIED.
+    #   compliance violation. Valid compliance severity levels include the
+    #   following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED.
+    #   The default value is UNSPECIFIED.
     #
     # @option params [Boolean] :approved_patches_enable_non_security
     #   Indicates whether the list of approved patches includes non-security
@@ -761,14 +731,6 @@ module Aws::SSM
     #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
-    #
-    #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [Package Name Formats for Approved and
-    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -2881,9 +2843,6 @@ module Aws::SSM
     # supports creating multiple default patch baselines. For example, you
     # can create a default patch baseline for each operating system.
     #
-    # If you do not specify an operating system value, the default patch
-    # baseline for Windows is returned.
-    #
     # @option params [String] :operating_system
     #   Returns the default patch baseline for the specified operating system.
     #
@@ -4767,8 +4726,6 @@ module Aws::SSM
     # @option params [String] :description
     #   Information about the parameter that you want to add to the system.
     #
-    #   Do not enter personally identifiable information in this field.
-    #
     # @option params [required, String] :value
     #   The parameter value that you want to add to the system.
     #
@@ -4891,17 +4848,9 @@ module Aws::SSM
     #   The type of target being registered with the Maintenance Window.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   The targets (either instances or tags).
-    #
-    #   Specify instances using the following format:
-    #
-    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
-    #
-    #   Specify tags using either of the following formats:
-    #
-    #   `Key=tag:<tag-key>,Values=<tag-value-1>,<tag-value-2>`
-    #
-    #   `Key=tag-key,Values=<tag-key-1>,<tag-key-2>`
+    #   The targets (either instances or tags). Instances are specified using
+    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
+    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
     #
     # @option params [String] :owner_information
     #   User-provided value that will be included in any CloudWatch events
@@ -4957,18 +4906,12 @@ module Aws::SSM
     # Adds a new task to a Maintenance Window.
     #
     # @option params [required, String] :window_id
-    #   The ID of the Maintenance Window the task should be added to.
+    #   The id of the Maintenance Window the task should be added to.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   The targets (either instances or Maintenance Window targets).
-    #
-    #   Specify instances using the following format:
-    #
-    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
-    #
-    #   Specify Maintenance Window targets using the following format:
-    #
-    #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
+    #   The targets (either instances or tags). Instances are specified using
+    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
+    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
     #
     # @option params [required, String] :task_arn
     #   The ARN of the task to execute
@@ -4981,14 +4924,6 @@ module Aws::SSM
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
     #   The parameters that should be passed to the task when it is executed.
-    #
-    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
-    #   a task when it runs, instead use the `Parameters` option in the
-    #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
-    #
-    #    </note>
     #
     # @option params [Types::MaintenanceWindowTaskInvocationParameters] :task_invocation_parameters
     #   The parameters that the task should use during execution. Populate
@@ -5011,15 +4946,6 @@ module Aws::SSM
     # @option params [Types::LoggingInfo] :logging_info
     #   A structure containing information about an Amazon S3 bucket to write
     #   instance-level logs to.
-    #
-    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
-    #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
-    #   options in the `TaskInvocationParameters` structure. For information
-    #   about how Systems Manager handles these options for the supported
-    #   Maintenance Window task types, see
-    #   MaintenanceWindowTaskInvocationParameters.
-    #
-    #    </note>
     #
     # @option params [String] :name
     #   An optional name for the task.
@@ -5120,31 +5046,8 @@ module Aws::SSM
     # @option params [required, String] :resource_type
     #   The type of resource of which you want to remove a tag.
     #
-    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
-    #
-    #    </note>
-    #
     # @option params [required, String] :resource_id
-    #   The resource ID for which you want to remove tags. Use the ID of the
-    #   resource. Here are some examples:
-    #
-    #   ManagedInstance: mi-012345abcde
-    #
-    #   MaintenanceWindow: mw-012345abcde
-    #
-    #   PatchBaseline: pb-012345abcde
-    #
-    #   For the Document and Parameter values, use the name of the resource.
-    #
-    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
-    #   managed instances. You must specify the the name of the managed
-    #   instance in the following format: mi-ID\_number. For example,
-    #   mi-1a2b3c4d5e6f.
-    #
-    #    </note>
+    #   The resource ID for which you want to remove tags.
     #
     # @option params [required, Array<String>] :tag_keys
     #   Tag keys that you want to remove from the specified resource.
@@ -5249,7 +5152,7 @@ module Aws::SSM
     #
     # @option params [Integer] :timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it will not run.
+    #   executing, it will not execute.
     #
     # @option params [String] :comment
     #   User-specified information about the command, such as a brief
@@ -5949,18 +5852,18 @@ module Aws::SSM
     # Modifies a task assigned to a Maintenance Window. You can't change
     # the task type, but you can change the following values:
     #
-    # * TaskARN. For example, you can change a RUN\_COMMAND task from
-    #   AWS-RunPowerShellScript to AWS-RunShellScript.
+    # Task ARN. For example, you can change a RUN\_COMMAND task from
+    # AWS-RunPowerShellScript to AWS-RunShellScript.
     #
-    # * ServiceRoleArn
+    # Service role ARN.
     #
-    # * TaskInvocationParameters
+    # Task parameters.
     #
-    # * Priority
+    # Task priority.
     #
-    # * MaxConcurrency
+    # Task MaxConcurrency and MaxErrors.
     #
-    # * MaxErrors
+    # Log location.
     #
     # If a parameter is null, then the corresponding field is not modified.
     # Also, if you set Replace to true, then all fields required by the
@@ -5986,17 +5889,7 @@ module Aws::SSM
     #   during task execution.
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
-    #   The parameters to modify.
-    #
-    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
-    #   a task when it runs, instead use the `Parameters` option in the
-    #   `TaskInvocationParameters` structure. For information about how
-    #   Systems Manager handles these options for the supported Maintenance
-    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
-    #
-    #    </note>
-    #
-    #   The map has the following format:
+    #   The parameters to modify. The map has the following format:
     #
     #   Key: string, between 1 and 255 characters
     #
@@ -6024,15 +5917,6 @@ module Aws::SSM
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   The new logging location in Amazon S3 to specify.
-    #
-    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
-    #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
-    #   options in the `TaskInvocationParameters` structure. For information
-    #   about how Systems Manager handles these options for the supported
-    #   Maintenance Window task types, see
-    #   MaintenanceWindowTaskInvocationParameters.
-    #
-    #    </note>
     #
     # @option params [String] :name
     #   The new task name to specify.
@@ -6234,14 +6118,6 @@ module Aws::SSM
     # @option params [Array<String>] :approved_patches
     #   A list of explicitly approved patches for the baseline.
     #
-    #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [Package Name Formats for Approved and
-    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
-    #
     # @option params [String] :approved_patches_compliance_level
     #   Assigns a new compliance severity level to an existing patch baseline.
     #
@@ -6252,14 +6128,6 @@ module Aws::SSM
     #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
-    #
-    #   For information about accepted formats for lists of approved patches
-    #   and rejected patches, see [Package Name Formats for Approved and
-    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -6389,7 +6257,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

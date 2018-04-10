@@ -155,10 +155,11 @@ module Aws::DatabaseMigrationService
 
     # @!group API Operations
 
-    # Adds metadata tags to a DMS resource, including replication instance,
-    # endpoint, security group, and migration task. These tags can also be
-    # used with cost allocation reporting to track cost associated with DMS
-    # resources, or used in a Condition statement in an IAM policy for DMS.
+    # Adds metadata tags to an AWS DMS resource, including replication
+    # instance, endpoint, security group, and migration task. These tags can
+    # also be used with cost allocation reporting to track cost associated
+    # with DMS resources, or used in a Condition statement in an IAM policy
+    # for DMS.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to
@@ -225,7 +226,8 @@ module Aws::DatabaseMigrationService
     # @option params [required, String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
     #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb,
+    #   mongodb, and sqlserver.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -266,6 +268,13 @@ module Aws::DatabaseMigrationService
     #
     #   The default value is none.
     #
+    # @option params [String] :service_access_role_arn
+    #   The Amazon Resource Name (ARN) for the service access role you want to
+    #   use to create the endpoint.
+    #
+    # @option params [String] :external_table_definition
+    #   The external table definition.
+    #
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
     #   more information about the available settings, see the **Using Object
@@ -277,7 +286,7 @@ module Aws::DatabaseMigrationService
     #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html
     #
     # @option params [Types::S3Settings] :s3_settings
-    #   Settings in JSON format for the target S3 endpoint. For more
+    #   Settings in JSON format for the target Amazon S3 endpoint. For more
     #   information about the available settings, see the **Extra Connection
     #   Attributes** section at [ Using Amazon S3 as a Target for AWS Database
     #   Migration Service][1].
@@ -363,6 +372,8 @@ module Aws::DatabaseMigrationService
     #     ],
     #     certificate_arn: "String",
     #     ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #     service_access_role_arn: "String",
+    #     external_table_definition: "String",
     #     dynamo_db_settings: {
     #       service_access_role_arn: "String", # required
     #     },
@@ -387,6 +398,7 @@ module Aws::DatabaseMigrationService
     #       extract_doc_id: "String",
     #       docs_to_investigate: "String",
     #       auth_source: "String",
+    #       kms_key_id: "String",
     #     },
     #   })
     #
@@ -395,6 +407,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_identifier #=> String
     #   resp.endpoint.endpoint_type #=> String, one of "source", "target"
     #   resp.endpoint.engine_name #=> String
+    #   resp.endpoint.engine_display_name #=> String
     #   resp.endpoint.username #=> String
     #   resp.endpoint.server_name #=> String
     #   resp.endpoint.port #=> Integer
@@ -405,6 +418,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
     #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.endpoint.service_access_role_arn #=> String
+    #   resp.endpoint.external_table_definition #=> String
     #   resp.endpoint.external_id #=> String
     #   resp.endpoint.dynamo_db_settings.service_access_role_arn #=> String
     #   resp.endpoint.s3_settings.service_access_role_arn #=> String
@@ -425,6 +440,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.extract_doc_id #=> String
     #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
+    #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
@@ -459,7 +475,7 @@ module Aws::DatabaseMigrationService
     # [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html
     #
     # @option params [required, String] :subscription_name
-    #   The name of the DMS event notification subscription.
+    #   The name of the AWS DMS event notification subscription.
     #
     #   Constraints: The name must be less than 255 characters.
     #
@@ -778,6 +794,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
+    #   resp.replication_instance.free_until #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstance AWS API Documentation
     #
@@ -918,7 +935,34 @@ module Aws::DatabaseMigrationService
     #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
-    #   The start time for the Change Data Capture (CDC) operation.
+    #   Indicates the start time for a change data capture (CDC) operation.
+    #   Use either CdcStartTime or CdcStartPosition to specify when you want a
+    #   CDC operation to start. Specifying both values results in an error.
+    #
+    # @option params [String] :cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. Use either CdcStartPosition or CdcStartTime to specify when you
+    #   want a CDC operation to start. Specifying both values results in an
+    #   error.
+    #
+    #   The value can be in date, checkpoint, or LSN/SCN format.
+    #
+    #   Date Example: --cdc-start-position “2018-03-08T12:12:12”
+    #
+    #   Checkpoint Example: --cdc-start-position
+    #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+    #
+    #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #
+    # @option params [String] :cdc_stop_position
+    #   Indicates when you want a change data capture (CDC) operation to stop.
+    #   The value can be either server time or commit time.
+    #
+    #   Server time example: --cdc-stop-position
+    #   “server\_time:3018-02-09T12:12:12”
+    #
+    #   Commit time example: --cdc-stop-position “commit\_time:
+    #   3018-02-09T12:12:12 “
     #
     # @option params [Array<Types::Tag>] :tags
     #   Tags to be added to the replication instance.
@@ -976,6 +1020,8 @@ module Aws::DatabaseMigrationService
     #     table_mappings: "String", # required
     #     replication_task_settings: "String",
     #     cdc_start_time: Time.now,
+    #     cdc_start_position: "String",
+    #     cdc_stop_position: "String",
     #     tags: [
     #       {
     #         key: "String",
@@ -998,6 +1044,9 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.cdc_start_position #=> String
+    #   resp.replication_task.cdc_stop_position #=> String
+    #   resp.replication_task.recovery_checkpoint #=> String
     #   resp.replication_task.replication_task_arn #=> String
     #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
     #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
@@ -1118,6 +1167,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_identifier #=> String
     #   resp.endpoint.endpoint_type #=> String, one of "source", "target"
     #   resp.endpoint.engine_name #=> String
+    #   resp.endpoint.engine_display_name #=> String
     #   resp.endpoint.username #=> String
     #   resp.endpoint.server_name #=> String
     #   resp.endpoint.port #=> Integer
@@ -1128,6 +1178,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
     #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.endpoint.service_access_role_arn #=> String
+    #   resp.endpoint.external_table_definition #=> String
     #   resp.endpoint.external_id #=> String
     #   resp.endpoint.dynamo_db_settings.service_access_role_arn #=> String
     #   resp.endpoint.s3_settings.service_access_role_arn #=> String
@@ -1148,6 +1200,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.extract_doc_id #=> String
     #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
+    #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
@@ -1318,6 +1371,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
+    #   resp.replication_instance.free_until #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstance AWS API Documentation
     #
@@ -1417,6 +1471,9 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.cdc_start_position #=> String
+    #   resp.replication_task.cdc_stop_position #=> String
+    #   resp.replication_task.recovery_checkpoint #=> String
     #   resp.replication_task.replication_task_arn #=> String
     #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
     #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
@@ -1749,6 +1806,7 @@ module Aws::DatabaseMigrationService
     #   resp.supported_endpoint_types[0].engine_name #=> String
     #   resp.supported_endpoint_types[0].supports_cdc #=> Boolean
     #   resp.supported_endpoint_types[0].endpoint_type #=> String, one of "source", "target"
+    #   resp.supported_endpoint_types[0].engine_display_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypes AWS API Documentation
     #
@@ -1834,6 +1892,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].endpoint_identifier #=> String
     #   resp.endpoints[0].endpoint_type #=> String, one of "source", "target"
     #   resp.endpoints[0].engine_name #=> String
+    #   resp.endpoints[0].engine_display_name #=> String
     #   resp.endpoints[0].username #=> String
     #   resp.endpoints[0].server_name #=> String
     #   resp.endpoints[0].port #=> Integer
@@ -1844,6 +1903,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].endpoint_arn #=> String
     #   resp.endpoints[0].certificate_arn #=> String
     #   resp.endpoints[0].ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.endpoints[0].service_access_role_arn #=> String
+    #   resp.endpoints[0].external_table_definition #=> String
     #   resp.endpoints[0].external_id #=> String
     #   resp.endpoints[0].dynamo_db_settings.service_access_role_arn #=> String
     #   resp.endpoints[0].s3_settings.service_access_role_arn #=> String
@@ -1864,6 +1925,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].mongo_db_settings.extract_doc_id #=> String
     #   resp.endpoints[0].mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoints[0].mongo_db_settings.auth_source #=> String
+    #   resp.endpoints[0].mongo_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints AWS API Documentation
     #
@@ -2365,6 +2427,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].replication_instance_private_ip_addresses[0] #=> String
     #   resp.replication_instances[0].publicly_accessible #=> Boolean
     #   resp.replication_instances[0].secondary_availability_zone #=> String
+    #   resp.replication_instances[0].free_until #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstances AWS API Documentation
     #
@@ -2605,6 +2668,9 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].stop_reason #=> String
     #   resp.replication_tasks[0].replication_task_creation_date #=> Time
     #   resp.replication_tasks[0].replication_task_start_date #=> Time
+    #   resp.replication_tasks[0].cdc_start_position #=> String
+    #   resp.replication_tasks[0].cdc_stop_position #=> String
+    #   resp.replication_tasks[0].recovery_checkpoint #=> String
     #   resp.replication_tasks[0].replication_task_arn #=> String
     #   resp.replication_tasks[0].replication_task_stats.full_load_progress_percent #=> Integer
     #   resp.replication_tasks[0].replication_task_stats.elapsed_time_millis #=> Integer
@@ -2927,7 +2993,8 @@ module Aws::DatabaseMigrationService
     # @option params [String] :engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
     #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase,
+    #   dynamodb, mongodb, and sqlserver.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -2959,6 +3026,13 @@ module Aws::DatabaseMigrationService
     #   verify-full.
     #
     #   The default value is none.
+    #
+    # @option params [String] :service_access_role_arn
+    #   The Amazon Resource Name (ARN) for the service access role you want to
+    #   use to modify the endpoint.
+    #
+    # @option params [String] :external_table_definition
+    #   The external table definition.
     #
     # @option params [Types::DynamoDbSettings] :dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
@@ -3036,6 +3110,8 @@ module Aws::DatabaseMigrationService
     #     extra_connection_attributes: "String",
     #     certificate_arn: "String",
     #     ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #     service_access_role_arn: "String",
+    #     external_table_definition: "String",
     #     dynamo_db_settings: {
     #       service_access_role_arn: "String", # required
     #     },
@@ -3060,6 +3136,7 @@ module Aws::DatabaseMigrationService
     #       extract_doc_id: "String",
     #       docs_to_investigate: "String",
     #       auth_source: "String",
+    #       kms_key_id: "String",
     #     },
     #   })
     #
@@ -3068,6 +3145,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_identifier #=> String
     #   resp.endpoint.endpoint_type #=> String, one of "source", "target"
     #   resp.endpoint.engine_name #=> String
+    #   resp.endpoint.engine_display_name #=> String
     #   resp.endpoint.username #=> String
     #   resp.endpoint.server_name #=> String
     #   resp.endpoint.port #=> Integer
@@ -3078,6 +3156,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
     #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #   resp.endpoint.service_access_role_arn #=> String
+    #   resp.endpoint.external_table_definition #=> String
     #   resp.endpoint.external_id #=> String
     #   resp.endpoint.dynamo_db_settings.service_access_role_arn #=> String
     #   resp.endpoint.s3_settings.service_access_role_arn #=> String
@@ -3098,6 +3178,7 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.mongo_db_settings.extract_doc_id #=> String
     #   resp.endpoint.mongo_db_settings.docs_to_investigate #=> String
     #   resp.endpoint.mongo_db_settings.auth_source #=> String
+    #   resp.endpoint.mongo_db_settings.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
@@ -3378,6 +3459,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
+    #   resp.replication_instance.free_until #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstance AWS API Documentation
     #
@@ -3493,7 +3575,34 @@ module Aws::DatabaseMigrationService
     #   settings.
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
-    #   The start time for the Change Data Capture (CDC) operation.
+    #   Indicates the start time for a change data capture (CDC) operation.
+    #   Use either CdcStartTime or CdcStartPosition to specify when you want a
+    #   CDC operation to start. Specifying both values results in an error.
+    #
+    # @option params [String] :cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. Use either CdcStartPosition or CdcStartTime to specify when you
+    #   want a CDC operation to start. Specifying both values results in an
+    #   error.
+    #
+    #   The value can be in date, checkpoint, or LSN/SCN format.
+    #
+    #   Date Example: --cdc-start-position “2018-03-08T12:12:12”
+    #
+    #   Checkpoint Example: --cdc-start-position
+    #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+    #
+    #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #
+    # @option params [String] :cdc_stop_position
+    #   Indicates when you want a change data capture (CDC) operation to stop.
+    #   The value can be either server time or commit time.
+    #
+    #   Server time example: --cdc-stop-position
+    #   “server\_time:3018-02-09T12:12:12”
+    #
+    #   Commit time example: --cdc-stop-position “commit\_time:
+    #   3018-02-09T12:12:12 “
     #
     # @return [Types::ModifyReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3508,6 +3617,8 @@ module Aws::DatabaseMigrationService
     #     table_mappings: "String",
     #     replication_task_settings: "String",
     #     cdc_start_time: Time.now,
+    #     cdc_start_position: "String",
+    #     cdc_stop_position: "String",
     #   })
     #
     # @example Response structure
@@ -3524,6 +3635,9 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.cdc_start_position #=> String
+    #   resp.replication_task.cdc_stop_position #=> String
+    #   resp.replication_task.recovery_checkpoint #=> String
     #   resp.replication_task.replication_task_arn #=> String
     #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
     #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
@@ -3600,6 +3714,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
+    #   resp.replication_instance.free_until #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstance AWS API Documentation
     #
@@ -3762,7 +3877,34 @@ module Aws::DatabaseMigrationService
     #   The type of replication task.
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
-    #   The start time for the Change Data Capture (CDC) operation.
+    #   Indicates the start time for a change data capture (CDC) operation.
+    #   Use either CdcStartTime or CdcStartPosition to specify when you want a
+    #   CDC operation to start. Specifying both values results in an error.
+    #
+    # @option params [String] :cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. Use either CdcStartPosition or CdcStartTime to specify when you
+    #   want a CDC operation to start. Specifying both values results in an
+    #   error.
+    #
+    #   The value can be in date, checkpoint, or LSN/SCN format.
+    #
+    #   Date Example: --cdc-start-position “2018-03-08T12:12:12”
+    #
+    #   Checkpoint Example: --cdc-start-position
+    #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+    #
+    #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #
+    # @option params [String] :cdc_stop_position
+    #   Indicates when you want a change data capture (CDC) operation to stop.
+    #   The value can be either server time or commit time.
+    #
+    #   Server time example: --cdc-stop-position
+    #   “server\_time:3018-02-09T12:12:12”
+    #
+    #   Commit time example: --cdc-stop-position “commit\_time:
+    #   3018-02-09T12:12:12 “
     #
     # @return [Types::StartReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3801,6 +3943,8 @@ module Aws::DatabaseMigrationService
     #     replication_task_arn: "String", # required
     #     start_replication_task_type: "start-replication", # required, accepts start-replication, resume-processing, reload-target
     #     cdc_start_time: Time.now,
+    #     cdc_start_position: "String",
+    #     cdc_stop_position: "String",
     #   })
     #
     # @example Response structure
@@ -3817,6 +3961,9 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.cdc_start_position #=> String
+    #   resp.replication_task.cdc_stop_position #=> String
+    #   resp.replication_task.recovery_checkpoint #=> String
     #   resp.replication_task.replication_task_arn #=> String
     #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
     #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
@@ -3864,6 +4011,9 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.cdc_start_position #=> String
+    #   resp.replication_task.cdc_stop_position #=> String
+    #   resp.replication_task.recovery_checkpoint #=> String
     #   resp.replication_task.replication_task_arn #=> String
     #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
     #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
@@ -3935,6 +4085,9 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.cdc_start_position #=> String
+    #   resp.replication_task.cdc_stop_position #=> String
+    #   resp.replication_task.recovery_checkpoint #=> String
     #   resp.replication_task.replication_task_arn #=> String
     #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
     #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
@@ -4020,7 +4173,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

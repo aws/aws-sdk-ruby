@@ -87,6 +87,142 @@ module Aws::MediaPackage
       include Aws::Structure
     end
 
+    # A Common Media Application Format (CMAF) encryption configuration.
+    #
+    # @note When making an API call, you may pass CmafEncryption
+    #   data as a hash:
+    #
+    #       {
+    #         key_rotation_interval_seconds: 1,
+    #         speke_key_provider: { # required
+    #           resource_id: "__string", # required
+    #           role_arn: "__string", # required
+    #           system_ids: ["__string"], # required
+    #           url: "__string", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] key_rotation_interval_seconds
+    #   Time (in seconds) between each encryption key rotation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] speke_key_provider
+    #   A configuration for accessing an external Secure Packager and
+    #   Encoder Key Exchange (SPEKE) service that will provide encryption
+    #   keys.
+    #   @return [Types::SpekeKeyProvider]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafEncryption AWS API Documentation
+    #
+    class CmafEncryption < Struct.new(
+      :key_rotation_interval_seconds,
+      :speke_key_provider)
+      include Aws::Structure
+    end
+
+    # A Common Media Application Format (CMAF) packaging configuration.
+    #
+    # @!attribute [rw] encryption
+    #   A Common Media Application Format (CMAF) encryption configuration.
+    #   @return [Types::CmafEncryption]
+    #
+    # @!attribute [rw] hls_manifests
+    #   A list of HLS manifest configurations
+    #   @return [Array<Types::HlsManifest>]
+    #
+    # @!attribute [rw] segment_duration_seconds
+    #   Duration (in seconds) of each segment. Actual segments will be
+    #   rounded to the nearest multiple of the source segment duration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment_prefix
+    #   An optional custom string that is prepended to the name of each
+    #   segment. If not specified, it defaults to the ChannelId.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_selection
+    #   A StreamSelection configuration.
+    #   @return [Types::StreamSelection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafPackage AWS API Documentation
+    #
+    class CmafPackage < Struct.new(
+      :encryption,
+      :hls_manifests,
+      :segment_duration_seconds,
+      :segment_prefix,
+      :stream_selection)
+      include Aws::Structure
+    end
+
+    # A Common Media Application Format (CMAF) packaging configuration.
+    #
+    # @note When making an API call, you may pass CmafPackageCreateOrUpdateParameters
+    #   data as a hash:
+    #
+    #       {
+    #         encryption: {
+    #           key_rotation_interval_seconds: 1,
+    #           speke_key_provider: { # required
+    #             resource_id: "__string", # required
+    #             role_arn: "__string", # required
+    #             system_ids: ["__string"], # required
+    #             url: "__string", # required
+    #           },
+    #         },
+    #         hls_manifests: [
+    #           {
+    #             ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #             id: "__string", # required
+    #             include_iframe_only_stream: false,
+    #             manifest_name: "__string",
+    #             playlist_type: "NONE", # accepts NONE, EVENT, VOD
+    #             playlist_window_seconds: 1,
+    #             program_date_time_interval_seconds: 1,
+    #           },
+    #         ],
+    #         segment_duration_seconds: 1,
+    #         segment_prefix: "__string",
+    #         stream_selection: {
+    #           max_video_bits_per_second: 1,
+    #           min_video_bits_per_second: 1,
+    #           stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
+    #         },
+    #       }
+    #
+    # @!attribute [rw] encryption
+    #   A Common Media Application Format (CMAF) encryption configuration.
+    #   @return [Types::CmafEncryption]
+    #
+    # @!attribute [rw] hls_manifests
+    #   A list of HLS manifest configurations
+    #   @return [Array<Types::HlsManifestCreateOrUpdateParameters>]
+    #
+    # @!attribute [rw] segment_duration_seconds
+    #   Duration (in seconds) of each segment. Actual segments will be
+    #   rounded to the nearest multiple of the source segment duration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment_prefix
+    #   An optional custom string that is prepended to the name of each
+    #   segment. If not specified, it defaults to the ChannelId.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_selection
+    #   A StreamSelection configuration.
+    #   @return [Types::StreamSelection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafPackageCreateOrUpdateParameters AWS API Documentation
+    #
+    class CmafPackageCreateOrUpdateParameters < Struct.new(
+      :encryption,
+      :hls_manifests,
+      :segment_duration_seconds,
+      :segment_prefix,
+      :stream_selection)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateChannelRequest
     #   data as a hash:
     #
@@ -137,6 +273,35 @@ module Aws::MediaPackage
     #
     #       {
     #         channel_id: "__string", # required
+    #         cmaf_package: {
+    #           encryption: {
+    #             key_rotation_interval_seconds: 1,
+    #             speke_key_provider: { # required
+    #               resource_id: "__string", # required
+    #               role_arn: "__string", # required
+    #               system_ids: ["__string"], # required
+    #               url: "__string", # required
+    #             },
+    #           },
+    #           hls_manifests: [
+    #             {
+    #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #               id: "__string", # required
+    #               include_iframe_only_stream: false,
+    #               manifest_name: "__string",
+    #               playlist_type: "NONE", # accepts NONE, EVENT, VOD
+    #               playlist_window_seconds: 1,
+    #               program_date_time_interval_seconds: 1,
+    #             },
+    #           ],
+    #           segment_duration_seconds: 1,
+    #           segment_prefix: "__string",
+    #           stream_selection: {
+    #             max_video_bits_per_second: 1,
+    #             min_video_bits_per_second: 1,
+    #             stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
+    #           },
+    #         },
     #         dash_package: {
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
@@ -213,6 +378,10 @@ module Aws::MediaPackage
     # @!attribute [rw] channel_id
     #   @return [String]
     #
+    # @!attribute [rw] cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #   @return [Types::CmafPackageCreateOrUpdateParameters]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -248,6 +417,7 @@ module Aws::MediaPackage
     #
     class CreateOriginEndpointRequest < Struct.new(
       :channel_id,
+      :cmaf_package,
       :dash_package,
       :description,
       :hls_package,
@@ -265,6 +435,10 @@ module Aws::MediaPackage
     #
     # @!attribute [rw] channel_id
     #   @return [String]
+    #
+    # @!attribute [rw] cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #   @return [Types::CmafPackage]
     #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
@@ -305,6 +479,7 @@ module Aws::MediaPackage
     class CreateOriginEndpointResponse < Struct.new(
       :arn,
       :channel_id,
+      :cmaf_package,
       :dash_package,
       :description,
       :hls_package,
@@ -537,6 +712,10 @@ module Aws::MediaPackage
     # @!attribute [rw] channel_id
     #   @return [String]
     #
+    # @!attribute [rw] cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #   @return [Types::CmafPackage]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -576,6 +755,7 @@ module Aws::MediaPackage
     class DescribeOriginEndpointResponse < Struct.new(
       :arn,
       :channel_id,
+      :cmaf_package,
       :dash_package,
       :description,
       :hls_package,
@@ -652,6 +832,148 @@ module Aws::MediaPackage
     #
     class HlsIngest < Struct.new(
       :ingest_endpoints)
+      include Aws::Structure
+    end
+
+    # A HTTP Live Streaming (HLS) manifest configuration.
+    #
+    # @!attribute [rw] ad_markers
+    #   This setting controls how ad markers are included in the packaged
+    #   OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the
+    #   output. "PASSTHROUGH" causes the manifest to contain a copy of the
+    #   SCTE-35 ad markers (comments) taken directly from the input HTTP
+    #   Live Streaming (HLS) manifest. "SCTE35\_ENHANCED" generates ad
+    #   markers and blackout tags based on SCTE-35 messages in the input
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the manifest. The ID must be unique within the
+    #   OriginEndpoint and it cannot be changed after it is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_iframe_only_stream
+    #   When enabled, an I-Frame only stream will be included in the output.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] manifest_name
+    #   An optional short string appended to the end of the OriginEndpoint
+    #   URL. If not specified, defaults to the manifestName for the
+    #   OriginEndpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] playlist_type
+    #   The HTTP Live Streaming (HLS) playlist type. When either "EVENT"
+    #   or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry
+    #   will be included in the media playlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] playlist_window_seconds
+    #   Time window (in seconds) contained in each parent manifest.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_date_time_interval_seconds
+    #   The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+    #   inserted into manifests. Additionally, when an interval is specified
+    #   ID3Timed Metadata messages will be generated every 5 seconds using
+    #   the ingest time of the content. If the interval is not specified, or
+    #   set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into
+    #   manifests and no ID3Timed Metadata messages will be generated. Note
+    #   that irrespective of this parameter, if any ID3 Timed Metadata is
+    #   found in HTTP Live Streaming (HLS) input, it will be passed through
+    #   to HLS output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url
+    #   The URL of the packaged OriginEndpoint for consumption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsManifest AWS API Documentation
+    #
+    class HlsManifest < Struct.new(
+      :ad_markers,
+      :id,
+      :include_iframe_only_stream,
+      :manifest_name,
+      :playlist_type,
+      :playlist_window_seconds,
+      :program_date_time_interval_seconds,
+      :url)
+      include Aws::Structure
+    end
+
+    # A HTTP Live Streaming (HLS) manifest configuration.
+    #
+    # @note When making an API call, you may pass HlsManifestCreateOrUpdateParameters
+    #   data as a hash:
+    #
+    #       {
+    #         ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #         id: "__string", # required
+    #         include_iframe_only_stream: false,
+    #         manifest_name: "__string",
+    #         playlist_type: "NONE", # accepts NONE, EVENT, VOD
+    #         playlist_window_seconds: 1,
+    #         program_date_time_interval_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] ad_markers
+    #   This setting controls how ad markers are included in the packaged
+    #   OriginEndpoint. "NONE" will omit all SCTE-35 ad markers from the
+    #   output. "PASSTHROUGH" causes the manifest to contain a copy of the
+    #   SCTE-35 ad markers (comments) taken directly from the input HTTP
+    #   Live Streaming (HLS) manifest. "SCTE35\_ENHANCED" generates ad
+    #   markers and blackout tags based on SCTE-35 messages in the input
+    #   source.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the manifest. The ID must be unique within the
+    #   OriginEndpoint and it cannot be changed after it is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_iframe_only_stream
+    #   When enabled, an I-Frame only stream will be included in the output.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] manifest_name
+    #   An optional short string appended to the end of the OriginEndpoint
+    #   URL. If not specified, defaults to the manifestName for the
+    #   OriginEndpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] playlist_type
+    #   The HTTP Live Streaming (HLS) playlist type. When either "EVENT"
+    #   or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry
+    #   will be included in the media playlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] playlist_window_seconds
+    #   Time window (in seconds) contained in each parent manifest.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] program_date_time_interval_seconds
+    #   The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+    #   inserted into manifests. Additionally, when an interval is specified
+    #   ID3Timed Metadata messages will be generated every 5 seconds using
+    #   the ingest time of the content. If the interval is not specified, or
+    #   set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into
+    #   manifests and no ID3Timed Metadata messages will be generated. Note
+    #   that irrespective of this parameter, if any ID3 Timed Metadata is
+    #   found in HTTP Live Streaming (HLS) input, it will be passed through
+    #   to HLS output.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsManifestCreateOrUpdateParameters AWS API Documentation
+    #
+    class HlsManifestCreateOrUpdateParameters < Struct.new(
+      :ad_markers,
+      :id,
+      :include_iframe_only_stream,
+      :manifest_name,
+      :playlist_type,
+      :playlist_window_seconds,
+      :program_date_time_interval_seconds)
       include Aws::Structure
     end
 
@@ -942,6 +1264,10 @@ module Aws::MediaPackage
     #   The ID of the Channel the OriginEndpoint is associated with.
     #   @return [String]
     #
+    # @!attribute [rw] cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #   @return [Types::CmafPackage]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -993,6 +1319,7 @@ module Aws::MediaPackage
     class OriginEndpoint < Struct.new(
       :arn,
       :channel_id,
+      :cmaf_package,
       :dash_package,
       :description,
       :hls_package,
@@ -1012,6 +1339,10 @@ module Aws::MediaPackage
     #   The ID of the Channel that the OriginEndpoint will be associated
     #   with. This cannot be changed after the OriginEndpoint is created.
     #   @return [String]
+    #
+    # @!attribute [rw] cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #   @return [Types::CmafPackageCreateOrUpdateParameters]
     #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
@@ -1061,6 +1392,7 @@ module Aws::MediaPackage
     #
     class OriginEndpointCreateParameters < Struct.new(
       :channel_id,
+      :cmaf_package,
       :dash_package,
       :description,
       :hls_package,
@@ -1093,6 +1425,10 @@ module Aws::MediaPackage
     end
 
     # Configuration parameters for updating an existing OriginEndpoint.
+    #
+    # @!attribute [rw] cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #   @return [Types::CmafPackageCreateOrUpdateParameters]
     #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
@@ -1135,6 +1471,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/OriginEndpointUpdateParameters AWS API Documentation
     #
     class OriginEndpointUpdateParameters < Struct.new(
+      :cmaf_package,
       :dash_package,
       :description,
       :hls_package,
@@ -1307,6 +1644,35 @@ module Aws::MediaPackage
     #   data as a hash:
     #
     #       {
+    #         cmaf_package: {
+    #           encryption: {
+    #             key_rotation_interval_seconds: 1,
+    #             speke_key_provider: { # required
+    #               resource_id: "__string", # required
+    #               role_arn: "__string", # required
+    #               system_ids: ["__string"], # required
+    #               url: "__string", # required
+    #             },
+    #           },
+    #           hls_manifests: [
+    #             {
+    #               ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #               id: "__string", # required
+    #               include_iframe_only_stream: false,
+    #               manifest_name: "__string",
+    #               playlist_type: "NONE", # accepts NONE, EVENT, VOD
+    #               playlist_window_seconds: 1,
+    #               program_date_time_interval_seconds: 1,
+    #             },
+    #           ],
+    #           segment_duration_seconds: 1,
+    #           segment_prefix: "__string",
+    #           stream_selection: {
+    #             max_video_bits_per_second: 1,
+    #             min_video_bits_per_second: 1,
+    #             stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
+    #           },
+    #         },
     #         dash_package: {
     #           encryption: {
     #             key_rotation_interval_seconds: 1,
@@ -1380,6 +1746,10 @@ module Aws::MediaPackage
     #         whitelist: ["__string"],
     #       }
     #
+    # @!attribute [rw] cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #   @return [Types::CmafPackageCreateOrUpdateParameters]
+    #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
     #   configuration.
@@ -1414,6 +1784,7 @@ module Aws::MediaPackage
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateOriginEndpointRequest AWS API Documentation
     #
     class UpdateOriginEndpointRequest < Struct.new(
+      :cmaf_package,
       :dash_package,
       :description,
       :hls_package,
@@ -1431,6 +1802,10 @@ module Aws::MediaPackage
     #
     # @!attribute [rw] channel_id
     #   @return [String]
+    #
+    # @!attribute [rw] cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #   @return [Types::CmafPackage]
     #
     # @!attribute [rw] dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging
@@ -1471,6 +1846,7 @@ module Aws::MediaPackage
     class UpdateOriginEndpointResponse < Struct.new(
       :arn,
       :channel_id,
+      :cmaf_package,
       :dash_package,
       :description,
       :hls_package,

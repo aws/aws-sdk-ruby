@@ -201,6 +201,8 @@ module Aws::DatabaseMigrationService
     #         ],
     #         certificate_arn: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         service_access_role_arn: "String",
+    #         external_table_definition: "String",
     #         dynamo_db_settings: {
     #           service_access_role_arn: "String", # required
     #         },
@@ -225,6 +227,7 @@ module Aws::DatabaseMigrationService
     #           extract_doc_id: "String",
     #           docs_to_investigate: "String",
     #           auth_source: "String",
+    #           kms_key_id: "String",
     #         },
     #       }
     #
@@ -241,7 +244,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
     #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, dynamodb,
+    #   mongodb, and sqlserver.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -294,6 +298,15 @@ module Aws::DatabaseMigrationService
     #   The default value is none.
     #   @return [String]
     #
+    # @!attribute [rw] service_access_role_arn
+    #   The Amazon Resource Name (ARN) for the service access role you want
+    #   to use to create the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_table_definition
+    #   The external table definition.
+    #   @return [String]
+    #
     # @!attribute [rw] dynamo_db_settings
     #   Settings in JSON format for the target Amazon DynamoDB endpoint. For
     #   more information about the available settings, see the **Using
@@ -307,7 +320,7 @@ module Aws::DatabaseMigrationService
     #   @return [Types::DynamoDbSettings]
     #
     # @!attribute [rw] s3_settings
-    #   Settings in JSON format for the target S3 endpoint. For more
+    #   Settings in JSON format for the target Amazon S3 endpoint. For more
     #   information about the available settings, see the **Extra Connection
     #   Attributes** section at [ Using Amazon S3 as a Target for AWS
     #   Database Migration Service][1].
@@ -345,6 +358,8 @@ module Aws::DatabaseMigrationService
       :tags,
       :certificate_arn,
       :ssl_mode,
+      :service_access_role_arn,
+      :external_table_definition,
       :dynamo_db_settings,
       :s3_settings,
       :mongo_db_settings)
@@ -381,7 +396,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] subscription_name
-    #   The name of the DMS event notification subscription.
+    #   The name of the AWS DMS event notification subscription.
     #
     #   Constraints: The name must be less than 255 characters.
     #   @return [String]
@@ -678,6 +693,8 @@ module Aws::DatabaseMigrationService
     #         table_mappings: "String", # required
     #         replication_task_settings: "String",
     #         cdc_start_time: Time.now,
+    #         cdc_start_position: "String",
+    #         cdc_stop_position: "String",
     #         tags: [
     #           {
     #             key: "String",
@@ -736,8 +753,38 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] cdc_start_time
-    #   The start time for the Change Data Capture (CDC) operation.
+    #   Indicates the start time for a change data capture (CDC) operation.
+    #   Use either CdcStartTime or CdcStartPosition to specify when you want
+    #   a CDC operation to start. Specifying both values results in an
+    #   error.
     #   @return [Time]
+    #
+    # @!attribute [rw] cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. Use either CdcStartPosition or CdcStartTime to specify when
+    #   you want a CDC operation to start. Specifying both values results in
+    #   an error.
+    #
+    #   The value can be in date, checkpoint, or LSN/SCN format.
+    #
+    #   Date Example: --cdc-start-position “2018-03-08T12:12:12”
+    #
+    #   Checkpoint Example: --cdc-start-position
+    #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+    #
+    #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_stop_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   stop. The value can be either server time or commit time.
+    #
+    #   Server time example: --cdc-stop-position
+    #   “server\_time:3018-02-09T12:12:12”
+    #
+    #   Commit time example: --cdc-stop-position “commit\_time:
+    #   3018-02-09T12:12:12 “
+    #   @return [String]
     #
     # @!attribute [rw] tags
     #   Tags to be added to the replication instance.
@@ -754,6 +801,8 @@ module Aws::DatabaseMigrationService
       :table_mappings,
       :replication_task_settings,
       :cdc_start_time,
+      :cdc_start_position,
+      :cdc_stop_position,
       :tags)
       include Aws::Structure
     end
@@ -1992,7 +2041,14 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] engine_name
     #   The database engine name. Valid values, depending on the
     #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase,
+    #   dynamodb, mongodb, and sqlserver.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_display_name
+    #   The expanded name for the engine name. For example, if the
+    #   `EngineName` parameter is "aurora," this value would be "Amazon
+    #   Aurora MySQL."
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -2047,6 +2103,14 @@ module Aws::DatabaseMigrationService
     #   The default value is none.
     #   @return [String]
     #
+    # @!attribute [rw] service_access_role_arn
+    #   The Amazon Resource Name (ARN) used by the service access IAM role.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_table_definition
+    #   The external table definition.
+    #   @return [String]
+    #
     # @!attribute [rw] external_id
     #   Value returned by a call to CreateEndpoint that can be used for
     #   cross-account validation. Use it on a subsequent call to
@@ -2074,6 +2138,7 @@ module Aws::DatabaseMigrationService
       :endpoint_identifier,
       :endpoint_type,
       :engine_name,
+      :engine_display_name,
       :username,
       :server_name,
       :port,
@@ -2084,6 +2149,8 @@ module Aws::DatabaseMigrationService
       :endpoint_arn,
       :certificate_arn,
       :ssl_mode,
+      :service_access_role_arn,
+      :external_table_definition,
       :external_id,
       :dynamo_db_settings,
       :s3_settings,
@@ -2337,6 +2404,8 @@ module Aws::DatabaseMigrationService
     #         extra_connection_attributes: "String",
     #         certificate_arn: "String",
     #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
+    #         service_access_role_arn: "String",
+    #         external_table_definition: "String",
     #         dynamo_db_settings: {
     #           service_access_role_arn: "String", # required
     #         },
@@ -2361,6 +2430,7 @@ module Aws::DatabaseMigrationService
     #           extract_doc_id: "String",
     #           docs_to_investigate: "String",
     #           auth_source: "String",
+    #           kms_key_id: "String",
     #         },
     #       }
     #
@@ -2382,7 +2452,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] engine_name
     #   The type of engine for the endpoint. Valid values, depending on the
     #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase,
+    #   dynamodb, mongodb, and sqlserver.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -2422,6 +2493,15 @@ module Aws::DatabaseMigrationService
     #   verify-full.
     #
     #   The default value is none.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_access_role_arn
+    #   The Amazon Resource Name (ARN) for the service access role you want
+    #   to use to modify the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_table_definition
+    #   The external table definition.
     #   @return [String]
     #
     # @!attribute [rw] dynamo_db_settings
@@ -2474,6 +2554,8 @@ module Aws::DatabaseMigrationService
       :extra_connection_attributes,
       :certificate_arn,
       :ssl_mode,
+      :service_access_role_arn,
+      :external_table_definition,
       :dynamo_db_settings,
       :s3_settings,
       :mongo_db_settings)
@@ -2729,6 +2811,8 @@ module Aws::DatabaseMigrationService
     #         table_mappings: "String",
     #         replication_task_settings: "String",
     #         cdc_start_time: Time.now,
+    #         cdc_start_position: "String",
+    #         cdc_stop_position: "String",
     #       }
     #
     # @!attribute [rw] replication_task_arn
@@ -2768,8 +2852,38 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] cdc_start_time
-    #   The start time for the Change Data Capture (CDC) operation.
+    #   Indicates the start time for a change data capture (CDC) operation.
+    #   Use either CdcStartTime or CdcStartPosition to specify when you want
+    #   a CDC operation to start. Specifying both values results in an
+    #   error.
     #   @return [Time]
+    #
+    # @!attribute [rw] cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. Use either CdcStartPosition or CdcStartTime to specify when
+    #   you want a CDC operation to start. Specifying both values results in
+    #   an error.
+    #
+    #   The value can be in date, checkpoint, or LSN/SCN format.
+    #
+    #   Date Example: --cdc-start-position “2018-03-08T12:12:12”
+    #
+    #   Checkpoint Example: --cdc-start-position
+    #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+    #
+    #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_stop_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   stop. The value can be either server time or commit time.
+    #
+    #   Server time example: --cdc-stop-position
+    #   “server\_time:3018-02-09T12:12:12”
+    #
+    #   Commit time example: --cdc-stop-position “commit\_time:
+    #   3018-02-09T12:12:12 “
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTaskMessage AWS API Documentation
     #
@@ -2779,7 +2893,9 @@ module Aws::DatabaseMigrationService
       :migration_type,
       :table_mappings,
       :replication_task_settings,
-      :cdc_start_time)
+      :cdc_start_time,
+      :cdc_start_position,
+      :cdc_stop_position)
       include Aws::Structure
     end
 
@@ -2809,6 +2925,7 @@ module Aws::DatabaseMigrationService
     #         extract_doc_id: "String",
     #         docs_to_investigate: "String",
     #         auth_source: "String",
+    #         kms_key_id: "String",
     #       }
     #
     # @!attribute [rw] username
@@ -2884,6 +3001,15 @@ module Aws::DatabaseMigrationService
     #   The default is admin.
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The KMS key identifier that will be used to encrypt the connection
+    #   parameters. If you do not specify a value for the KmsKeyId
+    #   parameter, then AWS DMS will use your default encryption key. AWS
+    #   KMS creates the default encryption key for your AWS account. Your
+    #   AWS account has a different default encryption key for each AWS
+    #   region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/MongoDbSettings AWS API Documentation
     #
     class MongoDbSettings < Struct.new(
@@ -2897,7 +3023,8 @@ module Aws::DatabaseMigrationService
       :nesting_level,
       :extract_doc_id,
       :docs_to_investigate,
-      :auth_source)
+      :auth_source,
+      :kms_key_id)
       include Aws::Structure
     end
 
@@ -3236,6 +3363,11 @@ module Aws::DatabaseMigrationService
     #   Multi-AZ deployment.
     #   @return [String]
     #
+    # @!attribute [rw] free_until
+    #   The expiration date of the free replication instance that is part of
+    #   the Free DMS program.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstance AWS API Documentation
     #
     class ReplicationInstance < Struct.new(
@@ -3259,7 +3391,8 @@ module Aws::DatabaseMigrationService
       :replication_instance_public_ip_addresses,
       :replication_instance_private_ip_addresses,
       :publicly_accessible,
-      :secondary_availability_zone)
+      :secondary_availability_zone,
+      :free_until)
       include Aws::Structure
     end
 
@@ -3409,6 +3542,40 @@ module Aws::DatabaseMigrationService
     #   The date the replication task is scheduled to start.
     #   @return [Time]
     #
+    # @!attribute [rw] cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. Use either CdcStartPosition or CdcStartTime to specify when
+    #   you want a CDC operation to start. Specifying both values results in
+    #   an error.
+    #
+    #   The value can be in date, checkpoint, or LSN/SCN format.
+    #
+    #   Date Example: --cdc-start-position “2018-03-08T12:12:12”
+    #
+    #   Checkpoint Example: --cdc-start-position
+    #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+    #
+    #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_stop_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   stop. The value can be either server time or commit time.
+    #
+    #   Server time example: --cdc-stop-position
+    #   “server\_time:3018-02-09T12:12:12”
+    #
+    #   Commit time example: --cdc-stop-position “commit\_time:
+    #   3018-02-09T12:12:12 “
+    #   @return [String]
+    #
+    # @!attribute [rw] recovery_checkpoint
+    #   Indicates the last checkpoint that occurred during a change data
+    #   capture (CDC) operation. You can provide this value to the
+    #   `CdcStartPosition` parameter to start a CDC operation that begins at
+    #   that checkpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #   @return [String]
@@ -3433,6 +3600,9 @@ module Aws::DatabaseMigrationService
       :stop_reason,
       :replication_task_creation_date,
       :replication_task_start_date,
+      :cdc_start_position,
+      :cdc_stop_position,
+      :recovery_checkpoint,
       :replication_task_arn,
       :replication_task_stats)
       include Aws::Structure
@@ -3536,6 +3706,7 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] external_table_definition
+    #   The external table definition.
     #   @return [String]
     #
     # @!attribute [rw] csv_row_delimiter
@@ -3615,6 +3786,8 @@ module Aws::DatabaseMigrationService
     #         replication_task_arn: "String", # required
     #         start_replication_task_type: "start-replication", # required, accepts start-replication, resume-processing, reload-target
     #         cdc_start_time: Time.now,
+    #         cdc_start_position: "String",
+    #         cdc_stop_position: "String",
     #       }
     #
     # @!attribute [rw] replication_task_arn
@@ -3627,15 +3800,47 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] cdc_start_time
-    #   The start time for the Change Data Capture (CDC) operation.
+    #   Indicates the start time for a change data capture (CDC) operation.
+    #   Use either CdcStartTime or CdcStartPosition to specify when you want
+    #   a CDC operation to start. Specifying both values results in an
+    #   error.
     #   @return [Time]
+    #
+    # @!attribute [rw] cdc_start_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   start. Use either CdcStartPosition or CdcStartTime to specify when
+    #   you want a CDC operation to start. Specifying both values results in
+    #   an error.
+    #
+    #   The value can be in date, checkpoint, or LSN/SCN format.
+    #
+    #   Date Example: --cdc-start-position “2018-03-08T12:12:12”
+    #
+    #   Checkpoint Example: --cdc-start-position
+    #   "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+    #
+    #   LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_stop_position
+    #   Indicates when you want a change data capture (CDC) operation to
+    #   stop. The value can be either server time or commit time.
+    #
+    #   Server time example: --cdc-stop-position
+    #   “server\_time:3018-02-09T12:12:12”
+    #
+    #   Commit time example: --cdc-stop-position “commit\_time:
+    #   3018-02-09T12:12:12 “
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskMessage AWS API Documentation
     #
     class StartReplicationTaskMessage < Struct.new(
       :replication_task_arn,
       :start_replication_task_type,
-      :cdc_start_time)
+      :cdc_start_time,
+      :cdc_start_position,
+      :cdc_stop_position)
       include Aws::Structure
     end
 
@@ -3703,7 +3908,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] engine_name
     #   The database engine name. Valid values, depending on the
     #   EndPointType, include mysql, oracle, postgres, mariadb, aurora,
-    #   redshift, S3, sybase, dynamodb, mongodb, and sqlserver.
+    #   aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase,
+    #   dynamodb, mongodb, and sqlserver.
     #   @return [String]
     #
     # @!attribute [rw] supports_cdc
@@ -3714,12 +3920,19 @@ module Aws::DatabaseMigrationService
     #   The type of endpoint.
     #   @return [String]
     #
+    # @!attribute [rw] engine_display_name
+    #   The expanded name for the engine name. For example, if the
+    #   `EngineName` parameter is "aurora," this value would be "Amazon
+    #   Aurora MySQL."
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SupportedEndpointType AWS API Documentation
     #
     class SupportedEndpointType < Struct.new(
       :engine_name,
       :supports_cdc,
-      :endpoint_type)
+      :endpoint_type,
+      :engine_display_name)
       include Aws::Structure
     end
 

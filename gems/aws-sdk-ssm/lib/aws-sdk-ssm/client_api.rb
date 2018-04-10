@@ -2721,6 +2721,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsError)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
       end)
 
       api.add_operation(:cancel_command, Seahorse::Model::Operation.new.tap do |o|
@@ -3727,6 +3728,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceType)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
       end)
 
       api.add_operation(:send_automation_signal, Seahorse::Model::Operation.new.tap do |o|
