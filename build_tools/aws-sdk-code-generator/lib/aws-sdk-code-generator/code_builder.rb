@@ -59,7 +59,7 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}.rb", service_module(prefix))
         y.yield("#{prefix}/customizations.rb", '')
         y.yield("#{prefix}/types.rb", types_module)
-        y.yield("#{prefix}/event_stream.rb", event_stream_module) unless @service.protocol == 'api-gateway'
+        y.yield("#{prefix}/event_stream.rb", event_stream_module) if has_eventstream
         y.yield("#{prefix}/client_api.rb", client_api_module)
         y.yield("#{prefix}/client.rb", client_class)
         y.yield("#{prefix}/errors.rb", errors_module)
@@ -168,6 +168,16 @@ module AwsSdkCodeGenerator
         module_name: @service.module_name
       ).render
     end
+
+    private
+
+    def has_eventstream
+      @service.api['shapes'].each do |_, ref|
+        return true if ref['eventstream']
+      end
+      false
+    end
+
   end
 
 end

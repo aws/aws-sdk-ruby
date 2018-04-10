@@ -69,6 +69,7 @@ module AwsSdkCodeGenerator
           end
         end
         paths << "#{@prefix}/customizations"
+        paths << "#{@prefix}/event_stream" if eventstream_shape?
         paths.to_a
       end
 
@@ -82,6 +83,12 @@ module AwsSdkCodeGenerator
         nil
       end
 
+      def eventstream_shape?
+        @service.api['shapes'].each do |_, shape_ref|
+          return true if shape_ref['eventstream']
+        end
+        false
+      end
     end
   end
 end

@@ -1,4 +1,3 @@
-$LOAD_PATH.unshift(File.expand_path('../../../../../aws-eventstream/lib/', __FILE__))
 require 'aws-eventstream'
 
 module Aws
