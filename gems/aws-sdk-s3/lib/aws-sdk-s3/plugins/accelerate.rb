@@ -60,6 +60,8 @@ each bucket.  [Go here for more information](http://docs.aws.amazon.com/AmazonS3
             endpoint.port = 443
             endpoint.host = "#{bucket_name}.s3-accelerate.amazonaws.com"
             context.http_request.endpoint = endpoint.to_s
+            # s3 accelerate endpoint doesn't work with 'expect' header
+            context.http_request.headers.delete('expect')
           end
 
           def use_combined_accelerate_dualstack_endpoint(context)
@@ -70,6 +72,8 @@ each bucket.  [Go here for more information](http://docs.aws.amazon.com/AmazonS3
             endpoint.port = 443
             endpoint.host = "#{bucket_name}.s3-accelerate.dualstack.amazonaws.com"
             context.http_request.endpoint = endpoint.to_s
+            # s3 accelerate endpoint doesn't work with 'expect' header
+            context.http_request.headers.delete('expect')
           end
 
           def validate_bucket_name!(bucket_name)
