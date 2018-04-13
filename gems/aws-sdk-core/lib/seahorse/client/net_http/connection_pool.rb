@@ -1,3 +1,4 @@
+require 'cgi'
 require 'net/http'
 require 'net/https'
 require 'delegate'
@@ -252,6 +253,17 @@ module Seahorse
 
         private
 
+        # Extract the parts of the http_proxy URI
+        # @return [Array(String)]
+        def http_proxy_parts
+          return [
+            http_proxy.host,
+            http_proxy.port,
+            (http_proxy.user && CGI::unescape(http_proxy.user)),
+            (http_proxy.password && CGI::unescape(http_proxy.password))
+          ]
+        end
+
         # Starts and returns a new HTTP(S) session.
         # @param [String] endpoint
         # @return [Net::HTTPSession]
@@ -262,10 +274,7 @@ module Seahorse
           args = []
           args << endpoint.host
           args << endpoint.port
-          args << http_proxy.host
-          args << http_proxy.port
-          args << http_proxy.user
-          args << http_proxy.password
+          args += http_proxy_parts
 
           http = ExtendedSession.new(Net::HTTP.new(*args.compact))
           http.set_debug_output(logger) if http_wire_trace?
