@@ -12,7 +12,7 @@ module Seahorse
           if RUBY_VERSION >= '2.0' && RUBY_VERSION < '2.5'
             Net::HTTP.send(:include, Ruby_2)
             Net::HTTP::IDEMPOTENT_METHODS_.clear
-          elsif RUBY_VERSION >= '1.9.3'
+          elsif RUBY_VERSION >= '1.9.3' && RUBY_VERSION < '2.0'
             Net::HTTP.send(:include, Ruby_1_9_3)
           end
           Net::HTTP.send(:alias_method, :old_transport_request, :transport_request)
