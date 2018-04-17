@@ -165,12 +165,14 @@ module Aws
       #       body: 'body' # String or IO object
       #     )
       #
-      #     # Apply the following hash of headers to your HTTP request
-      #     signature.headers['Host']
-      #     signature.headers['X-Amz-Date']
-      #     signature.headers['X-Amz-Security-Token']
-      #     signature.headers['X-Amz-Content-Sha256']
-      #     signature.headers['Authorization']
+      #     # Apply the following hash of headers to your HTTP request (note
+      #     # that the header keys are lowercase from our signature object)
+      #     my_request['Host']                 = signature.headers['host']
+      #     my_request['X-Amz-Date']           = signature.headers['x-amz-date']
+      #     my_request['X-Amz-Security-Token'] = signature.headers['x-amz-security-token']
+      #     my_request['X-Amz-Content-Sha256'] = signature.headers['x-amz-content-sha256']
+      #     my_request['Authorization']        = signature.headers['authorization']
+
       #
       # In addition to computing the signature headers, the canonicalized
       # request, string to sign and content sha256 checksum are also available.
