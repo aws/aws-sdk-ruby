@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.34 (2018-04-19)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
