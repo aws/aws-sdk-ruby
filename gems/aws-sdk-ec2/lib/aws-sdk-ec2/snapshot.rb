@@ -342,10 +342,9 @@ module Aws::EC2
     #   may appear to complete even though you provided an invalid identifier.
     #   The action will eventually fail.
     # @option options [String] :presigned_url
-    #   The pre-signed URL parameter is required when copying an encrypted
-    #   snapshot with the Amazon EC2 Query API; it is available as an optional
-    #   parameter in all other cases. For more information, see [Query
-    #   Requests][1].
+    #   When you copy an encrypted source snapshot using the Amazon EC2 Query
+    #   API, you must supply a pre-signed URL. This parameter is optional for
+    #   unencrypted snapshots. For more information, see [Query Requests][1].
     #
     #   The `PresignedUrl` should use the snapshot source endpoint, the
     #   `CopySnapshot` action, and include the `SourceRegion`,

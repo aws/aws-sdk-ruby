@@ -182,6 +182,8 @@ module Aws::CodePipeline
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     SecretAccessKey = Shapes::StringShape.new(name: 'SecretAccessKey')
     SessionToken = Shapes::StringShape.new(name: 'SessionToken')
+    SourceRevision = Shapes::StructureShape.new(name: 'SourceRevision')
+    SourceRevisionList = Shapes::ListShape.new(name: 'SourceRevisionList')
     StageActionDeclarationList = Shapes::ListShape.new(name: 'StageActionDeclarationList')
     StageBlockerDeclarationList = Shapes::ListShape.new(name: 'StageBlockerDeclarationList')
     StageContext = Shapes::StructureShape.new(name: 'StageContext')
@@ -524,6 +526,7 @@ module Aws::CodePipeline
     PipelineExecutionSummary.add_member(:status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "status"))
     PipelineExecutionSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     PipelineExecutionSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
+    PipelineExecutionSummary.add_member(:source_revisions, Shapes::ShapeRef.new(shape: SourceRevisionList, location_name: "sourceRevisions"))
     PipelineExecutionSummary.struct_class = Types::PipelineExecutionSummary
 
     PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)
@@ -615,6 +618,14 @@ module Aws::CodePipeline
     S3ArtifactLocation.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "bucketName"))
     S3ArtifactLocation.add_member(:object_key, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "objectKey"))
     S3ArtifactLocation.struct_class = Types::S3ArtifactLocation
+
+    SourceRevision.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "actionName"))
+    SourceRevision.add_member(:revision_id, Shapes::ShapeRef.new(shape: Revision, location_name: "revisionId"))
+    SourceRevision.add_member(:revision_summary, Shapes::ShapeRef.new(shape: RevisionSummary, location_name: "revisionSummary"))
+    SourceRevision.add_member(:revision_url, Shapes::ShapeRef.new(shape: Url, location_name: "revisionUrl"))
+    SourceRevision.struct_class = Types::SourceRevision
+
+    SourceRevisionList.member = Shapes::ShapeRef.new(shape: SourceRevision)
 
     StageActionDeclarationList.member = Shapes::ShapeRef.new(shape: ActionDeclaration)
 

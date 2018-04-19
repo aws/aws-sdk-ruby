@@ -90,7 +90,7 @@ module Aws::EC2
     # credits, and bursting, see [Amazon EBS Volume Types][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #
-    # Constraint: Range is 100-20000 IOPS for io1 volumes and 100-10000 IOPS
+    # Constraint: Range is 100-32000 IOPS for io1 volumes and 100-10000 IOPS
     # for `gp2` volumes.
     #
     # Condition: This parameter is required for requests to create `io1`

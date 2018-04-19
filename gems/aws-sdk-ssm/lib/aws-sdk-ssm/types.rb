@@ -100,6 +100,8 @@ module Aws::SSM
     #   One or more tags. The value parameter is required, but if you don't
     #   want the tag to have a value, specify the parameter with no value,
     #   and we set the value to an empty string.
+    #
+    #   Do not enter personally identifiable information in this field.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResourceRequest AWS API Documentation
@@ -742,7 +744,7 @@ module Aws::SSM
     #
     # @!attribute [rw] expires_after
     #   If this time is reached and the command has not already started
-    #   executing, it will not execute. Calculated based on the ExpiresAfter
+    #   executing, it will not run. Calculated based on the ExpiresAfter
     #   user input provided as part of the SendCommand API.
     #   @return [Time]
     #
@@ -1480,12 +1482,16 @@ module Aws::SSM
     # @!attribute [rw] description
     #   A userdefined description of the resource that you want to register
     #   with Amazon EC2.
+    #
+    #   Do not enter personally identifiable information in this field.
     #   @return [String]
     #
     # @!attribute [rw] default_instance_name
     #   The name of the registered, managed instance as it will appear in
     #   the Amazon EC2 console or when you use the AWS command line tools to
     #   list EC2 resources.
+    #
+    #   Do not enter personally identifiable information in this field.
     #   @return [String]
     #
     # @!attribute [rw] iam_role
@@ -2150,6 +2156,90 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocumentResult AWS API Documentation
     #
     class DeleteDocumentResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteInventoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         type_name: "InventoryItemTypeName", # required
+    #         schema_delete_option: "DisableSchema", # accepts DisableSchema, DeleteSchema
+    #         dry_run: false,
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] type_name
+    #   The name of the custom inventory type for which you want to delete
+    #   either all previously collected data, or the inventory type itself.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_delete_option
+    #   Use the `SchemaDeleteOption` to delete a custom inventory type
+    #   (schema). If you don't choose this option, the system only deletes
+    #   existing inventory data associated with the custom inventory type.
+    #   Choose one of the following options:
+    #
+    #   DisableSchema: If you choose this option, the system ignores all
+    #   inventory data for the specified version, and any earlier versions.
+    #   To enable this schema again, you must call the `PutInventory` action
+    #   for a version greater than the disbled version.
+    #
+    #   DeleteSchema: This option deletes the specified custom type from the
+    #   Inventory service. You can recreate the schema later, if you want.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Use this option to view a summary of the deletion request without
+    #   deleting any data or the data type. This option is useful when you
+    #   only want to understand what will be deleted. Once you validate that
+    #   the data to be deleted is what you intend to delete, you can run the
+    #   same command without specifying the `DryRun` option.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   User-provided idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteInventoryRequest AWS API Documentation
+    #
+    class DeleteInventoryRequest < Struct.new(
+      :type_name,
+      :schema_delete_option,
+      :dry_run,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] deletion_id
+    #   Every `DeleteInventory` action is assigned a unique ID. This option
+    #   returns a unique ID. You can use this ID to query the status of a
+    #   delete operation. This option is useful for ensuring that a delete
+    #   operation has completed before you begin other actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the inventory data type specified in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_summary
+    #   A summary of the delete operation. For more information about this
+    #   summary, see [Understanding the Delete Inventory Summary][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary
+    #   @return [Types::InventoryDeletionSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteInventoryResult AWS API Documentation
+    #
+    class DeleteInventoryResult < Struct.new(
+      :deletion_id,
+      :type_name,
+      :deletion_summary)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteMaintenanceWindowRequest
     #   data as a hash:
@@ -3232,6 +3322,57 @@ module Aws::SSM
     #
     class DescribeInstancePatchesResult < Struct.new(
       :patches,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInventoryDeletionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         deletion_id: "InventoryDeletionId",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] deletion_id
+    #   Specify the delete inventory ID for which you want information. This
+    #   ID was returned by the `DeleteInventory` action.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInventoryDeletionsRequest AWS API Documentation
+    #
+    class DescribeInventoryDeletionsRequest < Struct.new(
+      :deletion_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inventory_deletions
+    #   A list of status items for deleted inventory.
+    #   @return [Array<Types::InventoryDeletionStatusItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInventoryDeletionsResult AWS API Documentation
+    #
+    class DescribeInventoryDeletionsResult < Struct.new(
+      :inventory_deletions,
       :next_token)
       include Aws::Structure
     end
@@ -4408,8 +4549,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the parent command for this invocation. This status
-    #   can be different than StatusDetails.
+    #   The status of this invocation plugin. This status can be different
+    #   than StatusDetails.
     #   @return [String]
     #
     # @!attribute [rw] status_details
@@ -5017,8 +5158,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
-    #   The parameters passed to the task when it was executed. The map has
-    #   the following format:
+    #   The parameters passed to the task when it was executed.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
+    #
+    #   The map has the following format:
     #
     #   Key: string, between 1 and 255 characters
     #
@@ -5207,6 +5357,14 @@ module Aws::SSM
     #
     # @!attribute [rw] task_parameters
     #   The parameters to pass to the task when it executes.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] task_invocation_parameters
@@ -5230,6 +5388,15 @@ module Aws::SSM
     #
     # @!attribute [rw] logging_info
     #   The location in Amazon S3 where the task results are logged.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name
@@ -5380,10 +5547,21 @@ module Aws::SSM
     #
     # @!attribute [rw] recursive
     #   Retrieve all parameters within a hierarchy.
+    #
+    #   If a user has access to a path, then the user can access all levels
+    #   of that path. For example, if a user has permission to access path
+    #   /a, then the user can also access /a/b. Even if a user has
+    #   explicitly been denied access in IAM for parameter /a, they can
+    #   still call the GetParametersByPath API action recursively and view
+    #   /a/b.
     #   @return [Boolean]
     #
     # @!attribute [rw] parameter_filters
     #   Filters to limit the request results.
+    #
+    #   <note markdown="1"> You can't filter using the parameter name.
+    #
+    #    </note>
     #   @return [Array<Types::ParameterStringFilter>]
     #
     # @!attribute [rw] with_decryption
@@ -6102,6 +6280,103 @@ module Aws::SSM
     class InventoryAggregator < Struct.new(
       :expression,
       :aggregators)
+      include Aws::Structure
+    end
+
+    # Status information returned by the `DeleteInventory` action.
+    #
+    # @!attribute [rw] deletion_id
+    #   The deletion ID returned by the `DeleteInventory` action.
+    #   @return [String]
+    #
+    # @!attribute [rw] type_name
+    #   The name of the inventory data type.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_start_time
+    #   The UTC timestamp when the delete operation started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_status
+    #   The status of the operation. Possible values are InProgress and
+    #   Complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_status_message
+    #   Information about the status.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_summary
+    #   Information about the delete operation. For more information about
+    #   this summary, see [Understanding the Delete Inventory Summary][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-delete.html#sysman-inventory-delete-summary
+    #   @return [Types::InventoryDeletionSummary]
+    #
+    # @!attribute [rw] last_status_update_time
+    #   The UTC timestamp of when the last status report.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryDeletionStatusItem AWS API Documentation
+    #
+    class InventoryDeletionStatusItem < Struct.new(
+      :deletion_id,
+      :type_name,
+      :deletion_start_time,
+      :last_status,
+      :last_status_message,
+      :deletion_summary,
+      :last_status_update_time)
+      include Aws::Structure
+    end
+
+    # Information about the delete operation.
+    #
+    # @!attribute [rw] total_count
+    #   The total number of items to delete. This count does not change
+    #   during the delete operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remaining_count
+    #   Remaining number of items to delete.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] summary_items
+    #   A list of counts and versions for deleted items.
+    #   @return [Array<Types::InventoryDeletionSummaryItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryDeletionSummary AWS API Documentation
+    #
+    class InventoryDeletionSummary < Struct.new(
+      :total_count,
+      :remaining_count,
+      :summary_items)
+      include Aws::Structure
+    end
+
+    # Either a count, remaining count, or a version number in a delete
+    # inventory summary.
+    #
+    # @!attribute [rw] version
+    #   The inventory type version.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   A count of the number of deleted items.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remaining_count
+    #   The remaining number of items to delete.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryDeletionSummaryItem AWS API Documentation
+    #
+    class InventoryDeletionSummaryItem < Struct.new(
+      :version,
+      :count,
+      :remaining_count)
       include Aws::Structure
     end
 
@@ -7052,6 +7327,15 @@ module Aws::SSM
 
     # Information about an Amazon S3 bucket to write instance-level logs to.
     #
+    # <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    # options in the `TaskInvocationParameters` structure. For information
+    # about how Systems Manager handles these options for the supported
+    # Maintenance Window task types, see
+    # MaintenanceWindowTaskInvocationParameters.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass LoggingInfo
     #   data as a hash:
     #
@@ -7100,6 +7384,27 @@ module Aws::SSM
     #
     # @!attribute [rw] parameters
     #   The parameters for the AUTOMATION task.
+    #
+    #   For information about specifying and updating task parameters, see
+    #   RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    For AUTOMATION task types, Systems Manager ignores any values
+    #   specified for these parameters.
+    #
+    #    </note>
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowAutomationParameters AWS API Documentation
@@ -7345,6 +7650,27 @@ module Aws::SSM
 
     # The parameters for a LAMBDA task type.
     #
+    # For information about specifying and updating task parameters, see
+    # RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
+    #
+    # <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    # options in the `TaskInvocationParameters` structure. For information
+    # about how Systems Manager handles these options for the supported
+    # Maintenance Window task types, see
+    # MaintenanceWindowTaskInvocationParameters.
+    #
+    #  `TaskParameters` has been deprecated. To specify parameters to pass to
+    # a task when it runs, instead use the `Parameters` option in the
+    # `TaskInvocationParameters` structure. For information about how
+    # Systems Manager handles these options for the supported Maintenance
+    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #  For Lambda tasks, Systems Manager ignores any values specified for
+    # TaskParameters and LoggingInfo.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass MaintenanceWindowLambdaParameters
     #   data as a hash:
     #
@@ -7382,6 +7708,28 @@ module Aws::SSM
     end
 
     # The parameters for a RUN\_COMMAND task type.
+    #
+    # For information about specifying and updating task parameters, see
+    # RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
+    #
+    # <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    # options in the `TaskInvocationParameters` structure. For information
+    # about how Systems Manager handles these options for the supported
+    # Maintenance Window task types, see
+    # MaintenanceWindowTaskInvocationParameters.
+    #
+    #  `TaskParameters` has been deprecated. To specify parameters to pass to
+    # a task when it runs, instead use the `Parameters` option in the
+    # `TaskInvocationParameters` structure. For information about how
+    # Systems Manager handles these options for the supported Maintenance
+    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #  For Run Command tasks, Systems Manager uses specified values for
+    # `TaskParameters` and `LoggingInfo` only if no values are specified for
+    # `TaskInvocationParameters`.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass MaintenanceWindowRunCommandParameters
     #   data as a hash:
@@ -7458,7 +7806,28 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # The parameters for the STEP\_FUNCTION execution.
+    # The parameters for a STEP\_FUNCTION task.
+    #
+    # For information about specifying and updating task parameters, see
+    # RegisterTaskWithMaintenanceWindow and UpdateMaintenanceWindowTask.
+    #
+    # <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    # logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    # options in the `TaskInvocationParameters` structure. For information
+    # about how Systems Manager handles these options for the supported
+    # Maintenance Window task types, see
+    # MaintenanceWindowTaskInvocationParameters.
+    #
+    #  `TaskParameters` has been deprecated. To specify parameters to pass to
+    # a task when it runs, instead use the `Parameters` option in the
+    # `TaskInvocationParameters` structure. For information about how
+    # Systems Manager handles these options for the supported Maintenance
+    # Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #  For Step Functions tasks, Systems Manager ignores any values specified
+    # for `TaskParameters` and `LoggingInfo`.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass MaintenanceWindowStepFunctionsParameters
     #   data as a hash:
@@ -7564,6 +7933,14 @@ module Aws::SSM
     # @!attribute [rw] task_parameters
     #   The parameters that should be passed to the task when it is
     #   executed.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] priority
@@ -7574,6 +7951,15 @@ module Aws::SSM
     #
     # @!attribute [rw] logging_info
     #   Information about an Amazon S3 bucket to write task-level logs to.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] service_role_arn
@@ -7661,7 +8047,7 @@ module Aws::SSM
     #   @return [Types::MaintenanceWindowRunCommandParameters]
     #
     # @!attribute [rw] automation
-    #   The parameters for a AUTOMATION task type.
+    #   The parameters for an AUTOMATION task type.
     #   @return [Types::MaintenanceWindowAutomationParameters]
     #
     # @!attribute [rw] step_functions
@@ -8829,9 +9215,16 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   Information about the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventoryResult AWS API Documentation
     #
-    class PutInventoryResult < Aws::EmptyStructure; end
+    class PutInventoryResult < Struct.new(
+      :message)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass PutParameterRequest
     #   data as a hash:
@@ -8870,6 +9263,8 @@ module Aws::SSM
     #
     # @!attribute [rw] description
     #   Information about the parameter that you want to add to the system.
+    #
+    #   Do not enter personally identifiable information in this field.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -9169,6 +9564,14 @@ module Aws::SSM
     # @!attribute [rw] task_parameters
     #   The parameters that should be passed to the task when it is
     #   executed.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] task_invocation_parameters
@@ -9196,6 +9599,15 @@ module Aws::SSM
     # @!attribute [rw] logging_info
     #   A structure containing information about an Amazon S3 bucket to
     #   write instance-level logs to.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name
@@ -9632,7 +10044,7 @@ module Aws::SSM
     #
     # @!attribute [rw] timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it will not execute.
+    #   executing, it will not run.
     #   @return [Integer]
     #
     # @!attribute [rw] comment
@@ -10660,7 +11072,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] task_parameters
-    #   The parameters to modify. The map has the following format:
+    #   The parameters to modify.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
+    #
+    #   The map has the following format:
     #
     #   Key: string, between 1 and 255 characters
     #
@@ -10694,6 +11116,15 @@ module Aws::SSM
     #
     # @!attribute [rw] logging_info
     #   The new logging location in Amazon S3 to specify.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name
@@ -10752,6 +11183,14 @@ module Aws::SSM
     #
     # @!attribute [rw] task_parameters
     #   The updated parameter values.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass
+    #   to a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>]
     #
     # @!attribute [rw] task_invocation_parameters
@@ -10772,6 +11211,15 @@ module Aws::SSM
     #
     # @!attribute [rw] logging_info
     #   The updated logging information in Amazon S3.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to
+    #   contain logs, instead use the `OutputS3BucketName` and
+    #   `OutputS3KeyPrefix` options in the `TaskInvocationParameters`
+    #   structure. For information about how Systems Manager handles these
+    #   options for the supported Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #   @return [Types::LoggingInfo]
     #
     # @!attribute [rw] name

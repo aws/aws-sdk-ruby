@@ -738,7 +738,7 @@ module Aws::CloudWatchLogs
     # @option params [String] :log_stream_name_prefix
     #   The prefix to match.
     #
-    #   If `orderBy` is `LastEventTime`,you cannot specify this parameter.
+    #   iIf `orderBy` is `LastEventTime`,you cannot specify this parameter.
     #
     # @option params [String] :order_by
     #   If the value is `LogStreamName`, the results are ordered by log stream
@@ -1686,7 +1686,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

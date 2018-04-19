@@ -1994,13 +1994,17 @@ module Aws::CodePipeline
     #   timestamp format.
     #   @return [Time]
     #
+    # @!attribute [rw] source_revisions
+    #   @return [Array<Types::SourceRevision>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecutionSummary AWS API Documentation
     #
     class PipelineExecutionSummary < Struct.new(
       :pipeline_execution_id,
       :status,
       :start_time,
-      :last_update_time)
+      :last_update_time,
+      :source_revisions)
       include Aws::Structure
     end
 
@@ -2542,6 +2546,28 @@ module Aws::CodePipeline
     class S3ArtifactLocation < Struct.new(
       :bucket_name,
       :object_key)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_name
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_summary
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_url
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/SourceRevision AWS API Documentation
+    #
+    class SourceRevision < Struct.new(
+      :action_name,
+      :revision_id,
+      :revision_summary,
+      :revision_url)
       include Aws::Structure
     end
 
