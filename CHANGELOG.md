@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
 2.11.34 (2018-04-19)
 ------------------
 
