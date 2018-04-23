@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix parsing flattened XML shape from shape reference for S3 https://github.com/aws/aws-sdk-ruby/issues/1764
+
 3.20.0 (2018-04-23)
 ------------------
 
