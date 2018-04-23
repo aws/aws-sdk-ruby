@@ -292,6 +292,7 @@ to be backwards compatible.
 | AWS Identity and Access Management                    | IAM                             | 2010-05-08  |
 | AWS Import/Export                                     | ImportExport                    | 2010-06-01  |
 | AWS IoT                                               | IoT                             | 2015-05-28  |
+| AWS IoT Analytics                                     | IoTAnalytics                    | 2017-11-27  |
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |

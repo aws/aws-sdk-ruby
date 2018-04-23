@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScalingPlans - Updated the API, and documentation for AWS Auto Scaling Plans.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::IoTAnalytics - Added support for a new service, AWS IoT Analytics.
+
 2.11.35 (2018-04-20)
 ------------------
 

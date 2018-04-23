@@ -92,6 +92,7 @@ module Aws
     ImportExport
     Inspector
     IoT
+    IoTAnalytics
     IoTDataPlane
     IoTJobsDataPlane
     KMS
