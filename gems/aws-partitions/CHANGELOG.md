@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2018-04-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTAnalytics`.
+
 1.80.0 (2018-04-10)
 ------------------
 

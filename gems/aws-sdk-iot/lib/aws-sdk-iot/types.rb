@@ -19,7 +19,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] set_as_active
@@ -114,6 +115,11 @@ module Aws::IoT
     #           token: "SalesforceToken", # required
     #           url: "SalesforceEndpoint", # required
     #         },
+    #         iot_analytics: {
+    #           channel_arn: "AwsArn",
+    #           channel_name: "ChannelName",
+    #           role_arn: "AwsArn",
+    #         },
     #       }
     #
     # @!attribute [rw] dynamo_db
@@ -170,6 +176,10 @@ module Aws::IoT
     #   Send a message to a Salesforce IoT Cloud Input Stream.
     #   @return [Types::SalesforceAction]
     #
+    # @!attribute [rw] iot_analytics
+    #   Sends message data to an AWS IoT Analytics channel.
+    #   @return [Types::IotAnalyticsAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -183,7 +193,8 @@ module Aws::IoT
       :cloudwatch_metric,
       :cloudwatch_alarm,
       :elasticsearch,
-      :salesforce)
+      :salesforce,
+      :iot_analytics)
       include Aws::Structure
     end
 
@@ -578,12 +589,15 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] last_modified_date
+    #   The date the CA certificate was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] customer_version
+    #   The customer version of the CA certificate.
     #   @return [Integer]
     #
     # @!attribute [rw] generation_id
+    #   The generation ID of the CA certificate.
     #   @return [String]
     #
     class CACertificateDescription < Struct.new(
@@ -610,7 +624,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     class CancelCertificateTransferRequest < Struct.new(
@@ -666,7 +681,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -728,6 +744,7 @@ module Aws::IoT
     #   @return [Time]
     #
     # @!attribute [rw] customer_version
+    #   The customer version of the certificate.
     #   @return [Integer]
     #
     # @!attribute [rw] transfer_data
@@ -735,6 +752,7 @@ module Aws::IoT
     #   @return [Types::TransferData]
     #
     # @!attribute [rw] generation_id
+    #   The generation ID of the certificate.
     #   @return [String]
     #
     class CertificateDescription < Struct.new(
@@ -1820,6 +1838,11 @@ module Aws::IoT
     #                 token: "SalesforceToken", # required
     #                 url: "SalesforceEndpoint", # required
     #               },
+    #               iot_analytics: {
+    #                 channel_arn: "AwsArn",
+    #                 channel_name: "ChannelName",
+    #                 role_arn: "AwsArn",
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -1900,6 +1923,11 @@ module Aws::IoT
     #             salesforce: {
     #               token: "SalesforceToken", # required
     #               url: "SalesforceEndpoint", # required
+    #             },
+    #             iot_analytics: {
+    #               channel_arn: "AwsArn",
+    #               channel_name: "ChannelName",
+    #               role_arn: "AwsArn",
     #             },
     #           },
     #         },
@@ -1996,7 +2024,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate to delete.
+    #   The ID of the certificate to delete. (The last part of the
+    #   certificate ARN contains the certificate ID.)
     #   @return [String]
     #
     class DeleteCACertificateRequest < Struct.new(
@@ -2019,7 +2048,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] force_delete
@@ -2373,7 +2403,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     class DescribeCertificateRequest < Struct.new(
@@ -3394,12 +3425,15 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] creation_date
+    #   The date the policy was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_date
+    #   The date the policy was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] generation_id
+    #   The generation ID of the policy.
     #   @return [String]
     #
     class GetPolicyResponse < Struct.new(
@@ -3460,12 +3494,15 @@ module Aws::IoT
     #   @return [Boolean]
     #
     # @!attribute [rw] creation_date
+    #   The date the policy version was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_date
+    #   The date the policy version was last modified.
     #   @return [Time]
     #
     # @!attribute [rw] generation_id
+    #   The generation ID of the policy version.
     #   @return [String]
     #
     class GetPolicyVersionResponse < Struct.new(
@@ -3581,6 +3618,39 @@ module Aws::IoT
     #
     class ImplicitDeny < Struct.new(
       :policies)
+      include Aws::Structure
+    end
+
+    # Sends message data to an AWS IoT Analytics channel.
+    #
+    # @note When making an API call, you may pass IotAnalyticsAction
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "AwsArn",
+    #         channel_name: "ChannelName",
+    #         role_arn: "AwsArn",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   (deprecated) The ARN of the IoT Analytics channel to which message
+    #   data will be sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the IoT Analytics channel to which message data will be
+    #   sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role which has a policy that grants IoT permission to
+    #   send message data via IoT Analytics (iotanalytics:BatchPutMessage).
+    #   @return [String]
+    #
+    class IotAnalyticsAction < Struct.new(
+      :channel_arn,
+      :channel_name,
+      :role_arn)
       include Aws::Structure
     end
 
@@ -4458,7 +4528,7 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token used to retreive the next set of results.
+    #   A token used to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] ota_update_status
@@ -5854,11 +5924,21 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] template_body
-    #   The provisioning template.
+    #   The provisioning template. See [Programmatic Provisioning][1] for
+    #   more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters for provisioning a thing.
+    #   The parameters for provisioning a thing. See [Programmatic
+    #   Provisioning][1] for more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #   @return [Hash<String,String>]
     #
     class RegisterThingRequest < Struct.new(
@@ -5916,7 +5996,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] reject_reason
@@ -6053,6 +6134,11 @@ module Aws::IoT
     #                 token: "SalesforceToken", # required
     #                 url: "SalesforceEndpoint", # required
     #               },
+    #               iot_analytics: {
+    #                 channel_arn: "AwsArn",
+    #                 channel_name: "ChannelName",
+    #                 role_arn: "AwsArn",
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -6134,6 +6220,11 @@ module Aws::IoT
     #               token: "SalesforceToken", # required
     #               url: "SalesforceEndpoint", # required
     #             },
+    #             iot_analytics: {
+    #               channel_arn: "AwsArn",
+    #               channel_name: "ChannelName",
+    #               role_arn: "AwsArn",
+    #             },
     #           },
     #         },
     #       }
@@ -6183,6 +6274,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] role_alias_arn
+    #   The ARN of the role alias.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -6937,7 +7029,7 @@ module Aws::IoT
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] shadow
-    #   The thing shadow.
+    #   The shadow.
     #   @return [String]
     #
     class ThingDocument < Struct.new(
@@ -7270,6 +7362,11 @@ module Aws::IoT
     #               token: "SalesforceToken", # required
     #               url: "SalesforceEndpoint", # required
     #             },
+    #             iot_analytics: {
+    #               channel_arn: "AwsArn",
+    #               channel_name: "ChannelName",
+    #               role_arn: "AwsArn",
+    #             },
     #           },
     #         ],
     #         rule_disabled: false,
@@ -7351,6 +7448,11 @@ module Aws::IoT
     #             token: "SalesforceToken", # required
     #             url: "SalesforceEndpoint", # required
     #           },
+    #           iot_analytics: {
+    #             channel_arn: "AwsArn",
+    #             channel_name: "ChannelName",
+    #             role_arn: "AwsArn",
+    #           },
     #         },
     #       }
     #
@@ -7405,7 +7507,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] target_aws_account
@@ -7581,7 +7684,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] new_status

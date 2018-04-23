@@ -72,6 +72,7 @@ module Aws
   autoload :ImportExport, 'aws-sdk-importexport'
   autoload :Inspector, 'aws-sdk-inspector'
   autoload :IoT, 'aws-sdk-iot'
+  autoload :IoTAnalytics, 'aws-sdk-iotanalytics'
   autoload :IoTDataPlane, 'aws-sdk-iotdataplane'
   autoload :IoTJobsDataPlane, 'aws-sdk-iotjobsdataplane'
   autoload :KMS, 'aws-sdk-kms'
