@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.36 (2018-04-23)
+------------------
+
 * Feature - Aws::AutoScalingPlans - Updated the API, and documentation for AWS Auto Scaling Plans.
 
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
