@@ -267,24 +267,24 @@ module Aws::SecretsManager
     # versions of the secret. Versions without a staging label are
     # considered deprecated and are not included in the list.
     #
-    # You provide the secret data to be encrypted by putting text in the
-    # `SecretString` parameter or binary data in the `SecretBinary`
-    # parameter. If you include `SecretString` or `SecretBinary` then
-    # Secrets Manager also creates an initial secret version and, if you
-    # don't supply a staging label, automatically maps the new version's
-    # ID to the staging label `AWSCURRENT`.
+    # You provide the secret data to be encrypted by putting text in either
+    # the `SecretString` parameter or binary data in the `SecretBinary`
+    # parameter, but not both. If you include `SecretString` or
+    # `SecretBinary` then Secrets Manager also creates an initial secret
+    # version and, if you don't supply a staging label, automatically maps
+    # the new version's ID to the staging label `AWSCURRENT`.
     #
     # <note markdown="1"> * If you call an operation that needs to encrypt or decrypt the
-    #   `SecretString` and `SecretBinary` for a secret in the same account
-    #   as the calling user and that secret doesn't specify a KMS
-    #   encryption key, Secrets Manager uses the account's default AWS
-    #   managed customer master key (CMK) with the alias
-    #   `aws/secretsmanager`. If this key doesn't already exist in your
-    #   account then Secrets Manager creates it for you automatically. All
-    #   users in the same AWS account automatically have access to use the
-    #   default CMK. Note that if an Secrets Manager API call results in AWS
-    #   having to create the account's AWS-managed CMK, it can result in a
-    #   one-time significant delay in returning the result.
+    #   `SecretString` or `SecretBinary` for a secret in the same account as
+    #   the calling user and that secret doesn't specify a KMS encryption
+    #   key, Secrets Manager uses the account's default AWS managed
+    #   customer master key (CMK) with the alias `aws/secretsmanager`. If
+    #   this key doesn't already exist in your account then Secrets Manager
+    #   creates it for you automatically. All users in the same AWS account
+    #   automatically have access to use the default CMK. Note that if an
+    #   Secrets Manager API call results in AWS having to create the
+    #   account's AWS-managed CMK, it can result in a one-time significant
+    #   delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -386,7 +386,7 @@ module Aws::SecretsManager
     #
     # @option params [String] :kms_key_id
     #   (Optional) Specifies the ARN or alias of the AWS KMS customer master
-    #   key (CMK) to be used to encrypt the `SecretString` and `SecretBinary`
+    #   key (CMK) to be used to encrypt the `SecretString` or `SecretBinary`
     #   values in the versions stored in this secret.
     #
     #   If you don't specify this value, then Secrets Manager defaults to
@@ -408,12 +408,8 @@ module Aws::SecretsManager
     #   file and then use the appropriate technique for your tool to pass the
     #   contents of the file as a parameter.
     #
-    #   Either `SecretString`, `SecretBinary`, or both must have a value. They
-    #   cannot both be empty.
-    #
-    #   This `SecretBinary` value is stored separately from the
-    #   `SecretString`, but the two parameters jointly share a maximum size
-    #   limit.
+    #   Either `SecretString` or `SecretBinary` must have a value, but not
+    #   both. They cannot both be empty.
     #
     #   This parameter is not available using the Secrets Manager console. It
     #   can be accessed only by using the AWS CLI or one of the AWS SDKs.
@@ -422,11 +418,8 @@ module Aws::SecretsManager
     #   (Optional) Specifies text data that you want to encrypt and store in
     #   this new version of the secret.
     #
-    #   Either `SecretString`, `SecretBinary`, or both must have a value. They
-    #   cannot both be empty.
-    #
-    #   This string value is stored separately from the `SecretBinary`, but
-    #   the two parameters jointly share a maximum size limit.
+    #   Either `SecretString` or `SecretBinary` must have a value, but not
+    #   both. They cannot both be empty.
     #
     #   If you create a secret by using the Secrets Manager console then
     #   Secrets Manager puts the protected secret text in only the
@@ -883,8 +876,9 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Retrieves the contents of the encrypted fields `SecretString` and
-    # `SecretBinary` from the specified version of a secret.
+    # Retrieves the contents of the encrypted fields `SecretString` or
+    # `SecretBinary` from the specified version of a secret, whichever
+    # contains content.
     #
     # **Minimum permissions**
     #
@@ -1286,16 +1280,16 @@ module Aws::SecretsManager
     #   `AWSPREVIOUS` to the version that `AWSCURRENT` was removed from.
     #
     # <note markdown="1"> * If you call an operation that needs to encrypt or decrypt the
-    #   `SecretString` and `SecretBinary` for a secret in the same account
-    #   as the calling user and that secret doesn't specify a KMS
-    #   encryption key, Secrets Manager uses the account's default AWS
-    #   managed customer master key (CMK) with the alias
-    #   `aws/secretsmanager`. If this key doesn't already exist in your
-    #   account then Secrets Manager creates it for you automatically. All
-    #   users in the same AWS account automatically have access to use the
-    #   default CMK. Note that if an Secrets Manager API call results in AWS
-    #   having to create the account's AWS-managed CMK, it can result in a
-    #   one-time significant delay in returning the result.
+    #   `SecretString` or `SecretBinary` for a secret in the same account as
+    #   the calling user and that secret doesn't specify a KMS encryption
+    #   key, Secrets Manager uses the account's default AWS managed
+    #   customer master key (CMK) with the alias `aws/secretsmanager`. If
+    #   this key doesn't already exist in your account then Secrets Manager
+    #   creates it for you automatically. All users in the same AWS account
+    #   automatically have access to use the default CMK. Note that if an
+    #   Secrets Manager API call results in AWS having to create the
+    #   account's AWS-managed CMK, it can result in a one-time significant
+    #   delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -1388,7 +1382,8 @@ module Aws::SecretsManager
     #   command-line tools, we recommend that you store your binary data in a
     #   file and then use the appropriate technique for your tool to pass the
     #   contents of the file as a parameter. Either `SecretBinary` or
-    #   `SecretString` must have a value. They cannot both be empty.
+    #   `SecretString` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   This parameter is not accessible if the secret using the Secrets
     #   Manager console.
@@ -1396,7 +1391,8 @@ module Aws::SecretsManager
     # @option params [String] :secret_string
     #   (Optional) Specifies text data that you want to encrypt and store in
     #   this new version of the secret. Either `SecretString` or
-    #   `SecretBinary` must have a value. They cannot both be empty.
+    #   `SecretBinary` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   If you create this secret by using the Secrets Manager console then
     #   Secrets Manager puts the protected secret text in only the
@@ -1901,16 +1897,16 @@ module Aws::SecretsManager
     #   only create new ones.
     #
     # <note markdown="1"> * If you call an operation that needs to encrypt or decrypt the
-    #   `SecretString` and `SecretBinary` for a secret in the same account
-    #   as the calling user and that secret doesn't specify a KMS
-    #   encryption key, Secrets Manager uses the account's default AWS
-    #   managed customer master key (CMK) with the alias
-    #   `aws/secretsmanager`. If this key doesn't already exist in your
-    #   account then Secrets Manager creates it for you automatically. All
-    #   users in the same AWS account automatically have access to use the
-    #   default CMK. Note that if an Secrets Manager API call results in AWS
-    #   having to create the account's AWS-managed CMK, it can result in a
-    #   one-time significant delay in returning the result.
+    #   `SecretString` or `SecretBinary` for a secret in the same account as
+    #   the calling user and that secret doesn't specify a KMS encryption
+    #   key, Secrets Manager uses the account's default AWS managed
+    #   customer master key (CMK) with the alias `aws/secretsmanager`. If
+    #   this key doesn't already exist in your account then Secrets Manager
+    #   creates it for you automatically. All users in the same AWS account
+    #   automatically have access to use the default CMK. Note that if an
+    #   Secrets Manager API call results in AWS having to create the
+    #   account's AWS-managed CMK, it can result in a one-time significant
+    #   delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -2025,14 +2021,16 @@ module Aws::SecretsManager
     #   command-line tools, we recommend that you store your binary data in a
     #   file and then use the appropriate technique for your tool to pass the
     #   contents of the file as a parameter. Either `SecretBinary` or
-    #   `SecretString` must have a value. They cannot both be empty.
+    #   `SecretString` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   This parameter is not accessible using the Secrets Manager console.
     #
     # @option params [String] :secret_string
     #   (Optional) Specifies text data that you want to encrypt and store in
     #   this new version of the secret. Either `SecretBinary` or
-    #   `SecretString` must have a value. They cannot both be empty.
+    #   `SecretString` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   If you create this secret by using the Secrets Manager console then
     #   Secrets Manager puts the protected secret text in only the
@@ -2303,7 +2301,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

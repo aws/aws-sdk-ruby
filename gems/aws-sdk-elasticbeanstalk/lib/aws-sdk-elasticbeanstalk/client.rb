@@ -426,6 +426,7 @@ module Aws::ElasticBeanstalk
     #
     # @example Response structure
     #
+    #   resp.application.application_arn #=> String
     #   resp.application.application_name #=> String
     #   resp.application.description #=> String
     #   resp.application.date_created #=> Time
@@ -589,6 +590,7 @@ module Aws::ElasticBeanstalk
     #
     # @example Response structure
     #
+    #   resp.application_version.application_version_arn #=> String
     #   resp.application_version.application_name #=> String
     #   resp.application_version.description #=> String
     #   resp.application_version.version_label #=> String
@@ -1404,6 +1406,7 @@ module Aws::ElasticBeanstalk
     # @example Response structure
     #
     #   resp.application_versions #=> Array
+    #   resp.application_versions[0].application_version_arn #=> String
     #   resp.application_versions[0].application_name #=> String
     #   resp.application_versions[0].description #=> String
     #   resp.application_versions[0].version_label #=> String
@@ -1492,6 +1495,7 @@ module Aws::ElasticBeanstalk
     # @example Response structure
     #
     #   resp.applications #=> Array
+    #   resp.applications[0].application_arn #=> String
     #   resp.applications[0].application_name #=> String
     #   resp.applications[0].description #=> String
     #   resp.applications[0].date_created #=> Time
@@ -3252,6 +3256,7 @@ module Aws::ElasticBeanstalk
     #
     # @example Response structure
     #
+    #   resp.application.application_arn #=> String
     #   resp.application.application_name #=> String
     #   resp.application.description #=> String
     #   resp.application.date_created #=> Time
@@ -3394,6 +3399,7 @@ module Aws::ElasticBeanstalk
     #
     # @example Response structure
     #
+    #   resp.application_version.application_version_arn #=> String
     #   resp.application_version.application_name #=> String
     #   resp.application_version.description #=> String
     #   resp.application_version.version_label #=> String
@@ -3975,7 +3981,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
