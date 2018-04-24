@@ -2,6 +2,12 @@ Unreleased Changes
 ------------------
 
 * Issue - Avoiding Net::HTTP patching for Ruby 2.5
+* Issue - Fix parsing flattened XML shape from shape reference for S3 https://github.com/aws/aws-sdk-ruby/issues/1764
+
+3.20.0 (2018-04-23)
+------------------
+
+* Feature - Aws::InstanceProfileCredentials - Add sending a User-Agent other than the default User-Agent in Ruby.  Adding the User-Agent `aws-sdk-ruby3/<version>` to allow protection against Server Side Request Forgery (SSRF) credential theft vectors by use of a metadata proxy.  
 
 3.19.0 (2018-04-04)
 ------------------
