@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.37 (2018-04-24)
+------------------
+
 * Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
 
 * Feature - Aws::SecretsManager - Updated the documentation for AWS Secrets Manager.
