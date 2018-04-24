@@ -42,6 +42,8 @@ module Aws::DeviceFarm
     CreateRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'CreateRemoteAccessSessionResult')
     CreateUploadRequest = Shapes::StructureShape.new(name: 'CreateUploadRequest')
     CreateUploadResult = Shapes::StructureShape.new(name: 'CreateUploadResult')
+    CreateVPCEConfigurationRequest = Shapes::StructureShape.new(name: 'CreateVPCEConfigurationRequest')
+    CreateVPCEConfigurationResult = Shapes::StructureShape.new(name: 'CreateVPCEConfigurationResult')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
     CustomerArtifactPaths = Shapes::StructureShape.new(name: 'CustomerArtifactPaths')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
@@ -59,6 +61,8 @@ module Aws::DeviceFarm
     DeleteRunResult = Shapes::StructureShape.new(name: 'DeleteRunResult')
     DeleteUploadRequest = Shapes::StructureShape.new(name: 'DeleteUploadRequest')
     DeleteUploadResult = Shapes::StructureShape.new(name: 'DeleteUploadResult')
+    DeleteVPCEConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteVPCEConfigurationRequest')
+    DeleteVPCEConfigurationResult = Shapes::StructureShape.new(name: 'DeleteVPCEConfigurationResult')
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceAttribute = Shapes::StringShape.new(name: 'DeviceAttribute')
     DeviceFormFactor = Shapes::StringShape.new(name: 'DeviceFormFactor')
@@ -109,6 +113,8 @@ module Aws::DeviceFarm
     GetTestResult = Shapes::StructureShape.new(name: 'GetTestResult')
     GetUploadRequest = Shapes::StructureShape.new(name: 'GetUploadRequest')
     GetUploadResult = Shapes::StructureShape.new(name: 'GetUploadResult')
+    GetVPCEConfigurationRequest = Shapes::StructureShape.new(name: 'GetVPCEConfigurationRequest')
+    GetVPCEConfigurationResult = Shapes::StructureShape.new(name: 'GetVPCEConfigurationResult')
     HostAddress = Shapes::StringShape.new(name: 'HostAddress')
     IdempotencyException = Shapes::StructureShape.new(name: 'IdempotencyException')
     IncompatibilityMessage = Shapes::StructureShape.new(name: 'IncompatibilityMessage')
@@ -121,6 +127,7 @@ module Aws::DeviceFarm
     InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InteractionMode = Shapes::StringShape.new(name: 'InteractionMode')
+    InvalidOperationException = Shapes::StructureShape.new(name: 'InvalidOperationException')
     IosPaths = Shapes::ListShape.new(name: 'IosPaths')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobTimeoutMinutes = Shapes::IntegerShape.new(name: 'JobTimeoutMinutes')
@@ -162,6 +169,8 @@ module Aws::DeviceFarm
     ListUniqueProblemsResult = Shapes::StructureShape.new(name: 'ListUniqueProblemsResult')
     ListUploadsRequest = Shapes::StructureShape.new(name: 'ListUploadsRequest')
     ListUploadsResult = Shapes::StructureShape.new(name: 'ListUploadsResult')
+    ListVPCEConfigurationsRequest = Shapes::StructureShape.new(name: 'ListVPCEConfigurationsRequest')
+    ListVPCEConfigurationsResult = Shapes::StructureShape.new(name: 'ListVPCEConfigurationsResult')
     Location = Shapes::StructureShape.new(name: 'Location')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxSlotMap = Shapes::MapShape.new(name: 'MaxSlotMap')
@@ -219,6 +228,7 @@ module Aws::DeviceFarm
     ScheduleRunResult = Shapes::StructureShape.new(name: 'ScheduleRunResult')
     ScheduleRunTest = Shapes::StructureShape.new(name: 'ScheduleRunTest')
     ServiceAccountException = Shapes::StructureShape.new(name: 'ServiceAccountException')
+    ServiceDnsName = Shapes::StringShape.new(name: 'ServiceDnsName')
     SkipAppResign = Shapes::BooleanShape.new(name: 'SkipAppResign')
     SshPublicKey = Shapes::StringShape.new(name: 'SshPublicKey')
     StopRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionRequest')
@@ -248,10 +258,17 @@ module Aws::DeviceFarm
     UpdateNetworkProfileResult = Shapes::StructureShape.new(name: 'UpdateNetworkProfileResult')
     UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
     UpdateProjectResult = Shapes::StructureShape.new(name: 'UpdateProjectResult')
+    UpdateVPCEConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateVPCEConfigurationRequest')
+    UpdateVPCEConfigurationResult = Shapes::StructureShape.new(name: 'UpdateVPCEConfigurationResult')
     Upload = Shapes::StructureShape.new(name: 'Upload')
     UploadStatus = Shapes::StringShape.new(name: 'UploadStatus')
     UploadType = Shapes::StringShape.new(name: 'UploadType')
     Uploads = Shapes::ListShape.new(name: 'Uploads')
+    VPCEConfiguration = Shapes::StructureShape.new(name: 'VPCEConfiguration')
+    VPCEConfigurationDescription = Shapes::StringShape.new(name: 'VPCEConfigurationDescription')
+    VPCEConfigurationName = Shapes::StringShape.new(name: 'VPCEConfigurationName')
+    VPCEConfigurations = Shapes::ListShape.new(name: 'VPCEConfigurations')
+    VPCEServiceName = Shapes::StringShape.new(name: 'VPCEServiceName')
 
     AccountSettings.add_member(:aws_account_number, Shapes::ShapeRef.new(shape: AWSAccountNumber, location_name: "awsAccountNumber"))
     AccountSettings.add_member(:unmetered_devices, Shapes::ShapeRef.new(shape: PurchasedDevicesMap, location_name: "unmeteredDevices"))
@@ -362,6 +379,15 @@ module Aws::DeviceFarm
     CreateUploadResult.add_member(:upload, Shapes::ShapeRef.new(shape: Upload, location_name: "upload"))
     CreateUploadResult.struct_class = Types::CreateUploadResult
 
+    CreateVPCEConfigurationRequest.add_member(:vpce_configuration_name, Shapes::ShapeRef.new(shape: VPCEConfigurationName, required: true, location_name: "vpceConfigurationName"))
+    CreateVPCEConfigurationRequest.add_member(:vpce_service_name, Shapes::ShapeRef.new(shape: VPCEServiceName, required: true, location_name: "vpceServiceName"))
+    CreateVPCEConfigurationRequest.add_member(:service_dns_name, Shapes::ShapeRef.new(shape: ServiceDnsName, required: true, location_name: "serviceDnsName"))
+    CreateVPCEConfigurationRequest.add_member(:vpce_configuration_description, Shapes::ShapeRef.new(shape: VPCEConfigurationDescription, location_name: "vpceConfigurationDescription"))
+    CreateVPCEConfigurationRequest.struct_class = Types::CreateVPCEConfigurationRequest
+
+    CreateVPCEConfigurationResult.add_member(:vpce_configuration, Shapes::ShapeRef.new(shape: VPCEConfiguration, location_name: "vpceConfiguration"))
+    CreateVPCEConfigurationResult.struct_class = Types::CreateVPCEConfigurationResult
+
     CustomerArtifactPaths.add_member(:ios_paths, Shapes::ShapeRef.new(shape: IosPaths, location_name: "iosPaths"))
     CustomerArtifactPaths.add_member(:android_paths, Shapes::ShapeRef.new(shape: AndroidPaths, location_name: "androidPaths"))
     CustomerArtifactPaths.add_member(:device_host_paths, Shapes::ShapeRef.new(shape: DeviceHostPaths, location_name: "deviceHostPaths"))
@@ -401,6 +427,11 @@ module Aws::DeviceFarm
     DeleteUploadRequest.struct_class = Types::DeleteUploadRequest
 
     DeleteUploadResult.struct_class = Types::DeleteUploadResult
+
+    DeleteVPCEConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    DeleteVPCEConfigurationRequest.struct_class = Types::DeleteVPCEConfigurationRequest
+
+    DeleteVPCEConfigurationResult.struct_class = Types::DeleteVPCEConfigurationResult
 
     Device.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     Device.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -480,6 +511,7 @@ module Aws::DeviceFarm
     GetDevicePoolCompatibilityRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "appArn"))
     GetDevicePoolCompatibilityRequest.add_member(:test_type, Shapes::ShapeRef.new(shape: TestType, location_name: "testType"))
     GetDevicePoolCompatibilityRequest.add_member(:test, Shapes::ShapeRef.new(shape: ScheduleRunTest, location_name: "test"))
+    GetDevicePoolCompatibilityRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ScheduleRunConfiguration, location_name: "configuration"))
     GetDevicePoolCompatibilityRequest.struct_class = Types::GetDevicePoolCompatibilityRequest
 
     GetDevicePoolCompatibilityResult.add_member(:compatible_devices, Shapes::ShapeRef.new(shape: DevicePoolCompatibilityResults, location_name: "compatibleDevices"))
@@ -559,6 +591,12 @@ module Aws::DeviceFarm
 
     GetUploadResult.add_member(:upload, Shapes::ShapeRef.new(shape: Upload, location_name: "upload"))
     GetUploadResult.struct_class = Types::GetUploadResult
+
+    GetVPCEConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    GetVPCEConfigurationRequest.struct_class = Types::GetVPCEConfigurationRequest
+
+    GetVPCEConfigurationResult.add_member(:vpce_configuration, Shapes::ShapeRef.new(shape: VPCEConfiguration, location_name: "vpceConfiguration"))
+    GetVPCEConfigurationResult.struct_class = Types::GetVPCEConfigurationResult
 
     IncompatibilityMessage.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     IncompatibilityMessage.add_member(:type, Shapes::ShapeRef.new(shape: DeviceAttribute, location_name: "type"))
@@ -747,6 +785,14 @@ module Aws::DeviceFarm
     ListUploadsResult.add_member(:uploads, Shapes::ShapeRef.new(shape: Uploads, location_name: "uploads"))
     ListUploadsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListUploadsResult.struct_class = Types::ListUploadsResult
+
+    ListVPCEConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    ListVPCEConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListVPCEConfigurationsRequest.struct_class = Types::ListVPCEConfigurationsRequest
+
+    ListVPCEConfigurationsResult.add_member(:vpce_configurations, Shapes::ShapeRef.new(shape: VPCEConfigurations, location_name: "vpceConfigurations"))
+    ListVPCEConfigurationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListVPCEConfigurationsResult.struct_class = Types::ListVPCEConfigurationsResult
 
     Location.add_member(:latitude, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "latitude"))
     Location.add_member(:longitude, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "longitude"))
@@ -943,6 +989,7 @@ module Aws::DeviceFarm
     ScheduleRunConfiguration.add_member(:network_profile_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "networkProfileArn"))
     ScheduleRunConfiguration.add_member(:locale, Shapes::ShapeRef.new(shape: String, location_name: "locale"))
     ScheduleRunConfiguration.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "location"))
+    ScheduleRunConfiguration.add_member(:vpce_configuration_arns, Shapes::ShapeRef.new(shape: AmazonResourceNames, location_name: "vpceConfigurationArns"))
     ScheduleRunConfiguration.add_member(:customer_artifact_paths, Shapes::ShapeRef.new(shape: CustomerArtifactPaths, location_name: "customerArtifactPaths"))
     ScheduleRunConfiguration.add_member(:radios, Shapes::ShapeRef.new(shape: Radios, location_name: "radios"))
     ScheduleRunConfiguration.add_member(:auxiliary_apps, Shapes::ShapeRef.new(shape: AmazonResourceNames, location_name: "auxiliaryApps"))
@@ -1078,6 +1125,16 @@ module Aws::DeviceFarm
     UpdateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
     UpdateProjectResult.struct_class = Types::UpdateProjectResult
 
+    UpdateVPCEConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    UpdateVPCEConfigurationRequest.add_member(:vpce_configuration_name, Shapes::ShapeRef.new(shape: VPCEConfigurationName, location_name: "vpceConfigurationName"))
+    UpdateVPCEConfigurationRequest.add_member(:vpce_service_name, Shapes::ShapeRef.new(shape: VPCEServiceName, location_name: "vpceServiceName"))
+    UpdateVPCEConfigurationRequest.add_member(:service_dns_name, Shapes::ShapeRef.new(shape: ServiceDnsName, location_name: "serviceDnsName"))
+    UpdateVPCEConfigurationRequest.add_member(:vpce_configuration_description, Shapes::ShapeRef.new(shape: VPCEConfigurationDescription, location_name: "vpceConfigurationDescription"))
+    UpdateVPCEConfigurationRequest.struct_class = Types::UpdateVPCEConfigurationRequest
+
+    UpdateVPCEConfigurationResult.add_member(:vpce_configuration, Shapes::ShapeRef.new(shape: VPCEConfiguration, location_name: "vpceConfiguration"))
+    UpdateVPCEConfigurationResult.struct_class = Types::UpdateVPCEConfigurationResult
+
     Upload.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     Upload.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     Upload.add_member(:created, Shapes::ShapeRef.new(shape: DateTime, location_name: "created"))
@@ -1090,6 +1147,15 @@ module Aws::DeviceFarm
     Upload.struct_class = Types::Upload
 
     Uploads.member = Shapes::ShapeRef.new(shape: Upload)
+
+    VPCEConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
+    VPCEConfiguration.add_member(:vpce_configuration_name, Shapes::ShapeRef.new(shape: VPCEConfigurationName, location_name: "vpceConfigurationName"))
+    VPCEConfiguration.add_member(:vpce_service_name, Shapes::ShapeRef.new(shape: VPCEServiceName, location_name: "vpceServiceName"))
+    VPCEConfiguration.add_member(:service_dns_name, Shapes::ShapeRef.new(shape: ServiceDnsName, location_name: "serviceDnsName"))
+    VPCEConfiguration.add_member(:vpce_configuration_description, Shapes::ShapeRef.new(shape: VPCEConfigurationDescription, location_name: "vpceConfigurationDescription"))
+    VPCEConfiguration.struct_class = Types::VPCEConfiguration
+
+    VPCEConfigurations.member = Shapes::ShapeRef.new(shape: VPCEConfiguration)
 
 
     # @api private
@@ -1178,6 +1244,17 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
       end)
 
+      api.add_operation(:create_vpce_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVPCEConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVPCEConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVPCEConfigurationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
       api.add_operation(:delete_device_pool, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDevicePool"
         o.http_method = "POST"
@@ -1260,6 +1337,18 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:delete_vpce_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVPCEConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVPCEConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVPCEConfigurationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
 
       api.add_operation(:get_account_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1445,6 +1534,17 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:get_vpce_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetVPCEConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetVPCEConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetVPCEConfigurationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
       end)
 
@@ -1744,6 +1844,16 @@ module Aws::DeviceFarm
         )
       end)
 
+      api.add_operation(:list_vpce_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVPCEConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListVPCEConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVPCEConfigurationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
       api.add_operation(:purchase_offering, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PurchaseOffering"
         o.http_method = "POST"
@@ -1865,6 +1975,18 @@ module Aws::DeviceFarm
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:update_vpce_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateVPCEConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateVPCEConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateVPCEConfigurationResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
       end)
     end
 

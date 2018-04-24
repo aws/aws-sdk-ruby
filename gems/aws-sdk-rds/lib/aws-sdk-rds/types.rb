@@ -8107,6 +8107,7 @@ module Aws::RDS
     #         preferred_backup_window: "String",
     #         preferred_maintenance_window: "String",
     #         enable_iam_database_authentication: false,
+    #         engine_version: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -8258,6 +8259,16 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless the
+    #   ApplyImmediately parameter is set to true.
+    #
+    #   For a list of valid engine versions, see CreateDBInstance, or call
+    #   DescribeDBEngineVersions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -8272,7 +8283,8 @@ module Aws::RDS
       :option_group_name,
       :preferred_backup_window,
       :preferred_maintenance_window,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :engine_version)
       include Aws::Structure
     end
 

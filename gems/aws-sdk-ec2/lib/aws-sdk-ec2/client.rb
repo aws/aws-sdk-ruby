@@ -2390,10 +2390,9 @@ module Aws::EC2
     #   The action will eventually fail.
     #
     # @option params [String] :presigned_url
-    #   The pre-signed URL parameter is required when copying an encrypted
-    #   snapshot with the Amazon EC2 Query API; it is available as an optional
-    #   parameter in all other cases. For more information, see [Query
-    #   Requests][1].
+    #   When you copy an encrypted source snapshot using the Amazon EC2 Query
+    #   API, you must supply a pre-signed URL. This parameter is optional for
+    #   unencrypted snapshots. For more information, see [Query Requests][1].
     #
     #   The `PresignedUrl` should use the snapshot source endpoint, the
     #   `CopySnapshot` action, and include the `SourceRegion`,
@@ -5258,11 +5257,16 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [Integer] :iops
-    #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
-    #   operations per second (IOPS) to provision for the volume, with a
-    #   maximum ratio of 50 IOPS/GiB.
+    #   The number of I/O operations per second (IOPS) to provision for the
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
+    #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
+    #   Volume Types][1].
     #
-    #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
+    #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #
     # @option params [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
@@ -5311,7 +5315,11 @@ module Aws::EC2
     #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
     #   Cold HDD, or `standard` for Magnetic volumes.
     #
-    #   Default: `standard`
+    #   Defaults: If no volume type is specified, the default is `standard` in
+    #   us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1,
+    #   ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2,
+    #   ap-south-1, us-gov-west-1, and cn-north-1. In all other regions, EBS
+    #   defaults to `gp2`.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -9122,23 +9130,23 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filter
     #   One or more filters.
     #
-    #   * `instance-type` - The instance type size that the Dedicated Host is
-    #     configured to support.
-    #
     #   * `auto-placement` - Whether auto-placement is enabled or disabled
     #     (`on` \| `off`).
+    #
+    #   * `availability-zone` - The Availability Zone of the host.
+    #
+    #   * `client-token` - The idempotency token you provided when you
+    #     allocated the host.
     #
     #   * `host-reservation-id` - The ID of the reservation assigned to this
     #     host.
     #
-    #   * `client-token` - The idempotency token you provided when you
-    #     launched the instance
+    #   * `instance-type` - The instance type size that the Dedicated Host is
+    #     configured to support.
     #
-    #   * `state`- The allocation state of the Dedicated Host (`available` \|
+    #   * `state` - The allocation state of the Dedicated Host (`available` \|
     #     `under-assessment` \| `permanent-failure` \| `released` \|
     #     `released-permanent-failure`).
-    #
-    #   * `availability-zone` - The Availability Zone of the host.
     #
     # @option params [Array<String>] :host_ids
     #   The IDs of the Dedicated Hosts. The IDs are used for targeted instance
@@ -9195,6 +9203,8 @@ module Aws::EC2
     #   resp.hosts[0].instances[0].instance_id #=> String
     #   resp.hosts[0].instances[0].instance_type #=> String
     #   resp.hosts[0].state #=> String, one of "available", "under-assessment", "permanent-failure", "released", "released-permanent-failure"
+    #   resp.hosts[0].allocation_time #=> Time
+    #   resp.hosts[0].release_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts AWS API Documentation
@@ -14418,7 +14428,10 @@ module Aws::EC2
     #     for Throughput Optimized HDD, `sc1`for Cold HDD, or `standard` for
     #     Magnetic.
     #
-    #   * `launch.group-id` - The security group for the instance.
+    #   * `launch.group-id` - The ID of the security group for the instance.
+    #
+    #   * `launch.group-name` - The name of the security group for the
+    #     instance.
     #
     #   * `launch.image-id` - The ID of the AMI.
     #
@@ -15494,7 +15507,7 @@ module Aws::EC2
     #     attached to.
     #
     #   * `attachment.status` - The attachment state (`attaching` \|
-    #     `attached` \| `detaching` \| `detached`).
+    #     `attached` \| `detaching`).
     #
     #   * `availability-zone` - The Availability Zone in which the volume was
     #     created.
@@ -18962,6 +18975,13 @@ module Aws::EC2
 
     # Modifies the specified attribute of the specified instance. You can
     # specify only one attribute at a time.
+    #
+    # <b>Note: </b>Using this action to change the security groups
+    # associated with an elastic network interface (ENI) attached to an
+    # instance in a VPC can result in an error if the instance has more than
+    # one ENI. To change the security groups associated with an ENI attached
+    # to an instance that has multiple ENIs, we recommend that you use the
+    # ModifyNetworkInterfaceAttribute action.
     #
     # To modify some attributes, the instance must be stopped. For more
     # information, see [Modifying Attributes of a Stopped Instance][1] in
@@ -24096,7 +24116,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

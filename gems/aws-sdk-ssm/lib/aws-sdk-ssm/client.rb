@@ -199,6 +199,8 @@ module Aws::SSM
     #   want the tag to have a value, specify the parameter with no value, and
     #   we set the value to an empty string.
     #
+    #   Do not enter personally identifiable information in this field.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -268,10 +270,14 @@ module Aws::SSM
     #   A userdefined description of the resource that you want to register
     #   with Amazon EC2.
     #
+    #   Do not enter personally identifiable information in this field.
+    #
     # @option params [String] :default_instance_name
     #   The name of the registered, managed instance as it will appear in the
     #   Amazon EC2 console or when you use the AWS command line tools to list
     #   EC2 resources.
+    #
+    #   Do not enter personally identifiable information in this field.
     #
     # @option params [required, String] :iam_role
     #   The Amazon Identity and Access Management (IAM) role that you want to
@@ -942,6 +948,76 @@ module Aws::SSM
     # @param [Hash] params ({})
     def delete_document(params = {}, options = {})
       req = build_request(:delete_document, params)
+      req.send_request(options)
+    end
+
+    # Delete a custom inventory type, or the data associated with a custom
+    # Inventory type. Deleting a custom inventory type is also referred to
+    # as deleting a custom inventory schema.
+    #
+    # @option params [required, String] :type_name
+    #   The name of the custom inventory type for which you want to delete
+    #   either all previously collected data, or the inventory type itself.
+    #
+    # @option params [String] :schema_delete_option
+    #   Use the `SchemaDeleteOption` to delete a custom inventory type
+    #   (schema). If you don't choose this option, the system only deletes
+    #   existing inventory data associated with the custom inventory type.
+    #   Choose one of the following options:
+    #
+    #   DisableSchema: If you choose this option, the system ignores all
+    #   inventory data for the specified version, and any earlier versions. To
+    #   enable this schema again, you must call the `PutInventory` action for
+    #   a version greater than the disbled version.
+    #
+    #   DeleteSchema: This option deletes the specified custom type from the
+    #   Inventory service. You can recreate the schema later, if you want.
+    #
+    # @option params [Boolean] :dry_run
+    #   Use this option to view a summary of the deletion request without
+    #   deleting any data or the data type. This option is useful when you
+    #   only want to understand what will be deleted. Once you validate that
+    #   the data to be deleted is what you intend to delete, you can run the
+    #   same command without specifying the `DryRun` option.
+    #
+    # @option params [String] :client_token
+    #   User-provided idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteInventoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInventoryResult#deletion_id #deletion_id} => String
+    #   * {Types::DeleteInventoryResult#type_name #type_name} => String
+    #   * {Types::DeleteInventoryResult#deletion_summary #deletion_summary} => Types::InventoryDeletionSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inventory({
+    #     type_name: "InventoryItemTypeName", # required
+    #     schema_delete_option: "DisableSchema", # accepts DisableSchema, DeleteSchema
+    #     dry_run: false,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deletion_id #=> String
+    #   resp.type_name #=> String
+    #   resp.deletion_summary.total_count #=> Integer
+    #   resp.deletion_summary.remaining_count #=> Integer
+    #   resp.deletion_summary.summary_items #=> Array
+    #   resp.deletion_summary.summary_items[0].version #=> String
+    #   resp.deletion_summary.summary_items[0].count #=> Integer
+    #   resp.deletion_summary.summary_items[0].remaining_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteInventory AWS API Documentation
+    #
+    # @overload delete_inventory(params = {})
+    # @param [Hash] params ({})
+    def delete_inventory(params = {}, options = {})
+      req = build_request(:delete_inventory, params)
       req.send_request(options)
     end
 
@@ -2079,6 +2155,60 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_instance_patches(params = {}, options = {})
       req = build_request(:describe_instance_patches, params)
+      req.send_request(options)
+    end
+
+    # Describes a specific delete inventory operation.
+    #
+    # @option params [String] :deletion_id
+    #   Specify the delete inventory ID for which you want information. This
+    #   ID was returned by the `DeleteInventory` action.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @return [Types::DescribeInventoryDeletionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInventoryDeletionsResult#inventory_deletions #inventory_deletions} => Array&lt;Types::InventoryDeletionStatusItem&gt;
+    #   * {Types::DescribeInventoryDeletionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inventory_deletions({
+    #     deletion_id: "InventoryDeletionId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inventory_deletions #=> Array
+    #   resp.inventory_deletions[0].deletion_id #=> String
+    #   resp.inventory_deletions[0].type_name #=> String
+    #   resp.inventory_deletions[0].deletion_start_time #=> Time
+    #   resp.inventory_deletions[0].last_status #=> String, one of "InProgress", "Complete"
+    #   resp.inventory_deletions[0].last_status_message #=> String
+    #   resp.inventory_deletions[0].deletion_summary.total_count #=> Integer
+    #   resp.inventory_deletions[0].deletion_summary.remaining_count #=> Integer
+    #   resp.inventory_deletions[0].deletion_summary.summary_items #=> Array
+    #   resp.inventory_deletions[0].deletion_summary.summary_items[0].version #=> String
+    #   resp.inventory_deletions[0].deletion_summary.summary_items[0].count #=> Integer
+    #   resp.inventory_deletions[0].deletion_summary.summary_items[0].remaining_count #=> Integer
+    #   resp.inventory_deletions[0].last_status_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInventoryDeletions AWS API Documentation
+    #
+    # @overload describe_inventory_deletions(params = {})
+    # @param [Hash] params ({})
+    def describe_inventory_deletions(params = {}, options = {})
+      req = build_request(:describe_inventory_deletions, params)
       req.send_request(options)
     end
 
@@ -3552,8 +3682,18 @@ module Aws::SSM
     # @option params [Boolean] :recursive
     #   Retrieve all parameters within a hierarchy.
     #
+    #   If a user has access to a path, then the user can access all levels of
+    #   that path. For example, if a user has permission to access path /a,
+    #   then the user can also access /a/b. Even if a user has explicitly been
+    #   denied access in IAM for parameter /a, they can still call the
+    #   GetParametersByPath API action recursively and view /a/b.
+    #
     # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
     #   Filters to limit the request results.
+    #
+    #   <note markdown="1"> You can't filter using the parameter name.
+    #
+    #    </note>
     #
     # @option params [Boolean] :with_decryption
     #   Retrieve all parameters in a hierarchy with their value decrypted.
@@ -4667,7 +4807,9 @@ module Aws::SSM
     # @option params [required, Array<Types::InventoryItem>] :items
     #   The inventory items that you want to add or update on instances.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::PutInventoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutInventoryResult#message #message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4690,6 +4832,10 @@ module Aws::SSM
     #       },
     #     ],
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventory AWS API Documentation
     #
@@ -4725,6 +4871,8 @@ module Aws::SSM
     #
     # @option params [String] :description
     #   Information about the parameter that you want to add to the system.
+    #
+    #   Do not enter personally identifiable information in this field.
     #
     # @option params [required, String] :value
     #   The parameter value that you want to add to the system.
@@ -4925,6 +5073,14 @@ module Aws::SSM
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
     #   The parameters that should be passed to the task when it is executed.
     #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
+    #   a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
+    #
     # @option params [Types::MaintenanceWindowTaskInvocationParameters] :task_invocation_parameters
     #   The parameters that the task should use during execution. Populate
     #   only the fields that match the task type. All other fields should be
@@ -4946,6 +5102,15 @@ module Aws::SSM
     # @option params [Types::LoggingInfo] :logging_info
     #   A structure containing information about an Amazon S3 bucket to write
     #   instance-level logs to.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    #   options in the `TaskInvocationParameters` structure. For information
+    #   about how Systems Manager handles these options for the supported
+    #   Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #
     # @option params [String] :name
     #   An optional name for the task.
@@ -5152,7 +5317,7 @@ module Aws::SSM
     #
     # @option params [Integer] :timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it will not execute.
+    #   executing, it will not run.
     #
     # @option params [String] :comment
     #   User-specified information about the command, such as a brief
@@ -5852,18 +6017,18 @@ module Aws::SSM
     # Modifies a task assigned to a Maintenance Window. You can't change
     # the task type, but you can change the following values:
     #
-    # Task ARN. For example, you can change a RUN\_COMMAND task from
-    # AWS-RunPowerShellScript to AWS-RunShellScript.
+    # * TaskARN. For example, you can change a RUN\_COMMAND task from
+    #   AWS-RunPowerShellScript to AWS-RunShellScript.
     #
-    # Service role ARN.
+    # * ServiceRoleArn
     #
-    # Task parameters.
+    # * TaskInvocationParameters
     #
-    # Task priority.
+    # * Priority
     #
-    # Task MaxConcurrency and MaxErrors.
+    # * MaxConcurrency
     #
-    # Log location.
+    # * MaxErrors
     #
     # If a parameter is null, then the corresponding field is not modified.
     # Also, if you set Replace to true, then all fields required by the
@@ -5889,7 +6054,17 @@ module Aws::SSM
     #   during task execution.
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
-    #   The parameters to modify. The map has the following format:
+    #   The parameters to modify.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
+    #   a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
+    #
+    #   The map has the following format:
     #
     #   Key: string, between 1 and 255 characters
     #
@@ -5917,6 +6092,15 @@ module Aws::SSM
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   The new logging location in Amazon S3 to specify.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    #   options in the `TaskInvocationParameters` structure. For information
+    #   about how Systems Manager handles these options for the supported
+    #   Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #
     # @option params [String] :name
     #   The new task name to specify.
@@ -6257,7 +6441,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

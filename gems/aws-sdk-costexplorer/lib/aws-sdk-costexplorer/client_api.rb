@@ -75,6 +75,8 @@ module Aws::CostExplorer
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
     PurchasedHours = Shapes::StringShape.new(name: 'PurchasedHours')
+    RDSInstanceDetails = Shapes::StructureShape.new(name: 'RDSInstanceDetails')
+    RequestChangedException = Shapes::StructureShape.new(name: 'RequestChangedException')
     ReservationAggregates = Shapes::StructureShape.new(name: 'ReservationAggregates')
     ReservationCoverageGroup = Shapes::StructureShape.new(name: 'ReservationCoverageGroup')
     ReservationCoverageGroups = Shapes::ListShape.new(name: 'ReservationCoverageGroups')
@@ -253,6 +255,7 @@ module Aws::CostExplorer
     Groups.member = Shapes::ShapeRef.new(shape: Group)
 
     InstanceDetails.add_member(:ec2_instance_details, Shapes::ShapeRef.new(shape: EC2InstanceDetails, location_name: "EC2InstanceDetails"))
+    InstanceDetails.add_member(:rds_instance_details, Shapes::ShapeRef.new(shape: RDSInstanceDetails, location_name: "RDSInstanceDetails"))
     InstanceDetails.struct_class = Types::InstanceDetails
 
     Keys.member = Shapes::ShapeRef.new(shape: Key)
@@ -265,6 +268,16 @@ module Aws::CostExplorer
 
     Metrics.key = Shapes::ShapeRef.new(shape: MetricName)
     Metrics.value = Shapes::ShapeRef.new(shape: MetricValue)
+
+    RDSInstanceDetails.add_member(:family, Shapes::ShapeRef.new(shape: GenericString, location_name: "Family"))
+    RDSInstanceDetails.add_member(:instance_type, Shapes::ShapeRef.new(shape: GenericString, location_name: "InstanceType"))
+    RDSInstanceDetails.add_member(:region, Shapes::ShapeRef.new(shape: GenericString, location_name: "Region"))
+    RDSInstanceDetails.add_member(:database_engine, Shapes::ShapeRef.new(shape: GenericString, location_name: "DatabaseEngine"))
+    RDSInstanceDetails.add_member(:deployment_option, Shapes::ShapeRef.new(shape: GenericString, location_name: "DeploymentOption"))
+    RDSInstanceDetails.add_member(:license_model, Shapes::ShapeRef.new(shape: GenericString, location_name: "LicenseModel"))
+    RDSInstanceDetails.add_member(:current_generation, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "CurrentGeneration"))
+    RDSInstanceDetails.add_member(:size_flex_eligible, Shapes::ShapeRef.new(shape: GenericBoolean, location_name: "SizeFlexEligible"))
+    RDSInstanceDetails.struct_class = Types::RDSInstanceDetails
 
     ReservationAggregates.add_member(:utilization_percentage, Shapes::ShapeRef.new(shape: UtilizationPercentage, location_name: "UtilizationPercentage"))
     ReservationAggregates.add_member(:purchased_hours, Shapes::ShapeRef.new(shape: PurchasedHours, location_name: "PurchasedHours"))
@@ -380,6 +393,7 @@ module Aws::CostExplorer
         o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
         o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
       end)
 
       api.add_operation(:get_dimension_values, Seahorse::Model::Operation.new.tap do |o|
@@ -390,7 +404,9 @@ module Aws::CostExplorer
         o.output = Shapes::ShapeRef.new(shape: GetDimensionValuesResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
       end)
 
       api.add_operation(:get_reservation_coverage, Seahorse::Model::Operation.new.tap do |o|
@@ -434,7 +450,9 @@ module Aws::CostExplorer
         o.output = Shapes::ShapeRef.new(shape: GetTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: BillExpirationException)
+        o.errors << Shapes::ShapeRef.new(shape: DataUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestChangedException)
       end)
     end
 

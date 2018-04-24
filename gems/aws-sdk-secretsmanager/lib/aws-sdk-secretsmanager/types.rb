@@ -73,9 +73,7 @@ module Aws::SecretsManager
     #       }
     #
     # @!attribute [rw] name
-    #   Specifies the friendly name of the new secret. The secret name can
-    #   consist of uppercase letters, lowercase letters, digits, and any of
-    #   the following characters: /\_+=.@-    Spaces are not permitted.
+    #   Specifies the friendly name of the new secret.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -87,9 +85,9 @@ module Aws::SecretsManager
     #   then you can leave this parameter empty. The CLI or SDK generates a
     #   random UUID for you and includes as the value for this parameter in
     #   the request. If you don't use the SDK and instead generate a raw
-    #   HTTP request to the AWS Secrets Manager service endpoint, then you
-    #   must generate a `ClientRequestToken` yourself for the new version
-    #   and include that value in the request.
+    #   HTTP request to the Secrets Manager service endpoint, then you must
+    #   generate a `ClientRequestToken` yourself for the new version and
+    #   include that value in the request.
     #
     #    </note>
     #
@@ -135,7 +133,7 @@ module Aws::SecretsManager
     #   If you don't specify this value, then Secrets Manager defaults to
     #   using the AWS account's default CMK (the one named
     #   `aws/secretsmanager`). If a KMS CMK with that name doesn't yet
-    #   exist, then AWS Secrets Manager creates it for you automatically the
+    #   exist, then Secrets Manager creates it for you automatically the
     #   first time it needs to encrypt a version's `SecretString` or
     #   `SecretBinary` fields.
     #
@@ -202,8 +200,8 @@ module Aws::SecretsManager
     #   This operation only appends tags to the existing list of tags. To
     #   remove tags, you must use UntagResource.
     #
-    #   * AWS Secrets Manager tag key names are case sensitive. A tag with
-    #     the key "ABC" is a different tag from one with key "abc".
+    #   * Secrets Manager tag key names are case sensitive. A tag with the
+    #     key "ABC" is a different tag from one with key "abc".
     #
     #   * If you check tags in IAM policy `Condition` elements as part of
     #     your security strategy, then adding or removing a tag can change
@@ -264,13 +262,13 @@ module Aws::SecretsManager
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the secret that you just created.
     #
-    #   <note markdown="1"> AWS Secrets Manager automatically adds several random characters to
-    #   the name at the end of the ARN when you initially create a secret.
-    #   This affects only the ARN and not the actual friendly name. This
-    #   ensures that if you create a new secret with the same name as an old
-    #   secret that you previously deleted, then users with access to the
-    #   old secret *don't* automatically get access to the new secret
-    #   because the ARNs are different.
+    #   <note markdown="1"> Secrets Manager automatically adds several random characters to the
+    #   name at the end of the ARN when you initially create a secret. This
+    #   affects only the ARN and not the actual friendly name. This ensures
+    #   that if you create a new secret with the same name as an old secret
+    #   that you previously deleted, then users with access to the old
+    #   secret *don't* automatically get access to the new secret because
+    #   the ARNs are different.
     #
     #    </note>
     #   @return [String]
@@ -307,8 +305,8 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] recovery_window_in_days
-    #   (Optional) Specifies the number of days that AWS Secrets Manager
-    #   waits before it can delete the secret.
+    #   (Optional) Specifies the number of days that Secrets Manager waits
+    #   before it can delete the secret.
     #
     #   This value can range from 7 to 30 days. The default value is 30.
     #   @return [Integer]
@@ -330,9 +328,9 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] deletion_date
-    #   The date and time after which this secret will be deleted by AWS
-    #   Secrets Manager and is no longer recoverable. This value is the date
-    #   and time of the delete request plus the number of days specified in
+    #   The date and time after which this secret can be deleted by Secrets
+    #   Manager and can no longer be restored. This value is the date and
+    #   time of the delete request plus the number of days specified in
     #   `RecoveryWindowInDays`.
     #   @return [Time]
     #
@@ -380,7 +378,7 @@ module Aws::SecretsManager
     # @!attribute [rw] kms_key_id
     #   The ARN or alias of the AWS KMS customer master key (CMK) that's
     #   used to encrypt the `SecretString` and `SecretBinary` fields in each
-    #   version of the secret. If you don't provide a key, then AWS Secrets
+    #   version of the secret. If you don't provide a key, then Secrets
     #   Manager defaults to encrypting the secret fields with the default
     #   KMS CMK (the one named `awssecretsmanager`) for this account.
     #   @return [String]
@@ -394,9 +392,9 @@ module Aws::SecretsManager
     #   @return [Boolean]
     #
     # @!attribute [rw] rotation_lambda_arn
-    #   The ARN of a Lambda function that's invoked by AWS Secrets Manager
-    #   to rotate the secret either automatically per the schedule or
-    #   manually by a call to `RotateSecret`.
+    #   The ARN of a Lambda function that's invoked by Secrets Manager to
+    #   rotate the secret either automatically per the schedule or manually
+    #   by a call to `RotateSecret`.
     #   @return [String]
     #
     # @!attribute [rw] rotation_rules
@@ -646,7 +644,7 @@ module Aws::SecretsManager
     #
     #   If you store custom information in the secret by using the
     #   CreateSecret, UpdateSecret, or PutSecretValue API operations instead
-    #   of the AWS Secrets Manager console, or by using the **Other secret
+    #   of the Secrets Manager console, or by using the **Other secret
     #   type** in the console, then you must code your Lambda rotation
     #   function to parse and interpret those values.
     #   @return [String]
@@ -696,8 +694,8 @@ module Aws::SecretsManager
     #   beyond the maximum you specify, the `NextToken` response element is
     #   present and has a value (isn't null). Include that value as the
     #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that AWS Secrets Manager
-    #   might return fewer results than the maximum even when there are more
+    #   get the next part of the results. Note that Secrets Manager might
+    #   return fewer results than the maximum even when there are more
     #   results available. You should check `NextToken` after every
     #   operation to ensure that you receive all of the results.
     #   @return [Integer]
@@ -746,13 +744,13 @@ module Aws::SecretsManager
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) for the secret.
     #
-    #   <note markdown="1"> AWS Secrets Manager automatically adds several random characters to
-    #   the name at the end of the ARN when you initially create a secret.
-    #   This affects only the ARN and not the actual friendly name. This
-    #   ensures that if you create a new secret with the same name as an old
-    #   secret that you previously deleted, then users with access to the
-    #   old secret *don't* automatically get access to the new secret
-    #   because the ARNs are different.
+    #   <note markdown="1"> Secrets Manager automatically adds several random characters to the
+    #   name at the end of the ARN when you initially create a secret. This
+    #   affects only the ARN and not the actual friendly name. This ensures
+    #   that if you create a new secret with the same name as an old secret
+    #   that you previously deleted, then users with access to the old
+    #   secret *don't* automatically get access to the new secret because
+    #   the ARNs are different.
     #
     #    </note>
     #   @return [String]
@@ -786,8 +784,8 @@ module Aws::SecretsManager
     #   beyond the maximum you specify, the `NextToken` response element is
     #   present and has a value (isn't null). Include that value as the
     #   `NextToken` request parameter in the next call to the operation to
-    #   get the next part of the results. Note that AWS Secrets Manager
-    #   might return fewer results than the maximum even when there are more
+    #   get the next part of the results. Note that Secrets Manager might
+    #   return fewer results than the maximum even when there are more
     #   results available. You should check `NextToken` after every
     #   operation to ensure that you receive all of the results.
     #   @return [Integer]
@@ -846,10 +844,6 @@ module Aws::SecretsManager
     #   Specifies the secret to which you want to add a new version. You can
     #   specify either the Amazon Resource Name (ARN) or the friendly name
     #   of the secret. The secret must already exist.
-    #
-    #   The secret name can consist of uppercase letters, lowercase letters,
-    #   digits, and any of the following characters: /\_+=.@-    Spaces are
-    #   not permitted.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -859,8 +853,8 @@ module Aws::SecretsManager
     #   <note markdown="1"> If you use the AWS CLI or one of the AWS SDK to call this operation,
     #   then you can leave this parameter empty. The CLI or SDK generates a
     #   random UUID for you and includes that in the request. If you don't
-    #   use the SDK and instead generate a raw HTTP request to the AWS
-    #   Secrets Manager service endpoint, then you must generate a
+    #   use the SDK and instead generate a raw HTTP request to the Secrets
+    #   Manager service endpoint, then you must generate a
     #   `ClientRequestToken` yourself for new versions and include that
     #   value in the request.
     #
@@ -942,7 +936,7 @@ module Aws::SecretsManager
     #   automatically removed from the other version and attached to this
     #   version.
     #
-    #   If you do not specify a value for `VersionStages` then AWS Secrets
+    #   If you do not specify a value for `VersionStages` then Secrets
     #   Manager automatically moves the staging label `AWSCURRENT` to this
     #   new version.
     #   @return [Array<String>]
@@ -1050,7 +1044,7 @@ module Aws::SecretsManager
     #   then you can leave this parameter empty. The CLI or SDK generates a
     #   random UUID for you and includes that in the request for this
     #   parameter. If you don't use the SDK and instead generate a raw HTTP
-    #   request to the AWS Secrets Manager service endpoint, then you must
+    #   request to the Secrets Manager service endpoint, then you must
     #   generate a `ClientRequestToken` yourself for new versions and
     #   include that value in the request.
     #
@@ -1155,7 +1149,7 @@ module Aws::SecretsManager
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the secret.
     #
-    #   For more information about ARNs in AWS Secrets Manager, see [Policy
+    #   For more information about ARNs in Secrets Manager, see [Policy
     #   Resources][1] in the *AWS Secrets Manager User Guide*.
     #
     #
@@ -1177,7 +1171,7 @@ module Aws::SecretsManager
     # @!attribute [rw] kms_key_id
     #   The ARN or alias of the AWS KMS customer master key (CMK) that's
     #   used to encrypt the `SecretString` and `SecretBinary` fields in each
-    #   version of the secret. If you don't provide a key, then AWS Secrets
+    #   version of the secret. If you don't provide a key, then Secrets
     #   Manager defaults to encrypting the secret fields with the default
     #   KMS CMK (the one named `awssecretsmanager`) for this account.
     #   @return [String]
@@ -1188,8 +1182,8 @@ module Aws::SecretsManager
     #   @return [Boolean]
     #
     # @!attribute [rw] rotation_lambda_arn
-    #   The ARN of an AWS Lambda function that's invoked by AWS Secrets
-    #   Manager to rotate and expire the secret either automatically per the
+    #   The ARN of an AWS Lambda function that's invoked by Secrets Manager
+    #   to rotate and expire the secret either automatically per the
     #   schedule or manually by a call to RotateSecret.
     #   @return [String]
     #
@@ -1420,8 +1414,8 @@ module Aws::SecretsManager
     #   If you use the AWS CLI or one of the AWS SDK to call this operation,
     #   then you can leave this parameter empty. The CLI or SDK generates a
     #   random UUID for you and includes that in the request. If you don't
-    #   use the SDK and instead generate a raw HTTP request to the AWS
-    #   Secrets Manager service endpoint, then you must generate a
+    #   use the SDK and instead generate a raw HTTP request to the Secrets
+    #   Manager service endpoint, then you must generate a
     #   `ClientRequestToken` yourself for new versions and include that
     #   value in the request.
     #
@@ -1469,9 +1463,9 @@ module Aws::SecretsManager
     #   If you don't specify this value, then Secrets Manager defaults to
     #   using the default CMK in the account (the one named
     #   `aws/secretsmanager`). If a KMS CMK with that name doesn't exist,
-    #   then AWS Secrets Manager creates it for you automatically the first
-    #   time it needs to encrypt a version's `Plaintext` or
-    #   `PlaintextString` fields.
+    #   then Secrets Manager creates it for you automatically the first time
+    #   it needs to encrypt a version's `Plaintext` or `PlaintextString`
+    #   fields.
     #
     #   You can only use the account's default CMK to encrypt and decrypt
     #   if you call this operation using credentials from the same account
@@ -1527,13 +1521,13 @@ module Aws::SecretsManager
     # @!attribute [rw] arn
     #   The ARN of this secret.
     #
-    #   <note markdown="1"> AWS Secrets Manager automatically adds several random characters to
-    #   the name at the end of the ARN when you initially create a secret.
-    #   This affects only the ARN and not the actual friendly name. This
-    #   ensures that if you create a new secret with the same name as an old
-    #   secret that you previously deleted, then users with access to the
-    #   old secret *don't* automatically get access to the new secret
-    #   because the ARNs are different.
+    #   <note markdown="1"> Secrets Manager automatically adds several random characters to the
+    #   name at the end of the ARN when you initially create a secret. This
+    #   affects only the ARN and not the actual friendly name. This ensures
+    #   that if you create a new secret with the same name as an old secret
+    #   that you previously deleted, then users with access to the old
+    #   secret *don't* automatically get access to the new secret because
+    #   the ARNs are different.
     #
     #    </note>
     #   @return [String]

@@ -75,6 +75,10 @@ module Aws::Firehose
     ListDeliveryStreamsInput = Shapes::StructureShape.new(name: 'ListDeliveryStreamsInput')
     ListDeliveryStreamsInputLimit = Shapes::IntegerShape.new(name: 'ListDeliveryStreamsInputLimit')
     ListDeliveryStreamsOutput = Shapes::StructureShape.new(name: 'ListDeliveryStreamsOutput')
+    ListTagsForDeliveryStreamInput = Shapes::StructureShape.new(name: 'ListTagsForDeliveryStreamInput')
+    ListTagsForDeliveryStreamInputLimit = Shapes::IntegerShape.new(name: 'ListTagsForDeliveryStreamInputLimit')
+    ListTagsForDeliveryStreamOutput = Shapes::StructureShape.new(name: 'ListTagsForDeliveryStreamOutput')
+    ListTagsForDeliveryStreamOutputTagList = Shapes::ListShape.new(name: 'ListTagsForDeliveryStreamOutputTagList')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LogStreamName = Shapes::StringShape.new(name: 'LogStreamName')
     NoEncryptionConfig = Shapes::StringShape.new(name: 'NoEncryptionConfig')
@@ -120,7 +124,16 @@ module Aws::Firehose
     SplunkRetryDurationInSeconds = Shapes::IntegerShape.new(name: 'SplunkRetryDurationInSeconds')
     SplunkRetryOptions = Shapes::StructureShape.new(name: 'SplunkRetryOptions')
     SplunkS3BackupMode = Shapes::StringShape.new(name: 'SplunkS3BackupMode')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagDeliveryStreamInput = Shapes::StructureShape.new(name: 'TagDeliveryStreamInput')
+    TagDeliveryStreamInputTagList = Shapes::ListShape.new(name: 'TagDeliveryStreamInputTagList')
+    TagDeliveryStreamOutput = Shapes::StructureShape.new(name: 'TagDeliveryStreamOutput')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UntagDeliveryStreamInput = Shapes::StructureShape.new(name: 'UntagDeliveryStreamInput')
+    UntagDeliveryStreamOutput = Shapes::StructureShape.new(name: 'UntagDeliveryStreamOutput')
     UpdateDestinationInput = Shapes::StructureShape.new(name: 'UpdateDestinationInput')
     UpdateDestinationOutput = Shapes::StructureShape.new(name: 'UpdateDestinationOutput')
     Username = Shapes::StringShape.new(name: 'Username')
@@ -295,6 +308,17 @@ module Aws::Firehose
     ListDeliveryStreamsOutput.add_member(:has_more_delivery_streams, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreDeliveryStreams"))
     ListDeliveryStreamsOutput.struct_class = Types::ListDeliveryStreamsOutput
 
+    ListTagsForDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
+    ListTagsForDeliveryStreamInput.add_member(:exclusive_start_tag_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "ExclusiveStartTagKey"))
+    ListTagsForDeliveryStreamInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListTagsForDeliveryStreamInputLimit, location_name: "Limit"))
+    ListTagsForDeliveryStreamInput.struct_class = Types::ListTagsForDeliveryStreamInput
+
+    ListTagsForDeliveryStreamOutput.add_member(:tags, Shapes::ShapeRef.new(shape: ListTagsForDeliveryStreamOutputTagList, required: true, location_name: "Tags"))
+    ListTagsForDeliveryStreamOutput.add_member(:has_more_tags, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreTags"))
+    ListTagsForDeliveryStreamOutput.struct_class = Types::ListTagsForDeliveryStreamOutput
+
+    ListTagsForDeliveryStreamOutputTagList.member = Shapes::ShapeRef.new(shape: Tag)
+
     ProcessingConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
     ProcessingConfiguration.add_member(:processors, Shapes::ShapeRef.new(shape: ProcessorList, location_name: "Processors"))
     ProcessingConfiguration.struct_class = Types::ProcessingConfiguration
@@ -445,6 +469,26 @@ module Aws::Firehose
     SplunkRetryOptions.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: SplunkRetryDurationInSeconds, location_name: "DurationInSeconds"))
     SplunkRetryOptions.struct_class = Types::SplunkRetryOptions
 
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
+    TagDeliveryStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagDeliveryStreamInputTagList, required: true, location_name: "Tags"))
+    TagDeliveryStreamInput.struct_class = Types::TagDeliveryStreamInput
+
+    TagDeliveryStreamInputTagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagDeliveryStreamOutput.struct_class = Types::TagDeliveryStreamOutput
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    UntagDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
+    UntagDeliveryStreamInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagDeliveryStreamInput.struct_class = Types::UntagDeliveryStreamInput
+
+    UntagDeliveryStreamOutput.struct_class = Types::UntagDeliveryStreamOutput
+
     UpdateDestinationInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     UpdateDestinationInput.add_member(:current_delivery_stream_version_id, Shapes::ShapeRef.new(shape: DeliveryStreamVersionId, required: true, location_name: "CurrentDeliveryStreamVersionId"))
     UpdateDestinationInput.add_member(:destination_id, Shapes::ShapeRef.new(shape: DestinationId, required: true, location_name: "DestinationId"))
@@ -510,6 +554,17 @@ module Aws::Firehose
         o.output = Shapes::ShapeRef.new(shape: ListDeliveryStreamsOutput)
       end)
 
+      api.add_operation(:list_tags_for_delivery_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForDeliveryStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForDeliveryStreamInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForDeliveryStreamOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:put_record, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutRecord"
         o.http_method = "POST"
@@ -530,6 +585,30 @@ module Aws::Firehose
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:tag_delivery_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagDeliveryStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagDeliveryStreamInput)
+        o.output = Shapes::ShapeRef.new(shape: TagDeliveryStreamOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:untag_delivery_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagDeliveryStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagDeliveryStreamInput)
+        o.output = Shapes::ShapeRef.new(shape: UntagDeliveryStreamOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:update_destination, Seahorse::Model::Operation.new.tap do |o|

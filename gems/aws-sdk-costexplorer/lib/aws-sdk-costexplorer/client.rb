@@ -301,7 +301,7 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # Retrieves all available filter values for a specific filter over a
+    # Retrieves all available filter values for a specified filter over a
     # period of time. You can search the dimension values for an arbitrary
     # string.
     #
@@ -328,31 +328,41 @@ module Aws::CostExplorer
     #   `COST_AND_USAGE` the resulting dimension values can be used in the
     #   `GetCostAndUsage` operation.
     #
-    #   If you set the context to `CostAndUsage`, you can use the following
+    #   If you set the context to `COST_AND_USAGE`, you can use the following
     #   dimensions for searching:
     #
     #   * AZ - The Availability Zone. An example is `us-east-1a`.
     #
-    #   * INSTANCE\_TYPE - The type of instance. An example is an EC2
+    #   * DATABASE\_ENGINE - The Amazon Relational Database Service database.
+    #     Examples are Aurora or MySQL.
+    #
+    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
     #     `m4.xlarge`.
+    #
+    #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
+    #     AWS services, such as Amazon Web Services.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that includes
     #     the full name of the member account. The value field contains the
     #     AWS ID of the member account.
     #
+    #   * OPERATING\_SYSTEM - The operating system. Examples are Windows or
+    #     Linux.
+    #
     #   * OPERATION - The action performed. Examples include `RunInstance` and
     #     `CreateBucket`.
+    #
+    #   * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
     #
     #   * PURCHASE\_TYPE - The reservation type of the purchase to which this
     #     usage is related. Examples include On-Demand Instances and Standard
     #     Reserved Instances.
     #
-    #   * SERVICE - The AWS service such as DynamoDB.
+    #   * SERVICE - The AWS service such as Amazon DynamoDB.
     #
     #   * USAGE\_TYPE - The type of usage. An example is
-    #     `DataTransfer-In-Bytes`. The response for the `GetDimensionValues`
-    #     operation includes a unit attribute, examples of which include GB
-    #     and Hrs.
+    #     DataTransfer-In-Bytes. The response for the `GetDimensionValues`
+    #     operation includes a unit attribute. Examples include GB and Hrs.
     #
     #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An example
     #     is EC2: CloudWatch – Alarms. The response for this operation
@@ -366,22 +376,28 @@ module Aws::CostExplorer
     #
     #   * AZ - The Availability Zone. An example is `us-east-1a`.
     #
-    #   * INSTANCE\_TYPE - The type of instance. An example is an EC2
+    #   * CACHE\_ENGINE - The Amazon ElastiCache operating system. Examples
+    #     are Windows or Linux.
+    #
+    #   * DEPLOYMENT\_OPTION - The scope of Amazon Relational Database Service
+    #     deployments. Valid values are `SingleAZ` and `MultiAZ`.
+    #
+    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that includes
     #     the full name of the member account. The value field contains the
     #     AWS ID of the member account.
     #
-    #   * PLATFORM - The specific combination of operating system, license
-    #     model, and software on an instance. For example, a Windows instance
-    #     with SQL Server Web and no license, or a Red Hat Enterprise Linux
-    #     instance.
+    #   * PLATFORM - The EC2 operating system. Examples are Windows or Linux.
     #
     #   * REGION - The AWS Region.
     #
-    #   * SCOPE - The scope of a Reserved Instance (RI). Values are regional
-    #     or a single Availability Zone.
+    #   * SCOPE (Utilization only) - The scope of a Reserved Instance (RI).
+    #     Values are regional or a single Availability Zone.
+    #
+    #   * TAG (Coverage only) - The tags that are associated with a Reserved
+    #     Instance (RI).
     #
     #   * TENANCY - The tenancy of a resource. Examples are shared or
     #     dedicated.
@@ -440,13 +456,25 @@ module Aws::CostExplorer
     #
     # * AZ
     #
+    # * CACHE\_ENGINE
+    #
+    # * DATABASE\_ENGINE
+    #
+    # * DEPLOYMENT\_OPTION
+    #
     # * INSTANCE\_TYPE
     #
     # * LINKED\_ACCOUNT
     #
+    # * OPERATING\_SYSTEM
+    #
     # * PLATFORM
     #
     # * REGION
+    #
+    # * SERVICE
+    #
+    # * TAG
     #
     # * TENANCY
     #
@@ -467,13 +495,23 @@ module Aws::CostExplorer
     #
     #   * AZ
     #
+    #   * CACHE\_ENGINE
+    #
+    #   * DATABASE\_ENGINE
+    #
+    #   * DEPLOYMENT\_OPTION
+    #
     #   * INSTANCE\_TYPE
     #
     #   * LINKED\_ACCOUNT
     #
+    #   * OPERATING\_SYSTEM
+    #
     #   * PLATFORM
     #
     #   * REGION
+    #
+    #   * TAG
     #
     #   * TENANCY
     #
@@ -482,8 +520,8 @@ module Aws::CostExplorer
     #   are `MONTHLY` and `DAILY`.
     #
     #   If `GroupBy` is set, `Granularity` can't be set. If `Granularity`
-    #   isn't set, the response object doesn't include the `Granularity`,
-    #   either `MONTHLY` or `DAILY`.
+    #   isn't set, the response object doesn't include `Granularity`, either
+    #   `MONTHLY` or `DAILY`.
     #
     # @option params [Types::Expression] :filter
     #   Filters utilization data by dimensions. You can filter by the
@@ -491,13 +529,25 @@ module Aws::CostExplorer
     #
     #   * AZ
     #
+    #   * CACHE\_ENGINE
+    #
+    #   * DATABASE\_ENGINE
+    #
+    #   * DEPLOYMENT\_OPTION
+    #
     #   * INSTANCE\_TYPE
     #
     #   * LINKED\_ACCOUNT
     #
+    #   * OPERATING\_SYSTEM
+    #
     #   * PLATFORM
     #
     #   * REGION
+    #
+    #   * SERVICE
+    #
+    #   * TAG
     #
     #   * TENANCY
     #
@@ -631,7 +681,8 @@ module Aws::CostExplorer
     #   The reservation purchase option that you want recommendations for.
     #
     # @option params [Types::ServiceSpecification] :service_specification
-    #   The specific service, such as EC2, that you want recommendations for.
+    #   The hardware specifications for the service instances that you want
+    #   recommendations for, such as standard or convertible EC2 instances.
     #
     # @option params [Integer] :page_size
     #   The number of recommendations that you want returned in a single
@@ -684,6 +735,14 @@ module Aws::CostExplorer
     #   resp.recommendations[0].recommendation_details[0].instance_details.ec2_instance_details.tenancy #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.ec2_instance_details.current_generation #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].instance_details.ec2_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.family #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.instance_type #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.database_engine #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.deployment_option #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.license_model #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.current_generation #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.size_flex_eligible #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].recommended_number_of_instances_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].recommended_normalized_units_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].minimum_number_of_instances_used_per_hour #=> String
@@ -715,15 +774,14 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # You can retrieve the reservation utilization for your account. Master
-    # accounts in an organization in AWS Organizations have access to their
-    # associated member accounts. You can filter data by dimensions in a
-    # time period. You can use `GetDimensionValues` to determine the
-    # possible dimension values. Currently, you can group only by
-    # `SUBSCRIPTION_ID`.
+    # Retrieves the reservation utilization for your account. Master
+    # accounts in an organization have access to member accounts. You can
+    # filter data by dimensions in a time period. You can use
+    # `GetDimensionValues` to determine the possible dimension values.
+    # Currently, you can group only by `SUBSCRIPTION_ID`.
     #
     # @option params [required, Types::DateInterval] :time_period
-    #   Sets the start and end dates for retrieving reserve instance (RI)
+    #   Sets the start and end dates for retrieving Reserved Instance (RI)
     #   utilization. The start date is inclusive, but the end date is
     #   exclusive. For example, if `start` is `2017-01-01` and `end` is
     #   `2017-05-01`, then the cost and usage data is retrieved from
@@ -735,16 +793,42 @@ module Aws::CostExplorer
     #
     # @option params [String] :granularity
     #   If `GroupBy` is set, `Granularity` can't be set. If `Granularity`
-    #   isn't set, the response object doesn't include the `Granularity`,
-    #   either `MONTHLY` or `DAILY`. If both `GroupBy` and `Granularity`
-    #   aren't set, `GetReservationUtilization` defaults to `DAILY`.
+    #   isn't set, the response object doesn't include `Granularity`, either
+    #   `MONTHLY` or `DAILY`. If both `GroupBy` and `Granularity` aren't set,
+    #   `GetReservationUtilization` defaults to `DAILY`.
     #
     # @option params [Types::Expression] :filter
-    #   Filters utilization data by using different dimensions.
+    #   Filters utilization data by dimensions. You can filter by the
+    #   following dimensions:
+    #
+    #   * AZ
+    #
+    #   * CACHE\_ENGINE
+    #
+    #   * DATABASE\_ENGINE
+    #
+    #   * DEPLOYMENT\_OPTION
+    #
+    #   * INSTANCE\_TYPE
+    #
+    #   * LINKED\_ACCOUNT
+    #
+    #   * OPERATING\_SYSTEM
+    #
+    #   * PLATFORM
+    #
+    #   * REGION
+    #
+    #   * SERVICE
+    #
+    #   * SCOPE
+    #
+    #   * TENANCY
+    #
     #   `GetReservationUtilization` uses the same ` Expression ` object as the
     #   other operations, but only `AND` is supported among each dimension,
-    #   and nesting is supported to only one level deep. If there are multiple
-    #   values for a dimension, they are OR'd together.
+    #   and nesting is supported up to only one level deep. If there are
+    #   multiple values for a dimension, they are OR'd together.
     #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
@@ -830,8 +914,8 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
-    # You can query for available tag keys and tag values for a specified
-    # period. You can search the tag values for an arbitrary string.
+    # Queries for available tag keys and tag values for a specified period.
+    # You can search the tag values for an arbitrary string.
     #
     # @option params [String] :search_string
     #   The value that you want to search for.
@@ -900,7 +984,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

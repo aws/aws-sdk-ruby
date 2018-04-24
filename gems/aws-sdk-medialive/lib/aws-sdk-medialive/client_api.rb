@@ -48,6 +48,7 @@ module Aws::MediaLive
     AudioSelector = Shapes::StructureShape.new(name: 'AudioSelector')
     AudioSelectorSettings = Shapes::StructureShape.new(name: 'AudioSelectorSettings')
     AudioType = Shapes::StringShape.new(name: 'AudioType')
+    AuthenticationScheme = Shapes::StringShape.new(name: 'AuthenticationScheme')
     AvailBlanking = Shapes::StructureShape.new(name: 'AvailBlanking')
     AvailBlankingState = Shapes::StringShape.new(name: 'AvailBlankingState')
     AvailConfiguration = Shapes::StructureShape.new(name: 'AvailConfiguration')
@@ -274,6 +275,12 @@ module Aws::MediaLive
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
     ResourceConflict = Shapes::StructureShape.new(name: 'ResourceConflict')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
+    RtmpCacheFullBehavior = Shapes::StringShape.new(name: 'RtmpCacheFullBehavior')
+    RtmpCaptionData = Shapes::StringShape.new(name: 'RtmpCaptionData')
+    RtmpCaptionInfoDestinationSettings = Shapes::StructureShape.new(name: 'RtmpCaptionInfoDestinationSettings')
+    RtmpGroupSettings = Shapes::StructureShape.new(name: 'RtmpGroupSettings')
+    RtmpOutputCertificateMode = Shapes::StringShape.new(name: 'RtmpOutputCertificateMode')
+    RtmpOutputSettings = Shapes::StructureShape.new(name: 'RtmpOutputSettings')
     Scte20Convert608To708 = Shapes::StringShape.new(name: 'Scte20Convert608To708')
     Scte20PlusEmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'Scte20PlusEmbeddedDestinationSettings')
     Scte20SourceSettings = Shapes::StructureShape.new(name: 'Scte20SourceSettings')
@@ -373,6 +380,7 @@ module Aws::MediaLive
     __integerMin25Max10000 = Shapes::IntegerShape.new(name: '__integerMin25Max10000')
     __integerMin25Max2000 = Shapes::IntegerShape.new(name: '__integerMin25Max2000')
     __integerMin3 = Shapes::IntegerShape.new(name: '__integerMin3')
+    __integerMin30 = Shapes::IntegerShape.new(name: '__integerMin30')
     __integerMin4Max20 = Shapes::IntegerShape.new(name: '__integerMin4Max20')
     __integerMin96Max600 = Shapes::IntegerShape.new(name: '__integerMin96Max600')
     __integerMinNegative1000Max1000 = Shapes::IntegerShape.new(name: '__integerMinNegative1000Max1000')
@@ -551,6 +559,7 @@ module Aws::MediaLive
     CaptionDestinationSettings.add_member(:dvb_sub_destination_settings, Shapes::ShapeRef.new(shape: DvbSubDestinationSettings, location_name: "dvbSubDestinationSettings"))
     CaptionDestinationSettings.add_member(:embedded_destination_settings, Shapes::ShapeRef.new(shape: EmbeddedDestinationSettings, location_name: "embeddedDestinationSettings"))
     CaptionDestinationSettings.add_member(:embedded_plus_scte_20_destination_settings, Shapes::ShapeRef.new(shape: EmbeddedPlusScte20DestinationSettings, location_name: "embeddedPlusScte20DestinationSettings"))
+    CaptionDestinationSettings.add_member(:rtmp_caption_info_destination_settings, Shapes::ShapeRef.new(shape: RtmpCaptionInfoDestinationSettings, location_name: "rtmpCaptionInfoDestinationSettings"))
     CaptionDestinationSettings.add_member(:scte_20_plus_embedded_destination_settings, Shapes::ShapeRef.new(shape: Scte20PlusEmbeddedDestinationSettings, location_name: "scte20PlusEmbeddedDestinationSettings"))
     CaptionDestinationSettings.add_member(:scte_27_destination_settings, Shapes::ShapeRef.new(shape: Scte27DestinationSettings, location_name: "scte27DestinationSettings"))
     CaptionDestinationSettings.add_member(:smpte_tt_destination_settings, Shapes::ShapeRef.new(shape: SmpteTtDestinationSettings, location_name: "smpteTtDestinationSettings"))
@@ -1139,6 +1148,7 @@ module Aws::MediaLive
     M3u8Settings.add_member(:scte_35_behavior, Shapes::ShapeRef.new(shape: M3u8Scte35Behavior, location_name: "scte35Behavior"))
     M3u8Settings.add_member(:scte_35_pid, Shapes::ShapeRef.new(shape: __string, location_name: "scte35Pid"))
     M3u8Settings.add_member(:timed_metadata_behavior, Shapes::ShapeRef.new(shape: M3u8TimedMetadataBehavior, location_name: "timedMetadataBehavior"))
+    M3u8Settings.add_member(:timed_metadata_pid, Shapes::ShapeRef.new(shape: __string, location_name: "timedMetadataPid"))
     M3u8Settings.add_member(:transport_stream_id, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "transportStreamId"))
     M3u8Settings.add_member(:video_pid, Shapes::ShapeRef.new(shape: __string, location_name: "videoPid"))
     M3u8Settings.struct_class = Types::M3u8Settings
@@ -1188,6 +1198,7 @@ module Aws::MediaLive
     OutputDestination.struct_class = Types::OutputDestination
 
     OutputDestinationSettings.add_member(:password_param, Shapes::ShapeRef.new(shape: __string, location_name: "passwordParam"))
+    OutputDestinationSettings.add_member(:stream_name, Shapes::ShapeRef.new(shape: __string, location_name: "streamName"))
     OutputDestinationSettings.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
     OutputDestinationSettings.add_member(:username, Shapes::ShapeRef.new(shape: __string, location_name: "username"))
     OutputDestinationSettings.struct_class = Types::OutputDestinationSettings
@@ -1200,6 +1211,7 @@ module Aws::MediaLive
     OutputGroupSettings.add_member(:archive_group_settings, Shapes::ShapeRef.new(shape: ArchiveGroupSettings, location_name: "archiveGroupSettings"))
     OutputGroupSettings.add_member(:hls_group_settings, Shapes::ShapeRef.new(shape: HlsGroupSettings, location_name: "hlsGroupSettings"))
     OutputGroupSettings.add_member(:ms_smooth_group_settings, Shapes::ShapeRef.new(shape: MsSmoothGroupSettings, location_name: "msSmoothGroupSettings"))
+    OutputGroupSettings.add_member(:rtmp_group_settings, Shapes::ShapeRef.new(shape: RtmpGroupSettings, location_name: "rtmpGroupSettings"))
     OutputGroupSettings.add_member(:udp_group_settings, Shapes::ShapeRef.new(shape: UdpGroupSettings, location_name: "udpGroupSettings"))
     OutputGroupSettings.struct_class = Types::OutputGroupSettings
 
@@ -1209,6 +1221,7 @@ module Aws::MediaLive
     OutputSettings.add_member(:archive_output_settings, Shapes::ShapeRef.new(shape: ArchiveOutputSettings, location_name: "archiveOutputSettings"))
     OutputSettings.add_member(:hls_output_settings, Shapes::ShapeRef.new(shape: HlsOutputSettings, location_name: "hlsOutputSettings"))
     OutputSettings.add_member(:ms_smooth_output_settings, Shapes::ShapeRef.new(shape: MsSmoothOutputSettings, location_name: "msSmoothOutputSettings"))
+    OutputSettings.add_member(:rtmp_output_settings, Shapes::ShapeRef.new(shape: RtmpOutputSettings, location_name: "rtmpOutputSettings"))
     OutputSettings.add_member(:udp_output_settings, Shapes::ShapeRef.new(shape: UdpOutputSettings, location_name: "udpOutputSettings"))
     OutputSettings.struct_class = Types::OutputSettings
 
@@ -1224,6 +1237,21 @@ module Aws::MediaLive
 
     ResourceNotFound.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ResourceNotFound.struct_class = Types::ResourceNotFound
+
+    RtmpCaptionInfoDestinationSettings.struct_class = Types::RtmpCaptionInfoDestinationSettings
+
+    RtmpGroupSettings.add_member(:authentication_scheme, Shapes::ShapeRef.new(shape: AuthenticationScheme, location_name: "authenticationScheme"))
+    RtmpGroupSettings.add_member(:cache_full_behavior, Shapes::ShapeRef.new(shape: RtmpCacheFullBehavior, location_name: "cacheFullBehavior"))
+    RtmpGroupSettings.add_member(:cache_length, Shapes::ShapeRef.new(shape: __integerMin30, location_name: "cacheLength"))
+    RtmpGroupSettings.add_member(:caption_data, Shapes::ShapeRef.new(shape: RtmpCaptionData, location_name: "captionData"))
+    RtmpGroupSettings.add_member(:restart_delay, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "restartDelay"))
+    RtmpGroupSettings.struct_class = Types::RtmpGroupSettings
+
+    RtmpOutputSettings.add_member(:certificate_mode, Shapes::ShapeRef.new(shape: RtmpOutputCertificateMode, location_name: "certificateMode"))
+    RtmpOutputSettings.add_member(:connection_retry_interval, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "connectionRetryInterval"))
+    RtmpOutputSettings.add_member(:destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "destination"))
+    RtmpOutputSettings.add_member(:num_retries, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "numRetries"))
+    RtmpOutputSettings.struct_class = Types::RtmpOutputSettings
 
     Scte20PlusEmbeddedDestinationSettings.struct_class = Types::Scte20PlusEmbeddedDestinationSettings
 

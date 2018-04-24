@@ -989,6 +989,11 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries[0].status #=> String, one of "InProgress", "Succeeded", "Superseded", "Failed"
     #   resp.pipeline_execution_summaries[0].start_time #=> Time
     #   resp.pipeline_execution_summaries[0].last_update_time #=> Time
+    #   resp.pipeline_execution_summaries[0].source_revisions #=> Array
+    #   resp.pipeline_execution_summaries[0].source_revisions[0].action_name #=> String
+    #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_id #=> String
+    #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_summary #=> String
+    #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions AWS API Documentation
@@ -1635,7 +1640,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

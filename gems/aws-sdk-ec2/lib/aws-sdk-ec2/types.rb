@@ -2544,10 +2544,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] presigned_url
-    #   The pre-signed URL parameter is required when copying an encrypted
-    #   snapshot with the Amazon EC2 Query API; it is available as an
-    #   optional parameter in all other cases. For more information, see
-    #   [Query Requests][1].
+    #   When you copy an encrypted source snapshot using the Amazon EC2
+    #   Query API, you must supply a pre-signed URL. This parameter is
+    #   optional for unencrypted snapshots. For more information, see [Query
+    #   Requests][1].
     #
     #   The `PresignedUrl` should use the snapshot source endpoint, the
     #   `CopySnapshot` action, and include the `SourceRegion`,
@@ -4573,11 +4573,16 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
-    #   operations per second (IOPS) to provision for the volume, with a
-    #   maximum ratio of 50 IOPS/GiB.
+    #   The number of I/O operations per second (IOPS) to provision for the
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
+    #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
+    #   Volume Types][1].
     #
-    #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
+    #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
@@ -4630,7 +4635,11 @@ module Aws::EC2
     #   for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
     #   for Cold HDD, or `standard` for Magnetic volumes.
     #
-    #   Default: `standard`
+    #   Defaults: If no volume type is specified, the default is `standard`
+    #   in us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1,
+    #   sa-east-1, ap-northeast-1, ap-northeast-2, ap-southeast-1,
+    #   ap-southeast-2, ap-south-1, us-gov-west-1, and cn-north-1. In all
+    #   other regions, EBS defaults to `gp2`.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -7686,23 +7695,23 @@ module Aws::EC2
     # @!attribute [rw] filter
     #   One or more filters.
     #
-    #   * `instance-type` - The instance type size that the Dedicated Host
-    #     is configured to support.
-    #
     #   * `auto-placement` - Whether auto-placement is enabled or disabled
     #     (`on` \| `off`).
+    #
+    #   * `availability-zone` - The Availability Zone of the host.
+    #
+    #   * `client-token` - The idempotency token you provided when you
+    #     allocated the host.
     #
     #   * `host-reservation-id` - The ID of the reservation assigned to this
     #     host.
     #
-    #   * `client-token` - The idempotency token you provided when you
-    #     launched the instance
+    #   * `instance-type` - The instance type size that the Dedicated Host
+    #     is configured to support.
     #
-    #   * `state`- The allocation state of the Dedicated Host (`available`
+    #   * `state` - The allocation state of the Dedicated Host (`available`
     #     \| `under-assessment` \| `permanent-failure` \| `released` \|
     #     `released-permanent-failure`).
-    #
-    #   * `availability-zone` - The Availability Zone of the host.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] host_ids
@@ -11622,7 +11631,10 @@ module Aws::EC2
     #     SSD, `st1` for Throughput Optimized HDD, `sc1`for Cold HDD, or
     #     `standard` for Magnetic.
     #
-    #   * `launch.group-id` - The security group for the instance.
+    #   * `launch.group-id` - The ID of the security group for the instance.
+    #
+    #   * `launch.group-name` - The name of the security group for the
+    #     instance.
     #
     #   * `launch.image-id` - The ID of the AMI.
     #
@@ -12393,7 +12405,7 @@ module Aws::EC2
     #     attached to.
     #
     #   * `attachment.status` - The attachment state (`attaching` \|
-    #     `attached` \| `detaching` \| `detached`).
+    #     `attached` \| `detaching`).
     #
     #   * `availability-zone` - The Availability Zone in which the volume
     #     was created.
@@ -14875,8 +14887,30 @@ module Aws::EC2
     end
 
     # A filter name and value pair that is used to return a more specific
-    # list of results. Filters can be used to match a set of resources by
-    # various criteria, such as tags, attributes, or IDs.
+    # list of results from a describe operation. Filters can be used to
+    # match a set of resources by specific criteria, such as tags,
+    # attributes, or IDs. The filters supported by a describe operation are
+    # documented with the describe operation. For example:
+    #
+    # * DescribeAvailabilityZones
+    #
+    # * DescribeImages
+    #
+    # * DescribeInstances
+    #
+    # * DescribeKeyPairs
+    #
+    # * DescribeSecurityGroups
+    #
+    # * DescribeSnapshots
+    #
+    # * DescribeSubnets
+    #
+    # * DescribeTags
+    #
+    # * DescribeVolumes
+    #
+    # * DescribeVpcs
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -15589,6 +15623,14 @@ module Aws::EC2
     #   The Dedicated Host's state.
     #   @return [String]
     #
+    # @!attribute [rw] allocation_time
+    #   The time that the Dedicated Host was allocated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] release_time
+    #   The time that the Dedicated Host was released.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
@@ -15600,7 +15642,9 @@ module Aws::EC2
       :host_properties,
       :host_reservation_id,
       :instances,
-      :state)
+      :state,
+      :allocation_time,
+      :release_time)
       include Aws::Structure
     end
 
@@ -29487,7 +29531,7 @@ module Aws::EC2
     #   performance, I/O credits, and bursting, see [Amazon EBS Volume
     #   Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   Constraint: Range is 100-20000 IOPS for io1 volumes and 100-10000
+    #   Constraint: Range is 100-32000 IOPS for io1 volumes and 100-10000
     #   IOPS for `gp2` volumes.
     #
     #   Condition: This parameter is required for requests to create `io1`
