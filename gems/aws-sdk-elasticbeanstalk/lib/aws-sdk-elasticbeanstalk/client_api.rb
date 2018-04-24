@@ -17,6 +17,7 @@ module Aws::ElasticBeanstalk
     ActionHistoryStatus = Shapes::StringShape.new(name: 'ActionHistoryStatus')
     ActionStatus = Shapes::StringShape.new(name: 'ActionStatus')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
+    ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     ApplicationDescription = Shapes::StructureShape.new(name: 'ApplicationDescription')
     ApplicationDescriptionList = Shapes::ListShape.new(name: 'ApplicationDescriptionList')
     ApplicationDescriptionMessage = Shapes::StructureShape.new(name: 'ApplicationDescriptionMessage')
@@ -26,6 +27,7 @@ module Aws::ElasticBeanstalk
     ApplicationNamesList = Shapes::ListShape.new(name: 'ApplicationNamesList')
     ApplicationResourceLifecycleConfig = Shapes::StructureShape.new(name: 'ApplicationResourceLifecycleConfig')
     ApplicationResourceLifecycleDescriptionMessage = Shapes::StructureShape.new(name: 'ApplicationResourceLifecycleDescriptionMessage')
+    ApplicationVersionArn = Shapes::StringShape.new(name: 'ApplicationVersionArn')
     ApplicationVersionDescription = Shapes::StructureShape.new(name: 'ApplicationVersionDescription')
     ApplicationVersionDescriptionList = Shapes::ListShape.new(name: 'ApplicationVersionDescriptionList')
     ApplicationVersionDescriptionMessage = Shapes::StructureShape.new(name: 'ApplicationVersionDescriptionMessage')
@@ -310,6 +312,7 @@ module Aws::ElasticBeanstalk
     AbortEnvironmentUpdateMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
     AbortEnvironmentUpdateMessage.struct_class = Types::AbortEnvironmentUpdateMessage
 
+    ApplicationDescription.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
     ApplicationDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     ApplicationDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ApplicationDescription.add_member(:date_created, Shapes::ShapeRef.new(shape: CreationDate, location_name: "DateCreated"))
@@ -343,6 +346,7 @@ module Aws::ElasticBeanstalk
     ApplicationResourceLifecycleDescriptionMessage.add_member(:resource_lifecycle_config, Shapes::ShapeRef.new(shape: ApplicationResourceLifecycleConfig, location_name: "ResourceLifecycleConfig"))
     ApplicationResourceLifecycleDescriptionMessage.struct_class = Types::ApplicationResourceLifecycleDescriptionMessage
 
+    ApplicationVersionDescription.add_member(:application_version_arn, Shapes::ShapeRef.new(shape: ApplicationVersionArn, location_name: "ApplicationVersionArn"))
     ApplicationVersionDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     ApplicationVersionDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ApplicationVersionDescription.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))

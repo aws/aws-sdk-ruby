@@ -127,8 +127,8 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] kms_key_id
     #   (Optional) Specifies the ARN or alias of the AWS KMS customer master
-    #   key (CMK) to be used to encrypt the `SecretString` and
-    #   `SecretBinary` values in the versions stored in this secret.
+    #   key (CMK) to be used to encrypt the `SecretString` or `SecretBinary`
+    #   values in the versions stored in this secret.
     #
     #   If you don't specify this value, then Secrets Manager defaults to
     #   using the AWS account's default CMK (the one named
@@ -150,12 +150,8 @@ module Aws::SecretsManager
     #   a file and then use the appropriate technique for your tool to pass
     #   the contents of the file as a parameter.
     #
-    #   Either `SecretString`, `SecretBinary`, or both must have a value.
-    #   They cannot both be empty.
-    #
-    #   This `SecretBinary` value is stored separately from the
-    #   `SecretString`, but the two parameters jointly share a maximum size
-    #   limit.
+    #   Either `SecretString` or `SecretBinary` must have a value, but not
+    #   both. They cannot both be empty.
     #
     #   This parameter is not available using the Secrets Manager console.
     #   It can be accessed only by using the AWS CLI or one of the AWS SDKs.
@@ -165,11 +161,8 @@ module Aws::SecretsManager
     #   (Optional) Specifies text data that you want to encrypt and store in
     #   this new version of the secret.
     #
-    #   Either `SecretString`, `SecretBinary`, or both must have a value.
-    #   They cannot both be empty.
-    #
-    #   This string value is stored separately from the `SecretBinary`, but
-    #   the two parameters jointly share a maximum size limit.
+    #   Either `SecretString` or `SecretBinary` must have a value, but not
+    #   both. They cannot both be empty.
     #
     #   If you create a secret by using the Secrets Manager console then
     #   Secrets Manager puts the protected secret text in only the
@@ -377,7 +370,7 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] kms_key_id
     #   The ARN or alias of the AWS KMS customer master key (CMK) that's
-    #   used to encrypt the `SecretString` and `SecretBinary` fields in each
+    #   used to encrypt the `SecretString` or `SecretBinary` fields in each
     #   version of the secret. If you don't provide a key, then Secrets
     #   Manager defaults to encrypting the secret fields with the default
     #   KMS CMK (the one named `awssecretsmanager`) for this account.
@@ -896,7 +889,8 @@ module Aws::SecretsManager
     #   command-line tools, we recommend that you store your binary data in
     #   a file and then use the appropriate technique for your tool to pass
     #   the contents of the file as a parameter. Either `SecretBinary` or
-    #   `SecretString` must have a value. They cannot both be empty.
+    #   `SecretString` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   This parameter is not accessible if the secret using the Secrets
     #   Manager console.
@@ -905,7 +899,8 @@ module Aws::SecretsManager
     # @!attribute [rw] secret_string
     #   (Optional) Specifies text data that you want to encrypt and store in
     #   this new version of the secret. Either `SecretString` or
-    #   `SecretBinary` must have a value. They cannot both be empty.
+    #   `SecretBinary` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   If you create this secret by using the Secrets Manager console then
     #   Secrets Manager puts the protected secret text in only the
@@ -1479,7 +1474,8 @@ module Aws::SecretsManager
     #   command-line tools, we recommend that you store your binary data in
     #   a file and then use the appropriate technique for your tool to pass
     #   the contents of the file as a parameter. Either `SecretBinary` or
-    #   `SecretString` must have a value. They cannot both be empty.
+    #   `SecretString` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   This parameter is not accessible using the Secrets Manager console.
     #   @return [String]
@@ -1487,7 +1483,8 @@ module Aws::SecretsManager
     # @!attribute [rw] secret_string
     #   (Optional) Specifies text data that you want to encrypt and store in
     #   this new version of the secret. Either `SecretBinary` or
-    #   `SecretString` must have a value. They cannot both be empty.
+    #   `SecretString` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   If you create this secret by using the Secrets Manager console then
     #   Secrets Manager puts the protected secret text in only the
