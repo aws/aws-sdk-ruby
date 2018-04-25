@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.38 (2018-04-25)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
 
 * Feature - Aws::Rekognition - Updated the documentation for Amazon Rekognition.
