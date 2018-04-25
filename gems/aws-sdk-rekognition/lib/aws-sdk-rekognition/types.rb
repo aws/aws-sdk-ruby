@@ -949,8 +949,30 @@ module Aws::Rekognition
     # Structure containing attributes of the face that the algorithm
     # detected.
     #
+    # A `FaceDetail` object contains either the default facial attributes or
+    # all facial attributes. The default attributes are `BoundingBox`,
+    # `Confidence`, `Landmarks`, `Pose`, and `Quality`.
+    #
+    # is the only Rekognition Video stored video operation that can return a
+    # `FaceDetail` object with all attributes. To specify which attributes
+    # to return, use the `FaceAttributes` input parameter for . The
+    # following Rekognition Video operations return only the default
+    # attributes. The corresponding Start operations don't have a
+    # `FaceAttributes` input parameter.
+    #
+    # * GetCelebrityRecognition
+    #
+    # * GetPersonTracking
+    #
+    # * GetFaceSearch
+    #
+    # The Rekognition Image and operations can return all facial attributes.
+    # To specify which attributes to return, use the `Attributes` input
+    # parameter for `DetectFaces`. For `IndexFaces`, use the
+    # `DetectAttributes` input parameter.
+    #
     # @!attribute [rw] bounding_box
-    #   Bounding box of the face.
+    #   Bounding box of the face. Default attribute.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] age_range
@@ -1003,21 +1025,21 @@ module Aws::Rekognition
     #   @return [Array<Types::Emotion>]
     #
     # @!attribute [rw] landmarks
-    #   Indicates the location of landmarks on the face.
+    #   Indicates the location of landmarks on the face. Default attribute.
     #   @return [Array<Types::Landmark>]
     #
     # @!attribute [rw] pose
     #   Indicates the pose of the face as determined by its pitch, roll, and
-    #   yaw.
+    #   yaw. Default attribute.
     #   @return [Types::Pose]
     #
     # @!attribute [rw] quality
-    #   Identifies image brightness and sharpness.
+    #   Identifies image brightness and sharpness. Default attribute.
     #   @return [Types::ImageQuality]
     #
     # @!attribute [rw] confidence
     #   Confidence level that the bounding box contains a face (and not a
-    #   different object such as a tree).
+    #   different object such as a tree). Default attribute.
     #   @return [Float]
     #
     class FaceDetail < Struct.new(
@@ -1207,8 +1229,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of celebrities you want Rekognition Video to return
-    #   in the response. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1282,8 +1306,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of content moderation labels to return. The default
-    #   is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1358,7 +1384,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of detected faces to return. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1427,8 +1456,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of search results you want Rekognition Video to
-    #   return in the response. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1509,8 +1540,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of labels you want Amazon Rekognition to return in
-    #   the response. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1588,7 +1621,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of tracked persons to return. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -2189,7 +2225,7 @@ module Aws::Rekognition
 
     # Information about a person whose face matches a face(s) in a Amazon
     # Rekognition collection. Includes information about the faces in the
-    # Amazon Rekognition collection (,information about the person
+    # Amazon Rekognition collection (, information about the person
     # (PersonDetail) and the timestamp for when the person was detected in a
     # video. An array of `PersonMatch` objects is returned by .
     #

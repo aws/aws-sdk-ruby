@@ -25,10 +25,16 @@ module Aws::XRay
     Edge = Shapes::StructureShape.new(name: 'Edge')
     EdgeList = Shapes::ListShape.new(name: 'EdgeList')
     EdgeStatistics = Shapes::StructureShape.new(name: 'EdgeStatistics')
+    EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
+    EncryptionKeyId = Shapes::StringShape.new(name: 'EncryptionKeyId')
+    EncryptionStatus = Shapes::StringShape.new(name: 'EncryptionStatus')
+    EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorStatistics = Shapes::StructureShape.new(name: 'ErrorStatistics')
     FaultStatistics = Shapes::StructureShape.new(name: 'FaultStatistics')
     FilterExpression = Shapes::StringShape.new(name: 'FilterExpression')
+    GetEncryptionConfigRequest = Shapes::StructureShape.new(name: 'GetEncryptionConfigRequest')
+    GetEncryptionConfigResult = Shapes::StructureShape.new(name: 'GetEncryptionConfigResult')
     GetServiceGraphRequest = Shapes::StructureShape.new(name: 'GetServiceGraphRequest')
     GetServiceGraphResult = Shapes::StructureShape.new(name: 'GetServiceGraphResult')
     GetTraceGraphRequest = Shapes::StructureShape.new(name: 'GetTraceGraphRequest')
@@ -45,6 +51,8 @@ module Aws::XRay
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     NullableLong = Shapes::IntegerShape.new(name: 'NullableLong')
+    PutEncryptionConfigRequest = Shapes::StructureShape.new(name: 'PutEncryptionConfigRequest')
+    PutEncryptionConfigResult = Shapes::StructureShape.new(name: 'PutEncryptionConfigResult')
     PutTelemetryRecordsRequest = Shapes::StructureShape.new(name: 'PutTelemetryRecordsRequest')
     PutTelemetryRecordsResult = Shapes::StructureShape.new(name: 'PutTelemetryRecordsResult')
     PutTraceSegmentsRequest = Shapes::StructureShape.new(name: 'PutTraceSegmentsRequest')
@@ -132,6 +140,11 @@ module Aws::XRay
     EdgeStatistics.add_member(:total_response_time, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "TotalResponseTime"))
     EdgeStatistics.struct_class = Types::EdgeStatistics
 
+    EncryptionConfig.add_member(:key_id, Shapes::ShapeRef.new(shape: String, location_name: "KeyId"))
+    EncryptionConfig.add_member(:status, Shapes::ShapeRef.new(shape: EncryptionStatus, location_name: "Status"))
+    EncryptionConfig.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, location_name: "Type"))
+    EncryptionConfig.struct_class = Types::EncryptionConfig
+
     ErrorStatistics.add_member(:throttle_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "ThrottleCount"))
     ErrorStatistics.add_member(:other_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "OtherCount"))
     ErrorStatistics.add_member(:total_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "TotalCount"))
@@ -140,6 +153,11 @@ module Aws::XRay
     FaultStatistics.add_member(:other_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "OtherCount"))
     FaultStatistics.add_member(:total_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "TotalCount"))
     FaultStatistics.struct_class = Types::FaultStatistics
+
+    GetEncryptionConfigRequest.struct_class = Types::GetEncryptionConfigRequest
+
+    GetEncryptionConfigResult.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
+    GetEncryptionConfigResult.struct_class = Types::GetEncryptionConfigResult
 
     GetServiceGraphRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     GetServiceGraphRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
@@ -185,6 +203,13 @@ module Aws::XRay
     Http.add_member(:user_agent, Shapes::ShapeRef.new(shape: String, location_name: "UserAgent"))
     Http.add_member(:client_ip, Shapes::ShapeRef.new(shape: String, location_name: "ClientIp"))
     Http.struct_class = Types::Http
+
+    PutEncryptionConfigRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: EncryptionKeyId, location_name: "KeyId"))
+    PutEncryptionConfigRequest.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "Type"))
+    PutEncryptionConfigRequest.struct_class = Types::PutEncryptionConfigRequest
+
+    PutEncryptionConfigResult.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
+    PutEncryptionConfigResult.struct_class = Types::PutEncryptionConfigResult
 
     PutTelemetryRecordsRequest.add_member(:telemetry_records, Shapes::ShapeRef.new(shape: TelemetryRecordList, required: true, location_name: "TelemetryRecords"))
     PutTelemetryRecordsRequest.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: EC2InstanceId, location_name: "EC2InstanceId"))
@@ -325,6 +350,16 @@ module Aws::XRay
         )
       end)
 
+      api.add_operation(:get_encryption_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEncryptionConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/EncryptionConfig"
+        o.input = Shapes::ShapeRef.new(shape: GetEncryptionConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEncryptionConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+      end)
+
       api.add_operation(:get_service_graph, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetServiceGraph"
         o.http_method = "POST"
@@ -368,6 +403,16 @@ module Aws::XRay
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_encryption_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutEncryptionConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/PutEncryptionConfig"
+        o.input = Shapes::ShapeRef.new(shape: PutEncryptionConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutEncryptionConfigResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
       end)
 
       api.add_operation(:put_telemetry_records, Seahorse::Model::Operation.new.tap do |o|

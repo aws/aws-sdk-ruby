@@ -217,6 +217,34 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # A configuration document that specifies encryption configuration
+    # settings.
+    #
+    # @!attribute [rw] key_id
+    #   The ID of the customer master key (CMK) used for encryption, if
+    #   applicable.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The encryption status. After modifying encryption configuration with
+    #   PutEncryptionConfig, the status can be `UPDATING` for up to one hour
+    #   before X-Ray starts encrypting data with the new key.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of encryption. Set to `KMS` for encryption with CMKs. Set
+    #   to `NONE` for default encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/EncryptionConfig AWS API Documentation
+    #
+    class EncryptionConfig < Struct.new(
+      :key_id,
+      :status,
+      :type)
+      include Aws::Structure
+    end
+
     # Information about requests that failed with a 4xx Client Error status
     # code.
     #
@@ -262,6 +290,23 @@ module Aws::XRay
     class FaultStatistics < Struct.new(
       :other_count,
       :total_count)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfigRequest AWS API Documentation
+    #
+    class GetEncryptionConfigRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] encryption_config
+    #   The encryption configuration document.
+    #   @return [Types::EncryptionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfigResult AWS API Documentation
+    #
+    class GetEncryptionConfigResult < Struct.new(
+      :encryption_config)
       include Aws::Structure
     end
 
@@ -417,8 +462,8 @@ module Aws::XRay
     #   @return [Time]
     #
     # @!attribute [rw] traces_processed_count
-    #   The number of traces that were processed to get this set of
-    #   summaries.
+    #   The total number of traces processed, including traces that did not
+    #   match the specified filter expression.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -488,6 +533,55 @@ module Aws::XRay
       :http_method,
       :user_agent,
       :client_ip)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutEncryptionConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "EncryptionKeyId",
+    #         type: "NONE", # required, accepts NONE, KMS
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   An AWS KMS customer master key (CMK) in one of the following
+    #   formats:
+    #
+    #   * **Alias** - The name of the key. For example, `alias/MyKey`.
+    #
+    #   * **Key ID** - The KMS key ID of the key. For example,
+    #     `ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`.
+    #
+    #   * **ARN** - The full Amazon Resource Name of the key ID or alias.
+    #     For example,
+    #     `arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`.
+    #     Use this format to specify a key in a different account.
+    #
+    #   Omit this key if you set `Type` to `NONE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of encryption. Set to `KMS` to use your own key for
+    #   encryption. Set to `NONE` for default encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfigRequest AWS API Documentation
+    #
+    class PutEncryptionConfigRequest < Struct.new(
+      :key_id,
+      :type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] encryption_config
+    #   The new encryption configuration.
+    #   @return [Types::EncryptionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfigResult AWS API Documentation
+    #
+    class PutEncryptionConfigResult < Struct.new(
+      :encryption_config)
       include Aws::Structure
     end
 
@@ -578,12 +672,19 @@ module Aws::XRay
     # PutTraceSegments, or an `inferred` segment for a downstream service,
     # generated from a subsegment sent by the service that called it.
     #
+    # For the full segment document schema, see [AWS X-Ray Segment
+    # Documents][1] in the *AWS X-Ray Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html
+    #
     # @!attribute [rw] id
     #   The segment's ID.
     #   @return [String]
     #
     # @!attribute [rw] document
-    #   The segment document
+    #   The segment document.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Segment AWS API Documentation

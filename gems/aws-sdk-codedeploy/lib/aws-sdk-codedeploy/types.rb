@@ -1607,10 +1607,11 @@ module Aws::CodeDeploy
     #     balancer immediately after the new application revision is
     #     installed on the instances in the replacement environment.
     #
-    #   * STOP\_DEPLOYMENT: Do not register new instances with load balancer
-    #     unless traffic is rerouted manually. If traffic is not rerouted
-    #     manually before the end of the specified wait period, the
-    #     deployment status is changed to Stopped.
+    #   * STOP\_DEPLOYMENT: Do not register new instances with a load
+    #     balancer unless traffic rerouting is started using
+    #     ContinueDeployment. If traffic rerouting is not started before the
+    #     end of the specified wait period, the deployment status is changed
+    #     to Stopped.
     #   @return [String]
     #
     # @!attribute [rw] wait_time_in_minutes

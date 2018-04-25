@@ -1172,6 +1172,13 @@ module Aws::Rekognition
     # `CelebrityRecognition` contains information about the celebrity in a
     # object and the time, `Timestamp`, the celebrity was detected.
     #
+    # <note markdown="1"> `GetCelebrityRecognition` only returns the default facial attributes
+    # (`BoundingBox`, `Confidence`, `Landmarks`, `Pose`, and `Quality`). The
+    # other facial attributes listed in the `Face` object of the following
+    # response syntax are not returned. For more information, see .
+    #
+    #  </note>
+    #
     # By default, the `Celebrities` array is sorted by time (milliseconds
     # from the start of the video). You can also sort the array by celebrity
     # by specifying the value `ID` in the `SortBy` input parameter.
@@ -1196,8 +1203,10 @@ module Aws::Rekognition
     #   can get the job identifer from a call to `StartCelebrityRecognition`.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of celebrities you want Rekognition Video to return in
-    #   the response. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more
@@ -1330,7 +1339,9 @@ module Aws::Rekognition
     #   the job in a subsequent call to `GetContentModeration`.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of content moderation labels to return. The default is
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
     #   1000.
     #
     # @option params [String] :next_token
@@ -1415,7 +1426,10 @@ module Aws::Rekognition
     #   from `StartFaceDetection`.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of detected faces to return. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there are more faces
@@ -1512,8 +1526,16 @@ module Aws::Rekognition
     #
     # The search results are retured in an array, `Persons`, of objects.
     # Each`PersonMatch` element contains details about the matching faces in
-    # the input collection, person information for the matched person, and
-    # the time the person was matched in the video.
+    # the input collection, person information (facial attributes, bounding
+    # boxes, and person identifer) for the matched person, and the time the
+    # person was matched in the video.
+    #
+    # <note markdown="1"> `GetFaceSearch` only returns the default facial attributes
+    # (`BoundingBox`, `Confidence`, `Landmarks`, `Pose`, and `Quality`). The
+    # other facial attributes listed in the `Face` object of the following
+    # response syntax are not returned. For more information, see .
+    #
+    #  </note>
     #
     # By default, the `Persons` array is sorted by the time, in milliseconds
     # from the start of the video, persons are matched. You can also sort by
@@ -1524,8 +1546,10 @@ module Aws::Rekognition
     #   from an initial call to `StartFaceSearch`.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of search results you want Rekognition Video to return
-    #   in the response. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more search
@@ -1660,8 +1684,10 @@ module Aws::Rekognition
     #   `StartlabelDetection`.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of labels you want Amazon Rekognition to return in the
-    #   response. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there are more labels
@@ -1733,6 +1759,13 @@ module Aws::Rekognition
     # `GetPersonTracking` returns an array, `Persons`, of tracked persons
     # and the time(s) they were tracked in the video.
     #
+    # <note markdown="1"> `GetPersonTracking` only returns the default facial attributes
+    # (`BoundingBox`, `Confidence`, `Landmarks`, `Pose`, and `Quality`). The
+    # other facial attributes listed in the `Face` object of the following
+    # response syntax are not returned. For more information, see .
+    #
+    #  </note>
+    #
     # By default, the array is sorted by the time(s) a person is tracked in
     # the video. You can sort by tracked persons by specifying `INDEX` for
     # the `SortBy` input parameter.
@@ -1750,7 +1783,10 @@ module Aws::Rekognition
     #   `JobId` from a call to `StartPersonTracking`.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of tracked persons to return. The default is 1000.
+    #   Maximum number of results to return per paginated call. The largest
+    #   value you can specify is 1000. If you specify a value greater than
+    #   1000, a maximum of 1000 results is returned. The default value is
+    #   1000.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there are more
@@ -3297,7 +3333,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
