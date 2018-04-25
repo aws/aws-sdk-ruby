@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::Rekognition - Updated the documentation for Amazon Rekognition.
+
+* Feature - Aws::XRay - Updated the API, and documentation for AWS X-Ray.
+
 2.11.37 (2018-04-24)
 ------------------
 
