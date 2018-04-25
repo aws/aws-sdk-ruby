@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Avoiding Net::HTTP patching for Ruby 2.5
+
 3.20.1 (2018-04-24)
 ------------------
 
