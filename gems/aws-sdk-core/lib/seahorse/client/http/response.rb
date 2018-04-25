@@ -67,7 +67,7 @@ module Seahorse
         def signal_data(chunk)
           unless chunk == ''
             # record raw binary stream for eventstream
-            # parsed event struct object is written to body
+            # body is used for emit events
             @raw_stream.write(chunk)
             @body.write(chunk)
             emit(:data, chunk)

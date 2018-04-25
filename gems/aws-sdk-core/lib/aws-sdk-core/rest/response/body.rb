@@ -16,10 +16,9 @@ module Aws
 
         # @param [IO] body
         # @param [Hash, Struct] data
-        # @param [IO, nil] raw_stream binary raw stream for eventstream
-        def apply(body, data, raw_stream = nil)
+        def apply(body, data)
           if event_stream?
-            data[@rules[:payload]] = parse_eventstream(body, raw_stream)
+            data[@rules[:payload]] = parse_eventstream(body)
           elsif streaming?
             data[@rules[:payload]] = body
           elsif @rules[:payload]
@@ -46,15 +45,11 @@ module Aws
           @parser_class.new(rules).parse(body, target) if body.size > 0
         end
 
-        def parse_eventstream(body, raw_stream)
+        def parse_eventstream(body)
           event_parser = Aws::Binary::EventParser.new(@parser_class, @rules[:payload_member])
           @rules[:payload_member].shape.struct_class.new do |eventstream|
-            if body.is_a?(Seahorse::Client::BlockIO)
-              eventstream.yield(body)
-            elsif raw_stream
-              Aws::EventStream::Decoder.new.decode(raw_stream) do |raw|
-                eventstream.yield(event_parser.apply(raw))
-              end
+            Aws::EventStream::Decoder.new.decode(body) do |raw|
+              eventstream.yield(event_parser.apply(raw))
             end
           end
         end

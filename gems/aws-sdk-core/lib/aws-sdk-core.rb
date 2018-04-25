@@ -65,6 +65,7 @@ require_relative 'aws-sdk-core/json'
 # event stream
 require_relative 'aws-sdk-core/binary'
 require_relative 'aws-sdk-core/event_error'
+require_relative 'aws-sdk-core/event_emitter'
 
 # aws-sdk-sts is vendored to support Aws::AssumeRoleCredentials
 

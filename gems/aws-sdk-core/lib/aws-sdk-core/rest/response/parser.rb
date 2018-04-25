@@ -31,8 +31,7 @@ module Aws
           Body.new(parser_class(response), rules).
             apply(
               response.context.http_response.body,
-              response.data,
-              response.context.http_response.raw_stream
+              response.data
             )
         end
 

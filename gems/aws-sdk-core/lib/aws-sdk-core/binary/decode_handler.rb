@@ -6,7 +6,7 @@ module Aws
 
       def call(context)
         if eventstream_member = eventstream?(context)
-          attach_eventstream_listeners(context, eventstream_member.last)
+          attach_eventstream_listeners(context, eventstream_member)
         end
         @handler.call(context)
       end
@@ -14,8 +14,8 @@ module Aws
       private
 
       def eventstream?(ctx)
-        ctx.operation.output.shape.members.each do |name, ref|
-          return [name, ref] if ref.eventstream
+        ctx.operation.output.shape.members.each do |_, ref|
+          return ref if ref.eventstream
         end
       end
 
@@ -23,11 +23,11 @@ module Aws
 
         context.http_response.on_headers(200) do
           protocol = context.config.api.metadata['protocol']
-          context.http_response.body = IODecoder.new(
+          context.http_response.body = EventStreamDecoder.new(
             protocol,
             rules,
             context.http_response.body,
-            context.config.eventstream_handler)
+            context[:event_stream_handler])
         end
 
         context.http_response.on_success(200) do
@@ -35,16 +35,11 @@ module Aws
           if context.http_response.raw_stream.respond_to?(:rewind)
             context.http_response.raw_stream.rewind
           end
-
-          decoder = context.http_response.body
-          decoder.io.rewind if decoder.io.respond_to?(:rewind)
-          context.http_response.body = decoder.io
+          context.http_response.body = context.http_response.raw_stream
         end
 
         context.http_response.on_error do
-          if context.http_response.body.respond_to?(:io)
-            context.http_response.body = context.http_response.body.io
-          end
+          context.http_response.body = context.http_response.raw_stream
         end
 
       end

@@ -11,12 +11,7 @@ module Seahorse
       # @return [Integer]
       def write(chunk)
         @block.call(chunk)
-        if chunk.respond_to?(:bytesize)
-          chunk.bytesize.tap { |chunk_size| @size += chunk_size }
-        else
-          # count events in an eventstream
-          1.tap { |event_count| @size += event_count }
-        end
+        chunk.bytesize.tap { |chunk_size| @size += chunk_size }
       end
 
       # @param [Integer] bytes (nil)

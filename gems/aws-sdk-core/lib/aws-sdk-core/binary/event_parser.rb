@@ -51,7 +51,10 @@ module Aws
 
       def parse_event(raw_event)
         event_type = raw_event.headers.delete(":event-type").value
-        #content_type = raw_event.headers.delete(":content-type").value
+        # content_type = raw_event.headers.delete(":content-type").value
+
+        # TODO all in event header? or not encoded?
+        # if event_type == 'initial-response' end
 
         # locate event from eventstream
         name, ref = @rules.shape.member_by_location_name(event_type)
