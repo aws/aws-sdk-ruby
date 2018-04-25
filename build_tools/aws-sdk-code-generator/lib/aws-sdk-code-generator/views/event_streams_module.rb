@@ -1,6 +1,6 @@
 module AwsSdkCodeGenerator
   module Views
-    class EventStreamModule < View
+    class EventStreamsModule < View
 
       include Helper
 

@@ -69,7 +69,7 @@ module AwsSdkCodeGenerator
           end
         end
         paths << "#{@prefix}/customizations"
-        paths << "#{@prefix}/event_stream" if eventstream_shape?
+        paths << "#{@prefix}/event_streams" if eventstream_shape?
         paths.to_a
       end
 

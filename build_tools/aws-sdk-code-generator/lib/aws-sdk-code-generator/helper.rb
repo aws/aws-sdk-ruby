@@ -180,7 +180,7 @@ module AwsSdkCodeGenerator
       output_shape = api['shapes'][operation['output']['shape']]
       return false unless output_shape.key? 'members'
       output_shape['members'].each do |name, ref|
-        return true if Api.eventstream?(ref, api)
+        return ref['shape'] if Api.eventstream?(ref, api)
       end
       return false
     end

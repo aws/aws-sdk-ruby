@@ -36,7 +36,9 @@ module AwsSdkCodeGenerator
         @name = options.fetch(:name)
         @documentation = options.fetch(:documentation)
         @streaming = options.fetch(:streaming)
-        @eventstream_output = options.fetch(:eventstream_output)
+        @eventstream_output = !!options.fetch(:eventstream_output)
+        @eventstream_member = @eventstream_output ?
+          options.fetch(:eventstream_output) : nil
       end
 
       # @return [String]
@@ -48,14 +50,13 @@ module AwsSdkCodeGenerator
       # @return [Boolean]
       attr_reader :eventstream_output
 
+      # @return [String]
+      attr_reader :eventstream_member
+
       def block_option
         if @streaming
           ", &block"
         end
-      end
-
-      def eventstream_decode
-        "req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)"
       end
 
     end

@@ -59,7 +59,7 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}.rb", service_module(prefix))
         y.yield("#{prefix}/customizations.rb", '')
         y.yield("#{prefix}/types.rb", types_module)
-        y.yield("#{prefix}/event_stream.rb", event_stream_module) if has_eventstream
+        y.yield("#{prefix}/event_streams.rb", event_streams_module) if has_eventstream
         y.yield("#{prefix}/client_api.rb", client_api_module)
         y.yield("#{prefix}/client.rb", client_class)
         y.yield("#{prefix}/errors.rb", errors_module)
@@ -85,8 +85,8 @@ module AwsSdkCodeGenerator
       Views::TypesModule.new(service: @service).render
     end
 
-    def event_stream_module
-      Views::EventStreamModule.new(service: @service).render
+    def event_streams_module
+      Views::EventStreamsModule.new(service: @service).render
     end
 
     def client_api_module
