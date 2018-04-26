@@ -295,7 +295,8 @@ module Aws::SecretsManager
     #   `KMSKeyId`. If you call an API that must encrypt or decrypt
     #   `SecretString` or `SecretBinary` using credentials from a different
     #   account then the KMS key policy must grant cross-account access to
-    #   that other account's user or role.
+    #   that other account's user or role for both the kms:GenerateDataKey
+    #   and kms:Decrypt operations.
     #
     #  </note>
     #
@@ -311,7 +312,7 @@ module Aws::SecretsManager
     #   key to encrypt the secret. You do not need this permission to use
     #   the account's default AWS managed CMK for Secrets Manager.
     #
-    # * kms:Encrypt - needed only if you use a customer-created KMS key to
+    # * kms:Decrypt - needed only if you use a customer-created KMS key to
     #   encrypt the secret. You do not need this permission to use the
     #   account's default AWS managed CMK for Secrets Manager.
     #
@@ -1300,7 +1301,8 @@ module Aws::SecretsManager
     #   `KMSKeyId`. If you call an API that must encrypt or decrypt
     #   `SecretString` or `SecretBinary` using credentials from a different
     #   account then the KMS key policy must grant cross-account access to
-    #   that other account's user or role.
+    #   that other account's user or role for both the kms:GenerateDataKey
+    #   and kms:Decrypt operations.
     #
     #  </note>
     #
@@ -1917,7 +1919,8 @@ module Aws::SecretsManager
     #   `KMSKeyId`. If you call an API that must encrypt or decrypt
     #   `SecretString` or `SecretBinary` using credentials from a different
     #   account then the KMS key policy must grant cross-account access to
-    #   that other account's user or role.
+    #   that other account's user or role for both the kms:GenerateDataKey
+    #   and kms:Decrypt operations.
     #
     #  </note>
     #
@@ -2301,7 +2304,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

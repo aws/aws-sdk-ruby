@@ -832,7 +832,7 @@ module Aws::Glacier
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/latest/dev/using-iam-with-amazon-glacier.html
+    # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
     # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
     # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html
     #
@@ -3180,7 +3180,7 @@ module Aws::Glacier
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glacier'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
