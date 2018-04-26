@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glacier - Updated the documentation for Amazon Glacier.
+
+* Feature - Aws::SecretsManager - Updated the documentation for AWS Secrets Manager.
+
 2.11.38 (2018-04-25)
 ------------------
 
