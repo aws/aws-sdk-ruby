@@ -36,7 +36,10 @@ module Aws
 
       def stub_structure(ref, visited)
         ref.shape.members.inject(ref.shape.struct_class.new) do |struct, (mname, mref)|
-          struct[mname] = stub_ref(mref, visited)
+          # For eventstream shape, it returns an Enumerator
+          unless mref.eventstream
+            struct[mname] = stub_ref(mref, visited)
+          end
           struct
         end
       end

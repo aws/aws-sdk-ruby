@@ -1,0 +1,67 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "endpointPrefix": "svc",
+    "protocol": "rest-xml",
+    "signatureVersion": "v4"
+  },
+  "operations": {
+    "Foo": {
+      "name": "Foo",
+      "http": {
+        "method": "GET",
+        "requestUri": "/"
+      },
+      "output": {"shape": "FooOutput"}
+    } 
+  },
+  "shapes": {
+    "FooOutput": {
+      "type": "structure",
+      "members": {
+        "Payload": {
+          "shape": "BarPayload"
+        }
+      },
+      "payload": "Payload"
+    },
+    "BarPayload": {
+      "type": "structure",
+      "members": {
+        "A": {"shape": "AEventShape"},
+        "B": {"shape": "BEventShape"}
+      },
+      "eventstream": true
+    },
+    "AEventShape": {
+      "type": "structure",
+      "members": {
+        "MemberA": {
+          "shape": "StringShape",
+          "eventheader": true
+        },
+        "MemberB": {
+          "shape": "BlobShape",
+          "eventpayload": true
+        }
+      },
+      "event": true
+    },
+    "BEventShape": {
+      "type": "structure",
+      "members": {
+        "MemberC": {
+          "shape": "StringShape",
+          "eventpayload": true
+        }
+      },
+      "event": true
+    },
+    "StringShape": {
+      "type": "string"
+    },
+    "BlobShape": {
+      "type": "blob"
+    }
+  }
+}

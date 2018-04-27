@@ -309,7 +309,8 @@ module AwsSdkCodeGenerator
 
       def shape_ref_eventpayload(ref)
         if ref['eventpayload']
-          ", eventpayload: true"
+          type = @service.api['shapes'][ref['shape']]['type']
+          ", eventpayload: true, eventpayload_type: '#{type}'"
         else
           ''
         end
@@ -317,7 +318,8 @@ module AwsSdkCodeGenerator
 
       def shape_ref_eventheader(ref)
         if ref['eventheader']
-          ", eventheader: true"
+          type = @service.api['shapes'][ref['shape']]['type']
+          ", eventheader: true, eventheader_type: '#{type}'"
         else
           ''
         end

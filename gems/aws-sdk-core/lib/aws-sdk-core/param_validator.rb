@@ -38,28 +38,34 @@ module Aws
       # ensure the value is hash like
       return unless correct_type?(ref, values, errors, context)
 
-      shape = ref.shape
+      if ref.eventstream
+        #TODO
+        # validate eventstream response
+      else
+        shape = ref.shape
 
-      # ensure required members are present
-      if @validate_required
-        shape.required.each do |member_name|
-          if values[member_name].nil?
-            param = "#{context}[#{member_name.inspect}]"
-            errors << "missing required parameter #{param}"
+        # ensure required members are present
+        if @validate_required
+          shape.required.each do |member_name|
+            if values[member_name].nil?
+              param = "#{context}[#{member_name.inspect}]"
+              errors << "missing required parameter #{param}"
+            end
           end
         end
-      end
 
-      # validate non-nil members
-      values.each_pair do |name, value|
-        unless value.nil?
-          if shape.member?(name)
-            member_ref = shape.member(name)
-            shape(member_ref, value, errors, context + "[#{name.inspect}]")
-          else
-            errors << "unexpected value at #{context}[#{name.inspect}]"
+        # validate non-nil members
+        values.each_pair do |name, value|
+          unless value.nil?
+            if shape.member?(name)
+              member_ref = shape.member(name)
+              shape(member_ref, value, errors, context + "[#{name.inspect}]")
+            else
+              errors << "unexpected value at #{context}[#{name.inspect}]"
+            end
           end
         end
+
       end
     end
 
@@ -130,6 +136,7 @@ module Aws
       case value
       when Hash then true
       when ref.shape.struct_class then true
+      when Enumerator then ref.eventstream
       else
         errors << expected_got(context, "a hash", value)
         false
