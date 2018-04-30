@@ -9,8 +9,12 @@ describe 'Client Interface:' do
 
     let(:stream) {
       [
+        # eventheader & eventpayload(blob)
         { event_type: :a, member_a: 'foo', member_b: StringIO.new('bar') },
-        { event_type: :b, member_c: StringIO.new('baz') }
+        # eventpayload(string)
+        { event_type: :b, member_c: 'baz' },
+        # eventpayload(structure)
+        { event_type: :c, member_d: {struct_member_a: 'foo', struct_member_b: 'bar'} }
       ].each
     }
     let(:client) {
@@ -28,11 +32,14 @@ describe 'Client Interface:' do
       tracker = {}
       handler.on_a_event {|e| tracker[:a] = e}
       handler.on_b_event {|e| tracker[:b] = e}
+      handler.on_c_event {|e| tracker[:c] = e}
       resp = client.foo(event_stream_handler: handler)
 
       expect(tracker[:a].member_a).to eq('foo')
       expect(tracker[:a].member_b.read).to eq('bar')
       expect(tracker[:b].member_c.read).to eq('baz')
+      expect(tracker[:c].member_d.struct_member_a).to eq('foo')
+      expect(tracker[:c].member_d.struct_member_b).to eq('bar')
       expect(resp.payload).to be_a(Enumerator)
     end
 
@@ -41,12 +48,15 @@ describe 'Client Interface:' do
       handler = Proc.new do |stream|
         stream.on_a_event {|e| tracker[:a] = e}
         stream.on_b_event {|e| tracker[:b] = e}
+        stream.on_c_event {|e| tracker[:c] = e}
       end
       resp = client.foo(event_stream_handler: handler)
 
       expect(tracker[:a].member_a).to eq('foo')
       expect(tracker[:a].member_b.read).to eq('bar')
       expect(tracker[:b].member_c.read).to eq('baz')
+      expect(tracker[:c].member_d.struct_member_a).to eq('foo')
+      expect(tracker[:c].member_d.struct_member_b).to eq('bar')
       expect(resp.payload).to be_a(Enumerator)
     end
 
@@ -61,6 +71,9 @@ describe 'Client Interface:' do
           expect(event.member_b.read).to eq('bar')
         when :b
           expect(event.member_c.read).to eq('baz')
+        when :c
+          expect(event.member_d.struct_member_a).to eq('foo')
+          expect(event.member_d.struct_member_b).to eq('bar')
         end
       end
     end
@@ -74,6 +87,8 @@ describe 'Client Interface:' do
       expect(tracker[:a].member_a).to eq('foo')
       expect(tracker[:a].member_b.read).to eq('bar')
       expect(tracker[:b].member_c.read).to eq('baz')
+      expect(tracker[:c].member_d.struct_member_a).to eq('foo')
+      expect(tracker[:c].member_d.struct_member_b).to eq('bar')
       expect(resp.payload).to be_a(Enumerator)
     end
 
@@ -82,6 +97,7 @@ describe 'Client Interface:' do
       handler = Events::EventStreams::BarPayload.new
       handler.on_a_event {|e| tracker[:a] = e}
       handler.on_b_event {|e| tracker[:b] = e}
+      handler.on_c_event {|e| tracker[:c] = e}
       resp = client.foo(event_stream_handler: handler) do |stream|
         stream.on_event {|e| tracker[:later] << e}
       end
@@ -89,9 +105,12 @@ describe 'Client Interface:' do
       expect(tracker[:a].member_a).to eq('foo')
       expect(tracker[:a].member_b.read).to eq('bar')
       expect(tracker[:b].member_c.read).to eq('baz')
-      expect(tracker[:later].size).to eq(2)
-      expect(tracker[:later].first).to eq(tracker[:a])
-      expect(tracker[:later].last).to eq(tracker[:b])
+      expect(tracker[:c].member_d.struct_member_a).to eq('foo')
+      expect(tracker[:c].member_d.struct_member_b).to eq('bar')
+      expect(tracker[:later].size).to eq(3)
+      expect(tracker[:later][0]).to eq(tracker[:a])
+      expect(tracker[:later][1]).to eq(tracker[:b])
+      expect(tracker[:later][2]).to eq(tracker[:c])
       expect(resp.payload).to be_a(Enumerator)
     end
 

@@ -29,7 +29,8 @@
       "type": "structure",
       "members": {
         "A": {"shape": "AEventShape"},
-        "B": {"shape": "BEventShape"}
+        "B": {"shape": "BEventShape"},
+        "C": {"shape": "CEventShape"}
       },
       "eventstream": true
     },
@@ -56,6 +57,27 @@
         }
       },
       "event": true
+    },
+    "CEventShape": {
+      "type": "structure",
+      "members": {
+        "MemberD": {
+          "shape": "StructShape",
+          "eventpayload": true
+        }
+      },
+      "event": true
+    },
+    "StructShape": {
+      "type": "structure",
+      "members": {
+        "StructMemberA": {
+          "shape": "StringShape"
+        },
+        "StructMemberB": {
+          "shape": "StringShape"
+        }
+      }
     },
     "StringShape": {
       "type": "string"

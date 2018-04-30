@@ -53,7 +53,7 @@ module Aws
         event_type = raw_event.headers.delete(":event-type").value
         # content_type = raw_event.headers.delete(":content-type").value
 
-        # TODO all in event header? or not encoded?
+        # TODO Pending
         # if event_type == 'initial-response' end
 
         # locate event from eventstream
@@ -69,7 +69,7 @@ module Aws
              event.send("#{member_name}=", raw_event.payload) :
              event.send("#{member_name}=", parse_payload(raw_event.payload.read, member_ref))
           elsif member_ref.eventheader
-            event.send("#{member_name}=", raw_event.headers[member_ref.location_name].value.inspect)
+            event.send("#{member_name}=", raw_event.headers[member_ref.location_name].value)
           else
             raise "Non eventpayload or eventheader member found at event"
           end
