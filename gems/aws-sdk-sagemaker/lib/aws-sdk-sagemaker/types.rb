@@ -383,6 +383,10 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] model_name
@@ -417,13 +421,20 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] vpc_config
+    #   A object that specifies the VPC that you want your model to connect
+    #   to. Control access to and from your training container by
+    #   configuring the VPC. For more information, see host-vpc.
+    #   @return [Types::VpcConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput AWS API Documentation
     #
     class CreateModelInput < Struct.new(
       :model_name,
       :primary_container,
       :execution_role_arn,
-      :tags)
+      :tags,
+      :vpc_config)
       include Aws::Structure
     end
 
@@ -669,6 +680,10 @@ module Aws::SageMaker
     #           volume_size_in_gb: 1, # required
     #           volume_kms_key_id: "KmsKeyId",
     #         },
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
     #         stopping_condition: { # required
     #           max_runtime_in_seconds: 1,
     #         },
@@ -764,6 +779,12 @@ module Aws::SageMaker
     #   specify an instance count greater than 1.
     #   @return [Types::ResourceConfig]
     #
+    # @!attribute [rw] vpc_config
+    #   A object that specifies the VPC that you want your training job to
+    #   connect to. Control access to and from your training container by
+    #   configuring the VPC. For more information, see train-vpc
+    #   @return [Types::VpcConfig]
+    #
     # @!attribute [rw] stopping_condition
     #   Sets a duration for training. Use this parameter to cap model
     #   training costs. To stop a job, Amazon SageMaker sends the algorithm
@@ -798,6 +819,7 @@ module Aws::SageMaker
       :input_data_config,
       :output_data_config,
       :resource_config,
+      :vpc_config,
       :stopping_condition,
       :tags)
       include Aws::Structure
@@ -1108,6 +1130,11 @@ module Aws::SageMaker
     #   for the model.
     #   @return [String]
     #
+    # @!attribute [rw] vpc_config
+    #   A object that specifies the VPC that this model has access to. For
+    #   more information, see host-vpc
+    #   @return [Types::VpcConfig]
+    #
     # @!attribute [rw] creation_time
     #   A timestamp that shows when the model was created.
     #   @return [Time]
@@ -1122,6 +1149,7 @@ module Aws::SageMaker
       :model_name,
       :primary_container,
       :execution_role_arn,
+      :vpc_config,
       :creation_time,
       :model_arn)
       include Aws::Structure
@@ -1392,6 +1420,11 @@ module Aws::SageMaker
     #   that are configured for model training.
     #   @return [Types::ResourceConfig]
     #
+    # @!attribute [rw] vpc_config
+    #   A object that specifies the VPC that this training job has access
+    #   to. For more information, see train-vpc.
+    #   @return [Types::VpcConfig]
+    #
     # @!attribute [rw] stopping_condition
     #   The condition under which to stop the training job.
     #   @return [Types::StoppingCondition]
@@ -1428,6 +1461,7 @@ module Aws::SageMaker
       :input_data_config,
       :output_data_config,
       :resource_config,
+      :vpc_config,
       :stopping_condition,
       :creation_time,
       :training_start_time,
@@ -2892,6 +2926,37 @@ module Aws::SageMaker
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceOutput AWS API Documentation
     #
     class UpdateNotebookInstanceOutput < Aws::EmptyStructure; end
+
+    # Specifies a VPC that your training jobs and hosted models have access
+    # to. Control access to and from your training and model containers by
+    # configuring the VPC. For more information, see host-vpc and train-vpc.
+    #
+    # @note When making an API call, you may pass VpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       }
+    #
+    # @!attribute [rw] security_group_ids
+    #   The VPC security group IDs, in the form sg-xxxxxxxx. Specify the
+    #   security groups for the VPC that is specified in the `Subnets`
+    #   field.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnets
+    #   The ID of the subnets in the VPC to which you want to connect your
+    #   training job or model.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VpcConfig AWS API Documentation
+    #
+    class VpcConfig < Struct.new(
+      :security_group_ids,
+      :subnets)
+      include Aws::Structure
+    end
 
   end
 end

@@ -433,6 +433,11 @@ module Aws::SageMaker
     #
     #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   A object that specifies the VPC that you want your model to connect
+    #   to. Control access to and from your training container by configuring
+    #   the VPC. For more information, see host-vpc.
+    #
     # @return [Types::CreateModelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateModelOutput#model_arn #model_arn} => String
@@ -456,6 +461,10 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -827,6 +836,11 @@ module Aws::SageMaker
     #   the algorithm specification. For distributed training algorithms,
     #   specify an instance count greater than 1.
     #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   A object that specifies the VPC that you want your training job to
+    #   connect to. Control access to and from your training container by
+    #   configuring the VPC. For more information, see train-vpc
+    #
     # @option params [required, Types::StoppingCondition] :stopping_condition
     #   Sets a duration for training. Use this parameter to cap model training
     #   costs. To stop a job, Amazon SageMaker sends the algorithm the
@@ -889,6 +903,10 @@ module Aws::SageMaker
     #       instance_count: 1, # required
     #       volume_size_in_gb: 1, # required
     #       volume_kms_key_id: "KmsKeyId",
+    #     },
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -1168,6 +1186,7 @@ module Aws::SageMaker
     #   * {Types::DescribeModelOutput#model_name #model_name} => String
     #   * {Types::DescribeModelOutput#primary_container #primary_container} => Types::ContainerDefinition
     #   * {Types::DescribeModelOutput#execution_role_arn #execution_role_arn} => String
+    #   * {Types::DescribeModelOutput#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::DescribeModelOutput#creation_time #creation_time} => Time
     #   * {Types::DescribeModelOutput#model_arn #model_arn} => String
     #
@@ -1186,6 +1205,10 @@ module Aws::SageMaker
     #   resp.primary_container.environment #=> Hash
     #   resp.primary_container.environment["EnvironmentKey"] #=> String
     #   resp.execution_role_arn #=> String
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
+    #   resp.vpc_config.subnets #=> Array
+    #   resp.vpc_config.subnets[0] #=> String
     #   resp.creation_time #=> Time
     #   resp.model_arn #=> String
     #
@@ -1317,6 +1340,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#input_data_config #input_data_config} => Array&lt;Types::Channel&gt;
     #   * {Types::DescribeTrainingJobResponse#output_data_config #output_data_config} => Types::OutputDataConfig
     #   * {Types::DescribeTrainingJobResponse#resource_config #resource_config} => Types::ResourceConfig
+    #   * {Types::DescribeTrainingJobResponse#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::DescribeTrainingJobResponse#stopping_condition #stopping_condition} => Types::StoppingCondition
     #   * {Types::DescribeTrainingJobResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeTrainingJobResponse#training_start_time #training_start_time} => Time
@@ -1356,6 +1380,10 @@ module Aws::SageMaker
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.volume_size_in_gb #=> Integer
     #   resp.resource_config.volume_kms_key_id #=> String
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
+    #   resp.vpc_config.subnets #=> Array
+    #   resp.vpc_config.subnets[0] #=> String
     #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.creation_time #=> Time
     #   resp.training_start_time #=> Time
@@ -2139,7 +2167,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

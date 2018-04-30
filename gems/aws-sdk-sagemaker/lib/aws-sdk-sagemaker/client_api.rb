@@ -160,6 +160,7 @@ module Aws::SageMaker
     StopTrainingJobRequest = Shapes::StructureShape.new(name: 'StopTrainingJobRequest')
     StoppingCondition = Shapes::StructureShape.new(name: 'StoppingCondition')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
+    Subnets = Shapes::ListShape.new(name: 'Subnets')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -187,6 +188,8 @@ module Aws::SageMaker
     VariantName = Shapes::StringShape.new(name: 'VariantName')
     VariantWeight = Shapes::FloatShape.new(name: 'VariantWeight')
     VolumeSizeInGB = Shapes::IntegerShape.new(name: 'VolumeSizeInGB')
+    VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
+    VpcSecurityGroupIds = Shapes::ListShape.new(name: 'VpcSecurityGroupIds')
 
     AddTagsInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     AddTagsInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -233,6 +236,7 @@ module Aws::SageMaker
     CreateModelInput.add_member(:primary_container, Shapes::ShapeRef.new(shape: ContainerDefinition, required: true, location_name: "PrimaryContainer"))
     CreateModelInput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
     CreateModelInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateModelInput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     CreateModelInput.struct_class = Types::CreateModelInput
 
     CreateModelOutput.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "ModelArn"))
@@ -274,6 +278,7 @@ module Aws::SageMaker
     CreateTrainingJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
     CreateTrainingJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
     CreateTrainingJobRequest.add_member(:resource_config, Shapes::ShapeRef.new(shape: ResourceConfig, required: true, location_name: "ResourceConfig"))
+    CreateTrainingJobRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     CreateTrainingJobRequest.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     CreateTrainingJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateTrainingJobRequest.struct_class = Types::CreateTrainingJobRequest
@@ -334,6 +339,7 @@ module Aws::SageMaker
     DescribeModelOutput.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     DescribeModelOutput.add_member(:primary_container, Shapes::ShapeRef.new(shape: ContainerDefinition, required: true, location_name: "PrimaryContainer"))
     DescribeModelOutput.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ExecutionRoleArn"))
+    DescribeModelOutput.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     DescribeModelOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeModelOutput.add_member(:model_arn, Shapes::ShapeRef.new(shape: ModelArn, required: true, location_name: "ModelArn"))
     DescribeModelOutput.struct_class = Types::DescribeModelOutput
@@ -384,6 +390,7 @@ module Aws::SageMaker
     DescribeTrainingJobResponse.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
     DescribeTrainingJobResponse.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
     DescribeTrainingJobResponse.add_member(:resource_config, Shapes::ShapeRef.new(shape: ResourceConfig, required: true, location_name: "ResourceConfig"))
+    DescribeTrainingJobResponse.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     DescribeTrainingJobResponse.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, required: true, location_name: "StoppingCondition"))
     DescribeTrainingJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
     DescribeTrainingJobResponse.add_member(:training_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TrainingStartTime"))
@@ -603,6 +610,8 @@ module Aws::SageMaker
     StoppingCondition.add_member(:max_runtime_in_seconds, Shapes::ShapeRef.new(shape: MaxRuntimeInSeconds, location_name: "MaxRuntimeInSeconds"))
     StoppingCondition.struct_class = Types::StoppingCondition
 
+    Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -648,6 +657,12 @@ module Aws::SageMaker
     UpdateNotebookInstanceLifecycleConfigOutput.struct_class = Types::UpdateNotebookInstanceLifecycleConfigOutput
 
     UpdateNotebookInstanceOutput.struct_class = Types::UpdateNotebookInstanceOutput
+
+    VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIds, required: true, location_name: "SecurityGroupIds"))
+    VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "Subnets"))
+    VpcConfig.struct_class = Types::VpcConfig
+
+    VpcSecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
 
     # @api private

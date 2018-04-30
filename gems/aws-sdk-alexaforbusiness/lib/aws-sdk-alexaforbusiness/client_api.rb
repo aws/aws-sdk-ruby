@@ -27,6 +27,7 @@ module Aws::AlexaForBusiness
     AssociateSkillGroupWithRoomResponse = Shapes::StructureShape.new(name: 'AssociateSkillGroupWithRoomResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
     Contact = Shapes::StructureShape.new(name: 'Contact')
     ContactData = Shapes::StructureShape.new(name: 'ContactData')
     ContactDataList = Shapes::ListShape.new(name: 'ContactDataList')
@@ -60,6 +61,10 @@ module Aws::AlexaForBusiness
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceData = Shapes::StructureShape.new(name: 'DeviceData')
     DeviceDataList = Shapes::ListShape.new(name: 'DeviceDataList')
+    DeviceEvent = Shapes::StructureShape.new(name: 'DeviceEvent')
+    DeviceEventList = Shapes::ListShape.new(name: 'DeviceEventList')
+    DeviceEventType = Shapes::StringShape.new(name: 'DeviceEventType')
+    DeviceEventValue = Shapes::StringShape.new(name: 'DeviceEventValue')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
     DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
@@ -103,6 +108,8 @@ module Aws::AlexaForBusiness
     GetSkillGroupResponse = Shapes::StructureShape.new(name: 'GetSkillGroupResponse')
     InvalidUserStatusException = Shapes::StructureShape.new(name: 'InvalidUserStatusException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListDeviceEventsRequest = Shapes::StructureShape.new(name: 'ListDeviceEventsRequest')
+    ListDeviceEventsResponse = Shapes::StructureShape.new(name: 'ListDeviceEventsResponse')
     ListSkillsRequest = Shapes::StructureShape.new(name: 'ListSkillsRequest')
     ListSkillsResponse = Shapes::StructureShape.new(name: 'ListSkillsResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
@@ -175,6 +182,7 @@ module Aws::AlexaForBusiness
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TemperatureUnit = Shapes::StringShape.new(name: 'TemperatureUnit')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
@@ -372,12 +380,20 @@ module Aws::AlexaForBusiness
 
     DeviceDataList.member = Shapes::ShapeRef.new(shape: DeviceData)
 
+    DeviceEvent.add_member(:type, Shapes::ShapeRef.new(shape: DeviceEventType, location_name: "Type"))
+    DeviceEvent.add_member(:value, Shapes::ShapeRef.new(shape: DeviceEventValue, location_name: "Value"))
+    DeviceEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    DeviceEvent.struct_class = Types::DeviceEvent
+
+    DeviceEventList.member = Shapes::ShapeRef.new(shape: DeviceEvent)
+
     DeviceStatusDetail.add_member(:code, Shapes::ShapeRef.new(shape: DeviceStatusDetailCode, location_name: "Code"))
     DeviceStatusDetail.struct_class = Types::DeviceStatusDetail
 
     DeviceStatusDetails.member = Shapes::ShapeRef.new(shape: DeviceStatusDetail)
 
     DeviceStatusInfo.add_member(:device_status_details, Shapes::ShapeRef.new(shape: DeviceStatusDetails, location_name: "DeviceStatusDetails"))
+    DeviceStatusInfo.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "ConnectionStatus"))
     DeviceStatusInfo.struct_class = Types::DeviceStatusInfo
 
     DisassociateContactFromAddressBookRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
@@ -450,6 +466,16 @@ module Aws::AlexaForBusiness
 
     GetSkillGroupResponse.add_member(:skill_group, Shapes::ShapeRef.new(shape: SkillGroup, location_name: "SkillGroup"))
     GetSkillGroupResponse.struct_class = Types::GetSkillGroupResponse
+
+    ListDeviceEventsRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DeviceArn"))
+    ListDeviceEventsRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: DeviceEventType, location_name: "EventType"))
+    ListDeviceEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDeviceEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListDeviceEventsRequest.struct_class = Types::ListDeviceEventsRequest
+
+    ListDeviceEventsResponse.add_member(:device_events, Shapes::ShapeRef.new(shape: DeviceEventList, location_name: "DeviceEvents"))
+    ListDeviceEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDeviceEventsResponse.struct_class = Types::ListDeviceEventsResponse
 
     ListSkillsRequest.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
     ListSkillsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -754,6 +780,7 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateContactWithAddressBookRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateContactWithAddressBookResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:associate_device_with_room, Seahorse::Model::Operation.new.tap do |o|
@@ -980,6 +1007,21 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: GetSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:list_device_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDeviceEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDeviceEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDeviceEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_skills, Seahorse::Model::Operation.new.tap do |o|

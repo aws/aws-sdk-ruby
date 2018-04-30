@@ -119,13 +119,10 @@ module Aws::GuardDuty
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
-    ListOfPortProbeDetail = Shapes::ListShape.new(name: 'ListOfPortProbeDetail')
     ListThreatIntelSetsRequest = Shapes::StructureShape.new(name: 'ListThreatIntelSetsRequest')
     ListThreatIntelSetsResponse = Shapes::StructureShape.new(name: 'ListThreatIntelSetsResponse')
     LocalPortDetails = Shapes::StructureShape.new(name: 'LocalPortDetails')
     Location = Shapes::StringShape.new(name: 'Location')
-    MapOfCondition = Shapes::MapShape.new(name: 'MapOfCondition')
-    MapOfCountBySeverityFindingStatistic = Shapes::MapShape.new(name: 'MapOfCountBySeverityFindingStatistic')
     Master = Shapes::StructureShape.new(name: 'Master')
     MasterId = Shapes::StringShape.new(name: 'MasterId')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -182,6 +179,10 @@ module Aws::GuardDuty
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
+    __listOfPortProbeDetail = Shapes::ListShape.new(name: '__listOfPortProbeDetail')
+    __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOfCondition = Shapes::MapShape.new(name: '__mapOfCondition')
+    __mapOfCountBySeverityFindingStatistic = Shapes::MapShape.new(name: '__mapOfCountBySeverityFindingStatistic')
     __string = Shapes::StringShape.new(name: '__string')
     __timestamp = Shapes::TimestampShape.new(name: '__timestamp')
 
@@ -198,8 +199,8 @@ module Aws::GuardDuty
     AccessKeyDetails.add_member(:user_type, Shapes::ShapeRef.new(shape: __string, location_name: "userType"))
     AccessKeyDetails.struct_class = Types::AccessKeyDetails
 
-    AccountDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
-    AccountDetail.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "email"))
+    AccountDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    AccountDetail.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "email"))
     AccountDetail.struct_class = Types::AccountDetail
 
     AccountDetails.member = Shapes::ShapeRef.new(shape: AccountDetail)
@@ -341,31 +342,31 @@ module Aws::GuardDuty
     ErrorResponse.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "__type"))
     ErrorResponse.struct_class = Types::ErrorResponse
 
-    Finding.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
-    Finding.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Finding.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "accountId"))
+    Finding.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "arn"))
     Finding.add_member(:confidence, Shapes::ShapeRef.new(shape: __double, location_name: "confidence"))
-    Finding.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    Finding.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
     Finding.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    Finding.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    Finding.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     Finding.add_member(:partition, Shapes::ShapeRef.new(shape: __string, location_name: "partition"))
-    Finding.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
-    Finding.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
-    Finding.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, location_name: "schemaVersion"))
+    Finding.add_member(:region, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "region"))
+    Finding.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "resource"))
+    Finding.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "schemaVersion"))
     Finding.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
-    Finding.add_member(:severity, Shapes::ShapeRef.new(shape: __double, location_name: "severity"))
+    Finding.add_member(:severity, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "severity"))
     Finding.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "title"))
-    Finding.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "type"))
-    Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    Finding.add_member(:type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "type"))
+    Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, required: true, location_name: "updatedAt"))
     Finding.struct_class = Types::Finding
 
-    FindingCriteria.add_member(:criterion, Shapes::ShapeRef.new(shape: MapOfCondition, location_name: "criterion"))
+    FindingCriteria.add_member(:criterion, Shapes::ShapeRef.new(shape: __mapOfCondition, location_name: "criterion"))
     FindingCriteria.struct_class = Types::FindingCriteria
 
     FindingIds.member = Shapes::ShapeRef.new(shape: FindingId)
 
     FindingStatisticTypes.member = Shapes::ShapeRef.new(shape: FindingStatisticType)
 
-    FindingStatistics.add_member(:count_by_severity, Shapes::ShapeRef.new(shape: MapOfCountBySeverityFindingStatistic, location_name: "countBySeverity"))
+    FindingStatistics.add_member(:count_by_severity, Shapes::ShapeRef.new(shape: __mapOfCountBySeverityFindingStatistic, location_name: "countBySeverity"))
     FindingStatistics.struct_class = Types::FindingStatistics
 
     FindingTypes.member = Shapes::ShapeRef.new(shape: FindingType)
@@ -467,6 +468,7 @@ module Aws::GuardDuty
 
     InviteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
     InviteMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
+    InviteMembersRequest.add_member(:disable_email_notification, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableEmailNotification"))
     InviteMembersRequest.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     InviteMembersRequest.struct_class = Types::InviteMembersRequest
 
@@ -523,8 +525,6 @@ module Aws::GuardDuty
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
 
-    ListOfPortProbeDetail.member = Shapes::ShapeRef.new(shape: PortProbeDetail)
-
     ListThreatIntelSetsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     ListThreatIntelSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListThreatIntelSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -538,25 +538,19 @@ module Aws::GuardDuty
     LocalPortDetails.add_member(:port_name, Shapes::ShapeRef.new(shape: __string, location_name: "portName"))
     LocalPortDetails.struct_class = Types::LocalPortDetails
 
-    MapOfCondition.key = Shapes::ShapeRef.new(shape: __string)
-    MapOfCondition.value = Shapes::ShapeRef.new(shape: Condition)
-
-    MapOfCountBySeverityFindingStatistic.key = Shapes::ShapeRef.new(shape: __string)
-    MapOfCountBySeverityFindingStatistic.value = Shapes::ShapeRef.new(shape: CountBySeverityFindingStatistic)
-
     Master.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     Master.add_member(:invitation_id, Shapes::ShapeRef.new(shape: InvitationId, location_name: "invitationId"))
     Master.add_member(:invited_at, Shapes::ShapeRef.new(shape: InvitedAt, location_name: "invitedAt"))
     Master.add_member(:relationship_status, Shapes::ShapeRef.new(shape: __string, location_name: "relationshipStatus"))
     Master.struct_class = Types::Master
 
-    Member.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    Member.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     Member.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "detectorId"))
-    Member.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "email"))
+    Member.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "email"))
     Member.add_member(:invited_at, Shapes::ShapeRef.new(shape: InvitedAt, location_name: "invitedAt"))
-    Member.add_member(:master_id, Shapes::ShapeRef.new(shape: MasterId, location_name: "masterId"))
-    Member.add_member(:relationship_status, Shapes::ShapeRef.new(shape: __string, location_name: "relationshipStatus"))
-    Member.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    Member.add_member(:master_id, Shapes::ShapeRef.new(shape: MasterId, required: true, location_name: "masterId"))
+    Member.add_member(:relationship_status, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "relationshipStatus"))
+    Member.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, required: true, location_name: "updatedAt"))
     Member.struct_class = Types::Member
 
     Members.member = Shapes::ShapeRef.new(shape: Member)
@@ -591,7 +585,7 @@ module Aws::GuardDuty
     Organization.struct_class = Types::Organization
 
     PortProbeAction.add_member(:blocked, Shapes::ShapeRef.new(shape: __boolean, location_name: "blocked"))
-    PortProbeAction.add_member(:port_probe_details, Shapes::ShapeRef.new(shape: ListOfPortProbeDetail, location_name: "portProbeDetails"))
+    PortProbeAction.add_member(:port_probe_details, Shapes::ShapeRef.new(shape: __listOfPortProbeDetail, location_name: "portProbeDetails"))
     PortProbeAction.struct_class = Types::PortProbeAction
 
     PortProbeDetail.add_member(:local_port_details, Shapes::ShapeRef.new(shape: LocalPortDetails, location_name: "localPortDetails"))
@@ -675,8 +669,8 @@ module Aws::GuardDuty
 
     UnarchiveFindingsResponse.struct_class = Types::UnarchiveFindingsResponse
 
-    UnprocessedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
-    UnprocessedAccount.add_member(:result, Shapes::ShapeRef.new(shape: __string, location_name: "result"))
+    UnprocessedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "accountId"))
+    UnprocessedAccount.add_member(:result, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "result"))
     UnprocessedAccount.struct_class = Types::UnprocessedAccount
 
     UnprocessedAccounts.member = Shapes::ShapeRef.new(shape: UnprocessedAccount)
@@ -712,6 +706,14 @@ module Aws::GuardDuty
     UpdateThreatIntelSetRequest.struct_class = Types::UpdateThreatIntelSetRequest
 
     UpdateThreatIntelSetResponse.struct_class = Types::UpdateThreatIntelSetResponse
+
+    __listOfPortProbeDetail.member = Shapes::ShapeRef.new(shape: PortProbeDetail)
+
+    __mapOfCondition.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOfCondition.value = Shapes::ShapeRef.new(shape: Condition)
+
+    __mapOfCountBySeverityFindingStatistic.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOfCountBySeverityFindingStatistic.value = Shapes::ShapeRef.new(shape: CountBySeverityFindingStatistic)
 
 
     # @api private

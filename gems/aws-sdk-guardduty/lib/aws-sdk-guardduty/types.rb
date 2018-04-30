@@ -80,8 +80,8 @@ module Aws::GuardDuty
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId",
-    #         email: "Email",
+    #         account_id: "AccountId", # required
+    #         email: "Email", # required
     #       }
     #
     # @!attribute [rw] account_id
@@ -387,8 +387,8 @@ module Aws::GuardDuty
     #       {
     #         account_details: [
     #           {
-    #             account_id: "AccountId",
-    #             email: "Email",
+    #             account_id: "AccountId", # required
+    #             email: "Email", # required
     #           },
     #         ],
     #         detector_id: "__string", # required
@@ -1413,6 +1413,7 @@ module Aws::GuardDuty
     #       {
     #         account_ids: ["__string"],
     #         detector_id: "__string", # required
+    #         disable_email_notification: false,
     #         message: "Message",
     #       }
     #
@@ -1424,9 +1425,13 @@ module Aws::GuardDuty
     # @!attribute [rw] detector_id
     #   @return [String]
     #
+    # @!attribute [rw] disable_email_notification
+    #   Indicates whether invite member email notification is disabled
+    #   @return [Boolean]
+    #
     # @!attribute [rw] message
     #   The invitation message that you want to send to the accounts that
-    #   you're inviting to GuardDuty as members.
+    #   you’re inviting to GuardDuty as members.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersRequest AWS API Documentation
@@ -1434,6 +1439,7 @@ module Aws::GuardDuty
     class InviteMembersRequest < Struct.new(
       :account_ids,
       :detector_id,
+      :disable_email_notification,
       :message)
       include Aws::Structure
     end

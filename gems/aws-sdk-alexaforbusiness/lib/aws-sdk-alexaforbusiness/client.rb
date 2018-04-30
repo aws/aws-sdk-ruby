@@ -155,7 +155,7 @@ module Aws::AlexaForBusiness
 
     # @!group API Operations
 
-    # Associates a contact to a given address book.
+    # Associates a contact with a given address book.
     #
     # @option params [required, String] :contact_arn
     #   The ARN of the contact to associate with an address book.
@@ -181,10 +181,10 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Associates a device to a given room. This applies all the settings
+    # Associates a device with a given room. This applies all the settings
     # from the room profile to the device, and all the skills in any skill
     # groups added to that room. This operation requires the device to be
-    # online, or a manual sync is required.
+    # online, or else a manual sync is required.
     #
     # @option params [String] :device_arn
     #   The ARN of the device to associate to a room. Required.
@@ -210,7 +210,7 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Associates a skill group to a given room. This enables all skills in
+    # Associates a skill group with a given room. This enables all skills in
     # the associated skill group on all devices in the room.
     #
     # @option params [String] :skill_group_arn
@@ -280,7 +280,7 @@ module Aws::AlexaForBusiness
     # Creates a contact with the specified details.
     #
     # @option params [String] :display_name
-    #   The name of the contact to display on the AWS management console.
+    #   The name of the contact to display on the console.
     #
     # @option params [required, String] :first_name
     #   The first name of the contact that is used to call the contact on the
@@ -291,7 +291,7 @@ module Aws::AlexaForBusiness
     #   device.
     #
     # @option params [required, String] :phone_number
-    #   The phone number of the contact in E164 format.
+    #   The phone number of the contact in E.164 format.
     #
     # @option params [String] :client_request_token
     #   A unique, user-specified identifier for this request that ensures
@@ -885,6 +885,7 @@ module Aws::AlexaForBusiness
     #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE"
     #   resp.device.device_status_info.device_status_details #=> Array
     #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
+    #   resp.device.device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDevice AWS API Documentation
     #
@@ -1031,6 +1032,61 @@ module Aws::AlexaForBusiness
     # @param [Hash] params ({})
     def get_skill_group(params = {}, options = {})
       req = build_request(:get_skill_group, params)
+      req.send_request(options)
+    end
+
+    # Lists the Device Event history for up to 30 days. If EventType isn't
+    # specified in the request, this returns a list of all device events in
+    # reverse chronological order. If EventType is specified, this returns a
+    # list of device events for that EventType in reverse chronological
+    # order.
+    #
+    # @option params [required, String] :device_arn
+    #   The ARN of a device.
+    #
+    # @option params [String] :event_type
+    #   The event type to filter device events.
+    #
+    # @option params [String] :next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response only includes results beyond the token, up to
+    #   the value specified by MaxResults.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to include in the response. If more
+    #   results exist than the specified MaxResults value, a token is included
+    #   in the response so that the remaining results can be retrieved.
+    #   Required.
+    #
+    # @return [Types::ListDeviceEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDeviceEventsResponse#device_events #device_events} => Array&lt;Types::DeviceEvent&gt;
+    #   * {Types::ListDeviceEventsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_device_events({
+    #     device_arn: "Arn", # required
+    #     event_type: "CONNECTION_STATUS", # accepts CONNECTION_STATUS
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_events #=> Array
+    #   resp.device_events[0].type #=> String, one of "CONNECTION_STATUS"
+    #   resp.device_events[0].value #=> String
+    #   resp.device_events[0].timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEvents AWS API Documentation
+    #
+    # @overload list_device_events(params = {})
+    # @param [Hash] params ({})
+    def list_device_events(params = {}, options = {})
+      req = build_request(:list_device_events, params)
       req.send_request(options)
     end
 
@@ -1380,12 +1436,13 @@ module Aws::AlexaForBusiness
     # @option params [Array<Types::Filter>] :filters
     #   The filters to use to list a specified set of devices. Supported
     #   filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode,
-    #   RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.
+    #   RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and
+    #   ConnectionStatus (ONLINE and OFFLINE).
     #
     # @option params [Array<Types::Sort>] :sort_criteria
     #   The sort order to use in listing the specified set of devices.
     #   Supported sort keys are DeviceName, DeviceStatus, RoomName,
-    #   DeviceType, and DeviceSerialNumber.
+    #   DeviceType, DeviceSerialNumber, and ConnectionStatus.
     #
     # @return [Types::SearchDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1426,6 +1483,7 @@ module Aws::AlexaForBusiness
     #   resp.devices[0].room_name #=> String
     #   resp.devices[0].device_status_info.device_status_details #=> Array
     #   resp.devices[0].device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
+    #   resp.devices[0].device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
     #
@@ -1700,7 +1758,7 @@ module Aws::AlexaForBusiness
     #   resp.users[0].first_name #=> String
     #   resp.users[0].last_name #=> String
     #   resp.users[0].email #=> String
-    #   resp.users[0].enrollment_status #=> String, one of "INITIALIZED", "PENDING", "REGISTERED", "DEREGISTERING"
+    #   resp.users[0].enrollment_status #=> String, one of "INITIALIZED", "PENDING", "REGISTERED", "DISASSOCIATING", "DEREGISTERING"
     #   resp.users[0].enrollment_id #=> String
     #   resp.next_token #=> String
     #   resp.total_count #=> Integer
@@ -1738,7 +1796,7 @@ module Aws::AlexaForBusiness
       req.send_request(options)
     end
 
-    # Resets a device and its account to the known default settings by
+    # Resets a device and its account to the known default settings, by
     # clearing all information and settings set by previous users.
     #
     # @option params [String] :room_arn
@@ -2062,7 +2120,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

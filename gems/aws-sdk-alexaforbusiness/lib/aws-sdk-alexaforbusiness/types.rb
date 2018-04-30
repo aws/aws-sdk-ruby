@@ -146,16 +146,16 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name of the contact to display on the AWS management console.
+    #   The name of the contact to display on the console.
     #   @return [String]
     #
     # @!attribute [rw] first_name
-    #   The first name of the contact that is used to call the contact on
-    #   the device.
+    #   The first name of the contact, used to call the contact on the
+    #   device.
     #   @return [String]
     #
     # @!attribute [rw] last_name
-    #   The last name of the contact that is used to call the contact on the
+    #   The last name of the contact, used to call the contact on the
     #   device.
     #   @return [String]
     #
@@ -181,16 +181,16 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   The name of the contact to display on the AWS management console.
+    #   The name of the contact to display on the console.
     #   @return [String]
     #
     # @!attribute [rw] first_name
-    #   The first name of the contact that is used to call the contact on
-    #   the device.
+    #   The first name of the contact, used to call the contact on the
+    #   device.
     #   @return [String]
     #
     # @!attribute [rw] last_name
-    #   The last name of the contact that is used to call the contact on the
+    #   The last name of the contact, used to call the contact on the
     #   device.
     #   @return [String]
     #
@@ -266,7 +266,7 @@ module Aws::AlexaForBusiness
     #       }
     #
     # @!attribute [rw] display_name
-    #   The name of the contact to display on the AWS management console.
+    #   The name of the contact to display on the console.
     #   @return [String]
     #
     # @!attribute [rw] first_name
@@ -280,7 +280,7 @@ module Aws::AlexaForBusiness
     #   @return [String]
     #
     # @!attribute [rw] phone_number
-    #   The phone number of the contact in E164 format.
+    #   The phone number of the contact in E.164 format.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -787,7 +787,7 @@ module Aws::AlexaForBusiness
     #
     # @!attribute [rw] device_status
     #   The status of a device. If the status is not READY, check the
-    #   DeviceStatusInfo for details.
+    #   DeviceStatusInfo value for details.
     #   @return [String]
     #
     # @!attribute [rw] device_status_info
@@ -867,6 +867,29 @@ module Aws::AlexaForBusiness
       include Aws::Structure
     end
 
+    # The list of device events.
+    #
+    # @!attribute [rw] type
+    #   The type of device event.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The time (in epoch) when the event occurred.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceEvent AWS API Documentation
+    #
+    class DeviceEvent < Struct.new(
+      :type,
+      :value,
+      :timestamp)
+      include Aws::Structure
+    end
+
     # Details of a device’s status.
     #
     # @!attribute [rw] code
@@ -886,10 +909,16 @@ module Aws::AlexaForBusiness
     #   One or more device status detail descriptions.
     #   @return [Array<Types::DeviceStatusDetail>]
     #
+    # @!attribute [rw] connection_status
+    #   The latest available information about the connection status of a
+    #   device.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusInfo AWS API Documentation
     #
     class DeviceStatusInfo < Struct.new(
-      :device_status_details)
+      :device_status_details,
+      :connection_status)
       include Aws::Structure
     end
 
@@ -1214,6 +1243,62 @@ module Aws::AlexaForBusiness
     #
     class GetSkillGroupResponse < Struct.new(
       :skill_group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListDeviceEventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_arn: "Arn", # required
+    #         event_type: "CONNECTION_STATUS", # accepts CONNECTION_STATUS
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] device_arn
+    #   The ARN of a device.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The event type to filter device events.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An optional token returned from a prior request. Use this token for
+    #   pagination of results from this action. If this parameter is
+    #   specified, the response only includes results beyond the token, up
+    #   to the value specified by MaxResults.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in the response. If more
+    #   results exist than the specified MaxResults value, a token is
+    #   included in the response so that the remaining results can be
+    #   retrieved. Required.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEventsRequest AWS API Documentation
+    #
+    class ListDeviceEventsRequest < Struct.new(
+      :device_arn,
+      :event_type,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_events
+    #   @return [Array<Types::DeviceEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEventsResponse AWS API Documentation
+    #
+    class ListDeviceEventsResponse < Struct.new(
+      :device_events,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1825,13 +1910,14 @@ module Aws::AlexaForBusiness
     # @!attribute [rw] filters
     #   The filters to use to list a specified set of devices. Supported
     #   filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode,
-    #   RoomName, DeviceType, DeviceSerialNumber, and UnassociatedOnly.
+    #   RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and
+    #   ConnectionStatus (ONLINE and OFFLINE).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] sort_criteria
     #   The sort order to use in listing the specified set of devices.
     #   Supported sort keys are DeviceName, DeviceStatus, RoomName,
-    #   DeviceType, and DeviceSerialNumber.
+    #   DeviceType, DeviceSerialNumber, and ConnectionStatus.
     #   @return [Array<Types::Sort>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchDevicesRequest AWS API Documentation

@@ -300,8 +300,8 @@ module Aws::GuardDuty
     #   resp = client.create_members({
     #     account_details: [
     #       {
-    #         account_id: "AccountId",
-    #         email: "Email",
+    #         account_id: "AccountId", # required
+    #         email: "Email", # required
     #       },
     #     ],
     #     detector_id: "__string", # required
@@ -1024,9 +1024,12 @@ module Aws::GuardDuty
     #
     # @option params [required, String] :detector_id
     #
+    # @option params [Boolean] :disable_email_notification
+    #   Indicates whether invite member email notification is disabled
+    #
     # @option params [String] :message
     #   The invitation message that you want to send to the accounts that
-    #   you're inviting to GuardDuty as members.
+    #   you’re inviting to GuardDuty as members.
     #
     # @return [Types::InviteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1037,6 +1040,7 @@ module Aws::GuardDuty
     #   resp = client.invite_members({
     #     account_ids: ["__string"],
     #     detector_id: "__string", # required
+    #     disable_email_notification: false,
     #     message: "Message",
     #   })
     #
@@ -1362,7 +1366,7 @@ module Aws::GuardDuty
     # Disables GuardDuty from monitoring findings of the member accounts
     # specified by the account IDs. After running this command, a master
     # GuardDuty account can run StartMonitoringMembers to re-enable
-    # GuardDuty to monitor these members' findings.
+    # GuardDuty to monitor these members’ findings.
     #
     # @option params [Array<String>] :account_ids
     #   A list of account IDs of the GuardDuty member accounts whose findings
@@ -1571,7 +1575,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
