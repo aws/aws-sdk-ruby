@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
+
+* Feature - Aws::Route53Domains - Updated the API, and documentation for Amazon Route 53 Domains.
+
+* Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
+
+* Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
+
 2.11.39 (2018-04-26)
 ------------------
 
