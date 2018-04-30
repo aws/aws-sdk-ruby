@@ -52,7 +52,7 @@ module Aws
     end
 
     # @return [Integer] The number of times to retry failed attempts to
-    #   fetch credentials from the instance metadata service. Defaults to 0.
+    #   fetch credentials from the instance metadata service. Defaults to 5.
     attr_reader :retries
 
     private
