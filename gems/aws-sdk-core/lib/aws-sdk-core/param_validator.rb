@@ -39,8 +39,10 @@ module Aws
       return unless correct_type?(ref, values, errors, context)
 
       if ref.eventstream
-        #TODO
-        # validate eventstream response
+        values.each do |value|
+          # each event is structure type
+          structure(ref.shape.member(value[:event_type]), value, errors, context)
+        end
       else
         shape = ref.shape
 
@@ -57,6 +59,9 @@ module Aws
         # validate non-nil members
         values.each_pair do |name, value|
           unless value.nil?
+            # :event_type is not modeled
+            # and also needed when construct body
+            next if name == :event_type
             if shape.member?(name)
               member_ref = shape.member(name)
               shape(member_ref, value, errors, context + "[#{name.inspect}]")

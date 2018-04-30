@@ -77,10 +77,7 @@ module Aws
         end
 
         def eventstream?(rules)
-          rules.shape.members.each do |_, ref|
-            return true if ref.eventstream
-          end
-          false
+          rules.eventstream
         end
 
         def encode_eventstream_response(rules, data, builder)
