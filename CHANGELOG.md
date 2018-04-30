@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.40 (2018-04-30)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
