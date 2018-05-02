@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.41 (2018-05-02)
+------------------
+
 * Feature - Aws::ACM - Updated the documentation for AWS Certificate Manager.
 
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
