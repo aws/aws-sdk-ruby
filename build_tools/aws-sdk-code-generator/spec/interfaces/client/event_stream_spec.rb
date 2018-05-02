@@ -115,8 +115,9 @@ describe 'Client Interface:' do
     end
 
     it 'supports error event' do
-      # TODO, provide mock event to above
-      # and verify event are being processed
+    end
+
+    it 'support exception event' do
     end
 
   end

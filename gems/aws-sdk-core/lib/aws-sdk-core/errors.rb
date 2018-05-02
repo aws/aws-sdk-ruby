@@ -34,6 +34,10 @@ module Aws
       end
     end
 
+    # Raised when EventStream Parser failed to parse
+    # a raw event message
+    class EventStreamParserError < RuntimeError; end
+
     # Various plugins perform client-side checksums of responses.
     # This error indicates a checksum failed.
     class ChecksumError < RuntimeError; end

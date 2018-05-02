@@ -31,7 +31,8 @@ module Aws
           when 'event'
             parse_event(raw_event)
           else
-            raise 'Unrecognized :message-type value for the event'
+            raise Aws::Errors::EventStreamParserError.new(
+              'Unrecognized :message-type value for the event')
           end
         else
           # no :message-type header, regular event by default
@@ -50,6 +51,7 @@ module Aws
       end
 
       def parse_event(raw_event)
+        # TODO exception-type for modeled exception events
         event_type = raw_event.headers.delete(":event-type").value
         # content_type = raw_event.headers.delete(":content-type").value
 

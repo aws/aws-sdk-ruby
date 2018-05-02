@@ -26,7 +26,6 @@ module Aws
 
       private
 
-      # TODO, more protocol
       def parser_class(protocol)
         case protocol
         when 'rest-xml' then Aws::Xml::Parser
