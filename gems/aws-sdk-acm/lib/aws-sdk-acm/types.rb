@@ -152,7 +152,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/troubleshooting.html#troubleshooting-failed
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -166,8 +166,8 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
-    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/import-certificate.html
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
     #   @return [String]
     #
     # @!attribute [rw] renewal_summary
@@ -177,7 +177,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [Types::RenewalSummary]
     #
     # @!attribute [rw] key_usages
@@ -257,7 +257,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-concepts.html#concept-transparency
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
     #
     # @note When making an API call, you may pass CertificateOptions
     #   data as a hash:
@@ -409,7 +409,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
     #   @return [Types::ResourceRecord]
     #
     # @!attribute [rw] validation_method
@@ -865,14 +865,14 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #
     # @!attribute [rw] renewal_status
     #   The status of ACM's [managed renewal][1] of the certificate.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [String]
     #
     # @!attribute [rw] domain_validation_options
@@ -884,7 +884,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [Array<Types::DomainValidation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewalSummary AWS API Documentation
@@ -916,11 +916,11 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] domain_name
-    #   Fully qualified domain name (FQDN), such as www.example.com, of the
-    #   site that you want to secure with an ACM Certificate. Use an
-    #   asterisk (*) to create a wildcard certificate that protects several
-    #   sites in the same domain. For example, *.example.com protects
-    #   www.example.com, site.example.com, and images.example.com.
+    #   Fully qualified domain name (FQDN), such as www.example.com, that
+    #   you want to secure with an ACM certificate. Use an asterisk (*) to
+    #   create a wildcard certificate that protects several sites in the
+    #   same domain. For example, *.example.com protects www.example.com,
+    #   site.example.com, and images.example.com.
     #
     #   The first domain name you enter cannot exceed 63 octets, including
     #   periods. Each subsequent Subject Alternative Name (SAN), however,
@@ -928,14 +928,15 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] validation_method
-    #   The method you want to use to validate that you own or control
-    #   domain. You can [validate with DNS][1] or [validate with email][2].
-    #   We recommend that you use DNS validation.
+    #   The method you want to use if you are requesting a public
+    #   certificate to validate that you own or control domain. You can
+    #   [validate with DNS][1] or [validate with email][2]. We recommend
+    #   that you use DNS validation.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html
-    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-email.html
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
@@ -966,7 +967,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-limits.html
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] idempotency_token
@@ -995,21 +996,23 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #   @return [Types::CertificateOptions]
     #
     # @!attribute [rw] certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the private certificate authority
-    #   (CA) that will be used to issue the certificate. For more
-    #   information about private CAs, see the [AWS Certificate Manager
-    #   Private Certificate Authority (PCA)][1] user guide. The ARN must
-    #   have the following form:
+    #   (CA) that will be used to issue the certificate. If you do not
+    #   provide an ARN and you are trying to request a private certificate,
+    #   ACM will attempt to issue a public certificate. For more information
+    #   about private CAs, see the [AWS Certificate Manager Private
+    #   Certificate Authority (PCA)][1] user guide. The ARN must have the
+    #   following form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm-pca/latest/userguide/PcaWelcome.html
+    #   [1]: http://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation

@@ -76,6 +76,10 @@ module Aws::CodePipeline
     CurrentRevision = Shapes::StructureShape.new(name: 'CurrentRevision')
     DeleteCustomActionTypeInput = Shapes::StructureShape.new(name: 'DeleteCustomActionTypeInput')
     DeletePipelineInput = Shapes::StructureShape.new(name: 'DeletePipelineInput')
+    DeleteWebhookInput = Shapes::StructureShape.new(name: 'DeleteWebhookInput')
+    DeleteWebhookOutput = Shapes::StructureShape.new(name: 'DeleteWebhookOutput')
+    DeregisterWebhookWithThirdPartyInput = Shapes::StructureShape.new(name: 'DeregisterWebhookWithThirdPartyInput')
+    DeregisterWebhookWithThirdPartyOutput = Shapes::StructureShape.new(name: 'DeregisterWebhookWithThirdPartyOutput')
     Description = Shapes::StringShape.new(name: 'Description')
     DisableStageTransitionInput = Shapes::StructureShape.new(name: 'DisableStageTransitionInput')
     DisabledReason = Shapes::StringShape.new(name: 'DisabledReason')
@@ -112,6 +116,8 @@ module Aws::CodePipeline
     InvalidNonceException = Shapes::StructureShape.new(name: 'InvalidNonceException')
     InvalidStageDeclarationException = Shapes::StructureShape.new(name: 'InvalidStageDeclarationException')
     InvalidStructureException = Shapes::StructureShape.new(name: 'InvalidStructureException')
+    InvalidWebhookAuthenticationParametersException = Shapes::StructureShape.new(name: 'InvalidWebhookAuthenticationParametersException')
+    InvalidWebhookFilterPatternException = Shapes::StructureShape.new(name: 'InvalidWebhookFilterPatternException')
     Job = Shapes::StructureShape.new(name: 'Job')
     JobData = Shapes::StructureShape.new(name: 'JobData')
     JobDetails = Shapes::StructureShape.new(name: 'JobDetails')
@@ -119,6 +125,7 @@ module Aws::CodePipeline
     JobList = Shapes::ListShape.new(name: 'JobList')
     JobNotFoundException = Shapes::StructureShape.new(name: 'JobNotFoundException')
     JobStatus = Shapes::StringShape.new(name: 'JobStatus')
+    JsonPath = Shapes::StringShape.new(name: 'JsonPath')
     LastChangedAt = Shapes::TimestampShape.new(name: 'LastChangedAt')
     LastChangedBy = Shapes::StringShape.new(name: 'LastChangedBy')
     LastUpdatedBy = Shapes::StringShape.new(name: 'LastUpdatedBy')
@@ -129,6 +136,10 @@ module Aws::CodePipeline
     ListPipelineExecutionsOutput = Shapes::StructureShape.new(name: 'ListPipelineExecutionsOutput')
     ListPipelinesInput = Shapes::StructureShape.new(name: 'ListPipelinesInput')
     ListPipelinesOutput = Shapes::StructureShape.new(name: 'ListPipelinesOutput')
+    ListWebhookItem = Shapes::StructureShape.new(name: 'ListWebhookItem')
+    ListWebhooksInput = Shapes::StructureShape.new(name: 'ListWebhooksInput')
+    ListWebhooksOutput = Shapes::StructureShape.new(name: 'ListWebhooksOutput')
+    MatchEquals = Shapes::StringShape.new(name: 'MatchEquals')
     MaxBatchSize = Shapes::IntegerShape.new(name: 'MaxBatchSize')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumArtifactCount = Shapes::IntegerShape.new(name: 'MaximumArtifactCount')
@@ -170,7 +181,11 @@ module Aws::CodePipeline
     PutJobSuccessResultInput = Shapes::StructureShape.new(name: 'PutJobSuccessResultInput')
     PutThirdPartyJobFailureResultInput = Shapes::StructureShape.new(name: 'PutThirdPartyJobFailureResultInput')
     PutThirdPartyJobSuccessResultInput = Shapes::StructureShape.new(name: 'PutThirdPartyJobSuccessResultInput')
+    PutWebhookInput = Shapes::StructureShape.new(name: 'PutWebhookInput')
+    PutWebhookOutput = Shapes::StructureShape.new(name: 'PutWebhookOutput')
     QueryParamMap = Shapes::MapShape.new(name: 'QueryParamMap')
+    RegisterWebhookWithThirdPartyInput = Shapes::StructureShape.new(name: 'RegisterWebhookWithThirdPartyInput')
+    RegisterWebhookWithThirdPartyOutput = Shapes::StructureShape.new(name: 'RegisterWebhookWithThirdPartyOutput')
     RetryStageExecutionInput = Shapes::StructureShape.new(name: 'RetryStageExecutionInput')
     RetryStageExecutionOutput = Shapes::StructureShape.new(name: 'RetryStageExecutionOutput')
     Revision = Shapes::StringShape.new(name: 'Revision')
@@ -213,6 +228,21 @@ module Aws::CodePipeline
     UrlTemplate = Shapes::StringShape.new(name: 'UrlTemplate')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     Version = Shapes::StringShape.new(name: 'Version')
+    WebhookArn = Shapes::StringShape.new(name: 'WebhookArn')
+    WebhookAuthConfiguration = Shapes::StructureShape.new(name: 'WebhookAuthConfiguration')
+    WebhookAuthConfigurationAllowedIPRange = Shapes::StringShape.new(name: 'WebhookAuthConfigurationAllowedIPRange')
+    WebhookAuthConfigurationSecretToken = Shapes::StringShape.new(name: 'WebhookAuthConfigurationSecretToken')
+    WebhookAuthenticationType = Shapes::StringShape.new(name: 'WebhookAuthenticationType')
+    WebhookDefinition = Shapes::StructureShape.new(name: 'WebhookDefinition')
+    WebhookErrorCode = Shapes::StringShape.new(name: 'WebhookErrorCode')
+    WebhookErrorMessage = Shapes::StringShape.new(name: 'WebhookErrorMessage')
+    WebhookFilterRule = Shapes::StructureShape.new(name: 'WebhookFilterRule')
+    WebhookFilters = Shapes::ListShape.new(name: 'WebhookFilters')
+    WebhookLastTriggered = Shapes::TimestampShape.new(name: 'WebhookLastTriggered')
+    WebhookList = Shapes::ListShape.new(name: 'WebhookList')
+    WebhookName = Shapes::StringShape.new(name: 'WebhookName')
+    WebhookNotFoundException = Shapes::StructureShape.new(name: 'WebhookNotFoundException')
+    WebhookUrl = Shapes::StringShape.new(name: 'WebhookUrl')
 
     AWSSessionCredentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyId, required: true, location_name: "accessKeyId"))
     AWSSessionCredentials.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKey, required: true, location_name: "secretAccessKey"))
@@ -379,6 +409,16 @@ module Aws::CodePipeline
     DeletePipelineInput.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "name"))
     DeletePipelineInput.struct_class = Types::DeletePipelineInput
 
+    DeleteWebhookInput.add_member(:name, Shapes::ShapeRef.new(shape: WebhookName, required: true, location_name: "name"))
+    DeleteWebhookInput.struct_class = Types::DeleteWebhookInput
+
+    DeleteWebhookOutput.struct_class = Types::DeleteWebhookOutput
+
+    DeregisterWebhookWithThirdPartyInput.add_member(:webhook_name, Shapes::ShapeRef.new(shape: WebhookName, location_name: "webhookName"))
+    DeregisterWebhookWithThirdPartyInput.struct_class = Types::DeregisterWebhookWithThirdPartyInput
+
+    DeregisterWebhookWithThirdPartyOutput.struct_class = Types::DeregisterWebhookWithThirdPartyOutput
+
     DisableStageTransitionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
     DisableStageTransitionInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
     DisableStageTransitionInput.add_member(:transition_type, Shapes::ShapeRef.new(shape: StageTransitionType, required: true, location_name: "transitionType"))
@@ -498,6 +538,22 @@ module Aws::CodePipeline
     ListPipelinesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPipelinesOutput.struct_class = Types::ListPipelinesOutput
 
+    ListWebhookItem.add_member(:definition, Shapes::ShapeRef.new(shape: WebhookDefinition, required: true, location_name: "definition"))
+    ListWebhookItem.add_member(:url, Shapes::ShapeRef.new(shape: WebhookUrl, required: true, location_name: "url"))
+    ListWebhookItem.add_member(:error_message, Shapes::ShapeRef.new(shape: WebhookErrorMessage, location_name: "errorMessage"))
+    ListWebhookItem.add_member(:error_code, Shapes::ShapeRef.new(shape: WebhookErrorCode, location_name: "errorCode"))
+    ListWebhookItem.add_member(:last_triggered, Shapes::ShapeRef.new(shape: WebhookLastTriggered, location_name: "lastTriggered"))
+    ListWebhookItem.add_member(:arn, Shapes::ShapeRef.new(shape: WebhookArn, location_name: "arn"))
+    ListWebhookItem.struct_class = Types::ListWebhookItem
+
+    ListWebhooksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListWebhooksInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListWebhooksInput.struct_class = Types::ListWebhooksInput
+
+    ListWebhooksOutput.add_member(:webhooks, Shapes::ShapeRef.new(shape: WebhookList, location_name: "webhooks"))
+    ListWebhooksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListWebhooksOutput.struct_class = Types::ListWebhooksOutput
+
     OutputArtifact.add_member(:name, Shapes::ShapeRef.new(shape: ArtifactName, required: true, location_name: "name"))
     OutputArtifact.struct_class = Types::OutputArtifact
 
@@ -603,8 +659,19 @@ module Aws::CodePipeline
     PutThirdPartyJobSuccessResultInput.add_member(:execution_details, Shapes::ShapeRef.new(shape: ExecutionDetails, location_name: "executionDetails"))
     PutThirdPartyJobSuccessResultInput.struct_class = Types::PutThirdPartyJobSuccessResultInput
 
+    PutWebhookInput.add_member(:webhook, Shapes::ShapeRef.new(shape: WebhookDefinition, required: true, location_name: "webhook"))
+    PutWebhookInput.struct_class = Types::PutWebhookInput
+
+    PutWebhookOutput.add_member(:webhook, Shapes::ShapeRef.new(shape: ListWebhookItem, location_name: "webhook"))
+    PutWebhookOutput.struct_class = Types::PutWebhookOutput
+
     QueryParamMap.key = Shapes::ShapeRef.new(shape: ActionConfigurationKey)
     QueryParamMap.value = Shapes::ShapeRef.new(shape: ActionConfigurationQueryableValue)
+
+    RegisterWebhookWithThirdPartyInput.add_member(:webhook_name, Shapes::ShapeRef.new(shape: WebhookName, location_name: "webhookName"))
+    RegisterWebhookWithThirdPartyInput.struct_class = Types::RegisterWebhookWithThirdPartyInput
+
+    RegisterWebhookWithThirdPartyOutput.struct_class = Types::RegisterWebhookWithThirdPartyOutput
 
     RetryStageExecutionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
     RetryStageExecutionInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
@@ -690,6 +757,26 @@ module Aws::CodePipeline
     UpdatePipelineOutput.add_member(:pipeline, Shapes::ShapeRef.new(shape: PipelineDeclaration, location_name: "pipeline"))
     UpdatePipelineOutput.struct_class = Types::UpdatePipelineOutput
 
+    WebhookAuthConfiguration.add_member(:allowed_ip_range, Shapes::ShapeRef.new(shape: WebhookAuthConfigurationAllowedIPRange, location_name: "AllowedIPRange"))
+    WebhookAuthConfiguration.add_member(:secret_token, Shapes::ShapeRef.new(shape: WebhookAuthConfigurationSecretToken, location_name: "SecretToken"))
+    WebhookAuthConfiguration.struct_class = Types::WebhookAuthConfiguration
+
+    WebhookDefinition.add_member(:name, Shapes::ShapeRef.new(shape: WebhookName, required: true, location_name: "name"))
+    WebhookDefinition.add_member(:target_pipeline, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "targetPipeline"))
+    WebhookDefinition.add_member(:target_action, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "targetAction"))
+    WebhookDefinition.add_member(:filters, Shapes::ShapeRef.new(shape: WebhookFilters, required: true, location_name: "filters"))
+    WebhookDefinition.add_member(:authentication, Shapes::ShapeRef.new(shape: WebhookAuthenticationType, required: true, location_name: "authentication"))
+    WebhookDefinition.add_member(:authentication_configuration, Shapes::ShapeRef.new(shape: WebhookAuthConfiguration, required: true, location_name: "authenticationConfiguration"))
+    WebhookDefinition.struct_class = Types::WebhookDefinition
+
+    WebhookFilterRule.add_member(:json_path, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "jsonPath"))
+    WebhookFilterRule.add_member(:match_equals, Shapes::ShapeRef.new(shape: MatchEquals, location_name: "matchEquals"))
+    WebhookFilterRule.struct_class = Types::WebhookFilterRule
+
+    WebhookFilters.member = Shapes::ShapeRef.new(shape: WebhookFilterRule)
+
+    WebhookList.member = Shapes::ShapeRef.new(shape: ListWebhookItem)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -769,6 +856,25 @@ module Aws::CodePipeline
         o.input = Shapes::ShapeRef.new(shape: DeletePipelineInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_webhook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWebhook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWebhookInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWebhookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:deregister_webhook_with_third_party, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterWebhookWithThirdParty"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterWebhookWithThirdPartyInput)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterWebhookWithThirdPartyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: WebhookNotFoundException)
       end)
 
       api.add_operation(:disable_stage_transition, Seahorse::Model::Operation.new.tap do |o|
@@ -874,6 +980,17 @@ module Aws::CodePipeline
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListPipelinesInput)
         o.output = Shapes::ShapeRef.new(shape: ListPipelinesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+      end)
+
+      api.add_operation(:list_webhooks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWebhooks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListWebhooksInput)
+        o.output = Shapes::ShapeRef.new(shape: ListWebhooksOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
@@ -967,6 +1084,29 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidClientTokenException)
+      end)
+
+      api.add_operation(:put_webhook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutWebhook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutWebhookInput)
+        o.output = Shapes::ShapeRef.new(shape: PutWebhookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidWebhookFilterPatternException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidWebhookAuthenticationParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+      end)
+
+      api.add_operation(:register_webhook_with_third_party, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterWebhookWithThirdParty"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterWebhookWithThirdPartyInput)
+        o.output = Shapes::ShapeRef.new(shape: RegisterWebhookWithThirdPartyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: WebhookNotFoundException)
       end)
 
       api.add_operation(:retry_stage_execution, Seahorse::Model::Operation.new.tap do |o|

@@ -147,6 +147,8 @@ module Aws::EC2
     CreateDhcpOptionsResult = Shapes::StructureShape.new(name: 'CreateDhcpOptionsResult')
     CreateEgressOnlyInternetGatewayRequest = Shapes::StructureShape.new(name: 'CreateEgressOnlyInternetGatewayRequest')
     CreateEgressOnlyInternetGatewayResult = Shapes::StructureShape.new(name: 'CreateEgressOnlyInternetGatewayResult')
+    CreateFleetRequest = Shapes::StructureShape.new(name: 'CreateFleetRequest')
+    CreateFleetResult = Shapes::StructureShape.new(name: 'CreateFleetResult')
     CreateFlowLogsRequest = Shapes::StructureShape.new(name: 'CreateFlowLogsRequest')
     CreateFlowLogsResult = Shapes::StructureShape.new(name: 'CreateFlowLogsResult')
     CreateFpgaImageRequest = Shapes::StructureShape.new(name: 'CreateFpgaImageRequest')
@@ -213,10 +215,19 @@ module Aws::EC2
     CustomerGatewayList = Shapes::ListShape.new(name: 'CustomerGatewayList')
     DatafeedSubscriptionState = Shapes::StringShape.new(name: 'DatafeedSubscriptionState')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DefaultTargetCapacityType = Shapes::StringShape.new(name: 'DefaultTargetCapacityType')
     DeleteCustomerGatewayRequest = Shapes::StructureShape.new(name: 'DeleteCustomerGatewayRequest')
     DeleteDhcpOptionsRequest = Shapes::StructureShape.new(name: 'DeleteDhcpOptionsRequest')
     DeleteEgressOnlyInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteEgressOnlyInternetGatewayRequest')
     DeleteEgressOnlyInternetGatewayResult = Shapes::StructureShape.new(name: 'DeleteEgressOnlyInternetGatewayResult')
+    DeleteFleetError = Shapes::StructureShape.new(name: 'DeleteFleetError')
+    DeleteFleetErrorCode = Shapes::StringShape.new(name: 'DeleteFleetErrorCode')
+    DeleteFleetErrorItem = Shapes::StructureShape.new(name: 'DeleteFleetErrorItem')
+    DeleteFleetErrorSet = Shapes::ListShape.new(name: 'DeleteFleetErrorSet')
+    DeleteFleetSuccessItem = Shapes::StructureShape.new(name: 'DeleteFleetSuccessItem')
+    DeleteFleetSuccessSet = Shapes::ListShape.new(name: 'DeleteFleetSuccessSet')
+    DeleteFleetsRequest = Shapes::StructureShape.new(name: 'DeleteFleetsRequest')
+    DeleteFleetsResult = Shapes::StructureShape.new(name: 'DeleteFleetsResult')
     DeleteFlowLogsRequest = Shapes::StructureShape.new(name: 'DeleteFlowLogsRequest')
     DeleteFlowLogsResult = Shapes::StructureShape.new(name: 'DeleteFlowLogsResult')
     DeleteFpgaImageRequest = Shapes::StructureShape.new(name: 'DeleteFpgaImageRequest')
@@ -285,6 +296,12 @@ module Aws::EC2
     DescribeElasticGpusResult = Shapes::StructureShape.new(name: 'DescribeElasticGpusResult')
     DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
     DescribeExportTasksResult = Shapes::StructureShape.new(name: 'DescribeExportTasksResult')
+    DescribeFleetHistoryRequest = Shapes::StructureShape.new(name: 'DescribeFleetHistoryRequest')
+    DescribeFleetHistoryResult = Shapes::StructureShape.new(name: 'DescribeFleetHistoryResult')
+    DescribeFleetInstancesRequest = Shapes::StructureShape.new(name: 'DescribeFleetInstancesRequest')
+    DescribeFleetInstancesResult = Shapes::StructureShape.new(name: 'DescribeFleetInstancesResult')
+    DescribeFleetsRequest = Shapes::StructureShape.new(name: 'DescribeFleetsRequest')
+    DescribeFleetsResult = Shapes::StructureShape.new(name: 'DescribeFleetsResult')
     DescribeFlowLogsRequest = Shapes::StructureShape.new(name: 'DescribeFlowLogsRequest')
     DescribeFlowLogsResult = Shapes::StructureShape.new(name: 'DescribeFlowLogsResult')
     DescribeFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'DescribeFpgaImageAttributeRequest')
@@ -495,7 +512,24 @@ module Aws::EC2
     ExportToS3TaskSpecification = Shapes::StructureShape.new(name: 'ExportToS3TaskSpecification')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
+    FleetActivityStatus = Shapes::StringShape.new(name: 'FleetActivityStatus')
+    FleetData = Shapes::StructureShape.new(name: 'FleetData')
+    FleetEventType = Shapes::StringShape.new(name: 'FleetEventType')
+    FleetExcessCapacityTerminationPolicy = Shapes::StringShape.new(name: 'FleetExcessCapacityTerminationPolicy')
+    FleetIdSet = Shapes::ListShape.new(name: 'FleetIdSet')
+    FleetIdentifier = Shapes::StringShape.new(name: 'FleetIdentifier')
+    FleetLaunchTemplateConfig = Shapes::StructureShape.new(name: 'FleetLaunchTemplateConfig')
+    FleetLaunchTemplateConfigList = Shapes::ListShape.new(name: 'FleetLaunchTemplateConfigList')
+    FleetLaunchTemplateConfigListRequest = Shapes::ListShape.new(name: 'FleetLaunchTemplateConfigListRequest')
+    FleetLaunchTemplateConfigRequest = Shapes::StructureShape.new(name: 'FleetLaunchTemplateConfigRequest')
+    FleetLaunchTemplateOverrides = Shapes::StructureShape.new(name: 'FleetLaunchTemplateOverrides')
+    FleetLaunchTemplateOverridesList = Shapes::ListShape.new(name: 'FleetLaunchTemplateOverridesList')
+    FleetLaunchTemplateOverridesListRequest = Shapes::ListShape.new(name: 'FleetLaunchTemplateOverridesListRequest')
+    FleetLaunchTemplateOverridesRequest = Shapes::StructureShape.new(name: 'FleetLaunchTemplateOverridesRequest')
     FleetLaunchTemplateSpecification = Shapes::StructureShape.new(name: 'FleetLaunchTemplateSpecification')
+    FleetLaunchTemplateSpecificationRequest = Shapes::StructureShape.new(name: 'FleetLaunchTemplateSpecificationRequest')
+    FleetSet = Shapes::ListShape.new(name: 'FleetSet')
+    FleetStateCode = Shapes::StringShape.new(name: 'FleetStateCode')
     FleetType = Shapes::StringShape.new(name: 'FleetType')
     Float = Shapes::FloatShape.new(name: 'Float')
     FlowLog = Shapes::StructureShape.new(name: 'FlowLog')
@@ -528,6 +562,8 @@ module Aws::EC2
     GroupIds = Shapes::ListShape.new(name: 'GroupIds')
     GroupNameStringList = Shapes::ListShape.new(name: 'GroupNameStringList')
     HistoryRecord = Shapes::StructureShape.new(name: 'HistoryRecord')
+    HistoryRecordEntry = Shapes::StructureShape.new(name: 'HistoryRecordEntry')
+    HistoryRecordSet = Shapes::ListShape.new(name: 'HistoryRecordSet')
     HistoryRecords = Shapes::ListShape.new(name: 'HistoryRecords')
     Host = Shapes::StructureShape.new(name: 'Host')
     HostInstance = Shapes::StructureShape.new(name: 'HostInstance')
@@ -700,6 +736,8 @@ module Aws::EC2
     Long = Shapes::IntegerShape.new(name: 'Long')
     MarketType = Shapes::StringShape.new(name: 'MarketType')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    ModifyFleetRequest = Shapes::StructureShape.new(name: 'ModifyFleetRequest')
+    ModifyFleetResult = Shapes::StructureShape.new(name: 'ModifyFleetResult')
     ModifyFpgaImageAttributeRequest = Shapes::StructureShape.new(name: 'ModifyFpgaImageAttributeRequest')
     ModifyFpgaImageAttributeResult = Shapes::StructureShape.new(name: 'ModifyFpgaImageAttributeResult')
     ModifyHostsRequest = Shapes::StructureShape.new(name: 'ModifyHostsRequest')
@@ -979,6 +1017,7 @@ module Aws::EC2
     SnapshotList = Shapes::ListShape.new(name: 'SnapshotList')
     SnapshotState = Shapes::StringShape.new(name: 'SnapshotState')
     SnapshotTaskDetail = Shapes::StructureShape.new(name: 'SnapshotTaskDetail')
+    SpotAllocationStrategy = Shapes::StringShape.new(name: 'SpotAllocationStrategy')
     SpotDatafeedSubscription = Shapes::StructureShape.new(name: 'SpotDatafeedSubscription')
     SpotFleetLaunchSpecification = Shapes::StructureShape.new(name: 'SpotFleetLaunchSpecification')
     SpotFleetMonitoring = Shapes::StructureShape.new(name: 'SpotFleetMonitoring')
@@ -987,6 +1026,7 @@ module Aws::EC2
     SpotFleetRequestConfigSet = Shapes::ListShape.new(name: 'SpotFleetRequestConfigSet')
     SpotFleetTagSpecification = Shapes::StructureShape.new(name: 'SpotFleetTagSpecification')
     SpotFleetTagSpecificationList = Shapes::ListShape.new(name: 'SpotFleetTagSpecificationList')
+    SpotInstanceInterruptionBehavior = Shapes::StringShape.new(name: 'SpotInstanceInterruptionBehavior')
     SpotInstanceRequest = Shapes::StructureShape.new(name: 'SpotInstanceRequest')
     SpotInstanceRequestIdList = Shapes::ListShape.new(name: 'SpotInstanceRequestIdList')
     SpotInstanceRequestList = Shapes::ListShape.new(name: 'SpotInstanceRequestList')
@@ -995,6 +1035,8 @@ module Aws::EC2
     SpotInstanceStatus = Shapes::StructureShape.new(name: 'SpotInstanceStatus')
     SpotInstanceType = Shapes::StringShape.new(name: 'SpotInstanceType')
     SpotMarketOptions = Shapes::StructureShape.new(name: 'SpotMarketOptions')
+    SpotOptions = Shapes::StructureShape.new(name: 'SpotOptions')
+    SpotOptionsRequest = Shapes::StructureShape.new(name: 'SpotOptionsRequest')
     SpotPlacement = Shapes::StructureShape.new(name: 'SpotPlacement')
     SpotPrice = Shapes::StructureShape.new(name: 'SpotPrice')
     SpotPriceHistoryList = Shapes::ListShape.new(name: 'SpotPriceHistoryList')
@@ -1031,6 +1073,8 @@ module Aws::EC2
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagSpecification = Shapes::StructureShape.new(name: 'TagSpecification')
     TagSpecificationList = Shapes::ListShape.new(name: 'TagSpecificationList')
+    TargetCapacitySpecification = Shapes::StructureShape.new(name: 'TargetCapacitySpecification')
+    TargetCapacitySpecificationRequest = Shapes::StructureShape.new(name: 'TargetCapacitySpecificationRequest')
     TargetConfiguration = Shapes::StructureShape.new(name: 'TargetConfiguration')
     TargetConfigurationRequest = Shapes::StructureShape.new(name: 'TargetConfigurationRequest')
     TargetConfigurationRequestSet = Shapes::ListShape.new(name: 'TargetConfigurationRequestSet')
@@ -1631,6 +1675,23 @@ module Aws::EC2
     CreateEgressOnlyInternetGatewayResult.add_member(:egress_only_internet_gateway, Shapes::ShapeRef.new(shape: EgressOnlyInternetGateway, location_name: "egressOnlyInternetGateway"))
     CreateEgressOnlyInternetGatewayResult.struct_class = Types::CreateEgressOnlyInternetGatewayResult
 
+    CreateFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+    CreateFleetRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptionsRequest, location_name: "SpotOptions"))
+    CreateFleetRequest.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: FleetExcessCapacityTerminationPolicy, location_name: "ExcessCapacityTerminationPolicy"))
+    CreateFleetRequest.add_member(:launch_template_configs, Shapes::ShapeRef.new(shape: FleetLaunchTemplateConfigListRequest, required: true, location_name: "LaunchTemplateConfigs"))
+    CreateFleetRequest.add_member(:target_capacity_specification, Shapes::ShapeRef.new(shape: TargetCapacitySpecificationRequest, required: true, location_name: "TargetCapacitySpecification"))
+    CreateFleetRequest.add_member(:terminate_instances_with_expiration, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminateInstancesWithExpiration"))
+    CreateFleetRequest.add_member(:type, Shapes::ShapeRef.new(shape: FleetType, location_name: "Type"))
+    CreateFleetRequest.add_member(:valid_from, Shapes::ShapeRef.new(shape: DateTime, location_name: "ValidFrom"))
+    CreateFleetRequest.add_member(:valid_until, Shapes::ShapeRef.new(shape: DateTime, location_name: "ValidUntil"))
+    CreateFleetRequest.add_member(:replace_unhealthy_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReplaceUnhealthyInstances"))
+    CreateFleetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateFleetRequest.struct_class = Types::CreateFleetRequest
+
+    CreateFleetResult.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, location_name: "fleetId"))
+    CreateFleetResult.struct_class = Types::CreateFleetResult
+
     CreateFlowLogsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateFlowLogsRequest.add_member(:deliver_logs_permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DeliverLogsPermissionArn"))
     CreateFlowLogsRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LogGroupName"))
@@ -1968,6 +2029,32 @@ module Aws::EC2
     DeleteEgressOnlyInternetGatewayResult.add_member(:return_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnCode"))
     DeleteEgressOnlyInternetGatewayResult.struct_class = Types::DeleteEgressOnlyInternetGatewayResult
 
+    DeleteFleetError.add_member(:code, Shapes::ShapeRef.new(shape: DeleteFleetErrorCode, location_name: "code"))
+    DeleteFleetError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    DeleteFleetError.struct_class = Types::DeleteFleetError
+
+    DeleteFleetErrorItem.add_member(:error, Shapes::ShapeRef.new(shape: DeleteFleetError, location_name: "error"))
+    DeleteFleetErrorItem.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, location_name: "fleetId"))
+    DeleteFleetErrorItem.struct_class = Types::DeleteFleetErrorItem
+
+    DeleteFleetErrorSet.member = Shapes::ShapeRef.new(shape: DeleteFleetErrorItem, location_name: "item")
+
+    DeleteFleetSuccessItem.add_member(:current_fleet_state, Shapes::ShapeRef.new(shape: FleetStateCode, location_name: "currentFleetState"))
+    DeleteFleetSuccessItem.add_member(:previous_fleet_state, Shapes::ShapeRef.new(shape: FleetStateCode, location_name: "previousFleetState"))
+    DeleteFleetSuccessItem.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, location_name: "fleetId"))
+    DeleteFleetSuccessItem.struct_class = Types::DeleteFleetSuccessItem
+
+    DeleteFleetSuccessSet.member = Shapes::ShapeRef.new(shape: DeleteFleetSuccessItem, location_name: "item")
+
+    DeleteFleetsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DeleteFleetsRequest.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdSet, required: true, location_name: "FleetId"))
+    DeleteFleetsRequest.add_member(:terminate_instances, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "TerminateInstances"))
+    DeleteFleetsRequest.struct_class = Types::DeleteFleetsRequest
+
+    DeleteFleetsResult.add_member(:successful_fleet_deletions, Shapes::ShapeRef.new(shape: DeleteFleetSuccessSet, location_name: "successfulFleetDeletionSet"))
+    DeleteFleetsResult.add_member(:unsuccessful_fleet_deletions, Shapes::ShapeRef.new(shape: DeleteFleetErrorSet, location_name: "unsuccessfulFleetDeletionSet"))
+    DeleteFleetsResult.struct_class = Types::DeleteFleetsResult
+
     DeleteFlowLogsRequest.add_member(:flow_log_ids, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "FlowLogId"))
     DeleteFlowLogsRequest.struct_class = Types::DeleteFlowLogsRequest
 
@@ -2239,6 +2326,44 @@ module Aws::EC2
 
     DescribeExportTasksResult.add_member(:export_tasks, Shapes::ShapeRef.new(shape: ExportTaskList, location_name: "exportTaskSet"))
     DescribeExportTasksResult.struct_class = Types::DescribeExportTasksResult
+
+    DescribeFleetHistoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeFleetHistoryRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: FleetEventType, location_name: "EventType"))
+    DescribeFleetHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeFleetHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeFleetHistoryRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, required: true, location_name: "FleetId"))
+    DescribeFleetHistoryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "StartTime"))
+    DescribeFleetHistoryRequest.struct_class = Types::DescribeFleetHistoryRequest
+
+    DescribeFleetHistoryResult.add_member(:history_records, Shapes::ShapeRef.new(shape: HistoryRecordSet, location_name: "historyRecordSet"))
+    DescribeFleetHistoryResult.add_member(:last_evaluated_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "lastEvaluatedTime"))
+    DescribeFleetHistoryResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeFleetHistoryResult.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, location_name: "fleetId"))
+    DescribeFleetHistoryResult.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
+    DescribeFleetHistoryResult.struct_class = Types::DescribeFleetHistoryResult
+
+    DescribeFleetInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeFleetInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeFleetInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeFleetInstancesRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, required: true, location_name: "FleetId"))
+    DescribeFleetInstancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeFleetInstancesRequest.struct_class = Types::DescribeFleetInstancesRequest
+
+    DescribeFleetInstancesResult.add_member(:active_instances, Shapes::ShapeRef.new(shape: ActiveInstanceSet, location_name: "activeInstanceSet"))
+    DescribeFleetInstancesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeFleetInstancesResult.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, location_name: "fleetId"))
+    DescribeFleetInstancesResult.struct_class = Types::DescribeFleetInstancesResult
+
+    DescribeFleetsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeFleetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeFleetsRequest.add_member(:fleet_ids, Shapes::ShapeRef.new(shape: FleetIdSet, location_name: "FleetId"))
+    DescribeFleetsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeFleetsRequest.struct_class = Types::DescribeFleetsRequest
+
+    DescribeFleetsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeFleetsResult.add_member(:fleets, Shapes::ShapeRef.new(shape: FleetSet, location_name: "fleetSet"))
+    DescribeFleetsResult.struct_class = Types::DescribeFleetsResult
 
     DescribeFlowLogsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     DescribeFlowLogsRequest.add_member(:flow_log_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "FlowLogId"))
@@ -3167,10 +3292,68 @@ module Aws::EC2
 
     FilterList.member = Shapes::ShapeRef.new(shape: Filter, location_name: "Filter")
 
+    FleetData.add_member(:activity_status, Shapes::ShapeRef.new(shape: FleetActivityStatus, location_name: "activityStatus"))
+    FleetData.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "createTime"))
+    FleetData.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, location_name: "fleetId"))
+    FleetData.add_member(:fleet_state, Shapes::ShapeRef.new(shape: FleetStateCode, location_name: "fleetState"))
+    FleetData.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    FleetData.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: FleetExcessCapacityTerminationPolicy, location_name: "excessCapacityTerminationPolicy"))
+    FleetData.add_member(:fulfilled_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "fulfilledCapacity"))
+    FleetData.add_member(:fulfilled_on_demand_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "fulfilledOnDemandCapacity"))
+    FleetData.add_member(:launch_template_configs, Shapes::ShapeRef.new(shape: FleetLaunchTemplateConfigList, location_name: "launchTemplateConfigs"))
+    FleetData.add_member(:target_capacity_specification, Shapes::ShapeRef.new(shape: TargetCapacitySpecification, location_name: "targetCapacitySpecification"))
+    FleetData.add_member(:terminate_instances_with_expiration, Shapes::ShapeRef.new(shape: Boolean, location_name: "terminateInstancesWithExpiration"))
+    FleetData.add_member(:type, Shapes::ShapeRef.new(shape: FleetType, location_name: "type"))
+    FleetData.add_member(:valid_from, Shapes::ShapeRef.new(shape: DateTime, location_name: "validFrom"))
+    FleetData.add_member(:valid_until, Shapes::ShapeRef.new(shape: DateTime, location_name: "validUntil"))
+    FleetData.add_member(:replace_unhealthy_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "replaceUnhealthyInstances"))
+    FleetData.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotOptions, location_name: "spotOptions"))
+    FleetData.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    FleetData.struct_class = Types::FleetData
+
+    FleetIdSet.member = Shapes::ShapeRef.new(shape: FleetIdentifier)
+
+    FleetLaunchTemplateConfig.add_member(:launch_template_specification, Shapes::ShapeRef.new(shape: FleetLaunchTemplateSpecification, location_name: "launchTemplateSpecification"))
+    FleetLaunchTemplateConfig.add_member(:overrides, Shapes::ShapeRef.new(shape: FleetLaunchTemplateOverridesList, location_name: "overrides"))
+    FleetLaunchTemplateConfig.struct_class = Types::FleetLaunchTemplateConfig
+
+    FleetLaunchTemplateConfigList.member = Shapes::ShapeRef.new(shape: FleetLaunchTemplateConfig, location_name: "item")
+
+    FleetLaunchTemplateConfigListRequest.member = Shapes::ShapeRef.new(shape: FleetLaunchTemplateConfigRequest, location_name: "item")
+
+    FleetLaunchTemplateConfigRequest.add_member(:launch_template_specification, Shapes::ShapeRef.new(shape: FleetLaunchTemplateSpecificationRequest, location_name: "LaunchTemplateSpecification"))
+    FleetLaunchTemplateConfigRequest.add_member(:overrides, Shapes::ShapeRef.new(shape: FleetLaunchTemplateOverridesListRequest, location_name: "Overrides"))
+    FleetLaunchTemplateConfigRequest.struct_class = Types::FleetLaunchTemplateConfigRequest
+
+    FleetLaunchTemplateOverrides.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+    FleetLaunchTemplateOverrides.add_member(:max_price, Shapes::ShapeRef.new(shape: String, location_name: "maxPrice"))
+    FleetLaunchTemplateOverrides.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
+    FleetLaunchTemplateOverrides.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    FleetLaunchTemplateOverrides.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "weightedCapacity"))
+    FleetLaunchTemplateOverrides.struct_class = Types::FleetLaunchTemplateOverrides
+
+    FleetLaunchTemplateOverridesList.member = Shapes::ShapeRef.new(shape: FleetLaunchTemplateOverrides, location_name: "item")
+
+    FleetLaunchTemplateOverridesListRequest.member = Shapes::ShapeRef.new(shape: FleetLaunchTemplateOverridesRequest, location_name: "item")
+
+    FleetLaunchTemplateOverridesRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
+    FleetLaunchTemplateOverridesRequest.add_member(:max_price, Shapes::ShapeRef.new(shape: String, location_name: "MaxPrice"))
+    FleetLaunchTemplateOverridesRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "SubnetId"))
+    FleetLaunchTemplateOverridesRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
+    FleetLaunchTemplateOverridesRequest.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "WeightedCapacity"))
+    FleetLaunchTemplateOverridesRequest.struct_class = Types::FleetLaunchTemplateOverridesRequest
+
     FleetLaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateId"))
     FleetLaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: LaunchTemplateName, location_name: "launchTemplateName"))
     FleetLaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     FleetLaunchTemplateSpecification.struct_class = Types::FleetLaunchTemplateSpecification
+
+    FleetLaunchTemplateSpecificationRequest.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: String, location_name: "LaunchTemplateId"))
+    FleetLaunchTemplateSpecificationRequest.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: LaunchTemplateName, location_name: "LaunchTemplateName"))
+    FleetLaunchTemplateSpecificationRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    FleetLaunchTemplateSpecificationRequest.struct_class = Types::FleetLaunchTemplateSpecificationRequest
+
+    FleetSet.member = Shapes::ShapeRef.new(shape: FleetData, location_name: "item")
 
     FlowLog.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
     FlowLog.add_member(:deliver_logs_error_message, Shapes::ShapeRef.new(shape: String, location_name: "deliverLogsErrorMessage"))
@@ -3294,6 +3477,13 @@ module Aws::EC2
     HistoryRecord.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, required: true, location_name: "eventType"))
     HistoryRecord.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "timestamp"))
     HistoryRecord.struct_class = Types::HistoryRecord
+
+    HistoryRecordEntry.add_member(:event_information, Shapes::ShapeRef.new(shape: EventInformation, location_name: "eventInformation"))
+    HistoryRecordEntry.add_member(:event_type, Shapes::ShapeRef.new(shape: FleetEventType, location_name: "eventType"))
+    HistoryRecordEntry.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "timestamp"))
+    HistoryRecordEntry.struct_class = Types::HistoryRecordEntry
+
+    HistoryRecordSet.member = Shapes::ShapeRef.new(shape: HistoryRecordEntry, location_name: "item")
 
     HistoryRecords.member = Shapes::ShapeRef.new(shape: HistoryRecord, location_name: "item")
 
@@ -4063,6 +4253,15 @@ module Aws::EC2
     LoadPermissionRequest.add_member(:group, Shapes::ShapeRef.new(shape: PermissionGroup, location_name: "Group"))
     LoadPermissionRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: String, location_name: "UserId"))
     LoadPermissionRequest.struct_class = Types::LoadPermissionRequest
+
+    ModifyFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyFleetRequest.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: FleetExcessCapacityTerminationPolicy, location_name: "ExcessCapacityTerminationPolicy"))
+    ModifyFleetRequest.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetIdentifier, required: true, location_name: "FleetId"))
+    ModifyFleetRequest.add_member(:target_capacity_specification, Shapes::ShapeRef.new(shape: TargetCapacitySpecificationRequest, required: true, location_name: "TargetCapacitySpecification"))
+    ModifyFleetRequest.struct_class = Types::ModifyFleetRequest
+
+    ModifyFleetResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyFleetResult.struct_class = Types::ModifyFleetResult
 
     ModifyFpgaImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyFpgaImageAttributeRequest.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FpgaImageId"))
@@ -5371,11 +5570,13 @@ module Aws::EC2
     SpotFleetRequestConfigData.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     SpotFleetRequestConfigData.add_member(:excess_capacity_termination_policy, Shapes::ShapeRef.new(shape: ExcessCapacityTerminationPolicy, location_name: "excessCapacityTerminationPolicy"))
     SpotFleetRequestConfigData.add_member(:fulfilled_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "fulfilledCapacity"))
+    SpotFleetRequestConfigData.add_member(:on_demand_fulfilled_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "onDemandFulfilledCapacity"))
     SpotFleetRequestConfigData.add_member(:iam_fleet_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "iamFleetRole"))
     SpotFleetRequestConfigData.add_member(:launch_specifications, Shapes::ShapeRef.new(shape: LaunchSpecsList, location_name: "launchSpecifications"))
     SpotFleetRequestConfigData.add_member(:launch_template_configs, Shapes::ShapeRef.new(shape: LaunchTemplateConfigList, location_name: "launchTemplateConfigs"))
     SpotFleetRequestConfigData.add_member(:spot_price, Shapes::ShapeRef.new(shape: String, location_name: "spotPrice"))
     SpotFleetRequestConfigData.add_member(:target_capacity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "targetCapacity"))
+    SpotFleetRequestConfigData.add_member(:on_demand_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "onDemandTargetCapacity"))
     SpotFleetRequestConfigData.add_member(:terminate_instances_with_expiration, Shapes::ShapeRef.new(shape: Boolean, location_name: "terminateInstancesWithExpiration"))
     SpotFleetRequestConfigData.add_member(:type, Shapes::ShapeRef.new(shape: FleetType, location_name: "type"))
     SpotFleetRequestConfigData.add_member(:valid_from, Shapes::ShapeRef.new(shape: DateTime, location_name: "validFrom"))
@@ -5433,6 +5634,14 @@ module Aws::EC2
     SpotMarketOptions.add_member(:valid_until, Shapes::ShapeRef.new(shape: DateTime, location_name: "ValidUntil"))
     SpotMarketOptions.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: InstanceInterruptionBehavior, location_name: "InstanceInterruptionBehavior"))
     SpotMarketOptions.struct_class = Types::SpotMarketOptions
+
+    SpotOptions.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotAllocationStrategy, location_name: "allocationStrategy"))
+    SpotOptions.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: SpotInstanceInterruptionBehavior, location_name: "instanceInterruptionBehavior"))
+    SpotOptions.struct_class = Types::SpotOptions
+
+    SpotOptionsRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: SpotAllocationStrategy, location_name: "AllocationStrategy"))
+    SpotOptionsRequest.add_member(:instance_interruption_behavior, Shapes::ShapeRef.new(shape: SpotInstanceInterruptionBehavior, location_name: "InstanceInterruptionBehavior"))
+    SpotOptionsRequest.struct_class = Types::SpotOptionsRequest
 
     SpotPlacement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     SpotPlacement.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
@@ -5547,6 +5756,18 @@ module Aws::EC2
     TagSpecification.struct_class = Types::TagSpecification
 
     TagSpecificationList.member = Shapes::ShapeRef.new(shape: TagSpecification, location_name: "item")
+
+    TargetCapacitySpecification.add_member(:total_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "totalTargetCapacity"))
+    TargetCapacitySpecification.add_member(:on_demand_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "onDemandTargetCapacity"))
+    TargetCapacitySpecification.add_member(:spot_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "spotTargetCapacity"))
+    TargetCapacitySpecification.add_member(:default_target_capacity_type, Shapes::ShapeRef.new(shape: DefaultTargetCapacityType, location_name: "defaultTargetCapacityType"))
+    TargetCapacitySpecification.struct_class = Types::TargetCapacitySpecification
+
+    TargetCapacitySpecificationRequest.add_member(:total_target_capacity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalTargetCapacity"))
+    TargetCapacitySpecificationRequest.add_member(:on_demand_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "OnDemandTargetCapacity"))
+    TargetCapacitySpecificationRequest.add_member(:spot_target_capacity, Shapes::ShapeRef.new(shape: Integer, location_name: "SpotTargetCapacity"))
+    TargetCapacitySpecificationRequest.add_member(:default_target_capacity_type, Shapes::ShapeRef.new(shape: DefaultTargetCapacityType, location_name: "DefaultTargetCapacityType"))
+    TargetCapacitySpecificationRequest.struct_class = Types::TargetCapacitySpecificationRequest
 
     TargetConfiguration.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
     TargetConfiguration.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, location_name: "offeringId"))
@@ -6226,6 +6447,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: CreateEgressOnlyInternetGatewayResult)
       end)
 
+      api.add_operation(:create_fleet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFleet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateFleetRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFleetResult)
+      end)
+
       api.add_operation(:create_flow_logs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFlowLogs"
         o.http_method = "POST"
@@ -6496,6 +6725,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteEgressOnlyInternetGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteEgressOnlyInternetGatewayResult)
+      end)
+
+      api.add_operation(:delete_fleets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFleets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFleetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFleetsResult)
       end)
 
       api.add_operation(:delete_flow_logs, Seahorse::Model::Operation.new.tap do |o|
@@ -6824,6 +7061,30 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeExportTasksRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeExportTasksResult)
+      end)
+
+      api.add_operation(:describe_fleet_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFleetHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFleetHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFleetHistoryResult)
+      end)
+
+      api.add_operation(:describe_fleet_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFleetInstances"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFleetInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFleetInstancesResult)
+      end)
+
+      api.add_operation(:describe_fleets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFleets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFleetsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFleetsResult)
       end)
 
       api.add_operation(:describe_flow_logs, Seahorse::Model::Operation.new.tap do |o|
@@ -7657,6 +7918,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ImportVolumeRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportVolumeResult)
+      end)
+
+      api.add_operation(:modify_fleet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyFleet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyFleetRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyFleetResult)
       end)
 
       api.add_operation(:modify_fpga_image_attribute, Seahorse::Model::Operation.new.tap do |o|

@@ -2845,6 +2845,163 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateFleetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         client_token: "String",
+    #         spot_options: {
+    #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #         },
+    #         excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
+    #         launch_template_configs: [ # required
+    #           {
+    #             launch_template_specification: {
+    #               launch_template_id: "String",
+    #               launch_template_name: "LaunchTemplateName",
+    #               version: "String",
+    #             },
+    #             overrides: [
+    #               {
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #                 max_price: "String",
+    #                 subnet_id: "String",
+    #                 availability_zone: "String",
+    #                 weighted_capacity: 1.0,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         target_capacity_specification: { # required
+    #           total_target_capacity: 1, # required
+    #           on_demand_target_capacity: 1,
+    #           spot_target_capacity: 1,
+    #           default_target_capacity_type: "spot", # accepts spot, on-demand
+    #         },
+    #         terminate_instances_with_expiration: false,
+    #         type: "request", # accepts request, maintain
+    #         valid_from: Time.now,
+    #         valid_until: Time.now,
+    #         replace_unhealthy_instances: false,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_options
+    #   Includes `SpotAllocationStrategy` and
+    #   `SpotInstanceInterruptionBehavior` inside this structure.
+    #   @return [Types::SpotOptionsRequest]
+    #
+    # @!attribute [rw] excess_capacity_termination_policy
+    #   Indicates whether running instances should be terminated if the
+    #   total target capacity of the EC2 Fleet is decreased below the
+    #   current size of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_configs
+    #   The configuration for the EC2 Fleet.
+    #   @return [Array<Types::FleetLaunchTemplateConfigRequest>]
+    #
+    # @!attribute [rw] target_capacity_specification
+    #   The `TotalTargetCapacity`, `OnDemandTargetCapacity`,
+    #   `SpotTargetCapacity`, and `DefaultCapacityType` structure.
+    #   @return [Types::TargetCapacitySpecificationRequest]
+    #
+    # @!attribute [rw] terminate_instances_with_expiration
+    #   Indicates whether running instances should be terminated when the
+    #   EC2 Fleet expires.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The type of request. Indicates whether the EC2 Fleet only `requests`
+    #   the target capacity, or also attempts to `maintain` it. If you
+    #   request a certain target capacity, EC2 Fleet only places the
+    #   required requests. It does not attempt to replenish instances if
+    #   capacity is diminished, and does not submit requests in alternative
+    #   capacity pools if capacity is unavailable. To maintain a certain
+    #   target capacity, EC2 Fleet places the required requests to meet this
+    #   target capacity. It also automatically replenishes any interrupted
+    #   Spot Instances. Default: `maintain`.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_from
+    #   The start date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
+    #   fulfilling the request immediately.
+    #   @return [Time]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new EC2 Fleet
+    #   requests are placed or able to fulfill the request. The default end
+    #   date is 7 days from the current date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] replace_unhealthy_instances
+    #   Indicates whether EC2 Fleet should replace unhealthy instances.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags for an EC2 Fleet resource.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetRequest AWS API Documentation
+    #
+    class CreateFleetRequest < Struct.new(
+      :dry_run,
+      :client_token,
+      :spot_options,
+      :excess_capacity_termination_policy,
+      :launch_template_configs,
+      :target_capacity_specification,
+      :terminate_instances_with_expiration,
+      :type,
+      :valid_from,
+      :valid_until,
+      :replace_unhealthy_instances,
+      :tag_specifications)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetResult AWS API Documentation
+    #
+    class CreateFleetResult < Struct.new(
+      :fleet_id)
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateFlowLogs.
     #
     # @note When making an API call, you may pass CreateFlowLogsRequest
@@ -5393,6 +5550,115 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an EC2 Fleet error.
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The description for the error code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetError AWS API Documentation
+    #
+    class DeleteFleetError < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes an EC2 Fleet that was not successfully deleted.
+    #
+    # @!attribute [rw] error
+    #   The error.
+    #   @return [Types::DeleteFleetError]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetErrorItem AWS API Documentation
+    #
+    class DeleteFleetErrorItem < Struct.new(
+      :error,
+      :fleet_id)
+      include Aws::Structure
+    end
+
+    # Describes an EC2 Fleet that was successfully deleted.
+    #
+    # @!attribute [rw] current_fleet_state
+    #   The current state of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_fleet_state
+    #   The previous state of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetSuccessItem AWS API Documentation
+    #
+    class DeleteFleetSuccessItem < Struct.new(
+      :current_fleet_state,
+      :previous_fleet_state,
+      :fleet_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFleetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         fleet_ids: ["FleetIdentifier"], # required
+    #         terminate_instances: false, # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fleet_ids
+    #   The IDs of the EC2 Fleets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] terminate_instances
+    #   Indicates whether to terminate instances for an EC2 Fleet if it is
+    #   deleted successfully.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetsRequest AWS API Documentation
+    #
+    class DeleteFleetsRequest < Struct.new(
+      :dry_run,
+      :fleet_ids,
+      :terminate_instances)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_fleet_deletions
+    #   Information about the EC2 Fleets that are successfully deleted.
+    #   @return [Array<Types::DeleteFleetSuccessItem>]
+    #
+    # @!attribute [rw] unsuccessful_fleet_deletions
+    #   Information about the EC2 Fleets that are not successfully deleted.
+    #   @return [Array<Types::DeleteFleetErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetsResult AWS API Documentation
+    #
+    class DeleteFleetsResult < Struct.new(
+      :successful_fleet_deletions,
+      :unsuccessful_fleet_deletions)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DeleteFlowLogs.
     #
     # @note When making an API call, you may pass DeleteFlowLogsRequest
@@ -7275,6 +7541,243 @@ module Aws::EC2
     #
     class DescribeExportTasksResult < Struct.new(
       :export_tasks)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         event_type: "instance-change", # accepts instance-change, fleet-change, service-error
+    #         max_results: 1,
+    #         next_token: "String",
+    #         fleet_id: "FleetIdentifier", # required
+    #         start_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] event_type
+    #   The type of events to describe. By default, all events are
+    #   described.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and 1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start date and time for the events, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetHistoryRequest AWS API Documentation
+    #
+    class DescribeFleetHistoryRequest < Struct.new(
+      :dry_run,
+      :event_type,
+      :max_results,
+      :next_token,
+      :fleet_id,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] history_records
+    #   Information about the events in the history of the EC2 Fleet.
+    #   @return [Array<Types::HistoryRecordEntry>]
+    #
+    # @!attribute [rw] last_evaluated_time
+    #   The last date and time for the events, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). All records up to this time
+    #   were retrieved.
+    #
+    #   If `nextToken` indicates that there are more results, this value is
+    #   not present.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start date and time for the events, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetHistoryResult AWS API Documentation
+    #
+    class DescribeFleetHistoryResult < Struct.new(
+      :history_records,
+      :last_evaluated_time,
+      :next_token,
+      :fleet_id,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetInstancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         max_results: 1,
+    #         next_token: "String",
+    #         fleet_id: "FleetIdentifier", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and 1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetInstancesRequest AWS API Documentation
+    #
+    class DescribeFleetInstancesRequest < Struct.new(
+      :dry_run,
+      :max_results,
+      :next_token,
+      :fleet_id,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] active_instances
+    #   The running instances. This list is refreshed periodically and might
+    #   be out of date.
+    #   @return [Array<Types::ActiveInstance>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetInstancesResult AWS API Documentation
+    #
+    class DescribeFleetInstancesResult < Struct.new(
+      :active_instances,
+      :next_token,
+      :fleet_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         max_results: 1,
+    #         next_token: "String",
+    #         fleet_ids: ["FleetIdentifier"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and 1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_ids
+    #   The ID of the EC2 Fleets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsRequest AWS API Documentation
+    #
+    class DescribeFleetsRequest < Struct.new(
+      :dry_run,
+      :max_results,
+      :next_token,
+      :fleet_ids,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleets
+    #   The EC2 Fleets.
+    #   @return [Array<Types::FleetData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsResult AWS API Documentation
+    #
+    class DescribeFleetsResult < Struct.new(
+      :next_token,
+      :fleets)
       include Aws::Structure
     end
 
@@ -11397,8 +11900,8 @@ module Aws::EC2
     # Contains the output of DescribeSpotFleetInstances.
     #
     # @!attribute [rw] active_instances
-    #   The running instances. Note that this list is refreshed periodically
-    #   and might be out of date.
+    #   The running instances. This list is refreshed periodically and might
+    #   be out of date.
     #   @return [Array<Types::ActiveInstance>]
     #
     # @!attribute [rw] next_token
@@ -11690,7 +12193,7 @@ module Aws::EC2
     #     `active` \| `closed` \| `cancelled` \| `failed`). Spot request
     #     status information can help you track your Amazon EC2 Spot
     #     Instance requests. For more information, see [Spot Request
-    #     Status][1] in the Amazon Elastic Compute Cloud User Guide.
+    #     Status][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #   * `status-code` - The short code describing the most recent
     #     evaluation of your Spot Instance request.
@@ -11799,7 +12302,7 @@ module Aws::EC2
     #     use wildcards; greater than or less than comparison is not
     #     supported).
     #
-    #   * `timestamp` - The timestamp of the Spot price history, in UTC
+    #   * `timestamp` - The time stamp of the Spot price history, in UTC
     #     format (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). You can
     #     use wildcards (* and ?). Greater than or less than comparison is
     #     not supported.
@@ -14721,9 +15224,9 @@ module Aws::EC2
     #     Instances. The Spot Fleet will be deleted two days after its
     #     instances were terminated.
     #
-    #   * `cancelled_running` - The Spot Fleet is canceled and will not
-    #     launch additional Spot Instances, but its existing Spot Instances
-    #     continue to run until they are interrupted or terminated.
+    #   * `cancelled_running` - The Spot Fleet is canceled and does not
+    #     launch additional Spot Instances. Existing Spot Instances continue
+    #     to run until they are interrupted or terminated.
     #
     #   * `cancelled_terminating` - The Spot Fleet is canceled and its Spot
     #     Instances are terminating.
@@ -14936,6 +15439,272 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an EC2 Fleet.
+    #
+    # @!attribute [rw] activity_status
+    #   The progress of the EC2 Fleet. If there is an error, the status is
+    #   `error`. After all requests are placed, the status is
+    #   `pending_fulfillment`. If the size of the EC2 Fleet is equal to or
+    #   greater than its target capacity, the status is `fulfilled`. If the
+    #   size of the EC2 Fleet is decreased, the status is
+    #   `pending_termination` while instances are terminating.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The creation date and time of the EC2 Fleet.
+    #   @return [Time]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_state
+    #   The state of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #   Constraints: Maximum 64 ASCII characters
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] excess_capacity_termination_policy
+    #   Indicates whether running instances should be terminated if the
+    #   target capacity of the EC2 Fleet is decreased below the current size
+    #   of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] fulfilled_capacity
+    #   The number of units fulfilled by this request compared to the set
+    #   target capacity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] fulfilled_on_demand_capacity
+    #   The number of units fulfilled by this request compared to the set
+    #   target On-Demand capacity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] launch_template_configs
+    #   The launch template and overrides.
+    #   @return [Array<Types::FleetLaunchTemplateConfig>]
+    #
+    # @!attribute [rw] target_capacity_specification
+    #   The number of units to request. You can choose to set the target
+    #   capacity in terms of instances or a performance characteristic that
+    #   is important to your application workload, such as vCPUs, memory, or
+    #   I/O. If the request type is `maintain`, you can specify a target
+    #   capacity of 0 and add capacity later.
+    #   @return [Types::TargetCapacitySpecification]
+    #
+    # @!attribute [rw] terminate_instances_with_expiration
+    #   Indicates whether running instances should be terminated when the
+    #   EC2 Fleet expires.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The type of request. Indicates whether the EC2 Fleet only `requests`
+    #   the target capacity, or also attempts to `maintain` it. If you
+    #   request a certain target capacity, EC2 Fleet only places the
+    #   required requests; it does not attempt to replenish instances if
+    #   capacity is diminished, and does not submit requests in alternative
+    #   capacity pools if capacity is unavailable. To maintain a certain
+    #   target capacity, EC2 Fleet places the required requests to meet this
+    #   target capacity. It also automatically replenishes any interrupted
+    #   Spot Instances. Default: `maintain`.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_from
+    #   The start date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
+    #   fulfilling the request immediately.
+    #   @return [Time]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new instance
+    #   requests are placed or able to fulfill the request. The default end
+    #   date is 7 days from the current date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] replace_unhealthy_instances
+    #   Indicates whether EC2 Fleet should replace unhealthy instances.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] spot_options
+    #   The configuration of Spot Instances in an EC2 Fleet.
+    #   @return [Types::SpotOptions]
+    #
+    # @!attribute [rw] tags
+    #   The tags for an EC2 Fleet resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetData AWS API Documentation
+    #
+    class FleetData < Struct.new(
+      :activity_status,
+      :create_time,
+      :fleet_id,
+      :fleet_state,
+      :client_token,
+      :excess_capacity_termination_policy,
+      :fulfilled_capacity,
+      :fulfilled_on_demand_capacity,
+      :launch_template_configs,
+      :target_capacity_specification,
+      :terminate_instances_with_expiration,
+      :type,
+      :valid_from,
+      :valid_until,
+      :replace_unhealthy_instances,
+      :spot_options,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes a launch template and overrides.
+    #
+    # @!attribute [rw] launch_template_specification
+    #   The launch template.
+    #   @return [Types::FleetLaunchTemplateSpecification]
+    #
+    # @!attribute [rw] overrides
+    #   Any parameters that you specify override the same parameters in the
+    #   launch template.
+    #   @return [Array<Types::FleetLaunchTemplateOverrides>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateConfig AWS API Documentation
+    #
+    class FleetLaunchTemplateConfig < Struct.new(
+      :launch_template_specification,
+      :overrides)
+      include Aws::Structure
+    end
+
+    # Describes a launch template and overrides.
+    #
+    # @note When making an API call, you may pass FleetLaunchTemplateConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_specification: {
+    #           launch_template_id: "String",
+    #           launch_template_name: "LaunchTemplateName",
+    #           version: "String",
+    #         },
+    #         overrides: [
+    #           {
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #             max_price: "String",
+    #             subnet_id: "String",
+    #             availability_zone: "String",
+    #             weighted_capacity: 1.0,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] launch_template_specification
+    #   The launch template to use. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [Types::FleetLaunchTemplateSpecificationRequest]
+    #
+    # @!attribute [rw] overrides
+    #   Any parameters that you specify override the same parameters in the
+    #   launch template.
+    #   @return [Array<Types::FleetLaunchTemplateOverridesRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateConfigRequest AWS API Documentation
+    #
+    class FleetLaunchTemplateConfigRequest < Struct.new(
+      :launch_template_specification,
+      :overrides)
+      include Aws::Structure
+    end
+
+    # Describes overrides for a launch template.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_price
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] weighted_capacity
+    #   The number of units provided by the specified instance type.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides AWS API Documentation
+    #
+    class FleetLaunchTemplateOverrides < Struct.new(
+      :instance_type,
+      :max_price,
+      :subnet_id,
+      :availability_zone,
+      :weighted_capacity)
+      include Aws::Structure
+    end
+
+    # Describes overrides for a launch template.
+    #
+    # @note When making an API call, you may pass FleetLaunchTemplateOverridesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         max_price: "String",
+    #         subnet_id: "String",
+    #         availability_zone: "String",
+    #         weighted_capacity: 1.0,
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_price
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] weighted_capacity
+    #   The number of units provided by the specified instance type.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest AWS API Documentation
+    #
+    class FleetLaunchTemplateOverridesRequest < Struct.new(
+      :instance_type,
+      :max_price,
+      :subnet_id,
+      :availability_zone,
+      :weighted_capacity)
+      include Aws::Structure
+    end
+
     # Describes a launch template.
     #
     # @note When making an API call, you may pass FleetLaunchTemplateSpecification
@@ -14965,6 +15734,39 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecification AWS API Documentation
     #
     class FleetLaunchTemplateSpecification < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version)
+      include Aws::Structure
+    end
+
+    # The launch template to use. You must specify either the launch
+    # template ID or launch template name in the request.
+    #
+    # @note When making an API call, you may pass FleetLaunchTemplateSpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "String",
+    #         launch_template_name: "LaunchTemplateName",
+    #         version: "String",
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the launch template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecificationRequest AWS API Documentation
+    #
+    class FleetLaunchTemplateSpecificationRequest < Struct.new(
       :launch_template_id,
       :launch_template_name,
       :version)
@@ -15569,6 +16371,30 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HistoryRecord AWS API Documentation
     #
     class HistoryRecord < Struct.new(
+      :event_information,
+      :event_type,
+      :timestamp)
+      include Aws::Structure
+    end
+
+    # Describes an event in the history of the EC2 Fleet.
+    #
+    # @!attribute [rw] event_information
+    #   Information about the event.
+    #   @return [Types::EventInformation]
+    #
+    # @!attribute [rw] event_type
+    #   The event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The date and time of the event, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HistoryRecordEntry AWS API Documentation
+    #
+    class HistoryRecordEntry < Struct.new(
       :event_information,
       :event_type,
       :timestamp)
@@ -19139,7 +19965,7 @@ module Aws::EC2
     end
 
     # The launch template to use. You must specify either the launch
-    # template ID or launch template name in the request.
+    # template ID or launch template name in the request, but not both.
     #
     # @note When making an API call, you may pass LaunchTemplateSpecification
     #   data as a hash:
@@ -19514,6 +20340,63 @@ module Aws::EC2
     class LoadPermissionRequest < Struct.new(
       :group,
       :user_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyFleetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
+    #         fleet_id: "FleetIdentifier", # required
+    #         target_capacity_specification: { # required
+    #           total_target_capacity: 1, # required
+    #           on_demand_target_capacity: 1,
+    #           spot_target_capacity: 1,
+    #           default_target_capacity_type: "spot", # accepts spot, on-demand
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] excess_capacity_termination_policy
+    #   Indicates whether running instances should be terminated if the
+    #   total target capacity of the EC2 Fleet is decreased below the
+    #   current size of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_capacity_specification
+    #   The size of the EC2 Fleet.
+    #   @return [Types::TargetCapacitySpecificationRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleetRequest AWS API Documentation
+    #
+    class ModifyFleetRequest < Struct.new(
+      :dry_run,
+      :excess_capacity_termination_policy,
+      :fleet_id,
+      :target_capacity_specification)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Is `true` if the request succeeds, and an error otherwise.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleetResult AWS API Documentation
+    #
+    class ModifyFleetResult < Struct.new(
+      :return)
       include Aws::Structure
     end
 
@@ -23636,6 +24519,7 @@ module Aws::EC2
     #           client_token: "String",
     #           excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #           fulfilled_capacity: 1.0,
+    #           on_demand_fulfilled_capacity: 1.0,
     #           iam_fleet_role: "String", # required
     #           launch_specifications: [
     #             {
@@ -23742,6 +24626,7 @@ module Aws::EC2
     #           ],
     #           spot_price: "String",
     #           target_capacity: 1, # required
+    #           on_demand_target_capacity: 1,
     #           terminate_instances_with_expiration: false,
     #           type: "request", # accepts request, maintain
     #           valid_from: Time.now,
@@ -23920,14 +24805,14 @@ module Aws::EC2
     #   termination notice, which gives the instance a two-minute warning
     #   before it terminates.
     #
-    #   Note that you can't specify an Availability Zone group or a launch
-    #   group if you specify a duration.
+    #   You can't specify an Availability Zone group or a launch group if
+    #   you specify a duration.
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Idempotency][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -25841,7 +26726,8 @@ module Aws::EC2
     # @!attribute [rw] launch_template
     #   The launch template to use to launch the instances. Any parameters
     #   that you specify in RunInstances override the same parameters in the
-    #   launch template.
+    #   launch template. You can specify either the name or ID of a launch
+    #   template, but not both.
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] instance_market_options
@@ -27678,6 +28564,7 @@ module Aws::EC2
     #         client_token: "String",
     #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #         fulfilled_capacity: 1.0,
+    #         on_demand_fulfilled_capacity: 1.0,
     #         iam_fleet_role: "String", # required
     #         launch_specifications: [
     #           {
@@ -27784,6 +28671,7 @@ module Aws::EC2
     #         ],
     #         spot_price: "String",
     #         target_capacity: 1, # required
+    #         on_demand_target_capacity: 1,
     #         terminate_instances_with_expiration: false,
     #         type: "request", # accepts request, maintain
     #         valid_from: Time.now,
@@ -27814,9 +28702,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier you provide to ensure
-    #   idempotency of your listings. This helps avoid duplicate listings.
-    #   For more information, see [Ensuring Idempotency][1].
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of your listings. This helps to avoid duplicate
+    #   listings. For more information, see [Ensuring Idempotency][1].
     #
     #
     #
@@ -27832,6 +28720,11 @@ module Aws::EC2
     # @!attribute [rw] fulfilled_capacity
     #   The number of units fulfilled by this request compared to the set
     #   target capacity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] on_demand_fulfilled_capacity
+    #   The number of On-Demand units fulfilled by this request compared to
+    #   the set target On-Demand capacity.
     #   @return [Float]
     #
     # @!attribute [rw] iam_fleet_role
@@ -27862,21 +28755,28 @@ module Aws::EC2
     #   capacity of 0 and add capacity later.
     #   @return [Integer]
     #
+    # @!attribute [rw] on_demand_target_capacity
+    #   The number of On-Demand units to request. You can choose to set the
+    #   target capacity in terms of instances or a performance
+    #   characteristic that is important to your application workload, such
+    #   as vCPUs, memory, or I/O. If the request type is `maintain`, you can
+    #   specify a target capacity of 0 and add capacity later.
+    #   @return [Integer]
+    #
     # @!attribute [rw] terminate_instances_with_expiration
     #   Indicates whether running Spot Instances should be terminated when
     #   the Spot Fleet request expires.
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of request. Indicates whether the fleet will only `request`
-    #   the target capacity or also attempt to `maintain` it. When you
-    #   `request` a certain target capacity, the fleet will only place the
-    #   required requests. It will not attempt to replenish Spot Instances
-    #   if capacity is diminished, nor will it submit requests in
-    #   alternative Spot pools if capacity is not available. When you want
-    #   to `maintain` a certain target capacity, fleet will place the
-    #   required requests to meet this target capacity. It will also
-    #   automatically replenish any interrupted instances. Default:
+    #   The type of request. Indicates whether the Spot Fleet only requests
+    #   the target capacity or also attempts to maintain it. When this value
+    #   is `request`, the Spot Fleet only places the required requests. It
+    #   does not attempt to replenish Spot Instances if capacity is
+    #   diminished, nor does it submit requests in alternative Spot pools if
+    #   capacity is not available. To maintain a certain target capacity,
+    #   the Spot Fleet places the required requests to meet capacity and
+    #   automatically replenishes any interrupted instances. Default:
     #   `maintain`.
     #   @return [String]
     #
@@ -27920,11 +28820,13 @@ module Aws::EC2
       :client_token,
       :excess_capacity_termination_policy,
       :fulfilled_capacity,
+      :on_demand_fulfilled_capacity,
       :iam_fleet_role,
       :launch_specifications,
       :launch_template_configs,
       :spot_price,
       :target_capacity,
+      :on_demand_target_capacity,
       :terminate_instances_with_expiration,
       :type,
       :valid_from,
@@ -28026,10 +28928,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the Spot Instance request. Spot status information can
-    #   help you track your Spot Instance requests. For more information,
-    #   see [Spot Status][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   The state of the Spot Instance request. Spot status information
+    #   helps track your Spot Instance requests. For more information, see
+    #   [Spot Status][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -28115,7 +29016,7 @@ module Aws::EC2
     #
     # @!attribute [rw] code
     #   The status code. For a list of status codes, see [Spot Status
-    #   Codes][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Codes][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -28188,6 +29089,54 @@ module Aws::EC2
       :spot_instance_type,
       :block_duration_minutes,
       :valid_until,
+      :instance_interruption_behavior)
+      include Aws::Structure
+    end
+
+    # Describes the configuration of Spot Instances in an EC2 Fleet.
+    #
+    # @!attribute [rw] allocation_strategy
+    #   Indicates how to allocate the target capacity across the Spot pools
+    #   specified by the Spot Fleet request. The default is `lowestPrice`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_interruption_behavior
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptions AWS API Documentation
+    #
+    class SpotOptions < Struct.new(
+      :allocation_strategy,
+      :instance_interruption_behavior)
+      include Aws::Structure
+    end
+
+    # Describes the configuration of Spot Instances in an EC2 Fleet request.
+    #
+    # @note When making an API call, you may pass SpotOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #       }
+    #
+    # @!attribute [rw] allocation_strategy
+    #   Indicates how to allocate the target capacity across the Spot pools
+    #   specified by the Spot Fleet request. The default is `lowestPrice`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_interruption_behavior
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptionsRequest AWS API Documentation
+    #
+    class SpotOptionsRequest < Struct.new(
+      :allocation_strategy,
       :instance_interruption_behavior)
       include Aws::Structure
     end
@@ -28768,6 +29717,84 @@ module Aws::EC2
     class TagSpecification < Struct.new(
       :resource_type,
       :tags)
+      include Aws::Structure
+    end
+
+    # The number of units to request. You can choose to set the target
+    # capacity in terms of instances or a performance characteristic that is
+    # important to your application workload, such as vCPUs, memory, or I/O.
+    # If the request type is `maintain`, you can specify a target capacity
+    # of 0 and add capacity later.
+    #
+    # @!attribute [rw] total_target_capacity
+    #   The number of units to request, filled using
+    #   `DefaultTargetCapacityType`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_target_capacity
+    #   The number of On-Demand units to request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spot_target_capacity
+    #   The maximum number of Spot units to launch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_target_capacity_type
+    #   The default `TotalTargetCapacity`, which is either `Spot` or
+    #   `On-Demand`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecification AWS API Documentation
+    #
+    class TargetCapacitySpecification < Struct.new(
+      :total_target_capacity,
+      :on_demand_target_capacity,
+      :spot_target_capacity,
+      :default_target_capacity_type)
+      include Aws::Structure
+    end
+
+    # The number of units to request. You can choose to set the target
+    # capacity in terms of instances or a performance characteristic that is
+    # important to your application workload, such as vCPUs, memory, or I/O.
+    # If the request type is `maintain`, you can specify a target capacity
+    # of 0 and add capacity later.
+    #
+    # @note When making an API call, you may pass TargetCapacitySpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         total_target_capacity: 1, # required
+    #         on_demand_target_capacity: 1,
+    #         spot_target_capacity: 1,
+    #         default_target_capacity_type: "spot", # accepts spot, on-demand
+    #       }
+    #
+    # @!attribute [rw] total_target_capacity
+    #   The number of units to request, filled using
+    #   `DefaultTargetCapacityType`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_target_capacity
+    #   The number of On-Demand units to request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spot_target_capacity
+    #   The number of Spot units to request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_target_capacity_type
+    #   The default `TotalTargetCapacity`, which is either `Spot` or
+    #   `On-Demand`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecificationRequest AWS API Documentation
+    #
+    class TargetCapacitySpecificationRequest < Struct.new(
+      :total_target_capacity,
+      :on_demand_target_capacity,
+      :spot_target_capacity,
+      :default_target_capacity_type)
       include Aws::Structure
     end
 

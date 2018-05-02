@@ -84,16 +84,34 @@ module Aws::SSM
     #
     # @!attribute [rw] resource_type
     #   Specifies the type of resource you are tagging.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_id
     #   The resource ID you want to tag.
     #
-    #   For the ManagedInstance, MaintenanceWindow, and PatchBaseline
-    #   values, use the ID of the resource, such as mw-01234361858c9b57b for
-    #   a Maintenance Window.
+    #   Use the ID of the resource. Here are some examples:
+    #
+    #   ManagedInstance: mi-012345abcde
+    #
+    #   MaintenanceWindow: mw-012345abcde
+    #
+    #   PatchBaseline: pb-012345abcde
     #
     #   For the Document and Parameter values, use the name of the resource.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -737,6 +755,10 @@ module Aws::SSM
     #   The name of the document requested for execution.
     #   @return [String]
     #
+    # @!attribute [rw] document_version
+    #   The SSM document version.
+    #   @return [String]
+    #
     # @!attribute [rw] comment
     #   User-specified information about the command, such as a brief
     #   description of what the command should do.
@@ -888,6 +910,7 @@ module Aws::SSM
     class Command < Struct.new(
       :command_id,
       :document_name,
+      :document_version,
       :comment,
       :expires_after,
       :parameters,
@@ -963,6 +986,10 @@ module Aws::SSM
     #
     # @!attribute [rw] document_name
     #   The document name that was requested for execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The SSM document version.
     #   @return [String]
     #
     # @!attribute [rw] requested_date_time
@@ -1068,6 +1095,7 @@ module Aws::SSM
       :instance_name,
       :comment,
       :document_name,
+      :document_version,
       :requested_date_time,
       :status,
       :status_details,
@@ -1293,15 +1321,15 @@ module Aws::SSM
     #
     # @!attribute [rw] id
     #   An ID for the compliance item. For example, if the compliance item
-    #   is a Windows patch, the ID could be the number of the KB article.
-    #   Here's an example: KB4010320.
+    #   is a Windows patch, the ID could be the number of the KB article;
+    #   for example: KB4010320.
     #   @return [String]
     #
     # @!attribute [rw] title
     #   A title for the compliance item. For example, if the compliance item
     #   is a Windows patch, the title could be the title of the KB article
-    #   for the patch. Here's an example: Security Update for Active
-    #   Directory Federation Services.
+    #   for the patch; for example: Security Update for Active Directory
+    #   Federation Services.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1362,8 +1390,8 @@ module Aws::SSM
     # @!attribute [rw] title
     #   The title of the compliance item. For example, if the compliance
     #   item is a Windows patch, the title could be the title of the KB
-    #   article for the patch. Here's an example: Security Update for
-    #   Active Directory Federation Services.
+    #   article for the patch; for example: Security Update for Active
+    #   Directory Federation Services.
     #   @return [String]
     #
     # @!attribute [rw] severity
@@ -1480,7 +1508,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] description
-    #   A userdefined description of the resource that you want to register
+    #   A user-defined description of the resource that you want to register
     #   with Amazon EC2.
     #
     #   Do not enter personally identifiable information in this field.
@@ -1980,14 +2008,20 @@ module Aws::SSM
     #
     # @!attribute [rw] approved_patches
     #   A list of explicitly approved patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] approved_patches_compliance_level
     #   Defines the compliance level for approved patches. This means that
     #   if an approved patch is reported as missing, this is the severity of
-    #   the compliance violation. Valid compliance severity levels include
-    #   the following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL,
-    #   UNSPECIFIED. The default value is UNSPECIFIED.
+    #   the compliance violation. The default value is UNSPECIFIED.
     #   @return [String]
     #
     # @!attribute [rw] approved_patches_enable_non_security
@@ -1998,6 +2032,14 @@ module Aws::SSM
     #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] description
@@ -4509,6 +4551,10 @@ module Aws::SSM
     #   AWS-RunShellScript.
     #   @return [String]
     #
+    # @!attribute [rw] document_version
+    #   The SSM document version used in the request.
+    #   @return [String]
+    #
     # @!attribute [rw] plugin_name
     #   The name of the plugin for which you want detailed results. For
     #   example, aws:RunShellScript is a plugin.
@@ -4640,6 +4686,7 @@ module Aws::SSM
       :instance_id,
       :comment,
       :document_name,
+      :document_version,
       :plugin_name,
       :response_code,
       :execution_start_date_time,
@@ -6146,7 +6193,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] owner_information
-    #   Placeholder information, this field will always be empty in the
+    #   Placeholder information. This field will always be empty in the
     #   current release of the service.
     #   @return [String]
     #
@@ -8785,9 +8832,9 @@ module Aws::SSM
     #
     # * `Low`
     #
-    # **SUSE Linux Enterprise Server (SUSE) Operating Systems**
+    # **SUSE Linux Enterprise Server (SLES) Operating Systems**
     #
-    # The supported keys for SUSE operating systems are `PRODUCT`,
+    # The supported keys for SLES operating systems are `PRODUCT`,
     # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
     # values for each of these keys.
     #
@@ -8840,6 +8887,62 @@ module Aws::SSM
     # * `Important`
     #
     # * `Moderate`
+    #
+    # * `Low`
+    #
+    # **CentOS Operating Systems**
+    #
+    # The supported keys for CentOS operating systems are `PRODUCT`,
+    # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
+    # values for each of these keys.
+    #
+    # *Supported key:* `PRODUCT`
+    #
+    # *Supported values:*
+    #
+    # * `CentOS6.5`
+    #
+    # * `CentOS6.6`
+    #
+    # * `CentOS6.7`
+    #
+    # * `CentOS6.8`
+    #
+    # * `CentOS6.9`
+    #
+    # * `CentOS7.0`
+    #
+    # * `CentOS7.1`
+    #
+    # * `CentOS7.2`
+    #
+    # * `CentOS7.3`
+    #
+    # * `CentOS7.4`
+    #
+    # *Supported key:* `CLASSIFICATION`
+    #
+    # *Supported values:*
+    #
+    # * `Security`
+    #
+    # * `Bugfix`
+    #
+    # * `Enhancement`
+    #
+    # * `Recommended`
+    #
+    # * `Newpackage`
+    #
+    # *Supported key:* `SEVERITY`
+    #
+    # *Supported values:*
+    #
+    # * `Critical`
+    #
+    # * `Important`
+    #
+    # * `Medium`
     #
     # * `Low`
     #
@@ -9421,10 +9524,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags). Instances are specified
-    #   using
-    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
-    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+    #   The targets (either instances or tags).
+    #
+    #   Specify instances using the following format:
+    #
+    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #
+    #   Specify tags using either of the following formats:
+    #
+    #   `Key=tag:<tag-key>,Values=<tag-value-1>,<tag-value-2>`
+    #
+    #   `Key=tag-key,Values=<tag-key-1>,<tag-key-2>`
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] owner_information
@@ -9539,14 +9649,19 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] window_id
-    #   The id of the Maintenance Window the task should be added to.
+    #   The ID of the Maintenance Window the task should be added to.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   The targets (either instances or tags). Instances are specified
-    #   using
-    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
-    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+    #   The targets (either instances or Maintenance Window targets).
+    #
+    #   Specify instances using the following format:
+    #
+    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #
+    #   Specify Maintenance Window targets using the following format:
+    #
+    #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] task_arn
@@ -9667,10 +9782,33 @@ module Aws::SSM
     #
     # @!attribute [rw] resource_type
     #   The type of resource of which you want to remove a tag.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The resource ID for which you want to remove tags.
+    #   The resource ID for which you want to remove tags. Use the ID of the
+    #   resource. Here are some examples:
+    #
+    #   ManagedInstance: mi-012345abcde
+    #
+    #   MaintenanceWindow: mw-012345abcde
+    #
+    #   PatchBaseline: pb-012345abcde
+    #
+    #   For the Document and Parameter values, use the name of the resource.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -9976,6 +10114,7 @@ module Aws::SSM
     #           },
     #         ],
     #         document_name: "DocumentARN", # required
+    #         document_version: "DocumentVersion",
     #         document_hash: "DocumentHash",
     #         document_hash_type: "Sha256", # accepts Sha256, Sha1
     #         timeout_seconds: 1,
@@ -10023,6 +10162,11 @@ module Aws::SSM
     # @!attribute [rw] document_name
     #   Required. The name of the Systems Manager document to execute. This
     #   can be a public document or a custom document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_version
+    #   The SSM document version to use in the request. You can specify
+    #   Default, Latest, or a specific version number.
     #   @return [String]
     #
     # @!attribute [rw] document_hash
@@ -10112,6 +10256,7 @@ module Aws::SSM
       :instance_ids,
       :targets,
       :document_name,
+      :document_version,
       :document_hash,
       :document_hash_type,
       :timeout_seconds,
@@ -11341,6 +11486,14 @@ module Aws::SSM
     #
     # @!attribute [rw] approved_patches
     #   A list of explicitly approved patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] approved_patches_compliance_level
@@ -11356,6 +11509,14 @@ module Aws::SSM
     #
     # @!attribute [rw] rejected_patches
     #   A list of explicitly rejected patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] description
