@@ -69,7 +69,10 @@ module Aws
              event.send("#{member_name}=", raw_event.payload) :
              event.send("#{member_name}=", parse_payload(raw_event.payload.read, member_ref))
           elsif member_ref.eventheader
-            event.send("#{member_name}=", raw_event.headers[member_ref.location_name].value)
+            # allow incomplete event members in response
+            if raw_event.headers.key?(member_ref.location_name)
+              event.send("#{member_name}=", raw_event.headers[member_ref.location_name].value)
+            end
           else
             raise "Non eventpayload or eventheader member found at event"
           end
