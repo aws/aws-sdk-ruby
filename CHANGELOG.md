@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Updated the documentation for AWS Certificate Manager.
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
 2.11.40 (2018-04-30)
 ------------------
 
