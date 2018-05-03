@@ -119,7 +119,7 @@ module Aws
       private
 
       def decode_io(io)
-        Enumerator.new {|e| e << decode_message(io) unless io.eof? }
+        ::Enumerator.new {|e| e << decode_message(io) unless io.eof? }
       end
 
       def decode_message(io)
