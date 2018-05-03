@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Makes aws-sdk-v1 resilient to security groups long ids. Following the move to longer ids, `AutoScaling::LaunchConfiguration` fails a regex testing the length of `SecurityGroup` ids.
+
 1.67.0 (2017-04-03)
 ------------------
 

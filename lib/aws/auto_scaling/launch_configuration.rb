@@ -150,7 +150,7 @@ module AWS
       protected
 
       def get_security_groups(names_or_ids)
-        if names_or_ids.all?{|str| str.match(/^sg-[0-9a-f]{8}$/) }
+        if names_or_ids.all?{|str| str.match(/^sg-[0-9a-f]{8,}$/) }
           names_or_ids.collect do |security_group_id|
             EC2::SecurityGroup.new(security_group_id, :config => config)
           end
