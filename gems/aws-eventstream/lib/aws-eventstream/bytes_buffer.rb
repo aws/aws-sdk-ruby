@@ -56,6 +56,10 @@ module Aws
         @pos
       end
 
+      def clear!
+        @data = ''
+        @pos = 0
+      end
     end
 
   end

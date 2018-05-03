@@ -9,6 +9,22 @@ require 'aws-eventstream'
 module SpecHelper
   class << self
 
+    def expected_decoded_message(path)
+       expect_path = File.join(
+         File.expand_path('../fixtures/decoded/positive', __FILE__),
+         File.basename(path)
+       )
+       convert_msg(expect_path)
+    end
+
+    def expected_decoded_error(path)
+       expect_path = File.join(
+         File.expand_path('../fixtures/decoded/negative', __FILE__),
+         File.basename(path)
+       )
+       convert_error(expect_path)
+    end
+
     def convert_msg(path)
       hash = JSON.load(File.read(path))
       Aws::EventStream::Message.new(

@@ -29,6 +29,35 @@ module Aws
     #   message_pool.next
     #   # => Aws::EventStream::Message
     #   
+    # * {#decode_chunk} - decodes a single message from a chunk of data,
+    #   returning message object followed by boolean(indicating eof status
+    #   of data) in an array object
+    #
+    # ## Examples
+    #
+    #   # chunk containing exact one message data
+    #   message, chunk_eof = decoder.decode_chunk(chunk_str)
+    #   message
+    #   # => Aws::EventStream::Message
+    #   chunk_eof
+    #   # => true
+    #
+    #   # chunk containing partial of single message data
+    #   message, chunk_eof = decoder.decode_chunk(chunk_str)
+    #   message
+    #   # => nil
+    #   chunk_eof
+    #   # => true
+    #   # chunk data is saved at message_buffer of the decoder
+    #
+    #   # chunk containing more that one message data
+    #   message, chunk_eof = decoder.decode_chunk(chunk_str)
+    #   message
+    #   # => Aws::EventStream::Message
+    #   chunk_eof
+    #   # => false
+    #   # extra chunk data is saved at message_buffer of the decoder
+    #
     class Decoder
 
       include Enumerable
@@ -49,7 +78,11 @@ module Aws
       #
       def initialize(options = {})
         @format = options.fetch(:format, true)
+        @message_buffer = BytesBuffer.new('')
       end
+
+      # @returns [BytesBuffer]
+      attr_reader :message_buffer
 
       # Decodes messages from a binary stream
       #
@@ -60,10 +93,27 @@ module Aws
       # @return [Enumerable<Message>, nil] Returns a new Enumerable
       #   containing decoded messages if no block is given
       def decode(io, &block)
+        io = BytesBuffer.new(io.read)
         return decode_io(io) unless block_given?
         until io.eof?
-          yield(decode_message(io))
+          # fetch message only
+          yield(decode_message(io).first)
         end
+      end
+
+      # Decodes a single message from a chunk of string
+      #
+      # @param [String] chunk A chunk of string to be decoded,
+      #   chunk can contain partial event message to multiple event messages
+      #   When not provided, decode data from #message_buffer
+      #
+      # @return [Array<Message|nil, Boolean>] Returns single decoded message
+      #   and boolean pair, the boolean flag indicates whether this chunk
+      #   has been fully consumed, unused data is tracked at #message_buffer
+      def decode_chunk(chunk = nil)
+        @message_buffer.write(chunk) if chunk
+        @message_buffer.rewind
+        decode_message(@message_buffer)
       end
 
       private
@@ -75,10 +125,22 @@ module Aws
       def decode_message(io)
         # decode prelude
         total_len, headers_len, prelude_buffer = prelude(io)
+
+        # incomplete message received, leave it in the buffer
+        return [nil, true] if io.bytesize < total_len
+
         # decode headers and payload
         headers, payload = context(io, total_len, headers_len, prelude_buffer)
 
-        Message.new(headers: headers, payload: payload)
+        # track extra message data in the buffer if exists
+        # for #decode_chunk, io is @message_buffer
+        if eof = io.eof?
+          @message_buffer.clear!
+        else
+          @message_buffer = BytesBuffer.new(@message_buffer.read)
+        end
+
+        [Message.new(headers: headers, payload: payload), eof]
       end
 
       def prelude(io)
@@ -102,9 +164,6 @@ module Aws
         # buffer rest of the message except prelude length
         # including context and total message checksum
         buffer = BytesBuffer.new(io.read(total_len - PRELUDE_LENGTH))
-        unless buffer.bytesize == total_len - PRELUDE_LENGTH
-          raise Errors::IncompleteMessageError
-        end
         context_len = total_len - OVERHEAD_LENGTH
 
         prelude_buffer.rewind

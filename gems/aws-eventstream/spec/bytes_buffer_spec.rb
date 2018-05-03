@@ -57,6 +57,14 @@ module Aws
         expect(buffer.bytesize).to eql(3)
       end
 
+      it '#clear! all data and reset position' do
+        buffer = BytesBuffer.new('foo')
+        buffer.read(1)
+        buffer.clear!
+        expect(buffer.tell).to eq(0)
+        expect(buffer.read).to eq('')
+        expect(buffer.eof?).to be true
+      end
     end
 
   end

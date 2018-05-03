@@ -18,7 +18,7 @@ module Aws
 
       it 'formats timestamp when format is enable' do
         hv = HeaderValue.new(value: 8675309, type: 'timestamp', format: true)
-        expect(hv.value).to eql(8675.309)
+        expect(hv.value).to eql(Time.at(8675.309))
       end
 
     end

@@ -36,7 +36,8 @@ module Aws
       end
 
       def format_timestamp(value)
-        value / 1000.0
+        # millis_since_epoch to sec_since_epoch
+        Time.at(value / 1000.0)
       end
 
     end
