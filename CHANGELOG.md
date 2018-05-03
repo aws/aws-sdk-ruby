@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.42 (2018-05-03)
+------------------
+
 * Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
 
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
