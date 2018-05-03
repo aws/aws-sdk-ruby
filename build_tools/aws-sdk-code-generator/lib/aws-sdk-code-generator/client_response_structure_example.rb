@@ -11,6 +11,8 @@ module AwsSdkCodeGenerator
     end
 
     def to_str
+      # TODO
+      # eventstream response shape, usage pattern
       "@example Response structure\n\n  #{entry(@shape_ref, "resp", Set.new).join("\n  ")}"
     end
     alias to_s to_str
