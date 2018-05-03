@@ -98,10 +98,10 @@ module AWS
 
         it 'returns security groups with id patterns' do
           groups
-          groups << 'sg-12345678'
+          groups << 'sg-12345678910121416'
           groups << 'sg-22345678'
           launch_config.security_groups.should == [
-            EC2::SecurityGroup.new('sg-12345678', :config => config),
+            EC2::SecurityGroup.new('sg-12345678910121416', :config => config),
             EC2::SecurityGroup.new('sg-22345678', :config => config),
           ]
         end
