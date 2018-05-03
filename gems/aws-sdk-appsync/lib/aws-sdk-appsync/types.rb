@@ -10,6 +10,43 @@ module Aws::AppSync
 
     # Describes an API key.
     #
+    # Customers invoke AWS AppSync GraphQL APIs with API keys as an identity
+    # mechanism. There are two key versions:
+    #
+    # **da1**\: This version was introduced at launch in November 2017.
+    # These keys always expire after 7 days. Key expiration is managed by
+    # DynamoDB TTL. The keys will cease to be valid after Feb 21, 2018 and
+    # should not be used after that date.
+    #
+    # * `ListApiKeys` returns the expiration time in milliseconds.
+    #
+    # * `CreateApiKey` returns the expiration time in milliseconds.
+    #
+    # * `UpdateApiKey` is not available for this key version.
+    #
+    # * `DeleteApiKey` deletes the item from the table.
+    #
+    # * Expiration is stored in DynamoDB as milliseconds. This results in a
+    #   bug where keys are not automatically deleted because DynamoDB
+    #   expects the TTL to be stored in seconds. As a one-time action, we
+    #   will delete these keys from the table after Feb 21, 2018.
+    #
+    # **da2**\: This version was introduced in February 2018 when AppSync
+    # added support to extend key expiration.
+    #
+    # * `ListApiKeys` returns the expiration time in seconds.
+    #
+    # * `CreateApiKey` returns the expiration time in seconds and accepts a
+    #   user-provided expiration time in seconds.
+    #
+    # * `UpdateApiKey` returns the expiration time in seconds and accepts a
+    #   user-provided expiration time in seconds. Key expiration can only be
+    #   updated while the key has not expired.
+    #
+    # * `DeleteApiKey` deletes the item from the table.
+    #
+    # * Expiration is stored in DynamoDB as seconds.
+    #
     # @!attribute [rw] id
     #   The API key ID.
     #   @return [String]
@@ -50,9 +87,10 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] expires
-    #   The time after which the API key expires. The date is represented as
-    #   seconds since the epoch, rounded down to the nearest hour. The
-    #   default value for this parameter is 7 days from creation time.
+    #   The time from creation time after which the API key expires. The
+    #   date is represented as seconds since the epoch, rounded down to the
+    #   nearest hour. The default value for this parameter is 7 days from
+    #   creation time. For more information, see .
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiKeyRequest AWS API Documentation
@@ -161,18 +199,32 @@ module Aws::AppSync
     #
     #       {
     #         name: "String", # required
-    #         authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
+    #         log_config: {
+    #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
+    #           cloud_watch_logs_role_arn: "String", # required
+    #         },
+    #         authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #         user_pool_config: {
     #           user_pool_id: "String", # required
     #           aws_region: "String", # required
     #           default_action: "ALLOW", # required, accepts ALLOW, DENY
     #           app_id_client_regex: "String",
     #         },
+    #         open_id_connect_config: {
+    #           issuer: "String", # required
+    #           client_id: "String",
+    #           iat_ttl: 1,
+    #           auth_ttl: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
     #   A user-supplied name for the `GraphqlApi`.
     #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   The Amazon CloudWatch logs configuration.
+    #   @return [Types::LogConfig]
     #
     # @!attribute [rw] authentication_type
     #   The authentication type: API key, IAM, or Amazon Cognito User Pools.
@@ -182,12 +234,18 @@ module Aws::AppSync
     #   The Amazon Cognito User Pool configuration.
     #   @return [Types::UserPoolConfig]
     #
+    # @!attribute [rw] open_id_connect_config
+    #   The Open Id Connect configuration configuration.
+    #   @return [Types::OpenIDConnectConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest AWS API Documentation
     #
     class CreateGraphqlApiRequest < Struct.new(
       :name,
+      :log_config,
       :authentication_type,
-      :user_pool_config)
+      :user_pool_config,
+      :open_id_connect_config)
       include Aws::Structure
     end
 
@@ -338,9 +396,10 @@ module Aws::AppSync
     #
     #   * **AWS\_LAMBDA**\: The data source is an AWS Lambda function.
     #
-    #   * **NONE**\: There is no data source. This type is used when the
-    #     required information can be computed on the fly without connecting
-    #     to a back-end data source.
+    #   * **NONE**\: There is no data source. This type is used when when
+    #     you wish to invoke a GraphQL operation without connecting to a
+    #     data source, such as performing data transformation with resolvers
+    #     or triggering a subscription to be invoked from a mutation.
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -809,9 +868,17 @@ module Aws::AppSync
     #   The authentication type.
     #   @return [String]
     #
+    # @!attribute [rw] log_config
+    #   The Amazon CloudWatch Logs configuration.
+    #   @return [Types::LogConfig]
+    #
     # @!attribute [rw] user_pool_config
     #   The Amazon Cognito User Pool configuration.
     #   @return [Types::UserPoolConfig]
+    #
+    # @!attribute [rw] open_id_connect_config
+    #   The Open Id Connect configuration.
+    #   @return [Types::OpenIDConnectConfig]
     #
     # @!attribute [rw] arn
     #   The ARN.
@@ -827,7 +894,9 @@ module Aws::AppSync
       :name,
       :api_id,
       :authentication_type,
+      :log_config,
       :user_pool_config,
+      :open_id_connect_config,
       :arn,
       :uris)
       include Aws::Structure
@@ -1104,6 +1173,99 @@ module Aws::AppSync
       include Aws::Structure
     end
 
+    # The CloudWatch Logs configuration.
+    #
+    # @note When making an API call, you may pass LogConfig
+    #   data as a hash:
+    #
+    #       {
+    #         field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
+    #         cloud_watch_logs_role_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] field_log_level
+    #   The field logging level. Values can be NONE, ERROR, ALL.
+    #
+    #   * **NONE**\: No field-level logs are captured.
+    #
+    #   * **ERROR**\: Logs the following information only for the fields
+    #     that are in error:
+    #
+    #     * The error section in the server response.
+    #
+    #     * Field-level errors.
+    #
+    #     * The generated request/response functions that got resolved for
+    #       error fields.
+    #
+    #   * **ALL**\: The following information is logged for all fields in
+    #     the query:
+    #
+    #     * Field-level tracing information.
+    #
+    #     * The generated request/response functions that got resolved for
+    #       each field.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_logs_role_arn
+    #   The service role that AWS AppSync will assume to publish to Amazon
+    #   CloudWatch logs in your account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LogConfig AWS API Documentation
+    #
+    class LogConfig < Struct.new(
+      :field_log_level,
+      :cloud_watch_logs_role_arn)
+      include Aws::Structure
+    end
+
+    # Describes an Open Id Connect configuration.
+    #
+    # @note When making an API call, you may pass OpenIDConnectConfig
+    #   data as a hash:
+    #
+    #       {
+    #         issuer: "String", # required
+    #         client_id: "String",
+    #         iat_ttl: 1,
+    #         auth_ttl: 1,
+    #       }
+    #
+    # @!attribute [rw] issuer
+    #   The issuer for the open id connect configuration. The issuer
+    #   returned by discovery MUST exactly match the value of iss in the ID
+    #   Token.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The client identifier of the Relying party at the OpenID Provider.
+    #   This identifier is typically obtained when the Relying party is
+    #   registered with the OpenID Provider. You can specify a regular
+    #   expression so the AWS AppSync can validate against multiple client
+    #   identifiers at a time
+    #   @return [String]
+    #
+    # @!attribute [rw] iat_ttl
+    #   The number of milliseconds a token is valid after being issued to a
+    #   user.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auth_ttl
+    #   The number of milliseconds a token is valid after being
+    #   authenticated.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/OpenIDConnectConfig AWS API Documentation
+    #
+    class OpenIDConnectConfig < Struct.new(
+      :issuer,
+      :client_id,
+      :iat_ttl,
+      :auth_ttl)
+      include Aws::Structure
+    end
+
     # Describes a resolver.
     #
     # @!attribute [rw] type_name
@@ -1234,8 +1396,9 @@ module Aws::AppSync
     #   @return [String]
     #
     # @!attribute [rw] expires
-    #   The time after which the API key expires. The date is represented as
-    #   seconds since the epoch.
+    #   The time from update time after which the API key expires. The date
+    #   is represented as seconds since the epoch. For more information, see
+    #   .
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiKeyRequest AWS API Documentation
@@ -1345,12 +1508,22 @@ module Aws::AppSync
     #       {
     #         api_id: "String", # required
     #         name: "String", # required
-    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
+    #         log_config: {
+    #           field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
+    #           cloud_watch_logs_role_arn: "String", # required
+    #         },
+    #         authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #         user_pool_config: {
     #           user_pool_id: "String", # required
     #           aws_region: "String", # required
     #           default_action: "ALLOW", # required, accepts ALLOW, DENY
     #           app_id_client_regex: "String",
+    #         },
+    #         open_id_connect_config: {
+    #           issuer: "String", # required
+    #           client_id: "String",
+    #           iat_ttl: 1,
+    #           auth_ttl: 1,
     #         },
     #       }
     #
@@ -1362,6 +1535,11 @@ module Aws::AppSync
     #   The new name for the `GraphqlApi` object.
     #   @return [String]
     #
+    # @!attribute [rw] log_config
+    #   The Amazon CloudWatch logs configuration for the `GraphqlApi`
+    #   object.
+    #   @return [Types::LogConfig]
+    #
     # @!attribute [rw] authentication_type
     #   The new authentication type for the `GraphqlApi` object.
     #   @return [String]
@@ -1371,13 +1549,20 @@ module Aws::AppSync
     #   object.
     #   @return [Types::UserPoolConfig]
     #
+    # @!attribute [rw] open_id_connect_config
+    #   The Open Id Connect configuration configuration for the `GraphqlApi`
+    #   object.
+    #   @return [Types::OpenIDConnectConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest AWS API Documentation
     #
     class UpdateGraphqlApiRequest < Struct.new(
       :api_id,
       :name,
+      :log_config,
       :authentication_type,
-      :user_pool_config)
+      :user_pool_config,
+      :open_id_connect_config)
       include Aws::Structure
     end
 

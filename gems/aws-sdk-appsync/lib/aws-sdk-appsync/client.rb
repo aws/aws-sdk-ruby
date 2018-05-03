@@ -155,9 +155,10 @@ module Aws::AppSync
     #   A description of the purpose of the API key.
     #
     # @option params [Integer] :expires
-    #   The time after which the API key expires. The date is represented as
-    #   seconds since the epoch, rounded down to the nearest hour. The default
-    #   value for this parameter is 7 days from creation time.
+    #   The time from creation time after which the API key expires. The date
+    #   is represented as seconds since the epoch, rounded down to the nearest
+    #   hour. The default value for this parameter is 7 days from creation
+    #   time. For more information, see .
     #
     # @return [Types::CreateApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -267,11 +268,17 @@ module Aws::AppSync
     # @option params [required, String] :name
     #   A user-supplied name for the `GraphqlApi`.
     #
+    # @option params [Types::LogConfig] :log_config
+    #   The Amazon CloudWatch logs configuration.
+    #
     # @option params [required, String] :authentication_type
     #   The authentication type: API key, IAM, or Amazon Cognito User Pools.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
     #   The Amazon Cognito User Pool configuration.
+    #
+    # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
+    #   The Open Id Connect configuration configuration.
     #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -281,12 +288,22 @@ module Aws::AppSync
     #
     #   resp = client.create_graphql_api({
     #     name: "String", # required
-    #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
+    #     log_config: {
+    #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
+    #       cloud_watch_logs_role_arn: "String", # required
+    #     },
+    #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #     user_pool_config: {
     #       user_pool_id: "String", # required
     #       aws_region: "String", # required
     #       default_action: "ALLOW", # required, accepts ALLOW, DENY
     #       app_id_client_regex: "String",
+    #     },
+    #     open_id_connect_config: {
+    #       issuer: "String", # required
+    #       client_id: "String",
+    #       iat_ttl: 1,
+    #       auth_ttl: 1,
     #     },
     #   })
     #
@@ -294,11 +311,17 @@ module Aws::AppSync
     #
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
-    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS"
+    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
     #   resp.graphql_api.user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.open_id_connect_config.auth_ttl #=> Integer
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
@@ -610,11 +633,17 @@ module Aws::AppSync
     #
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
-    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS"
+    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
     #   resp.graphql_api.user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.open_id_connect_config.auth_ttl #=> Integer
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
@@ -773,6 +802,13 @@ module Aws::AppSync
 
     # Lists the API keys for a given API.
     #
+    # <note markdown="1"> API keys are deleted automatically sometime after they expire.
+    # However, they may still be included in the response until they have
+    # actually been deleted. You can safely call `DeleteApiKey` to manually
+    # delete a key before it's automatically deleted.
+    #
+    #  </note>
+    #
     # @option params [required, String] :api_id
     #   The API ID.
     #
@@ -892,11 +928,17 @@ module Aws::AppSync
     #   resp.graphql_apis #=> Array
     #   resp.graphql_apis[0].name #=> String
     #   resp.graphql_apis[0].api_id #=> String
-    #   resp.graphql_apis[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS"
+    #   resp.graphql_apis[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_apis[0].log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_apis[0].log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_apis[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_apis[0].user_pool_config.aws_region #=> String
     #   resp.graphql_apis[0].user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
     #   resp.graphql_apis[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_apis[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_apis[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_apis[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_apis[0].open_id_connect_config.auth_ttl #=> Integer
     #   resp.graphql_apis[0].arn #=> String
     #   resp.graphql_apis[0].uris #=> Hash
     #   resp.graphql_apis[0].uris["String"] #=> String
@@ -1057,8 +1099,8 @@ module Aws::AppSync
     #   A description of the purpose of the API key.
     #
     # @option params [Integer] :expires
-    #   The time after which the API key expires. The date is represented as
-    #   seconds since the epoch.
+    #   The time from update time after which the API key expires. The date is
+    #   represented as seconds since the epoch. For more information, see .
     #
     # @return [Types::UpdateApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1171,11 +1213,18 @@ module Aws::AppSync
     # @option params [required, String] :name
     #   The new name for the `GraphqlApi` object.
     #
+    # @option params [Types::LogConfig] :log_config
+    #   The Amazon CloudWatch logs configuration for the `GraphqlApi` object.
+    #
     # @option params [String] :authentication_type
     #   The new authentication type for the `GraphqlApi` object.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
     #   The new Amazon Cognito User Pool configuration for the `GraphqlApi`
+    #   object.
+    #
+    # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
+    #   The Open Id Connect configuration configuration for the `GraphqlApi`
     #   object.
     #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1187,12 +1236,22 @@ module Aws::AppSync
     #   resp = client.update_graphql_api({
     #     api_id: "String", # required
     #     name: "String", # required
-    #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
+    #     log_config: {
+    #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
+    #       cloud_watch_logs_role_arn: "String", # required
+    #     },
+    #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #     user_pool_config: {
     #       user_pool_id: "String", # required
     #       aws_region: "String", # required
     #       default_action: "ALLOW", # required, accepts ALLOW, DENY
     #       app_id_client_regex: "String",
+    #     },
+    #     open_id_connect_config: {
+    #       issuer: "String", # required
+    #       client_id: "String",
+    #       iat_ttl: 1,
+    #       auth_ttl: 1,
     #     },
     #   })
     #
@@ -1200,11 +1259,17 @@ module Aws::AppSync
     #
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
-    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS"
+    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
     #   resp.graphql_api.user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.open_id_connect_config.auth_ttl #=> Integer
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
@@ -1328,7 +1393,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
