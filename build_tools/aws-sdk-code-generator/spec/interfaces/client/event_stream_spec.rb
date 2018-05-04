@@ -10,11 +10,13 @@ describe 'Client Interface:' do
     let(:stream) {
       [
         # eventheader & eventpayload(blob)
-        { event_type: :a, member_a: 'foo', member_b: StringIO.new('bar') },
+        { message_type: 'event', event_type: :a, member_a: 'foo', member_b: StringIO.new('bar') },
         # eventpayload(string)
-        { event_type: :b, member_c: 'baz' },
+        { message_type: 'event', event_type: :b, member_c: 'baz' },
         # eventpayload(structure)
-        { event_type: :c, member_d: {struct_member_a: 'foo', struct_member_b: 'bar'} }
+        { message_type: 'event', event_type: :c, member_d: {struct_member_a: 'foo', struct_member_b: 'bar'} },
+        # an unmodeled error event
+        { message_type: 'error', error_code: 'InternalError', error_message: 'An internal server error occurred'}
       ].each
     }
     let(:client) {
@@ -115,6 +117,17 @@ describe 'Client Interface:' do
     end
 
     it 'supports error event' do
+      error = nil
+      handler = Events::EventStreams::BarPayload.new
+      handler.on_error_event do |e| 
+        error = e
+        raise e
+      end
+      expect {
+        client.foo(event_stream_handler: handler)
+      }.to raise_error(Aws::Errors::EventError)
+      expect(error.error_code).to eq('InternalError')
+      expect(error.error_message).to eq('An internal server error occurred')
     end
 
     it 'support exception event' do

@@ -41,7 +41,16 @@ module Aws
       if ref.eventstream
         values.each do |value|
           # each event is structure type
-          structure(ref.shape.member(value[:event_type]), value, errors, context)
+          case value[:message_type]
+          when 'event'
+            val = value.dup
+            val.delete(:message_type)
+            structure(ref.shape.member(val[:event_type]), val, errors, context)
+          when 'error'
+            # Error is unmodeled
+          when 'exception'
+            # TODO
+          end
         end
       else
         shape = ref.shape

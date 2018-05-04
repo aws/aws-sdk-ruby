@@ -30,6 +30,9 @@ module Aws
             parse_error_event(raw_event)
           when 'event'
             parse_event(raw_event)
+          when 'exception'
+            # TODO
+            #parse_exception(raw_event)
           else
             raise Aws::Errors::EventStreamParserError.new(
               'Unrecognized :message-type value for the event')
@@ -43,7 +46,7 @@ module Aws
       def parse_error_event(raw_event)
         error_code = raw_event.headers.delete(":error-code")
         error_message = raw_event.headers.delete(":error-message")
-        Aws::EventError.new(
+        Aws::Errors::EventError.new(
           :error,
           error_code ? error_code.value : error_code,
           error_message ? error_message.value : error_message

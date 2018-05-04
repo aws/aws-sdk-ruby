@@ -17,14 +17,21 @@ module Aws
       end
 
       def write(chunk)
-        # wrap decoded parsed event with callbacks in a event stream
-        @decoder.decode(StringIO.new(chunk)) do |raw_event|
-          event = @event_parser.apply(raw_event)
-          @emitter.signal(event.event_type, event) unless @emitter.nil?
+        raw_event, eof = @decoder.decode_chunk(chunk)
+        emit_event(raw_event) if raw_event
+        while !eof
+          # exhaust message_buffer data
+          raw_event, eof = @decoder.decode_chunk
+          emit_event(raw_event) if raw_event
         end
       end
 
       private
+
+      def emit_event(raw_event)
+        event = @event_parser.apply(raw_event)
+        @emitter.signal(event.event_type, event) unless @emitter.nil?
+      end
 
       def parser_class(protocol)
         case protocol
