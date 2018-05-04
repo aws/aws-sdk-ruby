@@ -91,7 +91,8 @@ module Aws
               # errors are unmodeled
               encode_error(opts, event_data)
             when 'exception'
-              # TODO
+              # Pending
+              raise 'Stubbing :exception event is not supported'
             end
             stream << Aws::EventStream::Encoder.new.encode(
               Aws::EventStream::Message.new(opts))

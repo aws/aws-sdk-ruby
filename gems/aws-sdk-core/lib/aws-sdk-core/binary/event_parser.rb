@@ -31,8 +31,9 @@ module Aws
           when 'event'
             parse_event(raw_event)
           when 'exception'
-            # TODO
-            #parse_exception(raw_event)
+            # Pending
+            raise Aws::Errors::EventStreamParserError.new(
+              ':exception event parsing is not supported')
           else
             raise Aws::Errors::EventStreamParserError.new(
               'Unrecognized :message-type value for the event')
@@ -54,12 +55,13 @@ module Aws
       end
 
       def parse_event(raw_event)
-        # TODO exception-type for modeled exception events
         event_type = raw_event.headers.delete(":event-type").value
         # content_type = raw_event.headers.delete(":content-type").value
 
-        # TODO Pending
-        # if event_type == 'initial-response' end
+        # Pending
+        raise Aws::Errors::EventStreamParserError.new(
+          'non eventstream member at response is not supported yet'
+        ) if event_type == 'initial-response'
 
         # locate event from eventstream
         name, ref = @rules.shape.member_by_location_name(event_type)

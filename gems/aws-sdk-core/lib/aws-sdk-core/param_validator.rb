@@ -46,10 +46,10 @@ module Aws
             val = value.dup
             val.delete(:message_type)
             structure(ref.shape.member(val[:event_type]), val, errors, context)
-          when 'error'
-            # Error is unmodeled
-          when 'exception'
-            # TODO
+          when 'error' # Error is unmodeled
+          when 'exception' # Pending
+            raise Aws::Errors::EventStreamParserError.new(
+              ':exception event validation is not supported')
           end
         end
       else
