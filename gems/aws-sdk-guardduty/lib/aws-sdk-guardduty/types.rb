@@ -319,6 +319,90 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # CreateFilter request object.
+    #
+    # @note When making an API call, you may pass CreateFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action: "NOOP", # accepts NOOP, ARCHIVE
+    #         client_token: "__stringMin0Max64",
+    #         description: "FilterDescription",
+    #         detector_id: "__string", # required
+    #         finding_criteria: {
+    #           criterion: {
+    #             "__string" => {
+    #               eq: ["__string"],
+    #               gt: 1,
+    #               gte: 1,
+    #               lt: 1,
+    #               lte: 1,
+    #               neq: ["__string"],
+    #             },
+    #           },
+    #         },
+    #         name: "FilterName",
+    #         rank: 1,
+    #       }
+    #
+    # @!attribute [rw] action
+    #   Specifies the action that is to be applied to the findings that
+    #   match the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_criteria
+    #   Represents the criteria to be used in the filter for querying
+    #   findings.
+    #   @return [Types::FindingCriteria]
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] rank
+    #   Specifies the position of the filter in the list of current filters.
+    #   Also specifies the order in which this filter is applied to the
+    #   findings.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilterRequest AWS API Documentation
+    #
+    class CreateFilterRequest < Struct.new(
+      :action,
+      :client_token,
+      :description,
+      :detector_id,
+      :finding_criteria,
+      :name,
+      :rank)
+      include Aws::Structure
+    end
+
+    # CreateFilter response object.
+    #
+    # @!attribute [rw] name
+    #   The name of the successfully created filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilterResponse AWS API Documentation
+    #
+    class CreateFilterResponse < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Create IP Set Request
     #
     # @note When making an API call, you may pass CreateIPSetRequest
@@ -569,6 +653,32 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorResponse AWS API Documentation
     #
     class DeleteDetectorResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "__string", # required
+    #         filter_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilterRequest AWS API Documentation
+    #
+    class DeleteFilterRequest < Struct.new(
+      :detector_id,
+      :filter_name)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilterResponse AWS API Documentation
+    #
+    class DeleteFilterResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteIPSetRequest
     #   data as a hash:
@@ -990,6 +1100,65 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "__string", # required
+    #         filter_name: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilterRequest AWS API Documentation
+    #
+    class GetFilterRequest < Struct.new(
+      :detector_id,
+      :filter_name)
+      include Aws::Structure
+    end
+
+    # GetFilter response object.
+    #
+    # @!attribute [rw] action
+    #   Specifies the action that is to be applied to the findings that
+    #   match the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_criteria
+    #   Represents the criteria to be used in the filter for querying
+    #   findings.
+    #   @return [Types::FindingCriteria]
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] rank
+    #   Specifies the position of the filter in the list of current filters.
+    #   Also specifies the order in which this filter is applied to the
+    #   findings.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilterResponse AWS API Documentation
+    #
+    class GetFilterResponse < Struct.new(
+      :action,
+      :description,
+      :finding_criteria,
+      :name,
+      :rank)
+      include Aws::Structure
+    end
+
     # Get Findings Request
     #
     # @note When making an API call, you may pass GetFindingsRequest
@@ -1321,6 +1490,10 @@ module Aws::GuardDuty
     #   The profile information of the EC2 instance.
     #   @return [Types::IamInstanceProfile]
     #
+    # @!attribute [rw] image_description
+    #   The image description of the EC2 instance.
+    #   @return [String]
+    #
     # @!attribute [rw] image_id
     #   The image ID of the EC2 instance.
     #   @return [String]
@@ -1362,6 +1535,7 @@ module Aws::GuardDuty
     class InstanceDetails < Struct.new(
       :availability_zone,
       :iam_instance_profile,
+      :image_description,
       :image_id,
       :instance_id,
       :instance_state,
@@ -1426,7 +1600,9 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] disable_email_notification
-    #   Indicates whether invite member email notification is disabled
+    #   A boolean value that specifies whether you want to disable email
+    #   notification to the accounts that you’re inviting to GuardDuty as
+    #   members.
     #   @return [Boolean]
     #
     # @!attribute [rw] message
@@ -1500,6 +1676,57 @@ module Aws::GuardDuty
     #
     class ListDetectorsResponse < Struct.new(
       :detector_ids,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFiltersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         detector_id: "__string", # required
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] detector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   You can use this parameter to indicate the maximum number of items
+    #   that you want in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFiltersRequest AWS API Documentation
+    #
+    class ListFiltersRequest < Struct.new(
+      :detector_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # ListFilters response object.
+    #
+    # @!attribute [rw] filter_names
+    #   A list of filter names
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the list action. For
+    #   subsequent calls to the action fill nextToken in the request with
+    #   the value of NextToken from the previous response to continue
+    #   listing data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFiltersResponse AWS API Documentation
+    #
+    class ListFiltersResponse < Struct.new(
+      :filter_names,
       :next_token)
       include Aws::Structure
     end
@@ -1929,6 +2156,10 @@ module Aws::GuardDuty
     #   A list of EC2 instance IPv6 address information.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] network_interface_id
+    #   The ID of the network interface
+    #   @return [String]
+    #
     # @!attribute [rw] private_dns_name
     #   Private DNS name of the EC2 instance.
     #   @return [String]
@@ -1965,6 +2196,7 @@ module Aws::GuardDuty
     #
     class NetworkInterface < Struct.new(
       :ipv_6_addresses,
+      :network_interface_id,
       :private_dns_name,
       :private_ip_address,
       :private_ip_addresses,
@@ -2430,6 +2662,82 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorResponse AWS API Documentation
     #
     class UpdateDetectorResponse < Aws::EmptyStructure; end
+
+    # UpdateFilter request object.
+    #
+    # @note When making an API call, you may pass UpdateFilterRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action: "NOOP", # accepts NOOP, ARCHIVE
+    #         description: "FilterDescription",
+    #         detector_id: "__string", # required
+    #         filter_name: "__string", # required
+    #         finding_criteria: {
+    #           criterion: {
+    #             "__string" => {
+    #               eq: ["__string"],
+    #               gt: 1,
+    #               gte: 1,
+    #               lt: 1,
+    #               lte: 1,
+    #               neq: ["__string"],
+    #             },
+    #           },
+    #         },
+    #         rank: 1,
+    #       }
+    #
+    # @!attribute [rw] action
+    #   Specifies the action that is to be applied to the findings that
+    #   match the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_id
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_name
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_criteria
+    #   Represents the criteria to be used in the filter for querying
+    #   findings.
+    #   @return [Types::FindingCriteria]
+    #
+    # @!attribute [rw] rank
+    #   Specifies the position of the filter in the list of current filters.
+    #   Also specifies the order in which this filter is applied to the
+    #   findings.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilterRequest AWS API Documentation
+    #
+    class UpdateFilterRequest < Struct.new(
+      :action,
+      :description,
+      :detector_id,
+      :filter_name,
+      :finding_criteria,
+      :rank)
+      include Aws::Structure
+    end
+
+    # UpdateFilter response object.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilterResponse AWS API Documentation
+    #
+    class UpdateFilterResponse < Struct.new(
+      :name)
+      include Aws::Structure
+    end
 
     # Update findings feedback body
     #

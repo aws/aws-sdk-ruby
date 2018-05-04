@@ -232,6 +232,73 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Creates a filter using the specified finding criteria.
+    #
+    # @option params [String] :action
+    #   Specifies the action that is to be applied to the findings that match
+    #   the filter.
+    #
+    # @option params [String] :client_token
+    #   The idempotency token for the create request.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :description
+    #   The description of the filter.
+    #
+    # @option params [required, String] :detector_id
+    #
+    # @option params [Types::FindingCriteria] :finding_criteria
+    #   Represents the criteria to be used in the filter for querying
+    #   findings.
+    #
+    # @option params [String] :name
+    #   The name of the filter.
+    #
+    # @option params [Integer] :rank
+    #   Specifies the position of the filter in the list of current filters.
+    #   Also specifies the order in which this filter is applied to the
+    #   findings.
+    #
+    # @return [Types::CreateFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFilterResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_filter({
+    #     action: "NOOP", # accepts NOOP, ARCHIVE
+    #     client_token: "__stringMin0Max64",
+    #     description: "FilterDescription",
+    #     detector_id: "__string", # required
+    #     finding_criteria: {
+    #       criterion: {
+    #         "__string" => {
+    #           eq: ["__string"],
+    #           gt: 1,
+    #           gte: 1,
+    #           lt: 1,
+    #           lte: 1,
+    #           neq: ["__string"],
+    #         },
+    #       },
+    #     },
+    #     name: "FilterName",
+    #     rank: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilter AWS API Documentation
+    #
+    # @overload create_filter(params = {})
+    # @param [Hash] params ({})
+    def create_filter(params = {}, options = {})
+      req = build_request(:create_filter, params)
+      req.send_request(options)
+    end
+
     # Creates a new IPSet - a list of trusted IP addresses that have been
     # whitelisted for secure communication with AWS infrastructure and
     # applications.
@@ -451,6 +518,30 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Deletes the filter specified by the filter name.
+    #
+    # @option params [required, String] :detector_id
+    #
+    # @option params [required, String] :filter_name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_filter({
+    #     detector_id: "__string", # required
+    #     filter_name: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilter AWS API Documentation
+    #
+    # @overload delete_filter(params = {})
+    # @param [Hash] params ({})
+    def delete_filter(params = {}, options = {})
+      req = build_request(:delete_filter, params)
+      req.send_request(options)
+    end
+
     # Deletes the IPSet specified by the IPSet ID.
     #
     # @option params [required, String] :detector_id
@@ -656,6 +747,52 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Returns the details of the filter specified by the filter name.
+    #
+    # @option params [required, String] :detector_id
+    #
+    # @option params [required, String] :filter_name
+    #
+    # @return [Types::GetFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFilterResponse#action #action} => String
+    #   * {Types::GetFilterResponse#description #description} => String
+    #   * {Types::GetFilterResponse#finding_criteria #finding_criteria} => Types::FindingCriteria
+    #   * {Types::GetFilterResponse#name #name} => String
+    #   * {Types::GetFilterResponse#rank #rank} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_filter({
+    #     detector_id: "__string", # required
+    #     filter_name: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action #=> String, one of "NOOP", "ARCHIVE"
+    #   resp.description #=> String
+    #   resp.finding_criteria.criterion #=> Hash
+    #   resp.finding_criteria.criterion["__string"].eq #=> Array
+    #   resp.finding_criteria.criterion["__string"].eq[0] #=> String
+    #   resp.finding_criteria.criterion["__string"].gt #=> Integer
+    #   resp.finding_criteria.criterion["__string"].gte #=> Integer
+    #   resp.finding_criteria.criterion["__string"].lt #=> Integer
+    #   resp.finding_criteria.criterion["__string"].lte #=> Integer
+    #   resp.finding_criteria.criterion["__string"].neq #=> Array
+    #   resp.finding_criteria.criterion["__string"].neq[0] #=> String
+    #   resp.name #=> String
+    #   resp.rank #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilter AWS API Documentation
+    #
+    # @overload get_filter(params = {})
+    # @param [Hash] params ({})
+    def get_filter(params = {}, options = {})
+      req = build_request(:get_filter, params)
+      req.send_request(options)
+    end
+
     # Describes Amazon GuardDuty findings specified by finding IDs.
     #
     # @option params [required, String] :detector_id
@@ -699,6 +836,7 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.instance_details.availability_zone #=> String
     #   resp.findings[0].resource.instance_details.iam_instance_profile.arn #=> String
     #   resp.findings[0].resource.instance_details.iam_instance_profile.id #=> String
+    #   resp.findings[0].resource.instance_details.image_description #=> String
     #   resp.findings[0].resource.instance_details.image_id #=> String
     #   resp.findings[0].resource.instance_details.instance_id #=> String
     #   resp.findings[0].resource.instance_details.instance_state #=> String
@@ -707,6 +845,7 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.instance_details.network_interfaces #=> Array
     #   resp.findings[0].resource.instance_details.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.findings[0].resource.instance_details.network_interfaces[0].ipv_6_addresses[0] #=> String
+    #   resp.findings[0].resource.instance_details.network_interfaces[0].network_interface_id #=> String
     #   resp.findings[0].resource.instance_details.network_interfaces[0].private_dns_name #=> String
     #   resp.findings[0].resource.instance_details.network_interfaces[0].private_ip_address #=> String
     #   resp.findings[0].resource.instance_details.network_interfaces[0].private_ip_addresses #=> Array
@@ -1025,7 +1164,9 @@ module Aws::GuardDuty
     # @option params [required, String] :detector_id
     #
     # @option params [Boolean] :disable_email_notification
-    #   Indicates whether invite member email notification is disabled
+    #   A boolean value that specifies whether you want to disable email
+    #   notification to the accounts that you’re inviting to GuardDuty as
+    #   members.
     #
     # @option params [String] :message
     #   The invitation message that you want to send to the accounts that
@@ -1092,6 +1233,44 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def list_detectors(params = {}, options = {})
       req = build_request(:list_detectors, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of the current filters.
+    #
+    # @option params [required, String] :detector_id
+    #
+    # @option params [Integer] :max_results
+    #   You can use this parameter to indicate the maximum number of items
+    #   that you want in the response.
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFiltersResponse#filter_names #filter_names} => Array&lt;String&gt;
+    #   * {Types::ListFiltersResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_filters({
+    #     detector_id: "__string", # required
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.filter_names #=> Array
+    #   resp.filter_names[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFilters AWS API Documentation
+    #
+    # @overload list_filters(params = {})
+    # @param [Hash] params ({})
+    def list_filters(params = {}, options = {})
+      req = build_request(:list_filters, params)
       req.send_request(options)
     end
 
@@ -1452,6 +1631,67 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Updates the filter specified by the filter name.
+    #
+    # @option params [String] :action
+    #   Specifies the action that is to be applied to the findings that match
+    #   the filter.
+    #
+    # @option params [String] :description
+    #   The description of the filter.
+    #
+    # @option params [required, String] :detector_id
+    #
+    # @option params [required, String] :filter_name
+    #
+    # @option params [Types::FindingCriteria] :finding_criteria
+    #   Represents the criteria to be used in the filter for querying
+    #   findings.
+    #
+    # @option params [Integer] :rank
+    #   Specifies the position of the filter in the list of current filters.
+    #   Also specifies the order in which this filter is applied to the
+    #   findings.
+    #
+    # @return [Types::UpdateFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFilterResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_filter({
+    #     action: "NOOP", # accepts NOOP, ARCHIVE
+    #     description: "FilterDescription",
+    #     detector_id: "__string", # required
+    #     filter_name: "__string", # required
+    #     finding_criteria: {
+    #       criterion: {
+    #         "__string" => {
+    #           eq: ["__string"],
+    #           gt: 1,
+    #           gte: 1,
+    #           lt: 1,
+    #           lte: 1,
+    #           neq: ["__string"],
+    #         },
+    #       },
+    #     },
+    #     rank: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilter AWS API Documentation
+    #
+    # @overload update_filter(params = {})
+    # @param [Hash] params ({})
+    def update_filter(params = {}, options = {})
+      req = build_request(:update_filter, params)
+      req.send_request(options)
+    end
+
     # Marks specified Amazon GuardDuty findings as useful or not useful.
     #
     # @option params [String] :comments
@@ -1575,7 +1815,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
