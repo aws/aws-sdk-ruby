@@ -32,7 +32,7 @@ module Aws
         # For user-friendly uuid representation,
         # format binary bytes into uuid string format
         uuid_pattern = [ [ 3, 2, 1, 0 ], [ 5, 4 ], [ 7, 6 ], [ 8, 9 ], 10..15 ]
-        uuid_pattern.map {|p| p.map {|n| "%02x" % bytes[n] }.join }.join("-")
+        uuid_pattern.map {|p| p.map {|n| "%02x" % bytes.to_a[n] }.join }.join("-")
       end
 
       def format_timestamp(value)
