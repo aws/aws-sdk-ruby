@@ -130,8 +130,5 @@ describe 'Client Interface:' do
       expect(error.error_message).to eq('An internal server error occurred')
     end
 
-    it 'support exception event' do
-    end
-
   end
 end

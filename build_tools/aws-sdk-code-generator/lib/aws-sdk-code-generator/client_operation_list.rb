@@ -8,6 +8,9 @@ module AwsSdkCodeGenerator
       examples = options.fetch(:examples, {})
       client_examples = options.fetch(:client_examples, {})
       @operations = api['operations'].map do |name, operation|
+        if AwsSdkCodeGenerator::Helper.eventstream_input?(operation, api)
+          raise 'eventstream at operation input is not supported'
+        end
         method_name = Underscore.underscore(name)
         Operation.new(
           name: method_name,
