@@ -150,7 +150,7 @@ module Aws
       case value
       when Hash then true
       when ref.shape.struct_class then true
-      when Enumerator then ref.eventstream
+      when Enumerator then ref.eventstream && value.respond_to?(:event_types)
       else
         errors << expected_got(context, "a hash", value)
         false
