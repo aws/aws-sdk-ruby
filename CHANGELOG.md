@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.43 (2018-05-04)
+------------------
+
 * Feature - Aws::GuardDuty - Updated the API, and documentation for Amazon GuardDuty.
 
 2.11.42 (2018-05-03)
