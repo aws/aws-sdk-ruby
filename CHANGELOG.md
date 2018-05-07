@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AlexaForBusiness - Updated the API for Alexa For Business.
+
+* Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
 2.11.43 (2018-05-04)
 ------------------
 
