@@ -49,6 +49,7 @@ module Aws::S3
     BucketVersioningStatus = Shapes::StringShape.new(name: 'BucketVersioningStatus')
     Buckets = Shapes::ListShape.new(name: 'Buckets')
     BytesProcessed = Shapes::IntegerShape.new(name: 'BytesProcessed')
+    BytesReturned = Shapes::IntegerShape.new(name: 'BytesReturned')
     BytesScanned = Shapes::IntegerShape.new(name: 'BytesScanned')
     CORSConfiguration = Shapes::StructureShape.new(name: 'CORSConfiguration')
     CORSRule = Shapes::StructureShape.new(name: 'CORSRule')
@@ -1460,6 +1461,7 @@ module Aws::S3
 
     Progress.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: BytesScanned, location_name: "BytesScanned"))
     Progress.add_member(:bytes_processed, Shapes::ShapeRef.new(shape: BytesProcessed, location_name: "BytesProcessed"))
+    Progress.add_member(:bytes_returned, Shapes::ShapeRef.new(shape: BytesReturned, location_name: "BytesReturned"))
     Progress.struct_class = Types::Progress
 
     PutBucketAccelerateConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
@@ -1792,6 +1794,7 @@ module Aws::S3
 
     Stats.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: BytesScanned, location_name: "BytesScanned"))
     Stats.add_member(:bytes_processed, Shapes::ShapeRef.new(shape: BytesProcessed, location_name: "BytesProcessed"))
+    Stats.add_member(:bytes_returned, Shapes::ShapeRef.new(shape: BytesReturned, location_name: "BytesReturned"))
     Stats.struct_class = Types::Stats
 
     StorageClassAnalysis.add_member(:data_export, Shapes::ShapeRef.new(shape: StorageClassAnalysisDataExport, location_name: "DataExport"))

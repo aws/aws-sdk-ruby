@@ -35,12 +35,17 @@ module Aws::ElasticsearchService
     DescribeElasticsearchDomainsResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainsResponse')
     DescribeElasticsearchInstanceTypeLimitsRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchInstanceTypeLimitsRequest')
     DescribeElasticsearchInstanceTypeLimitsResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchInstanceTypeLimitsResponse')
+    DescribeReservedElasticsearchInstanceOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstanceOfferingsRequest')
+    DescribeReservedElasticsearchInstanceOfferingsResponse = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstanceOfferingsResponse')
+    DescribeReservedElasticsearchInstancesRequest = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstancesRequest')
+    DescribeReservedElasticsearchInstancesResponse = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstancesResponse')
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainInfo = Shapes::StructureShape.new(name: 'DomainInfo')
     DomainInfoList = Shapes::ListShape.new(name: 'DomainInfoList')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     DomainNameList = Shapes::ListShape.new(name: 'DomainNameList')
+    Double = Shapes::FloatShape.new(name: 'Double')
     EBSOptions = Shapes::StructureShape.new(name: 'EBSOptions')
     EBSOptionsStatus = Shapes::StructureShape.new(name: 'EBSOptionsStatus')
     ESPartitionInstanceType = Shapes::StringShape.new(name: 'ESPartitionInstanceType')
@@ -57,10 +62,13 @@ module Aws::ElasticsearchService
     EncryptionAtRestOptionsStatus = Shapes::StructureShape.new(name: 'EncryptionAtRestOptionsStatus')
     EndpointsMap = Shapes::MapShape.new(name: 'EndpointsMap')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    GUID = Shapes::StringShape.new(name: 'GUID')
     IdentityPoolId = Shapes::StringShape.new(name: 'IdentityPoolId')
+    InstanceCount = Shapes::IntegerShape.new(name: 'InstanceCount')
     InstanceCountLimits = Shapes::StructureShape.new(name: 'InstanceCountLimits')
     InstanceLimits = Shapes::StructureShape.new(name: 'InstanceLimits')
     InstanceRole = Shapes::StringShape.new(name: 'InstanceRole')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerClass = Shapes::IntegerShape.new(name: 'IntegerClass')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidTypeException = Shapes::StructureShape.new(name: 'InvalidTypeException')
@@ -89,7 +97,17 @@ module Aws::ElasticsearchService
     OptionState = Shapes::StringShape.new(name: 'OptionState')
     OptionStatus = Shapes::StructureShape.new(name: 'OptionStatus')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
+    PurchaseReservedElasticsearchInstanceOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedElasticsearchInstanceOfferingRequest')
+    PurchaseReservedElasticsearchInstanceOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseReservedElasticsearchInstanceOfferingResponse')
+    RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
+    RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
     RemoveTagsRequest = Shapes::StructureShape.new(name: 'RemoveTagsRequest')
+    ReservationToken = Shapes::StringShape.new(name: 'ReservationToken')
+    ReservedElasticsearchInstance = Shapes::StructureShape.new(name: 'ReservedElasticsearchInstance')
+    ReservedElasticsearchInstanceList = Shapes::ListShape.new(name: 'ReservedElasticsearchInstanceList')
+    ReservedElasticsearchInstanceOffering = Shapes::StructureShape.new(name: 'ReservedElasticsearchInstanceOffering')
+    ReservedElasticsearchInstanceOfferingList = Shapes::ListShape.new(name: 'ReservedElasticsearchInstanceOfferingList')
+    ReservedElasticsearchInstancePaymentOption = Shapes::StringShape.new(name: 'ReservedElasticsearchInstancePaymentOption')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -197,6 +215,24 @@ module Aws::ElasticsearchService
 
     DescribeElasticsearchInstanceTypeLimitsResponse.add_member(:limits_by_role, Shapes::ShapeRef.new(shape: LimitsByRole, location_name: "LimitsByRole"))
     DescribeElasticsearchInstanceTypeLimitsResponse.struct_class = Types::DescribeElasticsearchInstanceTypeLimitsResponse
+
+    DescribeReservedElasticsearchInstanceOfferingsRequest.add_member(:reserved_elasticsearch_instance_offering_id, Shapes::ShapeRef.new(shape: GUID, location: "querystring", location_name: "offeringId"))
+    DescribeReservedElasticsearchInstanceOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    DescribeReservedElasticsearchInstanceOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    DescribeReservedElasticsearchInstanceOfferingsRequest.struct_class = Types::DescribeReservedElasticsearchInstanceOfferingsRequest
+
+    DescribeReservedElasticsearchInstanceOfferingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeReservedElasticsearchInstanceOfferingsResponse.add_member(:reserved_elasticsearch_instance_offerings, Shapes::ShapeRef.new(shape: ReservedElasticsearchInstanceOfferingList, location_name: "ReservedElasticsearchInstanceOfferings"))
+    DescribeReservedElasticsearchInstanceOfferingsResponse.struct_class = Types::DescribeReservedElasticsearchInstanceOfferingsResponse
+
+    DescribeReservedElasticsearchInstancesRequest.add_member(:reserved_elasticsearch_instance_id, Shapes::ShapeRef.new(shape: GUID, location: "querystring", location_name: "reservationId"))
+    DescribeReservedElasticsearchInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    DescribeReservedElasticsearchInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    DescribeReservedElasticsearchInstancesRequest.struct_class = Types::DescribeReservedElasticsearchInstancesRequest
+
+    DescribeReservedElasticsearchInstancesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeReservedElasticsearchInstancesResponse.add_member(:reserved_elasticsearch_instances, Shapes::ShapeRef.new(shape: ReservedElasticsearchInstanceList, location_name: "ReservedElasticsearchInstances"))
+    DescribeReservedElasticsearchInstancesResponse.struct_class = Types::DescribeReservedElasticsearchInstancesResponse
 
     DomainInfo.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     DomainInfo.struct_class = Types::DomainInfo
@@ -342,9 +378,53 @@ module Aws::ElasticsearchService
     OptionStatus.add_member(:pending_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "PendingDeletion"))
     OptionStatus.struct_class = Types::OptionStatus
 
+    PurchaseReservedElasticsearchInstanceOfferingRequest.add_member(:reserved_elasticsearch_instance_offering_id, Shapes::ShapeRef.new(shape: GUID, required: true, location_name: "ReservedElasticsearchInstanceOfferingId"))
+    PurchaseReservedElasticsearchInstanceOfferingRequest.add_member(:reservation_name, Shapes::ShapeRef.new(shape: ReservationToken, required: true, location_name: "ReservationName"))
+    PurchaseReservedElasticsearchInstanceOfferingRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "InstanceCount"))
+    PurchaseReservedElasticsearchInstanceOfferingRequest.struct_class = Types::PurchaseReservedElasticsearchInstanceOfferingRequest
+
+    PurchaseReservedElasticsearchInstanceOfferingResponse.add_member(:reserved_elasticsearch_instance_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ReservedElasticsearchInstanceId"))
+    PurchaseReservedElasticsearchInstanceOfferingResponse.add_member(:reservation_name, Shapes::ShapeRef.new(shape: ReservationToken, location_name: "ReservationName"))
+    PurchaseReservedElasticsearchInstanceOfferingResponse.struct_class = Types::PurchaseReservedElasticsearchInstanceOfferingResponse
+
+    RecurringCharge.add_member(:recurring_charge_amount, Shapes::ShapeRef.new(shape: Double, location_name: "RecurringChargeAmount"))
+    RecurringCharge.add_member(:recurring_charge_frequency, Shapes::ShapeRef.new(shape: String, location_name: "RecurringChargeFrequency"))
+    RecurringCharge.struct_class = Types::RecurringCharge
+
+    RecurringChargeList.member = Shapes::ShapeRef.new(shape: RecurringCharge)
+
     RemoveTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ARN"))
     RemoveTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TagKeys"))
     RemoveTagsRequest.struct_class = Types::RemoveTagsRequest
+
+    ReservedElasticsearchInstance.add_member(:reservation_name, Shapes::ShapeRef.new(shape: ReservationToken, location_name: "ReservationName"))
+    ReservedElasticsearchInstance.add_member(:reserved_elasticsearch_instance_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ReservedElasticsearchInstanceId"))
+    ReservedElasticsearchInstance.add_member(:reserved_elasticsearch_instance_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedElasticsearchInstanceOfferingId"))
+    ReservedElasticsearchInstance.add_member(:elasticsearch_instance_type, Shapes::ShapeRef.new(shape: ESPartitionInstanceType, location_name: "ElasticsearchInstanceType"))
+    ReservedElasticsearchInstance.add_member(:start_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "StartTime"))
+    ReservedElasticsearchInstance.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "Duration"))
+    ReservedElasticsearchInstance.add_member(:fixed_price, Shapes::ShapeRef.new(shape: Double, location_name: "FixedPrice"))
+    ReservedElasticsearchInstance.add_member(:usage_price, Shapes::ShapeRef.new(shape: Double, location_name: "UsagePrice"))
+    ReservedElasticsearchInstance.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "CurrencyCode"))
+    ReservedElasticsearchInstance.add_member(:elasticsearch_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ElasticsearchInstanceCount"))
+    ReservedElasticsearchInstance.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
+    ReservedElasticsearchInstance.add_member(:payment_option, Shapes::ShapeRef.new(shape: ReservedElasticsearchInstancePaymentOption, location_name: "PaymentOption"))
+    ReservedElasticsearchInstance.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
+    ReservedElasticsearchInstance.struct_class = Types::ReservedElasticsearchInstance
+
+    ReservedElasticsearchInstanceList.member = Shapes::ShapeRef.new(shape: ReservedElasticsearchInstance)
+
+    ReservedElasticsearchInstanceOffering.add_member(:reserved_elasticsearch_instance_offering_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ReservedElasticsearchInstanceOfferingId"))
+    ReservedElasticsearchInstanceOffering.add_member(:elasticsearch_instance_type, Shapes::ShapeRef.new(shape: ESPartitionInstanceType, location_name: "ElasticsearchInstanceType"))
+    ReservedElasticsearchInstanceOffering.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "Duration"))
+    ReservedElasticsearchInstanceOffering.add_member(:fixed_price, Shapes::ShapeRef.new(shape: Double, location_name: "FixedPrice"))
+    ReservedElasticsearchInstanceOffering.add_member(:usage_price, Shapes::ShapeRef.new(shape: Double, location_name: "UsagePrice"))
+    ReservedElasticsearchInstanceOffering.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "CurrencyCode"))
+    ReservedElasticsearchInstanceOffering.add_member(:payment_option, Shapes::ShapeRef.new(shape: ReservedElasticsearchInstancePaymentOption, location_name: "PaymentOption"))
+    ReservedElasticsearchInstanceOffering.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargeList, location_name: "RecurringCharges"))
+    ReservedElasticsearchInstanceOffering.struct_class = Types::ReservedElasticsearchInstanceOffering
+
+    ReservedElasticsearchInstanceOfferingList.member = Shapes::ShapeRef.new(shape: ReservedElasticsearchInstanceOffering)
 
     SnapshotOptions.add_member(:automated_snapshot_start_hour, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "AutomatedSnapshotStartHour"))
     SnapshotOptions.struct_class = Types::SnapshotOptions
@@ -514,6 +594,42 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:describe_reserved_elasticsearch_instance_offerings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReservedElasticsearchInstanceOfferings"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/reservedInstanceOfferings"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReservedElasticsearchInstanceOfferingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReservedElasticsearchInstanceOfferingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_reserved_elasticsearch_instances, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReservedElasticsearchInstances"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/reservedInstances"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReservedElasticsearchInstancesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReservedElasticsearchInstancesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_domain_names, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDomainNames"
         o.http_method = "GET"
@@ -568,6 +684,20 @@ module Aws::ElasticsearchService
         o.output = Shapes::ShapeRef.new(shape: ListTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:purchase_reserved_elasticsearch_instance_offering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PurchaseReservedElasticsearchInstanceOffering"
+        o.http_method = "POST"
+        o.http_request_uri = "/2015-01-01/es/purchaseReservedInstanceOffering"
+        o.input = Shapes::ShapeRef.new(shape: PurchaseReservedElasticsearchInstanceOfferingRequest)
+        o.output = Shapes::ShapeRef.new(shape: PurchaseReservedElasticsearchInstanceOfferingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

@@ -1251,7 +1251,7 @@ module Aws::AlexaForBusiness
     #
     #       {
     #         device_arn: "Arn", # required
-    #         event_type: "CONNECTION_STATUS", # accepts CONNECTION_STATUS
+    #         event_type: "CONNECTION_STATUS", # accepts CONNECTION_STATUS, DEVICE_STATUS
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }

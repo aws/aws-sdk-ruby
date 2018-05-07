@@ -882,7 +882,7 @@ module Aws::AlexaForBusiness
     #   resp.device.software_version #=> String
     #   resp.device.mac_address #=> String
     #   resp.device.room_arn #=> String
-    #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE"
+    #   resp.device.device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED"
     #   resp.device.device_status_info.device_status_details #=> Array
     #   resp.device.device_status_info.device_status_details[0].code #=> String, one of "DEVICE_SOFTWARE_UPDATE_NEEDED", "DEVICE_WAS_OFFLINE"
     #   resp.device.device_status_info.connection_status #=> String, one of "ONLINE", "OFFLINE"
@@ -1068,7 +1068,7 @@ module Aws::AlexaForBusiness
     #
     #   resp = client.list_device_events({
     #     device_arn: "Arn", # required
-    #     event_type: "CONNECTION_STATUS", # accepts CONNECTION_STATUS
+    #     event_type: "CONNECTION_STATUS", # accepts CONNECTION_STATUS, DEVICE_STATUS
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -1076,7 +1076,7 @@ module Aws::AlexaForBusiness
     # @example Response structure
     #
     #   resp.device_events #=> Array
-    #   resp.device_events[0].type #=> String, one of "CONNECTION_STATUS"
+    #   resp.device_events[0].type #=> String, one of "CONNECTION_STATUS", "DEVICE_STATUS"
     #   resp.device_events[0].value #=> String
     #   resp.device_events[0].timestamp #=> Time
     #   resp.next_token #=> String
@@ -1478,7 +1478,7 @@ module Aws::AlexaForBusiness
     #   resp.devices[0].device_name #=> String
     #   resp.devices[0].software_version #=> String
     #   resp.devices[0].mac_address #=> String
-    #   resp.devices[0].device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE"
+    #   resp.devices[0].device_status #=> String, one of "READY", "PENDING", "WAS_OFFLINE", "DEREGISTERED"
     #   resp.devices[0].room_arn #=> String
     #   resp.devices[0].room_name #=> String
     #   resp.devices[0].device_status_info.device_status_details #=> Array
@@ -2120,7 +2120,7 @@ module Aws::AlexaForBusiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-alexaforbusiness'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

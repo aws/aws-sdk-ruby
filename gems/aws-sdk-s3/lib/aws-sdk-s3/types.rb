@@ -5794,11 +5794,16 @@ module Aws::S3
     #   Current number of uncompressed object bytes processed.
     #   @return [Integer]
     #
+    # @!attribute [rw] bytes_returned
+    #   Current number of bytes of records payload data returned.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Progress AWS API Documentation
     #
     class Progress < Struct.new(
       :bytes_scanned,
-      :bytes_processed)
+      :bytes_processed,
+      :bytes_returned)
       include Aws::Structure
     end
 
@@ -8166,11 +8171,16 @@ module Aws::S3
     #   Total number of uncompressed object bytes processed.
     #   @return [Integer]
     #
+    # @!attribute [rw] bytes_returned
+    #   Total number of bytes of records payload data returned.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Stats AWS API Documentation
     #
     class Stats < Struct.new(
       :bytes_scanned,
-      :bytes_processed)
+      :bytes_processed,
+      :bytes_returned)
       include Aws::Structure
     end
 
