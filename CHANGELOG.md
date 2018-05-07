@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.44 (2018-05-07)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API for Alexa For Business.
 
 * Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
