@@ -6,6 +6,7 @@ module AwsSdkCodeGenerator
     def initialize(options)
       api = options.fetch(:api)
       examples = options.fetch(:examples, {})
+      module_name = options.fetch(:module_name)
       client_examples = options.fetch(:client_examples, {})
       @operations = api['operations'].map do |name, operation|
         if AwsSdkCodeGenerator::Helper.eventstream_input?(operation, api)
@@ -16,6 +17,7 @@ module AwsSdkCodeGenerator
           name: method_name,
           documentation: ClientOperationDocumentation.new(
             name: name,
+            module_name: module_name,
             method_name: method_name,
             operation: operation,
             api: api,

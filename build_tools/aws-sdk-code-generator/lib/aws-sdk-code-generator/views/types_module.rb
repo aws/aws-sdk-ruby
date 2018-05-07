@@ -90,8 +90,8 @@ module AwsSdkCodeGenerator
       end
 
       def eventstream_docs(shape_name)
-        # current eventstream support is response only
-        # TODO for eventstream class docs
+        "EventStream is an Enumerator of Events.\n"\
+        " #event_types #=> Array, returns all modeled event types in the stream"
       end
 
       def input_example_docs(shape_name)
