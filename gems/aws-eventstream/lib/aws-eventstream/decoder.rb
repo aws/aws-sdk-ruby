@@ -10,7 +10,7 @@ module Aws
     #
     # * {#decode} - decodes messages from an IO like object responds
     #   to #read that containing binary data, returning decoded
-    #   Aws::EventStream::Message along the way or wrapped in a enumerator
+    #   Aws::EventStream::Message along the way or wrapped in an enumerator
     #
     # ## Examples
     #
@@ -35,22 +35,22 @@ module Aws
     #
     # ## Examples
     #
-    #   # chunk containing exact one message data
+    #   # chunk containing exactly one message data
     #   message, chunk_eof = decoder.decode_chunk(chunk_str)
     #   message
     #   # => Aws::EventStream::Message
     #   chunk_eof
     #   # => true
     #
-    #   # chunk containing partial of single message data
+    #   # chunk containing a partial message
     #   message, chunk_eof = decoder.decode_chunk(chunk_str)
     #   message
     #   # => nil
     #   chunk_eof
     #   # => true
-    #   # chunk data is saved at message_buffer of the decoder
+    #   # chunk data is saved at decoder's message_buffer
     #
-    #   # chunk containing more that one message data
+    #   # chunk containing more that one data message
     #   message, chunk_eof = decoder.decode_chunk(chunk_str)
     #   message
     #   # => Aws::EventStream::Message
@@ -73,7 +73,7 @@ module Aws
       OVERHEAD_LENGTH = 16
 
       # @options options [Boolean] format (true) When `false`
-      #   disable user-friendly formating for message header values
+      #   disable user-friendly formatting for message header values
       #   including timestamp and uuid etc.
       #
       def initialize(options = {})

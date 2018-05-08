@@ -72,8 +72,8 @@ module Aws
         it '#decode_chunk buffers partial message' do
           file = Dir.glob(File.expand_path('../fixtures/encoded/positive/*', __FILE__)).first
           data = File.read(file)
-          first_part = data[0..50]
-          second_part = data[51..-1]
+          first_part = data[0..13]
+          second_part = data[14..-1]
           decoder = Decoder.new(format: false)
 
           msg, eof = decoder.decode_chunk(first_part)
