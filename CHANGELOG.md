@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.45 (2018-05-08)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
