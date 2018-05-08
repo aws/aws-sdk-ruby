@@ -2926,7 +2926,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-ec2-fleet.html
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -11078,6 +11078,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].tags[0].key #=> String
     #   resp.reservations[0].instances[0].tags[0].value #=> String
     #   resp.reservations[0].instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
+    #   resp.reservations[0].instances[0].cpu_options.core_count #=> Integer
+    #   resp.reservations[0].instances[0].cpu_options.threads_per_core #=> Integer
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -23618,6 +23620,15 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
     #
+    # @option params [Types::CpuOptionsRequest] :cpu_options
+    #   The CPU options for the instance. For more information, see
+    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Reservation#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
@@ -23743,6 +23754,10 @@ module Aws::EC2
     #     credit_specification: {
     #       cpu_credits: "String", # required
     #     },
+    #     cpu_options: {
+    #       core_count: 1,
+    #       threads_per_core: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -23843,6 +23858,8 @@ module Aws::EC2
     #   resp.instances[0].tags[0].key #=> String
     #   resp.instances[0].tags[0].value #=> String
     #   resp.instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
+    #   resp.instances[0].cpu_options.core_count #=> Integer
+    #   resp.instances[0].cpu_options.threads_per_core #=> Integer
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -24599,7 +24616,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

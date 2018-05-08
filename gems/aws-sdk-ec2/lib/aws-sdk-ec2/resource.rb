@@ -167,6 +167,10 @@ module Aws::EC2
     #     credit_specification: {
     #       cpu_credits: "String", # required
     #     },
+    #     cpu_options: {
+    #       core_count: 1,
+    #       threads_per_core: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -360,6 +364,14 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    # @option options [Types::CpuOptionsRequest] :cpu_options
+    #   The CPU options for the instance. For more information, see
+    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []

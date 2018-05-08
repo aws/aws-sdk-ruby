@@ -283,6 +283,12 @@ module Aws::EC2
       data[:virtualization_type]
     end
 
+    # The CPU options for the instance.
+    # @return [Types::CpuOptions]
+    def cpu_options
+      data[:cpu_options]
+    end
+
     # @!endgroup
 
     # @return [Client]

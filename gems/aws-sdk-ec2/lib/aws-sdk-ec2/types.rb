@@ -2609,6 +2609,53 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The CPU options for the instance.
+    #
+    # @!attribute [rw] core_count
+    #   The number of CPU cores for the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads per CPU core.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptions AWS API Documentation
+    #
+    class CpuOptions < Struct.new(
+      :core_count,
+      :threads_per_core)
+      include Aws::Structure
+    end
+
+    # The CPU options for the instance. Both the core count and threads per
+    # core must be specified in the request.
+    #
+    # @note When making an API call, you may pass CpuOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_count: 1,
+    #         threads_per_core: 1,
+    #       }
+    #
+    # @!attribute [rw] core_count
+    #   The number of CPU cores for the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads per CPU core. To disable Intel Hyper-Threading
+    #   Technology for the instance, specify a value of `1`. Otherwise,
+    #   specify the default value of `2`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptionsRequest AWS API Documentation
+    #
+    class CpuOptionsRequest < Struct.new(
+      :core_count,
+      :threads_per_core)
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateCustomerGateway.
     #
     # @note When making an API call, you may pass CreateCustomerGatewayRequest
@@ -17983,6 +18030,10 @@ module Aws::EC2
     #   The virtualization type of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_options
+    #   The CPU options for the instance.
+    #   @return [Types::CpuOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -18024,7 +18075,8 @@ module Aws::EC2
       :sriov_net_support,
       :state_reason,
       :tags,
-      :virtualization_type)
+      :virtualization_type,
+      :cpu_options)
       include Aws::Structure
     end
 
@@ -26492,6 +26544,10 @@ module Aws::EC2
     #         credit_specification: {
     #           cpu_credits: "String", # required
     #         },
+    #         cpu_options: {
+    #           core_count: 1,
+    #           threads_per_core: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] block_device_mappings
@@ -26747,6 +26803,16 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
     #   @return [Types::CreditSpecificationRequest]
     #
+    # @!attribute [rw] cpu_options
+    #   The CPU options for the instance. For more information, see
+    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #   @return [Types::CpuOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
     class RunInstancesRequest < Struct.new(
@@ -26779,7 +26845,8 @@ module Aws::EC2
       :tag_specifications,
       :launch_template,
       :instance_market_options,
-      :credit_specification)
+      :credit_specification,
+      :cpu_options)
       include Aws::Structure
     end
 

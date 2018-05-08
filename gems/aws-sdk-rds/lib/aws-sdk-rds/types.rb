@@ -565,10 +565,6 @@ module Aws::RDS
     #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
     #   KMS key alias for the KMS encryption key.
     #
-    #   If you copy an unencrypted DB cluster snapshot and specify a value
-    #   for the `KmsKeyId` parameter, Amazon RDS encrypts the target DB
-    #   cluster snapshot using the specified KMS encryption key.
-    #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a
     #   new KMS encryption key. If you don't specify a value for
@@ -584,6 +580,9 @@ module Aws::RDS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in
     #   another AWS Region.
+    #
+    #   If you copy an unencrypted DB cluster snapshot and specify a value
+    #   for the `KmsKeyId` parameter, an error is returned.
     #   @return [String]
     #
     # @!attribute [rw] pre_signed_url

@@ -137,6 +137,8 @@ module Aws::EC2
     CopyImageResult = Shapes::StructureShape.new(name: 'CopyImageResult')
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
     CopySnapshotResult = Shapes::StructureShape.new(name: 'CopySnapshotResult')
+    CpuOptions = Shapes::StructureShape.new(name: 'CpuOptions')
+    CpuOptionsRequest = Shapes::StructureShape.new(name: 'CpuOptionsRequest')
     CreateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'CreateCustomerGatewayRequest')
     CreateCustomerGatewayResult = Shapes::StructureShape.new(name: 'CreateCustomerGatewayResult')
     CreateDefaultSubnetRequest = Shapes::StructureShape.new(name: 'CreateDefaultSubnetRequest')
@@ -1591,11 +1593,11 @@ module Aws::EC2
 
     ConversionIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
-    ConversionTask.add_member(:conversion_task_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "conversionTaskId"))
+    ConversionTask.add_member(:conversion_task_id, Shapes::ShapeRef.new(shape: String, location_name: "conversionTaskId"))
     ConversionTask.add_member(:expiration_time, Shapes::ShapeRef.new(shape: String, location_name: "expirationTime"))
     ConversionTask.add_member(:import_instance, Shapes::ShapeRef.new(shape: ImportInstanceTaskDetails, location_name: "importInstance"))
     ConversionTask.add_member(:import_volume, Shapes::ShapeRef.new(shape: ImportVolumeTaskDetails, location_name: "importVolume"))
-    ConversionTask.add_member(:state, Shapes::ShapeRef.new(shape: ConversionTaskState, required: true, location_name: "state"))
+    ConversionTask.add_member(:state, Shapes::ShapeRef.new(shape: ConversionTaskState, location_name: "state"))
     ConversionTask.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     ConversionTask.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ConversionTask.struct_class = Types::ConversionTask
@@ -1636,6 +1638,14 @@ module Aws::EC2
 
     CopySnapshotResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     CopySnapshotResult.struct_class = Types::CopySnapshotResult
+
+    CpuOptions.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "coreCount"))
+    CpuOptions.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "threadsPerCore"))
+    CpuOptions.struct_class = Types::CpuOptions
+
+    CpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CoreCount"))
+    CpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "ThreadsPerCore"))
+    CpuOptionsRequest.struct_class = Types::CpuOptionsRequest
 
     CreateCustomerGatewayRequest.add_member(:bgp_asn, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "BgpAsn"))
     CreateCustomerGatewayRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IpAddress"))
@@ -3150,9 +3160,9 @@ module Aws::EC2
     DiskImage.struct_class = Types::DiskImage
 
     DiskImageDescription.add_member(:checksum, Shapes::ShapeRef.new(shape: String, location_name: "checksum"))
-    DiskImageDescription.add_member(:format, Shapes::ShapeRef.new(shape: DiskImageFormat, required: true, location_name: "format"))
-    DiskImageDescription.add_member(:import_manifest_url, Shapes::ShapeRef.new(shape: String, required: true, location_name: "importManifestUrl"))
-    DiskImageDescription.add_member(:size, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "size"))
+    DiskImageDescription.add_member(:format, Shapes::ShapeRef.new(shape: DiskImageFormat, location_name: "format"))
+    DiskImageDescription.add_member(:import_manifest_url, Shapes::ShapeRef.new(shape: String, location_name: "importManifestUrl"))
+    DiskImageDescription.add_member(:size, Shapes::ShapeRef.new(shape: Long, location_name: "size"))
     DiskImageDescription.struct_class = Types::DiskImageDescription
 
     DiskImageDetail.add_member(:bytes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "bytes"))
@@ -3162,7 +3172,7 @@ module Aws::EC2
 
     DiskImageList.member = Shapes::ShapeRef.new(shape: DiskImage)
 
-    DiskImageVolumeDescription.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
+    DiskImageVolumeDescription.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     DiskImageVolumeDescription.add_member(:size, Shapes::ShapeRef.new(shape: Long, location_name: "size"))
     DiskImageVolumeDescription.struct_class = Types::DiskImageVolumeDescription
 
@@ -3688,7 +3698,7 @@ module Aws::EC2
     ImportInstanceTaskDetails.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ImportInstanceTaskDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     ImportInstanceTaskDetails.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformValues, location_name: "platform"))
-    ImportInstanceTaskDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: ImportInstanceVolumeDetailSet, required: true, location_name: "volumes"))
+    ImportInstanceTaskDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: ImportInstanceVolumeDetailSet, location_name: "volumes"))
     ImportInstanceTaskDetails.struct_class = Types::ImportInstanceTaskDetails
 
     ImportInstanceVolumeDetailItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
@@ -3743,11 +3753,11 @@ module Aws::EC2
     ImportVolumeResult.add_member(:conversion_task, Shapes::ShapeRef.new(shape: ConversionTask, location_name: "conversionTask"))
     ImportVolumeResult.struct_class = Types::ImportVolumeResult
 
-    ImportVolumeTaskDetails.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, required: true, location_name: "availabilityZone"))
-    ImportVolumeTaskDetails.add_member(:bytes_converted, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "bytesConverted"))
+    ImportVolumeTaskDetails.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    ImportVolumeTaskDetails.add_member(:bytes_converted, Shapes::ShapeRef.new(shape: Long, location_name: "bytesConverted"))
     ImportVolumeTaskDetails.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
-    ImportVolumeTaskDetails.add_member(:image, Shapes::ShapeRef.new(shape: DiskImageDescription, required: true, location_name: "image"))
-    ImportVolumeTaskDetails.add_member(:volume, Shapes::ShapeRef.new(shape: DiskImageVolumeDescription, required: true, location_name: "volume"))
+    ImportVolumeTaskDetails.add_member(:image, Shapes::ShapeRef.new(shape: DiskImageDescription, location_name: "image"))
+    ImportVolumeTaskDetails.add_member(:volume, Shapes::ShapeRef.new(shape: DiskImageVolumeDescription, location_name: "volume"))
     ImportVolumeTaskDetails.struct_class = Types::ImportVolumeTaskDetails
 
     Instance.add_member(:ami_launch_index, Shapes::ShapeRef.new(shape: Integer, location_name: "amiLaunchIndex"))
@@ -3789,6 +3799,7 @@ module Aws::EC2
     Instance.add_member(:state_reason, Shapes::ShapeRef.new(shape: StateReason, location_name: "stateReason"))
     Instance.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Instance.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: VirtualizationType, location_name: "virtualizationType"))
+    Instance.add_member(:cpu_options, Shapes::ShapeRef.new(shape: CpuOptions, location_name: "cpuOptions"))
     Instance.struct_class = Types::Instance
 
     InstanceAttribute.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
@@ -5272,6 +5283,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:launch_template, Shapes::ShapeRef.new(shape: LaunchTemplateSpecification, location_name: "LaunchTemplate"))
     RunInstancesRequest.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: InstanceMarketOptionsRequest, location_name: "InstanceMarketOptions"))
     RunInstancesRequest.add_member(:credit_specification, Shapes::ShapeRef.new(shape: CreditSpecificationRequest, location_name: "CreditSpecification"))
+    RunInstancesRequest.add_member(:cpu_options, Shapes::ShapeRef.new(shape: CpuOptionsRequest, location_name: "CpuOptions"))
     RunInstancesRequest.struct_class = Types::RunInstancesRequest
 
     RunScheduledInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
