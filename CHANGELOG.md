@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.46 (2018-05-10)
+------------------
+
 * Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
