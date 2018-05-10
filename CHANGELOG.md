@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Budgets - Updated the API, and documentation for AWS Budgets.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws:: - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
 2.11.45 (2018-05-08)
 ------------------
 
