@@ -1,5 +1,3 @@
-require 'aws-eventstream'
-
 module Aws
   module Rest
     module Response
@@ -46,12 +44,8 @@ module Aws
         end
 
         def parse_eventstream(body)
-          event_parser = Aws::Binary::EventParser.new(@parser_class, @rules[:payload_member])
-          @rules[:payload_member].shape.struct_class.new do |eventstream|
-            Aws::EventStream::Decoder.new.decode(body) do |raw|
-              eventstream.yield(event_parser.apply(raw))
-            end
-          end
+          # body contains an array of parsed event when they arrive
+          @rules[:payload_member].shape.struct_class.new(body)
         end
 
       end

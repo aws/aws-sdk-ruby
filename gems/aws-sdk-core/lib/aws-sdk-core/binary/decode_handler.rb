@@ -31,11 +31,7 @@ module Aws
         end
 
         context.http_response.on_success(200) do
-          # rewind raw binary stream for eventstream
-          if context.http_response.raw_stream.respond_to?(:rewind)
-            context.http_response.raw_stream.rewind
-          end
-          context.http_response.body = context.http_response.raw_stream
+          context.http_response.body = context.http_response.body.events
         end
 
         context.http_response.on_error do

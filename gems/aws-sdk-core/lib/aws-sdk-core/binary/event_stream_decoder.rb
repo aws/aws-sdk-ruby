@@ -14,7 +14,11 @@ module Aws
         @event_parser = EventParser.new(parser_class(protocol), rules)
         @stream_class = extract_stream_class(rules.shape.struct_class)
         @emitter = event_stream_handler.event_emitter
+        @events = []
       end
+
+      # @return [Array] events Array of arrived event objects
+      attr_reader :events
 
       def write(chunk)
         raw_event, eof = @decoder.decode_chunk(chunk)
@@ -30,6 +34,7 @@ module Aws
 
       def emit_event(raw_event)
         event = @event_parser.apply(raw_event)
+        @events << event
         @emitter.signal(event.event_type, event) unless @emitter.nil?
       end
 

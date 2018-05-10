@@ -6028,10 +6028,12 @@ module Aws::S3
     #   For :stats event available at #on_stats_event callback and response eventstream enumerator:
     #   event.details.bytes_scanned #=> Integer
     #   event.details.bytes_processed #=> Integer
+    #   event.details.bytes_returned #=> Integer
     #
     #   For :progress event available at #on_progress_event callback and response eventstream enumerator:
     #   event.details.bytes_scanned #=> Integer
     #   event.details.bytes_processed #=> Integer
+    #   event.details.bytes_returned #=> Integer
     #
     #   For :cont event available at #on_cont_event callback and response eventstream enumerator:
     #    #=> EmptyStruct
