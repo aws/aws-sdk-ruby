@@ -166,7 +166,7 @@ module Aws::Budgets
     # @option params [Array<Types::NotificationWithSubscribers>] :notifications_with_subscribers
     #   A notification that you want to associate with a budget. A budget can
     #   have up to five notifications, and each notification can have one SNS
-    #   subscriber and up to 10 email subscribers. If you include
+    #   subscriber and up to ten email subscribers. If you include
     #   notifications and subscribers in your `CreateBudget` call, AWS creates
     #   the notifications and subscribers for you.
     #
@@ -248,7 +248,7 @@ module Aws::Budgets
     #   create a notification for.
     #
     # @option params [required, String] :budget_name
-    #   The name of the budget that you want AWS to notify you about. Budget
+    #   The name of the budget that you want AWS to notified you about. Budget
     #   names must be unique within an account.
     #
     # @option params [required, Types::Notification] :notification
@@ -257,7 +257,7 @@ module Aws::Budgets
     # @option params [required, Array<Types::Subscriber>] :subscribers
     #   A list of subscribers that you want to associate with the
     #   notification. Each notification can have one SNS subscriber and up to
-    #   10 email subscribers.
+    #   ten email subscribers.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -291,8 +291,8 @@ module Aws::Budgets
     # notification before you create the subscriber.
     #
     # @option params [required, String] :account_id
-    #   The `accountId` that is associated with the budget that you want to
-    #   create a subscriber for.
+    #   The `accountId` associated with the budget that you want to create a
+    #   subscriber for.
     #
     # @option params [required, String] :budget_name
     #   The name of the budget that you want to subscribe to. Budget names
@@ -332,8 +332,8 @@ module Aws::Budgets
 
     # Deletes a budget. You can delete your budget at any time.
     #
-    # Deleting a budget also deletes the notifications and subscribers that
-    # are associated with that budget.
+    # **Deleting a budget also deletes the notifications and subscribers
+    # associated with that budget.**
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget that you want to
@@ -360,8 +360,8 @@ module Aws::Budgets
 
     # Deletes a notification.
     #
-    # Deleting a notification also deletes the subscribers that are
-    # associated with the notification.
+    # **Deleting a notification also deletes the subscribers associated with
+    # the notification.**
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget whose notification
@@ -397,8 +397,8 @@ module Aws::Budgets
 
     # Deletes a subscriber.
     #
-    # Deleting the last subscriber to a notification also deletes the
-    # notification.
+    # **Deleting the last subscriber to a notification also deletes the
+    # notification.**
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget whose subscriber
@@ -494,7 +494,7 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Lists the budgets that are associated with an account.
+    # Lists the budgets associated with an account.
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budgets that you want
@@ -502,11 +502,11 @@ module Aws::Budgets
     #
     # @option params [Integer] :max_results
     #   Optional integer. Specifies the maximum number of results to return in
-    #   a response.
+    #   response.
     #
     # @option params [String] :next_token
-    #   The pagination token that you include in your request to indicate the
-    #   next set of results that you want to retrieve.
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
     #
     # @return [Types::DescribeBudgetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -558,7 +558,7 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Lists the notifications that are associated with a budget.
+    # Lists the notifications associated with a budget.
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget whose notifications
@@ -569,11 +569,11 @@ module Aws::Budgets
     #
     # @option params [Integer] :max_results
     #   Optional integer. Specifies the maximum number of results to return in
-    #   a response.
+    #   response.
     #
     # @option params [String] :next_token
-    #   The pagination token that you include in your request to indicate the
-    #   next set of results that you want to retrieve.
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
     #
     # @return [Types::DescribeNotificationsForBudgetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -605,7 +605,7 @@ module Aws::Budgets
       req.send_request(options)
     end
 
-    # Lists the subscribers that are associated with a notification.
+    # Lists the subscribers associated with a notification.
     #
     # @option params [required, String] :account_id
     #   The `accountId` that is associated with the budget whose subscribers
@@ -619,11 +619,11 @@ module Aws::Budgets
     #
     # @option params [Integer] :max_results
     #   Optional integer. Specifies the maximum number of results to return in
-    #   a response.
+    #   response.
     #
     # @option params [String] :next_token
-    #   The pagination token that you include in your request to indicate the
-    #   next set of results that you want to retrieve.
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
     #
     # @return [Types::DescribeSubscribersForNotificationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -660,7 +660,7 @@ module Aws::Budgets
     end
 
     # Updates a budget. You can change every part of a budget except for the
-    # `budgetName` and the `calculatedSpend`. When you modify a budget, the
+    # `budgetName` and the `calculatedSpend`. When a budget is modified, the
     # `calculatedSpend` drops to zero until AWS has new usage data to use
     # for forecasting.
     #
@@ -735,7 +735,7 @@ module Aws::Budgets
     #   The name of the budget whose notification you want to update.
     #
     # @option params [required, Types::Notification] :old_notification
-    #   The previous notification that is associated with a budget.
+    #   The previous notification associated with a budget.
     #
     # @option params [required, Types::Notification] :new_notification
     #   The updated notification to be associated with a budget.
@@ -781,10 +781,10 @@ module Aws::Budgets
     #   The notification whose subscriber you want to update.
     #
     # @option params [required, Types::Subscriber] :old_subscriber
-    #   The previous subscriber that is associated with a budget notification.
+    #   The previous subscriber associated with a budget notification.
     #
     # @option params [required, Types::Subscriber] :new_subscriber
-    #   The updated subscriber that is associated with a budget notification.
+    #   The updated subscriber associated with a budget notification.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -829,7 +829,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

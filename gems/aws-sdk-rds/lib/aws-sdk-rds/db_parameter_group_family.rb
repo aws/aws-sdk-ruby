@@ -214,7 +214,7 @@ module Aws::RDS
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     # @return [Parameter::Collection]
     def engine_default_parameters(options = {})
       batches = Enumerator.new do |y|

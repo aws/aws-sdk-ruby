@@ -3885,13 +3885,13 @@ module Aws::EC2
     #
     # @!attribute [rw] protocol
     #   The protocol. A value of `-1` or `all` means all protocols. If you
-    #   specify `all`, `-1`, or a protocol number other than `tcp`, `udp`,
-    #   or `icmp`, traffic on all ports is allowed, regardless of any ports
-    #   or ICMP types or codes you specify. If you specify protocol `58`
-    #   (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types
-    #   and codes allowed, regardless of any that you specify. If you
-    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
-    #   must specify an ICMP type and code.
+    #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
+    #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
+    #   any ports or ICMP types or codes you specify. If you specify
+    #   protocol `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   all ICMP types and codes allowed, regardless of any that you
+    #   specify. If you specify protocol `58` (ICMPv6) and specify an IPv6
+    #   CIDR block, you must specify an ICMP type and code.
     #   @return [String]
     #
     # @!attribute [rw] rule_action
@@ -16026,6 +16026,7 @@ module Aws::EC2
     #       {
     #         instance_id: "String", # required
     #         dry_run: false,
+    #         latest: false,
     #       }
     #
     # @!attribute [rw] instance_id
@@ -16039,11 +16040,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] latest
+    #   When enabled, retrieves the latest console output for the instance.
+    #
+    #   Default: disabled (`false`)
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutputRequest AWS API Documentation
     #
     class GetConsoleOutputRequest < Struct.new(
       :instance_id,
-      :dry_run)
+      :dry_run,
+      :latest)
       include Aws::Structure
     end
 
@@ -16054,12 +16062,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] output
-    #   The console output, Base64-encoded. If using a command line tool,
-    #   the tool decodes the output for you.
+    #   The console output, base64-encoded. If you are using a command line
+    #   tool, the tool decodes the output for you.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   The time the output was last updated.
+    #   The time at which the output was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutputResult AWS API Documentation

@@ -561,6 +561,7 @@ module Aws::EC2
     #
     #   instance.console_output({
     #     dry_run: false,
+    #     latest: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -568,6 +569,10 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Boolean] :latest
+    #   When enabled, retrieves the latest console output for the instance.
+    #
+    #   Default: disabled (`false`)
     # @return [Types::GetConsoleOutputResult]
     def console_output(options = {})
       options = options.merge(instance_id: @id)

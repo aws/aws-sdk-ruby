@@ -500,6 +500,99 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Backtracks a DB cluster to a specific time, without creating a new DB
+    # cluster.
+    #
+    # For more information on backtracking, see [ Backtracking an Aurora DB
+    # Cluster][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Managing.Backtrack.html
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster to be backtracked. This
+    #   parameter is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `my-cluster1`
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :backtrack_to
+    #   The timestamp of the time to backtrack the DB cluster to, specified in
+    #   ISO 8601 format. For more information about ISO 8601, see the [ISO8601
+    #   Wikipedia page.][1]
+    #
+    #   <note markdown="1"> If the specified time is not a consistent time for the DB cluster,
+    #   Aurora automatically chooses the nearest possible consistent time for
+    #   the DB cluster.
+    #
+    #    </note>
+    #
+    #   Constraints:
+    #
+    #   * Must contain a valid ISO 8601 timestamp.
+    #
+    #   * Cannot contain a timestamp set in the future.
+    #
+    #   Example: `2017-07-08T18:00Z`
+    #
+    #
+    #
+    #   [1]: http://en.wikipedia.org/wiki/ISO_8601
+    #
+    # @option params [Boolean] :force
+    #   A value that, if specified, forces the DB cluster to backtrack when
+    #   binary logging is enabled. Otherwise, an error occurs when binary
+    #   logging is enabled.
+    #
+    # @option params [Boolean] :use_earliest_time_on_point_in_time_unavailable
+    #   If *BacktrackTo* is set to a timestamp earlier than the earliest
+    #   backtrack time, this value backtracks the DB cluster to the earliest
+    #   possible backtrack time. Otherwise, an error occurs.
+    #
+    # @return [Types::DBClusterBacktrack] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterBacktrack#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBClusterBacktrack#backtrack_identifier #backtrack_identifier} => String
+    #   * {Types::DBClusterBacktrack#backtrack_to #backtrack_to} => Time
+    #   * {Types::DBClusterBacktrack#backtracked_from #backtracked_from} => Time
+    #   * {Types::DBClusterBacktrack#backtrack_request_creation_time #backtrack_request_creation_time} => Time
+    #   * {Types::DBClusterBacktrack#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.backtrack_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #     backtrack_to: Time.now, # required
+    #     force: false,
+    #     use_earliest_time_on_point_in_time_unavailable: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_identifier #=> String
+    #   resp.backtrack_identifier #=> String
+    #   resp.backtrack_to #=> Time
+    #   resp.backtracked_from #=> Time
+    #   resp.backtrack_request_creation_time #=> Time
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BacktrackDBCluster AWS API Documentation
+    #
+    # @overload backtrack_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def backtrack_db_cluster(params = {}, options = {})
+      req = build_request(:backtrack_db_cluster, params)
+      req.send_request(options)
+    end
+
     # Copies the specified DB cluster parameter group.
     #
     # @option params [required, String] :source_db_cluster_parameter_group_identifier
@@ -1587,6 +1680,19 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1652,6 +1758,7 @@ module Aws::RDS
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
     #     source_region: "String",
     #   })
     #
@@ -1704,6 +1811,9 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -4303,6 +4413,9 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -5085,6 +5198,126 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Returns information about backtracks for a DB cluster.
+    #
+    # For more information on Amazon Aurora, see [Aurora on Amazon RDS][1]
+    # in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster to be described. This
+    #   parameter is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `my-cluster1`
+    #
+    # @option params [String] :backtrack_identifier
+    #   If specified, this value is the backtrack identifier of the backtrack
+    #   to be described.
+    #
+    #   Constraints:
+    #
+    #   * Must contain a valid universally unique identifier (UUID). For more
+    #     information about UUIDs, see [A Universally Unique Identifier (UUID)
+    #     URN Namespace][1].
+    #
+    #   ^
+    #
+    #   Example: `123e4567-e89b-12d3-a456-426655440000`
+    #
+    #
+    #
+    #   [1]: http://www.ietf.org/rfc/rfc4122.txt
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more DB clusters to describe. Supported
+    #   filters include the following:
+    #
+    #   * `db-cluster-backtrack-id` - Accepts backtrack identifiers. The
+    #     results list includes information about only the backtracks
+    #     identified by these identifiers.
+    #
+    #   * `db-cluster-backtrack-status` - Accepts any of the following
+    #     backtrack status values:
+    #
+    #     * `applying`
+    #
+    #     * `completed`
+    #
+    #     * `failed`
+    #
+    #     * `pending`
+    #
+    #     The results list includes information about only the backtracks
+    #     identified by these values. For more information about backtrack
+    #     status values, see DBClusterBacktrack.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   DescribeDBClusterBacktracks request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::DBClusterBacktrackMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterBacktrackMessage#marker #marker} => String
+    #   * {Types::DBClusterBacktrackMessage#db_cluster_backtracks #db_cluster_backtracks} => Array&lt;Types::DBClusterBacktrack&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_cluster_backtracks({
+    #     db_cluster_identifier: "String", # required
+    #     backtrack_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.db_cluster_backtracks #=> Array
+    #   resp.db_cluster_backtracks[0].db_cluster_identifier #=> String
+    #   resp.db_cluster_backtracks[0].backtrack_identifier #=> String
+    #   resp.db_cluster_backtracks[0].backtrack_to #=> Time
+    #   resp.db_cluster_backtracks[0].backtracked_from #=> Time
+    #   resp.db_cluster_backtracks[0].backtrack_request_creation_time #=> Time
+    #   resp.db_cluster_backtracks[0].status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterBacktracks AWS API Documentation
+    #
+    # @overload describe_db_cluster_backtracks(params = {})
+    # @param [Hash] params ({})
+    def describe_db_cluster_backtracks(params = {}, options = {})
+      req = build_request(:describe_db_cluster_backtracks, params)
+      req.send_request(options)
+    end
+
     # Returns a list of `DBClusterParameterGroup` descriptions. If a
     # `DBClusterParameterGroupName` parameter is specified, the list will
     # contain only the description of the specified DB cluster parameter
@@ -5640,6 +5873,9 @@ module Aws::RDS
     #   resp.db_clusters[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].clone_group_id #=> String
     #   resp.db_clusters[0].cluster_create_time #=> Time
+    #   resp.db_clusters[0].earliest_backtrack_time #=> Time
+    #   resp.db_clusters[0].backtrack_window #=> Integer
+    #   resp.db_clusters[0].backtrack_consumed_change_records #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -5671,7 +5907,7 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more than
@@ -6738,7 +6974,7 @@ module Aws::RDS
     #   The name of the DB parameter group family.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -8158,6 +8394,9 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -8378,6 +8617,19 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
     # @option params [String] :engine_version
     #   The version number of the database engine to which you want to
     #   upgrade. Changing this parameter results in an outage. The change is
@@ -8426,6 +8678,7 @@ module Aws::RDS
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
     #     engine_version: "String",
     #   })
     #
@@ -8478,6 +8731,9 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -10273,6 +10529,9 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -11097,6 +11356,19 @@ module Aws::RDS
     #   Management (IAM) role that authorizes Amazon RDS to access the Amazon
     #   S3 bucket on your behalf.
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -11134,6 +11406,7 @@ module Aws::RDS
     #     s3_bucket_name: "String", # required
     #     s3_prefix: "String",
     #     s3_ingestion_role_arn: "String", # required
+    #     backtrack_window: 1,
     #   })
     #
     # @example Response structure
@@ -11185,6 +11458,9 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -11308,6 +11584,19 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -11350,6 +11639,7 @@ module Aws::RDS
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
     #   })
     #
     # @example Response structure
@@ -11401,6 +11691,9 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -11561,6 +11854,19 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -11602,6 +11908,7 @@ module Aws::RDS
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
     #   })
     #
     # @example Response structure
@@ -11653,6 +11960,9 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -13490,7 +13800,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

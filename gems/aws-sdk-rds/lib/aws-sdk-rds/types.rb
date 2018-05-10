@@ -306,6 +306,77 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BacktrackDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #         backtrack_to: Time.now, # required
+    #         force: false,
+    #         use_earliest_time_on_point_in_time_unavailable: false,
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster to be backtracked. This
+    #   parameter is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `my-cluster1`
+    #   @return [String]
+    #
+    # @!attribute [rw] backtrack_to
+    #   The timestamp of the time to backtrack the DB cluster to, specified
+    #   in ISO 8601 format. For more information about ISO 8601, see the
+    #   [ISO8601 Wikipedia page.][1]
+    #
+    #   <note markdown="1"> If the specified time is not a consistent time for the DB cluster,
+    #   Aurora automatically chooses the nearest possible consistent time
+    #   for the DB cluster.
+    #
+    #    </note>
+    #
+    #   Constraints:
+    #
+    #   * Must contain a valid ISO 8601 timestamp.
+    #
+    #   * Cannot contain a timestamp set in the future.
+    #
+    #   Example: `2017-07-08T18:00Z`
+    #
+    #
+    #
+    #   [1]: http://en.wikipedia.org/wiki/ISO_8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] force
+    #   A value that, if specified, forces the DB cluster to backtrack when
+    #   binary logging is enabled. Otherwise, an error occurs when binary
+    #   logging is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] use_earliest_time_on_point_in_time_unavailable
+    #   If *BacktrackTo* is set to a timestamp earlier than the earliest
+    #   backtrack time, this value backtracks the DB cluster to the earliest
+    #   possible backtrack time. Otherwise, an error occurs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BacktrackDBClusterMessage AWS API Documentation
+    #
+    class BacktrackDBClusterMessage < Struct.new(
+      :db_cluster_identifier,
+      :backtrack_to,
+      :force,
+      :use_earliest_time_on_point_in_time_unavailable)
+      include Aws::Structure
+    end
+
     # A CA certificate for an AWS account.
     #
     # @!attribute [rw] certificate_identifier
@@ -1088,6 +1159,7 @@ module Aws::RDS
     #         kms_key_id: "String",
     #         pre_signed_url: "String",
     #         enable_iam_database_authentication: false,
+    #         backtrack_window: 1,
     #         source_region: "String",
     #       }
     #
@@ -1362,6 +1434,20 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -1395,6 +1481,7 @@ module Aws::RDS
       :kms_key_id,
       :pre_signed_url,
       :enable_iam_database_authentication,
+      :backtrack_window,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -3563,7 +3650,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] earliest_restorable_time
-    #   Specifies the earliest time to which a database can be restored with
+    #   The earliest time to which a database can be restored with
     #   point-in-time restore.
     #   @return [Time]
     #
@@ -3694,6 +3781,20 @@ module Aws::RDS
     #   Coordinated Time (UTC).
     #   @return [Time]
     #
+    # @!attribute [rw] earliest_backtrack_time
+    #   The earliest time to which a DB cluster can be backtracked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. If this value is set to 0,
+    #   backtracking is disabled for the DB cluster. Otherwise, backtracking
+    #   is enabled.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] backtrack_consumed_change_records
+    #   The number of change records stored for Backtrack.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -3731,7 +3832,83 @@ module Aws::RDS
       :associated_roles,
       :iam_database_authentication_enabled,
       :clone_group_id,
-      :cluster_create_time)
+      :cluster_create_time,
+      :earliest_backtrack_time,
+      :backtrack_window,
+      :backtrack_consumed_change_records)
+      include Aws::Structure
+    end
+
+    # This data type is used as a response element in the
+    # DescribeDBClusterBacktracks action.
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   Contains a user-supplied DB cluster identifier. This identifier is
+    #   the unique key that identifies a DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] backtrack_identifier
+    #   Contains the backtrack identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] backtrack_to
+    #   The timestamp of the time to which the DB cluster was backtracked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] backtracked_from
+    #   The timestamp of the time from which the DB cluster was backtracked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] backtrack_request_creation_time
+    #   The timestamp of the time at which the backtrack was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the backtrack. This property returns one of the
+    #   following values:
+    #
+    #   * `applying` - The backtrack is currently being applied to or rolled
+    #     back from the DB cluster.
+    #
+    #   * `completed` - The backtrack has successfully been applied to or
+    #     rolled back from the DB cluster.
+    #
+    #   * `failed` - An error occurred while the backtrack was applied to or
+    #     rolled back from the DB cluster.
+    #
+    #   * `pending` - The backtrack is currently pending application to or
+    #     rollback from the DB cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrack AWS API Documentation
+    #
+    class DBClusterBacktrack < Struct.new(
+      :db_cluster_identifier,
+      :backtrack_identifier,
+      :backtrack_to,
+      :backtracked_from,
+      :backtrack_request_creation_time,
+      :status)
+      include Aws::Structure
+    end
+
+    # Contains the result of a successful invocation of the
+    # DescribeDBClusterBacktracks action.
+    #
+    # @!attribute [rw] marker
+    #   A pagination token that can be used in a subsequent
+    #   DescribeDBClusterBacktracks request.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_backtracks
+    #   Contains a list of backtracks for the user.
+    #   @return [Array<Types::DBClusterBacktrack>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrackMessage AWS API Documentation
+    #
+    class DBClusterBacktrackMessage < Struct.new(
+      :marker,
+      :db_cluster_backtracks)
       include Aws::Structure
     end
 
@@ -5627,6 +5804,109 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDBClusterBacktracksMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #         backtrack_identifier: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster to be described. This
+    #   parameter is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `my-cluster1`
+    #   @return [String]
+    #
+    # @!attribute [rw] backtrack_identifier
+    #   If specified, this value is the backtrack identifier of the
+    #   backtrack to be described.
+    #
+    #   Constraints:
+    #
+    #   * Must contain a valid universally unique identifier (UUID). For
+    #     more information about UUIDs, see [A Universally Unique Identifier
+    #     (UUID) URN Namespace][1].
+    #
+    #   ^
+    #
+    #   Example: `123e4567-e89b-12d3-a456-426655440000`
+    #
+    #
+    #
+    #   [1]: http://www.ietf.org/rfc/rfc4122.txt
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more DB clusters to describe.
+    #   Supported filters include the following:
+    #
+    #   * `db-cluster-backtrack-id` - Accepts backtrack identifiers. The
+    #     results list includes information about only the backtracks
+    #     identified by these identifiers.
+    #
+    #   * `db-cluster-backtrack-status` - Accepts any of the following
+    #     backtrack status values:
+    #
+    #     * `applying`
+    #
+    #     * `completed`
+    #
+    #     * `failed`
+    #
+    #     * `pending`
+    #
+    #     The results list includes information about only the backtracks
+    #     identified by these values. For more information about backtrack
+    #     status values, see DBClusterBacktrack.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   DescribeDBClusterBacktracks request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterBacktracksMessage AWS API Documentation
+    #
+    class DescribeDBClusterBacktracksMessage < Struct.new(
+      :db_cluster_identifier,
+      :backtrack_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeDBClusterParameterGroupsMessage
     #   data as a hash:
     #
@@ -6029,7 +6309,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -6741,7 +7021,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -8009,7 +8289,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # This type is not currently supported.
+    # A filter name and value pair that is used to return a more specific
+    # list of results from a describe operation. Filters can be used to
+    # match a set of resources by specific criteria, such as IDs. The
+    # filters supported by a describe operation are documented with the
+    # describe operation.
+    #
+    # <note markdown="1"> Currently, wildcards are not supported in filters.
+    #
+    #  </note>
+    #
+    # The following actions can be filtered:
+    #
+    # * DescribeDBClusterBacktracks
+    #
+    # * DescribeDBClusters
+    #
+    # * DescribeDBInstances
+    #
+    # * DescribePendingMaintenanceActions
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -8020,11 +8318,11 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] name
-    #   This parameter is not currently supported.
+    #   The name of the filter. Filter names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   This parameter is not currently supported.
+    #   One or more filter values. Filter values are case-sensitive.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Filter AWS API Documentation
@@ -8106,6 +8404,7 @@ module Aws::RDS
     #         preferred_backup_window: "String",
     #         preferred_maintenance_window: "String",
     #         enable_iam_database_authentication: false,
+    #         backtrack_window: 1,
     #         engine_version: "String",
     #       }
     #
@@ -8258,6 +8557,20 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
     # @!attribute [rw] engine_version
     #   The version number of the database engine to which you want to
     #   upgrade. Changing this parameter results in an outage. The change is
@@ -8283,6 +8596,7 @@ module Aws::RDS
       :preferred_backup_window,
       :preferred_maintenance_window,
       :enable_iam_database_authentication,
+      :backtrack_window,
       :engine_version)
       include Aws::Structure
     end
@@ -11097,6 +11411,7 @@ module Aws::RDS
     #         s3_bucket_name: "String", # required
     #         s3_prefix: "String",
     #         s3_ingestion_role_arn: "String", # required
+    #         backtrack_window: 1,
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -11336,6 +11651,20 @@ module Aws::RDS
     #   Amazon S3 bucket on your behalf.
     #   @return [String]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -11363,7 +11692,8 @@ module Aws::RDS
       :source_engine_version,
       :s3_bucket_name,
       :s3_prefix,
-      :s3_ingestion_role_arn)
+      :s3_ingestion_role_arn,
+      :backtrack_window)
       include Aws::Structure
     end
 
@@ -11403,6 +11733,7 @@ module Aws::RDS
     #         ],
     #         kms_key_id: "String",
     #         enable_iam_database_authentication: false,
+    #         backtrack_window: 1,
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -11515,6 +11846,20 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -11530,7 +11875,8 @@ module Aws::RDS
       :vpc_security_group_ids,
       :tags,
       :kms_key_id,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :backtrack_window)
       include Aws::Structure
     end
 
@@ -11569,6 +11915,7 @@ module Aws::RDS
     #         ],
     #         kms_key_id: "String",
     #         enable_iam_database_authentication: false,
+    #         backtrack_window: 1,
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -11710,6 +12057,20 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -11724,7 +12085,8 @@ module Aws::RDS
       :vpc_security_group_ids,
       :tags,
       :kms_key_id,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :backtrack_window)
       include Aws::Structure
     end
 

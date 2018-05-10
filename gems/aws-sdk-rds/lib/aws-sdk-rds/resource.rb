@@ -51,6 +51,7 @@ module Aws::RDS
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -280,6 +281,18 @@ module Aws::RDS
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    # @option options [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1839,7 +1852,7 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     # @option options [Boolean] :default_only
     #   Indicates that only the default version of the specified engine or
     #   engine and major version combination is returned.

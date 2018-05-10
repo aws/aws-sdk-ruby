@@ -235,13 +235,13 @@ module Aws::EC2
     #   TCP or UDP protocols: The range of ports the rule applies to.
     # @option options [required, String] :protocol
     #   The protocol. A value of `-1` or `all` means all protocols. If you
-    #   specify `all`, `-1`, or a protocol number other than `tcp`, `udp`, or
-    #   `icmp`, traffic on all ports is allowed, regardless of any ports or
-    #   ICMP types or codes you specify. If you specify protocol `58` (ICMPv6)
-    #   and specify an IPv4 CIDR block, traffic for all ICMP types and codes
-    #   allowed, regardless of any that you specify. If you specify protocol
-    #   `58` (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP
-    #   type and code.
+    #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
+    #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
+    #   any ports or ICMP types or codes you specify. If you specify protocol
+    #   `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP
+    #   types and codes allowed, regardless of any that you specify. If you
+    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
+    #   must specify an ICMP type and code.
     # @option options [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
     # @option options [required, Integer] :rule_number
