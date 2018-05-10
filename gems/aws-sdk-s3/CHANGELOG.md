@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2018-05-07)
+------------------
+
+* Feature - API update.
+
+1.9.1 (2018-04-19)
+------------------
+
+* Issue - S3 accelerate endpoint doesn't work with 'expect' header
+
 1.9.0 (2018-04-04)
 ------------------
 

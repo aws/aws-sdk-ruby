@@ -2001,6 +2001,40 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeGlobalTableSettingsInput
+    #   data as a hash:
+    #
+    #       {
+    #         global_table_name: "TableName", # required
+    #       }
+    #
+    # @!attribute [rw] global_table_name
+    #   The name of the global table to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableSettingsInput AWS API Documentation
+    #
+    class DescribeGlobalTableSettingsInput < Struct.new(
+      :global_table_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_table_name
+    #   The name of the global table.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_settings
+    #   The region specific settings for the global table.
+    #   @return [Array<Types::ReplicaSettingsDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableSettingsOutput AWS API Documentation
+    #
+    class DescribeGlobalTableSettingsOutput < Struct.new(
+      :global_table_name,
+      :replica_settings)
+      include Aws::Structure
+    end
+
     # Represents the input of a `DescribeLimits` operation. Has no content.
     #
     # @api private
@@ -2933,6 +2967,35 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Represents the settings of a global secondary index for a global table
+    # that will be modified.
+    #
+    # @note When making an API call, you may pass GlobalTableGlobalSecondaryIndexSettingsUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "IndexName", # required
+    #         provisioned_write_capacity_units: 1,
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index. The name must be unique
+    #   among all other indexes on this table.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_write_capacity_units
+    #   The maximum number of writes consumed per second before DynamoDB
+    #   returns a `ThrottlingException.`
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableGlobalSecondaryIndexSettingsUpdate AWS API Documentation
+    #
+    class GlobalTableGlobalSecondaryIndexSettingsUpdate < Struct.new(
+      :index_name,
+      :provisioned_write_capacity_units)
+      include Aws::Structure
+    end
+
     # Information about item collections, if any, that were affected by the
     # operation. `ItemCollectionMetrics` is only returned if the request
     # asked for it. If the table does not have any local secondary indexes,
@@ -3535,13 +3598,13 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] earliest_restorable_date_time
     #   Specifies the earliest point in time you can restore your table to.
-    #   It is equal to the maximum of point in time recovery enabled time
-    #   and `CurrentTime` - `PointInTimeRecoveryPeriod`.
+    #   It You can restore your table to any point in time during the last
+    #   35 days.
     #   @return [Time]
     #
     # @!attribute [rw] latest_restorable_date_time
-    #   `LatestRestorableDateTime` is 5 minutes from now and there is a +/-
-    #   1 minute fuzziness on the restore times.
+    #   `LatestRestorableDateTime` is typically 5 minutes before the current
+    #   time.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PointInTimeRecoveryDescription AWS API Documentation
@@ -4599,6 +4662,175 @@ module Aws::DynamoDB
     #
     class ReplicaDescription < Struct.new(
       :region_name)
+      include Aws::Structure
+    end
+
+    # Represents the properties of a global secondary index.
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index. The name must be unique
+    #   among all other indexes on this table.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_status
+    #   The current status of the global secondary index:
+    #
+    #   * `CREATING` - The global secondary index is being created.
+    #
+    #   * `UPDATING` - The global secondary index is being updated.
+    #
+    #   * `DELETING` - The global secondary index is being deleted.
+    #
+    #   * `ACTIVE` - The global secondary index is ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_read_capacity_units
+    #   The maximum number of strongly consistent reads consumed per second
+    #   before DynamoDB returns a `ThrottlingException`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_write_capacity_units
+    #   The maximum number of writes consumed per second before DynamoDB
+    #   returns a `ThrottlingException`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexSettingsDescription AWS API Documentation
+    #
+    class ReplicaGlobalSecondaryIndexSettingsDescription < Struct.new(
+      :index_name,
+      :index_status,
+      :provisioned_read_capacity_units,
+      :provisioned_write_capacity_units)
+      include Aws::Structure
+    end
+
+    # Represents the settings of a global secondary index for a global table
+    # that will be modified.
+    #
+    # @note When making an API call, you may pass ReplicaGlobalSecondaryIndexSettingsUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         index_name: "IndexName", # required
+    #         provisioned_read_capacity_units: 1,
+    #       }
+    #
+    # @!attribute [rw] index_name
+    #   The name of the global secondary index. The name must be unique
+    #   among all other indexes on this table.
+    #   @return [String]
+    #
+    # @!attribute [rw] provisioned_read_capacity_units
+    #   The maximum number of strongly consistent reads consumed per second
+    #   before DynamoDB returns a `ThrottlingException`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaGlobalSecondaryIndexSettingsUpdate AWS API Documentation
+    #
+    class ReplicaGlobalSecondaryIndexSettingsUpdate < Struct.new(
+      :index_name,
+      :provisioned_read_capacity_units)
+      include Aws::Structure
+    end
+
+    # Represents the properties of a replica.
+    #
+    # @!attribute [rw] region_name
+    #   The region name of the replica.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_status
+    #   The current state of the region:
+    #
+    #   * `CREATING` - The region is being created.
+    #
+    #   * `UPDATING` - The region is being updated.
+    #
+    #   * `DELETING` - The region is being deleted.
+    #
+    #   * `ACTIVE` - The region is ready for use.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_provisioned_read_capacity_units
+    #   The maximum number of strongly consistent reads consumed per second
+    #   before DynamoDB returns a `ThrottlingException`. For more
+    #   information, see [Specifying Read and Write Requirements][1] in the
+    #   *Amazon DynamoDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replica_provisioned_write_capacity_units
+    #   The maximum number of writes consumed per second before DynamoDB
+    #   returns a `ThrottlingException`. For more information, see
+    #   [Specifying Read and Write Requirements][1] in the *Amazon DynamoDB
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replica_global_secondary_index_settings
+    #   Replica global secondary index settings for the global table.
+    #   @return [Array<Types::ReplicaGlobalSecondaryIndexSettingsDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaSettingsDescription AWS API Documentation
+    #
+    class ReplicaSettingsDescription < Struct.new(
+      :region_name,
+      :replica_status,
+      :replica_provisioned_read_capacity_units,
+      :replica_provisioned_write_capacity_units,
+      :replica_global_secondary_index_settings)
+      include Aws::Structure
+    end
+
+    # Represents the settings for a global table in a region that will be
+    # modified.
+    #
+    # @note When making an API call, you may pass ReplicaSettingsUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         region_name: "RegionName", # required
+    #         replica_provisioned_read_capacity_units: 1,
+    #         replica_global_secondary_index_settings_update: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             provisioned_read_capacity_units: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] region_name
+    #   The region of the replica to be added.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_provisioned_read_capacity_units
+    #   The maximum number of strongly consistent reads consumed per second
+    #   before DynamoDB returns a `ThrottlingException`. For more
+    #   information, see [Specifying Read and Write Requirements][1] in the
+    #   *Amazon DynamoDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
+    #   @return [Integer]
+    #
+    # @!attribute [rw] replica_global_secondary_index_settings_update
+    #   Represents the settings of a global secondary index for a global
+    #   table that will be modified.
+    #   @return [Array<Types::ReplicaGlobalSecondaryIndexSettingsUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaSettingsUpdate AWS API Documentation
+    #
+    class ReplicaSettingsUpdate < Struct.new(
+      :region_name,
+      :replica_provisioned_read_capacity_units,
+      :replica_global_secondary_index_settings_update)
       include Aws::Structure
     end
 
@@ -5910,6 +6142,77 @@ module Aws::DynamoDB
     #
     class UpdateGlobalTableOutput < Struct.new(
       :global_table_description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateGlobalTableSettingsInput
+    #   data as a hash:
+    #
+    #       {
+    #         global_table_name: "TableName", # required
+    #         global_table_provisioned_write_capacity_units: 1,
+    #         global_table_global_secondary_index_settings_update: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             provisioned_write_capacity_units: 1,
+    #           },
+    #         ],
+    #         replica_settings_update: [
+    #           {
+    #             region_name: "RegionName", # required
+    #             replica_provisioned_read_capacity_units: 1,
+    #             replica_global_secondary_index_settings_update: [
+    #               {
+    #                 index_name: "IndexName", # required
+    #                 provisioned_read_capacity_units: 1,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] global_table_name
+    #   The name of the global table
+    #   @return [String]
+    #
+    # @!attribute [rw] global_table_provisioned_write_capacity_units
+    #   The maximum number of writes consumed per second before DynamoDB
+    #   returns a `ThrottlingException.`
+    #   @return [Integer]
+    #
+    # @!attribute [rw] global_table_global_secondary_index_settings_update
+    #   Represents the settings of a global secondary index for a global
+    #   table that will be modified.
+    #   @return [Array<Types::GlobalTableGlobalSecondaryIndexSettingsUpdate>]
+    #
+    # @!attribute [rw] replica_settings_update
+    #   Represents the settings for a global table in a region that will be
+    #   modified.
+    #   @return [Array<Types::ReplicaSettingsUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableSettingsInput AWS API Documentation
+    #
+    class UpdateGlobalTableSettingsInput < Struct.new(
+      :global_table_name,
+      :global_table_provisioned_write_capacity_units,
+      :global_table_global_secondary_index_settings_update,
+      :replica_settings_update)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] global_table_name
+    #   The name of the global table.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_settings
+    #   The region specific settings for the global table.
+    #   @return [Array<Types::ReplicaSettingsDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableSettingsOutput AWS API Documentation
+    #
+    class UpdateGlobalTableSettingsOutput < Struct.new(
+      :global_table_name,
+      :replica_settings)
       include Aws::Structure
     end
 

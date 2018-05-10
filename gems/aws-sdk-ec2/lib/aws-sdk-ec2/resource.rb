@@ -167,6 +167,10 @@ module Aws::EC2
     #     credit_specification: {
     #       cpu_credits: "String", # required
     #     },
+    #     cpu_options: {
+    #       core_count: 1,
+    #       threads_per_core: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -345,7 +349,8 @@ module Aws::EC2
     # @option options [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template to use to launch the instances. Any parameters
     #   that you specify in RunInstances override the same parameters in the
-    #   launch template.
+    #   launch template. You can specify either the name or ID of a launch
+    #   template, but not both.
     # @option options [Types::InstanceMarketOptionsRequest] :instance_market_options
     #   The market (purchasing) option for the instances.
     # @option options [Types::CreditSpecificationRequest] :credit_specification
@@ -359,6 +364,14 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    # @option options [Types::CpuOptionsRequest] :cpu_options
+    #   The CPU options for the instance. For more information, see
+    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
@@ -768,11 +781,16 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     # @option options [Integer] :iops
-    #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
-    #   operations per second (IOPS) to provision for the volume, with a
-    #   maximum ratio of 50 IOPS/GiB.
+    #   The number of I/O operations per second (IOPS) to provision for the
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
+    #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
+    #   Volume Types][1].
     #
-    #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
+    #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     # @option options [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
     #   master key (CMK) to use when creating the encrypted volume. This
@@ -817,7 +835,11 @@ module Aws::EC2
     #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
     #   Cold HDD, or `standard` for Magnetic volumes.
     #
-    #   Default: `standard`
+    #   Defaults: If no volume type is specified, the default is `standard` in
+    #   us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1,
+    #   ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2,
+    #   ap-south-1, us-gov-west-1, and cn-north-1. In all other regions, EBS
+    #   defaults to `gp2`.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -2652,7 +2674,7 @@ module Aws::EC2
     #     attached to.
     #
     #   * `attachment.status` - The attachment state (`attaching` \|
-    #     `attached` \| `detaching` \| `detached`).
+    #     `attached` \| `detaching`).
     #
     #   * `availability-zone` - The Availability Zone in which the volume was
     #     created.

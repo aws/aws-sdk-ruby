@@ -235,6 +235,9 @@
   "IoT": {
     "models": "iot/2015-05-28"
   },
+  "IoTAnalytics": {
+    "models": "iotanalytics/2017-11-27"
+  },
   "IoTDataPlane": {
     "models": "iot-data/2015-05-28",
     "partitionsKey": null

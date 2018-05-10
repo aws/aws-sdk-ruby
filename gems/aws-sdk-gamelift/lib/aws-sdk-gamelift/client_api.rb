@@ -115,6 +115,8 @@ module Aws::GameLift
     Event = Shapes::StructureShape.new(name: 'Event')
     EventCode = Shapes::StringShape.new(name: 'EventCode')
     EventList = Shapes::ListShape.new(name: 'EventList')
+    FleetAction = Shapes::StringShape.new(name: 'FleetAction')
+    FleetActionList = Shapes::ListShape.new(name: 'FleetActionList')
     FleetAttributes = Shapes::StructureShape.new(name: 'FleetAttributes')
     FleetAttributesList = Shapes::ListShape.new(name: 'FleetAttributesList')
     FleetCapacity = Shapes::StructureShape.new(name: 'FleetCapacity')
@@ -221,6 +223,7 @@ module Aws::GameLift
     PlayerSessionId = Shapes::StringShape.new(name: 'PlayerSessionId')
     PlayerSessionList = Shapes::ListShape.new(name: 'PlayerSessionList')
     PlayerSessionStatus = Shapes::StringShape.new(name: 'PlayerSessionStatus')
+    PolicyType = Shapes::StringShape.new(name: 'PolicyType')
     PortNumber = Shapes::IntegerShape.new(name: 'PortNumber')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PositiveLong = Shapes::IntegerShape.new(name: 'PositiveLong')
@@ -248,12 +251,16 @@ module Aws::GameLift
     ServerProcess = Shapes::StructureShape.new(name: 'ServerProcess')
     ServerProcessList = Shapes::ListShape.new(name: 'ServerProcessList')
     SnsArnStringModel = Shapes::StringShape.new(name: 'SnsArnStringModel')
+    StartFleetActionsInput = Shapes::StructureShape.new(name: 'StartFleetActionsInput')
+    StartFleetActionsOutput = Shapes::StructureShape.new(name: 'StartFleetActionsOutput')
     StartGameSessionPlacementInput = Shapes::StructureShape.new(name: 'StartGameSessionPlacementInput')
     StartGameSessionPlacementOutput = Shapes::StructureShape.new(name: 'StartGameSessionPlacementOutput')
     StartMatchBackfillInput = Shapes::StructureShape.new(name: 'StartMatchBackfillInput')
     StartMatchBackfillOutput = Shapes::StructureShape.new(name: 'StartMatchBackfillOutput')
     StartMatchmakingInput = Shapes::StructureShape.new(name: 'StartMatchmakingInput')
     StartMatchmakingOutput = Shapes::StructureShape.new(name: 'StartMatchmakingOutput')
+    StopFleetActionsInput = Shapes::StructureShape.new(name: 'StopFleetActionsInput')
+    StopFleetActionsOutput = Shapes::StructureShape.new(name: 'StopFleetActionsOutput')
     StopGameSessionPlacementInput = Shapes::StructureShape.new(name: 'StopGameSessionPlacementInput')
     StopGameSessionPlacementOutput = Shapes::StructureShape.new(name: 'StopGameSessionPlacementOutput')
     StopMatchmakingInput = Shapes::StructureShape.new(name: 'StopMatchmakingInput')
@@ -261,6 +268,7 @@ module Aws::GameLift
     StringDoubleMap = Shapes::MapShape.new(name: 'StringDoubleMap')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringModel = Shapes::StringShape.new(name: 'StringModel')
+    TargetConfiguration = Shapes::StructureShape.new(name: 'TargetConfiguration')
     TerminalRoutingStrategyException = Shapes::StructureShape.new(name: 'TerminalRoutingStrategyException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
@@ -690,6 +698,8 @@ module Aws::GameLift
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
 
+    FleetActionList.member = Shapes::ShapeRef.new(shape: FleetAction)
+
     FleetAttributes.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
     FleetAttributes.add_member(:fleet_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "FleetArn"))
     FleetAttributes.add_member(:fleet_type, Shapes::ShapeRef.new(shape: FleetType, location_name: "FleetType"))
@@ -707,6 +717,7 @@ module Aws::GameLift
     FleetAttributes.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
     FleetAttributes.add_member(:resource_creation_limit_policy, Shapes::ShapeRef.new(shape: ResourceCreationLimitPolicy, location_name: "ResourceCreationLimitPolicy"))
     FleetAttributes.add_member(:metric_groups, Shapes::ShapeRef.new(shape: MetricGroupList, location_name: "MetricGroups"))
+    FleetAttributes.add_member(:stopped_actions, Shapes::ShapeRef.new(shape: FleetActionList, location_name: "StoppedActions"))
     FleetAttributes.struct_class = Types::FleetAttributes
 
     FleetAttributesList.member = Shapes::ShapeRef.new(shape: FleetAttributes)
@@ -977,12 +988,14 @@ module Aws::GameLift
 
     PutScalingPolicyInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
     PutScalingPolicyInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
-    PutScalingPolicyInput.add_member(:scaling_adjustment, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ScalingAdjustment"))
-    PutScalingPolicyInput.add_member(:scaling_adjustment_type, Shapes::ShapeRef.new(shape: ScalingAdjustmentType, required: true, location_name: "ScalingAdjustmentType"))
-    PutScalingPolicyInput.add_member(:threshold, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "Threshold"))
-    PutScalingPolicyInput.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperatorType, required: true, location_name: "ComparisonOperator"))
-    PutScalingPolicyInput.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "EvaluationPeriods"))
+    PutScalingPolicyInput.add_member(:scaling_adjustment, Shapes::ShapeRef.new(shape: Integer, location_name: "ScalingAdjustment"))
+    PutScalingPolicyInput.add_member(:scaling_adjustment_type, Shapes::ShapeRef.new(shape: ScalingAdjustmentType, location_name: "ScalingAdjustmentType"))
+    PutScalingPolicyInput.add_member(:threshold, Shapes::ShapeRef.new(shape: Double, location_name: "Threshold"))
+    PutScalingPolicyInput.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperatorType, location_name: "ComparisonOperator"))
+    PutScalingPolicyInput.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "EvaluationPeriods"))
     PutScalingPolicyInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
+    PutScalingPolicyInput.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, location_name: "PolicyType"))
+    PutScalingPolicyInput.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, location_name: "TargetConfiguration"))
     PutScalingPolicyInput.struct_class = Types::PutScalingPolicyInput
 
     PutScalingPolicyOutput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
@@ -1031,6 +1044,8 @@ module Aws::GameLift
     ScalingPolicy.add_member(:threshold, Shapes::ShapeRef.new(shape: Double, location_name: "Threshold"))
     ScalingPolicy.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "EvaluationPeriods"))
     ScalingPolicy.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    ScalingPolicy.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, location_name: "PolicyType"))
+    ScalingPolicy.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, location_name: "TargetConfiguration"))
     ScalingPolicy.struct_class = Types::ScalingPolicy
 
     ScalingPolicyList.member = Shapes::ShapeRef.new(shape: ScalingPolicy)
@@ -1053,6 +1068,12 @@ module Aws::GameLift
     ServerProcess.struct_class = Types::ServerProcess
 
     ServerProcessList.member = Shapes::ShapeRef.new(shape: ServerProcess)
+
+    StartFleetActionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    StartFleetActionsInput.add_member(:actions, Shapes::ShapeRef.new(shape: FleetActionList, required: true, location_name: "Actions"))
+    StartFleetActionsInput.struct_class = Types::StartFleetActionsInput
+
+    StartFleetActionsOutput.struct_class = Types::StartFleetActionsOutput
 
     StartGameSessionPlacementInput.add_member(:placement_id, Shapes::ShapeRef.new(shape: IdStringModel, required: true, location_name: "PlacementId"))
     StartGameSessionPlacementInput.add_member(:game_session_queue_name, Shapes::ShapeRef.new(shape: GameSessionQueueName, required: true, location_name: "GameSessionQueueName"))
@@ -1084,6 +1105,12 @@ module Aws::GameLift
     StartMatchmakingOutput.add_member(:matchmaking_ticket, Shapes::ShapeRef.new(shape: MatchmakingTicket, location_name: "MatchmakingTicket"))
     StartMatchmakingOutput.struct_class = Types::StartMatchmakingOutput
 
+    StopFleetActionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+    StopFleetActionsInput.add_member(:actions, Shapes::ShapeRef.new(shape: FleetActionList, required: true, location_name: "Actions"))
+    StopFleetActionsInput.struct_class = Types::StopFleetActionsInput
+
+    StopFleetActionsOutput.struct_class = Types::StopFleetActionsOutput
+
     StopGameSessionPlacementInput.add_member(:placement_id, Shapes::ShapeRef.new(shape: IdStringModel, required: true, location_name: "PlacementId"))
     StopGameSessionPlacementInput.struct_class = Types::StopGameSessionPlacementInput
 
@@ -1099,6 +1126,9 @@ module Aws::GameLift
     StringDoubleMap.value = Shapes::ShapeRef.new(shape: DoubleObject)
 
     StringList.member = Shapes::ShapeRef.new(shape: NonZeroAndMaxString)
+
+    TargetConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "TargetValue"))
+    TargetConfiguration.struct_class = Types::TargetConfiguration
 
     UpdateAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
     UpdateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, location_name: "Name"))
@@ -1846,6 +1876,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
       end)
 
+      api.add_operation(:start_fleet_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartFleetActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartFleetActionsInput)
+        o.output = Shapes::ShapeRef.new(shape: StartFleetActionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
       api.add_operation(:start_game_session_placement, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartGameSessionPlacement"
         o.http_method = "POST"
@@ -1880,6 +1922,18 @@ module Aws::GameLift
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedRegionException)
+      end)
+
+      api.add_operation(:stop_fleet_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopFleetActions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopFleetActionsInput)
+        o.output = Shapes::ShapeRef.new(shape: StopFleetActionsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:stop_game_session_placement, Seahorse::Model::Operation.new.tap do |o|

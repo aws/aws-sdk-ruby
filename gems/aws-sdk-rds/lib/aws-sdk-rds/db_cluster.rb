@@ -96,7 +96,7 @@ module Aws::RDS
       data[:percent_progress]
     end
 
-    # Specifies the earliest time to which a database can be restored with
+    # The earliest time to which a database can be restored with
     # point-in-time restore.
     # @return [Time]
     def earliest_restorable_time
@@ -275,6 +275,26 @@ module Aws::RDS
       data[:cluster_create_time]
     end
 
+    # The earliest time to which a DB cluster can be backtracked.
+    # @return [Time]
+    def earliest_backtrack_time
+      data[:earliest_backtrack_time]
+    end
+
+    # The target backtrack window, in seconds. If this value is set to 0,
+    # backtracking is disabled for the DB cluster. Otherwise, backtracking
+    # is enabled.
+    # @return [Integer]
+    def backtrack_window
+      data[:backtrack_window]
+    end
+
+    # The number of change records stored for Backtrack.
+    # @return [Integer]
+    def backtrack_consumed_change_records
+      data[:backtrack_consumed_change_records]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -436,6 +456,7 @@ module Aws::RDS
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -652,6 +673,18 @@ module Aws::RDS
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    # @option options [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -788,6 +821,8 @@ module Aws::RDS
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
+    #     engine_version: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -904,6 +939,26 @@ module Aws::RDS
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    # @option options [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    # @option options [String] :engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless the ApplyImmediately
+    #   parameter is set to true.
+    #
+    #   For a list of valid engine versions, see CreateDBInstance, or call
+    #   DescribeDBEngineVersions.
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -934,6 +989,7 @@ module Aws::RDS
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -1043,6 +1099,18 @@ module Aws::RDS
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    # @option options [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

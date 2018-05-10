@@ -115,7 +115,7 @@ module Aws
     end
 
     def http_get(connection, path)
-      response = connection.request(Net::HTTP::Get.new(path))
+      response = connection.request(Net::HTTP::Get.new(path, {"User-Agent" => "aws-sdk-ruby3/#{CORE_GEM_VERSION}"}))
       if response.code.to_i == 200
         response.body
       else

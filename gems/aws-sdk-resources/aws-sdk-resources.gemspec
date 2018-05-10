@@ -82,6 +82,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-importexport', '~> 1')
   spec.add_dependency('aws-sdk-inspector', '~> 1')
   spec.add_dependency('aws-sdk-iot', '~> 1')
+  spec.add_dependency('aws-sdk-iotanalytics', '~> 1')
   spec.add_dependency('aws-sdk-iotdataplane', '~> 1')
   spec.add_dependency('aws-sdk-iotjobsdataplane', '~> 1')
   spec.add_dependency('aws-sdk-kms', '~> 1')

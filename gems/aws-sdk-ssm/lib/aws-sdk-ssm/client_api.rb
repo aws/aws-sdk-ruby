@@ -153,6 +153,8 @@ module Aws::SSM
     DeleteAssociationResult = Shapes::StructureShape.new(name: 'DeleteAssociationResult')
     DeleteDocumentRequest = Shapes::StructureShape.new(name: 'DeleteDocumentRequest')
     DeleteDocumentResult = Shapes::StructureShape.new(name: 'DeleteDocumentResult')
+    DeleteInventoryRequest = Shapes::StructureShape.new(name: 'DeleteInventoryRequest')
+    DeleteInventoryResult = Shapes::StructureShape.new(name: 'DeleteInventoryResult')
     DeleteMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'DeleteMaintenanceWindowRequest')
     DeleteMaintenanceWindowResult = Shapes::StructureShape.new(name: 'DeleteMaintenanceWindowResult')
     DeleteParameterRequest = Shapes::StructureShape.new(name: 'DeleteParameterRequest')
@@ -202,6 +204,8 @@ module Aws::SSM
     DescribeInstancePatchStatesResult = Shapes::StructureShape.new(name: 'DescribeInstancePatchStatesResult')
     DescribeInstancePatchesRequest = Shapes::StructureShape.new(name: 'DescribeInstancePatchesRequest')
     DescribeInstancePatchesResult = Shapes::StructureShape.new(name: 'DescribeInstancePatchesResult')
+    DescribeInventoryDeletionsRequest = Shapes::StructureShape.new(name: 'DescribeInventoryDeletionsRequest')
+    DescribeInventoryDeletionsResult = Shapes::StructureShape.new(name: 'DescribeInventoryDeletionsResult')
     DescribeMaintenanceWindowExecutionTaskInvocationsRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionTaskInvocationsRequest')
     DescribeMaintenanceWindowExecutionTaskInvocationsResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionTaskInvocationsResult')
     DescribeMaintenanceWindowExecutionTasksRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionTasksRequest')
@@ -263,6 +267,7 @@ module Aws::SSM
     DocumentVersionList = Shapes::ListShape.new(name: 'DocumentVersionList')
     DocumentVersionNumber = Shapes::StringShape.new(name: 'DocumentVersionNumber')
     DoesNotExistException = Shapes::StructureShape.new(name: 'DoesNotExistException')
+    DryRun = Shapes::BooleanShape.new(name: 'DryRun')
     DuplicateDocumentContent = Shapes::StructureShape.new(name: 'DuplicateDocumentContent')
     DuplicateInstanceId = Shapes::StructureShape.new(name: 'DuplicateInstanceId')
     EffectiveInstanceAssociationMaxResults = Shapes::IntegerShape.new(name: 'EffectiveInstanceAssociationMaxResults')
@@ -362,6 +367,8 @@ module Aws::SSM
     InvalidAutomationSignalException = Shapes::StructureShape.new(name: 'InvalidAutomationSignalException')
     InvalidAutomationStatusUpdateException = Shapes::StructureShape.new(name: 'InvalidAutomationStatusUpdateException')
     InvalidCommandId = Shapes::StructureShape.new(name: 'InvalidCommandId')
+    InvalidDeleteInventoryParametersException = Shapes::StructureShape.new(name: 'InvalidDeleteInventoryParametersException')
+    InvalidDeletionIdException = Shapes::StructureShape.new(name: 'InvalidDeletionIdException')
     InvalidDocument = Shapes::StructureShape.new(name: 'InvalidDocument')
     InvalidDocumentContent = Shapes::StructureShape.new(name: 'InvalidDocumentContent')
     InvalidDocumentOperation = Shapes::StructureShape.new(name: 'InvalidDocumentOperation')
@@ -374,10 +381,12 @@ module Aws::SSM
     InvalidInstanceId = Shapes::StructureShape.new(name: 'InvalidInstanceId')
     InvalidInstanceInformationFilterValue = Shapes::StructureShape.new(name: 'InvalidInstanceInformationFilterValue')
     InvalidInventoryItemContextException = Shapes::StructureShape.new(name: 'InvalidInventoryItemContextException')
+    InvalidInventoryRequestException = Shapes::StructureShape.new(name: 'InvalidInventoryRequestException')
     InvalidItemContentException = Shapes::StructureShape.new(name: 'InvalidItemContentException')
     InvalidKeyId = Shapes::StructureShape.new(name: 'InvalidKeyId')
     InvalidNextToken = Shapes::StructureShape.new(name: 'InvalidNextToken')
     InvalidNotificationConfig = Shapes::StructureShape.new(name: 'InvalidNotificationConfig')
+    InvalidOptionException = Shapes::StructureShape.new(name: 'InvalidOptionException')
     InvalidOutputFolder = Shapes::StructureShape.new(name: 'InvalidOutputFolder')
     InvalidOutputLocation = Shapes::StructureShape.new(name: 'InvalidOutputLocation')
     InvalidParameters = Shapes::StructureShape.new(name: 'InvalidParameters')
@@ -395,6 +404,16 @@ module Aws::SSM
     InventoryAggregatorExpression = Shapes::StringShape.new(name: 'InventoryAggregatorExpression')
     InventoryAggregatorList = Shapes::ListShape.new(name: 'InventoryAggregatorList')
     InventoryAttributeDataType = Shapes::StringShape.new(name: 'InventoryAttributeDataType')
+    InventoryDeletionId = Shapes::StringShape.new(name: 'InventoryDeletionId')
+    InventoryDeletionLastStatusMessage = Shapes::StringShape.new(name: 'InventoryDeletionLastStatusMessage')
+    InventoryDeletionLastStatusUpdateTime = Shapes::TimestampShape.new(name: 'InventoryDeletionLastStatusUpdateTime')
+    InventoryDeletionStartTime = Shapes::TimestampShape.new(name: 'InventoryDeletionStartTime')
+    InventoryDeletionStatus = Shapes::StringShape.new(name: 'InventoryDeletionStatus')
+    InventoryDeletionStatusItem = Shapes::StructureShape.new(name: 'InventoryDeletionStatusItem')
+    InventoryDeletionSummary = Shapes::StructureShape.new(name: 'InventoryDeletionSummary')
+    InventoryDeletionSummaryItem = Shapes::StructureShape.new(name: 'InventoryDeletionSummaryItem')
+    InventoryDeletionSummaryItems = Shapes::ListShape.new(name: 'InventoryDeletionSummaryItems')
+    InventoryDeletionsList = Shapes::ListShape.new(name: 'InventoryDeletionsList')
     InventoryFilter = Shapes::StructureShape.new(name: 'InventoryFilter')
     InventoryFilterKey = Shapes::StringShape.new(name: 'InventoryFilterKey')
     InventoryFilterList = Shapes::ListShape.new(name: 'InventoryFilterList')
@@ -422,6 +441,7 @@ module Aws::SSM
     InventoryResultItem = Shapes::StructureShape.new(name: 'InventoryResultItem')
     InventoryResultItemKey = Shapes::StringShape.new(name: 'InventoryResultItemKey')
     InventoryResultItemMap = Shapes::MapShape.new(name: 'InventoryResultItemMap')
+    InventorySchemaDeleteOption = Shapes::StringShape.new(name: 'InventorySchemaDeleteOption')
     InventoryTypeDisplayName = Shapes::StringShape.new(name: 'InventoryTypeDisplayName')
     InvocationDoesNotExist = Shapes::StructureShape.new(name: 'InvocationDoesNotExist')
     InvocationTraceOutput = Shapes::StringShape.new(name: 'InvocationTraceOutput')
@@ -630,6 +650,7 @@ module Aws::SSM
     Product = Shapes::StringShape.new(name: 'Product')
     PutComplianceItemsRequest = Shapes::StructureShape.new(name: 'PutComplianceItemsRequest')
     PutComplianceItemsResult = Shapes::StructureShape.new(name: 'PutComplianceItemsResult')
+    PutInventoryMessage = Shapes::StringShape.new(name: 'PutInventoryMessage')
     PutInventoryRequest = Shapes::StructureShape.new(name: 'PutInventoryRequest')
     PutInventoryResult = Shapes::StructureShape.new(name: 'PutInventoryResult')
     PutParameterRequest = Shapes::StructureShape.new(name: 'PutParameterRequest')
@@ -644,11 +665,13 @@ module Aws::SSM
     RegisterTaskWithMaintenanceWindowResult = Shapes::StructureShape.new(name: 'RegisterTaskWithMaintenanceWindowResult')
     RegistrationLimit = Shapes::IntegerShape.new(name: 'RegistrationLimit')
     RegistrationsCount = Shapes::IntegerShape.new(name: 'RegistrationsCount')
+    RemainingCount = Shapes::IntegerShape.new(name: 'RemainingCount')
     RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
     ResolvedTargets = Shapes::StructureShape.new(name: 'ResolvedTargets')
     ResourceComplianceSummaryItem = Shapes::StructureShape.new(name: 'ResourceComplianceSummaryItem')
     ResourceComplianceSummaryItemList = Shapes::ListShape.new(name: 'ResourceComplianceSummaryItemList')
+    ResourceCount = Shapes::IntegerShape.new(name: 'ResourceCount')
     ResourceDataSyncAWSKMSKeyARN = Shapes::StringShape.new(name: 'ResourceDataSyncAWSKMSKeyARN')
     ResourceDataSyncAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceDataSyncAlreadyExistsException')
     ResourceDataSyncCountExceededException = Shapes::StructureShape.new(name: 'ResourceDataSyncCountExceededException')
@@ -725,6 +748,7 @@ module Aws::SSM
     TimeoutSeconds = Shapes::IntegerShape.new(name: 'TimeoutSeconds')
     TooManyTagsError = Shapes::StructureShape.new(name: 'TooManyTagsError')
     TooManyUpdates = Shapes::StructureShape.new(name: 'TooManyUpdates')
+    TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     TotalSizeLimitExceededException = Shapes::StructureShape.new(name: 'TotalSizeLimitExceededException')
     UnsupportedInventoryItemContextException = Shapes::StructureShape.new(name: 'UnsupportedInventoryItemContextException')
     UnsupportedInventorySchemaVersionException = Shapes::StructureShape.new(name: 'UnsupportedInventorySchemaVersionException')
@@ -911,6 +935,7 @@ module Aws::SSM
 
     Command.add_member(:command_id, Shapes::ShapeRef.new(shape: CommandId, location_name: "CommandId"))
     Command.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "DocumentName"))
+    Command.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     Command.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "Comment"))
     Command.add_member(:expires_after, Shapes::ShapeRef.new(shape: DateTime, location_name: "ExpiresAfter"))
     Command.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
@@ -942,6 +967,7 @@ module Aws::SSM
     CommandInvocation.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceTagName, location_name: "InstanceName"))
     CommandInvocation.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "Comment"))
     CommandInvocation.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "DocumentName"))
+    CommandInvocation.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     CommandInvocation.add_member(:requested_date_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "RequestedDateTime"))
     CommandInvocation.add_member(:status, Shapes::ShapeRef.new(shape: CommandInvocationStatus, location_name: "Status"))
     CommandInvocation.add_member(:status_details, Shapes::ShapeRef.new(shape: StatusDetails, location_name: "StatusDetails"))
@@ -1130,6 +1156,17 @@ module Aws::SSM
     DeleteDocumentRequest.struct_class = Types::DeleteDocumentRequest
 
     DeleteDocumentResult.struct_class = Types::DeleteDocumentResult
+
+    DeleteInventoryRequest.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, required: true, location_name: "TypeName"))
+    DeleteInventoryRequest.add_member(:schema_delete_option, Shapes::ShapeRef.new(shape: InventorySchemaDeleteOption, location_name: "SchemaDeleteOption"))
+    DeleteInventoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "DryRun"))
+    DeleteInventoryRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    DeleteInventoryRequest.struct_class = Types::DeleteInventoryRequest
+
+    DeleteInventoryResult.add_member(:deletion_id, Shapes::ShapeRef.new(shape: InventoryDeletionId, location_name: "DeletionId"))
+    DeleteInventoryResult.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, location_name: "TypeName"))
+    DeleteInventoryResult.add_member(:deletion_summary, Shapes::ShapeRef.new(shape: InventoryDeletionSummary, location_name: "DeletionSummary"))
+    DeleteInventoryResult.struct_class = Types::DeleteInventoryResult
 
     DeleteMaintenanceWindowRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
     DeleteMaintenanceWindowRequest.struct_class = Types::DeleteMaintenanceWindowRequest
@@ -1322,6 +1359,15 @@ module Aws::SSM
     DescribeInstancePatchesResult.add_member(:patches, Shapes::ShapeRef.new(shape: PatchComplianceDataList, location_name: "Patches"))
     DescribeInstancePatchesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeInstancePatchesResult.struct_class = Types::DescribeInstancePatchesResult
+
+    DescribeInventoryDeletionsRequest.add_member(:deletion_id, Shapes::ShapeRef.new(shape: InventoryDeletionId, location_name: "DeletionId"))
+    DescribeInventoryDeletionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInventoryDeletionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeInventoryDeletionsRequest.struct_class = Types::DescribeInventoryDeletionsRequest
+
+    DescribeInventoryDeletionsResult.add_member(:inventory_deletions, Shapes::ShapeRef.new(shape: InventoryDeletionsList, location_name: "InventoryDeletions"))
+    DescribeInventoryDeletionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInventoryDeletionsResult.struct_class = Types::DescribeInventoryDeletionsResult
 
     DescribeMaintenanceWindowExecutionTaskInvocationsRequest.add_member(:window_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionId, required: true, location_name: "WindowExecutionId"))
     DescribeMaintenanceWindowExecutionTaskInvocationsRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskId, required: true, location_name: "TaskId"))
@@ -1523,6 +1569,7 @@ module Aws::SSM
     GetCommandInvocationResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
     GetCommandInvocationResult.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "Comment"))
     GetCommandInvocationResult.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "DocumentName"))
+    GetCommandInvocationResult.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     GetCommandInvocationResult.add_member(:plugin_name, Shapes::ShapeRef.new(shape: CommandPluginName, location_name: "PluginName"))
     GetCommandInvocationResult.add_member(:response_code, Shapes::ShapeRef.new(shape: ResponseCode, location_name: "ResponseCode"))
     GetCommandInvocationResult.add_member(:execution_start_date_time, Shapes::ShapeRef.new(shape: StringDateTime, location_name: "ExecutionStartDateTime"))
@@ -1845,6 +1892,29 @@ module Aws::SSM
     InventoryAggregator.struct_class = Types::InventoryAggregator
 
     InventoryAggregatorList.member = Shapes::ShapeRef.new(shape: InventoryAggregator)
+
+    InventoryDeletionStatusItem.add_member(:deletion_id, Shapes::ShapeRef.new(shape: InventoryDeletionId, location_name: "DeletionId"))
+    InventoryDeletionStatusItem.add_member(:type_name, Shapes::ShapeRef.new(shape: InventoryItemTypeName, location_name: "TypeName"))
+    InventoryDeletionStatusItem.add_member(:deletion_start_time, Shapes::ShapeRef.new(shape: InventoryDeletionStartTime, location_name: "DeletionStartTime"))
+    InventoryDeletionStatusItem.add_member(:last_status, Shapes::ShapeRef.new(shape: InventoryDeletionStatus, location_name: "LastStatus"))
+    InventoryDeletionStatusItem.add_member(:last_status_message, Shapes::ShapeRef.new(shape: InventoryDeletionLastStatusMessage, location_name: "LastStatusMessage"))
+    InventoryDeletionStatusItem.add_member(:deletion_summary, Shapes::ShapeRef.new(shape: InventoryDeletionSummary, location_name: "DeletionSummary"))
+    InventoryDeletionStatusItem.add_member(:last_status_update_time, Shapes::ShapeRef.new(shape: InventoryDeletionLastStatusUpdateTime, location_name: "LastStatusUpdateTime"))
+    InventoryDeletionStatusItem.struct_class = Types::InventoryDeletionStatusItem
+
+    InventoryDeletionSummary.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
+    InventoryDeletionSummary.add_member(:remaining_count, Shapes::ShapeRef.new(shape: RemainingCount, location_name: "RemainingCount"))
+    InventoryDeletionSummary.add_member(:summary_items, Shapes::ShapeRef.new(shape: InventoryDeletionSummaryItems, location_name: "SummaryItems"))
+    InventoryDeletionSummary.struct_class = Types::InventoryDeletionSummary
+
+    InventoryDeletionSummaryItem.add_member(:version, Shapes::ShapeRef.new(shape: InventoryItemSchemaVersion, location_name: "Version"))
+    InventoryDeletionSummaryItem.add_member(:count, Shapes::ShapeRef.new(shape: ResourceCount, location_name: "Count"))
+    InventoryDeletionSummaryItem.add_member(:remaining_count, Shapes::ShapeRef.new(shape: RemainingCount, location_name: "RemainingCount"))
+    InventoryDeletionSummaryItem.struct_class = Types::InventoryDeletionSummaryItem
+
+    InventoryDeletionSummaryItems.member = Shapes::ShapeRef.new(shape: InventoryDeletionSummaryItem)
+
+    InventoryDeletionsList.member = Shapes::ShapeRef.new(shape: InventoryDeletionStatusItem)
 
     InventoryFilter.add_member(:key, Shapes::ShapeRef.new(shape: InventoryFilterKey, required: true, location_name: "Key"))
     InventoryFilter.add_member(:values, Shapes::ShapeRef.new(shape: InventoryFilterValueList, required: true, location_name: "Values"))
@@ -2340,6 +2410,7 @@ module Aws::SSM
     PutInventoryRequest.add_member(:items, Shapes::ShapeRef.new(shape: InventoryItemList, required: true, location_name: "Items"))
     PutInventoryRequest.struct_class = Types::PutInventoryRequest
 
+    PutInventoryResult.add_member(:message, Shapes::ShapeRef.new(shape: PutInventoryMessage, location_name: "Message"))
     PutInventoryResult.struct_class = Types::PutInventoryResult
 
     PutParameterRequest.add_member(:name, Shapes::ShapeRef.new(shape: PSParameterName, required: true, location_name: "Name"))
@@ -2463,6 +2534,7 @@ module Aws::SSM
     SendCommandRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdList, location_name: "InstanceIds"))
     SendCommandRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
     SendCommandRequest.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "DocumentName"))
+    SendCommandRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     SendCommandRequest.add_member(:document_hash, Shapes::ShapeRef.new(shape: DocumentHash, location_name: "DocumentHash"))
     SendCommandRequest.add_member(:document_hash_type, Shapes::ShapeRef.new(shape: DocumentHashType, location_name: "DocumentHashType"))
     SendCommandRequest.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: TimeoutSeconds, location_name: "TimeoutSeconds", metadata: {"box"=>true}))
@@ -2721,6 +2793,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsError)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
       end)
 
       api.add_operation(:cancel_command, Seahorse::Model::Operation.new.tap do |o|
@@ -2865,6 +2938,19 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentOperation)
         o.errors << Shapes::ShapeRef.new(shape: AssociatedInstances)
+      end)
+
+      api.add_operation(:delete_inventory, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInventory"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInventoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInventoryResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTypeNameException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOptionException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDeleteInventoryParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInventoryRequestException)
       end)
 
       api.add_operation(:delete_maintenance_window, Seahorse::Model::Operation.new.tap do |o|
@@ -3125,6 +3211,17 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+      end)
+
+      api.add_operation(:describe_inventory_deletions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInventoryDeletions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInventoryDeletionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInventoryDeletionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDeletionIdException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
       end)
 
@@ -3727,6 +3824,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceType)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
       end)
 
       api.add_operation(:send_automation_signal, Seahorse::Model::Operation.new.tap do |o|
@@ -3751,6 +3849,7 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentVersion)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOutputFolder)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameters)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedPlatformType)

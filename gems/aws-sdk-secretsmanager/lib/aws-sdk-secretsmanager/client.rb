@@ -216,6 +216,23 @@ module Aws::SecretsManager
     #   * {Types::CancelRotateSecretResponse#name #name} => String
     #   * {Types::CancelRotateSecretResponse#version_id #version_id} => String
     #
+    #
+    # @example Example: To cancel scheduled rotation for a secret
+    #
+    #   # The following example shows how to cancel rotation for a secret. The operation sets the RotationEnabled field to false
+    #   # and cancels all scheduled rotations. To resume scheduled rotations, you must re-enable rotation by calling the
+    #   # rotate-secret operation.
+    #
+    #   resp = client.cancel_rotate_secret({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "Name", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_rotate_secret({
@@ -237,9 +254,9 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Creates a new secret. A secret in AWS Secrets Manager consists of both
-    # the protected secret data and the important information needed to
-    # manage the secret.
+    # Creates a new secret. A secret in Secrets Manager consists of both the
+    # protected secret data and the important information needed to manage
+    # the secret.
     #
     # Secrets Manager stores the encrypted secret data in one of a
     # collection of "versions" associated with the secret. Each version
@@ -250,24 +267,24 @@ module Aws::SecretsManager
     # versions of the secret. Versions without a staging label are
     # considered deprecated and are not included in the list.
     #
-    # You provide the secret data to be encrypted by putting text in the
-    # `SecretString` parameter or binary data in the `SecretBinary`
-    # parameter. If you include `SecretString` or `SecretBinary` then
-    # Secrets Manager also creates an initial secret version and, if you
-    # don't supply a staging label, automatically maps the new version's
-    # ID to the staging label `AWSCURRENT`.
+    # You provide the secret data to be encrypted by putting text in either
+    # the `SecretString` parameter or binary data in the `SecretBinary`
+    # parameter, but not both. If you include `SecretString` or
+    # `SecretBinary` then Secrets Manager also creates an initial secret
+    # version and automatically attaches the staging label `AWSCURRENT` to
+    # the new version.
     #
-    # * If you call an operation that needs to encrypt or decrypt the
-    #   `SecretString` and `SecretBinary` for a secret in the same account
-    #   as the calling user and that secret doesn't specify a KMS
-    #   encryption key, AWS Secrets Manager uses the account's default AWS
-    #   managed customer master key (CMK) with the alias
-    #   `aws/secretsmanager`. If this key doesn't already exist in your
-    #   account then AWS Secrets Manager creates it for you automatically.
-    #   All users in the same AWS account automatically have access to use
-    #   the default CMK. Note that if an AWS Secrets Manager API call
-    #   results in AWS having to create the account's AWS-managed CMK, it
-    #   can result in a one-time significant delay in returning the result.
+    # <note markdown="1"> * If you call an operation that needs to encrypt or decrypt the
+    #   `SecretString` or `SecretBinary` for a secret in the same account as
+    #   the calling user and that secret doesn't specify a KMS encryption
+    #   key, Secrets Manager uses the account's default AWS managed
+    #   customer master key (CMK) with the alias `aws/secretsmanager`. If
+    #   this key doesn't already exist in your account then Secrets Manager
+    #   creates it for you automatically. All users in the same AWS account
+    #   automatically have access to use the default CMK. Note that if an
+    #   Secrets Manager API call results in AWS having to create the
+    #   account's AWS-managed CMK, it can result in a one-time significant
+    #   delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -278,7 +295,12 @@ module Aws::SecretsManager
     #   `KMSKeyId`. If you call an API that must encrypt or decrypt
     #   `SecretString` or `SecretBinary` using credentials from a different
     #   account then the KMS key policy must grant cross-account access to
-    #   that other account's user or role.
+    #   that other account's user or role for both the kms:GenerateDataKey
+    #   and kms:Decrypt operations.
+    #
+    #  </note>
+    #
+    #
     #
     # **Minimum permissions**
     #
@@ -290,7 +312,7 @@ module Aws::SecretsManager
     #   key to encrypt the secret. You do not need this permission to use
     #   the account's default AWS managed CMK for Secrets Manager.
     #
-    # * kms:Encrypt - needed only if you use a customer-created KMS key to
+    # * kms:Decrypt - needed only if you use a customer-created KMS key to
     #   encrypt the secret. You do not need this permission to use the
     #   account's default AWS managed CMK for Secrets Manager.
     #
@@ -314,9 +336,7 @@ module Aws::SecretsManager
     #   response value.
     #
     # @option params [required, String] :name
-    #   Specifies the friendly name of the new secret. The secret name can
-    #   consist of uppercase letters, lowercase letters, digits, and any of
-    #   the following characters: /\_+=.@-    Spaces are not permitted.
+    #   Specifies the friendly name of the new secret.
     #
     # @option params [String] :client_request_token
     #   (Optional) If you include `SecretString` or `SecretBinary`, then an
@@ -327,7 +347,7 @@ module Aws::SecretsManager
     #   then you can leave this parameter empty. The CLI or SDK generates a
     #   random UUID for you and includes as the value for this parameter in
     #   the request. If you don't use the SDK and instead generate a raw HTTP
-    #   request to the AWS Secrets Manager service endpoint, then you must
+    #   request to the Secrets Manager service endpoint, then you must
     #   generate a `ClientRequestToken` yourself for the new version and
     #   include that value in the request.
     #
@@ -367,14 +387,14 @@ module Aws::SecretsManager
     #
     # @option params [String] :kms_key_id
     #   (Optional) Specifies the ARN or alias of the AWS KMS customer master
-    #   key (CMK) to be used to encrypt the `SecretString` and `SecretBinary`
+    #   key (CMK) to be used to encrypt the `SecretString` or `SecretBinary`
     #   values in the versions stored in this secret.
     #
     #   If you don't specify this value, then Secrets Manager defaults to
     #   using the AWS account's default CMK (the one named
     #   `aws/secretsmanager`). If a KMS CMK with that name doesn't yet exist,
-    #   then AWS Secrets Manager creates it for you automatically the first
-    #   time it needs to encrypt a version's `SecretString` or `SecretBinary`
+    #   then Secrets Manager creates it for you automatically the first time
+    #   it needs to encrypt a version's `SecretString` or `SecretBinary`
     #   fields.
     #
     #   You can use the account's default CMK to encrypt and decrypt only if
@@ -389,12 +409,8 @@ module Aws::SecretsManager
     #   file and then use the appropriate technique for your tool to pass the
     #   contents of the file as a parameter.
     #
-    #   Either `SecretString`, `SecretBinary`, or both must have a value. They
-    #   cannot both be empty.
-    #
-    #   This `SecretBinary` value is stored separately from the
-    #   `SecretString`, but the two parameters jointly share a maximum size
-    #   limit.
+    #   Either `SecretString` or `SecretBinary` must have a value, but not
+    #   both. They cannot both be empty.
     #
     #   This parameter is not available using the Secrets Manager console. It
     #   can be accessed only by using the AWS CLI or one of the AWS SDKs.
@@ -403,11 +419,8 @@ module Aws::SecretsManager
     #   (Optional) Specifies text data that you want to encrypt and store in
     #   this new version of the secret.
     #
-    #   Either `SecretString`, `SecretBinary`, or both must have a value. They
-    #   cannot both be empty.
-    #
-    #   This string value is stored separately from the `SecretBinary`, but
-    #   the two parameters jointly share a maximum size limit.
+    #   Either `SecretString` or `SecretBinary` must have a value, but not
+    #   both. They cannot both be empty.
     #
     #   If you create a secret by using the Secrets Manager console then
     #   Secrets Manager puts the protected secret text in only the
@@ -437,8 +450,8 @@ module Aws::SecretsManager
     #   operation only appends tags to the existing list of tags. To remove
     #   tags, you must use UntagResource.
     #
-    #   * AWS Secrets Manager tag key names are case sensitive. A tag with the
-    #     key "ABC" is a different tag from one with key "abc".
+    #   * Secrets Manager tag key names are case sensitive. A tag with the key
+    #     "ABC" is a different tag from one with key "abc".
     #
     #   * If you check tags in IAM policy `Condition` elements as part of your
     #     security strategy, then adding or removing a tag can change
@@ -488,6 +501,26 @@ module Aws::SecretsManager
     #   * {Types::CreateSecretResponse#name #name} => String
     #   * {Types::CreateSecretResponse#version_id #version_id} => String
     #
+    #
+    # @example Example: To create a basic secret
+    #
+    #   # The following example shows how to create a secret. The credentials stored in the encrypted secret value are retrieved
+    #   # from a file on disk named mycreds.json.
+    #
+    #   resp = client.create_secret({
+    #     client_request_token: "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1", 
+    #     description: "My test database secret created with the CLI", 
+    #     name: "MyTestDatabaseSecret", 
+    #     secret_string: "{\"username\":\"david\",\"password\":\"BnQw!XDWgaEeT9XGTT29\"}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #     version_id: "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_secret({
@@ -522,24 +555,24 @@ module Aws::SecretsManager
 
     # Deletes an entire secret and all of its versions. You can optionally
     # include a recovery window during which you can restore the secret. If
-    # you don't provide a recovery window value, the operation defaults to
+    # you don't specify a recovery window value, the operation defaults to
     # 30 days. Secrets Manager attaches a `DeletionDate` stamp to the secret
     # that specifies the end of the recovery window. At the end of the
     # recovery window, Secrets Manager deletes the secret permanently.
     #
-    # At any time before recovery period ends, you can use RestoreSecret to
+    # At any time before recovery window ends, you can use RestoreSecret to
     # remove the `DeletionDate` and cancel the deletion of the secret.
     #
     # You cannot access the encrypted secret information in any secret that
     # is scheduled for deletion. If you need to access that information, you
-    # can cancel the deletion with RestoreSecret and then retrieve the
+    # must cancel the deletion with RestoreSecret and then retrieve the
     # information.
     #
     # <note markdown="1"> * There is no explicit operation to delete a version of a secret.
     #   Instead, remove all staging labels from the `VersionStage` field of
-    #   a version. That marks the version as deprecated and allows AWS
-    #   Secrets Manager to delete it as needed. Versions that do not have
-    #   any staging labels do not show up in ListSecretVersionIds unless you
+    #   a version. That marks the version as deprecated and allows Secrets
+    #   Manager to delete it as needed. Versions that do not have any
+    #   staging labels do not show up in ListSecretVersionIds unless you
     #   specify `IncludeDeprecated`.
     #
     # * The permanent secret deletion at the end of the waiting period is
@@ -562,14 +595,14 @@ module Aws::SecretsManager
     # * To create a secret, use CreateSecret.
     #
     # * To cancel deletion of a version of a secret before the recovery
-    #   period has expired, use RestoreSecret.
+    #   window has expired, use RestoreSecret.
     #
     # @option params [required, String] :secret_id
     #   Specifies the secret that you want to delete. You can specify either
     #   the Amazon Resource Name (ARN) or the friendly name of the secret.
     #
     # @option params [Integer] :recovery_window_in_days
-    #   (Optional) Specifies the number of days that AWS Secrets Manager waits
+    #   (Optional) Specifies the number of days that Secrets Manager waits
     #   before it can delete the secret.
     #
     #   This value can range from 7 to 30 days. The default value is 30.
@@ -579,6 +612,25 @@ module Aws::SecretsManager
     #   * {Types::DeleteSecretResponse#arn #arn} => String
     #   * {Types::DeleteSecretResponse#name #name} => String
     #   * {Types::DeleteSecretResponse#deletion_date #deletion_date} => Time
+    #
+    #
+    # @example Example: To delete a secret
+    #
+    #   # The following example shows how to delete a secret. The secret stays in your account in a deprecated and inaccessible
+    #   # state until the recovery window ends. After the date and time in the DeletionDate response field has passed, you can no
+    #   # longer recover this secret with restore-secret.
+    #
+    #   resp = client.delete_secret({
+    #     recovery_window_in_days: 7, 
+    #     secret_id: "MyTestDatabaseSecret1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     deletion_date: Time.parse("1524085349.095"), 
+    #     name: "MyTestDatabaseSecret", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -645,6 +697,49 @@ module Aws::SecretsManager
     #   * {Types::DescribeSecretResponse#deleted_date #deleted_date} => Time
     #   * {Types::DescribeSecretResponse#tags #tags} => Array&lt;Types::Tag&gt;
     #   * {Types::DescribeSecretResponse#version_ids_to_stages #version_ids_to_stages} => Hash&lt;String,Array&lt;String&gt;&gt;
+    #
+    #
+    # @example Example: To retrieve the details of a secret
+    #
+    #   # The following example shows how to get the details about a secret.
+    #
+    #   resp = client.describe_secret({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     description: "My test database secret", 
+    #     kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/EXAMPLE1-90ab-cdef-fedc-ba987KMSKEY1", 
+    #     last_accessed_date: Time.parse("1523923200"), 
+    #     last_changed_date: Time.parse(1523477145.729), 
+    #     last_rotated_date: Time.parse(1525747253.72), 
+    #     name: "MyTestDatabaseSecret", 
+    #     rotation_enabled: true, 
+    #     rotation_lambda_arn: "arn:aws:lambda:us-west-2:123456789012:function:MyTestRotationLambda", 
+    #     rotation_rules: {
+    #       automatically_after_days: 30, 
+    #     }, 
+    #     tags: [
+    #       {
+    #         key: "SecondTag", 
+    #         value: "AnotherValue", 
+    #       }, 
+    #       {
+    #         key: "FirstTag", 
+    #         value: "SomeValue", 
+    #       }, 
+    #     ], 
+    #     version_ids_to_stages: {
+    #       "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE" => [
+    #         "AWSPREVIOUS", 
+    #       ], 
+    #       "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE" => [
+    #         "AWSCURRENT", 
+    #       ], 
+    #     }, 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -739,6 +834,23 @@ module Aws::SecretsManager
     #
     #   * {Types::GetRandomPasswordResponse#random_password #random_password} => String
     #
+    #
+    # @example Example: To generate a random password
+    #
+    #   # The following example shows how to request a randomly generated password. This example includes the optional flags to
+    #   # require spaces and at least one character of each included type. It specifies a length of 20 characters.
+    #
+    #   resp = client.get_random_password({
+    #     include_space: true, 
+    #     password_length: 20, 
+    #     require_each_included_type: true, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     random_password: "N+Z43a,>vx7j O8^*<8i3", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_random_password({
@@ -765,8 +877,9 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Retrieves the contents of the encrypted fields `SecretString` and
-    # `SecretBinary` from the specified version of a secret.
+    # Retrieves the contents of the encrypted fields `SecretString` or
+    # `SecretBinary` from the specified version of a secret, whichever
+    # contains content.
     #
     # **Minimum permissions**
     #
@@ -824,6 +937,30 @@ module Aws::SecretsManager
     #   * {Types::GetSecretValueResponse#secret_string #secret_string} => String
     #   * {Types::GetSecretValueResponse#version_stages #version_stages} => Array&lt;String&gt;
     #   * {Types::GetSecretValueResponse#created_date #created_date} => Time
+    #
+    #
+    # @example Example: To retrieve the encrypted secret value of a secret
+    #
+    #   # The following example shows how to retrieve the secret string value from the version of the secret that has the
+    #   # AWSPREVIOUS staging label attached. If you want to retrieve the AWSCURRENT version of the secret, then you can omit the
+    #   # VersionStage parameter because it defaults to AWSCURRENT.
+    #
+    #   resp = client.get_secret_value({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #     version_stage: "AWSPREVIOUS", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     created_date: Time.parse(1523477145.713), 
+    #     name: "MyTestDatabaseSecret", 
+    #     secret_string: "{\n  \"username\":\"david\",\n  \"password\":\"BnQw&XDWgaEeT9XGTT29\"\n}\n", 
+    #     version_id: "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1", 
+    #     version_stages: [
+    #       "AWSPREVIOUS", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -893,8 +1030,8 @@ module Aws::SecretsManager
     #   beyond the maximum you specify, the `NextToken` response element is
     #   present and has a value (isn't null). Include that value as the
     #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that AWS Secrets Manager might
-    #   return fewer results than the maximum even when there are more results
+    #   the next part of the results. Note that Secrets Manager might return
+    #   fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -917,6 +1054,43 @@ module Aws::SecretsManager
     #   * {Types::ListSecretVersionIdsResponse#next_token #next_token} => String
     #   * {Types::ListSecretVersionIdsResponse#arn #arn} => String
     #   * {Types::ListSecretVersionIdsResponse#name #name} => String
+    #
+    #
+    # @example Example: To list all of the secret versions associated with a secret
+    #
+    #   # The following example shows how to retrieve a list of all of the versions of a secret, including those without any
+    #   # staging labels.
+    #
+    #   resp = client.list_secret_version_ids({
+    #     include_deprecated: true, 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #     versions: [
+    #       {
+    #         created_date: Time.parse(1523477145.713), 
+    #         version_id: "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE", 
+    #         version_stages: [
+    #           "AWSPREVIOUS", 
+    #         ], 
+    #       }, 
+    #       {
+    #         created_date: Time.parse(1523486221.391), 
+    #         version_id: "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE", 
+    #         version_stages: [
+    #           "AWSCURRENT", 
+    #         ], 
+    #       }, 
+    #       {
+    #         created_date: Time.parse(1511974462.36), 
+    #         version_id: "EXAMPLE3-90ab-cdef-fedc-ba987EXAMPLE;", 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -948,10 +1122,10 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Lists all of the secrets that are stored by AWS Secrets Manager in the
-    # AWS account. To list the versions currently stored for a specific
-    # secret, use ListSecretVersionIds. The encrypted fields `SecretString`
-    # and `SecretBinary` are not included in the output. To get that
+    # Lists all of the secrets that are stored by Secrets Manager in the AWS
+    # account. To list the versions currently stored for a specific secret,
+    # use ListSecretVersionIds. The encrypted fields `SecretString` and
+    # `SecretBinary` are not included in the output. To get that
     # information, call the GetSecretValue operation.
     #
     # <note markdown="1"> Always check the `NextToken` response parameter when calling any of
@@ -984,8 +1158,8 @@ module Aws::SecretsManager
     #   beyond the maximum you specify, the `NextToken` response element is
     #   present and has a value (isn't null). Include that value as the
     #   `NextToken` request parameter in the next call to the operation to get
-    #   the next part of the results. Note that AWS Secrets Manager might
-    #   return fewer results than the maximum even when there are more results
+    #   the next part of the results. Note that Secrets Manager might return
+    #   fewer results than the maximum even when there are more results
     #   available. You should check `NextToken` after every operation to
     #   ensure that you receive all of the results.
     #
@@ -1000,6 +1174,42 @@ module Aws::SecretsManager
     #
     #   * {Types::ListSecretsResponse#secret_list #secret_list} => Array&lt;Types::SecretListEntry&gt;
     #   * {Types::ListSecretsResponse#next_token #next_token} => String
+    #
+    #
+    # @example Example: To list the secrets in your account
+    #
+    #   # The following example shows how to list all of the secrets in your account.
+    #
+    #   resp = client.list_secrets({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     secret_list: [
+    #       {
+    #         arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #         description: "My test database secret", 
+    #         last_changed_date: Time.parse(1523477145.729), 
+    #         name: "MyTestDatabaseSecret", 
+    #         secret_versions_to_stages: {
+    #           "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE" => [
+    #             "AWSCURRENT", 
+    #           ], 
+    #         }, 
+    #       }, 
+    #       {
+    #         arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret1-d4e5f6", 
+    #         description: "Another secret created for a different database", 
+    #         last_changed_date: Time.parse(1523482025.685), 
+    #         name: "MyTestDatabaseSecret1", 
+    #         secret_versions_to_stages: {
+    #           "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE" => [
+    #             "AWSCURRENT", 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1042,11 +1252,12 @@ module Aws::SecretsManager
     # Stores a new encrypted secret value in the specified secret. To do
     # this, the operation creates a new version and attaches it to the
     # secret. The version can contain a new `SecretString` value or a new
-    # `SecretBinary` value.
+    # `SecretBinary` value. You can also specify the staging labels that are
+    # initially attached to the new version.
     #
-    # <note markdown="1"> The AWS Secrets Manager console uses only the `SecretString` field. To
-    # add binary data to a secret with the `SecretBinary` field you must use
-    # the AWS CLI or one of the AWS SDKs.
+    # <note markdown="1"> The Secrets Manager console uses only the `SecretString` field. To add
+    # binary data to a secret with the `SecretBinary` field you must use the
+    # AWS CLI or one of the AWS SDKs.
     #
     #  </note>
     #
@@ -1056,7 +1267,13 @@ module Aws::SecretsManager
     #
     # * If another version of this secret already exists, then this
     #   operation does not automatically move any staging labels other than
-    #   those that you specify in the `VersionStages` parameter.
+    #   those that you explicitly specify in the `VersionStages` parameter.
+    #
+    # * If this operation moves the staging label `AWSCURRENT` from another
+    #   version to this version (because you included it in the
+    #   `StagingLabels` parameter) then Secrets Manager also automatically
+    #   moves the staging label `AWSPREVIOUS` to the version that
+    #   `AWSCURRENT` was removed from.
     #
     # * This operation is idempotent. If a version with a `SecretVersionId`
     #   with the same value as the `ClientRequestToken` parameter already
@@ -1065,22 +1282,17 @@ module Aws::SecretsManager
     #   operation fails because you cannot modify an existing version; you
     #   can only create new ones.
     #
-    # * If this operation moves the staging label `AWSCURRENT` to this
-    #   version (because you included it in the `StagingLabels` parameter)
-    #   then Secrets Manager also automatically moves the staging label
-    #   `AWSPREVIOUS` to the version that `AWSCURRENT` was removed from.
-    #
-    # * If you call an operation that needs to encrypt or decrypt the
-    #   `SecretString` and `SecretBinary` for a secret in the same account
-    #   as the calling user and that secret doesn't specify a KMS
-    #   encryption key, AWS Secrets Manager uses the account's default AWS
-    #   managed customer master key (CMK) with the alias
-    #   `aws/secretsmanager`. If this key doesn't already exist in your
-    #   account then AWS Secrets Manager creates it for you automatically.
-    #   All users in the same AWS account automatically have access to use
-    #   the default CMK. Note that if an AWS Secrets Manager API call
-    #   results in AWS having to create the account's AWS-managed CMK, it
-    #   can result in a one-time significant delay in returning the result.
+    # <note markdown="1"> * If you call an operation that needs to encrypt or decrypt the
+    #   `SecretString` or `SecretBinary` for a secret in the same account as
+    #   the calling user and that secret doesn't specify a KMS encryption
+    #   key, Secrets Manager uses the account's default AWS managed
+    #   customer master key (CMK) with the alias `aws/secretsmanager`. If
+    #   this key doesn't already exist in your account then Secrets Manager
+    #   creates it for you automatically. All users in the same AWS account
+    #   automatically have access to use the default CMK. Note that if an
+    #   Secrets Manager API call results in AWS having to create the
+    #   account's AWS-managed CMK, it can result in a one-time significant
+    #   delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -1091,7 +1303,10 @@ module Aws::SecretsManager
     #   `KMSKeyId`. If you call an API that must encrypt or decrypt
     #   `SecretString` or `SecretBinary` using credentials from a different
     #   account then the KMS key policy must grant cross-account access to
-    #   that other account's user or role.
+    #   that other account's user or role for both the kms:GenerateDataKey
+    #   and kms:Decrypt operations.
+    #
+    #  </note>
     #
     # **Minimum permissions**
     #
@@ -1123,10 +1338,6 @@ module Aws::SecretsManager
     #   specify either the Amazon Resource Name (ARN) or the friendly name of
     #   the secret. The secret must already exist.
     #
-    #   The secret name can consist of uppercase letters, lowercase letters,
-    #   digits, and any of the following characters: /\_+=.@-    Spaces are
-    #   not permitted.
-    #
     # @option params [String] :client_request_token
     #   (Optional) Specifies a unique identifier for the new version of the
     #   secret.
@@ -1134,7 +1345,7 @@ module Aws::SecretsManager
     #   <note markdown="1"> If you use the AWS CLI or one of the AWS SDK to call this operation,
     #   then you can leave this parameter empty. The CLI or SDK generates a
     #   random UUID for you and includes that in the request. If you don't
-    #   use the SDK and instead generate a raw HTTP request to the AWS Secrets
+    #   use the SDK and instead generate a raw HTTP request to the Secrets
     #   Manager service endpoint, then you must generate a
     #   `ClientRequestToken` yourself for new versions and include that value
     #   in the request.
@@ -1175,7 +1386,8 @@ module Aws::SecretsManager
     #   command-line tools, we recommend that you store your binary data in a
     #   file and then use the appropriate technique for your tool to pass the
     #   contents of the file as a parameter. Either `SecretBinary` or
-    #   `SecretString` must have a value. They cannot both be empty.
+    #   `SecretString` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   This parameter is not accessible if the secret using the Secrets
     #   Manager console.
@@ -1183,7 +1395,8 @@ module Aws::SecretsManager
     # @option params [String] :secret_string
     #   (Optional) Specifies text data that you want to encrypt and store in
     #   this new version of the secret. Either `SecretString` or
-    #   `SecretBinary` must have a value. They cannot both be empty.
+    #   `SecretBinary` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   If you create this secret by using the Secrets Manager console then
     #   Secrets Manager puts the protected secret text in only the
@@ -1212,8 +1425,8 @@ module Aws::SecretsManager
     #   automatically removed from the other version and attached to this
     #   version.
     #
-    #   If you do not specify a value for `VersionStages` then AWS Secrets
-    #   Manager automatically moves the staging label `AWSCURRENT` to this new
+    #   If you do not specify a value for `VersionStages` then Secrets Manager
+    #   automatically moves the staging label `AWSCURRENT` to this new
     #   version.
     #
     # @return [Types::PutSecretValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1222,6 +1435,28 @@ module Aws::SecretsManager
     #   * {Types::PutSecretValueResponse#name #name} => String
     #   * {Types::PutSecretValueResponse#version_id #version_id} => String
     #   * {Types::PutSecretValueResponse#version_stages #version_stages} => Array&lt;String&gt;
+    #
+    #
+    # @example Example: To store a secret value in a new version of a secret
+    #
+    #   # The following example shows how to create a new version of the secret. Alternatively, you can use the update-secret
+    #   # command.
+    #
+    #   resp = client.put_secret_value({
+    #     client_request_token: "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #     secret_string: "{\"username\":\"david\",\"password\":\"BnQw!XDWgaEeT9XGTT29\"}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #     version_id: "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE", 
+    #     version_stages: [
+    #       "AWSCURRENT", 
+    #     ], 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1277,6 +1512,21 @@ module Aws::SecretsManager
     #
     #   * {Types::RestoreSecretResponse#arn #arn} => String
     #   * {Types::RestoreSecretResponse#name #name} => String
+    #
+    #
+    # @example Example: To restore a previously deleted secret
+    #
+    #   # The following example shows how to restore a secret that you previously scheduled for deletion.
+    #
+    #   resp = client.restore_secret({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1353,7 +1603,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/;asm-service-name;/latest/userguide/rotating-secrets.html
+    # [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
     #
     # @option params [required, String] :secret_id
     #   Specifies the secret that you want to rotate. You can specify either
@@ -1367,7 +1617,7 @@ module Aws::SecretsManager
     #   then you can leave this parameter empty. The CLI or SDK generates a
     #   random UUID for you and includes that in the request for this
     #   parameter. If you don't use the SDK and instead generate a raw HTTP
-    #   request to the AWS Secrets Manager service endpoint, then you must
+    #   request to the Secrets Manager service endpoint, then you must
     #   generate a `ClientRequestToken` yourself for new versions and include
     #   that value in the request.
     #
@@ -1508,6 +1758,26 @@ module Aws::SecretsManager
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To add tags to a secret
+    #
+    #   # The following example shows how to attach two tags each with a Key and Value to a secret. There is no output from this
+    #   # API. To see the result, use the DescribeSecret operation.
+    #
+    #   resp = client.tag_resource({
+    #     secret_id: "MyExampleSecret", 
+    #     tags: [
+    #       {
+    #         key: "FirstTag", 
+    #         value: "SomeValue", 
+    #       }, 
+    #       {
+    #         key: "SecondTag", 
+    #         value: "AnotherValue", 
+    #       }, 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
@@ -1574,6 +1844,20 @@ module Aws::SecretsManager
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
+    #
+    # @example Example: To remove tags from a secret
+    #
+    #   # The following example shows how to remove two tags from a secret's metadata. For each, both the tag and the associated
+    #   # value are removed. There is no output from this API. To see the result, use the DescribeSecret operation.
+    #
+    #   resp = client.untag_resource({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #     tag_keys: [
+    #       "FirstTag", 
+    #       "SecondTag", 
+    #     ], 
+    #   })
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
@@ -1597,36 +1881,33 @@ module Aws::SecretsManager
     # To modify the rotation configuration of a secret, use RotateSecret
     # instead.
     #
-    # <note markdown="1"> The AWS Secrets Manager console uses only the `SecretString` parameter
-    # and therefore limits you to encrypting and storing only a text string.
-    # To encrypt and store binary data as part of the version of a secret,
-    # you must use either the AWS CLI or one of the AWS SDKs.
+    # <note markdown="1"> The Secrets Manager console uses only the `SecretString` parameter and
+    # therefore limits you to encrypting and storing only a text string. To
+    # encrypt and store binary data as part of the version of a secret, you
+    # must use either the AWS CLI or one of the AWS SDKs.
     #
     #  </note>
-    #
-    # * If this update creates the first version of the secret or if you did
-    #   not include the `VersionStages` parameter then Secrets Manager
-    #   automatically attaches the staging label `AWSCURRENT` to the new
-    #   version and removes it from any version that had it previously. The
-    #   previous version (if any) is then given the staging label
-    #   `AWSPREVIOUS`.
     #
     # * If a version with a `SecretVersionId` with the same value as the
     #   `ClientRequestToken` parameter already exists, the operation
     #   generates an error. You cannot modify an existing version, you can
     #   only create new ones.
     #
-    # * If you call an operation that needs to encrypt or decrypt the
-    #   `SecretString` and `SecretBinary` for a secret in the same account
-    #   as the calling user and that secret doesn't specify a KMS
-    #   encryption key, AWS Secrets Manager uses the account's default AWS
-    #   managed customer master key (CMK) with the alias
-    #   `aws/secretsmanager`. If this key doesn't already exist in your
-    #   account then AWS Secrets Manager creates it for you automatically.
-    #   All users in the same AWS account automatically have access to use
-    #   the default CMK. Note that if an AWS Secrets Manager API call
-    #   results in AWS having to create the account's AWS-managed CMK, it
-    #   can result in a one-time significant delay in returning the result.
+    # * If you include `SecretString` or `SecretBinary` to create a new
+    #   secret version, Secrets Manager automatically attaches the staging
+    #   label `AWSCURRENT` to the new version.
+    #
+    # <note markdown="1"> * If you call an operation that needs to encrypt or decrypt the
+    #   `SecretString` or `SecretBinary` for a secret in the same account as
+    #   the calling user and that secret doesn't specify a KMS encryption
+    #   key, Secrets Manager uses the account's default AWS managed
+    #   customer master key (CMK) with the alias `aws/secretsmanager`. If
+    #   this key doesn't already exist in your account then Secrets Manager
+    #   creates it for you automatically. All users in the same AWS account
+    #   automatically have access to use the default CMK. Note that if an
+    #   Secrets Manager API call results in AWS having to create the
+    #   account's AWS-managed CMK, it can result in a one-time significant
+    #   delay in returning the result.
     #
     # * If the secret is in a different AWS account from the credentials
     #   calling an API that requires encryption or decryption of the secret
@@ -1637,7 +1918,10 @@ module Aws::SecretsManager
     #   `KMSKeyId`. If you call an API that must encrypt or decrypt
     #   `SecretString` or `SecretBinary` using credentials from a different
     #   account then the KMS key policy must grant cross-account access to
-    #   that other account's user or role.
+    #   that other account's user or role for both the kms:GenerateDataKey
+    #   and kms:Decrypt operations.
+    #
+    #  </note>
     #
     # **Minimum permissions**
     #
@@ -1677,7 +1961,7 @@ module Aws::SecretsManager
     #   If you use the AWS CLI or one of the AWS SDK to call this operation,
     #   then you can leave this parameter empty. The CLI or SDK generates a
     #   random UUID for you and includes that in the request. If you don't
-    #   use the SDK and instead generate a raw HTTP request to the AWS Secrets
+    #   use the SDK and instead generate a raw HTTP request to the Secrets
     #   Manager service endpoint, then you must generate a
     #   `ClientRequestToken` yourself for new versions and include that value
     #   in the request.
@@ -1724,8 +2008,8 @@ module Aws::SecretsManager
     #   If you don't specify this value, then Secrets Manager defaults to
     #   using the default CMK in the account (the one named
     #   `aws/secretsmanager`). If a KMS CMK with that name doesn't exist,
-    #   then AWS Secrets Manager creates it for you automatically the first
-    #   time it needs to encrypt a version's `Plaintext` or `PlaintextString`
+    #   then Secrets Manager creates it for you automatically the first time
+    #   it needs to encrypt a version's `Plaintext` or `PlaintextString`
     #   fields.
     #
     #   You can only use the account's default CMK to encrypt and decrypt if
@@ -1739,14 +2023,16 @@ module Aws::SecretsManager
     #   command-line tools, we recommend that you store your binary data in a
     #   file and then use the appropriate technique for your tool to pass the
     #   contents of the file as a parameter. Either `SecretBinary` or
-    #   `SecretString` must have a value. They cannot both be empty.
+    #   `SecretString` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   This parameter is not accessible using the Secrets Manager console.
     #
     # @option params [String] :secret_string
     #   (Optional) Specifies text data that you want to encrypt and store in
     #   this new version of the secret. Either `SecretBinary` or
-    #   `SecretString` must have a value. They cannot both be empty.
+    #   `SecretString` must have a value, but not both. They cannot both be
+    #   empty.
     #
     #   If you create this secret by using the Secrets Manager console then
     #   Secrets Manager puts the protected secret text in only the
@@ -1769,6 +2055,56 @@ module Aws::SecretsManager
     #   * {Types::UpdateSecretResponse#arn #arn} => String
     #   * {Types::UpdateSecretResponse#name #name} => String
     #   * {Types::UpdateSecretResponse#version_id #version_id} => String
+    #
+    #
+    # @example Example: To update the description of a secret
+    #
+    #   # The following example shows how to modify the description of a secret.
+    #
+    #   resp = client.update_secret({
+    #     client_request_token: "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE", 
+    #     description: "This is a new description for the secret.", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #   }
+    #
+    # @example Example: To update the KMS key associated with a secret
+    #
+    #   # This example shows how to update the KMS customer managed key (CMK) used to encrypt the secret value. The KMS CMK must
+    #   # be in the same region as the secret.
+    #
+    #   resp = client.update_secret({
+    #     kms_key_id: "arn:aws:kms:us-west-2:123456789012:key/EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #   }
+    #
+    # @example Example: To create a new version of the encrypted secret value
+    #
+    #   # The following example shows how to create a new version of the secret by updating the SecretString field. Alternatively,
+    #   # you can use the put-secret-value operation.
+    #
+    #   resp = client.update_secret({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #     secret_string: "{JSON STRING WITH CREDENTIALS}", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "aws:arn:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #     version_id: "EXAMPLE1-90ab-cdef-fedc-ba987EXAMPLE", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1840,7 +2176,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/;asm-service-name;/latest/userguide/terms-concepts.html#term_label
+    # [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/terms-concepts.html#term_staging-label
     #
     # @option params [required, String] :secret_id
     #   Specifies the secret with the version whose list of staging labels you
@@ -1875,6 +2211,61 @@ module Aws::SecretsManager
     #
     #   * {Types::UpdateSecretVersionStageResponse#arn #arn} => String
     #   * {Types::UpdateSecretVersionStageResponse#name #name} => String
+    #
+    #
+    # @example Example: To add a staging label attached to a version of a secret
+    #
+    #   # The following example shows you how to add a staging label to a version of a secret. You can review the results by
+    #   # running the operation ListSecretVersionIds and viewing the VersionStages response field for the affected version.
+    #
+    #   resp = client.update_secret_version_stage({
+    #     move_to_version_id: "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #     version_stage: "STAGINGLABEL1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #   }
+    #
+    # @example Example: To delete a staging label attached to a version of a secret
+    #
+    #   # The following example shows you how to delete a staging label that is attached to a version of a secret. You can review
+    #   # the results by running the operation ListSecretVersionIds and viewing the VersionStages response field for the affected
+    #   # version.
+    #
+    #   resp = client.update_secret_version_stage({
+    #     remove_from_version_id: "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #     version_stage: "STAGINGLABEL1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #   }
+    #
+    # @example Example: To move a staging label from one version of a secret to another
+    #
+    #   # The following example shows you how to move a staging label that is attached to one version of a secret to a different
+    #   # version. You can review the results by running the operation ListSecretVersionIds and viewing the VersionStages response
+    #   # field for the affected version.
+    #
+    #   resp = client.update_secret_version_stage({
+    #     move_to_version_id: "EXAMPLE2-90ab-cdef-fedc-ba987SECRET2", 
+    #     remove_from_version_id: "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #     version_stage: "AWSCURRENT", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1912,7 +2303,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -193,6 +193,7 @@ module Aws::CodeDeploy
     InvalidEC2TagCombinationException = Shapes::StructureShape.new(name: 'InvalidEC2TagCombinationException')
     InvalidEC2TagException = Shapes::StructureShape.new(name: 'InvalidEC2TagException')
     InvalidFileExistsBehaviorException = Shapes::StructureShape.new(name: 'InvalidFileExistsBehaviorException')
+    InvalidGitHubAccountTokenException = Shapes::StructureShape.new(name: 'InvalidGitHubAccountTokenException')
     InvalidGitHubAccountTokenNameException = Shapes::StructureShape.new(name: 'InvalidGitHubAccountTokenNameException')
     InvalidIamSessionArnException = Shapes::StructureShape.new(name: 'InvalidIamSessionArnException')
     InvalidIamUserArnException = Shapes::StructureShape.new(name: 'InvalidIamUserArnException')
@@ -1103,6 +1104,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUpdateOutdatedInstancesOnlyValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIgnoreApplicationStopFailuresValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGitHubAccountTokenException)
       end)
 
       api.add_operation(:create_deployment_config, Seahorse::Model::Operation.new.tap do |o|

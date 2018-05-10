@@ -564,31 +564,42 @@ module Aws::CostExplorer
     #   `COST_AND_USAGE` the resulting dimension values can be used in the
     #   `GetCostAndUsage` operation.
     #
-    #   If you set the context to `CostAndUsage`, you can use the following
-    #   dimensions for searching:
+    #   If you set the context to `COST_AND_USAGE`, you can use the
+    #   following dimensions for searching:
     #
     #   * AZ - The Availability Zone. An example is `us-east-1a`.
     #
-    #   * INSTANCE\_TYPE - The type of instance. An example is an EC2
+    #   * DATABASE\_ENGINE - The Amazon Relational Database Service
+    #     database. Examples are Aurora or MySQL.
+    #
+    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
     #     `m4.xlarge`.
+    #
+    #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
+    #     AWS services, such as Amazon Web Services.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that
     #     includes the full name of the member account. The value field
     #     contains the AWS ID of the member account.
     #
+    #   * OPERATING\_SYSTEM - The operating system. Examples are Windows or
+    #     Linux.
+    #
     #   * OPERATION - The action performed. Examples include `RunInstance`
     #     and `CreateBucket`.
+    #
+    #   * PLATFORM - The EC2 operating system. Examples are Windows or
+    #     Linux.
     #
     #   * PURCHASE\_TYPE - The reservation type of the purchase to which
     #     this usage is related. Examples include On-Demand Instances and
     #     Standard Reserved Instances.
     #
-    #   * SERVICE - The AWS service such as DynamoDB.
+    #   * SERVICE - The AWS service such as Amazon DynamoDB.
     #
     #   * USAGE\_TYPE - The type of usage. An example is
-    #     `DataTransfer-In-Bytes`. The response for the `GetDimensionValues`
-    #     operation includes a unit attribute, examples of which include GB
-    #     and Hrs.
+    #     DataTransfer-In-Bytes. The response for the `GetDimensionValues`
+    #     operation includes a unit attribute. Examples include GB and Hrs.
     #
     #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An
     #     example is EC2: CloudWatch – Alarms. The response for this
@@ -602,22 +613,29 @@ module Aws::CostExplorer
     #
     #   * AZ - The Availability Zone. An example is `us-east-1a`.
     #
-    #   * INSTANCE\_TYPE - The type of instance. An example is an EC2
+    #   * CACHE\_ENGINE - The Amazon ElastiCache operating system. Examples
+    #     are Windows or Linux.
+    #
+    #   * DEPLOYMENT\_OPTION - The scope of Amazon Relational Database
+    #     Service deployments. Valid values are `SingleAZ` and `MultiAZ`.
+    #
+    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that
     #     includes the full name of the member account. The value field
     #     contains the AWS ID of the member account.
     #
-    #   * PLATFORM - The specific combination of operating system, license
-    #     model, and software on an instance. For example, a Windows
-    #     instance with SQL Server Web and no license, or a Red Hat
-    #     Enterprise Linux instance.
+    #   * PLATFORM - The EC2 operating system. Examples are Windows or
+    #     Linux.
     #
     #   * REGION - The AWS Region.
     #
-    #   * SCOPE - The scope of a Reserved Instance (RI). Values are regional
-    #     or a single Availability Zone.
+    #   * SCOPE (Utilization only) - The scope of a Reserved Instance (RI).
+    #     Values are regional or a single Availability Zone.
+    #
+    #   * TAG (Coverage only) - The tags that are associated with a Reserved
+    #     Instance (RI).
     #
     #   * TENANCY - The tenancy of a resource. Examples are shared or
     #     dedicated.
@@ -644,31 +662,42 @@ module Aws::CostExplorer
     #   The filters that you used to filter your request. Some dimensions
     #   are available only for a specific context:
     #
-    #   If you set the context to `CostAndUsage`, you can use the following
-    #   dimensions for searching:
+    #   If you set the context to `COST_AND_USAGE`, you can use the
+    #   following dimensions for searching:
     #
     #   * AZ - The Availability Zone. An example is `us-east-1a`.
     #
-    #   * INSTANCE\_TYPE - The type of instance. An example is an EC2
+    #   * DATABASE\_ENGINE - The Amazon Relational Database Service
+    #     database. Examples are Aurora or MySQL.
+    #
+    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
     #     `m4.xlarge`.
+    #
+    #   * LEGAL\_ENTITY\_NAME - The name of the organization that sells you
+    #     AWS services, such as Amazon Web Services.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that
     #     includes the full name of the member account. The value field
     #     contains the AWS ID of the member account.
     #
+    #   * OPERATING\_SYSTEM - The operating system. Examples are Windows or
+    #     Linux.
+    #
     #   * OPERATION - The action performed. Examples include `RunInstance`
     #     and `CreateBucket`.
+    #
+    #   * PLATFORM - The EC2 operating system. Examples are Windows or
+    #     Linux.
     #
     #   * PURCHASE\_TYPE - The reservation type of the purchase to which
     #     this usage is related. Examples include On-Demand Instances and
     #     Standard Reserved Instances.
     #
-    #   * SERVICE - The AWS service such as DynamoDB.
+    #   * SERVICE - The AWS service such as Amazon DynamoDB.
     #
     #   * USAGE\_TYPE - The type of usage. An example is
-    #     `DataTransfer-In-Bytes`. The response for the `GetDimensionValues`
-    #     operation includes a unit attribute, examples of which include GB
-    #     and Hrs.
+    #     DataTransfer-In-Bytes. The response for the `GetDimensionValues`
+    #     operation includes a unit attribute. Examples include GB and Hrs.
     #
     #   * USAGE\_TYPE\_GROUP - The grouping of common usage types. An
     #     example is EC2: CloudWatch – Alarms. The response for this
@@ -682,22 +711,29 @@ module Aws::CostExplorer
     #
     #   * AZ - The Availability Zone. An example is `us-east-1a`.
     #
-    #   * INSTANCE\_TYPE - The type of instance. An example is an EC2
+    #   * CACHE\_ENGINE - The Amazon ElastiCache operating system. Examples
+    #     are Windows or Linux.
+    #
+    #   * DEPLOYMENT\_OPTION - The scope of Amazon Relational Database
+    #     Service deployments. Valid values are `SingleAZ` and `MultiAZ`.
+    #
+    #   * INSTANCE\_TYPE - The type of EC2 instance. An example is
     #     `m4.xlarge`.
     #
     #   * LINKED\_ACCOUNT - The description in the attribute map that
     #     includes the full name of the member account. The value field
     #     contains the AWS ID of the member account.
     #
-    #   * PLATFORM - The specific combination of operating system, license
-    #     model, and software on an instance. For example, a Windows
-    #     instance with SQL Server Web and no license, or a Red Hat
-    #     Enterprise Linux instance.
+    #   * PLATFORM - The EC2 operating system. Examples are Windows or
+    #     Linux.
     #
     #   * REGION - The AWS Region.
     #
-    #   * SCOPE - The scope of a Reserved Instance (RI). Values are regional
-    #     or a single Availability Zone.
+    #   * SCOPE (Utilization only) - The scope of a Reserved Instance (RI).
+    #     Values are regional or a single Availability Zone.
+    #
+    #   * TAG (Coverage only) - The tags that are associated with a Reserved
+    #     Instance (RI).
     #
     #   * TENANCY - The tenancy of a resource. Examples are shared or
     #     dedicated.
@@ -786,13 +822,23 @@ module Aws::CostExplorer
     #
     #   * AZ
     #
+    #   * CACHE\_ENGINE
+    #
+    #   * DATABASE\_ENGINE
+    #
+    #   * DEPLOYMENT\_OPTION
+    #
     #   * INSTANCE\_TYPE
     #
     #   * LINKED\_ACCOUNT
     #
+    #   * OPERATING\_SYSTEM
+    #
     #   * PLATFORM
     #
     #   * REGION
+    #
+    #   * TAG
     #
     #   * TENANCY
     #   @return [Array<Types::GroupDefinition>]
@@ -802,7 +848,7 @@ module Aws::CostExplorer
     #   values are `MONTHLY` and `DAILY`.
     #
     #   If `GroupBy` is set, `Granularity` can't be set. If `Granularity`
-    #   isn't set, the response object doesn't include the `Granularity`,
+    #   isn't set, the response object doesn't include `Granularity`,
     #   either `MONTHLY` or `DAILY`.
     #   @return [String]
     #
@@ -812,13 +858,25 @@ module Aws::CostExplorer
     #
     #   * AZ
     #
+    #   * CACHE\_ENGINE
+    #
+    #   * DATABASE\_ENGINE
+    #
+    #   * DEPLOYMENT\_OPTION
+    #
     #   * INSTANCE\_TYPE
     #
     #   * LINKED\_ACCOUNT
     #
+    #   * OPERATING\_SYSTEM
+    #
     #   * PLATFORM
     #
     #   * REGION
+    #
+    #   * SERVICE
+    #
+    #   * TAG
     #
     #   * TENANCY
     #
@@ -915,8 +973,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] service_specification
-    #   The specific service, such as EC2, that you want recommendations
-    #   for.
+    #   The hardware specifications for the service instances that you want
+    #   recommendations for, such as standard or convertible EC2 instances.
     #   @return [Types::ServiceSpecification]
     #
     # @!attribute [rw] page_size
@@ -1008,7 +1066,7 @@ module Aws::CostExplorer
     #       }
     #
     # @!attribute [rw] time_period
-    #   Sets the start and end dates for retrieving reserve instance (RI)
+    #   Sets the start and end dates for retrieving Reserved Instance (RI)
     #   utilization. The start date is inclusive, but the end date is
     #   exclusive. For example, if `start` is `2017-01-01` and `end` is
     #   `2017-05-01`, then the cost and usage data is retrieved from
@@ -1022,17 +1080,43 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] granularity
     #   If `GroupBy` is set, `Granularity` can't be set. If `Granularity`
-    #   isn't set, the response object doesn't include the `Granularity`,
+    #   isn't set, the response object doesn't include `Granularity`,
     #   either `MONTHLY` or `DAILY`. If both `GroupBy` and `Granularity`
     #   aren't set, `GetReservationUtilization` defaults to `DAILY`.
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   Filters utilization data by using different dimensions.
+    #   Filters utilization data by dimensions. You can filter by the
+    #   following dimensions:
+    #
+    #   * AZ
+    #
+    #   * CACHE\_ENGINE
+    #
+    #   * DATABASE\_ENGINE
+    #
+    #   * DEPLOYMENT\_OPTION
+    #
+    #   * INSTANCE\_TYPE
+    #
+    #   * LINKED\_ACCOUNT
+    #
+    #   * OPERATING\_SYSTEM
+    #
+    #   * PLATFORM
+    #
+    #   * REGION
+    #
+    #   * SERVICE
+    #
+    #   * SCOPE
+    #
+    #   * TENANCY
+    #
     #   `GetReservationUtilization` uses the same ` Expression ` object as
     #   the other operations, but only `AND` is supported among each
-    #   dimension, and nesting is supported to only one level deep. If there
-    #   are multiple values for a dimension, they are OR'd together.
+    #   dimension, and nesting is supported up to only one level deep. If
+    #   there are multiple values for a dimension, they are OR'd together.
     #   @return [Types::Expression]
     #
     # @!attribute [rw] next_page_token
@@ -1199,10 +1283,15 @@ module Aws::CostExplorer
     #   The EC2 instances that AWS recommends that you purchase.
     #   @return [Types::EC2InstanceDetails]
     #
+    # @!attribute [rw] rds_instance_details
+    #   The RDS instances that AWS recommends that you purchase.
+    #   @return [Types::RDSInstanceDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/InstanceDetails AWS API Documentation
     #
     class InstanceDetails < Struct.new(
-      :ec2_instance_details)
+      :ec2_instance_details,
+      :rds_instance_details)
       include Aws::Structure
     end
 
@@ -1221,6 +1310,56 @@ module Aws::CostExplorer
     class MetricValue < Struct.new(
       :amount,
       :unit)
+      include Aws::Structure
+    end
+
+    # Details about the RDS instances that AWS recommends that you purchase.
+    #
+    # @!attribute [rw] family
+    #   The instance family of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The type of instance that AWS recommends.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_engine
+    #   The database engine that the recommended reservation supports.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_option
+    #   Whether the recommendation is for a reservation in a single
+    #   availability zone or a reservation with a backup in a second
+    #   availability zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_model
+    #   The license model that the recommended reservation supports.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_generation
+    #   Whether the recommendation is for a current generation instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] size_flex_eligible
+    #   Whether the recommended reservation is size flexible.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RDSInstanceDetails AWS API Documentation
+    #
+    class RDSInstanceDetails < Struct.new(
+      :family,
+      :instance_type,
+      :region,
+      :database_engine,
+      :deployment_option,
+      :license_model,
+      :current_generation,
+      :size_flex_eligible)
       include Aws::Structure
     end
 
@@ -1401,8 +1540,8 @@ module Aws::CostExplorer
     #   @return [String]
     #
     # @!attribute [rw] estimated_reservation_cost_for_lookback_period
-    #   How much AWS estimates that you spent on Reserved Instances during
-    #   the specified historical period.
+    #   How much AWS estimates that you would have spent for all usage
+    #   during the specified historical period if you had had a reservation.
     #   @return [String]
     #
     # @!attribute [rw] upfront_cost

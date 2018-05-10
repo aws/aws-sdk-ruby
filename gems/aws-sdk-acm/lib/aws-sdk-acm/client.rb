@@ -177,7 +177,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/tags.html
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/tags.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM certificate to which the tag
@@ -347,13 +347,14 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Exports a certificate for use anywhere. You can export the
-    # certificate, the certificate chain, and the encrypted private key
-    # associated with the public key embedded in the certificate. You must
-    # store the private key securely. The private key is a 2048 bit RSA key.
-    # You must provide a passphrase for the private key when exporting it.
-    # You can use the following OpenSSL command to decrypt it later. Provide
-    # the passphrase when prompted.
+    # Exports a private certificate issued by a private certificate
+    # authority (CA) for use anywhere. You can export the certificate, the
+    # certificate chain, and the encrypted private key associated with the
+    # public key embedded in the certificate. You must store the private key
+    # securely. The private key is a 2048 bit RSA key. You must provide a
+    # passphrase for the private key when exporting it. You can use the
+    # following OpenSSL command to decrypt it later. Provide the passphrase
+    # when prompted.
     #
     # `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
     #
@@ -485,21 +486,25 @@ module Aws::ACM
     #   Include this argument only when you want to replace a previously
     #   imported certificate.
     #
-    # * When you import a certificate by using the CLI or one of the SDKs,
-    #   you must specify the certificate, the certificate chain, and the
-    #   private key by their file names preceded by `file://`. For example,
-    #   you can specify a certificate saved in the `C:\temp` folder as
+    # * When you import a certificate by using the CLI, you must specify the
+    #   certificate, the certificate chain, and the private key by their
+    #   file names preceded by `file://`. For example, you can specify a
+    #   certificate saved in the `C:\temp` folder as
     #   `file://C:\temp\certificate_to_import.pem`. If you are making an
     #   HTTP or HTTPS Query request, include these arguments as BLOBs.
+    #
+    # * When you import a certificate by using an SDK, you must specify the
+    #   certificate, the certificate chain, and the private key files in the
+    #   manner required by the programming language you're using.
     #
     # This operation returns the [Amazon Resource Name (ARN)][4] of the
     # imported certificate.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-services.html
-    # [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/import-certificate.html
-    # [3]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html
+    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+    # [3]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     # [4]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :certificate_arn
@@ -696,35 +701,27 @@ module Aws::ACM
     end
 
     # Requests an ACM certificate for use with other AWS services. To
-    # request an ACM certificate, you must specify the fully qualified
-    # domain name (FQDN) for your site in the `DomainName` parameter. You
-    # can also specify additional FQDNs in the `SubjectAlternativeNames`
-    # parameter.
+    # request an ACM certificate, you must specify a fully qualified domain
+    # name (FQDN) in the `DomainName` parameter. You can also specify
+    # additional FQDNs in the `SubjectAlternativeNames` parameter.
     #
-    # Each domain name that you specify must be validated to verify that you
-    # own or control the domain. You can use [DNS validation][1] or [email
-    # validation][2]. We recommend that you use DNS validation.
-    #
-    # If you choose email validation, email is sent to the domain owner to
-    # request approval to issue the certificate. Email is sent to three
-    # registered contact addresses in the WHOIS database and to five common
-    # system administration addresses formed from the `DomainName` you enter
-    # or the optional `ValidationDomain` parameter. For more information,
-    # see [Validate with Email][2].
-    #
-    # After receiving approval from the domain owner, the ACM certificate is
-    # issued.
+    # If you are requesting a private certificate, domain validation is not
+    # required. If you are requesting a public certificate, each domain name
+    # that you specify must be validated to verify that you own or control
+    # the domain. You can use [DNS validation][1] or [email validation][2].
+    # We recommend that you use DNS validation. ACM issues public
+    # certificates after receiving approval from the domain owner.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html
-    # [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-email.html
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [required, String] :domain_name
-    #   Fully qualified domain name (FQDN), such as www.example.com, of the
-    #   site that you want to secure with an ACM Certificate. Use an asterisk
-    #   (*) to create a wildcard certificate that protects several sites in
-    #   the same domain. For example, *.example.com protects www.example.com,
+    #   Fully qualified domain name (FQDN), such as www.example.com, that you
+    #   want to secure with an ACM certificate. Use an asterisk (*) to create
+    #   a wildcard certificate that protects several sites in the same domain.
+    #   For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
     #   The first domain name you enter cannot exceed 63 octets, including
@@ -732,14 +729,15 @@ module Aws::ACM
     #   be up to 253 octets in length.
     #
     # @option params [String] :validation_method
-    #   The method you want to use to validate that you own or control domain.
-    #   You can [validate with DNS][1] or [validate with email][2]. We
-    #   recommend that you use DNS validation.
+    #   The method you want to use if you are requesting a public certificate
+    #   to validate that you own or control domain. You can [validate with
+    #   DNS][1] or [validate with email][2]. We recommend that you use DNS
+    #   validation.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html
-    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-email.html
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [Array<String>] :subject_alternative_names
     #   Additional FQDNs to be included in the Subject Alternative Name
@@ -769,7 +767,7 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-limits.html
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
     #
     # @option params [String] :idempotency_token
     #   Customer chosen string that can be used to distinguish between calls
@@ -794,20 +792,21 @@ module Aws::ACM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #
     # @option params [String] :certificate_authority_arn
     #   The Amazon Resource Name (ARN) of the private certificate authority
-    #   (CA) that will be used to issue the certificate. For more information
-    #   about private CAs, see the [AWS Certificate Manager Private
-    #   Certificate Authority (PCA)][1] user guide. The ARN must have the
-    #   following form:
+    #   (CA) that will be used to issue the certificate. If you do not provide
+    #   an ARN and you are trying to request a private certificate, ACM will
+    #   attempt to issue a public certificate. For more information about
+    #   private CAs, see the [AWS Certificate Manager Private Certificate
+    #   Authority (PCA)][1] user guide. The ARN must have the following form:
     #
     #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm-pca/latest/userguide/PcaWelcome.html
+    #   [1]: http://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
     #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -860,7 +859,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/setup-email.html
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/setup-email.html
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the requested certificate. The
@@ -921,7 +920,7 @@ module Aws::ACM
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
     #
     # @option params [required, String] :certificate_arn
     #   ARN of the requested certificate to update. This must be of the form:
@@ -970,7 +969,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

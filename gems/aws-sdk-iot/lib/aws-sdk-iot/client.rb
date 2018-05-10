@@ -152,7 +152,8 @@ module Aws::IoT
     # enumerate your certificates.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [Boolean] :set_as_active
     #   Specifies whether the certificate is active.
@@ -342,7 +343,8 @@ module Aws::IoT
     # certificate changes from PENDING\_TRANSFER to INACTIVE.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -939,7 +941,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a thing record in the thing registry.
+    # Creates a thing record in the registry.
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to create.
@@ -1167,6 +1169,11 @@ module Aws::IoT
     #             token: "SalesforceToken", # required
     #             url: "SalesforceEndpoint", # required
     #           },
+    #           iot_analytics: {
+    #             channel_arn: "AwsArn",
+    #             channel_name: "ChannelName",
+    #             role_arn: "AwsArn",
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -1248,6 +1255,11 @@ module Aws::IoT
     #           token: "SalesforceToken", # required
     #           url: "SalesforceEndpoint", # required
     #         },
+    #         iot_analytics: {
+    #           channel_arn: "AwsArn",
+    #           channel_name: "ChannelName",
+    #           role_arn: "AwsArn",
+    #         },
     #       },
     #     },
     #   })
@@ -1282,7 +1294,8 @@ module Aws::IoT
     # Deletes a registered CA certificate.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate to delete.
+    #   The ID of the certificate to delete. (The last part of the certificate
+    #   ARN contains the certificate ID.)
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1307,7 +1320,8 @@ module Aws::IoT
     # UpdateCertificate API to set the certificate to the INACTIVE status.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [Boolean] :force_delete
     #   Forces a certificate request to be deleted.
@@ -1681,7 +1695,8 @@ module Aws::IoT
     # Gets information about the specified certificate.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @return [Types::DescribeCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2602,6 +2617,9 @@ module Aws::IoT
     #   resp.rule.actions[0].elasticsearch.id #=> String
     #   resp.rule.actions[0].salesforce.token #=> String
     #   resp.rule.actions[0].salesforce.url #=> String
+    #   resp.rule.actions[0].iot_analytics.channel_arn #=> String
+    #   resp.rule.actions[0].iot_analytics.channel_name #=> String
+    #   resp.rule.actions[0].iot_analytics.role_arn #=> String
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
     #   resp.rule.error_action.dynamo_db.table_name #=> String
@@ -2652,6 +2670,9 @@ module Aws::IoT
     #   resp.rule.error_action.elasticsearch.id #=> String
     #   resp.rule.error_action.salesforce.token #=> String
     #   resp.rule.error_action.salesforce.url #=> String
+    #   resp.rule.error_action.iot_analytics.channel_arn #=> String
+    #   resp.rule.error_action.iot_analytics.channel_name #=> String
+    #   resp.rule.error_action.iot_analytics.role_arn #=> String
     #
     # @overload get_topic_rule(params = {})
     # @param [Hash] params ({})
@@ -3095,7 +3116,7 @@ module Aws::IoT
     #   The maximum number of results to return at one time.
     #
     # @option params [String] :next_token
-    #   A token used to retreive the next set of results.
+    #   A token used to retrieve the next set of results.
     #
     # @option params [String] :ota_update_status
     #   The OTA update job status.
@@ -4016,10 +4037,20 @@ module Aws::IoT
     # Provisions a thing.
     #
     # @option params [required, String] :template_body
-    #   The provisioning template.
+    #   The provisioning template. See [Programmatic Provisioning][1] for more
+    #   information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #
     # @option params [Hash<String,String>] :parameters
-    #   The parameters for provisioning a thing.
+    #   The parameters for provisioning a thing. See [Programmatic
+    #   Provisioning][1] for more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #
     # @return [Types::RegisterThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4060,7 +4091,8 @@ module Aws::IoT
     # account in the INACTIVE state.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [String] :reject_reason
     #   The reason the certificate transfer was rejected.
@@ -4211,6 +4243,11 @@ module Aws::IoT
     #             token: "SalesforceToken", # required
     #             url: "SalesforceEndpoint", # required
     #           },
+    #           iot_analytics: {
+    #             channel_arn: "AwsArn",
+    #             channel_name: "ChannelName",
+    #             role_arn: "AwsArn",
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -4291,6 +4328,11 @@ module Aws::IoT
     #         salesforce: {
     #           token: "SalesforceToken", # required
     #           url: "SalesforceEndpoint", # required
+    #         },
+    #         iot_analytics: {
+    #           channel_arn: "AwsArn",
+    #           channel_name: "ChannelName",
+    #           role_arn: "AwsArn",
     #         },
     #       },
     #     },
@@ -4677,7 +4719,8 @@ module Aws::IoT
     # the DetachPrincipalPolicy API to detach them.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [required, String] :target_aws_account
     #   The AWS account.
@@ -4808,7 +4851,8 @@ module Aws::IoT
     # IoT using a certificate.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [required, String] :new_status
     #   The new status.
@@ -5107,7 +5151,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

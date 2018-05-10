@@ -119,6 +119,9 @@ module Seahorse
 
         def session(config, req, &block)
           pool_for(config).session_for(req.endpoint) do |http|
+            # Ruby 2.5, can disable retries for idempotent operations
+            # avoid patching for Ruby 2.5 for disable retry
+            http.max_retries = 0 if http.respond_to?(:max_retries)
             http.read_timeout = config.http_read_timeout
             yield(http)
           end

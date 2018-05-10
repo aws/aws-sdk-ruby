@@ -2008,8 +2008,8 @@ module Aws::EC2
     # Cancels one or more Spot Instance requests. Spot Instances are
     # instances that Amazon EC2 starts on your behalf when the maximum price
     # that you specify exceeds the current Spot price. For more information,
-    # see [Spot Instance Requests][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # see [Spot Instance Requests][1] in the *Amazon EC2 User Guide for
+    # Linux Instances*.
     #
     # Canceling a Spot Instance request does not terminate running Spot
     # Instances associated with the request.
@@ -2390,10 +2390,9 @@ module Aws::EC2
     #   The action will eventually fail.
     #
     # @option params [String] :presigned_url
-    #   The pre-signed URL parameter is required when copying an encrypted
-    #   snapshot with the Amazon EC2 Query API; it is available as an optional
-    #   parameter in all other cases. For more information, see [Query
-    #   Requests][1].
+    #   When you copy an encrypted source snapshot using the Amazon EC2 Query
+    #   API, you must supply a pre-signed URL. This parameter is optional for
+    #   unencrypted snapshots. For more information, see [Query Requests][1].
     #
     #   The `PresignedUrl` should use the snapshot source endpoint, the
     #   `CopySnapshot` action, and include the `SourceRegion`,
@@ -2913,6 +2912,151 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_egress_only_internet_gateway(params = {}, options = {})
       req = build_request(:create_egress_only_internet_gateway, params)
+      req.send_request(options)
+    end
+
+    # Launches an EC2 Fleet.
+    #
+    # You can create a single EC2 Fleet that includes multiple launch
+    # specifications that vary by instance type, AMI, Availability Zone, or
+    # subnet.
+    #
+    # For more information, see [Launching an EC2 Fleet][1] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Types::SpotOptionsRequest] :spot_options
+    #   Includes `SpotAllocationStrategy` and
+    #   `SpotInstanceInterruptionBehavior` inside this structure.
+    #
+    # @option params [String] :excess_capacity_termination_policy
+    #   Indicates whether running instances should be terminated if the total
+    #   target capacity of the EC2 Fleet is decreased below the current size
+    #   of the EC2 Fleet.
+    #
+    # @option params [required, Array<Types::FleetLaunchTemplateConfigRequest>] :launch_template_configs
+    #   The configuration for the EC2 Fleet.
+    #
+    # @option params [required, Types::TargetCapacitySpecificationRequest] :target_capacity_specification
+    #   The `TotalTargetCapacity`, `OnDemandTargetCapacity`,
+    #   `SpotTargetCapacity`, and `DefaultCapacityType` structure.
+    #
+    # @option params [Boolean] :terminate_instances_with_expiration
+    #   Indicates whether running instances should be terminated when the EC2
+    #   Fleet expires.
+    #
+    # @option params [String] :type
+    #   The type of request. Indicates whether the EC2 Fleet only `requests`
+    #   the target capacity, or also attempts to `maintain` it. If you request
+    #   a certain target capacity, EC2 Fleet only places the required
+    #   requests. It does not attempt to replenish instances if capacity is
+    #   diminished, and does not submit requests in alternative capacity pools
+    #   if capacity is unavailable. To maintain a certain target capacity, EC2
+    #   Fleet places the required requests to meet this target capacity. It
+    #   also automatically replenishes any interrupted Spot Instances.
+    #   Default: `maintain`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :valid_from
+    #   The start date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
+    #   fulfilling the request immediately.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :valid_until
+    #   The end date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new EC2 Fleet
+    #   requests are placed or able to fulfill the request. The default end
+    #   date is 7 days from the current date.
+    #
+    # @option params [Boolean] :replace_unhealthy_instances
+    #   Indicates whether EC2 Fleet should replace unhealthy instances.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags for an EC2 Fleet resource.
+    #
+    # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFleetResult#fleet_id #fleet_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_fleet({
+    #     dry_run: false,
+    #     client_token: "String",
+    #     spot_options: {
+    #       allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #       instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #     },
+    #     excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
+    #     launch_template_configs: [ # required
+    #       {
+    #         launch_template_specification: {
+    #           launch_template_id: "String",
+    #           launch_template_name: "LaunchTemplateName",
+    #           version: "String",
+    #         },
+    #         overrides: [
+    #           {
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #             max_price: "String",
+    #             subnet_id: "String",
+    #             availability_zone: "String",
+    #             weighted_capacity: 1.0,
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     target_capacity_specification: { # required
+    #       total_target_capacity: 1, # required
+    #       on_demand_target_capacity: 1,
+    #       spot_target_capacity: 1,
+    #       default_target_capacity_type: "spot", # accepts spot, on-demand
+    #     },
+    #     terminate_instances_with_expiration: false,
+    #     type: "request", # accepts request, maintain
+    #     valid_from: Time.now,
+    #     valid_until: Time.now,
+    #     replace_unhealthy_instances: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fleet_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleet AWS API Documentation
+    #
+    # @overload create_fleet(params = {})
+    # @param [Hash] params ({})
+    def create_fleet(params = {}, options = {})
+      req = build_request(:create_fleet, params)
       req.send_request(options)
     end
 
@@ -3760,11 +3904,12 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a NAT gateway in the specified subnet. A NAT gateway can be
-    # used to enable instances in a private subnet to connect to the
-    # Internet. This action creates a network interface in the specified
-    # subnet with a private IP address from the IP address range of the
-    # subnet. For more information, see [NAT Gateways][1] in the *Amazon
+    # Creates a NAT gateway in the specified public subnet. This action
+    # creates a network interface in the specified subnet with a private IP
+    # address from the IP address range of the subnet. Internet-bound
+    # traffic from a private subnet can be routed to the NAT gateway,
+    # therefore enabling instances in the private subnet to connect to the
+    # internet. For more information, see [NAT Gateways][1] in the *Amazon
     # Virtual Private Cloud User Guide*.
     #
     #
@@ -4020,13 +4165,13 @@ module Aws::EC2
     #
     # @option params [required, String] :protocol
     #   The protocol. A value of `-1` or `all` means all protocols. If you
-    #   specify `all`, `-1`, or a protocol number other than `tcp`, `udp`, or
-    #   `icmp`, traffic on all ports is allowed, regardless of any ports or
-    #   ICMP types or codes you specify. If you specify protocol `58` (ICMPv6)
-    #   and specify an IPv4 CIDR block, traffic for all ICMP types and codes
-    #   allowed, regardless of any that you specify. If you specify protocol
-    #   `58` (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP
-    #   type and code.
+    #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
+    #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
+    #   any ports or ICMP types or codes you specify. If you specify protocol
+    #   `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP
+    #   types and codes allowed, regardless of any that you specify. If you
+    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
+    #   must specify an ICMP type and code.
     #
     # @option params [required, String] :rule_action
     #   Indicates whether to allow or deny the traffic that matches the rule.
@@ -4944,8 +5089,8 @@ module Aws::EC2
 
     # Creates a data feed for Spot Instances, enabling you to view Spot
     # Instance usage logs. You can create one data feed per AWS account. For
-    # more information, see [Spot Instance Data Feed][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # more information, see [Spot Instance Data Feed][1] in the *Amazon EC2
+    # User Guide for Linux Instances*.
     #
     #
     #
@@ -5258,11 +5403,16 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #
     # @option params [Integer] :iops
-    #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
-    #   operations per second (IOPS) to provision for the volume, with a
-    #   maximum ratio of 50 IOPS/GiB.
+    #   The number of I/O operations per second (IOPS) to provision for the
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
+    #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
+    #   Volume Types][1].
     #
-    #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
+    #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #
     # @option params [String] :kms_key_id
     #   An identifier for the AWS Key Management Service (AWS KMS) customer
@@ -5311,7 +5461,11 @@ module Aws::EC2
     #   Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1` for
     #   Cold HDD, or `standard` for Magnetic volumes.
     #
-    #   Default: `standard`
+    #   Defaults: If no volume type is specified, the default is `standard` in
+    #   us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1,
+    #   ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2,
+    #   ap-south-1, us-gov-west-1, and cn-north-1. In all other regions, EBS
+    #   defaults to `gp2`.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -6275,6 +6429,61 @@ module Aws::EC2
     # @param [Hash] params ({})
     def delete_egress_only_internet_gateway(params = {}, options = {})
       req = build_request(:delete_egress_only_internet_gateway, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified EC2 Fleet.
+    #
+    # After you delete an EC2 Fleet, the EC2 Fleet launches no new
+    # instances. You must specify whether the EC2 Fleet should also
+    # terminate its instances. If you terminate the instances, the EC2 Fleet
+    # enters the `deleted_terminating` state. Otherwise, the EC2 Fleet
+    # enters the `deleted_running` state, and the instances continue to run
+    # until they are interrupted or you terminate them manually.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, Array<String>] :fleet_ids
+    #   The IDs of the EC2 Fleets.
+    #
+    # @option params [required, Boolean] :terminate_instances
+    #   Indicates whether to terminate instances for an EC2 Fleet if it is
+    #   deleted successfully.
+    #
+    # @return [Types::DeleteFleetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFleetsResult#successful_fleet_deletions #successful_fleet_deletions} => Array&lt;Types::DeleteFleetSuccessItem&gt;
+    #   * {Types::DeleteFleetsResult#unsuccessful_fleet_deletions #unsuccessful_fleet_deletions} => Array&lt;Types::DeleteFleetErrorItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_fleets({
+    #     dry_run: false,
+    #     fleet_ids: ["FleetIdentifier"], # required
+    #     terminate_instances: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_fleet_deletions #=> Array
+    #   resp.successful_fleet_deletions[0].current_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted-running", "deleted-terminating", "modifying"
+    #   resp.successful_fleet_deletions[0].previous_fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted-running", "deleted-terminating", "modifying"
+    #   resp.successful_fleet_deletions[0].fleet_id #=> String
+    #   resp.unsuccessful_fleet_deletions #=> Array
+    #   resp.unsuccessful_fleet_deletions[0].error.code #=> String, one of "fleetIdDoesNotExist", "fleetIdMalformed", "fleetNotInDeletableState", "unexpectedError"
+    #   resp.unsuccessful_fleet_deletions[0].error.message #=> String
+    #   resp.unsuccessful_fleet_deletions[0].fleet_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleets AWS API Documentation
+    #
+    # @overload delete_fleets(params = {})
+    # @param [Hash] params ({})
+    def delete_fleets(params = {}, options = {})
+      req = build_request(:delete_fleets, params)
       req.send_request(options)
     end
 
@@ -8702,6 +8911,227 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Describes the events for the specified EC2 Fleet during the specified
+    # time.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :event_type
+    #   The type of events to describe. By default, all events are described.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and 1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [required, String] :fleet_id
+    #   The ID of the EC2 Fleet.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start date and time for the events, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #
+    # @return [Types::DescribeFleetHistoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFleetHistoryResult#history_records #history_records} => Array&lt;Types::HistoryRecordEntry&gt;
+    #   * {Types::DescribeFleetHistoryResult#last_evaluated_time #last_evaluated_time} => Time
+    #   * {Types::DescribeFleetHistoryResult#next_token #next_token} => String
+    #   * {Types::DescribeFleetHistoryResult#fleet_id #fleet_id} => String
+    #   * {Types::DescribeFleetHistoryResult#start_time #start_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fleet_history({
+    #     dry_run: false,
+    #     event_type: "instance-change", # accepts instance-change, fleet-change, service-error
+    #     max_results: 1,
+    #     next_token: "String",
+    #     fleet_id: "FleetIdentifier", # required
+    #     start_time: Time.now, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.history_records #=> Array
+    #   resp.history_records[0].event_information.event_description #=> String
+    #   resp.history_records[0].event_information.event_sub_type #=> String
+    #   resp.history_records[0].event_information.instance_id #=> String
+    #   resp.history_records[0].event_type #=> String, one of "instance-change", "fleet-change", "service-error"
+    #   resp.history_records[0].timestamp #=> Time
+    #   resp.last_evaluated_time #=> Time
+    #   resp.next_token #=> String
+    #   resp.fleet_id #=> String
+    #   resp.start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetHistory AWS API Documentation
+    #
+    # @overload describe_fleet_history(params = {})
+    # @param [Hash] params ({})
+    def describe_fleet_history(params = {}, options = {})
+      req = build_request(:describe_fleet_history, params)
+      req.send_request(options)
+    end
+
+    # Describes the running instances for the specified EC2 Fleet.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and 1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [required, String] :fleet_id
+    #   The ID of the EC2 Fleet.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    # @return [Types::DescribeFleetInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFleetInstancesResult#active_instances #active_instances} => Array&lt;Types::ActiveInstance&gt;
+    #   * {Types::DescribeFleetInstancesResult#next_token #next_token} => String
+    #   * {Types::DescribeFleetInstancesResult#fleet_id #fleet_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fleet_instances({
+    #     dry_run: false,
+    #     max_results: 1,
+    #     next_token: "String",
+    #     fleet_id: "FleetIdentifier", # required
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.active_instances #=> Array
+    #   resp.active_instances[0].instance_id #=> String
+    #   resp.active_instances[0].instance_type #=> String
+    #   resp.active_instances[0].spot_instance_request_id #=> String
+    #   resp.active_instances[0].instance_health #=> String, one of "healthy", "unhealthy"
+    #   resp.next_token #=> String
+    #   resp.fleet_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetInstances AWS API Documentation
+    #
+    # @overload describe_fleet_instances(params = {})
+    # @param [Hash] params ({})
+    def describe_fleet_instances(params = {}, options = {})
+      req = build_request(:describe_fleet_instances, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified EC2 Fleet.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and 1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Array<String>] :fleet_ids
+    #   The ID of the EC2 Fleets.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   One or more filters.
+    #
+    # @return [Types::DescribeFleetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFleetsResult#next_token #next_token} => String
+    #   * {Types::DescribeFleetsResult#fleets #fleets} => Array&lt;Types::FleetData&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fleets({
+    #     dry_run: false,
+    #     max_results: 1,
+    #     next_token: "String",
+    #     fleet_ids: ["FleetIdentifier"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.fleets #=> Array
+    #   resp.fleets[0].activity_status #=> String, one of "error", "pending-fulfillment", "pending-termination", "fulfilled"
+    #   resp.fleets[0].create_time #=> Time
+    #   resp.fleets[0].fleet_id #=> String
+    #   resp.fleets[0].fleet_state #=> String, one of "submitted", "active", "deleted", "failed", "deleted-running", "deleted-terminating", "modifying"
+    #   resp.fleets[0].client_token #=> String
+    #   resp.fleets[0].excess_capacity_termination_policy #=> String, one of "no-termination", "termination"
+    #   resp.fleets[0].fulfilled_capacity #=> Float
+    #   resp.fleets[0].fulfilled_on_demand_capacity #=> Float
+    #   resp.fleets[0].launch_template_configs #=> Array
+    #   resp.fleets[0].launch_template_configs[0].launch_template_specification.launch_template_id #=> String
+    #   resp.fleets[0].launch_template_configs[0].launch_template_specification.launch_template_name #=> String
+    #   resp.fleets[0].launch_template_configs[0].launch_template_specification.version #=> String
+    #   resp.fleets[0].launch_template_configs[0].overrides #=> Array
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "x1e.xlarge", "x1e.2xlarge", "x1e.4xlarge", "x1e.8xlarge", "x1e.16xlarge", "x1e.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "i3.large", "i3.xlarge", "i3.2xlarge", "i3.4xlarge", "i3.8xlarge", "i3.16xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "c5.large", "c5.xlarge", "c5.2xlarge", "c5.4xlarge", "c5.9xlarge", "c5.18xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "g3.4xlarge", "g3.8xlarge", "g3.16xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "p3.2xlarge", "p3.8xlarge", "p3.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge", "m5.large", "m5.xlarge", "m5.2xlarge", "m5.4xlarge", "m5.12xlarge", "m5.24xlarge", "h1.2xlarge", "h1.4xlarge", "h1.8xlarge", "h1.16xlarge"
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].max_price #=> String
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].subnet_id #=> String
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].availability_zone #=> String
+    #   resp.fleets[0].launch_template_configs[0].overrides[0].weighted_capacity #=> Float
+    #   resp.fleets[0].target_capacity_specification.total_target_capacity #=> Integer
+    #   resp.fleets[0].target_capacity_specification.on_demand_target_capacity #=> Integer
+    #   resp.fleets[0].target_capacity_specification.spot_target_capacity #=> Integer
+    #   resp.fleets[0].target_capacity_specification.default_target_capacity_type #=> String, one of "spot", "on-demand"
+    #   resp.fleets[0].terminate_instances_with_expiration #=> Boolean
+    #   resp.fleets[0].type #=> String, one of "request", "maintain"
+    #   resp.fleets[0].valid_from #=> Time
+    #   resp.fleets[0].valid_until #=> Time
+    #   resp.fleets[0].replace_unhealthy_instances #=> Boolean
+    #   resp.fleets[0].spot_options.allocation_strategy #=> String, one of "lowest-price", "diversified"
+    #   resp.fleets[0].spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
+    #   resp.fleets[0].tags #=> Array
+    #   resp.fleets[0].tags[0].key #=> String
+    #   resp.fleets[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleets AWS API Documentation
+    #
+    # @overload describe_fleets(params = {})
+    # @param [Hash] params ({})
+    def describe_fleets(params = {}, options = {})
+      req = build_request(:describe_fleets, params)
+      req.send_request(options)
+    end
+
     # Describes one or more flow logs. To view the information in your flow
     # logs (the log streams for the network interfaces), you must use the
     # CloudWatch Logs console or the CloudWatch Logs API.
@@ -9122,23 +9552,23 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filter
     #   One or more filters.
     #
-    #   * `instance-type` - The instance type size that the Dedicated Host is
-    #     configured to support.
-    #
     #   * `auto-placement` - Whether auto-placement is enabled or disabled
     #     (`on` \| `off`).
+    #
+    #   * `availability-zone` - The Availability Zone of the host.
+    #
+    #   * `client-token` - The idempotency token you provided when you
+    #     allocated the host.
     #
     #   * `host-reservation-id` - The ID of the reservation assigned to this
     #     host.
     #
-    #   * `client-token` - The idempotency token you provided when you
-    #     launched the instance
+    #   * `instance-type` - The instance type size that the Dedicated Host is
+    #     configured to support.
     #
-    #   * `state`- The allocation state of the Dedicated Host (`available` \|
+    #   * `state` - The allocation state of the Dedicated Host (`available` \|
     #     `under-assessment` \| `permanent-failure` \| `released` \|
     #     `released-permanent-failure`).
-    #
-    #   * `availability-zone` - The Availability Zone of the host.
     #
     # @option params [Array<String>] :host_ids
     #   The IDs of the Dedicated Hosts. The IDs are used for targeted instance
@@ -9195,6 +9625,8 @@ module Aws::EC2
     #   resp.hosts[0].instances[0].instance_id #=> String
     #   resp.hosts[0].instances[0].instance_type #=> String
     #   resp.hosts[0].state #=> String, one of "available", "under-assessment", "permanent-failure", "released", "released-permanent-failure"
+    #   resp.hosts[0].allocation_time #=> Time
+    #   resp.hosts[0].release_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts AWS API Documentation
@@ -10647,6 +11079,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].tags[0].key #=> String
     #   resp.reservations[0].instances[0].tags[0].value #=> String
     #   resp.reservations[0].instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
+    #   resp.reservations[0].instances[0].cpu_options.core_count #=> Integer
+    #   resp.reservations[0].instances[0].cpu_options.threads_per_core #=> Integer
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -13916,8 +14350,8 @@ module Aws::EC2
     end
 
     # Describes the data feed for Spot Instances. For more information, see
-    # [Spot Instance Data Feed][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # [Spot Instance Data Feed][1] in the *Amazon EC2 User Guide for Linux
+    # Instances*.
     #
     #
     #
@@ -14275,6 +14709,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.client_token #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.excess_capacity_termination_policy #=> String, one of "noTermination", "default"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.fulfilled_capacity #=> Float
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_fulfilled_capacity #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.iam_fleet_role #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications #=> Array
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].security_groups #=> Array
@@ -14342,6 +14777,7 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_template_configs[0].overrides[0].weighted_capacity #=> Float
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.spot_price #=> String
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.target_capacity #=> Integer
+    #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.on_demand_target_capacity #=> Integer
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.terminate_instances_with_expiration #=> Boolean
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.type #=> String, one of "request", "maintain"
     #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.valid_from #=> Time
@@ -14367,8 +14803,8 @@ module Aws::EC2
     # Describes the Spot Instance requests that belong to your account. Spot
     # Instances are instances that Amazon EC2 launches when the Spot price
     # that you specify exceeds the current Spot price. For more information,
-    # see [Spot Instance Requests][1] in the *Amazon Elastic Compute Cloud
-    # User Guide*.
+    # see [Spot Instance Requests][1] in the *Amazon EC2 User Guide for
+    # Linux Instances*.
     #
     # You can use `DescribeSpotInstanceRequests` to find a running Spot
     # Instance by examining the response. If the status of the Spot Instance
@@ -14377,8 +14813,8 @@ module Aws::EC2
     # DescribeInstances with a filter to look for instances where the
     # instance lifecycle is `spot`.
     #
-    # Spot Instance requests are deleted 4 hours after they are canceled and
-    # their instances are terminated.
+    # Spot Instance requests are deleted four hours after they are canceled
+    # and their instances are terminated.
     #
     #
     #
@@ -14418,7 +14854,10 @@ module Aws::EC2
     #     for Throughput Optimized HDD, `sc1`for Cold HDD, or `standard` for
     #     Magnetic.
     #
-    #   * `launch.group-id` - The security group for the instance.
+    #   * `launch.group-id` - The ID of the security group for the instance.
+    #
+    #   * `launch.group-name` - The name of the security group for the
+    #     instance.
     #
     #   * `launch.image-id` - The ID of the AMI.
     #
@@ -14474,7 +14913,7 @@ module Aws::EC2
     #     \| `closed` \| `cancelled` \| `failed`). Spot request status
     #     information can help you track your Amazon EC2 Spot Instance
     #     requests. For more information, see [Spot Request Status][1] in the
-    #     Amazon Elastic Compute Cloud User Guide.
+    #     *Amazon EC2 User Guide for Linux Instances*.
     #
     #   * `status-code` - The short code describing the most recent evaluation
     #     of your Spot Instance request.
@@ -14673,8 +15112,8 @@ module Aws::EC2
     end
 
     # Describes the Spot price history. For more information, see [Spot
-    # Instance Pricing History][1] in the *Amazon Elastic Compute Cloud User
-    # Guide*.
+    # Instance Pricing History][1] in the *Amazon EC2 User Guide for Linux
+    # Instances*.
     #
     # When you specify a start and end time, this operation returns the
     # prices of the instance types within the time range that you specified
@@ -14701,10 +15140,10 @@ module Aws::EC2
     #   * `spot-price` - The Spot price. The value must match exactly (or use
     #     wildcards; greater than or less than comparison is not supported).
     #
-    #   * `timestamp` - The timestamp of the Spot price history, in UTC format
-    #     (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). You can use
-    #     wildcards (* and ?). Greater than or less than comparison is not
-    #     supported.
+    #   * `timestamp` - The time stamp of the Spot price history, in UTC
+    #     format (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). You can
+    #     use wildcards (* and ?). Greater than or less than comparison is
+    #     not supported.
     #
     # @option params [String] :availability_zone
     #   Filters the results by the specified Availability Zone.
@@ -15494,7 +15933,7 @@ module Aws::EC2
     #     attached to.
     #
     #   * `attachment.status` - The attachment state (`attaching` \|
-    #     `attached` \| `detaching` \| `detached`).
+    #     `attached` \| `detaching`).
     #
     #   * `availability-zone` - The Availability Zone in which the volume was
     #     created.
@@ -17701,26 +18140,23 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Gets the console output for the specified instance.
+    # Gets the console output for the specified instance. For Linux
+    # instances, the instance console output displays the exact console
+    # output that would normally be displayed on a physical monitor attached
+    # to a computer. For Windows instances, the instance console output
+    # includes output from the EC2Config service.
     #
-    # Instances do not have a physical monitor through which you can view
-    # their console output. They also lack physical controls that allow you
-    # to power up, reboot, or shut them down. To allow these actions, we
-    # provide them through the Amazon EC2 API and command line interface.
+    # GetConsoleOutput returns up to 64 KB of console output shortly after
+    # it's generated by the instance.
     #
-    # Instance console output is buffered and posted shortly after instance
-    # boot, reboot, and termination. Amazon EC2 preserves the most recent 64
-    # KB output, which is available for at least one hour after the most
-    # recent post.
+    # By default, the console output returns buffered information that was
+    # posted shortly after an instance transition state (start, stop,
+    # reboot, or terminate). This information is available for at least one
+    # hour after the most recent post.
     #
-    # For Linux instances, the instance console output displays the exact
-    # console output that would normally be displayed on a physical monitor
-    # attached to a computer. This output is buffered because the instance
-    # produces it and then posts it to a store where the instance's owner
-    # can retrieve it.
-    #
-    # For Windows instances, the instance console output includes output
-    # from the EC2Config service.
+    # You can optionally retrieve the latest serial console output at any
+    # time during the instance lifecycle. This option is only supported on
+    # C5, M5, and `i3.metal` instances.
     #
     # @option params [required, String] :instance_id
     #   The ID of the instance.
@@ -17730,6 +18166,11 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [Boolean] :latest
+    #   When enabled, retrieves the latest console output for the instance.
+    #
+    #   Default: disabled (`false`)
     #
     # @return [Types::GetConsoleOutputResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17742,6 +18183,7 @@ module Aws::EC2
     #   resp = client.get_console_output({
     #     instance_id: "String", # required
     #     dry_run: false,
+    #     latest: false,
     #   })
     #
     # @example Response structure
@@ -18584,6 +19026,58 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the specified EC2 Fleet.
+    #
+    # While the EC2 Fleet is being modified, it is in the `modifying` state.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [String] :excess_capacity_termination_policy
+    #   Indicates whether running instances should be terminated if the total
+    #   target capacity of the EC2 Fleet is decreased below the current size
+    #   of the EC2 Fleet.
+    #
+    # @option params [required, String] :fleet_id
+    #   The ID of the EC2 Fleet.
+    #
+    # @option params [required, Types::TargetCapacitySpecificationRequest] :target_capacity_specification
+    #   The size of the EC2 Fleet.
+    #
+    # @return [Types::ModifyFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyFleetResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_fleet({
+    #     dry_run: false,
+    #     excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
+    #     fleet_id: "FleetIdentifier", # required
+    #     target_capacity_specification: { # required
+    #       total_target_capacity: 1, # required
+    #       on_demand_target_capacity: 1,
+    #       spot_target_capacity: 1,
+    #       default_target_capacity_type: "spot", # accepts spot, on-demand
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleet AWS API Documentation
+    #
+    # @overload modify_fleet(params = {})
+    # @param [Hash] params ({})
+    def modify_fleet(params = {}, options = {})
+      req = build_request(:modify_fleet, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified attribute of the specified Amazon FPGA Image
     # (AFI).
     #
@@ -18962,6 +19456,13 @@ module Aws::EC2
 
     # Modifies the specified attribute of the specified instance. You can
     # specify only one attribute at a time.
+    #
+    # <b>Note: </b>Using this action to change the security groups
+    # associated with an elastic network interface (ENI) attached to an
+    # instance in a VPC can result in an error if the instance has more than
+    # one ENI. To change the security groups associated with an ENI attached
+    # to an instance that has multiple ENIs, we recommend that you use the
+    # ModifyNetworkInterfaceAttribute action.
     #
     # To modify some attributes, the instance must be stopped. For more
     # information, see [Modifying Attributes of a Stopped Instance][1] in
@@ -21639,6 +22140,11 @@ module Aws::EC2
 
     # Creates a Spot Fleet request.
     #
+    # The Spot Fleet request specifies the total target capacity and the
+    # On-Demand target capacity. Amazon EC2 calculates the difference
+    # between the total capacity and On-Demand capacity, and launches the
+    # difference as Spot capacity.
+    #
     # You can submit a single request that includes multiple launch
     # specifications that vary by instance type, AMI, Availability Zone, or
     # subnet.
@@ -21655,11 +22161,11 @@ module Aws::EC2
     # fleet.
     #
     # You can specify tags for the Spot Instances. You cannot tag other
-    # resource types in a Spot Fleet request; only the `instance` resource
-    # type is supported.
+    # resource types in a Spot Fleet request because only the `instance`
+    # resource type is supported.
     #
-    # For more information, see [Spot Fleet Requests][1] in the *Amazon
-    # Elastic Compute Cloud User Guide*.
+    # For more information, see [Spot Fleet Requests][1] in the *Amazon EC2
+    # User Guide for Linux Instances*.
     #
     #
     #
@@ -21838,6 +22344,7 @@ module Aws::EC2
     #       client_token: "String",
     #       excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #       fulfilled_capacity: 1.0,
+    #       on_demand_fulfilled_capacity: 1.0,
     #       iam_fleet_role: "String", # required
     #       launch_specifications: [
     #         {
@@ -21944,6 +22451,7 @@ module Aws::EC2
     #       ],
     #       spot_price: "String",
     #       target_capacity: 1, # required
+    #       on_demand_target_capacity: 1,
     #       terminate_instances_with_expiration: false,
     #       type: "request", # accepts request, maintain
     #       valid_from: Time.now,
@@ -21985,7 +22493,7 @@ module Aws::EC2
     # Creates a Spot Instance request. Spot Instances are instances that
     # Amazon EC2 launches when the maximum price that you specify exceeds
     # the current Spot price. For more information, see [Spot Instance
-    # Requests][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # Requests][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -22025,13 +22533,13 @@ module Aws::EC2
     #   notice, which gives the instance a two-minute warning before it
     #   terminates.
     #
-    #   Note that you can't specify an Availability Zone group or a launch
-    #   group if you specify a duration.
+    #   You can't specify an Availability Zone group or a launch group if you
+    #   specify a duration.
     #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Idempotency][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -23098,7 +23606,8 @@ module Aws::EC2
     # @option params [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template to use to launch the instances. Any parameters
     #   that you specify in RunInstances override the same parameters in the
-    #   launch template.
+    #   launch template. You can specify either the name or ID of a launch
+    #   template, but not both.
     #
     # @option params [Types::InstanceMarketOptionsRequest] :instance_market_options
     #   The market (purchasing) option for the instances.
@@ -23114,6 +23623,15 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    #
+    # @option params [Types::CpuOptionsRequest] :cpu_options
+    #   The CPU options for the instance. For more information, see
+    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
     #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -23240,6 +23758,10 @@ module Aws::EC2
     #     credit_specification: {
     #       cpu_credits: "String", # required
     #     },
+    #     cpu_options: {
+    #       core_count: 1,
+    #       threads_per_core: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -23340,6 +23862,8 @@ module Aws::EC2
     #   resp.instances[0].tags[0].key #=> String
     #   resp.instances[0].tags[0].value #=> String
     #   resp.instances[0].virtualization_type #=> String, one of "hvm", "paravirtual"
+    #   resp.instances[0].cpu_options.core_count #=> Integer
+    #   resp.instances[0].cpu_options.threads_per_core #=> Integer
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -24096,7 +24620,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

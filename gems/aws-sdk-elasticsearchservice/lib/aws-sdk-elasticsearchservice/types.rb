@@ -512,6 +512,108 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for parameters to
+    # `DescribeReservedElasticsearchInstanceOfferings`
+    #
+    # @note When making an API call, you may pass DescribeReservedElasticsearchInstanceOfferingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         reserved_elasticsearch_instance_offering_id: "GUID",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] reserved_elasticsearch_instance_offering_id
+    #   The offering identifier filter value. Use this parameter to show
+    #   only the available offering that matches the specified reservation
+    #   identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken should be sent in case if earlier API call produced result
+    #   containing NextToken. It is used for pagination.
+    #   @return [String]
+    #
+    class DescribeReservedElasticsearchInstanceOfferingsRequest < Struct.new(
+      :reserved_elasticsearch_instance_offering_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for results from
+    # `DescribeReservedElasticsearchInstanceOfferings`
+    #
+    # @!attribute [rw] next_token
+    #   Provides an identifier to allow retrieval of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_elasticsearch_instance_offerings
+    #   List of reserved Elasticsearch instance offerings
+    #   @return [Array<Types::ReservedElasticsearchInstanceOffering>]
+    #
+    class DescribeReservedElasticsearchInstanceOfferingsResponse < Struct.new(
+      :next_token,
+      :reserved_elasticsearch_instance_offerings)
+      include Aws::Structure
+    end
+
+    # Container for parameters to `DescribeReservedElasticsearchInstances`
+    #
+    # @note When making an API call, you may pass DescribeReservedElasticsearchInstancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         reserved_elasticsearch_instance_id: "GUID",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] reserved_elasticsearch_instance_id
+    #   The reserved instance identifier filter value. Use this parameter to
+    #   show only the reservation that matches the specified reserved
+    #   Elasticsearch instance ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken should be sent in case if earlier API call produced result
+    #   containing NextToken. It is used for pagination.
+    #   @return [String]
+    #
+    class DescribeReservedElasticsearchInstancesRequest < Struct.new(
+      :reserved_elasticsearch_instance_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for results from `DescribeReservedElasticsearchInstances`
+    #
+    # @!attribute [rw] next_token
+    #   Provides an identifier to allow retrieval of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_elasticsearch_instances
+    #   List of reserved Elasticsearch instances.
+    #   @return [Array<Types::ReservedElasticsearchInstance>]
+    #
+    class DescribeReservedElasticsearchInstancesResponse < Struct.new(
+      :next_token,
+      :reserved_elasticsearch_instances)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_name
     #   Specifies the `DomainName`.
     #   @return [String]
@@ -1222,6 +1324,72 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for parameters to
+    # `PurchaseReservedElasticsearchInstanceOffering`
+    #
+    # @note When making an API call, you may pass PurchaseReservedElasticsearchInstanceOfferingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         reserved_elasticsearch_instance_offering_id: "GUID", # required
+    #         reservation_name: "ReservationToken", # required
+    #         instance_count: 1,
+    #       }
+    #
+    # @!attribute [rw] reserved_elasticsearch_instance_offering_id
+    #   The ID of the reserved Elasticsearch instance offering to purchase.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_name
+    #   A customer-specified identifier to track this reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_count
+    #   The number of Elasticsearch instances to reserve.
+    #   @return [Integer]
+    #
+    class PurchaseReservedElasticsearchInstanceOfferingRequest < Struct.new(
+      :reserved_elasticsearch_instance_offering_id,
+      :reservation_name,
+      :instance_count)
+      include Aws::Structure
+    end
+
+    # Represents the output of a
+    # `PurchaseReservedElasticsearchInstanceOffering` operation.
+    #
+    # @!attribute [rw] reserved_elasticsearch_instance_id
+    #   Details of the reserved Elasticsearch instance which was purchased.
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_name
+    #   The customer-specified identifier used to track this reservation.
+    #   @return [String]
+    #
+    class PurchaseReservedElasticsearchInstanceOfferingResponse < Struct.new(
+      :reserved_elasticsearch_instance_id,
+      :reservation_name)
+      include Aws::Structure
+    end
+
+    # Contains the specific price and frequency of a recurring charges for a
+    # reserved Elasticsearch instance, or for a reserved Elasticsearch
+    # instance offering.
+    #
+    # @!attribute [rw] recurring_charge_amount
+    #   The monetary amount of the recurring charge.
+    #   @return [Float]
+    #
+    # @!attribute [rw] recurring_charge_frequency
+    #   The frequency of the recurring charge.
+    #   @return [String]
+    #
+    class RecurringCharge < Struct.new(
+      :recurring_charge_amount,
+      :recurring_charge_frequency)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `RemoveTags` operation. Specify
     # the `ARN` for the Elasticsearch domain from which you want to remove
     # the specified `TagKey`.
@@ -1247,6 +1415,134 @@ module Aws::ElasticsearchService
     class RemoveTagsRequest < Struct.new(
       :arn,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # Details of a reserved Elasticsearch instance.
+    #
+    # @!attribute [rw] reservation_name
+    #   The customer-specified identifier to track this reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_elasticsearch_instance_id
+    #   The unique identifier for the reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_elasticsearch_instance_offering_id
+    #   The offering identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] elasticsearch_instance_type
+    #   The Elasticsearch instance type offered by the reserved instance
+    #   offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time the reservation started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] duration
+    #   The duration, in seconds, for which the Elasticsearch instance is
+    #   reserved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fixed_price
+    #   The upfront fixed charge you will paid to purchase the specific
+    #   reserved Elasticsearch instance offering.
+    #   @return [Float]
+    #
+    # @!attribute [rw] usage_price
+    #   The rate you are charged for each hour for the domain that is using
+    #   this reserved instance.
+    #   @return [Float]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the reserved Elasticsearch instance offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] elasticsearch_instance_count
+    #   The number of Elasticsearch instances that have been reserved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The state of the reserved Elasticsearch instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_option
+    #   The payment option as defined in the reserved Elasticsearch instance
+    #   offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurring_charges
+    #   The charge to your account regardless of whether you are creating
+    #   any domains using the instance offering.
+    #   @return [Array<Types::RecurringCharge>]
+    #
+    class ReservedElasticsearchInstance < Struct.new(
+      :reservation_name,
+      :reserved_elasticsearch_instance_id,
+      :reserved_elasticsearch_instance_offering_id,
+      :elasticsearch_instance_type,
+      :start_time,
+      :duration,
+      :fixed_price,
+      :usage_price,
+      :currency_code,
+      :elasticsearch_instance_count,
+      :state,
+      :payment_option,
+      :recurring_charges)
+      include Aws::Structure
+    end
+
+    # Details of a reserved Elasticsearch instance offering.
+    #
+    # @!attribute [rw] reserved_elasticsearch_instance_offering_id
+    #   The Elasticsearch reserved instance offering identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] elasticsearch_instance_type
+    #   The Elasticsearch instance type offered by the reserved instance
+    #   offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   The duration, in seconds, for which the offering will reserve the
+    #   Elasticsearch instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fixed_price
+    #   The upfront fixed charge you will pay to purchase the specific
+    #   reserved Elasticsearch instance offering.
+    #   @return [Float]
+    #
+    # @!attribute [rw] usage_price
+    #   The rate you are charged for each hour the domain that is using the
+    #   offering is running.
+    #   @return [Float]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the reserved Elasticsearch instance offering.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_option
+    #   Payment option for the reserved Elasticsearch instance offering
+    #   @return [String]
+    #
+    # @!attribute [rw] recurring_charges
+    #   The charge to your account regardless of whether you are creating
+    #   any domains using the instance offering.
+    #   @return [Array<Types::RecurringCharge>]
+    #
+    class ReservedElasticsearchInstanceOffering < Struct.new(
+      :reserved_elasticsearch_instance_offering_id,
+      :elasticsearch_instance_type,
+      :duration,
+      :fixed_price,
+      :usage_price,
+      :currency_code,
+      :payment_option,
+      :recurring_charges)
       include Aws::Structure
     end
 

@@ -324,9 +324,9 @@ module Aws::Route53Domains
     # The period during which you can renew a domain name varies by TLD. For
     # a list of TLDs and their renewal policies, see ["Renewal,
     # restoration, and deletion times"][1] on the website for our registrar
-    # partner, Gandi. Route 53 requires that you renew before the end of the
-    # renewal period that is listed on the Gandi website so we can complete
-    # processing before the deadline.
+    # associate, Gandi. Amazon Route 53 requires that you renew before the
+    # end of the renewal period that is listed on the Gandi website so we
+    # can complete processing before the deadline.
     #
     #
     #
@@ -689,6 +689,11 @@ module Aws::Route53Domains
     # This operation returns the operation IDs of operations that are not
     # yet complete.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :submitted_since
+    #   An optional parameter that lets you get information about all the
+    #   operations that you submitted after a specified date and time. Specify
+    #   the date and time in Coordinated Universal time (UTC).
+    #
     # @option params [String] :marker
     #   For an initial request for a list of operations, omit this element. If
     #   the number of operations that are not yet complete is greater than the
@@ -710,6 +715,7 @@ module Aws::Route53Domains
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_operations({
+    #     submitted_since: Time.now,
     #     marker: "PageMarker",
     #     max_items: 1,
     #   })
@@ -766,9 +772,10 @@ module Aws::Route53Domains
       req.send_request(options)
     end
 
-    # This operation registers a domain. Domains are registered by the AWS
-    # registrar partner, Gandi. For some top-level domains (TLDs), this
-    # operation requires extra parameters.
+    # This operation registers a domain. Domains are registered either by
+    # Amazon Registrar (for .com, .net, and .org domains) or by our
+    # registrar associate, Gandi (for all other domains). For some top-level
+    # domains (TLDs), this operation requires extra parameters.
     #
     # When you register a domain, Amazon Route 53 does the following:
     #
@@ -782,8 +789,11 @@ module Aws::Route53Domains
     #   date so you can choose whether to renew the registration.
     #
     # * Optionally enables privacy protection, so WHOIS queries return
-    #   contact information for our registrar partner, Gandi, instead of the
-    #   information you entered for registrant, admin, and tech contacts.
+    #   contact information either for Amazon Registrar (for .com, .net, and
+    #   .org domains) or for our registrar associate, Gandi (for all other
+    #   TLDs). If you don't enable privacy protection, WHOIS queries return
+    #   the information that you entered for the registrant, admin, and tech
+    #   contacts.
     #
     # * If registration is successful, returns an operation ID that you can
     #   use to track the progress and completion of the action. If the
@@ -838,25 +848,31 @@ module Aws::Route53Domains
     #
     # @option params [Boolean] :privacy_protect_admin_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify `true`, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
+    #   you specify `true`, WHOIS ("who is") queries return contact
+    #   information either for Amazon Registrar (for .com, .net, and .org
+    #   domains) or for our registrar associate, Gandi (for all other TLDs).
+    #   If you specify `false`, WHOIS queries return the information that you
+    #   entered for the admin contact.
     #
     #   Default: `true`
     #
     # @option params [Boolean] :privacy_protect_registrant_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify `true`, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
+    #   you specify `true`, WHOIS ("who is") queries return contact
+    #   information either for Amazon Registrar (for .com, .net, and .org
+    #   domains) or for our registrar associate, Gandi (for all other TLDs).
+    #   If you specify `false`, WHOIS queries return the information that you
+    #   entered for the registrant contact (the domain owner).
     #
     #   Default: `true`
     #
     # @option params [Boolean] :privacy_protect_tech_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify `true`, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
+    #   you specify `true`, WHOIS ("who is") queries return contact
+    #   information either for Amazon Registrar (for .com, .net, and .org
+    #   domains) or for our registrar associate, Gandi (for all other TLDs).
+    #   If you specify `false`, WHOIS queries return the information that you
+    #   entered for the technical contact.
     #
     #   Default: `true`
     #
@@ -1076,8 +1092,9 @@ module Aws::Route53Domains
     end
 
     # This operation transfers a domain from another registrar to Amazon
-    # Route 53. When the transfer is complete, the domain is registered with
-    # the AWS registrar partner, Gandi.
+    # Route 53. When the transfer is complete, the domain is registered
+    # either with Amazon Registrar (for .com, .net, and .org domains) or
+    # with our registrar associate, Gandi (for all other TLDs).
     #
     # For transfer requirements, a detailed procedure, and information about
     # viewing the status of a domain transfer, see [Transferring
@@ -1148,25 +1165,31 @@ module Aws::Route53Domains
     #
     # @option params [Boolean] :privacy_protect_admin_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify `true`, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
+    #   you specify `true`, WHOIS ("who is") queries return contact
+    #   information either for Amazon Registrar (for .com, .net, and .org
+    #   domains) or for our registrar associate, Gandi (for all other TLDs).
+    #   If you specify `false`, WHOIS queries return the information that you
+    #   entered for the admin contact.
     #
     #   Default: `true`
     #
     # @option params [Boolean] :privacy_protect_registrant_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify `true`, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
+    #   you specify `true`, WHOIS ("who is") queries return contact
+    #   information either for Amazon Registrar (for .com, .net, and .org
+    #   domains) or for our registrar associate, Gandi (for all other TLDs).
+    #   If you specify `false`, WHOIS queries return the information that you
+    #   entered for the registrant contact (domain owner).
     #
     #   Default: `true`
     #
     # @option params [Boolean] :privacy_protect_tech_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify `true`, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
+    #   you specify `true`, WHOIS ("who is") queries return contact
+    #   information either for Amazon Registrar (for .com, .net, and .org
+    #   domains) or for our registrar associate, Gandi (for all other TLDs).
+    #   If you specify `false`, WHOIS queries return the information that you
+    #   entered for the technical contact.
     #
     #   Default: `true`
     #
@@ -1270,8 +1293,8 @@ module Aws::Route53Domains
     end
 
     # This operation updates the contact information for a particular
-    # domain. Information for at least one contact (registrant,
-    # administrator, or technical) must be supplied for update.
+    # domain. You must specify information for at least one contact:
+    # registrant, administrator, or technical.
     #
     # If the update is successful, this method returns an operation ID that
     # you can use to track the progress and completion of the action. If the
@@ -1378,20 +1401,17 @@ module Aws::Route53Domains
     end
 
     # This operation updates the specified domain contact's privacy
-    # setting. When the privacy option is enabled, personal information such
-    # as postal or email address is hidden from the results of a public
-    # WHOIS query. The privacy services are provided by the AWS registrar,
-    # Gandi. For more information, see the [Gandi privacy features][1].
+    # setting. When privacy protection is enabled, contact information such
+    # as email address is replaced either with contact information for
+    # Amazon Registrar (for .com, .net, and .org domains) or with contact
+    # information for our registrar associate, Gandi.
     #
-    # This operation only affects the privacy of the specified contact type
-    # (registrant, administrator, or tech). Successful acceptance returns an
-    # operation ID that you can use with GetOperationDetail to track the
-    # progress and completion of the action. If the request is not completed
-    # successfully, the domain registrant will be notified by email.
-    #
-    #
-    #
-    # [1]: http://www.gandi.net/domain/whois/?currency=USD&amp;amp;lang=en
+    # This operation affects only the contact information for the specified
+    # contact type (registrant, administrator, or tech). If the request
+    # succeeds, Amazon Route 53 returns an operation ID that you can use
+    # with GetOperationDetail to track the progress and completion of the
+    # action. If the request doesn't complete successfully, the domain
+    # registrant will be notified by email.
     #
     # @option params [required, String] :domain_name
     #   The name of the domain that you want to update the privacy setting
@@ -1399,21 +1419,27 @@ module Aws::Route53Domains
     #
     # @option params [Boolean] :admin_privacy
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify `true`, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
+    #   you specify `true`, WHOIS ("who is") queries return contact
+    #   information either for Amazon Registrar (for .com, .net, and .org
+    #   domains) or for our registrar associate, Gandi (for all other TLDs).
+    #   If you specify `false`, WHOIS queries return the information that you
+    #   entered for the admin contact.
     #
     # @option params [Boolean] :registrant_privacy
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify `true`, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
+    #   you specify `true`, WHOIS ("who is") queries return contact
+    #   information either for Amazon Registrar (for .com, .net, and .org
+    #   domains) or for our registrar associate, Gandi (for all other TLDs).
+    #   If you specify `false`, WHOIS queries return the information that you
+    #   entered for the registrant contact (domain owner).
     #
     # @option params [Boolean] :tech_privacy
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify `true`, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
+    #   you specify `true`, WHOIS ("who is") queries return contact
+    #   information either for Amazon Registrar (for .com, .net, and .org
+    #   domains) or for our registrar associate, Gandi (for all other TLDs).
+    #   If you specify `false`, WHOIS queries return the information that you
+    #   entered for the technical contact.
     #
     # @return [Types::UpdateDomainContactPrivacyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1531,11 +1557,13 @@ module Aws::Route53Domains
     #
     # @option params [Time,DateTime,Date,Integer,String] :start
     #   The beginning date and time for the time period for which you want a
-    #   list of billing records. Specify the date in Unix time format.
+    #   list of billing records. Specify the date and time in Coordinated
+    #   Universal time (UTC).
     #
     # @option params [Time,DateTime,Date,Integer,String] :end
     #   The end date and time for the time period for which you want a list of
-    #   billing records. Specify the date in Unix time format.
+    #   billing records. Specify the date and time in Coordinated Universal
+    #   time (UTC).
     #
     # @option params [String] :marker
     #   For an initial request for a list of billing records, omit this
@@ -1600,7 +1628,7 @@ module Aws::Route53Domains
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53domains'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

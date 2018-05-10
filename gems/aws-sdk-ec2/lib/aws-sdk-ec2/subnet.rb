@@ -345,6 +345,10 @@ module Aws::EC2
     #     credit_specification: {
     #       cpu_credits: "String", # required
     #     },
+    #     cpu_options: {
+    #       core_count: 1,
+    #       threads_per_core: 1,
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -521,7 +525,8 @@ module Aws::EC2
     # @option options [Types::LaunchTemplateSpecification] :launch_template
     #   The launch template to use to launch the instances. Any parameters
     #   that you specify in RunInstances override the same parameters in the
-    #   launch template.
+    #   launch template. You can specify either the name or ID of a launch
+    #   template, but not both.
     # @option options [Types::InstanceMarketOptionsRequest] :instance_market_options
     #   The market (purchasing) option for the instances.
     # @option options [Types::CreditSpecificationRequest] :credit_specification
@@ -535,6 +540,14 @@ module Aws::EC2
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
+    # @option options [Types::CpuOptionsRequest] :cpu_options
+    #   The CPU options for the instance. For more information, see
+    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []

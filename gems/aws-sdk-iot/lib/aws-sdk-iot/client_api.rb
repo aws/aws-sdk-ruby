@@ -74,6 +74,7 @@ module Aws::IoT
     CertificateStatus = Shapes::StringShape.new(name: 'CertificateStatus')
     CertificateValidationException = Shapes::StructureShape.new(name: 'CertificateValidationException')
     Certificates = Shapes::ListShape.new(name: 'Certificates')
+    ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     ClearDefaultAuthorizerRequest = Shapes::StructureShape.new(name: 'ClearDefaultAuthorizerRequest')
     ClearDefaultAuthorizerResponse = Shapes::StructureShape.new(name: 'ClearDefaultAuthorizerResponse')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -257,6 +258,7 @@ module Aws::IoT
     InvalidQueryException = Shapes::StructureShape.new(name: 'InvalidQueryException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidResponseException = Shapes::StructureShape.new(name: 'InvalidResponseException')
+    IotAnalyticsAction = Shapes::StructureShape.new(name: 'IotAnalyticsAction')
     IsAuthenticated = Shapes::BooleanShape.new(name: 'IsAuthenticated')
     IsDefaultVersion = Shapes::BooleanShape.new(name: 'IsDefaultVersion')
     IsDisabled = Shapes::BooleanShape.new(name: 'IsDisabled')
@@ -613,6 +615,7 @@ module Aws::IoT
     Action.add_member(:cloudwatch_alarm, Shapes::ShapeRef.new(shape: CloudwatchAlarmAction, location_name: "cloudwatchAlarm"))
     Action.add_member(:elasticsearch, Shapes::ShapeRef.new(shape: ElasticsearchAction, location_name: "elasticsearch"))
     Action.add_member(:salesforce, Shapes::ShapeRef.new(shape: SalesforceAction, location_name: "salesforce"))
+    Action.add_member(:iot_analytics, Shapes::ShapeRef.new(shape: IotAnalyticsAction, location_name: "iotAnalytics"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -1276,6 +1279,11 @@ module Aws::IoT
     ImplicitDeny.struct_class = Types::ImplicitDeny
 
     IndexNamesList.member = Shapes::ShapeRef.new(shape: IndexName)
+
+    IotAnalyticsAction.add_member(:channel_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "channelArn"))
+    IotAnalyticsAction.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName"))
+    IotAnalyticsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
+    IotAnalyticsAction.struct_class = Types::IotAnalyticsAction
 
     Job.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
     Job.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))

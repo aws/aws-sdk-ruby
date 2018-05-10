@@ -65,6 +65,10 @@ module Aws
           expect(resp.context.http_request.endpoint.to_s).to eq('https://bucket-name.s3.amazonaws.com/')
         end
 
+        it 'does not contain `expect` header in request' do
+          resp = accelerated_client.put_object(bucket:'bucket-name', key:'key', body: 'foo')
+          expect(resp.context.http_request.headers['expect']).to be_nil
+        end
       end
 
       describe ':use_accelerate_endpoint with :use_dualstack_endpoint' do
@@ -88,6 +92,11 @@ module Aws
         it 'does not apply to #delete_bucket' do
           resp = accel_dualstack_client.delete_bucket(bucket:'bucket-name')
           expect(resp.context.http_request.endpoint.to_s).to eq('https://bucket-name.s3.dualstack.us-east-1.amazonaws.com/')
+        end
+
+        it 'does not contain `expect` header in request' do
+          resp = accel_dualstack_client.put_object(bucket:'bucket-name', key:'key', body: 'foo')
+          expect(resp.context.http_request.headers['expect']).to be_nil
         end
         
       end

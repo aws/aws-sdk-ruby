@@ -818,6 +818,20 @@ module Aws::DynamoDB
     # * The tables must have DynamoDB Streams enabled
     #   (NEW\_AND\_OLD\_IMAGES).
     #
+    # * The tables must have same provisioned and maximum write capacity
+    #   units.
+    #
+    # If global secondary indexes are specified, then the following
+    # conditions must also be met:
+    #
+    # * The global secondary indexes must have the same name.
+    #
+    # * The global secondary indexes must have the same hash key and sort
+    #   key (if present).
+    #
+    # * The global secondary indexes must have the same provisioned and
+    #   maximum write capacity units.
+    #
     # @option params [required, String] :global_table_name
     #   The global table name.
     #
@@ -1795,7 +1809,7 @@ module Aws::DynamoDB
     #
     # `LatestRestorableDateTime` is typically 5 minutes before the current
     # time. You can restore your table to any point in time during the last
-    # 35 days with a 1-minute granularity.
+    # 35 days.
     #
     # You can call `DescribeContinuousBackups` at a maximum rate of 10 times
     # per second.
@@ -1860,6 +1874,45 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_global_table(params = {}, options = {})
       req = build_request(:describe_global_table, params)
+      req.send_request(options)
+    end
+
+    # Describes region specific settings for a global table.
+    #
+    # @option params [required, String] :global_table_name
+    #   The name of the global table to describe.
+    #
+    # @return [Types::DescribeGlobalTableSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGlobalTableSettingsOutput#global_table_name #global_table_name} => String
+    #   * {Types::DescribeGlobalTableSettingsOutput#replica_settings #replica_settings} => Array&lt;Types::ReplicaSettingsDescription&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_global_table_settings({
+    #     global_table_name: "TableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_table_name #=> String
+    #   resp.replica_settings #=> Array
+    #   resp.replica_settings[0].region_name #=> String
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_units #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableSettings AWS API Documentation
+    #
+    # @overload describe_global_table_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_global_table_settings(params = {}, options = {})
+      req = build_request(:describe_global_table_settings, params)
       req.send_request(options)
     end
 
@@ -3521,9 +3574,27 @@ module Aws::DynamoDB
 
     # Restores the specified table to the specified point in time within
     # `EarliestRestorableDateTime` and `LatestRestorableDateTime`. You can
-    # restore your table to any point in time during the last 35 days with a
-    # 1-minute granularity. Any number of users can execute up to 4
-    # concurrent restores (any type of restore) in a given account.
+    # restore your table to any point in time during the last 35 days. Any
+    # number of users can execute up to 4 concurrent restores (any type of
+    # restore) in a given account.
+    #
+    # When you restore using point in time recovery, DynamoDB restores your
+    # table data to the state based on the selected date and time
+    # (day:hour:minute:second) to a new table.
+    #
+    # Along with data, the following are also included on the new restored
+    # table using point in time recovery:
+    #
+    # * Global secondary indexes (GSIs)
+    #
+    # * Local secondary indexes (LSIs)
+    #
+    # * Provisioned read and write capacity
+    #
+    # * Encryption settings
+    #
+    #   All these settings come from the current settings of the source
+    #   table at the time of restore.
     #
     # You must manually set up the following on the restored table:
     #
@@ -4170,7 +4241,7 @@ module Aws::DynamoDB
     #
     # `LatestRestorableDateTime` is typically 5 minutes before the current
     # time. You can restore your table to any point in time during the last
-    # 35 days with a 1-minute granularity.
+    # 35 days..
     #
     # @option params [required, String] :table_name
     #   The name of the table.
@@ -4211,13 +4282,25 @@ module Aws::DynamoDB
     # table must already exist to be able to use this operation. Any replica
     # to be added must be empty, must have the same name as the global
     # table, must have the same key schema, and must have DynamoDB Streams
-    # enabled.
+    # enabled and must have same provisioned and maximum write capacity
+    # units.
     #
     # <note markdown="1"> Although you can use `UpdateGlobalTable` to add replicas and remove
     # replicas in a single request, for simplicity we recommend that you
     # issue separate requests for adding or removing replicas.
     #
     #  </note>
+    #
+    # If global secondary indexes are specified, then the following
+    # conditions must also be met:
+    #
+    # * The global secondary indexes must have the same name.
+    #
+    # * The global secondary indexes must have the same hash key and sort
+    #   key (if present).
+    #
+    # * The global secondary indexes must have the same provisioned and
+    #   maximum write capacity units.
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -4261,6 +4344,76 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def update_global_table(params = {}, options = {})
       req = build_request(:update_global_table, params)
+      req.send_request(options)
+    end
+
+    # Updates settings for a global table.
+    #
+    # @option params [required, String] :global_table_name
+    #   The name of the global table
+    #
+    # @option params [Integer] :global_table_provisioned_write_capacity_units
+    #   The maximum number of writes consumed per second before DynamoDB
+    #   returns a `ThrottlingException.`
+    #
+    # @option params [Array<Types::GlobalTableGlobalSecondaryIndexSettingsUpdate>] :global_table_global_secondary_index_settings_update
+    #   Represents the settings of a global secondary index for a global table
+    #   that will be modified.
+    #
+    # @option params [Array<Types::ReplicaSettingsUpdate>] :replica_settings_update
+    #   Represents the settings for a global table in a region that will be
+    #   modified.
+    #
+    # @return [Types::UpdateGlobalTableSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGlobalTableSettingsOutput#global_table_name #global_table_name} => String
+    #   * {Types::UpdateGlobalTableSettingsOutput#replica_settings #replica_settings} => Array&lt;Types::ReplicaSettingsDescription&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_table_settings({
+    #     global_table_name: "TableName", # required
+    #     global_table_provisioned_write_capacity_units: 1,
+    #     global_table_global_secondary_index_settings_update: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         provisioned_write_capacity_units: 1,
+    #       },
+    #     ],
+    #     replica_settings_update: [
+    #       {
+    #         region_name: "RegionName", # required
+    #         replica_provisioned_read_capacity_units: 1,
+    #         replica_global_secondary_index_settings_update: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             provisioned_read_capacity_units: 1,
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_table_name #=> String
+    #   resp.replica_settings #=> Array
+    #   resp.replica_settings[0].region_name #=> String
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_units #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableSettings AWS API Documentation
+    #
+    # @overload update_global_table_settings(params = {})
+    # @param [Hash] params ({})
+    def update_global_table_settings(params = {}, options = {})
+      req = build_request(:update_global_table_settings, params)
       req.send_request(options)
     end
 
@@ -4985,7 +5138,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

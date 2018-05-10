@@ -31,6 +31,8 @@ module Aws::WorkMail
     DeleteAliasResponse = Shapes::StructureShape.new(name: 'DeleteAliasResponse')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
     DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
+    DeleteMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsRequest')
+    DeleteMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsResponse')
     DeleteResourceRequest = Shapes::StructureShape.new(name: 'DeleteResourceRequest')
     DeleteResourceResponse = Shapes::StructureShape.new(name: 'DeleteResourceResponse')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
@@ -69,6 +71,8 @@ module Aws::WorkMail
     ListGroupMembersResponse = Shapes::StructureShape.new(name: 'ListGroupMembersResponse')
     ListGroupsRequest = Shapes::StructureShape.new(name: 'ListGroupsRequest')
     ListGroupsResponse = Shapes::StructureShape.new(name: 'ListGroupsResponse')
+    ListMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'ListMailboxPermissionsRequest')
+    ListMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'ListMailboxPermissionsResponse')
     ListOrganizationsRequest = Shapes::StructureShape.new(name: 'ListOrganizationsRequest')
     ListOrganizationsResponse = Shapes::StructureShape.new(name: 'ListOrganizationsResponse')
     ListResourceDelegatesRequest = Shapes::StructureShape.new(name: 'ListResourceDelegatesRequest')
@@ -92,6 +96,12 @@ module Aws::WorkMail
     OrganizationSummaries = Shapes::ListShape.new(name: 'OrganizationSummaries')
     OrganizationSummary = Shapes::StructureShape.new(name: 'OrganizationSummary')
     Password = Shapes::StringShape.new(name: 'Password')
+    Permission = Shapes::StructureShape.new(name: 'Permission')
+    PermissionType = Shapes::StringShape.new(name: 'PermissionType')
+    PermissionValues = Shapes::ListShape.new(name: 'PermissionValues')
+    Permissions = Shapes::ListShape.new(name: 'Permissions')
+    PutMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'PutMailboxPermissionsRequest')
+    PutMailboxPermissionsResponse = Shapes::StructureShape.new(name: 'PutMailboxPermissionsResponse')
     RegisterToWorkMailRequest = Shapes::StructureShape.new(name: 'RegisterToWorkMailRequest')
     RegisterToWorkMailResponse = Shapes::StructureShape.new(name: 'RegisterToWorkMailResponse')
     ReservedNameException = Shapes::StructureShape.new(name: 'ReservedNameException')
@@ -184,6 +194,13 @@ module Aws::WorkMail
     DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
 
     DeleteGroupResponse.struct_class = Types::DeleteGroupResponse
+
+    DeleteMailboxPermissionsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeleteMailboxPermissionsRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
+    DeleteMailboxPermissionsRequest.add_member(:grantee_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "GranteeId"))
+    DeleteMailboxPermissionsRequest.struct_class = Types::DeleteMailboxPermissionsRequest
+
+    DeleteMailboxPermissionsResponse.struct_class = Types::DeleteMailboxPermissionsResponse
 
     DeleteResourceRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
@@ -309,6 +326,16 @@ module Aws::WorkMail
     ListGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListGroupsResponse.struct_class = Types::ListGroupsResponse
 
+    ListMailboxPermissionsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    ListMailboxPermissionsRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
+    ListMailboxPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailboxPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListMailboxPermissionsRequest.struct_class = Types::ListMailboxPermissionsRequest
+
+    ListMailboxPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: Permissions, location_name: "Permissions"))
+    ListMailboxPermissionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListMailboxPermissionsResponse.struct_class = Types::ListMailboxPermissionsResponse
+
     ListOrganizationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListOrganizationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
     ListOrganizationsRequest.struct_class = Types::ListOrganizationsRequest
@@ -362,6 +389,23 @@ module Aws::WorkMail
     OrganizationSummary.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
     OrganizationSummary.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "State"))
     OrganizationSummary.struct_class = Types::OrganizationSummary
+
+    Permission.add_member(:grantee_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "GranteeId"))
+    Permission.add_member(:grantee_type, Shapes::ShapeRef.new(shape: MemberType, required: true, location_name: "GranteeType"))
+    Permission.add_member(:permission_values, Shapes::ShapeRef.new(shape: PermissionValues, required: true, location_name: "PermissionValues"))
+    Permission.struct_class = Types::Permission
+
+    PermissionValues.member = Shapes::ShapeRef.new(shape: PermissionType)
+
+    Permissions.member = Shapes::ShapeRef.new(shape: Permission)
+
+    PutMailboxPermissionsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    PutMailboxPermissionsRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
+    PutMailboxPermissionsRequest.add_member(:grantee_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "GranteeId"))
+    PutMailboxPermissionsRequest.add_member(:permission_values, Shapes::ShapeRef.new(shape: PermissionValues, required: true, location_name: "PermissionValues"))
+    PutMailboxPermissionsRequest.struct_class = Types::PutMailboxPermissionsRequest
+
+    PutMailboxPermissionsResponse.struct_class = Types::PutMailboxPermissionsResponse
 
     RegisterToWorkMailRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     RegisterToWorkMailRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "EntityId"))
@@ -553,6 +597,19 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
       end)
 
+      api.add_operation(:delete_mailbox_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteMailboxPermissions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteMailboxPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteMailboxPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:delete_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteResource"
         o.http_method = "POST"
@@ -724,6 +781,24 @@ module Aws::WorkMail
         )
       end)
 
+      api.add_operation(:list_mailbox_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListMailboxPermissions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListMailboxPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListMailboxPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_organizations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListOrganizations"
         o.http_method = "POST"
@@ -784,6 +859,19 @@ module Aws::WorkMail
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_mailbox_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutMailboxPermissions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutMailboxPermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutMailboxPermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityStateException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
       api.add_operation(:register_to_work_mail, Seahorse::Model::Operation.new.tap do |o|

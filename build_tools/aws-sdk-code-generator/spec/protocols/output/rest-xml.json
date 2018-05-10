@@ -314,6 +314,61 @@
     ]
   },
   {
+    "description": "Shape Reference Flattened List",
+    "metadata": {
+      "protocol": "rest-xml"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "ListMember": {
+            "shape": "StructureList",
+            "flattened": true
+          }
+        }
+      },
+      "StructureList": {
+        "type": "list",
+        "member": {
+          "shape": "Tag"
+        }
+      },
+      "Tag": {
+        "type": "structure",
+        "members": {
+          "Key": {
+            "shape": "StringType"
+          },
+          "Value": {
+            "shape": "StringType"
+          }
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "ListMember": [{"key": "foo", "value": "bar"}, {"key": "bar", "value": "baz"}]
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "<OperationNameResult><ListMember><Key>foo</Key><Value>bar</Value></ListMember><ListMember><Key>bar</Key><Value>baz</Value></ListMember></OperationNameResult>"
+        }
+      }
+    ]
+  },
+  {
     "description": "Normal map",
     "metadata": {
       "protocol": "rest-xml"

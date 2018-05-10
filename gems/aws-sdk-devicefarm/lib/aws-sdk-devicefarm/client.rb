@@ -200,7 +200,7 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [ # required
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
     #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
@@ -214,7 +214,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
@@ -733,6 +733,55 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Creates a configuration record in Device Farm for your Amazon Virtual
+    # Private Cloud (VPC) endpoint.
+    #
+    # @option params [required, String] :vpce_configuration_name
+    #   The friendly name you give to your VPC endpoint configuration, to
+    #   manage your configurations more easily.
+    #
+    # @option params [required, String] :vpce_service_name
+    #   The name of the VPC endpoint service running inside your AWS account
+    #   that you want Device Farm to test.
+    #
+    # @option params [required, String] :service_dns_name
+    #   The DNS name of the service running in your VPC that you want Device
+    #   Farm to test.
+    #
+    # @option params [String] :vpce_configuration_description
+    #   An optional description, providing more details about your VPC
+    #   endpoint configuration.
+    #
+    # @return [Types::CreateVPCEConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVPCEConfigurationResult#vpce_configuration #vpce_configuration} => Types::VPCEConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpce_configuration({
+    #     vpce_configuration_name: "VPCEConfigurationName", # required
+    #     vpce_service_name: "VPCEServiceName", # required
+    #     service_dns_name: "ServiceDnsName", # required
+    #     vpce_configuration_description: "VPCEConfigurationDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpce_configuration.arn #=> String
+    #   resp.vpce_configuration.vpce_configuration_name #=> String
+    #   resp.vpce_configuration.vpce_service_name #=> String
+    #   resp.vpce_configuration.service_dns_name #=> String
+    #   resp.vpce_configuration.vpce_configuration_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateVPCEConfiguration AWS API Documentation
+    #
+    # @overload create_vpce_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_vpce_configuration(params = {}, options = {})
+      req = build_request(:create_vpce_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes a device pool given the pool ARN. Does not allow deletion of
     # curated pools owned by the system.
     #
@@ -964,6 +1013,30 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Deletes a configuration for your Amazon Virtual Private Cloud (VPC)
+    # endpoint.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the VPC endpoint configuration you
+    #   want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vpce_configuration({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteVPCEConfiguration AWS API Documentation
+    #
+    # @overload delete_vpce_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_vpce_configuration(params = {}, options = {})
+      req = build_request(:delete_vpce_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns the number of unmetered iOS and/or unmetered Android devices
     # that have been purchased by the account.
     #
@@ -1190,7 +1263,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
@@ -1249,6 +1322,9 @@ module Aws::DeviceFarm
     # @option params [Types::ScheduleRunTest] :test
     #   Information about the uploaded test to be run against the device pool.
     #
+    # @option params [Types::ScheduleRunConfiguration] :configuration
+    #   An object containing information about the settings for a run.
+    #
     # @return [Types::GetDevicePoolCompatibilityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDevicePoolCompatibilityResult#compatible_devices #compatible_devices} => Array&lt;Types::DevicePoolCompatibilityResult&gt;
@@ -1286,6 +1362,29 @@ module Aws::DeviceFarm
     #       parameters: {
     #         "String" => "String",
     #       },
+    #     },
+    #     configuration: {
+    #       extra_data_package_arn: "AmazonResourceName",
+    #       network_profile_arn: "AmazonResourceName",
+    #       locale: "String",
+    #       location: {
+    #         latitude: 1.0, # required
+    #         longitude: 1.0, # required
+    #       },
+    #       vpce_configuration_arns: ["AmazonResourceName"],
+    #       customer_artifact_paths: {
+    #         ios_paths: ["String"],
+    #         android_paths: ["String"],
+    #         device_host_paths: ["String"],
+    #       },
+    #       radios: {
+    #         wifi: false,
+    #         bluetooth: false,
+    #         nfc: false,
+    #         gps: false,
+    #       },
+    #       auxiliary_apps: ["AmazonResourceName"],
+    #       billing_method: "METERED", # accepts METERED, UNMETERED
     #     },
     #   })
     #
@@ -1331,7 +1430,7 @@ module Aws::DeviceFarm
     #   resp.compatible_devices[0].compatible #=> Boolean
     #   resp.compatible_devices[0].incompatibility_messages #=> Array
     #   resp.compatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
+    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.incompatible_devices #=> Array
     #   resp.incompatible_devices[0].device.arn #=> String
     #   resp.incompatible_devices[0].device.name #=> String
@@ -1372,7 +1471,7 @@ module Aws::DeviceFarm
     #   resp.incompatible_devices[0].compatible #=> Boolean
     #   resp.incompatible_devices[0].incompatibility_messages #=> Array
     #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
+    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility AWS API Documentation
     #
@@ -1895,7 +1994,7 @@ module Aws::DeviceFarm
     #   resp.run.network_profile.uplink_loss_percent #=> Integer
     #   resp.run.network_profile.downlink_loss_percent #=> Integer
     #   resp.run.parsing_result_url #=> String
-    #   resp.run.result_code #=> String, one of "PARSING_FAILED"
+    #   resp.run.result_code #=> String, one of "PARSING_FAILED", "VPC_ENDPOINT_SETUP_FAILED"
     #   resp.run.seed #=> Integer
     #   resp.run.app_upload #=> String
     #   resp.run.event_count #=> Integer
@@ -2096,6 +2195,40 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def get_upload(params = {}, options = {})
       req = build_request(:get_upload, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the configuration settings for your Amazon
+    # Virtual Private Cloud (VPC) endpoint.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the VPC endpoint configuration you
+    #   want to describe.
+    #
+    # @return [Types::GetVPCEConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVPCEConfigurationResult#vpce_configuration #vpce_configuration} => Types::VPCEConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpce_configuration({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpce_configuration.arn #=> String
+    #   resp.vpce_configuration.vpce_configuration_name #=> String
+    #   resp.vpce_configuration.vpce_service_name #=> String
+    #   resp.vpce_configuration.service_dns_name #=> String
+    #   resp.vpce_configuration.vpce_configuration_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetVPCEConfiguration AWS API Documentation
+    #
+    # @overload get_vpce_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_vpce_configuration(params = {}, options = {})
+      req = build_request(:get_vpce_configuration, params)
       req.send_request(options)
     end
 
@@ -2355,7 +2488,7 @@ module Aws::DeviceFarm
     #   resp.device_pools[0].description #=> String
     #   resp.device_pools[0].type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pools[0].rules #=> Array
-    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
+    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.device_pools[0].rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pools[0].rules[0].value #=> String
     #   resp.next_token #=> String
@@ -3241,7 +3374,7 @@ module Aws::DeviceFarm
     #   resp.runs[0].network_profile.uplink_loss_percent #=> Integer
     #   resp.runs[0].network_profile.downlink_loss_percent #=> Integer
     #   resp.runs[0].parsing_result_url #=> String
-    #   resp.runs[0].result_code #=> String, one of "PARSING_FAILED"
+    #   resp.runs[0].result_code #=> String, one of "PARSING_FAILED", "VPC_ENDPOINT_SETUP_FAILED"
     #   resp.runs[0].seed #=> Integer
     #   resp.runs[0].app_upload #=> String
     #   resp.runs[0].event_count #=> Integer
@@ -3634,6 +3767,49 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Returns information about all Amazon Virtual Private Cloud (VPC)
+    # endpoint configurations in the AWS account.
+    #
+    # @option params [Integer] :max_results
+    #   An integer specifying the maximum number of items you want to return
+    #   in the API response.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListVPCEConfigurationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVPCEConfigurationsResult#vpce_configurations #vpce_configurations} => Array&lt;Types::VPCEConfiguration&gt;
+    #   * {Types::ListVPCEConfigurationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vpce_configurations({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpce_configurations #=> Array
+    #   resp.vpce_configurations[0].arn #=> String
+    #   resp.vpce_configurations[0].vpce_configuration_name #=> String
+    #   resp.vpce_configurations[0].vpce_service_name #=> String
+    #   resp.vpce_configurations[0].service_dns_name #=> String
+    #   resp.vpce_configurations[0].vpce_configuration_description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListVPCEConfigurations AWS API Documentation
+    #
+    # @overload list_vpce_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_vpce_configurations(params = {}, options = {})
+      req = build_request(:list_vpce_configurations, params)
+      req.send_request(options)
+    end
+
     # Immediately purchases offerings for an AWS account. Offerings renew
     # with the latest total purchased quantity for an offering, unless the
     # renewal was overridden. The API returns a `NotEligible` error if the
@@ -3881,6 +4057,7 @@ module Aws::DeviceFarm
     #         latitude: 1.0, # required
     #         longitude: 1.0, # required
     #       },
+    #       vpce_configuration_arns: ["AmazonResourceName"],
     #       customer_artifact_paths: {
     #         ios_paths: ["String"],
     #         android_paths: ["String"],
@@ -3941,7 +4118,7 @@ module Aws::DeviceFarm
     #   resp.run.network_profile.uplink_loss_percent #=> Integer
     #   resp.run.network_profile.downlink_loss_percent #=> Integer
     #   resp.run.parsing_result_url #=> String
-    #   resp.run.result_code #=> String, one of "PARSING_FAILED"
+    #   resp.run.result_code #=> String, one of "PARSING_FAILED", "VPC_ENDPOINT_SETUP_FAILED"
     #   resp.run.seed #=> Integer
     #   resp.run.app_upload #=> String
     #   resp.run.event_count #=> Integer
@@ -4133,7 +4310,7 @@ module Aws::DeviceFarm
     #   resp.run.network_profile.uplink_loss_percent #=> Integer
     #   resp.run.network_profile.downlink_loss_percent #=> Integer
     #   resp.run.parsing_result_url #=> String
-    #   resp.run.result_code #=> String, one of "PARSING_FAILED"
+    #   resp.run.result_code #=> String, one of "PARSING_FAILED", "VPC_ENDPOINT_SETUP_FAILED"
     #   resp.run.seed #=> Integer
     #   resp.run.app_upload #=> String
     #   resp.run.event_count #=> Integer
@@ -4270,7 +4447,7 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, REMOTE_DEBUG_ENABLED, APPIUM_VERSION, INSTANCE_ARN, INSTANCE_LABELS, FLEET_TYPE
     #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
@@ -4284,7 +4461,7 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "REMOTE_DEBUG_ENABLED", "APPIUM_VERSION", "INSTANCE_ARN", "INSTANCE_LABELS", "FLEET_TYPE"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
@@ -4514,6 +4691,60 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Updates information about an existing Amazon Virtual Private Cloud
+    # (VPC) endpoint configuration.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the VPC endpoint configuration you
+    #   want to update.
+    #
+    # @option params [String] :vpce_configuration_name
+    #   The friendly name you give to your VPC endpoint configuration, to
+    #   manage your configurations more easily.
+    #
+    # @option params [String] :vpce_service_name
+    #   The name of the VPC endpoint service running inside your AWS account
+    #   that you want Device Farm to test.
+    #
+    # @option params [String] :service_dns_name
+    #   The DNS (domain) name used to connect to your private service in your
+    #   Amazon VPC. The DNS name must not already be in use on the Internet.
+    #
+    # @option params [String] :vpce_configuration_description
+    #   An optional description, providing more details about your VPC
+    #   endpoint configuration.
+    #
+    # @return [Types::UpdateVPCEConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVPCEConfigurationResult#vpce_configuration #vpce_configuration} => Types::VPCEConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vpce_configuration({
+    #     arn: "AmazonResourceName", # required
+    #     vpce_configuration_name: "VPCEConfigurationName",
+    #     vpce_service_name: "VPCEServiceName",
+    #     service_dns_name: "ServiceDnsName",
+    #     vpce_configuration_description: "VPCEConfigurationDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpce_configuration.arn #=> String
+    #   resp.vpce_configuration.vpce_configuration_name #=> String
+    #   resp.vpce_configuration.vpce_service_name #=> String
+    #   resp.vpce_configuration.service_dns_name #=> String
+    #   resp.vpce_configuration.vpce_configuration_description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateVPCEConfiguration AWS API Documentation
+    #
+    # @overload update_vpce_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_vpce_configuration(params = {}, options = {})
+      req = build_request(:update_vpce_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -4527,7 +4758,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

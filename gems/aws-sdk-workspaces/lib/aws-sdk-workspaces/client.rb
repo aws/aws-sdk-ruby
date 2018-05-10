@@ -155,13 +155,129 @@ module Aws::WorkSpaces
 
     # @!group API Operations
 
-    # Creates tags for the specified WorkSpace.
+    # Associates the specified IP access control group with the specified
+    # directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The ID of the directory.
+    #
+    # @option params [required, Array<String>] :group_ids
+    #   The IDs of one or more IP access control groups.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_ip_groups({
+    #     directory_id: "DirectoryId", # required
+    #     group_ids: ["IpGroupId"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroups AWS API Documentation
+    #
+    # @overload associate_ip_groups(params = {})
+    # @param [Hash] params ({})
+    def associate_ip_groups(params = {}, options = {})
+      req = build_request(:associate_ip_groups, params)
+      req.send_request(options)
+    end
+
+    # Adds one or more rules to the specified IP access control group.
+    #
+    # This action gives users permission to access their WorkSpaces from the
+    # CIDR address ranges specified in the rules.
+    #
+    # @option params [required, String] :group_id
+    #   The ID of the group.
+    #
+    # @option params [required, Array<Types::IpRuleItem>] :user_rules
+    #   The rules to add to the group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.authorize_ip_rules({
+    #     group_id: "IpGroupId", # required
+    #     user_rules: [ # required
+    #       {
+    #         ip_rule: "IpRule",
+    #         rule_desc: "IpRuleDesc",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AuthorizeIpRules AWS API Documentation
+    #
+    # @overload authorize_ip_rules(params = {})
+    # @param [Hash] params ({})
+    def authorize_ip_rules(params = {}, options = {})
+      req = build_request(:authorize_ip_rules, params)
+      req.send_request(options)
+    end
+
+    # Creates an IP access control group.
+    #
+    # An IP access control group provides you with the ability to control
+    # the IP addresses from which users are allowed to access their
+    # WorkSpaces. To specify the CIDR address ranges, add rules to your IP
+    # access control group and then associate the group with your directory.
+    # You can add rules when you create the group or at any time using
+    # AuthorizeIpRules.
+    #
+    # There is a default IP access control group associated with your
+    # directory. If you don't associate an IP access control group with
+    # your directory, the default group is used. The default group includes
+    # a default rule that allows users to access their WorkSpaces from
+    # anywhere. You cannot modify the default IP access control group for
+    # your directory.
+    #
+    # @option params [required, String] :group_name
+    #   The name of the group.
+    #
+    # @option params [String] :group_desc
+    #   The description of the group.
+    #
+    # @option params [Array<Types::IpRuleItem>] :user_rules
+    #   The rules to add to the group.
+    #
+    # @return [Types::CreateIpGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIpGroupResult#group_id #group_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_ip_group({
+    #     group_name: "IpGroupName", # required
+    #     group_desc: "IpGroupDesc",
+    #     user_rules: [
+    #       {
+    #         ip_rule: "IpRule",
+    #         rule_desc: "IpRuleDesc",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroup AWS API Documentation
+    #
+    # @overload create_ip_group(params = {})
+    # @param [Hash] params ({})
+    def create_ip_group(params = {}, options = {})
+      req = build_request(:create_ip_group, params)
+      req.send_request(options)
+    end
+
+    # Creates the specified tags for the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The ID of the resource.
+    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags. Each resource can have a maximum of 50 tags.
+    #   The tags. Each WorkSpace can have a maximum of 50 tags.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -192,7 +308,7 @@ module Aws::WorkSpaces
     # created.
     #
     # @option params [required, Array<Types::WorkspaceRequest>] :workspaces
-    #   Information about the WorkSpaces to create.
+    #   The WorkSpaces to create. You can specify up to 25 WorkSpaces.
     #
     # @return [Types::CreateWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -251,7 +367,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].directory_id #=> String
     #   resp.pending_requests[0].user_name #=> String
     #   resp.pending_requests[0].ip_address #=> String
-    #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
+    #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.pending_requests[0].bundle_id #=> String
     #   resp.pending_requests[0].subnet_id #=> String
     #   resp.pending_requests[0].error_message #=> String
@@ -278,10 +394,35 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Deletes the specified tags from a WorkSpace.
+    # Deletes the specified IP access control group.
+    #
+    # You cannot delete an IP access control group that is associated with a
+    # directory.
+    #
+    # @option params [required, String] :group_id
+    #   The ID of the IP access control group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_ip_group({
+    #     group_id: "IpGroupId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroup AWS API Documentation
+    #
+    # @overload delete_ip_group(params = {})
+    # @param [Hash] params ({})
+    def delete_ip_group(params = {}, options = {})
+      req = build_request(:delete_ip_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified tags from the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The ID of the resource.
+    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The tag keys.
@@ -304,10 +445,55 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Describes the tags for the specified WorkSpace.
+    # Describes one or more of your IP access control groups.
+    #
+    # @option params [Array<String>] :group_ids
+    #   The IDs of one or more IP access control groups.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. (You received this token from a
+    #   previous call.)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return.
+    #
+    # @return [Types::DescribeIpGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeIpGroupsResult#result #result} => Array&lt;Types::WorkspacesIpGroup&gt;
+    #   * {Types::DescribeIpGroupsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_ip_groups({
+    #     group_ids: ["IpGroupId"],
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.result #=> Array
+    #   resp.result[0].group_id #=> String
+    #   resp.result[0].group_name #=> String
+    #   resp.result[0].group_desc #=> String
+    #   resp.result[0].user_rules #=> Array
+    #   resp.result[0].user_rules[0].ip_rule #=> String
+    #   resp.result[0].user_rules[0].rule_desc #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroups AWS API Documentation
+    #
+    # @overload describe_ip_groups(params = {})
+    # @param [Hash] params ({})
+    def describe_ip_groups(params = {}, options = {})
+      req = build_request(:describe_ip_groups, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified tags for the specified WorkSpace.
     #
     # @option params [required, String] :resource_id
-    #   The ID of the resource.
+    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
     #
     # @return [Types::DescribeTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -432,6 +618,8 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_creation_properties.default_ou #=> String
     #   resp.directories[0].workspace_creation_properties.custom_security_group_id #=> String
     #   resp.directories[0].workspace_creation_properties.user_enabled_as_local_administrator #=> Boolean
+    #   resp.directories[0].ip_group_ids #=> Array
+    #   resp.directories[0].ip_group_ids[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories AWS API Documentation
@@ -500,7 +688,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].directory_id #=> String
     #   resp.workspaces[0].user_name #=> String
     #   resp.workspaces[0].ip_address #=> String
-    #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
+    #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "ADMIN_MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "UPDATING", "STOPPING", "STOPPED", "ERROR"
     #   resp.workspaces[0].bundle_id #=> String
     #   resp.workspaces[0].subnet_id #=> String
     #   resp.workspaces[0].error_message #=> String
@@ -531,7 +719,8 @@ module Aws::WorkSpaces
     # Describes the connection status of the specified WorkSpaces.
     #
     # @option params [Array<String>] :workspace_ids
-    #   The identifiers of the WorkSpaces.
+    #   The identifiers of the WorkSpaces. You can specify up to 25
+    #   WorkSpaces.
     #
     # @option params [String] :next_token
     #   The token for the next set of results. (You received this token from a
@@ -567,6 +756,33 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Disassociates the specified IP access control group from the specified
+    # directory.
+    #
+    # @option params [required, String] :directory_id
+    #   The ID of the directory.
+    #
+    # @option params [required, Array<String>] :group_ids
+    #   The IDs of one or more IP access control groups.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_ip_groups({
+    #     directory_id: "DirectoryId", # required
+    #     group_ids: ["IpGroupId"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroups AWS API Documentation
+    #
+    # @overload disassociate_ip_groups(params = {})
+    # @param [Hash] params ({})
+    def disassociate_ip_groups(params = {}, options = {})
+      req = build_request(:disassociate_ip_groups, params)
+      req.send_request(options)
+    end
+
     # Modifies the specified WorkSpace properties.
     #
     # @option params [required, String] :workspace_id
@@ -599,16 +815,48 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Sets the state of the specified WorkSpace.
+    #
+    # To maintain a WorkSpace without being interrupted, set the WorkSpace
+    # state to `ADMIN_MAINTENANCE`. WorkSpaces in this state do not respond
+    # to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace
+    # in this state is not stopped. Users can log into a WorkSpace in the
+    # `ADMIN_MAINTENANCE` state.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the WorkSpace.
+    #
+    # @option params [required, String] :workspace_state
+    #   The WorkSpace state.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_workspace_state({
+    #     workspace_id: "WorkspaceId", # required
+    #     workspace_state: "AVAILABLE", # required, accepts AVAILABLE, ADMIN_MAINTENANCE
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceState AWS API Documentation
+    #
+    # @overload modify_workspace_state(params = {})
+    # @param [Hash] params ({})
+    def modify_workspace_state(params = {}, options = {})
+      req = build_request(:modify_workspace_state, params)
+      req.send_request(options)
+    end
+
     # Reboots the specified WorkSpaces.
     #
-    # You cannot reboot a WorkSpace unless its state is `AVAILABLE`,
-    # `IMPAIRED`, or `INOPERABLE`.
+    # You cannot reboot a WorkSpace unless its state is `AVAILABLE` or
+    # `UNHEALTHY`.
     #
     # This operation is asynchronous and returns before the WorkSpaces have
     # rebooted.
     #
     # @option params [required, Array<Types::RebootRequest>] :reboot_workspace_requests
-    #   The WorkSpaces to reboot.
+    #   The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
     #
     # @return [Types::RebootWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -640,10 +888,10 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Rebuilds the specified WorkSpaces.
+    # Rebuilds the specified WorkSpace.
     #
-    # You cannot rebuild a WorkSpace unless its state is `AVAILABLE` or
-    # `ERROR`.
+    # You cannot rebuild a WorkSpace unless its state is `AVAILABLE`,
+    # `ERROR`, or `UNHEALTHY`.
     #
     # Rebuilding a WorkSpace is a potentially destructive action that can
     # result in the loss of data. For more information, see [Rebuild a
@@ -657,7 +905,7 @@ module Aws::WorkSpaces
     # [1]: http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html
     #
     # @option params [required, Array<Types::RebuildRequest>] :rebuild_workspace_requests
-    #   The WorkSpaces to rebuild.
+    #   The WorkSpace to rebuild. You can specify a single WorkSpace.
     #
     # @return [Types::RebuildWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -689,13 +937,39 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Removes one or more rules from the specified IP access control group.
+    #
+    # @option params [required, String] :group_id
+    #   The ID of the group.
+    #
+    # @option params [required, Array<String>] :user_rules
+    #   The rules to remove from the group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.revoke_ip_rules({
+    #     group_id: "IpGroupId", # required
+    #     user_rules: ["IpRule"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RevokeIpRules AWS API Documentation
+    #
+    # @overload revoke_ip_rules(params = {})
+    # @param [Hash] params ({})
+    def revoke_ip_rules(params = {}, options = {})
+      req = build_request(:revoke_ip_rules, params)
+      req.send_request(options)
+    end
+
     # Starts the specified WorkSpaces.
     #
     # You cannot start a WorkSpace unless it has a running mode of
     # `AutoStop` and a state of `STOPPED`.
     #
     # @option params [required, Array<Types::StartRequest>] :start_workspace_requests
-    #   The WorkSpaces to start.
+    #   The WorkSpaces to start. You can specify up to 25 WorkSpaces.
     #
     # @return [Types::StartWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -733,7 +1007,7 @@ module Aws::WorkSpaces
     # and a state of `AVAILABLE`, `IMPAIRED`, `UNHEALTHY`, or `ERROR`.
     #
     # @option params [required, Array<Types::StopRequest>] :stop_workspace_requests
-    #   The WorkSpaces to stop.
+    #   The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
     #
     # @return [Types::StopWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -777,7 +1051,7 @@ module Aws::WorkSpaces
     # been completely terminated.
     #
     # @option params [required, Array<Types::TerminateRequest>] :terminate_workspace_requests
-    #   The WorkSpaces to terminate.
+    #   The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
     #
     # @return [Types::TerminateWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -809,6 +1083,38 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Replaces the current rules of the specified IP access control group
+    # with the specified rules.
+    #
+    # @option params [required, String] :group_id
+    #   The ID of the group.
+    #
+    # @option params [required, Array<Types::IpRuleItem>] :user_rules
+    #   One or more rules.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_rules_of_ip_group({
+    #     group_id: "IpGroupId", # required
+    #     user_rules: [ # required
+    #       {
+    #         ip_rule: "IpRule",
+    #         rule_desc: "IpRuleDesc",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateRulesOfIpGroup AWS API Documentation
+    #
+    # @overload update_rules_of_ip_group(params = {})
+    # @param [Hash] params ({})
+    def update_rules_of_ip_group(params = {}, options = {})
+      req = build_request(:update_rules_of_ip_group, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -822,7 +1128,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

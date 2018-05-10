@@ -31,6 +31,8 @@ module Aws::GuardDuty
     Country = Shapes::StructureShape.new(name: 'Country')
     CreateDetectorRequest = Shapes::StructureShape.new(name: 'CreateDetectorRequest')
     CreateDetectorResponse = Shapes::StructureShape.new(name: 'CreateDetectorResponse')
+    CreateFilterRequest = Shapes::StructureShape.new(name: 'CreateFilterRequest')
+    CreateFilterResponse = Shapes::StructureShape.new(name: 'CreateFilterResponse')
     CreateIPSetRequest = Shapes::StructureShape.new(name: 'CreateIPSetRequest')
     CreateIPSetResponse = Shapes::StructureShape.new(name: 'CreateIPSetResponse')
     CreateMembersRequest = Shapes::StructureShape.new(name: 'CreateMembersRequest')
@@ -44,6 +46,8 @@ module Aws::GuardDuty
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
     DeleteDetectorRequest = Shapes::StructureShape.new(name: 'DeleteDetectorRequest')
     DeleteDetectorResponse = Shapes::StructureShape.new(name: 'DeleteDetectorResponse')
+    DeleteFilterRequest = Shapes::StructureShape.new(name: 'DeleteFilterRequest')
+    DeleteFilterResponse = Shapes::StructureShape.new(name: 'DeleteFilterResponse')
     DeleteIPSetRequest = Shapes::StructureShape.new(name: 'DeleteIPSetRequest')
     DeleteIPSetResponse = Shapes::StructureShape.new(name: 'DeleteIPSetResponse')
     DeleteInvitationsRequest = Shapes::StructureShape.new(name: 'DeleteInvitationsRequest')
@@ -67,6 +71,11 @@ module Aws::GuardDuty
     Eq = Shapes::ListShape.new(name: 'Eq')
     ErrorResponse = Shapes::StructureShape.new(name: 'ErrorResponse')
     Feedback = Shapes::StringShape.new(name: 'Feedback')
+    FilterAction = Shapes::StringShape.new(name: 'FilterAction')
+    FilterDescription = Shapes::StringShape.new(name: 'FilterDescription')
+    FilterName = Shapes::StringShape.new(name: 'FilterName')
+    FilterNames = Shapes::ListShape.new(name: 'FilterNames')
+    FilterRank = Shapes::IntegerShape.new(name: 'FilterRank')
     Finding = Shapes::StructureShape.new(name: 'Finding')
     FindingCriteria = Shapes::StructureShape.new(name: 'FindingCriteria')
     FindingId = Shapes::StringShape.new(name: 'FindingId')
@@ -80,6 +89,8 @@ module Aws::GuardDuty
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
     GetDetectorRequest = Shapes::StructureShape.new(name: 'GetDetectorRequest')
     GetDetectorResponse = Shapes::StructureShape.new(name: 'GetDetectorResponse')
+    GetFilterRequest = Shapes::StructureShape.new(name: 'GetFilterRequest')
+    GetFilterResponse = Shapes::StructureShape.new(name: 'GetFilterResponse')
     GetFindingsRequest = Shapes::StructureShape.new(name: 'GetFindingsRequest')
     GetFindingsResponse = Shapes::StructureShape.new(name: 'GetFindingsResponse')
     GetFindingsStatisticsRequest = Shapes::StructureShape.new(name: 'GetFindingsStatisticsRequest')
@@ -111,6 +122,8 @@ module Aws::GuardDuty
     Ipv6Addresses = Shapes::ListShape.new(name: 'Ipv6Addresses')
     ListDetectorsRequest = Shapes::StructureShape.new(name: 'ListDetectorsRequest')
     ListDetectorsResponse = Shapes::StructureShape.new(name: 'ListDetectorsResponse')
+    ListFiltersRequest = Shapes::StructureShape.new(name: 'ListFiltersRequest')
+    ListFiltersResponse = Shapes::StructureShape.new(name: 'ListFiltersResponse')
     ListFindingsRequest = Shapes::StructureShape.new(name: 'ListFindingsRequest')
     ListFindingsResponse = Shapes::StructureShape.new(name: 'ListFindingsResponse')
     ListIPSetsRequest = Shapes::StructureShape.new(name: 'ListIPSetsRequest')
@@ -119,13 +132,10 @@ module Aws::GuardDuty
     ListInvitationsResponse = Shapes::StructureShape.new(name: 'ListInvitationsResponse')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
-    ListOfPortProbeDetail = Shapes::ListShape.new(name: 'ListOfPortProbeDetail')
     ListThreatIntelSetsRequest = Shapes::StructureShape.new(name: 'ListThreatIntelSetsRequest')
     ListThreatIntelSetsResponse = Shapes::StructureShape.new(name: 'ListThreatIntelSetsResponse')
     LocalPortDetails = Shapes::StructureShape.new(name: 'LocalPortDetails')
     Location = Shapes::StringShape.new(name: 'Location')
-    MapOfCondition = Shapes::MapShape.new(name: 'MapOfCondition')
-    MapOfCountBySeverityFindingStatistic = Shapes::MapShape.new(name: 'MapOfCountBySeverityFindingStatistic')
     Master = Shapes::StructureShape.new(name: 'Master')
     MasterId = Shapes::StringShape.new(name: 'MasterId')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -136,6 +146,7 @@ module Aws::GuardDuty
     Neq = Shapes::ListShape.new(name: 'Neq')
     NetworkConnectionAction = Shapes::StructureShape.new(name: 'NetworkConnectionAction')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
+    NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
@@ -172,6 +183,8 @@ module Aws::GuardDuty
     UnprocessedAccounts = Shapes::ListShape.new(name: 'UnprocessedAccounts')
     UpdateDetectorRequest = Shapes::StructureShape.new(name: 'UpdateDetectorRequest')
     UpdateDetectorResponse = Shapes::StructureShape.new(name: 'UpdateDetectorResponse')
+    UpdateFilterRequest = Shapes::StructureShape.new(name: 'UpdateFilterRequest')
+    UpdateFilterResponse = Shapes::StructureShape.new(name: 'UpdateFilterResponse')
     UpdateFindingsFeedbackRequest = Shapes::StructureShape.new(name: 'UpdateFindingsFeedbackRequest')
     UpdateFindingsFeedbackResponse = Shapes::StructureShape.new(name: 'UpdateFindingsFeedbackResponse')
     UpdateIPSetRequest = Shapes::StructureShape.new(name: 'UpdateIPSetRequest')
@@ -182,7 +195,12 @@ module Aws::GuardDuty
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
+    __listOfPortProbeDetail = Shapes::ListShape.new(name: '__listOfPortProbeDetail')
+    __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOfCondition = Shapes::MapShape.new(name: '__mapOfCondition')
+    __mapOfCountBySeverityFindingStatistic = Shapes::MapShape.new(name: '__mapOfCountBySeverityFindingStatistic')
     __string = Shapes::StringShape.new(name: '__string')
+    __stringMin0Max64 = Shapes::StringShape.new(name: '__stringMin0Max64')
     __timestamp = Shapes::TimestampShape.new(name: '__timestamp')
 
     AcceptInvitationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
@@ -198,8 +216,8 @@ module Aws::GuardDuty
     AccessKeyDetails.add_member(:user_type, Shapes::ShapeRef.new(shape: __string, location_name: "userType"))
     AccessKeyDetails.struct_class = Types::AccessKeyDetails
 
-    AccountDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
-    AccountDetail.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "email"))
+    AccountDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    AccountDetail.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "email"))
     AccountDetail.struct_class = Types::AccountDetail
 
     AccountDetails.member = Shapes::ShapeRef.new(shape: AccountDetail)
@@ -247,6 +265,18 @@ module Aws::GuardDuty
     CreateDetectorResponse.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "detectorId"))
     CreateDetectorResponse.struct_class = Types::CreateDetectorResponse
 
+    CreateFilterRequest.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, location_name: "action"))
+    CreateFilterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin0Max64, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: FilterDescription, location_name: "description"))
+    CreateFilterRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
+    CreateFilterRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, location_name: "findingCriteria"))
+    CreateFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
+    CreateFilterRequest.add_member(:rank, Shapes::ShapeRef.new(shape: FilterRank, location_name: "rank"))
+    CreateFilterRequest.struct_class = Types::CreateFilterRequest
+
+    CreateFilterResponse.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
+    CreateFilterResponse.struct_class = Types::CreateFilterResponse
+
     CreateIPSetRequest.add_member(:activate, Shapes::ShapeRef.new(shape: Activate, location_name: "activate"))
     CreateIPSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     CreateIPSetRequest.add_member(:format, Shapes::ShapeRef.new(shape: IpSetFormat, location_name: "format"))
@@ -290,6 +320,12 @@ module Aws::GuardDuty
     DeleteDetectorRequest.struct_class = Types::DeleteDetectorRequest
 
     DeleteDetectorResponse.struct_class = Types::DeleteDetectorResponse
+
+    DeleteFilterRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
+    DeleteFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "filterName"))
+    DeleteFilterRequest.struct_class = Types::DeleteFilterRequest
+
+    DeleteFilterResponse.struct_class = Types::DeleteFilterResponse
 
     DeleteIPSetRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     DeleteIPSetRequest.add_member(:ip_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ipSetId"))
@@ -341,31 +377,33 @@ module Aws::GuardDuty
     ErrorResponse.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "__type"))
     ErrorResponse.struct_class = Types::ErrorResponse
 
-    Finding.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
-    Finding.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    FilterNames.member = Shapes::ShapeRef.new(shape: FilterName)
+
+    Finding.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "accountId"))
+    Finding.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "arn"))
     Finding.add_member(:confidence, Shapes::ShapeRef.new(shape: __double, location_name: "confidence"))
-    Finding.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    Finding.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, required: true, location_name: "createdAt"))
     Finding.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    Finding.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    Finding.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     Finding.add_member(:partition, Shapes::ShapeRef.new(shape: __string, location_name: "partition"))
-    Finding.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
-    Finding.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
-    Finding.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, location_name: "schemaVersion"))
+    Finding.add_member(:region, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "region"))
+    Finding.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "resource"))
+    Finding.add_member(:schema_version, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "schemaVersion"))
     Finding.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
-    Finding.add_member(:severity, Shapes::ShapeRef.new(shape: __double, location_name: "severity"))
+    Finding.add_member(:severity, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "severity"))
     Finding.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "title"))
-    Finding.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "type"))
-    Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    Finding.add_member(:type, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "type"))
+    Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, required: true, location_name: "updatedAt"))
     Finding.struct_class = Types::Finding
 
-    FindingCriteria.add_member(:criterion, Shapes::ShapeRef.new(shape: MapOfCondition, location_name: "criterion"))
+    FindingCriteria.add_member(:criterion, Shapes::ShapeRef.new(shape: __mapOfCondition, location_name: "criterion"))
     FindingCriteria.struct_class = Types::FindingCriteria
 
     FindingIds.member = Shapes::ShapeRef.new(shape: FindingId)
 
     FindingStatisticTypes.member = Shapes::ShapeRef.new(shape: FindingStatisticType)
 
-    FindingStatistics.add_member(:count_by_severity, Shapes::ShapeRef.new(shape: MapOfCountBySeverityFindingStatistic, location_name: "countBySeverity"))
+    FindingStatistics.add_member(:count_by_severity, Shapes::ShapeRef.new(shape: __mapOfCountBySeverityFindingStatistic, location_name: "countBySeverity"))
     FindingStatistics.struct_class = Types::FindingStatistics
 
     FindingTypes.member = Shapes::ShapeRef.new(shape: FindingType)
@@ -384,6 +422,17 @@ module Aws::GuardDuty
     GetDetectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: DetectorStatus, location_name: "status"))
     GetDetectorResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
     GetDetectorResponse.struct_class = Types::GetDetectorResponse
+
+    GetFilterRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
+    GetFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "filterName"))
+    GetFilterRequest.struct_class = Types::GetFilterRequest
+
+    GetFilterResponse.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, location_name: "action"))
+    GetFilterResponse.add_member(:description, Shapes::ShapeRef.new(shape: FilterDescription, location_name: "description"))
+    GetFilterResponse.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, location_name: "findingCriteria"))
+    GetFilterResponse.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
+    GetFilterResponse.add_member(:rank, Shapes::ShapeRef.new(shape: FilterRank, location_name: "rank"))
+    GetFilterResponse.struct_class = Types::GetFilterResponse
 
     GetFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     GetFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, location_name: "findingIds"))
@@ -446,6 +495,7 @@ module Aws::GuardDuty
 
     InstanceDetails.add_member(:availability_zone, Shapes::ShapeRef.new(shape: __string, location_name: "availabilityZone"))
     InstanceDetails.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfile, location_name: "iamInstanceProfile"))
+    InstanceDetails.add_member(:image_description, Shapes::ShapeRef.new(shape: __string, location_name: "imageDescription"))
     InstanceDetails.add_member(:image_id, Shapes::ShapeRef.new(shape: __string, location_name: "imageId"))
     InstanceDetails.add_member(:instance_id, Shapes::ShapeRef.new(shape: __string, location_name: "instanceId"))
     InstanceDetails.add_member(:instance_state, Shapes::ShapeRef.new(shape: __string, location_name: "instanceState"))
@@ -467,6 +517,7 @@ module Aws::GuardDuty
 
     InviteMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, location_name: "accountIds"))
     InviteMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
+    InviteMembersRequest.add_member(:disable_email_notification, Shapes::ShapeRef.new(shape: __boolean, location_name: "disableEmailNotification"))
     InviteMembersRequest.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     InviteMembersRequest.struct_class = Types::InviteMembersRequest
 
@@ -484,6 +535,15 @@ module Aws::GuardDuty
     ListDetectorsResponse.add_member(:detector_ids, Shapes::ShapeRef.new(shape: DetectorIds, location_name: "detectorIds"))
     ListDetectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListDetectorsResponse.struct_class = Types::ListDetectorsResponse
+
+    ListFiltersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
+    ListFiltersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListFiltersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListFiltersRequest.struct_class = Types::ListFiltersRequest
+
+    ListFiltersResponse.add_member(:filter_names, Shapes::ShapeRef.new(shape: FilterNames, location_name: "filterNames"))
+    ListFiltersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListFiltersResponse.struct_class = Types::ListFiltersResponse
 
     ListFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     ListFindingsRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, location_name: "findingCriteria"))
@@ -523,8 +583,6 @@ module Aws::GuardDuty
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
 
-    ListOfPortProbeDetail.member = Shapes::ShapeRef.new(shape: PortProbeDetail)
-
     ListThreatIntelSetsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
     ListThreatIntelSetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListThreatIntelSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -538,25 +596,19 @@ module Aws::GuardDuty
     LocalPortDetails.add_member(:port_name, Shapes::ShapeRef.new(shape: __string, location_name: "portName"))
     LocalPortDetails.struct_class = Types::LocalPortDetails
 
-    MapOfCondition.key = Shapes::ShapeRef.new(shape: __string)
-    MapOfCondition.value = Shapes::ShapeRef.new(shape: Condition)
-
-    MapOfCountBySeverityFindingStatistic.key = Shapes::ShapeRef.new(shape: __string)
-    MapOfCountBySeverityFindingStatistic.value = Shapes::ShapeRef.new(shape: CountBySeverityFindingStatistic)
-
     Master.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
     Master.add_member(:invitation_id, Shapes::ShapeRef.new(shape: InvitationId, location_name: "invitationId"))
     Master.add_member(:invited_at, Shapes::ShapeRef.new(shape: InvitedAt, location_name: "invitedAt"))
     Master.add_member(:relationship_status, Shapes::ShapeRef.new(shape: __string, location_name: "relationshipStatus"))
     Master.struct_class = Types::Master
 
-    Member.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    Member.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     Member.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, location_name: "detectorId"))
-    Member.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "email"))
+    Member.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "email"))
     Member.add_member(:invited_at, Shapes::ShapeRef.new(shape: InvitedAt, location_name: "invitedAt"))
-    Member.add_member(:master_id, Shapes::ShapeRef.new(shape: MasterId, location_name: "masterId"))
-    Member.add_member(:relationship_status, Shapes::ShapeRef.new(shape: __string, location_name: "relationshipStatus"))
-    Member.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    Member.add_member(:master_id, Shapes::ShapeRef.new(shape: MasterId, required: true, location_name: "masterId"))
+    Member.add_member(:relationship_status, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "relationshipStatus"))
+    Member.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, required: true, location_name: "updatedAt"))
     Member.struct_class = Types::Member
 
     Members.member = Shapes::ShapeRef.new(shape: Member)
@@ -572,6 +624,7 @@ module Aws::GuardDuty
     NetworkConnectionAction.struct_class = Types::NetworkConnectionAction
 
     NetworkInterface.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6Addresses, location_name: "ipv6Addresses"))
+    NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "networkInterfaceId"))
     NetworkInterface.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: PrivateDnsName, location_name: "privateDnsName"))
     NetworkInterface.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: PrivateIpAddress, location_name: "privateIpAddress"))
     NetworkInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddresses, location_name: "privateIpAddresses"))
@@ -591,7 +644,7 @@ module Aws::GuardDuty
     Organization.struct_class = Types::Organization
 
     PortProbeAction.add_member(:blocked, Shapes::ShapeRef.new(shape: __boolean, location_name: "blocked"))
-    PortProbeAction.add_member(:port_probe_details, Shapes::ShapeRef.new(shape: ListOfPortProbeDetail, location_name: "portProbeDetails"))
+    PortProbeAction.add_member(:port_probe_details, Shapes::ShapeRef.new(shape: __listOfPortProbeDetail, location_name: "portProbeDetails"))
     PortProbeAction.struct_class = Types::PortProbeAction
 
     PortProbeDetail.add_member(:local_port_details, Shapes::ShapeRef.new(shape: LocalPortDetails, location_name: "localPortDetails"))
@@ -675,8 +728,8 @@ module Aws::GuardDuty
 
     UnarchiveFindingsResponse.struct_class = Types::UnarchiveFindingsResponse
 
-    UnprocessedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, location_name: "accountId"))
-    UnprocessedAccount.add_member(:result, Shapes::ShapeRef.new(shape: __string, location_name: "result"))
+    UnprocessedAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "accountId"))
+    UnprocessedAccount.add_member(:result, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "result"))
     UnprocessedAccount.struct_class = Types::UnprocessedAccount
 
     UnprocessedAccounts.member = Shapes::ShapeRef.new(shape: UnprocessedAccount)
@@ -686,6 +739,17 @@ module Aws::GuardDuty
     UpdateDetectorRequest.struct_class = Types::UpdateDetectorRequest
 
     UpdateDetectorResponse.struct_class = Types::UpdateDetectorResponse
+
+    UpdateFilterRequest.add_member(:action, Shapes::ShapeRef.new(shape: FilterAction, location_name: "action"))
+    UpdateFilterRequest.add_member(:description, Shapes::ShapeRef.new(shape: FilterDescription, location_name: "description"))
+    UpdateFilterRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
+    UpdateFilterRequest.add_member(:filter_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "filterName"))
+    UpdateFilterRequest.add_member(:finding_criteria, Shapes::ShapeRef.new(shape: FindingCriteria, location_name: "findingCriteria"))
+    UpdateFilterRequest.add_member(:rank, Shapes::ShapeRef.new(shape: FilterRank, location_name: "rank"))
+    UpdateFilterRequest.struct_class = Types::UpdateFilterRequest
+
+    UpdateFilterResponse.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, location_name: "name"))
+    UpdateFilterResponse.struct_class = Types::UpdateFilterResponse
 
     UpdateFindingsFeedbackRequest.add_member(:comments, Shapes::ShapeRef.new(shape: Comments, location_name: "comments"))
     UpdateFindingsFeedbackRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "detectorId"))
@@ -712,6 +776,14 @@ module Aws::GuardDuty
     UpdateThreatIntelSetRequest.struct_class = Types::UpdateThreatIntelSetRequest
 
     UpdateThreatIntelSetResponse.struct_class = Types::UpdateThreatIntelSetResponse
+
+    __listOfPortProbeDetail.member = Shapes::ShapeRef.new(shape: PortProbeDetail)
+
+    __mapOfCondition.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOfCondition.value = Shapes::ShapeRef.new(shape: Condition)
+
+    __mapOfCountBySeverityFindingStatistic.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOfCountBySeverityFindingStatistic.value = Shapes::ShapeRef.new(shape: CountBySeverityFindingStatistic)
 
 
     # @api private
@@ -754,6 +826,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector"
         o.input = Shapes::ShapeRef.new(shape: CreateDetectorRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDetectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:create_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/filter"
+        o.input = Shapes::ShapeRef.new(shape: CreateFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFilterResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -814,6 +896,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDetectorRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDetectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:delete_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFilter"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/detector/{detectorId}/filter/{filterName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFilterResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -884,6 +976,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}"
         o.input = Shapes::ShapeRef.new(shape: GetDetectorRequest)
         o.output = Shapes::ShapeRef.new(shape: GetDetectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFilter"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/filter/{filterName}"
+        o.input = Shapes::ShapeRef.new(shape: GetFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFilterResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
@@ -974,6 +1076,22 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector"
         o.input = Shapes::ShapeRef.new(shape: ListDetectorsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDetectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_filters, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFilters"
+        o.http_method = "GET"
+        o.http_request_uri = "/detector/{detectorId}/filter"
+        o.input = Shapes::ShapeRef.new(shape: ListFiltersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFiltersResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o[:pager] = Aws::Pager.new(
@@ -1100,6 +1218,16 @@ module Aws::GuardDuty
         o.http_request_uri = "/detector/{detectorId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateDetectorRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDetectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:update_filter, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFilter"
+        o.http_method = "POST"
+        o.http_request_uri = "/detector/{detectorId}/filter/{filterName}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFilterRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFilterResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)

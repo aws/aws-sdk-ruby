@@ -9,6 +9,7 @@ module Seahorse
       module Patches
 
         def self.apply!
+          return unless RUBY_VERSION < '2.5'
           if RUBY_VERSION >= '2.0'
             Net::HTTP.send(:include, Ruby_2)
             Net::HTTP::IDEMPOTENT_METHODS_.clear

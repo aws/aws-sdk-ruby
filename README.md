@@ -337,6 +337,7 @@ to be backwards compatible.
 | AWS Identity and Access Management                    | Aws::IAM                             | aws-sdk-iam                             | 2010-05-08  |
 | AWS Import/Export                                     | Aws::ImportExport                    | aws-sdk-importexport                    | 2010-06-01  |
 | AWS IoT                                               | Aws::IoT                             | aws-sdk-iot                             | 2015-05-28  |
+| AWS IoT Analytics                                     | Aws::IoTAnalytics                    | aws-sdk-iotanalytics                    | 2017-11-27  |
 | AWS IoT Data Plane                                    | Aws::IoTDataPlane                    | aws-sdk-iotdataplane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |

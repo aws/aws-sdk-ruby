@@ -355,6 +355,43 @@ module Aws::WorkMail
     #
     class DeleteGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteMailboxPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         entity_id: "WorkMailIdentifier", # required
+    #         grantee_id: "WorkMailIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the organization under which the entity (user or
+    #   group) exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the entity (user or group) for which to delete
+    #   mailbox permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee_id
+    #   The identifier of the entity (user or group) for which to delete
+    #   granted permissions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissionsRequest AWS API Documentation
+    #
+    class DeleteMailboxPermissionsRequest < Struct.new(
+      :organization_id,
+      :entity_id,
+      :grantee_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissionsResponse AWS API Documentation
+    #
+    class DeleteMailboxPermissionsResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteResourceRequest
     #   data as a hash:
     #
@@ -991,6 +1028,62 @@ module Aws::WorkMail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMailboxPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         entity_id: "WorkMailIdentifier", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the organization under which the entity (user or
+    #   group) exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the entity (user or group) for which to list
+    #   mailbox permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The first
+    #   call does not contain any tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxPermissionsRequest AWS API Documentation
+    #
+    class ListMailboxPermissionsRequest < Struct.new(
+      :organization_id,
+      :entity_id,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permissions
+    #   One page of the entity's mailbox permissions.
+    #   @return [Array<Types::Permission>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. The value is
+    #   "null" when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxPermissionsResponse AWS API Documentation
+    #
+    class ListMailboxPermissionsResponse < Struct.new(
+      :permissions,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListOrganizationsRequest
     #   data as a hash:
     #
@@ -1256,6 +1349,87 @@ module Aws::WorkMail
       :state)
       include Aws::Structure
     end
+
+    # Permission granted to an entity (user, group) to access a certain
+    # aspect of another entity's mailbox.
+    #
+    # @!attribute [rw] grantee_id
+    #   The identifier of the entity (user or group) to which the
+    #   permissions are granted.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee_type
+    #   The type of entity (user, group) of the entity referred to in
+    #   GranteeId.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_values
+    #   The permissions granted to the grantee. SEND\_AS allows the grantee
+    #   to send email as the owner of the mailbox (the grantee is not
+    #   mentioned on these emails). SEND\_ON\_BEHALF allows the grantee to
+    #   send email on behalf of the owner of the mailbox (the grantee is not
+    #   mentioned as the physical sender of these emails). FULL\_ACCESS
+    #   allows the grantee full access to the mailbox, irrespective of other
+    #   folder-level permissions set on the mailbox.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Permission AWS API Documentation
+    #
+    class Permission < Struct.new(
+      :grantee_id,
+      :grantee_type,
+      :permission_values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutMailboxPermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         entity_id: "WorkMailIdentifier", # required
+    #         grantee_id: "WorkMailIdentifier", # required
+    #         permission_values: ["FULL_ACCESS"], # required, accepts FULL_ACCESS, SEND_AS, SEND_ON_BEHALF
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The identifier of the organization under which the entity (user or
+    #   group) exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The identifier of the entity (user or group) for which to update
+    #   mailbox permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee_id
+    #   The identifier of the entity (user or group) to which to grant the
+    #   permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission_values
+    #   The permissions granted to the grantee. SEND\_AS allows the grantee
+    #   to send email as the owner of the mailbox (the grantee is not
+    #   mentioned on these emails). SEND\_ON\_BEHALF allows the grantee to
+    #   send email on behalf of the owner of the mailbox (the grantee is not
+    #   mentioned as the physical sender of these emails). FULL\_ACCESS
+    #   allows the grantee full access to the mailbox, irrespective of other
+    #   folder-level permissions set on the mailbox.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissionsRequest AWS API Documentation
+    #
+    class PutMailboxPermissionsRequest < Struct.new(
+      :organization_id,
+      :entity_id,
+      :grantee_id,
+      :permission_values)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissionsResponse AWS API Documentation
+    #
+    class PutMailboxPermissionsResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RegisterToWorkMailRequest
     #   data as a hash:

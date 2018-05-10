@@ -352,10 +352,6 @@ module Aws::RDS
     #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
     #   KMS key alias for the KMS encryption key.
     #
-    #   If you copy an unencrypted DB cluster snapshot and specify a value for
-    #   the `KmsKeyId` parameter, Amazon RDS encrypts the target DB cluster
-    #   snapshot using the specified KMS encryption key.
-    #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
     #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
@@ -371,6 +367,9 @@ module Aws::RDS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in another
     #   AWS Region.
+    #
+    #   If you copy an unencrypted DB cluster snapshot and specify a value for
+    #   the `KmsKeyId` parameter, an error is returned.
     # @option options [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
     #   `CopyDBClusterSnapshot` API action in the AWS Region that contains the
@@ -472,6 +471,7 @@ module Aws::RDS
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
@@ -543,6 +543,18 @@ module Aws::RDS
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    # @option options [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)

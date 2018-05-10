@@ -983,6 +983,76 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Delete a custom inventory type, or the data associated with a custom
+    # Inventory type. Deleting a custom inventory type is also referred to
+    # as deleting a custom inventory schema.
+    #
+    # @option params [required, String] :type_name
+    #   The name of the custom inventory type for which you want to delete
+    #   either all previously collected data, or the inventory type itself.
+    #
+    # @option params [String] :schema_delete_option
+    #   Use the `SchemaDeleteOption` to delete a custom inventory type
+    #   (schema). If you don't choose this option, the system only deletes
+    #   existing inventory data associated with the custom inventory type.
+    #   Choose one of the following options:
+    #
+    #   DisableSchema: If you choose this option, the system ignores all
+    #   inventory data for the specified version, and any earlier versions. To
+    #   enable this schema again, you must call the `PutInventory` action for
+    #   a version greater than the disbled version.
+    #
+    #   DeleteSchema: This option deletes the specified custom type from the
+    #   Inventory service. You can recreate the schema later, if you want.
+    #
+    # @option params [Boolean] :dry_run
+    #   Use this option to view a summary of the deletion request without
+    #   deleting any data or the data type. This option is useful when you
+    #   only want to understand what will be deleted. Once you validate that
+    #   the data to be deleted is what you intend to delete, you can run the
+    #   same command without specifying the `DryRun` option.
+    #
+    # @option params [String] :client_token
+    #   User-provided idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteInventoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInventoryResult#deletion_id #deletion_id} => String
+    #   * {Types::DeleteInventoryResult#type_name #type_name} => String
+    #   * {Types::DeleteInventoryResult#deletion_summary #deletion_summary} => Types::InventoryDeletionSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inventory({
+    #     type_name: "InventoryItemTypeName", # required
+    #     schema_delete_option: "DisableSchema", # accepts DisableSchema, DeleteSchema
+    #     dry_run: false,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deletion_id #=> String
+    #   resp.type_name #=> String
+    #   resp.deletion_summary.total_count #=> Integer
+    #   resp.deletion_summary.remaining_count #=> Integer
+    #   resp.deletion_summary.summary_items #=> Array
+    #   resp.deletion_summary.summary_items[0].version #=> String
+    #   resp.deletion_summary.summary_items[0].count #=> Integer
+    #   resp.deletion_summary.summary_items[0].remaining_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteInventory AWS API Documentation
+    #
+    # @overload delete_inventory(params = {})
+    # @param [Hash] params ({})
+    def delete_inventory(params = {}, options = {})
+      req = build_request(:delete_inventory, params)
+      req.send_request(options)
+    end
+
     # Deletes a Maintenance Window.
     #
     # @option params [required, String] :window_id
@@ -2120,6 +2190,60 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Describes a specific delete inventory operation.
+    #
+    # @option params [String] :deletion_id
+    #   Specify the delete inventory ID for which you want information. This
+    #   ID was returned by the `DeleteInventory` action.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @return [Types::DescribeInventoryDeletionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInventoryDeletionsResult#inventory_deletions #inventory_deletions} => Array&lt;Types::InventoryDeletionStatusItem&gt;
+    #   * {Types::DescribeInventoryDeletionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inventory_deletions({
+    #     deletion_id: "InventoryDeletionId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inventory_deletions #=> Array
+    #   resp.inventory_deletions[0].deletion_id #=> String
+    #   resp.inventory_deletions[0].type_name #=> String
+    #   resp.inventory_deletions[0].deletion_start_time #=> Time
+    #   resp.inventory_deletions[0].last_status #=> String, one of "InProgress", "Complete"
+    #   resp.inventory_deletions[0].last_status_message #=> String
+    #   resp.inventory_deletions[0].deletion_summary.total_count #=> Integer
+    #   resp.inventory_deletions[0].deletion_summary.remaining_count #=> Integer
+    #   resp.inventory_deletions[0].deletion_summary.summary_items #=> Array
+    #   resp.inventory_deletions[0].deletion_summary.summary_items[0].version #=> String
+    #   resp.inventory_deletions[0].deletion_summary.summary_items[0].count #=> Integer
+    #   resp.inventory_deletions[0].deletion_summary.summary_items[0].remaining_count #=> Integer
+    #   resp.inventory_deletions[0].last_status_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInventoryDeletions AWS API Documentation
+    #
+    # @overload describe_inventory_deletions(params = {})
+    # @param [Hash] params ({})
+    def describe_inventory_deletions(params = {}, options = {})
+      req = build_request(:describe_inventory_deletions, params)
+      req.send_request(options)
+    end
+
     # Retrieves the individual task executions (one per target) for a
     # particular task executed as part of a Maintenance Window execution.
     #
@@ -2830,6 +2954,7 @@ module Aws::SSM
     #   * {Types::GetCommandInvocationResult#instance_id #instance_id} => String
     #   * {Types::GetCommandInvocationResult#comment #comment} => String
     #   * {Types::GetCommandInvocationResult#document_name #document_name} => String
+    #   * {Types::GetCommandInvocationResult#document_version #document_version} => String
     #   * {Types::GetCommandInvocationResult#plugin_name #plugin_name} => String
     #   * {Types::GetCommandInvocationResult#response_code #response_code} => Integer
     #   * {Types::GetCommandInvocationResult#execution_start_date_time #execution_start_date_time} => String
@@ -2856,6 +2981,7 @@ module Aws::SSM
     #   resp.instance_id #=> String
     #   resp.comment #=> String
     #   resp.document_name #=> String
+    #   resp.document_version #=> String
     #   resp.plugin_name #=> String
     #   resp.response_code #=> Integer
     #   resp.execution_start_date_time #=> String
@@ -3593,8 +3719,18 @@ module Aws::SSM
     # @option params [Boolean] :recursive
     #   Retrieve all parameters within a hierarchy.
     #
+    #   If a user has access to a path, then the user can access all levels of
+    #   that path. For example, if a user has permission to access path /a,
+    #   then the user can also access /a/b. Even if a user has explicitly been
+    #   denied access in IAM for parameter /a, they can still call the
+    #   GetParametersByPath API action recursively and view /a/b.
+    #
     # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
     #   Filters to limit the request results.
+    #
+    #   <note markdown="1"> You can't filter using the parameter name.
+    #
+    #    </note>
     #
     # @option params [Boolean] :with_decryption
     #   Retrieve all parameters in a hierarchy with their value decrypted.
@@ -3939,6 +4075,7 @@ module Aws::SSM
     #   resp.command_invocations[0].instance_name #=> String
     #   resp.command_invocations[0].comment #=> String
     #   resp.command_invocations[0].document_name #=> String
+    #   resp.command_invocations[0].document_version #=> String
     #   resp.command_invocations[0].requested_date_time #=> Time
     #   resp.command_invocations[0].status #=> String, one of "Pending", "InProgress", "Delayed", "Success", "Cancelled", "TimedOut", "Failed", "Cancelling"
     #   resp.command_invocations[0].status_details #=> String
@@ -4020,6 +4157,7 @@ module Aws::SSM
     #   resp.commands #=> Array
     #   resp.commands[0].command_id #=> String
     #   resp.commands[0].document_name #=> String
+    #   resp.commands[0].document_version #=> String
     #   resp.commands[0].comment #=> String
     #   resp.commands[0].expires_after #=> Time
     #   resp.commands[0].parameters #=> Hash
@@ -4708,7 +4846,9 @@ module Aws::SSM
     # @option params [required, Array<Types::InventoryItem>] :items
     #   The inventory items that you want to add or update on instances.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::PutInventoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutInventoryResult#message #message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4732,6 +4872,10 @@ module Aws::SSM
     #     ],
     #   })
     #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventory AWS API Documentation
     #
     # @overload put_inventory(params = {})
@@ -4741,7 +4885,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Add one or more parameters to the system.
+    # Add a parameter to the system.
     #
     # @option params [required, String] :name
     #   The fully qualified name of the parameter that you want to add to the
@@ -5232,6 +5376,10 @@ module Aws::SSM
     #   Required. The name of the Systems Manager document to execute. This
     #   can be a public document or a custom document.
     #
+    # @option params [String] :document_version
+    #   The SSM document version to use in the request. You can specify
+    #   Default, Latest, or a specific version number.
+    #
     # @option params [String] :document_hash
     #   The Sha256 or Sha1 hash created by the system when the document was
     #   created.
@@ -5315,6 +5463,7 @@ module Aws::SSM
     #       },
     #     ],
     #     document_name: "DocumentARN", # required
+    #     document_version: "DocumentVersion",
     #     document_hash: "DocumentHash",
     #     document_hash_type: "Sha256", # accepts Sha256, Sha1
     #     timeout_seconds: 1,
@@ -5339,6 +5488,7 @@ module Aws::SSM
     #
     #   resp.command.command_id #=> String
     #   resp.command.document_name #=> String
+    #   resp.command.document_version #=> String
     #   resp.command.comment #=> String
     #   resp.command.expires_after #=> Time
     #   resp.command.parameters #=> Hash
@@ -6389,7 +6539,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

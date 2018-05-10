@@ -1214,6 +1214,8 @@ module Aws::MediaLive
     #           },
     #           embedded_plus_scte_20_destination_settings: {
     #           },
+    #           rtmp_caption_info_destination_settings: {
+    #           },
     #           scte_20_plus_embedded_destination_settings: {
     #           },
     #           scte_27_destination_settings: {
@@ -1325,6 +1327,8 @@ module Aws::MediaLive
     #         },
     #         embedded_plus_scte_20_destination_settings: {
     #         },
+    #         rtmp_caption_info_destination_settings: {
+    #         },
     #         scte_20_plus_embedded_destination_settings: {
     #         },
     #         scte_27_destination_settings: {
@@ -1355,6 +1359,9 @@ module Aws::MediaLive
     # @!attribute [rw] embedded_plus_scte_20_destination_settings
     #   @return [Types::EmbeddedPlusScte20DestinationSettings]
     #
+    # @!attribute [rw] rtmp_caption_info_destination_settings
+    #   @return [Types::RtmpCaptionInfoDestinationSettings]
+    #
     # @!attribute [rw] scte_20_plus_embedded_destination_settings
     #   @return [Types::Scte20PlusEmbeddedDestinationSettings]
     #
@@ -1381,6 +1388,7 @@ module Aws::MediaLive
       :dvb_sub_destination_settings,
       :embedded_destination_settings,
       :embedded_plus_scte_20_destination_settings,
+      :rtmp_caption_info_destination_settings,
       :scte_20_plus_embedded_destination_settings,
       :scte_27_destination_settings,
       :smpte_tt_destination_settings,
@@ -1743,6 +1751,7 @@ module Aws::MediaLive
     #             settings: [
     #               {
     #                 password_param: "__string",
+    #                 stream_name: "__string",
     #                 url: "__string",
     #                 username: "__string",
     #               },
@@ -1925,6 +1934,8 @@ module Aws::MediaLive
     #                 },
     #                 embedded_plus_scte_20_destination_settings: {
     #                 },
+    #                 rtmp_caption_info_destination_settings: {
+    #                 },
     #                 scte_20_plus_embedded_destination_settings: {
     #                 },
     #                 scte_27_destination_settings: {
@@ -2078,6 +2089,13 @@ module Aws::MediaLive
     #                   timestamp_offset: "__string",
     #                   timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #                 },
+    #                 rtmp_group_settings: {
+    #                   authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
+    #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
+    #                   cache_length: 1,
+    #                   caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #                   restart_delay: 1,
+    #                 },
     #                 udp_group_settings: {
     #                   input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -2182,6 +2200,7 @@ module Aws::MediaLive
     #                             scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                             scte_35_pid: "__string",
     #                             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                             timed_metadata_pid: "__string",
     #                             transport_stream_id: 1,
     #                             video_pid: "__string",
     #                           },
@@ -2192,6 +2211,14 @@ module Aws::MediaLive
     #                     },
     #                     ms_smooth_output_settings: {
     #                       name_modifier: "__string",
+    #                     },
+    #                     rtmp_output_settings: {
+    #                       certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
+    #                       connection_retry_interval: 1,
+    #                       destination: { # required
+    #                         destination_ref_id: "__string",
+    #                       },
+    #                       num_retries: 1,
     #                     },
     #                     udp_output_settings: {
     #                       buffer_msec: 1,
@@ -3592,6 +3619,8 @@ module Aws::MediaLive
     #               },
     #               embedded_plus_scte_20_destination_settings: {
     #               },
+    #               rtmp_caption_info_destination_settings: {
+    #               },
     #               scte_20_plus_embedded_destination_settings: {
     #               },
     #               scte_27_destination_settings: {
@@ -3745,6 +3774,13 @@ module Aws::MediaLive
     #                 timestamp_offset: "__string",
     #                 timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #               },
+    #               rtmp_group_settings: {
+    #                 authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
+    #                 cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
+    #                 cache_length: 1,
+    #                 caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #                 restart_delay: 1,
+    #               },
     #               udp_group_settings: {
     #                 input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
     #                 timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -3849,6 +3885,7 @@ module Aws::MediaLive
     #                           scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                           scte_35_pid: "__string",
     #                           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                           timed_metadata_pid: "__string",
     #                           transport_stream_id: 1,
     #                           video_pid: "__string",
     #                         },
@@ -3859,6 +3896,14 @@ module Aws::MediaLive
     #                   },
     #                   ms_smooth_output_settings: {
     #                     name_modifier: "__string",
+    #                   },
+    #                   rtmp_output_settings: {
+    #                     certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
+    #                     connection_retry_interval: 1,
+    #                     destination: { # required
+    #                       destination_ref_id: "__string",
+    #                     },
+    #                     num_retries: 1,
     #                   },
     #                   udp_output_settings: {
     #                     buffer_msec: 1,
@@ -5022,6 +5067,7 @@ module Aws::MediaLive
     #               scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #               scte_35_pid: "__string",
     #               timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #               timed_metadata_pid: "__string",
     #               transport_stream_id: 1,
     #               video_pid: "__string",
     #             },
@@ -5083,6 +5129,7 @@ module Aws::MediaLive
     #             scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #             scte_35_pid: "__string",
     #             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #             timed_metadata_pid: "__string",
     #             transport_stream_id: 1,
     #             video_pid: "__string",
     #           },
@@ -5378,8 +5425,8 @@ module Aws::MediaLive
     # @!attribute [rw] uri
     #   Uniform Resource Identifier - This should be a path to a file
     #   accessible to the Live system (eg. a http:// URI) depending on the
-    #   output type. For example, a rtmpEndpoint should have a uri simliar
-    #   to: "rtmp://fmsserver/live".
+    #   output type. For example, a RTMP destination should have a uri
+    #   simliar to: "rtmp://fmsserver/live".
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -6386,6 +6433,7 @@ module Aws::MediaLive
     #         scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #         scte_35_pid: "__string",
     #         timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #         timed_metadata_pid: "__string",
     #         transport_stream_id: 1,
     #         video_pid: "__string",
     #       }
@@ -6460,6 +6508,12 @@ module Aws::MediaLive
     #   to output.
     #   @return [String]
     #
+    # @!attribute [rw] timed_metadata_pid
+    #   Packet Identifier (PID) of the timed metadata stream in the
+    #   transport stream. Can be entered as a decimal or hexadecimal value.
+    #   Valid values are 32 (or 0x20)..8182 (or 0x1ff6).
+    #   @return [String]
+    #
     # @!attribute [rw] transport_stream_id
     #   The value of the transport stream ID field in the Program Map Table.
     #   @return [Integer]
@@ -6485,6 +6539,7 @@ module Aws::MediaLive
       :scte_35_behavior,
       :scte_35_pid,
       :timed_metadata_behavior,
+      :timed_metadata_pid,
       :transport_stream_id,
       :video_pid)
       include Aws::Structure
@@ -6563,8 +6618,7 @@ module Aws::MediaLive
     # @!attribute [rw] certificate_mode
     #   If set to verifyAuthenticity, verify the https certificate chain to
     #   a trusted Certificate Authority (CA). This will cause https outputs
-    #   to self-signed certificates to fail unless those certificates are
-    #   manually added to the OS trusted keystore.
+    #   to self-signed certificates to fail.
     #   @return [String]
     #
     # @!attribute [rw] connection_retry_interval
@@ -6845,6 +6899,7 @@ module Aws::MediaLive
     #                   scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                   scte_35_pid: "__string",
     #                   timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                   timed_metadata_pid: "__string",
     #                   transport_stream_id: 1,
     #                   video_pid: "__string",
     #                 },
@@ -6855,6 +6910,14 @@ module Aws::MediaLive
     #           },
     #           ms_smooth_output_settings: {
     #             name_modifier: "__string",
+    #           },
+    #           rtmp_output_settings: {
+    #             certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
+    #             connection_retry_interval: 1,
+    #             destination: { # required
+    #               destination_ref_id: "__string",
+    #             },
+    #             num_retries: 1,
     #           },
     #           udp_output_settings: {
     #             buffer_msec: 1,
@@ -6973,6 +7036,7 @@ module Aws::MediaLive
     #         settings: [
     #           {
     #             password_param: "__string",
+    #             stream_name: "__string",
     #             url: "__string",
     #             username: "__string",
     #           },
@@ -7000,12 +7064,17 @@ module Aws::MediaLive
     #
     #       {
     #         password_param: "__string",
+    #         stream_name: "__string",
     #         url: "__string",
     #         username: "__string",
     #       }
     #
     # @!attribute [rw] password_param
     #   key used to extract the password from EC2 Parameter store
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   Stream name for RTMP destinations (URLs of type rtmp://)
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -7020,6 +7089,7 @@ module Aws::MediaLive
     #
     class OutputDestinationSettings < Struct.new(
       :password_param,
+      :stream_name,
       :url,
       :username)
       include Aws::Structure
@@ -7147,6 +7217,13 @@ module Aws::MediaLive
     #             timestamp_offset: "__string",
     #             timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #           },
+    #           rtmp_group_settings: {
+    #             authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
+    #             cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
+    #             cache_length: 1,
+    #             caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #             restart_delay: 1,
+    #           },
     #           udp_group_settings: {
     #             input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
     #             timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -7251,6 +7328,7 @@ module Aws::MediaLive
     #                       scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                       scte_35_pid: "__string",
     #                       timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                       timed_metadata_pid: "__string",
     #                       transport_stream_id: 1,
     #                       video_pid: "__string",
     #                     },
@@ -7261,6 +7339,14 @@ module Aws::MediaLive
     #               },
     #               ms_smooth_output_settings: {
     #                 name_modifier: "__string",
+    #               },
+    #               rtmp_output_settings: {
+    #                 certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
+    #                 connection_retry_interval: 1,
+    #                 destination: { # required
+    #                   destination_ref_id: "__string",
+    #                 },
+    #                 num_retries: 1,
     #               },
     #               udp_output_settings: {
     #                 buffer_msec: 1,
@@ -7479,6 +7565,13 @@ module Aws::MediaLive
     #           timestamp_offset: "__string",
     #           timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #         },
+    #         rtmp_group_settings: {
+    #           authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
+    #           cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
+    #           cache_length: 1,
+    #           caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #           restart_delay: 1,
+    #         },
     #         udp_group_settings: {
     #           input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
     #           timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -7495,6 +7588,9 @@ module Aws::MediaLive
     # @!attribute [rw] ms_smooth_group_settings
     #   @return [Types::MsSmoothGroupSettings]
     #
+    # @!attribute [rw] rtmp_group_settings
+    #   @return [Types::RtmpGroupSettings]
+    #
     # @!attribute [rw] udp_group_settings
     #   @return [Types::UdpGroupSettings]
     #
@@ -7504,6 +7600,7 @@ module Aws::MediaLive
       :archive_group_settings,
       :hls_group_settings,
       :ms_smooth_group_settings,
+      :rtmp_group_settings,
       :udp_group_settings)
       include Aws::Structure
     end
@@ -7623,6 +7720,7 @@ module Aws::MediaLive
     #                 scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                 scte_35_pid: "__string",
     #                 timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                 timed_metadata_pid: "__string",
     #                 transport_stream_id: 1,
     #                 video_pid: "__string",
     #               },
@@ -7633,6 +7731,14 @@ module Aws::MediaLive
     #         },
     #         ms_smooth_output_settings: {
     #           name_modifier: "__string",
+    #         },
+    #         rtmp_output_settings: {
+    #           certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
+    #           connection_retry_interval: 1,
+    #           destination: { # required
+    #             destination_ref_id: "__string",
+    #           },
+    #           num_retries: 1,
     #         },
     #         udp_output_settings: {
     #           buffer_msec: 1,
@@ -7717,6 +7823,9 @@ module Aws::MediaLive
     # @!attribute [rw] ms_smooth_output_settings
     #   @return [Types::MsSmoothOutputSettings]
     #
+    # @!attribute [rw] rtmp_output_settings
+    #   @return [Types::RtmpOutputSettings]
+    #
     # @!attribute [rw] udp_output_settings
     #   @return [Types::UdpOutputSettings]
     #
@@ -7726,6 +7835,7 @@ module Aws::MediaLive
       :archive_output_settings,
       :hls_output_settings,
       :ms_smooth_output_settings,
+      :rtmp_output_settings,
       :udp_output_settings)
       include Aws::Structure
     end
@@ -7795,6 +7905,111 @@ module Aws::MediaLive
     #
     class ResourceNotFound < Struct.new(
       :message)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpCaptionInfoDestinationSettings AWS API Documentation
+    #
+    class RtmpCaptionInfoDestinationSettings < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RtmpGroupSettings
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
+    #         cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
+    #         cache_length: 1,
+    #         caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #         restart_delay: 1,
+    #       }
+    #
+    # @!attribute [rw] authentication_scheme
+    #   Authentication scheme to use when connecting with CDN
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_full_behavior
+    #   Controls behavior when content cache fills up. If remote origin
+    #   server stalls the RTMP connection and does not accept content fast
+    #   enough the 'Media Cache' will fill up. When the cache reaches the
+    #   duration specified by cacheLength the cache will stop accepting new
+    #   content. If set to disconnectImmediately, the RTMP output will force
+    #   a disconnect. Clear the media cache, and reconnect after
+    #   restartDelay seconds. If set to waitForServer, the RTMP output will
+    #   wait up to 5 minutes to allow the origin server to begin accepting
+    #   data again.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_length
+    #   Cache length, in seconds, is used to calculate buffer size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] caption_data
+    #   Controls the types of data that passes to onCaptionInfo outputs. If
+    #   set to 'all' then 608 and 708 carried DTVCC data will be passed.
+    #   If set to 'field1AndField2608' then DTVCC data will be stripped
+    #   out, but 608 data from both fields will be passed. If set to
+    #   'field1608' then only the data carried in 608 from field 1 video
+    #   will be passed.
+    #   @return [String]
+    #
+    # @!attribute [rw] restart_delay
+    #   If a streaming output fails, number of seconds to wait until a
+    #   restart is initiated. A value of 0 means never restart.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpGroupSettings AWS API Documentation
+    #
+    class RtmpGroupSettings < Struct.new(
+      :authentication_scheme,
+      :cache_full_behavior,
+      :cache_length,
+      :caption_data,
+      :restart_delay)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RtmpOutputSettings
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
+    #         connection_retry_interval: 1,
+    #         destination: { # required
+    #           destination_ref_id: "__string",
+    #         },
+    #         num_retries: 1,
+    #       }
+    #
+    # @!attribute [rw] certificate_mode
+    #   If set to verifyAuthenticity, verify the tls certificate chain to a
+    #   trusted Certificate Authority (CA). This will cause rtmps outputs
+    #   with self-signed certificates to fail.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_retry_interval
+    #   Number of seconds to wait before retrying a connection to the Flash
+    #   Media server if the connection is lost.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination
+    #   The RTMP endpoint excluding the stream name (eg.
+    #   rtmp://host/appname). For connection to Akamai, a username and
+    #   password must be supplied. URI fields accept format identifiers.
+    #   @return [Types::OutputLocationRef]
+    #
+    # @!attribute [rw] num_retries
+    #   Number of retry attempts.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpOutputSettings AWS API Documentation
+    #
+    class RtmpOutputSettings < Struct.new(
+      :certificate_mode,
+      :connection_retry_interval,
+      :destination,
+      :num_retries)
       include Aws::Structure
     end
 
@@ -7956,6 +8171,7 @@ module Aws::MediaLive
     #           scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #           scte_35_pid: "__string",
     #           timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #           timed_metadata_pid: "__string",
     #           transport_stream_id: 1,
     #           video_pid: "__string",
     #         },
@@ -8490,6 +8706,7 @@ module Aws::MediaLive
     #             settings: [
     #               {
     #                 password_param: "__string",
+    #                 stream_name: "__string",
     #                 url: "__string",
     #                 username: "__string",
     #               },
@@ -8672,6 +8889,8 @@ module Aws::MediaLive
     #                 },
     #                 embedded_plus_scte_20_destination_settings: {
     #                 },
+    #                 rtmp_caption_info_destination_settings: {
+    #                 },
     #                 scte_20_plus_embedded_destination_settings: {
     #                 },
     #                 scte_27_destination_settings: {
@@ -8825,6 +9044,13 @@ module Aws::MediaLive
     #                   timestamp_offset: "__string",
     #                   timestamp_offset_mode: "USE_CONFIGURED_OFFSET", # accepts USE_CONFIGURED_OFFSET, USE_EVENT_START_DATE
     #                 },
+    #                 rtmp_group_settings: {
+    #                   authentication_scheme: "AKAMAI", # accepts AKAMAI, COMMON
+    #                   cache_full_behavior: "DISCONNECT_IMMEDIATELY", # accepts DISCONNECT_IMMEDIATELY, WAIT_FOR_SERVER
+    #                   cache_length: 1,
+    #                   caption_data: "ALL", # accepts ALL, FIELD1_608, FIELD1_AND_FIELD2_608
+    #                   restart_delay: 1,
+    #                 },
     #                 udp_group_settings: {
     #                   input_loss_action: "DROP_PROGRAM", # accepts DROP_PROGRAM, DROP_TS, EMIT_PROGRAM
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -8929,6 +9155,7 @@ module Aws::MediaLive
     #                             scte_35_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
     #                             scte_35_pid: "__string",
     #                             timed_metadata_behavior: "NO_PASSTHROUGH", # accepts NO_PASSTHROUGH, PASSTHROUGH
+    #                             timed_metadata_pid: "__string",
     #                             transport_stream_id: 1,
     #                             video_pid: "__string",
     #                           },
@@ -8939,6 +9166,14 @@ module Aws::MediaLive
     #                     },
     #                     ms_smooth_output_settings: {
     #                       name_modifier: "__string",
+    #                     },
+    #                     rtmp_output_settings: {
+    #                       certificate_mode: "SELF_SIGNED", # accepts SELF_SIGNED, VERIFY_AUTHENTICITY
+    #                       connection_retry_interval: 1,
+    #                       destination: { # required
+    #                         destination_ref_id: "__string",
+    #                       },
+    #                       num_retries: 1,
     #                     },
     #                     udp_output_settings: {
     #                       buffer_msec: 1,

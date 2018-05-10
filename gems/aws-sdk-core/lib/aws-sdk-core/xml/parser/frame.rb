@@ -24,9 +24,9 @@ module Aws
 
           def frame_class(ref)
             klass = FRAME_CLASSES[ref.shape.class]
-            if ListFrame == klass && ref.shape.flattened
+            if ListFrame == klass && (ref.shape.flattened || ref["flattened"])
               FlatListFrame
-            elsif MapFrame == klass && ref.shape.flattened
+            elsif MapFrame == klass && (ref.shape.flattened || ref["flattened"])
               MapEntryFrame
             else
               klass
@@ -120,15 +120,15 @@ module Aws
         end
 
         def xml_name(ref)
-          if flattened_list?(ref.shape)
+          if flattened_list?(ref)
             ref.shape.member.location_name || ref.location_name
           else
             ref.location_name
           end
         end
 
-        def flattened_list?(shape)
-          ListShape === shape && shape.flattened
+        def flattened_list?(ref)
+          ListShape === ref.shape && (ref.shape.flattened || ref["flattened"])
         end
 
       end

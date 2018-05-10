@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.15.0 (2018-04-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iotanalytics` gem.
+
 3.14.0 (2018-04-04)
 ------------------
 

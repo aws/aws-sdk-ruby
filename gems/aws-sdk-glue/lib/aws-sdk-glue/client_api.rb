@@ -343,6 +343,7 @@ module Aws::Glue
     TableVersion = Shapes::StructureShape.new(name: 'TableVersion')
     TableVersionError = Shapes::StructureShape.new(name: 'TableVersionError')
     TableVersionErrors = Shapes::ListShape.new(name: 'TableVersionErrors')
+    Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampValue = Shapes::TimestampShape.new(name: 'TimestampValue')
     Token = Shapes::StringShape.new(name: 'Token')
@@ -394,6 +395,7 @@ module Aws::Glue
 
     Action.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
     Action.add_member(:arguments, Shapes::ShapeRef.new(shape: GenericMap, location_name: "Arguments"))
+    Action.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -678,6 +680,7 @@ module Aws::Glue
     CreateJobRequest.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionsList, location_name: "Connections"))
     CreateJobRequest.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries"))
     CreateJobRequest.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
+    CreateJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -717,6 +720,7 @@ module Aws::Glue
     CreateTriggerRequest.add_member(:predicate, Shapes::ShapeRef.new(shape: Predicate, location_name: "Predicate"))
     CreateTriggerRequest.add_member(:actions, Shapes::ShapeRef.new(shape: ActionList, required: true, location_name: "Actions"))
     CreateTriggerRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateTriggerRequest.add_member(:start_on_creation, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "StartOnCreation"))
     CreateTriggerRequest.struct_class = Types::CreateTriggerRequest
 
     CreateTriggerResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -1145,6 +1149,7 @@ module Aws::Glue
     Job.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionsList, location_name: "Connections"))
     Job.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries"))
     Job.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
+    Job.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     Job.struct_class = Types::Job
 
     JobBookmarkEntry.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
@@ -1173,6 +1178,8 @@ module Aws::Glue
     JobRun.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorString, location_name: "ErrorMessage"))
     JobRun.add_member(:predecessor_runs, Shapes::ShapeRef.new(shape: PredecessorList, location_name: "PredecessorRuns"))
     JobRun.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
+    JobRun.add_member(:execution_time, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "ExecutionTime"))
+    JobRun.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     JobRun.struct_class = Types::JobRun
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
@@ -1186,6 +1193,7 @@ module Aws::Glue
     JobUpdate.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionsList, location_name: "Connections"))
     JobUpdate.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries"))
     JobUpdate.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
+    JobUpdate.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     JobUpdate.struct_class = Types::JobUpdate
 
     JsonClassifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -1336,6 +1344,7 @@ module Aws::Glue
     StartJobRunRequest.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))
     StartJobRunRequest.add_member(:arguments, Shapes::ShapeRef.new(shape: GenericMap, location_name: "Arguments"))
     StartJobRunRequest.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
+    StartJobRunRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
     StartJobRunRequest.struct_class = Types::StartJobRunRequest
 
     StartJobRunResponse.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))

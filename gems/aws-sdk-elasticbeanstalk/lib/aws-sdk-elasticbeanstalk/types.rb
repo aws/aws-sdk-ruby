@@ -36,6 +36,10 @@ module Aws::ElasticBeanstalk
 
     # Describes the properties of an application.
     #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application.
+    #   @return [String]
+    #
     # @!attribute [rw] application_name
     #   The name of the application.
     #   @return [String]
@@ -68,6 +72,7 @@ module Aws::ElasticBeanstalk
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescription AWS API Documentation
     #
     class ApplicationDescription < Struct.new(
+      :application_arn,
       :application_name,
       :description,
       :date_created,
@@ -198,6 +203,10 @@ module Aws::ElasticBeanstalk
 
     # Describes the properties of an application version.
     #
+    # @!attribute [rw] application_version_arn
+    #   The Amazon Resource Name (ARN) of the application version.
+    #   @return [String]
+    #
     # @!attribute [rw] application_name
     #   The name of the application to which the application version
     #   belongs.
@@ -240,6 +249,7 @@ module Aws::ElasticBeanstalk
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescription AWS API Documentation
     #
     class ApplicationVersionDescription < Struct.new(
+      :application_version_arn,
       :application_name,
       :description,
       :version_label,
@@ -2411,7 +2421,7 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] environment_arn
     #   The environment's Amazon Resource Name (ARN), which can be used in
-    #   other API reuqests that require an ARN.
+    #   other API requests that require an ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription AWS API Documentation

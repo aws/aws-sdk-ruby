@@ -416,6 +416,39 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Deletes permissions granted to a user or group.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier of the organization under which the entity (user or
+    #   group) exists.
+    #
+    # @option params [required, String] :entity_id
+    #   The identifier of the entity (user or group) for which to delete
+    #   mailbox permissions.
+    #
+    # @option params [required, String] :grantee_id
+    #   The identifier of the entity (user or group) for which to delete
+    #   granted permissions.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_mailbox_permissions({
+    #     organization_id: "OrganizationId", # required
+    #     entity_id: "WorkMailIdentifier", # required
+    #     grantee_id: "WorkMailIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissions AWS API Documentation
+    #
+    # @overload delete_mailbox_permissions(params = {})
+    # @param [Hash] params ({})
+    def delete_mailbox_permissions(params = {}, options = {})
+      req = build_request(:delete_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified resource.
     #
     # @option params [required, String] :organization_id
@@ -882,6 +915,55 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Lists the mailbox permissions associated with a mailbox.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier of the organization under which the entity (user or
+    #   group) exists.
+    #
+    # @option params [required, String] :entity_id
+    #   The identifier of the entity (user or group) for which to list mailbox
+    #   permissions.
+    #
+    # @option params [String] :next_token
+    #   The token to use to retrieve the next page of results. The first call
+    #   does not contain any tokens.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @return [Types::ListMailboxPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMailboxPermissionsResponse#permissions #permissions} => Array&lt;Types::Permission&gt;
+    #   * {Types::ListMailboxPermissionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mailbox_permissions({
+    #     organization_id: "OrganizationId", # required
+    #     entity_id: "WorkMailIdentifier", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].grantee_id #=> String
+    #   resp.permissions[0].grantee_type #=> String, one of "GROUP", "USER"
+    #   resp.permissions[0].permission_values #=> Array
+    #   resp.permissions[0].permission_values[0] #=> String, one of "FULL_ACCESS", "SEND_AS", "SEND_ON_BEHALF"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxPermissions AWS API Documentation
+    #
+    # @overload list_mailbox_permissions(params = {})
+    # @param [Hash] params ({})
+    def list_mailbox_permissions(params = {}, options = {})
+      req = build_request(:list_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
     # Returns summaries of the customer's non-deleted organizations.
     #
     # @option params [String] :next_token
@@ -1060,6 +1142,50 @@ module Aws::WorkMail
       req.send_request(options)
     end
 
+    # Sets permissions for a user or group. This replaces any pre-existing
+    # permissions set for the entity.
+    #
+    # @option params [required, String] :organization_id
+    #   The identifier of the organization under which the entity (user or
+    #   group) exists.
+    #
+    # @option params [required, String] :entity_id
+    #   The identifier of the entity (user or group) for which to update
+    #   mailbox permissions.
+    #
+    # @option params [required, String] :grantee_id
+    #   The identifier of the entity (user or group) to which to grant the
+    #   permissions.
+    #
+    # @option params [required, Array<String>] :permission_values
+    #   The permissions granted to the grantee. SEND\_AS allows the grantee to
+    #   send email as the owner of the mailbox (the grantee is not mentioned
+    #   on these emails). SEND\_ON\_BEHALF allows the grantee to send email on
+    #   behalf of the owner of the mailbox (the grantee is not mentioned as
+    #   the physical sender of these emails). FULL\_ACCESS allows the grantee
+    #   full access to the mailbox, irrespective of other folder-level
+    #   permissions set on the mailbox.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_mailbox_permissions({
+    #     organization_id: "OrganizationId", # required
+    #     entity_id: "WorkMailIdentifier", # required
+    #     grantee_id: "WorkMailIdentifier", # required
+    #     permission_values: ["FULL_ACCESS"], # required, accepts FULL_ACCESS, SEND_AS, SEND_ON_BEHALF
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissions AWS API Documentation
+    #
+    # @overload put_mailbox_permissions(params = {})
+    # @param [Hash] params ({})
+    def put_mailbox_permissions(params = {}, options = {})
+      req = build_request(:put_mailbox_permissions, params)
+      req.send_request(options)
+    end
+
     # Registers an existing and disabled user, group, or resource/entity for
     # Amazon WorkMail use by associating a mailbox and calendaring
     # capabilities. It performs no change if the entity is enabled and fails
@@ -1220,7 +1346,7 @@ module Aws::WorkMail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workmail'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

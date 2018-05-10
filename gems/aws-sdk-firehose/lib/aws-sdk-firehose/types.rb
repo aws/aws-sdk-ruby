@@ -9,9 +9,9 @@ module Aws::Firehose
   module Types
 
     # Describes hints for the buffering to perform before delivering data to
-    # the destination. Please note that these options are treated as hints,
-    # and therefore Kinesis Firehose may choose to use different values when
-    # it is optimal.
+    # the destination. These options are treated as hints, and therefore
+    # Kinesis Data Firehose might choose to use different values whenever it
+    # is optimal.
     #
     # @note When making an API call, you may pass BufferingHints
     #   data as a hash:
@@ -103,7 +103,7 @@ module Aws::Firehose
     #   Optional parameters to use with the Amazon Redshift `COPY` command.
     #   For more information, see the "Optional Parameters" section of
     #   [Amazon Redshift COPY command][1]. Some possible examples that would
-    #   apply to Kinesis Firehose are as follows:
+    #   apply to Kinesis Data Firehose are as follows:
     #
     #   `delimiter '\t' lzop;` - fields are delimited with "\\t" (TAB
     #   character) and compressed using lzop.
@@ -411,8 +411,8 @@ module Aws::Firehose
     #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream. This name must be unique per AWS
-    #   account in the same region. If the delivery streams are in different
-    #   accounts or different regions, you can have multiple delivery
+    #   account in the same Region. If the delivery streams are in different
+    #   accounts or different Regions, you can have multiple delivery
     #   streams with the same name.
     #   @return [String]
     #
@@ -423,14 +423,15 @@ module Aws::Firehose
     #   * `DirectPut`\: Provider applications access the delivery stream
     #     directly.
     #
-    #   * `KinesisStreamAsSource`\: The delivery stream uses a Kinesis
+    #   * `KinesisStreamAsSource`\: The delivery stream uses a Kinesis data
     #     stream as a source.
     #   @return [String]
     #
     # @!attribute [rw] kinesis_stream_source_configuration
-    #   When a Kinesis stream is used as the source for the delivery stream,
-    #   a KinesisStreamSourceConfiguration containing the Kinesis stream ARN
-    #   and the role ARN for the source stream.
+    #   When a Kinesis data stream is used as the source for the delivery
+    #   stream, a KinesisStreamSourceConfiguration containing the Kinesis
+    #   data stream Amazon Resource Name (ARN) and the role ARN for the
+    #   source stream.
     #   @return [Types::KinesisStreamSourceConfiguration]
     #
     # @!attribute [rw] s3_destination_configuration
@@ -522,7 +523,7 @@ module Aws::Firehose
     #   * `DirectPut`\: Provider applications access the delivery stream
     #     directly.
     #
-    #   * `KinesisStreamAsSource`\: The delivery stream uses a Kinesis
+    #   * `KinesisStreamAsSource`\: The delivery stream uses a Kinesis data
     #     stream as a source.
     #   @return [String]
     #
@@ -543,7 +544,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] source
     #   If the `DeliveryStreamType` parameter is `KinesisStreamAsSource`, a
-    #   SourceDescription object describing the source Kinesis stream.
+    #   SourceDescription object describing the source Kinesis data stream.
     #   @return [Types::SourceDescription]
     #
     # @!attribute [rw] destinations
@@ -590,8 +591,8 @@ module Aws::Firehose
     #
     # @!attribute [rw] exclusive_start_destination_id
     #   The ID of the destination to start returning the destination
-    #   information. Currently, Kinesis Firehose supports one destination
-    #   per delivery stream.
+    #   information. Currently, Kinesis Data Firehose supports one
+    #   destination per delivery stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStreamInput AWS API Documentation
@@ -749,9 +750,10 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role to be assumed by Kinesis Firehose for
-    #   calling the Amazon ES Configuration API and for indexing documents.
-    #   For more information, see [Amazon S3 Bucket Access][1].
+    #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
+    #   Kinesis Data Firehose for calling the Amazon ES Configuration API
+    #   and for indexing documents. For more information, see [Grant Kinesis
+    #   Data Firehose Access to an Amazon Destination][1].
     #
     #
     #
@@ -762,7 +764,7 @@ module Aws::Firehose
     #   The ARN of the Amazon ES domain. The IAM role must have permissions
     #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
     #   and `DescribeElasticsearchDomainConfig` after assuming the role
-    #   specified in **RoleARN**.
+    #   specified in `RoleARN`.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -776,9 +778,8 @@ module Aws::Firehose
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
     #   time stamp to the IndexName to facilitate the expiration of old
-    #   data. For more information, see [Index Rotation for Amazon
-    #   Elasticsearch Service Destination][1]. The default value
-    #   is `OneDay`.
+    #   data. For more information, see [Index Rotation for the Amazon ES
+    #   Destination][1]. The default value is `OneDay`.
     #
     #
     #
@@ -787,28 +788,29 @@ module Aws::Firehose
     #
     # @!attribute [rw] buffering_hints
     #   The buffering options. If no value is specified, the default values
-    #   for **ElasticsearchBufferingHints** are used.
+    #   for `ElasticsearchBufferingHints` are used.
     #   @return [Types::ElasticsearchBufferingHints]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Kinesis Firehose is unable to deliver
-    #   documents to Amazon ES. The default value is 300 (5 minutes).
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver documents to Amazon ES. The default value is 300 (5
+    #   minutes).
     #   @return [Types::ElasticsearchRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
     #   Defines how documents should be delivered to Amazon S3. When set to
-    #   FailedDocumentsOnly, Kinesis Firehose writes any documents that
-    #   could not be indexed to the configured Amazon S3 destination, with
-    #   elasticsearch-failed/ appended to the key prefix. When set to
-    #   AllDocuments, Kinesis Firehose delivers all incoming records to
-    #   Amazon S3, and also writes failed documents with
-    #   elasticsearch-failed/ appended to the prefix. For more information,
-    #   see [Amazon S3 Backup for Amazon Elasticsearch Service
-    #   Destination][1]. Default value is FailedDocumentsOnly.
+    #   `FailedDocumentsOnly`, Kinesis Data Firehose writes any documents
+    #   that could not be indexed to the configured Amazon S3 destination,
+    #   with `elasticsearch-failed/` appended to the key prefix. When set to
+    #   `AllDocuments`, Kinesis Data Firehose delivers all incoming records
+    #   to Amazon S3, and also writes failed documents with
+    #   `elasticsearch-failed/` appended to the prefix. For more
+    #   information, see [Data Delivery Failure Handling][1]. Default value
+    #   is `FailedDocumentsOnly`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#retry
     #   @return [String]
     #
     # @!attribute [rw] s3_configuration
@@ -843,7 +845,7 @@ module Aws::Firehose
     # The destination description in Amazon ES.
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
@@ -964,9 +966,10 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the IAM role to be assumed by Kinesis Firehose for
-    #   calling the Amazon ES Configuration API and for indexing documents.
-    #   For more information, see [Amazon S3 Bucket Access][1].
+    #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
+    #   Kinesis Data Firehose for calling the Amazon ES Configuration API
+    #   and for indexing documents. For more information, see [Grant Kinesis
+    #   Data Firehose Access to an Amazon S3 Destination][1].
     #
     #
     #
@@ -977,7 +980,7 @@ module Aws::Firehose
     #   The ARN of the Amazon ES domain. The IAM role must have permissions
     #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
     #   and `DescribeElasticsearchDomainConfig` after assuming the IAM role
-    #   specified in **RoleARN**.
+    #   specified in `RoleARN`.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -991,8 +994,8 @@ module Aws::Firehose
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
     #   time stamp to IndexName to facilitate the expiration of old data.
-    #   For more information, see [Index Rotation for Amazon Elasticsearch
-    #   Service Destination][1]. Default value is `OneDay`.
+    #   For more information, see [Index Rotation for the Amazon ES
+    #   Destination][1]. Default value is `OneDay`.
     #
     #
     #
@@ -1001,12 +1004,13 @@ module Aws::Firehose
     #
     # @!attribute [rw] buffering_hints
     #   The buffering options. If no value is specified,
-    #   **ElasticsearchBufferingHints** object default values are used.
+    #   `ElasticsearchBufferingHints` object default values are used.
     #   @return [Types::ElasticsearchBufferingHints]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Kinesis Firehose is unable to deliver
-    #   documents to Amazon ES. The default value is 300 (5 minutes).
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver documents to Amazon ES. The default value is 300 (5
+    #   minutes).
     #   @return [Types::ElasticsearchRetryOptions]
     #
     # @!attribute [rw] s3_update
@@ -1037,7 +1041,7 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Configures retry behavior in case Kinesis Firehose is unable to
+    # Configures retry behavior in case Kinesis Data Firehose is unable to
     # deliver documents to Amazon ES.
     #
     # @note When making an API call, you may pass ElasticsearchRetryOptions
@@ -1049,7 +1053,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] duration_in_seconds
     #   After an initial failure to deliver to Amazon ES, the total amount
-    #   of time during which Kinesis Firehose re-attempts delivery
+    #   of time during which Kinesis Data Firehose re-attempts delivery
     #   (including the first attempt). After this time has elapsed, the
     #   failed documents are written to Amazon S3. Default value is 300
     #   seconds (5 minutes). A value of 0 (zero) results in no retries.
@@ -1155,7 +1159,7 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
@@ -1164,15 +1168,15 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered S3 files. You can specify an extra prefix to be added in
-    #   front of the time format prefix. If the prefix ends with a slash, it
-    #   appears as a folder in the S3 bucket. For more information, see
-    #   [Amazon S3 Object Name Format][1] in the *Amazon Kinesis Firehose
-    #   Developer Guide*.
+    #   delivered Amazon S3 files. You can specify an extra prefix to be
+    #   added in front of the time format prefix. If the prefix ends with a
+    #   slash, it appears as a folder in the S3 bucket. For more
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Data Firehose Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1224,7 +1228,7 @@ module Aws::Firehose
     # Describes a destination in Amazon S3.
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
@@ -1236,12 +1240,12 @@ module Aws::Firehose
     #   delivered S3 files. You can specify an extra prefix to be added in
     #   front of the time format prefix. If the prefix ends with a slash, it
     #   appears as a folder in the S3 bucket. For more information, see
-    #   [Amazon S3 Object Name Format][1] in the *Amazon Kinesis Firehose
-    #   Developer Guide*.
+    #   [Amazon S3 Object Name Format][1] in the *Amazon Kinesis Data
+    #   Firehose Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1354,7 +1358,7 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
@@ -1363,15 +1367,15 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered S3 files. You can specify an extra prefix to be added in
-    #   front of the time format prefix. If the prefix ends with a slash, it
-    #   appears as a folder in the S3 bucket. For more information, see
-    #   [Amazon S3 Object Name Format][1] in the *Amazon Kinesis Firehose
-    #   Developer Guide*.
+    #   delivered Amazon S3 files. You can specify an extra prefix to be
+    #   added in front of the time format prefix. If the prefix ends with a
+    #   slash, it appears as a folder in the S3 bucket. For more
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Data Firehose Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1430,8 +1434,8 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] awskms_key_arn
-    #   The ARN of the encryption key. Must belong to the same region as the
-    #   destination Amazon S3 bucket.
+    #   The Amazon Resource Name (ARN) of the encryption key. Must belong to
+    #   the same AWS Region as the destination Amazon S3 bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KMSEncryptionConfig AWS API Documentation
@@ -1441,8 +1445,8 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # The stream and role ARNs for a Kinesis stream used as the source for a
-    # delivery stream.
+    # The stream and role Amazon Resource Names (ARNs) for a Kinesis data
+    # stream used as the source for a delivery stream.
     #
     # @note When making an API call, you may pass KinesisStreamSourceConfiguration
     #   data as a hash:
@@ -1453,11 +1457,11 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] kinesis_stream_arn
-    #   The ARN of the source Kinesis stream.
+    #   The ARN of the source Kinesis data stream.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role that provides access to the source Kinesis
+    #   The ARN of the role that provides access to the source Kinesis data
     #   stream.
     #   @return [String]
     #
@@ -1469,20 +1473,20 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Details about a Kinesis stream used as the source for a Kinesis
-    # Firehose delivery stream.
+    # Details about a Kinesis data stream used as the source for a Kinesis
+    # Data Firehose delivery stream.
     #
     # @!attribute [rw] kinesis_stream_arn
-    #   The ARN of the source Kinesis stream.
+    #   The Amazon Resource Name (ARN) of the source Kinesis data stream.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role used by the source Kinesis stream.
+    #   The ARN of the role used by the source Kinesis data stream.
     #   @return [String]
     #
     # @!attribute [rw] delivery_start_timestamp
-    #   Kinesis Firehose starts retrieving records from the Kinesis stream
-    #   starting with this time stamp.
+    #   Kinesis Data Firehose starts retrieving records from the Kinesis
+    #   data stream starting with this time stamp.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KinesisStreamSourceDescription AWS API Documentation
@@ -1514,7 +1518,7 @@ module Aws::Firehose
     #   * `DirectPut`\: Provider applications access the delivery stream
     #     directly.
     #
-    #   * `KinesisStreamAsSource`\: The delivery stream uses a Kinesis
+    #   * `KinesisStreamAsSource`\: The delivery stream uses a Kinesis data
     #     stream as a source.
     #
     #   This parameter is optional. If this parameter is omitted, delivery
@@ -1547,6 +1551,61 @@ module Aws::Firehose
     class ListDeliveryStreamsOutput < Struct.new(
       :delivery_stream_names,
       :has_more_delivery_streams)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsForDeliveryStreamInput
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_stream_name: "DeliveryStreamName", # required
+    #         exclusive_start_tag_key: "TagKey",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] delivery_stream_name
+    #   The name of the delivery stream whose tags you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusive_start_tag_key
+    #   The key to use as the starting point for the list of tags. If you
+    #   set this parameter, `ListTagsForDeliveryStream` gets all tags that
+    #   occur after `ExclusiveStartTagKey`.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The number of tags to return. If this number is less than the total
+    #   number of tags associated with the delivery stream, `HasMoreTags` is
+    #   set to `true` in the response. To list additional tags, set
+    #   `ExclusiveStartTagKey` to the last key in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListTagsForDeliveryStreamInput AWS API Documentation
+    #
+    class ListTagsForDeliveryStreamInput < Struct.new(
+      :delivery_stream_name,
+      :exclusive_start_tag_key,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tags associated with `DeliveryStreamName`, starting with
+    #   the first tag after `ExclusiveStartTagKey` and up to the specified
+    #   `Limit`.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] has_more_tags
+    #   If this is `true` in the response, more tags are available. To list
+    #   the remaining tags, set `ExclusiveStartTagKey` to the key of the
+    #   last tag returned and call `ListTagsForDeliveryStream` again.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListTagsForDeliveryStreamOutput AWS API Documentation
+    #
+    class ListTagsForDeliveryStreamOutput < Struct.new(
+      :tags,
+      :has_more_tags)
       include Aws::Structure
     end
 
@@ -1857,7 +1916,7 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] cluster_jdbc_url
@@ -1877,8 +1936,9 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Kinesis Firehose is unable to deliver
-    #   documents to Amazon Redshift. Default value is 3600 (60 minutes).
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver documents to Amazon Redshift. Default value is 3600 (60
+    #   minutes).
     #   @return [Types::RedshiftRetryOptions]
     #
     # @!attribute [rw] s3_configuration
@@ -1887,7 +1947,7 @@ module Aws::Firehose
     #   topic for CreateDeliveryStream.
     #
     #   The compression formats `SNAPPY` or `ZIP` cannot be specified in
-    #   **RedshiftDestinationConfiguration.S3Configuration** because the
+    #   `RedshiftDestinationConfiguration.S3Configuration` because the
     #   Amazon Redshift `COPY` operation that reads from the S3 bucket
     #   doesn't support these compression formats.
     #   @return [Types::S3DestinationConfiguration]
@@ -1928,7 +1988,7 @@ module Aws::Firehose
     # Describes a destination in Amazon Redshift.
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] cluster_jdbc_url
@@ -1944,8 +2004,9 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Kinesis Firehose is unable to deliver
-    #   documents to Amazon Redshift. Default value is 3600 (60 minutes).
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver documents to Amazon Redshift. Default value is 3600 (60
+    #   minutes).
     #   @return [Types::RedshiftRetryOptions]
     #
     # @!attribute [rw] s3_destination_description
@@ -2067,7 +2128,7 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] cluster_jdbc_url
@@ -2087,15 +2148,16 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Kinesis Firehose is unable to deliver
-    #   documents to Amazon Redshift. Default value is 3600 (60 minutes).
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver documents to Amazon Redshift. Default value is 3600 (60
+    #   minutes).
     #   @return [Types::RedshiftRetryOptions]
     #
     # @!attribute [rw] s3_update
     #   The Amazon S3 destination.
     #
     #   The compression formats `SNAPPY` or `ZIP` cannot be specified in
-    #   **RedshiftDestinationUpdate.S3Update** because the Amazon Redshift
+    #   `RedshiftDestinationUpdate.S3Update` because the Amazon Redshift
     #   `COPY` operation that reads from the S3 bucket doesn't support
     #   these compression formats.
     #   @return [Types::S3DestinationUpdate]
@@ -2133,7 +2195,7 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Configures retry behavior in case Kinesis Firehose is unable to
+    # Configures retry behavior in case Kinesis Data Firehose is unable to
     # deliver documents to Amazon Redshift.
     #
     # @note When making an API call, you may pass RedshiftRetryOptions
@@ -2144,12 +2206,12 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] duration_in_seconds
-    #   The length of time during which Kinesis Firehose retries delivery
-    #   after a failure, starting from the initial request and including the
-    #   first attempt. The default value is 3600 seconds (60 minutes).
-    #   Kinesis Firehose does not retry if the value of `DurationInSeconds`
-    #   is 0 (zero) or if the first delivery attempt takes longer than the
-    #   current value.
+    #   The length of time during which Kinesis Data Firehose retries
+    #   delivery after a failure, starting from the initial request and
+    #   including the first attempt. The default value is 3600 seconds (60
+    #   minutes). Kinesis Data Firehose does not retry if the value of
+    #   `DurationInSeconds` is 0 (zero) or if the first delivery attempt
+    #   takes longer than the current value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftRetryOptions AWS API Documentation
@@ -2187,7 +2249,7 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
@@ -2196,19 +2258,19 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered S3 files. You can specify an extra prefix to be added in
-    #   front of the time format prefix. If the prefix ends with a slash, it
-    #   appears as a folder in the S3 bucket. For more information, see
-    #   [Amazon S3 Object Name Format][1] in the *Amazon Kinesis Firehose
-    #   Developer Guide*.
+    #   delivered Amazon S3 files. You can specify an extra prefix to be
+    #   added in front of the time format prefix. If the prefix ends with a
+    #   slash, it appears as a folder in the S3 bucket. For more
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Data Firehose Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
-    #   The buffering option. If no value is specified, **BufferingHints**
+    #   The buffering option. If no value is specified, `BufferingHints`
     #   object default values are used.
     #   @return [Types::BufferingHints]
     #
@@ -2246,7 +2308,7 @@ module Aws::Firehose
     # Describes a destination in Amazon S3.
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
@@ -2255,19 +2317,19 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered S3 files. You can specify an extra prefix to be added in
-    #   front of the time format prefix. If the prefix ends with a slash, it
-    #   appears as a folder in the S3 bucket. For more information, see
-    #   [Amazon S3 Object Name Format][1] in the *Amazon Kinesis Firehose
-    #   Developer Guide*.
+    #   delivered Amazon S3 files. You can specify an extra prefix to be
+    #   added in front of the time format prefix. If the prefix ends with a
+    #   slash, it appears as a folder in the S3 bucket. For more
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Data Firehose Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
-    #   The buffering option. If no value is specified, **BufferingHints**
+    #   The buffering option. If no value is specified, `BufferingHints`
     #   object default values are used.
     #   @return [Types::BufferingHints]
     #
@@ -2326,7 +2388,7 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials.
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
@@ -2335,19 +2397,19 @@ module Aws::Firehose
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered S3 files. You can specify an extra prefix to be added in
-    #   front of the time format prefix. If the prefix ends with a slash, it
-    #   appears as a folder in the S3 bucket. For more information, see
-    #   [Amazon S3 Object Name Format][1] in the *Amazon Kinesis Firehose
-    #   Developer Guide*.
+    #   delivered Amazon S3 files. You can specify an extra prefix to be
+    #   added in front of the time format prefix. If the prefix ends with a
+    #   slash, it appears as a folder in the S3 bucket. For more
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Data Firehose Developer Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
-    #   The buffering option. If no value is specified, **BufferingHints**
+    #   The buffering option. If no value is specified, `BufferingHints`
     #   object default values are used.
     #   @return [Types::BufferingHints]
     #
@@ -2382,11 +2444,11 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Details about a Kinesis stream used as the source for a Kinesis
-    # Firehose delivery stream.
+    # Details about a Kinesis data stream used as the source for a Kinesis
+    # Data Firehose delivery stream.
     #
     # @!attribute [rw] kinesis_stream_source_description
-    #   The KinesisStreamSourceDescription value for the source Kinesis
+    #   The KinesisStreamSourceDescription value for the source Kinesis data
     #   stream.
     #   @return [Types::KinesisStreamSourceDescription]
     #
@@ -2454,39 +2516,39 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] hec_endpoint
-    #   The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose
-    #   sends your data.
+    #   The HTTP Event Collector (HEC) endpoint to which Kinesis Data
+    #   Firehose sends your data.
     #   @return [String]
     #
     # @!attribute [rw] hec_endpoint_type
-    #   This type can be either "Raw" or "Event".
+    #   This type can be either "Raw" or "Event."
     #   @return [String]
     #
     # @!attribute [rw] hec_token
-    #   This is a GUID you obtain from your Splunk cluster when you create a
-    #   new HEC endpoint.
+    #   This is a GUID that you obtain from your Splunk cluster when you
+    #   create a new HEC endpoint.
     #   @return [String]
     #
     # @!attribute [rw] hec_acknowledgment_timeout_in_seconds
-    #   The amount of time that Kinesis Firehose waits to receive an
+    #   The amount of time that Kinesis Data Firehose waits to receive an
     #   acknowledgment from Splunk after it sends it data. At the end of the
-    #   timeout period Kinesis Firehose either tries to send the data again
-    #   or considers it an error, based on your retry settings.
+    #   timeout period, Kinesis Data Firehose either tries to send the data
+    #   again or considers it an error, based on your retry settings.
     #   @return [Integer]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Kinesis Firehose is unable to deliver
-    #   data to Splunk or if it doesn't receive an acknowledgment of
-    #   receipt from Splunk.
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver data to Splunk, or if it doesn't receive an acknowledgment
+    #   of receipt from Splunk.
     #   @return [Types::SplunkRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
     #   Defines how documents should be delivered to Amazon S3. When set to
-    #   `FailedDocumentsOnly`, Kinesis Firehose writes any data that could
-    #   not be indexed to the configured Amazon S3 destination. When set to
-    #   `AllDocuments`, Kinesis Firehose delivers all incoming records to
-    #   Amazon S3, and also writes failed documents to Amazon S3. Default
-    #   value is `FailedDocumentsOnly`.
+    #   `FailedDocumentsOnly`, Kinesis Data Firehose writes any data that
+    #   could not be indexed to the configured Amazon S3 destination. When
+    #   set to `AllDocuments`, Kinesis Data Firehose delivers all incoming
+    #   records to Amazon S3, and also writes failed documents to Amazon S3.
+    #   Default value is `FailedDocumentsOnly`.
     #   @return [String]
     #
     # @!attribute [rw] s3_configuration
@@ -2519,12 +2581,12 @@ module Aws::Firehose
     # Describes a destination in Splunk.
     #
     # @!attribute [rw] hec_endpoint
-    #   The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose
-    #   sends your data.
+    #   The HTTP Event Collector (HEC) endpoint to which Kinesis Data
+    #   Firehose sends your data.
     #   @return [String]
     #
     # @!attribute [rw] hec_endpoint_type
-    #   This type can be either "Raw" or "Event".
+    #   This type can be either "Raw" or "Event."
     #   @return [String]
     #
     # @!attribute [rw] hec_token
@@ -2533,25 +2595,25 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] hec_acknowledgment_timeout_in_seconds
-    #   The amount of time that Kinesis Firehose waits to receive an
+    #   The amount of time that Kinesis Data Firehose waits to receive an
     #   acknowledgment from Splunk after it sends it data. At the end of the
-    #   timeout period Kinesis Firehose either tries to send the data again
-    #   or considers it an error, based on your retry settings.
+    #   timeout period, Kinesis Data Firehose either tries to send the data
+    #   again or considers it an error, based on your retry settings.
     #   @return [Integer]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Kinesis Firehose is unable to deliver
-    #   data to Splunk or if it doesn't receive an acknowledgment of
-    #   receipt from Splunk.
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver data to Splunk or if it doesn't receive an acknowledgment
+    #   of receipt from Splunk.
     #   @return [Types::SplunkRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
     #   Defines how documents should be delivered to Amazon S3. When set to
-    #   `FailedDocumentsOnly`, Kinesis Firehose writes any data that could
-    #   not be indexed to the configured Amazon S3 destination. When set to
-    #   `AllDocuments`, Kinesis Firehose delivers all incoming records to
-    #   Amazon S3, and also writes failed documents to Amazon S3. Default
-    #   value is `FailedDocumentsOnly`.
+    #   `FailedDocumentsOnly`, Kinesis Data Firehose writes any data that
+    #   could not be indexed to the configured Amazon S3 destination. When
+    #   set to `AllDocuments`, Kinesis Data Firehose delivers all incoming
+    #   records to Amazon S3, and also writes failed documents to Amazon S3.
+    #   Default value is `FailedDocumentsOnly`.
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_description
@@ -2638,39 +2700,39 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] hec_endpoint
-    #   The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose
-    #   sends your data.
+    #   The HTTP Event Collector (HEC) endpoint to which Kinesis Data
+    #   Firehose sends your data.
     #   @return [String]
     #
     # @!attribute [rw] hec_endpoint_type
-    #   This type can be either "Raw" or "Event".
+    #   This type can be either "Raw" or "Event."
     #   @return [String]
     #
     # @!attribute [rw] hec_token
-    #   This is a GUID you obtain from your Splunk cluster when you create a
+    #   A GUID that you obtain from your Splunk cluster when you create a
     #   new HEC endpoint.
     #   @return [String]
     #
     # @!attribute [rw] hec_acknowledgment_timeout_in_seconds
-    #   The amount of time that Kinesis Firehose waits to receive an
-    #   acknowledgment from Splunk after it sends it data. At the end of the
-    #   timeout period Kinesis Firehose either tries to send the data again
-    #   or considers it an error, based on your retry settings.
+    #   The amount of time that Kinesis Data Firehose waits to receive an
+    #   acknowledgment from Splunk after it sends data. At the end of the
+    #   timeout period, Kinesis Data Firehose either tries to send the data
+    #   again or considers it an error, based on your retry settings.
     #   @return [Integer]
     #
     # @!attribute [rw] retry_options
-    #   The retry behavior in case Kinesis Firehose is unable to deliver
-    #   data to Splunk or if it doesn't receive an acknowledgment of
-    #   receipt from Splunk.
+    #   The retry behavior in case Kinesis Data Firehose is unable to
+    #   deliver data to Splunk or if it doesn't receive an acknowledgment
+    #   of receipt from Splunk.
     #   @return [Types::SplunkRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
     #   Defines how documents should be delivered to Amazon S3. When set to
-    #   `FailedDocumentsOnly`, Kinesis Firehose writes any data that could
-    #   not be indexed to the configured Amazon S3 destination. When set to
-    #   `AllDocuments`, Kinesis Firehose delivers all incoming records to
-    #   Amazon S3, and also writes failed documents to Amazon S3. Default
-    #   value is `FailedDocumentsOnly`.
+    #   `FailedDocumentsOnly`, Kinesis Data Firehose writes any data that
+    #   could not be indexed to the configured Amazon S3 destination. When
+    #   set to `AllDocuments`, Kinesis Data Firehose delivers all incoming
+    #   records to Amazon S3, and also writes failed documents to Amazon S3.
+    #   Default value is `FailedDocumentsOnly`.
     #   @return [String]
     #
     # @!attribute [rw] s3_update
@@ -2700,8 +2762,8 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Configures retry behavior in case Kinesis Firehose is unable to
-    # deliver documents to Splunk or if it doesn't receive an
+    # Configures retry behavior in case Kinesis Data Firehose is unable to
+    # deliver documents to Splunk, or if it doesn't receive an
     # acknowledgment from Splunk.
     #
     # @note When making an API call, you may pass SplunkRetryOptions
@@ -2712,10 +2774,11 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] duration_in_seconds
-    #   The total amount of time that Kinesis Firehose spends on retries.
-    #   This duration starts after the initial attempt to send data to
-    #   Splunk fails and doesn't include the periods during which Kinesis
-    #   Firehose waits for acknowledgment from Splunk after each attempt.
+    #   The total amount of time that Kinesis Data Firehose spends on
+    #   retries. This duration starts after the initial attempt to send data
+    #   to Splunk fails. It doesn't include the periods during which
+    #   Kinesis Data Firehose waits for acknowledgment from Splunk after
+    #   each attempt.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkRetryOptions AWS API Documentation
@@ -2724,6 +2787,99 @@ module Aws::Firehose
       :duration_in_seconds)
       include Aws::Structure
     end
+
+    # Metadata that you can assign to a delivery stream, consisting of a
+    # key-value pair.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A unique identifier for the tag. Maximum length: 128 characters.
+    #   Valid characters: Unicode letters, digits, white space, \_ . / = + -
+    #   % @
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   An optional string, which you can use to describe or define the tag.
+    #   Maximum length: 256 characters. Valid characters: Unicode letters,
+    #   digits, white space, \_ . / = + - % @
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagDeliveryStreamInput
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_stream_name: "DeliveryStreamName", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] delivery_stream_name
+    #   The name of the delivery stream to which you want to add the tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A set of key-value pairs to use to create the tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagDeliveryStreamInput AWS API Documentation
+    #
+    class TagDeliveryStreamInput < Struct.new(
+      :delivery_stream_name,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/TagDeliveryStreamOutput AWS API Documentation
+    #
+    class TagDeliveryStreamOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagDeliveryStreamInput
+    #   data as a hash:
+    #
+    #       {
+    #         delivery_stream_name: "DeliveryStreamName", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] delivery_stream_name
+    #   The name of the delivery stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys. Each corresponding tag is removed from the
+    #   delivery stream.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UntagDeliveryStreamInput AWS API Documentation
+    #
+    class UntagDeliveryStreamInput < Struct.new(
+      :delivery_stream_name,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UntagDeliveryStreamOutput AWS API Documentation
+    #
+    class UntagDeliveryStreamOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateDestinationInput
     #   data as a hash:
@@ -2997,11 +3153,11 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] current_delivery_stream_version_id
-    #   Obtain this value from the **VersionId** result of
-    #   DeliveryStreamDescription. This value is required, and helps the
-    #   service to perform conditional operations. For example, if there is
-    #   an interleaving update and this value is null, then the update
-    #   destination fails. After the update is successful, the **VersionId**
+    #   Obtain this value from the `VersionId` result of
+    #   DeliveryStreamDescription. This value is required, and it helps the
+    #   service perform conditional operations. For example, if there is an
+    #   interleaving update and this value is null, then the update
+    #   destination fails. After the update is successful, the `VersionId`
     #   value is updated. The service then performs a merge of the old
     #   configuration with the new configuration.
     #   @return [String]

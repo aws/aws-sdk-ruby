@@ -1,6 +1,46 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2018-05-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.85.0 (2018-05-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.84.0 (2018-05-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.83.0 (2018-05-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.82.0 (2018-04-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.81.0 (2018-04-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTAnalytics`.
+
+1.80.0 (2018-04-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.79.0 (2018-04-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.78.0 (2018-04-05)
 ------------------
 
