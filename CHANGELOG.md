@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
 2.11.47 (2018-05-10)
 ------------------
 
