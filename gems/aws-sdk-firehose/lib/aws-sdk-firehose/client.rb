@@ -155,7 +155,7 @@ module Aws::Firehose
 
     # @!group API Operations
 
-    # Creates a delivery stream.
+    # Creates a Kinesis Data Firehose delivery stream.
     #
     # By default, you can create up to 50 delivery streams per AWS Region.
     #
@@ -168,56 +168,57 @@ module Aws::Firehose
     #
     # A Kinesis Data Firehose delivery stream can be configured to receive
     # records directly from providers using PutRecord or PutRecordBatch, or
-    # it can be configured to use an existing Kinesis data stream as its
-    # source. To specify a Kinesis data stream as input, set the
+    # it can be configured to use an existing Kinesis stream as its source.
+    # To specify a Kinesis data stream as input, set the
     # `DeliveryStreamType` parameter to `KinesisStreamAsSource`, and provide
-    # the Kinesis data stream Amazon Resource Name (ARN) and role ARN in the
+    # the Kinesis stream Amazon Resource Name (ARN) and role ARN in the
     # `KinesisStreamSourceConfiguration` parameter.
     #
     # A delivery stream is configured with a single destination: Amazon S3,
-    # Amazon ES, Amazon Redshift, or Splunk. Specify only one of the
-    # following destination configuration parameters:
-    # `ExtendedS3DestinationConfiguration`, `S3DestinationConfiguration`,
-    # `ElasticsearchDestinationConfiguration`,
-    # `RedshiftDestinationConfiguration`, or
-    # `SplunkDestinationConfiguration`.
+    # Amazon ES, Amazon Redshift, or Splunk. You must specify only one of
+    # the following destination configuration parameters:
+    # **ExtendedS3DestinationConfiguration**,
+    # **S3DestinationConfiguration**,
+    # **ElasticsearchDestinationConfiguration**,
+    # **RedshiftDestinationConfiguration**, or
+    # **SplunkDestinationConfiguration**.
     #
-    # When you specify `S3DestinationConfiguration`, you can also provide
-    # the following optional values: `BufferingHints`,
-    # `EncryptionConfiguration`, and `CompressionFormat`. By default, if no
-    # `BufferingHints` value is provided, Kinesis Data Firehose buffers data
-    # up to 5 MB or for 5 minutes, whichever condition is satisfied first.
-    # `BufferingHints` is a hint, so there are some cases where the service
-    # cannot adhere to these conditions strictly. For example, record
-    # boundaries are such that the size is a little over or under the
-    # configured buffering size. By default, no encryption is performed. We
-    # strongly recommend that you enable encryption to ensure secure data
-    # storage in Amazon S3.
+    # When you specify **S3DestinationConfiguration**, you can also provide
+    # the following optional values: **BufferingHints**,
+    # **EncryptionConfiguration**, and **CompressionFormat**. By default, if
+    # no **BufferingHints** value is provided, Kinesis Data Firehose buffers
+    # data up to 5 MB or for 5 minutes, whichever condition is satisfied
+    # first. **BufferingHints** is a hint, so there are some cases where the
+    # service cannot adhere to these conditions strictly. For example,
+    # record boundaries might be such that the size is a little over or
+    # under the configured buffering size. By default, no encryption is
+    # performed. We strongly recommend that you enable encryption to ensure
+    # secure data storage in Amazon S3.
     #
     # A few notes about Amazon Redshift as a destination:
     #
     # * An Amazon Redshift destination requires an S3 bucket as intermediate
-    #   location. This is because Kinesis Data Firehose first delivers data
-    #   to Amazon S3 and then uses `COPY` syntax to load data into an Amazon
-    #   Redshift table. This is specified in the
-    #   `RedshiftDestinationConfiguration.S3Configuration` parameter.
+    #   location. Kinesis Data Firehose first delivers data to Amazon S3 and
+    #   then uses `COPY` syntax to load data into an Amazon Redshift table.
+    #   This is specified in the
+    #   **RedshiftDestinationConfiguration.S3Configuration** parameter.
     #
     # * The compression formats `SNAPPY` or `ZIP` cannot be specified in
     #   `RedshiftDestinationConfiguration.S3Configuration` because the
     #   Amazon Redshift `COPY` operation that reads from the S3 bucket
     #   doesn't support these compression formats.
     #
-    # * We strongly recommend that you use the user name and password that
-    #   you provide exclusively with Kinesis Data Firehose. In addition, the
-    #   permissions for the account should be restricted for Amazon Redshift
+    # * We strongly recommend that you use the user name and password you
+    #   provide exclusively with Kinesis Data Firehose, and that the
+    #   permissions for the account are restricted for Amazon Redshift
     #   `INSERT` permissions.
     #
     # Kinesis Data Firehose assumes the IAM role that is configured as part
     # of the destination. The role should allow the Kinesis Data Firehose
     # principal to assume the role, and the role should have permissions
     # that allow the service to deliver the data. For more information, see
-    # [Grant Kinesis Firehose Access to an Amazon S3 Destination][1] in the
-    # *Amazon Kinesis Data Firehose Developer Guide*.
+    # [Grant Kinesis Data Firehose Access to an Amazon S3 Destination][1] in
+    # the *Amazon Kinesis Data Firehose Developer Guide*.
     #
     #
     #
@@ -225,9 +226,9 @@ module Aws::Firehose
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream. This name must be unique per AWS
-    #   account in the same Region. If the delivery streams are in different
-    #   accounts or different Regions, you can have multiple delivery streams
-    #   with the same name.
+    #   account in the same AWS Region. If the delivery streams are in
+    #   different accounts or different Regions, you can have multiple
+    #   delivery streams with the same name.
     #
     # @option params [String] :delivery_stream_type
     #   The delivery stream type. This parameter can be one of the following
@@ -351,6 +352,55 @@ module Aws::Firehose
     #           log_group_name: "LogGroupName",
     #           log_stream_name: "LogStreamName",
     #         },
+    #       },
+    #       data_format_conversion_configuration: {
+    #         schema_configuration: {
+    #           role_arn: "NonEmptyStringWithoutWhitespace",
+    #           catalog_id: "NonEmptyStringWithoutWhitespace",
+    #           database_name: "NonEmptyStringWithoutWhitespace",
+    #           table_name: "NonEmptyStringWithoutWhitespace",
+    #           region: "NonEmptyStringWithoutWhitespace",
+    #           version_id: "NonEmptyStringWithoutWhitespace",
+    #         },
+    #         input_format_configuration: {
+    #           deserializer: {
+    #             open_x_json_ser_de: {
+    #               convert_dots_in_json_keys_to_underscores: false,
+    #               case_insensitive: false,
+    #               column_to_json_key_mappings: {
+    #                 "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #               },
+    #             },
+    #             hive_json_ser_de: {
+    #               timestamp_formats: ["NonEmptyString"],
+    #             },
+    #           },
+    #         },
+    #         output_format_configuration: {
+    #           serializer: {
+    #             parquet_ser_de: {
+    #               block_size_bytes: 1,
+    #               page_size_bytes: 1,
+    #               compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #               enable_dictionary_compression: false,
+    #               max_padding_bytes: 1,
+    #               writer_version: "V1", # accepts V1, V2
+    #             },
+    #             orc_ser_de: {
+    #               stripe_size_bytes: 1,
+    #               block_size_bytes: 1,
+    #               row_index_stride: 1,
+    #               enable_padding: false,
+    #               padding_tolerance: 1.0,
+    #               compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #               bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #               bloom_filter_false_positive_probability: 1.0,
+    #               dictionary_key_threshold: 1.0,
+    #               format_version: "V0_11", # accepts V0_11, V0_12
+    #             },
+    #           },
+    #         },
+    #         enabled: false,
     #       },
     #     },
     #     redshift_destination_configuration: {
@@ -557,11 +607,11 @@ module Aws::Firehose
     #
     # To check the state of a delivery stream, use DescribeDeliveryStream.
     #
-    # While the delivery stream is `DELETING` state, the service may
-    # continue to accept the records, but the service doesn't make any
-    # guarantees with respect to delivering the data. Therefore, as a best
-    # practice, you should first stop any applications that are sending
-    # records before deleting a delivery stream.
+    # While the delivery stream is `DELETING` state, the service might
+    # continue to accept the records, but it doesn't make any guarantees
+    # with respect to delivering the data. Therefore, as a best practice,
+    # you should first stop any applications that are sending records before
+    # deleting a delivery stream.
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
@@ -592,13 +642,13 @@ module Aws::Firehose
     #   The name of the delivery stream.
     #
     # @option params [Integer] :limit
-    #   The limit on the number of destinations to return. Currently, you can
-    #   have one destination per delivery stream.
+    #   The limit on the number of destinations to return. You can have one
+    #   destination per delivery stream.
     #
     # @option params [String] :exclusive_start_destination_id
     #   The ID of the destination to start returning the destination
-    #   information. Currently, Kinesis Data Firehose supports one destination
-    #   per delivery stream.
+    #   information. Kinesis Data Firehose supports one destination per
+    #   delivery stream.
     #
     # @return [Types::DescribeDeliveryStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -666,6 +716,36 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.cloud_watch_logging_options.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.cloud_watch_logging_options.log_stream_name #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.schema_configuration.role_arn #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.schema_configuration.catalog_id #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.schema_configuration.database_name #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.schema_configuration.table_name #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.schema_configuration.region #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.schema_configuration.version_id #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.input_format_configuration.deserializer.open_x_json_ser_de.convert_dots_in_json_keys_to_underscores #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.input_format_configuration.deserializer.open_x_json_ser_de.case_insensitive #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.input_format_configuration.deserializer.open_x_json_ser_de.column_to_json_key_mappings #=> Hash
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.input_format_configuration.deserializer.open_x_json_ser_de.column_to_json_key_mappings["NonEmptyStringWithoutWhitespace"] #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.input_format_configuration.deserializer.hive_json_ser_de.timestamp_formats #=> Array
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.input_format_configuration.deserializer.hive_json_ser_de.timestamp_formats[0] #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.parquet_ser_de.block_size_bytes #=> Integer
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.parquet_ser_de.page_size_bytes #=> Integer
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.parquet_ser_de.compression #=> String, one of "UNCOMPRESSED", "GZIP", "SNAPPY"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.parquet_ser_de.enable_dictionary_compression #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.parquet_ser_de.max_padding_bytes #=> Integer
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.parquet_ser_de.writer_version #=> String, one of "V1", "V2"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.stripe_size_bytes #=> Integer
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.block_size_bytes #=> Integer
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.row_index_stride #=> Integer
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.enable_padding #=> Boolean
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.padding_tolerance #=> Float
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.compression #=> String, one of "NONE", "ZLIB", "SNAPPY"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.bloom_filter_columns #=> Array
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.bloom_filter_columns[0] #=> String
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.bloom_filter_false_positive_probability #=> Float
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.dictionary_key_threshold #=> Float
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.output_format_configuration.serializer.orc_ser_de.format_version #=> String, one of "V0_11", "V0_12"
+    #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.data_format_conversion_configuration.enabled #=> Boolean
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.role_arn #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cluster_jdbc_url #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.copy_command.data_table_name #=> String
@@ -881,16 +961,16 @@ module Aws::Firehose
     # referred to as producers.
     #
     # By default, each delivery stream can take in up to 2,000 transactions
-    # per second, 5,000 records per second, or 5 MB per second. Note that if
-    # you use `PutRecord` and PutRecordBatch, the limits are an aggregate
-    # across these two operations for each delivery stream. For more
-    # information about limits and how to request an increase, see [Amazon
-    # Kinesis Data Firehose Limits][1].
+    # per second, 5,000 records per second, or 5 MB per second. If you use
+    # PutRecord and PutRecordBatch, the limits are an aggregate across these
+    # two operations for each delivery stream. For more information about
+    # limits and how to request an increase, see [Amazon Kinesis Data
+    # Firehose Limits][1].
     #
     # You must specify the name of the delivery stream and the data record
-    # when using `PutRecord`. The data record consists of a data blob that
-    # can be up to 1,000 KB in size and any kind of data. For example, it
-    # can be a segment from a log file, geographic location data, website
+    # when using PutRecord. The data record consists of a data blob that can
+    # be up to 1,000 KB in size, and any kind of data. For example, it can
+    # be a segment from a log file, geographic location data, website
     # clickstream data, and so on.
     #
     # Kinesis Data Firehose buffers records before delivering them to the
@@ -909,9 +989,9 @@ module Aws::Firehose
     # throughput limits have been exceeded for the delivery stream.
     #
     # Data records sent to Kinesis Data Firehose are stored for 24 hours
-    # from the time they are added to a delivery stream as it attempts to
-    # send the records to the destination. If the destination is unreachable
-    # for more than 24 hours, the data is no longer available.
+    # from the time they are added to a delivery stream as it tries to send
+    # the records to the destination. If the destination is unreachable for
+    # more than 24 hours, the data is no longer available.
     #
     #
     #
@@ -957,18 +1037,18 @@ module Aws::Firehose
     #
     # By default, each delivery stream can take in up to 2,000 transactions
     # per second, 5,000 records per second, or 5 MB per second. If you use
-    # PutRecord and `PutRecordBatch`, the limits are an aggregate across
-    # these two operations for each delivery stream. For more information
-    # about limits, see [Amazon Kinesis Data Firehose Limits][1].
+    # PutRecord and PutRecordBatch, the limits are an aggregate across these
+    # two operations for each delivery stream. For more information about
+    # limits, see [Amazon Kinesis Data Firehose Limits][1].
     #
-    # Each `PutRecordBatch` request supports up to 500 records. Each record
-    # in the request can be as large as 1,000 KB (before 64-bit encoding),
-    # up to a limit of 4 MB for the entire request. These limits cannot be
+    # Each PutRecordBatch request supports up to 500 records. Each record in
+    # the request can be as large as 1,000 KB (before 64-bit encoding), up
+    # to a limit of 4 MB for the entire request. These limits cannot be
     # changed.
     #
     # You must specify the name of the delivery stream and the data record
     # when using PutRecord. The data record consists of a data blob that can
-    # be up to 1,000 KB in size and any kind of data. For example, it could
+    # be up to 1,000 KB in size, and any kind of data. For example, it could
     # be a segment from a log file, geographic location data, website
     # clickstream data, and so on.
     #
@@ -979,32 +1059,34 @@ module Aws::Firehose
     # consumer application to parse individual data items when reading the
     # data from the destination.
     #
-    # The `PutRecordBatch` response includes a count of failed records,
-    # `FailedPutCount`, and an array of responses, `RequestResponses`. Each
-    # entry in the `RequestResponses` array provides additional information
-    # about the processed record. It directly correlates with a record in
-    # the request array using the same ordering, from the top to the bottom.
-    # The response array always includes the same number of records as the
-    # request array. `RequestResponses` includes both successfully and
-    # unsuccessfully processed records. Kinesis Data Firehose attempts to
-    # process all records in each `PutRecordBatch` request. A single record
-    # failure does not stop the processing of subsequent records.
+    # The PutRecordBatch response includes a count of failed records,
+    # **FailedPutCount**, and an array of responses, **RequestResponses**.
+    # Each entry in the **RequestResponses** array provides additional
+    # information about the processed record. It directly correlates with a
+    # record in the request array using the same ordering, from the top to
+    # the bottom. The response array always includes the same number of
+    # records as the request array. **RequestResponses** includes both
+    # successfully and unsuccessfully processed records. Kinesis Data
+    # Firehose tries to process all records in each PutRecordBatch request.
+    # A single record failure does not stop the processing of subsequent
+    # records.
     #
-    # A successfully processed record includes a `RecordId` value, which is
-    # unique for the record. An unsuccessfully processed record includes
-    # `ErrorCode` and `ErrorMessage` values. `ErrorCode` reflects the type
-    # of error, and is one of the following values: `ServiceUnavailable` or
-    # `InternalFailure`. `ErrorMessage` provides more detailed information
-    # about the error.
+    # A successfully processed record includes a **RecordId** value, which
+    # is unique for the record. An unsuccessfully processed record includes
+    # **ErrorCode** and **ErrorMessage** values. **ErrorCode** reflects the
+    # type of error, and is one of the following values:
+    # `ServiceUnavailable` or `InternalFailure`. **ErrorMessage** provides
+    # more detailed information about the error.
     #
     # If there is an internal server error or a timeout, the write might
-    # have completed or it might have failed. If `FailedPutCount` is greater
-    # than 0, retry the request, resending only those records that might
-    # have failed processing. This minimizes the possible duplicate records
-    # and also reduces the total bytes sent (and corresponding charges). We
-    # recommend that you handle any duplicates at the destination.
+    # have completed or it might have failed. If **FailedPutCount** is
+    # greater than 0, retry the request, resending only those records that
+    # might have failed processing. This minimizes the possible duplicate
+    # records and also reduces the total bytes sent (and corresponding
+    # charges). We recommend that you handle any duplicates at the
+    # destination.
     #
-    # If `PutRecordBatch` throws `ServiceUnavailableException`, back off and
+    # If PutRecordBatch throws **ServiceUnavailableException**, back off and
     # retry. If the exception persists, it is possible that the throughput
     # limits have been exceeded for the delivery stream.
     #
@@ -1166,20 +1248,20 @@ module Aws::Firehose
     # does not merge any parameters. In this case, all parameters must be
     # specified.
     #
-    # Kinesis Data Firehose uses `CurrentDeliveryStreamVersionId` to avoid
+    # Kinesis Data Firehose uses **CurrentDeliveryStreamVersionId** to avoid
     # race conditions and conflicting merges. This is a required field, and
     # the service updates the configuration only if the existing
     # configuration has a version ID that matches. After the update is
-    # applied successfully, the version ID is updated, and you can retrieve
-    # it using DescribeDeliveryStream. Use the new version ID to set
-    # `CurrentDeliveryStreamVersionId` in the next call.
+    # applied successfully, the version ID is updated, and can be retrieved
+    # using DescribeDeliveryStream. Use the new version ID to set
+    # **CurrentDeliveryStreamVersionId** in the next call.
     #
     # @option params [required, String] :delivery_stream_name
     #   The name of the delivery stream.
     #
     # @option params [required, String] :current_delivery_stream_version_id
-    #   Obtain this value from the `VersionId` result of
-    #   DeliveryStreamDescription. This value is required, and it helps the
+    #   Obtain this value from the **VersionId** result of
+    #   DeliveryStreamDescription. This value is required, and helps the
     #   service perform conditional operations. For example, if there is an
     #   interleaving update and this value is null, then the update
     #   destination fails. After the update is successful, the `VersionId`
@@ -1288,6 +1370,55 @@ module Aws::Firehose
     #           log_group_name: "LogGroupName",
     #           log_stream_name: "LogStreamName",
     #         },
+    #       },
+    #       data_format_conversion_configuration: {
+    #         schema_configuration: {
+    #           role_arn: "NonEmptyStringWithoutWhitespace",
+    #           catalog_id: "NonEmptyStringWithoutWhitespace",
+    #           database_name: "NonEmptyStringWithoutWhitespace",
+    #           table_name: "NonEmptyStringWithoutWhitespace",
+    #           region: "NonEmptyStringWithoutWhitespace",
+    #           version_id: "NonEmptyStringWithoutWhitespace",
+    #         },
+    #         input_format_configuration: {
+    #           deserializer: {
+    #             open_x_json_ser_de: {
+    #               convert_dots_in_json_keys_to_underscores: false,
+    #               case_insensitive: false,
+    #               column_to_json_key_mappings: {
+    #                 "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #               },
+    #             },
+    #             hive_json_ser_de: {
+    #               timestamp_formats: ["NonEmptyString"],
+    #             },
+    #           },
+    #         },
+    #         output_format_configuration: {
+    #           serializer: {
+    #             parquet_ser_de: {
+    #               block_size_bytes: 1,
+    #               page_size_bytes: 1,
+    #               compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #               enable_dictionary_compression: false,
+    #               max_padding_bytes: 1,
+    #               writer_version: "V1", # accepts V1, V2
+    #             },
+    #             orc_ser_de: {
+    #               stripe_size_bytes: 1,
+    #               block_size_bytes: 1,
+    #               row_index_stride: 1,
+    #               enable_padding: false,
+    #               padding_tolerance: 1.0,
+    #               compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #               bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #               bloom_filter_false_positive_probability: 1.0,
+    #               dictionary_key_threshold: 1.0,
+    #               format_version: "V0_11", # accepts V0_11, V0_12
+    #             },
+    #           },
+    #         },
+    #         enabled: false,
     #       },
     #     },
     #     redshift_destination_update: {
@@ -1494,7 +1625,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

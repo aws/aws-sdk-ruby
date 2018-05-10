@@ -12,11 +12,13 @@ module Aws::Firehose
     include Seahorse::Model
 
     AWSKMSKeyARN = Shapes::StringShape.new(name: 'AWSKMSKeyARN')
+    BlockSizeBytes = Shapes::IntegerShape.new(name: 'BlockSizeBytes')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     BucketARN = Shapes::StringShape.new(name: 'BucketARN')
     BufferingHints = Shapes::StructureShape.new(name: 'BufferingHints')
     CloudWatchLoggingOptions = Shapes::StructureShape.new(name: 'CloudWatchLoggingOptions')
     ClusterJDBCURL = Shapes::StringShape.new(name: 'ClusterJDBCURL')
+    ColumnToJsonKeyMappings = Shapes::MapShape.new(name: 'ColumnToJsonKeyMappings')
     CompressionFormat = Shapes::StringShape.new(name: 'CompressionFormat')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     CopyCommand = Shapes::StructureShape.new(name: 'CopyCommand')
@@ -24,6 +26,7 @@ module Aws::Firehose
     CreateDeliveryStreamInput = Shapes::StructureShape.new(name: 'CreateDeliveryStreamInput')
     CreateDeliveryStreamOutput = Shapes::StructureShape.new(name: 'CreateDeliveryStreamOutput')
     Data = Shapes::BlobShape.new(name: 'Data')
+    DataFormatConversionConfiguration = Shapes::StructureShape.new(name: 'DataFormatConversionConfiguration')
     DataTableColumns = Shapes::StringShape.new(name: 'DataTableColumns')
     DataTableName = Shapes::StringShape.new(name: 'DataTableName')
     DeleteDeliveryStreamInput = Shapes::StructureShape.new(name: 'DeleteDeliveryStreamInput')
@@ -39,6 +42,7 @@ module Aws::Firehose
     DescribeDeliveryStreamInput = Shapes::StructureShape.new(name: 'DescribeDeliveryStreamInput')
     DescribeDeliveryStreamInputLimit = Shapes::IntegerShape.new(name: 'DescribeDeliveryStreamInputLimit')
     DescribeDeliveryStreamOutput = Shapes::StructureShape.new(name: 'DescribeDeliveryStreamOutput')
+    Deserializer = Shapes::StructureShape.new(name: 'Deserializer')
     DestinationDescription = Shapes::StructureShape.new(name: 'DestinationDescription')
     DestinationDescriptionList = Shapes::ListShape.new(name: 'DestinationDescriptionList')
     DestinationId = Shapes::StringShape.new(name: 'DestinationId')
@@ -65,6 +69,8 @@ module Aws::Firehose
     HECEndpoint = Shapes::StringShape.new(name: 'HECEndpoint')
     HECEndpointType = Shapes::StringShape.new(name: 'HECEndpointType')
     HECToken = Shapes::StringShape.new(name: 'HECToken')
+    HiveJsonSerDe = Shapes::StructureShape.new(name: 'HiveJsonSerDe')
+    InputFormatConfiguration = Shapes::StructureShape.new(name: 'InputFormatConfiguration')
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     KMSEncryptionConfig = Shapes::StructureShape.new(name: 'KMSEncryptionConfig')
@@ -75,6 +81,8 @@ module Aws::Firehose
     ListDeliveryStreamsInput = Shapes::StructureShape.new(name: 'ListDeliveryStreamsInput')
     ListDeliveryStreamsInputLimit = Shapes::IntegerShape.new(name: 'ListDeliveryStreamsInputLimit')
     ListDeliveryStreamsOutput = Shapes::StructureShape.new(name: 'ListDeliveryStreamsOutput')
+    ListOfNonEmptyStrings = Shapes::ListShape.new(name: 'ListOfNonEmptyStrings')
+    ListOfNonEmptyStringsWithoutWhitespace = Shapes::ListShape.new(name: 'ListOfNonEmptyStringsWithoutWhitespace')
     ListTagsForDeliveryStreamInput = Shapes::StructureShape.new(name: 'ListTagsForDeliveryStreamInput')
     ListTagsForDeliveryStreamInputLimit = Shapes::IntegerShape.new(name: 'ListTagsForDeliveryStreamInputLimit')
     ListTagsForDeliveryStreamOutput = Shapes::StructureShape.new(name: 'ListTagsForDeliveryStreamOutput')
@@ -82,7 +90,20 @@ module Aws::Firehose
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LogStreamName = Shapes::StringShape.new(name: 'LogStreamName')
     NoEncryptionConfig = Shapes::StringShape.new(name: 'NoEncryptionConfig')
+    NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
+    NonEmptyStringWithoutWhitespace = Shapes::StringShape.new(name: 'NonEmptyStringWithoutWhitespace')
     NonNegativeIntegerObject = Shapes::IntegerShape.new(name: 'NonNegativeIntegerObject')
+    OpenXJsonSerDe = Shapes::StructureShape.new(name: 'OpenXJsonSerDe')
+    OrcCompression = Shapes::StringShape.new(name: 'OrcCompression')
+    OrcFormatVersion = Shapes::StringShape.new(name: 'OrcFormatVersion')
+    OrcRowIndexStride = Shapes::IntegerShape.new(name: 'OrcRowIndexStride')
+    OrcSerDe = Shapes::StructureShape.new(name: 'OrcSerDe')
+    OrcStripeSizeBytes = Shapes::IntegerShape.new(name: 'OrcStripeSizeBytes')
+    OutputFormatConfiguration = Shapes::StructureShape.new(name: 'OutputFormatConfiguration')
+    ParquetCompression = Shapes::StringShape.new(name: 'ParquetCompression')
+    ParquetPageSizeBytes = Shapes::IntegerShape.new(name: 'ParquetPageSizeBytes')
+    ParquetSerDe = Shapes::StructureShape.new(name: 'ParquetSerDe')
+    ParquetWriterVersion = Shapes::StringShape.new(name: 'ParquetWriterVersion')
     Password = Shapes::StringShape.new(name: 'Password')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     ProcessingConfiguration = Shapes::StructureShape.new(name: 'ProcessingConfiguration')
@@ -93,6 +114,7 @@ module Aws::Firehose
     ProcessorParameterName = Shapes::StringShape.new(name: 'ProcessorParameterName')
     ProcessorParameterValue = Shapes::StringShape.new(name: 'ProcessorParameterValue')
     ProcessorType = Shapes::StringShape.new(name: 'ProcessorType')
+    Proportion = Shapes::FloatShape.new(name: 'Proportion')
     PutRecordBatchInput = Shapes::StructureShape.new(name: 'PutRecordBatchInput')
     PutRecordBatchOutput = Shapes::StructureShape.new(name: 'PutRecordBatchOutput')
     PutRecordBatchRequestEntryList = Shapes::ListShape.new(name: 'PutRecordBatchRequestEntryList')
@@ -115,6 +137,8 @@ module Aws::Firehose
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     S3DestinationDescription = Shapes::StructureShape.new(name: 'S3DestinationDescription')
     S3DestinationUpdate = Shapes::StructureShape.new(name: 'S3DestinationUpdate')
+    SchemaConfiguration = Shapes::StructureShape.new(name: 'SchemaConfiguration')
+    Serializer = Shapes::StructureShape.new(name: 'Serializer')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SizeInMBs = Shapes::IntegerShape.new(name: 'SizeInMBs')
     SourceDescription = Shapes::StructureShape.new(name: 'SourceDescription')
@@ -147,6 +171,9 @@ module Aws::Firehose
     CloudWatchLoggingOptions.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "LogStreamName"))
     CloudWatchLoggingOptions.struct_class = Types::CloudWatchLoggingOptions
 
+    ColumnToJsonKeyMappings.key = Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace)
+    ColumnToJsonKeyMappings.value = Shapes::ShapeRef.new(shape: NonEmptyString)
+
     CopyCommand.add_member(:data_table_name, Shapes::ShapeRef.new(shape: DataTableName, required: true, location_name: "DataTableName"))
     CopyCommand.add_member(:data_table_columns, Shapes::ShapeRef.new(shape: DataTableColumns, location_name: "DataTableColumns"))
     CopyCommand.add_member(:copy_options, Shapes::ShapeRef.new(shape: CopyOptions, location_name: "CopyOptions"))
@@ -164,6 +191,12 @@ module Aws::Firehose
 
     CreateDeliveryStreamOutput.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: DeliveryStreamARN, location_name: "DeliveryStreamARN"))
     CreateDeliveryStreamOutput.struct_class = Types::CreateDeliveryStreamOutput
+
+    DataFormatConversionConfiguration.add_member(:schema_configuration, Shapes::ShapeRef.new(shape: SchemaConfiguration, location_name: "SchemaConfiguration"))
+    DataFormatConversionConfiguration.add_member(:input_format_configuration, Shapes::ShapeRef.new(shape: InputFormatConfiguration, location_name: "InputFormatConfiguration"))
+    DataFormatConversionConfiguration.add_member(:output_format_configuration, Shapes::ShapeRef.new(shape: OutputFormatConfiguration, location_name: "OutputFormatConfiguration"))
+    DataFormatConversionConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
+    DataFormatConversionConfiguration.struct_class = Types::DataFormatConversionConfiguration
 
     DeleteDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     DeleteDeliveryStreamInput.struct_class = Types::DeleteDeliveryStreamInput
@@ -191,6 +224,10 @@ module Aws::Firehose
 
     DescribeDeliveryStreamOutput.add_member(:delivery_stream_description, Shapes::ShapeRef.new(shape: DeliveryStreamDescription, required: true, location_name: "DeliveryStreamDescription"))
     DescribeDeliveryStreamOutput.struct_class = Types::DescribeDeliveryStreamOutput
+
+    Deserializer.add_member(:open_x_json_ser_de, Shapes::ShapeRef.new(shape: OpenXJsonSerDe, location_name: "OpenXJsonSerDe"))
+    Deserializer.add_member(:hive_json_ser_de, Shapes::ShapeRef.new(shape: HiveJsonSerDe, location_name: "HiveJsonSerDe"))
+    Deserializer.struct_class = Types::Deserializer
 
     DestinationDescription.add_member(:destination_id, Shapes::ShapeRef.new(shape: DestinationId, required: true, location_name: "DestinationId"))
     DestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
@@ -261,6 +298,7 @@ module Aws::Firehose
     ExtendedS3DestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ExtendedS3DestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
     ExtendedS3DestinationConfiguration.add_member(:s3_backup_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3BackupConfiguration"))
+    ExtendedS3DestinationConfiguration.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
     ExtendedS3DestinationConfiguration.struct_class = Types::ExtendedS3DestinationConfiguration
 
     ExtendedS3DestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
@@ -273,6 +311,7 @@ module Aws::Firehose
     ExtendedS3DestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ExtendedS3DestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
     ExtendedS3DestinationDescription.add_member(:s3_backup_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3BackupDescription"))
+    ExtendedS3DestinationDescription.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
     ExtendedS3DestinationDescription.struct_class = Types::ExtendedS3DestinationDescription
 
     ExtendedS3DestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
@@ -285,7 +324,14 @@ module Aws::Firehose
     ExtendedS3DestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ExtendedS3DestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
     ExtendedS3DestinationUpdate.add_member(:s3_backup_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3BackupUpdate"))
+    ExtendedS3DestinationUpdate.add_member(:data_format_conversion_configuration, Shapes::ShapeRef.new(shape: DataFormatConversionConfiguration, location_name: "DataFormatConversionConfiguration"))
     ExtendedS3DestinationUpdate.struct_class = Types::ExtendedS3DestinationUpdate
+
+    HiveJsonSerDe.add_member(:timestamp_formats, Shapes::ShapeRef.new(shape: ListOfNonEmptyStrings, location_name: "TimestampFormats"))
+    HiveJsonSerDe.struct_class = Types::HiveJsonSerDe
+
+    InputFormatConfiguration.add_member(:deserializer, Shapes::ShapeRef.new(shape: Deserializer, location_name: "Deserializer"))
+    InputFormatConfiguration.struct_class = Types::InputFormatConfiguration
 
     KMSEncryptionConfig.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: AWSKMSKeyARN, required: true, location_name: "AWSKMSKeyARN"))
     KMSEncryptionConfig.struct_class = Types::KMSEncryptionConfig
@@ -308,6 +354,10 @@ module Aws::Firehose
     ListDeliveryStreamsOutput.add_member(:has_more_delivery_streams, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreDeliveryStreams"))
     ListDeliveryStreamsOutput.struct_class = Types::ListDeliveryStreamsOutput
 
+    ListOfNonEmptyStrings.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    ListOfNonEmptyStringsWithoutWhitespace.member = Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace)
+
     ListTagsForDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     ListTagsForDeliveryStreamInput.add_member(:exclusive_start_tag_key, Shapes::ShapeRef.new(shape: TagKey, location_name: "ExclusiveStartTagKey"))
     ListTagsForDeliveryStreamInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListTagsForDeliveryStreamInputLimit, location_name: "Limit"))
@@ -318,6 +368,34 @@ module Aws::Firehose
     ListTagsForDeliveryStreamOutput.struct_class = Types::ListTagsForDeliveryStreamOutput
 
     ListTagsForDeliveryStreamOutputTagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    OpenXJsonSerDe.add_member(:convert_dots_in_json_keys_to_underscores, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ConvertDotsInJsonKeysToUnderscores"))
+    OpenXJsonSerDe.add_member(:case_insensitive, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "CaseInsensitive"))
+    OpenXJsonSerDe.add_member(:column_to_json_key_mappings, Shapes::ShapeRef.new(shape: ColumnToJsonKeyMappings, location_name: "ColumnToJsonKeyMappings"))
+    OpenXJsonSerDe.struct_class = Types::OpenXJsonSerDe
+
+    OrcSerDe.add_member(:stripe_size_bytes, Shapes::ShapeRef.new(shape: OrcStripeSizeBytes, location_name: "StripeSizeBytes"))
+    OrcSerDe.add_member(:block_size_bytes, Shapes::ShapeRef.new(shape: BlockSizeBytes, location_name: "BlockSizeBytes"))
+    OrcSerDe.add_member(:row_index_stride, Shapes::ShapeRef.new(shape: OrcRowIndexStride, location_name: "RowIndexStride"))
+    OrcSerDe.add_member(:enable_padding, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnablePadding"))
+    OrcSerDe.add_member(:padding_tolerance, Shapes::ShapeRef.new(shape: Proportion, location_name: "PaddingTolerance"))
+    OrcSerDe.add_member(:compression, Shapes::ShapeRef.new(shape: OrcCompression, location_name: "Compression"))
+    OrcSerDe.add_member(:bloom_filter_columns, Shapes::ShapeRef.new(shape: ListOfNonEmptyStringsWithoutWhitespace, location_name: "BloomFilterColumns"))
+    OrcSerDe.add_member(:bloom_filter_false_positive_probability, Shapes::ShapeRef.new(shape: Proportion, location_name: "BloomFilterFalsePositiveProbability"))
+    OrcSerDe.add_member(:dictionary_key_threshold, Shapes::ShapeRef.new(shape: Proportion, location_name: "DictionaryKeyThreshold"))
+    OrcSerDe.add_member(:format_version, Shapes::ShapeRef.new(shape: OrcFormatVersion, location_name: "FormatVersion"))
+    OrcSerDe.struct_class = Types::OrcSerDe
+
+    OutputFormatConfiguration.add_member(:serializer, Shapes::ShapeRef.new(shape: Serializer, location_name: "Serializer"))
+    OutputFormatConfiguration.struct_class = Types::OutputFormatConfiguration
+
+    ParquetSerDe.add_member(:block_size_bytes, Shapes::ShapeRef.new(shape: BlockSizeBytes, location_name: "BlockSizeBytes"))
+    ParquetSerDe.add_member(:page_size_bytes, Shapes::ShapeRef.new(shape: ParquetPageSizeBytes, location_name: "PageSizeBytes"))
+    ParquetSerDe.add_member(:compression, Shapes::ShapeRef.new(shape: ParquetCompression, location_name: "Compression"))
+    ParquetSerDe.add_member(:enable_dictionary_compression, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDictionaryCompression"))
+    ParquetSerDe.add_member(:max_padding_bytes, Shapes::ShapeRef.new(shape: NonNegativeIntegerObject, location_name: "MaxPaddingBytes"))
+    ParquetSerDe.add_member(:writer_version, Shapes::ShapeRef.new(shape: ParquetWriterVersion, location_name: "WriterVersion"))
+    ParquetSerDe.struct_class = Types::ParquetSerDe
 
     ProcessingConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
     ProcessingConfiguration.add_member(:processors, Shapes::ShapeRef.new(shape: ProcessorList, location_name: "Processors"))
@@ -429,6 +507,18 @@ module Aws::Firehose
     S3DestinationUpdate.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     S3DestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     S3DestinationUpdate.struct_class = Types::S3DestinationUpdate
+
+    SchemaConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, location_name: "RoleARN"))
+    SchemaConfiguration.add_member(:catalog_id, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, location_name: "CatalogId"))
+    SchemaConfiguration.add_member(:database_name, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, location_name: "DatabaseName"))
+    SchemaConfiguration.add_member(:table_name, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, location_name: "TableName"))
+    SchemaConfiguration.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, location_name: "Region"))
+    SchemaConfiguration.add_member(:version_id, Shapes::ShapeRef.new(shape: NonEmptyStringWithoutWhitespace, location_name: "VersionId"))
+    SchemaConfiguration.struct_class = Types::SchemaConfiguration
+
+    Serializer.add_member(:parquet_ser_de, Shapes::ShapeRef.new(shape: ParquetSerDe, location_name: "ParquetSerDe"))
+    Serializer.add_member(:orc_ser_de, Shapes::ShapeRef.new(shape: OrcSerDe, location_name: "OrcSerDe"))
+    Serializer.struct_class = Types::Serializer
 
     SourceDescription.add_member(:kinesis_stream_source_description, Shapes::ShapeRef.new(shape: KinesisStreamSourceDescription, location_name: "KinesisStreamSourceDescription"))
     SourceDescription.struct_class = Types::SourceDescription

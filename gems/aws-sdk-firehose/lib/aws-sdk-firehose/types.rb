@@ -10,8 +10,8 @@ module Aws::Firehose
 
     # Describes hints for the buffering to perform before delivering data to
     # the destination. These options are treated as hints, and therefore
-    # Kinesis Data Firehose might choose to use different values whenever it
-    # is optimal.
+    # Kinesis Data Firehose might choose to use different values when it is
+    # optimal.
     #
     # @note When making an API call, you may pass BufferingHints
     #   data as a hash:
@@ -225,6 +225,55 @@ module Aws::Firehose
     #               log_stream_name: "LogStreamName",
     #             },
     #           },
+    #           data_format_conversion_configuration: {
+    #             schema_configuration: {
+    #               role_arn: "NonEmptyStringWithoutWhitespace",
+    #               catalog_id: "NonEmptyStringWithoutWhitespace",
+    #               database_name: "NonEmptyStringWithoutWhitespace",
+    #               table_name: "NonEmptyStringWithoutWhitespace",
+    #               region: "NonEmptyStringWithoutWhitespace",
+    #               version_id: "NonEmptyStringWithoutWhitespace",
+    #             },
+    #             input_format_configuration: {
+    #               deserializer: {
+    #                 open_x_json_ser_de: {
+    #                   convert_dots_in_json_keys_to_underscores: false,
+    #                   case_insensitive: false,
+    #                   column_to_json_key_mappings: {
+    #                     "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #                   },
+    #                 },
+    #                 hive_json_ser_de: {
+    #                   timestamp_formats: ["NonEmptyString"],
+    #                 },
+    #               },
+    #             },
+    #             output_format_configuration: {
+    #               serializer: {
+    #                 parquet_ser_de: {
+    #                   block_size_bytes: 1,
+    #                   page_size_bytes: 1,
+    #                   compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #                   enable_dictionary_compression: false,
+    #                   max_padding_bytes: 1,
+    #                   writer_version: "V1", # accepts V1, V2
+    #                 },
+    #                 orc_ser_de: {
+    #                   stripe_size_bytes: 1,
+    #                   block_size_bytes: 1,
+    #                   row_index_stride: 1,
+    #                   enable_padding: false,
+    #                   padding_tolerance: 1.0,
+    #                   compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #                   bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #                   bloom_filter_false_positive_probability: 1.0,
+    #                   dictionary_key_threshold: 1.0,
+    #                   format_version: "V0_11", # accepts V0_11, V0_12
+    #                 },
+    #               },
+    #             },
+    #             enabled: false,
+    #           },
     #         },
     #         redshift_destination_configuration: {
     #           role_arn: "RoleARN", # required
@@ -411,9 +460,9 @@ module Aws::Firehose
     #
     # @!attribute [rw] delivery_stream_name
     #   The name of the delivery stream. This name must be unique per AWS
-    #   account in the same Region. If the delivery streams are in different
-    #   accounts or different Regions, you can have multiple delivery
-    #   streams with the same name.
+    #   account in the same AWS Region. If the delivery streams are in
+    #   different accounts or different Regions, you can have multiple
+    #   delivery streams with the same name.
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_type
@@ -481,6 +530,101 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Specifies that you want Kinesis Data Firehose to convert data from the
+    # JSON format to the Parquet or ORC format before writing it to Amazon
+    # S3. Kinesis Data Firehose uses the serializer and deserializer that
+    # you specify, in addition to the column information from the AWS Glue
+    # table, to deserialize your input data from JSON and then serialize it
+    # to the Parquet or ORC format. For more information, see [Kinesis Data
+    # Firehose Record Format Conversion][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html
+    #
+    # @note When making an API call, you may pass DataFormatConversionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         schema_configuration: {
+    #           role_arn: "NonEmptyStringWithoutWhitespace",
+    #           catalog_id: "NonEmptyStringWithoutWhitespace",
+    #           database_name: "NonEmptyStringWithoutWhitespace",
+    #           table_name: "NonEmptyStringWithoutWhitespace",
+    #           region: "NonEmptyStringWithoutWhitespace",
+    #           version_id: "NonEmptyStringWithoutWhitespace",
+    #         },
+    #         input_format_configuration: {
+    #           deserializer: {
+    #             open_x_json_ser_de: {
+    #               convert_dots_in_json_keys_to_underscores: false,
+    #               case_insensitive: false,
+    #               column_to_json_key_mappings: {
+    #                 "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #               },
+    #             },
+    #             hive_json_ser_de: {
+    #               timestamp_formats: ["NonEmptyString"],
+    #             },
+    #           },
+    #         },
+    #         output_format_configuration: {
+    #           serializer: {
+    #             parquet_ser_de: {
+    #               block_size_bytes: 1,
+    #               page_size_bytes: 1,
+    #               compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #               enable_dictionary_compression: false,
+    #               max_padding_bytes: 1,
+    #               writer_version: "V1", # accepts V1, V2
+    #             },
+    #             orc_ser_de: {
+    #               stripe_size_bytes: 1,
+    #               block_size_bytes: 1,
+    #               row_index_stride: 1,
+    #               enable_padding: false,
+    #               padding_tolerance: 1.0,
+    #               compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #               bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #               bloom_filter_false_positive_probability: 1.0,
+    #               dictionary_key_threshold: 1.0,
+    #               format_version: "V0_11", # accepts V0_11, V0_12
+    #             },
+    #           },
+    #         },
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] schema_configuration
+    #   Specifies the AWS Glue Data Catalog table that contains the column
+    #   information.
+    #   @return [Types::SchemaConfiguration]
+    #
+    # @!attribute [rw] input_format_configuration
+    #   Specifies the deserializer that you want Kinesis Data Firehose to
+    #   use to convert the format of your data from JSON.
+    #   @return [Types::InputFormatConfiguration]
+    #
+    # @!attribute [rw] output_format_configuration
+    #   Specifies the serializer that you want Kinesis Data Firehose to use
+    #   to convert the format of your data to the Parquet or ORC format.
+    #   @return [Types::OutputFormatConfiguration]
+    #
+    # @!attribute [rw] enabled
+    #   Defaults to `true`. Set it to `false` if you want to disable format
+    #   conversion while preserving the configuration details.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DataFormatConversionConfiguration AWS API Documentation
+    #
+    class DataFormatConversionConfiguration < Struct.new(
+      :schema_configuration,
+      :input_format_configuration,
+      :output_format_configuration,
+      :enabled)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDeliveryStreamInput
     #   data as a hash:
     #
@@ -510,7 +654,13 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_arn
-    #   The Amazon Resource Name (ARN) of the delivery stream.
+    #   The Amazon Resource Name (ARN) of the delivery stream. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] delivery_stream_status
@@ -585,14 +735,14 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The limit on the number of destinations to return. Currently, you
-    #   can have one destination per delivery stream.
+    #   The limit on the number of destinations to return. You can have one
+    #   destination per delivery stream.
     #   @return [Integer]
     #
     # @!attribute [rw] exclusive_start_destination_id
     #   The ID of the destination to start returning the destination
-    #   information. Currently, Kinesis Data Firehose supports one
-    #   destination per delivery stream.
+    #   information. Kinesis Data Firehose supports one destination per
+    #   delivery stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStreamInput AWS API Documentation
@@ -612,6 +762,59 @@ module Aws::Firehose
     #
     class DescribeDeliveryStreamOutput < Struct.new(
       :delivery_stream_description)
+      include Aws::Structure
+    end
+
+    # The deserializer you want Kinesis Data Firehose to use for converting
+    # the input data from JSON. Kinesis Data Firehose then serializes the
+    # data to its final format using the Serializer. Kinesis Data Firehose
+    # supports two types of deserializers: the [Apache Hive JSON SerDe][1]
+    # and the [OpenX JSON SerDe][2].
+    #
+    #
+    #
+    # [1]: https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-JSON
+    # [2]: https://github.com/rcongiu/Hive-JSON-Serde
+    #
+    # @note When making an API call, you may pass Deserializer
+    #   data as a hash:
+    #
+    #       {
+    #         open_x_json_ser_de: {
+    #           convert_dots_in_json_keys_to_underscores: false,
+    #           case_insensitive: false,
+    #           column_to_json_key_mappings: {
+    #             "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #           },
+    #         },
+    #         hive_json_ser_de: {
+    #           timestamp_formats: ["NonEmptyString"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] open_x_json_ser_de
+    #   The OpenX SerDe. Used by Kinesis Data Firehose for deserializing
+    #   data, which means converting it from the JSON format in preparation
+    #   for serializing it to the Parquet or ORC format. This is one of two
+    #   deserializers you can choose, depending on which one offers the
+    #   functionality you need. The other option is the native Hive /
+    #   HCatalog JsonSerDe.
+    #   @return [Types::OpenXJsonSerDe]
+    #
+    # @!attribute [rw] hive_json_ser_de
+    #   The native Hive / HCatalog JsonSerDe. Used by Kinesis Data Firehose
+    #   for deserializing data, which means converting it from the JSON
+    #   format in preparation for serializing it to the Parquet or ORC
+    #   format. This is one of two deserializers you can choose, depending
+    #   on which one offers the functionality you need. The other option is
+    #   the OpenX SerDe.
+    #   @return [Types::HiveJsonSerDe]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Deserializer AWS API Documentation
+    #
+    class Deserializer < Struct.new(
+      :open_x_json_ser_de,
+      :hive_json_ser_de)
       include Aws::Structure
     end
 
@@ -753,18 +956,25 @@ module Aws::Firehose
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
     #   Kinesis Data Firehose for calling the Amazon ES Configuration API
     #   and for indexing documents. For more information, see [Grant Kinesis
-    #   Data Firehose Access to an Amazon Destination][1].
+    #   Data Firehose Access to an Amazon S3 Destination][1] and [Amazon
+    #   Resource Names (ARNs) and AWS Service Namespaces][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
     #   The ARN of the Amazon ES domain. The IAM role must have permissions
     #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
     #   and `DescribeElasticsearchDomainConfig` after assuming the role
-    #   specified in `RoleARN`.
+    #   specified in **RoleARN**. For more information, see [Amazon Resource
+    #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -772,12 +982,15 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] type_name
-    #   The Elasticsearch type name.
+    #   The Elasticsearch type name. For Elasticsearch 6.x, there can be
+    #   only one type per index. If you try to specify a new type for an
+    #   existing index that already has another type, Kinesis Data Firehose
+    #   returns an error during run time.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
-    #   time stamp to the IndexName to facilitate the expiration of old
+    #   time stamp to the `IndexName` to facilitate the expiration of old
     #   data. For more information, see [Index Rotation for the Amazon ES
     #   Destination][1]. The default value is `OneDay`.
     #
@@ -798,19 +1011,19 @@ module Aws::Firehose
     #   @return [Types::ElasticsearchRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
-    #   Defines how documents should be delivered to Amazon S3. When set to
-    #   `FailedDocumentsOnly`, Kinesis Data Firehose writes any documents
-    #   that could not be indexed to the configured Amazon S3 destination,
-    #   with `elasticsearch-failed/` appended to the key prefix. When set to
-    #   `AllDocuments`, Kinesis Data Firehose delivers all incoming records
-    #   to Amazon S3, and also writes failed documents with
-    #   `elasticsearch-failed/` appended to the prefix. For more
-    #   information, see [Data Delivery Failure Handling][1]. Default value
-    #   is `FailedDocumentsOnly`.
+    #   Defines how documents should be delivered to Amazon S3. When it is
+    #   set to `FailedDocumentsOnly`, Kinesis Data Firehose writes any
+    #   documents that could not be indexed to the configured Amazon S3
+    #   destination, with `elasticsearch-failed/` appended to the key
+    #   prefix. When set to `AllDocuments`, Kinesis Data Firehose delivers
+    #   all incoming records to Amazon S3, and also writes failed documents
+    #   with `elasticsearch-failed/` appended to the prefix. For more
+    #   information, see [Amazon S3 Backup for the Amazon ES
+    #   Destination][1]. Default value is `FailedDocumentsOnly`.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#retry
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup
     #   @return [String]
     #
     # @!attribute [rw] s3_configuration
@@ -822,7 +1035,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationConfiguration AWS API Documentation
@@ -845,11 +1058,22 @@ module Aws::Firehose
     # The destination description in Amazon ES.
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
-    #   The ARN of the Amazon ES domain.
+    #   The ARN of the Amazon ES domain. For more information, see [Amazon
+    #   Resource Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -885,7 +1109,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options.
+    #   The Amazon CloudWatch logging options.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationDescription AWS API Documentation
@@ -969,18 +1193,25 @@ module Aws::Firehose
     #   The Amazon Resource Name (ARN) of the IAM role to be assumed by
     #   Kinesis Data Firehose for calling the Amazon ES Configuration API
     #   and for indexing documents. For more information, see [Grant Kinesis
-    #   Data Firehose Access to an Amazon S3 Destination][1].
+    #   Data Firehose Access to an Amazon S3 Destination][1] and [Amazon
+    #   Resource Names (ARNs) and AWS Service Namespaces][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+    #   [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
     #   The ARN of the Amazon ES domain. The IAM role must have permissions
     #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
     #   and `DescribeElasticsearchDomainConfig` after assuming the IAM role
-    #   specified in `RoleARN`.
+    #   specified in **RoleARN**. For more information, see [Amazon Resource
+    #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -988,12 +1219,15 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] type_name
-    #   The Elasticsearch type name.
+    #   The Elasticsearch type name. For Elasticsearch 6.x, there can be
+    #   only one type per index. If you try to specify a new type for an
+    #   existing index that already has another type, Kinesis Data Firehose
+    #   returns an error during runtime.
     #   @return [String]
     #
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
-    #   time stamp to IndexName to facilitate the expiration of old data.
+    #   time stamp to `IndexName` to facilitate the expiration of old data.
     #   For more information, see [Index Rotation for the Amazon ES
     #   Destination][1]. Default value is `OneDay`.
     #
@@ -1004,7 +1238,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] buffering_hints
     #   The buffering options. If no value is specified,
-    #   `ElasticsearchBufferingHints` object default values are used.
+    #   **ElasticsearchBufferingHints** object default values are used.
     #   @return [Types::ElasticsearchBufferingHints]
     #
     # @!attribute [rw] retry_options
@@ -1053,7 +1287,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] duration_in_seconds
     #   After an initial failure to deliver to Amazon ES, the total amount
-    #   of time during which Kinesis Data Firehose re-attempts delivery
+    #   of time during which Kinesis Data Firehose retries delivery
     #   (including the first attempt). After this time has elapsed, the
     #   failed documents are written to Amazon S3. Default value is 300
     #   seconds (5 minutes). A value of 0 (zero) results in no retries.
@@ -1156,14 +1390,74 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         data_format_conversion_configuration: {
+    #           schema_configuration: {
+    #             role_arn: "NonEmptyStringWithoutWhitespace",
+    #             catalog_id: "NonEmptyStringWithoutWhitespace",
+    #             database_name: "NonEmptyStringWithoutWhitespace",
+    #             table_name: "NonEmptyStringWithoutWhitespace",
+    #             region: "NonEmptyStringWithoutWhitespace",
+    #             version_id: "NonEmptyStringWithoutWhitespace",
+    #           },
+    #           input_format_configuration: {
+    #             deserializer: {
+    #               open_x_json_ser_de: {
+    #                 convert_dots_in_json_keys_to_underscores: false,
+    #                 case_insensitive: false,
+    #                 column_to_json_key_mappings: {
+    #                   "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #                 },
+    #               },
+    #               hive_json_ser_de: {
+    #                 timestamp_formats: ["NonEmptyString"],
+    #               },
+    #             },
+    #           },
+    #           output_format_configuration: {
+    #             serializer: {
+    #               parquet_ser_de: {
+    #                 block_size_bytes: 1,
+    #                 page_size_bytes: 1,
+    #                 compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #                 enable_dictionary_compression: false,
+    #                 max_padding_bytes: 1,
+    #                 writer_version: "V1", # accepts V1, V2
+    #               },
+    #               orc_ser_de: {
+    #                 stripe_size_bytes: 1,
+    #                 block_size_bytes: 1,
+    #                 row_index_stride: 1,
+    #                 enable_padding: false,
+    #                 padding_tolerance: 1.0,
+    #                 compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #                 bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #                 bloom_filter_false_positive_probability: 1.0,
+    #                 dictionary_key_threshold: 1.0,
+    #                 format_version: "V0_11", # accepts V0_11, V0_12
+    #               },
+    #             },
+    #           },
+    #           enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
-    #   The ARN of the S3 bucket.
+    #   The ARN of the S3 bucket. For more information, see [Amazon Resource
+    #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -1194,7 +1488,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] processing_configuration
@@ -1209,6 +1503,12 @@ module Aws::Firehose
     #   The configuration for backup in Amazon S3.
     #   @return [Types::S3DestinationConfiguration]
     #
+    # @!attribute [rw] data_format_conversion_configuration
+    #   The serializer, deserializer, and schema for converting data from
+    #   the JSON format to the Parquet or ORC format before writing it to
+    #   Amazon S3.
+    #   @return [Types::DataFormatConversionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationConfiguration AWS API Documentation
     #
     class ExtendedS3DestinationConfiguration < Struct.new(
@@ -1221,27 +1521,39 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :processing_configuration,
       :s3_backup_mode,
-      :s3_backup_configuration)
+      :s3_backup_configuration,
+      :data_format_conversion_configuration)
       include Aws::Structure
     end
 
     # Describes a destination in Amazon S3.
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
-    #   The ARN of the S3 bucket.
+    #   The ARN of the S3 bucket. For more information, see [Amazon Resource
+    #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] prefix
     #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
-    #   delivered S3 files. You can specify an extra prefix to be added in
-    #   front of the time format prefix. If the prefix ends with a slash, it
-    #   appears as a folder in the S3 bucket. For more information, see
-    #   [Amazon S3 Object Name Format][1] in the *Amazon Kinesis Data
-    #   Firehose Developer Guide*.
+    #   delivered Amazon S3 files. You can specify an extra prefix to be
+    #   added in front of the time format prefix. If the prefix ends with a
+    #   slash, it appears as a folder in the S3 bucket. For more
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Data Firehose Developer Guide*.
     #
     #
     #
@@ -1263,7 +1575,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] processing_configuration
@@ -1278,6 +1590,12 @@ module Aws::Firehose
     #   The configuration for backup in Amazon S3.
     #   @return [Types::S3DestinationDescription]
     #
+    # @!attribute [rw] data_format_conversion_configuration
+    #   The serializer, deserializer, and schema for converting data from
+    #   the JSON format to the Parquet or ORC format before writing it to
+    #   Amazon S3.
+    #   @return [Types::DataFormatConversionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationDescription AWS API Documentation
     #
     class ExtendedS3DestinationDescription < Struct.new(
@@ -1290,7 +1608,8 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :processing_configuration,
       :s3_backup_mode,
-      :s3_backup_description)
+      :s3_backup_description,
+      :data_format_conversion_configuration)
       include Aws::Structure
     end
 
@@ -1355,14 +1674,74 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         data_format_conversion_configuration: {
+    #           schema_configuration: {
+    #             role_arn: "NonEmptyStringWithoutWhitespace",
+    #             catalog_id: "NonEmptyStringWithoutWhitespace",
+    #             database_name: "NonEmptyStringWithoutWhitespace",
+    #             table_name: "NonEmptyStringWithoutWhitespace",
+    #             region: "NonEmptyStringWithoutWhitespace",
+    #             version_id: "NonEmptyStringWithoutWhitespace",
+    #           },
+    #           input_format_configuration: {
+    #             deserializer: {
+    #               open_x_json_ser_de: {
+    #                 convert_dots_in_json_keys_to_underscores: false,
+    #                 case_insensitive: false,
+    #                 column_to_json_key_mappings: {
+    #                   "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #                 },
+    #               },
+    #               hive_json_ser_de: {
+    #                 timestamp_formats: ["NonEmptyString"],
+    #               },
+    #             },
+    #           },
+    #           output_format_configuration: {
+    #             serializer: {
+    #               parquet_ser_de: {
+    #                 block_size_bytes: 1,
+    #                 page_size_bytes: 1,
+    #                 compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #                 enable_dictionary_compression: false,
+    #                 max_padding_bytes: 1,
+    #                 writer_version: "V1", # accepts V1, V2
+    #               },
+    #               orc_ser_de: {
+    #                 stripe_size_bytes: 1,
+    #                 block_size_bytes: 1,
+    #                 row_index_stride: 1,
+    #                 enable_padding: false,
+    #                 padding_tolerance: 1.0,
+    #                 compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #                 bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #                 bloom_filter_false_positive_probability: 1.0,
+    #                 dictionary_key_threshold: 1.0,
+    #                 format_version: "V0_11", # accepts V0_11, V0_12
+    #               },
+    #             },
+    #           },
+    #           enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
-    #   The ARN of the S3 bucket.
+    #   The ARN of the S3 bucket. For more information, see [Amazon Resource
+    #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -1393,7 +1772,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @!attribute [rw] processing_configuration
@@ -1408,6 +1787,12 @@ module Aws::Firehose
     #   The Amazon S3 destination for backup.
     #   @return [Types::S3DestinationUpdate]
     #
+    # @!attribute [rw] data_format_conversion_configuration
+    #   The serializer, deserializer, and schema for converting data from
+    #   the JSON format to the Parquet or ORC format before writing it to
+    #   Amazon S3.
+    #   @return [Types::DataFormatConversionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationUpdate AWS API Documentation
     #
     class ExtendedS3DestinationUpdate < Struct.new(
@@ -1420,7 +1805,78 @@ module Aws::Firehose
       :cloud_watch_logging_options,
       :processing_configuration,
       :s3_backup_mode,
-      :s3_backup_update)
+      :s3_backup_update,
+      :data_format_conversion_configuration)
+      include Aws::Structure
+    end
+
+    # The native Hive / HCatalog JsonSerDe. Used by Kinesis Data Firehose
+    # for deserializing data, which means converting it from the JSON format
+    # in preparation for serializing it to the Parquet or ORC format. This
+    # is one of two deserializers you can choose, depending on which one
+    # offers the functionality you need. The other option is the OpenX
+    # SerDe.
+    #
+    # @note When making an API call, you may pass HiveJsonSerDe
+    #   data as a hash:
+    #
+    #       {
+    #         timestamp_formats: ["NonEmptyString"],
+    #       }
+    #
+    # @!attribute [rw] timestamp_formats
+    #   Indicates how you want Kinesis Data Firehose to parse the date and
+    #   time stamps that may be present in your input data JSON. To specify
+    #   these format strings, follow the pattern syntax of JodaTime's
+    #   DateTimeFormat format strings. For more information, see [Class
+    #   DateTimeFormat][1]. You can also use the special value `millis` to
+    #   parse time stamps in epoch milliseconds. If you don't specify a
+    #   format, Kinesis Data Firehose uses `java.sql.Timestamp::valueOf` by
+    #   default.
+    #
+    #
+    #
+    #   [1]: https://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/HiveJsonSerDe AWS API Documentation
+    #
+    class HiveJsonSerDe < Struct.new(
+      :timestamp_formats)
+      include Aws::Structure
+    end
+
+    # Specifies the deserializer you want to use to convert the format of
+    # the input data.
+    #
+    # @note When making an API call, you may pass InputFormatConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         deserializer: {
+    #           open_x_json_ser_de: {
+    #             convert_dots_in_json_keys_to_underscores: false,
+    #             case_insensitive: false,
+    #             column_to_json_key_mappings: {
+    #               "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #             },
+    #           },
+    #           hive_json_ser_de: {
+    #             timestamp_formats: ["NonEmptyString"],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] deserializer
+    #   Specifies which deserializer to use. You can choose either the
+    #   Apache Hive JSON SerDe or the OpenX JSON SerDe. If both are
+    #   non-null, the server rejects the request.
+    #   @return [Types::Deserializer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/InputFormatConfiguration AWS API Documentation
+    #
+    class InputFormatConfiguration < Struct.new(
+      :deserializer)
       include Aws::Structure
     end
 
@@ -1435,7 +1891,13 @@ module Aws::Firehose
     #
     # @!attribute [rw] awskms_key_arn
     #   The Amazon Resource Name (ARN) of the encryption key. Must belong to
-    #   the same AWS Region as the destination Amazon S3 bucket.
+    #   the same AWS Region as the destination Amazon S3 bucket. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KMSEncryptionConfig AWS API Documentation
@@ -1457,12 +1919,22 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] kinesis_stream_arn
-    #   The ARN of the source Kinesis data stream.
+    #   The ARN of the source Kinesis data stream. For more information, see
+    #   [Amazon Kinesis Data Streams ARN Format][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The ARN of the role that provides access to the source Kinesis data
-    #   stream.
+    #   stream. For more information, see [AWS Identity and Access
+    #   Management (IAM) ARN Format][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KinesisStreamSourceConfiguration AWS API Documentation
@@ -1478,10 +1950,22 @@ module Aws::Firehose
     #
     # @!attribute [rw] kinesis_stream_arn
     #   The Amazon Resource Name (ARN) of the source Kinesis data stream.
+    #   For more information, see [Amazon Kinesis Data Streams ARN
+    #   Format][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role used by the source Kinesis data stream.
+    #   The ARN of the role used by the source Kinesis data stream. For more
+    #   information, see [AWS Identity and Access Management (IAM) ARN
+    #   Format][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
     #   @return [String]
     #
     # @!attribute [rw] delivery_start_timestamp
@@ -1606,6 +2090,275 @@ module Aws::Firehose
     class ListTagsForDeliveryStreamOutput < Struct.new(
       :tags,
       :has_more_tags)
+      include Aws::Structure
+    end
+
+    # The OpenX SerDe. Used by Kinesis Data Firehose for deserializing data,
+    # which means converting it from the JSON format in preparation for
+    # serializing it to the Parquet or ORC format. This is one of two
+    # deserializers you can choose, depending on which one offers the
+    # functionality you need. The other option is the native Hive / HCatalog
+    # JsonSerDe.
+    #
+    # @note When making an API call, you may pass OpenXJsonSerDe
+    #   data as a hash:
+    #
+    #       {
+    #         convert_dots_in_json_keys_to_underscores: false,
+    #         case_insensitive: false,
+    #         column_to_json_key_mappings: {
+    #           "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] convert_dots_in_json_keys_to_underscores
+    #   When set to `true`, specifies that the names of the keys include
+    #   dots and that you want Kinesis Data Firehose to replace them with
+    #   underscores. This is useful because Apache Hive does not allow dots
+    #   in column names. For example, if the JSON contains a key whose name
+    #   is "a.b", you can define the column name to be "a\_b" when using
+    #   this option.
+    #
+    #   The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] case_insensitive
+    #   When set to `true`, which is the default, Kinesis Data Firehose
+    #   converts JSON keys to lowercase before deserializing them.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] column_to_json_key_mappings
+    #   Maps column names to JSON keys that aren't identical to the column
+    #   names. This is useful when the JSON contains keys that are Hive
+    #   keywords. For example, `timestamp` is a Hive keyword. If you have a
+    #   JSON key named `timestamp`, set this parameter to `\{"ts":
+    #   "timestamp"\}` to map this key to a column named `ts`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/OpenXJsonSerDe AWS API Documentation
+    #
+    class OpenXJsonSerDe < Struct.new(
+      :convert_dots_in_json_keys_to_underscores,
+      :case_insensitive,
+      :column_to_json_key_mappings)
+      include Aws::Structure
+    end
+
+    # A serializer to use for converting data to the ORC format before
+    # storing it in Amazon S3. For more information, see [Apache ORC][1].
+    #
+    #
+    #
+    # [1]: https://orc.apache.org/docs/
+    #
+    # @note When making an API call, you may pass OrcSerDe
+    #   data as a hash:
+    #
+    #       {
+    #         stripe_size_bytes: 1,
+    #         block_size_bytes: 1,
+    #         row_index_stride: 1,
+    #         enable_padding: false,
+    #         padding_tolerance: 1.0,
+    #         compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #         bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #         bloom_filter_false_positive_probability: 1.0,
+    #         dictionary_key_threshold: 1.0,
+    #         format_version: "V0_11", # accepts V0_11, V0_12
+    #       }
+    #
+    # @!attribute [rw] stripe_size_bytes
+    #   The number of bytes in each stripe. The default is 64 MiB and the
+    #   minimum is 8 MiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] block_size_bytes
+    #   The Hadoop Distributed File System (HDFS) block size. This is useful
+    #   if you intend to copy the data from Amazon S3 to HDFS before
+    #   querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis
+    #   Data Firehose uses this value for padding calculations.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] row_index_stride
+    #   The number of rows between index entries. The default is 10,000 and
+    #   the minimum is 1,000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_padding
+    #   Set this to `true` to indicate that you want stripes to be padded to
+    #   the HDFS block boundaries. This is useful if you intend to copy the
+    #   data from Amazon S3 to HDFS before querying. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] padding_tolerance
+    #   A number between 0 and 1 that defines the tolerance for block
+    #   padding as a decimal fraction of stripe size. The default value is
+    #   0.05, which means 5 percent of stripe size.
+    #
+    #   For the default values of 64 MiB ORC stripes and 256 MiB HDFS
+    #   blocks, the default block padding tolerance of 5 percent reserves a
+    #   maximum of 3.2 MiB for padding within the 256 MiB block. In such a
+    #   case, if the available size within the block is more than 3.2 MiB, a
+    #   new, smaller stripe is inserted to fit within that space. This
+    #   ensures that no stripe crosses block boundaries and causes remote
+    #   reads within a node-local task.
+    #
+    #   Kinesis Data Firehose ignores this parameter when
+    #   OrcSerDe$EnablePadding is `false`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] compression
+    #   The compression code to use over data blocks. The default is
+    #   `SNAPPY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] bloom_filter_columns
+    #   The column names for which you want Kinesis Data Firehose to create
+    #   bloom filters. The default is `null`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] bloom_filter_false_positive_probability
+    #   The Bloom filter false positive probability (FPP). The lower the
+    #   FPP, the bigger the Bloom filter. The default value is 0.05, the
+    #   minimum is 0, and the maximum is 1.
+    #   @return [Float]
+    #
+    # @!attribute [rw] dictionary_key_threshold
+    #   Represents the fraction of the total number of non-null rows. To
+    #   turn off dictionary encoding, set this fraction to a number that is
+    #   less than the number of distinct keys in a dictionary. To always use
+    #   dictionary encoding, set this threshold to 1.
+    #   @return [Float]
+    #
+    # @!attribute [rw] format_version
+    #   The version of the file to write. The possible values are `V0_11`
+    #   and `V0_12`. The default is `V0_12`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/OrcSerDe AWS API Documentation
+    #
+    class OrcSerDe < Struct.new(
+      :stripe_size_bytes,
+      :block_size_bytes,
+      :row_index_stride,
+      :enable_padding,
+      :padding_tolerance,
+      :compression,
+      :bloom_filter_columns,
+      :bloom_filter_false_positive_probability,
+      :dictionary_key_threshold,
+      :format_version)
+      include Aws::Structure
+    end
+
+    # Specifies the serializer that you want Kinesis Data Firehose to use to
+    # convert the format of your data before it writes it to Amazon S3.
+    #
+    # @note When making an API call, you may pass OutputFormatConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         serializer: {
+    #           parquet_ser_de: {
+    #             block_size_bytes: 1,
+    #             page_size_bytes: 1,
+    #             compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #             enable_dictionary_compression: false,
+    #             max_padding_bytes: 1,
+    #             writer_version: "V1", # accepts V1, V2
+    #           },
+    #           orc_ser_de: {
+    #             stripe_size_bytes: 1,
+    #             block_size_bytes: 1,
+    #             row_index_stride: 1,
+    #             enable_padding: false,
+    #             padding_tolerance: 1.0,
+    #             compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #             bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #             bloom_filter_false_positive_probability: 1.0,
+    #             dictionary_key_threshold: 1.0,
+    #             format_version: "V0_11", # accepts V0_11, V0_12
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] serializer
+    #   Specifies which serializer to use. You can choose either the ORC
+    #   SerDe or the Parquet SerDe. If both are non-null, the server rejects
+    #   the request.
+    #   @return [Types::Serializer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/OutputFormatConfiguration AWS API Documentation
+    #
+    class OutputFormatConfiguration < Struct.new(
+      :serializer)
+      include Aws::Structure
+    end
+
+    # A serializer to use for converting data to the Parquet format before
+    # storing it in Amazon S3. For more information, see [Apache
+    # Parquet][1].
+    #
+    #
+    #
+    # [1]: https://parquet.apache.org/documentation/latest/
+    #
+    # @note When making an API call, you may pass ParquetSerDe
+    #   data as a hash:
+    #
+    #       {
+    #         block_size_bytes: 1,
+    #         page_size_bytes: 1,
+    #         compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #         enable_dictionary_compression: false,
+    #         max_padding_bytes: 1,
+    #         writer_version: "V1", # accepts V1, V2
+    #       }
+    #
+    # @!attribute [rw] block_size_bytes
+    #   The Hadoop Distributed File System (HDFS) block size. This is useful
+    #   if you intend to copy the data from Amazon S3 to HDFS before
+    #   querying. The default is 256 MiB and the minimum is 64 MiB. Kinesis
+    #   Data Firehose uses this value for padding calculations.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] page_size_bytes
+    #   The Parquet page size. Column chunks are divided into pages. A page
+    #   is conceptually an indivisible unit (in terms of compression and
+    #   encoding). The minimum value is 64 KiB and the default is 1 MiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compression
+    #   The compression code to use over data blocks. The possible values
+    #   are `UNCOMPRESSED`, `SNAPPY`, and `GZIP`, with the default being
+    #   `SNAPPY`. Use `SNAPPY` for higher decompression speed. Use `GZIP` if
+    #   the compression ration is more important than speed.
+    #   @return [String]
+    #
+    # @!attribute [rw] enable_dictionary_compression
+    #   Indicates whether to enable dictionary compression.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_padding_bytes
+    #   The maximum amount of padding to apply. This is useful if you intend
+    #   to copy the data from Amazon S3 to HDFS before querying. The default
+    #   is 0.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] writer_version
+    #   Indicates the version of row format to output. The possible values
+    #   are `V1` and `V2`. The default is `V1`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ParquetSerDe AWS API Documentation
+    #
+    class ParquetSerDe < Struct.new(
+      :block_size_bytes,
+      :page_size_bytes,
+      :compression,
+      :enable_dictionary_compression,
+      :max_padding_bytes,
+      :writer_version)
       include Aws::Structure
     end
 
@@ -1916,7 +2669,13 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] cluster_jdbc_url
@@ -1988,7 +2747,13 @@ module Aws::Firehose
     # Describes a destination in Amazon Redshift.
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] cluster_jdbc_url
@@ -2026,7 +2791,7 @@ module Aws::Firehose
     #   @return [Types::S3DestinationDescription]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationDescription AWS API Documentation
@@ -2128,7 +2893,13 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] cluster_jdbc_url
@@ -2175,7 +2946,7 @@ module Aws::Firehose
     #   @return [Types::S3DestinationUpdate]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationUpdate AWS API Documentation
@@ -2249,11 +3020,22 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
-    #   The ARN of the S3 bucket.
+    #   The ARN of the S3 bucket. For more information, see [Amazon Resource
+    #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -2308,11 +3090,22 @@ module Aws::Firehose
     # Describes a destination in Amazon S3.
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
-    #   The ARN of the S3 bucket.
+    #   The ARN of the S3 bucket. For more information, see [Amazon Resource
+    #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -2344,7 +3137,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationDescription AWS API Documentation
@@ -2388,11 +3181,22 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the AWS credentials.
+    #   The Amazon Resource Name (ARN) of the AWS credentials. For more
+    #   information, see [Amazon Resource Names (ARNs) and AWS Service
+    #   Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] bucket_arn
-    #   The ARN of the S3 bucket.
+    #   The ARN of the S3 bucket. For more information, see [Amazon Resource
+    #   Names (ARNs) and AWS Service Namespaces][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
     # @!attribute [rw] prefix
@@ -2441,6 +3245,129 @@ module Aws::Firehose
       :compression_format,
       :encryption_configuration,
       :cloud_watch_logging_options)
+      include Aws::Structure
+    end
+
+    # Specifies the schema to which you want Kinesis Data Firehose to
+    # configure your data before it writes it to Amazon S3.
+    #
+    # @note When making an API call, you may pass SchemaConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "NonEmptyStringWithoutWhitespace",
+    #         catalog_id: "NonEmptyStringWithoutWhitespace",
+    #         database_name: "NonEmptyStringWithoutWhitespace",
+    #         table_name: "NonEmptyStringWithoutWhitespace",
+    #         region: "NonEmptyStringWithoutWhitespace",
+    #         version_id: "NonEmptyStringWithoutWhitespace",
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The role that Kinesis Data Firehose can use to access AWS Glue. This
+    #   role must be in the same account you use for Kinesis Data Firehose.
+    #   Cross-account roles aren't allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the AWS Glue Data Catalog. If you don't supply this, the
+    #   AWS account ID is used by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   Specifies the name of the AWS Glue database that contains the schema
+    #   for the output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   Specifies the AWS Glue table that contains the column information
+    #   that constitutes your data schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   If you don't specify an AWS Region, the default is the current
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   Specifies the table version for the output data schema. If you
+    #   don't specify this version ID, or if you set it to `LATEST`,
+    #   Kinesis Data Firehose uses the most recent version. This means that
+    #   any updates to the table are automatically picked up.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SchemaConfiguration AWS API Documentation
+    #
+    class SchemaConfiguration < Struct.new(
+      :role_arn,
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :region,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # The serializer that you want Kinesis Data Firehose to use to convert
+    # data to the target format before writing it to Amazon S3. Kinesis Data
+    # Firehose supports two types of serializers: the [ORC SerDe][1] and the
+    # [Parquet SerDe][2].
+    #
+    #
+    #
+    # [1]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/orc/OrcSerde.html
+    # [2]: https://hive.apache.org/javadocs/r1.2.2/api/org/apache/hadoop/hive/ql/io/parquet/serde/ParquetHiveSerDe.html
+    #
+    # @note When making an API call, you may pass Serializer
+    #   data as a hash:
+    #
+    #       {
+    #         parquet_ser_de: {
+    #           block_size_bytes: 1,
+    #           page_size_bytes: 1,
+    #           compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #           enable_dictionary_compression: false,
+    #           max_padding_bytes: 1,
+    #           writer_version: "V1", # accepts V1, V2
+    #         },
+    #         orc_ser_de: {
+    #           stripe_size_bytes: 1,
+    #           block_size_bytes: 1,
+    #           row_index_stride: 1,
+    #           enable_padding: false,
+    #           padding_tolerance: 1.0,
+    #           compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #           bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #           bloom_filter_false_positive_probability: 1.0,
+    #           dictionary_key_threshold: 1.0,
+    #           format_version: "V0_11", # accepts V0_11, V0_12
+    #         },
+    #       }
+    #
+    # @!attribute [rw] parquet_ser_de
+    #   A serializer to use for converting data to the Parquet format before
+    #   storing it in Amazon S3. For more information, see [Apache
+    #   Parquet][1].
+    #
+    #
+    #
+    #   [1]: https://parquet.apache.org/documentation/latest/
+    #   @return [Types::ParquetSerDe]
+    #
+    # @!attribute [rw] orc_ser_de
+    #   A serializer to use for converting data to the ORC format before
+    #   storing it in Amazon S3. For more information, see [Apache ORC][1].
+    #
+    #
+    #
+    #   [1]: https://orc.apache.org/docs/
+    #   @return [Types::OrcSerDe]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Serializer AWS API Documentation
+    #
+    class Serializer < Struct.new(
+      :parquet_ser_de,
+      :orc_ser_de)
       include Aws::Structure
     end
 
@@ -2560,7 +3487,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationConfiguration AWS API Documentation
@@ -2590,8 +3517,8 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] hec_token
-    #   This is a GUID you obtain from your Splunk cluster when you create a
-    #   new HEC endpoint.
+    #   A GUID you obtain from your Splunk cluster when you create a new HEC
+    #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] hec_acknowledgment_timeout_in_seconds
@@ -2625,7 +3552,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationDescription AWS API Documentation
@@ -2744,7 +3671,7 @@ module Aws::Firehose
     #   @return [Types::ProcessingConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   The CloudWatch logging options for your delivery stream.
+    #   The Amazon CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationUpdate AWS API Documentation
@@ -2965,6 +3892,55 @@ module Aws::Firehose
     #               log_stream_name: "LogStreamName",
     #             },
     #           },
+    #           data_format_conversion_configuration: {
+    #             schema_configuration: {
+    #               role_arn: "NonEmptyStringWithoutWhitespace",
+    #               catalog_id: "NonEmptyStringWithoutWhitespace",
+    #               database_name: "NonEmptyStringWithoutWhitespace",
+    #               table_name: "NonEmptyStringWithoutWhitespace",
+    #               region: "NonEmptyStringWithoutWhitespace",
+    #               version_id: "NonEmptyStringWithoutWhitespace",
+    #             },
+    #             input_format_configuration: {
+    #               deserializer: {
+    #                 open_x_json_ser_de: {
+    #                   convert_dots_in_json_keys_to_underscores: false,
+    #                   case_insensitive: false,
+    #                   column_to_json_key_mappings: {
+    #                     "NonEmptyStringWithoutWhitespace" => "NonEmptyString",
+    #                   },
+    #                 },
+    #                 hive_json_ser_de: {
+    #                   timestamp_formats: ["NonEmptyString"],
+    #                 },
+    #               },
+    #             },
+    #             output_format_configuration: {
+    #               serializer: {
+    #                 parquet_ser_de: {
+    #                   block_size_bytes: 1,
+    #                   page_size_bytes: 1,
+    #                   compression: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, SNAPPY
+    #                   enable_dictionary_compression: false,
+    #                   max_padding_bytes: 1,
+    #                   writer_version: "V1", # accepts V1, V2
+    #                 },
+    #                 orc_ser_de: {
+    #                   stripe_size_bytes: 1,
+    #                   block_size_bytes: 1,
+    #                   row_index_stride: 1,
+    #                   enable_padding: false,
+    #                   padding_tolerance: 1.0,
+    #                   compression: "NONE", # accepts NONE, ZLIB, SNAPPY
+    #                   bloom_filter_columns: ["NonEmptyStringWithoutWhitespace"],
+    #                   bloom_filter_false_positive_probability: 1.0,
+    #                   dictionary_key_threshold: 1.0,
+    #                   format_version: "V0_11", # accepts V0_11, V0_12
+    #                 },
+    #               },
+    #             },
+    #             enabled: false,
+    #           },
     #         },
     #         redshift_destination_update: {
     #           role_arn: "RoleARN",
@@ -3153,8 +4129,8 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] current_delivery_stream_version_id
-    #   Obtain this value from the `VersionId` result of
-    #   DeliveryStreamDescription. This value is required, and it helps the
+    #   Obtain this value from the **VersionId** result of
+    #   DeliveryStreamDescription. This value is required, and helps the
     #   service perform conditional operations. For example, if there is an
     #   interleaving update and this value is null, then the update
     #   destination fails. After the update is successful, the `VersionId`
