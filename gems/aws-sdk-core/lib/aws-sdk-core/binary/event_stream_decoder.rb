@@ -47,7 +47,11 @@ module Aws
       end
 
       def extract_stream_class(type_class)
-        Object.const_get(type_class.to_s.sub(/::Types::/, "::EventStreams::"))
+        parts = type_class.to_s.split('::')
+        parts.inject(Kernel) do |const, part_name|
+          part_name == 'Types' ? const.const_get('EventStreams')
+            : const.const_get(part_name)
+        end
       end
     end
 
