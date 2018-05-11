@@ -45,7 +45,9 @@ module Aws
 
         def parse_eventstream(body)
           # body contains an array of parsed event when they arrive
-          @rules[:payload_member].shape.struct_class.new(body)
+          @rules[:payload_member].shape.struct_class.new do |payload|
+            body.each { |event| payload << event }
+          end
         end
 
       end

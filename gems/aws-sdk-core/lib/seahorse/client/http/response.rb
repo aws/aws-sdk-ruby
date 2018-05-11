@@ -67,7 +67,7 @@ module Seahorse
         def signal_data(chunk)
           unless chunk == ''
             # record raw binary stream for eventstream
-            # body is used for emit events
+            # in case error happens, body is used for emit/track events
             @raw_stream.write(chunk)
             @body.write(chunk)
             emit(:data, chunk)
