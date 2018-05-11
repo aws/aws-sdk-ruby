@@ -7,7 +7,6 @@ else
   gem 'rake', require: false
 end
 gem 'jmespath'
-gem 'aws-eventstream'
 
 group :test do
 
