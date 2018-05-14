@@ -8,7 +8,7 @@ module BuildTools
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
     # Minimum `aws-sdk-core` version for eventstream support
-    EVENTSTREAM_CORE_VERSION = "3.21"
+    EVENTSTREAM_CORE_VERSION = "3.21.0"
     EVENTSTREAM_PLUGIN = "Aws::Plugins::EventStreamConfiguration"
 
     # @option options [String] :manifest_path (MANIFEST_PATH)
@@ -110,7 +110,9 @@ module BuildTools
     end
 
     def gem_dependencies(api, dependencies)
-      dependencies['aws-sdk-core'] = "~> #{core_version(api)}"
+      version_file = File.read("#{$GEMS_DIR}/aws-sdk-core/VERSION").rstrip
+      eventstream_version_string = eventstream?(api) ? ", >= #{EVENTSTREAM_CORE_VERSION}" : ''
+      dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{eventstream_version_string}"
 
       case api['metadata']['signatureVersion']
       when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
@@ -129,15 +131,6 @@ module BuildTools
         return true if ref['eventstream'] || ref['event']
       end
       false
-    end
-
-    def core_version(api)
-      version_file = File.read("#{$GEMS_DIR}/aws-sdk-core/VERSION").rstrip
-      if eventstream?(api)
-        EVENTSTREAM_CORE_VERSION
-      else
-        "#{version_file.split('.')[0]}"
-      end
     end
 
   end
