@@ -111,8 +111,8 @@ module BuildTools
 
     def gem_dependencies(api, dependencies)
       version_file = File.read("#{$GEMS_DIR}/aws-sdk-core/VERSION").rstrip
-      eventstream_version_string = eventstream?(api) ? ", >= #{EVENTSTREAM_CORE_VERSION}" : ''
-      dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}#{eventstream_version_string}"
+      eventstream_version_string = eventstream?(api) ? ", '>= #{EVENTSTREAM_CORE_VERSION}" : ''
+      dependencies['aws-sdk-core'] = "~> #{version_file.split('.')[0]}'#{eventstream_version_string}"
 
       case api['metadata']['signatureVersion']
       when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
