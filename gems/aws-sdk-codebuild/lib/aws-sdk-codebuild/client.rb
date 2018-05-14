@@ -498,6 +498,7 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.builds[0].environment.privileged_mode #=> Boolean
     #   resp.builds[0].environment.certificate #=> String
+    #   resp.builds[0].service_role #=> String
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
     #   resp.builds[0].logs.deep_link #=> String
@@ -786,7 +787,7 @@ module Aws::CodeBuild
     # per-build basis, you will be billed for both builds. Therefore, if you
     # are using AWS CodePipeline, we recommend that you disable webhooks in
     # CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For
-    # more information, see step 9 in [Change a Build Project's
+    # more information, see step 5 in [Change a Build Project's
     # Settings][1].
     #
     #
@@ -1126,6 +1127,19 @@ module Aws::CodeBuild
     #   A set of environment variables that overrides, for this build only,
     #   the latest ones already defined in the build project.
     #
+    # @option params [String] :source_type_override
+    #   A source input type for this build that overrides the source input
+    #   defined in the build project
+    #
+    # @option params [String] :source_location_override
+    #   A location that overrides for this build the source location for the
+    #   one defined in the build project.
+    #
+    # @option params [Types::SourceAuth] :source_auth_override
+    #   An authorization type for this build that overrides the one defined in
+    #   the build project. This override applies only if the build project's
+    #   source is BitBucket or GitHub.
+    #
     # @option params [Integer] :git_clone_depth_override
     #   The user-defined depth of history, with a minimum value of 0, that
     #   overrides, for this build only, any previous depth of history defined
@@ -1135,10 +1149,51 @@ module Aws::CodeBuild
     #   A build spec declaration that overrides, for this build only, the
     #   latest one already defined in the build project.
     #
+    # @option params [Boolean] :insecure_ssl_override
+    #   Enable this flag to override the insecure SSL setting that is
+    #   specified in the build project. The insecure SSL setting determines
+    #   whether to ignore SSL warnings while connecting to the project source
+    #   code. This override applies only if the build's source is GitHub
+    #   Enterprise.
+    #
+    # @option params [String] :environment_type_override
+    #   A container type for this build that overrides the one specified in
+    #   the build project.
+    #
+    # @option params [String] :image_override
+    #   The name of an image for this build that overrides the one specified
+    #   in the build project.
+    #
+    # @option params [String] :compute_type_override
+    #   The name of a compute type for this build that overrides the one
+    #   specified in the build project.
+    #
+    # @option params [String] :certificate_override
+    #   The name of a certificate for this build that overrides the one
+    #   specified in the build project.
+    #
+    # @option params [Types::ProjectCache] :cache_override
+    #   A ProjectCache object specified for this build that overrides the one
+    #   defined in the build project.
+    #
+    # @option params [String] :service_role_override
+    #   The name of a service role for this build that overrides the one
+    #   specified in the build project.
+    #
+    # @option params [Boolean] :privileged_mode_override
+    #   Enable this flag to override privileged mode in the build project.
+    #
     # @option params [Integer] :timeout_in_minutes_override
     #   The number of build timeout minutes, from 5 to 480 (8 hours), that
     #   overrides, for this build only, the latest setting already defined in
     #   the build project.
+    #
+    # @option params [String] :idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the StartBuild request. The token is included in the
+    #   StartBuild request and is valid for 12 hours. If you repeat the
+    #   StartBuild request with the same token, but change a parameter, AWS
+    #   CodeBuild returns a parameter mismatch error.
     #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1164,9 +1219,27 @@ module Aws::CodeBuild
     #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #       },
     #     ],
+    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #     source_location_override: "String",
+    #     source_auth_override: {
+    #       type: "OAUTH", # required, accepts OAUTH
+    #       resource: "String",
+    #     },
     #     git_clone_depth_override: 1,
     #     buildspec_override: "String",
+    #     insecure_ssl_override: false,
+    #     environment_type_override: "LINUX_CONTAINER", # accepts LINUX_CONTAINER
+    #     image_override: "NonEmptyString",
+    #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+    #     certificate_override: "String",
+    #     cache_override: {
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       location: "String",
+    #     },
+    #     service_role_override: "NonEmptyString",
+    #     privileged_mode_override: false,
     #     timeout_in_minutes_override: 1,
+    #     idempotency_token: "String",
     #   })
     #
     # @example Response structure
@@ -1209,6 +1282,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
+    #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
@@ -1287,6 +1361,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
+    #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
@@ -1547,7 +1622,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

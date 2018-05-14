@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2018-05-14)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoT1ClickProjects`.
+
+* Feature - Added support for enumerating regions for `Aws::IoT1ClickDevicesService`.
+
 1.86.0 (2018-05-10)
 ------------------
 

@@ -289,6 +289,8 @@ module Aws
             'ImportExport' => 'importexport',
             'Inspector' => 'inspector',
             'IoT' => 'iot',
+            'IoT1ClickDevicesService' => 'devices.iot1click',
+            'IoT1ClickProjects' => 'projects.iot1click',
             'IoTAnalytics' => 'iotanalytics',
             'IoTJobsDataPlane' => 'data.jobs.iot',
             'KMS' => 'kms',

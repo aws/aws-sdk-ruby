@@ -235,6 +235,12 @@
   "IoT": {
     "models": "iot/2015-05-28"
   },
+  "IoT1ClickDevicesService": {
+    "models": "iot1click-devices/2018-05-14"
+  },
+  "IoT1ClickProjects": {
+    "models": "iot1click-projects/2018-05-14"
+  },
   "IoTAnalytics": {
     "models": "iotanalytics/2017-11-27"
   },

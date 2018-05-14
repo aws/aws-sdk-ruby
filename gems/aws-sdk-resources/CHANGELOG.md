@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.16.0 (2018-05-14)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iot1clickprojects` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iot1clickdevicesservice` gem.
+
 3.15.0 (2018-04-23)
 ------------------
 

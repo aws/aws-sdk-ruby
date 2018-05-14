@@ -72,6 +72,8 @@ module Aws
   autoload :ImportExport, 'aws-sdk-importexport'
   autoload :Inspector, 'aws-sdk-inspector'
   autoload :IoT, 'aws-sdk-iot'
+  autoload :IoT1ClickDevicesService, 'aws-sdk-iot1clickdevicesservice'
+  autoload :IoT1ClickProjects, 'aws-sdk-iot1clickprojects'
   autoload :IoTAnalytics, 'aws-sdk-iotanalytics'
   autoload :IoTDataPlane, 'aws-sdk-iotdataplane'
   autoload :IoTJobsDataPlane, 'aws-sdk-iotjobsdataplane'

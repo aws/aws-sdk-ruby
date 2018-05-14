@@ -179,6 +179,10 @@ module Aws::CodeBuild
     #   Information about the build environment for this build.
     #   @return [Types::ProjectEnvironment]
     #
+    # @!attribute [rw] service_role
+    #   The name of a service role used for this build.
+    #   @return [String]
+    #
     # @!attribute [rw] logs
     #   Information about the build's logs in Amazon CloudWatch Logs.
     #   @return [Types::LogsLocation]
@@ -233,6 +237,7 @@ module Aws::CodeBuild
       :artifacts,
       :cache,
       :environment,
+      :service_role,
       :logs,
       :timeout_in_minutes,
       :build_complete,
@@ -1216,12 +1221,22 @@ module Aws::CodeBuild
     #     ignored if specified, because no build output will be produced.
     #
     #   * If `type` is set to `S3`, this is the name of the output artifact
-    #     object.
+    #     object. If you set the name to be a forward slash ("/"), then
+    #     the artifact is stored in the root of the output bucket.
     #
-    #   For example, if `path` is set to `MyArtifacts`, `namespaceType` is
-    #   set to `BUILD_ID`, and `name` is set to `MyArtifact.zip`, then the
-    #   output artifact would be stored in
-    #   `MyArtifacts/build-ID/MyArtifact.zip`.
+    #   For example:
+    #
+    #   * If `path` is set to `MyArtifacts`, `namespaceType` is set to
+    #     `BUILD_ID`, and `name` is set to `MyArtifact.zip`, then the output
+    #     artifact would be stored in `MyArtifacts/build-ID/MyArtifact.zip`.
+    #
+    #   * If `path` is empty, `namespaceType` is set to `NONE`, and `name`
+    #     is set to "`/`", then the output artifact would be stored in the
+    #     root of the output bucket.
+    #
+    #   * If `path` is set to `MyArtifacts`, `namespaceType` is set to
+    #     `BUILD_ID`, and `name` is set to "`/`", then the output artifact
+    #     would be stored in `MyArtifacts/build-ID `.
     #   @return [String]
     #
     # @!attribute [rw] packaging
@@ -1564,9 +1579,27 @@ module Aws::CodeBuild
     #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #           },
     #         ],
+    #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #         source_location_override: "String",
+    #         source_auth_override: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
     #         git_clone_depth_override: 1,
     #         buildspec_override: "String",
+    #         insecure_ssl_override: false,
+    #         environment_type_override: "LINUX_CONTAINER", # accepts LINUX_CONTAINER
+    #         image_override: "NonEmptyString",
+    #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+    #         certificate_override: "String",
+    #         cache_override: {
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           location: "String",
+    #         },
+    #         service_role_override: "NonEmptyString",
+    #         privileged_mode_override: false,
     #         timeout_in_minutes_override: 1,
+    #         idempotency_token: "String",
     #       }
     #
     # @!attribute [rw] project_name
@@ -1608,6 +1641,22 @@ module Aws::CodeBuild
     #   the latest ones already defined in the build project.
     #   @return [Array<Types::EnvironmentVariable>]
     #
+    # @!attribute [rw] source_type_override
+    #   A source input type for this build that overrides the source input
+    #   defined in the build project
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_override
+    #   A location that overrides for this build the source location for the
+    #   one defined in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_auth_override
+    #   An authorization type for this build that overrides the one defined
+    #   in the build project. This override applies only if the build
+    #   project's source is BitBucket or GitHub.
+    #   @return [Types::SourceAuth]
+    #
     # @!attribute [rw] git_clone_depth_override
     #   The user-defined depth of history, with a minimum value of 0, that
     #   overrides, for this build only, any previous depth of history
@@ -1619,11 +1668,61 @@ module Aws::CodeBuild
     #   latest one already defined in the build project.
     #   @return [String]
     #
+    # @!attribute [rw] insecure_ssl_override
+    #   Enable this flag to override the insecure SSL setting that is
+    #   specified in the build project. The insecure SSL setting determines
+    #   whether to ignore SSL warnings while connecting to the project
+    #   source code. This override applies only if the build's source is
+    #   GitHub Enterprise.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] environment_type_override
+    #   A container type for this build that overrides the one specified in
+    #   the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_override
+    #   The name of an image for this build that overrides the one specified
+    #   in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type_override
+    #   The name of a compute type for this build that overrides the one
+    #   specified in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_override
+    #   The name of a certificate for this build that overrides the one
+    #   specified in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_override
+    #   A ProjectCache object specified for this build that overrides the
+    #   one defined in the build project.
+    #   @return [Types::ProjectCache]
+    #
+    # @!attribute [rw] service_role_override
+    #   The name of a service role for this build that overrides the one
+    #   specified in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] privileged_mode_override
+    #   Enable this flag to override privileged mode in the build project.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] timeout_in_minutes_override
     #   The number of build timeout minutes, from 5 to 480 (8 hours), that
     #   overrides, for this build only, the latest setting already defined
     #   in the build project.
     #   @return [Integer]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the StartBuild request. The token is included in the
+    #   StartBuild request and is valid for 12 hours. If you repeat the
+    #   StartBuild request with the same token, but change a parameter, AWS
+    #   CodeBuild returns a parameter mismatch error.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
@@ -1632,9 +1731,21 @@ module Aws::CodeBuild
       :source_version,
       :artifacts_override,
       :environment_variables_override,
+      :source_type_override,
+      :source_location_override,
+      :source_auth_override,
       :git_clone_depth_override,
       :buildspec_override,
-      :timeout_in_minutes_override)
+      :insecure_ssl_override,
+      :environment_type_override,
+      :image_override,
+      :compute_type_override,
+      :certificate_override,
+      :cache_override,
+      :service_role_override,
+      :privileged_mode_override,
+      :timeout_in_minutes_override,
+      :idempotency_token)
       include Aws::Structure
     end
 
