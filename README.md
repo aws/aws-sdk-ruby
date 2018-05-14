@@ -292,6 +292,8 @@ to be backwards compatible.
 | AWS Identity and Access Management                    | IAM                             | 2010-05-08  |
 | AWS Import/Export                                     | ImportExport                    | 2010-06-01  |
 | AWS IoT                                               | IoT                             | 2015-05-28  |
+| AWS IoT 1-Click Devices Service                       | IoT1ClickDevicesService         | 2018-05-14  |
+| AWS IoT 1-Click Projects Service                      | IoT1ClickProjects               | 2018-05-14  |
 | AWS IoT Analytics                                     | IoTAnalytics                    | 2017-11-27  |
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
@@ -390,8 +392,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 
 ## License

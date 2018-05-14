@@ -92,6 +92,8 @@ module Aws
     ImportExport
     Inspector
     IoT
+    IoT1ClickDevicesService
+    IoT1ClickProjects
     IoTAnalytics
     IoTDataPlane
     IoTJobsDataPlane

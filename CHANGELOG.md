@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
+* Feature - Aws::IoT1ClickDevicesService - Added support for a new service, AWS IoT 1-Click Devices Service.
+
+* Feature - Aws::IoT1ClickProjects - Added support for a new service, AWS IoT 1-Click Projects Service.
+
 2.11.48 (2018-05-10)
 ------------------
 
