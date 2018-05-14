@@ -7,7 +7,6 @@
 
 require 'seahorse/client/plugins/content_length.rb'
 require 'aws-sdk-core/plugins/credentials_configuration.rb'
-require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
 require 'aws-sdk-core/plugins/param_validator.rb'
@@ -35,6 +34,7 @@ require 'aws-sdk-s3/plugins/sse_cpk.rb'
 require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
+require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3)
 
@@ -49,7 +49,6 @@ module Aws::S3
 
     add_plugin(Seahorse::Client::Plugins::ContentLength)
     add_plugin(Aws::Plugins::CredentialsConfiguration)
-    add_plugin(Aws::Plugins::EventStreamConfiguration)
     add_plugin(Aws::Plugins::Logging)
     add_plugin(Aws::Plugins::ParamConverter)
     add_plugin(Aws::Plugins::ParamValidator)
@@ -77,6 +76,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
     add_plugin(Aws::S3::Plugins::S3Signer)
     add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
 
     # @option options [required, Aws::CredentialProvider] :credentials
     #   Your AWS credentials. This can be an instance of any one of the

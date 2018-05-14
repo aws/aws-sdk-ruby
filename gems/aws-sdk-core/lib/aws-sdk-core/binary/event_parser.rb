@@ -59,9 +59,11 @@ module Aws
         # content_type = raw_event.headers.delete(":content-type").value
 
         # Pending
-        raise Aws::Errors::EventStreamParserError.new(
-          'non eventstream member at response is not supported yet'
-        ) if event_type == 'initial-response'
+        if event_type == 'initial-response'
+          raise Aws::Errors::EventStreamParserError.new(
+            'non eventstream member at response is not supported yet'
+          )
+        end
 
         # locate event from eventstream
         name, ref = @rules.shape.member_by_location_name(event_type)
