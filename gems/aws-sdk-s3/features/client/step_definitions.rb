@@ -366,7 +366,7 @@ Then(/^"([^"]*)" event should be processed "(\d+)" times when it arrives$/) do |
   expect(@tracker[type.to_sym].size).to eq(times.to_i)
 end
 
-When("I select it with query {string} with event stream handler") do |string|
+When(/^I select it with query "([^"]*)" with event stream handler$/) do |string|
   @tracker = Hash.new([])
   handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
   handler.on_records_event do |e|
