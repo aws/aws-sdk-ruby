@@ -11,6 +11,7 @@ module Seahorse
           @required = false
           @deprecated = false
           @location = nil
+          @location_name = nil
           options.each do |key, value|
             if key == :metadata
               value.each do |k,v|
