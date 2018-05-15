@@ -10,6 +10,7 @@ module Seahorse
           @metadata = {}
           @required = false
           @deprecated = false
+          @location = nil
           options.each do |key, value|
             if key == :metadata
               value.each do |k,v|
