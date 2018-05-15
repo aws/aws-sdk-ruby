@@ -363,7 +363,7 @@ When(/^I select it with query "([^"]*)" with block$/) do |query|
 end
 
 Then(/^"([^"]*)" event should be processed "(\d+)" times when it arrives$/) do |type, times|
-  expect(@tracker[type.to_sym].size).to eq(times)
+  expect(@tracker[type.to_sym].size).to eq(times.to_i)
 end
 
 When("I select it with query {string} with event stream handler") do |string|
