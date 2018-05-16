@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.51 (2018-05-16)
+------------------
+
 * Feature - Aws::SecretsManager - Updated the documentation for AWS Secrets Manager.
 
 * Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
