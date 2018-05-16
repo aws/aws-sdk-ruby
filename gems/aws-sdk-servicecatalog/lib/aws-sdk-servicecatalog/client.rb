@@ -2036,6 +2036,14 @@ module Aws::ServiceCatalog
     # @option params [Integer] :page_size
     #   The maximum number of items to return with this call.
     #
+    # @option params [String] :portfolio_share_type
+    #   The type of shared portfolios to list. The default is to list imported
+    #   portfolios.
+    #
+    #   * `AWS_SERVICECATALOG` - List default portfolios
+    #
+    #   * `IMPORTED` - List imported portfolios
+    #
     # @return [Types::ListAcceptedPortfolioSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAcceptedPortfolioSharesOutput#portfolio_details #portfolio_details} => Array&lt;Types::PortfolioDetail&gt;
@@ -2047,6 +2055,7 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     page_token: "PageToken",
     #     page_size: 1,
+    #     portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG
     #   })
     #
     # @example Response structure
@@ -3647,7 +3656,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -176,7 +176,7 @@ module Aws::SecretsManager
     #   environments, see [Using JSON for Parameters][1] in the *AWS CLI
     #   User Guide*. For example:
     #
-    #   `[\{"Key":"username","Value":"bob"\},\{"Key":"password","Value":"abc123xyz456"\}]`
+    #   `[\{"username":"bob"\},\{"password":"abc123xyz456"\}]`
     #
     #   If your command-line tool or SDK requires quotation marks around the
     #   parameter, you should use single quotes to avoid confusion with the
@@ -914,6 +914,14 @@ module Aws::SecretsManager
     #   environments, see [Using JSON for Parameters][1] in the *AWS CLI
     #   User Guide*.
     #
+    #   For example:
+    #
+    #   `[\{"username":"bob"\},\{"password":"abc123xyz456"\}]`
+    #
+    #   If your command-line tool or SDK requires quotation marks around the
+    #   parameter, you should use single quotes to avoid confusion with the
+    #   double quotes required in the JSON text.
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
@@ -1496,7 +1504,13 @@ module Aws::SecretsManager
     #   string argument and specify key/value pairs. For information on how
     #   to format a JSON parameter for the various command line tool
     #   environments, see [Using JSON for Parameters][1] in the *AWS CLI
-    #   User Guide*.
+    #   User Guide*. For example:
+    #
+    #   `[\{"username":"bob"\},\{"password":"abc123xyz456"\}]`
+    #
+    #   If your command-line tool or SDK requires quotation marks around the
+    #   parameter, you should use single quotes to avoid confusion with the
+    #   double quotes required in the JSON text.
     #
     #
     #
