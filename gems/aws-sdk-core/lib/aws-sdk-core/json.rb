@@ -23,7 +23,7 @@ module Aws
 
       def load(json)
         ENGINE.load(json, *ENGINE_LOAD_OPTIONS)
-      rescue ENGINE_ERROR => e
+      rescue *ENGINE_ERROR => e
         raise ParseError.new(e)
       end
 
@@ -45,15 +45,15 @@ module Aws
       end
 
       def json_engine
-        [JSON, [], [], JSON::ParserError]
+        [JSON, [], [], [JSON::ParserError]]
       end
 
       def oj_parse_error
         if Oj.const_defined?('ParseError')
-          Oj::ParseError
+          [Oj::ParseError]
         else
-          SyntaxError
-        end
+          [SyntaxError]
+        end << EncodingError
       end
 
     end

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Rescue `EncodingError` raised by `oj` on JSON documents with new line.
+
 3.20.2 (2018-04-26)
 ------------------
 
