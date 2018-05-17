@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2018-05-17)
+------------------
+
 * Feature - Support S3 `SelectObjectContent` API
 
 1.10.0 (2018-05-07)

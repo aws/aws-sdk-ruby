@@ -1883,7 +1883,7 @@ module Aws::CognitoIdentityProvider
     #   resp = client.create_identity_provider({
     #     user_pool_id: "UserPoolIdType", # required
     #     provider_name: "ProviderNameTypeV1", # required
-    #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon
+    #     provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, OIDC
     #     provider_details: { # required
     #       "StringType" => "StringType",
     #     },
@@ -1897,7 +1897,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -2268,6 +2268,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
+    #   resp.user_pool.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPool AWS API Documentation
     #
@@ -2309,13 +2310,45 @@ module Aws::CognitoIdentityProvider
     #   on this client.
     #
     # @option params [Array<String>] :callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #
     # @option params [Array<String>] :logout_urls
     #   A list of allowed logout URLs for the identity providers.
     #
     # @option params [String] :default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #
     # @option params [Array<String>] :allowed_o_auth_flows
     #   Set to `code` to initiate a code grant flow, which provides an
@@ -2663,7 +2696,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -2906,6 +2939,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #   resp.user_pool.user_pool_add_ons.advanced_security_mode #=> String, one of "OFF", "AUDIT", "ENFORCED"
+    #   resp.user_pool.arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPool AWS API Documentation
     #
@@ -3235,7 +3269,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -3696,7 +3730,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.providers #=> Array
     #   resp.providers[0].provider_name #=> String
-    #   resp.providers[0].provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.providers[0].provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.providers[0].last_modified_date #=> Time
     #   resp.providers[0].creation_date #=> Time
     #   resp.next_token #=> String
@@ -4871,7 +4905,7 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.identity_provider.user_pool_id #=> String
     #   resp.identity_provider.provider_name #=> String
-    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon"
+    #   resp.identity_provider.provider_type #=> String, one of "SAML", "Facebook", "Google", "LoginWithAmazon", "OIDC"
     #   resp.identity_provider.provider_details #=> Hash
     #   resp.identity_provider.provider_details["StringType"] #=> String
     #   resp.identity_provider.attribute_mapping #=> Hash
@@ -5161,13 +5195,45 @@ module Aws::CognitoIdentityProvider
     #   on this client.
     #
     # @option params [Array<String>] :callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #
     # @option params [Array<String>] :logout_urls
     #   A list of allowed logout URLs for the identity providers.
     #
     # @option params [String] :default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #
     # @option params [Array<String>] :allowed_o_auth_flows
     #   Set to `code` to initiate a code grant flow, which provides an
@@ -5260,7 +5326,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # Use this API to register a user's entered TOTP code and mark the
-    # user's software token MFA status as "verified" if successful,
+    # user's software token MFA status as "verified" if successful. The
+    # request takes an access token or a session string, but not both.
     #
     # @option params [String] :access_token
     #   The access token.
@@ -5346,7 +5413,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

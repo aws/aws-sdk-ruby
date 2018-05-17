@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.21.0 (2018-05-17)
+------------------
+
 * Feature - Support `vnd.amazon.event-stream` binary stream protocol over HTTP1.1
 
 3.20.2 (2018-04-26)

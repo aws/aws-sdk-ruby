@@ -937,6 +937,15 @@ module Aws::CognitoIdentityProvider
     #   call. This is returned to you in the `AdminInitiateAuth` response if
     #   you need to pass another challenge.
     #
+    #   * `MFA_SETUP`\: If MFA is required, users who do not have at least
+    #     one of the MFA methods set up are presented with an `MFA_SETUP`
+    #     challenge. The user must set up at least one MFA type to continue
+    #     to authenticate.
+    #
+    #   * `SELECT_MFA_TYPE`\: Selects the MFA type. Valid MFA options are
+    #     `SMS_MFA` for text SMS MFA, and `SOFTWARE_TOKEN_MFA` for TOTP
+    #     software token MFA.
+    #
     #   * `SMS_MFA`\: Next challenge is to supply an `SMS_MFA_CODE`,
     #     delivered via SMS.
     #
@@ -1902,7 +1911,7 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] expires_in
-    #   The expiration period of the authentication result.
+    #   The expiration period of the authentication result in seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] token_type
@@ -2396,7 +2405,7 @@ module Aws::CognitoIdentityProvider
     #       {
     #         user_pool_id: "UserPoolIdType", # required
     #         provider_name: "ProviderNameTypeV1", # required
-    #         provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon
+    #         provider_type: "SAML", # required, accepts SAML, Facebook, Google, LoginWithAmazon, OIDC
     #         provider_details: { # required
     #           "StringType" => "StringType",
     #         },
@@ -2623,7 +2632,24 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity
+    #   providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [Array<String>]
     #
     # @!attribute [rw] logout_urls
@@ -2632,6 +2658,22 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
@@ -5712,8 +5754,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Boolean]
     #
     # @!attribute [rw] mutable
-    #   Specifies whether the attribute can be changed once it has been
-    #   created.
+    #   Specifies whether the value of the attribute can be changed.
     #   @return [Boolean]
     #
     # @!attribute [rw] required
@@ -6762,7 +6803,24 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity
+    #   providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [Array<String>]
     #
     # @!attribute [rw] logout_urls
@@ -6771,6 +6829,22 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
@@ -7228,7 +7302,24 @@ module Aws::CognitoIdentityProvider
     #   @return [Array<String>]
     #
     # @!attribute [rw] callback_urls
-    #   A list of allowed callback URLs for the identity providers.
+    #   A list of allowed redirect (callback) URLs for the identity
+    #   providers.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [Array<String>]
     #
     # @!attribute [rw] logout_urls
@@ -7237,6 +7328,22 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] default_redirect_uri
     #   The default redirect URI. Must be in the `CallbackURLs` list.
+    #
+    #   A redirect URI must:
+    #
+    #   * Be an absolute URI.
+    #
+    #   * Be registered with the authorization server.
+    #
+    #   * Not use HTTP without TLS (i.e. use HTTPS instead of HTTP).
+    #
+    #   * Not include a fragment component.
+    #
+    #   See [OAuth 2.0 - Redirection Endpoint][1].
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc6749#section-3.1.2
     #   @return [String]
     #
     # @!attribute [rw] allowed_o_auth_flows
@@ -7366,7 +7473,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::UserPoolPolicyType]
     #
     # @!attribute [rw] lambda_config
-    #   The AWS Lambda triggers associated with tue user pool.
+    #   The AWS Lambda triggers associated with the user pool.
     #   @return [Types::LambdaConfigType]
     #
     # @!attribute [rw] status
@@ -7479,6 +7586,10 @@ module Aws::CognitoIdentityProvider
     #   The user pool add-ons.
     #   @return [Types::UserPoolAddOnsType]
     #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the user pool.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolType AWS API Documentation
     #
     class UserPoolType < Struct.new(
@@ -7508,7 +7619,8 @@ module Aws::CognitoIdentityProvider
       :email_configuration_failure,
       :domain,
       :admin_create_user_config,
-      :user_pool_add_ons)
+      :user_pool_add_ons,
+      :arn)
       include Aws::Structure
     end
 

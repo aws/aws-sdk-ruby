@@ -1661,6 +1661,7 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:domain, Shapes::ShapeRef.new(shape: DomainType, location_name: "Domain"))
     UserPoolType.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
     UserPoolType.add_member(:user_pool_add_ons, Shapes::ShapeRef.new(shape: UserPoolAddOnsType, location_name: "UserPoolAddOns"))
+    UserPoolType.add_member(:arn, Shapes::ShapeRef.new(shape: ArnType, location_name: "Arn"))
     UserPoolType.struct_class = Types::UserPoolType
 
     UserType.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username"))
