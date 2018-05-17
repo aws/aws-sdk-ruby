@@ -12,10 +12,14 @@ module AwsSdkCodeGenerator
       @api = options.fetch(:api)
       @client_examples = options.fetch(:client_examples, [])
       @examples = options.fetch(:examples)
+      @module_name = options.fetch(:module_name)
     end
 
     # @return [String]
     attr_reader :method_name
+
+    # @return [String]
+    attr_reader :module_name
 
     # @return [Hash]
     attr_reader :operation
@@ -37,6 +41,7 @@ module AwsSdkCodeGenerator
         option_tags(operation, api),
         return_tag(operation, api),
         generated_examples(operation, api),
+        eventstream_examples(module_name, method_name, operation, api),
         shared_examples(examples, operation, api),
         given_examples(client_examples),
         request_syntax_example(method_name, operation, api),
@@ -159,6 +164,18 @@ module AwsSdkCodeGenerator
 
     def generated_examples(operation, api)
       nil
+    end
+
+    def eventstream_examples(module_name, method_name, operation, api)
+      return unless !!Helper.eventstream_output?(operation, api)
+      EventStreamExample.new(
+        api: api,
+        operation: operation,
+        method_name: method_name,
+        module_name: module_name,
+        receiver: 'client',
+        resp_var: 'resp'
+      ).format
     end
 
     def given_examples(client_examples)

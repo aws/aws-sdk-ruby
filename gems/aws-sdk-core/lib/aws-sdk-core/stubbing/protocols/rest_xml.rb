@@ -6,11 +6,15 @@ module Aws
         include Seahorse::Model::Shapes
 
         def body_for(api, operation, rules, data)
-          xml = []
-          rules.location_name = operation.name + 'Result'
-          rules['xmlNamespace'] = { 'uri' => api.metadata['xmlNamespace'] }
-          Xml::Builder.new(rules, target:xml).to_xml(data)
-          xml.join
+          if eventstream?(rules)
+            encode_eventstream_response(rules, data, Xml::Builder)
+          else
+            xml = []
+            rules.location_name = operation.name + 'Result'
+            rules['xmlNamespace'] = { 'uri' => api.metadata['xmlNamespace'] }
+            Xml::Builder.new(rules, target:xml).to_xml(data)
+            xml.join
+          end
         end
 
         def stub_error(error_code)

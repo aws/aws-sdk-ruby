@@ -1,0 +1,38 @@
+{{#generated_src_warning}}
+{{generated_src_warning}}
+{{/generated_src_warning}}
+module {{module_name}}
+  module EventStreams
+    {{#eventstreams}}
+    class {{class_name}}
+
+      def initialize
+        @event_emitter = EventEmitter.new
+      end
+
+      {{#types}}
+      def on_{{.}}_event(&block)
+        @event_emitter.on(:{{.}}, Proc.new)
+      end
+
+      {{/types}}
+      def on_error_event(&block)
+        @event_emitter.on(:error, Proc.new)
+      end
+
+      def on_event(&block)
+        {{#types}}
+        on_{{.}}_event(&block)
+        {{/types}}
+      end
+
+      # @api private
+      # @return EventEmitter
+      attr_reader :event_emitter
+
+    end
+    {{/eventstreams}}
+
+  end
+end
+

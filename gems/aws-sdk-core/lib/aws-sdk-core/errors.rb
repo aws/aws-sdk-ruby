@@ -34,6 +34,41 @@ module Aws
       end
     end
 
+    # Raised when EventStream Parser failed to parse
+    # a raw event message
+    class EventStreamParserError < RuntimeError; end
+
+    # Error event in an event stream which has event_type :error
+    # error code and error message can be retrieved when available.
+    #
+    # example usage:
+    #
+    #   client.stream_foo(name: 'bar') do |event|
+    #     stream.on_error_event do |event|
+    #       puts "Error #{event.error_code}: #{event.error_message}"
+    #       raise event
+    #     end
+    #   end
+    #
+    class EventError < RuntimeError
+
+      def initialize(event_type, code, message)
+        @event_type = event_type
+        @error_code = code
+        @error_message = message
+      end
+
+      # @return [Symbol]
+      attr_reader :event_type
+
+      # @return [String]
+      attr_reader :error_code
+
+      # @return [String]
+      attr_reader :error_message
+
+    end
+
     # Various plugins perform client-side checksums of responses.
     # This error indicates a checksum failed.
     class ChecksumError < RuntimeError; end

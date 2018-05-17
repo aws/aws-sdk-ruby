@@ -1,4 +1,5 @@
 require 'openssl'
+require "csv"
 
 Before("@s3", "@client") do
   @client = Aws::S3::Client.new
@@ -293,4 +294,143 @@ Then(/^I can streaming download key "([^"]*)"$/) do |key|
   end
   expect(resp.body).to be_a(Seahorse::Client::BlockIO)
   expect(resp.context[:response_target]).to be_a(Proc)
+end
+
+Given(/^I put a file with content:$/) do |table|
+  @select_file_name = "test.csv"
+  csv = Tempfile.new("file.csv")
+  CSV.open(csv.path, "wb") do |f|
+    table.raw.each {|row| f << row}
+  end
+  @client.put_object(
+    bucket: @bucket_name,
+    key: @select_file_name,
+    body: File.read(csv.path)
+  ) 
+  csv.unlink
+end
+
+When(/^I select it with query "([^"]*)"$/) do |query|
+  @select_resp = @client.select_object_content(
+    bucket: @bucket_name,
+    key: @select_file_name,
+    expression_type: "SQL",
+    expression: query,
+    input_serialization: {
+      csv: {
+        file_header_info: "USE"
+      }
+    },
+    output_serialization: {csv: {}}
+  )
+  @tracker = Hash.new([])
+end
+
+Then(/^response should contain "([^"]*)" event$/) do |type|
+  @select_resp.payload.each do |event|
+    next unless event.event_type == type.to_sym
+    @tracker[type.to_sym] << event
+  end
+  expect(@tracker[:records]).not_to be_nil
+end
+
+Then(/^the event should have payload member with content "([^"]*)"$/) do |payload|
+  @tracker[:records].each do |e|
+    # same event process twice, same string IO
+    e.payload.rewind
+    expect(e.payload.read.strip).to eq(payload)
+  end
+end
+
+When(/^I select it with query "([^"]*)" with block$/) do |query|
+  @tracker = Hash.new([])
+  @select_resp = @client.select_object_content(
+    bucket: @bucket_name,
+    key: @select_file_name,
+    expression_type: "SQL",
+    expression: query,
+    input_serialization: {
+      csv: {
+        file_header_info: "USE"
+      }
+    },
+    output_serialization: {csv: {}}
+  ) do |stream|
+    stream.on_records_event do |e|
+      @tracker[e.event_type] << e
+    end
+  end
+end
+
+Then(/^"([^"]*)" event should be processed "(\d+)" times when it arrives$/) do |type, times|
+  expect(@tracker[type.to_sym].size).to eq(times.to_i)
+end
+
+When(/^I select it with query "([^"]*)" with event stream handler$/) do |string|
+  @tracker = Hash.new([])
+  handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
+  handler.on_records_event do |e|
+    @tracker[:records] << e
+  end
+  @select_resp = @client.select_object_content(
+    bucket: @bucket_name,
+    key: @select_file_name,
+    expression_type: "SQL",
+    expression: string,
+    input_serialization: {
+      csv: {
+        file_header_info: "USE"
+      }
+    },
+    output_serialization: {csv: {}},
+    event_stream_handler: handler
+  )
+end
+
+When(/^I select it with query "([^"]*)" with Proc Object$/) do |query|
+  @tracker = Hash.new([])
+  handler = Proc.new do |stream|
+    stream.on_records_event do |e|
+      @tracker[:records] << e
+    end
+  end
+  @select_resp = @client.select_object_content(
+    bucket: @bucket_name,
+    key: @select_file_name,
+    expression_type: "SQL",
+    expression: query,
+    input_serialization: {
+      csv: {
+        file_header_info: "USE"
+      }
+    },
+    output_serialization: {csv: {}},
+    event_stream_handler: handler
+  )
+end
+
+When(/^I select it with query "([^"]*)" with handler and block$/) do |query|
+  @tracker = Hash.new([])
+  handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
+  handler.on_records_event do |e|
+    @tracker[:records] << e
+  end
+  @select_resp = @client.select_object_content(
+    bucket: @bucket_name,
+    key: @select_file_name,
+    expression_type: "SQL",
+    expression: query,
+    input_serialization: {
+      csv: {
+        file_header_info: "USE"
+      }
+    },
+    output_serialization: {csv: {}},
+    event_stream_handler: handler
+  ) do |stream|
+    stream.on_records_event do |e|
+      @tracker[:records] << e
+    end
+  end
+
 end

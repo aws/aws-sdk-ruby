@@ -871,6 +871,13 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ContinuationEvent AWS API Documentation
+    #
+    class ContinuationEvent < Struct.new(
+      :event_type)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] copy_object_result
     #   @return [Types::CopyObjectResult]
     #
@@ -2111,6 +2118,13 @@ module Aws::S3
     #
     class EncryptionConfiguration < Struct.new(
       :replica_kms_key_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EndEvent AWS API Documentation
+    #
+    class EndEvent < Struct.new(
+      :event_type)
       include Aws::Structure
     end
 
@@ -5807,6 +5821,18 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] details
+    #   The Progress event details.
+    #   @return [Types::Progress]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ProgressEvent AWS API Documentation
+    #
+    class ProgressEvent < Struct.new(
+      :details,
+      :event_type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutBucketAccelerateConfigurationRequest
     #   data as a hash:
     #
@@ -7209,6 +7235,18 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] payload
+    #   The byte array of partial, one or more result records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RecordsEvent AWS API Documentation
+    #
+    class RecordsEvent < Struct.new(
+      :payload,
+      :event_type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass Redirect
     #   data as a hash:
     #
@@ -7419,6 +7457,13 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RequestProgress
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
     # @!attribute [rw] enabled
     #   Specifies whether periodic QueryProgress frames should be sent.
     #   Valid values: TRUE, FALSE. Default value: FALSE.
@@ -7971,6 +8016,146 @@ module Aws::S3
     #
     class SSES3 < Aws::EmptyStructure; end
 
+    # @!attribute [rw] payload
+    #   @return [Types::SelectObjectContentEventStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentOutput AWS API Documentation
+    #
+    class SelectObjectContentOutput < Struct.new(
+      :payload)
+      include Aws::Structure
+    end
+
+    # Request to filter the contents of an Amazon S3 object based on a
+    # simple Structured Query Language (SQL) statement. In the request,
+    # along with the SQL expression, you must also specify a data
+    # serialization format (JSON or CSV) of the object. Amazon S3 uses this
+    # to parse object data into records, and returns only records that match
+    # the specified SQL expression. You must also specify the data
+    # serialization format for the response. For more information, go to
+    # [S3Select API Documentation][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
+    #
+    # @note When making an API call, you may pass SelectObjectContentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         key: "ObjectKey", # required
+    #         sse_customer_algorithm: "SSECustomerAlgorithm",
+    #         sse_customer_key: "SSECustomerKey",
+    #         sse_customer_key_md5: "SSECustomerKeyMD5",
+    #         expression: "Expression", # required
+    #         expression_type: "SQL", # required, accepts SQL
+    #         request_progress: {
+    #           enabled: false,
+    #         },
+    #         input_serialization: { # required
+    #           csv: {
+    #             file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #             comments: "Comments",
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #           compression_type: "NONE", # accepts NONE, GZIP
+    #           json: {
+    #             type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #           },
+    #         },
+    #         output_serialization: { # required
+    #           csv: {
+    #             quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #           json: {
+    #             record_delimiter: "RecordDelimiter",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The S3 Bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The Object Key.
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_algorithm
+    #   The SSE Algorithm used to encrypt the object. For more information,
+    #   go to [ Server-Side Encryption (Using Customer-Provided Encryption
+    #   Keys][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_key
+    #   The SSE Customer Key. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_key_md5
+    #   The SSE Customer Key MD5. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The expression that is used to query the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression_type
+    #   The type of the provided expression (e.g., SQL).
+    #   @return [String]
+    #
+    # @!attribute [rw] request_progress
+    #   Specifies if periodic request progress information should be
+    #   enabled.
+    #   @return [Types::RequestProgress]
+    #
+    # @!attribute [rw] input_serialization
+    #   Describes the format of the data in the object that is being
+    #   queried.
+    #   @return [Types::InputSerialization]
+    #
+    # @!attribute [rw] output_serialization
+    #   Describes the format of the data that you want Amazon S3 to return
+    #   in response.
+    #   @return [Types::OutputSerialization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentRequest AWS API Documentation
+    #
+    class SelectObjectContentRequest < Struct.new(
+      :bucket,
+      :key,
+      :sse_customer_algorithm,
+      :sse_customer_key,
+      :sse_customer_key_md5,
+      :expression,
+      :expression_type,
+      :request_progress,
+      :input_serialization,
+      :output_serialization)
+      include Aws::Structure
+    end
+
     # Describes the parameters for Select job types.
     #
     # @note When making an API call, you may pass SelectParameters
@@ -8181,6 +8366,18 @@ module Aws::S3
       :bytes_scanned,
       :bytes_processed,
       :bytes_returned)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] details
+    #   The Stats event details.
+    #   @return [Types::Stats]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StatsEvent AWS API Documentation
+    #
+    class StatsEvent < Struct.new(
+      :details,
+      :event_type)
       include Aws::Structure
     end
 
@@ -8852,6 +9049,25 @@ module Aws::S3
       :redirect_all_requests_to,
       :routing_rules)
       include Aws::Structure
+    end
+
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentEventStream AWS API Documentation
+    #
+    class SelectObjectContentEventStream < Enumerator
+
+      def event_types
+        [
+          :records,
+          :stats,
+          :progress,
+          :cont,
+          :end
+        ]
+      end
+
     end
 
   end

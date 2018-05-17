@@ -79,6 +79,7 @@ module Aws::S3
     ContentMD5 = Shapes::StringShape.new(name: 'ContentMD5')
     ContentRange = Shapes::StringShape.new(name: 'ContentRange')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    ContinuationEvent = Shapes::StructureShape.new(name: 'ContinuationEvent')
     CopyObjectOutput = Shapes::StructureShape.new(name: 'CopyObjectOutput')
     CopyObjectRequest = Shapes::StructureShape.new(name: 'CopyObjectRequest')
     CopyObjectResult = Shapes::StructureShape.new(name: 'CopyObjectResult')
@@ -136,6 +137,7 @@ module Aws::S3
     EncodingType = Shapes::StringShape.new(name: 'EncodingType')
     Encryption = Shapes::StructureShape.new(name: 'Encryption')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
+    EndEvent = Shapes::StructureShape.new(name: 'EndEvent')
     Error = Shapes::StructureShape.new(name: 'Error')
     ErrorDocument = Shapes::StructureShape.new(name: 'ErrorDocument')
     Errors = Shapes::ListShape.new(name: 'Errors', flattened: true)
@@ -343,6 +345,7 @@ module Aws::S3
     Policy = Shapes::StringShape.new(name: 'Policy')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
     Progress = Shapes::StructureShape.new(name: 'Progress')
+    ProgressEvent = Shapes::StructureShape.new(name: 'ProgressEvent')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     PutBucketAccelerateConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAccelerateConfigurationRequest')
     PutBucketAclRequest = Shapes::StructureShape.new(name: 'PutBucketAclRequest')
@@ -378,6 +381,7 @@ module Aws::S3
     QuoteFields = Shapes::StringShape.new(name: 'QuoteFields')
     Range = Shapes::StringShape.new(name: 'Range')
     RecordDelimiter = Shapes::StringShape.new(name: 'RecordDelimiter')
+    RecordsEvent = Shapes::StructureShape.new(name: 'RecordsEvent')
     Redirect = Shapes::StructureShape.new(name: 'Redirect')
     RedirectAllRequestsTo = Shapes::StructureShape.new(name: 'RedirectAllRequestsTo')
     ReplaceKeyPrefixWith = Shapes::StringShape.new(name: 'ReplaceKeyPrefixWith')
@@ -417,6 +421,9 @@ module Aws::S3
     SSEKMS = Shapes::StructureShape.new(name: 'SSEKMS')
     SSEKMSKeyId = Shapes::StringShape.new(name: 'SSEKMSKeyId')
     SSES3 = Shapes::StructureShape.new(name: 'SSES3')
+    SelectObjectContentEventStream = Shapes::StructureShape.new(name: 'SelectObjectContentEventStream')
+    SelectObjectContentOutput = Shapes::StructureShape.new(name: 'SelectObjectContentOutput')
+    SelectObjectContentRequest = Shapes::StructureShape.new(name: 'SelectObjectContentRequest')
     SelectParameters = Shapes::StructureShape.new(name: 'SelectParameters')
     ServerSideEncryption = Shapes::StringShape.new(name: 'ServerSideEncryption')
     ServerSideEncryptionByDefault = Shapes::StructureShape.new(name: 'ServerSideEncryptionByDefault')
@@ -429,6 +436,7 @@ module Aws::S3
     SseKmsEncryptedObjectsStatus = Shapes::StringShape.new(name: 'SseKmsEncryptedObjectsStatus')
     StartAfter = Shapes::StringShape.new(name: 'StartAfter')
     Stats = Shapes::StructureShape.new(name: 'Stats')
+    StatsEvent = Shapes::StructureShape.new(name: 'StatsEvent')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     StorageClassAnalysis = Shapes::StructureShape.new(name: 'StorageClassAnalysis')
     StorageClassAnalysisDataExport = Shapes::StructureShape.new(name: 'StorageClassAnalysisDataExport')
@@ -603,6 +611,8 @@ module Aws::S3
     Condition.add_member(:http_error_code_returned_equals, Shapes::ShapeRef.new(shape: HttpErrorCodeReturnedEquals, location_name: "HttpErrorCodeReturnedEquals"))
     Condition.add_member(:key_prefix_equals, Shapes::ShapeRef.new(shape: KeyPrefixEquals, location_name: "KeyPrefixEquals"))
     Condition.struct_class = Types::Condition
+
+    ContinuationEvent.struct_class = Types::ContinuationEvent
 
     CopyObjectOutput.add_member(:copy_object_result, Shapes::ShapeRef.new(shape: CopyObjectResult, location_name: "CopyObjectResult"))
     CopyObjectOutput.add_member(:expiration, Shapes::ShapeRef.new(shape: Expiration, location: "header", location_name: "x-amz-expiration"))
@@ -819,6 +829,8 @@ module Aws::S3
 
     EncryptionConfiguration.add_member(:replica_kms_key_id, Shapes::ShapeRef.new(shape: ReplicaKmsKeyID, location_name: "ReplicaKmsKeyID"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    EndEvent.struct_class = Types::EndEvent
 
     Error.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
     Error.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location_name: "VersionId"))
@@ -1464,6 +1476,9 @@ module Aws::S3
     Progress.add_member(:bytes_returned, Shapes::ShapeRef.new(shape: BytesReturned, location_name: "BytesReturned"))
     Progress.struct_class = Types::Progress
 
+    ProgressEvent.add_member(:details, Shapes::ShapeRef.new(shape: Progress, eventpayload: true, eventpayload_type: 'structure', location_name: "Details", metadata: {"eventpayload"=>true}))
+    ProgressEvent.struct_class = Types::ProgressEvent
+
     PutBucketAccelerateConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketAccelerateConfigurationRequest.add_member(:accelerate_configuration, Shapes::ShapeRef.new(shape: AccelerateConfiguration, required: true, location_name: "AccelerateConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketAccelerateConfigurationRequest.struct_class = Types::PutBucketAccelerateConfigurationRequest
@@ -1680,6 +1695,9 @@ module Aws::S3
 
     QueueConfigurationList.member = Shapes::ShapeRef.new(shape: QueueConfiguration)
 
+    RecordsEvent.add_member(:payload, Shapes::ShapeRef.new(shape: Body, eventpayload: true, eventpayload_type: 'blob', location_name: "Payload", metadata: {"eventpayload"=>true}))
+    RecordsEvent.struct_class = Types::RecordsEvent
+
     Redirect.add_member(:host_name, Shapes::ShapeRef.new(shape: HostName, location_name: "HostName"))
     Redirect.add_member(:http_redirect_code, Shapes::ShapeRef.new(shape: HttpRedirectCode, location_name: "HttpRedirectCode"))
     Redirect.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, location_name: "Protocol"))
@@ -1768,6 +1786,30 @@ module Aws::S3
 
     SSES3.struct_class = Types::SSES3
 
+    SelectObjectContentEventStream.add_member(:records, Shapes::ShapeRef.new(shape: RecordsEvent, event: true, location_name: "Records"))
+    SelectObjectContentEventStream.add_member(:stats, Shapes::ShapeRef.new(shape: StatsEvent, event: true, location_name: "Stats"))
+    SelectObjectContentEventStream.add_member(:progress, Shapes::ShapeRef.new(shape: ProgressEvent, event: true, location_name: "Progress"))
+    SelectObjectContentEventStream.add_member(:cont, Shapes::ShapeRef.new(shape: ContinuationEvent, event: true, location_name: "Cont"))
+    SelectObjectContentEventStream.add_member(:end, Shapes::ShapeRef.new(shape: EndEvent, event: true, location_name: "End"))
+    SelectObjectContentEventStream.struct_class = Types::SelectObjectContentEventStream
+
+    SelectObjectContentOutput.add_member(:payload, Shapes::ShapeRef.new(shape: SelectObjectContentEventStream, eventstream: true, location_name: "Payload"))
+    SelectObjectContentOutput.struct_class = Types::SelectObjectContentOutput
+    SelectObjectContentOutput[:payload] = :payload
+    SelectObjectContentOutput[:payload_member] = SelectObjectContentOutput.member(:payload)
+
+    SelectObjectContentRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+    SelectObjectContentRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
+    SelectObjectContentRequest.add_member(:sse_customer_algorithm, Shapes::ShapeRef.new(shape: SSECustomerAlgorithm, location: "header", location_name: "x-amz-server-side-encryption-customer-algorithm"))
+    SelectObjectContentRequest.add_member(:sse_customer_key, Shapes::ShapeRef.new(shape: SSECustomerKey, location: "header", location_name: "x-amz-server-side-encryption-customer-key"))
+    SelectObjectContentRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
+    SelectObjectContentRequest.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
+    SelectObjectContentRequest.add_member(:expression_type, Shapes::ShapeRef.new(shape: ExpressionType, required: true, location_name: "ExpressionType"))
+    SelectObjectContentRequest.add_member(:request_progress, Shapes::ShapeRef.new(shape: RequestProgress, location_name: "RequestProgress"))
+    SelectObjectContentRequest.add_member(:input_serialization, Shapes::ShapeRef.new(shape: InputSerialization, required: true, location_name: "InputSerialization"))
+    SelectObjectContentRequest.add_member(:output_serialization, Shapes::ShapeRef.new(shape: OutputSerialization, required: true, location_name: "OutputSerialization"))
+    SelectObjectContentRequest.struct_class = Types::SelectObjectContentRequest
+
     SelectParameters.add_member(:input_serialization, Shapes::ShapeRef.new(shape: InputSerialization, required: true, location_name: "InputSerialization"))
     SelectParameters.add_member(:expression_type, Shapes::ShapeRef.new(shape: ExpressionType, required: true, location_name: "ExpressionType"))
     SelectParameters.add_member(:expression, Shapes::ShapeRef.new(shape: Expression, required: true, location_name: "Expression"))
@@ -1796,6 +1838,9 @@ module Aws::S3
     Stats.add_member(:bytes_processed, Shapes::ShapeRef.new(shape: BytesProcessed, location_name: "BytesProcessed"))
     Stats.add_member(:bytes_returned, Shapes::ShapeRef.new(shape: BytesReturned, location_name: "BytesReturned"))
     Stats.struct_class = Types::Stats
+
+    StatsEvent.add_member(:details, Shapes::ShapeRef.new(shape: Stats, eventpayload: true, eventpayload_type: 'structure', location_name: "Details", metadata: {"eventpayload"=>true}))
+    StatsEvent.struct_class = Types::StatsEvent
 
     StorageClassAnalysis.add_member(:data_export, Shapes::ShapeRef.new(shape: StorageClassAnalysisDataExport, location_name: "DataExport"))
     StorageClassAnalysis.struct_class = Types::StorageClassAnalysis
@@ -2568,6 +2613,19 @@ module Aws::S3
         o.input = Shapes::ShapeRef.new(shape: RestoreObjectRequest)
         o.output = Shapes::ShapeRef.new(shape: RestoreObjectOutput)
         o.errors << Shapes::ShapeRef.new(shape: ObjectAlreadyInActiveTierError)
+      end)
+
+      api.add_operation(:select_object_content, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SelectObjectContent"
+        o.http_method = "POST"
+        o.http_request_uri = "/{Bucket}/{Key+}?select&select-type=2"
+        o.input = Shapes::ShapeRef.new(shape: SelectObjectContentRequest,
+          location_name: "SelectObjectContentRequest",
+          metadata: {
+            "xmlNamespace" => {"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}
+          }
+        )
+        o.output = Shapes::ShapeRef.new(shape: SelectObjectContentOutput)
       end)
 
       api.add_operation(:upload_part, Seahorse::Model::Operation.new.tap do |o|

@@ -101,7 +101,14 @@ module AwsSdkCodeGenerator
       # @return [Boolean]
       def streaming?(shape_or_shape_ref, api)
         ref, shape = resolve(shape_or_shape_ref, api)
-        ref['streaming'] || shape['streaming']
+        ref['streaming'] || shape['streaming'] ||
+          ref['eventstream'] || shape['eventstream']
+      end
+
+      # @return [Boolean]
+      def eventstream?(shape_or_shape_ref, api)
+        ref, shape = resolve(shape_or_shape_ref, api)
+        ref['eventstream'] || shape['eventstream']
       end
 
       def plural?(resource)
