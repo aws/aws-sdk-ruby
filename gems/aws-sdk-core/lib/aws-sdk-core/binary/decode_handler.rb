@@ -35,7 +35,9 @@ module Aws
         end
 
         context.http_response.on_error do
-          context.http_response.body = context.http_response.raw_stream
+          # Potential enhancement to made
+          # since we don't want to track raw bytes in memory
+          context.http_response.body = StringIO.new
         end
 
       end

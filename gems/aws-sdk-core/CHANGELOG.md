@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove `raw_stream` tracking, [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1786)
+
 3.21.0 (2018-05-17)
 ------------------
 
