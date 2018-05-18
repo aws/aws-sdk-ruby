@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SES - Updated the documentation for Amazon Simple Email Service.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
 2.11.52 (2018-05-17)
 ------------------
 
