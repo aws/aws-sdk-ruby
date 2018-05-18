@@ -2062,6 +2062,94 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteJobExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         thing_name: "ThingName", # required
+    #         execution_number: 1, # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job whose execution on a particular device will be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing whose job execution will be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_number
+    #   The ID of the job execution to be deleted. The `executionNumber`
+    #   refers to the execution of a particular job on a particular device.
+    #
+    #   Note that once a job execution is deleted, the `executionNumber` may
+    #   be reused by IoT, so be sure you get and use the correct value here.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] force
+    #   (Optional) When true, you can delete a job execution which is
+    #   "IN\_PROGRESS". Otherwise, you can only delete a job execution
+    #   which is in a terminal state ("SUCCEEDED", "FAILED",
+    #   "REJECTED", "REMOVED" or "CANCELED") or an exception will
+    #   occur. The default is false.
+    #
+    #   <note markdown="1"> Deleting a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to access job information or update the job
+    #   execution status. Use caution and ensure that the device is able to
+    #   recover to a valid state.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    class DeleteJobExecutionRequest < Struct.new(
+      :job_id,
+      :thing_name,
+      :execution_number,
+      :force)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job to be deleted.
+    #
+    #   After a job deletion is completed, you may reuse this jobId when you
+    #   create a new job. However, this is not recommended, and you must
+    #   ensure that your devices are not using the jobId to refer to the
+    #   deleted job.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   (Optional) When true, you can delete a job which is
+    #   "IN\_PROGRESS". Otherwise, you can only delete a job which is in a
+    #   terminal state ("COMPLETED" or "CANCELED") or an exception will
+    #   occur. The default is false.
+    #
+    #   <note markdown="1"> Deleting a job which is "IN\_PROGRESS", will cause a device which
+    #   is executing the job to be unable to access job information or
+    #   update the job execution status. Use caution and ensure that each
+    #   device executing a job which is deleted is able to recover to a
+    #   valid state.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    class DeleteJobRequest < Struct.new(
+      :job_id,
+      :force)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteOTAUpdateRequest
     #   data as a hash:
     #
@@ -3621,7 +3709,7 @@ module Aws::IoT
       include Aws::Structure
     end
 
-    # Sends message data to an AWS IoT Analytics channel.
+    # Sends messge data to an AWS IoT Analytics channel.
     #
     # @note When making an API call, you may pass IotAnalyticsAction
     #   data as a hash:
@@ -3643,8 +3731,9 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The ARN of the role which has a policy that grants IoT permission to
-    #   send message data via IoT Analytics (iotanalytics:BatchPutMessage).
+    #   The ARN of the role which has a policy that grants IoT Analytics
+    #   permission to send message data via IoT Analytics
+    #   (iotanalytics:BatchPutMessage).
     #   @return [String]
     #
     class IotAnalyticsAction < Struct.new(

@@ -126,6 +126,8 @@ module Aws::IoT
     DeleteCACertificateResponse = Shapes::StructureShape.new(name: 'DeleteCACertificateResponse')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
     DeleteConflictException = Shapes::StructureShape.new(name: 'DeleteConflictException')
+    DeleteJobExecutionRequest = Shapes::StructureShape.new(name: 'DeleteJobExecutionRequest')
+    DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
     DeleteOTAUpdateRequest = Shapes::StructureShape.new(name: 'DeleteOTAUpdateRequest')
     DeleteOTAUpdateResponse = Shapes::StructureShape.new(name: 'DeleteOTAUpdateResponse')
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
@@ -218,6 +220,7 @@ module Aws::IoT
     FirehoseSeparator = Shapes::StringShape.new(name: 'FirehoseSeparator')
     Flag = Shapes::BooleanShape.new(name: 'Flag')
     ForceDelete = Shapes::BooleanShape.new(name: 'ForceDelete')
+    ForceFlag = Shapes::BooleanShape.new(name: 'ForceFlag')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GEMaxResults = Shapes::IntegerShape.new(name: 'GEMaxResults')
     GenerationId = Shapes::StringShape.new(name: 'GenerationId')
@@ -258,6 +261,7 @@ module Aws::IoT
     InvalidQueryException = Shapes::StructureShape.new(name: 'InvalidQueryException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidResponseException = Shapes::StructureShape.new(name: 'InvalidResponseException')
+    InvalidStateTransitionException = Shapes::StructureShape.new(name: 'InvalidStateTransitionException')
     IotAnalyticsAction = Shapes::StructureShape.new(name: 'IotAnalyticsAction')
     IsAuthenticated = Shapes::BooleanShape.new(name: 'IsAuthenticated')
     IsDefaultVersion = Shapes::BooleanShape.new(name: 'IsDefaultVersion')
@@ -944,6 +948,16 @@ module Aws::IoT
     DeleteCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     DeleteCertificateRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: ForceDelete, location: "querystring", location_name: "forceDelete"))
     DeleteCertificateRequest.struct_class = Types::DeleteCertificateRequest
+
+    DeleteJobExecutionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    DeleteJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
+    DeleteJobExecutionRequest.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, required: true, location: "uri", location_name: "executionNumber"))
+    DeleteJobExecutionRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    DeleteJobExecutionRequest.struct_class = Types::DeleteJobExecutionRequest
+
+    DeleteJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    DeleteJobRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    DeleteJobRequest.struct_class = Types::DeleteJobRequest
 
     DeleteOTAUpdateRequest.add_member(:ota_update_id, Shapes::ShapeRef.new(shape: OTAUpdateId, required: true, location: "uri", location_name: "otaUpdateId"))
     DeleteOTAUpdateRequest.struct_class = Types::DeleteOTAUpdateRequest
@@ -2489,6 +2503,33 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteJob"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/jobs/{jobId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateTransitionException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_job_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteJobExecution"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/things/{thingName}/jobs/{jobId}/executionNumber/{executionNumber}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteJobExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateTransitionException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_ota_update, Seahorse::Model::Operation.new.tap do |o|

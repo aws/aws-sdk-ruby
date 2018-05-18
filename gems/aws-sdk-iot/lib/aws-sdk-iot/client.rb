@@ -1342,6 +1342,102 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Deletes a job and its related job executions.
+    #
+    # Deleting a job may take time, depending on the number of job
+    # executions created for the job and various other factors. While the
+    # job is being deleted, the status of the job will be shown as
+    # "DELETION\_IN\_PROGRESS". Attempting to delete or cancel a job whose
+    # status is already "DELETION\_IN\_PROGRESS" will result in an error.
+    #
+    # Only 10 jobs may have status "DELETION\_IN\_PROGRESS" at the same
+    # time, or a LimitExceededException will occur.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job to be deleted.
+    #
+    #   After a job deletion is completed, you may reuse this jobId when you
+    #   create a new job. However, this is not recommended, and you must
+    #   ensure that your devices are not using the jobId to refer to the
+    #   deleted job.
+    #
+    # @option params [Boolean] :force
+    #   (Optional) When true, you can delete a job which is "IN\_PROGRESS".
+    #   Otherwise, you can only delete a job which is in a terminal state
+    #   ("COMPLETED" or "CANCELED") or an exception will occur. The
+    #   default is false.
+    #
+    #   <note markdown="1"> Deleting a job which is "IN\_PROGRESS", will cause a device which is
+    #   executing the job to be unable to access job information or update the
+    #   job execution status. Use caution and ensure that each device
+    #   executing a job which is deleted is able to recover to a valid state.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job({
+    #     job_id: "JobId", # required
+    #     force: false,
+    #   })
+    #
+    # @overload delete_job(params = {})
+    # @param [Hash] params ({})
+    def delete_job(params = {}, options = {})
+      req = build_request(:delete_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes a job execution.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job whose execution on a particular device will be
+    #   deleted.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing whose job execution will be deleted.
+    #
+    # @option params [required, Integer] :execution_number
+    #   The ID of the job execution to be deleted. The `executionNumber`
+    #   refers to the execution of a particular job on a particular device.
+    #
+    #   Note that once a job execution is deleted, the `executionNumber` may
+    #   be reused by IoT, so be sure you get and use the correct value here.
+    #
+    # @option params [Boolean] :force
+    #   (Optional) When true, you can delete a job execution which is
+    #   "IN\_PROGRESS". Otherwise, you can only delete a job execution which
+    #   is in a terminal state ("SUCCEEDED", "FAILED", "REJECTED",
+    #   "REMOVED" or "CANCELED") or an exception will occur. The default
+    #   is false.
+    #
+    #   <note markdown="1"> Deleting a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to access job information or update the job
+    #   execution status. Use caution and ensure that the device is able to
+    #   recover to a valid state.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job_execution({
+    #     job_id: "JobId", # required
+    #     thing_name: "ThingName", # required
+    #     execution_number: 1, # required
+    #     force: false,
+    #   })
+    #
+    # @overload delete_job_execution(params = {})
+    # @param [Hash] params ({})
+    def delete_job_execution(params = {}, options = {})
+      req = build_request(:delete_job_execution, params)
+      req.send_request(options)
+    end
+
     # Delete an OTA update.
     #
     # @option params [required, String] :ota_update_id
@@ -5151,7 +5247,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
