@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
 2.11.53 (2018-05-18)
 ------------------
 
