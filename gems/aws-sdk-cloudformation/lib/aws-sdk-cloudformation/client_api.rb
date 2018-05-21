@@ -90,6 +90,7 @@ module Aws::CloudFormation
     EventId = Shapes::StringShape.new(name: 'EventId')
     ExecuteChangeSetInput = Shapes::StructureShape.new(name: 'ExecuteChangeSetInput')
     ExecuteChangeSetOutput = Shapes::StructureShape.new(name: 'ExecuteChangeSetOutput')
+    ExecutionRoleName = Shapes::StringShape.new(name: 'ExecutionRoleName')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     Export = Shapes::StructureShape.new(name: 'Export')
     ExportName = Shapes::StringShape.new(name: 'ExportName')
@@ -376,6 +377,7 @@ module Aws::CloudFormation
     CreateStackSetInput.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
     CreateStackSetInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateStackSetInput.add_member(:administration_role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "AdministrationRoleARN"))
+    CreateStackSetInput.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
     CreateStackSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateStackSetInput.struct_class = Types::CreateStackSetInput
 
@@ -811,6 +813,7 @@ module Aws::CloudFormation
     StackSet.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     StackSet.add_member(:stack_set_arn, Shapes::ShapeRef.new(shape: StackSetARN, location_name: "StackSetARN"))
     StackSet.add_member(:administration_role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "AdministrationRoleARN"))
+    StackSet.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
     StackSet.struct_class = Types::StackSet
 
     StackSetOperation.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
@@ -820,6 +823,7 @@ module Aws::CloudFormation
     StackSetOperation.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     StackSetOperation.add_member(:retain_stacks, Shapes::ShapeRef.new(shape: RetainStacksNullable, location_name: "RetainStacks"))
     StackSetOperation.add_member(:administration_role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "AdministrationRoleARN"))
+    StackSetOperation.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
     StackSetOperation.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
     StackSetOperation.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
     StackSetOperation.struct_class = Types::StackSetOperation
@@ -917,7 +921,7 @@ module Aws::CloudFormation
     UpdateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     UpdateStackInput.struct_class = Types::UpdateStackInput
 
-    UpdateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetName, required: true, location_name: "StackSetName"))
+    UpdateStackInstancesInput.add_member(:stack_set_name, Shapes::ShapeRef.new(shape: StackSetNameOrId, required: true, location_name: "StackSetName"))
     UpdateStackInstancesInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "Accounts"))
     UpdateStackInstancesInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "Regions"))
     UpdateStackInstancesInput.add_member(:parameter_overrides, Shapes::ShapeRef.new(shape: Parameters, location_name: "ParameterOverrides"))
@@ -941,7 +945,10 @@ module Aws::CloudFormation
     UpdateStackSetInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     UpdateStackSetInput.add_member(:operation_preferences, Shapes::ShapeRef.new(shape: StackSetOperationPreferences, location_name: "OperationPreferences"))
     UpdateStackSetInput.add_member(:administration_role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "AdministrationRoleARN"))
+    UpdateStackSetInput.add_member(:execution_role_name, Shapes::ShapeRef.new(shape: ExecutionRoleName, location_name: "ExecutionRoleName"))
     UpdateStackSetInput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId", metadata: {"idempotencyToken"=>true}))
+    UpdateStackSetInput.add_member(:accounts, Shapes::ShapeRef.new(shape: AccountList, location_name: "Accounts"))
+    UpdateStackSetInput.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "Regions"))
     UpdateStackSetInput.struct_class = Types::UpdateStackSetInput
 
     UpdateStackSetOutput.add_member(:operation_id, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "OperationId"))
@@ -1378,6 +1385,7 @@ module Aws::CloudFormation
         o.errors << Shapes::ShapeRef.new(shape: OperationIdAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: StaleRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: StackInstanceNotFoundException)
       end)
 
       api.add_operation(:update_termination_protection, Seahorse::Model::Operation.new.tap do |o|
