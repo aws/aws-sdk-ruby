@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allow objects responding to #to_h to be marshaled to DynamoDB as a Hash.
+
 1.6.0 (2018-04-30)
 ------------------
 

@@ -21,6 +21,7 @@ module Aws
       end
 
       class Marshaler
+        HASHY_TEST = lambda { |val| val.nil? ? false : val.respond_to?(:to_h) }
         STRINGY_TEST = lambda { |val| val.respond_to?(:to_str) }
 
         def format(obj)
@@ -39,6 +40,11 @@ module Aws
           when Numeric then { n: obj.to_s }
           when StringIO, IO then { b: obj }
           when Set then format_set(obj)
+          when HASHY_TEST
+            hash = obj.to_h
+            hash.each.with_object(m:{}) do |(key, value), map|
+              map[:m][key.to_s] = format(value)
+            end
           when true, false then { bool: obj }
           when nil then { null: true }
           else
