@@ -303,7 +303,7 @@ module Aws::Inspector
 
     AssessmentTarget.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "arn"))
     AssessmentTarget.add_member(:name, Shapes::ShapeRef.new(shape: AssessmentTargetName, required: true, location_name: "name"))
-    AssessmentTarget.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceGroupArn"))
+    AssessmentTarget.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceGroupArn"))
     AssessmentTarget.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     AssessmentTarget.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     AssessmentTarget.struct_class = Types::AssessmentTarget
@@ -352,7 +352,7 @@ module Aws::Inspector
     BatchDescribeArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
     CreateAssessmentTargetRequest.add_member(:assessment_target_name, Shapes::ShapeRef.new(shape: AssessmentTargetName, required: true, location_name: "assessmentTargetName"))
-    CreateAssessmentTargetRequest.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceGroupArn"))
+    CreateAssessmentTargetRequest.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceGroupArn"))
     CreateAssessmentTargetRequest.struct_class = Types::CreateAssessmentTargetRequest
 
     CreateAssessmentTargetResponse.add_member(:assessment_target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentTargetArn"))
@@ -677,7 +677,7 @@ module Aws::Inspector
 
     UpdateAssessmentTargetRequest.add_member(:assessment_target_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentTargetArn"))
     UpdateAssessmentTargetRequest.add_member(:assessment_target_name, Shapes::ShapeRef.new(shape: AssessmentTargetName, required: true, location_name: "assessmentTargetName"))
-    UpdateAssessmentTargetRequest.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceGroupArn"))
+    UpdateAssessmentTargetRequest.add_member(:resource_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceGroupArn"))
     UpdateAssessmentTargetRequest.struct_class = Types::UpdateAssessmentTargetRequest
 
     UserAttributeKeyList.member = Shapes::ShapeRef.new(shape: AttributeKey)
@@ -722,6 +722,7 @@ module Aws::Inspector
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCrossAccountRoleException)
       end)
 
       api.add_operation(:create_assessment_template, Seahorse::Model::Operation.new.tap do |o|

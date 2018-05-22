@@ -676,7 +676,7 @@ module Aws::Inspector
     #
     #       {
     #         assessment_target_name: "AssessmentTargetName", # required
-    #         resource_group_arn: "Arn", # required
+    #         resource_group_arn: "Arn",
     #       }
     #
     # @!attribute [rw] assessment_target_name
@@ -2486,7 +2486,7 @@ module Aws::Inspector
     #       {
     #         assessment_target_arn: "Arn", # required
     #         assessment_target_name: "AssessmentTargetName", # required
-    #         resource_group_arn: "Arn", # required
+    #         resource_group_arn: "Arn",
     #       }
     #
     # @!attribute [rw] assessment_target_arn

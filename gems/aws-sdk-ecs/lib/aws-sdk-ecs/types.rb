@@ -769,6 +769,11 @@ module Aws::ECS
     #   `Hostname` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--hostname` option to [docker run][3].
     #
+    #   <note markdown="1"> The `hostname` parameter is not supported if using the `awsvpc`
+    #   networkMode.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
@@ -1106,13 +1111,13 @@ module Aws::ECS
     #
     # @!attribute [rw] remaining_resources
     #   For CPU and memory resource types, this parameter describes the
-    #   remaining CPU and memory on the that has not already been allocated
-    #   to tasks (and is therefore available for new tasks). For port
-    #   resource types, this parameter describes the ports that were
-    #   reserved by the Amazon ECS container agent (at instance registration
-    #   time) and any task containers that have reserved port mappings on
-    #   the host (with the `host` or `bridge` network mode). Any port that
-    #   is not specified here is available for new tasks.
+    #   remaining CPU and memory that has not already been allocated to
+    #   tasks and is therefore available for new tasks. For port resource
+    #   types, this parameter describes the ports that were reserved by the
+    #   Amazon ECS container agent (at instance registration time) and any
+    #   task containers that have reserved port mappings on the host (with
+    #   the `host` or `bridge` network mode). Any port that is not specified
+    #   here is available for new tasks.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] registered_resources
@@ -1369,6 +1374,8 @@ module Aws::ECS
     #           {
     #             registry_arn: "String",
     #             port: 1,
+    #             container_name: "String",
+    #             container_port: 1,
     #           },
     #         ],
     #         desired_count: 1, # required
@@ -1443,15 +1450,30 @@ module Aws::ECS
     #   this service is placed on a container instance, the container
     #   instance and port combination is registered as a target in the
     #   target group specified here.
+    #
+    #   Services with tasks that use the `awsvpc` network mode (for example,
+    #   those with the Fargate launch type) only support Application Load
+    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   supported. Also, when you create any target groups for these
+    #   services, you must choose `ip` as the target type, not `instance`,
+    #   because tasks that use the `awsvpc` network mode are associated with
+    #   an elastic network interface, not an Amazon EC2 instance.
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
     #   The details of the service discovery registries you want to assign
     #   to this service. For more information, see [Service Discovery][1].
     #
+    #   <note markdown="1"> Service discovery is supported for Fargate tasks if using platform
+    #   version v1.1.0 or later. For more information, see [AWS Fargate
+    #   Platform Versions][2].
+    #
+    #    </note>
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] desired_count
@@ -1460,7 +1482,7 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #   @return [String]
     #
@@ -1970,7 +1992,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] container_instances
-    #   A list of container instance IDs or full ARN entries.
+    #   A list of up to 100 container instance IDs or full Amazon Resource
+    #   Name (ARN) entries.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesRequest AWS API Documentation
@@ -2526,8 +2549,13 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] shared_memory_size
-    #   The value for the size of the `/dev/shm` volume. This parameter maps
-    #   to the `--shm-size` option to [docker run][1].
+    #   The value for the size (in MiB) of the `/dev/shm` volume. This
+    #   parameter maps to the `--shm-size` option to [docker run][1].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the
+    #   `sharedMemorySize` parameter is not supported.
+    #
+    #    </note>
     #
     #
     #
@@ -2535,8 +2563,14 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] tmpfs
-    #   The container path, mount options, and size of the tmpfs mount. This
-    #   parameter maps to the `--tmpfs` option to [docker run][1].
+    #   The container path, mount options, and size (in MiB) of the tmpfs
+    #   mount. This parameter maps to the `--tmpfs` option to [docker
+    #   run][1].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the `tmpfs`
+    #   parameter is not supported.
+    #
+    #    </note>
     #
     #
     #
@@ -3178,6 +3212,14 @@ module Aws::ECS
 
     # Details on a load balancer that is used with a service.
     #
+    # Services with tasks that use the `awsvpc` network mode (for example,
+    # those with the Fargate launch type) only support Application Load
+    # Balancers and Network Load Balancers; Classic Load Balancers are not
+    # supported. Also, when you create any target groups for these services,
+    # you must choose `ip` as the target type, not `instance`, because tasks
+    # that use the `awsvpc` network mode are associated with an elastic
+    # network interface, not an Amazon EC2 instance.
+    #
     # @note When making an API call, you may pass LoadBalancer
     #   data as a hash:
     #
@@ -3191,6 +3233,12 @@ module Aws::ECS
     # @!attribute [rw] target_group_arn
     #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
     #   target group associated with a service.
+    #
+    #   If your service's task definition uses the `awsvpc` network mode
+    #   (which is required for the Fargate launch type), you must choose
+    #   `ip` as the target type, not `instance`, because tasks that use the
+    #   `awsvpc` network mode are associated with an elastic network
+    #   interface, not an Amazon EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
@@ -4057,8 +4105,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the resource, such as `cpu`, `memory`, `ports`, or a
-    #   user-defined resource.
+    #   The name of the resource, such as `CPU`, `MEMORY`, `PORTS`,
+    #   `PORTS_UDP`, or a user-defined resource.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4295,6 +4343,14 @@ module Aws::ECS
     #   the load balancer name, the container name (as it appears in a
     #   container definition), and the container port to access from the
     #   load balancer.
+    #
+    #   Services with tasks that use the `awsvpc` network mode (for example,
+    #   those with the Fargate launch type) only support Application Load
+    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   supported. Also, when you create any target groups for these
+    #   services, you must choose `ip` as the target type, not `instance`,
+    #   because tasks that use the `awsvpc` network mode are associated with
+    #   an elastic network interface, not an Amazon EC2 instance.
     #   @return [Array<Types::LoadBalancer>]
     #
     # @!attribute [rw] service_registries
@@ -4444,12 +4500,14 @@ module Aws::ECS
     #       {
     #         registry_arn: "String",
     #         port: 1,
+    #         container_name: "String",
+    #         container_port: 1,
     #       }
     #
     # @!attribute [rw] registry_arn
-    #   The Amazon Resource Name (ARN) of the Service Registry. The
-    #   currently supported service registry is Amazon Route 53 Auto Naming
-    #   Service. For more information, see [Service][1].
+    #   The Amazon Resource Name (ARN) of the service registry. The
+    #   currently supported service registry is Amazon Route 53 Auto Naming.
+    #   For more information, see [Service][1].
     #
     #
     #
@@ -4457,15 +4515,41 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] port
-    #   The port value used if your Service Discovery service specified an
-    #   SRV record.
+    #   The port value used if your service discovery service specified an
+    #   SRV record. This field is required if both the `awsvpc` network mode
+    #   and SRV records are used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_name
+    #   The container name value, already specified in the task definition,
+    #   to be used for your service discovery service. If the task
+    #   definition that your service task specifies uses the `bridge` or
+    #   `host` network mode, you must specify a `containerName` and
+    #   `containerPort` combination from the task definition. If the task
+    #   definition that your service task specifies uses the `awsvpc`
+    #   network mode and a type SRV DNS record is used, you must specify
+    #   either a `containerName` and `containerPort` combination or a `port`
+    #   value, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_port
+    #   The port value, already specified in the task definition, to be used
+    #   for your service discovery service. If the task definition your
+    #   service task specifies uses the `bridge` or `host` network mode, you
+    #   must specify a `containerName` and `containerPort` combination from
+    #   the task definition. If the task definition your service task
+    #   specifies uses the `awsvpc` network mode and a type SRV DNS record
+    #   is used, you must specify either a `containerName` and
+    #   `containerPort` combination or a `port` value, but not both.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRegistry AWS API Documentation
     #
     class ServiceRegistry < Struct.new(
       :registry_arn,
-      :port)
+      :port,
+      :container_name,
+      :container_port)
       include Aws::Structure
     end
 
@@ -5368,7 +5452,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   The size of the tmpfs volume.
+    #   The size (in MiB) of the tmpfs volume.
     #   @return [Integer]
     #
     # @!attribute [rw] mount_options

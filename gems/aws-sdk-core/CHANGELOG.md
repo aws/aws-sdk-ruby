@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.21.2 (2018-05-22)
+------------------
+
 * Issue - Update `EventEmitter` to `Aws::EventEmitter` [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1791)
 
 3.21.1 (2018-05-18)

@@ -740,6 +740,8 @@ module Aws::ECS
 
     ServiceRegistry.add_member(:registry_arn, Shapes::ShapeRef.new(shape: String, location_name: "registryArn"))
     ServiceRegistry.add_member(:port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "port"))
+    ServiceRegistry.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
+    ServiceRegistry.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
     ServiceRegistry.struct_class = Types::ServiceRegistry
 
     Services.member = Shapes::ShapeRef.new(shape: Service)

@@ -290,11 +290,12 @@ module Aws::ECS
     #   different placement strategy) with the `placementStrategy`
     #   parameter):
     #
-    #   * Sort the valid container instances by the fewest number of running
-    #     tasks for this service in the same Availability Zone as the
-    #     instance. For example, if zone A has one running service task and
-    #     zones B and C each have zero, valid container instances in either
-    #     zone B or C are considered optimal for placement.
+    #   * Sort the valid container instances, giving priority to instances
+    #     that have the fewest number of running tasks for this service in
+    #     their respective Availability Zone. For example, if zone A has one
+    #     running service task and zones B and C each have zero, valid
+    #     container instances in either zone B or C are considered optimal
+    #     for placement.
     #
     #   * Place the new service task on a valid container instance in an
     #     optimal Availability Zone (based on the previous steps), favoring
@@ -341,20 +342,35 @@ module Aws::ECS
     #   on a container instance, the container instance and port combination
     #   is registered as a target in the target group specified here.
     #
+    #   Services with tasks that use the `awsvpc` network mode (for example,
+    #   those with the Fargate launch type) only support Application Load
+    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   supported. Also, when you create any target groups for these services,
+    #   you must choose `ip` as the target type, not `instance`, because tasks
+    #   that use the `awsvpc` network mode are associated with an elastic
+    #   network interface, not an Amazon EC2 instance.
+    #
     # @option params [Array<Types::ServiceRegistry>] :service_registries
     #   The details of the service discovery registries you want to assign to
     #   this service. For more information, see [Service Discovery][1].
     #
+    #   <note markdown="1"> Service discovery is supported for Fargate tasks if using platform
+    #   version v1.1.0 or later. For more information, see [AWS Fargate
+    #   Platform Versions][2].
+    #
+    #    </note>
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
     # @option params [required, Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
     #   and keep running on your cluster.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #
     # @option params [String] :launch_type
@@ -568,6 +584,8 @@ module Aws::ECS
     #       {
     #         registry_arn: "String",
     #         port: 1,
+    #         container_name: "String",
+    #         container_port: 1,
     #       },
     #     ],
     #     desired_count: 1, # required
@@ -614,6 +632,8 @@ module Aws::ECS
     #   resp.service.service_registries #=> Array
     #   resp.service.service_registries[0].registry_arn #=> String
     #   resp.service.service_registries[0].port #=> Integer
+    #   resp.service.service_registries[0].container_name #=> String
+    #   resp.service.service_registries[0].container_port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -843,6 +863,8 @@ module Aws::ECS
     #   resp.service.service_registries #=> Array
     #   resp.service.service_registries[0].registry_arn #=> String
     #   resp.service.service_registries[0].port #=> Integer
+    #   resp.service.service_registries[0].container_name #=> String
+    #   resp.service.service_registries[0].container_port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -1268,7 +1290,8 @@ module Aws::ECS
     #   cluster, the default cluster is assumed.
     #
     # @option params [required, Array<String>] :container_instances
-    #   A list of container instance IDs or full ARN entries.
+    #   A list of up to 100 container instance IDs or full Amazon Resource
+    #   Name (ARN) entries.
     #
     # @return [Types::DescribeContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1518,6 +1541,8 @@ module Aws::ECS
     #   resp.services[0].service_registries #=> Array
     #   resp.services[0].service_registries[0].registry_arn #=> String
     #   resp.services[0].service_registries[0].port #=> Integer
+    #   resp.services[0].service_registries[0].container_name #=> String
+    #   resp.services[0].service_registries[0].container_port #=> Integer
     #   resp.services[0].status #=> String
     #   resp.services[0].desired_count #=> Integer
     #   resp.services[0].running_count #=> Integer
@@ -4492,6 +4517,8 @@ module Aws::ECS
     #   resp.service.service_registries #=> Array
     #   resp.service.service_registries[0].registry_arn #=> String
     #   resp.service.service_registries[0].port #=> Integer
+    #   resp.service.service_registries[0].container_name #=> String
+    #   resp.service.service_registries[0].container_port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -4558,7 +4585,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
