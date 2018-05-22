@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.55 (2018-05-22)
+------------------
+
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
 
 * Feature - Aws::Inspector - Updated the API for Amazon Inspector.
