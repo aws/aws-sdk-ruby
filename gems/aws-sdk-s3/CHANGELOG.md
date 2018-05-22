@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Update EventEmitter to Aws::EventEmitter
+
 1.12.0 (2018-05-18)
 ------------------
 

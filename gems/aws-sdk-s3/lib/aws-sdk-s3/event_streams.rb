@@ -10,7 +10,7 @@ module Aws::S3
     class SelectObjectContentEventStream
 
       def initialize
-        @event_emitter = EventEmitter.new
+        @event_emitter = Aws::EventEmitter.new
       end
 
       def on_records_event(&block)
@@ -46,7 +46,7 @@ module Aws::S3
       end
 
       # @api private
-      # @return EventEmitter
+      # @return Aws::EventEmitter
       attr_reader :event_emitter
 
     end

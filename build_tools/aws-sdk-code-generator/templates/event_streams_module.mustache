@@ -7,7 +7,7 @@ module {{module_name}}
     class {{class_name}}
 
       def initialize
-        @event_emitter = EventEmitter.new
+        @event_emitter = Aws::EventEmitter.new
       end
 
       {{#types}}
@@ -27,7 +27,7 @@ module {{module_name}}
       end
 
       # @api private
-      # @return EventEmitter
+      # @return Aws::EventEmitter
       attr_reader :event_emitter
 
     end
