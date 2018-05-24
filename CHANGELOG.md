@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.56 (2018-05-24)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the API for AWS CodeBuild.
 
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
