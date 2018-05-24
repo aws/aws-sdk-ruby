@@ -295,6 +295,13 @@ module Aws::RDS
       data[:backtrack_consumed_change_records]
     end
 
+    # A list of log types that this DB cluster is configured to export to
+    # CloudWatch Logs.
+    # @return [Array<String>]
+    def enabled_cloudwatch_logs_exports
+      data[:enabled_cloudwatch_logs_exports]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -457,6 +464,7 @@ module Aws::RDS
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -685,6 +693,9 @@ module Aws::RDS
     #     (72 hours).
     #
     #   ^
+    # @option options [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -822,6 +833,10 @@ module Aws::RDS
     #     preferred_maintenance_window: "String",
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
+    #     cloudwatch_logs_export_configuration: {
+    #       enable_log_types: ["String"],
+    #       disable_log_types: ["String"],
+    #     },
     #     engine_version: "String",
     #   })
     # @param [Hash] options ({})
@@ -951,6 +966,9 @@ module Aws::RDS
     #     (72 hours).
     #
     #   ^
+    # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB cluster.
     # @option options [String] :engine_version
     #   The version number of the database engine to which you want to
     #   upgrade. Changing this parameter results in an outage. The change is
@@ -990,6 +1008,7 @@ module Aws::RDS
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -1111,6 +1130,9 @@ module Aws::RDS
     #     (72 hours).
     #
     #   ^
+    # @option options [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

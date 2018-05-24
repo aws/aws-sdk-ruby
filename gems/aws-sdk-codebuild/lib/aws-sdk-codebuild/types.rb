@@ -414,7 +414,7 @@ module Aws::CodeBuild
     #           location: "String",
     #         },
     #         environment: { # required
-    #           type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #           image: "NonEmptyString", # required
     #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #           environment_variables: [
@@ -1331,7 +1331,7 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #         type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #         image: "NonEmptyString", # required
     #         compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #         environment_variables: [
@@ -1588,7 +1588,7 @@ module Aws::CodeBuild
     #         git_clone_depth_override: 1,
     #         buildspec_override: "String",
     #         insecure_ssl_override: false,
-    #         environment_type_override: "LINUX_CONTAINER", # accepts LINUX_CONTAINER
+    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #         image_override: "NonEmptyString",
     #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #         certificate_override: "String",
@@ -1848,7 +1848,7 @@ module Aws::CodeBuild
     #           location: "String",
     #         },
     #         environment: {
-    #           type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #           image: "NonEmptyString", # required
     #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #           environment_variables: [

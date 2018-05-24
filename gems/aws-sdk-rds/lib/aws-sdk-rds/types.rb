@@ -1160,6 +1160,7 @@ module Aws::RDS
     #         pre_signed_url: "String",
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #         source_region: "String",
     #       }
     #
@@ -1448,6 +1449,11 @@ module Aws::RDS
     #   ^
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -1482,6 +1488,7 @@ module Aws::RDS
       :pre_signed_url,
       :enable_iam_database_authentication,
       :backtrack_window,
+      :enable_cloudwatch_logs_exports,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -2654,6 +2661,13 @@ module Aws::RDS
     # @!attribute [rw] enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
@@ -3042,6 +3056,13 @@ module Aws::RDS
     # @!attribute [rw] enable_performance_insights
     #   True to enable Performance Insights for the read replica, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
@@ -3795,6 +3816,11 @@ module Aws::RDS
     #   The number of change records stored for Backtrack.
     #   @return [Integer]
     #
+    # @!attribute [rw] enabled_cloudwatch_logs_exports
+    #   A list of log types that this DB cluster is configured to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -3835,7 +3861,8 @@ module Aws::RDS
       :cluster_create_time,
       :earliest_backtrack_time,
       :backtrack_window,
-      :backtrack_consumed_change_records)
+      :backtrack_consumed_change_records,
+      :enabled_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -8405,6 +8432,10 @@ module Aws::RDS
     #         preferred_maintenance_window: "String",
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
+    #         cloudwatch_logs_export_configuration: {
+    #           enable_log_types: ["String"],
+    #           disable_log_types: ["String"],
+    #         },
     #         engine_version: "String",
     #       }
     #
@@ -8571,6 +8602,11 @@ module Aws::RDS
     #   ^
     #   @return [Integer]
     #
+    # @!attribute [rw] cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB cluster.
+    #   @return [Types::CloudwatchLogsExportConfiguration]
+    #
     # @!attribute [rw] engine_version
     #   The version number of the database engine to which you want to
     #   upgrade. Changing this parameter results in an outage. The change is
@@ -8597,6 +8633,7 @@ module Aws::RDS
       :preferred_maintenance_window,
       :enable_iam_database_authentication,
       :backtrack_window,
+      :cloudwatch_logs_export_configuration,
       :engine_version)
       include Aws::Structure
     end
@@ -9334,6 +9371,13 @@ module Aws::RDS
     # @!attribute [rw] enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
@@ -9344,7 +9388,7 @@ module Aws::RDS
     #
     # @!attribute [rw] cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #   to CloudWatch Logs for a specific DB instance.
     #   @return [Types::CloudwatchLogsExportConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
@@ -11412,6 +11456,7 @@ module Aws::RDS
     #         s3_prefix: "String",
     #         s3_ingestion_role_arn: "String", # required
     #         backtrack_window: 1,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -11665,6 +11710,11 @@ module Aws::RDS
     #   ^
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -11693,7 +11743,8 @@ module Aws::RDS
       :s3_bucket_name,
       :s3_prefix,
       :s3_ingestion_role_arn,
-      :backtrack_window)
+      :backtrack_window,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -11734,6 +11785,7 @@ module Aws::RDS
     #         kms_key_id: "String",
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -11860,6 +11912,11 @@ module Aws::RDS
     #   ^
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -11876,7 +11933,8 @@ module Aws::RDS
       :tags,
       :kms_key_id,
       :enable_iam_database_authentication,
-      :backtrack_window)
+      :backtrack_window,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -11916,6 +11974,7 @@ module Aws::RDS
     #         kms_key_id: "String",
     #         enable_iam_database_authentication: false,
     #         backtrack_window: 1,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -12071,6 +12130,11 @@ module Aws::RDS
     #   ^
     #   @return [Integer]
     #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -12086,7 +12150,8 @@ module Aws::RDS
       :tags,
       :kms_key_id,
       :enable_iam_database_authentication,
-      :backtrack_window)
+      :backtrack_window,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -12806,6 +12871,13 @@ module Aws::RDS
     # @!attribute [rw] enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id

@@ -1457,6 +1457,13 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
@@ -1729,6 +1736,13 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the read replica, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
@@ -2374,13 +2388,20 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
     # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #   to CloudWatch Logs for a specific DB instance.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)

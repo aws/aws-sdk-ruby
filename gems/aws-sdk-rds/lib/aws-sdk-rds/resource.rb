@@ -52,6 +52,7 @@ module Aws::RDS
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
     #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -293,6 +294,9 @@ module Aws::RDS
     #     (72 hours).
     #
     #   ^
+    # @option options [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1276,6 +1280,13 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key

@@ -469,7 +469,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   This name must be unique per region per account, can have a maximum of
     #   32 characters, must contain only alphanumeric characters or hyphens,
-    #   and must not begin or end with a hyphen.
+    #   must not begin or end with a hyphen, and must not begin with
+    #   "internal-".
     #
     # @option params [Array<String>] :subnets
     #   The IDs of the public subnets. You can specify only one subnet per
@@ -1387,6 +1388,15 @@ module Aws::ElasticLoadBalancingV2
     # Describes the attributes for the specified Application Load Balancer
     # or Network Load Balancer.
     #
+    # For more information, see [Load Balancer Attributes][1] in the
+    # *Application Load Balancers Guide* or [Load Balancer Attributes][2] in
+    # the *Network Load Balancers Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#load-balancer-attributes
+    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#load-balancer-attributes
+    #
     # @option params [required, String] :load_balancer_arn
     #   The Amazon Resource Name (ARN) of the load balancer.
     #
@@ -1871,6 +1881,15 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Describes the attributes for the specified target group.
+    #
+    # For more information, see [Target Group Attributes][1] in the
+    # *Application Load Balancers Guide* or [Target Group Attributes][2] in
+    # the *Network Load Balancers Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#target-group-attributes
+    # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#target-group-attributes
     #
     # @option params [required, String] :target_group_arn
     #   The Amazon Resource Name (ARN) of the target group.
@@ -3231,7 +3250,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

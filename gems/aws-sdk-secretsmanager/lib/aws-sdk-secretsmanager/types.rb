@@ -74,6 +74,9 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] name
     #   Specifies the friendly name of the new secret.
+    #
+    #   The secret name must be ASCII letters, digits, or the following
+    #   characters : /\_+=,.@-
     #   @return [String]
     #
     # @!attribute [rw] client_request_token

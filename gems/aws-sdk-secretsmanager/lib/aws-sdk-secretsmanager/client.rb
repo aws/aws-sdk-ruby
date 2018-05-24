@@ -338,6 +338,9 @@ module Aws::SecretsManager
     # @option params [required, String] :name
     #   Specifies the friendly name of the new secret.
     #
+    #   The secret name must be ASCII letters, digits, or the following
+    #   characters : /\_+=,.@-
+    #
     # @option params [String] :client_request_token
     #   (Optional) If you include `SecretString` or `SecretBinary`, then an
     #   initial version is created as part of the secret, and this parameter
@@ -2317,7 +2320,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

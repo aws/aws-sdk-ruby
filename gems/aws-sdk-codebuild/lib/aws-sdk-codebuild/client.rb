@@ -489,7 +489,7 @@ module Aws::CodeBuild
     #   resp.builds[0].artifacts.md5sum #=> String
     #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.builds[0].cache.location #=> String
-    #   resp.builds[0].environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.builds[0].environment.image #=> String
     #   resp.builds[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.builds[0].environment.environment_variables #=> Array
@@ -561,7 +561,7 @@ module Aws::CodeBuild
     #   resp.projects[0].artifacts.packaging #=> String, one of "NONE", "ZIP"
     #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.projects[0].cache.location #=> String
-    #   resp.projects[0].environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.projects[0].environment.image #=> String
     #   resp.projects[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.projects[0].environment.environment_variables #=> Array
@@ -686,7 +686,7 @@ module Aws::CodeBuild
     #       location: "String",
     #     },
     #     environment: { # required
-    #       type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #       environment_variables: [
@@ -736,7 +736,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
-    #   resp.project.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.project.environment.environment_variables #=> Array
@@ -1007,7 +1007,7 @@ module Aws::CodeBuild
     # @example Response structure
     #
     #   resp.platforms #=> Array
-    #   resp.platforms[0].platform #=> String, one of "DEBIAN", "AMAZON_LINUX", "UBUNTU"
+    #   resp.platforms[0].platform #=> String, one of "DEBIAN", "AMAZON_LINUX", "UBUNTU", "WINDOWS_SERVER"
     #   resp.platforms[0].languages #=> Array
     #   resp.platforms[0].languages[0].language #=> String, one of "JAVA", "PYTHON", "NODE_JS", "RUBY", "GOLANG", "DOCKER", "ANDROID", "DOTNET", "BASE"
     #   resp.platforms[0].languages[0].images #=> Array
@@ -1228,7 +1228,7 @@ module Aws::CodeBuild
     #     git_clone_depth_override: 1,
     #     buildspec_override: "String",
     #     insecure_ssl_override: false,
-    #     environment_type_override: "LINUX_CONTAINER", # accepts LINUX_CONTAINER
+    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #     image_override: "NonEmptyString",
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #     certificate_override: "String",
@@ -1273,7 +1273,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.md5sum #=> String
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
-    #   resp.build.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.build.environment.environment_variables #=> Array
@@ -1352,7 +1352,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.md5sum #=> String
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
-    #   resp.build.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.build.environment.environment_variables #=> Array
@@ -1476,7 +1476,7 @@ module Aws::CodeBuild
     #       location: "String",
     #     },
     #     environment: {
-    #       type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #       environment_variables: [
@@ -1526,7 +1526,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
-    #   resp.project.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.project.environment.environment_variables #=> Array
@@ -1622,7 +1622,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
