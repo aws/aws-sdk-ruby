@@ -928,6 +928,9 @@ module Aws::Glue
     # @option params [Integer] :timeout
     #   The job timeout in minutes. The default is 2880 minutes (48 hours).
     #
+    # @option params [Types::NotificationProperty] :notification_property
+    #   Specifies configuration properties of a job notification.
+    #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResponse#name #name} => String
@@ -955,6 +958,9 @@ module Aws::Glue
     #     max_retries: 1,
     #     allocated_capacity: 1,
     #     timeout: 1,
+    #     notification_property: {
+    #       notify_delay_after: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1263,6 +1269,9 @@ module Aws::Glue
     #           "GenericString" => "GenericString",
     #         },
     #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       },
     #     ],
     #     description: "DescriptionString",
@@ -2305,6 +2314,7 @@ module Aws::Glue
     #   resp.job.max_retries #=> Integer
     #   resp.job.allocated_capacity #=> Integer
     #   resp.job.timeout #=> Integer
+    #   resp.job.notification_property.notify_delay_after #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -2358,6 +2368,7 @@ module Aws::Glue
     #   resp.job_run.allocated_capacity #=> Integer
     #   resp.job_run.execution_time #=> Integer
     #   resp.job_run.timeout #=> Integer
+    #   resp.job_run.notification_property.notify_delay_after #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -2413,6 +2424,7 @@ module Aws::Glue
     #   resp.job_runs[0].allocated_capacity #=> Integer
     #   resp.job_runs[0].execution_time #=> Integer
     #   resp.job_runs[0].timeout #=> Integer
+    #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -2463,6 +2475,7 @@ module Aws::Glue
     #   resp.jobs[0].max_retries #=> Integer
     #   resp.jobs[0].allocated_capacity #=> Integer
     #   resp.jobs[0].timeout #=> Integer
+    #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -3183,6 +3196,7 @@ module Aws::Glue
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
     #   resp.trigger.actions[0].timeout #=> Integer
+    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
@@ -3238,6 +3252,7 @@ module Aws::Glue
     #   resp.triggers[0].actions[0].arguments #=> Hash
     #   resp.triggers[0].actions[0].arguments["GenericString"] #=> String
     #   resp.triggers[0].actions[0].timeout #=> Integer
+    #   resp.triggers[0].actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.triggers[0].predicate.logical #=> String, one of "AND", "ANY"
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
@@ -3499,6 +3514,9 @@ module Aws::Glue
     #   The job run timeout in minutes. It overrides the timeout value of the
     #   job.
     #
+    # @option params [Types::NotificationProperty] :notification_property
+    #   Specifies configuration properties of a job run notification.
+    #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartJobRunResponse#job_run_id #job_run_id} => String
@@ -3513,6 +3531,9 @@ module Aws::Glue
     #     },
     #     allocated_capacity: 1,
     #     timeout: 1,
+    #     notification_property: {
+    #       notify_delay_after: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3964,6 +3985,9 @@ module Aws::Glue
     #       max_retries: 1,
     #       allocated_capacity: 1,
     #       timeout: 1,
+    #       notification_property: {
+    #         notify_delay_after: 1,
+    #       },
     #     },
     #   })
     #
@@ -4191,6 +4215,9 @@ module Aws::Glue
     #             "GenericString" => "GenericString",
     #           },
     #           timeout: 1,
+    #           notification_property: {
+    #             notify_delay_after: 1,
+    #           },
     #         },
     #       ],
     #       predicate: {
@@ -4219,6 +4246,7 @@ module Aws::Glue
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
     #   resp.trigger.actions[0].timeout #=> Integer
+    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
@@ -4295,7 +4323,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -412,6 +412,28 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Deletes the retention configuration.
+    #
+    # @option params [required, String] :retention_configuration_name
+    #   The name of the retention configuration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_retention_configuration({
+    #     retention_configuration_name: "RetentionConfigurationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRetentionConfiguration AWS API Documentation
+    #
+    # @overload delete_retention_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_retention_configuration(params = {}, options = {})
+      req = build_request(:delete_retention_configuration, params)
+      req.send_request(options)
+    end
+
     # Schedules delivery of a configuration snapshot to the Amazon S3 bucket
     # in the specified delivery channel. After the delivery has started, AWS
     # Config sends the following notifications using an Amazon SNS topic
@@ -1163,6 +1185,57 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns the details of one or more retention configurations. If the
+    # retention configuration name is not specified, this action returns the
+    # details for all the retention configurations for that account.
+    #
+    # <note markdown="1"> Currently, AWS Config supports only one retention configuration per
+    # region in your account.
+    #
+    #  </note>
+    #
+    # @option params [Array<String>] :retention_configuration_names
+    #   A list of names of retention configurations for which you want
+    #   details. If you do not specify a name, AWS Config returns details for
+    #   all the retention configurations for that account.
+    #
+    #   <note markdown="1"> Currently, AWS Config supports only one retention configuration per
+    #   region in your account.
+    #
+    #    </note>
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeRetentionConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRetentionConfigurationsResponse#retention_configurations #retention_configurations} => Array&lt;Types::RetentionConfiguration&gt;
+    #   * {Types::DescribeRetentionConfigurationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_retention_configurations({
+    #     retention_configuration_names: ["RetentionConfigurationName"],
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retention_configurations #=> Array
+    #   resp.retention_configurations[0].name #=> String
+    #   resp.retention_configurations[0].retention_period_in_days #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRetentionConfigurations AWS API Documentation
+    #
+    # @overload describe_retention_configurations(params = {})
+    # @param [Hash] params ({})
+    def describe_retention_configurations(params = {}, options = {})
+      req = build_request(:describe_retention_configurations, params)
+      req.send_request(options)
+    end
+
     # Returns the evaluation results for the specified AWS Config rule for a
     # specific resource in a rule. The results indicate which AWS resources
     # were evaluated by the rule, when each resource was last evaluated, and
@@ -1599,7 +1672,10 @@ module Aws::ConfigService
 
     # Returns a list of configuration items for the specified resource. The
     # list contains details about each state of the resource during the
-    # specified time interval.
+    # specified time interval. If you specified a retention period to retain
+    # your `ConfigurationItems` between a minimum of 30 days and a maximum
+    # of 7 years (2557 days), AWS Config returns the `ConfigurationItems`
+    # for the specified retention period.
     #
     # The response is paginated. By default, AWS Config returns a limit of
     # 10 configuration items per page. You can customize this number with
@@ -2128,6 +2204,49 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Creates and updates the retention configuration with details about
+    # retention period (number of days) that AWS Config stores your
+    # historical information. The API creates the `RetentionConfiguration`
+    # object and names the object as **default**. When you have a
+    # `RetentionConfiguration` object named **default**, calling the API
+    # modifies the default object.
+    #
+    # <note markdown="1"> Currently, AWS Config supports only one retention configuration per
+    # region in your account.
+    #
+    #  </note>
+    #
+    # @option params [required, Integer] :retention_period_in_days
+    #   Number of days AWS Config stores your historical information.
+    #
+    #   <note markdown="1"> Currently, only applicable to the configuration item history.
+    #
+    #    </note>
+    #
+    # @return [Types::PutRetentionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRetentionConfigurationResponse#retention_configuration #retention_configuration} => Types::RetentionConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_retention_configuration({
+    #     retention_period_in_days: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retention_configuration.name #=> String
+    #   resp.retention_configuration.retention_period_in_days #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRetentionConfiguration AWS API Documentation
+    #
+    # @overload put_retention_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_retention_configuration(params = {}, options = {})
+      req = build_request(:put_retention_configuration, params)
+      req.send_request(options)
+    end
+
     # Runs an on-demand evaluation for the specified AWS Config rules
     # against the last known configuration state of the resources. Use
     # `StartConfigRulesEvaluation` when you want to test that a rule you
@@ -2251,7 +2370,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -19,6 +19,9 @@ module Aws::Glue
     #           "GenericString" => "GenericString",
     #         },
     #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
@@ -50,12 +53,17 @@ module Aws::Glue
     #   the job.
     #   @return [Integer]
     #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job run notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Action AWS API Documentation
     #
     class Action < Struct.new(
       :job_name,
       :arguments,
-      :timeout)
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -1528,6 +1536,9 @@ module Aws::Glue
     #         max_retries: 1,
     #         allocated_capacity: 1,
     #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1600,6 +1611,10 @@ module Aws::Glue
     #   The job timeout in minutes. The default is 2880 minutes (48 hours).
     #   @return [Integer]
     #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -1613,7 +1628,8 @@ module Aws::Glue
       :connections,
       :max_retries,
       :allocated_capacity,
-      :timeout)
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -1934,6 +1950,9 @@ module Aws::Glue
     #               "GenericString" => "GenericString",
     #             },
     #             timeout: 1,
+    #             notification_property: {
+    #               notify_delay_after: 1,
+    #             },
     #           },
     #         ],
     #         description: "DescriptionString",
@@ -4261,6 +4280,10 @@ module Aws::Glue
     #   The job timeout in minutes.
     #   @return [Integer]
     #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -4276,7 +4299,8 @@ module Aws::Glue
       :connections,
       :max_retries,
       :allocated_capacity,
-      :timeout)
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -4427,6 +4451,10 @@ module Aws::Glue
     #   The job run timeout in minutes.
     #   @return [Integer]
     #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job run notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -4444,7 +4472,8 @@ module Aws::Glue
       :predecessor_runs,
       :allocated_capacity,
       :execution_time,
-      :timeout)
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -4475,6 +4504,9 @@ module Aws::Glue
     #         max_retries: 1,
     #         allocated_capacity: 1,
     #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] description
@@ -4542,6 +4574,10 @@ module Aws::Glue
     #   The job timeout in minutes. The default is 2880 minutes (48 hours).
     #   @return [Integer]
     #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
     class JobUpdate < Struct.new(
@@ -4554,7 +4590,8 @@ module Aws::Glue
       :connections,
       :max_retries,
       :allocated_capacity,
-      :timeout)
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -4720,6 +4757,27 @@ module Aws::Glue
       :target_table,
       :target_path,
       :target_type)
+      include Aws::Structure
+    end
+
+    # Specifies configuration properties of a notification.
+    #
+    # @note When making an API call, you may pass NotificationProperty
+    #   data as a hash:
+    #
+    #       {
+    #         notify_delay_after: 1,
+    #       }
+    #
+    # @!attribute [rw] notify_delay_after
+    #   After a job run starts, the number of minutes to wait before sending
+    #   a job run delay notification.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/NotificationProperty AWS API Documentation
+    #
+    class NotificationProperty < Struct.new(
+      :notify_delay_after)
       include Aws::Structure
     end
 
@@ -5303,6 +5361,9 @@ module Aws::Glue
     #         },
     #         allocated_capacity: 1,
     #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
@@ -5351,6 +5412,10 @@ module Aws::Glue
     #   the job.
     #   @return [Integer]
     #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job run notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRunRequest AWS API Documentation
     #
     class StartJobRunRequest < Struct.new(
@@ -5358,7 +5423,8 @@ module Aws::Glue
       :job_run_id,
       :arguments,
       :allocated_capacity,
-      :timeout)
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -5956,6 +6022,9 @@ module Aws::Glue
     #               "GenericString" => "GenericString",
     #             },
     #             timeout: 1,
+    #             notification_property: {
+    #               notify_delay_after: 1,
+    #             },
     #           },
     #         ],
     #         predicate: {
@@ -6404,6 +6473,9 @@ module Aws::Glue
     #           max_retries: 1,
     #           allocated_capacity: 1,
     #           timeout: 1,
+    #           notification_property: {
+    #             notify_delay_after: 1,
+    #           },
     #         },
     #       }
     #
@@ -6680,6 +6752,9 @@ module Aws::Glue
     #                 "GenericString" => "GenericString",
     #               },
     #               timeout: 1,
+    #               notification_property: {
+    #                 notify_delay_after: 1,
+    #               },
     #             },
     #           ],
     #           predicate: {

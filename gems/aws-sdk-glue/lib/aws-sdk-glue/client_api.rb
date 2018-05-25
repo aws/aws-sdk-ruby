@@ -155,6 +155,7 @@ module Aws::Glue
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorString = Shapes::StringShape.new(name: 'ErrorString')
     ExecutionProperty = Shapes::StructureShape.new(name: 'ExecutionProperty')
+    ExecutionTime = Shapes::IntegerShape.new(name: 'ExecutionTime')
     FieldType = Shapes::StringShape.new(name: 'FieldType')
     FilterString = Shapes::StringShape.new(name: 'FilterString')
     FormatString = Shapes::StringShape.new(name: 'FormatString')
@@ -269,6 +270,8 @@ module Aws::Glue
     NoScheduleException = Shapes::StructureShape.new(name: 'NoScheduleException')
     NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
+    NotificationProperty = Shapes::StructureShape.new(name: 'NotificationProperty')
+    NotifyDelayAfter = Shapes::IntegerShape.new(name: 'NotifyDelayAfter')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
     Order = Shapes::StructureShape.new(name: 'Order')
     OrderList = Shapes::ListShape.new(name: 'OrderList')
@@ -396,6 +399,7 @@ module Aws::Glue
     Action.add_member(:job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "JobName"))
     Action.add_member(:arguments, Shapes::ShapeRef.new(shape: GenericMap, location_name: "Arguments"))
     Action.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    Action.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -681,6 +685,7 @@ module Aws::Glue
     CreateJobRequest.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries"))
     CreateJobRequest.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
     CreateJobRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    CreateJobRequest.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
@@ -1150,6 +1155,7 @@ module Aws::Glue
     Job.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries"))
     Job.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
     Job.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    Job.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
     Job.struct_class = Types::Job
 
     JobBookmarkEntry.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
@@ -1178,8 +1184,9 @@ module Aws::Glue
     JobRun.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorString, location_name: "ErrorMessage"))
     JobRun.add_member(:predecessor_runs, Shapes::ShapeRef.new(shape: PredecessorList, location_name: "PredecessorRuns"))
     JobRun.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
-    JobRun.add_member(:execution_time, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "ExecutionTime"))
+    JobRun.add_member(:execution_time, Shapes::ShapeRef.new(shape: ExecutionTime, location_name: "ExecutionTime"))
     JobRun.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    JobRun.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
     JobRun.struct_class = Types::JobRun
 
     JobRunList.member = Shapes::ShapeRef.new(shape: JobRun)
@@ -1194,6 +1201,7 @@ module Aws::Glue
     JobUpdate.add_member(:max_retries, Shapes::ShapeRef.new(shape: MaxRetries, location_name: "MaxRetries"))
     JobUpdate.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
     JobUpdate.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    JobUpdate.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
     JobUpdate.struct_class = Types::JobUpdate
 
     JsonClassifier.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -1231,6 +1239,9 @@ module Aws::Glue
     MatchCriteria.member = Shapes::ShapeRef.new(shape: NameString)
 
     NameStringList.member = Shapes::ShapeRef.new(shape: NameString)
+
+    NotificationProperty.add_member(:notify_delay_after, Shapes::ShapeRef.new(shape: NotifyDelayAfter, location_name: "NotifyDelayAfter"))
+    NotificationProperty.struct_class = Types::NotificationProperty
 
     Order.add_member(:column, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Column"))
     Order.add_member(:sort_order, Shapes::ShapeRef.new(shape: IntegerFlag, required: true, location_name: "SortOrder"))
@@ -1345,6 +1356,7 @@ module Aws::Glue
     StartJobRunRequest.add_member(:arguments, Shapes::ShapeRef.new(shape: GenericMap, location_name: "Arguments"))
     StartJobRunRequest.add_member(:allocated_capacity, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "AllocatedCapacity"))
     StartJobRunRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    StartJobRunRequest.add_member(:notification_property, Shapes::ShapeRef.new(shape: NotificationProperty, location_name: "NotificationProperty"))
     StartJobRunRequest.struct_class = Types::StartJobRunRequest
 
     StartJobRunResponse.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))

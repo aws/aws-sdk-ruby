@@ -1955,7 +1955,7 @@ module Aws::IoT
     #   resp.job.job_arn #=> String
     #   resp.job.job_id #=> String
     #   resp.job.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
-    #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED"
+    #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
     #   resp.job.comment #=> String
     #   resp.job.targets #=> Array
     #   resp.job.targets[0] #=> String
@@ -3178,7 +3178,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
-    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -3193,7 +3193,7 @@ module Aws::IoT
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].thing_group_id #=> String
     #   resp.jobs[0].target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
-    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED"
+    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].completed_at #=> Time
@@ -5247,7 +5247,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

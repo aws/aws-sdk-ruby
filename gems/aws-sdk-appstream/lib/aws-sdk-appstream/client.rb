@@ -588,6 +588,10 @@ module Aws::AppStream
     #   Feedback link. If no URL is specified, no Send Feedback link is
     #   displayed.
     #
+    # @option params [Array<Types::UserSetting>] :user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -606,6 +610,12 @@ module Aws::AppStream
     #     ],
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
+    #     user_settings: [
+    #       {
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -623,6 +633,9 @@ module Aws::AppStream
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
+    #   resp.stack.user_settings #=> Array
+    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
+    #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -1181,6 +1194,9 @@ module Aws::AppStream
     #   resp.stacks[0].stack_errors #=> Array
     #   resp.stacks[0].stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stacks[0].stack_errors[0].error_message #=> String
+    #   resp.stacks[0].user_settings #=> Array
+    #   resp.stacks[0].user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
+    #   resp.stacks[0].user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -1815,6 +1831,10 @@ module Aws::AppStream
     # @option params [Array<String>] :attributes_to_delete
     #   The stack attributes to delete.
     #
+    # @option params [Array<Types::UserSetting>] :user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -1834,7 +1854,13 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL, FEEDBACK_URL, THEME_NAME
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #     user_settings: [
+    #       {
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1852,6 +1878,9 @@ module Aws::AppStream
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
+    #   resp.stack.user_settings #=> Array
+    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
+    #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -1875,7 +1904,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

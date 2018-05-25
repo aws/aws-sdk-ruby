@@ -24,7 +24,7 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] all_aws_regions
-    #   If true, aggreagate existing AWS Config regions and future regions.
+    #   If true, aggregate existing AWS Config regions and future regions.
     #   @return [Boolean]
     #
     # @!attribute [rw] aws_regions
@@ -1332,6 +1332,24 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteRetentionConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         retention_configuration_name: "RetentionConfigurationName", # required
+    #       }
+    #
+    # @!attribute [rw] retention_configuration_name
+    #   The name of the retention configuration to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRetentionConfigurationRequest AWS API Documentation
+    #
+    class DeleteRetentionConfigurationRequest < Struct.new(
+      :retention_configuration_name)
+      include Aws::Structure
+    end
+
     # The input for the DeliverConfigSnapshot action.
     #
     # @note When making an API call, you may pass DeliverConfigSnapshotRequest
@@ -1850,7 +1868,7 @@ module Aws::ConfigService
     end
 
     # @!attribute [rw] aggregated_source_status_list
-    #   Retuns an AggregatedSourceStatus object.
+    #   Returns an AggregatedSourceStatus object.
     #   @return [Array<Types::AggregatedSourceStatus>]
     #
     # @!attribute [rw] next_token
@@ -2092,6 +2110,55 @@ module Aws::ConfigService
     #
     class DescribePendingAggregationRequestsResponse < Struct.new(
       :pending_aggregation_requests,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeRetentionConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         retention_configuration_names: ["RetentionConfigurationName"],
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] retention_configuration_names
+    #   A list of names of retention configurations for which you want
+    #   details. If you do not specify a name, AWS Config returns details
+    #   for all the retention configurations for that account.
+    #
+    #   <note markdown="1"> Currently, AWS Config supports only one retention configuration per
+    #   region in your account.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRetentionConfigurationsRequest AWS API Documentation
+    #
+    class DescribeRetentionConfigurationsRequest < Struct.new(
+      :retention_configuration_names,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retention_configurations
+    #   Returns a retention configuration object.
+    #   @return [Array<Types::RetentionConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` string returned on a previous page that you use to
+    #   get the next page of results in a paginated response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRetentionConfigurationsResponse AWS API Documentation
+    #
+    class DescribeRetentionConfigurationsResponse < Struct.new(
+      :retention_configurations,
       :next_token)
       include Aws::Structure
     end
@@ -2845,7 +2912,7 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] all_aws_regions
-    #   If true, aggreagate existing AWS Config regions and future regions.
+    #   If true, aggregate existing AWS Config regions and future regions.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/OrganizationAggregationSource AWS API Documentation
@@ -3126,6 +3193,39 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutRetentionConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         retention_period_in_days: 1, # required
+    #       }
+    #
+    # @!attribute [rw] retention_period_in_days
+    #   Number of days AWS Config stores your historical information.
+    #
+    #   <note markdown="1"> Currently, only applicable to the configuration item history.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRetentionConfigurationRequest AWS API Documentation
+    #
+    class PutRetentionConfigurationRequest < Struct.new(
+      :retention_period_in_days)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retention_configuration
+    #   Returns a retention configuration object.
+    #   @return [Types::RetentionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRetentionConfigurationResponse AWS API Documentation
+    #
+    class PutRetentionConfigurationResponse < Struct.new(
+      :retention_configuration)
+      include Aws::Structure
+    end
+
     # Specifies the types of AWS resource for which AWS Config records
     # configuration changes.
     #
@@ -3335,6 +3435,30 @@ module Aws::ConfigService
     class ResourceKey < Struct.new(
       :resource_type,
       :resource_id)
+      include Aws::Structure
+    end
+
+    # An object with the name of the retention configuration and the
+    # retention period in days. The object stores the configuration for data
+    # retention in AWS Config.
+    #
+    # @!attribute [rw] name
+    #   The name of the retention configuration object.
+    #   @return [String]
+    #
+    # @!attribute [rw] retention_period_in_days
+    #   Number of days AWS Config stores your historical information.
+    #
+    #   <note markdown="1"> Currently, only applicable to the configuration item history.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RetentionConfiguration AWS API Documentation
+    #
+    class RetentionConfiguration < Struct.new(
+      :name,
+      :retention_period_in_days)
       include Aws::Structure
     end
 

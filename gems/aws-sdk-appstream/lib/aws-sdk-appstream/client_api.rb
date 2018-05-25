@@ -13,6 +13,7 @@ module Aws::AppStream
 
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountPassword = Shapes::StringShape.new(name: 'AccountPassword')
+    Action = Shapes::StringShape.new(name: 'Action')
     Application = Shapes::StructureShape.new(name: 'Application')
     Applications = Shapes::ListShape.new(name: 'Applications')
     AppstreamAgentVersion = Shapes::StringShape.new(name: 'AppstreamAgentVersion')
@@ -111,6 +112,7 @@ module Aws::AppStream
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
+    Permission = Shapes::StringShape.new(name: 'Permission')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     RedirectURL = Shapes::StringShape.new(name: 'RedirectURL')
     RegionName = Shapes::StringShape.new(name: 'RegionName')
@@ -164,6 +166,8 @@ module Aws::AppStream
     UpdateStackRequest = Shapes::StructureShape.new(name: 'UpdateStackRequest')
     UpdateStackResult = Shapes::StructureShape.new(name: 'UpdateStackResult')
     UserId = Shapes::StringShape.new(name: 'UserId')
+    UserSetting = Shapes::StructureShape.new(name: 'UserSetting')
+    UserSettingList = Shapes::ListShape.new(name: 'UserSettingList')
     VisibilityType = Shapes::StringShape.new(name: 'VisibilityType')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
 
@@ -255,6 +259,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
     CreateStackRequest.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
     CreateStackRequest.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
+    CreateStackRequest.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -508,6 +513,7 @@ module Aws::AppStream
     Stack.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
     Stack.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
     Stack.add_member(:stack_errors, Shapes::ShapeRef.new(shape: StackErrors, location_name: "StackErrors"))
+    Stack.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
     Stack.struct_class = Types::Stack
 
     StackAttributes.member = Shapes::ShapeRef.new(shape: StackAttribute)
@@ -604,10 +610,17 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
     UpdateStackRequest.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
     UpdateStackRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: StackAttributes, location_name: "AttributesToDelete"))
+    UpdateStackRequest.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
     UpdateStackResult.struct_class = Types::UpdateStackResult
+
+    UserSetting.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    UserSetting.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "Permission"))
+    UserSetting.struct_class = Types::UserSetting
+
+    UserSettingList.member = Shapes::ShapeRef.new(shape: UserSetting)
 
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "SecurityGroupIds"))

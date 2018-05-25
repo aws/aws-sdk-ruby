@@ -92,6 +92,7 @@ module Aws::ConfigService
     DeleteEvaluationResultsRequest = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsRequest')
     DeleteEvaluationResultsResponse = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsResponse')
     DeletePendingAggregationRequestRequest = Shapes::StructureShape.new(name: 'DeletePendingAggregationRequestRequest')
+    DeleteRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteRetentionConfigurationRequest')
     DeliverConfigSnapshotRequest = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotRequest')
     DeliverConfigSnapshotResponse = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotResponse')
     DeliveryChannel = Shapes::StructureShape.new(name: 'DeliveryChannel')
@@ -127,6 +128,8 @@ module Aws::ConfigService
     DescribePendingAggregationRequestsLimit = Shapes::IntegerShape.new(name: 'DescribePendingAggregationRequestsLimit')
     DescribePendingAggregationRequestsRequest = Shapes::StructureShape.new(name: 'DescribePendingAggregationRequestsRequest')
     DescribePendingAggregationRequestsResponse = Shapes::StructureShape.new(name: 'DescribePendingAggregationRequestsResponse')
+    DescribeRetentionConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeRetentionConfigurationsRequest')
+    DescribeRetentionConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeRetentionConfigurationsResponse')
     EarlierTime = Shapes::TimestampShape.new(name: 'EarlierTime')
     EmptiableStringWithCharLimit256 = Shapes::StringShape.new(name: 'EmptiableStringWithCharLimit256')
     Evaluation = Shapes::StructureShape.new(name: 'Evaluation')
@@ -177,6 +180,7 @@ module Aws::ConfigService
     MaxNumberOfConfigRulesExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigRulesExceededException')
     MaxNumberOfConfigurationRecordersExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigurationRecordersExceededException')
     MaxNumberOfDeliveryChannelsExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfDeliveryChannelsExceededException')
+    MaxNumberOfRetentionConfigurationsExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfRetentionConfigurationsExceededException')
     MaximumExecutionFrequency = Shapes::StringShape.new(name: 'MaximumExecutionFrequency')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     Name = Shapes::StringShape.new(name: 'Name')
@@ -190,6 +194,7 @@ module Aws::ConfigService
     NoSuchConfigurationAggregatorException = Shapes::StructureShape.new(name: 'NoSuchConfigurationAggregatorException')
     NoSuchConfigurationRecorderException = Shapes::StructureShape.new(name: 'NoSuchConfigurationRecorderException')
     NoSuchDeliveryChannelException = Shapes::StructureShape.new(name: 'NoSuchDeliveryChannelException')
+    NoSuchRetentionConfigurationException = Shapes::StructureShape.new(name: 'NoSuchRetentionConfigurationException')
     OrderingTimestamp = Shapes::TimestampShape.new(name: 'OrderingTimestamp')
     OrganizationAccessDeniedException = Shapes::StructureShape.new(name: 'OrganizationAccessDeniedException')
     OrganizationAggregationSource = Shapes::StructureShape.new(name: 'OrganizationAggregationSource')
@@ -206,6 +211,8 @@ module Aws::ConfigService
     PutDeliveryChannelRequest = Shapes::StructureShape.new(name: 'PutDeliveryChannelRequest')
     PutEvaluationsRequest = Shapes::StructureShape.new(name: 'PutEvaluationsRequest')
     PutEvaluationsResponse = Shapes::StructureShape.new(name: 'PutEvaluationsResponse')
+    PutRetentionConfigurationRequest = Shapes::StructureShape.new(name: 'PutRetentionConfigurationRequest')
+    PutRetentionConfigurationResponse = Shapes::StructureShape.new(name: 'PutRetentionConfigurationResponse')
     RecorderName = Shapes::StringShape.new(name: 'RecorderName')
     RecorderStatus = Shapes::StringShape.new(name: 'RecorderStatus')
     RecordingGroup = Shapes::StructureShape.new(name: 'RecordingGroup')
@@ -231,6 +238,11 @@ module Aws::ConfigService
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
+    RetentionConfiguration = Shapes::StructureShape.new(name: 'RetentionConfiguration')
+    RetentionConfigurationList = Shapes::ListShape.new(name: 'RetentionConfigurationList')
+    RetentionConfigurationName = Shapes::StringShape.new(name: 'RetentionConfigurationName')
+    RetentionConfigurationNameList = Shapes::ListShape.new(name: 'RetentionConfigurationNameList')
+    RetentionPeriodInDays = Shapes::IntegerShape.new(name: 'RetentionPeriodInDays')
     RuleLimit = Shapes::IntegerShape.new(name: 'RuleLimit')
     Scope = Shapes::StructureShape.new(name: 'Scope')
     Source = Shapes::StructureShape.new(name: 'Source')
@@ -508,6 +520,9 @@ module Aws::ConfigService
     DeletePendingAggregationRequestRequest.add_member(:requester_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "RequesterAwsRegion"))
     DeletePendingAggregationRequestRequest.struct_class = Types::DeletePendingAggregationRequestRequest
 
+    DeleteRetentionConfigurationRequest.add_member(:retention_configuration_name, Shapes::ShapeRef.new(shape: RetentionConfigurationName, required: true, location_name: "RetentionConfigurationName"))
+    DeleteRetentionConfigurationRequest.struct_class = Types::DeleteRetentionConfigurationRequest
+
     DeliverConfigSnapshotRequest.add_member(:delivery_channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "deliveryChannelName"))
     DeliverConfigSnapshotRequest.struct_class = Types::DeliverConfigSnapshotRequest
 
@@ -638,6 +653,14 @@ module Aws::ConfigService
     DescribePendingAggregationRequestsResponse.add_member(:pending_aggregation_requests, Shapes::ShapeRef.new(shape: PendingAggregationRequestList, location_name: "PendingAggregationRequests"))
     DescribePendingAggregationRequestsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribePendingAggregationRequestsResponse.struct_class = Types::DescribePendingAggregationRequestsResponse
+
+    DescribeRetentionConfigurationsRequest.add_member(:retention_configuration_names, Shapes::ShapeRef.new(shape: RetentionConfigurationNameList, location_name: "RetentionConfigurationNames"))
+    DescribeRetentionConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRetentionConfigurationsRequest.struct_class = Types::DescribeRetentionConfigurationsRequest
+
+    DescribeRetentionConfigurationsResponse.add_member(:retention_configurations, Shapes::ShapeRef.new(shape: RetentionConfigurationList, location_name: "RetentionConfigurations"))
+    DescribeRetentionConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeRetentionConfigurationsResponse.struct_class = Types::DescribeRetentionConfigurationsResponse
 
     Evaluation.add_member(:compliance_resource_type, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "ComplianceResourceType"))
     Evaluation.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: BaseResourceId, required: true, location_name: "ComplianceResourceId"))
@@ -799,6 +822,12 @@ module Aws::ConfigService
     PutEvaluationsResponse.add_member(:failed_evaluations, Shapes::ShapeRef.new(shape: Evaluations, location_name: "FailedEvaluations"))
     PutEvaluationsResponse.struct_class = Types::PutEvaluationsResponse
 
+    PutRetentionConfigurationRequest.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: RetentionPeriodInDays, required: true, location_name: "RetentionPeriodInDays"))
+    PutRetentionConfigurationRequest.struct_class = Types::PutRetentionConfigurationRequest
+
+    PutRetentionConfigurationResponse.add_member(:retention_configuration, Shapes::ShapeRef.new(shape: RetentionConfiguration, location_name: "RetentionConfiguration"))
+    PutRetentionConfigurationResponse.struct_class = Types::PutRetentionConfigurationResponse
+
     RecordingGroup.add_member(:all_supported, Shapes::ShapeRef.new(shape: AllSupported, location_name: "allSupported"))
     RecordingGroup.add_member(:include_global_resource_types, Shapes::ShapeRef.new(shape: IncludeGlobalResourceTypes, location_name: "includeGlobalResourceTypes"))
     RecordingGroup.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
@@ -841,6 +870,14 @@ module Aws::ConfigService
     ResourceTypeList.member = Shapes::ShapeRef.new(shape: ResourceType)
 
     ResourceTypes.member = Shapes::ShapeRef.new(shape: StringWithCharLimit256)
+
+    RetentionConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: RetentionConfigurationName, required: true, location_name: "Name"))
+    RetentionConfiguration.add_member(:retention_period_in_days, Shapes::ShapeRef.new(shape: RetentionPeriodInDays, required: true, location_name: "RetentionPeriodInDays"))
+    RetentionConfiguration.struct_class = Types::RetentionConfiguration
+
+    RetentionConfigurationList.member = Shapes::ShapeRef.new(shape: RetentionConfiguration)
+
+    RetentionConfigurationNameList.member = Shapes::ShapeRef.new(shape: RetentionConfigurationName)
 
     Scope.add_member(:compliance_resource_types, Shapes::ShapeRef.new(shape: ComplianceResourceTypes, location_name: "ComplianceResourceTypes"))
     Scope.add_member(:tag_key, Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKey"))
@@ -966,6 +1003,16 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: DeletePendingAggregationRequestRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+      end)
+
+      api.add_operation(:delete_retention_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRetentionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRetentionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRetentionConfigurationException)
       end)
 
       api.add_operation(:deliver_config_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -1113,6 +1160,17 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLimitException)
+      end)
+
+      api.add_operation(:describe_retention_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRetentionConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRetentionConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRetentionConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchRetentionConfigurationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:get_aggregate_compliance_details_by_config_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1291,6 +1349,16 @@ module Aws::ConfigService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResultTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+      end)
+
+      api.add_operation(:put_retention_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutRetentionConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutRetentionConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutRetentionConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfRetentionConfigurationsExceededException)
       end)
 
       api.add_operation(:start_config_rules_evaluation, Seahorse::Model::Operation.new.tap do |o|

@@ -4538,7 +4538,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED
+    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS
     #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #         max_results: 1,
     #         next_token: "NextToken",

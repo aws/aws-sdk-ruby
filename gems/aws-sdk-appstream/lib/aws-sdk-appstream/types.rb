@@ -532,6 +532,12 @@ module Aws::AppStream
     #         ],
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
+    #         user_settings: [
+    #           {
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -561,6 +567,11 @@ module Aws::AppStream
     #   displayed.
     #   @return [String]
     #
+    # @!attribute [rw] user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #   @return [Array<Types::UserSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -569,7 +580,8 @@ module Aws::AppStream
       :display_name,
       :storage_connectors,
       :redirect_url,
-      :feedback_url)
+      :feedback_url,
+      :user_settings)
       include Aws::Structure
     end
 
@@ -1743,6 +1755,11 @@ module Aws::AppStream
     #   The errors for the stack.
     #   @return [Array<Types::StackError>]
     #
+    # @!attribute [rw] user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default these actions are enabled.
+    #   @return [Array<Types::UserSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -1754,7 +1771,8 @@ module Aws::AppStream
       :storage_connectors,
       :redirect_url,
       :feedback_url,
-      :stack_errors)
+      :stack_errors,
+      :user_settings)
       include Aws::Structure
     end
 
@@ -2190,7 +2208,13 @@ module Aws::AppStream
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL, FEEDBACK_URL, THEME_NAME
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #         user_settings: [
+    #           {
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] display_name
@@ -2228,6 +2252,11 @@ module Aws::AppStream
     #   The stack attributes to delete.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #   @return [Array<Types::UserSetting>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -2238,7 +2267,8 @@ module Aws::AppStream
       :delete_storage_connectors,
       :redirect_url,
       :feedback_url,
-      :attributes_to_delete)
+      :attributes_to_delete,
+      :user_settings)
       include Aws::Structure
     end
 
@@ -2250,6 +2280,33 @@ module Aws::AppStream
     #
     class UpdateStackResult < Struct.new(
       :stack)
+      include Aws::Structure
+    end
+
+    # Describes an action and whether the action is enabled or disabled for
+    # users during their streaming sessions.
+    #
+    # @note When making an API call, you may pass UserSetting
+    #   data as a hash:
+    #
+    #       {
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   Indicates whether the action is enabled or disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserSetting AWS API Documentation
+    #
+    class UserSetting < Struct.new(
+      :action,
+      :permission)
       include Aws::Structure
     end
 
