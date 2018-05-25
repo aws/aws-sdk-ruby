@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.57 (2018-05-25)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
