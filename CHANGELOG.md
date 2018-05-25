@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::Glue - Updated the API, and documentation for AWS Glue.
+
+* Feature - Aws::IoT - Updated the API for AWS IoT.
+
 2.11.56 (2018-05-24)
 ------------------
 
