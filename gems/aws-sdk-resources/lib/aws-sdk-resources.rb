@@ -104,6 +104,7 @@ module Aws
   autoload :OpsWorks, 'aws-sdk-opsworks'
   autoload :OpsWorksCM, 'aws-sdk-opsworkscm'
   autoload :Organizations, 'aws-sdk-organizations'
+  autoload :PI, 'aws-sdk-pi'
   autoload :Pinpoint, 'aws-sdk-pinpoint'
   autoload :Polly, 'aws-sdk-polly'
   autoload :Pricing, 'aws-sdk-pricing'

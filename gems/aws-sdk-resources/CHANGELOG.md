@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.17.0 (2018-05-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pi` gem.
+
 3.16.0 (2018-05-14)
 ------------------
 

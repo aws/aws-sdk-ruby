@@ -335,6 +335,9 @@
   "Organizations": {
     "models": "organizations/2016-11-28"
   },
+  "PI": {
+    "models": "pi/2018-02-27"
+  },
   "Pinpoint": {
     "models": "pinpoint/2016-12-01"
   },

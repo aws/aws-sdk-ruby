@@ -320,6 +320,7 @@ module Aws
             'OpsWorks' => 'opsworks',
             'OpsWorksCM' => 'opsworks-cm',
             'Organizations' => 'organizations',
+            'PI' => 'pi',
             'Pinpoint' => 'pinpoint',
             'Polly' => 'polly',
             'Pricing' => 'api.pricing',

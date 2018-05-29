@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2018-05-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PI`.
+
 1.87.0 (2018-05-14)
 ------------------
 
