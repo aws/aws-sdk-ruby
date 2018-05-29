@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::PI - Added support for a new service, AWS Performance Insights.
+
 2.11.57 (2018-05-25)
 ------------------
 

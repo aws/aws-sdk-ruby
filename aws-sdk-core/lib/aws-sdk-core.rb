@@ -124,6 +124,7 @@ module Aws
     OpsWorks
     OpsWorksCM
     Organizations
+    PI
     Pinpoint
     Polly
     Pricing
