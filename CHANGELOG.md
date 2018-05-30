@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::Neptune - Added support for a new service, Amazon Neptune.
+
 2.11.58 (2018-05-29)
 ------------------
 

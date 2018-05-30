@@ -390,6 +390,10 @@
     "models": "mobile/2017-07-01",
     "endpoint": "mobile"
   },
+  "Neptune": {
+    "models": "neptune/2014-10-31",
+    "endpoint": "rds"
+  },
   "OpsWorks": {
     "models": "opsworks/2013-02-18",
     "endpoint": "opsworks"

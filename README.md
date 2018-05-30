@@ -368,6 +368,7 @@ to be backwards compatible.
 | Amazon Lightsail                                      | Lightsail                       | 2016-11-28  |
 | Amazon Machine Learning                               | MachineLearning                 | 2014-12-12  |
 | Amazon Mechanical Turk                                | MTurk                           | 2017-01-17  |
+| Amazon Neptune                                        | Neptune                         | 2014-10-31  |
 | Amazon Pinpoint                                       | Pinpoint                        | 2016-12-01  |
 | Amazon Polly                                          | Polly                           | 2016-06-10  |
 | Amazon Redshift                                       | Redshift                        | 2012-12-01  |
@@ -393,8 +394,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 
 ## License

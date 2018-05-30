@@ -121,6 +121,7 @@ module Aws
     MediaStoreData
     MigrationHub
     Mobile
+    Neptune
     OpsWorks
     OpsWorksCM
     Organizations
