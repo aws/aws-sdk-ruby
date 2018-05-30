@@ -25,19 +25,19 @@ module Aws
 
         def apply_api_customizations(api)
           metadata = api['metadata'] || {}
-          prefix = metadata['endpointPrefix']
+          prefix = metadata['serviceFullName']
           # event stream is not supported at V2
           api = exclude_eventstream(api) if api['operations']
           @apis[prefix].call(api) if @apis[prefix]
         end
 
         def apply_doc_customizations(api, docs)
-          prefix = api.metadata['endpointPrefix']
+          prefix = api.metadata['serviceFullName']
           @docs[prefix].call(docs) if @docs[prefix]
         end
 
         def apply_plugins(client_class)
-          prefix = client_class.api.metadata['endpointPrefix']
+          prefix = client_class.api.metadata['serviceFullName']
           if @plugins[prefix]
             @plugins[prefix][:add].each { |p| client_class.add_plugin(p) }
             @plugins[prefix][:remove].each { |p| client_class.remove_plugin(p) }
@@ -69,11 +69,11 @@ module Aws
 
       end
 
-      plugins('apigateway',
+      plugins('Amazon API Gateway',
         add: %w(Aws::Plugins::APIGatewayHeader),
       )
 
-      api('cloudfront') do |api|
+      api('Amazon CloudFront') do |api|
 
         api['shapes'].each do |_, shape|
           if shape['members'] && shape['members']['MaxItems']
@@ -88,19 +88,19 @@ module Aws
 
       end
 
-      plugins('cloudsearchdomain',
+      plugins('Amazon CloudSearch Domain',
         add: %w(Aws::Plugins::CSDConditionalSigning
           Aws::Plugins::CSDSwitchToPost),
         remove: %w(Aws::Plugins::RegionalEndpoint),
       )
 
-      plugins('dynamodb', add: %w(
+      plugins('Amazon DynamoDB', add: %w(
         Aws::Plugins::DynamoDBExtendedRetries
         Aws::Plugins::DynamoDBSimpleAttributes
         Aws::Plugins::DynamoDBCRC32Validation
       ))
 
-      api('ec2') do |api|
+      api('Amazon Elastic Compute Cloud') do |api|
         if ENV['DOCSTRINGS']
           members = api['shapes']['CopySnapshotRequest']['members']
           members.delete('DestinationRegion')
@@ -108,12 +108,12 @@ module Aws
         end
       end
 
-      plugins('ec2', add: %w(
+      plugins('Amazon Elastic Compute Cloud', add: %w(
         Aws::Plugins::EC2CopyEncryptedSnapshot
         Aws::Plugins::EC2RegionValidation
       ))
 
-      api('glacier') do |api|
+      api('Amazon Glacier') do |api|
         api['shapes']['Timestamp'] = {
           'type' => 'timestamp',
           'timestampFormat' => 'iso8601',
@@ -132,48 +132,48 @@ module Aws
         end
       end
 
-      plugins('glacier', add: %w(
+      plugins('Amazon Glacier', add: %w(
         Aws::Plugins::GlacierAccountId
         Aws::Plugins::GlacierApiVersion
         Aws::Plugins::GlacierChecksums
       ))
 
-      api('importexport') do |api|
+      api('AWS Import/Export') do |api|
         api['operations'].each do |_, operation|
           operation['http']['requestUri'] = '/'
         end
       end
 
-      api('data.iot') do |api|
+      api('AWS IoT Data Plane') do |api|
         api['metadata'].delete('endpointPrefix')
       end
 
-      api('lambda') do |api|
+      api('AWS Lambda') do |api|
         api['shapes']['Timestamp']['type'] = 'timestamp'
       end
 
-      doc('lambda') do |docs|
+      doc('AWS Lambda') do |docs|
         docs['shapes']['Blob']['refs']['UpdateFunctionCodeRequest$ZipFile'] =
           "<p>.zip file containing your packaged source code.</p>"
       end
 
-      plugins('machinelearning', add: %w(
+      plugins('Amazon Machine Learning', add: %w(
         Aws::Plugins::MachineLearningPredictEndpoint
       ))
 
-      api('route53') do |api|
+      api('Amazon Route 53') do |api|
         api['shapes']['PageMaxItems']['type'] = 'integer'
       end
 
-      plugins('route53', add: %w(
+      plugins('Amazon Route 53', add: %w(
         Aws::Plugins::Route53IdFix
       ))
 
-      plugins('rds', add: %w(
+      plugins('Amazon Relational Database Service', add: %w(
         Aws::Plugins::RDSCrossRegionCopying
       ))
 
-      api('rds') do |api|
+      api('Amazon Relational Database Service') do |api|
         api['shapes']['CopyDBSnapshotMessage']['members']['DestinationRegion'] =
           {"shape" => "String"}
         api['shapes']['CreateDBInstanceReadReplicaMessage']['members']['DestinationRegion'] =
@@ -192,7 +192,7 @@ module Aws
           {"shape" => "String"}
       end
 
-      doc('rds') do |docs|
+      doc('Amazon Relational Database Service') do |docs|
         docs['shapes']['String']['refs']['CopyDBSnapshotMessage$SourceRegion'] =
           "<p>The region which you are copying an encrypted snapshot from.</p>" +
           "<p>This is a required paramter that allows SDK to compute a pre-signed Url and" +
@@ -211,7 +211,7 @@ module Aws
           " populate <code>PreSignedURL</code> parameter on your behalf.</p>"
       end
 
-      api('s3') do |api|
+      api('Amazon Simple Storage Service') do |api|
         api['metadata'].delete('signatureVersion')
         if ENV['DOCSTRINGS']
           api['shapes']['AccelerateBoolean'] = { 'type' => 'boolean' }
@@ -244,7 +244,7 @@ module Aws
         end
       end
 
-      doc('s3') do |docs|
+      doc('Amazon Simple Storage Service') do |docs|
         if ENV['DOCSTRINGS']
           docs['shapes']['AccelerateBoolean'] = {}
           docs['shapes']['AccelerateBoolean']['refs'] = {}
@@ -252,7 +252,7 @@ module Aws
         end
       end
 
-      plugins('s3', add: %w(
+      plugins('Amazon Simple Storage Service', add: %w(
         Aws::Plugins::S3Accelerate
         Aws::Plugins::S3Dualstack
         Aws::Plugins::S3BucketDns
@@ -269,16 +269,16 @@ module Aws
         Aws::Plugins::S3RequestSigner
       ))
 
-      api('sqs') do |api|
+      api('Amazon Simple Queue Service') do |api|
         api['metadata']['errorPrefix'] = 'AWS.SimpleQueueService.'
       end
 
-      plugins('sqs', add: %w(
+      plugins('Amazon Simple Queue Service', add: %w(
         Aws::Plugins::SQSQueueUrls
         Aws::Plugins::SQSMd5s
       ))
 
-      plugins('swf', add: %w(
+      plugins('Amazon Simple Workflow Service', add: %w(
         Aws::Plugins::SWFReadTimeouts
       ))
 
