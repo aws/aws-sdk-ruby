@@ -67,6 +67,11 @@ require_relative 'aws-sdk-core/json'
 require_relative 'aws-sdk-core/binary'
 require_relative 'aws-sdk-core/event_emitter'
 
+# client metrics
+
+require_relative 'aws-sdk-core/client_side_monitoring/request_metrics'
+require_relative 'aws-sdk-core/client_side_monitoring/publisher'
+
 # aws-sdk-sts is vendored to support Aws::AssumeRoleCredentials
 
 require 'aws-sdk-sts'
