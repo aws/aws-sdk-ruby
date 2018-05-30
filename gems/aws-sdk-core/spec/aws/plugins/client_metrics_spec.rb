@@ -53,14 +53,53 @@ module Aws
 
         it 'does not include the plugin when client_side_monitoring is false' do
           client = ClientMetricsSvc::Client.new(
-            stub_responses: true,
+            credentials: Aws::Credentials.new('stub_akid', 'stub_secret'),
+            region: "us-stubbed-1",
             client_side_monitoring: false
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsPlugin
+            Aws::Plugins::ClientMetricsPlugin::Handler
           )
           expect(client.handlers.to_a).not_to include(
-            Aws::Plugins::ClientMetricsSendPlugin
+            Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
+          )
+          expect(client.handlers.to_a).not_to include(
+            Aws::Plugins::ClientMetricsSendPlugin::LatencyHandler
+          )
+        end
+
+        it 'does not include the plugin unless a port is provided' do
+          client = ClientMetricsSvc::Client.new(
+            credentials: Aws::Credentials.new('stub_akid', 'stub_secret'),
+            region: "us-stubbed-1",
+            client_side_monitoring: true
+          )
+          expect(client.handlers.to_a).not_to include(
+            Aws::Plugins::ClientMetricsPlugin::Handler
+          )
+          expect(client.handlers.to_a).not_to include(
+            Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
+          )
+          expect(client.handlers.to_a).not_to include(
+            Aws::Plugins::ClientMetricsSendPlugin::LatencyHandler
+          )
+        end
+
+        it 'does include the plugins when a port is provided' do
+          client = ClientMetricsSvc::Client.new(
+            credentials: Aws::Credentials.new('stub_akid', 'stub_secret'),
+            region: "us-stubbed-1",
+            client_side_monitoring: true,
+            client_side_monitoring_port: 1234
+          )
+          expect(client.handlers.to_a).to include(
+            Aws::Plugins::ClientMetricsPlugin::Handler
+          )
+          expect(client.handlers.to_a).to include(
+            Aws::Plugins::ClientMetricsSendPlugin::AttemptHandler
+          )
+          expect(client.handlers.to_a).to include(
+            Aws::Plugins::ClientMetricsSendPlugin::LatencyHandler
           )
         end
 

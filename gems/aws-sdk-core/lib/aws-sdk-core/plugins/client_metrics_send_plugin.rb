@@ -5,7 +5,7 @@ module Aws
     class ClientMetricsSendPlugin < Seahorse::Client::Plugin
 
       def add_handlers(handlers, config)
-        if config.client_side_monitoring
+        if config.client_side_monitoring && config.client_side_monitoring_port
           # AttemptHandler comes just before we would retry an error.
           handlers.add(AttemptHandler, step: :sign, priority: 95)
           # LatencyHandler is as close to sending as possible.
@@ -29,7 +29,7 @@ module Aws
           request_metrics = context.metadata[:client_metrics]
           attempt_opts = {
             timestamp: DateTime.now.strftime('%Q').to_i,
-            fqdn: context.http_request.endpoint.host, # Is this always right?
+            fqdn: context.http_request.endpoint.host,
             region: context.config.region,
             user_agent: context.http_request.headers["user-agent"],
           }
@@ -44,7 +44,6 @@ module Aws
           call_attempt = request_metrics.build_call_attempt(attempt_opts)
           context.metadata[:current_call_attempt] = call_attempt
 
-          # Need to handle success/failure and storage in request_metrics here.
           resp = @handler.call(context)
           headers = context.http_response.headers
           if headers.include?("x-amz-id-2")
@@ -61,8 +60,6 @@ module Aws
             e_name = _extract_error_name(e)
             e_msg = e.message
             call_attempt.aws_exception_msg = "#{e_name}: #{e_msg}"
-          else
-            # Do I need anything here?
           end
           request_metrics.add_call_attempt(call_attempt)
           resp

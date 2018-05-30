@@ -3,6 +3,7 @@ require 'socket'
 
 module Aws
   module ClientSideMonitoring
+    # @api private
     class Publisher
       attr_reader :agent_port
 
@@ -26,13 +27,12 @@ module Aws
 
       def send_datagram(msg)
         if @agent_port
-          # Should I consider reuse of sockets?
           socket = UDPSocket.new
           begin
             socket.connect("127.0.0.1", @agent_port)
             socket.send(msg, 0)
           rescue Errno::ECONNREFUSED
-            # Drop on the floor?
+            # Drop on the floor
           end
         end
       end

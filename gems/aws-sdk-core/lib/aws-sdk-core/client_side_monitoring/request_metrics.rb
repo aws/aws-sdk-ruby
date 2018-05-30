@@ -1,5 +1,6 @@
 module Aws
   module ClientSideMonitoring
+    # @api private
     class RequestMetrics
       attr_reader :api_call, :api_call_attempts
 

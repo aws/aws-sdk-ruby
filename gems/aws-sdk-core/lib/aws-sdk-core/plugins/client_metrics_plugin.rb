@@ -39,7 +39,7 @@ all generated client side metrics. Defaults to an empty string.
       end
 
       def add_handlers(handlers, config)
-        if config.client_side_monitoring
+        if config.client_side_monitoring && config.client_side_monitoring_port
           handlers.add(Handler, step: :initialize)
           publisher = config.client_side_monitoring_publisher
           publisher.agent_port = config.client_side_monitoring_port
@@ -55,7 +55,6 @@ all generated client side metrics. Defaults to an empty string.
       end
 
       def self.resolve_client_side_monitoring(cfg)
-        default = true
         env_source = ENV["AWS_CSM_ENABLED"]
         env_source = nil if env_source == ""
         if env_source.is_a?(String) && (env_source.downcase == "false" || env_source.downcase == "f")
@@ -95,8 +94,8 @@ all generated client side metrics. Defaults to an empty string.
           context.metadata[:client_metrics] = request_metrics
           start_time = Time.now
           begin
-            resp = @handler.call(context)
-          ensure # Anything different in case of failure?
+            @handler.call(context)
+          ensure
             end_time = Time.now
             request_metrics.api_call.complete(
               latency: ((end_time - start_time) * 1000).to_i,
