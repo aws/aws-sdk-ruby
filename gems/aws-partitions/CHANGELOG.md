@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2018-05-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Neptune`.
+
 1.88.0 (2018-05-29)
 ------------------
 

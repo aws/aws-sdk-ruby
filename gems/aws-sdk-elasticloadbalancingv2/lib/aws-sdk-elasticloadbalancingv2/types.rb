@@ -14,23 +14,77 @@ module Aws::ElasticLoadBalancingV2
     #   data as a hash:
     #
     #       {
-    #         type: "forward", # required, accepts forward
-    #         target_group_arn: "TargetGroupArn", # required
+    #         type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #         target_group_arn: "TargetGroupArn",
+    #         authenticate_oidc_config: {
+    #           issuer: "AuthenticateOidcActionIssuer", # required
+    #           authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
+    #           token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
+    #           user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
+    #           client_id: "AuthenticateOidcActionClientId", # required
+    #           client_secret: "AuthenticateOidcActionClientSecret", # required
+    #           session_cookie_name: "AuthenticateOidcActionSessionCookieName",
+    #           scope: "AuthenticateOidcActionScope",
+    #           session_timeout: 1,
+    #           authentication_request_extra_params: {
+    #             "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
+    #           },
+    #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #         },
+    #         authenticate_cognito_config: {
+    #           user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
+    #           user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
+    #           user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
+    #           session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
+    #           scope: "AuthenticateCognitoActionScope",
+    #           session_timeout: 1,
+    #           authentication_request_extra_params: {
+    #             "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
+    #           },
+    #           on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #         },
+    #         order: 1,
     #       }
     #
     # @!attribute [rw] type
-    #   The type of action.
+    #   The type of action. Each rule must include one forward action.
     #   @return [String]
     #
     # @!attribute [rw] target_group_arn
-    #   The Amazon Resource Name (ARN) of the target group.
+    #   The Amazon Resource Name (ARN) of the target group. Specify only
+    #   when `Type` is `forward`.
+    #
+    #   For a default rule, the protocol of the target group must be HTTP or
+    #   HTTPS for an Application Load Balancer or TCP for a Network Load
+    #   Balancer.
     #   @return [String]
+    #
+    # @!attribute [rw] authenticate_oidc_config
+    #   \[HTTPS listener\] Information about an identity provider that is
+    #   compliant with OpenID Connect (OIDC). Specify only when `Type` is
+    #   `authenticate-oidc`.
+    #   @return [Types::AuthenticateOidcActionConfig]
+    #
+    # @!attribute [rw] authenticate_cognito_config
+    #   \[HTTPS listener\] Information for using Amazon Cognito to
+    #   authenticate users. Specify only when `Type` is
+    #   `authenticate-cognito`.
+    #   @return [Types::AuthenticateCognitoActionConfig]
+    #
+    # @!attribute [rw] order
+    #   The order for the action. This value is required for rules with
+    #   multiple actions. The action with the lowest value for order is
+    #   performed first. The forward action must be performed last.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Action AWS API Documentation
     #
     class Action < Struct.new(
       :type,
-      :target_group_arn)
+      :target_group_arn,
+      :authenticate_oidc_config,
+      :authenticate_cognito_config,
+      :order)
       include Aws::Structure
     end
 
@@ -106,6 +160,189 @@ module Aws::ElasticLoadBalancingV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTagsOutput AWS API Documentation
     #
     class AddTagsOutput < Aws::EmptyStructure; end
+
+    # Request parameters to use when integrating with Amazon Cognito to
+    # authenticate users.
+    #
+    # @note When making an API call, you may pass AuthenticateCognitoActionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
+    #         user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
+    #         user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
+    #         session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
+    #         scope: "AuthenticateCognitoActionScope",
+    #         session_timeout: 1,
+    #         authentication_request_extra_params: {
+    #           "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
+    #         },
+    #         on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #       }
+    #
+    # @!attribute [rw] user_pool_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_client_id
+    #   The ID of the Amazon Cognito user pool client.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_domain
+    #   The domain prefix or fully-qualified domain name of the Amazon
+    #   Cognito user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_cookie_name
+    #   The name of the cookie used to maintain session information. The
+    #   default is AWSELBAuthSessionCookie.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The set of user claims to be requested from the IdP. The default is
+    #   `openid`.
+    #
+    #   To verify which scope values your IdP supports and how to separate
+    #   multiple values, see the documentation for your IdP.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_timeout
+    #   The maximum duration of the authentication session, in seconds. The
+    #   default is 604800 seconds (7 days).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] authentication_request_extra_params
+    #   The query parameters (up to 10) to include in the redirect request
+    #   to the authorization endpoint.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] on_unauthenticated_request
+    #   The behavior if the user is not authenticated. The following are
+    #   possible values:
+    #
+    #   * deny`` - Return an HTTP 401 Unauthorized error.
+    #
+    #   * allow`` - Allow the request to be forwarded to the target.
+    #
+    #   * authenticate`` - Redirect the request to the IdP authorization
+    #     endpoint. This is the default value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AuthenticateCognitoActionConfig AWS API Documentation
+    #
+    class AuthenticateCognitoActionConfig < Struct.new(
+      :user_pool_arn,
+      :user_pool_client_id,
+      :user_pool_domain,
+      :session_cookie_name,
+      :scope,
+      :session_timeout,
+      :authentication_request_extra_params,
+      :on_unauthenticated_request)
+      include Aws::Structure
+    end
+
+    # Request parameters when using an identity provider (IdP) that is
+    # compliant with OpenID Connect (OIDC) to authenticate users.
+    #
+    # @note When making an API call, you may pass AuthenticateOidcActionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         issuer: "AuthenticateOidcActionIssuer", # required
+    #         authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
+    #         token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
+    #         user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
+    #         client_id: "AuthenticateOidcActionClientId", # required
+    #         client_secret: "AuthenticateOidcActionClientSecret", # required
+    #         session_cookie_name: "AuthenticateOidcActionSessionCookieName",
+    #         scope: "AuthenticateOidcActionScope",
+    #         session_timeout: 1,
+    #         authentication_request_extra_params: {
+    #           "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
+    #         },
+    #         on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #       }
+    #
+    # @!attribute [rw] issuer
+    #   The OIDC issuer identifier of the IdP. This must be a full URL,
+    #   including the HTTPS protocol, the domain, and the path.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_endpoint
+    #   The authorization endpoint of the IdP. This must be a full URL,
+    #   including the HTTPS protocol, the domain, and the path.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_endpoint
+    #   The token endpoint of the IdP. This must be a full URL, including
+    #   the HTTPS protocol, the domain, and the path.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_info_endpoint
+    #   The user info endpoint of the IdP. This must be a full URL,
+    #   including the HTTPS protocol, the domain, and the path.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_id
+    #   The OAuth 2.0 client identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The OAuth 2.0 client secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_cookie_name
+    #   The name of the cookie used to maintain session information. The
+    #   default is AWSELBAuthSessionCookie.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The set of user claims to be requested from the IdP. The default is
+    #   `openid`.
+    #
+    #   To verify which scope values your IdP supports and how to separate
+    #   multiple values, see the documentation for your IdP.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_timeout
+    #   The maximum duration of the authentication session, in seconds. The
+    #   default is 604800 seconds (7 days).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] authentication_request_extra_params
+    #   The query parameters (up to 10) to include in the redirect request
+    #   to the authorization endpoint.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] on_unauthenticated_request
+    #   The behavior if the user is not authenticated. The following are
+    #   possible values:
+    #
+    #   * deny`` - Return an HTTP 401 Unauthorized error.
+    #
+    #   * allow`` - Allow the request to be forwarded to the target.
+    #
+    #   * authenticate`` - Redirect the request to the IdP authorization
+    #     endpoint. This is the default value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AuthenticateOidcActionConfig AWS API Documentation
+    #
+    class AuthenticateOidcActionConfig < Struct.new(
+      :issuer,
+      :authorization_endpoint,
+      :token_endpoint,
+      :user_info_endpoint,
+      :client_id,
+      :client_secret,
+      :session_cookie_name,
+      :scope,
+      :session_timeout,
+      :authentication_request_extra_params,
+      :on_unauthenticated_request)
+      include Aws::Structure
+    end
 
     # Information about an Availability Zone.
     #
@@ -190,8 +427,36 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         default_actions: [ # required
     #           {
-    #             type: "forward", # required, accepts forward
-    #             target_group_arn: "TargetGroupArn", # required
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #             target_group_arn: "TargetGroupArn",
+    #             authenticate_oidc_config: {
+    #               issuer: "AuthenticateOidcActionIssuer", # required
+    #               authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
+    #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
+    #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
+    #               client_id: "AuthenticateOidcActionClientId", # required
+    #               client_secret: "AuthenticateOidcActionClientSecret", # required
+    #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
+    #               scope: "AuthenticateOidcActionScope",
+    #               session_timeout: 1,
+    #               authentication_request_extra_params: {
+    #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
+    #               },
+    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #             },
+    #             authenticate_cognito_config: {
+    #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
+    #               user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
+    #               user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
+    #               session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
+    #               scope: "AuthenticateCognitoActionScope",
+    #               session_timeout: 1,
+    #               authentication_request_extra_params: {
+    #                 "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
+    #               },
+    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #             },
+    #             order: 1,
     #           },
     #         ],
     #       }
@@ -217,15 +482,25 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   \[HTTPS listeners\] The SSL server certificate. You must provide
-    #   exactly one certificate.
+    #   \[HTTPS listeners\] The default SSL server certificate. You must
+    #   provide exactly one certificate. To create a certificate list, use
+    #   AddListenerCertificates.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
-    #   The default action for the listener. For Application Load Balancers,
-    #   the protocol of the specified target group must be HTTP or HTTPS.
-    #   For Network Load Balancers, the protocol of the specified target
-    #   group must be TCP.
+    #   The actions for the default rule. The rule must include one forward
+    #   action.
+    #
+    #   If the action type is `forward`, you can specify a single target
+    #   group. The protocol of the target group must be HTTP or HTTPS for an
+    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #
+    #   If the action type is `authenticate-oidc`, you can use an identity
+    #   provider that is OpenID Connect (OIDC) compliant to authenticate
+    #   users as they access your application.
+    #
+    #   If the action type is `authenticate-cognito`, you can use Amazon
+    #   Cognito to authenticate users as they access your application.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
@@ -385,8 +660,36 @@ module Aws::ElasticLoadBalancingV2
     #         priority: 1, # required
     #         actions: [ # required
     #           {
-    #             type: "forward", # required, accepts forward
-    #             target_group_arn: "TargetGroupArn", # required
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #             target_group_arn: "TargetGroupArn",
+    #             authenticate_oidc_config: {
+    #               issuer: "AuthenticateOidcActionIssuer", # required
+    #               authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
+    #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
+    #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
+    #               client_id: "AuthenticateOidcActionClientId", # required
+    #               client_secret: "AuthenticateOidcActionClientSecret", # required
+    #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
+    #               scope: "AuthenticateOidcActionScope",
+    #               session_timeout: 1,
+    #               authentication_request_extra_params: {
+    #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
+    #               },
+    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #             },
+    #             authenticate_cognito_config: {
+    #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
+    #               user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
+    #               user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
+    #               session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
+    #               scope: "AuthenticateCognitoActionScope",
+    #               session_timeout: 1,
+    #               authentication_request_extra_params: {
+    #                 "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
+    #               },
+    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #             },
+    #             order: 1,
     #           },
     #         ],
     #       }
@@ -431,13 +734,22 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::RuleCondition>]
     #
     # @!attribute [rw] priority
-    #   The priority for the rule. A listener can't have multiple rules
-    #   with the same priority.
+    #   The rule priority. A listener can't have multiple rules with the
+    #   same priority.
     #   @return [Integer]
     #
     # @!attribute [rw] actions
-    #   An action. Each action has the type `forward` and specifies a target
+    #   The actions. Each rule must include one forward action.
+    #
+    #   If the action type is `forward`, you can specify a single target
     #   group.
+    #
+    #   If the action type is `authenticate-oidc`, you can use an identity
+    #   provider that is OpenID Connect (OIDC) compliant to authenticate
+    #   users as they access your application.
+    #
+    #   If the action type is `authenticate-cognito`, you can use Amazon
+    #   Cognito to authenticate users as they access your application.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleInput AWS API Documentation
@@ -1527,8 +1839,36 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         default_actions: [
     #           {
-    #             type: "forward", # required, accepts forward
-    #             target_group_arn: "TargetGroupArn", # required
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #             target_group_arn: "TargetGroupArn",
+    #             authenticate_oidc_config: {
+    #               issuer: "AuthenticateOidcActionIssuer", # required
+    #               authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
+    #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
+    #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
+    #               client_id: "AuthenticateOidcActionClientId", # required
+    #               client_secret: "AuthenticateOidcActionClientSecret", # required
+    #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
+    #               scope: "AuthenticateOidcActionScope",
+    #               session_timeout: 1,
+    #               authentication_request_extra_params: {
+    #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
+    #               },
+    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #             },
+    #             authenticate_cognito_config: {
+    #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
+    #               user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
+    #               user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
+    #               session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
+    #               scope: "AuthenticateCognitoActionScope",
+    #               session_timeout: 1,
+    #               authentication_request_extra_params: {
+    #                 "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
+    #               },
+    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #             },
+    #             order: 1,
     #           },
     #         ],
     #       }
@@ -1548,9 +1888,9 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] ssl_policy
-    #   The security policy that defines which protocols and ciphers are
-    #   supported. For more information, see [Security Policies][1] in the
-    #   *Application Load Balancers Guide*.
+    #   \[HTTPS listeners\] The security policy that defines which protocols
+    #   and ciphers are supported. For more information, see [Security
+    #   Policies][1] in the *Application Load Balancers Guide*.
     #
     #
     #
@@ -1558,13 +1898,25 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   The default SSL server certificate.
+    #   \[HTTPS listeners\] The default SSL server certificate. You must
+    #   provide exactly one certificate. To create a certificate list, use
+    #   AddListenerCertificates.
     #   @return [Array<Types::Certificate>]
     #
     # @!attribute [rw] default_actions
-    #   The default action. For Application Load Balancers, the protocol of
-    #   the specified target group must be HTTP or HTTPS. For Network Load
-    #   Balancers, the protocol of the specified target group must be TCP.
+    #   The actions for the default rule. The rule must include one forward
+    #   action.
+    #
+    #   If the action type is `forward`, you can specify a single target
+    #   group. The protocol of the target group must be HTTP or HTTPS for an
+    #   Application Load Balancer or TCP for a Network Load Balancer.
+    #
+    #   If the action type is `authenticate-oidc`, you can use an identity
+    #   provider that is OpenID Connect (OIDC) compliant to authenticate
+    #   users as they access your application.
+    #
+    #   If the action type is `authenticate-cognito`, you can use Amazon
+    #   Cognito to authenticate users as they access your application.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
@@ -1580,7 +1932,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # @!attribute [rw] listeners
-    #   Information about the modified listeners.
+    #   Information about the modified listener.
     #   @return [Array<Types::Listener>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerOutput AWS API Documentation
@@ -1643,8 +1995,36 @@ module Aws::ElasticLoadBalancingV2
     #         ],
     #         actions: [
     #           {
-    #             type: "forward", # required, accepts forward
-    #             target_group_arn: "TargetGroupArn", # required
+    #             type: "forward", # required, accepts forward, authenticate-oidc, authenticate-cognito
+    #             target_group_arn: "TargetGroupArn",
+    #             authenticate_oidc_config: {
+    #               issuer: "AuthenticateOidcActionIssuer", # required
+    #               authorization_endpoint: "AuthenticateOidcActionAuthorizationEndpoint", # required
+    #               token_endpoint: "AuthenticateOidcActionTokenEndpoint", # required
+    #               user_info_endpoint: "AuthenticateOidcActionUserInfoEndpoint", # required
+    #               client_id: "AuthenticateOidcActionClientId", # required
+    #               client_secret: "AuthenticateOidcActionClientSecret", # required
+    #               session_cookie_name: "AuthenticateOidcActionSessionCookieName",
+    #               scope: "AuthenticateOidcActionScope",
+    #               session_timeout: 1,
+    #               authentication_request_extra_params: {
+    #                 "AuthenticateOidcActionAuthenticationRequestParamName" => "AuthenticateOidcActionAuthenticationRequestParamValue",
+    #               },
+    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #             },
+    #             authenticate_cognito_config: {
+    #               user_pool_arn: "AuthenticateCognitoActionUserPoolArn", # required
+    #               user_pool_client_id: "AuthenticateCognitoActionUserPoolClientId", # required
+    #               user_pool_domain: "AuthenticateCognitoActionUserPoolDomain", # required
+    #               session_cookie_name: "AuthenticateCognitoActionSessionCookieName",
+    #               scope: "AuthenticateCognitoActionScope",
+    #               session_timeout: 1,
+    #               authentication_request_extra_params: {
+    #                 "AuthenticateCognitoActionAuthenticationRequestParamName" => "AuthenticateCognitoActionAuthenticationRequestParamValue",
+    #               },
+    #               on_unauthenticated_request: "deny", # accepts deny, allow, authenticate
+    #             },
+    #             order: 1,
     #           },
     #         ],
     #       }
@@ -1654,11 +2034,52 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] conditions
-    #   The conditions.
+    #   The conditions. Each condition specifies a field name and a single
+    #   value.
+    #
+    #   If the field name is `host-header`, you can specify a single host
+    #   name (for example, my.example.com). A host name is case insensitive,
+    #   can be up to 128 characters in length, and can contain any of the
+    #   following characters. Note that you can include up to three wildcard
+    #   characters.
+    #
+    #   * A-Z, a-z, 0-9
+    #
+    #   * \- .
+    #
+    #   * * (matches 0 or more characters)
+    #
+    #   * ? (matches exactly 1 character)
+    #
+    #   If the field name is `path-pattern`, you can specify a single path
+    #   pattern. A path pattern is case sensitive, can be up to 128
+    #   characters in length, and can contain any of the following
+    #   characters. Note that you can include up to three wildcard
+    #   characters.
+    #
+    #   * A-Z, a-z, 0-9
+    #
+    #   * \_ - . $ / ~ " ' @ : +
+    #
+    #   * &amp; (using &amp;amp;)
+    #
+    #   * * (matches 0 or more characters)
+    #
+    #   * ? (matches exactly 1 character)
     #   @return [Array<Types::RuleCondition>]
     #
     # @!attribute [rw] actions
-    #   The actions. The target group must use the HTTP or HTTPS protocol.
+    #   The actions.
+    #
+    #   If the action type is `forward`, you can specify a single target
+    #   group.
+    #
+    #   If the action type is `authenticate-oidc`, you can use an identity
+    #   provider that is OpenID Connect (OIDC) compliant to authenticate
+    #   users as they access your application.
+    #
+    #   If the action type is `authenticate-cognito`, you can use Amazon
+    #   Cognito to authenticate users as they access your application.
     #   @return [Array<Types::Action>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRuleInput AWS API Documentation
@@ -1671,7 +2092,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # @!attribute [rw] rules
-    #   Information about the rule.
+    #   Information about the modified rule.
     #   @return [Array<Types::Rule>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRuleOutput AWS API Documentation
@@ -1802,7 +2223,7 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # @!attribute [rw] target_groups
-    #   Information about the target group.
+    #   Information about the modified target group.
     #   @return [Array<Types::TargetGroup>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupOutput AWS API Documentation
@@ -2134,7 +2555,7 @@ module Aws::ElasticLoadBalancingV2
     #
     #       {
     #         load_balancer_arn: "LoadBalancerArn", # required
-    #         subnets: ["SubnetId"], # required
+    #         subnets: ["SubnetId"],
     #         subnet_mappings: [
     #           {
     #             subnet_id: "SubnetId",

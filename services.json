@@ -326,6 +326,9 @@
   "Mobile": {
     "models": "mobile/2017-07-01"
   },
+  "Neptune": {
+    "models": "neptune/2014-10-31"
+  },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"
   },

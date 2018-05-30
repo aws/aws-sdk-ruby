@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.18.0 (2018-05-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-neptune` gem.
+
 3.17.0 (2018-05-29)
 ------------------
 

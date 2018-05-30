@@ -317,6 +317,7 @@ module Aws
             'MediaStoreData' => 'data.mediastore',
             'MigrationHub' => 'mgh',
             'Mobile' => 'mobile',
+            'Neptune' => 'rds',
             'OpsWorks' => 'opsworks',
             'OpsWorksCM' => 'opsworks-cm',
             'Organizations' => 'organizations',
