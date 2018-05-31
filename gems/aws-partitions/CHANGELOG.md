@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.89.1 (2018-05-31)
+------------------
+
 * Issue - Revert a few improperly configured endpoints.
 
 1.89.0 (2018-05-30)
