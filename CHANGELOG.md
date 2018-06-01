@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::Redshift - Updated the documentation for Amazon Redshift.
+
+* Feature - Aws::SNS - Updated the API, and documentation for Amazon Simple Notification Service.
+
+* Feature - Aws::MediaTailor - Added support for a new service, AWS MediaTailor.
+
 2.11.60 (2018-05-31)
 ------------------
 

@@ -302,6 +302,7 @@ to be backwards compatible.
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
+| AWS MediaTailor                                       | MediaTailor                     | 2018-04-23  |
 | AWS Migration Hub                                     | MigrationHub                    | 2017-05-31  |
 | AWS Mobile                                            | Mobile                          | 2017-07-01  |
 | AWS OpsWorks                                          | OpsWorks                        | 2013-02-18  |

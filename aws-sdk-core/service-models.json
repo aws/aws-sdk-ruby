@@ -382,6 +382,10 @@
     "models": "mediastore-data/2017-09-01",
     "endpoint": "data.mediastore"
   },
+  "MediaTailor": {
+    "models": "mediatailor/2018-04-23",
+    "endpoint": "api.mediatailor"
+  },
   "MigrationHub": {
     "models": "AWSMigrationHub/2017-05-31",
     "endpoint": "mgh"

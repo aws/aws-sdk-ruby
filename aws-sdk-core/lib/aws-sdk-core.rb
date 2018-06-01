@@ -119,6 +119,7 @@ module Aws
     MediaPackage
     MediaStore
     MediaStoreData
+    MediaTailor
     MigrationHub
     Mobile
     Neptune
