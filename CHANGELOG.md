@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.61 (2018-06-01)
+------------------
+
 * Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
 
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
