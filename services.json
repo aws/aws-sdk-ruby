@@ -320,6 +320,9 @@
   "MediaStoreData": {
     "models": "mediastore-data/2017-09-01"
   },
+  "MediaTailor": {
+    "models": "mediatailor/2018-04-23"
+  },
   "MigrationHub": {
     "models": "AWSMigrationHub/2017-05-31"
   },

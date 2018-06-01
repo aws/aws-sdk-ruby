@@ -531,22 +531,33 @@ module Aws::SNS
     #   A map of the subscription's attributes. Attributes in this map
     #   include the following:
     #
-    #   * `SubscriptionArn` -- the subscription's ARN
+    #   * `ConfirmationWasAuthenticated` -- `true` if the subscription
+    #     confirmation request was authenticated.
     #
-    #   * `TopicArn` -- the topic ARN that the subscription is associated
-    #     with
+    #   * `DeliveryPolicy` -- The JSON serialization of the subscription's
+    #     delivery policy.
     #
-    #   * `Owner` -- the AWS account ID of the subscription's owner
-    #
-    #   * `ConfirmationWasAuthenticated` -- true if the subscription
-    #     confirmation request was authenticated
-    #
-    #   * `DeliveryPolicy` -- the JSON serialization of the subscription's
-    #     delivery policy
-    #
-    #   * `EffectiveDeliveryPolicy` -- the JSON serialization of the
+    #   * `EffectiveDeliveryPolicy` -- The JSON serialization of the
     #     effective delivery policy that takes into account the topic
-    #     delivery policy and account system defaults
+    #     delivery policy and account system defaults.
+    #
+    #   * `FilterPolicy` -- The filter policy JSON that is assigned to the
+    #     subscription.
+    #
+    #   * `Owner` -- The AWS account ID of the subscription's owner.
+    #
+    #   * `PendingConfirmation` -- `true` if the subscription hasn't been
+    #     confirmed. To confirm a pending subscription, call the
+    #     `ConfirmSubscription` action with a confirmation token.
+    #
+    #   * `RawMessageDelivery` -- `true` if raw message delivery is enabled
+    #     for the subscription. Raw messages are free of JSON formatting and
+    #     can be sent to HTTP/S and Amazon SQS endpoints.
+    #
+    #   * `SubscriptionArn` -- The subscription's ARN.
+    #
+    #   * `TopicArn` -- The topic ARN that the subscription is associated
+    #     with.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributesResponse AWS API Documentation
@@ -899,8 +910,8 @@ module Aws::SNS
     #
     # @!attribute [rw] data_type
     #   Amazon SNS supports the following logical data types: String,
-    #   Number, and Binary. For more information, see [Message Attribute
-    #   Data Types][1].
+    #   String.Array, Number, and Binary. For more information, see [Message
+    #   Attribute Data Types][1].
     #
     #
     #
@@ -1019,17 +1030,30 @@ module Aws::SNS
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   The message you want to send to the topic.
+    #   The message you want to send.
     #
-    #   If you want to send the same message to all transport protocols,
-    #   include the text of the message as a String value.
+    #   If you are publishing to a topic and you want to send the same
+    #   message to all transport protocols, include the text of the message
+    #   as a String value. If you want to send different messages for each
+    #   transport protocol, set the value of the `MessageStructure`
+    #   parameter to `json` and use a JSON object for the `Message`
+    #   parameter.
     #
-    #   If you want to send different messages for each transport protocol,
-    #   set the value of the `MessageStructure` parameter to `json` and use
-    #   a JSON object for the `Message` parameter.
     #
-    #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB
-    #   in size (262144 bytes, not 262144 characters).
+    #
+    #   Constraints:
+    #
+    #   * With the exception of SMS, messages must be UTF-8 encoded strings
+    #     and at most 256 KB in size (262144 bytes, not 262144 characters).
+    #
+    #   * For SMS, each message can contain up to 140 bytes, and the
+    #     character limit depends on the encoding scheme. For example, an
+    #     SMS message can contain 160 GSM characters, 140 ASCII characters,
+    #     or 70 UCS-2 characters. If you publish a message that exceeds the
+    #     size limit, Amazon SNS sends it as multiple messages, each fitting
+    #     within the size limit. Messages are not cut off in the middle of a
+    #     word but on whole-word boundaries. The total size limit for a
+    #     single SMS publish action is 1600 bytes.
     #
     #   JSON-specific constraints:
     #
@@ -1284,8 +1308,10 @@ module Aws::SNS
     #   messages, you will incur costs that exceed your limit.
     #
     #   By default, the spend limit is set to the maximum allowed by Amazon
-    #   SNS. If you want to exceed the maximum, contact [AWS Support][1] or
-    #   your AWS sales representative for a service limit increase.
+    #   SNS. If you want to raise the limit, submit an [SNS Limit Increase
+    #   case][1]. For **New limit value**, enter your desired monthly spend
+    #   limit. In the **Use Case Description** field, explain that you are
+    #   requesting an SMS monthly spend limit increase.
     #
     #   `DeliveryStatusIAMRole` – The ARN of the IAM role that allows Amazon
     #   SNS to write logs about SMS deliveries in CloudWatch Logs. For each
@@ -1349,7 +1375,7 @@ module Aws::SNS
     #
     #
     #
-    #   [1]: https://aws.amazon.com/premiumsupport/
+    #   [1]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&amp;limitType=service-code-sns
     #   [2]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
     #   @return [Hash<String,String>]
     #
@@ -1385,7 +1411,8 @@ module Aws::SNS
     #   The name of the attribute you want to set. Only a subset of the
     #   subscriptions attributes are mutable.
     #
-    #   Valid values: `DeliveryPolicy` \| `RawMessageDelivery`
+    #   Valid values: `DeliveryPolicy` \| `FilterPolicy` \|
+    #   `RawMessageDelivery`
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
@@ -1445,6 +1472,10 @@ module Aws::SNS
     #         topic_arn: "topicARN", # required
     #         protocol: "protocol", # required
     #         endpoint: "endpoint",
+    #         attributes: {
+    #           "attributeName" => "attributeValue",
+    #         },
+    #         return_subscription_arn: false,
     #       }
     #
     # @!attribute [rw] topic_arn
@@ -1500,21 +1531,47 @@ module Aws::SNS
     #     Lambda function.
     #   @return [String]
     #
+    # @!attribute [rw] attributes
+    #   Assigns attributes to the subscription as a map of key-value pairs.
+    #   You can assign any attribute that is supported by the
+    #   `SetSubscriptionAttributes` action.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] return_subscription_arn
+    #   Sets whether the response from the `Subscribe` request includes the
+    #   subscription ARN, even if the subscription is not yet confirmed.
+    #
+    #   If you set this parameter to `false`, the response includes the ARN
+    #   for confirmed subscriptions, but it includes an ARN value of
+    #   "pending subscription" for subscriptions that are not yet
+    #   confirmed. A subscription becomes confirmed when the subscriber
+    #   calls the `ConfirmSubscription` action with a confirmation token.
+    #
+    #   If you set this parameter to `true`, the response includes the ARN
+    #   in all cases, even if the subscription is not yet confirmed.
+    #
+    #   The default value is `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeInput AWS API Documentation
     #
     class SubscribeInput < Struct.new(
       :topic_arn,
       :protocol,
-      :endpoint)
+      :endpoint,
+      :attributes,
+      :return_subscription_arn)
       include Aws::Structure
     end
 
     # Response for Subscribe action.
     #
     # @!attribute [rw] subscription_arn
-    #   The ARN of the subscription, if the service was able to create a
-    #   subscription immediately (without requiring endpoint owner
-    #   confirmation).
+    #   The ARN of the subscription if it is confirmed, or the string
+    #   "pending confirmation" if the subscription requires confirmation.
+    #   However, if the API request parameter `ReturnSubscriptionArn` is
+    #   true, then the value is always the subscription ARN, even if the
+    #   subscription requires confirmation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeResponse AWS API Documentation

@@ -56,6 +56,7 @@ module Aws::DirectoryService
     CreateTrustRequest = Shapes::StructureShape.new(name: 'CreateTrustRequest')
     CreateTrustResult = Shapes::StructureShape.new(name: 'CreateTrustResult')
     CreatedDateTime = Shapes::TimestampShape.new(name: 'CreatedDateTime')
+    CustomerUserName = Shapes::StringShape.new(name: 'CustomerUserName')
     DeleteAssociatedConditionalForwarder = Shapes::BooleanShape.new(name: 'DeleteAssociatedConditionalForwarder')
     DeleteConditionalForwarderRequest = Shapes::StructureShape.new(name: 'DeleteConditionalForwarderRequest')
     DeleteConditionalForwarderResult = Shapes::StructureShape.new(name: 'DeleteConditionalForwarderResult')
@@ -127,6 +128,7 @@ module Aws::DirectoryService
     InsufficientPermissionsException = Shapes::StructureShape.new(name: 'InsufficientPermissionsException')
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
+    InvalidPasswordException = Shapes::StructureShape.new(name: 'InvalidPasswordException')
     IpAddr = Shapes::StringShape.new(name: 'IpAddr')
     IpAddrs = Shapes::ListShape.new(name: 'IpAddrs')
     IpRoute = Shapes::StructureShape.new(name: 'IpRoute')
@@ -168,6 +170,8 @@ module Aws::DirectoryService
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
     ReplicationScope = Shapes::StringShape.new(name: 'ReplicationScope')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
+    ResetUserPasswordRequest = Shapes::StructureShape.new(name: 'ResetUserPasswordRequest')
+    ResetUserPasswordResult = Shapes::StructureShape.new(name: 'ResetUserPasswordResult')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     RestoreFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreFromSnapshotRequest')
     RestoreFromSnapshotResult = Shapes::StructureShape.new(name: 'RestoreFromSnapshotResult')
@@ -227,7 +231,9 @@ module Aws::DirectoryService
     UpdateRadiusResult = Shapes::StructureShape.new(name: 'UpdateRadiusResult')
     UpdateSecurityGroupForDirectoryControllers = Shapes::BooleanShape.new(name: 'UpdateSecurityGroupForDirectoryControllers')
     UseSameUsername = Shapes::BooleanShape.new(name: 'UseSameUsername')
+    UserDoesNotExistException = Shapes::StructureShape.new(name: 'UserDoesNotExistException')
     UserName = Shapes::StringShape.new(name: 'UserName')
+    UserPassword = Shapes::StringShape.new(name: 'UserPassword')
     VerifyTrustRequest = Shapes::StructureShape.new(name: 'VerifyTrustRequest')
     VerifyTrustResult = Shapes::StructureShape.new(name: 'VerifyTrustResult')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
@@ -631,6 +637,13 @@ module Aws::DirectoryService
     RemoveTagsFromResourceRequest.struct_class = Types::RemoveTagsFromResourceRequest
 
     RemoveTagsFromResourceResult.struct_class = Types::RemoveTagsFromResourceResult
+
+    ResetUserPasswordRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+    ResetUserPasswordRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: CustomerUserName, required: true, location_name: "UserName"))
+    ResetUserPasswordRequest.add_member(:new_password, Shapes::ShapeRef.new(shape: UserPassword, required: true, location_name: "NewPassword"))
+    ResetUserPasswordRequest.struct_class = Types::ResetUserPasswordRequest
+
+    ResetUserPasswordResult.struct_class = Types::ResetUserPasswordResult
 
     RestoreFromSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
     RestoreFromSnapshotRequest.struct_class = Types::RestoreFromSnapshotRequest
@@ -1182,6 +1195,21 @@ module Aws::DirectoryService
         o.output = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceResult)
         o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+      end)
+
+      api.add_operation(:reset_user_password, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetUserPassword"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResetUserPasswordRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetUserPasswordResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: UserDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
       end)

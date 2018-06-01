@@ -127,17 +127,29 @@ module Aws::SNS
     #   If you don't specify a value for the `PhoneNumber` parameter, you
     #   must specify a value for the `TargetArn` or `TopicArn` parameters.
     # @option options [required, String] :message
-    #   The message you want to send to the topic.
+    #   The message you want to send.
     #
-    #   If you want to send the same message to all transport protocols,
-    #   include the text of the message as a String value.
+    #   If you are publishing to a topic and you want to send the same message
+    #   to all transport protocols, include the text of the message as a
+    #   String value. If you want to send different messages for each
+    #   transport protocol, set the value of the `MessageStructure` parameter
+    #   to `json` and use a JSON object for the `Message` parameter.
     #
-    #   If you want to send different messages for each transport protocol,
-    #   set the value of the `MessageStructure` parameter to `json` and use a
-    #   JSON object for the `Message` parameter.
     #
-    #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB in
-    #   size (262144 bytes, not 262144 characters).
+    #
+    #   Constraints:
+    #
+    #   * With the exception of SMS, messages must be UTF-8 encoded strings
+    #     and at most 256 KB in size (262144 bytes, not 262144 characters).
+    #
+    #   * For SMS, each message can contain up to 140 bytes, and the character
+    #     limit depends on the encoding scheme. For example, an SMS message
+    #     can contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2
+    #     characters. If you publish a message that exceeds the size limit,
+    #     Amazon SNS sends it as multiple messages, each fitting within the
+    #     size limit. Messages are not cut off in the middle of a word but on
+    #     whole-word boundaries. The total size limit for a single SMS publish
+    #     action is 1600 bytes.
     #
     #   JSON-specific constraints:
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.19.0 (2018-06-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mediatailor` gem.
+
 3.18.0 (2018-05-30)
 ------------------
 

@@ -315,6 +315,7 @@ module Aws
             'MediaPackage' => 'mediapackage',
             'MediaStore' => 'mediastore',
             'MediaStoreData' => 'data.mediastore',
+            'MediaTailor' => 'api.mediatailor',
             'MigrationHub' => 'mgh',
             'Mobile' => 'mobile',
             'Neptune' => 'rds',

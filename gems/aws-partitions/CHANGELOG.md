@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2018-06-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaTailor`.
+
 1.89.1 (2018-05-31)
 ------------------
 

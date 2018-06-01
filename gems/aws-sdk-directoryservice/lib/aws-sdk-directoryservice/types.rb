@@ -2285,6 +2285,41 @@ module Aws::DirectoryService
     #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass ResetUserPasswordRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         user_name: "CustomerUserName", # required
+    #         new_password: "UserPassword", # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   Identifier of the AWS Managed Microsoft AD or Simple AD directory in
+    #   which the user resides.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The username of the user whose password will be reset.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_password
+    #   The new password that will be reset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPasswordRequest AWS API Documentation
+    #
+    class ResetUserPasswordRequest < Struct.new(
+      :directory_id,
+      :user_name,
+      :new_password)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPasswordResult AWS API Documentation
+    #
+    class ResetUserPasswordResult < Aws::EmptyStructure; end
+
     # An object representing the inputs for the RestoreFromSnapshot
     # operation.
     #

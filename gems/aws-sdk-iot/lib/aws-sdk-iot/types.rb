@@ -633,12 +633,73 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelJobExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         thing_name: "ThingName", # required
+    #         force: false,
+    #         expected_version: 1,
+    #         status_details: {
+    #           "DetailsKey" => "DetailsValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job to be canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing whose execution of the job will be canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   (Optional) If `true` the job execution will be canceled if it has
+    #   status IN\_PROGRESS or QUEUED, otherwise the job execution will be
+    #   canceled only if it has status QUEUED. If you attempt to cancel a
+    #   job execution that is IN\_PROGRESS, and you do not set `force` to
+    #   `true`, then an `InvalidStateTransitionException` will be thrown.
+    #   The default is `false`.
+    #
+    #   Canceling a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to update the job execution status. Use caution
+    #   and ensure that the device is able to recover to a valid state.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expected_version
+    #   (Optional) The expected current version of the job execution. Each
+    #   time you update the job execution, its version is incremented. If
+    #   the version of the job execution stored in Jobs does not match, the
+    #   update is rejected with a VersionMismatch error, and an
+    #   ErrorResponse that contains the current job execution status data is
+    #   returned. (This makes it unnecessary to perform a separate
+    #   DescribeJobExecution request in order to obtain the job execution
+    #   status data.)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_details
+    #   A collection of name/value pairs that describe the status of the job
+    #   execution. If not specified, the statusDetails are unchanged. You
+    #   can specify at most 10 name/value pairs.
+    #   @return [Hash<String,String>]
+    #
+    class CancelJobExecutionRequest < Struct.new(
+      :job_id,
+      :thing_name,
+      :force,
+      :expected_version,
+      :status_details)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelJobRequest
     #   data as a hash:
     #
     #       {
     #         job_id: "JobId", # required
     #         comment: "Comment",
+    #         force: false,
     #       }
     #
     # @!attribute [rw] job_id
@@ -649,9 +710,21 @@ module Aws::IoT
     #   An optional comment string describing why the job was canceled.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   (Optional) If `true` job executions with status "IN\_PROGRESS" and
+    #   "QUEUED" are canceled, otherwise only job executions with status
+    #   "QUEUED" are canceled. The default is `false`.
+    #
+    #   Canceling a job which is "IN\_PROGRESS", will cause a device which
+    #   is executing the job to be unable to update the job execution
+    #   status. Use caution and ensure that each device executing a job
+    #   which is canceled is able to recover to a valid state.
+    #   @return [Boolean]
+    #
     class CancelJobRequest < Struct.new(
       :job_id,
-      :comment)
+      :comment,
+      :force)
       include Aws::Structure
     end
 
@@ -3769,6 +3842,11 @@ module Aws::IoT
     #   `COMPLETED`.
     #   @return [String]
     #
+    # @!attribute [rw] force_canceled
+    #   Will be `true` if the job was canceled with the optional `force`
+    #   parameter set to `true`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] comment
     #   If the job was updated, describes the reason for the update.
     #   @return [String]
@@ -3817,6 +3895,7 @@ module Aws::IoT
       :job_id,
       :target_selection,
       :status,
+      :force_canceled,
       :comment,
       :targets,
       :description,
@@ -3841,6 +3920,11 @@ module Aws::IoT
     #   The status of the job execution (IN\_PROGRESS, QUEUED, FAILED,
     #   SUCCESS, CANCELED, or REJECTED).
     #   @return [String]
+    #
+    # @!attribute [rw] force_canceled
+    #   Will be `true` if the job execution was canceled with the optional
+    #   `force` parameter set to `true`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] status_details
     #   A collection of name/value pairs that describe the status of the job
@@ -3873,15 +3957,22 @@ module Aws::IoT
     #   information.
     #   @return [Integer]
     #
+    # @!attribute [rw] version_number
+    #   The version of the job execution. Job execution versions are
+    #   incremented each time they are updated by a device.
+    #   @return [Integer]
+    #
     class JobExecution < Struct.new(
       :job_id,
       :status,
+      :force_canceled,
       :status_details,
       :thing_arn,
       :queued_at,
       :started_at,
       :last_updated_at,
-      :execution_number)
+      :execution_number,
+      :version_number)
       include Aws::Structure
     end
 
@@ -3988,7 +4079,9 @@ module Aws::IoT
     # The job process details.
     #
     # @!attribute [rw] processing_targets
-    #   The devices on which the job is executing.
+    #   The target devices to which the job execution is being rolled out.
+    #   This value will be null after the job execution has finished rolling
+    #   out to all the target devices.
     #   @return [Array<String>]
     #
     # @!attribute [rw] number_of_canceled_things
@@ -6702,7 +6795,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] message_format
-    #   The message format of the message to publish. Optional. Accepted
+    #   (Optional) The message format of the message to publish. Accepted
     #   values are "JSON" and "RAW". The default value of the attribute
     #   is "RAW". SNS uses this setting to determine if the payload should
     #   be parsed and relevant platform-specific bits of the payload should

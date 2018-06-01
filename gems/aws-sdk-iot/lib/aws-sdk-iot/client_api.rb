@@ -58,6 +58,7 @@ module Aws::IoT
     CACertificateStatus = Shapes::StringShape.new(name: 'CACertificateStatus')
     CACertificates = Shapes::ListShape.new(name: 'CACertificates')
     CancelCertificateTransferRequest = Shapes::StructureShape.new(name: 'CancelCertificateTransferRequest')
+    CancelJobExecutionRequest = Shapes::StructureShape.new(name: 'CancelJobExecutionRequest')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
     CanceledThings = Shapes::IntegerShape.new(name: 'CanceledThings')
@@ -211,6 +212,7 @@ module Aws::IoT
     EventConfigurations = Shapes::MapShape.new(name: 'EventConfigurations')
     EventType = Shapes::StringShape.new(name: 'EventType')
     ExecutionNumber = Shapes::IntegerShape.new(name: 'ExecutionNumber')
+    ExpectedVersion = Shapes::IntegerShape.new(name: 'ExpectedVersion')
     ExpiresInSec = Shapes::IntegerShape.new(name: 'ExpiresInSec')
     ExplicitDeny = Shapes::StructureShape.new(name: 'ExplicitDeny')
     FailedThings = Shapes::IntegerShape.new(name: 'FailedThings')
@@ -221,6 +223,7 @@ module Aws::IoT
     Flag = Shapes::BooleanShape.new(name: 'Flag')
     ForceDelete = Shapes::BooleanShape.new(name: 'ForceDelete')
     ForceFlag = Shapes::BooleanShape.new(name: 'ForceFlag')
+    Forced = Shapes::BooleanShape.new(name: 'Forced')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GEMaxResults = Shapes::IntegerShape.new(name: 'GEMaxResults')
     GenerationId = Shapes::StringShape.new(name: 'GenerationId')
@@ -597,6 +600,7 @@ module Aws::IoT
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::IntegerShape.new(name: 'Version')
     VersionConflictException = Shapes::StructureShape.new(name: 'VersionConflictException')
+    VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
     VersionsLimitExceededException = Shapes::StructureShape.new(name: 'VersionsLimitExceededException')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
     resourceArn = Shapes::StringShape.new(name: 'resourceArn')
@@ -726,8 +730,16 @@ module Aws::IoT
     CancelCertificateTransferRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     CancelCertificateTransferRequest.struct_class = Types::CancelCertificateTransferRequest
 
+    CancelJobExecutionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    CancelJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
+    CancelJobExecutionRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    CancelJobExecutionRequest.add_member(:expected_version, Shapes::ShapeRef.new(shape: ExpectedVersion, location_name: "expectedVersion"))
+    CancelJobExecutionRequest.add_member(:status_details, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "statusDetails"))
+    CancelJobExecutionRequest.struct_class = Types::CancelJobExecutionRequest
+
     CancelJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     CancelJobRequest.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    CancelJobRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
     CancelJobRequest.struct_class = Types::CancelJobRequest
 
     CancelJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -1303,6 +1315,7 @@ module Aws::IoT
     Job.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     Job.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
     Job.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
+    Job.add_member(:force_canceled, Shapes::ShapeRef.new(shape: Forced, location_name: "forceCanceled"))
     Job.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
     Job.add_member(:targets, Shapes::ShapeRef.new(shape: JobTargets, location_name: "targets"))
     Job.add_member(:description, Shapes::ShapeRef.new(shape: JobDescription, location_name: "description"))
@@ -1320,12 +1333,14 @@ module Aws::IoT
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     JobExecution.add_member(:status, Shapes::ShapeRef.new(shape: JobExecutionStatus, location_name: "status"))
+    JobExecution.add_member(:force_canceled, Shapes::ShapeRef.new(shape: Forced, location_name: "forceCanceled"))
     JobExecution.add_member(:status_details, Shapes::ShapeRef.new(shape: JobExecutionStatusDetails, location_name: "statusDetails"))
     JobExecution.add_member(:thing_arn, Shapes::ShapeRef.new(shape: ThingArn, location_name: "thingArn"))
     JobExecution.add_member(:queued_at, Shapes::ShapeRef.new(shape: DateType, location_name: "queuedAt"))
     JobExecution.add_member(:started_at, Shapes::ShapeRef.new(shape: DateType, location_name: "startedAt"))
     JobExecution.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))
     JobExecution.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, location_name: "executionNumber"))
+    JobExecution.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "versionNumber"))
     JobExecution.struct_class = Types::JobExecution
 
     JobExecutionStatusDetails.add_member(:details_map, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "detailsMap"))
@@ -2258,6 +2273,20 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:cancel_job_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelJobExecution"
+        o.http_method = "PUT"
+        o.http_request_uri = "/things/{thingName}/jobs/{jobId}/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelJobExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateTransitionException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: VersionConflictException)
       end)
 
       api.add_operation(:clear_default_authorizer, Seahorse::Model::Operation.new.tap do |o|

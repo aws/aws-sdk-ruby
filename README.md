@@ -347,6 +347,7 @@ to be backwards compatible.
 | AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
+| AWS MediaTailor                                       | Aws::MediaTailor                     | aws-sdk-mediatailor                     | 2018-04-23  |
 | AWS Migration Hub                                     | Aws::MigrationHub                    | aws-sdk-migrationhub                    | 2017-05-31  |
 | AWS Mobile                                            | Aws::Mobile                          | aws-sdk-mobile                          | 2017-07-01  |
 | AWS OpsWorks                                          | Aws::OpsWorks                        | aws-sdk-opsworks                        | 2013-02-18  |

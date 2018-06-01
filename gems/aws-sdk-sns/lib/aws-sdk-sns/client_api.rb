@@ -31,6 +31,7 @@ module Aws::SNS
     DeleteTopicInput = Shapes::StructureShape.new(name: 'DeleteTopicInput')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointDisabledException = Shapes::StructureShape.new(name: 'EndpointDisabledException')
+    FilterPolicyLimitExceededException = Shapes::StructureShape.new(name: 'FilterPolicyLimitExceededException')
     GetEndpointAttributesInput = Shapes::StructureShape.new(name: 'GetEndpointAttributesInput')
     GetEndpointAttributesResponse = Shapes::StructureShape.new(name: 'GetEndpointAttributesResponse')
     GetPlatformApplicationAttributesInput = Shapes::StructureShape.new(name: 'GetPlatformApplicationAttributesInput')
@@ -316,6 +317,8 @@ module Aws::SNS
     SubscribeInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
     SubscribeInput.add_member(:protocol, Shapes::ShapeRef.new(shape: protocol, required: true, location_name: "Protocol"))
     SubscribeInput.add_member(:endpoint, Shapes::ShapeRef.new(shape: endpoint, location_name: "Endpoint"))
+    SubscribeInput.add_member(:attributes, Shapes::ShapeRef.new(shape: SubscriptionAttributesMap, location_name: "Attributes"))
+    SubscribeInput.add_member(:return_subscription_arn, Shapes::ShapeRef.new(shape: boolean, location_name: "ReturnSubscriptionArn"))
     SubscribeInput.struct_class = Types::SubscribeInput
 
     SubscribeResponse.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: subscriptionARN, location_name: "SubscriptionArn"))
@@ -700,6 +703,7 @@ module Aws::SNS
         o.input = Shapes::ShapeRef.new(shape: SetSubscriptionAttributesInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: FilterPolicyLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
@@ -724,6 +728,7 @@ module Aws::SNS
         o.input = Shapes::ShapeRef.new(shape: SubscribeInput)
         o.output = Shapes::ShapeRef.new(shape: SubscribeResponse)
         o.errors << Shapes::ShapeRef.new(shape: SubscriptionLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: FilterPolicyLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

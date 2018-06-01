@@ -1700,6 +1700,38 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
+    # Resets the password for any user in your AWS Managed Microsoft AD or
+    # Simple AD directory.
+    #
+    # @option params [required, String] :directory_id
+    #   Identifier of the AWS Managed Microsoft AD or Simple AD directory in
+    #   which the user resides.
+    #
+    # @option params [required, String] :user_name
+    #   The username of the user whose password will be reset.
+    #
+    # @option params [required, String] :new_password
+    #   The new password that will be reset.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_user_password({
+    #     directory_id: "DirectoryId", # required
+    #     user_name: "CustomerUserName", # required
+    #     new_password: "UserPassword", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ResetUserPassword AWS API Documentation
+    #
+    # @overload reset_user_password(params = {})
+    # @param [Hash] params ({})
+    def reset_user_password(params = {}, options = {})
+      req = build_request(:reset_user_password, params)
+      req.send_request(options)
+    end
+
     # Restores a directory using an existing directory snapshot.
     #
     # When you restore a directory from a snapshot, any changes made to the
@@ -1925,7 +1957,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

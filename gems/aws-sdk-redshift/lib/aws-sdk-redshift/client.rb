@@ -1549,7 +1549,7 @@ module Aws::Redshift
 
     # Adds one or more tags to a specified resource.
     #
-    # A resource can have up to 10 tags. If you try to create more than 10
+    # A resource can have up to 50 tags. If you try to create more than 50
     # tags for a resource, you will receive an error and the attempt will
     # fail.
     #
@@ -4600,7 +4600,8 @@ module Aws::Redshift
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   A list of virtual private cloud (VPC) security groups to be associated
-    #   with the cluster.
+    #   with the cluster. This change is asynchronously applied as soon as
+    #   possible.
     #
     # @option params [String] :master_user_password
     #   The new password for the cluster master user. This change is
@@ -6203,7 +6204,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -369,6 +369,16 @@ module Aws::IoT
     # @option params [String] :comment
     #   An optional comment string describing why the job was canceled.
     #
+    # @option params [Boolean] :force
+    #   (Optional) If `true` job executions with status "IN\_PROGRESS" and
+    #   "QUEUED" are canceled, otherwise only job executions with status
+    #   "QUEUED" are canceled. The default is `false`.
+    #
+    #   Canceling a job which is "IN\_PROGRESS", will cause a device which
+    #   is executing the job to be unable to update the job execution status.
+    #   Use caution and ensure that each device executing a job which is
+    #   canceled is able to recover to a valid state.
+    #
     # @return [Types::CancelJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CancelJobResponse#job_arn #job_arn} => String
@@ -380,6 +390,7 @@ module Aws::IoT
     #   resp = client.cancel_job({
     #     job_id: "JobId", # required
     #     comment: "Comment",
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -392,6 +403,61 @@ module Aws::IoT
     # @param [Hash] params ({})
     def cancel_job(params = {}, options = {})
       req = build_request(:cancel_job, params)
+      req.send_request(options)
+    end
+
+    # Cancels the execution of a job for a given thing.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job to be canceled.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing whose execution of the job will be canceled.
+    #
+    # @option params [Boolean] :force
+    #   (Optional) If `true` the job execution will be canceled if it has
+    #   status IN\_PROGRESS or QUEUED, otherwise the job execution will be
+    #   canceled only if it has status QUEUED. If you attempt to cancel a job
+    #   execution that is IN\_PROGRESS, and you do not set `force` to `true`,
+    #   then an `InvalidStateTransitionException` will be thrown. The default
+    #   is `false`.
+    #
+    #   Canceling a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to update the job execution status. Use caution
+    #   and ensure that the device is able to recover to a valid state.
+    #
+    # @option params [Integer] :expected_version
+    #   (Optional) The expected current version of the job execution. Each
+    #   time you update the job execution, its version is incremented. If the
+    #   version of the job execution stored in Jobs does not match, the update
+    #   is rejected with a VersionMismatch error, and an ErrorResponse that
+    #   contains the current job execution status data is returned. (This
+    #   makes it unnecessary to perform a separate DescribeJobExecution
+    #   request in order to obtain the job execution status data.)
+    #
+    # @option params [Hash<String,String>] :status_details
+    #   A collection of name/value pairs that describe the status of the job
+    #   execution. If not specified, the statusDetails are unchanged. You can
+    #   specify at most 10 name/value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_job_execution({
+    #     job_id: "JobId", # required
+    #     thing_name: "ThingName", # required
+    #     force: false,
+    #     expected_version: 1,
+    #     status_details: {
+    #       "DetailsKey" => "DetailsValue",
+    #     },
+    #   })
+    #
+    # @overload cancel_job_execution(params = {})
+    # @param [Hash] params ({})
+    def cancel_job_execution(params = {}, options = {})
+      req = build_request(:cancel_job_execution, params)
       req.send_request(options)
     end
 
@@ -1956,6 +2022,7 @@ module Aws::IoT
     #   resp.job.job_id #=> String
     #   resp.job.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
     #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
+    #   resp.job.force_canceled #=> Boolean
     #   resp.job.comment #=> String
     #   resp.job.targets #=> Array
     #   resp.job.targets[0] #=> String
@@ -2013,6 +2080,7 @@ module Aws::IoT
     #
     #   resp.execution.job_id #=> String
     #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution.force_canceled #=> Boolean
     #   resp.execution.status_details.details_map #=> Hash
     #   resp.execution.status_details.details_map["DetailsKey"] #=> String
     #   resp.execution.thing_arn #=> String
@@ -2020,6 +2088,7 @@ module Aws::IoT
     #   resp.execution.started_at #=> Time
     #   resp.execution.last_updated_at #=> Time
     #   resp.execution.execution_number #=> Integer
+    #   resp.execution.version_number #=> Integer
     #
     # @overload describe_job_execution(params = {})
     # @param [Hash] params ({})
@@ -2384,7 +2453,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets effective policies.
+    # Gets a list of the policies that have an effect on the authorization
+    # behavior of the specified device when it connects to the AWS IoT
+    # device gateway.
     #
     # @option params [String] :principal
     #   The principal.
@@ -4688,7 +4759,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Test custom authorization.
+    # Tests if a specified principal is authorized to perform an AWS IoT
+    # action on a specified resource. Use this to test and debug the
+    # authorization behavior of devices that connect to the AWS IoT device
+    # gateway.
     #
     # @option params [String] :principal
     #   The principal.
@@ -4757,7 +4831,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Invoke the specified custom authorizer for testing purposes.
+    # Tests a custom authorization behavior by invoking a specified custom
+    # authorizer. Use this to test and debug the custom authorization
+    # behavior of devices that connect to the AWS IoT device gateway.
     #
     # @option params [required, String] :authorizer_name
     #   The custom authorizer name.
@@ -5247,7 +5323,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

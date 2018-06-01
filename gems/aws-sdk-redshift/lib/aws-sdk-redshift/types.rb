@@ -4578,7 +4578,8 @@ module Aws::Redshift
     #
     # @!attribute [rw] vpc_security_group_ids
     #   A list of virtual private cloud (VPC) security groups to be
-    #   associated with the cluster.
+    #   associated with the cluster. This change is asynchronously applied
+    #   as soon as possible.
     #   @return [Array<String>]
     #
     # @!attribute [rw] master_user_password

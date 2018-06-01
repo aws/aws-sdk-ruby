@@ -99,6 +99,7 @@ module Aws
   autoload :MediaPackage, 'aws-sdk-mediapackage'
   autoload :MediaStore, 'aws-sdk-mediastore'
   autoload :MediaStoreData, 'aws-sdk-mediastoredata'
+  autoload :MediaTailor, 'aws-sdk-mediatailor'
   autoload :MigrationHub, 'aws-sdk-migrationhub'
   autoload :Mobile, 'aws-sdk-mobile'
   autoload :Neptune, 'aws-sdk-neptune'
