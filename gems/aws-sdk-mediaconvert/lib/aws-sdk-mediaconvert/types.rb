@@ -9,7 +9,13 @@ module Aws::MediaConvert
   module Types
 
     # Required when you set (Codec) under
-    # (AudioDescriptions)>(CodecSettings) to the value AAC.
+    # (AudioDescriptions)>(CodecSettings) to the value AAC. The service
+    # accepts one of two mutually exclusive groups of AAC settings--VBR and
+    # CBR. To select one of these modes, set the value of Bitrate control
+    # mode (rateControlMode) to "VBR" or "CBR". In VBR mode, you control
+    # the audio quality with the setting VBR quality (vbrQuality). In CBR
+    # mode, you use the setting Bitrate (bitrate). Defaults and valid values
+    # depend on the rate control mode.
     #
     # @note When making an API call, you may pass AacSettings
     #   data as a hash:
@@ -18,10 +24,10 @@ module Aws::MediaConvert
     #         audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #         bitrate: 1,
     #         codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #         coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #         coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #         rate_control_mode: "CBR", # accepts CBR, VBR
     #         raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #         sample_rate: 1,
+    #         sample_rate: 1, # required
     #         specification: "MPEG2", # accepts MPEG2, MPEG4
     #         vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #       }
@@ -41,8 +47,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] bitrate
-    #   Average bitrate in bits/second. Valid values depend on rate control
-    #   mode and profile.
+    #   Average bitrate in bits/second. Defaults and valid values depend on
+    #   rate control mode and profile.
     #   @return [Integer]
     #
     # @!attribute [rw] codec_profile
@@ -243,10 +249,10 @@ module Aws::MediaConvert
     #           audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #           bitrate: 1,
     #           codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #           coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #           coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #           rate_control_mode: "CBR", # accepts CBR, VBR
     #           raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #           sample_rate: 1,
+    #           sample_rate: 1, # required
     #           specification: "MPEG2", # accepts MPEG2, MPEG4
     #           vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #         },
@@ -265,7 +271,7 @@ module Aws::MediaConvert
     #           channels: 1,
     #           sample_rate: 1,
     #         },
-    #         codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #         codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #         eac_3_settings: {
     #           attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #           bitrate: 1,
@@ -297,13 +303,20 @@ module Aws::MediaConvert
     #         wav_settings: {
     #           bit_depth: 1,
     #           channels: 1,
+    #           format: "RIFF", # accepts RIFF, RF64
     #           sample_rate: 1,
     #         },
     #       }
     #
     # @!attribute [rw] aac_settings
     #   Required when you set (Codec) under
-    #   (AudioDescriptions)>(CodecSettings) to the value AAC.
+    #   (AudioDescriptions)>(CodecSettings) to the value AAC. The service
+    #   accepts one of two mutually exclusive groups of AAC settings--VBR
+    #   and CBR. To select one of these modes, set the value of Bitrate
+    #   control mode (rateControlMode) to "VBR" or "CBR". In VBR mode,
+    #   you control the audio quality with the setting VBR quality
+    #   (vbrQuality). In CBR mode, you use the setting Bitrate (bitrate).
+    #   Defaults and valid values depend on the rate control mode.
     #   @return [Types::AacSettings]
     #
     # @!attribute [rw] ac_3_settings
@@ -365,15 +378,15 @@ module Aws::MediaConvert
     #         audio_source_name: "__string",
     #         audio_type: 1,
     #         audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #         codec_settings: {
+    #         codec_settings: { # required
     #           aac_settings: {
     #             audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #             bitrate: 1,
     #             codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #             coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #             coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #             rate_control_mode: "CBR", # accepts CBR, VBR
     #             raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #             sample_rate: 1,
+    #             sample_rate: 1, # required
     #             specification: "MPEG2", # accepts MPEG2, MPEG4
     #             vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #           },
@@ -392,7 +405,7 @@ module Aws::MediaConvert
     #             channels: 1,
     #             sample_rate: 1,
     #           },
-    #           codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #           codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #           eac_3_settings: {
     #             attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #             bitrate: 1,
@@ -424,23 +437,24 @@ module Aws::MediaConvert
     #           wav_settings: {
     #             bit_depth: 1,
     #             channels: 1,
+    #             format: "RIFF", # accepts RIFF, RF64
     #             sample_rate: 1,
     #           },
     #         },
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #         language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #         remix_settings: {
-    #           channel_mapping: {
-    #             output_channels: [
+    #           channel_mapping: { # required
+    #             output_channels: [ # required
     #               {
-    #                 input_channels: [1],
+    #                 input_channels: [1], # required
     #               },
     #             ],
     #           },
-    #           channels_in: 1,
-    #           channels_out: 1,
+    #           channels_in: 1, # required
+    #           channels_out: 1, # required
     #         },
-    #         stream_name: "__string",
+    #         stream_name: "__stringPatternWS",
     #       }
     #
     # @!attribute [rw] audio_normalization_settings
@@ -597,32 +611,31 @@ module Aws::MediaConvert
     #
     #       {
     #         default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #         external_audio_file_input: "__string",
+    #         external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #         offset: 1,
     #         pids: [1],
     #         program_selection: 1,
     #         remix_settings: {
-    #           channel_mapping: {
-    #             output_channels: [
+    #           channel_mapping: { # required
+    #             output_channels: [ # required
     #               {
-    #                 input_channels: [1],
+    #                 input_channels: [1], # required
     #               },
     #             ],
     #           },
-    #           channels_in: 1,
-    #           channels_out: 1,
+    #           channels_in: 1, # required
+    #           channels_out: 1, # required
     #         },
     #         selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
     #         tracks: [1],
     #       }
     #
     # @!attribute [rw] default_selection
-    #   When an "Audio Description":#audio\_description specifies an
-    #   AudioSelector or AudioSelectorGroup for which no matching source is
-    #   found in the input, then the audio selector marked as DEFAULT will
-    #   be used. If none are marked as default, silence will be inserted for
-    #   the duration of the input.
+    #   Enable this setting on one audio selector to set it as the default
+    #   for the job. The service uses this default for outputs where it
+    #   can't find the specified input audio. If you don't set a default,
+    #   those outputs have no audio.
     #   @return [String]
     #
     # @!attribute [rw] external_audio_file_input
@@ -644,17 +657,22 @@ module Aws::MediaConvert
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] program_selection
-    #   Applies only when input streams contain Dolby E. Enter the program
-    #   ID (according to the metadata in the audio) of the Dolby E program
-    #   to extract from the specified track. One program extracted per audio
-    #   selector. To select multiple programs, create multiple selectors
-    #   with the same Track and different Program numbers. "All channels"
-    #   means to ignore the program IDs and include all the channels in this
-    #   selector; useful if metadata is known to be incorrect.
+    #   Use this setting for input streams that contain Dolby E, to have the
+    #   service extract specific program data from the track. To select
+    #   multiple programs, create multiple selectors with the same Track and
+    #   different Program numbers. In the console, this setting is visible
+    #   when you set Selector type to Track. Choose the program number from
+    #   the dropdown list. If you are sending a JSON file, provide the
+    #   program ID, which is part of the audio metadata. If your input file
+    #   has incorrect metadata, you can choose All channels instead of a
+    #   program number to have the service ignore the program IDs and
+    #   include all the programs in the track.
     #   @return [Integer]
     #
     # @!attribute [rw] remix_settings
-    #   Advanced audio remixing settings.
+    #   Use these settings to reorder the audio channels of one input to
+    #   match those of another input. This allows you to combine the two
+    #   files into a single output, one after the other.
     #   @return [Types::RemixSettings]
     #
     # @!attribute [rw] selector_type
@@ -662,9 +680,13 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] tracks
-    #   Identify the channel to include in this selector by entering the
-    #   1-based track index. To combine several tracks, enter a
-    #   comma-separated list, e.g. "1,2,3" for tracks 1-3.
+    #   Identify a track from the input audio to include in this selector by
+    #   entering the track index number. To include several tracks in a
+    #   single audio selector, specify multiple tracks as follows. Using the
+    #   console, enter a comma-separated list. For examle, type "1,2,3" to
+    #   include tracks 1 through 3. Specifying directly in your JSON job
+    #   file, provide the track numbers in an array. For example,
+    #   "tracks": \[1,2,3\].
     #   @return [Array<Integer>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioSelector AWS API Documentation
@@ -688,15 +710,15 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         audio_selector_names: ["__string"],
+    #         audio_selector_names: ["__stringMin1"], # required
     #       }
     #
     # @!attribute [rw] audio_selector_names
-    #   Name of an "Audio Selector":#inputs-audio\_selector within the
-    #   same input to include in the group. Audio selector names are
-    #   standardized, based on their order within the input (e.g. "Audio
-    #   Selector 1"). The audio\_selector\_name parameter can be repeated
-    #   to add any number of audio selectors to the group.
+    #   Name of an Audio Selector within the same input to include in the
+    #   group. Audio selector names are standardized, based on their order
+    #   within the input (e.g., "Audio Selector 1"). The audio selector
+    #   name parameter can be repeated to add any number of audio selectors
+    #   to the group.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AudioSelectorGroup AWS API Documentation
@@ -712,7 +734,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         avail_blanking_image: "__string",
+    #         avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
     #       }
     #
     # @!attribute [rw] avail_blanking_image
@@ -733,15 +755,15 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         alignment: "CENTERED", # accepts CENTERED, LEFT
+    #         alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #         background_opacity: 1,
     #         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #         font_opacity: 1,
+    #         font_opacity: 1, # required
     #         font_resolution: 1,
     #         font_size: 1,
-    #         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #         outline_size: 1,
+    #         outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #         outline_size: 1, # required
     #         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #         shadow_opacity: 1,
     #         shadow_x_offset: 1,
@@ -839,9 +861,12 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] teletext_spacing
-    #   Controls whether a fixed grid size or proportional font spacing will
-    #   be used to generate the output subtitles bitmap. Only applicable for
-    #   Teletext inputs and DVB-Sub/Burn-in outputs.
+    #   Only applies to jobs with input captions in Teletext or STL formats.
+    #   Specify whether the spacing between letters in your captions is set
+    #   by the captions grid or varies depending on letter width. Choose
+    #   fixed grid to conform to the spacing specified in the captions file
+    #   more accurately. Choose proportional to make the text easier to read
+    #   if the captions are closed caption.
     #   @return [String]
     #
     # @!attribute [rw] x_position
@@ -920,18 +945,18 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         caption_selector_name: "__string",
-    #         destination_settings: {
+    #         caption_selector_name: "__stringMin1", # required
+    #         destination_settings: { # required
     #           burnin_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT
+    #             alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
     #             background_opacity: 1,
     #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #             font_opacity: 1,
+    #             font_opacity: 1, # required
     #             font_resolution: 1,
     #             font_size: 1,
-    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #             outline_size: 1,
+    #             outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #             outline_size: 1, # required
     #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
@@ -940,17 +965,17 @@ module Aws::MediaConvert
     #             x_position: 1,
     #             y_position: 1,
     #           },
-    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #           destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #           dvb_sub_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT
+    #             alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
     #             background_opacity: 1,
     #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #             font_opacity: 1,
+    #             font_opacity: 1, # required
     #             font_resolution: 1,
     #             font_size: 1,
-    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #             outline_size: 1,
+    #             outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #             outline_size: 1, # required
     #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
@@ -963,7 +988,7 @@ module Aws::MediaConvert
     #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #           },
     #           teletext_destination_settings: {
-    #             page_number: "__string",
+    #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #           },
     #           ttml_destination_settings: {
     #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -1009,17 +1034,17 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         destination_settings: {
+    #         destination_settings: { # required
     #           burnin_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT
+    #             alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
     #             background_opacity: 1,
     #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #             font_opacity: 1,
+    #             font_opacity: 1, # required
     #             font_resolution: 1,
     #             font_size: 1,
-    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #             outline_size: 1,
+    #             outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #             outline_size: 1, # required
     #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
@@ -1028,17 +1053,17 @@ module Aws::MediaConvert
     #             x_position: 1,
     #             y_position: 1,
     #           },
-    #           destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #           destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #           dvb_sub_destination_settings: {
-    #             alignment: "CENTERED", # accepts CENTERED, LEFT
+    #             alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #             background_color: "NONE", # accepts NONE, BLACK, WHITE
     #             background_opacity: 1,
     #             font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #             font_opacity: 1,
+    #             font_opacity: 1, # required
     #             font_resolution: 1,
     #             font_size: 1,
-    #             outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #             outline_size: 1,
+    #             outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #             outline_size: 1, # required
     #             shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #             shadow_opacity: 1,
     #             shadow_x_offset: 1,
@@ -1051,7 +1076,7 @@ module Aws::MediaConvert
     #             framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #           },
     #           teletext_destination_settings: {
-    #             page_number: "__string",
+    #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #           },
     #           ttml_destination_settings: {
     #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -1095,15 +1120,15 @@ module Aws::MediaConvert
     #
     #       {
     #         burnin_destination_settings: {
-    #           alignment: "CENTERED", # accepts CENTERED, LEFT
+    #           alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #           background_opacity: 1,
     #           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #           font_opacity: 1,
+    #           font_opacity: 1, # required
     #           font_resolution: 1,
     #           font_size: 1,
-    #           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #           outline_size: 1,
+    #           outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #           outline_size: 1, # required
     #           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #           shadow_opacity: 1,
     #           shadow_x_offset: 1,
@@ -1112,17 +1137,17 @@ module Aws::MediaConvert
     #           x_position: 1,
     #           y_position: 1,
     #         },
-    #         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #         destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #         dvb_sub_destination_settings: {
-    #           alignment: "CENTERED", # accepts CENTERED, LEFT
+    #           alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #           background_opacity: 1,
     #           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #           font_opacity: 1,
+    #           font_opacity: 1, # required
     #           font_resolution: 1,
     #           font_size: 1,
-    #           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #           outline_size: 1,
+    #           outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #           outline_size: 1, # required
     #           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #           shadow_opacity: 1,
     #           shadow_x_offset: 1,
@@ -1135,7 +1160,7 @@ module Aws::MediaConvert
     #           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #         },
     #         teletext_destination_settings: {
-    #           page_number: "__string",
+    #           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #         },
     #         ttml_destination_settings: {
     #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -1180,14 +1205,15 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Caption inputs to be mapped to caption outputs.
+    # Set up captions in your outputs by first selecting them from your
+    # input here.
     #
     # @note When making an API call, you may pass CaptionSelector
     #   data as a hash:
     #
     #       {
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
-    #         source_settings: {
+    #         source_settings: { # required
     #           ancillary_source_settings: {
     #             source_ancillary_channel_number: 1,
     #           },
@@ -1201,12 +1227,12 @@ module Aws::MediaConvert
     #           },
     #           file_source_settings: {
     #             convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #             source_file: "__string",
+    #             source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #             time_delta: 1,
     #           },
-    #           source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #           source_type: "ANCILLARY", # required, accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
     #           teletext_source_settings: {
-    #             page_number: "__string",
+    #             page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #           },
     #         },
     #       }
@@ -1254,12 +1280,12 @@ module Aws::MediaConvert
     #         },
     #         file_source_settings: {
     #           convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #           source_file: "__string",
+    #           source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #           time_delta: 1,
     #         },
-    #         source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #         source_type: "ANCILLARY", # required, accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
     #         teletext_source_settings: {
-    #           page_number: "__string",
+    #           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #         },
     #       }
     #
@@ -1311,9 +1337,9 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         output_channels: [
+    #         output_channels: [ # required
     #           {
-    #             input_channels: [1],
+    #             input_channels: [1], # required
     #           },
     #         ],
     #       }
@@ -1326,6 +1352,202 @@ module Aws::MediaConvert
     #
     class ChannelMapping < Struct.new(
       :output_channels)
+      include Aws::Structure
+    end
+
+    # Settings for CMAF encryption
+    #
+    # @note When making an API call, you may pass CmafEncryptionSettings
+    #   data as a hash:
+    #
+    #       {
+    #         constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #         encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #         initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         static_key_provider: { # required
+    #           key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #           key_format_versions: "__stringPatternDD",
+    #           static_key_value: "__stringPatternAZaZ0932", # required
+    #           url: "__string", # required
+    #         },
+    #         type: "STATIC_KEY", # required, accepts STATIC_KEY
+    #       }
+    #
+    # @!attribute [rw] constant_initialization_vector
+    #   This is a 128-bit, 16-byte hex value represented by a 32-character
+    #   text string. If this parameter is not set then the Initialization
+    #   Vector will follow the segment number by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_method
+    #   Encrypts the segments with the given encryption scheme. Leave blank
+    #   to disable. Selecting 'Disabled' in the web interface also
+    #   disables encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] initialization_vector_in_manifest
+    #   The Initialization Vector is a 128-bit number used in conjunction
+    #   with the key for encrypting blocks. If set to INCLUDE,
+    #   Initialization Vector is listed in the manifest. Otherwise
+    #   Initialization Vector is not in the manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] static_key_provider
+    #   Settings for use with a SPEKE key provider.
+    #   @return [Types::StaticKeyProvider]
+    #
+    # @!attribute [rw] type
+    #   Indicates which type of key provider is used for encryption.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafEncryptionSettings AWS API Documentation
+    #
+    class CmafEncryptionSettings < Struct.new(
+      :constant_initialization_vector,
+      :encryption_method,
+      :initialization_vector_in_manifest,
+      :static_key_provider,
+      :type)
+      include Aws::Structure
+    end
+
+    # Required when you set (Type) under
+    # (OutputGroups)>(OutputGroupSettings) to CMAF\_GROUP\_SETTINGS.
+    #
+    # @note When making an API call, you may pass CmafGroupSettings
+    #   data as a hash:
+    #
+    #       {
+    #         base_url: "__string",
+    #         client_cache: "DISABLED", # accepts DISABLED, ENABLED
+    #         codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
+    #         destination: "__stringPatternS3",
+    #         encryption: {
+    #           constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #           encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #           initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           static_key_provider: { # required
+    #             key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #             key_format_versions: "__stringPatternDD",
+    #             static_key_value: "__stringPatternAZaZ0932", # required
+    #             url: "__string", # required
+    #           },
+    #           type: "STATIC_KEY", # required, accepts STATIC_KEY
+    #         },
+    #         fragment_length: 1, # required
+    #         manifest_compression: "GZIP", # accepts GZIP, NONE
+    #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #         min_buffer_time: 1,
+    #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
+    #         segment_length: 1, # required
+    #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #         write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #       }
+    #
+    # @!attribute [rw] base_url
+    #   A partial URI prefix that will be put in the manifest file at the
+    #   top level BaseURL element. Can be used if streams are delivered from
+    #   a different URL than the manifest file.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_cache
+    #   When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents
+    #   client from saving media segments for later replay.
+    #   @return [String]
+    #
+    # @!attribute [rw] codec_specification
+    #   Specification to use (RFC-6381 or the default RFC-4281) during m3u8
+    #   playlist generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   Use Destination (Destination) to specify the S3 output location and
+    #   the output filename base. Destination accepts format identifiers. If
+    #   you do not specify the base filename in the URI, the service will
+    #   use the filename of the input file. If your job has multiple inputs,
+    #   the service uses the filename of the first input file.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption
+    #   DRM settings.
+    #   @return [Types::CmafEncryptionSettings]
+    #
+    # @!attribute [rw] fragment_length
+    #   Length of fragments to generate (in seconds). Fragment length must
+    #   be compatible with GOP size and Framerate. Note that fragments will
+    #   end on the next keyframe after this number of seconds, so actual
+    #   fragment length may be longer. When Emit Single File is checked, the
+    #   fragmentation is internal to a single output file and it does not
+    #   cause the creation of many output files as in other output types.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] manifest_compression
+    #   When set to GZIP, compresses HLS playlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] manifest_duration_format
+    #   Indicates whether the output manifest should use floating point
+    #   values for segment duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_buffer_time
+    #   Minimum time of initially buffered media that is needed to ensure
+    #   smooth playout.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment_control
+    #   When set to SINGLE\_FILE, a single output file is generated, which
+    #   is internally segmented using the Fragment Length and Segment
+    #   Length. When set to SEGMENTED\_FILES, separate segment files will be
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_length
+    #   Use this setting to specify the length, in seconds, of each
+    #   individual CMAF segment. This value applies to the whole package;
+    #   that is, to every output in the output group. Note that segments end
+    #   on the first keyframe after this number of seconds, so the actual
+    #   segment length might be slightly longer. If you set Segment control
+    #   (CmafSegmentControl) to single file, the service puts the content of
+    #   each output in a single file that has metadata that marks these
+    #   segments. If you set it to segmented files, the service creates
+    #   multiple files for each output, each with the content of one
+    #   segment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_inf_resolution
+    #   Include or exclude RESOLUTION attribute for video in
+    #   EXT-X-STREAM-INF tag of variant manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] write_dash_manifest
+    #   When set to ENABLED, a DASH MPD manifest will be generated for this
+    #   output.
+    #   @return [String]
+    #
+    # @!attribute [rw] write_hls_manifest
+    #   When set to ENABLED, an Apple HLS manifest will be generated for
+    #   this output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmafGroupSettings AWS API Documentation
+    #
+    class CmafGroupSettings < Struct.new(
+      :base_url,
+      :client_cache,
+      :codec_specification,
+      :destination,
+      :encryption,
+      :fragment_length,
+      :manifest_compression,
+      :manifest_duration_format,
+      :min_buffer_time,
+      :segment_control,
+      :segment_length,
+      :stream_inf_resolution,
+      :write_dash_manifest,
+      :write_hls_manifest)
       include Aws::Structure
     end
 
@@ -1343,8 +1565,8 @@ module Aws::MediaConvert
     #           blue_primary_y: 1,
     #           green_primary_x: 1,
     #           green_primary_y: 1,
-    #           max_content_light_level: 1,
-    #           max_frame_average_light_level: 1,
+    #           max_content_light_level: 1, # required
+    #           max_frame_average_light_level: 1, # required
     #           max_luminance: 1,
     #           min_luminance: 1,
     #           red_primary_x: 1,
@@ -1374,10 +1596,14 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] hdr_10_metadata
-    #   Use the HDR master display (Hdr10Metadata) settings to provide
-    #   values for HDR color. These values vary depending on the input video
-    #   and must be provided by a color grader. Range is 0 to 50,000, each
-    #   increment represents 0.00002 in CIE1931 color coordinate.
+    #   Use the HDR master display (Hdr10Metadata) settings to correct HDR
+    #   metadata or to provide missing metadata. These values vary depending
+    #   on the input video and must be provided by a color grader. Range is
+    #   0 to 50,000, each increment represents 0.00002 in CIE1931 color
+    #   coordinate. Note that these settings are not color correction. Note
+    #   that if you are creating HDR outputs inside of an HLS CMAF package,
+    #   to comply with the Apple specification, you must use the HVC1 for
+    #   H.265 setting.
     #   @return [Types::Hdr10Metadata]
     #
     # @!attribute [rw] hue
@@ -1406,7 +1632,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #         container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #         f4v_settings: {
     #           moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #         },
@@ -1417,19 +1643,19 @@ module Aws::MediaConvert
     #           bitrate: 1,
     #           buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #           dvb_nit_settings: {
-    #             network_id: 1,
-    #             network_name: "__string",
-    #             nit_interval: 1,
+    #             network_id: 1, # required
+    #             network_name: "__stringMin1Max256", # required
+    #             nit_interval: 1, # required
     #           },
     #           dvb_sdt_settings: {
     #             output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #             sdt_interval: 1,
-    #             service_name: "__string",
-    #             service_provider_name: "__string",
+    #             service_name: "__stringMin1Max256",
+    #             service_provider_name: "__stringMin1Max256",
     #           },
     #           dvb_sub_pids: [1],
     #           dvb_tdt_settings: {
-    #             tdt_interval: 1,
+    #             tdt_interval: 1, # required
     #           },
     #           dvb_teletext_pid: 1,
     #           ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -1538,37 +1764,37 @@ module Aws::MediaConvert
     #         client_request_token: "__string",
     #         job_template: "__string",
     #         queue: "__string",
-    #         role: "__string",
-    #         settings: {
+    #         role: "__string", # required
+    #         settings: { # required
     #           ad_avail_offset: 1,
     #           avail_blanking: {
-    #             avail_blanking_image: "__string",
+    #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
     #           },
-    #           inputs: [
+    #           inputs: [ # required
     #             {
     #               audio_selector_groups: {
     #                 "__string" => {
-    #                   audio_selector_names: ["__string"],
+    #                   audio_selector_names: ["__stringMin1"], # required
     #                 },
     #               },
     #               audio_selectors: {
     #                 "__string" => {
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__string",
+    #                   external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
     #                   program_selection: 1,
     #                   remix_settings: {
-    #                     channel_mapping: {
-    #                       output_channels: [
+    #                     channel_mapping: { # required
+    #                       output_channels: [ # required
     #                         {
-    #                           input_channels: [1],
+    #                           input_channels: [1], # required
     #                         },
     #                       ],
     #                     },
-    #                     channels_in: 1,
-    #                     channels_out: 1,
+    #                     channels_in: 1, # required
+    #                     channels_out: 1, # required
     #                   },
     #                   selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
     #                   tracks: [1],
@@ -1577,7 +1803,7 @@ module Aws::MediaConvert
     #               caption_selectors: {
     #                 "__string" => {
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
-    #                   source_settings: {
+    #                   source_settings: { # required
     #                     ancillary_source_settings: {
     #                       source_ancillary_channel_number: 1,
     #                     },
@@ -1591,25 +1817,25 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                       source_file: "__string",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #                       time_delta: 1,
     #                     },
-    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                     source_type: "ANCILLARY", # required, accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
     #                     teletext_source_settings: {
-    #                       page_number: "__string",
+    #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                     },
     #                   },
     #                 },
     #               },
     #               deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
     #               denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #               file_input: "__string",
+    #               file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM", # required
     #               filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #               filter_strength: 1,
     #               input_clippings: [
     #                 {
-    #                   end_timecode: "__string",
-    #                   start_timecode: "__string",
+    #                   end_timecode: "__stringPattern010920405090509092",
+    #                   start_timecode: "__stringPattern010920405090509092",
     #                 },
     #               ],
     #               program_number: 1,
@@ -1623,8 +1849,8 @@ module Aws::MediaConvert
     #                   blue_primary_y: 1,
     #                   green_primary_x: 1,
     #                   green_primary_y: 1,
-    #                   max_content_light_level: 1,
-    #                   max_frame_average_light_level: 1,
+    #                   max_content_light_level: 1, # required
+    #                   max_frame_average_light_level: 1, # required
     #                   max_luminance: 1,
     #                   min_luminance: 1,
     #                   red_primary_x: 1,
@@ -1641,29 +1867,56 @@ module Aws::MediaConvert
     #             breakout_code: 1,
     #             distributor_id: "__string",
     #           },
-    #           output_groups: [
+    #           output_groups: [ # required
     #             {
     #               custom_name: "__string",
     #               name: "__string",
-    #               output_group_settings: {
+    #               output_group_settings: { # required
+    #                 cmaf_group_settings: {
+    #                   base_url: "__string",
+    #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
+    #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
+    #                   destination: "__stringPatternS3",
+    #                   encryption: {
+    #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     static_key_provider: { # required
+    #                       key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                       key_format_versions: "__stringPatternDD",
+    #                       static_key_value: "__stringPatternAZaZ0932", # required
+    #                       url: "__string", # required
+    #                     },
+    #                     type: "STATIC_KEY", # required, accepts STATIC_KEY
+    #                   },
+    #                   fragment_length: 1, # required
+    #                   manifest_compression: "GZIP", # accepts GZIP, NONE
+    #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                   min_buffer_time: 1,
+    #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
+    #                   segment_length: 1, # required
+    #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                 },
     #                 dash_iso_group_settings: {
     #                   base_url: "__string",
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                   encryption: {
-    #                     speke_key_provider: {
-    #                       resource_id: "__string",
-    #                       system_ids: ["__string"],
-    #                       url: "__string",
+    #                     speke_key_provider: { # required
+    #                       resource_id: "__string", # required
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                       url: "__stringPatternHttps", # required
     #                     },
     #                   },
-    #                   fragment_length: 1,
+    #                   fragment_length: 1, # required
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                   segment_length: 1,
+    #                   segment_length: 1, # required
     #                 },
     #                 file_group_settings: {
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -1678,33 +1931,33 @@ module Aws::MediaConvert
     #                   caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                   encryption: {
-    #                     constant_initialization_vector: "__string",
+    #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     speke_key_provider: {
-    #                       resource_id: "__string",
-    #                       system_ids: ["__string"],
-    #                       url: "__string",
+    #                       resource_id: "__string", # required
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                       url: "__stringPatternHttps", # required
     #                     },
     #                     static_key_provider: {
-    #                       key_format: "__string",
-    #                       key_format_versions: "__string",
-    #                       static_key_value: "__string",
-    #                       url: "__string",
+    #                       key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                       key_format_versions: "__stringPatternDD",
+    #                       static_key_value: "__stringPatternAZaZ0932", # required
+    #                       url: "__string", # required
     #                     },
-    #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
+    #                     type: "SPEKE", # required, accepts SPEKE, STATIC_KEY
     #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #                   min_segment_length: 1,
+    #                   min_segment_length: 1, # required
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   program_date_time_period: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                   segment_length: 1,
+    #                   segment_length: 1, # required
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -1713,20 +1966,20 @@ module Aws::MediaConvert
     #                 },
     #                 ms_smooth_group_settings: {
     #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                   encryption: {
-    #                     speke_key_provider: {
-    #                       resource_id: "__string",
-    #                       system_ids: ["__string"],
-    #                       url: "__string",
+    #                     speke_key_provider: { # required
+    #                       resource_id: "__string", # required
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                       url: "__stringPatternHttps", # required
     #                     },
     #                   },
-    #                   fragment_length: 1,
+    #                   fragment_length: 1, # required
     #                   manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #                 },
-    #                 type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS
+    #                 type: "HLS_GROUP_SETTINGS", # required, accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
     #               },
-    #               outputs: [
+    #               outputs: [ # required
     #                 {
     #                   audio_descriptions: [
     #                     {
@@ -1741,15 +1994,15 @@ module Aws::MediaConvert
     #                       audio_source_name: "__string",
     #                       audio_type: 1,
     #                       audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                       codec_settings: {
+    #                       codec_settings: { # required
     #                         aac_settings: {
     #                           audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                           bitrate: 1,
     #                           codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                           coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                           coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                           rate_control_mode: "CBR", # accepts CBR, VBR
     #                           raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                           sample_rate: 1,
+    #                           sample_rate: 1, # required
     #                           specification: "MPEG2", # accepts MPEG2, MPEG4
     #                           vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #                         },
@@ -1768,7 +2021,7 @@ module Aws::MediaConvert
     #                           channels: 1,
     #                           sample_rate: 1,
     #                         },
-    #                         codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                         codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #                         eac_3_settings: {
     #                           attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                           bitrate: 1,
@@ -1800,39 +2053,40 @@ module Aws::MediaConvert
     #                         wav_settings: {
     #                           bit_depth: 1,
     #                           channels: 1,
+    #                           format: "RIFF", # accepts RIFF, RF64
     #                           sample_rate: 1,
     #                         },
     #                       },
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                       language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                       remix_settings: {
-    #                         channel_mapping: {
-    #                           output_channels: [
+    #                         channel_mapping: { # required
+    #                           output_channels: [ # required
     #                             {
-    #                               input_channels: [1],
+    #                               input_channels: [1], # required
     #                             },
     #                           ],
     #                         },
-    #                         channels_in: 1,
-    #                         channels_out: 1,
+    #                         channels_in: 1, # required
+    #                         channels_out: 1, # required
     #                       },
-    #                       stream_name: "__string",
+    #                       stream_name: "__stringPatternWS",
     #                     },
     #                   ],
     #                   caption_descriptions: [
     #                     {
-    #                       caption_selector_name: "__string",
-    #                       destination_settings: {
+    #                       caption_selector_name: "__stringMin1", # required
+    #                       destination_settings: { # required
     #                         burnin_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                           alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                           font_opacity: 1,
+    #                           font_opacity: 1, # required
     #                           font_resolution: 1,
     #                           font_size: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                           outline_size: 1,
+    #                           outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           outline_size: 1, # required
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
@@ -1841,17 +2095,17 @@ module Aws::MediaConvert
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
-    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                         destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                           alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                           font_opacity: 1,
+    #                           font_opacity: 1, # required
     #                           font_resolution: 1,
     #                           font_size: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                           outline_size: 1,
+    #                           outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           outline_size: 1, # required
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
@@ -1864,7 +2118,7 @@ module Aws::MediaConvert
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                         },
     #                         teletext_destination_settings: {
-    #                           page_number: "__string",
+    #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                         },
     #                         ttml_destination_settings: {
     #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -1875,7 +2129,7 @@ module Aws::MediaConvert
     #                     },
     #                   ],
     #                   container_settings: {
-    #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #                     container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                     f4v_settings: {
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     },
@@ -1886,19 +2140,19 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                       dvb_nit_settings: {
-    #                         network_id: 1,
-    #                         network_name: "__string",
-    #                         nit_interval: 1,
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         nit_interval: 1, # required
     #                       },
     #                       dvb_sdt_settings: {
     #                         output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                         sdt_interval: 1,
-    #                         service_name: "__string",
-    #                         service_provider_name: "__string",
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256",
     #                       },
     #                       dvb_sub_pids: [1],
     #                       dvb_tdt_settings: {
-    #                         tdt_interval: 1,
+    #                         tdt_interval: 1, # required
     #                       },
     #                       dvb_teletext_pid: 1,
     #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -1959,7 +2213,7 @@ module Aws::MediaConvert
     #                     },
     #                   },
     #                   extension: "__string",
-    #                   name_modifier: "__string",
+    #                   name_modifier: "__stringMin1",
     #                   output_settings: {
     #                     hls_settings: {
     #                       audio_group_id: "__string",
@@ -1969,12 +2223,12 @@ module Aws::MediaConvert
     #                       segment_modifier: "__string",
     #                     },
     #                   },
-    #                   preset: "__string",
+    #                   preset: "__stringMin0",
     #                   video_description: {
     #                     afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                     anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #                     codec_settings: {
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                     codec_settings: { # required
+    #                       codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -2057,6 +2311,7 @@ module Aws::MediaConvert
     #                         temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #                         tiles: "DISABLED", # accepts DISABLED, ENABLED
     #                         unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #                         write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #                       },
     #                       mpeg_2_settings: {
     #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -2106,19 +2361,19 @@ module Aws::MediaConvert
     #                     },
     #                     color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                     crop: {
-    #                       height: 1,
-    #                       width: 1,
-    #                       x: 1,
-    #                       y: 1,
+    #                       height: 1, # required
+    #                       width: 1, # required
+    #                       x: 1, # required
+    #                       y: 1, # required
     #                     },
     #                     drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #                     fixed_afd: 1,
     #                     height: 1,
     #                     position: {
-    #                       height: 1,
-    #                       width: 1,
-    #                       x: 1,
-    #                       y: 1,
+    #                       height: 1, # required
+    #                       width: 1, # required
+    #                       x: 1, # required
+    #                       y: 1, # required
     #                     },
     #                     respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #                     scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -2134,8 +2389,8 @@ module Aws::MediaConvert
     #                           blue_primary_y: 1,
     #                           green_primary_x: 1,
     #                           green_primary_y: 1,
-    #                           max_content_light_level: 1,
-    #                           max_frame_average_light_level: 1,
+    #                           max_content_light_level: 1, # required
+    #                           max_frame_average_light_level: 1, # required
     #                           max_luminance: 1,
     #                           min_luminance: 1,
     #                           red_primary_x: 1,
@@ -2152,24 +2407,24 @@ module Aws::MediaConvert
     #                         mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                       },
     #                       image_inserter: {
-    #                         insertable_images: [
+    #                         insertable_images: [ # required
     #                           {
     #                             duration: 1,
     #                             fade_in: 1,
     #                             fade_out: 1,
     #                             height: 1,
-    #                             image_inserter_input: "__string",
-    #                             image_x: 1,
-    #                             image_y: 1,
-    #                             layer: 1,
-    #                             opacity: 1,
-    #                             start_time: "__string",
+    #                             image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                             image_x: 1, # required
+    #                             image_y: 1, # required
+    #                             layer: 1, # required
+    #                             opacity: 1, # required
+    #                             start_time: "__stringPattern01D20305D205D",
     #                             width: 1,
     #                           },
     #                         ],
     #                       },
     #                       noise_reducer: {
-    #                         filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                         filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #                         filter_settings: {
     #                           strength: 1,
     #                         },
@@ -2182,7 +2437,7 @@ module Aws::MediaConvert
     #                       timecode_burnin: {
     #                         font_size: 1,
     #                         position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #                         prefix: "__string",
+    #                         prefix: "__stringPattern",
     #                       },
     #                     },
     #                     width: 1,
@@ -2192,16 +2447,16 @@ module Aws::MediaConvert
     #             },
     #           ],
     #           timecode_config: {
-    #             anchor: "__string",
+    #             anchor: "__stringPattern010920405090509092",
     #             source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
-    #             start: "__string",
-    #             timestamp_offset: "__string",
+    #             start: "__stringPattern010920405090509092",
+    #             timestamp_offset: "__stringPattern0940191020191209301",
     #           },
     #           timed_metadata_insertion: {
-    #             id_3_insertions: [
+    #             id_3_insertions: [ # required
     #               {
-    #                 id_3: "__string",
-    #                 timecode: "__string",
+    #                 id_3: "__stringPatternAZaZ0902", # required
+    #                 timecode: "__stringPattern010920405090509092", # required
     #               },
     #             ],
     #           },
@@ -2281,38 +2536,38 @@ module Aws::MediaConvert
     #       {
     #         category: "__string",
     #         description: "__string",
-    #         name: "__string",
+    #         name: "__string", # required
     #         queue: "__string",
-    #         settings: {
+    #         settings: { # required
     #           ad_avail_offset: 1,
     #           avail_blanking: {
-    #             avail_blanking_image: "__string",
+    #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
     #           },
     #           inputs: [
     #             {
     #               audio_selector_groups: {
     #                 "__string" => {
-    #                   audio_selector_names: ["__string"],
+    #                   audio_selector_names: ["__stringMin1"], # required
     #                 },
     #               },
     #               audio_selectors: {
     #                 "__string" => {
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__string",
+    #                   external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
     #                   program_selection: 1,
     #                   remix_settings: {
-    #                     channel_mapping: {
-    #                       output_channels: [
+    #                     channel_mapping: { # required
+    #                       output_channels: [ # required
     #                         {
-    #                           input_channels: [1],
+    #                           input_channels: [1], # required
     #                         },
     #                       ],
     #                     },
-    #                     channels_in: 1,
-    #                     channels_out: 1,
+    #                     channels_in: 1, # required
+    #                     channels_out: 1, # required
     #                   },
     #                   selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
     #                   tracks: [1],
@@ -2321,7 +2576,7 @@ module Aws::MediaConvert
     #               caption_selectors: {
     #                 "__string" => {
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
-    #                   source_settings: {
+    #                   source_settings: { # required
     #                     ancillary_source_settings: {
     #                       source_ancillary_channel_number: 1,
     #                     },
@@ -2335,12 +2590,12 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                       source_file: "__string",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #                       time_delta: 1,
     #                     },
-    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                     source_type: "ANCILLARY", # required, accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
     #                     teletext_source_settings: {
-    #                       page_number: "__string",
+    #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                     },
     #                   },
     #                 },
@@ -2351,8 +2606,8 @@ module Aws::MediaConvert
     #               filter_strength: 1,
     #               input_clippings: [
     #                 {
-    #                   end_timecode: "__string",
-    #                   start_timecode: "__string",
+    #                   end_timecode: "__stringPattern010920405090509092",
+    #                   start_timecode: "__stringPattern010920405090509092",
     #                 },
     #               ],
     #               program_number: 1,
@@ -2366,8 +2621,8 @@ module Aws::MediaConvert
     #                   blue_primary_y: 1,
     #                   green_primary_x: 1,
     #                   green_primary_y: 1,
-    #                   max_content_light_level: 1,
-    #                   max_frame_average_light_level: 1,
+    #                   max_content_light_level: 1, # required
+    #                   max_frame_average_light_level: 1, # required
     #                   max_luminance: 1,
     #                   min_luminance: 1,
     #                   red_primary_x: 1,
@@ -2384,29 +2639,56 @@ module Aws::MediaConvert
     #             breakout_code: 1,
     #             distributor_id: "__string",
     #           },
-    #           output_groups: [
+    #           output_groups: [ # required
     #             {
     #               custom_name: "__string",
     #               name: "__string",
-    #               output_group_settings: {
+    #               output_group_settings: { # required
+    #                 cmaf_group_settings: {
+    #                   base_url: "__string",
+    #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
+    #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
+    #                   destination: "__stringPatternS3",
+    #                   encryption: {
+    #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     static_key_provider: { # required
+    #                       key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                       key_format_versions: "__stringPatternDD",
+    #                       static_key_value: "__stringPatternAZaZ0932", # required
+    #                       url: "__string", # required
+    #                     },
+    #                     type: "STATIC_KEY", # required, accepts STATIC_KEY
+    #                   },
+    #                   fragment_length: 1, # required
+    #                   manifest_compression: "GZIP", # accepts GZIP, NONE
+    #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                   min_buffer_time: 1,
+    #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
+    #                   segment_length: 1, # required
+    #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                 },
     #                 dash_iso_group_settings: {
     #                   base_url: "__string",
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                   encryption: {
-    #                     speke_key_provider: {
-    #                       resource_id: "__string",
-    #                       system_ids: ["__string"],
-    #                       url: "__string",
+    #                     speke_key_provider: { # required
+    #                       resource_id: "__string", # required
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                       url: "__stringPatternHttps", # required
     #                     },
     #                   },
-    #                   fragment_length: 1,
+    #                   fragment_length: 1, # required
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                   segment_length: 1,
+    #                   segment_length: 1, # required
     #                 },
     #                 file_group_settings: {
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -2421,33 +2703,33 @@ module Aws::MediaConvert
     #                   caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                   encryption: {
-    #                     constant_initialization_vector: "__string",
+    #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     speke_key_provider: {
-    #                       resource_id: "__string",
-    #                       system_ids: ["__string"],
-    #                       url: "__string",
+    #                       resource_id: "__string", # required
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                       url: "__stringPatternHttps", # required
     #                     },
     #                     static_key_provider: {
-    #                       key_format: "__string",
-    #                       key_format_versions: "__string",
-    #                       static_key_value: "__string",
-    #                       url: "__string",
+    #                       key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                       key_format_versions: "__stringPatternDD",
+    #                       static_key_value: "__stringPatternAZaZ0932", # required
+    #                       url: "__string", # required
     #                     },
-    #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
+    #                     type: "SPEKE", # required, accepts SPEKE, STATIC_KEY
     #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #                   min_segment_length: 1,
+    #                   min_segment_length: 1, # required
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   program_date_time_period: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                   segment_length: 1,
+    #                   segment_length: 1, # required
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -2456,20 +2738,20 @@ module Aws::MediaConvert
     #                 },
     #                 ms_smooth_group_settings: {
     #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                   encryption: {
-    #                     speke_key_provider: {
-    #                       resource_id: "__string",
-    #                       system_ids: ["__string"],
-    #                       url: "__string",
+    #                     speke_key_provider: { # required
+    #                       resource_id: "__string", # required
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                       url: "__stringPatternHttps", # required
     #                     },
     #                   },
-    #                   fragment_length: 1,
+    #                   fragment_length: 1, # required
     #                   manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #                 },
-    #                 type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS
+    #                 type: "HLS_GROUP_SETTINGS", # required, accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
     #               },
-    #               outputs: [
+    #               outputs: [ # required
     #                 {
     #                   audio_descriptions: [
     #                     {
@@ -2484,15 +2766,15 @@ module Aws::MediaConvert
     #                       audio_source_name: "__string",
     #                       audio_type: 1,
     #                       audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                       codec_settings: {
+    #                       codec_settings: { # required
     #                         aac_settings: {
     #                           audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                           bitrate: 1,
     #                           codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                           coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                           coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                           rate_control_mode: "CBR", # accepts CBR, VBR
     #                           raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                           sample_rate: 1,
+    #                           sample_rate: 1, # required
     #                           specification: "MPEG2", # accepts MPEG2, MPEG4
     #                           vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #                         },
@@ -2511,7 +2793,7 @@ module Aws::MediaConvert
     #                           channels: 1,
     #                           sample_rate: 1,
     #                         },
-    #                         codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                         codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #                         eac_3_settings: {
     #                           attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                           bitrate: 1,
@@ -2543,39 +2825,40 @@ module Aws::MediaConvert
     #                         wav_settings: {
     #                           bit_depth: 1,
     #                           channels: 1,
+    #                           format: "RIFF", # accepts RIFF, RF64
     #                           sample_rate: 1,
     #                         },
     #                       },
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                       language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                       remix_settings: {
-    #                         channel_mapping: {
-    #                           output_channels: [
+    #                         channel_mapping: { # required
+    #                           output_channels: [ # required
     #                             {
-    #                               input_channels: [1],
+    #                               input_channels: [1], # required
     #                             },
     #                           ],
     #                         },
-    #                         channels_in: 1,
-    #                         channels_out: 1,
+    #                         channels_in: 1, # required
+    #                         channels_out: 1, # required
     #                       },
-    #                       stream_name: "__string",
+    #                       stream_name: "__stringPatternWS",
     #                     },
     #                   ],
     #                   caption_descriptions: [
     #                     {
-    #                       caption_selector_name: "__string",
-    #                       destination_settings: {
+    #                       caption_selector_name: "__stringMin1", # required
+    #                       destination_settings: { # required
     #                         burnin_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                           alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                           font_opacity: 1,
+    #                           font_opacity: 1, # required
     #                           font_resolution: 1,
     #                           font_size: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                           outline_size: 1,
+    #                           outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           outline_size: 1, # required
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
@@ -2584,17 +2867,17 @@ module Aws::MediaConvert
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
-    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                         destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                           alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                           font_opacity: 1,
+    #                           font_opacity: 1, # required
     #                           font_resolution: 1,
     #                           font_size: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                           outline_size: 1,
+    #                           outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           outline_size: 1, # required
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
@@ -2607,7 +2890,7 @@ module Aws::MediaConvert
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                         },
     #                         teletext_destination_settings: {
-    #                           page_number: "__string",
+    #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                         },
     #                         ttml_destination_settings: {
     #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -2618,7 +2901,7 @@ module Aws::MediaConvert
     #                     },
     #                   ],
     #                   container_settings: {
-    #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #                     container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                     f4v_settings: {
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     },
@@ -2629,19 +2912,19 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                       dvb_nit_settings: {
-    #                         network_id: 1,
-    #                         network_name: "__string",
-    #                         nit_interval: 1,
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         nit_interval: 1, # required
     #                       },
     #                       dvb_sdt_settings: {
     #                         output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                         sdt_interval: 1,
-    #                         service_name: "__string",
-    #                         service_provider_name: "__string",
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256",
     #                       },
     #                       dvb_sub_pids: [1],
     #                       dvb_tdt_settings: {
-    #                         tdt_interval: 1,
+    #                         tdt_interval: 1, # required
     #                       },
     #                       dvb_teletext_pid: 1,
     #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -2702,7 +2985,7 @@ module Aws::MediaConvert
     #                     },
     #                   },
     #                   extension: "__string",
-    #                   name_modifier: "__string",
+    #                   name_modifier: "__stringMin1",
     #                   output_settings: {
     #                     hls_settings: {
     #                       audio_group_id: "__string",
@@ -2712,12 +2995,12 @@ module Aws::MediaConvert
     #                       segment_modifier: "__string",
     #                     },
     #                   },
-    #                   preset: "__string",
+    #                   preset: "__stringMin0",
     #                   video_description: {
     #                     afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                     anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #                     codec_settings: {
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                     codec_settings: { # required
+    #                       codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -2800,6 +3083,7 @@ module Aws::MediaConvert
     #                         temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #                         tiles: "DISABLED", # accepts DISABLED, ENABLED
     #                         unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #                         write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #                       },
     #                       mpeg_2_settings: {
     #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -2849,19 +3133,19 @@ module Aws::MediaConvert
     #                     },
     #                     color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                     crop: {
-    #                       height: 1,
-    #                       width: 1,
-    #                       x: 1,
-    #                       y: 1,
+    #                       height: 1, # required
+    #                       width: 1, # required
+    #                       x: 1, # required
+    #                       y: 1, # required
     #                     },
     #                     drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #                     fixed_afd: 1,
     #                     height: 1,
     #                     position: {
-    #                       height: 1,
-    #                       width: 1,
-    #                       x: 1,
-    #                       y: 1,
+    #                       height: 1, # required
+    #                       width: 1, # required
+    #                       x: 1, # required
+    #                       y: 1, # required
     #                     },
     #                     respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #                     scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -2877,8 +3161,8 @@ module Aws::MediaConvert
     #                           blue_primary_y: 1,
     #                           green_primary_x: 1,
     #                           green_primary_y: 1,
-    #                           max_content_light_level: 1,
-    #                           max_frame_average_light_level: 1,
+    #                           max_content_light_level: 1, # required
+    #                           max_frame_average_light_level: 1, # required
     #                           max_luminance: 1,
     #                           min_luminance: 1,
     #                           red_primary_x: 1,
@@ -2895,24 +3179,24 @@ module Aws::MediaConvert
     #                         mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                       },
     #                       image_inserter: {
-    #                         insertable_images: [
+    #                         insertable_images: [ # required
     #                           {
     #                             duration: 1,
     #                             fade_in: 1,
     #                             fade_out: 1,
     #                             height: 1,
-    #                             image_inserter_input: "__string",
-    #                             image_x: 1,
-    #                             image_y: 1,
-    #                             layer: 1,
-    #                             opacity: 1,
-    #                             start_time: "__string",
+    #                             image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                             image_x: 1, # required
+    #                             image_y: 1, # required
+    #                             layer: 1, # required
+    #                             opacity: 1, # required
+    #                             start_time: "__stringPattern01D20305D205D",
     #                             width: 1,
     #                           },
     #                         ],
     #                       },
     #                       noise_reducer: {
-    #                         filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                         filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #                         filter_settings: {
     #                           strength: 1,
     #                         },
@@ -2925,7 +3209,7 @@ module Aws::MediaConvert
     #                       timecode_burnin: {
     #                         font_size: 1,
     #                         position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #                         prefix: "__string",
+    #                         prefix: "__stringPattern",
     #                       },
     #                     },
     #                     width: 1,
@@ -2935,16 +3219,16 @@ module Aws::MediaConvert
     #             },
     #           ],
     #           timecode_config: {
-    #             anchor: "__string",
+    #             anchor: "__stringPattern010920405090509092",
     #             source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
-    #             start: "__string",
-    #             timestamp_offset: "__string",
+    #             start: "__stringPattern010920405090509092",
+    #             timestamp_offset: "__stringPattern0940191020191209301",
     #           },
     #           timed_metadata_insertion: {
-    #             id_3_insertions: [
+    #             id_3_insertions: [ # required
     #               {
-    #                 id_3: "__string",
-    #                 timecode: "__string",
+    #                 id_3: "__stringPatternAZaZ0902", # required
+    #                 timecode: "__stringPattern010920405090509092", # required
     #               },
     #             ],
     #           },
@@ -3008,8 +3292,8 @@ module Aws::MediaConvert
     #       {
     #         category: "__string",
     #         description: "__string",
-    #         name: "__string",
-    #         settings: {
+    #         name: "__string", # required
+    #         settings: { # required
     #           audio_descriptions: [
     #             {
     #               audio_normalization_settings: {
@@ -3023,15 +3307,15 @@ module Aws::MediaConvert
     #               audio_source_name: "__string",
     #               audio_type: 1,
     #               audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               codec_settings: {
+    #               codec_settings: { # required
     #                 aac_settings: {
     #                   audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                   bitrate: 1,
     #                   codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                   coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                   coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                   rate_control_mode: "CBR", # accepts CBR, VBR
     #                   raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                   sample_rate: 1,
+    #                   sample_rate: 1, # required
     #                   specification: "MPEG2", # accepts MPEG2, MPEG4
     #                   vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #                 },
@@ -3050,7 +3334,7 @@ module Aws::MediaConvert
     #                   channels: 1,
     #                   sample_rate: 1,
     #                 },
-    #                 codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                 codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #                 eac_3_settings: {
     #                   attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                   bitrate: 1,
@@ -3082,38 +3366,39 @@ module Aws::MediaConvert
     #                 wav_settings: {
     #                   bit_depth: 1,
     #                   channels: 1,
+    #                   format: "RIFF", # accepts RIFF, RF64
     #                   sample_rate: 1,
     #                 },
     #               },
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               remix_settings: {
-    #                 channel_mapping: {
-    #                   output_channels: [
+    #                 channel_mapping: { # required
+    #                   output_channels: [ # required
     #                     {
-    #                       input_channels: [1],
+    #                       input_channels: [1], # required
     #                     },
     #                   ],
     #                 },
-    #                 channels_in: 1,
-    #                 channels_out: 1,
+    #                 channels_in: 1, # required
+    #                 channels_out: 1, # required
     #               },
-    #               stream_name: "__string",
+    #               stream_name: "__stringPatternWS",
     #             },
     #           ],
     #           caption_descriptions: [
     #             {
-    #               destination_settings: {
+    #               destination_settings: { # required
     #                 burnin_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                   alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   background_opacity: 1,
     #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                   font_opacity: 1,
+    #                   font_opacity: 1, # required
     #                   font_resolution: 1,
     #                   font_size: 1,
-    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                   outline_size: 1,
+    #                   outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                   outline_size: 1, # required
     #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
@@ -3122,17 +3407,17 @@ module Aws::MediaConvert
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
-    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                 destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #                 dvb_sub_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                   alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   background_opacity: 1,
     #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                   font_opacity: 1,
+    #                   font_opacity: 1, # required
     #                   font_resolution: 1,
     #                   font_size: 1,
-    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                   outline_size: 1,
+    #                   outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                   outline_size: 1, # required
     #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
@@ -3145,7 +3430,7 @@ module Aws::MediaConvert
     #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                 },
     #                 teletext_destination_settings: {
-    #                   page_number: "__string",
+    #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
     #                 ttml_destination_settings: {
     #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -3156,7 +3441,7 @@ module Aws::MediaConvert
     #             },
     #           ],
     #           container_settings: {
-    #             container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #             container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #             f4v_settings: {
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #             },
@@ -3167,19 +3452,19 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #               dvb_nit_settings: {
-    #                 network_id: 1,
-    #                 network_name: "__string",
-    #                 nit_interval: 1,
+    #                 network_id: 1, # required
+    #                 network_name: "__stringMin1Max256", # required
+    #                 nit_interval: 1, # required
     #               },
     #               dvb_sdt_settings: {
     #                 output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                 sdt_interval: 1,
-    #                 service_name: "__string",
-    #                 service_provider_name: "__string",
+    #                 service_name: "__stringMin1Max256",
+    #                 service_provider_name: "__stringMin1Max256",
     #               },
     #               dvb_sub_pids: [1],
     #               dvb_tdt_settings: {
-    #                 tdt_interval: 1,
+    #                 tdt_interval: 1, # required
     #               },
     #               dvb_teletext_pid: 1,
     #               ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -3242,8 +3527,8 @@ module Aws::MediaConvert
     #           video_description: {
     #             afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #             anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #             codec_settings: {
-    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #             codec_settings: { # required
+    #               codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -3326,6 +3611,7 @@ module Aws::MediaConvert
     #                 temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #                 tiles: "DISABLED", # accepts DISABLED, ENABLED
     #                 unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #                 write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #               },
     #               mpeg_2_settings: {
     #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -3375,19 +3661,19 @@ module Aws::MediaConvert
     #             },
     #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #             crop: {
-    #               height: 1,
-    #               width: 1,
-    #               x: 1,
-    #               y: 1,
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
     #             },
     #             drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #             fixed_afd: 1,
     #             height: 1,
     #             position: {
-    #               height: 1,
-    #               width: 1,
-    #               x: 1,
-    #               y: 1,
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
     #             },
     #             respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #             scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -3403,8 +3689,8 @@ module Aws::MediaConvert
     #                   blue_primary_y: 1,
     #                   green_primary_x: 1,
     #                   green_primary_y: 1,
-    #                   max_content_light_level: 1,
-    #                   max_frame_average_light_level: 1,
+    #                   max_content_light_level: 1, # required
+    #                   max_frame_average_light_level: 1, # required
     #                   max_luminance: 1,
     #                   min_luminance: 1,
     #                   red_primary_x: 1,
@@ -3421,24 +3707,24 @@ module Aws::MediaConvert
     #                 mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #               },
     #               image_inserter: {
-    #                 insertable_images: [
+    #                 insertable_images: [ # required
     #                   {
     #                     duration: 1,
     #                     fade_in: 1,
     #                     fade_out: 1,
     #                     height: 1,
-    #                     image_inserter_input: "__string",
-    #                     image_x: 1,
-    #                     image_y: 1,
-    #                     layer: 1,
-    #                     opacity: 1,
-    #                     start_time: "__string",
+    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                     image_x: 1, # required
+    #                     image_y: 1, # required
+    #                     layer: 1, # required
+    #                     opacity: 1, # required
+    #                     start_time: "__stringPattern01D20305D205D",
     #                     width: 1,
     #                   },
     #                 ],
     #               },
     #               noise_reducer: {
-    #                 filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                 filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #                 filter_settings: {
     #                   strength: 1,
     #                 },
@@ -3451,7 +3737,7 @@ module Aws::MediaConvert
     #               timecode_burnin: {
     #                 font_size: 1,
     #                 position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #                 prefix: "__string",
+    #                 prefix: "__stringPattern",
     #               },
     #             },
     #             width: 1,
@@ -3507,7 +3793,7 @@ module Aws::MediaConvert
     #
     #       {
     #         description: "__string",
-    #         name: "__string",
+    #         name: "__string", # required
     #       }
     #
     # @!attribute [rw] description
@@ -3549,10 +3835,10 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         speke_key_provider: {
-    #           resource_id: "__string",
-    #           system_ids: ["__string"],
-    #           url: "__string",
+    #         speke_key_provider: { # required
+    #           resource_id: "__string", # required
+    #           system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #           url: "__stringPatternHttps", # required
     #         },
     #       }
     #
@@ -3575,19 +3861,19 @@ module Aws::MediaConvert
     #
     #       {
     #         base_url: "__string",
-    #         destination: "__string",
+    #         destination: "__stringPatternS3",
     #         encryption: {
-    #           speke_key_provider: {
-    #             resource_id: "__string",
-    #             system_ids: ["__string"],
-    #             url: "__string",
+    #           speke_key_provider: { # required
+    #             resource_id: "__string", # required
+    #             system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #             url: "__stringPatternHttps", # required
     #           },
     #         },
-    #         fragment_length: 1,
+    #         fragment_length: 1, # required
     #         hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #         min_buffer_time: 1,
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #         segment_length: 1,
+    #         segment_length: 1, # required
     #       }
     #
     # @!attribute [rw] base_url
@@ -3842,9 +4128,9 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         network_id: 1,
-    #         network_name: "__string",
-    #         nit_interval: 1,
+    #         network_id: 1, # required
+    #         network_name: "__stringMin1Max256", # required
+    #         nit_interval: 1, # required
     #       }
     #
     # @!attribute [rw] network_id
@@ -3879,8 +4165,8 @@ module Aws::MediaConvert
     #       {
     #         output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #         sdt_interval: 1,
-    #         service_name: "__string",
-    #         service_provider_name: "__string",
+    #         service_name: "__stringMin1Max256",
+    #         service_provider_name: "__stringMin1Max256",
     #       }
     #
     # @!attribute [rw] output_sdt
@@ -3925,15 +4211,15 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         alignment: "CENTERED", # accepts CENTERED, LEFT
+    #         alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #         background_opacity: 1,
     #         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #         font_opacity: 1,
+    #         font_opacity: 1, # required
     #         font_resolution: 1,
     #         font_size: 1,
-    #         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #         outline_size: 1,
+    #         outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #         outline_size: 1, # required
     #         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #         shadow_opacity: 1,
     #         shadow_x_offset: 1,
@@ -4031,9 +4317,12 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] teletext_spacing
-    #   Controls whether a fixed grid size or proportional font spacing will
-    #   be used to generate the output subtitles bitmap. Only applicable for
-    #   Teletext inputs and DVB-Sub/Burn-in outputs.
+    #   Only applies to jobs with input captions in Teletext or STL formats.
+    #   Specify whether the spacing between letters in your captions is set
+    #   by the captions grid or varies depending on letter width. Choose
+    #   fixed grid to conform to the spacing specified in the captions file
+    #   more accurately. Choose proportional to make the text easier to read
+    #   if the captions are closed caption.
     #   @return [String]
     #
     # @!attribute [rw] x_position
@@ -4109,7 +4398,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         tdt_interval: 1,
+    #         tdt_interval: 1, # required
     #       }
     #
     # @!attribute [rw] tdt_interval
@@ -4376,7 +4665,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         destination: "__string",
+    #         destination: "__stringPatternS3",
     #       }
     #
     # @!attribute [rw] destination
@@ -4401,7 +4690,7 @@ module Aws::MediaConvert
     #
     #       {
     #         convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #         source_file: "__string",
+    #         source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #         time_delta: 1,
     #       }
     #
@@ -4678,10 +4967,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] bitrate
-    #   Average bitrate in bits/second. Required for VBR, CBR, and ABR. Five
-    #   megabits can be entered as 5000000 or 5m. Five hundred kilobits can
-    #   be entered as 500000 or 0.5m. For MS Smooth outputs, bitrates must
-    #   be unique when rounded down to the nearest multiple of 1000.
+    #   Average bitrate in bits/second. Required for VBR and CBR. For MS
+    #   Smooth outputs, bitrates must be unique when rounded down to the
+    #   nearest multiple of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] codec_level
@@ -4708,9 +4996,19 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
-    #   Using the API, set FramerateControl to INITIALIZE\_FROM\_SOURCE if
-    #   you want the service to use the framerate from the input. Using the
-    #   console, do this by choosing INITIALIZE\_FROM\_SOURCE for Framerate.
+    #   If you are using the console, use the Framerate setting to specify
+    #   the framerate for this output. If you want to keep the same
+    #   framerate as the input video, choose Follow source. If you want to
+    #   do framerate conversion, choose a framerate from the dropdown list
+    #   or choose Custom. The framerates shown in the dropdown list are
+    #   decimal approximations of fractions. If you choose Custom, specify
+    #   your framerate as a fraction. If you are creating your transcoding
+    #   job specification as a JSON file without the console, use
+    #   FramerateControl to specify which value the service uses for the
+    #   framerate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
+    #   want the service to use the framerate from the input. Choose
+    #   SPECIFIED if you want the service to use the framerate you specify
+    #   in the settings FramerateNumerator and FramerateDenominator.
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
@@ -4762,9 +5060,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] hrd_buffer_size
-    #   Size of buffer (HRD buffer model). Five megabits can be entered as
-    #   5000000 or 5m. Five hundred kilobits can be entered as 500000 or
-    #   0.5m.
+    #   Size of buffer (HRD buffer model) in bits. For example, enter five
+    #   megabits as 5000000.
     #   @return [Integer]
     #
     # @!attribute [rw] interlace_mode
@@ -4772,21 +5069,20 @@ module Aws::MediaConvert
     #   the output. * Top Field First (TOP\_FIELD) and Bottom Field First
     #   (BOTTOM\_FIELD) produce interlaced output with the entire output
     #   having the same field polarity (top or bottom first). * Follow,
-    #   Default Top (FOLLOw\_TOP\_FIELD) and Follow, Default Bottom
+    #   Default Top (FOLLOW\_TOP\_FIELD) and Follow, Default Bottom
     #   (FOLLOW\_BOTTOM\_FIELD) use the same field polarity as the source.
-    #   Therefore, behavior depends on the input scan type. - If the source
-    #   is interlaced, the output will be interlaced with the same polarity
-    #   as the source (it will follow the source). The output could
-    #   therefore be a mix of "top field first" and "bottom field
+    #   Therefore, behavior depends on the input scan type, as follows. - If
+    #   the source is interlaced, the output will be interlaced with the
+    #   same polarity as the source (it will follow the source). The output
+    #   could therefore be a mix of "top field first" and "bottom field
     #   first". - If the source is progressive, the output will be
     #   interlaced with "top field first" or "bottom field first"
     #   polarity, depending on which of the Follow options you chose.
     #   @return [String]
     #
     # @!attribute [rw] max_bitrate
-    #   Maximum bitrate in bits/second (for VBR mode only). Five megabits
-    #   can be entered as 5000000 or 5m. Five hundred kilobits can be
-    #   entered as 500000 or 0.5m.
+    #   Maximum bitrate in bits/second. For example, enter five megabits per
+    #   second as 5000000.
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
@@ -4830,8 +5126,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] rate_control_mode
-    #   Rate control mode. CQ uses constant quantizer (qp), ABR (average
-    #   bitrate) does not write HRD parameters.
+    #   Use this setting to specify whether this output has a variable
+    #   bitrate (VBR) or constant bitrate (CBR).
     #   @return [String]
     #
     # @!attribute [rw] repeat_pps
@@ -4973,6 +5269,7 @@ module Aws::MediaConvert
     #         temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #         tiles: "DISABLED", # accepts DISABLED, ENABLED
     #         unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #         write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #       }
     #
     # @!attribute [rw] adaptive_quantization
@@ -4986,10 +5283,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] bitrate
-    #   Average bitrate in bits/second. Required for VBR, CBR, and ABR. Five
-    #   megabits can be entered as 5000000 or 5m. Five hundred kilobits can
-    #   be entered as 500000 or 0.5m. For MS Smooth outputs, bitrates must
-    #   be unique when rounded down to the nearest multiple of 1000.
+    #   Average bitrate in bits/second. Required for VBR and CBR. For MS
+    #   Smooth outputs, bitrates must be unique when rounded down to the
+    #   nearest multiple of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] codec_level
@@ -5009,9 +5305,19 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
-    #   Using the API, set FramerateControl to INITIALIZE\_FROM\_SOURCE if
-    #   you want the service to use the framerate from the input. Using the
-    #   console, do this by choosing INITIALIZE\_FROM\_SOURCE for Framerate.
+    #   If you are using the console, use the Framerate setting to specify
+    #   the framerate for this output. If you want to keep the same
+    #   framerate as the input video, choose Follow source. If you want to
+    #   do framerate conversion, choose a framerate from the dropdown list
+    #   or choose Custom. The framerates shown in the dropdown list are
+    #   decimal approximations of fractions. If you choose Custom, specify
+    #   your framerate as a fraction. If you are creating your transcoding
+    #   job sepecification as a JSON file without the console, use
+    #   FramerateControl to specify which value the service uses for the
+    #   framerate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
+    #   want the service to use the framerate from the input. Choose
+    #   SPECIFIED if you want the service to use the framerate you specify
+    #   in the settings FramerateNumerator and FramerateDenominator.
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
@@ -5057,9 +5363,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] hrd_buffer_size
-    #   Size of buffer (HRD buffer model). Five megabits can be entered as
-    #   5000000 or 5m. Five hundred kilobits can be entered as 500000 or
-    #   0.5m.
+    #   Size of buffer (HRD buffer model) in bits. For example, enter five
+    #   megabits as 5000000.
     #   @return [Integer]
     #
     # @!attribute [rw] interlace_mode
@@ -5067,7 +5372,7 @@ module Aws::MediaConvert
     #   the output. * Top Field First (TOP\_FIELD) and Bottom Field First
     #   (BOTTOM\_FIELD) produce interlaced output with the entire output
     #   having the same field polarity (top or bottom first). * Follow,
-    #   Default Top (FOLLOw\_TOP\_FIELD) and Follow, Default Bottom
+    #   Default Top (FOLLOW\_TOP\_FIELD) and Follow, Default Bottom
     #   (FOLLOW\_BOTTOM\_FIELD) use the same field polarity as the source.
     #   Therefore, behavior depends on the input scan type. - If the source
     #   is interlaced, the output will be interlaced with the same polarity
@@ -5079,9 +5384,7 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] max_bitrate
-    #   Maximum bitrate in bits/second (for VBR mode only). Five megabits
-    #   can be entered as 5000000 or 5m. Five hundred kilobits can be
-    #   entered as 500000 or 0.5m.
+    #   Maximum bitrate in bits/second.
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
@@ -5125,8 +5428,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] rate_control_mode
-    #   Rate control mode. CQ uses constant quantizer (qp), ABR (average
-    #   bitrate) does not write HRD parameters.
+    #   Use this setting to specify whether this output has a variable
+    #   bitrate (VBR) or constant bitrate (CBR).
     #   @return [String]
     #
     # @!attribute [rw] sample_adaptive_offset_filter_mode
@@ -5192,6 +5495,15 @@ module Aws::MediaConvert
     #   message.
     #   @return [String]
     #
+    # @!attribute [rw] write_mp_4_packaging_type
+    #   If HVC1, output that is H.265 will be marked as HVC1 and adhere to
+    #   the ISO-IECJTC1-SC29\_N13798\_Text\_ISOIEC\_FDIS\_14496-15\_3rd\_E
+    #   spec which states that parameter set NAL units will be stored in the
+    #   sample headers but not in the samples directly. If HEV1, then H.265
+    #   will be marked as HEV1 and parameter set NAL units will be written
+    #   into the samples.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/H265Settings AWS API Documentation
     #
     class H265Settings < Struct.new(
@@ -5230,14 +5542,19 @@ module Aws::MediaConvert
       :temporal_adaptive_quantization,
       :temporal_ids,
       :tiles,
-      :unregistered_sei_timecode)
+      :unregistered_sei_timecode,
+      :write_mp_4_packaging_type)
       include Aws::Structure
     end
 
-    # Use the HDR master display (Hdr10Metadata) settings to provide values
-    # for HDR color. These values vary depending on the input video and must
-    # be provided by a color grader. Range is 0 to 50,000, each increment
-    # represents 0.00002 in CIE1931 color coordinate.
+    # Use the HDR master display (Hdr10Metadata) settings to correct HDR
+    # metadata or to provide missing metadata. These values vary depending
+    # on the input video and must be provided by a color grader. Range is 0
+    # to 50,000, each increment represents 0.00002 in CIE1931 color
+    # coordinate. Note that these settings are not color correction. Note
+    # that if you are creating HDR outputs inside of an HLS CMAF package, to
+    # comply with the Apple specification, you must use the HVC1 for H.265
+    # setting.
     #
     # @note When making an API call, you may pass Hdr10Metadata
     #   data as a hash:
@@ -5247,8 +5564,8 @@ module Aws::MediaConvert
     #         blue_primary_y: 1,
     #         green_primary_x: 1,
     #         green_primary_y: 1,
-    #         max_content_light_level: 1,
-    #         max_frame_average_light_level: 1,
+    #         max_content_light_level: 1, # required
+    #         max_frame_average_light_level: 1, # required
     #         max_luminance: 1,
     #         min_luminance: 1,
     #         red_primary_x: 1,
@@ -5258,27 +5575,31 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] blue_primary_x
-    #   HDR Master Display Information comes from the color grader and the
-    #   color grading tools. Range is 0 to 50,000, each increment represents
-    #   0.00002 in CIE1931 color coordinate.
+    #   HDR Master Display Information must be provided by a color grader,
+    #   using color grading tools. Range is 0 to 50,000, each increment
+    #   represents 0.00002 in CIE1931 color coordinate. Note that this
+    #   setting is not for color correction.
     #   @return [Integer]
     #
     # @!attribute [rw] blue_primary_y
-    #   HDR Master Display Information comes from the color grader and the
-    #   color grading tools. Range is 0 to 50,000, each increment represents
-    #   0.00002 in CIE1931 color coordinate.
+    #   HDR Master Display Information must be provided by a color grader,
+    #   using color grading tools. Range is 0 to 50,000, each increment
+    #   represents 0.00002 in CIE1931 color coordinate. Note that this
+    #   setting is not for color correction.
     #   @return [Integer]
     #
     # @!attribute [rw] green_primary_x
-    #   HDR Master Display Information comes from the color grader and the
-    #   color grading tools. Range is 0 to 50,000, each increment represents
-    #   0.00002 in CIE1931 color coordinate.
+    #   HDR Master Display Information must be provided by a color grader,
+    #   using color grading tools. Range is 0 to 50,000, each increment
+    #   represents 0.00002 in CIE1931 color coordinate. Note that this
+    #   setting is not for color correction.
     #   @return [Integer]
     #
     # @!attribute [rw] green_primary_y
-    #   HDR Master Display Information comes from the color grader and the
-    #   color grading tools. Range is 0 to 50,000, each increment represents
-    #   0.00002 in CIE1931 color coordinate.
+    #   HDR Master Display Information must be provided by a color grader,
+    #   using color grading tools. Range is 0 to 50,000, each increment
+    #   represents 0.00002 in CIE1931 color coordinate. Note that this
+    #   setting is not for color correction.
     #   @return [Integer]
     #
     # @!attribute [rw] max_content_light_level
@@ -5302,27 +5623,31 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] red_primary_x
-    #   HDR Master Display Information comes from the color grader and the
-    #   color grading tools. Range is 0 to 50,000, each increment represents
-    #   0.00002 in CIE1931 color coordinate.
+    #   HDR Master Display Information must be provided by a color grader,
+    #   using color grading tools. Range is 0 to 50,000, each increment
+    #   represents 0.00002 in CIE1931 color coordinate. Note that this
+    #   setting is not for color correction.
     #   @return [Integer]
     #
     # @!attribute [rw] red_primary_y
-    #   HDR Master Display Information comes from the color grader and the
-    #   color grading tools. Range is 0 to 50,000, each increment represents
-    #   0.00002 in CIE1931 color coordinate.
+    #   HDR Master Display Information must be provided by a color grader,
+    #   using color grading tools. Range is 0 to 50,000, each increment
+    #   represents 0.00002 in CIE1931 color coordinate. Note that this
+    #   setting is not for color correction.
     #   @return [Integer]
     #
     # @!attribute [rw] white_point_x
-    #   HDR Master Display Information comes from the color grader and the
-    #   color grading tools. Range is 0 to 50,000, each increment represents
-    #   0.00002 in CIE1931 color coordinate.
+    #   HDR Master Display Information must be provided by a color grader,
+    #   using color grading tools. Range is 0 to 50,000, each increment
+    #   represents 0.00002 in CIE1931 color coordinate. Note that this
+    #   setting is not for color correction.
     #   @return [Integer]
     #
     # @!attribute [rw] white_point_y
-    #   HDR Master Display Information comes from the color grader and the
-    #   color grading tools. Range is 0 to 50,000, each increment represents
-    #   0.00002 in CIE1931 color coordinate.
+    #   HDR Master Display Information must be provided by a color grader,
+    #   using color grading tools. Range is 0 to 50,000, each increment
+    #   represents 0.00002 in CIE1931 color coordinate. Note that this
+    #   setting is not for color correction.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/Hdr10Metadata AWS API Documentation
@@ -5382,21 +5707,21 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         constant_initialization_vector: "__string",
+    #         constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #         encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #         initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         speke_key_provider: {
-    #           resource_id: "__string",
-    #           system_ids: ["__string"],
-    #           url: "__string",
+    #           resource_id: "__string", # required
+    #           system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #           url: "__stringPatternHttps", # required
     #         },
     #         static_key_provider: {
-    #           key_format: "__string",
-    #           key_format_versions: "__string",
-    #           static_key_value: "__string",
-    #           url: "__string",
+    #           key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #           key_format_versions: "__stringPatternDD",
+    #           static_key_value: "__stringPatternAZaZ0932", # required
+    #           url: "__string", # required
     #         },
-    #         type: "SPEKE", # accepts SPEKE, STATIC_KEY
+    #         type: "SPEKE", # required, accepts SPEKE, STATIC_KEY
     #       }
     #
     # @!attribute [rw] constant_initialization_vector
@@ -5461,33 +5786,33 @@ module Aws::MediaConvert
     #         caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
     #         client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
-    #         destination: "__string",
+    #         destination: "__stringPatternS3",
     #         directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #         encryption: {
-    #           constant_initialization_vector: "__string",
+    #           constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #           encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #           initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           speke_key_provider: {
-    #             resource_id: "__string",
-    #             system_ids: ["__string"],
-    #             url: "__string",
+    #             resource_id: "__string", # required
+    #             system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #             url: "__stringPatternHttps", # required
     #           },
     #           static_key_provider: {
-    #             key_format: "__string",
-    #             key_format_versions: "__string",
-    #             static_key_value: "__string",
-    #             url: "__string",
+    #             key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #             key_format_versions: "__stringPatternDD",
+    #             static_key_value: "__stringPatternAZaZ0932", # required
+    #             url: "__string", # required
     #           },
-    #           type: "SPEKE", # accepts SPEKE, STATIC_KEY
+    #           type: "SPEKE", # required, accepts SPEKE, STATIC_KEY
     #         },
     #         manifest_compression: "GZIP", # accepts GZIP, NONE
     #         manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #         min_segment_length: 1,
+    #         min_segment_length: 1, # required
     #         output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #         program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         program_date_time_period: 1,
     #         segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #         segment_length: 1,
+    #         segment_length: 1, # required
     #         segments_per_subdirectory: 1,
     #         stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -5707,15 +6032,15 @@ module Aws::MediaConvert
     # To insert ID3 tags in your output, specify two values. Use ID3 tag
     # (Id3) to specify the base 64 encoded string and use Timecode
     # (TimeCode) to specify the time when the tag should be inserted. To
-    # insert multiple ID3 tags in your output, create mulitple instances of
+    # insert multiple ID3 tags in your output, create multiple instances of
     # ID3 insertion (Id3Insertion).
     #
     # @note When making an API call, you may pass Id3Insertion
     #   data as a hash:
     #
     #       {
-    #         id_3: "__string",
-    #         timecode: "__string",
+    #         id_3: "__stringPatternAZaZ0902", # required
+    #         timecode: "__stringPattern010920405090509092", # required
     #       }
     #
     # @!attribute [rw] id_3
@@ -5742,18 +6067,18 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         insertable_images: [
+    #         insertable_images: [ # required
     #           {
     #             duration: 1,
     #             fade_in: 1,
     #             fade_out: 1,
     #             height: 1,
-    #             image_inserter_input: "__string",
-    #             image_x: 1,
-    #             image_y: 1,
-    #             layer: 1,
-    #             opacity: 1,
-    #             start_time: "__string",
+    #             image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #             image_x: 1, # required
+    #             image_y: 1, # required
+    #             layer: 1, # required
+    #             opacity: 1, # required
+    #             start_time: "__stringPattern01D20305D205D",
     #             width: 1,
     #           },
     #         ],
@@ -5779,27 +6104,27 @@ module Aws::MediaConvert
     #       {
     #         audio_selector_groups: {
     #           "__string" => {
-    #             audio_selector_names: ["__string"],
+    #             audio_selector_names: ["__stringMin1"], # required
     #           },
     #         },
     #         audio_selectors: {
     #           "__string" => {
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #             external_audio_file_input: "__string",
+    #             external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             offset: 1,
     #             pids: [1],
     #             program_selection: 1,
     #             remix_settings: {
-    #               channel_mapping: {
-    #                 output_channels: [
+    #               channel_mapping: { # required
+    #                 output_channels: [ # required
     #                   {
-    #                     input_channels: [1],
+    #                     input_channels: [1], # required
     #                   },
     #                 ],
     #               },
-    #               channels_in: 1,
-    #               channels_out: 1,
+    #               channels_in: 1, # required
+    #               channels_out: 1, # required
     #             },
     #             selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
     #             tracks: [1],
@@ -5808,7 +6133,7 @@ module Aws::MediaConvert
     #         caption_selectors: {
     #           "__string" => {
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
-    #             source_settings: {
+    #             source_settings: { # required
     #               ancillary_source_settings: {
     #                 source_ancillary_channel_number: 1,
     #               },
@@ -5822,25 +6147,25 @@ module Aws::MediaConvert
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                 source_file: "__string",
+    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #                 time_delta: 1,
     #               },
-    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #               source_type: "ANCILLARY", # required, accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
     #               teletext_source_settings: {
-    #                 page_number: "__string",
+    #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #               },
     #             },
     #           },
     #         },
     #         deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
     #         denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #         file_input: "__string",
+    #         file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM", # required
     #         filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #         filter_strength: 1,
     #         input_clippings: [
     #           {
-    #             end_timecode: "__string",
-    #             start_timecode: "__string",
+    #             end_timecode: "__stringPattern010920405090509092",
+    #             start_timecode: "__stringPattern010920405090509092",
     #           },
     #         ],
     #         program_number: 1,
@@ -5854,8 +6179,8 @@ module Aws::MediaConvert
     #             blue_primary_y: 1,
     #             green_primary_x: 1,
     #             green_primary_y: 1,
-    #             max_content_light_level: 1,
-    #             max_frame_average_light_level: 1,
+    #             max_content_light_level: 1, # required
+    #             max_frame_average_light_level: 1, # required
     #             max_luminance: 1,
     #             min_luminance: 1,
     #             red_primary_x: 1,
@@ -5948,15 +6273,15 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] timecode_source
-    #   Use Timecode source (InputTimecodeSource) to specify how timecode
-    #   information from your input is adjusted and encoded in all outputs
-    #   for the job. Default is embedded. Set to Embedded (EMBEDDED) to use
-    #   the timecode that is in the input video. If no embedded timecode is
-    #   in the source, will set the timecode for the first frame to
-    #   00:00:00:00. Set to Start at 0 (ZEROBASED) to set the timecode of
-    #   the initial frame to 00:00:00:00. Set to Specified start
-    #   (SPECIFIEDSTART) to provide the initial timecode yourself the
-    #   setting (Start).
+    #   Timecode source under input settings (InputTimecodeSource) only
+    #   affects the behavior of features that apply to a single input at a
+    #   time, such as input clipping and synchronizing some captions
+    #   formats. Use this setting to specify whether the service counts
+    #   frames by timecodes embedded in the video (EMBEDDED) or by starting
+    #   the first frame at zero (ZEROBASED). In both cases, the timecode
+    #   format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number.
+    #   Only set this to EMBEDDED if your source video has embedded
+    #   timecodes.
     #   @return [String]
     #
     # @!attribute [rw] video_selector
@@ -5982,35 +6307,42 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Include one instance of (InputClipping) for each input clip.
+    # To transcode only portions of your input (clips), include one Input
+    # clipping (one instance of InputClipping in the JSON job file) for each
+    # input clip. All input clips you specify will be included in every
+    # output of the job.
     #
     # @note When making an API call, you may pass InputClipping
     #   data as a hash:
     #
     #       {
-    #         end_timecode: "__string",
-    #         start_timecode: "__string",
+    #         end_timecode: "__stringPattern010920405090509092",
+    #         start_timecode: "__stringPattern010920405090509092",
     #       }
     #
     # @!attribute [rw] end_timecode
     #   Set End timecode (EndTimecode) to the end of the portion of the
     #   input you are clipping. The frame corresponding to the End timecode
     #   value is included in the clip. Start timecode or End timecode may be
-    #   left blank, but not both. When choosing this value, take into
-    #   account your setting for Input timecode source. For example, if you
-    #   have embedded timecodes that start at 01:00:00:00 and you want your
-    #   clip to begin five minutes into the video, use 01:00:05:00.
+    #   left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF,
+    #   where HH is the hour, MM is the minute, SS is the second, and FF is
+    #   the frame number. When choosing this value, take into account your
+    #   setting for timecode source under input settings
+    #   (InputTimecodeSource). For example, if you have embedded timecodes
+    #   that start at 01:00:00:00 and you want your clip to end six minutes
+    #   into the video, use 01:06:00:00.
     #   @return [String]
     #
     # @!attribute [rw] start_timecode
     #   Set Start timecode (StartTimecode) to the beginning of the portion
     #   of the input you are clipping. The frame corresponding to the Start
     #   timecode value is included in the clip. Start timecode or End
-    #   timecode may be left blank, but not both. When choosing this value,
-    #   take into account your setting for Input timecode source. For
-    #   example, if you have embedded timecodes that start at 01:00:00:00
-    #   and you want your clip to begin five minutes into the video, use
-    #   01:00:05:00.
+    #   timecode may be left blank, but not both. Use the format HH:MM:SS:FF
+    #   or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the
+    #   second, and FF is the frame number. When choosing this value, take
+    #   into account your setting for Input timecode source. For example, if
+    #   you have embedded timecodes that start at 01:00:00:00 and you want
+    #   your clip to begin five minutes into the video, use 01:05:00:00.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputClipping AWS API Documentation
@@ -6029,27 +6361,27 @@ module Aws::MediaConvert
     #       {
     #         audio_selector_groups: {
     #           "__string" => {
-    #             audio_selector_names: ["__string"],
+    #             audio_selector_names: ["__stringMin1"], # required
     #           },
     #         },
     #         audio_selectors: {
     #           "__string" => {
     #             default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #             external_audio_file_input: "__string",
+    #             external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             offset: 1,
     #             pids: [1],
     #             program_selection: 1,
     #             remix_settings: {
-    #               channel_mapping: {
-    #                 output_channels: [
+    #               channel_mapping: { # required
+    #                 output_channels: [ # required
     #                   {
-    #                     input_channels: [1],
+    #                     input_channels: [1], # required
     #                   },
     #                 ],
     #               },
-    #               channels_in: 1,
-    #               channels_out: 1,
+    #               channels_in: 1, # required
+    #               channels_out: 1, # required
     #             },
     #             selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
     #             tracks: [1],
@@ -6058,7 +6390,7 @@ module Aws::MediaConvert
     #         caption_selectors: {
     #           "__string" => {
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
-    #             source_settings: {
+    #             source_settings: { # required
     #               ancillary_source_settings: {
     #                 source_ancillary_channel_number: 1,
     #               },
@@ -6072,12 +6404,12 @@ module Aws::MediaConvert
     #               },
     #               file_source_settings: {
     #                 convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                 source_file: "__string",
+    #                 source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #                 time_delta: 1,
     #               },
-    #               source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #               source_type: "ANCILLARY", # required, accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
     #               teletext_source_settings: {
-    #                 page_number: "__string",
+    #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #               },
     #             },
     #           },
@@ -6088,8 +6420,8 @@ module Aws::MediaConvert
     #         filter_strength: 1,
     #         input_clippings: [
     #           {
-    #             end_timecode: "__string",
-    #             start_timecode: "__string",
+    #             end_timecode: "__stringPattern010920405090509092",
+    #             start_timecode: "__stringPattern010920405090509092",
     #           },
     #         ],
     #         program_number: 1,
@@ -6103,8 +6435,8 @@ module Aws::MediaConvert
     #             blue_primary_y: 1,
     #             green_primary_x: 1,
     #             green_primary_y: 1,
-    #             max_content_light_level: 1,
-    #             max_frame_average_light_level: 1,
+    #             max_content_light_level: 1, # required
+    #             max_frame_average_light_level: 1, # required
     #             max_luminance: 1,
     #             min_luminance: 1,
     #             red_primary_x: 1,
@@ -6190,15 +6522,15 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] timecode_source
-    #   Use Timecode source (InputTimecodeSource) to specify how timecode
-    #   information from your input is adjusted and encoded in all outputs
-    #   for the job. Default is embedded. Set to Embedded (EMBEDDED) to use
-    #   the timecode that is in the input video. If no embedded timecode is
-    #   in the source, will set the timecode for the first frame to
-    #   00:00:00:00. Set to Start at 0 (ZEROBASED) to set the timecode of
-    #   the initial frame to 00:00:00:00. Set to Specified start
-    #   (SPECIFIEDSTART) to provide the initial timecode yourself the
-    #   setting (Start).
+    #   Timecode source under input settings (InputTimecodeSource) only
+    #   affects the behavior of features that apply to a single input at a
+    #   time, such as input clipping and synchronizing some captions
+    #   formats. Use this setting to specify whether the service counts
+    #   frames by timecodes embedded in the video (EMBEDDED) or by starting
+    #   the first frame at zero (ZEROBASED). In both cases, the timecode
+    #   format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number.
+    #   Only set this to EMBEDDED if your source video has embedded
+    #   timecodes.
     #   @return [String]
     #
     # @!attribute [rw] video_selector
@@ -6233,12 +6565,12 @@ module Aws::MediaConvert
     #         fade_in: 1,
     #         fade_out: 1,
     #         height: 1,
-    #         image_inserter_input: "__string",
-    #         image_x: 1,
-    #         image_y: 1,
-    #         layer: 1,
-    #         opacity: 1,
-    #         start_time: "__string",
+    #         image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #         image_x: 1, # required
+    #         image_y: 1, # required
+    #         layer: 1, # required
+    #         opacity: 1, # required
+    #         start_time: "__stringPattern01D20305D205D",
     #         width: 1,
     #       }
     #
@@ -6298,8 +6630,8 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] start_time
     #   Use Start time (StartTime) to specify the video timecode when the
-    #   image is inserted in the output. This must be in timecode format
-    #   (HH:MM:SS:FF)
+    #   image is inserted in the output. This must be in timecode
+    #   (HH:MM:SS:FF or HH:MM:SS;FF) format.
     #   @return [String]
     #
     # @!attribute [rw] width
@@ -6418,33 +6750,33 @@ module Aws::MediaConvert
     #       {
     #         ad_avail_offset: 1,
     #         avail_blanking: {
-    #           avail_blanking_image: "__string",
+    #           avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
     #         },
-    #         inputs: [
+    #         inputs: [ # required
     #           {
     #             audio_selector_groups: {
     #               "__string" => {
-    #                 audio_selector_names: ["__string"],
+    #                 audio_selector_names: ["__stringMin1"], # required
     #               },
     #             },
     #             audio_selectors: {
     #               "__string" => {
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                 external_audio_file_input: "__string",
+    #                 external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 offset: 1,
     #                 pids: [1],
     #                 program_selection: 1,
     #                 remix_settings: {
-    #                   channel_mapping: {
-    #                     output_channels: [
+    #                   channel_mapping: { # required
+    #                     output_channels: [ # required
     #                       {
-    #                         input_channels: [1],
+    #                         input_channels: [1], # required
     #                       },
     #                     ],
     #                   },
-    #                   channels_in: 1,
-    #                   channels_out: 1,
+    #                   channels_in: 1, # required
+    #                   channels_out: 1, # required
     #                 },
     #                 selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
     #                 tracks: [1],
@@ -6453,7 +6785,7 @@ module Aws::MediaConvert
     #             caption_selectors: {
     #               "__string" => {
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
-    #                 source_settings: {
+    #                 source_settings: { # required
     #                   ancillary_source_settings: {
     #                     source_ancillary_channel_number: 1,
     #                   },
@@ -6467,25 +6799,25 @@ module Aws::MediaConvert
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                     source_file: "__string",
+    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #                     time_delta: 1,
     #                   },
-    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                   source_type: "ANCILLARY", # required, accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
     #                   teletext_source_settings: {
-    #                     page_number: "__string",
+    #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                   },
     #                 },
     #               },
     #             },
     #             deblock_filter: "ENABLED", # accepts ENABLED, DISABLED
     #             denoise_filter: "ENABLED", # accepts ENABLED, DISABLED
-    #             file_input: "__string",
+    #             file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM", # required
     #             filter_enable: "AUTO", # accepts AUTO, DISABLE, FORCE
     #             filter_strength: 1,
     #             input_clippings: [
     #               {
-    #                 end_timecode: "__string",
-    #                 start_timecode: "__string",
+    #                 end_timecode: "__stringPattern010920405090509092",
+    #                 start_timecode: "__stringPattern010920405090509092",
     #               },
     #             ],
     #             program_number: 1,
@@ -6499,8 +6831,8 @@ module Aws::MediaConvert
     #                 blue_primary_y: 1,
     #                 green_primary_x: 1,
     #                 green_primary_y: 1,
-    #                 max_content_light_level: 1,
-    #                 max_frame_average_light_level: 1,
+    #                 max_content_light_level: 1, # required
+    #                 max_frame_average_light_level: 1, # required
     #                 max_luminance: 1,
     #                 min_luminance: 1,
     #                 red_primary_x: 1,
@@ -6517,29 +6849,56 @@ module Aws::MediaConvert
     #           breakout_code: 1,
     #           distributor_id: "__string",
     #         },
-    #         output_groups: [
+    #         output_groups: [ # required
     #           {
     #             custom_name: "__string",
     #             name: "__string",
-    #             output_group_settings: {
+    #             output_group_settings: { # required
+    #               cmaf_group_settings: {
+    #                 base_url: "__string",
+    #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
+    #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
+    #                 destination: "__stringPatternS3",
+    #                 encryption: {
+    #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #                   encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   static_key_provider: { # required
+    #                     key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                     key_format_versions: "__stringPatternDD",
+    #                     static_key_value: "__stringPatternAZaZ0932", # required
+    #                     url: "__string", # required
+    #                   },
+    #                   type: "STATIC_KEY", # required, accepts STATIC_KEY
+    #                 },
+    #                 fragment_length: 1, # required
+    #                 manifest_compression: "GZIP", # accepts GZIP, NONE
+    #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                 min_buffer_time: 1,
+    #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
+    #                 segment_length: 1, # required
+    #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #               },
     #               dash_iso_group_settings: {
     #                 base_url: "__string",
-    #                 destination: "__string",
+    #                 destination: "__stringPatternS3",
     #                 encryption: {
-    #                   speke_key_provider: {
-    #                     resource_id: "__string",
-    #                     system_ids: ["__string"],
-    #                     url: "__string",
+    #                   speke_key_provider: { # required
+    #                     resource_id: "__string", # required
+    #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                     url: "__stringPatternHttps", # required
     #                   },
     #                 },
-    #                 fragment_length: 1,
+    #                 fragment_length: 1, # required
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                 min_buffer_time: 1,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                 segment_length: 1,
+    #                 segment_length: 1, # required
     #               },
     #               file_group_settings: {
-    #                 destination: "__string",
+    #                 destination: "__stringPatternS3",
     #               },
     #               hls_group_settings: {
     #                 ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -6554,33 +6913,33 @@ module Aws::MediaConvert
     #                 caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
-    #                 destination: "__string",
+    #                 destination: "__stringPatternS3",
     #                 directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                 encryption: {
-    #                   constant_initialization_vector: "__string",
+    #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   speke_key_provider: {
-    #                     resource_id: "__string",
-    #                     system_ids: ["__string"],
-    #                     url: "__string",
+    #                     resource_id: "__string", # required
+    #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                     url: "__stringPatternHttps", # required
     #                   },
     #                   static_key_provider: {
-    #                     key_format: "__string",
-    #                     key_format_versions: "__string",
-    #                     static_key_value: "__string",
-    #                     url: "__string",
+    #                     key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                     key_format_versions: "__stringPatternDD",
+    #                     static_key_value: "__stringPatternAZaZ0932", # required
+    #                     url: "__string", # required
     #                   },
-    #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
+    #                   type: "SPEKE", # required, accepts SPEKE, STATIC_KEY
     #                 },
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #                 min_segment_length: 1,
+    #                 min_segment_length: 1, # required
     #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                 program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 program_date_time_period: 1,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                 segment_length: 1,
+    #                 segment_length: 1, # required
     #                 segments_per_subdirectory: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -6589,20 +6948,20 @@ module Aws::MediaConvert
     #               },
     #               ms_smooth_group_settings: {
     #                 audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
-    #                 destination: "__string",
+    #                 destination: "__stringPatternS3",
     #                 encryption: {
-    #                   speke_key_provider: {
-    #                     resource_id: "__string",
-    #                     system_ids: ["__string"],
-    #                     url: "__string",
+    #                   speke_key_provider: { # required
+    #                     resource_id: "__string", # required
+    #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                     url: "__stringPatternHttps", # required
     #                   },
     #                 },
-    #                 fragment_length: 1,
+    #                 fragment_length: 1, # required
     #                 manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #               },
-    #               type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS
+    #               type: "HLS_GROUP_SETTINGS", # required, accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
     #             },
-    #             outputs: [
+    #             outputs: [ # required
     #               {
     #                 audio_descriptions: [
     #                   {
@@ -6617,15 +6976,15 @@ module Aws::MediaConvert
     #                     audio_source_name: "__string",
     #                     audio_type: 1,
     #                     audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                     codec_settings: {
+    #                     codec_settings: { # required
     #                       aac_settings: {
     #                         audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                         bitrate: 1,
     #                         codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                         coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                         coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                         rate_control_mode: "CBR", # accepts CBR, VBR
     #                         raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                         sample_rate: 1,
+    #                         sample_rate: 1, # required
     #                         specification: "MPEG2", # accepts MPEG2, MPEG4
     #                         vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #                       },
@@ -6644,7 +7003,7 @@ module Aws::MediaConvert
     #                         channels: 1,
     #                         sample_rate: 1,
     #                       },
-    #                       codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                       codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #                       eac_3_settings: {
     #                         attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                         bitrate: 1,
@@ -6676,39 +7035,40 @@ module Aws::MediaConvert
     #                       wav_settings: {
     #                         bit_depth: 1,
     #                         channels: 1,
+    #                         format: "RIFF", # accepts RIFF, RF64
     #                         sample_rate: 1,
     #                       },
     #                     },
     #                     language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                     language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                     remix_settings: {
-    #                       channel_mapping: {
-    #                         output_channels: [
+    #                       channel_mapping: { # required
+    #                         output_channels: [ # required
     #                           {
-    #                             input_channels: [1],
+    #                             input_channels: [1], # required
     #                           },
     #                         ],
     #                       },
-    #                       channels_in: 1,
-    #                       channels_out: 1,
+    #                       channels_in: 1, # required
+    #                       channels_out: 1, # required
     #                     },
-    #                     stream_name: "__string",
+    #                     stream_name: "__stringPatternWS",
     #                   },
     #                 ],
     #                 caption_descriptions: [
     #                   {
-    #                     caption_selector_name: "__string",
-    #                     destination_settings: {
+    #                     caption_selector_name: "__stringMin1", # required
+    #                     destination_settings: { # required
     #                       burnin_destination_settings: {
-    #                         alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                         alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         background_opacity: 1,
     #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                         font_opacity: 1,
+    #                         font_opacity: 1, # required
     #                         font_resolution: 1,
     #                         font_size: 1,
-    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                         outline_size: 1,
+    #                         outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                         outline_size: 1, # required
     #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
@@ -6717,17 +7077,17 @@ module Aws::MediaConvert
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
-    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                       destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #                       dvb_sub_destination_settings: {
-    #                         alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                         alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         background_opacity: 1,
     #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                         font_opacity: 1,
+    #                         font_opacity: 1, # required
     #                         font_resolution: 1,
     #                         font_size: 1,
-    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                         outline_size: 1,
+    #                         outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                         outline_size: 1, # required
     #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
@@ -6740,7 +7100,7 @@ module Aws::MediaConvert
     #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                       },
     #                       teletext_destination_settings: {
-    #                         page_number: "__string",
+    #                         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                       },
     #                       ttml_destination_settings: {
     #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -6751,7 +7111,7 @@ module Aws::MediaConvert
     #                   },
     #                 ],
     #                 container_settings: {
-    #                   container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #                   container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                   f4v_settings: {
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   },
@@ -6762,19 +7122,19 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                     dvb_nit_settings: {
-    #                       network_id: 1,
-    #                       network_name: "__string",
-    #                       nit_interval: 1,
+    #                       network_id: 1, # required
+    #                       network_name: "__stringMin1Max256", # required
+    #                       nit_interval: 1, # required
     #                     },
     #                     dvb_sdt_settings: {
     #                       output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                       sdt_interval: 1,
-    #                       service_name: "__string",
-    #                       service_provider_name: "__string",
+    #                       service_name: "__stringMin1Max256",
+    #                       service_provider_name: "__stringMin1Max256",
     #                     },
     #                     dvb_sub_pids: [1],
     #                     dvb_tdt_settings: {
-    #                       tdt_interval: 1,
+    #                       tdt_interval: 1, # required
     #                     },
     #                     dvb_teletext_pid: 1,
     #                     ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -6835,7 +7195,7 @@ module Aws::MediaConvert
     #                   },
     #                 },
     #                 extension: "__string",
-    #                 name_modifier: "__string",
+    #                 name_modifier: "__stringMin1",
     #                 output_settings: {
     #                   hls_settings: {
     #                     audio_group_id: "__string",
@@ -6845,12 +7205,12 @@ module Aws::MediaConvert
     #                     segment_modifier: "__string",
     #                   },
     #                 },
-    #                 preset: "__string",
+    #                 preset: "__stringMin0",
     #                 video_description: {
     #                   afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                   anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #                   codec_settings: {
-    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   codec_settings: { # required
+    #                     codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -6933,6 +7293,7 @@ module Aws::MediaConvert
     #                       temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #                       tiles: "DISABLED", # accepts DISABLED, ENABLED
     #                       unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #                       write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #                     },
     #                     mpeg_2_settings: {
     #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -6982,19 +7343,19 @@ module Aws::MediaConvert
     #                   },
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                   crop: {
-    #                     height: 1,
-    #                     width: 1,
-    #                     x: 1,
-    #                     y: 1,
+    #                     height: 1, # required
+    #                     width: 1, # required
+    #                     x: 1, # required
+    #                     y: 1, # required
     #                   },
     #                   drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #                   fixed_afd: 1,
     #                   height: 1,
     #                   position: {
-    #                     height: 1,
-    #                     width: 1,
-    #                     x: 1,
-    #                     y: 1,
+    #                     height: 1, # required
+    #                     width: 1, # required
+    #                     x: 1, # required
+    #                     y: 1, # required
     #                   },
     #                   respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #                   scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -7010,8 +7371,8 @@ module Aws::MediaConvert
     #                         blue_primary_y: 1,
     #                         green_primary_x: 1,
     #                         green_primary_y: 1,
-    #                         max_content_light_level: 1,
-    #                         max_frame_average_light_level: 1,
+    #                         max_content_light_level: 1, # required
+    #                         max_frame_average_light_level: 1, # required
     #                         max_luminance: 1,
     #                         min_luminance: 1,
     #                         red_primary_x: 1,
@@ -7028,24 +7389,24 @@ module Aws::MediaConvert
     #                       mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                     },
     #                     image_inserter: {
-    #                       insertable_images: [
+    #                       insertable_images: [ # required
     #                         {
     #                           duration: 1,
     #                           fade_in: 1,
     #                           fade_out: 1,
     #                           height: 1,
-    #                           image_inserter_input: "__string",
-    #                           image_x: 1,
-    #                           image_y: 1,
-    #                           layer: 1,
-    #                           opacity: 1,
-    #                           start_time: "__string",
+    #                           image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                           image_x: 1, # required
+    #                           image_y: 1, # required
+    #                           layer: 1, # required
+    #                           opacity: 1, # required
+    #                           start_time: "__stringPattern01D20305D205D",
     #                           width: 1,
     #                         },
     #                       ],
     #                     },
     #                     noise_reducer: {
-    #                       filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                       filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #                       filter_settings: {
     #                         strength: 1,
     #                       },
@@ -7058,7 +7419,7 @@ module Aws::MediaConvert
     #                     timecode_burnin: {
     #                       font_size: 1,
     #                       position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #                       prefix: "__string",
+    #                       prefix: "__stringPattern",
     #                     },
     #                   },
     #                   width: 1,
@@ -7068,16 +7429,16 @@ module Aws::MediaConvert
     #           },
     #         ],
     #         timecode_config: {
-    #           anchor: "__string",
+    #           anchor: "__stringPattern010920405090509092",
     #           source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
-    #           start: "__string",
-    #           timestamp_offset: "__string",
+    #           start: "__stringPattern010920405090509092",
+    #           timestamp_offset: "__stringPattern0940191020191209301",
     #         },
     #         timed_metadata_insertion: {
-    #           id_3_insertions: [
+    #           id_3_insertions: [ # required
     #             {
-    #               id_3: "__string",
-    #               timecode: "__string",
+    #               id_3: "__stringPatternAZaZ0902", # required
+    #               timecode: "__stringPattern010920405090509092", # required
     #             },
     #           ],
     #         },
@@ -7104,8 +7465,8 @@ module Aws::MediaConvert
     #   @return [Types::NielsenConfiguration]
     #
     # @!attribute [rw] output_groups
-    #   **!!**(OutputGroups) contains one group of settings for each set
-    #   of outputs that share a common package type. All unpackaged files
+    #   (OutputGroups) contains one group of settings for each set of
+    #   outputs that share a common package type. All unpackaged files
     #   (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in
     #   a single output group as well. Required in (OutputGroups) is a group
     #   of settings that apply to the whole group. This required object
@@ -7114,7 +7475,8 @@ module Aws::MediaConvert
     #   are as follows. * FILE\_GROUP\_SETTINGS, FileGroupSettings *
     #   HLS\_GROUP\_SETTINGS, HlsGroupSettings *
     #   DASH\_ISO\_GROUP\_SETTINGS, DashIsoGroupSettings *
-    #   MS\_SMOOTH\_GROUP\_SETTINGS, MsSmoothGroupSettings
+    #   MS\_SMOOTH\_GROUP\_SETTINGS, MsSmoothGroupSettings *
+    #   CMAF\_GROUP\_SETTINGS, CmafGroupSettings
     #   @return [Array<Types::OutputGroup>]
     #
     # @!attribute [rw] timecode_config
@@ -7211,33 +7573,33 @@ module Aws::MediaConvert
     #       {
     #         ad_avail_offset: 1,
     #         avail_blanking: {
-    #           avail_blanking_image: "__string",
+    #           avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
     #         },
     #         inputs: [
     #           {
     #             audio_selector_groups: {
     #               "__string" => {
-    #                 audio_selector_names: ["__string"],
+    #                 audio_selector_names: ["__stringMin1"], # required
     #               },
     #             },
     #             audio_selectors: {
     #               "__string" => {
     #                 default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                 external_audio_file_input: "__string",
+    #                 external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 offset: 1,
     #                 pids: [1],
     #                 program_selection: 1,
     #                 remix_settings: {
-    #                   channel_mapping: {
-    #                     output_channels: [
+    #                   channel_mapping: { # required
+    #                     output_channels: [ # required
     #                       {
-    #                         input_channels: [1],
+    #                         input_channels: [1], # required
     #                       },
     #                     ],
     #                   },
-    #                   channels_in: 1,
-    #                   channels_out: 1,
+    #                   channels_in: 1, # required
+    #                   channels_out: 1, # required
     #                 },
     #                 selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
     #                 tracks: [1],
@@ -7246,7 +7608,7 @@ module Aws::MediaConvert
     #             caption_selectors: {
     #               "__string" => {
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
-    #                 source_settings: {
+    #                 source_settings: { # required
     #                   ancillary_source_settings: {
     #                     source_ancillary_channel_number: 1,
     #                   },
@@ -7260,12 +7622,12 @@ module Aws::MediaConvert
     #                   },
     #                   file_source_settings: {
     #                     convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                     source_file: "__string",
+    #                     source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #                     time_delta: 1,
     #                   },
-    #                   source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                   source_type: "ANCILLARY", # required, accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
     #                   teletext_source_settings: {
-    #                     page_number: "__string",
+    #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                   },
     #                 },
     #               },
@@ -7276,8 +7638,8 @@ module Aws::MediaConvert
     #             filter_strength: 1,
     #             input_clippings: [
     #               {
-    #                 end_timecode: "__string",
-    #                 start_timecode: "__string",
+    #                 end_timecode: "__stringPattern010920405090509092",
+    #                 start_timecode: "__stringPattern010920405090509092",
     #               },
     #             ],
     #             program_number: 1,
@@ -7291,8 +7653,8 @@ module Aws::MediaConvert
     #                 blue_primary_y: 1,
     #                 green_primary_x: 1,
     #                 green_primary_y: 1,
-    #                 max_content_light_level: 1,
-    #                 max_frame_average_light_level: 1,
+    #                 max_content_light_level: 1, # required
+    #                 max_frame_average_light_level: 1, # required
     #                 max_luminance: 1,
     #                 min_luminance: 1,
     #                 red_primary_x: 1,
@@ -7309,29 +7671,56 @@ module Aws::MediaConvert
     #           breakout_code: 1,
     #           distributor_id: "__string",
     #         },
-    #         output_groups: [
+    #         output_groups: [ # required
     #           {
     #             custom_name: "__string",
     #             name: "__string",
-    #             output_group_settings: {
+    #             output_group_settings: { # required
+    #               cmaf_group_settings: {
+    #                 base_url: "__string",
+    #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
+    #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
+    #                 destination: "__stringPatternS3",
+    #                 encryption: {
+    #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #                   encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   static_key_provider: { # required
+    #                     key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                     key_format_versions: "__stringPatternDD",
+    #                     static_key_value: "__stringPatternAZaZ0932", # required
+    #                     url: "__string", # required
+    #                   },
+    #                   type: "STATIC_KEY", # required, accepts STATIC_KEY
+    #                 },
+    #                 fragment_length: 1, # required
+    #                 manifest_compression: "GZIP", # accepts GZIP, NONE
+    #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                 min_buffer_time: 1,
+    #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
+    #                 segment_length: 1, # required
+    #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                 write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #               },
     #               dash_iso_group_settings: {
     #                 base_url: "__string",
-    #                 destination: "__string",
+    #                 destination: "__stringPatternS3",
     #                 encryption: {
-    #                   speke_key_provider: {
-    #                     resource_id: "__string",
-    #                     system_ids: ["__string"],
-    #                     url: "__string",
+    #                   speke_key_provider: { # required
+    #                     resource_id: "__string", # required
+    #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                     url: "__stringPatternHttps", # required
     #                   },
     #                 },
-    #                 fragment_length: 1,
+    #                 fragment_length: 1, # required
     #                 hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                 min_buffer_time: 1,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                 segment_length: 1,
+    #                 segment_length: 1, # required
     #               },
     #               file_group_settings: {
-    #                 destination: "__string",
+    #                 destination: "__stringPatternS3",
     #               },
     #               hls_group_settings: {
     #                 ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -7346,33 +7735,33 @@ module Aws::MediaConvert
     #                 caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
-    #                 destination: "__string",
+    #                 destination: "__stringPatternS3",
     #                 directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                 encryption: {
-    #                   constant_initialization_vector: "__string",
+    #                   constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                   encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                   initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   speke_key_provider: {
-    #                     resource_id: "__string",
-    #                     system_ids: ["__string"],
-    #                     url: "__string",
+    #                     resource_id: "__string", # required
+    #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                     url: "__stringPatternHttps", # required
     #                   },
     #                   static_key_provider: {
-    #                     key_format: "__string",
-    #                     key_format_versions: "__string",
-    #                     static_key_value: "__string",
-    #                     url: "__string",
+    #                     key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                     key_format_versions: "__stringPatternDD",
+    #                     static_key_value: "__stringPatternAZaZ0932", # required
+    #                     url: "__string", # required
     #                   },
-    #                   type: "SPEKE", # accepts SPEKE, STATIC_KEY
+    #                   type: "SPEKE", # required, accepts SPEKE, STATIC_KEY
     #                 },
     #                 manifest_compression: "GZIP", # accepts GZIP, NONE
     #                 manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #                 min_segment_length: 1,
+    #                 min_segment_length: 1, # required
     #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                 program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 program_date_time_period: 1,
     #                 segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                 segment_length: 1,
+    #                 segment_length: 1, # required
     #                 segments_per_subdirectory: 1,
     #                 stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -7381,20 +7770,20 @@ module Aws::MediaConvert
     #               },
     #               ms_smooth_group_settings: {
     #                 audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
-    #                 destination: "__string",
+    #                 destination: "__stringPatternS3",
     #                 encryption: {
-    #                   speke_key_provider: {
-    #                     resource_id: "__string",
-    #                     system_ids: ["__string"],
-    #                     url: "__string",
+    #                   speke_key_provider: { # required
+    #                     resource_id: "__string", # required
+    #                     system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                     url: "__stringPatternHttps", # required
     #                   },
     #                 },
-    #                 fragment_length: 1,
+    #                 fragment_length: 1, # required
     #                 manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #               },
-    #               type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS
+    #               type: "HLS_GROUP_SETTINGS", # required, accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
     #             },
-    #             outputs: [
+    #             outputs: [ # required
     #               {
     #                 audio_descriptions: [
     #                   {
@@ -7409,15 +7798,15 @@ module Aws::MediaConvert
     #                     audio_source_name: "__string",
     #                     audio_type: 1,
     #                     audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                     codec_settings: {
+    #                     codec_settings: { # required
     #                       aac_settings: {
     #                         audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                         bitrate: 1,
     #                         codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                         coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                         coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                         rate_control_mode: "CBR", # accepts CBR, VBR
     #                         raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                         sample_rate: 1,
+    #                         sample_rate: 1, # required
     #                         specification: "MPEG2", # accepts MPEG2, MPEG4
     #                         vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #                       },
@@ -7436,7 +7825,7 @@ module Aws::MediaConvert
     #                         channels: 1,
     #                         sample_rate: 1,
     #                       },
-    #                       codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                       codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #                       eac_3_settings: {
     #                         attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                         bitrate: 1,
@@ -7468,39 +7857,40 @@ module Aws::MediaConvert
     #                       wav_settings: {
     #                         bit_depth: 1,
     #                         channels: 1,
+    #                         format: "RIFF", # accepts RIFF, RF64
     #                         sample_rate: 1,
     #                       },
     #                     },
     #                     language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                     language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                     remix_settings: {
-    #                       channel_mapping: {
-    #                         output_channels: [
+    #                       channel_mapping: { # required
+    #                         output_channels: [ # required
     #                           {
-    #                             input_channels: [1],
+    #                             input_channels: [1], # required
     #                           },
     #                         ],
     #                       },
-    #                       channels_in: 1,
-    #                       channels_out: 1,
+    #                       channels_in: 1, # required
+    #                       channels_out: 1, # required
     #                     },
-    #                     stream_name: "__string",
+    #                     stream_name: "__stringPatternWS",
     #                   },
     #                 ],
     #                 caption_descriptions: [
     #                   {
-    #                     caption_selector_name: "__string",
-    #                     destination_settings: {
+    #                     caption_selector_name: "__stringMin1", # required
+    #                     destination_settings: { # required
     #                       burnin_destination_settings: {
-    #                         alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                         alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         background_opacity: 1,
     #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                         font_opacity: 1,
+    #                         font_opacity: 1, # required
     #                         font_resolution: 1,
     #                         font_size: 1,
-    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                         outline_size: 1,
+    #                         outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                         outline_size: 1, # required
     #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
@@ -7509,17 +7899,17 @@ module Aws::MediaConvert
     #                         x_position: 1,
     #                         y_position: 1,
     #                       },
-    #                       destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                       destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #                       dvb_sub_destination_settings: {
-    #                         alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                         alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                         background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         background_opacity: 1,
     #                         font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                         font_opacity: 1,
+    #                         font_opacity: 1, # required
     #                         font_resolution: 1,
     #                         font_size: 1,
-    #                         outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                         outline_size: 1,
+    #                         outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                         outline_size: 1, # required
     #                         shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                         shadow_opacity: 1,
     #                         shadow_x_offset: 1,
@@ -7532,7 +7922,7 @@ module Aws::MediaConvert
     #                         framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                       },
     #                       teletext_destination_settings: {
-    #                         page_number: "__string",
+    #                         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                       },
     #                       ttml_destination_settings: {
     #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -7543,7 +7933,7 @@ module Aws::MediaConvert
     #                   },
     #                 ],
     #                 container_settings: {
-    #                   container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #                   container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                   f4v_settings: {
     #                     moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                   },
@@ -7554,19 +7944,19 @@ module Aws::MediaConvert
     #                     bitrate: 1,
     #                     buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                     dvb_nit_settings: {
-    #                       network_id: 1,
-    #                       network_name: "__string",
-    #                       nit_interval: 1,
+    #                       network_id: 1, # required
+    #                       network_name: "__stringMin1Max256", # required
+    #                       nit_interval: 1, # required
     #                     },
     #                     dvb_sdt_settings: {
     #                       output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                       sdt_interval: 1,
-    #                       service_name: "__string",
-    #                       service_provider_name: "__string",
+    #                       service_name: "__stringMin1Max256",
+    #                       service_provider_name: "__stringMin1Max256",
     #                     },
     #                     dvb_sub_pids: [1],
     #                     dvb_tdt_settings: {
-    #                       tdt_interval: 1,
+    #                       tdt_interval: 1, # required
     #                     },
     #                     dvb_teletext_pid: 1,
     #                     ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -7627,7 +8017,7 @@ module Aws::MediaConvert
     #                   },
     #                 },
     #                 extension: "__string",
-    #                 name_modifier: "__string",
+    #                 name_modifier: "__stringMin1",
     #                 output_settings: {
     #                   hls_settings: {
     #                     audio_group_id: "__string",
@@ -7637,12 +8027,12 @@ module Aws::MediaConvert
     #                     segment_modifier: "__string",
     #                   },
     #                 },
-    #                 preset: "__string",
+    #                 preset: "__stringMin0",
     #                 video_description: {
     #                   afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                   anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #                   codec_settings: {
-    #                     codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                   codec_settings: { # required
+    #                     codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #                     frame_capture_settings: {
     #                       framerate_denominator: 1,
     #                       framerate_numerator: 1,
@@ -7725,6 +8115,7 @@ module Aws::MediaConvert
     #                       temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #                       tiles: "DISABLED", # accepts DISABLED, ENABLED
     #                       unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #                       write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #                     },
     #                     mpeg_2_settings: {
     #                       adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -7774,19 +8165,19 @@ module Aws::MediaConvert
     #                   },
     #                   color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                   crop: {
-    #                     height: 1,
-    #                     width: 1,
-    #                     x: 1,
-    #                     y: 1,
+    #                     height: 1, # required
+    #                     width: 1, # required
+    #                     x: 1, # required
+    #                     y: 1, # required
     #                   },
     #                   drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #                   fixed_afd: 1,
     #                   height: 1,
     #                   position: {
-    #                     height: 1,
-    #                     width: 1,
-    #                     x: 1,
-    #                     y: 1,
+    #                     height: 1, # required
+    #                     width: 1, # required
+    #                     x: 1, # required
+    #                     y: 1, # required
     #                   },
     #                   respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #                   scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -7802,8 +8193,8 @@ module Aws::MediaConvert
     #                         blue_primary_y: 1,
     #                         green_primary_x: 1,
     #                         green_primary_y: 1,
-    #                         max_content_light_level: 1,
-    #                         max_frame_average_light_level: 1,
+    #                         max_content_light_level: 1, # required
+    #                         max_frame_average_light_level: 1, # required
     #                         max_luminance: 1,
     #                         min_luminance: 1,
     #                         red_primary_x: 1,
@@ -7820,24 +8211,24 @@ module Aws::MediaConvert
     #                       mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                     },
     #                     image_inserter: {
-    #                       insertable_images: [
+    #                       insertable_images: [ # required
     #                         {
     #                           duration: 1,
     #                           fade_in: 1,
     #                           fade_out: 1,
     #                           height: 1,
-    #                           image_inserter_input: "__string",
-    #                           image_x: 1,
-    #                           image_y: 1,
-    #                           layer: 1,
-    #                           opacity: 1,
-    #                           start_time: "__string",
+    #                           image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                           image_x: 1, # required
+    #                           image_y: 1, # required
+    #                           layer: 1, # required
+    #                           opacity: 1, # required
+    #                           start_time: "__stringPattern01D20305D205D",
     #                           width: 1,
     #                         },
     #                       ],
     #                     },
     #                     noise_reducer: {
-    #                       filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                       filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #                       filter_settings: {
     #                         strength: 1,
     #                       },
@@ -7850,7 +8241,7 @@ module Aws::MediaConvert
     #                     timecode_burnin: {
     #                       font_size: 1,
     #                       position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #                       prefix: "__string",
+    #                       prefix: "__stringPattern",
     #                     },
     #                   },
     #                   width: 1,
@@ -7860,16 +8251,16 @@ module Aws::MediaConvert
     #           },
     #         ],
     #         timecode_config: {
-    #           anchor: "__string",
+    #           anchor: "__stringPattern010920405090509092",
     #           source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
-    #           start: "__string",
-    #           timestamp_offset: "__string",
+    #           start: "__stringPattern010920405090509092",
+    #           timestamp_offset: "__stringPattern0940191020191209301",
     #         },
     #         timed_metadata_insertion: {
-    #           id_3_insertions: [
+    #           id_3_insertions: [ # required
     #             {
-    #               id_3: "__string",
-    #               timecode: "__string",
+    #               id_3: "__stringPatternAZaZ0902", # required
+    #               timecode: "__stringPattern010920405090509092", # required
     #             },
     #           ],
     #         },
@@ -7896,8 +8287,8 @@ module Aws::MediaConvert
     #   @return [Types::NielsenConfiguration]
     #
     # @!attribute [rw] output_groups
-    #   **!!**(OutputGroups) contains one group of settings for each set
-    #   of outputs that share a common package type. All unpackaged files
+    #   (OutputGroups) contains one group of settings for each set of
+    #   outputs that share a common package type. All unpackaged files
     #   (MPEG-4, MPEG-2 TS, Quicktime, MXF, and no container) are grouped in
     #   a single output group as well. Required in (OutputGroups) is a group
     #   of settings that apply to the whole group. This required object
@@ -7906,7 +8297,8 @@ module Aws::MediaConvert
     #   are as follows. * FILE\_GROUP\_SETTINGS, FileGroupSettings *
     #   HLS\_GROUP\_SETTINGS, HlsGroupSettings *
     #   DASH\_ISO\_GROUP\_SETTINGS, DashIsoGroupSettings *
-    #   MS\_SMOOTH\_GROUP\_SETTINGS, MsSmoothGroupSettings
+    #   MS\_SMOOTH\_GROUP\_SETTINGS, MsSmoothGroupSettings *
+    #   CMAF\_GROUP\_SETTINGS, CmafGroupSettings
     #   @return [Array<Types::OutputGroup>]
     #
     # @!attribute [rw] timecode_config
@@ -8233,19 +8625,19 @@ module Aws::MediaConvert
     #         bitrate: 1,
     #         buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #         dvb_nit_settings: {
-    #           network_id: 1,
-    #           network_name: "__string",
-    #           nit_interval: 1,
+    #           network_id: 1, # required
+    #           network_name: "__stringMin1Max256", # required
+    #           nit_interval: 1, # required
     #         },
     #         dvb_sdt_settings: {
     #           output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #           sdt_interval: 1,
-    #           service_name: "__string",
-    #           service_provider_name: "__string",
+    #           service_name: "__stringMin1Max256",
+    #           service_provider_name: "__stringMin1Max256",
     #         },
     #         dvb_sub_pids: [1],
     #         dvb_tdt_settings: {
-    #           tdt_interval: 1,
+    #           tdt_interval: 1, # required
     #         },
     #         dvb_teletext_pid: 1,
     #         ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -8608,8 +9000,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata
-    #   If PASSTHROUGH, inserts ID3 timed metadata from the timed\_metadata
-    #   REST command into this output.
+    #   Applies only to HLS outputs. Use this setting to specify whether the
+    #   service inserts the ID3 timed metadata from the input in this
+    #   output.
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata_pid
@@ -8829,10 +9222,9 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] bitrate
-    #   Average bitrate in bits/second. Required for VBR, CBR, and ABR. Five
-    #   megabits can be entered as 5000000 or 5m. Five hundred kilobits can
-    #   be entered as 500000 or 0.5m. For MS Smooth outputs, bitrates must
-    #   be unique when rounded down to the nearest multiple of 1000.
+    #   Average bitrate in bits/second. Required for VBR and CBR. For MS
+    #   Smooth outputs, bitrates must be unique when rounded down to the
+    #   nearest multiple of 1000.
     #   @return [Integer]
     #
     # @!attribute [rw] codec_level
@@ -8846,9 +9238,19 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
-    #   Using the API, set FramerateControl to INITIALIZE\_FROM\_SOURCE if
-    #   you want the service to use the framerate from the input. Using the
-    #   console, do this by choosing INITIALIZE\_FROM\_SOURCE for Framerate.
+    #   If you are using the console, use the Framerate setting to specify
+    #   the framerate for this output. If you want to keep the same
+    #   framerate as the input video, choose Follow source. If you want to
+    #   do framerate conversion, choose a framerate from the dropdown list
+    #   or choose Custom. The framerates shown in the dropdown list are
+    #   decimal approximations of fractions. If you choose Custom, specify
+    #   your framerate as a fraction. If you are creating your transcoding
+    #   job sepecification as a JSON file without the console, use
+    #   FramerateControl to specify which value the service uses for the
+    #   framerate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
+    #   want the service to use the framerate from the input. Choose
+    #   SPECIFIED if you want the service to use the framerate you specify
+    #   in the settings FramerateNumerator and FramerateDenominator.
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
@@ -8889,9 +9291,8 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] hrd_buffer_size
-    #   Size of buffer (HRD buffer model). Five megabits can be entered as
-    #   5000000 or 5m. Five hundred kilobits can be entered as 500000 or
-    #   0.5m.
+    #   Size of buffer (HRD buffer model) in bits. For example, enter five
+    #   megabits as 5000000.
     #   @return [Integer]
     #
     # @!attribute [rw] interlace_mode
@@ -8899,7 +9300,7 @@ module Aws::MediaConvert
     #   the output. * Top Field First (TOP\_FIELD) and Bottom Field First
     #   (BOTTOM\_FIELD) produce interlaced output with the entire output
     #   having the same field polarity (top or bottom first). * Follow,
-    #   Default Top (FOLLOw\_TOP\_FIELD) and Follow, Default Bottom
+    #   Default Top (FOLLOW\_TOP\_FIELD) and Follow, Default Bottom
     #   (FOLLOW\_BOTTOM\_FIELD) use the same field polarity as the source.
     #   Therefore, behavior depends on the input scan type. - If the source
     #   is interlaced, the output will be interlaced with the same polarity
@@ -8918,9 +9319,8 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] max_bitrate
-    #   Maximum bitrate in bits/second (for VBR mode only). Five megabits
-    #   can be entered as 5000000 or 5m. Five hundred kilobits can be
-    #   entered as 500000 or 0.5m.
+    #   Maximum bitrate in bits/second. For example, enter five megabits per
+    #   second as 5000000.
     #   @return [Integer]
     #
     # @!attribute [rw] min_i_interval
@@ -9040,10 +9440,10 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         speke_key_provider: {
-    #           resource_id: "__string",
-    #           system_ids: ["__string"],
-    #           url: "__string",
+    #         speke_key_provider: { # required
+    #           resource_id: "__string", # required
+    #           system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #           url: "__stringPatternHttps", # required
     #         },
     #       }
     #
@@ -9066,15 +9466,15 @@ module Aws::MediaConvert
     #
     #       {
     #         audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
-    #         destination: "__string",
+    #         destination: "__stringPatternS3",
     #         encryption: {
-    #           speke_key_provider: {
-    #             resource_id: "__string",
-    #             system_ids: ["__string"],
-    #             url: "__string",
+    #           speke_key_provider: { # required
+    #             resource_id: "__string", # required
+    #             system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #             url: "__stringPatternHttps", # required
     #           },
     #         },
-    #         fragment_length: 1,
+    #         fragment_length: 1, # required
     #         manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #       }
     #
@@ -9159,7 +9559,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #         filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #         filter_settings: {
     #           strength: 1,
     #         },
@@ -9174,9 +9574,9 @@ module Aws::MediaConvert
     #   Use Noise reducer filter (NoiseReducerFilter) to select one of the
     #   following spatial image filtering functions. To use this setting,
     #   you must also enable Noise reducer (NoiseReducer). * Bilateral is
-    #   an edge preserving noise reduction filter * Mean (softest),
-    #   Gaussian, Lanczos, and Sharpen (sharpest) are convolution filters *
-    #   Conserve is a min/max noise reduction filter * Spatial is
+    #   an edge preserving noise reduction filter. * Mean (softest),
+    #   Gaussian, Lanczos, and Sharpen (sharpest) are convolution filters.
+    #   * Conserve is a min/max noise reduction filter. * Spatial is a
     #   frequency-domain filter based on JND principles.
     #   @return [String]
     #
@@ -9273,15 +9673,15 @@ module Aws::MediaConvert
     #             audio_source_name: "__string",
     #             audio_type: 1,
     #             audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #             codec_settings: {
+    #             codec_settings: { # required
     #               aac_settings: {
     #                 audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                 bitrate: 1,
     #                 codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                 coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                 coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                 rate_control_mode: "CBR", # accepts CBR, VBR
     #                 raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                 sample_rate: 1,
+    #                 sample_rate: 1, # required
     #                 specification: "MPEG2", # accepts MPEG2, MPEG4
     #                 vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #               },
@@ -9300,7 +9700,7 @@ module Aws::MediaConvert
     #                 channels: 1,
     #                 sample_rate: 1,
     #               },
-    #               codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #               codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #               eac_3_settings: {
     #                 attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                 bitrate: 1,
@@ -9332,39 +9732,40 @@ module Aws::MediaConvert
     #               wav_settings: {
     #                 bit_depth: 1,
     #                 channels: 1,
+    #                 format: "RIFF", # accepts RIFF, RF64
     #                 sample_rate: 1,
     #               },
     #             },
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #             remix_settings: {
-    #               channel_mapping: {
-    #                 output_channels: [
+    #               channel_mapping: { # required
+    #                 output_channels: [ # required
     #                   {
-    #                     input_channels: [1],
+    #                     input_channels: [1], # required
     #                   },
     #                 ],
     #               },
-    #               channels_in: 1,
-    #               channels_out: 1,
+    #               channels_in: 1, # required
+    #               channels_out: 1, # required
     #             },
-    #             stream_name: "__string",
+    #             stream_name: "__stringPatternWS",
     #           },
     #         ],
     #         caption_descriptions: [
     #           {
-    #             caption_selector_name: "__string",
-    #             destination_settings: {
+    #             caption_selector_name: "__stringMin1", # required
+    #             destination_settings: { # required
     #               burnin_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                 alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 background_opacity: 1,
     #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                 font_opacity: 1,
+    #                 font_opacity: 1, # required
     #                 font_resolution: 1,
     #                 font_size: 1,
-    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                 outline_size: 1,
+    #                 outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                 outline_size: 1, # required
     #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
@@ -9373,17 +9774,17 @@ module Aws::MediaConvert
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
-    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #               destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #               dvb_sub_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                 alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 background_opacity: 1,
     #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                 font_opacity: 1,
+    #                 font_opacity: 1, # required
     #                 font_resolution: 1,
     #                 font_size: 1,
-    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                 outline_size: 1,
+    #                 outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                 outline_size: 1, # required
     #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
@@ -9396,7 +9797,7 @@ module Aws::MediaConvert
     #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #               },
     #               teletext_destination_settings: {
-    #                 page_number: "__string",
+    #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #               },
     #               ttml_destination_settings: {
     #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -9407,7 +9808,7 @@ module Aws::MediaConvert
     #           },
     #         ],
     #         container_settings: {
-    #           container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #           container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #           f4v_settings: {
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           },
@@ -9418,19 +9819,19 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #             dvb_nit_settings: {
-    #               network_id: 1,
-    #               network_name: "__string",
-    #               nit_interval: 1,
+    #               network_id: 1, # required
+    #               network_name: "__stringMin1Max256", # required
+    #               nit_interval: 1, # required
     #             },
     #             dvb_sdt_settings: {
     #               output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #               sdt_interval: 1,
-    #               service_name: "__string",
-    #               service_provider_name: "__string",
+    #               service_name: "__stringMin1Max256",
+    #               service_provider_name: "__stringMin1Max256",
     #             },
     #             dvb_sub_pids: [1],
     #             dvb_tdt_settings: {
-    #               tdt_interval: 1,
+    #               tdt_interval: 1, # required
     #             },
     #             dvb_teletext_pid: 1,
     #             ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -9491,7 +9892,7 @@ module Aws::MediaConvert
     #           },
     #         },
     #         extension: "__string",
-    #         name_modifier: "__string",
+    #         name_modifier: "__stringMin1",
     #         output_settings: {
     #           hls_settings: {
     #             audio_group_id: "__string",
@@ -9501,12 +9902,12 @@ module Aws::MediaConvert
     #             segment_modifier: "__string",
     #           },
     #         },
-    #         preset: "__string",
+    #         preset: "__stringMin0",
     #         video_description: {
     #           afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #           anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #           codec_settings: {
-    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #           codec_settings: { # required
+    #             codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -9589,6 +9990,7 @@ module Aws::MediaConvert
     #               temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #               tiles: "DISABLED", # accepts DISABLED, ENABLED
     #               unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #               write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #             },
     #             mpeg_2_settings: {
     #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -9638,19 +10040,19 @@ module Aws::MediaConvert
     #           },
     #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #           crop: {
-    #             height: 1,
-    #             width: 1,
-    #             x: 1,
-    #             y: 1,
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
     #           },
     #           drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #           fixed_afd: 1,
     #           height: 1,
     #           position: {
-    #             height: 1,
-    #             width: 1,
-    #             x: 1,
-    #             y: 1,
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
     #           },
     #           respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #           scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -9666,8 +10068,8 @@ module Aws::MediaConvert
     #                 blue_primary_y: 1,
     #                 green_primary_x: 1,
     #                 green_primary_y: 1,
-    #                 max_content_light_level: 1,
-    #                 max_frame_average_light_level: 1,
+    #                 max_content_light_level: 1, # required
+    #                 max_frame_average_light_level: 1, # required
     #                 max_luminance: 1,
     #                 min_luminance: 1,
     #                 red_primary_x: 1,
@@ -9684,24 +10086,24 @@ module Aws::MediaConvert
     #               mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #             },
     #             image_inserter: {
-    #               insertable_images: [
+    #               insertable_images: [ # required
     #                 {
     #                   duration: 1,
     #                   fade_in: 1,
     #                   fade_out: 1,
     #                   height: 1,
-    #                   image_inserter_input: "__string",
-    #                   image_x: 1,
-    #                   image_y: 1,
-    #                   layer: 1,
-    #                   opacity: 1,
-    #                   start_time: "__string",
+    #                   image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                   image_x: 1, # required
+    #                   image_y: 1, # required
+    #                   layer: 1, # required
+    #                   opacity: 1, # required
+    #                   start_time: "__stringPattern01D20305D205D",
     #                   width: 1,
     #                 },
     #               ],
     #             },
     #             noise_reducer: {
-    #               filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #               filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #               filter_settings: {
     #                 strength: 1,
     #               },
@@ -9714,7 +10116,7 @@ module Aws::MediaConvert
     #             timecode_burnin: {
     #               font_size: 1,
     #               position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #               prefix: "__string",
+    #               prefix: "__stringPattern",
     #             },
     #           },
     #           width: 1,
@@ -9797,7 +10199,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         input_channels: [1],
+    #         input_channels: [1], # required
     #       }
     #
     # @!attribute [rw] input_channels
@@ -9837,25 +10239,52 @@ module Aws::MediaConvert
     #       {
     #         custom_name: "__string",
     #         name: "__string",
-    #         output_group_settings: {
+    #         output_group_settings: { # required
+    #           cmaf_group_settings: {
+    #             base_url: "__string",
+    #             client_cache: "DISABLED", # accepts DISABLED, ENABLED
+    #             codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
+    #             destination: "__stringPatternS3",
+    #             encryption: {
+    #               constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #               encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #               initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               static_key_provider: { # required
+    #                 key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                 key_format_versions: "__stringPatternDD",
+    #                 static_key_value: "__stringPatternAZaZ0932", # required
+    #                 url: "__string", # required
+    #               },
+    #               type: "STATIC_KEY", # required, accepts STATIC_KEY
+    #             },
+    #             fragment_length: 1, # required
+    #             manifest_compression: "GZIP", # accepts GZIP, NONE
+    #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #             min_buffer_time: 1,
+    #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
+    #             segment_length: 1, # required
+    #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #             write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #           },
     #           dash_iso_group_settings: {
     #             base_url: "__string",
-    #             destination: "__string",
+    #             destination: "__stringPatternS3",
     #             encryption: {
-    #               speke_key_provider: {
-    #                 resource_id: "__string",
-    #                 system_ids: ["__string"],
-    #                 url: "__string",
+    #               speke_key_provider: { # required
+    #                 resource_id: "__string", # required
+    #                 system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                 url: "__stringPatternHttps", # required
     #               },
     #             },
-    #             fragment_length: 1,
+    #             fragment_length: 1, # required
     #             hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #             min_buffer_time: 1,
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #             segment_length: 1,
+    #             segment_length: 1, # required
     #           },
     #           file_group_settings: {
-    #             destination: "__string",
+    #             destination: "__stringPatternS3",
     #           },
     #           hls_group_settings: {
     #             ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -9870,33 +10299,33 @@ module Aws::MediaConvert
     #             caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
     #             client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #             codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
-    #             destination: "__string",
+    #             destination: "__stringPatternS3",
     #             directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #             encryption: {
-    #               constant_initialization_vector: "__string",
+    #               constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #               encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #               initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               speke_key_provider: {
-    #                 resource_id: "__string",
-    #                 system_ids: ["__string"],
-    #                 url: "__string",
+    #                 resource_id: "__string", # required
+    #                 system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                 url: "__stringPatternHttps", # required
     #               },
     #               static_key_provider: {
-    #                 key_format: "__string",
-    #                 key_format_versions: "__string",
-    #                 static_key_value: "__string",
-    #                 url: "__string",
+    #                 key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                 key_format_versions: "__stringPatternDD",
+    #                 static_key_value: "__stringPatternAZaZ0932", # required
+    #                 url: "__string", # required
     #               },
-    #               type: "SPEKE", # accepts SPEKE, STATIC_KEY
+    #               type: "SPEKE", # required, accepts SPEKE, STATIC_KEY
     #             },
     #             manifest_compression: "GZIP", # accepts GZIP, NONE
     #             manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #             min_segment_length: 1,
+    #             min_segment_length: 1, # required
     #             output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #             program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             program_date_time_period: 1,
     #             segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #             segment_length: 1,
+    #             segment_length: 1, # required
     #             segments_per_subdirectory: 1,
     #             stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -9905,20 +10334,20 @@ module Aws::MediaConvert
     #           },
     #           ms_smooth_group_settings: {
     #             audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
-    #             destination: "__string",
+    #             destination: "__stringPatternS3",
     #             encryption: {
-    #               speke_key_provider: {
-    #                 resource_id: "__string",
-    #                 system_ids: ["__string"],
-    #                 url: "__string",
+    #               speke_key_provider: { # required
+    #                 resource_id: "__string", # required
+    #                 system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                 url: "__stringPatternHttps", # required
     #               },
     #             },
-    #             fragment_length: 1,
+    #             fragment_length: 1, # required
     #             manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #           },
-    #           type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS
+    #           type: "HLS_GROUP_SETTINGS", # required, accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
     #         },
-    #         outputs: [
+    #         outputs: [ # required
     #           {
     #             audio_descriptions: [
     #               {
@@ -9933,15 +10362,15 @@ module Aws::MediaConvert
     #                 audio_source_name: "__string",
     #                 audio_type: 1,
     #                 audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                 codec_settings: {
+    #                 codec_settings: { # required
     #                   aac_settings: {
     #                     audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                     bitrate: 1,
     #                     codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                     coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                     coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                     rate_control_mode: "CBR", # accepts CBR, VBR
     #                     raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                     sample_rate: 1,
+    #                     sample_rate: 1, # required
     #                     specification: "MPEG2", # accepts MPEG2, MPEG4
     #                     vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #                   },
@@ -9960,7 +10389,7 @@ module Aws::MediaConvert
     #                     channels: 1,
     #                     sample_rate: 1,
     #                   },
-    #                   codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                   codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #                   eac_3_settings: {
     #                     attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                     bitrate: 1,
@@ -9992,39 +10421,40 @@ module Aws::MediaConvert
     #                   wav_settings: {
     #                     bit_depth: 1,
     #                     channels: 1,
+    #                     format: "RIFF", # accepts RIFF, RF64
     #                     sample_rate: 1,
     #                   },
     #                 },
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                 language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                 remix_settings: {
-    #                   channel_mapping: {
-    #                     output_channels: [
+    #                   channel_mapping: { # required
+    #                     output_channels: [ # required
     #                       {
-    #                         input_channels: [1],
+    #                         input_channels: [1], # required
     #                       },
     #                     ],
     #                   },
-    #                   channels_in: 1,
-    #                   channels_out: 1,
+    #                   channels_in: 1, # required
+    #                   channels_out: 1, # required
     #                 },
-    #                 stream_name: "__string",
+    #                 stream_name: "__stringPatternWS",
     #               },
     #             ],
     #             caption_descriptions: [
     #               {
-    #                 caption_selector_name: "__string",
-    #                 destination_settings: {
+    #                 caption_selector_name: "__stringMin1", # required
+    #                 destination_settings: { # required
     #                   burnin_destination_settings: {
-    #                     alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                     alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                     background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                     background_opacity: 1,
     #                     font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                     font_opacity: 1,
+    #                     font_opacity: 1, # required
     #                     font_resolution: 1,
     #                     font_size: 1,
-    #                     outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                     outline_size: 1,
+    #                     outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                     outline_size: 1, # required
     #                     shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                     shadow_opacity: 1,
     #                     shadow_x_offset: 1,
@@ -10033,17 +10463,17 @@ module Aws::MediaConvert
     #                     x_position: 1,
     #                     y_position: 1,
     #                   },
-    #                   destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                   destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #                   dvb_sub_destination_settings: {
-    #                     alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                     alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                     background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                     background_opacity: 1,
     #                     font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                     font_opacity: 1,
+    #                     font_opacity: 1, # required
     #                     font_resolution: 1,
     #                     font_size: 1,
-    #                     outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                     outline_size: 1,
+    #                     outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                     outline_size: 1, # required
     #                     shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                     shadow_opacity: 1,
     #                     shadow_x_offset: 1,
@@ -10056,7 +10486,7 @@ module Aws::MediaConvert
     #                     framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                   },
     #                   teletext_destination_settings: {
-    #                     page_number: "__string",
+    #                     page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                   },
     #                   ttml_destination_settings: {
     #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -10067,7 +10497,7 @@ module Aws::MediaConvert
     #               },
     #             ],
     #             container_settings: {
-    #               container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #               container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #               f4v_settings: {
     #                 moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #               },
@@ -10078,19 +10508,19 @@ module Aws::MediaConvert
     #                 bitrate: 1,
     #                 buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                 dvb_nit_settings: {
-    #                   network_id: 1,
-    #                   network_name: "__string",
-    #                   nit_interval: 1,
+    #                   network_id: 1, # required
+    #                   network_name: "__stringMin1Max256", # required
+    #                   nit_interval: 1, # required
     #                 },
     #                 dvb_sdt_settings: {
     #                   output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                   sdt_interval: 1,
-    #                   service_name: "__string",
-    #                   service_provider_name: "__string",
+    #                   service_name: "__stringMin1Max256",
+    #                   service_provider_name: "__stringMin1Max256",
     #                 },
     #                 dvb_sub_pids: [1],
     #                 dvb_tdt_settings: {
-    #                   tdt_interval: 1,
+    #                   tdt_interval: 1, # required
     #                 },
     #                 dvb_teletext_pid: 1,
     #                 ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -10151,7 +10581,7 @@ module Aws::MediaConvert
     #               },
     #             },
     #             extension: "__string",
-    #             name_modifier: "__string",
+    #             name_modifier: "__stringMin1",
     #             output_settings: {
     #               hls_settings: {
     #                 audio_group_id: "__string",
@@ -10161,12 +10591,12 @@ module Aws::MediaConvert
     #                 segment_modifier: "__string",
     #               },
     #             },
-    #             preset: "__string",
+    #             preset: "__stringMin0",
     #             video_description: {
     #               afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #               anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #               codec_settings: {
-    #                 codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #               codec_settings: { # required
+    #                 codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #                 frame_capture_settings: {
     #                   framerate_denominator: 1,
     #                   framerate_numerator: 1,
@@ -10249,6 +10679,7 @@ module Aws::MediaConvert
     #                   temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #                   tiles: "DISABLED", # accepts DISABLED, ENABLED
     #                   unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #                   write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #                 },
     #                 mpeg_2_settings: {
     #                   adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -10298,19 +10729,19 @@ module Aws::MediaConvert
     #               },
     #               color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #               crop: {
-    #                 height: 1,
-    #                 width: 1,
-    #                 x: 1,
-    #                 y: 1,
+    #                 height: 1, # required
+    #                 width: 1, # required
+    #                 x: 1, # required
+    #                 y: 1, # required
     #               },
     #               drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #               fixed_afd: 1,
     #               height: 1,
     #               position: {
-    #                 height: 1,
-    #                 width: 1,
-    #                 x: 1,
-    #                 y: 1,
+    #                 height: 1, # required
+    #                 width: 1, # required
+    #                 x: 1, # required
+    #                 y: 1, # required
     #               },
     #               respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #               scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -10326,8 +10757,8 @@ module Aws::MediaConvert
     #                     blue_primary_y: 1,
     #                     green_primary_x: 1,
     #                     green_primary_y: 1,
-    #                     max_content_light_level: 1,
-    #                     max_frame_average_light_level: 1,
+    #                     max_content_light_level: 1, # required
+    #                     max_frame_average_light_level: 1, # required
     #                     max_luminance: 1,
     #                     min_luminance: 1,
     #                     red_primary_x: 1,
@@ -10344,24 +10775,24 @@ module Aws::MediaConvert
     #                   mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                 },
     #                 image_inserter: {
-    #                   insertable_images: [
+    #                   insertable_images: [ # required
     #                     {
     #                       duration: 1,
     #                       fade_in: 1,
     #                       fade_out: 1,
     #                       height: 1,
-    #                       image_inserter_input: "__string",
-    #                       image_x: 1,
-    #                       image_y: 1,
-    #                       layer: 1,
-    #                       opacity: 1,
-    #                       start_time: "__string",
+    #                       image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                       image_x: 1, # required
+    #                       image_y: 1, # required
+    #                       layer: 1, # required
+    #                       opacity: 1, # required
+    #                       start_time: "__stringPattern01D20305D205D",
     #                       width: 1,
     #                     },
     #                   ],
     #                 },
     #                 noise_reducer: {
-    #                   filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                   filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #                   filter_settings: {
     #                     strength: 1,
     #                   },
@@ -10374,7 +10805,7 @@ module Aws::MediaConvert
     #                 timecode_burnin: {
     #                   font_size: 1,
     #                   position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #                   prefix: "__string",
+    #                   prefix: "__stringPattern",
     #                 },
     #               },
     #               width: 1,
@@ -10434,24 +10865,51 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
+    #         cmaf_group_settings: {
+    #           base_url: "__string",
+    #           client_cache: "DISABLED", # accepts DISABLED, ENABLED
+    #           codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
+    #           destination: "__stringPatternS3",
+    #           encryption: {
+    #             constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #             encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #             initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             static_key_provider: { # required
+    #               key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #               key_format_versions: "__stringPatternDD",
+    #               static_key_value: "__stringPatternAZaZ0932", # required
+    #               url: "__string", # required
+    #             },
+    #             type: "STATIC_KEY", # required, accepts STATIC_KEY
+    #           },
+    #           fragment_length: 1, # required
+    #           manifest_compression: "GZIP", # accepts GZIP, NONE
+    #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #           min_buffer_time: 1,
+    #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
+    #           segment_length: 1, # required
+    #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #           write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #         },
     #         dash_iso_group_settings: {
     #           base_url: "__string",
-    #           destination: "__string",
+    #           destination: "__stringPatternS3",
     #           encryption: {
-    #             speke_key_provider: {
-    #               resource_id: "__string",
-    #               system_ids: ["__string"],
-    #               url: "__string",
+    #             speke_key_provider: { # required
+    #               resource_id: "__string", # required
+    #               system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #               url: "__stringPatternHttps", # required
     #             },
     #           },
-    #           fragment_length: 1,
+    #           fragment_length: 1, # required
     #           hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #           min_buffer_time: 1,
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #           segment_length: 1,
+    #           segment_length: 1, # required
     #         },
     #         file_group_settings: {
-    #           destination: "__string",
+    #           destination: "__stringPatternS3",
     #         },
     #         hls_group_settings: {
     #           ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -10466,33 +10924,33 @@ module Aws::MediaConvert
     #           caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
     #           client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #           codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
-    #           destination: "__string",
+    #           destination: "__stringPatternS3",
     #           directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #           encryption: {
-    #             constant_initialization_vector: "__string",
+    #             constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #             encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #             initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             speke_key_provider: {
-    #               resource_id: "__string",
-    #               system_ids: ["__string"],
-    #               url: "__string",
+    #               resource_id: "__string", # required
+    #               system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #               url: "__stringPatternHttps", # required
     #             },
     #             static_key_provider: {
-    #               key_format: "__string",
-    #               key_format_versions: "__string",
-    #               static_key_value: "__string",
-    #               url: "__string",
+    #               key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #               key_format_versions: "__stringPatternDD",
+    #               static_key_value: "__stringPatternAZaZ0932", # required
+    #               url: "__string", # required
     #             },
-    #             type: "SPEKE", # accepts SPEKE, STATIC_KEY
+    #             type: "SPEKE", # required, accepts SPEKE, STATIC_KEY
     #           },
     #           manifest_compression: "GZIP", # accepts GZIP, NONE
     #           manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #           min_segment_length: 1,
+    #           min_segment_length: 1, # required
     #           output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #           program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           program_date_time_period: 1,
     #           segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #           segment_length: 1,
+    #           segment_length: 1, # required
     #           segments_per_subdirectory: 1,
     #           stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -10501,19 +10959,24 @@ module Aws::MediaConvert
     #         },
     #         ms_smooth_group_settings: {
     #           audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
-    #           destination: "__string",
+    #           destination: "__stringPatternS3",
     #           encryption: {
-    #             speke_key_provider: {
-    #               resource_id: "__string",
-    #               system_ids: ["__string"],
-    #               url: "__string",
+    #             speke_key_provider: { # required
+    #               resource_id: "__string", # required
+    #               system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #               url: "__stringPatternHttps", # required
     #             },
     #           },
-    #           fragment_length: 1,
+    #           fragment_length: 1, # required
     #           manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #         },
-    #         type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS
+    #         type: "HLS_GROUP_SETTINGS", # required, accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
     #       }
+    #
+    # @!attribute [rw] cmaf_group_settings
+    #   Required when you set (Type) under
+    #   (OutputGroups)>(OutputGroupSettings) to CMAF\_GROUP\_SETTINGS.
+    #   @return [Types::CmafGroupSettings]
     #
     # @!attribute [rw] dash_iso_group_settings
     #   Required when you set (Type) under
@@ -10537,12 +11000,13 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] type
     #   Type of output group (File group, Apple HLS, DASH ISO, Microsoft
-    #   Smooth Streaming)
+    #   Smooth Streaming, CMAF)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/OutputGroupSettings AWS API Documentation
     #
     class OutputGroupSettings < Struct.new(
+      :cmaf_group_settings,
       :dash_iso_group_settings,
       :file_group_settings,
       :hls_group_settings,
@@ -10648,15 +11112,15 @@ module Aws::MediaConvert
     #             audio_source_name: "__string",
     #             audio_type: 1,
     #             audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #             codec_settings: {
+    #             codec_settings: { # required
     #               aac_settings: {
     #                 audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                 bitrate: 1,
     #                 codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                 coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                 coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                 rate_control_mode: "CBR", # accepts CBR, VBR
     #                 raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                 sample_rate: 1,
+    #                 sample_rate: 1, # required
     #                 specification: "MPEG2", # accepts MPEG2, MPEG4
     #                 vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #               },
@@ -10675,7 +11139,7 @@ module Aws::MediaConvert
     #                 channels: 1,
     #                 sample_rate: 1,
     #               },
-    #               codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #               codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #               eac_3_settings: {
     #                 attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                 bitrate: 1,
@@ -10707,38 +11171,39 @@ module Aws::MediaConvert
     #               wav_settings: {
     #                 bit_depth: 1,
     #                 channels: 1,
+    #                 format: "RIFF", # accepts RIFF, RF64
     #                 sample_rate: 1,
     #               },
     #             },
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #             language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #             remix_settings: {
-    #               channel_mapping: {
-    #                 output_channels: [
+    #               channel_mapping: { # required
+    #                 output_channels: [ # required
     #                   {
-    #                     input_channels: [1],
+    #                     input_channels: [1], # required
     #                   },
     #                 ],
     #               },
-    #               channels_in: 1,
-    #               channels_out: 1,
+    #               channels_in: 1, # required
+    #               channels_out: 1, # required
     #             },
-    #             stream_name: "__string",
+    #             stream_name: "__stringPatternWS",
     #           },
     #         ],
     #         caption_descriptions: [
     #           {
-    #             destination_settings: {
+    #             destination_settings: { # required
     #               burnin_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                 alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 background_opacity: 1,
     #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                 font_opacity: 1,
+    #                 font_opacity: 1, # required
     #                 font_resolution: 1,
     #                 font_size: 1,
-    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                 outline_size: 1,
+    #                 outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                 outline_size: 1, # required
     #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
@@ -10747,17 +11212,17 @@ module Aws::MediaConvert
     #                 x_position: 1,
     #                 y_position: 1,
     #               },
-    #               destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #               destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #               dvb_sub_destination_settings: {
-    #                 alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                 alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                 background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 background_opacity: 1,
     #                 font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                 font_opacity: 1,
+    #                 font_opacity: 1, # required
     #                 font_resolution: 1,
     #                 font_size: 1,
-    #                 outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                 outline_size: 1,
+    #                 outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                 outline_size: 1, # required
     #                 shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                 shadow_opacity: 1,
     #                 shadow_x_offset: 1,
@@ -10770,7 +11235,7 @@ module Aws::MediaConvert
     #                 framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #               },
     #               teletext_destination_settings: {
-    #                 page_number: "__string",
+    #                 page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #               },
     #               ttml_destination_settings: {
     #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -10781,7 +11246,7 @@ module Aws::MediaConvert
     #           },
     #         ],
     #         container_settings: {
-    #           container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #           container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #           f4v_settings: {
     #             moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #           },
@@ -10792,19 +11257,19 @@ module Aws::MediaConvert
     #             bitrate: 1,
     #             buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #             dvb_nit_settings: {
-    #               network_id: 1,
-    #               network_name: "__string",
-    #               nit_interval: 1,
+    #               network_id: 1, # required
+    #               network_name: "__stringMin1Max256", # required
+    #               nit_interval: 1, # required
     #             },
     #             dvb_sdt_settings: {
     #               output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #               sdt_interval: 1,
-    #               service_name: "__string",
-    #               service_provider_name: "__string",
+    #               service_name: "__stringMin1Max256",
+    #               service_provider_name: "__stringMin1Max256",
     #             },
     #             dvb_sub_pids: [1],
     #             dvb_tdt_settings: {
-    #               tdt_interval: 1,
+    #               tdt_interval: 1, # required
     #             },
     #             dvb_teletext_pid: 1,
     #             ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -10867,8 +11332,8 @@ module Aws::MediaConvert
     #         video_description: {
     #           afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #           anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #           codec_settings: {
-    #             codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #           codec_settings: { # required
+    #             codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #             frame_capture_settings: {
     #               framerate_denominator: 1,
     #               framerate_numerator: 1,
@@ -10951,6 +11416,7 @@ module Aws::MediaConvert
     #               temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #               tiles: "DISABLED", # accepts DISABLED, ENABLED
     #               unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #               write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #             },
     #             mpeg_2_settings: {
     #               adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -11000,19 +11466,19 @@ module Aws::MediaConvert
     #           },
     #           color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #           crop: {
-    #             height: 1,
-    #             width: 1,
-    #             x: 1,
-    #             y: 1,
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
     #           },
     #           drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #           fixed_afd: 1,
     #           height: 1,
     #           position: {
-    #             height: 1,
-    #             width: 1,
-    #             x: 1,
-    #             y: 1,
+    #             height: 1, # required
+    #             width: 1, # required
+    #             x: 1, # required
+    #             y: 1, # required
     #           },
     #           respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #           scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -11028,8 +11494,8 @@ module Aws::MediaConvert
     #                 blue_primary_y: 1,
     #                 green_primary_x: 1,
     #                 green_primary_y: 1,
-    #                 max_content_light_level: 1,
-    #                 max_frame_average_light_level: 1,
+    #                 max_content_light_level: 1, # required
+    #                 max_frame_average_light_level: 1, # required
     #                 max_luminance: 1,
     #                 min_luminance: 1,
     #                 red_primary_x: 1,
@@ -11046,24 +11512,24 @@ module Aws::MediaConvert
     #               mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #             },
     #             image_inserter: {
-    #               insertable_images: [
+    #               insertable_images: [ # required
     #                 {
     #                   duration: 1,
     #                   fade_in: 1,
     #                   fade_out: 1,
     #                   height: 1,
-    #                   image_inserter_input: "__string",
-    #                   image_x: 1,
-    #                   image_y: 1,
-    #                   layer: 1,
-    #                   opacity: 1,
-    #                   start_time: "__string",
+    #                   image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                   image_x: 1, # required
+    #                   image_y: 1, # required
+    #                   layer: 1, # required
+    #                   opacity: 1, # required
+    #                   start_time: "__stringPattern01D20305D205D",
     #                   width: 1,
     #                 },
     #               ],
     #             },
     #             noise_reducer: {
-    #               filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #               filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #               filter_settings: {
     #                 strength: 1,
     #               },
@@ -11076,7 +11542,7 @@ module Aws::MediaConvert
     #             timecode_burnin: {
     #               font_size: 1,
     #               position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #               prefix: "__string",
+    #               prefix: "__stringPattern",
     #             },
     #           },
     #           width: 1,
@@ -11142,9 +11608,19 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] framerate_control
-    #   Using the API, set FramerateControl to INITIALIZE\_FROM\_SOURCE if
-    #   you want the service to use the framerate from the input. Using the
-    #   console, do this by choosing INITIALIZE\_FROM\_SOURCE for Framerate.
+    #   If you are using the console, use the Framerate setting to specify
+    #   the framerate for this output. If you want to keep the same
+    #   framerate as the input video, choose Follow source. If you want to
+    #   do framerate conversion, choose a framerate from the dropdown list
+    #   or choose Custom. The framerates shown in the dropdown list are
+    #   decimal approximations of fractions. If you choose Custom, specify
+    #   your framerate as a fraction. If you are creating your transcoding
+    #   job sepecification as a JSON file without the console, use
+    #   FramerateControl to specify which value the service uses for the
+    #   framerate for this output. Choose INITIALIZE\_FROM\_SOURCE if you
+    #   want the service to use the framerate from the input. Choose
+    #   SPECIFIED if you want the service to use the framerate you specify
+    #   in the settings FramerateNumerator and FramerateDenominator.
     #   @return [String]
     #
     # @!attribute [rw] framerate_conversion_algorithm
@@ -11169,7 +11645,7 @@ module Aws::MediaConvert
     #   the output. * Top Field First (TOP\_FIELD) and Bottom Field First
     #   (BOTTOM\_FIELD) produce interlaced output with the entire output
     #   having the same field polarity (top or bottom first). * Follow,
-    #   Default Top (FOLLOw\_TOP\_FIELD) and Follow, Default Bottom
+    #   Default Top (FOLLOW\_TOP\_FIELD) and Follow, Default Bottom
     #   (FOLLOW\_BOTTOM\_FIELD) use the same field polarity as the source.
     #   Therefore, behavior depends on the input scan type. - If the source
     #   is interlaced, the output will be interlaced with the same polarity
@@ -11282,10 +11758,10 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         height: 1,
-    #         width: 1,
-    #         x: 1,
-    #         y: 1,
+    #         height: 1, # required
+    #         width: 1, # required
+    #         x: 1, # required
+    #         y: 1, # required
     #       }
     #
     # @!attribute [rw] height
@@ -11317,22 +11793,23 @@ module Aws::MediaConvert
     end
 
     # Use Manual audio remixing (RemixSettings) to adjust audio levels for
-    # each output channel. With audio remixing, you can output more or fewer
-    # audio channels than your input audio source provides.
+    # each audio channel in each output of your job. With audio remixing,
+    # you can output more or fewer audio channels than your input audio
+    # source provides.
     #
     # @note When making an API call, you may pass RemixSettings
     #   data as a hash:
     #
     #       {
-    #         channel_mapping: {
-    #           output_channels: [
+    #         channel_mapping: { # required
+    #           output_channels: [ # required
     #             {
-    #               input_channels: [1],
+    #               input_channels: [1], # required
     #             },
     #           ],
     #         },
-    #         channels_in: 1,
-    #         channels_out: 1,
+    #         channels_in: 1, # required
+    #         channels_out: 1, # required
     #       }
     #
     # @!attribute [rw] channel_mapping
@@ -11396,9 +11873,9 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         resource_id: "__string",
-    #         system_ids: ["__string"],
-    #         url: "__string",
+    #         resource_id: "__string", # required
+    #         system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #         url: "__stringPatternHttps", # required
     #       }
     #
     # @!attribute [rw] resource_id
@@ -11432,10 +11909,10 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         key_format: "__string",
-    #         key_format_versions: "__string",
-    #         static_key_value: "__string",
-    #         url: "__string",
+    #         key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #         key_format_versions: "__stringPatternDD",
+    #         static_key_value: "__stringPatternAZaZ0932", # required
+    #         url: "__string", # required
     #       }
     #
     # @!attribute [rw] key_format
@@ -11475,7 +11952,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         page_number: "__string",
+    #         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #       }
     #
     # @!attribute [rw] page_number
@@ -11499,7 +11976,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         page_number: "__string",
+    #         page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #       }
     #
     # @!attribute [rw] page_number
@@ -11525,7 +12002,7 @@ module Aws::MediaConvert
     #       {
     #         font_size: 1,
     #         position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #         prefix: "__string",
+    #         prefix: "__stringPattern",
     #       }
     #
     # @!attribute [rw] font_size
@@ -11557,17 +12034,17 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Contains settings used to acquire and adjust timecode information from
-    # inputs.
+    # These settings control how the service handles timecodes throughout
+    # the job. These settings don't affect input clipping.
     #
     # @note When making an API call, you may pass TimecodeConfig
     #   data as a hash:
     #
     #       {
-    #         anchor: "__string",
+    #         anchor: "__stringPattern010920405090509092",
     #         source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
-    #         start: "__string",
-    #         timestamp_offset: "__string",
+    #         start: "__stringPattern010920405090509092",
+    #         timestamp_offset: "__stringPattern0940191020191209301",
     #       }
     #
     # @!attribute [rw] anchor
@@ -11576,46 +12053,47 @@ module Aws::MediaConvert
     #   the input video frame to the output video frame. Use 24-hour format
     #   with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting
     #   ignores framerate conversion. System behavior for Anchor Timecode
-    #   varies depending on your setting for Timecode source
-    #   (TimecodeSource). * If Timecode source (TimecodeSource) is set to
-    #   Specified Start (specifiedstart), the first input frame is the
-    #   specified value in Start Timecode (Start). Anchor Timecode (Anchor)
-    #   and Start Timecode (Start) are used calculate output timecode. * If
-    #   Timecode source (TimecodeSource) is set to Start at 0 (zerobased)
-    #   the first frame is 00:00:00:00. * If Timecode source
-    #   (TimecodeSource) is set to Embedded (embedded), the first frame is
-    #   the timecode value on the first input frame of the input.
+    #   varies depending on your setting for Source (TimecodeSource). * If
+    #   Source (TimecodeSource) is set to Specified Start (SPECIFIEDSTART),
+    #   the first input frame is the specified value in Start Timecode
+    #   (Start). Anchor Timecode (Anchor) and Start Timecode (Start) are
+    #   used calculate output timecode. * If Source (TimecodeSource) is set
+    #   to Start at 0 (ZEROBASED) the first frame is 00:00:00:00. * If
+    #   Source (TimecodeSource) is set to Embedded (EMBEDDED), the first
+    #   frame is the timecode value on the first input frame of the input.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   Use Timecode source (TimecodeSource) to set how timecodes are
-    #   handled within this input. To make sure that your video, audio,
-    #   captions, and markers are synchronized and that time-based features,
-    #   such as image inserter, work correctly, choose the Timecode source
-    #   option that matches your assets. All timecodes are in a 24-hour
-    #   format with frame number (HH:MM:SS:FF). * Embedded (EMBEDDED) - Use
-    #   the timecode that is in the input video. If no embedded timecode is
-    #   in the source, the service will use Start at 0 (ZEROBASED) instead.
-    #   * Start at 0 (ZEROBASED) - Set the timecode of the initial frame to
+    #   Use Source (TimecodeSource) to set how timecodes are handled within
+    #   this job. To make sure that your video, audio, captions, and markers
+    #   are synchronized and that time-based features, such as image
+    #   inserter, work correctly, choose the Timecode source option that
+    #   matches your assets. All timecodes are in a 24-hour format with
+    #   frame number (HH:MM:SS:FF). * Embedded (EMBEDDED) - Use the
+    #   timecode that is in the input video. If no embedded timecode is in
+    #   the source, the service will use Start at 0 (ZEROBASED) instead. *
+    #   Start at 0 (ZEROBASED) - Set the timecode of the initial frame to
     #   00:00:00:00. * Specified Start (SPECIFIEDSTART) - Set the timecode
     #   of the initial frame to a value other than zero. You use Start
     #   timecode (Start) to provide this value.
     #   @return [String]
     #
     # @!attribute [rw] start
-    #   Only use when you set Timecode Source (TimecodeSource) to Specified
-    #   Start (SPECIFIEDSTART). Use Start timecode (Start) to specify the
-    #   timecode for the initial frame. Use 24-hour format with frame
-    #   number, (HH:MM:SS:FF) or (HH:MM:SS;FF).
+    #   Only use when you set Source (TimecodeSource) to Specified start
+    #   (SPECIFIEDSTART). Use Start timecode (Start) to specify the timecode
+    #   for the initial frame. Use 24-hour format with frame number,
+    #   (HH:MM:SS:FF) or (HH:MM:SS;FF).
     #   @return [String]
     #
     # @!attribute [rw] timestamp_offset
     #   Only applies to outputs that support program-date-time stamp. Use
-    #   Time stamp offset (TimestampOffset) to overwrite the timecode date
+    #   Timestamp offset (TimestampOffset) to overwrite the timecode date
     #   without affecting the time and frame number. Provide the new date as
     #   a string in the format "yyyy-mm-dd". To use Time stamp offset, you
     #   must also enable Insert program-date-time (InsertProgramDateTime) in
-    #   the output settings.
+    #   the output settings. For example, if the date part of your timecodes
+    #   is 2002-1-25 and you want to change it to one year later, set
+    #   Timestamp offset (TimestampOffset) to 2003-1-25.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TimecodeConfig AWS API Documentation
@@ -11637,16 +12115,15 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         id_3_insertions: [
+    #         id_3_insertions: [ # required
     #           {
-    #             id_3: "__string",
-    #             timecode: "__string",
+    #             id_3: "__stringPatternAZaZ0902", # required
+    #             timecode: "__stringPattern010920405090509092", # required
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] id_3_insertions
-    #   Id3Insertions contains the array of Id3Insertion instances.
     #   @return [Array<Types::Id3Insertion>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TimedMetadataInsertion AWS API Documentation
@@ -11717,33 +12194,33 @@ module Aws::MediaConvert
     #         settings: {
     #           ad_avail_offset: 1,
     #           avail_blanking: {
-    #             avail_blanking_image: "__string",
+    #             avail_blanking_image: "__stringMin14PatternS3BmpBMPPngPNG",
     #           },
     #           inputs: [
     #             {
     #               audio_selector_groups: {
     #                 "__string" => {
-    #                   audio_selector_names: ["__string"],
+    #                   audio_selector_names: ["__stringMin1"], # required
     #                 },
     #               },
     #               audio_selectors: {
     #                 "__string" => {
     #                   default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #                   external_audio_file_input: "__string",
+    #                   external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   offset: 1,
     #                   pids: [1],
     #                   program_selection: 1,
     #                   remix_settings: {
-    #                     channel_mapping: {
-    #                       output_channels: [
+    #                     channel_mapping: { # required
+    #                       output_channels: [ # required
     #                         {
-    #                           input_channels: [1],
+    #                           input_channels: [1], # required
     #                         },
     #                       ],
     #                     },
-    #                     channels_in: 1,
-    #                     channels_out: 1,
+    #                     channels_in: 1, # required
+    #                     channels_out: 1, # required
     #                   },
     #                   selector_type: "PID", # accepts PID, TRACK, LANGUAGE_CODE
     #                   tracks: [1],
@@ -11752,7 +12229,7 @@ module Aws::MediaConvert
     #               caption_selectors: {
     #                 "__string" => {
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
-    #                   source_settings: {
+    #                   source_settings: { # required
     #                     ancillary_source_settings: {
     #                       source_ancillary_channel_number: 1,
     #                     },
@@ -11766,12 +12243,12 @@ module Aws::MediaConvert
     #                     },
     #                     file_source_settings: {
     #                       convert_608_to_708: "UPCONVERT", # accepts UPCONVERT, DISABLED
-    #                       source_file: "__string",
+    #                       source_file: "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI", # required
     #                       time_delta: 1,
     #                     },
-    #                     source_type: "ANCILLARY", # accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
+    #                     source_type: "ANCILLARY", # required, accepts ANCILLARY, DVB_SUB, EMBEDDED, SCC, TTML, STL, SRT, TELETEXT, NULL_SOURCE
     #                     teletext_source_settings: {
-    #                       page_number: "__string",
+    #                       page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                     },
     #                   },
     #                 },
@@ -11782,8 +12259,8 @@ module Aws::MediaConvert
     #               filter_strength: 1,
     #               input_clippings: [
     #                 {
-    #                   end_timecode: "__string",
-    #                   start_timecode: "__string",
+    #                   end_timecode: "__stringPattern010920405090509092",
+    #                   start_timecode: "__stringPattern010920405090509092",
     #                 },
     #               ],
     #               program_number: 1,
@@ -11797,8 +12274,8 @@ module Aws::MediaConvert
     #                   blue_primary_y: 1,
     #                   green_primary_x: 1,
     #                   green_primary_y: 1,
-    #                   max_content_light_level: 1,
-    #                   max_frame_average_light_level: 1,
+    #                   max_content_light_level: 1, # required
+    #                   max_frame_average_light_level: 1, # required
     #                   max_luminance: 1,
     #                   min_luminance: 1,
     #                   red_primary_x: 1,
@@ -11815,29 +12292,56 @@ module Aws::MediaConvert
     #             breakout_code: 1,
     #             distributor_id: "__string",
     #           },
-    #           output_groups: [
+    #           output_groups: [ # required
     #             {
     #               custom_name: "__string",
     #               name: "__string",
-    #               output_group_settings: {
+    #               output_group_settings: { # required
+    #                 cmaf_group_settings: {
+    #                   base_url: "__string",
+    #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
+    #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
+    #                   destination: "__stringPatternS3",
+    #                   encryption: {
+    #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
+    #                     encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
+    #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     static_key_provider: { # required
+    #                       key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                       key_format_versions: "__stringPatternDD",
+    #                       static_key_value: "__stringPatternAZaZ0932", # required
+    #                       url: "__string", # required
+    #                     },
+    #                     type: "STATIC_KEY", # required, accepts STATIC_KEY
+    #                   },
+    #                   fragment_length: 1, # required
+    #                   manifest_compression: "GZIP", # accepts GZIP, NONE
+    #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
+    #                   min_buffer_time: 1,
+    #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
+    #                   segment_length: 1, # required
+    #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   write_dash_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                   write_hls_manifest: "DISABLED", # accepts DISABLED, ENABLED
+    #                 },
     #                 dash_iso_group_settings: {
     #                   base_url: "__string",
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                   encryption: {
-    #                     speke_key_provider: {
-    #                       resource_id: "__string",
-    #                       system_ids: ["__string"],
-    #                       url: "__string",
+    #                     speke_key_provider: { # required
+    #                       resource_id: "__string", # required
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                       url: "__stringPatternHttps", # required
     #                     },
     #                   },
-    #                   fragment_length: 1,
+    #                   fragment_length: 1, # required
     #                   hbbtv_compliance: "HBBTV_1_5", # accepts HBBTV_1_5, NONE
     #                   min_buffer_time: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                   segment_length: 1,
+    #                   segment_length: 1, # required
     #                 },
     #                 file_group_settings: {
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                 },
     #                 hls_group_settings: {
     #                   ad_markers: ["ELEMENTAL"], # accepts ELEMENTAL, ELEMENTAL_SCTE35
@@ -11852,33 +12356,33 @@ module Aws::MediaConvert
     #                   caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                   directory_structure: "SINGLE_DIRECTORY", # accepts SINGLE_DIRECTORY, SUBDIRECTORY_PER_STREAM
     #                   encryption: {
-    #                     constant_initialization_vector: "__string",
+    #                     constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                     encryption_method: "AES128", # accepts AES128, SAMPLE_AES
     #                     initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     speke_key_provider: {
-    #                       resource_id: "__string",
-    #                       system_ids: ["__string"],
-    #                       url: "__string",
+    #                       resource_id: "__string", # required
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                       url: "__stringPatternHttps", # required
     #                     },
     #                     static_key_provider: {
-    #                       key_format: "__string",
-    #                       key_format_versions: "__string",
-    #                       static_key_value: "__string",
-    #                       url: "__string",
+    #                       key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
+    #                       key_format_versions: "__stringPatternDD",
+    #                       static_key_value: "__stringPatternAZaZ0932", # required
+    #                       url: "__string", # required
     #                     },
-    #                     type: "SPEKE", # accepts SPEKE, STATIC_KEY
+    #                     type: "SPEKE", # required, accepts SPEKE, STATIC_KEY
     #                   },
     #                   manifest_compression: "GZIP", # accepts GZIP, NONE
     #                   manifest_duration_format: "FLOATING_POINT", # accepts FLOATING_POINT, INTEGER
-    #                   min_segment_length: 1,
+    #                   min_segment_length: 1, # required
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY
     #                   program_date_time: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   program_date_time_period: 1,
     #                   segment_control: "SINGLE_FILE", # accepts SINGLE_FILE, SEGMENTED_FILES
-    #                   segment_length: 1,
+    #                   segment_length: 1, # required
     #                   segments_per_subdirectory: 1,
     #                   stream_inf_resolution: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   timed_metadata_id_3_frame: "NONE", # accepts NONE, PRIV, TDRL
@@ -11887,20 +12391,20 @@ module Aws::MediaConvert
     #                 },
     #                 ms_smooth_group_settings: {
     #                   audio_deduplication: "COMBINE_DUPLICATE_STREAMS", # accepts COMBINE_DUPLICATE_STREAMS, NONE
-    #                   destination: "__string",
+    #                   destination: "__stringPatternS3",
     #                   encryption: {
-    #                     speke_key_provider: {
-    #                       resource_id: "__string",
-    #                       system_ids: ["__string"],
-    #                       url: "__string",
+    #                     speke_key_provider: { # required
+    #                       resource_id: "__string", # required
+    #                       system_ids: ["__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12"], # required
+    #                       url: "__stringPatternHttps", # required
     #                     },
     #                   },
-    #                   fragment_length: 1,
+    #                   fragment_length: 1, # required
     #                   manifest_encoding: "UTF8", # accepts UTF8, UTF16
     #                 },
-    #                 type: "HLS_GROUP_SETTINGS", # accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS
+    #                 type: "HLS_GROUP_SETTINGS", # required, accepts HLS_GROUP_SETTINGS, DASH_ISO_GROUP_SETTINGS, FILE_GROUP_SETTINGS, MS_SMOOTH_GROUP_SETTINGS, CMAF_GROUP_SETTINGS
     #               },
-    #               outputs: [
+    #               outputs: [ # required
     #                 {
     #                   audio_descriptions: [
     #                     {
@@ -11915,15 +12419,15 @@ module Aws::MediaConvert
     #                       audio_source_name: "__string",
     #                       audio_type: 1,
     #                       audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #                       codec_settings: {
+    #                       codec_settings: { # required
     #                         aac_settings: {
     #                           audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                           bitrate: 1,
     #                           codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                           coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                           coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                           rate_control_mode: "CBR", # accepts CBR, VBR
     #                           raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                           sample_rate: 1,
+    #                           sample_rate: 1, # required
     #                           specification: "MPEG2", # accepts MPEG2, MPEG4
     #                           vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #                         },
@@ -11942,7 +12446,7 @@ module Aws::MediaConvert
     #                           channels: 1,
     #                           sample_rate: 1,
     #                         },
-    #                         codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                         codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #                         eac_3_settings: {
     #                           attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                           bitrate: 1,
@@ -11974,39 +12478,40 @@ module Aws::MediaConvert
     #                         wav_settings: {
     #                           bit_depth: 1,
     #                           channels: 1,
+    #                           format: "RIFF", # accepts RIFF, RF64
     #                           sample_rate: 1,
     #                         },
     #                       },
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                       language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                       remix_settings: {
-    #                         channel_mapping: {
-    #                           output_channels: [
+    #                         channel_mapping: { # required
+    #                           output_channels: [ # required
     #                             {
-    #                               input_channels: [1],
+    #                               input_channels: [1], # required
     #                             },
     #                           ],
     #                         },
-    #                         channels_in: 1,
-    #                         channels_out: 1,
+    #                         channels_in: 1, # required
+    #                         channels_out: 1, # required
     #                       },
-    #                       stream_name: "__string",
+    #                       stream_name: "__stringPatternWS",
     #                     },
     #                   ],
     #                   caption_descriptions: [
     #                     {
-    #                       caption_selector_name: "__string",
-    #                       destination_settings: {
+    #                       caption_selector_name: "__stringMin1", # required
+    #                       destination_settings: { # required
     #                         burnin_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                           alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                           font_opacity: 1,
+    #                           font_opacity: 1, # required
     #                           font_resolution: 1,
     #                           font_size: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                           outline_size: 1,
+    #                           outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           outline_size: 1, # required
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
@@ -12015,17 +12520,17 @@ module Aws::MediaConvert
     #                           x_position: 1,
     #                           y_position: 1,
     #                         },
-    #                         destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                         destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #                         dvb_sub_destination_settings: {
-    #                           alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                           alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                           background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           background_opacity: 1,
     #                           font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                           font_opacity: 1,
+    #                           font_opacity: 1, # required
     #                           font_resolution: 1,
     #                           font_size: 1,
-    #                           outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                           outline_size: 1,
+    #                           outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                           outline_size: 1, # required
     #                           shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                           shadow_opacity: 1,
     #                           shadow_x_offset: 1,
@@ -12038,7 +12543,7 @@ module Aws::MediaConvert
     #                           framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                         },
     #                         teletext_destination_settings: {
-    #                           page_number: "__string",
+    #                           page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                         },
     #                         ttml_destination_settings: {
     #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -12049,7 +12554,7 @@ module Aws::MediaConvert
     #                     },
     #                   ],
     #                   container_settings: {
-    #                     container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #                     container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #                     f4v_settings: {
     #                       moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #                     },
@@ -12060,19 +12565,19 @@ module Aws::MediaConvert
     #                       bitrate: 1,
     #                       buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #                       dvb_nit_settings: {
-    #                         network_id: 1,
-    #                         network_name: "__string",
-    #                         nit_interval: 1,
+    #                         network_id: 1, # required
+    #                         network_name: "__stringMin1Max256", # required
+    #                         nit_interval: 1, # required
     #                       },
     #                       dvb_sdt_settings: {
     #                         output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                         sdt_interval: 1,
-    #                         service_name: "__string",
-    #                         service_provider_name: "__string",
+    #                         service_name: "__stringMin1Max256",
+    #                         service_provider_name: "__stringMin1Max256",
     #                       },
     #                       dvb_sub_pids: [1],
     #                       dvb_tdt_settings: {
-    #                         tdt_interval: 1,
+    #                         tdt_interval: 1, # required
     #                       },
     #                       dvb_teletext_pid: 1,
     #                       ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -12133,7 +12638,7 @@ module Aws::MediaConvert
     #                     },
     #                   },
     #                   extension: "__string",
-    #                   name_modifier: "__string",
+    #                   name_modifier: "__stringMin1",
     #                   output_settings: {
     #                     hls_settings: {
     #                       audio_group_id: "__string",
@@ -12143,12 +12648,12 @@ module Aws::MediaConvert
     #                       segment_modifier: "__string",
     #                     },
     #                   },
-    #                   preset: "__string",
+    #                   preset: "__stringMin0",
     #                   video_description: {
     #                     afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #                     anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #                     codec_settings: {
-    #                       codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #                     codec_settings: { # required
+    #                       codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #                       frame_capture_settings: {
     #                         framerate_denominator: 1,
     #                         framerate_numerator: 1,
@@ -12231,6 +12736,7 @@ module Aws::MediaConvert
     #                         temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #                         tiles: "DISABLED", # accepts DISABLED, ENABLED
     #                         unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #                         write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #                       },
     #                       mpeg_2_settings: {
     #                         adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -12280,19 +12786,19 @@ module Aws::MediaConvert
     #                     },
     #                     color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #                     crop: {
-    #                       height: 1,
-    #                       width: 1,
-    #                       x: 1,
-    #                       y: 1,
+    #                       height: 1, # required
+    #                       width: 1, # required
+    #                       x: 1, # required
+    #                       y: 1, # required
     #                     },
     #                     drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #                     fixed_afd: 1,
     #                     height: 1,
     #                     position: {
-    #                       height: 1,
-    #                       width: 1,
-    #                       x: 1,
-    #                       y: 1,
+    #                       height: 1, # required
+    #                       width: 1, # required
+    #                       x: 1, # required
+    #                       y: 1, # required
     #                     },
     #                     respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #                     scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -12308,8 +12814,8 @@ module Aws::MediaConvert
     #                           blue_primary_y: 1,
     #                           green_primary_x: 1,
     #                           green_primary_y: 1,
-    #                           max_content_light_level: 1,
-    #                           max_frame_average_light_level: 1,
+    #                           max_content_light_level: 1, # required
+    #                           max_frame_average_light_level: 1, # required
     #                           max_luminance: 1,
     #                           min_luminance: 1,
     #                           red_primary_x: 1,
@@ -12326,24 +12832,24 @@ module Aws::MediaConvert
     #                         mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #                       },
     #                       image_inserter: {
-    #                         insertable_images: [
+    #                         insertable_images: [ # required
     #                           {
     #                             duration: 1,
     #                             fade_in: 1,
     #                             fade_out: 1,
     #                             height: 1,
-    #                             image_inserter_input: "__string",
-    #                             image_x: 1,
-    #                             image_y: 1,
-    #                             layer: 1,
-    #                             opacity: 1,
-    #                             start_time: "__string",
+    #                             image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                             image_x: 1, # required
+    #                             image_y: 1, # required
+    #                             layer: 1, # required
+    #                             opacity: 1, # required
+    #                             start_time: "__stringPattern01D20305D205D",
     #                             width: 1,
     #                           },
     #                         ],
     #                       },
     #                       noise_reducer: {
-    #                         filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                         filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #                         filter_settings: {
     #                           strength: 1,
     #                         },
@@ -12356,7 +12862,7 @@ module Aws::MediaConvert
     #                       timecode_burnin: {
     #                         font_size: 1,
     #                         position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #                         prefix: "__string",
+    #                         prefix: "__stringPattern",
     #                       },
     #                     },
     #                     width: 1,
@@ -12366,16 +12872,16 @@ module Aws::MediaConvert
     #             },
     #           ],
     #           timecode_config: {
-    #             anchor: "__string",
+    #             anchor: "__stringPattern010920405090509092",
     #             source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
-    #             start: "__string",
-    #             timestamp_offset: "__string",
+    #             start: "__stringPattern010920405090509092",
+    #             timestamp_offset: "__stringPattern0940191020191209301",
     #           },
     #           timed_metadata_insertion: {
-    #             id_3_insertions: [
+    #             id_3_insertions: [ # required
     #               {
-    #                 id_3: "__string",
-    #                 timecode: "__string",
+    #                 id_3: "__stringPatternAZaZ0902", # required
+    #                 timecode: "__stringPattern010920405090509092", # required
     #               },
     #             ],
     #           },
@@ -12454,15 +12960,15 @@ module Aws::MediaConvert
     #               audio_source_name: "__string",
     #               audio_type: 1,
     #               audio_type_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
-    #               codec_settings: {
+    #               codec_settings: { # required
     #                 aac_settings: {
     #                   audio_description_broadcaster_mix: "BROADCASTER_MIXED_AD", # accepts BROADCASTER_MIXED_AD, NORMAL
     #                   bitrate: 1,
     #                   codec_profile: "LC", # accepts LC, HEV1, HEV2
-    #                   coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
+    #                   coding_mode: "AD_RECEIVER_MIX", # required, accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1
     #                   rate_control_mode: "CBR", # accepts CBR, VBR
     #                   raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
-    #                   sample_rate: 1,
+    #                   sample_rate: 1, # required
     #                   specification: "MPEG2", # accepts MPEG2, MPEG4
     #                   vbr_quality: "LOW", # accepts LOW, MEDIUM_LOW, MEDIUM_HIGH, HIGH
     #                 },
@@ -12481,7 +12987,7 @@ module Aws::MediaConvert
     #                   channels: 1,
     #                   sample_rate: 1,
     #                 },
-    #                 codec: "AAC", # accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
+    #                 codec: "AAC", # required, accepts AAC, MP2, WAV, AIFF, AC3, EAC3, PASSTHROUGH
     #                 eac_3_settings: {
     #                   attenuation_control: "ATTENUATE_3_DB", # accepts ATTENUATE_3_DB, NONE
     #                   bitrate: 1,
@@ -12513,38 +13019,39 @@ module Aws::MediaConvert
     #                 wav_settings: {
     #                   bit_depth: 1,
     #                   channels: 1,
+    #                   format: "RIFF", # accepts RIFF, RF64
     #                   sample_rate: 1,
     #                 },
     #               },
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #               remix_settings: {
-    #                 channel_mapping: {
-    #                   output_channels: [
+    #                 channel_mapping: { # required
+    #                   output_channels: [ # required
     #                     {
-    #                       input_channels: [1],
+    #                       input_channels: [1], # required
     #                     },
     #                   ],
     #                 },
-    #                 channels_in: 1,
-    #                 channels_out: 1,
+    #                 channels_in: 1, # required
+    #                 channels_out: 1, # required
     #               },
-    #               stream_name: "__string",
+    #               stream_name: "__stringPatternWS",
     #             },
     #           ],
     #           caption_descriptions: [
     #             {
-    #               destination_settings: {
+    #               destination_settings: { # required
     #                 burnin_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                   alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   background_opacity: 1,
     #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                   font_opacity: 1,
+    #                   font_opacity: 1, # required
     #                   font_resolution: 1,
     #                   font_size: 1,
-    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                   outline_size: 1,
+    #                   outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                   outline_size: 1, # required
     #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
@@ -12553,17 +13060,17 @@ module Aws::MediaConvert
     #                   x_position: 1,
     #                   y_position: 1,
     #                 },
-    #                 destination_type: "BURN_IN", # accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
+    #                 destination_type: "BURN_IN", # required, accepts BURN_IN, DVB_SUB, EMBEDDED, SCC, SRT, TELETEXT, TTML, WEBVTT
     #                 dvb_sub_destination_settings: {
-    #                   alignment: "CENTERED", # accepts CENTERED, LEFT
+    #                   alignment: "CENTERED", # required, accepts CENTERED, LEFT
     #                   background_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   background_opacity: 1,
     #                   font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE
-    #                   font_opacity: 1,
+    #                   font_opacity: 1, # required
     #                   font_resolution: 1,
     #                   font_size: 1,
-    #                   outline_color: "BLACK", # accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
-    #                   outline_size: 1,
+    #                   outline_color: "BLACK", # required, accepts BLACK, WHITE, YELLOW, RED, GREEN, BLUE
+    #                   outline_size: 1, # required
     #                   shadow_color: "NONE", # accepts NONE, BLACK, WHITE
     #                   shadow_opacity: 1,
     #                   shadow_x_offset: 1,
@@ -12576,7 +13083,7 @@ module Aws::MediaConvert
     #                   framerate: "FRAMERATE_23_97", # accepts FRAMERATE_23_97, FRAMERATE_24, FRAMERATE_29_97_DROPFRAME, FRAMERATE_29_97_NON_DROPFRAME
     #                 },
     #                 teletext_destination_settings: {
-    #                   page_number: "__string",
+    #                   page_number: "__stringMin3Max3Pattern1809aFAF09aEAE",
     #                 },
     #                 ttml_destination_settings: {
     #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
@@ -12587,7 +13094,7 @@ module Aws::MediaConvert
     #             },
     #           ],
     #           container_settings: {
-    #             container: "F4V", # accepts F4V, ISMV, M2TS, M3U8, MOV, MP4, MPD, MXF, RAW
+    #             container: "F4V", # required, accepts F4V, ISMV, M2TS, M3U8, CMFC, MOV, MP4, MPD, MXF, RAW
     #             f4v_settings: {
     #               moov_placement: "PROGRESSIVE_DOWNLOAD", # accepts PROGRESSIVE_DOWNLOAD, NORMAL
     #             },
@@ -12598,19 +13105,19 @@ module Aws::MediaConvert
     #               bitrate: 1,
     #               buffer_model: "MULTIPLEX", # accepts MULTIPLEX, NONE
     #               dvb_nit_settings: {
-    #                 network_id: 1,
-    #                 network_name: "__string",
-    #                 nit_interval: 1,
+    #                 network_id: 1, # required
+    #                 network_name: "__stringMin1Max256", # required
+    #                 nit_interval: 1, # required
     #               },
     #               dvb_sdt_settings: {
     #                 output_sdt: "SDT_FOLLOW", # accepts SDT_FOLLOW, SDT_FOLLOW_IF_PRESENT, SDT_MANUAL, SDT_NONE
     #                 sdt_interval: 1,
-    #                 service_name: "__string",
-    #                 service_provider_name: "__string",
+    #                 service_name: "__stringMin1Max256",
+    #                 service_provider_name: "__stringMin1Max256",
     #               },
     #               dvb_sub_pids: [1],
     #               dvb_tdt_settings: {
-    #                 tdt_interval: 1,
+    #                 tdt_interval: 1, # required
     #               },
     #               dvb_teletext_pid: 1,
     #               ebp_audio_interval: "VIDEO_AND_FIXED_INTERVALS", # accepts VIDEO_AND_FIXED_INTERVALS, VIDEO_INTERVAL
@@ -12673,8 +13180,8 @@ module Aws::MediaConvert
     #           video_description: {
     #             afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #             anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #             codec_settings: {
-    #               codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #             codec_settings: { # required
+    #               codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #               frame_capture_settings: {
     #                 framerate_denominator: 1,
     #                 framerate_numerator: 1,
@@ -12757,6 +13264,7 @@ module Aws::MediaConvert
     #                 temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #                 tiles: "DISABLED", # accepts DISABLED, ENABLED
     #                 unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #                 write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #               },
     #               mpeg_2_settings: {
     #                 adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -12806,19 +13314,19 @@ module Aws::MediaConvert
     #             },
     #             color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #             crop: {
-    #               height: 1,
-    #               width: 1,
-    #               x: 1,
-    #               y: 1,
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
     #             },
     #             drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #             fixed_afd: 1,
     #             height: 1,
     #             position: {
-    #               height: 1,
-    #               width: 1,
-    #               x: 1,
-    #               y: 1,
+    #               height: 1, # required
+    #               width: 1, # required
+    #               x: 1, # required
+    #               y: 1, # required
     #             },
     #             respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #             scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -12834,8 +13342,8 @@ module Aws::MediaConvert
     #                   blue_primary_y: 1,
     #                   green_primary_x: 1,
     #                   green_primary_y: 1,
-    #                   max_content_light_level: 1,
-    #                   max_frame_average_light_level: 1,
+    #                   max_content_light_level: 1, # required
+    #                   max_frame_average_light_level: 1, # required
     #                   max_luminance: 1,
     #                   min_luminance: 1,
     #                   red_primary_x: 1,
@@ -12852,24 +13360,24 @@ module Aws::MediaConvert
     #                 mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #               },
     #               image_inserter: {
-    #                 insertable_images: [
+    #                 insertable_images: [ # required
     #                   {
     #                     duration: 1,
     #                     fade_in: 1,
     #                     fade_out: 1,
     #                     height: 1,
-    #                     image_inserter_input: "__string",
-    #                     image_x: 1,
-    #                     image_y: 1,
-    #                     layer: 1,
-    #                     opacity: 1,
-    #                     start_time: "__string",
+    #                     image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                     image_x: 1, # required
+    #                     image_y: 1, # required
+    #                     layer: 1, # required
+    #                     opacity: 1, # required
+    #                     start_time: "__stringPattern01D20305D205D",
     #                     width: 1,
     #                   },
     #                 ],
     #               },
     #               noise_reducer: {
-    #                 filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #                 filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #                 filter_settings: {
     #                   strength: 1,
     #                 },
@@ -12882,7 +13390,7 @@ module Aws::MediaConvert
     #               timecode_burnin: {
     #                 font_size: 1,
     #                 position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #                 prefix: "__string",
+    #                 prefix: "__stringPattern",
     #               },
     #             },
     #             width: 1,
@@ -12996,7 +13504,7 @@ module Aws::MediaConvert
     #   data as a hash:
     #
     #       {
-    #         codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #         codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #         frame_capture_settings: {
     #           framerate_denominator: 1,
     #           framerate_numerator: 1,
@@ -13079,6 +13587,7 @@ module Aws::MediaConvert
     #           temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #           tiles: "DISABLED", # accepts DISABLED, ENABLED
     #           unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #           write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #         },
     #         mpeg_2_settings: {
     #           adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -13175,8 +13684,8 @@ module Aws::MediaConvert
     #       {
     #         afd_signaling: "NONE", # accepts NONE, AUTO, FIXED
     #         anti_alias: "DISABLED", # accepts DISABLED, ENABLED
-    #         codec_settings: {
-    #           codec: "FRAME_CAPTURE", # accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
+    #         codec_settings: { # required
+    #           codec: "FRAME_CAPTURE", # required, accepts FRAME_CAPTURE, H_264, H_265, MPEG2, PRORES
     #           frame_capture_settings: {
     #             framerate_denominator: 1,
     #             framerate_numerator: 1,
@@ -13259,6 +13768,7 @@ module Aws::MediaConvert
     #             temporal_ids: "DISABLED", # accepts DISABLED, ENABLED
     #             tiles: "DISABLED", # accepts DISABLED, ENABLED
     #             unregistered_sei_timecode: "DISABLED", # accepts DISABLED, ENABLED
+    #             write_mp_4_packaging_type: "HVC1", # accepts HVC1, HEV1
     #           },
     #           mpeg_2_settings: {
     #             adaptive_quantization: "OFF", # accepts OFF, LOW, MEDIUM, HIGH
@@ -13308,19 +13818,19 @@ module Aws::MediaConvert
     #         },
     #         color_metadata: "IGNORE", # accepts IGNORE, INSERT
     #         crop: {
-    #           height: 1,
-    #           width: 1,
-    #           x: 1,
-    #           y: 1,
+    #           height: 1, # required
+    #           width: 1, # required
+    #           x: 1, # required
+    #           y: 1, # required
     #         },
     #         drop_frame_timecode: "DISABLED", # accepts DISABLED, ENABLED
     #         fixed_afd: 1,
     #         height: 1,
     #         position: {
-    #           height: 1,
-    #           width: 1,
-    #           x: 1,
-    #           y: 1,
+    #           height: 1, # required
+    #           width: 1, # required
+    #           x: 1, # required
+    #           y: 1, # required
     #         },
     #         respond_to_afd: "NONE", # accepts NONE, RESPOND, PASSTHROUGH
     #         scaling_behavior: "DEFAULT", # accepts DEFAULT, STRETCH_TO_OUTPUT
@@ -13336,8 +13846,8 @@ module Aws::MediaConvert
     #               blue_primary_y: 1,
     #               green_primary_x: 1,
     #               green_primary_y: 1,
-    #               max_content_light_level: 1,
-    #               max_frame_average_light_level: 1,
+    #               max_content_light_level: 1, # required
+    #               max_frame_average_light_level: 1, # required
     #               max_luminance: 1,
     #               min_luminance: 1,
     #               red_primary_x: 1,
@@ -13354,24 +13864,24 @@ module Aws::MediaConvert
     #             mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #           },
     #           image_inserter: {
-    #             insertable_images: [
+    #             insertable_images: [ # required
     #               {
     #                 duration: 1,
     #                 fade_in: 1,
     #                 fade_out: 1,
     #                 height: 1,
-    #                 image_inserter_input: "__string",
-    #                 image_x: 1,
-    #                 image_y: 1,
-    #                 layer: 1,
-    #                 opacity: 1,
-    #                 start_time: "__string",
+    #                 image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #                 image_x: 1, # required
+    #                 image_y: 1, # required
+    #                 layer: 1, # required
+    #                 opacity: 1, # required
+    #                 start_time: "__stringPattern01D20305D205D",
     #                 width: 1,
     #               },
     #             ],
     #           },
     #           noise_reducer: {
-    #             filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #             filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #             filter_settings: {
     #               strength: 1,
     #             },
@@ -13384,7 +13894,7 @@ module Aws::MediaConvert
     #           timecode_burnin: {
     #             font_size: 1,
     #             position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #             prefix: "__string",
+    #             prefix: "__stringPattern",
     #           },
     #         },
     #         width: 1,
@@ -13392,12 +13902,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] afd_signaling
     #   This setting only applies to H.264 and MPEG2 outputs. Use Insert AFD
-    #   signaling (AfdSignaling) to whether there are AFD values in the
-    #   output video data and what those values are. * Choose None to
-    #   remove all AFD values from this output. * Choose Fixed to ignore
-    #   input AFD values and instead encode the value specified in the job.
-    #   * Choose Auto to calculate output AFD values based on the input AFD
-    #   scaler data.
+    #   signaling (AfdSignaling) to specify whether the service includes AFD
+    #   values in the output video data and what those values are. * Choose
+    #   None to remove all AFD values from this output. * Choose Fixed to
+    #   ignore input AFD values and instead encode the value specified in
+    #   the job. * Choose Auto to calculate output AFD values based on the
+    #   input AFD scaler data.
     #   @return [String]
     #
     # @!attribute [rw] anti_alias
@@ -13487,13 +13997,20 @@ module Aws::MediaConvert
     #   @return [Integer]
     #
     # @!attribute [rw] timecode_insertion
-    #   Enable Timecode insertion to include timecode information in this
-    #   output. Do this in the API by setting (VideoTimecodeInsertion) to
-    #   (PIC\_TIMING\_SEI). To get timecodes to appear correctly in your
-    #   output, also set up the timecode configuration for your job in the
-    #   input settings. Only enable Timecode insertion when the input
-    #   framerate is identical to output framerate. Disable this setting to
-    #   remove the timecode from the output. Default is disabled.
+    #   Applies only to H.264, H.265, MPEG2, and ProRes outputs. Only enable
+    #   Timecode insertion when the input framerate is identical to the
+    #   output framerate. To include timecodes in this output, set Timecode
+    #   insertion (VideoTimecodeInsertion) to PIC\_TIMING\_SEI. To leave
+    #   them out, set it to DISABLED. Default is DISABLED. When the service
+    #   inserts timecodes in an output, by default, it uses any embedded
+    #   timecodes from the input. If none are present, the service will set
+    #   the timecode for the first output frame to zero. To change this
+    #   default behavior, adjust the settings under Timecode configuration
+    #   (TimecodeConfig). In the console, these settings are located under
+    #   Job > Job settings > Timecode configuration. Note - Timecode source
+    #   under input settings (InputTimecodeSource) does not affect the
+    #   timecodes that are inserted in the output. Source under Job settings
+    #   > Timecode configuration (TimecodeSource) does.
     #   @return [String]
     #
     # @!attribute [rw] video_preprocessors
@@ -13564,8 +14081,8 @@ module Aws::MediaConvert
     #             blue_primary_y: 1,
     #             green_primary_x: 1,
     #             green_primary_y: 1,
-    #             max_content_light_level: 1,
-    #             max_frame_average_light_level: 1,
+    #             max_content_light_level: 1, # required
+    #             max_frame_average_light_level: 1, # required
     #             max_luminance: 1,
     #             min_luminance: 1,
     #             red_primary_x: 1,
@@ -13582,24 +14099,24 @@ module Aws::MediaConvert
     #           mode: "DEINTERLACE", # accepts DEINTERLACE, INVERSE_TELECINE, ADAPTIVE
     #         },
     #         image_inserter: {
-    #           insertable_images: [
+    #           insertable_images: [ # required
     #             {
     #               duration: 1,
     #               fade_in: 1,
     #               fade_out: 1,
     #               height: 1,
-    #               image_inserter_input: "__string",
-    #               image_x: 1,
-    #               image_y: 1,
-    #               layer: 1,
-    #               opacity: 1,
-    #               start_time: "__string",
+    #               image_inserter_input: "__stringMin14PatternS3BmpBMPPngPNGTgaTGA", # required
+    #               image_x: 1, # required
+    #               image_y: 1, # required
+    #               layer: 1, # required
+    #               opacity: 1, # required
+    #               start_time: "__stringPattern01D20305D205D",
     #               width: 1,
     #             },
     #           ],
     #         },
     #         noise_reducer: {
-    #           filter: "BILATERAL", # accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
+    #           filter: "BILATERAL", # required, accepts BILATERAL, MEAN, GAUSSIAN, LANCZOS, SHARPEN, CONSERVE, SPATIAL
     #           filter_settings: {
     #             strength: 1,
     #           },
@@ -13612,7 +14129,7 @@ module Aws::MediaConvert
     #         timecode_burnin: {
     #           font_size: 1,
     #           position: "TOP_CENTER", # accepts TOP_CENTER, TOP_LEFT, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT
-    #           prefix: "__string",
+    #           prefix: "__stringPattern",
     #         },
     #       }
     #
@@ -13668,8 +14185,8 @@ module Aws::MediaConvert
     #           blue_primary_y: 1,
     #           green_primary_x: 1,
     #           green_primary_y: 1,
-    #           max_content_light_level: 1,
-    #           max_frame_average_light_level: 1,
+    #           max_content_light_level: 1, # required
+    #           max_frame_average_light_level: 1, # required
     #           max_luminance: 1,
     #           min_luminance: 1,
     #           red_primary_x: 1,
@@ -13682,27 +14199,38 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] color_space
-    #   Specifies the colorspace of an input. This setting works in tandem
-    #   with "Color Corrector":#color\_corrector >
-    #   color\_space\_conversion to determine if any conversion will be
-    #   performed.
+    #   If your input video has accurate color space metadata, or if you
+    #   don't know about color space, leave this set to the default value
+    #   FOLLOW. The service will automatically detect your input color
+    #   space. If your input video has metadata indicating the wrong color
+    #   space, or if your input video is missing color space metadata that
+    #   should be there, specify the accurate color space here. If you
+    #   choose HDR10, you can also correct inaccurate color space
+    #   coefficients, using the HDR master display information controls. You
+    #   must also set Color space usage (ColorSpaceUsage) to FORCE for the
+    #   service to use these values.
     #   @return [String]
     #
     # @!attribute [rw] color_space_usage
     #   There are two sources for color metadata, the input file and the job
-    #   configuration. This enum controls which takes precedence. FORCE:
-    #   System will use color metadata supplied by user, if any. If the user
-    #   does not supply color metadata the system will use data from the
-    #   source. FALLBACK: System will use color metadata from the source. If
-    #   source has no color metadata, the system will use user-supplied
-    #   color metadata values if available.
+    #   configuration (in the Color space and HDR master display informaiton
+    #   settings). The Color space usage setting controls which takes
+    #   precedence. FORCE: The system will use color metadata supplied by
+    #   user, if any. If the user does not supply color metadata, the system
+    #   will use data from the source. FALLBACK: The system will use color
+    #   metadata from the source. If source has no color metadata, the
+    #   system will use user-supplied color metadata values if available.
     #   @return [String]
     #
     # @!attribute [rw] hdr_10_metadata
-    #   Use the HDR master display (Hdr10Metadata) settings to provide
-    #   values for HDR color. These values vary depending on the input video
-    #   and must be provided by a color grader. Range is 0 to 50,000, each
-    #   increment represents 0.00002 in CIE1931 color coordinate.
+    #   Use the HDR master display (Hdr10Metadata) settings to correct HDR
+    #   metadata or to provide missing metadata. These values vary depending
+    #   on the input video and must be provided by a color grader. Range is
+    #   0 to 50,000, each increment represents 0.00002 in CIE1931 color
+    #   coordinate. Note that these settings are not color correction. Note
+    #   that if you are creating HDR outputs inside of an HLS CMAF package,
+    #   to comply with the Apple specification, you must use the HVC1 for
+    #   H.265 setting.
     #   @return [Types::Hdr10Metadata]
     #
     # @!attribute [rw] pid
@@ -13738,6 +14266,7 @@ module Aws::MediaConvert
     #       {
     #         bit_depth: 1,
     #         channels: 1,
+    #         format: "RIFF", # accepts RIFF, RF64
     #         sample_rate: 1,
     #       }
     #
@@ -13752,6 +14281,13 @@ module Aws::MediaConvert
     #   values are Mono, Stereo, 4-Channel, and 8-Channel, respectively.
     #   @return [Integer]
     #
+    # @!attribute [rw] format
+    #   The service defaults to using RIFF for WAV outputs. If your output
+    #   audio is likely to exceed 4 GB in file size, or if you otherwise
+    #   need the extended support of the RF64 format, set your output WAV
+    #   file format to RF64.
+    #   @return [String]
+    #
     # @!attribute [rw] sample_rate
     #   Sample rate in Hz.
     #   @return [Integer]
@@ -13761,6 +14297,7 @@ module Aws::MediaConvert
     class WavSettings < Struct.new(
       :bit_depth,
       :channels,
+      :format,
       :sample_rate)
       include Aws::Structure
     end

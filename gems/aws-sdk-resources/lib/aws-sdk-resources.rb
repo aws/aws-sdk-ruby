@@ -53,6 +53,7 @@ module Aws
   autoload :ECR, 'aws-sdk-ecr'
   autoload :ECS, 'aws-sdk-ecs'
   autoload :EFS, 'aws-sdk-efs'
+  autoload :EKS, 'aws-sdk-eks'
   autoload :EMR, 'aws-sdk-emr'
   autoload :ElastiCache, 'aws-sdk-elasticache'
   autoload :ElasticBeanstalk, 'aws-sdk-elasticbeanstalk'

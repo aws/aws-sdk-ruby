@@ -823,15 +823,19 @@ module Aws::MigrationHub
     #   address, it will then be required to call it with *both* the IP and
     #   MAC addresses to prevent overiding the MAC address.
     #
-    # * Note the instructions regarding the special use case of the
-    #   `ResourceAttributeList` parameter when specifying any "VM" related
-    #   value.
+    # * Note the instructions regarding the special use case of the [
+    #   `ResourceAttributeList` ][1] parameter when specifying any "VM"
+    #   related value.
     #
     # <note markdown="1"> Because this is an asynchronous call, it will always return 200,
     # whether an association occurs or not. To confirm if an association was
     # found based on the provided details, call `ListDiscoveredResources`.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList
     #
     # @option params [required, String] :progress_update_stream
     #   The name of the ProgressUpdateStream.
@@ -844,20 +848,30 @@ module Aws::MigrationHub
     #   be used to map the task to a resource in the Application Discovery
     #   Service (ADS)'s repository.
     #
-    #   <note markdown="1"> In the `ResourceAttribute` object array, the `Type` field is reserved
-    #   for the following values: `IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS |
-    #   FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH
-    #   | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER`, and the identifying value can
-    #   be a string up to 256 characters.
+    #   <note markdown="1"> Takes the object array of `ResourceAttribute` where the `Type` field
+    #   is reserved for the following values: `IPV4_ADDRESS | IPV6_ADDRESS |
+    #   MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE |
+    #   VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER` where the
+    #   identifying value can be a string up to 256 characters.
     #
     #    </note>
     #
-    #   If any "VM" related value is used for a `ResourceAttribute` object,
-    #   it is required that `VM_MANAGER_ID`, as a minimum, is always used. If
-    #   it is not used, the server will not be associated in the Application
-    #   Discovery Service (ADS)'s repository using any of the other "VM"
-    #   related values, and you will experience data loss. See the Example
-    #   section below for a use case of specifying "VM" related values.
+    #   * If any "VM" related value is set for a `ResourceAttribute` object,
+    #     it is required that `VM_MANAGER_ID`, as a minimum, is always set. If
+    #     `VM_MANAGER_ID` is not set, then all "VM" fields will be discarded
+    #     and "VM" fields will not be used for matching the migration task
+    #     to a server in Application Discovery Service (ADS)'s repository.
+    #     See the [Example][1] section below for a use case of specifying
+    #     "VM" related values.
+    #
+    #   * If a server you are trying to match has multiple IP or MAC
+    #     addresses, you should provide as many as you know in separate
+    #     type/value pairs passed to the `ResourceAttributeList` parameter to
+    #     maximize the chances of matching.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -901,7 +915,7 @@ module Aws::MigrationHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhub'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

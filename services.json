@@ -173,6 +173,9 @@
   "EFS": {
     "models": "elasticfilesystem/2015-02-01"
   },
+  "EKS": {
+    "models": "eks/2017-11-01"
+  },
   "EMR": {
     "models": "elasticmapreduce/2009-03-31"
   },

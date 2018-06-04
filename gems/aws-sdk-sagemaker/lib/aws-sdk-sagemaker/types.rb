@@ -112,6 +112,32 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # A list of categorical hyperparameters to tune.
+    #
+    # @note When making an API call, you may pass CategoricalParameterRange
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ParameterKey", # required
+    #         values: ["ParameterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the categorical hyperparameter to tune.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of the categories for the hyperparameter.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CategoricalParameterRange AWS API Documentation
+    #
+    class CategoricalParameterRange < Struct.new(
+      :name,
+      :values)
+      include Aws::Structure
+    end
+
     # A channel is a named input source that training algorithms can
     # consume.
     #
@@ -146,14 +172,14 @@ module Aws::SageMaker
     #
     # @!attribute [rw] compression_type
     #   If training data is compressed, the compression type. The default
-    #   value is `None`. `CompressionType` is used only in PIPE input mode.
-    #   In FILE mode, leave this field unset or set it to None.
+    #   value is `None`. `CompressionType` is used only in Pipe input mode.
+    #   In File mode, leave this field unset or set it to None.
     #   @return [String]
     #
     # @!attribute [rw] record_wrapper_type
     #   Specify RecordIO as the value when input data is in raw format but
-    #   the training algorithm requires the RecordIO format, in which
-    #   caseAmazon SageMaker wraps each individual S3 object in a RecordIO
+    #   the training algorithm requires the RecordIO format, in which case,
+    #   Amazon SageMaker wraps each individual S3 object in a RecordIO
     #   record. If the input data is already in RecordIO format, you don't
     #   need to set this attribute. For more information, see [Create a
     #   Dataset Using RecordIO][1].
@@ -228,6 +254,41 @@ module Aws::SageMaker
       :image,
       :model_data_url,
       :environment)
+      include Aws::Structure
+    end
+
+    # A list of continuous hyperparameters to tune.
+    #
+    # @note When making an API call, you may pass ContinuousParameterRange
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ParameterKey", # required
+    #         min_value: "ParameterValue", # required
+    #         max_value: "ParameterValue", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the continuous hyperparameter to tune.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_value
+    #   The minimum value for the hyperparameter. The tuning job uses
+    #   floating-point values between this value and `MaxValue`for tuning.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_value
+    #   The maximum value for the hyperparameter. The tuning job uses
+    #   floating-point values between `MinValue` value and this value for
+    #   tuning.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ContinuousParameterRange AWS API Documentation
+    #
+    class ContinuousParameterRange < Struct.new(
+      :name,
+      :min_value,
+      :max_value)
       include Aws::Structure
     end
 
@@ -363,6 +424,152 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateHyperParameterTuningJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #         hyper_parameter_tuning_job_config: { # required
+    #           strategy: "Bayesian", # required, accepts Bayesian
+    #           hyper_parameter_tuning_job_objective: { # required
+    #             type: "Maximize", # required, accepts Maximize, Minimize
+    #             metric_name: "MetricName", # required
+    #           },
+    #           resource_limits: { # required
+    #             max_number_of_training_jobs: 1, # required
+    #             max_parallel_training_jobs: 1, # required
+    #           },
+    #           parameter_ranges: { # required
+    #             integer_parameter_ranges: [
+    #               {
+    #                 name: "ParameterKey", # required
+    #                 min_value: "ParameterValue", # required
+    #                 max_value: "ParameterValue", # required
+    #               },
+    #             ],
+    #             continuous_parameter_ranges: [
+    #               {
+    #                 name: "ParameterKey", # required
+    #                 min_value: "ParameterValue", # required
+    #                 max_value: "ParameterValue", # required
+    #               },
+    #             ],
+    #             categorical_parameter_ranges: [
+    #               {
+    #                 name: "ParameterKey", # required
+    #                 values: ["ParameterValue"], # required
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         training_job_definition: { # required
+    #           static_hyper_parameters: {
+    #             "ParameterKey" => "ParameterValue",
+    #           },
+    #           algorithm_specification: { # required
+    #             training_image: "AlgorithmImage", # required
+    #             training_input_mode: "Pipe", # required, accepts Pipe, File
+    #             metric_definitions: [
+    #               {
+    #                 name: "MetricName", # required
+    #                 regex: "MetricRegex", # required
+    #               },
+    #             ],
+    #           },
+    #           role_arn: "RoleArn", # required
+    #           input_data_config: [ # required
+    #             {
+    #               channel_name: "ChannelName", # required
+    #               data_source: { # required
+    #                 s3_data_source: { # required
+    #                   s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #                   s3_uri: "S3Uri", # required
+    #                   s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #                 },
+    #               },
+    #               content_type: "ContentType",
+    #               compression_type: "None", # accepts None, Gzip
+    #               record_wrapper_type: "None", # accepts None, RecordIO
+    #             },
+    #           ],
+    #           vpc_config: {
+    #             security_group_ids: ["SecurityGroupId"], # required
+    #             subnets: ["SubnetId"], # required
+    #           },
+    #           output_data_config: { # required
+    #             kms_key_id: "KmsKeyId",
+    #             s3_output_path: "S3Uri", # required
+    #           },
+    #           resource_config: { # required
+    #             instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #             instance_count: 1, # required
+    #             volume_size_in_gb: 1, # required
+    #             volume_kms_key_id: "KmsKeyId",
+    #           },
+    #           stopping_condition: { # required
+    #             max_runtime_in_seconds: 1,
+    #           },
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of the tuning job. This name is the prefix for the names of
+    #   all training jobs that this tuning job launches. The name must be
+    #   unique within the same AWS account and AWS Region. Names are not
+    #   case sensitive, and must be between 1-32 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_config
+    #   The object that describes the tuning job, including the search
+    #   strategy, metric used to evaluate training jobs, ranges of
+    #   parameters to search, and resource limits for the tuning job.
+    #   @return [Types::HyperParameterTuningJobConfig]
+    #
+    # @!attribute [rw] training_job_definition
+    #   The object that describes the training jobs that this tuning job
+    #   launches, including static hyperparameters, input data
+    #   configuration, output data configuration, resource configuration,
+    #   and stopping condition.
+    #   @return [Types::HyperParameterTrainingJobDefinition]
+    #
+    # @!attribute [rw] tags
+    #   An array of key-value pairs. You can use tags to categorize your AWS
+    #   resources in different ways, for example, by purpose, owner, or
+    #   environment. For more information, see [Using Cost Allocation
+    #   Tags][1] in the *AWS Billing and Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com//awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHyperParameterTuningJobRequest AWS API Documentation
+    #
+    class CreateHyperParameterTuningJobRequest < Struct.new(
+      :hyper_parameter_tuning_job_name,
+      :hyper_parameter_tuning_job_config,
+      :training_job_definition,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hyper_parameter_tuning_job_arn
+    #   The Amazon Resource Name (ARN) of the tuning job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHyperParameterTuningJobResponse AWS API Documentation
+    #
+    class CreateHyperParameterTuningJobResponse < Struct.new(
+      :hyper_parameter_tuning_job_arn)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateModelInput
     #   data as a hash:
     #
@@ -406,6 +613,11 @@ module Aws::SageMaker
     #   of model hosting. For more information, see [Amazon SageMaker
     #   Roles][1].
     #
+    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
+    #   API must have the `iam:PassRole` permission.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
@@ -423,8 +635,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] vpc_config
     #   A object that specifies the VPC that you want your model to connect
-    #   to. Control access to and from your training container by
-    #   configuring the VPC. For more information, see host-vpc.
+    #   to. Control access to and from your model container by configuring
+    #   the VPC. For more information, see host-vpc.
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput AWS API Documentation
@@ -495,6 +707,11 @@ module Aws::SageMaker
     #   Amazon SageMaker service principal (sagemaker.amazonaws.com)
     #   permissions to assume this role. For more information, see [Amazon
     #   SageMaker Roles][1].
+    #
+    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
+    #   API must have the `iam:PassRole` permission.
+    #
+    #    </note>
     #
     #
     #
@@ -702,9 +919,9 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameters
-    #   Algorithm-specific parameters. You set hyperparameters before you
-    #   start the learning process. Hyperparameters influence the quality of
-    #   the model. For a list of hyperparameters for each training algorithm
+    #   Algorithm-specific parameters that influence the quality of the
+    #   model. You set hyperparameters before you start the learning
+    #   process. For a list of hyperparameters for each training algorithm
     #   provided by Amazon SageMaker, see [Algorithms][1].
     #
     #   You can specify a maximum of 100 hyperparameters. Each
@@ -738,6 +955,11 @@ module Aws::SageMaker
     #   logs to Amazon CloudWatch Logs, and publish metrics to Amazon
     #   CloudWatch. You grant permissions for all of these tasks to an IAM
     #   role. For more information, see [Amazon SageMaker Roles][1].
+    #
+    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
+    #   API must have the `iam:PassRole` permission.
+    #
+    #    </note>
     #
     #
     #
@@ -1097,6 +1319,96 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeHyperParameterTuningJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #       }
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of the tuning job to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJobRequest AWS API Documentation
+    #
+    class DescribeHyperParameterTuningJobRequest < Struct.new(
+      :hyper_parameter_tuning_job_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of the tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_arn
+    #   The Amazon Resource Name (ARN) of the tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_config
+    #   The object that specifies the configuration of the tuning job.
+    #   @return [Types::HyperParameterTuningJobConfig]
+    #
+    # @!attribute [rw] training_job_definition
+    #   The object that specifies the definition of the training jobs that
+    #   this tuning job launches.
+    #   @return [Types::HyperParameterTrainingJobDefinition]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_status
+    #   The status of the tuning job: InProgress, Completed, Failed,
+    #   Stopping, or Stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the tuning job started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_end_time
+    #   The date and time that the tuning job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the status of the tuning job was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_job_status_counters
+    #   The object that specifies the number of training jobs, categorized
+    #   by status, that this tuning job launched.
+    #   @return [Types::TrainingJobStatusCounters]
+    #
+    # @!attribute [rw] objective_status_counters
+    #   The object that specifies the number of training jobs, categorized
+    #   by the status of their final objective metric, that this tuning job
+    #   launched.
+    #   @return [Types::ObjectiveStatusCounters]
+    #
+    # @!attribute [rw] best_training_job
+    #   A object that describes the training job that completed with the
+    #   best current .
+    #   @return [Types::HyperParameterTrainingJobSummary]
+    #
+    # @!attribute [rw] failure_reason
+    #   If the tuning job failed, the reason it failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJobResponse AWS API Documentation
+    #
+    class DescribeHyperParameterTuningJobResponse < Struct.new(
+      :hyper_parameter_tuning_job_name,
+      :hyper_parameter_tuning_job_arn,
+      :hyper_parameter_tuning_job_config,
+      :training_job_definition,
+      :hyper_parameter_tuning_job_status,
+      :creation_time,
+      :hyper_parameter_tuning_end_time,
+      :last_modified_time,
+      :training_job_status_counters,
+      :objective_status_counters,
+      :best_training_job,
+      :failure_reason)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeModelInput
     #   data as a hash:
     #
@@ -1351,6 +1663,12 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) of the training job.
     #   @return [String]
     #
+    # @!attribute [rw] tuning_job_arn
+    #   The Amazon Resource Name (ARN) of the associated hyperparameter
+    #   tuning job if the training job was launched by a hyperparameter
+    #   tuning job.
+    #   @return [String]
+    #
     # @!attribute [rw] model_artifacts
     #   Information about the Amazon S3 location that is configured for
     #   storing model artifacts.
@@ -1434,11 +1752,21 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] training_start_time
-    #   A timestamp that indicates when training started.
+    #   Indicates the time when the training job starts on training
+    #   instances. You are billed for the time interval between this time
+    #   and the value of `TrainingEndTime`. The start time in CloudWatch
+    #   Logs might be later than this time. The difference is due to the
+    #   time it takes to download the training data and to the size of the
+    #   training container.
     #   @return [Time]
     #
     # @!attribute [rw] training_end_time
-    #   A timestamp that indicates when model training ended.
+    #   Indicates the time when the training job ends on training instances.
+    #   You are billed for the time interval between the value of
+    #   `TrainingStartTime` and this time. For successful jobs and stopped
+    #   jobs, this is the time after model artifacts are uploaded. For
+    #   failed jobs, this is the time when Amazon SageMaker detects a job
+    #   failure.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -1451,6 +1779,7 @@ module Aws::SageMaker
     class DescribeTrainingJobResponse < Struct.new(
       :training_job_name,
       :training_job_arn,
+      :tuning_job_arn,
       :model_artifacts,
       :training_job_status,
       :secondary_status,
@@ -1555,6 +1884,491 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :endpoint_status)
+      include Aws::Structure
+    end
+
+    # Shows the final value for the objective metric for a training job that
+    # was launched by a hyperparameter tuning job. You define the objective
+    # metric in the `HyperParameterTuningJobObjective` parameter of
+    # HyperParameterTuningJobConfig.
+    #
+    # @!attribute [rw] type
+    #   Whether to minimize or maximize the objective metric. Valid values
+    #   are Minimize and Maximize.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the objective metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the objective metric.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/FinalHyperParameterTuningJobObjectiveMetric AWS API Documentation
+    #
+    class FinalHyperParameterTuningJobObjectiveMetric < Struct.new(
+      :type,
+      :metric_name,
+      :value)
+      include Aws::Structure
+    end
+
+    # Specifies which training algorithm to use for training jobs that a
+    # hyperparameter tuning job launches and the metrics to monitor.
+    #
+    # @note When making an API call, you may pass HyperParameterAlgorithmSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         training_image: "AlgorithmImage", # required
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         metric_definitions: [
+    #           {
+    #             name: "MetricName", # required
+    #             regex: "MetricRegex", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] training_image
+    #   The registry path of the Docker image that contains the training
+    #   algorithm. For information about Docker registry paths for built-in
+    #   algorithms, see sagemaker-algo-docker-registry-paths.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_input_mode
+    #   The input mode that the algorithm supports: File or Pipe. In File
+    #   input mode, Amazon SageMaker downloads the training data from Amazon
+    #   S3 to the storage volume that is attached to the training instance
+    #   and mounts the directory to the Docker volume for the training
+    #   container. In Pipe input mode, Amazon SageMaker streams data
+    #   directly from Amazon S3 to the container.
+    #
+    #   If you specify File mode, make sure that you provision the storage
+    #   volume that is attached to the training instance with enough
+    #   capacity to accommodate the training data downloaded from Amazon S3,
+    #   the model artifacts, and intermediate information.
+    #
+    #
+    #
+    #   For more information about input modes, see [Algorithms][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_definitions
+    #   An array of objects that specify the metrics that the algorithm
+    #   emits.
+    #   @return [Array<Types::MetricDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterAlgorithmSpecification AWS API Documentation
+    #
+    class HyperParameterAlgorithmSpecification < Struct.new(
+      :training_image,
+      :training_input_mode,
+      :metric_definitions)
+      include Aws::Structure
+    end
+
+    # Defines the training jobs launched by a hyperparameter tuning job.
+    #
+    # @note When making an API call, you may pass HyperParameterTrainingJobDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         static_hyper_parameters: {
+    #           "ParameterKey" => "ParameterValue",
+    #         },
+    #         algorithm_specification: { # required
+    #           training_image: "AlgorithmImage", # required
+    #           training_input_mode: "Pipe", # required, accepts Pipe, File
+    #           metric_definitions: [
+    #             {
+    #               name: "MetricName", # required
+    #               regex: "MetricRegex", # required
+    #             },
+    #           ],
+    #         },
+    #         role_arn: "RoleArn", # required
+    #         input_data_config: [ # required
+    #           {
+    #             channel_name: "ChannelName", # required
+    #             data_source: { # required
+    #               s3_data_source: { # required
+    #                 s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #                 s3_uri: "S3Uri", # required
+    #                 s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #               },
+    #             },
+    #             content_type: "ContentType",
+    #             compression_type: "None", # accepts None, Gzip
+    #             record_wrapper_type: "None", # accepts None, RecordIO
+    #           },
+    #         ],
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
+    #         output_data_config: { # required
+    #           kms_key_id: "KmsKeyId",
+    #           s3_output_path: "S3Uri", # required
+    #         },
+    #         resource_config: { # required
+    #           instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #           instance_count: 1, # required
+    #           volume_size_in_gb: 1, # required
+    #           volume_kms_key_id: "KmsKeyId",
+    #         },
+    #         stopping_condition: { # required
+    #           max_runtime_in_seconds: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] static_hyper_parameters
+    #   Specifies the values of hyperparameters that do not change for the
+    #   tuning job.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] algorithm_specification
+    #   The object that specifies the algorithm to use for the training jobs
+    #   that the tuning job launches.
+    #   @return [Types::HyperParameterAlgorithmSpecification]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   training jobs that the tuning job launches.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_data_config
+    #   An array of objects that specify the input for the training jobs
+    #   that the tuning job launches.
+    #   @return [Array<Types::Channel>]
+    #
+    # @!attribute [rw] vpc_config
+    #   The object that specifies the VPC that you want the training jobs
+    #   that this hyperparameter tuning job launches to connect to. Control
+    #   access to and from your training container by configuring the VPC.
+    #   For more information, see train-vpc.
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Specifies the path to the Amazon S3 bucket where you store model
+    #   artifacts from the training jobs that the tuning job launches.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] resource_config
+    #   The resources, including the compute instances and storage volumes,
+    #   to use for the training jobs that the tuning job launches.
+    #
+    #   Storage volumes store model artifacts and incremental states.
+    #   Training algorithms might also use storage volumes for scratch
+    #   space. If you want Amazon SageMaker to use the storage volume to
+    #   store the training data, choose `File` as the `TrainingInputMode` in
+    #   the algorithm specification. For distributed training algorithms,
+    #   specify an instance count greater than 1.
+    #   @return [Types::ResourceConfig]
+    #
+    # @!attribute [rw] stopping_condition
+    #   Sets a maximum duration for the training jobs that the tuning job
+    #   launches. Use this parameter to limit model training costs.
+    #
+    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
+    #   signal. This delays job termination for 120 seconds. Algorithms
+    #   might use this 120-second window to save the model artifacts.
+    #
+    #   When Amazon SageMaker terminates a job because the stopping
+    #   condition has been met, training algorithms provided by Amazon
+    #   SageMaker save the intermediate results of the job.
+    #   @return [Types::StoppingCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobDefinition AWS API Documentation
+    #
+    class HyperParameterTrainingJobDefinition < Struct.new(
+      :static_hyper_parameters,
+      :algorithm_specification,
+      :role_arn,
+      :input_data_config,
+      :vpc_config,
+      :output_data_config,
+      :resource_config,
+      :stopping_condition)
+      include Aws::Structure
+    end
+
+    # Specifies summary information about a training job.
+    #
+    # @!attribute [rw] training_job_name
+    #   The name of the training job.
+    #   @return [String]
+    #
+    # @!attribute [rw] training_job_arn
+    #   The Amazon Resource Name (ARN) of the training job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the training job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_start_time
+    #   The date and time that the training job started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_end_time
+    #   The date and time that the training job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_job_status
+    #   The status of the training job.
+    #   @return [String]
+    #
+    # @!attribute [rw] tuned_hyper_parameters
+    #   A list of the hyperparameters for which you specified ranges to
+    #   search.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason that the
+    #   @return [String]
+    #
+    # @!attribute [rw] final_hyper_parameter_tuning_job_objective_metric
+    #   The object that specifies the value of the objective metric of the
+    #   tuning job that launched this training job.
+    #   @return [Types::FinalHyperParameterTuningJobObjectiveMetric]
+    #
+    # @!attribute [rw] objective_status
+    #   The status of the objective metric for the training job:
+    #
+    #   * Succeeded: The final objective metric for the training job was
+    #     evaluated by the hyperparameter tuning job and used in the
+    #     hyperparameter tuning process.
+    #
+    #   ^
+    #   ^
+    #
+    #   * Pending: The training job is in progress and evaluation of its
+    #     final objective metric is pending.
+    #
+    #   ^
+    #   ^
+    #
+    #   * Failed: The final objective metric for the training job was not
+    #     evaluated, and was not used in the hyperparameter tuning process.
+    #     This typically occurs when the training job failed or did not emit
+    #     an objective metric.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTrainingJobSummary AWS API Documentation
+    #
+    class HyperParameterTrainingJobSummary < Struct.new(
+      :training_job_name,
+      :training_job_arn,
+      :creation_time,
+      :training_start_time,
+      :training_end_time,
+      :training_job_status,
+      :tuned_hyper_parameters,
+      :failure_reason,
+      :final_hyper_parameter_tuning_job_objective_metric,
+      :objective_status)
+      include Aws::Structure
+    end
+
+    # Configures a hyperparameter tuning job.
+    #
+    # @note When making an API call, you may pass HyperParameterTuningJobConfig
+    #   data as a hash:
+    #
+    #       {
+    #         strategy: "Bayesian", # required, accepts Bayesian
+    #         hyper_parameter_tuning_job_objective: { # required
+    #           type: "Maximize", # required, accepts Maximize, Minimize
+    #           metric_name: "MetricName", # required
+    #         },
+    #         resource_limits: { # required
+    #           max_number_of_training_jobs: 1, # required
+    #           max_parallel_training_jobs: 1, # required
+    #         },
+    #         parameter_ranges: { # required
+    #           integer_parameter_ranges: [
+    #             {
+    #               name: "ParameterKey", # required
+    #               min_value: "ParameterValue", # required
+    #               max_value: "ParameterValue", # required
+    #             },
+    #           ],
+    #           continuous_parameter_ranges: [
+    #             {
+    #               name: "ParameterKey", # required
+    #               min_value: "ParameterValue", # required
+    #               max_value: "ParameterValue", # required
+    #             },
+    #           ],
+    #           categorical_parameter_ranges: [
+    #             {
+    #               name: "ParameterKey", # required
+    #               values: ["ParameterValue"], # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] strategy
+    #   Specifies the search strategy for hyperparameters. Currently, the
+    #   only valid value is `Bayesian`.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_objective
+    #   The object that specifies the objective metric for this tuning job.
+    #   @return [Types::HyperParameterTuningJobObjective]
+    #
+    # @!attribute [rw] resource_limits
+    #   The object that specifies the maximum number of training jobs and
+    #   parallel training jobs for this tuning job.
+    #   @return [Types::ResourceLimits]
+    #
+    # @!attribute [rw] parameter_ranges
+    #   The object that specifies the ranges of hyperparameters that this
+    #   tuning job searches.
+    #   @return [Types::ParameterRanges]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobConfig AWS API Documentation
+    #
+    class HyperParameterTuningJobConfig < Struct.new(
+      :strategy,
+      :hyper_parameter_tuning_job_objective,
+      :resource_limits,
+      :parameter_ranges)
+      include Aws::Structure
+    end
+
+    # Defines the objective metric for a hyperparameter tuning job.
+    # Hyperparameter tuning uses the value of this metric to evaluate the
+    # training jobs it launches, and returns the training job that results
+    # in either the highest or lowest value for this metric, depending on
+    # the value you specify for the `Type` parameter.
+    #
+    # @note When making an API call, you may pass HyperParameterTuningJobObjective
+    #   data as a hash:
+    #
+    #       {
+    #         type: "Maximize", # required, accepts Maximize, Minimize
+    #         metric_name: "MetricName", # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   Whether to minimize or maximize the objective metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric to use for the objective metric.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobObjective AWS API Documentation
+    #
+    class HyperParameterTuningJobObjective < Struct.new(
+      :type,
+      :metric_name)
+      include Aws::Structure
+    end
+
+    # Provides summary information about a hyperparameter tuning job.
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of the tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_arn
+    #   The Amazon Resource Name (ARN) of the tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_status
+    #   The status of the tuning job.
+    #   @return [String]
+    #
+    # @!attribute [rw] strategy
+    #   Specifies the search strategy hyperparameter tuning uses to choose
+    #   which hyperparameters to use for each iteration. Currently, the only
+    #   valid value is Bayesian.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that the tuning job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] hyper_parameter_tuning_end_time
+    #   The date and time that the tuning job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the tuning job was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] training_job_status_counters
+    #   The object that specifies the numbers of training jobs, categorized
+    #   by status, that this tuning job launched.
+    #   @return [Types::TrainingJobStatusCounters]
+    #
+    # @!attribute [rw] objective_status_counters
+    #   The object that specifies the numbers of training jobs, categorized
+    #   by objective metric status, that this tuning job launched.
+    #   @return [Types::ObjectiveStatusCounters]
+    #
+    # @!attribute [rw] resource_limits
+    #   The object that specifies the maximum number of training jobs and
+    #   parallel training jobs allowed for this tuning job.
+    #   @return [Types::ResourceLimits]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobSummary AWS API Documentation
+    #
+    class HyperParameterTuningJobSummary < Struct.new(
+      :hyper_parameter_tuning_job_name,
+      :hyper_parameter_tuning_job_arn,
+      :hyper_parameter_tuning_job_status,
+      :strategy,
+      :creation_time,
+      :hyper_parameter_tuning_end_time,
+      :last_modified_time,
+      :training_job_status_counters,
+      :objective_status_counters,
+      :resource_limits)
+      include Aws::Structure
+    end
+
+    # For a hyperparameter of the integer type, specifies the range that a
+    # hyperparameter tuning job searches.
+    #
+    # @note When making an API call, you may pass IntegerParameterRange
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ParameterKey", # required
+    #         min_value: "ParameterValue", # required
+    #         max_value: "ParameterValue", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the hyperparameter to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] min_value
+    #   The minimum value of the hyperparameter to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_value
+    #   The maximum value of the hyperparameter to search.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/IntegerParameterRange AWS API Documentation
+    #
+    class IntegerParameterRange < Struct.new(
+      :name,
+      :min_value,
+      :max_value)
       include Aws::Structure
     end
 
@@ -1729,6 +2543,104 @@ module Aws::SageMaker
     #
     class ListEndpointsOutput < Struct.new(
       :endpoints,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListHyperParameterTuningJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         sort_by: "Name", # accepts Name, Status, CreationTime
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #         name_contains: "NameContains",
+    #         creation_time_after: Time.now,
+    #         creation_time_before: Time.now,
+    #         last_modified_time_after: Time.now,
+    #         last_modified_time_before: Time.now,
+    #         status_equals: "Completed", # accepts Completed, InProgress, Failed, Stopped, Stopping
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous `ListHyperParameterTuningJobs` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of tuning jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of tuning jobs to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort results by. The default is `Name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_contains
+    #   A string in the tuning job name. This filter returns only tuning
+    #   jobs whose name contains the specified string.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time_after
+    #   A filter that returns only tuning jobs that were created after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_time_before
+    #   A filter that returns only tuning jobs that were created before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_after
+    #   A filter that returns only tuning jobs that were modified after the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time_before
+    #   A filter that returns only tuning jobs that were modified before the
+    #   specified time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_equals
+    #   A filter that returns only tuning jobs with the specified status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHyperParameterTuningJobsRequest AWS API Documentation
+    #
+    class ListHyperParameterTuningJobsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :sort_by,
+      :sort_order,
+      :name_contains,
+      :creation_time_after,
+      :creation_time_before,
+      :last_modified_time_after,
+      :last_modified_time_before,
+      :status_equals)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] hyper_parameter_tuning_job_summaries
+    #   A list of objects that describe the tuning jobs that the
+    #   `ListHyperParameterTuningJobs` request returned.
+    #   @return [Array<Types::HyperParameterTuningJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of this `ListHyperParameterTuningJobs` request was
+    #   truncated, the response includes a `NextToken`. To retrieve the next
+    #   set of tuning jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHyperParameterTuningJobsResponse AWS API Documentation
+    #
+    class ListHyperParameterTuningJobsResponse < Struct.new(
+      :hyper_parameter_tuning_job_summaries,
       :next_token)
       include Aws::Structure
     end
@@ -2070,6 +2982,77 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTrainingJobsForHyperParameterTuningJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
+    #         sort_by: "Name", # accepts Name, CreationTime, Status, FinalObjectiveMetricValue
+    #         sort_order: "Ascending", # accepts Ascending, Descending
+    #       }
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of the tuning job whose training jobs you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous
+    #   `ListTrainingJobsForHyperParameterTuningJob` request was truncated,
+    #   the response includes a `NextToken`. To retrieve the next set of
+    #   training jobs, use the token in the next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of training jobs to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_equals
+    #   A filter that returns only training jobs with the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort results by. The default is `Name`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsForHyperParameterTuningJobRequest AWS API Documentation
+    #
+    class ListTrainingJobsForHyperParameterTuningJobRequest < Struct.new(
+      :hyper_parameter_tuning_job_name,
+      :next_token,
+      :max_results,
+      :status_equals,
+      :sort_by,
+      :sort_order)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] training_job_summaries
+    #   A list of objects that describe the training jobs that the
+    #   `ListTrainingJobsForHyperParameterTuningJob` request returned.
+    #   @return [Array<Types::HyperParameterTrainingJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the result of this `ListTrainingJobsForHyperParameterTuningJob`
+    #   request was truncated, the response includes a `NextToken`. To
+    #   retrieve the next set of training jobs, use the token in the next
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsForHyperParameterTuningJobResponse AWS API Documentation
+    #
+    class ListTrainingJobsForHyperParameterTuningJobResponse < Struct.new(
+      :training_job_summaries,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTrainingJobsRequest
     #   data as a hash:
     #
@@ -2117,8 +3100,8 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] name_contains
-    #   A string in the training job name. This filter returns only models
-    #   whose name contains the specified string.
+    #   A string in the training job name. This filter returns only training
+    #   jobs whose name contains the specified string.
     #   @return [String]
     #
     # @!attribute [rw] status_equals
@@ -2165,6 +3148,37 @@ module Aws::SageMaker
     class ListTrainingJobsResponse < Struct.new(
       :training_job_summaries,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Specifies a metric that the training algorithm writes to `stderr` or
+    # `stdout`. Amazon SageMakerHyperparamter tuning captures all defined
+    # metrics. You specify one metric that a hyperparameter tuning job uses
+    # as its objective metric to choose the best training job.
+    #
+    # @note When making an API call, you may pass MetricDefinition
+    #   data as a hash:
+    #
+    #       {
+    #         name: "MetricName", # required
+    #         regex: "MetricRegex", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] regex
+    #   A regular expression that searches the output of a training job and
+    #   gets the value of the metric. For more information about using
+    #   regular expressions to define metrics, see hpo-define-metrics.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDefinition AWS API Documentation
+    #
+    class MetricDefinition < Struct.new(
+      :name,
+      :regex)
       include Aws::Structure
     end
 
@@ -2327,6 +3341,39 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies the number of training jobs that this hyperparameter tuning
+    # job launched, categorized by the status of their objective metric. The
+    # objective metric status shows whether the final objective metric for
+    # the training job has been evaluated by the tuning job and used in the
+    # hyperparameter tuning process.
+    #
+    # @!attribute [rw] succeeded
+    #   The number of training jobs whose final objective metric was
+    #   evaluated by the hyperparameter tuning job and used in the
+    #   hyperparameter tuning process.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] pending
+    #   The number of training jobs that are in progress and pending
+    #   evaluation of their final objective metric.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed
+    #   The number of training jobs whose final objective metric was not
+    #   evaluated and used in the hyperparameter tuning process. This
+    #   typically occurs when the training job failed or did not emit an
+    #   objective metric.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ObjectiveStatusCounters AWS API Documentation
+    #
+    class ObjectiveStatusCounters < Struct.new(
+      :succeeded,
+      :pending,
+      :failed)
+      include Aws::Structure
+    end
+
     # Provides information about how to store model training results (model
     # artifacts).
     #
@@ -2343,11 +3390,10 @@ module Aws::SageMaker
     #   uses to encrypt the model artifacts at rest using Amazon S3
     #   server-side encryption.
     #
-    #   <note markdown="1"> If the configuration of the output S3 bucket requires server-side
-    #   encryption for objects, and you don't provide the KMS key ID,
-    #   Amazon SageMaker uses the default service key. For more information,
-    #   see [KMS-Managed Encryption Keys][1] in Amazon Simple Storage
-    #   Service developer guide.
+    #   <note markdown="1"> If you don't provide the KMS key ID, Amazon SageMaker uses the
+    #   default KMS key for Amazon S3 for your role's account. For more
+    #   information, see [KMS-Managed Encryption Keys][1] in Amazon Simple
+    #   Storage Service developer guide.
     #
     #    </note>
     #
@@ -2373,6 +3419,61 @@ module Aws::SageMaker
     class OutputDataConfig < Struct.new(
       :kms_key_id,
       :s3_output_path)
+      include Aws::Structure
+    end
+
+    # Specifies ranges of integer, continuous, and categorical
+    # hyperparameters that a hyperparameter tuning job searches.
+    #
+    # @note When making an API call, you may pass ParameterRanges
+    #   data as a hash:
+    #
+    #       {
+    #         integer_parameter_ranges: [
+    #           {
+    #             name: "ParameterKey", # required
+    #             min_value: "ParameterValue", # required
+    #             max_value: "ParameterValue", # required
+    #           },
+    #         ],
+    #         continuous_parameter_ranges: [
+    #           {
+    #             name: "ParameterKey", # required
+    #             min_value: "ParameterValue", # required
+    #             max_value: "ParameterValue", # required
+    #           },
+    #         ],
+    #         categorical_parameter_ranges: [
+    #           {
+    #             name: "ParameterKey", # required
+    #             values: ["ParameterValue"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] integer_parameter_ranges
+    #   The array of IntegerParameterRange objects that specify ranges of
+    #   integer hyperparameters that a hyperparameter tuning job searches.
+    #   @return [Array<Types::IntegerParameterRange>]
+    #
+    # @!attribute [rw] continuous_parameter_ranges
+    #   The array of ContinuousParameterRange objects that specify ranges of
+    #   continuous hyperparameters that a hyperparameter tuning job
+    #   searches.
+    #   @return [Array<Types::ContinuousParameterRange>]
+    #
+    # @!attribute [rw] categorical_parameter_ranges
+    #   The array of CategoricalParameterRange objects that specify ranges
+    #   of categorical hyperparameters that a hyperparameter tuning job
+    #   searches.
+    #   @return [Array<Types::CategoricalParameterRange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParameterRanges AWS API Documentation
+    #
+    class ParameterRanges < Struct.new(
+      :integer_parameter_ranges,
+      :continuous_parameter_ranges,
+      :categorical_parameter_ranges)
       include Aws::Structure
     end
 
@@ -2521,6 +3622,35 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies the maximum number of training jobs and parallel training
+    # jobs that a hyperparameter tuning job can launch.
+    #
+    # @note When making an API call, you may pass ResourceLimits
+    #   data as a hash:
+    #
+    #       {
+    #         max_number_of_training_jobs: 1, # required
+    #         max_parallel_training_jobs: 1, # required
+    #       }
+    #
+    # @!attribute [rw] max_number_of_training_jobs
+    #   The maximum number of training jobs that a hyperparameter tuning job
+    #   can launch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_parallel_training_jobs
+    #   The maximum number of concurrent training jobs that a hyperparameter
+    #   tuning job can launch.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceLimits AWS API Documentation
+    #
+    class ResourceLimits < Struct.new(
+      :max_number_of_training_jobs,
+      :max_parallel_training_jobs)
+      include Aws::Structure
+    end
+
     # Describes the S3 data source.
     #
     # @note When making an API call, you may pass S3DataSource
@@ -2633,6 +3763,24 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopHyperParameterTuningJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #       }
+    #
+    # @!attribute [rw] hyper_parameter_tuning_job_name
+    #   The name of the tuning job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopHyperParameterTuningJobRequest AWS API Documentation
+    #
+    class StopHyperParameterTuningJobRequest < Struct.new(
+      :hyper_parameter_tuning_job_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopNotebookInstanceInput
     #   data as a hash:
     #
@@ -2728,6 +3876,47 @@ module Aws::SageMaker
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # The numbers of training jobs launched by a hyperparameter tuning job,
+    # categorized by status.
+    #
+    # @!attribute [rw] completed
+    #   The number of completed training jobs launched by a hyperparameter
+    #   tuning job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] in_progress
+    #   The number of in-progress training jobs launched by a hyperparameter
+    #   tuning job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retryable_error
+    #   The number of training jobs that failed, but can be retried. A
+    #   failed training job can be retried only if it failed because an
+    #   internal service error occurred.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] non_retryable_error
+    #   The number of training jobs that failed and can't be retried. A
+    #   failed training job can't be retried if it failed because a client
+    #   error occurred.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stopped
+    #   The number of training jobs launched by a hyperparameter tuning job
+    #   that were manually stopped.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobStatusCounters AWS API Documentation
+    #
+    class TrainingJobStatusCounters < Struct.new(
+      :completed,
+      :in_progress,
+      :retryable_error,
+      :non_retryable_error,
+      :stopped)
       include Aws::Structure
     end
 
@@ -2866,8 +4055,18 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   Amazon Resource Name (ARN) of the IAM role to associate with the
-    #   instance.
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
+    #   can assume to access the notebook instance. For more information,
+    #   see [Amazon SageMaker Roles][1].
+    #
+    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
+    #   API must have the `iam:PassRole` permission.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceInput AWS API Documentation

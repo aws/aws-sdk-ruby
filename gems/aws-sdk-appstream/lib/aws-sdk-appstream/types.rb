@@ -526,8 +526,9 @@ module Aws::AppStream
     #         display_name: "DisplayName",
     #         storage_connectors: [
     #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
     #             resource_identifier: "ResourceIdentifier",
+    #             domains: ["Domain"],
     #           },
     #         ],
     #         redirect_url: "RedirectURL",
@@ -1904,14 +1905,15 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes a storage connector.
+    # Describes a connector to enable persistent storage for users.
     #
     # @note When making an API call, you may pass StorageConnector
     #   data as a hash:
     #
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
+    #         domains: ["Domain"],
     #       }
     #
     # @!attribute [rw] connector_type
@@ -1922,11 +1924,16 @@ module Aws::AppStream
     #   The ARN of the storage connector.
     #   @return [String]
     #
+    # @!attribute [rw] domains
+    #   The names of the domains for the G Suite account.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector AWS API Documentation
     #
     class StorageConnector < Struct.new(
       :connector_type,
-      :resource_identifier)
+      :resource_identifier,
+      :domains)
       include Aws::Structure
     end
 
@@ -2201,14 +2208,15 @@ module Aws::AppStream
     #         name: "String", # required
     #         storage_connectors: [
     #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
     #             resource_identifier: "ResourceIdentifier",
+    #             domains: ["Domain"],
     #           },
     #         ],
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
     #         user_settings: [
     #           {
     #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE

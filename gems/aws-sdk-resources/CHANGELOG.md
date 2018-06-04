@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.20.0 (2018-06-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-eks` gem.
+
 3.19.0 (2018-06-01)
 ------------------
 

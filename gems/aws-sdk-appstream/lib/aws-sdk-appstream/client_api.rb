@@ -70,7 +70,9 @@ module Aws::AppStream
     DisassociateFleetRequest = Shapes::StructureShape.new(name: 'DisassociateFleetRequest')
     DisassociateFleetResult = Shapes::StructureShape.new(name: 'DisassociateFleetResult')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
+    Domain = Shapes::StringShape.new(name: 'Domain')
     DomainJoinInfo = Shapes::StructureShape.new(name: 'DomainJoinInfo')
+    DomainList = Shapes::ListShape.new(name: 'DomainList')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpireSessionRequest = Shapes::StructureShape.new(name: 'ExpireSessionRequest')
     ExpireSessionResult = Shapes::StructureShape.new(name: 'ExpireSessionResult')
@@ -376,6 +378,8 @@ module Aws::AppStream
     DomainJoinInfo.add_member(:organizational_unit_distinguished_name, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
     DomainJoinInfo.struct_class = Types::DomainJoinInfo
 
+    DomainList.member = Shapes::ShapeRef.new(shape: Domain)
+
     ExpireSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SessionId"))
     ExpireSessionRequest.struct_class = Types::ExpireSessionRequest
 
@@ -551,6 +555,7 @@ module Aws::AppStream
 
     StorageConnector.add_member(:connector_type, Shapes::ShapeRef.new(shape: StorageConnectorType, required: true, location_name: "ConnectorType"))
     StorageConnector.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceIdentifier"))
+    StorageConnector.add_member(:domains, Shapes::ShapeRef.new(shape: DomainList, location_name: "Domains"))
     StorageConnector.struct_class = Types::StorageConnector
 
     StorageConnectorList.member = Shapes::ShapeRef.new(shape: StorageConnector)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2018-06-04)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EKS`.
+
 1.90.0 (2018-06-01)
 ------------------
 

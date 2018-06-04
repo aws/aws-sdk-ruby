@@ -63,6 +63,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-ecr', '~> 1')
   spec.add_dependency('aws-sdk-ecs', '~> 1')
   spec.add_dependency('aws-sdk-efs', '~> 1')
+  spec.add_dependency('aws-sdk-eks', '~> 1')
   spec.add_dependency('aws-sdk-emr', '~> 1')
   spec.add_dependency('aws-sdk-elasticache', '~> 1')
   spec.add_dependency('aws-sdk-elasticbeanstalk', '~> 1')

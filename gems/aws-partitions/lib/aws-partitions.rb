@@ -270,6 +270,7 @@ module Aws
             'ECR' => 'ecr',
             'ECS' => 'ecs',
             'EFS' => 'elasticfilesystem',
+            'EKS' => 'eks',
             'EMR' => 'elasticmapreduce',
             'ElastiCache' => 'elasticache',
             'ElasticBeanstalk' => 'elasticbeanstalk',
