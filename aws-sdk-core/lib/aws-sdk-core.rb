@@ -73,6 +73,7 @@ module Aws
     ECR
     ECS
     EFS
+    EKS
     EMR
     ElastiCache
     ElasticBeanstalk

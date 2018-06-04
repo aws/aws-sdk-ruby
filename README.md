@@ -349,6 +349,7 @@ to be backwards compatible.
 | Amazon EC2 Container Service                          | ECS                             | 2014-11-13  |
 | Amazon ElastiCache                                    | ElastiCache                     | 2015-02-02  |
 | Amazon Elastic Compute Cloud                          | EC2                             | 2016-11-15  |
+| Amazon Elastic Container Service for Kubernetes       | EKS                             | 2017-11-01  |
 | Amazon Elastic File System                            | EFS                             | 2015-02-01  |
 | Amazon Elastic MapReduce                              | EMR                             | 2009-03-31  |
 | Amazon Elastic Transcoder                             | ElasticTranscoder               | 2012-09-25  |
@@ -395,8 +396,8 @@ to be backwards compatible.
 | AmazonMQ                                              | MQ                              | 2017-11-27  |
 | Application Auto Scaling                              | ApplicationAutoScaling          | 2016-02-06  |
 | Auto Scaling                                          | AutoScaling                     | 2011-01-01  |
-| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Elastic Load Balancing                                | ElasticLoadBalancing            | 2012-06-01  |
+| Elastic Load Balancing                                | ElasticLoadBalancingV2          | 2015-12-01  |
 | Firewall Management Service                           | FMS                             | 2018-01-01  |
 
 ## License
