@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.62 (2018-06-04)
+------------------
+
 * Feature - Aws::MigrationHub - Updated the documentation for AWS Migration Hub.
 
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
