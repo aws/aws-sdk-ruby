@@ -12,6 +12,8 @@ module Aws::CostExplorer
     include Seahorse::Model
 
     AccountScope = Shapes::StringShape.new(name: 'AccountScope')
+    AmortizedRecurringFee = Shapes::StringShape.new(name: 'AmortizedRecurringFee')
+    AmortizedUpfrontFee = Shapes::StringShape.new(name: 'AmortizedUpfrontFee')
     AttributeType = Shapes::StringShape.new(name: 'AttributeType')
     AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
@@ -68,9 +70,11 @@ module Aws::CostExplorer
     MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
     MetricValue = Shapes::StructureShape.new(name: 'MetricValue')
     Metrics = Shapes::MapShape.new(name: 'Metrics')
+    NetRISavings = Shapes::StringShape.new(name: 'NetRISavings')
     NextPageToken = Shapes::StringShape.new(name: 'NextPageToken')
     NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     OfferingClass = Shapes::StringShape.new(name: 'OfferingClass')
+    OnDemandCostOfRIHoursUsed = Shapes::StringShape.new(name: 'OnDemandCostOfRIHoursUsed')
     OnDemandHours = Shapes::StringShape.new(name: 'OnDemandHours')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
@@ -100,6 +104,8 @@ module Aws::CostExplorer
     TagValues = Shapes::StructureShape.new(name: 'TagValues')
     TermInYears = Shapes::StringShape.new(name: 'TermInYears')
     TotalActualHours = Shapes::StringShape.new(name: 'TotalActualHours')
+    TotalAmortizedFee = Shapes::StringShape.new(name: 'TotalAmortizedFee')
+    TotalPotentialRISavings = Shapes::StringShape.new(name: 'TotalPotentialRISavings')
     TotalRunningHours = Shapes::StringShape.new(name: 'TotalRunningHours')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
     UtilizationByTime = Shapes::StructureShape.new(name: 'UtilizationByTime')
@@ -283,6 +289,12 @@ module Aws::CostExplorer
     ReservationAggregates.add_member(:purchased_hours, Shapes::ShapeRef.new(shape: PurchasedHours, location_name: "PurchasedHours"))
     ReservationAggregates.add_member(:total_actual_hours, Shapes::ShapeRef.new(shape: TotalActualHours, location_name: "TotalActualHours"))
     ReservationAggregates.add_member(:unused_hours, Shapes::ShapeRef.new(shape: UnusedHours, location_name: "UnusedHours"))
+    ReservationAggregates.add_member(:on_demand_cost_of_ri_hours_used, Shapes::ShapeRef.new(shape: OnDemandCostOfRIHoursUsed, location_name: "OnDemandCostOfRIHoursUsed"))
+    ReservationAggregates.add_member(:net_ri_savings, Shapes::ShapeRef.new(shape: NetRISavings, location_name: "NetRISavings"))
+    ReservationAggregates.add_member(:total_potential_ri_savings, Shapes::ShapeRef.new(shape: TotalPotentialRISavings, location_name: "TotalPotentialRISavings"))
+    ReservationAggregates.add_member(:amortized_upfront_fee, Shapes::ShapeRef.new(shape: AmortizedUpfrontFee, location_name: "AmortizedUpfrontFee"))
+    ReservationAggregates.add_member(:amortized_recurring_fee, Shapes::ShapeRef.new(shape: AmortizedRecurringFee, location_name: "AmortizedRecurringFee"))
+    ReservationAggregates.add_member(:total_amortized_fee, Shapes::ShapeRef.new(shape: TotalAmortizedFee, location_name: "TotalAmortizedFee"))
     ReservationAggregates.struct_class = Types::ReservationAggregates
 
     ReservationCoverageGroup.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))

@@ -1065,9 +1065,9 @@ module Aws::RDS
     # @option options [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: A value from `1150-65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The default port for the engine.
     # @option options [String] :db_subnet_group_name
     #   The DB subnet group name to use for the new DB cluster.
     #

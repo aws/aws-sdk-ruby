@@ -296,13 +296,47 @@ module Aws::RDS
     # ^
     #
     # @!attribute [rw] name
-    #   The name of the availability zone.
+    #   The name of the Availability Zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # Contains the available processor feature information for the DB
+    # instance class of a DB instance.
+    #
+    # For more information, see [Configuring the Processor of the DB
+    # Instance Class][1] in the <i>Amazon RDS User Guide. </i>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor
+    #
+    # @!attribute [rw] name
+    #   The name of the processor feature. Valid names are `coreCount` and
+    #   `threadsPerCore`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value for the processor feature of the DB instance
+    #   class.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_values
+    #   The allowed values for the processor feature of the DB instance
+    #   class.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AvailableProcessorFeature AWS API Documentation
+    #
+    class AvailableProcessorFeature < Struct.new(
+      :name,
+      :default_value,
+      :allowed_values)
       include Aws::Structure
     end
 
@@ -1710,6 +1744,12 @@ module Aws::RDS
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] db_name
@@ -2681,6 +2721,11 @@ module Aws::RDS
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
     class CreateDBInstanceMessage < Struct.new(
@@ -2725,7 +2770,8 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :processor_features)
       include Aws::Structure
     end
 
@@ -2760,6 +2806,13 @@ module Aws::RDS
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #         source_region: "String",
     #       }
     #
@@ -3076,6 +3129,16 @@ module Aws::RDS
     #   Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -3109,6 +3172,8 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :enable_cloudwatch_logs_exports,
+      :processor_features,
+      :use_default_processor_features,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -4752,6 +4817,11 @@ module Aws::RDS
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -4806,7 +4876,8 @@ module Aws::RDS
       :iam_database_authentication_enabled,
       :performance_insights_enabled,
       :performance_insights_kms_key_id,
-      :enabled_cloudwatch_logs_exports)
+      :enabled_cloudwatch_logs_exports,
+      :processor_features)
       include Aws::Structure
     end
 
@@ -5199,6 +5270,12 @@ module Aws::RDS
     #   to database accounts is enabled, and otherwise false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance when the DB snapshot was
+    #   created.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -5227,7 +5304,8 @@ module Aws::RDS
       :kms_key_id,
       :db_snapshot_arn,
       :timezone,
-      :iam_database_authentication_enabled)
+      :iam_database_authentication_enabled,
+      :processor_features)
       include Aws::Structure
     end
 
@@ -7705,8 +7783,12 @@ module Aws::RDS
     #
     # @!attribute [rw] product_description
     #   Product description filter value. Specify this parameter to show
-    #   only the available offerings matching the specified product
+    #   only the available offerings that contain the specified product
     #   description.
+    #
+    #   <note markdown="1"> The results show offerings that partially match the filter value.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] offering_type
@@ -8806,6 +8888,13 @@ module Aws::RDS
     #           enable_log_types: ["String"],
     #           disable_log_types: ["String"],
     #         },
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -9391,6 +9480,16 @@ module Aws::RDS
     #   to CloudWatch Logs for a specific DB instance.
     #   @return [Types::CloudwatchLogsExportConfiguration]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
     class ModifyDBInstanceMessage < Struct.new(
@@ -9429,7 +9528,9 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
-      :cloudwatch_logs_export_configuration)
+      :cloudwatch_logs_export_configuration,
+      :processor_features,
+      :use_default_processor_features)
       include Aws::Structure
     end
 
@@ -10396,6 +10497,11 @@ module Aws::RDS
     #   Maximum provisioned IOPS per GiB for a DB instance.
     #   @return [Float]
     #
+    # @!attribute [rw] available_processor_features
+    #   A list of the available processor features for the DB instance class
+    #   of a DB instance.
+    #   @return [Array<Types::AvailableProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -10418,7 +10524,8 @@ module Aws::RDS
       :min_iops_per_db_instance,
       :max_iops_per_db_instance,
       :min_iops_per_gib,
-      :max_iops_per_gib)
+      :max_iops_per_gib,
+      :available_processor_features)
       include Aws::Structure
     end
 
@@ -10692,6 +10799,11 @@ module Aws::RDS
     #   or deactivated.
     #   @return [Types::PendingCloudwatchLogsExports]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -10708,7 +10820,72 @@ module Aws::RDS
       :storage_type,
       :ca_certificate_identifier,
       :db_subnet_group_name,
-      :pending_cloudwatch_logs_exports)
+      :pending_cloudwatch_logs_exports,
+      :processor_features)
+      include Aws::Structure
+    end
+
+    # Contains the processor features of a DB instance class.
+    #
+    # To specify the number of CPU cores, use the `coreCount` feature name
+    # for the `Name` parameter. To specify the number of threads per core,
+    # use the `threadsPerCore` feature name for the `Name` parameter.
+    #
+    # You can set the processor features of the DB instance class for a DB
+    # instance when you call one of the following actions:
+    #
+    # * CreateDBInstance
+    #
+    # * ModifyDBInstance
+    #
+    # * RestoreDBInstanceFromDBSnapshot
+    #
+    # * RestoreDBInstanceFromS3
+    #
+    # * RestoreDBInstanceToPointInTime
+    #
+    # You can view the valid processor values for a particular instance
+    # class by calling the DescribeOrderableDBInstanceOptions action and
+    # specifying the instance class for the `DBInstanceClass` parameter.
+    #
+    # In addition, you can use the following actions for DB instance class
+    # processor information:
+    #
+    # * DescribeDBInstances
+    #
+    # * DescribeDBSnapshots
+    #
+    # * DescribeValidDBInstanceModifications
+    #
+    # For more information, see [Configuring the Processor of the DB
+    # Instance Class][1] in the <i>Amazon RDS User Guide. </i>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor
+    #
+    # @note When making an API call, you may pass ProcessorFeature
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the processor feature. Valid names are `coreCount` and
+    #   `threadsPerCore`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a processor feature name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ProcessorFeature AWS API Documentation
+    #
+    class ProcessorFeature < Struct.new(
+      :name,
+      :value)
       include Aws::Structure
     end
 
@@ -12049,9 +12226,9 @@ module Aws::RDS
     # @!attribute [rw] port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: A value from `1150-65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The default port for the engine.
     #   @return [Integer]
     #
     # @!attribute [rw] db_subnet_group_name
@@ -12201,6 +12378,13 @@ module Aws::RDS
     #         domain_iam_role_name: "String",
     #         enable_iam_database_authentication: false,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -12450,6 +12634,16 @@ module Aws::RDS
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
@@ -12475,7 +12669,9 @@ module Aws::RDS
       :copy_tags_to_snapshot,
       :domain_iam_role_name,
       :enable_iam_database_authentication,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :processor_features,
+      :use_default_processor_features)
       include Aws::Structure
     end
 
@@ -12541,6 +12737,13 @@ module Aws::RDS
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -12891,6 +13094,16 @@ module Aws::RDS
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message AWS API Documentation
     #
     class RestoreDBInstanceFromS3Message < Struct.new(
@@ -12932,7 +13145,9 @@ module Aws::RDS
       :s3_ingestion_role_arn,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :processor_features,
+      :use_default_processor_features)
       include Aws::Structure
     end
 
@@ -12984,6 +13199,13 @@ module Aws::RDS
     #         domain_iam_role_name: "String",
     #         enable_iam_database_authentication: false,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #       }
     #
     # @!attribute [rw] source_db_instance_identifier
@@ -13244,6 +13466,16 @@ module Aws::RDS
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
@@ -13271,7 +13503,9 @@ module Aws::RDS
       :domain,
       :domain_iam_role_name,
       :enable_iam_database_authentication,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :processor_features,
+      :use_default_processor_features)
       include Aws::Structure
     end
 
@@ -13615,10 +13849,15 @@ module Aws::RDS
     #   Valid storage options for your DB instance.
     #   @return [Array<Types::ValidStorageOptions>]
     #
+    # @!attribute [rw] valid_processor_features
+    #   Valid processor features for your DB instance.
+    #   @return [Array<Types::AvailableProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidDBInstanceModificationsMessage AWS API Documentation
     #
     class ValidDBInstanceModificationsMessage < Struct.new(
-      :storage)
+      :storage,
+      :valid_processor_features)
       include Aws::Structure
     end
 

@@ -86,8 +86,8 @@ module Aws::SecretsManager
     #
     #   <note markdown="1"> If you use the AWS CLI or one of the AWS SDK to call this operation,
     #   then you can leave this parameter empty. The CLI or SDK generates a
-    #   random UUID for you and includes as the value for this parameter in
-    #   the request. If you don't use the SDK and instead generate a raw
+    #   random UUID for you and includes it as the value for this parameter
+    #   in the request. If you don't use the SDK and instead generate a raw
     #   HTTP request to the Secrets Manager service endpoint, then you must
     #   generate a `ClientRequestToken` yourself for the new version and
     #   include that value in the request.
@@ -129,13 +129,17 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   (Optional) Specifies the ARN or alias of the AWS KMS customer master
-    #   key (CMK) to be used to encrypt the `SecretString` or `SecretBinary`
-    #   values in the versions stored in this secret.
+    #   (Optional) Specifies the ARN, Key ID, or alias of the AWS KMS
+    #   customer master key (CMK) to be used to encrypt the `SecretString`
+    #   or `SecretBinary` values in the versions stored in this secret.
+    #
+    #   You can specify any of the supported ways to identify a AWS KMS key
+    #   ID. If you need to reference a CMK in a different account, you can
+    #   use only the key ARN or the alias ARN.
     #
     #   If you don't specify this value, then Secrets Manager defaults to
     #   using the AWS account's default CMK (the one named
-    #   `aws/secretsmanager`). If a KMS CMK with that name doesn't yet
+    #   `aws/secretsmanager`). If a AWS KMS CMK with that name doesn't yet
     #   exist, then Secrets Manager creates it for you automatically the
     #   first time it needs to encrypt a version's `SecretString` or
     #   `SecretBinary` fields.
@@ -376,7 +380,7 @@ module Aws::SecretsManager
     #   used to encrypt the `SecretString` or `SecretBinary` fields in each
     #   version of the secret. If you don't provide a key, then Secrets
     #   Manager defaults to encrypting the secret fields with the default
-    #   KMS CMK (the one named `awssecretsmanager`) for this account.
+    #   AWS KMS CMK (the one named `awssecretsmanager`) for this account.
     #   @return [String]
     #
     # @!attribute [rw] rotation_enabled
@@ -1160,7 +1164,7 @@ module Aws::SecretsManager
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#iam-resources
+    #   [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#iam-resources
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1462,16 +1466,16 @@ module Aws::SecretsManager
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   (Optional) Specifies the ARN or alias of the KMS customer master key
-    #   (CMK) to be used to encrypt the protected text in the versions of
-    #   this secret.
+    #   (Optional) Specifies the ARN or alias of the AWS KMS customer master
+    #   key (CMK) to be used to encrypt the protected text in the versions
+    #   of this secret.
     #
     #   If you don't specify this value, then Secrets Manager defaults to
     #   using the default CMK in the account (the one named
-    #   `aws/secretsmanager`). If a KMS CMK with that name doesn't exist,
-    #   then Secrets Manager creates it for you automatically the first time
-    #   it needs to encrypt a version's `Plaintext` or `PlaintextString`
-    #   fields.
+    #   `aws/secretsmanager`). If a AWS KMS CMK with that name doesn't
+    #   exist, then Secrets Manager creates it for you automatically the
+    #   first time it needs to encrypt a version's `Plaintext` or
+    #   `PlaintextString` fields.
     #
     #   You can only use the account's default CMK to encrypt and decrypt
     #   if you call this operation using credentials from the same account

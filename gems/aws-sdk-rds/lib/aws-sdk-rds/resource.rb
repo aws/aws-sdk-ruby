@@ -420,6 +420,12 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1294,6 +1300,9 @@ module Aws::RDS
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = @client.create_db_instance(options)
@@ -2569,7 +2578,12 @@ module Aws::RDS
     #   Valid Values: `1 | 3 | 31536000 | 94608000`
     # @option options [String] :product_description
     #   Product description filter value. Specify this parameter to show only
-    #   the available offerings matching the specified product description.
+    #   the available offerings that contain the specified product
+    #   description.
+    #
+    #   <note markdown="1"> The results show offerings that partially match the filter value.
+    #
+    #    </note>
     # @option options [String] :offering_type
     #   The offering type filter value. Specify this parameter to show only
     #   the available offerings matching the specified offering type.

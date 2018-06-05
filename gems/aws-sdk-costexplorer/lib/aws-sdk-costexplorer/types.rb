@@ -254,8 +254,8 @@ module Aws::CostExplorer
     #   `Expression` for that looks like this:
     #
     #   `\{ "And": [ \{"Or": [ \{"Dimensions": \{ "Key": "INSTANCE_TYPE",
-    #   "Values": [ "m4.x.large", "c4.large" ] \}\}, \{"Tag": \{ "Key":
-    #   "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not": \{"dimensions":
+    #   "Values": [ "m4.x.large", "c4.large" ] \}\}, \{"Tags": \{ "Key":
+    #   "TagName", "Values": ["Value1"] \} \} ]\}, \{"Not": \{"Dimensions":
     #   \{ "Key": "USAGE_TYPE", "Values": ["DataTransfer"] \}\}\} ] \} `
     #
     #   <note markdown="1"> Because each `Expression` can have only one operator, the service
@@ -1381,13 +1381,45 @@ module Aws::CostExplorer
     #   The number of RI hours that you didn't use.
     #   @return [String]
     #
+    # @!attribute [rw] on_demand_cost_of_ri_hours_used
+    #   How much your RIs would cost if charged On-Demand rates.
+    #   @return [String]
+    #
+    # @!attribute [rw] net_ri_savings
+    #   How much you saved due to purchasing and utilizing RIs. This is
+    #   calculated by subtracting the `TotalAmortizedFee` from the
+    #   `OnDemandCostOfRIHoursUsed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_potential_ri_savings
+    #   How much you could save if you use your entire reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] amortized_upfront_fee
+    #   The upfront cost of your RI, amortized over the RI period.
+    #   @return [String]
+    #
+    # @!attribute [rw] amortized_recurring_fee
+    #   The monthly cost of your RI, amortized over the RI period.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_amortized_fee
+    #   The total cost of your RI, amortized over the RI period.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationAggregates AWS API Documentation
     #
     class ReservationAggregates < Struct.new(
       :utilization_percentage,
       :purchased_hours,
       :total_actual_hours,
-      :unused_hours)
+      :unused_hours,
+      :on_demand_cost_of_ri_hours_used,
+      :net_ri_savings,
+      :total_potential_ri_savings,
+      :amortized_upfront_fee,
+      :amortized_recurring_fee,
+      :total_amortized_fee)
       include Aws::Structure
     end
 

@@ -895,14 +895,32 @@ module Aws::CostExplorer
     #   resp.utilizations_by_time[0].groups[0].utilization.purchased_hours #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.total_actual_hours #=> String
     #   resp.utilizations_by_time[0].groups[0].utilization.unused_hours #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.on_demand_cost_of_ri_hours_used #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.net_ri_savings #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.total_potential_ri_savings #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.amortized_upfront_fee #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.amortized_recurring_fee #=> String
+    #   resp.utilizations_by_time[0].groups[0].utilization.total_amortized_fee #=> String
     #   resp.utilizations_by_time[0].total.utilization_percentage #=> String
     #   resp.utilizations_by_time[0].total.purchased_hours #=> String
     #   resp.utilizations_by_time[0].total.total_actual_hours #=> String
     #   resp.utilizations_by_time[0].total.unused_hours #=> String
+    #   resp.utilizations_by_time[0].total.on_demand_cost_of_ri_hours_used #=> String
+    #   resp.utilizations_by_time[0].total.net_ri_savings #=> String
+    #   resp.utilizations_by_time[0].total.total_potential_ri_savings #=> String
+    #   resp.utilizations_by_time[0].total.amortized_upfront_fee #=> String
+    #   resp.utilizations_by_time[0].total.amortized_recurring_fee #=> String
+    #   resp.utilizations_by_time[0].total.total_amortized_fee #=> String
     #   resp.total.utilization_percentage #=> String
     #   resp.total.purchased_hours #=> String
     #   resp.total.total_actual_hours #=> String
     #   resp.total.unused_hours #=> String
+    #   resp.total.on_demand_cost_of_ri_hours_used #=> String
+    #   resp.total.net_ri_savings #=> String
+    #   resp.total.total_potential_ri_savings #=> String
+    #   resp.total.amortized_upfront_fee #=> String
+    #   resp.total.amortized_recurring_fee #=> String
+    #   resp.total.total_amortized_fee #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationUtilization AWS API Documentation
@@ -984,7 +1002,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

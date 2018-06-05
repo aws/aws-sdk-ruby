@@ -1281,6 +1281,9 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshot.processor_features #=> Array
+    #   resp.db_snapshot.processor_features[0].name #=> String
+    #   resp.db_snapshot.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -2975,6 +2978,10 @@ module Aws::RDS
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
     #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -3049,6 +3056,12 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -3103,6 +3116,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -3150,6 +3166,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -3467,6 +3486,14 @@ module Aws::RDS
     #   The list of logs that the new DB instance is to export to CloudWatch
     #   Logs.
     #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3532,6 +3559,13 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #     source_region: "String",
     #   })
     #
@@ -3587,6 +3621,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -3634,6 +3671,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -3945,6 +3985,9 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshot.processor_features #=> Array
+    #   resp.db_snapshot.processor_features[0].name #=> String
+    #   resp.db_snapshot.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -4741,6 +4784,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -4788,6 +4834,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -4954,6 +5003,9 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshot.processor_features #=> Array
+    #   resp.db_snapshot.processor_features[0].name #=> String
+    #   resp.db_snapshot.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -6175,6 +6227,9 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instances[0].pending_modified_values.processor_features #=> Array
+    #   resp.db_instances[0].pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instances[0].pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -6222,6 +6277,9 @@ module Aws::RDS
     #   resp.db_instances[0].performance_insights_kms_key_id #=> String
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instances[0].processor_features #=> Array
+    #   resp.db_instances[0].processor_features[0].name #=> String
+    #   resp.db_instances[0].processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -6809,6 +6867,9 @@ module Aws::RDS
     #   resp.db_snapshots[0].db_snapshot_arn #=> String
     #   resp.db_snapshots[0].timezone #=> String
     #   resp.db_snapshots[0].iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshots[0].processor_features #=> Array
+    #   resp.db_snapshots[0].processor_features[0].name #=> String
+    #   resp.db_snapshots[0].processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots AWS API Documentation
     #
@@ -7697,6 +7758,10 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].max_iops_per_db_instance #=> Integer
     #   resp.orderable_db_instance_options[0].min_iops_per_gib #=> Float
     #   resp.orderable_db_instance_options[0].max_iops_per_gib #=> Float
+    #   resp.orderable_db_instance_options[0].available_processor_features #=> Array
+    #   resp.orderable_db_instance_options[0].available_processor_features[0].name #=> String
+    #   resp.orderable_db_instance_options[0].available_processor_features[0].default_value #=> String
+    #   resp.orderable_db_instance_options[0].available_processor_features[0].allowed_values #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -7949,7 +8014,12 @@ module Aws::RDS
     #
     # @option params [String] :product_description
     #   Product description filter value. Specify this parameter to show only
-    #   the available offerings matching the specified product description.
+    #   the available offerings that contain the specified product
+    #   description.
+    #
+    #   <note markdown="1"> The results show offerings that partially match the filter value.
+    #
+    #    </note>
     #
     # @option params [String] :offering_type
     #   The offering type filter value. Specify this parameter to show only
@@ -8211,6 +8281,10 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio #=> Array
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].from #=> Float
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].to #=> Float
+    #   resp.valid_db_instance_modifications_message.valid_processor_features #=> Array
+    #   resp.valid_db_instance_modifications_message.valid_processor_features[0].name #=> String
+    #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
+    #   resp.valid_db_instance_modifications_message.valid_processor_features[0].allowed_values #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeValidDBInstanceModifications AWS API Documentation
     #
@@ -9531,6 +9605,14 @@ module Aws::RDS
     #   The configuration setting for the log types to be enabled for export
     #   to CloudWatch Logs for a specific DB instance.
     #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -9599,6 +9681,13 @@ module Aws::RDS
     #       enable_log_types: ["String"],
     #       disable_log_types: ["String"],
     #     },
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     #
     # @example Response structure
@@ -9653,6 +9742,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -9700,6 +9792,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -9899,6 +9994,9 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshot.processor_features #=> Array
+    #   resp.db_snapshot.processor_features[0].name #=> String
+    #   resp.db_snapshot.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -10448,6 +10546,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -10495,6 +10596,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -10792,6 +10896,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -10839,6 +10946,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -11859,9 +11969,9 @@ module Aws::RDS
     # @option params [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: A value from `1150-65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The default port for the engine.
     #
     # @option params [String] :db_subnet_group_name
     #   The DB subnet group name to use for the new DB cluster.
@@ -12295,6 +12405,14 @@ module Aws::RDS
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
     #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -12425,6 +12543,13 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     #
     # @example Response structure
@@ -12479,6 +12604,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -12526,6 +12654,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -12852,6 +12983,14 @@ module Aws::RDS
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
     #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -12903,6 +13042,13 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     #
     # @example Response structure
@@ -12957,6 +13103,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13004,6 +13153,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -13020,7 +13172,7 @@ module Aws::RDS
     # number of days specified by the BackupRetentionPeriod property.
     #
     # The target database is created with most of the original
-    # configuration, but in a system-selected availability zone, with the
+    # configuration, but in a system-selected Availability Zone, with the
     # default security group, the default subnet group, and the default DB
     # parameter group. By default, the new DB instance is created as a
     # single-AZ deployment except when the instance is a SQL Server instance
@@ -13264,6 +13416,14 @@ module Aws::RDS
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
     #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -13397,6 +13557,13 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     #
     # @example Response structure
@@ -13451,6 +13618,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13498,6 +13668,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -13671,6 +13844,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13718,6 +13894,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -13809,6 +13988,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13856,6 +14038,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -13879,7 +14064,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

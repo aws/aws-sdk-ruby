@@ -429,6 +429,13 @@ module Aws::RDS
       data[:enabled_cloudwatch_logs_exports]
     end
 
+    # The number of CPU cores and the number of threads per core for the DB
+    # instance class of the DB instance.
+    # @return [Array<Types::ProcessorFeature>]
+    def processor_features
+      data[:processor_features]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -610,6 +617,12 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1471,6 +1484,9 @@ module Aws::RDS
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1511,6 +1527,13 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1750,6 +1773,12 @@ module Aws::RDS
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
     #   Logs.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1906,6 +1935,13 @@ module Aws::RDS
     #       enable_log_types: ["String"],
     #       disable_log_types: ["String"],
     #     },
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -2402,6 +2438,12 @@ module Aws::RDS
     # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
     #   to CloudWatch Logs for a specific DB instance.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2520,6 +2562,13 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -2720,6 +2769,12 @@ module Aws::RDS
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)
