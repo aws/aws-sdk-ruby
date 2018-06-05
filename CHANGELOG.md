@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::Polly - Updated the API, and documentation for Amazon Polly.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::SecretsManager - Updated the documentation for AWS Secrets Manager.
+
+* Feature - Aws::Shield - Updated the API, and documentation for AWS Shield.
+
 2.11.62 (2018-06-04)
 ------------------
 
