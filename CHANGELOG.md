@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.63 (2018-06-05)
+------------------
+
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
 
 * Feature - Aws::Polly - Updated the API, and documentation for Amazon Polly.
