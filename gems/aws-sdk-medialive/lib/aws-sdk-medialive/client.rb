@@ -155,6 +155,8 @@ module Aws::MediaLive
     #
     # @option params [Types::InputSpecification] :input_specification
     #
+    # @option params [String] :log_level
+    #
     # @option params [String] :name
     #
     # @option params [String] :request_id
@@ -469,7 +471,7 @@ module Aws::MediaLive
     #               key_format_versions: "__string",
     #               key_provider_settings: {
     #                 static_key_settings: {
-    #                   key_provider_server: {
+    #                   key_provider_server: { # required
     #                     password_param: "__string",
     #                     uri: "__string", # required
     #                     username: "__string",
@@ -860,6 +862,7 @@ module Aws::MediaLive
     #       maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
     #       resolution: "SD", # accepts SD, HD, UHD
     #     },
+    #     log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
     #     name: "__string",
     #     request_id: "__string",
     #     reserved: "__string",
@@ -1328,6 +1331,7 @@ module Aws::MediaLive
     #   resp.channel.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.channel.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.channel.name #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
@@ -1462,6 +1466,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#id #id} => String
     #   * {Types::DeleteChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::DeleteChannelResponse#input_specification #input_specification} => Types::InputSpecification
+    #   * {Types::DeleteChannelResponse#log_level #log_level} => String
     #   * {Types::DeleteChannelResponse#name #name} => String
     #   * {Types::DeleteChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DeleteChannelResponse#role_arn #role_arn} => String
@@ -1935,6 +1940,7 @@ module Aws::MediaLive
     #   resp.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
@@ -2004,6 +2010,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#id #id} => String
     #   * {Types::DescribeChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::DescribeChannelResponse#input_specification #input_specification} => Types::InputSpecification
+    #   * {Types::DescribeChannelResponse#log_level #log_level} => String
     #   * {Types::DescribeChannelResponse#name #name} => String
     #   * {Types::DescribeChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::DescribeChannelResponse#role_arn #role_arn} => String
@@ -2477,6 +2484,7 @@ module Aws::MediaLive
     #   resp.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
@@ -2647,6 +2655,7 @@ module Aws::MediaLive
     #   resp.channels[0].input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.channels[0].input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channels[0].input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.channels[0].log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.channels[0].name #=> String
     #   resp.channels[0].pipelines_running_count #=> Integer
     #   resp.channels[0].role_arn #=> String
@@ -2763,6 +2772,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#id #id} => String
     #   * {Types::StartChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::StartChannelResponse#input_specification #input_specification} => Types::InputSpecification
+    #   * {Types::StartChannelResponse#log_level #log_level} => String
     #   * {Types::StartChannelResponse#name #name} => String
     #   * {Types::StartChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StartChannelResponse#role_arn #role_arn} => String
@@ -3236,6 +3246,7 @@ module Aws::MediaLive
     #   resp.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
@@ -3263,6 +3274,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#id #id} => String
     #   * {Types::StopChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::StopChannelResponse#input_specification #input_specification} => Types::InputSpecification
+    #   * {Types::StopChannelResponse#log_level #log_level} => String
     #   * {Types::StopChannelResponse#name #name} => String
     #   * {Types::StopChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
     #   * {Types::StopChannelResponse#role_arn #role_arn} => String
@@ -3736,6 +3748,7 @@ module Aws::MediaLive
     #   resp.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.name #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
@@ -3761,6 +3774,8 @@ module Aws::MediaLive
     # @option params [Array<Types::InputAttachment>] :input_attachments
     #
     # @option params [Types::InputSpecification] :input_specification
+    #
+    # @option params [String] :log_level
     #
     # @option params [String] :name
     #
@@ -4071,7 +4086,7 @@ module Aws::MediaLive
     #               key_format_versions: "__string",
     #               key_provider_settings: {
     #                 static_key_settings: {
-    #                   key_provider_server: {
+    #                   key_provider_server: { # required
     #                     password_param: "__string",
     #                     uri: "__string", # required
     #                     username: "__string",
@@ -4462,6 +4477,7 @@ module Aws::MediaLive
     #       maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
     #       resolution: "SD", # accepts SD, HD, UHD
     #     },
+    #     log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
     #     name: "__string",
     #     role_arn: "__string",
     #   })
@@ -4928,6 +4944,7 @@ module Aws::MediaLive
     #   resp.channel.input_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC"
     #   resp.channel.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
     #   resp.channel.name #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
@@ -5060,7 +5077,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

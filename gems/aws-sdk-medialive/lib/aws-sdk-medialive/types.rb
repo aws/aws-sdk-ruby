@@ -1577,6 +1577,10 @@ module Aws::MediaLive
     # @!attribute [rw] input_specification
     #   @return [Types::InputSpecification]
     #
+    # @!attribute [rw] log_level
+    #   The log level being written to CloudWatch Logs.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the channel. (user-mutable)
     #   @return [String]
@@ -1603,6 +1607,7 @@ module Aws::MediaLive
       :id,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -1662,6 +1667,10 @@ module Aws::MediaLive
     # @!attribute [rw] input_specification
     #   @return [Types::InputSpecification]
     #
+    # @!attribute [rw] log_level
+    #   The log level being written to CloudWatch Logs.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the channel. (user-mutable)
     #   @return [String]
@@ -1687,6 +1696,7 @@ module Aws::MediaLive
       :id,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -1708,6 +1718,10 @@ module Aws::MediaLive
     #   Specification of input for this channel (max. bitrate, resolution,
     #   codec, etc.)
     #   @return [Types::InputSpecification]
+    #
+    # @!attribute [rw] log_level
+    #   The log level to write to CloudWatch Logs.
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   Name of channel.
@@ -1734,6 +1748,7 @@ module Aws::MediaLive
       :encoder_settings,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :request_id,
       :reserved,
@@ -2042,7 +2057,7 @@ module Aws::MediaLive
     #                   key_format_versions: "__string",
     #                   key_provider_settings: {
     #                     static_key_settings: {
-    #                       key_provider_server: {
+    #                       key_provider_server: { # required
     #                         password_param: "__string",
     #                         uri: "__string", # required
     #                         username: "__string",
@@ -2433,6 +2448,7 @@ module Aws::MediaLive
     #           maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
     #           resolution: "SD", # accepts SD, HD, UHD
     #         },
+    #         log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
     #         name: "__string",
     #         request_id: "__string",
     #         reserved: "__string",
@@ -2450,6 +2466,9 @@ module Aws::MediaLive
     #
     # @!attribute [rw] input_specification
     #   @return [Types::InputSpecification]
+    #
+    # @!attribute [rw] log_level
+    #   @return [String]
     #
     # @!attribute [rw] name
     #   @return [String]
@@ -2472,6 +2491,7 @@ module Aws::MediaLive
       :encoder_settings,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :request_id,
       :reserved,
@@ -2692,6 +2712,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_specification
     #   @return [Types::InputSpecification]
     #
+    # @!attribute [rw] log_level
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -2714,6 +2737,7 @@ module Aws::MediaLive
       :id,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -2801,6 +2825,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_specification
     #   @return [Types::InputSpecification]
     #
+    # @!attribute [rw] log_level
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -2823,6 +2850,7 @@ module Aws::MediaLive
       :id,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -3727,7 +3755,7 @@ module Aws::MediaLive
     #                 key_format_versions: "__string",
     #                 key_provider_settings: {
     #                   static_key_settings: {
-    #                     key_provider_server: {
+    #                     key_provider_server: { # required
     #                       password_param: "__string",
     #                       uri: "__string", # required
     #                       username: "__string",
@@ -4679,7 +4707,7 @@ module Aws::MediaLive
     #         key_format_versions: "__string",
     #         key_provider_settings: {
     #           static_key_settings: {
-    #             key_provider_server: {
+    #             key_provider_server: { # required
     #               password_param: "__string",
     #               uri: "__string", # required
     #               username: "__string",
@@ -5831,7 +5859,7 @@ module Aws::MediaLive
     #
     #       {
     #         static_key_settings: {
-    #           key_provider_server: {
+    #           key_provider_server: { # required
     #             password_param: "__string",
     #             uri: "__string", # required
     #             username: "__string",
@@ -7170,7 +7198,7 @@ module Aws::MediaLive
     #             key_format_versions: "__string",
     #             key_provider_settings: {
     #               static_key_settings: {
-    #                 key_provider_server: {
+    #                 key_provider_server: { # required
     #                   password_param: "__string",
     #                   uri: "__string", # required
     #                   username: "__string",
@@ -7518,7 +7546,7 @@ module Aws::MediaLive
     #           key_format_versions: "__string",
     #           key_provider_settings: {
     #             static_key_settings: {
-    #               key_provider_server: {
+    #               key_provider_server: { # required
     #                 password_param: "__string",
     #                 uri: "__string", # required
     #                 username: "__string",
@@ -8233,6 +8261,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_specification
     #   @return [Types::InputSpecification]
     #
+    # @!attribute [rw] log_level
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -8255,6 +8286,7 @@ module Aws::MediaLive
       :id,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -8266,7 +8298,7 @@ module Aws::MediaLive
     #   data as a hash:
     #
     #       {
-    #         key_provider_server: {
+    #         key_provider_server: { # required
     #           password_param: "__string",
     #           uri: "__string", # required
     #           username: "__string",
@@ -8328,6 +8360,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_specification
     #   @return [Types::InputSpecification]
     #
+    # @!attribute [rw] log_level
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -8350,6 +8385,7 @@ module Aws::MediaLive
       :id,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -8673,6 +8709,10 @@ module Aws::MediaLive
     #   codec, etc.)
     #   @return [Types::InputSpecification]
     #
+    # @!attribute [rw] log_level
+    #   The log level to write to CloudWatch Logs.
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The name of the channel.
     #   @return [String]
@@ -8690,6 +8730,7 @@ module Aws::MediaLive
       :encoder_settings,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :role_arn)
       include Aws::Structure
@@ -8997,7 +9038,7 @@ module Aws::MediaLive
     #                   key_format_versions: "__string",
     #                   key_provider_settings: {
     #                     static_key_settings: {
-    #                       key_provider_server: {
+    #                       key_provider_server: { # required
     #                         password_param: "__string",
     #                         uri: "__string", # required
     #                         username: "__string",
@@ -9388,6 +9429,7 @@ module Aws::MediaLive
     #           maximum_bitrate: "MAX_10_MBPS", # accepts MAX_10_MBPS, MAX_20_MBPS, MAX_50_MBPS
     #           resolution: "SD", # accepts SD, HD, UHD
     #         },
+    #         log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
     #         name: "__string",
     #         role_arn: "__string",
     #       }
@@ -9407,6 +9449,9 @@ module Aws::MediaLive
     # @!attribute [rw] input_specification
     #   @return [Types::InputSpecification]
     #
+    # @!attribute [rw] log_level
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -9421,6 +9466,7 @@ module Aws::MediaLive
       :encoder_settings,
       :input_attachments,
       :input_specification,
+      :log_level,
       :name,
       :role_arn)
       include Aws::Structure
