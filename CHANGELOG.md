@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
 2.11.63 (2018-06-05)
 ------------------
 
