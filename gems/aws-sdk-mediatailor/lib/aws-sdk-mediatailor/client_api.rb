@@ -104,7 +104,7 @@ module Aws::MediaTailor
       api.add_operation(:delete_playback_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeletePlaybackConfiguration"
         o.http_method = "DELETE"
-        o.http_request_uri = "/prod/playbackConfiguration/{Name}"
+        o.http_request_uri = "/playbackConfiguration/{Name}"
         o.input = Shapes::ShapeRef.new(shape: DeletePlaybackConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
@@ -112,7 +112,7 @@ module Aws::MediaTailor
       api.add_operation(:get_playback_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPlaybackConfiguration"
         o.http_method = "GET"
-        o.http_request_uri = "/prod/playbackConfiguration/{Name}"
+        o.http_request_uri = "/playbackConfiguration/{Name}"
         o.input = Shapes::ShapeRef.new(shape: GetPlaybackConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPlaybackConfigurationResponse)
       end)
@@ -120,7 +120,7 @@ module Aws::MediaTailor
       api.add_operation(:list_playback_configurations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPlaybackConfigurations"
         o.http_method = "GET"
-        o.http_request_uri = "/prod/playbackConfigurations"
+        o.http_request_uri = "/playbackConfigurations"
         o.input = Shapes::ShapeRef.new(shape: ListPlaybackConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPlaybackConfigurationsResponse)
       end)
@@ -128,7 +128,7 @@ module Aws::MediaTailor
       api.add_operation(:put_playback_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutPlaybackConfiguration"
         o.http_method = "PUT"
-        o.http_request_uri = "/prod/playbackConfiguration"
+        o.http_request_uri = "/playbackConfiguration"
         o.input = Shapes::ShapeRef.new(shape: PutPlaybackConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: PutPlaybackConfigurationResponse)
       end)
