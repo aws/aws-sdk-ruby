@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.65 (2018-06-08)
+------------------
+
 * Feature - Aws::MediaTailor - Updated the API for AWS MediaTailor.
 
 2.11.64 (2018-06-07)
