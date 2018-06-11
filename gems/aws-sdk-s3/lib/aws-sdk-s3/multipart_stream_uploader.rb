@@ -106,13 +106,7 @@ module Aws
         return if read_pipe.closed?
         temp_io = @tempfile ? Tempfile.new(TEMPFILE_PREIX) : StringIO.new
         temp_io.binmode
-        buffer = read_pipe.read(@part_size)
-        if buffer
-          temp_io.write(buffer)
-          bytes_copied = buffer.bytesize
-        else
-          bytes_copied = 0
-        end
+        bytes_copied = IO.copy_stream(read_pipe, temp_io, @part_size)
         temp_io.rewind
         if bytes_copied == 0
           if Tempfile === temp_io

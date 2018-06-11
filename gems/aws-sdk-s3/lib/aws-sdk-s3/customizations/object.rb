@@ -219,6 +219,9 @@ module Aws
       #     # Passed chunks automatically split into multiupart multipart upload parts
       #     # and the parts are uploaded in parallel. This allows for streaming uploads
       #     # that never touch the disk.
+      #
+      #  Note that this is known to have issues in JRuby until jruby-9.1.15.0, so avoid using this with older versions of JRuby.
+      #
       # @example Streaming chunks of data
       #     obj.upload_file do |write_stream|
       #       10.times { write_stream << 'hello' }
