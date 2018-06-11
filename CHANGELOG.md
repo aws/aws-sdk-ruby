@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
+
+* Feature - Aws::RDS - Updated the documentation, and integration test for Amazon Relational Database Service.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
 2.11.65 (2018-06-08)
 ------------------
 
