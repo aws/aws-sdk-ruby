@@ -1066,6 +1066,70 @@ module Aws::CloudDirectory
     #
     class BatchDetachTypedLinkResponse < Aws::EmptyStructure; end
 
+    # Retrieves attributes that are associated with a typed link inside a
+    # BatchRead operation. For more information, see GetLinkAttributes and
+    # BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchGetLinkAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         typed_link_specifier: { # required
+    #           typed_link_facet: { # required
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           source_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           identity_attribute_values: [ # required
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               value: { # required
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         attribute_names: ["AttributeName"], # required
+    #       }
+    #
+    # @!attribute [rw] typed_link_specifier
+    #   Allows a typed link specifier to be accepted as input.
+    #   @return [Types::TypedLinkSpecifier]
+    #
+    # @!attribute [rw] attribute_names
+    #   A list of attribute names whose values will be retrieved.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetLinkAttributes AWS API Documentation
+    #
+    class BatchGetLinkAttributes < Struct.new(
+      :typed_link_specifier,
+      :attribute_names)
+      include Aws::Structure
+    end
+
+    # Represents the output of a GetLinkAttributes response operation.
+    #
+    # @!attribute [rw] attributes
+    #   The attributes that are associated with the typed link.
+    #   @return [Array<Types::AttributeKeyAndValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetLinkAttributesResponse AWS API Documentation
+    #
+    class BatchGetLinkAttributesResponse < Struct.new(
+      :attributes)
+      include Aws::Structure
+    end
+
     # Retrieves attributes within a facet that are associated with an object
     # inside an BatchRead operation. For more information, see
     # GetObjectAttributes and BatchReadRequest$Operations.
@@ -2039,6 +2103,33 @@ module Aws::CloudDirectory
     #           next_token: "NextToken",
     #           max_results: 1,
     #         },
+    #         get_link_attributes: {
+    #           typed_link_specifier: { # required
+    #             typed_link_facet: { # required
+    #               schema_arn: "Arn", # required
+    #               typed_link_name: "TypedLinkName", # required
+    #             },
+    #             source_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             target_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             identity_attribute_values: [ # required
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 value: { # required
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           attribute_names: ["AttributeName"], # required
+    #         },
     #       }
     #
     # @!attribute [rw] list_object_attributes
@@ -2123,6 +2214,10 @@ module Aws::CloudDirectory
     #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
     #   @return [Types::BatchListIncomingTypedLinks]
     #
+    # @!attribute [rw] get_link_attributes
+    #   Retrieves attributes that are associated with a typed link.
+    #   @return [Types::BatchGetLinkAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadOperation AWS API Documentation
     #
     class BatchReadOperation < Struct.new(
@@ -2137,7 +2232,8 @@ module Aws::CloudDirectory
       :lookup_policy,
       :list_index,
       :list_outgoing_typed_links,
-      :list_incoming_typed_links)
+      :list_incoming_typed_links,
+      :get_link_attributes)
       include Aws::Structure
     end
 
@@ -2336,6 +2432,33 @@ module Aws::CloudDirectory
     #               next_token: "NextToken",
     #               max_results: 1,
     #             },
+    #             get_link_attributes: {
+    #               typed_link_specifier: { # required
+    #                 typed_link_facet: { # required
+    #                   schema_arn: "Arn", # required
+    #                   typed_link_name: "TypedLinkName", # required
+    #                 },
+    #                 source_object_reference: { # required
+    #                   selector: "SelectorObjectReference",
+    #                 },
+    #                 target_object_reference: { # required
+    #                   selector: "SelectorObjectReference",
+    #                 },
+    #                 identity_attribute_values: [ # required
+    #                   {
+    #                     attribute_name: "AttributeName", # required
+    #                     value: { # required
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               attribute_names: ["AttributeName"], # required
+    #             },
     #           },
     #         ],
     #         consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
@@ -2460,6 +2583,10 @@ module Aws::CloudDirectory
     #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
     #   @return [Types::BatchListIncomingTypedLinksResponse]
     #
+    # @!attribute [rw] get_link_attributes
+    #   The list of attributes to retrieve from the typed link.
+    #   @return [Types::BatchGetLinkAttributesResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchReadSuccessfulResponse AWS API Documentation
     #
     class BatchReadSuccessfulResponse < Struct.new(
@@ -2474,7 +2601,8 @@ module Aws::CloudDirectory
       :lookup_policy,
       :list_index,
       :list_outgoing_typed_links,
-      :list_incoming_typed_links)
+      :list_incoming_typed_links,
+      :get_link_attributes)
       include Aws::Structure
     end
 
@@ -2514,6 +2642,82 @@ module Aws::CloudDirectory
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchRemoveFacetFromObjectResponse AWS API Documentation
     #
     class BatchRemoveFacetFromObjectResponse < Aws::EmptyStructure; end
+
+    # Updates a given typed link’s attributes inside a BatchRead operation.
+    # Attributes to be updated must not contribute to the typed link’s
+    # identity, as defined by its `IdentityAttributeOrder`. For more
+    # information, see UpdateLinkAttributes and BatchReadRequest$Operations.
+    #
+    # @note When making an API call, you may pass BatchUpdateLinkAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         typed_link_specifier: { # required
+    #           typed_link_facet: { # required
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           source_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           identity_attribute_values: [ # required
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               value: { # required
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         attribute_updates: [ # required
+    #           {
+    #             attribute_key: {
+    #               schema_arn: "Arn", # required
+    #               facet_name: "FacetName", # required
+    #               name: "AttributeName", # required
+    #             },
+    #             attribute_action: {
+    #               attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #               attribute_update_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] typed_link_specifier
+    #   Allows a typed link specifier to be accepted as input.
+    #   @return [Types::TypedLinkSpecifier]
+    #
+    # @!attribute [rw] attribute_updates
+    #   The attributes update structure.
+    #   @return [Array<Types::LinkAttributeUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchUpdateLinkAttributes AWS API Documentation
+    #
+    class BatchUpdateLinkAttributes < Struct.new(
+      :typed_link_specifier,
+      :attribute_updates)
+      include Aws::Structure
+    end
+
+    # Represents the output of a UpdateLinkAttributes response operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchUpdateLinkAttributesResponse AWS API Documentation
+    #
+    class BatchUpdateLinkAttributesResponse < Aws::EmptyStructure; end
 
     # Represents the output of a `BatchUpdate` operation.
     #
@@ -2785,6 +2989,51 @@ module Aws::CloudDirectory
     #             ],
     #           },
     #         },
+    #         update_link_attributes: {
+    #           typed_link_specifier: { # required
+    #             typed_link_facet: { # required
+    #               schema_arn: "Arn", # required
+    #               typed_link_name: "TypedLinkName", # required
+    #             },
+    #             source_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             target_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             identity_attribute_values: [ # required
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 value: { # required
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           attribute_updates: [ # required
+    #             {
+    #               attribute_key: {
+    #                 schema_arn: "Arn", # required
+    #                 facet_name: "FacetName", # required
+    #                 name: "AttributeName", # required
+    #               },
+    #               attribute_action: {
+    #                 attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #                 attribute_update_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] create_object
@@ -2858,6 +3107,10 @@ module Aws::CloudDirectory
     #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
     #   @return [Types::BatchDetachTypedLink]
     #
+    # @!attribute [rw] update_link_attributes
+    #   Updates a given object's attributes.
+    #   @return [Types::BatchUpdateLinkAttributes]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteOperation AWS API Documentation
     #
     class BatchWriteOperation < Struct.new(
@@ -2874,7 +3127,8 @@ module Aws::CloudDirectory
       :attach_to_index,
       :detach_from_index,
       :attach_typed_link,
-      :detach_typed_link)
+      :detach_typed_link,
+      :update_link_attributes)
       include Aws::Structure
     end
 
@@ -2951,6 +3205,10 @@ module Aws::CloudDirectory
     #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
     #   @return [Types::BatchDetachTypedLinkResponse]
     #
+    # @!attribute [rw] update_link_attributes
+    #   Represents the output of a `BatchWrite` response operation.
+    #   @return [Types::BatchUpdateLinkAttributesResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchWriteOperationResponse AWS API Documentation
     #
     class BatchWriteOperationResponse < Struct.new(
@@ -2967,7 +3225,8 @@ module Aws::CloudDirectory
       :attach_to_index,
       :detach_from_index,
       :attach_typed_link,
-      :detach_typed_link)
+      :detach_typed_link,
+      :update_link_attributes)
       include Aws::Structure
     end
 
@@ -3182,6 +3441,51 @@ module Aws::CloudDirectory
     #                   },
     #                 ],
     #               },
+    #             },
+    #             update_link_attributes: {
+    #               typed_link_specifier: { # required
+    #                 typed_link_facet: { # required
+    #                   schema_arn: "Arn", # required
+    #                   typed_link_name: "TypedLinkName", # required
+    #                 },
+    #                 source_object_reference: { # required
+    #                   selector: "SelectorObjectReference",
+    #                 },
+    #                 target_object_reference: { # required
+    #                   selector: "SelectorObjectReference",
+    #                 },
+    #                 identity_attribute_values: [ # required
+    #                   {
+    #                     attribute_name: "AttributeName", # required
+    #                     value: { # required
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               attribute_updates: [ # required
+    #                 {
+    #                   attribute_key: {
+    #                     schema_arn: "Arn", # required
+    #                     facet_name: "FacetName", # required
+    #                     name: "AttributeName", # required
+    #                   },
+    #                   attribute_action: {
+    #                     attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #                     attribute_update_value: {
+    #                       string_value: "StringAttributeValue",
+    #                       binary_value: "data",
+    #                       boolean_value: false,
+    #                       number_value: "NumberAttributeValue",
+    #                       datetime_value: Time.now,
+    #                     },
+    #                   },
+    #                 },
+    #               ],
     #             },
     #           },
     #         ],
@@ -4343,6 +4647,83 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetLinkAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_arn: "Arn", # required
+    #         typed_link_specifier: { # required
+    #           typed_link_facet: { # required
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           source_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           identity_attribute_values: [ # required
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               value: { # required
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         attribute_names: ["AttributeName"], # required
+    #         consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #       }
+    #
+    # @!attribute [rw] directory_arn
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the typed link resides. For more information, see arns or
+    #   [Typed link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [String]
+    #
+    # @!attribute [rw] typed_link_specifier
+    #   Allows a typed link specifier to be accepted as input.
+    #   @return [Types::TypedLinkSpecifier]
+    #
+    # @!attribute [rw] attribute_names
+    #   A list of attribute names whose values will be retrieved.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] consistency_level
+    #   The consistency level at which to retrieve the attributes on a typed
+    #   link.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetLinkAttributesRequest AWS API Documentation
+    #
+    class GetLinkAttributesRequest < Struct.new(
+      :directory_arn,
+      :typed_link_specifier,
+      :attribute_names,
+      :consistency_level)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The attributes that are associated with the typed link.
+    #   @return [Array<Types::AttributeKeyAndValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetLinkAttributesResponse AWS API Documentation
+    #
+    class GetLinkAttributesResponse < Struct.new(
+      :attributes)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetObjectAttributesRequest
     #   data as a hash:
     #
@@ -4558,6 +4939,78 @@ module Aws::CloudDirectory
     class IndexAttachment < Struct.new(
       :indexed_attributes,
       :object_identifier)
+      include Aws::Structure
+    end
+
+    # The action to take on a typed link attribute value. Updates are only
+    # supported for attributes which don’t contribute to link identity.
+    #
+    # @note When making an API call, you may pass LinkAttributeAction
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #         attribute_update_value: {
+    #           string_value: "StringAttributeValue",
+    #           binary_value: "data",
+    #           boolean_value: false,
+    #           number_value: "NumberAttributeValue",
+    #           datetime_value: Time.now,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] attribute_action_type
+    #   A type that can be either `UPDATE_OR_CREATE` or `DELETE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_update_value
+    #   The value that you want to update to.
+    #   @return [Types::TypedAttributeValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LinkAttributeAction AWS API Documentation
+    #
+    class LinkAttributeAction < Struct.new(
+      :attribute_action_type,
+      :attribute_update_value)
+      include Aws::Structure
+    end
+
+    # Structure that contains attribute update information.
+    #
+    # @note When making an API call, you may pass LinkAttributeUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         attribute_key: {
+    #           schema_arn: "Arn", # required
+    #           facet_name: "FacetName", # required
+    #           name: "AttributeName", # required
+    #         },
+    #         attribute_action: {
+    #           attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #           attribute_update_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] attribute_key
+    #   The key of the attribute being updated.
+    #   @return [Types::AttributeKey]
+    #
+    # @!attribute [rw] attribute_action
+    #   The action to perform as part of the attribute update.
+    #   @return [Types::LinkAttributeAction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LinkAttributeUpdate AWS API Documentation
+    #
+    class LinkAttributeUpdate < Struct.new(
+      :attribute_key,
+      :attribute_action)
       include Aws::Structure
     end
 
@@ -6808,6 +7261,87 @@ module Aws::CloudDirectory
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateFacetResponse AWS API Documentation
     #
     class UpdateFacetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateLinkAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_arn: "Arn", # required
+    #         typed_link_specifier: { # required
+    #           typed_link_facet: { # required
+    #             schema_arn: "Arn", # required
+    #             typed_link_name: "TypedLinkName", # required
+    #           },
+    #           source_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           target_object_reference: { # required
+    #             selector: "SelectorObjectReference",
+    #           },
+    #           identity_attribute_values: [ # required
+    #             {
+    #               attribute_name: "AttributeName", # required
+    #               value: { # required
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         attribute_updates: [ # required
+    #           {
+    #             attribute_key: {
+    #               schema_arn: "Arn", # required
+    #               facet_name: "FacetName", # required
+    #               name: "AttributeName", # required
+    #             },
+    #             attribute_action: {
+    #               attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #               attribute_update_value: {
+    #                 string_value: "StringAttributeValue",
+    #                 binary_value: "data",
+    #                 boolean_value: false,
+    #                 number_value: "NumberAttributeValue",
+    #                 datetime_value: Time.now,
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] directory_arn
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the updated typed link resides. For more information, see arns
+    #   or [Typed link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #   @return [String]
+    #
+    # @!attribute [rw] typed_link_specifier
+    #   Allows a typed link specifier to be accepted as input.
+    #   @return [Types::TypedLinkSpecifier]
+    #
+    # @!attribute [rw] attribute_updates
+    #   The attributes update structure.
+    #   @return [Array<Types::LinkAttributeUpdate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateLinkAttributesRequest AWS API Documentation
+    #
+    class UpdateLinkAttributesRequest < Struct.new(
+      :directory_arn,
+      :typed_link_specifier,
+      :attribute_updates)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateLinkAttributesResponse AWS API Documentation
+    #
+    class UpdateLinkAttributesResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateObjectAttributesRequest
     #   data as a hash:

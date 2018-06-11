@@ -641,6 +641,33 @@ module Aws::CloudDirectory
     #           next_token: "NextToken",
     #           max_results: 1,
     #         },
+    #         get_link_attributes: {
+    #           typed_link_specifier: { # required
+    #             typed_link_facet: { # required
+    #               schema_arn: "Arn", # required
+    #               typed_link_name: "TypedLinkName", # required
+    #             },
+    #             source_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             target_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             identity_attribute_values: [ # required
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 value: { # required
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           attribute_names: ["AttributeName"], # required
+    #         },
     #       },
     #     ],
     #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
@@ -743,6 +770,15 @@ module Aws::CloudDirectory
     #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].value.number_value #=> String
     #   resp.responses[0].successful_response.list_incoming_typed_links.link_specifiers[0].identity_attribute_values[0].value.datetime_value #=> Time
     #   resp.responses[0].successful_response.list_incoming_typed_links.next_token #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes #=> Array
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].key.schema_arn #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].key.facet_name #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].key.name #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.string_value #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.binary_value #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.boolean_value #=> Boolean
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.number_value #=> String
+    #   resp.responses[0].successful_response.get_link_attributes.attributes[0].value.datetime_value #=> Time
     #   resp.responses[0].exception_response.type #=> String, one of "ValidationException", "InvalidArnException", "ResourceNotFoundException", "InvalidNextTokenException", "AccessDeniedException", "NotNodeException", "FacetValidationException", "CannotListParentOfRootException", "NotIndexException", "NotPolicyException", "DirectoryNotEnabledException", "LimitExceededException", "InternalServiceException"
     #   resp.responses[0].exception_response.message #=> String
     #
@@ -979,6 +1015,51 @@ module Aws::CloudDirectory
     #               },
     #             ],
     #           },
+    #         },
+    #         update_link_attributes: {
+    #           typed_link_specifier: { # required
+    #             typed_link_facet: { # required
+    #               schema_arn: "Arn", # required
+    #               typed_link_name: "TypedLinkName", # required
+    #             },
+    #             source_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             target_object_reference: { # required
+    #               selector: "SelectorObjectReference",
+    #             },
+    #             identity_attribute_values: [ # required
+    #               {
+    #                 attribute_name: "AttributeName", # required
+    #                 value: { # required
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           attribute_updates: [ # required
+    #             {
+    #               attribute_key: {
+    #                 schema_arn: "Arn", # required
+    #                 facet_name: "FacetName", # required
+    #                 name: "AttributeName", # required
+    #               },
+    #               attribute_action: {
+    #                 attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #                 attribute_update_value: {
+    #                   string_value: "StringAttributeValue",
+    #                   binary_value: "data",
+    #                   boolean_value: false,
+    #                   number_value: "NumberAttributeValue",
+    #                   datetime_value: Time.now,
+    #                 },
+    #               },
+    #             },
+    #           ],
     #         },
     #       },
     #     ],
@@ -1850,6 +1931,84 @@ module Aws::CloudDirectory
     # @param [Hash] params ({})
     def get_facet(params = {}, options = {})
       req = build_request(:get_facet, params)
+      req.send_request(options)
+    end
+
+    # Retrieves attributes that are associated with a typed link.
+    #
+    # @option params [required, String] :directory_arn
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the typed link resides. For more information, see arns or [Typed
+    #   link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, Types::TypedLinkSpecifier] :typed_link_specifier
+    #   Allows a typed link specifier to be accepted as input.
+    #
+    # @option params [required, Array<String>] :attribute_names
+    #   A list of attribute names whose values will be retrieved.
+    #
+    # @option params [String] :consistency_level
+    #   The consistency level at which to retrieve the attributes on a typed
+    #   link.
+    #
+    # @return [Types::GetLinkAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLinkAttributesResponse#attributes #attributes} => Array&lt;Types::AttributeKeyAndValue&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_link_attributes({
+    #     directory_arn: "Arn", # required
+    #     typed_link_specifier: { # required
+    #       typed_link_facet: { # required
+    #         schema_arn: "Arn", # required
+    #         typed_link_name: "TypedLinkName", # required
+    #       },
+    #       source_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       target_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       identity_attribute_values: [ # required
+    #         {
+    #           attribute_name: "AttributeName", # required
+    #           value: { # required
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     attribute_names: ["AttributeName"], # required
+    #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].key.schema_arn #=> String
+    #   resp.attributes[0].key.facet_name #=> String
+    #   resp.attributes[0].key.name #=> String
+    #   resp.attributes[0].value.string_value #=> String
+    #   resp.attributes[0].value.binary_value #=> String
+    #   resp.attributes[0].value.boolean_value #=> Boolean
+    #   resp.attributes[0].value.number_value #=> String
+    #   resp.attributes[0].value.datetime_value #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetLinkAttributes AWS API Documentation
+    #
+    # @overload get_link_attributes(params = {})
+    # @param [Hash] params ({})
+    def get_link_attributes(params = {}, options = {})
+      req = build_request(:get_link_attributes, params)
       req.send_request(options)
     end
 
@@ -3469,6 +3628,85 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Updates a given typed link’s attributes. Attributes to be updated must
+    # not contribute to the typed link’s identity, as defined by its
+    # `IdentityAttributeOrder`.
+    #
+    # @option params [required, String] :directory_arn
+    #   The Amazon Resource Name (ARN) that is associated with the Directory
+    #   where the updated typed link resides. For more information, see arns
+    #   or [Typed link][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink
+    #
+    # @option params [required, Types::TypedLinkSpecifier] :typed_link_specifier
+    #   Allows a typed link specifier to be accepted as input.
+    #
+    # @option params [required, Array<Types::LinkAttributeUpdate>] :attribute_updates
+    #   The attributes update structure.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_link_attributes({
+    #     directory_arn: "Arn", # required
+    #     typed_link_specifier: { # required
+    #       typed_link_facet: { # required
+    #         schema_arn: "Arn", # required
+    #         typed_link_name: "TypedLinkName", # required
+    #       },
+    #       source_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       target_object_reference: { # required
+    #         selector: "SelectorObjectReference",
+    #       },
+    #       identity_attribute_values: [ # required
+    #         {
+    #           attribute_name: "AttributeName", # required
+    #           value: { # required
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     attribute_updates: [ # required
+    #       {
+    #         attribute_key: {
+    #           schema_arn: "Arn", # required
+    #           facet_name: "FacetName", # required
+    #           name: "AttributeName", # required
+    #         },
+    #         attribute_action: {
+    #           attribute_action_type: "CREATE_OR_UPDATE", # accepts CREATE_OR_UPDATE, DELETE
+    #           attribute_update_value: {
+    #             string_value: "StringAttributeValue",
+    #             binary_value: "data",
+    #             boolean_value: false,
+    #             number_value: "NumberAttributeValue",
+    #             datetime_value: Time.now,
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateLinkAttributes AWS API Documentation
+    #
+    # @overload update_link_attributes(params = {})
+    # @param [Hash] params ({})
+    def update_link_attributes(params = {}, options = {})
+      req = build_request(:update_link_attributes, params)
+      req.send_request(options)
+    end
+
     # Updates a given object's attributes.
     #
     # @option params [required, String] :directory_arn
@@ -3744,7 +3982,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

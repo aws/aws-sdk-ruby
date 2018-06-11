@@ -371,6 +371,12 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CachediSCSIVolume AWS API Documentation
     #
     class CachediSCSIVolume < Struct.new(
@@ -383,7 +389,8 @@ module Aws::StorageGateway
       :source_snapshot_id,
       :volume_iscsi_attributes,
       :created_date,
-      :volume_used_in_bytes)
+      :volume_used_in_bytes,
+      :kms_key)
       include Aws::Structure
     end
 
@@ -517,6 +524,8 @@ module Aws::StorageGateway
     #         source_volume_arn: "VolumeARN",
     #         network_interface_id: "NetworkInterfaceId", # required
     #         client_token: "ClientToken", # required
+    #         kms_encrypted: false,
+    #         kms_key: "KMSKey",
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -547,6 +556,17 @@ module Aws::StorageGateway
     # @!attribute [rw] client_token
     #   @return [String]
     #
+    # @!attribute [rw] kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolumeInput AWS API Documentation
     #
     class CreateCachediSCSIVolumeInput < Struct.new(
@@ -556,7 +576,9 @@ module Aws::StorageGateway
       :target_name,
       :source_volume_arn,
       :network_interface_id,
-      :client_token)
+      :client_token,
+      :kms_encrypted,
+      :kms_key)
       include Aws::Structure
     end
 
@@ -621,8 +643,9 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The KMS key used for Amazon S3 server side encryption. This value
-    #   can only be set when KmsEncrypted is true. Optional.
+    #   The Amazon Resource Name (ARN) KMS key used for Amazon S3 server
+    #   side encryption. This value can only be set when KMSEncrypted is
+    #   true. Optional.
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -636,9 +659,9 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by file gateway. Possible values are S3\_STANDARD or
-    #   S3\_STANDARD\_IA. If this field is not populated, the default value
-    #   S3\_STANDARD is used. Optional.
+    #   by file gateway. Possible values are S3\_STANDARD, S3\_STANDARD\_IA
+    #   or S3\_ONEZONE\_IA. If this field is not populated, the default
+    #   value S3\_STANDARD is used. Optional.
     #   @return [String]
     #
     # @!attribute [rw] object_acl
@@ -930,6 +953,8 @@ module Aws::StorageGateway
     #         gateway_arn: "GatewayARN", # required
     #         tape_size_in_bytes: 1, # required
     #         tape_barcode: "TapeBarcode", # required
+    #         kms_encrypted: false,
+    #         kms_key: "KMSKey",
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -955,12 +980,25 @@ module Aws::StorageGateway
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS Key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcodeInput AWS API Documentation
     #
     class CreateTapeWithBarcodeInput < Struct.new(
       :gateway_arn,
       :tape_size_in_bytes,
-      :tape_barcode)
+      :tape_barcode,
+      :kms_encrypted,
+      :kms_key)
       include Aws::Structure
     end
 
@@ -989,6 +1027,8 @@ module Aws::StorageGateway
     #         client_token: "ClientToken", # required
     #         num_tapes_to_create: 1, # required
     #         tape_barcode_prefix: "TapeBarcodePrefix", # required
+    #         kms_encrypted: false,
+    #         kms_key: "KMSKey",
     #       }
     #
     # @!attribute [rw] gateway_arn
@@ -1030,6 +1070,17 @@ module Aws::StorageGateway
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapesInput AWS API Documentation
     #
     class CreateTapesInput < Struct.new(
@@ -1037,7 +1088,9 @@ module Aws::StorageGateway
       :tape_size_in_bytes,
       :client_token,
       :num_tapes_to_create,
-      :tape_barcode_prefix)
+      :tape_barcode_prefix,
+      :kms_encrypted,
+      :kms_key)
       include Aws::Structure
     end
 
@@ -2855,7 +2908,9 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The ARN of the KMS key used for Amazon S3 server side encryption.
+    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -2874,9 +2929,9 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by file gateway. Possible values are S3\_STANDARD or
-    #   S3\_STANDARD\_IA. If this field is not populated, the default value
-    #   S3\_STANDARD is used. Optional.
+    #   by file gateway. Possible values are S3\_STANDARD, S3\_STANDARD\_IA
+    #   or S3\_ONEZONE\_IA. If this field is not populated, the default
+    #   value S3\_STANDARD is used. Optional.
     #   @return [String]
     #
     # @!attribute [rw] object_acl
@@ -3472,6 +3527,12 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tape AWS API Documentation
     #
     class Tape < Struct.new(
@@ -3482,7 +3543,8 @@ module Aws::StorageGateway
       :tape_status,
       :vtl_device,
       :progress,
-      :tape_used_in_bytes)
+      :tape_used_in_bytes,
+      :kms_key)
       include Aws::Structure
     end
 
@@ -3498,6 +3560,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] tape_created_date
+    #   The date the virtual tape was created.
     #   @return [Time]
     #
     # @!attribute [rw] tape_size_in_bytes
@@ -3507,7 +3570,7 @@ module Aws::StorageGateway
     # @!attribute [rw] completion_time
     #   The time that the archiving of the virtual tape was completed.
     #
-    #   The string format of the completion time is in the ISO8601 extended
+    #   The default time stamp format is in the ISO8601 extended
     #   YYYY-MM-DD'T'HH:MM:SS'Z' format.
     #   @return [Time]
     #
@@ -3530,6 +3593,12 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Integer]
     #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeArchive AWS API Documentation
     #
     class TapeArchive < Struct.new(
@@ -3540,7 +3609,8 @@ module Aws::StorageGateway
       :completion_time,
       :retrieved_to,
       :tape_status,
-      :tape_used_in_bytes)
+      :tape_used_in_bytes,
+      :kms_key)
       include Aws::Structure
     end
 
@@ -3588,8 +3658,8 @@ module Aws::StorageGateway
     #   The time when the point-in-time view of the virtual tape was
     #   replicated for later recovery.
     #
-    #   The string format of the tape recovery point time is in the ISO8601
-    #   extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+    #   The default time stamp format of the tape recovery point time is in
+    #   the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
     #   @return [Time]
     #
     # @!attribute [rw] tape_size_in_bytes
@@ -3925,8 +3995,9 @@ module Aws::StorageGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key
-    #   The KMS key used for Amazon S3 server side encryption. This value
-    #   can only be set when KmsEncrypted is true. Optional.
+    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
     #   @return [String]
     #
     # @!attribute [rw] nfs_file_share_defaults
@@ -3935,9 +4006,9 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] default_storage_class
     #   The default storage class for objects put into an Amazon S3 bucket
-    #   by a file gateway. Possible values are S3\_STANDARD or
-    #   S3\_STANDARD\_IA. If this field is not populated, the default value
-    #   S3\_STANDARD is used. Optional.
+    #   by a file gateway. Possible values are S3\_STANDARD,
+    #   S3\_STANDARD\_IA or S3\_ONEZONE\_IA. If this field is not populated,
+    #   the default value S3\_STANDARD is used. Optional.
     #   @return [String]
     #
     # @!attribute [rw] object_acl

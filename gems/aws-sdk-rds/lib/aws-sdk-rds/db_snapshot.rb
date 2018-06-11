@@ -582,7 +582,7 @@ module Aws::RDS
     #   example, `db.m4.large`. Not all DB instance classes are available in
     #   all AWS Regions, or for all database engines. For the full list of DB
     #   instance classes, and availability for your engine, see [DB Instance
-    #   Class][1] in the Amazon RDS User Guide.
+    #   Class][1] in the *Amazon RDS User Guide.*
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #

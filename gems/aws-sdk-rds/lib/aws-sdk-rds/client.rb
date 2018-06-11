@@ -760,7 +760,7 @@ module Aws::RDS
     # For more information on copying encrypted DB cluster snapshots from
     # one AWS Region to another, see [ Copying a DB Cluster Snapshot in the
     # Same Account, Either in the Same Region or Across Regions][3] in the
-    # Amazon RDS User Guide.
+    # *Amazon RDS User Guide.*
     #
     # For more information on Amazon Aurora, see [Aurora on Amazon RDS][4]
     # in the *Amazon RDS User Guide.*
@@ -1063,7 +1063,7 @@ module Aws::RDS
     # destination AWS Region for the DB snapshot copy.
     #
     # For more information about copying snapshots, see [Copying a DB
-    # Snapshot][1] in the Amazon RDS User Guide.
+    # Snapshot][1] in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -2247,7 +2247,7 @@ module Aws::RDS
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB instance
     #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the Amazon RDS User Guide.
+    #   in the *Amazon RDS User Guide.*
     #
     #
     #
@@ -2557,9 +2557,11 @@ module Aws::RDS
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   The following are the database engines and major and minor versions
-    #   that are available with Amazon RDS. Not every database engine is
-    #   available for every AWS Region.
+    #   For a list of valid engine versions, call DescribeDBEngineVersions.
+    #
+    #   The following are the database engines and links to information about
+    #   the major and minor versions that are available with Amazon RDS. Not
+    #   every database engine is available for every AWS Region.
     #
     #   **Amazon Aurora**
     #
@@ -2569,187 +2571,35 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
-    #   * `10.2.12` (supported in all AWS Regions)
+    #   See [MariaDB on Amazon RDS Versions][1] in the *Amazon RDS User
+    #   Guide.*
     #
-    #   * `10.2.11` (supported in all AWS Regions)
+    #   **Microsoft SQL Server**
     #
-    #
-    #
-    #   * `10.1.31` (supported in all AWS Regions)
-    #
-    #   * `10.1.26` (supported in all AWS Regions)
-    #
-    #   * `10.1.23` (supported in all AWS Regions)
-    #
-    #   * `10.1.19` (supported in all AWS Regions)
-    #
-    #   * `10.1.14` (supported in all AWS Regions except us-east-2)
-    #
-    #
-    #
-    #   * `10.0.34` (supported in all AWS Regions)
-    #
-    #   * `10.0.32` (supported in all AWS Regions)
-    #
-    #   * `10.0.31` (supported in all AWS Regions)
-    #
-    #   * `10.0.28` (supported in all AWS Regions)
-    #
-    #   * `10.0.24` (supported in all AWS Regions)
-    #
-    #   * `10.0.17` (supported in all AWS Regions except us-east-2,
-    #     ca-central-1, eu-west-2)
-    #
-    #   **Microsoft SQL Server 2017**
-    #
-    #   * `14.00.1000.169.v1` (supported for all editions, and all AWS
-    #     Regions)
-    #
-    #   ^
-    #
-    #   **Microsoft SQL Server 2016**
-    #
-    #   * `13.00.4451.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `13.00.4422.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `13.00.2164.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   **Microsoft SQL Server 2014**
-    #
-    #   * `12.00.5546.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `12.00.5000.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `12.00.4422.0.v1` (supported for all editions except Enterprise
-    #     Edition, and all AWS Regions except ca-central-1 and eu-west-2)
-    #
-    #   **Microsoft SQL Server 2012**
-    #
-    #   * `11.00.6594.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `11.00.6020.0.v1` (supported for all editions, and all AWS Regions)
-    #
-    #   * `11.00.5058.0.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
-    #
-    #   * `11.00.2100.60.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
-    #
-    #   **Microsoft SQL Server 2008 R2**
-    #
-    #   * `10.50.6529.0.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
-    #
-    #   * `10.50.6000.34.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
-    #
-    #   * `10.50.2789.0.v1` (supported for all editions, and all AWS Regions
-    #     except us-east-2, ca-central-1, and eu-west-2)
+    #   See [Version and Feature Support on Amazon RDS][2] in the *Amazon RDS
+    #   User Guide.*
     #
     #   **MySQL**
     #
-    #   * `5.7.21` (supported in all AWS regions)
+    #   See [MySQL on Amazon RDS Versions][3] in the *Amazon RDS User Guide.*
     #
-    #   * `5.7.19` (supported in all AWS regions)
+    #   **Oracle**
     #
-    #   * `5.7.17` (supported in all AWS regions)
-    #
-    #   * `5.7.16` (supported in all AWS regions)
-    #
-    #
-    #
-    #   * `5.6.39` (supported in all AWS Regions)
-    #
-    #   * `5.6.37` (supported in all AWS Regions)
-    #
-    #   * `5.6.35` (supported in all AWS Regions)
-    #
-    #   * `5.6.34` (supported in all AWS Regions)
-    #
-    #   * `5.6.29` (supported in all AWS Regions)
-    #
-    #   * `5.6.27` (supported in all AWS Regions except us-east-2,
-    #     ca-central-1, eu-west-2)
-    #
-    #
-    #
-    #   * `5.5.59` (supported in all AWS Regions)
-    #
-    #   * `5.5.57` (supported in all AWS Regions)
-    #
-    #   * `5.5.54` (supported in all AWS Regions)
-    #
-    #   * `5.5.53` (supported in all AWS Regions)
-    #
-    #   * `5.5.46` (supported in all AWS Regions)
-    #
-    #   **Oracle 12c**
-    #
-    #   * `12.1.0.2.v9` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v8` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v7` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v6` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v5` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v4` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v3` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v2` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   * `12.1.0.2.v1` (supported for EE in all AWS regions, and SE2 in all
-    #     AWS regions except us-gov-west-1)
-    #
-    #   **Oracle 11g**
-    #
-    #   * `11.2.0.4.v13` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v12` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v11` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v10` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v9` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v8` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v7` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v6` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v5` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v4` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v3` (supported for EE, SE1, and SE, in all AWS regions)
-    #
-    #   * `11.2.0.4.v1` (supported for EE, SE1, and SE, in all AWS regions)
+    #   See [Oracle Database Engine Release Notes][4] in the *Amazon RDS User
+    #   Guide.*
     #
     #   **PostgreSQL**
     #
-    #   * **Version 10.1**
+    #   See [Supported PostgreSQL Database Versions][5] in the *Amazon RDS
+    #   User Guide.*
     #
-    #   * **Version 9.6.x:** ` 9.6.6 | 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
-    #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
-    #   * **Version 9.4.x:** ` 9.4.14 | 9.4.12 | 9.4.11 | 9.4.9 | 9.4.7`
-    #
-    #   * **Version 9.3.x:** ` 9.3.19 | 9.3.17 | 9.3.16 | 9.3.14 | 9.3.12`
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
+    #   [2]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport
+    #   [3]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+    #   [4]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
+    #   [5]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts.General.DBVersions
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
@@ -3239,7 +3089,7 @@ module Aws::RDS
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB instance
     #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the Amazon RDS User Guide.
+    #   in the *Amazon RDS User Guide.*
     #
     #   Default: Inherits from the source DB instance.
     #
@@ -8746,7 +8596,7 @@ module Aws::RDS
     #   applied during the next maintenance window unless the ApplyImmediately
     #   parameter is set to true.
     #
-    #   For a list of valid engine versions, see CreateDBInstance, or call
+    #   For a list of valid engine versions, see CreateDBCluster, or call
     #   DescribeDBEngineVersions.
     #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -9093,7 +8943,7 @@ module Aws::RDS
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB instance
     #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the Amazon RDS User Guide.
+    #   in the *Amazon RDS User Guide.*
     #
     #   If you modify the DB instance class, an outage occurs during the
     #   change. The change is applied during the next maintenance window,
@@ -9319,7 +9169,8 @@ module Aws::RDS
     #   family for the new engine version must be specified. The new DB
     #   parameter group can be the default for that DB parameter group family.
     #
-    #   For a list of valid engine versions, see CreateDBInstance.
+    #   For information about valid engine versions, see CreateDBInstance, or
+    #   call DescribeDBEngineVersions.
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
@@ -12211,7 +12062,7 @@ module Aws::RDS
     #   example, `db.m4.large`. Not all DB instance classes are available in
     #   all AWS Regions, or for all database engines. For the full list of DB
     #   instance classes, and availability for your engine, see [DB Instance
-    #   Class][1] in the Amazon RDS User Guide.
+    #   Class][1] in the *Amazon RDS User Guide.*
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -12711,7 +12562,7 @@ module Aws::RDS
     #   `db.m4.large`. Not all DB instance classes are available in all AWS
     #   Regions, or for all database engines. For the full list of DB instance
     #   classes, and availability for your engine, see [DB Instance Class][1]
-    #   in the Amazon RDS User Guide.
+    #   in the *Amazon RDS User Guide.*
     #
     #   Importing from Amazon S3 is not supported on the db.t2.micro DB
     #   instance class.
@@ -12836,8 +12687,8 @@ module Aws::RDS
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use. Choose the latest
-    #   minor version of your database engine as specified in
-    #   CreateDBInstance.
+    #   minor version of your database engine. For information about engine
+    #   versions, see CreateDBInstance, or call DescribeDBEngineVersions.
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   True to indicate that minor engine upgrades are applied automatically
@@ -13232,7 +13083,7 @@ module Aws::RDS
     #   example, `db.m4.large`. Not all DB instance classes are available in
     #   all AWS Regions, or for all database engines. For the full list of DB
     #   instance classes, and availability for your engine, see [DB Instance
-    #   Class][1] in the Amazon RDS User Guide.
+    #   Class][1] in the *Amazon RDS User Guide.*
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -14064,7 +13915,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

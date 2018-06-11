@@ -317,6 +317,7 @@ module Aws::StorageGateway
     CachediSCSIVolume.add_member(:volume_iscsi_attributes, Shapes::ShapeRef.new(shape: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
     CachediSCSIVolume.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
     CachediSCSIVolume.add_member(:volume_used_in_bytes, Shapes::ShapeRef.new(shape: VolumeUsedInBytes, location_name: "VolumeUsedInBytes"))
+    CachediSCSIVolume.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     CachediSCSIVolume.struct_class = Types::CachediSCSIVolume
 
     CachediSCSIVolumes.member = Shapes::ShapeRef.new(shape: CachediSCSIVolume)
@@ -350,6 +351,8 @@ module Aws::StorageGateway
     CreateCachediSCSIVolumeInput.add_member(:source_volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "SourceVolumeARN"))
     CreateCachediSCSIVolumeInput.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
     CreateCachediSCSIVolumeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
+    CreateCachediSCSIVolumeInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
+    CreateCachediSCSIVolumeInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     CreateCachediSCSIVolumeInput.struct_class = Types::CreateCachediSCSIVolumeInput
 
     CreateCachediSCSIVolumeOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
@@ -408,6 +411,8 @@ module Aws::StorageGateway
     CreateTapeWithBarcodeInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     CreateTapeWithBarcodeInput.add_member(:tape_size_in_bytes, Shapes::ShapeRef.new(shape: TapeSize, required: true, location_name: "TapeSizeInBytes"))
     CreateTapeWithBarcodeInput.add_member(:tape_barcode, Shapes::ShapeRef.new(shape: TapeBarcode, required: true, location_name: "TapeBarcode"))
+    CreateTapeWithBarcodeInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
+    CreateTapeWithBarcodeInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     CreateTapeWithBarcodeInput.struct_class = Types::CreateTapeWithBarcodeInput
 
     CreateTapeWithBarcodeOutput.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
@@ -418,6 +423,8 @@ module Aws::StorageGateway
     CreateTapesInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
     CreateTapesInput.add_member(:num_tapes_to_create, Shapes::ShapeRef.new(shape: NumTapesToCreate, required: true, location_name: "NumTapesToCreate"))
     CreateTapesInput.add_member(:tape_barcode_prefix, Shapes::ShapeRef.new(shape: TapeBarcodePrefix, required: true, location_name: "TapeBarcodePrefix"))
+    CreateTapesInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
+    CreateTapesInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     CreateTapesInput.struct_class = Types::CreateTapesInput
 
     CreateTapesOutput.add_member(:tape_arns, Shapes::ShapeRef.new(shape: TapeARNs, location_name: "TapeARNs"))
@@ -856,6 +863,7 @@ module Aws::StorageGateway
     Tape.add_member(:vtl_device, Shapes::ShapeRef.new(shape: VTLDeviceARN, location_name: "VTLDevice"))
     Tape.add_member(:progress, Shapes::ShapeRef.new(shape: DoubleObject, location_name: "Progress"))
     Tape.add_member(:tape_used_in_bytes, Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
+    Tape.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     Tape.struct_class = Types::Tape
 
     TapeARNs.member = Shapes::ShapeRef.new(shape: TapeARN)
@@ -868,6 +876,7 @@ module Aws::StorageGateway
     TapeArchive.add_member(:retrieved_to, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "RetrievedTo"))
     TapeArchive.add_member(:tape_status, Shapes::ShapeRef.new(shape: TapeArchiveStatus, location_name: "TapeStatus"))
     TapeArchive.add_member(:tape_used_in_bytes, Shapes::ShapeRef.new(shape: TapeUsage, location_name: "TapeUsedInBytes"))
+    TapeArchive.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     TapeArchive.struct_class = Types::TapeArchive
 
     TapeArchives.member = Shapes::ShapeRef.new(shape: TapeArchive)
