@@ -155,7 +155,7 @@ module Aws::ACM
 
     # @!group API Operations
 
-    # Adds one or more tags to an ACM Certificate. Tags are labels that you
+    # Adds one or more tags to an ACM certificate. Tags are labels that you
     # can use to identify and organize your AWS resources. Each tag consists
     # of a `key` and an optional `value`. You specify the certificate on
     # input by its Amazon Resource Name (ARN). You specify the tag by using
@@ -167,9 +167,9 @@ module Aws::ACM
     # relationship among those certificates. Similarly, you can apply the
     # same tag to multiple resources if you want to specify a relationship
     # among those resources. For example, you can add the same tag to an ACM
-    # Certificate and an Elastic Load Balancing load balancer to indicate
+    # certificate and an Elastic Load Balancing load balancer to indicate
     # that they are both used by the same website. For more information, see
-    # [Tagging ACM Certificates][1].
+    # [Tagging ACM certificates][1].
     #
     # To remove one or more tags, use the RemoveTagsFromCertificate action.
     # To view all of the tags that have been applied to the certificate, use
@@ -180,7 +180,7 @@ module Aws::ACM
     # [1]: http://docs.aws.amazon.com/acm/latest/userguide/tags.html
     #
     # @option params [required, String] :certificate_arn
-    #   String that contains the ARN of the ACM Certificate to which the tag
+    #   String that contains the ARN of the ACM certificate to which the tag
     #   is to be applied. This must be of the form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -224,14 +224,14 @@ module Aws::ACM
     # calling the GetCertificate action. The certificate will not be
     # available for use by AWS services integrated with ACM.
     #
-    # <note markdown="1"> You cannot delete an ACM Certificate that is being used by another AWS
+    # <note markdown="1"> You cannot delete an ACM certificate that is being used by another AWS
     # service. To delete a certificate that is in use, the certificate
     # association must first be removed.
     #
     #  </note>
     #
     # @option params [required, String] :certificate_arn
-    #   String that contains the ARN of the ACM Certificate to be deleted.
+    #   String that contains the ARN of the ACM certificate to be deleted.
     #   This must be of the form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -260,10 +260,10 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Returns detailed metadata about the specified ACM Certificate.
+    # Returns detailed metadata about the specified ACM certificate.
     #
     # @option params [required, String] :certificate_arn
-    #   The Amazon Resource Name (ARN) of the ACM Certificate. The ARN must
+    #   The Amazon Resource Name (ARN) of the ACM certificate. The ARN must
     #   have the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -316,8 +316,8 @@ module Aws::ACM
     #   resp.certificate.signature_algorithm #=> String
     #   resp.certificate.in_use_by #=> Array
     #   resp.certificate.in_use_by[0] #=> String
-    #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "CAA_ERROR", "OTHER"
-    #   resp.certificate.type #=> String, one of "IMPORTED", "AMAZON_ISSUED"
+    #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "CAA_ERROR", "PCA_LIMIT_EXCEEDED", "PCA_INVALID_ARN", "PCA_INVALID_STATE", "PCA_REQUEST_FAILED", "PCA_RESOURCE_NOT_FOUND", "PCA_INVALID_ARGS", "OTHER"
+    #   resp.certificate.type #=> String, one of "IMPORTED", "AMAZON_ISSUED", "PRIVATE"
     #   resp.certificate.renewal_summary.renewal_status #=> String, one of "PENDING_AUTO_RENEWAL", "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #   resp.certificate.renewal_summary.domain_validation_options #=> Array
     #   resp.certificate.renewal_summary.domain_validation_options[0].domain_name #=> String
@@ -334,6 +334,9 @@ module Aws::ACM
     #   resp.certificate.extended_key_usages #=> Array
     #   resp.certificate.extended_key_usages[0].name #=> String, one of "TLS_WEB_SERVER_AUTHENTICATION", "TLS_WEB_CLIENT_AUTHENTICATION", "CODE_SIGNING", "EMAIL_PROTECTION", "TIME_STAMPING", "OCSP_SIGNING", "IPSEC_END_SYSTEM", "IPSEC_TUNNEL", "IPSEC_USER", "ANY", "NONE", "CUSTOM"
     #   resp.certificate.extended_key_usages[0].oid #=> String
+    #   resp.certificate.certificate_authority_arn #=> String
+    #   resp.certificate.renewal_eligibility #=> String, one of "ELIGIBLE", "INELIGIBLE"
+    #   resp.certificate.options.certificate_transparency_logging_preference #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate AWS API Documentation
     #
@@ -341,6 +344,59 @@ module Aws::ACM
     # @param [Hash] params ({})
     def describe_certificate(params = {}, options = {})
       req = build_request(:describe_certificate, params)
+      req.send_request(options)
+    end
+
+    # Exports a private certificate issued by a private certificate
+    # authority (CA) for use anywhere. You can export the certificate, the
+    # certificate chain, and the encrypted private key associated with the
+    # public key embedded in the certificate. You must store the private key
+    # securely. The private key is a 2048 bit RSA key. You must provide a
+    # passphrase for the private key when exporting it. You can use the
+    # following OpenSSL command to decrypt it later. Provide the passphrase
+    # when prompted.
+    #
+    # `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
+    #
+    # @option params [required, String] :certificate_arn
+    #   An Amazon Resource Name (ARN) of the issued certificate. This must be
+    #   of the form:
+    #
+    #   `arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012`
+    #
+    # @option params [required, String, IO] :passphrase
+    #   Passphrase to associate with the encrypted exported private key. If
+    #   you want to later decrypt the private key, you must have the
+    #   passphrase. You can use the following OpenSSL command to decrypt a
+    #   private key:
+    #
+    #   `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
+    #
+    # @return [Types::ExportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ExportCertificateResponse#certificate #certificate} => String
+    #   * {Types::ExportCertificateResponse#certificate_chain #certificate_chain} => String
+    #   * {Types::ExportCertificateResponse#private_key #private_key} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.export_certificate({
+    #     certificate_arn: "Arn", # required
+    #     passphrase: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate #=> String
+    #   resp.certificate_chain #=> String
+    #   resp.private_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificate AWS API Documentation
+    #
+    # @overload export_certificate(params = {})
+    # @param [Hash] params ({})
+    def export_certificate(params = {}, options = {})
+      req = build_request(:export_certificate, params)
       req.send_request(options)
     end
 
@@ -430,12 +486,16 @@ module Aws::ACM
     #   Include this argument only when you want to replace a previously
     #   imported certificate.
     #
-    # * When you import a certificate by using the CLI or one of the SDKs,
-    #   you must specify the certificate, the certificate chain, and the
-    #   private key by their file names preceded by `file://`. For example,
-    #   you can specify a certificate saved in the `C:\temp` folder as
+    # * When you import a certificate by using the CLI, you must specify the
+    #   certificate, the certificate chain, and the private key by their
+    #   file names preceded by `file://`. For example, you can specify a
+    #   certificate saved in the `C:\temp` folder as
     #   `file://C:\temp\certificate_to_import.pem`. If you are making an
     #   HTTP or HTTPS Query request, include these arguments as BLOBs.
+    #
+    # * When you import a certificate by using an SDK, you must specify the
+    #   certificate, the certificate chain, and the private key files in the
+    #   manner required by the programming language you're using.
     #
     # This operation returns the [Amazon Resource Name (ARN)][4] of the
     # imported certificate.
@@ -548,13 +608,13 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Lists the tags that have been applied to the ACM Certificate. Use the
+    # Lists the tags that have been applied to the ACM certificate. Use the
     # certificate's Amazon Resource Name (ARN) to specify the certificate.
-    # To add a tag to an ACM Certificate, use the AddTagsToCertificate
+    # To add a tag to an ACM certificate, use the AddTagsToCertificate
     # action. To delete a tag, use the RemoveTagsFromCertificate action.
     #
     # @option params [required, String] :certificate_arn
-    #   String that contains the ARN of the ACM Certificate for which you want
+    #   String that contains the ARN of the ACM certificate for which you want
     #   to list the tags. This must have the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -591,7 +651,7 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Remove one or more tags from an ACM Certificate. A tag consists of a
+    # Remove one or more tags from an ACM certificate. A tag consists of a
     # key-value pair. If you do not specify the value portion of the tag
     # when calling this function, the tag will be removed regardless of
     # value. If you specify a value, the tag is removed only if it is
@@ -599,7 +659,7 @@ module Aws::ACM
     #
     # To add tags to a certificate, use the AddTagsToCertificate action. To
     # view all of the tags that have been applied to a specific ACM
-    # Certificate, use the ListTagsForCertificate action.
+    # certificate, use the ListTagsForCertificate action.
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM Certificate with one or more
@@ -640,33 +700,28 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Requests an ACM Certificate for use with other AWS services. To
-    # request an ACM Certificate, you must specify the fully qualified
-    # domain name (FQDN) for your site in the `DomainName` parameter. You
-    # can also specify additional FQDNs in the `SubjectAlternativeNames`
-    # parameter if users can reach your site by using other names.
+    # Requests an ACM certificate for use with other AWS services. To
+    # request an ACM certificate, you must specify a fully qualified domain
+    # name (FQDN) in the `DomainName` parameter. You can also specify
+    # additional FQDNs in the `SubjectAlternativeNames` parameter.
     #
-    # For each domain name you specify, email is sent to the domain owner to
-    # request approval to issue the certificate. Email is sent to three
-    # registered contact addresses in the WHOIS database and to five common
-    # system administration addresses formed from the `DomainName` you enter
-    # or the optional `ValidationDomain` parameter. For more information,
-    # see [Validate Domain Ownership][1].
-    #
-    # After receiving approval from the domain owner, the ACM Certificate is
-    # issued. For more information, see the [AWS Certificate Manager User
-    # Guide][2].
+    # If you are requesting a private certificate, domain validation is not
+    # required. If you are requesting a public certificate, each domain name
+    # that you specify must be validated to verify that you own or control
+    # the domain. You can use [DNS validation][1] or [email validation][2].
+    # We recommend that you use DNS validation. ACM issues public
+    # certificates after receiving approval from the domain owner.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate.html
-    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [required, String] :domain_name
-    #   Fully qualified domain name (FQDN), such as www.example.com, of the
-    #   site that you want to secure with an ACM Certificate. Use an asterisk
-    #   (*) to create a wildcard certificate that protects several sites in
-    #   the same domain. For example, *.example.com protects www.example.com,
+    #   Fully qualified domain name (FQDN), such as www.example.com, that you
+    #   want to secure with an ACM certificate. Use an asterisk (*) to create
+    #   a wildcard certificate that protects several sites in the same domain.
+    #   For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
     #   The first domain name you enter cannot exceed 63 octets, including
@@ -674,14 +729,22 @@ module Aws::ACM
     #   be up to 253 octets in length.
     #
     # @option params [String] :validation_method
-    #   The method you want to use to validate your domain.
+    #   The method you want to use if you are requesting a public certificate
+    #   to validate that you own or control domain. You can [validate with
+    #   DNS][1] or [validate with email][2]. We recommend that you use DNS
+    #   validation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #
     # @option params [Array<String>] :subject_alternative_names
     #   Additional FQDNs to be included in the Subject Alternative Name
-    #   extension of the ACM Certificate. For example, add the name
+    #   extension of the ACM certificate. For example, add the name
     #   www.example.net to a certificate for which the `DomainName` field is
     #   www.example.com if users can reach your site by using either name. The
-    #   maximum number of domain names that you can add to an ACM Certificate
+    #   maximum number of domain names that you can add to an ACM certificate
     #   is 100. However, the initial limit is 10 domain names. If you need
     #   more than 10 names, you must request a limit increase. For more
     #   information, see [Limits][1].
@@ -719,6 +782,32 @@ module Aws::ACM
     #   The domain name that you want ACM to use to send you emails so that
     #   you can validate domain ownership.
     #
+    # @option params [Types::CertificateOptions] :options
+    #   Currently, you can use this parameter to specify whether to add the
+    #   certificate to a certificate transparency log. Certificate
+    #   transparency makes it possible to detect SSL/TLS certificates that
+    #   have been mistakenly or maliciously issued. Certificates that have not
+    #   been logged typically produce an error message in a browser. For more
+    #   information, see [Opting Out of Certificate Transparency Logging][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #
+    # @option params [String] :certificate_authority_arn
+    #   The Amazon Resource Name (ARN) of the private certificate authority
+    #   (CA) that will be used to issue the certificate. If you do not provide
+    #   an ARN and you are trying to request a private certificate, ACM will
+    #   attempt to issue a public certificate. For more information about
+    #   private CAs, see the [AWS Certificate Manager Private Certificate
+    #   Authority (PCA)][1] user guide. The ARN must have the following form:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
+    #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RequestCertificateResponse#certificate_arn #certificate_arn} => String
@@ -736,6 +825,10 @@ module Aws::ACM
     #         validation_domain: "DomainNameString", # required
     #       },
     #     ],
+    #     options: {
+    #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     certificate_authority_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -753,12 +846,12 @@ module Aws::ACM
 
     # Resends the email that requests domain ownership validation. The
     # domain owner or an authorized representative must approve the ACM
-    # Certificate before it can be issued. The certificate can be approved
+    # certificate before it can be issued. The certificate can be approved
     # by clicking a link in the mail to navigate to the Amazon certificate
     # approval website and then clicking **I Approve**. However, the
     # validation email can be blocked by spam filters. Therefore, if you do
     # not receive the original mail, you can request that the mail be resent
-    # within 72 hours of requesting the ACM Certificate. If more than 72
+    # within 72 hours of requesting the ACM certificate. If more than 72
     # hours have elapsed since your original request or since your last
     # attempt to resend validation mail, you must request a new certificate.
     # For more information about setting up your contact email addresses,
@@ -820,6 +913,49 @@ module Aws::ACM
       req.send_request(options)
     end
 
+    # Updates a certificate. Currently, you can use this function to specify
+    # whether to opt in to or out of recording your certificate in a
+    # certificate transparency log. For more information, see [ Opting Out
+    # of Certificate Transparency Logging][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #
+    # @option params [required, String] :certificate_arn
+    #   ARN of the requested certificate to update. This must be of the form:
+    #
+    #   `arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
+    #   `
+    #
+    # @option params [required, Types::CertificateOptions] :options
+    #   Use to update the options for your certificate. Currently, you can
+    #   specify whether to add your certificate to a transparency log.
+    #   Certificate transparency makes it possible to detect SSL/TLS
+    #   certificates that have been mistakenly or maliciously issued.
+    #   Certificates that have not been logged typically produce an error
+    #   message in a browser.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_certificate_options({
+    #     certificate_arn: "Arn", # required
+    #     options: { # required
+    #       certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptions AWS API Documentation
+    #
+    # @overload update_certificate_options(params = {})
+    # @param [Hash] params ({})
+    def update_certificate_options(params = {}, options = {})
+      req = build_request(:update_certificate_options, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -833,7 +969,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

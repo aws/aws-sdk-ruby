@@ -15,16 +15,27 @@ module Aws::AutoScalingPlans
     #
     #       {
     #         cloud_formation_stack_arn: "XmlString",
+    #         tag_filters: [
+    #           {
+    #             key: "XmlStringMaxLen128",
+    #             values: ["XmlStringMaxLen256"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cloud_formation_stack_arn
     #   The Amazon Resource Name (ARN) of a CloudFormation stack.
     #   @return [String]
     #
+    # @!attribute [rw] tag_filters
+    #   A set of tags (up to 50).
+    #   @return [Array<Types::TagFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ApplicationSource AWS API Documentation
     #
     class ApplicationSource < Struct.new(
-      :cloud_formation_stack_arn)
+      :cloud_formation_stack_arn,
+      :tag_filters)
       include Aws::Structure
     end
 
@@ -35,6 +46,12 @@ module Aws::AutoScalingPlans
     #         scaling_plan_name: "ScalingPlanName", # required
     #         application_source: { # required
     #           cloud_formation_stack_arn: "XmlString",
+    #           tag_filters: [
+    #             {
+    #               key: "XmlStringMaxLen128",
+    #               values: ["XmlStringMaxLen256"],
+    #             },
+    #           ],
     #         },
     #         scaling_instructions: [ # required
     #           {
@@ -73,11 +90,13 @@ module Aws::AutoScalingPlans
     #       }
     #
     # @!attribute [rw] scaling_plan_name
-    #   The name of the scaling plan.
+    #   The name of the scaling plan. Names cannot contain vertical bars,
+    #   colons, or forward slashes.
     #   @return [String]
     #
     # @!attribute [rw] application_source
-    #   The source for the application.
+    #   A CloudFormation stack or set of tags. You can create one scaling
+    #   plan per application source.
     #   @return [Types::ApplicationSource]
     #
     # @!attribute [rw] scaling_instructions
@@ -244,6 +263,12 @@ module Aws::AutoScalingPlans
     #         application_sources: [
     #           {
     #             cloud_formation_stack_arn: "XmlString",
+    #             tag_filters: [
+    #               {
+    #                 key: "XmlStringMaxLen128",
+    #                 values: ["XmlStringMaxLen256"],
+    #               },
+    #             ],
     #           },
     #         ],
     #         max_results: 1,
@@ -346,8 +371,9 @@ module Aws::AutoScalingPlans
     # @!attribute [rw] resource_label
     #   Identifies the resource associated with the metric type. You can't
     #   specify a resource label unless the metric type is
-    #   `ALBRequestCountPerTarget` and there is a target group attached to
-    #   the Auto Scaling group, Spot Fleet request, or ECS service.
+    #   `ALBRequestCountPerTarget` and there is a target group for an
+    #   Application Load Balancer attached to the Auto Scaling group, Spot
+    #   Fleet request, or ECS service.
     #
     #   The format is
     #   app/&lt;load-balancer-name&gt;/&lt;load-balancer-id&gt;/targetgroup/&lt;target-group-name&gt;/&lt;target-group-id&gt;,
@@ -529,6 +555,10 @@ module Aws::AutoScalingPlans
     #   A simple message about the current status of the scaling plan.
     #   @return [String]
     #
+    # @!attribute [rw] status_start_time
+    #   The Unix timestamp when the scaling plan entered the current status.
+    #   @return [Time]
+    #
     # @!attribute [rw] creation_time
     #   The Unix timestamp when the scaling plan was created.
     #   @return [Time]
@@ -542,6 +572,7 @@ module Aws::AutoScalingPlans
       :scaling_instructions,
       :status_code,
       :status_message,
+      :status_start_time,
       :creation_time)
       include Aws::Structure
     end
@@ -676,6 +707,32 @@ module Aws::AutoScalingPlans
       include Aws::Structure
     end
 
+    # Represents a tag.
+    #
+    # @note When making an API call, you may pass TagFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "XmlStringMaxLen128",
+    #         values: ["XmlStringMaxLen256"],
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The tag values (0 to 20).
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/TagFilter AWS API Documentation
+    #
+    class TagFilter < Struct.new(
+      :key,
+      :values)
+      include Aws::Structure
+    end
+
     # Represents a target tracking scaling policy.
     #
     # @note When making an API call, you may pass TargetTrackingConfiguration
@@ -769,6 +826,87 @@ module Aws::AutoScalingPlans
       :estimated_instance_warmup)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateScalingPlanRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_source: {
+    #           cloud_formation_stack_arn: "XmlString",
+    #           tag_filters: [
+    #             {
+    #               key: "XmlStringMaxLen128",
+    #               values: ["XmlStringMaxLen256"],
+    #             },
+    #           ],
+    #         },
+    #         scaling_plan_name: "ScalingPlanName", # required
+    #         scaling_instructions: [
+    #           {
+    #             service_namespace: "autoscaling", # required, accepts autoscaling, ecs, ec2, rds, dynamodb
+    #             resource_id: "ResourceIdMaxLen1600", # required
+    #             scalable_dimension: "autoscaling:autoScalingGroup:DesiredCapacity", # required, accepts autoscaling:autoScalingGroup:DesiredCapacity, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #             min_capacity: 1, # required
+    #             max_capacity: 1, # required
+    #             target_tracking_configurations: [ # required
+    #               {
+    #                 predefined_scaling_metric_specification: {
+    #                   predefined_scaling_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
+    #                   resource_label: "ResourceLabel",
+    #                 },
+    #                 customized_scaling_metric_specification: {
+    #                   metric_name: "MetricName", # required
+    #                   namespace: "MetricNamespace", # required
+    #                   dimensions: [
+    #                     {
+    #                       name: "MetricDimensionName", # required
+    #                       value: "MetricDimensionValue", # required
+    #                     },
+    #                   ],
+    #                   statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #                   unit: "MetricUnit",
+    #                 },
+    #                 target_value: 1.0, # required
+    #                 disable_scale_in: false,
+    #                 scale_out_cooldown: 1,
+    #                 scale_in_cooldown: 1,
+    #                 estimated_instance_warmup: 1,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         scaling_plan_version: 1, # required
+    #       }
+    #
+    # @!attribute [rw] application_source
+    #   A CloudFormation stack or set of tags.
+    #   @return [Types::ApplicationSource]
+    #
+    # @!attribute [rw] scaling_plan_name
+    #   The name of the scaling plan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scaling_instructions
+    #   The scaling instructions.
+    #   @return [Array<Types::ScalingInstruction>]
+    #
+    # @!attribute [rw] scaling_plan_version
+    #   The version number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlanRequest AWS API Documentation
+    #
+    class UpdateScalingPlanRequest < Struct.new(
+      :application_source,
+      :scaling_plan_name,
+      :scaling_instructions,
+      :scaling_plan_version)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlanResponse AWS API Documentation
+    #
+    class UpdateScalingPlanResponse < Aws::EmptyStructure; end
 
   end
 end

@@ -89,6 +89,15 @@ module Aws::IAM
       data[:description]
     end
 
+    # The maximum session duration (in seconds) for the specified role.
+    # Anyone who uses the AWS CLI or API to assume the role can specify the
+    # duration using the optional `DurationSeconds` API parameter or
+    # `duration-seconds` CLI parameter.
+    # @return [Integer]
+    def max_session_duration
+      data[:max_session_duration]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -297,12 +306,12 @@ module Aws::IAM
     #   If it is not included, it defaults to a slash (/), listing all
     #   policies.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #

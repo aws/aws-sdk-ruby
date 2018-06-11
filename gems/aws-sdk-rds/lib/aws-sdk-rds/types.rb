@@ -296,13 +296,118 @@ module Aws::RDS
     # ^
     #
     # @!attribute [rw] name
-    #   The name of the availability zone.
+    #   The name of the Availability Zone.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # Contains the available processor feature information for the DB
+    # instance class of a DB instance.
+    #
+    # For more information, see [Configuring the Processor of the DB
+    # Instance Class][1] in the <i>Amazon RDS User Guide. </i>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor
+    #
+    # @!attribute [rw] name
+    #   The name of the processor feature. Valid names are `coreCount` and
+    #   `threadsPerCore`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value for the processor feature of the DB instance
+    #   class.
+    #   @return [String]
+    #
+    # @!attribute [rw] allowed_values
+    #   The allowed values for the processor feature of the DB instance
+    #   class.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AvailableProcessorFeature AWS API Documentation
+    #
+    class AvailableProcessorFeature < Struct.new(
+      :name,
+      :default_value,
+      :allowed_values)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BacktrackDBClusterMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #         backtrack_to: Time.now, # required
+    #         force: false,
+    #         use_earliest_time_on_point_in_time_unavailable: false,
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster to be backtracked. This
+    #   parameter is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `my-cluster1`
+    #   @return [String]
+    #
+    # @!attribute [rw] backtrack_to
+    #   The timestamp of the time to backtrack the DB cluster to, specified
+    #   in ISO 8601 format. For more information about ISO 8601, see the
+    #   [ISO8601 Wikipedia page.][1]
+    #
+    #   <note markdown="1"> If the specified time is not a consistent time for the DB cluster,
+    #   Aurora automatically chooses the nearest possible consistent time
+    #   for the DB cluster.
+    #
+    #    </note>
+    #
+    #   Constraints:
+    #
+    #   * Must contain a valid ISO 8601 timestamp.
+    #
+    #   * Cannot contain a timestamp set in the future.
+    #
+    #   Example: `2017-07-08T18:00Z`
+    #
+    #
+    #
+    #   [1]: http://en.wikipedia.org/wiki/ISO_8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] force
+    #   A value that, if specified, forces the DB cluster to backtrack when
+    #   binary logging is enabled. Otherwise, an error occurs when binary
+    #   logging is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] use_earliest_time_on_point_in_time_unavailable
+    #   If *BacktrackTo* is set to a timestamp earlier than the earliest
+    #   backtrack time, this value backtracks the DB cluster to the earliest
+    #   possible backtrack time. Otherwise, an error occurs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BacktrackDBClusterMessage AWS API Documentation
+    #
+    class BacktrackDBClusterMessage < Struct.new(
+      :db_cluster_identifier,
+      :backtrack_to,
+      :force,
+      :use_earliest_time_on_point_in_time_unavailable)
       include Aws::Structure
     end
 
@@ -565,10 +670,6 @@ module Aws::RDS
     #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
     #   KMS key alias for the KMS encryption key.
     #
-    #   If you copy an unencrypted DB cluster snapshot and specify a value
-    #   for the `KmsKeyId` parameter, Amazon RDS encrypts the target DB
-    #   cluster snapshot using the specified KMS encryption key.
-    #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a
     #   new KMS encryption key. If you don't specify a value for
@@ -584,6 +685,9 @@ module Aws::RDS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in
     #   another AWS Region.
+    #
+    #   If you copy an unencrypted DB cluster snapshot and specify a value
+    #   for the `KmsKeyId` parameter, an error is returned.
     #   @return [String]
     #
     # @!attribute [rw] pre_signed_url
@@ -1089,6 +1193,8 @@ module Aws::RDS
     #         kms_key_id: "String",
     #         pre_signed_url: "String",
     #         enable_iam_database_authentication: false,
+    #         backtrack_window: 1,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #         source_region: "String",
     #       }
     #
@@ -1169,15 +1275,21 @@ module Aws::RDS
     # @!attribute [rw] engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora`, `aurora-postgresql`
+    #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora),
+    #   `aurora-mysql` (for MySQL 5.7-compatible Aurora), and
+    #   `aurora-postgresql`
     #   @return [String]
     #
     # @!attribute [rw] engine_version
     #   The version number of the database engine to use.
     #
-    #   **Aurora**
+    #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`
+    #   Example: `5.6.10a`, `5.7.12`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -1357,6 +1469,25 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] destination_region
     #   @return [String]
     #
@@ -1390,6 +1521,8 @@ module Aws::RDS
       :kms_key_id,
       :pre_signed_url,
       :enable_iam_database_authentication,
+      :backtrack_window,
+      :enable_cloudwatch_logs_exports,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -1430,6 +1563,14 @@ module Aws::RDS
     #   group family, and can be applied only to a DB cluster running a
     #   database engine and engine version compatible with that DB cluster
     #   parameter group family.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `aurora5.6`, `aurora-mysql5.7`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `aurora-postgresql9.6`
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1603,6 +1744,12 @@ module Aws::RDS
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] db_name
@@ -1806,7 +1953,9 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
+    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #
+    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -2130,11 +2279,13 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.2.12` (supported in all AWS Regions)
+    #
     #   * `10.2.11` (supported in all AWS Regions)
     #
-    #   ^
     #
     #
+    #   * `10.1.31` (supported in all AWS Regions)
     #
     #   * `10.1.26` (supported in all AWS Regions)
     #
@@ -2145,6 +2296,8 @@ module Aws::RDS
     #   * `10.1.14` (supported in all AWS Regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.34` (supported in all AWS Regions)
     #
     #   * `10.0.32` (supported in all AWS Regions)
     #
@@ -2213,6 +2366,8 @@ module Aws::RDS
     #
     #   **MySQL**
     #
+    #   * `5.7.21` (supported in all AWS regions)
+    #
     #   * `5.7.19` (supported in all AWS regions)
     #
     #   * `5.7.17` (supported in all AWS regions)
@@ -2220,6 +2375,8 @@ module Aws::RDS
     #   * `5.7.16` (supported in all AWS regions)
     #
     #
+    #
+    #   * `5.6.39` (supported in all AWS Regions)
     #
     #   * `5.6.37` (supported in all AWS Regions)
     #
@@ -2233,6 +2390,8 @@ module Aws::RDS
     #     ca-central-1, eu-west-2)
     #
     #
+    #
+    #   * `5.5.59` (supported in all AWS Regions)
     #
     #   * `5.5.57` (supported in all AWS Regions)
     #
@@ -2299,7 +2458,9 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
+    #   * **Version 10.1**
+    #
+    #   * **Version 9.6.x:** ` 9.6.6 | 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
     #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
@@ -2540,6 +2701,13 @@ module Aws::RDS
     # @!attribute [rw] enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
@@ -2552,6 +2720,11 @@ module Aws::RDS
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
     #
@@ -2597,7 +2770,8 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :processor_features)
       include Aws::Structure
     end
 
@@ -2632,6 +2806,13 @@ module Aws::RDS
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #         source_region: "String",
     #       }
     #
@@ -2707,18 +2888,13 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] multi_az
-    #   Specifies whether the read replica is in a Multi-AZ deployment.
+    #   Specifies whether the Read Replica is in a Multi-AZ deployment.
     #
     #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates
     #   a standby of your replica in another Availability Zone for failover
     #   support for the replica. Creating your Read Replica as a Multi-AZ DB
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
-    #
-    #   <note markdown="1"> Currently PostgreSQL Read Replicas can only be created as single-AZ
-    #   DB instances.
-    #
-    #    </note>
     #   @return [Boolean]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -2933,6 +3109,13 @@ module Aws::RDS
     # @!attribute [rw] enable_performance_insights
     #   True to enable Performance Insights for the read replica, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
@@ -2945,6 +3128,16 @@ module Aws::RDS
     #   The list of logs that the new DB instance is to export to CloudWatch
     #   Logs.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
     #
     # @!attribute [rw] destination_region
     #   @return [String]
@@ -2979,6 +3172,8 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :enable_cloudwatch_logs_exports,
+      :processor_features,
+      :use_default_processor_features,
       :destination_region,
       :source_region)
       include Aws::Structure
@@ -3541,7 +3736,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] earliest_restorable_time
-    #   Specifies the earliest time to which a database can be restored with
+    #   The earliest time to which a database can be restored with
     #   point-in-time restore.
     #   @return [Time]
     #
@@ -3672,6 +3867,25 @@ module Aws::RDS
     #   Coordinated Time (UTC).
     #   @return [Time]
     #
+    # @!attribute [rw] earliest_backtrack_time
+    #   The earliest time to which a DB cluster can be backtracked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. If this value is set to 0,
+    #   backtracking is disabled for the DB cluster. Otherwise, backtracking
+    #   is enabled.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] backtrack_consumed_change_records
+    #   The number of change records stored for Backtrack.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enabled_cloudwatch_logs_exports
+    #   A list of log types that this DB cluster is configured to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -3709,7 +3923,84 @@ module Aws::RDS
       :associated_roles,
       :iam_database_authentication_enabled,
       :clone_group_id,
-      :cluster_create_time)
+      :cluster_create_time,
+      :earliest_backtrack_time,
+      :backtrack_window,
+      :backtrack_consumed_change_records,
+      :enabled_cloudwatch_logs_exports)
+      include Aws::Structure
+    end
+
+    # This data type is used as a response element in the
+    # DescribeDBClusterBacktracks action.
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   Contains a user-supplied DB cluster identifier. This identifier is
+    #   the unique key that identifies a DB cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] backtrack_identifier
+    #   Contains the backtrack identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] backtrack_to
+    #   The timestamp of the time to which the DB cluster was backtracked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] backtracked_from
+    #   The timestamp of the time from which the DB cluster was backtracked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] backtrack_request_creation_time
+    #   The timestamp of the time at which the backtrack was requested.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of the backtrack. This property returns one of the
+    #   following values:
+    #
+    #   * `applying` - The backtrack is currently being applied to or rolled
+    #     back from the DB cluster.
+    #
+    #   * `completed` - The backtrack has successfully been applied to or
+    #     rolled back from the DB cluster.
+    #
+    #   * `failed` - An error occurred while the backtrack was applied to or
+    #     rolled back from the DB cluster.
+    #
+    #   * `pending` - The backtrack is currently pending application to or
+    #     rollback from the DB cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrack AWS API Documentation
+    #
+    class DBClusterBacktrack < Struct.new(
+      :db_cluster_identifier,
+      :backtrack_identifier,
+      :backtrack_to,
+      :backtracked_from,
+      :backtrack_request_creation_time,
+      :status)
+      include Aws::Structure
+    end
+
+    # Contains the result of a successful invocation of the
+    # DescribeDBClusterBacktracks action.
+    #
+    # @!attribute [rw] marker
+    #   A pagination token that can be used in a subsequent
+    #   DescribeDBClusterBacktracks request.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_cluster_backtracks
+    #   Contains a list of backtracks for the user.
+    #   @return [Array<Types::DBClusterBacktrack>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrackMessage AWS API Documentation
+    #
+    class DBClusterBacktrackMessage < Struct.new(
+      :marker,
+      :db_cluster_backtracks)
       include Aws::Structure
     end
 
@@ -4173,6 +4464,11 @@ module Aws::RDS
     #   the log types specified by ExportableLogTypes to CloudWatch Logs.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_read_replica
+    #   Indicates whether the database engine version supports read
+    #   replicas.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -4186,7 +4482,8 @@ module Aws::RDS
       :valid_upgrade_target,
       :supported_timezones,
       :exportable_log_types,
-      :supports_log_exports_to_cloudwatch_logs)
+      :supports_log_exports_to_cloudwatch_logs,
+      :supports_read_replica)
       include Aws::Structure
     end
 
@@ -4520,6 +4817,11 @@ module Aws::RDS
     #   CloudWatch Logs.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
     #
     class DBInstance < Struct.new(
@@ -4574,7 +4876,8 @@ module Aws::RDS
       :iam_database_authentication_enabled,
       :performance_insights_enabled,
       :performance_insights_kms_key_id,
-      :enabled_cloudwatch_logs_exports)
+      :enabled_cloudwatch_logs_exports,
+      :processor_features)
       include Aws::Structure
     end
 
@@ -4967,6 +5270,12 @@ module Aws::RDS
     #   to database accounts is enabled, and otherwise false.
     #   @return [Boolean]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance when the DB snapshot was
+    #   created.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
     #
     class DBSnapshot < Struct.new(
@@ -4995,7 +5304,8 @@ module Aws::RDS
       :kms_key_id,
       :db_snapshot_arn,
       :timezone,
-      :iam_database_authentication_enabled)
+      :iam_database_authentication_enabled,
+      :processor_features)
       include Aws::Structure
     end
 
@@ -5599,6 +5909,109 @@ module Aws::RDS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeDBClusterBacktracksMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_cluster_identifier: "String", # required
+    #         backtrack_identifier: "String",
+    #         filters: [
+    #           {
+    #             name: "String", # required
+    #             values: ["String"], # required
+    #           },
+    #         ],
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster to be described. This
+    #   parameter is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `my-cluster1`
+    #   @return [String]
+    #
+    # @!attribute [rw] backtrack_identifier
+    #   If specified, this value is the backtrack identifier of the
+    #   backtrack to be described.
+    #
+    #   Constraints:
+    #
+    #   * Must contain a valid universally unique identifier (UUID). For
+    #     more information about UUIDs, see [A Universally Unique Identifier
+    #     (UUID) URN Namespace][1].
+    #
+    #   ^
+    #
+    #   Example: `123e4567-e89b-12d3-a456-426655440000`
+    #
+    #
+    #
+    #   [1]: http://www.ietf.org/rfc/rfc4122.txt
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A filter that specifies one or more DB clusters to describe.
+    #   Supported filters include the following:
+    #
+    #   * `db-cluster-backtrack-id` - Accepts backtrack identifiers. The
+    #     results list includes information about only the backtracks
+    #     identified by these identifiers.
+    #
+    #   * `db-cluster-backtrack-status` - Accepts any of the following
+    #     backtrack status values:
+    #
+    #     * `applying`
+    #
+    #     * `completed`
+    #
+    #     * `failed`
+    #
+    #     * `pending`
+    #
+    #     The results list includes information about only the backtracks
+    #     identified by these values. For more information about backtrack
+    #     status values, see DBClusterBacktrack.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous
+    #   DescribeDBClusterBacktracks request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the
+    #   value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterBacktracksMessage AWS API Documentation
+    #
+    class DescribeDBClusterBacktracksMessage < Struct.new(
+      :db_cluster_identifier,
+      :backtrack_identifier,
+      :filters,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeDBClusterParameterGroupsMessage
     #   data as a hash:
     #
@@ -6001,7 +6414,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -6713,7 +7126,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -7370,8 +7783,12 @@ module Aws::RDS
     #
     # @!attribute [rw] product_description
     #   Product description filter value. Specify this parameter to show
-    #   only the available offerings matching the specified product
+    #   only the available offerings that contain the specified product
     #   description.
+    #
+    #   <note markdown="1"> The results show offerings that partially match the filter value.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] offering_type
@@ -7981,7 +8398,25 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # This type is not currently supported.
+    # A filter name and value pair that is used to return a more specific
+    # list of results from a describe operation. Filters can be used to
+    # match a set of resources by specific criteria, such as IDs. The
+    # filters supported by a describe operation are documented with the
+    # describe operation.
+    #
+    # <note markdown="1"> Currently, wildcards are not supported in filters.
+    #
+    #  </note>
+    #
+    # The following actions can be filtered:
+    #
+    # * DescribeDBClusterBacktracks
+    #
+    # * DescribeDBClusters
+    #
+    # * DescribeDBInstances
+    #
+    # * DescribePendingMaintenanceActions
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -7992,11 +8427,11 @@ module Aws::RDS
     #       }
     #
     # @!attribute [rw] name
-    #   This parameter is not currently supported.
+    #   The name of the filter. Filter names are case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   This parameter is not currently supported.
+    #   One or more filter values. Filter values are case-sensitive.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Filter AWS API Documentation
@@ -8078,6 +8513,12 @@ module Aws::RDS
     #         preferred_backup_window: "String",
     #         preferred_maintenance_window: "String",
     #         enable_iam_database_authentication: false,
+    #         backtrack_window: 1,
+    #         cloudwatch_logs_export_configuration: {
+    #           enable_log_types: ["String"],
+    #           disable_log_types: ["String"],
+    #         },
+    #         engine_version: "String",
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -8164,7 +8605,7 @@ module Aws::RDS
     #
     # @!attribute [rw] option_group_name
     #   A value that indicates that the DB cluster should be associated with
-    #   the specified option group. Changing this parameter does not result
+    #   the specified option group. Changing this parameter doesn't result
     #   in an outage except in the following case, and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request. If the parameter change
@@ -8229,6 +8670,35 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB cluster.
+    #   @return [Types::CloudwatchLogsExportConfiguration]
+    #
+    # @!attribute [rw] engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless the
+    #   ApplyImmediately parameter is set to true.
+    #
+    #   For a list of valid engine versions, see CreateDBInstance, or call
+    #   DescribeDBEngineVersions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -8243,7 +8713,10 @@ module Aws::RDS
       :option_group_name,
       :preferred_backup_window,
       :preferred_maintenance_window,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :backtrack_window,
+      :cloudwatch_logs_export_configuration,
+      :engine_version)
       include Aws::Structure
     end
 
@@ -8415,6 +8888,13 @@ module Aws::RDS
     #           enable_log_types: ["String"],
     #           disable_log_types: ["String"],
     #         },
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -8482,7 +8962,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_security_groups
     #   A list of DB security groups to authorize on this DB instance.
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints:
@@ -8535,7 +9015,7 @@ module Aws::RDS
     #   The new password for the master user. The password can include any
     #   printable ASCII character except "/", """, or "@".
     #
-    #   Changing this parameter does not result in an outage and the change
+    #   Changing this parameter doesn't result in an outage and the change
     #   is asynchronously applied as soon as possible. Between the time of
     #   the request and the completion of the request, the
     #   `MasterUserPassword` element exists in the `PendingModifiedValues`
@@ -8578,7 +9058,7 @@ module Aws::RDS
     #
     # @!attribute [rw] db_parameter_group_name
     #   The name of the DB parameter group to apply to the DB instance.
-    #   Changing this setting does not result in an outage. The parameter
+    #   Changing this setting doesn't result in an outage. The parameter
     #   group name itself is changed immediately, but the actual parameter
     #   changes are not applied until you reboot the instance without
     #   failover. The db instance will NOT be rebooted automatically and the
@@ -8627,7 +9107,7 @@ module Aws::RDS
     # @!attribute [rw] preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, as determined by the
-    #   `BackupRetentionPeriod` parameter. Changing this parameter does not
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
     #   result in an outage and the change is asynchronously applied as soon
     #   as possible.
     #
@@ -8650,11 +9130,11 @@ module Aws::RDS
     #
     # @!attribute [rw] preferred_maintenance_window
     #   The weekly time range (in UTC) during which system maintenance can
-    #   occur, which might result in an outage. Changing this parameter does
-    #   not result in an outage, except in the following situation, and the
-    #   change is asynchronously applied as soon as possible. If there are
-    #   pending actions that cause a reboot, and the maintenance window is
-    #   changed to include the current time, then changing this parameter
+    #   occur, which might result in an outage. Changing this parameter
+    #   doesn't result in an outage, except in the following situation, and
+    #   the change is asynchronously applied as soon as possible. If there
+    #   are pending actions that cause a reboot, and the maintenance window
+    #   is changed to include the current time, then changing this parameter
     #   will cause a reboot of the DB instance. If moving this window to the
     #   current time, there must be at least 30 minutes between the current
     #   time and end of the window to ensure pending changes are applied.
@@ -8670,7 +9150,7 @@ module Aws::RDS
     #
     # @!attribute [rw] multi_az
     #   Specifies if the DB instance is a Multi-AZ deployment. Changing this
-    #   parameter does not result in an outage and the change is applied
+    #   parameter doesn't result in an outage and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request.
     #   @return [Boolean]
@@ -8692,7 +9172,7 @@ module Aws::RDS
     #
     # @!attribute [rw] allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
-    #   parameter does not result in an outage and the change is
+    #   parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints: This parameter must be set to true when specifying a
@@ -8703,7 +9183,7 @@ module Aws::RDS
     # @!attribute [rw] auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to
     #   the DB instance during the maintenance window. Changing this
-    #   parameter does not result in an outage except in the following case
+    #   parameter doesn't result in an outage except in the following case
     #   and the change is asynchronously applied as soon as possible. An
     #   outage will result if this parameter is set to `true` during the
     #   maintenance window, and a newer minor version is available, and RDS
@@ -8721,7 +9201,7 @@ module Aws::RDS
     #   The new Provisioned IOPS (I/O operations per second) value for the
     #   RDS instance.
     #
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   applied during the next maintenance window unless the
     #   `ApplyImmediately` parameter is set to `true` for this request. If
     #   you are migrating from Provisioned IOPS to standard storage, set
@@ -8754,7 +9234,7 @@ module Aws::RDS
     #
     # @!attribute [rw] option_group_name
     #   Indicates that the DB instance should be associated with the
-    #   specified option group. Changing this parameter does not result in
+    #   specified option group. Changing this parameter doesn't result in
     #   an outage except in the following case and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request. If the parameter change
@@ -8980,6 +9460,13 @@ module Aws::RDS
     # @!attribute [rw] enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
@@ -8990,8 +9477,18 @@ module Aws::RDS
     #
     # @!attribute [rw] cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #   to CloudWatch Logs for a specific DB instance.
     #   @return [Types::CloudwatchLogsExportConfiguration]
+    #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
     #
@@ -9031,7 +9528,9 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
-      :cloudwatch_logs_export_configuration)
+      :cloudwatch_logs_export_configuration,
+      :processor_features,
+      :use_default_processor_features)
       include Aws::Structure
     end
 
@@ -9998,6 +10497,11 @@ module Aws::RDS
     #   Maximum provisioned IOPS per GiB for a DB instance.
     #   @return [Float]
     #
+    # @!attribute [rw] available_processor_features
+    #   A list of the available processor features for the DB instance class
+    #   of a DB instance.
+    #   @return [Array<Types::AvailableProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
     #
     class OrderableDBInstanceOption < Struct.new(
@@ -10020,7 +10524,8 @@ module Aws::RDS
       :min_iops_per_db_instance,
       :max_iops_per_db_instance,
       :min_iops_per_gib,
-      :max_iops_per_gib)
+      :max_iops_per_gib,
+      :available_processor_features)
       include Aws::Structure
     end
 
@@ -10294,6 +10799,11 @@ module Aws::RDS
     #   or deactivated.
     #   @return [Types::PendingCloudwatchLogsExports]
     #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
@@ -10310,7 +10820,72 @@ module Aws::RDS
       :storage_type,
       :ca_certificate_identifier,
       :db_subnet_group_name,
-      :pending_cloudwatch_logs_exports)
+      :pending_cloudwatch_logs_exports,
+      :processor_features)
+      include Aws::Structure
+    end
+
+    # Contains the processor features of a DB instance class.
+    #
+    # To specify the number of CPU cores, use the `coreCount` feature name
+    # for the `Name` parameter. To specify the number of threads per core,
+    # use the `threadsPerCore` feature name for the `Name` parameter.
+    #
+    # You can set the processor features of the DB instance class for a DB
+    # instance when you call one of the following actions:
+    #
+    # * CreateDBInstance
+    #
+    # * ModifyDBInstance
+    #
+    # * RestoreDBInstanceFromDBSnapshot
+    #
+    # * RestoreDBInstanceFromS3
+    #
+    # * RestoreDBInstanceToPointInTime
+    #
+    # You can view the valid processor values for a particular instance
+    # class by calling the DescribeOrderableDBInstanceOptions action and
+    # specifying the instance class for the `DBInstanceClass` parameter.
+    #
+    # In addition, you can use the following actions for DB instance class
+    # processor information:
+    #
+    # * DescribeDBInstances
+    #
+    # * DescribeDBSnapshots
+    #
+    # * DescribeValidDBInstanceModifications
+    #
+    # For more information, see [Configuring the Processor of the DB
+    # Instance Class][1] in the <i>Amazon RDS User Guide. </i>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html#USER_ConfigureProcessor
+    #
+    # @note When making an API call, you may pass ProcessorFeature
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the processor feature. Valid names are `coreCount` and
+    #   `threadsPerCore`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of a processor feature name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ProcessorFeature AWS API Documentation
+    #
+    class ProcessorFeature < Struct.new(
+      :name,
+      :value)
       include Aws::Structure
     end
 
@@ -11057,6 +11632,8 @@ module Aws::RDS
     #         s3_bucket_name: "String", # required
     #         s3_prefix: "String",
     #         s3_ingestion_role_arn: "String", # required
+    #         backtrack_window: 1,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -11138,9 +11715,13 @@ module Aws::RDS
     # @!attribute [rw] engine_version
     #   The version number of the database engine to use.
     #
-    #   **Aurora**
+    #   **Aurora MySQL**
     #
     #   Example: `5.6.10a`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -11292,6 +11873,25 @@ module Aws::RDS
     #   Amazon S3 bucket on your behalf.
     #   @return [String]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -11319,7 +11919,9 @@ module Aws::RDS
       :source_engine_version,
       :s3_bucket_name,
       :s3_prefix,
-      :s3_ingestion_role_arn)
+      :s3_ingestion_role_arn,
+      :backtrack_window,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -11359,6 +11961,8 @@ module Aws::RDS
     #         ],
     #         kms_key_id: "String",
     #         enable_iam_database_authentication: false,
+    #         backtrack_window: 1,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -11372,7 +11976,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 letters, numbers, or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -11471,6 +12075,25 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -11486,7 +12109,9 @@ module Aws::RDS
       :vpc_security_group_ids,
       :tags,
       :kms_key_id,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :backtrack_window,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -11525,6 +12150,8 @@ module Aws::RDS
     #         ],
     #         kms_key_id: "String",
     #         enable_iam_database_authentication: false,
+    #         backtrack_window: 1,
+    #         enable_cloudwatch_logs_exports: ["String"],
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -11599,9 +12226,9 @@ module Aws::RDS
     # @!attribute [rw] port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: A value from `1150-65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The default port for the engine.
     #   @return [Integer]
     #
     # @!attribute [rw] db_subnet_group_name
@@ -11666,6 +12293,25 @@ module Aws::RDS
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking,
+    #   set this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -11680,7 +12326,9 @@ module Aws::RDS
       :vpc_security_group_ids,
       :tags,
       :kms_key_id,
-      :enable_iam_database_authentication)
+      :enable_iam_database_authentication,
+      :backtrack_window,
+      :enable_cloudwatch_logs_exports)
       include Aws::Structure
     end
 
@@ -11730,6 +12378,13 @@ module Aws::RDS
     #         domain_iam_role_name: "String",
     #         enable_iam_database_authentication: false,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -11863,10 +12518,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
-    #
-    #   * `aurora-postgresql`
-    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -11975,8 +12626,6 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
-    #
     #   Default: `false`
     #   @return [Boolean]
     #
@@ -11984,6 +12633,16 @@ module Aws::RDS
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
     #
@@ -12010,7 +12669,9 @@ module Aws::RDS
       :copy_tags_to_snapshot,
       :domain_iam_role_name,
       :enable_iam_database_authentication,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :processor_features,
+      :use_default_processor_features)
       include Aws::Structure
     end
 
@@ -12076,6 +12737,13 @@ module Aws::RDS
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #       }
     #
     # @!attribute [rw] db_name
@@ -12406,6 +13074,13 @@ module Aws::RDS
     # @!attribute [rw] enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
@@ -12418,6 +13093,16 @@ module Aws::RDS
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3Message AWS API Documentation
     #
@@ -12460,7 +13145,9 @@ module Aws::RDS
       :s3_ingestion_role_arn,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :processor_features,
+      :use_default_processor_features)
       include Aws::Structure
     end
 
@@ -12512,6 +13199,13 @@ module Aws::RDS
     #         domain_iam_role_name: "String",
     #         enable_iam_database_authentication: false,
     #         enable_cloudwatch_logs_exports: ["String"],
+    #         processor_features: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         use_default_processor_features: false,
     #       }
     #
     # @!attribute [rw] source_db_instance_identifier
@@ -12663,10 +13357,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
-    #
-    #   * `aurora-postgresql`
-    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -12768,8 +13458,6 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
-    #
     #   Default: `false`
     #   @return [Boolean]
     #
@@ -12777,6 +13465,16 @@ module Aws::RDS
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] processor_features
+    #   The number of CPU cores and the number of threads per core for the
+    #   DB instance class of the DB instance.
+    #   @return [Array<Types::ProcessorFeature>]
+    #
+    # @!attribute [rw] use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
     #
@@ -12805,7 +13503,9 @@ module Aws::RDS
       :domain,
       :domain_iam_role_name,
       :enable_iam_database_authentication,
-      :enable_cloudwatch_logs_exports)
+      :enable_cloudwatch_logs_exports,
+      :processor_features,
+      :use_default_processor_features)
       include Aws::Structure
     end
 
@@ -13149,10 +13849,15 @@ module Aws::RDS
     #   Valid storage options for your DB instance.
     #   @return [Array<Types::ValidStorageOptions>]
     #
+    # @!attribute [rw] valid_processor_features
+    #   Valid processor features for your DB instance.
+    #   @return [Array<Types::AvailableProcessorFeature>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ValidDBInstanceModificationsMessage AWS API Documentation
     #
     class ValidDBInstanceModificationsMessage < Struct.new(
-      :storage)
+      :storage,
+      :valid_processor_features)
       include Aws::Structure
     end
 

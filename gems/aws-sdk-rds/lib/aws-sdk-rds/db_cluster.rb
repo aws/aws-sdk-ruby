@@ -96,7 +96,7 @@ module Aws::RDS
       data[:percent_progress]
     end
 
-    # Specifies the earliest time to which a database can be restored with
+    # The earliest time to which a database can be restored with
     # point-in-time restore.
     # @return [Time]
     def earliest_restorable_time
@@ -275,6 +275,33 @@ module Aws::RDS
       data[:cluster_create_time]
     end
 
+    # The earliest time to which a DB cluster can be backtracked.
+    # @return [Time]
+    def earliest_backtrack_time
+      data[:earliest_backtrack_time]
+    end
+
+    # The target backtrack window, in seconds. If this value is set to 0,
+    # backtracking is disabled for the DB cluster. Otherwise, backtracking
+    # is enabled.
+    # @return [Integer]
+    def backtrack_window
+      data[:backtrack_window]
+    end
+
+    # The number of change records stored for Backtrack.
+    # @return [Integer]
+    def backtrack_consumed_change_records
+      data[:backtrack_consumed_change_records]
+    end
+
+    # A list of log types that this DB cluster is configured to export to
+    # CloudWatch Logs.
+    # @return [Array<String>]
+    def enabled_cloudwatch_logs_exports
+      data[:enabled_cloudwatch_logs_exports]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -436,6 +463,8 @@ module Aws::RDS
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -487,13 +516,19 @@ module Aws::RDS
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora`, `aurora-postgresql`
+    #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora),
+    #   `aurora-mysql` (for MySQL 5.7-compatible Aurora), and
+    #   `aurora-postgresql`
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   **Aurora**
+    #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`
+    #   Example: `5.6.10a`, `5.7.12`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`
     # @option options [Integer] :port
     #   The port number on which the instances in the DB cluster accept
     #   connections.
@@ -646,6 +681,21 @@ module Aws::RDS
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    # @option options [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    # @option options [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -782,6 +832,12 @@ module Aws::RDS
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
+    #     cloudwatch_logs_export_configuration: {
+    #       enable_log_types: ["String"],
+    #       disable_log_types: ["String"],
+    #     },
+    #     engine_version: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -841,7 +897,7 @@ module Aws::RDS
     #   Constraints: Must contain from 8 to 41 characters.
     # @option options [String] :option_group_name
     #   A value that indicates that the DB cluster should be associated with
-    #   the specified option group. Changing this parameter does not result in
+    #   the specified option group. Changing this parameter doesn't result in
     #   an outage except in the following case, and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request. If the parameter change
@@ -898,6 +954,29 @@ module Aws::RDS
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    # @option options [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB cluster.
+    # @option options [String] :engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless the ApplyImmediately
+    #   parameter is set to true.
+    #
+    #   For a list of valid engine versions, see CreateDBInstance, or call
+    #   DescribeDBEngineVersions.
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -928,6 +1007,8 @@ module Aws::RDS
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -984,9 +1065,9 @@ module Aws::RDS
     # @option options [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: A value from `1150-65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The default port for the engine.
     # @option options [String] :db_subnet_group_name
     #   The DB subnet group name to use for the new DB cluster.
     #
@@ -1037,6 +1118,21 @@ module Aws::RDS
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    # @option options [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    # @option options [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

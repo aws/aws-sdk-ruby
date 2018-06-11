@@ -1,3 +1,5 @@
+require 'aws-eventstream'
+
 module Aws
   module Stubbing
     module Protocols
@@ -72,6 +74,77 @@ module Aws
 
         def head_operation(operation)
           operation.http_method == "HEAD"
+        end
+
+        def eventstream?(rules)
+          rules.eventstream
+        end
+
+        def encode_eventstream_response(rules, data, builder)
+          data.inject('') do |stream, event_data|
+            # construct message headers and payload
+            opts = {headers: {}}
+            case event_data.delete(:message_type)
+            when 'event'
+              encode_event(opts, rules, event_data, builder)
+            when 'error'
+              # errors are unmodeled
+              encode_error(opts, event_data)
+            when 'exception'
+              # Pending
+              raise 'Stubbing :exception event is not supported'
+            end
+            stream << Aws::EventStream::Encoder.new.encode(
+              Aws::EventStream::Message.new(opts))
+            stream
+          end
+        end
+
+        def encode_error(opts, event_data)
+          opts[:headers][':error-message'] = Aws::EventStream::HeaderValue.new(
+            value: event_data[:error_message],
+            type: 'string'
+          )
+          opts[:headers][':error-code'] = Aws::EventStream::HeaderValue.new(
+            value: event_data[:error_code],
+            type: 'string'
+          )
+          opts[:headers][':message-type'] = Aws::EventStream::HeaderValue.new(
+            value: 'error',
+            type: 'string'
+          )
+          opts
+        end
+
+        def encode_event(opts, rules, event_data, builder)
+          event_ref = rules.shape.member(event_data.delete(:event_type))
+          event_data.each do |k, v|
+            member_ref = event_ref.shape.member(k)
+            if member_ref.eventheader
+              opts[:headers][member_ref.location_name] = Aws::EventStream::HeaderValue.new(
+                value: v,
+                type: member_ref.eventheader_type
+              )
+            elsif member_ref.eventpayload
+              case member_ref.eventpayload_type
+              when 'string'
+                opts[:payload] = StringIO.new(v)
+              when 'blob'
+                opts[:payload] = v
+              when 'structure'
+                opts[:payload] = StringIO.new(builder.new(member_ref).serialize(v))
+              end
+            end
+          end
+          opts[:headers][':event-type'] = Aws::EventStream::HeaderValue.new(
+            value: event_ref.location_name,
+            type: 'string'
+          )
+          opts[:headers][':message-type'] = Aws::EventStream::HeaderValue.new(
+            value: 'event',
+            type: 'string'
+          )
+          opts
         end
 
       end

@@ -46,6 +46,10 @@ module Aws::StorageGateway
     #   activation-related parameters, however, these are merely defaults --
     #   the arguments you pass to the `ActivateGateway` API call determine
     #   the actual configuration of your gateway.
+    #
+    #   For more information, see
+    #   https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html
+    #   in the Storage Gateway User Guide.
     #   @return [String]
     #
     # @!attribute [rw] gateway_name
@@ -70,9 +74,9 @@ module Aws::StorageGateway
     #
     #   Valid Values: "us-east-1", "us-east-2", "us-west-1",
     #   "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1",
-    #   "eu-west-2", "ap-northeast-1", "ap-northeast-2",
-    #   "ap-southeast-1", "ap-southeast-2", "ap-south-1",
-    #   "sa-east-1"
+    #   "eu-west-2", "eu-west-3", "ap-northeast-1",
+    #   "ap-northeast-2", "ap-southeast-1", "ap-southeast-2",
+    #   "ap-south-1", "sa-east-1"
     #
     #
     #
@@ -589,10 +593,12 @@ module Aws::StorageGateway
     #         role: "Role", # required
     #         location_arn: "LocationARN", # required
     #         default_storage_class: "StorageClass",
+    #         object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
     #         client_list: ["IPV4AddressCIDR"],
     #         squash: "Squash",
     #         read_only: false,
     #         guess_mime_type_enabled: false,
+    #         requester_pays: false,
     #       }
     #
     # @!attribute [rw] client_token
@@ -635,6 +641,12 @@ module Aws::StorageGateway
     #   S3\_STANDARD is used. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] object_acl
+    #   Sets the access control list permission for objects in the Amazon S3
+    #   bucket that a file gateway puts objects into. The default value is
+    #   "private".
+    #   @return [String]
+    #
     # @!attribute [rw] client_list
     #   The list of clients that are allowed to access the file gateway. The
     #   list must contain either valid IP addresses or valid CIDR blocks.
@@ -651,14 +663,20 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   Sets the write status of a file share: "true" if the write status
-    #   is read-only, and otherwise "false".
+    #   Sets the write status of a file share. This value is true if the
+    #   write status is read-only, and otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] guess_mime_type_enabled
     #   Enables guessing of the MIME type for uploaded objects based on file
-    #   extensions: "true" to enable MIME type guessing, and otherwise
-    #   "false".
+    #   extensions. Set this value to true to enable MIME type guessing, and
+    #   otherwise to false. The default value is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] requester_pays
+    #   Sets who pays the cost of the request and the data download from the
+    #   Amazon S3 bucket. Set this value to true if you want the requester
+    #   to pay instead of the bucket owner, and otherwise to false.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
@@ -672,10 +690,12 @@ module Aws::StorageGateway
       :role,
       :location_arn,
       :default_storage_class,
+      :object_acl,
       :client_list,
       :squash,
       :read_only,
-      :guess_mime_type_enabled)
+      :guess_mime_type_enabled,
+      :requester_pays)
       include Aws::Structure
     end
 
@@ -2859,6 +2879,12 @@ module Aws::StorageGateway
     #   S3\_STANDARD is used. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] object_acl
+    #   Sets the access control list permission for objects in the S3 bucket
+    #   that a file gateway puts objects into. The default value is
+    #   "private".
+    #   @return [String]
+    #
     # @!attribute [rw] client_list
     #   The list of clients that are allowed to access the file gateway. The
     #   list must contain either valid IP addresses or valid CIDR blocks.
@@ -2875,15 +2901,20 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   A value that indicates whether the write status of a file share is
-    #   read-only: "true" if write status is read-only, and otherwise
-    #   "false".
+    #   Sets the write status of a file share. This value is true if the
+    #   write status is read-only, and otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] guess_mime_type_enabled
     #   Enables guessing of the MIME type for uploaded objects based on file
-    #   extensions: "true" to enable MIME type guessing, and otherwise
-    #   "false".
+    #   extensions. Set this value to true to enable MIME type guessing, and
+    #   otherwise to false. The default value is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] requester_pays
+    #   Sets who pays the cost of the request and the data download from the
+    #   Amazon S3 bucket. Set this value to true if you want the requester
+    #   to pay instead of the bucket owner, and otherwise to false.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
@@ -2900,10 +2931,12 @@ module Aws::StorageGateway
       :role,
       :location_arn,
       :default_storage_class,
+      :object_acl,
       :client_list,
       :squash,
       :read_only,
-      :guess_mime_type_enabled)
+      :guess_mime_type_enabled,
+      :requester_pays)
       include Aws::Structure
     end
 
@@ -3874,10 +3907,12 @@ module Aws::StorageGateway
     #           owner_id: 1,
     #         },
     #         default_storage_class: "StorageClass",
+    #         object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
     #         client_list: ["IPV4AddressCIDR"],
     #         squash: "Squash",
     #         read_only: false,
     #         guess_mime_type_enabled: false,
+    #         requester_pays: false,
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -3905,6 +3940,12 @@ module Aws::StorageGateway
     #   S3\_STANDARD is used. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] object_acl
+    #   Sets the access control list permission for objects in the S3 bucket
+    #   that a file gateway puts objects into. The default value is
+    #   "private".
+    #   @return [String]
+    #
     # @!attribute [rw] client_list
     #   The list of clients that are allowed to access the file gateway. The
     #   list must contain either valid IP addresses or valid CIDR blocks.
@@ -3921,14 +3962,20 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] read_only
-    #   Sets the write status of a file share: "true" if the write status
-    #   is read-only, otherwise "false".
+    #   Sets the write status of a file share. This value is true if the
+    #   write status is read-only, and otherwise false.
     #   @return [Boolean]
     #
     # @!attribute [rw] guess_mime_type_enabled
     #   Enables guessing of the MIME type for uploaded objects based on file
-    #   extensions: "true" to enable MIME type guessing, and otherwise
-    #   "false".
+    #   extensions. Set this value to true to enable MIME type guessing, and
+    #   otherwise to false. The default value is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] requester_pays
+    #   Sets who pays the cost of the request and the data download from the
+    #   Amazon S3 bucket. Set this value to true if you want the requester
+    #   to pay instead of the bucket owner, and otherwise to false.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
@@ -3939,10 +3986,12 @@ module Aws::StorageGateway
       :kms_key,
       :nfs_file_share_defaults,
       :default_storage_class,
+      :object_acl,
       :client_list,
       :squash,
       :read_only,
-      :guess_mime_type_enabled)
+      :guess_mime_type_enabled,
+      :requester_pays)
       include Aws::Structure
     end
 

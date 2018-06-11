@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.0.1 (2018-02-16)
+------------------
+
 * Issue - Update `aws-sdk-marketplacemetering` gemspec metadata.
 
 1.0.0 (2017-08-29)

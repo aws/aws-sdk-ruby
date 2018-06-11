@@ -8,6 +8,104 @@
 module Aws::CloudWatchEvents
   module Types
 
+    # The array properties for the submitted job, such as the size of the
+    # array. The array size can be between 2 and 10,000. If you specify
+    # array properties for a job, it becomes an array job. This parameter is
+    # used only if the target is an AWS Batch job.
+    #
+    # @note When making an API call, you may pass BatchArrayProperties
+    #   data as a hash:
+    #
+    #       {
+    #         size: 1,
+    #       }
+    #
+    # @!attribute [rw] size
+    #   The size of the array, if this is an array batch job. Valid values
+    #   are integers between 2 and 10,000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchArrayProperties AWS API Documentation
+    #
+    class BatchArrayProperties < Struct.new(
+      :size)
+      include Aws::Structure
+    end
+
+    # The custom parameters to be used when the target is an AWS Batch job.
+    #
+    # @note When making an API call, you may pass BatchParameters
+    #   data as a hash:
+    #
+    #       {
+    #         job_definition: "String", # required
+    #         job_name: "String", # required
+    #         array_properties: {
+    #           size: 1,
+    #         },
+    #         retry_strategy: {
+    #           attempts: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] job_definition
+    #   The ARN or name of the job definition to use if the event target is
+    #   an AWS Batch job. This job definition must already exist.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name to use for this execution of the job, if the target is an
+    #   AWS Batch job.
+    #   @return [String]
+    #
+    # @!attribute [rw] array_properties
+    #   The array properties for the submitted job, such as the size of the
+    #   array. The array size can be between 2 and 10,000. If you specify
+    #   array properties for a job, it becomes an array job. This parameter
+    #   is used only if the target is an AWS Batch job.
+    #   @return [Types::BatchArrayProperties]
+    #
+    # @!attribute [rw] retry_strategy
+    #   The retry strategy to use for failed jobs, if the target is an AWS
+    #   Batch job. The retry strategy is the number of times to retry the
+    #   failed job execution. Valid values are 1 to 10. When you specify a
+    #   retry strategy here, it overrides the retry strategy defined in the
+    #   job definition.
+    #   @return [Types::BatchRetryStrategy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchParameters AWS API Documentation
+    #
+    class BatchParameters < Struct.new(
+      :job_definition,
+      :job_name,
+      :array_properties,
+      :retry_strategy)
+      include Aws::Structure
+    end
+
+    # The retry strategy to use for failed jobs, if the target is an AWS
+    # Batch job. If you specify a retry strategy here, it overrides the
+    # retry strategy defined in the job definition.
+    #
+    # @note When making an API call, you may pass BatchRetryStrategy
+    #   data as a hash:
+    #
+    #       {
+    #         attempts: 1,
+    #       }
+    #
+    # @!attribute [rw] attempts
+    #   The number of times to attempt to retry, if the job fails. Valid
+    #   values are 1 to 10.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchRetryStrategy AWS API Documentation
+    #
+    class BatchRetryStrategy < Struct.new(
+      :attempts)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteRuleRequest
     #   data as a hash:
     #
@@ -458,9 +556,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] detail
-    #   In the JSON sense, an object containing fields, which may also
-    #   contain nested subobjects. No constraints are imposed on its
-    #   contents.
+    #   A valid JSON string. There is no other schema imposed. The JSON
+    #   string may contain fields and nested subobjects.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequestEntry AWS API Documentation
@@ -656,6 +753,19 @@ module Aws::CloudWatchEvents
     #             ecs_parameters: {
     #               task_definition_arn: "Arn", # required
     #               task_count: 1,
+    #             },
+    #             batch_parameters: {
+    #               job_definition: "String", # required
+    #               job_name: "String", # required
+    #               array_properties: {
+    #                 size: 1,
+    #               },
+    #               retry_strategy: {
+    #                 attempts: 1,
+    #               },
+    #             },
+    #             sqs_parameters: {
+    #               message_group_id: "MessageGroupId",
     #             },
     #           },
     #         ],
@@ -909,6 +1019,27 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
+    # This structure includes the custom parameter to be used when the
+    # target is an SQS FIFO queue.
+    #
+    # @note When making an API call, you may pass SqsParameters
+    #   data as a hash:
+    #
+    #       {
+    #         message_group_id: "MessageGroupId",
+    #       }
+    #
+    # @!attribute [rw] message_group_id
+    #   The FIFO message group ID to use as the target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/SqsParameters AWS API Documentation
+    #
+    class SqsParameters < Struct.new(
+      :message_group_id)
+      include Aws::Structure
+    end
+
     # Targets are the resources to be invoked when a rule is triggered.
     # Target types include EC2 instances, AWS Lambda functions, Amazon
     # Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines,
@@ -944,6 +1075,19 @@ module Aws::CloudWatchEvents
     #           task_definition_arn: "Arn", # required
     #           task_count: 1,
     #         },
+    #         batch_parameters: {
+    #           job_definition: "String", # required
+    #           job_name: "String", # required
+    #           array_properties: {
+    #             size: 1,
+    #           },
+    #           retry_strategy: {
+    #             attempts: 1,
+    #           },
+    #         },
+    #         sqs_parameters: {
+    #           message_group_id: "MessageGroupId",
+    #         },
     #       }
     #
     # @!attribute [rw] id
@@ -962,8 +1106,7 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] input
     #   Valid JSON text passed to the target. In this case, nothing from the
-    #   event itself is passed to the target. You must use JSON dot
-    #   notation, not bracket notation. For more information, see [The
+    #   event itself is passed to the target. For more information, see [The
     #   JavaScript Object Notation (JSON) Data Interchange Format][1].
     #
     #
@@ -1011,6 +1154,21 @@ module Aws::CloudWatchEvents
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
     #   @return [Types::EcsParameters]
     #
+    # @!attribute [rw] batch_parameters
+    #   Contains the job definition, job name, and other parameters if the
+    #   event target is an AWS Batch job. For more information about AWS
+    #   Batch, see [Jobs][1] in the *AWS Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/batch/latest/userguide/jobs.html
+    #   @return [Types::BatchParameters]
+    #
+    # @!attribute [rw] sqs_parameters
+    #   Contains the message group ID to use when the target is a FIFO
+    #   queue.
+    #   @return [Types::SqsParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Target AWS API Documentation
     #
     class Target < Struct.new(
@@ -1022,7 +1180,9 @@ module Aws::CloudWatchEvents
       :input_transformer,
       :kinesis_parameters,
       :run_command_parameters,
-      :ecs_parameters)
+      :ecs_parameters,
+      :batch_parameters,
+      :sqs_parameters)
       include Aws::Structure
     end
 

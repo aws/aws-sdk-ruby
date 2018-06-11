@@ -58,6 +58,7 @@ module Aws::IoT
     CACertificateStatus = Shapes::StringShape.new(name: 'CACertificateStatus')
     CACertificates = Shapes::ListShape.new(name: 'CACertificates')
     CancelCertificateTransferRequest = Shapes::StructureShape.new(name: 'CancelCertificateTransferRequest')
+    CancelJobExecutionRequest = Shapes::StructureShape.new(name: 'CancelJobExecutionRequest')
     CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
     CancelJobResponse = Shapes::StructureShape.new(name: 'CancelJobResponse')
     CanceledThings = Shapes::IntegerShape.new(name: 'CanceledThings')
@@ -74,6 +75,7 @@ module Aws::IoT
     CertificateStatus = Shapes::StringShape.new(name: 'CertificateStatus')
     CertificateValidationException = Shapes::StructureShape.new(name: 'CertificateValidationException')
     Certificates = Shapes::ListShape.new(name: 'Certificates')
+    ChannelName = Shapes::StringShape.new(name: 'ChannelName')
     ClearDefaultAuthorizerRequest = Shapes::StructureShape.new(name: 'ClearDefaultAuthorizerRequest')
     ClearDefaultAuthorizerResponse = Shapes::StructureShape.new(name: 'ClearDefaultAuthorizerResponse')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
@@ -117,6 +119,7 @@ module Aws::IoT
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
     CredentialDurationSeconds = Shapes::IntegerShape.new(name: 'CredentialDurationSeconds')
     CustomCodeSigning = Shapes::StructureShape.new(name: 'CustomCodeSigning')
+    CustomerVersion = Shapes::IntegerShape.new(name: 'CustomerVersion')
     DateType = Shapes::TimestampShape.new(name: 'DateType')
     DeleteAuthorizerRequest = Shapes::StructureShape.new(name: 'DeleteAuthorizerRequest')
     DeleteAuthorizerResponse = Shapes::StructureShape.new(name: 'DeleteAuthorizerResponse')
@@ -124,6 +127,8 @@ module Aws::IoT
     DeleteCACertificateResponse = Shapes::StructureShape.new(name: 'DeleteCACertificateResponse')
     DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
     DeleteConflictException = Shapes::StructureShape.new(name: 'DeleteConflictException')
+    DeleteJobExecutionRequest = Shapes::StructureShape.new(name: 'DeleteJobExecutionRequest')
+    DeleteJobRequest = Shapes::StructureShape.new(name: 'DeleteJobRequest')
     DeleteOTAUpdateRequest = Shapes::StructureShape.new(name: 'DeleteOTAUpdateRequest')
     DeleteOTAUpdateResponse = Shapes::StructureShape.new(name: 'DeleteOTAUpdateResponse')
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
@@ -207,6 +212,7 @@ module Aws::IoT
     EventConfigurations = Shapes::MapShape.new(name: 'EventConfigurations')
     EventType = Shapes::StringShape.new(name: 'EventType')
     ExecutionNumber = Shapes::IntegerShape.new(name: 'ExecutionNumber')
+    ExpectedVersion = Shapes::IntegerShape.new(name: 'ExpectedVersion')
     ExpiresInSec = Shapes::IntegerShape.new(name: 'ExpiresInSec')
     ExplicitDeny = Shapes::StructureShape.new(name: 'ExplicitDeny')
     FailedThings = Shapes::IntegerShape.new(name: 'FailedThings')
@@ -216,8 +222,11 @@ module Aws::IoT
     FirehoseSeparator = Shapes::StringShape.new(name: 'FirehoseSeparator')
     Flag = Shapes::BooleanShape.new(name: 'Flag')
     ForceDelete = Shapes::BooleanShape.new(name: 'ForceDelete')
+    ForceFlag = Shapes::BooleanShape.new(name: 'ForceFlag')
+    Forced = Shapes::BooleanShape.new(name: 'Forced')
     FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
     GEMaxResults = Shapes::IntegerShape.new(name: 'GEMaxResults')
+    GenerationId = Shapes::StringShape.new(name: 'GenerationId')
     GetEffectivePoliciesRequest = Shapes::StructureShape.new(name: 'GetEffectivePoliciesRequest')
     GetEffectivePoliciesResponse = Shapes::StructureShape.new(name: 'GetEffectivePoliciesResponse')
     GetIndexingConfigurationRequest = Shapes::StructureShape.new(name: 'GetIndexingConfigurationRequest')
@@ -255,6 +264,8 @@ module Aws::IoT
     InvalidQueryException = Shapes::StructureShape.new(name: 'InvalidQueryException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     InvalidResponseException = Shapes::StructureShape.new(name: 'InvalidResponseException')
+    InvalidStateTransitionException = Shapes::StructureShape.new(name: 'InvalidStateTransitionException')
+    IotAnalyticsAction = Shapes::StructureShape.new(name: 'IotAnalyticsAction')
     IsAuthenticated = Shapes::BooleanShape.new(name: 'IsAuthenticated')
     IsDefaultVersion = Shapes::BooleanShape.new(name: 'IsDefaultVersion')
     IsDisabled = Shapes::BooleanShape.new(name: 'IsDisabled')
@@ -589,6 +600,7 @@ module Aws::IoT
     Value = Shapes::StringShape.new(name: 'Value')
     Version = Shapes::IntegerShape.new(name: 'Version')
     VersionConflictException = Shapes::StructureShape.new(name: 'VersionConflictException')
+    VersionNumber = Shapes::IntegerShape.new(name: 'VersionNumber')
     VersionsLimitExceededException = Shapes::StructureShape.new(name: 'VersionsLimitExceededException')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
     resourceArn = Shapes::StringShape.new(name: 'resourceArn')
@@ -611,6 +623,7 @@ module Aws::IoT
     Action.add_member(:cloudwatch_alarm, Shapes::ShapeRef.new(shape: CloudwatchAlarmAction, location_name: "cloudwatchAlarm"))
     Action.add_member(:elasticsearch, Shapes::ShapeRef.new(shape: ElasticsearchAction, location_name: "elasticsearch"))
     Action.add_member(:salesforce, Shapes::ShapeRef.new(shape: SalesforceAction, location_name: "salesforce"))
+    Action.add_member(:iot_analytics, Shapes::ShapeRef.new(shape: IotAnalyticsAction, location_name: "iotAnalytics"))
     Action.struct_class = Types::Action
 
     ActionList.member = Shapes::ShapeRef.new(shape: Action)
@@ -707,6 +720,9 @@ module Aws::IoT
     CACertificateDescription.add_member(:owned_by, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "ownedBy"))
     CACertificateDescription.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
     CACertificateDescription.add_member(:auto_registration_status, Shapes::ShapeRef.new(shape: AutoRegistrationStatus, location_name: "autoRegistrationStatus"))
+    CACertificateDescription.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
+    CACertificateDescription.add_member(:customer_version, Shapes::ShapeRef.new(shape: CustomerVersion, location_name: "customerVersion"))
+    CACertificateDescription.add_member(:generation_id, Shapes::ShapeRef.new(shape: GenerationId, location_name: "generationId"))
     CACertificateDescription.struct_class = Types::CACertificateDescription
 
     CACertificates.member = Shapes::ShapeRef.new(shape: CACertificate)
@@ -714,8 +730,16 @@ module Aws::IoT
     CancelCertificateTransferRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     CancelCertificateTransferRequest.struct_class = Types::CancelCertificateTransferRequest
 
+    CancelJobExecutionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    CancelJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
+    CancelJobExecutionRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    CancelJobExecutionRequest.add_member(:expected_version, Shapes::ShapeRef.new(shape: ExpectedVersion, location_name: "expectedVersion"))
+    CancelJobExecutionRequest.add_member(:status_details, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "statusDetails"))
+    CancelJobExecutionRequest.struct_class = Types::CancelJobExecutionRequest
+
     CancelJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
     CancelJobRequest.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
+    CancelJobRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
     CancelJobRequest.struct_class = Types::CancelJobRequest
 
     CancelJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
@@ -738,7 +762,9 @@ module Aws::IoT
     CertificateDescription.add_member(:previous_owned_by, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "previousOwnedBy"))
     CertificateDescription.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
     CertificateDescription.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
+    CertificateDescription.add_member(:customer_version, Shapes::ShapeRef.new(shape: CustomerVersion, location_name: "customerVersion"))
     CertificateDescription.add_member(:transfer_data, Shapes::ShapeRef.new(shape: TransferData, location_name: "transferData"))
+    CertificateDescription.add_member(:generation_id, Shapes::ShapeRef.new(shape: GenerationId, location_name: "generationId"))
     CertificateDescription.struct_class = Types::CertificateDescription
 
     Certificates.member = Shapes::ShapeRef.new(shape: Certificate)
@@ -934,6 +960,16 @@ module Aws::IoT
     DeleteCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
     DeleteCertificateRequest.add_member(:force_delete, Shapes::ShapeRef.new(shape: ForceDelete, location: "querystring", location_name: "forceDelete"))
     DeleteCertificateRequest.struct_class = Types::DeleteCertificateRequest
+
+    DeleteJobExecutionRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    DeleteJobExecutionRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
+    DeleteJobExecutionRequest.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, required: true, location: "uri", location_name: "executionNumber"))
+    DeleteJobExecutionRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    DeleteJobExecutionRequest.struct_class = Types::DeleteJobExecutionRequest
+
+    DeleteJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location: "uri", location_name: "jobId"))
+    DeleteJobRequest.add_member(:force, Shapes::ShapeRef.new(shape: ForceFlag, location: "querystring", location_name: "force"))
+    DeleteJobRequest.struct_class = Types::DeleteJobRequest
 
     DeleteOTAUpdateRequest.add_member(:ota_update_id, Shapes::ShapeRef.new(shape: OTAUpdateId, required: true, location: "uri", location_name: "otaUpdateId"))
     DeleteOTAUpdateRequest.struct_class = Types::DeleteOTAUpdateRequest
@@ -1223,6 +1259,9 @@ module Aws::IoT
     GetPolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, location_name: "policyArn"))
     GetPolicyResponse.add_member(:policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policyDocument"))
     GetPolicyResponse.add_member(:default_version_id, Shapes::ShapeRef.new(shape: PolicyVersionId, location_name: "defaultVersionId"))
+    GetPolicyResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
+    GetPolicyResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
+    GetPolicyResponse.add_member(:generation_id, Shapes::ShapeRef.new(shape: GenerationId, location_name: "generationId"))
     GetPolicyResponse.struct_class = Types::GetPolicyResponse
 
     GetPolicyVersionRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location: "uri", location_name: "policyName"))
@@ -1234,6 +1273,9 @@ module Aws::IoT
     GetPolicyVersionResponse.add_member(:policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "policyDocument"))
     GetPolicyVersionResponse.add_member(:policy_version_id, Shapes::ShapeRef.new(shape: PolicyVersionId, location_name: "policyVersionId"))
     GetPolicyVersionResponse.add_member(:is_default_version, Shapes::ShapeRef.new(shape: IsDefaultVersion, location_name: "isDefaultVersion"))
+    GetPolicyVersionResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
+    GetPolicyVersionResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "lastModifiedDate"))
+    GetPolicyVersionResponse.add_member(:generation_id, Shapes::ShapeRef.new(shape: GenerationId, location_name: "generationId"))
     GetPolicyVersionResponse.struct_class = Types::GetPolicyVersionResponse
 
     GetRegistrationCodeRequest.struct_class = Types::GetRegistrationCodeRequest
@@ -1264,10 +1306,16 @@ module Aws::IoT
 
     IndexNamesList.member = Shapes::ShapeRef.new(shape: IndexName)
 
+    IotAnalyticsAction.add_member(:channel_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "channelArn"))
+    IotAnalyticsAction.add_member(:channel_name, Shapes::ShapeRef.new(shape: ChannelName, location_name: "channelName"))
+    IotAnalyticsAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
+    IotAnalyticsAction.struct_class = Types::IotAnalyticsAction
+
     Job.add_member(:job_arn, Shapes::ShapeRef.new(shape: JobArn, location_name: "jobArn"))
     Job.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     Job.add_member(:target_selection, Shapes::ShapeRef.new(shape: TargetSelection, location_name: "targetSelection"))
     Job.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
+    Job.add_member(:force_canceled, Shapes::ShapeRef.new(shape: Forced, location_name: "forceCanceled"))
     Job.add_member(:comment, Shapes::ShapeRef.new(shape: Comment, location_name: "comment"))
     Job.add_member(:targets, Shapes::ShapeRef.new(shape: JobTargets, location_name: "targets"))
     Job.add_member(:description, Shapes::ShapeRef.new(shape: JobDescription, location_name: "description"))
@@ -1285,12 +1333,14 @@ module Aws::IoT
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
     JobExecution.add_member(:status, Shapes::ShapeRef.new(shape: JobExecutionStatus, location_name: "status"))
+    JobExecution.add_member(:force_canceled, Shapes::ShapeRef.new(shape: Forced, location_name: "forceCanceled"))
     JobExecution.add_member(:status_details, Shapes::ShapeRef.new(shape: JobExecutionStatusDetails, location_name: "statusDetails"))
     JobExecution.add_member(:thing_arn, Shapes::ShapeRef.new(shape: ThingArn, location_name: "thingArn"))
     JobExecution.add_member(:queued_at, Shapes::ShapeRef.new(shape: DateType, location_name: "queuedAt"))
     JobExecution.add_member(:started_at, Shapes::ShapeRef.new(shape: DateType, location_name: "startedAt"))
     JobExecution.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))
     JobExecution.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, location_name: "executionNumber"))
+    JobExecution.add_member(:version_number, Shapes::ShapeRef.new(shape: VersionNumber, location_name: "versionNumber"))
     JobExecution.struct_class = Types::JobExecution
 
     JobExecutionStatusDetails.add_member(:details_map, Shapes::ShapeRef.new(shape: DetailsMap, location_name: "detailsMap"))
@@ -1780,6 +1830,7 @@ module Aws::IoT
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
     RoleAliasDescription.add_member(:role_alias, Shapes::ShapeRef.new(shape: RoleAlias, location_name: "roleAlias"))
+    RoleAliasDescription.add_member(:role_alias_arn, Shapes::ShapeRef.new(shape: RoleAliasArn, location_name: "roleAliasArn"))
     RoleAliasDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     RoleAliasDescription.add_member(:owner, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "owner"))
     RoleAliasDescription.add_member(:credential_duration_seconds, Shapes::ShapeRef.new(shape: CredentialDurationSeconds, location_name: "credentialDurationSeconds"))
@@ -2224,6 +2275,20 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:cancel_job_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelJobExecution"
+        o.http_method = "PUT"
+        o.http_request_uri = "/things/{thingName}/jobs/{jobId}/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelJobExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateTransitionException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: VersionConflictException)
+      end)
+
       api.add_operation(:clear_default_authorizer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ClearDefaultAuthorizer"
         o.http_method = "DELETE"
@@ -2467,6 +2532,33 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteJob"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/jobs/{jobId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateTransitionException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:delete_job_execution, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteJobExecution"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/things/{thingName}/jobs/{jobId}/executionNumber/{executionNumber}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteJobExecutionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidStateTransitionException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_ota_update, Seahorse::Model::Operation.new.tap do |o|
@@ -3518,6 +3610,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
       end)
 
       api.add_operation(:set_default_policy_version, Seahorse::Model::Operation.new.tap do |o|

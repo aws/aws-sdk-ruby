@@ -17,6 +17,7 @@ module Aws::ElasticBeanstalk
     ActionHistoryStatus = Shapes::StringShape.new(name: 'ActionHistoryStatus')
     ActionStatus = Shapes::StringShape.new(name: 'ActionStatus')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
+    ApplicationArn = Shapes::StringShape.new(name: 'ApplicationArn')
     ApplicationDescription = Shapes::StructureShape.new(name: 'ApplicationDescription')
     ApplicationDescriptionList = Shapes::ListShape.new(name: 'ApplicationDescriptionList')
     ApplicationDescriptionMessage = Shapes::StructureShape.new(name: 'ApplicationDescriptionMessage')
@@ -26,6 +27,7 @@ module Aws::ElasticBeanstalk
     ApplicationNamesList = Shapes::ListShape.new(name: 'ApplicationNamesList')
     ApplicationResourceLifecycleConfig = Shapes::StructureShape.new(name: 'ApplicationResourceLifecycleConfig')
     ApplicationResourceLifecycleDescriptionMessage = Shapes::StructureShape.new(name: 'ApplicationResourceLifecycleDescriptionMessage')
+    ApplicationVersionArn = Shapes::StringShape.new(name: 'ApplicationVersionArn')
     ApplicationVersionDescription = Shapes::StructureShape.new(name: 'ApplicationVersionDescription')
     ApplicationVersionDescriptionList = Shapes::ListShape.new(name: 'ApplicationVersionDescriptionList')
     ApplicationVersionDescriptionMessage = Shapes::StructureShape.new(name: 'ApplicationVersionDescriptionMessage')
@@ -93,6 +95,7 @@ module Aws::ElasticBeanstalk
     DeleteSourceBundle = Shapes::BooleanShape.new(name: 'DeleteSourceBundle')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
     DeploymentTimestamp = Shapes::TimestampShape.new(name: 'DeploymentTimestamp')
+    DescribeAccountAttributesResult = Shapes::StructureShape.new(name: 'DescribeAccountAttributesResult')
     DescribeApplicationVersionsMessage = Shapes::StructureShape.new(name: 'DescribeApplicationVersionsMessage')
     DescribeApplicationsMessage = Shapes::StructureShape.new(name: 'DescribeApplicationsMessage')
     DescribeConfigurationOptionsMessage = Shapes::StructureShape.new(name: 'DescribeConfigurationOptionsMessage')
@@ -234,6 +237,8 @@ module Aws::ElasticBeanstalk
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceQuota = Shapes::StructureShape.new(name: 'ResourceQuota')
+    ResourceQuotas = Shapes::StructureShape.new(name: 'ResourceQuotas')
     ResourceTagsDescriptionMessage = Shapes::StructureShape.new(name: 'ResourceTagsDescriptionMessage')
     ResourceTypeNotSupportedException = Shapes::StructureShape.new(name: 'ResourceTypeNotSupportedException')
     RestartAppServerMessage = Shapes::StructureShape.new(name: 'RestartAppServerMessage')
@@ -307,6 +312,7 @@ module Aws::ElasticBeanstalk
     AbortEnvironmentUpdateMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
     AbortEnvironmentUpdateMessage.struct_class = Types::AbortEnvironmentUpdateMessage
 
+    ApplicationDescription.add_member(:application_arn, Shapes::ShapeRef.new(shape: ApplicationArn, location_name: "ApplicationArn"))
     ApplicationDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     ApplicationDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ApplicationDescription.add_member(:date_created, Shapes::ShapeRef.new(shape: CreationDate, location_name: "DateCreated"))
@@ -340,6 +346,7 @@ module Aws::ElasticBeanstalk
     ApplicationResourceLifecycleDescriptionMessage.add_member(:resource_lifecycle_config, Shapes::ShapeRef.new(shape: ApplicationResourceLifecycleConfig, location_name: "ResourceLifecycleConfig"))
     ApplicationResourceLifecycleDescriptionMessage.struct_class = Types::ApplicationResourceLifecycleDescriptionMessage
 
+    ApplicationVersionDescription.add_member(:application_version_arn, Shapes::ShapeRef.new(shape: ApplicationVersionArn, location_name: "ApplicationVersionArn"))
     ApplicationVersionDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     ApplicationVersionDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     ApplicationVersionDescription.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
@@ -557,6 +564,9 @@ module Aws::ElasticBeanstalk
     Deployment.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     Deployment.add_member(:deployment_time, Shapes::ShapeRef.new(shape: DeploymentTimestamp, location_name: "DeploymentTime"))
     Deployment.struct_class = Types::Deployment
+
+    DescribeAccountAttributesResult.add_member(:resource_quotas, Shapes::ShapeRef.new(shape: ResourceQuotas, location_name: "ResourceQuotas"))
+    DescribeAccountAttributesResult.struct_class = Types::DescribeAccountAttributesResult
 
     DescribeApplicationVersionsMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     DescribeApplicationVersionsMessage.add_member(:version_labels, Shapes::ShapeRef.new(shape: VersionLabelsList, location_name: "VersionLabels"))
@@ -921,6 +931,16 @@ module Aws::ElasticBeanstalk
     RequestEnvironmentInfoMessage.add_member(:info_type, Shapes::ShapeRef.new(shape: EnvironmentInfoType, required: true, location_name: "InfoType"))
     RequestEnvironmentInfoMessage.struct_class = Types::RequestEnvironmentInfoMessage
 
+    ResourceQuota.add_member(:maximum, Shapes::ShapeRef.new(shape: BoxedInt, location_name: "Maximum"))
+    ResourceQuota.struct_class = Types::ResourceQuota
+
+    ResourceQuotas.add_member(:application_quota, Shapes::ShapeRef.new(shape: ResourceQuota, location_name: "ApplicationQuota"))
+    ResourceQuotas.add_member(:application_version_quota, Shapes::ShapeRef.new(shape: ResourceQuota, location_name: "ApplicationVersionQuota"))
+    ResourceQuotas.add_member(:environment_quota, Shapes::ShapeRef.new(shape: ResourceQuota, location_name: "EnvironmentQuota"))
+    ResourceQuotas.add_member(:configuration_template_quota, Shapes::ShapeRef.new(shape: ResourceQuota, location_name: "ConfigurationTemplateQuota"))
+    ResourceQuotas.add_member(:custom_platform_quota, Shapes::ShapeRef.new(shape: ResourceQuota, location_name: "CustomPlatformQuota"))
+    ResourceQuotas.struct_class = Types::ResourceQuotas
+
     ResourceTagsDescriptionMessage.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ResourceArn"))
     ResourceTagsDescriptionMessage.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "ResourceTags"))
     ResourceTagsDescriptionMessage.struct_class = Types::ResourceTagsDescriptionMessage
@@ -1230,6 +1250,15 @@ module Aws::ElasticBeanstalk
         o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
         o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
         o.errors << Shapes::ShapeRef.new(shape: PlatformVersionStillReferencedException)
+      end)
+
+      api.add_operation(:describe_account_attributes, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountAttributes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountAttributesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
       end)
 
       api.add_operation(:describe_application_versions, Seahorse::Model::Operation.new.tap do |o|

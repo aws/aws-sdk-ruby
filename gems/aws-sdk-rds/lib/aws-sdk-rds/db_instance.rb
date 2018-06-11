@@ -429,6 +429,13 @@ module Aws::RDS
       data[:enabled_cloudwatch_logs_exports]
     end
 
+    # The number of CPU cores and the number of threads per core for the DB
+    # instance class of the DB instance.
+    # @return [Array<Types::ProcessorFeature>]
+    def processor_features
+      data[:processor_features]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -610,6 +617,12 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -791,7 +804,9 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
+    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #
+    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -1085,11 +1100,13 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.2.12` (supported in all AWS Regions)
+    #
     #   * `10.2.11` (supported in all AWS Regions)
     #
-    #   ^
     #
     #
+    #   * `10.1.31` (supported in all AWS Regions)
     #
     #   * `10.1.26` (supported in all AWS Regions)
     #
@@ -1100,6 +1117,8 @@ module Aws::RDS
     #   * `10.1.14` (supported in all AWS Regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.34` (supported in all AWS Regions)
     #
     #   * `10.0.32` (supported in all AWS Regions)
     #
@@ -1161,6 +1180,8 @@ module Aws::RDS
     #
     #   **MySQL**
     #
+    #   * `5.7.21` (supported in all AWS regions)
+    #
     #   * `5.7.19` (supported in all AWS regions)
     #
     #   * `5.7.17` (supported in all AWS regions)
@@ -1168,6 +1189,8 @@ module Aws::RDS
     #   * `5.7.16` (supported in all AWS regions)
     #
     #
+    #
+    #   * `5.6.39` (supported in all AWS Regions)
     #
     #   * `5.6.37` (supported in all AWS Regions)
     #
@@ -1181,6 +1204,8 @@ module Aws::RDS
     #     ca-central-1, eu-west-2)
     #
     #
+    #
+    #   * `5.5.59` (supported in all AWS Regions)
     #
     #   * `5.5.57` (supported in all AWS Regions)
     #
@@ -1247,7 +1272,9 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
+    #   * **Version 10.1**
+    #
+    #   * **Version 9.6.x:** ` 9.6.6 | 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
     #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
@@ -1443,6 +1470,13 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
@@ -1450,6 +1484,9 @@ module Aws::RDS
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1490,6 +1527,13 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -1523,18 +1567,13 @@ module Aws::RDS
     #
     #   Valid Values: `1150-65535`
     # @option options [Boolean] :multi_az
-    #   Specifies whether the read replica is in a Multi-AZ deployment.
+    #   Specifies whether the Read Replica is in a Multi-AZ deployment.
     #
     #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates a
     #   standby of your replica in another Availability Zone for failover
     #   support for the replica. Creating your Read Replica as a Multi-AZ DB
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
-    #
-    #   <note markdown="1"> Currently PostgreSQL Read Replicas can only be created as single-AZ DB
-    #   instances.
-    #
-    #    </note>
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
     #   Read Replica during the maintenance window.
@@ -1720,6 +1759,13 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the read replica, and
     #   otherwise false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
@@ -1727,6 +1773,12 @@ module Aws::RDS
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
     #   Logs.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -1883,6 +1935,13 @@ module Aws::RDS
     #       enable_log_types: ["String"],
     #       disable_log_types: ["String"],
     #     },
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -1933,7 +1992,7 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
     # @option options [Array<String>] :db_security_groups
     #   A list of DB security groups to authorize on this DB instance.
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints:
@@ -1979,7 +2038,7 @@ module Aws::RDS
     #   The new password for the master user. The password can include any
     #   printable ASCII character except "/", """, or "@".
     #
-    #   Changing this parameter does not result in an outage and the change is
+    #   Changing this parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible. Between the time of the
     #   request and the completion of the request, the `MasterUserPassword`
     #   element exists in the `PendingModifiedValues` element of the operation
@@ -2020,7 +2079,7 @@ module Aws::RDS
     #    </note>
     # @option options [String] :db_parameter_group_name
     #   The name of the DB parameter group to apply to the DB instance.
-    #   Changing this setting does not result in an outage. The parameter
+    #   Changing this setting doesn't result in an outage. The parameter
     #   group name itself is changed immediately, but the actual parameter
     #   changes are not applied until you reboot the instance without
     #   failover. The db instance will NOT be rebooted automatically and the
@@ -2064,7 +2123,7 @@ module Aws::RDS
     # @option options [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, as determined by the
-    #   `BackupRetentionPeriod` parameter. Changing this parameter does not
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
     #   result in an outage and the change is asynchronously applied as soon
     #   as possible.
     #
@@ -2084,9 +2143,9 @@ module Aws::RDS
     #   * Must be at least 30 minutes
     # @option options [String] :preferred_maintenance_window
     #   The weekly time range (in UTC) during which system maintenance can
-    #   occur, which might result in an outage. Changing this parameter does
-    #   not result in an outage, except in the following situation, and the
-    #   change is asynchronously applied as soon as possible. If there are
+    #   occur, which might result in an outage. Changing this parameter
+    #   doesn't result in an outage, except in the following situation, and
+    #   the change is asynchronously applied as soon as possible. If there are
     #   pending actions that cause a reboot, and the maintenance window is
     #   changed to include the current time, then changing this parameter will
     #   cause a reboot of the DB instance. If moving this window to the
@@ -2102,7 +2161,7 @@ module Aws::RDS
     #   Constraints: Must be at least 30 minutes
     # @option options [Boolean] :multi_az
     #   Specifies if the DB instance is a Multi-AZ deployment. Changing this
-    #   parameter does not result in an outage and the change is applied
+    #   parameter doesn't result in an outage and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request.
     # @option options [String] :engine_version
@@ -2119,7 +2178,7 @@ module Aws::RDS
     #   For a list of valid engine versions, see CreateDBInstance.
     # @option options [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
-    #   parameter does not result in an outage and the change is
+    #   parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints: This parameter must be set to true when specifying a
@@ -2128,7 +2187,7 @@ module Aws::RDS
     # @option options [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
     #   DB instance during the maintenance window. Changing this parameter
-    #   does not result in an outage except in the following case and the
+    #   doesn't result in an outage except in the following case and the
     #   change is asynchronously applied as soon as possible. An outage will
     #   result if this parameter is set to `true` during the maintenance
     #   window, and a newer minor version is available, and RDS has enabled
@@ -2142,7 +2201,7 @@ module Aws::RDS
     #   The new Provisioned IOPS (I/O operations per second) value for the RDS
     #   instance.
     #
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   applied during the next maintenance window unless the
     #   `ApplyImmediately` parameter is set to `true` for this request. If you
     #   are migrating from Provisioned IOPS to standard storage, set this
@@ -2172,7 +2231,7 @@ module Aws::RDS
     #   Default: Uses existing setting
     # @option options [String] :option_group_name
     #   Indicates that the DB instance should be associated with the specified
-    #   option group. Changing this parameter does not result in an outage
+    #   option group. Changing this parameter doesn't result in an outage
     #   except in the following case and the change is applied during the next
     #   maintenance window unless the `ApplyImmediately` parameter is set to
     #   `true` for this request. If the parameter change results in an option
@@ -2365,13 +2424,26 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
     # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #   to CloudWatch Logs for a specific DB instance.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -2490,6 +2562,13 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -2606,10 +2685,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
-    #
-    #   * `aurora-postgresql`
-    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -2690,12 +2765,16 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
-    #
     #   Default: `false`
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

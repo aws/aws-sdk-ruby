@@ -401,13 +401,13 @@ module Aws::S3
     #               {
     #                 date: Time.now,
     #                 days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #               },
     #             ],
     #             noncurrent_version_transitions: [
     #               {
     #                 noncurrent_days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #               },
     #             ],
     #             noncurrent_version_expiration: {
@@ -435,7 +435,7 @@ module Aws::S3
     #
     #       {
     #         logging_enabled: {
-    #           target_bucket: "TargetBucket",
+    #           target_bucket: "TargetBucket", # required
     #           target_grants: [
     #             {
     #               grantee: {
@@ -448,11 +448,14 @@ module Aws::S3
     #               permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE
     #             },
     #           ],
-    #           target_prefix: "TargetPrefix",
+    #           target_prefix: "TargetPrefix", # required
     #         },
     #       }
     #
     # @!attribute [rw] logging_enabled
+    #   Container for logging information. Presence of this element
+    #   indicates that logging is enabled. Parameters TargetBucket and
+    #   TargetPrefix are required in this case.
     #   @return [Types::LoggingEnabled]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLoggingStatus AWS API Documentation
@@ -868,6 +871,13 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ContinuationEvent AWS API Documentation
+    #
+    class ContinuationEvent < Struct.new(
+      :event_type)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] copy_object_result
     #   @return [Types::CopyObjectResult]
     #
@@ -954,7 +964,7 @@ module Aws::S3
     #         metadata_directive: "COPY", # accepts COPY, REPLACE
     #         tagging_directive: "COPY", # accepts COPY, REPLACE
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -1379,7 +1389,7 @@ module Aws::S3
     #           "MetadataKey" => "MetadataValue",
     #         },
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -2011,7 +2021,7 @@ module Aws::S3
     #       {
     #         bucket: "BucketName", # required
     #         account: "AccountId",
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #         access_control_translation: {
     #           owner: "Destination", # required, accepts Destination
     #         },
@@ -2108,6 +2118,13 @@ module Aws::S3
     #
     class EncryptionConfiguration < Struct.new(
       :replica_kms_key_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EndEvent AWS API Documentation
+    #
+    class EndEvent < Struct.new(
+      :event_type)
       include Aws::Structure
     end
 
@@ -2460,6 +2477,9 @@ module Aws::S3
     end
 
     # @!attribute [rw] logging_enabled
+    #   Container for logging information. Presence of this element
+    #   indicates that logging is enabled. Parameters TargetBucket and
+    #   TargetPrefix are required in this case.
     #   @return [Types::LoggingEnabled]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLoggingOutput AWS API Documentation
@@ -3613,16 +3633,31 @@ module Aws::S3
     #           field_delimiter: "FieldDelimiter",
     #           quote_character: "QuoteCharacter",
     #         },
+    #         compression_type: "NONE", # accepts NONE, GZIP
+    #         json: {
+    #           type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #         },
     #       }
     #
     # @!attribute [rw] csv
     #   Describes the serialization of a CSV-encoded object.
     #   @return [Types::CSVInput]
     #
+    # @!attribute [rw] compression_type
+    #   Specifies object's compression format. Valid values: NONE, GZIP.
+    #   Default Value: NONE.
+    #   @return [String]
+    #
+    # @!attribute [rw] json
+    #   Specifies JSON as object's input serialization format.
+    #   @return [Types::JSONInput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InputSerialization AWS API Documentation
     #
     class InputSerialization < Struct.new(
-      :csv)
+      :csv,
+      :compression_type,
+      :json)
       include Aws::Structure
     end
 
@@ -3850,6 +3885,42 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass JSONInput
+    #   data as a hash:
+    #
+    #       {
+    #         type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of JSON. Valid values: Document, Lines.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JSONInput AWS API Documentation
+    #
+    class JSONInput < Struct.new(
+      :type)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass JSONOutput
+    #   data as a hash:
+    #
+    #       {
+    #         record_delimiter: "RecordDelimiter",
+    #       }
+    #
+    # @!attribute [rw] record_delimiter
+    #   The value used to separate individual records in the output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/JSONOutput AWS API Documentation
+    #
+    class JSONOutput < Struct.new(
+      :record_delimiter)
+      include Aws::Structure
+    end
+
     # Container for specifying the AWS Lambda notification configuration.
     #
     # @note When making an API call, you may pass LambdaFunctionConfiguration
@@ -3922,11 +3993,11 @@ module Aws::S3
     #             transition: {
     #               date: Time.now,
     #               days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #             },
     #             noncurrent_version_transition: {
     #               noncurrent_days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #             },
     #             noncurrent_version_expiration: {
     #               noncurrent_days: 1,
@@ -4015,13 +4086,13 @@ module Aws::S3
     #           {
     #             date: Time.now,
     #             days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #           },
     #         ],
     #         noncurrent_version_transitions: [
     #           {
     #             noncurrent_days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #           },
     #         ],
     #         noncurrent_version_expiration: {
@@ -5039,11 +5110,15 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # Container for logging information. Presence of this element indicates
+    # that logging is enabled. Parameters TargetBucket and TargetPrefix are
+    # required in this case.
+    #
     # @note When making an API call, you may pass LoggingEnabled
     #   data as a hash:
     #
     #       {
-    #         target_bucket: "TargetBucket",
+    #         target_bucket: "TargetBucket", # required
     #         target_grants: [
     #           {
     #             grantee: {
@@ -5056,7 +5131,7 @@ module Aws::S3
     #             permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE
     #           },
     #         ],
-    #         target_prefix: "TargetPrefix",
+    #         target_prefix: "TargetPrefix", # required
     #       }
     #
     # @!attribute [rw] target_bucket
@@ -5292,18 +5367,19 @@ module Aws::S3
     end
 
     # Container for the transition rule that describes when noncurrent
-    # objects transition to the STANDARD\_IA or GLACIER storage class. If
-    # your bucket is versioning-enabled (or versioning is suspended), you
-    # can set this action to request that Amazon S3 transition noncurrent
-    # object versions to the STANDARD\_IA or GLACIER storage class at a
-    # specific period in the object's lifetime.
+    # objects transition to the STANDARD\_IA, ONEZONE\_IA or GLACIER storage
+    # class. If your bucket is versioning-enabled (or versioning is
+    # suspended), you can set this action to request that Amazon S3
+    # transition noncurrent object versions to the STANDARD\_IA, ONEZONE\_IA
+    # or GLACIER storage class at a specific period in the object's
+    # lifetime.
     #
     # @note When making an API call, you may pass NoncurrentVersionTransition
     #   data as a hash:
     #
     #       {
     #         noncurrent_days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #       }
     #
     # @!attribute [rw] noncurrent_days
@@ -5625,7 +5701,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #         },
     #       }
     #
@@ -5654,16 +5730,24 @@ module Aws::S3
     #           field_delimiter: "FieldDelimiter",
     #           quote_character: "QuoteCharacter",
     #         },
+    #         json: {
+    #           record_delimiter: "RecordDelimiter",
+    #         },
     #       }
     #
     # @!attribute [rw] csv
     #   Describes the serialization of CSV-encoded Select results.
     #   @return [Types::CSVOutput]
     #
+    # @!attribute [rw] json
+    #   Specifies JSON as request's output serialization format.
+    #   @return [Types::JSONOutput]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/OutputSerialization AWS API Documentation
     #
     class OutputSerialization < Struct.new(
-      :csv)
+      :csv,
+      :json)
       include Aws::Structure
     end
 
@@ -5713,6 +5797,39 @@ module Aws::S3
       :last_modified,
       :etag,
       :size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bytes_scanned
+    #   Current number of object bytes scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bytes_processed
+    #   Current number of uncompressed object bytes processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bytes_returned
+    #   Current number of bytes of records payload data returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Progress AWS API Documentation
+    #
+    class Progress < Struct.new(
+      :bytes_scanned,
+      :bytes_processed,
+      :bytes_returned)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] details
+    #   The Progress event details.
+    #   @return [Types::Progress]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ProgressEvent AWS API Documentation
+    #
+    class ProgressEvent < Struct.new(
+      :details,
+      :event_type)
       include Aws::Structure
     end
 
@@ -6059,13 +6176,13 @@ module Aws::S3
     #                 {
     #                   date: Time.now,
     #                   days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #                 },
     #               ],
     #               noncurrent_version_transitions: [
     #                 {
     #                   noncurrent_days: 1,
-    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #                   storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #                 },
     #               ],
     #               noncurrent_version_expiration: {
@@ -6113,11 +6230,11 @@ module Aws::S3
     #               transition: {
     #                 date: Time.now,
     #                 days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #               },
     #               noncurrent_version_transition: {
     #                 noncurrent_days: 1,
-    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #                 storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #               },
     #               noncurrent_version_expiration: {
     #                 noncurrent_days: 1,
@@ -6155,7 +6272,7 @@ module Aws::S3
     #         bucket: "BucketName", # required
     #         bucket_logging_status: { # required
     #           logging_enabled: {
-    #             target_bucket: "TargetBucket",
+    #             target_bucket: "TargetBucket", # required
     #             target_grants: [
     #               {
     #                 grantee: {
@@ -6168,7 +6285,7 @@ module Aws::S3
     #                 permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE
     #               },
     #             ],
-    #             target_prefix: "TargetPrefix",
+    #             target_prefix: "TargetPrefix", # required
     #           },
     #         },
     #         content_md5: "ContentMD5",
@@ -6420,7 +6537,7 @@ module Aws::S3
     #               destination: { # required
     #                 bucket: "BucketName", # required
     #                 account: "AccountId",
-    #                 storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #                 storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #                 access_control_translation: {
     #                   owner: "Destination", # required, accepts Destination
     #                 },
@@ -6802,7 +6919,7 @@ module Aws::S3
     #           "MetadataKey" => "MetadataValue",
     #         },
     #         server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #         website_redirect_location: "WebsiteRedirectLocation",
     #         sse_customer_algorithm: "SSECustomerAlgorithm",
     #         sse_customer_key: "SSECustomerKey",
@@ -7118,6 +7235,18 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @!attribute [rw] payload
+    #   The byte array of partial, one or more result records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RecordsEvent AWS API Documentation
+    #
+    class RecordsEvent < Struct.new(
+      :payload,
+      :event_type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass Redirect
     #   data as a hash:
     #
@@ -7217,7 +7346,7 @@ module Aws::S3
     #             destination: { # required
     #               bucket: "BucketName", # required
     #               account: "AccountId",
-    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #               access_control_translation: {
     #                 owner: "Destination", # required, accepts Destination
     #               },
@@ -7265,7 +7394,7 @@ module Aws::S3
     #         destination: { # required
     #           bucket: "BucketName", # required
     #           account: "AccountId",
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #           access_control_translation: {
     #             owner: "Destination", # required, accepts Destination
     #           },
@@ -7328,6 +7457,25 @@ module Aws::S3
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RequestProgress
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether periodic QueryProgress frames should be sent.
+    #   Valid values: TRUE, FALSE. Default value: FALSE.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RequestProgress AWS API Documentation
+    #
+    class RequestProgress < Struct.new(
+      :enabled)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] request_charged
     #   If present, indicates that the requester was successfully charged
     #   for the request.
@@ -7371,6 +7519,10 @@ module Aws::S3
     #                 field_delimiter: "FieldDelimiter",
     #                 quote_character: "QuoteCharacter",
     #               },
+    #               compression_type: "NONE", # accepts NONE, GZIP
+    #               json: {
+    #                 type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #               },
     #             },
     #             expression_type: "SQL", # required, accepts SQL
     #             expression: "Expression", # required
@@ -7381,6 +7533,9 @@ module Aws::S3
     #                 record_delimiter: "RecordDelimiter",
     #                 field_delimiter: "FieldDelimiter",
     #                 quote_character: "QuoteCharacter",
+    #               },
+    #               json: {
+    #                 record_delimiter: "RecordDelimiter",
     #               },
     #             },
     #           },
@@ -7420,7 +7575,7 @@ module Aws::S3
     #                   value: "MetadataValue",
     #                 },
     #               ],
-    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #               storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #             },
     #           },
     #         },
@@ -7482,6 +7637,10 @@ module Aws::S3
     #               field_delimiter: "FieldDelimiter",
     #               quote_character: "QuoteCharacter",
     #             },
+    #             compression_type: "NONE", # accepts NONE, GZIP
+    #             json: {
+    #               type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #             },
     #           },
     #           expression_type: "SQL", # required, accepts SQL
     #           expression: "Expression", # required
@@ -7492,6 +7651,9 @@ module Aws::S3
     #               record_delimiter: "RecordDelimiter",
     #               field_delimiter: "FieldDelimiter",
     #               quote_character: "QuoteCharacter",
+    #             },
+    #             json: {
+    #               record_delimiter: "RecordDelimiter",
     #             },
     #           },
     #         },
@@ -7531,7 +7693,7 @@ module Aws::S3
     #                 value: "MetadataValue",
     #               },
     #             ],
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #           },
     #         },
     #       }
@@ -7634,11 +7796,11 @@ module Aws::S3
     #         transition: {
     #           date: Time.now,
     #           days: 1,
-    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #         },
     #         noncurrent_version_transition: {
     #           noncurrent_days: 1,
-    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #           storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #         },
     #         noncurrent_version_expiration: {
     #           noncurrent_days: 1,
@@ -7670,11 +7832,12 @@ module Aws::S3
     #
     # @!attribute [rw] noncurrent_version_transition
     #   Container for the transition rule that describes when noncurrent
-    #   objects transition to the STANDARD\_IA or GLACIER storage class. If
-    #   your bucket is versioning-enabled (or versioning is suspended), you
-    #   can set this action to request that Amazon S3 transition noncurrent
-    #   object versions to the STANDARD\_IA or GLACIER storage class at a
-    #   specific period in the object's lifetime.
+    #   objects transition to the STANDARD\_IA, ONEZONE\_IA or GLACIER
+    #   storage class. If your bucket is versioning-enabled (or versioning
+    #   is suspended), you can set this action to request that Amazon S3
+    #   transition noncurrent object versions to the STANDARD\_IA,
+    #   ONEZONE\_IA or GLACIER storage class at a specific period in the
+    #   object's lifetime.
     #   @return [Types::NoncurrentVersionTransition]
     #
     # @!attribute [rw] noncurrent_version_expiration
@@ -7773,7 +7936,7 @@ module Aws::S3
     #             value: "MetadataValue",
     #           },
     #         ],
-    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #       }
     #
     # @!attribute [rw] bucket_name
@@ -7853,6 +8016,146 @@ module Aws::S3
     #
     class SSES3 < Aws::EmptyStructure; end
 
+    # @!attribute [rw] payload
+    #   @return [Types::SelectObjectContentEventStream]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentOutput AWS API Documentation
+    #
+    class SelectObjectContentOutput < Struct.new(
+      :payload)
+      include Aws::Structure
+    end
+
+    # Request to filter the contents of an Amazon S3 object based on a
+    # simple Structured Query Language (SQL) statement. In the request,
+    # along with the SQL expression, you must also specify a data
+    # serialization format (JSON or CSV) of the object. Amazon S3 uses this
+    # to parse object data into records, and returns only records that match
+    # the specified SQL expression. You must also specify the data
+    # serialization format for the response. For more information, go to
+    # [S3Select API Documentation][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html
+    #
+    # @note When making an API call, you may pass SelectObjectContentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         key: "ObjectKey", # required
+    #         sse_customer_algorithm: "SSECustomerAlgorithm",
+    #         sse_customer_key: "SSECustomerKey",
+    #         sse_customer_key_md5: "SSECustomerKeyMD5",
+    #         expression: "Expression", # required
+    #         expression_type: "SQL", # required, accepts SQL
+    #         request_progress: {
+    #           enabled: false,
+    #         },
+    #         input_serialization: { # required
+    #           csv: {
+    #             file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #             comments: "Comments",
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #           compression_type: "NONE", # accepts NONE, GZIP
+    #           json: {
+    #             type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #           },
+    #         },
+    #         output_serialization: { # required
+    #           csv: {
+    #             quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #             quote_escape_character: "QuoteEscapeCharacter",
+    #             record_delimiter: "RecordDelimiter",
+    #             field_delimiter: "FieldDelimiter",
+    #             quote_character: "QuoteCharacter",
+    #           },
+    #           json: {
+    #             record_delimiter: "RecordDelimiter",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The S3 Bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The Object Key.
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_algorithm
+    #   The SSE Algorithm used to encrypt the object. For more information,
+    #   go to [ Server-Side Encryption (Using Customer-Provided Encryption
+    #   Keys][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_key
+    #   The SSE Customer Key. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] sse_customer_key_md5
+    #   The SSE Customer Key MD5. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The expression that is used to query the object.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression_type
+    #   The type of the provided expression (e.g., SQL).
+    #   @return [String]
+    #
+    # @!attribute [rw] request_progress
+    #   Specifies if periodic request progress information should be
+    #   enabled.
+    #   @return [Types::RequestProgress]
+    #
+    # @!attribute [rw] input_serialization
+    #   Describes the format of the data in the object that is being
+    #   queried.
+    #   @return [Types::InputSerialization]
+    #
+    # @!attribute [rw] output_serialization
+    #   Describes the format of the data that you want Amazon S3 to return
+    #   in response.
+    #   @return [Types::OutputSerialization]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentRequest AWS API Documentation
+    #
+    class SelectObjectContentRequest < Struct.new(
+      :bucket,
+      :key,
+      :sse_customer_algorithm,
+      :sse_customer_key,
+      :sse_customer_key_md5,
+      :expression,
+      :expression_type,
+      :request_progress,
+      :input_serialization,
+      :output_serialization)
+      include Aws::Structure
+    end
+
     # Describes the parameters for Select job types.
     #
     # @note When making an API call, you may pass SelectParameters
@@ -7868,6 +8171,10 @@ module Aws::S3
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
     #           },
+    #           compression_type: "NONE", # accepts NONE, GZIP
+    #           json: {
+    #             type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #           },
     #         },
     #         expression_type: "SQL", # required, accepts SQL
     #         expression: "Expression", # required
@@ -7878,6 +8185,9 @@ module Aws::S3
     #             record_delimiter: "RecordDelimiter",
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
+    #           },
+    #           json: {
+    #             record_delimiter: "RecordDelimiter",
     #           },
     #         },
     #       }
@@ -8035,6 +8345,39 @@ module Aws::S3
     #
     class SseKmsEncryptedObjects < Struct.new(
       :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bytes_scanned
+    #   Total number of object bytes scanned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bytes_processed
+    #   Total number of uncompressed object bytes processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bytes_returned
+    #   Total number of bytes of records payload data returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Stats AWS API Documentation
+    #
+    class Stats < Struct.new(
+      :bytes_scanned,
+      :bytes_processed,
+      :bytes_returned)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] details
+    #   The Stats event details.
+    #   @return [Types::Stats]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StatsEvent AWS API Documentation
+    #
+    class StatsEvent < Struct.new(
+      :details,
+      :event_type)
       include Aws::Structure
     end
 
@@ -8275,7 +8618,7 @@ module Aws::S3
     #       {
     #         date: Time.now,
     #         days: 1,
-    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #       }
     #
     # @!attribute [rw] date
@@ -8706,6 +9049,25 @@ module Aws::S3
       :redirect_all_requests_to,
       :routing_rules)
       include Aws::Structure
+    end
+
+    # EventStream is an Enumerator of Events.
+    #  #event_types #=> Array, returns all modeled event types in the stream
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContentEventStream AWS API Documentation
+    #
+    class SelectObjectContentEventStream < Enumerator
+
+      def event_types
+        [
+          :records,
+          :stats,
+          :progress,
+          :cont,
+          :end
+        ]
+      end
+
     end
 
   end

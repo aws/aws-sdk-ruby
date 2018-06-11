@@ -1553,7 +1553,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "en-US", # accepts en-US
+    #         locale: "en-US", # accepts en-US, en-GB, de-DE
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -1621,7 +1621,7 @@ module Aws::LexModelBuildingService
     #   data as a hash:
     #
     #       {
-    #         locale: "en-US", # accepts en-US
+    #         locale: "en-US", # accepts en-US, en-GB, de-DE
     #         signature_contains: "String",
     #         next_token: "NextToken",
     #         max_results: 1,
@@ -1684,8 +1684,8 @@ module Aws::LexModelBuildingService
     #       {
     #         name: "Name", # required
     #         version: "NumericalVersion", # required
-    #         resource_type: "BOT", # required, accepts BOT
-    #         export_type: "ALEXA_SKILLS_KIT", # required, accepts ALEXA_SKILLS_KIT
+    #         resource_type: "BOT", # required, accepts BOT, INTENT, SLOT_TYPE
+    #         export_type: "ALEXA_SKILLS_KIT", # required, accepts ALEXA_SKILLS_KIT, LEX
     #       }
     #
     # @!attribute [rw] name
@@ -1762,6 +1762,67 @@ module Aws::LexModelBuildingService
       :export_status,
       :failure_reason,
       :url)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetImportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         import_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] import_id
+    #   The identifier of the import job information to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetImportRequest AWS API Documentation
+    #
+    class GetImportRequest < Struct.new(
+      :import_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name given to the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource imported.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_strategy
+    #   The action taken when there was a conflict between an existing
+    #   resource and a resource in the import file.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_id
+    #   The identifier for the specific import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the import job. If the status is `FAILED`, you can get
+    #   the reason for the failure from the `failureReason` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   A string that describes why an import job failed to complete.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_date
+    #   A timestamp for the date and time that the import job was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetImportResponse AWS API Documentation
+    #
+    class GetImportResponse < Struct.new(
+      :name,
+      :resource_type,
+      :merge_strategy,
+      :import_id,
+      :import_status,
+      :failure_reason,
+      :created_date)
       include Aws::Structure
     end
 
@@ -2496,8 +2557,9 @@ module Aws::LexModelBuildingService
     #         voice_id: "String",
     #         checksum: "String",
     #         process_behavior: "SAVE", # accepts SAVE, BUILD
-    #         locale: "en-US", # required, accepts en-US
+    #         locale: "en-US", # required, accepts en-US, en-GB, de-DE
     #         child_directed: false, # required
+    #         create_version: false,
     #       }
     #
     # @!attribute [rw] name
@@ -2593,11 +2655,11 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] process_behavior
-    #   If you set the `processBehavior` element to `Build`, Amazon Lex
+    #   If you set the `processBehavior` element to `BUILD`, Amazon Lex
     #   builds the bot so that it can be run. If you set the element to
-    #   `Save`Amazon Lex saves the bot, but doesn't build it.
+    #   `SAVE` Amazon Lex saves the bot, but doesn't build it.
     #
-    #   If you don't specify this value, the default value is `Save`.
+    #   If you don't specify this value, the default value is `BUILD`.
     #   @return [String]
     #
     # @!attribute [rw] locale
@@ -2640,6 +2702,9 @@ module Aws::LexModelBuildingService
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
+    # @!attribute [rw] create_version
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotRequest AWS API Documentation
     #
     class PutBotRequest < Struct.new(
@@ -2653,7 +2718,8 @@ module Aws::LexModelBuildingService
       :checksum,
       :process_behavior,
       :locale,
-      :child_directed)
+      :child_directed,
+      :create_version)
       include Aws::Structure
     end
 
@@ -2761,6 +2827,9 @@ module Aws::LexModelBuildingService
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #   @return [Boolean]
     #
+    # @!attribute [rw] create_version
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBotResponse AWS API Documentation
     #
     class PutBotResponse < Struct.new(
@@ -2778,7 +2847,8 @@ module Aws::LexModelBuildingService
       :checksum,
       :version,
       :locale,
-      :child_directed)
+      :child_directed,
+      :create_version)
       include Aws::Structure
     end
 
@@ -2879,6 +2949,7 @@ module Aws::LexModelBuildingService
     #         },
     #         parent_intent_signature: "BuiltinIntentSignature",
     #         checksum: "String",
+    #         create_version: false,
     #       }
     #
     # @!attribute [rw] name
@@ -3028,6 +3099,9 @@ module Aws::LexModelBuildingService
     #   `PreconditionFailedException` exception.
     #   @return [String]
     #
+    # @!attribute [rw] create_version
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentRequest AWS API Documentation
     #
     class PutIntentRequest < Struct.new(
@@ -3042,7 +3116,8 @@ module Aws::LexModelBuildingService
       :dialog_code_hook,
       :fulfillment_activity,
       :parent_intent_signature,
-      :checksum)
+      :checksum,
+      :create_version)
       include Aws::Structure
     end
 
@@ -3118,6 +3193,9 @@ module Aws::LexModelBuildingService
     #   Checksum of the `$LATEST`version of the intent created or updated.
     #   @return [String]
     #
+    # @!attribute [rw] create_version
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntentResponse AWS API Documentation
     #
     class PutIntentResponse < Struct.new(
@@ -3135,7 +3213,8 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version,
-      :checksum)
+      :checksum,
+      :create_version)
       include Aws::Structure
     end
 
@@ -3153,6 +3232,7 @@ module Aws::LexModelBuildingService
     #         ],
     #         checksum: "String",
     #         value_selection_strategy: "ORIGINAL_VALUE", # accepts ORIGINAL_VALUE, TOP_RESOLUTION
+    #         create_version: false,
     #       }
     #
     # @!attribute [rw] name
@@ -3219,6 +3299,9 @@ module Aws::LexModelBuildingService
     #   `ORIGINAL_VALUE`.
     #   @return [String]
     #
+    # @!attribute [rw] create_version
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeRequest AWS API Documentation
     #
     class PutSlotTypeRequest < Struct.new(
@@ -3226,7 +3309,8 @@ module Aws::LexModelBuildingService
       :description,
       :enumeration_values,
       :checksum,
-      :value_selection_strategy)
+      :value_selection_strategy,
+      :create_version)
       include Aws::Structure
     end
 
@@ -3266,6 +3350,9 @@ module Aws::LexModelBuildingService
     #   value of the slot. For more information, see PutSlotType.
     #   @return [String]
     #
+    # @!attribute [rw] create_version
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotTypeResponse AWS API Documentation
     #
     class PutSlotTypeResponse < Struct.new(
@@ -3276,7 +3363,8 @@ module Aws::LexModelBuildingService
       :created_date,
       :version,
       :checksum,
-      :value_selection_strategy)
+      :value_selection_strategy,
+      :create_version)
       include Aws::Structure
     end
 
@@ -3423,6 +3511,92 @@ module Aws::LexModelBuildingService
       :last_updated_date,
       :created_date,
       :version)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartImportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         payload: "data", # required
+    #         resource_type: "BOT", # required, accepts BOT, INTENT, SLOT_TYPE
+    #         merge_strategy: "OVERWRITE_LATEST", # required, accepts OVERWRITE_LATEST, FAIL_ON_CONFLICT
+    #       }
+    #
+    # @!attribute [rw] payload
+    #   A zip archive in binary format. The archive should contain one file,
+    #   a JSON file containing the resource to import. The resource should
+    #   match the type specified in the `resourceType` field.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Specifies the type of resource to export. Each resource also exports
+    #   any resources that it depends on.
+    #
+    #   * A bot exports dependent intents.
+    #
+    #   * An intent exports dependent slot types.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_strategy
+    #   Specifies the action that the `StartImport` operation should take
+    #   when there is an existing resource with the same name.
+    #
+    #   * FAIL\_ON\_CONFLICT - The import operation is stopped on the first
+    #     conflict between a resource in the import file and an existing
+    #     resource. The name of the resource causing the conflict is in the
+    #     `failureReason` field of the response to the `GetImport`
+    #     operation.
+    #
+    #     OVERWRITE\_LATEST - The import operation proceeds even if there is
+    #     a conflict with an existing resource. The $LASTEST version of the
+    #     existing resource is overwritten with the data from the import
+    #     file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImportRequest AWS API Documentation
+    #
+    class StartImportRequest < Struct.new(
+      :payload,
+      :resource_type,
+      :merge_strategy)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name given to the import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] merge_strategy
+    #   The action to take when there is a merge conflict.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_id
+    #   The identifier for the specific import job.
+    #   @return [String]
+    #
+    # @!attribute [rw] import_status
+    #   The status of the import job. If the status is `FAILED`, you can get
+    #   the reason for the failure using the `GetImport` operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   A timestamp for the date and time that the import job was requested.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImportResponse AWS API Documentation
+    #
+    class StartImportResponse < Struct.new(
+      :name,
+      :resource_type,
+      :merge_strategy,
+      :import_id,
+      :import_status,
+      :created_date)
       include Aws::Structure
     end
 

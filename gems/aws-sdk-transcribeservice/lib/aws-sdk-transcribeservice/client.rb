@@ -155,10 +155,78 @@ module Aws::TranscribeService
 
     # @!group API Operations
 
+    # Creates a new custom vocabulary that you can use to change the way
+    # Amazon Transcribe handles transcription of an audio file.
+    #
+    # @option params [required, String] :vocabulary_name
+    #   The name of the vocabulary. The name must be unique within an AWS
+    #   account. The name is case-sensitive.
+    #
+    # @option params [required, String] :language_code
+    #   The language code of the vocabulary entries.
+    #
+    # @option params [required, Array<String>] :phrases
+    #   An array of strings that contains the vocabulary entries.
+    #
+    # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVocabularyResponse#vocabulary_name #vocabulary_name} => String
+    #   * {Types::CreateVocabularyResponse#language_code #language_code} => String
+    #   * {Types::CreateVocabularyResponse#vocabulary_state #vocabulary_state} => String
+    #   * {Types::CreateVocabularyResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::CreateVocabularyResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vocabulary({
+    #     vocabulary_name: "VocabularyName", # required
+    #     language_code: "en-US", # required, accepts en-US, es-US
+    #     phrases: ["Phrase"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_name #=> String
+    #   resp.language_code #=> String, one of "en-US", "es-US"
+    #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
+    #   resp.last_modified_time #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabulary AWS API Documentation
+    #
+    # @overload create_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def create_vocabulary(params = {}, options = {})
+      req = build_request(:create_vocabulary, params)
+      req.send_request(options)
+    end
+
+    # Deletes a vocabulary from Amazon Transcribe.
+    #
+    # @option params [required, String] :vocabulary_name
+    #   The name of the vocabulary to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vocabulary({
+    #     vocabulary_name: "VocabularyName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabulary AWS API Documentation
+    #
+    # @overload delete_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def delete_vocabulary(params = {}, options = {})
+      req = build_request(:delete_vocabulary, params)
+      req.send_request(options)
+    end
+
     # Returns information about a transcription job. To see the status of
-    # the job, check the `Status` field. If the status is `COMPLETE`, the
-    # job is finished and you can find the results at the location specified
-    # in the `TranscriptionFileUri` field.
+    # the job, check the `TranscriptionJobStatus` field. If the status is
+    # `COMPLETED`, the job is finished and you can find the results at the
+    # location specified in the `TranscriptionFileUri` field.
     #
     # @option params [required, String] :transcription_job_name
     #   The name of the job.
@@ -185,6 +253,9 @@ module Aws::TranscribeService
     #   resp.transcription_job.creation_time #=> Time
     #   resp.transcription_job.completion_time #=> Time
     #   resp.transcription_job.failure_reason #=> String
+    #   resp.transcription_job.settings.vocabulary_name #=> String
+    #   resp.transcription_job.settings.show_speaker_labels #=> Boolean
+    #   resp.transcription_job.settings.max_speaker_labels #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJob AWS API Documentation
     #
@@ -195,18 +266,63 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Gets information about a vocabulary.
+    #
+    # @option params [required, String] :vocabulary_name
+    #   The name of the vocabulary to return information about. The name is
+    #   case-sensitive.
+    #
+    # @return [Types::GetVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVocabularyResponse#vocabulary_name #vocabulary_name} => String
+    #   * {Types::GetVocabularyResponse#language_code #language_code} => String
+    #   * {Types::GetVocabularyResponse#vocabulary_state #vocabulary_state} => String
+    #   * {Types::GetVocabularyResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetVocabularyResponse#failure_reason #failure_reason} => String
+    #   * {Types::GetVocabularyResponse#download_uri #download_uri} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vocabulary({
+    #     vocabulary_name: "VocabularyName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_name #=> String
+    #   resp.language_code #=> String, one of "en-US", "es-US"
+    #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
+    #   resp.last_modified_time #=> Time
+    #   resp.failure_reason #=> String
+    #   resp.download_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabulary AWS API Documentation
+    #
+    # @overload get_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def get_vocabulary(params = {}, options = {})
+      req = build_request(:get_vocabulary, params)
+      req.send_request(options)
+    end
+
     # Lists transcription jobs with the specified status.
     #
-    # @option params [required, String] :status
+    # @option params [String] :status
     #   When specified, returns only transcription jobs with the specified
     #   status.
+    #
+    # @option params [String] :job_name_contains
+    #   When specified, the jobs returned in the list are limited to jobs
+    #   whose name contains the specified string.
     #
     # @option params [String] :next_token
     #   If the result of the previous request to `ListTranscriptionJobs` was
     #   truncated, include the `NextToken` to fetch the next set of jobs.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of jobs to return in the response.
+    #   The maximum number of jobs to return in the response. If there are
+    #   fewer results in the list, this response contains only the actual
+    #   results.
     #
     # @return [Types::ListTranscriptionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -217,7 +333,8 @@ module Aws::TranscribeService
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_transcription_jobs({
-    #     status: "IN_PROGRESS", # required, accepts IN_PROGRESS, FAILED, COMPLETED
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, FAILED, COMPLETED
+    #     job_name_contains: "TranscriptionJobName",
     #     next_token: "NextToken",
     #     max_results: 1,
     #   })
@@ -243,6 +360,62 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Returns a list of vocabularies that match the specified criteria. If
+    # no criteria are specified, returns the entire list of vocabularies.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous request to `ListVocabularies` was
+    #   truncated, include the `NextToken` to fetch the next set of jobs.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of vocabularies to return in the response. If there
+    #   are fewer results in the list, this response contains only the actual
+    #   results.
+    #
+    # @option params [String] :state_equals
+    #   When specified, only returns vocabularies with the `VocabularyState`
+    #   field equal to the specified state.
+    #
+    # @option params [String] :name_contains
+    #   When specified, the vocabularies returned in the list are limited to
+    #   vocabularies whose name contains the specified string. The search is
+    #   case-insensitive, `ListVocabularies` will return both
+    #   "vocabularyname" and "VocabularyName" in the response list.
+    #
+    # @return [Types::ListVocabulariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListVocabulariesResponse#status #status} => String
+    #   * {Types::ListVocabulariesResponse#next_token #next_token} => String
+    #   * {Types::ListVocabulariesResponse#vocabularies #vocabularies} => Array&lt;Types::VocabularyInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_vocabularies({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     state_equals: "PENDING", # accepts PENDING, READY, FAILED
+    #     name_contains: "VocabularyName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.next_token #=> String
+    #   resp.vocabularies #=> Array
+    #   resp.vocabularies[0].vocabulary_name #=> String
+    #   resp.vocabularies[0].language_code #=> String, one of "en-US", "es-US"
+    #   resp.vocabularies[0].last_modified_time #=> Time
+    #   resp.vocabularies[0].vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularies AWS API Documentation
+    #
+    # @overload list_vocabularies(params = {})
+    # @param [Hash] params ({})
+    def list_vocabularies(params = {}, options = {})
+      req = build_request(:list_vocabularies, params)
+      req.send_request(options)
+    end
+
     # Starts an asynchronous job to transcribe speech to text.
     #
     # @option params [required, String] :transcription_job_name
@@ -260,6 +433,10 @@ module Aws::TranscribeService
     # @option params [required, Types::Media] :media
     #   An object that describes the input media for a transcription job.
     #
+    # @option params [Types::Settings] :settings
+    #   A `Settings` object that provides optional settings for a
+    #   transcription job.
+    #
     # @return [Types::StartTranscriptionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTranscriptionJobResponse#transcription_job #transcription_job} => Types::TranscriptionJob
@@ -273,6 +450,11 @@ module Aws::TranscribeService
     #     media_format: "mp3", # required, accepts mp3, mp4, wav, flac
     #     media: { # required
     #       media_file_uri: "Uri",
+    #     },
+    #     settings: {
+    #       vocabulary_name: "VocabularyName",
+    #       show_speaker_labels: false,
+    #       max_speaker_labels: 1,
     #     },
     #   })
     #
@@ -288,6 +470,9 @@ module Aws::TranscribeService
     #   resp.transcription_job.creation_time #=> Time
     #   resp.transcription_job.completion_time #=> Time
     #   resp.transcription_job.failure_reason #=> String
+    #   resp.transcription_job.settings.vocabulary_name #=> String
+    #   resp.transcription_job.settings.show_speaker_labels #=> Boolean
+    #   resp.transcription_job.settings.max_speaker_labels #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJob AWS API Documentation
     #
@@ -295,6 +480,48 @@ module Aws::TranscribeService
     # @param [Hash] params ({})
     def start_transcription_job(params = {}, options = {})
       req = build_request(:start_transcription_job, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing vocabulary with new values.
+    #
+    # @option params [required, String] :vocabulary_name
+    #   The name of the vocabulary to update. The name is case-sensitive.
+    #
+    # @option params [required, String] :language_code
+    #   The language code of the vocabulary entries.
+    #
+    # @option params [required, Array<String>] :phrases
+    #   An array of strings containing the vocabulary entries.
+    #
+    # @return [Types::UpdateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVocabularyResponse#vocabulary_name #vocabulary_name} => String
+    #   * {Types::UpdateVocabularyResponse#language_code #language_code} => String
+    #   * {Types::UpdateVocabularyResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateVocabularyResponse#vocabulary_state #vocabulary_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vocabulary({
+    #     vocabulary_name: "VocabularyName", # required
+    #     language_code: "en-US", # required, accepts en-US, es-US
+    #     phrases: ["Phrase"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_name #=> String
+    #   resp.language_code #=> String, one of "en-US", "es-US"
+    #   resp.last_modified_time #=> Time
+    #   resp.vocabulary_state #=> String, one of "PENDING", "READY", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabulary AWS API Documentation
+    #
+    # @overload update_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def update_vocabulary(params = {}, options = {})
+      req = build_request(:update_vocabulary, params)
       req.send_request(options)
     end
 
@@ -311,7 +538,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -700,13 +700,13 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Creates a plan. A plan includes the list of resources that will be
-    # created (when provisioning a new product) or modified (when updating a
+    # Creates a plan. A plan includes the list of resources to be created
+    # (when provisioning a new product) or modified (when updating a
     # provisioned product) when the plan is executed.
     #
     # You can create one plan per provisioned product. To create a plan for
-    # an existing provisioned product, it's status must be AVAILBLE or
-    # TAINTED.
+    # an existing provisioned product, the product status must be AVAILBLE
+    # or TAINTED.
     #
     # To view the resource changes in the change set, use
     # DescribeProvisionedProductPlan. To create or modify the provisioned
@@ -1135,6 +1135,31 @@ module Aws::ServiceCatalog
     # @param [Hash] params ({})
     def delete_provisioning_artifact(params = {}, options = {})
       req = build_request(:delete_provisioning_artifact, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified TagOption.
+    #
+    # You cannot delete a TagOption if it is associated with a product or
+    # portfolio.
+    #
+    # @option params [required, String] :id
+    #   The TagOption identifier.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_tag_option({
+    #     id: "TagOptionId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteTagOption AWS API Documentation
+    #
+    # @overload delete_tag_option(params = {})
+    # @param [Hash] params ({})
+    def delete_tag_option(params = {}, options = {})
+      req = build_request(:delete_tag_option, params)
       req.send_request(options)
     end
 
@@ -2011,6 +2036,14 @@ module Aws::ServiceCatalog
     # @option params [Integer] :page_size
     #   The maximum number of items to return with this call.
     #
+    # @option params [String] :portfolio_share_type
+    #   The type of shared portfolios to list. The default is to list imported
+    #   portfolios.
+    #
+    #   * `AWS_SERVICECATALOG` - List default portfolios
+    #
+    #   * `IMPORTED` - List imported portfolios
+    #
     # @return [Types::ListAcceptedPortfolioSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAcceptedPortfolioSharesOutput#portfolio_details #portfolio_details} => Array&lt;Types::PortfolioDetail&gt;
@@ -2022,6 +2055,7 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     page_token: "PageToken",
     #     page_size: 1,
+    #     portfolio_share_type: "IMPORTED", # accepts IMPORTED, AWS_SERVICECATALOG
     #   })
     #
     # @example Response structure
@@ -2358,8 +2392,8 @@ module Aws::ServiceCatalog
       req.send_request(options)
     end
 
-    # Lists the plans for the specified provisioned product or all plans the
-    # user has access to.
+    # Lists the plans for the specified provisioned product or all plans to
+    # which the user has access.
     #
     # @option params [String] :accept_language
     #   The language code.
@@ -3622,7 +3656,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

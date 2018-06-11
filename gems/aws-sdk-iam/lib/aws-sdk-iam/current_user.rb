@@ -90,7 +90,7 @@ module Aws::IAM
     # then this field contains the date and time the most recent password
     # was used.
     #
-    # This value is returned only in the GetUser and ListUsers actions.
+    # This value is returned only in the GetUser and ListUsers operations.
     #
     #
     #
@@ -245,7 +245,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -282,7 +282,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -320,7 +320,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #

@@ -511,6 +511,114 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
+    # You can use the `GetMetricData` API to retrieve as many as 100
+    # different metrics in a single request, with a total of as many as
+    # 100,800 datapoints. You can also optionally perform math expressions
+    # on the values of the returned statistics, to create new time series
+    # that represent new insights into your data. For example, using Lambda
+    # metrics, you could divide the Errors metric by the Invocations metric
+    # to get an error rate time series. For more information about metric
+    # math expressions, see [Metric Math Syntax and Functions][1] in the
+    # *Amazon CloudWatch User Guide*.
+    #
+    # Calls to the `GetMetricData` API have a different pricing structure
+    # than calls to `GetMetricStatistics`. For more information about
+    # pricing, see [Amazon CloudWatch Pricing][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
+    # [2]: https://aws.amazon.com/cloudwatch/pricing/
+    #
+    # @option params [required, Array<Types::MetricDataQuery>] :metric_data_queries
+    #   The metric queries to be returned. A single `GetMetricData` call can
+    #   include as many as 100 `MetricDataQuery` structures. Each of these
+    #   structures can specify either a metric to retrieve, or a math
+    #   expression to perform on retrieved data.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The time stamp indicating the earliest data to be returned.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The time stamp indicating the latest data to be returned.
+    #
+    # @option params [String] :next_token
+    #   Include this value, if it was returned by the previous call, to get
+    #   the next set of data points.
+    #
+    # @option params [String] :scan_by
+    #   The order in which data points should be returned.
+    #   `TimestampDescending` returns the newest data first and paginates when
+    #   the `MaxDatapoints` limit is reached. `TimestampAscending` returns the
+    #   oldest data first and paginates when the `MaxDatapoints` limit is
+    #   reached.
+    #
+    # @option params [Integer] :max_datapoints
+    #   The maximum number of data points the request should return before
+    #   paginating. If you omit this, the default of 100,800 is used.
+    #
+    # @return [Types::GetMetricDataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMetricDataOutput#metric_data_results #metric_data_results} => Array&lt;Types::MetricDataResult&gt;
+    #   * {Types::GetMetricDataOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_metric_data({
+    #     metric_data_queries: [ # required
+    #       {
+    #         id: "MetricId", # required
+    #         metric_stat: {
+    #           metric: { # required
+    #             namespace: "Namespace",
+    #             metric_name: "MetricName",
+    #             dimensions: [
+    #               {
+    #                 name: "DimensionName", # required
+    #                 value: "DimensionValue", # required
+    #               },
+    #             ],
+    #           },
+    #           period: 1, # required
+    #           stat: "Stat", # required
+    #           unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+    #         },
+    #         expression: "MetricExpression",
+    #         label: "MetricLabel",
+    #         return_data: false,
+    #       },
+    #     ],
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     next_token: "NextToken",
+    #     scan_by: "TimestampDescending", # accepts TimestampDescending, TimestampAscending
+    #     max_datapoints: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_data_results #=> Array
+    #   resp.metric_data_results[0].id #=> String
+    #   resp.metric_data_results[0].label #=> String
+    #   resp.metric_data_results[0].timestamps #=> Array
+    #   resp.metric_data_results[0].timestamps[0] #=> Time
+    #   resp.metric_data_results[0].values #=> Array
+    #   resp.metric_data_results[0].values[0] #=> Float
+    #   resp.metric_data_results[0].status_code #=> String, one of "Complete", "InternalError", "PartialData"
+    #   resp.metric_data_results[0].messages #=> Array
+    #   resp.metric_data_results[0].messages[0].code #=> String
+    #   resp.metric_data_results[0].messages[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricData AWS API Documentation
+    #
+    # @overload get_metric_data(params = {})
+    # @param [Hash] params ({})
+    def get_metric_data(params = {}, options = {})
+      req = build_request(:get_metric_data, params)
+      req.send_request(options)
+    end
+
     # Gets statistics for the specified metric.
     #
     # The maximum number of data points returned from a single call is
@@ -667,8 +775,8 @@ module Aws::CloudWatch
     # @option params [String] :unit
     #   The unit for a given metric. Metrics may be reported in multiple
     #   units. Not supplying a unit results in all units being returned. If
-    #   the metric only ever reports one unit, specifying a unit has no
-    #   effect.
+    #   you specify only a unit that the metric does not report, the results
+    #   of the call are null.
     #
     # @return [Types::GetMetricStatisticsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1028,7 +1136,7 @@ module Aws::CloudWatch
     #
     #   Be sure to specify 10 or 30 only for metrics that are stored by a
     #   `PutMetricData` call with a `StorageResolution` of 1. If you specify a
-    #   Period of 10 or 30 for a metric that does not have sub-minute
+    #   period of 10 or 30 for a metric that does not have sub-minute
     #   resolution, the alarm still attempts to gather data at the period rate
     #   that you specify. In this case, it does not receive data for the
     #   attempts that do not correspond to a one-minute data resolution, and
@@ -1059,12 +1167,24 @@ module Aws::CloudWatch
     #
     # @option params [required, Integer] :evaluation_periods
     #   The number of periods over which data is compared to the specified
-    #   threshold. An alarm's total current evaluation period can be no
-    #   longer than one day, so this number multiplied by `Period` cannot be
-    #   more than 86,400 seconds.
+    #   threshold. If you are setting an alarm which requires that a number of
+    #   consecutive data points be breaching to trigger the alarm, this value
+    #   specifies that number. If you are setting an "M out of N" alarm,
+    #   this value is the N.
+    #
+    #   An alarm's total current evaluation period can be no longer than one
+    #   day, so this number multiplied by `Period` cannot be more than 86,400
+    #   seconds.
     #
     # @option params [Integer] :datapoints_to_alarm
     #   The number of datapoints that must be breaching to trigger the alarm.
+    #   This is used only if you are setting an "M out of N" alarm. In that
+    #   case, this value is the M. For more information, see [Evaluating an
+    #   Alarm][1] in the *Amazon CloudWatch User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation
     #
     # @option params [required, Float] :threshold
     #   The value against which the specified statistic is compared.
@@ -1284,7 +1404,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

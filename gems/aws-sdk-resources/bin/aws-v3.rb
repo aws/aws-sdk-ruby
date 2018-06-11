@@ -98,7 +98,7 @@ require 'aws-sdk-resources'
 
 # when running the REPL locally, we want to load all of the gems from source
 if File.directory?(File.expand_path('../../../../build_tools', __FILE__))
-  gems = %w(aws-sdk-core aws-sigv4 aws-sigv2 aws-partitions)
+  gems = %w(aws-sdk-core aws-sigv4 aws-sigv2 aws-partitions aws-eventstream)
   Aws.constants.each do |const_name|
     if Aws.autoload?(const_name)
       gems << "aws-sdk-#{const_name.downcase}"

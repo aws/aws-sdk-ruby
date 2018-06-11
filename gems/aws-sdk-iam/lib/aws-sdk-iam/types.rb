@@ -11,7 +11,7 @@ module Aws::IAM
     # Contains information about an AWS access key.
     #
     # This data type is used as a response element in the CreateAccessKey
-    # and ListAccessKeys actions.
+    # and ListAccessKeys operations.
     #
     # <note markdown="1"> The `SecretAccessKey` value is returned only in response to
     # CreateAccessKey. You can get a secret access key only when you first
@@ -29,8 +29,8 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the access key. `Active` means the key is valid for
-    #   API calls, while `Inactive` means it is not.
+    #   The status of the access key. `Active` means that the key is valid
+    #   for API calls, while `Inactive` means it is not.
     #   @return [String]
     #
     # @!attribute [rw] secret_access_key
@@ -55,11 +55,12 @@ module Aws::IAM
     # Contains information about the last time an AWS access key was used.
     #
     # This data type is used as a response element in the
-    # GetAccessKeyLastUsed action.
+    # GetAccessKeyLastUsed operation.
     #
     # @!attribute [rw] last_used_date
     #   The date and time, in [ISO 8601 date-time format][1], when the
-    #   access key was most recently used. This field is null when:
+    #   access key was most recently used. This field is null in the
+    #   following situations:
     #
     #   * The user does not have an access key.
     #
@@ -75,7 +76,8 @@ module Aws::IAM
     #
     # @!attribute [rw] service_name
     #   The name of the AWS service with which this access key was most
-    #   recently used. This field displays "N/A" when:
+    #   recently used. This field displays "N/A" in the following
+    #   situations:
     #
     #   * The user does not have an access key.
     #
@@ -87,7 +89,7 @@ module Aws::IAM
     #
     # @!attribute [rw] region
     #   The AWS region where this access key was most recently used. This
-    #   field is displays "N/A" when:
+    #   field is displays "N/A" in the following situations:
     #
     #   * The user does not have an access key.
     #
@@ -116,7 +118,7 @@ module Aws::IAM
     # Contains information about an AWS access key, without its secret key.
     #
     # This data type is used as a response element in the ListAccessKeys
-    # action.
+    # operation.
     #
     # @!attribute [rw] user_name
     #   The name of the IAM user that the key is associated with.
@@ -156,7 +158,8 @@ module Aws::IAM
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC)
     #   provider resource to add the client ID to. You can get a list of
-    #   OIDC provider ARNs by using the ListOpenIDConnectProviders action.
+    #   OIDC provider ARNs by using the ListOpenIDConnectProviders
+    #   operation.
     #   @return [String]
     #
     # @!attribute [rw] client_id
@@ -186,7 +189,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -228,7 +231,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -241,7 +244,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -271,7 +274,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -353,7 +356,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -384,7 +387,8 @@ module Aws::IAM
     # An attached policy is a managed policy that has been attached to a
     # user, group, or role. This data type is used as a response element in
     # the ListAttachedGroupPolicies, ListAttachedRolePolicies,
-    # ListAttachedUserPolicies, and GetAccountAuthorizationDetails actions.
+    # ListAttachedUserPolicies, and GetAccountAuthorizationDetails
+    # operations.
     #
     # For more information about managed policies, refer to [Managed
     # Policies and Inline Policies][1] in the *Using IAM* guide.
@@ -433,15 +437,15 @@ module Aws::IAM
     #   The new password. The new password must conform to the AWS
     #   account's password policy, if one exists.
     #
-    #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of almost any printable ASCII character
-    #   from the space (\\u0020) through the end of the ASCII character
-    #   range (\\u00FF). You can also include the tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D) characters. Although any of
-    #   these characters are valid in a password, note that many tools, such
-    #   as the AWS Management Console, might restrict the ability to enter
-    #   certain characters because they have special meaning within that
-    #   tool.
+    #   The [regex pattern][1] that is used to validate this parameter is a
+    #   string of characters. That string can include almost any printable
+    #   ASCII character from the space (\\u0020) through the end of the
+    #   ASCII character range (\\u00FF). You can also include the tab
+    #   (\\u0009), line feed (\\u000A), and carriage return (\\u000D)
+    #   characters. Any of these characters are valid in a password.
+    #   However, many tools, such as the AWS Management Console, might
+    #   restrict the ability to type certain characters because they have
+    #   special meaning within that tool.
     #
     #
     #
@@ -481,8 +485,8 @@ module Aws::IAM
     #
     # @!attribute [rw] context_key_values
     #   The value (or values, if the condition context key supports multiple
-    #   values) to provide to the simulation for use when the key is
-    #   referenced by a `Condition` element in an input policy.
+    #   values) to provide to the simulation when the key is referenced by a
+    #   `Condition` element in an input policy.
     #   @return [Array<String>]
     #
     # @!attribute [rw] context_key_type
@@ -512,7 +516,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -581,12 +585,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (per its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -601,9 +605,9 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-. The group name must be unique within the account.
-    #   Group names are not distinguished by case. For example, you cannot
-    #   create groups named both "ADMINS" and "admins".
+    #   characters: \_+=,.@-. The group name must be unique within the
+    #   account. Group names are not distinguished by case. For example, you
+    #   cannot create groups named both "ADMINS" and "admins".
     #
     #
     #
@@ -645,7 +649,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -659,12 +663,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (per its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -709,7 +713,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -719,15 +723,15 @@ module Aws::IAM
     # @!attribute [rw] password
     #   The new password for the user.
     #
-    #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of almost any printable ASCII character
-    #   from the space (\\u0020) through the end of the ASCII character
-    #   range (\\u00FF). You can also include the tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D) characters. Although any of
-    #   these characters are valid in a password, note that many tools, such
-    #   as the AWS Management Console, might restrict the ability to enter
-    #   certain characters because they have special meaning within that
-    #   tool.
+    #   The [regex pattern][1] that is used to validate this parameter is a
+    #   string of characters. That string can include almost any printable
+    #   ASCII character from the space (\\u0020) through the end of the
+    #   ASCII character range (\\u00FF). You can also include the tab
+    #   (\\u0009), line feed (\\u000A), and carriage return (\\u000D)
+    #   characters. Any of these characters are valid in a password.
+    #   However, many tools, such as the AWS Management Console, might
+    #   restrict the ability to type certain characters because they have
+    #   special meaning within that tool.
     #
     #
     #
@@ -771,12 +775,12 @@ module Aws::IAM
     #       }
     #
     # @!attribute [rw] url
-    #   The URL of the identity provider. The URL must begin with
-    #   "https://" and should correspond to the `iss` claim in the
-    #   provider's OpenID Connect ID tokens. Per the OIDC standard, path
-    #   components are allowed but query parameters are not. Typically the
-    #   URL consists of only a host name, like
-    #   "https://server.example.org" or "https://example.com".
+    #   The URL of the identity provider. The URL must begin with `https://`
+    #   and should correspond to the `iss` claim in the provider's OpenID
+    #   Connect ID tokens. Per the OIDC standard, path components are
+    #   allowed but query parameters are not. Typically the URL consists of
+    #   only a hostname, like `https://server.example.org` or
+    #   `https://example.com`.
     #
     #   You cannot register the same provider multiple times in a single AWS
     #   account. If you try to submit a URL that has already been used for
@@ -796,14 +800,14 @@ module Aws::IAM
     #   IAM OIDC provider.
     #
     #   There is no defined format for a client ID. The
-    #   `CreateOpenIDConnectProviderRequest` action accepts client IDs up to
-    #   255 characters long.
+    #   `CreateOpenIDConnectProviderRequest` operation accepts client IDs up
+    #   to 255 characters long.
     #   @return [Array<String>]
     #
     # @!attribute [rw] thumbprint_list
     #   A list of server certificate thumbprints for the OpenID Connect
-    #   (OIDC) identity provider's server certificate(s). Typically this
-    #   list includes only one entry. However, IAM lets you have up to five
+    #   (OIDC) identity provider's server certificates. Typically this list
+    #   includes only one entry. However, IAM lets you have up to five
     #   thumbprints for an OIDC provider. This lets you maintain multiple
     #   thumbprints if the identity provider is rotating certificates.
     #
@@ -813,11 +817,11 @@ module Aws::IAM
     #   40-character string.
     #
     #   You must provide at least one thumbprint when creating an IAM OIDC
-    #   provider. For example, if the OIDC provider is `server.example.com`
-    #   and the provider stores its keys at
-    #   "https://keys.server.example.com/openid-connect", the thumbprint
-    #   string would be the hex-encoded SHA-1 hash value of the certificate
-    #   used by https://keys.server.example.com.
+    #   provider. For example, assume that the OIDC provider is
+    #   `server.example.com` and the provider stores its keys at
+    #   https://keys.server.example.com/openid-connect. In that case, the
+    #   thumbprint string would be the hex-encoded SHA-1 hash value of the
+    #   certificate used by https://keys.server.example.com.
     #
     #   For more information about obtaining the OIDC provider's
     #   thumbprint, see [Obtaining the Thumbprint for an OpenID Connect
@@ -869,7 +873,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -885,12 +889,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (per its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -903,12 +907,16 @@ module Aws::IAM
     #   new policy.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -975,12 +983,16 @@ module Aws::IAM
     #   this new version of the policy.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -992,8 +1004,8 @@ module Aws::IAM
     #   version.
     #
     #   When this parameter is `true`, the new policy version becomes the
-    #   operative version; that is, the version that is in effect for the
-    #   IAM users, groups, and roles that the policy is attached to.
+    #   operative version. That is, it becomes the version that is in effect
+    #   for the IAM users, groups, and roles that the policy is attached to.
     #
     #   For more information about managed policy versions, see [Versioning
     #   for Managed Policies][1] in the *IAM User Guide*.
@@ -1033,6 +1045,7 @@ module Aws::IAM
     #         role_name: "roleNameType", # required
     #         assume_role_policy_document: "policyDocumentType", # required
     #         description: "roleDescriptionType",
+    #         max_session_duration: 1,
     #       }
     #
     # @!attribute [rw] path
@@ -1042,12 +1055,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (per its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -1076,12 +1089,16 @@ module Aws::IAM
     #   permission to assume the role.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -1089,8 +1106,31 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A customer-provided description of the role.
+    #   A description of the role.
     #   @return [String]
+    #
+    # @!attribute [rw] max_session_duration
+    #   The maximum session duration (in seconds) that you want to set for
+    #   the specified role. If you do not specify a value for this setting,
+    #   the default maximum of one hour is applied. This setting can have a
+    #   value from 1 hour to 12 hours.
+    #
+    #   Anyone who assumes the role from the AWS CLI or API can use the
+    #   `DurationSeconds` API parameter or the `duration-seconds` CLI
+    #   parameter to request a longer session. The `MaxSessionDuration`
+    #   setting determines the maximum duration that can be requested using
+    #   the `DurationSeconds` parameter. If users don't specify a value for
+    #   the `DurationSeconds` parameter, their security credentials are
+    #   valid for one hour by default. This applies when you use the
+    #   `AssumeRole*` API operations or the `assume-role*` CLI operations
+    #   but does not apply when you use those operations to create a console
+    #   URL. For more information, see [Using IAM Roles][1] in the *IAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest AWS API Documentation
     #
@@ -1098,7 +1138,8 @@ module Aws::IAM
       :path,
       :role_name,
       :assume_role_policy_document,
-      :description)
+      :description,
+      :max_session_duration)
       include Aws::Structure
     end
 
@@ -1145,7 +1186,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1239,7 +1280,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1291,12 +1332,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (per its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -1310,7 +1351,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-. User names are not distinguished by case. For
+    #   characters: \_+=,.@-. User names are not distinguished by case. For
     #   example, you cannot create users named both "TESTUSER" and
     #   "testuser".
     #
@@ -1355,12 +1396,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   This parameter allows (per its [regex pattern][2]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -1375,7 +1416,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1417,7 +1458,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1460,7 +1501,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1530,7 +1571,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1543,7 +1584,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1571,7 +1612,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1598,7 +1639,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1625,7 +1666,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1650,7 +1691,7 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM OpenID Connect provider
     #   resource object to delete. You can get a list of OpenID Connect
     #   provider resource ARNs by using the ListOpenIDConnectProviders
-    #   action.
+    #   operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProviderRequest AWS API Documentation
@@ -1758,7 +1799,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1832,7 +1873,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1872,7 +1913,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1933,7 +1974,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1975,7 +2016,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2017,7 +2058,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2030,7 +2071,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2058,7 +2099,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2112,11 +2153,12 @@ module Aws::IAM
     #
     # @!attribute [rw] role_usage_list
     #   A list of objects that contains details about the service-linked
-    #   role deletion failure. If the service-linked role has active
-    #   sessions or if any resources that were used by the role have not
-    #   been deleted from the linked service, the role can't be deleted.
-    #   This parameter includes a list of the resources that are associated
-    #   with the role and the region in which the resources are being used.
+    #   role deletion failure, if that information is returned by the
+    #   service. If the service-linked role has active sessions or if any
+    #   resources that were used by the role have not been deleted from the
+    #   linked service, the role can't be deleted. This parameter includes
+    #   a list of the resources that are associated with the role and the
+    #   region in which the resources are being used.
     #   @return [Array<Types::RoleUsageType>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletionTaskFailureReasonType AWS API Documentation
@@ -2142,7 +2184,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2224,7 +2266,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2266,7 +2308,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2290,7 +2332,7 @@ module Aws::IAM
     # @!attribute [rw] authentication_code_1
     #   An authentication code emitted by the device.
     #
-    #   The format for this parameter is a string of 6 digits.
+    #   The format for this parameter is a string of six digits.
     #
     #   Submit your request immediately after generating the authentication
     #   codes. If you generate the codes and then wait too long to submit
@@ -2307,7 +2349,7 @@ module Aws::IAM
     # @!attribute [rw] authentication_code_2
     #   A subsequent authentication code emitted by the device.
     #
-    #   The format for this parameter is a string of 6 digits.
+    #   The format for this parameter is a string of six digits.
     #
     #   Submit your request immediately after generating the authentication
     #   codes. If you generate the codes and then wait too long to submit
@@ -2337,11 +2379,12 @@ module Aws::IAM
     # SimulateCustomPolicy ` and ` SimulatePrincipalPolicy `.
     #
     # @!attribute [rw] eval_action_name
-    #   The name of the API action tested on the indicated resource.
+    #   The name of the API operation tested on the indicated resource.
     #   @return [String]
     #
     # @!attribute [rw] eval_resource_name
-    #   The ARN of the resource that the indicated API action was tested on.
+    #   The ARN of the resource that the indicated API operation was tested
+    #   on.
     #   @return [String]
     #
     # @!attribute [rw] eval_decision
@@ -2351,9 +2394,9 @@ module Aws::IAM
     # @!attribute [rw] matched_statements
     #   A list of the statements in the input policies that determine the
     #   result for this scenario. Remember that even if multiple statements
-    #   allow the action on the resource, if only one statement denies that
-    #   action, then the explicit deny overrides any allow, and the deny
-    #   statement is the only entry included in the result.
+    #   allow the operation on the resource, if only one statement denies
+    #   that operation, then the explicit deny overrides any allow, and the
+    #   deny statement is the only entry included in the result.
     #   @return [Array<Types::Statement>]
     #
     # @!attribute [rw] missing_context_values
@@ -2388,8 +2431,8 @@ module Aws::IAM
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] resource_specific_results
-    #   The individual results of the simulation of the API action specified
-    #   in EvalActionName on each resource.
+    #   The individual results of the simulation of the API operation
+    #   specified in EvalActionName on each resource.
     #   @return [Array<Types::ResourceSpecificResult>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EvaluationResult AWS API Documentation
@@ -2608,12 +2651,16 @@ module Aws::IAM
     #   containing the complete, valid JSON text of an IAM policy.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -2652,12 +2699,13 @@ module Aws::IAM
     # @!attribute [rw] policy_source_arn
     #   The ARN of a user, group, or role whose policies contain the context
     #   keys that you want listed. If you specify a user, the list includes
-    #   context keys that are found in all policies attached to the user as
-    #   well as to all groups that the user is a member of. If you pick a
-    #   group or a role, then it includes only those context keys that are
-    #   found in policies attached to that entity. Note that all parameters
-    #   are shown in unencoded form here for clarity, but must be URL
-    #   encoded to be included as a part of a real HTML request.
+    #   context keys that are found in all policies that are attached to the
+    #   user. The list also includes all groups that the user is a member
+    #   of. If you pick a group or a role, then it includes only those
+    #   context keys that are found in policies attached to that entity.
+    #   Note that all parameters are shown in unencoded form here for
+    #   clarity, but must be URL encoded to be included as a part of a real
+    #   HTML request.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)
     #   and AWS Service Namespaces][1] in the *AWS General Reference*.
@@ -2672,12 +2720,16 @@ module Aws::IAM
     #   of context keys that are referenced.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -2734,7 +2786,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2747,7 +2799,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2800,7 +2852,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2885,7 +2937,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2925,7 +2977,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2963,7 +3015,7 @@ module Aws::IAM
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the OIDC provider resource object
     #   in IAM to get information for. You can get a list of OIDC provider
-    #   resource ARNs by using the ListOpenIDConnectProviders action.
+    #   resource ARNs by using the ListOpenIDConnectProviders operation.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)
     #   and AWS Service Namespaces][1] in the *AWS General Reference*.
@@ -3135,7 +3187,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -3278,7 +3330,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -3339,7 +3391,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -3417,7 +3469,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -3430,7 +3482,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -3482,7 +3534,7 @@ module Aws::IAM
     #   the user making the request. This parameter allows (per its [regex
     #   pattern][1]) a string of characters consisting of upper and
     #   lowercase alphanumeric characters with no spaces. You can also
-    #   include any of the following characters: =,.@-
+    #   include any of the following characters: \_+=,.@-
     #
     #
     #
@@ -3511,7 +3563,8 @@ module Aws::IAM
 
     # Contains information about an IAM group entity.
     #
-    # This data type is used as a response element in the following actions:
+    # This data type is used as a response element in the following
+    # operations:
     #
     # * CreateGroup
     #
@@ -3576,7 +3629,7 @@ module Aws::IAM
     # policies.
     #
     # This data type is used as a response element in the
-    # GetAccountAuthorizationDetails action.
+    # GetAccountAuthorizationDetails operation.
     #
     # @!attribute [rw] path
     #   The path to the group. For more information about paths, see [IAM
@@ -3645,7 +3698,8 @@ module Aws::IAM
 
     # Contains information about an instance profile.
     #
-    # This data type is used as a response element in the following actions:
+    # This data type is used as a response element in the following
+    # operations:
     #
     # * CreateInstanceProfile
     #
@@ -3723,7 +3777,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -3875,7 +3929,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -3887,12 +3941,12 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all policies.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -3990,12 +4044,12 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all policies.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -4081,7 +4135,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -4093,12 +4147,12 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all policies.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -4205,12 +4259,12 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all entities.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -4304,7 +4358,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -4348,7 +4402,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -4395,7 +4449,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -4477,12 +4531,12 @@ module Aws::IAM
     #   with `/division_abc/subdivision_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all groups. This paramater allows (per its [regex
+    #   slash (/), listing all groups. This parameter allows (per its [regex
     #   pattern][1]) a string of characters consisting of either a forward
     #   slash (/) by itself or a string that must begin and end with forward
-    #   slashes, containing any ASCII character from the ! (\\u0021) thru
-    #   the DEL character (\\u007F), including most punctuation characters,
-    #   digits, and upper and lowercased letters.
+    #   slashes. In addition, it can contain any ASCII character from the !
+    #   (\\u0021) through the DEL character (\\u007F), including most
+    #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
     #
@@ -4647,12 +4701,13 @@ module Aws::IAM
     #   path starts with `/application_abc/component_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all instance profiles. This paramater allows (per
+    #   slash (/), listing all instance profiles. This parameter allows (per
     #   its [regex pattern][1]) a string of characters consisting of either
     #   a forward slash (/) by itself or a string that must begin and end
-    #   with forward slashes, containing any ASCII character from the !
-    #   (\\u0021) thru the DEL character (\\u007F), including most
-    #   punctuation characters, digits, and upper and lowercased letters.
+    #   with forward slashes. In addition, it can contain any ASCII
+    #   character from the ! (\\u0021) through the DEL character (\\u007F),
+    #   including most punctuation characters, digits, and upper and
+    #   lowercased letters.
     #
     #
     #
@@ -4734,7 +4789,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -4856,12 +4911,12 @@ module Aws::IAM
     # @!attribute [rw] path_prefix
     #   The path prefix for filtering the results. This parameter is
     #   optional. If it is not included, it defaults to a slash (/), listing
-    #   all policies. This paramater allows (per its [regex pattern][1]) a
+    #   all policies. This parameter allows (per its [regex pattern][1]) a
     #   string of characters consisting of either a forward slash (/) by
-    #   itself or a string that must begin and end with forward slashes,
-    #   containing any ASCII character from the ! (\\u0021) thru the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
-    #   and upper and lowercased letters.
+    #   itself or a string that must begin and end with forward slashes. In
+    #   addition, it can contain any ASCII character from the ! (\\u0021)
+    #   through the DEL character (\\u007F), including most punctuation
+    #   characters, digits, and upper and lowercased letters.
     #
     #
     #
@@ -5115,12 +5170,12 @@ module Aws::IAM
     #   with `/application_abc/component_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all roles. This paramater allows (per its [regex
+    #   slash (/), listing all roles. This parameter allows (per its [regex
     #   pattern][1]) a string of characters consisting of either a forward
     #   slash (/) by itself or a string that must begin and end with forward
-    #   slashes, containing any ASCII character from the ! (\\u0021) thru
-    #   the DEL character (\\u007F), including most punctuation characters,
-    #   digits, and upper and lowercased letters.
+    #   slashes. In addition, it can contain any ASCII character from the !
+    #   (\\u0021) through the DEL character (\\u007F), including most
+    #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
     #
@@ -5218,13 +5273,13 @@ module Aws::IAM
     #
     # @!attribute [rw] user_name
     #   The name of the IAM user to list SSH public keys for. If none is
-    #   specified, the UserName field is determined implicitly based on the
-    #   AWS access key used to sign the request.
+    #   specified, the `UserName` field is determined implicitly based on
+    #   the AWS access key used to sign the request.
     #
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -5306,12 +5361,13 @@ module Aws::IAM
     #   the path starts with `/company/servercerts`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all server certificates. This paramater allows
+    #   slash (/), listing all server certificates. This parameter allows
     #   (per its [regex pattern][1]) a string of characters consisting of
     #   either a forward slash (/) by itself or a string that must begin and
-    #   end with forward slashes, containing any ASCII character from the !
-    #   (\\u0021) thru the DEL character (\\u007F), including most
-    #   punctuation characters, digits, and upper and lowercased letters.
+    #   end with forward slashes. In addition, it can contain any ASCII
+    #   character from the ! (\\u0021) through the DEL character (\\u007F),
+    #   including most punctuation characters, digits, and upper and
+    #   lowercased letters.
     #
     #
     #
@@ -5388,13 +5444,14 @@ module Aws::IAM
     #
     # @!attribute [rw] user_name
     #   The name of the user whose service-specific credentials you want
-    #   information about. If this value is not specified then the operation
-    #   assumes the user whose credentials are used to call the operation.
+    #   information about. If this value is not specified, then the
+    #   operation assumes the user whose credentials are used to call the
+    #   operation.
     #
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -5443,7 +5500,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -5525,7 +5582,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -5607,12 +5664,13 @@ module Aws::IAM
     #   whose path starts with `/division_abc/subdivision_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all user names. This paramater allows (per its
+    #   slash (/), listing all user names. This parameter allows (per its
     #   [regex pattern][1]) a string of characters consisting of either a
     #   forward slash (/) by itself or a string that must begin and end with
-    #   forward slashes, containing any ASCII character from the ! (\\u0021)
-    #   thru the DEL character (\\u007F), including most punctuation
-    #   characters, digits, and upper and lowercased letters.
+    #   forward slashes. In addition, it can contain any ASCII character
+    #   from the ! (\\u0021) through the DEL character (\\u007F), including
+    #   most punctuation characters, digits, and upper and lowercased
+    #   letters.
     #
     #
     #
@@ -5690,7 +5748,7 @@ module Aws::IAM
     #
     # @!attribute [rw] assignment_status
     #   The status (`Unassigned` or `Assigned`) of the devices to list. If
-    #   you do not specify an `AssignmentStatus`, the action defaults to
+    #   you do not specify an `AssignmentStatus`, the operation defaults to
     #   `Any` which lists both assigned and unassigned virtual MFA devices.
     #   @return [String]
     #
@@ -5758,7 +5816,7 @@ module Aws::IAM
     # Contains the user name and password create date for a user.
     #
     # This data type is used as a response element in the CreateLoginProfile
-    # and GetLoginProfile actions.
+    # and GetLoginProfile operations.
     #
     # @!attribute [rw] user_name
     #   The name of the user, which can be used for signing in to the AWS
@@ -5786,7 +5844,7 @@ module Aws::IAM
     # Contains information about an MFA device.
     #
     # This data type is used as a response element in the ListMFADevices
-    # action.
+    # operation.
     #
     # @!attribute [rw] user_name
     #   The user with whom the MFA device is associated.
@@ -5815,7 +5873,7 @@ module Aws::IAM
     # and roles) that the policy is attached to.
     #
     # This data type is used as a response element in the
-    # GetAccountAuthorizationDetails action.
+    # GetAccountAuthorizationDetails operation.
     #
     # For more information about managed policies, see [Managed Policies and
     # Inline Policies][1] in the *Using IAM* guide.
@@ -5954,11 +6012,11 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # Contains information about AWS Organizations's affect on a policy
+    # Contains information about AWS Organizations's effect on a policy
     # simulation.
     #
     # @!attribute [rw] allowed_by_organizations
-    #   Specifies whether the simulated action is allowed by the AWS
+    #   Specifies whether the simulated operation is allowed by the AWS
     #   Organizations service control policies that impact the simulated
     #   user's account.
     #   @return [Boolean]
@@ -5973,7 +6031,7 @@ module Aws::IAM
     # Contains information about the account password policy.
     #
     # This data type is used as a response element in the
-    # GetAccountPasswordPolicy action.
+    # GetAccountPasswordPolicy operation.
     #
     # @!attribute [rw] minimum_password_length
     #   Minimum length to require for IAM user passwords.
@@ -6004,7 +6062,7 @@ module Aws::IAM
     #
     # @!attribute [rw] expire_passwords
     #   Indicates whether passwords in the account expire. Returns true if
-    #   MaxPasswordAge is contains a value greater than 0. Returns false if
+    #   `MaxPasswordAge` contains a value greater than 0. Returns false if
     #   MaxPasswordAge is 0 or not present.
     #   @return [Boolean]
     #
@@ -6041,7 +6099,7 @@ module Aws::IAM
     # Contains information about a managed policy.
     #
     # This data type is used as a response element in the CreatePolicy,
-    # GetPolicy, and ListPolicies actions.
+    # GetPolicy, and ListPolicies operations.
     #
     # For more information about managed policies, refer to [Managed
     # Policies and Inline Policies][1] in the *Using IAM* guide.
@@ -6153,7 +6211,7 @@ module Aws::IAM
     # document.
     #
     # This data type is used as a response element in the
-    # GetAccountAuthorizationDetails action.
+    # GetAccountAuthorizationDetails operation.
     #
     # @!attribute [rw] policy_name
     #   The name of the policy.
@@ -6175,7 +6233,7 @@ module Aws::IAM
     # to.
     #
     # This data type is used as a response element in the
-    # ListEntitiesForPolicy action.
+    # ListEntitiesForPolicy operation.
     #
     # For more information about managed policies, refer to [Managed
     # Policies and Inline Policies][1] in the *Using IAM* guide.
@@ -6210,7 +6268,7 @@ module Aws::IAM
     # to.
     #
     # This data type is used as a response element in the
-    # ListEntitiesForPolicy action.
+    # ListEntitiesForPolicy operation.
     #
     # For more information about managed policies, refer to [Managed
     # Policies and Inline Policies][1] in the *Using IAM* guide.
@@ -6245,7 +6303,7 @@ module Aws::IAM
     # to.
     #
     # This data type is used as a response element in the
-    # ListEntitiesForPolicy action.
+    # ListEntitiesForPolicy operation.
     #
     # For more information about managed policies, refer to [Managed
     # Policies and Inline Policies][1] in the *Using IAM* guide.
@@ -6280,7 +6338,7 @@ module Aws::IAM
     #
     # This data type is used as a response element in the
     # CreatePolicyVersion, GetPolicyVersion, ListPolicyVersions, and
-    # GetAccountAuthorizationDetails actions.
+    # GetAccountAuthorizationDetails operations.
     #
     # For more information about managed policies, refer to [Managed
     # Policies and Inline Policies][1] in the *Using IAM* guide.
@@ -6296,6 +6354,17 @@ module Aws::IAM
     #   GetPolicyVersion and GetAccountAuthorizationDetails operations. It
     #   is not returned in the response to the CreatePolicyVersion or
     #   ListPolicyVersions operations.
+    #
+    #   The policy document returned in this structure is URL-encoded
+    #   compliant with [RFC 3986][1]. You can use a URL decoding method to
+    #   convert the policy back to plain JSON text. For example, if you use
+    #   Java, you can use the `decode` method of the `java.net.URLDecoder`
+    #   utility class in the Java SDK. Other languages and SDKs provide
+    #   similar functionality.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3986
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -6366,7 +6435,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6379,7 +6448,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6390,12 +6459,16 @@ module Aws::IAM
     #   The policy document.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -6439,7 +6512,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6450,12 +6523,16 @@ module Aws::IAM
     #   The policy document.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -6486,7 +6563,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6499,7 +6576,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-+
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6510,12 +6587,16 @@ module Aws::IAM
     #   The policy document.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -6542,7 +6623,7 @@ module Aws::IAM
     # @!attribute [rw] open_id_connect_provider_arn
     #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource to
     #   remove the client ID from. You can get a list of OIDC provider ARNs
-    #   by using the ListOpenIDConnectProviders action.
+    #   by using the ListOpenIDConnectProviders operation.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)
     #   and AWS Service Namespaces][1] in the *AWS General Reference*.
@@ -6580,7 +6661,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6622,7 +6703,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6635,7 +6716,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6666,7 +6747,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6708,8 +6789,8 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # Contains the result of the simulation of a single API action call on a
-    # single resource.
+    # Contains the result of the simulation of a single API operation call
+    # on a single resource.
     #
     # This data type is used by a member of the EvaluationResult data type.
     #
@@ -6719,16 +6800,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] eval_resource_decision
-    #   The result of the simulation of the simulated API action on the
+    #   The result of the simulation of the simulated API operation on the
     #   resource specified in `EvalResourceName`.
     #   @return [String]
     #
     # @!attribute [rw] matched_statements
     #   A list of the statements in the input policies that determine the
     #   result for this part of the simulation. Remember that even if
-    #   multiple statements allow the action on the resource, if *any*
-    #   statement denies that action, then the explicit deny overrides any
-    #   allow, and the deny statement is the only entry included in the
+    #   multiple statements allow the operation on the resource, if *any*
+    #   statement denies that operation, then the explicit deny overrides
+    #   any allow, and the deny statement is the only entry included in the
     #   result.
     #   @return [Array<Types::Statement>]
     #
@@ -6780,7 +6861,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6793,7 +6874,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6823,7 +6904,7 @@ module Aws::IAM
     end
 
     # Contains information about an IAM role. This structure is returned as
-    # a response element in several APIs that interact with roles.
+    # a response element in several API operations that interact with roles.
     #
     # @!attribute [rw] path
     #   The path to the role. For more information about paths, see [IAM
@@ -6875,6 +6956,13 @@ module Aws::IAM
     #   A description of the role that you provide.
     #   @return [String]
     #
+    # @!attribute [rw] max_session_duration
+    #   The maximum session duration (in seconds) for the specified role.
+    #   Anyone who uses the AWS CLI or API to assume the role can specify
+    #   the duration using the optional `DurationSeconds` API parameter or
+    #   `duration-seconds` CLI parameter.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role AWS API Documentation
     #
     class Role < Struct.new(
@@ -6884,7 +6972,8 @@ module Aws::IAM
       :arn,
       :create_date,
       :assume_role_policy_document,
-      :description)
+      :description,
+      :max_session_duration)
       include Aws::Structure
     end
 
@@ -6892,7 +6981,7 @@ module Aws::IAM
     # policies.
     #
     # This data type is used as a response element in the
-    # GetAccountAuthorizationDetails action.
+    # GetAccountAuthorizationDetails operation.
     #
     # @!attribute [rw] path
     #   The path to the role. For more information about paths, see [IAM
@@ -6972,7 +7061,7 @@ module Aws::IAM
     end
 
     # An object that contains details about how a service-linked role is
-    # used.
+    # used, if that information is returned by the service.
     #
     # This data type is used as a response element in the
     # GetServiceLinkedRoleDeletionStatus operation.
@@ -7019,7 +7108,7 @@ module Aws::IAM
     # Contains information about an SSH public key.
     #
     # This data type is used as a response element in the GetSSHPublicKey
-    # and UploadSSHPublicKey actions.
+    # and UploadSSHPublicKey operations.
     #
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
@@ -7038,9 +7127,9 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the SSH public key. `Active` means the key can be used
-    #   for authentication with an AWS CodeCommit repository. `Inactive`
-    #   means the key cannot be used.
+    #   The status of the SSH public key. `Active` means that the key can be
+    #   used for authentication with an AWS CodeCommit repository.
+    #   `Inactive` means that the key cannot be used.
     #   @return [String]
     #
     # @!attribute [rw] upload_date
@@ -7068,7 +7157,7 @@ module Aws::IAM
     # or fingerprint.
     #
     # This data type is used as a response element in the ListSSHPublicKeys
-    # action.
+    # operation.
     #
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
@@ -7079,9 +7168,9 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the SSH public key. `Active` means the key can be used
-    #   for authentication with an AWS CodeCommit repository. `Inactive`
-    #   means the key cannot be used.
+    #   The status of the SSH public key. `Active` means that the key can be
+    #   used for authentication with an AWS CodeCommit repository.
+    #   `Inactive` means that the key cannot be used.
     #   @return [String]
     #
     # @!attribute [rw] upload_date
@@ -7106,7 +7195,7 @@ module Aws::IAM
     # Contains information about a server certificate.
     #
     # This data type is used as a response element in the
-    # GetServerCertificate action.
+    # GetServerCertificate operation.
     #
     # @!attribute [rw] server_certificate_metadata
     #   The meta information of the server certificate, such as its name,
@@ -7134,7 +7223,7 @@ module Aws::IAM
     # certificate body, certificate chain, and private key.
     #
     # This data type is used as a response element in the
-    # UploadServerCertificate and ListServerCertificates actions.
+    # UploadServerCertificate and ListServerCertificates operations.
     #
     # @!attribute [rw] path
     #   The path to the server certificate. For more information about
@@ -7189,7 +7278,7 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # Contains the details of a service specific credential.
+    # Contains the details of a service-specific credential.
     #
     # @!attribute [rw] create_date
     #   The date and time, in [ISO 8601 date-time format][1], when the
@@ -7226,8 +7315,8 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the service-specific credential. `Active` means the
-    #   key is valid for API calls, while `Inactive` means it is not.
+    #   The status of the service-specific credential. `Active` means that
+    #   the key is valid for API calls, while `Inactive` means it is not.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceSpecificCredential AWS API Documentation
@@ -7251,8 +7340,8 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the service-specific credential. `Active` means the
-    #   key is valid for API calls, while `Inactive` means it is not.
+    #   The status of the service-specific credential. `Active` means that
+    #   the key is valid for API calls, while `Inactive` means it is not.
     #   @return [String]
     #
     # @!attribute [rw] service_user_name
@@ -7331,7 +7420,7 @@ module Aws::IAM
     # Contains information about an X.509 signing certificate.
     #
     # This data type is used as a response element in the
-    # UploadSigningCertificate and ListSigningCertificates actions.
+    # UploadSigningCertificate and ListSigningCertificates operations.
     #
     # @!attribute [rw] user_name
     #   The name of the user the signing certificate is associated with.
@@ -7346,8 +7435,8 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the signing certificate. `Active` means the key is
-    #   valid for API calls, while `Inactive` means it is not.
+    #   The status of the signing certificate. `Active` means that the key
+    #   is valid for API calls, while `Inactive` means it is not.
     #   @return [String]
     #
     # @!attribute [rw] upload_date
@@ -7394,16 +7483,21 @@ module Aws::IAM
     #   policies in this parameter. Any resource-based policy must be
     #   submitted with the `ResourcePolicy` parameter. The policies cannot
     #   be "scope-down" policies, such as you could include in a call to
-    #   [GetFederationToken][1] or one of the [AssumeRole][2] APIs to
-    #   restrict what a user can do while using the temporary credentials.
+    #   [GetFederationToken][1] or one of the [AssumeRole][2] API
+    #   operations. In other words, do not use policies designed to restrict
+    #   what a user can do while using the temporary credentials.
     #
     #   The [regex pattern][3] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -7413,9 +7507,9 @@ module Aws::IAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] action_names
-    #   A list of names of API actions to evaluate in the simulation. Each
-    #   action is evaluated against each resource. Each action must include
-    #   the service identifier, such as `iam:CreateUser`.
+    #   A list of names of API operations to evaluate in the simulation.
+    #   Each operation is evaluated against each resource. Each operation
+    #   must include the service identifier, such as `iam:CreateUser`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_arns
@@ -7450,12 +7544,16 @@ module Aws::IAM
     #   simulation.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -7477,7 +7575,7 @@ module Aws::IAM
     #
     # @!attribute [rw] caller_arn
     #   The ARN of the IAM user that you want to use as the simulated caller
-    #   of the APIs. `CallerArn` is required if you include a
+    #   of the API operations. `CallerArn` is required if you include a
     #   `ResourcePolicy` so that the policy's `Principal` element has a
     #   value to use in evaluating the policy.
     #
@@ -7492,14 +7590,15 @@ module Aws::IAM
     #   @return [Array<Types::ContextEntry>]
     #
     # @!attribute [rw] resource_handling_option
-    #   Specifies the type of simulation to run. Different APIs that support
-    #   resource-based policies require different combinations of resources.
-    #   By specifying the type of simulation to run, you enable the policy
-    #   simulator to enforce the presence of the required resources to
-    #   ensure reliable simulation results. If your simulation does not
-    #   match one of the following scenarios, then you can omit this
-    #   parameter. The following list shows each of the supported scenario
-    #   values and the resources that you must define to run the simulation.
+    #   Specifies the type of simulation to run. Different API operations
+    #   that support resource-based policies require different combinations
+    #   of resources. By specifying the type of simulation to run, you
+    #   enable the policy simulator to enforce the presence of the required
+    #   resources to ensure reliable simulation results. If your simulation
+    #   does not match one of the following scenarios, then you can omit
+    #   this parameter. The following list shows each of the supported
+    #   scenario values and the resources that you must define to run the
+    #   simulation.
     #
     #   Each of the EC2 scenarios requires that you specify instance, image,
     #   and security-group resources. If your scenario includes an EBS
@@ -7507,7 +7606,7 @@ module Aws::IAM
     #   scenario includes VPC, then you must supply the network-interface
     #   resource. If it includes an IP subnet, then you must specify the
     #   subnet resource. For more information on the EC2 scenario options,
-    #   see [Supported Platforms][1] in the *AWS EC2 User Guide*.
+    #   see [Supported Platforms][1] in the *Amazon EC2 User Guide*.
     #
     #   * **EC2-Classic-InstanceStore**
     #
@@ -7651,12 +7750,16 @@ module Aws::IAM
     #   complete, valid JSON text of an IAM policy.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -7664,14 +7767,14 @@ module Aws::IAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] action_names
-    #   A list of names of API actions to evaluate in the simulation. Each
-    #   action is evaluated for each resource. Each action must include the
-    #   service identifier, such as `iam:CreateUser`.
+    #   A list of names of API operations to evaluate in the simulation.
+    #   Each operation is evaluated for each resource. Each operation must
+    #   include the service identifier, such as `iam:CreateUser`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_arns
     #   A list of ARNs of AWS resources to include in the simulation. If
-    #   this parameter is not provided then the value defaults to `*` (all
+    #   this parameter is not provided, then the value defaults to `*` (all
     #   resources). Each API in the `ActionNames` parameter is evaluated for
     #   each resource in this list. The simulation determines the access
     #   result (allowed or denied) of each combination and reports it in the
@@ -7697,12 +7800,16 @@ module Aws::IAM
     #   simulation.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -7724,13 +7831,14 @@ module Aws::IAM
     #
     # @!attribute [rw] caller_arn
     #   The ARN of the IAM user that you want to specify as the simulated
-    #   caller of the APIs. If you do not specify a `CallerArn`, it defaults
-    #   to the ARN of the user that you specify in `PolicySourceArn`, if you
-    #   specified a user. If you include both a `PolicySourceArn` (for
-    #   example, `arn:aws:iam::123456789012:user/David`) and a `CallerArn`
-    #   (for example, `arn:aws:iam::123456789012:user/Bob`), the result is
-    #   that you simulate calling the APIs as Bob, as if Bob had David's
-    #   policies.
+    #   caller of the API operations. If you do not specify a `CallerArn`,
+    #   it defaults to the ARN of the user that you specify in
+    #   `PolicySourceArn`, if you specified a user. If you include both a
+    #   `PolicySourceArn` (for example,
+    #   `arn:aws:iam::123456789012:user/David`) and a `CallerArn` (for
+    #   example, `arn:aws:iam::123456789012:user/Bob`), the result is that
+    #   you simulate calling the API operations as Bob, as if Bob had
+    #   David's policies.
     #
     #   You can specify only the ARN of an IAM user. You cannot specify the
     #   ARN of an assumed role, federated user, or a service principal.
@@ -7755,14 +7863,15 @@ module Aws::IAM
     #   @return [Array<Types::ContextEntry>]
     #
     # @!attribute [rw] resource_handling_option
-    #   Specifies the type of simulation to run. Different APIs that support
-    #   resource-based policies require different combinations of resources.
-    #   By specifying the type of simulation to run, you enable the policy
-    #   simulator to enforce the presence of the required resources to
-    #   ensure reliable simulation results. If your simulation does not
-    #   match one of the following scenarios, then you can omit this
-    #   parameter. The following list shows each of the supported scenario
-    #   values and the resources that you must define to run the simulation.
+    #   Specifies the type of simulation to run. Different API operations
+    #   that support resource-based policies require different combinations
+    #   of resources. By specifying the type of simulation to run, you
+    #   enable the policy simulator to enforce the presence of the required
+    #   resources to ensure reliable simulation results. If your simulation
+    #   does not match one of the following scenarios, then you can omit
+    #   this parameter. The following list shows each of the supported
+    #   scenario values and the resources that you must define to run the
+    #   simulation.
     #
     #   Each of the EC2 scenarios requires that you specify instance, image,
     #   and security-group resources. If your scenario includes an EBS
@@ -7770,7 +7879,7 @@ module Aws::IAM
     #   scenario includes VPC, then you must supply the network-interface
     #   resource. If it includes an IP subnet, then you must specify the
     #   subnet resource. For more information on the EC2 scenario options,
-    #   see [Supported Platforms][1] in the *AWS EC2 User Guide*.
+    #   see [Supported Platforms][1] in the *Amazon EC2 User Guide*.
     #
     #   * **EC2-Classic-InstanceStore**
     #
@@ -7886,7 +7995,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -7907,8 +8016,8 @@ module Aws::IAM
     #
     # @!attribute [rw] status
     #   The status you want to assign to the secret access key. `Active`
-    #   means the key can be used for API calls to AWS, while `Inactive`
-    #   means the key cannot be used.
+    #   means that the key can be used for API calls to AWS, while
+    #   `Inactive` means that the key cannot be used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKeyRequest AWS API Documentation
@@ -7938,7 +8047,8 @@ module Aws::IAM
     # @!attribute [rw] minimum_password_length
     #   The minimum number of characters allowed in an IAM user password.
     #
-    #   Default value: 6
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `6`.
     #   @return [Integer]
     #
     # @!attribute [rw] require_symbols
@@ -7947,28 +8057,36 @@ module Aws::IAM
     #
     #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that passwords do
+    #   not require at least one symbol character.
     #   @return [Boolean]
     #
     # @!attribute [rw] require_numbers
     #   Specifies whether IAM user passwords must contain at least one
     #   numeric character (0 to 9).
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that passwords do
+    #   not require at least one numeric character.
     #   @return [Boolean]
     #
     # @!attribute [rw] require_uppercase_characters
     #   Specifies whether IAM user passwords must contain at least one
     #   uppercase character from the ISO basic Latin alphabet (A to Z).
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that passwords do
+    #   not require at least one uppercase character.
     #   @return [Boolean]
     #
     # @!attribute [rw] require_lowercase_characters
     #   Specifies whether IAM user passwords must contain at least one
     #   lowercase character from the ISO basic Latin alphabet (a to z).
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that passwords do
+    #   not require at least one lowercase character.
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_users_to_change_password
@@ -7977,7 +8095,10 @@ module Aws::IAM
     #   [Letting IAM Users Change Their Own Passwords][1] in the *IAM User
     #   Guide*.
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that IAM users in
+    #   the account do not automatically have permissions to change their
+    #   own password.
     #
     #
     #
@@ -7985,25 +8106,31 @@ module Aws::IAM
     #   @return [Boolean]
     #
     # @!attribute [rw] max_password_age
-    #   The number of days that an IAM user password is valid. The default
-    #   value of 0 means IAM user passwords never expire.
+    #   The number of days that an IAM user password is valid.
     #
-    #   Default value: 0
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `0`. The result is that IAM user passwords
+    #   never expire.
     #   @return [Integer]
     #
     # @!attribute [rw] password_reuse_prevention
     #   Specifies the number of previous passwords that IAM users are
-    #   prevented from reusing. The default value of 0 means IAM users are
-    #   not prevented from reusing previous passwords.
+    #   prevented from reusing.
     #
-    #   Default value: 0
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `0`. The result is that IAM users are not
+    #   prevented from reusing previous passwords.
     #   @return [Integer]
     #
     # @!attribute [rw] hard_expiry
     #   Prevents IAM users from setting a new password after their password
-    #   has expired.
+    #   has expired. The IAM user cannot be accessed until an administrator
+    #   resets the password.
     #
-    #   Default value: false
+    #   If you do not specify a value for this parameter, then the operation
+    #   uses the default value of `false`. The result is that IAM users can
+    #   change their passwords after they expire and continue to sign in as
+    #   the user.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicyRequest AWS API Documentation
@@ -8046,12 +8173,16 @@ module Aws::IAM
     #   The policy that grants an entity permission to assume the role.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -8082,7 +8213,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8093,12 +8224,12 @@ module Aws::IAM
     #   New path for the IAM group. Only include this if changing the
     #   group's path.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -8112,7 +8243,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8143,7 +8274,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8154,15 +8285,20 @@ module Aws::IAM
     #   The new password for the specified IAM user.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D). However, the format can be
-    #   further restricted by the account administrator by setting a
-    #   password policy on the AWS account. For more information, see
-    #   UpdateAccountPasswordPolicy.
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
+    #
+    #   However, the format can be further restricted by the account
+    #   administrator by setting a password policy on the AWS account. For
+    #   more information, see UpdateAccountPasswordPolicy.
     #
     #
     #
@@ -8195,7 +8331,7 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource
     #   object for which you want to update the thumbprint. You can get a
     #   list of OIDC provider ARNs by using the ListOpenIDConnectProviders
-    #   action.
+    #   operation.
     #
     #   For more information about ARNs, see [Amazon Resource Names (ARNs)
     #   and AWS Service Namespaces][1] in the *AWS General Reference*.
@@ -8253,6 +8389,59 @@ module Aws::IAM
       :role)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #         description: "roleDescriptionType",
+    #         max_session_duration: 1,
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the role that you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description that you want to apply to the specified role.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_session_duration
+    #   The maximum session duration (in seconds) that you want to set for
+    #   the specified role. If you do not specify a value for this setting,
+    #   the default maximum of one hour is applied. This setting can have a
+    #   value from 1 hour to 12 hours.
+    #
+    #   Anyone who assumes the role from the AWS CLI or API can use the
+    #   `DurationSeconds` API parameter or the `duration-seconds` CLI
+    #   parameter to request a longer session. The `MaxSessionDuration`
+    #   setting determines the maximum duration that can be requested using
+    #   the `DurationSeconds` parameter. If users don't specify a value for
+    #   the `DurationSeconds` parameter, their security credentials are
+    #   valid for one hour by default. This applies when you use the
+    #   `AssumeRole*` API operations or the `assume-role*` CLI operations
+    #   but does not apply when you use those operations to create a console
+    #   URL. For more information, see [Using IAM Roles][1] in the *IAM User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleRequest AWS API Documentation
+    #
+    class UpdateRoleRequest < Struct.new(
+      :role_name,
+      :description,
+      :max_session_duration)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleResponse AWS API Documentation
+    #
+    class UpdateRoleResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateSAMLProviderRequest
     #   data as a hash:
@@ -8319,7 +8508,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8339,9 +8528,9 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status to assign to the SSH public key. `Active` means the key
-    #   can be used for authentication with an AWS CodeCommit repository.
-    #   `Inactive` means the key cannot be used.
+    #   The status to assign to the SSH public key. `Active` means that the
+    #   key can be used for authentication with an AWS CodeCommit
+    #   repository. `Inactive` means that the key cannot be used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKeyRequest AWS API Documentation
@@ -8368,7 +8557,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8379,12 +8568,12 @@ module Aws::IAM
     #   The new path for the server certificate. Include this only if you
     #   are updating the server certificate's path.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -8399,7 +8588,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8432,7 +8621,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8479,7 +8668,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8499,9 +8688,9 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status you want to assign to the certificate. `Active` means the
-    #   certificate can be used for API calls to AWS, while `Inactive` means
-    #   the certificate cannot be used.
+    #   The status you want to assign to the certificate. `Active` means
+    #   that the certificate can be used for API calls to AWS `Inactive`
+    #   means that the certificate cannot be used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificateRequest AWS API Documentation
@@ -8529,7 +8718,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8540,12 +8729,12 @@ module Aws::IAM
     #   New path for the IAM user. Include this parameter only if you're
     #   changing the user's path.
     #
-    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   string that must begin and end with forward slashes. In addition, it
+    #   can contain any ASCII character from the ! (\\u0021) through the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -8559,7 +8748,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8589,7 +8778,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8601,12 +8790,16 @@ module Aws::IAM
     #   or PEM format.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -8650,16 +8843,16 @@ module Aws::IAM
     #   paths, see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/). This paramater allows (per its [regex pattern][2]) a
+    #   slash (/). This parameter allows (per its [regex pattern][2]) a
     #   string of characters consisting of either a forward slash (/) by
-    #   itself or a string that must begin and end with forward slashes,
-    #   containing any ASCII character from the ! (\\u0021) thru the DEL
-    #   character (\\u007F), including most punctuation characters, digits,
-    #   and upper and lowercased letters.
+    #   itself or a string that must begin and end with forward slashes. In
+    #   addition, it can contain any ASCII character from the ! (\\u0021)
+    #   through the DEL character (\\u007F), including most punctuation
+    #   characters, digits, and upper and lowercased letters.
     #
     #   <note markdown="1"> If you are uploading a server certificate specifically for use with
     #   Amazon CloudFront distributions, you must specify a path using the
-    #   `--path` option. The path must begin with `/cloudfront` and must
+    #   `path` parameter. The path must begin with `/cloudfront` and must
     #   include a trailing slash (for example, `/cloudfront/test/`).
     #
     #    </note>
@@ -8677,7 +8870,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8688,12 +8881,16 @@ module Aws::IAM
     #   The contents of the public key certificate in PEM-encoded format.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -8704,12 +8901,16 @@ module Aws::IAM
     #   The contents of the private key in PEM-encoded format.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -8722,12 +8923,16 @@ module Aws::IAM
     #   chain.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -8773,7 +8978,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8784,12 +8989,16 @@ module Aws::IAM
     #   The contents of the signing certificate.
     #
     #   The [regex pattern][1] used to validate this parameter is a string
-    #   of characters consisting of any printable ASCII character ranging
-    #   from the space character (\\u0020) through end of the ASCII
-    #   character range as well as the printable characters in the Basic
-    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
-    #   also includes the special characters tab (\\u0009), line feed
-    #   (\\u000A), and carriage return (\\u000D).
+    #   of characters consisting of the following:
+    #
+    #   * Any printable ASCII character ranging from the space character
+    #     (\\u0020) through the end of the ASCII character range
+    #
+    #   * The printable characters in the Basic Latin and Latin-1 Supplement
+    #     character set (through \\u00FF)
+    #
+    #   * The special characters tab (\\u0009), line feed (\\u000A), and
+    #     carriage return (\\u000D)
     #
     #
     #
@@ -8820,7 +9029,8 @@ module Aws::IAM
 
     # Contains information about an IAM user entity.
     #
-    # This data type is used as a response element in the following actions:
+    # This data type is used as a response element in the following
+    # operations:
     #
     # * CreateUser
     #
@@ -8890,7 +9100,7 @@ module Aws::IAM
     #   past, then this field contains the date and time the most recent
     #   password was used.
     #
-    #   This value is returned only in the GetUser and ListUsers actions.
+    #   This value is returned only in the GetUser and ListUsers operations.
     #
     #
     #
@@ -8914,7 +9124,7 @@ module Aws::IAM
     # policies and all the IAM groups the user is in.
     #
     # This data type is used as a response element in the
-    # GetAccountAuthorizationDetails action.
+    # GetAccountAuthorizationDetails operation.
     #
     # @!attribute [rw] path
     #   The path to the user. For more information about paths, see [IAM

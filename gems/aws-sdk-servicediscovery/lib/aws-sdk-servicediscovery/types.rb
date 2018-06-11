@@ -131,8 +131,11 @@ module Aws::ServiceDiscovery
     #           ],
     #         },
     #         health_check_config: {
-    #           type: "HTTP", # required, accepts HTTP, HTTPS, TCP
+    #           type: "HTTP", # accepts HTTP, HTTPS, TCP
     #           resource_path: "ResourcePath",
+    #           failure_threshold: 1,
+    #         },
+    #         health_check_custom_config: {
     #           failure_threshold: 1,
     #         },
     #       }
@@ -174,6 +177,9 @@ module Aws::ServiceDiscovery
     #   [1]: http://aws.amazon.com/route53/pricing
     #   @return [Types::HealthCheckConfig]
     #
+    # @!attribute [rw] health_check_custom_config
+    #   @return [Types::HealthCheckCustomConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreateServiceRequest AWS API Documentation
     #
     class CreateServiceRequest < Struct.new(
@@ -181,7 +187,8 @@ module Aws::ServiceDiscovery
       :creator_request_id,
       :description,
       :dns_config,
-      :health_check_config)
+      :health_check_config,
+      :health_check_custom_config)
       include Aws::Structure
     end
 
@@ -801,7 +808,7 @@ module Aws::ServiceDiscovery
     #   data as a hash:
     #
     #       {
-    #         type: "HTTP", # required, accepts HTTP, HTTPS, TCP
+    #         type: "HTTP", # accepts HTTP, HTTPS, TCP
     #         resource_path: "ResourcePath",
     #         failure_threshold: 1,
     #       }
@@ -866,6 +873,23 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass HealthCheckCustomConfig
+    #   data as a hash:
+    #
+    #       {
+    #         failure_threshold: 1,
+    #       }
+    #
+    # @!attribute [rw] failure_threshold
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HealthCheckCustomConfig AWS API Documentation
+    #
+    class HealthCheckCustomConfig < Struct.new(
+      :failure_threshold)
+      include Aws::Structure
+    end
+
     # A complex type that contains information about an instance that Amazon
     # Route 53 creates when you submit a `RegisterInstance` request.
     #
@@ -917,67 +941,75 @@ module Aws::ServiceDiscovery
     #
     #   Supported attribute keys include the following:
     #
-    #   * `AWS_ALIAS_DNS_NAME`\: If you want Route 53 to create an alias
-    #     record that routes traffic to an Elastic Load Balancing load
-    #     balancer, specify the DNS name that is associated with the load
-    #     balancer. For information about how to get the DNS name, see
-    #     "DNSName" in the topic [AliasTarget][1].
+    #   **AWS\_ALIAS\_DNS\_NAME**
     #
-    #     Note the following:
+    #   ****
     #
-    #     * The configuration for the service that is specified by
-    #       `ServiceId` must include settings for an A record, an AAAA
-    #       record, or both.
+    #   If you want Route 53 to create an alias record that routes traffic
+    #   to an Elastic Load Balancing load balancer, specify the DNS name
+    #   that is associated with the load balancer. For information about how
+    #   to get the DNS name, see "DNSName" in the topic [AliasTarget][1].
     #
-    #     * In the service that is specified by `ServiceId`, the value of
-    #       `RoutingPolicy` must be `WEIGHTED`.
+    #   Note the following:
     #
-    #     * If the service that is specified by `ServiceId` includes
-    #       `HealthCheckConfig` settings, Route 53 will create the health
-    #       check, but it won't associate the health check with the alias
-    #       record.
+    #   * The configuration for the service that is specified by `ServiceId`
+    #     must include settings for an A record, an AAAA record, or both.
     #
-    #     * Auto naming currently doesn't support creating alias records
-    #       that route traffic to AWS resources other than ELB load
-    #       balancers.
+    #   * In the service that is specified by `ServiceId`, the value of
+    #     `RoutingPolicy` must be `WEIGHTED`.
     #
-    #     * If you specify a value for `AWS_ALIAS_DNS_NAME`, don't specify
-    #       values for any of the `AWS_INSTANCE` attributes.
+    #   * If the service that is specified by `ServiceId` includes
+    #     `HealthCheckConfig` settings, Route 53 will create the health
+    #     check, but it won't associate the health check with the alias
+    #     record.
     #
-    #   * `AWS_INSTANCE_CNAME`\: If the service configuration includes a
-    #     CNAME record, the domain name that you want Route 53 to return in
-    #     response to DNS queries, for example, `example.com`.
+    #   * Auto naming currently doesn't support creating alias records that
+    #     route traffic to AWS resources other than ELB load balancers.
     #
-    #     This value is required if the service specified by `ServiceId`
-    #     includes settings for an CNAME record.
+    #   * If you specify a value for `AWS_ALIAS_DNS_NAME`, don't specify
+    #     values for any of the `AWS_INSTANCE` attributes.
     #
-    #   * `AWS_INSTANCE_IPV4`\: If the service configuration includes an A
-    #     record, the IPv4 address that you want Route 53 to return in
-    #     response to DNS queries, for example, `192.0.2.44`.
+    #   **AWS\_INSTANCE\_CNAME**
     #
-    #     This value is required if the service specified by `ServiceId`
-    #     includes settings for an A record. Either `AWS_INSTANCE_IPV4` or
-    #     `AWS_INSTANCE_IPV6` is required if the service includes settings
-    #     for an SRV record.
+    #   If the service configuration includes a CNAME record, the domain
+    #   name that you want Route 53 to return in response to DNS queries,
+    #   for example, `example.com`.
     #
-    #   * `AWS_INSTANCE_IPV6`\: If the service configuration includes an
-    #     AAAA record, the IPv6 address that you want Route 53 to return in
-    #     response to DNS queries, for example,
-    #     `2001:0db8:85a3:0000:0000:abcd:0001:2345`.
+    #   This value is required if the service specified by `ServiceId`
+    #   includes settings for an CNAME record.
     #
-    #     This value is required if the service specified by `ServiceId`
-    #     includes settings for an AAAA record. Either `AWS_INSTANCE_IPV4`
-    #     or `AWS_INSTANCE_IPV6` is required if the service includes
-    #     settings for an SRV record.
+    #   **AWS\_INSTANCE\_IPV4**
     #
-    #   * `AWS_INSTANCE_PORT`\: If the service includes an SRV record, the
-    #     value that you want Route 53 to return for the port. In addition,
-    #     if the service includes `HealthCheckConfig`, the port on the
-    #     endpoint that you want Route 53 to send requests to. For more
-    #     information, see CreateService.
+    #   If the service configuration includes an A record, the IPv4 address
+    #   that you want Route 53 to return in response to DNS queries, for
+    #   example, `192.0.2.44`.
     #
-    #     This value is required if you specified settings for an SRV record
-    #     when you created the service.
+    #   This value is required if the service specified by `ServiceId`
+    #   includes settings for an A record. If the service includes settings
+    #   for an SRV record, you must specify a value for `AWS_INSTANCE_IPV4`,
+    #   `AWS_INSTANCE_IPV6`, or both.
+    #
+    #   **AWS\_INSTANCE\_IPV6**
+    #
+    #   If the service configuration includes an AAAA record, the IPv6
+    #   address that you want Route 53 to return in response to DNS queries,
+    #   for example, `2001:0db8:85a3:0000:0000:abcd:0001:2345`.
+    #
+    #   This value is required if the service specified by `ServiceId`
+    #   includes settings for an AAAA record. If the service includes
+    #   settings for an SRV record, you must specify a value for
+    #   `AWS_INSTANCE_IPV4`, `AWS_INSTANCE_IPV6`, or both.
+    #
+    #   **AWS\_INSTANCE\_PORT**
+    #
+    #   If the service includes an SRV record, the value that you want Route
+    #   53 to return for the port.
+    #
+    #   If the service includes `HealthCheckConfig`, the port on the
+    #   endpoint that you want Route 53 to send requests to.
+    #
+    #   This value is required if you specified settings for an SRV record
+    #   when you created the service.
     #
     #
     #
@@ -1812,9 +1844,9 @@ module Aws::ServiceDiscovery
     #   example, `192.0.2.44`.
     #
     #   This value is required if the service specified by `ServiceId`
-    #   includes settings for an A record. Either `AWS_INSTANCE_IPV4` or
-    #   `AWS_INSTANCE_IPV6` is required if the service includes settings for
-    #   an SRV record.
+    #   includes settings for an A record. If the service includes settings
+    #   for an SRV record, you must specify a value for `AWS_INSTANCE_IPV4`,
+    #   `AWS_INSTANCE_IPV6`, or both.
     #
     #   **AWS\_INSTANCE\_IPV6**
     #
@@ -1823,9 +1855,9 @@ module Aws::ServiceDiscovery
     #   for example, `2001:0db8:85a3:0000:0000:abcd:0001:2345`.
     #
     #   This value is required if the service specified by `ServiceId`
-    #   includes settings for an AAAA record. Either `AWS_INSTANCE_IPV4` or
-    #   `AWS_INSTANCE_IPV6` is required if the service includes settings for
-    #   an SRV record.
+    #   includes settings for an AAAA record. If the service includes
+    #   settings for an SRV record, you must specify a value for
+    #   `AWS_INSTANCE_IPV4`, `AWS_INSTANCE_IPV6`, or both.
     #
     #   **AWS\_INSTANCE\_PORT**
     #
@@ -1909,6 +1941,9 @@ module Aws::ServiceDiscovery
     #   [1]: http://aws.amazon.com/route53/pricing
     #   @return [Types::HealthCheckConfig]
     #
+    # @!attribute [rw] health_check_custom_config
+    #   @return [Types::HealthCheckCustomConfig]
+    #
     # @!attribute [rw] create_date
     #   The date and time that the service was created, in Unix format and
     #   Coordinated Universal Time (UTC). The value of `CreateDate` is
@@ -1933,6 +1968,7 @@ module Aws::ServiceDiscovery
       :instance_count,
       :dns_config,
       :health_check_config,
+      :health_check_custom_config,
       :create_date,
       :creator_request_id)
       include Aws::Structure
@@ -1954,7 +1990,7 @@ module Aws::ServiceDiscovery
     #           ],
     #         },
     #         health_check_config: {
-    #           type: "HTTP", # required, accepts HTTP, HTTPS, TCP
+    #           type: "HTTP", # accepts HTTP, HTTPS, TCP
     #           resource_path: "ResourcePath",
     #           failure_threshold: 1,
     #         },
@@ -2123,6 +2159,33 @@ module Aws::ServiceDiscovery
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateInstanceCustomHealthStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_id: "ResourceId", # required
+    #         instance_id: "ResourceId", # required
+    #         status: "HEALTHY", # required, accepts HEALTHY, UNHEALTHY
+    #       }
+    #
+    # @!attribute [rw] service_id
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateInstanceCustomHealthStatusRequest AWS API Documentation
+    #
+    class UpdateInstanceCustomHealthStatusRequest < Struct.new(
+      :service_id,
+      :instance_id,
+      :status)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateServiceRequest
     #   data as a hash:
     #
@@ -2139,7 +2202,7 @@ module Aws::ServiceDiscovery
     #             ],
     #           },
     #           health_check_config: {
-    #             type: "HTTP", # required, accepts HTTP, HTTPS, TCP
+    #             type: "HTTP", # accepts HTTP, HTTPS, TCP
     #             resource_path: "ResourcePath",
     #             failure_threshold: 1,
     #           },

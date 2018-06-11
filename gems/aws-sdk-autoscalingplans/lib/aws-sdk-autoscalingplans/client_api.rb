@@ -63,13 +63,21 @@ module Aws::AutoScalingPlans
     ScalingPolicy = Shapes::StructureShape.new(name: 'ScalingPolicy')
     ScalingStatusCode = Shapes::StringShape.new(name: 'ScalingStatusCode')
     ServiceNamespace = Shapes::StringShape.new(name: 'ServiceNamespace')
+    TagFilter = Shapes::StructureShape.new(name: 'TagFilter')
+    TagFilters = Shapes::ListShape.new(name: 'TagFilters')
+    TagValues = Shapes::ListShape.new(name: 'TagValues')
     TargetTrackingConfiguration = Shapes::StructureShape.new(name: 'TargetTrackingConfiguration')
     TargetTrackingConfigurations = Shapes::ListShape.new(name: 'TargetTrackingConfigurations')
     TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
+    UpdateScalingPlanRequest = Shapes::StructureShape.new(name: 'UpdateScalingPlanRequest')
+    UpdateScalingPlanResponse = Shapes::StructureShape.new(name: 'UpdateScalingPlanResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     XmlString = Shapes::StringShape.new(name: 'XmlString')
+    XmlStringMaxLen128 = Shapes::StringShape.new(name: 'XmlStringMaxLen128')
+    XmlStringMaxLen256 = Shapes::StringShape.new(name: 'XmlStringMaxLen256')
 
     ApplicationSource.add_member(:cloud_formation_stack_arn, Shapes::ShapeRef.new(shape: XmlString, location_name: "CloudFormationStackARN"))
+    ApplicationSource.add_member(:tag_filters, Shapes::ShapeRef.new(shape: TagFilters, location_name: "TagFilters"))
     ApplicationSource.struct_class = Types::ApplicationSource
 
     ApplicationSources.member = Shapes::ShapeRef.new(shape: ApplicationSource)
@@ -142,6 +150,7 @@ module Aws::AutoScalingPlans
     ScalingPlan.add_member(:scaling_instructions, Shapes::ShapeRef.new(shape: ScalingInstructions, required: true, location_name: "ScalingInstructions"))
     ScalingPlan.add_member(:status_code, Shapes::ShapeRef.new(shape: ScalingPlanStatusCode, required: true, location_name: "StatusCode"))
     ScalingPlan.add_member(:status_message, Shapes::ShapeRef.new(shape: XmlString, location_name: "StatusMessage"))
+    ScalingPlan.add_member(:status_start_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "StatusStartTime"))
     ScalingPlan.add_member(:creation_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "CreationTime"))
     ScalingPlan.struct_class = Types::ScalingPlan
 
@@ -168,6 +177,14 @@ module Aws::AutoScalingPlans
     ScalingPolicy.add_member(:target_tracking_configuration, Shapes::ShapeRef.new(shape: TargetTrackingConfiguration, location_name: "TargetTrackingConfiguration"))
     ScalingPolicy.struct_class = Types::ScalingPolicy
 
+    TagFilter.add_member(:key, Shapes::ShapeRef.new(shape: XmlStringMaxLen128, location_name: "Key"))
+    TagFilter.add_member(:values, Shapes::ShapeRef.new(shape: TagValues, location_name: "Values"))
+    TagFilter.struct_class = Types::TagFilter
+
+    TagFilters.member = Shapes::ShapeRef.new(shape: TagFilter)
+
+    TagValues.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen256)
+
     TargetTrackingConfiguration.add_member(:predefined_scaling_metric_specification, Shapes::ShapeRef.new(shape: PredefinedScalingMetricSpecification, location_name: "PredefinedScalingMetricSpecification"))
     TargetTrackingConfiguration.add_member(:customized_scaling_metric_specification, Shapes::ShapeRef.new(shape: CustomizedScalingMetricSpecification, location_name: "CustomizedScalingMetricSpecification"))
     TargetTrackingConfiguration.add_member(:target_value, Shapes::ShapeRef.new(shape: MetricScale, required: true, location_name: "TargetValue"))
@@ -178,6 +195,14 @@ module Aws::AutoScalingPlans
     TargetTrackingConfiguration.struct_class = Types::TargetTrackingConfiguration
 
     TargetTrackingConfigurations.member = Shapes::ShapeRef.new(shape: TargetTrackingConfiguration)
+
+    UpdateScalingPlanRequest.add_member(:application_source, Shapes::ShapeRef.new(shape: ApplicationSource, location_name: "ApplicationSource"))
+    UpdateScalingPlanRequest.add_member(:scaling_plan_name, Shapes::ShapeRef.new(shape: ScalingPlanName, required: true, location_name: "ScalingPlanName"))
+    UpdateScalingPlanRequest.add_member(:scaling_instructions, Shapes::ShapeRef.new(shape: ScalingInstructions, location_name: "ScalingInstructions"))
+    UpdateScalingPlanRequest.add_member(:scaling_plan_version, Shapes::ShapeRef.new(shape: ScalingPlanVersion, required: true, location_name: "ScalingPlanVersion"))
+    UpdateScalingPlanRequest.struct_class = Types::UpdateScalingPlanRequest
+
+    UpdateScalingPlanResponse.struct_class = Types::UpdateScalingPlanResponse
 
 
     # @api private
@@ -241,6 +266,18 @@ module Aws::AutoScalingPlans
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:update_scaling_plan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateScalingPlan"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateScalingPlanRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateScalingPlanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ObjectNotFoundException)
       end)
     end
 

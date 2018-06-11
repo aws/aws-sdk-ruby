@@ -181,6 +181,52 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Copies the image within the same region or to a new region within the
+    # same AWS account. Note that any tags you added to the image will not
+    # be copied.
+    #
+    # @option params [required, String] :source_image_name
+    #   The name of the image to copy.
+    #
+    # @option params [required, String] :destination_image_name
+    #   The name that the image will have when it is copied to the
+    #   destination.
+    #
+    # @option params [required, String] :destination_region
+    #   The destination region to which the image will be copied. This
+    #   parameter is required, even if you are copying an image within the
+    #   same region.
+    #
+    # @option params [String] :destination_image_description
+    #   The description that the image will have when it is copied to the
+    #   destination.
+    #
+    # @return [Types::CopyImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CopyImageResponse#destination_image_name #destination_image_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.copy_image({
+    #     source_image_name: "Name", # required
+    #     destination_image_name: "Name", # required
+    #     destination_region: "RegionName", # required
+    #     destination_image_description: "Description",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_image_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImage AWS API Documentation
+    #
+    # @overload copy_image(params = {})
+    # @param [Hash] params ({})
+    def copy_image(params = {}, options = {})
+      req = build_request(:copy_image, params)
+      req.send_request(options)
+    end
+
     # Creates a directory configuration.
     #
     # @option params [required, String] :directory_name
@@ -534,7 +580,17 @@ module Aws::AppStream
     #   The storage connectors to enable.
     #
     # @option params [String] :redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
+    #
+    # @option params [String] :feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
+    #
+    # @option params [Array<Types::UserSetting>] :user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
     #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -548,11 +604,19 @@ module Aws::AppStream
     #     display_name: "DisplayName",
     #     storage_connectors: [
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
+    #         domains: ["Domain"],
     #       },
     #     ],
     #     redirect_url: "RedirectURL",
+    #     feedback_url: "FeedbackURL",
+    #     user_settings: [
+    #       {
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -563,12 +627,18 @@ module Aws::AppStream
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
     #   resp.stack.storage_connectors #=> Array
-    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
+    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
+    #   resp.stack.storage_connectors[0].domains #=> Array
+    #   resp.stack.storage_connectors[0].domains[0] #=> String
     #   resp.stack.redirect_url #=> String
+    #   resp.stack.feedback_url #=> String
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
+    #   resp.stack.user_settings #=> Array
+    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
+    #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -703,12 +773,12 @@ module Aws::AppStream
     #   resp.image.arn #=> String
     #   resp.image.base_image_arn #=> String
     #   resp.image.display_name #=> String
-    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "DELETING"
+    #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.platform #=> String, one of "WINDOWS"
     #   resp.image.description #=> String
-    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE"
+    #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.image.state_change_reason.message #=> String
     #   resp.image.applications #=> Array
     #   resp.image.applications[0].name #=> String
@@ -998,12 +1068,12 @@ module Aws::AppStream
     #   resp.images[0].arn #=> String
     #   resp.images[0].base_image_arn #=> String
     #   resp.images[0].display_name #=> String
-    #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "DELETING"
+    #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
     #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE"
     #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].platform #=> String, one of "WINDOWS"
     #   resp.images[0].description #=> String
-    #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE"
+    #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE"
     #   resp.images[0].state_change_reason.message #=> String
     #   resp.images[0].applications #=> Array
     #   resp.images[0].applications[0].name #=> String
@@ -1033,10 +1103,10 @@ module Aws::AppStream
     # is to authenticate users using a streaming URL.
     #
     # @option params [required, String] :stack_name
-    #   The name of the stack.
+    #   The name of the stack. This value is case-sensitive.
     #
     # @option params [required, String] :fleet_name
-    #   The name of the fleet.
+    #   The name of the fleet. This value is case-sensitive.
     #
     # @option params [String] :user_id
     #   The user ID.
@@ -1120,12 +1190,18 @@ module Aws::AppStream
     #   resp.stacks[0].display_name #=> String
     #   resp.stacks[0].created_time #=> Time
     #   resp.stacks[0].storage_connectors #=> Array
-    #   resp.stacks[0].storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
+    #   resp.stacks[0].storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE"
     #   resp.stacks[0].storage_connectors[0].resource_identifier #=> String
+    #   resp.stacks[0].storage_connectors[0].domains #=> Array
+    #   resp.stacks[0].storage_connectors[0].domains[0] #=> String
     #   resp.stacks[0].redirect_url #=> String
+    #   resp.stacks[0].feedback_url #=> String
     #   resp.stacks[0].stack_errors #=> Array
     #   resp.stacks[0].stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stacks[0].stack_errors[0].error_message #=> String
+    #   resp.stacks[0].user_settings #=> Array
+    #   resp.stacks[0].user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
+    #   resp.stacks[0].user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -1749,10 +1825,20 @@ module Aws::AppStream
     #   Deletes the storage connectors currently enabled for the stack.
     #
     # @option params [String] :redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
+    #
+    # @option params [String] :feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
     #
     # @option params [Array<String>] :attributes_to_delete
     #   The stack attributes to delete.
+    #
+    # @option params [Array<Types::UserSetting>] :user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
     #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1766,13 +1852,21 @@ module Aws::AppStream
     #     name: "String", # required
     #     storage_connectors: [
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
+    #         domains: ["Domain"],
     #       },
     #     ],
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL
+    #     feedback_url: "FeedbackURL",
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #     user_settings: [
+    #       {
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1783,12 +1877,18 @@ module Aws::AppStream
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
     #   resp.stack.storage_connectors #=> Array
-    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS"
+    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
+    #   resp.stack.storage_connectors[0].domains #=> Array
+    #   resp.stack.storage_connectors[0].domains[0] #=> String
     #   resp.stack.redirect_url #=> String
+    #   resp.stack.feedback_url #=> String
     #   resp.stack.stack_errors #=> Array
     #   resp.stack.stack_errors[0].error_code #=> String, one of "STORAGE_CONNECTOR_ERROR", "INTERNAL_SERVICE_ERROR"
     #   resp.stack.stack_errors[0].error_message #=> String
+    #   resp.stack.user_settings #=> Array
+    #   resp.stack.user_settings[0].action #=> String, one of "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", "CLIPBOARD_COPY_TO_LOCAL_DEVICE", "FILE_UPLOAD", "FILE_DOWNLOAD", "PRINTING_TO_LOCAL_DEVICE"
+    #   resp.stack.user_settings[0].permission #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -1812,7 +1912,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

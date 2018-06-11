@@ -23,7 +23,11 @@
       "input":{"shape":"GetCostAndUsageRequest"},
       "output":{"shape":"GetCostAndUsageResponse"},
       "errors":[
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"BillExpirationException"},
+        {"shape":"DataUnavailableException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"RequestChangedException"}
       ]
     },
     "GetDimensionValues":{
@@ -35,7 +39,39 @@
       "input":{"shape":"GetDimensionValuesRequest"},
       "output":{"shape":"GetDimensionValuesResponse"},
       "errors":[
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"BillExpirationException"},
+        {"shape":"DataUnavailableException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"RequestChangedException"}
+      ]
+    },
+    "GetReservationCoverage":{
+      "name":"GetReservationCoverage",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetReservationCoverageRequest"},
+      "output":{"shape":"GetReservationCoverageResponse"},
+      "errors":[
+        {"shape":"LimitExceededException"},
+        {"shape":"DataUnavailableException"},
+        {"shape":"InvalidNextTokenException"}
+      ]
+    },
+    "GetReservationPurchaseRecommendation":{
+      "name":"GetReservationPurchaseRecommendation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetReservationPurchaseRecommendationRequest"},
+      "output":{"shape":"GetReservationPurchaseRecommendationResponse"},
+      "errors":[
+        {"shape":"LimitExceededException"},
+        {"shape":"DataUnavailableException"},
+        {"shape":"InvalidNextTokenException"}
       ]
     },
     "GetReservationUtilization":{
@@ -47,7 +83,9 @@
       "input":{"shape":"GetReservationUtilizationRequest"},
       "output":{"shape":"GetReservationUtilizationResponse"},
       "errors":[
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"DataUnavailableException"},
+        {"shape":"InvalidNextTokenException"}
       ]
     },
     "GetTags":{
@@ -59,11 +97,21 @@
       "input":{"shape":"GetTagsRequest"},
       "output":{"shape":"GetTagsResponse"},
       "errors":[
-        {"shape":"LimitExceededException"}
+        {"shape":"LimitExceededException"},
+        {"shape":"BillExpirationException"},
+        {"shape":"DataUnavailableException"},
+        {"shape":"InvalidNextTokenException"},
+        {"shape":"RequestChangedException"}
       ]
     }
   },
   "shapes":{
+    "AccountScope":{
+      "type":"string",
+      "enum":["PAYER"]
+    },
+    "AmortizedRecurringFee":{"type":"string"},
+    "AmortizedUpfrontFee":{"type":"string"},
     "AttributeType":{"type":"string"},
     "AttributeValue":{"type":"string"},
     "Attributes":{
@@ -71,12 +119,54 @@
       "key":{"shape":"AttributeType"},
       "value":{"shape":"AttributeValue"}
     },
+    "BillExpirationException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "Context":{
       "type":"string",
       "enum":[
         "COST_AND_USAGE",
         "RESERVATIONS"
       ]
+    },
+    "Coverage":{
+      "type":"structure",
+      "members":{
+        "CoverageHours":{"shape":"CoverageHours"}
+      }
+    },
+    "CoverageByTime":{
+      "type":"structure",
+      "members":{
+        "TimePeriod":{"shape":"DateInterval"},
+        "Groups":{"shape":"ReservationCoverageGroups"},
+        "Total":{"shape":"Coverage"}
+      }
+    },
+    "CoverageHours":{
+      "type":"structure",
+      "members":{
+        "OnDemandHours":{"shape":"OnDemandHours"},
+        "ReservedHours":{"shape":"ReservedHours"},
+        "TotalRunningHours":{"shape":"TotalRunningHours"},
+        "CoverageHoursPercentage":{"shape":"CoverageHoursPercentage"}
+      }
+    },
+    "CoverageHoursPercentage":{"type":"string"},
+    "CoveragesByTime":{
+      "type":"list",
+      "member":{"shape":"CoverageByTime"}
+    },
+    "DataUnavailableException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
     },
     "DateInterval":{
       "type":"structure",
@@ -106,7 +196,12 @@
         "TENANCY",
         "SCOPE",
         "PLATFORM",
-        "SUBSCRIPTION_ID"
+        "SUBSCRIPTION_ID",
+        "LEGAL_ENTITY_NAME",
+        "DEPLOYMENT_OPTION",
+        "DATABASE_ENGINE",
+        "CACHE_ENGINE",
+        "INSTANCE_TYPE_FAMILY"
       ]
     },
     "DimensionValues":{
@@ -127,6 +222,25 @@
       "type":"list",
       "member":{"shape":"DimensionValuesWithAttributes"}
     },
+    "EC2InstanceDetails":{
+      "type":"structure",
+      "members":{
+        "Family":{"shape":"GenericString"},
+        "InstanceType":{"shape":"GenericString"},
+        "Region":{"shape":"GenericString"},
+        "AvailabilityZone":{"shape":"GenericString"},
+        "Platform":{"shape":"GenericString"},
+        "Tenancy":{"shape":"GenericString"},
+        "CurrentGeneration":{"shape":"GenericBoolean"},
+        "SizeFlexEligible":{"shape":"GenericBoolean"}
+      }
+    },
+    "EC2Specification":{
+      "type":"structure",
+      "members":{
+        "OfferingClass":{"shape":"OfferingClass"}
+      }
+    },
     "Entity":{"type":"string"},
     "ErrorMessage":{"type":"string"},
     "Estimated":{"type":"boolean"},
@@ -144,6 +258,8 @@
       "type":"list",
       "member":{"shape":"Expression"}
     },
+    "GenericBoolean":{"type":"boolean"},
+    "GenericString":{"type":"string"},
     "GetCostAndUsageRequest":{
       "type":"structure",
       "members":{
@@ -188,6 +304,49 @@
         "DimensionValues":{"shape":"DimensionValuesWithAttributesList"},
         "ReturnSize":{"shape":"PageSize"},
         "TotalSize":{"shape":"PageSize"},
+        "NextPageToken":{"shape":"NextPageToken"}
+      }
+    },
+    "GetReservationCoverageRequest":{
+      "type":"structure",
+      "required":["TimePeriod"],
+      "members":{
+        "TimePeriod":{"shape":"DateInterval"},
+        "GroupBy":{"shape":"GroupDefinitions"},
+        "Granularity":{"shape":"Granularity"},
+        "Filter":{"shape":"Expression"},
+        "NextPageToken":{"shape":"NextPageToken"}
+      }
+    },
+    "GetReservationCoverageResponse":{
+      "type":"structure",
+      "required":["CoveragesByTime"],
+      "members":{
+        "CoveragesByTime":{"shape":"CoveragesByTime"},
+        "Total":{"shape":"Coverage"},
+        "NextPageToken":{"shape":"NextPageToken"}
+      }
+    },
+    "GetReservationPurchaseRecommendationRequest":{
+      "type":"structure",
+      "required":["Service"],
+      "members":{
+        "AccountId":{"shape":"GenericString"},
+        "Service":{"shape":"GenericString"},
+        "AccountScope":{"shape":"AccountScope"},
+        "LookbackPeriodInDays":{"shape":"LookbackPeriodInDays"},
+        "TermInYears":{"shape":"TermInYears"},
+        "PaymentOption":{"shape":"PaymentOption"},
+        "ServiceSpecification":{"shape":"ServiceSpecification"},
+        "PageSize":{"shape":"NonNegativeInteger"},
+        "NextPageToken":{"shape":"NextPageToken"}
+      }
+    },
+    "GetReservationPurchaseRecommendationResponse":{
+      "type":"structure",
+      "members":{
+        "Metadata":{"shape":"ReservationPurchaseRecommendationMetadata"},
+        "Recommendations":{"shape":"ReservationPurchaseRecommendations"},
         "NextPageToken":{"shape":"NextPageToken"}
       }
     },
@@ -272,6 +431,20 @@
       "type":"list",
       "member":{"shape":"Group"}
     },
+    "InstanceDetails":{
+      "type":"structure",
+      "members":{
+        "EC2InstanceDetails":{"shape":"EC2InstanceDetails"},
+        "RDSInstanceDetails":{"shape":"RDSInstanceDetails"}
+      }
+    },
+    "InvalidNextTokenException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "Key":{"type":"string"},
     "Keys":{
       "type":"list",
@@ -283,6 +456,14 @@
         "Message":{"shape":"ErrorMessage"}
       },
       "exception":true
+    },
+    "LookbackPeriodInDays":{
+      "type":"string",
+      "enum":[
+        "SEVEN_DAYS",
+        "THIRTY_DAYS",
+        "SIXTY_DAYS"
+      ]
     },
     "MetricAmount":{"type":"string"},
     "MetricName":{"type":"string"},
@@ -303,20 +484,137 @@
       "key":{"shape":"MetricName"},
       "value":{"shape":"MetricValue"}
     },
+    "NetRISavings":{"type":"string"},
     "NextPageToken":{"type":"string"},
+    "NonNegativeInteger":{
+      "type":"integer",
+      "min":0
+    },
+    "OfferingClass":{
+      "type":"string",
+      "enum":[
+        "STANDARD",
+        "CONVERTIBLE"
+      ]
+    },
+    "OnDemandCostOfRIHoursUsed":{"type":"string"},
+    "OnDemandHours":{"type":"string"},
     "PageSize":{"type":"integer"},
+    "PaymentOption":{
+      "type":"string",
+      "enum":[
+        "NO_UPFRONT",
+        "PARTIAL_UPFRONT",
+        "ALL_UPFRONT"
+      ]
+    },
     "PurchasedHours":{"type":"string"},
+    "RDSInstanceDetails":{
+      "type":"structure",
+      "members":{
+        "Family":{"shape":"GenericString"},
+        "InstanceType":{"shape":"GenericString"},
+        "Region":{"shape":"GenericString"},
+        "DatabaseEngine":{"shape":"GenericString"},
+        "DeploymentOption":{"shape":"GenericString"},
+        "LicenseModel":{"shape":"GenericString"},
+        "CurrentGeneration":{"shape":"GenericBoolean"},
+        "SizeFlexEligible":{"shape":"GenericBoolean"}
+      }
+    },
+    "RequestChangedException":{
+      "type":"structure",
+      "members":{
+        "Message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "ReservationAggregates":{
       "type":"structure",
       "members":{
         "UtilizationPercentage":{"shape":"UtilizationPercentage"},
         "PurchasedHours":{"shape":"PurchasedHours"},
         "TotalActualHours":{"shape":"TotalActualHours"},
-        "UnusedHours":{"shape":"UnusedHours"}
+        "UnusedHours":{"shape":"UnusedHours"},
+        "OnDemandCostOfRIHoursUsed":{"shape":"OnDemandCostOfRIHoursUsed"},
+        "NetRISavings":{"shape":"NetRISavings"},
+        "TotalPotentialRISavings":{"shape":"TotalPotentialRISavings"},
+        "AmortizedUpfrontFee":{"shape":"AmortizedUpfrontFee"},
+        "AmortizedRecurringFee":{"shape":"AmortizedRecurringFee"},
+        "TotalAmortizedFee":{"shape":"TotalAmortizedFee"}
       }
+    },
+    "ReservationCoverageGroup":{
+      "type":"structure",
+      "members":{
+        "Attributes":{"shape":"Attributes"},
+        "Coverage":{"shape":"Coverage"}
+      }
+    },
+    "ReservationCoverageGroups":{
+      "type":"list",
+      "member":{"shape":"ReservationCoverageGroup"}
     },
     "ReservationGroupKey":{"type":"string"},
     "ReservationGroupValue":{"type":"string"},
+    "ReservationPurchaseRecommendation":{
+      "type":"structure",
+      "members":{
+        "AccountScope":{"shape":"AccountScope"},
+        "LookbackPeriodInDays":{"shape":"LookbackPeriodInDays"},
+        "TermInYears":{"shape":"TermInYears"},
+        "PaymentOption":{"shape":"PaymentOption"},
+        "ServiceSpecification":{"shape":"ServiceSpecification"},
+        "RecommendationDetails":{"shape":"ReservationPurchaseRecommendationDetails"},
+        "RecommendationSummary":{"shape":"ReservationPurchaseRecommendationSummary"}
+      }
+    },
+    "ReservationPurchaseRecommendationDetail":{
+      "type":"structure",
+      "members":{
+        "InstanceDetails":{"shape":"InstanceDetails"},
+        "RecommendedNumberOfInstancesToPurchase":{"shape":"GenericString"},
+        "RecommendedNormalizedUnitsToPurchase":{"shape":"GenericString"},
+        "MinimumNumberOfInstancesUsedPerHour":{"shape":"GenericString"},
+        "MinimumNormalizedUnitsUsedPerHour":{"shape":"GenericString"},
+        "MaximumNumberOfInstancesUsedPerHour":{"shape":"GenericString"},
+        "MaximumNormalizedUnitsUsedPerHour":{"shape":"GenericString"},
+        "AverageNumberOfInstancesUsedPerHour":{"shape":"GenericString"},
+        "AverageNormalizedUnitsUsedPerHour":{"shape":"GenericString"},
+        "AverageUtilization":{"shape":"GenericString"},
+        "EstimatedBreakEvenInMonths":{"shape":"GenericString"},
+        "CurrencyCode":{"shape":"GenericString"},
+        "EstimatedMonthlySavingsAmount":{"shape":"GenericString"},
+        "EstimatedMonthlySavingsPercentage":{"shape":"GenericString"},
+        "EstimatedMonthlyOnDemandCost":{"shape":"GenericString"},
+        "EstimatedReservationCostForLookbackPeriod":{"shape":"GenericString"},
+        "UpfrontCost":{"shape":"GenericString"},
+        "RecurringStandardMonthlyCost":{"shape":"GenericString"}
+      }
+    },
+    "ReservationPurchaseRecommendationDetails":{
+      "type":"list",
+      "member":{"shape":"ReservationPurchaseRecommendationDetail"}
+    },
+    "ReservationPurchaseRecommendationMetadata":{
+      "type":"structure",
+      "members":{
+        "RecommendationId":{"shape":"GenericString"},
+        "GenerationTimestamp":{"shape":"GenericString"}
+      }
+    },
+    "ReservationPurchaseRecommendationSummary":{
+      "type":"structure",
+      "members":{
+        "TotalEstimatedMonthlySavingsAmount":{"shape":"GenericString"},
+        "TotalEstimatedMonthlySavingsPercentage":{"shape":"GenericString"},
+        "CurrencyCode":{"shape":"GenericString"}
+      }
+    },
+    "ReservationPurchaseRecommendations":{
+      "type":"list",
+      "member":{"shape":"ReservationPurchaseRecommendation"}
+    },
     "ReservationUtilizationGroup":{
       "type":"structure",
       "members":{
@@ -330,6 +628,7 @@
       "type":"list",
       "member":{"shape":"ReservationUtilizationGroup"}
     },
+    "ReservedHours":{"type":"string"},
     "ResultByTime":{
       "type":"structure",
       "members":{
@@ -344,6 +643,12 @@
       "member":{"shape":"ResultByTime"}
     },
     "SearchString":{"type":"string"},
+    "ServiceSpecification":{
+      "type":"structure",
+      "members":{
+        "EC2Specification":{"shape":"EC2Specification"}
+      }
+    },
     "TagKey":{"type":"string"},
     "TagList":{
       "type":"list",
@@ -356,7 +661,17 @@
         "Values":{"shape":"Values"}
       }
     },
+    "TermInYears":{
+      "type":"string",
+      "enum":[
+        "ONE_YEAR",
+        "THREE_YEARS"
+      ]
+    },
     "TotalActualHours":{"type":"string"},
+    "TotalAmortizedFee":{"type":"string"},
+    "TotalPotentialRISavings":{"type":"string"},
+    "TotalRunningHours":{"type":"string"},
     "UnusedHours":{"type":"string"},
     "UtilizationByTime":{
       "type":"structure",

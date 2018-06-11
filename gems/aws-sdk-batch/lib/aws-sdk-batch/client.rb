@@ -881,6 +881,7 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.ulimits[0].name #=> String
     #   resp.job_definitions[0].container_properties.ulimits[0].soft_limit #=> Integer
     #   resp.job_definitions[0].container_properties.user #=> String
+    #   resp.job_definitions[0].timeout.attempt_duration_seconds #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
@@ -1112,6 +1113,7 @@ module Aws::Batch
     #   resp.jobs[0].array_properties.status_summary["String"] #=> Integer
     #   resp.jobs[0].array_properties.size #=> Integer
     #   resp.jobs[0].array_properties.index #=> Integer
+    #   resp.jobs[0].timeout.attempt_duration_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs AWS API Documentation
     #
@@ -1262,7 +1264,22 @@ module Aws::Batch
     # @option params [Types::RetryStrategy] :retry_strategy
     #   The retry strategy to use for failed jobs that are submitted with this
     #   job definition. Any retry strategy that is specified during a
-    #   SubmitJob operation overrides the retry strategy defined here.
+    #   SubmitJob operation overrides the retry strategy defined here. If a
+    #   job is terminated due to a timeout, it is not retried.
+    #
+    # @option params [Types::JobTimeout] :timeout
+    #   The timeout configuration for jobs that are submitted with this job
+    #   definition, after which AWS Batch terminates your jobs if they have
+    #   not finished. If a job is terminated due to a timeout, it is not
+    #   retried. The minimum value for the timeout is 60 seconds. Any timeout
+    #   configuration that is specified during a SubmitJob operation overrides
+    #   the timeout configuration defined here. For more information, see [Job
+    #   Timeouts][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
     #
     # @return [Types::RegisterJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1345,6 +1362,9 @@ module Aws::Batch
     #     retry_strategy: {
     #       attempts: 1,
     #     },
+    #     timeout: {
+    #       attempt_duration_seconds: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1420,6 +1440,21 @@ module Aws::Batch
     #   operation. When a retry strategy is specified here, it overrides the
     #   retry strategy defined in the job definition.
     #
+    # @option params [Types::JobTimeout] :timeout
+    #   The timeout configuration for this SubmitJob operation. You can
+    #   specify a timeout duration after which AWS Batch terminates your jobs
+    #   if they have not finished. If a job is terminated due to a timeout, it
+    #   is not retried. The minimum value for the timeout is 60 seconds. This
+    #   configuration overrides any timeout configuration specified in the job
+    #   definition. For array jobs, child jobs have the same timeout
+    #   configuration as the parent job. For more information, see [Job
+    #   Timeouts][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #
     # @return [Types::SubmitJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SubmitJobResponse#job_name #job_name} => String
@@ -1473,6 +1508,9 @@ module Aws::Batch
     #     },
     #     retry_strategy: {
     #       attempts: 1,
+    #     },
+    #     timeout: {
+    #       attempt_duration_seconds: 1,
     #     },
     #   })
     #
@@ -1699,7 +1737,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

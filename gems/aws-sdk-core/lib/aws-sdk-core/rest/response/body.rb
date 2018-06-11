@@ -15,7 +15,9 @@ module Aws
         # @param [IO] body
         # @param [Hash, Struct] data
         def apply(body, data)
-          if streaming?
+          if event_stream?
+            data[@rules[:payload]] = parse_eventstream(body)
+          elsif streaming?
             data[@rules[:payload]] = body
           elsif @rules[:payload]
             data[@rules[:payload]] = parse(body.read, @rules[:payload_member])
@@ -26,6 +28,10 @@ module Aws
 
         private
 
+        def event_stream?
+          @rules[:payload] && @rules[:payload_member].eventstream
+        end
+
         def streaming?
           @rules[:payload] && (
             BlobShape === @rules[:payload_member].shape ||
@@ -35,6 +41,13 @@ module Aws
 
         def parse(body, rules, target = nil)
           @parser_class.new(rules).parse(body, target) if body.size > 0
+        end
+
+        def parse_eventstream(body)
+          # body contains an array of parsed event when they arrive
+          @rules[:payload_member].shape.struct_class.new do |payload|
+            body.each { |event| payload << event }
+          end
         end
 
       end

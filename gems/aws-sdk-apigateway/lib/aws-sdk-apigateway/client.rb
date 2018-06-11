@@ -241,7 +241,7 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :name
     #   \[Required\] The name of the authorizer.
@@ -284,11 +284,11 @@ module Aws::APIGateway
     #
     # @option params [String] :identity_source
     #   The identity source for which authorization is requested. * For a
-    #   `TOKEN` authorizer, this is required and specifies the request
-    #     header mapping expression for the custom header holding the
-    #     authorization token submitted by the client. For example, if the
-    #     token header name is `Auth`, the header mapping expression is
-    #     `method.request.header.Auth`.
+    #   `TOKEN` or `COGNITO_USER_POOLS` authorizer, this is required
+    #     and specifies the request header mapping expression for the custom
+    #     header holding the authorization token submitted by the client. For
+    #     example, if the token header name is `Auth`, the header mapping
+    #     expression is `method.request.header.Auth`.
     #   * For the `REQUEST` authorizer, this is required when authorization
     #     caching is enabled. The value is a comma-separated string of one or
     #     more mapping expressions of the specified request parameters. For
@@ -304,16 +304,15 @@ module Aws::APIGateway
     #     function. The valid value is a string of comma-separated mapping
     #     expressions of the specified request parameters. When the
     #     authorization caching is not enabled, this property is optional.
-    #   * For a `COGNITO_USER_POOLS` authorizer, this property is not used.
     #
     # @option params [String] :identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
     #   authorizers, this value is a regular expression. API Gateway will
-    #   match the incoming token from the client against the specified regular
-    #   expression. It will invoke the authorizer's Lambda function there is
-    #   a match. Otherwise, it will return a 401 Unauthorized response without
-    #   calling the Lambda function. The validation expression does not apply
-    #   to the `REQUEST` authorizer.
+    #   match the `aud` field of the incoming token from the client against
+    #   the specified regular expression. It will invoke the authorizer's
+    #   Lambda function when there is a match. Otherwise, it will return a 401
+    #   Unauthorized response without calling the Lambda function. The
+    #   validation expression does not apply to the `REQUEST` authorizer.
     #
     # @option params [Integer] :authorizer_result_ttl_in_seconds
     #   The TTL in seconds of cached authorizer results. If it equals 0,
@@ -373,7 +372,8 @@ module Aws::APIGateway
     # Creates a new BasePathMapping resource.
     #
     # @option params [required, String] :domain_name
-    #   The domain name of the BasePathMapping resource to create.
+    #   \[Required\] The domain name of the BasePathMapping resource to
+    #   create.
     #
     # @option params [String] :base_path
     #   The base path name that callers of the API must provide as part of the
@@ -382,7 +382,7 @@ module Aws::APIGateway
     #   callers to specify a base path name after the domain name.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :stage
     #   The name of the API's stage that you want to use for this mapping.
@@ -421,7 +421,7 @@ module Aws::APIGateway
     # callable over the internet.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :stage_name
     #   The name of the Stage resource for the Deployment resource to create.
@@ -588,7 +588,7 @@ module Aws::APIGateway
     # Creates a new domain name.
     #
     # @option params [required, String] :domain_name
-    #   (Required) The name of the DomainName resource.
+    #   \[Required\] The name of the DomainName resource.
     #
     # @option params [String] :certificate_name
     #   The user-friendly name of the certificate that will be used by
@@ -685,24 +685,25 @@ module Aws::APIGateway
     # Adds a new Model resource to an existing RestApi resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier under which the Model will be created.
+    #   \[Required\] The RestApi identifier under which the Model will be
+    #   created.
     #
     # @option params [required, String] :name
-    #   The name of the model. Must be alphanumeric.
+    #   \[Required\] The name of the model. Must be alphanumeric.
     #
     # @option params [String] :description
     #   The description of the model.
     #
     # @option params [String] :schema
     #   The schema for the model. For `application/json` models, this should
-    #   be [JSON-schema draft v4][1] model.
+    #   be [JSON schema draft 4][1] model.
     #
     #
     #
-    #   [1]: http://json-schema.org/documentation.html
+    #   [1]: https://tools.ietf.org/html/draft-zyp-json-schema-04
     #
     # @option params [required, String] :content_type
-    #   The content-type for the model.
+    #   \[Required\] The content-type for the model.
     #
     # @return [Types::Model] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -740,7 +741,7 @@ module Aws::APIGateway
     # Creates a ReqeustValidator of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :name
     #   The name of the to-be-created RequestValidator.
@@ -787,10 +788,10 @@ module Aws::APIGateway
     # Creates a Resource resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :parent_id
-    #   The parent resource's identifier.
+    #   \[Required\] The parent resource's identifier.
     #
     # @option params [required, String] :path_part
     #   The last path segment for this resource.
@@ -871,7 +872,7 @@ module Aws::APIGateway
     # Creates a new RestApi resource.
     #
     # @option params [required, String] :name
-    #   The name of the RestApi.
+    #   \[Required\] The name of the RestApi.
     #
     # @option params [String] :description
     #   The description of the RestApi.
@@ -887,15 +888,16 @@ module Aws::APIGateway
     #   the RestApi supports only UTF-8-encoded text payloads.
     #
     # @option params [Integer] :minimum_compression_size
-    #   A nullable integer used to enable (non-negative between 0 and 10485760
-    #   (10M) bytes, inclusive) or disable (null) compression on an API. When
-    #   compression is enabled, compression or decompression are not applied
-    #   on the payload if the payload size is smaller than this value. Setting
-    #   it to zero allows compression for any payload size.
+    #   A nullable integer that is used to enable compression (with
+    #   non-negative between 0 and 10485760 (10M) bytes, inclusive) or disable
+    #   compression (with a null value) on an API. When compression is
+    #   enabled, compression or decompression is not applied on the payload if
+    #   the payload size is smaller than this value. Setting it to zero allows
+    #   compression for any payload size.
     #
     # @option params [String] :api_key_source
-    #   The source of the API key for metring requests according to a usage
-    #   plan. Valid values are * `HEADER` to read the API key from the
+    #   The source of the API key for metering requests according to a usage
+    #   plan. Valid values are: * `HEADER` to read the API key from the
     #   `X-API-Key` header of a
     #     request.
     #   * `AUTHORIZER` to read the API key from the `UsageIdentifierKey` from
@@ -904,6 +906,9 @@ module Aws::APIGateway
     # @option params [Types::EndpointConfiguration] :endpoint_configuration
     #   The endpoint configuration of this RestApi showing the endpoint types
     #   of the API.
+    #
+    # @option params [String] :policy
+    #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -917,6 +922,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::RestApi#policy #policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -931,6 +937,7 @@ module Aws::APIGateway
     #     endpoint_configuration: {
     #       types: ["REGIONAL"], # accepts REGIONAL, EDGE
     #     },
+    #     policy: "String",
     #   })
     #
     # @example Response structure
@@ -948,6 +955,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.policy #=> String
     #
     # @overload create_rest_api(params = {})
     # @param [Hash] params ({})
@@ -960,7 +968,7 @@ module Aws::APIGateway
     # for the API.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
     #   \[Required\] The name for the Stage resource.
@@ -990,9 +998,9 @@ module Aws::APIGateway
     #   The canary deployment settings of this stage.
     #
     # @option params [Hash<String,String>] :tags
-    #   Key/Value map of strings. Valid character set is \[a-zA-Z+-=.\_:/\].
-    #   Tag key can be up to 128 characters and must not start with "aws:".
-    #   Tag value can be up to 256 characters.
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
     #
     # @return [Types::Stage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1084,7 +1092,7 @@ module Aws::APIGateway
     # the associated API stages, specified in the payload.
     #
     # @option params [required, String] :name
-    #   The name of the usage plan.
+    #   \[Required\] The name of the usage plan.
     #
     # @option params [String] :description
     #   The description of the usage plan.
@@ -1156,15 +1164,16 @@ module Aws::APIGateway
     # plan.
     #
     # @option params [required, String] :usage_plan_id
-    #   The Id of the UsagePlan resource representing the usage plan
-    #   containing the to-be-created UsagePlanKey resource representing a plan
-    #   customer.
+    #   \[Required\] The Id of the UsagePlan resource representing the usage
+    #   plan containing the to-be-created UsagePlanKey resource representing a
+    #   plan customer.
     #
     # @option params [required, String] :key_id
-    #   The identifier of a UsagePlanKey resource for a plan customer.
+    #   \[Required\] The identifier of a UsagePlanKey resource for a plan
+    #   customer.
     #
     # @option params [required, String] :key_type
-    #   The type of a UsagePlanKey resource for a plan customer.
+    #   \[Required\] The type of a UsagePlanKey resource for a plan customer.
     #
     # @return [Types::UsagePlanKey] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1248,7 +1257,7 @@ module Aws::APIGateway
     # Deletes the ApiKey resource.
     #
     # @option params [required, String] :api_key
-    #   The identifier of the ApiKey resource to be deleted.
+    #   \[Required\] The identifier of the ApiKey resource to be deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1276,10 +1285,10 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :authorizer_id
-    #   The identifier of the Authorizer resource.
+    #   \[Required\] The identifier of the Authorizer resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1300,10 +1309,12 @@ module Aws::APIGateway
     # Deletes the BasePathMapping resource.
     #
     # @option params [required, String] :domain_name
-    #   The domain name of the BasePathMapping resource to delete.
+    #   \[Required\] The domain name of the BasePathMapping resource to
+    #   delete.
     #
     # @option params [required, String] :base_path
-    #   The base path name of the BasePathMapping resource to delete.
+    #   \[Required\] The base path name of the BasePathMapping resource to
+    #   delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1324,7 +1335,8 @@ module Aws::APIGateway
     # Deletes the ClientCertificate resource.
     #
     # @option params [required, String] :client_certificate_id
-    #   The identifier of the ClientCertificate resource to be deleted.
+    #   \[Required\] The identifier of the ClientCertificate resource to be
+    #   deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1345,10 +1357,10 @@ module Aws::APIGateway
     # if there are no Stage resources associated with it.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :deployment_id
-    #   The identifier of the Deployment resource to delete.
+    #   \[Required\] The identifier of the Deployment resource to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1414,7 +1426,7 @@ module Aws::APIGateway
     # Deletes the DomainName resource.
     #
     # @option params [required, String] :domain_name
-    #   The name of the DomainName resource to be deleted.
+    #   \[Required\] The name of the DomainName resource to be deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1435,10 +1447,11 @@ module Aws::APIGateway
     # type on the given RestApi and resets it with the default settings.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :response_type
-    #   The response type of the associated GatewayResponse. Valid values are
+    #   \[Required\] The response type of the associated GatewayResponse.
+    #   Valid values are
     #   * ACCESS\_DENIED
     #   * API\_CONFIGURATION\_ERROR
     #   * AUTHORIZER\_FAILURE
@@ -1458,7 +1471,7 @@ module Aws::APIGateway
     #   * RESOURCE\_NOT\_FOUND
     #   * THROTTLED
     #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   * UNSUPPORTED\_MEDIA\_TYPE
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1479,13 +1492,14 @@ module Aws::APIGateway
     # Represents a delete integration.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   Specifies a delete integration request's resource identifier.
+    #   \[Required\] Specifies a delete integration request's resource
+    #   identifier.
     #
     # @option params [required, String] :http_method
-    #   Specifies a delete integration request's HTTP method.
+    #   \[Required\] Specifies a delete integration request's HTTP method.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1507,17 +1521,19 @@ module Aws::APIGateway
     # Represents a delete integration response.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   Specifies a delete integration response request's resource
-    #   identifier.
+    #   \[Required\] Specifies a delete integration response request's
+    #   resource identifier.
     #
     # @option params [required, String] :http_method
-    #   Specifies a delete integration response request's HTTP method.
+    #   \[Required\] Specifies a delete integration response request's HTTP
+    #   method.
     #
     # @option params [required, String] :status_code
-    #   Specifies a delete integration response request's status code.
+    #   \[Required\] Specifies a delete integration response request's status
+    #   code.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1540,13 +1556,13 @@ module Aws::APIGateway
     # Deletes an existing Method resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The Resource identifier for the Method resource.
+    #   \[Required\] The Resource identifier for the Method resource.
     #
     # @option params [required, String] :http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1568,16 +1584,17 @@ module Aws::APIGateway
     # Deletes an existing MethodResponse resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The Resource identifier for the MethodResponse resource.
+    #   \[Required\] The Resource identifier for the MethodResponse resource.
     #
     # @option params [required, String] :http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #
     # @option params [required, String] :status_code
-    #   The status code identifier for the MethodResponse resource.
+    #   \[Required\] The status code identifier for the MethodResponse
+    #   resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1600,10 +1617,10 @@ module Aws::APIGateway
     # Deletes a model.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :model_name
-    #   The name of the model to delete.
+    #   \[Required\] The name of the model to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1624,7 +1641,7 @@ module Aws::APIGateway
     # Deletes a RequestValidator of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :request_validator_id
     #   \[Required\] The identifier of the RequestValidator to be deleted.
@@ -1648,10 +1665,10 @@ module Aws::APIGateway
     # Deletes a Resource resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the Resource resource.
+    #   \[Required\] The identifier of the Resource resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1672,7 +1689,7 @@ module Aws::APIGateway
     # Deletes the specified API.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1692,10 +1709,10 @@ module Aws::APIGateway
     # Deletes a Stage resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   The name of the Stage resource to delete.
+    #   \[Required\] The name of the Stage resource to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1716,7 +1733,7 @@ module Aws::APIGateway
     # Deletes a usage plan of a given plan Id.
     #
     # @option params [required, String] :usage_plan_id
-    #   The Id of the to-be-deleted usage plan.
+    #   \[Required\] The Id of the to-be-deleted usage plan.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1737,12 +1754,12 @@ module Aws::APIGateway
     # associated usage plan.
     #
     # @option params [required, String] :usage_plan_id
-    #   The Id of the UsagePlan resource representing the usage plan
-    #   containing the to-be-deleted UsagePlanKey resource representing a plan
-    #   customer.
+    #   \[Required\] The Id of the UsagePlan resource representing the usage
+    #   plan containing the to-be-deleted UsagePlanKey resource representing a
+    #   plan customer.
     #
     # @option params [required, String] :key_id
-    #   The Id of the UsagePlanKey resource to be deleted.
+    #   \[Required\] The Id of the UsagePlanKey resource to be deleted.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1808,10 +1825,10 @@ module Aws::APIGateway
     # Flushes a stage's cache.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   The name of the stage to flush its cache.
+    #   \[Required\] The name of the stage to flush its cache.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1891,7 +1908,7 @@ module Aws::APIGateway
     # Gets information about the current ApiKey resource.
     #
     # @option params [required, String] :api_key
-    #   The identifier of the ApiKey resource.
+    #   \[Required\] The identifier of the ApiKey resource.
     #
     # @option params [Boolean] :include_value
     #   A boolean flag to specify whether (`true`) or not (`false`) the result
@@ -1942,7 +1959,8 @@ module Aws::APIGateway
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @option params [String] :name_query
     #   The name of queried API keys.
@@ -2006,10 +2024,10 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :authorizer_id
-    #   The identifier of the Authorizer resource.
+    #   \[Required\] The identifier of the Authorizer resource.
     #
     # @return [Types::Authorizer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2063,13 +2081,14 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::Authorizers] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2110,13 +2129,15 @@ module Aws::APIGateway
     # Describe a BasePathMapping resource.
     #
     # @option params [required, String] :domain_name
-    #   The domain name of the BasePathMapping resource to be described.
+    #   \[Required\] The domain name of the BasePathMapping resource to be
+    #   described.
     #
     # @option params [required, String] :base_path
-    #   The base path name that callers of the API must provide as part of the
-    #   URL after the domain name. This value must be unique for all of the
-    #   mappings across a single API. Leave this blank if you do not want
-    #   callers to specify any base path name after the domain name.
+    #   \[Required\] The base path name that callers of the API must provide
+    #   as part of the URL after the domain name. This value must be unique
+    #   for all of the mappings across a single API. Leave this blank if you
+    #   do not want callers to specify any base path name after the domain
+    #   name.
     #
     # @return [Types::BasePathMapping] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2147,14 +2168,14 @@ module Aws::APIGateway
     # Represents a collection of BasePathMapping resources.
     #
     # @option params [required, String] :domain_name
-    #   The domain name of a BasePathMapping resource.
+    #   \[Required\] The domain name of a BasePathMapping resource.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::BasePathMappings] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2187,7 +2208,8 @@ module Aws::APIGateway
     # Gets information about the current ClientCertificate resource.
     #
     # @option params [required, String] :client_certificate_id
-    #   The identifier of the ClientCertificate resource to be described.
+    #   \[Required\] The identifier of the ClientCertificate resource to be
+    #   described.
     #
     # @return [Types::ClientCertificate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2224,8 +2246,8 @@ module Aws::APIGateway
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::ClientCertificates] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2259,10 +2281,11 @@ module Aws::APIGateway
     # Gets information about a Deployment resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :deployment_id
-    #   The identifier of the Deployment resource to get information about.
+    #   \[Required\] The identifier of the Deployment resource to get
+    #   information about.
     #
     # @option params [Array<String>] :embed
     #   A query parameter to retrieve the specified embedded resources of the
@@ -2312,14 +2335,14 @@ module Aws::APIGateway
     # Gets information about a Deployments collection.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::Deployments] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2405,7 +2428,8 @@ module Aws::APIGateway
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @option params [String] :location_status
     #   The status of the API documentation parts to retrieve. Valid values
@@ -2489,7 +2513,8 @@ module Aws::APIGateway
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::DocumentationVersions] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2523,7 +2548,7 @@ module Aws::APIGateway
     # intuitive URL that can be called.
     #
     # @option params [required, String] :domain_name
-    #   The name of the DomainName resource.
+    #   \[Required\] The name of the DomainName resource.
     #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2573,8 +2598,8 @@ module Aws::APIGateway
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::DomainNames] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2615,13 +2640,14 @@ module Aws::APIGateway
     # Exports a deployed version of a RestApi in a specified format.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   The name of the Stage that will be exported.
+    #   \[Required\] The name of the Stage that will be exported.
     #
     # @option params [required, String] :export_type
-    #   The type of export. Currently only 'swagger' is supported.
+    #   \[Required\] The type of export. Currently only 'swagger' is
+    #   supported.
     #
     # @option params [Hash<String,String>] :parameters
     #   A key-value map of query string parameters that specify properties of
@@ -2674,10 +2700,11 @@ module Aws::APIGateway
     # RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :response_type
-    #   The response type of the associated GatewayResponse. Valid values are
+    #   \[Required\] The response type of the associated GatewayResponse.
+    #   Valid values are
     #   * ACCESS\_DENIED
     #   * API\_CONFIGURATION\_ERROR
     #   * AUTHORIZER\_FAILURE
@@ -2697,7 +2724,7 @@ module Aws::APIGateway
     #   * RESOURCE\_NOT\_FOUND
     #   * THROTTLED
     #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   * UNSUPPORTED\_MEDIA\_TYPE
     #
     # @return [Types::GatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2737,7 +2764,7 @@ module Aws::APIGateway
     # collection for the supported response types.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set. The
@@ -2745,9 +2772,9 @@ module Aws::APIGateway
     #   position does not apply here.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page. The GatewayResponses
-    #   collection does not support pagination and the limit does not apply
-    #   here.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500. The GatewayResponses collection does
+    #   not support pagination and the limit does not apply here.
     #
     # @return [Types::GatewayResponses] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2784,13 +2811,14 @@ module Aws::APIGateway
     # Get the integration settings.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   Specifies a get integration request's resource identifier
+    #   \[Required\] Specifies a get integration request's resource
+    #   identifier
     #
     # @option params [required, String] :http_method
-    #   Specifies a get integration request's HTTP method.
+    #   \[Required\] Specifies a get integration request's HTTP method.
     #
     # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2854,16 +2882,19 @@ module Aws::APIGateway
     # Represents a get integration response.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   Specifies a get integration response request's resource identifier.
+    #   \[Required\] Specifies a get integration response request's resource
+    #   identifier.
     #
     # @option params [required, String] :http_method
-    #   Specifies a get integration response request's HTTP method.
+    #   \[Required\] Specifies a get integration response request's HTTP
+    #   method.
     #
     # @option params [required, String] :status_code
-    #   Specifies a get integration response request's status code.
+    #   \[Required\] Specifies a get integration response request's status
+    #   code.
     #
     # @return [Types::IntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2902,13 +2933,13 @@ module Aws::APIGateway
     # Describe an existing Method resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The Resource identifier for the Method resource.
+    #   \[Required\] The Resource identifier for the Method resource.
     #
     # @option params [required, String] :http_method
-    #   Specifies the method request's HTTP method type.
+    #   \[Required\] Specifies the method request's HTTP method type.
     #
     # @return [Types::Method] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2987,16 +3018,16 @@ module Aws::APIGateway
     # Describes a MethodResponse resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The Resource identifier for the MethodResponse resource.
+    #   \[Required\] The Resource identifier for the MethodResponse resource.
     #
     # @option params [required, String] :http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #
     # @option params [required, String] :status_code
-    #   The status code for the MethodResponse resource.
+    #   \[Required\] The status code for the MethodResponse resource.
     #
     # @return [Types::MethodResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3031,10 +3062,10 @@ module Aws::APIGateway
     # Describes an existing model defined for a RestApi resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The RestApi identifier under which the Model exists.
+    #   \[Required\] The RestApi identifier under which the Model exists.
     #
     # @option params [required, String] :model_name
-    #   The name of the model as an identifier.
+    #   \[Required\] The name of the model as an identifier.
     #
     # @option params [Boolean] :flatten
     #   A query parameter of a Boolean value to resolve (`true`) all external
@@ -3076,10 +3107,10 @@ module Aws::APIGateway
     # payload into the structure of a model.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :model_name
-    #   The name of the model for which to generate a template.
+    #   \[Required\] The name of the model for which to generate a template.
     #
     # @return [Types::Template] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3106,14 +3137,14 @@ module Aws::APIGateway
     # Describes existing Models defined for a RestApi resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::Models] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3148,7 +3179,7 @@ module Aws::APIGateway
     # Gets a RequestValidator of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :request_validator_id
     #   \[Required\] The identifier of the RequestValidator to be retrieved.
@@ -3184,13 +3215,14 @@ module Aws::APIGateway
     # Gets the RequestValidators collection of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::RequestValidators] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3224,10 +3256,10 @@ module Aws::APIGateway
     # Lists information about a resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The identifier for the Resource resource.
+    #   \[Required\] The identifier for the Resource resource.
     #
     # @option params [Array<String>] :embed
     #   A query parameter to retrieve the specified resources embedded in the
@@ -3314,14 +3346,14 @@ module Aws::APIGateway
     # Lists information about a collection of Resource resources.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @option params [Array<String>] :embed
     #   A query parameter used to retrieve the specified resources embedded in
@@ -3408,7 +3440,7 @@ module Aws::APIGateway
     # Lists the RestApi resource in the collection.
     #
     # @option params [required, String] :rest_api_id
-    #   The identifier of the RestApi resource.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3422,6 +3454,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::RestApi#policy #policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3444,6 +3477,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.policy #=> String
     #
     # @overload get_rest_api(params = {})
     # @param [Hash] params ({})
@@ -3458,8 +3492,8 @@ module Aws::APIGateway
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::RestApis] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3490,6 +3524,7 @@ module Aws::APIGateway
     #   resp.items[0].api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.items[0].endpoint_configuration.types #=> Array
     #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.items[0].policy #=> String
     #
     # @overload get_rest_apis(params = {})
     # @param [Hash] params ({})
@@ -3501,15 +3536,15 @@ module Aws::APIGateway
     # Generates a client SDK for a RestApi and Stage.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   The name of the Stage that the SDK will use.
+    #   \[Required\] The name of the Stage that the SDK will use.
     #
     # @option params [required, String] :sdk_type
-    #   The language for the generated SDK. Currently `java`, `javascript`,
-    #   `android`, `objectivec` (for iOS), `swift` (for iOS), and `ruby` are
-    #   supported.
+    #   \[Required\] The language for the generated SDK. Currently `java`,
+    #   `javascript`, `android`, `objectivec` (for iOS), `swift` (for iOS),
+    #   and `ruby` are supported.
     #
     # @option params [Hash<String,String>] :parameters
     #   A string-to-string key-value map of query parameters
@@ -3551,7 +3586,7 @@ module Aws::APIGateway
     end
 
     # @option params [required, String] :id
-    #   The identifier of the queried SdkType instance.
+    #   \[Required\] The identifier of the queried SdkType instance.
     #
     # @return [Types::SdkType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3589,7 +3624,8 @@ module Aws::APIGateway
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::SdkTypes] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3627,10 +3663,10 @@ module Aws::APIGateway
     # Gets information about a Stage resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   The name of the Stage resource to get information about.
+    #   \[Required\] The name of the Stage resource to get information about.
     #
     # @return [Types::Stage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3702,7 +3738,7 @@ module Aws::APIGateway
     # Gets information about one or more Stage resources.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :deployment_id
     #   The stages' deployment identifiers.
@@ -3764,8 +3800,9 @@ module Aws::APIGateway
     # Gets the Tags collection for a given resource.
     #
     # @option params [required, String] :resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. At present,
-    #   Stage is the only taggable resource.
+    #   \[Required\] The ARN of a resource that can be tagged. The resource
+    #   ARN must be URL-encoded. At present, Stage is the only taggable
+    #   resource.
     #
     # @option params [String] :position
     #   (Not currently supported) The current pagination position in the paged
@@ -3773,7 +3810,7 @@ module Aws::APIGateway
     #
     # @option params [Integer] :limit
     #   (Not currently supported) The maximum number of returned results per
-    #   page.
+    #   page. The default value is 25 and the maximum value is 500.
     #
     # @return [Types::Tags] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3802,22 +3839,23 @@ module Aws::APIGateway
     # Gets the usage data of a usage plan in a specified time interval.
     #
     # @option params [required, String] :usage_plan_id
-    #   The Id of the usage plan associated with the usage data.
+    #   \[Required\] The Id of the usage plan associated with the usage data.
     #
     # @option params [String] :key_id
     #   The Id of the API key associated with the resultant usage data.
     #
     # @option params [required, String] :start_date
-    #   The starting date (e.g., 2016-01-01) of the usage data.
+    #   \[Required\] The starting date (e.g., 2016-01-01) of the usage data.
     #
     # @option params [required, String] :end_date
-    #   The ending date (e.g., 2016-12-31) of the usage data.
+    #   \[Required\] The ending date (e.g., 2016-12-31) of the usage data.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::Usage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3859,7 +3897,7 @@ module Aws::APIGateway
     # Gets a usage plan of a given plan identifier.
     #
     # @option params [required, String] :usage_plan_id
-    #   The identifier of the UsagePlan resource to be retrieved.
+    #   \[Required\] The identifier of the UsagePlan resource to be retrieved.
     #
     # @return [Types::UsagePlan] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3902,13 +3940,13 @@ module Aws::APIGateway
     # Gets a usage plan key of a given key identifier.
     #
     # @option params [required, String] :usage_plan_id
-    #   The Id of the UsagePlan resource representing the usage plan
-    #   containing the to-be-retrieved UsagePlanKey resource representing a
-    #   plan customer.
+    #   \[Required\] The Id of the UsagePlan resource representing the usage
+    #   plan containing the to-be-retrieved UsagePlanKey resource representing
+    #   a plan customer.
     #
     # @option params [required, String] :key_id
-    #   The key Id of the to-be-retrieved UsagePlanKey resource representing a
-    #   plan customer.
+    #   \[Required\] The key Id of the to-be-retrieved UsagePlanKey resource
+    #   representing a plan customer.
     #
     # @return [Types::UsagePlanKey] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3942,15 +3980,16 @@ module Aws::APIGateway
     # specified usage plan.
     #
     # @option params [required, String] :usage_plan_id
-    #   The Id of the UsagePlan resource representing the usage plan
-    #   containing the to-be-retrieved UsagePlanKey resource representing a
-    #   plan customer.
+    #   \[Required\] The Id of the UsagePlan resource representing the usage
+    #   plan containing the to-be-retrieved UsagePlanKey resource representing
+    #   a plan customer.
     #
     # @option params [String] :position
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @option params [String] :name_query
     #   A query parameter specifying the name of the to-be-returned usage plan
@@ -3995,7 +4034,8 @@ module Aws::APIGateway
     #   The identifier of the API key associated with the usage plans.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::UsagePlans] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4079,7 +4119,8 @@ module Aws::APIGateway
     #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value is
+    #   25 and the maximum value is 500.
     #
     # @return [Types::VpcLinks] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4238,9 +4279,9 @@ module Aws::APIGateway
     #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json
     #
     # @option params [required, String, IO] :body
-    #   The POST request body containing external API definitions. Currently,
-    #   only Swagger definition JSON files are supported. The maximum size of
-    #   the API definition file is 2MB.
+    #   \[Required\] The POST request body containing external API
+    #   definitions. Currently, only Swagger definition JSON files are
+    #   supported. The maximum size of the API definition file is 2MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4254,6 +4295,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::RestApi#policy #policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4280,6 +4322,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.policy #=> String
     #
     # @overload import_rest_api(params = {})
     # @param [Hash] params ({})
@@ -4292,10 +4335,11 @@ module Aws::APIGateway
     # type and status code on the given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :response_type
-    #   The response type of the associated GatewayResponse. Valid values are
+    #   \[Required\] The response type of the associated GatewayResponse.
+    #   Valid values are
     #   * ACCESS\_DENIED
     #   * API\_CONFIGURATION\_ERROR
     #   * AUTHORIZER\_FAILURE
@@ -4315,7 +4359,7 @@ module Aws::APIGateway
     #   * RESOURCE\_NOT\_FOUND
     #   * THROTTLED
     #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   * UNSUPPORTED\_MEDIA\_TYPE
     #
     # @option params [String] :status_code
     #   The HTTP status code of the GatewayResponse.
@@ -4370,16 +4414,16 @@ module Aws::APIGateway
     # Sets up a method's integration.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   Specifies a put integration request's resource ID.
+    #   \[Required\] Specifies a put integration request's resource ID.
     #
     # @option params [required, String] :http_method
-    #   Specifies a put integration request's HTTP method.
+    #   \[Required\] Specifies a put integration request's HTTP method.
     #
     # @option params [required, String] :type
-    #   Specifies a put integration input's type.
+    #   \[Required\] Specifies a put integration input's type.
     #
     # @option params [String] :integration_http_method
     #   Specifies a put integration HTTP method. When the integration type is
@@ -4574,17 +4618,19 @@ module Aws::APIGateway
     # Represents a put integration.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   Specifies a put integration response request's resource identifier.
+    #   \[Required\] Specifies a put integration response request's resource
+    #   identifier.
     #
     # @option params [required, String] :http_method
-    #   Specifies a put integration response request's HTTP method.
+    #   \[Required\] Specifies a put integration response request's HTTP
+    #   method.
     #
     # @option params [required, String] :status_code
-    #   Specifies the status code that is used to map the integration response
-    #   to an existing MethodResponse.
+    #   \[Required\] Specifies the status code that is used to map the
+    #   integration response to an existing MethodResponse.
     #
     # @option params [String] :selection_pattern
     #   Specifies the selection pattern of a put integration response.
@@ -4665,23 +4711,24 @@ module Aws::APIGateway
     # Add a method to an existing Resource resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The Resource identifier for the new Method resource.
+    #   \[Required\] The Resource identifier for the new Method resource.
     #
     # @option params [required, String] :http_method
-    #   Specifies the method request's HTTP method type.
+    #   \[Required\] Specifies the method request's HTTP method type.
     #
     # @option params [required, String] :authorization_type
-    #   The method's authorization type. Valid values are `NONE` for open
-    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using a
-    #   custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito user
-    #   pool.
+    #   \[Required\] The method's authorization type. Valid values are `NONE`
+    #   for open access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for
+    #   using a custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito
+    #   user pool.
     #
     # @option params [String] :authorizer_id
     #   Specifies the identifier of an Authorizer to use on this Method, if
-    #   the type is CUSTOM.
+    #   the type is CUSTOM or COGNITO\_USER\_POOLS. The authorizer identifier
+    #   is generated by API Gateway when you created the authorizer.
     #
     # @option params [Boolean] :api_key_required
     #   Specifies whether the method required a valid ApiKey.
@@ -4718,9 +4765,9 @@ module Aws::APIGateway
     #
     # @option params [Array<String>] :authorization_scopes
     #   A list of authorization scopes configured on the method. The scopes
-    #   are used with a `COGNITO_USER_POOL` authorizer to authorize the method
-    #   invocation. The authorization works by matching the method scopes
-    #   against the scopes parsed from the access token in the incoming
+    #   are used with a `COGNITO_USER_POOLS` authorizer to authorize the
+    #   method invocation. The authorization works by matching the method
+    #   scopes against the scopes parsed from the access token in the incoming
     #   request. The method invocation is authorized if any method scopes
     #   matches a claimed scope in the access token. Otherwise, the invocation
     #   is not authorized. When the method scope is configured, the client
@@ -4816,16 +4863,16 @@ module Aws::APIGateway
     # Adds a MethodResponse to an existing Method resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The Resource identifier for the Method resource.
+    #   \[Required\] The Resource identifier for the Method resource.
     #
     # @option params [required, String] :http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #
     # @option params [required, String] :status_code
-    #   The method response's status code.
+    #   \[Required\] The method response's status code.
     #
     # @option params [Hash<String,Boolean>] :response_parameters
     #   A key-value map specifying required or optional response parameters
@@ -4890,7 +4937,7 @@ module Aws::APIGateway
     # overwriting the existing API.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [String] :mode
     #   The `mode` query parameter to specify the update mode. Valid values
@@ -4910,9 +4957,9 @@ module Aws::APIGateway
     #   ignore=documentation --body 'file:///path/to/imported-api-body.json`.
     #
     # @option params [required, String, IO] :body
-    #   The PUT request body containing external API definitions. Currently,
-    #   only Swagger definition JSON files are supported. The maximum size of
-    #   the API definition file is 2MB.
+    #   \[Required\] The PUT request body containing external API definitions.
+    #   Currently, only Swagger definition JSON files are supported. The
+    #   maximum size of the API definition file is 2MB.
     #
     # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4926,6 +4973,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::RestApi#policy #policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4954,6 +5002,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.policy #=> String
     #
     # @overload put_rest_api(params = {})
     # @param [Hash] params ({})
@@ -4962,16 +5011,17 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
-    # Adds or updates Tags on a gievn resource.
+    # Adds or updates a tag on a given resource.
     #
     # @option params [required, String] :resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. At present,
-    #   Stage is the only taggable resource.
+    #   \[Required\] The ARN of a resource that can be tagged. The resource
+    #   ARN must be URL-encoded. At present, Stage is the only taggable
+    #   resource.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   \[Required\] Key/Value map of strings. Valid character set is
-    #   \[a-zA-Z+-=.\_:/\]. Tag key can be up to 128 characters and must not
-    #   start with "aws:". Tag value can be up to 256 characters.
+    #   \[Required\] The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5003,10 +5053,11 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :authorizer_id
-    #   Specifies a test invoke authorizer request's Authorizer ID.
+    #   \[Required\] Specifies a test invoke authorizer request's Authorizer
+    #   ID.
     #
     # @option params [Hash<String,String>] :headers
     #   \[Required\] A key-value map of headers to simulate an incoming
@@ -5081,13 +5132,13 @@ module Aws::APIGateway
     # parameters, and an incoming request body.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   Specifies a test invoke method request's resource ID.
+    #   \[Required\] Specifies a test invoke method request's resource ID.
     #
     # @option params [required, String] :http_method
-    #   Specifies a test invoke method request's HTTP method.
+    #   \[Required\] Specifies a test invoke method request's HTTP method.
     #
     # @option params [String] :path_with_query_string
     #   The URI path, including query string, of the simulated invocation
@@ -5150,14 +5201,15 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
-    # Removes Tags from a given resource.
+    # Removes a tag from a given resource.
     #
     # @option params [required, String] :resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. At present,
-    #   Stage is the only taggable resource.
+    #   \[Required\] The ARN of a resource that can be tagged. The resource
+    #   ARN must be URL-encoded. At present, Stage is the only taggable
+    #   resource.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The Tag keys to delete.
+    #   \[Required\] The Tag keys to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -5220,7 +5272,7 @@ module Aws::APIGateway
     # Changes information about an ApiKey resource.
     #
     # @option params [required, String] :api_key
-    #   The identifier of the ApiKey resource to be updated.
+    #   \[Required\] The identifier of the ApiKey resource to be updated.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5283,10 +5335,10 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :authorizer_id
-    #   The identifier of the Authorizer resource.
+    #   \[Required\] The identifier of the Authorizer resource.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5344,10 +5396,11 @@ module Aws::APIGateway
     # Changes information about the BasePathMapping resource.
     #
     # @option params [required, String] :domain_name
-    #   The domain name of the BasePathMapping resource to change.
+    #   \[Required\] The domain name of the BasePathMapping resource to
+    #   change.
     #
     # @option params [required, String] :base_path
-    #   The base path of the BasePathMapping resource to change.
+    #   \[Required\] The base path of the BasePathMapping resource to change.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5390,7 +5443,8 @@ module Aws::APIGateway
     # Changes information about an ClientCertificate resource.
     #
     # @option params [required, String] :client_certificate_id
-    #   The identifier of the ClientCertificate resource to be updated.
+    #   \[Required\] The identifier of the ClientCertificate resource to be
+    #   updated.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5436,7 +5490,7 @@ module Aws::APIGateway
     # Changes information about a Deployment resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :deployment_id
     #   The replacement identifier for the Deployment resource to change
@@ -5581,7 +5635,7 @@ module Aws::APIGateway
     # Changes information about the DomainName resource.
     #
     # @option params [required, String] :domain_name
-    #   The name of the DomainName resource to be changed.
+    #   \[Required\] The name of the DomainName resource to be changed.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5641,10 +5695,11 @@ module Aws::APIGateway
     # RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :response_type
-    #   The response type of the associated GatewayResponse. Valid values are
+    #   \[Required\] The response type of the associated GatewayResponse.
+    #   Valid values are
     #   * ACCESS\_DENIED
     #   * API\_CONFIGURATION\_ERROR
     #   * AUTHORIZER\_FAILURE
@@ -5664,7 +5719,7 @@ module Aws::APIGateway
     #   * RESOURCE\_NOT\_FOUND
     #   * THROTTLED
     #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   * UNSUPPORTED\_MEDIA\_TYPE
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5713,13 +5768,14 @@ module Aws::APIGateway
     # Represents an update integration.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   Represents an update integration request's resource identifier.
+    #   \[Required\] Represents an update integration request's resource
+    #   identifier.
     #
     # @option params [required, String] :http_method
-    #   Represents an update integration request's HTTP method.
+    #   \[Required\] Represents an update integration request's HTTP method.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5795,17 +5851,19 @@ module Aws::APIGateway
     # Represents an update integration response.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   Specifies an update integration response request's resource
-    #   identifier.
+    #   \[Required\] Specifies an update integration response request's
+    #   resource identifier.
     #
     # @option params [required, String] :http_method
-    #   Specifies an update integration response request's HTTP method.
+    #   \[Required\] Specifies an update integration response request's HTTP
+    #   method.
     #
     # @option params [required, String] :status_code
-    #   Specifies an update integration response request's status code.
+    #   \[Required\] Specifies an update integration response request's
+    #   status code.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5856,13 +5914,13 @@ module Aws::APIGateway
     # Updates an existing Method resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The Resource identifier for the Method resource.
+    #   \[Required\] The Resource identifier for the Method resource.
     #
     # @option params [required, String] :http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -5953,16 +6011,16 @@ module Aws::APIGateway
     # Updates an existing MethodResponse resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The Resource identifier for the MethodResponse resource.
+    #   \[Required\] The Resource identifier for the MethodResponse resource.
     #
     # @option params [required, String] :http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #
     # @option params [required, String] :status_code
-    #   The status code for the MethodResponse resource.
+    #   \[Required\] The status code for the MethodResponse resource.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -6009,10 +6067,10 @@ module Aws::APIGateway
     # Changes information about a model.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :model_name
-    #   The name of the model to update.
+    #   \[Required\] The name of the model to update.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -6059,7 +6117,7 @@ module Aws::APIGateway
     # Updates a RequestValidator of a given RestApi.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :request_validator_id
     #   \[Required\] The identifier of RequestValidator to be updated.
@@ -6107,10 +6165,10 @@ module Aws::APIGateway
     # Changes information about a Resource resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :resource_id
-    #   The identifier of the Resource resource.
+    #   \[Required\] The identifier of the Resource resource.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -6199,7 +6257,7 @@ module Aws::APIGateway
     # Changes information about the specified API.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -6217,6 +6275,7 @@ module Aws::APIGateway
     #   * {Types::RestApi#minimum_compression_size #minimum_compression_size} => Integer
     #   * {Types::RestApi#api_key_source #api_key_source} => String
     #   * {Types::RestApi#endpoint_configuration #endpoint_configuration} => Types::EndpointConfiguration
+    #   * {Types::RestApi#policy #policy} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6247,6 +6306,7 @@ module Aws::APIGateway
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
     #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.policy #=> String
     #
     # @overload update_rest_api(params = {})
     # @param [Hash] params ({})
@@ -6258,10 +6318,11 @@ module Aws::APIGateway
     # Changes information about a Stage resource.
     #
     # @option params [required, String] :rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #
     # @option params [required, String] :stage_name
-    #   The name of the Stage resource to change information about.
+    #   \[Required\] The name of the Stage resource to change information
+    #   about.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -6346,11 +6407,11 @@ module Aws::APIGateway
     # associated with a specified API key.
     #
     # @option params [required, String] :usage_plan_id
-    #   The Id of the usage plan associated with the usage data.
+    #   \[Required\] The Id of the usage plan associated with the usage data.
     #
     # @option params [required, String] :key_id
-    #   The identifier of the API key associated with the usage plan in which
-    #   a temporary extension is granted to the remaining quota.
+    #   \[Required\] The identifier of the API key associated with the usage
+    #   plan in which a temporary extension is granted to the remaining quota.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -6400,7 +6461,7 @@ module Aws::APIGateway
     # Updates a usage plan of a given plan Id.
     #
     # @option params [required, String] :usage_plan_id
-    #   The Id of the to-be-updated usage plan.
+    #   \[Required\] The Id of the to-be-updated usage plan.
     #
     # @option params [Array<Types::PatchOperation>] :patch_operations
     #   A list of update operations to be applied to the specified resource
@@ -6515,7 +6576,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -95,6 +95,13 @@ module Aws::Lightsail
     # @!attribute [rw] instance_names
     #   An array of strings representing the instance name(s) you want to
     #   attach to your load balancer.
+    #
+    #   An instance must be `running` before you can attach it to your load
+    #   balancer.
+    #
+    #   There are no additional limits on the number of instances you can
+    #   attach to your load balancer, aside from the limit of Lightsail
+    #   instances you can create in your account (20).
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachInstancesToLoadBalancerRequest AWS API Documentation
@@ -126,11 +133,11 @@ module Aws::Lightsail
     #
     # @!attribute [rw] load_balancer_name
     #   The name of the load balancer to which you want to associate the
-    #   TLS/SSL certificate.
+    #   SSL/TLS certificate.
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
-    #   The name of your TLS/SSL certificate.
+    #   The name of your SSL/TLS certificate.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachLoadBalancerTlsCertificateRequest AWS API Documentation
@@ -143,6 +150,10 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An object representing the API operations.
+    #
+    #   These SSL/TLS certificates are only usable by Lightsail load
+    #   balancers. You can't get the certificate and use it for another
+    #   purpose.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachLoadBalancerTlsCertificateResult AWS API Documentation
@@ -917,10 +928,14 @@ module Aws::Lightsail
     #   The path you provided to perform the load balancer health check. If
     #   you didn't specify a health check path, Lightsail uses the root
     #   path of your website (e.g., `"/"`).
+    #
+    #   You may want to specify a custom health check path other than the
+    #   root of your application if your home page loads slowly or has a lot
+    #   of media or scripting on it.
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
-    #   The name of the TLS/SSL certificate.
+    #   The name of the SSL/TLS certificate.
     #
     #   If you specify `certificateName`, then `certificateDomainName` is
     #   required (and vice-versa).
@@ -935,8 +950,9 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] certificate_alternative_names
-    #   The alternative domain names to use with your TLS/SSL certificate
-    #   (e.g., `www.example.com`, `www.ejemplo.com`, `ejemplo.com`).
+    #   The optional alternative domains and subdomains to use with your
+    #   SSL/TLS certificate (e.g., `www.example.com`, `example.com`,
+    #   `m.example.com`, `blog.example.com`).
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerRequest AWS API Documentation
@@ -973,21 +989,34 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] load_balancer_name
-    #   The load balancer name where you want to create the TLS/SSL
+    #   The load balancer name where you want to create the SSL/TLS
     #   certificate.
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
-    #   The TLS/SSL certificate name.
+    #   The SSL/TLS certificate name.
+    #
+    #   You can have up to 10 certificates in your account at one time. Each
+    #   Lightsail load balancer can have up to 2 certificates associated
+    #   with it at one time. There is also an overall limit to the number of
+    #   certificates that can be issue in a 365-day period. For more
+    #   information, see [Limits][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html
     #   @return [String]
     #
     # @!attribute [rw] certificate_domain_name
-    #   The domain name (e.g., `example.com`) for your TLS/SSL certificate.
+    #   The domain name (e.g., `example.com`) for your SSL/TLS certificate.
     #   @return [String]
     #
     # @!attribute [rw] certificate_alternative_names
-    #   An array of strings listing alternative domain names for your
-    #   TLS/SSL certificate.
+    #   An array of strings listing alternative domains and subdomains for
+    #   your SSL/TLS certificate. Lightsail will de-dupe the names for you.
+    #   You can have a maximum of 9 alternative names (in addition to the 1
+    #   primary domain). We do not support wildcards (e.g.,
+    #   `*.example.com`).
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerTlsCertificateRequest AWS API Documentation
@@ -1279,11 +1308,16 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
-    #   The TLS/SSL certificate name.
+    #   The SSL/TLS certificate name.
     #   @return [String]
     #
     # @!attribute [rw] force
-    #   When `true`, forces the deletion of a TLS/SSL certificate.
+    #   When `true`, forces the deletion of an SSL/TLS certificate.
+    #
+    #   There can be two certificates associated with a Lightsail load
+    #   balancer: the primary and the backup. The force parameter is
+    #   required when the primary SSL/TLS certificate is in use by an
+    #   instance attached to the load balancer.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteLoadBalancerTlsCertificateRequest AWS API Documentation
@@ -1672,11 +1706,18 @@ module Aws::Lightsail
     #
     # @!attribute [rw] target
     #   The target AWS name server (e.g., `ns-111.awsdns-22.com.`).
+    #
+    #   For Lightsail load balancers, the value looks like
+    #   `ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com`.
+    #   Be sure to also set `isAlias` to `true` when setting up an A record
+    #   for a load balancer.
     #   @return [String]
     #
     # @!attribute [rw] is_alias
     #   When `true`, specifies whether the domain entry is an alias used by
-    #   the Lightsail load balancer.
+    #   the Lightsail load balancer. You can include an alias (A type)
+    #   record in your request, which points to a load balancer DNS name and
+    #   routes traffic to your load balancer
     #   @return [Boolean]
     #
     # @!attribute [rw] type
@@ -2542,6 +2583,28 @@ module Aws::Lightsail
     # @!attribute [rw] statistics
     #   An array of statistics that you want to request metrics for. Valid
     #   values are listed below.
+    #
+    #   * <b> <code>SampleCount</code> </b> - The count (number) of data
+    #     points used for the statistical calculation.
+    #
+    #   * <b> <code>Average</code> </b> - The value of Sum / SampleCount
+    #     during the specified period. By comparing this statistic with the
+    #     Minimum and Maximum, you can determine the full scope of a metric
+    #     and how close the average use is to the Minimum and Maximum. This
+    #     comparison helps you to know when to increase or decrease your
+    #     resources as needed.
+    #
+    #   * <b> <code>Sum</code> </b> - All values submitted for the matching
+    #     metric added together. This statistic can be useful for
+    #     determining the total volume of a metric.
+    #
+    #   * <b> <code>Minimum</code> </b> - The lowest value observed during
+    #     the specified period. You can use this value to determine low
+    #     volumes of activity for your application.
+    #
+    #   * <b> <code>Maximum</code> </b> - The highest value observed during
+    #     the specified period. You can use this value to determine high
+    #     volumes of activity for your application.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerMetricDataRequest AWS API Documentation
@@ -2559,7 +2622,93 @@ module Aws::Lightsail
 
     # @!attribute [rw] metric_name
     #   The metric about which you are receiving information. Valid values
-    #   are listed below.
+    #   are listed below, along with the most useful `statistics` to include
+    #   in your request.
+    #
+    #   * <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number
+    #     of TLS connections initiated by the client that did not establish
+    #     a session with the load balancer. Possible causes include a
+    #     mismatch of ciphers or protocols.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #   * <b> <code>HealthyHostCount</code> </b> - The number of target
+    #     instances that are considered healthy.
+    #
+    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
+    #     and `Maximum`.
+    #
+    #   * <b> <code>UnhealthyHostCount</code> </b> - The number of target
+    #     instances that are considered unhealthy.
+    #
+    #     `Statistics`\: The most useful statistic are `Average`, `Minimum`,
+    #     and `Maximum`.
+    #
+    #   * <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP
+    #     4XX client error codes that originate from the load balancer.
+    #     Client errors are generated when requests are malformed or
+    #     incomplete. These requests have not been received by the target
+    #     instance. This count does not include any response codes generated
+    #     by the target instances.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP
+    #     5XX server error codes that originate from the load balancer. This
+    #     count does not include any response codes generated by the target
+    #     instances.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of
+    #     HTTP response codes generated by the target instances. This does
+    #     not include any response codes generated by the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of
+    #     HTTP response codes generated by the target instances. This does
+    #     not include any response codes generated by the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of
+    #     HTTP response codes generated by the target instances. This does
+    #     not include any response codes generated by the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of
+    #     HTTP response codes generated by the target instances. This does
+    #     not include any response codes generated by the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
+    #
+    #   * <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in
+    #     seconds, after the request leaves the load balancer until a
+    #     response from the target instance is received.
+    #
+    #     `Statistics`\: The most useful statistic is `Average`.
+    #
+    #   * <b> <code>RejectedConnectionCount</code> </b> - The number of
+    #     connections that were rejected because the load balancer had
+    #     reached its maximum number of connections.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`.
+    #
+    #   * <b> <code>RequestCount</code> </b> - The number of requests
+    #     processed over IPv4. This count includes only the requests with a
+    #     response generated by a target instance of the load balancer.
+    #
+    #     `Statistics`\: The most useful statistic is `Sum`. Note that
+    #     `Minimum`, `Maximum`, and `Average` all return `1`.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
@@ -2611,7 +2760,7 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] load_balancer_name
-    #   The name of the load balancer where you stored your TLS/SSL
+    #   The name of the load balancer you associated with your SSL/TLS
     #   certificate.
     #   @return [String]
     #
@@ -2624,7 +2773,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] tls_certificates
     #   An array of LoadBalancerTlsCertificate objects describing your
-    #   TLS/SSL certificates.
+    #   SSL/TLS certificates.
     #   @return [Array<Types::LoadBalancerTlsCertificate>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerTlsCertificatesResult AWS API Documentation
@@ -3145,7 +3294,65 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] instance_health_reason
-    #   More information about the instance health. Valid values are below.
+    #   More information about the instance health. If the `instanceHealth`
+    #   is `healthy`, then an `instanceHealthReason` value is not provided.
+    #
+    #   If <b> <code>instanceHealth</code> </b> is `initial`, the <b>
+    #   <code>instanceHealthReason</code> </b> value can be one of the
+    #   following:
+    #
+    #   * <b> <code>Lb.RegistrationInProgress</code> </b> - The target
+    #     instance is in the process of being registered with the load
+    #     balancer.
+    #
+    #   * <b> <code>Lb.InitialHealthChecking</code> </b> - The Lightsail
+    #     load balancer is still sending the target instance the minimum
+    #     number of health checks required to determine its health status.
+    #
+    #   If <b> <code>instanceHealth</code> </b> is `unhealthy`, the <b>
+    #   <code>instanceHealthReason</code> </b> value can be one of the
+    #   following:
+    #
+    #   * <b> <code>Instance.ResponseCodeMismatch</code> </b> - The health
+    #     checks did not return an expected HTTP code.
+    #
+    #   * <b> <code>Instance.Timeout</code> </b> - The health check requests
+    #     timed out.
+    #
+    #   * <b> <code>Instance.FailedHealthChecks</code> </b> - The health
+    #     checks failed because the connection to the target instance timed
+    #     out, the target instance response was malformed, or the target
+    #     instance failed the health check for an unknown reason.
+    #
+    #   * <b> <code>Lb.InternalError</code> </b> - The health checks failed
+    #     due to an internal error.
+    #
+    #   If <b> <code>instanceHealth</code> </b> is `unused`, the <b>
+    #   <code>instanceHealthReason</code> </b> value can be one of the
+    #   following:
+    #
+    #   * <b> <code>Instance.NotRegistered</code> </b> - The target instance
+    #     is not registered with the target group.
+    #
+    #   * <b> <code>Instance.NotInUse</code> </b> - The target group is not
+    #     used by any load balancer, or the target instance is in an
+    #     Availability Zone that is not enabled for its load balancer.
+    #
+    #   * <b> <code>Instance.IpUnusable</code> </b> - The target IP address
+    #     is reserved for use by a Lightsail load balancer.
+    #
+    #   * <b> <code>Instance.InvalidState</code> </b> - The target is in the
+    #     stopped or terminated state.
+    #
+    #   If <b> <code>instanceHealth</code> </b> is `draining`, the <b>
+    #   <code>instanceHealthReason</code> </b> value can be one of the
+    #   following:
+    #
+    #   * <b> <code>Instance.DeregistrationInProgress</code> </b> - The
+    #     target instance is in the process of being deregistered and the
+    #     deregistration delay period has not expired.
+    #
+    #   ^
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceHealthSummary AWS API Documentation
@@ -3489,8 +3696,9 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   The AWS Region and Availability Zone where your load balancer was
-    #   created (e.g., `us-east-2a`).
+    #   The AWS Region where your load balancer was created (e.g.,
+    #   `us-east-2a`). Lightsail automatically creates your load balancer
+    #   across Availability Zones.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
@@ -3508,10 +3716,13 @@ module Aws::Lightsail
     # @!attribute [rw] protocol
     #   The protocol you have enabled for your load balancer. Valid values
     #   are below.
+    #
+    #   You can't just have `HTTP_HTTPS`, but you can have just `HTTP`.
     #   @return [String]
     #
     # @!attribute [rw] public_ports
-    #   An array of public port settings for your load balancer.
+    #   An array of public port settings for your load balancer. For HTTP,
+    #   use port 80. For HTTPS, use port 443.
     #   @return [Array<Integer>]
     #
     # @!attribute [rw] health_check_path
@@ -3521,7 +3732,9 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] instance_port
-    #   The instance port where the load balancer is listening.
+    #   The port where the load balancer will direct traffic to your
+    #   Lightsail instances. For HTTP traffic, it's port 80. For HTTPS
+    #   traffic, it's port 443.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_health_summary
@@ -3531,7 +3744,8 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tls_certificate_summaries
     #   An array of LoadBalancerTlsCertificateSummary objects that provide
-    #   additional information about the TLS/SSL certificates.
+    #   additional information about the SSL/TLS certificates. For example,
+    #   if `true`, the certificate is attached to the load balancer.
     #   @return [Array<Types::LoadBalancerTlsCertificateSummary>]
     #
     # @!attribute [rw] configuration_options
@@ -3560,28 +3774,28 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes a load balancer TLS/SSL certificate.
+    # Describes a load balancer SSL/TLS certificate.
     #
     # TLS is just an updated, more secure version of Secure Socket Layer
     # (SSL).
     #
     # @!attribute [rw] name
-    #   The name of the TLS/SSL certificate (e.g., `my-certificate`).
+    #   The name of the SSL/TLS certificate (e.g., `my-certificate`).
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) of the TLS/SSL certificate.
+    #   The Amazon Resource Name (ARN) of the SSL/TLS certificate.
     #   @return [String]
     #
     # @!attribute [rw] support_code
     #   The support code. Include this code in your email to support when
-    #   you have questions about your Lightsail load balancer or TLS/SSL
+    #   you have questions about your Lightsail load balancer or SSL/TLS
     #   certificate. This code enables our support team to look up your
     #   Lightsail information more easily.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time when you created your TLS/SSL certificate.
+    #   The time when you created your SSL/TLS certificate.
     #   @return [Time]
     #
     # @!attribute [rw] location
@@ -3590,24 +3804,48 @@ module Aws::Lightsail
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
-    #   The resource type (e.g., `LoadBalancerTlsCertificate`.
+    #   The resource type (e.g., `LoadBalancerTlsCertificate`).
+    #
+    #   * <b> <code>Instance</code> </b> - A Lightsail instance (a virtual
+    #     private server)
+    #
+    #   * <b> <code>StaticIp</code> </b> - A static IP address
+    #
+    #   * <b> <code>KeyPair</code> </b> - The key pair used to connect to a
+    #     Lightsail instance
+    #
+    #   * <b> <code>InstanceSnapshot</code> </b> - A Lightsail instance
+    #     snapshot
+    #
+    #   * <b> <code>Domain</code> </b> - A DNS zone
+    #
+    #   * <b> <code>PeeredVpc</code> </b> - A peered VPC
+    #
+    #   * <b> <code>LoadBalancer</code> </b> - A Lightsail load balancer
+    #
+    #   * <b> <code>LoadBalancerTlsCertificate</code> </b> - An SSL/TLS
+    #     certificate associated with a Lightsail load balancer
+    #
+    #   * <b> <code>Disk</code> </b> - A Lightsail block storage disk
+    #
+    #   * <b> <code>DiskSnapshot</code> </b> - A block storage disk snapshot
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
-    #   The load balancer name where your TLS/SSL certificate is attached.
+    #   The load balancer name where your SSL/TLS certificate is attached.
     #   @return [String]
     #
     # @!attribute [rw] is_attached
-    #   When `true`, the TLS/SSL certificate is attached to the Lightsail
+    #   When `true`, the SSL/TLS certificate is attached to the Lightsail
     #   load balancer.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
-    #   The status of the TLS/SSL certificate. Valid values are below.
+    #   The status of the SSL/TLS certificate. Valid values are below.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   The domain name for your TLS/SSL certificate.
+    #   The domain name for your SSL/TLS certificate.
     #   @return [String]
     #
     # @!attribute [rw] domain_validation_records
@@ -3616,11 +3854,11 @@ module Aws::Lightsail
     #   @return [Array<Types::LoadBalancerTlsCertificateDomainValidationRecord>]
     #
     # @!attribute [rw] failure_reason
-    #   The reason for the TLS/SSL certificate validation failure.
+    #   The reason for the SSL/TLS certificate validation failure.
     #   @return [String]
     #
     # @!attribute [rw] issued_at
-    #   The time when the TLS/SSL certificate was issued.
+    #   The time when the SSL/TLS certificate was issued.
     #   @return [Time]
     #
     # @!attribute [rw] issuer
@@ -3633,11 +3871,11 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] not_after
-    #   The timestamp when the TLS/SSL certificate expires.
+    #   The timestamp when the SSL/TLS certificate expires.
     #   @return [Time]
     #
     # @!attribute [rw] not_before
-    #   The timestamp when the TLS/SSL certificate is first valid.
+    #   The timestamp when the SSL/TLS certificate is first valid.
     #   @return [Time]
     #
     # @!attribute [rw] renewal_summary
@@ -3650,7 +3888,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] revoked_at
-    #   The timestamp when the TLS/SSL certificate was revoked.
+    #   The timestamp when the SSL/TLS certificate was revoked.
     #   @return [Time]
     #
     # @!attribute [rw] serial
@@ -3667,12 +3905,12 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
-    #   One or more domain names (subject alternative names) included in the
-    #   certificate. This list contains the domain names that are bound to
-    #   the public key that is contained in the certificate. The subject
-    #   alternative names include the canonical domain name (CN) of the
-    #   certificate and additional domain names that can be used to connect
-    #   to the website.
+    #   One or more domains or subdomains included in the certificate. This
+    #   list contains the domain names that are bound to the public key that
+    #   is contained in the certificate. The subject alternative names
+    #   include the canonical domain name (CNAME) of the certificate and
+    #   additional domain names that can be used to connect to the website,
+    #   such as `example.com`, `www.example.com`, or `m.example.com`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificate AWS API Documentation
@@ -3705,11 +3943,11 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Contains information about the domain names on a TLS/SSL certificate
+    # Contains information about the domain names on an SSL/TLS certificate
     # that you will use to validate domain ownership.
     #
     # @!attribute [rw] domain_name
-    #   A fully qualified domain name in the certificate request.
+    #   The fully qualified domain name in the certificate request.
     #   @return [String]
     #
     # @!attribute [rw] validation_status
@@ -3724,7 +3962,7 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Describes the validation record of each domain name in the TLS/SSL
+    # Describes the validation record of each domain name in the SSL/TLS
     # certificate.
     #
     # @!attribute [rw] name
@@ -3746,7 +3984,7 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   The domain name against which your TLS/SSL certificate was
+    #   The domain name against which your SSL/TLS certificate was
     #   validated.
     #   @return [String]
     #
@@ -3784,14 +4022,14 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
-    # Provides a summary of TLS/SSL certificate metadata.
+    # Provides a summary of SSL/TLS certificate metadata.
     #
     # @!attribute [rw] name
-    #   The name of the TLS/SSL certificate.
+    #   The name of the SSL/TLS certificate.
     #   @return [String]
     #
     # @!attribute [rw] is_attached
-    #   When `true`, the TLS/SSL certificate is attached to the Lightsail
+    #   When `true`, the SSL/TLS certificate is attached to the Lightsail
     #   load balancer.
     #   @return [Boolean]
     #
@@ -4124,7 +4362,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] operations
     #   An array of key-value pairs containing information about the request
-    #   operation.
+    #   operations.
     #   @return [Array<Types::Operation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootInstanceResult AWS API Documentation
@@ -4422,7 +4660,8 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] load_balancer_name
-    #   The name of the load balancer that you want to modify.
+    #   The name of the load balancer that you want to modify (e.g.,
+    #   `my-load-balancer`.
     #   @return [String]
     #
     # @!attribute [rw] attribute_name

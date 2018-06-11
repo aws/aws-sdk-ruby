@@ -454,8 +454,11 @@ module Aws::CodePipeline
     # will fail after the action is marked for deletion. Only used for
     # custom actions.
     #
-    # You cannot recreate a custom action after it has been deleted unless
-    # you increase the version number of the action.
+    # To re-create a custom action after it has been deleted you must use a
+    # string in the version field that has never been used before. This
+    # string can be an incremented version number, for example. To restore a
+    # deleted custom action, use a JSON file that is identical to the
+    # deleted action, including the original string in the version field.
     #
     # @option params [required, String] :category
     #   The category of the custom action that you want to delete, such as
@@ -506,6 +509,57 @@ module Aws::CodePipeline
     # @param [Hash] params ({})
     def delete_pipeline(params = {}, options = {})
       req = build_request(:delete_pipeline, params)
+      req.send_request(options)
+    end
+
+    # Deletes a previously created webhook by name. Deleting the webhook
+    # stops AWS CodePipeline from starting a pipeline every time an external
+    # event occurs. The API will return successfully when trying to delete a
+    # webhook that is already deleted. If a deleted webhook is re-created by
+    # calling PutWebhook with the same name, it will have a different URL.
+    #
+    # @option params [required, String] :name
+    #   The name of the webhook you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_webhook({
+    #     name: "WebhookName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteWebhook AWS API Documentation
+    #
+    # @overload delete_webhook(params = {})
+    # @param [Hash] params ({})
+    def delete_webhook(params = {}, options = {})
+      req = build_request(:delete_webhook, params)
+      req.send_request(options)
+    end
+
+    # Removes the connection between the webhook that was created by
+    # CodePipeline and the external tool with events to be detected.
+    # Currently only supported for webhooks that target an action type of
+    # GitHub.
+    #
+    # @option params [String] :webhook_name
+    #   The name of the webhook you want to deregister.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_webhook_with_third_party({
+    #     webhook_name: "WebhookName",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeregisterWebhookWithThirdParty AWS API Documentation
+    #
+    # @overload deregister_webhook_with_third_party(params = {})
+    # @param [Hash] params ({})
+    def deregister_webhook_with_third_party(params = {}, options = {})
+      req = build_request(:deregister_webhook_with_third_party, params)
       req.send_request(options)
     end
 
@@ -989,6 +1043,11 @@ module Aws::CodePipeline
     #   resp.pipeline_execution_summaries[0].status #=> String, one of "InProgress", "Succeeded", "Superseded", "Failed"
     #   resp.pipeline_execution_summaries[0].start_time #=> Time
     #   resp.pipeline_execution_summaries[0].last_update_time #=> Time
+    #   resp.pipeline_execution_summaries[0].source_revisions #=> Array
+    #   resp.pipeline_execution_summaries[0].source_revisions[0].action_name #=> String
+    #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_id #=> String
+    #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_summary #=> String
+    #   resp.pipeline_execution_summaries[0].source_revisions[0].revision_url #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelineExecutions AWS API Documentation
@@ -1035,7 +1094,63 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Gets a listing of all the webhooks in this region for this account.
+    # The output lists all webhooks and includes the webhook URL and ARN, as
+    # well the configuration for each webhook.
+    #
+    # @option params [String] :next_token
+    #   The token that was returned from the previous ListWebhooks call, which
+    #   can be used to return the next set of webhooks in the list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned nextToken
+    #   value.
+    #
+    # @return [Types::ListWebhooksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWebhooksOutput#webhooks #webhooks} => Array&lt;Types::ListWebhookItem&gt;
+    #   * {Types::ListWebhooksOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_webhooks({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.webhooks #=> Array
+    #   resp.webhooks[0].definition.name #=> String
+    #   resp.webhooks[0].definition.target_pipeline #=> String
+    #   resp.webhooks[0].definition.target_action #=> String
+    #   resp.webhooks[0].definition.filters #=> Array
+    #   resp.webhooks[0].definition.filters[0].json_path #=> String
+    #   resp.webhooks[0].definition.filters[0].match_equals #=> String
+    #   resp.webhooks[0].definition.authentication #=> String, one of "GITHUB_HMAC", "IP", "UNAUTHENTICATED"
+    #   resp.webhooks[0].definition.authentication_configuration.allowed_ip_range #=> String
+    #   resp.webhooks[0].definition.authentication_configuration.secret_token #=> String
+    #   resp.webhooks[0].url #=> String
+    #   resp.webhooks[0].error_message #=> String
+    #   resp.webhooks[0].error_code #=> String
+    #   resp.webhooks[0].last_triggered #=> Time
+    #   resp.webhooks[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhooks AWS API Documentation
+    #
+    # @overload list_webhooks(params = {})
+    # @param [Hash] params ({})
+    def list_webhooks(params = {}, options = {})
+      req = build_request(:list_webhooks, params)
+      req.send_request(options)
+    end
+
     # Returns information about any jobs for AWS CodePipeline to act upon.
+    # PollForJobs is only valid for action types with "Custom" in the
+    # owner field. If the action type contains "AWS" or "ThirdParty" in
+    # the owner field, the PollForJobs action returns an error.
     #
     # When this API is called, AWS CodePipeline returns temporary
     # credentials for the Amazon S3 bucket used to store artifacts for the
@@ -1443,6 +1558,98 @@ module Aws::CodePipeline
       req.send_request(options)
     end
 
+    # Defines a webhook and returns a unique webhook URL generated by
+    # CodePipeline. This URL can be supplied to third party source hosting
+    # providers to call every time there's a code change. When CodePipeline
+    # receives a POST request on this URL, the pipeline defined in the
+    # webhook is started as long as the POST request satisfied the
+    # authentication and filtering requirements supplied when defining the
+    # webhook. RegisterWebhookWithThirdParty and
+    # DeregisterWebhookWithThirdParty APIs can be used to automatically
+    # configure supported third parties to call the generated webhook URL.
+    #
+    # @option params [required, Types::WebhookDefinition] :webhook
+    #   The detail provided in an input file to create the webhook, such as
+    #   the webhook name, the pipeline name, and the action name. Give the
+    #   webhook a unique name which identifies the webhook being defined. You
+    #   may choose to name the webhook after the pipeline and action it
+    #   targets so that you can easily recognize what it's used for later.
+    #
+    # @return [Types::PutWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutWebhookOutput#webhook #webhook} => Types::ListWebhookItem
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_webhook({
+    #     webhook: { # required
+    #       name: "WebhookName", # required
+    #       target_pipeline: "PipelineName", # required
+    #       target_action: "ActionName", # required
+    #       filters: [ # required
+    #         {
+    #           json_path: "JsonPath", # required
+    #           match_equals: "MatchEquals",
+    #         },
+    #       ],
+    #       authentication: "GITHUB_HMAC", # required, accepts GITHUB_HMAC, IP, UNAUTHENTICATED
+    #       authentication_configuration: { # required
+    #         allowed_ip_range: "WebhookAuthConfigurationAllowedIPRange",
+    #         secret_token: "WebhookAuthConfigurationSecretToken",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.webhook.definition.name #=> String
+    #   resp.webhook.definition.target_pipeline #=> String
+    #   resp.webhook.definition.target_action #=> String
+    #   resp.webhook.definition.filters #=> Array
+    #   resp.webhook.definition.filters[0].json_path #=> String
+    #   resp.webhook.definition.filters[0].match_equals #=> String
+    #   resp.webhook.definition.authentication #=> String, one of "GITHUB_HMAC", "IP", "UNAUTHENTICATED"
+    #   resp.webhook.definition.authentication_configuration.allowed_ip_range #=> String
+    #   resp.webhook.definition.authentication_configuration.secret_token #=> String
+    #   resp.webhook.url #=> String
+    #   resp.webhook.error_message #=> String
+    #   resp.webhook.error_code #=> String
+    #   resp.webhook.last_triggered #=> Time
+    #   resp.webhook.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhook AWS API Documentation
+    #
+    # @overload put_webhook(params = {})
+    # @param [Hash] params ({})
+    def put_webhook(params = {}, options = {})
+      req = build_request(:put_webhook, params)
+      req.send_request(options)
+    end
+
+    # Configures a connection between the webhook that was created and the
+    # external tool with events to be detected.
+    #
+    # @option params [String] :webhook_name
+    #   The name of an existing webhook created with PutWebhook to register
+    #   with a supported third party.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_webhook_with_third_party({
+    #     webhook_name: "WebhookName",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RegisterWebhookWithThirdParty AWS API Documentation
+    #
+    # @overload register_webhook_with_third_party(params = {})
+    # @param [Hash] params ({})
+    def register_webhook_with_third_party(params = {}, options = {})
+      req = build_request(:register_webhook_with_third_party, params)
+      req.send_request(options)
+    end
+
     # Resumes the pipeline execution by retrying the last failed actions in
     # a stage.
     #
@@ -1635,7 +1842,7 @@ module Aws::CodePipeline
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codepipeline'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

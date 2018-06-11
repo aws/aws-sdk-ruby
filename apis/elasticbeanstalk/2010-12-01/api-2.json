@@ -6,6 +6,7 @@
     "protocol":"query",
     "serviceAbbreviation":"Elastic Beanstalk",
     "serviceFullName":"AWS Elastic Beanstalk",
+    "serviceId":"Elastic Beanstalk",
     "signatureVersion":"v4",
     "uid":"elasticbeanstalk-2010-12-01",
     "xmlNamespace":"http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"
@@ -226,6 +227,20 @@
         {"shape":"InsufficientPrivilegesException"},
         {"shape":"ElasticBeanstalkServiceException"},
         {"shape":"PlatformVersionStillReferencedException"}
+      ]
+    },
+    "DescribeAccountAttributes":{
+      "name":"DescribeAccountAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "output":{
+        "shape":"DescribeAccountAttributesResult",
+        "resultWrapper":"DescribeAccountAttributesResult"
+      },
+      "errors":[
+        {"shape":"InsufficientPrivilegesException"}
       ]
     },
     "DescribeApplicationVersions":{
@@ -643,9 +658,11 @@
         "Unknown"
       ]
     },
+    "ApplicationArn":{"type":"string"},
     "ApplicationDescription":{
       "type":"structure",
       "members":{
+        "ApplicationArn":{"shape":"ApplicationArn"},
         "ApplicationName":{"shape":"ApplicationName"},
         "Description":{"shape":"Description"},
         "DateCreated":{"shape":"CreationDate"},
@@ -703,9 +720,11 @@
         "ResourceLifecycleConfig":{"shape":"ApplicationResourceLifecycleConfig"}
       }
     },
+    "ApplicationVersionArn":{"type":"string"},
     "ApplicationVersionDescription":{
       "type":"structure",
       "members":{
+        "ApplicationVersionArn":{"shape":"ApplicationVersionArn"},
         "ApplicationName":{"shape":"ApplicationName"},
         "Description":{"shape":"Description"},
         "VersionLabel":{"shape":"VersionLabel"},
@@ -1156,6 +1175,12 @@
       }
     },
     "DeploymentTimestamp":{"type":"timestamp"},
+    "DescribeAccountAttributesResult":{
+      "type":"structure",
+      "members":{
+        "ResourceQuotas":{"shape":"ResourceQuotas"}
+      }
+    },
     "DescribeApplicationVersionsMessage":{
       "type":"structure",
       "members":{
@@ -1990,6 +2015,22 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "ResourceQuota":{
+      "type":"structure",
+      "members":{
+        "Maximum":{"shape":"BoxedInt"}
+      }
+    },
+    "ResourceQuotas":{
+      "type":"structure",
+      "members":{
+        "ApplicationQuota":{"shape":"ResourceQuota"},
+        "ApplicationVersionQuota":{"shape":"ResourceQuota"},
+        "EnvironmentQuota":{"shape":"ResourceQuota"},
+        "ConfigurationTemplateQuota":{"shape":"ResourceQuota"},
+        "CustomPlatformQuota":{"shape":"ResourceQuota"}
+      }
     },
     "ResourceTagsDescriptionMessage":{
       "type":"structure",

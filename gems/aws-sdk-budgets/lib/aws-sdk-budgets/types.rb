@@ -55,7 +55,7 @@ module Aws::Budgets
     #             unit: "UnitValue", # required
     #           },
     #         },
-    #         budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
+    #         budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
     #       }
     #
     # @!attribute [rw] budget_name
@@ -309,7 +309,7 @@ module Aws::Budgets
     #               unit: "UnitValue", # required
     #             },
     #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
+    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
     #         },
     #         notifications_with_subscribers: [
     #           {
@@ -1031,7 +1031,7 @@ module Aws::Budgets
     #               unit: "UnitValue", # required
     #             },
     #           },
-    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
+    #           budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
     #         },
     #       }
     #

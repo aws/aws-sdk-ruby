@@ -46,6 +46,19 @@
         {"shape":"ResourceLimitExceeded"}
       ]
     },
+    "CreateHyperParameterTuningJob":{
+      "name":"CreateHyperParameterTuningJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateHyperParameterTuningJobRequest"},
+      "output":{"shape":"CreateHyperParameterTuningJobResponse"},
+      "errors":[
+        {"shape":"ResourceInUse"},
+        {"shape":"ResourceLimitExceeded"}
+      ]
+    },
     "CreateModel":{
       "name":"CreateModel",
       "http":{
@@ -66,6 +79,18 @@
       },
       "input":{"shape":"CreateNotebookInstanceInput"},
       "output":{"shape":"CreateNotebookInstanceOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ]
+    },
+    "CreateNotebookInstanceLifecycleConfig":{
+      "name":"CreateNotebookInstanceLifecycleConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateNotebookInstanceLifecycleConfigInput"},
+      "output":{"shape":"CreateNotebookInstanceLifecycleConfigOutput"},
       "errors":[
         {"shape":"ResourceLimitExceeded"}
       ]
@@ -124,6 +149,14 @@
       },
       "input":{"shape":"DeleteNotebookInstanceInput"}
     },
+    "DeleteNotebookInstanceLifecycleConfig":{
+      "name":"DeleteNotebookInstanceLifecycleConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteNotebookInstanceLifecycleConfigInput"}
+    },
     "DeleteTags":{
       "name":"DeleteTags",
       "http":{
@@ -151,6 +184,18 @@
       "input":{"shape":"DescribeEndpointConfigInput"},
       "output":{"shape":"DescribeEndpointConfigOutput"}
     },
+    "DescribeHyperParameterTuningJob":{
+      "name":"DescribeHyperParameterTuningJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeHyperParameterTuningJobRequest"},
+      "output":{"shape":"DescribeHyperParameterTuningJobResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ]
+    },
     "DescribeModel":{
       "name":"DescribeModel",
       "http":{
@@ -168,6 +213,15 @@
       },
       "input":{"shape":"DescribeNotebookInstanceInput"},
       "output":{"shape":"DescribeNotebookInstanceOutput"}
+    },
+    "DescribeNotebookInstanceLifecycleConfig":{
+      "name":"DescribeNotebookInstanceLifecycleConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeNotebookInstanceLifecycleConfigInput"},
+      "output":{"shape":"DescribeNotebookInstanceLifecycleConfigOutput"}
     },
     "DescribeTrainingJob":{
       "name":"DescribeTrainingJob",
@@ -199,6 +253,15 @@
       "input":{"shape":"ListEndpointsInput"},
       "output":{"shape":"ListEndpointsOutput"}
     },
+    "ListHyperParameterTuningJobs":{
+      "name":"ListHyperParameterTuningJobs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListHyperParameterTuningJobsRequest"},
+      "output":{"shape":"ListHyperParameterTuningJobsResponse"}
+    },
     "ListModels":{
       "name":"ListModels",
       "http":{
@@ -207,6 +270,15 @@
       },
       "input":{"shape":"ListModelsInput"},
       "output":{"shape":"ListModelsOutput"}
+    },
+    "ListNotebookInstanceLifecycleConfigs":{
+      "name":"ListNotebookInstanceLifecycleConfigs",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListNotebookInstanceLifecycleConfigsInput"},
+      "output":{"shape":"ListNotebookInstanceLifecycleConfigsOutput"}
     },
     "ListNotebookInstances":{
       "name":"ListNotebookInstances",
@@ -235,6 +307,18 @@
       "input":{"shape":"ListTrainingJobsRequest"},
       "output":{"shape":"ListTrainingJobsResponse"}
     },
+    "ListTrainingJobsForHyperParameterTuningJob":{
+      "name":"ListTrainingJobsForHyperParameterTuningJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTrainingJobsForHyperParameterTuningJobRequest"},
+      "output":{"shape":"ListTrainingJobsForHyperParameterTuningJobResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ]
+    },
     "StartNotebookInstance":{
       "name":"StartNotebookInstance",
       "http":{
@@ -244,6 +328,17 @@
       "input":{"shape":"StartNotebookInstanceInput"},
       "errors":[
         {"shape":"ResourceLimitExceeded"}
+      ]
+    },
+    "StopHyperParameterTuningJob":{
+      "name":"StopHyperParameterTuningJob",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopHyperParameterTuningJobRequest"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
       ]
     },
     "StopNotebookInstance":{
@@ -300,6 +395,18 @@
       "errors":[
         {"shape":"ResourceLimitExceeded"}
       ]
+    },
+    "UpdateNotebookInstanceLifecycleConfig":{
+      "name":"UpdateNotebookInstanceLifecycleConfig",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateNotebookInstanceLifecycleConfigInput"},
+      "output":{"shape":"UpdateNotebookInstanceLifecycleConfigOutput"},
+      "errors":[
+        {"shape":"ResourceLimitExceeded"}
+      ]
     }
   },
   "shapes":{
@@ -334,6 +441,23 @@
         "TrainingImage":{"shape":"AlgorithmImage"},
         "TrainingInputMode":{"shape":"TrainingInputMode"}
       }
+    },
+    "CategoricalParameterRange":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Values"
+      ],
+      "members":{
+        "Name":{"shape":"ParameterKey"},
+        "Values":{"shape":"ParameterValues"}
+      }
+    },
+    "CategoricalParameterRanges":{
+      "type":"list",
+      "member":{"shape":"CategoricalParameterRange"},
+      "max":20,
+      "min":0
     },
     "Channel":{
       "type":"structure",
@@ -381,6 +505,25 @@
       "type":"string",
       "max":256
     },
+    "ContinuousParameterRange":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "MinValue",
+        "MaxValue"
+      ],
+      "members":{
+        "Name":{"shape":"ParameterKey"},
+        "MinValue":{"shape":"ParameterValue"},
+        "MaxValue":{"shape":"ParameterValue"}
+      }
+    },
+    "ContinuousParameterRanges":{
+      "type":"list",
+      "member":{"shape":"ContinuousParameterRange"},
+      "max":20,
+      "min":0
+    },
     "CreateEndpointConfigInput":{
       "type":"structure",
       "required":[
@@ -420,6 +563,27 @@
         "EndpointArn":{"shape":"EndpointArn"}
       }
     },
+    "CreateHyperParameterTuningJobRequest":{
+      "type":"structure",
+      "required":[
+        "HyperParameterTuningJobName",
+        "HyperParameterTuningJobConfig",
+        "TrainingJobDefinition"
+      ],
+      "members":{
+        "HyperParameterTuningJobName":{"shape":"HyperParameterTuningJobName"},
+        "HyperParameterTuningJobConfig":{"shape":"HyperParameterTuningJobConfig"},
+        "TrainingJobDefinition":{"shape":"HyperParameterTrainingJobDefinition"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CreateHyperParameterTuningJobResponse":{
+      "type":"structure",
+      "required":["HyperParameterTuningJobArn"],
+      "members":{
+        "HyperParameterTuningJobArn":{"shape":"HyperParameterTuningJobArn"}
+      }
+    },
     "CreateModelInput":{
       "type":"structure",
       "required":[
@@ -431,7 +595,8 @@
         "ModelName":{"shape":"ModelName"},
         "PrimaryContainer":{"shape":"ContainerDefinition"},
         "ExecutionRoleArn":{"shape":"RoleArn"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "VpcConfig":{"shape":"VpcConfig"}
       }
     },
     "CreateModelOutput":{
@@ -455,7 +620,24 @@
         "SecurityGroupIds":{"shape":"SecurityGroupIds"},
         "RoleArn":{"shape":"RoleArn"},
         "KmsKeyId":{"shape":"KmsKeyId"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "LifecycleConfigName":{"shape":"NotebookInstanceLifecycleConfigName"},
+        "DirectInternetAccess":{"shape":"DirectInternetAccess"}
+      }
+    },
+    "CreateNotebookInstanceLifecycleConfigInput":{
+      "type":"structure",
+      "required":["NotebookInstanceLifecycleConfigName"],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{"shape":"NotebookInstanceLifecycleConfigName"},
+        "OnCreate":{"shape":"NotebookInstanceLifecycleConfigList"},
+        "OnStart":{"shape":"NotebookInstanceLifecycleConfigList"}
+      }
+    },
+    "CreateNotebookInstanceLifecycleConfigOutput":{
+      "type":"structure",
+      "members":{
+        "NotebookInstanceLifecycleConfigArn":{"shape":"NotebookInstanceLifecycleConfigArn"}
       }
     },
     "CreateNotebookInstanceOutput":{
@@ -497,6 +679,7 @@
         "InputDataConfig":{"shape":"InputDataConfig"},
         "OutputDataConfig":{"shape":"OutputDataConfig"},
         "ResourceConfig":{"shape":"ResourceConfig"},
+        "VpcConfig":{"shape":"VpcConfig"},
         "StoppingCondition":{"shape":"StoppingCondition"},
         "Tags":{"shape":"TagList"}
       }
@@ -542,6 +725,13 @@
       "required":["NotebookInstanceName"],
       "members":{
         "NotebookInstanceName":{"shape":"NotebookInstanceName"}
+      }
+    },
+    "DeleteNotebookInstanceLifecycleConfigInput":{
+      "type":"structure",
+      "required":["NotebookInstanceLifecycleConfigName"],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{"shape":"NotebookInstanceLifecycleConfigName"}
       }
     },
     "DeleteTagsInput":{
@@ -611,6 +801,40 @@
         "LastModifiedTime":{"shape":"Timestamp"}
       }
     },
+    "DescribeHyperParameterTuningJobRequest":{
+      "type":"structure",
+      "required":["HyperParameterTuningJobName"],
+      "members":{
+        "HyperParameterTuningJobName":{"shape":"HyperParameterTuningJobName"}
+      }
+    },
+    "DescribeHyperParameterTuningJobResponse":{
+      "type":"structure",
+      "required":[
+        "HyperParameterTuningJobName",
+        "HyperParameterTuningJobArn",
+        "HyperParameterTuningJobConfig",
+        "TrainingJobDefinition",
+        "HyperParameterTuningJobStatus",
+        "CreationTime",
+        "TrainingJobStatusCounters",
+        "ObjectiveStatusCounters"
+      ],
+      "members":{
+        "HyperParameterTuningJobName":{"shape":"HyperParameterTuningJobName"},
+        "HyperParameterTuningJobArn":{"shape":"HyperParameterTuningJobArn"},
+        "HyperParameterTuningJobConfig":{"shape":"HyperParameterTuningJobConfig"},
+        "TrainingJobDefinition":{"shape":"HyperParameterTrainingJobDefinition"},
+        "HyperParameterTuningJobStatus":{"shape":"HyperParameterTuningJobStatus"},
+        "CreationTime":{"shape":"Timestamp"},
+        "HyperParameterTuningEndTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "TrainingJobStatusCounters":{"shape":"TrainingJobStatusCounters"},
+        "ObjectiveStatusCounters":{"shape":"ObjectiveStatusCounters"},
+        "BestTrainingJob":{"shape":"HyperParameterTrainingJobSummary"},
+        "FailureReason":{"shape":"FailureReason"}
+      }
+    },
     "DescribeModelInput":{
       "type":"structure",
       "required":["ModelName"],
@@ -631,6 +855,7 @@
         "ModelName":{"shape":"ModelName"},
         "PrimaryContainer":{"shape":"ContainerDefinition"},
         "ExecutionRoleArn":{"shape":"RoleArn"},
+        "VpcConfig":{"shape":"VpcConfig"},
         "CreationTime":{"shape":"Timestamp"},
         "ModelArn":{"shape":"ModelArn"}
       }
@@ -640,6 +865,24 @@
       "required":["NotebookInstanceName"],
       "members":{
         "NotebookInstanceName":{"shape":"NotebookInstanceName"}
+      }
+    },
+    "DescribeNotebookInstanceLifecycleConfigInput":{
+      "type":"structure",
+      "required":["NotebookInstanceLifecycleConfigName"],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{"shape":"NotebookInstanceLifecycleConfigName"}
+      }
+    },
+    "DescribeNotebookInstanceLifecycleConfigOutput":{
+      "type":"structure",
+      "members":{
+        "NotebookInstanceLifecycleConfigArn":{"shape":"NotebookInstanceLifecycleConfigArn"},
+        "NotebookInstanceLifecycleConfigName":{"shape":"NotebookInstanceLifecycleConfigName"},
+        "OnCreate":{"shape":"NotebookInstanceLifecycleConfigList"},
+        "OnStart":{"shape":"NotebookInstanceLifecycleConfigList"},
+        "LastModifiedTime":{"shape":"LastModifiedTime"},
+        "CreationTime":{"shape":"CreationTime"}
       }
     },
     "DescribeNotebookInstanceOutput":{
@@ -657,7 +900,9 @@
         "KmsKeyId":{"shape":"KmsKeyId"},
         "NetworkInterfaceId":{"shape":"NetworkInterfaceId"},
         "LastModifiedTime":{"shape":"LastModifiedTime"},
-        "CreationTime":{"shape":"CreationTime"}
+        "CreationTime":{"shape":"CreationTime"},
+        "NotebookInstanceLifecycleConfigName":{"shape":"NotebookInstanceLifecycleConfigName"},
+        "DirectInternetAccess":{"shape":"DirectInternetAccess"}
       }
     },
     "DescribeTrainingJobRequest":{
@@ -684,6 +929,7 @@
       "members":{
         "TrainingJobName":{"shape":"TrainingJobName"},
         "TrainingJobArn":{"shape":"TrainingJobArn"},
+        "TuningJobArn":{"shape":"HyperParameterTuningJobArn"},
         "ModelArtifacts":{"shape":"ModelArtifacts"},
         "TrainingJobStatus":{"shape":"TrainingJobStatus"},
         "SecondaryStatus":{"shape":"SecondaryStatus"},
@@ -694,6 +940,7 @@
         "InputDataConfig":{"shape":"InputDataConfig"},
         "OutputDataConfig":{"shape":"OutputDataConfig"},
         "ResourceConfig":{"shape":"ResourceConfig"},
+        "VpcConfig":{"shape":"VpcConfig"},
         "StoppingCondition":{"shape":"StoppingCondition"},
         "CreationTime":{"shape":"Timestamp"},
         "TrainingStartTime":{"shape":"Timestamp"},
@@ -714,6 +961,13 @@
       "type":"list",
       "member":{"shape":"DesiredWeightAndCapacity"},
       "min":1
+    },
+    "DirectInternetAccess":{
+      "type":"string",
+      "enum":[
+        "Enabled",
+        "Disabled"
+      ]
     },
     "EndpointArn":{
       "type":"string",
@@ -827,6 +1081,171 @@
       "type":"string",
       "max":1024
     },
+    "FinalHyperParameterTuningJobObjectiveMetric":{
+      "type":"structure",
+      "required":[
+        "MetricName",
+        "Value"
+      ],
+      "members":{
+        "Type":{"shape":"HyperParameterTuningJobObjectiveType"},
+        "MetricName":{"shape":"MetricName"},
+        "Value":{"shape":"MetricValue"}
+      }
+    },
+    "HyperParameterAlgorithmSpecification":{
+      "type":"structure",
+      "required":[
+        "TrainingImage",
+        "TrainingInputMode"
+      ],
+      "members":{
+        "TrainingImage":{"shape":"AlgorithmImage"},
+        "TrainingInputMode":{"shape":"TrainingInputMode"},
+        "MetricDefinitions":{"shape":"MetricDefinitionList"}
+      }
+    },
+    "HyperParameterTrainingJobDefinition":{
+      "type":"structure",
+      "required":[
+        "AlgorithmSpecification",
+        "RoleArn",
+        "InputDataConfig",
+        "OutputDataConfig",
+        "ResourceConfig",
+        "StoppingCondition"
+      ],
+      "members":{
+        "StaticHyperParameters":{"shape":"HyperParameters"},
+        "AlgorithmSpecification":{"shape":"HyperParameterAlgorithmSpecification"},
+        "RoleArn":{"shape":"RoleArn"},
+        "InputDataConfig":{"shape":"InputDataConfig"},
+        "VpcConfig":{"shape":"VpcConfig"},
+        "OutputDataConfig":{"shape":"OutputDataConfig"},
+        "ResourceConfig":{"shape":"ResourceConfig"},
+        "StoppingCondition":{"shape":"StoppingCondition"}
+      }
+    },
+    "HyperParameterTrainingJobSummaries":{
+      "type":"list",
+      "member":{"shape":"HyperParameterTrainingJobSummary"}
+    },
+    "HyperParameterTrainingJobSummary":{
+      "type":"structure",
+      "required":[
+        "TrainingJobName",
+        "TrainingJobArn",
+        "CreationTime",
+        "TrainingJobStatus",
+        "TunedHyperParameters"
+      ],
+      "members":{
+        "TrainingJobName":{"shape":"TrainingJobName"},
+        "TrainingJobArn":{"shape":"TrainingJobArn"},
+        "CreationTime":{"shape":"Timestamp"},
+        "TrainingStartTime":{"shape":"Timestamp"},
+        "TrainingEndTime":{"shape":"Timestamp"},
+        "TrainingJobStatus":{"shape":"TrainingJobStatus"},
+        "TunedHyperParameters":{"shape":"HyperParameters"},
+        "FailureReason":{"shape":"FailureReason"},
+        "FinalHyperParameterTuningJobObjectiveMetric":{"shape":"FinalHyperParameterTuningJobObjectiveMetric"},
+        "ObjectiveStatus":{"shape":"ObjectiveStatus"}
+      }
+    },
+    "HyperParameterTuningJobArn":{
+      "type":"string",
+      "max":256,
+      "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:hyper-parameter-tuning-job/.*"
+    },
+    "HyperParameterTuningJobConfig":{
+      "type":"structure",
+      "required":[
+        "Strategy",
+        "HyperParameterTuningJobObjective",
+        "ResourceLimits",
+        "ParameterRanges"
+      ],
+      "members":{
+        "Strategy":{"shape":"HyperParameterTuningJobStrategyType"},
+        "HyperParameterTuningJobObjective":{"shape":"HyperParameterTuningJobObjective"},
+        "ResourceLimits":{"shape":"ResourceLimits"},
+        "ParameterRanges":{"shape":"ParameterRanges"}
+      }
+    },
+    "HyperParameterTuningJobName":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "HyperParameterTuningJobObjective":{
+      "type":"structure",
+      "required":[
+        "Type",
+        "MetricName"
+      ],
+      "members":{
+        "Type":{"shape":"HyperParameterTuningJobObjectiveType"},
+        "MetricName":{"shape":"MetricName"}
+      }
+    },
+    "HyperParameterTuningJobObjectiveType":{
+      "type":"string",
+      "enum":[
+        "Maximize",
+        "Minimize"
+      ]
+    },
+    "HyperParameterTuningJobSortByOptions":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "Status",
+        "CreationTime"
+      ]
+    },
+    "HyperParameterTuningJobStatus":{
+      "type":"string",
+      "enum":[
+        "Completed",
+        "InProgress",
+        "Failed",
+        "Stopped",
+        "Stopping"
+      ]
+    },
+    "HyperParameterTuningJobStrategyType":{
+      "type":"string",
+      "enum":["Bayesian"]
+    },
+    "HyperParameterTuningJobSummaries":{
+      "type":"list",
+      "member":{"shape":"HyperParameterTuningJobSummary"}
+    },
+    "HyperParameterTuningJobSummary":{
+      "type":"structure",
+      "required":[
+        "HyperParameterTuningJobName",
+        "HyperParameterTuningJobArn",
+        "HyperParameterTuningJobStatus",
+        "Strategy",
+        "CreationTime",
+        "TrainingJobStatusCounters",
+        "ObjectiveStatusCounters"
+      ],
+      "members":{
+        "HyperParameterTuningJobName":{"shape":"HyperParameterTuningJobName"},
+        "HyperParameterTuningJobArn":{"shape":"HyperParameterTuningJobArn"},
+        "HyperParameterTuningJobStatus":{"shape":"HyperParameterTuningJobStatus"},
+        "Strategy":{"shape":"HyperParameterTuningJobStrategyType"},
+        "CreationTime":{"shape":"Timestamp"},
+        "HyperParameterTuningEndTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "TrainingJobStatusCounters":{"shape":"TrainingJobStatusCounters"},
+        "ObjectiveStatusCounters":{"shape":"ObjectiveStatusCounters"},
+        "ResourceLimits":{"shape":"ResourceLimits"}
+      }
+    },
     "HyperParameters":{
       "type":"map",
       "key":{"shape":"ParameterKey"},
@@ -849,9 +1268,40 @@
       "type":"string",
       "enum":[
         "ml.t2.medium",
+        "ml.t2.large",
+        "ml.t2.xlarge",
+        "ml.t2.2xlarge",
         "ml.m4.xlarge",
-        "ml.p2.xlarge"
+        "ml.m4.2xlarge",
+        "ml.m4.4xlarge",
+        "ml.m4.10xlarge",
+        "ml.m4.16xlarge",
+        "ml.p2.xlarge",
+        "ml.p2.8xlarge",
+        "ml.p2.16xlarge",
+        "ml.p3.2xlarge",
+        "ml.p3.8xlarge",
+        "ml.p3.16xlarge"
       ]
+    },
+    "IntegerParameterRange":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "MinValue",
+        "MaxValue"
+      ],
+      "members":{
+        "Name":{"shape":"ParameterKey"},
+        "MinValue":{"shape":"ParameterValue"},
+        "MaxValue":{"shape":"ParameterValue"}
+      }
+    },
+    "IntegerParameterRanges":{
+      "type":"list",
+      "member":{"shape":"IntegerParameterRange"},
+      "max":20,
+      "min":0
     },
     "KmsKeyId":{
       "type":"string",
@@ -901,6 +1351,32 @@
         "NextToken":{"shape":"PaginationToken"}
       }
     },
+    "ListHyperParameterTuningJobsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{
+          "shape":"MaxResults",
+          "box":true
+        },
+        "SortBy":{"shape":"HyperParameterTuningJobSortByOptions"},
+        "SortOrder":{"shape":"SortOrder"},
+        "NameContains":{"shape":"NameContains"},
+        "CreationTimeAfter":{"shape":"Timestamp"},
+        "CreationTimeBefore":{"shape":"Timestamp"},
+        "LastModifiedTimeAfter":{"shape":"Timestamp"},
+        "LastModifiedTimeBefore":{"shape":"Timestamp"},
+        "StatusEquals":{"shape":"HyperParameterTuningJobStatus"}
+      }
+    },
+    "ListHyperParameterTuningJobsResponse":{
+      "type":"structure",
+      "required":["HyperParameterTuningJobSummaries"],
+      "members":{
+        "HyperParameterTuningJobSummaries":{"shape":"HyperParameterTuningJobSummaries"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListModelsInput":{
       "type":"structure",
       "members":{
@@ -921,6 +1397,27 @@
         "NextToken":{"shape":"PaginationToken"}
       }
     },
+    "ListNotebookInstanceLifecycleConfigsInput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"},
+        "SortBy":{"shape":"NotebookInstanceLifecycleConfigSortKey"},
+        "SortOrder":{"shape":"NotebookInstanceLifecycleConfigSortOrder"},
+        "NameContains":{"shape":"NotebookInstanceLifecycleConfigNameContains"},
+        "CreationTimeBefore":{"shape":"CreationTime"},
+        "CreationTimeAfter":{"shape":"CreationTime"},
+        "LastModifiedTimeBefore":{"shape":"LastModifiedTime"},
+        "LastModifiedTimeAfter":{"shape":"LastModifiedTime"}
+      }
+    },
+    "ListNotebookInstanceLifecycleConfigsOutput":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"NextToken"},
+        "NotebookInstanceLifecycleConfigs":{"shape":"NotebookInstanceLifecycleConfigSummaryList"}
+      }
+    },
     "ListNotebookInstancesInput":{
       "type":"structure",
       "members":{
@@ -933,7 +1430,8 @@
         "CreationTimeAfter":{"shape":"CreationTime"},
         "LastModifiedTimeBefore":{"shape":"LastModifiedTime"},
         "LastModifiedTimeAfter":{"shape":"LastModifiedTime"},
-        "StatusEquals":{"shape":"NotebookInstanceStatus"}
+        "StatusEquals":{"shape":"NotebookInstanceStatus"},
+        "NotebookInstanceLifecycleConfigNameContains":{"shape":"NotebookInstanceLifecycleConfigName"}
       }
     },
     "ListNotebookInstancesOutput":{
@@ -963,6 +1461,26 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "ListTrainingJobsForHyperParameterTuningJobRequest":{
+      "type":"structure",
+      "required":["HyperParameterTuningJobName"],
+      "members":{
+        "HyperParameterTuningJobName":{"shape":"HyperParameterTuningJobName"},
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"},
+        "StatusEquals":{"shape":"TrainingJobStatus"},
+        "SortBy":{"shape":"TrainingJobSortByOptions"},
+        "SortOrder":{"shape":"SortOrder"}
+      }
+    },
+    "ListTrainingJobsForHyperParameterTuningJobResponse":{
+      "type":"structure",
+      "required":["TrainingJobSummaries"],
+      "members":{
+        "TrainingJobSummaries":{"shape":"HyperParameterTrainingJobSummaries"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
     "ListTrainingJobsRequest":{
       "type":"structure",
       "members":{
@@ -989,6 +1507,14 @@
         "NextToken":{"shape":"NextToken"}
       }
     },
+    "MaxNumberOfTrainingJobs":{
+      "type":"integer",
+      "min":1
+    },
+    "MaxParallelTrainingJobs":{
+      "type":"integer",
+      "min":1
+    },
     "MaxResults":{
       "type":"integer",
       "max":100,
@@ -998,6 +1524,34 @@
       "type":"integer",
       "min":1
     },
+    "MetricDefinition":{
+      "type":"structure",
+      "required":[
+        "Name",
+        "Regex"
+      ],
+      "members":{
+        "Name":{"shape":"MetricName"},
+        "Regex":{"shape":"MetricRegex"}
+      }
+    },
+    "MetricDefinitionList":{
+      "type":"list",
+      "member":{"shape":"MetricDefinition"},
+      "max":20,
+      "min":0
+    },
+    "MetricName":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "MetricRegex":{
+      "type":"string",
+      "max":500,
+      "min":1
+    },
+    "MetricValue":{"type":"float"},
     "ModelArn":{
       "type":"string",
       "max":2048,
@@ -1057,6 +1611,67 @@
       "type":"string",
       "max":256
     },
+    "NotebookInstanceLifecycleConfigArn":{
+      "type":"string",
+      "max":256
+    },
+    "NotebookInstanceLifecycleConfigContent":{
+      "type":"string",
+      "max":16384,
+      "min":1
+    },
+    "NotebookInstanceLifecycleConfigList":{
+      "type":"list",
+      "member":{"shape":"NotebookInstanceLifecycleHook"},
+      "max":1
+    },
+    "NotebookInstanceLifecycleConfigName":{
+      "type":"string",
+      "max":63,
+      "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "NotebookInstanceLifecycleConfigNameContains":{
+      "type":"string",
+      "pattern":"[a-zA-Z0-9-]+"
+    },
+    "NotebookInstanceLifecycleConfigSortKey":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "CreationTime",
+        "LastModifiedTime"
+      ]
+    },
+    "NotebookInstanceLifecycleConfigSortOrder":{
+      "type":"string",
+      "enum":[
+        "Ascending",
+        "Descending"
+      ]
+    },
+    "NotebookInstanceLifecycleConfigSummary":{
+      "type":"structure",
+      "required":[
+        "NotebookInstanceLifecycleConfigName",
+        "NotebookInstanceLifecycleConfigArn"
+      ],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{"shape":"NotebookInstanceLifecycleConfigName"},
+        "NotebookInstanceLifecycleConfigArn":{"shape":"NotebookInstanceLifecycleConfigArn"},
+        "CreationTime":{"shape":"CreationTime"},
+        "LastModifiedTime":{"shape":"LastModifiedTime"}
+      }
+    },
+    "NotebookInstanceLifecycleConfigSummaryList":{
+      "type":"list",
+      "member":{"shape":"NotebookInstanceLifecycleConfigSummary"}
+    },
+    "NotebookInstanceLifecycleHook":{
+      "type":"structure",
+      "members":{
+        "Content":{"shape":"NotebookInstanceLifecycleConfigContent"}
+      }
+    },
     "NotebookInstanceName":{
       "type":"string",
       "max":63,
@@ -1105,7 +1720,8 @@
         "Url":{"shape":"NotebookInstanceUrl"},
         "InstanceType":{"shape":"InstanceType"},
         "CreationTime":{"shape":"CreationTime"},
-        "LastModifiedTime":{"shape":"LastModifiedTime"}
+        "LastModifiedTime":{"shape":"LastModifiedTime"},
+        "NotebookInstanceLifecycleConfigName":{"shape":"NotebookInstanceLifecycleConfigName"}
       }
     },
     "NotebookInstanceSummaryList":{
@@ -1113,6 +1729,26 @@
       "member":{"shape":"NotebookInstanceSummary"}
     },
     "NotebookInstanceUrl":{"type":"string"},
+    "ObjectiveStatus":{
+      "type":"string",
+      "enum":[
+        "Succeeded",
+        "Pending",
+        "Failed"
+      ]
+    },
+    "ObjectiveStatusCounter":{
+      "type":"integer",
+      "min":0
+    },
+    "ObjectiveStatusCounters":{
+      "type":"structure",
+      "members":{
+        "Succeeded":{"shape":"ObjectiveStatusCounter"},
+        "Pending":{"shape":"ObjectiveStatusCounter"},
+        "Failed":{"shape":"ObjectiveStatusCounter"}
+      }
+    },
     "OrderKey":{
       "type":"string",
       "enum":[
@@ -1136,9 +1772,23 @@
       "type":"string",
       "max":256
     },
+    "ParameterRanges":{
+      "type":"structure",
+      "members":{
+        "IntegerParameterRanges":{"shape":"IntegerParameterRanges"},
+        "ContinuousParameterRanges":{"shape":"ContinuousParameterRanges"},
+        "CategoricalParameterRanges":{"shape":"CategoricalParameterRanges"}
+      }
+    },
     "ParameterValue":{
       "type":"string",
       "max":256
+    },
+    "ParameterValues":{
+      "type":"list",
+      "member":{"shape":"ParameterValue"},
+      "max":20,
+      "min":1
     },
     "ProductionVariant":{
       "type":"structure",
@@ -1159,16 +1809,38 @@
     "ProductionVariantInstanceType":{
       "type":"string",
       "enum":[
-        "ml.c4.2xlarge",
-        "ml.c4.8xlarge",
-        "ml.c4.xlarge",
-        "ml.c5.2xlarge",
-        "ml.c5.9xlarge",
-        "ml.c5.xlarge",
+        "ml.t2.medium",
+        "ml.t2.large",
+        "ml.t2.xlarge",
+        "ml.t2.2xlarge",
         "ml.m4.xlarge",
+        "ml.m4.2xlarge",
+        "ml.m4.4xlarge",
+        "ml.m4.10xlarge",
+        "ml.m4.16xlarge",
+        "ml.m5.large",
+        "ml.m5.xlarge",
+        "ml.m5.2xlarge",
+        "ml.m5.4xlarge",
+        "ml.m5.12xlarge",
+        "ml.m5.24xlarge",
+        "ml.c4.large",
+        "ml.c4.xlarge",
+        "ml.c4.2xlarge",
+        "ml.c4.4xlarge",
+        "ml.c4.8xlarge",
         "ml.p2.xlarge",
+        "ml.p2.8xlarge",
+        "ml.p2.16xlarge",
         "ml.p3.2xlarge",
-        "ml.t2.medium"
+        "ml.p3.8xlarge",
+        "ml.p3.16xlarge",
+        "ml.c5.large",
+        "ml.c5.xlarge",
+        "ml.c5.2xlarge",
+        "ml.c5.4xlarge",
+        "ml.c5.9xlarge",
+        "ml.c5.18xlarge"
       ]
     },
     "ProductionVariantList":{
@@ -1230,6 +1902,17 @@
         "Message":{"shape":"FailureReason"}
       },
       "exception":true
+    },
+    "ResourceLimits":{
+      "type":"structure",
+      "required":[
+        "MaxNumberOfTrainingJobs",
+        "MaxParallelTrainingJobs"
+      ],
+      "members":{
+        "MaxNumberOfTrainingJobs":{"shape":"MaxNumberOfTrainingJobs"},
+        "MaxParallelTrainingJobs":{"shape":"MaxParallelTrainingJobs"}
+      }
     },
     "ResourceNotFound":{
       "type":"structure",
@@ -1325,6 +2008,13 @@
         "NotebookInstanceName":{"shape":"NotebookInstanceName"}
       }
     },
+    "StopHyperParameterTuningJobRequest":{
+      "type":"structure",
+      "required":["HyperParameterTuningJobName"],
+      "members":{
+        "HyperParameterTuningJobName":{"shape":"HyperParameterTuningJobName"}
+      }
+    },
     "StopNotebookInstanceInput":{
       "type":"structure",
       "required":["NotebookInstanceName"],
@@ -1348,6 +2038,12 @@
     "SubnetId":{
       "type":"string",
       "max":32
+    },
+    "Subnets":{
+      "type":"list",
+      "member":{"shape":"SubnetId"},
+      "max":16,
+      "min":1
     },
     "Tag":{
       "type":"structure",
@@ -1404,10 +2100,19 @@
       "type":"string",
       "enum":[
         "ml.m4.xlarge",
+        "ml.m4.2xlarge",
         "ml.m4.4xlarge",
         "ml.m4.10xlarge",
+        "ml.m4.16xlarge",
+        "ml.m5.large",
+        "ml.m5.xlarge",
+        "ml.m5.2xlarge",
+        "ml.m5.4xlarge",
+        "ml.m5.12xlarge",
+        "ml.m5.24xlarge",
         "ml.c4.xlarge",
         "ml.c4.2xlarge",
+        "ml.c4.4xlarge",
         "ml.c4.8xlarge",
         "ml.p2.xlarge",
         "ml.p2.8xlarge",
@@ -1425,13 +2130,22 @@
     "TrainingJobArn":{
       "type":"string",
       "max":256,
-      "pattern":"arn:aws:sagemaker:[\\p{Alnum}\\-]*:[0-9]{12}:training-job/.*"
+      "pattern":"arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-job/.*"
     },
     "TrainingJobName":{
       "type":"string",
       "max":63,
       "min":1,
       "pattern":"^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "TrainingJobSortByOptions":{
+      "type":"string",
+      "enum":[
+        "Name",
+        "CreationTime",
+        "Status",
+        "FinalObjectiveMetricValue"
+      ]
     },
     "TrainingJobStatus":{
       "type":"string",
@@ -1442,6 +2156,20 @@
         "Stopping",
         "Stopped"
       ]
+    },
+    "TrainingJobStatusCounter":{
+      "type":"integer",
+      "min":0
+    },
+    "TrainingJobStatusCounters":{
+      "type":"structure",
+      "members":{
+        "Completed":{"shape":"TrainingJobStatusCounter"},
+        "InProgress":{"shape":"TrainingJobStatusCounter"},
+        "RetryableError":{"shape":"TrainingJobStatusCounter"},
+        "NonRetryableError":{"shape":"TrainingJobStatusCounter"},
+        "Stopped":{"shape":"TrainingJobStatusCounter"}
+      }
     },
     "TrainingJobSummaries":{
       "type":"list",
@@ -1509,6 +2237,20 @@
         "RoleArn":{"shape":"RoleArn"}
       }
     },
+    "UpdateNotebookInstanceLifecycleConfigInput":{
+      "type":"structure",
+      "required":["NotebookInstanceLifecycleConfigName"],
+      "members":{
+        "NotebookInstanceLifecycleConfigName":{"shape":"NotebookInstanceLifecycleConfigName"},
+        "OnCreate":{"shape":"NotebookInstanceLifecycleConfigList"},
+        "OnStart":{"shape":"NotebookInstanceLifecycleConfigList"}
+      }
+    },
+    "UpdateNotebookInstanceLifecycleConfigOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "UpdateNotebookInstanceOutput":{
       "type":"structure",
       "members":{
@@ -1530,6 +2272,23 @@
     },
     "VolumeSizeInGB":{
       "type":"integer",
+      "min":1
+    },
+    "VpcConfig":{
+      "type":"structure",
+      "required":[
+        "SecurityGroupIds",
+        "Subnets"
+      ],
+      "members":{
+        "SecurityGroupIds":{"shape":"VpcSecurityGroupIds"},
+        "Subnets":{"shape":"Subnets"}
+      }
+    },
+    "VpcSecurityGroupIds":{
+      "type":"list",
+      "member":{"shape":"SecurityGroupId"},
+      "max":5,
       "min":1
     }
   }

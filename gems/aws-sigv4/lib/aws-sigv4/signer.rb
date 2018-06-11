@@ -192,7 +192,7 @@ module Aws
       #   to sign. If the 'X-Amz-Content-Sha256' header is set, the `:body`
       #   is optional and will not be read.
       #
-      # @option request [otpional, String, IO] :body ('') The HTTP request body.
+      # @option request [optional, String, IO] :body ('') The HTTP request body.
       #   A sha256 checksum is computed of the body unless the
       #   'X-Amz-Content-Sha256' header is set.
       #
@@ -253,7 +253,7 @@ module Aws
       # To generate a presigned URL, you must provide a HTTP URI and
       # the http method.
       #
-      #     url = signer.presigned_url(
+      #     url = signer.presign_url(
       #       http_method: 'GET',
       #       url: 'https://my-bucket.s3-us-east-1.amazonaws.com/key',
       #       expires_in: 60
@@ -262,7 +262,7 @@ module Aws
       # By default, signatures are valid for 15 minutes. You can specify
       # the number of seconds for the URL to expire in.
       #
-      #     url = signer.presigned_url(
+      #     url = signer.presign_url(
       #       http_method: 'GET',
       #       url: 'https://my-bucket.s3-us-east-1.amazonaws.com/key',
       #       expires_in: 3600 # one hour
@@ -273,7 +273,7 @@ module Aws
       # **must** be provided, or the signature is invalid. Other headers
       # are optional, but should be provided for security reasons.
       #
-      #     url = signer.presigned_url(
+      #     url = signer.presign_url(
       #       http_method: 'PUT',
       #       url: 'https://my-bucket.s3-us-east-1.amazonaws.com/key',
       #       headers: {
@@ -438,11 +438,11 @@ module Aws
       end
 
       def canonical_headers(headers)
-        headers = headers.inject([]) do |headers, (k,v)|
+        headers = headers.inject([]) do |hdrs, (k,v)|
           if @unsigned_headers.include?(k)
-            headers
+            hdrs
           else
-            headers << [k,v]
+            hdrs << [k,v]
           end
         end
         headers = headers.sort_by(&:first)

@@ -441,6 +441,7 @@ module Aws::GameLift
     #         metric_groups: ["MetricGroup"],
     #         peer_vpc_aws_account_id: "NonZeroAndMaxString",
     #         peer_vpc_id: "NonZeroAndMaxString",
+    #         fleet_type: "ON_DEMAND", # accepts ON_DEMAND, SPOT
     #       }
     #
     # @!attribute [rw] name
@@ -564,6 +565,22 @@ module Aws::GameLift
     #   the AWS Management Console.
     #   @return [String]
     #
+    # @!attribute [rw] fleet_type
+    #   Indicates whether to use on-demand instances or spot instances for
+    #   this fleet. If empty, the default is ON\_DEMAND. Both categories of
+    #   instances use identical hardware and configurations, based on the
+    #   instance type selected for this fleet. You can acquire on-demand
+    #   instances at any time for a fixed price and keep them as long as you
+    #   need them. Spot instances have lower prices, but spot pricing is
+    #   variable, and while in use they can be interrupted (with a
+    #   two-minute notification). Learn more about Amazon GameLift spot
+    #   instances with at [ Choose Computing Resources][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-ec2-instances.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
     class CreateFleetInput < Struct.new(
@@ -580,7 +597,8 @@ module Aws::GameLift
       :resource_creation_limit_policy,
       :metric_groups,
       :peer_vpc_aws_account_id,
-      :peer_vpc_id)
+      :peer_vpc_id,
+      :fleet_type)
       include Aws::Structure
     end
 
@@ -2549,15 +2567,21 @@ module Aws::GameLift
     #
     # * ListFleets
     #
+    # * DeleteFleet
+    #
     # * Describe fleets:
     #
     #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
     #
     #   * DescribeFleetPortSettings
     #
     #   * DescribeFleetUtilization
     #
     #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
     #
     #   * DescribeFleetEvents
     #
@@ -2571,21 +2595,11 @@ module Aws::GameLift
     #
     #   * UpdateRuntimeConfiguration
     #
-    # * Manage fleet capacity:
+    # * Manage fleet actions:
     #
-    #   * DescribeFleetCapacity
+    #   * StartFleetActions
     #
-    #   * UpdateFleetCapacity
-    #
-    #   * PutScalingPolicy (automatic scaling)
-    #
-    #   * DescribeScalingPolicies (automatic scaling)
-    #
-    #   * DeleteScalingPolicy (automatic scaling)
-    #
-    #   * DescribeEC2InstanceLimits
-    #
-    # * DeleteFleet
+    #   * StopFleetActions
     #
     # @!attribute [rw] desired
     #   Ideal number of active instances in the fleet.
@@ -2683,12 +2697,6 @@ module Aws::GameLift
     #   Type of event being logged. The following events are currently in
     #   use:
     #
-    #   **General events:**
-    #
-    #   * GENERIC\_EVENT -- An unspecified event has occurred.
-    #
-    #   ^
-    #
     #   **Fleet creation events:**
     #
     #   * FLEET\_CREATED -- A fleet record was successfully created with a
@@ -2775,6 +2783,13 @@ module Aws::GameLift
     #   * FLEET\_VPC\_PEERING\_DELETED -- A VPC peering connection has been
     #     successfully deleted.
     #
+    #   **Spot instance events:**
+    #
+    #   * INSTANCE\_INTERRUPTED -- A spot instance was interrupted by EC2
+    #     with a two-minute notification.
+    #
+    #   ^
+    #
     #   **Other fleet events:**
     #
     #   * FLEET\_SCALING\_EVENT -- A change was made to the fleet's
@@ -2786,6 +2801,8 @@ module Aws::GameLift
     #     Event messaging includes both the old and new policy setting.
     #
     #   * FLEET\_DELETED -- A request to delete a fleet was initiated.
+    #
+    #   * GENERIC\_EVENT -- An unspecified event has occurred.
     #
     #
     #
@@ -2829,15 +2846,21 @@ module Aws::GameLift
     #
     # * ListFleets
     #
+    # * DeleteFleet
+    #
     # * Describe fleets:
     #
     #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
     #
     #   * DescribeFleetPortSettings
     #
     #   * DescribeFleetUtilization
     #
     #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
     #
     #   * DescribeFleetEvents
     #
@@ -2851,21 +2874,11 @@ module Aws::GameLift
     #
     #   * UpdateRuntimeConfiguration
     #
-    # * Manage fleet capacity:
+    # * Manage fleet actions:
     #
-    #   * DescribeFleetCapacity
+    #   * StartFleetActions
     #
-    #   * UpdateFleetCapacity
-    #
-    #   * PutScalingPolicy (automatic scaling)
-    #
-    #   * DescribeScalingPolicies (automatic scaling)
-    #
-    #   * DeleteScalingPolicy (automatic scaling)
-    #
-    #   * DescribeEC2InstanceLimits
-    #
-    # * DeleteFleet
+    #   * StopFleetActions
     #
     # @!attribute [rw] fleet_id
     #   Unique identifier for a fleet.
@@ -2873,6 +2886,22 @@ module Aws::GameLift
     #
     # @!attribute [rw] fleet_arn
     #   Identifier for a fleet that is unique across all regions.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_type
+    #   Indicates whether the fleet uses on-demand or spot instances. A spot
+    #   instance in use may be interrupted with a two-minute notification.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   EC2 instance type indicating the computing resources of each
+    #   instance in the fleet, including CPU, memory, storage, and
+    #   networking capacity. See [Amazon EC2 Instance Types][1] for detailed
+    #   descriptions.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/ec2/instance-types/
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2980,11 +3009,18 @@ module Aws::GameLift
     #   fleet can be included in only one metric group at a time.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] stopped_actions
+    #   List of fleet actions that have been suspended using
+    #   StopFleetActions. This includes auto-scaling.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes AWS API Documentation
     #
     class FleetAttributes < Struct.new(
       :fleet_id,
       :fleet_arn,
+      :fleet_type,
+      :instance_type,
       :description,
       :name,
       :creation_time,
@@ -2997,7 +3033,8 @@ module Aws::GameLift
       :new_game_session_protection_policy,
       :operating_system,
       :resource_creation_limit_policy,
-      :metric_groups)
+      :metric_groups,
+      :stopped_actions)
       include Aws::Structure
     end
 
@@ -3012,15 +3049,21 @@ module Aws::GameLift
     #
     # * ListFleets
     #
+    # * DeleteFleet
+    #
     # * Describe fleets:
     #
     #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
     #
     #   * DescribeFleetPortSettings
     #
     #   * DescribeFleetUtilization
     #
     #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
     #
     #   * DescribeFleetEvents
     #
@@ -3034,21 +3077,11 @@ module Aws::GameLift
     #
     #   * UpdateRuntimeConfiguration
     #
-    # * Manage fleet capacity:
+    # * Manage fleet actions:
     #
-    #   * DescribeFleetCapacity
+    #   * StartFleetActions
     #
-    #   * UpdateFleetCapacity
-    #
-    #   * PutScalingPolicy (automatic scaling)
-    #
-    #   * DescribeScalingPolicies (automatic scaling)
-    #
-    #   * DeleteScalingPolicy (automatic scaling)
-    #
-    #   * DescribeEC2InstanceLimits
-    #
-    # * DeleteFleet
+    #   * StopFleetActions
     #
     # @!attribute [rw] fleet_id
     #   Unique identifier for a fleet.
@@ -3089,15 +3122,21 @@ module Aws::GameLift
     #
     # * ListFleets
     #
+    # * DeleteFleet
+    #
     # * Describe fleets:
     #
     #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
     #
     #   * DescribeFleetPortSettings
     #
     #   * DescribeFleetUtilization
     #
     #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
     #
     #   * DescribeFleetEvents
     #
@@ -3111,21 +3150,11 @@ module Aws::GameLift
     #
     #   * UpdateRuntimeConfiguration
     #
-    # * Manage fleet capacity:
+    # * Manage fleet actions:
     #
-    #   * DescribeFleetCapacity
+    #   * StartFleetActions
     #
-    #   * UpdateFleetCapacity
-    #
-    #   * PutScalingPolicy (automatic scaling)
-    #
-    #   * DescribeScalingPolicies (automatic scaling)
-    #
-    #   * DeleteScalingPolicy (automatic scaling)
-    #
-    #   * DescribeEC2InstanceLimits
-    #
-    # * DeleteFleet
+    #   * StopFleetActions
     #
     # @!attribute [rw] fleet_id
     #   Unique identifier for a fleet.
@@ -3270,6 +3299,13 @@ module Aws::GameLift
     #   `ACTIVE` status to have player sessions.
     #   @return [String]
     #
+    # @!attribute [rw] status_reason
+    #   Provides additional information about game session status.
+    #   `INTERRUPTED` indicates that the game session was hosted on a spot
+    #   instance that was reclaimed, causing the active game session to be
+    #   terminated.
+    #   @return [String]
+    #
     # @!attribute [rw] game_properties
     #   Set of custom properties for a game session, formatted as key:value
     #   pairs. These properties are passed to a game server process in the
@@ -3315,7 +3351,7 @@ module Aws::GameLift
     #
     # @!attribute [rw] matchmaker_data
     #   Information about the matchmaking process that was used to create
-    #   the game session. It is in JSON syntax, formated as a string. In
+    #   the game session. It is in JSON syntax, formatted as a string. In
     #   addition the matchmaking configuration used, it contains data on all
     #   players assigned to the match, including player attributes and team
     #   assignments. For more details on matchmaker data, see [Match
@@ -3339,6 +3375,7 @@ module Aws::GameLift
       :current_player_session_count,
       :maximum_player_session_count,
       :status,
+      :status_reason,
       :game_properties,
       :ip_address,
       :port,
@@ -3548,11 +3585,11 @@ module Aws::GameLift
     #
     # @!attribute [rw] matchmaker_data
     #   Information on the matchmaking process for this game. Data is in
-    #   JSON syntax, formated as a string. It identifies the matchmaking
+    #   JSON syntax, formatted as a string. It identifies the matchmaking
     #   configuration used to create the match, and contains data on all
     #   players assigned to the match, including player attributes and team
-    #   assignments. For more details on matchmaker data, see
-    #   [http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data][1].
+    #   assignments. For more details on matchmaker data, see [Match
+    #   Data][1].
     #
     #
     #
@@ -4420,10 +4457,10 @@ module Aws::GameLift
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   Time stamp indicating when the matchmaking request stopped being
-    #   processed due to successful completion, timeout, or cancellation.
-    #   Format is a number expressed in Unix time as milliseconds (for
-    #   example "1469498468.057").
+    #   Time stamp indicating when this matchmaking request stopped being
+    #   processed due to success, failure, or cancellation. Format is a
+    #   number expressed in Unix time as milliseconds (for example
+    #   "1469498468.057").
     #   @return [Time]
     #
     # @!attribute [rw] players
@@ -4759,12 +4796,16 @@ module Aws::GameLift
     #       {
     #         name: "NonZeroAndMaxString", # required
     #         fleet_id: "FleetId", # required
-    #         scaling_adjustment: 1, # required
-    #         scaling_adjustment_type: "ChangeInCapacity", # required, accepts ChangeInCapacity, ExactCapacity, PercentChangeInCapacity
-    #         threshold: 1.0, # required
-    #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
-    #         evaluation_periods: 1, # required
+    #         scaling_adjustment: 1,
+    #         scaling_adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, ExactCapacity, PercentChangeInCapacity
+    #         threshold: 1.0,
+    #         comparison_operator: "GreaterThanOrEqualToThreshold", # accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #         evaluation_periods: 1,
     #         metric_name: "ActivatingGameSessions", # required, accepts ActivatingGameSessions, ActiveGameSessions, ActiveInstances, AvailableGameSessions, AvailablePlayerSessions, CurrentPlayerSessions, IdleInstances, PercentAvailableGameSessions, PercentIdleInstances, QueueDepth, WaitTime
+    #         policy_type: "RuleBased", # accepts RuleBased, TargetBased
+    #         target_configuration: {
+    #           target_value: 1.0, # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -4774,7 +4815,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] fleet_id
-    #   Unique identifier for a fleet to apply this policy to.
+    #   Unique identifier for a fleet to apply this policy to. The fleet
+    #   cannot be in any of the following statuses: ERROR or DELETING.
     #   @return [String]
     #
     # @!attribute [rw] scaling_adjustment
@@ -4813,31 +4855,65 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] metric_name
-    #   Name of the Amazon GameLift-defined metric that is used to trigger
-    #   an adjustment.
+    #   Name of the Amazon GameLift-defined metric that is used to trigger a
+    #   scaling adjustment. For detailed descriptions of fleet metrics, see
+    #   [Monitor Amazon GameLift with Amazon CloudWatch][1].
     #
-    #   * **ActivatingGameSessions** -- number of game sessions in the
-    #     process of being created (game session status = `ACTIVATING`).
+    #   * **ActivatingGameSessions** -- Game sessions in the process of
+    #     being created.
     #
-    #   * **ActiveGameSessions** -- number of game sessions currently
-    #     running (game session status = `ACTIVE`).
+    #   * **ActiveGameSessions** -- Game sessions that are currently
+    #     running.
     #
-    #   * **CurrentPlayerSessions** -- number of active or reserved player
-    #     sessions (player session status = `ACTIVE` or `RESERVED`).
+    #   * **ActiveInstances** -- Fleet instances that are currently running
+    #     at least one game session.
     #
-    #   * **AvailablePlayerSessions** -- number of player session slots
-    #     currently available in active game sessions across the fleet,
-    #     calculated by subtracting a game session's current player session
-    #     count from its maximum player session count. This number includes
-    #     game sessions that are not currently accepting players (game
-    #     session `PlayerSessionCreationPolicy` = `DENY_ALL`).
+    #   * **AvailableGameSessions** -- Additional game sessions that fleet
+    #     could host simultaneously, given current capacity.
     #
-    #   * **ActiveInstances** -- number of instances currently running a
-    #     game session.
+    #   * **AvailablePlayerSessions** -- Empty player slots in currently
+    #     active game sessions. This includes game sessions that are not
+    #     currently accepting players. Reserved player slots are not
+    #     included.
     #
-    #   * **IdleInstances** -- number of instances not currently running a
-    #     game session.
+    #   * **CurrentPlayerSessions** -- Player slots in active game sessions
+    #     that are being used by a player or are reserved for a player.
+    #
+    #   * **IdleInstances** -- Active instances that are currently hosting
+    #     zero game sessions.
+    #
+    #   * **PercentAvailableGameSessions** -- Unused percentage of the total
+    #     number of game sessions that a fleet could host simultaneously,
+    #     given current capacity. Use this metric for a target-based scaling
+    #     policy.
+    #
+    #   * **PercentIdleInstances** -- Percentage of the total number of
+    #     active instances that are hosting zero game sessions.
+    #
+    #   * **QueueDepth** -- Pending game session placement requests, in any
+    #     queue, where the current fleet is the top-priority destination.
+    #
+    #   * **WaitTime** -- Current wait time for pending game session
+    #     placement requests, in any queue, where the current fleet is the
+    #     top-priority destination.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html
     #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   Type of scaling policy to create. For a target-based policy, set the
+    #   parameter *MetricName* to 'PercentAvailableGameSessions' and
+    #   specify a *TargetConfiguration*. For a rule-based policy set the
+    #   following parameters: *MetricName*, *ComparisonOperator*,
+    #   *Threshold*, *EvaluationPeriods*, *ScalingAdjustmentType*, and
+    #   *ScalingAdjustment*.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_configuration
+    #   Object that contains settings for a target-based scaling policy.
+    #   @return [Types::TargetConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PutScalingPolicyInput AWS API Documentation
     #
@@ -4849,7 +4925,9 @@ module Aws::GameLift
       :threshold,
       :comparison_operator,
       :evaluation_periods,
-      :metric_name)
+      :metric_name,
+      :policy_type,
+      :target_configuration)
       include Aws::Structure
     end
 
@@ -4987,15 +5065,21 @@ module Aws::GameLift
     #
     # * ListFleets
     #
+    # * DeleteFleet
+    #
     # * Describe fleets:
     #
     #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
     #
     #   * DescribeFleetPortSettings
     #
     #   * DescribeFleetUtilization
     #
     #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
     #
     #   * DescribeFleetEvents
     #
@@ -5009,21 +5093,11 @@ module Aws::GameLift
     #
     #   * UpdateRuntimeConfiguration
     #
-    # * Manage fleet capacity:
+    # * Manage fleet actions:
     #
-    #   * DescribeFleetCapacity
+    #   * StartFleetActions
     #
-    #   * UpdateFleetCapacity
-    #
-    #   * PutScalingPolicy (automatic scaling)
-    #
-    #   * DescribeScalingPolicies (automatic scaling)
-    #
-    #   * DeleteScalingPolicy (automatic scaling)
-    #
-    #   * DescribeEC2InstanceLimits
-    #
-    # * DeleteFleet
+    #   * StopFleetActions
     #
     # @note When making an API call, you may pass RoutingStrategy
     #   data as a hash:
@@ -5095,15 +5169,21 @@ module Aws::GameLift
     #
     # * ListFleets
     #
+    # * DeleteFleet
+    #
     # * Describe fleets:
     #
     #   * DescribeFleetAttributes
+    #
+    #   * DescribeFleetCapacity
     #
     #   * DescribeFleetPortSettings
     #
     #   * DescribeFleetUtilization
     #
     #   * DescribeRuntimeConfiguration
+    #
+    #   * DescribeEC2InstanceLimits
     #
     #   * DescribeFleetEvents
     #
@@ -5117,21 +5197,11 @@ module Aws::GameLift
     #
     #   * UpdateRuntimeConfiguration
     #
-    # * Manage fleet capacity:
+    # * Manage fleet actions:
     #
-    #   * DescribeFleetCapacity
+    #   * StartFleetActions
     #
-    #   * UpdateFleetCapacity
-    #
-    #   * PutScalingPolicy (automatic scaling)
-    #
-    #   * DescribeScalingPolicies (automatic scaling)
-    #
-    #   * DeleteScalingPolicy (automatic scaling)
-    #
-    #   * DescribeEC2InstanceLimits
-    #
-    # * DeleteFleet
+    #   * StopFleetActions
     #
     # @note When making an API call, you may pass RuntimeConfiguration
     #   data as a hash:
@@ -5223,49 +5293,27 @@ module Aws::GameLift
     # Rule that controls how a fleet is scaled. Scaling policies are
     # uniquely identified by the combination of name and fleet ID.
     #
-    # Fleet-related operations include:
+    # Operations related to fleet capacity scaling include:
     #
-    # * CreateFleet
+    # * DescribeFleetCapacity
     #
-    # * ListFleets
+    # * UpdateFleetCapacity
     #
-    # * Describe fleets:
+    # * DescribeEC2InstanceLimits
     #
-    #   * DescribeFleetAttributes
+    # * Manage scaling policies:
     #
-    #   * DescribeFleetPortSettings
+    #   * PutScalingPolicy (auto-scaling)
     #
-    #   * DescribeFleetUtilization
+    #   * DescribeScalingPolicies (auto-scaling)
     #
-    #   * DescribeRuntimeConfiguration
+    #   * DeleteScalingPolicy (auto-scaling)
     #
-    #   * DescribeFleetEvents
+    # * Manage fleet actions:
     #
-    # * Update fleets:
+    #   * StartFleetActions
     #
-    #   * UpdateFleetAttributes
-    #
-    #   * UpdateFleetCapacity
-    #
-    #   * UpdateFleetPortSettings
-    #
-    #   * UpdateRuntimeConfiguration
-    #
-    # * Manage fleet capacity:
-    #
-    #   * DescribeFleetCapacity
-    #
-    #   * UpdateFleetCapacity
-    #
-    #   * PutScalingPolicy (automatic scaling)
-    #
-    #   * DescribeScalingPolicies (automatic scaling)
-    #
-    #   * DeleteScalingPolicy (automatic scaling)
-    #
-    #   * DescribeEC2InstanceLimits
-    #
-    # * DeleteFleet
+    #   * StopFleetActions
     #
     # @!attribute [rw] fleet_id
     #   Unique identifier for a fleet that is associated with this scaling
@@ -5278,10 +5326,14 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Current status of the scaling policy. The scaling policy is only in
-    #   force when in an `ACTIVE` status.
+    #   Current status of the scaling policy. The scaling policy can be in
+    #   force only when in an `ACTIVE` status. Scaling policies can be
+    #   suspended for individual fleets (see StopFleetActions; if suspended
+    #   for a fleet, the policy status does not change. View a fleet's
+    #   stopped actions by calling DescribeFleetCapacity.
     #
-    #   * **ACTIVE** -- The scaling policy is currently in force.
+    #   * **ACTIVE** -- The scaling policy can be used for auto-scaling a
+    #     fleet.
     #
     #   * **UPDATE\_REQUESTED** -- A request to update the scaling policy
     #     has been received.
@@ -5334,31 +5386,65 @@ module Aws::GameLift
     #   @return [Integer]
     #
     # @!attribute [rw] metric_name
-    #   Name of the Amazon GameLift-defined metric that is used to trigger
-    #   an adjustment.
+    #   Name of the Amazon GameLift-defined metric that is used to trigger a
+    #   scaling adjustment. For detailed descriptions of fleet metrics, see
+    #   [Monitor Amazon GameLift with Amazon CloudWatch][1].
     #
-    #   * **ActivatingGameSessions** -- number of game sessions in the
-    #     process of being created (game session status = `ACTIVATING`).
+    #   * **ActivatingGameSessions** -- Game sessions in the process of
+    #     being created.
     #
-    #   * **ActiveGameSessions** -- number of game sessions currently
-    #     running (game session status = `ACTIVE`).
+    #   * **ActiveGameSessions** -- Game sessions that are currently
+    #     running.
     #
-    #   * **CurrentPlayerSessions** -- number of active or reserved player
-    #     sessions (player session status = `ACTIVE` or `RESERVED`).
+    #   * **ActiveInstances** -- Fleet instances that are currently running
+    #     at least one game session.
     #
-    #   * **AvailablePlayerSessions** -- number of player session slots
-    #     currently available in active game sessions across the fleet,
-    #     calculated by subtracting a game session's current player session
-    #     count from its maximum player session count. This number does
-    #     include game sessions that are not currently accepting players
-    #     (game session `PlayerSessionCreationPolicy` = `DENY_ALL`).
+    #   * **AvailableGameSessions** -- Additional game sessions that fleet
+    #     could host simultaneously, given current capacity.
     #
-    #   * **ActiveInstances** -- number of instances currently running a
-    #     game session.
+    #   * **AvailablePlayerSessions** -- Empty player slots in currently
+    #     active game sessions. This includes game sessions that are not
+    #     currently accepting players. Reserved player slots are not
+    #     included.
     #
-    #   * **IdleInstances** -- number of instances not currently running a
-    #     game session.
+    #   * **CurrentPlayerSessions** -- Player slots in active game sessions
+    #     that are being used by a player or are reserved for a player.
+    #
+    #   * **IdleInstances** -- Active instances that are currently hosting
+    #     zero game sessions.
+    #
+    #   * **PercentAvailableGameSessions** -- Unused percentage of the total
+    #     number of game sessions that a fleet could host simultaneously,
+    #     given current capacity. Use this metric for a target-based scaling
+    #     policy.
+    #
+    #   * **PercentIdleInstances** -- Percentage of the total number of
+    #     active instances that are hosting zero game sessions.
+    #
+    #   * **QueueDepth** -- Pending game session placement requests, in any
+    #     queue, where the current fleet is the top-priority destination.
+    #
+    #   * **WaitTime** -- Current wait time for pending game session
+    #     placement requests, in any queue, where the current fleet is the
+    #     top-priority destination.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html
     #   @return [String]
+    #
+    # @!attribute [rw] policy_type
+    #   Type of scaling policy to create. For a target-based policy, set the
+    #   parameter *MetricName* to 'PercentAvailableGameSessions' and
+    #   specify a *TargetConfiguration*. For a rule-based policy set the
+    #   following parameters: *MetricName*, *ComparisonOperator*,
+    #   *Threshold*, *EvaluationPeriods*, *ScalingAdjustmentType*, and
+    #   *ScalingAdjustment*.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_configuration
+    #   Object that contains settings for a target-based scaling policy.
+    #   @return [Types::TargetConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ScalingPolicy AWS API Documentation
     #
@@ -5371,7 +5457,9 @@ module Aws::GameLift
       :comparison_operator,
       :threshold,
       :evaluation_periods,
-      :metric_name)
+      :metric_name,
+      :policy_type,
+      :target_configuration)
       include Aws::Structure
     end
 
@@ -5559,6 +5647,34 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartFleetActionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_id: "FleetId", # required
+    #         actions: ["AUTO_SCALING"], # required, accepts AUTO_SCALING
+    #       }
+    #
+    # @!attribute [rw] fleet_id
+    #   Unique identifier for a fleet
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   List of actions to restart on the fleet.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartFleetActionsInput AWS API Documentation
+    #
+    class StartFleetActionsInput < Struct.new(
+      :fleet_id,
+      :actions)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartFleetActionsOutput AWS API Documentation
+    #
+    class StartFleetActionsOutput < Aws::EmptyStructure; end
+
     # Represents the input for a request action.
     #
     # @note When making an API call, you may pass StartGameSessionPlacementInput
@@ -5729,14 +5845,14 @@ module Aws::GameLift
     #   game session. This information is used by the matchmaker to find new
     #   players and add them to the existing game.
     #
-    #   * PlayerID, PlayerAttributes, Team -- This information is maintained
-    #     in the GameSession object, `MatchmakerData` property, for all
-    #     players who are currently assigned to the game session. The
-    #     matchmaker data is in JSON syntax, formatted as a string. For more
-    #     details, see [ Match Data][1].
+    #   * PlayerID, PlayerAttributes, Team -\\\\- This information is
+    #     maintained in the GameSession object, `MatchmakerData` property,
+    #     for all players who are currently assigned to the game session.
+    #     The matchmaker data is in JSON syntax, formatted as a string. For
+    #     more details, see [ Match Data][1].
     #
-    #   * LatencyInMs -- If the matchmaker uses player latency, include a
-    #     latency value, in milliseconds, for the region that the game
+    #   * LatencyInMs -\\\\- If the matchmaker uses player latency, include
+    #     a latency value, in milliseconds, for the region that the game
     #     session is currently in. Do not include latency values for any
     #     other region.
     #
@@ -5837,6 +5953,34 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopFleetActionsInput
+    #   data as a hash:
+    #
+    #       {
+    #         fleet_id: "FleetId", # required
+    #         actions: ["AUTO_SCALING"], # required, accepts AUTO_SCALING
+    #       }
+    #
+    # @!attribute [rw] fleet_id
+    #   Unique identifier for a fleet
+    #   @return [String]
+    #
+    # @!attribute [rw] actions
+    #   List of actions to suspend on the fleet.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopFleetActionsInput AWS API Documentation
+    #
+    class StopFleetActionsInput < Struct.new(
+      :fleet_id,
+      :actions)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopFleetActionsOutput AWS API Documentation
+    #
+    class StopFleetActionsOutput < Aws::EmptyStructure; end
+
     # Represents the input for a request action.
     #
     # @note When making an API call, you may pass StopGameSessionPlacementInput
@@ -5894,6 +6038,58 @@ module Aws::GameLift
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopMatchmakingOutput AWS API Documentation
     #
     class StopMatchmakingOutput < Aws::EmptyStructure; end
+
+    # Settings for a target-based scaling policy (see ScalingPolicy. A
+    # target-based policy tracks a particular fleet metric specifies a
+    # target value for the metric. As player usage changes, the policy
+    # triggers Amazon GameLift to adjust capacity so that the metric returns
+    # to the target value. The target configuration specifies settings as
+    # needed for the target based policy, including the target value.
+    #
+    # Operations related to fleet capacity scaling include:
+    #
+    # * DescribeFleetCapacity
+    #
+    # * UpdateFleetCapacity
+    #
+    # * DescribeEC2InstanceLimits
+    #
+    # * Manage scaling policies:
+    #
+    #   * PutScalingPolicy (auto-scaling)
+    #
+    #   * DescribeScalingPolicies (auto-scaling)
+    #
+    #   * DeleteScalingPolicy (auto-scaling)
+    #
+    # * Manage fleet actions:
+    #
+    #   * StartFleetActions
+    #
+    #   * StopFleetActions
+    #
+    # @note When making an API call, you may pass TargetConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         target_value: 1.0, # required
+    #       }
+    #
+    # @!attribute [rw] target_value
+    #   Desired value to use with a target-based scaling policy. The value
+    #   must be relevant for whatever metric the scaling policy is using.
+    #   For example, in a policy using the metric
+    #   PercentAvailableGameSessions, the target value should be the
+    #   preferred size of the fleet's buffer (the percent of capacity that
+    #   should be idle and ready for new game sessions).
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/TargetConfiguration AWS API Documentation
+    #
+    class TargetConfiguration < Struct.new(
+      :target_value)
+      include Aws::Structure
+    end
 
     # Represents the input for a request action.
     #

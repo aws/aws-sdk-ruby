@@ -152,8 +152,7 @@ module Aws::Lambda
     # function. Each permission you add to the resource policy allows an
     # event source, permission to invoke the Lambda function.
     #
-    # For information about the push model, see [AWS Lambda: How it
-    # Works][1].
+    # For information about the push model, see [Lambda Functions][1].
     #
     # If you are using versioning, the permissions you add are specific to
     # the Lambda function version or alias you specify in the
@@ -379,29 +378,24 @@ module Aws::Lambda
     # This association between a stream source and a Lambda function is
     # called the event source mapping.
     #
-    # This event source mapping is relevant only in the AWS Lambda pull
-    # model, where AWS Lambda invokes the function. For more information,
-    # see [AWS Lambda: How it Works][1] in the *AWS Lambda Developer Guide*.
-    #
     # You provide mapping information (for example, which stream to read
     # from and which Lambda function to invoke) in the request body.
     #
     # Each event source, such as an Amazon Kinesis or a DynamoDB stream, can
-    # be associated with multiple AWS Lambda function. A given Lambda
+    # be associated with multiple AWS Lambda functions. A given Lambda
     # function can be associated with multiple AWS event sources.
     #
     # If you are using versioning, you can specify a specific function
     # version or an alias via the function name parameter. For more
     # information about versioning, see [AWS Lambda Function Versioning and
-    # Aliases][2].
+    # Aliases][1].
     #
     # This operation requires permission for the
     # `lambda:CreateEventSourceMapping` action.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html
-    # [2]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :event_source_arn
     #   The Amazon Resource Name (ARN) of the Amazon Kinesis or the Amazon
@@ -445,13 +439,17 @@ module Aws::Lambda
     #   records.
     #
     # @option params [required, String] :starting_position
-    #   The position in the stream where AWS Lambda should start reading.
-    #   Valid only for Kinesis streams. For more information, see
-    #   [ShardIteratorType][1] in the *Amazon Kinesis API Reference*.
+    #   The position in the DynamoDB or Kinesis stream where AWS Lambda should
+    #   start reading. For more information, see [GetShardIterator][1] in the
+    #   *Amazon Kinesis API Reference Guide* or [GetShardIterator][2] in the
+    #   *Amazon DynamoDB API Reference Guide*. The `AT_TIMESTAMP` value is
+    #   supported only for [Kinesis streams][3].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
+    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html
+    #   [3]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
     #   The timestamp of the data record from which to start reading. Used
@@ -459,11 +457,12 @@ module Aws::Lambda
     #   exact timestamp does not exist, the iterator returned is for the next
     #   (later) record. If the timestamp is older than the current trim
     #   horizon, the iterator returned is for the oldest untrimmed data record
-    #   (TRIM\_HORIZON). Valid only for Kinesis streams.
+    #   (TRIM\_HORIZON). Valid only for [Kinesis streams][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
+    #   [2]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
     #
     # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -539,7 +538,9 @@ module Aws::Lambda
     #   To use the Python runtime v3.6, set the value to "python3.6". To use
     #   the Python runtime v2.7, set the value to "python2.7". To use the
     #   Node.js runtime v6.10, set the value to "nodejs6.10". To use the
-    #   Node.js runtime v4.3, set the value to "nodejs4.3".
+    #   Node.js runtime v4.3, set the value to "nodejs4.3". To use the .NET
+    #   Core runtime v1.0, set the value to "dotnetcore1.0". To use the .NET
+    #   Core runtime v2.0, set the value to "dotnetcore2.0".
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available on
@@ -604,7 +605,8 @@ module Aws::Lambda
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
     #   The parent object that contains the target ARN (Amazon Resource Name)
-    #   of an Amazon SQS queue or Amazon SNS topic.
+    #   of an Amazon SQS queue or Amazon SNS topic. For more information, see
+    #   dlq.
     #
     # @option params [Types::Environment] :environment
     #   The parent object that contains your environment's configuration
@@ -619,7 +621,13 @@ module Aws::Lambda
     #   The parent object that contains your function's tracing settings.
     #
     # @option params [Hash<String,String>] :tags
-    #   The list of tags (key-value pairs) assigned to the new function.
+    #   The list of tags (key-value pairs) assigned to the new function. For
+    #   more information, see [Tagging Lambda Functions][1] in the **AWS
+    #   Lambda Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -685,7 +693,7 @@ module Aws::Lambda
     #
     #   resp = client.create_function({
     #     function_name: "FunctionName", # required
-    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
+    #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
     #     role: "RoleArn", # required
     #     handler: "Handler", # required
     #     code: { # required
@@ -723,7 +731,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1265,7 +1273,7 @@ module Aws::Lambda
     #
     #   resp.configuration.function_name #=> String
     #   resp.configuration.function_arn #=> String
-    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
+    #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
     #   resp.configuration.role #=> String
     #   resp.configuration.handler #=> String
     #   resp.configuration.code_size #=> Integer
@@ -1413,7 +1421,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -1976,7 +1984,7 @@ module Aws::Lambda
     #   resp.functions #=> Array
     #   resp.functions[0].function_name #=> String
     #   resp.functions[0].function_arn #=> String
-    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
+    #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
     #   resp.functions[0].role #=> String
     #   resp.functions[0].handler #=> String
     #   resp.functions[0].code_size #=> Integer
@@ -2011,10 +2019,22 @@ module Aws::Lambda
     end
 
     # Returns a list of tags assigned to a function when supplied the
-    # function ARN (Amazon Resource Name).
+    # function ARN (Amazon Resource Name). For more information on Tagging,
+    # see [Tagging Lambda Functions][1] in the **AWS Lambda Developer
+    # Guide**.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @option params [required, String] :resource
-    #   The ARN (Amazon Resource Name) of the function.
+    #   The ARN (Amazon Resource Name) of the function. For more information,
+    #   see [Tagging Lambda Functions][1] in the **AWS Lambda Developer
+    #   Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @return [Types::ListTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2104,7 +2124,7 @@ module Aws::Lambda
     #   resp.versions #=> Array
     #   resp.versions[0].function_name #=> String
     #   resp.versions[0].function_arn #=> String
-    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
+    #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
     #   resp.versions[0].role #=> String
     #   resp.versions[0].handler #=> String
     #   resp.versions[0].code_size #=> Integer
@@ -2242,7 +2262,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2397,14 +2417,30 @@ module Aws::Lambda
     # Creates a list of tags (key-value pairs) on the Lambda function.
     # Requires the Lambda function ARN (Amazon Resource Name). If a key is
     # specified without a value, Lambda creates a tag with the specified key
-    # and a value of null.
+    # and a value of null. For more information, see [Tagging Lambda
+    # Functions][1] in the **AWS Lambda Developer Guide**.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @option params [required, String] :resource
-    #   The ARN (Amazon Resource Name) of the Lambda function.
+    #   The ARN (Amazon Resource Name) of the Lambda function. For more
+    #   information, see [Tagging Lambda Functions][1] in the **AWS Lambda
+    #   Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @option params [required, Hash<String,String>] :tags
     #   The list of tags (key-value pairs) you are assigning to the Lambda
-    #   function.
+    #   function. For more information, see [Tagging Lambda Functions][1] in
+    #   the **AWS Lambda Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2427,13 +2463,30 @@ module Aws::Lambda
     end
 
     # Removes tags from a Lambda function. Requires the function ARN (Amazon
-    # Resource Name).
+    # Resource Name). For more information, see [Tagging Lambda
+    # Functions][1] in the **AWS Lambda Developer Guide**.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @option params [required, String] :resource
-    #   The ARN (Amazon Resource Name) of the function.
+    #   The ARN (Amazon Resource Name) of the function. For more information,
+    #   see [Tagging Lambda Functions][1] in the **AWS Lambda Developer
+    #   Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The list of tag keys to be deleted from the function.
+    #   The list of tag keys to be deleted from the function. For more
+    #   information, see [Tagging Lambda Functions][1] in the **AWS Lambda
+    #   Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2708,8 +2761,7 @@ module Aws::Lambda
     #   you are using the web API directly, the contents of the zip file must
     #   be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the
     #   SDKs or CLI will do the encoding for you. For more information about
-    #   creating a .zip file, see [Execution Permissions][1] in the *AWS
-    #   Lambda Developer Guide*.
+    #   creating a .zip file, see [Execution Permissions][1].
     #
     #
     #
@@ -2818,7 +2870,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -2923,8 +2975,9 @@ module Aws::Lambda
     #   To use the Python runtime v3.6, set the value to "python3.6". To use
     #   the Python runtime v2.7, set the value to "python2.7". To use the
     #   Node.js runtime v6.10, set the value to "nodejs6.10". To use the
-    #   Node.js runtime v4.3, set the value to "nodejs4.3". To use the
-    #   Python runtime v3.6, set the value to "python3.6".
+    #   Node.js runtime v4.3, set the value to "nodejs4.3". To use the .NET
+    #   Core runtime v1.0, set the value to "dotnetcore1.0". To use the .NET
+    #   Core runtime v2.0, set the value to "dotnetcore2.0".
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available on
@@ -2937,7 +2990,8 @@ module Aws::Lambda
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
     #   The parent object that contains the target ARN (Amazon Resource Name)
-    #   of an Amazon SQS queue or Amazon SNS topic.
+    #   of an Amazon SQS queue or Amazon SNS topic. For more information, see
+    #   dlq.
     #
     # @option params [String] :kms_key_arn
     #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
@@ -3030,7 +3084,7 @@ module Aws::Lambda
     #         "EnvironmentVariableName" => "EnvironmentVariableValue",
     #       },
     #     },
-    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
+    #     runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
     #     dead_letter_config: {
     #       target_arn: "ResourceArn",
     #     },
@@ -3045,7 +3099,7 @@ module Aws::Lambda
     #
     #   resp.function_name #=> String
     #   resp.function_arn #=> String
-    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
+    #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "nodejs6.10", "nodejs8.10", "java8", "python2.7", "python3.6", "dotnetcore1.0", "dotnetcore2.0", "nodejs4.3-edge", "go1.x"
     #   resp.role #=> String
     #   resp.handler #=> String
     #   resp.code_size #=> Integer
@@ -3092,7 +3146,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

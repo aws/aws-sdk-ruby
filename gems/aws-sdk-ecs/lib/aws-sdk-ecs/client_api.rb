@@ -89,6 +89,8 @@ module Aws::ECS
     EnvironmentVariables = Shapes::ListShape.new(name: 'EnvironmentVariables')
     Failure = Shapes::StructureShape.new(name: 'Failure')
     Failures = Shapes::ListShape.new(name: 'Failures')
+    HealthCheck = Shapes::StructureShape.new(name: 'HealthCheck')
+    HealthStatus = Shapes::StringShape.new(name: 'HealthStatus')
     HostEntry = Shapes::StructureShape.new(name: 'HostEntry')
     HostEntryList = Shapes::ListShape.new(name: 'HostEntryList')
     HostVolumeProperties = Shapes::StructureShape.new(name: 'HostVolumeProperties')
@@ -155,6 +157,8 @@ module Aws::ECS
     ServiceEvents = Shapes::ListShape.new(name: 'ServiceEvents')
     ServiceNotActiveException = Shapes::StructureShape.new(name: 'ServiceNotActiveException')
     ServiceNotFoundException = Shapes::StructureShape.new(name: 'ServiceNotFoundException')
+    ServiceRegistries = Shapes::ListShape.new(name: 'ServiceRegistries')
+    ServiceRegistry = Shapes::StructureShape.new(name: 'ServiceRegistry')
     Services = Shapes::ListShape.new(name: 'Services')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StartTaskRequest = Shapes::StructureShape.new(name: 'StartTaskRequest')
@@ -180,6 +184,8 @@ module Aws::ECS
     TaskOverride = Shapes::StructureShape.new(name: 'TaskOverride')
     Tasks = Shapes::ListShape.new(name: 'Tasks')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Tmpfs = Shapes::StructureShape.new(name: 'Tmpfs')
+    TmpfsList = Shapes::ListShape.new(name: 'TmpfsList')
     TransportProtocol = Shapes::StringShape.new(name: 'TransportProtocol')
     Ulimit = Shapes::StructureShape.new(name: 'Ulimit')
     UlimitList = Shapes::ListShape.new(name: 'UlimitList')
@@ -251,6 +257,7 @@ module Aws::ECS
     Container.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     Container.add_member(:network_bindings, Shapes::ShapeRef.new(shape: NetworkBindings, location_name: "networkBindings"))
     Container.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: NetworkInterfaces, location_name: "networkInterfaces"))
+    Container.add_member(:health_status, Shapes::ShapeRef.new(shape: HealthStatus, location_name: "healthStatus"))
     Container.struct_class = Types::Container
 
     ContainerDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -280,6 +287,7 @@ module Aws::ECS
     ContainerDefinition.add_member(:docker_labels, Shapes::ShapeRef.new(shape: DockerLabelsMap, location_name: "dockerLabels"))
     ContainerDefinition.add_member(:ulimits, Shapes::ShapeRef.new(shape: UlimitList, location_name: "ulimits"))
     ContainerDefinition.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LogConfiguration, location_name: "logConfiguration"))
+    ContainerDefinition.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheck, location_name: "healthCheck"))
     ContainerDefinition.struct_class = Types::ContainerDefinition
 
     ContainerDefinitions.member = Shapes::ShapeRef.new(shape: ContainerDefinition)
@@ -333,6 +341,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceName"))
     CreateServiceRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
     CreateServiceRequest.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
+    CreateServiceRequest.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
     CreateServiceRequest.add_member(:desired_count, Shapes::ShapeRef.new(shape: BoxedInteger, required: true, location_name: "desiredCount"))
     CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateServiceRequest.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
@@ -467,6 +476,13 @@ module Aws::ECS
 
     Failures.member = Shapes::ShapeRef.new(shape: Failure)
 
+    HealthCheck.add_member(:command, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "command"))
+    HealthCheck.add_member(:interval, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "interval"))
+    HealthCheck.add_member(:timeout, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "timeout"))
+    HealthCheck.add_member(:retries, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "retries"))
+    HealthCheck.add_member(:start_period, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "startPeriod"))
+    HealthCheck.struct_class = Types::HealthCheck
+
     HostEntry.add_member(:hostname, Shapes::ShapeRef.new(shape: String, required: true, location_name: "hostname"))
     HostEntry.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ipAddress"))
     HostEntry.struct_class = Types::HostEntry
@@ -487,6 +503,8 @@ module Aws::ECS
     LinuxParameters.add_member(:capabilities, Shapes::ShapeRef.new(shape: KernelCapabilities, location_name: "capabilities"))
     LinuxParameters.add_member(:devices, Shapes::ShapeRef.new(shape: DevicesList, location_name: "devices"))
     LinuxParameters.add_member(:init_process_enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "initProcessEnabled"))
+    LinuxParameters.add_member(:shared_memory_size, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "sharedMemorySize"))
+    LinuxParameters.add_member(:tmpfs, Shapes::ShapeRef.new(shape: TmpfsList, location_name: "tmpfs"))
     LinuxParameters.struct_class = Types::LinuxParameters
 
     ListAttributesRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
@@ -692,6 +710,7 @@ module Aws::ECS
     Service.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     Service.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "clusterArn"))
     Service.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
+    Service.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
     Service.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     Service.add_member(:desired_count, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredCount"))
     Service.add_member(:running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningCount"))
@@ -716,6 +735,14 @@ module Aws::ECS
     ServiceEvent.struct_class = Types::ServiceEvent
 
     ServiceEvents.member = Shapes::ShapeRef.new(shape: ServiceEvent)
+
+    ServiceRegistries.member = Shapes::ShapeRef.new(shape: ServiceRegistry)
+
+    ServiceRegistry.add_member(:registry_arn, Shapes::ShapeRef.new(shape: String, location_name: "registryArn"))
+    ServiceRegistry.add_member(:port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "port"))
+    ServiceRegistry.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
+    ServiceRegistry.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
+    ServiceRegistry.struct_class = Types::ServiceRegistry
 
     Services.member = Shapes::ShapeRef.new(shape: Service)
 
@@ -796,6 +823,7 @@ module Aws::ECS
     Task.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
     Task.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
     Task.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
+    Task.add_member(:health_status, Shapes::ShapeRef.new(shape: HealthStatus, location_name: "healthStatus"))
     Task.struct_class = Types::Task
 
     TaskDefinition.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
@@ -827,6 +855,13 @@ module Aws::ECS
     TaskOverride.struct_class = Types::TaskOverride
 
     Tasks.member = Shapes::ShapeRef.new(shape: Task)
+
+    Tmpfs.add_member(:container_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "containerPath"))
+    Tmpfs.add_member(:size, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "size"))
+    Tmpfs.add_member(:mount_options, Shapes::ShapeRef.new(shape: StringList, location_name: "mountOptions"))
+    Tmpfs.struct_class = Types::Tmpfs
+
+    TmpfsList.member = Shapes::ShapeRef.new(shape: Tmpfs)
 
     Ulimit.add_member(:name, Shapes::ShapeRef.new(shape: UlimitName, required: true, location_name: "name"))
     Ulimit.add_member(:soft_limit, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "softLimit"))

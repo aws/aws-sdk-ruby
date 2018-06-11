@@ -525,7 +525,7 @@ module Aws::CodeDeploy
     # @!attribute [rw] termination_wait_time_in_minutes
     #   The number of minutes to wait after a successful blue/green
     #   deployment before terminating instances from the original
-    #   environment.
+    #   environment. The maximum setting is 2880 minutes (2 days).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BlueInstanceTerminationOption AWS API Documentation
@@ -1607,10 +1607,11 @@ module Aws::CodeDeploy
     #     balancer immediately after the new application revision is
     #     installed on the instances in the replacement environment.
     #
-    #   * STOP\_DEPLOYMENT: Do not register new instances with load balancer
-    #     unless traffic is rerouted manually. If traffic is not rerouted
-    #     manually before the end of the specified wait period, the
-    #     deployment status is changed to Stopped.
+    #   * STOP\_DEPLOYMENT: Do not register new instances with a load
+    #     balancer unless traffic rerouting is started using
+    #     ContinueDeployment. If traffic rerouting is not started before the
+    #     end of the specified wait period, the deployment status is changed
+    #     to Stopped.
     #   @return [String]
     #
     # @!attribute [rw] wait_time_in_minutes
@@ -2982,12 +2983,20 @@ module Aws::CodeDeploy
     #   An array containing information about the load balancer to use for
     #   load balancing in a deployment. In Elastic Load Balancing, load
     #   balancers are used with Classic Load Balancers.
+    #
+    #   <note markdown="1"> Adding more than one load balancer to the array is not supported.
+    #
+    #    </note>
     #   @return [Array<Types::ELBInfo>]
     #
     # @!attribute [rw] target_group_info_list
     #   An array containing information about the target group to use for
     #   load balancing in a deployment. In Elastic Load Balancing, target
     #   groups are used with Application Load Balancers.
+    #
+    #   <note markdown="1"> Adding more than one target group to the array is not supported.
+    #
+    #    </note>
     #   @return [Array<Types::TargetGroupInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LoadBalancerInfo AWS API Documentation

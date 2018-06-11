@@ -292,9 +292,9 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Attaches a policy to a root, an organizational unit, or an individual
-    # account. How the policy affects accounts depends on the type of
-    # policy:
+    # Attaches a policy to a root, an organizational unit (OU), or an
+    # individual account. How the policy affects accounts depends on the
+    # type of policy:
     #
     # * **Service control policy (SCP)** - An SCP specifies what permissions
     #   can be delegated to users in affected member accounts. The scope of
@@ -562,15 +562,26 @@ module Aws::Organizations
     # Account in Your Organization][2] in the *AWS Organizations User
     # Guide*.
     #
-    # When you create an account in an organization using the AWS
-    # Organizations console, API, or CLI commands, the information required
-    # for the account to operate as a standalone account, such as a payment
-    # method and signing the End User Licence Agreement (EULA) is *not*
-    # automatically collected. If you must remove an account from your
-    # organization later, you can do so only after you provide the missing
-    # information. Follow the steps at [ To leave an organization when all
-    # required account information has not yet been provided][3] in the *AWS
-    # Organizations User Guide*.
+    # * When you create an account in an organization using the AWS
+    #   Organizations console, API, or CLI commands, the information
+    #   required for the account to operate as a standalone account, such as
+    #   a payment method and signing the End User Licence Agreement (EULA)
+    #   is *not* automatically collected. If you must remove an account from
+    #   your organization later, you can do so only after you provide the
+    #   missing information. Follow the steps at [ To leave an organization
+    #   when all required account information has not yet been provided][3]
+    #   in the *AWS Organizations User Guide*.
+    #
+    # * If you get an exception that indicates that you exceeded your
+    #   account limits for the organization or that the operation failed
+    #   because your organization is still initializing, wait one hour and
+    #   then try again. If the error persists after an hour, then contact
+    #   [AWS Customer Support][4].
+    #
+    # * Because `CreateAccount` operates asynchronously, it can return a
+    #   successful completion message even though account initialization
+    #   might still be in progress. You might need to wait a few minutes
+    #   before you can successfully access the account.
     #
     # <note markdown="1"> When you create a member account with this operation, you can choose
     # whether to create the account with the **IAM User and Role Access to
@@ -579,25 +590,17 @@ module Aws::Organizations
     # for the account. If you disable this, then only the account root user
     # can access billing information. For information about how to disable
     # this for an account, see [Granting Access to Your Billing Information
-    # and Tools][4].
+    # and Tools][5].
     #
     #  </note>
-    #
-    # This operation can be called only from the organization's master
-    # account.
-    #
-    # If you get an exception that indicates that you exceeded your account
-    # limits for the organization or that you can"t add an account because
-    # your organization is still initializing, please contact [ AWS Customer
-    # Support][5].
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integration_service-linked-roles
     # [2]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html
     # [3]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
-    # [4]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
-    # [5]: https://console.aws.amazon.com/support/home#/
+    # [4]: https://console.aws.amazon.com/support/home#/
+    # [5]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html
     #
     # @option params [required, String] :email
     #   The email address of the owner to assign to the new member account.
@@ -1135,7 +1138,7 @@ module Aws::Organizations
 
     # Deletes the organization. You can delete an organization only by using
     # credentials from the master account. The organization must be empty of
-    # member accounts, OUs, and policies.
+    # member accounts, organizational units (OUs), and policies.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1148,9 +1151,9 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Deletes an organizational unit from a root or another OU. You must
-    # first remove all accounts and child OUs from the OU that you want to
-    # delete.
+    # Deletes an organizational unit (OU) from a root or another OU. You
+    # must first remove all accounts and child OUs from the OU that you want
+    # to delete.
     #
     # This operation can be called only from the organization's master
     # account.
@@ -1197,8 +1200,8 @@ module Aws::Organizations
     end
 
     # Deletes the specified policy from your organization. Before you
-    # perform this operation, you must first detach the policy from all OUs,
-    # roots, and accounts.
+    # perform this operation, you must first detach the policy from all
+    # organizational units (OUs), roots, and accounts.
     #
     # This operation can be called only from the organization's master
     # account.
@@ -1492,6 +1495,12 @@ module Aws::Organizations
     #
     # This operation can be called from any account in the organization.
     #
+    # <note markdown="1"> Even if a policy type is shown as available in the organization, it
+    # can be disabled separately at the root level with DisablePolicyType.
+    # Use ListRoots to see the status of policy types for a specified root.
+    #
+    #  </note>
+    #
     # @return [Types::DescribeOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeOrganizationResponse#organization #organization} => Types::Organization
@@ -1674,10 +1683,10 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Detaches a policy from a target root, organizational unit, or account.
-    # If the policy being detached is a service control policy (SCP), the
-    # changes to permissions for IAM users and roles in affected accounts
-    # are immediate.
+    # Detaches a policy from a target root, organizational unit (OU), or
+    # account. If the policy being detached is a service control policy
+    # (SCP), the changes to permissions for IAM users and roles in affected
+    # accounts are immediate.
     #
     # **Note:** Every root, OU, and account must have at least one SCP
     # attached. If you want to replace the default `FullAWSAccess` policy
@@ -1822,11 +1831,19 @@ module Aws::Organizations
     # a certain type can be attached to entities in a root only if that type
     # is enabled in the root. After you perform this operation, you no
     # longer can attach policies of the specified type to that root or to
-    # any OU or account in that root. You can undo this by using the
-    # EnablePolicyType operation.
+    # any organizational unit (OU) or account in that root. You can undo
+    # this by using the EnablePolicyType operation.
     #
     # This operation can be called only from the organization's master
     # account.
+    #
+    # <note markdown="1"> If you disable a policy type for a root, it still shows as enabled for
+    # the organization if all features are enabled in that organization. Use
+    # ListRoots to see the status of policy types for a specified root. Use
+    # DescribeOrganization to see the status of policy types in the
+    # organization.
+    #
+    #  </note>
     #
     # @option params [required, String] :root_id
     #   The unique identifier (ID) of the root in which you want to disable a
@@ -1952,13 +1969,16 @@ module Aws::Organizations
     # Organization][1] in the *AWS Organizations User Guide*.
     #
     # This operation is required only for organizations that were created
-    # explicitly with only the consolidated billing features enabled, or
-    # that were migrated from a Consolidated Billing account family to
-    # Organizations. Calling this operation sends a handshake to every
-    # invited account in the organization. The feature set change can be
-    # finalized and the additional features enabled only after all
-    # administrators in the invited accounts approve the change by accepting
-    # the handshake.
+    # explicitly with only the consolidated billing features enabled.
+    # Calling this operation sends a handshake to every invited account in
+    # the organization. The feature set change can be finalized and the
+    # additional features enabled only after all administrators in the
+    # invited accounts approve the change by accepting the handshake.
+    #
+    # After you enable all features, you can separately enable or disable
+    # individual policy types in a root using EnablePolicyType and
+    # DisablePolicyType. To see the status of policy types in a root, use
+    # ListRoots.
     #
     # After all invited member accounts accept the handshake, you finalize
     # the feature set change by accepting the handshake that contains
@@ -2044,12 +2064,18 @@ module Aws::Organizations
     end
 
     # Enables a policy type in a root. After you enable a policy type in a
-    # root, you can attach policies of that type to the root, any OU, or
-    # account in that root. You can undo this by using the DisablePolicyType
-    # operation.
+    # root, you can attach policies of that type to the root, any
+    # organizational unit (OU), or account in that root. You can undo this
+    # by using the DisablePolicyType operation.
     #
     # This operation can be called only from the organization's master
     # account.
+    #
+    # You can enable a policy type in a root only if that policy type is
+    # available in the organization. Use DescribeOrganization to view the
+    # status of available policy types in the organization.
+    #
+    # To view the status of policy type in a root, use ListRoots.
     #
     # @option params [required, String] :root_id
     #   The unique identifier (ID) of the root in which you want to enable a
@@ -2126,21 +2152,22 @@ module Aws::Organizations
     # invitation is implemented as a Handshake whose details are in the
     # response.
     #
-    # You can invite AWS accounts only from the same seller as the master
-    # account. For example, if your organization's master account was
-    # created by Amazon Internet Services Pvt. Ltd (AISPL), an AWS seller in
-    # India, then you can only invite other AISPL accounts to your
-    # organization. You can't combine accounts from AISPL and AWS, or any
-    # other AWS seller. For more information, see [Consolidated Billing in
-    # India][1].
+    # * You can invite AWS accounts only from the same seller as the master
+    #   account. For example, if your organization's master account was
+    #   created by Amazon Internet Services Pvt. Ltd (AISPL), an AWS seller
+    #   in India, then you can only invite other AISPL accounts to your
+    #   organization. You can't combine accounts from AISPL and AWS, or any
+    #   other AWS seller. For more information, see [Consolidated Billing in
+    #   India][1].
+    #
+    # * If you receive an exception that indicates that you exceeded your
+    #   account limits for the organization or that the operation failed
+    #   because your organization is still initializing, wait one hour and
+    #   then try again. If the error persists after an hour, then contact
+    #   [AWS Customer Support][2].
     #
     # This operation can be called only from the organization's master
     # account.
-    #
-    # If you get an exception that indicates that you exceeded your account
-    # limits for the organization or that you can"t add an account because
-    # your organization is still initializing, please contact [ AWS Customer
-    # Support][2].
     #
     #
     #
@@ -2391,8 +2418,16 @@ module Aws::Organizations
     end
 
     # Lists all the accounts in the organization. To request only the
-    # accounts in a root or OU, use the ListAccountsForParent operation
-    # instead.
+    # accounts in a specified root or organizational unit (OU), use the
+    # ListAccountsForParent operation instead.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2505,6 +2540,14 @@ module Aws::Organizations
     # and not in any child OUs. To get a list of all accounts in the
     # organization, use the ListAccounts operation.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # This operation can be called only from the organization's master
     # account.
     #
@@ -2597,9 +2640,18 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Lists all of the OUs or accounts that are contained in the specified
-    # parent OU or root. This operation, along with ListParents enables you
-    # to traverse the tree structure that makes up this root.
+    # Lists all of the organizational units (OUs) or accounts that are
+    # contained in the specified parent OU or root. This operation, along
+    # with ListParents enables you to traverse the tree structure that makes
+    # up this root.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2700,6 +2752,14 @@ module Aws::Organizations
 
     # Lists the account creation requests that match the specified status
     # that is currently being tracked for the organization.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -2816,6 +2876,14 @@ module Aws::Organizations
     # Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the
     # results of this API for only 30 days after changing to that state.
     # After that they are deleted and no longer accessible.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called from any account in the organization.
     #
@@ -2954,6 +3022,14 @@ module Aws::Organizations
     # Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the
     # results of this API for only 30 days after changing to that state.
     # After that they are deleted and no longer accessible.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -3129,6 +3205,14 @@ module Aws::Organizations
     # Lists the organizational units (OUs) in a parent organizational unit
     # or root.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # This operation can be called only from the organization's master
     # account.
     #
@@ -3229,6 +3313,14 @@ module Aws::Organizations
     # along with ListChildren enables you to traverse the tree structure
     # that makes up this root.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # This operation can be called only from the organization's master
     # account.
     #
@@ -3322,6 +3414,14 @@ module Aws::Organizations
 
     # Retrieves the list of all policies in an organization of a specified
     # type.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -3422,6 +3522,14 @@ module Aws::Organizations
     # Lists the policies that are directly attached to the specified target
     # root, organizational unit (OU), or account. You must specify the
     # policy type that you want included in the returned list.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -3530,8 +3638,25 @@ module Aws::Organizations
 
     # Lists the roots that are defined in the current organization.
     #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
+    #
     # This operation can be called only from the organization's master
     # account.
+    #
+    # <note markdown="1"> Policy types can be enabled and disabled in roots. This is distinct
+    # from whether they are available in the organization. When you enable
+    # all features, you make policy types available for use in that
+    # organization. Individual policy types can then be enabled and disabled
+    # in a root. To see the availability of a policy type in an
+    # organization, use DescribeOrganization.
+    #
+    #  </note>
     #
     # @option params [String] :next_token
     #   Use this parameter if you receive a `NextToken` response in a previous
@@ -3608,8 +3733,16 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Lists all the roots, OUs, and accounts to which the specified policy
-    # is attached.
+    # Lists all the roots, organizaitonal units (OUs), and accounts to which
+    # the specified policy is attached.
+    #
+    # <note markdown="1"> Always check the `NextToken` response parameter for a `null` value
+    # when calling a `List*` operation. These operations can occasionally
+    # return an empty set of results even when there are more results
+    # available. The `NextToken` response parameter value is `null` *only*
+    # when there are no more results to display.
+    #
+    #  </note>
     #
     # This operation can be called only from the organization's master
     # account.
@@ -3708,8 +3841,8 @@ module Aws::Organizations
       req.send_request(options)
     end
 
-    # Moves an account from its current source parent root or OU to the
-    # specified destination parent root or OU.
+    # Moves an account from its current source parent root or organizational
+    # unit (OU) to the specified destination parent root or OU.
     #
     # This operation can be called only from the organization's master
     # account.
@@ -3804,31 +3937,25 @@ module Aws::Organizations
     # account. Member accounts can remove themselves with LeaveOrganization
     # instead.
     #
-    # * You can remove an account from your organization only if the account
-    #   is configured with the information required to operate as a
-    #   standalone account. When you create an account in an organization
-    #   using the AWS Organizations console, API, or CLI commands, the
-    #   information required of standalone accounts is *not* automatically
-    #   collected. For an account that you want to make standalone, you must
-    #   accept the End User License Agreement (EULA), choose a support plan,
-    #   provide and verify the required contact information, and provide a
-    #   current payment method. AWS uses the payment method to charge for
-    #   any billable (not free tier) AWS activity that occurs while the
-    #   account is not attached to an organization. To remove an account
-    #   that does not yet have this information, you must sign in as the
-    #   member account and follow the steps at [ To leave an organization
-    #   when all required account information has not yet been provided][1]
-    #   in the *AWS Organizations User Guide*.
-    #
-    # * You can remove a member account only after you enable IAM user
-    #   access to billing in the member account. For more information, see
-    #   [Activating Access to the Billing and Cost Management Console][2] in
-    #   the *AWS Billing and Cost Management User Guide*.
+    # You can remove an account from your organization only if the account
+    # is configured with the information required to operate as a standalone
+    # account. When you create an account in an organization using the AWS
+    # Organizations console, API, or CLI commands, the information required
+    # of standalone accounts is *not* automatically collected. For an
+    # account that you want to make standalone, you must accept the End User
+    # License Agreement (EULA), choose a support plan, provide and verify
+    # the required contact information, and provide a current payment
+    # method. AWS uses the payment method to charge for any billable (not
+    # free tier) AWS activity that occurs while the account is not attached
+    # to an organization. To remove an account that does not yet have this
+    # information, you must sign in as the member account and follow the
+    # steps at [ To leave an organization when all required account
+    # information has not yet been provided][1] in the *AWS Organizations
+    # User Guide*.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info
-    # [2]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
     #
     # @option params [required, String] :account_id
     #   The unique identifier (ID) of the member account that you want to
@@ -4079,7 +4206,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

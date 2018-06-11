@@ -500,6 +500,99 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Backtracks a DB cluster to a specific time, without creating a new DB
+    # cluster.
+    #
+    # For more information on backtracking, see [ Backtracking an Aurora DB
+    # Cluster][1] in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Managing.Backtrack.html
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster to be backtracked. This
+    #   parameter is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `my-cluster1`
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :backtrack_to
+    #   The timestamp of the time to backtrack the DB cluster to, specified in
+    #   ISO 8601 format. For more information about ISO 8601, see the [ISO8601
+    #   Wikipedia page.][1]
+    #
+    #   <note markdown="1"> If the specified time is not a consistent time for the DB cluster,
+    #   Aurora automatically chooses the nearest possible consistent time for
+    #   the DB cluster.
+    #
+    #    </note>
+    #
+    #   Constraints:
+    #
+    #   * Must contain a valid ISO 8601 timestamp.
+    #
+    #   * Cannot contain a timestamp set in the future.
+    #
+    #   Example: `2017-07-08T18:00Z`
+    #
+    #
+    #
+    #   [1]: http://en.wikipedia.org/wiki/ISO_8601
+    #
+    # @option params [Boolean] :force
+    #   A value that, if specified, forces the DB cluster to backtrack when
+    #   binary logging is enabled. Otherwise, an error occurs when binary
+    #   logging is enabled.
+    #
+    # @option params [Boolean] :use_earliest_time_on_point_in_time_unavailable
+    #   If *BacktrackTo* is set to a timestamp earlier than the earliest
+    #   backtrack time, this value backtracks the DB cluster to the earliest
+    #   possible backtrack time. Otherwise, an error occurs.
+    #
+    # @return [Types::DBClusterBacktrack] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterBacktrack#db_cluster_identifier #db_cluster_identifier} => String
+    #   * {Types::DBClusterBacktrack#backtrack_identifier #backtrack_identifier} => String
+    #   * {Types::DBClusterBacktrack#backtrack_to #backtrack_to} => Time
+    #   * {Types::DBClusterBacktrack#backtracked_from #backtracked_from} => Time
+    #   * {Types::DBClusterBacktrack#backtrack_request_creation_time #backtrack_request_creation_time} => Time
+    #   * {Types::DBClusterBacktrack#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.backtrack_db_cluster({
+    #     db_cluster_identifier: "String", # required
+    #     backtrack_to: Time.now, # required
+    #     force: false,
+    #     use_earliest_time_on_point_in_time_unavailable: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_cluster_identifier #=> String
+    #   resp.backtrack_identifier #=> String
+    #   resp.backtrack_to #=> Time
+    #   resp.backtracked_from #=> Time
+    #   resp.backtrack_request_creation_time #=> Time
+    #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BacktrackDBCluster AWS API Documentation
+    #
+    # @overload backtrack_db_cluster(params = {})
+    # @param [Hash] params ({})
+    def backtrack_db_cluster(params = {}, options = {})
+      req = build_request(:backtrack_db_cluster, params)
+      req.send_request(options)
+    end
+
     # Copies the specified DB cluster parameter group.
     #
     # @option params [required, String] :source_db_cluster_parameter_group_identifier
@@ -722,10 +815,6 @@ module Aws::RDS
     #   key ID is the Amazon Resource Name (ARN), KMS key identifier, or the
     #   KMS key alias for the KMS encryption key.
     #
-    #   If you copy an unencrypted DB cluster snapshot and specify a value for
-    #   the `KmsKeyId` parameter, Amazon RDS encrypts the target DB cluster
-    #   snapshot using the specified KMS encryption key.
-    #
     #   If you copy an encrypted DB cluster snapshot from your AWS account,
     #   you can specify a value for `KmsKeyId` to encrypt the copy with a new
     #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
@@ -741,6 +830,9 @@ module Aws::RDS
     #   encryption keys are specific to the AWS Region that they are created
     #   in, and you can't use encryption keys from one AWS Region in another
     #   AWS Region.
+    #
+    #   If you copy an unencrypted DB cluster snapshot and specify a value for
+    #   the `KmsKeyId` parameter, an error is returned.
     #
     # @option params [String] :pre_signed_url
     #   The URL that contains a Signature Version 4 signed request for the
@@ -970,9 +1062,6 @@ module Aws::RDS
     # the AWS Region where you call the `CopyDBSnapshot` action is the
     # destination AWS Region for the DB snapshot copy.
     #
-    # You can't copy an encrypted, shared DB snapshot from one AWS Region
-    # to another.
-    #
     # For more information about copying snapshots, see [Copying a DB
     # Snapshot][1] in the Amazon RDS User Guide.
     #
@@ -1192,6 +1281,9 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshot.processor_features #=> Array
+    #   resp.db_snapshot.processor_features[0].name #=> String
+    #   resp.db_snapshot.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -1412,14 +1504,20 @@ module Aws::RDS
     # @option params [required, String] :engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora`, `aurora-postgresql`
+    #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora),
+    #   `aurora-mysql` (for MySQL 5.7-compatible Aurora), and
+    #   `aurora-postgresql`
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   **Aurora**
+    #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`
+    #   Example: `5.6.10a`, `5.7.12`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the DB cluster accept
@@ -1585,6 +1683,23 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1650,6 +1765,8 @@ module Aws::RDS
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #     source_region: "String",
     #   })
     #
@@ -1702,6 +1819,11 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
     #
@@ -1767,6 +1889,14 @@ module Aws::RDS
     #   group family, and can be applied only to a DB cluster running a
     #   database engine and engine version compatible with that DB cluster
     #   parameter group family.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `aurora5.6`, `aurora-mysql5.7`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `aurora-postgresql9.6`
     #
     # @option params [required, String] :description
     #   The description for the DB cluster parameter group.
@@ -2130,7 +2260,9 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
+    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #
+    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -2437,11 +2569,13 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.2.12` (supported in all AWS Regions)
+    #
     #   * `10.2.11` (supported in all AWS Regions)
     #
-    #   ^
     #
     #
+    #   * `10.1.31` (supported in all AWS Regions)
     #
     #   * `10.1.26` (supported in all AWS Regions)
     #
@@ -2452,6 +2586,8 @@ module Aws::RDS
     #   * `10.1.14` (supported in all AWS Regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.34` (supported in all AWS Regions)
     #
     #   * `10.0.32` (supported in all AWS Regions)
     #
@@ -2513,6 +2649,8 @@ module Aws::RDS
     #
     #   **MySQL**
     #
+    #   * `5.7.21` (supported in all AWS regions)
+    #
     #   * `5.7.19` (supported in all AWS regions)
     #
     #   * `5.7.17` (supported in all AWS regions)
@@ -2520,6 +2658,8 @@ module Aws::RDS
     #   * `5.7.16` (supported in all AWS regions)
     #
     #
+    #
+    #   * `5.6.39` (supported in all AWS Regions)
     #
     #   * `5.6.37` (supported in all AWS Regions)
     #
@@ -2533,6 +2673,8 @@ module Aws::RDS
     #     ca-central-1, eu-west-2)
     #
     #
+    #
+    #   * `5.5.59` (supported in all AWS Regions)
     #
     #   * `5.5.57` (supported in all AWS Regions)
     #
@@ -2599,7 +2741,9 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
+    #   * **Version 10.1**
+    #
+    #   * **Version 9.6.x:** ` 9.6.6 | 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
     #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
@@ -2818,6 +2962,13 @@ module Aws::RDS
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
     #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
+    #
     # @option params [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
@@ -2826,6 +2977,10 @@ module Aws::RDS
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
+    #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2901,6 +3056,12 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2955,6 +3116,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -3002,6 +3166,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -3017,14 +3184,14 @@ module Aws::RDS
     # running MySQL, MariaDB, or PostgreSQL. For more information, see
     # [Working with PostgreSQL, MySQL, and MariaDB Read Replicas][1].
     #
-    # Amazon Aurora does not support this action. You must call the
+    # Amazon Aurora doesn't support this action. You must call the
     # `CreateDBInstance` action to create a DB instance for an Aurora DB
     # cluster.
     #
     # All Read Replica DB instances are created with backups disabled. All
     # other DB instance attributes (including DB security groups and DB
     # parameter groups) are inherited from the source DB instance, except as
-    # specified below.
+    # specified following.
     #
     # Your source DB instance must have backup retention enabled.
     #
@@ -3096,18 +3263,13 @@ module Aws::RDS
     #   Valid Values: `1150-65535`
     #
     # @option params [Boolean] :multi_az
-    #   Specifies whether the read replica is in a Multi-AZ deployment.
+    #   Specifies whether the Read Replica is in a Multi-AZ deployment.
     #
     #   You can create a Read Replica as a Multi-AZ DB instance. RDS creates a
     #   standby of your replica in another Availability Zone for failover
     #   support for the replica. Creating your Read Replica as a Multi-AZ DB
     #   instance is independent of whether the source database is a Multi-AZ
     #   DB instance.
-    #
-    #   <note markdown="1"> Currently PostgreSQL Read Replicas can only be created as single-AZ DB
-    #   instances.
-    #
-    #    </note>
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades are applied automatically to the
@@ -3308,6 +3470,13 @@ module Aws::RDS
     #   True to enable Performance Insights for the read replica, and
     #   otherwise false.
     #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
+    #
     # @option params [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
@@ -3316,6 +3485,14 @@ module Aws::RDS
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
     #   Logs.
+    #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -3382,6 +3559,13 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #     source_region: "String",
     #   })
     #
@@ -3437,6 +3621,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -3484,6 +3671,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -3607,6 +3797,11 @@ module Aws::RDS
 
     # Creates a new DB security group. DB security groups control access to
     # a DB instance.
+    #
+    # <note markdown="1"> A DB security group controls access to EC2-Classic DB instances that
+    # are not in a VPC.
+    #
+    #  </note>
     #
     # @option params [required, String] :db_security_group_name
     #   The name for the DB security group. This value is stored as a
@@ -3790,6 +3985,9 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshot.processor_features #=> Array
+    #   resp.db_snapshot.processor_features[0].name #=> String
+    #   resp.db_snapshot.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -4284,6 +4482,11 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
     #
@@ -4581,6 +4784,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -4628,6 +4834,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -4794,6 +5003,9 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshot.processor_features #=> Array
+    #   resp.db_snapshot.processor_features[0].name #=> String
+    #   resp.db_snapshot.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -4946,7 +5158,7 @@ module Aws::RDS
     # instances allowed. The description for a quota includes the quota
     # name, current usage toward that quota, and the quota's maximum value.
     #
-    # This command does not take any parameters.
+    # This command doesn't take any parameters.
     #
     # @return [Types::AccountAttributesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5063,6 +5275,126 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_certificates(params = {}, options = {})
       req = build_request(:describe_certificates, params)
+      req.send_request(options)
+    end
+
+    # Returns information about backtracks for a DB cluster.
+    #
+    # For more information on Amazon Aurora, see [Aurora on Amazon RDS][1]
+    # in the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+    #
+    # @option params [required, String] :db_cluster_identifier
+    #   The DB cluster identifier of the DB cluster to be described. This
+    #   parameter is stored as a lowercase string.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    #   Example: `my-cluster1`
+    #
+    # @option params [String] :backtrack_identifier
+    #   If specified, this value is the backtrack identifier of the backtrack
+    #   to be described.
+    #
+    #   Constraints:
+    #
+    #   * Must contain a valid universally unique identifier (UUID). For more
+    #     information about UUIDs, see [A Universally Unique Identifier (UUID)
+    #     URN Namespace][1].
+    #
+    #   ^
+    #
+    #   Example: `123e4567-e89b-12d3-a456-426655440000`
+    #
+    #
+    #
+    #   [1]: http://www.ietf.org/rfc/rfc4122.txt
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies one or more DB clusters to describe. Supported
+    #   filters include the following:
+    #
+    #   * `db-cluster-backtrack-id` - Accepts backtrack identifiers. The
+    #     results list includes information about only the backtracks
+    #     identified by these identifiers.
+    #
+    #   * `db-cluster-backtrack-status` - Accepts any of the following
+    #     backtrack status values:
+    #
+    #     * `applying`
+    #
+    #     * `completed`
+    #
+    #     * `failed`
+    #
+    #     * `pending`
+    #
+    #     The results list includes information about only the backtracks
+    #     identified by these values. For more information about backtrack
+    #     status values, see DBClusterBacktrack.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that the
+    #   remaining results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   DescribeDBClusterBacktracks request. If this parameter is specified,
+    #   the response includes only records beyond the marker, up to the value
+    #   specified by `MaxRecords`.
+    #
+    # @return [Types::DBClusterBacktrackMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DBClusterBacktrackMessage#marker #marker} => String
+    #   * {Types::DBClusterBacktrackMessage#db_cluster_backtracks #db_cluster_backtracks} => Array&lt;Types::DBClusterBacktrack&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_cluster_backtracks({
+    #     db_cluster_identifier: "String", # required
+    #     backtrack_identifier: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.db_cluster_backtracks #=> Array
+    #   resp.db_cluster_backtracks[0].db_cluster_identifier #=> String
+    #   resp.db_cluster_backtracks[0].backtrack_identifier #=> String
+    #   resp.db_cluster_backtracks[0].backtrack_to #=> Time
+    #   resp.db_cluster_backtracks[0].backtracked_from #=> Time
+    #   resp.db_cluster_backtracks[0].backtrack_request_creation_time #=> Time
+    #   resp.db_cluster_backtracks[0].status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterBacktracks AWS API Documentation
+    #
+    # @overload describe_db_cluster_backtracks(params = {})
+    # @param [Hash] params ({})
+    def describe_db_cluster_backtracks(params = {}, options = {})
+      req = build_request(:describe_db_cluster_backtracks, params)
       req.send_request(options)
     end
 
@@ -5621,6 +5953,11 @@ module Aws::RDS
     #   resp.db_clusters[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].clone_group_id #=> String
     #   resp.db_clusters[0].cluster_create_time #=> Time
+    #   resp.db_clusters[0].earliest_backtrack_time #=> Time
+    #   resp.db_clusters[0].backtrack_window #=> Integer
+    #   resp.db_clusters[0].backtrack_consumed_change_records #=> Integer
+    #   resp.db_clusters[0].enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_clusters[0].enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
     #
@@ -5652,7 +5989,7 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more than
@@ -5749,6 +6086,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
     #   resp.db_engine_versions[0].exportable_log_types[0] #=> String
     #   resp.db_engine_versions[0].supports_log_exports_to_cloudwatch_logs #=> Boolean
+    #   resp.db_engine_versions[0].supports_read_replica #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -5889,6 +6227,9 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instances[0].pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instances[0].pending_modified_values.processor_features #=> Array
+    #   resp.db_instances[0].pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instances[0].pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -5936,6 +6277,9 @@ module Aws::RDS
     #   resp.db_instances[0].performance_insights_kms_key_id #=> String
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instances[0].enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instances[0].processor_features #=> Array
+    #   resp.db_instances[0].processor_features[0].name #=> String
+    #   resp.db_instances[0].processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -6523,6 +6867,9 @@ module Aws::RDS
     #   resp.db_snapshots[0].db_snapshot_arn #=> String
     #   resp.db_snapshots[0].timezone #=> String
     #   resp.db_snapshots[0].iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshots[0].processor_features #=> Array
+    #   resp.db_snapshots[0].processor_features[0].name #=> String
+    #   resp.db_snapshots[0].processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots AWS API Documentation
     #
@@ -6718,7 +7065,7 @@ module Aws::RDS
     #   The name of the DB parameter group family.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -7411,6 +7758,10 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].max_iops_per_db_instance #=> Integer
     #   resp.orderable_db_instance_options[0].min_iops_per_gib #=> Float
     #   resp.orderable_db_instance_options[0].max_iops_per_gib #=> Float
+    #   resp.orderable_db_instance_options[0].available_processor_features #=> Array
+    #   resp.orderable_db_instance_options[0].available_processor_features[0].name #=> String
+    #   resp.orderable_db_instance_options[0].available_processor_features[0].default_value #=> String
+    #   resp.orderable_db_instance_options[0].available_processor_features[0].allowed_values #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -7663,7 +8014,12 @@ module Aws::RDS
     #
     # @option params [String] :product_description
     #   Product description filter value. Specify this parameter to show only
-    #   the available offerings matching the specified product description.
+    #   the available offerings that contain the specified product
+    #   description.
+    #
+    #   <note markdown="1"> The results show offerings that partially match the filter value.
+    #
+    #    </note>
     #
     # @option params [String] :offering_type
     #   The offering type filter value. Specify this parameter to show only
@@ -7925,6 +8281,10 @@ module Aws::RDS
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio #=> Array
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].from #=> Float
     #   resp.valid_db_instance_modifications_message.storage[0].iops_to_storage_ratio[0].to #=> Float
+    #   resp.valid_db_instance_modifications_message.valid_processor_features #=> Array
+    #   resp.valid_db_instance_modifications_message.valid_processor_features[0].name #=> String
+    #   resp.valid_db_instance_modifications_message.valid_processor_features[0].default_value #=> String
+    #   resp.valid_db_instance_modifications_message.valid_processor_features[0].allowed_values #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeValidDBInstanceModifications AWS API Documentation
     #
@@ -8138,6 +8498,11 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
     #
@@ -8297,7 +8662,7 @@ module Aws::RDS
     #
     # @option params [String] :option_group_name
     #   A value that indicates that the DB cluster should be associated with
-    #   the specified option group. Changing this parameter does not result in
+    #   the specified option group. Changing this parameter doesn't result in
     #   an outage except in the following case, and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request. If the parameter change
@@ -8358,6 +8723,32 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
+    # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
+    #   The configuration setting for the log types to be enabled for export
+    #   to CloudWatch Logs for a specific DB cluster.
+    #
+    # @option params [String] :engine_version
+    #   The version number of the database engine to which you want to
+    #   upgrade. Changing this parameter results in an outage. The change is
+    #   applied during the next maintenance window unless the ApplyImmediately
+    #   parameter is set to true.
+    #
+    #   For a list of valid engine versions, see CreateDBInstance, or call
+    #   DescribeDBEngineVersions.
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -8397,6 +8788,12 @@ module Aws::RDS
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
+    #     cloudwatch_logs_export_configuration: {
+    #       enable_log_types: ["String"],
+    #       disable_log_types: ["String"],
+    #     },
+    #     engine_version: "String",
     #   })
     #
     # @example Response structure
@@ -8448,6 +8845,11 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
     #
@@ -8725,7 +9127,7 @@ module Aws::RDS
     #
     # @option params [Array<String>] :db_security_groups
     #   A list of DB security groups to authorize on this DB instance.
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints:
@@ -8774,7 +9176,7 @@ module Aws::RDS
     #   The new password for the master user. The password can include any
     #   printable ASCII character except "/", """, or "@".
     #
-    #   Changing this parameter does not result in an outage and the change is
+    #   Changing this parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible. Between the time of the
     #   request and the completion of the request, the `MasterUserPassword`
     #   element exists in the `PendingModifiedValues` element of the operation
@@ -8816,7 +9218,7 @@ module Aws::RDS
     #
     # @option params [String] :db_parameter_group_name
     #   The name of the DB parameter group to apply to the DB instance.
-    #   Changing this setting does not result in an outage. The parameter
+    #   Changing this setting doesn't result in an outage. The parameter
     #   group name itself is changed immediately, but the actual parameter
     #   changes are not applied until you reboot the instance without
     #   failover. The db instance will NOT be rebooted automatically and the
@@ -8862,7 +9264,7 @@ module Aws::RDS
     # @option params [String] :preferred_backup_window
     #   The daily time range during which automated backups are created if
     #   automated backups are enabled, as determined by the
-    #   `BackupRetentionPeriod` parameter. Changing this parameter does not
+    #   `BackupRetentionPeriod` parameter. Changing this parameter doesn't
     #   result in an outage and the change is asynchronously applied as soon
     #   as possible.
     #
@@ -8883,9 +9285,9 @@ module Aws::RDS
     #
     # @option params [String] :preferred_maintenance_window
     #   The weekly time range (in UTC) during which system maintenance can
-    #   occur, which might result in an outage. Changing this parameter does
-    #   not result in an outage, except in the following situation, and the
-    #   change is asynchronously applied as soon as possible. If there are
+    #   occur, which might result in an outage. Changing this parameter
+    #   doesn't result in an outage, except in the following situation, and
+    #   the change is asynchronously applied as soon as possible. If there are
     #   pending actions that cause a reboot, and the maintenance window is
     #   changed to include the current time, then changing this parameter will
     #   cause a reboot of the DB instance. If moving this window to the
@@ -8902,7 +9304,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :multi_az
     #   Specifies if the DB instance is a Multi-AZ deployment. Changing this
-    #   parameter does not result in an outage and the change is applied
+    #   parameter doesn't result in an outage and the change is applied
     #   during the next maintenance window unless the `ApplyImmediately`
     #   parameter is set to `true` for this request.
     #
@@ -8921,7 +9323,7 @@ module Aws::RDS
     #
     # @option params [Boolean] :allow_major_version_upgrade
     #   Indicates that major version upgrades are allowed. Changing this
-    #   parameter does not result in an outage and the change is
+    #   parameter doesn't result in an outage and the change is
     #   asynchronously applied as soon as possible.
     #
     #   Constraints: This parameter must be set to true when specifying a
@@ -8931,7 +9333,7 @@ module Aws::RDS
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor version upgrades are applied automatically to the
     #   DB instance during the maintenance window. Changing this parameter
-    #   does not result in an outage except in the following case and the
+    #   doesn't result in an outage except in the following case and the
     #   change is asynchronously applied as soon as possible. An outage will
     #   result if this parameter is set to `true` during the maintenance
     #   window, and a newer minor version is available, and RDS has enabled
@@ -8947,7 +9349,7 @@ module Aws::RDS
     #   The new Provisioned IOPS (I/O operations per second) value for the RDS
     #   instance.
     #
-    #   Changing this setting does not result in an outage and the change is
+    #   Changing this setting doesn't result in an outage and the change is
     #   applied during the next maintenance window unless the
     #   `ApplyImmediately` parameter is set to `true` for this request. If you
     #   are migrating from Provisioned IOPS to standard storage, set this
@@ -8978,7 +9380,7 @@ module Aws::RDS
     #
     # @option params [String] :option_group_name
     #   Indicates that the DB instance should be associated with the specified
-    #   option group. Changing this parameter does not result in an outage
+    #   option group. Changing this parameter doesn't result in an outage
     #   except in the following case and the change is applied during the next
     #   maintenance window unless the `ApplyImmediately` parameter is set to
     #   `true` for this request. If the parameter change results in an option
@@ -9187,6 +9589,13 @@ module Aws::RDS
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
     #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
+    #
     # @option params [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
@@ -9194,7 +9603,15 @@ module Aws::RDS
     #
     # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB instance or DB cluster.
+    #   to CloudWatch Logs for a specific DB instance.
+    #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9264,6 +9681,13 @@ module Aws::RDS
     #       enable_log_types: ["String"],
     #       disable_log_types: ["String"],
     #     },
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     #
     # @example Response structure
@@ -9318,6 +9742,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -9365,6 +9792,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -9564,6 +9994,9 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
+    #   resp.db_snapshot.processor_features #=> Array
+    #   resp.db_snapshot.processor_features[0].name #=> String
+    #   resp.db_snapshot.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -9970,10 +10403,16 @@ module Aws::RDS
 
     # Promotes a Read Replica DB instance to a standalone DB instance.
     #
-    # <note markdown="1"> We recommend that you enable automated backups on your Read Replica
-    # before promoting the Read Replica. This ensures that no backup is
-    # taken during the promotion process. Once the instance is promoted to a
-    # primary instance, backups are taken based on your backup settings.
+    # <note markdown="1"> * Backup duration is a function of the amount of changes to the
+    #   database since the previous backup. If you plan to promote a Read
+    #   Replica to a standalone instance, we recommend that you enable
+    #   backups and complete at least one backup prior to promotion. In
+    #   addition, a Read Replica cannot be promoted to a standalone instance
+    #   when it is in the `backing-up` status. If you have enabled backups
+    #   on your Read Replica, configure the automated backup window so that
+    #   daily backups do not interfere with Read Replica promotion.
+    #
+    # * This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
     #
     #  </note>
     #
@@ -10107,6 +10546,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -10154,6 +10596,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -10237,6 +10682,11 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
     #
@@ -10446,6 +10896,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -10493,6 +10946,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -10919,9 +11375,13 @@ module Aws::RDS
     # @option params [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   **Aurora**
+    #   **Aurora MySQL**
     #
     #   Example: `5.6.10a`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`
     #
     # @option params [Integer] :port
     #   The port number on which the instances in the restored DB cluster
@@ -11057,6 +11517,23 @@ module Aws::RDS
     #   Management (IAM) role that authorizes Amazon RDS to access the Amazon
     #   S3 bucket on your behalf.
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #
     # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
@@ -11094,6 +11571,8 @@ module Aws::RDS
     #     s3_bucket_name: "String", # required
     #     s3_prefix: "String",
     #     s3_ingestion_role_arn: "String", # required
+    #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -11145,6 +11624,11 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
     #
@@ -11183,7 +11667,7 @@ module Aws::RDS
     #
     #   Constraints:
     #
-    #   * Must contain from 1 to 255 letters, numbers, or hyphens
+    #   * Must contain from 1 to 63 letters, numbers, or hyphens
     #
     #   * First character must be a letter
     #
@@ -11268,6 +11752,23 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -11310,6 +11811,8 @@ module Aws::RDS
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -11361,6 +11864,11 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
@@ -11461,9 +11969,9 @@ module Aws::RDS
     # @option params [Integer] :port
     #   The port number on which the new DB cluster accepts connections.
     #
-    #   Constraints: Value must be `1150-65535`
+    #   Constraints: A value from `1150-65535`.
     #
-    #   Default: The same port as the original DB cluster.
+    #   Default: The default port for the engine.
     #
     # @option params [String] :db_subnet_group_name
     #   The DB subnet group name to use for the new DB cluster.
@@ -11521,6 +12029,23 @@ module Aws::RDS
     #
     #   Default: `false`
     #
+    # @option params [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    #
+    # @option params [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of logs that the restored DB cluster is to export to
+    #   CloudWatch Logs.
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -11562,6 +12087,8 @@ module Aws::RDS
     #     ],
     #     kms_key_id: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -11613,6 +12140,11 @@ module Aws::RDS
     #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.clone_group_id #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #   resp.db_cluster.earliest_backtrack_time #=> Time
+    #   resp.db_cluster.backtrack_window #=> Integer
+    #   resp.db_cluster.backtrack_consumed_change_records #=> Integer
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports #=> Array
+    #   resp.db_cluster.enabled_cloudwatch_logs_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
@@ -11634,7 +12166,7 @@ module Aws::RDS
     #
     # If your intent is to replace your original DB instance with the new,
     # restored DB instance, then rename your original DB instance before you
-    # call the RestoreDBInstanceFromDBSnapshot action. RDS does not allow
+    # call the RestoreDBInstanceFromDBSnapshot action. RDS doesn't allow
     # two DB instances with the same name. Once you have renamed your
     # original DB instance with a different identifier, then you can pass
     # the original name of the DB instance as the DBInstanceIdentifier in
@@ -11644,6 +12176,11 @@ module Aws::RDS
     #
     # If you are restoring from a shared manual DB snapshot, the
     # `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
+    #
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
+    # Aurora, use RestoreDBClusterFromSnapshot.
+    #
+    #  </note>
     #
     # @option params [required, String] :db_instance_identifier
     #   Name of the DB instance to create from the DB snapshot. This parameter
@@ -11765,10 +12302,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
-    #
-    #   * `aurora-postgresql`
-    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -11866,13 +12399,19 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
-    #
     #   Default: `false`
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
+    #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12004,6 +12543,13 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     #
     # @example Response structure
@@ -12058,6 +12604,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -12105,6 +12654,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -12415,6 +12967,13 @@ module Aws::RDS
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
     #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
+    #
     # @option params [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key
@@ -12423,6 +12982,14 @@ module Aws::RDS
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
+    #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12475,6 +13042,13 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     #
     # @example Response structure
@@ -12529,6 +13103,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -12576,6 +13153,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -12592,13 +13172,18 @@ module Aws::RDS
     # number of days specified by the BackupRetentionPeriod property.
     #
     # The target database is created with most of the original
-    # configuration, but in a system-selected availability zone, with the
+    # configuration, but in a system-selected Availability Zone, with the
     # default security group, the default subnet group, and the default DB
     # parameter group. By default, the new DB instance is created as a
     # single-AZ deployment except when the instance is a SQL Server instance
     # that has an option group that is associated with mirroring; in this
     # case, the instance becomes a mirrored deployment and not a single-AZ
     # deployment.
+    #
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For
+    # Aurora, use RestoreDBClusterToPointInTime.
+    #
+    #  </note>
     #
     # @option params [required, String] :source_db_instance_identifier
     #   The identifier of the source DB instance from which to restore.
@@ -12735,10 +13320,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
-    #
-    #   * `aurora-postgresql`
-    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -12829,13 +13410,19 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
-    #
     #   Default: `false`
     #
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
+    #
+    # @option params [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    #
+    # @option params [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12970,6 +13557,13 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     #
     # @example Response structure
@@ -13024,6 +13618,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13071,6 +13668,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -13175,7 +13775,7 @@ module Aws::RDS
     # more information, see Stopping and Starting a DB instance in the AWS
     # RDS user guide.
     #
-    # <note markdown="1"> This command does not apply to Aurora MySQL and Aurora PostgreSQL.
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
     #
     #  </note>
     #
@@ -13244,6 +13844,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13291,6 +13894,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -13308,7 +13914,7 @@ module Aws::RDS
     # For more information, see Stopping and Starting a DB instance in the
     # AWS RDS user guide.
     #
-    # <note markdown="1"> This command does not apply to Aurora MySQL and Aurora PostgreSQL.
+    # <note markdown="1"> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
     #
     #  </note>
     #
@@ -13382,6 +13988,9 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_enable[0] #=> String
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable #=> Array
     #   resp.db_instance.pending_modified_values.pending_cloudwatch_logs_exports.log_types_to_disable[0] #=> String
+    #   resp.db_instance.pending_modified_values.processor_features #=> Array
+    #   resp.db_instance.pending_modified_values.processor_features[0].name #=> String
+    #   resp.db_instance.pending_modified_values.processor_features[0].value #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -13429,6 +14038,9 @@ module Aws::RDS
     #   resp.db_instance.performance_insights_kms_key_id #=> String
     #   resp.db_instance.enabled_cloudwatch_logs_exports #=> Array
     #   resp.db_instance.enabled_cloudwatch_logs_exports[0] #=> String
+    #   resp.db_instance.processor_features #=> Array
+    #   resp.db_instance.processor_features[0].name #=> String
+    #   resp.db_instance.processor_features[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -13452,7 +14064,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

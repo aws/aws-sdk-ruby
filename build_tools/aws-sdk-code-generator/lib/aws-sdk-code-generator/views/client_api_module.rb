@@ -27,6 +27,11 @@ module AwsSdkCodeGenerator
         'flattened' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
+        # event stream modeling
+        'event' => false,
+        'eventstream' => false,
+        'eventheader' => false,
+        'eventpayload' => false,
         # ignore
         'box' => false,
         'fault' => false,
@@ -98,8 +103,10 @@ module AwsSdkCodeGenerator
       # @return [Array<Shape>]
       def shapes
         shape_enum.map do |shape_name, shape|
-          # APIG model, shape can start with downcase
-          shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
+          # APIG model, shape can start with downcase and with "__"
+          if @service.protocol == 'api-gateway'
+            shape_name = lstrip_prefix(upcase_first(shape_name))
+          end
           Shape.new.tap do |s|
             s.name = shape_name
             s.class_name, shape = shape_class_name(shape)
@@ -110,8 +117,10 @@ module AwsSdkCodeGenerator
 
       def shape_definitions
         shape_enum.inject([]) do |groups, (shape_name, shape)|
-          # APIG model, shape can start with downcase
-          shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
+          # APIG model, shape can start with downcase and with "__"
+          if @service.protocol == 'api-gateway'
+            shape_name = lstrip_prefix(upcase_first(shape_name))
+          end
           lines = []
           if non_error_struct?(shape)
             required = Set.new(shape['required'] || [])
@@ -248,9 +257,17 @@ module AwsSdkCodeGenerator
       end
 
       def shape_ref(ref, member_name = nil, required = Set.new)
-        line = "Shapes::ShapeRef.new(shape: #{ref['shape']}"
+        ref_name = ref['shape']
+        if  @service.protocol == 'api-gateway'
+          ref_name = lstrip_prefix(ref_name)
+        end
+        line = "Shapes::ShapeRef.new(shape: #{ref_name}"
         line += shape_ref_required(required, member_name)
         line += shape_ref_deprecated(ref)
+        line += shape_ref_event(ref)
+        line += shape_ref_eventstream(ref)
+        line += shape_ref_eventpayload(ref)
+        line += shape_ref_eventheader(ref)
         line += shape_ref_location(ref)
         line += shape_ref_location_name(member_name, ref)
         line += shape_ref_metadata(ref)
@@ -271,6 +288,40 @@ module AwsSdkCodeGenerator
           ", deprecated: true"
         else
           ""
+        end
+      end
+
+      def shape_ref_eventstream(ref)
+        if @service.api['shapes'][ref['shape']]['eventstream']
+          ", eventstream: true"
+        else
+          ''
+        end
+      end
+
+      def shape_ref_event(ref)
+        if @service.api['shapes'][ref['shape']]['event']
+          ", event: true"
+        else
+          ''
+        end
+      end
+
+      def shape_ref_eventpayload(ref)
+        if ref['eventpayload']
+          type = @service.api['shapes'][ref['shape']]['type']
+          ", eventpayload: true, eventpayload_type: '#{type}'"
+        else
+          ''
+        end
+      end
+
+      def shape_ref_eventheader(ref)
+        if ref['eventheader']
+          type = @service.api['shapes'][ref['shape']]['type']
+          ", eventheader: true, eventheader_type: '#{type}'"
+        else
+          ''
         end
       end
 
@@ -324,9 +375,11 @@ module AwsSdkCodeGenerator
 
       def operation_ref(ref)
         metadata = ref.dup
-        # APIG model, shape can start with downcase
         shape_name = metadata.delete('shape')
-        shape_name = upcase_first(shape_name) if @service.protocol == 'api-gateway'
+        # APIG model, shape can start with downcase and with "__"
+        if @service.protocol == 'api-gateway'
+          shape_name = lstrip_prefix(upcase_first(shape_name))
+        end
         if metadata.empty?
           options = ''
         else

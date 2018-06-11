@@ -700,7 +700,7 @@ module Aws::Glacier
     #
     # @!attribute [rw] kms_context
     #   Optional. If the encryption type is `aws:kms`, you can use this
-    #   value to specify the encryption context for the restore results.
+    #   value to specify the encryption context for the job results.
     #   @return [String]
     #
     class Encryption < Struct.new(
@@ -1139,7 +1139,7 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The retrieval option to use for the archive retrieval. Valid values
+    #   The tier to use for a select or an archive retrieval. Valid values
     #   are `Expedited`, `Standard`, or `Bulk`. `Standard` is the default.
     #   @return [String]
     #
@@ -1152,7 +1152,7 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] select_parameters
-    #   Contains the parameters that define a select job.
+    #   Contains the parameters used for a select.
     #   @return [Types::SelectParameters]
     #
     # @!attribute [rw] output_location
@@ -1743,9 +1743,9 @@ module Aws::Glacier
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The retrieval option to use for a select or archive retrieval job.
-    #   Valid values are `Expedited`, `Standard`, or `Bulk`. `Standard` is
-    #   the default.
+    #   The tier to use for a select or an archive retrieval job. Valid
+    #   values are `Expedited`, `Standard`, or `Bulk`. `Standard` is the
+    #   default.
     #   @return [String]
     #
     # @!attribute [rw] inventory_retrieval_parameters
@@ -2196,8 +2196,8 @@ module Aws::Glacier
     #       }
     #
     # @!attribute [rw] s3
-    #   Describes an S3 location that will receive the results of the
-    #   restore request.
+    #   Describes an S3 location that will receive the results of the job
+    #   request.
     #   @return [Types::S3Location]
     #
     class OutputLocation < Struct.new(
@@ -2371,12 +2371,11 @@ module Aws::Glacier
     #       }
     #
     # @!attribute [rw] bucket_name
-    #   The name of the bucket where the restore results are stored.
+    #   The name of the Amazon S3 bucket where the job results are stored.
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   The prefix that is prepended to the restore results for this
-    #   request.
+    #   The prefix that is prepended to the results for this request.
     #   @return [String]
     #
     # @!attribute [rw] encryption
@@ -2385,7 +2384,7 @@ module Aws::Glacier
     #   @return [Types::Encryption]
     #
     # @!attribute [rw] canned_acl
-    #   The canned ACL to apply to the restore results.
+    #   The canned access control list (ACL) to apply to the job results.
     #   @return [String]
     #
     # @!attribute [rw] access_control_list
@@ -2393,15 +2392,15 @@ module Aws::Glacier
     #   @return [Array<Types::Grant>]
     #
     # @!attribute [rw] tagging
-    #   The tag-set that is applied to the restore results.
+    #   The tag-set that is applied to the job results.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_metadata
-    #   A map of metadata to store with the restore results in Amazon S3.
+    #   A map of metadata to store with the job results in Amazon S3.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] storage_class
-    #   The storage class used to store the restore results.
+    #   The storage class used to store the job results.
     #   @return [String]
     #
     class S3Location < Struct.new(

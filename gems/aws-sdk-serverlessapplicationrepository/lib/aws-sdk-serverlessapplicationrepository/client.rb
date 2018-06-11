@@ -152,6 +152,8 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [String] :description
     #
+    # @option params [String] :home_page_url
+    #
     # @option params [Array<String>] :labels
     #
     # @option params [String] :license_body
@@ -180,6 +182,7 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::CreateApplicationResponse#author #author} => String
     #   * {Types::CreateApplicationResponse#creation_time #creation_time} => String
     #   * {Types::CreateApplicationResponse#description #description} => String
+    #   * {Types::CreateApplicationResponse#home_page_url #home_page_url} => String
     #   * {Types::CreateApplicationResponse#labels #labels} => Array&lt;String&gt;
     #   * {Types::CreateApplicationResponse#license_url #license_url} => String
     #   * {Types::CreateApplicationResponse#name #name} => String
@@ -192,6 +195,7 @@ module Aws::ServerlessApplicationRepository
     #   resp = client.create_application({
     #     author: "__string",
     #     description: "__string",
+    #     home_page_url: "__string",
     #     labels: ["__string"],
     #     license_body: "__string",
     #     license_url: "__string",
@@ -211,6 +215,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.author #=> String
     #   resp.creation_time #=> String
     #   resp.description #=> String
+    #   resp.home_page_url #=> String
     #   resp.labels #=> Array
     #   resp.labels[0] #=> String
     #   resp.license_url #=> String
@@ -335,8 +340,8 @@ module Aws::ServerlessApplicationRepository
     #     application_id: "__string", # required
     #     parameter_overrides: [
     #       {
-    #         name: "__string",
-    #         value: "__string",
+    #         name: "__string", # required
+    #         value: "__string", # required
     #       },
     #     ],
     #     semantic_version: "__string",
@@ -359,6 +364,27 @@ module Aws::ServerlessApplicationRepository
       req.send_request(options)
     end
 
+    # Deletes the specified application.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_application({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/DeleteApplication AWS API Documentation
+    #
+    # @overload delete_application(params = {})
+    # @param [Hash] params ({})
+    def delete_application(params = {}, options = {})
+      req = build_request(:delete_application, params)
+      req.send_request(options)
+    end
+
     # Gets the specified application.
     #
     # @option params [required, String] :application_id
@@ -371,6 +397,7 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::GetApplicationResponse#author #author} => String
     #   * {Types::GetApplicationResponse#creation_time #creation_time} => String
     #   * {Types::GetApplicationResponse#description #description} => String
+    #   * {Types::GetApplicationResponse#home_page_url #home_page_url} => String
     #   * {Types::GetApplicationResponse#labels #labels} => Array&lt;String&gt;
     #   * {Types::GetApplicationResponse#license_url #license_url} => String
     #   * {Types::GetApplicationResponse#name #name} => String
@@ -391,6 +418,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.author #=> String
     #   resp.creation_time #=> String
     #   resp.description #=> String
+    #   resp.home_page_url #=> String
     #   resp.labels #=> Array
     #   resp.labels[0] #=> String
     #   resp.license_url #=> String
@@ -524,6 +552,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.applications[0].author #=> String
     #   resp.applications[0].creation_time #=> String
     #   resp.applications[0].description #=> String
+    #   resp.applications[0].home_page_url #=> String
     #   resp.applications[0].labels #=> Array
     #   resp.applications[0].labels[0] #=> String
     #   resp.applications[0].name #=> String
@@ -555,8 +584,8 @@ module Aws::ServerlessApplicationRepository
     #     application_id: "__string", # required
     #     statements: [
     #       {
-    #         actions: ["__string"],
-    #         principals: ["__string"],
+    #         actions: ["__string"], # required
+    #         principals: ["__string"], # required
     #         statement_id: "__string",
     #       },
     #     ],
@@ -588,6 +617,8 @@ module Aws::ServerlessApplicationRepository
     #
     # @option params [String] :description
     #
+    # @option params [String] :home_page_url
+    #
     # @option params [Array<String>] :labels
     #
     # @option params [String] :readme_body
@@ -600,6 +631,7 @@ module Aws::ServerlessApplicationRepository
     #   * {Types::UpdateApplicationResponse#author #author} => String
     #   * {Types::UpdateApplicationResponse#creation_time #creation_time} => String
     #   * {Types::UpdateApplicationResponse#description #description} => String
+    #   * {Types::UpdateApplicationResponse#home_page_url #home_page_url} => String
     #   * {Types::UpdateApplicationResponse#labels #labels} => Array&lt;String&gt;
     #   * {Types::UpdateApplicationResponse#license_url #license_url} => String
     #   * {Types::UpdateApplicationResponse#name #name} => String
@@ -613,6 +645,7 @@ module Aws::ServerlessApplicationRepository
     #     application_id: "__string", # required
     #     author: "__string",
     #     description: "__string",
+    #     home_page_url: "__string",
     #     labels: ["__string"],
     #     readme_body: "__string",
     #     readme_url: "__string",
@@ -624,6 +657,7 @@ module Aws::ServerlessApplicationRepository
     #   resp.author #=> String
     #   resp.creation_time #=> String
     #   resp.description #=> String
+    #   resp.home_page_url #=> String
     #   resp.labels #=> Array
     #   resp.labels[0] #=> String
     #   resp.license_url #=> String
@@ -674,7 +708,7 @@ module Aws::ServerlessApplicationRepository
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-serverlessapplicationrepository'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

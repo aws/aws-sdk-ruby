@@ -34,6 +34,7 @@ require_relative 'aws-sdk-s3/object_acl'
 require_relative 'aws-sdk-s3/object_summary'
 require_relative 'aws-sdk-s3/object_version'
 require_relative 'aws-sdk-s3/customizations'
+require_relative 'aws-sdk-s3/event_streams'
 
 # This module provides support for Amazon Simple Storage Service. This module is available in the
 # `aws-sdk-s3` gem.
@@ -62,6 +63,6 @@ require_relative 'aws-sdk-s3/customizations'
 # @service
 module Aws::S3
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.13.0'
 
 end

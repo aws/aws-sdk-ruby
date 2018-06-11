@@ -152,7 +152,8 @@ module Aws::IoT
     # enumerate your certificates.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [Boolean] :set_as_active
     #   Specifies whether the certificate is active.
@@ -342,7 +343,8 @@ module Aws::IoT
     # certificate changes from PENDING\_TRANSFER to INACTIVE.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -367,6 +369,16 @@ module Aws::IoT
     # @option params [String] :comment
     #   An optional comment string describing why the job was canceled.
     #
+    # @option params [Boolean] :force
+    #   (Optional) If `true` job executions with status "IN\_PROGRESS" and
+    #   "QUEUED" are canceled, otherwise only job executions with status
+    #   "QUEUED" are canceled. The default is `false`.
+    #
+    #   Canceling a job which is "IN\_PROGRESS", will cause a device which
+    #   is executing the job to be unable to update the job execution status.
+    #   Use caution and ensure that each device executing a job which is
+    #   canceled is able to recover to a valid state.
+    #
     # @return [Types::CancelJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CancelJobResponse#job_arn #job_arn} => String
@@ -378,6 +390,7 @@ module Aws::IoT
     #   resp = client.cancel_job({
     #     job_id: "JobId", # required
     #     comment: "Comment",
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -390,6 +403,61 @@ module Aws::IoT
     # @param [Hash] params ({})
     def cancel_job(params = {}, options = {})
       req = build_request(:cancel_job, params)
+      req.send_request(options)
+    end
+
+    # Cancels the execution of a job for a given thing.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job to be canceled.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing whose execution of the job will be canceled.
+    #
+    # @option params [Boolean] :force
+    #   (Optional) If `true` the job execution will be canceled if it has
+    #   status IN\_PROGRESS or QUEUED, otherwise the job execution will be
+    #   canceled only if it has status QUEUED. If you attempt to cancel a job
+    #   execution that is IN\_PROGRESS, and you do not set `force` to `true`,
+    #   then an `InvalidStateTransitionException` will be thrown. The default
+    #   is `false`.
+    #
+    #   Canceling a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to update the job execution status. Use caution
+    #   and ensure that the device is able to recover to a valid state.
+    #
+    # @option params [Integer] :expected_version
+    #   (Optional) The expected current version of the job execution. Each
+    #   time you update the job execution, its version is incremented. If the
+    #   version of the job execution stored in Jobs does not match, the update
+    #   is rejected with a VersionMismatch error, and an ErrorResponse that
+    #   contains the current job execution status data is returned. (This
+    #   makes it unnecessary to perform a separate DescribeJobExecution
+    #   request in order to obtain the job execution status data.)
+    #
+    # @option params [Hash<String,String>] :status_details
+    #   A collection of name/value pairs that describe the status of the job
+    #   execution. If not specified, the statusDetails are unchanged. You can
+    #   specify at most 10 name/value pairs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_job_execution({
+    #     job_id: "JobId", # required
+    #     thing_name: "ThingName", # required
+    #     force: false,
+    #     expected_version: 1,
+    #     status_details: {
+    #       "DetailsKey" => "DetailsValue",
+    #     },
+    #   })
+    #
+    # @overload cancel_job_execution(params = {})
+    # @param [Hash] params ({})
+    def cancel_job_execution(params = {}, options = {})
+      req = build_request(:cancel_job_execution, params)
       req.send_request(options)
     end
 
@@ -939,7 +1007,7 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Creates a thing record in the thing registry.
+    # Creates a thing record in the registry.
     #
     # @option params [required, String] :thing_name
     #   The name of the thing to create.
@@ -1167,6 +1235,11 @@ module Aws::IoT
     #             token: "SalesforceToken", # required
     #             url: "SalesforceEndpoint", # required
     #           },
+    #           iot_analytics: {
+    #             channel_arn: "AwsArn",
+    #             channel_name: "ChannelName",
+    #             role_arn: "AwsArn",
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -1248,6 +1321,11 @@ module Aws::IoT
     #           token: "SalesforceToken", # required
     #           url: "SalesforceEndpoint", # required
     #         },
+    #         iot_analytics: {
+    #           channel_arn: "AwsArn",
+    #           channel_name: "ChannelName",
+    #           role_arn: "AwsArn",
+    #         },
     #       },
     #     },
     #   })
@@ -1282,7 +1360,8 @@ module Aws::IoT
     # Deletes a registered CA certificate.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate to delete.
+    #   The ID of the certificate to delete. (The last part of the certificate
+    #   ARN contains the certificate ID.)
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1307,7 +1386,8 @@ module Aws::IoT
     # UpdateCertificate API to set the certificate to the INACTIVE status.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [Boolean] :force_delete
     #   Forces a certificate request to be deleted.
@@ -1325,6 +1405,102 @@ module Aws::IoT
     # @param [Hash] params ({})
     def delete_certificate(params = {}, options = {})
       req = build_request(:delete_certificate, params)
+      req.send_request(options)
+    end
+
+    # Deletes a job and its related job executions.
+    #
+    # Deleting a job may take time, depending on the number of job
+    # executions created for the job and various other factors. While the
+    # job is being deleted, the status of the job will be shown as
+    # "DELETION\_IN\_PROGRESS". Attempting to delete or cancel a job whose
+    # status is already "DELETION\_IN\_PROGRESS" will result in an error.
+    #
+    # Only 10 jobs may have status "DELETION\_IN\_PROGRESS" at the same
+    # time, or a LimitExceededException will occur.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job to be deleted.
+    #
+    #   After a job deletion is completed, you may reuse this jobId when you
+    #   create a new job. However, this is not recommended, and you must
+    #   ensure that your devices are not using the jobId to refer to the
+    #   deleted job.
+    #
+    # @option params [Boolean] :force
+    #   (Optional) When true, you can delete a job which is "IN\_PROGRESS".
+    #   Otherwise, you can only delete a job which is in a terminal state
+    #   ("COMPLETED" or "CANCELED") or an exception will occur. The
+    #   default is false.
+    #
+    #   <note markdown="1"> Deleting a job which is "IN\_PROGRESS", will cause a device which is
+    #   executing the job to be unable to access job information or update the
+    #   job execution status. Use caution and ensure that each device
+    #   executing a job which is deleted is able to recover to a valid state.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job({
+    #     job_id: "JobId", # required
+    #     force: false,
+    #   })
+    #
+    # @overload delete_job(params = {})
+    # @param [Hash] params ({})
+    def delete_job(params = {}, options = {})
+      req = build_request(:delete_job, params)
+      req.send_request(options)
+    end
+
+    # Deletes a job execution.
+    #
+    # @option params [required, String] :job_id
+    #   The ID of the job whose execution on a particular device will be
+    #   deleted.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing whose job execution will be deleted.
+    #
+    # @option params [required, Integer] :execution_number
+    #   The ID of the job execution to be deleted. The `executionNumber`
+    #   refers to the execution of a particular job on a particular device.
+    #
+    #   Note that once a job execution is deleted, the `executionNumber` may
+    #   be reused by IoT, so be sure you get and use the correct value here.
+    #
+    # @option params [Boolean] :force
+    #   (Optional) When true, you can delete a job execution which is
+    #   "IN\_PROGRESS". Otherwise, you can only delete a job execution which
+    #   is in a terminal state ("SUCCEEDED", "FAILED", "REJECTED",
+    #   "REMOVED" or "CANCELED") or an exception will occur. The default
+    #   is false.
+    #
+    #   <note markdown="1"> Deleting a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to access job information or update the job
+    #   execution status. Use caution and ensure that the device is able to
+    #   recover to a valid state.
+    #
+    #    </note>
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_job_execution({
+    #     job_id: "JobId", # required
+    #     thing_name: "ThingName", # required
+    #     execution_number: 1, # required
+    #     force: false,
+    #   })
+    #
+    # @overload delete_job_execution(params = {})
+    # @param [Hash] params ({})
+    def delete_job_execution(params = {}, options = {})
+      req = build_request(:delete_job_execution, params)
       req.send_request(options)
     end
 
@@ -1665,6 +1841,9 @@ module Aws::IoT
     #   resp.certificate_description.owned_by #=> String
     #   resp.certificate_description.creation_date #=> Time
     #   resp.certificate_description.auto_registration_status #=> String, one of "ENABLE", "DISABLE"
+    #   resp.certificate_description.last_modified_date #=> Time
+    #   resp.certificate_description.customer_version #=> Integer
+    #   resp.certificate_description.generation_id #=> String
     #   resp.registration_config.template_body #=> String
     #   resp.registration_config.role_arn #=> String
     #
@@ -1678,7 +1857,8 @@ module Aws::IoT
     # Gets information about the specified certificate.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @return [Types::DescribeCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1701,11 +1881,13 @@ module Aws::IoT
     #   resp.certificate_description.previous_owned_by #=> String
     #   resp.certificate_description.creation_date #=> Time
     #   resp.certificate_description.last_modified_date #=> Time
+    #   resp.certificate_description.customer_version #=> Integer
     #   resp.certificate_description.transfer_data.transfer_message #=> String
     #   resp.certificate_description.transfer_data.reject_reason #=> String
     #   resp.certificate_description.transfer_data.transfer_date #=> Time
     #   resp.certificate_description.transfer_data.accept_date #=> Time
     #   resp.certificate_description.transfer_data.reject_date #=> Time
+    #   resp.certificate_description.generation_id #=> String
     #
     # @overload describe_certificate(params = {})
     # @param [Hash] params ({})
@@ -1839,7 +2021,8 @@ module Aws::IoT
     #   resp.job.job_arn #=> String
     #   resp.job.job_id #=> String
     #   resp.job.target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
-    #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED"
+    #   resp.job.status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
+    #   resp.job.force_canceled #=> Boolean
     #   resp.job.comment #=> String
     #   resp.job.targets #=> Array
     #   resp.job.targets[0] #=> String
@@ -1897,6 +2080,7 @@ module Aws::IoT
     #
     #   resp.execution.job_id #=> String
     #   resp.execution.status #=> String, one of "QUEUED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "REJECTED", "REMOVED", "CANCELED"
+    #   resp.execution.force_canceled #=> Boolean
     #   resp.execution.status_details.details_map #=> Hash
     #   resp.execution.status_details.details_map["DetailsKey"] #=> String
     #   resp.execution.thing_arn #=> String
@@ -1904,6 +2088,7 @@ module Aws::IoT
     #   resp.execution.started_at #=> Time
     #   resp.execution.last_updated_at #=> Time
     #   resp.execution.execution_number #=> Integer
+    #   resp.execution.version_number #=> Integer
     #
     # @overload describe_job_execution(params = {})
     # @param [Hash] params ({})
@@ -1930,6 +2115,7 @@ module Aws::IoT
     # @example Response structure
     #
     #   resp.role_alias_description.role_alias #=> String
+    #   resp.role_alias_description.role_alias_arn #=> String
     #   resp.role_alias_description.role_arn #=> String
     #   resp.role_alias_description.owner #=> String
     #   resp.role_alias_description.credential_duration_seconds #=> Integer
@@ -2267,7 +2453,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Gets effective policies.
+    # Gets a list of the policies that have an effect on the authorization
+    # behavior of the specified device when it connects to the AWS IoT
+    # device gateway.
     #
     # @option params [String] :principal
     #   The principal.
@@ -2435,6 +2623,9 @@ module Aws::IoT
     #   * {Types::GetPolicyResponse#policy_arn #policy_arn} => String
     #   * {Types::GetPolicyResponse#policy_document #policy_document} => String
     #   * {Types::GetPolicyResponse#default_version_id #default_version_id} => String
+    #   * {Types::GetPolicyResponse#creation_date #creation_date} => Time
+    #   * {Types::GetPolicyResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::GetPolicyResponse#generation_id #generation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2448,6 +2639,9 @@ module Aws::IoT
     #   resp.policy_arn #=> String
     #   resp.policy_document #=> String
     #   resp.default_version_id #=> String
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #   resp.generation_id #=> String
     #
     # @overload get_policy(params = {})
     # @param [Hash] params ({})
@@ -2471,6 +2665,9 @@ module Aws::IoT
     #   * {Types::GetPolicyVersionResponse#policy_document #policy_document} => String
     #   * {Types::GetPolicyVersionResponse#policy_version_id #policy_version_id} => String
     #   * {Types::GetPolicyVersionResponse#is_default_version #is_default_version} => Boolean
+    #   * {Types::GetPolicyVersionResponse#creation_date #creation_date} => Time
+    #   * {Types::GetPolicyVersionResponse#last_modified_date #last_modified_date} => Time
+    #   * {Types::GetPolicyVersionResponse#generation_id #generation_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2486,6 +2683,9 @@ module Aws::IoT
     #   resp.policy_document #=> String
     #   resp.policy_version_id #=> String
     #   resp.is_default_version #=> Boolean
+    #   resp.creation_date #=> Time
+    #   resp.last_modified_date #=> Time
+    #   resp.generation_id #=> String
     #
     # @overload get_policy_version(params = {})
     # @param [Hash] params ({})
@@ -2584,6 +2784,9 @@ module Aws::IoT
     #   resp.rule.actions[0].elasticsearch.id #=> String
     #   resp.rule.actions[0].salesforce.token #=> String
     #   resp.rule.actions[0].salesforce.url #=> String
+    #   resp.rule.actions[0].iot_analytics.channel_arn #=> String
+    #   resp.rule.actions[0].iot_analytics.channel_name #=> String
+    #   resp.rule.actions[0].iot_analytics.role_arn #=> String
     #   resp.rule.rule_disabled #=> Boolean
     #   resp.rule.aws_iot_sql_version #=> String
     #   resp.rule.error_action.dynamo_db.table_name #=> String
@@ -2634,6 +2837,9 @@ module Aws::IoT
     #   resp.rule.error_action.elasticsearch.id #=> String
     #   resp.rule.error_action.salesforce.token #=> String
     #   resp.rule.error_action.salesforce.url #=> String
+    #   resp.rule.error_action.iot_analytics.channel_arn #=> String
+    #   resp.rule.error_action.iot_analytics.channel_name #=> String
+    #   resp.rule.error_action.iot_analytics.role_arn #=> String
     #
     # @overload get_topic_rule(params = {})
     # @param [Hash] params ({})
@@ -3043,7 +3249,7 @@ module Aws::IoT
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_jobs({
-    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED
+    #     status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS
     #     target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #     max_results: 1,
     #     next_token: "NextToken",
@@ -3058,7 +3264,7 @@ module Aws::IoT
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].thing_group_id #=> String
     #   resp.jobs[0].target_selection #=> String, one of "CONTINUOUS", "SNAPSHOT"
-    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED"
+    #   resp.jobs[0].status #=> String, one of "IN_PROGRESS", "CANCELED", "COMPLETED", "DELETION_IN_PROGRESS"
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].completed_at #=> Time
@@ -3077,7 +3283,7 @@ module Aws::IoT
     #   The maximum number of results to return at one time.
     #
     # @option params [String] :next_token
-    #   A token used to retreive the next set of results.
+    #   A token used to retrieve the next set of results.
     #
     # @option params [String] :ota_update_status
     #   The OTA update job status.
@@ -3998,10 +4204,20 @@ module Aws::IoT
     # Provisions a thing.
     #
     # @option params [required, String] :template_body
-    #   The provisioning template.
+    #   The provisioning template. See [Programmatic Provisioning][1] for more
+    #   information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #
     # @option params [Hash<String,String>] :parameters
-    #   The parameters for provisioning a thing.
+    #   The parameters for provisioning a thing. See [Programmatic
+    #   Provisioning][1] for more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #
     # @return [Types::RegisterThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4042,7 +4258,8 @@ module Aws::IoT
     # account in the INACTIVE state.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [String] :reject_reason
     #   The reason the certificate transfer was rejected.
@@ -4193,6 +4410,11 @@ module Aws::IoT
     #             token: "SalesforceToken", # required
     #             url: "SalesforceEndpoint", # required
     #           },
+    #           iot_analytics: {
+    #             channel_arn: "AwsArn",
+    #             channel_name: "ChannelName",
+    #             role_arn: "AwsArn",
+    #           },
     #         },
     #       ],
     #       rule_disabled: false,
@@ -4273,6 +4495,11 @@ module Aws::IoT
     #         salesforce: {
     #           token: "SalesforceToken", # required
     #           url: "SalesforceEndpoint", # required
+    #         },
+    #         iot_analytics: {
+    #           channel_arn: "AwsArn",
+    #           channel_name: "ChannelName",
+    #           role_arn: "AwsArn",
     #         },
     #       },
     #     },
@@ -4532,7 +4759,10 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Test custom authorization.
+    # Tests if a specified principal is authorized to perform an AWS IoT
+    # action on a specified resource. Use this to test and debug the
+    # authorization behavior of devices that connect to the AWS IoT device
+    # gateway.
     #
     # @option params [String] :principal
     #   The principal.
@@ -4601,7 +4831,9 @@ module Aws::IoT
       req.send_request(options)
     end
 
-    # Invoke the specified custom authorizer for testing purposes.
+    # Tests a custom authorization behavior by invoking a specified custom
+    # authorizer. Use this to test and debug the custom authorization
+    # behavior of devices that connect to the AWS IoT device gateway.
     #
     # @option params [required, String] :authorizer_name
     #   The custom authorizer name.
@@ -4659,7 +4891,8 @@ module Aws::IoT
     # the DetachPrincipalPolicy API to detach them.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [required, String] :target_aws_account
     #   The AWS account.
@@ -4790,7 +5023,8 @@ module Aws::IoT
     # IoT using a certificate.
     #
     # @option params [required, String] :certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #
     # @option params [required, String] :new_status
     #   The new status.
@@ -5089,7 +5323,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

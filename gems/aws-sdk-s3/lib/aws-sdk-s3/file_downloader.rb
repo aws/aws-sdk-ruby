@@ -93,35 +93,9 @@ module Aws
         end
       end
 
-      def sort_files(files)
-        # sort file by start range count or part number
-        files.sort do |a, b|
-          a[/([^\=]+)$/].split('-')[0].to_i <=> b[/([^\=]+)$/].split('-')[0].to_i
-        end
-      end
-
-      def concatenate_parts(fileparts)
-        File.open(@path, 'wb')do |output_path|
-          sort_files(fileparts).each {|part| IO.copy_stream(part, output_path)}
-        end
-      end
-
-      def file_batches(chunks, dir, mode)
-        batches = []
+      def batches(chunks, mode)
         chunks = (1..chunks) if mode.eql? 'part_number'
-        chunks.each_slice(@thread_count) do |slice|
-          batches << map_files(slice, dir, mode)
-        end
-        batches
-      end
-
-      def map_files(slice, dir, mode)
-        case mode
-        when 'range'
-          slice.inject({}) {|h, chunk| h[chunk] = File.join(dir, chunk); h}
-        when 'part_number'
-          slice.inject({}) {|h, part| h[part] = File.join(dir, "part_number=#{part}"); h}
-        end
+        chunks.each_slice(@thread_count).to_a
       end
 
       def multithreaded_get_by_ranges(chunks)
@@ -133,30 +107,26 @@ module Aws
       end
 
       def thread_batches(chunks, param)
-        # create a tmp dir under destination dir for batches
-        dir = Dir.mktmpdir(nil, File.dirname(@path))
-        batches = file_batches(chunks, dir, param)
-        parts = batches.flat_map(&:values)
-        begin
-          batches.each do |batch|
-            threads = []
-            batch.each do |chunk, file|
-              threads << Thread.new do
-                @client.get_object(
-                  :bucket => @bucket,
-                  :key => @key,
-                  param.to_sym => chunk,
-                  :response_target => file
-                )
-              end
+        batches(chunks, param).each do |batch|
+          threads = []
+          batch.each do |chunk|
+            threads << Thread.new do
+              resp = @client.get_object(
+                :bucket => @bucket,
+                :key => @key,
+                param.to_sym => chunk
+              )
+              write(resp)
             end
-            threads.each(&:join)
           end
-          concatenate_parts(parts)
-        ensure
-          # clean up tmp dir
-          FileUtils.remove_entry(dir)
+          threads.each(&:join)
         end
+      end
+
+      def write(resp)
+        range, _ = resp.content_range.split(" ").last.split("/")
+        head, _ = range.split("-").map {|s| s.to_i}
+        IO.write(@path, resp.body.read, head)
       end
 
       def single_request

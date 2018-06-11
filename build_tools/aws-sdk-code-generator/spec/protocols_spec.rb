@@ -211,7 +211,11 @@ fixtures.each do |directory, files|
             # temporary work-around for header case-sensitive test
             context.http_response.headers = test_case['response']['headers']
 
-            context.http_response.signal_data(test_case['response']['body'])
+            # Base64 encoded binary body is provided for eventstream
+            body = test_case['response']['eventstream'] ?
+              Base64.decode64(test_case['response']['body']) :
+              test_case['response']['body']
+            context.http_response.signal_data(body)
             context.http_response.signal_done
             Seahorse::Client::Response.new(context:context)
           end
@@ -219,8 +223,24 @@ fixtures.each do |directory, files|
           data = data_to_hash(resp.data)
 
           expected_data = format_data(resp.context.operation.output, test_case['result'] || {})
-
-          expect(data).to eq(expected_data)
+          if test_case['response']['eventstream']
+            data.each do |member_name, value|
+              if value.respond_to?(:each)
+                # event stream member
+                value.each do |event_struct|
+                  # verify each event
+                  event = event_struct.to_h
+                  expect_event = expected_data[member_name][event.delete(:event_type)]
+                  expect(data_to_hash(event)).to eq(expect_event)
+                end
+              else
+                # non event stream member
+                expect(value).to eq(expected_data[member_name])
+              end
+            end
+          else
+            expect(data).to eq(expected_data)
+          end
         end
 
       end

@@ -197,6 +197,13 @@ module Aws::RDS
       data[:iam_database_authentication_enabled]
     end
 
+    # The number of CPU cores and the number of threads per core for the DB
+    # instance class of the DB instance when the DB snapshot was created.
+    # @return [Array<Types::ProcessorFeature>]
+    def processor_features
+      data[:processor_features]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -548,6 +555,13 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     enable_iam_database_authentication: false,
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #     use_default_processor_features: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -650,10 +664,6 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
-    #
-    #   * `aurora-postgresql`
-    #
     #   * `mariadb`
     #
     #   * `mysql`
@@ -741,12 +751,16 @@ module Aws::RDS
     #
     #   * For MySQL 5.7, minor version 5.7.16 or higher
     #
-    #   * Aurora 5.6 or higher.
-    #
     #   Default: `false`
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
+    # @option options [Boolean] :use_default_processor_features
+    #   A value that specifies that the DB instance class of the DB instance
+    #   uses its default processor features.
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

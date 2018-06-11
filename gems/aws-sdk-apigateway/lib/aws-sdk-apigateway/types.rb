@@ -256,11 +256,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   \[Required\] The authorizer type. Valid values are `TOKEN` for a
-    #   Lambda function using a single authorization token submitted in a
-    #   custom header, `REQUEST` for a Lambda function using incoming
-    #   request parameters, and `COGNITO_USER_POOLS` for using an Amazon
-    #   Cognito user pool.
+    #   The authorizer type. Valid values are `TOKEN` for a Lambda function
+    #   using a single authorization token submitted in a custom header,
+    #   `REQUEST` for a Lambda function using incoming request parameters,
+    #   and `COGNITO_USER_POOLS` for using an Amazon Cognito user pool.
     #   @return [String]
     #
     # @!attribute [rw] provider_arns
@@ -298,11 +297,11 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_source
     #   The identity source for which authorization is requested. * For a
-    #   `TOKEN` authorizer, this is required and specifies the
-    #     request header mapping expression for the custom header holding
-    #     the authorization token submitted by the client. For example, if
-    #     the token header name is `Auth`, the header mapping expression is
-    #     `method.request.header.Auth`.
+    #   `TOKEN` or `COGNITO_USER_POOLS` authorizer, this is required
+    #     and specifies the request header mapping expression for the custom
+    #     header holding the authorization token submitted by the client.
+    #     For example, if the token header name is `Auth`, the header
+    #     mapping expression is `method.request.header.Auth`.
     #   * For the `REQUEST` authorizer, this is required when authorization
     #     caching is enabled. The value is a comma-separated string of one
     #     or more mapping expressions of the specified request parameters.
@@ -318,17 +317,16 @@ module Aws::APIGateway
     #     function. The valid value is a string of comma-separated mapping
     #     expressions of the specified request parameters. When the
     #     authorization caching is not enabled, this property is optional.
-    #   * For a `COGNITO_USER_POOLS` authorizer, this property is not used.
     #   @return [String]
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
     #   authorizers, this value is a regular expression. API Gateway will
-    #   match the incoming token from the client against the specified
-    #   regular expression. It will invoke the authorizer's Lambda function
-    #   there is a match. Otherwise, it will return a 401 Unauthorized
-    #   response without calling the Lambda function. The validation
-    #   expression does not apply to the `REQUEST` authorizer.
+    #   match the `aud` field of the incoming token from the client against
+    #   the specified regular expression. It will invoke the authorizer's
+    #   Lambda function when there is a match. Otherwise, it will return a
+    #   401 Unauthorized response without calling the Lambda function. The
+    #   validation expression does not apply to the `REQUEST` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -628,7 +626,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -678,11 +676,11 @@ module Aws::APIGateway
     #
     # @!attribute [rw] identity_source
     #   The identity source for which authorization is requested. * For a
-    #   `TOKEN` authorizer, this is required and specifies the
-    #     request header mapping expression for the custom header holding
-    #     the authorization token submitted by the client. For example, if
-    #     the token header name is `Auth`, the header mapping expression is
-    #     `method.request.header.Auth`.
+    #   `TOKEN` or `COGNITO_USER_POOLS` authorizer, this is required
+    #     and specifies the request header mapping expression for the custom
+    #     header holding the authorization token submitted by the client.
+    #     For example, if the token header name is `Auth`, the header
+    #     mapping expression is `method.request.header.Auth`.
     #   * For the `REQUEST` authorizer, this is required when authorization
     #     caching is enabled. The value is a comma-separated string of one
     #     or more mapping expressions of the specified request parameters.
@@ -698,17 +696,16 @@ module Aws::APIGateway
     #     function. The valid value is a string of comma-separated mapping
     #     expressions of the specified request parameters. When the
     #     authorization caching is not enabled, this property is optional.
-    #   * For a `COGNITO_USER_POOLS` authorizer, this property is not used.
     #   @return [String]
     #
     # @!attribute [rw] identity_validation_expression
     #   A validation expression for the incoming identity token. For `TOKEN`
     #   authorizers, this value is a regular expression. API Gateway will
-    #   match the incoming token from the client against the specified
-    #   regular expression. It will invoke the authorizer's Lambda function
-    #   there is a match. Otherwise, it will return a 401 Unauthorized
-    #   response without calling the Lambda function. The validation
-    #   expression does not apply to the `REQUEST` authorizer.
+    #   match the `aud` field of the incoming token from the client against
+    #   the specified regular expression. It will invoke the authorizer's
+    #   Lambda function when there is a match. Otherwise, it will return a
+    #   401 Unauthorized response without calling the Lambda function. The
+    #   validation expression does not apply to the `REQUEST` authorizer.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_result_ttl_in_seconds
@@ -745,7 +742,8 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The domain name of the BasePathMapping resource to create.
+    #   \[Required\] The domain name of the BasePathMapping resource to
+    #   create.
     #   @return [String]
     #
     # @!attribute [rw] base_path
@@ -756,7 +754,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage
@@ -798,7 +796,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -945,7 +943,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] domain_name
-    #   (Required) The name of the DomainName resource.
+    #   \[Required\] The name of the DomainName resource.
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
@@ -1024,11 +1022,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier under which the Model will be created.
+    #   \[Required\] The RestApi identifier under which the Model will be
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the model. Must be alphanumeric.
+    #   \[Required\] The name of the model. Must be alphanumeric.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1037,15 +1036,15 @@ module Aws::APIGateway
     #
     # @!attribute [rw] schema
     #   The schema for the model. For `application/json` models, this should
-    #   be [JSON-schema draft v4][1] model.
+    #   be [JSON schema draft 4][1] model.
     #
     #
     #
-    #   [1]: http://json-schema.org/documentation.html
+    #   [1]: https://tools.ietf.org/html/draft-zyp-json-schema-04
     #   @return [String]
     #
     # @!attribute [rw] content_type
-    #   The content-type for the model.
+    #   \[Required\] The content-type for the model.
     #   @return [String]
     #
     class CreateModelRequest < Struct.new(
@@ -1070,7 +1069,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1108,11 +1107,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] parent_id
-    #   The parent resource's identifier.
+    #   \[Required\] The parent resource's identifier.
     #   @return [String]
     #
     # @!attribute [rw] path_part
@@ -1142,10 +1141,11 @@ module Aws::APIGateway
     #         endpoint_configuration: {
     #           types: ["REGIONAL"], # accepts REGIONAL, EDGE
     #         },
+    #         policy: "String",
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the RestApi.
+    #   \[Required\] The name of the RestApi.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1166,16 +1166,17 @@ module Aws::APIGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] minimum_compression_size
-    #   A nullable integer used to enable (non-negative between 0 and
-    #   10485760 (10M) bytes, inclusive) or disable (null) compression on an
-    #   API. When compression is enabled, compression or decompression are
-    #   not applied on the payload if the payload size is smaller than this
-    #   value. Setting it to zero allows compression for any payload size.
+    #   A nullable integer that is used to enable compression (with
+    #   non-negative between 0 and 10485760 (10M) bytes, inclusive) or
+    #   disable compression (with a null value) on an API. When compression
+    #   is enabled, compression or decompression is not applied on the
+    #   payload if the payload size is smaller than this value. Setting it
+    #   to zero allows compression for any payload size.
     #   @return [Integer]
     #
     # @!attribute [rw] api_key_source
-    #   The source of the API key for metring requests according to a usage
-    #   plan. Valid values are * `HEADER` to read the API key from the
+    #   The source of the API key for metering requests according to a usage
+    #   plan. Valid values are: * `HEADER` to read the API key from the
     #   `X-API-Key` header of a
     #     request.
     #   * `AUTHORIZER` to read the API key from the `UsageIdentifierKey`
@@ -1187,6 +1188,10 @@ module Aws::APIGateway
     #   types of the API.
     #   @return [Types::EndpointConfiguration]
     #
+    # @!attribute [rw] policy
+    #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
+    #   @return [String]
+    #
     class CreateRestApiRequest < Struct.new(
       :name,
       :description,
@@ -1195,7 +1200,8 @@ module Aws::APIGateway
       :binary_media_types,
       :minimum_compression_size,
       :api_key_source,
-      :endpoint_configuration)
+      :endpoint_configuration,
+      :policy)
       include Aws::Structure
     end
 
@@ -1229,7 +1235,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
@@ -1268,9 +1274,9 @@ module Aws::APIGateway
     #   @return [Types::CanarySettings]
     #
     # @!attribute [rw] tags
-    #   Key/Value map of strings. Valid character set is \[a-zA-Z+-=.\_:/\].
-    #   Tag key can be up to 128 characters and must not start with
-    #   "aws:". Tag value can be up to 256 characters.
+    #   The key-value map of strings. The valid character set is
+    #   \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and must
+    #   not start with `aws:`. The tag value can be up to 256 characters.
     #   @return [Hash<String,String>]
     #
     class CreateStageRequest < Struct.new(
@@ -1300,17 +1306,19 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] usage_plan_id
-    #   The Id of the UsagePlan resource representing the usage plan
-    #   containing the to-be-created UsagePlanKey resource representing a
-    #   plan customer.
+    #   \[Required\] The Id of the UsagePlan resource representing the usage
+    #   plan containing the to-be-created UsagePlanKey resource representing
+    #   a plan customer.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The identifier of a UsagePlanKey resource for a plan customer.
+    #   \[Required\] The identifier of a UsagePlanKey resource for a plan
+    #   customer.
     #   @return [String]
     #
     # @!attribute [rw] key_type
-    #   The type of a UsagePlanKey resource for a plan customer.
+    #   \[Required\] The type of a UsagePlanKey resource for a plan
+    #   customer.
     #   @return [String]
     #
     class CreateUsagePlanKeyRequest < Struct.new(
@@ -1348,7 +1356,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the usage plan.
+    #   \[Required\] The name of the usage plan.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1421,7 +1429,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] api_key
-    #   The identifier of the ApiKey resource to be deleted.
+    #   \[Required\] The identifier of the ApiKey resource to be deleted.
     #   @return [String]
     #
     class DeleteApiKeyRequest < Struct.new(
@@ -1440,11 +1448,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   The identifier of the Authorizer resource.
+    #   \[Required\] The identifier of the Authorizer resource.
     #   @return [String]
     #
     class DeleteAuthorizerRequest < Struct.new(
@@ -1464,11 +1472,13 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The domain name of the BasePathMapping resource to delete.
+    #   \[Required\] The domain name of the BasePathMapping resource to
+    #   delete.
     #   @return [String]
     #
     # @!attribute [rw] base_path
-    #   The base path name of the BasePathMapping resource to delete.
+    #   \[Required\] The base path name of the BasePathMapping resource to
+    #   delete.
     #   @return [String]
     #
     class DeleteBasePathMappingRequest < Struct.new(
@@ -1487,7 +1497,8 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] client_certificate_id
-    #   The identifier of the ClientCertificate resource to be deleted.
+    #   \[Required\] The identifier of the ClientCertificate resource to be
+    #   deleted.
     #   @return [String]
     #
     class DeleteClientCertificateRequest < Struct.new(
@@ -1506,11 +1517,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
-    #   The identifier of the Deployment resource to delete.
+    #   \[Required\] The identifier of the Deployment resource to delete.
     #   @return [String]
     #
     class DeleteDeploymentRequest < Struct.new(
@@ -1578,7 +1589,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of the DomainName resource to be deleted.
+    #   \[Required\] The name of the DomainName resource to be deleted.
     #   @return [String]
     #
     class DeleteDomainNameRequest < Struct.new(
@@ -1598,11 +1609,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] response_type
-    #   The response type of the associated GatewayResponse. Valid values
+    #   \[Required\] The response type of the associated GatewayResponse.
+    #   Valid values
     #   are * ACCESS\_DENIED
     #   * API\_CONFIGURATION\_ERROR
     #   * AUTHORIZER\_FAILURE
@@ -1622,7 +1634,7 @@ module Aws::APIGateway
     #   * RESOURCE\_NOT\_FOUND
     #   * THROTTLED
     #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   * UNSUPPORTED\_MEDIA\_TYPE
     #   @return [String]
     #
     class DeleteGatewayResponseRequest < Struct.new(
@@ -1643,15 +1655,16 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Specifies a delete integration request's resource identifier.
+    #   \[Required\] Specifies a delete integration request's resource
+    #   identifier.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies a delete integration request's HTTP method.
+    #   \[Required\] Specifies a delete integration request's HTTP method.
     #   @return [String]
     #
     class DeleteIntegrationRequest < Struct.new(
@@ -1674,20 +1687,22 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Specifies a delete integration response request's resource
-    #   identifier.
+    #   \[Required\] Specifies a delete integration response request's
+    #   resource identifier.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies a delete integration response request's HTTP method.
+    #   \[Required\] Specifies a delete integration response request's HTTP
+    #   method.
     #   @return [String]
     #
     # @!attribute [rw] status_code
-    #   Specifies a delete integration response request's status code.
+    #   \[Required\] Specifies a delete integration response request's
+    #   status code.
     #   @return [String]
     #
     class DeleteIntegrationResponseRequest < Struct.new(
@@ -1710,15 +1725,15 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource identifier for the Method resource.
+    #   \[Required\] The Resource identifier for the Method resource.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #   @return [String]
     #
     class DeleteMethodRequest < Struct.new(
@@ -1741,19 +1756,21 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource identifier for the MethodResponse resource.
+    #   \[Required\] The Resource identifier for the MethodResponse
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #   @return [String]
     #
     # @!attribute [rw] status_code
-    #   The status code identifier for the MethodResponse resource.
+    #   \[Required\] The status code identifier for the MethodResponse
+    #   resource.
     #   @return [String]
     #
     class DeleteMethodResponseRequest < Struct.new(
@@ -1775,11 +1792,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] model_name
-    #   The name of the model to delete.
+    #   \[Required\] The name of the model to delete.
     #   @return [String]
     #
     class DeleteModelRequest < Struct.new(
@@ -1799,7 +1816,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] request_validator_id
@@ -1823,11 +1840,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the Resource resource.
+    #   \[Required\] The identifier of the Resource resource.
     #   @return [String]
     #
     class DeleteResourceRequest < Struct.new(
@@ -1846,7 +1863,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     class DeleteRestApiRequest < Struct.new(
@@ -1865,11 +1882,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The name of the Stage resource to delete.
+    #   \[Required\] The name of the Stage resource to delete.
     #   @return [String]
     #
     class DeleteStageRequest < Struct.new(
@@ -1890,13 +1907,13 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] usage_plan_id
-    #   The Id of the UsagePlan resource representing the usage plan
-    #   containing the to-be-deleted UsagePlanKey resource representing a
-    #   plan customer.
+    #   \[Required\] The Id of the UsagePlan resource representing the usage
+    #   plan containing the to-be-deleted UsagePlanKey resource representing
+    #   a plan customer.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The Id of the UsagePlanKey resource to be deleted.
+    #   \[Required\] The Id of the UsagePlanKey resource to be deleted.
     #   @return [String]
     #
     class DeleteUsagePlanKeyRequest < Struct.new(
@@ -1915,7 +1932,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] usage_plan_id
-    #   The Id of the to-be-deleted usage plan.
+    #   \[Required\] The Id of the to-be-deleted usage plan.
     #   @return [String]
     #
     class DeleteUsagePlanRequest < Struct.new(
@@ -2166,13 +2183,13 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] type
-    #   The type of API entity to which the documentation content applies.
-    #   It is a valid and required field for API entity types of `API`,
-    #   `AUTHORIZER`, `MODEL`, `RESOURCE`, `METHOD`, `PATH_PARAMETER`,
-    #   `QUERY_PARAMETER`, `REQUEST_HEADER`, `REQUEST_BODY`, `RESPONSE`,
-    #   `RESPONSE_HEADER`, and `RESPONSE_BODY`. Content inheritance does not
-    #   apply to any entity of the `API`, `AUTHORIZER`, `METHOD`, `MODEL`,
-    #   `REQUEST_BODY`, or `RESOURCE` type.
+    #   \[Required\] The type of API entity to which the documentation
+    #   content applies. Valid values are `API`, `AUTHORIZER`, `MODEL`,
+    #   `RESOURCE`, `METHOD`, `PATH_PARAMETER`, `QUERY_PARAMETER`,
+    #   `REQUEST_HEADER`, `REQUEST_BODY`, `RESPONSE`, `RESPONSE_HEADER`, and
+    #   `RESPONSE_BODY`. Content inheritance does not apply to any entity of
+    #   the `API`, `AUTHORIZER`, `METHOD`, `MODEL`, `REQUEST_BODY`, or
+    #   `RESOURCE` type.
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -2340,7 +2357,8 @@ module Aws::APIGateway
     # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
     #
     # @!attribute [rw] domain_name
-    #   The name of the DomainName resource.
+    #   The custom domain name as an API host name, for example,
+    #   `my-api.example.com`.
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
@@ -2537,11 +2555,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The name of the stage to flush its cache.
+    #   \[Required\] The name of the stage to flush its cache.
     #   @return [String]
     #
     class FlushStageCacheRequest < Struct.new(
@@ -2610,7 +2628,7 @@ module Aws::APIGateway
     #   * RESOURCE\_NOT\_FOUND
     #   * THROTTLED
     #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   * UNSUPPORTED\_MEDIA\_TYPE
     #   @return [String]
     #
     # @!attribute [rw] status_code
@@ -2732,7 +2750,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] api_key
-    #   The identifier of the ApiKey resource.
+    #   \[Required\] The identifier of the ApiKey resource.
     #   @return [String]
     #
     # @!attribute [rw] include_value
@@ -2764,7 +2782,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     # @!attribute [rw] name_query
@@ -2801,11 +2820,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   The identifier of the Authorizer resource.
+    #   \[Required\] The identifier of the Authorizer resource.
     #   @return [String]
     #
     class GetAuthorizerRequest < Struct.new(
@@ -2826,7 +2845,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -2834,7 +2853,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetAuthorizersRequest < Struct.new(
@@ -2855,14 +2875,16 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The domain name of the BasePathMapping resource to be described.
+    #   \[Required\] The domain name of the BasePathMapping resource to be
+    #   described.
     #   @return [String]
     #
     # @!attribute [rw] base_path
-    #   The base path name that callers of the API must provide as part of
-    #   the URL after the domain name. This value must be unique for all of
-    #   the mappings across a single API. Leave this blank if you do not
-    #   want callers to specify any base path name after the domain name.
+    #   \[Required\] The base path name that callers of the API must provide
+    #   as part of the URL after the domain name. This value must be unique
+    #   for all of the mappings across a single API. Leave this blank if you
+    #   do not want callers to specify any base path name after the domain
+    #   name.
     #   @return [String]
     #
     class GetBasePathMappingRequest < Struct.new(
@@ -2884,7 +2906,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The domain name of a BasePathMapping resource.
+    #   \[Required\] The domain name of a BasePathMapping resource.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -2892,8 +2914,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetBasePathMappingsRequest < Struct.new(
@@ -2914,7 +2936,8 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] client_certificate_id
-    #   The identifier of the ClientCertificate resource to be described.
+    #   \[Required\] The identifier of the ClientCertificate resource to be
+    #   described.
     #   @return [String]
     #
     class GetClientCertificateRequest < Struct.new(
@@ -2938,8 +2961,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetClientCertificatesRequest < Struct.new(
@@ -2960,11 +2983,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
-    #   The identifier of the Deployment resource to get information about.
+    #   \[Required\] The identifier of the Deployment resource to get
+    #   information about.
     #   @return [String]
     #
     # @!attribute [rw] embed
@@ -3001,7 +3025,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -3009,8 +3033,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetDeploymentsRequest < Struct.new(
@@ -3081,7 +3105,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     # @!attribute [rw] location_status
@@ -3147,7 +3172,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetDocumentationVersionsRequest < Struct.new(
@@ -3167,7 +3193,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of the DomainName resource.
+    #   \[Required\] The name of the DomainName resource.
     #   @return [String]
     #
     class GetDomainNameRequest < Struct.new(
@@ -3190,8 +3216,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetDomainNamesRequest < Struct.new(
@@ -3216,15 +3242,16 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The name of the Stage that will be exported.
+    #   \[Required\] The name of the Stage that will be exported.
     #   @return [String]
     #
     # @!attribute [rw] export_type
-    #   The type of export. Currently only 'swagger' is supported.
+    #   \[Required\] The type of export. Currently only 'swagger' is
+    #   supported.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -3266,11 +3293,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] response_type
-    #   The response type of the associated GatewayResponse. Valid values
+    #   \[Required\] The response type of the associated GatewayResponse.
+    #   Valid values
     #   are * ACCESS\_DENIED
     #   * API\_CONFIGURATION\_ERROR
     #   * AUTHORIZER\_FAILURE
@@ -3290,7 +3318,7 @@ module Aws::APIGateway
     #   * RESOURCE\_NOT\_FOUND
     #   * THROTTLED
     #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   * UNSUPPORTED\_MEDIA\_TYPE
     #   @return [String]
     #
     class GetGatewayResponseRequest < Struct.new(
@@ -3314,7 +3342,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -3324,9 +3352,9 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page. The
-    #   GatewayResponses collection does not support pagination and the
-    #   limit does not apply here.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500. The GatewayResponses collection
+    #   does not support pagination and the limit does not apply here.
     #   @return [Integer]
     #
     class GetGatewayResponsesRequest < Struct.new(
@@ -3348,15 +3376,16 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Specifies a get integration request's resource identifier
+    #   \[Required\] Specifies a get integration request's resource
+    #   identifier
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies a get integration request's HTTP method.
+    #   \[Required\] Specifies a get integration request's HTTP method.
     #   @return [String]
     #
     class GetIntegrationRequest < Struct.new(
@@ -3379,19 +3408,22 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Specifies a get integration response request's resource identifier.
+    #   \[Required\] Specifies a get integration response request's
+    #   resource identifier.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies a get integration response request's HTTP method.
+    #   \[Required\] Specifies a get integration response request's HTTP
+    #   method.
     #   @return [String]
     #
     # @!attribute [rw] status_code
-    #   Specifies a get integration response request's status code.
+    #   \[Required\] Specifies a get integration response request's status
+    #   code.
     #   @return [String]
     #
     class GetIntegrationResponseRequest < Struct.new(
@@ -3414,15 +3446,15 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource identifier for the Method resource.
+    #   \[Required\] The Resource identifier for the Method resource.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies the method request's HTTP method type.
+    #   \[Required\] Specifies the method request's HTTP method type.
     #   @return [String]
     #
     class GetMethodRequest < Struct.new(
@@ -3445,19 +3477,20 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource identifier for the MethodResponse resource.
+    #   \[Required\] The Resource identifier for the MethodResponse
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #   @return [String]
     #
     # @!attribute [rw] status_code
-    #   The status code for the MethodResponse resource.
+    #   \[Required\] The status code for the MethodResponse resource.
     #   @return [String]
     #
     class GetMethodResponseRequest < Struct.new(
@@ -3481,11 +3514,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The RestApi identifier under which the Model exists.
+    #   \[Required\] The RestApi identifier under which the Model exists.
     #   @return [String]
     #
     # @!attribute [rw] model_name
-    #   The name of the model as an identifier.
+    #   \[Required\] The name of the model as an identifier.
     #   @return [String]
     #
     # @!attribute [rw] flatten
@@ -3513,11 +3546,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] model_name
-    #   The name of the model for which to generate a template.
+    #   \[Required\] The name of the model for which to generate a template.
     #   @return [String]
     #
     class GetModelTemplateRequest < Struct.new(
@@ -3538,7 +3571,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -3546,8 +3579,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetModelsRequest < Struct.new(
@@ -3568,7 +3601,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] request_validator_id
@@ -3593,7 +3626,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -3601,7 +3634,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetRequestValidatorsRequest < Struct.new(
@@ -3623,11 +3657,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The identifier for the Resource resource.
+    #   \[Required\] The identifier for the Resource resource.
     #   @return [String]
     #
     # @!attribute [rw] embed
@@ -3660,7 +3694,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -3668,8 +3702,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     # @!attribute [rw] embed
@@ -3701,7 +3735,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The identifier of the RestApi resource.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     class GetRestApiRequest < Struct.new(
@@ -3724,8 +3758,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page. The value is 25 by
-    #   default and could be between 1 - 500.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetRestApisRequest < Struct.new(
@@ -3749,17 +3783,17 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The name of the Stage that the SDK will use.
+    #   \[Required\] The name of the Stage that the SDK will use.
     #   @return [String]
     #
     # @!attribute [rw] sdk_type
-    #   The language for the generated SDK. Currently `java`, `javascript`,
-    #   `android`, `objectivec` (for iOS), `swift` (for iOS), and `ruby` are
-    #   supported.
+    #   \[Required\] The language for the generated SDK. Currently `java`,
+    #   `javascript`, `android`, `objectivec` (for iOS), `swift` (for iOS),
+    #   and `ruby` are supported.
     #   @return [String]
     #
     # @!attribute [rw] parameters
@@ -3790,7 +3824,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] id
-    #   The identifier of the queried SdkType instance.
+    #   \[Required\] The identifier of the queried SdkType instance.
     #   @return [String]
     #
     class GetSdkTypeRequest < Struct.new(
@@ -3813,7 +3847,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetSdkTypesRequest < Struct.new(
@@ -3833,11 +3868,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The name of the Stage resource to get information about.
+    #   \[Required\] The name of the Stage resource to get information
+    #   about.
     #   @return [String]
     #
     class GetStageRequest < Struct.new(
@@ -3858,7 +3894,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -3883,8 +3919,9 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. At present,
-    #   Stage is the only taggable resource.
+    #   \[Required\] The ARN of a resource that can be tagged. The resource
+    #   ARN must be URL-encoded. At present, Stage is the only taggable
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -3894,7 +3931,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] limit
     #   (Not currently supported) The maximum number of returned results per
-    #   page.
+    #   page. The default value is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetTagsRequest < Struct.new(
@@ -3915,14 +3952,14 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] usage_plan_id
-    #   The Id of the UsagePlan resource representing the usage plan
-    #   containing the to-be-retrieved UsagePlanKey resource representing a
-    #   plan customer.
+    #   \[Required\] The Id of the UsagePlan resource representing the usage
+    #   plan containing the to-be-retrieved UsagePlanKey resource
+    #   representing a plan customer.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The key Id of the to-be-retrieved UsagePlanKey resource representing
-    #   a plan customer.
+    #   \[Required\] The key Id of the to-be-retrieved UsagePlanKey resource
+    #   representing a plan customer.
     #   @return [String]
     #
     class GetUsagePlanKeyRequest < Struct.new(
@@ -3945,9 +3982,9 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] usage_plan_id
-    #   The Id of the UsagePlan resource representing the usage plan
-    #   containing the to-be-retrieved UsagePlanKey resource representing a
-    #   plan customer.
+    #   \[Required\] The Id of the UsagePlan resource representing the usage
+    #   plan containing the to-be-retrieved UsagePlanKey resource
+    #   representing a plan customer.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -3955,7 +3992,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     # @!attribute [rw] name_query
@@ -3981,7 +4019,8 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] usage_plan_id
-    #   The identifier of the UsagePlan resource to be retrieved.
+    #   \[Required\] The identifier of the UsagePlan resource to be
+    #   retrieved.
     #   @return [String]
     #
     class GetUsagePlanRequest < Struct.new(
@@ -4009,7 +4048,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetUsagePlansRequest < Struct.new(
@@ -4035,7 +4075,8 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] usage_plan_id
-    #   The Id of the usage plan associated with the usage data.
+    #   \[Required\] The Id of the usage plan associated with the usage
+    #   data.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -4043,11 +4084,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] start_date
-    #   The starting date (e.g., 2016-01-01) of the usage data.
+    #   \[Required\] The starting date (e.g., 2016-01-01) of the usage data.
     #   @return [String]
     #
     # @!attribute [rw] end_date
-    #   The ending date (e.g., 2016-12-31) of the usage data.
+    #   \[Required\] The ending date (e.g., 2016-12-31) of the usage data.
     #   @return [String]
     #
     # @!attribute [rw] position
@@ -4055,7 +4096,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetUsageRequest < Struct.new(
@@ -4103,7 +4145,8 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of returned results per page.
+    #   The maximum number of returned results per page. The default value
+    #   is 25 and the maximum value is 500.
     #   @return [Integer]
     #
     class GetVpcLinksRequest < Struct.new(
@@ -4242,9 +4285,9 @@ module Aws::APIGateway
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] body
-    #   The POST request body containing external API definitions.
-    #   Currently, only Swagger definition JSON files are supported. The
-    #   maximum size of the API definition file is 2MB.
+    #   \[Required\] The POST request body containing external API
+    #   definitions. Currently, only Swagger definition JSON files are
+    #   supported. The maximum size of the API definition file is 2MB.
     #   @return [String]
     #
     class ImportRestApiRequest < Struct.new(
@@ -4748,7 +4791,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] authorization_scopes
     #   A list of authorization scopes configured on the method. The scopes
-    #   are used with a `COGNITO_USER_POOL` authorizer to authorize the
+    #   are used with a `COGNITO_USER_POOLS` authorizer to authorize the
     #   method invocation. The authorization works by matching the method
     #   scopes against the scopes parsed from the access token in the
     #   incoming request. The method invocation is authorized if any method
@@ -4989,7 +5032,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] schema
     #   The schema for the model. For `application/json` models, this should
-    #   be [JSON-schema draft v4][1] model. Do not include "\\*/"
+    #   be [JSON schema draft 4][1] model. Do not include "\\*/"
     #   characters in the description of any properties because such
     #   "\\*/" characters may be interpreted as the closing marker for
     #   comments in some languages, such as Java or JavaScript, causing the
@@ -4997,7 +5040,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: http://json-schema.org/documentation.html
+    #   [1]: https://tools.ietf.org/html/draft-zyp-json-schema-04
     #   @return [String]
     #
     # @!attribute [rw] content_type
@@ -5125,11 +5168,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] response_type
-    #   The response type of the associated GatewayResponse. Valid values
+    #   \[Required\] The response type of the associated GatewayResponse.
+    #   Valid values
     #   are * ACCESS\_DENIED
     #   * API\_CONFIGURATION\_ERROR
     #   * AUTHORIZER\_FAILURE
@@ -5149,7 +5193,7 @@ module Aws::APIGateway
     #   * RESOURCE\_NOT\_FOUND
     #   * THROTTLED
     #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   * UNSUPPORTED\_MEDIA\_TYPE
     #   @return [String]
     #
     # @!attribute [rw] status_code
@@ -5204,19 +5248,19 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Specifies a put integration request's resource ID.
+    #   \[Required\] Specifies a put integration request's resource ID.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies a put integration request's HTTP method.
+    #   \[Required\] Specifies a put integration request's HTTP method.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Specifies a put integration input's type.
+    #   \[Required\] Specifies a put integration input's type.
     #   @return [String]
     #
     # @!attribute [rw] integration_http_method
@@ -5388,20 +5432,22 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Specifies a put integration response request's resource identifier.
+    #   \[Required\] Specifies a put integration response request's
+    #   resource identifier.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies a put integration response request's HTTP method.
+    #   \[Required\] Specifies a put integration response request's HTTP
+    #   method.
     #   @return [String]
     #
     # @!attribute [rw] status_code
-    #   Specifies the status code that is used to map the integration
-    #   response to an existing MethodResponse.
+    #   \[Required\] Specifies the status code that is used to map the
+    #   integration response to an existing MethodResponse.
     #   @return [String]
     #
     # @!attribute [rw] selection_pattern
@@ -5479,27 +5525,29 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource identifier for the new Method resource.
+    #   \[Required\] The Resource identifier for the new Method resource.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies the method request's HTTP method type.
+    #   \[Required\] Specifies the method request's HTTP method type.
     #   @return [String]
     #
     # @!attribute [rw] authorization_type
-    #   The method's authorization type. Valid values are `NONE` for open
-    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using
-    #   a custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito
-    #   user pool.
+    #   \[Required\] The method's authorization type. Valid values are
+    #   `NONE` for open access, `AWS_IAM` for using AWS IAM permissions,
+    #   `CUSTOM` for using a custom authorizer, or `COGNITO_USER_POOLS` for
+    #   using a Cognito user pool.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
     #   Specifies the identifier of an Authorizer to use on this Method, if
-    #   the type is CUSTOM.
+    #   the type is CUSTOM or COGNITO\_USER\_POOLS. The authorizer
+    #   identifier is generated by API Gateway when you created the
+    #   authorizer.
     #   @return [String]
     #
     # @!attribute [rw] api_key_required
@@ -5542,7 +5590,7 @@ module Aws::APIGateway
     #
     # @!attribute [rw] authorization_scopes
     #   A list of authorization scopes configured on the method. The scopes
-    #   are used with a `COGNITO_USER_POOL` authorizer to authorize the
+    #   are used with a `COGNITO_USER_POOLS` authorizer to authorize the
     #   method invocation. The authorization works by matching the method
     #   scopes against the scopes parsed from the access token in the
     #   incoming request. The method invocation is authorized if any method
@@ -5586,19 +5634,19 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource identifier for the Method resource.
+    #   \[Required\] The Resource identifier for the Method resource.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #   @return [String]
     #
     # @!attribute [rw] status_code
-    #   The method response's status code.
+    #   \[Required\] The method response's status code.
     #   @return [String]
     #
     # @!attribute [rw] response_parameters
@@ -5652,7 +5700,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] mode
@@ -5677,9 +5725,9 @@ module Aws::APIGateway
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] body
-    #   The PUT request body containing external API definitions. Currently,
-    #   only Swagger definition JSON files are supported. The maximum size
-    #   of the API definition file is 2MB.
+    #   \[Required\] The PUT request body containing external API
+    #   definitions. Currently, only Swagger definition JSON files are
+    #   supported. The maximum size of the API definition file is 2MB.
     #   @return [String]
     #
     class PutRestApiRequest < Struct.new(
@@ -5930,16 +5978,17 @@ module Aws::APIGateway
     #   @return [Array<String>]
     #
     # @!attribute [rw] minimum_compression_size
-    #   A nullable integer used to enable (non-negative between 0 and
-    #   10485760 (10M) bytes, inclusive) or disable (null) compression on an
-    #   API. When compression is enabled, compression or decompression are
-    #   not applied on the payload if the payload size is smaller than this
-    #   value. Setting it to zero allows compression for any payload size.
+    #   A nullable integer that is used to enable compression (with
+    #   non-negative between 0 and 10485760 (10M) bytes, inclusive) or
+    #   disable compression (with a null value) on an API. When compression
+    #   is enabled, compression or decompression is not applied on the
+    #   payload if the payload size is smaller than this value. Setting it
+    #   to zero allows compression for any payload size.
     #   @return [Integer]
     #
     # @!attribute [rw] api_key_source
-    #   The source of the API key for metring requests according to a usage
-    #   plan. Valid values are * `HEADER` to read the API key from the
+    #   The source of the API key for metering requests according to a usage
+    #   plan. Valid values are: * `HEADER` to read the API key from the
     #   `X-API-Key` header of a
     #     request.
     #   * `AUTHORIZER` to read the API key from the `UsageIdentifierKey`
@@ -5951,6 +6000,10 @@ module Aws::APIGateway
     #   types of the API.
     #   @return [Types::EndpointConfiguration]
     #
+    # @!attribute [rw] policy
+    #   A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
+    #   @return [String]
+    #
     class RestApi < Struct.new(
       :id,
       :name,
@@ -5961,7 +6014,8 @@ module Aws::APIGateway
       :binary_media_types,
       :minimum_compression_size,
       :api_key_source,
-      :endpoint_configuration)
+      :endpoint_configuration,
+      :policy)
       include Aws::Structure
     end
 
@@ -6153,7 +6207,8 @@ module Aws::APIGateway
     #   @return [Types::CanarySettings]
     #
     # @!attribute [rw] tags
-    #   A collection of Tags associated with a given resource.
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] created_date
@@ -6228,7 +6283,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Adds or updates Tags on a gievn resource.
+    # Adds or updates a tag on a given resource.
     #
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
@@ -6241,14 +6296,16 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. At present,
-    #   Stage is the only taggable resource.
+    #   \[Required\] The ARN of a resource that can be tagged. The resource
+    #   ARN must be URL-encoded. At present, Stage is the only taggable
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   \[Required\] Key/Value map of strings. Valid character set is
-    #   \[a-zA-Z+-=.\_:/\]. Tag key can be up to 128 characters and must not
-    #   start with "aws:". Tag value can be up to 256 characters.
+    #   \[Required\] The key-value map of strings. The valid character set
+    #   is \[a-zA-Z+-=.\_:/\]. The tag key can be up to 128 characters and
+    #   must not start with `aws:`. The tag value can be up to 256
+    #   characters.
     #   @return [Hash<String,String>]
     #
     class TagResourceRequest < Struct.new(
@@ -6257,10 +6314,12 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # A collection of Tags associated with a given resource.
+    # The collection of tags. Each tag element is associated with a given
+    # resource.
     #
     # @!attribute [rw] tags
-    #   A collection of Tags associated with a given resource.
+    #   The collection of tags. Each tag element is associated with a given
+    #   resource.
     #   @return [Hash<String,String>]
     #
     class Tags < Struct.new(
@@ -6314,11 +6373,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   Specifies a test invoke authorizer request's Authorizer ID.
+    #   \[Required\] Specifies a test invoke authorizer request's
+    #   Authorizer ID.
     #   @return [String]
     #
     # @!attribute [rw] headers
@@ -6426,15 +6486,15 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Specifies a test invoke method request's resource ID.
+    #   \[Required\] Specifies a test invoke method request's resource ID.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies a test invoke method request's HTTP method.
+    #   \[Required\] Specifies a test invoke method request's HTTP method.
     #   @return [String]
     #
     # @!attribute [rw] path_with_query_string
@@ -6540,7 +6600,7 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Removes Tags from a given resource.
+    # Removes a tag from a given resource.
     #
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
@@ -6551,12 +6611,13 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   \[Required\] The ARN of a resource that can be tagged. At present,
-    #   Stage is the only taggable resource.
+    #   \[Required\] The ARN of a resource that can be tagged. The resource
+    #   ARN must be URL-encoded. At present, Stage is the only taggable
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The Tag keys to delete.
+    #   \[Required\] The Tag keys to delete.
     #   @return [Array<String>]
     #
     class UntagResourceRequest < Struct.new(
@@ -6610,7 +6671,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] api_key
-    #   The identifier of the ApiKey resource to be updated.
+    #   \[Required\] The identifier of the ApiKey resource to be updated.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -6643,11 +6704,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
-    #   The identifier of the Authorizer resource.
+    #   \[Required\] The identifier of the Authorizer resource.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -6681,11 +6742,13 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The domain name of the BasePathMapping resource to change.
+    #   \[Required\] The domain name of the BasePathMapping resource to
+    #   change.
     #   @return [String]
     #
     # @!attribute [rw] base_path
-    #   The base path of the BasePathMapping resource to change.
+    #   \[Required\] The base path of the BasePathMapping resource to
+    #   change.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -6718,7 +6781,8 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] client_certificate_id
-    #   The identifier of the ClientCertificate resource to be updated.
+    #   \[Required\] The identifier of the ClientCertificate resource to be
+    #   updated.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -6752,7 +6816,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
@@ -6867,7 +6931,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of the DomainName resource to be changed.
+    #   \[Required\] The name of the DomainName resource to be changed.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -6901,11 +6965,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] response_type
-    #   The response type of the associated GatewayResponse. Valid values
+    #   \[Required\] The response type of the associated GatewayResponse.
+    #   Valid values
     #   are * ACCESS\_DENIED
     #   * API\_CONFIGURATION\_ERROR
     #   * AUTHORIZER\_FAILURE
@@ -6925,7 +6990,7 @@ module Aws::APIGateway
     #   * RESOURCE\_NOT\_FOUND
     #   * THROTTLED
     #   * UNAUTHORIZED
-    #   * UNSUPPORTED\_MEDIA\_TYPES
+    #   * UNSUPPORTED\_MEDIA\_TYPE
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -6960,15 +7025,17 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Represents an update integration request's resource identifier.
+    #   \[Required\] Represents an update integration request's resource
+    #   identifier.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Represents an update integration request's HTTP method.
+    #   \[Required\] Represents an update integration request's HTTP
+    #   method.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7005,20 +7072,22 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Specifies an update integration response request's resource
-    #   identifier.
+    #   \[Required\] Specifies an update integration response request's
+    #   resource identifier.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   Specifies an update integration response request's HTTP method.
+    #   \[Required\] Specifies an update integration response request's
+    #   HTTP method.
     #   @return [String]
     #
     # @!attribute [rw] status_code
-    #   Specifies an update integration response request's status code.
+    #   \[Required\] Specifies an update integration response request's
+    #   status code.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7055,15 +7124,15 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource identifier for the Method resource.
+    #   \[Required\] The Resource identifier for the Method resource.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7100,19 +7169,20 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The Resource identifier for the MethodResponse resource.
+    #   \[Required\] The Resource identifier for the MethodResponse
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] http_method
-    #   The HTTP verb of the Method resource.
+    #   \[Required\] The HTTP verb of the Method resource.
     #   @return [String]
     #
     # @!attribute [rw] status_code
-    #   The status code for the MethodResponse resource.
+    #   \[Required\] The status code for the MethodResponse resource.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7148,11 +7218,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] model_name
-    #   The name of the model to update.
+    #   \[Required\] The name of the model to update.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7186,7 +7256,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] request_validator_id
@@ -7224,11 +7294,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The identifier of the Resource resource.
+    #   \[Required\] The identifier of the Resource resource.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7261,7 +7331,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7294,11 +7364,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] rest_api_id
-    #   The string identifier of the associated RestApi.
+    #   \[Required\] The string identifier of the associated RestApi.
     #   @return [String]
     #
     # @!attribute [rw] stage_name
-    #   The name of the Stage resource to change information about.
+    #   \[Required\] The name of the Stage resource to change information
+    #   about.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7331,7 +7402,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] usage_plan_id
-    #   The Id of the to-be-updated usage plan.
+    #   \[Required\] The Id of the to-be-updated usage plan.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations
@@ -7365,12 +7436,14 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] usage_plan_id
-    #   The Id of the usage plan associated with the usage data.
+    #   \[Required\] The Id of the usage plan associated with the usage
+    #   data.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The identifier of the API key associated with the usage plan in
-    #   which a temporary extension is granted to the remaining quota.
+    #   \[Required\] The identifier of the API key associated with the usage
+    #   plan in which a temporary extension is granted to the remaining
+    #   quota.
     #   @return [String]
     #
     # @!attribute [rw] patch_operations

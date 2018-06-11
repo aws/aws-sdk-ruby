@@ -155,9 +155,125 @@ module Aws::Shield
 
     # @!group API Operations
 
+    # Authorizes the DDoS Response team (DRT) to access the specified Amazon
+    # S3 bucket containing your flow logs. You can associate up to 10 Amazon
+    # S3 buckets with your subscription.
+    #
+    # To use the services of the DRT and make an `AssociateDRTLogBucket`
+    # request, you must be subscribed to the [Business Support plan][1] or
+    # the [Enterprise Support plan][2].
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/premiumsupport/business-support/
+    # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
+    #
+    # @option params [required, String] :log_bucket
+    #   The Amazon S3 bucket that contains your flow logs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_drt_log_bucket({
+    #     log_bucket: "LogBucket", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTLogBucket AWS API Documentation
+    #
+    # @overload associate_drt_log_bucket(params = {})
+    # @param [Hash] params ({})
+    def associate_drt_log_bucket(params = {}, options = {})
+      req = build_request(:associate_drt_log_bucket, params)
+      req.send_request(options)
+    end
+
+    # Authorizes the DDoS Response team (DRT), using the specified role, to
+    # access your AWS account to assist with DDoS attack mitigation during
+    # potential attacks. This enables the DRT to inspect your AWS WAF
+    # configuration and create or update AWS WAF rules and web ACLs.
+    #
+    # You can associate only one `RoleArn` with your subscription. If you
+    # submit an `AssociateDRTRole` request for an account that already has
+    # an associated role, the new `RoleArn` will replace the existing
+    # `RoleArn`.
+    #
+    # Prior to making the `AssociateDRTRole` request, you must attach the
+    # [AWSShieldDRTAccessPolicy][1] managed policy to the role you will
+    # specify in the request. For more information see [Attaching and
+    # Detaching IAM Policies](
+    # https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
+    # The role must also trust the service principal `
+    # drt.shield.amazonaws.com`. For more information, see [IAM JSON Policy
+    # Elements: Principal][2].
+    #
+    # The DRT will have access only to your AWS WAF and Shield resources. By
+    # submitting this request, you authorize the DRT to inspect your AWS WAF
+    # and Shield configuration and create and update AWS WAF rules and web
+    # ACLs on your behalf. The DRT takes these actions only if explicitly
+    # authorized by you.
+    #
+    # You must have the `iam:PassRole` permission to make an
+    # `AssociateDRTRole` request. For more information, see [Granting a User
+    # Permissions to Pass a Role to an AWS Service][3].
+    #
+    # To use the services of the DRT and make an `AssociateDRTRole` request,
+    # you must be subscribed to the [Business Support plan][4] or the
+    # [Enterprise Support plan][5].
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    # [4]: https://aws.amazon.com/premiumsupport/business-support/
+    # [5]: https://aws.amazon.com/premiumsupport/enterprise-support/
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the role the DRT will use to access
+    #   your AWS account.
+    #
+    #   Prior to making the `AssociateDRTRole` request, you must attach the
+    #   [AWSShieldDRTAccessPolicy][1] managed policy to this role. For more
+    #   information see [Attaching and Detaching IAM Policies](
+    #   https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
+    #
+    #
+    #
+    #   [1]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_drt_role({
+    #     role_arn: "RoleArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AssociateDRTRole AWS API Documentation
+    #
+    # @overload associate_drt_role(params = {})
+    # @param [Hash] params ({})
+    def associate_drt_role(params = {}, options = {})
+      req = build_request(:associate_drt_role, params)
+      req.send_request(options)
+    end
+
     # Enables AWS Shield Advanced for a specific AWS resource. The resource
     # can be an Amazon CloudFront distribution, Elastic Load Balancing load
     # balancer, Elastic IP Address, or an Amazon Route 53 hosted zone.
+    #
+    # You can add protection to only a single resource with each
+    # CreateProtection request. If you want to add protection to multiple
+    # resources at once, use the [AWS WAF console][1]. For more information
+    # see [Getting Started with AWS Shield Advanced][2] and [Add AWS Shield
+    # Advanced Protection to more AWS Resources][3].
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/waf/
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html
     #
     # @option params [required, String] :name
     #   Friendly name for the `Protection` you are creating.
@@ -209,6 +325,21 @@ module Aws::Shield
     end
 
     # Activates AWS Shield Advanced for an account.
+    #
+    # As part of this request you can specify `EmergencySettings` that
+    # automaticaly grant the DDoS response team (DRT) needed permissions to
+    # assist you during a suspected DDoS attack. For more information see
+    # [Authorize the DDoS Response Team to Create Rules and Web ACLs on Your
+    # Behalf][1].
+    #
+    # When you initally create a subscription, your subscription is set to
+    # be automatically renewed at the end of the existing subscription
+    # period. You can change this by submitting an `UpdateSubscription`
+    # request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/authorize-DRT.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -325,6 +456,51 @@ module Aws::Shield
       req.send_request(options)
     end
 
+    # Returns the current role and list of Amazon S3 log buckets used by the
+    # DDoS Response team (DRT) to access your AWS account while assisting
+    # with attack mitigation.
+    #
+    # @return [Types::DescribeDRTAccessResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDRTAccessResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeDRTAccessResponse#log_bucket_list #log_bucket_list} => Array&lt;String&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.role_arn #=> String
+    #   resp.log_bucket_list #=> Array
+    #   resp.log_bucket_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeDRTAccess AWS API Documentation
+    #
+    # @overload describe_drt_access(params = {})
+    # @param [Hash] params ({})
+    def describe_drt_access(params = {}, options = {})
+      req = build_request(:describe_drt_access, params)
+      req.send_request(options)
+    end
+
+    # Lists the email addresses that the DRT can use to contact you during a
+    # suspected attack.
+    #
+    # @return [Types::DescribeEmergencyContactSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEmergencyContactSettingsResponse#emergency_contact_list #emergency_contact_list} => Array&lt;Types::EmergencyContact&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.emergency_contact_list #=> Array
+    #   resp.emergency_contact_list[0].email_address #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeEmergencyContactSettings AWS API Documentation
+    #
+    # @overload describe_emergency_contact_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_emergency_contact_settings(params = {}, options = {})
+      req = build_request(:describe_emergency_contact_settings, params)
+      req.send_request(options)
+    end
+
     # Lists the details of a Protection object.
     #
     # @option params [required, String] :protection_id
@@ -366,7 +542,12 @@ module Aws::Shield
     # @example Response structure
     #
     #   resp.subscription.start_time #=> Time
+    #   resp.subscription.end_time #=> Time
     #   resp.subscription.time_commitment_in_seconds #=> Integer
+    #   resp.subscription.auto_renew #=> String, one of "ENABLED", "DISABLED"
+    #   resp.subscription.limits #=> Array
+    #   resp.subscription.limits[0].type #=> String
+    #   resp.subscription.limits[0].max #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription AWS API Documentation
     #
@@ -374,6 +555,65 @@ module Aws::Shield
     # @param [Hash] params ({})
     def describe_subscription(params = {}, options = {})
       req = build_request(:describe_subscription, params)
+      req.send_request(options)
+    end
+
+    # Removes the DDoS Response team's (DRT) access to the specified Amazon
+    # S3 bucket containing your flow logs.
+    #
+    # To make a `DisassociateDRTLogBucket` request, you must be subscribed
+    # to the [Business Support plan][1] or the [Enterprise Support plan][2].
+    # However, if you are not subscribed to one of these support plans, but
+    # had been previously and had granted the DRT access to your account,
+    # you can submit a `DisassociateDRTLogBucket` request to remove this
+    # access.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/premiumsupport/business-support/
+    # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
+    #
+    # @option params [required, String] :log_bucket
+    #   The Amazon S3 bucket that contains your flow logs.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_drt_log_bucket({
+    #     log_bucket: "LogBucket", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTLogBucket AWS API Documentation
+    #
+    # @overload disassociate_drt_log_bucket(params = {})
+    # @param [Hash] params ({})
+    def disassociate_drt_log_bucket(params = {}, options = {})
+      req = build_request(:disassociate_drt_log_bucket, params)
+      req.send_request(options)
+    end
+
+    # Removes the DDoS Response team's (DRT) access to your AWS account.
+    #
+    # To make a `DisassociateDRTRole` request, you must be subscribed to the
+    # [Business Support plan][1] or the [Enterprise Support plan][2].
+    # However, if you are not subscribed to one of these support plans, but
+    # had been previously and had granted the DRT access to your account,
+    # you can submit a `DisassociateDRTRole` request to remove this access.
+    #
+    #
+    #
+    # [1]: https://aws.amazon.com/premiumsupport/business-support/
+    # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRole AWS API Documentation
+    #
+    # @overload disassociate_drt_role(params = {})
+    # @param [Hash] params ({})
+    def disassociate_drt_role(params = {}, options = {})
+      req = build_request(:disassociate_drt_role, params)
       req.send_request(options)
     end
 
@@ -512,6 +752,62 @@ module Aws::Shield
       req.send_request(options)
     end
 
+    # Updates the details of the list of email addresses that the DRT can
+    # use to contact you during a suspected attack.
+    #
+    # @option params [Array<Types::EmergencyContact>] :emergency_contact_list
+    #   A list of email addresses that the DRT can use to contact you during a
+    #   suspected attack.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_emergency_contact_settings({
+    #     emergency_contact_list: [
+    #       {
+    #         email_address: "EmailAddress", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateEmergencyContactSettings AWS API Documentation
+    #
+    # @overload update_emergency_contact_settings(params = {})
+    # @param [Hash] params ({})
+    def update_emergency_contact_settings(params = {}, options = {})
+      req = build_request(:update_emergency_contact_settings, params)
+      req.send_request(options)
+    end
+
+    # Updates the details of an existing subscription. Only enter values for
+    # parameters you want to change. Empty parameters are not updated.
+    #
+    # @option params [String] :auto_renew
+    #   When you initally create a subscription, `AutoRenew` is set to
+    #   `ENABLED`. If `ENABLED`, the subscription will be automatically
+    #   renewed at the end of the existing subscription period. You can change
+    #   this by submitting an `UpdateSubscription` request. If the
+    #   `UpdateSubscription` request does not included a value for
+    #   `AutoRenew`, the existing value for `AutoRenew` remains unchanged.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_subscription({
+    #     auto_renew: "ENABLED", # accepts ENABLED, DISABLED
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateSubscription AWS API Documentation
+    #
+    # @overload update_subscription(params = {})
+    # @param [Hash] params ({})
+    def update_subscription(params = {}, options = {})
+      req = build_request(:update_subscription, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -525,7 +821,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

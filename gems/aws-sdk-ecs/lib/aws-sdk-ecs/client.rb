@@ -290,11 +290,12 @@ module Aws::ECS
     #   different placement strategy) with the `placementStrategy`
     #   parameter):
     #
-    #   * Sort the valid container instances by the fewest number of running
-    #     tasks for this service in the same Availability Zone as the
-    #     instance. For example, if zone A has one running service task and
-    #     zones B and C each have zero, valid container instances in either
-    #     zone B or C are considered optimal for placement.
+    #   * Sort the valid container instances, giving priority to instances
+    #     that have the fewest number of running tasks for this service in
+    #     their respective Availability Zone. For example, if zone A has one
+    #     running service task and zones B and C each have zero, valid
+    #     container instances in either zone B or C are considered optimal
+    #     for placement.
     #
     #   * Place the new service task on a valid container instance in an
     #     optimal Availability Zone (based on the previous steps), favoring
@@ -341,12 +342,35 @@ module Aws::ECS
     #   on a container instance, the container instance and port combination
     #   is registered as a target in the target group specified here.
     #
+    #   Services with tasks that use the `awsvpc` network mode (for example,
+    #   those with the Fargate launch type) only support Application Load
+    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   supported. Also, when you create any target groups for these services,
+    #   you must choose `ip` as the target type, not `instance`, because tasks
+    #   that use the `awsvpc` network mode are associated with an elastic
+    #   network interface, not an Amazon EC2 instance.
+    #
+    # @option params [Array<Types::ServiceRegistry>] :service_registries
+    #   The details of the service discovery registries you want to assign to
+    #   this service. For more information, see [Service Discovery][1].
+    #
+    #   <note markdown="1"> Service discovery is supported for Fargate tasks if using platform
+    #   version v1.1.0 or later. For more information, see [AWS Fargate
+    #   Platform Versions][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #
     # @option params [required, Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
     #   and keep running on your cluster.
     #
     # @option params [String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #
     # @option params [String] :launch_type
@@ -414,11 +438,11 @@ module Aws::ECS
     #   should ignore unhealthy Elastic Load Balancing target health checks
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
-    #   while to start and respond to ELB health checks, you can specify a
-    #   health check grace period of up to 1,800 seconds during which the ECS
-    #   service scheduler will ignore ELB health check status. This grace
-    #   period can prevent the ECS service scheduler from marking tasks as
-    #   unhealthy and stopping them before they have time to come up.
+    #   while to start and respond to Elastic Load Balancing health checks,
+    #   you can specify a health check grace period of up to 1,800 seconds
+    #   during which the ECS service scheduler ignores health check status.
+    #   This grace period can prevent the ECS service scheduler from marking
+    #   tasks as unhealthy and stopping them before they have time to come up.
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -556,6 +580,14 @@ module Aws::ECS
     #         container_port: 1,
     #       },
     #     ],
+    #     service_registries: [
+    #       {
+    #         registry_arn: "String",
+    #         port: 1,
+    #         container_name: "String",
+    #         container_port: 1,
+    #       },
+    #     ],
     #     desired_count: 1, # required
     #     client_token: "String",
     #     launch_type: "EC2", # accepts EC2, FARGATE
@@ -597,6 +629,11 @@ module Aws::ECS
     #   resp.service.load_balancers[0].load_balancer_name #=> String
     #   resp.service.load_balancers[0].container_name #=> String
     #   resp.service.load_balancers[0].container_port #=> Integer
+    #   resp.service.service_registries #=> Array
+    #   resp.service.service_registries[0].registry_arn #=> String
+    #   resp.service.service_registries[0].port #=> Integer
+    #   resp.service.service_registries[0].container_name #=> String
+    #   resp.service.service_registries[0].container_port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -823,6 +860,11 @@ module Aws::ECS
     #   resp.service.load_balancers[0].load_balancer_name #=> String
     #   resp.service.load_balancers[0].container_name #=> String
     #   resp.service.load_balancers[0].container_port #=> Integer
+    #   resp.service.service_registries #=> Array
+    #   resp.service.service_registries[0].registry_arn #=> String
+    #   resp.service.service_registries[0].port #=> Integer
+    #   resp.service.service_registries[0].container_name #=> String
+    #   resp.service.service_registries[0].container_port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -1080,6 +1122,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
     #   resp.task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.task_definition.container_definitions[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1104,6 +1152,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -1236,7 +1290,8 @@ module Aws::ECS
     #   cluster, the default cluster is assumed.
     #
     # @option params [required, Array<String>] :container_instances
-    #   A list of container instance IDs or full ARN entries.
+    #   A list of up to 100 container instance IDs or full Amazon Resource
+    #   Name (ARN) entries.
     #
     # @return [Types::DescribeContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1483,6 +1538,11 @@ module Aws::ECS
     #   resp.services[0].load_balancers[0].load_balancer_name #=> String
     #   resp.services[0].load_balancers[0].container_name #=> String
     #   resp.services[0].load_balancers[0].container_port #=> Integer
+    #   resp.services[0].service_registries #=> Array
+    #   resp.services[0].service_registries[0].registry_arn #=> String
+    #   resp.services[0].service_registries[0].port #=> Integer
+    #   resp.services[0].service_registries[0].container_name #=> String
+    #   resp.services[0].service_registries[0].container_port #=> Integer
     #   resp.services[0].status #=> String
     #   resp.services[0].desired_count #=> Integer
     #   resp.services[0].running_count #=> Integer
@@ -1667,6 +1727,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
     #   resp.task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.task_definition.container_definitions[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -1691,6 +1757,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -1835,6 +1907,7 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -1857,6 +1930,7 @@ module Aws::ECS
     #   resp.tasks[0].attachments[0].details #=> Array
     #   resp.tasks[0].attachments[0].details[0].name #=> String
     #   resp.tasks[0].attachments[0].details[0].value #=> String
+    #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2909,8 +2983,11 @@ module Aws::ECS
     #   defaults to `EC2`.
     #
     # @option params [String] :cpu
-    #   The number of `cpu` units used by the task. If using the EC2 launch
-    #   type, this field is optional and any value can be used.
+    #   The number of CPU units used by the task. It can be expressed as an
+    #   integer using CPU units, for example `1024`, or as a string using
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but will
+    #   be converted to an integer indicating the CPU units when the task
+    #   definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -2918,26 +2995,34 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If you are using the Fargate launch type, this field is required and
-    #   you must use one of the following values, which determines your range
-    #   of valid values for the `memory` parameter:
+    #   If using the EC2 launch type, this field is optional. Supported values
+    #   are between `128` CPU units (`0.125` vCPUs) and `10240` CPU units
+    #   (`10` vCPUs).
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 0.5GB, 1GB, 2GB
+    #   If using the Fargate launch type, this field is required and you must
+    #   use one of the following values, which determines your range of
+    #   supported values for the `memory` parameter:
     #
-    #   * 512 (.5 vCPU) - Available `memory` values: 1GB, 2GB, 3GB, 4GB
+    #   * 256 (.25 vCPU) - Available `memory` values: 512 (0.5 GB), 1024 (1
+    #     GB), 2048 (2 GB)
     #
-    #   * 1024 (1 vCPU) - Available `memory` values: 2GB, 3GB, 4GB, 5GB, 6GB,
-    #     7GB, 8GB
+    #   * 512 (.5 vCPU) - Available `memory` values: 1024 (1 GB), 2048 (2 GB),
+    #     3072 (3 GB), 4096 (4 GB)
     #
-    #   * 2048 (2 vCPU) - Available `memory` values: Between 4GB and 16GB in
-    #     1GB increments
+    #   * 1024 (1 vCPU) - Available `memory` values: 2048 (2 GB), 3072 (3 GB),
+    #     4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
     #
-    #   * 4096 (4 vCPU) - Available `memory` values: Between 8GB and 30GB in
-    #     1GB increments
+    #   * 2048 (2 vCPU) - Available `memory` values: Between 4096 (4 GB) and
+    #     16384 (16 GB) in increments of 1024 (1 GB)
+    #
+    #   * 4096 (4 vCPU) - Available `memory` values: Between 8192 (8 GB) and
+    #     30720 (30 GB) in increments of 1024 (1 GB)
     #
     # @option params [String] :memory
-    #   The amount (in MiB) of memory used by the task. If using the EC2
-    #   launch type, this field is optional and any value can be used.
+    #   The amount of memory (in MiB) used by the task. It can be expressed as
+    #   an integer using MiB, for example `1024`, or as a string using GB, for
+    #   example `1GB` or `1 GB`, in a task definition but will be converted to
+    #   an integer indicating the MiB when the task definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -2945,22 +3030,26 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If you are using the Fargate launch type, this field is required and
-    #   you must use one of the following values, which determines your range
-    #   of valid values for the `cpu` parameter:
+    #   If using the EC2 launch type, this field is optional.
     #
-    #   * 0\.5GB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
+    #   If using the Fargate launch type, this field is required and you must
+    #   use one of the following values, which determines your range of
+    #   supported values for the `cpu` parameter:
     #
-    #   * 1GB, 2GB, 3GB, 4GB - Available `cpu` values: 512 (.5 vCPU)
+    #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values: 256
+    #     (.25 vCPU)
     #
-    #   * 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available `cpu` values: 1024 (1
-    #     vCPU)
+    #   * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available `cpu`
+    #     values: 512 (.5 vCPU)
     #
-    #   * Between 4GB and 16GB in 1GB increments - Available `cpu` values:
-    #     2048 (2 vCPU)
+    #   * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB),
+    #     7168 (7 GB), 8192 (8 GB) - Available `cpu` values: 1024 (1 vCPU)
     #
-    #   * Between 8GB and 30GB in 1GB increments - Available `cpu` values:
-    #     4096 (4 vCPU)
+    #   * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
+    #     Available `cpu` values: 2048 (2 vCPU)
+    #
+    #   * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) -
+    #     Available `cpu` values: 4096 (4 vCPU)
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3080,6 +3169,14 @@ module Aws::ECS
     #             },
     #           ],
     #           init_process_enabled: false,
+    #           shared_memory_size: 1,
+    #           tmpfs: [
+    #             {
+    #               container_path: "String", # required
+    #               size: 1, # required
+    #               mount_options: ["String"],
+    #             },
+    #           ],
     #         },
     #         hostname: "String",
     #         user: "String",
@@ -3111,6 +3208,13 @@ module Aws::ECS
     #           options: {
     #             "String" => "String",
     #           },
+    #         },
+    #         health_check: {
+    #           command: ["String"], # required
+    #           interval: 1,
+    #           timeout: 1,
+    #           retries: 1,
+    #           start_period: 1,
     #         },
     #       },
     #     ],
@@ -3173,6 +3277,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions #=> Array
     #   resp.task_definition.container_definitions[0].linux_parameters.devices[0].permissions[0] #=> String, one of "read", "write", "mknod"
     #   resp.task_definition.container_definitions[0].linux_parameters.init_process_enabled #=> Boolean
+    #   resp.task_definition.container_definitions[0].linux_parameters.shared_memory_size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].container_path #=> String
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].size #=> Integer
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options #=> Array
+    #   resp.task_definition.container_definitions[0].linux_parameters.tmpfs[0].mount_options[0] #=> String
     #   resp.task_definition.container_definitions[0].hostname #=> String
     #   resp.task_definition.container_definitions[0].user #=> String
     #   resp.task_definition.container_definitions[0].working_directory #=> String
@@ -3197,6 +3307,12 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
     #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.command #=> Array
+    #   resp.task_definition.container_definitions[0].health_check.command[0] #=> String
+    #   resp.task_definition.container_definitions[0].health_check.interval #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.timeout #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.retries #=> Integer
+    #   resp.task_definition.container_definitions[0].health_check.start_period #=> Integer
     #   resp.task_definition.family #=> String
     #   resp.task_definition.task_role_arn #=> String
     #   resp.task_definition.execution_role_arn #=> String
@@ -3471,6 +3587,7 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -3493,6 +3610,7 @@ module Aws::ECS
     #   resp.tasks[0].attachments[0].details #=> Array
     #   resp.tasks[0].attachments[0].details[0].name #=> String
     #   resp.tasks[0].attachments[0].details[0].value #=> String
+    #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3649,6 +3767,7 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.tasks[0].containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.tasks[0].containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.tasks[0].started_by #=> String
     #   resp.tasks[0].version #=> Integer
     #   resp.tasks[0].stopped_reason #=> String
@@ -3671,6 +3790,7 @@ module Aws::ECS
     #   resp.tasks[0].attachments[0].details #=> Array
     #   resp.tasks[0].attachments[0].details[0].name #=> String
     #   resp.tasks[0].attachments[0].details[0].value #=> String
+    #   resp.tasks[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3769,6 +3889,7 @@ module Aws::ECS
     #   resp.task.containers[0].network_interfaces[0].attachment_id #=> String
     #   resp.task.containers[0].network_interfaces[0].private_ipv_4_address #=> String
     #   resp.task.containers[0].network_interfaces[0].ipv6_address #=> String
+    #   resp.task.containers[0].health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #   resp.task.started_by #=> String
     #   resp.task.version #=> Integer
     #   resp.task.stopped_reason #=> String
@@ -3791,6 +3912,7 @@ module Aws::ECS
     #   resp.task.attachments[0].details #=> Array
     #   resp.task.attachments[0].details[0].name #=> String
     #   resp.task.attachments[0].details[0].value #=> String
+    #   resp.task.health_status #=> String, one of "HEALTHY", "UNHEALTHY", "UNKNOWN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -3899,7 +4021,7 @@ module Aws::ECS
     #   The Unix time stamp for when the container image pull completed.
     #
     # @option params [Time,DateTime,Date,Integer,String] :execution_stopped_at
-    #   The Unix timestamp for when the task execution stopped.
+    #   The Unix time stamp for when the task execution stopped.
     #
     # @return [Types::SubmitTaskStateChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4180,8 +4302,21 @@ module Aws::ECS
     # definition in a service by specifying the cluster that the service is
     # running in and a new `desiredCount` parameter.
     #
-    # You can use UpdateService to modify your task definition and deploy a
-    # new version of your service.
+    # If you have updated the Docker image of your application, you can
+    # create a new task definition with that image and deploy it to your
+    # service. The service scheduler uses the minimum healthy percent and
+    # maximum percent parameters (in the service's deployment
+    # configuration) to determine the deployment strategy.
+    #
+    # <note markdown="1"> If your updated Docker image uses the same tag as what is in the
+    # existing task definition for your service (for example,
+    # `my_image:latest`), you do not need to create a new revision of your
+    # task definition. You can update the service using the
+    # `forceNewDeployment` option. The new tasks launched by the deployment
+    # pull the current image/tag combination from your repository when they
+    # start.
+    #
+    #  </note>
     #
     # You can also update the deployment configuration of a service. When a
     # deployment is triggered by updating the task definition of a service,
@@ -4276,7 +4411,7 @@ module Aws::ECS
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   The network configuration for the service. This parameter is required
     #   for task definitions that use the `awsvpc` network mode to receive
-    #   their own Elastic Network Interface, and it is not supported for other
+    #   their own elastic network interface, and it is not supported for other
     #   network modes. For more information, see [Task Networking][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
@@ -4296,18 +4431,24 @@ module Aws::ECS
     #   The platform version you want to update your service to run.
     #
     # @option params [Boolean] :force_new_deployment
-    #   Whether or not to force a new deployment of the service.
+    #   Whether to force a new deployment of the service. Deployments are not
+    #   forced by default. You can use this option to trigger a new deployment
+    #   with no service definition changes. For example, you can update a
+    #   service's tasks to use a newer Docker image with the same image/tag
+    #   combination (`my_image:latest`) or to roll Fargate tasks onto a newer
+    #   platform version.
     #
     # @option params [Integer] :health_check_grace_period_seconds
     #   The period of time, in seconds, that the Amazon ECS service scheduler
     #   should ignore unhealthy Elastic Load Balancing target health checks
     #   after a task has first started. This is only valid if your service is
     #   configured to use a load balancer. If your service's tasks take a
-    #   while to start and respond to ELB health checks, you can specify a
-    #   health check grace period of up to 1,800 seconds during which the ECS
-    #   service scheduler will ignore ELB health check status. This grace
-    #   period can prevent the ECS service scheduler from marking tasks as
-    #   unhealthy and stopping them before they have time to come up.
+    #   while to start and respond to Elastic Load Balancing health checks,
+    #   you can specify a health check grace period of up to 1,800 seconds
+    #   during which the ECS service scheduler ignores the Elastic Load
+    #   Balancing health check status. This grace period can prevent the ECS
+    #   service scheduler from marking tasks as unhealthy and stopping them
+    #   before they have time to come up.
     #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4373,6 +4514,11 @@ module Aws::ECS
     #   resp.service.load_balancers[0].load_balancer_name #=> String
     #   resp.service.load_balancers[0].container_name #=> String
     #   resp.service.load_balancers[0].container_port #=> Integer
+    #   resp.service.service_registries #=> Array
+    #   resp.service.service_registries[0].registry_arn #=> String
+    #   resp.service.service_registries[0].port #=> Integer
+    #   resp.service.service_registries[0].container_name #=> String
+    #   resp.service.service_registries[0].container_port #=> Integer
     #   resp.service.status #=> String
     #   resp.service.desired_count #=> Integer
     #   resp.service.running_count #=> Integer
@@ -4439,7 +4585,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

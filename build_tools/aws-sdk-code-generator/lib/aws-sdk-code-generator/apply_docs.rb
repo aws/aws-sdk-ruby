@@ -17,12 +17,15 @@ module AwsSdkCodeGenerator
     def apply_docs(docs)
       @api['documentation'] = docs['service']
       docs['operations'].each do |name, docstring|
+        next unless @api['operations'][name]
         @api['operations'][name]['documentation'] = docstring
       end
       docs['shapes'].each do |shape_name, shape_docs|
+        next unless @api['shapes'][shape_name]
         @api['shapes'][shape_name]['documentation'] = shape_docs['base']
         shape_docs['refs'].each do |ref, ref_docs|
           ref_shape, ref_member = ref.split('$')
+          next unless @api['shapes'][ref_shape]
           case @api['shapes'][ref_shape]['type']
           when 'structure'
             shape = @api['shapes'][ref_shape]

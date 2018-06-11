@@ -2,6 +2,9 @@
   "ACM": {
     "models": "acm/2015-12-08"
   },
+  "ACMPCA": {
+    "models": "acm-pca/2017-08-22"
+  },
   "APIGateway": {
     "models": "apigateway/2015-07-09",
     "addPlugins": [
@@ -49,7 +52,7 @@
     "models": "cloudformation/2010-05-15"
   },
   "CloudFront": {
-    "models": "cloudfront/2017-03-25"
+    "models": "cloudfront/2017-10-30"
   },
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
@@ -113,6 +116,9 @@
   "ConfigService": {
     "models": "config/2014-11-12"
   },
+  "Connect": {
+    "models": "connect/2017-08-08"
+  },
   "CostExplorer": {
     "models": "ce/2017-10-25"
   },
@@ -167,6 +173,9 @@
   "EFS": {
     "models": "elasticfilesystem/2015-02-01"
   },
+  "EKS": {
+    "models": "eks/2017-11-01"
+  },
   "EMR": {
     "models": "elasticmapreduce/2009-03-31"
   },
@@ -187,6 +196,9 @@
   },
   "ElasticsearchService": {
     "models": "es/2015-01-01"
+  },
+  "FMS": {
+    "models": "fms/2018-01-01"
   },
   "Firehose": {
     "models": "firehose/2015-08-04"
@@ -225,6 +237,15 @@
   },
   "IoT": {
     "models": "iot/2015-05-28"
+  },
+  "IoT1ClickDevicesService": {
+    "models": "iot1click-devices/2018-05-14"
+  },
+  "IoT1ClickProjects": {
+    "models": "iot1click-projects/2018-05-14"
+  },
+  "IoTAnalytics": {
+    "models": "iotanalytics/2017-11-27"
   },
   "IoTDataPlane": {
     "models": "iot-data/2015-05-28",
@@ -302,11 +323,17 @@
   "MediaStoreData": {
     "models": "mediastore-data/2017-09-01"
   },
+  "MediaTailor": {
+    "models": "mediatailor/2018-04-23"
+  },
   "MigrationHub": {
     "models": "AWSMigrationHub/2017-05-31"
   },
   "Mobile": {
     "models": "mobile/2017-07-01"
+  },
+  "Neptune": {
+    "models": "neptune/2014-10-31"
   },
   "OpsWorks": {
     "models": "opsworks/2013-02-18"
@@ -316,6 +343,9 @@
   },
   "Organizations": {
     "models": "organizations/2016-11-28"
+  },
+  "PI": {
+    "models": "pi/2018-02-27"
   },
   "Pinpoint": {
     "models": "pinpoint/2016-12-01"
@@ -416,6 +446,9 @@
   },
   "SageMakerRuntime": {
     "models": "runtime.sagemaker/2017-05-13"
+  },
+  "SecretsManager": {
+    "models": "secretsmanager/2017-10-17"
   },
   "ServerlessApplicationRepository": {
     "models": "serverlessrepo/2017-09-08"

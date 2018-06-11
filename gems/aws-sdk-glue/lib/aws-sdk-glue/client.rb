@@ -513,13 +513,14 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Stops one or more job runs for a specified Job.
+    # Stops one or more job runs for a specified job definition.
     #
     # @option params [required, String] :job_name
-    #   The name of the Job in question.
+    #   The name of the job definition for which to stop job runs.
     #
     # @option params [required, Array<String>] :job_run_ids
-    #   A list of the JobRunIds that should be stopped for that Job.
+    #   A list of the JobRunIds that should be stopped for that job
+    #   definition.
     #
     # @return [Types::BatchStopJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -785,7 +786,7 @@ module Aws::Glue
     # @option params [String] :subnet_id
     #   The subnet ID for the new DevEndpoint to use.
     #
-    # @option params [required, String] :public_key
+    # @option params [String] :public_key
     #   The public key to use for authentication.
     #
     # @option params [Integer] :number_of_nodes
@@ -833,7 +834,7 @@ module Aws::Glue
     #     role_arn: "RoleArn", # required
     #     security_group_ids: ["GenericString"],
     #     subnet_id: "GenericString",
-    #     public_key: "GenericString", # required
+    #     public_key: "GenericString",
     #     number_of_nodes: 1,
     #     extra_python_libs_s3_path: "GenericString",
     #     extra_jars_s3_path: "GenericString",
@@ -866,19 +867,20 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Creates a new job.
+    # Creates a new job definition.
     #
     # @option params [required, String] :name
-    #   The name you assign to this job. It must be unique in your account.
+    #   The name you assign to this job definition. It must be unique in your
+    #   account.
     #
     # @option params [String] :description
-    #   Description of the job.
+    #   Description of the job being defined.
     #
     # @option params [String] :log_uri
     #   This field is reserved for future use.
     #
     # @option params [required, String] :role
-    #   The name of the IAM role associated with this job.
+    #   The name or ARN of the IAM role associated with this job.
     #
     # @option params [Types::ExecutionProperty] :execution_property
     #   An ExecutionProperty specifying the maximum number of concurrent runs
@@ -904,7 +906,7 @@ module Aws::Glue
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #
     # @option params [Types::ConnectionsList] :connections
     #   The connections used for this job.
@@ -922,6 +924,12 @@ module Aws::Glue
     #
     #
     #   [1]: https://aws.amazon.com/glue/pricing/
+    #
+    # @option params [Integer] :timeout
+    #   The job timeout in minutes. The default is 2880 minutes (48 hours).
+    #
+    # @option params [Types::NotificationProperty] :notification_property
+    #   Specifies configuration properties of a job notification.
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -949,6 +957,10 @@ module Aws::Glue
     #     },
     #     max_retries: 1,
     #     allocated_capacity: 1,
+    #     timeout: 1,
+    #     notification_property: {
+    #       notify_delay_after: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1226,6 +1238,10 @@ module Aws::Glue
     # @option params [String] :description
     #   A description of the new trigger.
     #
+    # @option params [Boolean] :start_on_creation
+    #   Set to true to start SCHEDULED and CONDITIONAL triggers when created.
+    #   True not supported for ON\_DEMAND triggers.
+    #
     # @return [Types::CreateTriggerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTriggerResponse#name #name} => String
@@ -1242,7 +1258,7 @@ module Aws::Glue
     #         {
     #           logical_operator: "EQUALS", # accepts EQUALS
     #           job_name: "NameString",
-    #           state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED
+    #           state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #         },
     #       ],
     #     },
@@ -1252,9 +1268,14 @@ module Aws::Glue
     #         arguments: {
     #           "GenericString" => "GenericString",
     #         },
+    #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       },
     #     ],
     #     description: "DescriptionString",
+    #     start_on_creation: false,
     #   })
     #
     # @example Response structure
@@ -1435,11 +1456,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Deletes a specified job. If the job is not found, no exception is
-    # thrown.
+    # Deletes a specified job definition. If the job definition is not
+    # found, no exception is thrown.
     #
     # @option params [required, String] :job_name
-    #   The name of the job to delete.
+    #   The name of the job definition to delete.
     #
     # @return [Types::DeleteJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2182,6 +2203,7 @@ module Aws::Glue
     #   resp.dev_endpoint.security_group_ids[0] #=> String
     #   resp.dev_endpoint.subnet_id #=> String
     #   resp.dev_endpoint.yarn_endpoint_address #=> String
+    #   resp.dev_endpoint.private_address #=> String
     #   resp.dev_endpoint.zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoint.public_address #=> String
     #   resp.dev_endpoint.status #=> String
@@ -2234,6 +2256,7 @@ module Aws::Glue
     #   resp.dev_endpoints[0].security_group_ids[0] #=> String
     #   resp.dev_endpoints[0].subnet_id #=> String
     #   resp.dev_endpoints[0].yarn_endpoint_address #=> String
+    #   resp.dev_endpoints[0].private_address #=> String
     #   resp.dev_endpoints[0].zeppelin_remote_spark_interpreter_port #=> Integer
     #   resp.dev_endpoints[0].public_address #=> String
     #   resp.dev_endpoints[0].status #=> String
@@ -2261,7 +2284,7 @@ module Aws::Glue
     # Retrieves an existing job definition.
     #
     # @option params [required, String] :job_name
-    #   The name of the job to retrieve.
+    #   The name of the job definition to retrieve.
     #
     # @return [Types::GetJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2290,6 +2313,8 @@ module Aws::Glue
     #   resp.job.connections.connections[0] #=> String
     #   resp.job.max_retries #=> Integer
     #   resp.job.allocated_capacity #=> Integer
+    #   resp.job.timeout #=> Integer
+    #   resp.job.notification_property.notify_delay_after #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJob AWS API Documentation
     #
@@ -2303,7 +2328,7 @@ module Aws::Glue
     # Retrieves the metadata for a given job run.
     #
     # @option params [required, String] :job_name
-    #   Name of the job being run.
+    #   Name of the job definition being run.
     #
     # @option params [required, String] :run_id
     #   The ID of the job run.
@@ -2333,7 +2358,7 @@ module Aws::Glue
     #   resp.job_run.started_on #=> Time
     #   resp.job_run.last_modified_on #=> Time
     #   resp.job_run.completed_on #=> Time
-    #   resp.job_run.job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"
+    #   resp.job_run.job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.job_run.arguments #=> Hash
     #   resp.job_run.arguments["GenericString"] #=> String
     #   resp.job_run.error_message #=> String
@@ -2341,6 +2366,9 @@ module Aws::Glue
     #   resp.job_run.predecessor_runs[0].job_name #=> String
     #   resp.job_run.predecessor_runs[0].run_id #=> String
     #   resp.job_run.allocated_capacity #=> Integer
+    #   resp.job_run.execution_time #=> Integer
+    #   resp.job_run.timeout #=> Integer
+    #   resp.job_run.notification_property.notify_delay_after #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -2351,10 +2379,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves metadata for all runs of a given job.
+    # Retrieves metadata for all runs of a given job definition.
     #
     # @option params [required, String] :job_name
-    #   The name of the job for which to retrieve all job runs.
+    #   The name of the job definition for which to retrieve all job runs.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
@@ -2386,7 +2414,7 @@ module Aws::Glue
     #   resp.job_runs[0].started_on #=> Time
     #   resp.job_runs[0].last_modified_on #=> Time
     #   resp.job_runs[0].completed_on #=> Time
-    #   resp.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"
+    #   resp.job_runs[0].job_run_state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.job_runs[0].arguments #=> Hash
     #   resp.job_runs[0].arguments["GenericString"] #=> String
     #   resp.job_runs[0].error_message #=> String
@@ -2394,6 +2422,9 @@ module Aws::Glue
     #   resp.job_runs[0].predecessor_runs[0].job_name #=> String
     #   resp.job_runs[0].predecessor_runs[0].run_id #=> String
     #   resp.job_runs[0].allocated_capacity #=> Integer
+    #   resp.job_runs[0].execution_time #=> Integer
+    #   resp.job_runs[0].timeout #=> Integer
+    #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -2405,7 +2436,7 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Retrieves all current jobs.
+    # Retrieves all current job definitions.
     #
     # @option params [String] :next_token
     #   A continuation token, if this is a continuation call.
@@ -2443,6 +2474,8 @@ module Aws::Glue
     #   resp.jobs[0].connections.connections[0] #=> String
     #   resp.jobs[0].max_retries #=> Integer
     #   resp.jobs[0].allocated_capacity #=> Integer
+    #   resp.jobs[0].timeout #=> Integer
+    #   resp.jobs[0].notification_property.notify_delay_after #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobs AWS API Documentation
@@ -3162,11 +3195,13 @@ module Aws::Glue
     #   resp.trigger.actions[0].job_name #=> String
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
+    #   resp.trigger.actions[0].timeout #=> Integer
+    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"
+    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTrigger AWS API Documentation
     #
@@ -3216,11 +3251,13 @@ module Aws::Glue
     #   resp.triggers[0].actions[0].job_name #=> String
     #   resp.triggers[0].actions[0].arguments #=> Hash
     #   resp.triggers[0].actions[0].arguments["GenericString"] #=> String
+    #   resp.triggers[0].actions[0].timeout #=> Integer
+    #   resp.triggers[0].actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.triggers[0].predicate.logical #=> String, one of "AND", "ANY"
     #   resp.triggers[0].predicate.conditions #=> Array
     #   resp.triggers[0].predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.triggers[0].predicate.conditions[0].job_name #=> String
-    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"
+    #   resp.triggers[0].predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTriggers AWS API Documentation
@@ -3434,17 +3471,17 @@ module Aws::Glue
       req.send_request(options)
     end
 
-    # Runs a job.
+    # Starts a job run using a job definition.
     #
     # @option params [required, String] :job_name
-    #   The name of the job to start.
+    #   The name of the job definition to use.
     #
     # @option params [String] :job_run_id
     #   The ID of a previous JobRun to retry.
     #
     # @option params [Hash<String,String>] :arguments
     #   The job arguments specifically for this run. They override the
-    #   equivalent default arguments set for the job itself.
+    #   equivalent default arguments set for in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that AWS Glue itself consumes.
@@ -3460,7 +3497,7 @@ module Aws::Glue
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #
     # @option params [Integer] :allocated_capacity
     #   The number of AWS Glue data processing units (DPUs) to allocate to
@@ -3472,6 +3509,13 @@ module Aws::Glue
     #
     #
     #   [1]: https://aws.amazon.com/glue/pricing/
+    #
+    # @option params [Integer] :timeout
+    #   The job run timeout in minutes. It overrides the timeout value of the
+    #   job.
+    #
+    # @option params [Types::NotificationProperty] :notification_property
+    #   Specifies configuration properties of a job run notification.
     #
     # @return [Types::StartJobRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3486,6 +3530,10 @@ module Aws::Glue
     #       "GenericString" => "GenericString",
     #     },
     #     allocated_capacity: 1,
+    #     timeout: 1,
+    #     notification_property: {
+    #       notify_delay_after: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3907,7 +3955,7 @@ module Aws::Glue
     #   Name of the job definition to update.
     #
     # @option params [required, Types::JobUpdate] :job_update
-    #   Specifies the values with which to update the job.
+    #   Specifies the values with which to update the job definition.
     #
     # @return [Types::UpdateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3936,6 +3984,10 @@ module Aws::Glue
     #       },
     #       max_retries: 1,
     #       allocated_capacity: 1,
+    #       timeout: 1,
+    #       notification_property: {
+    #         notify_delay_after: 1,
+    #       },
     #     },
     #   })
     #
@@ -4162,6 +4214,10 @@ module Aws::Glue
     #           arguments: {
     #             "GenericString" => "GenericString",
     #           },
+    #           timeout: 1,
+    #           notification_property: {
+    #             notify_delay_after: 1,
+    #           },
     #         },
     #       ],
     #       predicate: {
@@ -4170,7 +4226,7 @@ module Aws::Glue
     #           {
     #             logical_operator: "EQUALS", # accepts EQUALS
     #             job_name: "NameString",
-    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED
+    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #           },
     #         ],
     #       },
@@ -4189,11 +4245,13 @@ module Aws::Glue
     #   resp.trigger.actions[0].job_name #=> String
     #   resp.trigger.actions[0].arguments #=> Hash
     #   resp.trigger.actions[0].arguments["GenericString"] #=> String
+    #   resp.trigger.actions[0].timeout #=> Integer
+    #   resp.trigger.actions[0].notification_property.notify_delay_after #=> Integer
     #   resp.trigger.predicate.logical #=> String, one of "AND", "ANY"
     #   resp.trigger.predicate.conditions #=> Array
     #   resp.trigger.predicate.conditions[0].logical_operator #=> String, one of "EQUALS"
     #   resp.trigger.predicate.conditions[0].job_name #=> String
-    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"
+    #   resp.trigger.predicate.conditions[0].state #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTrigger AWS API Documentation
     #
@@ -4265,7 +4323,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -237,7 +237,7 @@ module Aws::Inspector
     #   The user-defined name that identifies the assessment target that you
     #   want to create. The name must be unique within the AWS account.
     #
-    # @option params [required, String] :resource_group_arn
+    # @option params [String] :resource_group_arn
     #   The ARN that specifies the resource group that is used to create the
     #   assessment target.
     #
@@ -265,7 +265,7 @@ module Aws::Inspector
     #
     #   resp = client.create_assessment_target({
     #     assessment_target_name: "AssessmentTargetName", # required
-    #     resource_group_arn: "Arn", # required
+    #     resource_group_arn: "Arn",
     #   })
     #
     # @example Response structure
@@ -2530,7 +2530,7 @@ module Aws::Inspector
     # @option params [required, String] :assessment_target_name
     #   The name of the assessment target that you want to update.
     #
-    # @option params [required, String] :resource_group_arn
+    # @option params [String] :resource_group_arn
     #   The ARN of the resource group that is used to specify the new resource
     #   group to associate with the assessment target.
     #
@@ -2552,7 +2552,7 @@ module Aws::Inspector
     #   resp = client.update_assessment_target({
     #     assessment_target_arn: "Arn", # required
     #     assessment_target_name: "AssessmentTargetName", # required
-    #     resource_group_arn: "Arn", # required
+    #     resource_group_arn: "Arn",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UpdateAssessmentTarget AWS API Documentation
@@ -2577,7 +2577,7 @@ module Aws::Inspector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

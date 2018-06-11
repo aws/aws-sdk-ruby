@@ -189,6 +189,27 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Retrieves the current encryption configuration for X-Ray data.
+    #
+    # @return [Types::GetEncryptionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEncryptionConfigResult#encryption_config #encryption_config} => Types::EncryptionConfig
+    #
+    # @example Response structure
+    #
+    #   resp.encryption_config.key_id #=> String
+    #   resp.encryption_config.status #=> String, one of "UPDATING", "ACTIVE"
+    #   resp.encryption_config.type #=> String, one of "NONE", "KMS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfig AWS API Documentation
+    #
+    # @overload get_encryption_config(params = {})
+    # @param [Hash] params ({})
+    def get_encryption_config(params = {}, options = {})
+      req = build_request(:get_encryption_config, params)
+      req.send_request(options)
+    end
+
     # Retrieves a document that describes services that process incoming
     # requests, and downstream services that they call as a result. Root
     # services process incoming requests and make calls to downstream
@@ -469,6 +490,53 @@ module Aws::XRay
       req.send_request(options)
     end
 
+    # Updates the encryption configuration for X-Ray data.
+    #
+    # @option params [String] :key_id
+    #   An AWS KMS customer master key (CMK) in one of the following formats:
+    #
+    #   * **Alias** - The name of the key. For example, `alias/MyKey`.
+    #
+    #   * **Key ID** - The KMS key ID of the key. For example,
+    #     `ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`.
+    #
+    #   * **ARN** - The full Amazon Resource Name of the key ID or alias. For
+    #     example,
+    #     `arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456`.
+    #     Use this format to specify a key in a different account.
+    #
+    #   Omit this key if you set `Type` to `NONE`.
+    #
+    # @option params [required, String] :type
+    #   The type of encryption. Set to `KMS` to use your own key for
+    #   encryption. Set to `NONE` for default encryption.
+    #
+    # @return [Types::PutEncryptionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEncryptionConfigResult#encryption_config #encryption_config} => Types::EncryptionConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_encryption_config({
+    #     key_id: "EncryptionKeyId",
+    #     type: "NONE", # required, accepts NONE, KMS
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.encryption_config.key_id #=> String
+    #   resp.encryption_config.status #=> String, one of "UPDATING", "ACTIVE"
+    #   resp.encryption_config.type #=> String, one of "NONE", "KMS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfig AWS API Documentation
+    #
+    # @overload put_encryption_config(params = {})
+    # @param [Hash] params ({})
+    def put_encryption_config(params = {}, options = {})
+      req = build_request(:put_encryption_config, params)
+      req.send_request(options)
+    end
+
     # Used by the AWS X-Ray daemon to upload telemetry.
     #
     # @option params [required, Array<Types::TelemetryRecord>] :telemetry_records
@@ -565,7 +633,7 @@ module Aws::XRay
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html
+    # [1]: https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html
     #
     # @option params [required, Array<String>] :trace_segment_documents
     #   A string containing a JSON document defining one or more segments or
@@ -610,7 +678,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -123,15 +123,16 @@ module Aws::Batch
     #   @return [Types::AttemptContainerDetail]
     #
     # @!attribute [rw] started_at
-    #   The Unix time stamp for when the attempt was started (when the
-    #   attempt transitioned from the `STARTING` state to the `RUNNING`
-    #   state).
+    #   The Unix time stamp (in seconds and milliseconds) for when the
+    #   attempt was started (when the attempt transitioned from the
+    #   `STARTING` state to the `RUNNING` state).
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_at
-    #   The Unix time stamp for when the attempt was stopped (when the
-    #   attempt transitioned from the `RUNNING` state to a terminal state,
-    #   such as `SUCCEEDED` or `FAILED`).
+    #   The Unix time stamp (in seconds and milliseconds) for when the
+    #   attempt was stopped (when the attempt transitioned from the
+    #   `RUNNING` state to a terminal state, such as `SUCCEEDED` or
+    #   `FAILED`).
     #   @return [Integer]
     #
     # @!attribute [rw] status_reason
@@ -684,11 +685,18 @@ module Aws::Batch
     #   `--memory` option to [docker run][3]. You must specify at least 4
     #   MiB of memory for a job.
     #
+    #   <note markdown="1"> If you are trying to maximize your resource utilization by providing
+    #   your jobs as much memory as possible for a particular instance type,
+    #   see [Memory Management][4] in the *AWS Batch User Guide*.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
     #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
     #   [3]: https://docs.docker.com/engine/reference/run/
+    #   [4]: http://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
     #   @return [Integer]
     #
     # @!attribute [rw] command
@@ -1384,6 +1392,12 @@ module Aws::Batch
     #   An object with various properties specific to container-based jobs.
     #   @return [Types::ContainerProperties]
     #
+    # @!attribute [rw] timeout
+    #   The timeout configuration for jobs that are submitted with this job
+    #   definition. You can specify a timeout duration after which AWS Batch
+    #   terminates your jobs if they have not finished.
+    #   @return [Types::JobTimeout]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDefinition AWS API Documentation
     #
     class JobDefinition < Struct.new(
@@ -1394,7 +1408,8 @@ module Aws::Batch
       :type,
       :parameters,
       :retry_strategy,
-      :container_properties)
+      :container_properties,
+      :timeout)
       include Aws::Structure
     end
 
@@ -1453,11 +1468,11 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The Unix time stamp for when the job was created. For non-array jobs
-    #   and parent array jobs, this is when the job entered the `SUBMITTED`
-    #   state (at the time SubmitJob was called). For array child jobs, this
-    #   is when the child job was spawned by its parent and entered the
-    #   `PENDING` state.
+    #   The Unix time stamp (in seconds and milliseconds) for when the job
+    #   was created. For non-array jobs and parent array jobs, this is when
+    #   the job entered the `SUBMITTED` state (at the time SubmitJob was
+    #   called). For array child jobs, this is when the child job was
+    #   spawned by its parent and entered the `PENDING` state.
     #   @return [Integer]
     #
     # @!attribute [rw] retry_strategy
@@ -1465,14 +1480,15 @@ module Aws::Batch
     #   @return [Types::RetryStrategy]
     #
     # @!attribute [rw] started_at
-    #   The Unix time stamp for when the job was started (when the job
-    #   transitioned from the `STARTING` state to the `RUNNING` state).
+    #   The Unix time stamp (in seconds and milliseconds) for when the job
+    #   was started (when the job transitioned from the `STARTING` state to
+    #   the `RUNNING` state).
     #   @return [Integer]
     #
     # @!attribute [rw] stopped_at
-    #   The Unix time stamp for when the job was stopped (when the job
-    #   transitioned from the `RUNNING` state to a terminal state, such as
-    #   `SUCCEEDED` or `FAILED`).
+    #   The Unix time stamp (in seconds and milliseconds) for when the job
+    #   was stopped (when the job transitioned from the `RUNNING` state to a
+    #   terminal state, such as `SUCCEEDED` or `FAILED`).
     #   @return [Integer]
     #
     # @!attribute [rw] depends_on
@@ -1498,6 +1514,10 @@ module Aws::Batch
     #   The array properties of the job, if it is an array job.
     #   @return [Types::ArrayPropertiesDetail]
     #
+    # @!attribute [rw] timeout
+    #   The timeout configuration for the job.
+    #   @return [Types::JobTimeout]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDetail AWS API Documentation
     #
     class JobDetail < Struct.new(
@@ -1515,7 +1535,8 @@ module Aws::Batch
       :job_definition,
       :parameters,
       :container,
-      :array_properties)
+      :array_properties,
+      :timeout)
       include Aws::Structure
     end
 
@@ -1624,6 +1645,28 @@ module Aws::Batch
       :stopped_at,
       :container,
       :array_properties)
+      include Aws::Structure
+    end
+
+    # An object representing a job timeout configuration.
+    #
+    # @note When making an API call, you may pass JobTimeout
+    #   data as a hash:
+    #
+    #       {
+    #         attempt_duration_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] attempt_duration_seconds
+    #   The time duration in seconds (measured from the job attempt's
+    #   `startedAt` timestamp) after which AWS Batch terminates your jobs if
+    #   they have not finished.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobTimeout AWS API Documentation
+    #
+    class JobTimeout < Struct.new(
+      :attempt_duration_seconds)
       include Aws::Structure
     end
 
@@ -1821,6 +1864,9 @@ module Aws::Batch
     #         retry_strategy: {
     #           attempts: 1,
     #         },
+    #         timeout: {
+    #           attempt_duration_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_definition_name
@@ -1848,8 +1894,24 @@ module Aws::Batch
     # @!attribute [rw] retry_strategy
     #   The retry strategy to use for failed jobs that are submitted with
     #   this job definition. Any retry strategy that is specified during a
-    #   SubmitJob operation overrides the retry strategy defined here.
+    #   SubmitJob operation overrides the retry strategy defined here. If a
+    #   job is terminated due to a timeout, it is not retried.
     #   @return [Types::RetryStrategy]
+    #
+    # @!attribute [rw] timeout
+    #   The timeout configuration for jobs that are submitted with this job
+    #   definition, after which AWS Batch terminates your jobs if they have
+    #   not finished. If a job is terminated due to a timeout, it is not
+    #   retried. The minimum value for the timeout is 60 seconds. Any
+    #   timeout configuration that is specified during a SubmitJob operation
+    #   overrides the timeout configuration defined here. For more
+    #   information, see [Job Timeouts][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   @return [Types::JobTimeout]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionRequest AWS API Documentation
     #
@@ -1858,7 +1920,8 @@ module Aws::Batch
       :type,
       :parameters,
       :container_properties,
-      :retry_strategy)
+      :retry_strategy,
+      :timeout)
       include Aws::Structure
     end
 
@@ -1939,6 +2002,9 @@ module Aws::Batch
     #         retry_strategy: {
     #           attempts: 1,
     #         },
+    #         timeout: {
+    #           attempt_duration_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
@@ -2004,6 +2070,22 @@ module Aws::Batch
     #   retry strategy defined in the job definition.
     #   @return [Types::RetryStrategy]
     #
+    # @!attribute [rw] timeout
+    #   The timeout configuration for this SubmitJob operation. You can
+    #   specify a timeout duration after which AWS Batch terminates your
+    #   jobs if they have not finished. If a job is terminated due to a
+    #   timeout, it is not retried. The minimum value for the timeout is 60
+    #   seconds. This configuration overrides any timeout configuration
+    #   specified in the job definition. For array jobs, child jobs have the
+    #   same timeout configuration as the parent job. For more information,
+    #   see [Job Timeouts][1] in the *Amazon Elastic Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html
+    #   @return [Types::JobTimeout]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobRequest AWS API Documentation
     #
     class SubmitJobRequest < Struct.new(
@@ -2014,7 +2096,8 @@ module Aws::Batch
       :job_definition,
       :parameters,
       :container_overrides,
-      :retry_strategy)
+      :retry_strategy,
+      :timeout)
       include Aws::Structure
     end
 

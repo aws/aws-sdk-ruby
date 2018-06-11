@@ -274,7 +274,7 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     # @option options [Boolean] :default_only
     #   Indicates that only the default version of the specified engine or
     #   engine and major version combination is returned.

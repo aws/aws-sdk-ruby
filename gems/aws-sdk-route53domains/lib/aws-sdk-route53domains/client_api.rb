@@ -282,6 +282,7 @@ module Aws::Route53Domains
     ListDomainsResponse.add_member(:next_page_marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "NextPageMarker"))
     ListDomainsResponse.struct_class = Types::ListDomainsResponse
 
+    ListOperationsRequest.add_member(:submitted_since, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SubmittedSince"))
     ListOperationsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "Marker"))
     ListOperationsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location_name: "MaxItems"))
     ListOperationsRequest.struct_class = Types::ListOperationsRequest

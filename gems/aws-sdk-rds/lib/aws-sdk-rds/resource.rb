@@ -51,6 +51,8 @@ module Aws::RDS
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
     #     enable_iam_database_authentication: false,
+    #     backtrack_window: 1,
+    #     enable_cloudwatch_logs_exports: ["String"],
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -115,13 +117,19 @@ module Aws::RDS
     # @option options [required, String] :engine
     #   The name of the database engine to be used for this DB cluster.
     #
-    #   Valid Values: `aurora`, `aurora-postgresql`
+    #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora),
+    #   `aurora-mysql` (for MySQL 5.7-compatible Aurora), and
+    #   `aurora-postgresql`
     # @option options [String] :engine_version
     #   The version number of the database engine to use.
     #
-    #   **Aurora**
+    #   **Aurora MySQL**
     #
-    #   Example: `5.6.10a`
+    #   Example: `5.6.10a`, `5.7.12`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `9.6.3`
     # @option options [Integer] :port
     #   The port number on which the instances in the DB cluster accept
     #   connections.
@@ -274,6 +282,21 @@ module Aws::RDS
     #   accounts to database accounts, and otherwise false.
     #
     #   Default: `false`
+    # @option options [Integer] :backtrack_window
+    #   The target backtrack window, in seconds. To disable backtracking, set
+    #   this value to 0.
+    #
+    #   Default: 0
+    #
+    #   Constraints:
+    #
+    #   * If specified, this value must be set to a number from 0 to 259,200
+    #     (72 hours).
+    #
+    #   ^
+    # @option options [Array<String>] :enable_cloudwatch_logs_exports
+    #   The list of log types that need to be enabled for exporting to
+    #   CloudWatch Logs.
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -320,6 +343,14 @@ module Aws::RDS
     #   group family, and can be applied only to a DB cluster running a
     #   database engine and engine version compatible with that DB cluster
     #   parameter group family.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Example: `aurora5.6`, `aurora-mysql5.7`
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Example: `aurora-postgresql9.6`
     # @option options [required, String] :description
     #   The description for the DB cluster parameter group.
     # @option options [Array<Types::Tag>] :tags
@@ -389,6 +420,12 @@ module Aws::RDS
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
     #     enable_cloudwatch_logs_exports: ["String"],
+    #     processor_features: [
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -583,7 +620,9 @@ module Aws::RDS
     #
     #   Valid Values:
     #
-    #   * `aurora`
+    #   * `aurora` (for MySQL 5.6-compatible Aurora)
+    #
+    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -877,11 +916,13 @@ module Aws::RDS
     #
     #   **MariaDB**
     #
+    #   * `10.2.12` (supported in all AWS Regions)
+    #
     #   * `10.2.11` (supported in all AWS Regions)
     #
-    #   ^
     #
     #
+    #   * `10.1.31` (supported in all AWS Regions)
     #
     #   * `10.1.26` (supported in all AWS Regions)
     #
@@ -892,6 +933,8 @@ module Aws::RDS
     #   * `10.1.14` (supported in all AWS Regions except us-east-2)
     #
     #
+    #
+    #   * `10.0.34` (supported in all AWS Regions)
     #
     #   * `10.0.32` (supported in all AWS Regions)
     #
@@ -953,6 +996,8 @@ module Aws::RDS
     #
     #   **MySQL**
     #
+    #   * `5.7.21` (supported in all AWS regions)
+    #
     #   * `5.7.19` (supported in all AWS regions)
     #
     #   * `5.7.17` (supported in all AWS regions)
@@ -960,6 +1005,8 @@ module Aws::RDS
     #   * `5.7.16` (supported in all AWS regions)
     #
     #
+    #
+    #   * `5.6.39` (supported in all AWS Regions)
     #
     #   * `5.6.37` (supported in all AWS Regions)
     #
@@ -973,6 +1020,8 @@ module Aws::RDS
     #     ca-central-1, eu-west-2)
     #
     #
+    #
+    #   * `5.5.59` (supported in all AWS Regions)
     #
     #   * `5.5.57` (supported in all AWS Regions)
     #
@@ -1039,7 +1088,9 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.6.x:** ` 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
+    #   * **Version 10.1**
+    #
+    #   * **Version 9.6.x:** ` 9.6.6 | 9.6.5 | 9.6.3 | 9.6.2 | 9.6.1`
     #
     #   * **Version 9.5.x:** ` 9.5.9 | 9.5.7 | 9.5.6 | 9.5.4 | 9.5.2`
     #
@@ -1235,6 +1286,13 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   True to enable Performance Insights for the DB instance, and otherwise
     #   false.
+    #
+    #   For more information, see [Using Amazon Performance Insights][1] in
+    #   the *Amazon Relational Database Service User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html
     # @option options [String] :performance_insights_kms_key_id
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
@@ -1242,6 +1300,9 @@ module Aws::RDS
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
+    # @option options [Array<Types::ProcessorFeature>] :processor_features
+    #   The number of CPU cores and the number of threads per core for the DB
+    #   instance class of the DB instance.
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = @client.create_db_instance(options)
@@ -1811,7 +1872,7 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   Not currently supported.
+    #   This parameter is not currently supported.
     # @option options [Boolean] :default_only
     #   Indicates that only the default version of the specified engine or
     #   engine and major version combination is returned.
@@ -2517,7 +2578,12 @@ module Aws::RDS
     #   Valid Values: `1 | 3 | 31536000 | 94608000`
     # @option options [String] :product_description
     #   Product description filter value. Specify this parameter to show only
-    #   the available offerings matching the specified product description.
+    #   the available offerings that contain the specified product
+    #   description.
+    #
+    #   <note markdown="1"> The results show offerings that partially match the filter value.
+    #
+    #    </note>
     # @option options [String] :offering_type
     #   The offering type filter value. Specify this parameter to show only
     #   the available offerings matching the specified offering type.

@@ -404,13 +404,17 @@ module Aws::Lambda
     #   @return [Integer]
     #
     # @!attribute [rw] starting_position
-    #   The position in the stream where AWS Lambda should start reading.
-    #   Valid only for Kinesis streams. For more information, see
-    #   [ShardIteratorType][1] in the *Amazon Kinesis API Reference*.
+    #   The position in the DynamoDB or Kinesis stream where AWS Lambda
+    #   should start reading. For more information, see
+    #   [GetShardIterator][1] in the *Amazon Kinesis API Reference Guide* or
+    #   [GetShardIterator][2] in the *Amazon DynamoDB API Reference Guide*.
+    #   The `AT_TIMESTAMP` value is supported only for [Kinesis streams][3].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
+    #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html
+    #   [3]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
@@ -419,11 +423,12 @@ module Aws::Lambda
     #   exact timestamp does not exist, the iterator returned is for the
     #   next (later) record. If the timestamp is older than the current trim
     #   horizon, the iterator returned is for the oldest untrimmed data
-    #   record (TRIM\_HORIZON). Valid only for Kinesis streams.
+    #   record (TRIM\_HORIZON). Valid only for [Kinesis streams][2].
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
+    #   [2]: http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
@@ -443,7 +448,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
     #         role: "RoleArn", # required
     #         handler: "Handler", # required
     #         code: { # required
@@ -492,7 +497,9 @@ module Aws::Lambda
     #   To use the Python runtime v3.6, set the value to "python3.6". To
     #   use the Python runtime v2.7, set the value to "python2.7". To use
     #   the Node.js runtime v6.10, set the value to "nodejs6.10". To use
-    #   the Node.js runtime v4.3, set the value to "nodejs4.3".
+    #   the Node.js runtime v4.3, set the value to "nodejs4.3". To use the
+    #   .NET Core runtime v1.0, set the value to "dotnetcore1.0". To use
+    #   the .NET Core runtime v2.0, set the value to "dotnetcore2.0".
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available
@@ -566,7 +573,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] dead_letter_config
     #   The parent object that contains the target ARN (Amazon Resource
-    #   Name) of an Amazon SQS queue or Amazon SNS topic.
+    #   Name) of an Amazon SQS queue or Amazon SNS topic. For more
+    #   information, see dlq.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
@@ -585,7 +593,13 @@ module Aws::Lambda
     #   @return [Types::TracingConfig]
     #
     # @!attribute [rw] tags
-    #   The list of tags (key-value pairs) assigned to the new function.
+    #   The list of tags (key-value pairs) assigned to the new function. For
+    #   more information, see [Tagging Lambda Functions][1] in the **AWS
+    #   Lambda Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
@@ -609,8 +623,9 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The parent object that contains the target ARN (Amazon Resource Name)
-    # of an Amazon SQS queue or Amazon SNS topic.
+    # The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
+    # topic you specify as your Dead Letter Queue (DLQ). For more
+    # information, see dlq.
     #
     # @note When making an API call, you may pass DeadLetterConfig
     #   data as a hash:
@@ -621,7 +636,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] target_arn
     #   The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
-    #   topic you specify as your Dead Letter Queue (DLQ).
+    #   topic you specify as your Dead Letter Queue (DLQ). dlq. For more
+    #   information, see dlq.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeadLetterConfig AWS API Documentation
@@ -886,7 +902,7 @@ module Aws::Lambda
     #   must be base64-encoded. If you are using the AWS SDKs or the AWS
     #   CLI, the SDKs or CLI will do the encoding for you. For more
     #   information about creating a .zip file, see [Execution
-    #   Permissions][1] in the *AWS Lambda Developer Guide*.
+    #   Permissions][1] in the **AWS Lambda Developer Guide**.
     #
     #
     #
@@ -1009,7 +1025,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] dead_letter_config
     #   The parent object that contains the target ARN (Amazon Resource
-    #   Name) of an Amazon SQS queue or Amazon SNS topic.
+    #   Name) of an Amazon SQS queue or Amazon SNS topic. For more
+    #   information, see dlq.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
@@ -1223,7 +1240,13 @@ module Aws::Lambda
     #   @return [Types::FunctionCodeLocation]
     #
     # @!attribute [rw] tags
-    #   Returns the list of tags associated with the function.
+    #   Returns the list of tags associated with the function. For more
+    #   information, see [Tagging Lambda Functions][1] in the **AWS Lambda
+    #   Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] concurrency
@@ -1696,7 +1719,13 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] resource
-    #   The ARN (Amazon Resource Name) of the function.
+    #   The ARN (Amazon Resource Name) of the function. For more
+    #   information, see [Tagging Lambda Functions][1] in the **AWS Lambda
+    #   Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsRequest AWS API Documentation
@@ -1707,7 +1736,12 @@ module Aws::Lambda
     end
 
     # @!attribute [rw] tags
-    #   The list of tags assigned to the function.
+    #   The list of tags assigned to the function. For more information, see
+    #   [Tagging Lambda Functions][1] in the **AWS Lambda Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsResponse AWS API Documentation
@@ -1916,12 +1950,23 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] resource
-    #   The ARN (Amazon Resource Name) of the Lambda function.
+    #   The ARN (Amazon Resource Name) of the Lambda function. For more
+    #   information, see [Tagging Lambda Functions][1] in the **AWS Lambda
+    #   Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The list of tags (key-value pairs) you are assigning to the Lambda
-    #   function.
+    #   function. For more information, see [Tagging Lambda Functions][1] in
+    #   the **AWS Lambda Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceRequest AWS API Documentation
@@ -1980,11 +2025,23 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] resource
-    #   The ARN (Amazon Resource Name) of the function.
+    #   The ARN (Amazon Resource Name) of the function. For more
+    #   information, see [Tagging Lambda Functions][1] in the **AWS Lambda
+    #   Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   The list of tag keys to be deleted from the function.
+    #   The list of tag keys to be deleted from the function. For more
+    #   information, see [Tagging Lambda Functions][1] in the **AWS Lambda
+    #   Developer Guide**.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/tagging.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceRequest AWS API Documentation
@@ -2147,7 +2204,7 @@ module Aws::Lambda
     #   must be base64-encoded. If you are using the AWS SDKs or the AWS
     #   CLI, the SDKs or CLI will do the encoding for you. For more
     #   information about creating a .zip file, see [Execution
-    #   Permissions][1] in the *AWS Lambda Developer Guide*.
+    #   Permissions][1].
     #
     #
     #
@@ -2226,7 +2283,7 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, nodejs8.10, java8, python2.7, python3.6, dotnetcore1.0, dotnetcore2.0, nodejs4.3-edge, go1.x
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },
@@ -2299,7 +2356,8 @@ module Aws::Lambda
     #   use the Python runtime v2.7, set the value to "python2.7". To use
     #   the Node.js runtime v6.10, set the value to "nodejs6.10". To use
     #   the Node.js runtime v4.3, set the value to "nodejs4.3". To use the
-    #   Python runtime v3.6, set the value to "python3.6".
+    #   .NET Core runtime v1.0, set the value to "dotnetcore1.0". To use
+    #   the .NET Core runtime v2.0, set the value to "dotnetcore2.0".
     #
     #   <note markdown="1"> Node v0.10.42 is currently marked as deprecated. You must migrate
     #   existing functions to the newer Node.js runtime versions available
@@ -2313,7 +2371,8 @@ module Aws::Lambda
     #
     # @!attribute [rw] dead_letter_config
     #   The parent object that contains the target ARN (Amazon Resource
-    #   Name) of an Amazon SQS queue or Amazon SNS topic.
+    #   Name) of an Amazon SQS queue or Amazon SNS topic. For more
+    #   information, see dlq.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] kms_key_arn

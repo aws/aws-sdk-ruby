@@ -38,6 +38,7 @@ module Aws::CloudWatch
     Datapoint = Shapes::StructureShape.new(name: 'Datapoint')
     DatapointValue = Shapes::FloatShape.new(name: 'DatapointValue')
     DatapointValueMap = Shapes::MapShape.new(name: 'DatapointValueMap')
+    DatapointValues = Shapes::ListShape.new(name: 'DatapointValues')
     Datapoints = Shapes::ListShape.new(name: 'Datapoints')
     DatapointsToAlarm = Shapes::IntegerShape.new(name: 'DatapointsToAlarm')
     DeleteAlarmsInput = Shapes::StructureShape.new(name: 'DeleteAlarmsInput')
@@ -65,6 +66,9 @@ module Aws::CloudWatch
     FaultDescription = Shapes::StringShape.new(name: 'FaultDescription')
     GetDashboardInput = Shapes::StructureShape.new(name: 'GetDashboardInput')
     GetDashboardOutput = Shapes::StructureShape.new(name: 'GetDashboardOutput')
+    GetMetricDataInput = Shapes::StructureShape.new(name: 'GetMetricDataInput')
+    GetMetricDataMaxDatapoints = Shapes::IntegerShape.new(name: 'GetMetricDataMaxDatapoints')
+    GetMetricDataOutput = Shapes::StructureShape.new(name: 'GetMetricDataOutput')
     GetMetricStatisticsInput = Shapes::StructureShape.new(name: 'GetMetricStatisticsInput')
     GetMetricStatisticsOutput = Shapes::StructureShape.new(name: 'GetMetricStatisticsOutput')
     HistoryData = Shapes::StringShape.new(name: 'HistoryData')
@@ -83,13 +87,24 @@ module Aws::CloudWatch
     ListMetricsOutput = Shapes::StructureShape.new(name: 'ListMetricsOutput')
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
     Message = Shapes::StringShape.new(name: 'Message')
+    MessageData = Shapes::StructureShape.new(name: 'MessageData')
+    MessageDataCode = Shapes::StringShape.new(name: 'MessageDataCode')
+    MessageDataValue = Shapes::StringShape.new(name: 'MessageDataValue')
     Metric = Shapes::StructureShape.new(name: 'Metric')
     MetricAlarm = Shapes::StructureShape.new(name: 'MetricAlarm')
     MetricAlarms = Shapes::ListShape.new(name: 'MetricAlarms')
     MetricData = Shapes::ListShape.new(name: 'MetricData')
+    MetricDataQueries = Shapes::ListShape.new(name: 'MetricDataQueries')
+    MetricDataQuery = Shapes::StructureShape.new(name: 'MetricDataQuery')
+    MetricDataResult = Shapes::StructureShape.new(name: 'MetricDataResult')
+    MetricDataResultMessages = Shapes::ListShape.new(name: 'MetricDataResultMessages')
+    MetricDataResults = Shapes::ListShape.new(name: 'MetricDataResults')
     MetricDatum = Shapes::StructureShape.new(name: 'MetricDatum')
+    MetricExpression = Shapes::StringShape.new(name: 'MetricExpression')
+    MetricId = Shapes::StringShape.new(name: 'MetricId')
     MetricLabel = Shapes::StringShape.new(name: 'MetricLabel')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
+    MetricStat = Shapes::StructureShape.new(name: 'MetricStat')
     Metrics = Shapes::ListShape.new(name: 'Metrics')
     MissingRequiredParameterException = Shapes::StructureShape.new(name: 'MissingRequiredParameterException')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
@@ -102,18 +117,23 @@ module Aws::CloudWatch
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
+    ReturnData = Shapes::BooleanShape.new(name: 'ReturnData')
+    ScanBy = Shapes::StringShape.new(name: 'ScanBy')
     SetAlarmStateInput = Shapes::StructureShape.new(name: 'SetAlarmStateInput')
     Size = Shapes::IntegerShape.new(name: 'Size')
     StandardUnit = Shapes::StringShape.new(name: 'StandardUnit')
+    Stat = Shapes::StringShape.new(name: 'Stat')
     StateReason = Shapes::StringShape.new(name: 'StateReason')
     StateReasonData = Shapes::StringShape.new(name: 'StateReasonData')
     StateValue = Shapes::StringShape.new(name: 'StateValue')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     StatisticSet = Shapes::StructureShape.new(name: 'StatisticSet')
     Statistics = Shapes::ListShape.new(name: 'Statistics')
+    StatusCode = Shapes::StringShape.new(name: 'StatusCode')
     StorageResolution = Shapes::IntegerShape.new(name: 'StorageResolution')
     Threshold = Shapes::FloatShape.new(name: 'Threshold')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    Timestamps = Shapes::ListShape.new(name: 'Timestamps')
     TreatMissingData = Shapes::StringShape.new(name: 'TreatMissingData')
 
     AlarmHistoryItem.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
@@ -155,6 +175,8 @@ module Aws::CloudWatch
 
     DatapointValueMap.key = Shapes::ShapeRef.new(shape: ExtendedStatistic)
     DatapointValueMap.value = Shapes::ShapeRef.new(shape: DatapointValue)
+
+    DatapointValues.member = Shapes::ShapeRef.new(shape: DatapointValue)
 
     Datapoints.member = Shapes::ShapeRef.new(shape: Datapoint)
 
@@ -230,6 +252,18 @@ module Aws::CloudWatch
     GetDashboardOutput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, location_name: "DashboardName"))
     GetDashboardOutput.struct_class = Types::GetDashboardOutput
 
+    GetMetricDataInput.add_member(:metric_data_queries, Shapes::ShapeRef.new(shape: MetricDataQueries, required: true, location_name: "MetricDataQueries"))
+    GetMetricDataInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
+    GetMetricDataInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
+    GetMetricDataInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetMetricDataInput.add_member(:scan_by, Shapes::ShapeRef.new(shape: ScanBy, location_name: "ScanBy"))
+    GetMetricDataInput.add_member(:max_datapoints, Shapes::ShapeRef.new(shape: GetMetricDataMaxDatapoints, location_name: "MaxDatapoints"))
+    GetMetricDataInput.struct_class = Types::GetMetricDataInput
+
+    GetMetricDataOutput.add_member(:metric_data_results, Shapes::ShapeRef.new(shape: MetricDataResults, location_name: "MetricDataResults"))
+    GetMetricDataOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetMetricDataOutput.struct_class = Types::GetMetricDataOutput
+
     GetMetricStatisticsInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
     GetMetricStatisticsInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     GetMetricStatisticsInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
@@ -262,6 +296,10 @@ module Aws::CloudWatch
     ListMetricsOutput.add_member(:metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "Metrics"))
     ListMetricsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListMetricsOutput.struct_class = Types::ListMetricsOutput
+
+    MessageData.add_member(:code, Shapes::ShapeRef.new(shape: MessageDataCode, location_name: "Code"))
+    MessageData.add_member(:value, Shapes::ShapeRef.new(shape: MessageDataValue, location_name: "Value"))
+    MessageData.struct_class = Types::MessageData
 
     Metric.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     Metric.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
@@ -299,6 +337,27 @@ module Aws::CloudWatch
 
     MetricData.member = Shapes::ShapeRef.new(shape: MetricDatum)
 
+    MetricDataQueries.member = Shapes::ShapeRef.new(shape: MetricDataQuery)
+
+    MetricDataQuery.add_member(:id, Shapes::ShapeRef.new(shape: MetricId, required: true, location_name: "Id"))
+    MetricDataQuery.add_member(:metric_stat, Shapes::ShapeRef.new(shape: MetricStat, location_name: "MetricStat"))
+    MetricDataQuery.add_member(:expression, Shapes::ShapeRef.new(shape: MetricExpression, location_name: "Expression"))
+    MetricDataQuery.add_member(:label, Shapes::ShapeRef.new(shape: MetricLabel, location_name: "Label"))
+    MetricDataQuery.add_member(:return_data, Shapes::ShapeRef.new(shape: ReturnData, location_name: "ReturnData"))
+    MetricDataQuery.struct_class = Types::MetricDataQuery
+
+    MetricDataResult.add_member(:id, Shapes::ShapeRef.new(shape: MetricId, location_name: "Id"))
+    MetricDataResult.add_member(:label, Shapes::ShapeRef.new(shape: MetricLabel, location_name: "Label"))
+    MetricDataResult.add_member(:timestamps, Shapes::ShapeRef.new(shape: Timestamps, location_name: "Timestamps"))
+    MetricDataResult.add_member(:values, Shapes::ShapeRef.new(shape: DatapointValues, location_name: "Values"))
+    MetricDataResult.add_member(:status_code, Shapes::ShapeRef.new(shape: StatusCode, location_name: "StatusCode"))
+    MetricDataResult.add_member(:messages, Shapes::ShapeRef.new(shape: MetricDataResultMessages, location_name: "Messages"))
+    MetricDataResult.struct_class = Types::MetricDataResult
+
+    MetricDataResultMessages.member = Shapes::ShapeRef.new(shape: MessageData)
+
+    MetricDataResults.member = Shapes::ShapeRef.new(shape: MetricDataResult)
+
     MetricDatum.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
     MetricDatum.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
     MetricDatum.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
@@ -307,6 +366,12 @@ module Aws::CloudWatch
     MetricDatum.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
     MetricDatum.add_member(:storage_resolution, Shapes::ShapeRef.new(shape: StorageResolution, location_name: "StorageResolution"))
     MetricDatum.struct_class = Types::MetricDatum
+
+    MetricStat.add_member(:metric, Shapes::ShapeRef.new(shape: Metric, required: true, location_name: "Metric"))
+    MetricStat.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "Period"))
+    MetricStat.add_member(:stat, Shapes::ShapeRef.new(shape: Stat, required: true, location_name: "Stat"))
+    MetricStat.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
+    MetricStat.struct_class = Types::MetricStat
 
     Metrics.member = Shapes::ShapeRef.new(shape: Metric)
 
@@ -357,6 +422,8 @@ module Aws::CloudWatch
     StatisticSet.struct_class = Types::StatisticSet
 
     Statistics.member = Shapes::ShapeRef.new(shape: Statistic)
+
+    Timestamps.member = Shapes::ShapeRef.new(shape: Timestamp)
 
 
     # @api private
@@ -455,6 +522,15 @@ module Aws::CloudWatch
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: DashboardNotFoundError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
+      end)
+
+      api.add_operation(:get_metric_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetMetricData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetMetricDataInput)
+        o.output = Shapes::ShapeRef.new(shape: GetMetricDataOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
       end)
 
       api.add_operation(:get_metric_statistics, Seahorse::Model::Operation.new.tap do |o|

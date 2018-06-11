@@ -34,6 +34,7 @@ require 'aws-sdk-s3/plugins/sse_cpk.rb'
 require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
+require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3)
 
@@ -75,6 +76,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
     add_plugin(Aws::S3::Plugins::S3Signer)
     add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
+    add_plugin(Aws::Plugins::EventStreamConfiguration)
 
     # @option options [required, Aws::CredentialProvider] :credentials
     #   Your AWS credentials. This can be an instance of any one of the
@@ -132,6 +134,9 @@ module Aws::S3
     #   The client endpoint is normally constructed from the `:region`
     #   option. You should only configure an `:endpoint` when connecting
     #   to test endpoints. This should be avalid HTTP(S) URI.
+    #
+    # @option options [Proc] :event_stream_handler
+    #   When an EventStream or Proc object is provided, it will be used as callback for each chunk of event stream response received along the way.
     #
     # @option options [Boolean] :follow_redirects (true)
     #   When `true`, this client will follow 307 redirects returned
@@ -547,7 +552,7 @@ module Aws::S3
     #     metadata_directive: "COPY", # accepts COPY, REPLACE
     #     tagging_directive: "COPY", # accepts COPY, REPLACE
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -817,7 +822,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -1744,9 +1749,9 @@ module Aws::S3
     #   resp.rules[0].status #=> String, one of "Enabled", "Disabled"
     #   resp.rules[0].transition.date #=> Time
     #   resp.rules[0].transition.days #=> Integer
-    #   resp.rules[0].transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA"
+    #   resp.rules[0].transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA"
     #   resp.rules[0].noncurrent_version_transition.noncurrent_days #=> Integer
-    #   resp.rules[0].noncurrent_version_transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA"
+    #   resp.rules[0].noncurrent_version_transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA"
     #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
     #   resp.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
     #
@@ -1818,10 +1823,10 @@ module Aws::S3
     #   resp.rules[0].transitions #=> Array
     #   resp.rules[0].transitions[0].date #=> Time
     #   resp.rules[0].transitions[0].days #=> Integer
-    #   resp.rules[0].transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA"
+    #   resp.rules[0].transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA"
     #   resp.rules[0].noncurrent_version_transitions #=> Array
     #   resp.rules[0].noncurrent_version_transitions[0].noncurrent_days #=> Integer
-    #   resp.rules[0].noncurrent_version_transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA"
+    #   resp.rules[0].noncurrent_version_transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA", "ONEZONE_IA"
     #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
     #   resp.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
     #
@@ -2199,7 +2204,7 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].source_selection_criteria.sse_kms_encrypted_objects.status #=> String, one of "Enabled", "Disabled"
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
     #   resp.replication_configuration.rules[0].destination.account #=> String
-    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
+    #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA"
     #   resp.replication_configuration.rules[0].destination.access_control_translation.owner #=> String, one of "Destination"
     #   resp.replication_configuration.rules[0].destination.encryption_configuration.replica_kms_key_id #=> String
     #
@@ -2646,7 +2651,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
     #   resp.parts_count #=> Integer
@@ -3093,7 +3098,7 @@ module Aws::S3
     #   resp.sse_customer_algorithm #=> String
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA"
     #   resp.request_charged #=> String, one of "requester"
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
     #   resp.parts_count #=> Integer
@@ -3492,7 +3497,7 @@ module Aws::S3
     #   resp.uploads[0].upload_id #=> String
     #   resp.uploads[0].key #=> String
     #   resp.uploads[0].initiated #=> Time
-    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
+    #   resp.uploads[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA"
     #   resp.uploads[0].owner.display_name #=> String
     #   resp.uploads[0].owner.id #=> String
     #   resp.uploads[0].initiator.id #=> String
@@ -3757,7 +3762,7 @@ module Aws::S3
     #   resp.contents[0].last_modified #=> Time
     #   resp.contents[0].etag #=> String
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.name #=> String
@@ -3893,7 +3898,7 @@ module Aws::S3
     #   resp.contents[0].last_modified #=> Time
     #   resp.contents[0].etag #=> String
     #   resp.contents[0].size #=> Integer
-    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER"
+    #   resp.contents[0].storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "GLACIER", "STANDARD_IA", "ONEZONE_IA"
     #   resp.contents[0].owner.display_name #=> String
     #   resp.contents[0].owner.id #=> String
     #   resp.name #=> String
@@ -4028,7 +4033,7 @@ module Aws::S3
     #   resp.initiator.display_name #=> String
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
-    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
+    #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA", "ONEZONE_IA"
     #   resp.request_charged #=> String, one of "requester"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts AWS API Documentation
@@ -4424,11 +4429,11 @@ module Aws::S3
     #           transition: {
     #             date: Time.now,
     #             days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #           },
     #           noncurrent_version_transition: {
     #             noncurrent_days: 1,
-    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #           },
     #           noncurrent_version_expiration: {
     #             noncurrent_days: 1,
@@ -4523,13 +4528,13 @@ module Aws::S3
     #             {
     #               date: Time.now,
     #               days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #             },
     #           ],
     #           noncurrent_version_transitions: [
     #             {
     #               noncurrent_days: 1,
-    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+    #               storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA, ONEZONE_IA
     #             },
     #           ],
     #           noncurrent_version_expiration: {
@@ -4595,7 +4600,7 @@ module Aws::S3
     #     bucket: "BucketName", # required
     #     bucket_logging_status: { # required
     #       logging_enabled: {
-    #         target_bucket: "TargetBucket",
+    #         target_bucket: "TargetBucket", # required
     #         target_grants: [
     #           {
     #             grantee: {
@@ -4608,7 +4613,7 @@ module Aws::S3
     #             permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE
     #           },
     #         ],
-    #         target_prefix: "TargetPrefix",
+    #         target_prefix: "TargetPrefix", # required
     #       },
     #     },
     #     content_md5: "ContentMD5",
@@ -4915,7 +4920,7 @@ module Aws::S3
     #           destination: { # required
     #             bucket: "BucketName", # required
     #             account: "AccountId",
-    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #             storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #             access_control_translation: {
     #               owner: "Destination", # required, accepts Destination
     #             },
@@ -5432,7 +5437,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",
@@ -5713,6 +5718,10 @@ module Aws::S3
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
     #           },
+    #           compression_type: "NONE", # accepts NONE, GZIP
+    #           json: {
+    #             type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #           },
     #         },
     #         expression_type: "SQL", # required, accepts SQL
     #         expression: "Expression", # required
@@ -5723,6 +5732,9 @@ module Aws::S3
     #             record_delimiter: "RecordDelimiter",
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
+    #           },
+    #           json: {
+    #             record_delimiter: "RecordDelimiter",
     #           },
     #         },
     #       },
@@ -5762,7 +5774,7 @@ module Aws::S3
     #               value: "MetadataValue",
     #             },
     #           ],
-    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+    #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA
     #         },
     #       },
     #     },
@@ -5781,6 +5793,278 @@ module Aws::S3
     def restore_object(params = {}, options = {})
       req = build_request(:restore_object, params)
       req.send_request(options)
+    end
+
+    # This operation filters the contents of an Amazon S3 object based on a
+    # simple Structured Query Language (SQL) statement. In the request,
+    # along with the SQL expression, you must also specify a data
+    # serialization format (JSON or CSV) of the object. Amazon S3 uses this
+    # to parse object data into records, and returns only records that match
+    # the specified SQL expression. You must also specify the data
+    # serialization format for the response.
+    #
+    # @option params [required, String] :bucket
+    #   The S3 Bucket.
+    #
+    # @option params [required, String] :key
+    #   The Object Key.
+    #
+    # @option params [String] :sse_customer_algorithm
+    #   The SSE Algorithm used to encrypt the object. For more information, go
+    #   to [ Server-Side Encryption (Using Customer-Provided Encryption
+    #   Keys][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #
+    # @option params [String] :sse_customer_key
+    #   The SSE Customer Key. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #
+    # @option params [String] :sse_customer_key_md5
+    #   The SSE Customer Key MD5. For more information, go to [ Server-Side
+    #   Encryption (Using Customer-Provided Encryption Keys][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #
+    # @option params [required, String] :expression
+    #   The expression that is used to query the object.
+    #
+    # @option params [required, String] :expression_type
+    #   The type of the provided expression (e.g., SQL).
+    #
+    # @option params [Types::RequestProgress] :request_progress
+    #   Specifies if periodic request progress information should be enabled.
+    #
+    # @option params [required, Types::InputSerialization] :input_serialization
+    #   Describes the format of the data in the object that is being queried.
+    #
+    # @option params [required, Types::OutputSerialization] :output_serialization
+    #   Describes the format of the data that you want Amazon S3 to return in
+    #   response.
+    #
+    # @return [Types::SelectObjectContentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SelectObjectContentOutput#payload #payload} => Types::SelectObjectContentEventStream
+    #
+    # @example EventStream Operation Example
+    #
+    #   You can process event once it arrives immediately, or wait until
+    #   full response complete and iterate through eventstream enumerator.
+    #
+    #   To interact with event immediately, you need to register #select_object_content
+    #   with callbacks, callbacks can be register for specifc events or for all events,
+    #   callback for errors in the event stream is also available for register.
+    #
+    #   Callbacks can be passed in by `:event_stream_handler` option or within block
+    #   statement attached to #select_object_content call directly. Hybrid pattern of both
+    #   is also supported.
+    #
+    #   `:event_stream_handler` option takes in either Proc object or
+    #   EventStreams::SelectObjectContentEventStream object.
+    #
+    #   Usage pattern a): callbacks with a block attached to #select_object_content
+    #     Example for registering callbacks for all event types and error event
+    #
+    #     client.select_object_content( # params input# ) do |stream|
+    #
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #
+    #       stream.on_event do |event|
+    #         # process all events arrive
+    #         puts event.event_type
+    #         ...
+    #       end
+    #
+    #     end
+    #
+    #   Usage pattern b): pass in `:event_stream_handler` for #select_object_content
+    #
+    #     1) create a EventStreams::SelectObjectContentEventStream object
+    #     Example for registering callbacks with specific events
+    #
+    #       handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
+    #       handler.on_records_event do |event|
+    #         event # => Aws::S3::Types::Records
+    #       end
+    #       handler.on_stats_event do |event|
+    #         event # => Aws::S3::Types::Stats
+    #       end
+    #       handler.on_progress_event do |event|
+    #         event # => Aws::S3::Types::Progress
+    #       end
+    #       handler.on_cont_event do |event|
+    #         event # => Aws::S3::Types::Cont
+    #       end
+    #       handler.on_end_event do |event|
+    #         event # => Aws::S3::Types::End
+    #       end
+    #
+    #     client.select_object_content( # params input #, event_stream_handler: handler)
+    #
+    #     2) use a Ruby Proc object
+    #     Example for registering callbacks with specific events
+    #
+    #     handler = Proc.new do |stream|
+    #       stream.on_records_event do |event|
+    #         event # => Aws::S3::Types::Records
+    #       end
+    #       stream.on_stats_event do |event|
+    #         event # => Aws::S3::Types::Stats
+    #       end
+    #       stream.on_progress_event do |event|
+    #         event # => Aws::S3::Types::Progress
+    #       end
+    #       stream.on_cont_event do |event|
+    #         event # => Aws::S3::Types::Cont
+    #       end
+    #       stream.on_end_event do |event|
+    #         event # => Aws::S3::Types::End
+    #       end
+    #     end
+    #
+    #     client.select_object_content( # params input #, event_stream_handler: handler)
+    #
+    #   Usage pattern c): hybird pattern of a) and b)
+    #
+    #       handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
+    #       handler.on_records_event do |event|
+    #         event # => Aws::S3::Types::Records
+    #       end
+    #       handler.on_stats_event do |event|
+    #         event # => Aws::S3::Types::Stats
+    #       end
+    #       handler.on_progress_event do |event|
+    #         event # => Aws::S3::Types::Progress
+    #       end
+    #       handler.on_cont_event do |event|
+    #         event # => Aws::S3::Types::Cont
+    #       end
+    #       handler.on_end_event do |event|
+    #         event # => Aws::S3::Types::End
+    #       end
+    #
+    #     client.select_object_content( # params input #, event_stream_handler: handler) do |stream|
+    #       stream.on_error_event do |event|
+    #         # catch unmodeled error event in the stream
+    #         raise event
+    #         # => Aws::Errors::EventError
+    #         # event.event_type => :error
+    #         # event.error_code => String
+    #         # event.error_message => String
+    #       end
+    #     end
+    #
+    #   Besides above usage patterns for process events when they arrive immediately, you can also
+    #   iterate through events after response complete.
+    #
+    #   Events are available at resp.payload # => Enumerator
+    #   For parameter input example, please refer to following request syntax
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.select_object_content({
+    #     bucket: "BucketName", # required
+    #     key: "ObjectKey", # required
+    #     sse_customer_algorithm: "SSECustomerAlgorithm",
+    #     sse_customer_key: "SSECustomerKey",
+    #     sse_customer_key_md5: "SSECustomerKeyMD5",
+    #     expression: "Expression", # required
+    #     expression_type: "SQL", # required, accepts SQL
+    #     request_progress: {
+    #       enabled: false,
+    #     },
+    #     input_serialization: { # required
+    #       csv: {
+    #         file_header_info: "USE", # accepts USE, IGNORE, NONE
+    #         comments: "Comments",
+    #         quote_escape_character: "QuoteEscapeCharacter",
+    #         record_delimiter: "RecordDelimiter",
+    #         field_delimiter: "FieldDelimiter",
+    #         quote_character: "QuoteCharacter",
+    #       },
+    #       compression_type: "NONE", # accepts NONE, GZIP
+    #       json: {
+    #         type: "DOCUMENT", # accepts DOCUMENT, LINES
+    #       },
+    #     },
+    #     output_serialization: { # required
+    #       csv: {
+    #         quote_fields: "ALWAYS", # accepts ALWAYS, ASNEEDED
+    #         quote_escape_character: "QuoteEscapeCharacter",
+    #         record_delimiter: "RecordDelimiter",
+    #         field_delimiter: "FieldDelimiter",
+    #         quote_character: "QuoteCharacter",
+    #       },
+    #       json: {
+    #         record_delimiter: "RecordDelimiter",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   All events are available at resp.payload:
+    #   resp.payload #=> Enumerator
+    #   resp.payload.event_types #=> [:records, :stats, :progress, :cont, :end]
+    #
+    #   For :records event available at #on_records_event callback and response eventstream enumerator:
+    #   event.payload #=> IO
+    #
+    #   For :stats event available at #on_stats_event callback and response eventstream enumerator:
+    #   event.details.bytes_scanned #=> Integer
+    #   event.details.bytes_processed #=> Integer
+    #   event.details.bytes_returned #=> Integer
+    #
+    #   For :progress event available at #on_progress_event callback and response eventstream enumerator:
+    #   event.details.bytes_scanned #=> Integer
+    #   event.details.bytes_processed #=> Integer
+    #   event.details.bytes_returned #=> Integer
+    #
+    #   For :cont event available at #on_cont_event callback and response eventstream enumerator:
+    #    #=> EmptyStruct
+    #   For :end event available at #on_end_event callback and response eventstream enumerator:
+    #    #=> EmptyStruct
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/SelectObjectContent AWS API Documentation
+    #
+    # @overload select_object_content(params = {})
+    # @param [Hash] params ({})
+    def select_object_content(params = {}, options = {}, &block)
+      params = params.dup
+      event_stream_handler = case handler = params.delete(:event_stream_handler)
+        when EventStreams::SelectObjectContentEventStream then handler
+        when Proc then EventStreams::SelectObjectContentEventStream.new.tap(&handler)
+        when nil then EventStreams::SelectObjectContentEventStream.new
+        else
+          msg = "expected :event_stream_handler to be a block or "\
+            "instance of Aws::S3::EventStreams::SelectObjectContentEventStream"\
+            ", got `#{handler.inspect}` instead"
+          raise ArgumentError, msg
+        end
+
+      yield(event_stream_handler) if block_given?
+
+      req = build_request(:select_object_content, params)
+
+      req.context[:event_stream_handler] = event_stream_handler
+      req.handlers.add(Aws::Binary::DecodeHandler, priority: 95)
+
+      req.send_request(options, &block)
     end
 
     # Uploads a part in a multipart upload.
@@ -6087,7 +6371,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

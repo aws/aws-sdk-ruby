@@ -454,8 +454,12 @@ module Aws::MTurk
     #   submit. It does not affect how your HITs are grouped.
     #
     # @option params [Array<Types::QualificationRequirement>] :qualification_requirements
-    #   A condition that a Worker's Qualifications must meet before the
-    #   Worker is allowed to accept and complete the HIT.
+    #   Conditions that a Worker's Qualifications must meet in order to
+    #   accept the HIT. A HIT can have between zero and ten Qualification
+    #   requirements. All requirements must be met in order for a Worker to
+    #   accept the HIT. Additionally, other actions can be restricted using
+    #   the `ActionsGuarded` field on each `QualificationRequirement`
+    #   structure.
     #
     # @option params [String] :unique_request_token
     #   A unique identifier for this request which allows you to retry the
@@ -524,6 +528,7 @@ module Aws::MTurk
     #           },
     #         ],
     #         required_to_preview: false,
+    #         actions_guarded: "Accept", # accepts Accept, PreviewAndAccept, DiscoverPreviewAndAccept
     #       },
     #     ],
     #     unique_request_token: "IdempotencyToken",
@@ -593,6 +598,7 @@ module Aws::MTurk
     #   resp.hit.qualification_requirements[0].locale_values[0].country #=> String
     #   resp.hit.qualification_requirements[0].locale_values[0].subdivision #=> String
     #   resp.hit.qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hit.qualification_requirements[0].actions_guarded #=> String, one of "Accept", "PreviewAndAccept", "DiscoverPreviewAndAccept"
     #   resp.hit.hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
     #   resp.hit.number_of_assignments_pending #=> Integer
     #   resp.hit.number_of_assignments_available #=> Integer
@@ -648,8 +654,12 @@ module Aws::MTurk
     #   before accepting it.
     #
     # @option params [Array<Types::QualificationRequirement>] :qualification_requirements
-    #   A condition that a Worker's Qualifications must meet before the
-    #   Worker is allowed to accept and complete the HIT.
+    #   Conditions that a Worker's Qualifications must meet in order to
+    #   accept the HIT. A HIT can have between zero and ten Qualification
+    #   requirements. All requirements must be met in order for a Worker to
+    #   accept the HIT. Additionally, other actions can be restricted using
+    #   the `ActionsGuarded` field on each `QualificationRequirement`
+    #   structure.
     #
     # @return [Types::CreateHITTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -676,6 +686,7 @@ module Aws::MTurk
     #           },
     #         ],
     #         required_to_preview: false,
+    #         actions_guarded: "Accept", # accepts Accept, PreviewAndAccept, DiscoverPreviewAndAccept
     #       },
     #     ],
     #   })
@@ -870,6 +881,7 @@ module Aws::MTurk
     #   resp.hit.qualification_requirements[0].locale_values[0].country #=> String
     #   resp.hit.qualification_requirements[0].locale_values[0].subdivision #=> String
     #   resp.hit.qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hit.qualification_requirements[0].actions_guarded #=> String, one of "Accept", "PreviewAndAccept", "DiscoverPreviewAndAccept"
     #   resp.hit.hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
     #   resp.hit.number_of_assignments_pending #=> Integer
     #   resp.hit.number_of_assignments_available #=> Integer
@@ -1259,6 +1271,7 @@ module Aws::MTurk
     #   resp.hit.qualification_requirements[0].locale_values[0].country #=> String
     #   resp.hit.qualification_requirements[0].locale_values[0].subdivision #=> String
     #   resp.hit.qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hit.qualification_requirements[0].actions_guarded #=> String, one of "Accept", "PreviewAndAccept", "DiscoverPreviewAndAccept"
     #   resp.hit.hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
     #   resp.hit.number_of_assignments_pending #=> Integer
     #   resp.hit.number_of_assignments_available #=> Integer
@@ -1360,6 +1373,7 @@ module Aws::MTurk
     #   resp.hit.qualification_requirements[0].locale_values[0].country #=> String
     #   resp.hit.qualification_requirements[0].locale_values[0].subdivision #=> String
     #   resp.hit.qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hit.qualification_requirements[0].actions_guarded #=> String, one of "Accept", "PreviewAndAccept", "DiscoverPreviewAndAccept"
     #   resp.hit.hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
     #   resp.hit.number_of_assignments_pending #=> Integer
     #   resp.hit.number_of_assignments_available #=> Integer
@@ -1646,6 +1660,7 @@ module Aws::MTurk
     #   resp.hits[0].qualification_requirements[0].locale_values[0].country #=> String
     #   resp.hits[0].qualification_requirements[0].locale_values[0].subdivision #=> String
     #   resp.hits[0].qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hits[0].qualification_requirements[0].actions_guarded #=> String, one of "Accept", "PreviewAndAccept", "DiscoverPreviewAndAccept"
     #   resp.hits[0].hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
     #   resp.hits[0].number_of_assignments_pending #=> Integer
     #   resp.hits[0].number_of_assignments_available #=> Integer
@@ -1718,6 +1733,7 @@ module Aws::MTurk
     #   resp.hits[0].qualification_requirements[0].locale_values[0].country #=> String
     #   resp.hits[0].qualification_requirements[0].locale_values[0].subdivision #=> String
     #   resp.hits[0].qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hits[0].qualification_requirements[0].actions_guarded #=> String, one of "Accept", "PreviewAndAccept", "DiscoverPreviewAndAccept"
     #   resp.hits[0].hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
     #   resp.hits[0].number_of_assignments_pending #=> Integer
     #   resp.hits[0].number_of_assignments_available #=> Integer
@@ -1784,10 +1800,8 @@ module Aws::MTurk
       req.send_request(options)
     end
 
-    # The `ListQualificationRequests` operation retrieves requests for
-    # Qualifications of a particular Qualification type. The owner of the
-    # Qualification type calls this operation to poll for pending requests,
-    # and accepts them using the AcceptQualification operation.
+    # The `ListQualificationTypes` operation returns a list of Qualification
+    # types, filtered by an optional search term.
     #
     # @option params [String] :query
     #   A text query against all of the searchable attributes of Qualification
@@ -2036,6 +2050,7 @@ module Aws::MTurk
     #   resp.hits[0].qualification_requirements[0].locale_values[0].country #=> String
     #   resp.hits[0].qualification_requirements[0].locale_values[0].subdivision #=> String
     #   resp.hits[0].qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hits[0].qualification_requirements[0].actions_guarded #=> String, one of "Accept", "PreviewAndAccept", "DiscoverPreviewAndAccept"
     #   resp.hits[0].hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
     #   resp.hits[0].number_of_assignments_pending #=> Integer
     #   resp.hits[0].number_of_assignments_available #=> Integer
@@ -2642,7 +2657,7 @@ module Aws::MTurk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mturk'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

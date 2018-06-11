@@ -163,10 +163,12 @@ module Aws::AutoScalingPlans
     # scaling instructions in your scaling plan.
     #
     # @option params [required, String] :scaling_plan_name
-    #   The name of the scaling plan.
+    #   The name of the scaling plan. Names cannot contain vertical bars,
+    #   colons, or forward slashes.
     #
     # @option params [required, Types::ApplicationSource] :application_source
-    #   The source for the application.
+    #   A CloudFormation stack or set of tags. You can create one scaling plan
+    #   per application source.
     #
     # @option params [required, Array<Types::ScalingInstruction>] :scaling_instructions
     #   The scaling instructions.
@@ -181,6 +183,12 @@ module Aws::AutoScalingPlans
     #     scaling_plan_name: "ScalingPlanName", # required
     #     application_source: { # required
     #       cloud_formation_stack_arn: "XmlString",
+    #       tag_filters: [
+    #         {
+    #           key: "XmlStringMaxLen128",
+    #           values: ["XmlStringMaxLen256"],
+    #         },
+    #       ],
     #     },
     #     scaling_instructions: [ # required
     #       {
@@ -358,6 +366,12 @@ module Aws::AutoScalingPlans
     #     application_sources: [
     #       {
     #         cloud_formation_stack_arn: "XmlString",
+    #         tag_filters: [
+    #           {
+    #             key: "XmlStringMaxLen128",
+    #             values: ["XmlStringMaxLen256"],
+    #           },
+    #         ],
     #       },
     #     ],
     #     max_results: 1,
@@ -370,6 +384,10 @@ module Aws::AutoScalingPlans
     #   resp.scaling_plans[0].scaling_plan_name #=> String
     #   resp.scaling_plans[0].scaling_plan_version #=> Integer
     #   resp.scaling_plans[0].application_source.cloud_formation_stack_arn #=> String
+    #   resp.scaling_plans[0].application_source.tag_filters #=> Array
+    #   resp.scaling_plans[0].application_source.tag_filters[0].key #=> String
+    #   resp.scaling_plans[0].application_source.tag_filters[0].values #=> Array
+    #   resp.scaling_plans[0].application_source.tag_filters[0].values[0] #=> String
     #   resp.scaling_plans[0].scaling_instructions #=> Array
     #   resp.scaling_plans[0].scaling_instructions[0].service_namespace #=> String, one of "autoscaling", "ecs", "ec2", "rds", "dynamodb"
     #   resp.scaling_plans[0].scaling_instructions[0].resource_id #=> String
@@ -391,8 +409,9 @@ module Aws::AutoScalingPlans
     #   resp.scaling_plans[0].scaling_instructions[0].target_tracking_configurations[0].scale_out_cooldown #=> Integer
     #   resp.scaling_plans[0].scaling_instructions[0].target_tracking_configurations[0].scale_in_cooldown #=> Integer
     #   resp.scaling_plans[0].scaling_instructions[0].target_tracking_configurations[0].estimated_instance_warmup #=> Integer
-    #   resp.scaling_plans[0].status_code #=> String, one of "Active", "ActiveWithProblems", "CreationInProgress", "CreationFailed", "DeletionInProgress", "DeletionFailed"
+    #   resp.scaling_plans[0].status_code #=> String, one of "Active", "ActiveWithProblems", "CreationInProgress", "CreationFailed", "DeletionInProgress", "DeletionFailed", "UpdateInProgress", "UpdateFailed"
     #   resp.scaling_plans[0].status_message #=> String
+    #   resp.scaling_plans[0].status_start_time #=> Time
     #   resp.scaling_plans[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
@@ -402,6 +421,84 @@ module Aws::AutoScalingPlans
     # @param [Hash] params ({})
     def describe_scaling_plans(params = {}, options = {})
       req = build_request(:describe_scaling_plans, params)
+      req.send_request(options)
+    end
+
+    # Updates the scaling plan for the specified scaling plan.
+    #
+    # You cannot update a scaling plan if it is in the process of being
+    # created, updated, or deleted.
+    #
+    # @option params [Types::ApplicationSource] :application_source
+    #   A CloudFormation stack or set of tags.
+    #
+    # @option params [required, String] :scaling_plan_name
+    #   The name of the scaling plan.
+    #
+    # @option params [Array<Types::ScalingInstruction>] :scaling_instructions
+    #   The scaling instructions.
+    #
+    # @option params [required, Integer] :scaling_plan_version
+    #   The version number.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_scaling_plan({
+    #     application_source: {
+    #       cloud_formation_stack_arn: "XmlString",
+    #       tag_filters: [
+    #         {
+    #           key: "XmlStringMaxLen128",
+    #           values: ["XmlStringMaxLen256"],
+    #         },
+    #       ],
+    #     },
+    #     scaling_plan_name: "ScalingPlanName", # required
+    #     scaling_instructions: [
+    #       {
+    #         service_namespace: "autoscaling", # required, accepts autoscaling, ecs, ec2, rds, dynamodb
+    #         resource_id: "ResourceIdMaxLen1600", # required
+    #         scalable_dimension: "autoscaling:autoScalingGroup:DesiredCapacity", # required, accepts autoscaling:autoScalingGroup:DesiredCapacity, ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, rds:cluster:ReadReplicaCount, dynamodb:table:ReadCapacityUnits, dynamodb:table:WriteCapacityUnits, dynamodb:index:ReadCapacityUnits, dynamodb:index:WriteCapacityUnits
+    #         min_capacity: 1, # required
+    #         max_capacity: 1, # required
+    #         target_tracking_configurations: [ # required
+    #           {
+    #             predefined_scaling_metric_specification: {
+    #               predefined_scaling_metric_type: "ASGAverageCPUUtilization", # required, accepts ASGAverageCPUUtilization, ASGAverageNetworkIn, ASGAverageNetworkOut, DynamoDBReadCapacityUtilization, DynamoDBWriteCapacityUtilization, ECSServiceAverageCPUUtilization, ECSServiceAverageMemoryUtilization, ALBRequestCountPerTarget, RDSReaderAverageCPUUtilization, RDSReaderAverageDatabaseConnections, EC2SpotFleetRequestAverageCPUUtilization, EC2SpotFleetRequestAverageNetworkIn, EC2SpotFleetRequestAverageNetworkOut
+    #               resource_label: "ResourceLabel",
+    #             },
+    #             customized_scaling_metric_specification: {
+    #               metric_name: "MetricName", # required
+    #               namespace: "MetricNamespace", # required
+    #               dimensions: [
+    #                 {
+    #                   name: "MetricDimensionName", # required
+    #                   value: "MetricDimensionValue", # required
+    #                 },
+    #               ],
+    #               statistic: "Average", # required, accepts Average, Minimum, Maximum, SampleCount, Sum
+    #               unit: "MetricUnit",
+    #             },
+    #             target_value: 1.0, # required
+    #             disable_scale_in: false,
+    #             scale_out_cooldown: 1,
+    #             scale_in_cooldown: 1,
+    #             estimated_instance_warmup: 1,
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     scaling_plan_version: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlan AWS API Documentation
+    #
+    # @overload update_scaling_plan(params = {})
+    # @param [Hash] params ({})
+    def update_scaling_plan(params = {}, options = {})
+      req = build_request(:update_scaling_plan, params)
       req.send_request(options)
     end
 
@@ -418,7 +515,7 @@ module Aws::AutoScalingPlans
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscalingplans'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

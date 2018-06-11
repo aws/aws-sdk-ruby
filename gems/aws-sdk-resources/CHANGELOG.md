@@ -1,6 +1,52 @@
 Unreleased Changes
 ------------------
 
+3.20.0 (2018-06-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-eks` gem.
+
+3.19.0 (2018-06-01)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-mediatailor` gem.
+
+3.18.0 (2018-05-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-neptune` gem.
+
+3.17.0 (2018-05-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pi` gem.
+
+3.16.0 (2018-05-14)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iot1clickprojects` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iot1clickdevicesservice` gem.
+
+3.15.0 (2018-04-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-iotanalytics` gem.
+
+3.14.0 (2018-04-04)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-secretsmanager` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-fms` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-acmpca` gem.
+
+3.13.0 (2018-03-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-connect` gem.
+
 3.12.0 (2018-01-19)
 ------------------
 

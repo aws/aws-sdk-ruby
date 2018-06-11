@@ -185,19 +185,39 @@ module Aws::SSM
     # @option params [required, String] :resource_type
     #   Specifies the type of resource you are tagging.
     #
+    #   <note markdown="1"> The ManagedInstance type for this API action is for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
+    #
     # @option params [required, String] :resource_id
     #   The resource ID you want to tag.
     #
-    #   For the ManagedInstance, MaintenanceWindow, and PatchBaseline values,
-    #   use the ID of the resource, such as mw-01234361858c9b57b for a
-    #   Maintenance Window.
+    #   Use the ID of the resource. Here are some examples:
+    #
+    #   ManagedInstance: mi-012345abcde
+    #
+    #   MaintenanceWindow: mw-012345abcde
+    #
+    #   PatchBaseline: pb-012345abcde
     #
     #   For the Document and Parameter values, use the name of the resource.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   One or more tags. The value parameter is required, but if you don't
     #   want the tag to have a value, specify the parameter with no value, and
     #   we set the value to an empty string.
+    #
+    #   Do not enter personally identifiable information in this field.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -265,13 +285,17 @@ module Aws::SSM
     # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html
     #
     # @option params [String] :description
-    #   A userdefined description of the resource that you want to register
+    #   A user-defined description of the resource that you want to register
     #   with Amazon EC2.
+    #
+    #   Do not enter personally identifiable information in this field.
     #
     # @option params [String] :default_instance_name
     #   The name of the registered, managed instance as it will appear in the
     #   Amazon EC2 console or when you use the AWS command line tools to list
     #   EC2 resources.
+    #
+    #   Do not enter personally identifiable information in this field.
     #
     # @option params [required, String] :iam_role
     #   The Amazon Identity and Access Management (IAM) role that you want to
@@ -717,12 +741,18 @@ module Aws::SSM
     # @option params [Array<String>] :approved_patches
     #   A list of explicitly approved patches for the baseline.
     #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #
     # @option params [String] :approved_patches_compliance_level
     #   Defines the compliance level for approved patches. This means that if
     #   an approved patch is reported as missing, this is the severity of the
-    #   compliance violation. Valid compliance severity levels include the
-    #   following: CRITICAL, HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED.
-    #   The default value is UNSPECIFIED.
+    #   compliance violation. The default value is UNSPECIFIED.
     #
     # @option params [Boolean] :approved_patches_enable_non_security
     #   Indicates whether the list of approved patches includes non-security
@@ -731,6 +761,14 @@ module Aws::SSM
     #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -753,7 +791,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #     name: "BaselineName", # required
     #     global_filters: {
     #       patch_filters: [ # required
@@ -942,6 +980,76 @@ module Aws::SSM
     # @param [Hash] params ({})
     def delete_document(params = {}, options = {})
       req = build_request(:delete_document, params)
+      req.send_request(options)
+    end
+
+    # Delete a custom inventory type, or the data associated with a custom
+    # Inventory type. Deleting a custom inventory type is also referred to
+    # as deleting a custom inventory schema.
+    #
+    # @option params [required, String] :type_name
+    #   The name of the custom inventory type for which you want to delete
+    #   either all previously collected data, or the inventory type itself.
+    #
+    # @option params [String] :schema_delete_option
+    #   Use the `SchemaDeleteOption` to delete a custom inventory type
+    #   (schema). If you don't choose this option, the system only deletes
+    #   existing inventory data associated with the custom inventory type.
+    #   Choose one of the following options:
+    #
+    #   DisableSchema: If you choose this option, the system ignores all
+    #   inventory data for the specified version, and any earlier versions. To
+    #   enable this schema again, you must call the `PutInventory` action for
+    #   a version greater than the disbled version.
+    #
+    #   DeleteSchema: This option deletes the specified custom type from the
+    #   Inventory service. You can recreate the schema later, if you want.
+    #
+    # @option params [Boolean] :dry_run
+    #   Use this option to view a summary of the deletion request without
+    #   deleting any data or the data type. This option is useful when you
+    #   only want to understand what will be deleted. Once you validate that
+    #   the data to be deleted is what you intend to delete, you can run the
+    #   same command without specifying the `DryRun` option.
+    #
+    # @option params [String] :client_token
+    #   User-provided idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteInventoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteInventoryResult#deletion_id #deletion_id} => String
+    #   * {Types::DeleteInventoryResult#type_name #type_name} => String
+    #   * {Types::DeleteInventoryResult#deletion_summary #deletion_summary} => Types::InventoryDeletionSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_inventory({
+    #     type_name: "InventoryItemTypeName", # required
+    #     schema_delete_option: "DisableSchema", # accepts DisableSchema, DeleteSchema
+    #     dry_run: false,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deletion_id #=> String
+    #   resp.type_name #=> String
+    #   resp.deletion_summary.total_count #=> Integer
+    #   resp.deletion_summary.remaining_count #=> Integer
+    #   resp.deletion_summary.summary_items #=> Array
+    #   resp.deletion_summary.summary_items[0].version #=> String
+    #   resp.deletion_summary.summary_items[0].count #=> Integer
+    #   resp.deletion_summary.summary_items[0].remaining_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteInventory AWS API Documentation
+    #
+    # @overload delete_inventory(params = {})
+    # @param [Hash] params ({})
+    def delete_inventory(params = {}, options = {})
+      req = build_request(:delete_inventory, params)
       req.send_request(options)
     end
 
@@ -2082,6 +2190,60 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Describes a specific delete inventory operation.
+    #
+    # @option params [String] :deletion_id
+    #   Specify the delete inventory ID for which you want information. This
+    #   ID was returned by the `DeleteInventory` action.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @return [Types::DescribeInventoryDeletionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInventoryDeletionsResult#inventory_deletions #inventory_deletions} => Array&lt;Types::InventoryDeletionStatusItem&gt;
+    #   * {Types::DescribeInventoryDeletionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_inventory_deletions({
+    #     deletion_id: "InventoryDeletionId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inventory_deletions #=> Array
+    #   resp.inventory_deletions[0].deletion_id #=> String
+    #   resp.inventory_deletions[0].type_name #=> String
+    #   resp.inventory_deletions[0].deletion_start_time #=> Time
+    #   resp.inventory_deletions[0].last_status #=> String, one of "InProgress", "Complete"
+    #   resp.inventory_deletions[0].last_status_message #=> String
+    #   resp.inventory_deletions[0].deletion_summary.total_count #=> Integer
+    #   resp.inventory_deletions[0].deletion_summary.remaining_count #=> Integer
+    #   resp.inventory_deletions[0].deletion_summary.summary_items #=> Array
+    #   resp.inventory_deletions[0].deletion_summary.summary_items[0].version #=> String
+    #   resp.inventory_deletions[0].deletion_summary.summary_items[0].count #=> Integer
+    #   resp.inventory_deletions[0].deletion_summary.summary_items[0].remaining_count #=> Integer
+    #   resp.inventory_deletions[0].last_status_update_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInventoryDeletions AWS API Documentation
+    #
+    # @overload describe_inventory_deletions(params = {})
+    # @param [Hash] params ({})
+    def describe_inventory_deletions(params = {}, options = {})
+      req = build_request(:describe_inventory_deletions, params)
+      req.send_request(options)
+    end
+
     # Retrieves the individual task executions (one per target) for a
     # particular task executed as part of a Maintenance Window execution.
     #
@@ -2581,7 +2743,7 @@ module Aws::SSM
     #   resp.baseline_identities #=> Array
     #   resp.baseline_identities[0].baseline_id #=> String
     #   resp.baseline_identities[0].baseline_name #=> String
-    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
+    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.baseline_identities[0].baseline_description #=> String
     #   resp.baseline_identities[0].default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -2671,7 +2833,7 @@ module Aws::SSM
     #   resp.mappings[0].patch_group #=> String
     #   resp.mappings[0].baseline_identity.baseline_id #=> String
     #   resp.mappings[0].baseline_identity.baseline_name #=> String
-    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
+    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.mappings[0].baseline_identity.baseline_description #=> String
     #   resp.mappings[0].baseline_identity.default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -2792,6 +2954,7 @@ module Aws::SSM
     #   * {Types::GetCommandInvocationResult#instance_id #instance_id} => String
     #   * {Types::GetCommandInvocationResult#comment #comment} => String
     #   * {Types::GetCommandInvocationResult#document_name #document_name} => String
+    #   * {Types::GetCommandInvocationResult#document_version #document_version} => String
     #   * {Types::GetCommandInvocationResult#plugin_name #plugin_name} => String
     #   * {Types::GetCommandInvocationResult#response_code #response_code} => Integer
     #   * {Types::GetCommandInvocationResult#execution_start_date_time #execution_start_date_time} => String
@@ -2818,6 +2981,7 @@ module Aws::SSM
     #   resp.instance_id #=> String
     #   resp.comment #=> String
     #   resp.document_name #=> String
+    #   resp.document_version #=> String
     #   resp.plugin_name #=> String
     #   resp.response_code #=> Integer
     #   resp.execution_start_date_time #=> String
@@ -2843,6 +3007,9 @@ module Aws::SSM
     # supports creating multiple default patch baselines. For example, you
     # can create a default patch baseline for each operating system.
     #
+    # If you do not specify an operating system value, the default patch
+    # baseline for Windows is returned.
+    #
     # @option params [String] :operating_system
     #   Returns the default patch baseline for the specified operating system.
     #
@@ -2854,13 +3021,13 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_default_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline AWS API Documentation
     #
@@ -3552,8 +3719,18 @@ module Aws::SSM
     # @option params [Boolean] :recursive
     #   Retrieve all parameters within a hierarchy.
     #
+    #   If a user has access to a path, then the user can access all levels of
+    #   that path. For example, if a user has permission to access path /a,
+    #   then the user can also access /a/b. Even if a user has explicitly been
+    #   denied access in IAM for parameter /a, they can still call the
+    #   GetParametersByPath API action recursively and view /a/b.
+    #
     # @option params [Array<Types::ParameterStringFilter>] :parameter_filters
     #   Filters to limit the request results.
+    #
+    #   <note markdown="1"> You can't filter using the parameter name.
+    #
+    #    </note>
     #
     # @option params [Boolean] :with_decryption
     #   Retrieve all parameters in a hierarchy with their value decrypted.
@@ -3639,7 +3816,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -3698,14 +3875,14 @@ module Aws::SSM
     #
     #   resp = client.get_patch_baseline_for_patch_group({
     #     patch_group: "PatchGroup", # required
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup AWS API Documentation
     #
@@ -3898,6 +4075,7 @@ module Aws::SSM
     #   resp.command_invocations[0].instance_name #=> String
     #   resp.command_invocations[0].comment #=> String
     #   resp.command_invocations[0].document_name #=> String
+    #   resp.command_invocations[0].document_version #=> String
     #   resp.command_invocations[0].requested_date_time #=> Time
     #   resp.command_invocations[0].status #=> String, one of "Pending", "InProgress", "Delayed", "Success", "Cancelled", "TimedOut", "Failed", "Cancelling"
     #   resp.command_invocations[0].status_details #=> String
@@ -3979,6 +4157,7 @@ module Aws::SSM
     #   resp.commands #=> Array
     #   resp.commands[0].command_id #=> String
     #   resp.commands[0].document_name #=> String
+    #   resp.commands[0].document_version #=> String
     #   resp.commands[0].comment #=> String
     #   resp.commands[0].expires_after #=> Time
     #   resp.commands[0].parameters #=> Hash
@@ -4457,6 +4636,7 @@ module Aws::SSM
     #   resp.resource_data_sync_items[0].last_successful_sync_time #=> Time
     #   resp.resource_data_sync_items[0].last_status #=> String, one of "Successful", "Failed", "InProgress"
     #   resp.resource_data_sync_items[0].sync_created_time #=> Time
+    #   resp.resource_data_sync_items[0].last_sync_status_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListResourceDataSync AWS API Documentation
@@ -4666,7 +4846,9 @@ module Aws::SSM
     # @option params [required, Array<Types::InventoryItem>] :items
     #   The inventory items that you want to add or update on instances.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @return [Types::PutInventoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutInventoryResult#message #message} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4690,6 +4872,10 @@ module Aws::SSM
     #     ],
     #   })
     #
+    # @example Response structure
+    #
+    #   resp.message #=> String
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventory AWS API Documentation
     #
     # @overload put_inventory(params = {})
@@ -4699,7 +4885,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Add one or more parameters to the system.
+    # Add a parameter to the system.
     #
     # @option params [required, String] :name
     #   The fully qualified name of the parameter that you want to add to the
@@ -4724,6 +4910,8 @@ module Aws::SSM
     #
     # @option params [String] :description
     #   Information about the parameter that you want to add to the system.
+    #
+    #   Do not enter personally identifiable information in this field.
     #
     # @option params [required, String] :value
     #   The parameter value that you want to add to the system.
@@ -4847,9 +5035,17 @@ module Aws::SSM
     #   The type of target being registered with the Maintenance Window.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   The targets (either instances or tags). Instances are specified using
-    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
-    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+    #   The targets (either instances or tags).
+    #
+    #   Specify instances using the following format:
+    #
+    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #
+    #   Specify tags using either of the following formats:
+    #
+    #   `Key=tag:<tag-key>,Values=<tag-value-1>,<tag-value-2>`
+    #
+    #   `Key=tag-key,Values=<tag-key-1>,<tag-key-2>`
     #
     # @option params [String] :owner_information
     #   User-provided value that will be included in any CloudWatch events
@@ -4905,12 +5101,18 @@ module Aws::SSM
     # Adds a new task to a Maintenance Window.
     #
     # @option params [required, String] :window_id
-    #   The id of the Maintenance Window the task should be added to.
+    #   The ID of the Maintenance Window the task should be added to.
     #
     # @option params [required, Array<Types::Target>] :targets
-    #   The targets (either instances or tags). Instances are specified using
-    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
-    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+    #   The targets (either instances or Maintenance Window targets).
+    #
+    #   Specify instances using the following format:
+    #
+    #   `Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>`
+    #
+    #   Specify Maintenance Window targets using the following format:
+    #
+    #   `Key=<WindowTargetIds>,Values=<window-target-id-1>,<window-target-id-2>`
     #
     # @option params [required, String] :task_arn
     #   The ARN of the task to execute
@@ -4923,6 +5125,14 @@ module Aws::SSM
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
     #   The parameters that should be passed to the task when it is executed.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
+    #   a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #
     # @option params [Types::MaintenanceWindowTaskInvocationParameters] :task_invocation_parameters
     #   The parameters that the task should use during execution. Populate
@@ -4945,6 +5155,15 @@ module Aws::SSM
     # @option params [Types::LoggingInfo] :logging_info
     #   A structure containing information about an Amazon S3 bucket to write
     #   instance-level logs to.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    #   options in the `TaskInvocationParameters` structure. For information
+    #   about how Systems Manager handles these options for the supported
+    #   Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #
     # @option params [String] :name
     #   An optional name for the task.
@@ -5045,8 +5264,31 @@ module Aws::SSM
     # @option params [required, String] :resource_type
     #   The type of resource of which you want to remove a tag.
     #
+    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
+    #
     # @option params [required, String] :resource_id
-    #   The resource ID for which you want to remove tags.
+    #   The resource ID for which you want to remove tags. Use the ID of the
+    #   resource. Here are some examples:
+    #
+    #   ManagedInstance: mi-012345abcde
+    #
+    #   MaintenanceWindow: mw-012345abcde
+    #
+    #   PatchBaseline: pb-012345abcde
+    #
+    #   For the Document and Parameter values, use the name of the resource.
+    #
+    #   <note markdown="1"> The ManagedInstance type for this API action is only for on-premises
+    #   managed instances. You must specify the the name of the managed
+    #   instance in the following format: mi-ID\_number. For example,
+    #   mi-1a2b3c4d5e6f.
+    #
+    #    </note>
     #
     # @option params [required, Array<String>] :tag_keys
     #   Tag keys that you want to remove from the specified resource.
@@ -5134,6 +5376,10 @@ module Aws::SSM
     #   Required. The name of the Systems Manager document to execute. This
     #   can be a public document or a custom document.
     #
+    # @option params [String] :document_version
+    #   The SSM document version to use in the request. You can specify
+    #   Default, Latest, or a specific version number.
+    #
     # @option params [String] :document_hash
     #   The Sha256 or Sha1 hash created by the system when the document was
     #   created.
@@ -5151,7 +5397,7 @@ module Aws::SSM
     #
     # @option params [Integer] :timeout_seconds
     #   If this time is reached and the command has not already started
-    #   executing, it will not execute.
+    #   executing, it will not run.
     #
     # @option params [String] :comment
     #   User-specified information about the command, such as a brief
@@ -5189,7 +5435,7 @@ module Aws::SSM
     #   the command fails one more time beyond the value of MaxErrors, the
     #   systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
-    #   is 50. For more information about how to use MaxErrors, see [Using
+    #   is 0. For more information about how to use MaxErrors, see [Using
     #   Error Controls][1].
     #
     #
@@ -5217,6 +5463,7 @@ module Aws::SSM
     #       },
     #     ],
     #     document_name: "DocumentARN", # required
+    #     document_version: "DocumentVersion",
     #     document_hash: "DocumentHash",
     #     document_hash_type: "Sha256", # accepts Sha256, Sha1
     #     timeout_seconds: 1,
@@ -5241,6 +5488,7 @@ module Aws::SSM
     #
     #   resp.command.command_id #=> String
     #   resp.command.document_name #=> String
+    #   resp.command.document_version #=> String
     #   resp.command.comment #=> String
     #   resp.command.expires_after #=> Time
     #   resp.command.parameters #=> Hash
@@ -5851,18 +6099,18 @@ module Aws::SSM
     # Modifies a task assigned to a Maintenance Window. You can't change
     # the task type, but you can change the following values:
     #
-    # Task ARN. For example, you can change a RUN\_COMMAND task from
-    # AWS-RunPowerShellScript to AWS-RunShellScript.
+    # * TaskARN. For example, you can change a RUN\_COMMAND task from
+    #   AWS-RunPowerShellScript to AWS-RunShellScript.
     #
-    # Service role ARN.
+    # * ServiceRoleArn
     #
-    # Task parameters.
+    # * TaskInvocationParameters
     #
-    # Task priority.
+    # * Priority
     #
-    # Task MaxConcurrency and MaxErrors.
+    # * MaxConcurrency
     #
-    # Log location.
+    # * MaxErrors
     #
     # If a parameter is null, then the corresponding field is not modified.
     # Also, if you set Replace to true, then all fields required by the
@@ -5888,7 +6136,17 @@ module Aws::SSM
     #   during task execution.
     #
     # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
-    #   The parameters to modify. The map has the following format:
+    #   The parameters to modify.
+    #
+    #   <note markdown="1"> `TaskParameters` has been deprecated. To specify parameters to pass to
+    #   a task when it runs, instead use the `Parameters` option in the
+    #   `TaskInvocationParameters` structure. For information about how
+    #   Systems Manager handles these options for the supported Maintenance
+    #   Window task types, see MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
+    #
+    #   The map has the following format:
     #
     #   Key: string, between 1 and 255 characters
     #
@@ -5916,6 +6174,15 @@ module Aws::SSM
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   The new logging location in Amazon S3 to specify.
+    #
+    #   <note markdown="1"> `LoggingInfo` has been deprecated. To specify an S3 bucket to contain
+    #   logs, instead use the `OutputS3BucketName` and `OutputS3KeyPrefix`
+    #   options in the `TaskInvocationParameters` structure. For information
+    #   about how Systems Manager handles these options for the supported
+    #   Maintenance Window task types, see
+    #   MaintenanceWindowTaskInvocationParameters.
+    #
+    #    </note>
     #
     # @option params [String] :name
     #   The new task name to specify.
@@ -6117,6 +6384,14 @@ module Aws::SSM
     # @option params [Array<String>] :approved_patches
     #   A list of explicitly approved patches for the baseline.
     #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
+    #
     # @option params [String] :approved_patches_compliance_level
     #   Assigns a new compliance severity level to an existing patch baseline.
     #
@@ -6127,6 +6402,14 @@ module Aws::SSM
     #
     # @option params [Array<String>] :rejected_patches
     #   A list of explicitly rejected patches for the baseline.
+    #
+    #   For information about accepted formats for lists of approved patches
+    #   and rejected patches, see [Package Name Formats for Approved and
+    #   Rejected Patch Lists][1] in the *AWS Systems Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html
     #
     # @option params [String] :description
     #   A description of the patch baseline.
@@ -6206,7 +6489,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -6256,7 +6539,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -130,6 +130,57 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CopyImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_image_name: "Name", # required
+    #         destination_image_name: "Name", # required
+    #         destination_region: "RegionName", # required
+    #         destination_image_description: "Description",
+    #       }
+    #
+    # @!attribute [rw] source_image_name
+    #   The name of the image to copy.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_image_name
+    #   The name that the image will have when it is copied to the
+    #   destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_region
+    #   The destination region to which the image will be copied. This
+    #   parameter is required, even if you are copying an image within the
+    #   same region.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_image_description
+    #   The description that the image will have when it is copied to the
+    #   destination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImageRequest AWS API Documentation
+    #
+    class CopyImageRequest < Struct.new(
+      :source_image_name,
+      :destination_image_name,
+      :destination_region,
+      :destination_image_description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_image_name
+    #   The name of the destination image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImageResponse AWS API Documentation
+    #
+    class CopyImageResponse < Struct.new(
+      :destination_image_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDirectoryConfigRequest
     #   data as a hash:
     #
@@ -475,11 +526,19 @@ module Aws::AppStream
     #         display_name: "DisplayName",
     #         storage_connectors: [
     #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
     #             resource_identifier: "ResourceIdentifier",
+    #             domains: ["Domain"],
     #           },
     #         ],
     #         redirect_url: "RedirectURL",
+    #         feedback_url: "FeedbackURL",
+    #         user_settings: [
+    #           {
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -499,8 +558,20 @@ module Aws::AppStream
     #   @return [Array<Types::StorageConnector>]
     #
     # @!attribute [rw] redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
     #   @return [String]
+    #
+    # @!attribute [rw] feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #   @return [Array<Types::UserSetting>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
@@ -509,7 +580,9 @@ module Aws::AppStream
       :description,
       :display_name,
       :storage_connectors,
-      :redirect_url)
+      :redirect_url,
+      :feedback_url,
+      :user_settings)
       include Aws::Structure
     end
 
@@ -902,11 +975,11 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] stack_name
-    #   The name of the stack.
+    #   The name of the stack. This value is case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] fleet_name
-    #   The name of the fleet.
+    #   The name of the fleet. This value is case-sensitive.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -1669,12 +1742,24 @@ module Aws::AppStream
     #   @return [Array<Types::StorageConnector>]
     #
     # @!attribute [rw] redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
     #   @return [String]
     #
     # @!attribute [rw] stack_errors
     #   The errors for the stack.
     #   @return [Array<Types::StackError>]
+    #
+    # @!attribute [rw] user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default these actions are enabled.
+    #   @return [Array<Types::UserSetting>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
@@ -1686,7 +1771,9 @@ module Aws::AppStream
       :created_time,
       :storage_connectors,
       :redirect_url,
-      :stack_errors)
+      :feedback_url,
+      :stack_errors,
+      :user_settings)
       include Aws::Structure
     end
 
@@ -1818,14 +1905,15 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # Describes a storage connector.
+    # Describes a connector to enable persistent storage for users.
     #
     # @note When making an API call, you may pass StorageConnector
     #   data as a hash:
     #
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
+    #         domains: ["Domain"],
     #       }
     #
     # @!attribute [rw] connector_type
@@ -1836,11 +1924,16 @@ module Aws::AppStream
     #   The ARN of the storage connector.
     #   @return [String]
     #
+    # @!attribute [rw] domains
+    #   The names of the domains for the G Suite account.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector AWS API Documentation
     #
     class StorageConnector < Struct.new(
       :connector_type,
-      :resource_identifier)
+      :resource_identifier,
+      :domains)
       include Aws::Structure
     end
 
@@ -2115,13 +2208,21 @@ module Aws::AppStream
     #         name: "String", # required
     #         storage_connectors: [
     #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
     #             resource_identifier: "ResourceIdentifier",
+    #             domains: ["Domain"],
     #           },
     #         ],
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, REDIRECT_URL
+    #         feedback_url: "FeedbackURL",
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #         user_settings: [
+    #           {
+    #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #             permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] display_name
@@ -2145,12 +2246,24 @@ module Aws::AppStream
     #   @return [Boolean]
     #
     # @!attribute [rw] redirect_url
-    #   The URL the user is redirected to after the streaming session ends.
+    #   The URL that users are redirected to after their streaming session
+    #   ends.
+    #   @return [String]
+    #
+    # @!attribute [rw] feedback_url
+    #   The URL that users are redirected to after they click the Send
+    #   Feedback link. If no URL is specified, no Send Feedback link is
+    #   displayed.
     #   @return [String]
     #
     # @!attribute [rw] attributes_to_delete
     #   The stack attributes to delete.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_settings
+    #   The actions that are enabled or disabled for users during their
+    #   streaming sessions. By default, these actions are enabled.
+    #   @return [Array<Types::UserSetting>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
@@ -2161,7 +2274,9 @@ module Aws::AppStream
       :storage_connectors,
       :delete_storage_connectors,
       :redirect_url,
-      :attributes_to_delete)
+      :feedback_url,
+      :attributes_to_delete,
+      :user_settings)
       include Aws::Structure
     end
 
@@ -2173,6 +2288,33 @@ module Aws::AppStream
     #
     class UpdateStackResult < Struct.new(
       :stack)
+      include Aws::Structure
+    end
+
+    # Describes an action and whether the action is enabled or disabled for
+    # users during their streaming sessions.
+    #
+    # @note When making an API call, you may pass UserSetting
+    #   data as a hash:
+    #
+    #       {
+    #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
+    #         permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action that is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   Indicates whether the action is enabled or disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserSetting AWS API Documentation
+    #
+    class UserSetting < Struct.new(
+      :action,
+      :permission)
       include Aws::Structure
     end
 

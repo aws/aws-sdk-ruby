@@ -2447,6 +2447,13 @@ module Aws::Organizations
     #   A list of policy types that are enabled for this organization. For
     #   example, if your organization has all features enabled, then service
     #   control policies (SCPs) are included in the list.
+    #
+    #   <note markdown="1"> Even if a policy type is shown as available in the organization, you
+    #   can separately enable and disable them at the root level by using
+    #   EnablePolicyType and DisablePolicyType. Use ListRoots to see the
+    #   status of a policy type in that root.
+    #
+    #    </note>
     #   @return [Array<Types::PolicyTypeSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Organization AWS API Documentation
@@ -2782,6 +2789,13 @@ module Aws::Organizations
     # @!attribute [rw] policy_types
     #   The types of policies that are currently enabled for the root and
     #   therefore can be attached to the root or to its OUs or accounts.
+    #
+    #   <note markdown="1"> Even if a policy type is shown as available in the organization, you
+    #   can separately enable and disable them at the root level by using
+    #   EnablePolicyType and DisablePolicyType. Use DescribeOrganization to
+    #   see the availability of the policy types in that organization.
+    #
+    #    </note>
     #   @return [Array<Types::PolicyTypeSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/Root AWS API Documentation

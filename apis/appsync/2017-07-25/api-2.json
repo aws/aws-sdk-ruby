@@ -27,7 +27,8 @@
         {"shape":"UnauthorizedException"},
         {"shape":"LimitExceededException"},
         {"shape":"InternalFailureException"},
-        {"shape":"ApiKeyLimitExceededException"}
+        {"shape":"ApiKeyLimitExceededException"},
+        {"shape":"ApiKeyValidityOutOfBoundsException"}
       ]
     },
     "CreateDataSource":{
@@ -60,7 +61,6 @@
         {"shape":"ConcurrentModificationException"},
         {"shape":"UnauthorizedException"},
         {"shape":"InternalFailureException"},
-        {"shape":"LimitExceededException"},
         {"shape":"ApiLimitExceededException"}
       ]
     },
@@ -355,6 +355,23 @@
         {"shape":"InternalFailureException"}
       ]
     },
+    "UpdateApiKey":{
+      "name":"UpdateApiKey",
+      "http":{
+        "method":"POST",
+        "requestUri":"/v1/apis/{apiId}/apikeys/{id}"
+      },
+      "input":{"shape":"UpdateApiKeyRequest"},
+      "output":{"shape":"UpdateApiKeyResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"NotFoundException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"InternalFailureException"},
+        {"shape":"ApiKeyValidityOutOfBoundsException"}
+      ]
+    },
     "UpdateDataSource":{
       "name":"UpdateDataSource",
       "http":{
@@ -436,6 +453,14 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "ApiKeyValidityOutOfBoundsException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
+    },
     "ApiKeys":{
       "type":"list",
       "member":{"shape":"ApiKey"}
@@ -453,7 +478,8 @@
       "enum":[
         "API_KEY",
         "AWS_IAM",
-        "AMAZON_COGNITO_USER_POOLS"
+        "AMAZON_COGNITO_USER_POOLS",
+        "OPENID_CONNECT"
       ]
     },
     "BadRequestException":{
@@ -483,7 +509,8 @@
           "location":"uri",
           "locationName":"apiId"
         },
-        "description":{"shape":"String"}
+        "description":{"shape":"String"},
+        "expires":{"shape":"Long"}
       }
     },
     "CreateApiKeyResponse":{
@@ -527,9 +554,11 @@
         "authenticationType"
       ],
       "members":{
-        "name":{"shape":"ResourceName"},
+        "name":{"shape":"String"},
+        "logConfig":{"shape":"LogConfig"},
         "authenticationType":{"shape":"AuthenticationType"},
-        "userPoolConfig":{"shape":"UserPoolConfig"}
+        "userPoolConfig":{"shape":"UserPoolConfig"},
+        "openIDConnectConfig":{"shape":"OpenIDConnectConfig"}
       }
     },
     "CreateGraphqlApiResponse":{
@@ -611,7 +640,8 @@
       "enum":[
         "AWS_LAMBDA",
         "AMAZON_DYNAMODB",
-        "AMAZON_ELASTICSEARCH"
+        "AMAZON_ELASTICSEARCH",
+        "NONE"
       ]
     },
     "DataSources":{
@@ -767,6 +797,14 @@
       }
     },
     "ErrorMessage":{"type":"string"},
+    "FieldLogLevel":{
+      "type":"string",
+      "enum":[
+        "NONE",
+        "ERROR",
+        "ALL"
+      ]
+    },
     "GetDataSourceRequest":{
       "type":"structure",
       "required":[
@@ -929,7 +967,9 @@
         "name":{"shape":"ResourceName"},
         "apiId":{"shape":"String"},
         "authenticationType":{"shape":"AuthenticationType"},
+        "logConfig":{"shape":"LogConfig"},
         "userPoolConfig":{"shape":"UserPoolConfig"},
+        "openIDConnectConfig":{"shape":"OpenIDConnectConfig"},
         "arn":{"shape":"String"},
         "uris":{"shape":"MapOfStringToString"}
       }
@@ -1112,6 +1152,17 @@
         "nextToken":{"shape":"PaginationToken"}
       }
     },
+    "LogConfig":{
+      "type":"structure",
+      "required":[
+        "fieldLogLevel",
+        "cloudWatchLogsRoleArn"
+      ],
+      "members":{
+        "fieldLogLevel":{"shape":"FieldLogLevel"},
+        "cloudWatchLogsRoleArn":{"shape":"String"}
+      }
+    },
     "Long":{"type":"long"},
     "MapOfStringToString":{
       "type":"map",
@@ -1121,7 +1172,7 @@
     "MappingTemplate":{
       "type":"string",
       "max":65536,
-      "min":0
+      "min":1
     },
     "MaxResults":{
       "type":"integer",
@@ -1135,6 +1186,16 @@
       },
       "error":{"httpStatusCode":404},
       "exception":true
+    },
+    "OpenIDConnectConfig":{
+      "type":"structure",
+      "required":["issuer"],
+      "members":{
+        "issuer":{"shape":"String"},
+        "clientId":{"shape":"String"},
+        "iatTTL":{"shape":"Long"},
+        "authTTL":{"shape":"Long"}
+      }
     },
     "OutputType":{
       "type":"string",
@@ -1225,6 +1286,33 @@
       "error":{"httpStatusCode":401},
       "exception":true
     },
+    "UpdateApiKeyRequest":{
+      "type":"structure",
+      "required":[
+        "apiId",
+        "id"
+      ],
+      "members":{
+        "apiId":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"apiId"
+        },
+        "id":{
+          "shape":"String",
+          "location":"uri",
+          "locationName":"id"
+        },
+        "description":{"shape":"String"},
+        "expires":{"shape":"Long"}
+      }
+    },
+    "UpdateApiKeyResponse":{
+      "type":"structure",
+      "members":{
+        "apiKey":{"shape":"ApiKey"}
+      }
+    },
     "UpdateDataSourceRequest":{
       "type":"structure",
       "required":[
@@ -1269,9 +1357,11 @@
           "location":"uri",
           "locationName":"apiId"
         },
-        "name":{"shape":"ResourceName"},
+        "name":{"shape":"String"},
+        "logConfig":{"shape":"LogConfig"},
         "authenticationType":{"shape":"AuthenticationType"},
-        "userPoolConfig":{"shape":"UserPoolConfig"}
+        "userPoolConfig":{"shape":"UserPoolConfig"},
+        "openIDConnectConfig":{"shape":"OpenIDConnectConfig"}
       }
     },
     "UpdateGraphqlApiResponse":{

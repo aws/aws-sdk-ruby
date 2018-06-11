@@ -801,7 +801,7 @@ module Aws::MigrationHub
     #         migration_task_name: "MigrationTaskName", # required
     #         resource_attribute_list: [ # required
     #           {
-    #             type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER, LABEL
+    #             type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER
     #             value: "ResourceAttributeValue", # required
     #           },
     #         ],
@@ -820,6 +820,31 @@ module Aws::MigrationHub
     #   Information about the resource that is being migrated. This data
     #   will be used to map the task to a resource in the Application
     #   Discovery Service (ADS)'s repository.
+    #
+    #   <note markdown="1"> Takes the object array of `ResourceAttribute` where the `Type` field
+    #   is reserved for the following values: `IPV4_ADDRESS | IPV6_ADDRESS |
+    #   MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE |
+    #   VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER` where the
+    #   identifying value can be a string up to 256 characters.
+    #
+    #    </note>
+    #
+    #   * If any "VM" related value is set for a `ResourceAttribute`
+    #     object, it is required that `VM_MANAGER_ID`, as a minimum, is
+    #     always set. If `VM_MANAGER_ID` is not set, then all "VM" fields
+    #     will be discarded and "VM" fields will not be used for matching
+    #     the migration task to a server in Application Discovery Service
+    #     (ADS)'s repository. See the [Example][1] section below for a use
+    #     case of specifying "VM" related values.
+    #
+    #   * If a server you are trying to match has multiple IP or MAC
+    #     addresses, you should provide as many as you know in separate
+    #     type/value pairs passed to the `ResourceAttributeList` parameter
+    #     to maximize the chances of matching.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples
     #   @return [Array<Types::ResourceAttribute>]
     #
     # @!attribute [rw] dry_run
@@ -843,11 +868,33 @@ module Aws::MigrationHub
 
     # Attribute associated with a resource.
     #
+    # Note the corresponding format required per type listed below:
+    #
+    # IPV4
+    #
+    # : `x.x.x.x`
+    #
+    #   *where x is an integer in the range \[0,255\]*
+    #
+    # IPV6
+    #
+    # : `y : y : y : y : y : y : y : y`
+    #
+    #   *where y is a hexadecimal between 0 and FFFF. \[0, FFFF\]*
+    #
+    # MAC\_ADDRESS
+    #
+    # : `^([0-9A-Fa-f]\{2\}[:-])\{5\}([0-9A-Fa-f]\{2\})$`
+    #
+    # FQDN
+    #
+    # : `^[^<>\{\}\\\\/?,=\\p\{Cntrl\}]\{1,256\}$`
+    #
     # @note When making an API call, you may pass ResourceAttribute
     #   data as a hash:
     #
     #       {
-    #         type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER, LABEL
+    #         type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER
     #         value: "ResourceAttributeValue", # required
     #       }
     #

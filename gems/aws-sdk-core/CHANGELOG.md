@@ -1,6 +1,68 @@
 Unreleased Changes
 ------------------
 
+3.21.2 (2018-05-22)
+------------------
+
+* Issue - Update `EventEmitter` to `Aws::EventEmitter` [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1791)
+
+3.21.1 (2018-05-18)
+------------------
+
+* Issue - Remove `raw_stream` tracking, [Github Issue](https://github.com/aws/aws-sdk-ruby/issues/1786)
+
+3.21.0 (2018-05-17)
+------------------
+
+* Feature - Support `vnd.amazon.event-stream` binary stream protocol over HTTP1.1
+
+3.20.2 (2018-04-26)
+------------------
+
+* Issue - Avoiding Net::HTTP patching for Ruby 2.5
+
+3.20.1 (2018-04-24)
+------------------
+
+* Issue - Fix parsing flattened XML shape from shape reference for S3 https://github.com/aws/aws-sdk-ruby/issues/1764
+
+3.20.0 (2018-04-23)
+------------------
+
+* Feature - Aws::InstanceProfileCredentials - Add sending a User-Agent other than the default User-Agent in Ruby.  Adding the User-Agent `aws-sdk-ruby3/<version>` to allow protection against Server Side Request Forgery (SSRF) credential theft vectors by use of a metadata proxy.  
+
+3.19.0 (2018-04-04)
+------------------
+
+* Feature - Updated the list of parameters to filter when logging.
+
+3.18.1 (2018-03-29)
+------------------
+
+* Issue - Fix undefined method `each`/`next` for `Enumerable::Enumerator` when this class exists in the environment
+
+3.18.0 (2018-03-28)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.17.1 (2018-03-20)
+------------------
+
+* Issue - Support timestamp shape in querystring
+
+3.17.0 (2018-02-27)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Issue - Fix Ruby warnings: Shadowed local variables "parts" and "headers"
+
+3.16.0 (2018-02-20)
+------------------
+
+* Feature - Aws::InstanceProfileCredentials - When the `AWS_EC2_METADATA_DISABLED` environment variable is present with the value `true` (not case sensitive), the `Aws::InstanceProfileCredentials` credential provider will not be used.
+
 3.15.0 (2018-02-06)
 ------------------
 
@@ -244,4 +306,3 @@ Unreleased Changes
 ------------------
 
 * Feature - Initial preview release of the `aws-sdk-core` gem.
-

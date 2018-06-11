@@ -283,6 +283,12 @@ module Aws::EC2
       data[:virtualization_type]
     end
 
+    # The CPU options for the instance.
+    # @return [Types::CpuOptions]
+    def cpu_options
+      data[:cpu_options]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -555,6 +561,7 @@ module Aws::EC2
     #
     #   instance.console_output({
     #     dry_run: false,
+    #     latest: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -562,6 +569,10 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Boolean] :latest
+    #   When enabled, retrieves the latest console output for the instance.
+    #
+    #   Default: disabled (`false`)
     # @return [Types::GetConsoleOutputResult]
     def console_output(options = {})
       options = options.merge(instance_id: @id)
@@ -1267,7 +1278,7 @@ module Aws::EC2
     #     attached to.
     #
     #   * `attachment.status` - The attachment state (`attaching` \|
-    #     `attached` \| `detaching` \| `detached`).
+    #     `attached` \| `detaching`).
     #
     #   * `availability-zone` - The Availability Zone in which the volume was
     #     created.

@@ -1,6 +1,177 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2018-06-04)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EKS`.
+
+1.90.0 (2018-06-01)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::MediaTailor`.
+
+1.89.1 (2018-05-31)
+------------------
+
+* Issue - Revert a few improperly configured endpoints.
+
+1.89.0 (2018-05-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Neptune`.
+
+1.88.0 (2018-05-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PI`.
+
+1.87.0 (2018-05-14)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoT1ClickProjects`.
+
+* Feature - Added support for enumerating regions for `Aws::IoT1ClickDevicesService`.
+
+1.86.0 (2018-05-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.85.0 (2018-05-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.84.0 (2018-05-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.83.0 (2018-05-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.82.0 (2018-04-26)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.81.0 (2018-04-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::IoTAnalytics`.
+
+1.80.0 (2018-04-10)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.79.0 (2018-04-09)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.78.0 (2018-04-05)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.77.0 (2018-04-04)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::SecretsManager`.
+
+* Feature - Added support for enumerating regions for `Aws::FMS`.
+
+* Feature - Added support for enumerating regions for `Aws::ACMPCA`.
+
+1.76.0 (2018-03-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Connect`.
+
+1.75.0 (2018-03-29)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.74.0 (2018-03-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.73.0 (2018-03-27)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.72.0 (2018-03-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.71.0 (2018-03-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.70.0 (2018-03-07)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.69.0 (2018-03-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.68.0 (2018-02-28)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.67.0 (2018-02-23)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.66.0 (2018-02-22)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.65.0 (2018-02-21)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.64.0 (2018-02-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.63.0 (2018-02-15)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.62.0 (2018-02-14)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.61.0 (2018-02-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
+1.60.0 (2018-02-12)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endoints.
+
 1.59.0 (2018-02-06)
 ------------------
 

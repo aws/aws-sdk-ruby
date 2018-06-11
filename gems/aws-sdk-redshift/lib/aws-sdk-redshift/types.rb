@@ -135,10 +135,14 @@ module Aws::Redshift
     #   The name of the availability zone.
     #   @return [String]
     #
+    # @!attribute [rw] supported_platforms
+    #   @return [Array<Types::SupportedPlatform>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
-      :name)
+      :name,
+      :supported_platforms)
       include Aws::Structure
     end
 
@@ -1057,8 +1061,9 @@ module Aws::Redshift
     #   about node types, go to [ Working with Clusters][1] in the *Amazon
     #   Redshift Cluster Management Guide*.
     #
-    #   Valid Values: `ds1.xlarge` \| `ds1.8xlarge` \| `ds2.xlarge` \|
-    #   `ds2.8xlarge` \| `dc1.large` \| `dc1.8xlarge`.
+    #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `ds2.xlarge` \|
+    #   `ds2.8xlarge` \| `dc1.large` \| `dc1.8xlarge` \| `dc2.large` \|
+    #   `dc2.8xlarge`
     #
     #
     #
@@ -1071,7 +1076,8 @@ module Aws::Redshift
     #
     #   Constraints:
     #
-    #   * Must be 1 - 128 alphanumeric characters.
+    #   * Must be 1 - 128 alphanumeric characters. The user name can't be
+    #     `PUBLIC`.
     #
     #   * First character must be a letter.
     #
@@ -2493,6 +2499,7 @@ module Aws::Redshift
     #         owner_account: "String",
     #         tag_keys: ["String"],
     #         tag_values: ["String"],
+    #         cluster_exists: false,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -2587,6 +2594,14 @@ module Aws::Redshift
     #   associated with them.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] cluster_exists
+    #   A value that indicates whether to return snapshots only for an
+    #   existing cluster. Table-level restore can be performed only using a
+    #   snapshot of an existing cluster, that is, a cluster that has not
+    #   been deleted. If `ClusterExists` is set to `true`,
+    #   `ClusterIdentifier` is required.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshotsMessage AWS API Documentation
     #
     class DescribeClusterSnapshotsMessage < Struct.new(
@@ -2599,7 +2614,8 @@ module Aws::Redshift
       :marker,
       :owner_account,
       :tag_keys,
-      :tag_values)
+      :tag_values,
+      :cluster_exists)
       include Aws::Structure
     end
 
@@ -4122,7 +4138,8 @@ module Aws::Redshift
     #
     #   Constraints:
     #
-    #   * Must be 1 to 64 alphanumeric characters or hyphens
+    #   * Must be 1 to 64 alphanumeric characters or hyphens. The user name
+    #     can't be `PUBLIC`.
     #
     #   * Must contain only lowercase letters, numbers, underscore, plus
     #     sign, period (dot), at symbol (@), or hyphen.
@@ -4523,8 +4540,8 @@ module Aws::Redshift
     #   the cluster are restored. You can use DescribeResize to track the
     #   progress of the resize request.
     #
-    #   Valid Values: ` ds1.xlarge` \| `ds1.8xlarge` \| ` ds2.xlarge` \|
-    #   `ds2.8xlarge` \| `dc1.large` \| `dc1.8xlarge`.
+    #   Valid Values: `ds2.xlarge` \| `ds2.8xlarge` \| `dc1.large` \|
+    #   `dc1.8xlarge` \| `dc2.large` \| `dc2.8xlarge`
     #   @return [String]
     #
     # @!attribute [rw] number_of_nodes
@@ -4561,7 +4578,8 @@ module Aws::Redshift
     #
     # @!attribute [rw] vpc_security_group_ids
     #   A list of virtual private cloud (VPC) security groups to be
-    #   associated with the cluster.
+    #   associated with the cluster. This change is asynchronously applied
+    #   as soon as possible.
     #   @return [Array<String>]
     #
     # @!attribute [rw] master_user_password
@@ -5344,6 +5362,9 @@ module Aws::Redshift
     #   The recurring charges for the reserved node.
     #   @return [Array<Types::RecurringCharge>]
     #
+    # @!attribute [rw] reserved_node_offering_type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNode AWS API Documentation
     #
     class ReservedNode < Struct.new(
@@ -5358,7 +5379,8 @@ module Aws::Redshift
       :node_count,
       :state,
       :offering_type,
-      :recurring_charges)
+      :recurring_charges,
+      :reserved_node_offering_type)
       include Aws::Structure
     end
 
@@ -5402,6 +5424,9 @@ module Aws::Redshift
     #   effect for heavy-utilization reserved nodes.
     #   @return [Array<Types::RecurringCharge>]
     #
+    # @!attribute [rw] reserved_node_offering_type
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeOffering AWS API Documentation
     #
     class ReservedNodeOffering < Struct.new(
@@ -5412,7 +5437,8 @@ module Aws::Redshift
       :usage_price,
       :currency_code,
       :offering_type,
-      :recurring_charges)
+      :recurring_charges,
+      :reserved_node_offering_type)
       include Aws::Structure
     end
 
@@ -5801,12 +5827,14 @@ module Aws::Redshift
     #   taken. You can modify this if you are using any DS node type. In
     #   that case, you can choose to restore into another DS node type of
     #   the same size. For example, you can restore ds1.8xlarge into
-    #   ds2.8xlarge, or ds2.xlarge into ds1.xlarge. If you have a DC
+    #   ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC
     #   instance type, you must restore into that same instance type and
     #   size. In other words, you can only restore a dc1.large instance type
-    #   into another dc1.large instance type. For more information about
-    #   node types, see [ About Clusters and Nodes][1] in the *Amazon
-    #   Redshift Cluster Management Guide*
+    #   into another dc1.large instance type or dc2.large instance type. You
+    #   can't restore dc1.8xlarge to dc2.8xlarge. First restore to a
+    #   dc1.8xlareg cluster, then resize to a dc2.8large cluster. For more
+    #   information about node types, see [ About Clusters and Nodes][1] in
+    #   the *Amazon Redshift Cluster Management Guide*.
     #
     #
     #
@@ -6436,6 +6464,18 @@ module Aws::Redshift
       :subnet_identifier,
       :subnet_availability_zone,
       :subnet_status)
+      include Aws::Structure
+    end
+
+    # A list of supported platforms for orderable clusters.
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SupportedPlatform AWS API Documentation
+    #
+    class SupportedPlatform < Struct.new(
+      :name)
       include Aws::Structure
     end
 

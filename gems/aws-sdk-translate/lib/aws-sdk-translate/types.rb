@@ -25,6 +25,11 @@ module Aws::Translate
     #   One of the supported language codes for the source text. If the
     #   `TargetLanguageCode` is not "en", the `SourceLanguageCode` must be
     #   "en".
+    #
+    #   To have Amazon Translate determine the source language of your text,
+    #   you can specify `auto` in the `SourceLanguageCode` field. If you
+    #   specify `auto`, Amazon Translate will call Amazon Comprehend to
+    #   determine the source language.
     #   @return [String]
     #
     # @!attribute [rw] target_language_code

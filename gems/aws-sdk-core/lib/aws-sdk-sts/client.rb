@@ -180,9 +180,18 @@ module Aws::STS
     # information, see [Common Scenarios for Temporary Credentials][4] in
     # the *IAM User Guide*.
     #
-    # The temporary security credentials are valid for the duration that you
-    # specified when calling `AssumeRole`, which can be from 900 seconds (15
-    # minutes) to a maximum of 3600 seconds (1 hour). The default is 1 hour.
+    # By default, the temporary security credentials created by `AssumeRole`
+    # last for one hour. However, you can use the optional `DurationSeconds`
+    # parameter to specify the duration of your session. You can provide a
+    # value from 900 seconds (15 minutes) up to the maximum session duration
+    # setting for the role. This setting can have a value from 1 hour to 12
+    # hours. To learn how to view the maximum value for your role, see [View
+    # the Maximum Session Duration Setting for a Role][5] in the *IAM User
+    # Guide*. The maximum session duration limit applies when you use the
+    # `AssumeRole*` API operations or the `assume-role*` CLI operations but
+    # does not apply when you use those operations to create a console URL.
+    # For more information, see [Using IAM Roles][6] in the *IAM User
+    # Guide*.
     #
     # The temporary security credentials created by `AssumeRole` can be used
     # to make API calls to any AWS service with the following exception: you
@@ -201,7 +210,7 @@ module Aws::STS
     # credentials. You cannot use the passed policy to grant permissions
     # that are in excess of those allowed by the access policy of the role
     # that is being assumed. For more information, see [Permissions for
-    # AssumeRole, AssumeRoleWithSAML, and AssumeRoleWithWebIdentity][5] in
+    # AssumeRole, AssumeRoleWithSAML, and AssumeRoleWithWebIdentity][7] in
     # the *IAM User Guide*.
     #
     # To assume a role, your AWS account must be trusted by the role. The
@@ -216,7 +225,12 @@ module Aws::STS
     # the role in the other account. If the user is in the same account as
     # the role, then you can either attach a policy to the user (identical
     # to the previous different account user), or you can add the user as a
-    # principal directly in the role's trust policy
+    # principal directly in the role's trust policy. In this case, the
+    # trust policy acts as the only resource-based policy in IAM, and users
+    # in the same account as the role do not need explicit permission to
+    # assume the role. For more information about trust policies and
+    # resource-based policies, see [IAM Policies][8] in the *IAM User
+    # Guide*.
     #
     # **Using MFA with AssumeRole**
     #
@@ -232,7 +246,7 @@ module Aws::STS
     #
     # `"Condition": \{"Bool": \{"aws:MultiFactorAuthPresent": true\}\}`
     #
-    # For more information, see [Configuring MFA-Protected API Access][6] in
+    # For more information, see [Configuring MFA-Protected API Access][9] in
     # the *IAM User Guide* guide.
     #
     # To use MFA with `AssumeRole`, you pass values for the `SerialNumber`
@@ -246,8 +260,11 @@ module Aws::STS
     # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
     # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
     # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html#sts-introduction
-    # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
-    # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/MFAProtectedAPI.html
+    # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # [7]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+    # [8]: http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    # [9]: http://docs.aws.amazon.com/IAM/latest/UserGuide/MFAProtectedAPI.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role to assume.
@@ -304,22 +321,31 @@ module Aws::STS
     #
     # @option params [Integer] :duration_seconds
     #   The duration, in seconds, of the role session. The value can range
-    #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
-    #   the value is set to 3600 seconds.
+    #   from 900 seconds (15 minutes) up to the maximum session duration
+    #   setting for the role. This setting can have a value from 1 hour to 12
+    #   hours. If you specify a value higher than this setting, the operation
+    #   fails. For example, if you specify a session duration of 12 hours, but
+    #   your administrator set the maximum session duration to 6 hours, your
+    #   operation fails. To learn how to view the maximum value for your role,
+    #   see [View the Maximum Session Duration Setting for a Role][1] in the
+    #   *IAM User Guide*.
     #
-    #   <note markdown="1"> This is separate from the duration of a console session that you might
-    #   request using the returned credentials. The request to the federation
-    #   endpoint for a console sign-in token takes a `SessionDuration`
-    #   parameter that specifies the maximum length of the console session,
-    #   separately from the `DurationSeconds` parameter on this API. For more
-    #   information, see [Creating a URL that Enables Federated Users to
-    #   Access the AWS Management Console][1] in the *IAM User Guide*.
+    #   By default, the value is set to 3600 seconds.
+    #
+    #   <note markdown="1"> The `DurationSeconds` parameter is separate from the duration of a
+    #   console session that you might request using the returned credentials.
+    #   The request to the federation endpoint for a console sign-in token
+    #   takes a `SessionDuration` parameter that specifies the maximum length
+    #   of the console session. For more information, see [Creating a URL that
+    #   Enables Federated Users to Access the AWS Management Console][2] in
+    #   the *IAM User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #
     # @option params [String] :external_id
     #   A unique identifier that is used by third parties when assuming roles
@@ -443,11 +469,21 @@ module Aws::STS
     # Applications can use these temporary security credentials to sign
     # calls to AWS services.
     #
-    # The temporary security credentials are valid for the duration that you
-    # specified when calling `AssumeRole`, or until the time specified in
-    # the SAML authentication response's `SessionNotOnOrAfter` value,
-    # whichever is shorter. The duration can be from 900 seconds (15
-    # minutes) to a maximum of 3600 seconds (1 hour). The default is 1 hour.
+    # By default, the temporary security credentials created by
+    # `AssumeRoleWithSAML` last for one hour. However, you can use the
+    # optional `DurationSeconds` parameter to specify the duration of your
+    # session. Your role session lasts for the duration that you specify, or
+    # until the time specified in the SAML authentication response's
+    # `SessionNotOnOrAfter` value, whichever is shorter. You can provide a
+    # `DurationSeconds` value from 900 seconds (15 minutes) up to the
+    # maximum session duration setting for the role. This setting can have a
+    # value from 1 hour to 12 hours. To learn how to view the maximum value
+    # for your role, see [View the Maximum Session Duration Setting for a
+    # Role][3] in the *IAM User Guide*. The maximum session duration limit
+    # applies when you use the `AssumeRole*` API operations or the
+    # `assume-role*` CLI operations but does not apply when you use those
+    # operations to create a console URL. For more information, see [Using
+    # IAM Roles][4] in the *IAM User Guide*.
     #
     # The temporary security credentials created by `AssumeRoleWithSAML` can
     # be used to make API calls to any AWS service with the following
@@ -468,7 +504,7 @@ module Aws::STS
     # passed policy to grant permissions that are in excess of those allowed
     # by the access policy of the role that is being assumed. For more
     # information, see [Permissions for AssumeRole, AssumeRoleWithSAML, and
-    # AssumeRoleWithWebIdentity][3] in the *IAM User Guide*.
+    # AssumeRoleWithWebIdentity][5] in the *IAM User Guide*.
     #
     # Before your application can call `AssumeRoleWithSAML`, you must
     # configure your SAML identity provider (IdP) to issue the claims
@@ -491,24 +527,26 @@ module Aws::STS
     #
     # For more information, see the following resources:
     #
-    # * [About SAML 2.0-based Federation][4] in the *IAM User Guide*.
+    # * [About SAML 2.0-based Federation][6] in the *IAM User Guide*.
     #
-    # * [Creating SAML Identity Providers][5] in the *IAM User Guide*.
+    # * [Creating SAML Identity Providers][7] in the *IAM User Guide*.
     #
-    # * [Configuring a Relying Party and Claims][6] in the *IAM User Guide*.
+    # * [Configuring a Relying Party and Claims][8] in the *IAM User Guide*.
     #
-    # * [Creating a Role for SAML 2.0 Federation][7] in the *IAM User
+    # * [Creating a Role for SAML 2.0 Federation][9] in the *IAM User
     #   Guide*.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
     # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
-    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
-    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
-    # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html
-    # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html
-    # [7]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html
+    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+    # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+    # [7]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html
+    # [8]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html
+    # [9]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role that the caller is
@@ -562,25 +600,35 @@ module Aws::STS
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
     #
     # @option params [Integer] :duration_seconds
-    #   The duration, in seconds, of the role session. The value can range
-    #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
-    #   the value is set to 3600 seconds. An expiration can also be specified
-    #   in the SAML authentication response's `SessionNotOnOrAfter` value.
-    #   The actual expiration time is whichever value is shorter.
+    #   The duration, in seconds, of the role session. Your role session lasts
+    #   for the duration that you specify for the `DurationSeconds` parameter,
+    #   or until the time specified in the SAML authentication response's
+    #   `SessionNotOnOrAfter` value, whichever is shorter. You can provide a
+    #   `DurationSeconds` value from 900 seconds (15 minutes) up to the
+    #   maximum session duration setting for the role. This setting can have a
+    #   value from 1 hour to 12 hours. If you specify a value higher than this
+    #   setting, the operation fails. For example, if you specify a session
+    #   duration of 12 hours, but your administrator set the maximum session
+    #   duration to 6 hours, your operation fails. To learn how to view the
+    #   maximum value for your role, see [View the Maximum Session Duration
+    #   Setting for a Role][1] in the *IAM User Guide*.
     #
-    #   <note markdown="1"> This is separate from the duration of a console session that you might
-    #   request using the returned credentials. The request to the federation
-    #   endpoint for a console sign-in token takes a `SessionDuration`
-    #   parameter that specifies the maximum length of the console session,
-    #   separately from the `DurationSeconds` parameter on this API. For more
-    #   information, see [Enabling SAML 2.0 Federated Users to Access the AWS
-    #   Management Console][1] in the *IAM User Guide*.
+    #   By default, the value is set to 3600 seconds.
+    #
+    #   <note markdown="1"> The `DurationSeconds` parameter is separate from the duration of a
+    #   console session that you might request using the returned credentials.
+    #   The request to the federation endpoint for a console sign-in token
+    #   takes a `SessionDuration` parameter that specifies the maximum length
+    #   of the console session. For more information, see [Creating a URL that
+    #   Enables Federated Users to Access the AWS Management Console][2] in
+    #   the *IAM User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #
     # @return [Types::AssumeRoleWithSAMLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -660,9 +708,18 @@ module Aws::STS
     # can use these temporary security credentials to sign calls to AWS
     # service APIs.
     #
-    # The credentials are valid for the duration that you specified when
-    # calling `AssumeRoleWithWebIdentity`, which can be from 900 seconds (15
-    # minutes) to a maximum of 3600 seconds (1 hour). The default is 1 hour.
+    # By default, the temporary security credentials created by
+    # `AssumeRoleWithWebIdentity` last for one hour. However, you can use
+    # the optional `DurationSeconds` parameter to specify the duration of
+    # your session. You can provide a value from 900 seconds (15 minutes) up
+    # to the maximum session duration setting for the role. This setting can
+    # have a value from 1 hour to 12 hours. To learn how to view the maximum
+    # value for your role, see [View the Maximum Session Duration Setting
+    # for a Role][7] in the *IAM User Guide*. The maximum session duration
+    # limit applies when you use the `AssumeRole*` API operations or the
+    # `assume-role*` CLI operations but does not apply when you use those
+    # operations to create a console URL. For more information, see [Using
+    # IAM Roles][8] in the *IAM User Guide*.
     #
     # The temporary security credentials created by
     # `AssumeRoleWithWebIdentity` can be used to make API calls to any AWS
@@ -681,7 +738,7 @@ module Aws::STS
     # credentials. You cannot use the passed policy to grant permissions
     # that are in excess of those allowed by the access policy of the role
     # that is being assumed. For more information, see [Permissions for
-    # AssumeRole, AssumeRoleWithSAML, and AssumeRoleWithWebIdentity][7] in
+    # AssumeRole, AssumeRoleWithSAML, and AssumeRoleWithWebIdentity][9] in
     # the *IAM User Guide*.
     #
     # Before your application can call `AssumeRoleWithWebIdentity`, you must
@@ -692,19 +749,19 @@ module Aws::STS
     # specified in the role's trust policy.
     #
     # Calling `AssumeRoleWithWebIdentity` can result in an entry in your AWS
-    # CloudTrail logs. The entry includes the [Subject][8] of the provided
+    # CloudTrail logs. The entry includes the [Subject][10] of the provided
     # Web Identity Token. We recommend that you avoid using any personally
     # identifiable information (PII) in this field. For example, you could
     # instead use a GUID or a pairwise identifier, as [suggested in the OIDC
-    # specification][9].
+    # specification][11].
     #
     # For more information about how to use web identity federation and the
     # `AssumeRoleWithWebIdentity` API, see the following resources:
     #
-    # * [Using Web Identity Federation APIs for Mobile Apps][10] and
-    #   [Federation Through a Web-based Identity Provider][11].
+    # * [Using Web Identity Federation APIs for Mobile Apps][12] and
+    #   [Federation Through a Web-based Identity Provider][13].
     #
-    # * [ Web Identity Federation Playground][12]. This interactive website
+    # * [ Web Identity Federation Playground][14]. This interactive website
     #   lets you walk through the process of authenticating via Login with
     #   Amazon, Facebook, or Google, getting temporary security credentials,
     #   and then using those credentials to make a request to AWS.
@@ -714,7 +771,7 @@ module Aws::STS
     #   and then how to use the information from these providers to get and
     #   use temporary security credentials.
     #
-    # * [Web Identity Federation with Mobile Applications][13]. This article
+    # * [Web Identity Federation with Mobile Applications][15]. This article
     #   discusses web identity federation and shows an example of how to use
     #   web identity federation to get access to content in Amazon S3.
     #
@@ -726,13 +783,15 @@ module Aws::STS
     # [4]: http://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth.html#d0e664
     # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
     # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
-    # [7]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
-    # [8]: http://openid.net/specs/openid-connect-core-1_0.html#Claims
-    # [9]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
-    # [10]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
-    # [11]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
-    # [12]: https://web-identity-federation-playground.s3.amazonaws.com/index.html
-    # [13]: http://aws.amazon.com/articles/4617974389850313
+    # [7]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    # [8]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # [9]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+    # [10]: http://openid.net/specs/openid-connect-core-1_0.html#Claims
+    # [11]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
+    # [12]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
+    # [13]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
+    # [14]: https://web-identity-federation-playground.s3.amazonaws.com/index.html
+    # [15]: http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role that the caller is
@@ -804,22 +863,31 @@ module Aws::STS
     #
     # @option params [Integer] :duration_seconds
     #   The duration, in seconds, of the role session. The value can range
-    #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
-    #   the value is set to 3600 seconds.
+    #   from 900 seconds (15 minutes) up to the maximum session duration
+    #   setting for the role. This setting can have a value from 1 hour to 12
+    #   hours. If you specify a value higher than this setting, the operation
+    #   fails. For example, if you specify a session duration of 12 hours, but
+    #   your administrator set the maximum session duration to 6 hours, your
+    #   operation fails. To learn how to view the maximum value for your role,
+    #   see [View the Maximum Session Duration Setting for a Role][1] in the
+    #   *IAM User Guide*.
     #
-    #   <note markdown="1"> This is separate from the duration of a console session that you might
-    #   request using the returned credentials. The request to the federation
-    #   endpoint for a console sign-in token takes a `SessionDuration`
-    #   parameter that specifies the maximum length of the console session,
-    #   separately from the `DurationSeconds` parameter on this API. For more
-    #   information, see [Creating a URL that Enables Federated Users to
-    #   Access the AWS Management Console][1] in the *IAM User Guide*.
+    #   By default, the value is set to 3600 seconds.
+    #
+    #   <note markdown="1"> The `DurationSeconds` parameter is separate from the duration of a
+    #   console session that you might request using the returned credentials.
+    #   The request to the federation endpoint for a console sign-in token
+    #   takes a `SessionDuration` parameter that specifies the maximum length
+    #   of the console session. For more information, see [Creating a URL that
+    #   Enables Federated Users to Access the AWS Management Console][2] in
+    #   the *IAM User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #
     # @return [Types::AssumeRoleWithWebIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1407,7 +1475,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.15.0'
+      context[:gem_version] = '3.21.2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

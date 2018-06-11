@@ -489,7 +489,7 @@ module Aws::CodeBuild
     #   resp.builds[0].artifacts.md5sum #=> String
     #   resp.builds[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.builds[0].cache.location #=> String
-    #   resp.builds[0].environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.builds[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.builds[0].environment.image #=> String
     #   resp.builds[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.builds[0].environment.environment_variables #=> Array
@@ -498,6 +498,7 @@ module Aws::CodeBuild
     #   resp.builds[0].environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.builds[0].environment.privileged_mode #=> Boolean
     #   resp.builds[0].environment.certificate #=> String
+    #   resp.builds[0].service_role #=> String
     #   resp.builds[0].logs.group_name #=> String
     #   resp.builds[0].logs.stream_name #=> String
     #   resp.builds[0].logs.deep_link #=> String
@@ -560,7 +561,7 @@ module Aws::CodeBuild
     #   resp.projects[0].artifacts.packaging #=> String, one of "NONE", "ZIP"
     #   resp.projects[0].cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.projects[0].cache.location #=> String
-    #   resp.projects[0].environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.projects[0].environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.projects[0].environment.image #=> String
     #   resp.projects[0].environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.projects[0].environment.environment_variables #=> Array
@@ -580,6 +581,8 @@ module Aws::CodeBuild
     #   resp.projects[0].webhook.url #=> String
     #   resp.projects[0].webhook.payload_url #=> String
     #   resp.projects[0].webhook.secret #=> String
+    #   resp.projects[0].webhook.branch_filter #=> String
+    #   resp.projects[0].webhook.last_modified_secret #=> Time
     #   resp.projects[0].vpc_config.vpc_id #=> String
     #   resp.projects[0].vpc_config.subnets #=> Array
     #   resp.projects[0].vpc_config.subnets[0] #=> String
@@ -683,7 +686,7 @@ module Aws::CodeBuild
     #       location: "String",
     #     },
     #     environment: { # required
-    #       type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #       environment_variables: [
@@ -733,7 +736,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
-    #   resp.project.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.project.environment.environment_variables #=> Array
@@ -753,6 +756,8 @@ module Aws::CodeBuild
     #   resp.project.webhook.url #=> String
     #   resp.project.webhook.payload_url #=> String
     #   resp.project.webhook.secret #=> String
+    #   resp.project.webhook.branch_filter #=> String
+    #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
     #   resp.project.vpc_config.subnets[0] #=> String
@@ -782,7 +787,7 @@ module Aws::CodeBuild
     # per-build basis, you will be billed for both builds. Therefore, if you
     # are using AWS CodePipeline, we recommend that you disable webhooks in
     # CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For
-    # more information, see step 9 in [Change a Build Project's
+    # more information, see step 5 in [Change a Build Project's
     # Settings][1].
     #
     #
@@ -790,7 +795,13 @@ module Aws::CodeBuild
     # [1]: http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console
     #
     # @option params [required, String] :project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
+    #
+    # @option params [String] :branch_filter
+    #   A regular expression used to determine which branches in a repository
+    #   are built when a webhook is triggered. If the name of a branch matches
+    #   the regular expression, then it is built. If it doesn't match, then
+    #   it is not. If branchFilter is empty, then all branches are built.
     #
     # @return [Types::CreateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -800,6 +811,7 @@ module Aws::CodeBuild
     #
     #   resp = client.create_webhook({
     #     project_name: "ProjectName", # required
+    #     branch_filter: "String",
     #   })
     #
     # @example Response structure
@@ -807,6 +819,8 @@ module Aws::CodeBuild
     #   resp.webhook.url #=> String
     #   resp.webhook.payload_url #=> String
     #   resp.webhook.secret #=> String
+    #   resp.webhook.branch_filter #=> String
+    #   resp.webhook.last_modified_secret #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhook AWS API Documentation
     #
@@ -845,7 +859,7 @@ module Aws::CodeBuild
     # repository.
     #
     # @option params [required, String] :project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -867,7 +881,8 @@ module Aws::CodeBuild
     # Resets the cache for a project.
     #
     # @option params [required, String] :project_name
-    #   The name of the build project that the cache will be reset for.
+    #   The name of the AWS CodeBuild build project that the cache will be
+    #   reset for.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -936,7 +951,7 @@ module Aws::CodeBuild
     # build ID representing a single build.
     #
     # @option params [required, String] :project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
     #
     # @option params [String] :sort_order
     #   The order to list build IDs. Valid values include:
@@ -992,7 +1007,7 @@ module Aws::CodeBuild
     # @example Response structure
     #
     #   resp.platforms #=> Array
-    #   resp.platforms[0].platform #=> String, one of "DEBIAN", "AMAZON_LINUX", "UBUNTU"
+    #   resp.platforms[0].platform #=> String, one of "DEBIAN", "AMAZON_LINUX", "UBUNTU", "WINDOWS_SERVER"
     #   resp.platforms[0].languages #=> Array
     #   resp.platforms[0].languages[0].language #=> String, one of "JAVA", "PYTHON", "NODE_JS", "RUBY", "GOLANG", "DOCKER", "ANDROID", "DOTNET", "BASE"
     #   resp.platforms[0].languages[0].images #=> Array
@@ -1079,7 +1094,7 @@ module Aws::CodeBuild
     # Starts running a build.
     #
     # @option params [required, String] :project_name
-    #   The name of the build project to start running a build.
+    #   The name of the AWS CodeBuild build project to start running a build.
     #
     # @option params [String] :source_version
     #   A version of the build input to be built, for this build only. If not
@@ -1112,6 +1127,19 @@ module Aws::CodeBuild
     #   A set of environment variables that overrides, for this build only,
     #   the latest ones already defined in the build project.
     #
+    # @option params [String] :source_type_override
+    #   A source input type for this build that overrides the source input
+    #   defined in the build project
+    #
+    # @option params [String] :source_location_override
+    #   A location that overrides for this build the source location for the
+    #   one defined in the build project.
+    #
+    # @option params [Types::SourceAuth] :source_auth_override
+    #   An authorization type for this build that overrides the one defined in
+    #   the build project. This override applies only if the build project's
+    #   source is BitBucket or GitHub.
+    #
     # @option params [Integer] :git_clone_depth_override
     #   The user-defined depth of history, with a minimum value of 0, that
     #   overrides, for this build only, any previous depth of history defined
@@ -1121,10 +1149,51 @@ module Aws::CodeBuild
     #   A build spec declaration that overrides, for this build only, the
     #   latest one already defined in the build project.
     #
+    # @option params [Boolean] :insecure_ssl_override
+    #   Enable this flag to override the insecure SSL setting that is
+    #   specified in the build project. The insecure SSL setting determines
+    #   whether to ignore SSL warnings while connecting to the project source
+    #   code. This override applies only if the build's source is GitHub
+    #   Enterprise.
+    #
+    # @option params [String] :environment_type_override
+    #   A container type for this build that overrides the one specified in
+    #   the build project.
+    #
+    # @option params [String] :image_override
+    #   The name of an image for this build that overrides the one specified
+    #   in the build project.
+    #
+    # @option params [String] :compute_type_override
+    #   The name of a compute type for this build that overrides the one
+    #   specified in the build project.
+    #
+    # @option params [String] :certificate_override
+    #   The name of a certificate for this build that overrides the one
+    #   specified in the build project.
+    #
+    # @option params [Types::ProjectCache] :cache_override
+    #   A ProjectCache object specified for this build that overrides the one
+    #   defined in the build project.
+    #
+    # @option params [String] :service_role_override
+    #   The name of a service role for this build that overrides the one
+    #   specified in the build project.
+    #
+    # @option params [Boolean] :privileged_mode_override
+    #   Enable this flag to override privileged mode in the build project.
+    #
     # @option params [Integer] :timeout_in_minutes_override
     #   The number of build timeout minutes, from 5 to 480 (8 hours), that
     #   overrides, for this build only, the latest setting already defined in
     #   the build project.
+    #
+    # @option params [String] :idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the StartBuild request. The token is included in the
+    #   StartBuild request and is valid for 12 hours. If you repeat the
+    #   StartBuild request with the same token, but change a parameter, AWS
+    #   CodeBuild returns a parameter mismatch error.
     #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1150,9 +1219,27 @@ module Aws::CodeBuild
     #         type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #       },
     #     ],
+    #     source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #     source_location_override: "String",
+    #     source_auth_override: {
+    #       type: "OAUTH", # required, accepts OAUTH
+    #       resource: "String",
+    #     },
     #     git_clone_depth_override: 1,
     #     buildspec_override: "String",
+    #     insecure_ssl_override: false,
+    #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
+    #     image_override: "NonEmptyString",
+    #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+    #     certificate_override: "String",
+    #     cache_override: {
+    #       type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #       location: "String",
+    #     },
+    #     service_role_override: "NonEmptyString",
+    #     privileged_mode_override: false,
     #     timeout_in_minutes_override: 1,
+    #     idempotency_token: "String",
     #   })
     #
     # @example Response structure
@@ -1186,7 +1273,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.md5sum #=> String
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
-    #   resp.build.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.build.environment.environment_variables #=> Array
@@ -1195,6 +1282,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
+    #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
@@ -1264,7 +1352,7 @@ module Aws::CodeBuild
     #   resp.build.artifacts.md5sum #=> String
     #   resp.build.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.build.cache.location #=> String
-    #   resp.build.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.build.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.build.environment.image #=> String
     #   resp.build.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.build.environment.environment_variables #=> Array
@@ -1273,6 +1361,7 @@ module Aws::CodeBuild
     #   resp.build.environment.environment_variables[0].type #=> String, one of "PLAINTEXT", "PARAMETER_STORE"
     #   resp.build.environment.privileged_mode #=> Boolean
     #   resp.build.environment.certificate #=> String
+    #   resp.build.service_role #=> String
     #   resp.build.logs.group_name #=> String
     #   resp.build.logs.stream_name #=> String
     #   resp.build.logs.deep_link #=> String
@@ -1387,7 +1476,7 @@ module Aws::CodeBuild
     #       location: "String",
     #     },
     #     environment: {
-    #       type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #       type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #       image: "NonEmptyString", # required
     #       compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #       environment_variables: [
@@ -1437,7 +1526,7 @@ module Aws::CodeBuild
     #   resp.project.artifacts.packaging #=> String, one of "NONE", "ZIP"
     #   resp.project.cache.type #=> String, one of "NO_CACHE", "S3"
     #   resp.project.cache.location #=> String
-    #   resp.project.environment.type #=> String, one of "LINUX_CONTAINER"
+    #   resp.project.environment.type #=> String, one of "WINDOWS_CONTAINER", "LINUX_CONTAINER"
     #   resp.project.environment.image #=> String
     #   resp.project.environment.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
     #   resp.project.environment.environment_variables #=> Array
@@ -1457,6 +1546,8 @@ module Aws::CodeBuild
     #   resp.project.webhook.url #=> String
     #   resp.project.webhook.payload_url #=> String
     #   resp.project.webhook.secret #=> String
+    #   resp.project.webhook.branch_filter #=> String
+    #   resp.project.webhook.last_modified_secret #=> Time
     #   resp.project.vpc_config.vpc_id #=> String
     #   resp.project.vpc_config.subnets #=> Array
     #   resp.project.vpc_config.subnets[0] #=> String
@@ -1474,6 +1565,50 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
+    # Updates the webhook associated with an AWS CodeBuild build project.
+    #
+    # @option params [required, String] :project_name
+    #   The name of the AWS CodeBuild project.
+    #
+    # @option params [String] :branch_filter
+    #   A regular expression used to determine which branches in a repository
+    #   are built when a webhook is triggered. If the name of a branch matches
+    #   the regular expression, then it is built. If it doesn't match, then
+    #   it is not. If branchFilter is empty, then all branches are built.
+    #
+    # @option params [Boolean] :rotate_secret
+    #   A boolean value that specifies whether the associated repository's
+    #   secret token should be updated.
+    #
+    # @return [Types::UpdateWebhookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateWebhookOutput#webhook #webhook} => Types::Webhook
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_webhook({
+    #     project_name: "ProjectName", # required
+    #     branch_filter: "String",
+    #     rotate_secret: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.webhook.url #=> String
+    #   resp.webhook.payload_url #=> String
+    #   resp.webhook.secret #=> String
+    #   resp.webhook.branch_filter #=> String
+    #   resp.webhook.last_modified_secret #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook AWS API Documentation
+    #
+    # @overload update_webhook(params = {})
+    # @param [Hash] params ({})
+    def update_webhook(params = {}, options = {})
+      req = build_request(:update_webhook, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1487,7 +1622,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

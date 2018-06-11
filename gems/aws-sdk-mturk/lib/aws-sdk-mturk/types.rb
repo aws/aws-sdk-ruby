@@ -310,6 +310,7 @@ module Aws::MTurk
     #               },
     #             ],
     #             required_to_preview: false,
+    #             actions_guarded: "Accept", # accepts Accept, PreviewAndAccept, DiscoverPreviewAndAccept
     #           },
     #         ],
     #         unique_request_token: "IdempotencyToken",
@@ -432,8 +433,12 @@ module Aws::MTurk
     #   @return [String]
     #
     # @!attribute [rw] qualification_requirements
-    #   A condition that a Worker's Qualifications must meet before the
-    #   Worker is allowed to accept and complete the HIT.
+    #   Conditions that a Worker's Qualifications must meet in order to
+    #   accept the HIT. A HIT can have between zero and ten Qualification
+    #   requirements. All requirements must be met in order for a Worker to
+    #   accept the HIT. Additionally, other actions can be restricted using
+    #   the `ActionsGuarded` field on each `QualificationRequirement`
+    #   structure.
     #   @return [Array<Types::QualificationRequirement>]
     #
     # @!attribute [rw] unique_request_token
@@ -536,6 +541,7 @@ module Aws::MTurk
     #               },
     #             ],
     #             required_to_preview: false,
+    #             actions_guarded: "Accept", # accepts Accept, PreviewAndAccept, DiscoverPreviewAndAccept
     #           },
     #         ],
     #       }
@@ -582,8 +588,12 @@ module Aws::MTurk
     #   @return [String]
     #
     # @!attribute [rw] qualification_requirements
-    #   A condition that a Worker's Qualifications must meet before the
-    #   Worker is allowed to accept and complete the HIT.
+    #   Conditions that a Worker's Qualifications must meet in order to
+    #   accept the HIT. A HIT can have between zero and ten Qualification
+    #   requirements. All requirements must be met in order for a Worker to
+    #   accept the HIT. Additionally, other actions can be restricted using
+    #   the `ActionsGuarded` field on each `QualificationRequirement`
+    #   structure.
     #   @return [Array<Types::QualificationRequirement>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/CreateHITTypeRequest AWS API Documentation
@@ -1305,10 +1315,12 @@ module Aws::MTurk
     #   @return [String]
     #
     # @!attribute [rw] qualification_requirements
-    #   A condition that a Worker's Qualifications must meet in order to
+    #   Conditions that a Worker's Qualifications must meet in order to
     #   accept the HIT. A HIT can have between zero and ten Qualification
-    #   requirements. All requirements must be met by a Worker's
-    #   Qualifications for the Worker to accept the HIT.
+    #   requirements. All requirements must be met in order for a Worker to
+    #   accept the HIT. Additionally, other actions can be restricted using
+    #   the `ActionsGuarded` field on each `QualificationRequirement`
+    #   structure.
     #   @return [Array<Types::QualificationRequirement>]
     #
     # @!attribute [rw] hit_review_status
@@ -2352,7 +2364,8 @@ module Aws::MTurk
     # The QualificationRequirement data structure describes a Qualification
     # that a Worker must have before the Worker is allowed to accept a HIT.
     # A requirement may optionally state that a Worker must have the
-    # Qualification in order to preview the HIT.
+    # Qualification in order to preview the HIT, or see the HIT in search
+    # results.
     #
     # @note When making an API call, you may pass QualificationRequirement
     #   data as a hash:
@@ -2368,6 +2381,7 @@ module Aws::MTurk
     #           },
     #         ],
     #         required_to_preview: false,
+    #         actions_guarded: "Accept", # accepts Accept, PreviewAndAccept, DiscoverPreviewAndAccept
     #       }
     #
     # @!attribute [rw] qualification_type_id
@@ -2409,16 +2423,42 @@ module Aws::MTurk
     #   @return [Array<Types::Locale>]
     #
     # @!attribute [rw] required_to_preview
-    #   If true, the question data for the HIT will not be shown when a
-    #   Worker whose Qualifications do not meet this requirement tries to
-    #   preview the HIT. That is, a Worker's Qualifications must meet all
-    #   of the requirements for which RequiredToPreview is true in order to
-    #   preview the HIT. If a Worker meets all of the requirements where
-    #   RequiredToPreview is true (or if there are no such requirements),
-    #   but does not meet all of the requirements for the HIT, the Worker
-    #   will be allowed to preview the HIT's question data, but will not be
-    #   allowed to accept and complete the HIT. The default is false.
+    #   DEPRECATED: Use the `ActionsGuarded` field instead. If
+    #   RequiredToPreview is true, the question data for the HIT will not be
+    #   shown when a Worker whose Qualifications do not meet this
+    #   requirement tries to preview the HIT. That is, a Worker's
+    #   Qualifications must meet all of the requirements for which
+    #   RequiredToPreview is true in order to preview the HIT. If a Worker
+    #   meets all of the requirements where RequiredToPreview is true (or if
+    #   there are no such requirements), but does not meet all of the
+    #   requirements for the HIT, the Worker will be allowed to preview the
+    #   HIT's question data, but will not be allowed to accept and complete
+    #   the HIT. The default is false. This should not be used in
+    #   combination with the `ActionsGuarded` field.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] actions_guarded
+    #   Setting this attribute prevents Workers whose Qualifications do not
+    #   meet this QualificationRequirement from taking the specified action.
+    #   Valid arguments include "Accept" (Worker cannot accept the HIT,
+    #   but can preview the HIT and see it in their search results),
+    #   "PreviewAndAccept" (Worker cannot accept or preview the HIT, but
+    #   can see the HIT in their search results), and
+    #   "DiscoverPreviewAndAccept" (Worker cannot accept, preview, or see
+    #   the HIT in their search results). It's possible for you to create a
+    #   HIT with multiple QualificationRequirements (which can have
+    #   different values for the ActionGuarded attribute). In this case, the
+    #   Worker is only permitted to perform an action when they have met all
+    #   QualificationRequirements guarding the action. The actions in the
+    #   order of least restrictive to most restrictive are Discover, Preview
+    #   and Accept. For example, if a Worker meets all
+    #   QualificationRequirements that are set to DiscoverPreviewAndAccept,
+    #   but do not meet all requirements that are set with PreviewAndAccept,
+    #   then the Worker will be able to Discover, i.e. see the HIT in their
+    #   search result, but will not be able to Preview or Accept the HIT.
+    #   ActionsGuarded should not be used in combination with the
+    #   `RequiredToPreview` field.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/QualificationRequirement AWS API Documentation
     #
@@ -2427,7 +2467,8 @@ module Aws::MTurk
       :comparator,
       :integer_values,
       :locale_values,
-      :required_to_preview)
+      :required_to_preview,
+      :actions_guarded)
       include Aws::Structure
     end
 

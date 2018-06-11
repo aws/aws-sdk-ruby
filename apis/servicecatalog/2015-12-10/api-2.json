@@ -265,6 +265,20 @@
         {"shape":"InvalidParametersException"}
       ]
     },
+    "DeleteTagOption":{
+      "name":"DeleteTagOption",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTagOptionInput"},
+      "output":{"shape":"DeleteTagOptionOutput"},
+      "errors":[
+        {"shape":"TagOptionNotMigratedException"},
+        {"shape":"ResourceInUseException"},
+        {"shape":"ResourceNotFoundException"}
+      ]
+    },
     "DescribeConstraint":{
       "name":"DescribeConstraint",
       "http":{
@@ -1268,6 +1282,18 @@
       "members":{
       }
     },
+    "DeleteTagOptionInput":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "Id":{"shape":"TagOptionId"}
+      }
+    },
+    "DeleteTagOptionOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DescribeConstraintInput":{
       "type":"structure",
       "required":["Id"],
@@ -1609,7 +1635,8 @@
       "members":{
         "AcceptLanguage":{"shape":"AcceptLanguage"},
         "PageToken":{"shape":"PageToken"},
-        "PageSize":{"shape":"PageSize"}
+        "PageSize":{"shape":"PageSize"},
+        "PortfolioShareType":{"shape":"PortfolioShareType"}
       }
     },
     "ListAcceptedPortfolioSharesOutput":{
@@ -1886,6 +1913,13 @@
       "min":1
     },
     "PortfolioName":{"type":"string"},
+    "PortfolioShareType":{
+      "type":"string",
+      "enum":[
+        "IMPORTED",
+        "AWS_SERVICECATALOG"
+      ]
+    },
     "Principal":{
       "type":"structure",
       "members":{

@@ -213,7 +213,7 @@ module Aws::Budgets
     #           unit: "UnitValue", # required
     #         },
     #       },
-    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
+    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
     #     },
     #     notifications_with_subscribers: [
     #       {
@@ -485,7 +485,7 @@ module Aws::Budgets
     #   resp.budget.calculated_spend.actual_spend.unit #=> String
     #   resp.budget.calculated_spend.forecasted_spend.amount #=> String
     #   resp.budget.calculated_spend.forecasted_spend.unit #=> String
-    #   resp.budget.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION"
+    #   resp.budget.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE"
     #
     # @overload describe_budget(params = {})
     # @param [Hash] params ({})
@@ -548,7 +548,7 @@ module Aws::Budgets
     #   resp.budgets[0].calculated_spend.actual_spend.unit #=> String
     #   resp.budgets[0].calculated_spend.forecasted_spend.amount #=> String
     #   resp.budgets[0].calculated_spend.forecasted_spend.unit #=> String
-    #   resp.budgets[0].budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION"
+    #   resp.budgets[0].budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE"
     #   resp.next_token #=> String
     #
     # @overload describe_budgets(params = {})
@@ -714,7 +714,7 @@ module Aws::Budgets
     #           unit: "UnitValue", # required
     #         },
     #       },
-    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION
+    #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE
     #     },
     #   })
     #
@@ -829,7 +829,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

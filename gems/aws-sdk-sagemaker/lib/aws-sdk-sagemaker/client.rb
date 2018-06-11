@@ -356,7 +356,7 @@ module Aws::SageMaker
     #         variant_name: "VariantName", # required
     #         model_name: "ModelName", # required
     #         initial_instance_count: 1, # required
-    #         instance_type: "ml.c4.2xlarge", # required, accepts ml.c4.2xlarge, ml.c4.8xlarge, ml.c4.xlarge, ml.c5.2xlarge, ml.c5.9xlarge, ml.c5.xlarge, ml.m4.xlarge, ml.p2.xlarge, ml.p3.2xlarge, ml.t2.medium
+    #         instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.large, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #         initial_variant_weight: 1.0,
     #       },
     #     ],
@@ -379,6 +379,145 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def create_endpoint_config(params = {}, options = {})
       req = build_request(:create_endpoint_config, params)
+      req.send_request(options)
+    end
+
+    # Starts a hyperparameter tuning job.
+    #
+    # @option params [required, String] :hyper_parameter_tuning_job_name
+    #   The name of the tuning job. This name is the prefix for the names of
+    #   all training jobs that this tuning job launches. The name must be
+    #   unique within the same AWS account and AWS Region. Names are not case
+    #   sensitive, and must be between 1-32 characters.
+    #
+    # @option params [required, Types::HyperParameterTuningJobConfig] :hyper_parameter_tuning_job_config
+    #   The object that describes the tuning job, including the search
+    #   strategy, metric used to evaluate training jobs, ranges of parameters
+    #   to search, and resource limits for the tuning job.
+    #
+    # @option params [required, Types::HyperParameterTrainingJobDefinition] :training_job_definition
+    #   The object that describes the training jobs that this tuning job
+    #   launches, including static hyperparameters, input data configuration,
+    #   output data configuration, resource configuration, and stopping
+    #   condition.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An array of key-value pairs. You can use tags to categorize your AWS
+    #   resources in different ways, for example, by purpose, owner, or
+    #   environment. For more information, see [Using Cost Allocation Tags][1]
+    #   in the *AWS Billing and Cost Management User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com//awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #
+    # @return [Types::CreateHyperParameterTuningJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateHyperParameterTuningJobResponse#hyper_parameter_tuning_job_arn #hyper_parameter_tuning_job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_hyper_parameter_tuning_job({
+    #     hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #     hyper_parameter_tuning_job_config: { # required
+    #       strategy: "Bayesian", # required, accepts Bayesian
+    #       hyper_parameter_tuning_job_objective: { # required
+    #         type: "Maximize", # required, accepts Maximize, Minimize
+    #         metric_name: "MetricName", # required
+    #       },
+    #       resource_limits: { # required
+    #         max_number_of_training_jobs: 1, # required
+    #         max_parallel_training_jobs: 1, # required
+    #       },
+    #       parameter_ranges: { # required
+    #         integer_parameter_ranges: [
+    #           {
+    #             name: "ParameterKey", # required
+    #             min_value: "ParameterValue", # required
+    #             max_value: "ParameterValue", # required
+    #           },
+    #         ],
+    #         continuous_parameter_ranges: [
+    #           {
+    #             name: "ParameterKey", # required
+    #             min_value: "ParameterValue", # required
+    #             max_value: "ParameterValue", # required
+    #           },
+    #         ],
+    #         categorical_parameter_ranges: [
+    #           {
+    #             name: "ParameterKey", # required
+    #             values: ["ParameterValue"], # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     training_job_definition: { # required
+    #       static_hyper_parameters: {
+    #         "ParameterKey" => "ParameterValue",
+    #       },
+    #       algorithm_specification: { # required
+    #         training_image: "AlgorithmImage", # required
+    #         training_input_mode: "Pipe", # required, accepts Pipe, File
+    #         metric_definitions: [
+    #           {
+    #             name: "MetricName", # required
+    #             regex: "MetricRegex", # required
+    #           },
+    #         ],
+    #       },
+    #       role_arn: "RoleArn", # required
+    #       input_data_config: [ # required
+    #         {
+    #           channel_name: "ChannelName", # required
+    #           data_source: { # required
+    #             s3_data_source: { # required
+    #               s3_data_type: "ManifestFile", # required, accepts ManifestFile, S3Prefix
+    #               s3_uri: "S3Uri", # required
+    #               s3_data_distribution_type: "FullyReplicated", # accepts FullyReplicated, ShardedByS3Key
+    #             },
+    #           },
+    #           content_type: "ContentType",
+    #           compression_type: "None", # accepts None, Gzip
+    #           record_wrapper_type: "None", # accepts None, RecordIO
+    #         },
+    #       ],
+    #       vpc_config: {
+    #         security_group_ids: ["SecurityGroupId"], # required
+    #         subnets: ["SubnetId"], # required
+    #       },
+    #       output_data_config: { # required
+    #         kms_key_id: "KmsKeyId",
+    #         s3_output_path: "S3Uri", # required
+    #       },
+    #       resource_config: { # required
+    #         instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #         instance_count: 1, # required
+    #         volume_size_in_gb: 1, # required
+    #         volume_kms_key_id: "KmsKeyId",
+    #       },
+    #       stopping_condition: { # required
+    #         max_runtime_in_seconds: 1,
+    #       },
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hyper_parameter_tuning_job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHyperParameterTuningJob AWS API Documentation
+    #
+    # @overload create_hyper_parameter_tuning_job(params = {})
+    # @param [Hash] params ({})
+    def create_hyper_parameter_tuning_job(params = {}, options = {})
+      req = build_request(:create_hyper_parameter_tuning_job, params)
       req.send_request(options)
     end
 
@@ -420,6 +559,11 @@ module Aws::SageMaker
     #   on ML compute instances. Deploying on ML compute instances is part of
     #   model hosting. For more information, see [Amazon SageMaker Roles][1].
     #
+    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
+    #   API must have the `iam:PassRole` permission.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
@@ -432,6 +576,11 @@ module Aws::SageMaker
     #
     #
     #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   A object that specifies the VPC that you want your model to connect
+    #   to. Control access to and from your model container by configuring the
+    #   VPC. For more information, see host-vpc.
     #
     # @return [Types::CreateModelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -456,6 +605,10 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -472,27 +625,29 @@ module Aws::SageMaker
     end
 
     # Creates an Amazon SageMaker notebook instance. A notebook instance is
-    # an ML compute instance running on a Jupyter notebook.
+    # a machine learning (ML) compute instance running on a Jupyter
+    # notebook.
     #
-    # In a `CreateNotebookInstance` request, you specify the type of ML
-    # compute instance that you want to run. Amazon SageMaker launches the
-    # instance, installs common libraries that you can use to explore
-    # datasets for model training, and attaches an ML storage volume to the
-    # notebook instance.
+    # In a `CreateNotebookInstance` request, specify the type of ML compute
+    # instance that you want to run. Amazon SageMaker launches the instance,
+    # installs common libraries that you can use to explore datasets for
+    # model training, and attaches an ML storage volume to the notebook
+    # instance.
     #
     # Amazon SageMaker also provides a set of example notebooks. Each
-    # notebook demonstrates how to use Amazon SageMaker with a specific an
+    # notebook demonstrates how to use Amazon SageMaker with a specific
     # algorithm or with a machine learning framework.
     #
     # After receiving the request, Amazon SageMaker does the following:
     #
     # 1.  Creates a network interface in the Amazon SageMaker VPC.
     #
-    # 2.  (Option) If you specified `SubnetId`, creates a network interface
-    #     in your own VPC, which is inferred from the subnet ID that you
-    #     provide in the input. When creating this network interface, Amazon
-    #     SageMaker attaches the security group that you specified in the
-    #     request to the network interface that it creates in your VPC.
+    # 2.  (Option) If you specified `SubnetId`, Amazon SageMaker creates a
+    #     network interface in your own VPC, which is inferred from the
+    #     subnet ID that you provide in the input. When creating this
+    #     network interface, Amazon SageMaker attaches the security group
+    #     that you specified in the request to the network interface that it
+    #     creates in your VPC.
     #
     # 3.  Launches an EC2 instance of the type specified in the request in
     #     the Amazon SageMaker VPC. If you specified `SubnetId` of your VPC,
@@ -538,6 +693,11 @@ module Aws::SageMaker
     #   assume this role. For more information, see [Amazon SageMaker
     #   Roles][1].
     #
+    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
+    #   API must have the `iam:PassRole` permission.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
@@ -551,6 +711,22 @@ module Aws::SageMaker
     #   A list of tags to associate with the notebook instance. You can add
     #   tags later by using the `CreateTags` API.
     #
+    # @option params [String] :lifecycle_config_name
+    #   The name of a lifecycle configuration to associate with the notebook
+    #   instance. For information about lifestyle configurations, see
+    #   notebook-lifecycle-config.
+    #
+    # @option params [String] :direct_internet_access
+    #   Sets whether Amazon SageMaker provides internet access to the notebook
+    #   instance. If you set this to `Disabled` this notebook instance will be
+    #   able to access resources only in your VPC, and will not be able to
+    #   connect to Amazon SageMaker training and endpoint services unless your
+    #   configure a NAT Gateway in your VPC.
+    #
+    #   For more information, see appendix-notebook-and-internet-access. You
+    #   can set the value of this parameter to `Disabled` only if you set a
+    #   value for the `SubnetId` parameter.
+    #
     # @return [Types::CreateNotebookInstanceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNotebookInstanceOutput#notebook_instance_arn #notebook_instance_arn} => String
@@ -559,7 +735,7 @@ module Aws::SageMaker
     #
     #   resp = client.create_notebook_instance({
     #     notebook_instance_name: "NotebookInstanceName", # required
-    #     instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge
+    #     instance_type: "ml.t2.medium", # required, accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #     subnet_id: "SubnetId",
     #     security_group_ids: ["SecurityGroupId"],
     #     role_arn: "RoleArn", # required
@@ -570,6 +746,8 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     lifecycle_config_name: "NotebookInstanceLifecycleConfigName",
+    #     direct_internet_access: "Enabled", # accepts Enabled, Disabled
     #   })
     #
     # @example Response structure
@@ -585,7 +763,71 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns a URL that you can use to connect to the Juypter server from a
+    # Creates a lifecycle configuration that you can associate with a
+    # notebook instance. A *lifecycle configuration* is a collection of
+    # shell scripts that run when you create or start a notebook instance.
+    #
+    # Each lifecycle configuration script has a limit of 16384 characters.
+    #
+    # The value of the `$PATH` environment variable that is available to
+    # both scripts is `/sbin:bin:/usr/sbin:/usr/bin`.
+    #
+    # View CloudWatch Logs for notebook instance lifecycle configurations in
+    # log group `/aws/sagemaker/NotebookInstances` in log stream
+    # `[notebook-instance-name]/[LifecycleConfigHook]`.
+    #
+    # Lifecycle configuration scripts cannot run for longer than 5 minutes.
+    # If a script runs for longer than 5 minutes, it fails and the notebook
+    # instance is not created or started.
+    #
+    # For information about notebook instance lifestyle configurations, see
+    # notebook-lifecycle-config.
+    #
+    # @option params [required, String] :notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration.
+    #
+    # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_create
+    #   A shell script that runs only once, when you create a notebook
+    #   instance.
+    #
+    # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_start
+    #   A shell script that runs every time you start a notebook instance,
+    #   including when you create the notebook instance.
+    #
+    # @return [Types::CreateNotebookInstanceLifecycleConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNotebookInstanceLifecycleConfigOutput#notebook_instance_lifecycle_config_arn #notebook_instance_lifecycle_config_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_notebook_instance_lifecycle_config({
+    #     notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #     on_create: [
+    #       {
+    #         content: "NotebookInstanceLifecycleConfigContent",
+    #       },
+    #     ],
+    #     on_start: [
+    #       {
+    #         content: "NotebookInstanceLifecycleConfigContent",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_instance_lifecycle_config_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceLifecycleConfig AWS API Documentation
+    #
+    # @overload create_notebook_instance_lifecycle_config(params = {})
+    # @param [Hash] params ({})
+    def create_notebook_instance_lifecycle_config(params = {}, options = {})
+      req = build_request(:create_notebook_instance_lifecycle_config, params)
+      req.send_request(options)
+    end
+
+    # Returns a URL that you can use to connect to the Jupyter server from a
     # notebook instance. In the Amazon SageMaker console, when you choose
     # `Open` next to a notebook instance, Amazon SageMaker opens a new tab
     # showing the Jupyter server home page from the notebook instance. The
@@ -672,10 +914,10 @@ module Aws::SageMaker
     #   Region in an AWS account. It appears in the Amazon SageMaker console.
     #
     # @option params [Hash<String,String>] :hyper_parameters
-    #   Algorithm-specific parameters. You set hyperparameters before you
-    #   start the learning process. Hyperparameters influence the quality of
-    #   the model. For a list of hyperparameters for each training algorithm
-    #   provided by Amazon SageMaker, see [Algorithms][1].
+    #   Algorithm-specific parameters that influence the quality of the model.
+    #   You set hyperparameters before you start the learning process. For a
+    #   list of hyperparameters for each training algorithm provided by Amazon
+    #   SageMaker, see [Algorithms][1].
     #
     #   You can specify a maximum of 100 hyperparameters. Each hyperparameter
     #   is a key-value pair. Each key and value is limited to 256 characters,
@@ -690,12 +932,11 @@ module Aws::SageMaker
     #   algorithm and algorithm-specific metadata, including the input mode.
     #   For more information about algorithms provided by Amazon SageMaker,
     #   see [Algorithms][1]. For information about providing your own
-    #   algorithms, see [Bring Your Own Algorithms ][2].
+    #   algorithms, see your-algorithms.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
-    #   [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
@@ -707,6 +948,11 @@ module Aws::SageMaker
     #   Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch. You
     #   grant permissions for all of these tasks to an IAM role. For more
     #   information, see [Amazon SageMaker Roles][1].
+    #
+    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
+    #   API must have the `iam:PassRole` permission.
+    #
+    #    </note>
     #
     #
     #
@@ -743,6 +989,11 @@ module Aws::SageMaker
     #   store the training data, choose `File` as the `TrainingInputMode` in
     #   the algorithm specification. For distributed training algorithms,
     #   specify an instance count greater than 1.
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   A object that specifies the VPC that you want your training job to
+    #   connect to. Control access to and from your training container by
+    #   configuring the VPC. For more information, see train-vpc
     #
     # @option params [required, Types::StoppingCondition] :stopping_condition
     #   Sets a duration for training. Use this parameter to cap model training
@@ -802,10 +1053,14 @@ module Aws::SageMaker
     #       s3_output_path: "S3Uri", # required
     #     },
     #     resource_config: { # required
-    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
+    #       instance_type: "ml.m4.xlarge", # required, accepts ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.12xlarge, ml.m5.24xlarge, ml.c4.xlarge, ml.c4.2xlarge, ml.c4.4xlarge, ml.c4.8xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.18xlarge
     #       instance_count: 1, # required
     #       volume_size_in_gb: 1, # required
     #       volume_kms_key_id: "KmsKeyId",
+    #     },
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
     #     },
     #     stopping_condition: { # required
     #       max_runtime_in_seconds: 1,
@@ -854,7 +1109,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deletes an endpoint configuration. The `DeleteEndpoingConfig` API
+    # Deletes an endpoint configuration. The `DeleteEndpointConfig` API
     # deletes only the specified configuration. It does not delete endpoints
     # created using the configuration.
     #
@@ -932,6 +1187,28 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def delete_notebook_instance(params = {}, options = {})
       req = build_request(:delete_notebook_instance, params)
+      req.send_request(options)
+    end
+
+    # Deletes a notebook instance lifecycle configuration.
+    #
+    # @option params [required, String] :notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_notebook_instance_lifecycle_config({
+    #     notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceLifecycleConfig AWS API Documentation
+    #
+    # @overload delete_notebook_instance_lifecycle_config(params = {})
+    # @param [Hash] params ({})
+    def delete_notebook_instance_lifecycle_config(params = {}, options = {})
+      req = build_request(:delete_notebook_instance_lifecycle_config, params)
       req.send_request(options)
     end
 
@@ -1039,7 +1316,7 @@ module Aws::SageMaker
     #   resp.production_variants[0].variant_name #=> String
     #   resp.production_variants[0].model_name #=> String
     #   resp.production_variants[0].initial_instance_count #=> Integer
-    #   resp.production_variants[0].instance_type #=> String, one of "ml.c4.2xlarge", "ml.c4.8xlarge", "ml.c4.xlarge", "ml.c5.2xlarge", "ml.c5.9xlarge", "ml.c5.xlarge", "ml.m4.xlarge", "ml.p2.xlarge", "ml.p3.2xlarge", "ml.t2.medium"
+    #   resp.production_variants[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.large", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.large", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
     #   resp.production_variants[0].initial_variant_weight #=> Float
     #   resp.kms_key_id #=> String
     #   resp.creation_time #=> Time
@@ -1053,6 +1330,116 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Gets a description of a hyperparameter tuning job.
+    #
+    # @option params [required, String] :hyper_parameter_tuning_job_name
+    #   The name of the tuning job to describe.
+    #
+    # @return [Types::DescribeHyperParameterTuningJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeHyperParameterTuningJobResponse#hyper_parameter_tuning_job_name #hyper_parameter_tuning_job_name} => String
+    #   * {Types::DescribeHyperParameterTuningJobResponse#hyper_parameter_tuning_job_arn #hyper_parameter_tuning_job_arn} => String
+    #   * {Types::DescribeHyperParameterTuningJobResponse#hyper_parameter_tuning_job_config #hyper_parameter_tuning_job_config} => Types::HyperParameterTuningJobConfig
+    #   * {Types::DescribeHyperParameterTuningJobResponse#training_job_definition #training_job_definition} => Types::HyperParameterTrainingJobDefinition
+    #   * {Types::DescribeHyperParameterTuningJobResponse#hyper_parameter_tuning_job_status #hyper_parameter_tuning_job_status} => String
+    #   * {Types::DescribeHyperParameterTuningJobResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeHyperParameterTuningJobResponse#hyper_parameter_tuning_end_time #hyper_parameter_tuning_end_time} => Time
+    #   * {Types::DescribeHyperParameterTuningJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeHyperParameterTuningJobResponse#training_job_status_counters #training_job_status_counters} => Types::TrainingJobStatusCounters
+    #   * {Types::DescribeHyperParameterTuningJobResponse#objective_status_counters #objective_status_counters} => Types::ObjectiveStatusCounters
+    #   * {Types::DescribeHyperParameterTuningJobResponse#best_training_job #best_training_job} => Types::HyperParameterTrainingJobSummary
+    #   * {Types::DescribeHyperParameterTuningJobResponse#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_hyper_parameter_tuning_job({
+    #     hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hyper_parameter_tuning_job_name #=> String
+    #   resp.hyper_parameter_tuning_job_arn #=> String
+    #   resp.hyper_parameter_tuning_job_config.strategy #=> String, one of "Bayesian"
+    #   resp.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.type #=> String, one of "Maximize", "Minimize"
+    #   resp.hyper_parameter_tuning_job_config.hyper_parameter_tuning_job_objective.metric_name #=> String
+    #   resp.hyper_parameter_tuning_job_config.resource_limits.max_number_of_training_jobs #=> Integer
+    #   resp.hyper_parameter_tuning_job_config.resource_limits.max_parallel_training_jobs #=> Integer
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges #=> Array
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges[0].name #=> String
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges[0].min_value #=> String
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.integer_parameter_ranges[0].max_value #=> String
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.continuous_parameter_ranges #=> Array
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.continuous_parameter_ranges[0].name #=> String
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.continuous_parameter_ranges[0].min_value #=> String
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.continuous_parameter_ranges[0].max_value #=> String
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges #=> Array
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].name #=> String
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values #=> Array
+    #   resp.hyper_parameter_tuning_job_config.parameter_ranges.categorical_parameter_ranges[0].values[0] #=> String
+    #   resp.training_job_definition.static_hyper_parameters #=> Hash
+    #   resp.training_job_definition.static_hyper_parameters["ParameterKey"] #=> String
+    #   resp.training_job_definition.algorithm_specification.training_image #=> String
+    #   resp.training_job_definition.algorithm_specification.training_input_mode #=> String, one of "Pipe", "File"
+    #   resp.training_job_definition.algorithm_specification.metric_definitions #=> Array
+    #   resp.training_job_definition.algorithm_specification.metric_definitions[0].name #=> String
+    #   resp.training_job_definition.algorithm_specification.metric_definitions[0].regex #=> String
+    #   resp.training_job_definition.role_arn #=> String
+    #   resp.training_job_definition.input_data_config #=> Array
+    #   resp.training_job_definition.input_data_config[0].channel_name #=> String
+    #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.s3_data_type #=> String, one of "ManifestFile", "S3Prefix"
+    #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.s3_uri #=> String
+    #   resp.training_job_definition.input_data_config[0].data_source.s3_data_source.s3_data_distribution_type #=> String, one of "FullyReplicated", "ShardedByS3Key"
+    #   resp.training_job_definition.input_data_config[0].content_type #=> String
+    #   resp.training_job_definition.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
+    #   resp.training_job_definition.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
+    #   resp.training_job_definition.vpc_config.security_group_ids #=> Array
+    #   resp.training_job_definition.vpc_config.security_group_ids[0] #=> String
+    #   resp.training_job_definition.vpc_config.subnets #=> Array
+    #   resp.training_job_definition.vpc_config.subnets[0] #=> String
+    #   resp.training_job_definition.output_data_config.kms_key_id #=> String
+    #   resp.training_job_definition.output_data_config.s3_output_path #=> String
+    #   resp.training_job_definition.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.training_job_definition.resource_config.instance_count #=> Integer
+    #   resp.training_job_definition.resource_config.volume_size_in_gb #=> Integer
+    #   resp.training_job_definition.resource_config.volume_kms_key_id #=> String
+    #   resp.training_job_definition.stopping_condition.max_runtime_in_seconds #=> Integer
+    #   resp.hyper_parameter_tuning_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
+    #   resp.creation_time #=> Time
+    #   resp.hyper_parameter_tuning_end_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.training_job_status_counters.completed #=> Integer
+    #   resp.training_job_status_counters.in_progress #=> Integer
+    #   resp.training_job_status_counters.retryable_error #=> Integer
+    #   resp.training_job_status_counters.non_retryable_error #=> Integer
+    #   resp.training_job_status_counters.stopped #=> Integer
+    #   resp.objective_status_counters.succeeded #=> Integer
+    #   resp.objective_status_counters.pending #=> Integer
+    #   resp.objective_status_counters.failed #=> Integer
+    #   resp.best_training_job.training_job_name #=> String
+    #   resp.best_training_job.training_job_arn #=> String
+    #   resp.best_training_job.creation_time #=> Time
+    #   resp.best_training_job.training_start_time #=> Time
+    #   resp.best_training_job.training_end_time #=> Time
+    #   resp.best_training_job.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.best_training_job.tuned_hyper_parameters #=> Hash
+    #   resp.best_training_job.tuned_hyper_parameters["ParameterKey"] #=> String
+    #   resp.best_training_job.failure_reason #=> String
+    #   resp.best_training_job.final_hyper_parameter_tuning_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
+    #   resp.best_training_job.final_hyper_parameter_tuning_job_objective_metric.metric_name #=> String
+    #   resp.best_training_job.final_hyper_parameter_tuning_job_objective_metric.value #=> Float
+    #   resp.best_training_job.objective_status #=> String, one of "Succeeded", "Pending", "Failed"
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeHyperParameterTuningJob AWS API Documentation
+    #
+    # @overload describe_hyper_parameter_tuning_job(params = {})
+    # @param [Hash] params ({})
+    def describe_hyper_parameter_tuning_job(params = {}, options = {})
+      req = build_request(:describe_hyper_parameter_tuning_job, params)
+      req.send_request(options)
+    end
+
     # Describes a model that you created using the `CreateModel` API.
     #
     # @option params [required, String] :model_name
@@ -1063,6 +1450,7 @@ module Aws::SageMaker
     #   * {Types::DescribeModelOutput#model_name #model_name} => String
     #   * {Types::DescribeModelOutput#primary_container #primary_container} => Types::ContainerDefinition
     #   * {Types::DescribeModelOutput#execution_role_arn #execution_role_arn} => String
+    #   * {Types::DescribeModelOutput#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::DescribeModelOutput#creation_time #creation_time} => Time
     #   * {Types::DescribeModelOutput#model_arn #model_arn} => String
     #
@@ -1081,6 +1469,10 @@ module Aws::SageMaker
     #   resp.primary_container.environment #=> Hash
     #   resp.primary_container.environment["EnvironmentKey"] #=> String
     #   resp.execution_role_arn #=> String
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
+    #   resp.vpc_config.subnets #=> Array
+    #   resp.vpc_config.subnets[0] #=> String
     #   resp.creation_time #=> Time
     #   resp.model_arn #=> String
     #
@@ -1113,6 +1505,8 @@ module Aws::SageMaker
     #   * {Types::DescribeNotebookInstanceOutput#network_interface_id #network_interface_id} => String
     #   * {Types::DescribeNotebookInstanceOutput#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribeNotebookInstanceOutput#creation_time #creation_time} => Time
+    #   * {Types::DescribeNotebookInstanceOutput#notebook_instance_lifecycle_config_name #notebook_instance_lifecycle_config_name} => String
+    #   * {Types::DescribeNotebookInstanceOutput#direct_internet_access #direct_internet_access} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1127,7 +1521,7 @@ module Aws::SageMaker
     #   resp.notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting"
     #   resp.failure_reason #=> String
     #   resp.url #=> String
-    #   resp.instance_type #=> String, one of "ml.t2.medium", "ml.m4.xlarge", "ml.p2.xlarge"
+    #   resp.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
     #   resp.subnet_id #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
@@ -1136,6 +1530,8 @@ module Aws::SageMaker
     #   resp.network_interface_id #=> String
     #   resp.last_modified_time #=> Time
     #   resp.creation_time #=> Time
+    #   resp.notebook_instance_lifecycle_config_name #=> String
+    #   resp.direct_internet_access #=> String, one of "Enabled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstance AWS API Documentation
     #
@@ -1143,6 +1539,49 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def describe_notebook_instance(params = {}, options = {})
       req = build_request(:describe_notebook_instance, params)
+      req.send_request(options)
+    end
+
+    # Returns a description of a notebook instance lifecycle configuration.
+    #
+    # For information about notebook instance lifestyle configurations, see
+    # notebook-lifecycle-config.
+    #
+    # @option params [required, String] :notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration to describe.
+    #
+    # @return [Types::DescribeNotebookInstanceLifecycleConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#notebook_instance_lifecycle_config_arn #notebook_instance_lifecycle_config_arn} => String
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#notebook_instance_lifecycle_config_name #notebook_instance_lifecycle_config_name} => String
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#on_create #on_create} => Array&lt;Types::NotebookInstanceLifecycleHook&gt;
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#on_start #on_start} => Array&lt;Types::NotebookInstanceLifecycleHook&gt;
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeNotebookInstanceLifecycleConfigOutput#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_notebook_instance_lifecycle_config({
+    #     notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_instance_lifecycle_config_arn #=> String
+    #   resp.notebook_instance_lifecycle_config_name #=> String
+    #   resp.on_create #=> Array
+    #   resp.on_create[0].content #=> String
+    #   resp.on_start #=> Array
+    #   resp.on_start[0].content #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceLifecycleConfig AWS API Documentation
+    #
+    # @overload describe_notebook_instance_lifecycle_config(params = {})
+    # @param [Hash] params ({})
+    def describe_notebook_instance_lifecycle_config(params = {}, options = {})
+      req = build_request(:describe_notebook_instance_lifecycle_config, params)
       req.send_request(options)
     end
 
@@ -1155,6 +1594,7 @@ module Aws::SageMaker
     #
     #   * {Types::DescribeTrainingJobResponse#training_job_name #training_job_name} => String
     #   * {Types::DescribeTrainingJobResponse#training_job_arn #training_job_arn} => String
+    #   * {Types::DescribeTrainingJobResponse#tuning_job_arn #tuning_job_arn} => String
     #   * {Types::DescribeTrainingJobResponse#model_artifacts #model_artifacts} => Types::ModelArtifacts
     #   * {Types::DescribeTrainingJobResponse#training_job_status #training_job_status} => String
     #   * {Types::DescribeTrainingJobResponse#secondary_status #secondary_status} => String
@@ -1165,6 +1605,7 @@ module Aws::SageMaker
     #   * {Types::DescribeTrainingJobResponse#input_data_config #input_data_config} => Array&lt;Types::Channel&gt;
     #   * {Types::DescribeTrainingJobResponse#output_data_config #output_data_config} => Types::OutputDataConfig
     #   * {Types::DescribeTrainingJobResponse#resource_config #resource_config} => Types::ResourceConfig
+    #   * {Types::DescribeTrainingJobResponse#vpc_config #vpc_config} => Types::VpcConfig
     #   * {Types::DescribeTrainingJobResponse#stopping_condition #stopping_condition} => Types::StoppingCondition
     #   * {Types::DescribeTrainingJobResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeTrainingJobResponse#training_start_time #training_start_time} => Time
@@ -1181,6 +1622,7 @@ module Aws::SageMaker
     #
     #   resp.training_job_name #=> String
     #   resp.training_job_arn #=> String
+    #   resp.tuning_job_arn #=> String
     #   resp.model_artifacts.s3_model_artifacts #=> String
     #   resp.training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
     #   resp.secondary_status #=> String, one of "Starting", "Downloading", "Training", "Uploading", "Stopping", "Stopped", "MaxRuntimeExceeded", "Completed", "Failed"
@@ -1200,10 +1642,14 @@ module Aws::SageMaker
     #   resp.input_data_config[0].record_wrapper_type #=> String, one of "None", "RecordIO"
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
-    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
+    #   resp.resource_config.instance_type #=> String, one of "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.m5.large", "ml.m5.xlarge", "ml.m5.2xlarge", "ml.m5.4xlarge", "ml.m5.12xlarge", "ml.m5.24xlarge", "ml.c4.xlarge", "ml.c4.2xlarge", "ml.c4.4xlarge", "ml.c4.8xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge", "ml.c5.xlarge", "ml.c5.2xlarge", "ml.c5.4xlarge", "ml.c5.9xlarge", "ml.c5.18xlarge"
     #   resp.resource_config.instance_count #=> Integer
     #   resp.resource_config.volume_size_in_gb #=> Integer
     #   resp.resource_config.volume_kms_key_id #=> String
+    #   resp.vpc_config.security_group_ids #=> Array
+    #   resp.vpc_config.security_group_ids[0] #=> String
+    #   resp.vpc_config.subnets #=> Array
+    #   resp.vpc_config.subnets[0] #=> String
     #   resp.stopping_condition.max_runtime_in_seconds #=> Integer
     #   resp.creation_time #=> Time
     #   resp.training_start_time #=> Time
@@ -1359,6 +1805,97 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Gets a list of objects that describe the hyperparameter tuning jobs
+    # launched in your account.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous `ListHyperParameterTuningJobs` request
+    #   was truncated, the response includes a `NextToken`. To retrieve the
+    #   next set of tuning jobs, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of tuning jobs to return.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort results by. The default is `Name`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #
+    # @option params [String] :name_contains
+    #   A string in the tuning job name. This filter returns only tuning jobs
+    #   whose name contains the specified string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only tuning jobs that were created after the
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only tuning jobs that were created before the
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   A filter that returns only tuning jobs that were modified after the
+    #   specified time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   A filter that returns only tuning jobs that were modified before the
+    #   specified time.
+    #
+    # @option params [String] :status_equals
+    #   A filter that returns only tuning jobs with the specified status.
+    #
+    # @return [Types::ListHyperParameterTuningJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListHyperParameterTuningJobsResponse#hyper_parameter_tuning_job_summaries #hyper_parameter_tuning_job_summaries} => Array&lt;Types::HyperParameterTuningJobSummary&gt;
+    #   * {Types::ListHyperParameterTuningJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_hyper_parameter_tuning_jobs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     sort_by: "Name", # accepts Name, Status, CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     name_contains: "NameContains",
+    #     creation_time_after: Time.now,
+    #     creation_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     status_equals: "Completed", # accepts Completed, InProgress, Failed, Stopped, Stopping
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.hyper_parameter_tuning_job_summaries #=> Array
+    #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_job_name #=> String
+    #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_job_arn #=> String
+    #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
+    #   resp.hyper_parameter_tuning_job_summaries[0].strategy #=> String, one of "Bayesian"
+    #   resp.hyper_parameter_tuning_job_summaries[0].creation_time #=> Time
+    #   resp.hyper_parameter_tuning_job_summaries[0].hyper_parameter_tuning_end_time #=> Time
+    #   resp.hyper_parameter_tuning_job_summaries[0].last_modified_time #=> Time
+    #   resp.hyper_parameter_tuning_job_summaries[0].training_job_status_counters.completed #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].training_job_status_counters.in_progress #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].training_job_status_counters.retryable_error #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].training_job_status_counters.non_retryable_error #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].training_job_status_counters.stopped #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].objective_status_counters.succeeded #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].objective_status_counters.pending #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].objective_status_counters.failed #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].resource_limits.max_number_of_training_jobs #=> Integer
+    #   resp.hyper_parameter_tuning_job_summaries[0].resource_limits.max_parallel_training_jobs #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListHyperParameterTuningJobs AWS API Documentation
+    #
+    # @overload list_hyper_parameter_tuning_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_hyper_parameter_tuning_jobs(params = {}, options = {})
+      req = build_request(:list_hyper_parameter_tuning_jobs, params)
+      req.send_request(options)
+    end
+
     # Lists models created with the [CreateModel][1] API.
     #
     #
@@ -1425,6 +1962,80 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Lists notebook instance lifestyle configurations created with the API.
+    #
+    # @option params [String] :next_token
+    #   If the result of a `ListNotebookInstanceLifecycleConfigs` request was
+    #   truncated, the response includes a `NextToken`. To get the next set of
+    #   lifecycle configurations, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of lifecycle configurations to return in the
+    #   response.
+    #
+    # @option params [String] :sort_by
+    #   Sorts the list of results. The default is `CreationTime`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results.
+    #
+    # @option params [String] :name_contains
+    #   A string in the lifecycle configuration name. This filter returns only
+    #   lifecycle configurations whose name contains the specified string.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_before
+    #   A filter that returns only lifecycle configurations that were created
+    #   before the specified time (timestamp).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :creation_time_after
+    #   A filter that returns only lifecycle configurations that were created
+    #   after the specified time (timestamp).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_before
+    #   A filter that returns only lifecycle configurations that were modified
+    #   before the specified time (timestamp).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :last_modified_time_after
+    #   A filter that returns only lifecycle configurations that were modified
+    #   after the specified time (timestamp).
+    #
+    # @return [Types::ListNotebookInstanceLifecycleConfigsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNotebookInstanceLifecycleConfigsOutput#next_token #next_token} => String
+    #   * {Types::ListNotebookInstanceLifecycleConfigsOutput#notebook_instance_lifecycle_configs #notebook_instance_lifecycle_configs} => Array&lt;Types::NotebookInstanceLifecycleConfigSummary&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_notebook_instance_lifecycle_configs({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     sort_by: "Name", # accepts Name, CreationTime, LastModifiedTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #     name_contains: "NotebookInstanceLifecycleConfigNameContains",
+    #     creation_time_before: Time.now,
+    #     creation_time_after: Time.now,
+    #     last_modified_time_before: Time.now,
+    #     last_modified_time_after: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.notebook_instance_lifecycle_configs #=> Array
+    #   resp.notebook_instance_lifecycle_configs[0].notebook_instance_lifecycle_config_name #=> String
+    #   resp.notebook_instance_lifecycle_configs[0].notebook_instance_lifecycle_config_arn #=> String
+    #   resp.notebook_instance_lifecycle_configs[0].creation_time #=> Time
+    #   resp.notebook_instance_lifecycle_configs[0].last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstanceLifecycleConfigs AWS API Documentation
+    #
+    # @overload list_notebook_instance_lifecycle_configs(params = {})
+    # @param [Hash] params ({})
+    def list_notebook_instance_lifecycle_configs(params = {}, options = {})
+      req = build_request(:list_notebook_instance_lifecycle_configs, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the Amazon SageMaker notebook instances in the
     # requester's account in an AWS Region.
     #
@@ -1473,6 +2084,12 @@ module Aws::SageMaker
     #   A filter that returns only notebook instances with the specified
     #   status.
     #
+    # @option params [String] :notebook_instance_lifecycle_config_name_contains
+    #   A string in the name of a notebook instances lifecycle configuration
+    #   associated with this notebook instance. This filter returns only
+    #   notebook instances associated with a lifecycle configuration with a
+    #   name that contains the specified string.
+    #
     # @return [Types::ListNotebookInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListNotebookInstancesOutput#next_token #next_token} => String
@@ -1491,6 +2108,7 @@ module Aws::SageMaker
     #     last_modified_time_before: Time.now,
     #     last_modified_time_after: Time.now,
     #     status_equals: "Pending", # accepts Pending, InService, Stopping, Stopped, Failed, Deleting
+    #     notebook_instance_lifecycle_config_name_contains: "NotebookInstanceLifecycleConfigName",
     #   })
     #
     # @example Response structure
@@ -1501,9 +2119,10 @@ module Aws::SageMaker
     #   resp.notebook_instances[0].notebook_instance_arn #=> String
     #   resp.notebook_instances[0].notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting"
     #   resp.notebook_instances[0].url #=> String
-    #   resp.notebook_instances[0].instance_type #=> String, one of "ml.t2.medium", "ml.m4.xlarge", "ml.p2.xlarge"
+    #   resp.notebook_instances[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
     #   resp.notebook_instances[0].creation_time #=> Time
     #   resp.notebook_instances[0].last_modified_time #=> Time
+    #   resp.notebook_instances[0].notebook_instance_lifecycle_config_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstances AWS API Documentation
     #
@@ -1584,8 +2203,8 @@ module Aws::SageMaker
     #   time (timestamp).
     #
     # @option params [String] :name_contains
-    #   A string in the training job name. This filter returns only models
-    #   whose name contains the specified string.
+    #   A string in the training job name. This filter returns only training
+    #   jobs whose name contains the specified string.
     #
     # @option params [String] :status_equals
     #   A filter that retrieves only training jobs with a specific status.
@@ -1636,6 +2255,73 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Gets a list of objects that describe the training jobs that a
+    # hyperparameter tuning job launched.
+    #
+    # @option params [required, String] :hyper_parameter_tuning_job_name
+    #   The name of the tuning job whose training jobs you want to list.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous
+    #   `ListTrainingJobsForHyperParameterTuningJob` request was truncated,
+    #   the response includes a `NextToken`. To retrieve the next set of
+    #   training jobs, use the token in the next request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of training jobs to return.
+    #
+    # @option params [String] :status_equals
+    #   A filter that returns only training jobs with the specified status.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort results by. The default is `Name`.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for results. The default is `Ascending`.
+    #
+    # @return [Types::ListTrainingJobsForHyperParameterTuningJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTrainingJobsForHyperParameterTuningJobResponse#training_job_summaries #training_job_summaries} => Array&lt;Types::HyperParameterTrainingJobSummary&gt;
+    #   * {Types::ListTrainingJobsForHyperParameterTuningJobResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_training_jobs_for_hyper_parameter_tuning_job({
+    #     hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     status_equals: "InProgress", # accepts InProgress, Completed, Failed, Stopping, Stopped
+    #     sort_by: "Name", # accepts Name, CreationTime, Status, FinalObjectiveMetricValue
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.training_job_summaries #=> Array
+    #   resp.training_job_summaries[0].training_job_name #=> String
+    #   resp.training_job_summaries[0].training_job_arn #=> String
+    #   resp.training_job_summaries[0].creation_time #=> Time
+    #   resp.training_job_summaries[0].training_start_time #=> Time
+    #   resp.training_job_summaries[0].training_end_time #=> Time
+    #   resp.training_job_summaries[0].training_job_status #=> String, one of "InProgress", "Completed", "Failed", "Stopping", "Stopped"
+    #   resp.training_job_summaries[0].tuned_hyper_parameters #=> Hash
+    #   resp.training_job_summaries[0].tuned_hyper_parameters["ParameterKey"] #=> String
+    #   resp.training_job_summaries[0].failure_reason #=> String
+    #   resp.training_job_summaries[0].final_hyper_parameter_tuning_job_objective_metric.type #=> String, one of "Maximize", "Minimize"
+    #   resp.training_job_summaries[0].final_hyper_parameter_tuning_job_objective_metric.metric_name #=> String
+    #   resp.training_job_summaries[0].final_hyper_parameter_tuning_job_objective_metric.value #=> Float
+    #   resp.training_job_summaries[0].objective_status #=> String, one of "Succeeded", "Pending", "Failed"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListTrainingJobsForHyperParameterTuningJob AWS API Documentation
+    #
+    # @overload list_training_jobs_for_hyper_parameter_tuning_job(params = {})
+    # @param [Hash] params ({})
+    def list_training_jobs_for_hyper_parameter_tuning_job(params = {}, options = {})
+      req = build_request(:list_training_jobs_for_hyper_parameter_tuning_job, params)
+      req.send_request(options)
+    end
+
     # Launches an ML compute instance with the latest version of the
     # libraries and attaches your ML storage volume. After configuring the
     # notebook instance, Amazon SageMaker sets the notebook instance status
@@ -1659,6 +2345,35 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def start_notebook_instance(params = {}, options = {})
       req = build_request(:start_notebook_instance, params)
+      req.send_request(options)
+    end
+
+    # Stops a running hyperparameter tuning job and all running training
+    # jobs that the tuning job launched.
+    #
+    # All model artifacts output from the training jobs are stored in Amazon
+    # Simple Storage Service (Amazon S3). All data that the training jobs
+    # write toAmazon CloudWatch Logs are still available in CloudWatch.
+    # After the tuning job moves to the `Stopped` state, it releases all
+    # reserved resources for the tuning job.
+    #
+    # @option params [required, String] :hyper_parameter_tuning_job_name
+    #   The name of the tuning job to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_hyper_parameter_tuning_job({
+    #     hyper_parameter_tuning_job_name: "HyperParameterTuningJobName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopHyperParameterTuningJob AWS API Documentation
+    #
+    # @overload stop_hyper_parameter_tuning_job(params = {})
+    # @param [Hash] params ({})
+    def stop_hyper_parameter_tuning_job(params = {}, options = {})
+      req = build_request(:stop_hyper_parameter_tuning_job, params)
       req.send_request(options)
     end
 
@@ -1829,8 +2544,18 @@ module Aws::SageMaker
     #   The Amazon ML compute instance type.
     #
     # @option params [String] :role_arn
-    #   Amazon Resource Name (ARN) of the IAM role to associate with the
-    #   instance.
+    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
+    #   can assume to access the notebook instance. For more information, see
+    #   [Amazon SageMaker Roles][1].
+    #
+    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
+    #   API must have the `iam:PassRole` permission.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1838,7 +2563,7 @@ module Aws::SageMaker
     #
     #   resp = client.update_notebook_instance({
     #     notebook_instance_name: "NotebookInstanceName", # required
-    #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.m4.xlarge, ml.p2.xlarge
+    #     instance_type: "ml.t2.medium", # accepts ml.t2.medium, ml.t2.large, ml.t2.xlarge, ml.t2.2xlarge, ml.m4.xlarge, ml.m4.2xlarge, ml.m4.4xlarge, ml.m4.10xlarge, ml.m4.16xlarge, ml.p2.xlarge, ml.p2.8xlarge, ml.p2.16xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge
     #     role_arn: "RoleArn",
     #   })
     #
@@ -1848,6 +2573,47 @@ module Aws::SageMaker
     # @param [Hash] params ({})
     def update_notebook_instance(params = {}, options = {})
       req = build_request(:update_notebook_instance, params)
+      req.send_request(options)
+    end
+
+    # Updates a notebook instance lifecycle configuration created with the
+    # API.
+    #
+    # @option params [required, String] :notebook_instance_lifecycle_config_name
+    #   The name of the lifecycle configuration.
+    #
+    # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_create
+    #   The shell script that runs only once, when you create a notebook
+    #   instance
+    #
+    # @option params [Array<Types::NotebookInstanceLifecycleHook>] :on_start
+    #   The shell script that runs every time you start a notebook instance,
+    #   including when you create the notebook instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_notebook_instance_lifecycle_config({
+    #     notebook_instance_lifecycle_config_name: "NotebookInstanceLifecycleConfigName", # required
+    #     on_create: [
+    #       {
+    #         content: "NotebookInstanceLifecycleConfigContent",
+    #       },
+    #     ],
+    #     on_start: [
+    #       {
+    #         content: "NotebookInstanceLifecycleConfigContent",
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceLifecycleConfig AWS API Documentation
+    #
+    # @overload update_notebook_instance_lifecycle_config(params = {})
+    # @param [Hash] params ({})
+    def update_notebook_instance_lifecycle_config(params = {}, options = {})
+      req = build_request(:update_notebook_instance_lifecycle_config, params)
       req.send_request(options)
     end
 
@@ -1864,7 +2630,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

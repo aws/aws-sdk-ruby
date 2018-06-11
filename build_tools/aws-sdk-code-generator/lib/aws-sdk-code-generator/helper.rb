@@ -136,6 +136,14 @@ module AwsSdkCodeGenerator
       end
     end
 
+    def lstrip_prefix(name)
+      name.start_with?("__") ? name[2..-1] : name
+    end
+
+    def apig_prefix(name)
+      "__" << name
+    end
+
     def shape(ref)
       if ref.nil?
         nil
@@ -167,6 +175,27 @@ module AwsSdkCodeGenerator
       end
     end
 
+    def eventstream_output?(operation, api)
+      return false unless operation.key? 'output'
+      output_shape = api['shapes'][operation['output']['shape']]
+      return false unless output_shape.key? 'members'
+      output_shape['members'].each do |name, ref|
+        return ref['shape'] if Api.eventstream?(ref, api)
+      end
+      return false
+    end
+
+    # currently not support eventstream input
+    def eventstream_input?(operation, api)
+      return false unless operation.key? 'input'
+      input_shape = api['shapes'][operation['input']['shape']]
+      return false unless input_shape.key? 'members'
+      input_shape['members'].each do |name, ref|
+        return true if Api.eventstream?(ref, api)
+      end
+      return false
+    end
+
     def deep_copy(obj)
       case obj
       when nil then nil
@@ -189,7 +218,8 @@ module AwsSdkCodeGenerator
       str.gsub(/(.{1,#{width}})(\s+|\Z)/, "#{indent}\\1\n").chomp
     end
 
-    module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string
+    module_function :deep_copy, :operation_streaming?, :downcase_first, :wrap_string, :apig_prefix,
+      :eventstream_output?, :eventstream_input?
 
   end
 end

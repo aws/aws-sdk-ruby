@@ -20,7 +20,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   Role arn you wish to associate with this group.
+    #   The ARN of the role you wish to associate with this group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroupRequest AWS API Documentation
@@ -32,7 +32,8 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] associated_at
-    #   Time the role arn was associated to your group.
+    #   The time, in milliseconds since the epoch, when the role ARN was
+    #   associated with the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroupResponse AWS API Documentation
@@ -50,7 +51,7 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] role_arn
-    #   Role arn you wish to associate with this account.
+    #   The ARN of the service role you wish to associate with your account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccountRequest AWS API Documentation
@@ -61,7 +62,7 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] associated_at
-    #   Time when the service role was associated to the account.
+    #   The time when the service role was associated with the account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccountResponse AWS API Documentation
@@ -71,7 +72,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Connectivity Info
+    # Information about a Greengrass core's connectivity.
     #
     # @note When making an API call, you may pass ConnectivityInfo
     #   data as a hash:
@@ -84,11 +85,11 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] host_address
-    #   Endpoint for the GGC. Can be an IP address or DNS.
+    #   The endpoint for the Greengrass core. Can be an IP address or DNS.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Element Id for this entry in the list.
+    #   The ID of the connectivity information.
     #   @return [String]
     #
     # @!attribute [rw] metadata
@@ -96,7 +97,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] port_number
-    #   Port of the GGC. Usually 8883.
+    #   The port of the Greengrass core. Usually 8883.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ConnectivityInfo AWS API Documentation
@@ -109,7 +110,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on the core
+    # Information about a core.
     #
     # @note When making an API call, you may pass Core
     #   data as a hash:
@@ -122,20 +123,20 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   Certificate arn of the core.
+    #   The ARN of the certificate associated with the core.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Element Id for this entry in the list.
+    #   The ID of the core.
     #   @return [String]
     #
     # @!attribute [rw] sync_shadow
-    #   If true, the local shadow value automatically syncs with the
-    #   cloud's shadow state.
+    #   If true, the core's local shadow is automatically synced with the
+    #   cloud.
     #   @return [Boolean]
     #
     # @!attribute [rw] thing_arn
-    #   Thing arn of the core.
+    #   The ARN of the thing which is the core.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Core AWS API Documentation
@@ -148,7 +149,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on core definition version
+    # Information about a core definition version.
     #
     # @note When making an API call, you may pass CoreDefinitionVersion
     #   data as a hash:
@@ -165,7 +166,7 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] cores
-    #   Cores in the definition version.
+    #   A list of cores in the core definition version.
     #   @return [Array<Types::Core>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CoreDefinitionVersion AWS API Documentation
@@ -197,7 +198,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] initial_version
-    #   Information on core definition version
+    #   Information about a core definition version.
     #   @return [Types::CoreDefinitionVersion]
     #
     # @!attribute [rw] name
@@ -302,7 +303,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on Deployment
+    # Information about a deployment.
     #
     # @note When making an API call, you may pass CreateDeploymentRequest
     #   data as a hash:
@@ -319,19 +320,20 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
-    #   Id of the deployment if you wish to redeploy a previous deployment.
+    #   The ID of the deployment if you wish to redeploy a previous
+    #   deployment.
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
-    #   Type of deployment. When used in CreateDeployment, only
-    #   NewDeployment and Redeployment are valid.
+    #   The type of deployment. When used in ''CreateDeployment'', only
+    #   ''NewDeployment'' and ''Redeployment'' are valid.
     #   @return [String]
     #
     # @!attribute [rw] group_id
     #   @return [String]
     #
     # @!attribute [rw] group_version_id
-    #   Group Version you wish to deploy.
+    #   The ID of the group version to be deployed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeploymentRequest AWS API Documentation
@@ -346,11 +348,11 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] deployment_arn
-    #   The arn of the deployment.
+    #   The ARN of the deployment.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
-    #   The id of the deployment.
+    #   The ID of the deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeploymentResponse AWS API Documentation
@@ -383,7 +385,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] initial_version
-    #   Information on device definition version
+    #   Information about a device definition version.
     #   @return [Types::DeviceDefinitionVersion]
     #
     # @!attribute [rw] name
@@ -498,6 +500,7 @@ module Aws::Greengrass
     #             {
     #               function_arn: "__string",
     #               function_configuration: {
+    #                 encoding_type: "binary", # accepts binary, json
     #                 environment: {
     #                   access_sysfs: false,
     #                   resource_access_policies: [
@@ -527,7 +530,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] initial_version
-    #   Information on the function definition version
+    #   Information about a function definition version.
     #   @return [Types::FunctionDefinitionVersion]
     #
     # @!attribute [rw] name
@@ -586,6 +589,7 @@ module Aws::Greengrass
     #           {
     #             function_arn: "__string",
     #             function_configuration: {
+    #               encoding_type: "binary", # accepts binary, json
     #               environment: {
     #                 access_sysfs: false,
     #                 resource_access_policies: [
@@ -672,7 +676,7 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] group_certificate_authority_arn
-    #   Arn of the group certificate authority.
+    #   The ARN of the group certificate authority.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupCertificateAuthorityResponse AWS API Documentation
@@ -702,7 +706,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] initial_version
-    #   Information on group version
+    #   Information about a group version.
     #   @return [Types::GroupVersion]
     #
     # @!attribute [rw] name
@@ -848,7 +852,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] initial_version
-    #   Information on logger definition version
+    #   Information about a logger definition version.
     #   @return [Types::LoggerDefinitionVersion]
     #
     # @!attribute [rw] name
@@ -980,6 +984,14 @@ module Aws::Greengrass
     #                   },
     #                   source_path: "__string",
     #                 },
+    #                 s3_machine_learning_model_resource_data: {
+    #                   destination_path: "__string",
+    #                   s3_uri: "__string",
+    #                 },
+    #                 sage_maker_machine_learning_model_resource_data: {
+    #                   destination_path: "__string",
+    #                   sage_maker_job_arn: "__string",
+    #                 },
     #               },
     #             },
     #           ],
@@ -991,7 +1003,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] initial_version
-    #   Information on resource definition version
+    #   Information about a resource definition version.
     #   @return [Types::ResourceDefinitionVersion]
     #
     # @!attribute [rw] name
@@ -1066,6 +1078,14 @@ module Aws::Greengrass
     #                 },
     #                 source_path: "__string",
     #               },
+    #               s3_machine_learning_model_resource_data: {
+    #                 destination_path: "__string",
+    #                 s3_uri: "__string",
+    #               },
+    #               sage_maker_machine_learning_model_resource_data: {
+    #                 destination_path: "__string",
+    #                 sage_maker_job_arn: "__string",
+    #               },
     #             },
     #           },
     #         ],
@@ -1111,7 +1131,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Request for the CreateSoftwareUpdateJob API
+    # Request for the CreateSoftwareUpdateJob API.
     #
     # @note When making an API call, you may pass CreateSoftwareUpdateJobRequest
     #   data as a hash:
@@ -1135,7 +1155,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] software_to_update
-    #   The piece of software on the Greengrass Core that will be updated.
+    #   The piece of software on the Greengrass core that will be updated.
     #   @return [String]
     #
     # @!attribute [rw] update_agent_log_level
@@ -1144,15 +1164,17 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] update_targets
-    #   The target arns that this update will be applied to.
+    #   The ARNs of the targets (IoT things or IoT thing groups) that this
+    #   update will be applied to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] update_targets_architecture
-    #   The architecture of the Cores in the targets of an update
+    #   The architecture of the cores which are the targets of an update.
     #   @return [String]
     #
     # @!attribute [rw] update_targets_operating_system
-    #   The operating system of the Cores in the targets of an update
+    #   The operating system of the cores which are the targets of an
+    #   update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobRequest AWS API Documentation
@@ -1169,11 +1191,11 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] iot_job_arn
-    #   The Iot Job Arn corresponding to this update.
+    #   The IoT Job ARN corresponding to this update.
     #   @return [String]
     #
     # @!attribute [rw] iot_job_id
-    #   The Iot Job Id corresponding to this update.
+    #   The IoT Job Id corresponding to this update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobResponse AWS API Documentation
@@ -1206,7 +1228,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] initial_version
-    #   Information on subscription definition version
+    #   Information about a subscription definition version.
     #   @return [Types::SubscriptionDefinitionVersion]
     #
     # @!attribute [rw] name
@@ -1311,34 +1333,36 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on the Definition
+    # Information about a definition.
     #
     # @!attribute [rw] arn
-    #   Arn of the definition.
+    #   The ARN of the definition.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp of when the definition was created.
+    #   The time, in milliseconds since the epoch, when the definition was
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Id of the definition.
+    #   The ID of the definition.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_timestamp
-    #   Last updated timestamp of the definition.
+    #   The time, in milliseconds since the epoch, when the definition was
+    #   last updated.
     #   @return [String]
     #
     # @!attribute [rw] latest_version
-    #   Last version of the definition.
+    #   The latest version of the definition.
     #   @return [String]
     #
     # @!attribute [rw] latest_version_arn
-    #   Latest version arn of the definition.
+    #   The ARN of the latest version of the definition.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the definition.
+    #   The name of the definition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DefinitionInformation AWS API Documentation
@@ -1501,26 +1525,27 @@ module Aws::Greengrass
     #
     class DeleteSubscriptionDefinitionResponse < Aws::EmptyStructure; end
 
-    # Information on the deployment
+    # Information about a deployment.
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the deployment was created.
+    #   The time, in milliseconds since the epoch, when the deployment was
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] deployment_arn
-    #   Arn of the deployment.
+    #   The ARN of the deployment.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
-    #   Id of the deployment.
+    #   The ID of the deployment.
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
-    #   The type of deployment.
+    #   The type of the deployment.
     #   @return [String]
     #
     # @!attribute [rw] group_arn
-    #   Arn of the group for this deployment.
+    #   The ARN of the group for this deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Deployment AWS API Documentation
@@ -1534,7 +1559,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on a Device
+    # Information about a device.
     #
     # @note When making an API call, you may pass Device
     #   data as a hash:
@@ -1547,20 +1572,20 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   Certificate arn of the device.
+    #   The ARN of the certificate associated with the device.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Element Id for this entry in the list.
+    #   The ID of the device.
     #   @return [String]
     #
     # @!attribute [rw] sync_shadow
-    #   If true, the local shadow value automatically syncs with the
-    #   cloud's shadow state.
+    #   If true, the device's local shadow will be automatically synced
+    #   with the cloud.
     #   @return [Boolean]
     #
     # @!attribute [rw] thing_arn
-    #   Thing arn of the device.
+    #   The thing ARN of the device.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Device AWS API Documentation
@@ -1573,7 +1598,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on device definition version
+    # Information about a device definition version.
     #
     # @note When making an API call, you may pass DeviceDefinitionVersion
     #   data as a hash:
@@ -1590,7 +1615,7 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] devices
-    #   Devices in the definition version.
+    #   A list of devices in the definition version.
     #   @return [Array<Types::Device>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeviceDefinitionVersion AWS API Documentation
@@ -1618,7 +1643,8 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] disassociated_at
-    #   Time when the role was disassociated from the group.
+    #   The time, in milliseconds since the epoch, when the role was
+    #   disassociated from the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateRoleFromGroupResponse AWS API Documentation
@@ -1635,7 +1661,7 @@ module Aws::Greengrass
     class DisassociateServiceRoleFromAccountRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] disassociated_at
-    #   Time when the service role was disassociated from the account.
+    #   The time when the service role was disassociated from the account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccountResponse AWS API Documentation
@@ -1651,14 +1677,14 @@ module Aws::Greengrass
     #
     class Empty < Aws::EmptyStructure; end
 
-    # ErrorDetail
+    # Details about the error.
     #
     # @!attribute [rw] detailed_error_code
-    #   Detailed Error Code
+    #   A detailed error code.
     #   @return [String]
     #
     # @!attribute [rw] detailed_error_message
-    #   Detailed Error Message
+    #   A detailed error message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ErrorDetail AWS API Documentation
@@ -1669,7 +1695,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on function
+    # Information about a Lambda function.
     #
     # @note When making an API call, you may pass Function
     #   data as a hash:
@@ -1677,6 +1703,7 @@ module Aws::Greengrass
     #       {
     #         function_arn: "__string",
     #         function_configuration: {
+    #           encoding_type: "binary", # accepts binary, json
     #           environment: {
     #             access_sysfs: false,
     #             resource_access_policies: [
@@ -1699,15 +1726,15 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] function_arn
-    #   Arn of the Lambda function.
+    #   The ARN of the Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] function_configuration
-    #   Configuration of the function
+    #   The configuration of the Lambda function.
     #   @return [Types::FunctionConfiguration]
     #
     # @!attribute [rw] id
-    #   Id of the function in this version.
+    #   The ID of the Lambda function.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Function AWS API Documentation
@@ -1719,12 +1746,13 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Configuration of the function
+    # The configuration of the Lambda function.
     #
     # @note When making an API call, you may pass FunctionConfiguration
     #   data as a hash:
     #
     #       {
+    #         encoding_type: "binary", # accepts binary, json
     #         environment: {
     #           access_sysfs: false,
     #           resource_access_policies: [
@@ -1744,36 +1772,42 @@ module Aws::Greengrass
     #         timeout: 1,
     #       }
     #
+    # @!attribute [rw] encoding_type
+    #   The expected encoding type of the input payload for the function.
+    #   The default is ''json''.
+    #   @return [String]
+    #
     # @!attribute [rw] environment
-    #   Environment of the function configuration
+    #   The environment configuration of the function.
     #   @return [Types::FunctionConfigurationEnvironment]
     #
     # @!attribute [rw] exec_args
-    #   Execution Arguments
+    #   The execution arguments.
     #   @return [String]
     #
     # @!attribute [rw] executable
-    #   Executable
+    #   The name of the function executable.
     #   @return [String]
     #
     # @!attribute [rw] memory_size
-    #   The memory size, in KB, you configured for the function.
+    #   The memory size, in KB, which the function requires.
     #   @return [Integer]
     #
     # @!attribute [rw] pinned
-    #   Whether the function is pinned or not. Pinned means the function is
+    #   True if the function is pinned. Pinned means the function is
     #   long-lived and starts when the core starts.
     #   @return [Boolean]
     #
     # @!attribute [rw] timeout
-    #   The function execution time at which Lambda should terminate the
-    #   function. This timeout still applies to pinned lambdas for each
-    #   request.
+    #   The allowed function execution time, after which Lambda should
+    #   terminate the function. This timeout still applies to pinned lambdas
+    #   for each request.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
+      :encoding_type,
       :environment,
       :exec_args,
       :executable,
@@ -1783,7 +1817,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Environment of the function configuration
+    # The environment configuration of the function.
     #
     # @note When making an API call, you may pass FunctionConfigurationEnvironment
     #   data as a hash:
@@ -1802,14 +1836,19 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] access_sysfs
-    #   Flag to allow lambda access sys filesystem.
+    #   If true, the Lambda function is allowed to access the host's /sys
+    #   folder. Use this when the Lambda function needs to read device
+    #   information from /sys.
     #   @return [Boolean]
     #
     # @!attribute [rw] resource_access_policies
-    #   Policies for the function to access resources.
+    #   A list of the resources, with their permissions, to which the Lambda
+    #   function will be granted access. A Lambda function can have at most
+    #   10 resources.
     #   @return [Array<Types::ResourceAccessPolicy>]
     #
     # @!attribute [rw] variables
+    #   Environment variables for the Lambda function's configuration.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfigurationEnvironment AWS API Documentation
@@ -1821,7 +1860,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on the function definition version
+    # Information about a function definition version.
     #
     # @note When making an API call, you may pass FunctionDefinitionVersion
     #   data as a hash:
@@ -1831,6 +1870,7 @@ module Aws::Greengrass
     #           {
     #             function_arn: "__string",
     #             function_configuration: {
+    #               encoding_type: "binary", # accepts binary, json
     #               environment: {
     #                 access_sysfs: false,
     #                 resource_access_policies: [
@@ -1855,7 +1895,7 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] functions
-    #   Lambda functions in this function definition version.
+    #   A list of Lambda functions in this function definition version.
     #   @return [Array<Types::Function>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefinitionVersion AWS API Documentation
@@ -1865,14 +1905,14 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # General Error
+    # General error information.
     #
     # @!attribute [rw] error_details
-    #   Error Details
+    #   Details about the error.
     #   @return [Array<Types::ErrorDetail>]
     #
     # @!attribute [rw] message
-    #   Message containing information about the error
+    #   A message containing information about the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GeneralError AWS API Documentation
@@ -1901,11 +1941,11 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] associated_at
-    #   Time when the role was associated for the group.
+    #   The time when the role was associated with the group.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   Arn of the role that is associated with the group.
+    #   The ARN of the role that is associated with the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetAssociatedRoleResponse AWS API Documentation
@@ -1933,14 +1973,14 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # connectivity info response
+    # Information about a Greengrass core's connectivity.
     #
     # @!attribute [rw] connectivity_info
-    #   Connectivity info list
+    #   Connectivity info list.
     #   @return [Array<Types::ConnectivityInfo>]
     #
     # @!attribute [rw] message
-    #   Response Text
+    #   A message about the connectivity info request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfoResponse AWS API Documentation
@@ -2025,23 +2065,24 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] arn
-    #   Arn of the core definition version.
+    #   The ARN of the core definition version.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp of when the core definition version was created.
+    #   The time, in milliseconds since the epoch, when the core definition
+    #   version was created.
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   Information on definition
+    #   Information about the core definition version.
     #   @return [Types::CoreDefinitionVersion]
     #
     # @!attribute [rw] id
-    #   Id of the core definition the version belongs to.
+    #   The ID of the core definition version.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version of the core definition version.
+    #   The version of the core definition version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionVersionResponse AWS API Documentation
@@ -2077,10 +2118,10 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # The response body contains the status of a deployment for a group.
+    # Information about the status of a deployment for a group.
     #
     # @!attribute [rw] deployment_status
-    #   Status of the deployment.
+    #   The status of the deployment.
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
@@ -2088,15 +2129,16 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] error_details
-    #   The error Details
+    #   Error details
     #   @return [Array<Types::ErrorDetail>]
     #
     # @!attribute [rw] error_message
-    #   Error Message
+    #   Error message
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Last time the deployment status was updated.
+    #   The time, in milliseconds since the epoch, when the deployment
+    #   status was updated.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeploymentStatusResponse AWS API Documentation
@@ -2184,23 +2226,24 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] arn
-    #   Arn of the device definition version.
+    #   The ARN of the device definition version.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp of when the device definition version was created.
+    #   The time, in milliseconds since the epoch, when the device
+    #   definition version was created.
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   Device definition version
+    #   Information about the device definition version.
     #   @return [Types::DeviceDefinitionVersion]
     #
     # @!attribute [rw] id
-    #   Id of the device definition the version belongs to.
+    #   The ID of the device definition version.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version of the device definition version.
+    #   The version of the device definition version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersionResponse AWS API Documentation
@@ -2287,14 +2330,15 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Function definition version
+    # Information about a function definition version.
     #
     # @!attribute [rw] arn
-    #   Arn of the function definition version.
+    #   The ARN of the function definition version.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp when the funtion definition version was created.
+    #   The time, in milliseconds since the epoch, when the function
+    #   definition version was created.
     #   @return [String]
     #
     # @!attribute [rw] definition
@@ -2302,11 +2346,11 @@ module Aws::Greengrass
     #   @return [Types::FunctionDefinitionVersion]
     #
     # @!attribute [rw] id
-    #   Id of the function definition the version belongs to.
+    #   The ID of the function definition version.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version of the function definition version.
+    #   The version of the function definition version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersionResponse AWS API Documentation
@@ -2342,18 +2386,18 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Certificate authority for the group.
+    # Information about a certificate authority for a group.
     #
     # @!attribute [rw] group_certificate_authority_arn
-    #   Arn of the certificate authority for the group.
+    #   The ARN of the certificate authority for the group.
     #   @return [String]
     #
     # @!attribute [rw] group_certificate_authority_id
-    #   Id of the certificate authority for the group.
+    #   The ID of the certificate authority for the group.
     #   @return [String]
     #
     # @!attribute [rw] pem_encoded_certificate
-    #   PEM encoded certificate for the group.
+    #   The PEM encoded certificate for the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthorityResponse AWS API Documentation
@@ -2473,26 +2517,27 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on the group version
+    # Information about a group version.
     #
     # @!attribute [rw] arn
-    #   Arn of the group version.
+    #   The ARN of the group version.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp when the group version was created.
+    #   The time, in milliseconds since the epoch, when the group version
+    #   was created.
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   Information on the definition
+    #   Information about the group version definition.
     #   @return [Types::GroupVersion]
     #
     # @!attribute [rw] id
-    #   Id of the group version.
+    #   The ID of the group version.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Unique Id for a version of the Group.
+    #   The unique ID for the version of the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersionResponse AWS API Documentation
@@ -2579,26 +2624,27 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on logger definition version response
+    # Information about a logger definition version.
     #
     # @!attribute [rw] arn
-    #   Arn of the logger definition version.
+    #   The ARN of the logger definition version.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp of when the logger definition version was created.
+    #   The time, in milliseconds since the epoch, when the logger
+    #   definition version was created.
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   Information on definition
+    #   Information about the logger definition version.
     #   @return [Types::LoggerDefinitionVersion]
     #
     # @!attribute [rw] id
-    #   Id of the logger definition the version belongs to.
+    #   The ID of the logger definition version.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version of the logger definition version.
+    #   The version of the logger definition version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionVersionResponse AWS API Documentation
@@ -2685,26 +2731,27 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on resource definition version response
+    # Information about a resource definition version.
     #
     # @!attribute [rw] arn
     #   Arn of the resource definition version.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp of when the resource definition version was created.
+    #   The time, in milliseconds since the epoch, when the resource
+    #   definition version was created.
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   Information on definition.
+    #   Information about the definition.
     #   @return [Types::ResourceDefinitionVersion]
     #
     # @!attribute [rw] id
-    #   Id of the resource definition the version belongs to.
+    #   The ID of the resource definition version.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version of the resource definition version.
+    #   The version of the resource definition version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersionResponse AWS API Documentation
@@ -2725,11 +2772,11 @@ module Aws::Greengrass
     class GetServiceRoleForAccountRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] associated_at
-    #   Time when the service role was associated to the account.
+    #   The time when the service role was associated with the account.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   Role arn which is associated to the account.
+    #   The ARN of the role which is associated with the account.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccountResponse AWS API Documentation
@@ -2813,26 +2860,27 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on the Subscription Definition Version
+    # Information about a subscription definition version.
     #
     # @!attribute [rw] arn
-    #   Arn of the subscription definition version.
+    #   The ARN of the subscription definition version.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp of when the subscription definition version was created.
+    #   The time, in milliseconds since the epoch, when the subscription
+    #   definition version was created.
     #   @return [String]
     #
     # @!attribute [rw] definition
-    #   Information on the definition
+    #   Information about the subscription definition version.
     #   @return [Types::SubscriptionDefinitionVersion]
     #
     # @!attribute [rw] id
-    #   Id of the subscription definition the version belongs to.
+    #   The ID of the subscription definition version.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Version of the subscription definition version.
+    #   The version of the subscription definition version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersionResponse AWS API Documentation
@@ -2846,14 +2894,14 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on group certificate authority properties
+    # Information about a certificate authority for a group.
     #
     # @!attribute [rw] group_certificate_authority_arn
-    #   Arn of the certificate authority for the group.
+    #   The ARN of the certificate authority for the group.
     #   @return [String]
     #
     # @!attribute [rw] group_certificate_authority_id
-    #   Id of the certificate authority for the group.
+    #   The ID of the certificate authority for the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupCertificateAuthorityProperties AWS API Documentation
@@ -2864,19 +2912,20 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on the group certificate configuration
+    # Information about a group certificate configuration.
     #
     # @!attribute [rw] certificate_authority_expiry_in_milliseconds
-    #   Amount of time when the certificate authority expires in
-    #   milliseconds.
+    #   The amount of time remaining before the certificate authority
+    #   expires, in milliseconds.
     #   @return [String]
     #
     # @!attribute [rw] certificate_expiry_in_milliseconds
-    #   Amount of time when the certificate expires in milliseconds.
+    #   The amount of time remaining before the certificate expires, in
+    #   milliseconds.
     #   @return [String]
     #
     # @!attribute [rw] group_id
-    #   Id of the group the certificate configuration belongs to.
+    #   The ID of the group certificate configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupCertificateConfiguration AWS API Documentation
@@ -2888,34 +2937,36 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on the group
+    # Information about a group.
     #
     # @!attribute [rw] arn
-    #   Arn of a group.
+    #   The ARN of the group.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp of when the group was created.
+    #   The time, in milliseconds since the epoch, when the group was
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Id of a group.
+    #   The ID of the group.
     #   @return [String]
     #
     # @!attribute [rw] last_updated_timestamp
-    #   Last updated timestamp of the group.
+    #   The time, in milliseconds since the epoch, when the group was last
+    #   updated.
     #   @return [String]
     #
     # @!attribute [rw] latest_version
-    #   Last version of the group.
+    #   The latest version of the group.
     #   @return [String]
     #
     # @!attribute [rw] latest_version_arn
-    #   Latest version arn of the group.
+    #   The ARN of the latest version of the group.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of a group.
+    #   The name of the group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupInformation AWS API Documentation
@@ -2942,11 +2993,15 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] auto_add_group_owner
-    #   Eanble the auto added group owner.
+    #   If true, GreenGrass automatically adds the specified Linux OS group
+    #   owner of the resource to the Lambda process privileges. Thus the
+    #   Lambda process will have the file access permissions of the added
+    #   Linux group.
     #   @return [Boolean]
     #
     # @!attribute [rw] group_owner
-    #   Name of the group owner.
+    #   The name of the Linux OS group whose privileges will be added to the
+    #   Lambda process. This field is optional.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupOwnerSetting AWS API Documentation
@@ -2957,7 +3012,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on group version
+    # Information about a group version.
     #
     # @note When making an API call, you may pass GroupVersion
     #   data as a hash:
@@ -2972,27 +3027,27 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] core_definition_version_arn
-    #   Core definition version arn for this group.
+    #   The ARN of the core definition version for this group.
     #   @return [String]
     #
     # @!attribute [rw] device_definition_version_arn
-    #   Device definition version arn for this group.
+    #   The ARN of the device definition version for this group.
     #   @return [String]
     #
     # @!attribute [rw] function_definition_version_arn
-    #   Function definition version arn for this group.
+    #   The ARN of the function definition version for this group.
     #   @return [String]
     #
     # @!attribute [rw] logger_definition_version_arn
-    #   Logger definition version arn for this group.
+    #   The ARN of the logger definition version for this group.
     #   @return [String]
     #
     # @!attribute [rw] resource_definition_version_arn
-    #   Resource definition version arn for this group.
+    #   The resource definition version ARN for this group.
     #   @return [String]
     #
     # @!attribute [rw] subscription_definition_version_arn
-    #   Subscription definition version arn for this group.
+    #   The ARN of the subscription definition version for this group.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupVersion AWS API Documentation
@@ -3084,10 +3139,10 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # List of definition responses
+    # A list of definitions.
     #
     # @!attribute [rw] definitions
-    #   Definitions
+    #   Information about a definition.
     #   @return [Array<Types::DefinitionInformation>]
     #
     # @!attribute [rw] next_token
@@ -3131,7 +3186,7 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] deployments
-    #   List of deployments for the requested groups
+    #   A list of deployments for the requested groups.
     #   @return [Array<Types::Deployment>]
     #
     # @!attribute [rw] next_token
@@ -3319,7 +3374,7 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] group_certificate_authorities
-    #   List of certificate authorities associated with the group.
+    #   A list of certificate authorities associated with the group.
     #   @return [Array<Types::GroupCertificateAuthorityProperties>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupCertificateAuthoritiesResponse AWS API Documentation
@@ -3393,7 +3448,7 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] groups
-    #   Groups
+    #   Information about a group.
     #   @return [Array<Types::GroupInformation>]
     #
     # @!attribute [rw] next_token
@@ -3640,7 +3695,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # List of versions response
+    # A list of versions.
     #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or ''null'' if there are
@@ -3648,7 +3703,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] versions
-    #   Versions
+    #   Information about a version.
     #   @return [Array<Types::VersionInformation>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListVersionsResponse AWS API Documentation
@@ -3659,7 +3714,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Attributes that define the Local Device Resource.
+    # Attributes that define a local device resource.
     #
     # @note When making an API call, you may pass LocalDeviceResourceData
     #   data as a hash:
@@ -3673,11 +3728,13 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] group_owner_setting
-    #   Group owner related settings for local resources.
+    #   Group/owner related settings for local resources.
     #   @return [Types::GroupOwnerSetting]
     #
     # @!attribute [rw] source_path
-    #   Local source path of the resource.
+    #   The local absolute path of the device resource. The source path for
+    #   a device resource can refer only to a character device or block
+    #   device under ''/dev''.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalDeviceResourceData AWS API Documentation
@@ -3688,7 +3745,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Attributes that define the Local Volume Resource.
+    # Attributes that define a local volume resource.
     #
     # @note When making an API call, you may pass LocalVolumeResourceData
     #   data as a hash:
@@ -3703,15 +3760,19 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] destination_path
-    #   Local destination path of the resource.
+    #   The absolute local path of the resource inside the lambda
+    #   environment.
     #   @return [String]
     #
     # @!attribute [rw] group_owner_setting
-    #   Group owner related settings for local resources.
+    #   Allows you to configure additional group privileges for the Lambda
+    #   process. This field is optional.
     #   @return [Types::GroupOwnerSetting]
     #
     # @!attribute [rw] source_path
-    #   Local source path of the resource.
+    #   The local absolute path of the volume resource on the host. The
+    #   source path for a volume resource type cannot start with
+    #   ''/proc'' or ''/sys''.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalVolumeResourceData AWS API Documentation
@@ -3723,7 +3784,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on the Logger
+    # Information about a logger
     #
     # @note When making an API call, you may pass Logger
     #   data as a hash:
@@ -3737,24 +3798,24 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] component
-    #   The component that will be subject to logs
+    #   The component that will be subject to logging.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Element Id for this entry in the list.
+    #   The id of the logger.
     #   @return [String]
     #
     # @!attribute [rw] level
-    #   The level of the logs
+    #   The level of the logs.
     #   @return [String]
     #
     # @!attribute [rw] space
-    #   Amount of hardware space, in KB, to use if file system is used for
-    #   logging purposes.
+    #   The amount of file space, in KB, to use if the local file system is
+    #   used for logging purposes.
     #   @return [Integer]
     #
     # @!attribute [rw] type
-    #   The type which will be use for log output
+    #   The type of log output which will be used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Logger AWS API Documentation
@@ -3768,7 +3829,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on logger definition version
+    # Information about a logger definition version.
     #
     # @note When making an API call, you may pass LoggerDefinitionVersion
     #   data as a hash:
@@ -3786,7 +3847,7 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] loggers
-    #   List of loggers.
+    #   A list of loggers.
     #   @return [Array<Types::Logger>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LoggerDefinitionVersion AWS API Documentation
@@ -3796,7 +3857,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information needed to perform a reset of a group's deployments.
+    # Information about a group reset request.
     #
     # @note When making an API call, you may pass ResetDeploymentsRequest
     #   data as a hash:
@@ -3811,7 +3872,7 @@ module Aws::Greengrass
     #   @return [String]
     #
     # @!attribute [rw] force
-    #   When set to true, perform a best-effort only core reset.
+    #   If true, performs a best-effort only core reset.
     #   @return [Boolean]
     #
     # @!attribute [rw] group_id
@@ -3827,11 +3888,11 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] deployment_arn
-    #   The arn of the reset deployment.
+    #   The ARN of the deployment.
     #   @return [String]
     #
     # @!attribute [rw] deployment_id
-    #   The id of the reset deployment.
+    #   The ID of the deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeploymentsResponse AWS API Documentation
@@ -3842,7 +3903,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on the resource.
+    # Information about a resource.
     #
     # @note When making an API call, you may pass Resource
     #   data as a hash:
@@ -3866,15 +3927,29 @@ module Aws::Greengrass
     #             },
     #             source_path: "__string",
     #           },
+    #           s3_machine_learning_model_resource_data: {
+    #             destination_path: "__string",
+    #             s3_uri: "__string",
+    #           },
+    #           sage_maker_machine_learning_model_resource_data: {
+    #             destination_path: "__string",
+    #             sage_maker_job_arn: "__string",
+    #           },
     #         },
     #       }
     #
     # @!attribute [rw] id
-    #   Resource Id.
+    #   The resource ID, used to refer to a resource in the Lambda function
+    #   configuration. Max length is 128 characters with pattern
+    #   ''\[a-zA-Z0-9:\_-\]+''. This must be unique within a Greengrass
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A descriptive resource name.
+    #   The descriptive resource name, which is displayed on the Greengrass
+    #   console. Max length 128 characters with pattern
+    #   ''\[a-zA-Z0-9:\_-\]+''. This must be unique within a Greengrass
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] resource_data_container
@@ -3890,7 +3965,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Policy for the function to access a resource.
+    # A policy used by the function to access a resource.
     #
     # @note When making an API call, you may pass ResourceAccessPolicy
     #   data as a hash:
@@ -3901,11 +3976,13 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] permission
-    #   The function's access permission to the resource.
+    #   The permissions that the Lambda function has to the resource. Can be
+    #   one of ''rw'' (read/write) or ''ro'' (read-only).
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Id of the resource. A reference to the resource definiton.
+    #   The ID of the resource. (This ID is assigned to the resource when
+    #   you create the resource definiton.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceAccessPolicy AWS API Documentation
@@ -3916,7 +3993,11 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # A container of data for all resource types.
+    # A container for resource data. The container takes only one of the
+    # following supported resource data types:
+    # ''LocalDeviceResourceData'', ''LocalVolumeResourceData'',
+    # ''SageMakerMachineLearningModelResourceData'',
+    # ''S3MachineLearningModelResourceData''.
     #
     # @note When making an API call, you may pass ResourceDataContainer
     #   data as a hash:
@@ -3937,25 +4018,43 @@ module Aws::Greengrass
     #           },
     #           source_path: "__string",
     #         },
+    #         s3_machine_learning_model_resource_data: {
+    #           destination_path: "__string",
+    #           s3_uri: "__string",
+    #         },
+    #         sage_maker_machine_learning_model_resource_data: {
+    #           destination_path: "__string",
+    #           sage_maker_job_arn: "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] local_device_resource_data
-    #   Attributes that define the Local Device Resource.
+    #   Attributes that define the local device resource.
     #   @return [Types::LocalDeviceResourceData]
     #
     # @!attribute [rw] local_volume_resource_data
-    #   Attributes that define the Local Volume Resource.
+    #   Attributes that define the local volume resource.
     #   @return [Types::LocalVolumeResourceData]
+    #
+    # @!attribute [rw] s3_machine_learning_model_resource_data
+    #   Attributes that define an S3 machine learning resource.
+    #   @return [Types::S3MachineLearningModelResourceData]
+    #
+    # @!attribute [rw] sage_maker_machine_learning_model_resource_data
+    #   Attributes that define an SageMaker machine learning resource.
+    #   @return [Types::SageMakerMachineLearningModelResourceData]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDataContainer AWS API Documentation
     #
     class ResourceDataContainer < Struct.new(
       :local_device_resource_data,
-      :local_volume_resource_data)
+      :local_volume_resource_data,
+      :s3_machine_learning_model_resource_data,
+      :sage_maker_machine_learning_model_resource_data)
       include Aws::Structure
     end
 
-    # Information on resource definition version
+    # Information about a resource definition version.
     #
     # @note When making an API call, you may pass ResourceDefinitionVersion
     #   data as a hash:
@@ -3981,13 +4080,21 @@ module Aws::Greengrass
     #                 },
     #                 source_path: "__string",
     #               },
+    #               s3_machine_learning_model_resource_data: {
+    #                 destination_path: "__string",
+    #                 s3_uri: "__string",
+    #               },
+    #               sage_maker_machine_learning_model_resource_data: {
+    #                 destination_path: "__string",
+    #                 sage_maker_job_arn: "__string",
+    #               },
     #             },
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] resources
-    #   List of resources.
+    #   A list of resources.
     #   @return [Array<Types::Resource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDefinitionVersion AWS API Documentation
@@ -3997,7 +4104,63 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on subscription
+    # Attributes that define an S3 machine learning resource.
+    #
+    # @note When making an API call, you may pass S3MachineLearningModelResourceData
+    #   data as a hash:
+    #
+    #       {
+    #         destination_path: "__string",
+    #         s3_uri: "__string",
+    #       }
+    #
+    # @!attribute [rw] destination_path
+    #   The absolute local path of the resource inside the Lambda
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_uri
+    #   The URI of the source model in an S3 bucket. The model package must
+    #   be in tar.gz or .zip format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/S3MachineLearningModelResourceData AWS API Documentation
+    #
+    class S3MachineLearningModelResourceData < Struct.new(
+      :destination_path,
+      :s3_uri)
+      include Aws::Structure
+    end
+
+    # Attributes that define an SageMaker machine learning resource.
+    #
+    # @note When making an API call, you may pass SageMakerMachineLearningModelResourceData
+    #   data as a hash:
+    #
+    #       {
+    #         destination_path: "__string",
+    #         sage_maker_job_arn: "__string",
+    #       }
+    #
+    # @!attribute [rw] destination_path
+    #   The absolute local path of the resource inside the Lambda
+    #   environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] sage_maker_job_arn
+    #   The ARN of the SageMaker training job that represents the source
+    #   model.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/SageMakerMachineLearningModelResourceData AWS API Documentation
+    #
+    class SageMakerMachineLearningModelResourceData < Struct.new(
+      :destination_path,
+      :sage_maker_job_arn)
+      include Aws::Structure
+    end
+
+    # Information about a subscription.
     #
     # @note When making an API call, you may pass Subscription
     #   data as a hash:
@@ -4010,21 +4173,23 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] id
-    #   Element Id for this entry in the list.
+    #   The id of the subscription.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   Source of the subscription. Can be a thing arn, lambda arn or word
-    #   'cloud'
+    #   The source of the subscription. Can be a thing ARN, a Lambda
+    #   function ARN, 'cloud' (which represents the IoT cloud), or
+    #   'GGShadowService'.
     #   @return [String]
     #
     # @!attribute [rw] subject
-    #   Subject of the message.
+    #   The subject of the message.
     #   @return [String]
     #
     # @!attribute [rw] target
-    #   Where the message is sent to. Can be a thing arn, lambda arn or word
-    #   'cloud'.
+    #   Where the message is sent to. Can be a thing ARN, a Lambda function
+    #   ARN, 'cloud' (which represents the IoT cloud), or
+    #   'GGShadowService'.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Subscription AWS API Documentation
@@ -4037,7 +4202,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on subscription definition version
+    # Information about a subscription definition version.
     #
     # @note When making an API call, you may pass SubscriptionDefinitionVersion
     #   data as a hash:
@@ -4054,7 +4219,7 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] subscriptions
-    #   Subscriptions in the version.
+    #   A list of subscriptions.
     #   @return [Array<Types::Subscription>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/SubscriptionDefinitionVersion AWS API Documentation
@@ -4064,7 +4229,7 @@ module Aws::Greengrass
       include Aws::Structure
     end
 
-    # Information on connectivity info
+    # Information required to update a Greengrass core's connectivity.
     #
     # @note When making an API call, you may pass UpdateConnectivityInfoRequest
     #   data as a hash:
@@ -4082,7 +4247,7 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] connectivity_info
-    #   Connectivity info list
+    #   A list of connectivity info.
     #   @return [Array<Types::ConnectivityInfo>]
     #
     # @!attribute [rw] thing_name
@@ -4097,11 +4262,11 @@ module Aws::Greengrass
     end
 
     # @!attribute [rw] message
-    #   Response Text
+    #   A message about the connectivity info update request.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   New Version
+    #   The new version of the connectivity info.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfoResponse AWS API Documentation
@@ -4199,7 +4364,8 @@ module Aws::Greengrass
     #       }
     #
     # @!attribute [rw] certificate_expiry_in_milliseconds
-    #   Amount of time when the certificate expires in milliseconds.
+    #   The amount of time remaining before the certificate expires, in
+    #   milliseconds.
     #   @return [String]
     #
     # @!attribute [rw] group_id
@@ -4335,22 +4501,23 @@ module Aws::Greengrass
     #
     class UpdateSubscriptionDefinitionResponse < Aws::EmptyStructure; end
 
-    # Information on the version
+    # Information about a version.
     #
     # @!attribute [rw] arn
-    #   Arn of the version.
+    #   The ARN of the version.
     #   @return [String]
     #
     # @!attribute [rw] creation_timestamp
-    #   Timestamp of when the version was created.
+    #   The time, in milliseconds since the epoch, when the version was
+    #   created.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   Id of the resource container.
+    #   The ID of the version.
     #   @return [String]
     #
     # @!attribute [rw] version
-    #   Unique Id of a version.
+    #   The unique ID of the version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/VersionInformation AWS API Documentation

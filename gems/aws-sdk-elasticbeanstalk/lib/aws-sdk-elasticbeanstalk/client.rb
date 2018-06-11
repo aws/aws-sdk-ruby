@@ -426,6 +426,7 @@ module Aws::ElasticBeanstalk
     #
     # @example Response structure
     #
+    #   resp.application.application_arn #=> String
     #   resp.application.application_name #=> String
     #   resp.application.description #=> String
     #   resp.application.date_created #=> Time
@@ -589,6 +590,7 @@ module Aws::ElasticBeanstalk
     #
     # @example Response structure
     #
+    #   resp.application_version.application_version_arn #=> String
     #   resp.application_version.application_name #=> String
     #   resp.application_version.description #=> String
     #   resp.application_version.version_label #=> String
@@ -1298,6 +1300,32 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
+    # Returns attributes related to AWS Elastic Beanstalk that are
+    # associated with the calling AWS account.
+    #
+    # The result currently has one set of attributes—resource quotas.
+    #
+    # @return [Types::DescribeAccountAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountAttributesResult#resource_quotas #resource_quotas} => Types::ResourceQuotas
+    #
+    # @example Response structure
+    #
+    #   resp.resource_quotas.application_quota.maximum #=> Integer
+    #   resp.resource_quotas.application_version_quota.maximum #=> Integer
+    #   resp.resource_quotas.environment_quota.maximum #=> Integer
+    #   resp.resource_quotas.configuration_template_quota.maximum #=> Integer
+    #   resp.resource_quotas.custom_platform_quota.maximum #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeAccountAttributes AWS API Documentation
+    #
+    # @overload describe_account_attributes(params = {})
+    # @param [Hash] params ({})
+    def describe_account_attributes(params = {}, options = {})
+      req = build_request(:describe_account_attributes, params)
+      req.send_request(options)
+    end
+
     # Retrieve a list of application versions.
     #
     # @option params [String] :application_name
@@ -1378,6 +1406,7 @@ module Aws::ElasticBeanstalk
     # @example Response structure
     #
     #   resp.application_versions #=> Array
+    #   resp.application_versions[0].application_version_arn #=> String
     #   resp.application_versions[0].application_name #=> String
     #   resp.application_versions[0].description #=> String
     #   resp.application_versions[0].version_label #=> String
@@ -1466,6 +1495,7 @@ module Aws::ElasticBeanstalk
     # @example Response structure
     #
     #   resp.applications #=> Array
+    #   resp.applications[0].application_arn #=> String
     #   resp.applications[0].application_name #=> String
     #   resp.applications[0].description #=> String
     #   resp.applications[0].date_created #=> Time
@@ -3226,6 +3256,7 @@ module Aws::ElasticBeanstalk
     #
     # @example Response structure
     #
+    #   resp.application.application_arn #=> String
     #   resp.application.application_name #=> String
     #   resp.application.description #=> String
     #   resp.application.date_created #=> Time
@@ -3368,6 +3399,7 @@ module Aws::ElasticBeanstalk
     #
     # @example Response structure
     #
+    #   resp.application_version.application_version_arn #=> String
     #   resp.application_version.application_name #=> String
     #   resp.application_version.description #=> String
     #   resp.application_version.version_label #=> String
@@ -3949,7 +3981,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

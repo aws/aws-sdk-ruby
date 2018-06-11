@@ -188,6 +188,9 @@ module Aws::MediaPackage
     #
     # @option params [required, String] :channel_id
     #
+    # @option params [Types::CmafPackageCreateOrUpdateParameters] :cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #
     # @option params [Types::DashPackage] :dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
     #
@@ -213,6 +216,7 @@ module Aws::MediaPackage
     #
     #   * {Types::CreateOriginEndpointResponse#arn #arn} => String
     #   * {Types::CreateOriginEndpointResponse#channel_id #channel_id} => String
+    #   * {Types::CreateOriginEndpointResponse#cmaf_package #cmaf_package} => Types::CmafPackage
     #   * {Types::CreateOriginEndpointResponse#dash_package #dash_package} => Types::DashPackage
     #   * {Types::CreateOriginEndpointResponse#description #description} => String
     #   * {Types::CreateOriginEndpointResponse#hls_package #hls_package} => Types::HlsPackage
@@ -228,6 +232,35 @@ module Aws::MediaPackage
     #
     #   resp = client.create_origin_endpoint({
     #     channel_id: "__string", # required
+    #     cmaf_package: {
+    #       encryption: {
+    #         key_rotation_interval_seconds: 1,
+    #         speke_key_provider: { # required
+    #           resource_id: "__string", # required
+    #           role_arn: "__string", # required
+    #           system_ids: ["__string"], # required
+    #           url: "__string", # required
+    #         },
+    #       },
+    #       hls_manifests: [
+    #         {
+    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           id: "__string", # required
+    #           include_iframe_only_stream: false,
+    #           manifest_name: "__string",
+    #           playlist_type: "NONE", # accepts NONE, EVENT, VOD
+    #           playlist_window_seconds: 1,
+    #           program_date_time_interval_seconds: 1,
+    #         },
+    #       ],
+    #       segment_duration_seconds: 1,
+    #       segment_prefix: "__string",
+    #       stream_selection: {
+    #         max_video_bits_per_second: 1,
+    #         min_video_bits_per_second: 1,
+    #         stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
+    #       },
+    #     },
     #     dash_package: {
     #       encryption: {
     #         key_rotation_interval_seconds: 1,
@@ -305,6 +338,26 @@ module Aws::MediaPackage
     #
     #   resp.arn #=> String
     #   resp.channel_id #=> String
+    #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.cmaf_package.encryption.speke_key_provider.resource_id #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
+    #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.url #=> String
+    #   resp.cmaf_package.hls_manifests #=> Array
+    #   resp.cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.cmaf_package.hls_manifests[0].id #=> String
+    #   resp.cmaf_package.hls_manifests[0].include_iframe_only_stream #=> Boolean
+    #   resp.cmaf_package.hls_manifests[0].manifest_name #=> String
+    #   resp.cmaf_package.hls_manifests[0].playlist_type #=> String, one of "NONE", "EVENT", "VOD"
+    #   resp.cmaf_package.hls_manifests[0].playlist_window_seconds #=> Integer
+    #   resp.cmaf_package.hls_manifests[0].program_date_time_interval_seconds #=> Integer
+    #   resp.cmaf_package.hls_manifests[0].url #=> String
+    #   resp.cmaf_package.segment_duration_seconds #=> Integer
+    #   resp.cmaf_package.segment_prefix #=> String
+    #   resp.cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
+    #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
+    #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.dash_package.encryption.speke_key_provider.role_arn #=> String
@@ -453,6 +506,7 @@ module Aws::MediaPackage
     #
     #   * {Types::DescribeOriginEndpointResponse#arn #arn} => String
     #   * {Types::DescribeOriginEndpointResponse#channel_id #channel_id} => String
+    #   * {Types::DescribeOriginEndpointResponse#cmaf_package #cmaf_package} => Types::CmafPackage
     #   * {Types::DescribeOriginEndpointResponse#dash_package #dash_package} => Types::DashPackage
     #   * {Types::DescribeOriginEndpointResponse#description #description} => String
     #   * {Types::DescribeOriginEndpointResponse#hls_package #hls_package} => Types::HlsPackage
@@ -474,6 +528,26 @@ module Aws::MediaPackage
     #
     #   resp.arn #=> String
     #   resp.channel_id #=> String
+    #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.cmaf_package.encryption.speke_key_provider.resource_id #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
+    #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.url #=> String
+    #   resp.cmaf_package.hls_manifests #=> Array
+    #   resp.cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.cmaf_package.hls_manifests[0].id #=> String
+    #   resp.cmaf_package.hls_manifests[0].include_iframe_only_stream #=> Boolean
+    #   resp.cmaf_package.hls_manifests[0].manifest_name #=> String
+    #   resp.cmaf_package.hls_manifests[0].playlist_type #=> String, one of "NONE", "EVENT", "VOD"
+    #   resp.cmaf_package.hls_manifests[0].playlist_window_seconds #=> Integer
+    #   resp.cmaf_package.hls_manifests[0].program_date_time_interval_seconds #=> Integer
+    #   resp.cmaf_package.hls_manifests[0].url #=> String
+    #   resp.cmaf_package.segment_duration_seconds #=> Integer
+    #   resp.cmaf_package.segment_prefix #=> String
+    #   resp.cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
+    #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
+    #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.dash_package.encryption.speke_key_provider.role_arn #=> String
@@ -602,6 +676,26 @@ module Aws::MediaPackage
     #   resp.origin_endpoints #=> Array
     #   resp.origin_endpoints[0].arn #=> String
     #   resp.origin_endpoints[0].channel_id #=> String
+    #   resp.origin_endpoints[0].cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.resource_id #=> String
+    #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.role_arn #=> String
+    #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.system_ids #=> Array
+    #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
+    #   resp.origin_endpoints[0].cmaf_package.encryption.speke_key_provider.url #=> String
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests #=> Array
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].id #=> String
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].include_iframe_only_stream #=> Boolean
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].manifest_name #=> String
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].playlist_type #=> String, one of "NONE", "EVENT", "VOD"
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].playlist_window_seconds #=> Integer
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].program_date_time_interval_seconds #=> Integer
+    #   resp.origin_endpoints[0].cmaf_package.hls_manifests[0].url #=> String
+    #   resp.origin_endpoints[0].cmaf_package.segment_duration_seconds #=> Integer
+    #   resp.origin_endpoints[0].cmaf_package.segment_prefix #=> String
+    #   resp.origin_endpoints[0].cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
+    #   resp.origin_endpoints[0].cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
+    #   resp.origin_endpoints[0].cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.origin_endpoints[0].dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.origin_endpoints[0].dash_package.encryption.speke_key_provider.role_arn #=> String
@@ -741,6 +835,9 @@ module Aws::MediaPackage
 
     # Updates an existing OriginEndpoint.
     #
+    # @option params [Types::CmafPackageCreateOrUpdateParameters] :cmaf_package
+    #   A Common Media Application Format (CMAF) packaging configuration.
+    #
     # @option params [Types::DashPackage] :dash_package
     #   A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
     #
@@ -766,6 +863,7 @@ module Aws::MediaPackage
     #
     #   * {Types::UpdateOriginEndpointResponse#arn #arn} => String
     #   * {Types::UpdateOriginEndpointResponse#channel_id #channel_id} => String
+    #   * {Types::UpdateOriginEndpointResponse#cmaf_package #cmaf_package} => Types::CmafPackage
     #   * {Types::UpdateOriginEndpointResponse#dash_package #dash_package} => Types::DashPackage
     #   * {Types::UpdateOriginEndpointResponse#description #description} => String
     #   * {Types::UpdateOriginEndpointResponse#hls_package #hls_package} => Types::HlsPackage
@@ -780,6 +878,35 @@ module Aws::MediaPackage
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_origin_endpoint({
+    #     cmaf_package: {
+    #       encryption: {
+    #         key_rotation_interval_seconds: 1,
+    #         speke_key_provider: { # required
+    #           resource_id: "__string", # required
+    #           role_arn: "__string", # required
+    #           system_ids: ["__string"], # required
+    #           url: "__string", # required
+    #         },
+    #       },
+    #       hls_manifests: [
+    #         {
+    #           ad_markers: "NONE", # accepts NONE, SCTE35_ENHANCED, PASSTHROUGH
+    #           id: "__string", # required
+    #           include_iframe_only_stream: false,
+    #           manifest_name: "__string",
+    #           playlist_type: "NONE", # accepts NONE, EVENT, VOD
+    #           playlist_window_seconds: 1,
+    #           program_date_time_interval_seconds: 1,
+    #         },
+    #       ],
+    #       segment_duration_seconds: 1,
+    #       segment_prefix: "__string",
+    #       stream_selection: {
+    #         max_video_bits_per_second: 1,
+    #         min_video_bits_per_second: 1,
+    #         stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
+    #       },
+    #     },
     #     dash_package: {
     #       encryption: {
     #         key_rotation_interval_seconds: 1,
@@ -857,6 +984,26 @@ module Aws::MediaPackage
     #
     #   resp.arn #=> String
     #   resp.channel_id #=> String
+    #   resp.cmaf_package.encryption.key_rotation_interval_seconds #=> Integer
+    #   resp.cmaf_package.encryption.speke_key_provider.resource_id #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.role_arn #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.system_ids #=> Array
+    #   resp.cmaf_package.encryption.speke_key_provider.system_ids[0] #=> String
+    #   resp.cmaf_package.encryption.speke_key_provider.url #=> String
+    #   resp.cmaf_package.hls_manifests #=> Array
+    #   resp.cmaf_package.hls_manifests[0].ad_markers #=> String, one of "NONE", "SCTE35_ENHANCED", "PASSTHROUGH"
+    #   resp.cmaf_package.hls_manifests[0].id #=> String
+    #   resp.cmaf_package.hls_manifests[0].include_iframe_only_stream #=> Boolean
+    #   resp.cmaf_package.hls_manifests[0].manifest_name #=> String
+    #   resp.cmaf_package.hls_manifests[0].playlist_type #=> String, one of "NONE", "EVENT", "VOD"
+    #   resp.cmaf_package.hls_manifests[0].playlist_window_seconds #=> Integer
+    #   resp.cmaf_package.hls_manifests[0].program_date_time_interval_seconds #=> Integer
+    #   resp.cmaf_package.hls_manifests[0].url #=> String
+    #   resp.cmaf_package.segment_duration_seconds #=> Integer
+    #   resp.cmaf_package.segment_prefix #=> String
+    #   resp.cmaf_package.stream_selection.max_video_bits_per_second #=> Integer
+    #   resp.cmaf_package.stream_selection.min_video_bits_per_second #=> Integer
+    #   resp.cmaf_package.stream_selection.stream_order #=> String, one of "ORIGINAL", "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING"
     #   resp.dash_package.encryption.key_rotation_interval_seconds #=> Integer
     #   resp.dash_package.encryption.speke_key_provider.resource_id #=> String
     #   resp.dash_package.encryption.speke_key_provider.role_arn #=> String
@@ -932,7 +1079,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

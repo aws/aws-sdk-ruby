@@ -36,6 +36,10 @@ module Aws::ElasticBeanstalk
 
     # Describes the properties of an application.
     #
+    # @!attribute [rw] application_arn
+    #   The Amazon Resource Name (ARN) of the application.
+    #   @return [String]
+    #
     # @!attribute [rw] application_name
     #   The name of the application.
     #   @return [String]
@@ -68,6 +72,7 @@ module Aws::ElasticBeanstalk
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescription AWS API Documentation
     #
     class ApplicationDescription < Struct.new(
+      :application_arn,
       :application_name,
       :description,
       :date_created,
@@ -198,6 +203,10 @@ module Aws::ElasticBeanstalk
 
     # Describes the properties of an application version.
     #
+    # @!attribute [rw] application_version_arn
+    #   The Amazon Resource Name (ARN) of the application version.
+    #   @return [String]
+    #
     # @!attribute [rw] application_name
     #   The name of the application to which the application version
     #   belongs.
@@ -240,6 +249,7 @@ module Aws::ElasticBeanstalk
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescription AWS API Documentation
     #
     class ApplicationVersionDescription < Struct.new(
+      :application_version_arn,
       :application_name,
       :description,
       :version_label,
@@ -1592,6 +1602,18 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_quotas
+    #   The Elastic Beanstalk resource quotas associated with the calling
+    #   AWS account.
+    #   @return [Types::ResourceQuotas]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeAccountAttributesResult AWS API Documentation
+    #
+    class DescribeAccountAttributesResult < Struct.new(
+      :resource_quotas)
+      include Aws::Structure
+    end
+
     # Request to describe application versions.
     #
     # @note When making an API call, you may pass DescribeApplicationVersionsMessage
@@ -2399,7 +2421,7 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] environment_arn
     #   The environment's Amazon Resource Name (ARN), which can be used in
-    #   other API reuqests that require an ARN.
+    #   other API requests that require an ARN.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription AWS API Documentation
@@ -3498,6 +3520,57 @@ module Aws::ElasticBeanstalk
       :environment_id,
       :environment_name,
       :info_type)
+      include Aws::Structure
+    end
+
+    # The AWS Elastic Beanstalk quota information for a single resource type
+    # in an AWS account. It reflects the resource's limits for this
+    # account.
+    #
+    # @!attribute [rw] maximum
+    #   The maximum number of instances of this Elastic Beanstalk resource
+    #   type that an AWS account can use.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuota AWS API Documentation
+    #
+    class ResourceQuota < Struct.new(
+      :maximum)
+      include Aws::Structure
+    end
+
+    # A set of per-resource AWS Elastic Beanstalk quotas associated with an
+    # AWS account. They reflect Elastic Beanstalk resource limits for this
+    # account.
+    #
+    # @!attribute [rw] application_quota
+    #   The quota for applications in the AWS account.
+    #   @return [Types::ResourceQuota]
+    #
+    # @!attribute [rw] application_version_quota
+    #   The quota for application versions in the AWS account.
+    #   @return [Types::ResourceQuota]
+    #
+    # @!attribute [rw] environment_quota
+    #   The quota for environments in the AWS account.
+    #   @return [Types::ResourceQuota]
+    #
+    # @!attribute [rw] configuration_template_quota
+    #   The quota for configuration templates in the AWS account.
+    #   @return [Types::ResourceQuota]
+    #
+    # @!attribute [rw] custom_platform_quota
+    #   The quota for custom platforms in the AWS account.
+    #   @return [Types::ResourceQuota]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuotas AWS API Documentation
+    #
+    class ResourceQuotas < Struct.new(
+      :application_quota,
+      :application_version_quota,
+      :environment_quota,
+      :configuration_template_quota,
+      :custom_platform_quota)
       include Aws::Structure
     end
 

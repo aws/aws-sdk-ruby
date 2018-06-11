@@ -290,6 +290,11 @@ module Aws::Pinpoint
     #       ],
     #       description: "__string",
     #       holdout_percent: 1,
+    #       hook: {
+    #         lambda_function_name: "__string",
+    #         mode: "DELIVERY", # accepts DELIVERY, FILTER
+    #         web_url: "__string",
+    #       },
     #       is_paused: false,
     #       limits: {
     #         daily: 1,
@@ -476,6 +481,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
+    #   resp.campaign_response.hook.lambda_function_name #=> String
+    #   resp.campaign_response.hook.mode #=> String, one of "DELIVERY", "FILTER"
+    #   resp.campaign_response.hook.web_url #=> String
     #   resp.campaign_response.id #=> String
     #   resp.campaign_response.is_paused #=> Boolean
     #   resp.campaign_response.last_modified_date #=> String
@@ -566,6 +574,55 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def create_campaign(params = {}, options = {})
       req = build_request(:create_campaign, params)
+      req.send_request(options)
+    end
+
+    # Creates an export job.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, Types::ExportJobRequest] :export_job_request
+    #
+    # @return [Types::CreateExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExportJobResponse#export_job_response #export_job_response} => Types::ExportJobResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_export_job({
+    #     application_id: "__string", # required
+    #     export_job_request: { # required
+    #       role_arn: "__string",
+    #       s3_url_prefix: "__string",
+    #       segment_id: "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_job_response.application_id #=> String
+    #   resp.export_job_response.completed_pieces #=> Integer
+    #   resp.export_job_response.completion_date #=> String
+    #   resp.export_job_response.creation_date #=> String
+    #   resp.export_job_response.definition.role_arn #=> String
+    #   resp.export_job_response.definition.s3_url_prefix #=> String
+    #   resp.export_job_response.definition.segment_id #=> String
+    #   resp.export_job_response.failed_pieces #=> Integer
+    #   resp.export_job_response.failures #=> Array
+    #   resp.export_job_response.failures[0] #=> String
+    #   resp.export_job_response.id #=> String
+    #   resp.export_job_response.job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.export_job_response.total_failures #=> Integer
+    #   resp.export_job_response.total_pieces #=> Integer
+    #   resp.export_job_response.total_processed #=> Integer
+    #   resp.export_job_response.type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateExportJob AWS API Documentation
+    #
+    # @overload create_export_job(params = {})
+    # @param [Hash] params ({})
+    def create_export_job(params = {}, options = {})
+      req = build_request(:create_export_job, params)
       req.send_request(options)
     end
 
@@ -869,7 +926,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an APNS VOIP channel
+    # Delete an APNS VoIP channel
     #
     # @option params [required, String] :application_id
     #
@@ -907,7 +964,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Delete an APNS VOIP sandbox channel
+    # Delete an APNS VoIP sandbox channel
     #
     # @option params [required, String] :application_id
     #
@@ -1109,6 +1166,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
+    #   resp.campaign_response.hook.lambda_function_name #=> String
+    #   resp.campaign_response.hook.mode #=> String, one of "DELIVERY", "FILTER"
+    #   resp.campaign_response.hook.web_url #=> String
     #   resp.campaign_response.id #=> String
     #   resp.campaign_response.is_paused #=> Boolean
     #   resp.campaign_response.last_modified_date #=> String
@@ -1238,6 +1298,68 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def delete_email_channel(params = {}, options = {})
       req = build_request(:delete_email_channel, params)
+      req.send_request(options)
+    end
+
+    # Deletes an endpoint.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :endpoint_id
+    #
+    # @return [Types::DeleteEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteEndpointResponse#endpoint_response #endpoint_response} => Types::EndpointResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_endpoint({
+    #     application_id: "__string", # required
+    #     endpoint_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoint_response.address #=> String
+    #   resp.endpoint_response.application_id #=> String
+    #   resp.endpoint_response.attributes #=> Hash
+    #   resp.endpoint_response.attributes["__string"] #=> Array
+    #   resp.endpoint_response.attributes["__string"][0] #=> String
+    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM"
+    #   resp.endpoint_response.cohort_id #=> String
+    #   resp.endpoint_response.creation_date #=> String
+    #   resp.endpoint_response.demographic.app_version #=> String
+    #   resp.endpoint_response.demographic.locale #=> String
+    #   resp.endpoint_response.demographic.make #=> String
+    #   resp.endpoint_response.demographic.model #=> String
+    #   resp.endpoint_response.demographic.model_version #=> String
+    #   resp.endpoint_response.demographic.platform #=> String
+    #   resp.endpoint_response.demographic.platform_version #=> String
+    #   resp.endpoint_response.demographic.timezone #=> String
+    #   resp.endpoint_response.effective_date #=> String
+    #   resp.endpoint_response.endpoint_status #=> String
+    #   resp.endpoint_response.id #=> String
+    #   resp.endpoint_response.location.city #=> String
+    #   resp.endpoint_response.location.country #=> String
+    #   resp.endpoint_response.location.latitude #=> Float
+    #   resp.endpoint_response.location.longitude #=> Float
+    #   resp.endpoint_response.location.postal_code #=> String
+    #   resp.endpoint_response.location.region #=> String
+    #   resp.endpoint_response.metrics #=> Hash
+    #   resp.endpoint_response.metrics["__string"] #=> Float
+    #   resp.endpoint_response.opt_out #=> String
+    #   resp.endpoint_response.request_id #=> String
+    #   resp.endpoint_response.user.user_attributes #=> Hash
+    #   resp.endpoint_response.user.user_attributes["__string"] #=> Array
+    #   resp.endpoint_response.user.user_attributes["__string"][0] #=> String
+    #   resp.endpoint_response.user.user_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEndpoint AWS API Documentation
+    #
+    # @overload delete_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_endpoint(params = {}, options = {})
+      req = build_request(:delete_endpoint, params)
       req.send_request(options)
     end
 
@@ -1535,7 +1657,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an APNS Voip channel
+    # Get an APNS VoIP channel
     #
     # @option params [required, String] :application_id
     #
@@ -1573,7 +1695,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Get an APNS VoipSandbox channel
+    # Get an APNS VoIPSandbox channel
     #
     # @option params [required, String] :application_id
     #
@@ -1656,6 +1778,9 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.application_settings_resource.application_id #=> String
+    #   resp.application_settings_resource.campaign_hook.lambda_function_name #=> String
+    #   resp.application_settings_resource.campaign_hook.mode #=> String, one of "DELIVERY", "FILTER"
+    #   resp.application_settings_resource.campaign_hook.web_url #=> String
     #   resp.application_settings_resource.last_modified_date #=> String
     #   resp.application_settings_resource.limits.daily #=> Integer
     #   resp.application_settings_resource.limits.maximum_duration #=> Integer
@@ -1842,6 +1967,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
+    #   resp.campaign_response.hook.lambda_function_name #=> String
+    #   resp.campaign_response.hook.mode #=> String, one of "DELIVERY", "FILTER"
+    #   resp.campaign_response.hook.web_url #=> String
     #   resp.campaign_response.id #=> String
     #   resp.campaign_response.is_paused #=> Boolean
     #   resp.campaign_response.last_modified_date #=> String
@@ -2086,6 +2214,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
+    #   resp.campaign_response.hook.lambda_function_name #=> String
+    #   resp.campaign_response.hook.mode #=> String, one of "DELIVERY", "FILTER"
+    #   resp.campaign_response.hook.web_url #=> String
     #   resp.campaign_response.id #=> String
     #   resp.campaign_response.is_paused #=> Boolean
     #   resp.campaign_response.last_modified_date #=> String
@@ -2285,6 +2416,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
+    #   resp.campaigns_response.item[0].hook.lambda_function_name #=> String
+    #   resp.campaigns_response.item[0].hook.mode #=> String, one of "DELIVERY", "FILTER"
+    #   resp.campaigns_response.item[0].hook.web_url #=> String
     #   resp.campaigns_response.item[0].id #=> String
     #   resp.campaigns_response.item[0].is_paused #=> Boolean
     #   resp.campaigns_response.item[0].last_modified_date #=> String
@@ -2482,6 +2616,9 @@ module Aws::Pinpoint
     #   resp.campaigns_response.item[0].default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
     #   resp.campaigns_response.item[0].description #=> String
     #   resp.campaigns_response.item[0].holdout_percent #=> Integer
+    #   resp.campaigns_response.item[0].hook.lambda_function_name #=> String
+    #   resp.campaigns_response.item[0].hook.mode #=> String, one of "DELIVERY", "FILTER"
+    #   resp.campaigns_response.item[0].hook.web_url #=> String
     #   resp.campaigns_response.item[0].id #=> String
     #   resp.campaigns_response.item[0].is_paused #=> Boolean
     #   resp.campaigns_response.item[0].last_modified_date #=> String
@@ -2639,7 +2776,7 @@ module Aws::Pinpoint
     #   resp.endpoint_response.attributes #=> Hash
     #   resp.endpoint_response.attributes["__string"] #=> Array
     #   resp.endpoint_response.attributes["__string"][0] #=> String
-    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU"
+    #   resp.endpoint_response.channel_type #=> String, one of "GCM", "APNS", "APNS_SANDBOX", "APNS_VOIP", "APNS_VOIP_SANDBOX", "ADM", "SMS", "EMAIL", "BAIDU", "CUSTOM"
     #   resp.endpoint_response.cohort_id #=> String
     #   resp.endpoint_response.creation_date #=> String
     #   resp.endpoint_response.demographic.app_version #=> String
@@ -2707,6 +2844,101 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_event_stream(params = {}, options = {})
       req = build_request(:get_event_stream, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an export job.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, String] :job_id
+    #
+    # @return [Types::GetExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExportJobResponse#export_job_response #export_job_response} => Types::ExportJobResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_export_job({
+    #     application_id: "__string", # required
+    #     job_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_job_response.application_id #=> String
+    #   resp.export_job_response.completed_pieces #=> Integer
+    #   resp.export_job_response.completion_date #=> String
+    #   resp.export_job_response.creation_date #=> String
+    #   resp.export_job_response.definition.role_arn #=> String
+    #   resp.export_job_response.definition.s3_url_prefix #=> String
+    #   resp.export_job_response.definition.segment_id #=> String
+    #   resp.export_job_response.failed_pieces #=> Integer
+    #   resp.export_job_response.failures #=> Array
+    #   resp.export_job_response.failures[0] #=> String
+    #   resp.export_job_response.id #=> String
+    #   resp.export_job_response.job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.export_job_response.total_failures #=> Integer
+    #   resp.export_job_response.total_pieces #=> Integer
+    #   resp.export_job_response.total_processed #=> Integer
+    #   resp.export_job_response.type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetExportJob AWS API Documentation
+    #
+    # @overload get_export_job(params = {})
+    # @param [Hash] params ({})
+    def get_export_job(params = {}, options = {})
+      req = build_request(:get_export_job, params)
+      req.send_request(options)
+    end
+
+    # Returns information about your export jobs.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [String] :token
+    #
+    # @return [Types::GetExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExportJobsResponse#export_jobs_response #export_jobs_response} => Types::ExportJobsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_export_jobs({
+    #     application_id: "__string", # required
+    #     page_size: "__string",
+    #     token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_jobs_response.item #=> Array
+    #   resp.export_jobs_response.item[0].application_id #=> String
+    #   resp.export_jobs_response.item[0].completed_pieces #=> Integer
+    #   resp.export_jobs_response.item[0].completion_date #=> String
+    #   resp.export_jobs_response.item[0].creation_date #=> String
+    #   resp.export_jobs_response.item[0].definition.role_arn #=> String
+    #   resp.export_jobs_response.item[0].definition.s3_url_prefix #=> String
+    #   resp.export_jobs_response.item[0].definition.segment_id #=> String
+    #   resp.export_jobs_response.item[0].failed_pieces #=> Integer
+    #   resp.export_jobs_response.item[0].failures #=> Array
+    #   resp.export_jobs_response.item[0].failures[0] #=> String
+    #   resp.export_jobs_response.item[0].id #=> String
+    #   resp.export_jobs_response.item[0].job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.export_jobs_response.item[0].total_failures #=> Integer
+    #   resp.export_jobs_response.item[0].total_pieces #=> Integer
+    #   resp.export_jobs_response.item[0].total_processed #=> Integer
+    #   resp.export_jobs_response.item[0].type #=> String
+    #   resp.export_jobs_response.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetExportJobs AWS API Documentation
+    #
+    # @overload get_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def get_export_jobs(params = {}, options = {})
+      req = build_request(:get_export_jobs, params)
       req.send_request(options)
     end
 
@@ -2923,6 +3155,59 @@ module Aws::Pinpoint
     # @param [Hash] params ({})
     def get_segment(params = {}, options = {})
       req = build_request(:get_segment, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of export jobs for a specific segment.
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [String] :page_size
+    #
+    # @option params [required, String] :segment_id
+    #
+    # @option params [String] :token
+    #
+    # @return [Types::GetSegmentExportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSegmentExportJobsResponse#export_jobs_response #export_jobs_response} => Types::ExportJobsResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_segment_export_jobs({
+    #     application_id: "__string", # required
+    #     page_size: "__string",
+    #     segment_id: "__string", # required
+    #     token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_jobs_response.item #=> Array
+    #   resp.export_jobs_response.item[0].application_id #=> String
+    #   resp.export_jobs_response.item[0].completed_pieces #=> Integer
+    #   resp.export_jobs_response.item[0].completion_date #=> String
+    #   resp.export_jobs_response.item[0].creation_date #=> String
+    #   resp.export_jobs_response.item[0].definition.role_arn #=> String
+    #   resp.export_jobs_response.item[0].definition.s3_url_prefix #=> String
+    #   resp.export_jobs_response.item[0].definition.segment_id #=> String
+    #   resp.export_jobs_response.item[0].failed_pieces #=> Integer
+    #   resp.export_jobs_response.item[0].failures #=> Array
+    #   resp.export_jobs_response.item[0].failures[0] #=> String
+    #   resp.export_jobs_response.item[0].id #=> String
+    #   resp.export_jobs_response.item[0].job_status #=> String, one of "CREATED", "INITIALIZING", "PROCESSING", "COMPLETING", "COMPLETED", "FAILING", "FAILED"
+    #   resp.export_jobs_response.item[0].total_failures #=> Integer
+    #   resp.export_jobs_response.item[0].total_pieces #=> Integer
+    #   resp.export_jobs_response.item[0].total_processed #=> Integer
+    #   resp.export_jobs_response.item[0].type #=> String
+    #   resp.export_jobs_response.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentExportJobs AWS API Documentation
+    #
+    # @overload get_segment_export_jobs(params = {})
+    # @param [Hash] params ({})
+    def get_segment_export_jobs(params = {}, options = {})
+      req = build_request(:get_segment_export_jobs, params)
       req.send_request(options)
     end
 
@@ -3319,7 +3604,7 @@ module Aws::Pinpoint
     #       addresses: {
     #         "__string" => {
     #           body_override: "__string",
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
     #           context: {
     #             "__string" => "__string",
     #           },
@@ -3456,6 +3741,7 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
     #           substitutions: {
     #             "__string" => ["__string"],
@@ -3619,6 +3905,7 @@ module Aws::Pinpoint
     #         sms_message: {
     #           body: "__string",
     #           message_type: "TRANSACTIONAL", # accepts TRANSACTIONAL, PROMOTIONAL
+    #           origination_number: "__string",
     #           sender_id: "__string",
     #           substitutions: {
     #             "__string" => ["__string"],
@@ -3808,10 +4095,10 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an APNS VOIP channel
+    # Update an APNS VoIP channel
     #
     # @option params [required, Types::APNSVoipChannelRequest] :apns_voip_channel_request
-    #   Apple VOIP Push Notification Service channel definition.
+    #   Apple VoIP Push Notification Service channel definition.
     #
     # @option params [required, String] :application_id
     #
@@ -3859,10 +4146,10 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Update an APNS VOIP sandbox channel
+    # Update an APNS VoIP sandbox channel
     #
     # @option params [required, Types::APNSVoipSandboxChannelRequest] :apns_voip_sandbox_channel_request
-    #   Apple VOIP Developer Push Notification Service channel definition.
+    #   Apple VoIP Developer Push Notification Service channel definition.
     #
     # @option params [required, String] :application_id
     #
@@ -3926,6 +4213,11 @@ module Aws::Pinpoint
     #   resp = client.update_application_settings({
     #     application_id: "__string", # required
     #     write_application_settings_request: { # required
+    #       campaign_hook: {
+    #         lambda_function_name: "__string",
+    #         mode: "DELIVERY", # accepts DELIVERY, FILTER
+    #         web_url: "__string",
+    #       },
     #       limits: {
     #         daily: 1,
     #         maximum_duration: 1,
@@ -3942,6 +4234,9 @@ module Aws::Pinpoint
     # @example Response structure
     #
     #   resp.application_settings_resource.application_id #=> String
+    #   resp.application_settings_resource.campaign_hook.lambda_function_name #=> String
+    #   resp.application_settings_resource.campaign_hook.mode #=> String, one of "DELIVERY", "FILTER"
+    #   resp.application_settings_resource.campaign_hook.web_url #=> String
     #   resp.application_settings_resource.last_modified_date #=> String
     #   resp.application_settings_resource.limits.daily #=> Integer
     #   resp.application_settings_resource.limits.maximum_duration #=> Integer
@@ -4121,6 +4416,11 @@ module Aws::Pinpoint
     #       ],
     #       description: "__string",
     #       holdout_percent: 1,
+    #       hook: {
+    #         lambda_function_name: "__string",
+    #         mode: "DELIVERY", # accepts DELIVERY, FILTER
+    #         web_url: "__string",
+    #       },
     #       is_paused: false,
     #       limits: {
     #         daily: 1,
@@ -4307,6 +4607,9 @@ module Aws::Pinpoint
     #   resp.campaign_response.default_state.campaign_status #=> String, one of "SCHEDULED", "EXECUTING", "PENDING_NEXT_RUN", "COMPLETED", "PAUSED"
     #   resp.campaign_response.description #=> String
     #   resp.campaign_response.holdout_percent #=> Integer
+    #   resp.campaign_response.hook.lambda_function_name #=> String
+    #   resp.campaign_response.hook.mode #=> String, one of "DELIVERY", "FILTER"
+    #   resp.campaign_response.hook.web_url #=> String
     #   resp.campaign_response.id #=> String
     #   resp.campaign_response.is_paused #=> Boolean
     #   resp.campaign_response.last_modified_date #=> String
@@ -4471,7 +4774,7 @@ module Aws::Pinpoint
     #       attributes: {
     #         "__string" => ["__string"],
     #       },
-    #       channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #       channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
     #       demographic: {
     #         app_version: "__string",
     #         locale: "__string",
@@ -4542,7 +4845,7 @@ module Aws::Pinpoint
     #           attributes: {
     #             "__string" => ["__string"],
     #           },
-    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU
+    #           channel_type: "GCM", # accepts GCM, APNS, APNS_SANDBOX, APNS_VOIP, APNS_VOIP_SANDBOX, ADM, SMS, EMAIL, BAIDU, CUSTOM
     #           demographic: {
     #             app_version: "__string",
     #             locale: "__string",
@@ -4829,7 +5132,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

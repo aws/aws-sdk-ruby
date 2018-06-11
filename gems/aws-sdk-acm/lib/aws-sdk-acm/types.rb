@@ -22,7 +22,7 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   String that contains the ARN of the ACM Certificate to which the tag
+    #   String that contains the ARN of the ACM certificate to which the tag
     #   is to be applied. This must be of the form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -193,6 +193,27 @@ module Aws::ACM
     #   can be used and consists of a name and an object identifier (OID).
     #   @return [Array<Types::ExtendedKeyUsage>]
     #
+    # @!attribute [rw] certificate_authority_arn
+    #   The Amazon Resource Name (ARN) of the ACM PCA private certificate
+    #   authority (CA) that issued the certificate. This has the following
+    #   format:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
+    #   @return [String]
+    #
+    # @!attribute [rw] renewal_eligibility
+    #   Specifies whether the certificate is eligible for renewal.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   Value that specifies whether to add the certificate to a
+    #   transparency log. Certificate transparency makes it possible to
+    #   detect SSL certificates that have been mistakenly or maliciously
+    #   issued. A browser might respond to certificate that has not been
+    #   logged by showing an error message. The logs are cryptographically
+    #   secure.
+    #   @return [Types::CertificateOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateDetail AWS API Documentation
     #
     class CertificateDetail < Struct.new(
@@ -218,7 +239,42 @@ module Aws::ACM
       :type,
       :renewal_summary,
       :key_usages,
-      :extended_key_usages)
+      :extended_key_usages,
+      :certificate_authority_arn,
+      :renewal_eligibility,
+      :options)
+      include Aws::Structure
+    end
+
+    # Structure that contains options for your certificate. Currently, you
+    # can use this only to specify whether to opt in to or out of
+    # certificate transparency logging. Some browsers require that public
+    # certificates issued for your domain be recorded in a log. Certificates
+    # that are not logged typically generate a browser error. Transparency
+    # makes it possible for you to detect SSL/TLS certificates that have
+    # been mistakenly or maliciously issued for your domain. For general
+    # information, see [Certificate Transparency Logging][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency
+    #
+    # @note When making an API call, you may pass CertificateOptions
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] certificate_transparency_logging_preference
+    #   You can opt out of certificate transparency logging by specifying
+    #   the `DISABLED` option. Opt in by specifying `ENABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateOptions AWS API Documentation
+    #
+    class CertificateOptions < Struct.new(
+      :certificate_transparency_logging_preference)
       include Aws::Structure
     end
 
@@ -259,7 +315,7 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   String that contains the ARN of the ACM Certificate to be deleted.
+    #   String that contains the ARN of the ACM certificate to be deleted.
     #   This must be of the form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -287,7 +343,7 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   The Amazon Resource Name (ARN) of the ACM Certificate. The ARN must
+    #   The Amazon Resource Name (ARN) of the ACM certificate. The ARN must
     #   have the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -415,6 +471,61 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExportCertificateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "Arn", # required
+    #         passphrase: "data", # required
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   An Amazon Resource Name (ARN) of the issued certificate. This must
+    #   be of the form:
+    #
+    #   `arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012`
+    #   @return [String]
+    #
+    # @!attribute [rw] passphrase
+    #   Passphrase to associate with the encrypted exported private key. If
+    #   you want to later decrypt the private key, you must have the
+    #   passphrase. You can use the following OpenSSL command to decrypt a
+    #   private key:
+    #
+    #   `openssl rsa -in encrypted_key.pem -out decrypted_key.pem`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateRequest AWS API Documentation
+    #
+    class ExportCertificateRequest < Struct.new(
+      :certificate_arn,
+      :passphrase)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate
+    #   The base64 PEM-encoded certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_chain
+    #   The base64 PEM-encoded certificate chain. This does not include the
+    #   certificate that you are exporting.
+    #   @return [String]
+    #
+    # @!attribute [rw] private_key
+    #   The PEM-encoded private key associated with the public key in the
+    #   certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateResponse AWS API Documentation
+    #
+    class ExportCertificateResponse < Struct.new(
+      :certificate,
+      :certificate_chain,
+      :private_key)
+      include Aws::Structure
+    end
+
     # The Extended Key Usage X.509 v3 extension defines one or more purposes
     # for which the public key can be used. This is in addition to or in
     # place of the basic purposes specified by the Key Usage extension.
@@ -517,7 +628,7 @@ module Aws::ACM
     end
 
     # @!attribute [rw] certificate
-    #   String that contains the ACM Certificate represented by the ARN
+    #   String that contains the ACM certificate represented by the ARN
     #   specified at input.
     #   @return [String]
     #
@@ -659,7 +770,7 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] certificate_summary_list
-    #   A list of ACM Certificates.
+    #   A list of ACM certificates.
     #   @return [Array<Types::CertificateSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificatesResponse AWS API Documentation
@@ -678,7 +789,7 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   String that contains the ARN of the ACM Certificate for which you
+    #   String that contains the ARN of the ACM certificate for which you
     #   want to list the tags. This must have the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
@@ -798,14 +909,18 @@ module Aws::ACM
     #             validation_domain: "DomainNameString", # required
     #           },
     #         ],
+    #         options: {
+    #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #         certificate_authority_arn: "Arn",
     #       }
     #
     # @!attribute [rw] domain_name
-    #   Fully qualified domain name (FQDN), such as www.example.com, of the
-    #   site that you want to secure with an ACM Certificate. Use an
-    #   asterisk (*) to create a wildcard certificate that protects several
-    #   sites in the same domain. For example, *.example.com protects
-    #   www.example.com, site.example.com, and images.example.com.
+    #   Fully qualified domain name (FQDN), such as www.example.com, that
+    #   you want to secure with an ACM certificate. Use an asterisk (*) to
+    #   create a wildcard certificate that protects several sites in the
+    #   same domain. For example, *.example.com protects www.example.com,
+    #   site.example.com, and images.example.com.
     #
     #   The first domain name you enter cannot exceed 63 octets, including
     #   periods. Each subsequent Subject Alternative Name (SAN), however,
@@ -813,16 +928,24 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] validation_method
-    #   The method you want to use to validate your domain.
+    #   The method you want to use if you are requesting a public
+    #   certificate to validate that you own or control domain. You can
+    #   [validate with DNS][1] or [validate with email][2]. We recommend
+    #   that you use DNS validation.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html
+    #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html
     #   @return [String]
     #
     # @!attribute [rw] subject_alternative_names
     #   Additional FQDNs to be included in the Subject Alternative Name
-    #   extension of the ACM Certificate. For example, add the name
+    #   extension of the ACM certificate. For example, add the name
     #   www.example.net to a certificate for which the `DomainName` field is
     #   www.example.com if users can reach your site by using either name.
     #   The maximum number of domain names that you can add to an ACM
-    #   Certificate is 100. However, the initial limit is 10 domain names.
+    #   certificate is 100. However, the initial limit is 10 domain names.
     #   If you need more than 10 names, you must request a limit increase.
     #   For more information, see [Limits][1].
     #
@@ -862,6 +985,36 @@ module Aws::ACM
     #   you can validate domain ownership.
     #   @return [Array<Types::DomainValidationOption>]
     #
+    # @!attribute [rw] options
+    #   Currently, you can use this parameter to specify whether to add the
+    #   certificate to a certificate transparency log. Certificate
+    #   transparency makes it possible to detect SSL/TLS certificates that
+    #   have been mistakenly or maliciously issued. Certificates that have
+    #   not been logged typically produce an error message in a browser. For
+    #   more information, see [Opting Out of Certificate Transparency
+    #   Logging][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
+    #   @return [Types::CertificateOptions]
+    #
+    # @!attribute [rw] certificate_authority_arn
+    #   The Amazon Resource Name (ARN) of the private certificate authority
+    #   (CA) that will be used to issue the certificate. If you do not
+    #   provide an ARN and you are trying to request a private certificate,
+    #   ACM will attempt to issue a public certificate. For more information
+    #   about private CAs, see the [AWS Certificate Manager Private
+    #   Certificate Authority (PCA)][1] user guide. The ARN must have the
+    #   following form:
+    #
+    #   `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
     #
     class RequestCertificateRequest < Struct.new(
@@ -869,7 +1022,9 @@ module Aws::ACM
       :validation_method,
       :subject_alternative_names,
       :idempotency_token,
-      :domain_validation_options)
+      :domain_validation_options,
+      :options,
+      :certificate_authority_arn)
       include Aws::Structure
     end
 
@@ -992,6 +1147,41 @@ module Aws::ACM
     class Tag < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateCertificateOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         certificate_arn: "Arn", # required
+    #         options: { # required
+    #           certificate_transparency_logging_preference: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] certificate_arn
+    #   ARN of the requested certificate to update. This must be of the
+    #   form:
+    #
+    #   `arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
+    #   `
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   Use to update the options for your certificate. Currently, you can
+    #   specify whether to add your certificate to a transparency log.
+    #   Certificate transparency makes it possible to detect SSL/TLS
+    #   certificates that have been mistakenly or maliciously issued.
+    #   Certificates that have not been logged typically produce an error
+    #   message in a browser.
+    #   @return [Types::CertificateOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptionsRequest AWS API Documentation
+    #
+    class UpdateCertificateOptionsRequest < Struct.new(
+      :certificate_arn,
+      :options)
       include Aws::Structure
     end
 

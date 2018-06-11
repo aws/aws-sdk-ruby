@@ -37,6 +37,7 @@ module Aws::Pinpoint
     BaiduChannelResponse = Shapes::StructureShape.new(name: 'BaiduChannelResponse')
     BaiduMessage = Shapes::StructureShape.new(name: 'BaiduMessage')
     CampaignEmailMessage = Shapes::StructureShape.new(name: 'CampaignEmailMessage')
+    CampaignHook = Shapes::StructureShape.new(name: 'CampaignHook')
     CampaignLimits = Shapes::StructureShape.new(name: 'CampaignLimits')
     CampaignResponse = Shapes::StructureShape.new(name: 'CampaignResponse')
     CampaignSmsMessage = Shapes::StructureShape.new(name: 'CampaignSmsMessage')
@@ -49,6 +50,8 @@ module Aws::Pinpoint
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateCampaignRequest = Shapes::StructureShape.new(name: 'CreateCampaignRequest')
     CreateCampaignResponse = Shapes::StructureShape.new(name: 'CreateCampaignResponse')
+    CreateExportJobRequest = Shapes::StructureShape.new(name: 'CreateExportJobRequest')
+    CreateExportJobResponse = Shapes::StructureShape.new(name: 'CreateExportJobResponse')
     CreateImportJobRequest = Shapes::StructureShape.new(name: 'CreateImportJobRequest')
     CreateImportJobResponse = Shapes::StructureShape.new(name: 'CreateImportJobResponse')
     CreateSegmentRequest = Shapes::StructureShape.new(name: 'CreateSegmentRequest')
@@ -73,6 +76,8 @@ module Aws::Pinpoint
     DeleteCampaignResponse = Shapes::StructureShape.new(name: 'DeleteCampaignResponse')
     DeleteEmailChannelRequest = Shapes::StructureShape.new(name: 'DeleteEmailChannelRequest')
     DeleteEmailChannelResponse = Shapes::StructureShape.new(name: 'DeleteEmailChannelResponse')
+    DeleteEndpointRequest = Shapes::StructureShape.new(name: 'DeleteEndpointRequest')
+    DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
     DeleteEventStreamRequest = Shapes::StructureShape.new(name: 'DeleteEventStreamRequest')
     DeleteEventStreamResponse = Shapes::StructureShape.new(name: 'DeleteEventStreamResponse')
     DeleteGcmChannelRequest = Shapes::StructureShape.new(name: 'DeleteGcmChannelRequest')
@@ -97,6 +102,10 @@ module Aws::Pinpoint
     EndpointSendConfiguration = Shapes::StructureShape.new(name: 'EndpointSendConfiguration')
     EndpointUser = Shapes::StructureShape.new(name: 'EndpointUser')
     EventStream = Shapes::StructureShape.new(name: 'EventStream')
+    ExportJobRequest = Shapes::StructureShape.new(name: 'ExportJobRequest')
+    ExportJobResource = Shapes::StructureShape.new(name: 'ExportJobResource')
+    ExportJobResponse = Shapes::StructureShape.new(name: 'ExportJobResponse')
+    ExportJobsResponse = Shapes::StructureShape.new(name: 'ExportJobsResponse')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     Format = Shapes::StringShape.new(name: 'Format')
     Frequency = Shapes::StringShape.new(name: 'Frequency')
@@ -137,12 +146,18 @@ module Aws::Pinpoint
     GetEndpointResponse = Shapes::StructureShape.new(name: 'GetEndpointResponse')
     GetEventStreamRequest = Shapes::StructureShape.new(name: 'GetEventStreamRequest')
     GetEventStreamResponse = Shapes::StructureShape.new(name: 'GetEventStreamResponse')
+    GetExportJobRequest = Shapes::StructureShape.new(name: 'GetExportJobRequest')
+    GetExportJobResponse = Shapes::StructureShape.new(name: 'GetExportJobResponse')
+    GetExportJobsRequest = Shapes::StructureShape.new(name: 'GetExportJobsRequest')
+    GetExportJobsResponse = Shapes::StructureShape.new(name: 'GetExportJobsResponse')
     GetGcmChannelRequest = Shapes::StructureShape.new(name: 'GetGcmChannelRequest')
     GetGcmChannelResponse = Shapes::StructureShape.new(name: 'GetGcmChannelResponse')
     GetImportJobRequest = Shapes::StructureShape.new(name: 'GetImportJobRequest')
     GetImportJobResponse = Shapes::StructureShape.new(name: 'GetImportJobResponse')
     GetImportJobsRequest = Shapes::StructureShape.new(name: 'GetImportJobsRequest')
     GetImportJobsResponse = Shapes::StructureShape.new(name: 'GetImportJobsResponse')
+    GetSegmentExportJobsRequest = Shapes::StructureShape.new(name: 'GetSegmentExportJobsRequest')
+    GetSegmentExportJobsResponse = Shapes::StructureShape.new(name: 'GetSegmentExportJobsResponse')
     GetSegmentImportJobsRequest = Shapes::StructureShape.new(name: 'GetSegmentImportJobsRequest')
     GetSegmentImportJobsResponse = Shapes::StructureShape.new(name: 'GetSegmentImportJobsResponse')
     GetSegmentRequest = Shapes::StructureShape.new(name: 'GetSegmentRequest')
@@ -165,6 +180,7 @@ module Aws::Pinpoint
     ListOfApplicationResponse = Shapes::ListShape.new(name: 'ListOfApplicationResponse')
     ListOfCampaignResponse = Shapes::ListShape.new(name: 'ListOfCampaignResponse')
     ListOfEndpointBatchItem = Shapes::ListShape.new(name: 'ListOfEndpointBatchItem')
+    ListOfExportJobResponse = Shapes::ListShape.new(name: 'ListOfExportJobResponse')
     ListOfImportJobResponse = Shapes::ListShape.new(name: 'ListOfImportJobResponse')
     ListOfSegmentResponse = Shapes::ListShape.new(name: 'ListOfSegmentResponse')
     ListOfTreatmentResource = Shapes::ListShape.new(name: 'ListOfTreatmentResource')
@@ -188,6 +204,7 @@ module Aws::Pinpoint
     MessageResult = Shapes::StructureShape.new(name: 'MessageResult')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     MethodNotAllowedException = Shapes::StructureShape.new(name: 'MethodNotAllowedException')
+    Mode = Shapes::StringShape.new(name: 'Mode')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     PutEventStreamRequest = Shapes::StructureShape.new(name: 'PutEventStreamRequest')
     PutEventStreamResponse = Shapes::StructureShape.new(name: 'PutEventStreamResponse')
@@ -435,6 +452,7 @@ module Aws::Pinpoint
     ApplicationResponse.struct_class = Types::ApplicationResponse
 
     ApplicationSettingsResource.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    ApplicationSettingsResource.add_member(:campaign_hook, Shapes::ShapeRef.new(shape: CampaignHook, location_name: "CampaignHook"))
     ApplicationSettingsResource.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedDate"))
     ApplicationSettingsResource.add_member(:limits, Shapes::ShapeRef.new(shape: CampaignLimits, location_name: "Limits"))
     ApplicationSettingsResource.add_member(:quiet_time, Shapes::ShapeRef.new(shape: QuietTime, location_name: "QuietTime"))
@@ -487,6 +505,11 @@ module Aws::Pinpoint
     CampaignEmailMessage.add_member(:title, Shapes::ShapeRef.new(shape: __string, location_name: "Title"))
     CampaignEmailMessage.struct_class = Types::CampaignEmailMessage
 
+    CampaignHook.add_member(:lambda_function_name, Shapes::ShapeRef.new(shape: __string, location_name: "LambdaFunctionName"))
+    CampaignHook.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "Mode"))
+    CampaignHook.add_member(:web_url, Shapes::ShapeRef.new(shape: __string, location_name: "WebUrl"))
+    CampaignHook.struct_class = Types::CampaignHook
+
     CampaignLimits.add_member(:daily, Shapes::ShapeRef.new(shape: __integer, location_name: "Daily"))
     CampaignLimits.add_member(:maximum_duration, Shapes::ShapeRef.new(shape: __integer, location_name: "MaximumDuration"))
     CampaignLimits.add_member(:messages_per_second, Shapes::ShapeRef.new(shape: __integer, location_name: "MessagesPerSecond"))
@@ -499,6 +522,7 @@ module Aws::Pinpoint
     CampaignResponse.add_member(:default_state, Shapes::ShapeRef.new(shape: CampaignState, location_name: "DefaultState"))
     CampaignResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
     CampaignResponse.add_member(:holdout_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "HoldoutPercent"))
+    CampaignResponse.add_member(:hook, Shapes::ShapeRef.new(shape: CampaignHook, location_name: "Hook"))
     CampaignResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
     CampaignResponse.add_member(:is_paused, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsPaused"))
     CampaignResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedDate"))
@@ -549,6 +573,17 @@ module Aws::Pinpoint
     CreateCampaignResponse.struct_class = Types::CreateCampaignResponse
     CreateCampaignResponse[:payload] = :campaign_response
     CreateCampaignResponse[:payload_member] = CreateCampaignResponse.member(:campaign_response)
+
+    CreateExportJobRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    CreateExportJobRequest.add_member(:export_job_request, Shapes::ShapeRef.new(shape: ExportJobRequest, required: true, location_name: "ExportJobRequest"))
+    CreateExportJobRequest.struct_class = Types::CreateExportJobRequest
+    CreateExportJobRequest[:payload] = :export_job_request
+    CreateExportJobRequest[:payload_member] = CreateExportJobRequest.member(:export_job_request)
+
+    CreateExportJobResponse.add_member(:export_job_response, Shapes::ShapeRef.new(shape: ExportJobResponse, required: true, location_name: "ExportJobResponse"))
+    CreateExportJobResponse.struct_class = Types::CreateExportJobResponse
+    CreateExportJobResponse[:payload] = :export_job_response
+    CreateExportJobResponse[:payload_member] = CreateExportJobResponse.member(:export_job_response)
 
     CreateImportJobRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     CreateImportJobRequest.add_member(:import_job_request, Shapes::ShapeRef.new(shape: ImportJobRequest, required: true, location_name: "ImportJobRequest"))
@@ -657,6 +692,15 @@ module Aws::Pinpoint
     DeleteEmailChannelResponse.struct_class = Types::DeleteEmailChannelResponse
     DeleteEmailChannelResponse[:payload] = :email_channel_response
     DeleteEmailChannelResponse[:payload_member] = DeleteEmailChannelResponse.member(:email_channel_response)
+
+    DeleteEndpointRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    DeleteEndpointRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "endpoint-id"))
+    DeleteEndpointRequest.struct_class = Types::DeleteEndpointRequest
+
+    DeleteEndpointResponse.add_member(:endpoint_response, Shapes::ShapeRef.new(shape: EndpointResponse, required: true, location_name: "EndpointResponse"))
+    DeleteEndpointResponse.struct_class = Types::DeleteEndpointResponse
+    DeleteEndpointResponse[:payload] = :endpoint_response
+    DeleteEndpointResponse[:payload_member] = DeleteEndpointResponse.member(:endpoint_response)
 
     DeleteEventStreamRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteEventStreamRequest.struct_class = Types::DeleteEventStreamRequest
@@ -811,6 +855,35 @@ module Aws::Pinpoint
     EventStream.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastUpdatedBy"))
     EventStream.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
     EventStream.struct_class = Types::EventStream
+
+    ExportJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
+    ExportJobRequest.add_member(:s3_url_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "S3UrlPrefix"))
+    ExportJobRequest.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, location_name: "SegmentId"))
+    ExportJobRequest.struct_class = Types::ExportJobRequest
+
+    ExportJobResource.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
+    ExportJobResource.add_member(:s3_url_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "S3UrlPrefix"))
+    ExportJobResource.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, location_name: "SegmentId"))
+    ExportJobResource.struct_class = Types::ExportJobResource
+
+    ExportJobResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    ExportJobResponse.add_member(:completed_pieces, Shapes::ShapeRef.new(shape: __integer, location_name: "CompletedPieces"))
+    ExportJobResponse.add_member(:completion_date, Shapes::ShapeRef.new(shape: __string, location_name: "CompletionDate"))
+    ExportJobResponse.add_member(:creation_date, Shapes::ShapeRef.new(shape: __string, location_name: "CreationDate"))
+    ExportJobResponse.add_member(:definition, Shapes::ShapeRef.new(shape: ExportJobResource, location_name: "Definition"))
+    ExportJobResponse.add_member(:failed_pieces, Shapes::ShapeRef.new(shape: __integer, location_name: "FailedPieces"))
+    ExportJobResponse.add_member(:failures, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "Failures"))
+    ExportJobResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "Id"))
+    ExportJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
+    ExportJobResponse.add_member(:total_failures, Shapes::ShapeRef.new(shape: __integer, location_name: "TotalFailures"))
+    ExportJobResponse.add_member(:total_pieces, Shapes::ShapeRef.new(shape: __integer, location_name: "TotalPieces"))
+    ExportJobResponse.add_member(:total_processed, Shapes::ShapeRef.new(shape: __integer, location_name: "TotalProcessed"))
+    ExportJobResponse.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "Type"))
+    ExportJobResponse.struct_class = Types::ExportJobResponse
+
+    ExportJobsResponse.add_member(:item, Shapes::ShapeRef.new(shape: ListOfExportJobResponse, location_name: "Item"))
+    ExportJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ExportJobsResponse.struct_class = Types::ExportJobsResponse
 
     GCMChannelRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: __string, location_name: "ApiKey"))
     GCMChannelRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "Enabled"))
@@ -997,6 +1070,25 @@ module Aws::Pinpoint
     GetEventStreamResponse[:payload] = :event_stream
     GetEventStreamResponse[:payload_member] = GetEventStreamResponse.member(:event_stream)
 
+    GetExportJobRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetExportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "job-id"))
+    GetExportJobRequest.struct_class = Types::GetExportJobRequest
+
+    GetExportJobResponse.add_member(:export_job_response, Shapes::ShapeRef.new(shape: ExportJobResponse, required: true, location_name: "ExportJobResponse"))
+    GetExportJobResponse.struct_class = Types::GetExportJobResponse
+    GetExportJobResponse[:payload] = :export_job_response
+    GetExportJobResponse[:payload_member] = GetExportJobResponse.member(:export_job_response)
+
+    GetExportJobsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetExportJobsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
+    GetExportJobsRequest.add_member(:token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "token"))
+    GetExportJobsRequest.struct_class = Types::GetExportJobsRequest
+
+    GetExportJobsResponse.add_member(:export_jobs_response, Shapes::ShapeRef.new(shape: ExportJobsResponse, required: true, location_name: "ExportJobsResponse"))
+    GetExportJobsResponse.struct_class = Types::GetExportJobsResponse
+    GetExportJobsResponse[:payload] = :export_jobs_response
+    GetExportJobsResponse[:payload_member] = GetExportJobsResponse.member(:export_jobs_response)
+
     GetGcmChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetGcmChannelRequest.struct_class = Types::GetGcmChannelRequest
 
@@ -1023,6 +1115,17 @@ module Aws::Pinpoint
     GetImportJobsResponse.struct_class = Types::GetImportJobsResponse
     GetImportJobsResponse[:payload] = :import_jobs_response
     GetImportJobsResponse[:payload_member] = GetImportJobsResponse.member(:import_jobs_response)
+
+    GetSegmentExportJobsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetSegmentExportJobsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
+    GetSegmentExportJobsRequest.add_member(:segment_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "segment-id"))
+    GetSegmentExportJobsRequest.add_member(:token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "token"))
+    GetSegmentExportJobsRequest.struct_class = Types::GetSegmentExportJobsRequest
+
+    GetSegmentExportJobsResponse.add_member(:export_jobs_response, Shapes::ShapeRef.new(shape: ExportJobsResponse, required: true, location_name: "ExportJobsResponse"))
+    GetSegmentExportJobsResponse.struct_class = Types::GetSegmentExportJobsResponse
+    GetSegmentExportJobsResponse[:payload] = :export_jobs_response
+    GetSegmentExportJobsResponse[:payload_member] = GetSegmentExportJobsResponse.member(:export_jobs_response)
 
     GetSegmentImportJobsRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetSegmentImportJobsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "page-size"))
@@ -1129,6 +1232,8 @@ module Aws::Pinpoint
     ListOfCampaignResponse.member = Shapes::ShapeRef.new(shape: CampaignResponse)
 
     ListOfEndpointBatchItem.member = Shapes::ShapeRef.new(shape: EndpointBatchItem)
+
+    ListOfExportJobResponse.member = Shapes::ShapeRef.new(shape: ExportJobResponse)
 
     ListOfImportJobResponse.member = Shapes::ShapeRef.new(shape: ImportJobResponse)
 
@@ -1254,6 +1359,7 @@ module Aws::Pinpoint
 
     SMSMessage.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
     SMSMessage.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+    SMSMessage.add_member(:origination_number, Shapes::ShapeRef.new(shape: __string, location_name: "OriginationNumber"))
     SMSMessage.add_member(:sender_id, Shapes::ShapeRef.new(shape: __string, location_name: "SenderId"))
     SMSMessage.add_member(:substitutions, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "Substitutions"))
     SMSMessage.struct_class = Types::SMSMessage
@@ -1512,6 +1618,7 @@ module Aws::Pinpoint
     UpdateSmsChannelResponse[:payload] = :sms_channel_response
     UpdateSmsChannelResponse[:payload_member] = UpdateSmsChannelResponse.member(:sms_channel_response)
 
+    WriteApplicationSettingsRequest.add_member(:campaign_hook, Shapes::ShapeRef.new(shape: CampaignHook, location_name: "CampaignHook"))
     WriteApplicationSettingsRequest.add_member(:limits, Shapes::ShapeRef.new(shape: CampaignLimits, location_name: "Limits"))
     WriteApplicationSettingsRequest.add_member(:quiet_time, Shapes::ShapeRef.new(shape: QuietTime, location_name: "QuietTime"))
     WriteApplicationSettingsRequest.struct_class = Types::WriteApplicationSettingsRequest
@@ -1519,6 +1626,7 @@ module Aws::Pinpoint
     WriteCampaignRequest.add_member(:additional_treatments, Shapes::ShapeRef.new(shape: ListOfWriteTreatmentResource, location_name: "AdditionalTreatments"))
     WriteCampaignRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
     WriteCampaignRequest.add_member(:holdout_percent, Shapes::ShapeRef.new(shape: __integer, location_name: "HoldoutPercent"))
+    WriteCampaignRequest.add_member(:hook, Shapes::ShapeRef.new(shape: CampaignHook, location_name: "Hook"))
     WriteCampaignRequest.add_member(:is_paused, Shapes::ShapeRef.new(shape: __boolean, location_name: "IsPaused"))
     WriteCampaignRequest.add_member(:limits, Shapes::ShapeRef.new(shape: CampaignLimits, location_name: "Limits"))
     WriteCampaignRequest.add_member(:message_configuration, Shapes::ShapeRef.new(shape: MessageConfiguration, location_name: "MessageConfiguration"))
@@ -1580,6 +1688,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/campaigns"
         o.input = Shapes::ShapeRef.new(shape: CreateCampaignRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateCampaignResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:create_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateExportJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apps/{application-id}/jobs/export"
+        o.input = Shapes::ShapeRef.new(shape: CreateExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateExportJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -1734,6 +1856,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/channels/email"
         o.input = Shapes::ShapeRef.new(shape: DeleteEmailChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteEmailChannelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEndpoint"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apps/{application-id}/endpoints/{endpoint-id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEndpointResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -2036,6 +2172,34 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_export_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExportJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/jobs/export/{job-id}"
+        o.input = Shapes::ShapeRef.new(shape: GetExportJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetExportJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_export_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExportJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/jobs/export"
+        o.input = Shapes::ShapeRef.new(shape: GetExportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetExportJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_gcm_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetGcmChannel"
         o.http_method = "GET"
@@ -2084,6 +2248,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/segments/{segment-id}"
         o.input = Shapes::ShapeRef.new(shape: GetSegmentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSegmentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_segment_export_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSegmentExportJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/segments/{segment-id}/jobs/export"
+        o.input = Shapes::ShapeRef.new(shape: GetSegmentExportJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSegmentExportJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

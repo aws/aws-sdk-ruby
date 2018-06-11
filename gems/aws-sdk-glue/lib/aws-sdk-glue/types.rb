@@ -18,6 +18,10 @@ module Aws::Glue
     #         arguments: {
     #           "GenericString" => "GenericString",
     #         },
+    #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
@@ -41,14 +45,25 @@ module Aws::Glue
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] timeout
+    #   The job run timeout in minutes. It overrides the timeout value of
+    #   the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job run notification.
+    #   @return [Types::NotificationProperty]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Action AWS API Documentation
     #
     class Action < Struct.new(
       :job_name,
-      :arguments)
+      :arguments,
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -401,15 +416,15 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Records an error that occurred when attempting to stop a specified
-    # JobRun.
+    # Records an error that occurred when attempting to stop a specified job
+    # run.
     #
     # @!attribute [rw] job_name
-    #   The name of the Job in question.
+    #   The name of the job definition used in the job run in question.
     #   @return [String]
     #
     # @!attribute [rw] job_run_id
-    #   The JobRunId of the JobRun in question.
+    #   The JobRunId of the job run in question.
     #   @return [String]
     #
     # @!attribute [rw] error_detail
@@ -434,11 +449,12 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of the Job in question.
+    #   The name of the job definition for which to stop job runs.
     #   @return [String]
     #
     # @!attribute [rw] job_run_ids
-    #   A list of the JobRunIds that should be stopped for that Job.
+    #   A list of the JobRunIds that should be stopped for that job
+    #   definition.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunRequest AWS API Documentation
@@ -470,11 +486,11 @@ module Aws::Glue
     # Records a successful request to stop a specified JobRun.
     #
     # @!attribute [rw] job_name
-    #   The Name of the Job in question.
+    #   The name of the job definition used in the job run that was stopped.
     #   @return [String]
     #
     # @!attribute [rw] job_run_id
-    #   The JobRunId of the JobRun in question.
+    #   The JobRunId of the job run that was stopped.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunSuccessfulSubmission AWS API Documentation
@@ -714,7 +730,7 @@ module Aws::Glue
     #       {
     #         logical_operator: "EQUALS", # accepts EQUALS
     #         job_name: "NameString",
-    #         state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED
+    #         state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #       }
     #
     # @!attribute [rw] logical_operator
@@ -728,7 +744,7 @@ module Aws::Glue
     #
     # @!attribute [rw] state
     #   The condition state. Currently, the values supported are SUCCEEDED,
-    #   STOPPED and FAILED.
+    #   STOPPED, TIMEOUT and FAILED.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Condition AWS API Documentation
@@ -1313,7 +1329,7 @@ module Aws::Glue
     #         role_arn: "RoleArn", # required
     #         security_group_ids: ["GenericString"],
     #         subnet_id: "GenericString",
-    #         public_key: "GenericString", # required
+    #         public_key: "GenericString",
     #         number_of_nodes: 1,
     #         extra_python_libs_s3_path: "GenericString",
     #         extra_jars_s3_path: "GenericString",
@@ -1519,14 +1535,19 @@ module Aws::Glue
     #         },
     #         max_retries: 1,
     #         allocated_capacity: 1,
+    #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
-    #   The name you assign to this job. It must be unique in your account.
+    #   The name you assign to this job definition. It must be unique in
+    #   your account.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the job.
+    #   Description of the job being defined.
     #   @return [String]
     #
     # @!attribute [rw] log_uri
@@ -1534,7 +1555,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The name of the IAM role associated with this job.
+    #   The name or ARN of the IAM role associated with this job.
     #   @return [String]
     #
     # @!attribute [rw] execution_property
@@ -1563,7 +1584,7 @@ module Aws::Glue
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -1586,6 +1607,14 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
+    # @!attribute [rw] timeout
+    #   The job timeout in minutes. The default is 2880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -1598,12 +1627,14 @@ module Aws::Glue
       :default_arguments,
       :connections,
       :max_retries,
-      :allocated_capacity)
+      :allocated_capacity,
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
     # @!attribute [rw] name
-    #   The unique name that was provided.
+    #   The unique name that was provided for this job definition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobResponse AWS API Documentation
@@ -1908,7 +1939,7 @@ module Aws::Glue
     #             {
     #               logical_operator: "EQUALS", # accepts EQUALS
     #               job_name: "NameString",
-    #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED
+    #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #             },
     #           ],
     #         },
@@ -1918,9 +1949,14 @@ module Aws::Glue
     #             arguments: {
     #               "GenericString" => "GenericString",
     #             },
+    #             timeout: 1,
+    #             notification_property: {
+    #               notify_delay_after: 1,
+    #             },
     #           },
     #         ],
     #         description: "DescriptionString",
+    #         start_on_creation: false,
     #       }
     #
     # @!attribute [rw] name
@@ -1957,6 +1993,11 @@ module Aws::Glue
     #   A description of the new trigger.
     #   @return [String]
     #
+    # @!attribute [rw] start_on_creation
+    #   Set to true to start SCHEDULED and CONDITIONAL triggers when
+    #   created. True not supported for ON\_DEMAND triggers.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTriggerRequest AWS API Documentation
     #
     class CreateTriggerRequest < Struct.new(
@@ -1965,7 +2006,8 @@ module Aws::Glue
       :schedule,
       :predicate,
       :actions,
-      :description)
+      :description,
+      :start_on_creation)
       include Aws::Structure
     end
 
@@ -2275,7 +2317,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of the job to delete.
+    #   The name of the job definition to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteJobRequest AWS API Documentation
@@ -2286,7 +2328,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] job_name
-    #   The name of the job that was deleted.
+    #   The name of the job definition that was deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteJobResponse AWS API Documentation
@@ -2505,12 +2547,16 @@ module Aws::Glue
     #   The YARN endpoint address used by this DevEndpoint.
     #   @return [String]
     #
+    # @!attribute [rw] private_address
+    #   The private address used by this DevEndpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] zeppelin_remote_spark_interpreter_port
     #   The Apache Zeppelin port for the remote Apache Spark interpreter.
     #   @return [Integer]
     #
     # @!attribute [rw] public_address
-    #   The public address used by this DevEndpoint.
+    #   The public VPC address used by this DevEndpoint.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2580,6 +2626,7 @@ module Aws::Glue
       :security_group_ids,
       :subnet_id,
       :yarn_endpoint_address,
+      :private_address,
       :zeppelin_remote_spark_interpreter_port,
       :public_address,
       :status,
@@ -2664,9 +2711,9 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] max_concurrent_runs
-    #   The maximum number of concurrent runs allowed for a job. The default
-    #   is 1. An error is returned when this threshold is reached. The
-    #   maximum value you can specify is controlled by a service limit.
+    #   The maximum number of concurrent runs allowed for the job. The
+    #   default is 1. An error is returned when this threshold is reached.
+    #   The maximum value you can specify is controlled by a service limit.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ExecutionProperty AWS API Documentation
@@ -3211,7 +3258,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of the job to retrieve.
+    #   The name of the job definition to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRequest AWS API Documentation
@@ -3242,7 +3289,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_name
-    #   Name of the job being run.
+    #   Name of the job definition being run.
     #   @return [String]
     #
     # @!attribute [rw] run_id
@@ -3283,7 +3330,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of the job for which to retrieve all job runs.
+    #   The name of the job definition for which to retrieve all job runs.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -3345,11 +3392,12 @@ module Aws::Glue
     end
 
     # @!attribute [rw] jobs
-    #   A list of jobs.
+    #   A list of job definitions.
     #   @return [Array<Types::Job>]
     #
     # @!attribute [rw] next_token
-    #   A continuation token, if not all jobs have yet been returned.
+    #   A continuation token, if not all job definitions have yet been
+    #   returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobsResponse AWS API Documentation
@@ -4153,14 +4201,14 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies a job.
+    # Specifies a job definition.
     #
     # @!attribute [rw] name
-    #   The name you assign to this job.
+    #   The name you assign to this job definition.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of this job.
+    #   Description of the job being defined.
     #   @return [String]
     #
     # @!attribute [rw] log_uri
@@ -4168,15 +4216,15 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The name of the IAM role associated with this job.
+    #   The name or ARN of the IAM role associated with this job.
     #   @return [String]
     #
     # @!attribute [rw] created_on
-    #   The time and date that this job specification was created.
+    #   The time and date that this job definition was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_on
-    #   The last point in time when this job specification was modified.
+    #   The last point in time when this job definition was modified.
     #   @return [Time]
     #
     # @!attribute [rw] execution_property
@@ -4205,7 +4253,7 @@ module Aws::Glue
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -4213,20 +4261,28 @@ module Aws::Glue
     #   @return [Types::ConnectionsList]
     #
     # @!attribute [rw] max_retries
-    #   The maximum number of times to retry this job if it fails.
+    #   The maximum number of times to retry this job after a JobRun fails.
     #   @return [Integer]
     #
     # @!attribute [rw] allocated_capacity
     #   The number of AWS Glue data processing units (DPUs) allocated to
-    #   this Job. From 2 to 100 DPUs can be allocated; the default is 10. A
-    #   DPU is a relative measure of processing power that consists of 4
-    #   vCPUs of compute capacity and 16 GB of memory. For more information,
-    #   see the [AWS Glue pricing page][1].
+    #   runs of this job. From 2 to 100 DPUs can be allocated; the default
+    #   is 10. A DPU is a relative measure of processing power that consists
+    #   of 4 vCPUs of compute capacity and 16 GB of memory. For more
+    #   information, see the [AWS Glue pricing page][1].
     #
     #
     #
     #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The job timeout in minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job notification.
+    #   @return [Types::NotificationProperty]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
@@ -4242,7 +4298,9 @@ module Aws::Glue
       :default_arguments,
       :connections,
       :max_retries,
-      :allocated_capacity)
+      :allocated_capacity,
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -4279,7 +4337,7 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Specifies code that executes a job.
+    # Specifies code executed when a job is run.
     #
     # @note When making an API call, you may pass JobCommand
     #   data as a hash:
@@ -4325,7 +4383,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] job_name
-    #   The name of the job being run.
+    #   The name of the job definition being used in this run.
     #   @return [String]
     #
     # @!attribute [rw] started_on
@@ -4362,7 +4420,7 @@ module Aws::Glue
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] error_message
@@ -4385,6 +4443,18 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
+    # @!attribute [rw] execution_time
+    #   The amount of time (in seconds) that the job run consumed resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The job run timeout in minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job run notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -4400,13 +4470,16 @@ module Aws::Glue
       :arguments,
       :error_message,
       :predecessor_runs,
-      :allocated_capacity)
+      :allocated_capacity,
+      :execution_time,
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
-    # Specifies information used to update an existing job. Note that the
-    # previous job definition will be completely overwritten by this
-    # information.
+    # Specifies information used to update an existing job definition. Note
+    # that the previous job definition will be completely overwritten by
+    # this information.
     #
     # @note When making an API call, you may pass JobUpdate
     #   data as a hash:
@@ -4430,10 +4503,14 @@ module Aws::Glue
     #         },
     #         max_retries: 1,
     #         allocated_capacity: 1,
+    #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] description
-    #   Description of the job.
+    #   Description of the job being defined.
     #   @return [String]
     #
     # @!attribute [rw] log_uri
@@ -4441,7 +4518,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] role
-    #   The name of the IAM role associated with this job (required).
+    #   The name or ARN of the IAM role associated with this job (required).
     #   @return [String]
     #
     # @!attribute [rw] execution_property
@@ -4470,7 +4547,7 @@ module Aws::Glue
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connections
@@ -4493,6 +4570,14 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
+    # @!attribute [rw] timeout
+    #   The job timeout in minutes. The default is 2880 minutes (48 hours).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
     class JobUpdate < Struct.new(
@@ -4504,7 +4589,9 @@ module Aws::Glue
       :default_arguments,
       :connections,
       :max_retries,
-      :allocated_capacity)
+      :allocated_capacity,
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -4670,6 +4757,27 @@ module Aws::Glue
       :target_table,
       :target_path,
       :target_type)
+      include Aws::Structure
+    end
+
+    # Specifies configuration properties of a notification.
+    #
+    # @note When making an API call, you may pass NotificationProperty
+    #   data as a hash:
+    #
+    #       {
+    #         notify_delay_after: 1,
+    #       }
+    #
+    # @!attribute [rw] notify_delay_after
+    #   After a job run starts, the number of minutes to wait before sending
+    #   a job run delay notification.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/NotificationProperty AWS API Documentation
+    #
+    class NotificationProperty < Struct.new(
+      :notify_delay_after)
       include Aws::Structure
     end
 
@@ -4912,7 +5020,7 @@ module Aws::Glue
     # triggered this job run.
     #
     # @!attribute [rw] job_name
-    #   The name of the predecessor job.
+    #   The name of the job definition used by the predecessor job run.
     #   @return [String]
     #
     # @!attribute [rw] run_id
@@ -4938,13 +5046,14 @@ module Aws::Glue
     #           {
     #             logical_operator: "EQUALS", # accepts EQUALS
     #             job_name: "NameString",
-    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED
+    #             state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] logical
-    #   Currently "OR" is not supported.
+    #   Optional field if only one condition is listed. If multiple
+    #   conditions are listed, then this field is required.
     #   @return [String]
     #
     # @!attribute [rw] conditions
@@ -5251,10 +5360,14 @@ module Aws::Glue
     #           "GenericString" => "GenericString",
     #         },
     #         allocated_capacity: 1,
+    #         timeout: 1,
+    #         notification_property: {
+    #           notify_delay_after: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of the job to start.
+    #   The name of the job definition to use.
     #   @return [String]
     #
     # @!attribute [rw] job_run_id
@@ -5263,7 +5376,7 @@ module Aws::Glue
     #
     # @!attribute [rw] arguments
     #   The job arguments specifically for this run. They override the
-    #   equivalent default arguments set for the job itself.
+    #   equivalent default arguments set for in the job definition itself.
     #
     #   You can specify arguments here that your own job-execution script
     #   consumes, as well as arguments that AWS Glue itself consumes.
@@ -5279,7 +5392,7 @@ module Aws::Glue
     #
     #
     #   [1]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
-    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html
+    #   [2]: http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] allocated_capacity
@@ -5294,13 +5407,24 @@ module Aws::Glue
     #   [1]: https://aws.amazon.com/glue/pricing/
     #   @return [Integer]
     #
+    # @!attribute [rw] timeout
+    #   The job run timeout in minutes. It overrides the timeout value of
+    #   the job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] notification_property
+    #   Specifies configuration properties of a job run notification.
+    #   @return [Types::NotificationProperty]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobRunRequest AWS API Documentation
     #
     class StartJobRunRequest < Struct.new(
       :job_name,
       :job_run_id,
       :arguments,
-      :allocated_capacity)
+      :allocated_capacity,
+      :timeout,
+      :notification_property)
       include Aws::Structure
     end
 
@@ -5897,6 +6021,10 @@ module Aws::Glue
     #             arguments: {
     #               "GenericString" => "GenericString",
     #             },
+    #             timeout: 1,
+    #             notification_property: {
+    #               notify_delay_after: 1,
+    #             },
     #           },
     #         ],
     #         predicate: {
@@ -5905,7 +6033,7 @@ module Aws::Glue
     #             {
     #               logical_operator: "EQUALS", # accepts EQUALS
     #               job_name: "NameString",
-    #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED
+    #               state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #             },
     #           ],
     #         },
@@ -6344,6 +6472,10 @@ module Aws::Glue
     #           },
     #           max_retries: 1,
     #           allocated_capacity: 1,
+    #           timeout: 1,
+    #           notification_property: {
+    #             notify_delay_after: 1,
+    #           },
     #         },
     #       }
     #
@@ -6352,7 +6484,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] job_update
-    #   Specifies the values with which to update the job.
+    #   Specifies the values with which to update the job definition.
     #   @return [Types::JobUpdate]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJobRequest AWS API Documentation
@@ -6364,7 +6496,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] job_name
-    #   Returns the name of the updated job.
+    #   Returns the name of the updated job definition.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateJobResponse AWS API Documentation
@@ -6619,6 +6751,10 @@ module Aws::Glue
     #               arguments: {
     #                 "GenericString" => "GenericString",
     #               },
+    #               timeout: 1,
+    #               notification_property: {
+    #                 notify_delay_after: 1,
+    #               },
     #             },
     #           ],
     #           predicate: {
@@ -6627,7 +6763,7 @@ module Aws::Glue
     #               {
     #                 logical_operator: "EQUALS", # accepts EQUALS
     #                 job_name: "NameString",
-    #                 state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED
+    #                 state: "STARTING", # accepts STARTING, RUNNING, STOPPING, STOPPED, SUCCEEDED, FAILED, TIMEOUT
     #               },
     #             ],
     #           },

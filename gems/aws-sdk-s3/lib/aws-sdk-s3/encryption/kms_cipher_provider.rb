@@ -45,6 +45,8 @@ module Aws
             case envelope['x-amz-cek-alg']
             when 'AES/CBC/PKCS5Padding'
               :CBC
+            when 'AES/CBC/PKCS7Padding'
+              :CBC
             when 'AES/GCM/NoPadding'
               :GCM
             else

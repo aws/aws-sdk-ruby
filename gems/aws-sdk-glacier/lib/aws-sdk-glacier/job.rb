@@ -181,8 +181,8 @@ module Aws::Glacier
       data[:retrieval_byte_range]
     end
 
-    # The retrieval option to use for the archive retrieval. Valid values
-    # are `Expedited`, `Standard`, or `Bulk`. `Standard` is the default.
+    # The tier to use for a select or an archive retrieval. Valid values are
+    # `Expedited`, `Standard`, or `Bulk`. `Standard` is the default.
     # @return [String]
     def tier
       data[:tier]
@@ -200,7 +200,7 @@ module Aws::Glacier
       data[:job_output_path]
     end
 
-    # Contains the parameters that define a select job.
+    # Contains the parameters used for a select.
     # @return [Types::SelectParameters]
     def select_parameters
       data[:select_parameters]

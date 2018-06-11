@@ -271,7 +271,8 @@ module Aws::CodeCommit
     #   @return [String]
     #
     # @!attribute [rw] parents
-    #   The parent list for the specified commit.
+    #   A list of parent commits for the specified commit. Each parent
+    #   commit ID is the full commit ID.
     #   @return [Array<String>]
     #
     # @!attribute [rw] message
@@ -1980,6 +1981,107 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutFileInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         branch_name: "BranchName", # required
+    #         file_content: "data", # required
+    #         file_path: "Path", # required
+    #         file_mode: "EXECUTABLE", # accepts EXECUTABLE, NORMAL, SYMLINK
+    #         parent_commit_id: "CommitId",
+    #         commit_message: "Message",
+    #         name: "Name",
+    #         email: "Email",
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to add or update the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_name
+    #   The name of the branch where you want to add or update the file.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_content
+    #   The content of the file, in binary object format.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_path
+    #   The name of the file you want to add or update, including the
+    #   relative path to the file in the repository.
+    #
+    #   <note markdown="1"> If the path does not currently exist in the repository, the path
+    #   will be created as part of adding the file.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] file_mode
+    #   The file mode permissions of the blob. Valid file mode permissions
+    #   are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_commit_id
+    #   The full commit ID of the head commit in the branch where you want
+    #   to add or update the file. If the commit ID does not match the ID of
+    #   the head commit at the time of the operation, an error will occur,
+    #   and the file will not be added or updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] commit_message
+    #   A message about why this file was added or updated. While optional,
+    #   adding a message is strongly encouraged in order to provide a more
+    #   useful commit history for your repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the person adding or updating the file. While optional,
+    #   adding a name is strongly encouraged in order to provide a more
+    #   useful commit history for your repository.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   An email address for the person adding or updating the file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileInput AWS API Documentation
+    #
+    class PutFileInput < Struct.new(
+      :repository_name,
+      :branch_name,
+      :file_content,
+      :file_path,
+      :file_mode,
+      :parent_commit_id,
+      :commit_message,
+      :name,
+      :email)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] commit_id
+    #   The full SHA of the commit that contains this file change.
+    #   @return [String]
+    #
+    # @!attribute [rw] blob_id
+    #   The ID of the blob, which is its SHA-1 pointer.
+    #   @return [String]
+    #
+    # @!attribute [rw] tree_id
+    #   Tree information for the commit that contains this file change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileOutput AWS API Documentation
+    #
+    class PutFileOutput < Struct.new(
+      :commit_id,
+      :blob_id,
+      :tree_id)
+      include Aws::Structure
+    end
+
     # Represents the input ofa put repository triggers operation.
     #
     # @note When making an API call, you may pass PutRepositoryTriggersInput
@@ -2514,7 +2616,8 @@ module Aws::CodeCommit
     #   @return [String]
     #
     # @!attribute [rw] date
-    #   The date when the specified commit was pushed to the repository.
+    #   The date when the specified commit was commited, in timestamp format
+    #   with GMT offset.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UserInfo AWS API Documentation

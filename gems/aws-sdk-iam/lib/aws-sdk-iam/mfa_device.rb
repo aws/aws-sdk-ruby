@@ -181,7 +181,7 @@ module Aws::IAM
     # @option options [required, String] :authentication_code_1
     #   An authentication code emitted by the device.
     #
-    #   The format for this parameter is a string of 6 digits.
+    #   The format for this parameter is a string of six digits.
     #
     #   Submit your request immediately after generating the authentication
     #   codes. If you generate the codes and then wait too long to submit the
@@ -196,7 +196,7 @@ module Aws::IAM
     # @option options [required, String] :authentication_code_2
     #   A subsequent authentication code emitted by the device.
     #
-    #   The format for this parameter is a string of 6 digits.
+    #   The format for this parameter is a string of six digits.
     #
     #   Submit your request immediately after generating the authentication
     #   codes. If you generate the codes and then wait too long to submit the

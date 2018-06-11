@@ -183,7 +183,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateCloudFrontOriginAccessIdentity2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateCloudFrontOriginAccessIdentity2017_10_30 AWS API Documentation
     #
     # @overload create_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -290,11 +290,12 @@ module Aws::CloudFront
     #           quantity: 1, # required
     #           items: [
     #             {
-    #               lambda_function_arn: "string",
-    #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #               lambda_function_arn: "LambdaFunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #             },
     #           ],
     #         },
+    #         field_level_encryption_id: "string",
     #       },
     #       cache_behaviors: {
     #         quantity: 1, # required
@@ -343,11 +344,12 @@ module Aws::CloudFront
     #               quantity: 1, # required
     #               items: [
     #                 {
-    #                   lambda_function_arn: "string",
-    #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                 },
     #               ],
     #             },
+    #             field_level_encryption_id: "string",
     #           },
     #         ],
     #       },
@@ -463,6 +465,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -498,6 +501,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -528,7 +532,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistribution2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistribution2017_10_30 AWS API Documentation
     #
     # @overload create_distribution(params = {})
     # @param [Hash] params ({})
@@ -635,11 +639,12 @@ module Aws::CloudFront
     #             quantity: 1, # required
     #             items: [
     #               {
-    #                 lambda_function_arn: "string",
-    #                 event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 lambda_function_arn: "LambdaFunctionARN", # required
+    #                 event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #               },
     #             ],
     #           },
+    #           field_level_encryption_id: "string",
     #         },
     #         cache_behaviors: {
     #           quantity: 1, # required
@@ -688,11 +693,12 @@ module Aws::CloudFront
     #                 quantity: 1, # required
     #                 items: [
     #                   {
-    #                     lambda_function_arn: "string",
-    #                     event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     lambda_function_arn: "LambdaFunctionARN", # required
+    #                     event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                   },
     #                 ],
     #               },
+    #               field_level_encryption_id: "string",
     #             },
     #           ],
     #         },
@@ -817,6 +823,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -852,6 +859,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -882,12 +890,146 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionWithTags2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionWithTags2017_10_30 AWS API Documentation
     #
     # @overload create_distribution_with_tags(params = {})
     # @param [Hash] params ({})
     def create_distribution_with_tags(params = {}, options = {})
       req = build_request(:create_distribution_with_tags, params)
+      req.send_request(options)
+    end
+
+    # Create a new field-level encryption configuration.
+    #
+    # @option params [required, Types::FieldLevelEncryptionConfig] :field_level_encryption_config
+    #   The request to create a new field-level encryption configuration.
+    #
+    # @return [Types::CreateFieldLevelEncryptionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFieldLevelEncryptionConfigResult#field_level_encryption #field_level_encryption} => Types::FieldLevelEncryption
+    #   * {Types::CreateFieldLevelEncryptionConfigResult#location #location} => String
+    #   * {Types::CreateFieldLevelEncryptionConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_field_level_encryption_config({
+    #     field_level_encryption_config: { # required
+    #       caller_reference: "string", # required
+    #       comment: "string",
+    #       query_arg_profile_config: {
+    #         forward_when_query_arg_profile_is_unknown: false, # required
+    #         query_arg_profiles: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               query_arg: "string", # required
+    #               profile_id: "string", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       content_type_profile_config: {
+    #         forward_when_content_type_is_unknown: false, # required
+    #         content_type_profiles: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               format: "URLEncoded", # required, accepts URLEncoded
+    #               profile_id: "string",
+    #               content_type: "string", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption.id #=> String
+    #   resp.field_level_encryption.last_modified_time #=> Time
+    #   resp.field_level_encryption.field_level_encryption_config.caller_reference #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.comment #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.forward_when_query_arg_profile_is_unknown #=> Boolean
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.quantity #=> Integer
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items #=> Array
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items[0].query_arg #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.forward_when_content_type_is_unknown #=> Boolean
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.quantity #=> Integer
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items #=> Array
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].format #=> String, one of "URLEncoded"
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionConfig2017_10_30 AWS API Documentation
+    #
+    # @overload create_field_level_encryption_config(params = {})
+    # @param [Hash] params ({})
+    def create_field_level_encryption_config(params = {}, options = {})
+      req = build_request(:create_field_level_encryption_config, params)
+      req.send_request(options)
+    end
+
+    # Create a field-level encryption profile.
+    #
+    # @option params [required, Types::FieldLevelEncryptionProfileConfig] :field_level_encryption_profile_config
+    #   The request to create a field-level encryption profile.
+    #
+    # @return [Types::CreateFieldLevelEncryptionProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFieldLevelEncryptionProfileResult#field_level_encryption_profile #field_level_encryption_profile} => Types::FieldLevelEncryptionProfile
+    #   * {Types::CreateFieldLevelEncryptionProfileResult#location #location} => String
+    #   * {Types::CreateFieldLevelEncryptionProfileResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_field_level_encryption_profile({
+    #     field_level_encryption_profile_config: { # required
+    #       name: "string", # required
+    #       caller_reference: "string", # required
+    #       comment: "string",
+    #       encryption_entities: { # required
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             public_key_id: "string", # required
+    #             provider_id: "string", # required
+    #             field_patterns: { # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption_profile.id #=> String
+    #   resp.field_level_encryption_profile.last_modified_time #=> Time
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.name #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.caller_reference #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.comment #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.quantity #=> Integer
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items #=> Array
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].public_key_id #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].provider_id #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.quantity #=> Integer
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items #=> Array
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionProfile2017_10_30 AWS API Documentation
+    #
+    # @overload create_field_level_encryption_profile(params = {})
+    # @param [Hash] params ({})
+    def create_field_level_encryption_profile(params = {}, options = {})
+      req = build_request(:create_field_level_encryption_profile, params)
       req.send_request(options)
     end
 
@@ -928,12 +1070,56 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateInvalidation2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateInvalidation2017_10_30 AWS API Documentation
     #
     # @overload create_invalidation(params = {})
     # @param [Hash] params ({})
     def create_invalidation(params = {}, options = {})
       req = build_request(:create_invalidation, params)
+      req.send_request(options)
+    end
+
+    # Add a new public key to CloudFront to use, for example, for
+    # field-level encryption. You can add a maximum of 10 public keys with
+    # one AWS account.
+    #
+    # @option params [required, Types::PublicKeyConfig] :public_key_config
+    #   The request to add a public key to CloudFront.
+    #
+    # @return [Types::CreatePublicKeyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePublicKeyResult#public_key #public_key} => Types::PublicKey
+    #   * {Types::CreatePublicKeyResult#location #location} => String
+    #   * {Types::CreatePublicKeyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_public_key({
+    #     public_key_config: { # required
+    #       caller_reference: "string", # required
+    #       name: "string", # required
+    #       encoded_key: "string", # required
+    #       comment: "string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_key.id #=> String
+    #   resp.public_key.created_time #=> Time
+    #   resp.public_key.public_key_config.caller_reference #=> String
+    #   resp.public_key.public_key_config.name #=> String
+    #   resp.public_key.public_key_config.encoded_key #=> String
+    #   resp.public_key.public_key_config.comment #=> String
+    #   resp.location #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreatePublicKey2017_10_30 AWS API Documentation
+    #
+    # @overload create_public_key(params = {})
+    # @param [Hash] params ({})
+    def create_public_key(params = {}, options = {})
+      req = build_request(:create_public_key, params)
       req.send_request(options)
     end
 
@@ -1043,7 +1229,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistribution2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistribution2017_10_30 AWS API Documentation
     #
     # @overload create_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -1135,7 +1321,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionWithTags2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionWithTags2017_10_30 AWS API Documentation
     #
     # @overload create_streaming_distribution_with_tags(params = {})
     # @param [Hash] params ({})
@@ -1162,7 +1348,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentity2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteCloudFrontOriginAccessIdentity2017_10_30 AWS API Documentation
     #
     # @overload delete_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -1189,12 +1375,93 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistribution2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteDistribution2017_10_30 AWS API Documentation
     #
     # @overload delete_distribution(params = {})
     # @param [Hash] params ({})
     def delete_distribution(params = {}, options = {})
       req = build_request(:delete_distribution, params)
+      req.send_request(options)
+    end
+
+    # Remove a field-level encryption configuration.
+    #
+    # @option params [required, String] :id
+    #   The ID of the configuration you want to delete from CloudFront.
+    #
+    # @option params [String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   configuration identity to delete. For example: `E2QWRUHAPOMQZL`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_field_level_encryption_config({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionConfig2017_10_30 AWS API Documentation
+    #
+    # @overload delete_field_level_encryption_config(params = {})
+    # @param [Hash] params ({})
+    def delete_field_level_encryption_config(params = {}, options = {})
+      req = build_request(:delete_field_level_encryption_config, params)
+      req.send_request(options)
+    end
+
+    # Remove a field-level encryption profile.
+    #
+    # @option params [required, String] :id
+    #   Request the ID of the profile you want to delete from CloudFront.
+    #
+    # @option params [String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   profile to delete. For example: `E2QWRUHAPOMQZL`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_field_level_encryption_profile({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionProfile2017_10_30 AWS API Documentation
+    #
+    # @overload delete_field_level_encryption_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_field_level_encryption_profile(params = {}, options = {})
+      req = build_request(:delete_field_level_encryption_profile, params)
+      req.send_request(options)
+    end
+
+    # Remove a public key you previously added to CloudFront.
+    #
+    # @option params [required, String] :id
+    #   The ID of the public key you want to remove from CloudFront.
+    #
+    # @option params [String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   public key identity to delete. For example: `E2QWRUHAPOMQZL`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_public_key({
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeletePublicKey2017_10_30 AWS API Documentation
+    #
+    # @overload delete_public_key(params = {})
+    # @param [Hash] params ({})
+    def delete_public_key(params = {}, options = {})
+      req = build_request(:delete_public_key, params)
       req.send_request(options)
     end
 
@@ -1208,7 +1475,7 @@ module Aws::CloudFront
     #     role_name: "string", # required
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRole2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteServiceLinkedRole2017_10_30 AWS API Documentation
     #
     # @overload delete_service_linked_role(params = {})
     # @param [Hash] params ({})
@@ -1278,7 +1545,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistribution2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteStreamingDistribution2017_10_30 AWS API Documentation
     #
     # @overload delete_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -1311,7 +1578,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentity2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentity2017_10_30 AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -1342,7 +1609,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityConfig2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityConfig2017_10_30 AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity_config(params = {})
     # @param [Hash] params ({})
@@ -1437,6 +1704,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -1472,6 +1740,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -1501,7 +1770,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistribution2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistribution2017_10_30 AWS API Documentation
     #
     # @overload get_distribution(params = {})
     # @param [Hash] params ({})
@@ -1583,6 +1852,7 @@ module Aws::CloudFront
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -1618,6 +1888,7 @@ module Aws::CloudFront
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -1647,12 +1918,181 @@ module Aws::CloudFront
     #   resp.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionConfig2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionConfig2017_10_30 AWS API Documentation
     #
     # @overload get_distribution_config(params = {})
     # @param [Hash] params ({})
     def get_distribution_config(params = {}, options = {})
       req = build_request(:get_distribution_config, params)
+      req.send_request(options)
+    end
+
+    # Get the field-level encryption configuration information.
+    #
+    # @option params [required, String] :id
+    #   Request the ID for the field-level encryption configuration
+    #   information.
+    #
+    # @return [Types::GetFieldLevelEncryptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFieldLevelEncryptionResult#field_level_encryption #field_level_encryption} => Types::FieldLevelEncryption
+    #   * {Types::GetFieldLevelEncryptionResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_field_level_encryption({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption.id #=> String
+    #   resp.field_level_encryption.last_modified_time #=> Time
+    #   resp.field_level_encryption.field_level_encryption_config.caller_reference #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.comment #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.forward_when_query_arg_profile_is_unknown #=> Boolean
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.quantity #=> Integer
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items #=> Array
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items[0].query_arg #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.forward_when_content_type_is_unknown #=> Boolean
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.quantity #=> Integer
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items #=> Array
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].format #=> String, one of "URLEncoded"
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryption2017_10_30 AWS API Documentation
+    #
+    # @overload get_field_level_encryption(params = {})
+    # @param [Hash] params ({})
+    def get_field_level_encryption(params = {}, options = {})
+      req = build_request(:get_field_level_encryption, params)
+      req.send_request(options)
+    end
+
+    # Get the field-level encryption configuration information.
+    #
+    # @option params [required, String] :id
+    #   Request the ID for the field-level encryption configuration
+    #   information.
+    #
+    # @return [Types::GetFieldLevelEncryptionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFieldLevelEncryptionConfigResult#field_level_encryption_config #field_level_encryption_config} => Types::FieldLevelEncryptionConfig
+    #   * {Types::GetFieldLevelEncryptionConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_field_level_encryption_config({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption_config.caller_reference #=> String
+    #   resp.field_level_encryption_config.comment #=> String
+    #   resp.field_level_encryption_config.query_arg_profile_config.forward_when_query_arg_profile_is_unknown #=> Boolean
+    #   resp.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.quantity #=> Integer
+    #   resp.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items #=> Array
+    #   resp.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items[0].query_arg #=> String
+    #   resp.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption_config.content_type_profile_config.forward_when_content_type_is_unknown #=> Boolean
+    #   resp.field_level_encryption_config.content_type_profile_config.content_type_profiles.quantity #=> Integer
+    #   resp.field_level_encryption_config.content_type_profile_config.content_type_profiles.items #=> Array
+    #   resp.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].format #=> String, one of "URLEncoded"
+    #   resp.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionConfig2017_10_30 AWS API Documentation
+    #
+    # @overload get_field_level_encryption_config(params = {})
+    # @param [Hash] params ({})
+    def get_field_level_encryption_config(params = {}, options = {})
+      req = build_request(:get_field_level_encryption_config, params)
+      req.send_request(options)
+    end
+
+    # Get the field-level encryption profile information.
+    #
+    # @option params [required, String] :id
+    #   Get the ID for the field-level encryption profile information.
+    #
+    # @return [Types::GetFieldLevelEncryptionProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFieldLevelEncryptionProfileResult#field_level_encryption_profile #field_level_encryption_profile} => Types::FieldLevelEncryptionProfile
+    #   * {Types::GetFieldLevelEncryptionProfileResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_field_level_encryption_profile({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption_profile.id #=> String
+    #   resp.field_level_encryption_profile.last_modified_time #=> Time
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.name #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.caller_reference #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.comment #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.quantity #=> Integer
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items #=> Array
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].public_key_id #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].provider_id #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.quantity #=> Integer
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items #=> Array
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfile2017_10_30 AWS API Documentation
+    #
+    # @overload get_field_level_encryption_profile(params = {})
+    # @param [Hash] params ({})
+    def get_field_level_encryption_profile(params = {}, options = {})
+      req = build_request(:get_field_level_encryption_profile, params)
+      req.send_request(options)
+    end
+
+    # Get the field-level encryption profile configuration information.
+    #
+    # @option params [required, String] :id
+    #   Get the ID for the field-level encryption profile configuration
+    #   information.
+    #
+    # @return [Types::GetFieldLevelEncryptionProfileConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFieldLevelEncryptionProfileConfigResult#field_level_encryption_profile_config #field_level_encryption_profile_config} => Types::FieldLevelEncryptionProfileConfig
+    #   * {Types::GetFieldLevelEncryptionProfileConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_field_level_encryption_profile_config({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption_profile_config.name #=> String
+    #   resp.field_level_encryption_profile_config.caller_reference #=> String
+    #   resp.field_level_encryption_profile_config.comment #=> String
+    #   resp.field_level_encryption_profile_config.encryption_entities.quantity #=> Integer
+    #   resp.field_level_encryption_profile_config.encryption_entities.items #=> Array
+    #   resp.field_level_encryption_profile_config.encryption_entities.items[0].public_key_id #=> String
+    #   resp.field_level_encryption_profile_config.encryption_entities.items[0].provider_id #=> String
+    #   resp.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.quantity #=> Integer
+    #   resp.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items #=> Array
+    #   resp.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileConfig2017_10_30 AWS API Documentation
+    #
+    # @overload get_field_level_encryption_profile_config(params = {})
+    # @param [Hash] params ({})
+    def get_field_level_encryption_profile_config(params = {}, options = {})
+      req = build_request(:get_field_level_encryption_profile_config, params)
       req.send_request(options)
     end
 
@@ -1686,12 +2126,80 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetInvalidation2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetInvalidation2017_10_30 AWS API Documentation
     #
     # @overload get_invalidation(params = {})
     # @param [Hash] params ({})
     def get_invalidation(params = {}, options = {})
       req = build_request(:get_invalidation, params)
+      req.send_request(options)
+    end
+
+    # Get the public key information.
+    #
+    # @option params [required, String] :id
+    #   Request the ID for the public key.
+    #
+    # @return [Types::GetPublicKeyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPublicKeyResult#public_key #public_key} => Types::PublicKey
+    #   * {Types::GetPublicKeyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_public_key({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_key.id #=> String
+    #   resp.public_key.created_time #=> Time
+    #   resp.public_key.public_key_config.caller_reference #=> String
+    #   resp.public_key.public_key_config.name #=> String
+    #   resp.public_key.public_key_config.encoded_key #=> String
+    #   resp.public_key.public_key_config.comment #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKey2017_10_30 AWS API Documentation
+    #
+    # @overload get_public_key(params = {})
+    # @param [Hash] params ({})
+    def get_public_key(params = {}, options = {})
+      req = build_request(:get_public_key, params)
+      req.send_request(options)
+    end
+
+    # Return public key configuration informaation
+    #
+    # @option params [required, String] :id
+    #   Request the ID for the public key configuration.
+    #
+    # @return [Types::GetPublicKeyConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPublicKeyConfigResult#public_key_config #public_key_config} => Types::PublicKeyConfig
+    #   * {Types::GetPublicKeyConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_public_key_config({
+    #     id: "string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_key_config.caller_reference #=> String
+    #   resp.public_key_config.name #=> String
+    #   resp.public_key_config.encoded_key #=> String
+    #   resp.public_key_config.comment #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyConfig2017_10_30 AWS API Documentation
+    #
+    # @overload get_public_key_config(params = {})
+    # @param [Hash] params ({})
+    def get_public_key_config(params = {}, options = {})
+      req = build_request(:get_public_key_config, params)
       req.send_request(options)
     end
 
@@ -1744,7 +2252,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistribution2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistribution2017_10_30 AWS API Documentation
     #
     # @overload get_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -1789,7 +2297,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionConfig2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionConfig2017_10_30 AWS API Documentation
     #
     # @overload get_streaming_distribution_config(params = {})
     # @param [Hash] params ({})
@@ -1835,7 +2343,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_list.items[0].s3_canonical_user_id #=> String
     #   resp.cloud_front_origin_access_identity_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListCloudFrontOriginAccessIdentities2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListCloudFrontOriginAccessIdentities2017_10_30 AWS API Documentation
     #
     # @overload list_cloud_front_origin_access_identities(params = {})
     # @param [Hash] params ({})
@@ -1933,6 +2441,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].path_pattern #=> String
@@ -1968,6 +2477,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
     #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
     #   resp.distribution_list.items[0].custom_error_responses.items[0].error_code #=> Integer
@@ -1992,7 +2502,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributions2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributions2017_10_30 AWS API Documentation
     #
     # @overload list_distributions(params = {})
     # @param [Hash] params ({})
@@ -2099,6 +2609,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
     #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].path_pattern #=> String
@@ -2134,6 +2645,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution_list.items[0].cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
     #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
     #   resp.distribution_list.items[0].custom_error_responses.items[0].error_code #=> Integer
@@ -2158,12 +2670,120 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsByWebACLId2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsByWebACLId2017_10_30 AWS API Documentation
     #
     # @overload list_distributions_by_web_acl_id(params = {})
     # @param [Hash] params ({})
     def list_distributions_by_web_acl_id(params = {}, options = {})
       req = build_request(:list_distributions_by_web_acl_id, params)
+      req.send_request(options)
+    end
+
+    # List all field-level encryption configurations that have been created
+    # in CloudFront for this account.
+    #
+    # @option params [String] :marker
+    #   Use this when paginating results to indicate where to begin in your
+    #   list of configurations. The results include configurations in the list
+    #   that occur after the marker. To get the next page of results, set the
+    #   `Marker` to the value of the `NextMarker` from the current page's
+    #   response (which is also the ID of the last configuration on that
+    #   page).
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of field-level encryption configurations you want
+    #   in the response body.
+    #
+    # @return [Types::ListFieldLevelEncryptionConfigsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFieldLevelEncryptionConfigsResult#field_level_encryption_list #field_level_encryption_list} => Types::FieldLevelEncryptionList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_field_level_encryption_configs({
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption_list.next_marker #=> String
+    #   resp.field_level_encryption_list.max_items #=> Integer
+    #   resp.field_level_encryption_list.quantity #=> Integer
+    #   resp.field_level_encryption_list.items #=> Array
+    #   resp.field_level_encryption_list.items[0].id #=> String
+    #   resp.field_level_encryption_list.items[0].last_modified_time #=> Time
+    #   resp.field_level_encryption_list.items[0].comment #=> String
+    #   resp.field_level_encryption_list.items[0].query_arg_profile_config.forward_when_query_arg_profile_is_unknown #=> Boolean
+    #   resp.field_level_encryption_list.items[0].query_arg_profile_config.query_arg_profiles.quantity #=> Integer
+    #   resp.field_level_encryption_list.items[0].query_arg_profile_config.query_arg_profiles.items #=> Array
+    #   resp.field_level_encryption_list.items[0].query_arg_profile_config.query_arg_profiles.items[0].query_arg #=> String
+    #   resp.field_level_encryption_list.items[0].query_arg_profile_config.query_arg_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption_list.items[0].content_type_profile_config.forward_when_content_type_is_unknown #=> Boolean
+    #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.quantity #=> Integer
+    #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items #=> Array
+    #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items[0].format #=> String, one of "URLEncoded"
+    #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption_list.items[0].content_type_profile_config.content_type_profiles.items[0].content_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionConfigs2017_10_30 AWS API Documentation
+    #
+    # @overload list_field_level_encryption_configs(params = {})
+    # @param [Hash] params ({})
+    def list_field_level_encryption_configs(params = {}, options = {})
+      req = build_request(:list_field_level_encryption_configs, params)
+      req.send_request(options)
+    end
+
+    # Request a list of field-level encryption profiles that have been
+    # created in CloudFront for this account.
+    #
+    # @option params [String] :marker
+    #   Use this when paginating results to indicate where to begin in your
+    #   list of profiles. The results include profiles in the list that occur
+    #   after the marker. To get the next page of results, set the `Marker` to
+    #   the value of the `NextMarker` from the current page's response (which
+    #   is also the ID of the last profile on that page).
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of field-level encryption profiles you want in the
+    #   response body.
+    #
+    # @return [Types::ListFieldLevelEncryptionProfilesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFieldLevelEncryptionProfilesResult#field_level_encryption_profile_list #field_level_encryption_profile_list} => Types::FieldLevelEncryptionProfileList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_field_level_encryption_profiles({
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption_profile_list.next_marker #=> String
+    #   resp.field_level_encryption_profile_list.max_items #=> Integer
+    #   resp.field_level_encryption_profile_list.quantity #=> Integer
+    #   resp.field_level_encryption_profile_list.items #=> Array
+    #   resp.field_level_encryption_profile_list.items[0].id #=> String
+    #   resp.field_level_encryption_profile_list.items[0].last_modified_time #=> Time
+    #   resp.field_level_encryption_profile_list.items[0].name #=> String
+    #   resp.field_level_encryption_profile_list.items[0].encryption_entities.quantity #=> Integer
+    #   resp.field_level_encryption_profile_list.items[0].encryption_entities.items #=> Array
+    #   resp.field_level_encryption_profile_list.items[0].encryption_entities.items[0].public_key_id #=> String
+    #   resp.field_level_encryption_profile_list.items[0].encryption_entities.items[0].provider_id #=> String
+    #   resp.field_level_encryption_profile_list.items[0].encryption_entities.items[0].field_patterns.quantity #=> Integer
+    #   resp.field_level_encryption_profile_list.items[0].encryption_entities.items[0].field_patterns.items #=> Array
+    #   resp.field_level_encryption_profile_list.items[0].encryption_entities.items[0].field_patterns.items[0] #=> String
+    #   resp.field_level_encryption_profile_list.items[0].comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionProfiles2017_10_30 AWS API Documentation
+    #
+    # @overload list_field_level_encryption_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_field_level_encryption_profiles(params = {}, options = {})
+      req = build_request(:list_field_level_encryption_profiles, params)
       req.send_request(options)
     end
 
@@ -2210,12 +2830,57 @@ module Aws::CloudFront
     #   resp.invalidation_list.items[0].create_time #=> Time
     #   resp.invalidation_list.items[0].status #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListInvalidations2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListInvalidations2017_10_30 AWS API Documentation
     #
     # @overload list_invalidations(params = {})
     # @param [Hash] params ({})
     def list_invalidations(params = {}, options = {})
       req = build_request(:list_invalidations, params)
+      req.send_request(options)
+    end
+
+    # List all public keys that have been added to CloudFront for this
+    # account.
+    #
+    # @option params [String] :marker
+    #   Use this when paginating results to indicate where to begin in your
+    #   list of public keys. The results include public keys in the list that
+    #   occur after the marker. To get the next page of results, set the
+    #   `Marker` to the value of the `NextMarker` from the current page's
+    #   response (which is also the ID of the last public key on that page).
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of public keys you want in the response body.
+    #
+    # @return [Types::ListPublicKeysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPublicKeysResult#public_key_list #public_key_list} => Types::PublicKeyList
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_public_keys({
+    #     marker: "string",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_key_list.next_marker #=> String
+    #   resp.public_key_list.max_items #=> Integer
+    #   resp.public_key_list.quantity #=> Integer
+    #   resp.public_key_list.items #=> Array
+    #   resp.public_key_list.items[0].id #=> String
+    #   resp.public_key_list.items[0].name #=> String
+    #   resp.public_key_list.items[0].created_time #=> Time
+    #   resp.public_key_list.items[0].encoded_key #=> String
+    #   resp.public_key_list.items[0].comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListPublicKeys2017_10_30 AWS API Documentation
+    #
+    # @overload list_public_keys(params = {})
+    # @param [Hash] params ({})
+    def list_public_keys(params = {}, options = {})
+      req = build_request(:list_public_keys, params)
       req.send_request(options)
     end
 
@@ -2264,7 +2929,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
     #   resp.streaming_distribution_list.items[0].enabled #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListStreamingDistributions2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListStreamingDistributions2017_10_30 AWS API Documentation
     #
     # @overload list_streaming_distributions(params = {})
     # @param [Hash] params ({})
@@ -2294,7 +2959,7 @@ module Aws::CloudFront
     #   resp.tags.items[0].key #=> String
     #   resp.tags.items[0].value #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListTagsForResource2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListTagsForResource2017_10_30 AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -2327,7 +2992,7 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResource2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TagResource2017_10_30 AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -2355,7 +3020,7 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResource2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UntagResource2017_10_30 AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -2400,7 +3065,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateCloudFrontOriginAccessIdentity2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateCloudFrontOriginAccessIdentity2017_10_30 AWS API Documentation
     #
     # @overload update_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -2574,11 +3239,12 @@ module Aws::CloudFront
     #           quantity: 1, # required
     #           items: [
     #             {
-    #               lambda_function_arn: "string",
-    #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #               lambda_function_arn: "LambdaFunctionARN", # required
+    #               event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #             },
     #           ],
     #         },
+    #         field_level_encryption_id: "string",
     #       },
     #       cache_behaviors: {
     #         quantity: 1, # required
@@ -2627,11 +3293,12 @@ module Aws::CloudFront
     #               quantity: 1, # required
     #               items: [
     #                 {
-    #                   lambda_function_arn: "string",
-    #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   lambda_function_arn: "LambdaFunctionARN", # required
+    #                   event_type: "viewer-request", # required, accepts viewer-request, viewer-response, origin-request, origin-response
     #                 },
     #               ],
     #             },
+    #             field_level_encryption_id: "string",
     #           },
     #         ],
     #       },
@@ -2749,6 +3416,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.default_cache_behavior.field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
     #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -2784,6 +3452,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
     #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
+    #   resp.distribution.distribution_config.cache_behaviors.items[0].field_level_encryption_id #=> String
     #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
     #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
     #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -2813,12 +3482,210 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateDistribution2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateDistribution2017_10_30 AWS API Documentation
     #
     # @overload update_distribution(params = {})
     # @param [Hash] params ({})
     def update_distribution(params = {}, options = {})
       req = build_request(:update_distribution, params)
+      req.send_request(options)
+    end
+
+    # Update a field-level encryption configuration.
+    #
+    # @option params [required, Types::FieldLevelEncryptionConfig] :field_level_encryption_config
+    #   Request to update a field-level encryption configuration.
+    #
+    # @option params [required, String] :id
+    #   The ID of the configuration you want to update.
+    #
+    # @option params [String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   configuration identity to update. For example: `E2QWRUHAPOMQZL`.
+    #
+    # @return [Types::UpdateFieldLevelEncryptionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFieldLevelEncryptionConfigResult#field_level_encryption #field_level_encryption} => Types::FieldLevelEncryption
+    #   * {Types::UpdateFieldLevelEncryptionConfigResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_field_level_encryption_config({
+    #     field_level_encryption_config: { # required
+    #       caller_reference: "string", # required
+    #       comment: "string",
+    #       query_arg_profile_config: {
+    #         forward_when_query_arg_profile_is_unknown: false, # required
+    #         query_arg_profiles: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               query_arg: "string", # required
+    #               profile_id: "string", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       content_type_profile_config: {
+    #         forward_when_content_type_is_unknown: false, # required
+    #         content_type_profiles: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               format: "URLEncoded", # required, accepts URLEncoded
+    #               profile_id: "string",
+    #               content_type: "string", # required
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption.id #=> String
+    #   resp.field_level_encryption.last_modified_time #=> Time
+    #   resp.field_level_encryption.field_level_encryption_config.caller_reference #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.comment #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.forward_when_query_arg_profile_is_unknown #=> Boolean
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.quantity #=> Integer
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items #=> Array
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items[0].query_arg #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.query_arg_profile_config.query_arg_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.forward_when_content_type_is_unknown #=> Boolean
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.quantity #=> Integer
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items #=> Array
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].format #=> String, one of "URLEncoded"
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].profile_id #=> String
+    #   resp.field_level_encryption.field_level_encryption_config.content_type_profile_config.content_type_profiles.items[0].content_type #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionConfig2017_10_30 AWS API Documentation
+    #
+    # @overload update_field_level_encryption_config(params = {})
+    # @param [Hash] params ({})
+    def update_field_level_encryption_config(params = {}, options = {})
+      req = build_request(:update_field_level_encryption_config, params)
+      req.send_request(options)
+    end
+
+    # Update a field-level encryption profile.
+    #
+    # @option params [required, Types::FieldLevelEncryptionProfileConfig] :field_level_encryption_profile_config
+    #   Request to update a field-level encryption profile.
+    #
+    # @option params [required, String] :id
+    #   The ID of the field-level encryption profile request.
+    #
+    # @option params [String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   profile identity to update. For example: `E2QWRUHAPOMQZL`.
+    #
+    # @return [Types::UpdateFieldLevelEncryptionProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFieldLevelEncryptionProfileResult#field_level_encryption_profile #field_level_encryption_profile} => Types::FieldLevelEncryptionProfile
+    #   * {Types::UpdateFieldLevelEncryptionProfileResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_field_level_encryption_profile({
+    #     field_level_encryption_profile_config: { # required
+    #       name: "string", # required
+    #       caller_reference: "string", # required
+    #       comment: "string",
+    #       encryption_entities: { # required
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             public_key_id: "string", # required
+    #             provider_id: "string", # required
+    #             field_patterns: { # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.field_level_encryption_profile.id #=> String
+    #   resp.field_level_encryption_profile.last_modified_time #=> Time
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.name #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.caller_reference #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.comment #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.quantity #=> Integer
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items #=> Array
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].public_key_id #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].provider_id #=> String
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.quantity #=> Integer
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items #=> Array
+    #   resp.field_level_encryption_profile.field_level_encryption_profile_config.encryption_entities.items[0].field_patterns.items[0] #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionProfile2017_10_30 AWS API Documentation
+    #
+    # @overload update_field_level_encryption_profile(params = {})
+    # @param [Hash] params ({})
+    def update_field_level_encryption_profile(params = {}, options = {})
+      req = build_request(:update_field_level_encryption_profile, params)
+      req.send_request(options)
+    end
+
+    # Update public key information. Note that the only value you can change
+    # is the comment.
+    #
+    # @option params [required, Types::PublicKeyConfig] :public_key_config
+    #   Request to update public key information.
+    #
+    # @option params [required, String] :id
+    #   ID of the public key to be updated.
+    #
+    # @option params [String] :if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   public key to update. For example: `E2QWRUHAPOMQZL`.
+    #
+    # @return [Types::UpdatePublicKeyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePublicKeyResult#public_key #public_key} => Types::PublicKey
+    #   * {Types::UpdatePublicKeyResult#etag #etag} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_public_key({
+    #     public_key_config: { # required
+    #       caller_reference: "string", # required
+    #       name: "string", # required
+    #       encoded_key: "string", # required
+    #       comment: "string",
+    #     },
+    #     id: "string", # required
+    #     if_match: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.public_key.id #=> String
+    #   resp.public_key.created_time #=> Time
+    #   resp.public_key.public_key_config.caller_reference #=> String
+    #   resp.public_key.public_key_config.name #=> String
+    #   resp.public_key.public_key_config.encoded_key #=> String
+    #   resp.public_key.public_key_config.comment #=> String
+    #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdatePublicKey2017_10_30 AWS API Documentation
+    #
+    # @overload update_public_key(params = {})
+    # @param [Hash] params ({})
+    def update_public_key(params = {}, options = {})
+      req = build_request(:update_public_key, params)
       req.send_request(options)
     end
 
@@ -2903,7 +3770,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateStreamingDistribution2017_03_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateStreamingDistribution2017_10_30 AWS API Documentation
     #
     # @overload update_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -2925,7 +3792,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

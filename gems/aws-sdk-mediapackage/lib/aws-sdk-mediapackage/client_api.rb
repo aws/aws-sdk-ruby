@@ -16,6 +16,9 @@ module Aws::MediaPackage
     ChannelCreateParameters = Shapes::StructureShape.new(name: 'ChannelCreateParameters')
     ChannelList = Shapes::StructureShape.new(name: 'ChannelList')
     ChannelUpdateParameters = Shapes::StructureShape.new(name: 'ChannelUpdateParameters')
+    CmafEncryption = Shapes::StructureShape.new(name: 'CmafEncryption')
+    CmafPackage = Shapes::StructureShape.new(name: 'CmafPackage')
+    CmafPackageCreateOrUpdateParameters = Shapes::StructureShape.new(name: 'CmafPackageCreateOrUpdateParameters')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
     CreateOriginEndpointRequest = Shapes::StructureShape.new(name: 'CreateOriginEndpointRequest')
@@ -34,15 +37,13 @@ module Aws::MediaPackage
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     HlsEncryption = Shapes::StructureShape.new(name: 'HlsEncryption')
     HlsIngest = Shapes::StructureShape.new(name: 'HlsIngest')
+    HlsManifest = Shapes::StructureShape.new(name: 'HlsManifest')
+    HlsManifestCreateOrUpdateParameters = Shapes::StructureShape.new(name: 'HlsManifestCreateOrUpdateParameters')
     HlsPackage = Shapes::StructureShape.new(name: 'HlsPackage')
     IngestEndpoint = Shapes::StructureShape.new(name: 'IngestEndpoint')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
-    ListOfChannel = Shapes::ListShape.new(name: 'ListOfChannel')
-    ListOfIngestEndpoint = Shapes::ListShape.new(name: 'ListOfIngestEndpoint')
-    ListOfOriginEndpoint = Shapes::ListShape.new(name: 'ListOfOriginEndpoint')
-    ListOf__string = Shapes::ListShape.new(name: 'ListOf__string')
     ListOriginEndpointsRequest = Shapes::StructureShape.new(name: 'ListOriginEndpointsRequest')
     ListOriginEndpointsResponse = Shapes::StructureShape.new(name: 'ListOriginEndpointsResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -70,8 +71,14 @@ module Aws::MediaPackage
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
+    __listOfChannel = Shapes::ListShape.new(name: '__listOfChannel')
+    __listOfHlsManifest = Shapes::ListShape.new(name: '__listOfHlsManifest')
+    __listOfHlsManifestCreateOrUpdateParameters = Shapes::ListShape.new(name: '__listOfHlsManifestCreateOrUpdateParameters')
+    __listOfIngestEndpoint = Shapes::ListShape.new(name: '__listOfIngestEndpoint')
+    __listOfOriginEndpoint = Shapes::ListShape.new(name: '__listOfOriginEndpoint')
+    __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
+    __long = Shapes::IntegerShape.new(name: '__long')
     __string = Shapes::StringShape.new(name: '__string')
-    __timestamp = Shapes::TimestampShape.new(name: '__timestamp')
 
     Channel.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     Channel.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -80,15 +87,33 @@ module Aws::MediaPackage
     Channel.struct_class = Types::Channel
 
     ChannelCreateParameters.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
-    ChannelCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    ChannelCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     ChannelCreateParameters.struct_class = Types::ChannelCreateParameters
 
-    ChannelList.add_member(:channels, Shapes::ShapeRef.new(shape: ListOfChannel, location_name: "channels"))
+    ChannelList.add_member(:channels, Shapes::ShapeRef.new(shape: __listOfChannel, location_name: "channels"))
     ChannelList.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ChannelList.struct_class = Types::ChannelList
 
     ChannelUpdateParameters.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     ChannelUpdateParameters.struct_class = Types::ChannelUpdateParameters
+
+    CmafEncryption.add_member(:key_rotation_interval_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "keyRotationIntervalSeconds"))
+    CmafEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
+    CmafEncryption.struct_class = Types::CmafEncryption
+
+    CmafPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: CmafEncryption, location_name: "encryption"))
+    CmafPackage.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: __listOfHlsManifest, location_name: "hlsManifests"))
+    CmafPackage.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
+    CmafPackage.add_member(:segment_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "segmentPrefix"))
+    CmafPackage.add_member(:stream_selection, Shapes::ShapeRef.new(shape: StreamSelection, location_name: "streamSelection"))
+    CmafPackage.struct_class = Types::CmafPackage
+
+    CmafPackageCreateOrUpdateParameters.add_member(:encryption, Shapes::ShapeRef.new(shape: CmafEncryption, location_name: "encryption"))
+    CmafPackageCreateOrUpdateParameters.add_member(:hls_manifests, Shapes::ShapeRef.new(shape: __listOfHlsManifestCreateOrUpdateParameters, location_name: "hlsManifests"))
+    CmafPackageCreateOrUpdateParameters.add_member(:segment_duration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "segmentDurationSeconds"))
+    CmafPackageCreateOrUpdateParameters.add_member(:segment_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "segmentPrefix"))
+    CmafPackageCreateOrUpdateParameters.add_member(:stream_selection, Shapes::ShapeRef.new(shape: StreamSelection, location_name: "streamSelection"))
+    CmafPackageCreateOrUpdateParameters.struct_class = Types::CmafPackageCreateOrUpdateParameters
 
     CreateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateChannelRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
@@ -101,6 +126,7 @@ module Aws::MediaPackage
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
 
     CreateOriginEndpointRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "channelId"))
+    CreateOriginEndpointRequest.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
     CreateOriginEndpointRequest.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     CreateOriginEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateOriginEndpointRequest.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
@@ -109,11 +135,12 @@ module Aws::MediaPackage
     CreateOriginEndpointRequest.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     CreateOriginEndpointRequest.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     CreateOriginEndpointRequest.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
-    CreateOriginEndpointRequest.add_member(:whitelist, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "whitelist"))
+    CreateOriginEndpointRequest.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     CreateOriginEndpointRequest.struct_class = Types::CreateOriginEndpointRequest
 
     CreateOriginEndpointResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     CreateOriginEndpointResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    CreateOriginEndpointResponse.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
     CreateOriginEndpointResponse.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     CreateOriginEndpointResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateOriginEndpointResponse.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
@@ -123,7 +150,7 @@ module Aws::MediaPackage
     CreateOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     CreateOriginEndpointResponse.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     CreateOriginEndpointResponse.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
-    CreateOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "whitelist"))
+    CreateOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     CreateOriginEndpointResponse.struct_class = Types::CreateOriginEndpointResponse
 
     DashEncryption.add_member(:key_rotation_interval_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "keyRotationIntervalSeconds"))
@@ -164,6 +191,7 @@ module Aws::MediaPackage
 
     DescribeOriginEndpointResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     DescribeOriginEndpointResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    DescribeOriginEndpointResponse.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
     DescribeOriginEndpointResponse.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     DescribeOriginEndpointResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     DescribeOriginEndpointResponse.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
@@ -173,7 +201,7 @@ module Aws::MediaPackage
     DescribeOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     DescribeOriginEndpointResponse.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     DescribeOriginEndpointResponse.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
-    DescribeOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "whitelist"))
+    DescribeOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     DescribeOriginEndpointResponse.struct_class = Types::DescribeOriginEndpointResponse
 
     HlsEncryption.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __string, location_name: "constantInitializationVector"))
@@ -183,8 +211,27 @@ module Aws::MediaPackage
     HlsEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
     HlsEncryption.struct_class = Types::HlsEncryption
 
-    HlsIngest.add_member(:ingest_endpoints, Shapes::ShapeRef.new(shape: ListOfIngestEndpoint, location_name: "ingestEndpoints"))
+    HlsIngest.add_member(:ingest_endpoints, Shapes::ShapeRef.new(shape: __listOfIngestEndpoint, location_name: "ingestEndpoints"))
     HlsIngest.struct_class = Types::HlsIngest
+
+    HlsManifest.add_member(:ad_markers, Shapes::ShapeRef.new(shape: AdMarkers, location_name: "adMarkers"))
+    HlsManifest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
+    HlsManifest.add_member(:include_iframe_only_stream, Shapes::ShapeRef.new(shape: __boolean, location_name: "includeIframeOnlyStream"))
+    HlsManifest.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
+    HlsManifest.add_member(:playlist_type, Shapes::ShapeRef.new(shape: PlaylistType, location_name: "playlistType"))
+    HlsManifest.add_member(:playlist_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "playlistWindowSeconds"))
+    HlsManifest.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "programDateTimeIntervalSeconds"))
+    HlsManifest.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
+    HlsManifest.struct_class = Types::HlsManifest
+
+    HlsManifestCreateOrUpdateParameters.add_member(:ad_markers, Shapes::ShapeRef.new(shape: AdMarkers, location_name: "adMarkers"))
+    HlsManifestCreateOrUpdateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
+    HlsManifestCreateOrUpdateParameters.add_member(:include_iframe_only_stream, Shapes::ShapeRef.new(shape: __boolean, location_name: "includeIframeOnlyStream"))
+    HlsManifestCreateOrUpdateParameters.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
+    HlsManifestCreateOrUpdateParameters.add_member(:playlist_type, Shapes::ShapeRef.new(shape: PlaylistType, location_name: "playlistType"))
+    HlsManifestCreateOrUpdateParameters.add_member(:playlist_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "playlistWindowSeconds"))
+    HlsManifestCreateOrUpdateParameters.add_member(:program_date_time_interval_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "programDateTimeIntervalSeconds"))
+    HlsManifestCreateOrUpdateParameters.struct_class = Types::HlsManifestCreateOrUpdateParameters
 
     HlsPackage.add_member(:ad_markers, Shapes::ShapeRef.new(shape: AdMarkers, location_name: "adMarkers"))
     HlsPackage.add_member(:encryption, Shapes::ShapeRef.new(shape: HlsEncryption, location_name: "encryption"))
@@ -206,17 +253,9 @@ module Aws::MediaPackage
     ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListChannelsRequest.struct_class = Types::ListChannelsRequest
 
-    ListChannelsResponse.add_member(:channels, Shapes::ShapeRef.new(shape: ListOfChannel, location_name: "channels"))
+    ListChannelsResponse.add_member(:channels, Shapes::ShapeRef.new(shape: __listOfChannel, location_name: "channels"))
     ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListChannelsResponse.struct_class = Types::ListChannelsResponse
-
-    ListOfChannel.member = Shapes::ShapeRef.new(shape: Channel)
-
-    ListOfIngestEndpoint.member = Shapes::ShapeRef.new(shape: IngestEndpoint)
-
-    ListOfOriginEndpoint.member = Shapes::ShapeRef.new(shape: OriginEndpoint)
-
-    ListOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
     ListOriginEndpointsRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelId"))
     ListOriginEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -224,7 +263,7 @@ module Aws::MediaPackage
     ListOriginEndpointsRequest.struct_class = Types::ListOriginEndpointsRequest
 
     ListOriginEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
-    ListOriginEndpointsResponse.add_member(:origin_endpoints, Shapes::ShapeRef.new(shape: ListOfOriginEndpoint, location_name: "originEndpoints"))
+    ListOriginEndpointsResponse.add_member(:origin_endpoints, Shapes::ShapeRef.new(shape: __listOfOriginEndpoint, location_name: "originEndpoints"))
     ListOriginEndpointsResponse.struct_class = Types::ListOriginEndpointsResponse
 
     MssEncryption.add_member(:speke_key_provider, Shapes::ShapeRef.new(shape: SpekeKeyProvider, required: true, location_name: "spekeKeyProvider"))
@@ -238,6 +277,7 @@ module Aws::MediaPackage
 
     OriginEndpoint.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     OriginEndpoint.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    OriginEndpoint.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
     OriginEndpoint.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     OriginEndpoint.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     OriginEndpoint.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
@@ -247,25 +287,27 @@ module Aws::MediaPackage
     OriginEndpoint.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     OriginEndpoint.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     OriginEndpoint.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
-    OriginEndpoint.add_member(:whitelist, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "whitelist"))
+    OriginEndpoint.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     OriginEndpoint.struct_class = Types::OriginEndpoint
 
-    OriginEndpointCreateParameters.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    OriginEndpointCreateParameters.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "channelId"))
+    OriginEndpointCreateParameters.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
     OriginEndpointCreateParameters.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     OriginEndpointCreateParameters.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     OriginEndpointCreateParameters.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
-    OriginEndpointCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
+    OriginEndpointCreateParameters.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "id"))
     OriginEndpointCreateParameters.add_member(:manifest_name, Shapes::ShapeRef.new(shape: __string, location_name: "manifestName"))
     OriginEndpointCreateParameters.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     OriginEndpointCreateParameters.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     OriginEndpointCreateParameters.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
-    OriginEndpointCreateParameters.add_member(:whitelist, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "whitelist"))
+    OriginEndpointCreateParameters.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     OriginEndpointCreateParameters.struct_class = Types::OriginEndpointCreateParameters
 
     OriginEndpointList.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
-    OriginEndpointList.add_member(:origin_endpoints, Shapes::ShapeRef.new(shape: ListOfOriginEndpoint, location_name: "originEndpoints"))
+    OriginEndpointList.add_member(:origin_endpoints, Shapes::ShapeRef.new(shape: __listOfOriginEndpoint, location_name: "originEndpoints"))
     OriginEndpointList.struct_class = Types::OriginEndpointList
 
+    OriginEndpointUpdateParameters.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
     OriginEndpointUpdateParameters.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     OriginEndpointUpdateParameters.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     OriginEndpointUpdateParameters.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
@@ -273,7 +315,7 @@ module Aws::MediaPackage
     OriginEndpointUpdateParameters.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     OriginEndpointUpdateParameters.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     OriginEndpointUpdateParameters.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
-    OriginEndpointUpdateParameters.add_member(:whitelist, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "whitelist"))
+    OriginEndpointUpdateParameters.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     OriginEndpointUpdateParameters.struct_class = Types::OriginEndpointUpdateParameters
 
     RotateChannelCredentialsRequest.add_member(:id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "id"))
@@ -287,7 +329,7 @@ module Aws::MediaPackage
 
     SpekeKeyProvider.add_member(:resource_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "resourceId"))
     SpekeKeyProvider.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "roleArn"))
-    SpekeKeyProvider.add_member(:system_ids, Shapes::ShapeRef.new(shape: ListOf__string, required: true, location_name: "systemIds"))
+    SpekeKeyProvider.add_member(:system_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "systemIds"))
     SpekeKeyProvider.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
     SpekeKeyProvider.struct_class = Types::SpekeKeyProvider
 
@@ -306,6 +348,7 @@ module Aws::MediaPackage
     UpdateChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: __string, location_name: "id"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
 
+    UpdateOriginEndpointRequest.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackageCreateOrUpdateParameters, location_name: "cmafPackage"))
     UpdateOriginEndpointRequest.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     UpdateOriginEndpointRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateOriginEndpointRequest.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
@@ -314,11 +357,12 @@ module Aws::MediaPackage
     UpdateOriginEndpointRequest.add_member(:mss_package, Shapes::ShapeRef.new(shape: MssPackage, location_name: "mssPackage"))
     UpdateOriginEndpointRequest.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     UpdateOriginEndpointRequest.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
-    UpdateOriginEndpointRequest.add_member(:whitelist, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "whitelist"))
+    UpdateOriginEndpointRequest.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     UpdateOriginEndpointRequest.struct_class = Types::UpdateOriginEndpointRequest
 
     UpdateOriginEndpointResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
     UpdateOriginEndpointResponse.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, location_name: "channelId"))
+    UpdateOriginEndpointResponse.add_member(:cmaf_package, Shapes::ShapeRef.new(shape: CmafPackage, location_name: "cmafPackage"))
     UpdateOriginEndpointResponse.add_member(:dash_package, Shapes::ShapeRef.new(shape: DashPackage, location_name: "dashPackage"))
     UpdateOriginEndpointResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     UpdateOriginEndpointResponse.add_member(:hls_package, Shapes::ShapeRef.new(shape: HlsPackage, location_name: "hlsPackage"))
@@ -328,8 +372,20 @@ module Aws::MediaPackage
     UpdateOriginEndpointResponse.add_member(:startover_window_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "startoverWindowSeconds"))
     UpdateOriginEndpointResponse.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "timeDelaySeconds"))
     UpdateOriginEndpointResponse.add_member(:url, Shapes::ShapeRef.new(shape: __string, location_name: "url"))
-    UpdateOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: ListOf__string, location_name: "whitelist"))
+    UpdateOriginEndpointResponse.add_member(:whitelist, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "whitelist"))
     UpdateOriginEndpointResponse.struct_class = Types::UpdateOriginEndpointResponse
+
+    __listOfChannel.member = Shapes::ShapeRef.new(shape: Channel)
+
+    __listOfHlsManifest.member = Shapes::ShapeRef.new(shape: HlsManifest)
+
+    __listOfHlsManifestCreateOrUpdateParameters.member = Shapes::ShapeRef.new(shape: HlsManifestCreateOrUpdateParameters)
+
+    __listOfIngestEndpoint.member = Shapes::ShapeRef.new(shape: IngestEndpoint)
+
+    __listOfOriginEndpoint.member = Shapes::ShapeRef.new(shape: OriginEndpoint)
+
+    __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
 
     # @api private

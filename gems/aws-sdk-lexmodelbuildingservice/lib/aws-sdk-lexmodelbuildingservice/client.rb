@@ -225,7 +225,7 @@ module Aws::LexModelBuildingService
     #   resp.voice_id #=> String
     #   resp.checksum #=> String
     #   resp.version #=> String
-    #   resp.locale #=> String, one of "en-US"
+    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/CreateBotVersion AWS API Documentation
@@ -872,7 +872,7 @@ module Aws::LexModelBuildingService
     #   resp.voice_id #=> String
     #   resp.checksum #=> String
     #   resp.version #=> String
-    #   resp.locale #=> String, one of "en-US"
+    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBot AWS API Documentation
@@ -1290,7 +1290,7 @@ module Aws::LexModelBuildingService
     #
     #   resp.signature #=> String
     #   resp.supported_locales #=> Array
-    #   resp.supported_locales[0] #=> String, one of "en-US"
+    #   resp.supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.slots #=> Array
     #   resp.slots[0].name #=> String
     #
@@ -1340,7 +1340,7 @@ module Aws::LexModelBuildingService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_builtin_intents({
-    #     locale: "en-US", # accepts en-US
+    #     locale: "en-US", # accepts en-US, en-GB, de-DE
     #     signature_contains: "String",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -1351,7 +1351,7 @@ module Aws::LexModelBuildingService
     #   resp.intents #=> Array
     #   resp.intents[0].signature #=> String
     #   resp.intents[0].supported_locales #=> Array
-    #   resp.intents[0].supported_locales[0] #=> String, one of "en-US"
+    #   resp.intents[0].supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinIntents AWS API Documentation
@@ -1401,7 +1401,7 @@ module Aws::LexModelBuildingService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_builtin_slot_types({
-    #     locale: "en-US", # accepts en-US
+    #     locale: "en-US", # accepts en-US, en-GB, de-DE
     #     signature_contains: "String",
     #     next_token: "NextToken",
     #     max_results: 1,
@@ -1412,7 +1412,7 @@ module Aws::LexModelBuildingService
     #   resp.slot_types #=> Array
     #   resp.slot_types[0].signature #=> String
     #   resp.slot_types[0].supported_locales #=> Array
-    #   resp.slot_types[0].supported_locales[0] #=> String, one of "en-US"
+    #   resp.slot_types[0].supported_locales[0] #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetBuiltinSlotTypes AWS API Documentation
@@ -1453,16 +1453,16 @@ module Aws::LexModelBuildingService
     #   resp = client.get_export({
     #     name: "Name", # required
     #     version: "NumericalVersion", # required
-    #     resource_type: "BOT", # required, accepts BOT
-    #     export_type: "ALEXA_SKILLS_KIT", # required, accepts ALEXA_SKILLS_KIT
+    #     resource_type: "BOT", # required, accepts BOT, INTENT, SLOT_TYPE
+    #     export_type: "ALEXA_SKILLS_KIT", # required, accepts ALEXA_SKILLS_KIT, LEX
     #   })
     #
     # @example Response structure
     #
     #   resp.name #=> String
     #   resp.version #=> String
-    #   resp.resource_type #=> String, one of "BOT"
-    #   resp.export_type #=> String, one of "ALEXA_SKILLS_KIT"
+    #   resp.resource_type #=> String, one of "BOT", "INTENT", "SLOT_TYPE"
+    #   resp.export_type #=> String, one of "ALEXA_SKILLS_KIT", "LEX"
     #   resp.export_status #=> String, one of "IN_PROGRESS", "READY", "FAILED"
     #   resp.failure_reason #=> String
     #   resp.url #=> String
@@ -1473,6 +1473,48 @@ module Aws::LexModelBuildingService
     # @param [Hash] params ({})
     def get_export(params = {}, options = {})
       req = build_request(:get_export, params)
+      req.send_request(options)
+    end
+
+    # Gets information about an import job started with the `StartImport`
+    # operation.
+    #
+    # @option params [required, String] :import_id
+    #   The identifier of the import job information to return.
+    #
+    # @return [Types::GetImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetImportResponse#name #name} => String
+    #   * {Types::GetImportResponse#resource_type #resource_type} => String
+    #   * {Types::GetImportResponse#merge_strategy #merge_strategy} => String
+    #   * {Types::GetImportResponse#import_id #import_id} => String
+    #   * {Types::GetImportResponse#import_status #import_status} => String
+    #   * {Types::GetImportResponse#failure_reason #failure_reason} => Array&lt;String&gt;
+    #   * {Types::GetImportResponse#created_date #created_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_import({
+    #     import_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.resource_type #=> String, one of "BOT", "INTENT", "SLOT_TYPE"
+    #   resp.merge_strategy #=> String, one of "OVERWRITE_LATEST", "FAIL_ON_CONFLICT"
+    #   resp.import_id #=> String
+    #   resp.import_status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.failure_reason #=> Array
+    #   resp.failure_reason[0] #=> String
+    #   resp.created_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetImport AWS API Documentation
+    #
+    # @overload get_import(params = {})
+    # @param [Hash] params ({})
+    def get_import(params = {}, options = {})
+      req = build_request(:get_import, params)
       req.send_request(options)
     end
 
@@ -2274,11 +2316,11 @@ module Aws::LexModelBuildingService
     #   exception.
     #
     # @option params [String] :process_behavior
-    #   If you set the `processBehavior` element to `Build`, Amazon Lex builds
-    #   the bot so that it can be run. If you set the element to `Save`Amazon
+    #   If you set the `processBehavior` element to `BUILD`, Amazon Lex builds
+    #   the bot so that it can be run. If you set the element to `SAVE` Amazon
     #   Lex saves the bot, but doesn't build it.
     #
-    #   If you don't specify this value, the default value is `Save`.
+    #   If you don't specify this value, the default value is `BUILD`.
     #
     # @option params [required, String] :locale
     #   Specifies the target locale for the bot. Any intent used in the bot
@@ -2317,6 +2359,8 @@ module Aws::LexModelBuildingService
     #
     #   [1]: https://aws.amazon.com/lex/faqs#data-security
     #
+    # @option params [Boolean] :create_version
+    #
     # @return [Types::PutBotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutBotResponse#name #name} => String
@@ -2334,6 +2378,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutBotResponse#version #version} => String
     #   * {Types::PutBotResponse#locale #locale} => String
     #   * {Types::PutBotResponse#child_directed #child_directed} => Boolean
+    #   * {Types::PutBotResponse#create_version #create_version} => Boolean
     #
     #
     # @example Example: To create a bot
@@ -2461,8 +2506,9 @@ module Aws::LexModelBuildingService
     #     voice_id: "String",
     #     checksum: "String",
     #     process_behavior: "SAVE", # accepts SAVE, BUILD
-    #     locale: "en-US", # required, accepts en-US
+    #     locale: "en-US", # required, accepts en-US, en-GB, de-DE
     #     child_directed: false, # required
+    #     create_version: false,
     #   })
     #
     # @example Response structure
@@ -2491,8 +2537,9 @@ module Aws::LexModelBuildingService
     #   resp.voice_id #=> String
     #   resp.checksum #=> String
     #   resp.version #=> String
-    #   resp.locale #=> String, one of "en-US"
+    #   resp.locale #=> String, one of "en-US", "en-GB", "de-DE"
     #   resp.child_directed #=> Boolean
+    #   resp.create_version #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutBot AWS API Documentation
     #
@@ -2757,6 +2804,8 @@ module Aws::LexModelBuildingService
     #   match the `$LATEST` version, you get a `PreconditionFailedException`
     #   exception.
     #
+    # @option params [Boolean] :create_version
+    #
     # @return [Types::PutIntentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutIntentResponse#name #name} => String
@@ -2774,6 +2823,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutIntentResponse#created_date #created_date} => Time
     #   * {Types::PutIntentResponse#version #version} => String
     #   * {Types::PutIntentResponse#checksum #checksum} => String
+    #   * {Types::PutIntentResponse#create_version #create_version} => Boolean
     #
     #
     # @example Example: To create an intent
@@ -3141,6 +3191,7 @@ module Aws::LexModelBuildingService
     #     },
     #     parent_intent_signature: "BuiltinIntentSignature",
     #     checksum: "String",
+    #     create_version: false,
     #   })
     #
     # @example Response structure
@@ -3202,6 +3253,7 @@ module Aws::LexModelBuildingService
     #   resp.created_date #=> Time
     #   resp.version #=> String
     #   resp.checksum #=> String
+    #   resp.create_version #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutIntent AWS API Documentation
     #
@@ -3286,6 +3338,8 @@ module Aws::LexModelBuildingService
     #   If you don't specify the `valueSelectionStrategy`, the default is
     #   `ORIGINAL_VALUE`.
     #
+    # @option params [Boolean] :create_version
+    #
     # @return [Types::PutSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutSlotTypeResponse#name #name} => String
@@ -3296,6 +3350,7 @@ module Aws::LexModelBuildingService
     #   * {Types::PutSlotTypeResponse#version #version} => String
     #   * {Types::PutSlotTypeResponse#checksum #checksum} => String
     #   * {Types::PutSlotTypeResponse#value_selection_strategy #value_selection_strategy} => String
+    #   * {Types::PutSlotTypeResponse#create_version #create_version} => Boolean
     #
     #
     # @example Example: To Create a Slot Type
@@ -3346,6 +3401,7 @@ module Aws::LexModelBuildingService
     #     ],
     #     checksum: "String",
     #     value_selection_strategy: "ORIGINAL_VALUE", # accepts ORIGINAL_VALUE, TOP_RESOLUTION
+    #     create_version: false,
     #   })
     #
     # @example Response structure
@@ -3361,6 +3417,7 @@ module Aws::LexModelBuildingService
     #   resp.version #=> String
     #   resp.checksum #=> String
     #   resp.value_selection_strategy #=> String, one of "ORIGINAL_VALUE", "TOP_RESOLUTION"
+    #   resp.create_version #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/PutSlotType AWS API Documentation
     #
@@ -3368,6 +3425,69 @@ module Aws::LexModelBuildingService
     # @param [Hash] params ({})
     def put_slot_type(params = {}, options = {})
       req = build_request(:put_slot_type, params)
+      req.send_request(options)
+    end
+
+    # Starts a job to import a resource to Amazon Lex.
+    #
+    # @option params [required, String, IO] :payload
+    #   A zip archive in binary format. The archive should contain one file, a
+    #   JSON file containing the resource to import. The resource should match
+    #   the type specified in the `resourceType` field.
+    #
+    # @option params [required, String] :resource_type
+    #   Specifies the type of resource to export. Each resource also exports
+    #   any resources that it depends on.
+    #
+    #   * A bot exports dependent intents.
+    #
+    #   * An intent exports dependent slot types.
+    #
+    # @option params [required, String] :merge_strategy
+    #   Specifies the action that the `StartImport` operation should take when
+    #   there is an existing resource with the same name.
+    #
+    #   * FAIL\_ON\_CONFLICT - The import operation is stopped on the first
+    #     conflict between a resource in the import file and an existing
+    #     resource. The name of the resource causing the conflict is in the
+    #     `failureReason` field of the response to the `GetImport` operation.
+    #
+    #     OVERWRITE\_LATEST - The import operation proceeds even if there is a
+    #     conflict with an existing resource. The $LASTEST version of the
+    #     existing resource is overwritten with the data from the import file.
+    #
+    # @return [Types::StartImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartImportResponse#name #name} => String
+    #   * {Types::StartImportResponse#resource_type #resource_type} => String
+    #   * {Types::StartImportResponse#merge_strategy #merge_strategy} => String
+    #   * {Types::StartImportResponse#import_id #import_id} => String
+    #   * {Types::StartImportResponse#import_status #import_status} => String
+    #   * {Types::StartImportResponse#created_date #created_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_import({
+    #     payload: "data", # required
+    #     resource_type: "BOT", # required, accepts BOT, INTENT, SLOT_TYPE
+    #     merge_strategy: "OVERWRITE_LATEST", # required, accepts OVERWRITE_LATEST, FAIL_ON_CONFLICT
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.resource_type #=> String, one of "BOT", "INTENT", "SLOT_TYPE"
+    #   resp.merge_strategy #=> String, one of "OVERWRITE_LATEST", "FAIL_ON_CONFLICT"
+    #   resp.import_id #=> String
+    #   resp.import_status #=> String, one of "IN_PROGRESS", "COMPLETE", "FAILED"
+    #   resp.created_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImport AWS API Documentation
+    #
+    # @overload start_import(params = {})
+    # @param [Hash] params ({})
+    def start_import(params = {}, options = {})
+      req = build_request(:start_import, params)
       req.send_request(options)
     end
 
@@ -3384,7 +3504,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

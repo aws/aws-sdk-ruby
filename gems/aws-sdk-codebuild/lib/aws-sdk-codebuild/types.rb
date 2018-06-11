@@ -155,7 +155,7 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
     #   @return [String]
     #
     # @!attribute [rw] phases
@@ -178,6 +178,10 @@ module Aws::CodeBuild
     # @!attribute [rw] environment
     #   Information about the build environment for this build.
     #   @return [Types::ProjectEnvironment]
+    #
+    # @!attribute [rw] service_role
+    #   The name of a service role used for this build.
+    #   @return [String]
     #
     # @!attribute [rw] logs
     #   Information about the build's logs in Amazon CloudWatch Logs.
@@ -233,6 +237,7 @@ module Aws::CodeBuild
       :artifacts,
       :cache,
       :environment,
+      :service_role,
       :logs,
       :timeout_in_minutes,
       :build_complete,
@@ -409,7 +414,7 @@ module Aws::CodeBuild
     #           location: "String",
     #         },
     #         environment: { # required
-    #           type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #           image: "NonEmptyString", # required
     #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #           environment_variables: [
@@ -535,16 +540,26 @@ module Aws::CodeBuild
     #
     #       {
     #         project_name: "ProjectName", # required
+    #         branch_filter: "String",
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_filter
+    #   A regular expression used to determine which branches in a
+    #   repository are built when a webhook is triggered. If the name of a
+    #   branch matches the regular expression, then it is built. If it
+    #   doesn't match, then it is not. If branchFilter is empty, then all
+    #   branches are built.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateWebhookInput AWS API Documentation
     #
     class CreateWebhookInput < Struct.new(
-      :project_name)
+      :project_name,
+      :branch_filter)
       include Aws::Structure
     end
 
@@ -590,7 +605,7 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteWebhookInput AWS API Documentation
@@ -719,7 +734,8 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project that the cache will be reset for.
+    #   The name of the AWS CodeBuild build project that the cache will be
+    #   reset for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/InvalidateProjectCacheInput AWS API Documentation
@@ -743,7 +759,7 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project.
+    #   The name of the AWS CodeBuild project.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -1205,12 +1221,22 @@ module Aws::CodeBuild
     #     ignored if specified, because no build output will be produced.
     #
     #   * If `type` is set to `S3`, this is the name of the output artifact
-    #     object.
+    #     object. If you set the name to be a forward slash ("/"), then
+    #     the artifact is stored in the root of the output bucket.
     #
-    #   For example, if `path` is set to `MyArtifacts`, `namespaceType` is
-    #   set to `BUILD_ID`, and `name` is set to `MyArtifact.zip`, then the
-    #   output artifact would be stored in
-    #   `MyArtifacts/build-ID/MyArtifact.zip`.
+    #   For example:
+    #
+    #   * If `path` is set to `MyArtifacts`, `namespaceType` is set to
+    #     `BUILD_ID`, and `name` is set to `MyArtifact.zip`, then the output
+    #     artifact would be stored in `MyArtifacts/build-ID/MyArtifact.zip`.
+    #
+    #   * If `path` is empty, `namespaceType` is set to `NONE`, and `name`
+    #     is set to "`/`", then the output artifact would be stored in the
+    #     root of the output bucket.
+    #
+    #   * If `path` is set to `MyArtifacts`, `namespaceType` is set to
+    #     `BUILD_ID`, and `name` is set to "`/`", then the output artifact
+    #     would be stored in `MyArtifacts/build-ID `.
     #   @return [String]
     #
     # @!attribute [rw] packaging
@@ -1305,7 +1331,7 @@ module Aws::CodeBuild
     #   data as a hash:
     #
     #       {
-    #         type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #         type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #         image: "NonEmptyString", # required
     #         compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #         environment_variables: [
@@ -1347,18 +1373,17 @@ module Aws::CodeBuild
     #   @return [Array<Types::EnvironmentVariable>]
     #
     # @!attribute [rw] privileged_mode
-    #   If set to true, enables running the Docker daemon inside a Docker
-    #   container; otherwise, false or not specified (the default). This
-    #   value must be set to true only if this build project will be used to
-    #   build Docker images, and the specified build environment image is
-    #   not one provided by AWS CodeBuild with Docker support. Otherwise,
-    #   all associated builds that attempt to interact with the Docker
-    #   daemon will fail. Note that you must also start the Docker daemon so
-    #   that your builds can interact with it as needed. One way to do this
-    #   is to initialize the Docker daemon in the install phase of your
-    #   build spec by running the following build commands. (Do not run the
-    #   following build commands if the specified build environment image is
-    #   provided by AWS CodeBuild with Docker support.)
+    #   Enables running the Docker daemon inside a Docker container. Set to
+    #   true only if the build project is be used to build Docker images,
+    #   and the specified build environment image is not provided by AWS
+    #   CodeBuild with Docker support. Otherwise, all associated builds that
+    #   attempt to interact with the Docker daemon will fail. Note that you
+    #   must also start the Docker daemon so that builds can interact with
+    #   it. One way to do this is to initialize the Docker daemon during the
+    #   install phase of your build spec by running the following build
+    #   commands. (Do not run the following build commands if the specified
+    #   build environment image is provided by AWS CodeBuild with Docker
+    #   support.)
     #
     #   `- nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock
     #   --host=tcp://0.0.0.0:2375 --storage-driver=overlay& - timeout -t 15
@@ -1554,13 +1579,32 @@ module Aws::CodeBuild
     #             type: "PLAINTEXT", # accepts PLAINTEXT, PARAMETER_STORE
     #           },
     #         ],
+    #         source_type_override: "CODECOMMIT", # accepts CODECOMMIT, CODEPIPELINE, GITHUB, S3, BITBUCKET, GITHUB_ENTERPRISE
+    #         source_location_override: "String",
+    #         source_auth_override: {
+    #           type: "OAUTH", # required, accepts OAUTH
+    #           resource: "String",
+    #         },
     #         git_clone_depth_override: 1,
     #         buildspec_override: "String",
+    #         insecure_ssl_override: false,
+    #         environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
+    #         image_override: "NonEmptyString",
+    #         compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+    #         certificate_override: "String",
+    #         cache_override: {
+    #           type: "NO_CACHE", # required, accepts NO_CACHE, S3
+    #           location: "String",
+    #         },
+    #         service_role_override: "NonEmptyString",
+    #         privileged_mode_override: false,
     #         timeout_in_minutes_override: 1,
+    #         idempotency_token: "String",
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project to start running a build.
+    #   The name of the AWS CodeBuild build project to start running a
+    #   build.
     #   @return [String]
     #
     # @!attribute [rw] source_version
@@ -1597,6 +1641,22 @@ module Aws::CodeBuild
     #   the latest ones already defined in the build project.
     #   @return [Array<Types::EnvironmentVariable>]
     #
+    # @!attribute [rw] source_type_override
+    #   A source input type for this build that overrides the source input
+    #   defined in the build project
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location_override
+    #   A location that overrides for this build the source location for the
+    #   one defined in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_auth_override
+    #   An authorization type for this build that overrides the one defined
+    #   in the build project. This override applies only if the build
+    #   project's source is BitBucket or GitHub.
+    #   @return [Types::SourceAuth]
+    #
     # @!attribute [rw] git_clone_depth_override
     #   The user-defined depth of history, with a minimum value of 0, that
     #   overrides, for this build only, any previous depth of history
@@ -1608,11 +1668,61 @@ module Aws::CodeBuild
     #   latest one already defined in the build project.
     #   @return [String]
     #
+    # @!attribute [rw] insecure_ssl_override
+    #   Enable this flag to override the insecure SSL setting that is
+    #   specified in the build project. The insecure SSL setting determines
+    #   whether to ignore SSL warnings while connecting to the project
+    #   source code. This override applies only if the build's source is
+    #   GitHub Enterprise.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] environment_type_override
+    #   A container type for this build that overrides the one specified in
+    #   the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_override
+    #   The name of an image for this build that overrides the one specified
+    #   in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type_override
+    #   The name of a compute type for this build that overrides the one
+    #   specified in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_override
+    #   The name of a certificate for this build that overrides the one
+    #   specified in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] cache_override
+    #   A ProjectCache object specified for this build that overrides the
+    #   one defined in the build project.
+    #   @return [Types::ProjectCache]
+    #
+    # @!attribute [rw] service_role_override
+    #   The name of a service role for this build that overrides the one
+    #   specified in the build project.
+    #   @return [String]
+    #
+    # @!attribute [rw] privileged_mode_override
+    #   Enable this flag to override privileged mode in the build project.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] timeout_in_minutes_override
     #   The number of build timeout minutes, from 5 to 480 (8 hours), that
     #   overrides, for this build only, the latest setting already defined
     #   in the build project.
     #   @return [Integer]
+    #
+    # @!attribute [rw] idempotency_token
+    #   A unique, case sensitive identifier you provide to ensure the
+    #   idempotency of the StartBuild request. The token is included in the
+    #   StartBuild request and is valid for 12 hours. If you repeat the
+    #   StartBuild request with the same token, but change a parameter, AWS
+    #   CodeBuild returns a parameter mismatch error.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
     #
@@ -1621,9 +1731,21 @@ module Aws::CodeBuild
       :source_version,
       :artifacts_override,
       :environment_variables_override,
+      :source_type_override,
+      :source_location_override,
+      :source_auth_override,
       :git_clone_depth_override,
       :buildspec_override,
-      :timeout_in_minutes_override)
+      :insecure_ssl_override,
+      :environment_type_override,
+      :image_override,
+      :compute_type_override,
+      :certificate_override,
+      :cache_override,
+      :service_role_override,
+      :privileged_mode_override,
+      :timeout_in_minutes_override,
+      :idempotency_token)
       include Aws::Structure
     end
 
@@ -1726,7 +1848,7 @@ module Aws::CodeBuild
     #           location: "String",
     #         },
     #         environment: {
-    #           type: "LINUX_CONTAINER", # required, accepts LINUX_CONTAINER
+    #           type: "WINDOWS_CONTAINER", # required, accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #           image: "NonEmptyString", # required
     #           compute_type: "BUILD_GENERAL1_SMALL", # required, accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
     #           environment_variables: [
@@ -1854,6 +1976,53 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateWebhookInput
+    #   data as a hash:
+    #
+    #       {
+    #         project_name: "ProjectName", # required
+    #         branch_filter: "String",
+    #         rotate_secret: false,
+    #       }
+    #
+    # @!attribute [rw] project_name
+    #   The name of the AWS CodeBuild project.
+    #   @return [String]
+    #
+    # @!attribute [rw] branch_filter
+    #   A regular expression used to determine which branches in a
+    #   repository are built when a webhook is triggered. If the name of a
+    #   branch matches the regular expression, then it is built. If it
+    #   doesn't match, then it is not. If branchFilter is empty, then all
+    #   branches are built.
+    #   @return [String]
+    #
+    # @!attribute [rw] rotate_secret
+    #   A boolean value that specifies whether the associated repository's
+    #   secret token should be updated.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookInput AWS API Documentation
+    #
+    class UpdateWebhookInput < Struct.new(
+      :project_name,
+      :branch_filter,
+      :rotate_secret)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] webhook
+    #   Information about a repository's webhook that is associated with a
+    #   project in AWS CodeBuild.
+    #   @return [Types::Webhook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookOutput AWS API Documentation
+    #
+    class UpdateWebhookOutput < Struct.new(
+      :webhook)
+      include Aws::Structure
+    end
+
     # Information about the VPC configuration that AWS CodeBuild will
     # access.
     #
@@ -1895,21 +2064,34 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] payload_url
-    #   This is the server endpoint that will receive the webhook payload.
+    #   The CodeBuild endpoint where webhook events are sent.
     #   @return [String]
     #
     # @!attribute [rw] secret
-    #   Use this secret while creating a webhook in GitHub for Enterprise.
-    #   The secret allows webhook requests sent by GitHub for Enterprise to
-    #   be authenticated by AWS CodeBuild.
+    #   The secret token of the associated repository.
     #   @return [String]
+    #
+    # @!attribute [rw] branch_filter
+    #   A regular expression used to determine which branches in a
+    #   repository are built when a webhook is triggered. If the name of a
+    #   branch matches the regular expression, then it is built. If it
+    #   doesn't match, then it is not. If branchFilter is empty, then all
+    #   branches are built.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_secret
+    #   A timestamp indicating the last time a repository's secret token
+    #   was modified.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Webhook AWS API Documentation
     #
     class Webhook < Struct.new(
       :url,
       :payload_url,
-      :secret)
+      :secret,
+      :branch_filter,
+      :last_modified_secret)
       include Aws::Structure
     end
 

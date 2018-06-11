@@ -13,6 +13,7 @@ module Aws::AppStream
 
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     AccountPassword = Shapes::StringShape.new(name: 'AccountPassword')
+    Action = Shapes::StringShape.new(name: 'Action')
     Application = Shapes::StructureShape.new(name: 'Application')
     Applications = Shapes::ListShape.new(name: 'Applications')
     AppstreamAgentVersion = Shapes::StringShape.new(name: 'AppstreamAgentVersion')
@@ -25,6 +26,8 @@ module Aws::AppStream
     ComputeCapacity = Shapes::StructureShape.new(name: 'ComputeCapacity')
     ComputeCapacityStatus = Shapes::StructureShape.new(name: 'ComputeCapacityStatus')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    CopyImageRequest = Shapes::StructureShape.new(name: 'CopyImageRequest')
+    CopyImageResponse = Shapes::StructureShape.new(name: 'CopyImageResponse')
     CreateDirectoryConfigRequest = Shapes::StructureShape.new(name: 'CreateDirectoryConfigRequest')
     CreateDirectoryConfigResult = Shapes::StructureShape.new(name: 'CreateDirectoryConfigResult')
     CreateFleetRequest = Shapes::StructureShape.new(name: 'CreateFleetRequest')
@@ -67,10 +70,13 @@ module Aws::AppStream
     DisassociateFleetRequest = Shapes::StructureShape.new(name: 'DisassociateFleetRequest')
     DisassociateFleetResult = Shapes::StructureShape.new(name: 'DisassociateFleetResult')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
+    Domain = Shapes::StringShape.new(name: 'Domain')
     DomainJoinInfo = Shapes::StructureShape.new(name: 'DomainJoinInfo')
+    DomainList = Shapes::ListShape.new(name: 'DomainList')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpireSessionRequest = Shapes::StructureShape.new(name: 'ExpireSessionRequest')
     ExpireSessionResult = Shapes::StructureShape.new(name: 'ExpireSessionResult')
+    FeedbackURL = Shapes::StringShape.new(name: 'FeedbackURL')
     Fleet = Shapes::StructureShape.new(name: 'Fleet')
     FleetAttribute = Shapes::StringShape.new(name: 'FleetAttribute')
     FleetAttributes = Shapes::ListShape.new(name: 'FleetAttributes')
@@ -92,6 +98,7 @@ module Aws::AppStream
     ImageStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageStateChangeReasonCode')
     IncompatibleImageException = Shapes::StructureShape.new(name: 'IncompatibleImageException')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InvalidAccountStatusException = Shapes::StructureShape.new(name: 'InvalidAccountStatusException')
     InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidRoleException = Shapes::StructureShape.new(name: 'InvalidRoleException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -107,8 +114,10 @@ module Aws::AppStream
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
+    Permission = Shapes::StringShape.new(name: 'Permission')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     RedirectURL = Shapes::StringShape.new(name: 'RedirectURL')
+    RegionName = Shapes::StringShape.new(name: 'RegionName')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceError = Shapes::StructureShape.new(name: 'ResourceError')
     ResourceErrors = Shapes::ListShape.new(name: 'ResourceErrors')
@@ -159,6 +168,8 @@ module Aws::AppStream
     UpdateStackRequest = Shapes::StructureShape.new(name: 'UpdateStackRequest')
     UpdateStackResult = Shapes::StructureShape.new(name: 'UpdateStackResult')
     UserId = Shapes::StringShape.new(name: 'UserId')
+    UserSetting = Shapes::StructureShape.new(name: 'UserSetting')
+    UserSettingList = Shapes::ListShape.new(name: 'UserSettingList')
     VisibilityType = Shapes::StringShape.new(name: 'VisibilityType')
     VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
 
@@ -187,6 +198,15 @@ module Aws::AppStream
     ComputeCapacityStatus.add_member(:in_use, Shapes::ShapeRef.new(shape: Integer, location_name: "InUse"))
     ComputeCapacityStatus.add_member(:available, Shapes::ShapeRef.new(shape: Integer, location_name: "Available"))
     ComputeCapacityStatus.struct_class = Types::ComputeCapacityStatus
+
+    CopyImageRequest.add_member(:source_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "SourceImageName"))
+    CopyImageRequest.add_member(:destination_image_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "DestinationImageName"))
+    CopyImageRequest.add_member(:destination_region, Shapes::ShapeRef.new(shape: RegionName, required: true, location_name: "DestinationRegion"))
+    CopyImageRequest.add_member(:destination_image_description, Shapes::ShapeRef.new(shape: Description, location_name: "DestinationImageDescription"))
+    CopyImageRequest.struct_class = Types::CopyImageRequest
+
+    CopyImageResponse.add_member(:destination_image_name, Shapes::ShapeRef.new(shape: Name, location_name: "DestinationImageName"))
+    CopyImageResponse.struct_class = Types::CopyImageResponse
 
     CreateDirectoryConfigRequest.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, required: true, location_name: "DirectoryName"))
     CreateDirectoryConfigRequest.add_member(:organizational_unit_distinguished_names, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedNamesList, required: true, location_name: "OrganizationalUnitDistinguishedNames"))
@@ -240,6 +260,8 @@ module Aws::AppStream
     CreateStackRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     CreateStackRequest.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
     CreateStackRequest.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
+    CreateStackRequest.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
+    CreateStackRequest.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -355,6 +377,8 @@ module Aws::AppStream
     DomainJoinInfo.add_member(:directory_name, Shapes::ShapeRef.new(shape: DirectoryName, location_name: "DirectoryName"))
     DomainJoinInfo.add_member(:organizational_unit_distinguished_name, Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName, location_name: "OrganizationalUnitDistinguishedName"))
     DomainJoinInfo.struct_class = Types::DomainJoinInfo
+
+    DomainList.member = Shapes::ShapeRef.new(shape: Domain)
 
     ExpireSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SessionId"))
     ExpireSessionRequest.struct_class = Types::ExpireSessionRequest
@@ -491,7 +515,9 @@ module Aws::AppStream
     Stack.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Stack.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
     Stack.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
+    Stack.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
     Stack.add_member(:stack_errors, Shapes::ShapeRef.new(shape: StackErrors, location_name: "StackErrors"))
+    Stack.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
     Stack.struct_class = Types::Stack
 
     StackAttributes.member = Shapes::ShapeRef.new(shape: StackAttribute)
@@ -529,6 +555,7 @@ module Aws::AppStream
 
     StorageConnector.add_member(:connector_type, Shapes::ShapeRef.new(shape: StorageConnectorType, required: true, location_name: "ConnectorType"))
     StorageConnector.add_member(:resource_identifier, Shapes::ShapeRef.new(shape: ResourceIdentifier, location_name: "ResourceIdentifier"))
+    StorageConnector.add_member(:domains, Shapes::ShapeRef.new(shape: DomainList, location_name: "Domains"))
     StorageConnector.struct_class = Types::StorageConnector
 
     StorageConnectorList.member = Shapes::ShapeRef.new(shape: StorageConnector)
@@ -586,11 +613,19 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
     UpdateStackRequest.add_member(:delete_storage_connectors, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "DeleteStorageConnectors"))
     UpdateStackRequest.add_member(:redirect_url, Shapes::ShapeRef.new(shape: RedirectURL, location_name: "RedirectURL"))
+    UpdateStackRequest.add_member(:feedback_url, Shapes::ShapeRef.new(shape: FeedbackURL, location_name: "FeedbackURL"))
     UpdateStackRequest.add_member(:attributes_to_delete, Shapes::ShapeRef.new(shape: StackAttributes, location_name: "AttributesToDelete"))
+    UpdateStackRequest.add_member(:user_settings, Shapes::ShapeRef.new(shape: UserSettingList, location_name: "UserSettings"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
     UpdateStackResult.struct_class = Types::UpdateStackResult
+
+    UserSetting.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    UserSetting.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "Permission"))
+    UserSetting.struct_class = Types::UserSetting
+
+    UserSettingList.member = Shapes::ShapeRef.new(shape: UserSetting)
 
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIdList, location_name: "SubnetIds"))
     VpcConfig.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, location_name: "SecurityGroupIds"))
@@ -619,10 +654,25 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: AssociateFleetRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateFleetResult)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
+      api.add_operation(:copy_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CopyImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CopyImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CopyImageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
+        o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
 
       api.add_operation(:create_directory_config, Seahorse::Model::Operation.new.tap do |o|
@@ -633,6 +683,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: CreateDirectoryConfigResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
       end)
 
       api.add_operation(:create_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -645,6 +696,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
@@ -658,6 +710,7 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: CreateImageBuilderRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateImageBuilderResult)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -684,6 +737,7 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: CreateStackRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateStackResult)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
@@ -865,6 +919,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
@@ -877,6 +932,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
 
@@ -908,6 +964,7 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -939,6 +996,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: UpdateFleetResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
@@ -959,6 +1017,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
       end)
     end

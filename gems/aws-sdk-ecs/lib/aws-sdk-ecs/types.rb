@@ -15,7 +15,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the attachment, such as an `ElasticNetworkInterface`.
+    #   The type of the attachment, such as `ElasticNetworkInterface`.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -130,18 +130,20 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] subnets
-    #   The subnets associated with the task or service.
+    #   The subnets associated with the task or service. There is a limit of
+    #   10 subnets able to be specified per AwsVpcConfiguration.
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
     #   The security groups associated with the task or service. If you do
     #   not specify a security group, the default security group for the VPC
-    #   is used.
+    #   is used. There is a limit of 5 security groups able to be specified
+    #   per AwsVpcConfiguration.
     #   @return [Array<String>]
     #
     # @!attribute [rw] assign_public_ip
-    #   Specifies whether or not the task's elastic network interface
-    #   receives a public IP address.
+    #   Whether the task's elastic network interface receives a public IP
+    #   address.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/AwsVpcConfiguration AWS API Documentation
@@ -265,6 +267,12 @@ module Aws::ECS
     #   The network interfaces associated with the container.
     #   @return [Array<Types::NetworkInterface>]
     #
+    # @!attribute [rw] health_status
+    #   The health status of the container. If health checks are not
+    #   configured for this container in its task definition, then it
+    #   reports health status as `UNKNOWN`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container AWS API Documentation
     #
     class Container < Struct.new(
@@ -275,7 +283,8 @@ module Aws::ECS
       :exit_code,
       :reason,
       :network_bindings,
-      :network_interfaces)
+      :network_interfaces,
+      :health_status)
       include Aws::Structure
     end
 
@@ -334,6 +343,14 @@ module Aws::ECS
     #             },
     #           ],
     #           init_process_enabled: false,
+    #           shared_memory_size: 1,
+    #           tmpfs: [
+    #             {
+    #               container_path: "String", # required
+    #               size: 1, # required
+    #               mount_options: ["String"],
+    #             },
+    #           ],
     #         },
     #         hostname: "String",
     #         user: "String",
@@ -366,6 +383,13 @@ module Aws::ECS
     #             "String" => "String",
     #           },
     #         },
+    #         health_check: {
+    #           command: ["String"], # required
+    #           interval: 1,
+    #           timeout: 1,
+    #           retries: 1,
+    #           start_period: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -394,6 +418,11 @@ module Aws::ECS
     #   allowed. This parameter maps to `Image` in the [Create a
     #   container][1] section of the [Docker Remote API][2] and the `IMAGE`
     #   parameter of [docker run][3].
+    #
+    #   * When a new task starts, the Amazon ECS container agent pulls the
+    #     latest version of the specified image and tag for the container to
+    #     use. However, subsequent updates to a repository image are not
+    #     propagated to already running tasks.
     #
     #   * Images in Amazon ECR repositories can be specified by either using
     #     the full `registry/repository:tag` or
@@ -463,7 +492,7 @@ module Aws::ECS
     #   instance uses the CPU value to calculate the relative CPU share
     #   ratios for running containers. For more information, see [CPU share
     #   constraint][5] in the Docker documentation. The minimum valid CPU
-    #   share value that the Linux kernel will allow is 2; however, the CPU
+    #   share value that the Linux kernel allows is 2; however, the CPU
     #   parameter is not required, and you can use CPU values below 2 in
     #   your container definitions. For CPU values below 2 (including null),
     #   the behavior varies based on your Amazon ECS container agent
@@ -498,18 +527,18 @@ module Aws::ECS
     #   a container][1] section of the [Docker Remote API][2] and the
     #   `--memory` option to [docker run][3].
     #
-    #   If your containers will be part of a task using the Fargate launch
-    #   type, this field is optional and the only requirement is that the
-    #   total amount of memory reserved for all containers within a task be
-    #   lower than the task `memory` value.
+    #   If your containers are part of a task using the Fargate launch type,
+    #   this field is optional and the only requirement is that the total
+    #   amount of memory reserved for all containers within a task be lower
+    #   than the task `memory` value.
     #
-    #   For containers that will be part of a task using the EC2 launch
-    #   type, you must specify a non-zero integer for one or both of
-    #   `memory` or `memoryReservation` in container definitions. If you
-    #   specify both, `memory` must be greater than `memoryReservation`. If
-    #   you specify `memoryReservation`, then that value is subtracted from
-    #   the available memory resources for the container instance on which
-    #   the container is placed; otherwise, the value of `memory` is used.
+    #   For containers that are part of a task using the EC2 launch type,
+    #   you must specify a non-zero integer for one or both of `memory` or
+    #   `memoryReservation` in container definitions. If you specify both,
+    #   `memory` must be greater than `memoryReservation`. If you specify
+    #   `memoryReservation`, then that value is subtracted from the
+    #   available memory resources for the container instance on which the
+    #   container is placed; otherwise, the value of `memory` is used.
     #
     #   The Docker daemon reserves a minimum of 4 MiB of memory for a
     #   container, so you should not specify fewer than 4 MiB of memory for
@@ -730,8 +759,7 @@ module Aws::ECS
     #   Linux-specific modifications that are applied to the container, such
     #   as Linux KernelCapabilities.
     #
-    #   <note markdown="1"> This parameter is not supported for Windows containers or tasks
-    #   using the Fargate launch type.
+    #   <note markdown="1"> This parameter is not supported for Windows containers.
     #
     #    </note>
     #   @return [Types::LinuxParameters]
@@ -740,6 +768,11 @@ module Aws::ECS
     #   The hostname to use for your container. This parameter maps to
     #   `Hostname` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--hostname` option to [docker run][3].
+    #
+    #   <note markdown="1"> The `hostname` parameter is not supported if using the `awsvpc`
+    #   networkMode.
+    #
+    #    </note>
     #
     #
     #
@@ -996,6 +1029,19 @@ module Aws::ECS
     #   [5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Types::LogConfiguration]
     #
+    # @!attribute [rw] health_check
+    #   The health check command and associated configuration parameters for
+    #   the container. This parameter maps to `HealthCheck` in the [Create a
+    #   container][1] section of the [Docker Remote API][2] and the
+    #   `HEALTHCHECK` parameter of [docker run][3].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   [3]: https://docs.docker.com/engine/reference/run/
+    #   @return [Types::HealthCheck]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition AWS API Documentation
     #
     class ContainerDefinition < Struct.new(
@@ -1025,7 +1071,8 @@ module Aws::ECS
       :docker_security_options,
       :docker_labels,
       :ulimits,
-      :log_configuration)
+      :log_configuration,
+      :health_check)
       include Aws::Structure
     end
 
@@ -1063,20 +1110,25 @@ module Aws::ECS
     #   @return [Types::VersionInfo]
     #
     # @!attribute [rw] remaining_resources
-    #   For most resource types, this parameter describes the remaining
-    #   resources of the container instance that are available for new
-    #   tasks. For port resource types, this parameter describes the ports
-    #   that are reserved by the Amazon ECS container agent and any
-    #   containers that have reserved port mappings; any port that is not
-    #   specified here is available for new tasks.
+    #   For CPU and memory resource types, this parameter describes the
+    #   remaining CPU and memory that has not already been allocated to
+    #   tasks and is therefore available for new tasks. For port resource
+    #   types, this parameter describes the ports that were reserved by the
+    #   Amazon ECS container agent (at instance registration time) and any
+    #   task containers that have reserved port mappings on the host (with
+    #   the `host` or `bridge` network mode). Any port that is not specified
+    #   here is available for new tasks.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] registered_resources
-    #   For most resource types, this parameter describes the registered
-    #   resources on the container instance that are in use by current
-    #   tasks. For port resource types, this parameter describes the ports
-    #   that were reserved by the Amazon ECS container agent when it
-    #   registered the container instance with Amazon ECS.
+    #   For CPU and memory resource types, this parameter describes the
+    #   amount of each resource that was available on the container instance
+    #   when the container agent registered it with Amazon ECS; this value
+    #   represents the total amount of CPU and memory that can be allocated
+    #   on this container instance to tasks. For port resource types, this
+    #   parameter describes the ports that were reserved by the Amazon ECS
+    #   container agent when it registered the container instance with
+    #   Amazon ECS.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] status
@@ -1318,6 +1370,14 @@ module Aws::ECS
     #             container_port: 1,
     #           },
     #         ],
+    #         service_registries: [
+    #           {
+    #             registry_arn: "String",
+    #             port: 1,
+    #             container_name: "String",
+    #             container_port: 1,
+    #           },
+    #         ],
     #         desired_count: 1, # required
     #         client_token: "String",
     #         launch_type: "EC2", # accepts EC2, FARGATE
@@ -1390,7 +1450,31 @@ module Aws::ECS
     #   this service is placed on a container instance, the container
     #   instance and port combination is registered as a target in the
     #   target group specified here.
+    #
+    #   Services with tasks that use the `awsvpc` network mode (for example,
+    #   those with the Fargate launch type) only support Application Load
+    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   supported. Also, when you create any target groups for these
+    #   services, you must choose `ip` as the target type, not `instance`,
+    #   because tasks that use the `awsvpc` network mode are associated with
+    #   an elastic network interface, not an Amazon EC2 instance.
     #   @return [Array<Types::LoadBalancer>]
+    #
+    # @!attribute [rw] service_registries
+    #   The details of the service discovery registries you want to assign
+    #   to this service. For more information, see [Service Discovery][1].
+    #
+    #   <note markdown="1"> Service discovery is supported for Fargate tasks if using platform
+    #   version v1.1.0 or later. For more information, see [AWS Fargate
+    #   Platform Versions][2].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
+    #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] desired_count
     #   The number of instantiations of the specified task definition to
@@ -1398,7 +1482,7 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure the
+    #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. Up to 32 ASCII characters are allowed.
     #   @return [String]
     #
@@ -1477,12 +1561,12 @@ module Aws::ECS
     #   scheduler should ignore unhealthy Elastic Load Balancing target
     #   health checks after a task has first started. This is only valid if
     #   your service is configured to use a load balancer. If your
-    #   service's tasks take a while to start and respond to ELB health
-    #   checks, you can specify a health check grace period of up to 1,800
-    #   seconds during which the ECS service scheduler will ignore ELB
-    #   health check status. This grace period can prevent the ECS service
-    #   scheduler from marking tasks as unhealthy and stopping them before
-    #   they have time to come up.
+    #   service's tasks take a while to start and respond to Elastic Load
+    #   Balancing health checks, you can specify a health check grace period
+    #   of up to 1,800 seconds during which the ECS service scheduler
+    #   ignores health check status. This grace period can prevent the ECS
+    #   service scheduler from marking tasks as unhealthy and stopping them
+    #   before they have time to come up.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
@@ -1492,6 +1576,7 @@ module Aws::ECS
       :service_name,
       :task_definition,
       :load_balancers,
+      :service_registries,
       :desired_count,
       :client_token,
       :launch_type,
@@ -1907,7 +1992,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] container_instances
-    #   A list of container instance IDs or full ARN entries.
+    #   A list of up to 100 container instance IDs or full Amazon Resource
+    #   Name (ARN) entries.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesRequest AWS API Documentation
@@ -2150,6 +2236,82 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # An object representing a container health check. Health check
+    # parameters that are specified in a container definition override any
+    # Docker health checks that exist in the container image (such as those
+    # specified in a parent image or from the image's Dockerfile).
+    #
+    # @note When making an API call, you may pass HealthCheck
+    #   data as a hash:
+    #
+    #       {
+    #         command: ["String"], # required
+    #         interval: 1,
+    #         timeout: 1,
+    #         retries: 1,
+    #         start_period: 1,
+    #       }
+    #
+    # @!attribute [rw] command
+    #   A string array representing the command that the container runs to
+    #   determine if it is healthy. The string array must start with `CMD`
+    #   to execute the command arguments directly, or `CMD-SHELL` to run the
+    #   command with the container's default shell. For example:
+    #
+    #   `[ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]`
+    #
+    #   An exit code of 0 indicates success, and non-zero exit code
+    #   indicates failure. For more information, see `HealthCheck` in the
+    #   [Create a container][1] section of the [Docker Remote API][2].
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container
+    #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] interval
+    #   The time period in seconds between each health check execution. You
+    #   may specify between 5 and 300 seconds. The default value is 30
+    #   seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout
+    #   The time period in seconds to wait for a health check to succeed
+    #   before it is considered a failure. You may specify between 2 and 60
+    #   seconds. The default value is 5 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retries
+    #   The number of times to retry a failed health check before the
+    #   container is considered unhealthy. You may specify between 1 and 10
+    #   retries. The default value is 3 retries.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_period
+    #   The optional grace period within which to provide containers time to
+    #   bootstrap before failed health checks count towards the maximum
+    #   number of retries. You may specify between 0 and 300 seconds. The
+    #   `startPeriod` is disabled by default.
+    #
+    #   <note markdown="1"> If a health check succeeds within the `startPeriod`, then the
+    #   container is considered healthy and any subsequent failures count
+    #   toward the maximum number of retries.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HealthCheck AWS API Documentation
+    #
+    class HealthCheck < Struct.new(
+      :command,
+      :interval,
+      :timeout,
+      :retries,
+      :start_period)
+      include Aws::Structure
+    end
+
     # Hostnames and IP address entries that are added to the `/etc/hosts`
     # file of a container via the `extraHosts` parameter of its
     # ContainerDefinition.
@@ -2233,6 +2395,11 @@ module Aws::ECS
     #   default configuration provided by Docker. This parameter maps to
     #   `CapAdd` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--cap-add` option to [docker run][3].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the `add`
+    #   parameter is not supported.
+    #
+    #    </note>
     #
     #   Valid values: `"ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" |
     #   "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" |
@@ -2329,17 +2496,36 @@ module Aws::ECS
     #           },
     #         ],
     #         init_process_enabled: false,
+    #         shared_memory_size: 1,
+    #         tmpfs: [
+    #           {
+    #             container_path: "String", # required
+    #             size: 1, # required
+    #             mount_options: ["String"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] capabilities
     #   The Linux capabilities for the container that are added to or
     #   dropped from the default configuration provided by Docker.
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type,
+    #   `capabilities` is supported but the `add` parameter is not
+    #   supported.
+    #
+    #    </note>
     #   @return [Types::KernelCapabilities]
     #
     # @!attribute [rw] devices
     #   Any host devices to expose to the container. This parameter maps to
     #   `Devices` in the [Create a container][1] section of the [Docker
     #   Remote API][2] and the `--device` option to [docker run][3].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the
+    #   `devices` parameter is not supported.
+    #
+    #    </note>
     #
     #
     #
@@ -2362,12 +2548,43 @@ module Aws::ECS
     #   [1]: https://docs.docker.com/engine/reference/run/
     #   @return [Boolean]
     #
+    # @!attribute [rw] shared_memory_size
+    #   The value for the size (in MiB) of the `/dev/shm` volume. This
+    #   parameter maps to the `--shm-size` option to [docker run][1].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the
+    #   `sharedMemorySize` parameter is not supported.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tmpfs
+    #   The container path, mount options, and size (in MiB) of the tmpfs
+    #   mount. This parameter maps to the `--tmpfs` option to [docker
+    #   run][1].
+    #
+    #   <note markdown="1"> If you are using tasks that use the Fargate launch type, the `tmpfs`
+    #   parameter is not supported.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.docker.com/engine/reference/run/
+    #   @return [Array<Types::Tmpfs>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LinuxParameters AWS API Documentation
     #
     class LinuxParameters < Struct.new(
       :capabilities,
       :devices,
-      :init_process_enabled)
+      :init_process_enabled,
+      :shared_memory_size,
+      :tmpfs)
       include Aws::Structure
     end
 
@@ -2995,6 +3212,14 @@ module Aws::ECS
 
     # Details on a load balancer that is used with a service.
     #
+    # Services with tasks that use the `awsvpc` network mode (for example,
+    # those with the Fargate launch type) only support Application Load
+    # Balancers and Network Load Balancers; Classic Load Balancers are not
+    # supported. Also, when you create any target groups for these services,
+    # you must choose `ip` as the target type, not `instance`, because tasks
+    # that use the `awsvpc` network mode are associated with an elastic
+    # network interface, not an Amazon EC2 instance.
+    #
     # @note When making an API call, you may pass LoadBalancer
     #   data as a hash:
     #
@@ -3008,6 +3233,12 @@ module Aws::ECS
     # @!attribute [rw] target_group_arn
     #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
     #   target group associated with a service.
+    #
+    #   If your service's task definition uses the `awsvpc` network mode
+    #   (which is required for the Fargate launch type), you must choose
+    #   `ip` as the target type, not `instance`, because tasks that use the
+    #   `awsvpc` network mode are associated with an elastic network
+    #   interface, not an Amazon EC2 instance.
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
@@ -3354,8 +3585,8 @@ module Aws::ECS
     #   container.
     #
     #   If using containers in a task with the `awsvpc` or `host` network
-    #   mode, the `hostPort` can either be left blank or needs to be the
-    #   same value as the `containerPort`.
+    #   mode, the `hostPort` can either be left blank or set to the same
+    #   value as the `containerPort`.
     #
     #   If using containers in a task with the `bridge` network mode, you
     #   can specify a non-reserved host port for your container port
@@ -3602,6 +3833,14 @@ module Aws::ECS
     #                 },
     #               ],
     #               init_process_enabled: false,
+    #               shared_memory_size: 1,
+    #               tmpfs: [
+    #                 {
+    #                   container_path: "String", # required
+    #                   size: 1, # required
+    #                   mount_options: ["String"],
+    #                 },
+    #               ],
     #             },
     #             hostname: "String",
     #             user: "String",
@@ -3633,6 +3872,13 @@ module Aws::ECS
     #               options: {
     #                 "String" => "String",
     #               },
+    #             },
+    #             health_check: {
+    #               command: ["String"], # required
+    #               interval: 1,
+    #               timeout: 1,
+    #               retries: 1,
+    #               start_period: 1,
     #             },
     #           },
     #         ],
@@ -3745,8 +3991,11 @@ module Aws::ECS
     #   @return [Array<String>]
     #
     # @!attribute [rw] cpu
-    #   The number of `cpu` units used by the task. If using the EC2 launch
-    #   type, this field is optional and any value can be used.
+    #   The number of CPU units used by the task. It can be expressed as an
+    #   integer using CPU units, for example `1024`, or as a string using
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but
+    #   will be converted to an integer indicating the CPU units when the
+    #   task definition is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -3754,27 +4003,37 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If you are using the Fargate launch type, this field is required and
-    #   you must use one of the following values, which determines your
-    #   range of valid values for the `memory` parameter:
+    #   If using the EC2 launch type, this field is optional. Supported
+    #   values are between `128` CPU units (`0.125` vCPUs) and `10240` CPU
+    #   units (`10` vCPUs).
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 0.5GB, 1GB, 2GB
+    #   If using the Fargate launch type, this field is required and you
+    #   must use one of the following values, which determines your range of
+    #   supported values for the `memory` parameter:
     #
-    #   * 512 (.5 vCPU) - Available `memory` values: 1GB, 2GB, 3GB, 4GB
+    #   * 256 (.25 vCPU) - Available `memory` values: 512 (0.5 GB), 1024 (1
+    #     GB), 2048 (2 GB)
     #
-    #   * 1024 (1 vCPU) - Available `memory` values: 2GB, 3GB, 4GB, 5GB,
-    #     6GB, 7GB, 8GB
+    #   * 512 (.5 vCPU) - Available `memory` values: 1024 (1 GB), 2048 (2
+    #     GB), 3072 (3 GB), 4096 (4 GB)
     #
-    #   * 2048 (2 vCPU) - Available `memory` values: Between 4GB and 16GB in
-    #     1GB increments
+    #   * 1024 (1 vCPU) - Available `memory` values: 2048 (2 GB), 3072 (3
+    #     GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8
+    #     GB)
     #
-    #   * 4096 (4 vCPU) - Available `memory` values: Between 8GB and 30GB in
-    #     1GB increments
+    #   * 2048 (2 vCPU) - Available `memory` values: Between 4096 (4 GB) and
+    #     16384 (16 GB) in increments of 1024 (1 GB)
+    #
+    #   * 4096 (4 vCPU) - Available `memory` values: Between 8192 (8 GB) and
+    #     30720 (30 GB) in increments of 1024 (1 GB)
     #   @return [String]
     #
     # @!attribute [rw] memory
-    #   The amount (in MiB) of memory used by the task. If using the EC2
-    #   launch type, this field is optional and any value can be used.
+    #   The amount of memory (in MiB) used by the task. It can be expressed
+    #   as an integer using MiB, for example `1024`, or as a string using
+    #   GB, for example `1GB` or `1 GB`, in a task definition but will be
+    #   converted to an integer indicating the MiB when the task definition
+    #   is registered.
     #
     #   <note markdown="1"> Task-level CPU and memory parameters are ignored for Windows
     #   containers. We recommend specifying container-level resources for
@@ -3782,22 +4041,26 @@ module Aws::ECS
     #
     #    </note>
     #
-    #   If you are using the Fargate launch type, this field is required and
-    #   you must use one of the following values, which determines your
-    #   range of valid values for the `cpu` parameter:
+    #   If using the EC2 launch type, this field is optional.
     #
-    #   * 0\.5GB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
+    #   If using the Fargate launch type, this field is required and you
+    #   must use one of the following values, which determines your range of
+    #   supported values for the `cpu` parameter:
     #
-    #   * 1GB, 2GB, 3GB, 4GB - Available `cpu` values: 512 (.5 vCPU)
+    #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values:
+    #     256 (.25 vCPU)
     #
-    #   * 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available `cpu` values: 1024
-    #     (1 vCPU)
+    #   * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available
+    #     `cpu` values: 512 (.5 vCPU)
     #
-    #   * Between 4GB and 16GB in 1GB increments - Available `cpu` values:
-    #     2048 (2 vCPU)
+    #   * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB),
+    #     7168 (7 GB), 8192 (8 GB) - Available `cpu` values: 1024 (1 vCPU)
     #
-    #   * Between 8GB and 30GB in 1GB increments - Available `cpu` values:
-    #     4096 (4 vCPU)
+    #   * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
+    #     - Available `cpu` values: 2048 (2 vCPU)
+    #
+    #   * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
+    #     - Available `cpu` values: 4096 (4 vCPU)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
@@ -3842,8 +4105,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the resource, such as `cpu`, `memory`, `ports`, or a
-    #   user-defined resource.
+    #   The name of the resource, such as `CPU`, `MEMORY`, `PORTS`,
+    #   `PORTS_UDP`, or a user-defined resource.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -4080,7 +4343,18 @@ module Aws::ECS
     #   the load balancer name, the container name (as it appears in a
     #   container definition), and the container port to access from the
     #   load balancer.
+    #
+    #   Services with tasks that use the `awsvpc` network mode (for example,
+    #   those with the Fargate launch type) only support Application Load
+    #   Balancers and Network Load Balancers; Classic Load Balancers are not
+    #   supported. Also, when you create any target groups for these
+    #   services, you must choose `ip` as the target type, not `instance`,
+    #   because tasks that use the `awsvpc` network mode are associated with
+    #   an elastic network interface, not an Amazon EC2 instance.
     #   @return [Array<Types::LoadBalancer>]
+    #
+    # @!attribute [rw] service_registries
+    #   @return [Array<Types::ServiceRegistry>]
     #
     # @!attribute [rw] status
     #   The status of the service. The valid values are `ACTIVE`,
@@ -4175,6 +4449,7 @@ module Aws::ECS
       :service_name,
       :cluster_arn,
       :load_balancers,
+      :service_registries,
       :status,
       :desired_count,
       :running_count,
@@ -4214,6 +4489,67 @@ module Aws::ECS
       :id,
       :created_at,
       :message)
+      include Aws::Structure
+    end
+
+    # Details of the service registry.
+    #
+    # @note When making an API call, you may pass ServiceRegistry
+    #   data as a hash:
+    #
+    #       {
+    #         registry_arn: "String",
+    #         port: 1,
+    #         container_name: "String",
+    #         container_port: 1,
+    #       }
+    #
+    # @!attribute [rw] registry_arn
+    #   The Amazon Resource Name (ARN) of the service registry. The
+    #   currently supported service registry is Amazon Route 53 Auto Naming.
+    #   For more information, see [Service][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_autonaming_Service.html
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   The port value used if your service discovery service specified an
+    #   SRV record. This field is required if both the `awsvpc` network mode
+    #   and SRV records are used.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_name
+    #   The container name value, already specified in the task definition,
+    #   to be used for your service discovery service. If the task
+    #   definition that your service task specifies uses the `bridge` or
+    #   `host` network mode, you must specify a `containerName` and
+    #   `containerPort` combination from the task definition. If the task
+    #   definition that your service task specifies uses the `awsvpc`
+    #   network mode and a type SRV DNS record is used, you must specify
+    #   either a `containerName` and `containerPort` combination or a `port`
+    #   value, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_port
+    #   The port value, already specified in the task definition, to be used
+    #   for your service discovery service. If the task definition your
+    #   service task specifies uses the `bridge` or `host` network mode, you
+    #   must specify a `containerName` and `containerPort` combination from
+    #   the task definition. If the task definition your service task
+    #   specifies uses the `awsvpc` network mode and a type SRV DNS record
+    #   is used, you must specify either a `containerName` and
+    #   `containerPort` combination or a `port` value, but not both.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRegistry AWS API Documentation
+    #
+    class ServiceRegistry < Struct.new(
+      :registry_arn,
+      :port,
+      :container_name,
+      :container_port)
       include Aws::Structure
     end
 
@@ -4532,7 +4868,7 @@ module Aws::ECS
     #   @return [Time]
     #
     # @!attribute [rw] execution_stopped_at
-    #   The Unix timestamp for when the task execution stopped.
+    #   The Unix time stamp for when the task execution stopped.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChangeRequest AWS API Documentation
@@ -4592,45 +4928,64 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] cpu
-    #   The number of `cpu` units used by the task. If using the EC2 launch
-    #   type, this field is optional and any value can be used. If using the
-    #   Fargate launch type, this field is required and you must use one of
-    #   the following values, which determines your range of valid values
-    #   for the `memory` parameter:
+    #   The number of CPU units used by the task. It can be expressed as an
+    #   integer using CPU units, for example `1024`, or as a string using
+    #   vCPUs, for example `1 vCPU` or `1 vcpu`, in a task definition but is
+    #   converted to an integer indicating the CPU units when the task
+    #   definition is registered.
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 0.5GB, 1GB, 2GB
+    #   If using the EC2 launch type, this field is optional. Supported
+    #   values are between `128` CPU units (`0.125` vCPUs) and `10240` CPU
+    #   units (`10` vCPUs).
     #
-    #   * 512 (.5 vCPU) - Available `memory` values: 1GB, 2GB, 3GB, 4GB
+    #   If using the Fargate launch type, this field is required and you
+    #   must use one of the following values, which determines your range of
+    #   supported values for the `memory` parameter:
     #
-    #   * 1024 (1 vCPU) - Available `memory` values: 2GB, 3GB, 4GB, 5GB,
-    #     6GB, 7GB, 8GB
+    #   * 256 (.25 vCPU) - Available `memory` values: 512 (0.5 GB), 1024 (1
+    #     GB), 2048 (2 GB)
     #
-    #   * 2048 (2 vCPU) - Available `memory` values: Between 4GB and 16GB in
-    #     1GB increments
+    #   * 512 (.5 vCPU) - Available `memory` values: 1024 (1 GB), 2048 (2
+    #     GB), 3072 (3 GB), 4096 (4 GB)
     #
-    #   * 4096 (4 vCPU) - Available `memory` values: Between 8GB and 30GB in
-    #     1GB increments
+    #   * 1024 (1 vCPU) - Available `memory` values: 2048 (2 GB), 3072 (3
+    #     GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8
+    #     GB)
+    #
+    #   * 2048 (2 vCPU) - Available `memory` values: Between 4096 (4 GB) and
+    #     16384 (16 GB) in increments of 1024 (1 GB)
+    #
+    #   * 4096 (4 vCPU) - Available `memory` values: Between 8192 (8 GB) and
+    #     30720 (30 GB) in increments of 1024 (1 GB)
     #   @return [String]
     #
     # @!attribute [rw] memory
-    #   The amount (in MiB) of memory used by the task. If using the EC2
-    #   launch type, this field is optional and any value can be used. If
-    #   using the Fargate launch type, this field is required and you must
-    #   use one of the following values, which determines your range of
-    #   valid values for the `cpu` parameter:
+    #   The amount of memory (in MiB) used by the task. It can be expressed
+    #   as an integer using MiB, for example `1024`, or as a string using
+    #   GB, for example `1GB` or `1 GB`, in a task definition but is
+    #   converted to an integer indicating the MiB when the task definition
+    #   is registered.
     #
-    #   * 0\.5GB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
+    #   If using the EC2 launch type, this field is optional.
     #
-    #   * 1GB, 2GB, 3GB, 4GB - Available `cpu` values: 512 (.5 vCPU)
+    #   If using the Fargate launch type, this field is required and you
+    #   must use one of the following values, which determines your range of
+    #   supported values for the `cpu` parameter:
     #
-    #   * 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available `cpu` values: 1024
-    #     (1 vCPU)
+    #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values:
+    #     256 (.25 vCPU)
     #
-    #   * Between 4GB and 16GB in 1GB increments - Available `cpu` values:
-    #     2048 (2 vCPU)
+    #   * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available
+    #     `cpu` values: 512 (.5 vCPU)
     #
-    #   * Between 8GB and 30GB in 1GB increments - Available `cpu` values:
-    #     4096 (4 vCPU)
+    #   * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB),
+    #     7168 (7 GB), 8192 (8 GB) - Available `cpu` values: 1024 (1 vCPU)
+    #
+    #   * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
+    #     - Available `cpu` values: 2048 (2 vCPU)
+    #
+    #   * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
+    #     - Available `cpu` values: 4096 (4 vCPU)
     #   @return [String]
     #
     # @!attribute [rw] containers
@@ -4675,7 +5030,7 @@ module Aws::ECS
     #   @return [Time]
     #
     # @!attribute [rw] execution_stopped_at
-    #   The Unix timestamp for when the task execution stopped.
+    #   The Unix time stamp for when the task execution stopped.
     #   @return [Time]
     #
     # @!attribute [rw] created_at
@@ -4689,8 +5044,8 @@ module Aws::ECS
     #   @return [Time]
     #
     # @!attribute [rw] stopping_at
-    #   The Unix time stamp for when the task will stop (the task
-    #   transitioned from the `RUNNING` state to the `STOPPED` state).
+    #   The Unix time stamp for when the task will stop (transitions from
+    #   the `RUNNING` state to `STOPPED`).
     #   @return [Time]
     #
     # @!attribute [rw] stopped_at
@@ -4721,6 +5076,24 @@ module Aws::ECS
     #   uses the `awsvpc` network mode.
     #   @return [Array<Types::Attachment>]
     #
+    # @!attribute [rw] health_status
+    #   The health status for the task, which is determined by the health of
+    #   the essential containers in the task. If all essential containers in
+    #   the task are reporting as `HEALTHY`, then the task status also
+    #   reports as `HEALTHY`. If any essential containers in the task are
+    #   reporting as `UNHEALTHY` or `UNKNOWN`, then the task status also
+    #   reports as `UNHEALTHY` or `UNKNOWN`, accordingly.
+    #
+    #   <note markdown="1"> The Amazon ECS container agent does not monitor or report on Docker
+    #   health checks that are embedded in a container image (such as those
+    #   specified in a parent image or from the image's Dockerfile) and not
+    #   specified in the container definition. Health check parameters that
+    #   are specified in a container definition override any Docker health
+    #   checks that exist in the container image.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
     #
     class Task < Struct.new(
@@ -4749,7 +5122,8 @@ module Aws::ECS
       :group,
       :launch_type,
       :platform_version,
-      :attachments)
+      :attachments,
+      :health_status)
       include Aws::Structure
     end
 
@@ -4906,18 +5280,21 @@ module Aws::ECS
     #   the following values, which determines your range of valid values
     #   for the `memory` parameter:
     #
-    #   * 256 (.25 vCPU) - Available `memory` values: 0.5GB, 1GB, 2GB
+    #   * 256 (.25 vCPU) - Available `memory` values: 512 (0.5 GB), 1024 (1
+    #     GB), 2048 (2 GB)
     #
-    #   * 512 (.5 vCPU) - Available `memory` values: 1GB, 2GB, 3GB, 4GB
+    #   * 512 (.5 vCPU) - Available `memory` values: 1024 (1 GB), 2048 (2
+    #     GB), 3072 (3 GB), 4096 (4 GB)
     #
-    #   * 1024 (1 vCPU) - Available `memory` values: 2GB, 3GB, 4GB, 5GB,
-    #     6GB, 7GB, 8GB
+    #   * 1024 (1 vCPU) - Available `memory` values: 2048 (2 GB), 3072 (3
+    #     GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8
+    #     GB)
     #
-    #   * 2048 (2 vCPU) - Available `memory` values: Between 4GB and 16GB in
-    #     1GB increments
+    #   * 2048 (2 vCPU) - Available `memory` values: Between 4096 (4 GB) and
+    #     16384 (16 GB) in increments of 1024 (1 GB)
     #
-    #   * 4096 (4 vCPU) - Available `memory` values: Between 8GB and 30GB in
-    #     1GB increments
+    #   * 4096 (4 vCPU) - Available `memory` values: Between 8192 (8 GB) and
+    #     30720 (30 GB) in increments of 1024 (1 GB)
     #   @return [String]
     #
     # @!attribute [rw] memory
@@ -4927,18 +5304,20 @@ module Aws::ECS
     #   use one of the following values, which determines your range of
     #   valid values for the `cpu` parameter:
     #
-    #   * 0\.5GB, 1GB, 2GB - Available `cpu` values: 256 (.25 vCPU)
+    #   * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available `cpu` values:
+    #     256 (.25 vCPU)
     #
-    #   * 1GB, 2GB, 3GB, 4GB - Available `cpu` values: 512 (.5 vCPU)
+    #   * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available
+    #     `cpu` values: 512 (.5 vCPU)
     #
-    #   * 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available `cpu` values: 1024
-    #     (1 vCPU)
+    #   * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB),
+    #     7168 (7 GB), 8192 (8 GB) - Available `cpu` values: 1024 (1 vCPU)
     #
-    #   * Between 4GB and 16GB in 1GB increments - Available `cpu` values:
-    #     2048 (2 vCPU)
+    #   * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB)
+    #     - Available `cpu` values: 2048 (2 vCPU)
     #
-    #   * Between 8GB and 30GB in 1GB increments - Available `cpu` values:
-    #     4096 (4 vCPU)
+    #   * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
+    #     - Available `cpu` values: 4096 (4 vCPU)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition AWS API Documentation
@@ -4965,7 +5344,7 @@ module Aws::ECS
     # An object representing a constraint on task placement in the task
     # definition.
     #
-    # If you are using the Fargate launch type, task placement contraints
+    # If you are using the Fargate launch type, task placement constraints
     # are not supported.
     #
     # For more information, see [Task Placement Constraints][1] in the
@@ -5054,6 +5433,45 @@ module Aws::ECS
       :container_overrides,
       :task_role_arn,
       :execution_role_arn)
+      include Aws::Structure
+    end
+
+    # The container path, mount options, and size of the tmpfs mount.
+    #
+    # @note When making an API call, you may pass Tmpfs
+    #   data as a hash:
+    #
+    #       {
+    #         container_path: "String", # required
+    #         size: 1, # required
+    #         mount_options: ["String"],
+    #       }
+    #
+    # @!attribute [rw] container_path
+    #   The absolute file path where the tmpfs volume will be mounted.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The size (in MiB) of the tmpfs volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] mount_options
+    #   The list of tmpfs volume mount options.
+    #
+    #   Valid values: `"defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev"
+    #   | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" |
+    #   "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" |
+    #   "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" |
+    #   "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" |
+    #   "relatime" | "norelatime" | "strictatime" | "nostrictatime"`
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Tmpfs AWS API Documentation
+    #
+    class Tmpfs < Struct.new(
+      :container_path,
+      :size,
+      :mount_options)
       include Aws::Structure
     end
 
@@ -5234,7 +5652,7 @@ module Aws::ECS
     # @!attribute [rw] network_configuration
     #   The network configuration for the service. This parameter is
     #   required for task definitions that use the `awsvpc` network mode to
-    #   receive their own Elastic Network Interface, and it is not supported
+    #   receive their own elastic network interface, and it is not supported
     #   for other network modes. For more information, see [Task
     #   Networking][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
@@ -5257,7 +5675,12 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] force_new_deployment
-    #   Whether or not to force a new deployment of the service.
+    #   Whether to force a new deployment of the service. Deployments are
+    #   not forced by default. You can use this option to trigger a new
+    #   deployment with no service definition changes. For example, you can
+    #   update a service's tasks to use a newer Docker image with the same
+    #   image/tag combination (`my_image:latest`) or to roll Fargate tasks
+    #   onto a newer platform version.
     #   @return [Boolean]
     #
     # @!attribute [rw] health_check_grace_period_seconds
@@ -5265,12 +5688,12 @@ module Aws::ECS
     #   scheduler should ignore unhealthy Elastic Load Balancing target
     #   health checks after a task has first started. This is only valid if
     #   your service is configured to use a load balancer. If your
-    #   service's tasks take a while to start and respond to ELB health
-    #   checks, you can specify a health check grace period of up to 1,800
-    #   seconds during which the ECS service scheduler will ignore ELB
-    #   health check status. This grace period can prevent the ECS service
-    #   scheduler from marking tasks as unhealthy and stopping them before
-    #   they have time to come up.
+    #   service's tasks take a while to start and respond to Elastic Load
+    #   Balancing health checks, you can specify a health check grace period
+    #   of up to 1,800 seconds during which the ECS service scheduler
+    #   ignores the Elastic Load Balancing health check status. This grace
+    #   period can prevent the ECS service scheduler from marking tasks as
+    #   unhealthy and stopping them before they have time to come up.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation

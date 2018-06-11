@@ -29,7 +29,10 @@ module Aws
 
         def extract_body(rules, response)
           Body.new(parser_class(response), rules).
-            apply(response.context.http_response.body, response.data)
+            apply(
+              response.context.http_response.body,
+              response.data
+            )
         end
 
         def parser_class(response)

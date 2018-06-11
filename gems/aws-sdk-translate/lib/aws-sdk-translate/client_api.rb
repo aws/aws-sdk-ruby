@@ -12,6 +12,7 @@ module Aws::Translate
     include Seahorse::Model
 
     BoundedLengthString = Shapes::StringShape.new(name: 'BoundedLengthString')
+    DetectedLanguageLowConfidenceException = Shapes::StructureShape.new(name: 'DetectedLanguageLowConfidenceException')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     LanguageCodeString = Shapes::StringShape.new(name: 'LanguageCodeString')
@@ -59,6 +60,7 @@ module Aws::Translate
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguagePairException)
+        o.errors << Shapes::ShapeRef.new(shape: DetectedLanguageLowConfidenceException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)

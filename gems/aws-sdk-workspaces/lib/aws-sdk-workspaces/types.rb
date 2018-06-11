@@ -8,6 +8,67 @@
 module Aws::WorkSpaces
   module Types
 
+    # @note When making an API call, you may pass AssociateIpGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         group_ids: ["IpGroupId"], # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The ID of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_ids
+    #   The IDs of one or more IP access control groups.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroupsRequest AWS API Documentation
+    #
+    class AssociateIpGroupsRequest < Struct.new(
+      :directory_id,
+      :group_ids)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroupsResult AWS API Documentation
+    #
+    class AssociateIpGroupsResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass AuthorizeIpRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "IpGroupId", # required
+    #         user_rules: [ # required
+    #           {
+    #             ip_rule: "IpRule",
+    #             rule_desc: "IpRuleDesc",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_rules
+    #   The rules to add to the group.
+    #   @return [Array<Types::IpRuleItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AuthorizeIpRulesRequest AWS API Documentation
+    #
+    class AuthorizeIpRulesRequest < Struct.new(
+      :group_id,
+      :user_rules)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AuthorizeIpRulesResult AWS API Documentation
+    #
+    class AuthorizeIpRulesResult < Aws::EmptyStructure; end
+
     # Information about the compute type.
     #
     # @!attribute [rw] name
@@ -18,6 +79,52 @@ module Aws::WorkSpaces
     #
     class ComputeType < Struct.new(
       :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateIpGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "IpGroupName", # required
+    #         group_desc: "IpGroupDesc",
+    #         user_rules: [
+    #           {
+    #             ip_rule: "IpRule",
+    #             rule_desc: "IpRuleDesc",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_desc
+    #   The description of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_rules
+    #   The rules to add to the group.
+    #   @return [Array<Types::IpRuleItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroupRequest AWS API Documentation
+    #
+    class CreateIpGroupRequest < Struct.new(
+      :group_name,
+      :group_desc,
+      :user_rules)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_id
+    #   The ID of the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroupResult AWS API Documentation
+    #
+    class CreateIpGroupResult < Struct.new(
+      :group_id)
       include Aws::Structure
     end
 
@@ -35,11 +142,11 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource.
+    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags. Each resource can have a maximum of 50 tags.
+    #   The tags. Each WorkSpace can have a maximum of 50 tags.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsRequest AWS API Documentation
@@ -84,7 +191,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspaces
-    #   Information about the WorkSpaces to create.
+    #   The WorkSpaces to create. You can specify up to 25 WorkSpaces.
     #   @return [Array<Types::WorkspaceRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesRequest AWS API Documentation
@@ -152,6 +259,28 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteIpGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "IpGroupId", # required
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the IP access control group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroupRequest AWS API Documentation
+    #
+    class DeleteIpGroupRequest < Struct.new(
+      :group_id)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroupResult AWS API Documentation
+    #
+    class DeleteIpGroupResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteTagsRequest
     #   data as a hash:
     #
@@ -161,7 +290,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource.
+    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -180,6 +309,55 @@ module Aws::WorkSpaces
     #
     class DeleteTagsResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DescribeIpGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_ids: ["IpGroupId"],
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] group_ids
+    #   The IDs of one or more IP access control groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. (You received this token from
+    #   a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroupsRequest AWS API Documentation
+    #
+    class DescribeIpGroupsRequest < Struct.new(
+      :group_ids,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result
+    #   Information about the IP access control groups.
+    #   @return [Array<Types::WorkspacesIpGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next set of results, or null if
+    #   there are no more results available. This token is valid for one day
+    #   and must be used within that time frame.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroupsResult AWS API Documentation
+    #
+    class DescribeIpGroupsResult < Struct.new(
+      :result,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeTagsRequest
     #   data as a hash:
     #
@@ -188,7 +366,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] resource_id
-    #   The ID of the resource.
+    #   The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsRequest AWS API Documentation
@@ -316,7 +494,8 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_ids
-    #   The identifiers of the WorkSpaces.
+    #   The identifiers of the WorkSpaces. You can specify up to 25
+    #   WorkSpaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -430,6 +609,34 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateIpGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_id: "DirectoryId", # required
+    #         group_ids: ["IpGroupId"], # required
+    #       }
+    #
+    # @!attribute [rw] directory_id
+    #   The ID of the directory.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_ids
+    #   The IDs of one or more IP access control groups.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroupsRequest AWS API Documentation
+    #
+    class DisassociateIpGroupsRequest < Struct.new(
+      :directory_id,
+      :group_ids)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroupsResult AWS API Documentation
+    #
+    class DisassociateIpGroupsResult < Aws::EmptyStructure; end
+
     # Information about a WorkSpace that could not be created.
     #
     # @!attribute [rw] workspace_request
@@ -476,6 +683,32 @@ module Aws::WorkSpaces
       :workspace_id,
       :error_code,
       :error_message)
+      include Aws::Structure
+    end
+
+    # Information about a rule for an IP access control group.
+    #
+    # @note When making an API call, you may pass IpRuleItem
+    #   data as a hash:
+    #
+    #       {
+    #         ip_rule: "IpRule",
+    #         rule_desc: "IpRuleDesc",
+    #       }
+    #
+    # @!attribute [rw] ip_rule
+    #   The IP address range, in CIDR notation.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_desc
+    #   The description.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IpRuleItem AWS API Documentation
+    #
+    class IpRuleItem < Struct.new(
+      :ip_rule,
+      :rule_desc)
       include Aws::Structure
     end
 
@@ -531,6 +764,34 @@ module Aws::WorkSpaces
     #
     class ModifyWorkspacePropertiesResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass ModifyWorkspaceStateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         workspace_id: "WorkspaceId", # required
+    #         workspace_state: "AVAILABLE", # required, accepts AVAILABLE, ADMIN_MAINTENANCE
+    #       }
+    #
+    # @!attribute [rw] workspace_id
+    #   The ID of the WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_state
+    #   The WorkSpace state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceStateRequest AWS API Documentation
+    #
+    class ModifyWorkspaceStateRequest < Struct.new(
+      :workspace_id,
+      :workspace_state)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceStateResult AWS API Documentation
+    #
+    class ModifyWorkspaceStateResult < Aws::EmptyStructure; end
+
     # Information used to reboot a WorkSpace.
     #
     # @note When making an API call, you may pass RebootRequest
@@ -541,7 +802,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The identifier of the WorkSpace.
+    #   The ID of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootRequest AWS API Documentation
@@ -563,7 +824,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] reboot_workspace_requests
-    #   The WorkSpaces to reboot.
+    #   The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
     #   @return [Array<Types::RebootRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspacesRequest AWS API Documentation
@@ -594,7 +855,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The identifier of the WorkSpace.
+    #   The ID of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildRequest AWS API Documentation
@@ -616,7 +877,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] rebuild_workspace_requests
-    #   The WorkSpaces to rebuild.
+    #   The WorkSpace to rebuild. You can specify a single WorkSpace.
     #   @return [Array<Types::RebuildRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesRequest AWS API Documentation
@@ -627,7 +888,7 @@ module Aws::WorkSpaces
     end
 
     # @!attribute [rw] failed_requests
-    #   Information about the WorkSpaces that could not be rebuilt.
+    #   Information about the WorkSpace if it could not be rebuilt.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesResult AWS API Documentation
@@ -636,6 +897,34 @@ module Aws::WorkSpaces
       :failed_requests)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass RevokeIpRulesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "IpGroupId", # required
+    #         user_rules: ["IpRule"], # required
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_rules
+    #   The rules to remove from the group.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RevokeIpRulesRequest AWS API Documentation
+    #
+    class RevokeIpRulesRequest < Struct.new(
+      :group_id,
+      :user_rules)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RevokeIpRulesResult AWS API Documentation
+    #
+    class RevokeIpRulesResult < Aws::EmptyStructure; end
 
     # Information about the root volume for a WorkSpace bundle.
     #
@@ -682,7 +971,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] start_workspace_requests
-    #   The WorkSpaces to start.
+    #   The WorkSpaces to start. You can specify up to 25 WorkSpaces.
     #   @return [Array<Types::StartRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspacesRequest AWS API Documentation
@@ -735,7 +1024,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] stop_workspace_requests
-    #   The WorkSpaces to stop.
+    #   The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
     #   @return [Array<Types::StopRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspacesRequest AWS API Documentation
@@ -792,7 +1081,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] workspace_id
-    #   The identifier of the WorkSpace.
+    #   The ID of the WorkSpace.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateRequest AWS API Documentation
@@ -814,7 +1103,7 @@ module Aws::WorkSpaces
     #       }
     #
     # @!attribute [rw] terminate_workspace_requests
-    #   The WorkSpaces to terminate.
+    #   The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
     #   @return [Array<Types::TerminateRequest>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesRequest AWS API Documentation
@@ -834,6 +1123,39 @@ module Aws::WorkSpaces
       :failed_requests)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateRulesOfIpGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_id: "IpGroupId", # required
+    #         user_rules: [ # required
+    #           {
+    #             ip_rule: "IpRule",
+    #             rule_desc: "IpRuleDesc",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_rules
+    #   One or more rules.
+    #   @return [Array<Types::IpRuleItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateRulesOfIpGroupRequest AWS API Documentation
+    #
+    class UpdateRulesOfIpGroupRequest < Struct.new(
+      :group_id,
+      :user_rules)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateRulesOfIpGroupResult AWS API Documentation
+    #
+    class UpdateRulesOfIpGroupResult < Aws::EmptyStructure; end
 
     # Information about the user storage for a WorkSpace bundle.
     #
@@ -1011,8 +1333,8 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
-    # Contains information about an AWS Directory Service directory for use
-    # with Amazon WorkSpaces.
+    # Information about an AWS Directory Service directory for use with
+    # Amazon WorkSpaces.
     #
     # @!attribute [rw] directory_id
     #   The directory identifier.
@@ -1067,6 +1389,11 @@ module Aws::WorkSpaces
     #   The default creation properties for all WorkSpaces in the directory.
     #   @return [Types::DefaultWorkspaceCreationProperties]
     #
+    # @!attribute [rw] ip_group_ids
+    #   The identifiers of the IP access control groups associated with the
+    #   directory.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceDirectory AWS API Documentation
     #
     class WorkspaceDirectory < Struct.new(
@@ -1081,7 +1408,8 @@ module Aws::WorkSpaces
       :directory_type,
       :workspace_security_group_id,
       :state,
-      :workspace_creation_properties)
+      :workspace_creation_properties,
+      :ip_group_ids)
       include Aws::Structure
     end
 
@@ -1214,6 +1542,34 @@ module Aws::WorkSpaces
       :root_volume_encryption_enabled,
       :workspace_properties,
       :tags)
+      include Aws::Structure
+    end
+
+    # Information about an IP access control group.
+    #
+    # @!attribute [rw] group_id
+    #   The ID of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_desc
+    #   The description of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_rules
+    #   The rules.
+    #   @return [Array<Types::IpRuleItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspacesIpGroup AWS API Documentation
+    #
+    class WorkspacesIpGroup < Struct.new(
+      :group_id,
+      :group_name,
+      :group_desc,
+      :user_rules)
       include Aws::Structure
     end
 

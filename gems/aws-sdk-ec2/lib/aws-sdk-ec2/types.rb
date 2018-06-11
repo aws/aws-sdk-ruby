@@ -1089,7 +1089,7 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] value
-    #   The attribute value. Note that the value is case-sensitive.
+    #   The attribute value. The value is case-sensitive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttributeValue AWS API Documentation
@@ -2389,17 +2389,35 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) CMK to use
-    #   when encrypting the snapshots of an image during a copy operation.
-    #   This parameter is only required if you want to use a non-default
-    #   CMK; if this parameter is not specified, the default CMK for EBS is
-    #   used. The ARN contains the `arn:aws:kms` namespace, followed by the
-    #   region of the CMK, the AWS account ID of the CMK owner, the `key`
-    #   namespace, and then the CMK ID. For example,
-    #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted volume. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If
+    #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias, in the form `alias/ExampleAlias `
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
+    #     For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
+    #   call may appear to complete even though you provided an invalid
+    #   identifier. This action will eventually report failure.
+    #
     #   The specified CMK must exist in the region that the snapshot is
-    #   being copied to. If a `KmsKeyId` is specified, the `Encrypted` flag
-    #   must also be set.
+    #   being copied to.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2497,38 +2515,56 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) CMK to use
-    #   when creating the snapshot copy. This parameter is only required if
-    #   you want to use a non-default CMK; if this parameter is not
-    #   specified, the default CMK for EBS is used. The ARN contains the
-    #   `arn:aws:kms` namespace, followed by the region of the CMK, the AWS
-    #   account ID of the CMK owner, the `key` namespace, and then the CMK
-    #   ID. For example,
-    #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
-    #   The specified CMK must exist in the region that the snapshot is
-    #   being copied to. If a `KmsKeyId` is specified, the `Encrypted` flag
-    #   must also be set.
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
+    #   master key (CMK) to use when creating the encrypted volume. This
+    #   parameter is only required if you want to use a non-default CMK; if
+    #   this parameter is not specified, the default CMK for EBS is used. If
+    #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
+    #     For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
+    #   call may appear to complete even though you provided an invalid
+    #   identifier. The action will eventually fail.
     #   @return [String]
     #
     # @!attribute [rw] presigned_url
-    #   The pre-signed URL that facilitates copying an encrypted snapshot.
-    #   This parameter is only required when copying an encrypted snapshot
-    #   with the Amazon EC2 Query API; it is available as an optional
-    #   parameter in all other cases. The `PresignedUrl` should use the
-    #   snapshot source endpoint, the `CopySnapshot` action, and include the
-    #   `SourceRegion`, `SourceSnapshotId`, and `DestinationRegion`
-    #   parameters. The `PresignedUrl` must be signed using AWS Signature
-    #   Version 4. Because EBS snapshots are stored in Amazon S3, the
-    #   signing algorithm for this parameter uses the same logic that is
-    #   described in [Authenticating Requests by Using Query Parameters (AWS
-    #   Signature Version 4)][1] in the *Amazon Simple Storage Service API
-    #   Reference*. An invalid or improperly signed `PresignedUrl` will
-    #   cause the copy operation to fail asynchronously, and the snapshot
-    #   will move to an `error` state.
+    #   When you copy an encrypted source snapshot using the Amazon EC2
+    #   Query API, you must supply a pre-signed URL. This parameter is
+    #   optional for unencrypted snapshots. For more information, see [Query
+    #   Requests][1].
+    #
+    #   The `PresignedUrl` should use the snapshot source endpoint, the
+    #   `CopySnapshot` action, and include the `SourceRegion`,
+    #   `SourceSnapshotId`, and `DestinationRegion` parameters. The
+    #   `PresignedUrl` must be signed using AWS Signature Version 4. Because
+    #   EBS snapshots are stored in Amazon S3, the signing algorithm for
+    #   this parameter uses the same logic that is described in
+    #   [Authenticating Requests by Using Query Parameters (AWS Signature
+    #   Version 4)][2] in the *Amazon Simple Storage Service API Reference*.
+    #   An invalid or improperly signed `PresignedUrl` will cause the copy
+    #   operation to fail asynchronously, and the snapshot will move to an
+    #   `error` state.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html
+    #   [2]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   @return [String]
     #
     # @!attribute [rw] source_region
@@ -2570,6 +2606,53 @@ module Aws::EC2
     #
     class CopySnapshotResult < Struct.new(
       :snapshot_id)
+      include Aws::Structure
+    end
+
+    # The CPU options for the instance.
+    #
+    # @!attribute [rw] core_count
+    #   The number of CPU cores for the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads per CPU core.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptions AWS API Documentation
+    #
+    class CpuOptions < Struct.new(
+      :core_count,
+      :threads_per_core)
+      include Aws::Structure
+    end
+
+    # The CPU options for the instance. Both the core count and threads per
+    # core must be specified in the request.
+    #
+    # @note When making an API call, you may pass CpuOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_count: 1,
+    #         threads_per_core: 1,
+    #       }
+    #
+    # @!attribute [rw] core_count
+    #   The number of CPU cores for the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads per CPU core. To disable Intel Hyper-Threading
+    #   Technology for the instance, specify a value of `1`. Otherwise,
+    #   specify the default value of `2`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptionsRequest AWS API Documentation
+    #
+    class CpuOptionsRequest < Struct.new(
+      :core_count,
+      :threads_per_core)
       include Aws::Structure
     end
 
@@ -2806,6 +2889,163 @@ module Aws::EC2
     class CreateEgressOnlyInternetGatewayResult < Struct.new(
       :client_token,
       :egress_only_internet_gateway)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFleetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         client_token: "String",
+    #         spot_options: {
+    #           allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #           instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #         },
+    #         excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
+    #         launch_template_configs: [ # required
+    #           {
+    #             launch_template_specification: {
+    #               launch_template_id: "String",
+    #               launch_template_name: "LaunchTemplateName",
+    #               version: "String",
+    #             },
+    #             overrides: [
+    #               {
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #                 max_price: "String",
+    #                 subnet_id: "String",
+    #                 availability_zone: "String",
+    #                 weighted_capacity: 1.0,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         target_capacity_specification: { # required
+    #           total_target_capacity: 1, # required
+    #           on_demand_target_capacity: 1,
+    #           spot_target_capacity: 1,
+    #           default_target_capacity_type: "spot", # accepts spot, on-demand
+    #         },
+    #         terminate_instances_with_expiration: false,
+    #         type: "request", # accepts request, maintain
+    #         valid_from: Time.now,
+    #         valid_until: Time.now,
+    #         replace_unhealthy_instances: false,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] spot_options
+    #   Includes `SpotAllocationStrategy` and
+    #   `SpotInstanceInterruptionBehavior` inside this structure.
+    #   @return [Types::SpotOptionsRequest]
+    #
+    # @!attribute [rw] excess_capacity_termination_policy
+    #   Indicates whether running instances should be terminated if the
+    #   total target capacity of the EC2 Fleet is decreased below the
+    #   current size of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_configs
+    #   The configuration for the EC2 Fleet.
+    #   @return [Array<Types::FleetLaunchTemplateConfigRequest>]
+    #
+    # @!attribute [rw] target_capacity_specification
+    #   The `TotalTargetCapacity`, `OnDemandTargetCapacity`,
+    #   `SpotTargetCapacity`, and `DefaultCapacityType` structure.
+    #   @return [Types::TargetCapacitySpecificationRequest]
+    #
+    # @!attribute [rw] terminate_instances_with_expiration
+    #   Indicates whether running instances should be terminated when the
+    #   EC2 Fleet expires.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The type of request. Indicates whether the EC2 Fleet only `requests`
+    #   the target capacity, or also attempts to `maintain` it. If you
+    #   request a certain target capacity, EC2 Fleet only places the
+    #   required requests. It does not attempt to replenish instances if
+    #   capacity is diminished, and does not submit requests in alternative
+    #   capacity pools if capacity is unavailable. To maintain a certain
+    #   target capacity, EC2 Fleet places the required requests to meet this
+    #   target capacity. It also automatically replenishes any interrupted
+    #   Spot Instances. Default: `maintain`.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_from
+    #   The start date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
+    #   fulfilling the request immediately.
+    #   @return [Time]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new EC2 Fleet
+    #   requests are placed or able to fulfill the request. The default end
+    #   date is 7 days from the current date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] replace_unhealthy_instances
+    #   Indicates whether EC2 Fleet should replace unhealthy instances.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags for an EC2 Fleet resource.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetRequest AWS API Documentation
+    #
+    class CreateFleetRequest < Struct.new(
+      :dry_run,
+      :client_token,
+      :spot_options,
+      :excess_capacity_termination_policy,
+      :launch_template_configs,
+      :target_capacity_specification,
+      :terminate_instances_with_expiration,
+      :type,
+      :valid_from,
+      :valid_until,
+      :replace_unhealthy_instances,
+      :tag_specifications)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetResult AWS API Documentation
+    #
+    class CreateFleetResult < Struct.new(
+      :fleet_id)
       include Aws::Structure
     end
 
@@ -3243,7 +3483,7 @@ module Aws::EC2
     #             },
     #           ],
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #           key_name: "String",
     #           monitoring: {
     #             enabled: false,
@@ -3404,7 +3644,7 @@ module Aws::EC2
     #             },
     #           ],
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #           key_name: "String",
     #           monitoring: {
     #             enabled: false,
@@ -3645,13 +3885,13 @@ module Aws::EC2
     #
     # @!attribute [rw] protocol
     #   The protocol. A value of `-1` or `all` means all protocols. If you
-    #   specify `all`, `-1`, or a protocol number other than `tcp`, `udp`,
-    #   or `icmp`, traffic on all ports is allowed, regardless of any ports
-    #   or ICMP types or codes you specify. If you specify protocol `58`
-    #   (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types
-    #   and codes allowed, regardless of any that you specify. If you
-    #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
-    #   must specify an ICMP type and code.
+    #   specify `all`, `-1`, or a protocol number other than `6` (tcp), `17`
+    #   (udp), or `1` (icmp), traffic on all ports is allowed, regardless of
+    #   any ports or ICMP types or codes you specify. If you specify
+    #   protocol `58` (ICMPv6) and specify an IPv4 CIDR block, traffic for
+    #   all ICMP types and codes allowed, regardless of any that you
+    #   specify. If you specify protocol `58` (ICMPv6) and specify an IPv6
+    #   CIDR block, you must specify an ICMP type and code.
     #   @return [String]
     #
     # @!attribute [rw] rule_action
@@ -4222,6 +4462,17 @@ module Aws::EC2
     #       {
     #         description: "String",
     #         volume_id: "String", # required
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #         dry_run: false,
     #       }
     #
@@ -4232,6 +4483,10 @@ module Aws::EC2
     # @!attribute [rw] volume_id
     #   The ID of the EBS volume.
     #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the snapshot during creation.
+    #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
@@ -4245,6 +4500,7 @@ module Aws::EC2
     class CreateSnapshotRequest < Struct.new(
       :description,
       :volume_id,
+      :tag_specifications,
       :dry_run)
       include Aws::Structure
     end
@@ -4521,23 +4777,45 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
-    #   operations per second (IOPS) to provision for the volume, with a
-    #   maximum ratio of 50 IOPS/GiB.
+    #   The number of I/O operations per second (IOPS) to provision for the
+    #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
+    #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
+    #   Volume Types][1].
     #
-    #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
+    #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The full ARN of the AWS Key Management Service (AWS KMS) customer
+    #   An identifier for the AWS Key Management Service (AWS KMS) customer
     #   master key (CMK) to use when creating the encrypted volume. This
     #   parameter is only required if you want to use a non-default CMK; if
-    #   this parameter is not specified, the default CMK for EBS is used.
-    #   The ARN contains the `arn:aws:kms` namespace, followed by the region
-    #   of the CMK, the AWS account ID of the CMK owner, the `key`
-    #   namespace, and then the CMK ID. For example,
-    #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
-    #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #   this parameter is not specified, the default CMK for EBS is used. If
+    #   a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    #
+    #   The CMK identifier may be provided in any of the following formats:
+    #
+    #   * Key ID
+    #
+    #   * Key alias
+    #
+    #   * ARN using key ID. The ID ARN contains the `arn:aws:kms` namespace,
+    #     followed by the region of the CMK, the AWS account ID of the CMK
+    #     owner, the `key` namespace, and then the CMK ID. For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
+    #
+    #   * ARN using key alias. The alias ARN contains the `arn:aws:kms`
+    #     namespace, followed by the region of the CMK, the AWS account ID
+    #     of the CMK owner, the `alias` namespace, and then the CMK alias.
+    #     For example,
+    #     arn:aws:kms:*us-east-1*\:*012345678910*\:alias/*ExampleAlias*.
+    #
+    #   AWS parses `KmsKeyId` asynchronously, meaning that the action you
+    #   call may appear to complete even though you provided an invalid
+    #   identifier. The action will eventually fail.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -4561,7 +4839,11 @@ module Aws::EC2
     #   for Provisioned IOPS SSD, `st1` for Throughput Optimized HDD, `sc1`
     #   for Cold HDD, or `standard` for Magnetic volumes.
     #
-    #   Default: `standard`
+    #   Defaults: If no volume type is specified, the default is `standard`
+    #   in us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1,
+    #   sa-east-1, ap-northeast-1, ap-northeast-2, ap-southeast-1,
+    #   ap-southeast-2, ap-south-1, us-gov-west-1, and cn-north-1. In all
+    #   other regions, EBS defaults to `gp2`.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -5315,6 +5597,115 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an EC2 Fleet error.
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The description for the error code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetError AWS API Documentation
+    #
+    class DeleteFleetError < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # Describes an EC2 Fleet that was not successfully deleted.
+    #
+    # @!attribute [rw] error
+    #   The error.
+    #   @return [Types::DeleteFleetError]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetErrorItem AWS API Documentation
+    #
+    class DeleteFleetErrorItem < Struct.new(
+      :error,
+      :fleet_id)
+      include Aws::Structure
+    end
+
+    # Describes an EC2 Fleet that was successfully deleted.
+    #
+    # @!attribute [rw] current_fleet_state
+    #   The current state of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_fleet_state
+    #   The previous state of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetSuccessItem AWS API Documentation
+    #
+    class DeleteFleetSuccessItem < Struct.new(
+      :current_fleet_state,
+      :previous_fleet_state,
+      :fleet_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFleetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         fleet_ids: ["FleetIdentifier"], # required
+    #         terminate_instances: false, # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] fleet_ids
+    #   The IDs of the EC2 Fleets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] terminate_instances
+    #   Indicates whether to terminate instances for an EC2 Fleet if it is
+    #   deleted successfully.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetsRequest AWS API Documentation
+    #
+    class DeleteFleetsRequest < Struct.new(
+      :dry_run,
+      :fleet_ids,
+      :terminate_instances)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_fleet_deletions
+    #   Information about the EC2 Fleets that are successfully deleted.
+    #   @return [Array<Types::DeleteFleetSuccessItem>]
+    #
+    # @!attribute [rw] unsuccessful_fleet_deletions
+    #   Information about the EC2 Fleets that are not successfully deleted.
+    #   @return [Array<Types::DeleteFleetErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetsResult AWS API Documentation
+    #
+    class DeleteFleetsResult < Struct.new(
+      :successful_fleet_deletions,
+      :unsuccessful_fleet_deletions)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DeleteFlowLogs.
     #
     # @note When making an API call, you may pass DeleteFlowLogsRequest
@@ -6029,12 +6420,15 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   One or more tags to delete. If you omit this parameter, we delete
-    #   all tags for the specified resources. Specify a tag key and an
-    #   optional tag value to delete specific tags. If you specify a tag key
-    #   without a tag value, we delete any tag with this key regardless of
-    #   its value. If you specify a tag key with an empty string as the tag
-    #   value, we delete the tag only if its value is an empty string.
+    #   One or more tags to delete. Specify a tag key and an optional tag
+    #   value to delete specific tags. If you specify a tag key without a
+    #   tag value, we delete any tag with this key regardless of its value.
+    #   If you specify a tag key with an empty string as the tag value, we
+    #   delete the tag only if its value is an empty string.
+    #
+    #   If you omit this parameter, we delete all user-defined tags for the
+    #   specified resources. We do not delete AWS-generated tags (tags that
+    #   have the `aws:` prefix).
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTagsRequest AWS API Documentation
@@ -6543,8 +6937,8 @@ module Aws::EC2
     end
 
     # @!attribute [rw] use_long_ids_aggregated
-    #   Indicates whether all resrouces types in the region are configured
-    #   to use longer IDs. This value will only be `true` if all users are
+    #   Indicates whether all resource types in the region are configured to
+    #   use longer IDs. This value is only `true` if all users are
     #   configured to use longer IDs for all resources types in the region.
     #   @return [Boolean]
     #
@@ -7197,6 +7591,243 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeFleetHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         event_type: "instance-change", # accepts instance-change, fleet-change, service-error
+    #         max_results: 1,
+    #         next_token: "String",
+    #         fleet_id: "FleetIdentifier", # required
+    #         start_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] event_type
+    #   The type of events to describe. By default, all events are
+    #   described.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and 1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start date and time for the events, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetHistoryRequest AWS API Documentation
+    #
+    class DescribeFleetHistoryRequest < Struct.new(
+      :dry_run,
+      :event_type,
+      :max_results,
+      :next_token,
+      :fleet_id,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] history_records
+    #   Information about the events in the history of the EC2 Fleet.
+    #   @return [Array<Types::HistoryRecordEntry>]
+    #
+    # @!attribute [rw] last_evaluated_time
+    #   The last date and time for the events, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). All records up to this time
+    #   were retrieved.
+    #
+    #   If `nextToken` indicates that there are more results, this value is
+    #   not present.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start date and time for the events, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetHistoryResult AWS API Documentation
+    #
+    class DescribeFleetHistoryResult < Struct.new(
+      :history_records,
+      :last_evaluated_time,
+      :next_token,
+      :fleet_id,
+      :start_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetInstancesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         max_results: 1,
+    #         next_token: "String",
+    #         fleet_id: "FleetIdentifier", # required
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and 1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetInstancesRequest AWS API Documentation
+    #
+    class DescribeFleetInstancesRequest < Struct.new(
+      :dry_run,
+      :max_results,
+      :next_token,
+      :fleet_id,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] active_instances
+    #   The running instances. This list is refreshed periodically and might
+    #   be out of date.
+    #   @return [Array<Types::ActiveInstance>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetInstancesResult AWS API Documentation
+    #
+    class DescribeFleetInstancesResult < Struct.new(
+      :active_instances,
+      :next_token,
+      :fleet_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFleetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         max_results: 1,
+    #         next_token: "String",
+    #         fleet_ids: ["FleetIdentifier"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Specify a
+    #   value between 1 and 1000. The default value is 1000. To retrieve the
+    #   remaining results, make another call with the returned `NextToken`
+    #   value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_ids
+    #   The ID of the EC2 Fleets.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsRequest AWS API Documentation
+    #
+    class DescribeFleetsRequest < Struct.new(
+      :dry_run,
+      :max_results,
+      :next_token,
+      :fleet_ids,
+      :filters)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleets
+    #   The EC2 Fleets.
+    #   @return [Array<Types::FleetData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsResult AWS API Documentation
+    #
+    class DescribeFleetsResult < Struct.new(
+      :next_token,
+      :fleets)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeFlowLogs.
     #
     # @note When making an API call, you may pass DescribeFlowLogsRequest
@@ -7614,23 +8245,23 @@ module Aws::EC2
     # @!attribute [rw] filter
     #   One or more filters.
     #
-    #   * `instance-type` - The instance type size that the Dedicated Host
-    #     is configured to support.
-    #
     #   * `auto-placement` - Whether auto-placement is enabled or disabled
     #     (`on` \| `off`).
+    #
+    #   * `availability-zone` - The Availability Zone of the host.
+    #
+    #   * `client-token` - The idempotency token you provided when you
+    #     allocated the host.
     #
     #   * `host-reservation-id` - The ID of the reservation assigned to this
     #     host.
     #
-    #   * `client-token` - The idempotency token you provided when you
-    #     launched the instance
+    #   * `instance-type` - The instance type size that the Dedicated Host
+    #     is configured to support.
     #
-    #   * `state`- The allocation state of the Dedicated Host (`available`
+    #   * `state` - The allocation state of the Dedicated Host (`available`
     #     \| `under-assessment` \| `permanent-failure` \| `released` \|
     #     `released-permanent-failure`).
-    #
-    #   * `availability-zone` - The Availability Zone of the host.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] host_ids
@@ -7756,15 +8387,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resource
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `instance` \| `internet-gateway` \|
     #   `network-acl` \| `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `reservation` \|
     #   `route-table` \| `route-table-association` \| `security-group` \|
     #   `snapshot` \| `subnet` \| `subnet-cidr-block-association` \|
-    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \|
-    #   `vpc-peering-connection`
+    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \| `vpc-endpoint`
+    #   \| `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdFormatRequest AWS API Documentation
@@ -7804,15 +8435,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resource
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `instance` \| `internet-gateway` \|
     #   `network-acl` \| `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `reservation` \|
     #   `route-table` \| `route-table-association` \| `security-group` \|
     #   `snapshot` \| `subnet` \| `subnet-cidr-block-association` \|
-    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \|
-    #   `vpc-peering-connection`
+    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \| `vpc-endpoint`
+    #   \| `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdentityIdFormatRequest AWS API Documentation
@@ -8742,8 +9373,8 @@ module Aws::EC2
     #   The maximum number of results to return in a single call. To
     #   retrieve the remaining results, make another call with the returned
     #   `NextToken` value. This value can be between 5 and 1000. You cannot
-    #   specify this parameter and the instance IDs parameter or tag filters
-    #   in the same call.
+    #   specify this parameter and the instance IDs parameter in the same
+    #   call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -9902,15 +10533,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resources
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `instance` \| `internet-gateway` \|
     #   `network-acl` \| `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `reservation` \|
     #   `route-table` \| `route-table-association` \| `security-group` \|
     #   `snapshot` \| `subnet` \| `subnet-cidr-block-association` \|
-    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \|
-    #   `vpc-peering-connection`
+    #   `volume` \| `vpc` \| `vpc-cidr-block-association` \| `vpc-endpoint`
+    #   \| `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_results
@@ -10179,7 +10810,7 @@ module Aws::EC2
     #           },
     #         ],
     #         include_marketplace: false,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #         max_duration: 1,
     #         max_instance_count: 1,
     #         min_duration: 1,
@@ -11316,8 +11947,8 @@ module Aws::EC2
     # Contains the output of DescribeSpotFleetInstances.
     #
     # @!attribute [rw] active_instances
-    #   The running instances. Note that this list is refreshed periodically
-    #   and might be out of date.
+    #   The running instances. This list is refreshed periodically and might
+    #   be out of date.
     #   @return [Array<Types::ActiveInstance>]
     #
     # @!attribute [rw] next_token
@@ -11550,7 +12181,10 @@ module Aws::EC2
     #     SSD, `st1` for Throughput Optimized HDD, `sc1`for Cold HDD, or
     #     `standard` for Magnetic.
     #
-    #   * `launch.group-id` - The security group for the instance.
+    #   * `launch.group-id` - The ID of the security group for the instance.
+    #
+    #   * `launch.group-name` - The name of the security group for the
+    #     instance.
     #
     #   * `launch.image-id` - The ID of the AMI.
     #
@@ -11606,7 +12240,7 @@ module Aws::EC2
     #     `active` \| `closed` \| `cancelled` \| `failed`). Spot request
     #     status information can help you track your Amazon EC2 Spot
     #     Instance requests. For more information, see [Spot Request
-    #     Status][1] in the Amazon Elastic Compute Cloud User Guide.
+    #     Status][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #   * `status-code` - The short code describing the most recent
     #     evaluation of your Spot Instance request.
@@ -11692,7 +12326,7 @@ module Aws::EC2
     #         availability_zone: "String",
     #         dry_run: false,
     #         end_time: Time.now,
-    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #         max_results: 1,
     #         next_token: "String",
     #         product_descriptions: ["String"],
@@ -11715,7 +12349,7 @@ module Aws::EC2
     #     use wildcards; greater than or less than comparison is not
     #     supported).
     #
-    #   * `timestamp` - The timestamp of the Spot price history, in UTC
+    #   * `timestamp` - The time stamp of the Spot price history, in UTC
     #     format (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). You can
     #     use wildcards (* and ?). Greater than or less than comparison is
     #     not supported.
@@ -11782,7 +12416,7 @@ module Aws::EC2
     #
     # @!attribute [rw] next_token
     #   The token required to retrieve the next set of results. This value
-    #   is an empty string when there are no more results to return.
+    #   is null or an empty string when there are no more results to return.
     #   @return [String]
     #
     # @!attribute [rw] spot_price_history
@@ -12321,7 +12955,7 @@ module Aws::EC2
     #     attached to.
     #
     #   * `attachment.status` - The attachment state (`attaching` \|
-    #     `attached` \| `detaching` \| `detached`).
+    #     `attached` \| `detaching`).
     #
     #   * `availability-zone` - The Availability Zone in which the volume
     #     was created.
@@ -14233,7 +14867,8 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   ID for a user-managed CMK under which the EBS volume is encrypted.
+    #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a
+    #   user-managed CMK under which the EBS volume is encrypted.
     #
     #   Note: This parameter is only supported on `BlockDeviceMapping`
     #   objects called by [RunInstances][1], [RequestSpotFleet][2], and
@@ -14636,9 +15271,9 @@ module Aws::EC2
     #     Instances. The Spot Fleet will be deleted two days after its
     #     instances were terminated.
     #
-    #   * `cancelled_running` - The Spot Fleet is canceled and will not
-    #     launch additional Spot Instances, but its existing Spot Instances
-    #     continue to run until they are interrupted or terminated.
+    #   * `cancelled_running` - The Spot Fleet is canceled and does not
+    #     launch additional Spot Instances. Existing Spot Instances continue
+    #     to run until they are interrupted or terminated.
     #
     #   * `cancelled_terminating` - The Spot Fleet is canceled and its Spot
     #     Instances are terminating.
@@ -14802,8 +15437,30 @@ module Aws::EC2
     end
 
     # A filter name and value pair that is used to return a more specific
-    # list of results. Filters can be used to match a set of resources by
-    # various criteria, such as tags, attributes, or IDs.
+    # list of results from a describe operation. Filters can be used to
+    # match a set of resources by specific criteria, such as tags,
+    # attributes, or IDs. The filters supported by a describe operation are
+    # documented with the describe operation. For example:
+    #
+    # * DescribeAvailabilityZones
+    #
+    # * DescribeImages
+    #
+    # * DescribeInstances
+    #
+    # * DescribeKeyPairs
+    #
+    # * DescribeSecurityGroups
+    #
+    # * DescribeSnapshots
+    #
+    # * DescribeSubnets
+    #
+    # * DescribeTags
+    #
+    # * DescribeVolumes
+    #
+    # * DescribeVpcs
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -14826,6 +15483,272 @@ module Aws::EC2
     class Filter < Struct.new(
       :name,
       :values)
+      include Aws::Structure
+    end
+
+    # Describes an EC2 Fleet.
+    #
+    # @!attribute [rw] activity_status
+    #   The progress of the EC2 Fleet. If there is an error, the status is
+    #   `error`. After all requests are placed, the status is
+    #   `pending_fulfillment`. If the size of the EC2 Fleet is equal to or
+    #   greater than its target capacity, the status is `fulfilled`. If the
+    #   size of the EC2 Fleet is decreased, the status is
+    #   `pending_termination` while instances are terminating.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The creation date and time of the EC2 Fleet.
+    #   @return [Time]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_state
+    #   The state of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #   Constraints: Maximum 64 ASCII characters
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] excess_capacity_termination_policy
+    #   Indicates whether running instances should be terminated if the
+    #   target capacity of the EC2 Fleet is decreased below the current size
+    #   of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] fulfilled_capacity
+    #   The number of units fulfilled by this request compared to the set
+    #   target capacity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] fulfilled_on_demand_capacity
+    #   The number of units fulfilled by this request compared to the set
+    #   target On-Demand capacity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] launch_template_configs
+    #   The launch template and overrides.
+    #   @return [Array<Types::FleetLaunchTemplateConfig>]
+    #
+    # @!attribute [rw] target_capacity_specification
+    #   The number of units to request. You can choose to set the target
+    #   capacity in terms of instances or a performance characteristic that
+    #   is important to your application workload, such as vCPUs, memory, or
+    #   I/O. If the request type is `maintain`, you can specify a target
+    #   capacity of 0 and add capacity later.
+    #   @return [Types::TargetCapacitySpecification]
+    #
+    # @!attribute [rw] terminate_instances_with_expiration
+    #   Indicates whether running instances should be terminated when the
+    #   EC2 Fleet expires.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] type
+    #   The type of request. Indicates whether the EC2 Fleet only `requests`
+    #   the target capacity, or also attempts to `maintain` it. If you
+    #   request a certain target capacity, EC2 Fleet only places the
+    #   required requests; it does not attempt to replenish instances if
+    #   capacity is diminished, and does not submit requests in alternative
+    #   capacity pools if capacity is unavailable. To maintain a certain
+    #   target capacity, EC2 Fleet places the required requests to meet this
+    #   target capacity. It also automatically replenishes any interrupted
+    #   Spot Instances. Default: `maintain`.
+    #   @return [String]
+    #
+    # @!attribute [rw] valid_from
+    #   The start date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). The default is to start
+    #   fulfilling the request immediately.
+    #   @return [Time]
+    #
+    # @!attribute [rw] valid_until
+    #   The end date and time of the request, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). At this point, no new instance
+    #   requests are placed or able to fulfill the request. The default end
+    #   date is 7 days from the current date.
+    #   @return [Time]
+    #
+    # @!attribute [rw] replace_unhealthy_instances
+    #   Indicates whether EC2 Fleet should replace unhealthy instances.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] spot_options
+    #   The configuration of Spot Instances in an EC2 Fleet.
+    #   @return [Types::SpotOptions]
+    #
+    # @!attribute [rw] tags
+    #   The tags for an EC2 Fleet resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetData AWS API Documentation
+    #
+    class FleetData < Struct.new(
+      :activity_status,
+      :create_time,
+      :fleet_id,
+      :fleet_state,
+      :client_token,
+      :excess_capacity_termination_policy,
+      :fulfilled_capacity,
+      :fulfilled_on_demand_capacity,
+      :launch_template_configs,
+      :target_capacity_specification,
+      :terminate_instances_with_expiration,
+      :type,
+      :valid_from,
+      :valid_until,
+      :replace_unhealthy_instances,
+      :spot_options,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Describes a launch template and overrides.
+    #
+    # @!attribute [rw] launch_template_specification
+    #   The launch template.
+    #   @return [Types::FleetLaunchTemplateSpecification]
+    #
+    # @!attribute [rw] overrides
+    #   Any parameters that you specify override the same parameters in the
+    #   launch template.
+    #   @return [Array<Types::FleetLaunchTemplateOverrides>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateConfig AWS API Documentation
+    #
+    class FleetLaunchTemplateConfig < Struct.new(
+      :launch_template_specification,
+      :overrides)
+      include Aws::Structure
+    end
+
+    # Describes a launch template and overrides.
+    #
+    # @note When making an API call, you may pass FleetLaunchTemplateConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_specification: {
+    #           launch_template_id: "String",
+    #           launch_template_name: "LaunchTemplateName",
+    #           version: "String",
+    #         },
+    #         overrides: [
+    #           {
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #             max_price: "String",
+    #             subnet_id: "String",
+    #             availability_zone: "String",
+    #             weighted_capacity: 1.0,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] launch_template_specification
+    #   The launch template to use. You must specify either the launch
+    #   template ID or launch template name in the request.
+    #   @return [Types::FleetLaunchTemplateSpecificationRequest]
+    #
+    # @!attribute [rw] overrides
+    #   Any parameters that you specify override the same parameters in the
+    #   launch template.
+    #   @return [Array<Types::FleetLaunchTemplateOverridesRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateConfigRequest AWS API Documentation
+    #
+    class FleetLaunchTemplateConfigRequest < Struct.new(
+      :launch_template_specification,
+      :overrides)
+      include Aws::Structure
+    end
+
+    # Describes overrides for a launch template.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_price
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] weighted_capacity
+    #   The number of units provided by the specified instance type.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides AWS API Documentation
+    #
+    class FleetLaunchTemplateOverrides < Struct.new(
+      :instance_type,
+      :max_price,
+      :subnet_id,
+      :availability_zone,
+      :weighted_capacity)
+      include Aws::Structure
+    end
+
+    # Describes overrides for a launch template.
+    #
+    # @note When making an API call, you may pass FleetLaunchTemplateOverridesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         max_price: "String",
+    #         subnet_id: "String",
+    #         availability_zone: "String",
+    #         weighted_capacity: 1.0,
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_price
+    #   The maximum price per unit hour that you are willing to pay for a
+    #   Spot Instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which to launch the instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] weighted_capacity
+    #   The number of units provided by the specified instance type.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest AWS API Documentation
+    #
+    class FleetLaunchTemplateOverridesRequest < Struct.new(
+      :instance_type,
+      :max_price,
+      :subnet_id,
+      :availability_zone,
+      :weighted_capacity)
       include Aws::Structure
     end
 
@@ -14858,6 +15781,39 @@ module Aws::EC2
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecification AWS API Documentation
     #
     class FleetLaunchTemplateSpecification < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version)
+      include Aws::Structure
+    end
+
+    # The launch template to use. You must specify either the launch
+    # template ID or launch template name in the request.
+    #
+    # @note When making an API call, you may pass FleetLaunchTemplateSpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "String",
+    #         launch_template_name: "LaunchTemplateName",
+    #         version: "String",
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version number of the launch template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecificationRequest AWS API Documentation
+    #
+    class FleetLaunchTemplateSpecificationRequest < Struct.new(
       :launch_template_id,
       :launch_template_name,
       :version)
@@ -15070,6 +16026,7 @@ module Aws::EC2
     #       {
     #         instance_id: "String", # required
     #         dry_run: false,
+    #         latest: false,
     #       }
     #
     # @!attribute [rw] instance_id
@@ -15083,11 +16040,18 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] latest
+    #   When enabled, retrieves the latest console output for the instance.
+    #
+    #   Default: disabled (`false`)
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutputRequest AWS API Documentation
     #
     class GetConsoleOutputRequest < Struct.new(
       :instance_id,
-      :dry_run)
+      :dry_run,
+      :latest)
       include Aws::Structure
     end
 
@@ -15098,12 +16062,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] output
-    #   The console output, Base64-encoded. If using a command line tool,
-    #   the tool decodes the output for you.
+    #   The console output, base64-encoded. If you are using a command line
+    #   tool, the tool decodes the output for you.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   The time the output was last updated.
+    #   The time at which the output was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutputResult AWS API Documentation
@@ -15468,6 +16432,30 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an event in the history of the EC2 Fleet.
+    #
+    # @!attribute [rw] event_information
+    #   Information about the event.
+    #   @return [Types::EventInformation]
+    #
+    # @!attribute [rw] event_type
+    #   The event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The date and time of the event, in UTC format (for example,
+    #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HistoryRecordEntry AWS API Documentation
+    #
+    class HistoryRecordEntry < Struct.new(
+      :event_information,
+      :event_type,
+      :timestamp)
+      include Aws::Structure
+    end
+
     # Describes the properties of the Dedicated Host.
     #
     # @!attribute [rw] auto_placement
@@ -15516,6 +16504,14 @@ module Aws::EC2
     #   The Dedicated Host's state.
     #   @return [String]
     #
+    # @!attribute [rw] allocation_time
+    #   The time that the Dedicated Host was allocated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] release_time
+    #   The time that the Dedicated Host was released.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
@@ -15527,7 +16523,9 @@ module Aws::EC2
       :host_properties,
       :host_reservation_id,
       :instances,
-      :state)
+      :state,
+      :allocation_time,
+      :release_time)
       include Aws::Structure
     end
 
@@ -16331,7 +17329,7 @@ module Aws::EC2
     #         group_ids: ["String"],
     #         group_names: ["String"],
     #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #         monitoring: false,
     #         placement: {
     #           availability_zone: "String",
@@ -16377,7 +17375,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#vmimport-instance-types
+    #   [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmie_prereqs.html#vmimport-instance-types
     #   @return [String]
     #
     # @!attribute [rw] monitoring
@@ -16445,7 +17443,7 @@ module Aws::EC2
     #           group_ids: ["String"],
     #           group_names: ["String"],
     #           instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #           monitoring: false,
     #           placement: {
     #             availability_zone: "String",
@@ -17040,6 +18038,10 @@ module Aws::EC2
     #   The virtualization type of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] cpu_options
+    #   The CPU options for the instance.
+    #   @return [Types::CpuOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -17081,7 +18083,8 @@ module Aws::EC2
       :sriov_net_support,
       :state_reason,
       :tags,
-      :virtualization_type)
+      :virtualization_type,
+      :cpu_options)
       include Aws::Structure
     end
 
@@ -18471,7 +19474,7 @@ module Aws::EC2
     #         },
     #         overrides: [
     #           {
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #             spot_price: "String",
     #             subnet_id: "String",
     #             availability_zone: "String",
@@ -18890,7 +19893,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #         spot_price: "String",
     #         subnet_id: "String",
     #         availability_zone: "String",
@@ -19022,7 +20025,7 @@ module Aws::EC2
     end
 
     # The launch template to use. You must specify either the launch
-    # template ID or launch template name in the request.
+    # template ID or launch template name in the request, but not both.
     #
     # @note When making an API call, you may pass LaunchTemplateSpecification
     #   data as a hash:
@@ -19400,6 +20403,63 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyFleetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         excess_capacity_termination_policy: "no-termination", # accepts no-termination, termination
+    #         fleet_id: "FleetIdentifier", # required
+    #         target_capacity_specification: { # required
+    #           total_target_capacity: 1, # required
+    #           on_demand_target_capacity: 1,
+    #           spot_target_capacity: 1,
+    #           default_target_capacity_type: "spot", # accepts spot, on-demand
+    #         },
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] excess_capacity_termination_policy
+    #   Indicates whether running instances should be terminated if the
+    #   total target capacity of the EC2 Fleet is decreased below the
+    #   current size of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] fleet_id
+    #   The ID of the EC2 Fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_capacity_specification
+    #   The size of the EC2 Fleet.
+    #   @return [Types::TargetCapacitySpecificationRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleetRequest AWS API Documentation
+    #
+    class ModifyFleetRequest < Struct.new(
+      :dry_run,
+      :excess_capacity_termination_policy,
+      :fleet_id,
+      :target_capacity_specification)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Is `true` if the request succeeds, and an error otherwise.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleetResult AWS API Documentation
+    #
+    class ModifyFleetResult < Struct.new(
+      :return)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyFpgaImageAttributeRequest
     #   data as a hash:
     #
@@ -19560,14 +20620,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resource
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `internet-gateway` \| `network-acl` \|
     #   `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `route-table` \|
     #   `route-table-association` \| `security-group` \| `subnet` \|
     #   `subnet-cidr-block-association` \| `vpc` \|
-    #   `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #   `vpc-cidr-block-association` \| `vpc-endpoint` \|
+    #   `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`.
     #
     #   Alternatively, use the `all-current` option to include all resource
     #   types that are currently within their opt-in period for longer IDs.
@@ -19605,14 +20666,15 @@ module Aws::EC2
     #
     # @!attribute [rw] resource
     #   The type of resource: `bundle` \| `conversion-task` \|
-    #   `dhcp-options` \| `elastic-ip-allocation` \|
+    #   `customer-gateway` \| `dhcp-options` \| `elastic-ip-allocation` \|
     #   `elastic-ip-association` \| `export-task` \| `flow-log` \| `image`
     #   \| `import-task` \| `internet-gateway` \| `network-acl` \|
     #   `network-acl-association` \| `network-interface` \|
     #   `network-interface-attachment` \| `prefix-list` \| `route-table` \|
     #   `route-table-association` \| `security-group` \| `subnet` \|
     #   `subnet-cidr-block-association` \| `vpc` \|
-    #   `vpc-cidr-block-association` \| `vpc-peering-connection`.
+    #   `vpc-cidr-block-association` \| `vpc-endpoint` \|
+    #   `vpc-peering-connection` \| `vpn-connection` \| `vpn-gateway`.
     #
     #   Alternatively, use the `all-current` option to include all resource
     #   types that are currently within their opt-in period for longer IDs.
@@ -19992,18 +21054,28 @@ module Aws::EC2
     #
     #       {
     #         affinity: "default", # accepts default, host
+    #         group_name: "String",
     #         host_id: "String",
     #         instance_id: "String", # required
     #         tenancy: "dedicated", # accepts dedicated, host
     #       }
     #
     # @!attribute [rw] affinity
-    #   The new affinity setting for the instance.
+    #   The affinity setting for the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the placement group in which to place the instance. For
+    #   spread placement groups, the instance must have a tenancy of
+    #   `default`. For cluster placement groups, the instance must have a
+    #   tenancy of `default` or `dedicated`.
+    #
+    #   To remove an instance from a placement group, specify an empty
+    #   string ("").
     #   @return [String]
     #
     # @!attribute [rw] host_id
-    #   The ID of the Dedicated Host that the instance will have affinity
-    #   with.
+    #   The ID of the Dedicated Host with which to associate the instance.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -20011,13 +21083,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tenancy
-    #   The tenancy of the instance that you are modifying.
+    #   The tenancy for the instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacementRequest AWS API Documentation
     #
     class ModifyInstancePlacementRequest < Struct.new(
       :affinity,
+      :group_name,
       :host_id,
       :instance_id,
       :tenancy)
@@ -20186,7 +21259,7 @@ module Aws::EC2
     #           {
     #             availability_zone: "String",
     #             instance_count: 1,
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #             platform: "String",
     #             scope: "Availability Zone", # accepts Availability Zone, Region
     #           },
@@ -20461,6 +21534,7 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] volume_id
+    #   The ID of the volume.
     #   @return [String]
     #
     # @!attribute [rw] size
@@ -21699,8 +22773,9 @@ module Aws::EC2
     # Describes the VPC peering connection options.
     #
     # @!attribute [rw] allow_dns_resolution_from_remote_vpc
-    #   If true, enables a local VPC to resolve public DNS hostnames to
-    #   private IP addresses when queried from instances in the peer VPC.
+    #   If true, the public DNS hostnames of instances in the specified VPC
+    #   resolve to private IP addresses when queried from instances in the
+    #   peer VPC.
     #   @return [Boolean]
     #
     # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
@@ -23277,7 +24352,7 @@ module Aws::EC2
     #           },
     #         ],
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #         key_name: "String",
     #         monitoring: {
     #           enabled: false,
@@ -23504,6 +24579,7 @@ module Aws::EC2
     #           client_token: "String",
     #           excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #           fulfilled_capacity: 1.0,
+    #           on_demand_fulfilled_capacity: 1.0,
     #           iam_fleet_role: "String", # required
     #           launch_specifications: [
     #             {
@@ -23536,7 +24612,7 @@ module Aws::EC2
     #                 name: "String",
     #               },
     #               image_id: "String",
-    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #               kernel_id: "String",
     #               key_name: "String",
     #               monitoring: {
@@ -23599,7 +24675,7 @@ module Aws::EC2
     #               },
     #               overrides: [
     #                 {
-    #                   instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #                   instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #                   spot_price: "String",
     #                   subnet_id: "String",
     #                   availability_zone: "String",
@@ -23610,6 +24686,7 @@ module Aws::EC2
     #           ],
     #           spot_price: "String",
     #           target_capacity: 1, # required
+    #           on_demand_target_capacity: 1,
     #           terminate_instances_with_expiration: false,
     #           type: "request", # accepts request, maintain
     #           valid_from: Time.now,
@@ -23705,7 +24782,7 @@ module Aws::EC2
     #             name: "String",
     #           },
     #           image_id: "String",
-    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #           kernel_id: "String",
     #           key_name: "String",
     #           monitoring: {
@@ -23788,14 +24865,14 @@ module Aws::EC2
     #   termination notice, which gives the instance a two-minute warning
     #   before it terminates.
     #
-    #   Note that you can't specify an Availability Zone group or a launch
-    #   group if you specify a duration.
+    #   You can't specify an Availability Zone group or a launch group if
+    #   you specify a duration.
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to Ensure
-    #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Idempotency][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -23921,7 +24998,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -24281,7 +25358,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String",
     #         instance_count: 1,
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #         platform: "String",
     #         scope: "Availability Zone", # accepts Availability Zone, Region
     #       }
@@ -25378,7 +26455,7 @@ module Aws::EC2
     #           },
     #         ],
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #         ipv_6_address_count: 1,
     #         ipv_6_addresses: [
     #           {
@@ -25474,6 +26551,10 @@ module Aws::EC2
     #         },
     #         credit_specification: {
     #           cpu_credits: "String", # required
+    #         },
+    #         cpu_options: {
+    #           core_count: 1,
+    #           threads_per_core: 1,
     #         },
     #       }
     #
@@ -25709,7 +26790,8 @@ module Aws::EC2
     # @!attribute [rw] launch_template
     #   The launch template to use to launch the instances. Any parameters
     #   that you specify in RunInstances override the same parameters in the
-    #   launch template.
+    #   launch template. You can specify either the name or ID of a launch
+    #   template, but not both.
     #   @return [Types::LaunchTemplateSpecification]
     #
     # @!attribute [rw] instance_market_options
@@ -25728,6 +26810,16 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html
     #   @return [Types::CreditSpecificationRequest]
+    #
+    # @!attribute [rw] cpu_options
+    #   The CPU options for the instance. For more information, see
+    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #   @return [Types::CpuOptionsRequest]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
@@ -25761,7 +26853,8 @@ module Aws::EC2
       :tag_specifications,
       :launch_template,
       :instance_market_options,
-      :credit_specification)
+      :credit_specification,
+      :cpu_options)
       include Aws::Structure
     end
 
@@ -27298,7 +28391,7 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         image_id: "String",
-    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #         kernel_id: "String",
     #         key_name: "String",
     #         monitoring: {
@@ -27546,6 +28639,7 @@ module Aws::EC2
     #         client_token: "String",
     #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
     #         fulfilled_capacity: 1.0,
+    #         on_demand_fulfilled_capacity: 1.0,
     #         iam_fleet_role: "String", # required
     #         launch_specifications: [
     #           {
@@ -27578,7 +28672,7 @@ module Aws::EC2
     #               name: "String",
     #             },
     #             image_id: "String",
-    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #             kernel_id: "String",
     #             key_name: "String",
     #             monitoring: {
@@ -27641,7 +28735,7 @@ module Aws::EC2
     #             },
     #             overrides: [
     #               {
-    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
+    #                 instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, x1e.xlarge, x1e.2xlarge, x1e.4xlarge, x1e.8xlarge, x1e.16xlarge, x1e.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, i3.large, i3.xlarge, i3.2xlarge, i3.4xlarge, i3.8xlarge, i3.16xlarge, i3.metal, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge, c5.9xlarge, c5.18xlarge, c5d.large, c5d.xlarge, c5d.2xlarge, c5d.4xlarge, c5d.9xlarge, c5d.18xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, g3.4xlarge, g3.8xlarge, g3.16xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, p3.2xlarge, p3.8xlarge, p3.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.12xlarge, m5.24xlarge, m5d.large, m5d.xlarge, m5d.2xlarge, m5d.4xlarge, m5d.12xlarge, m5d.24xlarge, h1.2xlarge, h1.4xlarge, h1.8xlarge, h1.16xlarge
     #                 spot_price: "String",
     #                 subnet_id: "String",
     #                 availability_zone: "String",
@@ -27652,6 +28746,7 @@ module Aws::EC2
     #         ],
     #         spot_price: "String",
     #         target_capacity: 1, # required
+    #         on_demand_target_capacity: 1,
     #         terminate_instances_with_expiration: false,
     #         type: "request", # accepts request, maintain
     #         valid_from: Time.now,
@@ -27682,9 +28777,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier you provide to ensure
-    #   idempotency of your listings. This helps avoid duplicate listings.
-    #   For more information, see [Ensuring Idempotency][1].
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of your listings. This helps to avoid duplicate
+    #   listings. For more information, see [Ensuring Idempotency][1].
     #
     #
     #
@@ -27700,6 +28795,11 @@ module Aws::EC2
     # @!attribute [rw] fulfilled_capacity
     #   The number of units fulfilled by this request compared to the set
     #   target capacity.
+    #   @return [Float]
+    #
+    # @!attribute [rw] on_demand_fulfilled_capacity
+    #   The number of On-Demand units fulfilled by this request compared to
+    #   the set target On-Demand capacity.
     #   @return [Float]
     #
     # @!attribute [rw] iam_fleet_role
@@ -27730,21 +28830,28 @@ module Aws::EC2
     #   capacity of 0 and add capacity later.
     #   @return [Integer]
     #
+    # @!attribute [rw] on_demand_target_capacity
+    #   The number of On-Demand units to request. You can choose to set the
+    #   target capacity in terms of instances or a performance
+    #   characteristic that is important to your application workload, such
+    #   as vCPUs, memory, or I/O. If the request type is `maintain`, you can
+    #   specify a target capacity of 0 and add capacity later.
+    #   @return [Integer]
+    #
     # @!attribute [rw] terminate_instances_with_expiration
     #   Indicates whether running Spot Instances should be terminated when
     #   the Spot Fleet request expires.
     #   @return [Boolean]
     #
     # @!attribute [rw] type
-    #   The type of request. Indicates whether the fleet will only `request`
-    #   the target capacity or also attempt to `maintain` it. When you
-    #   `request` a certain target capacity, the fleet will only place the
-    #   required requests. It will not attempt to replenish Spot Instances
-    #   if capacity is diminished, nor will it submit requests in
-    #   alternative Spot pools if capacity is not available. When you want
-    #   to `maintain` a certain target capacity, fleet will place the
-    #   required requests to meet this target capacity. It will also
-    #   automatically replenish any interrupted instances. Default:
+    #   The type of request. Indicates whether the Spot Fleet only requests
+    #   the target capacity or also attempts to maintain it. When this value
+    #   is `request`, the Spot Fleet only places the required requests. It
+    #   does not attempt to replenish Spot Instances if capacity is
+    #   diminished, nor does it submit requests in alternative Spot pools if
+    #   capacity is not available. To maintain a certain target capacity,
+    #   the Spot Fleet places the required requests to meet capacity and
+    #   automatically replenishes any interrupted instances. Default:
     #   `maintain`.
     #   @return [String]
     #
@@ -27788,11 +28895,13 @@ module Aws::EC2
       :client_token,
       :excess_capacity_termination_policy,
       :fulfilled_capacity,
+      :on_demand_fulfilled_capacity,
       :iam_fleet_role,
       :launch_specifications,
       :launch_template_configs,
       :spot_price,
       :target_capacity,
+      :on_demand_target_capacity,
       :terminate_instances_with_expiration,
       :type,
       :valid_from,
@@ -27894,10 +29003,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the Spot Instance request. Spot status information can
-    #   help you track your Spot Instance requests. For more information,
-    #   see [Spot Status][1] in the *Amazon Elastic Compute Cloud User
-    #   Guide*.
+    #   The state of the Spot Instance request. Spot status information
+    #   helps track your Spot Instance requests. For more information, see
+    #   [Spot Status][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -27983,7 +29091,7 @@ module Aws::EC2
     #
     # @!attribute [rw] code
     #   The status code. For a list of status codes, see [Spot Status
-    #   Codes][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #   Codes][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
@@ -28056,6 +29164,54 @@ module Aws::EC2
       :spot_instance_type,
       :block_duration_minutes,
       :valid_until,
+      :instance_interruption_behavior)
+      include Aws::Structure
+    end
+
+    # Describes the configuration of Spot Instances in an EC2 Fleet.
+    #
+    # @!attribute [rw] allocation_strategy
+    #   Indicates how to allocate the target capacity across the Spot pools
+    #   specified by the Spot Fleet request. The default is `lowestPrice`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_interruption_behavior
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptions AWS API Documentation
+    #
+    class SpotOptions < Struct.new(
+      :allocation_strategy,
+      :instance_interruption_behavior)
+      include Aws::Structure
+    end
+
+    # Describes the configuration of Spot Instances in an EC2 Fleet request.
+    #
+    # @note When making an API call, you may pass SpotOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         allocation_strategy: "lowest-price", # accepts lowest-price, diversified
+    #         instance_interruption_behavior: "hibernate", # accepts hibernate, stop, terminate
+    #       }
+    #
+    # @!attribute [rw] allocation_strategy
+    #   Indicates how to allocate the target capacity across the Spot pools
+    #   specified by the Spot Fleet request. The default is `lowestPrice`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_interruption_behavior
+    #   The behavior when a Spot Instance is interrupted. The default is
+    #   `terminate`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptionsRequest AWS API Documentation
+    #
+    class SpotOptionsRequest < Struct.new(
+      :allocation_strategy,
       :instance_interruption_behavior)
       include Aws::Structure
     end
@@ -28279,19 +29435,23 @@ module Aws::EC2
     #   The message for the state change.
     #
     #   * `Server.InsufficientInstanceCapacity`\: There was insufficient
-    #     instance capacity to satisfy the launch request.
+    #     capacity available to satisfy the launch request.
     #
-    #   * `Server.InternalError`\: An internal error occurred during
-    #     instance launch, resulting in termination.
+    #   * `Server.InternalError`\: An internal error caused the instance to
+    #     terminate during launch.
     #
     #   * `Server.ScheduledStop`\: The instance was stopped due to a
     #     scheduled retirement.
     #
-    #   * `Server.SpotInstanceTermination`\: A Spot Instance was terminated
-    #     due to an increase in the Spot price.
+    #   * `Server.SpotInstanceShutdown`\: The instance was stopped because
+    #     the number of Spot requests with a maximum price equal to or
+    #     higher than the Spot price exceeded available capacity or because
+    #     of an increase in the Spot price.
     #
-    #   * `Client.InternalError`\: A client error caused the instance to
-    #     terminate on launch.
+    #   * `Server.SpotInstanceTermination`\: The instance was terminated
+    #     because the number of Spot requests with a maximum price equal to
+    #     or higher than the Spot price exceeded available capacity or
+    #     because of an increase in the Spot price.
     #
     #   * `Client.InstanceInitiatedShutdown`\: The instance was shut down
     #     using the `shutdown -h` command from the instance.
@@ -28299,15 +29459,18 @@ module Aws::EC2
     #   * `Client.InstanceTerminated`\: The instance was terminated or
     #     rebooted during AMI creation.
     #
+    #   * `Client.InternalError`\: A client error caused the instance to
+    #     terminate during launch.
+    #
+    #   * `Client.InvalidSnapshot.NotFound`\: The specified snapshot was not
+    #     found.
+    #
     #   * `Client.UserInitiatedShutdown`\: The instance was shut down using
     #     the Amazon EC2 API.
     #
     #   * `Client.VolumeLimitExceeded`\: The limit on the number of EBS
     #     volumes or total storage was exceeded. Decrease usage or request
-    #     an increase in your limits.
-    #
-    #   * `Client.InvalidSnapshot.NotFound`\: The specified snapshot was not
-    #     found.
+    #     an increase in your account limits.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StateReason AWS API Documentation
@@ -28624,7 +29787,8 @@ module Aws::EC2
     #
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
-    #   support tagging on creation are `instance` and `volume`.
+    #   support tagging on creation are `instance`, `snapshot`, and
+    #   `volume`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -28636,6 +29800,84 @@ module Aws::EC2
     class TagSpecification < Struct.new(
       :resource_type,
       :tags)
+      include Aws::Structure
+    end
+
+    # The number of units to request. You can choose to set the target
+    # capacity in terms of instances or a performance characteristic that is
+    # important to your application workload, such as vCPUs, memory, or I/O.
+    # If the request type is `maintain`, you can specify a target capacity
+    # of 0 and add capacity later.
+    #
+    # @!attribute [rw] total_target_capacity
+    #   The number of units to request, filled using
+    #   `DefaultTargetCapacityType`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_target_capacity
+    #   The number of On-Demand units to request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spot_target_capacity
+    #   The maximum number of Spot units to launch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_target_capacity_type
+    #   The default `TotalTargetCapacity`, which is either `Spot` or
+    #   `On-Demand`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecification AWS API Documentation
+    #
+    class TargetCapacitySpecification < Struct.new(
+      :total_target_capacity,
+      :on_demand_target_capacity,
+      :spot_target_capacity,
+      :default_target_capacity_type)
+      include Aws::Structure
+    end
+
+    # The number of units to request. You can choose to set the target
+    # capacity in terms of instances or a performance characteristic that is
+    # important to your application workload, such as vCPUs, memory, or I/O.
+    # If the request type is `maintain`, you can specify a target capacity
+    # of 0 and add capacity later.
+    #
+    # @note When making an API call, you may pass TargetCapacitySpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         total_target_capacity: 1, # required
+    #         on_demand_target_capacity: 1,
+    #         spot_target_capacity: 1,
+    #         default_target_capacity_type: "spot", # accepts spot, on-demand
+    #       }
+    #
+    # @!attribute [rw] total_target_capacity
+    #   The number of units to request, filled using
+    #   `DefaultTargetCapacityType`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] on_demand_target_capacity
+    #   The number of On-Demand units to request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] spot_target_capacity
+    #   The number of Spot units to request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_target_capacity_type
+    #   The default `TotalTargetCapacity`, which is either `Spot` or
+    #   `On-Demand`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecificationRequest AWS API Documentation
+    #
+    class TargetCapacitySpecificationRequest < Struct.new(
+      :total_target_capacity,
+      :on_demand_target_capacity,
+      :spot_target_capacity,
+      :default_target_capacity_type)
       include Aws::Structure
     end
 
@@ -29399,7 +30641,7 @@ module Aws::EC2
     #   performance, I/O credits, and bursting, see [Amazon EBS Volume
     #   Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
-    #   Constraint: Range is 100-20000 IOPS for io1 volumes and 100-10000
+    #   Constraint: Range is 100-32000 IOPS for io1 volumes and 100-10000
     #   IOPS for `gp2` volumes.
     #
     #   Condition: This parameter is required for requests to create `io1`

@@ -1416,6 +1416,33 @@ module Aws::WAF
       req.send_request(options)
     end
 
+    # Permanently deletes an IAM policy from the specified RuleGroup.
+    #
+    # The user making the request must be the owner of the RuleGroup.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the RuleGroup from which you want to
+    #   delete the policy.
+    #
+    #   The user making the request must be the owner of the RuleGroup.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_permission_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeletePermissionPolicy AWS API Documentation
+    #
+    # @overload delete_permission_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_permission_policy(params = {}, options = {})
+      req = build_request(:delete_permission_policy, params)
+      req.send_request(options)
+    end
+
     # Permanently deletes a RateBasedRule. You can't delete a rule if it's
     # still used in any `WebACL` objects or if it still includes any
     # predicates, such as `ByteMatchSet` objects.
@@ -2166,6 +2193,35 @@ module Aws::WAF
     # @param [Hash] params ({})
     def get_ip_set(params = {}, options = {})
       req = build_request(:get_ip_set, params)
+      req.send_request(options)
+    end
+
+    # Returns the IAM policy attached to the RuleGroup.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the RuleGroup for which you want to
+    #   get the policy.
+    #
+    # @return [Types::GetPermissionPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPermissionPolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_permission_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetPermissionPolicy AWS API Documentation
+    #
+    # @overload get_permission_policy(params = {})
+    # @param [Hash] params ({})
+    def get_permission_policy(params = {}, options = {})
+      req = build_request(:get_permission_policy, params)
       req.send_request(options)
     end
 
@@ -3552,6 +3608,65 @@ module Aws::WAF
       req.send_request(options)
     end
 
+    # Attaches a IAM policy to the specified resource. The only supported
+    # use for this action is to share a RuleGroup across accounts.
+    #
+    # The `PutPermissionPolicy` is subject to the following restrictions:
+    #
+    # * You can attach only one policy with each `PutPermissionPolicy`
+    #   request.
+    #
+    # * The policy must include an `Effect`, `Action` and `Principal`.
+    #
+    # * `Effect` must specify `Allow`.
+    #
+    # * The `Action` in the policy must be `waf:UpdateWebACL` and
+    #   `waf-regional:UpdateWebACL`. Any extra or wildcard actions in the
+    #   policy will be rejected.
+    #
+    # * The policy cannot include a `Resource` parameter.
+    #
+    # * The ARN in the request must be a valid WAF RuleGroup ARN and the
+    #   RuleGroup must exist in the same region.
+    #
+    # * The user making the request must be the owner of the RuleGroup.
+    #
+    # * Your policy must be composed using IAM Policy version 2012-10-17.
+    #
+    # For more information, see [IAM Policies][1].
+    #
+    # An example of a valid policy parameter is shown in the Examples
+    # section below.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the RuleGroup to which you want to
+    #   attach the policy.
+    #
+    # @option params [required, String] :policy
+    #   The policy to attach to the specified RuleGroup.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_permission_policy({
+    #     resource_arn: "ResourceArn", # required
+    #     policy: "PolicyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/PutPermissionPolicy AWS API Documentation
+    #
+    # @overload put_permission_policy(params = {})
+    # @param [Hash] params ({})
+    def put_permission_policy(params = {}, options = {})
+      req = build_request(:put_permission_policy, params)
+      req.send_request(options)
+    end
+
     # Inserts or deletes ByteMatchTuple objects (filters) in a ByteMatchSet.
     # For each `ByteMatchTuple` object, you specify the following values:
     #
@@ -4335,9 +4450,11 @@ module Aws::WAF
     #
     #   You can only insert `REGULAR` rules into a rule group.
     #
-    #   The `Action` data type within `ActivatedRule` is used only when
-    #   submitting an `UpdateWebACL` request. `ActivatedRule|Action` is not
-    #   applicable and therefore not available for `UpdateRuleGroup`.
+    #   `ActivatedRule|OverrideAction` applies only when updating or adding a
+    #   `RuleGroup` to a `WebACL`. In this case you do not use
+    #   `ActivatedRule|Action`. For all other update requests,
+    #   `ActivatedRule|Action` is used instead of
+    #   `ActivatedRule|OverrideAction`.
     #
     # @option params [required, String] :change_token
     #   The value returned by the most recent call to GetChangeToken.
@@ -4720,11 +4837,12 @@ module Aws::WAF
     #
     #   * WebACLUpdate: Contains `Action` and `ActivatedRule`
     #
-    #   * ActivatedRule: Contains `Action`, `Priority`, `RuleId`, and `Type`.
-    #     The `OverrideAction` data type within `ActivatedRule` is used only
-    #     when submitting an `UpdateRuleGroup` request.
-    #     `ActivatedRule|OverrideAction` is not applicable and therefore not
-    #     available for `UpdateWebACL`.
+    #   * ActivatedRule: Contains `Action`, `OverrideAction`, `Priority`,
+    #     `RuleId`, and `Type`. `ActivatedRule|OverrideAction` applies only
+    #     when updating or adding a `RuleGroup` to a `WebACL`. In this case
+    #     you do not use `ActivatedRule|Action`. For all other update
+    #     requests, `ActivatedRule|Action` is used instead of
+    #     `ActivatedRule|OverrideAction`.
     #
     #   * WafAction: Contains `Type`
     #
@@ -4941,7 +5059,7 @@ module Aws::WAF
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-waf'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

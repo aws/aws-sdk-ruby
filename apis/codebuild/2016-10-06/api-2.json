@@ -200,6 +200,20 @@
         {"shape":"InvalidInputException"},
         {"shape":"ResourceNotFoundException"}
       ]
+    },
+    "UpdateWebhook":{
+      "name":"UpdateWebhook",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateWebhookInput"},
+      "output":{"shape":"UpdateWebhookOutput"},
+      "errors":[
+        {"shape":"InvalidInputException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"OAuthProviderException"}
+      ]
     }
   },
   "shapes":{
@@ -290,6 +304,7 @@
         "artifacts":{"shape":"BuildArtifacts"},
         "cache":{"shape":"ProjectCache"},
         "environment":{"shape":"ProjectEnvironment"},
+        "serviceRole":{"shape":"NonEmptyString"},
         "logs":{"shape":"LogsLocation"},
         "timeoutInMinutes":{"shape":"WrapperInt"},
         "buildComplete":{"shape":"Boolean"},
@@ -405,7 +420,8 @@
       "type":"structure",
       "required":["projectName"],
       "members":{
-        "projectName":{"shape":"ProjectName"}
+        "projectName":{"shape":"ProjectName"},
+        "branchFilter":{"shape":"String"}
       }
     },
     "CreateWebhookOutput":{
@@ -474,7 +490,10 @@
     },
     "EnvironmentType":{
       "type":"string",
-      "enum":["LINUX_CONTAINER"]
+      "enum":[
+        "WINDOWS_CONTAINER",
+        "LINUX_CONTAINER"
+      ]
     },
     "EnvironmentVariable":{
       "type":"structure",
@@ -642,7 +661,8 @@
       "enum":[
         "DEBIAN",
         "AMAZON_LINUX",
-        "UBUNTU"
+        "UBUNTU",
+        "WINDOWS_SERVER"
       ]
     },
     "Project":{
@@ -805,9 +825,21 @@
         "sourceVersion":{"shape":"String"},
         "artifactsOverride":{"shape":"ProjectArtifacts"},
         "environmentVariablesOverride":{"shape":"EnvironmentVariables"},
+        "sourceTypeOverride":{"shape":"SourceType"},
+        "sourceLocationOverride":{"shape":"String"},
+        "sourceAuthOverride":{"shape":"SourceAuth"},
         "gitCloneDepthOverride":{"shape":"GitCloneDepth"},
         "buildspecOverride":{"shape":"String"},
-        "timeoutInMinutesOverride":{"shape":"TimeOut"}
+        "insecureSslOverride":{"shape":"WrapperBoolean"},
+        "environmentTypeOverride":{"shape":"EnvironmentType"},
+        "imageOverride":{"shape":"NonEmptyString"},
+        "computeTypeOverride":{"shape":"ComputeType"},
+        "certificateOverride":{"shape":"String"},
+        "cacheOverride":{"shape":"ProjectCache"},
+        "serviceRoleOverride":{"shape":"NonEmptyString"},
+        "privilegedModeOverride":{"shape":"WrapperBoolean"},
+        "timeoutInMinutesOverride":{"shape":"TimeOut"},
+        "idempotencyToken":{"shape":"String"}
       }
     },
     "StartBuildOutput":{
@@ -889,6 +921,21 @@
         "project":{"shape":"Project"}
       }
     },
+    "UpdateWebhookInput":{
+      "type":"structure",
+      "required":["projectName"],
+      "members":{
+        "projectName":{"shape":"ProjectName"},
+        "branchFilter":{"shape":"String"},
+        "rotateSecret":{"shape":"Boolean"}
+      }
+    },
+    "UpdateWebhookOutput":{
+      "type":"structure",
+      "members":{
+        "webhook":{"shape":"Webhook"}
+      }
+    },
     "ValueInput":{
       "type":"string",
       "max":255,
@@ -908,7 +955,9 @@
       "members":{
         "url":{"shape":"NonEmptyString"},
         "payloadUrl":{"shape":"NonEmptyString"},
-        "secret":{"shape":"NonEmptyString"}
+        "secret":{"shape":"NonEmptyString"},
+        "branchFilter":{"shape":"String"},
+        "lastModifiedSecret":{"shape":"Timestamp"}
       }
     },
     "WrapperBoolean":{"type":"boolean"},

@@ -83,17 +83,26 @@ module Aws
     def get_credentials
       # Retry loading credentials a configurable number of times if
       # the instance metadata service is not responding.
-      begin
-        retry_errors(NETWORK_ERRORS, max_retries: @retries) do
-          open_connection do |conn|
-            path = '/latest/meta-data/iam/security-credentials/'
-            profile_name = http_get(conn, path).lines.first.strip
-            http_get(conn, path + profile_name)
-          end
-        end
-      rescue
+      if _metadata_disabled?
         '{}'
+      else
+        begin
+          retry_errors(NETWORK_ERRORS, max_retries: @retries) do
+            open_connection do |conn|
+              path = '/latest/meta-data/iam/security-credentials/'
+              profile_name = http_get(conn, path).lines.first.strip
+              http_get(conn, path + profile_name)
+            end
+          end
+        rescue
+          '{}'
+        end
       end
+    end
+
+    def _metadata_disabled?
+      flag = ENV["AWS_EC2_METADATA_DISABLED"]
+      !flag.nil? && flag.downcase == "true"
     end
 
     def open_connection
@@ -106,7 +115,7 @@ module Aws
     end
 
     def http_get(connection, path)
-      response = connection.request(Net::HTTP::Get.new(path))
+      response = connection.request(Net::HTTP::Get.new(path, {"User-Agent" => "aws-sdk-ruby3/#{CORE_GEM_VERSION}"}))
       if response.code.to_i == 200
         response.body
       else

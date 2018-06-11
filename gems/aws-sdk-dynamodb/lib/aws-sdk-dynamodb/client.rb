@@ -545,6 +545,9 @@ module Aws::DynamoDB
     #   `BatchWriteItem` request. For example, you cannot put and delete the
     #   same item in the same `BatchWriteItem` request.
     #
+    # * Your request contains at least two items with identical hash and
+    #   range keys (which essentially is two put operations).
+    #
     # * There are more than 25 requests in the batch.
     #
     # * Any individual item in a batch exceeds 400 KB.
@@ -814,6 +817,20 @@ module Aws::DynamoDB
     #
     # * The tables must have DynamoDB Streams enabled
     #   (NEW\_AND\_OLD\_IMAGES).
+    #
+    # * The tables must have same provisioned and maximum write capacity
+    #   units.
+    #
+    # If global secondary indexes are specified, then the following
+    # conditions must also be met:
+    #
+    # * The global secondary indexes must have the same name.
+    #
+    # * The global secondary indexes must have the same hash key and sort
+    #   key (if present).
+    #
+    # * The global secondary indexes must have the same provisioned and
+    #   maximum write capacity units.
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -1781,16 +1798,25 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
-    # Checks the status of the backup restore settings on the specified
-    # table. If backups are enabled, `ContinuousBackupsStatus` will bet set
-    # to ENABLED.
+    # Checks the status of continuous backups and point in time recovery on
+    # the specified table. Continuous backups are `ENABLED` on all tables at
+    # table creation. If point in time recovery is enabled,
+    # `PointInTimeRecoveryStatus` will be set to ENABLED.
+    #
+    # Once continuous backups and point in time recovery are enabled, you
+    # can restore to any point in time within `EarliestRestorableDateTime`
+    # and `LatestRestorableDateTime`.
+    #
+    # `LatestRestorableDateTime` is typically 5 minutes before the current
+    # time. You can restore your table to any point in time during the last
+    # 35 days.
     #
     # You can call `DescribeContinuousBackups` at a maximum rate of 10 times
     # per second.
     #
     # @option params [required, String] :table_name
-    #   Name of the table for which the customer wants to check the backup and
-    #   restore settings.
+    #   Name of the table for which the customer wants to check the continuous
+    #   backups and point in time recovery settings.
     #
     # @return [Types::DescribeContinuousBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1805,6 +1831,9 @@ module Aws::DynamoDB
     # @example Response structure
     #
     #   resp.continuous_backups_description.continuous_backups_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.continuous_backups_description.point_in_time_recovery_description.point_in_time_recovery_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.continuous_backups_description.point_in_time_recovery_description.earliest_restorable_date_time #=> Time
+    #   resp.continuous_backups_description.point_in_time_recovery_description.latest_restorable_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackups AWS API Documentation
     #
@@ -1845,6 +1874,45 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_global_table(params = {}, options = {})
       req = build_request(:describe_global_table, params)
+      req.send_request(options)
+    end
+
+    # Describes region specific settings for a global table.
+    #
+    # @option params [required, String] :global_table_name
+    #   The name of the global table to describe.
+    #
+    # @return [Types::DescribeGlobalTableSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGlobalTableSettingsOutput#global_table_name #global_table_name} => String
+    #   * {Types::DescribeGlobalTableSettingsOutput#replica_settings #replica_settings} => Array&lt;Types::ReplicaSettingsDescription&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_global_table_settings({
+    #     global_table_name: "TableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_table_name #=> String
+    #   resp.replica_settings #=> Array
+    #   resp.replica_settings[0].region_name #=> String
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_units #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableSettings AWS API Documentation
+    #
+    # @overload describe_global_table_settings(params = {})
+    # @param [Hash] params ({})
+    def describe_global_table_settings(params = {}, options = {})
+      req = build_request(:describe_global_table_settings, params)
       req.send_request(options)
     end
 
@@ -3061,8 +3129,8 @@ module Aws::DynamoDB
     #   Items with the same partition key value are stored in sorted order by
     #   sort key. If the sort key data type is Number, the results are stored
     #   in numeric order. For type String, the results are stored in order of
-    #   ASCII character code values. For type Binary, DynamoDB treats each
-    #   byte of the binary data as unsigned.
+    #   UTF-8 bytes. For type Binary, DynamoDB treats each byte of the binary
+    #   data as unsigned.
     #
     #   If `ScanIndexForward` is `true`, DynamoDB returns the results in the
     #   order in which they are stored (by sort key value). This is the
@@ -3399,7 +3467,8 @@ module Aws::DynamoDB
     end
 
     # Creates a new table from an existing backup. Any number of users can
-    # execute up to 10 concurrent restores in a given account.
+    # execute up to 4 concurrent restores (any type of restore) in a given
+    # account.
     #
     # You can call `RestoreTableFromBackup` at a maximum rate of 10 times
     # per second.
@@ -3500,6 +3569,141 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def restore_table_from_backup(params = {}, options = {})
       req = build_request(:restore_table_from_backup, params)
+      req.send_request(options)
+    end
+
+    # Restores the specified table to the specified point in time within
+    # `EarliestRestorableDateTime` and `LatestRestorableDateTime`. You can
+    # restore your table to any point in time during the last 35 days. Any
+    # number of users can execute up to 4 concurrent restores (any type of
+    # restore) in a given account.
+    #
+    # When you restore using point in time recovery, DynamoDB restores your
+    # table data to the state based on the selected date and time
+    # (day:hour:minute:second) to a new table.
+    #
+    # Along with data, the following are also included on the new restored
+    # table using point in time recovery:
+    #
+    # * Global secondary indexes (GSIs)
+    #
+    # * Local secondary indexes (LSIs)
+    #
+    # * Provisioned read and write capacity
+    #
+    # * Encryption settings
+    #
+    #   All these settings come from the current settings of the source
+    #   table at the time of restore.
+    #
+    # You must manually set up the following on the restored table:
+    #
+    # * Auto scaling policies
+    #
+    # * IAM policies
+    #
+    # * Cloudwatch metrics and alarms
+    #
+    # * Tags
+    #
+    # * Stream settings
+    #
+    # * Time to Live (TTL) settings
+    #
+    # * Point in time recovery settings
+    #
+    # @option params [required, String] :source_table_name
+    #   Name of the source table that is being restored.
+    #
+    # @option params [required, String] :target_table_name
+    #   The name of the new table to which it must be restored to.
+    #
+    # @option params [Boolean] :use_latest_restorable_time
+    #   Restore the table to the latest possible time.
+    #   `LatestRestorableDateTime` is typically 5 minutes before the current
+    #   time.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :restore_date_time
+    #   Time in the past to restore the table to.
+    #
+    # @return [Types::RestoreTableToPointInTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreTableToPointInTimeOutput#table_description #table_description} => Types::TableDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_table_to_point_in_time({
+    #     source_table_name: "TableName", # required
+    #     target_table_name: "TableName", # required
+    #     use_latest_restorable_time: false,
+    #     restore_date_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_description.attribute_definitions #=> Array
+    #   resp.table_description.attribute_definitions[0].attribute_name #=> String
+    #   resp.table_description.attribute_definitions[0].attribute_type #=> String, one of "S", "N", "B"
+    #   resp.table_description.table_name #=> String
+    #   resp.table_description.key_schema #=> Array
+    #   resp.table_description.key_schema[0].attribute_name #=> String
+    #   resp.table_description.key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.table_description.table_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.creation_date_time #=> Time
+    #   resp.table_description.provisioned_throughput.last_increase_date_time #=> Time
+    #   resp.table_description.provisioned_throughput.last_decrease_date_time #=> Time
+    #   resp.table_description.provisioned_throughput.number_of_decreases_today #=> Integer
+    #   resp.table_description.provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.table_description.provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.table_description.table_size_bytes #=> Integer
+    #   resp.table_description.item_count #=> Integer
+    #   resp.table_description.table_arn #=> String
+    #   resp.table_description.table_id #=> String
+    #   resp.table_description.local_secondary_indexes #=> Array
+    #   resp.table_description.local_secondary_indexes[0].index_name #=> String
+    #   resp.table_description.local_secondary_indexes[0].key_schema #=> Array
+    #   resp.table_description.local_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.table_description.local_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.table_description.local_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table_description.local_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table_description.local_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table_description.local_secondary_indexes[0].index_size_bytes #=> Integer
+    #   resp.table_description.local_secondary_indexes[0].item_count #=> Integer
+    #   resp.table_description.local_secondary_indexes[0].index_arn #=> String
+    #   resp.table_description.global_secondary_indexes #=> Array
+    #   resp.table_description.global_secondary_indexes[0].index_name #=> String
+    #   resp.table_description.global_secondary_indexes[0].key_schema #=> Array
+    #   resp.table_description.global_secondary_indexes[0].key_schema[0].attribute_name #=> String
+    #   resp.table_description.global_secondary_indexes[0].key_schema[0].key_type #=> String, one of "HASH", "RANGE"
+    #   resp.table_description.global_secondary_indexes[0].projection.projection_type #=> String, one of "ALL", "KEYS_ONLY", "INCLUDE"
+    #   resp.table_description.global_secondary_indexes[0].projection.non_key_attributes #=> Array
+    #   resp.table_description.global_secondary_indexes[0].projection.non_key_attributes[0] #=> String
+    #   resp.table_description.global_secondary_indexes[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.table_description.global_secondary_indexes[0].backfilling #=> Boolean
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.last_increase_date_time #=> Time
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.last_decrease_date_time #=> Time
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.number_of_decreases_today #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.read_capacity_units #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].provisioned_throughput.write_capacity_units #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].index_size_bytes #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].item_count #=> Integer
+    #   resp.table_description.global_secondary_indexes[0].index_arn #=> String
+    #   resp.table_description.stream_specification.stream_enabled #=> Boolean
+    #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
+    #   resp.table_description.latest_stream_label #=> String
+    #   resp.table_description.latest_stream_arn #=> String
+    #   resp.table_description.restore_summary.source_backup_arn #=> String
+    #   resp.table_description.restore_summary.source_table_arn #=> String
+    #   resp.table_description.restore_summary.restore_date_time #=> Time
+    #   resp.table_description.restore_summary.restore_in_progress #=> Boolean
+    #   resp.table_description.sse_description.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime AWS API Documentation
+    #
+    # @overload restore_table_to_point_in_time(params = {})
+    # @param [Hash] params ({})
+    def restore_table_to_point_in_time(params = {}, options = {})
+      req = build_request(:restore_table_to_point_in_time, params)
       req.send_request(options)
     end
 
@@ -4024,17 +4228,79 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # `UpdateContinuousBackups` enables or disables point in time recovery
+    # for the specified table. A successful `UpdateContinuousBackups` call
+    # returns the current `ContinuousBackupsDescription`. Continuous backups
+    # are `ENABLED` on all tables at table creation. If point in time
+    # recovery is enabled, `PointInTimeRecoveryStatus` will be set to
+    # ENABLED.
+    #
+    # Once continuous backups and point in time recovery are enabled, you
+    # can restore to any point in time within `EarliestRestorableDateTime`
+    # and `LatestRestorableDateTime`.
+    #
+    # `LatestRestorableDateTime` is typically 5 minutes before the current
+    # time. You can restore your table to any point in time during the last
+    # 35 days..
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table.
+    #
+    # @option params [required, Types::PointInTimeRecoverySpecification] :point_in_time_recovery_specification
+    #   Represents the settings used to enable point in time recovery.
+    #
+    # @return [Types::UpdateContinuousBackupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateContinuousBackupsOutput#continuous_backups_description #continuous_backups_description} => Types::ContinuousBackupsDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_continuous_backups({
+    #     table_name: "TableName", # required
+    #     point_in_time_recovery_specification: { # required
+    #       point_in_time_recovery_enabled: false, # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.continuous_backups_description.continuous_backups_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.continuous_backups_description.point_in_time_recovery_description.point_in_time_recovery_status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.continuous_backups_description.point_in_time_recovery_description.earliest_restorable_date_time #=> Time
+    #   resp.continuous_backups_description.point_in_time_recovery_description.latest_restorable_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContinuousBackups AWS API Documentation
+    #
+    # @overload update_continuous_backups(params = {})
+    # @param [Hash] params ({})
+    def update_continuous_backups(params = {}, options = {})
+      req = build_request(:update_continuous_backups, params)
+      req.send_request(options)
+    end
+
     # Adds or removes replicas in the specified global table. The global
     # table must already exist to be able to use this operation. Any replica
     # to be added must be empty, must have the same name as the global
-    # table, must have the same key schema, must have DynamoDB Streams
-    # enabled, and cannot have any local secondary indexes (LSIs).
+    # table, must have the same key schema, and must have DynamoDB Streams
+    # enabled and must have same provisioned and maximum write capacity
+    # units.
     #
     # <note markdown="1"> Although you can use `UpdateGlobalTable` to add replicas and remove
     # replicas in a single request, for simplicity we recommend that you
     # issue separate requests for adding or removing replicas.
     #
     #  </note>
+    #
+    # If global secondary indexes are specified, then the following
+    # conditions must also be met:
+    #
+    # * The global secondary indexes must have the same name.
+    #
+    # * The global secondary indexes must have the same hash key and sort
+    #   key (if present).
+    #
+    # * The global secondary indexes must have the same provisioned and
+    #   maximum write capacity units.
     #
     # @option params [required, String] :global_table_name
     #   The global table name.
@@ -4078,6 +4344,76 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def update_global_table(params = {}, options = {})
       req = build_request(:update_global_table, params)
+      req.send_request(options)
+    end
+
+    # Updates settings for a global table.
+    #
+    # @option params [required, String] :global_table_name
+    #   The name of the global table
+    #
+    # @option params [Integer] :global_table_provisioned_write_capacity_units
+    #   The maximum number of writes consumed per second before DynamoDB
+    #   returns a `ThrottlingException.`
+    #
+    # @option params [Array<Types::GlobalTableGlobalSecondaryIndexSettingsUpdate>] :global_table_global_secondary_index_settings_update
+    #   Represents the settings of a global secondary index for a global table
+    #   that will be modified.
+    #
+    # @option params [Array<Types::ReplicaSettingsUpdate>] :replica_settings_update
+    #   Represents the settings for a global table in a region that will be
+    #   modified.
+    #
+    # @return [Types::UpdateGlobalTableSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGlobalTableSettingsOutput#global_table_name #global_table_name} => String
+    #   * {Types::UpdateGlobalTableSettingsOutput#replica_settings #replica_settings} => Array&lt;Types::ReplicaSettingsDescription&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_global_table_settings({
+    #     global_table_name: "TableName", # required
+    #     global_table_provisioned_write_capacity_units: 1,
+    #     global_table_global_secondary_index_settings_update: [
+    #       {
+    #         index_name: "IndexName", # required
+    #         provisioned_write_capacity_units: 1,
+    #       },
+    #     ],
+    #     replica_settings_update: [
+    #       {
+    #         region_name: "RegionName", # required
+    #         replica_provisioned_read_capacity_units: 1,
+    #         replica_global_secondary_index_settings_update: [
+    #           {
+    #             index_name: "IndexName", # required
+    #             provisioned_read_capacity_units: 1,
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.global_table_name #=> String
+    #   resp.replica_settings #=> Array
+    #   resp.replica_settings[0].region_name #=> String
+    #   resp.replica_settings[0].replica_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_provisioned_write_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings #=> Array
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_name #=> String
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].index_status #=> String, one of "CREATING", "UPDATING", "DELETING", "ACTIVE"
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_read_capacity_units #=> Integer
+    #   resp.replica_settings[0].replica_global_secondary_index_settings[0].provisioned_write_capacity_units #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableSettings AWS API Documentation
+    #
+    # @overload update_global_table_settings(params = {})
+    # @param [Hash] params ({})
+    def update_global_table_settings(params = {}, options = {})
+      req = build_request(:update_global_table_settings, params)
       req.send_request(options)
     end
 
@@ -4802,7 +5138,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

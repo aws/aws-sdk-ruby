@@ -45,8 +45,8 @@ module Aws::IAM
       data[:certificate_body]
     end
 
-    # The status of the signing certificate. `Active` means the key is valid
-    # for API calls, while `Inactive` means it is not.
+    # The status of the signing certificate. `Active` means that the key is
+    # valid for API calls, while `Inactive` means it is not.
     # @return [String]
     def status
       data[:status]

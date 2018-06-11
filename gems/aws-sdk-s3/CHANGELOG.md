@@ -3,6 +3,48 @@ Unreleased Changes
 
 * Feature - S3::Object#upload_stream
 
+1.13.0 (2018-05-22)
+------------------
+
+* Feature - API update.
+
+* Issue - Update EventEmitter to Aws::EventEmitter
+
+1.12.0 (2018-05-18)
+------------------
+
+* Feature - API update.
+
+1.11.0 (2018-05-17)
+------------------
+
+* Feature - Support S3 `SelectObjectContent` API
+
+1.10.0 (2018-05-07)
+------------------
+
+* Feature - API update.
+
+1.9.1 (2018-04-19)
+------------------
+
+* Issue - S3 accelerate endpoint doesn't work with 'expect' header
+
+1.9.0 (2018-04-04)
+------------------
+
+* Feature - API update.
+
+1.8.2 (2018-02-23)
+------------------
+
+* Issue - Add support for AES/CBC/PKCS7Padding to encryption client.
+
+1.8.1 (2018-02-16)
+------------------
+
+* Issue - Enhance S3 Multipart Downloader performance #1709
+
 * Issue - Fix Ruby 2.5 warnings.
 
 1.8.0 (2017-11-29)

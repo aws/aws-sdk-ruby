@@ -286,9 +286,8 @@ module Aws::MigrationHub
     #   stream name (same as a `CreateProgressUpdateStream` call).
     #
     # * The call will return, and a background process will asynchronously
-    #   be doing the actual delete of the stream and all of its resources
-    #   (tasks, associated resources, resource attributes, created
-    #   artifacts).
+    #   delete the stream and all of its resources (tasks, associated
+    #   resources, resource attributes, created artifacts).
     #
     # * If the stream takes time to be deleted, it might still show up on a
     #   `ListProgressUpdateStreams` call.
@@ -389,7 +388,7 @@ module Aws::MigrationHub
     #   resp.migration_task.task.progress_percent #=> Integer
     #   resp.migration_task.update_date_time #=> Time
     #   resp.migration_task.resource_attribute_list #=> Array
-    #   resp.migration_task.resource_attribute_list[0].type #=> String, one of "IPV4_ADDRESS", "IPV6_ADDRESS", "MAC_ADDRESS", "FQDN", "VM_MANAGER_ID", "VM_MANAGED_OBJECT_REFERENCE", "VM_NAME", "VM_PATH", "BIOS_ID", "MOTHERBOARD_SERIAL_NUMBER", "LABEL"
+    #   resp.migration_task.resource_attribute_list[0].type #=> String, one of "IPV4_ADDRESS", "IPV6_ADDRESS", "MAC_ADDRESS", "FQDN", "VM_MANAGER_ID", "VM_MANAGED_OBJECT_REFERENCE", "VM_NAME", "VM_PATH", "BIOS_ID", "MOTHERBOARD_SERIAL_NUMBER"
     #   resp.migration_task.resource_attribute_list[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/DescribeMigrationTask AWS API Documentation
@@ -818,17 +817,25 @@ module Aws::MigrationHub
     # repository. This association occurs asynchronously after
     # `PutResourceAttributes` returns.
     #
-    # Keep in mind that subsequent calls to PutResourceAttributes will
-    # override previously stored attributes. For example, if it is first
-    # called with a MAC address, but later, it is desired to *add* an IP
-    # address, it will then be required to call it with *both* the IP and
-    # MAC addresses to prevent overiding the MAC address.
+    # * Keep in mind that subsequent calls to PutResourceAttributes will
+    #   override previously stored attributes. For example, if it is first
+    #   called with a MAC address, but later, it is desired to *add* an IP
+    #   address, it will then be required to call it with *both* the IP and
+    #   MAC addresses to prevent overiding the MAC address.
+    #
+    # * Note the instructions regarding the special use case of the [
+    #   `ResourceAttributeList` ][1] parameter when specifying any "VM"
+    #   related value.
     #
     # <note markdown="1"> Because this is an asynchronous call, it will always return 200,
     # whether an association occurs or not. To confirm if an association was
-    # found based on the provided details, call `ListAssociatedResource`.
+    # found based on the provided details, call `ListDiscoveredResources`.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList
     #
     # @option params [required, String] :progress_update_stream
     #   The name of the ProgressUpdateStream.
@@ -840,6 +847,31 @@ module Aws::MigrationHub
     #   Information about the resource that is being migrated. This data will
     #   be used to map the task to a resource in the Application Discovery
     #   Service (ADS)'s repository.
+    #
+    #   <note markdown="1"> Takes the object array of `ResourceAttribute` where the `Type` field
+    #   is reserved for the following values: `IPV4_ADDRESS | IPV6_ADDRESS |
+    #   MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE |
+    #   VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER` where the
+    #   identifying value can be a string up to 256 characters.
+    #
+    #    </note>
+    #
+    #   * If any "VM" related value is set for a `ResourceAttribute` object,
+    #     it is required that `VM_MANAGER_ID`, as a minimum, is always set. If
+    #     `VM_MANAGER_ID` is not set, then all "VM" fields will be discarded
+    #     and "VM" fields will not be used for matching the migration task
+    #     to a server in Application Discovery Service (ADS)'s repository.
+    #     See the [Example][1] section below for a use case of specifying
+    #     "VM" related values.
+    #
+    #   * If a server you are trying to match has multiple IP or MAC
+    #     addresses, you should provide as many as you know in separate
+    #     type/value pairs passed to the `ResourceAttributeList` parameter to
+    #     maximize the chances of matching.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples
     #
     # @option params [Boolean] :dry_run
     #   Optional boolean flag to indicate whether any effect should take
@@ -854,7 +886,7 @@ module Aws::MigrationHub
     #     migration_task_name: "MigrationTaskName", # required
     #     resource_attribute_list: [ # required
     #       {
-    #         type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER, LABEL
+    #         type: "IPV4_ADDRESS", # required, accepts IPV4_ADDRESS, IPV6_ADDRESS, MAC_ADDRESS, FQDN, VM_MANAGER_ID, VM_MANAGED_OBJECT_REFERENCE, VM_NAME, VM_PATH, BIOS_ID, MOTHERBOARD_SERIAL_NUMBER
     #         value: "ResourceAttributeValue", # required
     #       },
     #     ],
@@ -883,7 +915,7 @@ module Aws::MigrationHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhub'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

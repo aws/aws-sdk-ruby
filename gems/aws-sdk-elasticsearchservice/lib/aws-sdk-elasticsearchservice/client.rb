@@ -230,6 +230,15 @@ module Aws::ElasticsearchService
     #
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
     #
+    # @option params [Types::CognitoOptions] :cognito_options
+    #   Options to specify the Cognito user and identity pools for Kibana
+    #   authentication. For more information, see [Amazon Cognito
+    #   Authentication for Kibana][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
+    #
     # @option params [Types::EncryptionAtRestOptions] :encryption_at_rest_options
     #   Specifies the Encryption At Rest Options.
     #
@@ -278,6 +287,12 @@ module Aws::ElasticsearchService
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
     #     },
+    #     cognito_options: {
+    #       enabled: false,
+    #       user_pool_id: "UserPoolId",
+    #       identity_pool_id: "IdentityPoolId",
+    #       role_arn: "RoleArn",
+    #     },
     #     encryption_at_rest_options: {
     #       enabled: false,
     #       kms_key_id: "KmsKeyId",
@@ -324,6 +339,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.cognito_options.enabled #=> Boolean
+    #   resp.domain_status.cognito_options.user_pool_id #=> String
+    #   resp.domain_status.cognito_options.identity_pool_id #=> String
+    #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status.advanced_options #=> Hash
@@ -387,6 +406,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.cognito_options.enabled #=> Boolean
+    #   resp.domain_status.cognito_options.user_pool_id #=> String
+    #   resp.domain_status.cognito_options.identity_pool_id #=> String
+    #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status.advanced_options #=> Hash
@@ -470,6 +493,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.cognito_options.enabled #=> Boolean
+    #   resp.domain_status.cognito_options.user_pool_id #=> String
+    #   resp.domain_status.cognito_options.identity_pool_id #=> String
+    #   resp.domain_status.cognito_options.role_arn #=> String
     #   resp.domain_status.encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status.encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status.advanced_options #=> Hash
@@ -554,6 +581,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.vpc_options.status.update_version #=> Integer
     #   resp.domain_config.vpc_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.vpc_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.cognito_options.options.enabled #=> Boolean
+    #   resp.domain_config.cognito_options.options.user_pool_id #=> String
+    #   resp.domain_config.cognito_options.options.identity_pool_id #=> String
+    #   resp.domain_config.cognito_options.options.role_arn #=> String
+    #   resp.domain_config.cognito_options.status.creation_date #=> Time
+    #   resp.domain_config.cognito_options.status.update_date #=> Time
+    #   resp.domain_config.cognito_options.status.update_version #=> Integer
+    #   resp.domain_config.cognito_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.cognito_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
     #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
@@ -633,6 +669,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].vpc_options.availability_zones[0] #=> String
     #   resp.domain_status_list[0].vpc_options.security_group_ids #=> Array
     #   resp.domain_status_list[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status_list[0].cognito_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].cognito_options.user_pool_id #=> String
+    #   resp.domain_status_list[0].cognito_options.identity_pool_id #=> String
+    #   resp.domain_status_list[0].cognito_options.role_arn #=> String
     #   resp.domain_status_list[0].encryption_at_rest_options.enabled #=> Boolean
     #   resp.domain_status_list[0].encryption_at_rest_options.kms_key_id #=> String
     #   resp.domain_status_list[0].advanced_options #=> Hash
@@ -697,6 +737,112 @@ module Aws::ElasticsearchService
     # @param [Hash] params ({})
     def describe_elasticsearch_instance_type_limits(params = {}, options = {})
       req = build_request(:describe_elasticsearch_instance_type_limits, params)
+      req.send_request(options)
+    end
+
+    # Lists available reserved Elasticsearch instance offerings.
+    #
+    # @option params [String] :reserved_elasticsearch_instance_offering_id
+    #   The offering identifier filter value. Use this parameter to show only
+    #   the available offering that matches the specified reservation
+    #   identifier.
+    #
+    # @option params [Integer] :max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #
+    # @option params [String] :next_token
+    #   NextToken should be sent in case if earlier API call produced result
+    #   containing NextToken. It is used for pagination.
+    #
+    # @return [Types::DescribeReservedElasticsearchInstanceOfferingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReservedElasticsearchInstanceOfferingsResponse#next_token #next_token} => String
+    #   * {Types::DescribeReservedElasticsearchInstanceOfferingsResponse#reserved_elasticsearch_instance_offerings #reserved_elasticsearch_instance_offerings} => Array&lt;Types::ReservedElasticsearchInstanceOffering&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_reserved_elasticsearch_instance_offerings({
+    #     reserved_elasticsearch_instance_offering_id: "GUID",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reserved_elasticsearch_instance_offerings #=> Array
+    #   resp.reserved_elasticsearch_instance_offerings[0].reserved_elasticsearch_instance_offering_id #=> String
+    #   resp.reserved_elasticsearch_instance_offerings[0].elasticsearch_instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.reserved_elasticsearch_instance_offerings[0].duration #=> Integer
+    #   resp.reserved_elasticsearch_instance_offerings[0].fixed_price #=> Float
+    #   resp.reserved_elasticsearch_instance_offerings[0].usage_price #=> Float
+    #   resp.reserved_elasticsearch_instance_offerings[0].currency_code #=> String
+    #   resp.reserved_elasticsearch_instance_offerings[0].payment_option #=> String, one of "ALL_UPFRONT", "PARTIAL_UPFRONT", "NO_UPFRONT"
+    #   resp.reserved_elasticsearch_instance_offerings[0].recurring_charges #=> Array
+    #   resp.reserved_elasticsearch_instance_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
+    #   resp.reserved_elasticsearch_instance_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
+    #
+    # @overload describe_reserved_elasticsearch_instance_offerings(params = {})
+    # @param [Hash] params ({})
+    def describe_reserved_elasticsearch_instance_offerings(params = {}, options = {})
+      req = build_request(:describe_reserved_elasticsearch_instance_offerings, params)
+      req.send_request(options)
+    end
+
+    # Returns information about reserved Elasticsearch instances for this
+    # account.
+    #
+    # @option params [String] :reserved_elasticsearch_instance_id
+    #   The reserved instance identifier filter value. Use this parameter to
+    #   show only the reservation that matches the specified reserved
+    #   Elasticsearch instance ID.
+    #
+    # @option params [Integer] :max_results
+    #   Set this value to limit the number of results returned. If not
+    #   specified, defaults to 100.
+    #
+    # @option params [String] :next_token
+    #   NextToken should be sent in case if earlier API call produced result
+    #   containing NextToken. It is used for pagination.
+    #
+    # @return [Types::DescribeReservedElasticsearchInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReservedElasticsearchInstancesResponse#next_token #next_token} => String
+    #   * {Types::DescribeReservedElasticsearchInstancesResponse#reserved_elasticsearch_instances #reserved_elasticsearch_instances} => Array&lt;Types::ReservedElasticsearchInstance&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_reserved_elasticsearch_instances({
+    #     reserved_elasticsearch_instance_id: "GUID",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reserved_elasticsearch_instances #=> Array
+    #   resp.reserved_elasticsearch_instances[0].reservation_name #=> String
+    #   resp.reserved_elasticsearch_instances[0].reserved_elasticsearch_instance_id #=> String
+    #   resp.reserved_elasticsearch_instances[0].reserved_elasticsearch_instance_offering_id #=> String
+    #   resp.reserved_elasticsearch_instances[0].elasticsearch_instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch", "d2.xlarge.elasticsearch", "d2.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch", "d2.8xlarge.elasticsearch", "c4.large.elasticsearch", "c4.xlarge.elasticsearch", "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch", "r4.large.elasticsearch", "r4.xlarge.elasticsearch", "r4.2xlarge.elasticsearch", "r4.4xlarge.elasticsearch", "r4.8xlarge.elasticsearch", "r4.16xlarge.elasticsearch", "i3.large.elasticsearch", "i3.xlarge.elasticsearch", "i3.2xlarge.elasticsearch", "i3.4xlarge.elasticsearch", "i3.8xlarge.elasticsearch", "i3.16xlarge.elasticsearch"
+    #   resp.reserved_elasticsearch_instances[0].start_time #=> Time
+    #   resp.reserved_elasticsearch_instances[0].duration #=> Integer
+    #   resp.reserved_elasticsearch_instances[0].fixed_price #=> Float
+    #   resp.reserved_elasticsearch_instances[0].usage_price #=> Float
+    #   resp.reserved_elasticsearch_instances[0].currency_code #=> String
+    #   resp.reserved_elasticsearch_instances[0].elasticsearch_instance_count #=> Integer
+    #   resp.reserved_elasticsearch_instances[0].state #=> String
+    #   resp.reserved_elasticsearch_instances[0].payment_option #=> String, one of "ALL_UPFRONT", "PARTIAL_UPFRONT", "NO_UPFRONT"
+    #   resp.reserved_elasticsearch_instances[0].recurring_charges #=> Array
+    #   resp.reserved_elasticsearch_instances[0].recurring_charges[0].recurring_charge_amount #=> Float
+    #   resp.reserved_elasticsearch_instances[0].recurring_charges[0].recurring_charge_frequency #=> String
+    #
+    # @overload describe_reserved_elasticsearch_instances(params = {})
+    # @param [Hash] params ({})
+    def describe_reserved_elasticsearch_instances(params = {}, options = {})
+      req = build_request(:describe_reserved_elasticsearch_instances, params)
       req.send_request(options)
     end
 
@@ -831,6 +977,42 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Allows you to purchase reserved Elasticsearch instances.
+    #
+    # @option params [required, String] :reserved_elasticsearch_instance_offering_id
+    #   The ID of the reserved Elasticsearch instance offering to purchase.
+    #
+    # @option params [required, String] :reservation_name
+    #   A customer-specified identifier to track this reservation.
+    #
+    # @option params [Integer] :instance_count
+    #   The number of Elasticsearch instances to reserve.
+    #
+    # @return [Types::PurchaseReservedElasticsearchInstanceOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PurchaseReservedElasticsearchInstanceOfferingResponse#reserved_elasticsearch_instance_id #reserved_elasticsearch_instance_id} => String
+    #   * {Types::PurchaseReservedElasticsearchInstanceOfferingResponse#reservation_name #reservation_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.purchase_reserved_elasticsearch_instance_offering({
+    #     reserved_elasticsearch_instance_offering_id: "GUID", # required
+    #     reservation_name: "ReservationToken", # required
+    #     instance_count: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reserved_elasticsearch_instance_id #=> String
+    #   resp.reservation_name #=> String
+    #
+    # @overload purchase_reserved_elasticsearch_instance_offering(params = {})
+    # @param [Hash] params ({})
+    def purchase_reserved_elasticsearch_instance_offering(params = {}, options = {})
+      req = build_request(:purchase_reserved_elasticsearch_instance_offering, params)
+      req.send_request(options)
+    end
+
     # Removes the specified set of tags from the specified Elasticsearch
     # domain.
     #
@@ -885,6 +1067,15 @@ module Aws::ElasticsearchService
     #
     #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc
     #
+    # @option params [Types::CognitoOptions] :cognito_options
+    #   Options to specify the Cognito user and identity pools for Kibana
+    #   authentication. For more information, see [Amazon Cognito
+    #   Authentication for Kibana][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html
+    #
     # @option params [Hash<String,String>] :advanced_options
     #   Modifies the advanced option to allow references to indices in an HTTP
     #   request body. Must be `false` when configuring access to individual
@@ -930,6 +1121,12 @@ module Aws::ElasticsearchService
     #     vpc_options: {
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
+    #     },
+    #     cognito_options: {
+    #       enabled: false,
+    #       user_pool_id: "UserPoolId",
+    #       identity_pool_id: "IdentityPoolId",
+    #       role_arn: "RoleArn",
     #     },
     #     advanced_options: {
     #       "String" => "String",
@@ -995,6 +1192,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.vpc_options.status.update_version #=> Integer
     #   resp.domain_config.vpc_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.vpc_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.cognito_options.options.enabled #=> Boolean
+    #   resp.domain_config.cognito_options.options.user_pool_id #=> String
+    #   resp.domain_config.cognito_options.options.identity_pool_id #=> String
+    #   resp.domain_config.cognito_options.options.role_arn #=> String
+    #   resp.domain_config.cognito_options.status.creation_date #=> Time
+    #   resp.domain_config.cognito_options.status.update_date #=> Time
+    #   resp.domain_config.cognito_options.status.update_version #=> Integer
+    #   resp.domain_config.cognito_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.cognito_options.status.pending_deletion #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.enabled #=> Boolean
     #   resp.domain_config.encryption_at_rest_options.options.kms_key_id #=> String
     #   resp.domain_config.encryption_at_rest_options.status.creation_date #=> Time
@@ -1038,7 +1244,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

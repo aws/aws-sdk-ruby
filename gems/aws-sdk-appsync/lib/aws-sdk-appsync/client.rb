@@ -154,6 +154,12 @@ module Aws::AppSync
     # @option params [String] :description
     #   A description of the purpose of the API key.
     #
+    # @option params [Integer] :expires
+    #   The time from creation time after which the API key expires. The date
+    #   is represented as seconds since the epoch, rounded down to the nearest
+    #   hour. The default value for this parameter is 7 days from creation
+    #   time. For more information, see .
+    #
     # @return [Types::CreateApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApiKeyResponse#api_key #api_key} => Types::ApiKey
@@ -163,6 +169,7 @@ module Aws::AppSync
     #   resp = client.create_api_key({
     #     api_id: "String", # required
     #     description: "String",
+    #     expires: 1,
     #   })
     #
     # @example Response structure
@@ -217,7 +224,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -238,7 +245,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -261,11 +268,17 @@ module Aws::AppSync
     # @option params [required, String] :name
     #   A user-supplied name for the `GraphqlApi`.
     #
+    # @option params [Types::LogConfig] :log_config
+    #   The Amazon CloudWatch logs configuration.
+    #
     # @option params [required, String] :authentication_type
     #   The authentication type: API key, IAM, or Amazon Cognito User Pools.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
     #   The Amazon Cognito User Pool configuration.
+    #
+    # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
+    #   The Open Id Connect configuration configuration.
     #
     # @return [Types::CreateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -274,13 +287,23 @@ module Aws::AppSync
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_graphql_api({
-    #     name: "ResourceName", # required
-    #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
+    #     name: "String", # required
+    #     log_config: {
+    #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
+    #       cloud_watch_logs_role_arn: "String", # required
+    #     },
+    #     authentication_type: "API_KEY", # required, accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #     user_pool_config: {
     #       user_pool_id: "String", # required
     #       aws_region: "String", # required
     #       default_action: "ALLOW", # required, accepts ALLOW, DENY
     #       app_id_client_regex: "String",
+    #     },
+    #     open_id_connect_config: {
+    #       issuer: "String", # required
+    #       client_id: "String",
+    #       iat_ttl: 1,
+    #       auth_ttl: 1,
     #     },
     #   })
     #
@@ -288,11 +311,17 @@ module Aws::AppSync
     #
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
-    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS"
+    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
     #   resp.graphql_api.user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.open_id_connect_config.auth_ttl #=> Integer
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
@@ -326,7 +355,7 @@ module Aws::AppSync
     # @option params [required, String] :request_mapping_template
     #   The mapping template to be used for requests.
     #
-    #   A resolver use a request mapping template to convert a GraphQL
+    #   A resolver uses a request mapping template to convert a GraphQL
     #   expression into a format that a data source can understand. Mapping
     #   templates are written in Apache Velocity Template Language (VTL).
     #
@@ -567,7 +596,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -604,11 +633,17 @@ module Aws::AppSync
     #
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
-    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS"
+    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
     #   resp.graphql_api.user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.open_id_connect_config.auth_ttl #=> Integer
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
@@ -767,6 +802,13 @@ module Aws::AppSync
 
     # Lists the API keys for a given API.
     #
+    # <note markdown="1"> API keys are deleted automatically sometime after they expire.
+    # However, they may still be included in the response until they have
+    # actually been deleted. You can safely call `DeleteApiKey` to manually
+    # delete a key before it's automatically deleted.
+    #
+    #  </note>
+    #
     # @option params [required, String] :api_id
     #   The API ID.
     #
@@ -840,7 +882,7 @@ module Aws::AppSync
     #   resp.data_sources[0].data_source_arn #=> String
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].description #=> String
-    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH"
+    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
     #   resp.data_sources[0].service_role_arn #=> String
     #   resp.data_sources[0].dynamodb_config.table_name #=> String
     #   resp.data_sources[0].dynamodb_config.aws_region #=> String
@@ -886,11 +928,17 @@ module Aws::AppSync
     #   resp.graphql_apis #=> Array
     #   resp.graphql_apis[0].name #=> String
     #   resp.graphql_apis[0].api_id #=> String
-    #   resp.graphql_apis[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS"
+    #   resp.graphql_apis[0].authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_apis[0].log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_apis[0].log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_apis[0].user_pool_config.user_pool_id #=> String
     #   resp.graphql_apis[0].user_pool_config.aws_region #=> String
     #   resp.graphql_apis[0].user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
     #   resp.graphql_apis[0].user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_apis[0].open_id_connect_config.issuer #=> String
+    #   resp.graphql_apis[0].open_id_connect_config.client_id #=> String
+    #   resp.graphql_apis[0].open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_apis[0].open_id_connect_config.auth_ttl #=> Integer
     #   resp.graphql_apis[0].arn #=> String
     #   resp.graphql_apis[0].uris #=> Hash
     #   resp.graphql_apis[0].uris["String"] #=> String
@@ -1039,6 +1087,49 @@ module Aws::AppSync
       req.send_request(options)
     end
 
+    # Updates an API key.
+    #
+    # @option params [required, String] :api_id
+    #   The ID for the GraphQL API
+    #
+    # @option params [required, String] :id
+    #   The API key ID.
+    #
+    # @option params [String] :description
+    #   A description of the purpose of the API key.
+    #
+    # @option params [Integer] :expires
+    #   The time from update time after which the API key expires. The date is
+    #   represented as seconds since the epoch. For more information, see .
+    #
+    # @return [Types::UpdateApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateApiKeyResponse#api_key #api_key} => Types::ApiKey
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_api_key({
+    #     api_id: "String", # required
+    #     id: "String", # required
+    #     description: "String",
+    #     expires: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.api_key.id #=> String
+    #   resp.api_key.description #=> String
+    #   resp.api_key.expires #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiKey AWS API Documentation
+    #
+    # @overload update_api_key(params = {})
+    # @param [Hash] params ({})
+    def update_api_key(params = {}, options = {})
+      req = build_request(:update_api_key, params)
+      req.send_request(options)
+    end
+
     # Updates a `DataSource` object.
     #
     # @option params [required, String] :api_id
@@ -1075,7 +1166,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -1096,7 +1187,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -1122,11 +1213,18 @@ module Aws::AppSync
     # @option params [required, String] :name
     #   The new name for the `GraphqlApi` object.
     #
+    # @option params [Types::LogConfig] :log_config
+    #   The Amazon CloudWatch logs configuration for the `GraphqlApi` object.
+    #
     # @option params [String] :authentication_type
     #   The new authentication type for the `GraphqlApi` object.
     #
     # @option params [Types::UserPoolConfig] :user_pool_config
     #   The new Amazon Cognito User Pool configuration for the `GraphqlApi`
+    #   object.
+    #
+    # @option params [Types::OpenIDConnectConfig] :open_id_connect_config
+    #   The Open Id Connect configuration configuration for the `GraphqlApi`
     #   object.
     #
     # @return [Types::UpdateGraphqlApiResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1137,13 +1235,23 @@ module Aws::AppSync
     #
     #   resp = client.update_graphql_api({
     #     api_id: "String", # required
-    #     name: "ResourceName", # required
-    #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS
+    #     name: "String", # required
+    #     log_config: {
+    #       field_log_level: "NONE", # required, accepts NONE, ERROR, ALL
+    #       cloud_watch_logs_role_arn: "String", # required
+    #     },
+    #     authentication_type: "API_KEY", # accepts API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT
     #     user_pool_config: {
     #       user_pool_id: "String", # required
     #       aws_region: "String", # required
     #       default_action: "ALLOW", # required, accepts ALLOW, DENY
     #       app_id_client_regex: "String",
+    #     },
+    #     open_id_connect_config: {
+    #       issuer: "String", # required
+    #       client_id: "String",
+    #       iat_ttl: 1,
+    #       auth_ttl: 1,
     #     },
     #   })
     #
@@ -1151,11 +1259,17 @@ module Aws::AppSync
     #
     #   resp.graphql_api.name #=> String
     #   resp.graphql_api.api_id #=> String
-    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS"
+    #   resp.graphql_api.authentication_type #=> String, one of "API_KEY", "AWS_IAM", "AMAZON_COGNITO_USER_POOLS", "OPENID_CONNECT"
+    #   resp.graphql_api.log_config.field_log_level #=> String, one of "NONE", "ERROR", "ALL"
+    #   resp.graphql_api.log_config.cloud_watch_logs_role_arn #=> String
     #   resp.graphql_api.user_pool_config.user_pool_id #=> String
     #   resp.graphql_api.user_pool_config.aws_region #=> String
     #   resp.graphql_api.user_pool_config.default_action #=> String, one of "ALLOW", "DENY"
     #   resp.graphql_api.user_pool_config.app_id_client_regex #=> String
+    #   resp.graphql_api.open_id_connect_config.issuer #=> String
+    #   resp.graphql_api.open_id_connect_config.client_id #=> String
+    #   resp.graphql_api.open_id_connect_config.iat_ttl #=> Integer
+    #   resp.graphql_api.open_id_connect_config.auth_ttl #=> Integer
     #   resp.graphql_api.arn #=> String
     #   resp.graphql_api.uris #=> Hash
     #   resp.graphql_api.uris["String"] #=> String
@@ -1279,7 +1393,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

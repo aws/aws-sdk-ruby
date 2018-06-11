@@ -76,6 +76,8 @@ module Aws::ServiceCatalog
     DeleteProvisionedProductPlanOutput = Shapes::StructureShape.new(name: 'DeleteProvisionedProductPlanOutput')
     DeleteProvisioningArtifactInput = Shapes::StructureShape.new(name: 'DeleteProvisioningArtifactInput')
     DeleteProvisioningArtifactOutput = Shapes::StructureShape.new(name: 'DeleteProvisioningArtifactOutput')
+    DeleteTagOptionInput = Shapes::StructureShape.new(name: 'DeleteTagOptionInput')
+    DeleteTagOptionOutput = Shapes::StructureShape.new(name: 'DeleteTagOptionOutput')
     DescribeConstraintInput = Shapes::StructureShape.new(name: 'DescribeConstraintInput')
     DescribeConstraintOutput = Shapes::StructureShape.new(name: 'DescribeConstraintOutput')
     DescribeCopyProductStatusInput = Shapes::StructureShape.new(name: 'DescribeCopyProductStatusInput')
@@ -171,6 +173,7 @@ module Aws::ServiceCatalog
     PortfolioDetails = Shapes::ListShape.new(name: 'PortfolioDetails')
     PortfolioDisplayName = Shapes::StringShape.new(name: 'PortfolioDisplayName')
     PortfolioName = Shapes::StringShape.new(name: 'PortfolioName')
+    PortfolioShareType = Shapes::StringShape.new(name: 'PortfolioShareType')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalARN = Shapes::StringShape.new(name: 'PrincipalARN')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
@@ -536,6 +539,11 @@ module Aws::ServiceCatalog
 
     DeleteProvisioningArtifactOutput.struct_class = Types::DeleteProvisioningArtifactOutput
 
+    DeleteTagOptionInput.add_member(:id, Shapes::ShapeRef.new(shape: TagOptionId, required: true, location_name: "Id"))
+    DeleteTagOptionInput.struct_class = Types::DeleteTagOptionInput
+
+    DeleteTagOptionOutput.struct_class = Types::DeleteTagOptionOutput
+
     DescribeConstraintInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     DescribeConstraintInput.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     DescribeConstraintInput.struct_class = Types::DescribeConstraintInput
@@ -687,6 +695,7 @@ module Aws::ServiceCatalog
     ListAcceptedPortfolioSharesInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
     ListAcceptedPortfolioSharesInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
     ListAcceptedPortfolioSharesInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    ListAcceptedPortfolioSharesInput.add_member(:portfolio_share_type, Shapes::ShapeRef.new(shape: PortfolioShareType, location_name: "PortfolioShareType"))
     ListAcceptedPortfolioSharesInput.struct_class = Types::ListAcceptedPortfolioSharesInput
 
     ListAcceptedPortfolioSharesOutput.add_member(:portfolio_details, Shapes::ShapeRef.new(shape: PortfolioDetails, location_name: "PortfolioDetails"))
@@ -1462,6 +1471,17 @@ module Aws::ServiceCatalog
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+      end)
+
+      api.add_operation(:delete_tag_option, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteTagOption"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteTagOptionInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteTagOptionOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TagOptionNotMigratedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_constraint, Seahorse::Model::Operation.new.tap do |o|

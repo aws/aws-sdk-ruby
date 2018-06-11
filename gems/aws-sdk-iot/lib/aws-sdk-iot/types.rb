@@ -19,7 +19,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] set_as_active
@@ -114,6 +115,11 @@ module Aws::IoT
     #           token: "SalesforceToken", # required
     #           url: "SalesforceEndpoint", # required
     #         },
+    #         iot_analytics: {
+    #           channel_arn: "AwsArn",
+    #           channel_name: "ChannelName",
+    #           role_arn: "AwsArn",
+    #         },
     #       }
     #
     # @!attribute [rw] dynamo_db
@@ -170,6 +176,10 @@ module Aws::IoT
     #   Send a message to a Salesforce IoT Cloud Input Stream.
     #   @return [Types::SalesforceAction]
     #
+    # @!attribute [rw] iot_analytics
+    #   Sends message data to an AWS IoT Analytics channel.
+    #   @return [Types::IotAnalyticsAction]
+    #
     class Action < Struct.new(
       :dynamo_db,
       :dynamo_d_bv_2,
@@ -183,7 +193,8 @@ module Aws::IoT
       :cloudwatch_metric,
       :cloudwatch_alarm,
       :elasticsearch,
-      :salesforce)
+      :salesforce,
+      :iot_analytics)
       include Aws::Structure
     end
 
@@ -577,6 +588,18 @@ module Aws::IoT
     #   device certificates. Valid values are "ENABLE" and "DISABLE"
     #   @return [String]
     #
+    # @!attribute [rw] last_modified_date
+    #   The date the CA certificate was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] customer_version
+    #   The customer version of the CA certificate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] generation_id
+    #   The generation ID of the CA certificate.
+    #   @return [String]
+    #
     class CACertificateDescription < Struct.new(
       :certificate_arn,
       :certificate_id,
@@ -584,7 +607,10 @@ module Aws::IoT
       :certificate_pem,
       :owned_by,
       :creation_date,
-      :auto_registration_status)
+      :auto_registration_status,
+      :last_modified_date,
+      :customer_version,
+      :generation_id)
       include Aws::Structure
     end
 
@@ -598,11 +624,72 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     class CancelCertificateTransferRequest < Struct.new(
       :certificate_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CancelJobExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         thing_name: "ThingName", # required
+    #         force: false,
+    #         expected_version: 1,
+    #         status_details: {
+    #           "DetailsKey" => "DetailsValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job to be canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing whose execution of the job will be canceled.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   (Optional) If `true` the job execution will be canceled if it has
+    #   status IN\_PROGRESS or QUEUED, otherwise the job execution will be
+    #   canceled only if it has status QUEUED. If you attempt to cancel a
+    #   job execution that is IN\_PROGRESS, and you do not set `force` to
+    #   `true`, then an `InvalidStateTransitionException` will be thrown.
+    #   The default is `false`.
+    #
+    #   Canceling a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to update the job execution status. Use caution
+    #   and ensure that the device is able to recover to a valid state.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] expected_version
+    #   (Optional) The expected current version of the job execution. Each
+    #   time you update the job execution, its version is incremented. If
+    #   the version of the job execution stored in Jobs does not match, the
+    #   update is rejected with a VersionMismatch error, and an
+    #   ErrorResponse that contains the current job execution status data is
+    #   returned. (This makes it unnecessary to perform a separate
+    #   DescribeJobExecution request in order to obtain the job execution
+    #   status data.)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_details
+    #   A collection of name/value pairs that describe the status of the job
+    #   execution. If not specified, the statusDetails are unchanged. You
+    #   can specify at most 10 name/value pairs.
+    #   @return [Hash<String,String>]
+    #
+    class CancelJobExecutionRequest < Struct.new(
+      :job_id,
+      :thing_name,
+      :force,
+      :expected_version,
+      :status_details)
       include Aws::Structure
     end
 
@@ -612,6 +699,7 @@ module Aws::IoT
     #       {
     #         job_id: "JobId", # required
     #         comment: "Comment",
+    #         force: false,
     #       }
     #
     # @!attribute [rw] job_id
@@ -622,9 +710,21 @@ module Aws::IoT
     #   An optional comment string describing why the job was canceled.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   (Optional) If `true` job executions with status "IN\_PROGRESS" and
+    #   "QUEUED" are canceled, otherwise only job executions with status
+    #   "QUEUED" are canceled. The default is `false`.
+    #
+    #   Canceling a job which is "IN\_PROGRESS", will cause a device which
+    #   is executing the job to be unable to update the job execution
+    #   status. Use caution and ensure that each device executing a job
+    #   which is canceled is able to recover to a valid state.
+    #   @return [Boolean]
+    #
     class CancelJobRequest < Struct.new(
       :job_id,
-      :comment)
+      :comment,
+      :force)
       include Aws::Structure
     end
 
@@ -654,7 +754,8 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -715,9 +816,17 @@ module Aws::IoT
     #   The date and time the certificate was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] customer_version
+    #   The customer version of the certificate.
+    #   @return [Integer]
+    #
     # @!attribute [rw] transfer_data
     #   The transfer data.
     #   @return [Types::TransferData]
+    #
+    # @!attribute [rw] generation_id
+    #   The generation ID of the certificate.
+    #   @return [String]
     #
     class CertificateDescription < Struct.new(
       :certificate_arn,
@@ -729,7 +838,9 @@ module Aws::IoT
       :previous_owned_by,
       :creation_date,
       :last_modified_date,
-      :transfer_data)
+      :customer_version,
+      :transfer_data,
+      :generation_id)
       include Aws::Structure
     end
 
@@ -1800,6 +1911,11 @@ module Aws::IoT
     #                 token: "SalesforceToken", # required
     #                 url: "SalesforceEndpoint", # required
     #               },
+    #               iot_analytics: {
+    #                 channel_arn: "AwsArn",
+    #                 channel_name: "ChannelName",
+    #                 role_arn: "AwsArn",
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -1880,6 +1996,11 @@ module Aws::IoT
     #             salesforce: {
     #               token: "SalesforceToken", # required
     #               url: "SalesforceEndpoint", # required
+    #             },
+    #             iot_analytics: {
+    #               channel_arn: "AwsArn",
+    #               channel_name: "ChannelName",
+    #               role_arn: "AwsArn",
     #             },
     #           },
     #         },
@@ -1976,7 +2097,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate to delete.
+    #   The ID of the certificate to delete. (The last part of the
+    #   certificate ARN contains the certificate ID.)
     #   @return [String]
     #
     class DeleteCACertificateRequest < Struct.new(
@@ -1999,7 +2121,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] force_delete
@@ -2009,6 +2132,94 @@ module Aws::IoT
     class DeleteCertificateRequest < Struct.new(
       :certificate_id,
       :force_delete)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteJobExecutionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         thing_name: "ThingName", # required
+    #         execution_number: 1, # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job whose execution on a particular device will be
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing whose job execution will be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_number
+    #   The ID of the job execution to be deleted. The `executionNumber`
+    #   refers to the execution of a particular job on a particular device.
+    #
+    #   Note that once a job execution is deleted, the `executionNumber` may
+    #   be reused by IoT, so be sure you get and use the correct value here.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] force
+    #   (Optional) When true, you can delete a job execution which is
+    #   "IN\_PROGRESS". Otherwise, you can only delete a job execution
+    #   which is in a terminal state ("SUCCEEDED", "FAILED",
+    #   "REJECTED", "REMOVED" or "CANCELED") or an exception will
+    #   occur. The default is false.
+    #
+    #   <note markdown="1"> Deleting a job execution which is "IN\_PROGRESS", will cause the
+    #   device to be unable to access job information or update the job
+    #   execution status. Use caution and ensure that the device is able to
+    #   recover to a valid state.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    class DeleteJobExecutionRequest < Struct.new(
+      :job_id,
+      :thing_name,
+      :execution_number,
+      :force)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #         force: false,
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The ID of the job to be deleted.
+    #
+    #   After a job deletion is completed, you may reuse this jobId when you
+    #   create a new job. However, this is not recommended, and you must
+    #   ensure that your devices are not using the jobId to refer to the
+    #   deleted job.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   (Optional) When true, you can delete a job which is
+    #   "IN\_PROGRESS". Otherwise, you can only delete a job which is in a
+    #   terminal state ("COMPLETED" or "CANCELED") or an exception will
+    #   occur. The default is false.
+    #
+    #   <note markdown="1"> Deleting a job which is "IN\_PROGRESS", will cause a device which
+    #   is executing the job to be unable to access job information or
+    #   update the job execution status. Use caution and ensure that each
+    #   device executing a job which is deleted is able to recover to a
+    #   valid state.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    class DeleteJobRequest < Struct.new(
+      :job_id,
+      :force)
       include Aws::Structure
     end
 
@@ -2353,7 +2564,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     class DescribeCertificateRequest < Struct.new(
@@ -3373,11 +3585,26 @@ module Aws::IoT
     #   The default policy version ID.
     #   @return [String]
     #
+    # @!attribute [rw] creation_date
+    #   The date the policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date the policy was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] generation_id
+    #   The generation ID of the policy.
+    #   @return [String]
+    #
     class GetPolicyResponse < Struct.new(
       :policy_name,
       :policy_arn,
       :policy_document,
-      :default_version_id)
+      :default_version_id,
+      :creation_date,
+      :last_modified_date,
+      :generation_id)
       include Aws::Structure
     end
 
@@ -3427,12 +3654,27 @@ module Aws::IoT
     #   Specifies whether the policy version is the default.
     #   @return [Boolean]
     #
+    # @!attribute [rw] creation_date
+    #   The date the policy version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date the policy version was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] generation_id
+    #   The generation ID of the policy version.
+    #   @return [String]
+    #
     class GetPolicyVersionResponse < Struct.new(
       :policy_arn,
       :policy_name,
       :policy_document,
       :policy_version_id,
-      :is_default_version)
+      :is_default_version,
+      :creation_date,
+      :last_modified_date,
+      :generation_id)
       include Aws::Structure
     end
 
@@ -3540,6 +3782,40 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # Sends messge data to an AWS IoT Analytics channel.
+    #
+    # @note When making an API call, you may pass IotAnalyticsAction
+    #   data as a hash:
+    #
+    #       {
+    #         channel_arn: "AwsArn",
+    #         channel_name: "ChannelName",
+    #         role_arn: "AwsArn",
+    #       }
+    #
+    # @!attribute [rw] channel_arn
+    #   (deprecated) The ARN of the IoT Analytics channel to which message
+    #   data will be sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the IoT Analytics channel to which message data will be
+    #   sent.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the role which has a policy that grants IoT Analytics
+    #   permission to send message data via IoT Analytics
+    #   (iotanalytics:BatchPutMessage).
+    #   @return [String]
+    #
+    class IotAnalyticsAction < Struct.new(
+      :channel_arn,
+      :channel_name,
+      :role_arn)
+      include Aws::Structure
+    end
+
     # The `Job` object contains details about a job.
     #
     # @!attribute [rw] job_arn
@@ -3565,6 +3841,11 @@ module Aws::IoT
     #   The status of the job, one of `IN_PROGRESS`, `CANCELED`, or
     #   `COMPLETED`.
     #   @return [String]
+    #
+    # @!attribute [rw] force_canceled
+    #   Will be `true` if the job was canceled with the optional `force`
+    #   parameter set to `true`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] comment
     #   If the job was updated, describes the reason for the update.
@@ -3614,6 +3895,7 @@ module Aws::IoT
       :job_id,
       :target_selection,
       :status,
+      :force_canceled,
       :comment,
       :targets,
       :description,
@@ -3638,6 +3920,11 @@ module Aws::IoT
     #   The status of the job execution (IN\_PROGRESS, QUEUED, FAILED,
     #   SUCCESS, CANCELED, or REJECTED).
     #   @return [String]
+    #
+    # @!attribute [rw] force_canceled
+    #   Will be `true` if the job execution was canceled with the optional
+    #   `force` parameter set to `true`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] status_details
     #   A collection of name/value pairs that describe the status of the job
@@ -3670,15 +3957,22 @@ module Aws::IoT
     #   information.
     #   @return [Integer]
     #
+    # @!attribute [rw] version_number
+    #   The version of the job execution. Job execution versions are
+    #   incremented each time they are updated by a device.
+    #   @return [Integer]
+    #
     class JobExecution < Struct.new(
       :job_id,
       :status,
+      :force_canceled,
       :status_details,
       :thing_arn,
       :queued_at,
       :started_at,
       :last_updated_at,
-      :execution_number)
+      :execution_number,
+      :version_number)
       include Aws::Structure
     end
 
@@ -3785,7 +4079,9 @@ module Aws::IoT
     # The job process details.
     #
     # @!attribute [rw] processing_targets
-    #   The devices on which the job is executing.
+    #   The target devices to which the job execution is being rolled out.
+    #   This value will be null after the job execution has finished rolling
+    #   out to all the target devices.
     #   @return [Array<String>]
     #
     # @!attribute [rw] number_of_canceled_things
@@ -4335,7 +4631,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED
+    #         status: "IN_PROGRESS", # accepts IN_PROGRESS, CANCELED, COMPLETED, DELETION_IN_PROGRESS
     #         target_selection: "CONTINUOUS", # accepts CONTINUOUS, SNAPSHOT
     #         max_results: 1,
     #         next_token: "NextToken",
@@ -4414,7 +4710,7 @@ module Aws::IoT
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token used to retreive the next set of results.
+    #   A token used to retrieve the next set of results.
     #   @return [String]
     #
     # @!attribute [rw] ota_update_status
@@ -5810,11 +6106,21 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] template_body
-    #   The provisioning template.
+    #   The provisioning template. See [Programmatic Provisioning][1] for
+    #   more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The parameters for provisioning a thing.
+    #   The parameters for provisioning a thing. See [Programmatic
+    #   Provisioning][1] for more information.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html
     #   @return [Hash<String,String>]
     #
     class RegisterThingRequest < Struct.new(
@@ -5872,7 +6178,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] reject_reason
@@ -6009,6 +6316,11 @@ module Aws::IoT
     #                 token: "SalesforceToken", # required
     #                 url: "SalesforceEndpoint", # required
     #               },
+    #               iot_analytics: {
+    #                 channel_arn: "AwsArn",
+    #                 channel_name: "ChannelName",
+    #                 role_arn: "AwsArn",
+    #               },
     #             },
     #           ],
     #           rule_disabled: false,
@@ -6090,6 +6402,11 @@ module Aws::IoT
     #               token: "SalesforceToken", # required
     #               url: "SalesforceEndpoint", # required
     #             },
+    #             iot_analytics: {
+    #               channel_arn: "AwsArn",
+    #               channel_name: "ChannelName",
+    #               role_arn: "AwsArn",
+    #             },
     #           },
     #         },
     #       }
@@ -6138,6 +6455,10 @@ module Aws::IoT
     #   The role alias.
     #   @return [String]
     #
+    # @!attribute [rw] role_alias_arn
+    #   The ARN of the role alias.
+    #   @return [String]
+    #
     # @!attribute [rw] role_arn
     #   The role ARN.
     #   @return [String]
@@ -6160,6 +6481,7 @@ module Aws::IoT
     #
     class RoleAliasDescription < Struct.new(
       :role_alias,
+      :role_alias_arn,
       :role_arn,
       :owner,
       :credential_duration_seconds,
@@ -6473,7 +6795,7 @@ module Aws::IoT
     #   @return [String]
     #
     # @!attribute [rw] message_format
-    #   The message format of the message to publish. Optional. Accepted
+    #   (Optional) The message format of the message to publish. Accepted
     #   values are "JSON" and "RAW". The default value of the attribute
     #   is "RAW". SNS uses this setting to determine if the payload should
     #   be parsed and relevant platform-specific bits of the payload should
@@ -6889,7 +7211,7 @@ module Aws::IoT
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] shadow
-    #   The thing shadow.
+    #   The shadow.
     #   @return [String]
     #
     class ThingDocument < Struct.new(
@@ -7222,6 +7544,11 @@ module Aws::IoT
     #               token: "SalesforceToken", # required
     #               url: "SalesforceEndpoint", # required
     #             },
+    #             iot_analytics: {
+    #               channel_arn: "AwsArn",
+    #               channel_name: "ChannelName",
+    #               role_arn: "AwsArn",
+    #             },
     #           },
     #         ],
     #         rule_disabled: false,
@@ -7303,6 +7630,11 @@ module Aws::IoT
     #             token: "SalesforceToken", # required
     #             url: "SalesforceEndpoint", # required
     #           },
+    #           iot_analytics: {
+    #             channel_arn: "AwsArn",
+    #             channel_name: "ChannelName",
+    #             role_arn: "AwsArn",
+    #           },
     #         },
     #       }
     #
@@ -7357,7 +7689,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] target_aws_account
@@ -7533,7 +7866,8 @@ module Aws::IoT
     #       }
     #
     # @!attribute [rw] certificate_id
-    #   The ID of the certificate.
+    #   The ID of the certificate. (The last part of the certificate ARN
+    #   contains the certificate ID.)
     #   @return [String]
     #
     # @!attribute [rw] new_status

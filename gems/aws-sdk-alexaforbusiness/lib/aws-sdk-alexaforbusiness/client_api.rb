@@ -12,14 +12,30 @@ module Aws::AlexaForBusiness
     include Seahorse::Model
 
     Address = Shapes::StringShape.new(name: 'Address')
+    AddressBook = Shapes::StructureShape.new(name: 'AddressBook')
+    AddressBookData = Shapes::StructureShape.new(name: 'AddressBookData')
+    AddressBookDataList = Shapes::ListShape.new(name: 'AddressBookDataList')
+    AddressBookDescription = Shapes::StringShape.new(name: 'AddressBookDescription')
+    AddressBookName = Shapes::StringShape.new(name: 'AddressBookName')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AssociateContactWithAddressBookRequest = Shapes::StructureShape.new(name: 'AssociateContactWithAddressBookRequest')
+    AssociateContactWithAddressBookResponse = Shapes::StructureShape.new(name: 'AssociateContactWithAddressBookResponse')
     AssociateDeviceWithRoomRequest = Shapes::StructureShape.new(name: 'AssociateDeviceWithRoomRequest')
     AssociateDeviceWithRoomResponse = Shapes::StructureShape.new(name: 'AssociateDeviceWithRoomResponse')
     AssociateSkillGroupWithRoomRequest = Shapes::StructureShape.new(name: 'AssociateSkillGroupWithRoomRequest')
     AssociateSkillGroupWithRoomResponse = Shapes::StructureShape.new(name: 'AssociateSkillGroupWithRoomResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
+    ConnectionStatus = Shapes::StringShape.new(name: 'ConnectionStatus')
+    Contact = Shapes::StructureShape.new(name: 'Contact')
+    ContactData = Shapes::StructureShape.new(name: 'ContactData')
+    ContactDataList = Shapes::ListShape.new(name: 'ContactDataList')
+    ContactName = Shapes::StringShape.new(name: 'ContactName')
+    CreateAddressBookRequest = Shapes::StructureShape.new(name: 'CreateAddressBookRequest')
+    CreateAddressBookResponse = Shapes::StructureShape.new(name: 'CreateAddressBookResponse')
+    CreateContactRequest = Shapes::StructureShape.new(name: 'CreateContactRequest')
+    CreateContactResponse = Shapes::StructureShape.new(name: 'CreateContactResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
     CreateProfileResponse = Shapes::StructureShape.new(name: 'CreateProfileResponse')
     CreateRoomRequest = Shapes::StructureShape.new(name: 'CreateRoomRequest')
@@ -28,6 +44,10 @@ module Aws::AlexaForBusiness
     CreateSkillGroupResponse = Shapes::StructureShape.new(name: 'CreateSkillGroupResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
+    DeleteAddressBookRequest = Shapes::StructureShape.new(name: 'DeleteAddressBookRequest')
+    DeleteAddressBookResponse = Shapes::StructureShape.new(name: 'DeleteAddressBookResponse')
+    DeleteContactRequest = Shapes::StructureShape.new(name: 'DeleteContactRequest')
+    DeleteContactResponse = Shapes::StructureShape.new(name: 'DeleteContactResponse')
     DeleteProfileRequest = Shapes::StructureShape.new(name: 'DeleteProfileRequest')
     DeleteProfileResponse = Shapes::StructureShape.new(name: 'DeleteProfileResponse')
     DeleteRoomRequest = Shapes::StructureShape.new(name: 'DeleteRoomRequest')
@@ -41,6 +61,10 @@ module Aws::AlexaForBusiness
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceData = Shapes::StructureShape.new(name: 'DeviceData')
     DeviceDataList = Shapes::ListShape.new(name: 'DeviceDataList')
+    DeviceEvent = Shapes::StructureShape.new(name: 'DeviceEvent')
+    DeviceEventList = Shapes::ListShape.new(name: 'DeviceEventList')
+    DeviceEventType = Shapes::StringShape.new(name: 'DeviceEventType')
+    DeviceEventValue = Shapes::StringShape.new(name: 'DeviceEventValue')
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
     DeviceSerialNumber = Shapes::StringShape.new(name: 'DeviceSerialNumber')
     DeviceStatus = Shapes::StringShape.new(name: 'DeviceStatus')
@@ -49,11 +73,14 @@ module Aws::AlexaForBusiness
     DeviceStatusDetails = Shapes::ListShape.new(name: 'DeviceStatusDetails')
     DeviceStatusInfo = Shapes::StructureShape.new(name: 'DeviceStatusInfo')
     DeviceType = Shapes::StringShape.new(name: 'DeviceType')
+    DisassociateContactFromAddressBookRequest = Shapes::StructureShape.new(name: 'DisassociateContactFromAddressBookRequest')
+    DisassociateContactFromAddressBookResponse = Shapes::StructureShape.new(name: 'DisassociateContactFromAddressBookResponse')
     DisassociateDeviceFromRoomRequest = Shapes::StructureShape.new(name: 'DisassociateDeviceFromRoomRequest')
     DisassociateDeviceFromRoomResponse = Shapes::StructureShape.new(name: 'DisassociateDeviceFromRoomResponse')
     DisassociateSkillGroupFromRoomRequest = Shapes::StructureShape.new(name: 'DisassociateSkillGroupFromRoomRequest')
     DisassociateSkillGroupFromRoomResponse = Shapes::StructureShape.new(name: 'DisassociateSkillGroupFromRoomResponse')
     DistanceUnit = Shapes::StringShape.new(name: 'DistanceUnit')
+    E164PhoneNumber = Shapes::StringShape.new(name: 'E164PhoneNumber')
     Email = Shapes::StringShape.new(name: 'Email')
     EnrollmentId = Shapes::StringShape.new(name: 'EnrollmentId')
     EnrollmentStatus = Shapes::StringShape.new(name: 'EnrollmentStatus')
@@ -65,6 +92,10 @@ module Aws::AlexaForBusiness
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
+    GetAddressBookRequest = Shapes::StructureShape.new(name: 'GetAddressBookRequest')
+    GetAddressBookResponse = Shapes::StructureShape.new(name: 'GetAddressBookResponse')
+    GetContactRequest = Shapes::StructureShape.new(name: 'GetContactRequest')
+    GetContactResponse = Shapes::StructureShape.new(name: 'GetContactResponse')
     GetDeviceRequest = Shapes::StructureShape.new(name: 'GetDeviceRequest')
     GetDeviceResponse = Shapes::StructureShape.new(name: 'GetDeviceResponse')
     GetProfileRequest = Shapes::StructureShape.new(name: 'GetProfileRequest')
@@ -77,6 +108,8 @@ module Aws::AlexaForBusiness
     GetSkillGroupResponse = Shapes::StructureShape.new(name: 'GetSkillGroupResponse')
     InvalidUserStatusException = Shapes::StructureShape.new(name: 'InvalidUserStatusException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListDeviceEventsRequest = Shapes::StructureShape.new(name: 'ListDeviceEventsRequest')
+    ListDeviceEventsResponse = Shapes::StructureShape.new(name: 'ListDeviceEventsResponse')
     ListSkillsRequest = Shapes::StructureShape.new(name: 'ListSkillsRequest')
     ListSkillsResponse = Shapes::StructureShape.new(name: 'ListSkillsResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
@@ -108,6 +141,10 @@ module Aws::AlexaForBusiness
     RoomSkillParameterKey = Shapes::StringShape.new(name: 'RoomSkillParameterKey')
     RoomSkillParameterValue = Shapes::StringShape.new(name: 'RoomSkillParameterValue')
     RoomSkillParameters = Shapes::ListShape.new(name: 'RoomSkillParameters')
+    SearchAddressBooksRequest = Shapes::StructureShape.new(name: 'SearchAddressBooksRequest')
+    SearchAddressBooksResponse = Shapes::StructureShape.new(name: 'SearchAddressBooksResponse')
+    SearchContactsRequest = Shapes::StructureShape.new(name: 'SearchContactsRequest')
+    SearchContactsResponse = Shapes::StructureShape.new(name: 'SearchContactsResponse')
     SearchDevicesRequest = Shapes::StructureShape.new(name: 'SearchDevicesRequest')
     SearchDevicesResponse = Shapes::StructureShape.new(name: 'SearchDevicesResponse')
     SearchProfilesRequest = Shapes::StructureShape.new(name: 'SearchProfilesRequest')
@@ -145,10 +182,15 @@ module Aws::AlexaForBusiness
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TemperatureUnit = Shapes::StringShape.new(name: 'TemperatureUnit')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     TotalCount = Shapes::IntegerShape.new(name: 'TotalCount')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAddressBookRequest = Shapes::StructureShape.new(name: 'UpdateAddressBookRequest')
+    UpdateAddressBookResponse = Shapes::StructureShape.new(name: 'UpdateAddressBookResponse')
+    UpdateContactRequest = Shapes::StructureShape.new(name: 'UpdateContactRequest')
+    UpdateContactResponse = Shapes::StructureShape.new(name: 'UpdateContactResponse')
     UpdateDeviceRequest = Shapes::StructureShape.new(name: 'UpdateDeviceRequest')
     UpdateDeviceResponse = Shapes::StructureShape.new(name: 'UpdateDeviceResponse')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
@@ -166,6 +208,24 @@ module Aws::AlexaForBusiness
     user_LastName = Shapes::StringShape.new(name: 'user_LastName')
     user_UserId = Shapes::StringShape.new(name: 'user_UserId')
 
+    AddressBook.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AddressBookArn"))
+    AddressBook.add_member(:name, Shapes::ShapeRef.new(shape: AddressBookName, location_name: "Name"))
+    AddressBook.add_member(:description, Shapes::ShapeRef.new(shape: AddressBookDescription, location_name: "Description"))
+    AddressBook.struct_class = Types::AddressBook
+
+    AddressBookData.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AddressBookArn"))
+    AddressBookData.add_member(:name, Shapes::ShapeRef.new(shape: AddressBookName, location_name: "Name"))
+    AddressBookData.add_member(:description, Shapes::ShapeRef.new(shape: AddressBookDescription, location_name: "Description"))
+    AddressBookData.struct_class = Types::AddressBookData
+
+    AddressBookDataList.member = Shapes::ShapeRef.new(shape: AddressBookData)
+
+    AssociateContactWithAddressBookRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
+    AssociateContactWithAddressBookRequest.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AddressBookArn"))
+    AssociateContactWithAddressBookRequest.struct_class = Types::AssociateContactWithAddressBookRequest
+
+    AssociateContactWithAddressBookResponse.struct_class = Types::AssociateContactWithAddressBookResponse
+
     AssociateDeviceWithRoomRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
     AssociateDeviceWithRoomRequest.add_member(:room_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoomArn"))
     AssociateDeviceWithRoomRequest.struct_class = Types::AssociateDeviceWithRoomRequest
@@ -177,6 +237,40 @@ module Aws::AlexaForBusiness
     AssociateSkillGroupWithRoomRequest.struct_class = Types::AssociateSkillGroupWithRoomRequest
 
     AssociateSkillGroupWithRoomResponse.struct_class = Types::AssociateSkillGroupWithRoomResponse
+
+    Contact.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ContactArn"))
+    Contact.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
+    Contact.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "FirstName"))
+    Contact.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
+    Contact.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "PhoneNumber"))
+    Contact.struct_class = Types::Contact
+
+    ContactData.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ContactArn"))
+    ContactData.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
+    ContactData.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "FirstName"))
+    ContactData.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
+    ContactData.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "PhoneNumber"))
+    ContactData.struct_class = Types::ContactData
+
+    ContactDataList.member = Shapes::ShapeRef.new(shape: ContactData)
+
+    CreateAddressBookRequest.add_member(:name, Shapes::ShapeRef.new(shape: AddressBookName, required: true, location_name: "Name"))
+    CreateAddressBookRequest.add_member(:description, Shapes::ShapeRef.new(shape: AddressBookDescription, location_name: "Description"))
+    CreateAddressBookRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateAddressBookRequest.struct_class = Types::CreateAddressBookRequest
+
+    CreateAddressBookResponse.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "AddressBookArn"))
+    CreateAddressBookResponse.struct_class = Types::CreateAddressBookResponse
+
+    CreateContactRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
+    CreateContactRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, required: true, location_name: "FirstName"))
+    CreateContactRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
+    CreateContactRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, required: true, location_name: "PhoneNumber"))
+    CreateContactRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    CreateContactRequest.struct_class = Types::CreateContactRequest
+
+    CreateContactResponse.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ContactArn"))
+    CreateContactResponse.struct_class = Types::CreateContactResponse
 
     CreateProfileRequest.add_member(:profile_name, Shapes::ShapeRef.new(shape: ProfileName, required: true, location_name: "ProfileName"))
     CreateProfileRequest.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, required: true, location_name: "Timezone"))
@@ -222,6 +316,16 @@ module Aws::AlexaForBusiness
 
     CreateUserResponse.add_member(:user_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "UserArn"))
     CreateUserResponse.struct_class = Types::CreateUserResponse
+
+    DeleteAddressBookRequest.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AddressBookArn"))
+    DeleteAddressBookRequest.struct_class = Types::DeleteAddressBookRequest
+
+    DeleteAddressBookResponse.struct_class = Types::DeleteAddressBookResponse
+
+    DeleteContactRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
+    DeleteContactRequest.struct_class = Types::DeleteContactRequest
+
+    DeleteContactResponse.struct_class = Types::DeleteContactResponse
 
     DeleteProfileRequest.add_member(:profile_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ProfileArn"))
     DeleteProfileRequest.struct_class = Types::DeleteProfileRequest
@@ -276,13 +380,27 @@ module Aws::AlexaForBusiness
 
     DeviceDataList.member = Shapes::ShapeRef.new(shape: DeviceData)
 
+    DeviceEvent.add_member(:type, Shapes::ShapeRef.new(shape: DeviceEventType, location_name: "Type"))
+    DeviceEvent.add_member(:value, Shapes::ShapeRef.new(shape: DeviceEventValue, location_name: "Value"))
+    DeviceEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
+    DeviceEvent.struct_class = Types::DeviceEvent
+
+    DeviceEventList.member = Shapes::ShapeRef.new(shape: DeviceEvent)
+
     DeviceStatusDetail.add_member(:code, Shapes::ShapeRef.new(shape: DeviceStatusDetailCode, location_name: "Code"))
     DeviceStatusDetail.struct_class = Types::DeviceStatusDetail
 
     DeviceStatusDetails.member = Shapes::ShapeRef.new(shape: DeviceStatusDetail)
 
     DeviceStatusInfo.add_member(:device_status_details, Shapes::ShapeRef.new(shape: DeviceStatusDetails, location_name: "DeviceStatusDetails"))
+    DeviceStatusInfo.add_member(:connection_status, Shapes::ShapeRef.new(shape: ConnectionStatus, location_name: "ConnectionStatus"))
     DeviceStatusInfo.struct_class = Types::DeviceStatusInfo
+
+    DisassociateContactFromAddressBookRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
+    DisassociateContactFromAddressBookRequest.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AddressBookArn"))
+    DisassociateContactFromAddressBookRequest.struct_class = Types::DisassociateContactFromAddressBookRequest
+
+    DisassociateContactFromAddressBookResponse.struct_class = Types::DisassociateContactFromAddressBookResponse
 
     DisassociateDeviceFromRoomRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
     DisassociateDeviceFromRoomRequest.struct_class = Types::DisassociateDeviceFromRoomRequest
@@ -304,6 +422,18 @@ module Aws::AlexaForBusiness
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: FilterValue)
+
+    GetAddressBookRequest.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AddressBookArn"))
+    GetAddressBookRequest.struct_class = Types::GetAddressBookRequest
+
+    GetAddressBookResponse.add_member(:address_book, Shapes::ShapeRef.new(shape: AddressBook, location_name: "AddressBook"))
+    GetAddressBookResponse.struct_class = Types::GetAddressBookResponse
+
+    GetContactRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
+    GetContactRequest.struct_class = Types::GetContactRequest
+
+    GetContactResponse.add_member(:contact, Shapes::ShapeRef.new(shape: Contact, location_name: "Contact"))
+    GetContactResponse.struct_class = Types::GetContactResponse
 
     GetDeviceRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
     GetDeviceRequest.struct_class = Types::GetDeviceRequest
@@ -336,6 +466,16 @@ module Aws::AlexaForBusiness
 
     GetSkillGroupResponse.add_member(:skill_group, Shapes::ShapeRef.new(shape: SkillGroup, location_name: "SkillGroup"))
     GetSkillGroupResponse.struct_class = Types::GetSkillGroupResponse
+
+    ListDeviceEventsRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DeviceArn"))
+    ListDeviceEventsRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: DeviceEventType, location_name: "EventType"))
+    ListDeviceEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDeviceEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListDeviceEventsRequest.struct_class = Types::ListDeviceEventsRequest
+
+    ListDeviceEventsResponse.add_member(:device_events, Shapes::ShapeRef.new(shape: DeviceEventList, location_name: "DeviceEvents"))
+    ListDeviceEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListDeviceEventsResponse.struct_class = Types::ListDeviceEventsResponse
 
     ListSkillsRequest.add_member(:skill_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SkillGroupArn"))
     ListSkillsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -422,6 +562,28 @@ module Aws::AlexaForBusiness
     RoomSkillParameter.struct_class = Types::RoomSkillParameter
 
     RoomSkillParameters.member = Shapes::ShapeRef.new(shape: RoomSkillParameter)
+
+    SearchAddressBooksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    SearchAddressBooksRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortList, location_name: "SortCriteria"))
+    SearchAddressBooksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchAddressBooksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    SearchAddressBooksRequest.struct_class = Types::SearchAddressBooksRequest
+
+    SearchAddressBooksResponse.add_member(:address_books, Shapes::ShapeRef.new(shape: AddressBookDataList, location_name: "AddressBooks"))
+    SearchAddressBooksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchAddressBooksResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
+    SearchAddressBooksResponse.struct_class = Types::SearchAddressBooksResponse
+
+    SearchContactsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+    SearchContactsRequest.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortList, location_name: "SortCriteria"))
+    SearchContactsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchContactsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    SearchContactsRequest.struct_class = Types::SearchContactsRequest
+
+    SearchContactsResponse.add_member(:contacts, Shapes::ShapeRef.new(shape: ContactDataList, location_name: "Contacts"))
+    SearchContactsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchContactsResponse.add_member(:total_count, Shapes::ShapeRef.new(shape: TotalCount, location_name: "TotalCount"))
+    SearchContactsResponse.struct_class = Types::SearchContactsResponse
 
     SearchDevicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     SearchDevicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -535,6 +697,22 @@ module Aws::AlexaForBusiness
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateAddressBookRequest.add_member(:address_book_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AddressBookArn"))
+    UpdateAddressBookRequest.add_member(:name, Shapes::ShapeRef.new(shape: AddressBookName, location_name: "Name"))
+    UpdateAddressBookRequest.add_member(:description, Shapes::ShapeRef.new(shape: AddressBookDescription, location_name: "Description"))
+    UpdateAddressBookRequest.struct_class = Types::UpdateAddressBookRequest
+
+    UpdateAddressBookResponse.struct_class = Types::UpdateAddressBookResponse
+
+    UpdateContactRequest.add_member(:contact_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ContactArn"))
+    UpdateContactRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "DisplayName"))
+    UpdateContactRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "FirstName"))
+    UpdateContactRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: ContactName, location_name: "LastName"))
+    UpdateContactRequest.add_member(:phone_number, Shapes::ShapeRef.new(shape: E164PhoneNumber, location_name: "PhoneNumber"))
+    UpdateContactRequest.struct_class = Types::UpdateContactRequest
+
+    UpdateContactResponse.struct_class = Types::UpdateContactResponse
+
     UpdateDeviceRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DeviceArn"))
     UpdateDeviceRequest.add_member(:device_name, Shapes::ShapeRef.new(shape: DeviceName, location_name: "DeviceName"))
     UpdateDeviceRequest.struct_class = Types::UpdateDeviceRequest
@@ -596,6 +774,15 @@ module Aws::AlexaForBusiness
         "targetPrefix" => "AlexaForBusiness",
       }
 
+      api.add_operation(:associate_contact_with_address_book, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateContactWithAddressBook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateContactWithAddressBookRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateContactWithAddressBookResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:associate_device_with_room, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateDeviceWithRoom"
         o.http_method = "POST"
@@ -611,6 +798,26 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateSkillGroupWithRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateSkillGroupWithRoomResponse)
+      end)
+
+      api.add_operation(:create_address_book, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAddressBook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateAddressBookRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAddressBookResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:create_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:create_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -651,6 +858,24 @@ module Aws::AlexaForBusiness
         o.output = Shapes::ShapeRef.new(shape: CreateUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:delete_address_book, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteAddressBook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteAddressBookRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteAddressBookResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:delete_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:delete_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -697,6 +922,14 @@ module Aws::AlexaForBusiness
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
+      api.add_operation(:disassociate_contact_from_address_book, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateContactFromAddressBook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateContactFromAddressBookRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateContactFromAddressBookResponse)
+      end)
+
       api.add_operation(:disassociate_device_from_room, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateDeviceFromRoom"
         o.http_method = "POST"
@@ -711,6 +944,24 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateSkillGroupFromRoomRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateSkillGroupFromRoomResponse)
+      end)
+
+      api.add_operation(:get_address_book, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAddressBook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAddressBookRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAddressBookResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:get_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContactResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 
       api.add_operation(:get_device, Seahorse::Model::Operation.new.tap do |o|
@@ -756,6 +1007,21 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: GetSkillGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSkillGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:list_device_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDeviceEvents"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListDeviceEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDeviceEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_skills, Seahorse::Model::Operation.new.tap do |o|
@@ -811,6 +1077,34 @@ module Aws::AlexaForBusiness
         o.input = Shapes::ShapeRef.new(shape: RevokeInvitationRequest)
         o.output = Shapes::ShapeRef.new(shape: RevokeInvitationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:search_address_books, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchAddressBooks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SearchAddressBooksRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchAddressBooksResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:search_contacts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchContacts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SearchContactsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchContactsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:search_devices, Seahorse::Model::Operation.new.tap do |o|
@@ -916,6 +1210,25 @@ module Aws::AlexaForBusiness
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+      end)
+
+      api.add_operation(:update_address_book, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAddressBook"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAddressBookRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAddressBookResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NameInUseException)
+      end)
+
+      api.add_operation(:update_contact, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateContact"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateContactRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateContactResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
       end)
 

@@ -69,6 +69,7 @@ module AwsSdkCodeGenerator
           end
         end
         paths << "#{@prefix}/customizations"
+        paths << "#{@prefix}/event_streams" if eventstream_shape?
         paths.to_a
       end
 
@@ -77,10 +78,17 @@ module AwsSdkCodeGenerator
       end
 
       def example_operation_name
+        raise "no operations found for the service" if @service.api['operations'].empty?
         underscore(@service.api['operations'].keys.first)
         nil
       end
 
+      def eventstream_shape?
+        @service.api['shapes'].each do |_, shape_ref|
+          return true if shape_ref['eventstream']
+        end
+        false
+      end
     end
   end
 end

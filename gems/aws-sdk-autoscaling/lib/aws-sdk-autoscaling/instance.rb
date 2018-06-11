@@ -239,8 +239,8 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [required, Boolean] :should_decrement_desired_capacity
-    #   If `True`, the Auto Scaling group decrements the desired capacity
-    #   value by the number of instances detached.
+    #   Indicates whether the Auto Scaling group decrements the desired
+    #   capacity value by the number of instances detached.
     # @return [Activity::Collection]
     def detach(options = {})
       batch = []
@@ -266,10 +266,8 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [required, Boolean] :should_decrement_desired_capacity
-    #   Specifies whether the instances moved to `Standby` mode count as part
-    #   of the Auto Scaling group's desired capacity. If set, the desired
-    #   capacity for the Auto Scaling group decrements by the number of
-    #   instances moved to `Standby` mode.
+    #   Indicates whether to decrement the desired capacity of the Auto
+    #   Scaling group by the number of instances moved to `Standby` mode.
     # @return [Activity::Collection]
     def enter_standby(options = {})
       batch = []
@@ -344,8 +342,8 @@ module Aws::AutoScaling
     #   })
     # @param [Hash] options ({})
     # @option options [required, Boolean] :should_decrement_desired_capacity
-    #   If `true`, terminating the instance also decrements the size of the
-    #   Auto Scaling group.
+    #   Indicates whether terminating the instance also decrements the size of
+    #   the Auto Scaling group.
     # @return [Activity]
     def terminate(options = {})
       options = options.merge(instance_id: @id)
@@ -439,8 +437,8 @@ module Aws::AutoScaling
       #   })
       # @param options ({})
       # @option options [required, Boolean] :should_decrement_desired_capacity
-      #   If `True`, the Auto Scaling group decrements the desired capacity
-      #   value by the number of instances detached.
+      #   Indicates whether the Auto Scaling group decrements the desired
+      #   capacity value by the number of instances detached.
       # @return [void]
       def batch_detach(options = {})
         batch_enum.each do |batch|
@@ -462,10 +460,8 @@ module Aws::AutoScaling
       #   })
       # @param options ({})
       # @option options [required, Boolean] :should_decrement_desired_capacity
-      #   Specifies whether the instances moved to `Standby` mode count as part
-      #   of the Auto Scaling group's desired capacity. If set, the desired
-      #   capacity for the Auto Scaling group decrements by the number of
-      #   instances moved to `Standby` mode.
+      #   Indicates whether to decrement the desired capacity of the Auto
+      #   Scaling group by the number of instances moved to `Standby` mode.
       # @return [void]
       def batch_enter_standby(options = {})
         batch_enum.each do |batch|

@@ -80,23 +80,31 @@ module Aws::STS
     #
     # @!attribute [rw] duration_seconds
     #   The duration, in seconds, of the role session. The value can range
-    #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
-    #   the value is set to 3600 seconds.
+    #   from 900 seconds (15 minutes) up to the maximum session duration
+    #   setting for the role. This setting can have a value from 1 hour to
+    #   12 hours. If you specify a value higher than this setting, the
+    #   operation fails. For example, if you specify a session duration of
+    #   12 hours, but your administrator set the maximum session duration to
+    #   6 hours, your operation fails. To learn how to view the maximum
+    #   value for your role, see [View the Maximum Session Duration Setting
+    #   for a Role][1] in the *IAM User Guide*.
     #
-    #   <note markdown="1"> This is separate from the duration of a console session that you
-    #   might request using the returned credentials. The request to the
-    #   federation endpoint for a console sign-in token takes a
-    #   `SessionDuration` parameter that specifies the maximum length of the
-    #   console session, separately from the `DurationSeconds` parameter on
-    #   this API. For more information, see [Creating a URL that Enables
-    #   Federated Users to Access the AWS Management Console][1] in the *IAM
-    #   User Guide*.
+    #   By default, the value is set to 3600 seconds.
+    #
+    #   <note markdown="1"> The `DurationSeconds` parameter is separate from the duration of a
+    #   console session that you might request using the returned
+    #   credentials. The request to the federation endpoint for a console
+    #   sign-in token takes a `SessionDuration` parameter that specifies the
+    #   maximum length of the console session. For more information, see
+    #   [Creating a URL that Enables Federated Users to Access the AWS
+    #   Management Console][2] in the *IAM User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
     #
     # @!attribute [rw] external_id
@@ -266,27 +274,36 @@ module Aws::STS
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
-    #   The duration, in seconds, of the role session. The value can range
-    #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
-    #   the value is set to 3600 seconds. An expiration can also be
-    #   specified in the SAML authentication response's
-    #   `SessionNotOnOrAfter` value. The actual expiration time is whichever
-    #   value is shorter.
-    #
-    #   <note markdown="1"> This is separate from the duration of a console session that you
-    #   might request using the returned credentials. The request to the
-    #   federation endpoint for a console sign-in token takes a
-    #   `SessionDuration` parameter that specifies the maximum length of the
-    #   console session, separately from the `DurationSeconds` parameter on
-    #   this API. For more information, see [Enabling SAML 2.0 Federated
-    #   Users to Access the AWS Management Console][1] in the *IAM User
+    #   The duration, in seconds, of the role session. Your role session
+    #   lasts for the duration that you specify for the `DurationSeconds`
+    #   parameter, or until the time specified in the SAML authentication
+    #   response's `SessionNotOnOrAfter` value, whichever is shorter. You
+    #   can provide a `DurationSeconds` value from 900 seconds (15 minutes)
+    #   up to the maximum session duration setting for the role. This
+    #   setting can have a value from 1 hour to 12 hours. If you specify a
+    #   value higher than this setting, the operation fails. For example, if
+    #   you specify a session duration of 12 hours, but your administrator
+    #   set the maximum session duration to 6 hours, your operation fails.
+    #   To learn how to view the maximum value for your role, see [View the
+    #   Maximum Session Duration Setting for a Role][1] in the *IAM User
     #   Guide*.
+    #
+    #   By default, the value is set to 3600 seconds.
+    #
+    #   <note markdown="1"> The `DurationSeconds` parameter is separate from the duration of a
+    #   console session that you might request using the returned
+    #   credentials. The request to the federation endpoint for a console
+    #   sign-in token takes a `SessionDuration` parameter that specifies the
+    #   maximum length of the console session. For more information, see
+    #   [Creating a URL that Enables Federated Users to Access the AWS
+    #   Management Console][2] in the *IAM User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAMLRequest AWS API Documentation
@@ -466,23 +483,31 @@ module Aws::STS
     #
     # @!attribute [rw] duration_seconds
     #   The duration, in seconds, of the role session. The value can range
-    #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
-    #   the value is set to 3600 seconds.
+    #   from 900 seconds (15 minutes) up to the maximum session duration
+    #   setting for the role. This setting can have a value from 1 hour to
+    #   12 hours. If you specify a value higher than this setting, the
+    #   operation fails. For example, if you specify a session duration of
+    #   12 hours, but your administrator set the maximum session duration to
+    #   6 hours, your operation fails. To learn how to view the maximum
+    #   value for your role, see [View the Maximum Session Duration Setting
+    #   for a Role][1] in the *IAM User Guide*.
     #
-    #   <note markdown="1"> This is separate from the duration of a console session that you
-    #   might request using the returned credentials. The request to the
-    #   federation endpoint for a console sign-in token takes a
-    #   `SessionDuration` parameter that specifies the maximum length of the
-    #   console session, separately from the `DurationSeconds` parameter on
-    #   this API. For more information, see [Creating a URL that Enables
-    #   Federated Users to Access the AWS Management Console][1] in the *IAM
-    #   User Guide*.
+    #   By default, the value is set to 3600 seconds.
+    #
+    #   <note markdown="1"> The `DurationSeconds` parameter is separate from the duration of a
+    #   console session that you might request using the returned
+    #   credentials. The request to the federation endpoint for a console
+    #   sign-in token takes a `SessionDuration` parameter that specifies the
+    #   maximum length of the console session. For more information, see
+    #   [Creating a URL that Enables Federated Users to Access the AWS
+    #   Management Console][2] in the *IAM User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentityRequest AWS API Documentation

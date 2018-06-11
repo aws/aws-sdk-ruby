@@ -155,6 +155,97 @@ module Aws::ConfigService
 
     # @!group API Operations
 
+    # Returns the current configuration for one or more requested resources.
+    # The operation also returns a list of resources that are not processed
+    # in the current request. If there are no unprocessed resources, the
+    # operation returns an empty unprocessedResourceKeys list.
+    #
+    # <note markdown="1"> * The API does not return results for deleted resources.
+    #
+    # * The API does not return any tags for the requested resources. This
+    #   information is filtered out of the supplementaryConfiguration
+    #   section of the API response.
+    #
+    #  </note>
+    #
+    # @option params [required, Array<Types::ResourceKey>] :resource_keys
+    #   A list of resource keys to be processed with the current request. Each
+    #   element in the list consists of the resource type and resource ID.
+    #
+    # @return [Types::BatchGetResourceConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetResourceConfigResponse#base_configuration_items #base_configuration_items} => Array&lt;Types::BaseConfigurationItem&gt;
+    #   * {Types::BatchGetResourceConfigResponse#unprocessed_resource_keys #unprocessed_resource_keys} => Array&lt;Types::ResourceKey&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_resource_config({
+    #     resource_keys: [ # required
+    #       {
+    #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
+    #         resource_id: "ResourceId", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.base_configuration_items #=> Array
+    #   resp.base_configuration_items[0].version #=> String
+    #   resp.base_configuration_items[0].account_id #=> String
+    #   resp.base_configuration_items[0].configuration_item_capture_time #=> Time
+    #   resp.base_configuration_items[0].configuration_item_status #=> String, one of "OK", "ResourceDiscovered", "ResourceNotRecorded", "ResourceDeleted", "ResourceDeletedNotRecorded"
+    #   resp.base_configuration_items[0].configuration_state_id #=> String
+    #   resp.base_configuration_items[0].arn #=> String
+    #   resp.base_configuration_items[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution", "AWS::WAF::RuleGroup", "AWS::WAFRegional::RuleGroup", "AWS::Lambda::Function", "AWS::ElasticBeanstalk::Application", "AWS::ElasticBeanstalk::ApplicationVersion", "AWS::ElasticBeanstalk::Environment", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::XRay::EncryptionConfig"
+    #   resp.base_configuration_items[0].resource_id #=> String
+    #   resp.base_configuration_items[0].resource_name #=> String
+    #   resp.base_configuration_items[0].aws_region #=> String
+    #   resp.base_configuration_items[0].availability_zone #=> String
+    #   resp.base_configuration_items[0].resource_creation_time #=> Time
+    #   resp.base_configuration_items[0].configuration #=> String
+    #   resp.base_configuration_items[0].supplementary_configuration #=> Hash
+    #   resp.base_configuration_items[0].supplementary_configuration["SupplementaryConfigurationName"] #=> String
+    #   resp.unprocessed_resource_keys #=> Array
+    #   resp.unprocessed_resource_keys[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution", "AWS::WAF::RuleGroup", "AWS::WAFRegional::RuleGroup", "AWS::Lambda::Function", "AWS::ElasticBeanstalk::Application", "AWS::ElasticBeanstalk::ApplicationVersion", "AWS::ElasticBeanstalk::Environment", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::XRay::EncryptionConfig"
+    #   resp.unprocessed_resource_keys[0].resource_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/BatchGetResourceConfig AWS API Documentation
+    #
+    # @overload batch_get_resource_config(params = {})
+    # @param [Hash] params ({})
+    def batch_get_resource_config(params = {}, options = {})
+      req = build_request(:batch_get_resource_config, params)
+      req.send_request(options)
+    end
+
+    # Deletes the authorization granted to the specified configuration
+    # aggregator account in a specified region.
+    #
+    # @option params [required, String] :authorized_account_id
+    #   The 12-digit account ID of the account authorized to aggregate data.
+    #
+    # @option params [required, String] :authorized_aws_region
+    #   The region authorized to collect aggregated data.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_aggregation_authorization({
+    #     authorized_account_id: "AccountId", # required
+    #     authorized_aws_region: "AwsRegion", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteAggregationAuthorization AWS API Documentation
+    #
+    # @overload delete_aggregation_authorization(params = {})
+    # @param [Hash] params ({})
+    def delete_aggregation_authorization(params = {}, options = {})
+      req = build_request(:delete_aggregation_authorization, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified AWS Config rule and all of its evaluation
     # results.
     #
@@ -183,6 +274,29 @@ module Aws::ConfigService
     # @param [Hash] params ({})
     def delete_config_rule(params = {}, options = {})
       req = build_request(:delete_config_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes the specified configuration aggregator and the aggregated data
+    # associated with the aggregator.
+    #
+    # @option params [required, String] :configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_configuration_aggregator({
+    #     configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationAggregator AWS API Documentation
+    #
+    # @overload delete_configuration_aggregator(params = {})
+    # @param [Hash] params ({})
+    def delete_configuration_aggregator(params = {}, options = {})
+      req = build_request(:delete_configuration_aggregator, params)
       req.send_request(options)
     end
 
@@ -245,13 +359,13 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
-    # Deletes the evaluation results for the specified Config rule. You can
-    # specify one Config rule per request. After you delete the evaluation
-    # results, you can call the StartConfigRulesEvaluation API to start
-    # evaluating your AWS resources against the rule.
+    # Deletes the evaluation results for the specified AWS Config rule. You
+    # can specify one AWS Config rule per request. After you delete the
+    # evaluation results, you can call the StartConfigRulesEvaluation API to
+    # start evaluating your AWS resources against the rule.
     #
     # @option params [required, String] :config_rule_name
-    #   The name of the Config rule for which you want to delete the
+    #   The name of the AWS Config rule for which you want to delete the
     #   evaluation results.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -271,18 +385,66 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Deletes pending authorization requests for a specified aggregator
+    # account in a specified region.
+    #
+    # @option params [required, String] :requester_account_id
+    #   The 12-digit account ID of the account requesting to aggregate data.
+    #
+    # @option params [required, String] :requester_aws_region
+    #   The region requesting to aggregate data.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_pending_aggregation_request({
+    #     requester_account_id: "AccountId", # required
+    #     requester_aws_region: "AwsRegion", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeletePendingAggregationRequest AWS API Documentation
+    #
+    # @overload delete_pending_aggregation_request(params = {})
+    # @param [Hash] params ({})
+    def delete_pending_aggregation_request(params = {}, options = {})
+      req = build_request(:delete_pending_aggregation_request, params)
+      req.send_request(options)
+    end
+
+    # Deletes the retention configuration.
+    #
+    # @option params [required, String] :retention_configuration_name
+    #   The name of the retention configuration to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_retention_configuration({
+    #     retention_configuration_name: "RetentionConfigurationName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRetentionConfiguration AWS API Documentation
+    #
+    # @overload delete_retention_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_retention_configuration(params = {}, options = {})
+      req = build_request(:delete_retention_configuration, params)
+      req.send_request(options)
+    end
+
     # Schedules delivery of a configuration snapshot to the Amazon S3 bucket
     # in the specified delivery channel. After the delivery has started, AWS
-    # Config sends following notifications using an Amazon SNS topic that
-    # you have specified.
+    # Config sends the following notifications using an Amazon SNS topic
+    # that you have specified.
     #
-    # * Notification of starting the delivery.
+    # * Notification of the start of the delivery.
     #
-    # * Notification of delivery completed, if the delivery was successfully
-    #   completed.
+    # * Notification of the completion of the delivery, if the delivery was
+    #   successfully completed.
     #
-    # * Notification of delivery failure, if the delivery failed to
-    #   complete.
+    # * Notification of delivery failure, if the delivery failed.
     #
     # @option params [required, String] :delivery_channel_name
     #   The name of the delivery channel through which the snapshot is
@@ -311,12 +473,114 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns a list of compliant and noncompliant rules with the number of
+    # resources for compliant and noncompliant rules.
+    #
+    # <note markdown="1"> The results can return an empty result page, but if you have a
+    # nextToken, the results are displayed on the next page.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #
+    # @option params [Types::ConfigRuleComplianceFilters] :filters
+    #   Filters the results by ConfigRuleComplianceFilters object.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of evaluation results returned on each page. The
+    #   default is maximum. If you specify 0, AWS Config uses the default.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeAggregateComplianceByConfigRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAggregateComplianceByConfigRulesResponse#aggregate_compliance_by_config_rules #aggregate_compliance_by_config_rules} => Array&lt;Types::AggregateComplianceByConfigRule&gt;
+    #   * {Types::DescribeAggregateComplianceByConfigRulesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_aggregate_compliance_by_config_rules({
+    #     configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #     filters: {
+    #       config_rule_name: "ConfigRuleName",
+    #       compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
+    #       account_id: "AccountId",
+    #       aws_region: "AwsRegion",
+    #     },
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aggregate_compliance_by_config_rules #=> Array
+    #   resp.aggregate_compliance_by_config_rules[0].config_rule_name #=> String
+    #   resp.aggregate_compliance_by_config_rules[0].compliance.compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT", "NOT_APPLICABLE", "INSUFFICIENT_DATA"
+    #   resp.aggregate_compliance_by_config_rules[0].compliance.compliance_contributor_count.capped_count #=> Integer
+    #   resp.aggregate_compliance_by_config_rules[0].compliance.compliance_contributor_count.cap_exceeded #=> Boolean
+    #   resp.aggregate_compliance_by_config_rules[0].account_id #=> String
+    #   resp.aggregate_compliance_by_config_rules[0].aws_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregateComplianceByConfigRules AWS API Documentation
+    #
+    # @overload describe_aggregate_compliance_by_config_rules(params = {})
+    # @param [Hash] params ({})
+    def describe_aggregate_compliance_by_config_rules(params = {}, options = {})
+      req = build_request(:describe_aggregate_compliance_by_config_rules, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of authorizations granted to various aggregator
+    # accounts and regions.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of AggregationAuthorizations returned on each page.
+    #   The default is maximum. If you specify 0, AWS Config uses the default.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeAggregationAuthorizationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAggregationAuthorizationsResponse#aggregation_authorizations #aggregation_authorizations} => Array&lt;Types::AggregationAuthorization&gt;
+    #   * {Types::DescribeAggregationAuthorizationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_aggregation_authorizations({
+    #     limit: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aggregation_authorizations #=> Array
+    #   resp.aggregation_authorizations[0].aggregation_authorization_arn #=> String
+    #   resp.aggregation_authorizations[0].authorized_account_id #=> String
+    #   resp.aggregation_authorizations[0].authorized_aws_region #=> String
+    #   resp.aggregation_authorizations[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeAggregationAuthorizations AWS API Documentation
+    #
+    # @overload describe_aggregation_authorizations(params = {})
+    # @param [Hash] params ({})
+    def describe_aggregation_authorizations(params = {}, options = {})
+      req = build_request(:describe_aggregation_authorizations, params)
+      req.send_request(options)
+    end
+
     # Indicates whether the specified AWS Config rules are compliant. If a
     # rule is noncompliant, this action returns the number of AWS resources
     # that do not comply with the rule.
     #
-    # A rule is compliant if all of the evaluated resources comply with it,
-    # and it is noncompliant if any of these resources do not comply.
+    # A rule is compliant if all of the evaluated resources comply with it.
+    # It is noncompliant if any of these resources do not comply.
     #
     # If AWS Config has no current evaluation results for the rule, it
     # returns `INSUFFICIENT_DATA`. This result might indicate one of the
@@ -328,8 +592,8 @@ module Aws::ConfigService
     #   `LastFailedInvocationTime`.
     #
     # * The rule's AWS Lambda function is failing to send evaluation
-    #   results to AWS Config. Verify that the role that you assigned to
-    #   your configuration recorder includes the `config:PutEvaluations`
+    #   results to AWS Config. Verify that the role you assigned to your
+    #   configuration recorder includes the `config:PutEvaluations`
     #   permission. If the rule is a custom rule, verify that the AWS Lambda
     #   execution role includes the `config:PutEvaluations` permission.
     #
@@ -348,7 +612,7 @@ module Aws::ConfigService
     #   `INSUFFICIENT_DATA`.
     #
     # @option params [String] :next_token
-    #   The `NextToken` string returned on a previous page that you use to get
+    #   The `nextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::DescribeComplianceByConfigRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -410,8 +674,8 @@ module Aws::ConfigService
     #   or removed from the rule's scope.
     #
     # @option params [String] :resource_type
-    #   The types of AWS resources for which you want compliance information;
-    #   for example, `AWS::EC2::Instance`. For this action, you can specify
+    #   The types of AWS resources for which you want compliance information
+    #   (for example, `AWS::EC2::Instance`). For this action, you can specify
     #   that the resource type is an AWS account by specifying
     #   `AWS::::Account`.
     #
@@ -423,16 +687,15 @@ module Aws::ConfigService
     # @option params [Array<String>] :compliance_types
     #   Filters the results by compliance.
     #
-    #   The allowed values are `COMPLIANT`, `NON_COMPLIANT`, and
-    #   `INSUFFICIENT_DATA`.
+    #   The allowed values are `COMPLIANT` and `NON_COMPLIANT`.
     #
     # @option params [Integer] :limit
     #   The maximum number of evaluation results returned on each page. The
-    #   default is 10. You cannot specify a limit greater than 100. If you
+    #   default is 10. You cannot specify a number greater than 100. If you
     #   specify 0, AWS Config uses the default.
     #
     # @option params [String] :next_token
-    #   The `NextToken` string returned on a previous page that you use to get
+    #   The `nextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::DescribeComplianceByResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -480,7 +743,7 @@ module Aws::ConfigService
     #   status information for all AWS managed Config rules that you use.
     #
     # @option params [String] :next_token
-    #   The `NextToken` string returned on a previous page that you use to get
+    #   The `nextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @option params [Integer] :limit
@@ -489,7 +752,7 @@ module Aws::ConfigService
     #   This parameter is required if the rule limit for your account is more
     #   than the default of 50 rules.
     #
-    #   For more information about requesting a rule limit increase, see [AWS
+    #   For information about requesting a rule limit increase, see [AWS
     #   Config Limits][1] in the *AWS General Reference Guide*.
     #
     #
@@ -542,7 +805,7 @@ module Aws::ConfigService
     #   rules.
     #
     # @option params [String] :next_token
-    #   The `NextToken` string returned on a previous page that you use to get
+    #   The `nextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::DescribeConfigRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -589,9 +852,126 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns status information for sources within an aggregator. The
+    # status includes information about the last time AWS Config aggregated
+    # data from source accounts or AWS Config failed to aggregate data from
+    # source accounts with the related error code or message.
+    #
+    # @option params [required, String] :configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #
+    # @option params [Array<String>] :update_status
+    #   Filters the status type.
+    #
+    #   * Valid value FAILED indicates errors while moving data.
+    #
+    #   * Valid value SUCCEEDED indicates the data was successfully moved.
+    #
+    #   * Valid value OUTDATED indicates the data is not the most recent.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of AggregatorSourceStatus returned on each page.
+    #   The default is maximum. If you specify 0, AWS Config uses the default.
+    #
+    # @return [Types::DescribeConfigurationAggregatorSourcesStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConfigurationAggregatorSourcesStatusResponse#aggregated_source_status_list #aggregated_source_status_list} => Array&lt;Types::AggregatedSourceStatus&gt;
+    #   * {Types::DescribeConfigurationAggregatorSourcesStatusResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_configuration_aggregator_sources_status({
+    #     configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #     update_status: ["FAILED"], # accepts FAILED, SUCCEEDED, OUTDATED
+    #     next_token: "String",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aggregated_source_status_list #=> Array
+    #   resp.aggregated_source_status_list[0].source_id #=> String
+    #   resp.aggregated_source_status_list[0].source_type #=> String, one of "ACCOUNT", "ORGANIZATION"
+    #   resp.aggregated_source_status_list[0].aws_region #=> String
+    #   resp.aggregated_source_status_list[0].last_update_status #=> String, one of "FAILED", "SUCCEEDED", "OUTDATED"
+    #   resp.aggregated_source_status_list[0].last_update_time #=> Time
+    #   resp.aggregated_source_status_list[0].last_error_code #=> String
+    #   resp.aggregated_source_status_list[0].last_error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregatorSourcesStatus AWS API Documentation
+    #
+    # @overload describe_configuration_aggregator_sources_status(params = {})
+    # @param [Hash] params ({})
+    def describe_configuration_aggregator_sources_status(params = {}, options = {})
+      req = build_request(:describe_configuration_aggregator_sources_status, params)
+      req.send_request(options)
+    end
+
+    # Returns the details of one or more configuration aggregators. If the
+    # configuration aggregator is not specified, this action returns the
+    # details for all the configuration aggregators associated with the
+    # account.
+    #
+    # @option params [Array<String>] :configuration_aggregator_names
+    #   The name of the configuration aggregators.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of configuration aggregators returned on each page.
+    #   The default is maximum. If you specify 0, AWS Config uses the default.
+    #
+    # @return [Types::DescribeConfigurationAggregatorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConfigurationAggregatorsResponse#configuration_aggregators #configuration_aggregators} => Array&lt;Types::ConfigurationAggregator&gt;
+    #   * {Types::DescribeConfigurationAggregatorsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_configuration_aggregators({
+    #     configuration_aggregator_names: ["ConfigurationAggregatorName"],
+    #     next_token: "String",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_aggregators #=> Array
+    #   resp.configuration_aggregators[0].configuration_aggregator_name #=> String
+    #   resp.configuration_aggregators[0].configuration_aggregator_arn #=> String
+    #   resp.configuration_aggregators[0].account_aggregation_sources #=> Array
+    #   resp.configuration_aggregators[0].account_aggregation_sources[0].account_ids #=> Array
+    #   resp.configuration_aggregators[0].account_aggregation_sources[0].account_ids[0] #=> String
+    #   resp.configuration_aggregators[0].account_aggregation_sources[0].all_aws_regions #=> Boolean
+    #   resp.configuration_aggregators[0].account_aggregation_sources[0].aws_regions #=> Array
+    #   resp.configuration_aggregators[0].account_aggregation_sources[0].aws_regions[0] #=> String
+    #   resp.configuration_aggregators[0].organization_aggregation_source.role_arn #=> String
+    #   resp.configuration_aggregators[0].organization_aggregation_source.aws_regions #=> Array
+    #   resp.configuration_aggregators[0].organization_aggregation_source.aws_regions[0] #=> String
+    #   resp.configuration_aggregators[0].organization_aggregation_source.all_aws_regions #=> Boolean
+    #   resp.configuration_aggregators[0].creation_time #=> Time
+    #   resp.configuration_aggregators[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationAggregators AWS API Documentation
+    #
+    # @overload describe_configuration_aggregators(params = {})
+    # @param [Hash] params ({})
+    def describe_configuration_aggregators(params = {}, options = {})
+      req = build_request(:describe_configuration_aggregators, params)
+      req.send_request(options)
+    end
+
     # Returns the current status of the specified configuration recorder. If
     # a configuration recorder is not specified, this action returns the
-    # status of all configuration recorder associated with the account.
+    # status of all configuration recorders associated with the account.
     #
     # <note markdown="1"> Currently, you can specify only one configuration recorder per region
     # in your account.
@@ -664,7 +1044,7 @@ module Aws::ConfigService
     #   resp.configuration_recorders[0].recording_group.all_supported #=> Boolean
     #   resp.configuration_recorders[0].recording_group.include_global_resource_types #=> Boolean
     #   resp.configuration_recorders[0].recording_group.resource_types #=> Array
-    #   resp.configuration_recorders[0].recording_group.resource_types[0] #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution"
+    #   resp.configuration_recorders[0].recording_group.resource_types[0] #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution", "AWS::WAF::RuleGroup", "AWS::WAFRegional::RuleGroup", "AWS::Lambda::Function", "AWS::ElasticBeanstalk::Application", "AWS::ElasticBeanstalk::ApplicationVersion", "AWS::ElasticBeanstalk::Environment", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::XRay::EncryptionConfig"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorders AWS API Documentation
     #
@@ -767,6 +1147,245 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Returns a list of all pending aggregation requests.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of evaluation results returned on each page. The
+    #   default is maximum. If you specify 0, AWS Config uses the default.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::DescribePendingAggregationRequestsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePendingAggregationRequestsResponse#pending_aggregation_requests #pending_aggregation_requests} => Array&lt;Types::PendingAggregationRequest&gt;
+    #   * {Types::DescribePendingAggregationRequestsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_pending_aggregation_requests({
+    #     limit: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.pending_aggregation_requests #=> Array
+    #   resp.pending_aggregation_requests[0].requester_account_id #=> String
+    #   resp.pending_aggregation_requests[0].requester_aws_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribePendingAggregationRequests AWS API Documentation
+    #
+    # @overload describe_pending_aggregation_requests(params = {})
+    # @param [Hash] params ({})
+    def describe_pending_aggregation_requests(params = {}, options = {})
+      req = build_request(:describe_pending_aggregation_requests, params)
+      req.send_request(options)
+    end
+
+    # Returns the details of one or more retention configurations. If the
+    # retention configuration name is not specified, this action returns the
+    # details for all the retention configurations for that account.
+    #
+    # <note markdown="1"> Currently, AWS Config supports only one retention configuration per
+    # region in your account.
+    #
+    #  </note>
+    #
+    # @option params [Array<String>] :retention_configuration_names
+    #   A list of names of retention configurations for which you want
+    #   details. If you do not specify a name, AWS Config returns details for
+    #   all the retention configurations for that account.
+    #
+    #   <note markdown="1"> Currently, AWS Config supports only one retention configuration per
+    #   region in your account.
+    #
+    #    </note>
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::DescribeRetentionConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeRetentionConfigurationsResponse#retention_configurations #retention_configurations} => Array&lt;Types::RetentionConfiguration&gt;
+    #   * {Types::DescribeRetentionConfigurationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_retention_configurations({
+    #     retention_configuration_names: ["RetentionConfigurationName"],
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retention_configurations #=> Array
+    #   resp.retention_configurations[0].name #=> String
+    #   resp.retention_configurations[0].retention_period_in_days #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRetentionConfigurations AWS API Documentation
+    #
+    # @overload describe_retention_configurations(params = {})
+    # @param [Hash] params ({})
+    def describe_retention_configurations(params = {}, options = {})
+      req = build_request(:describe_retention_configurations, params)
+      req.send_request(options)
+    end
+
+    # Returns the evaluation results for the specified AWS Config rule for a
+    # specific resource in a rule. The results indicate which AWS resources
+    # were evaluated by the rule, when each resource was last evaluated, and
+    # whether each resource complies with the rule.
+    #
+    # <note markdown="1"> The results can return an empty result page. But if you have a
+    # nextToken, the results are displayed on the next page.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #
+    # @option params [required, String] :config_rule_name
+    #   The name of the AWS Config rule for which you want compliance
+    #   information.
+    #
+    # @option params [required, String] :account_id
+    #   The 12-digit account ID of the source account.
+    #
+    # @option params [required, String] :aws_region
+    #   The source region from where the data is aggregated.
+    #
+    # @option params [String] :compliance_type
+    #   The resource compliance status.
+    #
+    #   <note markdown="1"> For the `GetAggregateComplianceDetailsByConfigRuleRequest` data type,
+    #   AWS Config supports only the `COMPLIANT` and `NON_COMPLIANT`. AWS
+    #   Config does not support the `NOT_APPLICABLE` and `INSUFFICIENT_DATA`
+    #   values.
+    #
+    #    </note>
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of evaluation results returned on each page. The
+    #   default is 50. You cannot specify a number greater than 100. If you
+    #   specify 0, AWS Config uses the default.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::GetAggregateComplianceDetailsByConfigRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAggregateComplianceDetailsByConfigRuleResponse#aggregate_evaluation_results #aggregate_evaluation_results} => Array&lt;Types::AggregateEvaluationResult&gt;
+    #   * {Types::GetAggregateComplianceDetailsByConfigRuleResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_aggregate_compliance_details_by_config_rule({
+    #     configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #     config_rule_name: "ConfigRuleName", # required
+    #     account_id: "AccountId", # required
+    #     aws_region: "AwsRegion", # required
+    #     compliance_type: "COMPLIANT", # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aggregate_evaluation_results #=> Array
+    #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.config_rule_name #=> String
+    #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_type #=> String
+    #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.evaluation_result_qualifier.resource_id #=> String
+    #   resp.aggregate_evaluation_results[0].evaluation_result_identifier.ordering_timestamp #=> Time
+    #   resp.aggregate_evaluation_results[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT", "NOT_APPLICABLE", "INSUFFICIENT_DATA"
+    #   resp.aggregate_evaluation_results[0].result_recorded_time #=> Time
+    #   resp.aggregate_evaluation_results[0].config_rule_invoked_time #=> Time
+    #   resp.aggregate_evaluation_results[0].annotation #=> String
+    #   resp.aggregate_evaluation_results[0].account_id #=> String
+    #   resp.aggregate_evaluation_results[0].aws_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateComplianceDetailsByConfigRule AWS API Documentation
+    #
+    # @overload get_aggregate_compliance_details_by_config_rule(params = {})
+    # @param [Hash] params ({})
+    def get_aggregate_compliance_details_by_config_rule(params = {}, options = {})
+      req = build_request(:get_aggregate_compliance_details_by_config_rule, params)
+      req.send_request(options)
+    end
+
+    # Returns the number of compliant and noncompliant rules for one or more
+    # accounts and regions in an aggregator.
+    #
+    # <note markdown="1"> The results can return an empty result page, but if you have a
+    # nextToken, the results are displayed on the next page.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #
+    # @option params [Types::ConfigRuleComplianceSummaryFilters] :filters
+    #   Filters the results based on the ConfigRuleComplianceSummaryFilters
+    #   object.
+    #
+    # @option params [String] :group_by_key
+    #   Groups the result based on ACCOUNT\_ID or AWS\_REGION.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of evaluation results returned on each page. The
+    #   default is 1000. You cannot specify a number greater than 1000. If you
+    #   specify 0, AWS Config uses the default.
+    #
+    # @option params [String] :next_token
+    #   The nextToken string returned on a previous page that you use to get
+    #   the next page of results in a paginated response.
+    #
+    # @return [Types::GetAggregateConfigRuleComplianceSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAggregateConfigRuleComplianceSummaryResponse#group_by_key #group_by_key} => String
+    #   * {Types::GetAggregateConfigRuleComplianceSummaryResponse#aggregate_compliance_counts #aggregate_compliance_counts} => Array&lt;Types::AggregateComplianceCount&gt;
+    #   * {Types::GetAggregateConfigRuleComplianceSummaryResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_aggregate_config_rule_compliance_summary({
+    #     configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #     filters: {
+    #       account_id: "AccountId",
+    #       aws_region: "AwsRegion",
+    #     },
+    #     group_by_key: "ACCOUNT_ID", # accepts ACCOUNT_ID, AWS_REGION
+    #     limit: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_by_key #=> String
+    #   resp.aggregate_compliance_counts #=> Array
+    #   resp.aggregate_compliance_counts[0].group_name #=> String
+    #   resp.aggregate_compliance_counts[0].compliance_summary.compliant_resource_count.capped_count #=> Integer
+    #   resp.aggregate_compliance_counts[0].compliance_summary.compliant_resource_count.cap_exceeded #=> Boolean
+    #   resp.aggregate_compliance_counts[0].compliance_summary.non_compliant_resource_count.capped_count #=> Integer
+    #   resp.aggregate_compliance_counts[0].compliance_summary.non_compliant_resource_count.cap_exceeded #=> Boolean
+    #   resp.aggregate_compliance_counts[0].compliance_summary.compliance_summary_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetAggregateConfigRuleComplianceSummary AWS API Documentation
+    #
+    # @overload get_aggregate_config_rule_compliance_summary(params = {})
+    # @param [Hash] params ({})
+    def get_aggregate_config_rule_compliance_summary(params = {}, options = {})
+      req = build_request(:get_aggregate_config_rule_compliance_summary, params)
+      req.send_request(options)
+    end
+
     # Returns the evaluation results for the specified AWS Config rule. The
     # results indicate which AWS resources were evaluated by the rule, when
     # each resource was last evaluated, and whether each resource complies
@@ -784,11 +1403,11 @@ module Aws::ConfigService
     #
     # @option params [Integer] :limit
     #   The maximum number of evaluation results returned on each page. The
-    #   default is 10. You cannot specify a limit greater than 100. If you
+    #   default is 10. You cannot specify a number greater than 100. If you
     #   specify 0, AWS Config uses the default.
     #
     # @option params [String] :next_token
-    #   The `NextToken` string returned on a previous page that you use to get
+    #   The `nextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::GetComplianceDetailsByConfigRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -847,7 +1466,7 @@ module Aws::ConfigService
     #   `NOT_APPLICABLE`.
     #
     # @option params [String] :next_token
-    #   The `NextToken` string returned on a previous page that you use to get
+    #   The `nextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::GetComplianceDetailsByResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -922,8 +1541,8 @@ module Aws::ConfigService
     #   type.
     #
     #   For this request, you can specify an AWS resource type such as
-    #   `AWS::EC2::Instance`, and you can specify that the resource type is an
-    #   AWS account by specifying `AWS::::Account`.
+    #   `AWS::EC2::Instance`. You can specify that the resource type is an AWS
+    #   account by specifying `AWS::::Account`.
     #
     # @return [Types::GetComplianceSummaryByResourceTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -969,11 +1588,11 @@ module Aws::ConfigService
     #
     # 3.  AWS Config returns the following:
     #
-    #     * The resource types (EC2 instances, IAM users, and S3 buckets)
+    #     * The resource types (EC2 instances, IAM users, and S3 buckets).
     #
-    #     * The number of each resource type (25, 20, and 15)
+    #     * The number of each resource type (25, 20, and 15).
     #
-    #     * The total number of all resources (60)
+    #     * The total number of all resources (60).
     #
     # The response is paginated. By default, AWS Config lists 100
     # ResourceCount objects on each page. You can customize this number with
@@ -981,14 +1600,15 @@ module Aws::ConfigService
     # get the next page of results, run the request again and specify the
     # string for the `nextToken` parameter.
     #
-    # <note markdown="1"> If you make a call to the GetDiscoveredResourceCounts action, you may
-    # not immediately receive resource counts in the following situations:
+    # <note markdown="1"> If you make a call to the GetDiscoveredResourceCounts action, you
+    # might not immediately receive resource counts in the following
+    # situations:
     #
-    #  * You are a new AWS Config customer
+    #  * You are a new AWS Config customer.
     #
-    # * You just enabled resource recording
+    # * You just enabled resource recording.
     #
-    #  It may take a few minutes for AWS Config to record and count your
+    #  It might take a few minutes for AWS Config to record and count your
     # resources. Wait a few minutes and then retry the
     # GetDiscoveredResourceCounts action.
     #
@@ -996,7 +1616,7 @@ module Aws::ConfigService
     #
     # @option params [Array<String>] :resource_types
     #   The comma-separated list that specifies the resource types that you
-    #   want the AWS Config to return. For example, (`"AWS::EC2::Instance"`,
+    #   want AWS Config to return (for example, `"AWS::EC2::Instance"`,
     #   `"AWS::IAM::User"`).
     #
     #   If a value for `resourceTypes` is not specified, AWS Config returns
@@ -1012,7 +1632,7 @@ module Aws::ConfigService
     #
     # @option params [Integer] :limit
     #   The maximum number of ResourceCount objects returned on each page. The
-    #   default is 100. You cannot specify a limit greater than 100. If you
+    #   default is 100. You cannot specify a number greater than 100. If you
     #   specify 0, AWS Config uses the default.
     #
     # @option params [String] :next_token
@@ -1037,7 +1657,7 @@ module Aws::ConfigService
     #
     #   resp.total_discovered_resources #=> Integer
     #   resp.resource_counts #=> Array
-    #   resp.resource_counts[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution"
+    #   resp.resource_counts[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution", "AWS::WAF::RuleGroup", "AWS::WAFRegional::RuleGroup", "AWS::Lambda::Function", "AWS::ElasticBeanstalk::Application", "AWS::ElasticBeanstalk::ApplicationVersion", "AWS::ElasticBeanstalk::Environment", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::XRay::EncryptionConfig"
     #   resp.resource_counts[0].count #=> Integer
     #   resp.next_token #=> String
     #
@@ -1052,7 +1672,10 @@ module Aws::ConfigService
 
     # Returns a list of configuration items for the specified resource. The
     # list contains details about each state of the resource during the
-    # specified time interval.
+    # specified time interval. If you specified a retention period to retain
+    # your `ConfigurationItems` between a minimum of 30 days and a maximum
+    # of 7 years (2557 days), AWS Config returns the `ConfigurationItems`
+    # for the specified retention period.
     #
     # The response is paginated. By default, AWS Config returns a limit of
     # 10 configuration items per page. You can customize this number with
@@ -1080,15 +1703,15 @@ module Aws::ConfigService
     # @option params [Time,DateTime,Date,Integer,String] :earlier_time
     #   The time stamp that indicates an earlier time. If not specified, the
     #   action returns paginated results that contain configuration items that
-    #   start from when the first configuration item was recorded.
+    #   start when the first configuration item was recorded.
     #
     # @option params [String] :chronological_order
-    #   The chronological order for configuration items listed. By default the
-    #   results are listed in reverse chronological order.
+    #   The chronological order for configuration items listed. By default,
+    #   the results are listed in reverse chronological order.
     #
     # @option params [Integer] :limit
     #   The maximum number of configuration items returned on each page. The
-    #   default is 10. You cannot specify a limit greater than 100. If you
+    #   default is 10. You cannot specify a number greater than 100. If you
     #   specify 0, AWS Config uses the default.
     #
     # @option params [String] :next_token
@@ -1103,7 +1726,7 @@ module Aws::ConfigService
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_config_history({
-    #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution
+    #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
     #     resource_id: "ResourceId", # required
     #     later_time: Time.now,
     #     earlier_time: Time.now,
@@ -1118,11 +1741,11 @@ module Aws::ConfigService
     #   resp.configuration_items[0].version #=> String
     #   resp.configuration_items[0].account_id #=> String
     #   resp.configuration_items[0].configuration_item_capture_time #=> Time
-    #   resp.configuration_items[0].configuration_item_status #=> String, one of "Ok", "Failed", "Discovered", "Deleted"
+    #   resp.configuration_items[0].configuration_item_status #=> String, one of "OK", "ResourceDiscovered", "ResourceNotRecorded", "ResourceDeleted", "ResourceDeletedNotRecorded"
     #   resp.configuration_items[0].configuration_state_id #=> String
     #   resp.configuration_items[0].configuration_item_md5_hash #=> String
     #   resp.configuration_items[0].arn #=> String
-    #   resp.configuration_items[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution"
+    #   resp.configuration_items[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution", "AWS::WAF::RuleGroup", "AWS::WAFRegional::RuleGroup", "AWS::Lambda::Function", "AWS::ElasticBeanstalk::Application", "AWS::ElasticBeanstalk::ApplicationVersion", "AWS::ElasticBeanstalk::Environment", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::XRay::EncryptionConfig"
     #   resp.configuration_items[0].resource_id #=> String
     #   resp.configuration_items[0].resource_name #=> String
     #   resp.configuration_items[0].aws_region #=> String
@@ -1133,7 +1756,7 @@ module Aws::ConfigService
     #   resp.configuration_items[0].related_events #=> Array
     #   resp.configuration_items[0].related_events[0] #=> String
     #   resp.configuration_items[0].relationships #=> Array
-    #   resp.configuration_items[0].relationships[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution"
+    #   resp.configuration_items[0].relationships[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution", "AWS::WAF::RuleGroup", "AWS::WAFRegional::RuleGroup", "AWS::Lambda::Function", "AWS::ElasticBeanstalk::Application", "AWS::ElasticBeanstalk::ApplicationVersion", "AWS::ElasticBeanstalk::Environment", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::XRay::EncryptionConfig"
     #   resp.configuration_items[0].relationships[0].resource_id #=> String
     #   resp.configuration_items[0].relationships[0].resource_name #=> String
     #   resp.configuration_items[0].relationships[0].relationship_name #=> String
@@ -1159,8 +1782,8 @@ module Aws::ConfigService
     # results to include only resources that have specific resource IDs or a
     # resource name.
     #
-    # <note markdown="1"> You can specify either resource IDs or a resource name but not both in
-    # the same request.
+    # <note markdown="1"> You can specify either resource IDs or a resource name, but not both,
+    # in the same request.
     #
     #  </note>
     #
@@ -1186,7 +1809,7 @@ module Aws::ConfigService
     #
     # @option params [Integer] :limit
     #   The maximum number of resource identifiers returned on each page. The
-    #   default is 100. You cannot specify a limit greater than 100. If you
+    #   default is 100. You cannot specify a number greater than 100. If you
     #   specify 0, AWS Config uses the default.
     #
     # @option params [Boolean] :include_deleted_resources
@@ -1205,7 +1828,7 @@ module Aws::ConfigService
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_discovered_resources({
-    #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution
+    #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
     #     resource_ids: ["ResourceId"],
     #     resource_name: "ResourceName",
     #     limit: 1,
@@ -1216,7 +1839,7 @@ module Aws::ConfigService
     # @example Response structure
     #
     #   resp.resource_identifiers #=> Array
-    #   resp.resource_identifiers[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution"
+    #   resp.resource_identifiers[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription", "AWS::CloudWatch::Alarm", "AWS::CloudFormation::Stack", "AWS::DynamoDB::Table", "AWS::AutoScaling::AutoScalingGroup", "AWS::AutoScaling::LaunchConfiguration", "AWS::AutoScaling::ScalingPolicy", "AWS::AutoScaling::ScheduledAction", "AWS::CodeBuild::Project", "AWS::WAF::RateBasedRule", "AWS::WAF::Rule", "AWS::WAF::WebACL", "AWS::WAFRegional::RateBasedRule", "AWS::WAFRegional::Rule", "AWS::WAFRegional::WebACL", "AWS::CloudFront::Distribution", "AWS::CloudFront::StreamingDistribution", "AWS::WAF::RuleGroup", "AWS::WAFRegional::RuleGroup", "AWS::Lambda::Function", "AWS::ElasticBeanstalk::Application", "AWS::ElasticBeanstalk::ApplicationVersion", "AWS::ElasticBeanstalk::Environment", "AWS::ElasticLoadBalancing::LoadBalancer", "AWS::XRay::EncryptionConfig"
     #   resp.resource_identifiers[0].resource_id #=> String
     #   resp.resource_identifiers[0].resource_name #=> String
     #   resp.resource_identifiers[0].resource_deletion_time #=> Time
@@ -1231,21 +1854,57 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Authorizes the aggregator account and region to collect data from the
+    # source account and region.
+    #
+    # @option params [required, String] :authorized_account_id
+    #   The 12-digit account ID of the account authorized to aggregate data.
+    #
+    # @option params [required, String] :authorized_aws_region
+    #   The region authorized to collect aggregated data.
+    #
+    # @return [Types::PutAggregationAuthorizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAggregationAuthorizationResponse#aggregation_authorization #aggregation_authorization} => Types::AggregationAuthorization
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_aggregation_authorization({
+    #     authorized_account_id: "AccountId", # required
+    #     authorized_aws_region: "AwsRegion", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aggregation_authorization.aggregation_authorization_arn #=> String
+    #   resp.aggregation_authorization.authorized_account_id #=> String
+    #   resp.aggregation_authorization.authorized_aws_region #=> String
+    #   resp.aggregation_authorization.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutAggregationAuthorization AWS API Documentation
+    #
+    # @overload put_aggregation_authorization(params = {})
+    # @param [Hash] params ({})
+    def put_aggregation_authorization(params = {}, options = {})
+      req = build_request(:put_aggregation_authorization, params)
+      req.send_request(options)
+    end
+
     # Adds or updates an AWS Config rule for evaluating whether your AWS
     # resources comply with your desired configurations.
     #
-    # You can use this action for custom Config rules and AWS managed Config
-    # rules. A custom Config rule is a rule that you develop and maintain.
-    # An AWS managed Config rule is a customizable, predefined rule that AWS
-    # Config provides.
+    # You can use this action for custom AWS Config rules and AWS managed
+    # Config rules. A custom AWS Config rule is a rule that you develop and
+    # maintain. An AWS managed Config rule is a customizable, predefined
+    # rule that AWS Config provides.
     #
-    # If you are adding a new custom Config rule, you must first create the
-    # AWS Lambda function that the rule invokes to evaluate your resources.
-    # When you use the `PutConfigRule` action to add the rule to AWS Config,
-    # you must specify the Amazon Resource Name (ARN) that AWS Lambda
-    # assigns to the function. Specify the ARN for the `SourceIdentifier`
-    # key. This key is part of the `Source` object, which is part of the
-    # `ConfigRule` object.
+    # If you are adding a new custom AWS Config rule, you must first create
+    # the AWS Lambda function that the rule invokes to evaluate your
+    # resources. When you use the `PutConfigRule` action to add the rule to
+    # AWS Config, you must specify the Amazon Resource Name (ARN) that AWS
+    # Lambda assigns to the function. Specify the ARN for the
+    # `SourceIdentifier` key. This key is part of the `Source` object, which
+    # is part of the `ConfigRule` object.
     #
     # If you are adding an AWS managed Config rule, specify the rule's
     # identifier for the `SourceIdentifier` key. To reference AWS managed
@@ -1262,7 +1921,7 @@ module Aws::ConfigService
     #
     # The maximum number of rules that AWS Config supports is 50.
     #
-    # For more information about requesting a rule limit increase, see [AWS
+    # For information about requesting a rule limit increase, see [AWS
     # Config Limits][2] in the *AWS General Reference Guide*.
     #
     # For more information about developing and using AWS Config rules, see
@@ -1320,10 +1979,81 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
+    # Creates and updates the configuration aggregator with the selected
+    # source accounts and regions. The source account can be individual
+    # account(s) or an organization.
+    #
+    # <note markdown="1"> AWS Config should be enabled in source accounts and regions you want
+    # to aggregate.
+    #
+    #  If your source type is an organization, you must be signed in to the
+    # master account and all features must be enabled in your organization.
+    # AWS Config calls `EnableAwsServiceAccess` API to enable integration
+    # between AWS Config and AWS Organizations.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :configuration_aggregator_name
+    #   The name of the configuration aggregator.
+    #
+    # @option params [Array<Types::AccountAggregationSource>] :account_aggregation_sources
+    #   A list of AccountAggregationSource object.
+    #
+    # @option params [Types::OrganizationAggregationSource] :organization_aggregation_source
+    #   An OrganizationAggregationSource object.
+    #
+    # @return [Types::PutConfigurationAggregatorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutConfigurationAggregatorResponse#configuration_aggregator #configuration_aggregator} => Types::ConfigurationAggregator
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_configuration_aggregator({
+    #     configuration_aggregator_name: "ConfigurationAggregatorName", # required
+    #     account_aggregation_sources: [
+    #       {
+    #         account_ids: ["AccountId"], # required
+    #         all_aws_regions: false,
+    #         aws_regions: ["String"],
+    #       },
+    #     ],
+    #     organization_aggregation_source: {
+    #       role_arn: "String", # required
+    #       aws_regions: ["String"],
+    #       all_aws_regions: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_aggregator.configuration_aggregator_name #=> String
+    #   resp.configuration_aggregator.configuration_aggregator_arn #=> String
+    #   resp.configuration_aggregator.account_aggregation_sources #=> Array
+    #   resp.configuration_aggregator.account_aggregation_sources[0].account_ids #=> Array
+    #   resp.configuration_aggregator.account_aggregation_sources[0].account_ids[0] #=> String
+    #   resp.configuration_aggregator.account_aggregation_sources[0].all_aws_regions #=> Boolean
+    #   resp.configuration_aggregator.account_aggregation_sources[0].aws_regions #=> Array
+    #   resp.configuration_aggregator.account_aggregation_sources[0].aws_regions[0] #=> String
+    #   resp.configuration_aggregator.organization_aggregation_source.role_arn #=> String
+    #   resp.configuration_aggregator.organization_aggregation_source.aws_regions #=> Array
+    #   resp.configuration_aggregator.organization_aggregation_source.aws_regions[0] #=> String
+    #   resp.configuration_aggregator.organization_aggregation_source.all_aws_regions #=> Boolean
+    #   resp.configuration_aggregator.creation_time #=> Time
+    #   resp.configuration_aggregator.last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationAggregator AWS API Documentation
+    #
+    # @overload put_configuration_aggregator(params = {})
+    # @param [Hash] params ({})
+    def put_configuration_aggregator(params = {}, options = {})
+      req = build_request(:put_configuration_aggregator, params)
+      req.send_request(options)
+    end
+
     # Creates a new configuration recorder to record the selected resource
     # configurations.
     #
-    # You can use this action to change the role `roleARN` and/or the
+    # You can use this action to change the role `roleARN` or the
     # `recordingGroup` of an existing recorder. To change the role, call the
     # action on the existing configuration recorder and specify a role.
     #
@@ -1351,7 +2081,7 @@ module Aws::ConfigService
     #       recording_group: {
     #         all_supported: false,
     #         include_global_resource_types: false,
-    #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution
+    #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription, AWS::CloudWatch::Alarm, AWS::CloudFormation::Stack, AWS::DynamoDB::Table, AWS::AutoScaling::AutoScalingGroup, AWS::AutoScaling::LaunchConfiguration, AWS::AutoScaling::ScalingPolicy, AWS::AutoScaling::ScheduledAction, AWS::CodeBuild::Project, AWS::WAF::RateBasedRule, AWS::WAF::Rule, AWS::WAF::WebACL, AWS::WAFRegional::RateBasedRule, AWS::WAFRegional::Rule, AWS::WAFRegional::WebACL, AWS::CloudFront::Distribution, AWS::CloudFront::StreamingDistribution, AWS::WAF::RuleGroup, AWS::WAFRegional::RuleGroup, AWS::Lambda::Function, AWS::ElasticBeanstalk::Application, AWS::ElasticBeanstalk::ApplicationVersion, AWS::ElasticBeanstalk::Environment, AWS::ElasticLoadBalancing::LoadBalancer, AWS::XRay::EncryptionConfig
     #       },
     #     },
     #   })
@@ -1384,7 +2114,7 @@ module Aws::ConfigService
     #
     # @option params [required, Types::DeliveryChannel] :delivery_channel
     #   The configuration delivery channel object that delivers the
-    #   configuration information to an Amazon S3 bucket, and to an Amazon SNS
+    #   configuration information to an Amazon S3 bucket and to an Amazon SNS
     #   topic.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1423,7 +2153,7 @@ module Aws::ConfigService
     #
     # @option params [required, String] :result_token
     #   An encrypted token that associates an evaluation with an AWS Config
-    #   rule. Identifies the rule and the event that triggered the evaluation
+    #   rule. Identifies the rule and the event that triggered the evaluation.
     #
     # @option params [Boolean] :test_mode
     #   Use this parameter to specify a test run for `PutEvaluations`. You can
@@ -1474,23 +2204,66 @@ module Aws::ConfigService
       req.send_request(options)
     end
 
-    # Runs an on-demand evaluation for the specified Config rules against
-    # the last known configuration state of the resources. Use
-    # `StartConfigRulesEvaluation` when you want to test a rule that you
+    # Creates and updates the retention configuration with details about
+    # retention period (number of days) that AWS Config stores your
+    # historical information. The API creates the `RetentionConfiguration`
+    # object and names the object as **default**. When you have a
+    # `RetentionConfiguration` object named **default**, calling the API
+    # modifies the default object.
+    #
+    # <note markdown="1"> Currently, AWS Config supports only one retention configuration per
+    # region in your account.
+    #
+    #  </note>
+    #
+    # @option params [required, Integer] :retention_period_in_days
+    #   Number of days AWS Config stores your historical information.
+    #
+    #   <note markdown="1"> Currently, only applicable to the configuration item history.
+    #
+    #    </note>
+    #
+    # @return [Types::PutRetentionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutRetentionConfigurationResponse#retention_configuration #retention_configuration} => Types::RetentionConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_retention_configuration({
+    #     retention_period_in_days: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.retention_configuration.name #=> String
+    #   resp.retention_configuration.retention_period_in_days #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRetentionConfiguration AWS API Documentation
+    #
+    # @overload put_retention_configuration(params = {})
+    # @param [Hash] params ({})
+    def put_retention_configuration(params = {}, options = {})
+      req = build_request(:put_retention_configuration, params)
+      req.send_request(options)
+    end
+
+    # Runs an on-demand evaluation for the specified AWS Config rules
+    # against the last known configuration state of the resources. Use
+    # `StartConfigRulesEvaluation` when you want to test that a rule you
     # updated is working as expected. `StartConfigRulesEvaluation` does not
-    # re-record the latest configuration state for your resources; it
+    # re-record the latest configuration state for your resources. It
     # re-runs an evaluation against the last known state of your resources.
     #
-    # You can specify up to 25 Config rules per request.
+    # You can specify up to 25 AWS Config rules per request.
     #
-    # An existing `StartConfigRulesEvaluation` call must complete for the
-    # specified rules before you can call the API again. If you chose to
-    # have AWS Config stream to an Amazon SNS topic, you will receive a
+    # An existing `StartConfigRulesEvaluation` call for the specified rules
+    # must complete before you can call the API again. If you chose to have
+    # AWS Config stream to an Amazon SNS topic, you will receive a
     # `ConfigRuleEvaluationStarted` notification when the evaluation starts.
     #
     # <note markdown="1"> You don't need to call the `StartConfigRulesEvaluation` API to run an
-    # evaluation for a new rule. When you create a new rule, AWS Config
-    # automatically evaluates your resources against the rule.
+    # evaluation for a new rule. When you create a rule, AWS Config
+    # evaluates your resources against the rule automatically.
     #
     #  </note>
     #
@@ -1513,7 +2286,7 @@ module Aws::ConfigService
     #     hours.
     #
     # @option params [Array<String>] :config_rule_names
-    #   The list of names of Config rules that you want to run evaluations
+    #   The list of names of AWS Config rules that you want to run evaluations
     #   for.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1597,7 +2370,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

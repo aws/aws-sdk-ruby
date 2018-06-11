@@ -4,7 +4,11 @@ module Aws
       class RestJson < Rest
 
         def body_for(_, _, rules, data)
-          Aws::Json::Builder.new(rules).serialize(data)
+          if eventstream?(rules)
+            encode_eventstream_response(rules, data, Aws::Json::Builder)
+          else
+            Aws::Json::Builder.new(rules).serialize(data)
+          end
         end
 
         def stub_error(error_code)
