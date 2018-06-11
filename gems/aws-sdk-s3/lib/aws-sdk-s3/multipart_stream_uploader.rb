@@ -2,6 +2,7 @@ require 'thread'
 require 'set'
 require 'tempfile'
 require 'stringio'
+
 module Aws
   module S3
     # @api private
