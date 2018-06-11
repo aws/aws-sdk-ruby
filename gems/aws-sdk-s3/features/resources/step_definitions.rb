@@ -4,6 +4,7 @@ require 'fileutils'
 require 'net/https'
 require 'net/http/post/multipart'
 require 'uri'
+require 'stringio'
 
 Before("@s3", "@resources") do
   @s3 = Aws::S3::Resource.new
@@ -22,6 +23,61 @@ Given(/^I create a bucket resource$/) do
   @bucket = @s3.create_bucket(bucket: @bucket_name)
   @created_buckets << @bucket
 end
+
+Given("I have {int} {int}MB chunks") do |number, size|
+  @chunks = number.to_i.times.map {'.' * size.to_i * 1024 * 1024}
+end
+
+Given("I have a {int}MB stream") do |size|
+  @stream = StringIO.new('.' * size * 1024 * 1024)
+end
+
+When("I upload the stream with the custom part size of {int}MB to the {string} object") do |part_size_mb, key|
+  @bucket.object(key).upload_stream(part_size: part_size_mb * 1024 * 1024) do |write_stream|
+    IO.copy_stream(@stream, write_stream)
+  end
+end
+
+Then("the {string} object should contained the stream") do |key|
+  data = @s3.bucket(@bucket_name).object(key).get.body.read
+  expect(data).to eq(@stream.string)
+end
+
+When(/^I upload the chunks using tempfile to the "(.*?)" object$/) do |key|
+  @bucket.object(key).upload_stream(tempfile: true) do |write_stream|
+    @chunks.each {|chunk| write_stream << chunk }
+  end
+end
+
+When(/^I upload the chunks to the "(.*?)" object$/) do |key|
+  @bucket.object(key).upload_stream do |write_stream|
+    @chunks.each {|chunk| write_stream << chunk }
+  end
+end
+
+When(/^I upload the chunks to the "(.*?)" object with SSE\/CPK$/) do |key|
+  require 'openssl'
+  cipher = OpenSSL::Cipher::AES256.new(:CBC)
+  encryption_key = cipher.random_key
+  @bucket.object(key).upload_stream({
+    sse_customer_key: encryption_key,
+    sse_customer_algorithm: 'AES256'
+  }) do |write_stream|
+    @chunks.each {|chunk| write_stream << chunk }
+  end
+end
+
+Then(/^the chunks should have been uploaded as a multipart upload$/) do
+  expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
+  expect(ApiCallTracker.called_operations).to include(:upload_part)
+  expect(ApiCallTracker.called_operations).to include(:complete_multipart_upload)
+end
+
+Then(/the "(.*?)" object should contained the chunks joined/) do |key|
+  data = @s3.bucket(@bucket_name).object(key).get.body.read
+  expect(data).to eq(@chunks.join)
+end
+
 
 Given(/^I have a (\d+)MB file$/) do |size|
   @file = Tempfile.new('tempfile')

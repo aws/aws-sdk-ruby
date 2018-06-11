@@ -214,6 +214,51 @@ module Aws
         url.to_s
       end
 
+      # Uploads a stream in a streaming fashion to the current object in S3.
+      #
+      #     # Passed chunks automatically split into multiupart multipart upload parts
+      #     # and the parts are uploaded in parallel. This allows for streaming uploads
+      #     # that never touch the disk.
+      # @example Streaming chunks of data
+      #     obj.upload_file do |write_stream|
+      #       10.times { write_stream << 'hello' }
+      #     end
+      #
+      # @option options [Integer] :thread_count
+      #   The number of parallel multipart uploads
+      #   Default `:thread_count` is `10`.
+      #
+      # @option options [Boolean] :tempfile
+      #   Normally read data is stored in memory when building the parts in order to complete
+      #   the underlying multipart upload. By passing `:tempfile => true` data read will be
+      #   temporarily stored on disk reducing the memory footprint vastly.
+      #   Default `:tempfile` is `false`.
+      #
+      # @option options [Integer] :part_size
+      #   Define how big each part size but the last should be.
+      #   Default `:part_size` is `5 * 1024 * 1024`.
+      #
+      # @raise [MultipartUploadError] If an object is being uploaded in
+      #   parts, and the upload can not be completed, then the upload is
+      #   aborted and this error is raised.  The raised error has a `#errors`
+      #   method that returns the failures that caused the upload to be
+      #   aborted.
+      #
+      # @return [Boolean] Returns `true` when the object is uploaded
+      #   without any errors.
+      #
+      def upload_stream(options = {}, &block)
+        uploading_options = options.dup
+        uploader = MultipartStreamUploader.new(
+          client: client,
+          thread_count: uploading_options.delete(:thread_count),
+          tempfile: uploading_options.delete(:tempfile),
+          part_size: uploading_options.delete(:part_size),
+        )
+        uploader.upload(uploading_options.merge(bucket: bucket_name, key: key), &block)
+        true
+      end
+
       # Uploads a file from disk to the current object in S3.
       #
       #     # small files are uploaded in a single API call

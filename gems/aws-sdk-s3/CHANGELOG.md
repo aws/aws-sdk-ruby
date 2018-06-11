@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - S3::Object#upload_stream
+
 1.13.0 (2018-05-22)
 ------------------
 
