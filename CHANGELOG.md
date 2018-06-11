@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.66 (2018-06-11)
+------------------
+
 * Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
 
 * Feature - Aws::RDS - Updated the documentation, and integration test for Amazon Relational Database Service.
