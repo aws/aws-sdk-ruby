@@ -216,7 +216,7 @@ module Aws
 
       # Uploads a stream in a streaming fashion to the current object in S3.
       #
-      #     # Passed chunks automatically split into multiupart multipart upload parts
+      #     # Passed chunks automatically split into multipart upload parts
       #     # and the parts are uploaded in parallel. This allows for streaming uploads
       #     # that never touch the disk.
       #
