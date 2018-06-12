@@ -540,6 +540,7 @@ module Aws::DeviceFarm
     #     client_id: "ClientId",
     #     configuration: {
     #       billing_method: "METERED", # accepts METERED, UNMETERED
+    #       vpce_configuration_arns: ["AmazonResourceName"],
     #     },
     #     interaction_mode: "INTERACTIVE", # accepts INTERACTIVE, NO_VIDEO, VIDEO_ONLY
     #     skip_app_resign: false,
@@ -4758,7 +4759,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

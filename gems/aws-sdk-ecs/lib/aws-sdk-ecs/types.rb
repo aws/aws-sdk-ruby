@@ -1378,7 +1378,7 @@ module Aws::ECS
     #             container_port: 1,
     #           },
     #         ],
-    #         desired_count: 1, # required
+    #         desired_count: 1,
     #         client_token: "String",
     #         launch_type: "EC2", # accepts EC2, FARGATE
     #         platform_version: "String",
@@ -1407,6 +1407,7 @@ module Aws::ECS
     #           },
     #         },
     #         health_check_grace_period_seconds: 1,
+    #         scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #       }
     #
     # @!attribute [rw] cluster
@@ -1569,6 +1570,34 @@ module Aws::ECS
     #   before they have time to come up.
     #   @return [Integer]
     #
+    # @!attribute [rw] scheduling_strategy
+    #   The scheduling strategy to use for the service. For more
+    #   information, see [Services][1].
+    #
+    #   There are two service scheduler strategies available:
+    #
+    #   * `REPLICA`-The replica scheduling strategy places and maintains the
+    #     desired number of tasks across your cluster. By default, the
+    #     service scheduler spreads tasks across Availability Zones. You can
+    #     use task placement strategies and constraints to customize task
+    #     placement decisions.
+    #
+    #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task
+    #     on each active container instance that meets all of the task
+    #     placement constraints that you specify in your cluster. When using
+    #     this strategy, there is no need to specify a desired number of
+    #     tasks, a task placement strategy, or use Service Auto Scaling
+    #     policies.
+    #
+    #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
     #
     class CreateServiceRequest < Struct.new(
@@ -1586,7 +1615,8 @@ module Aws::ECS
       :placement_constraints,
       :placement_strategy,
       :network_configuration,
-      :health_check_grace_period_seconds)
+      :health_check_grace_period_seconds,
+      :scheduling_strategy)
       include Aws::Structure
     end
 
@@ -1686,6 +1716,7 @@ module Aws::ECS
     #       {
     #         cluster: "String",
     #         service: "String", # required
+    #         force: false,
     #       }
     #
     # @!attribute [rw] cluster
@@ -1698,11 +1729,18 @@ module Aws::ECS
     #   The name of the service to delete.
     #   @return [String]
     #
+    # @!attribute [rw] force
+    #   If `true`, allows you to delete a service even if it has not been
+    #   scaled down to zero tasks. It is only necessary to use this if the
+    #   service is using the `REPLICA` scheduling strategy.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteServiceRequest AWS API Documentation
     #
     class DeleteServiceRequest < Struct.new(
       :cluster,
-      :service)
+      :service,
+      :force)
       include Aws::Structure
     end
 
@@ -2838,6 +2876,7 @@ module Aws::ECS
     #         next_token: "String",
     #         max_results: 1,
     #         launch_type: "EC2", # accepts EC2, FARGATE
+    #         scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #       }
     #
     # @!attribute [rw] cluster
@@ -2874,13 +2913,18 @@ module Aws::ECS
     #   The launch type for services you want to list.
     #   @return [String]
     #
+    # @!attribute [rw] scheduling_strategy
+    #   The scheduling strategy for services to list.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesRequest AWS API Documentation
     #
     class ListServicesRequest < Struct.new(
       :cluster,
       :next_token,
       :max_results,
-      :launch_type)
+      :launch_type,
+      :scheduling_strategy)
       include Aws::Structure
     end
 
@@ -4442,6 +4486,32 @@ module Aws::ECS
     #   checks after a task has first started.
     #   @return [Integer]
     #
+    # @!attribute [rw] scheduling_strategy
+    #   The scheduling strategy to use for the service. For more
+    #   information, see [Services][1].
+    #
+    #   There are two service scheduler strategies available:
+    #
+    #   * `REPLICA`-The replica scheduling strategy places and maintains the
+    #     desired number of tasks across your cluster. By default, the
+    #     service scheduler spreads tasks across Availability Zones. You can
+    #     use task placement strategies and constraints to customize task
+    #     placement decisions.
+    #
+    #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task
+    #     on each container instance in your cluster. When using this
+    #     strategy, do not specify a desired number of tasks or any task
+    #     placement strategies.
+    #
+    #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -4465,7 +4535,8 @@ module Aws::ECS
       :placement_constraints,
       :placement_strategy,
       :network_configuration,
-      :health_check_grace_period_seconds)
+      :health_check_grace_period_seconds,
+      :scheduling_strategy)
       include Aws::Structure
     end
 

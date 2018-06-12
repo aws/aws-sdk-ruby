@@ -351,6 +351,7 @@ module Aws::DeviceFarm
     CreateProjectResult.struct_class = Types::CreateProjectResult
 
     CreateRemoteAccessSessionConfiguration.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
+    CreateRemoteAccessSessionConfiguration.add_member(:vpce_configuration_arns, Shapes::ShapeRef.new(shape: AmazonResourceNames, location_name: "vpceConfigurationArns"))
     CreateRemoteAccessSessionConfiguration.struct_class = Types::CreateRemoteAccessSessionConfiguration
 
     CreateRemoteAccessSessionRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))

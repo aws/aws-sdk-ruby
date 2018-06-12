@@ -499,16 +499,23 @@ module Aws::DeviceFarm
     #
     #       {
     #         billing_method: "METERED", # accepts METERED, UNMETERED
+    #         vpce_configuration_arns: ["AmazonResourceName"],
     #       }
     #
     # @!attribute [rw] billing_method
     #   The billing method for the remote access session.
     #   @return [String]
     #
+    # @!attribute [rw] vpce_configuration_arns
+    #   An array of Amazon Resource Names (ARNs) included in the VPC
+    #   endpoint configuration.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionConfiguration AWS API Documentation
     #
     class CreateRemoteAccessSessionConfiguration < Struct.new(
-      :billing_method)
+      :billing_method,
+      :vpce_configuration_arns)
       include Aws::Structure
     end
 
@@ -529,6 +536,7 @@ module Aws::DeviceFarm
     #         client_id: "ClientId",
     #         configuration: {
     #           billing_method: "METERED", # accepts METERED, UNMETERED
+    #           vpce_configuration_arns: ["AmazonResourceName"],
     #         },
     #         interaction_mode: "INTERACTIVE", # accepts INTERACTIVE, NO_VIDEO, VIDEO_ONLY
     #         skip_app_resign: false,

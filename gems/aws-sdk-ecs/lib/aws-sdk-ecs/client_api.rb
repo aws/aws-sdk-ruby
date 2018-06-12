@@ -151,6 +151,7 @@ module Aws::ECS
     Resources = Shapes::ListShape.new(name: 'Resources')
     RunTaskRequest = Shapes::StructureShape.new(name: 'RunTaskRequest')
     RunTaskResponse = Shapes::StructureShape.new(name: 'RunTaskResponse')
+    SchedulingStrategy = Shapes::StringShape.new(name: 'SchedulingStrategy')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceEvent = Shapes::StructureShape.new(name: 'ServiceEvent')
@@ -342,7 +343,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:task_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskDefinition"))
     CreateServiceRequest.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "loadBalancers"))
     CreateServiceRequest.add_member(:service_registries, Shapes::ShapeRef.new(shape: ServiceRegistries, location_name: "serviceRegistries"))
-    CreateServiceRequest.add_member(:desired_count, Shapes::ShapeRef.new(shape: BoxedInteger, required: true, location_name: "desiredCount"))
+    CreateServiceRequest.add_member(:desired_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "desiredCount"))
     CreateServiceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateServiceRequest.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
     CreateServiceRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "platformVersion"))
@@ -352,6 +353,7 @@ module Aws::ECS
     CreateServiceRequest.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementStrategies, location_name: "placementStrategy"))
     CreateServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     CreateServiceRequest.add_member(:health_check_grace_period_seconds, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "healthCheckGracePeriodSeconds"))
+    CreateServiceRequest.add_member(:scheduling_strategy, Shapes::ShapeRef.new(shape: SchedulingStrategy, location_name: "schedulingStrategy"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -372,6 +374,7 @@ module Aws::ECS
 
     DeleteServiceRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     DeleteServiceRequest.add_member(:service, Shapes::ShapeRef.new(shape: String, required: true, location_name: "service"))
+    DeleteServiceRequest.add_member(:force, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "force"))
     DeleteServiceRequest.struct_class = Types::DeleteServiceRequest
 
     DeleteServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
@@ -542,6 +545,7 @@ module Aws::ECS
     ListServicesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListServicesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "maxResults"))
     ListServicesRequest.add_member(:launch_type, Shapes::ShapeRef.new(shape: LaunchType, location_name: "launchType"))
+    ListServicesRequest.add_member(:scheduling_strategy, Shapes::ShapeRef.new(shape: SchedulingStrategy, location_name: "schedulingStrategy"))
     ListServicesRequest.struct_class = Types::ListServicesRequest
 
     ListServicesResponse.add_member(:service_arns, Shapes::ShapeRef.new(shape: StringList, location_name: "serviceArns"))
@@ -727,6 +731,7 @@ module Aws::ECS
     Service.add_member(:placement_strategy, Shapes::ShapeRef.new(shape: PlacementStrategies, location_name: "placementStrategy"))
     Service.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "networkConfiguration"))
     Service.add_member(:health_check_grace_period_seconds, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "healthCheckGracePeriodSeconds"))
+    Service.add_member(:scheduling_strategy, Shapes::ShapeRef.new(shape: SchedulingStrategy, location_name: "schedulingStrategy"))
     Service.struct_class = Types::Service
 
     ServiceEvent.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))

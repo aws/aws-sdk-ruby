@@ -264,19 +264,24 @@ module Aws::ECS
     # state. Tasks for services that *do* use a load balancer are considered
     # healthy if they are in the `RUNNING` state and the container instance
     # they are hosted on is reported as healthy by the load balancer. The
-    # default value for `minimumHealthyPercent` is 50% in the console and
-    # 100% for the AWS CLI, the AWS SDKs, and the APIs.
+    # default value for a replica service for `minimumHealthyPercent` is 50%
+    # in the console and 100% for the AWS CLI, the AWS SDKs, and the APIs.
+    # The default value for a daemon service for `minimumHealthyPercent` is
+    # 0% for the AWS CLI, the AWS SDKs, and the APIs and 50% for the
+    # console.
     #
     # The `maximumPercent` parameter represents an upper limit on the number
     # of your service's tasks that are allowed in the `RUNNING` or
     # `PENDING` state during a deployment, as a percentage of the
     # `desiredCount` (rounded down to the nearest integer). This parameter
     # enables you to define the deployment batch size. For example, if your
-    # service has a `desiredCount` of four tasks and a `maximumPercent`
-    # value of 200%, the scheduler can start four new tasks before stopping
-    # the four older tasks (provided that the cluster resources required to
-    # do this are available). The default value for `maximumPercent` is
-    # 200%.
+    # replica service has a `desiredCount` of four tasks and a
+    # `maximumPercent` value of 200%, the scheduler can start four new tasks
+    # before stopping the four older tasks (provided that the cluster
+    # resources required to do this are available). The default value for a
+    # replica service for `maximumPercent` is 200%. If you are using a
+    # daemon service type, the `maximumPercent` should remain at 100%, which
+    # is the default value.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement in your cluster using the following logic:
@@ -365,7 +370,7 @@ module Aws::ECS
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
     #   [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
     #
-    # @option params [required, Integer] :desired_count
+    # @option params [Integer] :desired_count
     #   The number of instantiations of the specified task definition to place
     #   and keep running on your cluster.
     #
@@ -443,6 +448,32 @@ module Aws::ECS
     #   during which the ECS service scheduler ignores health check status.
     #   This grace period can prevent the ECS service scheduler from marking
     #   tasks as unhealthy and stopping them before they have time to come up.
+    #
+    # @option params [String] :scheduling_strategy
+    #   The scheduling strategy to use for the service. For more information,
+    #   see [Services][1].
+    #
+    #   There are two service scheduler strategies available:
+    #
+    #   * `REPLICA`-The replica scheduling strategy places and maintains the
+    #     desired number of tasks across your cluster. By default, the service
+    #     scheduler spreads tasks across Availability Zones. You can use task
+    #     placement strategies and constraints to customize task placement
+    #     decisions.
+    #
+    #   * `DAEMON`-The daemon scheduling strategy deploys exactly one task on
+    #     each active container instance that meets all of the task placement
+    #     constraints that you specify in your cluster. When using this
+    #     strategy, there is no need to specify a desired number of tasks, a
+    #     task placement strategy, or use Service Auto Scaling policies.
+    #
+    #     <note markdown="1"> Fargate tasks do not support the `DAEMON` scheduling strategy.
+    #
+    #      </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguideecs_services.html
     #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -588,7 +619,7 @@ module Aws::ECS
     #         container_port: 1,
     #       },
     #     ],
-    #     desired_count: 1, # required
+    #     desired_count: 1,
     #     client_token: "String",
     #     launch_type: "EC2", # accepts EC2, FARGATE
     #     platform_version: "String",
@@ -617,6 +648,7 @@ module Aws::ECS
     #       },
     #     },
     #     health_check_grace_period_seconds: 1,
+    #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #   })
     #
     # @example Response structure
@@ -677,6 +709,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
+    #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService AWS API Documentation
     #
@@ -825,6 +858,11 @@ module Aws::ECS
     # @option params [required, String] :service
     #   The name of the service to delete.
     #
+    # @option params [Boolean] :force
+    #   If `true`, allows you to delete a service even if it has not been
+    #   scaled down to zero tasks. It is only necessary to use this if the
+    #   service is using the `REPLICA` scheduling strategy.
+    #
     # @return [Types::DeleteServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteServiceResponse#service #service} => Types::Service
@@ -848,6 +886,7 @@ module Aws::ECS
     #   resp = client.delete_service({
     #     cluster: "String",
     #     service: "String", # required
+    #     force: false,
     #   })
     #
     # @example Response structure
@@ -908,6 +947,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
+    #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService AWS API Documentation
     #
@@ -1586,6 +1626,7 @@ module Aws::ECS
     #   resp.services[0].network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.services[0].network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.services[0].health_check_grace_period_seconds #=> Integer
+    #   resp.services[0].scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2272,6 +2313,9 @@ module Aws::ECS
     # @option params [String] :launch_type
     #   The launch type for services you want to list.
     #
+    # @option params [String] :scheduling_strategy
+    #   The scheduling strategy for services to list.
+    #
     # @return [Types::ListServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListServicesResponse#service_arns #service_arns} => Array&lt;String&gt;
@@ -2299,6 +2343,7 @@ module Aws::ECS
     #     next_token: "String",
     #     max_results: 1,
     #     launch_type: "EC2", # accepts EC2, FARGATE
+    #     scheduling_strategy: "REPLICA", # accepts REPLICA, DAEMON
     #   })
     #
     # @example Response structure
@@ -4562,6 +4607,7 @@ module Aws::ECS
     #   resp.service.network_configuration.awsvpc_configuration.security_groups[0] #=> String
     #   resp.service.network_configuration.awsvpc_configuration.assign_public_ip #=> String, one of "ENABLED", "DISABLED"
     #   resp.service.health_check_grace_period_seconds #=> Integer
+    #   resp.service.scheduling_strategy #=> String, one of "REPLICA", "DAEMON"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService AWS API Documentation
     #
@@ -4585,7 +4631,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
