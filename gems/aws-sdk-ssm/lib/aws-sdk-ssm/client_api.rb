@@ -77,6 +77,9 @@ module Aws::SSM
     CancelCommandRequest = Shapes::StructureShape.new(name: 'CancelCommandRequest')
     CancelCommandResult = Shapes::StructureShape.new(name: 'CancelCommandResult')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    CloudWatchLogGroupName = Shapes::StringShape.new(name: 'CloudWatchLogGroupName')
+    CloudWatchOutputConfig = Shapes::StructureShape.new(name: 'CloudWatchOutputConfig')
+    CloudWatchOutputEnabled = Shapes::BooleanShape.new(name: 'CloudWatchOutputEnabled')
     Command = Shapes::StructureShape.new(name: 'Command')
     CommandFilter = Shapes::StructureShape.new(name: 'CommandFilter')
     CommandFilterKey = Shapes::StringShape.new(name: 'CommandFilterKey')
@@ -165,6 +168,7 @@ module Aws::SSM
     DeletePatchBaselineResult = Shapes::StructureShape.new(name: 'DeletePatchBaselineResult')
     DeleteResourceDataSyncRequest = Shapes::StructureShape.new(name: 'DeleteResourceDataSyncRequest')
     DeleteResourceDataSyncResult = Shapes::StructureShape.new(name: 'DeleteResourceDataSyncResult')
+    DeliveryTimedOutCount = Shapes::IntegerShape.new(name: 'DeliveryTimedOutCount')
     DeregisterManagedInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceRequest')
     DeregisterManagedInstanceResult = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceResult')
     DeregisterPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'DeregisterPatchBaselineForPatchGroupRequest')
@@ -933,6 +937,10 @@ module Aws::SSM
 
     CancelCommandResult.struct_class = Types::CancelCommandResult
 
+    CloudWatchOutputConfig.add_member(:cloud_watch_log_group_name, Shapes::ShapeRef.new(shape: CloudWatchLogGroupName, location_name: "CloudWatchLogGroupName"))
+    CloudWatchOutputConfig.add_member(:cloud_watch_output_enabled, Shapes::ShapeRef.new(shape: CloudWatchOutputEnabled, location_name: "CloudWatchOutputEnabled"))
+    CloudWatchOutputConfig.struct_class = Types::CloudWatchOutputConfig
+
     Command.add_member(:command_id, Shapes::ShapeRef.new(shape: CommandId, location_name: "CommandId"))
     Command.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "DocumentName"))
     Command.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
@@ -952,8 +960,10 @@ module Aws::SSM
     Command.add_member(:target_count, Shapes::ShapeRef.new(shape: TargetCount, location_name: "TargetCount"))
     Command.add_member(:completed_count, Shapes::ShapeRef.new(shape: CompletedCount, location_name: "CompletedCount"))
     Command.add_member(:error_count, Shapes::ShapeRef.new(shape: ErrorCount, location_name: "ErrorCount"))
+    Command.add_member(:delivery_timed_out_count, Shapes::ShapeRef.new(shape: DeliveryTimedOutCount, location_name: "DeliveryTimedOutCount"))
     Command.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRole"))
     Command.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
+    Command.add_member(:cloud_watch_output_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, location_name: "CloudWatchOutputConfig"))
     Command.struct_class = Types::Command
 
     CommandFilter.add_member(:key, Shapes::ShapeRef.new(shape: CommandFilterKey, required: true, location_name: "key"))
@@ -977,6 +987,7 @@ module Aws::SSM
     CommandInvocation.add_member(:command_plugins, Shapes::ShapeRef.new(shape: CommandPluginList, location_name: "CommandPlugins"))
     CommandInvocation.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRole"))
     CommandInvocation.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
+    CommandInvocation.add_member(:cloud_watch_output_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, location_name: "CloudWatchOutputConfig"))
     CommandInvocation.struct_class = Types::CommandInvocation
 
     CommandInvocationList.member = Shapes::ShapeRef.new(shape: CommandInvocation)
@@ -1581,6 +1592,7 @@ module Aws::SSM
     GetCommandInvocationResult.add_member(:standard_output_url, Shapes::ShapeRef.new(shape: Url, location_name: "StandardOutputUrl"))
     GetCommandInvocationResult.add_member(:standard_error_content, Shapes::ShapeRef.new(shape: StandardErrorContent, location_name: "StandardErrorContent"))
     GetCommandInvocationResult.add_member(:standard_error_url, Shapes::ShapeRef.new(shape: Url, location_name: "StandardErrorUrl"))
+    GetCommandInvocationResult.add_member(:cloud_watch_output_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, location_name: "CloudWatchOutputConfig"))
     GetCommandInvocationResult.struct_class = Types::GetCommandInvocationResult
 
     GetDefaultPatchBaselineRequest.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
@@ -2547,6 +2559,7 @@ module Aws::SSM
     SendCommandRequest.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     SendCommandRequest.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
     SendCommandRequest.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
+    SendCommandRequest.add_member(:cloud_watch_output_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, location_name: "CloudWatchOutputConfig"))
     SendCommandRequest.struct_class = Types::SendCommandRequest
 
     SendCommandResult.add_member(:command, Shapes::ShapeRef.new(shape: Command, location_name: "Command"))

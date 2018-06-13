@@ -857,11 +857,12 @@ module Aws::SSM
     # We also recommend that you secure access to the Amazon S3 bucket by
     # creating a restrictive bucket policy. To view an example of a
     # restrictive Amazon S3 bucket policy for Resource Data Sync, see
-    # [Configuring Resource Data Sync for Inventory][1].
+    # [Create a Resource Data Sync for Inventory][1] in the *AWS Systems
+    # Manager User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-configuring.html#sysman-inventory-datasync
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync-create.html
     #
     # @option params [required, String] :sync_name
     #   A name for the configuration.
@@ -1192,7 +1193,7 @@ module Aws::SSM
     # Removes the server or virtual machine from the list of registered
     # servers. You can reregister the instance again at any time. If you
     # don't plan to use Run Command on the server, we suggest uninstalling
-    # the SSM Agent first.
+    # SSM Agent first.
     #
     # @option params [required, String] :instance_id
     #   The ID assigned to the managed instance when you registered it using
@@ -2966,6 +2967,7 @@ module Aws::SSM
     #   * {Types::GetCommandInvocationResult#standard_output_url #standard_output_url} => String
     #   * {Types::GetCommandInvocationResult#standard_error_content #standard_error_content} => String
     #   * {Types::GetCommandInvocationResult#standard_error_url #standard_error_url} => String
+    #   * {Types::GetCommandInvocationResult#cloud_watch_output_config #cloud_watch_output_config} => Types::CloudWatchOutputConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -2993,6 +2995,8 @@ module Aws::SSM
     #   resp.standard_output_url #=> String
     #   resp.standard_error_content #=> String
     #   resp.standard_error_url #=> String
+    #   resp.cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocation AWS API Documentation
     #
@@ -3558,7 +3562,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Get information about a parameter by using the parameter name.
+    # Get information about a parameter by using the parameter name. Don't
+    # confuse this API action with the GetParameters API action.
     #
     # @option params [required, String] :name
     #   The name of the parameter you want to query.
@@ -3649,7 +3654,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Get details of a parameter.
+    # Get details of a parameter. Don't confuse this API action with the
+    # GetParameter API action.
     #
     # @option params [required, Array<String>] :names
     #   Names of the parameters for which you want to query information.
@@ -3691,7 +3697,8 @@ module Aws::SSM
     end
 
     # Retrieve parameters in a specific hierarchy. For more information, see
-    # [Working with Systems Manager Parameters][1].
+    # [Working with Systems Manager Parameters][1] in the *AWS Systems
+    # Manager User Guide*.
     #
     # Request results are returned on a best-effort basis. If you specify
     # `MaxResults` in the request, the response includes information up to
@@ -4100,6 +4107,8 @@ module Aws::SSM
     #   resp.command_invocations[0].notification_config.notification_events #=> Array
     #   resp.command_invocations[0].notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.command_invocations[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
+    #   resp.command_invocations[0].cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.command_invocations[0].cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocations AWS API Documentation
@@ -4180,11 +4189,14 @@ module Aws::SSM
     #   resp.commands[0].target_count #=> Integer
     #   resp.commands[0].completed_count #=> Integer
     #   resp.commands[0].error_count #=> Integer
+    #   resp.commands[0].delivery_timed_out_count #=> Integer
     #   resp.commands[0].service_role #=> String
     #   resp.commands[0].notification_config.notification_arn #=> String
     #   resp.commands[0].notification_config.notification_events #=> Array
     #   resp.commands[0].notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.commands[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
+    #   resp.commands[0].cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.commands[0].cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommands AWS API Documentation
@@ -4894,7 +4906,7 @@ module Aws::SSM
     #   `/Dev/DBServer/MySQL/db-string13`
     #
     #   For information about parameter name requirements and restrictions,
-    #   see [About Creating Systems Manager Parameters][1] in the *AWS Systems
+    #   see [Creating Systems Manager Parameters][1] in the *AWS Systems
     #   Manager User Guide*.
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
@@ -4906,7 +4918,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-paramstore-su-create-about
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html
     #
     # @option params [String] :description
     #   Information about the parameter that you want to add to the system.
@@ -5355,7 +5367,8 @@ module Aws::SSM
     #   maximum of 50 IDs. If you prefer not to list individual instance IDs,
     #   you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information about
-    #   how to use Targets, see [Sending Commands to a Fleet][1].
+    #   how to use Targets, see [Sending Commands to a Fleet][1] in the *AWS
+    #   Systems Manager User Guide*.
     #
     #
     #
@@ -5366,7 +5379,7 @@ module Aws::SSM
     #   Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
     #   information about how to use Targets, see [Sending Commands to a
-    #   Fleet][1].
+    #   Fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -5378,7 +5391,16 @@ module Aws::SSM
     #
     # @option params [String] :document_version
     #   The SSM document version to use in the request. You can specify
-    #   Default, Latest, or a specific version number.
+    #   $DEFAULT, $LATEST, or a specific version number. If you execute
+    #   commands by using the AWS CLI, then you must escape the first two
+    #   options by using a backslash. If you specify a version number, then
+    #   you don't need to use the backslash. For example:
+    #
+    #   --document-version "\\$DEFAULT"
+    #
+    #   --document-version "\\$LATEST"
+    #
+    #   --document-version "3"
     #
     # @option params [String] :document_hash
     #   The Sha256 or Sha1 hash created by the system when the document was
@@ -5424,11 +5446,12 @@ module Aws::SSM
     #   (Optional) The maximum number of instances that are allowed to execute
     #   the command at the same time. You can specify a number such as 10 or a
     #   percentage such as 10%. The default value is 50. For more information
-    #   about how to use MaxConcurrency, see [Using Concurrency Controls][1].
+    #   about how to use MaxConcurrency, see [Using Concurrency Controls][1]
+    #   in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-velocity.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity
     #
     # @option params [String] :max_errors
     #   The maximum number of errors allowed without the command failing. When
@@ -5436,17 +5459,21 @@ module Aws::SSM
     #   systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
     #   is 0. For more information about how to use MaxErrors, see [Using
-    #   Error Controls][1].
+    #   Error Controls][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors
     #
     # @option params [String] :service_role_arn
     #   The IAM role that Systems Manager uses to send notifications.
     #
     # @option params [Types::NotificationConfig] :notification_config
     #   Configurations for sending notifications.
+    #
+    # @option params [Types::CloudWatchOutputConfig] :cloud_watch_output_config
+    #   Enables Systems Manager to send Run Command output to Amazon
+    #   CloudWatch Logs.
     #
     # @return [Types::SendCommandResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5482,6 +5509,10 @@ module Aws::SSM
     #       notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
     #       notification_type: "Command", # accepts Command, Invocation
     #     },
+    #     cloud_watch_output_config: {
+    #       cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #       cloud_watch_output_enabled: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -5511,11 +5542,14 @@ module Aws::SSM
     #   resp.command.target_count #=> Integer
     #   resp.command.completed_count #=> Integer
     #   resp.command.error_count #=> Integer
+    #   resp.command.delivery_timed_out_count #=> Integer
     #   resp.command.service_role #=> String
     #   resp.command.notification_config.notification_arn #=> String
     #   resp.command.notification_config.notification_events #=> Array
     #   resp.command.notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.command.notification_config.notification_type #=> String, one of "Command", "Invocation"
+    #   resp.command.cloud_watch_output_config.cloud_watch_log_group_name #=> String
+    #   resp.command.cloud_watch_output_config.cloud_watch_output_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommand AWS API Documentation
     #
@@ -6539,7 +6573,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

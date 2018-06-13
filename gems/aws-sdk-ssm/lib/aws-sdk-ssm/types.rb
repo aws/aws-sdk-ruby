@@ -745,6 +745,35 @@ module Aws::SSM
     #
     class CancelCommandResult < Aws::EmptyStructure; end
 
+    # Configuration options for sending command output to CloudWatch Logs.
+    #
+    # @note When making an API call, you may pass CloudWatchOutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #         cloud_watch_output_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] cloud_watch_log_group_name
+    #   The name of the CloudWatch log group where you want to send command
+    #   output. If you don't specify a group name, Systems Manager
+    #   automatically creates a log group for you. The log group uses the
+    #   following naming format: aws/ssm/*SystemsManagerDocumentName*.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_watch_output_enabled
+    #   Enables Systems Manager to send command output to CloudWatch Logs.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CloudWatchOutputConfig AWS API Documentation
+    #
+    class CloudWatchOutputConfig < Struct.new(
+      :cloud_watch_log_group_name,
+      :cloud_watch_output_enabled)
+      include Aws::Structure
+    end
+
     # Describes a command request.
     #
     # @!attribute [rw] command_id
@@ -798,8 +827,9 @@ module Aws::SSM
     #   more information than Status because it includes states resulting
     #   from error and concurrency control parameters. StatusDetails can
     #   show different results than Status. For more information about these
-    #   statuses, see [Run Command Status][1]. StatusDetails can be one of
-    #   the following values:
+    #   statuses, see [Understanding Command Statuses][1] in the *AWS
+    #   Systems Manager User Guide*. StatusDetails can be one of the
+    #   following values:
     #
     #   * Pending: The command has not been sent to any instances.
     #
@@ -835,7 +865,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] output_s3_region
@@ -860,7 +890,8 @@ module Aws::SSM
     #   command at the same time. You can specify a number of instances,
     #   such as 10, or a percentage of instances, such as 10%. The default
     #   value is 50. For more information about how to use MaxConcurrency,
-    #   see [Executing a Command Using Systems Manager Run Command][1].
+    #   see [Executing Commands Using Systems Manager Run Command][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -872,7 +903,8 @@ module Aws::SSM
     #   the command to additional targets. You can specify a number of
     #   errors, such as 10, or a percentage or errors, such as 10%. The
     #   default value is 0. For more information about how to use MaxErrors,
-    #   see [Executing a Command Using Systems Manager Run Command][1].
+    #   see [Executing Commands Using Systems Manager Run Command][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -895,6 +927,10 @@ module Aws::SSM
     #   Timed Out.
     #   @return [Integer]
     #
+    # @!attribute [rw] delivery_timed_out_count
+    #   The number of targets for which the status is Delivery Timed Out.
+    #   @return [Integer]
+    #
     # @!attribute [rw] service_role
     #   The IAM service role that Run Command uses to act on your behalf
     #   when sending notifications about command status changes.
@@ -904,6 +940,11 @@ module Aws::SSM
     #   Configurations for sending notifications about command status
     #   changes.
     #   @return [Types::NotificationConfig]
+    #
+    # @!attribute [rw] cloud_watch_output_config
+    #   CloudWatch Logs information where you want Systems Manager to send
+    #   the command output.
+    #   @return [Types::CloudWatchOutputConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Command AWS API Documentation
     #
@@ -927,8 +968,10 @@ module Aws::SSM
       :target_count,
       :completed_count,
       :error_count,
+      :delivery_timed_out_count,
       :service_role,
-      :notification_config)
+      :notification_config,
+      :cloud_watch_output_config)
       include Aws::Structure
     end
 
@@ -1006,8 +1049,9 @@ module Aws::SSM
     #   information than Status because it includes states resulting from
     #   error and concurrency control parameters. StatusDetails can show
     #   different results than Status. For more information about these
-    #   statuses, see [Run Command Status][1]. StatusDetails can be one of
-    #   the following values:
+    #   statuses, see [Understanding Command Statuses][1] in the *AWS
+    #   Systems Manager User Guide*. StatusDetails can be one of the
+    #   following values:
     #
     #   * Pending: The command has not been sent to the instance.
     #
@@ -1050,7 +1094,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] trace_output
@@ -1087,6 +1131,11 @@ module Aws::SSM
     #   changes on a per instance basis.
     #   @return [Types::NotificationConfig]
     #
+    # @!attribute [rw] cloud_watch_output_config
+    #   CloudWatch Logs information where you want Systems Manager to send
+    #   the command output.
+    #   @return [Types::CloudWatchOutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandInvocation AWS API Documentation
     #
     class CommandInvocation < Struct.new(
@@ -1104,7 +1153,8 @@ module Aws::SSM
       :standard_error_url,
       :command_plugins,
       :service_role,
-      :notification_config)
+      :notification_config,
+      :cloud_watch_output_config)
       include Aws::Structure
     end
 
@@ -1127,8 +1177,9 @@ module Aws::SSM
     #   more information than Status because it includes states resulting
     #   from error and concurrency control parameters. StatusDetails can
     #   show different results than Status. For more information about these
-    #   statuses, see [Run Command Status][1]. StatusDetails can be one of
-    #   the following values:
+    #   statuses, see [Understanding Command Statuses][1] in the *AWS
+    #   Systems Manager User Guide*. StatusDetails can be one of the
+    #   following values:
     #
     #   * Pending: The command has not been sent to the instance.
     #
@@ -1171,7 +1222,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] response_code
@@ -2267,7 +2318,8 @@ module Aws::SSM
     #
     # @!attribute [rw] deletion_summary
     #   A summary of the delete operation. For more information about this
-    #   summary, see [Understanding the Delete Inventory Summary][1].
+    #   summary, see [Understanding the Delete Inventory Summary][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -4604,8 +4656,9 @@ module Aws::SSM
     #   StatusDetails includes more information than Status because it
     #   includes states resulting from error and concurrency control
     #   parameters. StatusDetails can show different results than Status.
-    #   For more information about these statuses, see [Run Command
-    #   Status][1]. StatusDetails can be one of the following values:
+    #   For more information about these statuses, see [Understanding
+    #   Command Statuses][1] in the *AWS Systems Manager User Guide*.
+    #   StatusDetails can be one of the following values:
     #
     #   * Pending: The command has not been sent to the instance.
     #
@@ -4654,7 +4707,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [String]
     #
     # @!attribute [rw] standard_output_content
@@ -4679,6 +4732,11 @@ module Aws::SSM
     #   the command has not finished executing, then this string is empty.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_watch_output_config
+    #   CloudWatch Logs information where Systems Manager sent the command
+    #   output.
+    #   @return [Types::CloudWatchOutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationResult AWS API Documentation
     #
     class GetCommandInvocationResult < Struct.new(
@@ -4697,7 +4755,8 @@ module Aws::SSM
       :standard_output_content,
       :standard_output_url,
       :standard_error_content,
-      :standard_error_url)
+      :standard_error_url,
+      :cloud_watch_output_config)
       include Aws::Structure
     end
 
@@ -6009,7 +6068,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] ping_status
-    #   Connection status of the SSM Agent.
+    #   Connection status of SSM Agent.
     #   @return [String]
     #
     # @!attribute [rw] last_ping_date_time
@@ -6017,11 +6076,11 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] agent_version
-    #   The version of the SSM Agent running on your Linux instance.
+    #   The version of SSM Agent running on your Linux instance.
     #   @return [String]
     #
     # @!attribute [rw] is_latest_version
-    #   Indicates whether latest version of the SSM Agent is running on your
+    #   Indicates whether latest version of SSM Agent is running on your
     #   instance. Some older versions of Windows Server use the EC2Config
     #   service to process SSM requests. For this reason, this field does
     #   not indicate whether or not the latest version is installed on
@@ -6046,8 +6105,9 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] iam_role
-    #   The Amazon Identity and Access Management (IAM) role assigned to EC2
-    #   instances or managed instances.
+    #   The Amazon Identity and Access Management (IAM) role assigned to the
+    #   on-premises Systems Manager managed instances. This call does not
+    #   return the IAM role for Amazon EC2 instances.
     #   @return [String]
     #
     # @!attribute [rw] registration_date
@@ -6355,7 +6415,8 @@ module Aws::SSM
     #
     # @!attribute [rw] deletion_summary
     #   Information about the delete operation. For more information about
-    #   this summary, see [Understanding the Delete Inventory Summary][1].
+    #   this summary, see [Understanding the Delete Inventory Summary][1] in
+    #   the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -8222,12 +8283,12 @@ module Aws::SSM
     #   The different events for which you can receive notifications. These
     #   events include the following: All (events), InProgress, Success,
     #   TimedOut, Cancelled, Failed. To learn more about these events, see
-    #   [Setting Up Events and Notifications][1] in the *AWS Systems Manager
-    #   User Guide*.
+    #   [Configuring Amazon SNS Notifications for Run Command][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/rc-sns-notifications.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] notification_type
@@ -8386,6 +8447,11 @@ module Aws::SSM
 
     # One or more filters. Use a filter to return a more specific list of
     # results.
+    #
+    # <note markdown="1"> The `Name` field can't be used with the GetParametersByPath API
+    # action.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass ParameterStringFilter
     #   data as a hash:
@@ -8645,6 +8711,11 @@ module Aws::SSM
     #
     # * `WindowsServer2016`
     #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
+    #
     # *Supported key:* `CLASSIFICATION`
     #
     # *Supported values:*
@@ -8696,6 +8767,11 @@ module Aws::SSM
     # * `Ubuntu14.04`
     #
     # * `Ubuntu16.04`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
     #
     # *Supported key:* `PRIORITY`
     #
@@ -8749,6 +8825,11 @@ module Aws::SSM
     # * `AmazonLinux2017.03`
     #
     # * `AmazonLinux2017.09`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
     #
     # *Supported key:* `CLASSIFICATION`
     #
@@ -8806,6 +8887,11 @@ module Aws::SSM
     #
     # * `RedhatEnterpriseLinux7.4`
     #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
+    #
     # *Supported key:* `CLASSIFICATION`
     #
     # *Supported values:*
@@ -8861,6 +8947,11 @@ module Aws::SSM
     # * `Suse12.8`
     #
     # * `Suse12.9`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
     #
     # *Supported key:* `CLASSIFICATION`
     #
@@ -8919,6 +9010,11 @@ module Aws::SSM
     # * `CentOS7.3`
     #
     # * `CentOS7.4`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
     #
     # *Supported key:* `CLASSIFICATION`
     #
@@ -9077,7 +9173,9 @@ module Aws::SSM
     #
     # @!attribute [rw] approve_after_days
     #   The number of days after the release date of each patch matched by
-    #   the rule the patch is marked as approved in the patch baseline.
+    #   the rule that the patch is marked as approved in the patch baseline.
+    #   For example, a value of `7` means that patches are approved seven
+    #   days after they are released.
     #   @return [Integer]
     #
     # @!attribute [rw] enable_non_security
@@ -9349,8 +9447,8 @@ module Aws::SSM
     #   `/Dev/DBServer/MySQL/db-string13`
     #
     #   For information about parameter name requirements and restrictions,
-    #   see [About Creating Systems Manager Parameters][1] in the *AWS
-    #   Systems Manager User Guide*.
+    #   see [Creating Systems Manager Parameters][1] in the *AWS Systems
+    #   Manager User Guide*.
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
@@ -9361,7 +9459,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-paramstore-su-create-about
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -10133,6 +10231,10 @@ module Aws::SSM
     #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
     #           notification_type: "Command", # accepts Command, Invocation
     #         },
+    #         cloud_watch_output_config: {
+    #           cloud_watch_log_group_name: "CloudWatchLogGroupName",
+    #           cloud_watch_output_enabled: false,
+    #         },
     #       }
     #
     # @!attribute [rw] instance_ids
@@ -10140,7 +10242,8 @@ module Aws::SSM
     #   maximum of 50 IDs. If you prefer not to list individual instance
     #   IDs, you can instead send commands to a fleet of instances using the
     #   Targets parameter, which accepts EC2 tags. For more information
-    #   about how to use Targets, see [Sending Commands to a Fleet][1].
+    #   about how to use Targets, see [Sending Commands to a Fleet][1] in
+    #   the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -10152,7 +10255,7 @@ module Aws::SSM
     #   a Key,Value combination that you specify. Targets is required if you
     #   don't provide one or more instance IDs in the call. For more
     #   information about how to use Targets, see [Sending Commands to a
-    #   Fleet][1].
+    #   Fleet][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
@@ -10166,7 +10269,16 @@ module Aws::SSM
     #
     # @!attribute [rw] document_version
     #   The SSM document version to use in the request. You can specify
-    #   Default, Latest, or a specific version number.
+    #   $DEFAULT, $LATEST, or a specific version number. If you execute
+    #   commands by using the AWS CLI, then you must escape the first two
+    #   options by using a backslash. If you specify a version number, then
+    #   you don't need to use the backslash. For example:
+    #
+    #   --document-version "\\$DEFAULT"
+    #
+    #   --document-version "\\$LATEST"
+    #
+    #   --document-version "3"
     #   @return [String]
     #
     # @!attribute [rw] document_hash
@@ -10222,11 +10334,11 @@ module Aws::SSM
     #   execute the command at the same time. You can specify a number such
     #   as 10 or a percentage such as 10%. The default value is 50. For more
     #   information about how to use MaxConcurrency, see [Using Concurrency
-    #   Controls][1].
+    #   Controls][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-velocity.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -10235,11 +10347,11 @@ module Aws::SSM
     #   the systems stops sending the command to additional targets. You can
     #   specify a number like 10 or a percentage like 10%. The default value
     #   is 0. For more information about how to use MaxErrors, see [Using
-    #   Error Controls][1].
+    #   Error Controls][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -10249,6 +10361,11 @@ module Aws::SSM
     # @!attribute [rw] notification_config
     #   Configurations for sending notifications.
     #   @return [Types::NotificationConfig]
+    #
+    # @!attribute [rw] cloud_watch_output_config
+    #   Enables Systems Manager to send Run Command output to Amazon
+    #   CloudWatch Logs.
+    #   @return [Types::CloudWatchOutputConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommandRequest AWS API Documentation
     #
@@ -10268,7 +10385,8 @@ module Aws::SSM
       :max_concurrency,
       :max_errors,
       :service_role_arn,
-      :notification_config)
+      :notification_config,
+      :cloud_watch_output_config)
       include Aws::Structure
     end
 
@@ -10642,12 +10760,12 @@ module Aws::SSM
     #   User-defined criteria for sending commands that target instances
     #   that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or
     #   InstanceIds. For more information about how to send commands that
-    #   target instances using Key,Value parameters, see [Executing a
-    #   Command Using Systems Manager Run Command][1].
+    #   target instances using Key,Value parameters, see [Targeting Multiple
+    #   Instances][1] in the *AWS Systems Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -10656,7 +10774,8 @@ module Aws::SSM
     #   execute a command on instances that include Amazon EC2 tags of
     #   ServerRole,WebServer. For more information about how to send
     #   commands that target instances using Key,Value parameters, see
-    #   [Executing a Command Using Systems Manager Run Command][1].
+    #   [Sending Commands to a Fleet][1] in the *AWS Systems Manager User
+    #   Guide*.
     #
     #
     #

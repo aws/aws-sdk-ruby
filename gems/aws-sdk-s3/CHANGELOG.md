@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2018-06-13)
+------------------
+
 * Feature - Adds support for `Aws::S3::Object#upload_stream`, allowing streaming uploads outside of a File-based interface.
 
 1.13.0 (2018-05-22)
