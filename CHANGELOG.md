@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.68 (2018-06-13)
+------------------
+
 * Feature - Aws::ServiceCatalog - Updated the API for AWS Service Catalog.
 
 * Feature - Aws::SSM - Updated the API, documentation, and integration test for Amazon Simple Systems Manager (SSM).
