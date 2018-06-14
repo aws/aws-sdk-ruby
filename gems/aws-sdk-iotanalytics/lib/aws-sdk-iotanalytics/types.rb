@@ -235,6 +235,12 @@ module Aws::IoTAnalytics
     #           unlimited: false,
     #           number_of_days: 1,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] channel_name
@@ -245,9 +251,14 @@ module Aws::IoTAnalytics
     #   How long, in days, message data is kept for the channel.
     #   @return [Types::RetentionPeriod]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the channel.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateChannelRequest < Struct.new(
       :channel_name,
-      :retention_period)
+      :retention_period,
+      :tags)
       include Aws::Structure
     end
 
@@ -306,6 +317,12 @@ module Aws::IoTAnalytics
     #             },
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dataset_name
@@ -323,10 +340,15 @@ module Aws::IoTAnalytics
     #   can be empty or contain up to five **DataSetTrigger** objects.
     #   @return [Array<Types::DatasetTrigger>]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the data set.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateDatasetRequest < Struct.new(
       :dataset_name,
       :actions,
-      :triggers)
+      :triggers,
+      :tags)
       include Aws::Structure
     end
 
@@ -353,6 +375,12 @@ module Aws::IoTAnalytics
     #           unlimited: false,
     #           number_of_days: 1,
     #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] datastore_name
@@ -363,9 +391,14 @@ module Aws::IoTAnalytics
     #   How long, in days, message data is kept for the data store.
     #   @return [Types::RetentionPeriod]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the data store.
+    #   @return [Array<Types::Tag>]
+    #
     class CreateDatastoreRequest < Struct.new(
       :datastore_name,
-      :retention_period)
+      :retention_period,
+      :tags)
       include Aws::Structure
     end
 
@@ -454,6 +487,12 @@ module Aws::IoTAnalytics
     #             },
     #           },
     #         ],
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] pipeline_name
@@ -471,9 +510,14 @@ module Aws::IoTAnalytics
     #   normalize device data.
     #   @return [Array<Types::PipelineActivity>]
     #
+    # @!attribute [rw] tags
+    #   Metadata which can be used to manage the pipeline.
+    #   @return [Array<Types::Tag>]
+    #
     class CreatePipelineRequest < Struct.new(
       :pipeline_name,
-      :pipeline_activities)
+      :pipeline_activities,
+      :tags)
       include Aws::Structure
     end
 
@@ -1302,6 +1346,31 @@ module Aws::IoTAnalytics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource whose tags you want to list.
+    #   @return [String]
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags (metadata) which you have assigned to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # Information about logging options.
     #
     # @note When making an API call, you may pass LoggingOptions
@@ -1383,7 +1452,8 @@ module Aws::IoTAnalytics
     #       }
     #
     # @!attribute [rw] message_id
-    #   The ID you wish to assign to the message.
+    #   The ID you wish to assign to the message. Each "messageId" must be
+    #   unique within each batch sent.
     #   @return [String]
     #
     # @!attribute [rw] payload
@@ -1933,6 +2003,83 @@ module Aws::IoTAnalytics
       :reprocessing_id)
       include Aws::Structure
     end
+
+    # A set of key/value pairs which are used to manage the resource.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The tag's key.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag's value.
+    #   @return [String]
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: [ # required
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource whose tags will be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The new or modified tags for the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    class TagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource whose tags will be removed.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of those tags which will be removed.
+    #   @return [Array<String>]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateChannelRequest
     #   data as a hash:

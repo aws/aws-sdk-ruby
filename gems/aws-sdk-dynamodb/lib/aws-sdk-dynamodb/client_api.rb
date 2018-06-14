@@ -132,6 +132,7 @@ module Aws::DynamoDB
     ItemCollectionSizeLimitExceededException = Shapes::StructureShape.new(name: 'ItemCollectionSizeLimitExceededException')
     ItemCount = Shapes::IntegerShape.new(name: 'ItemCount')
     ItemList = Shapes::ListShape.new(name: 'ItemList')
+    KMSMasterKeyArn = Shapes::StringShape.new(name: 'KMSMasterKeyArn')
     Key = Shapes::MapShape.new(name: 'Key')
     KeyConditions = Shapes::MapShape.new(name: 'KeyConditions')
     KeyExpression = Shapes::StringShape.new(name: 'KeyExpression')
@@ -218,6 +219,7 @@ module Aws::DynamoDB
     SSEEnabled = Shapes::BooleanShape.new(name: 'SSEEnabled')
     SSESpecification = Shapes::StructureShape.new(name: 'SSESpecification')
     SSEStatus = Shapes::StringShape.new(name: 'SSEStatus')
+    SSEType = Shapes::StringShape.new(name: 'SSEType')
     ScalarAttributeType = Shapes::StringShape.new(name: 'ScalarAttributeType')
     ScanInput = Shapes::StructureShape.new(name: 'ScanInput')
     ScanOutput = Shapes::StructureShape.new(name: 'ScanOutput')
@@ -833,6 +835,8 @@ module Aws::DynamoDB
     RestoreTableToPointInTimeOutput.struct_class = Types::RestoreTableToPointInTimeOutput
 
     SSEDescription.add_member(:status, Shapes::ShapeRef.new(shape: SSEStatus, location_name: "Status"))
+    SSEDescription.add_member(:sse_type, Shapes::ShapeRef.new(shape: SSEType, location_name: "SSEType"))
+    SSEDescription.add_member(:kms_master_key_arn, Shapes::ShapeRef.new(shape: KMSMasterKeyArn, location_name: "KMSMasterKeyArn"))
     SSEDescription.struct_class = Types::SSEDescription
 
     SSESpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: SSEEnabled, required: true, location_name: "Enabled"))

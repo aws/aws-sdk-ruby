@@ -219,6 +219,9 @@ module Aws::IoTAnalytics
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the channel.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the channel.
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel_name #channel_name} => String
@@ -233,6 +236,12 @@ module Aws::IoTAnalytics
     #       unlimited: false,
     #       number_of_days: 1,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -269,6 +278,9 @@ module Aws::IoTAnalytics
     #   at a specified time or time interval. The list of triggers can be
     #   empty or contain up to five **DataSetTrigger** objects.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the data set.
+    #
     # @return [Types::CreateDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatasetResponse#dataset_name #dataset_name} => String
@@ -291,6 +303,12 @@ module Aws::IoTAnalytics
     #         schedule: {
     #           expression: "ScheduleExpression",
     #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -335,6 +353,9 @@ module Aws::IoTAnalytics
     # @option params [Types::RetentionPeriod] :retention_period
     #   How long, in days, message data is kept for the data store.
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the data store.
+    #
     # @return [Types::CreateDatastoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatastoreResponse#datastore_name #datastore_name} => String
@@ -349,6 +370,12 @@ module Aws::IoTAnalytics
     #       unlimited: false,
     #       number_of_days: 1,
     #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -381,6 +408,9 @@ module Aws::IoTAnalytics
     #   values; invoking your Lambda functions on messages for advanced
     #   processing; or performing mathematical transformations to normalize
     #   device data.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Metadata which can be used to manage the pipeline.
     #
     # @return [Types::CreatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -450,6 +480,12 @@ module Aws::IoTAnalytics
     #           role_arn: "RoleArn", # required
     #           next: "ActivityName",
     #         },
+    #       },
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
     #       },
     #     ],
     #   })
@@ -962,7 +998,41 @@ module Aws::IoTAnalytics
       req.send_request(options)
     end
 
+    # Lists the tags (metadata) which you have assigned to the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource whose tags you want to list.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].key #=> String
+    #   resp.tags[0].value #=> String
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Sets or updates the AWS IoT Analytics logging options.
+    #
+    # Note that if you update the value of any `loggingOptions` field, it
+    # takes up to one minute for the change to take effect. Also, if you
+    # change the policy attached to the role you specified in the roleArn
+    # field (for example, to correct an invalid policy) it takes up to 5
+    # minutes for that change to take effect.
     #
     # @option params [required, Types::LoggingOptions] :logging_options
     #   The new values of the AWS IoT Analytics logging options.
@@ -1155,6 +1225,60 @@ module Aws::IoTAnalytics
     # @param [Hash] params ({})
     def start_pipeline_reprocessing(params = {}, options = {})
       req = build_request(:start_pipeline_reprocessing, params)
+      req.send_request(options)
+    end
+
+    # Adds to or modifies the tags of the given resource. Tags are metadata
+    # which can be used to manage a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource whose tags will be modified.
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   The new or modified tags for the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: [ # required
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the given tags (metadata) from the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource whose tags will be removed.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of those tags which will be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -1358,7 +1482,7 @@ module Aws::IoTAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotanalytics'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

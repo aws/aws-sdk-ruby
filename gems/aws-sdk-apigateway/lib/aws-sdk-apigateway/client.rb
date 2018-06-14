@@ -656,7 +656,7 @@ module Aws::APIGateway
     #     regional_certificate_name: "String",
     #     regional_certificate_arn: "String",
     #     endpoint_configuration: {
-    #       types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #       types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
     #     },
     #   })
     #
@@ -673,7 +673,7 @@ module Aws::APIGateway
     #   resp.distribution_domain_name #=> String
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
-    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #
     # @overload create_domain_name(params = {})
     # @param [Hash] params ({})
@@ -935,7 +935,7 @@ module Aws::APIGateway
     #     minimum_compression_size: 1,
     #     api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #     endpoint_configuration: {
-    #       types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #       types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
     #     },
     #     policy: "String",
     #   })
@@ -954,7 +954,7 @@ module Aws::APIGateway
     #   resp.minimum_compression_size #=> Integer
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
-    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.policy #=> String
     #
     # @overload create_rest_api(params = {})
@@ -2583,7 +2583,7 @@ module Aws::APIGateway
     #   resp.distribution_domain_name #=> String
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
-    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #
     # @overload get_domain_name(params = {})
     # @param [Hash] params ({})
@@ -2628,7 +2628,7 @@ module Aws::APIGateway
     #   resp.items[0].distribution_domain_name #=> String
     #   resp.items[0].distribution_hosted_zone_id #=> String
     #   resp.items[0].endpoint_configuration.types #=> Array
-    #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #
     # @overload get_domain_names(params = {})
     # @param [Hash] params ({})
@@ -2653,11 +2653,11 @@ module Aws::APIGateway
     #   A key-value map of query string parameters that specify properties of
     #   the export, depending on the requested `exportType`. For `exportType`
     #   `swagger`, any combination of the following parameters are supported:
-    #   `integrations` will export the API with
-    #   x-amazon-apigateway-integration extensions. `authorizers` will export
-    #   the API with x-amazon-apigateway-authorizer extensions. `postman` will
-    #   export the API with Postman extensions, allowing for import to the
-    #   Postman tool
+    #   `extensions='integrations'` or `extensions='apigateway'` will export
+    #   the API with x-amazon-apigateway-integration extensions.
+    #   `extensions='authorizers'` will export the API with
+    #   x-amazon-apigateway-authorizer extensions. `postman` will export the
+    #   API with Postman extensions, allowing for import to the Postman tool
     #
     # @option params [String] :accepts
     #   The content-type of the export, for example `application/json`.
@@ -3476,7 +3476,7 @@ module Aws::APIGateway
     #   resp.minimum_compression_size #=> Integer
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
-    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.policy #=> String
     #
     # @overload get_rest_api(params = {})
@@ -3523,7 +3523,7 @@ module Aws::APIGateway
     #   resp.items[0].minimum_compression_size #=> Integer
     #   resp.items[0].api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.items[0].endpoint_configuration.types #=> Array
-    #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.items[0].endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.items[0].policy #=> String
     #
     # @overload get_rest_apis(params = {})
@@ -4261,8 +4261,9 @@ module Aws::APIGateway
     #   `ignore=documentation`.
     #
     #   To configure the endpoint type, set `parameters` as
-    #   `endpointConfigurationTypes=EDGE`
-    #   or`endpointConfigurationTypes=REGIONAL`. The default endpoint type is
+    #   `endpointConfigurationTypes=EDGE`,
+    #   `endpointConfigurationTypes=REGIONAL`, or
+    #   `endpointConfigurationTypes=PRIVATE`. The default endpoint type is
     #   `EDGE`.
     #
     #   To handle imported `basePath`, set `parameters` as `basePath=ignore`,
@@ -4271,12 +4272,12 @@ module Aws::APIGateway
     #   For example, the AWS CLI command to exclude documentation from the
     #   imported API is:
     #
-    #       aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json
+    #       aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'
     #
     #   The AWS CLI command to set the regional endpoint on the imported API
     #   is:
     #
-    #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json
+    #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json'
     #
     # @option params [required, String, IO] :body
     #   \[Required\] The POST request body containing external API
@@ -4321,7 +4322,7 @@ module Aws::APIGateway
     #   resp.minimum_compression_size #=> Integer
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
-    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.policy #=> String
     #
     # @overload import_rest_api(params = {})
@@ -4954,7 +4955,7 @@ module Aws::APIGateway
     #   exclude DocumentationParts from an imported API, set
     #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
     #   command of `aws apigateway import-rest-api --parameters
-    #   ignore=documentation --body 'file:///path/to/imported-api-body.json`.
+    #   ignore=documentation --body 'file:///path/to/imported-api-body.json'`.
     #
     # @option params [required, String, IO] :body
     #   \[Required\] The PUT request body containing external API definitions.
@@ -5001,7 +5002,7 @@ module Aws::APIGateway
     #   resp.minimum_compression_size #=> Integer
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
-    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.policy #=> String
     #
     # @overload put_rest_api(params = {})
@@ -5682,7 +5683,7 @@ module Aws::APIGateway
     #   resp.distribution_domain_name #=> String
     #   resp.distribution_hosted_zone_id #=> String
     #   resp.endpoint_configuration.types #=> Array
-    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #
     # @overload update_domain_name(params = {})
     # @param [Hash] params ({})
@@ -6305,7 +6306,7 @@ module Aws::APIGateway
     #   resp.minimum_compression_size #=> Integer
     #   resp.api_key_source #=> String, one of "HEADER", "AUTHORIZER"
     #   resp.endpoint_configuration.types #=> Array
-    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE"
+    #   resp.endpoint_configuration.types[0] #=> String, one of "REGIONAL", "EDGE", "PRIVATE"
     #   resp.policy #=> String
     #
     # @overload update_rest_api(params = {})
@@ -6576,7 +6577,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

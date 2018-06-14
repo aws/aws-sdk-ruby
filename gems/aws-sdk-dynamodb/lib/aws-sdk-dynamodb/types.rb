@@ -1961,8 +1961,8 @@ module Aws::DynamoDB
     end
 
     # @!attribute [rw] continuous_backups_description
-    #   `ContinuousBackupsDescription` can be one of the following :
-    #   ENABLED, DISABLED.
+    #   Represents the continuous backups and point in time recovery
+    #   settings on the table.
     #   @return [Types::ContinuousBackupsDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackupsOutput AWS API Documentation
@@ -3238,7 +3238,11 @@ module Aws::DynamoDB
     #   @return [Time]
     #
     # @!attribute [rw] exclusive_start_backup_arn
-    #   `LastEvaluatedBackupARN` returned by the previous ListBackups call.
+    #   `LastEvaluatedBackupArn` is the ARN of the backup last evaluated
+    #   when the current page of results was returned, inclusive of the
+    #   current page of results. This value may be specified as the
+    #   `ExclusiveStartBackupArn` of a new `ListBackups` operation in order
+    #   to fetch the next page of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackupsInput AWS API Documentation
@@ -3257,7 +3261,18 @@ module Aws::DynamoDB
     #   @return [Array<Types::BackupSummary>]
     #
     # @!attribute [rw] last_evaluated_backup_arn
-    #   Last evaluated BackupARN.
+    #   The ARN of the backup last evaluated when the current page of
+    #   results was returned, inclusive of the current page of results. This
+    #   value may be specified as the `ExclusiveStartBackupArn` of a new
+    #   `ListBackups` operation in order to fetch the next page of results.
+    #
+    #   If `LastEvaluatedBackupArn` is empty, then the last page of results
+    #   has been processed and there are no more results to be retrieved.
+    #
+    #   If `LastEvaluatedBackupArn` is not empty, this may or may not
+    #   indicate there is more data to be returned. All results are
+    #   guaranteed to have been returned if and only if no value for
+    #   `LastEvaluatedBackupArn` is returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackupsOutput AWS API Documentation
@@ -4998,10 +5013,25 @@ module Aws::DynamoDB
     #   * `DISABLED` - Server-side encryption is disabled.
     #   @return [String]
     #
+    # @!attribute [rw] sse_type
+    #   Server-side encryption type:
+    #
+    #   * `AES256` - Server-side encryption which uses the AES256 algorithm.
+    #
+    #   * `KMS` - Server-side encryption which uses AWS Key Management
+    #     Service.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_master_key_arn
+    #   The KMS master key ARN used for the KMS encryption.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSEDescription AWS API Documentation
     #
     class SSEDescription < Struct.new(
-      :status)
+      :status,
+      :sse_type,
+      :kms_master_key_arn)
       include Aws::Structure
     end
 

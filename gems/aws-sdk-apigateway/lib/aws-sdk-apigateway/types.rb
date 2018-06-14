@@ -938,7 +938,7 @@ module Aws::APIGateway
     #         regional_certificate_name: "String",
     #         regional_certificate_arn: "String",
     #         endpoint_configuration: {
-    #           types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
     #         },
     #       }
     #
@@ -1139,7 +1139,7 @@ module Aws::APIGateway
     #         minimum_compression_size: 1,
     #         api_key_source: "HEADER", # accepts HEADER, AUTHORIZER
     #         endpoint_configuration: {
-    #           types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #           types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
     #         },
     #         policy: "String",
     #       }
@@ -2482,14 +2482,15 @@ module Aws::APIGateway
     #   data as a hash:
     #
     #       {
-    #         types: ["REGIONAL"], # accepts REGIONAL, EDGE
+    #         types: ["REGIONAL"], # accepts REGIONAL, EDGE, PRIVATE
     #       }
     #
     # @!attribute [rw] types
     #   A list of endpoint types of an API (RestApi) or its custom domain
     #   name (DomainName). For an edge-optimized API and its custom domain
     #   name, the endpoint type is `"EDGE"`. For a regional API and its
-    #   custom domain name, the endpoint type is `REGIONAL`.
+    #   custom domain name, the endpoint type is `REGIONAL`. For a private
+    #   API, the endpoint type is `PRIVATE`.
     #   @return [Array<String>]
     #
     class EndpointConfiguration < Struct.new(
@@ -3258,11 +3259,12 @@ module Aws::APIGateway
     #   A key-value map of query string parameters that specify properties
     #   of the export, depending on the requested `exportType`. For
     #   `exportType` `swagger`, any combination of the following parameters
-    #   are supported: `integrations` will export the API with
-    #   x-amazon-apigateway-integration extensions. `authorizers` will
-    #   export the API with x-amazon-apigateway-authorizer extensions.
-    #   `postman` will export the API with Postman extensions, allowing for
-    #   import to the Postman tool
+    #   are supported: `extensions='integrations'` or
+    #   `extensions='apigateway'` will export the API with
+    #   x-amazon-apigateway-integration extensions.
+    #   `extensions='authorizers'` will export the API with
+    #   x-amazon-apigateway-authorizer extensions. `postman` will export the
+    #   API with Postman extensions, allowing for import to the Postman tool
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] accepts
@@ -4266,9 +4268,10 @@ module Aws::APIGateway
     #   `ignore=documentation`.
     #
     #   To configure the endpoint type, set `parameters` as
-    #   `endpointConfigurationTypes=EDGE`
-    #   or`endpointConfigurationTypes=REGIONAL`. The default endpoint type
-    #   is `EDGE`.
+    #   `endpointConfigurationTypes=EDGE`,
+    #   `endpointConfigurationTypes=REGIONAL`, or
+    #   `endpointConfigurationTypes=PRIVATE`. The default endpoint type is
+    #   `EDGE`.
     #
     #   To handle imported `basePath`, set `parameters` as
     #   `basePath=ignore`, `basePath=prepend` or `basePath=split`.
@@ -4276,12 +4279,12 @@ module Aws::APIGateway
     #   For example, the AWS CLI command to exclude documentation from the
     #   imported API is:
     #
-    #       aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json
+    #       aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'
     #
     #   The AWS CLI command to set the regional endpoint on the imported API
     #   is:
     #
-    #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json
+    #       aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json'
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] body
@@ -5721,7 +5724,7 @@ module Aws::APIGateway
     #   `ignore=documentation` as a `parameters` value, as in the AWS CLI
     #   command of `aws apigateway import-rest-api --parameters
     #   ignore=documentation --body
-    #   'file:///path/to/imported-api-body.json`.
+    #   'file:///path/to/imported-api-body.json'`.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] body
