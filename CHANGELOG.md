@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.69 (2018-06-14)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, documentation, and integration test for Amazon API Gateway.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
