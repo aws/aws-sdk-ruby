@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.70 (2018-06-15)
+------------------
+
 * Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
 
 2.11.69 (2018-06-14)
