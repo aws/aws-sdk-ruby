@@ -223,6 +223,7 @@ module Aws::MediaConvert
     #           },
     #           audio_selectors: {
     #             "__string" => {
+    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
@@ -246,6 +247,7 @@ module Aws::MediaConvert
     #           },
     #           caption_selectors: {
     #             "__string" => {
+    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               source_settings: { # required
     #                 ancillary_source_settings: {
@@ -325,7 +327,7 @@ module Aws::MediaConvert
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
-    #                 static_key_provider: { # required
+    #                 static_key_provider: {
     #                   key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
     #                   key_format_versions: "__stringPatternDD",
     #                   static_key_value: "__stringPatternAZaZ0932", # required
@@ -368,6 +370,7 @@ module Aws::MediaConvert
     #               caption_language_mappings: [
     #                 {
     #                   caption_channel: 1,
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_description: "__string",
     #                 },
@@ -501,6 +504,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1,
     #                     },
     #                   },
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   remix_settings: {
@@ -520,6 +524,7 @@ module Aws::MediaConvert
     #               caption_descriptions: [
     #                 {
     #                   caption_selector_name: "__stringMin1", # required
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   destination_settings: { # required
     #                     burnin_destination_settings: {
     #                       alignment: "CENTERED", # required, accepts CENTERED, LEFT
@@ -932,6 +937,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
     #   resp.job.settings.inputs[0].audio_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
@@ -948,6 +954,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].audio_selectors["__string"].tracks #=> Array
     #   resp.job.settings.inputs[0].audio_selectors["__string"].tracks[0] #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors #=> Hash
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
@@ -1029,6 +1036,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].custom_language_code #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
@@ -1130,6 +1138,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].custom_language_code #=> String
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -1140,6 +1149,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].stream_name #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -1503,6 +1513,7 @@ module Aws::MediaConvert
     #           },
     #           audio_selectors: {
     #             "__string" => {
+    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
@@ -1526,6 +1537,7 @@ module Aws::MediaConvert
     #           },
     #           caption_selectors: {
     #             "__string" => {
+    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               source_settings: { # required
     #                 ancillary_source_settings: {
@@ -1604,7 +1616,7 @@ module Aws::MediaConvert
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
-    #                 static_key_provider: { # required
+    #                 static_key_provider: {
     #                   key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
     #                   key_format_versions: "__stringPatternDD",
     #                   static_key_value: "__stringPatternAZaZ0932", # required
@@ -1647,6 +1659,7 @@ module Aws::MediaConvert
     #               caption_language_mappings: [
     #                 {
     #                   caption_channel: 1,
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_description: "__string",
     #                 },
@@ -1780,6 +1793,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1,
     #                     },
     #                   },
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   remix_settings: {
@@ -1799,6 +1813,7 @@ module Aws::MediaConvert
     #               caption_descriptions: [
     #                 {
     #                   caption_selector_name: "__stringMin1", # required
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   destination_settings: { # required
     #                     burnin_destination_settings: {
     #                       alignment: "CENTERED", # required, accepts CENTERED, LEFT
@@ -2202,6 +2217,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
@@ -2218,6 +2234,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].tracks #=> Array
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].tracks[0] #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
@@ -2298,6 +2315,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].custom_language_code #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
@@ -2399,6 +2417,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].custom_language_code #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -2409,6 +2428,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].stream_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -2824,6 +2844,7 @@ module Aws::MediaConvert
     #               sample_rate: 1,
     #             },
     #           },
+    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           remix_settings: {
@@ -2842,6 +2863,7 @@ module Aws::MediaConvert
     #       ],
     #       caption_descriptions: [
     #         {
+    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #           destination_settings: { # required
     #             burnin_destination_settings: {
     #               alignment: "CENTERED", # required, accepts CENTERED, LEFT
@@ -3266,6 +3288,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].custom_language_code #=> String
     #   resp.preset.settings.audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.preset.settings.audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -3275,6 +3298,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.preset.settings.audio_descriptions[0].stream_name #=> String
     #   resp.preset.settings.caption_descriptions #=> Array
+    #   resp.preset.settings.caption_descriptions[0].custom_language_code #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -3753,6 +3777,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
     #   resp.job.settings.inputs[0].audio_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
@@ -3769,6 +3794,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].audio_selectors["__string"].tracks #=> Array
     #   resp.job.settings.inputs[0].audio_selectors["__string"].tracks[0] #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors #=> Hash
+    #   resp.job.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
     #   resp.job.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
@@ -3850,6 +3876,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].custom_language_code #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
@@ -3951,6 +3978,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].custom_language_code #=> String
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -3961,6 +3989,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].audio_descriptions[0].stream_name #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -4309,6 +4338,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
@@ -4325,6 +4355,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].tracks #=> Array
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].tracks[0] #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
@@ -4405,6 +4436,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].custom_language_code #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
@@ -4506,6 +4538,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].custom_language_code #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -4516,6 +4549,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].stream_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -4910,6 +4944,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].custom_language_code #=> String
     #   resp.preset.settings.audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.preset.settings.audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -4919,6 +4954,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.preset.settings.audio_descriptions[0].stream_name #=> String
     #   resp.preset.settings.caption_descriptions #=> Array
+    #   resp.preset.settings.caption_descriptions[0].custom_language_code #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -5309,6 +5345,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_templates[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_templates[0].settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
@@ -5325,6 +5362,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].tracks #=> Array
     #   resp.job_templates[0].settings.inputs[0].audio_selectors["__string"].tracks[0] #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors #=> Hash
+    #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
@@ -5405,6 +5443,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].custom_language_code #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
@@ -5506,6 +5545,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].custom_language_code #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -5516,6 +5556,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].audio_descriptions[0].stream_name #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -5893,6 +5934,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.jobs[0].settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.jobs[0].settings.inputs[0].audio_selectors #=> Hash
+    #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
@@ -5909,6 +5951,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].tracks #=> Array
     #   resp.jobs[0].settings.inputs[0].audio_selectors["__string"].tracks[0] #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors #=> Hash
+    #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
@@ -5990,6 +6033,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].custom_language_code #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
@@ -6091,6 +6135,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].custom_language_code #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -6101,6 +6146,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].audio_descriptions[0].stream_name #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -6530,6 +6576,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.presets[0].settings.audio_descriptions[0].custom_language_code #=> String
     #   resp.presets[0].settings.audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.presets[0].settings.audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.presets[0].settings.audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -6539,6 +6586,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].stream_name #=> String
     #   resp.presets[0].settings.caption_descriptions #=> Array
+    #   resp.presets[0].settings.caption_descriptions[0].custom_language_code #=> String
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -6936,6 +6984,7 @@ module Aws::MediaConvert
     #           },
     #           audio_selectors: {
     #             "__string" => {
+    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
     #               external_audio_file_input: "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
@@ -6959,6 +7008,7 @@ module Aws::MediaConvert
     #           },
     #           caption_selectors: {
     #             "__string" => {
+    #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #               source_settings: { # required
     #                 ancillary_source_settings: {
@@ -7037,7 +7087,7 @@ module Aws::MediaConvert
     #                 constant_initialization_vector: "__stringMin32Max32Pattern09aFAF32",
     #                 encryption_method: "SAMPLE_AES", # accepts SAMPLE_AES
     #                 initialization_vector_in_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
-    #                 static_key_provider: { # required
+    #                 static_key_provider: {
     #                   key_format: "__stringPatternIdentityAZaZ26AZaZ09163",
     #                   key_format_versions: "__stringPatternDD",
     #                   static_key_value: "__stringPatternAZaZ0932", # required
@@ -7080,6 +7130,7 @@ module Aws::MediaConvert
     #               caption_language_mappings: [
     #                 {
     #                   caption_channel: 1,
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_description: "__string",
     #                 },
@@ -7213,6 +7264,7 @@ module Aws::MediaConvert
     #                       sample_rate: 1,
     #                     },
     #                   },
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #                   language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #                   remix_settings: {
@@ -7232,6 +7284,7 @@ module Aws::MediaConvert
     #               caption_descriptions: [
     #                 {
     #                   caption_selector_name: "__stringMin1", # required
+    #                   custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #                   destination_settings: { # required
     #                     burnin_destination_settings: {
     #                       alignment: "CENTERED", # required, accepts CENTERED, LEFT
@@ -7635,6 +7688,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names #=> Array
     #   resp.job_template.settings.inputs[0].audio_selector_groups["__string"].audio_selector_names[0] #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].audio_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].default_selection #=> String, one of "DEFAULT", "NOT_DEFAULT"
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].external_audio_file_input #=> String
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
@@ -7651,6 +7705,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].tracks #=> Array
     #   resp.job_template.settings.inputs[0].audio_selectors["__string"].tracks[0] #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors #=> Hash
+    #   resp.job_template.settings.inputs[0].caption_selectors["__string"].custom_language_code #=> String
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.ancillary_source_settings.source_ancillary_channel_number #=> Integer
     #   resp.job_template.settings.inputs[0].caption_selectors["__string"].source_settings.dvb_sub_source_settings.pid #=> Integer
@@ -7731,6 +7786,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.base_url #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings #=> Array
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].caption_channel #=> Integer
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].custom_language_code #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
@@ -7832,6 +7888,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].custom_language_code #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -7842,6 +7899,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].audio_descriptions[0].stream_name #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions #=> Array
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].caption_selector_name #=> String
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].custom_language_code #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -8255,6 +8313,7 @@ module Aws::MediaConvert
     #               sample_rate: 1,
     #             },
     #           },
+    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
     #           language_code_control: "FOLLOW_INPUT", # accepts FOLLOW_INPUT, USE_CONFIGURED
     #           remix_settings: {
@@ -8273,6 +8332,7 @@ module Aws::MediaConvert
     #       ],
     #       caption_descriptions: [
     #         {
+    #           custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #           destination_settings: { # required
     #             burnin_destination_settings: {
     #               alignment: "CENTERED", # required, accepts CENTERED, LEFT
@@ -8697,6 +8757,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.channels #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.format #=> String, one of "RIFF", "RF64"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.wav_settings.sample_rate #=> Integer
+    #   resp.preset.settings.audio_descriptions[0].custom_language_code #=> String
     #   resp.preset.settings.audio_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG"
     #   resp.preset.settings.audio_descriptions[0].language_code_control #=> String, one of "FOLLOW_INPUT", "USE_CONFIGURED"
     #   resp.preset.settings.audio_descriptions[0].remix_settings.channel_mapping.output_channels #=> Array
@@ -8706,6 +8767,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].remix_settings.channels_out #=> Integer
     #   resp.preset.settings.audio_descriptions[0].stream_name #=> String
     #   resp.preset.settings.caption_descriptions #=> Array
+    #   resp.preset.settings.caption_descriptions[0].custom_language_code #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.alignment #=> String, one of "CENTERED", "LEFT"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.burnin_destination_settings.background_opacity #=> Integer
@@ -9060,7 +9122,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

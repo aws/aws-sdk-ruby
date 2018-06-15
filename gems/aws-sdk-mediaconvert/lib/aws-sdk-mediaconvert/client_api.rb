@@ -473,6 +473,7 @@ module Aws::MediaConvert
     __stringMin1Max256 = Shapes::StringShape.new(name: '__stringMin1Max256')
     __stringMin32Max32Pattern09aFAF32 = Shapes::StringShape.new(name: '__stringMin32Max32Pattern09aFAF32')
     __stringMin3Max3Pattern1809aFAF09aEAE = Shapes::StringShape.new(name: '__stringMin3Max3Pattern1809aFAF09aEAE')
+    __stringMin3Max3PatternAZaZ3 = Shapes::StringShape.new(name: '__stringMin3Max3PatternAZaZ3')
     __stringPattern = Shapes::StringShape.new(name: '__stringPattern')
     __stringPattern010920405090509092 = Shapes::StringShape.new(name: '__stringPattern010920405090509092')
     __stringPattern01D20305D205D = Shapes::StringShape.new(name: '__stringPattern01D20305D205D')
@@ -533,6 +534,7 @@ module Aws::MediaConvert
     AudioDescription.add_member(:audio_type, Shapes::ShapeRef.new(shape: __integerMin0Max255, location_name: "audioType"))
     AudioDescription.add_member(:audio_type_control, Shapes::ShapeRef.new(shape: AudioTypeControl, location_name: "audioTypeControl"))
     AudioDescription.add_member(:codec_settings, Shapes::ShapeRef.new(shape: AudioCodecSettings, required: true, location_name: "codecSettings"))
+    AudioDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
     AudioDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     AudioDescription.add_member(:language_code_control, Shapes::ShapeRef.new(shape: AudioLanguageCodeControl, location_name: "languageCodeControl"))
     AudioDescription.add_member(:remix_settings, Shapes::ShapeRef.new(shape: RemixSettings, location_name: "remixSettings"))
@@ -547,6 +549,7 @@ module Aws::MediaConvert
     AudioNormalizationSettings.add_member(:target_lkfs, Shapes::ShapeRef.new(shape: __doubleMinNegative59Max0, location_name: "targetLkfs"))
     AudioNormalizationSettings.struct_class = Types::AudioNormalizationSettings
 
+    AudioSelector.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
     AudioSelector.add_member(:default_selection, Shapes::ShapeRef.new(shape: AudioDefaultSelection, location_name: "defaultSelection"))
     AudioSelector.add_member(:external_audio_file_input, Shapes::ShapeRef.new(shape: __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE, location_name: "externalAudioFileInput"))
     AudioSelector.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
@@ -588,11 +591,13 @@ module Aws::MediaConvert
     CancelJobResponse.struct_class = Types::CancelJobResponse
 
     CaptionDescription.add_member(:caption_selector_name, Shapes::ShapeRef.new(shape: __stringMin1, required: true, location_name: "captionSelectorName"))
+    CaptionDescription.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
     CaptionDescription.add_member(:destination_settings, Shapes::ShapeRef.new(shape: CaptionDestinationSettings, required: true, location_name: "destinationSettings"))
     CaptionDescription.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     CaptionDescription.add_member(:language_description, Shapes::ShapeRef.new(shape: __string, location_name: "languageDescription"))
     CaptionDescription.struct_class = Types::CaptionDescription
 
+    CaptionDescriptionPreset.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
     CaptionDescriptionPreset.add_member(:destination_settings, Shapes::ShapeRef.new(shape: CaptionDestinationSettings, required: true, location_name: "destinationSettings"))
     CaptionDescriptionPreset.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     CaptionDescriptionPreset.add_member(:language_description, Shapes::ShapeRef.new(shape: __string, location_name: "languageDescription"))
@@ -606,6 +611,7 @@ module Aws::MediaConvert
     CaptionDestinationSettings.add_member(:ttml_destination_settings, Shapes::ShapeRef.new(shape: TtmlDestinationSettings, location_name: "ttmlDestinationSettings"))
     CaptionDestinationSettings.struct_class = Types::CaptionDestinationSettings
 
+    CaptionSelector.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
     CaptionSelector.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     CaptionSelector.add_member(:source_settings, Shapes::ShapeRef.new(shape: CaptionSourceSettings, required: true, location_name: "sourceSettings"))
     CaptionSelector.struct_class = Types::CaptionSelector
@@ -624,7 +630,7 @@ module Aws::MediaConvert
     CmafEncryptionSettings.add_member(:constant_initialization_vector, Shapes::ShapeRef.new(shape: __stringMin32Max32Pattern09aFAF32, location_name: "constantInitializationVector"))
     CmafEncryptionSettings.add_member(:encryption_method, Shapes::ShapeRef.new(shape: CmafEncryptionType, location_name: "encryptionMethod"))
     CmafEncryptionSettings.add_member(:initialization_vector_in_manifest, Shapes::ShapeRef.new(shape: CmafInitializationVectorInManifest, location_name: "initializationVectorInManifest"))
-    CmafEncryptionSettings.add_member(:static_key_provider, Shapes::ShapeRef.new(shape: StaticKeyProvider, required: true, location_name: "staticKeyProvider"))
+    CmafEncryptionSettings.add_member(:static_key_provider, Shapes::ShapeRef.new(shape: StaticKeyProvider, location_name: "staticKeyProvider"))
     CmafEncryptionSettings.add_member(:type, Shapes::ShapeRef.new(shape: CmafKeyProviderType, required: true, location_name: "type"))
     CmafEncryptionSettings.struct_class = Types::CmafEncryptionSettings
 
@@ -941,6 +947,7 @@ module Aws::MediaConvert
     Hdr10Metadata.struct_class = Types::Hdr10Metadata
 
     HlsCaptionLanguageMapping.add_member(:caption_channel, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "captionChannel"))
+    HlsCaptionLanguageMapping.add_member(:custom_language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3PatternAZaZ3, location_name: "customLanguageCode"))
     HlsCaptionLanguageMapping.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "languageCode"))
     HlsCaptionLanguageMapping.add_member(:language_description, Shapes::ShapeRef.new(shape: __string, location_name: "languageDescription"))
     HlsCaptionLanguageMapping.struct_class = Types::HlsCaptionLanguageMapping
