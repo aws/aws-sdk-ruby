@@ -123,6 +123,9 @@ module Aws
       end
 
       def decode_message(io)
+        # incomplete message prelude received, leave it in the buffer
+        return [nil, true] if io.bytesize < PRELUDE_LENGTH
+
         # decode prelude
         total_len, headers_len, prelude_buffer = prelude(io)
 
