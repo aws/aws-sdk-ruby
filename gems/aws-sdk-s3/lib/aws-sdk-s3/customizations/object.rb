@@ -223,8 +223,16 @@ module Aws
       #  Note that this is known to have issues in JRuby until jruby-9.1.15.0, so avoid using this with older versions of JRuby.
       #
       # @example Streaming chunks of data
-      #     obj.upload_file do |write_stream|
-      #       10.times { write_stream << 'hello' }
+      #     obj.upload_stream do |write_stream|
+      #       10.times { write_stream << 'foo' }
+      #     end
+      # @example Streaming chunks of data
+      #     obj.upload_stream do |write_stream|
+      #       IO.copy_stream(IO.popen('ls'), write_stream)
+      #     end
+      # @example Streaming chunks of data
+      #     obj.upload_stream do |write_stream|
+      #       IO.copy_stream(STDIN, write_stream)
       #     end
       #
       # @option options [Integer] :thread_count
