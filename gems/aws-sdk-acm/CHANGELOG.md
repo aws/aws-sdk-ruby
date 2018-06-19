@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add DescribeCertificate waiter.
+
 1.7.0 (2018-05-02)
 ------------------
 
