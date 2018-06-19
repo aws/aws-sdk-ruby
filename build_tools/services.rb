@@ -60,6 +60,7 @@ module BuildTools
         waiters: model_path('waiters-2.json', config['models']),
         resources: model_path('resources-1.json', config['models']),
         examples: model_path('examples-1.json', config['models']),
+        smoke_tests: model_path('smoke.json', config['models']),
         gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
         add_plugins: add_plugins(api, config['addPlugins'] || []),
         remove_plugins: config['removePlugins'] || []
