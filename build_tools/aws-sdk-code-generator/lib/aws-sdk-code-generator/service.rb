@@ -12,6 +12,7 @@ module AwsSdkCodeGenerator
     # @option options [Hash, String] :waiters
     # @option options [Hash, String] :resources
     # @option options [Hash, String] :examples
+    # @option options [Hash, String] :smoke_tests
     # @option options [Hash<gem,version>] :gem_dependencies ({})
     # @option options [Hash] :add_plugins ({})
     # @option options [Hash] :remove_plugins ([])
@@ -30,6 +31,7 @@ module AwsSdkCodeGenerator
       @waiters = load_json(options[:waiters])
       @resources = load_json(options[:resources])
       @examples = load_json(options[:examples])
+      @smoke_tests = load_json(options[:smoke])
       @gem_dependencies = options[:gem_dependencies] || {}
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []
@@ -65,6 +67,9 @@ module AwsSdkCodeGenerator
 
     # @return [Hash, nil] The service shared examples model.
     attr_reader :examples
+
+    # @return [Hash, nil] The service smoke test model.
+    attr_reader :smoke_tests
 
     # @return [Hash<String,String>] A hash of gem dependencies. Hash keys
     #   are gem names, values are versions.
