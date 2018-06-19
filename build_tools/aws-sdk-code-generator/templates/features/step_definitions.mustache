@@ -7,11 +7,11 @@ After("@{{var_name}}") do
   # shared cleanup logic
 end
 
+# Shared Smoke Test Definitions
 Given(/I create a client in region '{region}'/) do |region|
   @regional_client = {{module_name}}::Client.new(region: region)
 end
 
-# Shared Smoke Test Definitions
 When(/I call the operation '{operation}'/) do |operation|
   begin
     @regional_client.send(operation.to_sym)
