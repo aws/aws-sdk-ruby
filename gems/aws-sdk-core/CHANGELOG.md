@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix to support URI encoded characters in http_proxy
+
 3.21.2 (2018-05-22)
 ------------------
 
