@@ -19,6 +19,7 @@ module AwsSdkCodeGenerator
         y.yield('spec/spec_helper.rb', spec_helper_file)
         if @service.smoke_tests
           y.yield('features/smoke.feature', smoke_file)
+          y.yield('features/smoke_step_definitions.rb', smoke_step_definitions_file)
         end
         y.yield('VERSION', version_file)
         code = CodeBuilder.new(@options)
@@ -40,6 +41,10 @@ module AwsSdkCodeGenerator
 
     def smoke_file
       Views::Features::Smoke.new(options).render
+    end
+
+    def smoke_step_definitions_file
+      Views::Features::SmokeStepDefinitions.new(options).render
     end
 
     def features_step_definitions_file

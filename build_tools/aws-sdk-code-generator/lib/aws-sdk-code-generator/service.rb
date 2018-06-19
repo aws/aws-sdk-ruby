@@ -31,7 +31,7 @@ module AwsSdkCodeGenerator
       @waiters = load_json(options[:waiters])
       @resources = load_json(options[:resources])
       @examples = load_json(options[:examples])
-      @smoke_tests = load_json(options[:smoke])
+      @smoke_tests = load_json(options[:smoke_tests])
       @gem_dependencies = options[:gem_dependencies] || {}
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []

@@ -12,7 +12,7 @@ Background:
   Scenario: {{scenario_string}}
   When I call the operation '{{operation}}' with params:
     """
-{{param_hash}}
+{{&param_hash}}
     """
   Then {{error_expectation}}
 {{/smoke_tests}}
