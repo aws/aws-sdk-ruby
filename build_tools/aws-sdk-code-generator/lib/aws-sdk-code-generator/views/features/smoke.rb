@@ -23,7 +23,7 @@ module AwsSdkCodeGenerator
               h[:scenario_string] = "Call Aws::#{service.module_name}::Client##{h[:operation]} and expect it to fail"
             else
               h[:error_expectation] = "I expect an error was not raised"
-              h[:scenario_string] = "Call Aws::#{service.module_name}::Client##{h[:operation]} and expect it to succeed"
+              h[:scenario_string] = "Call #{service.module_name}::Client##{h[:operation]} and expect it to succeed"
             end
             h[:param_hash] = test["input"].inject({}) do |acc, kv|
               raw_key, value = kv

@@ -12,6 +12,12 @@ module AwsSdkCodeGenerator
 
         attr_reader :module_name
 
+        # @return [String|nil]
+        def generated_src_warning
+          return if @custom
+          GENERATED_SRC_WARNING
+        end
+
       end
     end
   end

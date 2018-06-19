@@ -5,19 +5,19 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-
 Feature: Smoke tests for APIGateway
 
 Background:
   Given I create a client in region 'us-west-2'
 
   @apigateway @smoke
-  Scenario: Call Aws::Aws::APIGateway::Client#get_domain_names and expect it to succeed
+  Scenario: Call Aws::APIGateway::Client#get_domain_names and expect it to succeed
   When I call the operation 'get_domain_names' with params:
     """
 {}
     """
   Then I expect an error was not raised
+
   @apigateway @smoke
   Scenario: Call Aws::Aws::APIGateway::Client#create_usage_plan_key and expect it to fail
   When I call the operation 'create_usage_plan_key' with params:
