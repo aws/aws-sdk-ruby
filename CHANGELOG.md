@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.71 (2018-06-19)
+------------------
+
 * Feature - Aws::Rekognition - Updated the documentation for Amazon Rekognition.
 
 2.11.70 (2018-06-15)
