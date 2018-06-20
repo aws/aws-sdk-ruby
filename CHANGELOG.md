@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACMPCA - Updated the API, and documentation for AWS Certificate Manager Private Certificate Authority.
+
+* Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
 2.11.71 (2018-06-19)
 ------------------
 
