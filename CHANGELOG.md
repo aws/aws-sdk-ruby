@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.72 (2018-06-20)
+------------------
+
 * Feature - Aws::ACMPCA - Updated the API, and documentation for AWS Certificate Manager Private Certificate Authority.
 
 * Feature - Aws::MediaLive - Updated the API, and documentation for AWS Elemental MediaLive.
