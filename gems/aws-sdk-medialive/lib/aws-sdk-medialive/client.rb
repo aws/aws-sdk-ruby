@@ -1997,6 +1997,71 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Delete an expired reservation.
+    #
+    # @option params [required, String] :reservation_id
+    #
+    # @return [Types::DeleteReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteReservationResponse#arn #arn} => String
+    #   * {Types::DeleteReservationResponse#count #count} => Integer
+    #   * {Types::DeleteReservationResponse#currency_code #currency_code} => String
+    #   * {Types::DeleteReservationResponse#duration #duration} => Integer
+    #   * {Types::DeleteReservationResponse#duration_units #duration_units} => String
+    #   * {Types::DeleteReservationResponse#end #end} => String
+    #   * {Types::DeleteReservationResponse#fixed_price #fixed_price} => Float
+    #   * {Types::DeleteReservationResponse#name #name} => String
+    #   * {Types::DeleteReservationResponse#offering_description #offering_description} => String
+    #   * {Types::DeleteReservationResponse#offering_id #offering_id} => String
+    #   * {Types::DeleteReservationResponse#offering_type #offering_type} => String
+    #   * {Types::DeleteReservationResponse#region #region} => String
+    #   * {Types::DeleteReservationResponse#reservation_id #reservation_id} => String
+    #   * {Types::DeleteReservationResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
+    #   * {Types::DeleteReservationResponse#start #start} => String
+    #   * {Types::DeleteReservationResponse#state #state} => String
+    #   * {Types::DeleteReservationResponse#usage_price #usage_price} => Float
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_reservation({
+    #     reservation_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.count #=> Integer
+    #   resp.currency_code #=> String
+    #   resp.duration #=> Integer
+    #   resp.duration_units #=> String, one of "MONTHS"
+    #   resp.end #=> String
+    #   resp.fixed_price #=> Float
+    #   resp.name #=> String
+    #   resp.offering_description #=> String
+    #   resp.offering_id #=> String
+    #   resp.offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.region #=> String
+    #   resp.reservation_id #=> String
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.start #=> String
+    #   resp.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteReservation AWS API Documentation
+    #
+    # @overload delete_reservation(params = {})
+    # @param [Hash] params ({})
+    def delete_reservation(params = {}, options = {})
+      req = build_request(:delete_reservation, params)
+      req.send_request(options)
+    end
+
     # Gets details about a channel
     #
     # @option params [required, String] :channel_id
@@ -2587,6 +2652,124 @@ module Aws::MediaLive
       req.send_request(options)
     end
 
+    # Get details for an offering.
+    #
+    # @option params [required, String] :offering_id
+    #
+    # @return [Types::DescribeOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOfferingResponse#arn #arn} => String
+    #   * {Types::DescribeOfferingResponse#currency_code #currency_code} => String
+    #   * {Types::DescribeOfferingResponse#duration #duration} => Integer
+    #   * {Types::DescribeOfferingResponse#duration_units #duration_units} => String
+    #   * {Types::DescribeOfferingResponse#fixed_price #fixed_price} => Float
+    #   * {Types::DescribeOfferingResponse#offering_description #offering_description} => String
+    #   * {Types::DescribeOfferingResponse#offering_id #offering_id} => String
+    #   * {Types::DescribeOfferingResponse#offering_type #offering_type} => String
+    #   * {Types::DescribeOfferingResponse#region #region} => String
+    #   * {Types::DescribeOfferingResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
+    #   * {Types::DescribeOfferingResponse#usage_price #usage_price} => Float
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_offering({
+    #     offering_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.currency_code #=> String
+    #   resp.duration #=> Integer
+    #   resp.duration_units #=> String, one of "MONTHS"
+    #   resp.fixed_price #=> Float
+    #   resp.offering_description #=> String
+    #   resp.offering_id #=> String
+    #   resp.offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.region #=> String
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeOffering AWS API Documentation
+    #
+    # @overload describe_offering(params = {})
+    # @param [Hash] params ({})
+    def describe_offering(params = {}, options = {})
+      req = build_request(:describe_offering, params)
+      req.send_request(options)
+    end
+
+    # Get details for a reservation.
+    #
+    # @option params [required, String] :reservation_id
+    #
+    # @return [Types::DescribeReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReservationResponse#arn #arn} => String
+    #   * {Types::DescribeReservationResponse#count #count} => Integer
+    #   * {Types::DescribeReservationResponse#currency_code #currency_code} => String
+    #   * {Types::DescribeReservationResponse#duration #duration} => Integer
+    #   * {Types::DescribeReservationResponse#duration_units #duration_units} => String
+    #   * {Types::DescribeReservationResponse#end #end} => String
+    #   * {Types::DescribeReservationResponse#fixed_price #fixed_price} => Float
+    #   * {Types::DescribeReservationResponse#name #name} => String
+    #   * {Types::DescribeReservationResponse#offering_description #offering_description} => String
+    #   * {Types::DescribeReservationResponse#offering_id #offering_id} => String
+    #   * {Types::DescribeReservationResponse#offering_type #offering_type} => String
+    #   * {Types::DescribeReservationResponse#region #region} => String
+    #   * {Types::DescribeReservationResponse#reservation_id #reservation_id} => String
+    #   * {Types::DescribeReservationResponse#resource_specification #resource_specification} => Types::ReservationResourceSpecification
+    #   * {Types::DescribeReservationResponse#start #start} => String
+    #   * {Types::DescribeReservationResponse#state #state} => String
+    #   * {Types::DescribeReservationResponse#usage_price #usage_price} => Float
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_reservation({
+    #     reservation_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.count #=> Integer
+    #   resp.currency_code #=> String
+    #   resp.duration #=> Integer
+    #   resp.duration_units #=> String, one of "MONTHS"
+    #   resp.end #=> String
+    #   resp.fixed_price #=> Float
+    #   resp.name #=> String
+    #   resp.offering_description #=> String
+    #   resp.offering_id #=> String
+    #   resp.offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.region #=> String
+    #   resp.reservation_id #=> String
+    #   resp.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.start #=> String
+    #   resp.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeReservation AWS API Documentation
+    #
+    # @overload describe_reservation(params = {})
+    # @param [Hash] params ({})
+    def describe_reservation(params = {}, options = {})
+      req = build_request(:describe_reservation, params)
+      req.send_request(options)
+    end
+
     # Produces list of channels that have been created
     #
     # @option params [Integer] :max_results
@@ -2756,6 +2939,215 @@ module Aws::MediaLive
     # @param [Hash] params ({})
     def list_inputs(params = {}, options = {})
       req = build_request(:list_inputs, params)
+      req.send_request(options)
+    end
+
+    # List offerings available for purchase.
+    #
+    # @option params [String] :channel_configuration
+    #
+    # @option params [String] :codec
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :maximum_bitrate
+    #
+    # @option params [String] :maximum_framerate
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :resolution
+    #
+    # @option params [String] :resource_type
+    #
+    # @option params [String] :special_feature
+    #
+    # @option params [String] :video_quality
+    #
+    # @return [Types::ListOfferingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOfferingsResponse#next_token #next_token} => String
+    #   * {Types::ListOfferingsResponse#offerings #offerings} => Array&lt;Types::Offering&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_offerings({
+    #     channel_configuration: "__string",
+    #     codec: "__string",
+    #     max_results: 1,
+    #     maximum_bitrate: "__string",
+    #     maximum_framerate: "__string",
+    #     next_token: "__string",
+    #     resolution: "__string",
+    #     resource_type: "__string",
+    #     special_feature: "__string",
+    #     video_quality: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.offerings #=> Array
+    #   resp.offerings[0].arn #=> String
+    #   resp.offerings[0].currency_code #=> String
+    #   resp.offerings[0].duration #=> Integer
+    #   resp.offerings[0].duration_units #=> String, one of "MONTHS"
+    #   resp.offerings[0].fixed_price #=> Float
+    #   resp.offerings[0].offering_description #=> String
+    #   resp.offerings[0].offering_id #=> String
+    #   resp.offerings[0].offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.offerings[0].region #=> String
+    #   resp.offerings[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.offerings[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.offerings[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.offerings[0].resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.offerings[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.offerings[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.offerings[0].resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.offerings[0].usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListOfferings AWS API Documentation
+    #
+    # @overload list_offerings(params = {})
+    # @param [Hash] params ({})
+    def list_offerings(params = {}, options = {})
+      req = build_request(:list_offerings, params)
+      req.send_request(options)
+    end
+
+    # List purchased reservations.
+    #
+    # @option params [String] :codec
+    #
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :maximum_bitrate
+    #
+    # @option params [String] :maximum_framerate
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [String] :resolution
+    #
+    # @option params [String] :resource_type
+    #
+    # @option params [String] :special_feature
+    #
+    # @option params [String] :video_quality
+    #
+    # @return [Types::ListReservationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListReservationsResponse#next_token #next_token} => String
+    #   * {Types::ListReservationsResponse#reservations #reservations} => Array&lt;Types::Reservation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_reservations({
+    #     codec: "__string",
+    #     max_results: 1,
+    #     maximum_bitrate: "__string",
+    #     maximum_framerate: "__string",
+    #     next_token: "__string",
+    #     resolution: "__string",
+    #     resource_type: "__string",
+    #     special_feature: "__string",
+    #     video_quality: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.reservations #=> Array
+    #   resp.reservations[0].arn #=> String
+    #   resp.reservations[0].count #=> Integer
+    #   resp.reservations[0].currency_code #=> String
+    #   resp.reservations[0].duration #=> Integer
+    #   resp.reservations[0].duration_units #=> String, one of "MONTHS"
+    #   resp.reservations[0].end #=> String
+    #   resp.reservations[0].fixed_price #=> Float
+    #   resp.reservations[0].name #=> String
+    #   resp.reservations[0].offering_description #=> String
+    #   resp.reservations[0].offering_id #=> String
+    #   resp.reservations[0].offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.reservations[0].region #=> String
+    #   resp.reservations[0].reservation_id #=> String
+    #   resp.reservations[0].resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.reservations[0].resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.reservations[0].resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.reservations[0].resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.reservations[0].resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.reservations[0].resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.reservations[0].resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.reservations[0].start #=> String
+    #   resp.reservations[0].state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.reservations[0].usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListReservations AWS API Documentation
+    #
+    # @overload list_reservations(params = {})
+    # @param [Hash] params ({})
+    def list_reservations(params = {}, options = {})
+      req = build_request(:list_reservations, params)
+      req.send_request(options)
+    end
+
+    # Purchase an offering and create a reservation.
+    #
+    # @option params [Integer] :count
+    #
+    # @option params [String] :name
+    #
+    # @option params [required, String] :offering_id
+    #
+    # @option params [String] :request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::PurchaseOfferingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PurchaseOfferingResponse#reservation #reservation} => Types::Reservation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.purchase_offering({
+    #     count: 1,
+    #     name: "__string",
+    #     offering_id: "__string", # required
+    #     request_id: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.reservation.arn #=> String
+    #   resp.reservation.count #=> Integer
+    #   resp.reservation.currency_code #=> String
+    #   resp.reservation.duration #=> Integer
+    #   resp.reservation.duration_units #=> String, one of "MONTHS"
+    #   resp.reservation.end #=> String
+    #   resp.reservation.fixed_price #=> Float
+    #   resp.reservation.name #=> String
+    #   resp.reservation.offering_description #=> String
+    #   resp.reservation.offering_id #=> String
+    #   resp.reservation.offering_type #=> String, one of "NO_UPFRONT"
+    #   resp.reservation.region #=> String
+    #   resp.reservation.reservation_id #=> String
+    #   resp.reservation.resource_specification.codec #=> String, one of "MPEG2", "AVC", "HEVC", "AUDIO"
+    #   resp.reservation.resource_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
+    #   resp.reservation.resource_specification.maximum_framerate #=> String, one of "MAX_30_FPS", "MAX_60_FPS"
+    #   resp.reservation.resource_specification.resolution #=> String, one of "SD", "HD", "UHD"
+    #   resp.reservation.resource_specification.resource_type #=> String, one of "INPUT", "OUTPUT", "CHANNEL"
+    #   resp.reservation.resource_specification.special_feature #=> String, one of "ADVANCED_AUDIO", "AUDIO_NORMALIZATION"
+    #   resp.reservation.resource_specification.video_quality #=> String, one of "STANDARD", "ENHANCED", "PREMIUM"
+    #   resp.reservation.start #=> String
+    #   resp.reservation.state #=> String, one of "ACTIVE", "EXPIRED", "CANCELED", "DELETED"
+    #   resp.reservation.usage_price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOffering AWS API Documentation
+    #
+    # @overload purchase_offering(params = {})
+    # @param [Hash] params ({})
+    def purchase_offering(params = {}, options = {})
+      req = build_request(:purchase_offering, params)
       req.send_request(options)
     end
 
@@ -5077,7 +5469,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

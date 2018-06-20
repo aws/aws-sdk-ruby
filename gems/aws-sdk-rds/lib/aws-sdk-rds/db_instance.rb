@@ -422,6 +422,13 @@ module Aws::RDS
       data[:performance_insights_kms_key_id]
     end
 
+    # The amount of time, in days, to retain Performance Insights data.
+    # Valid values are 7 or 731 (2 years).
+    # @return [Integer]
+    def performance_insights_retention_period
+      data[:performance_insights_retention_period]
+    end
+
     # A list of log types that this DB instance is configured to export to
     # CloudWatch Logs.
     # @return [Array<String>]
@@ -616,6 +623,7 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     performance_insights_retention_period: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     processor_features: [
     #       {
@@ -1331,6 +1339,9 @@ module Aws::RDS
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
+    # @option options [Integer] :performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
@@ -1376,6 +1387,7 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     performance_insights_retention_period: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     processor_features: [
     #       {
@@ -1620,6 +1632,9 @@ module Aws::RDS
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
+    # @option options [Integer] :performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
     #   Logs.
@@ -1781,6 +1796,7 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     performance_insights_retention_period: 1,
     #     cloudwatch_logs_export_configuration: {
     #       enable_log_types: ["String"],
     #       disable_log_types: ["String"],
@@ -2286,6 +2302,9 @@ module Aws::RDS
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
+    # @option options [Integer] :performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
     # @option options [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
     #   to CloudWatch Logs for a specific DB instance.

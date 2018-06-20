@@ -419,6 +419,7 @@ module Aws::RDS
     #     enable_iam_database_authentication: false,
     #     enable_performance_insights: false,
     #     performance_insights_kms_key_id: "String",
+    #     performance_insights_retention_period: 1,
     #     enable_cloudwatch_logs_exports: ["String"],
     #     processor_features: [
     #       {
@@ -1147,6 +1148,9 @@ module Aws::RDS
     #   The AWS KMS key identifier for encryption of Performance Insights
     #   data. The KMS key ID is the Amazon Resource Name (ARN), KMS key
     #   identifier, or the KMS key alias for the KMS encryption key.
+    # @option options [Integer] :performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
@@ -1196,6 +1200,16 @@ module Aws::RDS
     #   associated with one and only one DB parameter group family, and can be
     #   applied only to a DB instance running a database engine and engine
     #   version compatible with that DB parameter group family.
+    #
+    #   To list all of the available parameter group families, use the
+    #   following command:
+    #
+    #   `aws rds describe-db-engine-versions --query
+    #   "DBEngineVersions[].DBParameterGroupFamily"`
+    #
+    #   <note markdown="1"> The output contains duplicates.
+    #
+    #    </note>
     # @option options [required, String] :description
     #   The description for the DB parameter group.
     # @option options [Array<Types::Tag>] :tags

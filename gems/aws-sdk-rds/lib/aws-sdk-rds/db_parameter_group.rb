@@ -201,6 +201,16 @@ module Aws::RDS
     #   associated with one and only one DB parameter group family, and can be
     #   applied only to a DB instance running a database engine and engine
     #   version compatible with that DB parameter group family.
+    #
+    #   To list all of the available parameter group families, use the
+    #   following command:
+    #
+    #   `aws rds describe-db-engine-versions --query
+    #   "DBEngineVersions[].DBParameterGroupFamily"`
+    #
+    #   <note markdown="1"> The output contains duplicates.
+    #
+    #    </note>
     # @option options [required, String] :description
     #   The description for the DB parameter group.
     # @option options [Array<Types::Tag>] :tags

@@ -1743,6 +1743,7 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
+    #         performance_insights_retention_period: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
     #         processor_features: [
     #           {
@@ -2560,6 +2561,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
+    #   @return [Integer]
+    #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs.
@@ -2614,6 +2620,7 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
+      :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
       :processor_features)
       include Aws::Structure
@@ -2649,6 +2656,7 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
+    #         performance_insights_retention_period: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
     #         processor_features: [
     #           {
@@ -2968,6 +2976,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
+    #   @return [Integer]
+    #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the new DB instance is to export to CloudWatch
     #   Logs.
@@ -3015,6 +3028,7 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
+      :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
       :processor_features,
       :use_default_processor_features,
@@ -3087,6 +3101,16 @@ module Aws::RDS
     #   associated with one and only one DB parameter group family, and can
     #   be applied only to a DB instance running a database engine and
     #   engine version compatible with that DB parameter group family.
+    #
+    #   To list all of the available parameter group families, use the
+    #   following command:
+    #
+    #   `aws rds describe-db-engine-versions --query
+    #   "DBEngineVersions[].DBParameterGroupFamily"`
+    #
+    #   <note markdown="1"> The output contains duplicates.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -4656,6 +4680,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
+    #   @return [Integer]
+    #
     # @!attribute [rw] enabled_cloudwatch_logs_exports
     #   A list of log types that this DB instance is configured to export to
     #   CloudWatch Logs.
@@ -4720,6 +4749,7 @@ module Aws::RDS
       :iam_database_authentication_enabled,
       :performance_insights_enabled,
       :performance_insights_kms_key_id,
+      :performance_insights_retention_period,
       :enabled_cloudwatch_logs_exports,
       :processor_features)
       include Aws::Structure
@@ -8728,6 +8758,7 @@ module Aws::RDS
     #         enable_iam_database_authentication: false,
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
+    #         performance_insights_retention_period: 1,
     #         cloudwatch_logs_export_configuration: {
     #           enable_log_types: ["String"],
     #           disable_log_types: ["String"],
@@ -9320,6 +9351,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
+    #   @return [Integer]
+    #
     # @!attribute [rw] cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
     #   to CloudWatch Logs for a specific DB instance.
@@ -9373,6 +9409,7 @@ module Aws::RDS
       :enable_iam_database_authentication,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
+      :performance_insights_retention_period,
       :cloudwatch_logs_export_configuration,
       :processor_features,
       :use_default_processor_features)
@@ -12581,6 +12618,7 @@ module Aws::RDS
     #         s3_ingestion_role_arn: "String", # required
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
+    #         performance_insights_retention_period: 1,
     #         enable_cloudwatch_logs_exports: ["String"],
     #         processor_features: [
     #           {
@@ -12934,6 +12972,11 @@ module Aws::RDS
     #   identifier, or the KMS key alias for the KMS encryption key.
     #   @return [String]
     #
+    # @!attribute [rw] performance_insights_retention_period
+    #   The amount of time, in days, to retain Performance Insights data.
+    #   Valid values are 7 or 731 (2 years).
+    #   @return [Integer]
+    #
     # @!attribute [rw] enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB instance is to export to
     #   CloudWatch Logs.
@@ -12990,6 +13033,7 @@ module Aws::RDS
       :s3_ingestion_role_arn,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
+      :performance_insights_retention_period,
       :enable_cloudwatch_logs_exports,
       :processor_features,
       :use_default_processor_features)

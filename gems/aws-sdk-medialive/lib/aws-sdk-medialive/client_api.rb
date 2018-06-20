@@ -93,12 +93,18 @@ module Aws::MediaLive
     DeleteInputResponse = Shapes::StructureShape.new(name: 'DeleteInputResponse')
     DeleteInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'DeleteInputSecurityGroupRequest')
     DeleteInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'DeleteInputSecurityGroupResponse')
+    DeleteReservationRequest = Shapes::StructureShape.new(name: 'DeleteReservationRequest')
+    DeleteReservationResponse = Shapes::StructureShape.new(name: 'DeleteReservationResponse')
     DescribeChannelRequest = Shapes::StructureShape.new(name: 'DescribeChannelRequest')
     DescribeChannelResponse = Shapes::StructureShape.new(name: 'DescribeChannelResponse')
     DescribeInputRequest = Shapes::StructureShape.new(name: 'DescribeInputRequest')
     DescribeInputResponse = Shapes::StructureShape.new(name: 'DescribeInputResponse')
     DescribeInputSecurityGroupRequest = Shapes::StructureShape.new(name: 'DescribeInputSecurityGroupRequest')
     DescribeInputSecurityGroupResponse = Shapes::StructureShape.new(name: 'DescribeInputSecurityGroupResponse')
+    DescribeOfferingRequest = Shapes::StructureShape.new(name: 'DescribeOfferingRequest')
+    DescribeOfferingResponse = Shapes::StructureShape.new(name: 'DescribeOfferingResponse')
+    DescribeReservationRequest = Shapes::StructureShape.new(name: 'DescribeReservationRequest')
+    DescribeReservationResponse = Shapes::StructureShape.new(name: 'DescribeReservationResponse')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
     DvbSdtOutputSdt = Shapes::StringShape.new(name: 'DvbSdtOutputSdt')
     DvbSdtSettings = Shapes::StructureShape.new(name: 'DvbSdtSettings')
@@ -233,6 +239,12 @@ module Aws::MediaLive
     ListInputsRequest = Shapes::StructureShape.new(name: 'ListInputsRequest')
     ListInputsResponse = Shapes::StructureShape.new(name: 'ListInputsResponse')
     ListInputsResultModel = Shapes::StructureShape.new(name: 'ListInputsResultModel')
+    ListOfferingsRequest = Shapes::StructureShape.new(name: 'ListOfferingsRequest')
+    ListOfferingsResponse = Shapes::StructureShape.new(name: 'ListOfferingsResponse')
+    ListOfferingsResultModel = Shapes::StructureShape.new(name: 'ListOfferingsResultModel')
+    ListReservationsRequest = Shapes::StructureShape.new(name: 'ListReservationsRequest')
+    ListReservationsResponse = Shapes::StructureShape.new(name: 'ListReservationsResponse')
+    ListReservationsResultModel = Shapes::StructureShape.new(name: 'ListReservationsResultModel')
     LogLevel = Shapes::StringShape.new(name: 'LogLevel')
     M2tsAbsentInputAudioBehavior = Shapes::StringShape.new(name: 'M2tsAbsentInputAudioBehavior')
     M2tsArib = Shapes::StringShape.new(name: 'M2tsArib')
@@ -265,6 +277,9 @@ module Aws::MediaLive
     NetworkInputServerValidation = Shapes::StringShape.new(name: 'NetworkInputServerValidation')
     NetworkInputSettings = Shapes::StructureShape.new(name: 'NetworkInputSettings')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    Offering = Shapes::StructureShape.new(name: 'Offering')
+    OfferingDurationUnits = Shapes::StringShape.new(name: 'OfferingDurationUnits')
+    OfferingType = Shapes::StringShape.new(name: 'OfferingType')
     Output = Shapes::StructureShape.new(name: 'Output')
     OutputDestination = Shapes::StructureShape.new(name: 'OutputDestination')
     OutputDestinationSettings = Shapes::StructureShape.new(name: 'OutputDestinationSettings')
@@ -273,7 +288,21 @@ module Aws::MediaLive
     OutputLocationRef = Shapes::StructureShape.new(name: 'OutputLocationRef')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
     PassThroughSettings = Shapes::StructureShape.new(name: 'PassThroughSettings')
+    PurchaseOffering = Shapes::StructureShape.new(name: 'PurchaseOffering')
+    PurchaseOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseOfferingRequest')
+    PurchaseOfferingResponse = Shapes::StructureShape.new(name: 'PurchaseOfferingResponse')
+    PurchaseOfferingResultModel = Shapes::StructureShape.new(name: 'PurchaseOfferingResultModel')
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
+    Reservation = Shapes::StructureShape.new(name: 'Reservation')
+    ReservationCodec = Shapes::StringShape.new(name: 'ReservationCodec')
+    ReservationMaximumBitrate = Shapes::StringShape.new(name: 'ReservationMaximumBitrate')
+    ReservationMaximumFramerate = Shapes::StringShape.new(name: 'ReservationMaximumFramerate')
+    ReservationResolution = Shapes::StringShape.new(name: 'ReservationResolution')
+    ReservationResourceSpecification = Shapes::StructureShape.new(name: 'ReservationResourceSpecification')
+    ReservationResourceType = Shapes::StringShape.new(name: 'ReservationResourceType')
+    ReservationSpecialFeature = Shapes::StringShape.new(name: 'ReservationSpecialFeature')
+    ReservationState = Shapes::StringShape.new(name: 'ReservationState')
+    ReservationVideoQuality = Shapes::StringShape.new(name: 'ReservationVideoQuality')
     ResourceConflict = Shapes::StructureShape.new(name: 'ResourceConflict')
     ResourceNotFound = Shapes::StructureShape.new(name: 'ResourceNotFound')
     RtmpCacheFullBehavior = Shapes::StringShape.new(name: 'RtmpCacheFullBehavior')
@@ -406,10 +435,12 @@ module Aws::MediaLive
     __listOfInputSourceRequest = Shapes::ListShape.new(name: '__listOfInputSourceRequest')
     __listOfInputWhitelistRule = Shapes::ListShape.new(name: '__listOfInputWhitelistRule')
     __listOfInputWhitelistRuleCidr = Shapes::ListShape.new(name: '__listOfInputWhitelistRuleCidr')
+    __listOfOffering = Shapes::ListShape.new(name: '__listOfOffering')
     __listOfOutput = Shapes::ListShape.new(name: '__listOfOutput')
     __listOfOutputDestination = Shapes::ListShape.new(name: '__listOfOutputDestination')
     __listOfOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfOutputDestinationSettings')
     __listOfOutputGroup = Shapes::ListShape.new(name: '__listOfOutputGroup')
+    __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
     __listOfValidationError = Shapes::ListShape.new(name: '__listOfValidationError')
     __listOfVideoDescription = Shapes::ListShape.new(name: '__listOfVideoDescription')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
@@ -707,6 +738,28 @@ module Aws::MediaLive
 
     DeleteInputSecurityGroupResponse.struct_class = Types::DeleteInputSecurityGroupResponse
 
+    DeleteReservationRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "reservationId"))
+    DeleteReservationRequest.struct_class = Types::DeleteReservationRequest
+
+    DeleteReservationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DeleteReservationResponse.add_member(:count, Shapes::ShapeRef.new(shape: __integer, location_name: "count"))
+    DeleteReservationResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    DeleteReservationResponse.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    DeleteReservationResponse.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    DeleteReservationResponse.add_member(:end, Shapes::ShapeRef.new(shape: __string, location_name: "end"))
+    DeleteReservationResponse.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    DeleteReservationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DeleteReservationResponse.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    DeleteReservationResponse.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    DeleteReservationResponse.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    DeleteReservationResponse.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    DeleteReservationResponse.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, location_name: "reservationId"))
+    DeleteReservationResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    DeleteReservationResponse.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
+    DeleteReservationResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+    DeleteReservationResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    DeleteReservationResponse.struct_class = Types::DeleteReservationResponse
+
     DescribeChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelId"))
     DescribeChannelRequest.struct_class = Types::DescribeChannelRequest
 
@@ -747,6 +800,44 @@ module Aws::MediaLive
     DescribeInputSecurityGroupResponse.add_member(:state, Shapes::ShapeRef.new(shape: InputSecurityGroupState, location_name: "state"))
     DescribeInputSecurityGroupResponse.add_member(:whitelist_rules, Shapes::ShapeRef.new(shape: __listOfInputWhitelistRule, location_name: "whitelistRules"))
     DescribeInputSecurityGroupResponse.struct_class = Types::DescribeInputSecurityGroupResponse
+
+    DescribeOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
+    DescribeOfferingRequest.struct_class = Types::DescribeOfferingRequest
+
+    DescribeOfferingResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeOfferingResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    DescribeOfferingResponse.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    DescribeOfferingResponse.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    DescribeOfferingResponse.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    DescribeOfferingResponse.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    DescribeOfferingResponse.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    DescribeOfferingResponse.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    DescribeOfferingResponse.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    DescribeOfferingResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    DescribeOfferingResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    DescribeOfferingResponse.struct_class = Types::DescribeOfferingResponse
+
+    DescribeReservationRequest.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "reservationId"))
+    DescribeReservationRequest.struct_class = Types::DescribeReservationRequest
+
+    DescribeReservationResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    DescribeReservationResponse.add_member(:count, Shapes::ShapeRef.new(shape: __integer, location_name: "count"))
+    DescribeReservationResponse.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    DescribeReservationResponse.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    DescribeReservationResponse.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    DescribeReservationResponse.add_member(:end, Shapes::ShapeRef.new(shape: __string, location_name: "end"))
+    DescribeReservationResponse.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    DescribeReservationResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    DescribeReservationResponse.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    DescribeReservationResponse.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    DescribeReservationResponse.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    DescribeReservationResponse.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    DescribeReservationResponse.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, location_name: "reservationId"))
+    DescribeReservationResponse.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    DescribeReservationResponse.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
+    DescribeReservationResponse.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+    DescribeReservationResponse.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    DescribeReservationResponse.struct_class = Types::DescribeReservationResponse
 
     DvbNitSettings.add_member(:network_id, Shapes::ShapeRef.new(shape: __integerMin0Max65536, required: true, location_name: "networkId"))
     DvbNitSettings.add_member(:network_name, Shapes::ShapeRef.new(shape: __stringMin1Max256, required: true, location_name: "networkName"))
@@ -1094,6 +1185,45 @@ module Aws::MediaLive
     ListInputsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListInputsResultModel.struct_class = Types::ListInputsResultModel
 
+    ListOfferingsRequest.add_member(:channel_configuration, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "channelConfiguration"))
+    ListOfferingsRequest.add_member(:codec, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "codec"))
+    ListOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListOfferingsRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumBitrate"))
+    ListOfferingsRequest.add_member(:maximum_framerate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumFramerate"))
+    ListOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListOfferingsRequest.add_member(:resolution, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "resolution"))
+    ListOfferingsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "resourceType"))
+    ListOfferingsRequest.add_member(:special_feature, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "specialFeature"))
+    ListOfferingsRequest.add_member(:video_quality, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "videoQuality"))
+    ListOfferingsRequest.struct_class = Types::ListOfferingsRequest
+
+    ListOfferingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListOfferingsResponse.add_member(:offerings, Shapes::ShapeRef.new(shape: __listOfOffering, location_name: "offerings"))
+    ListOfferingsResponse.struct_class = Types::ListOfferingsResponse
+
+    ListOfferingsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListOfferingsResultModel.add_member(:offerings, Shapes::ShapeRef.new(shape: __listOfOffering, location_name: "offerings"))
+    ListOfferingsResultModel.struct_class = Types::ListOfferingsResultModel
+
+    ListReservationsRequest.add_member(:codec, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "codec"))
+    ListReservationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListReservationsRequest.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumBitrate"))
+    ListReservationsRequest.add_member(:maximum_framerate, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "maximumFramerate"))
+    ListReservationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
+    ListReservationsRequest.add_member(:resolution, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "resolution"))
+    ListReservationsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "resourceType"))
+    ListReservationsRequest.add_member(:special_feature, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "specialFeature"))
+    ListReservationsRequest.add_member(:video_quality, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "videoQuality"))
+    ListReservationsRequest.struct_class = Types::ListReservationsRequest
+
+    ListReservationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListReservationsResponse.add_member(:reservations, Shapes::ShapeRef.new(shape: __listOfReservation, location_name: "reservations"))
+    ListReservationsResponse.struct_class = Types::ListReservationsResponse
+
+    ListReservationsResultModel.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
+    ListReservationsResultModel.add_member(:reservations, Shapes::ShapeRef.new(shape: __listOfReservation, location_name: "reservations"))
+    ListReservationsResultModel.struct_class = Types::ListReservationsResultModel
+
     M2tsSettings.add_member(:absent_input_audio_behavior, Shapes::ShapeRef.new(shape: M2tsAbsentInputAudioBehavior, location_name: "absentInputAudioBehavior"))
     M2tsSettings.add_member(:arib, Shapes::ShapeRef.new(shape: M2tsArib, location_name: "arib"))
     M2tsSettings.add_member(:arib_captions_pid, Shapes::ShapeRef.new(shape: __string, location_name: "aribCaptionsPid"))
@@ -1193,6 +1323,19 @@ module Aws::MediaLive
     NetworkInputSettings.add_member(:server_validation, Shapes::ShapeRef.new(shape: NetworkInputServerValidation, location_name: "serverValidation"))
     NetworkInputSettings.struct_class = Types::NetworkInputSettings
 
+    Offering.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Offering.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    Offering.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    Offering.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    Offering.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    Offering.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    Offering.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    Offering.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    Offering.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    Offering.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    Offering.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    Offering.struct_class = Types::Offering
+
     Output.add_member(:audio_description_names, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "audioDescriptionNames"))
     Output.add_member(:caption_description_names, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "captionDescriptionNames"))
     Output.add_member(:output_name, Shapes::ShapeRef.new(shape: __stringMin1Max255, location_name: "outputName"))
@@ -1234,10 +1377,55 @@ module Aws::MediaLive
 
     PassThroughSettings.struct_class = Types::PassThroughSettings
 
+    PurchaseOffering.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "count"))
+    PurchaseOffering.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    PurchaseOffering.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    PurchaseOffering.struct_class = Types::PurchaseOffering
+
+    PurchaseOfferingRequest.add_member(:count, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "count"))
+    PurchaseOfferingRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    PurchaseOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "offeringId"))
+    PurchaseOfferingRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
+    PurchaseOfferingRequest.struct_class = Types::PurchaseOfferingRequest
+
+    PurchaseOfferingResponse.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
+    PurchaseOfferingResponse.struct_class = Types::PurchaseOfferingResponse
+
+    PurchaseOfferingResultModel.add_member(:reservation, Shapes::ShapeRef.new(shape: Reservation, location_name: "reservation"))
+    PurchaseOfferingResultModel.struct_class = Types::PurchaseOfferingResultModel
+
     RemixSettings.add_member(:channel_mappings, Shapes::ShapeRef.new(shape: __listOfAudioChannelMapping, required: true, location_name: "channelMappings"))
     RemixSettings.add_member(:channels_in, Shapes::ShapeRef.new(shape: __integerMin1Max16, location_name: "channelsIn"))
     RemixSettings.add_member(:channels_out, Shapes::ShapeRef.new(shape: __integerMin1Max8, location_name: "channelsOut"))
     RemixSettings.struct_class = Types::RemixSettings
+
+    Reservation.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    Reservation.add_member(:count, Shapes::ShapeRef.new(shape: __integer, location_name: "count"))
+    Reservation.add_member(:currency_code, Shapes::ShapeRef.new(shape: __string, location_name: "currencyCode"))
+    Reservation.add_member(:duration, Shapes::ShapeRef.new(shape: __integer, location_name: "duration"))
+    Reservation.add_member(:duration_units, Shapes::ShapeRef.new(shape: OfferingDurationUnits, location_name: "durationUnits"))
+    Reservation.add_member(:end, Shapes::ShapeRef.new(shape: __string, location_name: "end"))
+    Reservation.add_member(:fixed_price, Shapes::ShapeRef.new(shape: __double, location_name: "fixedPrice"))
+    Reservation.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
+    Reservation.add_member(:offering_description, Shapes::ShapeRef.new(shape: __string, location_name: "offeringDescription"))
+    Reservation.add_member(:offering_id, Shapes::ShapeRef.new(shape: __string, location_name: "offeringId"))
+    Reservation.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingType, location_name: "offeringType"))
+    Reservation.add_member(:region, Shapes::ShapeRef.new(shape: __string, location_name: "region"))
+    Reservation.add_member(:reservation_id, Shapes::ShapeRef.new(shape: __string, location_name: "reservationId"))
+    Reservation.add_member(:resource_specification, Shapes::ShapeRef.new(shape: ReservationResourceSpecification, location_name: "resourceSpecification"))
+    Reservation.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "start"))
+    Reservation.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+    Reservation.add_member(:usage_price, Shapes::ShapeRef.new(shape: __double, location_name: "usagePrice"))
+    Reservation.struct_class = Types::Reservation
+
+    ReservationResourceSpecification.add_member(:codec, Shapes::ShapeRef.new(shape: ReservationCodec, location_name: "codec"))
+    ReservationResourceSpecification.add_member(:maximum_bitrate, Shapes::ShapeRef.new(shape: ReservationMaximumBitrate, location_name: "maximumBitrate"))
+    ReservationResourceSpecification.add_member(:maximum_framerate, Shapes::ShapeRef.new(shape: ReservationMaximumFramerate, location_name: "maximumFramerate"))
+    ReservationResourceSpecification.add_member(:resolution, Shapes::ShapeRef.new(shape: ReservationResolution, location_name: "resolution"))
+    ReservationResourceSpecification.add_member(:resource_type, Shapes::ShapeRef.new(shape: ReservationResourceType, location_name: "resourceType"))
+    ReservationResourceSpecification.add_member(:special_feature, Shapes::ShapeRef.new(shape: ReservationSpecialFeature, location_name: "specialFeature"))
+    ReservationResourceSpecification.add_member(:video_quality, Shapes::ShapeRef.new(shape: ReservationVideoQuality, location_name: "videoQuality"))
+    ReservationResourceSpecification.struct_class = Types::ReservationResourceSpecification
 
     ResourceConflict.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     ResourceConflict.struct_class = Types::ResourceConflict
@@ -1476,6 +1664,8 @@ module Aws::MediaLive
 
     __listOfInputWhitelistRuleCidr.member = Shapes::ShapeRef.new(shape: InputWhitelistRuleCidr)
 
+    __listOfOffering.member = Shapes::ShapeRef.new(shape: Offering)
+
     __listOfOutput.member = Shapes::ShapeRef.new(shape: Output)
 
     __listOfOutputDestination.member = Shapes::ShapeRef.new(shape: OutputDestination)
@@ -1483,6 +1673,8 @@ module Aws::MediaLive
     __listOfOutputDestinationSettings.member = Shapes::ShapeRef.new(shape: OutputDestinationSettings)
 
     __listOfOutputGroup.member = Shapes::ShapeRef.new(shape: OutputGroup)
+
+    __listOfReservation.member = Shapes::ShapeRef.new(shape: Reservation)
 
     __listOfValidationError.member = Shapes::ShapeRef.new(shape: ValidationError)
 
@@ -1596,6 +1788,22 @@ module Aws::MediaLive
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:delete_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteReservation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/prod/reservations/{reservationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteReservationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:describe_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeChannel"
         o.http_method = "GET"
@@ -1632,6 +1840,36 @@ module Aws::MediaLive
         o.http_request_uri = "/prod/inputSecurityGroups/{inputSecurityGroupId}"
         o.input = Shapes::ShapeRef.new(shape: DescribeInputSecurityGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInputSecurityGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_offering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeOffering"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/offerings/{offeringId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeOfferingRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeOfferingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:describe_reservation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReservation"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/reservations/{reservationId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReservationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReservationResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -1699,6 +1937,62 @@ module Aws::MediaLive
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_offerings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOfferings"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/offerings"
+        o.input = Shapes::ShapeRef.new(shape: ListOfferingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOfferingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_reservations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReservations"
+        o.http_method = "GET"
+        o.http_request_uri = "/prod/reservations"
+        o.input = Shapes::ShapeRef.new(shape: ListReservationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReservationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:purchase_offering, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PurchaseOffering"
+        o.http_method = "POST"
+        o.http_request_uri = "/prod/offerings/{offeringId}/purchase"
+        o.input = Shapes::ShapeRef.new(shape: PurchaseOfferingRequest)
+        o.output = Shapes::ShapeRef.new(shape: PurchaseOfferingResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: GatewayTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:start_channel, Seahorse::Model::Operation.new.tap do |o|

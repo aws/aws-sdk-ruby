@@ -2787,6 +2787,101 @@ module Aws::MediaLive
     #
     class DeleteInputSecurityGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteReservationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         reservation_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] reservation_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteReservationRequest AWS API Documentation
+    #
+    class DeleteReservationRequest < Struct.new(
+      :reservation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] currency_code
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_units
+    #   Units for duration, e.g. 'MONTHS'
+    #   @return [String]
+    #
+    # @!attribute [rw] end
+    #   @return [String]
+    #
+    # @!attribute [rw] fixed_price
+    #   @return [Float]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_description
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_type
+    #   Offering type, e.g. 'NO\_UPFRONT'
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_id
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   Resource configuration (codec, resolution, bitrate, ...)
+    #   @return [Types::ReservationResourceSpecification]
+    #
+    # @!attribute [rw] start
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Current reservation state
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_price
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DeleteReservationResponse AWS API Documentation
+    #
+    class DeleteReservationResponse < Struct.new(
+      :arn,
+      :count,
+      :currency_code,
+      :duration,
+      :duration_units,
+      :end,
+      :fixed_price,
+      :name,
+      :offering_description,
+      :offering_id,
+      :offering_type,
+      :region,
+      :reservation_id,
+      :resource_specification,
+      :start,
+      :state,
+      :usage_price)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeChannelRequest
     #   data as a hash:
     #
@@ -2957,6 +3052,171 @@ module Aws::MediaLive
       :inputs,
       :state,
       :whitelist_rules)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeOfferingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         offering_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] offering_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeOfferingRequest AWS API Documentation
+    #
+    class DescribeOfferingRequest < Struct.new(
+      :offering_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_units
+    #   Units for duration, e.g. 'MONTHS'
+    #   @return [String]
+    #
+    # @!attribute [rw] fixed_price
+    #   @return [Float]
+    #
+    # @!attribute [rw] offering_description
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_type
+    #   Offering type, e.g. 'NO\_UPFRONT'
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   Resource configuration (codec, resolution, bitrate, ...)
+    #   @return [Types::ReservationResourceSpecification]
+    #
+    # @!attribute [rw] usage_price
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeOfferingResponse AWS API Documentation
+    #
+    class DescribeOfferingResponse < Struct.new(
+      :arn,
+      :currency_code,
+      :duration,
+      :duration_units,
+      :fixed_price,
+      :offering_description,
+      :offering_id,
+      :offering_type,
+      :region,
+      :resource_specification,
+      :usage_price)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeReservationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         reservation_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] reservation_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeReservationRequest AWS API Documentation
+    #
+    class DescribeReservationRequest < Struct.new(
+      :reservation_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] currency_code
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_units
+    #   Units for duration, e.g. 'MONTHS'
+    #   @return [String]
+    #
+    # @!attribute [rw] end
+    #   @return [String]
+    #
+    # @!attribute [rw] fixed_price
+    #   @return [Float]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_description
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_type
+    #   Offering type, e.g. 'NO\_UPFRONT'
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_id
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   Resource configuration (codec, resolution, bitrate, ...)
+    #   @return [Types::ReservationResourceSpecification]
+    #
+    # @!attribute [rw] start
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Current reservation state
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_price
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeReservationResponse AWS API Documentation
+    #
+    class DescribeReservationResponse < Struct.new(
+      :arn,
+      :count,
+      :currency_code,
+      :duration,
+      :duration_units,
+      :end,
+      :fixed_price,
+      :name,
+      :offering_description,
+      :offering_id,
+      :offering_type,
+      :region,
+      :reservation_id,
+      :resource_specification,
+      :start,
+      :state,
+      :usage_price)
       include Aws::Structure
     end
 
@@ -6041,6 +6301,189 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListOfferingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         channel_configuration: "__string",
+    #         codec: "__string",
+    #         max_results: 1,
+    #         maximum_bitrate: "__string",
+    #         maximum_framerate: "__string",
+    #         next_token: "__string",
+    #         resolution: "__string",
+    #         resource_type: "__string",
+    #         special_feature: "__string",
+    #         video_quality: "__string",
+    #       }
+    #
+    # @!attribute [rw] channel_configuration
+    #   @return [String]
+    #
+    # @!attribute [rw] codec
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_bitrate
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_framerate
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   @return [String]
+    #
+    # @!attribute [rw] special_feature
+    #   @return [String]
+    #
+    # @!attribute [rw] video_quality
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListOfferingsRequest AWS API Documentation
+    #
+    class ListOfferingsRequest < Struct.new(
+      :channel_configuration,
+      :codec,
+      :max_results,
+      :maximum_bitrate,
+      :maximum_framerate,
+      :next_token,
+      :resolution,
+      :resource_type,
+      :special_feature,
+      :video_quality)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] offerings
+    #   @return [Array<Types::Offering>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListOfferingsResponse AWS API Documentation
+    #
+    class ListOfferingsResponse < Struct.new(
+      :next_token,
+      :offerings)
+      include Aws::Structure
+    end
+
+    # ListOfferings response
+    #
+    # @!attribute [rw] next_token
+    #   Token to retrieve the next page of results
+    #   @return [String]
+    #
+    # @!attribute [rw] offerings
+    #   List of offerings
+    #   @return [Array<Types::Offering>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListOfferingsResultModel AWS API Documentation
+    #
+    class ListOfferingsResultModel < Struct.new(
+      :next_token,
+      :offerings)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListReservationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         codec: "__string",
+    #         max_results: 1,
+    #         maximum_bitrate: "__string",
+    #         maximum_framerate: "__string",
+    #         next_token: "__string",
+    #         resolution: "__string",
+    #         resource_type: "__string",
+    #         special_feature: "__string",
+    #         video_quality: "__string",
+    #       }
+    #
+    # @!attribute [rw] codec
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_bitrate
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_framerate
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   @return [String]
+    #
+    # @!attribute [rw] special_feature
+    #   @return [String]
+    #
+    # @!attribute [rw] video_quality
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListReservationsRequest AWS API Documentation
+    #
+    class ListReservationsRequest < Struct.new(
+      :codec,
+      :max_results,
+      :maximum_bitrate,
+      :maximum_framerate,
+      :next_token,
+      :resolution,
+      :resource_type,
+      :special_feature,
+      :video_quality)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] reservations
+    #   @return [Array<Types::Reservation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListReservationsResponse AWS API Documentation
+    #
+    class ListReservationsResponse < Struct.new(
+      :next_token,
+      :reservations)
+      include Aws::Structure
+    end
+
+    # ListReservations response
+    #
+    # @!attribute [rw] next_token
+    #   Token to retrieve the next page of results
+    #   @return [String]
+    #
+    # @!attribute [rw] reservations
+    #   List of reservations
+    #   @return [Array<Types::Reservation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ListReservationsResultModel AWS API Documentation
+    #
+    class ListReservationsResultModel < Struct.new(
+      :next_token,
+      :reservations)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass M2tsSettings
     #   data as a hash:
     #
@@ -6822,6 +7265,73 @@ module Aws::MediaLive
     class NetworkInputSettings < Struct.new(
       :hls_input_settings,
       :server_validation)
+      include Aws::Structure
+    end
+
+    # Reserved resources available for purchase
+    #
+    # @!attribute [rw] arn
+    #   Unique offering ARN, e.g.
+    #   'arn:aws:medialive:us-west-2:123456789012:offering:87654321'
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g.
+    #   'USD'
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   Lease duration, e.g. '12'
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_units
+    #   Units for duration, e.g. 'MONTHS'
+    #   @return [String]
+    #
+    # @!attribute [rw] fixed_price
+    #   One-time charge for each reserved resource, e.g. '0.0' for a
+    #   NO\_UPFRONT offering
+    #   @return [Float]
+    #
+    # @!attribute [rw] offering_description
+    #   Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps,
+    #   and standard VQ in US West (Oregon)'
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   Unique offering ID, e.g. '87654321'
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_type
+    #   Offering type, e.g. 'NO\_UPFRONT'
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   AWS region, e.g. 'us-west-2'
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   Resource configuration details
+    #   @return [Types::ReservationResourceSpecification]
+    #
+    # @!attribute [rw] usage_price
+    #   Recurring usage charge for each reserved resource, e.g. '157.0'
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Offering AWS API Documentation
+    #
+    class Offering < Struct.new(
+      :arn,
+      :currency_code,
+      :duration,
+      :duration_units,
+      :fixed_price,
+      :offering_description,
+      :offering_id,
+      :offering_type,
+      :region,
+      :resource_specification,
+      :usage_price)
       include Aws::Structure
     end
 
@@ -7874,6 +8384,88 @@ module Aws::MediaLive
     #
     class PassThroughSettings < Aws::EmptyStructure; end
 
+    # PurchaseOffering request
+    #
+    # @!attribute [rw] count
+    #   Number of resources
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   Name for the new reservation
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   Unique request ID to be specified. This is needed to prevent retries from creating multiple resources.**A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOffering AWS API Documentation
+    #
+    class PurchaseOffering < Struct.new(
+      :count,
+      :name,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PurchaseOfferingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         count: 1,
+    #         name: "__string",
+    #         offering_id: "__string", # required
+    #         request_id: "__string",
+    #       }
+    #
+    # @!attribute [rw] count
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOfferingRequest AWS API Documentation
+    #
+    class PurchaseOfferingRequest < Struct.new(
+      :count,
+      :name,
+      :offering_id,
+      :request_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] reservation
+    #   Reserved resources available to use
+    #   @return [Types::Reservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOfferingResponse AWS API Documentation
+    #
+    class PurchaseOfferingResponse < Struct.new(
+      :reservation)
+      include Aws::Structure
+    end
+
+    # PurchaseOffering response
+    #
+    # @!attribute [rw] reservation
+    #   Reserved resources available to use
+    #   @return [Types::Reservation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PurchaseOfferingResultModel AWS API Documentation
+    #
+    class PurchaseOfferingResultModel < Struct.new(
+      :reservation)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemixSettings
     #   data as a hash:
     #
@@ -7913,6 +8505,148 @@ module Aws::MediaLive
       :channel_mappings,
       :channels_in,
       :channels_out)
+      include Aws::Structure
+    end
+
+    # Reserved resources available to use
+    #
+    # @!attribute [rw] arn
+    #   Unique reservation ARN, e.g.
+    #   'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   Number of reserved resources
+    #   @return [Integer]
+    #
+    # @!attribute [rw] currency_code
+    #   Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g.
+    #   'USD'
+    #   @return [String]
+    #
+    # @!attribute [rw] duration
+    #   Lease duration, e.g. '12'
+    #   @return [Integer]
+    #
+    # @!attribute [rw] duration_units
+    #   Units for duration, e.g. 'MONTHS'
+    #   @return [String]
+    #
+    # @!attribute [rw] end
+    #   Reservation UTC end date and time in ISO-8601 format, e.g.
+    #   '2019-03-01T00:00:00'
+    #   @return [String]
+    #
+    # @!attribute [rw] fixed_price
+    #   One-time charge for each reserved resource, e.g. '0.0' for a
+    #   NO\_UPFRONT offering
+    #   @return [Float]
+    #
+    # @!attribute [rw] name
+    #   User specified reservation name
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_description
+    #   Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps,
+    #   and standard VQ in US West (Oregon)'
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_id
+    #   Unique offering ID, e.g. '87654321'
+    #   @return [String]
+    #
+    # @!attribute [rw] offering_type
+    #   Offering type, e.g. 'NO\_UPFRONT'
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   AWS region, e.g. 'us-west-2'
+    #   @return [String]
+    #
+    # @!attribute [rw] reservation_id
+    #   Unique reservation ID, e.g. '1234567'
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_specification
+    #   Resource configuration details
+    #   @return [Types::ReservationResourceSpecification]
+    #
+    # @!attribute [rw] start
+    #   Reservation UTC start date and time in ISO-8601 format, e.g.
+    #   '2018-03-01T00:00:00'
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Current state of reservation, e.g. 'ACTIVE'
+    #   @return [String]
+    #
+    # @!attribute [rw] usage_price
+    #   Recurring usage charge for each reserved resource, e.g. '157.0'
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Reservation AWS API Documentation
+    #
+    class Reservation < Struct.new(
+      :arn,
+      :count,
+      :currency_code,
+      :duration,
+      :duration_units,
+      :end,
+      :fixed_price,
+      :name,
+      :offering_description,
+      :offering_id,
+      :offering_type,
+      :region,
+      :reservation_id,
+      :resource_specification,
+      :start,
+      :state,
+      :usage_price)
+      include Aws::Structure
+    end
+
+    # Resource configuration (codec, resolution, bitrate, ...)
+    #
+    # @!attribute [rw] codec
+    #   Codec, e.g. 'AVC'
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_bitrate
+    #   Maximum bitrate, e.g. 'MAX\_20\_MBPS'
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_framerate
+    #   Maximum framerate, e.g. 'MAX\_30\_FPS' (Outputs only)
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution
+    #   Resolution, e.g. 'HD'
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type, 'INPUT', 'OUTPUT', or 'CHANNEL'
+    #   @return [String]
+    #
+    # @!attribute [rw] special_feature
+    #   Special feature, e.g. 'AUDIO\_NORMALIZATION' (Channels only)
+    #   @return [String]
+    #
+    # @!attribute [rw] video_quality
+    #   Video quality, e.g. 'STANDARD' (Outputs only)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/ReservationResourceSpecification AWS API Documentation
+    #
+    class ReservationResourceSpecification < Struct.new(
+      :codec,
+      :maximum_bitrate,
+      :maximum_framerate,
+      :resolution,
+      :resource_type,
+      :special_feature,
+      :video_quality)
       include Aws::Structure
     end
 
