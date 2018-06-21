@@ -1998,7 +1998,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
@@ -4764,7 +4764,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #       }
     #
     # @!attribute [rw] operating_system
@@ -5762,7 +5762,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #       }
     #
     # @!attribute [rw] patch_group
@@ -8825,6 +8825,51 @@ module Aws::SSM
     # * `AmazonLinux2017.03`
     #
     # * `AmazonLinux2017.09`
+    #
+    # * `*`
+    #
+    #   *Use a wildcard character (*) to target all supported operating
+    #   system versions.*
+    #
+    # *Supported key:* `CLASSIFICATION`
+    #
+    # *Supported values:*
+    #
+    # * `Security`
+    #
+    # * `Bugfix`
+    #
+    # * `Enhancement`
+    #
+    # * `Recommended`
+    #
+    # * `Newpackage`
+    #
+    # *Supported key:* `SEVERITY`
+    #
+    # *Supported values:*
+    #
+    # * `Critical`
+    #
+    # * `Important`
+    #
+    # * `Medium`
+    #
+    # * `Low`
+    #
+    # **Amazon Linux 2 Operating Systems**
+    #
+    # The supported keys for Amazon Linux 2 operating systems are `PRODUCT`,
+    # `CLASSIFICATION`, and `SEVERITY`. See the following lists for valid
+    # values for each of these keys.
+    #
+    # *Supported key:* `PRODUCT`
+    #
+    # *Supported values:*
+    #
+    # * `AmazonLinux2`
+    #
+    # * `AmazonLinux2.0`
     #
     # * `*`
     #

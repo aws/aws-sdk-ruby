@@ -8,16 +8,15 @@
 require 'aws-sdk-core'
 require 'aws-sigv4'
 
-require_relative 'aws-sdk-neptune/types'
-require_relative 'aws-sdk-neptune/client_api'
-require_relative 'aws-sdk-neptune/client'
-require_relative 'aws-sdk-neptune/errors'
-require_relative 'aws-sdk-neptune/waiters'
-require_relative 'aws-sdk-neptune/resource'
-require_relative 'aws-sdk-neptune/customizations'
+require_relative 'aws-sdk-macie/types'
+require_relative 'aws-sdk-macie/client_api'
+require_relative 'aws-sdk-macie/client'
+require_relative 'aws-sdk-macie/errors'
+require_relative 'aws-sdk-macie/resource'
+require_relative 'aws-sdk-macie/customizations'
 
-# This module provides support for Amazon Neptune. This module is available in the
-# `aws-sdk-neptune` gem.
+# This module provides support for Amazon Macie. This module is available in the
+# `aws-sdk-macie` gem.
 #
 # # Client
 #
@@ -29,20 +28,20 @@ require_relative 'aws-sdk-neptune/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon Neptune all
+# Errors returned from Amazon Macie all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::Neptune::Errors::ServiceError
+#     rescue Aws::Macie::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::Neptune
+module Aws::Macie
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.0.0'
 
 end

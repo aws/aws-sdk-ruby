@@ -299,6 +299,9 @@
       "Aws::MachineLearning::Plugins::PredictEndpoint"
     ]
   },
+  "Macie": {
+    "models": "macie/2017-12-19"
+  },
   "MarketplaceCommerceAnalytics": {
     "models": "marketplacecommerceanalytics/2015-07-01"
   },

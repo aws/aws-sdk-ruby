@@ -308,6 +308,7 @@ module Aws
             'MQ' => 'mq',
             'MTurk' => 'mturk-requester',
             'MachineLearning' => 'machinelearning',
+            'Macie' => 'macie',
             'MarketplaceCommerceAnalytics' => 'marketplacecommerceanalytics',
             'MarketplaceEntitlementService' => 'entitlement.marketplace',
             'MarketplaceMetering' => 'metering.marketplace',

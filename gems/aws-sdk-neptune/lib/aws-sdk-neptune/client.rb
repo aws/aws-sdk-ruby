@@ -1424,25 +1424,7 @@ module Aws::Neptune
     #   more information, see CreateDBCluster.
     #
     # @option params [Boolean] :publicly_accessible
-    #   Specifies the accessibility options for the DB instance. A value of
-    #   true specifies an Internet-facing instance with a publicly resolvable
-    #   DNS name, which resolves to a public IP address. A value of false
-    #   specifies an internal instance with a DNS name that resolves to a
-    #   private IP address.
-    #
-    #   Default: The default behavior varies depending on whether a VPC has
-    #   been requested or not. The following list shows the default behavior
-    #   in each case.
-    #
-    #   * **Default VPC:** true
-    #
-    #   * **VPC:** false
-    #
-    #   If no DB subnet group has been specified as part of the request and
-    #   the PubliclyAccessible value has not been set, the DB instance is
-    #   publicly accessible. If a specific DB subnet group has been specified
-    #   as part of the request and the PubliclyAccessible value has not been
-    #   set, the DB instance is private.
+    #   This parameter is not supported.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags. For more information, see [Tagging Amazon Neptune
@@ -4909,20 +4891,7 @@ module Aws::Neptune
     #   Default: `8182`
     #
     # @option params [Boolean] :publicly_accessible
-    #   Boolean value that indicates if the DB instance has a publicly
-    #   resolvable DNS name. Set to `True` to make the DB instance
-    #   Internet-facing with a publicly resolvable DNS name, which resolves to
-    #   a public IP address. Set to `False` to make the DB instance internal
-    #   with a DNS name that resolves to a private IP address.
-    #
-    #   The DB instance must be part of a public subnet and
-    #   `PubliclyAccessible` must be true in order for it to be publicly
-    #   accessible.
-    #
-    #   Changes to the `PubliclyAccessible` parameter are applied immediately
-    #   regardless of the value of the `ApplyImmediately` parameter.
-    #
-    #   Default: false
+    #   This parameter is not supported.
     #
     # @option params [String] :monitoring_role_arn
     #   The ARN for the IAM role that permits Neptune to send enhanced
@@ -6238,7 +6207,7 @@ module Aws::Neptune
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-neptune'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

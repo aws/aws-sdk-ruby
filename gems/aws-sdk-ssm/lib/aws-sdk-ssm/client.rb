@@ -791,7 +791,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #     name: "BaselineName", # required
     #     global_filters: {
     #       patch_filters: [ # required
@@ -1931,6 +1931,12 @@ module Aws::SSM
     # instances. If you specify an instance ID that is not valid or an
     # instance that you do not own, you receive an error.
     #
+    # <note markdown="1"> The IamRole field for this API action is the Amazon Identity and
+    # Access Management (IAM) role assigned to on-premises instances. This
+    # call does not return the IAM role for Amazon EC2 instances.
+    #
+    #  </note>
+    #
     # @option params [Array<Types::InstanceInformationFilter>] :instance_information_filter_list
     #   One or more filters. Use a filter to return a more specific list of
     #   instances.
@@ -2744,7 +2750,7 @@ module Aws::SSM
     #   resp.baseline_identities #=> Array
     #   resp.baseline_identities[0].baseline_id #=> String
     #   resp.baseline_identities[0].baseline_name #=> String
-    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.baseline_identities[0].operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.baseline_identities[0].baseline_description #=> String
     #   resp.baseline_identities[0].default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -2834,7 +2840,7 @@ module Aws::SSM
     #   resp.mappings[0].patch_group #=> String
     #   resp.mappings[0].baseline_identity.baseline_id #=> String
     #   resp.mappings[0].baseline_identity.baseline_name #=> String
-    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.mappings[0].baseline_identity.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.mappings[0].baseline_identity.baseline_description #=> String
     #   resp.mappings[0].baseline_identity.default_baseline #=> Boolean
     #   resp.next_token #=> String
@@ -3025,13 +3031,13 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_default_patch_baseline({
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline AWS API Documentation
     #
@@ -3823,7 +3829,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -3882,14 +3888,14 @@ module Aws::SSM
     #
     #   resp = client.get_patch_baseline_for_patch_group({
     #     patch_group: "PatchGroup", # required
-    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
+    #     operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS
     #   })
     #
     # @example Response structure
     #
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup AWS API Documentation
     #
@@ -6523,7 +6529,7 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.name #=> String
-    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
+    #   resp.operating_system #=> String, one of "WINDOWS", "AMAZON_LINUX", "AMAZON_LINUX_2", "UBUNTU", "REDHAT_ENTERPRISE_LINUX", "SUSE", "CENTOS"
     #   resp.global_filters.patch_filters #=> Array
     #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID", "SECTION", "PRIORITY", "SEVERITY"
     #   resp.global_filters.patch_filters[0].values #=> Array
@@ -6573,7 +6579,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

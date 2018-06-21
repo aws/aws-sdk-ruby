@@ -343,8 +343,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | Aws::IoTDataPlane                    | aws-sdk-iotdataplane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | Aws::IoTJobsDataPlane                | aws-sdk-iotjobsdataplane                | 2017-09-29  |
 | AWS Key Management Service                            | Aws::KMS                             | aws-sdk-kms                             | 2014-11-01  |
-| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Lambda                                            | Aws::LambdaPreview                   | aws-sdk-lambdapreview                   | 2014-11-11  |
+| AWS Lambda                                            | Aws::Lambda                          | aws-sdk-lambda                          | 2015-03-31  |
 | AWS Marketplace Commerce Analytics                    | Aws::MarketplaceCommerceAnalytics    | aws-sdk-marketplacecommerceanalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | Aws::MarketplaceEntitlementService   | aws-sdk-marketplaceentitlementservice   | 2017-01-11  |
 | AWS MediaTailor                                       | Aws::MediaTailor                     | aws-sdk-mediatailor                     | 2018-04-23  |
@@ -414,6 +414,7 @@ to be backwards compatible.
 | Amazon Lex Runtime Service                            | Aws::Lex                             | aws-sdk-lex                             | 2016-11-28  |
 | Amazon Lightsail                                      | Aws::Lightsail                       | aws-sdk-lightsail                       | 2016-11-28  |
 | Amazon Machine Learning                               | Aws::MachineLearning                 | aws-sdk-machinelearning                 | 2014-12-12  |
+| Amazon Macie                                          | Aws::Macie                           | aws-sdk-macie                           | 2017-12-19  |
 | Amazon Mechanical Turk                                | Aws::MTurk                           | aws-sdk-mturk                           | 2017-01-17  |
 | Amazon Neptune                                        | Aws::Neptune                         | aws-sdk-neptune                         | 2014-10-31  |
 | Amazon Pinpoint                                       | Aws::Pinpoint                        | aws-sdk-pinpoint                        | 2016-12-01  |

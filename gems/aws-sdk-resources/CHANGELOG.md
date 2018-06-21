@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.21.0 (2018-06-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-macie` gem.
+
 3.20.0 (2018-06-04)
 ------------------
 

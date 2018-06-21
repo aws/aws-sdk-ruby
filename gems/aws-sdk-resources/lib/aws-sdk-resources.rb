@@ -92,6 +92,7 @@ module Aws
   autoload :MQ, 'aws-sdk-mq'
   autoload :MTurk, 'aws-sdk-mturk'
   autoload :MachineLearning, 'aws-sdk-machinelearning'
+  autoload :Macie, 'aws-sdk-macie'
   autoload :MarketplaceCommerceAnalytics, 'aws-sdk-marketplacecommerceanalytics'
   autoload :MarketplaceEntitlementService, 'aws-sdk-marketplaceentitlementservice'
   autoload :MarketplaceMetering, 'aws-sdk-marketplacemetering'

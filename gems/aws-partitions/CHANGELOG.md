@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2018-06-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Macie`.
+
 1.92.0 (2018-06-19)
 ------------------
 
