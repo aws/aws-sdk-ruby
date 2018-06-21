@@ -298,8 +298,8 @@ to be backwards compatible.
 | AWS IoT Data Plane                                    | IoTDataPlane                    | 2015-05-28  |
 | AWS IoT Jobs Data Plane                               | IoTJobsDataPlane                | 2017-09-29  |
 | AWS Key Management Service                            | KMS                             | 2014-11-01  |
-| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Lambda                                            | LambdaPreview                   | 2014-11-11  |
+| AWS Lambda                                            | Lambda                          | 2015-03-31  |
 | AWS Marketplace Commerce Analytics                    | MarketplaceCommerceAnalytics    | 2015-07-01  |
 | AWS Marketplace Entitlement Service                   | MarketplaceEntitlementService   | 2017-01-11  |
 | AWS MediaTailor                                       | MediaTailor                     | 2018-04-23  |
@@ -369,6 +369,7 @@ to be backwards compatible.
 | Amazon Lex Runtime Service                            | Lex                             | 2016-11-28  |
 | Amazon Lightsail                                      | Lightsail                       | 2016-11-28  |
 | Amazon Machine Learning                               | MachineLearning                 | 2014-12-12  |
+| Amazon Macie                                          | Macie                           | 2017-12-19  |
 | Amazon Mechanical Turk                                | MTurk                           | 2017-01-17  |
 | Amazon Neptune                                        | Neptune                         | 2014-10-31  |
 | Amazon Pinpoint                                       | Pinpoint                        | 2016-12-01  |

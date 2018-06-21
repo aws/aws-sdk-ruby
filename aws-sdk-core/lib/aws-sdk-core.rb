@@ -112,6 +112,7 @@ module Aws
     MQ
     MTurk
     MachineLearning
+    Macie
     MarketplaceCommerceAnalytics
     MarketplaceEntitlementService
     MarketplaceMetering

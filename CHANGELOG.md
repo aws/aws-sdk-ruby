@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Neptune - Updated the API, and documentation for Amazon Neptune.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::Macie - Added support for a new service, Amazon Macie.
+
 2.11.72 (2018-06-20)
 ------------------
 

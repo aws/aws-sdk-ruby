@@ -354,6 +354,10 @@
     "models": "machinelearning/2014-12-12",
     "endpoint": "machinelearning"
   },
+  "Macie": {
+    "models": "macie/2017-12-19",
+    "endpoint": "macie"
+  },
   "MarketplaceCommerceAnalytics": {
     "models": "marketplacecommerceanalytics/2015-07-01",
     "endpoint": "marketplacecommerceanalytics"
