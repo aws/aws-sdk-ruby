@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.73 (2018-06-21)
+------------------
+
 * Feature - Aws::Neptune - Updated the API, and documentation for Amazon Neptune.
 
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
