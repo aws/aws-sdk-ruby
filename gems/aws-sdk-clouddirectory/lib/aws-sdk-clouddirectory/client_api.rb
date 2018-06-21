@@ -172,6 +172,7 @@ module Aws::CloudDirectory
     FacetName = Shapes::StringShape.new(name: 'FacetName')
     FacetNameList = Shapes::ListShape.new(name: 'FacetNameList')
     FacetNotFoundException = Shapes::StructureShape.new(name: 'FacetNotFoundException')
+    FacetStyle = Shapes::StringShape.new(name: 'FacetStyle')
     FacetValidationException = Shapes::StructureShape.new(name: 'FacetValidationException')
     GetAppliedSchemaVersionRequest = Shapes::StructureShape.new(name: 'GetAppliedSchemaVersionRequest')
     GetAppliedSchemaVersionResponse = Shapes::StructureShape.new(name: 'GetAppliedSchemaVersionResponse')
@@ -224,6 +225,8 @@ module Aws::CloudDirectory
     ListIncomingTypedLinksResponse = Shapes::StructureShape.new(name: 'ListIncomingTypedLinksResponse')
     ListIndexRequest = Shapes::StructureShape.new(name: 'ListIndexRequest')
     ListIndexResponse = Shapes::StructureShape.new(name: 'ListIndexResponse')
+    ListManagedSchemaArnsRequest = Shapes::StructureShape.new(name: 'ListManagedSchemaArnsRequest')
+    ListManagedSchemaArnsResponse = Shapes::StructureShape.new(name: 'ListManagedSchemaArnsResponse')
     ListObjectAttributesRequest = Shapes::StructureShape.new(name: 'ListObjectAttributesRequest')
     ListObjectAttributesResponse = Shapes::StructureShape.new(name: 'ListObjectAttributesResponse')
     ListObjectChildrenRequest = Shapes::StructureShape.new(name: 'ListObjectChildrenRequest')
@@ -749,7 +752,8 @@ module Aws::CloudDirectory
     CreateFacetRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     CreateFacetRequest.add_member(:name, Shapes::ShapeRef.new(shape: FacetName, required: true, location_name: "Name"))
     CreateFacetRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: FacetAttributeList, location_name: "Attributes"))
-    CreateFacetRequest.add_member(:object_type, Shapes::ShapeRef.new(shape: ObjectType, required: true, location_name: "ObjectType"))
+    CreateFacetRequest.add_member(:object_type, Shapes::ShapeRef.new(shape: ObjectType, location_name: "ObjectType"))
+    CreateFacetRequest.add_member(:facet_style, Shapes::ShapeRef.new(shape: FacetStyle, location_name: "FacetStyle"))
     CreateFacetRequest.struct_class = Types::CreateFacetRequest
 
     CreateFacetResponse.struct_class = Types::CreateFacetResponse
@@ -865,6 +869,7 @@ module Aws::CloudDirectory
 
     Facet.add_member(:name, Shapes::ShapeRef.new(shape: FacetName, location_name: "Name"))
     Facet.add_member(:object_type, Shapes::ShapeRef.new(shape: ObjectType, location_name: "ObjectType"))
+    Facet.add_member(:facet_style, Shapes::ShapeRef.new(shape: FacetStyle, location_name: "FacetStyle"))
     Facet.struct_class = Types::Facet
 
     FacetAttribute.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, required: true, location_name: "Name"))
@@ -1054,6 +1059,15 @@ module Aws::CloudDirectory
     ListIndexResponse.add_member(:index_attachments, Shapes::ShapeRef.new(shape: IndexAttachmentList, location_name: "IndexAttachments"))
     ListIndexResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListIndexResponse.struct_class = Types::ListIndexResponse
+
+    ListManagedSchemaArnsRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SchemaArn"))
+    ListManagedSchemaArnsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListManagedSchemaArnsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    ListManagedSchemaArnsRequest.struct_class = Types::ListManagedSchemaArnsRequest
+
+    ListManagedSchemaArnsResponse.add_member(:schema_arns, Shapes::ShapeRef.new(shape: Arns, location_name: "SchemaArns"))
+    ListManagedSchemaArnsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListManagedSchemaArnsResponse.struct_class = Types::ListManagedSchemaArnsResponse
 
     ListObjectAttributesRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     ListObjectAttributesRequest.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
@@ -1397,7 +1411,7 @@ module Aws::CloudDirectory
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
 
-      api.version = "2016-05-10"
+      api.version = "2017-01-11"
 
       api.metadata = {
         "endpointPrefix" => "clouddirectory",
@@ -1436,6 +1450,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: SchemaAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttachmentException)
       end)
@@ -2140,6 +2155,26 @@ module Aws::CloudDirectory
         )
       end)
 
+      api.add_operation(:list_managed_schema_arns, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListManagedSchemaArns"
+        o.http_method = "POST"
+        o.http_request_uri = "/amazonclouddirectory/2017-01-11/schema/managed"
+        o.input = Shapes::ShapeRef.new(shape: ListManagedSchemaArnsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListManagedSchemaArnsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_object_attributes, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListObjectAttributes"
         o.http_method = "POST"
@@ -2506,6 +2541,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidFacetUpdateException)
+        o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: FacetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRuleException)
@@ -2594,6 +2630,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttachmentException)
+        o.errors << Shapes::ShapeRef.new(shape: SchemaAlreadyExistsException)
       end)
 
       api.add_operation(:upgrade_published_schema, Seahorse::Model::Operation.new.tap do |o|
