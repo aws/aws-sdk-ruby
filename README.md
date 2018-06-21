@@ -329,7 +329,7 @@ to be backwards compatible.
 | Amazon API Gateway                                    | APIGateway                      | 2015-07-09  |
 | Amazon AppStream                                      | AppStream                       | 2016-12-01  |
 | Amazon Athena                                         | Athena                          | 2017-05-18  |
-| Amazon CloudDirectory                                 | CloudDirectory                  | 2016-05-10  |
+| Amazon CloudDirectory                                 | CloudDirectory                  | 2017-01-11  |
 | Amazon CloudFront                                     | CloudFront                      | 2017-10-30  |
 | Amazon CloudHSM                                       | CloudHSM                        | 2014-05-30  |
 | Amazon CloudSearch                                    | CloudSearch                     | 2013-01-01  |

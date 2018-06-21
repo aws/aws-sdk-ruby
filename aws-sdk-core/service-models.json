@@ -56,7 +56,7 @@
     "endpoint": "cloud9"
   },
   "CloudDirectory": {
-    "models": "clouddirectory/2016-05-10",
+    "models": "clouddirectory/2017-01-11",
     "endpoint": "clouddirectory"
   },
   "CloudFormation": {
