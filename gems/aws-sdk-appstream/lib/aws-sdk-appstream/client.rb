@@ -227,7 +227,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a directory configuration.
+    # Creates a Directory Config object in AppStream 2.0. This object
+    # includes the information required to join streaming instances to an
+    # Active Directory domain.
     #
     # @option params [required, String] :directory_name
     #   The fully qualified name of the directory (for example,
@@ -274,7 +276,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a fleet.
+    # Creates a fleet. A fleet consists of streaming instances that run a
+    # specified image.
     #
     # @option params [required, String] :name
     #   A unique name for the fleet.
@@ -436,7 +439,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates an image builder.
+    # Creates an image builder. An image builder is a virtual machine that
+    # is used to create an image.
     #
     # The initial state of the builder is `PENDING`. When it is ready, the
     # state is `RUNNING`.
@@ -565,7 +569,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a stack.
+    # Creates a stack to start streaming applications to users. A stack
+    # consists of an associated fleet, user access policies, and storage
+    # configurations.
     #
     # @option params [required, String] :name
     #   The name of the stack.
@@ -599,7 +605,7 @@ module Aws::AppStream
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_stack({
-    #     name: "String", # required
+    #     name: "Name", # required
     #     description: "Description",
     #     display_name: "DisplayName",
     #     storage_connectors: [
@@ -649,7 +655,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Creates a URL to start a streaming session for the specified user.
+    # Creates a temporary URL to start an AppStream 2.0 streaming session
+    # for the specified user. A streaming URL enables application streaming
+    # to be tested without user setup.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack.
@@ -706,7 +714,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes the specified directory configuration.
+    # Deletes the specified Directory Config object from AppStream 2.0. This
+    # object includes the information required to join streaming instances
+    # to an Active Directory domain.
     #
     # @option params [required, String] :directory_name
     #   The name of the directory configuration.
@@ -750,9 +760,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes the specified image. You cannot delete an image that is
-    # currently in use. After you delete an image, you cannot provision new
-    # capacity using the image.
+    # Deletes the specified image. You cannot delete an image when it is in
+    # use. After you delete an image, you cannot provision new capacity
+    # using the image.
     #
     # @option params [required, String] :name
     #   The name of the image.
@@ -852,9 +862,10 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Deletes the specified stack. After this operation completes, the
-    # environment can no longer be activated and any reservations made for
-    # the stack are released.
+    # Deletes the specified stack. After the stack is deleted, the
+    # application streaming environment provided by the stack is no longer
+    # available to users. Also, any reservations made for application
+    # streaming sessions for the stack are released.
     #
     # @option params [required, String] :name
     #   The name of the stack.
@@ -876,9 +887,14 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified directory configurations. Note that although
-    # the response syntax in this topic includes the account password, this
-    # password is not returned in the actual response.
+    # Retrieves a list that describes one or more specified Directory Config
+    # objects for AppStream 2.0, if the names for these objects are
+    # provided. Otherwise, all Directory Config objects in the account are
+    # described. These objects include the information required to join
+    # streaming instances to an Active Directory domain.
+    #
+    # Although the response syntax in this topic includes the account
+    # password, this password is not returned in the actual response.
     #
     # @option params [Array<String>] :directory_names
     #   The directory names.
@@ -923,7 +939,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified fleets or all fleets in the account.
+    # Retrieves a list that describes one or more specified fleets, if the
+    # fleet names are provided. Otherwise, all fleets in the account are
+    # described.
     #
     # @option params [Array<String>] :names
     #   The names of the fleets to describe.
@@ -983,8 +1001,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified image builders or all image builders in the
-    # account.
+    # Retrieves a list that describes one or more specified image builders,
+    # if the image builder names are provided. Otherwise, all image builders
+    # in the account are described.
     #
     # @option params [Array<String>] :names
     #   The names of the image builders to describe.
@@ -1046,7 +1065,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified images or all images in the account.
+    # Retrieves a list that describes one or more specified images, if the
+    # image names are provided. Otherwise, all images in the account are
+    # described.
     #
     # @option params [Array<String>] :names
     #   The names of the images to describe.
@@ -1097,10 +1118,11 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the streaming sessions for the specified stack and fleet. If
-    # a user ID is provided, only the streaming sessions for only that user
-    # are returned. If an authentication type is not provided, the default
-    # is to authenticate users using a streaming URL.
+    # Retrieves a list that describes the streaming sessions for a specified
+    # stack and fleet. If a user ID is provided for the stack and fleet,
+    # only streaming sessions for that user are described. If an
+    # authentication type is not provided, the default is to authenticate
+    # users using a streaming URL.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack. This value is case-sensitive.
@@ -1149,6 +1171,8 @@ module Aws::AppStream
     #   resp.sessions[0].fleet_name #=> String
     #   resp.sessions[0].state #=> String, one of "ACTIVE", "PENDING", "EXPIRED"
     #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML", "USERPOOL"
+    #   resp.sessions[0].network_access_configuration.eni_private_ip_address #=> String
+    #   resp.sessions[0].network_access_configuration.eni_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions AWS API Documentation
@@ -1160,7 +1184,9 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Describes the specified stacks or all stacks in the account.
+    # Retrieves a list that describes one or more specified stacks, if the
+    # stack names are provided. Otherwise, all stacks in the account are
+    # described.
     #
     # @option params [Array<String>] :names
     #   The names of the stacks to describe.
@@ -1239,7 +1265,7 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Stops the specified streaming session.
+    # Immediately stops the specified streaming session.
     #
     # @option params [required, String] :session_id
     #   The ID of the streaming session.
@@ -1261,7 +1287,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Lists the fleets associated with the specified stack.
+    # Retrieves the name of the fleet that is associated with the specified
+    # stack.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack.
@@ -1297,7 +1324,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Lists the stacks associated with the specified fleet.
+    # Retrieves the name of the stack with which the specified fleet is
+    # associated.
     #
     # @option params [required, String] :fleet_name
     #   The name of the fleet.
@@ -1333,8 +1361,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Lists the tags for the specified AppStream 2.0 resource. You can tag
-    # AppStream 2.0 image builders, images, fleets, and stacks.
+    # Retrieves a list of all tags for the specified AppStream 2.0 resource.
+    # You can tag AppStream 2.0 image builders, images, fleets, and stacks.
     #
     # For more information about tags, see [Tagging Your Resources][1] in
     # the *Amazon AppStream 2.0 Developer Guide*.
@@ -1567,8 +1595,8 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Disassociates the specified tags from the specified AppStream 2.0
-    # resource.
+    # Disassociates one or more specified tags from the specified AppStream
+    # 2.0 resource.
     #
     # To list the current tags for your resources, use ListTagsForResource.
     #
@@ -1603,10 +1631,12 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Updates the specified directory configuration.
+    # Updates the specified Directory Config object in AppStream 2.0. This
+    # object includes the information required to join streaming instances
+    # to an Active Directory domain.
     #
     # @option params [required, String] :directory_name
-    #   The name of the directory configuration.
+    #   The name of the Directory Config object.
     #
     # @option params [Array<String>] :organizational_unit_distinguished_names
     #   The distinguished names of the organizational units for computer
@@ -1807,7 +1837,7 @@ module Aws::AppStream
       req.send_request(options)
     end
 
-    # Updates the specified stack.
+    # Updates the specified fields for the specified stack.
     #
     # @option params [String] :display_name
     #   The stack name for display.
@@ -1912,7 +1942,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

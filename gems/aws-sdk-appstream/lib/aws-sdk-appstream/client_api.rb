@@ -111,6 +111,7 @@ module Aws::AppStream
     Long = Shapes::IntegerShape.new(name: 'Long')
     Metadata = Shapes::MapShape.new(name: 'Metadata')
     Name = Shapes::StringShape.new(name: 'Name')
+    NetworkAccessConfiguration = Shapes::StructureShape.new(name: 'NetworkAccessConfiguration')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     OrganizationalUnitDistinguishedName = Shapes::StringShape.new(name: 'OrganizationalUnitDistinguishedName')
     OrganizationalUnitDistinguishedNamesList = Shapes::ListShape.new(name: 'OrganizationalUnitDistinguishedNamesList')
@@ -255,7 +256,7 @@ module Aws::AppStream
     CreateImageBuilderStreamingURLResult.add_member(:expires, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Expires"))
     CreateImageBuilderStreamingURLResult.struct_class = Types::CreateImageBuilderStreamingURLResult
 
-    CreateStackRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    CreateStackRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateStackRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateStackRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
     CreateStackRequest.add_member(:storage_connectors, Shapes::ShapeRef.new(shape: StorageConnectorList, location_name: "StorageConnectors"))
@@ -483,6 +484,10 @@ module Aws::AppStream
     Metadata.key = Shapes::ShapeRef.new(shape: String)
     Metadata.value = Shapes::ShapeRef.new(shape: String)
 
+    NetworkAccessConfiguration.add_member(:eni_private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "EniPrivateIpAddress"))
+    NetworkAccessConfiguration.add_member(:eni_id, Shapes::ShapeRef.new(shape: String, location_name: "EniId"))
+    NetworkAccessConfiguration.struct_class = Types::NetworkAccessConfiguration
+
     OrganizationalUnitDistinguishedNamesList.member = Shapes::ShapeRef.new(shape: OrganizationalUnitDistinguishedName)
 
     ResourceError.add_member(:error_code, Shapes::ShapeRef.new(shape: FleetErrorCode, location_name: "ErrorCode"))
@@ -504,6 +509,7 @@ module Aws::AppStream
     Session.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
     Session.add_member(:state, Shapes::ShapeRef.new(shape: SessionState, required: true, location_name: "State"))
     Session.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
+    Session.add_member(:network_access_configuration, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "NetworkAccessConfiguration"))
     Session.struct_class = Types::Session
 
     SessionList.member = Shapes::ShapeRef.new(shape: Session)
@@ -1019,6 +1025,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: IncompatibleImageException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
     end
 

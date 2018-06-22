@@ -521,7 +521,7 @@ module Aws::AppStream
     #   data as a hash:
     #
     #       {
-    #         name: "String", # required
+    #         name: "Name", # required
     #         description: "Description",
     #         display_name: "DisplayName",
     #         storage_connectors: [
@@ -1536,7 +1536,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] names
-    #   The names of the fleets.
+    #   The name of the fleet.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1578,7 +1578,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] names
-    #   The names of the stacks.
+    #   The name of the stack.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -1620,6 +1620,27 @@ module Aws::AppStream
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      include Aws::Structure
+    end
+
+    # The network details of the fleet instance for the streaming session.
+    #
+    # @!attribute [rw] eni_private_ip_address
+    #   The private IP address of the elastic network interface that is
+    #   attached to instances in your VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] eni_id
+    #   The resource identifier of the elastic network interface that is
+    #   attached to instances in your VPC. All network interfaces have the
+    #   eni-xxxxxxxx resource identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/NetworkAccessConfiguration AWS API Documentation
+    #
+    class NetworkAccessConfiguration < Struct.new(
+      :eni_private_ip_address,
+      :eni_id)
       include Aws::Structure
     end
 
@@ -1703,6 +1724,10 @@ module Aws::AppStream
     #   streaming URL (`API`) or SAML federation (`SAML`).
     #   @return [String]
     #
+    # @!attribute [rw] network_access_configuration
+    #   The network details for the streaming session.
+    #   @return [Types::NetworkAccessConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session AWS API Documentation
     #
     class Session < Struct.new(
@@ -1711,7 +1736,8 @@ module Aws::AppStream
       :stack_name,
       :fleet_name,
       :state,
-      :authentication_type)
+      :authentication_type,
+      :network_access_configuration)
       include Aws::Structure
     end
 
@@ -2012,7 +2038,7 @@ module Aws::AppStream
     #       }
     #
     # @!attribute [rw] directory_name
-    #   The name of the directory configuration.
+    #   The name of the Directory Config object.
     #   @return [String]
     #
     # @!attribute [rw] organizational_unit_distinguished_names
@@ -2035,7 +2061,7 @@ module Aws::AppStream
     end
 
     # @!attribute [rw] directory_config
-    #   Information about the directory configuration.
+    #   Information about the Directory Config object.
     #   @return [Types::DirectoryConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigResult AWS API Documentation
