@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.75 (2018-06-22)
+------------------
+
 * Feature - Aws::AlexaForBusiness - Updated the API, and documentation for Alexa For Business.
 
 * Feature - Aws::AppStream - Updated the API, documentation, and integration test for Amazon AppStream.
