@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Documentation indicates wrong keys for headers.
+
 1.0.2 (2018-02-21)
 ------------------
 
