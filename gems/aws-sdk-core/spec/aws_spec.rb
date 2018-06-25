@@ -56,4 +56,21 @@ module Aws
       expect(conn_pool.size).to eq(0)
     end
   end
+
+  describe 'add_plugins' do
+
+    let(:dir) { File.expand_path('../fixtures/apis', __FILE__) }
+
+    it 'adds custom plugins to service' do
+      SvcTest = ApiHelper.sample_service(
+        api: Json.load_file("#{dir}/s3.json")
+      )
+      Aws.add_plugins(SvcTest, {
+        'Custom::Plugin' => File.join(dir, "../custom/plugin.rb")
+      })
+      client = SvcTest::Client.new(region: 'foo')
+      expect(client.class.plugins).to include(Custom::Plugin)
+    end
+
+  end
 end
