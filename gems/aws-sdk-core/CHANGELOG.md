@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.22.0 (2018-06-26)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Feature - Allows you to set custom paths to shared config and shared credential files via the `AWS_CONFIG_FILE` and `AWS_SHARED_CREDENTIALS_FILE` environment variables.
 
 * Feature - Flexible retry strategies. Provides the `:retry_max_delay`, `:retry_base_delay`, and `:retry_jitter` options, which modify the default backoff strategy without the need to define a full retry lambda from scratch.

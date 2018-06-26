@@ -115,12 +115,23 @@ module Aws::XRay
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -678,7 +689,7 @@ module Aws::XRay
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-xray'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

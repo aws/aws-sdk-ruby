@@ -291,6 +291,44 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         secret_id: "SecretIdType", # required
+    #       }
+    #
+    # @!attribute [rw] secret_id
+    #   Specifies the secret for which you want to delete the attached
+    #   resource-based policy. You can specify either the Amazon Resource
+    #   Name (ARN) or the friendly name of the secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :secret_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the secret for which the resource-based policy was
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The friendly name of the secret for which the resource-based policy
+    #   was deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Struct.new(
+      :arn,
+      :name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteSecretRequest
     #   data as a hash:
     #
@@ -549,6 +587,59 @@ module Aws::SecretsManager
     #
     class GetRandomPasswordResponse < Struct.new(
       :random_password)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         secret_id: "SecretIdType", # required
+    #       }
+    #
+    # @!attribute [rw] secret_id
+    #   Specifies the secret for which you want to retrieve the attached
+    #   resource-based policy. You can specify either the Amazon Resource
+    #   Name (ARN) or the friendly name of the secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :secret_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the secret for which the resource-based policy was
+    #   retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The friendly name of the secret for which the resource-based policy
+    #   was retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   A JSON-formatted string that describes the permissions associated
+    #   with the attached secret. These permissions are combined with any
+    #   permissions associated with the user or role who attempts to access
+    #   this secret. The combined permissions specify who can access the
+    #   secret and what actions they can perform. For more information, see
+    #   [Authentication and Access Control for AWS Secrets Manager][1] in
+    #   the *AWS Secrets Manager User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :arn,
+      :name,
+      :resource_policy)
       include Aws::Structure
     end
 
@@ -826,6 +917,59 @@ module Aws::SecretsManager
     class ListSecretsResponse < Struct.new(
       :secret_list,
       :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         secret_id: "SecretIdType", # required
+    #         resource_policy: "NonEmptyResourcePolicyType", # required
+    #       }
+    #
+    # @!attribute [rw] secret_id
+    #   Specifies the secret to which you want to attach the resource-based
+    #   policy. You can specify either the Amazon Resource Name (ARN) or the
+    #   friendly name of the secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   A JSON-formatted string constructed according to the grammar and
+    #   syntax for an AWS resource-based policy. The policy in the string
+    #   identifies who can access or manage this secret and its versions.
+    #   For information on how to format a JSON parameter for the various
+    #   command line tool environments, see [Using JSON for Parameters][1]
+    #   in the *AWS CLI User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :secret_id,
+      :resource_policy)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The ARN of the secret for which the resource-based policy was
+    #   retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The friendly name of the secret for which the resource-based policy
+    #   was retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :arn,
+      :name)
       include Aws::Structure
     end
 

@@ -115,12 +115,23 @@ module Aws::SecretsManager
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -560,6 +571,55 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
+    # Deletes the resource-based policy currently attached to the secret.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * secretsmanager:DeleteResourcePolicy
+    #
+    # ^
+    #
+    # **Related operations**
+    #
+    # * To attach a resource policy to a secret, use PutResourcePolicy.
+    #
+    # * To retrieve the current resource-based policy that is attached to a
+    #   secret, use GetResourcePolicy.
+    #
+    # * To list all of the currently available secrets, use ListSecrets.
+    #
+    # @option params [required, String] :secret_id
+    #   Specifies the secret for which you want to delete the attached
+    #   resource-based policy. You can specify either the Amazon Resource Name
+    #   (ARN) or the friendly name of the secret.
+    #
+    # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteResourcePolicyResponse#arn #arn} => String
+    #   * {Types::DeleteResourcePolicyResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     secret_id: "SecretIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes an entire secret and all of its versions. You can optionally
     # include a recovery window during which you can restore the secret. If
     # you don't specify a recovery window value, the operation defaults to
@@ -881,6 +941,60 @@ module Aws::SecretsManager
     # @param [Hash] params ({})
     def get_random_password(params = {}, options = {})
       req = build_request(:get_random_password, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the JSON text of the resource-based policy attached to the
+    # specified secret. The JSON request string input and response output
+    # are shown formatted with whitespace and line breaks for better
+    # readability. Submit your input as a single line JSON string.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * secretsmanager:GetResourcePolicy
+    #
+    # ^
+    #
+    # **Related operations**
+    #
+    # * To attach a resource policy to a secret, use PutResourcePolicy.
+    #
+    # * To delete the resource-based policy that is attached to a secret,
+    #   use DeleteResourcePolicy.
+    #
+    # * To list all of the currently available secrets, use ListSecrets.
+    #
+    # @option params [required, String] :secret_id
+    #   Specifies the secret for which you want to retrieve the attached
+    #   resource-based policy. You can specify either the Amazon Resource Name
+    #   (ARN) or the friendly name of the secret.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#arn #arn} => String
+    #   * {Types::GetResourcePolicyResponse#name #name} => String
+    #   * {Types::GetResourcePolicyResponse#resource_policy #resource_policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     secret_id: "SecretIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.resource_policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
       req.send_request(options)
     end
 
@@ -1253,6 +1367,83 @@ module Aws::SecretsManager
     # @param [Hash] params ({})
     def list_secrets(params = {}, options = {})
       req = build_request(:list_secrets, params)
+      req.send_request(options)
+    end
+
+    # Attaches the contents of the specified resource-based policy to a
+    # secret. A resource-based policy is optional. Alternatively, you can
+    # use IAM user-based policies that specify the secret's ARN in the
+    # policy statement's `Resources` element. You can also use a
+    # combination of both identity- an resource-based policies. The affected
+    # users and roles receive the permissions permitted by all of the
+    # relevant policies. For more information, see [Using Resource-Based
+    # Policies for AWS Secrets Manager][1]. For the complete description of
+    # the AWS policy syntax and grammar, see [IAM JSON Policy Reference][2]
+    # in the *IAM User Guide*.
+    #
+    # **Minimum permissions**
+    #
+    # To run this command, you must have the following permissions:
+    #
+    # * secretsmanager:PutResourcePolicy
+    #
+    # ^
+    #
+    # **Related operations**
+    #
+    # * To retrieve the resource policy attached to a secret, use
+    #   GetResourcePolicy.
+    #
+    # * To delete the resource-based policy that is attached to a secret,
+    #   use DeleteResourcePolicy.
+    #
+    # * To list all of the currently available secrets, use ListSecrets.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html
+    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
+    #
+    # @option params [required, String] :secret_id
+    #   Specifies the secret to which you want to attach the resource-based
+    #   policy. You can specify either the Amazon Resource Name (ARN) or the
+    #   friendly name of the secret.
+    #
+    # @option params [required, String] :resource_policy
+    #   A JSON-formatted string constructed according to the grammar and
+    #   syntax for an AWS resource-based policy. The policy in the string
+    #   identifies who can access or manage this secret and its versions. For
+    #   information on how to format a JSON parameter for the various command
+    #   line tool environments, see [Using JSON for Parameters][1] in the *AWS
+    #   CLI User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#arn #arn} => String
+    #   * {Types::PutResourcePolicyResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     secret_id: "SecretIdType", # required
+    #     resource_policy: "NonEmptyResourcePolicyType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -2320,7 +2511,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

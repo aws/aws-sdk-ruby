@@ -115,12 +115,23 @@ module Aws::Inspector
     #   Used when loading credentials from the shared credentials file
     #   at HOME/.aws/credentials.  When not specified, 'default' is used.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -369,6 +380,38 @@ module Aws::Inspector
     # @param [Hash] params ({})
     def create_assessment_template(params = {}, options = {})
       req = build_request(:create_assessment_template, params)
+      req.send_request(options)
+    end
+
+    # Starts the generation of an exclusions preview for the specified
+    # assessment template. The exclusions preview lists the potential
+    # exclusions (ExclusionPreview) that Inspector can detect before it runs
+    # the assessment.
+    #
+    # @option params [required, String] :assessment_template_arn
+    #   The ARN that specifies the assessment template for which you want to
+    #   create an exclusions preview.
+    #
+    # @return [Types::CreateExclusionsPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExclusionsPreviewResponse#preview_token #preview_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_exclusions_preview({
+    #     assessment_template_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.preview_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateExclusionsPreview AWS API Documentation
+    #
+    # @overload create_exclusions_preview(params = {})
+    # @param [Hash] params ({})
+    def create_exclusions_preview(params = {}, options = {})
+      req = build_request(:create_exclusions_preview, params)
       req.send_request(options)
     end
 
@@ -850,6 +893,54 @@ module Aws::Inspector
       req.send_request(options)
     end
 
+    # Describes the exclusions that are specified by the exclusions' ARNs.
+    #
+    # @option params [required, Array<String>] :exclusion_arns
+    #   The list of ARNs that specify the exclusions that you want to
+    #   describe.
+    #
+    # @option params [String] :locale
+    #   The locale into which you want to translate the exclusion's title,
+    #   description, and recommendation.
+    #
+    # @return [Types::DescribeExclusionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExclusionsResponse#exclusions #exclusions} => Hash&lt;String,Types::Exclusion&gt;
+    #   * {Types::DescribeExclusionsResponse#failed_items #failed_items} => Hash&lt;String,Types::FailedItemDetails&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_exclusions({
+    #     exclusion_arns: ["Arn"], # required
+    #     locale: "EN_US", # accepts EN_US
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.exclusions #=> Hash
+    #   resp.exclusions["Arn"].arn #=> String
+    #   resp.exclusions["Arn"].title #=> String
+    #   resp.exclusions["Arn"].description #=> String
+    #   resp.exclusions["Arn"].recommendation #=> String
+    #   resp.exclusions["Arn"].scopes #=> Array
+    #   resp.exclusions["Arn"].scopes[0].key #=> String, one of "INSTANCE_ID", "RULES_PACKAGE_ARN"
+    #   resp.exclusions["Arn"].scopes[0].value #=> String
+    #   resp.exclusions["Arn"].attributes #=> Array
+    #   resp.exclusions["Arn"].attributes[0].key #=> String
+    #   resp.exclusions["Arn"].attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.failed_items #=> Hash
+    #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
+    #   resp.failed_items["Arn"].retryable #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeExclusions AWS API Documentation
+    #
+    # @overload describe_exclusions(params = {})
+    # @param [Hash] params ({})
+    def describe_exclusions(params = {}, options = {})
+      req = build_request(:describe_exclusions, params)
+      req.send_request(options)
+    end
+
     # Describes the findings that are specified by the ARNs of the findings.
     #
     # @option params [required, Array<String>] :finding_arns
@@ -1145,6 +1236,73 @@ module Aws::Inspector
     # @param [Hash] params ({})
     def get_assessment_report(params = {}, options = {})
       req = build_request(:get_assessment_report, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the exclusions preview (a list of ExclusionPreview objects)
+    # specified by the preview token. You can obtain the preview token by
+    # running the CreateExclusionsPreview API.
+    #
+    # @option params [required, String] :assessment_template_arn
+    #   The ARN that specifies the assessment template for which the
+    #   exclusions preview was requested.
+    #
+    # @option params [required, String] :preview_token
+    #   The unique identifier associated of the exclusions preview.
+    #
+    # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the
+    #   GetExclusionsPreviewRequest action. Subsequent calls to the action
+    #   fill nextToken in the request with the value of nextToken from the
+    #   previous response to continue listing data.
+    #
+    # @option params [Integer] :max_results
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 100. The maximum value is
+    #   500.
+    #
+    # @option params [String] :locale
+    #   The locale into which you want to translate the exclusion's title,
+    #   description, and recommendation.
+    #
+    # @return [Types::GetExclusionsPreviewResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetExclusionsPreviewResponse#preview_status #preview_status} => String
+    #   * {Types::GetExclusionsPreviewResponse#exclusion_previews #exclusion_previews} => Array&lt;Types::ExclusionPreview&gt;
+    #   * {Types::GetExclusionsPreviewResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_exclusions_preview({
+    #     assessment_template_arn: "Arn", # required
+    #     preview_token: "UUID", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     locale: "EN_US", # accepts EN_US
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.preview_status #=> String, one of "WORK_IN_PROGRESS", "COMPLETED"
+    #   resp.exclusion_previews #=> Array
+    #   resp.exclusion_previews[0].title #=> String
+    #   resp.exclusion_previews[0].description #=> String
+    #   resp.exclusion_previews[0].recommendation #=> String
+    #   resp.exclusion_previews[0].scopes #=> Array
+    #   resp.exclusion_previews[0].scopes[0].key #=> String, one of "INSTANCE_ID", "RULES_PACKAGE_ARN"
+    #   resp.exclusion_previews[0].scopes[0].value #=> String
+    #   resp.exclusion_previews[0].attributes #=> Array
+    #   resp.exclusion_previews[0].attributes[0].key #=> String
+    #   resp.exclusion_previews[0].attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetExclusionsPreview AWS API Documentation
+    #
+    # @overload get_exclusions_preview(params = {})
+    # @param [Hash] params ({})
+    def get_exclusions_preview(params = {}, options = {})
+      req = build_request(:get_exclusions_preview, params)
       req.send_request(options)
     end
 
@@ -1916,6 +2074,52 @@ module Aws::Inspector
       req.send_request(options)
     end
 
+    # List exclusions that are generated by the assessment run.
+    #
+    # @option params [required, String] :assessment_run_arn
+    #   The ARN of the assessment run that generated the exclusions that you
+    #   want to list.
+    #
+    # @option params [String] :next_token
+    #   You can use this parameter when paginating results. Set the value of
+    #   this parameter to null on your first call to the ListExclusionsRequest
+    #   action. Subsequent calls to the action fill nextToken in the request
+    #   with the value of nextToken from the previous response to continue
+    #   listing data.
+    #
+    # @option params [Integer] :max_results
+    #   You can use this parameter to indicate the maximum number of items you
+    #   want in the response. The default value is 100. The maximum value is
+    #   500.
+    #
+    # @return [Types::ListExclusionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExclusionsResponse#exclusion_arns #exclusion_arns} => Array&lt;String&gt;
+    #   * {Types::ListExclusionsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_exclusions({
+    #     assessment_run_arn: "Arn", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.exclusion_arns #=> Array
+    #   resp.exclusion_arns[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListExclusions AWS API Documentation
+    #
+    # @overload list_exclusions(params = {})
+    # @param [Hash] params ({})
+    def list_exclusions(params = {}, options = {})
+      req = build_request(:list_exclusions, params)
+      req.send_request(options)
+    end
+
     # Lists findings that are generated by the assessment runs that are
     # specified by the ARNs of the assessment runs.
     #
@@ -2577,7 +2781,7 @@ module Aws::Inspector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

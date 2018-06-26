@@ -21,6 +21,7 @@ module Aws::S3
     AccessControlPolicy = Shapes::StructureShape.new(name: 'AccessControlPolicy')
     AccessControlTranslation = Shapes::StructureShape.new(name: 'AccessControlTranslation')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AllowQuotedRecordDelimiter = Shapes::BooleanShape.new(name: 'AllowQuotedRecordDelimiter')
     AllowedHeader = Shapes::StringShape.new(name: 'AllowedHeader')
     AllowedHeaders = Shapes::ListShape.new(name: 'AllowedHeaders', flattened: true)
     AllowedMethod = Shapes::StringShape.new(name: 'AllowedMethod')
@@ -558,6 +559,7 @@ module Aws::S3
     CSVInput.add_member(:record_delimiter, Shapes::ShapeRef.new(shape: RecordDelimiter, location_name: "RecordDelimiter"))
     CSVInput.add_member(:field_delimiter, Shapes::ShapeRef.new(shape: FieldDelimiter, location_name: "FieldDelimiter"))
     CSVInput.add_member(:quote_character, Shapes::ShapeRef.new(shape: QuoteCharacter, location_name: "QuoteCharacter"))
+    CSVInput.add_member(:allow_quoted_record_delimiter, Shapes::ShapeRef.new(shape: AllowQuotedRecordDelimiter, location_name: "AllowQuotedRecordDelimiter"))
     CSVInput.struct_class = Types::CSVInput
 
     CSVOutput.add_member(:quote_fields, Shapes::ShapeRef.new(shape: QuoteFields, location_name: "QuoteFields"))

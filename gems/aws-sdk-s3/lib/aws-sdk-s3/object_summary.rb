@@ -741,6 +741,7 @@ module Aws::S3
     #             record_delimiter: "RecordDelimiter",
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
+    #             allow_quoted_record_delimiter: false,
     #           },
     #           compression_type: "NONE", # accepts NONE, GZIP
     #           json: {

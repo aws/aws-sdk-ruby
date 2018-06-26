@@ -165,12 +165,23 @@ module Aws::S3
     #   where server-side-encryption is used with customer-provided keys.
     #   This should only be disabled for local testing.
     #
+    # @option options [Float] :retry_base_delay (0.3)
+    #   The base delay in seconds used by the default backoff function.
+    #
+    # @option options [Symbol] :retry_jitter (:none)
+    #   A delay randomiser function used by the default backoff function. Some predefined functions can be referenced by name - :none, :equal, :full, otherwise a Proc that takes and returns a number.
+    #
+    #   @see https://www.awsarchitectureblog.com/2015/03/backoff.html
+    #
     # @option options [Integer] :retry_limit (3)
     #   The maximum number of times to retry failed requests.  Only
     #   ~ 500 level server errors and certain ~ 400 level client errors
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    #
+    # @option options [Integer] :retry_max_delay (0)
+    #   The maximum number of seconds to delay between retries (0 for no limit) used by the default backoff function.
     #
     # @option options [String] :secret_access_key
     #
@@ -5717,6 +5728,7 @@ module Aws::S3
     #             record_delimiter: "RecordDelimiter",
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
+    #             allow_quoted_record_delimiter: false,
     #           },
     #           compression_type: "NONE", # accepts NONE, GZIP
     #           json: {
@@ -5996,6 +6008,7 @@ module Aws::S3
     #         record_delimiter: "RecordDelimiter",
     #         field_delimiter: "FieldDelimiter",
     #         quote_character: "QuoteCharacter",
+    #         allow_quoted_record_delimiter: false,
     #       },
     #       compression_type: "NONE", # accepts NONE, GZIP
     #       json: {
@@ -6371,7 +6384,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

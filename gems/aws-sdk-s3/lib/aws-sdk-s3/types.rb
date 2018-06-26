@@ -549,6 +549,7 @@ module Aws::S3
     #         record_delimiter: "RecordDelimiter",
     #         field_delimiter: "FieldDelimiter",
     #         quote_character: "QuoteCharacter",
+    #         allow_quoted_record_delimiter: false,
     #       }
     #
     # @!attribute [rw] file_header_info
@@ -578,6 +579,12 @@ module Aws::S3
     #   value.
     #   @return [String]
     #
+    # @!attribute [rw] allow_quoted_record_delimiter
+    #   Specifies that CSV field values may contain quoted record delimiters
+    #   and such records should be allowed. Default value is FALSE. Setting
+    #   this value to TRUE may lower performance.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CSVInput AWS API Documentation
     #
     class CSVInput < Struct.new(
@@ -586,7 +593,8 @@ module Aws::S3
       :quote_escape_character,
       :record_delimiter,
       :field_delimiter,
-      :quote_character)
+      :quote_character,
+      :allow_quoted_record_delimiter)
       include Aws::Structure
     end
 
@@ -3632,6 +3640,7 @@ module Aws::S3
     #           record_delimiter: "RecordDelimiter",
     #           field_delimiter: "FieldDelimiter",
     #           quote_character: "QuoteCharacter",
+    #           allow_quoted_record_delimiter: false,
     #         },
     #         compression_type: "NONE", # accepts NONE, GZIP
     #         json: {
@@ -7518,6 +7527,7 @@ module Aws::S3
     #                 record_delimiter: "RecordDelimiter",
     #                 field_delimiter: "FieldDelimiter",
     #                 quote_character: "QuoteCharacter",
+    #                 allow_quoted_record_delimiter: false,
     #               },
     #               compression_type: "NONE", # accepts NONE, GZIP
     #               json: {
@@ -7636,6 +7646,7 @@ module Aws::S3
     #               record_delimiter: "RecordDelimiter",
     #               field_delimiter: "FieldDelimiter",
     #               quote_character: "QuoteCharacter",
+    #               allow_quoted_record_delimiter: false,
     #             },
     #             compression_type: "NONE", # accepts NONE, GZIP
     #             json: {
@@ -8061,6 +8072,7 @@ module Aws::S3
     #             record_delimiter: "RecordDelimiter",
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
+    #             allow_quoted_record_delimiter: false,
     #           },
     #           compression_type: "NONE", # accepts NONE, GZIP
     #           json: {
@@ -8170,6 +8182,7 @@ module Aws::S3
     #             record_delimiter: "RecordDelimiter",
     #             field_delimiter: "FieldDelimiter",
     #             quote_character: "QuoteCharacter",
+    #             allow_quoted_record_delimiter: false,
     #           },
     #           compression_type: "NONE", # accepts NONE, GZIP
     #           json: {
