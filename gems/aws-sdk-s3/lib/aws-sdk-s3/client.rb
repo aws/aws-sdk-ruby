@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # WARNING ABOUT GENERATED CODE
 #
 # This file is generated. See the contributing guide for more information:
@@ -27,6 +28,7 @@ require 'aws-sdk-s3/plugins/expect_100_continue.rb'
 require 'aws-sdk-s3/plugins/http_200_errors.rb'
 require 'aws-sdk-s3/plugins/s3_host_id.rb'
 require 'aws-sdk-s3/plugins/get_bucket_location_fix.rb'
+require 'aws-sdk-s3/plugins/get_checksum.rb'
 require 'aws-sdk-s3/plugins/location_constraint.rb'
 require 'aws-sdk-s3/plugins/md5s.rb'
 require 'aws-sdk-s3/plugins/redirects.rb'
@@ -69,6 +71,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::Http200Errors)
     add_plugin(Aws::S3::Plugins::S3HostId)
     add_plugin(Aws::S3::Plugins::GetBucketLocationFix)
+    add_plugin(Aws::S3::Plugins::GetChecksum)
     add_plugin(Aws::S3::Plugins::LocationConstraint)
     add_plugin(Aws::S3::Plugins::Md5s)
     add_plugin(Aws::S3::Plugins::Redirects)
