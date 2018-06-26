@@ -12,6 +12,27 @@ module Aws
         expect(client.config.retry_limit).to eq(3)
       end
 
+      it 'defaults config.retry_max_delay to 0' do
+        config = Seahorse::Client::Configuration.new
+        RetryErrors.new.add_options(config)
+        config = config.build!
+        expect(config.retry_max_delay).to eq(0)
+      end
+      
+      it 'defaults config.retry_base_delay to 0.3' do
+        config = Seahorse::Client::Configuration.new
+        RetryErrors.new.add_options(config)
+        config = config.build!
+        expect(config.retry_base_delay).to eq(0.3)
+      end
+      
+      it 'defaults config.retry_jitter to :none' do
+        config = Seahorse::Client::Configuration.new
+        RetryErrors.new.add_options(config)
+        config = config.build!
+        expect(config.retry_jitter).to eq(:none)
+      end
+
       describe 'ErrorInspector' do
 
         def inspector(error, http_status_code = 404)
@@ -193,7 +214,7 @@ module Aws
           handle(send_handler)
         end
 
-        it 'reties 3 times for a total of 4 attemps' do
+        it 'retries 3 times for a total of 4 attemps' do
           resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
           send_handler = double('send-handler')
           expect(send_handler).to receive(:call).
@@ -203,10 +224,100 @@ module Aws
           handle(send_handler)
         end
 
+        it 'backs off according to custom retry_backoff proc'  do
+          config.retry_backoff = lambda { |c| Kernel.sleep([0.4, 0.2, 1.7][c.retries]) }
+          expect(Kernel).to receive(:sleep).with(0.4).ordered
+          expect(Kernel).to receive(:sleep).with(0.2).ordered
+          expect(Kernel).to receive(:sleep).with(1.7).ordered
+          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
         it 'backs off exponentially between each retry attempt' do
           expect(Kernel).to receive(:sleep).with(0.3).ordered
           expect(Kernel).to receive(:sleep).with(0.6).ordered
           expect(Kernel).to receive(:sleep).with(1.2).ordered
+          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
+        it 'backs off exponentially between each retry attempt with custom :retry_base_delay' do
+          config.retry_base_delay = 1.0
+          expect(Kernel).to receive(:sleep).with(1.0).ordered
+          expect(Kernel).to receive(:sleep).with(2.0).ordered
+          expect(Kernel).to receive(:sleep).with(4.0).ordered
+          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
+        it 'caps backoff delay to :retry_max_delay 'do
+          config.retry_max_delay = 4.0
+          config.retry_limit = 6
+          expect(Kernel).to receive(:sleep).with(0.3).ordered
+          expect(Kernel).to receive(:sleep).with(0.6).ordered
+          expect(Kernel).to receive(:sleep).with(1.2).ordered
+          expect(Kernel).to receive(:sleep).with(2.4).ordered
+          expect(Kernel).to receive(:sleep).with(4.0).ordered
+          expect(Kernel).to receive(:sleep).with(4.0).ordered
+          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
+        it 'randomises the backoff delay with :retry_jitter set to :full' do
+          config.retry_jitter = :full
+          config.retry_max_delay = 2.0
+          config.retry_limit = 4
+
+          expect(Kernel).to receive(:rand).with(0..0.3).ordered.and_return(1)
+          expect(Kernel).to receive(:sleep).with(1).ordered
+
+          expect(Kernel).to receive(:rand).with(0..0.6).ordered.and_return(2)
+          expect(Kernel).to receive(:sleep).with(2).ordered
+
+          expect(Kernel).to receive(:rand).with(0..1.2).ordered.and_return(3)
+          expect(Kernel).to receive(:sleep).with(3).ordered
+
+          expect(Kernel).to receive(:rand).with(0..2.0).ordered.and_return(4)
+          expect(Kernel).to receive(:sleep).with(4).ordered
+
+          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
+        it 'randomises the backoff delay with :retry_jitter set to :equal'  do
+          config.retry_jitter = :equal
+          config.retry_max_delay = 2.0
+          config.retry_limit = 4
+
+          expect(Kernel).to receive(:rand).with(0..0.3/2).ordered.and_return(1)
+          expect(Kernel).to receive(:sleep).with(1 + 0.3/2).ordered
+
+          expect(Kernel).to receive(:rand).with(0..0.6/2).ordered.and_return(2)
+          expect(Kernel).to receive(:sleep).with(2 + 0.6/2).ordered
+
+          expect(Kernel).to receive(:rand).with(0..1.2/2).ordered.and_return(3)
+          expect(Kernel).to receive(:sleep).with(3 + 1.2/2).ordered
+
+          expect(Kernel).to receive(:rand).with(0..2.0/2).ordered.and_return(4)
+          expect(Kernel).to receive(:sleep).with(4 + 2.0/2).ordered
+
+          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
+        it 'raises KeyError with invalid jitter function' do
+          config.retry_jitter = :unknown
+          resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
+          expect(-> { handle { |context| resp } }).to raise_error(KeyError)
+        end
+
+        it 'adjusts delay with custom jitter'  do
+          config.retry_jitter = lambda { |delay| delay * 2}
+
+          expect(Kernel).to receive(:sleep).with(0.6).ordered
+          expect(Kernel).to receive(:sleep).with(1.2).ordered
+          expect(Kernel).to receive(:sleep).with(2.4).ordered
+
           resp.error = RetryErrorsSvc::Errors::RequestLimitExceeded.new(nil,nil)
           handle { |context| resp }
         end
