@@ -137,6 +137,13 @@ JSON
             "AR_SECRET",
             "AR_TOKEN"
           )
+          assume_role_stub(
+            "arn:aws:iam:123456789012:role/bar",
+            "ACCESS_KEY_ARPC", # from 'ar_from_self'
+            "AR_AKID",
+            "AR_SECRET",
+            "AR_TOKEN"
+          )
           client = ApiHelper.sample_rest_xml::Client.new(profile: "ar_from_self", region: "us-east-1")
           expect(client.config.credentials.access_key_id).to eq("AR_AKID")
         end
@@ -214,6 +221,59 @@ JSON
           region: "us-east-1"
         )
         expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+      end
+
+      it 'can chain assume role profiles' do
+        assume_role_stub(
+          "arn:aws:iam:123456789012:role/foo",
+          "ACCESS_KEY_0", # from 'default'
+          "AR_AKID_INNER",
+          "AR_SECRET_INNER",
+          "AR_TOKEN_INNER"
+        )
+        assume_role_stub(
+          "arn:aws:iam:123456789012:role/chain",
+          "AR_AKID_INNER", # from embedded role
+          "AR_AKID_CHAIN",
+          "AR_SECRET_CHAIN",
+          "AR_TOKEN_CHAIN"
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: "assumerole_chain",
+          region: "us-east-1"
+        )
+        expect(client.config.credentials.access_key_id).to eq("AR_AKID_CHAIN")
+      end
+
+      it 'detects credential loops and raises an appropriate error' do
+        expect {
+          ApiHelper.sample_rest_xml::Client.new(
+            profile: "assumerole_loop",
+            region: "us-east-1"
+          )
+        }.to raise_error(Errors::SourceProfileLoopError)
+      end
+
+      it 'does not raise a credential loop error when chain ends with self-referencing profile' do
+        assume_role_stub(
+          "arn:aws:iam:123456789012:role/bar",
+          "ACCESS_KEY_ARPC", # from 'ar_from_self'
+          "AR_AKID_INNER",
+          "AR_SECRET_INNER",
+          "AR_TOKEN_INNER"
+        )
+        assume_role_stub(
+          "arn:aws:iam:123456789012:role/chain",
+          "AR_AKID_INNER", # from embedded role
+          "AR_AKID_CHAIN",
+          "AR_SECRET_CHAIN",
+          "AR_TOKEN_CHAIN"
+        )
+        client = ApiHelper.sample_rest_xml::Client.new(
+          profile: "ar_chain_to_selfref",
+          region: "us-east-1"
+        )
+        expect(client.config.credentials.access_key_id).to eq("AR_AKID_CHAIN")
       end
     end
 
