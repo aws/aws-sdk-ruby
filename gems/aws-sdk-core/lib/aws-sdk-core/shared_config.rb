@@ -20,7 +20,11 @@ module Aws
     # `~/.aws/credentials`) and the shared config file (the default path for
     # which is `~/.aws/config`) are loaded. However, if you set the
     # `ENV['AWS_SDK_CONFIG_OPT_OUT']` environment variable, only the shared
-    # credential file will be loaded.
+    # credential file will be loaded. You can specify the shared credential
+    # file path with the `ENV['AWS_SHARED_CREDENTIALS_FILE']` environment
+    # variable or with the `:credentials_path` option. Similarly, you can
+    # specify the shared config file path with the `ENV['AWS_CONFIG_FILE']`
+    # environment variable or with the `:config_path` option.
     #
     # The default profile name is 'default'. You can specify the profile name
     # with the `ENV['AWS_PROFILE']` environment variable or with the
@@ -28,9 +32,11 @@ module Aws
     #
     # @param [Hash] options
     # @option options [String] :credentials_path Path to the shared credentials
-    #   file. Defaults to "#{Dir.home}/.aws/credentials".
+    #   file. If not specified, will check `ENV['AWS_SHARED_CREDENTIALS_FILE']`
+    #   before using the default value of "#{Dir.home}/.aws/credentials".
     # @option options [String] :config_path Path to the shared config file.
-    #   Defaults to "#{Dir.home}/.aws/config".
+    #   If not specified, will check `ENV['AWS_CONFIG_FILE']` before using the
+    #   default value of "#{Dir.home}/.aws/config".
     # @option options [String] :profile_name The credential/config profile name
     #   to use. If not specified, will check `ENV['AWS_PROFILE']` before using
     #   the fixed default value of 'default'.
@@ -254,11 +260,11 @@ module Aws
     end
 
     def determine_credentials_path
-      default_shared_config_path('credentials')
+      ENV['AWS_SHARED_CREDENTIALS_FILE'] || default_shared_config_path('credentials')
     end
 
     def determine_config_path
-      default_shared_config_path('config')
+      ENV['AWS_CONFIG_FILE'] || default_shared_config_path('config')
     end
 
     def default_shared_config_path(file)
