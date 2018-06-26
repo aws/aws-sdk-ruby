@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Inspector - Updated the API, and documentation for Amazon Inspector.
+
+* Feature - Aws::S3 - Updated the API, documentation, and integration test for Amazon Simple Storage Service.
+
+* Feature - Aws::SecretsManager - Updated the API, documentation, and integration test for AWS Secrets Manager.
+
 2.11.75 (2018-06-22)
 ------------------
 
