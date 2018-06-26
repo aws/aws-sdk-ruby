@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Allows you to set custom paths to shared config and shared credential files via the `AWS_CONFIG_FILE` and `AWS_SHARED_CREDENTIALS_FILE` environment variables.
+
 3.21.3 (2018-06-20)
 ------------------
 
