@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Updated the API, documentation, and integration test for Amazon CloudFront.
+
+* Feature - Aws::CodePipeline - Updated the API for AWS CodePipeline.
+
+* Feature - Aws::Comprehend - Updated the API, and documentation for Amazon Comprehend.
+
+* Feature - Aws::SecretsManager - Updated the documentation, and API for AWS Secrets Manager.
+
 2.11.76 (2018-06-26)
 ------------------
 
