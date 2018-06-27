@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.77 (2018-06-27)
+------------------
+
 * Feature - Aws::CloudFront - Updated the API, documentation, and integration test for Amazon CloudFront.
 
 * Feature - Aws::CodePipeline - Updated the API for AWS CodePipeline.
