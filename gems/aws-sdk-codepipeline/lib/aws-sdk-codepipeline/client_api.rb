@@ -1143,6 +1143,7 @@ module Aws::CodePipeline
         o.errors << Shapes::ShapeRef.new(shape: InvalidActionDeclarationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidBlockerDeclarationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStructureException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
     end
 

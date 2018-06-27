@@ -2496,23 +2496,6 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteServiceLinkedRoleRequest
-    #   data as a hash:
-    #
-    #       {
-    #         role_name: "string", # required
-    #       }
-    #
-    # @!attribute [rw] role_name
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteServiceLinkedRoleRequest AWS API Documentation
-    #
-    class DeleteServiceLinkedRoleRequest < Struct.new(
-      :role_name)
-      include Aws::Structure
-    end
-
     # The request to delete a streaming distribution.
     #
     # @note When making an API call, you may pass DeleteStreamingDistributionRequest

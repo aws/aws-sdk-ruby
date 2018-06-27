@@ -350,7 +350,7 @@ module Aws::SecretsManager
     #   Specifies the friendly name of the new secret.
     #
     #   The secret name must be ASCII letters, digits, or the following
-    #   characters : /\_+=,.@-
+    #   characters : /\_+=.@-
     #
     # @option params [String] :client_request_token
     #   (Optional) If you include `SecretString` or `SecretBinary`, then an
@@ -571,7 +571,8 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Deletes the resource-based policy currently attached to the secret.
+    # Deletes the resource-based permission policy that's attached to the
+    # secret.
     #
     # **Minimum permissions**
     #
@@ -585,15 +586,15 @@ module Aws::SecretsManager
     #
     # * To attach a resource policy to a secret, use PutResourcePolicy.
     #
-    # * To retrieve the current resource-based policy that is attached to a
+    # * To retrieve the current resource-based policy that's attached to a
     #   secret, use GetResourcePolicy.
     #
     # * To list all of the currently available secrets, use ListSecrets.
     #
     # @option params [required, String] :secret_id
-    #   Specifies the secret for which you want to delete the attached
-    #   resource-based policy. You can specify either the Amazon Resource Name
-    #   (ARN) or the friendly name of the secret.
+    #   Specifies the secret that you want to delete the attached
+    #   resource-based policy for. You can specify either the Amazon Resource
+    #   Name (ARN) or the friendly name of the secret.
     #
     # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -944,10 +945,11 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Retrieves the JSON text of the resource-based policy attached to the
-    # specified secret. The JSON request string input and response output
-    # are shown formatted with whitespace and line breaks for better
-    # readability. Submit your input as a single line JSON string.
+    # Retrieves the JSON text of the resource-based policy document that's
+    # attached to the specified secret. The JSON request string input and
+    # response output are shown formatted with white space and line breaks
+    # for better readability. Submit your input as a single line JSON
+    # string.
     #
     # **Minimum permissions**
     #
@@ -961,15 +963,15 @@ module Aws::SecretsManager
     #
     # * To attach a resource policy to a secret, use PutResourcePolicy.
     #
-    # * To delete the resource-based policy that is attached to a secret,
+    # * To delete the resource-based policy that's attached to a secret,
     #   use DeleteResourcePolicy.
     #
     # * To list all of the currently available secrets, use ListSecrets.
     #
     # @option params [required, String] :secret_id
-    #   Specifies the secret for which you want to retrieve the attached
-    #   resource-based policy. You can specify either the Amazon Resource Name
-    #   (ARN) or the friendly name of the secret.
+    #   Specifies the secret that you want to retrieve the attached
+    #   resource-based policy for. You can specify either the Amazon Resource
+    #   Name (ARN) or the friendly name of the secret.
     #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1370,12 +1372,13 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Attaches the contents of the specified resource-based policy to a
-    # secret. A resource-based policy is optional. Alternatively, you can
-    # use IAM user-based policies that specify the secret's ARN in the
-    # policy statement's `Resources` element. You can also use a
-    # combination of both identity- an resource-based policies. The affected
-    # users and roles receive the permissions permitted by all of the
+    # Attaches the contents of the specified resource-based permission
+    # policy to a secret. A resource-based policy is optional.
+    # Alternatively, you can use IAM identity-based policies that specify
+    # the secret's Amazon Resource Name (ARN) in the policy statement's
+    # `Resources` element. You can also use a combination of both
+    # identity-based and resource-based policies. The affected users and
+    # roles receive the permissions that are permitted by all of the
     # relevant policies. For more information, see [Using Resource-Based
     # Policies for AWS Secrets Manager][1]. For the complete description of
     # the AWS policy syntax and grammar, see [IAM JSON Policy Reference][2]
@@ -1391,10 +1394,10 @@ module Aws::SecretsManager
     #
     # **Related operations**
     #
-    # * To retrieve the resource policy attached to a secret, use
+    # * To retrieve the resource policy that's attached to a secret, use
     #   GetResourcePolicy.
     #
-    # * To delete the resource-based policy that is attached to a secret,
+    # * To delete the resource-based policy that's attached to a secret,
     #   use DeleteResourcePolicy.
     #
     # * To list all of the currently available secrets, use ListSecrets.
@@ -1405,13 +1408,12 @@ module Aws::SecretsManager
     # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #
     # @option params [required, String] :secret_id
-    #   Specifies the secret to which you want to attach the resource-based
-    #   policy. You can specify either the Amazon Resource Name (ARN) or the
-    #   friendly name of the secret.
+    #   Specifies the secret that you want to attach the resource-based policy
+    #   to. You can specify either the ARN or the friendly name of the secret.
     #
     # @option params [required, String] :resource_policy
-    #   A JSON-formatted string constructed according to the grammar and
-    #   syntax for an AWS resource-based policy. The policy in the string
+    #   A JSON-formatted string that's constructed according to the grammar
+    #   and syntax for an AWS resource-based policy. The policy in the string
     #   identifies who can access or manage this secret and its versions. For
     #   information on how to format a JSON parameter for the various command
     #   line tool environments, see [Using JSON for Parameters][1] in the *AWS
@@ -2511,7 +2513,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -76,7 +76,7 @@ module Aws::SecretsManager
     #   Specifies the friendly name of the new secret.
     #
     #   The secret name must be ASCII letters, digits, or the following
-    #   characters : /\_+=,.@-
+    #   characters : /\_+=.@-
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -299,9 +299,9 @@ module Aws::SecretsManager
     #       }
     #
     # @!attribute [rw] secret_id
-    #   Specifies the secret for which you want to delete the attached
-    #   resource-based policy. You can specify either the Amazon Resource
-    #   Name (ARN) or the friendly name of the secret.
+    #   Specifies the secret that you want to delete the attached
+    #   resource-based policy for. You can specify either the Amazon
+    #   Resource Name (ARN) or the friendly name of the secret.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteResourcePolicyRequest AWS API Documentation
@@ -312,13 +312,13 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the secret for which the resource-based policy was
-    #   deleted.
+    #   The ARN of the secret that the resource-based policy was deleted
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret for which the resource-based policy
-    #   was deleted.
+    #   The friendly name of the secret that the resource-based policy was
+    #   deleted for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteResourcePolicyResponse AWS API Documentation
@@ -598,9 +598,9 @@ module Aws::SecretsManager
     #       }
     #
     # @!attribute [rw] secret_id
-    #   Specifies the secret for which you want to retrieve the attached
-    #   resource-based policy. You can specify either the Amazon Resource
-    #   Name (ARN) or the friendly name of the secret.
+    #   Specifies the secret that you want to retrieve the attached
+    #   resource-based policy for. You can specify either the Amazon
+    #   Resource Name (ARN) or the friendly name of the secret.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetResourcePolicyRequest AWS API Documentation
@@ -611,23 +611,23 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the secret for which the resource-based policy was
-    #   retrieved.
+    #   The ARN of the secret that the resource-based policy was retrieved
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret for which the resource-based policy
-    #   was retrieved.
+    #   The friendly name of the secret that the resource-based policy was
+    #   retrieved for.
     #   @return [String]
     #
     # @!attribute [rw] resource_policy
-    #   A JSON-formatted string that describes the permissions associated
-    #   with the attached secret. These permissions are combined with any
-    #   permissions associated with the user or role who attempts to access
-    #   this secret. The combined permissions specify who can access the
-    #   secret and what actions they can perform. For more information, see
-    #   [Authentication and Access Control for AWS Secrets Manager][1] in
-    #   the *AWS Secrets Manager User Guide*.
+    #   A JSON-formatted string that describes the permissions that are
+    #   associated with the attached secret. These permissions are combined
+    #   with any permissions that are associated with the user or role that
+    #   attempts to access this secret. The combined permissions specify who
+    #   can access the secret and what actions they can perform. For more
+    #   information, see [Authentication and Access Control for AWS Secrets
+    #   Manager][1] in the *AWS Secrets Manager User Guide*.
     #
     #
     #
@@ -929,18 +929,18 @@ module Aws::SecretsManager
     #       }
     #
     # @!attribute [rw] secret_id
-    #   Specifies the secret to which you want to attach the resource-based
-    #   policy. You can specify either the Amazon Resource Name (ARN) or the
-    #   friendly name of the secret.
+    #   Specifies the secret that you want to attach the resource-based
+    #   policy to. You can specify either the ARN or the friendly name of
+    #   the secret.
     #   @return [String]
     #
     # @!attribute [rw] resource_policy
-    #   A JSON-formatted string constructed according to the grammar and
-    #   syntax for an AWS resource-based policy. The policy in the string
-    #   identifies who can access or manage this secret and its versions.
-    #   For information on how to format a JSON parameter for the various
-    #   command line tool environments, see [Using JSON for Parameters][1]
-    #   in the *AWS CLI User Guide*.
+    #   A JSON-formatted string that's constructed according to the grammar
+    #   and syntax for an AWS resource-based policy. The policy in the
+    #   string identifies who can access or manage this secret and its
+    #   versions. For information on how to format a JSON parameter for the
+    #   various command line tool environments, see [Using JSON for
+    #   Parameters][1] in the *AWS CLI User Guide*.
     #
     #
     #
@@ -956,13 +956,13 @@ module Aws::SecretsManager
     end
 
     # @!attribute [rw] arn
-    #   The ARN of the secret for which the resource-based policy was
-    #   retrieved.
+    #   The ARN of the secret that the resource-based policy was retrieved
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The friendly name of the secret for which the resource-based policy
-    #   was retrieved.
+    #   The friendly name of the secret that the resource-based policy was
+    #   retrieved for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicyResponse AWS API Documentation

@@ -212,8 +212,9 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Inspects the text of a batch of documents and returns information
-    # about them. For more information about entities, see how-entities
+    # Inspects the text of a batch of documents for named entities and
+    # returns information about them. For more information about named
+    # entities, see how-entities
     #
     # @option params [required, Array<String>] :text_list
     #   A list containing the text of the input documents. The list can
@@ -221,8 +222,8 @@ module Aws::Comprehend
     #   than 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -233,7 +234,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_entities({
     #     text_list: ["String"], # required
-    #     language_code: "String", # required
+    #     language_code: "en", # required, accepts en, es
     #   })
     #
     # @example Response structure
@@ -268,8 +269,8 @@ module Aws::Comprehend
     #   that 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectKeyPhrasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -280,7 +281,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_key_phrases({
     #     text_list: ["String"], # required
-    #     language_code: "String", # required
+    #     language_code: "en", # required, accepts en, es
     #   })
     #
     # @example Response structure
@@ -316,8 +317,8 @@ module Aws::Comprehend
     #   that 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. All documents must be in the same
-    #   language.
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
     #
     # @return [Types::BatchDetectSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -328,7 +329,7 @@ module Aws::Comprehend
     #
     #   resp = client.batch_detect_sentiment({
     #     text_list: ["String"], # required
-    #     language_code: "String", # required
+    #     language_code: "en", # required, accepts en, es
     #   })
     #
     # @example Response structure
@@ -354,6 +355,161 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Gets the properties associated with a dominant language detection job.
+    # Use this operation to get the status of a detection job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #
+    # @return [Types::DescribeDominantLanguageDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDominantLanguageDetectionJobResponse#dominant_language_detection_job_properties #dominant_language_detection_job_properties} => Types::DominantLanguageDetectionJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_dominant_language_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dominant_language_detection_job_properties.job_id #=> String
+    #   resp.dominant_language_detection_job_properties.job_name #=> String
+    #   resp.dominant_language_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.dominant_language_detection_job_properties.message #=> String
+    #   resp.dominant_language_detection_job_properties.submit_time #=> Time
+    #   resp.dominant_language_detection_job_properties.end_time #=> Time
+    #   resp.dominant_language_detection_job_properties.input_data_config.s3_uri #=> String
+    #   resp.dominant_language_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.dominant_language_detection_job_properties.output_data_config.s3_uri #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDominantLanguageDetectionJob AWS API Documentation
+    #
+    # @overload describe_dominant_language_detection_job(params = {})
+    # @param [Hash] params ({})
+    def describe_dominant_language_detection_job(params = {}, options = {})
+      req = build_request(:describe_dominant_language_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Gets the properties associated with an entities detection job. Use
+    # this operation to get the status of a detection job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #
+    # @return [Types::DescribeEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEntitiesDetectionJobResponse#entities_detection_job_properties #entities_detection_job_properties} => Types::EntitiesDetectionJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_entities_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities_detection_job_properties.job_id #=> String
+    #   resp.entities_detection_job_properties.job_name #=> String
+    #   resp.entities_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.entities_detection_job_properties.message #=> String
+    #   resp.entities_detection_job_properties.submit_time #=> Time
+    #   resp.entities_detection_job_properties.end_time #=> Time
+    #   resp.entities_detection_job_properties.input_data_config.s3_uri #=> String
+    #   resp.entities_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.entities_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.entities_detection_job_properties.language_code #=> String, one of "en", "es"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntitiesDetectionJob AWS API Documentation
+    #
+    # @overload describe_entities_detection_job(params = {})
+    # @param [Hash] params ({})
+    def describe_entities_detection_job(params = {}, options = {})
+      req = build_request(:describe_entities_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Gets the properties associated with a key phrases detection job. Use
+    # this operation to get the status of a detection job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #
+    # @return [Types::DescribeKeyPhrasesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeKeyPhrasesDetectionJobResponse#key_phrases_detection_job_properties #key_phrases_detection_job_properties} => Types::KeyPhrasesDetectionJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_key_phrases_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_phrases_detection_job_properties.job_id #=> String
+    #   resp.key_phrases_detection_job_properties.job_name #=> String
+    #   resp.key_phrases_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.key_phrases_detection_job_properties.message #=> String
+    #   resp.key_phrases_detection_job_properties.submit_time #=> Time
+    #   resp.key_phrases_detection_job_properties.end_time #=> Time
+    #   resp.key_phrases_detection_job_properties.input_data_config.s3_uri #=> String
+    #   resp.key_phrases_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.key_phrases_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.key_phrases_detection_job_properties.language_code #=> String, one of "en", "es"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeKeyPhrasesDetectionJob AWS API Documentation
+    #
+    # @overload describe_key_phrases_detection_job(params = {})
+    # @param [Hash] params ({})
+    def describe_key_phrases_detection_job(params = {}, options = {})
+      req = build_request(:describe_key_phrases_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Gets the properties associated with a sentiment detection job. Use
+    # this operation to get the status of a detection job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #
+    # @return [Types::DescribeSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSentimentDetectionJobResponse#sentiment_detection_job_properties #sentiment_detection_job_properties} => Types::SentimentDetectionJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_sentiment_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sentiment_detection_job_properties.job_id #=> String
+    #   resp.sentiment_detection_job_properties.job_name #=> String
+    #   resp.sentiment_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.sentiment_detection_job_properties.message #=> String
+    #   resp.sentiment_detection_job_properties.submit_time #=> Time
+    #   resp.sentiment_detection_job_properties.end_time #=> Time
+    #   resp.sentiment_detection_job_properties.input_data_config.s3_uri #=> String
+    #   resp.sentiment_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.sentiment_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.sentiment_detection_job_properties.language_code #=> String, one of "en", "es"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeSentimentDetectionJob AWS API Documentation
+    #
+    # @overload describe_sentiment_detection_job(params = {})
+    # @param [Hash] params ({})
+    def describe_sentiment_detection_job(params = {}, options = {})
+      req = build_request(:describe_sentiment_detection_job, params)
+      req.send_request(options)
+    end
+
     # Gets the properties associated with a topic detection job. Use this
     # operation to get the status of a detection job.
     #
@@ -374,7 +530,7 @@ module Aws::Comprehend
     #
     #   resp.topics_detection_job_properties.job_id #=> String
     #   resp.topics_detection_job_properties.job_name #=> String
-    #   resp.topics_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.topics_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.topics_detection_job_properties.message #=> String
     #   resp.topics_detection_job_properties.submit_time #=> Time
     #   resp.topics_detection_job_properties.end_time #=> Time
@@ -429,24 +585,16 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Inspects text for entities, and returns information about them. For
-    # more information, about entities, see how-entities.
+    # Inspects text for named entities, and returns information about them.
+    # For more information, about named entities, see how-entities.
     #
     # @option params [required, String] :text
     #   A UTF-8 text string. Each string must contain fewer that 5,000 bytes
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The RFC 5646 language code of the input text. If the request does not
-    #   specify the language code, the service detects the dominant language.
-    #   If you specify a language code that the service does not support, it
-    #   returns `UnsupportedLanguageException` exception. For more information
-    #   about RFC 5646, see [Tags for Identifying Languages][1] on the *IETF
-    #   Tools* web site.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc5646
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
     #
     # @return [Types::DetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -484,16 +632,8 @@ module Aws::Comprehend
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The RFC 5646 language code for the input text. If you don't specify a
-    #   language code, Amazon Comprehend detects the dominant language. If you
-    #   specify the code for a language that Amazon Comprehend does not
-    #   support, it returns and `UnsupportedLanguageException`. For more
-    #   information about RFC 5646, see [Tags for Identifying Languages][1] on
-    #   the *IETF Tools* web site.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc5646
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
     #
     # @return [Types::DetectKeyPhrasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -531,16 +671,8 @@ module Aws::Comprehend
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The RFC 5646 language code for the input text. If you don't specify a
-    #   language code, Amazon Comprehend detects the dominant language. If you
-    #   specify the code for a language that Amazon Comprehend does not
-    #   support, it returns and `UnsupportedLanguageException`. For more
-    #   information about RFC 5646, see [Tags for Identifying Languages][1] on
-    #   the *IETF Tools* web site.
-    #
-    #
-    #
-    #   [1]: https://tools.ietf.org/html/rfc5646
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
     #
     # @return [Types::DetectSentimentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -571,6 +703,230 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Gets a list of the dominant language detection jobs that you have
+    # submitted.
+    #
+    # @option params [Types::DominantLanguageDetectionJobFilter] :filter
+    #   Filters that jobs that are returned. You can filter jobs on their
+    #   name, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListDominantLanguageDetectionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDominantLanguageDetectionJobsResponse#dominant_language_detection_job_properties_list #dominant_language_detection_job_properties_list} => Array&lt;Types::DominantLanguageDetectionJobProperties&gt;
+    #   * {Types::ListDominantLanguageDetectionJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_dominant_language_detection_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dominant_language_detection_job_properties_list #=> Array
+    #   resp.dominant_language_detection_job_properties_list[0].job_id #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].job_name #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.dominant_language_detection_job_properties_list[0].message #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].submit_time #=> Time
+    #   resp.dominant_language_detection_job_properties_list[0].end_time #=> Time
+    #   resp.dominant_language_detection_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.dominant_language_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.dominant_language_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDominantLanguageDetectionJobs AWS API Documentation
+    #
+    # @overload list_dominant_language_detection_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_dominant_language_detection_jobs(params = {}, options = {})
+      req = build_request(:list_dominant_language_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of the entity detection jobs that you have submitted.
+    #
+    # @option params [Types::EntitiesDetectionJobFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs on their name,
+    #   status, or the date and time that they were submitted. You can only
+    #   set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListEntitiesDetectionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntitiesDetectionJobsResponse#entities_detection_job_properties_list #entities_detection_job_properties_list} => Array&lt;Types::EntitiesDetectionJobProperties&gt;
+    #   * {Types::ListEntitiesDetectionJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entities_detection_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entities_detection_job_properties_list #=> Array
+    #   resp.entities_detection_job_properties_list[0].job_id #=> String
+    #   resp.entities_detection_job_properties_list[0].job_name #=> String
+    #   resp.entities_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.entities_detection_job_properties_list[0].message #=> String
+    #   resp.entities_detection_job_properties_list[0].submit_time #=> Time
+    #   resp.entities_detection_job_properties_list[0].end_time #=> Time
+    #   resp.entities_detection_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.entities_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntitiesDetectionJobs AWS API Documentation
+    #
+    # @overload list_entities_detection_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_entities_detection_jobs(params = {}, options = {})
+      req = build_request(:list_entities_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Get a list of key phrase detection jobs that you have submitted.
+    #
+    # @option params [Types::KeyPhrasesDetectionJobFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs on their name,
+    #   status, or the date and time that they were submitted. You can only
+    #   set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListKeyPhrasesDetectionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListKeyPhrasesDetectionJobsResponse#key_phrases_detection_job_properties_list #key_phrases_detection_job_properties_list} => Array&lt;Types::KeyPhrasesDetectionJobProperties&gt;
+    #   * {Types::ListKeyPhrasesDetectionJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_key_phrases_detection_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_phrases_detection_job_properties_list #=> Array
+    #   resp.key_phrases_detection_job_properties_list[0].job_id #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].job_name #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.key_phrases_detection_job_properties_list[0].message #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].submit_time #=> Time
+    #   resp.key_phrases_detection_job_properties_list[0].end_time #=> Time
+    #   resp.key_phrases_detection_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.key_phrases_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.key_phrases_detection_job_properties_list[0].language_code #=> String, one of "en", "es"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListKeyPhrasesDetectionJobs AWS API Documentation
+    #
+    # @overload list_key_phrases_detection_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_key_phrases_detection_jobs(params = {}, options = {})
+      req = build_request(:list_key_phrases_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of sentiment detection jobs that you have submitted.
+    #
+    # @option params [Types::SentimentDetectionJobFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs on their name,
+    #   status, or the date and time that they were submitted. You can only
+    #   set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListSentimentDetectionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSentimentDetectionJobsResponse#sentiment_detection_job_properties_list #sentiment_detection_job_properties_list} => Array&lt;Types::SentimentDetectionJobProperties&gt;
+    #   * {Types::ListSentimentDetectionJobsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sentiment_detection_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sentiment_detection_job_properties_list #=> Array
+    #   resp.sentiment_detection_job_properties_list[0].job_id #=> String
+    #   resp.sentiment_detection_job_properties_list[0].job_name #=> String
+    #   resp.sentiment_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.sentiment_detection_job_properties_list[0].message #=> String
+    #   resp.sentiment_detection_job_properties_list[0].submit_time #=> Time
+    #   resp.sentiment_detection_job_properties_list[0].end_time #=> Time
+    #   resp.sentiment_detection_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.sentiment_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.sentiment_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListSentimentDetectionJobs AWS API Documentation
+    #
+    # @overload list_sentiment_detection_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_sentiment_detection_jobs(params = {}, options = {})
+      req = build_request(:list_sentiment_detection_jobs, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the topic detection jobs that you have submitted.
     #
     # @option params [Types::TopicsDetectionJobFilter] :filter
@@ -582,7 +938,8 @@ module Aws::Comprehend
     #   Identifies the next page of results to return.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return in each page.
+    #   The maximum number of results to return in each page. The default is
+    #   100.
     #
     # @return [Types::ListTopicsDetectionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -594,7 +951,7 @@ module Aws::Comprehend
     #   resp = client.list_topics_detection_jobs({
     #     filter: {
     #       job_name: "JobName",
-    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
     #       submit_time_before: Time.now,
     #       submit_time_after: Time.now,
     #     },
@@ -607,7 +964,7 @@ module Aws::Comprehend
     #   resp.topics_detection_job_properties_list #=> Array
     #   resp.topics_detection_job_properties_list[0].job_id #=> String
     #   resp.topics_detection_job_properties_list[0].job_name #=> String
-    #   resp.topics_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.topics_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #   resp.topics_detection_job_properties_list[0].message #=> String
     #   resp.topics_detection_job_properties_list[0].submit_time #=> Time
     #   resp.topics_detection_job_properties_list[0].end_time #=> Time
@@ -626,6 +983,254 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Starts an asynchronous dominant language detection job for a
+    # collection of documents. Use the operation to track the status of a
+    # job.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies where to send the output files.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #
+    # @option params [String] :job_name
+    #   An identifier for the job.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you do not set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartDominantLanguageDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDominantLanguageDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartDominantLanguageDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_dominant_language_detection_job({
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     client_request_token: "ClientRequestTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartDominantLanguageDetectionJob AWS API Documentation
+    #
+    # @overload start_dominant_language_detection_job(params = {})
+    # @param [Hash] params ({})
+    def start_dominant_language_detection_job(params = {}, options = {})
+      req = build_request(:start_dominant_language_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous entity detection job for a collection of
+    # documents. Use the operation to track the status of a job.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies where to send the output files.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #
+    # @option params [String] :job_name
+    #   The identifier of the job.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartEntitiesDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartEntitiesDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_entities_detection_job({
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     language_code: "en", # required, accepts en, es
+    #     client_request_token: "ClientRequestTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartEntitiesDetectionJob AWS API Documentation
+    #
+    # @overload start_entities_detection_job(params = {})
+    # @param [Hash] params ({})
+    def start_entities_detection_job(params = {}, options = {})
+      req = build_request(:start_entities_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous key phrase detection job for a collection of
+    # documents. Use the operation to track the status of a job.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies where to send the output files.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #
+    # @option params [String] :job_name
+    #   The identifier of the job.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartKeyPhrasesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartKeyPhrasesDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartKeyPhrasesDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_key_phrases_detection_job({
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     language_code: "en", # required, accepts en, es
+    #     client_request_token: "ClientRequestTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartKeyPhrasesDetectionJob AWS API Documentation
+    #
+    # @overload start_key_phrases_detection_job(params = {})
+    # @param [Hash] params ({})
+    def start_key_phrases_detection_job(params = {}, options = {})
+      req = build_request(:start_key_phrases_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous sentiment detection job for a collection of
+    # documents. use the operation to track the status of a job.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   Specifies the format and location of the input data for the job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies where to send the output files.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that grants Amazon Comprehend read access to your input
+    #   data.
+    #
+    # @option params [String] :job_name
+    #   The identifier of the job.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. You can specify English ("en")
+    #   or Spanish ("es"). All documents must be in the same language.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartSentimentDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartSentimentDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_sentiment_detection_job({
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     language_code: "en", # required, accepts en, es
+    #     client_request_token: "ClientRequestTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartSentimentDetectionJob AWS API Documentation
+    #
+    # @overload start_sentiment_detection_job(params = {})
+    # @param [Hash] params ({})
+    def start_sentiment_detection_job(params = {}, options = {})
+      req = build_request(:start_sentiment_detection_job, params)
+      req.send_request(options)
+    end
+
     # Starts an asynchronous topic detection job. Use the
     # `DescribeTopicDetectionJob` operation to track the status of a job.
     #
@@ -633,7 +1238,10 @@ module Aws::Comprehend
     #   Specifies the format and location of the input data for the job.
     #
     # @option params [required, Types::OutputDataConfig] :output_data_config
-    #   Specifies where to send the output files.
+    #   Specifies where to send the output files. The output is a compressed
+    #   archive with two files, `topic-terms.csv` that lists the terms
+    #   associated with each topic, and `doc-topics.csv` that lists the
+    #   documents associated with each topic
     #
     # @option params [required, String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of the AWS Identity and Access
@@ -677,7 +1285,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.job_id #=> String
-    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTopicsDetectionJob AWS API Documentation
     #
@@ -685,6 +1293,166 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def start_topics_detection_job(params = {}, options = {})
       req = build_request(:start_topics_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a dominant language detection job in progress.
+    #
+    # If the job state is `IN_PROGRESS` the job will be marked for
+    # termination and put into the `STOPPING` state.
+    #
+    # If the job is in the `COMPLETED` or `FAILED` state when you call the
+    # `StopDominantLanguageDetectionJob` operation, the operation will
+    # return a 400 Internal Request Exception.
+    #
+    # When a job is stopped, any document that has already been processed
+    # will be written to the output location.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the dominant language detection job to stop.
+    #
+    # @return [Types::StopDominantLanguageDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopDominantLanguageDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StopDominantLanguageDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_dominant_language_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopDominantLanguageDetectionJob AWS API Documentation
+    #
+    # @overload stop_dominant_language_detection_job(params = {})
+    # @param [Hash] params ({})
+    def stop_dominant_language_detection_job(params = {}, options = {})
+      req = build_request(:stop_dominant_language_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Stops an entities detection job in progress.
+    #
+    # If the job state is `IN_PROGRESS` the job will be marked for
+    # termination and put into the `STOPPING` state.
+    #
+    # If the job is in the `COMPLETED` or `FAILED` state when you call the
+    # `StopDominantLanguageDetectionJob` operation, the operation will
+    # return a 400 Internal Request Exception.
+    #
+    # When a job is stopped, any document that has already been processed
+    # will be written to the output location.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the entities detection job to stop.
+    #
+    # @return [Types::StopEntitiesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopEntitiesDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StopEntitiesDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_entities_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopEntitiesDetectionJob AWS API Documentation
+    #
+    # @overload stop_entities_detection_job(params = {})
+    # @param [Hash] params ({})
+    def stop_entities_detection_job(params = {}, options = {})
+      req = build_request(:stop_entities_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a key phrases detection job in progress.
+    #
+    # If the job state is `IN_PROGRESS` the job will be marked for
+    # termination and put into the `STOPPING` state.
+    #
+    # If the job is in the `COMPLETED` or `FAILED` state when you call the
+    # `StopDominantLanguageDetectionJob` operation, the operation will
+    # return a 400 Internal Request Exception.
+    #
+    # When a job is stopped, any document that has already been processed
+    # will be written to the output location.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the key phrases detection job to stop.
+    #
+    # @return [Types::StopKeyPhrasesDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopKeyPhrasesDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StopKeyPhrasesDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_key_phrases_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopKeyPhrasesDetectionJob AWS API Documentation
+    #
+    # @overload stop_key_phrases_detection_job(params = {})
+    # @param [Hash] params ({})
+    def stop_key_phrases_detection_job(params = {}, options = {})
+      req = build_request(:stop_key_phrases_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a sentiment detection job in progress.
+    #
+    # If the job state is `IN_PROGRESS` the job will be marked for
+    # termination and put into the `STOPPING` state.
+    #
+    # If the job is in the `COMPLETED` or `FAILED` state when you call the
+    # `StopDominantLanguageDetectionJob` operation, the operation will
+    # return a 400 Internal Request Exception.
+    #
+    # When a job is stopped, any document that has already been processed
+    # will be written to the output location.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the sentiment detection job to stop.
+    #
+    # @return [Types::StopSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopSentimentDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StopSentimentDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_sentiment_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopSentimentDetectionJob AWS API Documentation
+    #
+    # @overload stop_sentiment_detection_job(params = {})
+    # @param [Hash] params ({})
+    def stop_sentiment_detection_job(params = {}, options = {})
+      req = build_request(:stop_sentiment_detection_job, params)
       req.send_request(options)
     end
 
@@ -701,7 +1469,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

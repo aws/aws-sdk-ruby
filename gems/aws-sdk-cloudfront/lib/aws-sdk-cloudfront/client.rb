@@ -1476,25 +1476,6 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # @option params [required, String] :role_name
-    #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_service_linked_role({
-    #     role_name: "string", # required
-    #   })
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteServiceLinkedRole2017_10_30 AWS API Documentation
-    #
-    # @overload delete_service_linked_role(params = {})
-    # @param [Hash] params ({})
-    def delete_service_linked_role(params = {}, options = {})
-      req = build_request(:delete_service_linked_role, params)
-      req.send_request(options)
-    end
-
     # Delete a streaming distribution. To delete an RTMP distribution using
     # the CloudFront API, perform the following steps.
     #
@@ -3803,7 +3784,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
