@@ -107,7 +107,6 @@ module Aws
             }
           )
 
-
           resp = client.change_resource_record_sets(params)
           expect(resp.context.http_request.endpoint.path).to match(
             %r{^/\d{4}-\d{2}-\d{2}/hostedzone/zoneid/rrset/$}
@@ -116,7 +115,6 @@ module Aws
             '<HostedZoneId>target</HostedZoneId>'
           )
         end
-
       end
 
       describe '#get_traffic_policy' do
