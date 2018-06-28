@@ -92,6 +92,8 @@ end
 When(/^I upload the file$/) do
   @object = @bucket.object(@file.path)
   @object.upload_file(@file)
+  @old_key = @file.path
+  @version_id = @object.version_id
 end
 
 When(/^I upload the file to the "(.*?)" object with SSE\/CPK$/) do |key|
@@ -277,4 +279,30 @@ Then(/^I can streaming download object with key "([^"]*)"$/) do |key|
     expect(chunk).to eq("hello world")
   end
   expect(resp.body).to be_a(Seahorse::Client::BlockIO)
+end
+
+Given(/^I enabled bucket versioning$/) do
+  @s3.client.put_bucket_versioning(
+    bucket: @bucket_name,
+    versioning_configuration: {
+      status: "Enabled"
+    }
+  )
+end
+
+Given(/^I upload the file with same key$/) do
+  @object = @bucket.object(@old_key)
+  @object.upload_file(@file)
+end
+
+When(/^I download the file with previous version id$/) do
+  tempfile = Tempfile.new("sample")
+  @download_file_dest = tempfile.path
+  tempfile.unlink
+
+  @object.download_file(@download_file_dest, version_id: @version_id)
+end
+
+Then(/^the download file should match the previous version object$/) do
+  expect(FileUtils.compare_file(@old_key, @download_file_dest)).to be(true)
 end
