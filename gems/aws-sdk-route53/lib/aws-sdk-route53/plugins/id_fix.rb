@@ -29,7 +29,7 @@ module Aws
             # Many operations accept of :id or :hosted_zone_id as a root-level
             # param, pruning prefixes from those.
             [:id, :hosted_zone_id, :delegation_set_id].each do |key|
-              params[key] = remove_prefix(params[key]) if params[key]
+              params[key] = remove_prefix(params[key]) if params.to_hash.key?(key)
             end
 
             # The `#change_resource_record_sets operation` has a deeply nested
