@@ -5,6 +5,8 @@ Unreleased Changes
 
 * Issue - Reduce memory allocation in checksum and signature generation.
 
+* Issue - Ensure file handlers are closed when an exception is raised in `Aws::S3::FileUploader`.
+
 1.15.0 (2018-06-26)
 ------------------
 
