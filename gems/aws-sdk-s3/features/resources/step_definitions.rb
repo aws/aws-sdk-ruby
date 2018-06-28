@@ -93,7 +93,6 @@ When(/^I upload the file$/) do
   @object = @bucket.object(@file.path)
   @object.upload_file(@file)
   @old_key = @file.path
-  @version_id = @object.version_id
 end
 
 When(/^I upload the file to the "(.*?)" object with SSE\/CPK$/) do |key|
@@ -291,6 +290,7 @@ Given(/^I enabled bucket versioning$/) do
 end
 
 Given(/^I upload the file with same key$/) do
+  @version_id = @object.version_id
   @object = @bucket.object(@old_key)
   @object.upload_file(@file)
 end
