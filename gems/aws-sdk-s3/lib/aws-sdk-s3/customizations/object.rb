@@ -333,6 +333,10 @@ module Aws
       # @option options [String] thread_count Customize threads used in multipart
       #   download, if not provided, 10 is default value
       #
+      # @option options [String] version_id The object version id used to retrieve
+      #   the object, to know more about object versioning, see:
+      #   https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectVersioning.html
+      #
       # @return [Boolean] Returns `true` when the file is downloaded
       #   without any errors.
       def download_file(destination, options = {})

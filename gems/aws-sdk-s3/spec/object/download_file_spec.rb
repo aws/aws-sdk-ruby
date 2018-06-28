@@ -38,6 +38,7 @@ module Aws
         let(:small_file) { Tempfile.new('small-file') }
         let(:large_file) { Tempfile.new('large-file') }
         let(:single_part_file) { Tempfile.new('single-part-file') }
+        let(:version_id) { 'a-fake-version-id' }
 
         before(:each) do
           allow(Dir).to receive(:tmpdir).and_return(tmpdir)
@@ -45,6 +46,14 @@ module Aws
               bucket: 'bucket',
               key: 'small',
               part_number: 1
+            ).and_return(
+              client.stub_data(:head_object, content_length: one_meg, parts_count: nil)
+            )
+          allow(client).to receive(:head_object).with(
+              bucket: 'bucket',
+              key: 'small',
+              part_number: 1,
+              version_id: version_id
             ).and_return(
               client.stub_data(:head_object, content_length: one_meg, parts_count: nil)
             )
@@ -101,6 +110,18 @@ module Aws
 
           single_obj.put(body: single_part_file)
           single_obj.download_file(path)
+        end
+
+        it 'supports download object with version_id' do
+          expect(client).to receive(:get_object).with(
+            bucket: 'bucket',
+            key: 'small',
+            version_id: version_id,
+            response_target: path
+          ).exactly(1).times
+
+          small_obj.put(body: small_file)
+          small_obj.download_file(path, version_id: version_id)
         end
 
         it 'raises an error if an invaild mode is specified' do

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Supports `:version_id` for resource `#download_file` helper
+
 1.15.0 (2018-06-26)
 ------------------
 
