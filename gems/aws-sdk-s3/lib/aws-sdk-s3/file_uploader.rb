@@ -45,9 +45,7 @@ module Aws
 
       def open_file(source)
         if String === source || Pathname === source
-          file = File.open(source, 'rb')
-          yield(file)
-          file.close
+          File.open(source, 'rb') { |file| yield(file) }
         else
           yield(source)
         end
