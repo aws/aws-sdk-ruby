@@ -534,12 +534,28 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_bytes
+    #   The size of the volume in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] snapshot_id
+    #   The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore
+    #   as the new cached volume. Specify this field if you want to create
+    #   the iSCSI storage volume from a snapshot otherwise do not include
+    #   this field. To list snapshots for your account use
+    #   [DescribeSnapshots][1] in the *Amazon Elastic Compute Cloud API
+    #   Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html
     #   @return [String]
     #
     # @!attribute [rw] target_name
+    #   The name of the iSCSI target used by initiators to connect to the
+    #   target and as a suffix for the target ARN. For example, specifying
+    #   `TargetName` as *myvolume* results in the target ARN of
+    #   arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+    #   The target name must be unique across all volumes of a gateway.
     #   @return [String]
     #
     # @!attribute [rw] source_volume_arn
@@ -551,9 +567,18 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
+    #   The network interface of the gateway on which to expose the iSCSI
+    #   target. Only IPv4 addresses are accepted. Use
+    #   DescribeGatewayInformation to get a list of the network interfaces
+    #   available on a gateway.
+    #
+    #   Valid Values: A valid IP address.
     #   @return [String]
     #
     # @!attribute [rw] client_token
+    #   A unique identifier that you use to retry a request. If you retry a
+    #   request, use the same `ClientToken` you specified in the initial
+    #   request.
     #   @return [String]
     #
     # @!attribute [rw] kms_encrypted
@@ -583,9 +608,12 @@ module Aws::StorageGateway
     end
 
     # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the configured volume.
     #   @return [String]
     #
     # @!attribute [rw] target_arn
+    #   he Amazon Resource Name (ARN) of the volume target that includes the
+    #   iSCSI name that initiators can use to connect to the target.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolumeOutput AWS API Documentation
@@ -731,6 +759,140 @@ module Aws::StorageGateway
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareOutput AWS API Documentation
     #
     class CreateNFSFileShareOutput < Struct.new(
+      :file_share_arn)
+      include Aws::Structure
+    end
+
+    # CreateSMBFileShareInput
+    #
+    # @note When making an API call, you may pass CreateSMBFileShareInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "ClientToken", # required
+    #         gateway_arn: "GatewayARN", # required
+    #         kms_encrypted: false,
+    #         kms_key: "KMSKey",
+    #         role: "Role", # required
+    #         location_arn: "LocationARN", # required
+    #         default_storage_class: "StorageClass",
+    #         object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
+    #         read_only: false,
+    #         guess_mime_type_enabled: false,
+    #         requester_pays: false,
+    #         valid_user_list: ["FileShareUser"],
+    #         invalid_user_list: ["FileShareUser"],
+    #         authentication: "Authentication",
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   A unique string value that you supply that is used by file gateway
+    #   to ensure idempotent file share creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the file gateway on which you want
+    #   to create a file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) KMS key used for Amazon S3 server
+    #   side encryption. This value can only be set when KMSEncrypted is
+    #   true. Optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The ARN of the AWS Identity and Access Management (IAM) role that a
+    #   file gateway assumes when it accesses the underlying storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_arn
+    #   The ARN of the backed storage used for storing file data.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket
+    #   by file gateway. Possible values are S3\_STANDARD, S3\_STANDARD\_IA
+    #   or S3\_ONEZONE\_IA. If this field is not populated, the default
+    #   value S3\_STANDARD is used. Optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_acl
+    #   Sets the access control list permission for objects in the Amazon S3
+    #   bucket that a file gateway puts objects into. The default value is
+    #   "private".
+    #   @return [String]
+    #
+    # @!attribute [rw] read_only
+    #   Sets the write status of a file share. This value is true if the
+    #   write status is read-only, and otherwise false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] guess_mime_type_enabled
+    #   Enables guessing of the MIME type for uploaded objects based on file
+    #   extensions. Set this value to true to enable MIME type guessing, and
+    #   otherwise to false. The default value is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] requester_pays
+    #   Sets who pays the cost of the request and the data download from the
+    #   Amazon S3 bucket. Set this value to true if you want the requester
+    #   to pay instead of the bucket owner, and otherwise to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] valid_user_list
+    #   A list of users in the Active Directory that are allowed to access
+    #   the file share. Can only be set if Authentication is set to
+    #   "ActiveDirectory".
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] invalid_user_list
+    #   A list of users in the Active Directory that are not allowed to
+    #   access the file share. Can only be set if Authentication is set to
+    #   "ActiveDirectory".
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] authentication
+    #   The authentication method that users use to access the file share.
+    #
+    #   Valid values: "ActiveDirectory" or "GuestAccess". The default is
+    #   "ActiveDirectory".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareInput AWS API Documentation
+    #
+    class CreateSMBFileShareInput < Struct.new(
+      :client_token,
+      :gateway_arn,
+      :kms_encrypted,
+      :kms_key,
+      :role,
+      :location_arn,
+      :default_storage_class,
+      :object_acl,
+      :read_only,
+      :guess_mime_type_enabled,
+      :requester_pays,
+      :valid_user_list,
+      :invalid_user_list,
+      :authentication)
+      include Aws::Structure
+    end
+
+    # CreateSMBFileShareOutput
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the newly created file share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSMBFileShareOutput AWS API Documentation
+    #
+    class CreateSMBFileShareOutput < Struct.new(
       :file_share_arn)
       include Aws::Structure
     end
@@ -1796,6 +1958,82 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # DescribeSMBFileSharesInput
+    #
+    # @note When making an API call, you may pass DescribeSMBFileSharesInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_share_arn_list: ["FileShareARN"], # required
+    #       }
+    #
+    # @!attribute [rw] file_share_arn_list
+    #   An array containing the Amazon Resource Name (ARN) of each file
+    #   share to be described.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileSharesInput AWS API Documentation
+    #
+    class DescribeSMBFileSharesInput < Struct.new(
+      :file_share_arn_list)
+      include Aws::Structure
+    end
+
+    # DescribeSMBFileSharesOutput
+    #
+    # @!attribute [rw] smb_file_share_info_list
+    #   An array containing a description for each requested file share.
+    #   @return [Array<Types::SMBFileShareInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBFileSharesOutput AWS API Documentation
+    #
+    class DescribeSMBFileSharesOutput < Struct.new(
+      :smb_file_share_info_list)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeSMBSettingsInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsInput AWS API Documentation
+    #
+    class DescribeSMBSettingsInput < Struct.new(
+      :gateway_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain that the gateway is joined to.
+    #   @return [String]
+    #
+    # @!attribute [rw] smb_guest_password_set
+    #   This value is true if a password for the guest user “smbguest” is
+    #   set, and otherwise false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSMBSettingsOutput AWS API Documentation
+    #
+    class DescribeSMBSettingsOutput < Struct.new(
+      :gateway_arn,
+      :domain_name,
+      :smb_guest_password_set)
+      include Aws::Structure
+    end
+
     # A JSON object containing the DescribeSnapshotScheduleInput$VolumeARN
     # of the volume.
     #
@@ -2351,6 +2589,10 @@ module Aws::StorageGateway
 
     # Describes a file share.
     #
+    # @!attribute [rw] file_share_type
+    #   The type of the file share.
+    #   @return [String]
+    #
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the file share.
     #   @return [String]
@@ -2360,8 +2602,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] file_share_status
-    #   The status of the file share. Possible values are CREATING,
-    #   UPDATING, AVAILABLE and DELETING.
+    #   The status of the file share. Possible values are `CREATING`,
+    #   `UPDATING`, `AVAILABLE` and `DELETING`.
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
@@ -2372,6 +2614,7 @@ module Aws::StorageGateway
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/FileShareInfo AWS API Documentation
     #
     class FileShareInfo < Struct.new(
+      :file_share_type,
       :file_share_arn,
       :file_share_id,
       :file_share_status,
@@ -2414,6 +2657,61 @@ module Aws::StorageGateway
       :gateway_type,
       :gateway_operational_state,
       :gateway_name)
+      include Aws::Structure
+    end
+
+    # JoinDomainInput
+    #
+    # @note When making an API call, you may pass JoinDomainInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #         domain_name: "DomainName", # required
+    #         user_name: "DomainUserName", # required
+    #         password: "DomainUserPassword", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The unique Amazon Resource Name of the file gateway you want to add
+    #   to the Active Directory domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain that you want the gateway to join.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   Sets the user name of user who has permission to add the gateway to
+    #   the Active Directory domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   Sets the password of the user who has permission to add the gateway
+    #   to the Active Directory domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomainInput AWS API Documentation
+    #
+    class JoinDomainInput < Struct.new(
+      :gateway_arn,
+      :domain_name,
+      :user_name,
+      :password)
+      include Aws::Structure
+    end
+
+    # JoinDomainOutput
+    #
+    # @!attribute [rw] gateway_arn
+    #   The unique Amazon Resource Name of the gateway that joined the
+    #   domain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/JoinDomainOutput AWS API Documentation
+    #
+    class JoinDomainOutput < Struct.new(
+      :gateway_arn)
       include Aws::Structure
     end
 
@@ -2822,12 +3120,12 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # Describes file share default values. Files and folders stored as
-    # Amazon S3 objects in S3 buckets don't, by default, have Unix file
-    # permissions assigned to them. Upon discovery in an S3 bucket by
-    # Storage Gateway, the S3 objects that represent files and folders are
-    # assigned these default Unix permissions. This operation is only
-    # supported in the file gateway type.
+    # Describes Network File System (NFS) file share default values. Files
+    # and folders stored as Amazon S3 objects in S3 buckets don't, by
+    # default, have Unix file permissions assigned to them. Upon discovery
+    # in an S3 bucket by Storage Gateway, the S3 objects that represent
+    # files and folders are assigned these default Unix permissions. This
+    # operation is only supported in the file gateway type.
     #
     # @note When making an API call, you may pass NFSFileShareDefaults
     #   data as a hash:
@@ -2876,12 +3174,12 @@ module Aws::StorageGateway
     # buckets. This operation is only supported in file gateways.
     #
     # @!attribute [rw] nfs_file_share_defaults
-    #   Describes file share default values. Files and folders stored as
-    #   Amazon S3 objects in S3 buckets don't, by default, have Unix file
-    #   permissions assigned to them. Upon discovery in an S3 bucket by
-    #   Storage Gateway, the S3 objects that represent files and folders are
-    #   assigned these default Unix permissions. This operation is only
-    #   supported in the file gateway type.
+    #   Describes Network File System (NFS) file share default values. Files
+    #   and folders stored as Amazon S3 objects in S3 buckets don't, by
+    #   default, have Unix file permissions assigned to them. Upon discovery
+    #   in an S3 bucket by Storage Gateway, the S3 objects that represent
+    #   files and folders are assigned these default Unix permissions. This
+    #   operation is only supported in the file gateway type.
     #   @return [Types::NFSFileShareDefaults]
     #
     # @!attribute [rw] file_share_arn
@@ -2893,8 +3191,8 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] file_share_status
-    #   The status of the file share. Possible values are CREATING,
-    #   UPDATING, AVAILABLE and DELETING.
+    #   The status of the file share. Possible values are `CREATING`,
+    #   `UPDATING`, `AVAILABLE` and `DELETING`.
     #   @return [String]
     #
     # @!attribute [rw] gateway_arn
@@ -3247,6 +3545,124 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # The Windows file permissions and ownership information assigned, by
+    # default, to native S3 objects when file gateway discovers them in S3
+    # buckets. This operation is only supported in file gateways.
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_id
+    #   The ID of the file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_status
+    #   The status of the file share. Possible values are `CREATING`,
+    #   `UPDATING`, `AVAILABLE` and `DELETING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own KMS key,
+    #   or false to use a key managed by Amazon S3. Optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used for Amazon S3
+    #   server side encryption. This value can only be set when KMSEncrypted
+    #   is true. Optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The file share path used by the SMB client to identify the mount
+    #   point.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The ARN of the IAM role that file gateway assumes when it accesses
+    #   the underlying storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_arn
+    #   The ARN of the backend storage used for storing file data.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket
+    #   by file gateway. Possible values are S3\_STANDARD, S3\_STANDARD\_IA
+    #   or S3\_ONEZONE\_IA. If this field is not populated, the default
+    #   value S3\_STANDARD is used. Optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_acl
+    #   Sets the access control list permission for objects in the S3 bucket
+    #   that a file gateway puts objects into. The default value is
+    #   "private".
+    #   @return [String]
+    #
+    # @!attribute [rw] read_only
+    #   Sets the write status of a file share. This value is true if the
+    #   write status is read-only, and otherwise false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] guess_mime_type_enabled
+    #   Enables guessing of the MIME type for uploaded objects based on file
+    #   extensions. Set this value to true to enable MIME type guessing, and
+    #   otherwise to false. The default value is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] requester_pays
+    #   Sets who pays the cost of the request and the data download from the
+    #   Amazon S3 bucket. Set this value to true if you want the requester
+    #   to pay instead of the bucket owner, and otherwise to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] valid_user_list
+    #   A list of users in the Active Directory that are allowed to access
+    #   the file share. Can only be set if Authentication is set to
+    #   "ActiveDirectory".
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] invalid_user_list
+    #   A list of users in the Active Directory that are not allowed to
+    #   access the file share. Can only be set if Authentication is set to
+    #   "ActiveDirectory".
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] authentication
+    #   The authentication method of the file share. Valid values:
+    #   "ActiveDirectory" or "GuestAccess". The default is
+    #   "ActiveDirectory".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SMBFileShareInfo AWS API Documentation
+    #
+    class SMBFileShareInfo < Struct.new(
+      :file_share_arn,
+      :file_share_id,
+      :file_share_status,
+      :gateway_arn,
+      :kms_encrypted,
+      :kms_key,
+      :path,
+      :role,
+      :location_arn,
+      :default_storage_class,
+      :object_acl,
+      :read_only,
+      :guess_mime_type_enabled,
+      :requester_pays,
+      :valid_user_list,
+      :invalid_user_list,
+      :authentication)
+      include Aws::Structure
+    end
+
     # SetLocalConsolePasswordInput
     #
     # @note When making an API call, you may pass SetLocalConsolePasswordInput
@@ -3282,6 +3698,45 @@ module Aws::StorageGateway
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePasswordOutput AWS API Documentation
     #
     class SetLocalConsolePasswordOutput < Struct.new(
+      :gateway_arn)
+      include Aws::Structure
+    end
+
+    # SetSMBGuestPasswordInput
+    #
+    # @note When making an API call, you may pass SetSMBGuestPasswordInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN", # required
+    #         password: "SMBGuestPassword", # required
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the file gateway the SMB file
+    #   share is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password you want to set for your SMB Server.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordInput AWS API Documentation
+    #
+    class SetSMBGuestPasswordInput < Struct.new(
+      :gateway_arn,
+      :password)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetSMBGuestPasswordOutput AWS API Documentation
+    #
+    class SetSMBGuestPasswordOutput < Struct.new(
       :gateway_arn)
       include Aws::Structure
     end
@@ -4075,6 +4530,111 @@ module Aws::StorageGateway
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareOutput AWS API Documentation
     #
     class UpdateNFSFileShareOutput < Struct.new(
+      :file_share_arn)
+      include Aws::Structure
+    end
+
+    # UpdateSMBFileShareInput
+    #
+    # @note When making an API call, you may pass UpdateSMBFileShareInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_share_arn: "FileShareARN", # required
+    #         kms_encrypted: false,
+    #         kms_key: "KMSKey",
+    #         default_storage_class: "StorageClass",
+    #         object_acl: "private", # accepts private, public-read, public-read-write, authenticated-read, bucket-owner-read, bucket-owner-full-control, aws-exec-read
+    #         read_only: false,
+    #         guess_mime_type_enabled: false,
+    #         requester_pays: false,
+    #         valid_user_list: ["FileShareUser"],
+    #         invalid_user_list: ["FileShareUser"],
+    #       }
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the SMB file share you want to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) KMS key used for Amazon S3 server
+    #   side encryption. This value can only be set when KMSEncrypted is
+    #   true. Optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket
+    #   by file gateway. Possible values are S3\_STANDARD, S3\_STANDARD\_IA
+    #   or S3\_ONEZONE\_IA. If this field is not populated, the default
+    #   value S3\_STANDARD is used. Optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_acl
+    #   Sets the access control list permission for objects in the Amazon S3
+    #   bucket that a file gateway puts objects into. The default value is
+    #   "private".
+    #   @return [String]
+    #
+    # @!attribute [rw] read_only
+    #   Sets the write status of a file share. This value is true if the
+    #   write status is read-only, and otherwise false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] guess_mime_type_enabled
+    #   Enables guessing of the MIME type for uploaded objects based on file
+    #   extensions. Set this value to true to enable MIME type guessing, and
+    #   otherwise to false. The default value is true.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] requester_pays
+    #   Sets who pays the cost of the request and the data download from the
+    #   Amazon S3 bucket. Set this value to true if you want the requester
+    #   to pay instead of the bucket owner, and otherwise to false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] valid_user_list
+    #   A list of users in the Active Directory that are allowed to access
+    #   the file share. Can only be set if Authentication is set to
+    #   "ActiveDirectory".
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] invalid_user_list
+    #   A list of users in the Active Directory that are not allowed to
+    #   access the file share. Can only be set if Authentication is set to
+    #   "ActiveDirectory".
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareInput AWS API Documentation
+    #
+    class UpdateSMBFileShareInput < Struct.new(
+      :file_share_arn,
+      :kms_encrypted,
+      :kms_key,
+      :default_storage_class,
+      :object_acl,
+      :read_only,
+      :guess_mime_type_enabled,
+      :requester_pays,
+      :valid_user_list,
+      :invalid_user_list)
+      include Aws::Structure
+    end
+
+    # UpdateSMBFileShareOutput
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the updated SMB file share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSMBFileShareOutput AWS API Documentation
+    #
+    class UpdateSMBFileShareOutput < Struct.new(
       :file_share_arn)
       include Aws::Structure
     end

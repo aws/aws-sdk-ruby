@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2018-06-28)
+------------------
+
 * Feature - Supports `:version_id` for resource `#download_file` helper.
 
 * Issue - Reduce memory allocation in checksum and signature generation.

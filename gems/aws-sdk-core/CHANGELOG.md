@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.22.1 (2018-06-28)
+------------------
+
 * Issue - Performance enhancement to instance credential providers, to use a more precisely scoped Time parsing method for improved performance.
 
 3.22.0 (2018-06-26)

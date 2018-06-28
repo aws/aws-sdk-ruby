@@ -381,20 +381,24 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Identifies a stream as an event source for a Lambda function. It can
-    # be either an Amazon Kinesis stream or an Amazon DynamoDB stream. AWS
-    # Lambda invokes the specified function when records are posted to the
-    # stream.
+    # Identifies a poll-based event source for a Lambda function. It can be
+    # either an Amazon Kinesis or DynamoDB stream, or an Amazon SQS queue.
+    # AWS Lambda invokes the specified function when records are posted to
+    # the event source.
     #
-    # This association between a stream source and a Lambda function is
+    # This association between a poll-based source and a Lambda function is
     # called the event source mapping.
     #
-    # You provide mapping information (for example, which stream to read
-    # from and which Lambda function to invoke) in the request body.
+    # You provide mapping information (for example, which stream or SQS
+    # queue to read from and which Lambda function to invoke) in the request
+    # body.
     #
-    # Each event source, such as an Amazon Kinesis or a DynamoDB stream, can
-    # be associated with multiple AWS Lambda functions. A given Lambda
-    # function can be associated with multiple AWS event sources.
+    # Amazon Kinesis or DynamoDB stream event sources can be associated with
+    # multiple AWS Lambda functions and a given Lambda function can be
+    # associated with multiple AWS event sources. For Amazon SQS, you can
+    # configure multiple queues as event sources for a single Lambda
+    # function, but an SQS queue can be mapped only to a single Lambda
+    # function.
     #
     # If you are using versioning, you can specify a specific function
     # version or an alias via the function name parameter. For more
@@ -409,11 +413,10 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [required, String] :event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or the Amazon
-    #   DynamoDB stream that is the event source. Any record added to this
-    #   stream could cause AWS Lambda to invoke your Lambda function, it
-    #   depends on the `BatchSize`. AWS Lambda POSTs the Amazon Kinesis event,
-    #   containing records, to your Lambda function as JSON.
+    #   The Amazon Resource Name (ARN) of the event source. Any record added
+    #   to this source could cause AWS Lambda to invoke your Lambda function,
+    #   it depends on the `BatchSize`. AWS Lambda POSTs the event's records
+    #   to your Lambda function as JSON.
     #
     # @option params [required, String] :function_name
     #   The Lambda function to invoke when AWS Lambda detects an event on the
@@ -446,10 +449,11 @@ module Aws::Lambda
     # @option params [Integer] :batch_size
     #   The largest number of records that AWS Lambda will retrieve from your
     #   event source at the time of invoking your function. Your function
-    #   receives an event with all the retrieved records. The default is 100
-    #   records.
+    #   receives an event with all the retrieved records. The default for
+    #   Amazon Kinesis and Amazon DynamoDB is 100 records. For SQS, the
+    #   default is 1.
     #
-    # @option params [required, String] :starting_position
+    # @option params [String] :starting_position
     #   The position in the DynamoDB or Kinesis stream where AWS Lambda should
     #   start reading. For more information, see [GetShardIterator][1] in the
     #   *Amazon Kinesis API Reference Guide* or [GetShardIterator][2] in the
@@ -493,7 +497,7 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #     enabled: false,
     #     batch_size: 1,
-    #     starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
+    #     starting_position: "TRIM_HORIZON", # accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
     #     starting_position_timestamp: Time.now,
     #   })
     #
@@ -1850,8 +1854,8 @@ module Aws::Lambda
     # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
     #
     # @option params [String] :event_source_arn
-    #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream. (This
-    #   parameter is optional.)
+    #   The Amazon Resource Name (ARN) of the Amazon Kinesis or DynamoDB
+    #   stream, or an SQS queue. (This parameter is optional.)
     #
     # @option params [String] :function_name
     #   The name of the Lambda function.
@@ -3157,7 +3161,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

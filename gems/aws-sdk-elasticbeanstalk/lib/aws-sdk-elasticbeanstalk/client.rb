@@ -346,7 +346,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.environments[0].abortable_operation_in_progress #=> Boolean
     #   resp.environments[0].health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.environments[0].resources.load_balancer.load_balancer_name #=> String
     #   resp.environments[0].resources.load_balancer.domain #=> String
     #   resp.environments[0].resources.load_balancer.listeners #=> Array
@@ -526,10 +526,14 @@ module Aws::ElasticBeanstalk
     #   doesn't already exist.
     #
     # @option params [Boolean] :process
-    #   Preprocesses and validates the environment manifest (`env.yaml`) and
+    #   Pre-processes and validates the environment manifest (`env.yaml`) and
     #   configuration files (`*.config` files in the `.ebextensions` folder)
     #   in the source bundle. Validating configuration files can identify
     #   issues prior to deploying the application version to an environment.
+    #
+    #   You must turn processing on for application versions that you create
+    #   using AWS CodeBuild or AWS CodeCommit. For application versions built
+    #   from a source bundle in Amazon S3, processing is optional.
     #
     #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration files.
     #   It doesn't validate your application's configuration files, like
@@ -846,6 +850,13 @@ module Aws::ElasticBeanstalk
     #   AWS Elastic Beanstalk sets the configuration values to the default
     #   values associated with the specified solution stack.
     #
+    #   For a list of current solution stacks, see [Elastic Beanstalk
+    #   Supported Platforms][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html
+    #
     # @option params [String] :platform_arn
     #   The ARN of the platform.
     #
@@ -971,7 +982,7 @@ module Aws::ElasticBeanstalk
     #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.resources.load_balancer.load_balancer_name #=> String
     #   resp.resources.load_balancer.domain #=> String
     #   resp.resources.load_balancer.listeners #=> Array
@@ -2208,7 +2219,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.environments[0].abortable_operation_in_progress #=> Boolean
     #   resp.environments[0].health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.environments[0].health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.environments[0].resources.load_balancer.load_balancer_name #=> String
     #   resp.environments[0].resources.load_balancer.domain #=> String
     #   resp.environments[0].resources.load_balancer.listeners #=> Array
@@ -2380,7 +2391,7 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Retrives detailed information about the health of instances in your
+    # Retrieves detailed information about the health of instances in your
     # AWS Elastic Beanstalk. This operation requires [enhanced health
     # reporting][1].
     #
@@ -3185,7 +3196,7 @@ module Aws::ElasticBeanstalk
     #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.resources.load_balancer.load_balancer_name #=> String
     #   resp.resources.load_balancer.domain #=> String
     #   resp.resources.load_balancer.listeners #=> Array
@@ -3801,7 +3812,7 @@ module Aws::ElasticBeanstalk
     #   resp.status #=> String, one of "Launching", "Updating", "Ready", "Terminating", "Terminated"
     #   resp.abortable_operation_in_progress #=> Boolean
     #   resp.health #=> String, one of "Green", "Yellow", "Red", "Grey"
-    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe"
+    #   resp.health_status #=> String, one of "NoData", "Unknown", "Pending", "Ok", "Info", "Warning", "Degraded", "Severe", "Suspended"
     #   resp.resources.load_balancer.load_balancer_name #=> String
     #   resp.resources.load_balancer.domain #=> String
     #   resp.resources.load_balancer.listeners #=> Array
@@ -3992,7 +4003,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
