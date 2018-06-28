@@ -80,7 +80,7 @@ module Aws
         it 'closes the opened file handle' do
           file = double('fake-file')
           expect(File).to receive(:open).with(path, 'rb').and_return(file)
-          expect(file).to receive(:read).with(5).and_return('bytes')
+          expect(file).to receive(:read).with(5, nil).and_return('bytes')
           expect(file).to receive(:seek).with(1)
           expect(file).to receive(:close)
           part = FilePart.new(source:path, offset:1, size:5)

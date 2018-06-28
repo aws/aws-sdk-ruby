@@ -45,7 +45,7 @@ module Aws
           end
 
           def update_in_chunks(digest, io)
-            while chunk = io.read(CHUNK_SIZE)
+            while chunk = io.read(CHUNK_SIZE, buffer ||= "")
               digest.update(chunk)
             end
             io.rewind
