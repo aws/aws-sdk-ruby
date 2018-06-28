@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Reduce memory allocation when generating signatures.
+
 1.0.2 (2018-02-21)
 ------------------
 
