@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticBeanstalk - Updated the API, documentation, and integration test for AWS Elastic Beanstalk.
+
+* Feature - Aws::Lambda - Updated the API, documentation, and integration test for AWS Lambda.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
 2.11.77 (2018-06-27)
 ------------------
 
