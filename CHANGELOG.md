@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.78 (2018-06-28)
+------------------
+
 * Feature - Aws::ElasticBeanstalk - Updated the API, documentation, and integration test for AWS Elastic Beanstalk.
 
 * Feature - Aws::Lambda - Updated the API, documentation, and integration test for AWS Lambda.
