@@ -601,6 +601,21 @@ module Aws::SecretsManager
     #   * {Types::DeleteResourcePolicyResponse#arn #arn} => String
     #   * {Types::DeleteResourcePolicyResponse#name #name} => String
     #
+    #
+    # @example Example: To delete the resource-based policy attached to a secret
+    #
+    #   # The following example shows how to delete the resource-based policy that is attached to a secret.
+    #
+    #   resp = client.delete_resource_policy({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseMasterSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_resource_policy({
@@ -978,6 +993,22 @@ module Aws::SecretsManager
     #   * {Types::GetResourcePolicyResponse#arn #arn} => String
     #   * {Types::GetResourcePolicyResponse#name #name} => String
     #   * {Types::GetResourcePolicyResponse#resource_policy #resource_policy} => String
+    #
+    #
+    # @example Example: To retrieve the resource-based policy attached to a secret
+    #
+    #   # The following example shows how to retrieve the resource-based policy that is attached to a secret.
+    #
+    #   resp = client.get_resource_policy({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #     resource_policy: "{\n\"Version\":\"2012-10-17\",\n\"Statement\":[{\n\"Effect\":\"Allow\",\n\"Principal\":{\n\"AWS\":\"arn:aws:iam::123456789012:root\"\n},\n\"Action\":\"secretsmanager:GetSecretValue\",\n\"Resource\":\"*\"\n}]\n}", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -1427,6 +1458,22 @@ module Aws::SecretsManager
     #
     #   * {Types::PutResourcePolicyResponse#arn #arn} => String
     #   * {Types::PutResourcePolicyResponse#name #name} => String
+    #
+    #
+    # @example Example: To add a resource-based policy to a secret
+    #
+    #   # The following example shows how to add a resource-based policy to a secret.
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_policy: "{\n\"Version\":\"2012-10-17\",\n\"Statement\":[{\n\"Effect\":\"Allow\",\n\"Principal\":{\n\"AWS\":\"arn:aws:iam::123456789012:root\"\n},\n\"Action\":\"secretsmanager:GetSecretValue\",\n\"Resource\":\"*\"\n}]\n}", 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2513,7 +2560,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
