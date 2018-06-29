@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SecretsManager - Updated the documentation for AWS Secrets Manager.
+
 2.11.78 (2018-06-28)
 ------------------
 
