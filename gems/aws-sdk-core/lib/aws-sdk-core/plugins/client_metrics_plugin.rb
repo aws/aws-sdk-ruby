@@ -5,7 +5,7 @@ module Aws
     class ClientMetricsPlugin < Seahorse::Client::Plugin
 
       option(:client_side_monitoring,
-        default: true,
+        default: false,
         docstring: <<-DOCS) do |cfg|
 When `true`, client-side metrics will be collected for all API requests from
 this client.
@@ -14,7 +14,7 @@ this client.
       end
 
       option(:client_side_monitoring_port,
-        default: nil,
+        default: 31000,
         docstring: <<-DOCS) do |cfg|
 Required for publishing client metrics. The port that the client side monitoring
 agent is running on, where client metrics will be published via UDP.
@@ -51,7 +51,13 @@ all generated client side metrics. Defaults to an empty string.
         env_source = ENV["AWS_CSM_PORT"]
         env_source = nil if env_source == ""
         cfg_source = Aws.shared_config.csm_port(profile: cfg.profile)
-        env_source || cfg_source
+        if env_source
+          env_source.to_i
+        elsif cfg_source
+          cfg_source.to_i
+        else
+          31000
+        end
       end
 
       def self.resolve_client_side_monitoring(cfg)
@@ -61,12 +67,10 @@ all generated client side metrics. Defaults to an empty string.
           env_source = false
         end
         cfg_source = Aws.shared_config.csm_enabled(profile: cfg.profile)
-        if env_source == false
-          false
-        elsif cfg_source == false
-          false
-        else
+        if env_source || cfg_source
           true
+        else
+          false
         end
       end
 

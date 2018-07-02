@@ -43,8 +43,8 @@ module Aws
       end
 
       describe "configuration" do
-        it 'defaults config.client_side_monitoring to true' do
-          expect(client.config.client_side_monitoring).to be_truthy
+        it 'defaults config.client_side_monitoring to false' do
+          expect(client.config.client_side_monitoring).not_to be_truthy
         end
 
         it 'defaults to an empty string client id' do
@@ -68,11 +68,12 @@ module Aws
           )
         end
 
-        it 'does not include the plugin unless a port is provided' do
+        it 'does not include the plugin if an invalid port is provided' do
           client = ClientMetricsSvc::Client.new(
             credentials: Aws::Credentials.new('stub_akid', 'stub_secret'),
             region: "us-stubbed-1",
-            client_side_monitoring: true
+            client_side_monitoring: true,
+            client_side_monitoring_port: nil
           )
           expect(client.handlers.to_a).not_to include(
             Aws::Plugins::ClientMetricsPlugin::Handler
@@ -85,13 +86,13 @@ module Aws
           )
         end
 
-        it 'does include the plugins when a port is provided' do
+        it 'does include the plugins when using the default port' do
           client = ClientMetricsSvc::Client.new(
             credentials: Aws::Credentials.new('stub_akid', 'stub_secret'),
             region: "us-stubbed-1",
-            client_side_monitoring: true,
-            client_side_monitoring_port: 1234
+            client_side_monitoring: true
           )
+          expect(client.config.client_side_monitoring_port).to eq(31000)
           expect(client.handlers.to_a).to include(
             Aws::Plugins::ClientMetricsPlugin::Handler
           )
