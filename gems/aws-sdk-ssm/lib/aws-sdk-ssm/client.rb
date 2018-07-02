@@ -1471,6 +1471,147 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Use this API action to view information about a specific execution of
+    # a specific association.
+    #
+    # @option params [required, String] :association_id
+    #   The association ID that includes the execution for which you want to
+    #   view details.
+    #
+    # @option params [required, String] :execution_id
+    #   The execution ID for which you want to view details.
+    #
+    # @option params [Array<Types::AssociationExecutionTargetsFilter>] :filters
+    #   Filters for the request. You can specify the following filters and
+    #   values.
+    #
+    #   Status (EQUAL)
+    #
+    #   ResourceId (EQUAL)
+    #
+    #   ResourceType (EQUAL)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::DescribeAssociationExecutionTargetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssociationExecutionTargetsResult#association_execution_targets #association_execution_targets} => Array&lt;Types::AssociationExecutionTarget&gt;
+    #   * {Types::DescribeAssociationExecutionTargetsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_association_execution_targets({
+    #     association_id: "AssociationId", # required
+    #     execution_id: "AssociationExecutionId", # required
+    #     filters: [
+    #       {
+    #         key: "Status", # required, accepts Status, ResourceId, ResourceType
+    #         value: "AssociationExecutionTargetsFilterValue", # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_execution_targets #=> Array
+    #   resp.association_execution_targets[0].association_id #=> String
+    #   resp.association_execution_targets[0].association_version #=> String
+    #   resp.association_execution_targets[0].execution_id #=> String
+    #   resp.association_execution_targets[0].resource_id #=> String
+    #   resp.association_execution_targets[0].resource_type #=> String
+    #   resp.association_execution_targets[0].status #=> String
+    #   resp.association_execution_targets[0].detailed_status #=> String
+    #   resp.association_execution_targets[0].last_execution_date #=> Time
+    #   resp.association_execution_targets[0].output_source.output_source_id #=> String
+    #   resp.association_execution_targets[0].output_source.output_source_type #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionTargets AWS API Documentation
+    #
+    # @overload describe_association_execution_targets(params = {})
+    # @param [Hash] params ({})
+    def describe_association_execution_targets(params = {}, options = {})
+      req = build_request(:describe_association_execution_targets, params)
+      req.send_request(options)
+    end
+
+    # Use this API action to view all executions for a specific association
+    # ID.
+    #
+    # @option params [required, String] :association_id
+    #   The association ID for which you want to view execution history
+    #   details.
+    #
+    # @option params [Array<Types::AssociationExecutionFilter>] :filters
+    #   Filters for the request. You can specify the following filters and
+    #   values.
+    #
+    #   ExecutionId (EQUAL)
+    #
+    #   Status (EQUAL)
+    #
+    #   CreatedTime (EQUAL, GREATER\_THAN, LESS\_THAN)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #
+    # @option params [String] :next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #
+    # @return [Types::DescribeAssociationExecutionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAssociationExecutionsResult#association_executions #association_executions} => Array&lt;Types::AssociationExecution&gt;
+    #   * {Types::DescribeAssociationExecutionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_association_executions({
+    #     association_id: "AssociationId", # required
+    #     filters: [
+    #       {
+    #         key: "ExecutionId", # required, accepts ExecutionId, Status, CreatedTime
+    #         value: "AssociationExecutionFilterValue", # required
+    #         type: "EQUAL", # required, accepts EQUAL, LESS_THAN, GREATER_THAN
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_executions #=> Array
+    #   resp.association_executions[0].association_id #=> String
+    #   resp.association_executions[0].association_version #=> String
+    #   resp.association_executions[0].execution_id #=> String
+    #   resp.association_executions[0].status #=> String
+    #   resp.association_executions[0].detailed_status #=> String
+    #   resp.association_executions[0].created_time #=> Time
+    #   resp.association_executions[0].last_execution_date #=> Time
+    #   resp.association_executions[0].resource_count_by_status #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutions AWS API Documentation
+    #
+    # @overload describe_association_executions(params = {})
+    # @param [Hash] params ({})
+    def describe_association_executions(params = {}, options = {})
+      req = build_request(:describe_association_executions, params)
+      req.send_request(options)
+    end
+
     # Provides details about all active and terminated Automation
     # executions.
     #
@@ -3736,8 +3877,8 @@ module Aws::SSM
     #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
-    #   slash (/) and end with the parameter name. A hierarchy can have a
-    #   maximum of 15 levels. Here is an example of a hierarchy:
+    #   slash (/) and end with the parameter name. A parameter name hierarchy
+    #   can have a maximum of 15 levels. Here is an example of a hierarchy:
     #   `/Finance/Prod/IAD/WinServ2016/license33`
     #
     # @option params [Boolean] :recursive
@@ -4922,9 +5063,26 @@ module Aws::SSM
     #   the parameter path and name. For example:
     #   `/Dev/DBServer/MySQL/db-string13`
     #
-    #   For information about parameter name requirements and restrictions,
-    #   see [Creating Systems Manager Parameters][1] in the *AWS Systems
-    #   Manager User Guide*.
+    #   Naming Constraints:
+    #
+    #   * Parameter names are case sensitive.
+    #
+    #   * A parameter name must be unique within an AWS Region
+    #
+    #   * A parameter name can't be prefixed with "aws" or "ssm"
+    #     (case-insensitive).
+    #
+    #   * Parameter names can include only the following symbols and letters:
+    #     `a-zA-Z0-9_.-/`
+    #
+    #   * A parameter name can't include spaces.
+    #
+    #   * Parameter hierarchies are limited to a maximum depth of fifteen
+    #     levels.
+    #
+    #   For additional information about valid values for parameter names, see
+    #   [Requirements and Constraints for Parameter Names][1] in the *AWS
+    #   Systems Manager User Guide*.
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
@@ -4935,10 +5093,11 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
     #
     # @option params [String] :description
     #   Information about the parameter that you want to add to the system.
+    #   Optional but recommended.
     #
     #   Do not enter personally identifiable information in this field.
     #
@@ -4948,10 +5107,32 @@ module Aws::SSM
     # @option params [required, String] :type
     #   The type of parameter that you want to add to the system.
     #
+    #   Items in a `StringList` must be separated by a comma (,). You can't
+    #   use other punctuation or special character to escape items in the
+    #   list. If you have a parameter value that requires a comma, then use
+    #   the `String` data type.
+    #
+    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
+    #   templates or in the China Regions.
+    #
+    #    </note>
+    #
     # @option params [String] :key_id
-    #   The KMS Key ID that you want to use to encrypt a parameter when you
-    #   choose the SecureString data type. If you don't specify a key ID, the
-    #   system uses the default key associated with your AWS account.
+    #   The KMS Key ID that you want to use to encrypt a parameter. Either the
+    #   default AWS Key Management Service (AWS KMS) key automatically
+    #   assigned to your AWS account or a custom key. Required for parameters
+    #   that use the `SecureString` data type.
+    #
+    #   If you don't specify a key ID, the system uses the default key
+    #   associated with your AWS account.
+    #
+    #   * To use your default AWS KMS key, choose the `SecureString` data
+    #     type, and do *not* specify the `Key ID` when you create the
+    #     parameter. The system automatically populates `Key ID` with your
+    #     default KMS key.
+    #
+    #   * To use a custom KMS key, choose the `SecureString` data type with
+    #     the `Key ID` parameter.
     #
     # @option params [Boolean] :overwrite
     #   Overwrite an existing parameter. If not specified, will default to
@@ -5574,6 +5755,30 @@ module Aws::SSM
     # @param [Hash] params ({})
     def send_command(params = {}, options = {})
       req = build_request(:send_command, params)
+      req.send_request(options)
+    end
+
+    # Use this API action to execute an association immediately and only one
+    # time. This action can be helpful when troubleshooting associations.
+    #
+    # @option params [required, Array<String>] :association_ids
+    #   The association IDs that you want to execute immediately and only one
+    #   time.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_associations_once({
+    #     association_ids: ["AssociationId"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAssociationsOnce AWS API Documentation
+    #
+    # @overload start_associations_once(params = {})
+    # @param [Hash] params ({})
+    def start_associations_once(params = {}, options = {})
+      req = build_request(:start_associations_once, params)
       req.send_request(options)
     end
 
@@ -6590,7 +6795,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

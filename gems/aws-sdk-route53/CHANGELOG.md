@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.10.1 (2018-07-02)
+------------------
+
 * Issue - Update `IdFix` plugin to work with Hash and Struct requests.
 
 1.10.0 (2018-06-26)

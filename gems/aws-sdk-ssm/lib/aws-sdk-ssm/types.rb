@@ -287,6 +287,171 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Includes information about the specified association.
+    #
+    # @!attribute [rw] association_id
+    #   The association ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_version
+    #   The association version.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The execution ID for the association. If the association does not
+    #   run at intervals or according to a schedule, then the ExecutionID is
+    #   the same as the AssociationID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the association execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] detailed_status
+    #   Detailed status information about the execution.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The time the execution started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_execution_date
+    #   The date of the last execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_count_by_status
+    #   An aggregate status of the resources in the execution based on the
+    #   status type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecution AWS API Documentation
+    #
+    class AssociationExecution < Struct.new(
+      :association_id,
+      :association_version,
+      :execution_id,
+      :status,
+      :detailed_status,
+      :created_time,
+      :last_execution_date,
+      :resource_count_by_status)
+      include Aws::Structure
+    end
+
+    # Filters used in the request.
+    #
+    # @note When making an API call, you may pass AssociationExecutionFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "ExecutionId", # required, accepts ExecutionId, Status, CreatedTime
+    #         value: "AssociationExecutionFilterValue", # required
+    #         type: "EQUAL", # required, accepts EQUAL, LESS_THAN, GREATER_THAN
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key value used in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value specified for the key.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The filter type specified in the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionFilter AWS API Documentation
+    #
+    class AssociationExecutionFilter < Struct.new(
+      :key,
+      :value,
+      :type)
+      include Aws::Structure
+    end
+
+    # Includes information about the specified association execution.
+    #
+    # @!attribute [rw] association_id
+    #   The association ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_version
+    #   The association version.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The execution ID. If the association does not run at intervals or
+    #   according to a schedule, then the ExecutionID is the same as the
+    #   AssociationID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource ID, for example, the instance ID where the association
+    #   ran.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type, for example, instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The association execution status.
+    #   @return [String]
+    #
+    # @!attribute [rw] detailed_status
+    #   Detailed information about the execution status.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_execution_date
+    #   The date of the last execution.
+    #   @return [Time]
+    #
+    # @!attribute [rw] output_source
+    #   The location where the association details are saved.
+    #   @return [Types::OutputSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionTarget AWS API Documentation
+    #
+    class AssociationExecutionTarget < Struct.new(
+      :association_id,
+      :association_version,
+      :execution_id,
+      :resource_id,
+      :resource_type,
+      :status,
+      :detailed_status,
+      :last_execution_date,
+      :output_source)
+      include Aws::Structure
+    end
+
+    # Filters for the association execution.
+    #
+    # @note When making an API call, you may pass AssociationExecutionTargetsFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "Status", # required, accepts Status, ResourceId, ResourceType
+    #         value: "AssociationExecutionTargetsFilterValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key value used in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value specified for the key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationExecutionTargetsFilter AWS API Documentation
+    #
+    class AssociationExecutionTargetsFilter < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
     # Describes a filter.
     #
     # @note When making an API call, you may pass AssociationFilter
@@ -2701,6 +2866,151 @@ module Aws::SSM
     #
     class DescribeActivationsResult < Struct.new(
       :activation_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAssociationExecutionTargetsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "AssociationId", # required
+    #         execution_id: "AssociationExecutionId", # required
+    #         filters: [
+    #           {
+    #             key: "Status", # required, accepts Status, ResourceId, ResourceType
+    #             value: "AssociationExecutionTargetsFilterValue", # required
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The association ID that includes the execution for which you want to
+    #   view details.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_id
+    #   The execution ID for which you want to view details.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters for the request. You can specify the following filters and
+    #   values.
+    #
+    #   Status (EQUAL)
+    #
+    #   ResourceId (EQUAL)
+    #
+    #   ResourceType (EQUAL)
+    #   @return [Array<Types::AssociationExecutionTargetsFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionTargetsRequest AWS API Documentation
+    #
+    class DescribeAssociationExecutionTargetsRequest < Struct.new(
+      :association_id,
+      :execution_id,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_execution_targets
+    #   Information about the execution.
+    #   @return [Array<Types::AssociationExecutionTarget>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionTargetsResult AWS API Documentation
+    #
+    class DescribeAssociationExecutionTargetsResult < Struct.new(
+      :association_execution_targets,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeAssociationExecutionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_id: "AssociationId", # required
+    #         filters: [
+    #           {
+    #             key: "ExecutionId", # required, accepts ExecutionId, Status, CreatedTime
+    #             value: "AssociationExecutionFilterValue", # required
+    #             type: "EQUAL", # required, accepts EQUAL, LESS_THAN, GREATER_THAN
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] association_id
+    #   The association ID for which you want to view execution history
+    #   details.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters for the request. You can specify the following filters and
+    #   values.
+    #
+    #   ExecutionId (EQUAL)
+    #
+    #   Status (EQUAL)
+    #
+    #   CreatedTime (EQUAL, GREATER\_THAN, LESS\_THAN)
+    #   @return [Array<Types::AssociationExecutionFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this call. The call also
+    #   returns a token that you can specify in a subsequent call to get the
+    #   next set of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to start the list. Use this token to get the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionsRequest AWS API Documentation
+    #
+    class DescribeAssociationExecutionsRequest < Struct.new(
+      :association_id,
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] association_executions
+    #   A list of the executions for the specified association ID.
+    #   @return [Array<Types::AssociationExecution>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. Use this token to get
+    #   the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationExecutionsResult AWS API Documentation
+    #
+    class DescribeAssociationExecutionsResult < Struct.new(
+      :association_executions,
       :next_token)
       include Aws::Structure
     end
@@ -5646,9 +5956,9 @@ module Aws::SSM
     #
     # @!attribute [rw] path
     #   The hierarchy for the parameter. Hierarchies start with a forward
-    #   slash (/) and end with the parameter name. A hierarchy can have a
-    #   maximum of 15 levels. Here is an example of a hierarchy:
-    #   `/Finance/Prod/IAD/WinServ2016/license33`
+    #   slash (/) and end with the parameter name. A parameter name
+    #   hierarchy can have a maximum of 15 levels. Here is an example of a
+    #   hierarchy: `/Finance/Prod/IAD/WinServ2016/license33`
     #   @return [String]
     #
     # @!attribute [rw] recursive
@@ -8307,6 +8617,27 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Information about the source where the association execution details
+    # are stored.
+    #
+    # @!attribute [rw] output_source_id
+    #   The ID of the output source, for example the URL of an Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_source_type
+    #   The type of source where the association execution details are
+    #   stored, for example, Amazon S3.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/OutputSource AWS API Documentation
+    #
+    class OutputSource < Struct.new(
+      :output_source_id,
+      :output_source_type)
+      include Aws::Structure
+    end
+
     # An Amazon EC2 Systems Manager parameter in Parameter Store.
     #
     # @!attribute [rw] name
@@ -9307,7 +9638,7 @@ module Aws::SSM
     #
     #   `keepcache=0`
     #
-    #   `debualevel=2`
+    #   `debuglevel=2`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchSource AWS API Documentation
@@ -9491,9 +9822,26 @@ module Aws::SSM
     #   of the parameter path and name. For example:
     #   `/Dev/DBServer/MySQL/db-string13`
     #
-    #   For information about parameter name requirements and restrictions,
-    #   see [Creating Systems Manager Parameters][1] in the *AWS Systems
-    #   Manager User Guide*.
+    #   Naming Constraints:
+    #
+    #   * Parameter names are case sensitive.
+    #
+    #   * A parameter name must be unique within an AWS Region
+    #
+    #   * A parameter name can't be prefixed with "aws" or "ssm"
+    #     (case-insensitive).
+    #
+    #   * Parameter names can include only the following symbols and
+    #     letters: `a-zA-Z0-9_.-/`
+    #
+    #   * A parameter name can't include spaces.
+    #
+    #   * Parameter hierarchies are limited to a maximum depth of fifteen
+    #     levels.
+    #
+    #   For additional information about valid values for parameter names,
+    #   see [Requirements and Constraints for Parameter Names][1] in the
+    #   *AWS Systems Manager User Guide*.
     #
     #   <note markdown="1"> The maximum length constraint listed below includes capacity for
     #   additional system attributes that are not part of the name. The
@@ -9504,11 +9852,12 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html
     #   @return [String]
     #
     # @!attribute [rw] description
     #   Information about the parameter that you want to add to the system.
+    #   Optional but recommended.
     #
     #   Do not enter personally identifiable information in this field.
     #   @return [String]
@@ -9519,12 +9868,34 @@ module Aws::SSM
     #
     # @!attribute [rw] type
     #   The type of parameter that you want to add to the system.
+    #
+    #   Items in a `StringList` must be separated by a comma (,). You can't
+    #   use other punctuation or special character to escape items in the
+    #   list. If you have a parameter value that requires a comma, then use
+    #   the `String` data type.
+    #
+    #   <note markdown="1"> `SecureString` is not currently supported for AWS CloudFormation
+    #   templates or in the China Regions.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   The KMS Key ID that you want to use to encrypt a parameter when you
-    #   choose the SecureString data type. If you don't specify a key ID,
-    #   the system uses the default key associated with your AWS account.
+    #   The KMS Key ID that you want to use to encrypt a parameter. Either
+    #   the default AWS Key Management Service (AWS KMS) key automatically
+    #   assigned to your AWS account or a custom key. Required for
+    #   parameters that use the `SecureString` data type.
+    #
+    #   If you don't specify a key ID, the system uses the default key
+    #   associated with your AWS account.
+    #
+    #   * To use your default AWS KMS key, choose the `SecureString` data
+    #     type, and do *not* specify the `Key ID` when you create the
+    #     parameter. The system automatically populates `Key ID` with your
+    #     default KMS key.
+    #
+    #   * To use a custom KMS key, choose the `SecureString` data type with
+    #     the `Key ID` parameter.
     #   @return [String]
     #
     # @!attribute [rw] overwrite
@@ -10497,6 +10868,29 @@ module Aws::SSM
       :unspecified_count)
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass StartAssociationsOnceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         association_ids: ["AssociationId"], # required
+    #       }
+    #
+    # @!attribute [rw] association_ids
+    #   The association IDs that you want to execute immediately and only
+    #   one time.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAssociationsOnceRequest AWS API Documentation
+    #
+    class StartAssociationsOnceRequest < Struct.new(
+      :association_ids)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAssociationsOnceResult AWS API Documentation
+    #
+    class StartAssociationsOnceResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass StartAutomationExecutionRequest
     #   data as a hash:
