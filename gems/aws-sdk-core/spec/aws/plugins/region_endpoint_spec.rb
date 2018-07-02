@@ -35,7 +35,7 @@ module Aws
           expect(client_class.new.config.region).to eq('region-fallback2')
         end
 
-        it 'prefers AWS_DEFAULT_REGION to AWS_REGION or AMAZON_REGION' do
+        it 'prefers AWS_REGION to AMAZON_REGION or AWS_DEFAULT_REGION' do
           env['AWS_REGION'] = 'aws-region'
           env['AMAZON_REGION'] = 'amazon-region'
           env['AWS_DEFAULT_REGION'] = 'aws-default-region'
