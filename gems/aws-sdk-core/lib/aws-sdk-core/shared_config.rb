@@ -253,7 +253,8 @@ module Aws
 
       if success
         creds_json = JSON.parse(raw_out)
-        if creds_json['Version'] == 1
+        payload_version = creds_json['Version']
+        if payload_version == 1
           creds = Credentials.new(
             creds_json['AccessKeyId'],
             creds_json['SecretAccessKey'],
@@ -261,12 +262,12 @@ module Aws
           )
 
           return creds if credentials_complete(creds)
-          raise ArgumentError.new("Invalid json payload for credentials JSON version #{creds_json['Version']}")
+          raise ArgumentError.new("Invalid json payload for credentials JSON version #{payload_version}")
         else
-          raise ArgumentError.new("Invalid version #{creds_json['Version']} for credentials payload")
+          raise ArgumentError.new("Invalid version #{payload_version} for credentials payload")
         end
       else
-        abort('credential_process provider failure')
+        abort('credential_process provider failure, the credential process had non zero exit status')
       end
     end
 
