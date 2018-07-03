@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.81 (2018-07-03)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, documentation, and integration test for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Redshift - Updated the API, documentation, and integration test for Amazon Redshift.
