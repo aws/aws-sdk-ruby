@@ -240,8 +240,33 @@ module Aws
       )
       if credentials_complete(creds)
         creds
+      elsif proc_invocation = prof_config['credential_process']
+        credentials_from_process(proc_invocation)
       else
         nil
+      end
+    end
+
+    def credentials_from_process(proc_invocation)
+      raw_out = `#{proc_invocation}`
+      success = $?.success?
+
+      if success
+        creds_json = JSON.parse(raw_out)
+        if creds_json['Version'] == 1
+          creds = Credentials.new(
+            creds_json['AccessKeyId'],
+            creds_json['SecretAccessKey'],
+            creds_json['SessionToken']
+          )
+
+          return creds if credentials_complete(creds)
+          raise JSON::ParseErrror.new("Invalid json payload for credentials JSON version #{creds_json['Version']}")
+        else
+          raise ArgumentError.new("Invalid version #{creds_json['Version']} for credentials payload")
+        end
+      else
+        abort('credential_process provider failure')
       end
     end
 
