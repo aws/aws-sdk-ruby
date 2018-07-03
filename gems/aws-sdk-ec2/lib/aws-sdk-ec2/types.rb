@@ -358,8 +358,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [How to Ensure
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [How to Ensure
     #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
@@ -368,14 +368,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   Specify the instance type that you want your Dedicated Hosts to be
-    #   configured for. When you specify the instance type, that is the only
-    #   instance type that you can launch onto that host.
+    #   Specify the instance type for which to configure your Dedicated
+    #   Hosts. When you specify the instance type, that is the only instance
+    #   type that you can launch onto that host.
     #   @return [String]
     #
     # @!attribute [rw] quantity
-    #   The number of Dedicated Hosts you want to allocate to your account
-    #   with these parameters.
+    #   The number of Dedicated Hosts to allocate to your account with these
+    #   parameters.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsRequest AWS API Documentation
@@ -392,8 +392,8 @@ module Aws::EC2
     # Contains the output of AllocateHosts.
     #
     # @!attribute [rw] host_ids
-    #   The ID of the allocated Dedicated Host. This is used when you want
-    #   to launch an instance onto a specific host.
+    #   The ID of the allocated Dedicated Host. This is used to launch an
+    #   instance onto a specific host.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsResult AWS API Documentation
@@ -3017,7 +3017,16 @@ module Aws::EC2
     #   @return [Boolean]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags for an EC2 Fleet resource.
+    #   The key-value pair for tagging the EC2 Fleet request on creation.
+    #   The value for `ResourceType` must be `fleet`, otherwise the fleet
+    #   request fails. To tag instances at launch, specify the tags in the
+    #   [launch template][1]. For information about tagging after launch,
+    #   see [Tagging Your Resources][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template
+    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources
     #   @return [Array<Types::TagSpecification>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetRequest AWS API Documentation
@@ -6864,13 +6873,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of the tag's key). If you want to list only
-    #     resources where Purpose is X, see the `tag`\:*key*=*value* filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] public_ips
@@ -7126,17 +7131,9 @@ module Aws::EC2
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
     #     to the resource.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC that the instance is linked to.
     #   @return [Array<Types::Filter>]
@@ -7286,17 +7283,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -7366,17 +7355,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -7724,6 +7705,10 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `instance-type` - The instance type.
+    #
+    #   ^
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetInstancesRequest AWS API Documentation
@@ -7799,6 +7784,22 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `activity-status` - The progress of the EC2 Fleet ( `error` \|
+    #     `pending-fulfillment` \| `pending-termination` \| `fulfilled`).
+    #
+    #   * `excess-capacity-termination-policy` - Indicates whether to
+    #     terminate running instances if the target capacity is decreased
+    #     below the current EC2 Fleet size (`true` \| `false`).
+    #
+    #   * `fleet-state` - The state of the EC2 Fleet (`submitted` \|
+    #     `active` \| `deleted` \| `failed` \| `deleted-running` \|
+    #     `deleted-terminating` \| `modifying`).
+    #
+    #   * `replace-unhealthy-instances` - Indicates whether EC2 Fleet should
+    #     replace unhealthy instances (`true` \| `false`).
+    #
+    #   * `type` - The type of request (`request` \| `maintain`).
     #   @return [Array<Types::Filter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsRequest AWS API Documentation
@@ -7817,7 +7818,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] fleets
-    #   The EC2 Fleets.
+    #   Information about the EC2 Fleets.
     #   @return [Array<Types::FleetData>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsResult AWS API Documentation
@@ -8013,17 +8014,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `update-time` - The time of the most recent update.
     #   @return [Array<Types::Filter>]
@@ -8262,6 +8255,10 @@ module Aws::EC2
     #   * `state` - The allocation state of the Dedicated Host (`available`
     #     \| `under-assessment` \| `permanent-failure` \| `released` \|
     #     `released-permanent-failure`).
+    #
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] host_ids
@@ -8613,17 +8610,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the tag-value filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `virtualization-type` - The virtualization type (`paravirtual` \|
     #     `hvm`).
@@ -9336,16 +9325,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of the tag's key). If you want to list only
-    #     resources where Purpose is X, see the `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `tenancy` - The tenancy of an instance (`dedicated` \| `default`
     #     \| `host`).
@@ -9444,17 +9426,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -9607,7 +9581,7 @@ module Aws::EC2
     # @!attribute [rw] max_results
     #   The maximum number of results to return in a single call. To
     #   retrieve the remaining results, make another call with the returned
-    #   `NextToken` value. This value can be between 5 and 1000.
+    #   `NextToken` value. This value can be between 1 and 200.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -9709,13 +9683,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of the tag's key). If you want to list only
-    #     resources where Purpose is X, see the `tag`\:*key*=*value* filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] next_token
@@ -9873,17 +9843,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC in which the NAT gateway resides.
     #   @return [Array<Types::Filter>]
@@ -9999,17 +9961,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the network ACL.
     #   @return [Array<Types::Filter>]
@@ -10319,17 +10273,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the network interface.
     #   @return [Array<Types::Filter>]
@@ -11062,17 +11008,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `usage-price` - The usage price of the Reserved Instance, per hour
     #     (for example, 0.84).
@@ -11202,17 +11140,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the route table.
     #   @return [Array<Types::Filter>]
@@ -11587,9 +11517,9 @@ module Aws::EC2
     #   * `owner-id` - The AWS account ID of the owner of the security
     #     group.
     #
-    #   * `tag-key` - The key of a tag assigned to the security group.
-    #
-    #   * `tag-value` - The value of a tag assigned to the security group.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC specified when the security group was
     #     created.
@@ -11766,17 +11696,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `volume-id` - The ID of the volume the snapshot is for.
     #
@@ -12254,17 +12176,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `type` - The type of Spot Instance request (`one-time` \|
     #     `persistent`).
@@ -12543,17 +12457,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC for the subnet.
     #   @return [Array<Types::Filter>]
@@ -12625,9 +12531,9 @@ module Aws::EC2
     #   * `resource-id` - The resource ID.
     #
     #   * `resource-type` - The resource type (`customer-gateway` \|
-    #     `dhcp-options` \| `elastic-ip` \| `fpga-image` \| `image` \|
-    #     `instance` \| `internet-gateway` \| `launch-template` \|
-    #     `natgateway` \| `network-acl` \| `network-interface` \|
+    #     `dhcp-options` \| `elastic-ip` \| `fleet` \| `fpga-image` \|
+    #     `image` \| `instance` \| `internet-gateway` \| `launch-template`
+    #     \| `natgateway` \| `network-acl` \| `network-interface` \|
     #     `reserved-instances` \| `route-table` \| `security-group` \|
     #     `snapshot` \| `spot-instances-request` \| `subnet` \| `volume` \|
     #     `vpc` \| `vpc-peering-connection` \| `vpn-connection` \|
@@ -12977,17 +12883,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `volume-id` - The volume ID.
     #
@@ -13207,17 +13105,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -13791,17 +13681,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-peering-connection-id` - The ID of the VPC peering
     #     connection.
@@ -13896,17 +13778,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `vpc-id` - The ID of the VPC.
     #   @return [Array<Types::Filter>]
@@ -13990,17 +13864,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `type` - The type of VPN connection. Currently the only supported
     #     type is `ipsec.1`.
@@ -14086,17 +13952,9 @@ module Aws::EC2
     #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
     #     the filter value.
     #
-    #   * `tag-key` - The key of a tag assigned to the resource. This filter
-    #     is independent of the `tag-value` filter. For example, if you use
-    #     both the filter "tag-key=Purpose" and the filter
-    #     "tag-value=X", you get any resources assigned both the tag key
-    #     Purpose (regardless of what the tag's value is), and the tag
-    #     value X (regardless of what the tag's key is). If you want to
-    #     list only resources where Purpose is X, see the
-    #     `tag`\:*key*=*value* filter.
-    #
-    #   * `tag-value` - The value of a tag assigned to the resource. This
-    #     filter is independent of the `tag-key` filter.
+    #   * `tag-key` - The key of a tag assigned to the resource. Use this
+    #     filter to find all resources assigned a tag with a specific key,
+    #     regardless of the tag value.
     #
     #   * `type` - The type of virtual private gateway. Currently the only
     #     supported type is `ipsec.1`.
@@ -14870,8 +14728,8 @@ module Aws::EC2
     #   Identifier (key ID, key alias, ID ARN, or alias ARN) for a
     #   user-managed CMK under which the EBS volume is encrypted.
     #
-    #   Note: This parameter is only supported on `BlockDeviceMapping`
-    #   objects called by [RunInstances][1], [RequestSpotFleet][2], and
+    #   This parameter is only supported on `BlockDeviceMapping` objects
+    #   called by [RunInstances][1], [RequestSpotFleet][2], and
     #   [RequestSpotInstances][3].
     #
     #
@@ -16432,7 +16290,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Describes an event in the history of the EC2 Fleet.
+    # Describes an event in the history of an EC2 Fleet.
     #
     # @!attribute [rw] event_information
     #   Information about the event.
@@ -16512,6 +16370,10 @@ module Aws::EC2
     #   The time that the Dedicated Host was released.
     #   @return [Time]
     #
+    # @!attribute [rw] tags
+    #   Any tags assigned to the Dedicated Host.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
@@ -16525,7 +16387,8 @@ module Aws::EC2
       :instances,
       :state,
       :allocation_time,
-      :release_time)
+      :release_time,
+      :tags)
       include Aws::Structure
     end
 
@@ -20185,7 +20048,8 @@ module Aws::EC2
     #
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
-    #   support tagging on creation are `instance` and `volume`.
+    #   support tagging on creation are `instance` and `volume`. To tag a
+    #   resource after it has been created, see CreateTags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -24510,9 +24374,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to apply to the resources during launch. You can tag
-    #   instances and volumes. The specified tags are applied to all
-    #   instances or volumes that are created during launch.
+    #   The tags to apply to the resources during launch. You can only tag
+    #   instances and volumes on launch. The specified tags are applied to
+    #   all instances or volumes that are created during launch. To tag a
+    #   resource after it has been created, see CreateTags.
     #   @return [Array<Types::LaunchTemplateTagSpecificationRequest>]
     #
     # @!attribute [rw] elastic_gpu_specifications
@@ -26782,9 +26647,10 @@ module Aws::EC2
     #   @return [Array<Types::ElasticGpuSpecification>]
     #
     # @!attribute [rw] tag_specifications
-    #   The tags to apply to the resources during launch. You can tag
-    #   instances and volumes. The specified tags are applied to all
-    #   instances or volumes that are created during launch.
+    #   The tags to apply to the resources during launch. You can only tag
+    #   instances and volumes on launch. The specified tags are applied to
+    #   all instances or volumes that are created during launch. To tag a
+    #   resource after it has been created, see CreateTags.
     #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] launch_template
@@ -29787,8 +29653,9 @@ module Aws::EC2
     #
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
-    #   support tagging on creation are `instance`, `snapshot`, and
-    #   `volume`.
+    #   support tagging on creation are `fleet`, `instance`, `snapshot`, and
+    #   `volume`. To tag a resource after it has been created, see
+    #   CreateTags.
     #   @return [String]
     #
     # @!attribute [rw] tags

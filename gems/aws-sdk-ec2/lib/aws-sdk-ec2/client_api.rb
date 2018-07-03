@@ -3509,6 +3509,7 @@ module Aws::EC2
     Host.add_member(:state, Shapes::ShapeRef.new(shape: AllocationState, location_name: "state"))
     Host.add_member(:allocation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "allocationTime"))
     Host.add_member(:release_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "releaseTime"))
+    Host.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Host.struct_class = Types::Host
 
     HostInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))

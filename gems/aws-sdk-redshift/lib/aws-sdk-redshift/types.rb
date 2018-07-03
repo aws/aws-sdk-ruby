@@ -8,6 +8,45 @@
 module Aws::Redshift
   module Types
 
+    # @note When making an API call, you may pass AcceptReservedNodeExchangeInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         reserved_node_id: "String", # required
+    #         target_reserved_node_offering_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] reserved_node_id
+    #   A string representing the identifier of the Reserved Node to be
+    #   exchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_reserved_node_offering_id
+    #   The unique identifier of the Reserved Node offering to be used for
+    #   the exchange.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchangeInputMessage AWS API Documentation
+    #
+    class AcceptReservedNodeExchangeInputMessage < Struct.new(
+      :reserved_node_id,
+      :target_reserved_node_offering_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exchanged_reserved_node
+    #   Describes a reserved node. You can call the
+    #   DescribeReservedNodeOfferings API to obtain the available reserved
+    #   node offerings.
+    #   @return [Types::ReservedNode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AcceptReservedNodeExchangeOutputMessage AWS API Documentation
+    #
+    class AcceptReservedNodeExchangeOutputMessage < Struct.new(
+      :exchanged_reserved_node)
+      include Aws::Structure
+    end
+
     # Describes an AWS customer account authorized to restore a snapshot.
     #
     # @!attribute [rw] account_id
@@ -358,6 +397,10 @@ module Aws::Redshift
     #   used by the cluster to access other AWS services.
     #   @return [Array<Types::ClusterIamRole>]
     #
+    # @!attribute [rw] pending_actions
+    #   Cluster operations that are waiting to be started.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -393,7 +436,8 @@ module Aws::Redshift
       :tags,
       :kms_key_id,
       :enhanced_vpc_routing,
-      :iam_roles)
+      :iam_roles,
+      :pending_actions)
       include Aws::Structure
     end
 
@@ -425,6 +469,55 @@ module Aws::Redshift
       :db_user,
       :db_password,
       :expiration)
+      include Aws::Structure
+    end
+
+    # Describes a `ClusterDbRevision`.
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_database_revision
+    #   A string representing the current cluster version.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_revision_release_date
+    #   The date on which the database revision was released.
+    #   @return [Time]
+    #
+    # @!attribute [rw] revision_targets
+    #   A list of `RevisionTarget` objects, where each object describes the
+    #   database revision that a cluster can be updated to.
+    #   @return [Array<Types::RevisionTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterDbRevision AWS API Documentation
+    #
+    class ClusterDbRevision < Struct.new(
+      :cluster_identifier,
+      :current_database_revision,
+      :database_revision_release_date,
+      :revision_targets)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   A string representing the starting point for the next set of
+    #   revisions. If a value is returned in a response, you can retrieve
+    #   the next set of revisions by providing the value in the `marker`
+    #   parameter and retrying the command. If the `marker` field is empty,
+    #   all revisions have already been returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_db_revisions
+    #   A list of revisions.
+    #   @return [Array<Types::ClusterDbRevision>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterDbRevisionsMessage AWS API Documentation
+    #
+    class ClusterDbRevisionsMessage < Struct.new(
+      :marker,
+      :cluster_db_revisions)
       include Aws::Structure
     end
 
@@ -2280,6 +2373,56 @@ module Aws::Redshift
     class DeleteTagsMessage < Struct.new(
       :resource_name,
       :tag_keys)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClusterDbRevisionsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String",
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   A unique identifier for a cluster whose `ClusterDbRevisions` you are
+    #   requesting. This parameter is case sensitive. All clusters defined
+    #   for an account are returned by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of response records to return in each call. If
+    #   the number of remaining response records exceeds the specified
+    #   MaxRecords value, a value is returned in the `marker` field of the
+    #   response. You can retrieve the next set of response records by
+    #   providing the returned `marker` value in the `marker` parameter and
+    #   retrying the request.
+    #
+    #   Default: 100
+    #
+    #   Constraints: minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point for
+    #   returning a set of response records. When the results of a
+    #   `DescribeClusterDbRevisions` request exceed the value specified in
+    #   `MaxRecords`, Amazon Redshift returns a value in the `marker` field
+    #   of the response. You can retrieve the next set of response records
+    #   by providing the returned `marker` value in the `marker` parameter
+    #   and retrying the request.
+    #
+    #   Constraints: You can specify either the `ClusterIdentifier`
+    #   parameter, or the `marker` parameter, but not both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterDbRevisionsMessage AWS API Documentation
+    #
+    class DescribeClusterDbRevisionsMessage < Struct.new(
+      :cluster_identifier,
+      :max_records,
+      :marker)
       include Aws::Structure
     end
 
@@ -4240,6 +4383,61 @@ module Aws::Redshift
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetReservedNodeExchangeOfferingsInputMessage
+    #   data as a hash:
+    #
+    #       {
+    #         reserved_node_id: "String", # required
+    #         max_records: 1,
+    #         marker: "String",
+    #       }
+    #
+    # @!attribute [rw] reserved_node_id
+    #   A string representing the node identifier for the Reserved Node to
+    #   be exchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_records
+    #   An integer setting the maximum number of ReservedNodeOfferings to
+    #   retrieve.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   A value that indicates the starting point for the next set of
+    #   ReservedNodeOfferings.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferingsInputMessage AWS API Documentation
+    #
+    class GetReservedNodeExchangeOfferingsInputMessage < Struct.new(
+      :reserved_node_id,
+      :max_records,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   An optional parameter that specifies the starting point for
+    #   returning a set of response records. When the results of a
+    #   `GetReservedNodeExchangeOfferings` request exceed the value
+    #   specified in MaxRecords, Amazon Redshift returns a value in the
+    #   marker field of the response. You can retrieve the next set of
+    #   response records by providing the returned marker value in the
+    #   marker parameter and retrying the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] reserved_node_offerings
+    #   Returns an array of ReservedNodeOffering objects.
+    #   @return [Array<Types::ReservedNodeOffering>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetReservedNodeExchangeOfferingsOutputMessage AWS API Documentation
+    #
+    class GetReservedNodeExchangeOfferingsOutputMessage < Struct.new(
+      :marker,
+      :reserved_node_offerings)
+      include Aws::Structure
+    end
+
     # Returns information about an HSM client certificate. The certificate
     # is stored in a secure Hardware Storage Module (HSM), and used by the
     # Amazon Redshift cluster to encrypt data files.
@@ -4435,6 +4633,45 @@ module Aws::Redshift
       :last_successful_delivery_time,
       :last_failure_time,
       :last_failure_message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyClusterDbRevisionMessage
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_identifier: "String", # required
+    #         revision_target: "String", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of a cluster whose database revision you want
+    #   to modify.
+    #
+    #   Example: `examplecluster`
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_target
+    #   The identifier of the database revision. You can retrieve this value
+    #   from the response to the DescribeClusterDbRevisions request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevisionMessage AWS API Documentation
+    #
+    class ModifyClusterDbRevisionMessage < Struct.new(
+      :cluster_identifier,
+      :revision_target)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster
+    #   Describes a cluster.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterDbRevisionResult AWS API Documentation
+    #
+    class ModifyClusterDbRevisionResult < Struct.new(
+      :cluster)
       include Aws::Structure
     end
 
@@ -5351,6 +5588,11 @@ module Aws::Redshift
     #     for use.
     #
     #   * payment-failed-Payment failed for the purchase attempt.
+    #
+    #   * retired-The reserved node is no longer available.
+    #
+    #   * exchanging-The owner is exchanging the reserved node for another
+    #     reserved node.
     #   @return [String]
     #
     # @!attribute [rw] offering_type
@@ -6027,6 +6269,32 @@ module Aws::Redshift
     #
     class RestoreTableFromClusterSnapshotResult < Struct.new(
       :table_restore_status)
+      include Aws::Structure
+    end
+
+    # Describes a `RevisionTarget`.
+    #
+    # @!attribute [rw] database_revision
+    #   A unique string that identifies the version to update the cluster
+    #   to. You can use this value in ModifyClusterDbRevision.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A string that describes the changes and features that will be
+    #   applied to the cluster when it is updated to the corresponding
+    #   ClusterDbRevision.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_revision_release_date
+    #   The date on which the database revision was released.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevisionTarget AWS API Documentation
+    #
+    class RevisionTarget < Struct.new(
+      :database_revision,
+      :description,
+      :database_revision_release_date)
       include Aws::Structure
     end
 
