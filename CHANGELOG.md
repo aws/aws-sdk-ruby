@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, documentation, and integration test for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Redshift - Updated the API, documentation, and integration test for Amazon Redshift.
+
+* Feature - Aws::ACM - Updated the integration test, and waiters for AWS Certificate Manager.
+
 2.11.80 (2018-07-02)
 ------------------
 
