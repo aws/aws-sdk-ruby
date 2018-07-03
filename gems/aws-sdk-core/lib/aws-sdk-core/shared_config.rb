@@ -261,7 +261,7 @@ module Aws
           )
 
           return creds if credentials_complete(creds)
-          raise JSON::ParseErrror.new("Invalid json payload for credentials JSON version #{creds_json['Version']}")
+          raise ArgumentError.new("Invalid json payload for credentials JSON version #{creds_json['Version']}")
         else
           raise ArgumentError.new("Invalid version #{creds_json['Version']} for credentials payload")
         end
