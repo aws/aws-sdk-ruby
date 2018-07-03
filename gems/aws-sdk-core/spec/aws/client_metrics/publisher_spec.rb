@@ -39,6 +39,45 @@ module Aws
         rm
       end
 
+      let(:example_failed_attempt) do
+        a = RequestMetrics::ApiCallAttempt.new(
+          "StubService",
+          "StubOperation",
+          "",
+          1,
+          1526502725425,
+          "stub-service.us-stubbed-1.example.org",
+          "us-stubbed-1",
+          "my-user-agent",
+          "AKID-STUB",
+          "TOKEN-STUB"
+        )
+        a.request_latency = 95
+        a.http_status_code = 400
+        a.x_amz_request_id = "226FC0DC6464C2AE"
+        a.x_amz_id_2 = "fWhd+V0u5IWKNLhbIZi2ZR/DoWpAt2Km8T9ZZ75UnvkZFl0MU3jlf2B2zRJYHmxqkEc6iAtctOc="
+        a.aws_exception = "ServiceError"
+        a.aws_exception_msg = "A service problem happened."
+        a.sdk_exception = "Aws::Errors::ParserError"
+        a.sdk_exception_msg = "Response parsing error."
+        a
+      end
+
+      let(:example_failed_metric) do
+        rm = RequestMetrics.new(
+          service: "StubService",
+          operation: "StubOperation",
+          client_id: "FooClient",
+          timestamp: 1526502682104,
+        )
+        rm.add_call_attempt(example_failed_attempt)
+        rm.api_call.complete(
+          latency: 123,
+          attempt_count: 1
+        )
+        rm
+      end
+
       it "allows the setting of an agent port" do
         publisher = Aws::ClientSideMonitoring::Publisher.new(agent_port: 1234)
         expect(publisher.agent_port).to eq(1234)
@@ -58,6 +97,22 @@ module Aws
           0
         )
         publisher.publish(example_request_metric)
+      end
+
+      it 'handles error fields' do
+        publisher = Aws::ClientSideMonitoring::Publisher.new(agent_port: 1234)
+        stub_socket = double
+        allow(UDPSocket).to receive(:new) { stub_socket }
+        expect(stub_socket).to receive(:connect).twice
+        expect(stub_socket).to receive(:send).with(
+          '{"Type":"ApiCall","Service":"StubService","Api":"StubOperation","ClientId":"FooClient","Timestamp":1526502682104,"Version":1,"AttemptCount":1,"Latency":123}',
+          0
+        )
+        expect(stub_socket).to receive(:send).with(
+          '{"Type":"ApiCallAttempt","Service":"StubService","Api":"StubOperation","ClientId":"","Timestamp":1526502725425,"Version":1,"Fqdn":"stub-service.us-stubbed-1.example.org","Region":"us-stubbed-1","UserAgent":"my-user-agent","AccessKey":"AKID-STUB","SessionToken":"TOKEN-STUB","HttpStatusCode":400,"AwsException":"ServiceError","AwsExceptionMessage":"A service problem happened.","XAmzRequestId":"226FC0DC6464C2AE","XAmzId2":"fWhd+V0u5IWKNLhbIZi2ZR/DoWpAt2Km8T9ZZ75UnvkZFl0MU3jlf2B2zRJYHmxqkEc6iAtctOc=","AttemptLatency":95,"SdkException":"Aws::Errors::ParserError","SdkExceptionMessage":"Response parsing error."}',
+          0
+        )
+        publisher.publish(example_failed_metric)
       end
 
     end
