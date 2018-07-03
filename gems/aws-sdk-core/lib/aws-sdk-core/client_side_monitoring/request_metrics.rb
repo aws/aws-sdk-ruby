@@ -74,7 +74,8 @@ module Aws
         attr_reader :service, :api, :client_id, :version, :timestamp, :fqdn,
           :region, :user_agent, :access_key, :session_token
         attr_accessor :request_latency, :http_status_code, :aws_exception_msg,
-          :x_amz_request_id, :x_amz_id_2, :x_amzn_request_id
+          :x_amz_request_id, :x_amz_id_2, :x_amzn_request_id, :sdk_exception,
+          :aws_exception, :sdk_exception_msg
 
         def initialize(
           service,
@@ -116,11 +117,14 @@ module Aws
           # Optional Fields
           json["SessionToken"] = @session_token if @session_token
           json["HttpStatusCode"] = @http_status_code if @http_status_code
+          json["AwsException"] = @aws_exception if @aws_exception
           json["AwsExceptionMessage"] = @aws_exception_msg if @aws_exception_msg
           json["XAmznRequestId"] = @x_amzn_request_id if @x_amzn_request_id
           json["XAmzRequestId"] = @x_amz_request_id if @x_amz_request_id
           json["XAmzId2"] = @x_amz_id_2 if @x_amz_id_2
           json["AttemptLatency"] = @request_latency if @request_latency
+          json["SdkException"] = @sdk_exception if @sdk_exception
+          json["SdkExceptionMessage"] = @sdk_exception_msg if @sdk_exception_msg
           json.to_json
         end
       end

@@ -210,8 +210,9 @@ module Aws
           api_call_attempts = request_metrics.api_call_attempts
           expect(api_call_attempts.size).to eq(1)
           attempt = api_call_attempts[0]
+          expect(attempt.aws_exception).to eq("NoSuchKey")
           expect(attempt.aws_exception_msg).to eq(
-            "NoSuchKey: The resource you requested does not exist"
+            "The resource you requested does not exist"
           )
         end
 
@@ -244,6 +245,125 @@ module Aws
           expect(attempt.x_amz_id_2).to eq("fWhd+V0u5IWKNLhbIZi2ZR/DoWpAt2Km8T9ZZ75UnvkZFl0MU3jlf2B2zRJYHmxqkEc6iAtctOc=")
           expect(attempt.x_amz_request_id).to eq("226FC0DC6464C2AE")
         end
+
+        describe "failures without network requests" do
+          let(:failure_client) {
+            client = ClientMetricsSvc::Client.new(
+              stub_responses: true,
+              client_side_monitoring_publisher: stub_publisher
+            )
+            client.handlers.add(
+              ClientMetricsPlugin::Handler,
+              step: :initialize
+            )
+            client.handlers.add(
+              ClientMetricsSendPlugin::LatencyHandler,
+              step: :sign,
+              priority: 0
+            )
+            client.handlers.add(
+              ClientMetricsSendPlugin::AttemptHandler,
+              step: :sign,
+              priority: 95
+            )
+            client.handlers.add(
+              FailureInjectionHandler,
+              step: :validate,
+              priority: 50
+            )
+            client
+          }
+
+          it 'correctly publishes metrics for a validation error' do
+            expect {
+              failure_client.list_buckets
+            }.to raise_error(ArgumentError, "Injected exception.")
+            expect(stub_publisher.metrics.size).to eq(1)
+            request_metrics = stub_publisher.metrics[0]
+            api_call_attempts = request_metrics.api_call_attempts
+            expect(request_metrics.api_call.attempt_count).to eq(1)
+            expect(api_call_attempts.size).to eq(1)
+            attempt = api_call_attempts[0]
+            expect(attempt.sdk_exception).to eq("ArgumentError")
+            expect(attempt.sdk_exception_msg).to eq("Injected exception.")
+          end
+        end
+
+        describe "failures without network requests" do
+          let(:failure_client) {
+            client = ClientMetricsSvc::Client.new(
+              stub_responses: true,
+              client_side_monitoring_publisher: stub_publisher
+            )
+            client.handlers.add(
+              ClientMetricsPlugin::Handler,
+              step: :initialize
+            )
+            client.handlers.add(
+              ClientMetricsSendPlugin::LatencyHandler,
+              step: :sign,
+              priority: 0
+            )
+            client.handlers.add(
+              ClientMetricsSendPlugin::AttemptHandler,
+              step: :sign,
+              priority: 95
+            )
+            client.handlers.add(
+              ResponseFailureHandler,
+              step: :validate,
+              priority: 50
+            )
+            client
+          }
+
+          it "accounts for failures during response handling" do
+            expect {
+              failure_client.list_buckets
+            }.to raise_error(ArgumentError, "Bad response.")
+            expect(stub_publisher.metrics.size).to eq(1)
+            request_metrics = stub_publisher.metrics[0]
+            api_call_attempts = request_metrics.api_call_attempts
+            expect(request_metrics.api_call.attempt_count).to eq(1)
+            expect(api_call_attempts.size).to eq(1)
+            attempt = api_call_attempts[0]
+            expect(attempt.sdk_exception).to eq("ArgumentError")
+            expect(attempt.sdk_exception_msg).to eq("Bad response.")
+          end
+
+          it "can handle sdk exceptions and aws exceptions together" do
+            failure_client.stub_responses(:get_object,
+              {
+                status_code: 404,
+                body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"\
+                  "<Error>\n"\
+                  "<Code>NoSuchKey</Code>\n"\
+                  "<Message>The resource you requested does not exist</Message>\n"\
+                  "<Resource>/mybucket/myfoto.jpg</Resource>\n"\
+                  "<RequestId>4442587FB7D0A2F9</RequestId>\n"\
+                  "</Error>",
+                headers: {}
+              },
+              {}
+            )
+            expect {
+              failure_client.get_object(bucket: "mybucket", key: "myfoto.jpg")
+            }.to raise_error(ArgumentError, "Bad response.")
+            expect(stub_publisher.metrics.size).to eq(1)
+            request_metrics = stub_publisher.metrics[0]
+            api_call_attempts = request_metrics.api_call_attempts
+            expect(request_metrics.api_call.attempt_count).to eq(1)
+            expect(api_call_attempts.size).to eq(1)
+            attempt = api_call_attempts[0]
+            expect(attempt.aws_exception).to eq("NoSuchKey")
+            expect(attempt.aws_exception_msg).to eq(
+              "The resource you requested does not exist"
+            )
+            expect(attempt.sdk_exception).to eq("ArgumentError")
+            expect(attempt.sdk_exception_msg).to eq("Bad response.")
+          end
+        end
+
       end
     end
 
@@ -257,6 +377,19 @@ module Aws
 
       def publish(request_metrics)
         @metrics << request_metrics
+      end
+    end
+
+    class FailureInjectionHandler < Seahorse::Client::Handler
+      def call(context)
+        raise ArgumentError, "Injected exception."
+      end
+    end
+
+    class ResponseFailureHandler < Seahorse::Client::Handler
+      def call(context)
+        @handler.call(context)
+        raise ArgumentError, "Bad response."
       end
     end
 

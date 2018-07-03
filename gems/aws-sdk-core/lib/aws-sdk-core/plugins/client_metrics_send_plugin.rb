@@ -59,7 +59,8 @@ module Aws
           if e = resp.error
             e_name = _extract_error_name(e)
             e_msg = e.message
-            call_attempt.aws_exception_msg = "#{e_name}: #{e_msg}"
+            call_attempt.aws_exception = "#{e_name}"
+            call_attempt.aws_exception_msg = "#{e_msg}"
           end
           request_metrics.add_call_attempt(call_attempt)
           resp

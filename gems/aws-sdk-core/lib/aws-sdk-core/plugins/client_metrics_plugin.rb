@@ -99,6 +99,26 @@ all generated client side metrics. Defaults to an empty string.
           start_time = Time.now
           begin
             @handler.call(context)
+          rescue StandardError => e
+            # Handle SDK Exceptions
+            if request_metrics.api_call_attempts.empty?
+              attempt = request_metrics.build_call_attempt
+              attempt.sdk_exception = e.class.to_s
+              attempt.sdk_exception_msg = e.message
+              request_metrics.add_call_attempt(attempt)
+            elsif request_metrics.api_call_attempts.last.aws_exception.nil?
+              # Handle exceptions during response handlers
+              attempt = request_metrics.api_call_attempts.last
+              attempt.sdk_exception = e.class.to_s
+              attempt.sdk_exception_msg = e.message
+            elsif !e.class.to_s.match(request_metrics.api_call_attempts.last.aws_exception)
+              # Handle response handling exceptions that happened in addition to
+              # an AWS exception
+              attempt = request_metrics.api_call_attempts.last
+              attempt.sdk_exception = e.class.to_s
+              attempt.sdk_exception_msg = e.message
+            end # Else we don't have an SDK exception and are done.
+            raise e
           ensure
             end_time = Time.now
             request_metrics.api_call.complete(
