@@ -136,11 +136,8 @@ module Aws
     end
 
     def credentials_process(profile)
-      if @parsed_config && proc = @parsed_config[profile]['credential_process']
-        proc
-      else
-        nil
-      end
+      validate_profile_exists(profile)
+      @parsed_config[profile]['credential_process']
     end
 
     private

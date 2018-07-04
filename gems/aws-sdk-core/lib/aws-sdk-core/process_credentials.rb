@@ -12,7 +12,7 @@ module Aws
       @profile_name ||= shared_config.profile_name
 
       credential_proc = shared_config.credentials_process(@profile_name)
-      @credentials = credentials_from_process(credential_proc)
+      @credentials = credentials_from_process(credential_proc) if credential_proc
     end
 
     # @return [String]

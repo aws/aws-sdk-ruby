@@ -77,9 +77,9 @@ module Aws
         else
           ProcessCredentials.new(profile_name: ENV['AWS_PROFILE'].nil? ? 'default' : ENV['AWS_PROFILE'])
         end
-      else
-        nil
       end
+    rescue Errors::NoSuchProfileError
+      nil
     end
 
     def assume_role_credentials(options)
