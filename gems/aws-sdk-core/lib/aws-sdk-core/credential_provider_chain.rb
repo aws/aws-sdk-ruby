@@ -23,6 +23,7 @@ module Aws
         [:env_credentials, {}],
         [:assume_role_credentials, {}],
         [:shared_credentials, {}],
+        [:process_credentials, {}],
         [:instance_profile_credentials, {
           retries: @config ? @config.instance_profile_credentials_retries : 0,
           http_open_timeout: @config ? @config.instance_profile_credentials_timeout : 1,
@@ -67,6 +68,18 @@ module Aws
       end
     rescue Errors::NoSuchProfileError
       nil
+    end
+
+    def process_credentials(options)
+      if Aws.shared_config.config_enabled?
+        if options[:config]
+          ProcessCredentials.new(profile_name: options[:config].profile)
+        else
+          ProcessCredentials.new(profile_name: ENV['AWS_PROFILE'].nil? ? 'default' : ENV['AWS_PROFILE'])
+        end
+      else
+        nil
+      end
     end
 
     def assume_role_credentials(options)

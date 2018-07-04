@@ -135,6 +135,14 @@ module Aws
       end
     end
 
+    def credentials_process(profile)
+      if @parsed_config && proc = @parsed_config[profile]['credential_process']
+        proc
+      else
+        nil
+      end
+    end
+
     private
     def credentials_present?
       (@parsed_credentials && !@parsed_credentials.empty?) ||
@@ -240,34 +248,8 @@ module Aws
       )
       if credentials_complete(creds)
         creds
-      elsif proc_invocation = prof_config['credential_process']
-        credentials_from_process(proc_invocation)
       else
         nil
-      end
-    end
-
-    def credentials_from_process(proc_invocation)
-      raw_out = `#{proc_invocation}`
-      success = $?.success?
-
-      if success
-        creds_json = JSON.parse(raw_out)
-        payload_version = creds_json['Version']
-        if payload_version == 1
-          creds = Credentials.new(
-            creds_json['AccessKeyId'],
-            creds_json['SecretAccessKey'],
-            creds_json['SessionToken']
-          )
-
-          return creds if credentials_complete(creds)
-          raise ArgumentError.new("Invalid json payload for credentials JSON version #{payload_version}")
-        else
-          raise ArgumentError.new("Invalid version #{payload_version} for credentials payload")
-        end
-      else
-        abort('credential_process provider failure, the credential process had non zero exit status')
       end
     end
 

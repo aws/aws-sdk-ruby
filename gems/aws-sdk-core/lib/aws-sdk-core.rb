@@ -14,6 +14,7 @@ require_relative 'aws-sdk-core/credential_provider_chain'
 require_relative 'aws-sdk-core/ecs_credentials'
 require_relative 'aws-sdk-core/instance_profile_credentials'
 require_relative 'aws-sdk-core/shared_credentials'
+require_relative 'aws-sdk-core/process_credentials'
 
 # client modules
 

@@ -1,9 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Extensible Credential Providers, allows you to declare an executable
-to be run that outputs the credentials as a JSON payload allowing you to develop
-custom credential providers and easily add them to the credential resolution chain, [Docs](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes)
+* Feature - Extensible Credential Providers, allows you to declare an executable to be run that outputs the credentials as a JSON payload allowing you to develop custom credential providers and easily add them to the credential resolution chain, [Docs](https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes)
 
 3.22.1 (2018-06-28)
 ------------------
