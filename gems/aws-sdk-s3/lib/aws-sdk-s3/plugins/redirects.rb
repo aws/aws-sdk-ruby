@@ -18,7 +18,9 @@ by Amazon S3.
             response = @handler.call(context)
             if context.http_response.status_code == 307
               endpoint = context.http_response.headers['location']
-              context.http_request.endpoint = endpoint
+              unless context.http_request.endpoint.host.include?('fips')
+                context.http_request.endpoint = endpoint
+              end
               context.http_response.body.truncate(0)
               @handler.call(context)
             else

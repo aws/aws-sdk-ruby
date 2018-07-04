@@ -46,6 +46,11 @@ module Aws
           stub_request(:put, 'https://bucket.s3.eu-central-1.amazonaws.com/key').
             to_return(status: [200, 'Ok'])
 
+          stub_request(:put, 'https://bucket.s3-fips.us-west-2.amazonaws.com/key').
+            to_return(status: [307, 'Temporary Redirect'], headers: {
+              'Location' => 'https://bucket.s3.eu-central-1.amazonaws.com/key'
+            })
+
         end
 
         it 'detects the moved permanently and redirects' do
@@ -57,6 +62,15 @@ module Aws
           expect(host).to eq('bucket.s3.eu-central-1.amazonaws.com')
         end
 
+        it 'never redirect fips endpoints' do
+          client = S3::Client.new(client_opts.merge(
+            region: 'us-west-2', endpoint: 'https://s3-fips.us-west-2.amazonaws.com')
+          )
+          expect {
+            client.put_object(bucket:'bucket', key:'key', body:'body')
+          }.to raise_error(Aws::S3::Errors::Http307Error)
+
+        end
       end
     end
   end
