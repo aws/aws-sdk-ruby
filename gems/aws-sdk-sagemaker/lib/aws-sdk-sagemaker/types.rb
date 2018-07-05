@@ -227,8 +227,10 @@ module Aws::SageMaker
     #   The Amazon EC2 Container Registry (Amazon ECR) path where inference
     #   code is stored. If you are using your own custom algorithm instead
     #   of an algorithm provided by Amazon SageMaker, the inference code
-    #   must meet Amazon SageMaker requirements. For more information, see
-    #   [Using Your Own Algorithms with Amazon SageMaker][1]
+    #   must meet Amazon SageMaker requirements. Amazon SageMaker supports
+    #   both `registry/repository[:tag]` and `registry/repository[@digest]`
+    #   image path formats. For more information, see [Using Your Own
+    #   Algorithms with Amazon SageMaker][1]
     #
     #
     #
@@ -239,6 +241,18 @@ module Aws::SageMaker
     #   The S3 path where the model artifacts, which result from model
     #   training, are stored. This path must point to a single gzip
     #   compressed tar archive (.tar.gz suffix).
+    #
+    #   If you provide a value for this parameter, Amazon SageMaker uses AWS
+    #   Security Token Service to download model artifacts from the S3 path
+    #   you provide. AWS STS is activated in your IAM user account by
+    #   default. If you previously deactivated AWS STS for a region, you
+    #   need to reactivate AWS STS for that region. For more information,
+    #   see [Activating and Deactivating AWS STS i an AWS Region][1] in the
+    #   *AWS Identity and Access Management User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #   @return [String]
     #
     # @!attribute [rw] environment
@@ -526,16 +540,17 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_config
-    #   The object that describes the tuning job, including the search
-    #   strategy, metric used to evaluate training jobs, ranges of
-    #   parameters to search, and resource limits for the tuning job.
+    #   The HyperParameterTuningJobConfig object that describes the tuning
+    #   job, including the search strategy, metric used to evaluate training
+    #   jobs, ranges of parameters to search, and resource limits for the
+    #   tuning job.
     #   @return [Types::HyperParameterTuningJobConfig]
     #
     # @!attribute [rw] training_job_definition
-    #   The object that describes the training jobs that this tuning job
-    #   launches, including static hyperparameters, input data
-    #   configuration, output data configuration, resource configuration,
-    #   and stopping condition.
+    #   The HyperParameterTrainingJobDefinition object that describes the
+    #   training jobs that this tuning job launches, including static
+    #   hyperparameters, input data configuration, output data
+    #   configuration, resource configuration, and stopping condition.
     #   @return [Types::HyperParameterTrainingJobDefinition]
     #
     # @!attribute [rw] tags
@@ -634,9 +649,9 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] vpc_config
-    #   A object that specifies the VPC that you want your model to connect
-    #   to. Control access to and from your model container by configuring
-    #   the VPC. For more information, see host-vpc.
+    #   A VpcConfig object that specifies the VPC that you want your model
+    #   to connect to. Control access to and from your model container by
+    #   configuring the VPC. For more information, see host-vpc.
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelInput AWS API Documentation
@@ -1002,9 +1017,10 @@ module Aws::SageMaker
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] vpc_config
-    #   A object that specifies the VPC that you want your training job to
-    #   connect to. Control access to and from your training container by
-    #   configuring the VPC. For more information, see train-vpc
+    #   A VpcConfig object that specifies the VPC that you want your
+    #   training job to connect to. Control access to and from your training
+    #   container by configuring the VPC. For more information, see
+    #   train-vpc
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -1202,6 +1218,44 @@ module Aws::SageMaker
     #
     class DeleteTagsOutput < Aws::EmptyStructure; end
 
+    # Gets the Amazon EC2 Container Registry path of the docker image of the
+    # model that is hosted in this ProductionVariant.
+    #
+    # If you used the `registry/repository[:tag]` form to to specify the
+    # image path of the primary container when you created the model hosted
+    # in this `ProductionVariant`, the path resolves to a path of the form
+    # `registry/repository[@digest]`. A digest is a hash value that
+    # identifies a specific version of an image. For information about
+    # Amazon ECR paths, see [Pulling an Image][1] in the *Amazon ECR User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com//AmazonECR/latest/userguide/docker-pull-ecr-image.html
+    #
+    # @!attribute [rw] specified_image
+    #   The image path you specified when you created the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolved_image
+    #   The specific digest path of the image hosted in this
+    #   `ProductionVariant`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resolution_time
+    #   The date and time when the image path for the model resolved to the
+    #   `ResolvedImage`
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeployedImage AWS API Documentation
+    #
+    class DeployedImage < Struct.new(
+      :specified_image,
+      :resolved_image,
+      :resolution_time)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeEndpointConfigInput
     #   data as a hash:
     #
@@ -1285,8 +1339,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] production_variants
-    #   An array of ProductionVariant objects, one for each model hosted
-    #   behind this endpoint.
+    #   An array of ProductionVariantSummary objects, one for each model
+    #   hosted behind this endpoint.
     #   @return [Array<Types::ProductionVariantSummary>]
     #
     # @!attribute [rw] endpoint_status
@@ -1346,12 +1400,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_config
-    #   The object that specifies the configuration of the tuning job.
+    #   The HyperParameterTuningJobConfig object that specifies the
+    #   configuration of the tuning job.
     #   @return [Types::HyperParameterTuningJobConfig]
     #
     # @!attribute [rw] training_job_definition
-    #   The object that specifies the definition of the training jobs that
-    #   this tuning job launches.
+    #   The HyperParameterTrainingJobDefinition object that specifies the
+    #   definition of the training jobs that this tuning job launches.
     #   @return [Types::HyperParameterTrainingJobDefinition]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_status
@@ -1372,19 +1427,19 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] training_job_status_counters
-    #   The object that specifies the number of training jobs, categorized
-    #   by status, that this tuning job launched.
+    #   The TrainingJobStatusCounters object that specifies the number of
+    #   training jobs, categorized by status, that this tuning job launched.
     #   @return [Types::TrainingJobStatusCounters]
     #
     # @!attribute [rw] objective_status_counters
-    #   The object that specifies the number of training jobs, categorized
-    #   by the status of their final objective metric, that this tuning job
-    #   launched.
+    #   The ObjectiveStatusCounters object that specifies the number of
+    #   training jobs, categorized by the status of their final objective
+    #   metric, that this tuning job launched.
     #   @return [Types::ObjectiveStatusCounters]
     #
     # @!attribute [rw] best_training_job
-    #   A object that describes the training job that completed with the
-    #   best current .
+    #   A TrainingJobSummary object that describes the training job that
+    #   completed with the best current HyperParameterTuningJobObjective.
     #   @return [Types::HyperParameterTrainingJobSummary]
     #
     # @!attribute [rw] failure_reason
@@ -1443,8 +1498,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
-    #   A object that specifies the VPC that this model has access to. For
-    #   more information, see host-vpc
+    #   A VpcConfig object that specifies the VPC that this model has access
+    #   to. For more information, see host-vpc
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] creation_time
@@ -1739,8 +1794,8 @@ module Aws::SageMaker
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] vpc_config
-    #   A object that specifies the VPC that this training job has access
-    #   to. For more information, see train-vpc.
+    #   A VpcConfig object that specifies the VPC that this training job has
+    #   access to. For more information, see train-vpc.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] stopping_condition
@@ -1960,8 +2015,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] metric_definitions
-    #   An array of objects that specify the metrics that the algorithm
-    #   emits.
+    #   An array of MetricDefinition objects that specify the metrics that
+    #   the algorithm emits.
     #   @return [Array<Types::MetricDefinition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterAlgorithmSpecification AWS API Documentation
@@ -2033,8 +2088,8 @@ module Aws::SageMaker
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] algorithm_specification
-    #   The object that specifies the algorithm to use for the training jobs
-    #   that the tuning job launches.
+    #   The HyperParameterAlgorithmSpecification object that specifies the
+    #   algorithm to use for the training jobs that the tuning job launches.
     #   @return [Types::HyperParameterAlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
@@ -2043,15 +2098,15 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] input_data_config
-    #   An array of objects that specify the input for the training jobs
-    #   that the tuning job launches.
+    #   An array of Channel objects that specify the input for the training
+    #   jobs that the tuning job launches.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] vpc_config
-    #   The object that specifies the VPC that you want the training jobs
-    #   that this hyperparameter tuning job launches to connect to. Control
-    #   access to and from your training container by configuring the VPC.
-    #   For more information, see train-vpc.
+    #   The VpcConfig object that specifies the VPC that you want the
+    #   training jobs that this hyperparameter tuning job launches to
+    #   connect to. Control access to and from your training container by
+    #   configuring the VPC. For more information, see train-vpc.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] output_data_config
@@ -2130,12 +2185,13 @@ module Aws::SageMaker
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] failure_reason
-    #   The reason that the
+    #   The reason that the training job failed.
     #   @return [String]
     #
     # @!attribute [rw] final_hyper_parameter_tuning_job_objective_metric
-    #   The object that specifies the value of the objective metric of the
-    #   tuning job that launched this training job.
+    #   The FinalHyperParameterTuningJobObjectiveMetric object that
+    #   specifies the value of the objective metric of the tuning job that
+    #   launched this training job.
     #   @return [Types::FinalHyperParameterTuningJobObjectiveMetric]
     #
     # @!attribute [rw] objective_status
@@ -2223,17 +2279,18 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] hyper_parameter_tuning_job_objective
-    #   The object that specifies the objective metric for this tuning job.
+    #   The HyperParameterTuningJobObjective object that specifies the
+    #   objective metric for this tuning job.
     #   @return [Types::HyperParameterTuningJobObjective]
     #
     # @!attribute [rw] resource_limits
-    #   The object that specifies the maximum number of training jobs and
-    #   parallel training jobs for this tuning job.
+    #   The ResourceLimits object that specifies the maximum number of
+    #   training jobs and parallel training jobs for this tuning job.
     #   @return [Types::ResourceLimits]
     #
     # @!attribute [rw] parameter_ranges
-    #   The object that specifies the ranges of hyperparameters that this
-    #   tuning job searches.
+    #   The ParameterRanges object that specifies the ranges of
+    #   hyperparameters that this tuning job searches.
     #   @return [Types::ParameterRanges]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobConfig AWS API Documentation
@@ -2309,18 +2366,20 @@ module Aws::SageMaker
     #   @return [Time]
     #
     # @!attribute [rw] training_job_status_counters
-    #   The object that specifies the numbers of training jobs, categorized
-    #   by status, that this tuning job launched.
+    #   The TrainingJobStatusCounters object that specifies the numbers of
+    #   training jobs, categorized by status, that this tuning job launched.
     #   @return [Types::TrainingJobStatusCounters]
     #
     # @!attribute [rw] objective_status_counters
-    #   The object that specifies the numbers of training jobs, categorized
-    #   by objective metric status, that this tuning job launched.
+    #   The ObjectiveStatusCounters object that specifies the numbers of
+    #   training jobs, categorized by objective metric status, that this
+    #   tuning job launched.
     #   @return [Types::ObjectiveStatusCounters]
     #
     # @!attribute [rw] resource_limits
-    #   The object that specifies the maximum number of training jobs and
-    #   parallel training jobs allowed for this tuning job.
+    #   The ResourceLimits object that specifies the maximum number of
+    #   training jobs and parallel training jobs allowed for this tuning
+    #   job.
     #   @return [Types::ResourceLimits]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HyperParameterTuningJobSummary AWS API Documentation
@@ -2570,7 +2629,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of tuning jobs to return.
+    #   The maximum number of tuning jobs to return. The default value is
+    #   10.
     #   @return [Integer]
     #
     # @!attribute [rw] sort_by
@@ -2627,8 +2687,9 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] hyper_parameter_tuning_job_summaries
-    #   A list of objects that describe the tuning jobs that the
-    #   `ListHyperParameterTuningJobs` request returned.
+    #   A list of HyperParameterTuningJobSummary objects that describe the
+    #   tuning jobs that the `ListHyperParameterTuningJobs` request
+    #   returned.
     #   @return [Array<Types::HyperParameterTuningJobSummary>]
     #
     # @!attribute [rw] next_token
@@ -2829,7 +2890,7 @@ module Aws::SageMaker
     #         creation_time_after: Time.now,
     #         last_modified_time_before: Time.now,
     #         last_modified_time_after: Time.now,
-    #         status_equals: "Pending", # accepts Pending, InService, Stopping, Stopped, Failed, Deleting
+    #         status_equals: "Pending", # accepts Pending, InService, Stopping, Stopped, Failed, Deleting, Updating
     #         notebook_instance_lifecycle_config_name_contains: "NotebookInstanceLifecycleConfigName",
     #       }
     #
@@ -3006,7 +3067,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of training jobs to return.
+    #   The maximum number of training jobs to return. The default value is
+    #   10.
     #   @return [Integer]
     #
     # @!attribute [rw] status_equals
@@ -3015,6 +3077,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] sort_by
     #   The field to sort results by. The default is `Name`.
+    #
+    #   If the value of this field is `FinalObjectiveMetricValue`, any
+    #   training jobs that did not return an objective metric are not
+    #   listed.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -3034,8 +3100,9 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] training_job_summaries
-    #   A list of objects that describe the training jobs that the
-    #   `ListTrainingJobsForHyperParameterTuningJob` request returned.
+    #   A list of TrainingJobSummary objects that describe the training jobs
+    #   that the `ListTrainingJobsForHyperParameterTuningJob` request
+    #   returned.
     #   @return [Array<Types::HyperParameterTrainingJobSummary>]
     #
     # @!attribute [rw] next_token
@@ -3171,7 +3238,8 @@ module Aws::SageMaker
     # @!attribute [rw] regex
     #   A regular expression that searches the output of a training job and
     #   gets the value of the metric. For more information about using
-    #   regular expressions to define metrics, see hpo-define-metrics.
+    #   regular expressions to define metrics, see
+    #   automatic-model-tuning-define-metrics.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDefinition AWS API Documentation
@@ -3538,6 +3606,12 @@ module Aws::SageMaker
     #   The name of the variant.
     #   @return [String]
     #
+    # @!attribute [rw] deployed_images
+    #   An array of `DeployedImage` objects that specify the Amazon EC2
+    #   Container Registry paths of the inference images deployed on
+    #   instances of this `ProductionVariant`.
+    #   @return [Array<Types::DeployedImage>]
+    #
     # @!attribute [rw] current_weight
     #   The weight associated with the variant.
     #   @return [Float]
@@ -3560,6 +3634,7 @@ module Aws::SageMaker
     #
     class ProductionVariantSummary < Struct.new(
       :variant_name,
+      :deployed_images,
       :current_weight,
       :desired_weight,
       :current_instance_count,

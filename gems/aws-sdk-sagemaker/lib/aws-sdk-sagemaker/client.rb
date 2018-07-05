@@ -244,11 +244,21 @@ module Aws::SageMaker
     # For an example, see [Exercise 1: Using the K-Means Algorithm Provided
     # by Amazon SageMaker][3].
     #
+    # If any of the models hosted at this endpoint get model data from an
+    # Amazon S3 location, Amazon SageMaker uses AWS Security Token Service
+    # to download model artifacts from the S3 path you provided. AWS STS is
+    # activated in your IAM user account by default. If you previously
+    # deactivated AWS STS for a region, you need to reactivate AWS STS for
+    # that region. For more information, see [Activating and Deactivating
+    # AWS STS i an AWS Region][4] in the *AWS Identity and Access Management
+    # User Guide*.
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html
     # [2]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
     # [3]: http://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html
+    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
     #
     # @option params [required, String] :endpoint_name
     #   The name of the endpoint. The name must be unique within an AWS Region
@@ -402,15 +412,16 @@ module Aws::SageMaker
     #   sensitive, and must be between 1-32 characters.
     #
     # @option params [required, Types::HyperParameterTuningJobConfig] :hyper_parameter_tuning_job_config
-    #   The object that describes the tuning job, including the search
-    #   strategy, metric used to evaluate training jobs, ranges of parameters
-    #   to search, and resource limits for the tuning job.
+    #   The HyperParameterTuningJobConfig object that describes the tuning
+    #   job, including the search strategy, metric used to evaluate training
+    #   jobs, ranges of parameters to search, and resource limits for the
+    #   tuning job.
     #
     # @option params [required, Types::HyperParameterTrainingJobDefinition] :training_job_definition
-    #   The object that describes the training jobs that this tuning job
-    #   launches, including static hyperparameters, input data configuration,
-    #   output data configuration, resource configuration, and stopping
-    #   condition.
+    #   The HyperParameterTrainingJobDefinition object that describes the
+    #   training jobs that this tuning job launches, including static
+    #   hyperparameters, input data configuration, output data configuration,
+    #   resource configuration, and stopping condition.
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. You can use tags to categorize your AWS
@@ -589,9 +600,9 @@ module Aws::SageMaker
     #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   A object that specifies the VPC that you want your model to connect
-    #   to. Control access to and from your model container by configuring the
-    #   VPC. For more information, see host-vpc.
+    #   A VpcConfig object that specifies the VPC that you want your model to
+    #   connect to. Control access to and from your model container by
+    #   configuring the VPC. For more information, see host-vpc.
     #
     # @return [Types::CreateModelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1002,9 +1013,9 @@ module Aws::SageMaker
     #   specify an instance count greater than 1.
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   A object that specifies the VPC that you want your training job to
-    #   connect to. Control access to and from your training container by
-    #   configuring the VPC. For more information, see train-vpc
+    #   A VpcConfig object that specifies the VPC that you want your training
+    #   job to connect to. Control access to and from your training container
+    #   by configuring the VPC. For more information, see train-vpc
     #
     # @option params [required, Types::StoppingCondition] :stopping_condition
     #   Sets a duration for training. Use this parameter to cap model training
@@ -1281,6 +1292,10 @@ module Aws::SageMaker
     #   resp.endpoint_config_name #=> String
     #   resp.production_variants #=> Array
     #   resp.production_variants[0].variant_name #=> String
+    #   resp.production_variants[0].deployed_images #=> Array
+    #   resp.production_variants[0].deployed_images[0].specified_image #=> String
+    #   resp.production_variants[0].deployed_images[0].resolved_image #=> String
+    #   resp.production_variants[0].deployed_images[0].resolution_time #=> Time
     #   resp.production_variants[0].current_weight #=> Float
     #   resp.production_variants[0].desired_weight #=> Float
     #   resp.production_variants[0].current_instance_count #=> Integer
@@ -1529,7 +1544,7 @@ module Aws::SageMaker
     #
     #   resp.notebook_instance_arn #=> String
     #   resp.notebook_instance_name #=> String
-    #   resp.notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting"
+    #   resp.notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting", "Updating"
     #   resp.failure_reason #=> String
     #   resp.url #=> String
     #   resp.instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
@@ -1816,8 +1831,8 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of objects that describe the hyperparameter tuning jobs
-    # launched in your account.
+    # Gets a list of HyperParameterTuningJobSummary objects that describe
+    # the hyperparameter tuning jobs launched in your account.
     #
     # @option params [String] :next_token
     #   If the result of the previous `ListHyperParameterTuningJobs` request
@@ -1825,7 +1840,7 @@ module Aws::SageMaker
     #   next set of tuning jobs, use the token in the next request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of tuning jobs to return.
+    #   The maximum number of tuning jobs to return. The default value is 10.
     #
     # @option params [String] :sort_by
     #   The field to sort results by. The default is `Name`.
@@ -1973,7 +1988,8 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Lists notebook instance lifestyle configurations created with the API.
+    # Lists notebook instance lifestyle configurations created with the
+    # CreateNotebookInstanceLifecycleConfig API.
     #
     # @option params [String] :next_token
     #   If the result of a `ListNotebookInstanceLifecycleConfigs` request was
@@ -2118,7 +2134,7 @@ module Aws::SageMaker
     #     creation_time_after: Time.now,
     #     last_modified_time_before: Time.now,
     #     last_modified_time_after: Time.now,
-    #     status_equals: "Pending", # accepts Pending, InService, Stopping, Stopped, Failed, Deleting
+    #     status_equals: "Pending", # accepts Pending, InService, Stopping, Stopped, Failed, Deleting, Updating
     #     notebook_instance_lifecycle_config_name_contains: "NotebookInstanceLifecycleConfigName",
     #   })
     #
@@ -2128,7 +2144,7 @@ module Aws::SageMaker
     #   resp.notebook_instances #=> Array
     #   resp.notebook_instances[0].notebook_instance_name #=> String
     #   resp.notebook_instances[0].notebook_instance_arn #=> String
-    #   resp.notebook_instances[0].notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting"
+    #   resp.notebook_instances[0].notebook_instance_status #=> String, one of "Pending", "InService", "Stopping", "Stopped", "Failed", "Deleting", "Updating"
     #   resp.notebook_instances[0].url #=> String
     #   resp.notebook_instances[0].instance_type #=> String, one of "ml.t2.medium", "ml.t2.large", "ml.t2.xlarge", "ml.t2.2xlarge", "ml.m4.xlarge", "ml.m4.2xlarge", "ml.m4.4xlarge", "ml.m4.10xlarge", "ml.m4.16xlarge", "ml.p2.xlarge", "ml.p2.8xlarge", "ml.p2.16xlarge", "ml.p3.2xlarge", "ml.p3.8xlarge", "ml.p3.16xlarge"
     #   resp.notebook_instances[0].creation_time #=> Time
@@ -2266,8 +2282,8 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Gets a list of objects that describe the training jobs that a
-    # hyperparameter tuning job launched.
+    # Gets a list of TrainingJobSummary objects that describe the training
+    # jobs that a hyperparameter tuning job launched.
     #
     # @option params [required, String] :hyper_parameter_tuning_job_name
     #   The name of the tuning job whose training jobs you want to list.
@@ -2279,13 +2295,17 @@ module Aws::SageMaker
     #   training jobs, use the token in the next request.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of training jobs to return.
+    #   The maximum number of training jobs to return. The default value is
+    #   10.
     #
     # @option params [String] :status_equals
     #   A filter that returns only training jobs with the specified status.
     #
     # @option params [String] :sort_by
     #   The field to sort results by. The default is `Name`.
+    #
+    #   If the value of this field is `FinalObjectiveMetricValue`, any
+    #   training jobs that did not return an objective metric are not listed.
     #
     # @option params [String] :sort_order
     #   The sort order for results. The default is `Ascending`.
@@ -2462,6 +2482,11 @@ module Aws::SageMaker
     # to `InService`. To check the status of an endpoint, use the
     # [DescribeEndpoint][1] API.
     #
+    # <note markdown="1"> You cannot update an endpoint with the current `EndpointConfig`. To
+    # update an endpoint, you must create a new `EndpointConfig`.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html
@@ -2588,7 +2613,7 @@ module Aws::SageMaker
     end
 
     # Updates a notebook instance lifecycle configuration created with the
-    # API.
+    # CreateNotebookInstanceLifecycleConfig API.
     #
     # @option params [required, String] :notebook_instance_lifecycle_config_name
     #   The name of the lifecycle configuration.
@@ -2641,7 +2666,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

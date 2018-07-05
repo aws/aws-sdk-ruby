@@ -50,6 +50,8 @@ module Aws::SageMaker
     DeleteNotebookInstanceLifecycleConfigInput = Shapes::StructureShape.new(name: 'DeleteNotebookInstanceLifecycleConfigInput')
     DeleteTagsInput = Shapes::StructureShape.new(name: 'DeleteTagsInput')
     DeleteTagsOutput = Shapes::StructureShape.new(name: 'DeleteTagsOutput')
+    DeployedImage = Shapes::StructureShape.new(name: 'DeployedImage')
+    DeployedImages = Shapes::ListShape.new(name: 'DeployedImages')
     DescribeEndpointConfigInput = Shapes::StructureShape.new(name: 'DescribeEndpointConfigInput')
     DescribeEndpointConfigOutput = Shapes::StructureShape.new(name: 'DescribeEndpointConfigOutput')
     DescribeEndpointInput = Shapes::StructureShape.new(name: 'DescribeEndpointInput')
@@ -377,6 +379,13 @@ module Aws::SageMaker
     DeleteTagsInput.struct_class = Types::DeleteTagsInput
 
     DeleteTagsOutput.struct_class = Types::DeleteTagsOutput
+
+    DeployedImage.add_member(:specified_image, Shapes::ShapeRef.new(shape: Image, location_name: "SpecifiedImage"))
+    DeployedImage.add_member(:resolved_image, Shapes::ShapeRef.new(shape: Image, location_name: "ResolvedImage"))
+    DeployedImage.add_member(:resolution_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ResolutionTime"))
+    DeployedImage.struct_class = Types::DeployedImage
+
+    DeployedImages.member = Shapes::ShapeRef.new(shape: DeployedImage)
 
     DescribeEndpointConfigInput.add_member(:endpoint_config_name, Shapes::ShapeRef.new(shape: EndpointConfigName, required: true, location_name: "EndpointConfigName"))
     DescribeEndpointConfigInput.struct_class = Types::DescribeEndpointConfigInput
@@ -774,6 +783,7 @@ module Aws::SageMaker
     ProductionVariantList.member = Shapes::ShapeRef.new(shape: ProductionVariant)
 
     ProductionVariantSummary.add_member(:variant_name, Shapes::ShapeRef.new(shape: VariantName, required: true, location_name: "VariantName"))
+    ProductionVariantSummary.add_member(:deployed_images, Shapes::ShapeRef.new(shape: DeployedImages, location_name: "DeployedImages"))
     ProductionVariantSummary.add_member(:current_weight, Shapes::ShapeRef.new(shape: VariantWeight, location_name: "CurrentWeight"))
     ProductionVariantSummary.add_member(:desired_weight, Shapes::ShapeRef.new(shape: VariantWeight, location_name: "DesiredWeight"))
     ProductionVariantSummary.add_member(:current_instance_count, Shapes::ShapeRef.new(shape: TaskCount, location_name: "CurrentInstanceCount"))
