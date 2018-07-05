@@ -102,6 +102,10 @@ module Aws
       end
     end
 
+    # Raised when a client is constructed with Assume Role credentials using
+    # a credential_source, and that source doesn't provide credentials.
+    class InvalidProcessCredentialsPayload < RuntimeError; end
+
     # Raised when a client is constructed and region is not specified.
     class MissingRegionError < ArgumentError
       def initialize(*args)

@@ -23,7 +23,7 @@ module Aws
         if payload_version == 1
           _parse_payload_format_v1(creds_json)
         else
-          raise ArgumentError.new("Invalid version #{payload_version} for credentials payload")
+          raise Errors::InvalidProcessCredentialsPayload.new("Invalid version #{payload_version} for credentials payload")
         end
       else
         abort('credential_process provider failure, the credential process had non zero exit status')
@@ -39,7 +39,7 @@ module Aws
 
       @expiration = creds_json['Expiration'] ? Time.iso8601(creds_json['Expiration']) : nil
       return creds if creds.set?
-      raise ArgumentError.new("Invalid payload for JSON credentials version 1")
+      raise Errors::InvalidProcessCredentialsPayload.new("Invalid payload for JSON credentials version 1")
     end
 
     def refresh

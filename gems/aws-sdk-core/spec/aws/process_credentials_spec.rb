@@ -18,13 +18,13 @@ module Aws
     it 'will throw an error when the process credentials payload version is invalid' do 
       expect {
         creds = ProcessCredentials.new('echo \'{"Version":3,"AccessKeyId":"","SecretAccessKey":"","SessionToken":""}\'').credentials
-      }.to raise_error(ArgumentError)
+      }.to raise_error(Errors::InvalidProcessCredentialsPayload)
     end
 
     it 'will throw an error when the process credentials payload is malformed' do 
       expect {
         creds = ProcessCredentials.new('echo \'{"Version":1}\'').credentials
-      }.to raise_error(ArgumentError)
+      }.to raise_error(Errors::InvalidProcessCredentialsPayload)
     end
 
     it 'will throw an error and expose the stderr output when the credential process has a nonzero exit status' do
