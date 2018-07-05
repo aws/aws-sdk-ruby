@@ -71,12 +71,14 @@ module Aws
     end
 
     def process_credentials(options)
-      if Aws.shared_config.config_enabled?
-        if options[:config]
-          ProcessCredentials.new(profile_name: options[:config].profile)
-        else
-          ProcessCredentials.new(profile_name: ENV['AWS_PROFILE'].nil? ? 'default' : ENV['AWS_PROFILE'])
-        end
+      profile_name = options[:config].profile if options[:config]
+      profile_name ||= ENV['AWS_PROFILE'].nil? ? 'default' : ENV['AWS_PROFILE']
+      
+      config = Aws.shared_config
+      if config.config_enabled? && process_provider = config.credentials_process(profile_name)
+        ProcessCredentials.new(process_provider)
+      else
+        nil
       end
     rescue Errors::NoSuchProfileError
       nil

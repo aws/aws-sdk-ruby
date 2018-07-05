@@ -4,19 +4,10 @@ module Aws
     include CredentialProvider
     include RefreshingCredentials
 
-    def initialize(options = {})
-      shared_config = Aws.shared_config
-      
-      @profile_name = options[:profile_name]
-      @profile_name ||= ENV['AWS_PROFILE']
-      @profile_name ||= shared_config.profile_name
-
-      credential_proc = shared_config.credentials_process(@profile_name)
-      @credentials = credentials_from_process(credential_proc) if credential_proc
+    def initialize(process)
+      @process = process
+      @credentials = credentials_from_process(@process)
     end
-
-    # @return [String]
-    attr_reader :profile_name
 
     # @return [Credentials]
     attr_reader :credentials
@@ -52,8 +43,7 @@ module Aws
     end
 
     def refresh
-      proc = Aws.shared_config.credentials_process(@profile_name)
-      @credentials = credentials_from_process(proc)
+      @credentials = credentials_from_process(@process)
     end
 
     def near_expiration?
