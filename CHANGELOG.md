@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.82 (2018-07-05)
+------------------
+
 * Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
 
 * Feature - Aws::SageMaker - Updated the API, and documentation for Amazon SageMaker Service.
