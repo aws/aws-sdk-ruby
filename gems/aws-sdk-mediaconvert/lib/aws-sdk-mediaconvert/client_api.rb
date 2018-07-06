@@ -249,6 +249,8 @@ module Aws::MediaConvert
     ListPresetsResponse = Shapes::StructureShape.new(name: 'ListPresetsResponse')
     ListQueuesRequest = Shapes::StructureShape.new(name: 'ListQueuesRequest')
     ListQueuesResponse = Shapes::StructureShape.new(name: 'ListQueuesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     M2tsAudioBufferModel = Shapes::StringShape.new(name: 'M2tsAudioBufferModel')
     M2tsBufferModel = Shapes::StringShape.new(name: 'M2tsBufferModel')
     M2tsEbpAudioInterval = Shapes::StringShape.new(name: 'M2tsEbpAudioInterval')
@@ -330,12 +332,15 @@ module Aws::MediaConvert
     QueueStatus = Shapes::StringShape.new(name: 'QueueStatus')
     Rectangle = Shapes::StructureShape.new(name: 'Rectangle')
     RemixSettings = Shapes::StructureShape.new(name: 'RemixSettings')
+    ResourceTags = Shapes::StructureShape.new(name: 'ResourceTags')
     RespondToAfd = Shapes::StringShape.new(name: 'RespondToAfd')
     ScalingBehavior = Shapes::StringShape.new(name: 'ScalingBehavior')
     SccDestinationFramerate = Shapes::StringShape.new(name: 'SccDestinationFramerate')
     SccDestinationSettings = Shapes::StructureShape.new(name: 'SccDestinationSettings')
     SpekeKeyProvider = Shapes::StructureShape.new(name: 'SpekeKeyProvider')
     StaticKeyProvider = Shapes::StructureShape.new(name: 'StaticKeyProvider')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TeletextDestinationSettings = Shapes::StructureShape.new(name: 'TeletextDestinationSettings')
     TeletextSourceSettings = Shapes::StructureShape.new(name: 'TeletextSourceSettings')
     TimecodeBurnin = Shapes::StructureShape.new(name: 'TimecodeBurnin')
@@ -349,6 +354,8 @@ module Aws::MediaConvert
     TtmlDestinationSettings = Shapes::StructureShape.new(name: 'TtmlDestinationSettings')
     TtmlStylePassthrough = Shapes::StringShape.new(name: 'TtmlStylePassthrough')
     Type = Shapes::StringShape.new(name: 'Type')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateJobTemplateRequest = Shapes::StructureShape.new(name: 'UpdateJobTemplateRequest')
     UpdateJobTemplateResponse = Shapes::StructureShape.new(name: 'UpdateJobTemplateResponse')
     UpdatePresetRequest = Shapes::StructureShape.new(name: 'UpdatePresetRequest')
@@ -407,6 +414,7 @@ module Aws::MediaConvert
     __integerMin1Max1001 = Shapes::IntegerShape.new(name: '__integerMin1Max1001')
     __integerMin1Max16 = Shapes::IntegerShape.new(name: '__integerMin1Max16')
     __integerMin1Max2 = Shapes::IntegerShape.new(name: '__integerMin1Max2')
+    __integerMin1Max20 = Shapes::IntegerShape.new(name: '__integerMin1Max20')
     __integerMin1Max2147483647 = Shapes::IntegerShape.new(name: '__integerMin1Max2147483647')
     __integerMin1Max31 = Shapes::IntegerShape.new(name: '__integerMin1Max31')
     __integerMin1Max32 = Shapes::IntegerShape.new(name: '__integerMin1Max32')
@@ -457,6 +465,7 @@ module Aws::MediaConvert
     __listOf__integerMin1Max2147483647 = Shapes::ListShape.new(name: '__listOf__integerMin1Max2147483647')
     __listOf__integerMin32Max8182 = Shapes::ListShape.new(name: '__listOf__integerMin32Max8182')
     __listOf__integerMinNegative60Max6 = Shapes::ListShape.new(name: '__listOf__integerMinNegative60Max6')
+    __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __listOf__stringMin1 = Shapes::ListShape.new(name: '__listOf__stringMin1')
     __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = Shapes::ListShape.new(name: '__listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12')
     __long = Shapes::IntegerShape.new(name: '__long')
@@ -682,6 +691,7 @@ module Aws::MediaConvert
     CreateJobTemplateRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreateJobTemplateRequest.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location_name: "queue"))
     CreateJobTemplateRequest.add_member(:settings, Shapes::ShapeRef.new(shape: JobTemplateSettings, required: true, location_name: "settings"))
+    CreateJobTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateJobTemplateRequest.struct_class = Types::CreateJobTemplateRequest
 
     CreateJobTemplateResponse.add_member(:job_template, Shapes::ShapeRef.new(shape: JobTemplate, location_name: "jobTemplate"))
@@ -691,6 +701,7 @@ module Aws::MediaConvert
     CreatePresetRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreatePresetRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     CreatePresetRequest.add_member(:settings, Shapes::ShapeRef.new(shape: PresetSettings, required: true, location_name: "settings"))
+    CreatePresetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreatePresetRequest.struct_class = Types::CreatePresetRequest
 
     CreatePresetResponse.add_member(:preset, Shapes::ShapeRef.new(shape: Preset, location_name: "preset"))
@@ -698,6 +709,7 @@ module Aws::MediaConvert
 
     CreateQueueRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     CreateQueueRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    CreateQueueRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateQueueRequest.struct_class = Types::CreateQueueRequest
 
     CreateQueueResponse.add_member(:queue, Shapes::ShapeRef.new(shape: Queue, location_name: "queue"))
@@ -1090,7 +1102,7 @@ module Aws::MediaConvert
 
     ListJobTemplatesRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "category"))
     ListJobTemplatesRequest.add_member(:list_by, Shapes::ShapeRef.new(shape: JobTemplateListBy, location: "querystring", location_name: "listBy"))
-    ListJobTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location: "querystring", location_name: "maxResults"))
+    ListJobTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin1Max20, location: "querystring", location_name: "maxResults"))
     ListJobTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListJobTemplatesRequest.add_member(:order, Shapes::ShapeRef.new(shape: Order, location: "querystring", location_name: "order"))
     ListJobTemplatesRequest.struct_class = Types::ListJobTemplatesRequest
@@ -1099,7 +1111,7 @@ module Aws::MediaConvert
     ListJobTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListJobTemplatesResponse.struct_class = Types::ListJobTemplatesResponse
 
-    ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location: "querystring", location_name: "maxResults"))
+    ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin1Max20, location: "querystring", location_name: "maxResults"))
     ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListJobsRequest.add_member(:order, Shapes::ShapeRef.new(shape: Order, location: "querystring", location_name: "order"))
     ListJobsRequest.add_member(:queue, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "queue"))
@@ -1112,7 +1124,7 @@ module Aws::MediaConvert
 
     ListPresetsRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "category"))
     ListPresetsRequest.add_member(:list_by, Shapes::ShapeRef.new(shape: PresetListBy, location: "querystring", location_name: "listBy"))
-    ListPresetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location: "querystring", location_name: "maxResults"))
+    ListPresetsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin1Max20, location: "querystring", location_name: "maxResults"))
     ListPresetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListPresetsRequest.add_member(:order, Shapes::ShapeRef.new(shape: Order, location: "querystring", location_name: "order"))
     ListPresetsRequest.struct_class = Types::ListPresetsRequest
@@ -1122,7 +1134,7 @@ module Aws::MediaConvert
     ListPresetsResponse.struct_class = Types::ListPresetsResponse
 
     ListQueuesRequest.add_member(:list_by, Shapes::ShapeRef.new(shape: QueueListBy, location: "querystring", location_name: "listBy"))
-    ListQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integer, location: "querystring", location_name: "maxResults"))
+    ListQueuesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: __integerMin1Max20, location: "querystring", location_name: "maxResults"))
     ListQueuesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
     ListQueuesRequest.add_member(:order, Shapes::ShapeRef.new(shape: Order, location: "querystring", location_name: "order"))
     ListQueuesRequest.struct_class = Types::ListQueuesRequest
@@ -1130,6 +1142,12 @@ module Aws::MediaConvert
     ListQueuesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "nextToken"))
     ListQueuesResponse.add_member(:queues, Shapes::ShapeRef.new(shape: __listOfQueue, location_name: "queues"))
     ListQueuesResponse.struct_class = Types::ListQueuesResponse
+
+    ListTagsForResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTags, location_name: "resourceTags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
     M2tsSettings.add_member(:audio_buffer_model, Shapes::ShapeRef.new(shape: M2tsAudioBufferModel, location_name: "audioBufferModel"))
     M2tsSettings.add_member(:audio_frames_per_pes, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "audioFramesPerPes"))
@@ -1333,7 +1351,9 @@ module Aws::MediaConvert
     Queue.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
     Queue.add_member(:last_updated, Shapes::ShapeRef.new(shape: __timestampIso8601, location_name: "lastUpdated"))
     Queue.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    Queue.add_member(:progressing_jobs_count, Shapes::ShapeRef.new(shape: __integer, location_name: "progressingJobsCount"))
     Queue.add_member(:status, Shapes::ShapeRef.new(shape: QueueStatus, location_name: "status"))
+    Queue.add_member(:submitted_jobs_count, Shapes::ShapeRef.new(shape: __integer, location_name: "submittedJobsCount"))
     Queue.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "type"))
     Queue.struct_class = Types::Queue
 
@@ -1348,6 +1368,10 @@ module Aws::MediaConvert
     RemixSettings.add_member(:channels_out, Shapes::ShapeRef.new(shape: __integerMin1Max8, required: true, location_name: "channelsOut"))
     RemixSettings.struct_class = Types::RemixSettings
 
+    ResourceTags.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    ResourceTags.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    ResourceTags.struct_class = Types::ResourceTags
+
     SccDestinationSettings.add_member(:framerate, Shapes::ShapeRef.new(shape: SccDestinationFramerate, location_name: "framerate"))
     SccDestinationSettings.struct_class = Types::SccDestinationSettings
 
@@ -1361,6 +1385,12 @@ module Aws::MediaConvert
     StaticKeyProvider.add_member(:static_key_value, Shapes::ShapeRef.new(shape: __stringPatternAZaZ0932, required: true, location_name: "staticKeyValue"))
     StaticKeyProvider.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
     StaticKeyProvider.struct_class = Types::StaticKeyProvider
+
+    TagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "arn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
 
     TeletextDestinationSettings.add_member(:page_number, Shapes::ShapeRef.new(shape: __stringMin3Max3Pattern1809aFAF09aEAE, location_name: "pageNumber"))
     TeletextDestinationSettings.struct_class = Types::TeletextDestinationSettings
@@ -1389,6 +1419,12 @@ module Aws::MediaConvert
 
     TtmlDestinationSettings.add_member(:style_passthrough, Shapes::ShapeRef.new(shape: TtmlStylePassthrough, location_name: "stylePassthrough"))
     TtmlDestinationSettings.struct_class = Types::TtmlDestinationSettings
+
+    UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateJobTemplateRequest.add_member(:category, Shapes::ShapeRef.new(shape: __string, location_name: "category"))
     UpdateJobTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -1511,6 +1547,8 @@ module Aws::MediaConvert
     __listOf__integerMin32Max8182.member = Shapes::ShapeRef.new(shape: __integerMin32Max8182)
 
     __listOf__integerMinNegative60Max6.member = Shapes::ShapeRef.new(shape: __integerMinNegative60Max6)
+
+    __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
     __listOf__stringMin1.member = Shapes::ShapeRef.new(shape: __stringMin1)
 
@@ -1773,6 +1811,48 @@ module Aws::MediaConvert
         o.http_request_uri = "/2017-08-29/queues"
         o.input = Shapes::ShapeRef.new(shape: ListQueuesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListQueuesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/2017-08-29/tags/{arn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/2017-08-29/tags"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2017-08-29/tags"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

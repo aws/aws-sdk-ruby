@@ -3289,6 +3289,9 @@ module Aws::MediaConvert
     #             ],
     #           },
     #         },
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] category
@@ -3314,6 +3317,11 @@ module Aws::MediaConvert
     #   template that will be applied to jobs created from it.
     #   @return [Types::JobTemplateSettings]
     #
+    # @!attribute [rw] tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateJobTemplateRequest AWS API Documentation
     #
     class CreateJobTemplateRequest < Struct.new(
@@ -3321,7 +3329,8 @@ module Aws::MediaConvert
       :description,
       :name,
       :queue,
-      :settings)
+      :settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -3801,6 +3810,9 @@ module Aws::MediaConvert
     #             width: 1,
     #           },
     #         },
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] category
@@ -3819,13 +3831,19 @@ module Aws::MediaConvert
     #   Settings for preset
     #   @return [Types::PresetSettings]
     #
+    # @!attribute [rw] tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreatePresetRequest AWS API Documentation
     #
     class CreatePresetRequest < Struct.new(
       :category,
       :description,
       :name,
-      :settings)
+      :settings,
+      :tags)
       include Aws::Structure
     end
 
@@ -3852,6 +3870,9 @@ module Aws::MediaConvert
     #       {
     #         description: "__string",
     #         name: "__string", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
     #       }
     #
     # @!attribute [rw] description
@@ -3862,11 +3883,17 @@ module Aws::MediaConvert
     #   The name of the queue you are creating.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateQueueRequest AWS API Documentation
     #
     class CreateQueueRequest < Struct.new(
       :description,
-      :name)
+      :name,
+      :tags)
       include Aws::Structure
     end
 
@@ -8693,6 +8720,43 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # List the tags for your MediaConvert resource by sending a request with
+    # the Amazon Resource Name (ARN) of the resource. To get the ARN, send a
+    # GET request with the resource name.
+    #
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to list
+    #   tags for. To get the ARN, send a GET request with the resource name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # Successful list tags for resource requests return a JSON map of tags.
+    #
+    # @!attribute [rw] resource_tags
+    #   The Amazon Resource Name (ARN) and tags for an AWS Elemental
+    #   MediaConvert resource.
+    #   @return [Types::ResourceTags]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :resource_tags)
+      include Aws::Structure
+    end
+
     # Settings for M2TS Container.
     #
     # @note When making an API call, you may pass M2tsSettings
@@ -11818,11 +11882,19 @@ module Aws::MediaConvert
     #   your account.
     #   @return [String]
     #
+    # @!attribute [rw] progressing_jobs_count
+    #   Estimated number of jobs in PROGRESSING status.
+    #   @return [Integer]
+    #
     # @!attribute [rw] status
     #   Queues can be ACTIVE or PAUSED. If you pause a queue, jobs in that
     #   queue will not begin. Jobs running when a queue is paused continue
     #   to run until they finish or error out.
     #   @return [String]
+    #
+    # @!attribute [rw] submitted_jobs_count
+    #   Estimated number of jobs in SUBMITTED status.
+    #   @return [Integer]
     #
     # @!attribute [rw] type
     #   A queue can be of two types: system or custom. System or built-in
@@ -11837,7 +11909,9 @@ module Aws::MediaConvert
       :description,
       :last_updated,
       :name,
+      :progressing_jobs_count,
       :status,
+      :submitted_jobs_count,
       :type)
       include Aws::Structure
     end
@@ -11928,6 +12002,25 @@ module Aws::MediaConvert
       :channel_mapping,
       :channels_in,
       :channels_out)
+      include Aws::Structure
+    end
+
+    # The Amazon Resource Name (ARN) and tags for an AWS Elemental
+    # MediaConvert resource.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ResourceTags AWS API Documentation
+    #
+    class ResourceTags < Struct.new(
+      :arn,
+      :tags)
       include Aws::Structure
     end
 
@@ -12035,6 +12128,44 @@ module Aws::MediaConvert
       :url)
       include Aws::Structure
     end
+
+    # To tag a queue, preset, or job template, send a request with the tags
+    # and the Amazon Resource Name (ARN) of the resource that you want to
+    # tag.
+    #
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string", # required
+    #         tags: { # required
+    #           "__string" => "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to tag.
+    #   To get the ARN, send a GET request with the resource name.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :arn,
+      :tags)
+      include Aws::Structure
+    end
+
+    # Successful tag resource requests return an OK message.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
 
     # Settings for Teletext caption output
     #
@@ -12269,6 +12400,42 @@ module Aws::MediaConvert
       :style_passthrough)
       include Aws::Structure
     end
+
+    # To remove tags from a resource, send a request with the Amazon
+    # Resource Name (ARN) of the resource and the keys of the tags that you
+    # want to remove.
+    #
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "__string",
+    #         tag_keys: ["__string"],
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to
+    #   remove tags from. To get the ARN, send a GET request with the
+    #   resource name.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags that you want to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :arn,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # Successful untag resource requests return an OK message.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # Modify a job template by sending a request with the job template name
     # and any of the following that you wish to change: description,

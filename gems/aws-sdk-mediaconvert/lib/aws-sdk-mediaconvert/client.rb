@@ -1499,6 +1499,10 @@ module Aws::MediaConvert
     #   JobTemplateSettings contains all the transcode settings saved in the
     #   template that will be applied to jobs created from it.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobTemplateResponse#job_template #job_template} => Types::JobTemplate
@@ -2210,6 +2214,9 @@ module Aws::MediaConvert
     #         ],
     #       },
     #     },
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -2768,6 +2775,10 @@ module Aws::MediaConvert
     # @option params [required, Types::PresetSettings] :settings
     #   Settings for preset
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #
     # @return [Types::CreatePresetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePresetResponse#preset #preset} => Types::Preset
@@ -3230,6 +3241,9 @@ module Aws::MediaConvert
     #         width: 1,
     #       },
     #     },
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3617,6 +3631,10 @@ module Aws::MediaConvert
     # @option params [required, String] :name
     #   The name of the queue you are creating.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #
     # @return [Types::CreateQueueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateQueueResponse#queue #queue} => Types::Queue
@@ -3626,6 +3644,9 @@ module Aws::MediaConvert
     #   resp = client.create_queue({
     #     description: "__string",
     #     name: "__string", # required
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3635,7 +3656,9 @@ module Aws::MediaConvert
     #   resp.queue.description #=> String
     #   resp.queue.last_updated #=> Time
     #   resp.queue.name #=> String
+    #   resp.queue.progressing_jobs_count #=> Integer
     #   resp.queue.status #=> String, one of "ACTIVE", "PAUSED"
+    #   resp.queue.submitted_jobs_count #=> Integer
     #   resp.queue.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CreateQueue AWS API Documentation
@@ -5285,7 +5308,9 @@ module Aws::MediaConvert
     #   resp.queue.description #=> String
     #   resp.queue.last_updated #=> Time
     #   resp.queue.name #=> String
+    #   resp.queue.progressing_jobs_count #=> Integer
     #   resp.queue.status #=> String, one of "ACTIVE", "PAUSED"
+    #   resp.queue.submitted_jobs_count #=> Integer
     #   resp.queue.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/GetQueue AWS API Documentation
@@ -6940,7 +6965,9 @@ module Aws::MediaConvert
     #   resp.queues[0].description #=> String
     #   resp.queues[0].last_updated #=> Time
     #   resp.queues[0].name #=> String
+    #   resp.queues[0].progressing_jobs_count #=> Integer
     #   resp.queues[0].status #=> String, one of "ACTIVE", "PAUSED"
+    #   resp.queues[0].submitted_jobs_count #=> Integer
     #   resp.queues[0].type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListQueues AWS API Documentation
@@ -6949,6 +6976,98 @@ module Aws::MediaConvert
     # @param [Hash] params ({})
     def list_queues(params = {}, options = {})
       req = build_request(:list_queues, params)
+      req.send_request(options)
+    end
+
+    # Retrieve the tags for a MediaConvert resource.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to list
+    #   tags for. To get the ARN, send a GET request with the resource name.
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#resource_tags #resource_tags} => Types::ResourceTags
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_tags.arn #=> String
+    #   resp.resource_tags.tags #=> Hash
+    #   resp.resource_tags.tags["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Tag a MediaConvert queue, preset, or job template. For information
+    # about these resource types, see the User Guide at
+    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to tag.
+    #   To get the ARN, send a GET request with the resource name.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags that you want to add to the resource. You can tag resources
+    #   with a key-value pair or with only a key.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     arn: "__string", # required
+    #     tags: { # required
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Untag a MediaConvert queue, preset, or job template. For information
+    # about these resource types, see the User Guide at
+    # http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+    #
+    # @option params [String] :arn
+    #   The Amazon Resource Name (ARN) of the resource that you want to remove
+    #   tags from. To get the ARN, send a GET request with the resource name.
+    #
+    # @option params [Array<String>] :tag_keys
+    #   The keys of the tags that you want to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     arn: "__string",
+    #     tag_keys: ["__string"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
       req.send_request(options)
     end
 
@@ -9108,7 +9227,9 @@ module Aws::MediaConvert
     #   resp.queue.description #=> String
     #   resp.queue.last_updated #=> Time
     #   resp.queue.name #=> String
+    #   resp.queue.progressing_jobs_count #=> Integer
     #   resp.queue.status #=> String, one of "ACTIVE", "PAUSED"
+    #   resp.queue.submitted_jobs_count #=> Integer
     #   resp.queue.type #=> String, one of "SYSTEM", "CUSTOM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UpdateQueue AWS API Documentation
@@ -9133,7 +9254,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
