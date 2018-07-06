@@ -36,7 +36,11 @@ module Aws
 
     private
     def credentials_from_process(proc_invocation)
-      raw_out = `#{proc_invocation}`
+      begin
+        raw_out = `#{proc_invocation}`
+      rescue Errno::ENOENT
+        raise Errors::InvalidProcessCredentialsPayload.new("Could not find process #{proc_invocation}")
+      end
       success = $?.success?
 
       if success
@@ -48,7 +52,7 @@ module Aws
           raise Errors::InvalidProcessCredentialsPayload.new("Invalid version #{payload_version} for credentials payload")
         end
       else
-        abort('credential_process provider failure, the credential process had non zero exit status')
+        raise Errors::InvalidProcessCredentialsPayload.new('credential_process provider failure, the credential process had non zero exit status and failed to provide credentials')
       end
     end
 

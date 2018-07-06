@@ -30,14 +30,14 @@ module Aws
     it 'will throw an error and expose the stderr output when the credential process has a nonzero exit status' do
       expect {
         creds = ProcessCredentials.new('>&2 echo "Credential Provider Error"; false').credentials
-      }.to raise_error(SystemExit)
-      .and output("Credential Provider Error\ncredential_process provider failure, the credential process had non zero exit status\n").to_stderr_from_any_process
+      }.to raise_error(Errors::InvalidProcessCredentialsPayload)
+      .and output("Credential Provider Error\n").to_stderr_from_any_process
     end
 
     it 'will throw an error when the credential process cant be found' do
       expect {
         creds = ProcessCredentials.new('fake_proc').credentials
-      }.to raise_error(Errno::ENOENT)
+      }.to raise_error(Errors::InvalidProcessCredentialsPayload)
     end
   end
 end
