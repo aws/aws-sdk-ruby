@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MediaConvert - Updated the API, and documentation for AWS Elemental MediaConvert.
+
+* Feature - Aws::ServerlessApplicationRepository - Updated the API, and documentation for AWSServerlessApplicationRepository.
+
 2.11.82 (2018-07-05)
 ------------------
 
