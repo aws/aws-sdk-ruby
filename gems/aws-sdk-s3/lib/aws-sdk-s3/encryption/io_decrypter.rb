@@ -9,6 +9,7 @@ module Aws
         def initialize(cipher, io)
           @cipher = cipher.clone
           @io = io
+          @cipher_buffer = String.new
         end
 
         # @return [#write]
@@ -16,7 +17,7 @@ module Aws
 
         def write(chunk)
           # decrypt and write
-          @io.write(@cipher.update(chunk))
+          @io.write(@cipher.update(chunk, @cipher_buffer))
         end
 
         def finalize
