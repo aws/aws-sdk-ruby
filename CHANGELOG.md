@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and integration test for Application Auto Scaling.
+
+* Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, documentation, and integration test for AWS Database Migration Service.
+
+* Feature - Aws::Lambda - Updated the API for AWS Lambda.
+
+* Feature - Aws::TranscribeService - Updated the API, and documentation for Amazon Transcribe Service.
+
 2.11.83 (2018-07-06)
 ------------------
 
