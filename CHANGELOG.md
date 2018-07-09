@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.84 (2018-07-09)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and integration test for Application Auto Scaling.
 
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
