@@ -113,7 +113,7 @@ module Aws
           private
 
           def handle_region_errors(response)
-            if wrong_sigv4_region?(response)
+            if wrong_sigv4_region?(response) && !fips_region?(response)
               get_region_and_retry(response.context)
             else
               response
@@ -121,19 +121,20 @@ module Aws
           end
 
           def get_region_and_retry(context)
-            # disable region detect and retry for fips endpoints
-            unless context.http_request.endpoint.host.include?('fips')
-              actual_region = context.http_response.headers['x-amz-bucket-region']
-              actual_region ||= region_from_body(context.http_response.body_contents)
-              update_bucket_cache(context, actual_region)
-              log_warning(context, actual_region)
-              resign_with_new_region(context, actual_region)
-            end
+            actual_region = context.http_response.headers['x-amz-bucket-region']
+            actual_region ||= region_from_body(context.http_response.body_contents)
+            update_bucket_cache(context, actual_region)
+            log_warning(context, actual_region)
+            resign_with_new_region(context, actual_region)
             @handler.call(context)
           end
 
           def update_bucket_cache(context, actual_region)
             S3::BUCKET_REGIONS[context.params[:bucket]] = actual_region
+          end
+
+          def fips_region?(resp)
+            resp.context.http_request.endpoint.host.include?('fips')
           end
 
           def wrong_sigv4_region?(resp)
