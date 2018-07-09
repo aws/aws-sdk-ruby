@@ -15,7 +15,7 @@ def whitelist
     },
     "s3" => {
       "location_constraint.rb" => 12,
-      "s3_signer.rb" => 195
+      "s3_signer.rb" => 198
     }
   }
 end
