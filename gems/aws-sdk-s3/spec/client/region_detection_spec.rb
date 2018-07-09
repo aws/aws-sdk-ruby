@@ -43,6 +43,9 @@ module Aws
           stub_request(:put, 'https://bucket.s3.us-west-2.amazonaws.com/key').
             to_return(status: [400, 'Bad Request'], body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>AuthorizationHeaderMalformed</Code><Message>The authorization header is malformed; the region 'us-east-1' is wrong; expecting 'eu-central-1'</Message><Region>eu-central-1</Region><RequestId>531B68B3613F5C96</RequestId><HostId>TMnOREh0Ms0touCRX0XkJinw7xqsF0v/iFyA+nCC4d3PpF+k2oekWlSrUk+8d2/rvcnEv2QXer0=</HostId></Error>")
 
+          stub_request(:put, 'https://bucket.s3-fips.us-west-2.amazonaws.com/keya').
+            to_return(status: [400, 'Bad Request'], body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>AuthorizationHeaderMalformed</Code><Message>The authorization header is malformed; the region 'us-west-2' is wrong; expecting 'eu-central-1'</Message><Region>eu-central-1</Region><RequestId>531B68B3613F5C96</RequestId><HostId>TMnOREh0Ms0touCRX0XkJinw7xqsF0v/iFyA+nCC4d3PpF+k2oekWlSrUk+8d2/rvcnEv2QXer0=</HostId></Error>")
+
           stub_request(:put, 'https://bucket.s3.eu-central-1.amazonaws.com/key').
             to_return(status: [200, 'Ok'])
 
@@ -71,6 +74,16 @@ module Aws
           }.to raise_error(Aws::S3::Errors::Http307Error)
 
         end
+
+        it 'never fix endpoint for fips regions' do
+          client = S3::Client.new(client_opts.merge(
+            region: 'us-west-2', endpoint: 'https://s3-fips.us-west-2.amazonaws.com')
+          )
+          expect {
+            client.put_object(bucket:'bucket', key:'keya', body:'body')
+          }.to raise_error(Aws::S3::Errors::AuthorizationHeaderMalformed)
+        end
+
       end
     end
   end

@@ -123,14 +123,21 @@ module Aws
           def get_region_and_retry(context)
             actual_region = context.http_response.headers['x-amz-bucket-region']
             actual_region ||= region_from_body(context.http_response.body_contents)
-            update_bucket_cache(context, actual_region)
-            log_warning(context, actual_region)
-            resign_with_new_region(context, actual_region)
+            # disable retry for fips endpoints
+            unless fips_endpoint?(context, actual_region)
+              update_bucket_cache(context, actual_region)
+              log_warning(context, actual_region)
+              resign_with_new_region(context, actual_region)
+            end
             @handler.call(context)
           end
 
           def update_bucket_cache(context, actual_region)
             S3::BUCKET_REGIONS[context.params[:bucket]] = actual_region
+          end
+
+          def fips_endpoint?(context, actual_region)
+            context.http_request.endpoint.host.include?('fips') || actual_region.include?('fips')
           end
 
           def wrong_sigv4_region?(resp)
