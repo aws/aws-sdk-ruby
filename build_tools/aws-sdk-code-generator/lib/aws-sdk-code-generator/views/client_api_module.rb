@@ -69,6 +69,7 @@ module AwsSdkCodeGenerator
         'errorPrefix' => true,
         'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
+        'protocolSettings' => {}, # current unused unless for h2 exclude
 
         # ignore
         'apiVersion' => false,
