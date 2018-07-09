@@ -406,6 +406,7 @@ module Aws::TranscribeService
     #         media: { # required
     #           media_file_uri: "Uri",
     #         },
+    #         output_bucket_name: "OutputBucketName",
     #         settings: {
     #           vocabulary_name: "VocabularyName",
     #           show_speaker_labels: false,
@@ -414,7 +415,8 @@ module Aws::TranscribeService
     #       }
     #
     # @!attribute [rw] transcription_job_name
-    #   The name of the job. The name must be unique within an AWS account.
+    #   The name of the job. You can't use the strings "." or ".." in
+    #   the job name. The name must be unique within an AWS account.
     #   @return [String]
     #
     # @!attribute [rw] language_code
@@ -434,6 +436,28 @@ module Aws::TranscribeService
     #   An object that describes the input media for a transcription job.
     #   @return [Types::Media]
     #
+    # @!attribute [rw] output_bucket_name
+    #   The location where the transcription is stored.
+    #
+    #   If you set the `OutputBucketName`, Amazon Transcribe puts the
+    #   transcription in the specified S3 bucket. When you call the
+    #   GetTranscriptionJob operation, the operation returns this location
+    #   in the `TranscriptFileUri` field. The S3 bucket must have
+    #   permissions that allow Amazon Transcribe to put files in the bucket.
+    #   For more information, see [Permissions Required for IAM User
+    #   Roles][1].
+    #
+    #   If you don't set the `OutputBucketName`, Amazon Transcribe
+    #   generates a pre-signed URL, a shareable URL that provides secure
+    #   access to your transcription, and returns it in the
+    #   `TranscriptFileUri` field. Use this URL to download the
+    #   transcription.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user
+    #   @return [String]
+    #
     # @!attribute [rw] settings
     #   A `Settings` object that provides optional settings for a
     #   transcription job.
@@ -447,6 +471,7 @@ module Aws::TranscribeService
       :media_sample_rate_hertz,
       :media_format,
       :media,
+      :output_bucket_name,
       :settings)
       include Aws::Structure
     end
@@ -462,11 +487,16 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Describes the output of a transcription job.
+    # Identifies the location of a transcription.
     #
     # @!attribute [rw] transcript_file_uri
-    #   The S3 location where the transcription result is stored. Use this
-    #   URI to access the results of the transcription job.
+    #   The location where the transcription is stored.
+    #
+    #   Use this URI to access the transcription. If you specified an S3
+    #   bucket in the `OutputBucketName` field when you created the job,
+    #   this is the URI of that bucket. If you chose to store the
+    #   transcription in Amazon Transcribe, this is a shareable URL that
+    #   provides secure access to that location.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Transcript AWS API Documentation
@@ -480,7 +510,7 @@ module Aws::TranscribeService
     # `StartTranscriptionJob` operation.
     #
     # @!attribute [rw] transcription_job_name
-    #   A name to identify the transcription job.
+    #   The name of the transcription job.
     #   @return [String]
     #
     # @!attribute [rw] transcription_job_status
@@ -501,7 +531,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media
-    #   An object that describes the input media for a transcription job.
+    #   An object that describes the input media for the transcription job.
     #   @return [Types::Media]
     #
     # @!attribute [rw] transcript
@@ -509,11 +539,11 @@ module Aws::TranscribeService
     #   @return [Types::Transcript]
     #
     # @!attribute [rw] creation_time
-    #   Timestamp of the date and time that the job was created.
+    #   A timestamp that shows when the job was created.
     #   @return [Time]
     #
     # @!attribute [rw] completion_time
-    #   Timestamp of the date and time that the job completed.
+    #   A timestamp that shows when the job was completed.
     #   @return [Time]
     #
     # @!attribute [rw] failure_reason
@@ -522,7 +552,10 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Optional settings for the transcription job.
+    #   Optional settings for the transcription job. Use these settings to
+    #   turn on speaker recognition, to set the maximum number of speakers
+    #   that should be identified and to specify a custom vocabulary to use
+    #   when processing the transcription job.
     #   @return [Types::Settings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
@@ -545,15 +578,15 @@ module Aws::TranscribeService
     # Provides a summary of information about a transcription job.
     #
     # @!attribute [rw] transcription_job_name
-    #   The name assigned to the transcription job when it was created.
+    #   The name of the transcription job.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   Timestamp of the date and time that the job was created.
+    #   A timestamp that shows when the job was created.
     #   @return [Time]
     #
     # @!attribute [rw] completion_time
-    #   Timestamp of the date and time that the job completed.
+    #   A timestamp that shows when the job was completed.
     #   @return [Time]
     #
     # @!attribute [rw] language_code
@@ -567,8 +600,20 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   If the `TranscriptionJobStatus` field is `FAILED`, this field
-    #   contains a description of the error.
+    #   If the `TranscriptionJobStatus` field is `FAILED`, a description of
+    #   the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_location_type
+    #   Indicates the location of the output of the transcription job.
+    #
+    #   If the value is `CUSTOMER_BUCKET` then the location is the S3 bucket
+    #   specified in the `outputBucketName` field when the transcription job
+    #   was started with the `StartTranscriptionJob` operation.
+    #
+    #   If the value is `SERVICE_BUCKET` then the output is stored by Amazon
+    #   Transcribe and can be retrieved using the URI in the
+    #   `GetTranscriptionJob` response's `TranscriptFileUri` field.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJobSummary AWS API Documentation
@@ -579,7 +624,8 @@ module Aws::TranscribeService
       :completion_time,
       :language_code,
       :transcription_job_status,
-      :failure_reason)
+      :failure_reason,
+      :output_location_type)
       include Aws::Structure
     end
 

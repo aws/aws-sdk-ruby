@@ -203,7 +203,8 @@ module Aws::CostExplorer
     #   blended and unblended rates, see [Why does the "blended" annotation
     #   appear on some line items in my bill?][1].
     #
-    #   Valid values are `BlendedCost`, `UnblendedCost`, and `UsageQuantity`.
+    #   Valid values are `AmortizedCost`, `BlendedCost`, `UnblendedCost`, and
+    #   `UsageQuantity`.
     #
     #   <note markdown="1"> If you return the `UsageQuantity` metric, the service aggregates all
     #   usage numbers without taking into account the units. For example, if
@@ -567,6 +568,9 @@ module Aws::CostExplorer
     #   You can nest only one level deep. If there are multiple values for a
     #   dimension, they are OR'd together.
     #
+    #   If you don't provide a `SERVICE` filter, Cost Explorer defaults to
+    #   EC2.
+    #
     # @option params [String] :next_page_token
     #   The token to retrieve the next set of results. AWS provides the token
     #   when the response from a previous call has more results than the
@@ -677,9 +681,12 @@ module Aws::CostExplorer
     #   The specific service that you want recommendations for.
     #
     # @option params [String] :account_scope
-    #   The account scope that you want recommendations for. The only valid
-    #   value is `Payer`. This means that AWS includes the master account and
-    #   any member accounts when it calculates its recommendations.
+    #   The account scope that you want recommendations for. `PAYER` means
+    #   that AWS includes the master account and any member accounts when it
+    #   calculates its recommendations. `LINKED` means that AWS includes only
+    #   member accounts when it calculates its recommendations.
+    #
+    #   Valid values are `PAYER` and `LINKED`.
     #
     # @option params [String] :lookback_period_in_days
     #   The number of previous days that you want AWS to consider when it
@@ -714,7 +721,7 @@ module Aws::CostExplorer
     #   resp = client.get_reservation_purchase_recommendation({
     #     account_id: "GenericString",
     #     service: "GenericString", # required
-    #     account_scope: "PAYER", # accepts PAYER
+    #     account_scope: "PAYER", # accepts PAYER, LINKED
     #     lookback_period_in_days: "SEVEN_DAYS", # accepts SEVEN_DAYS, THIRTY_DAYS, SIXTY_DAYS
     #     term_in_years: "ONE_YEAR", # accepts ONE_YEAR, THREE_YEARS
     #     payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT
@@ -732,7 +739,7 @@ module Aws::CostExplorer
     #   resp.metadata.recommendation_id #=> String
     #   resp.metadata.generation_timestamp #=> String
     #   resp.recommendations #=> Array
-    #   resp.recommendations[0].account_scope #=> String, one of "PAYER"
+    #   resp.recommendations[0].account_scope #=> String, one of "PAYER", "LINKED"
     #   resp.recommendations[0].lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
     #   resp.recommendations[0].term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
     #   resp.recommendations[0].payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT"
@@ -750,6 +757,7 @@ module Aws::CostExplorer
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.instance_type #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.region #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.database_engine #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.database_edition #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.deployment_option #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.license_model #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.current_generation #=> Boolean
@@ -1013,7 +1021,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
