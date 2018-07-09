@@ -113,7 +113,7 @@ module Aws
           private
 
           def handle_region_errors(response)
-            if wrong_sigv4_region?(response)
+            if wrong_sigv4_region?(response) && !fips_region?(response)
               get_region_and_retry(response.context)
             else
               response
@@ -131,6 +131,10 @@ module Aws
 
           def update_bucket_cache(context, actual_region)
             S3::BUCKET_REGIONS[context.params[:bucket]] = actual_region
+          end
+
+          def fips_region?(resp)
+            resp.context.http_request.endpoint.host.include?('fips')
           end
 
           def wrong_sigv4_region?(resp)
