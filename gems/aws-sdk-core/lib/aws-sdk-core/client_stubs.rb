@@ -6,6 +6,9 @@ module Aws
   # return when a client is using stubbed responses. Pass
   # `:stub_responses => true` to a client constructor to enable this
   # behavior.
+  #
+  # Also allows you to see the requests made by the client by reading the
+  # api_requests instance variable
   module ClientStubs
 
     # @api private
@@ -17,6 +20,16 @@ module Aws
           apply_stubs(operation_name, Array === stubs ? stubs : [stubs])
         end
       end
+
+      # When a client is stubbed allow the user to access the requests made
+      @api_requests = []
+
+      requests = @api_requests
+      self.handle do |context|
+        requests << context
+        @handler.call(context)
+      end
+      self.class.attr_reader :api_requests
     end
 
     # Configures what data / errors should be returned from the named operation
