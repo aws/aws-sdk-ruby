@@ -29,7 +29,6 @@ module Aws
         requests << context
         @handler.call(context)
       end
-      self.class.attr_reader :api_requests
     end
 
     # Configures what data / errors should be returned from the named operation
@@ -175,6 +174,16 @@ module Aws
       else
         msg = 'stubbing is not enabled; enable stubbing in the constructor '
         msg << 'with `:stub_responses => true`'
+        raise msg
+      end
+    end
+
+    def api_requests
+      if config.stub_responses
+        @api_requests
+      else
+        msg = 'you must enable stubbing in order to client requests;'
+        msg << ' enable stubbing in the constructor with `:stub_responses => true`'
         raise msg
       end
     end
