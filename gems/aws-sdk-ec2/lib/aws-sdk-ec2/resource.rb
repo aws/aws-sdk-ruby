@@ -125,7 +125,7 @@ module Aws::EC2
     #         private_ip_addresses: [
     #           {
     #             primary: false,
-    #             private_ip_address: "String", # required
+    #             private_ip_address: "String",
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
@@ -474,7 +474,7 @@ module Aws::EC2
     #     private_ip_addresses: [
     #       {
     #         primary: false,
-    #         private_ip_address: "String", # required
+    #         private_ip_address: "String",
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,
@@ -785,7 +785,7 @@ module Aws::EC2
     #   The number of I/O operations per second (IOPS) to provision for the
     #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
     #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
-    #   Volume Types][1].
+    #   Volume Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #

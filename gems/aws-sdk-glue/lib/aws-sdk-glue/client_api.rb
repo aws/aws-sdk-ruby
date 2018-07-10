@@ -150,6 +150,8 @@ module Aws::Glue
     DevEndpoint = Shapes::StructureShape.new(name: 'DevEndpoint')
     DevEndpointCustomLibraries = Shapes::StructureShape.new(name: 'DevEndpointCustomLibraries')
     DevEndpointList = Shapes::ListShape.new(name: 'DevEndpointList')
+    DynamoDBTarget = Shapes::StructureShape.new(name: 'DynamoDBTarget')
+    DynamoDBTargetList = Shapes::ListShape.new(name: 'DynamoDBTargetList')
     EntityNotFoundException = Shapes::StructureShape.new(name: 'EntityNotFoundException')
     ErrorByName = Shapes::MapShape.new(name: 'ErrorByName')
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
@@ -607,6 +609,7 @@ module Aws::Glue
 
     CrawlerTargets.add_member(:s3_targets, Shapes::ShapeRef.new(shape: S3TargetList, location_name: "S3Targets"))
     CrawlerTargets.add_member(:jdbc_targets, Shapes::ShapeRef.new(shape: JdbcTargetList, location_name: "JdbcTargets"))
+    CrawlerTargets.add_member(:dynamo_db_targets, Shapes::ShapeRef.new(shape: DynamoDBTargetList, location_name: "DynamoDBTargets"))
     CrawlerTargets.struct_class = Types::CrawlerTargets
 
     CreateClassifierRequest.add_member(:grok_classifier, Shapes::ShapeRef.new(shape: CreateGrokClassifierRequest, location_name: "GrokClassifier"))
@@ -859,6 +862,11 @@ module Aws::Glue
     DevEndpointCustomLibraries.struct_class = Types::DevEndpointCustomLibraries
 
     DevEndpointList.member = Shapes::ShapeRef.new(shape: DevEndpoint)
+
+    DynamoDBTarget.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
+    DynamoDBTarget.struct_class = Types::DynamoDBTarget
+
+    DynamoDBTargetList.member = Shapes::ShapeRef.new(shape: DynamoDBTarget)
 
     ErrorByName.key = Shapes::ShapeRef.new(shape: NameString)
     ErrorByName.value = Shapes::ShapeRef.new(shape: ErrorDetail)
@@ -1221,6 +1229,7 @@ module Aws::Glue
 
     Location.add_member(:jdbc, Shapes::ShapeRef.new(shape: CodeGenNodeArgs, location_name: "Jdbc"))
     Location.add_member(:s3, Shapes::ShapeRef.new(shape: CodeGenNodeArgs, location_name: "S3"))
+    Location.add_member(:dynamo_db, Shapes::ShapeRef.new(shape: CodeGenNodeArgs, location_name: "DynamoDB"))
     Location.struct_class = Types::Location
 
     LocationMap.key = Shapes::ShapeRef.new(shape: ColumnValuesString)

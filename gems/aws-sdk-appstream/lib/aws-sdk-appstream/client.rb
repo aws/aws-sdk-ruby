@@ -621,7 +621,7 @@ module Aws::AppStream
     #     display_name: "DisplayName",
     #     storage_connectors: [
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
     #         domains: ["Domain"],
     #       },
@@ -644,7 +644,7 @@ module Aws::AppStream
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
     #   resp.stack.storage_connectors #=> Array
-    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE"
+    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE", "ONE_DRIVE"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
     #   resp.stack.storage_connectors[0].domains #=> Array
     #   resp.stack.storage_connectors[0].domains[0] #=> String
@@ -1083,14 +1083,24 @@ module Aws::AppStream
     # @option params [Array<String>] :names
     #   The names of the images to describe.
     #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results. If
+    #   this value is empty, only the first page is retrieved.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each results page.
+    #
     # @return [Types::DescribeImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeImagesResult#images #images} => Array&lt;Types::Image&gt;
+    #   * {Types::DescribeImagesResult#next_token #next_token} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_images({
     #     names: ["String"],
+    #     next_token: "String",
+    #     max_results: 1,
     #   })
     #
     # @example Response structure
@@ -1119,6 +1129,7 @@ module Aws::AppStream
     #   resp.images[0].created_time #=> Time
     #   resp.images[0].public_base_image_released_date #=> Time
     #   resp.images[0].appstream_agent_version #=> String
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
     #
@@ -1227,7 +1238,7 @@ module Aws::AppStream
     #   resp.stacks[0].display_name #=> String
     #   resp.stacks[0].created_time #=> Time
     #   resp.stacks[0].storage_connectors #=> Array
-    #   resp.stacks[0].storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE"
+    #   resp.stacks[0].storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE", "ONE_DRIVE"
     #   resp.stacks[0].storage_connectors[0].resource_identifier #=> String
     #   resp.stacks[0].storage_connectors[0].domains #=> Array
     #   resp.stacks[0].storage_connectors[0].domains[0] #=> String
@@ -1893,7 +1904,7 @@ module Aws::AppStream
     #     name: "String", # required
     #     storage_connectors: [
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
     #         domains: ["Domain"],
     #       },
@@ -1901,7 +1912,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE
@@ -1918,7 +1929,7 @@ module Aws::AppStream
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
     #   resp.stack.storage_connectors #=> Array
-    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE"
+    #   resp.stack.storage_connectors[0].connector_type #=> String, one of "HOMEFOLDERS", "GOOGLE_DRIVE", "ONE_DRIVE"
     #   resp.stack.storage_connectors[0].resource_identifier #=> String
     #   resp.stack.storage_connectors[0].domains #=> Array
     #   resp.stack.storage_connectors[0].domains[0] #=> String
@@ -1953,7 +1964,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

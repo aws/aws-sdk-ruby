@@ -86,7 +86,7 @@ module Aws::EC2
     # of IOPS that are provisioned for the volume. For General Purpose SSD
     # volumes, this represents the baseline performance of the volume and
     # the rate at which the volume accumulates I/O credits for bursting. For
-    # more information on General Purpose SSD baseline performance, I/O
+    # more information about General Purpose SSD baseline performance, I/O
     # credits, and bursting, see [Amazon EBS Volume Types][1] in the *Amazon
     # Elastic Compute Cloud User Guide*.
     #

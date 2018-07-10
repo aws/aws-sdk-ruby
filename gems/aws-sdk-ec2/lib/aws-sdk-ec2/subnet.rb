@@ -303,7 +303,7 @@ module Aws::EC2
     #         private_ip_addresses: [
     #           {
     #             primary: false,
-    #             private_ip_address: "String", # required
+    #             private_ip_address: "String",
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
@@ -580,7 +580,7 @@ module Aws::EC2
     #     private_ip_addresses: [
     #       {
     #         primary: false,
-    #         private_ip_address: "String", # required
+    #         private_ip_address: "String",
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,

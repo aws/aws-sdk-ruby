@@ -2484,16 +2484,12 @@ module Aws::EC2
     # customer master key (CMK); however, you can specify a non-default CMK
     # with the `KmsKeyId` parameter.
     #
-    # <note markdown="1"> To copy an encrypted snapshot that has been shared from another
+    # To copy an encrypted snapshot that has been shared from another
     # account, you must have permissions for the CMK used to encrypt the
     # snapshot.
     #
-    #  </note>
-    #
-    # <note markdown="1"> Snapshots created by the CopySnapshot action have an arbitrary volume
+    # Snapshots created by copying another snapshot have an arbitrary volume
     # ID that should not be used for any purpose.
-    #
-    #  </note>
     #
     # For more information, see [Copying an Amazon EBS Snapshot][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
@@ -2511,12 +2507,10 @@ module Aws::EC2
     #   the destination region in a `PresignedUrl` parameter, where it is
     #   required.
     #
-    #   <note markdown="1"> `CopySnapshot` sends the snapshot copy to the regional endpoint that
-    #   you send the HTTP request to, such as `ec2.us-east-1.amazonaws.com`
-    #   (in the AWS CLI, this is specified with the `--region` parameter or
-    #   the default region in your AWS configuration file).
-    #
-    #    </note>
+    #   The snapshot copy is sent to the regional endpoint that you sent the
+    #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With the
+    #   AWS CLI, this is specified using the `--region` parameter or the
+    #   default region in your AWS configuration file.
     #
     # @option params [Boolean] :encrypted
     #   Specifies whether the destination snapshot should be encrypted. You
@@ -3840,7 +3834,7 @@ module Aws::EC2
     #           private_ip_addresses: [
     #             {
     #               primary: false,
-    #               private_ip_address: "String", # required
+    #               private_ip_address: "String",
     #             },
     #           ],
     #           secondary_private_ip_address_count: 1,
@@ -3895,6 +3889,10 @@ module Aws::EC2
     #       },
     #       credit_specification: {
     #         cpu_credits: "String", # required
+    #       },
+    #       cpu_options: {
+    #         core_count: 1,
+    #         threads_per_core: 1,
     #       },
     #     },
     #   })
@@ -4061,7 +4059,7 @@ module Aws::EC2
     #           private_ip_addresses: [
     #             {
     #               primary: false,
-    #               private_ip_address: "String", # required
+    #               private_ip_address: "String",
     #             },
     #           ],
     #           secondary_private_ip_address_count: 1,
@@ -4116,6 +4114,10 @@ module Aws::EC2
     #       },
     #       credit_specification: {
     #         cpu_credits: "String", # required
+    #       },
+    #       cpu_options: {
+    #         core_count: 1,
+    #         threads_per_core: 1,
     #       },
     #     },
     #   })
@@ -4193,6 +4195,8 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.valid_until #=> Time
     #   resp.launch_template_version.launch_template_data.instance_market_options.spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.launch_template_version.launch_template_data.credit_specification.cpu_credits #=> String
+    #   resp.launch_template_version.launch_template_data.cpu_options.core_count #=> Integer
+    #   resp.launch_template_version.launch_template_data.cpu_options.threads_per_core #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateLaunchTemplateVersion AWS API Documentation
     #
@@ -4660,7 +4664,7 @@ module Aws::EC2
     #     private_ip_addresses: [
     #       {
     #         primary: false,
-    #         private_ip_address: "String", # required
+    #         private_ip_address: "String",
     #       },
     #     ],
     #     secondary_private_ip_address_count: 1,
@@ -5288,7 +5292,8 @@ module Aws::EC2
     # snapshots always remain protected.
     #
     # You can tag your snapshots during creation. For more information, see
-    # [Tagging Your Amazon EC2 Resources][1].
+    # [Tagging Your Amazon EC2 Resources][1] in the *Amazon Elastic Compute
+    # Cloud User Guide*.
     #
     # For more information, see [Amazon Elastic Block Store][2] and [Amazon
     # EBS Encryption][3] in the *Amazon Elastic Compute Cloud User Guide*.
@@ -5686,7 +5691,8 @@ module Aws::EC2
     # Guide*.
     #
     # You can tag your volumes during creation. For more information, see
-    # [Tagging Your Amazon EC2 Resources][3].
+    # [Tagging Your Amazon EC2 Resources][3] in the *Amazon Elastic Compute
+    # Cloud User Guide*.
     #
     # For more information, see [Creating an Amazon EBS Volume][4] in the
     # *Amazon Elastic Compute Cloud User Guide*.
@@ -5721,7 +5727,7 @@ module Aws::EC2
     #   The number of I/O operations per second (IOPS) to provision for the
     #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
     #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
-    #   Volume Types][1].
+    #   Volume Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #
@@ -7715,9 +7721,7 @@ module Aws::EC2
     # Deletes the specified EBS volume. The volume must be in the
     # `available` state (not attached to an instance).
     #
-    # <note markdown="1"> The volume may remain in the `deleting` state for several minutes.
-    #
-    #  </note>
+    # The volume can remain in the `deleting` state for several minutes.
     #
     # For more information, see [Deleting an Amazon EBS Volume][1] in the
     # *Amazon Elastic Compute Cloud User Guide*.
@@ -12034,6 +12038,8 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.valid_until #=> Time
     #   resp.launch_template_versions[0].launch_template_data.instance_market_options.spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.launch_template_versions[0].launch_template_data.credit_specification.cpu_credits #=> String
+    #   resp.launch_template_versions[0].launch_template_data.cpu_options.core_count #=> Integer
+    #   resp.launch_template_versions[0].launch_template_data.cpu_options.threads_per_core #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -16307,8 +16313,8 @@ module Aws::EC2
     # check fails, the overall status is `impaired`. If the status is
     # `insufficient-data`, then the checks may still be taking place on your
     # volume at the time. We recommend that you retry the request. For more
-    # information on volume status, see [Monitoring the Status of Your
-    # Volumes][1].
+    # information about volume status, see [Monitoring the Status of Your
+    # Volumes][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # *Events*\: Reflect the cause of a volume status and may require you to
     # take action. For example, if your volume returns an `impaired` status,
@@ -16324,12 +16330,10 @@ module Aws::EC2
     # I/O operations for the volume by calling the EnableVolumeIO action and
     # then check the volume for data consistency.
     #
-    # <note markdown="1"> Volume status is based on the volume status checks, and does not
+    # Volume status is based on the volume status checks, and does not
     # reflect the volume state. Therefore, volume status does not indicate
     # volumes in the `error` state (for example, when a volume is incapable
     # of accepting I/O.)
-    #
-    #  </note>
     #
     #
     #
@@ -16752,7 +16756,8 @@ module Aws::EC2
     # You can also use CloudWatch Events to check the status of a
     # modification to an EBS volume. For information about CloudWatch
     # Events, see the [Amazon CloudWatch Events User Guide][1]. For more
-    # information, see [Monitoring Volume Modifications"][2].
+    # information, see [Monitoring Volume Modifications"][2] in the *Amazon
+    # Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -19056,6 +19061,8 @@ module Aws::EC2
     #   resp.launch_template_data.instance_market_options.spot_options.valid_until #=> Time
     #   resp.launch_template_data.instance_market_options.spot_options.instance_interruption_behavior #=> String, one of "hibernate", "stop", "terminate"
     #   resp.launch_template_data.credit_specification.cpu_credits #=> String
+    #   resp.launch_template_data.cpu_options.core_count #=> Integer
+    #   resp.launch_template_data.cpu_options.threads_per_core #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -20779,26 +20786,21 @@ module Aws::EC2
     # call. If you need to both add and remove account IDs for a snapshot,
     # you must use multiple API calls.
     #
-    # <note markdown="1"> Encrypted snapshots and snapshots with AWS Marketplace product codes
+    # Encrypted snapshots and snapshots with AWS Marketplace product codes
     # cannot be made public. Snapshots encrypted with your default CMK
     # cannot be shared with other accounts.
     #
-    #  </note>
-    #
-    # For more information on modifying snapshot permissions, see [Sharing
-    # Snapshots][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # For more information about modifying snapshot permissions, see
+    # [Sharing Snapshots][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html
     #
     # @option params [String] :attribute
-    #   The snapshot attribute to modify.
-    #
-    #   <note markdown="1"> Only volume creation permissions may be modified at the customer
-    #   level.
-    #
-    #    </note>
+    #   The snapshot attribute to modify. Only volume creation permissions can
+    #   be modified.
     #
     # @option params [Types::CreateVolumePermissionModifications] :create_volume_permission
     #   A JSON representation of the snapshot attribute modification.
@@ -21070,21 +21072,15 @@ module Aws::EC2
     # For information about tracking status changes using either method, see
     # [Monitoring Volume Modifications][6].
     #
-    # <note markdown="1"> With previous-generation instance types, resizing an EBS volume may
+    # With previous-generation instance types, resizing an EBS volume may
     # require detaching and reattaching the volume or stopping and
-    # restarting the instance. For more information about modifying an EBS
-    # volume running Linux, see [Modifying the Size, IOPS, or Type of an EBS
-    # Volume on Linux][1]. For more information about modifying an EBS
-    # volume running Windows, see [Modifying the Size, IOPS, or Type of an
-    # EBS Volume on Windows][2].
+    # restarting the instance. For more information, see [Modifying the
+    # Size, IOPS, or Type of an EBS Volume on Linux][1] and [Modifying the
+    # Size, IOPS, or Type of an EBS Volume on Windows][2].
     #
-    #  </note>
-    #
-    # <note markdown="1"> If you reach the maximum volume modification rate per volume limit,
+    # If you reach the maximum volume modification rate per volume limit,
     # you will need to wait at least six hours before applying further
     # modifications to the affected EBS volume.
-    #
-    #  </note>
     #
     #
     #
@@ -21105,10 +21101,10 @@ module Aws::EC2
     #   The ID of the volume.
     #
     # @option params [Integer] :size
-    #   Target size in GiB of the volume to be modified. Target volume size
-    #   must be greater than or equal to than the existing size of the volume.
-    #   For information about available EBS volume sizes, see
-    #   [http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html][1].
+    #   The target size of the volume, in GiB. The target volume size must be
+    #   greater than or equal to than the existing size of the volume. For
+    #   information about available EBS volume sizes, see [Amazon EBS Volume
+    #   Types][1].
     #
     #   Default: If no size is specified, the existing size is retained.
     #
@@ -21117,19 +21113,15 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
     #
     # @option params [String] :volume_type
-    #   Target EBS volume type of the volume to be modified
-    #
-    #   The API does not support modifications for volume type `standard`. You
-    #   also cannot change the type of a volume to `standard`.
+    #   The target EBS volume type of the volume.
     #
     #   Default: If no type is specified, the existing type is retained.
     #
     # @option params [Integer] :iops
-    #   Target IOPS rate of the volume to be modified.
+    #   The target IOPS rate of the volume.
     #
-    #   Only valid for Provisioned IOPS SSD (`io1`) volumes. For more
-    #   information about `io1` IOPS configuration, see
-    #   [http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes\_piops][1].
+    #   This is only valid for Provisioned IOPS SSD (`io1`) volumes. For more
+    #   information, see [Provisioned IOPS SSD (io1) Volumes][1].
     #
     #   Default: If no IOPS value is specified, the existing value is
     #   retained.
@@ -23176,7 +23168,7 @@ module Aws::EC2
     #               private_ip_addresses: [
     #                 {
     #                   primary: false,
-    #                   private_ip_address: "String", # required
+    #                   private_ip_address: "String",
     #                 },
     #               ],
     #               secondary_private_ip_address_count: 1,
@@ -23481,7 +23473,7 @@ module Aws::EC2
     #           private_ip_addresses: [
     #             {
     #               primary: false,
-    #               private_ip_address: "String", # required
+    #               private_ip_address: "String",
     #             },
     #           ],
     #           secondary_private_ip_address_count: 1,
@@ -23779,8 +23771,9 @@ module Aws::EC2
 
     # Resets permission settings for the specified snapshot.
     #
-    # For more information on modifying snapshot permissions, see [Sharing
-    # Snapshots][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    # For more information about modifying snapshot permissions, see
+    # [Sharing Snapshots][1] in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #
     #
@@ -24561,7 +24554,7 @@ module Aws::EC2
     #         private_ip_addresses: [
     #           {
     #             primary: false,
-    #             private_ip_address: "String", # required
+    #             private_ip_address: "String",
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
@@ -25601,7 +25594,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

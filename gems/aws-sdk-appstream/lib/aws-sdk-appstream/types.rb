@@ -526,7 +526,7 @@ module Aws::AppStream
     #         display_name: "DisplayName",
     #         storage_connectors: [
     #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #             resource_identifier: "ResourceIdentifier",
     #             domains: ["Domain"],
     #           },
@@ -938,16 +938,29 @@ module Aws::AppStream
     #
     #       {
     #         names: ["String"],
+    #         next_token: "String",
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] names
     #   The names of the images to describe.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to retrieve the next page of results. If
+    #   this value is empty, only the first page is retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of each results page.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesRequest AWS API Documentation
     #
     class DescribeImagesRequest < Struct.new(
-      :names)
+      :names,
+      :next_token,
+      :max_results)
       include Aws::Structure
     end
 
@@ -955,10 +968,16 @@ module Aws::AppStream
     #   Information about the images.
     #   @return [Array<Types::Image>]
     #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results. If
+    #   this value is empty, only the first page is retrieved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesResult AWS API Documentation
     #
     class DescribeImagesResult < Struct.new(
-      :images)
+      :images,
+      :next_token)
       include Aws::Structure
     end
 
@@ -1937,7 +1956,7 @@ module Aws::AppStream
     #   data as a hash:
     #
     #       {
-    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
+    #         connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #         resource_identifier: "ResourceIdentifier",
     #         domains: ["Domain"],
     #       }
@@ -2234,7 +2253,7 @@ module Aws::AppStream
     #         name: "String", # required
     #         storage_connectors: [
     #           {
-    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE
+    #             connector_type: "HOMEFOLDERS", # required, accepts HOMEFOLDERS, GOOGLE_DRIVE, ONE_DRIVE
     #             resource_identifier: "ResourceIdentifier",
     #             domains: ["Domain"],
     #           },
@@ -2242,7 +2261,7 @@ module Aws::AppStream
     #         delete_storage_connectors: false,
     #         redirect_url: "RedirectURL",
     #         feedback_url: "FeedbackURL",
-    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
+    #         attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS
     #         user_settings: [
     #           {
     #             action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE

@@ -650,8 +650,9 @@ module Aws::Glue
     end
 
     # Creates a new crawler with specified targets, role, configuration, and
-    # optional schedule. At least one crawl target must be specified, in
-    # either the *s3Targets* or the *jdbcTargets* field.
+    # optional schedule. At least one crawl target must be specified, in the
+    # *s3Targets* field, the *jdbcTargets* field, or the *DynamoDBTargets*
+    # field.
     #
     # @option params [required, String] :name
     #   Name of the new crawler.
@@ -681,7 +682,7 @@ module Aws::Glue
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom classifiers that the user has registered. By default,
-    #   all AWS classifiers are included in a crawl, but these custom
+    #   all built-in classifiers are included in a crawl, but these custom
     #   classifiers always override the default classifiers for a given
     #   classification.
     #
@@ -693,16 +694,12 @@ module Aws::Glue
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such as
-    #   classification, input format, output format, serde information, and
-    #   schema from their parent table, rather than detect this information
-    #   separately for each partition. Use the following JSON string to
-    #   specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -725,6 +722,11 @@ module Aws::Glue
     #           connection_name: "ConnectionName",
     #           path: "Path",
     #           exclusions: ["Path"],
+    #         },
+    #       ],
+    #       dynamo_db_targets: [
+    #         {
+    #           path: "Path",
     #         },
     #       ],
     #     },
@@ -1924,6 +1926,8 @@ module Aws::Glue
     #   resp.crawler.targets.jdbc_targets[0].path #=> String
     #   resp.crawler.targets.jdbc_targets[0].exclusions #=> Array
     #   resp.crawler.targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawler.targets.dynamo_db_targets #=> Array
+    #   resp.crawler.targets.dynamo_db_targets[0].path #=> String
     #   resp.crawler.database_name #=> String
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
@@ -2035,6 +2039,8 @@ module Aws::Glue
     #   resp.crawlers[0].targets.jdbc_targets[0].path #=> String
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions #=> Array
     #   resp.crawlers[0].targets.jdbc_targets[0].exclusions[0] #=> String
+    #   resp.crawlers[0].targets.dynamo_db_targets #=> Array
+    #   resp.crawlers[0].targets.dynamo_db_targets[0].path #=> String
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -2541,6 +2547,13 @@ module Aws::Glue
     #           param: false,
     #         },
     #       ],
+    #       dynamo_db: [
+    #         {
+    #           name: "CodeGenArgName", # required
+    #           value: "CodeGenArgValue", # required
+    #           param: false,
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -2788,6 +2801,13 @@ module Aws::Glue
     #         },
     #       ],
     #       s3: [
+    #         {
+    #           name: "CodeGenArgName", # required
+    #           value: "CodeGenArgValue", # required
+    #           param: false,
+    #         },
+    #       ],
+    #       dynamo_db: [
     #         {
     #           name: "CodeGenArgName", # required
     #           value: "CodeGenArgValue", # required
@@ -3436,7 +3456,12 @@ module Aws::Glue
     end
 
     # Starts a crawl using the specified crawler, regardless of what is
-    # scheduled. If the crawler is already running, does nothing.
+    # scheduled. If the crawler is already running, returns a
+    # [CrawlerRunningException][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-exceptions.html#aws-glue-api-exceptions-CrawlerRunningException
     #
     # @option params [required, String] :name
     #   Name of the crawler to start.
@@ -3784,8 +3809,9 @@ module Aws::Glue
     #
     # @option params [Array<String>] :classifiers
     #   A list of custom classifiers that the user has registered. By default,
-    #   all classifiers are included in a crawl, but these custom classifiers
-    #   always override the default classifiers for a given classification.
+    #   all built-in classifiers are included in a crawl, but these custom
+    #   classifiers always override the default classifiers for a given
+    #   classification.
     #
     # @option params [String] :table_prefix
     #   The table prefix used for catalog tables that are created.
@@ -3795,16 +3821,12 @@ module Aws::Glue
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such as
-    #   classification, input format, output format, serde information, and
-    #   schema from their parent table, rather than detect this information
-    #   separately for each partition. Use the following JSON string to
-    #   specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3827,6 +3849,11 @@ module Aws::Glue
     #           connection_name: "ConnectionName",
     #           path: "Path",
     #           exclusions: ["Path"],
+    #         },
+    #       ],
+    #       dynamo_db_targets: [
+    #         {
+    #           path: "Path",
     #         },
     #       ],
     #     },
@@ -4334,7 +4361,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -56,6 +56,7 @@ module Aws::AppStream
     DescribeFleetsResult = Shapes::StructureShape.new(name: 'DescribeFleetsResult')
     DescribeImageBuildersRequest = Shapes::StructureShape.new(name: 'DescribeImageBuildersRequest')
     DescribeImageBuildersResult = Shapes::StructureShape.new(name: 'DescribeImageBuildersResult')
+    DescribeImagesMaxResults = Shapes::IntegerShape.new(name: 'DescribeImagesMaxResults')
     DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
     DescribeImagesResult = Shapes::StructureShape.new(name: 'DescribeImagesResult')
     DescribeSessionsRequest = Shapes::StructureShape.new(name: 'DescribeSessionsRequest')
@@ -334,9 +335,12 @@ module Aws::AppStream
     DescribeImageBuildersResult.struct_class = Types::DescribeImageBuildersResult
 
     DescribeImagesRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "Names"))
+    DescribeImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeImagesMaxResults, location_name: "MaxResults"))
     DescribeImagesRequest.struct_class = Types::DescribeImagesRequest
 
     DescribeImagesResult.add_member(:images, Shapes::ShapeRef.new(shape: ImageList, location_name: "Images"))
+    DescribeImagesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeImagesResult.struct_class = Types::DescribeImagesResult
 
     DescribeSessionsRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))

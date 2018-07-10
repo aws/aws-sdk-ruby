@@ -494,6 +494,7 @@ module Aws::CodeBuild
     #   resp.builds[0].source.buildspec #=> String
     #   resp.builds[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.builds[0].source.auth.resource #=> String
+    #   resp.builds[0].source.report_build_status #=> Boolean
     #   resp.builds[0].source.insecure_ssl #=> Boolean
     #   resp.builds[0].artifacts.location #=> String
     #   resp.builds[0].artifacts.sha256sum #=> String
@@ -563,6 +564,7 @@ module Aws::CodeBuild
     #   resp.projects[0].source.buildspec #=> String
     #   resp.projects[0].source.auth.type #=> String, one of "OAUTH"
     #   resp.projects[0].source.auth.resource #=> String
+    #   resp.projects[0].source.report_build_status #=> Boolean
     #   resp.projects[0].source.insecure_ssl #=> Boolean
     #   resp.projects[0].artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.projects[0].artifacts.location #=> String
@@ -682,6 +684,7 @@ module Aws::CodeBuild
     #         type: "OAUTH", # required, accepts OAUTH
     #         resource: "String",
     #       },
+    #       report_build_status: false,
     #       insecure_ssl: false,
     #     },
     #     artifacts: { # required
@@ -738,6 +741,7 @@ module Aws::CodeBuild
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
+    #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
@@ -1167,6 +1171,11 @@ module Aws::CodeBuild
     #   code. This override applies only if the build's source is GitHub
     #   Enterprise.
     #
+    # @option params [Boolean] :report_build_status_override
+    #   Set to true to report to your source provider the status of a build's
+    #   start and completion. If you use this option with a source provider
+    #   other than GitHub, an invalidInputException is thrown.
+    #
     # @option params [String] :environment_type_override
     #   A container type for this build that overrides the one specified in
     #   the build project.
@@ -1239,6 +1248,7 @@ module Aws::CodeBuild
     #     git_clone_depth_override: 1,
     #     buildspec_override: "String",
     #     insecure_ssl_override: false,
+    #     report_build_status_override: false,
     #     environment_type_override: "WINDOWS_CONTAINER", # accepts WINDOWS_CONTAINER, LINUX_CONTAINER
     #     image_override: "NonEmptyString",
     #     compute_type_override: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
@@ -1278,6 +1288,7 @@ module Aws::CodeBuild
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
+    #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
@@ -1357,6 +1368,7 @@ module Aws::CodeBuild
     #   resp.build.source.buildspec #=> String
     #   resp.build.source.auth.type #=> String, one of "OAUTH"
     #   resp.build.source.auth.resource #=> String
+    #   resp.build.source.report_build_status #=> Boolean
     #   resp.build.source.insecure_ssl #=> Boolean
     #   resp.build.artifacts.location #=> String
     #   resp.build.artifacts.sha256sum #=> String
@@ -1472,6 +1484,7 @@ module Aws::CodeBuild
     #         type: "OAUTH", # required, accepts OAUTH
     #         resource: "String",
     #       },
+    #       report_build_status: false,
     #       insecure_ssl: false,
     #     },
     #     artifacts: {
@@ -1528,6 +1541,7 @@ module Aws::CodeBuild
     #   resp.project.source.buildspec #=> String
     #   resp.project.source.auth.type #=> String, one of "OAUTH"
     #   resp.project.source.auth.resource #=> String
+    #   resp.project.source.report_build_status #=> Boolean
     #   resp.project.source.insecure_ssl #=> Boolean
     #   resp.project.artifacts.type #=> String, one of "CODEPIPELINE", "S3", "NO_ARTIFACTS"
     #   resp.project.artifacts.location #=> String
@@ -1633,7 +1647,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -30,6 +30,7 @@ module Aws::OpsWorks
       @id
     end
 
+    # The Amazon Resource Number (ARN) of a layer.
     # @return [String]
     def arn
       data[:arn]

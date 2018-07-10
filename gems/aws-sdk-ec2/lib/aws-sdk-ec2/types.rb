@@ -2492,12 +2492,10 @@ module Aws::EC2
     #   the destination region in a `PresignedUrl` parameter, where it is
     #   required.
     #
-    #   <note markdown="1"> `CopySnapshot` sends the snapshot copy to the regional endpoint that
-    #   you send the HTTP request to, such as `ec2.us-east-1.amazonaws.com`
-    #   (in the AWS CLI, this is specified with the `--region` parameter or
-    #   the default region in your AWS configuration file).
-    #
-    #    </note>
+    #   The snapshot copy is sent to the regional endpoint that you sent the
+    #   HTTP request to (for example, `ec2.us-east-1.amazonaws.com`). With
+    #   the AWS CLI, this is specified using the `--region` parameter or the
+    #   default region in your AWS configuration file.
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -3484,7 +3482,7 @@ module Aws::EC2
     #               private_ip_addresses: [
     #                 {
     #                   primary: false,
-    #                   private_ip_address: "String", # required
+    #                   private_ip_address: "String",
     #                 },
     #               ],
     #               secondary_private_ip_address_count: 1,
@@ -3539,6 +3537,10 @@ module Aws::EC2
     #           },
     #           credit_specification: {
     #             cpu_credits: "String", # required
+    #           },
+    #           cpu_options: {
+    #             core_count: 1,
+    #             threads_per_core: 1,
     #           },
     #         },
     #       }
@@ -3645,7 +3647,7 @@ module Aws::EC2
     #               private_ip_addresses: [
     #                 {
     #                   primary: false,
-    #                   private_ip_address: "String", # required
+    #                   private_ip_address: "String",
     #                 },
     #               ],
     #               secondary_private_ip_address_count: 1,
@@ -3700,6 +3702,10 @@ module Aws::EC2
     #           },
     #           credit_specification: {
     #             cpu_credits: "String", # required
+    #           },
+    #           cpu_options: {
+    #             core_count: 1,
+    #             threads_per_core: 1,
     #           },
     #         },
     #       }
@@ -4053,7 +4059,7 @@ module Aws::EC2
     #         private_ip_addresses: [
     #           {
     #             primary: false,
-    #             private_ip_address: "String", # required
+    #             private_ip_address: "String",
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
@@ -4789,7 +4795,7 @@ module Aws::EC2
     #   The number of I/O operations per second (IOPS) to provision for the
     #   volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000
     #   IOPS for volumes in most regions. For exceptions, see [Amazon EBS
-    #   Volume Types][1].
+    #   Volume Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
     #
@@ -18468,7 +18474,7 @@ module Aws::EC2
     #         private_ip_addresses: [
     #           {
     #             primary: false,
-    #             private_ip_address: "String", # required
+    #             private_ip_address: "String",
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
@@ -19363,6 +19369,53 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The CPU options for the instance.
+    #
+    # @!attribute [rw] core_count
+    #   The number of CPU cores for the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads per CPU core.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptions AWS API Documentation
+    #
+    class LaunchTemplateCpuOptions < Struct.new(
+      :core_count,
+      :threads_per_core)
+      include Aws::Structure
+    end
+
+    # The CPU options for the instance. Both the core count and threads per
+    # core must be specified in the request.
+    #
+    # @note When making an API call, you may pass LaunchTemplateCpuOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_count: 1,
+    #         threads_per_core: 1,
+    #       }
+    #
+    # @!attribute [rw] core_count
+    #   The number of CPU cores for the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] threads_per_core
+    #   The number of threads per CPU core. To disable Intel Hyper-Threading
+    #   Technology for the instance, specify a value of 1. Otherwise,
+    #   specify the default value of 2.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateCpuOptionsRequest AWS API Documentation
+    #
+    class LaunchTemplateCpuOptionsRequest < Struct.new(
+      :core_count,
+      :threads_per_core)
+      include Aws::Structure
+    end
+
     # Describes a block device for an EBS volume.
     #
     # @!attribute [rw] encrypted
@@ -19669,7 +19722,7 @@ module Aws::EC2
     #         private_ip_addresses: [
     #           {
     #             primary: false,
-    #             private_ip_address: "String", # required
+    #             private_ip_address: "String",
     #           },
     #         ],
     #         secondary_private_ip_address_count: 1,
@@ -21199,12 +21252,8 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] attribute
-    #   The snapshot attribute to modify.
-    #
-    #   <note markdown="1"> Only volume creation permissions may be modified at the customer
-    #   level.
-    #
-    #    </note>
+    #   The snapshot attribute to modify. Only volume creation permissions
+    #   can be modified.
     #   @return [String]
     #
     # @!attribute [rw] create_volume_permission
@@ -21402,10 +21451,10 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] size
-    #   Target size in GiB of the volume to be modified. Target volume size
-    #   must be greater than or equal to than the existing size of the
-    #   volume. For information about available EBS volume sizes, see
-    #   [http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html][1].
+    #   The target size of the volume, in GiB. The target volume size must
+    #   be greater than or equal to than the existing size of the volume.
+    #   For information about available EBS volume sizes, see [Amazon EBS
+    #   Volume Types][1].
     #
     #   Default: If no size is specified, the existing size is retained.
     #
@@ -21415,20 +21464,16 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   Target EBS volume type of the volume to be modified
-    #
-    #   The API does not support modifications for volume type `standard`.
-    #   You also cannot change the type of a volume to `standard`.
+    #   The target EBS volume type of the volume.
     #
     #   Default: If no type is specified, the existing type is retained.
     #   @return [String]
     #
     # @!attribute [rw] iops
-    #   Target IOPS rate of the volume to be modified.
+    #   The target IOPS rate of the volume.
     #
-    #   Only valid for Provisioned IOPS SSD (`io1`) volumes. For more
-    #   information about `io1` IOPS configuration, see
-    #   [http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes\_piops][1].
+    #   This is only valid for Provisioned IOPS SSD (`io1`) volumes. For
+    #   more information, see [Provisioned IOPS SSD (io1) Volumes][1].
     #
     #   Default: If no IOPS value is specified, the existing value is
     #   retained.
@@ -21450,7 +21495,7 @@ module Aws::EC2
     end
 
     # @!attribute [rw] volume_modification
-    #   A VolumeModification object.
+    #   Information about the volume modification.
     #   @return [Types::VolumeModification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeResult AWS API Documentation
@@ -22977,7 +23022,7 @@ module Aws::EC2
     #
     #       {
     #         primary: false,
-    #         private_ip_address: "String", # required
+    #         private_ip_address: "String",
     #       }
     #
     # @!attribute [rw] primary
@@ -24208,7 +24253,7 @@ module Aws::EC2
     #             private_ip_addresses: [
     #               {
     #                 primary: false,
-    #                 private_ip_address: "String", # required
+    #                 private_ip_address: "String",
     #               },
     #             ],
     #             secondary_private_ip_address_count: 1,
@@ -24263,6 +24308,10 @@ module Aws::EC2
     #         },
     #         credit_specification: {
     #           cpu_credits: "String", # required
+    #         },
+    #         cpu_options: {
+    #           core_count: 1,
+    #           threads_per_core: 1,
     #         },
     #       }
     #
@@ -24406,6 +24455,16 @@ module Aws::EC2
     #   instances only.
     #   @return [Types::CreditSpecificationRequest]
     #
+    # @!attribute [rw] cpu_options
+    #   The CPU options for the instance. For more information, see
+    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #   @return [Types::LaunchTemplateCpuOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -24428,7 +24487,8 @@ module Aws::EC2
       :security_group_ids,
       :security_groups,
       :instance_market_options,
-      :credit_specification)
+      :credit_specification,
+      :cpu_options)
       include Aws::Structure
     end
 
@@ -24501,7 +24561,7 @@ module Aws::EC2
     #                   private_ip_addresses: [
     #                     {
     #                       primary: false,
-    #                       private_ip_address: "String", # required
+    #                       private_ip_address: "String",
     #                     },
     #                   ],
     #                   secondary_private_ip_address_count: 1,
@@ -24671,7 +24731,7 @@ module Aws::EC2
     #               private_ip_addresses: [
     #                 {
     #                   primary: false,
-    #                   private_ip_address: "String", # required
+    #                   private_ip_address: "String",
     #                 },
     #               ],
     #               secondary_private_ip_address_count: 1,
@@ -24887,7 +24947,7 @@ module Aws::EC2
     #             private_ip_addresses: [
     #               {
     #                 primary: false,
-    #                 private_ip_address: "String", # required
+    #                 private_ip_address: "String",
     #               },
     #             ],
     #             secondary_private_ip_address_count: 1,
@@ -25807,6 +25867,16 @@ module Aws::EC2
     #   The credit option for CPU usage of the instance.
     #   @return [Types::CreditSpecification]
     #
+    # @!attribute [rw] cpu_options
+    #   The CPU options for the instance. For more information, see
+    #   [Optimizing CPU Options][1] in the *Amazon Elastic Compute Cloud
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html
+    #   @return [Types::LaunchTemplateCpuOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -25829,7 +25899,8 @@ module Aws::EC2
       :security_group_ids,
       :security_groups,
       :instance_market_options,
-      :credit_specification)
+      :credit_specification,
+      :cpu_options)
       include Aws::Structure
     end
 
@@ -26375,7 +26446,7 @@ module Aws::EC2
     #             private_ip_addresses: [
     #               {
     #                 primary: false,
-    #                 private_ip_address: "String", # required
+    #                 private_ip_address: "String",
     #               },
     #             ],
     #             secondary_private_ip_address_count: 1,
@@ -28281,7 +28352,7 @@ module Aws::EC2
     #             private_ip_addresses: [
     #               {
     #                 primary: false,
-    #                 private_ip_address: "String", # required
+    #                 private_ip_address: "String",
     #               },
     #             ],
     #             secondary_private_ip_address_count: 1,
@@ -28562,7 +28633,7 @@ module Aws::EC2
     #                 private_ip_addresses: [
     #                   {
     #                     primary: false,
-    #                     private_ip_address: "String", # required
+    #                     private_ip_address: "String",
     #                   },
     #                 ],
     #                 secondary_private_ip_address_count: 1,
@@ -30504,7 +30575,7 @@ module Aws::EC2
     #   number of IOPS that are provisioned for the volume. For General
     #   Purpose SSD volumes, this represents the baseline performance of the
     #   volume and the rate at which the volume accumulates I/O credits for
-    #   bursting. For more information on General Purpose SSD baseline
+    #   bursting. For more information about General Purpose SSD baseline
     #   performance, I/O credits, and bursting, see [Amazon EBS Volume
     #   Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
@@ -30612,52 +30683,52 @@ module Aws::EC2
     # null.
     #
     # @!attribute [rw] volume_id
-    #   ID of the volume being modified.
+    #   The ID of the volume.
     #   @return [String]
     #
     # @!attribute [rw] modification_state
-    #   Current state of modification. Modification state is null for
+    #   The current modification state. The modification state is null for
     #   unmodified volumes.
     #   @return [String]
     #
     # @!attribute [rw] status_message
-    #   Generic status message on modification progress or failure.
+    #   A status message about the modification progress or failure.
     #   @return [String]
     #
     # @!attribute [rw] target_size
-    #   Target size of the volume being modified.
+    #   The target size of the volume, in GiB.
     #   @return [Integer]
     #
     # @!attribute [rw] target_iops
-    #   Target IOPS rate of the volume being modified.
+    #   The target IOPS rate of the volume.
     #   @return [Integer]
     #
     # @!attribute [rw] target_volume_type
-    #   Target EBS volume type of the volume being modified.
+    #   The target EBS volume type of the volume.
     #   @return [String]
     #
     # @!attribute [rw] original_size
-    #   Original size of the volume being modified.
+    #   The original size of the volume.
     #   @return [Integer]
     #
     # @!attribute [rw] original_iops
-    #   Original IOPS rate of the volume being modified.
+    #   The original IOPS rate of the volume.
     #   @return [Integer]
     #
     # @!attribute [rw] original_volume_type
-    #   Original EBS volume type of the volume being modified.
+    #   The original EBS volume type of the volume.
     #   @return [String]
     #
     # @!attribute [rw] progress
-    #   Modification progress from 0 to 100%.
+    #   The modification progress, from 0 to 100 percent complete.
     #   @return [Integer]
     #
     # @!attribute [rw] start_time
-    #   Modification start time
+    #   The modification start time.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   Modification completion or failure time.
+    #   The modification completion or failure time.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeModification AWS API Documentation

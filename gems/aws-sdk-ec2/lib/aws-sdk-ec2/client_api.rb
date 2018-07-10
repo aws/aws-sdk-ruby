@@ -698,6 +698,8 @@ module Aws::EC2
     LaunchTemplateBlockDeviceMappingRequestList = Shapes::ListShape.new(name: 'LaunchTemplateBlockDeviceMappingRequestList')
     LaunchTemplateConfig = Shapes::StructureShape.new(name: 'LaunchTemplateConfig')
     LaunchTemplateConfigList = Shapes::ListShape.new(name: 'LaunchTemplateConfigList')
+    LaunchTemplateCpuOptions = Shapes::StructureShape.new(name: 'LaunchTemplateCpuOptions')
+    LaunchTemplateCpuOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateCpuOptionsRequest')
     LaunchTemplateEbsBlockDevice = Shapes::StructureShape.new(name: 'LaunchTemplateEbsBlockDevice')
     LaunchTemplateEbsBlockDeviceRequest = Shapes::StructureShape.new(name: 'LaunchTemplateEbsBlockDeviceRequest')
     LaunchTemplateErrorCode = Shapes::StringShape.new(name: 'LaunchTemplateErrorCode')
@@ -4103,6 +4105,14 @@ module Aws::EC2
 
     LaunchTemplateConfigList.member = Shapes::ShapeRef.new(shape: LaunchTemplateConfig, location_name: "item")
 
+    LaunchTemplateCpuOptions.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "coreCount"))
+    LaunchTemplateCpuOptions.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "threadsPerCore"))
+    LaunchTemplateCpuOptions.struct_class = Types::LaunchTemplateCpuOptions
+
+    LaunchTemplateCpuOptionsRequest.add_member(:core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "CoreCount"))
+    LaunchTemplateCpuOptionsRequest.add_member(:threads_per_core, Shapes::ShapeRef.new(shape: Integer, location_name: "ThreadsPerCore"))
+    LaunchTemplateCpuOptionsRequest.struct_class = Types::LaunchTemplateCpuOptionsRequest
+
     LaunchTemplateEbsBlockDevice.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     LaunchTemplateEbsBlockDevice.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
     LaunchTemplateEbsBlockDevice.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "iops"))
@@ -4732,7 +4742,7 @@ module Aws::EC2
     PrivateIpAddressConfigSet.member = Shapes::ShapeRef.new(shape: ScheduledInstancesPrivateIpAddressConfig, location_name: "PrivateIpAddressConfigSet")
 
     PrivateIpAddressSpecification.add_member(:primary, Shapes::ShapeRef.new(shape: Boolean, location_name: "primary"))
-    PrivateIpAddressSpecification.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, required: true, location_name: "privateIpAddress"))
+    PrivateIpAddressSpecification.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
     PrivateIpAddressSpecification.struct_class = Types::PrivateIpAddressSpecification
 
     PrivateIpAddressSpecificationList.member = Shapes::ShapeRef.new(shape: PrivateIpAddressSpecification, location_name: "item")
@@ -4959,6 +4969,7 @@ module Aws::EC2
     RequestLaunchTemplateData.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroupStringList, location_name: "SecurityGroup"))
     RequestLaunchTemplateData.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMarketOptionsRequest, location_name: "InstanceMarketOptions"))
     RequestLaunchTemplateData.add_member(:credit_specification, Shapes::ShapeRef.new(shape: CreditSpecificationRequest, location_name: "CreditSpecification"))
+    RequestLaunchTemplateData.add_member(:cpu_options, Shapes::ShapeRef.new(shape: LaunchTemplateCpuOptionsRequest, location_name: "CpuOptions"))
     RequestLaunchTemplateData.struct_class = Types::RequestLaunchTemplateData
 
     RequestSpotFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -5183,6 +5194,7 @@ module Aws::EC2
     ResponseLaunchTemplateData.add_member(:security_groups, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "securityGroupSet"))
     ResponseLaunchTemplateData.add_member(:instance_market_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMarketOptions, location_name: "instanceMarketOptions"))
     ResponseLaunchTemplateData.add_member(:credit_specification, Shapes::ShapeRef.new(shape: CreditSpecification, location_name: "creditSpecification"))
+    ResponseLaunchTemplateData.add_member(:cpu_options, Shapes::ShapeRef.new(shape: LaunchTemplateCpuOptions, location_name: "cpuOptions"))
     ResponseLaunchTemplateData.struct_class = Types::ResponseLaunchTemplateData
 
     RestorableByStringList.member = Shapes::ShapeRef.new(shape: String)

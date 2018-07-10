@@ -550,16 +550,16 @@ module Aws::Glue
       include Aws::Structure
     end
 
-    # Classifiers are written in Python and triggered during a crawl task.
-    # You can write your own classifiers to best categorize your data
-    # sources and specify the appropriate schemas to use for them. A
-    # classifier checks whether a given file is in a format it can handle,
-    # and if it is, the classifier creates a schema in the form of a
-    # `StructType` object that matches that data format.
+    # Classifiers are triggered during a crawl task. A classifier checks
+    # whether a given file is in a format it can handle, and if it is, the
+    # classifier creates a schema in the form of a `StructType` object that
+    # matches that data format.
     #
-    # A classifier can be a `grok` classifier, an XML classifier, or a JSON
-    # classifier, asspecified in one of the fields in the `Classifier`
-    # object.
+    # You can use the standard classifiers that AWS Glue supplies, or you
+    # can write your own classifiers to best categorize your data sources
+    # and specify the appropriate schemas to use for them. A classifier can
+    # be a `grok` classifier, an `XML` classifier, or a `JSON` classifier,
+    # as specified in one of the fields in the `Classifier` object.
     #
     # @!attribute [rw] grok_classifier
     #   A `GrokClassifier` object.
@@ -962,16 +962,12 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such
-    #   as classification, input format, output format, serde information,
-    #   and schema from their parent table, rather than detect this
-    #   information separately for each partition. Use the following JSON
-    #   string to specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
@@ -1064,6 +1060,11 @@ module Aws::Glue
     #             exclusions: ["Path"],
     #           },
     #         ],
+    #         dynamo_db_targets: [
+    #           {
+    #             path: "Path",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] s3_targets
@@ -1074,11 +1075,16 @@ module Aws::Glue
     #   Specifies JDBC targets.
     #   @return [Array<Types::JdbcTarget>]
     #
+    # @!attribute [rw] dynamo_db_targets
+    #   Specifies DynamoDB targets.
+    #   @return [Array<Types::DynamoDBTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerTargets AWS API Documentation
     #
     class CrawlerTargets < Struct.new(
       :s3_targets,
-      :jdbc_targets)
+      :jdbc_targets,
+      :dynamo_db_targets)
       include Aws::Structure
     end
 
@@ -1192,6 +1198,11 @@ module Aws::Glue
     #               exclusions: ["Path"],
     #             },
     #           ],
+    #           dynamo_db_targets: [
+    #             {
+    #               path: "Path",
+    #             },
+    #           ],
     #         },
     #         schedule: "CronExpression",
     #         classifiers: ["NameString"],
@@ -1237,7 +1248,7 @@ module Aws::Glue
     #
     # @!attribute [rw] classifiers
     #   A list of custom classifiers that the user has registered. By
-    #   default, all AWS classifiers are included in a crawl, but these
+    #   default, all built-in classifiers are included in a crawl, but these
     #   custom classifiers always override the default classifiers for a
     #   given classification.
     #   @return [Array<String>]
@@ -1252,16 +1263,12 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such
-    #   as classification, input format, output format, serde information,
-    #   and schema from their parent table, rather than detect this
-    #   information separately for each partition. Use the following JSON
-    #   string to specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerRequest AWS API Documentation
@@ -2683,6 +2690,26 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a DynamoDB table to crawl.
+    #
+    # @note When making an API call, you may pass DynamoDBTarget
+    #   data as a hash:
+    #
+    #       {
+    #         path: "Path",
+    #       }
+    #
+    # @!attribute [rw] path
+    #   The name of the DynamoDB table to crawl.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamoDBTarget AWS API Documentation
+    #
+    class DynamoDBTarget < Struct.new(
+      :path)
+      include Aws::Structure
+    end
+
     # Contains details about an error.
     #
     # @!attribute [rw] error_code
@@ -3437,6 +3464,13 @@ module Aws::Glue
     #               param: false,
     #             },
     #           ],
+    #           dynamo_db: [
+    #             {
+    #               name: "CodeGenArgName", # required
+    #               value: "CodeGenArgValue", # required
+    #               param: false,
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -3629,6 +3663,13 @@ module Aws::Glue
     #             },
     #           ],
     #           s3: [
+    #             {
+    #               name: "CodeGenArgName", # required
+    #               value: "CodeGenArgValue", # required
+    #               param: false,
+    #             },
+    #           ],
+    #           dynamo_db: [
     #             {
     #               name: "CodeGenArgName", # required
     #               value: "CodeGenArgValue", # required
@@ -4692,6 +4733,13 @@ module Aws::Glue
     #             param: false,
     #           },
     #         ],
+    #         dynamo_db: [
+    #           {
+    #             name: "CodeGenArgName", # required
+    #             value: "CodeGenArgValue", # required
+    #             param: false,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] jdbc
@@ -4702,11 +4750,16 @@ module Aws::Glue
     #   An Amazon S3 location.
     #   @return [Array<Types::CodeGenNodeArg>]
     #
+    # @!attribute [rw] dynamo_db
+    #   A DynamoDB Table location.
+    #   @return [Array<Types::CodeGenNodeArg>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Location AWS API Documentation
     #
     class Location < Struct.new(
       :jdbc,
-      :s3)
+      :s3,
+      :dynamo_db)
       include Aws::Structure
     end
 
@@ -6193,6 +6246,11 @@ module Aws::Glue
     #               exclusions: ["Path"],
     #             },
     #           ],
+    #           dynamo_db_targets: [
+    #             {
+    #               path: "Path",
+    #             },
+    #           ],
     #         },
     #         schedule: "CronExpression",
     #         classifiers: ["NameString"],
@@ -6238,9 +6296,9 @@ module Aws::Glue
     #
     # @!attribute [rw] classifiers
     #   A list of custom classifiers that the user has registered. By
-    #   default, all classifiers are included in a crawl, but these custom
-    #   classifiers always override the default classifiers for a given
-    #   classification.
+    #   default, all built-in classifiers are included in a crawl, but these
+    #   custom classifiers always override the default classifiers for a
+    #   given classification.
     #   @return [Array<String>]
     #
     # @!attribute [rw] table_prefix
@@ -6253,16 +6311,12 @@ module Aws::Glue
     #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
-    #   users to specify aspects of a Crawler's behavior.
+    #   users to specify aspects of a crawler's behavior. For more
+    #   information, see [Configuring a Crawler][1].
     #
-    #   You can use this field to force partitions to inherit metadata such
-    #   as classification, input format, output format, serde information,
-    #   and schema from their parent table, rather than detect this
-    #   information separately for each partition. Use the following JSON
-    #   string to specify that behavior:
     #
-    #   Example: `'\{ "Version": 1.0, "CrawlerOutput": \{ "Partitions": \{
-    #   "AddOrUpdateBehavior": "InheritFromTable" \} \} \}'`
+    #
+    #   [1]: http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerRequest AWS API Documentation
