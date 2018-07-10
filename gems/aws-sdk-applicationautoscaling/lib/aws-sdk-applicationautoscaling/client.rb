@@ -179,8 +179,10 @@ module Aws::ApplicationAutoScaling
     #   The name of the scaling policy.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -219,6 +221,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
@@ -252,6 +259,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -293,8 +303,10 @@ module Aws::ApplicationAutoScaling
     # Deletes the specified Application Auto Scaling scheduled action.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -336,6 +348,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
@@ -370,6 +387,9 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
     #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -399,8 +419,10 @@ module Aws::ApplicationAutoScaling
     # RegisterScalableTarget.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -439,6 +461,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -473,6 +500,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -520,8 +550,10 @@ module Aws::ApplicationAutoScaling
     # you can deregister it using DeregisterScalableTarget.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -561,6 +593,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -596,6 +633,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable targets. This value can be between 1
@@ -682,8 +722,10 @@ module Aws::ApplicationAutoScaling
     # policy or update an existing one, see PutScalingPolicy.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -723,6 +765,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property. If you specify a scalable
@@ -757,6 +804,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable targets. This value can be between 1
@@ -854,8 +904,10 @@ module Aws::ApplicationAutoScaling
     #   The names of the scaling policies to describe.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -895,6 +947,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property. If you specify a scalable
@@ -929,6 +986,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable targets. This value can be between 1
@@ -1058,8 +1118,10 @@ module Aws::ApplicationAutoScaling
     #   The names of the scheduled actions to describe.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1099,6 +1161,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property. If you specify a scalable
@@ -1133,6 +1200,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scheduled action results. This value can be
@@ -1209,8 +1279,10 @@ module Aws::ApplicationAutoScaling
     #   The name of the scaling policy.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1249,6 +1321,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
@@ -1282,6 +1359,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
     #
     # @option params [String] :policy_type
     #   The policy type. This parameter is required if you are creating a
@@ -1446,8 +1526,10 @@ module Aws::ApplicationAutoScaling
     # DeleteScheduledAction.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1468,11 +1550,12 @@ module Aws::ApplicationAutoScaling
     #   For rate expressions, *value* is a positive integer and *unit* is
     #   `minute` \| `minutes` \| `hour` \| `hours` \| `day` \| `days`.
     #
-    #   For more information about cron expressions, see [Cron][1].
+    #   For more information about cron expressions, see [Cron Expressions][1]
+    #   in the *Amazon CloudWatch Events User Guide*.
     #
     #
     #
-    #   [1]: https://en.wikipedia.org/wiki/Cron
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
     #
     # @option params [required, String] :scheduled_action_name
     #   The name of the scheduled action.
@@ -1510,6 +1593,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This parameter is required if you are creating
     #   a scheduled action. This string consists of the service namespace,
@@ -1544,6 +1632,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
+    #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The date and time for the scheduled action to start.
@@ -1598,8 +1689,10 @@ module Aws::ApplicationAutoScaling
     # DeregisterScalableTarget.
     #
     # @option params [required, String] :service_namespace
-    #   The namespace of the AWS service. For more information, see [AWS
-    #   Service Namespaces][1] in the *Amazon Web Services General Reference*.
+    #   The namespace of the AWS service that provides the resource or
+    #   `custom-resource` for a resource provided by your own application or
+    #   service. For more information, see [AWS Service Namespaces][1] in the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -1638,6 +1731,11 @@ module Aws::ApplicationAutoScaling
     #     and the unique identifier is the resource ID. Example:
     #     `endpoint/my-end-point/variant/KMeansClustering`.
     #
+    #   * Custom resources are not supported with a resource type. This
+    #     parameter must specify the `OutputValue` from the CloudFormation
+    #     template stack used to access the resources. The unique identifier
+    #     is defined by the service provider.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -1673,6 +1771,9 @@ module Aws::ApplicationAutoScaling
     #   * `sagemaker:variant:DesiredInstanceCount` - The number of EC2
     #     instances for an Amazon SageMaker model endpoint variant.
     #
+    #   * `custom-resource:ResourceType:Property` - The scalable dimension for
+    #     a custom resource provided by your own application or service.
+    #
     # @option params [Integer] :min_capacity
     #   The minimum value to scale to in response to a scale in event. This
     #   parameter is required if you are registering a scalable target.
@@ -1694,7 +1795,7 @@ module Aws::ApplicationAutoScaling
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ApplicationAutoScaling/latest/APIReference/application-autoscaling-service-linked-roles.html
+    #   [1]: http://docs.aws.amazon.com/autoscaling/application/userguide/application-autoscaling-service-linked-roles.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1764,7 +1865,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
