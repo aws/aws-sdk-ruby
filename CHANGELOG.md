@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.87 (2018-07-11)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::CostExplorer - Updated the API, and documentation for AWS Cost Explorer Service.
