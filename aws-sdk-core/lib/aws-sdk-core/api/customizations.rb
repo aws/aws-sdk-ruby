@@ -57,9 +57,12 @@ module Aws
 
         def is_eventstream?(api, shape_name)
           shape = api['shapes'][shape_name]
-          if shape['type'] == 'structure' && shape['payload']
-            payload_ref = shape['members'][shape['payload']]
-            api['shapes'][payload_ref['shape']]['eventstream']
+          if shape['type'] == 'structure'
+            eventstream = false
+            shape['members'].each do |_, m_ref|
+              eventstream ||= api['shapes'][m_ref['shape']]['eventstream']
+            end
+            eventstream
           else
             # non structure request/response shape
             # check if it's eventstream itself
