@@ -724,7 +724,7 @@ module Aws::CostExplorer
     #     account_scope: "PAYER", # accepts PAYER, LINKED
     #     lookback_period_in_days: "SEVEN_DAYS", # accepts SEVEN_DAYS, THIRTY_DAYS, SIXTY_DAYS
     #     term_in_years: "ONE_YEAR", # accepts ONE_YEAR, THREE_YEARS
-    #     payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT
+    #     payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
     #     service_specification: {
     #       ec2_specification: {
     #         offering_class: "STANDARD", # accepts STANDARD, CONVERTIBLE
@@ -742,7 +742,7 @@ module Aws::CostExplorer
     #   resp.recommendations[0].account_scope #=> String, one of "PAYER", "LINKED"
     #   resp.recommendations[0].lookback_period_in_days #=> String, one of "SEVEN_DAYS", "THIRTY_DAYS", "SIXTY_DAYS"
     #   resp.recommendations[0].term_in_years #=> String, one of "ONE_YEAR", "THREE_YEARS"
-    #   resp.recommendations[0].payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT"
+    #   resp.recommendations[0].payment_option #=> String, one of "NO_UPFRONT", "PARTIAL_UPFRONT", "ALL_UPFRONT", "LIGHT_UTILIZATION", "MEDIUM_UTILIZATION", "HEAVY_UTILIZATION"
     #   resp.recommendations[0].service_specification.ec2_specification.offering_class #=> String, one of "STANDARD", "CONVERTIBLE"
     #   resp.recommendations[0].recommendation_details #=> Array
     #   resp.recommendations[0].recommendation_details[0].instance_details.ec2_instance_details.family #=> String
@@ -762,6 +762,22 @@ module Aws::CostExplorer
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.license_model #=> String
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.current_generation #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].instance_details.rds_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.family #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.node_type #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.current_generation #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.redshift_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.family #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.node_type #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.product_description #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.current_generation #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.elasticache_instance_details.size_flex_eligible #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.instance_class #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.instance_size #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.region #=> String
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.current_generation #=> Boolean
+    #   resp.recommendations[0].recommendation_details[0].instance_details.es_instance_details.size_flex_eligible #=> Boolean
     #   resp.recommendations[0].recommendation_details[0].recommended_number_of_instances_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].recommended_normalized_units_to_purchase #=> String
     #   resp.recommendations[0].recommendation_details[0].minimum_number_of_instances_used_per_hour #=> String
@@ -1021,7 +1037,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

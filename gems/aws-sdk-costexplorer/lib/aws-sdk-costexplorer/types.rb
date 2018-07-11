@@ -229,6 +229,78 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # Details about the ES instances that AWS recommends that you purchase.
+    #
+    # @!attribute [rw] instance_class
+    #   The class of instance that AWS recommends.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_size
+    #   The size of instance that AWS recommends.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_generation
+    #   Whether the recommendation is for a current generation instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] size_flex_eligible
+    #   Whether the recommended reservation is size flexible.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ESInstanceDetails AWS API Documentation
+    #
+    class ESInstanceDetails < Struct.new(
+      :instance_class,
+      :instance_size,
+      :region,
+      :current_generation,
+      :size_flex_eligible)
+      include Aws::Structure
+    end
+
+    # Details about the ElastiCache instances that AWS recommends that you
+    # purchase.
+    #
+    # @!attribute [rw] family
+    #   The instance family of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The type of node that AWS recommends.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_description
+    #   The description of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_generation
+    #   Whether the recommendation is for a current generation instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] size_flex_eligible
+    #   Whether the recommended reservation is size flexible.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ElastiCacheInstanceDetails AWS API Documentation
+    #
+    class ElastiCacheInstanceDetails < Struct.new(
+      :family,
+      :node_type,
+      :region,
+      :product_description,
+      :current_generation,
+      :size_flex_eligible)
+      include Aws::Structure
+    end
+
     # Use `Expression` to filter by cost or by usage. There are two
     # patterns:
     #
@@ -938,7 +1010,7 @@ module Aws::CostExplorer
     #         account_scope: "PAYER", # accepts PAYER, LINKED
     #         lookback_period_in_days: "SEVEN_DAYS", # accepts SEVEN_DAYS, THIRTY_DAYS, SIXTY_DAYS
     #         term_in_years: "ONE_YEAR", # accepts ONE_YEAR, THREE_YEARS
-    #         payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT
+    #         payment_option: "NO_UPFRONT", # accepts NO_UPFRONT, PARTIAL_UPFRONT, ALL_UPFRONT, LIGHT_UTILIZATION, MEDIUM_UTILIZATION, HEAVY_UTILIZATION
     #         service_specification: {
     #           ec2_specification: {
     #             offering_class: "STANDARD", # accepts STANDARD, CONVERTIBLE
@@ -1293,11 +1365,26 @@ module Aws::CostExplorer
     #   The RDS instances that AWS recommends that you purchase.
     #   @return [Types::RDSInstanceDetails]
     #
+    # @!attribute [rw] redshift_instance_details
+    #   The Amazon Redshift instances that AWS recommends that you purchase.
+    #   @return [Types::RedshiftInstanceDetails]
+    #
+    # @!attribute [rw] elasticache_instance_details
+    #   The ElastiCache instances that AWS recommends that you purchase.
+    #   @return [Types::ElastiCacheInstanceDetails]
+    #
+    # @!attribute [rw] es_instance_details
+    #   The Amazon ES instances that AWS recommends that you purchase.
+    #   @return [Types::ESInstanceDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/InstanceDetails AWS API Documentation
     #
     class InstanceDetails < Struct.new(
       :ec2_instance_details,
-      :rds_instance_details)
+      :rds_instance_details,
+      :redshift_instance_details,
+      :elasticache_instance_details,
+      :es_instance_details)
       include Aws::Structure
     end
 
@@ -1369,6 +1456,40 @@ module Aws::CostExplorer
       :database_edition,
       :deployment_option,
       :license_model,
+      :current_generation,
+      :size_flex_eligible)
+      include Aws::Structure
+    end
+
+    # Details about the Amazon Redshift instances that AWS recommends that
+    # you purchase.
+    #
+    # @!attribute [rw] family
+    #   The instance family of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_type
+    #   The type of node that AWS recommends.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS Region of the recommended reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_generation
+    #   Whether the recommendation is for a current generation instance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] size_flex_eligible
+    #   Whether the recommended reservation is size flexible.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/RedshiftInstanceDetails AWS API Documentation
+    #
+    class RedshiftInstanceDetails < Struct.new(
+      :family,
+      :node_type,
+      :region,
       :current_generation,
       :size_flex_eligible)
       include Aws::Structure

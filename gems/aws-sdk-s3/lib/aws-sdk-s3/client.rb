@@ -5730,7 +5730,7 @@ module Aws::S3
     #             quote_character: "QuoteCharacter",
     #             allow_quoted_record_delimiter: false,
     #           },
-    #           compression_type: "NONE", # accepts NONE, GZIP
+    #           compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #           json: {
     #             type: "DOCUMENT", # accepts DOCUMENT, LINES
     #           },
@@ -5828,7 +5828,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #
     # @option params [String] :sse_customer_key
     #   The SSE Customer Key. For more information, go to [ Server-Side
@@ -5836,7 +5836,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #
     # @option params [String] :sse_customer_key_md5
     #   The SSE Customer Key MD5. For more information, go to [ Server-Side
@@ -5844,7 +5844,7 @@ module Aws::S3
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html
     #
     # @option params [required, String] :expression
     #   The expression that is used to query the object.
@@ -6010,7 +6010,7 @@ module Aws::S3
     #         quote_character: "QuoteCharacter",
     #         allow_quoted_record_delimiter: false,
     #       },
-    #       compression_type: "NONE", # accepts NONE, GZIP
+    #       compression_type: "NONE", # accepts NONE, GZIP, BZIP2
     #       json: {
     #         type: "DOCUMENT", # accepts DOCUMENT, LINES
     #       },
@@ -6384,7 +6384,7 @@ module Aws::S3
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3'
-      context[:gem_version] = '1.16.1'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

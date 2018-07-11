@@ -11073,6 +11073,37 @@ module Aws::SSM
     #   step.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] is_end
+    #   Enable this option to stop an Automation execution at the end of a
+    #   specific step. The Automation execution stops if the step execution
+    #   failed or succeeded.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] next_step
+    #   Specifies which step in an Automation to process next after
+    #   successfully completing a step.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_critical
+    #   Enable this option to designate a step as critical for the
+    #   successful completion of the Automation. If a step with this
+    #   designation fails, then Automation reports the final status of the
+    #   Automation as Failed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] valid_next_steps
+    #   ValidNextSteps offer different strategies for managing an Automation
+    #   workflow when a step finishes. Automation dynamically processes
+    #   ValidNextSteps when a step is completed. For example, you can
+    #   specify `Abort` to stop the Automation when a step fails or
+    #   `Continue` to ignore the failure of the current step and allow
+    #   Automation to continue processing the next step. You can also
+    #   specify `step:step_name ` to jump to a designated step after a step
+    #   succeeds. The result of the current step dynamically determines the
+    #   ValidNextSteps. If a step finishes and no ValidNextStep is
+    #   designated, then the Automation stops.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
     #
     class StepExecution < Struct.new(
@@ -11091,7 +11122,11 @@ module Aws::SSM
       :failure_message,
       :failure_details,
       :step_execution_id,
-      :overridden_parameters)
+      :overridden_parameters,
+      :is_end,
+      :next_step,
+      :is_critical,
+      :valid_next_steps)
       include Aws::Structure
     end
 

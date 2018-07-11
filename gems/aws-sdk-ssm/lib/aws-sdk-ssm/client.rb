@@ -1758,6 +1758,11 @@ module Aws::SSM
     #   resp.step_executions[0].overridden_parameters #=> Hash
     #   resp.step_executions[0].overridden_parameters["AutomationParameterKey"] #=> Array
     #   resp.step_executions[0].overridden_parameters["AutomationParameterKey"][0] #=> String
+    #   resp.step_executions[0].is_end #=> Boolean
+    #   resp.step_executions[0].next_step #=> String
+    #   resp.step_executions[0].is_critical #=> Boolean
+    #   resp.step_executions[0].valid_next_steps #=> Array
+    #   resp.step_executions[0].valid_next_steps[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationStepExecutions AWS API Documentation
@@ -3057,6 +3062,11 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].overridden_parameters #=> Hash
     #   resp.automation_execution.step_executions[0].overridden_parameters["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.step_executions[0].overridden_parameters["AutomationParameterKey"][0] #=> String
+    #   resp.automation_execution.step_executions[0].is_end #=> Boolean
+    #   resp.automation_execution.step_executions[0].next_step #=> String
+    #   resp.automation_execution.step_executions[0].is_critical #=> Boolean
+    #   resp.automation_execution.step_executions[0].valid_next_steps #=> Array
+    #   resp.automation_execution.step_executions[0].valid_next_steps[0] #=> String
     #   resp.automation_execution.step_executions_truncated #=> Boolean
     #   resp.automation_execution.parameters #=> Hash
     #   resp.automation_execution.parameters["AutomationParameterKey"] #=> Array
@@ -6795,7 +6805,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
