@@ -150,6 +150,22 @@ Known AWS regions include (not specific to this service):
         expect(client.example_operation.string).to eq('value')
       end
 
+      it 'allows api requests to be logged when stubbed' do 
+        client = client_class.new(stub_responses: {
+          example_operation: { string: 'value' }
+        })
+        expect(client.api_requests.length).to eq(0)
+        client.example_operation
+        expect(client.api_requests.length).to eq(1)
+      end
+
+      it 'raises an error when accessing api requests of a non stubbed client' do 
+        client = client_class.new(options.merge(stub_responses: false))
+        expect {
+          client.api_requests
+        }.to raise_error(NotImplementedError)
+      end
+
     end
   end
 end

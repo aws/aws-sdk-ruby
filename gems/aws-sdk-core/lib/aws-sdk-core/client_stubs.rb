@@ -26,7 +26,12 @@ module Aws
 
       requests = @api_requests
       self.handle do |context|
-        requests << context
+        requests << {
+          metadata: context.metadata,
+          request: context.http_request,
+          response: context.http_response,
+          context: context
+        }
         @handler.call(context)
       end
     end
@@ -178,13 +183,17 @@ module Aws
       end
     end
 
+    # Allows you to access all of the requests that the stubbed client has made
+    #
+    # @return [Array] Returns an array of the api requests made
+    # @raise [NotImplementedError] Raises `NotImplementedError` when the client is not stubbed
     def api_requests
       if config.stub_responses
         @api_requests
       else
-        msg = 'you must enable stubbing in order to client requests;'
-        msg << ' enable stubbing in the constructor with `:stub_responses => true`'
-        raise msg
+        msg = 'This method is only implemented for stubbed clients, and is '
+        msg << 'available when you enable stubbing in the constructor with `stub_responses: true`'
+        raise NotImplementedError.new(msg)
       end
     end
 
