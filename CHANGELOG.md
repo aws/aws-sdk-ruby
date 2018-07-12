@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
+
+* Feature - Aws::CodeBuild - Updated the API for AWS CodeBuild.
+
+* Feature - Aws::EFS - Updated the API, documentation, and integration test for Amazon Elastic File System.
+
+* Feature - Aws::EMR - Updated the API, documentation, and integration test for Amazon Elastic MapReduce.
+
+* Feature - Aws::IAM - Updated the API, documentation, and integration test for AWS Identity and Access Management.
+
+* Feature - Aws::DLM - Added support for a new service, Amazon Data Lifecycle Manager.
+
 2.11.87 (2018-07-11)
 ------------------
 

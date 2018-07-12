@@ -62,6 +62,7 @@ module Aws
     CostExplorer
     CostandUsageReportService
     DAX
+    DLM
     DataPipeline
     DatabaseMigrationService
     DeviceFarm

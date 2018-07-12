@@ -342,6 +342,7 @@ to be backwards compatible.
 | Amazon Cognito Sync                                   | CognitoSync                     | 2014-06-30  |
 | Amazon Comprehend                                     | Comprehend                      | 2017-11-27  |
 | Amazon Connect Service                                | Connect                         | 2017-08-08  |
+| Amazon Data Lifecycle Manager                         | DLM                             | 2018-01-12  |
 | Amazon DynamoDB                                       | DynamoDB                        | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)                     | DAX                             | 2017-04-19  |
 | Amazon DynamoDB Streams                               | DynamoDBStreams                 | 2012-08-10  |

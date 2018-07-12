@@ -154,6 +154,10 @@
     "models": "dax/2017-04-19",
     "endpoint": "dax"
   },
+  "DLM": {
+    "models": "dlm/2018-01-12",
+    "endpoint": "dlm"
+  },
   "DataPipeline": {
     "models": "datapipeline/2012-10-29",
     "endpoint": "datapipeline"
