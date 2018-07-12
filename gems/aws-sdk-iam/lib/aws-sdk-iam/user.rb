@@ -106,6 +106,20 @@ module Aws::IAM
       data[:password_last_used]
     end
 
+    # The ARN of the policy used to set the permissions boundary for the
+    # user.
+    #
+    # For more information about permissions boundaries, see [Permissions
+    # Boundaries for IAM Identities ][1] in the *IAM User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
+    # @return [Types::AttachedPermissionsBoundary]
+    def permissions_boundary
+      data[:permissions_boundary]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -319,6 +333,7 @@ module Aws::IAM
     #
     #   user = user.create({
     #     path: "pathType",
+    #     permissions_boundary: "arnType",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
@@ -339,6 +354,9 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
     #   [2]: http://wikipedia.org/wiki/regex
+    # @option options [String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the user.
     # @return [User]
     def create(options = {})
       options = options.merge(user_name: @name)

@@ -120,7 +120,7 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         name: "ResourceName", # required
     #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
+    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP
     #         service_role_arn: "String",
     #         dynamodb_config: {
     #           table_name: "String", # required
@@ -133,6 +133,9 @@ module Aws::AppSync
     #         elasticsearch_config: {
     #           endpoint: "String", # required
     #           aws_region: "String", # required
+    #         },
+    #         http_config: {
+    #           endpoint: "String",
     #         },
     #       }
     #
@@ -169,6 +172,10 @@ module Aws::AppSync
     #   Amazon Elasticsearch settings.
     #   @return [Types::ElasticsearchDataSourceConfig]
     #
+    # @!attribute [rw] http_config
+    #   Http endpoint settings.
+    #   @return [Types::HttpDataSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSourceRequest AWS API Documentation
     #
     class CreateDataSourceRequest < Struct.new(
@@ -179,7 +186,8 @@ module Aws::AppSync
       :service_role_arn,
       :dynamodb_config,
       :lambda_config,
-      :elasticsearch_config)
+      :elasticsearch_config,
+      :http_config)
       include Aws::Structure
     end
 
@@ -400,6 +408,8 @@ module Aws::AppSync
     #     you wish to invoke a GraphQL operation without connecting to a
     #     data source, such as performing data transformation with resolvers
     #     or triggering a subscription to be invoked from a mutation.
+    #
+    #   * **HTTP**\: The data source is an HTTP endpoint.
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -419,6 +429,10 @@ module Aws::AppSync
     #   Amazon Elasticsearch settings.
     #   @return [Types::ElasticsearchDataSourceConfig]
     #
+    # @!attribute [rw] http_config
+    #   Http endpoint settings.
+    #   @return [Types::HttpDataSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DataSource AWS API Documentation
     #
     class DataSource < Struct.new(
@@ -429,7 +443,8 @@ module Aws::AppSync
       :service_role_arn,
       :dynamodb_config,
       :lambda_config,
-      :elasticsearch_config)
+      :elasticsearch_config,
+      :http_config)
       include Aws::Structure
     end
 
@@ -899,6 +914,29 @@ module Aws::AppSync
       :open_id_connect_config,
       :arn,
       :uris)
+      include Aws::Structure
+    end
+
+    # Describes a Http data source configuration.
+    #
+    # @note When making an API call, you may pass HttpDataSourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint: "String",
+    #       }
+    #
+    # @!attribute [rw] endpoint
+    #   The Http url endpoint. You can either specify the domain name or ip
+    #   and port combination and the url scheme must be http(s). If the port
+    #   is not specified, AWS AppSync will use the default port 80 for http
+    #   endpoint and port 443 for https endpoints.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/HttpDataSourceConfig AWS API Documentation
+    #
+    class HttpDataSourceConfig < Struct.new(
+      :endpoint)
       include Aws::Structure
     end
 
@@ -1429,7 +1467,7 @@ module Aws::AppSync
     #         api_id: "String", # required
     #         name: "ResourceName", # required
     #         description: "String",
-    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
+    #         type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP
     #         service_role_arn: "String",
     #         dynamodb_config: {
     #           table_name: "String", # required
@@ -1442,6 +1480,9 @@ module Aws::AppSync
     #         elasticsearch_config: {
     #           endpoint: "String", # required
     #           aws_region: "String", # required
+    #         },
+    #         http_config: {
+    #           endpoint: "String",
     #         },
     #       }
     #
@@ -1477,6 +1518,10 @@ module Aws::AppSync
     #   The new Elasticsearch configuration.
     #   @return [Types::ElasticsearchDataSourceConfig]
     #
+    # @!attribute [rw] http_config
+    #   The new http endpoint configuration
+    #   @return [Types::HttpDataSourceConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceRequest AWS API Documentation
     #
     class UpdateDataSourceRequest < Struct.new(
@@ -1487,7 +1532,8 @@ module Aws::AppSync
       :service_role_arn,
       :dynamodb_config,
       :lambda_config,
-      :elasticsearch_config)
+      :elasticsearch_config,
+      :http_config)
       include Aws::Structure
     end
 

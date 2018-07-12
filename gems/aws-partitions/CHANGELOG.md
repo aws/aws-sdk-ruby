@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2018-07-12)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::DLM`.
+
 1.95.0 (2018-07-03)
 ------------------
 

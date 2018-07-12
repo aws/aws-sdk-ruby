@@ -98,7 +98,7 @@ module Aws::IAM
     #   Specifies whether IAM user passwords must contain at least one of the
     #   following non-alphanumeric characters:
     #
-    #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
+    #   ! @ # $ % ^ &amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that passwords do not
@@ -345,6 +345,7 @@ module Aws::IAM
     #     assume_role_policy_document: "policyDocumentType", # required
     #     description: "roleDescriptionType",
     #     max_session_duration: 1,
+    #     permissions_boundary: "arnType",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
@@ -420,6 +421,9 @@ module Aws::IAM
     #
     #
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # @option options [String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the role.
     # @return [Role]
     def create_role(options = {})
       resp = @client.create_role(options)
@@ -631,6 +635,7 @@ module Aws::IAM
     #   user = iam.create_user({
     #     path: "pathType",
     #     user_name: "userNameType", # required
+    #     permissions_boundary: "arnType",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
@@ -663,6 +668,9 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :permissions_boundary
+    #   The ARN of the policy that is used to set the permissions boundary for
+    #   the user.
     # @return [User]
     def create_user(options = {})
       resp = @client.create_user(options)
@@ -843,6 +851,7 @@ module Aws::IAM
     #     scope: "All", # accepts All, AWS, Local
     #     only_attached: false,
     #     path_prefix: "policyPathType",
+    #     policy_usage_filter: "PermissionsPolicy", # accepts PermissionsPolicy, PermissionsBoundary
     #   })
     # @param [Hash] options ({})
     # @option options [String] :scope
@@ -874,6 +883,16 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :policy_usage_filter
+    #   The policy usage method to use for filtering the results.
+    #
+    #   To list only permissions policies,
+    #   set `PolicyUsageFilter` to `PermissionsPolicy`. To list only the
+    #   policies used to set permissions boundaries, set the value
+    #   to `PermissionsBoundary`.
+    #
+    #   This parameter is optional. If it is not included, all policies are
+    #   returned.
     # @return [Policy::Collection]
     def policies(options = {})
       batches = Enumerator.new do |y|

@@ -428,7 +428,7 @@ module Aws::CodeBuild
     #           privileged_mode: false,
     #           certificate: "String",
     #         },
-    #         service_role: "NonEmptyString",
+    #         service_role: "NonEmptyString", # required
     #         timeout_in_minutes: 1,
     #         encryption_key: "NonEmptyString",
     #         tags: [

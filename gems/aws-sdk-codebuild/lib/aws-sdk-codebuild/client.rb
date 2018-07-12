@@ -636,7 +636,7 @@ module Aws::CodeBuild
     # @option params [required, Types::ProjectEnvironment] :environment
     #   Information about the build environment for the build project.
     #
-    # @option params [String] :service_role
+    # @option params [required, String] :service_role
     #   The ARN of the AWS Identity and Access Management (IAM) role that
     #   enables AWS CodeBuild to interact with dependent AWS services on
     #   behalf of the AWS account.
@@ -713,7 +713,7 @@ module Aws::CodeBuild
     #       privileged_mode: false,
     #       certificate: "String",
     #     },
-    #     service_role: "NonEmptyString",
+    #     service_role: "NonEmptyString", # required
     #     timeout_in_minutes: 1,
     #     encryption_key: "NonEmptyString",
     #     tags: [
@@ -1647,7 +1647,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -43,6 +43,7 @@ module Aws::EFS
     FileSystemSizeValue = Shapes::IntegerShape.new(name: 'FileSystemSizeValue')
     IncorrectFileSystemLifeCycleState = Shapes::StructureShape.new(name: 'IncorrectFileSystemLifeCycleState')
     IncorrectMountTargetState = Shapes::StructureShape.new(name: 'IncorrectMountTargetState')
+    InsufficientThroughputCapacity = Shapes::StructureShape.new(name: 'InsufficientThroughputCapacity')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressInUse = Shapes::StructureShape.new(name: 'IpAddressInUse')
@@ -61,6 +62,7 @@ module Aws::EFS
     NetworkInterfaceLimitExceeded = Shapes::StructureShape.new(name: 'NetworkInterfaceLimitExceeded')
     NoFreeAddressesInSubnet = Shapes::StructureShape.new(name: 'NoFreeAddressesInSubnet')
     PerformanceMode = Shapes::StringShape.new(name: 'PerformanceMode')
+    ProvisionedThroughputInMibps = Shapes::FloatShape.new(name: 'ProvisionedThroughputInMibps')
     SecurityGroup = Shapes::StringShape.new(name: 'SecurityGroup')
     SecurityGroupLimitExceeded = Shapes::StructureShape.new(name: 'SecurityGroupLimitExceeded')
     SecurityGroupNotFound = Shapes::StructureShape.new(name: 'SecurityGroupNotFound')
@@ -72,13 +74,19 @@ module Aws::EFS
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
+    ThroughputLimitExceeded = Shapes::StructureShape.new(name: 'ThroughputLimitExceeded')
+    ThroughputMode = Shapes::StringShape.new(name: 'ThroughputMode')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TooManyRequests = Shapes::StructureShape.new(name: 'TooManyRequests')
     UnsupportedAvailabilityZone = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZone')
+    UpdateFileSystemRequest = Shapes::StructureShape.new(name: 'UpdateFileSystemRequest')
 
     CreateFileSystemRequest.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken"))
     CreateFileSystemRequest.add_member(:performance_mode, Shapes::ShapeRef.new(shape: PerformanceMode, location_name: "PerformanceMode"))
     CreateFileSystemRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, location_name: "Encrypted"))
     CreateFileSystemRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CreateFileSystemRequest.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
+    CreateFileSystemRequest.add_member(:provisioned_throughput_in_mibps, Shapes::ShapeRef.new(shape: ProvisionedThroughputInMibps, location_name: "ProvisionedThroughputInMibps"))
     CreateFileSystemRequest.struct_class = Types::CreateFileSystemRequest
 
     CreateMountTargetRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -150,6 +158,8 @@ module Aws::EFS
     FileSystemDescription.add_member(:performance_mode, Shapes::ShapeRef.new(shape: PerformanceMode, required: true, location_name: "PerformanceMode"))
     FileSystemDescription.add_member(:encrypted, Shapes::ShapeRef.new(shape: Encrypted, location_name: "Encrypted"))
     FileSystemDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    FileSystemDescription.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
+    FileSystemDescription.add_member(:provisioned_throughput_in_mibps, Shapes::ShapeRef.new(shape: ProvisionedThroughputInMibps, location_name: "ProvisionedThroughputInMibps"))
     FileSystemDescription.struct_class = Types::FileSystemDescription
 
     FileSystemDescriptions.member = Shapes::ShapeRef.new(shape: FileSystemDescription)
@@ -183,6 +193,11 @@ module Aws::EFS
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
+    UpdateFileSystemRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location: "uri", location_name: "FileSystemId"))
+    UpdateFileSystemRequest.add_member(:throughput_mode, Shapes::ShapeRef.new(shape: ThroughputMode, location_name: "ThroughputMode"))
+    UpdateFileSystemRequest.add_member(:provisioned_throughput_in_mibps, Shapes::ShapeRef.new(shape: ProvisionedThroughputInMibps, location_name: "ProvisionedThroughputInMibps"))
+    UpdateFileSystemRequest.struct_class = Types::UpdateFileSystemRequest
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -206,6 +221,8 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientThroughputCapacity)
+        o.errors << Shapes::ShapeRef.new(shape: ThroughputLimitExceeded)
       end)
 
       api.add_operation(:create_mount_target, Seahorse::Model::Operation.new.tap do |o|
@@ -332,6 +349,21 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: IncorrectMountTargetState)
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound)
+      end)
+
+      api.add_operation(:update_file_system, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFileSystem"
+        o.http_method = "PUT"
+        o.http_request_uri = "/2015-02-01/file-systems/{FileSystemId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFileSystemRequest)
+        o.output = Shapes::ShapeRef.new(shape: FileSystemDescription)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+        o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: IncorrectFileSystemLifeCycleState)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientThroughputCapacity)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThroughputLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequests)
       end)
     end
 

@@ -42,6 +42,7 @@ module Aws
   autoload :CostExplorer, 'aws-sdk-costexplorer'
   autoload :CostandUsageReportService, 'aws-sdk-costandusagereportservice'
   autoload :DAX, 'aws-sdk-dax'
+  autoload :DLM, 'aws-sdk-dlm'
   autoload :DataPipeline, 'aws-sdk-datapipeline'
   autoload :DatabaseMigrationService, 'aws-sdk-databasemigrationservice'
   autoload :DeviceFarm, 'aws-sdk-devicefarm'

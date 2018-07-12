@@ -225,6 +225,9 @@ module Aws::AppSync
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
     #   Amazon Elasticsearch settings.
     #
+    # @option params [Types::HttpDataSourceConfig] :http_config
+    #   Http endpoint settings.
+    #
     # @return [Types::CreateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDataSourceResponse#data_source #data_source} => Types::DataSource
@@ -235,7 +238,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -249,6 +252,9 @@ module Aws::AppSync
     #       endpoint: "String", # required
     #       aws_region: "String", # required
     #     },
+    #     http_config: {
+    #       endpoint: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -256,7 +262,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -264,6 +270,7 @@ module Aws::AppSync
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
+    #   resp.data_source.http_config.endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSource AWS API Documentation
     #
@@ -607,7 +614,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -615,6 +622,7 @@ module Aws::AppSync
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
+    #   resp.data_source.http_config.endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSource AWS API Documentation
     #
@@ -893,7 +901,7 @@ module Aws::AppSync
     #   resp.data_sources[0].data_source_arn #=> String
     #   resp.data_sources[0].name #=> String
     #   resp.data_sources[0].description #=> String
-    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
+    #   resp.data_sources[0].type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP"
     #   resp.data_sources[0].service_role_arn #=> String
     #   resp.data_sources[0].dynamodb_config.table_name #=> String
     #   resp.data_sources[0].dynamodb_config.aws_region #=> String
@@ -901,6 +909,7 @@ module Aws::AppSync
     #   resp.data_sources[0].lambda_config.lambda_function_arn #=> String
     #   resp.data_sources[0].elasticsearch_config.endpoint #=> String
     #   resp.data_sources[0].elasticsearch_config.aws_region #=> String
+    #   resp.data_sources[0].http_config.endpoint #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSources AWS API Documentation
@@ -1167,6 +1176,9 @@ module Aws::AppSync
     # @option params [Types::ElasticsearchDataSourceConfig] :elasticsearch_config
     #   The new Elasticsearch configuration.
     #
+    # @option params [Types::HttpDataSourceConfig] :http_config
+    #   The new http endpoint configuration
+    #
     # @return [Types::UpdateDataSourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDataSourceResponse#data_source #data_source} => Types::DataSource
@@ -1177,7 +1189,7 @@ module Aws::AppSync
     #     api_id: "String", # required
     #     name: "ResourceName", # required
     #     description: "String",
-    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE
+    #     type: "AWS_LAMBDA", # required, accepts AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, NONE, HTTP
     #     service_role_arn: "String",
     #     dynamodb_config: {
     #       table_name: "String", # required
@@ -1191,6 +1203,9 @@ module Aws::AppSync
     #       endpoint: "String", # required
     #       aws_region: "String", # required
     #     },
+    #     http_config: {
+    #       endpoint: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1198,7 +1213,7 @@ module Aws::AppSync
     #   resp.data_source.data_source_arn #=> String
     #   resp.data_source.name #=> String
     #   resp.data_source.description #=> String
-    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE"
+    #   resp.data_source.type #=> String, one of "AWS_LAMBDA", "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH", "NONE", "HTTP"
     #   resp.data_source.service_role_arn #=> String
     #   resp.data_source.dynamodb_config.table_name #=> String
     #   resp.data_source.dynamodb_config.aws_region #=> String
@@ -1206,6 +1221,7 @@ module Aws::AppSync
     #   resp.data_source.lambda_config.lambda_function_arn #=> String
     #   resp.data_source.elasticsearch_config.endpoint #=> String
     #   resp.data_source.elasticsearch_config.aws_region #=> String
+    #   resp.data_source.http_config.endpoint #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSource AWS API Documentation
     #
@@ -1404,7 +1420,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

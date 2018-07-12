@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.22.0 (2018-07-12)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-dlm` gem.
+
 3.21.0 (2018-06-21)
 ------------------
 

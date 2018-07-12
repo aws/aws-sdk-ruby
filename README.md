@@ -387,6 +387,7 @@ to be backwards compatible.
 | Amazon Cognito Sync                                   | Aws::CognitoSync                     | aws-sdk-cognitosync                     | 2014-06-30  |
 | Amazon Comprehend                                     | Aws::Comprehend                      | aws-sdk-comprehend                      | 2017-11-27  |
 | Amazon Connect Service                                | Aws::Connect                         | aws-sdk-connect                         | 2017-08-08  |
+| Amazon Data Lifecycle Manager                         | Aws::DLM                             | aws-sdk-dlm                             | 2018-01-12  |
 | Amazon DynamoDB                                       | Aws::DynamoDB                        | aws-sdk-dynamodb                        | 2012-08-10  |
 | Amazon DynamoDB Accelerator (DAX)                     | Aws::DAX                             | aws-sdk-dax                             | 2017-04-19  |
 | Amazon DynamoDB Streams                               | Aws::DynamoDBStreams                 | aws-sdk-dynamodbstreams                 | 2012-08-10  |

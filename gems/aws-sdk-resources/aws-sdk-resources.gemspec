@@ -52,6 +52,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-costexplorer', '~> 1')
   spec.add_dependency('aws-sdk-costandusagereportservice', '~> 1')
   spec.add_dependency('aws-sdk-dax', '~> 1')
+  spec.add_dependency('aws-sdk-dlm', '~> 1')
   spec.add_dependency('aws-sdk-datapipeline', '~> 1')
   spec.add_dependency('aws-sdk-databasemigrationservice', '~> 1')
   spec.add_dependency('aws-sdk-devicefarm', '~> 1')

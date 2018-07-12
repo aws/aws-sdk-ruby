@@ -128,6 +128,9 @@
   "DAX": {
     "models": "dax/2017-04-19"
   },
+  "DLM": {
+    "models": "dlm/2018-01-12"
+  },
   "DataPipeline": {
     "models": "datapipeline/2012-10-29"
   },
