@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.88 (2018-07-12)
+------------------
+
 * Feature - Aws::AppSync - Updated the API, and documentation for AWS AppSync.
 
 * Feature - Aws::CodeBuild - Updated the API for AWS CodeBuild.
