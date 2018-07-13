@@ -161,10 +161,9 @@ Known AWS regions include (not specific to this service):
           expect(client.api_requests.length).to eq(1)
           
           log_obj = client.api_requests[0]
-          expect(log_obj[:metadata]).to eq({:gem_name=>"aws-sdk-sampleapi2", :gem_version=>"1.0.0", :response_target=>nil, :original_params=>{:bucket=>"aws-sdk"}, :request_id=>"stubbed-request-id"})
-          expect(log_obj[:request].http_method).to eq("PUT")
-          expect(log_obj[:response].body_contents).to eq("<CreateBucketResult xmlns=\"\">\n</CreateBucketResult>\n")
-          expect(log_obj[:response].status_code).to eq(200)
+          expect(log_obj[:operation_name]).to eq(:create_bucket)
+          expect(log_obj[:params]).to eq({:bucket=>"aws-sdk"})
+          expect(log_obj[:context].metadata).to eq({:gem_name=>"aws-sdk-sampleapi2", :gem_version=>"1.0.0", :response_target=>nil, :original_params=>{:bucket=>"aws-sdk"}, :request_id=>"stubbed-request-id"})
         end
 
         it 'raises an error when accessing api requests of a non stubbed client' do 

@@ -27,9 +27,8 @@ module Aws
       requests = @api_requests
       self.handle do |context|
         requests << {
-          metadata: context.metadata,
-          request: context.http_request,
-          response: context.http_response,
+          operation_name: context.operation_name,
+          params: context.params,
           context: context
         }
         @handler.call(context)
