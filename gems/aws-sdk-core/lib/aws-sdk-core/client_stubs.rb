@@ -184,7 +184,8 @@ module Aws
 
     # Allows you to access all of the requests that the stubbed client has made
     #
-    # @return [Array] Returns an array of the api requests made
+    # @return [Array] Returns an array of the api requests made, each request object contains the
+    #                 :operation_name, :params, and :context of the request. 
     # @raise [NotImplementedError] Raises `NotImplementedError` when the client is not stubbed
     def api_requests
       if config.stub_responses
