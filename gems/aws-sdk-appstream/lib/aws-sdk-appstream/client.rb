@@ -293,8 +293,11 @@ module Aws::AppStream
     # @option params [required, String] :name
     #   A unique name for the fleet.
     #
-    # @option params [required, String] :image_name
+    # @option params [String] :image_name
     #   The name of the image used to create the fleet.
+    #
+    # @option params [String] :image_arn
+    #   The ARN of the public, private, or shared image to use.
     #
     # @option params [required, String] :instance_type
     #   The instance type to use when launching fleet instances. The following
@@ -392,7 +395,8 @@ module Aws::AppStream
     #
     #   resp = client.create_fleet({
     #     name: "Name", # required
-    #     image_name: "String", # required
+    #     image_name: "String",
+    #     image_arn: "Arn",
     #     instance_type: "String", # required
     #     fleet_type: "ALWAYS_ON", # accepts ALWAYS_ON, ON_DEMAND
     #     compute_capacity: { # required
@@ -420,6 +424,7 @@ module Aws::AppStream
     #   resp.fleet.display_name #=> String
     #   resp.fleet.description #=> String
     #   resp.fleet.image_name #=> String
+    #   resp.fleet.image_arn #=> String
     #   resp.fleet.instance_type #=> String
     #   resp.fleet.fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND"
     #   resp.fleet.compute_capacity_status.desired #=> Integer
@@ -459,8 +464,11 @@ module Aws::AppStream
     # @option params [required, String] :name
     #   A unique name for the image builder.
     #
-    # @option params [required, String] :image_name
+    # @option params [String] :image_name
     #   The name of the image used to create the builder.
+    #
+    # @option params [String] :image_arn
+    #   The ARN of the public, private, or shared image to use.
     #
     # @option params [required, String] :instance_type
     #   The instance type to use when launching the image builder.
@@ -494,7 +502,8 @@ module Aws::AppStream
     #
     #   resp = client.create_image_builder({
     #     name: "Name", # required
-    #     image_name: "String", # required
+    #     image_name: "String",
+    #     image_arn: "Arn",
     #     instance_type: "String", # required
     #     description: "Description",
     #     display_name: "DisplayName",
@@ -795,7 +804,7 @@ module Aws::AppStream
     #   resp.image.base_image_arn #=> String
     #   resp.image.display_name #=> String
     #   resp.image.state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
-    #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.platform #=> String, one of "WINDOWS"
     #   resp.image.description #=> String
@@ -813,6 +822,8 @@ module Aws::AppStream
     #   resp.image.created_time #=> Time
     #   resp.image.public_base_image_released_date #=> Time
     #   resp.image.appstream_agent_version #=> String
+    #   resp.image.image_permissions.allow_fleet #=> Boolean
+    #   resp.image.image_permissions.allow_image_builder #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
     #
@@ -870,6 +881,35 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def delete_image_builder(params = {}, options = {})
       req = build_request(:delete_image_builder, params)
+      req.send_request(options)
+    end
+
+    # Deletes permissions for the specified private image. After you delete
+    # permissions for an image, AWS accounts to which you previously granted
+    # these permissions can no longer use the image.
+    #
+    # @option params [required, String] :name
+    #   The name of the private image.
+    #
+    # @option params [required, String] :shared_account_id
+    #   The 12-digit ID of the AWS account for which to delete image
+    #   permissions.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_image_permissions({
+    #     name: "Name", # required
+    #     shared_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImagePermissions AWS API Documentation
+    #
+    # @overload delete_image_permissions(params = {})
+    # @param [Hash] params ({})
+    def delete_image_permissions(params = {}, options = {})
+      req = build_request(:delete_image_permissions, params)
       req.send_request(options)
     end
 
@@ -981,6 +1021,7 @@ module Aws::AppStream
     #   resp.fleets[0].display_name #=> String
     #   resp.fleets[0].description #=> String
     #   resp.fleets[0].image_name #=> String
+    #   resp.fleets[0].image_arn #=> String
     #   resp.fleets[0].instance_type #=> String
     #   resp.fleets[0].fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND"
     #   resp.fleets[0].compute_capacity_status.desired #=> Integer
@@ -1076,6 +1117,57 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Retrieves a list that describes the permissions for a private image
+    # that you own.
+    #
+    # @option params [required, String] :name
+    #   The name of the private image for which to describe permissions. The
+    #   image must be one that you own.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each results page.
+    #
+    # @option params [Array<String>] :shared_aws_account_ids
+    #   The 12-digit ID of one or more AWS accounts with which the image is
+    #   shared.
+    #
+    # @option params [String] :next_token
+    #   The pagination token to use to retrieve the next page of results. If
+    #   this value is empty, only the first page is retrieved.
+    #
+    # @return [Types::DescribeImagePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeImagePermissionsResult#name #name} => String
+    #   * {Types::DescribeImagePermissionsResult#shared_image_permissions_list #shared_image_permissions_list} => Array&lt;Types::SharedImagePermissions&gt;
+    #   * {Types::DescribeImagePermissionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_image_permissions({
+    #     name: "Name", # required
+    #     max_results: 1,
+    #     shared_aws_account_ids: ["AwsAccountId"],
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.shared_image_permissions_list #=> Array
+    #   resp.shared_image_permissions_list[0].shared_account_id #=> String
+    #   resp.shared_image_permissions_list[0].image_permissions.allow_fleet #=> Boolean
+    #   resp.shared_image_permissions_list[0].image_permissions.allow_image_builder #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagePermissions AWS API Documentation
+    #
+    # @overload describe_image_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_image_permissions(params = {}, options = {})
+      req = build_request(:describe_image_permissions, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list that describes one or more specified images, if the
     # image names are provided. Otherwise, all images in the account are
     # described.
@@ -1083,12 +1175,18 @@ module Aws::AppStream
     # @option params [Array<String>] :names
     #   The names of the images to describe.
     #
+    # @option params [Array<String>] :arns
+    #   The ARNs of the public, private, and shared images to describe.
+    #
+    # @option params [String] :type
+    #   The type of image (public, private, or shared) to describe.
+    #
     # @option params [String] :next_token
     #   The pagination token to use to retrieve the next page of results. If
     #   this value is empty, only the first page is retrieved.
     #
     # @option params [Integer] :max_results
-    #   The maximum size of each results page.
+    #   The maximum size of each page of results.
     #
     # @return [Types::DescribeImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1099,6 +1197,8 @@ module Aws::AppStream
     #
     #   resp = client.describe_images({
     #     names: ["String"],
+    #     arns: ["Arn"],
+    #     type: "PUBLIC", # accepts PUBLIC, PRIVATE, SHARED
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -1111,7 +1211,7 @@ module Aws::AppStream
     #   resp.images[0].base_image_arn #=> String
     #   resp.images[0].display_name #=> String
     #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "COPYING", "DELETING"
-    #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].platform #=> String, one of "WINDOWS"
     #   resp.images[0].description #=> String
@@ -1129,6 +1229,8 @@ module Aws::AppStream
     #   resp.images[0].created_time #=> Time
     #   resp.images[0].public_base_image_released_date #=> Time
     #   resp.images[0].appstream_agent_version #=> String
+    #   resp.images[0].image_permissions.allow_fleet #=> Boolean
+    #   resp.images[0].image_permissions.allow_image_builder #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
@@ -1711,7 +1813,10 @@ module Aws::AppStream
     # @option params [String] :image_name
     #   The name of the image used to create the fleet.
     #
-    # @option params [required, String] :name
+    # @option params [String] :image_arn
+    #   The ARN of the public, private, or shared image to use.
+    #
+    # @option params [String] :name
     #   A unique name for the fleet.
     #
     # @option params [String] :instance_type
@@ -1800,7 +1905,8 @@ module Aws::AppStream
     #
     #   resp = client.update_fleet({
     #     image_name: "String",
-    #     name: "String", # required
+    #     image_arn: "Arn",
+    #     name: "String",
     #     instance_type: "String",
     #     compute_capacity: {
     #       desired_instances: 1, # required
@@ -1829,6 +1935,7 @@ module Aws::AppStream
     #   resp.fleet.display_name #=> String
     #   resp.fleet.description #=> String
     #   resp.fleet.image_name #=> String
+    #   resp.fleet.image_arn #=> String
     #   resp.fleet.instance_type #=> String
     #   resp.fleet.fleet_type #=> String, one of "ALWAYS_ON", "ON_DEMAND"
     #   resp.fleet.compute_capacity_status.desired #=> Integer
@@ -1856,6 +1963,40 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def update_fleet(params = {}, options = {})
       req = build_request(:update_fleet, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates permissions for the specified private image.
+    #
+    # @option params [required, String] :name
+    #   The name of the private image.
+    #
+    # @option params [required, String] :shared_account_id
+    #   The 12-digit ID of the AWS account for which you want add or update
+    #   image permissions.
+    #
+    # @option params [required, Types::ImagePermissions] :image_permissions
+    #   The permissions for the image.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_image_permissions({
+    #     name: "Name", # required
+    #     shared_account_id: "AwsAccountId", # required
+    #     image_permissions: { # required
+    #       allow_fleet: false,
+    #       allow_image_builder: false,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateImagePermissions AWS API Documentation
+    #
+    # @overload update_image_permissions(params = {})
+    # @param [Hash] params ({})
+    def update_image_permissions(params = {}, options = {})
+      req = build_request(:update_image_permissions, params)
       req.send_request(options)
     end
 
@@ -1964,7 +2105,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
