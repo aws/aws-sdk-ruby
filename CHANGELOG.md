@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.11.89 (2018-07-13)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::KinesisVideoArchivedMedia - Updated the API, and documentation for Amazon Kinesis Video Streams Archived Media.
